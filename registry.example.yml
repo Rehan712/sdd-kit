@@ -1,0 +1,37 @@
+# Registry of projects governed by this SDD kit — MACHINE-LOCAL configuration.
+#
+# setup.sh copies this to registry.yml (gitignored) on first install.
+# Edit registry.yml, not this example.
+#
+# Each project entry has:
+#   path:    absolute root directory (must exist on this machine)
+#   stacks:  tags matching files in templates/stack-overlays/
+#            shipped tags: rust, javascript, python, aws, react, monorepo
+#            (add your own overlay + expert to extend)
+#   notes:   freeform context the skills read when planning
+#
+# Per-project settings live in <project>/.specify/:
+#   stack.yml       — stacks: [...] (+ optional base_branch: main — default dev)
+#   constitution.md — project overrides, `extends` the kit constitution
+#   specs/          — one directory per spec (created by /sdd:specify)
+#
+# scripts/project-detect.sh resolves cwd → project root using .specify/stack.yml
+# first, then linked git worktrees, then this registry.
+#
+# TEAM TOPOLOGY lives elsewhere: system-map.yml (committed) describes what each
+# repo is, who owns it, dependencies, and contracts — entry names there must
+# match the names here. This file only says where repos are on THIS machine.
+
+projects:
+  - name: example-api
+    path: /absolute/path/to/example-api
+    stacks: [javascript, aws]
+    notes: |
+      Replace with your real project. Delete this entry once you have one.
+
+  # - name: example-cli
+  #   path: /absolute/path/to/example-cli
+  #   stacks: [rust]
+  #   notes: |
+  #     base_branch is per-project: set `base_branch: main` in its .specify/stack.yml
+  #     if the repo doesn't use `dev`.

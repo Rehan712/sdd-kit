@@ -1,0 +1,66 @@
+# System map — TEAM-SHARED topology of the repos this hub governs.
+#
+# Copy to system-map.yml (setup.sh does this on first install) and edit for YOUR
+# repos. system-map.yml is gitignored — it describes your real topology and stays
+# machine/team-local; THIS example is what ships with the kit.
+#
+# Unlike registry.yml (machine-local absolute paths), system-map.yml carries no
+# absolute paths: it answers "what is repo X, who owns it, and what does it
+# depend on". registry.yml answers "where is repo X on THIS machine".
+#
+# Read by: /sdd:specify (scoping a feature across repos), /sdd:plan (per-repo
+# exploration + contract ordering), scripts/system-map.sh (queries + validation).
+#
+# Schema — repos:
+#   name:       must match the registry.yml entry name (when checked out locally)
+#   system:     optional grouping label for repos that form one product
+#   team:       owning team (for external repos: the team you file asks with)
+#   role:       app | service | infra | design | library | external
+#               `external` = another team's repo — read-only for us, never
+#               receives tasks; features depending on it record an
+#               [EXTERNAL: …] marker in the spec instead.
+#   owns:       one line: what this repo is the source of truth for
+#   depends_on: repo names this one calls or builds against (direct deps only)
+#   contact:    where to reach the owners (mainly for external repos)
+#   remote:     optional git URL (https://, git@, or ssh://) for repos with no
+#               local checkout
+#
+# Schema — contracts:
+#   id:         short slug, referenced from specs and plans
+#   kind:       openapi | events | graphql | proto | types | design-tokens
+#   source:     the ONE repo that owns the contract (changes land there first)
+#   path:       where the schema lives (source-repo-relative path or URL)
+#   consumers:  repo names that build against it
+#
+# Validate with: scripts/system-map.sh check
+
+repos:
+  - name: example-api
+    system: example-product
+    team: core
+    role: service
+    owns: Example REST/GraphQL API — the source of truth for the public contract
+    depends_on: []
+    remote: https://github.com/your-org/example-api.git
+
+  - name: example-web
+    system: example-product
+    team: core
+    role: app
+    owns: Example web client
+    depends_on: [example-api]
+    remote: https://github.com/your-org/example-web.git
+
+  - name: partner-service
+    team: partner-team
+    role: external
+    owns: A dependency owned by another team — read-only, stub at the contract
+    depends_on: []
+    contact: "#partner-team on Slack"
+
+contracts:
+  - id: example-api
+    kind: openapi
+    source: example-api
+    path: /openapi.json  # consumers run codegen against this
+    consumers: [example-web]

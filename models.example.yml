@@ -1,0 +1,72 @@
+# Model policy for the SDD kit — MACHINE-LOCAL configuration.
+#
+# setup.sh bootstraps models.yml (gitignored) from this file — or interactively
+# via scripts/configure-models.sh. Edit models.yml, not this example.
+#
+# WHY: not every SDD phase deserves the same model. Design and adversarial
+# judgment (specify/plan/tasks, the two gates, security review) want the
+# strongest reasoning models on high effort; rote implementation is fine —
+# and faster and cheaper — on a mid-tier model.
+#
+# TIERS name a model class per CLI. Keys inside a tier (all optional — omit a
+# key to leave that CLI's session default untouched for the tier):
+#   claude_model:    alias (opus | sonnet | haiku | fable) or a full model ID
+#                    (e.g. claude-opus-4-8). Prefer aliases — ad-hoc subagent
+#                    dispatch (the Explore agent) only accepts aliases.
+#   claude_effort:   low | medium | high | xhigh | max
+#                    (avoid max — Claude Code treats it as session-only)
+#   codex_model:     OpenAI Codex CLI `model` (e.g. gpt-5.5, gpt-5.4)
+#   codex_effort:    Codex `model_reasoning_effort` (minimal|low|medium|high|xhigh)
+#   copilot_model:   GitHub Copilot CLI model id for the agent frontmatter
+#   copilot_effort:  advisory — written into the adapter preamble text only
+#
+# ROLES map each SDD role to a tier:
+#   skills:  specify, plan, tasks, implement, retro, onboard
+#   agents:  orchestrator, opponent, reality-check, security-reviewer,
+#            test-engineer, stack-expert (covers every agents/*-expert.md)
+#   runtime: explore (the Explore subagents /sdd:plan and /sdd:onboard fan out)
+#
+# HOW IT'S APPLIED
+#   scripts/apply-models.sh stamps model/effort into generated copies of the
+#   skills + agents under build/ (Claude homes symlink to those), and
+#   scripts/build-adapters.sh stamps the Codex/Copilot adapters and writes
+#   the sdd profiles into ~/.codex/config.toml. Re-run scripts/setup.sh
+#   (or those two scripts) after editing this file.
+
+tiers:
+  reasoning:            # deep design + adversarial judgment — strongest models
+    claude_model: opus
+    claude_effort: xhigh
+    codex_model: gpt-5.5
+    codex_effort: xhigh
+    copilot_model: claude-opus-4.8
+    copilot_effort: xhigh
+
+  implementation:       # code-writing work — mid-tier, faster and cheaper
+    claude_model: sonnet
+    claude_effort: high
+    codex_model: gpt-5.4
+    codex_effort: high
+    copilot_model: claude-sonnet-4.5
+    copilot_effort: high
+
+  # Add your own tiers, e.g. a cheap recon tier for codebase exploration,
+  # then point the `explore` role at it:
+  # recon:
+  #   claude_model: haiku
+  #   claude_effort: medium
+
+roles:
+  specify: reasoning
+  plan: reasoning
+  tasks: reasoning
+  retro: reasoning
+  implement: implementation
+  orchestrator: reasoning
+  opponent: reasoning
+  reality-check: reasoning
+  security-reviewer: reasoning
+  test-engineer: implementation
+  stack-expert: implementation
+  explore: implementation      # point at a recon tier if you add one
+  onboard: implementation      # /sdd:onboard repo research (like explore)
