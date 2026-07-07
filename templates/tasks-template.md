@@ -16,10 +16,14 @@ updated: YYYY-MM-DD
 - *Acceptance:* the observable check that says the task is done.
 - *Evidence:* appended when acceptance passes — the exact command + its key
   output line + date, e.g. `` `bun test api` → 14 passed (2026-07-04) ``.
-  **A box is never ticked without it** (`~/.sdd/scripts/spec-task.sh done
-  <spec-dir> T### --evidence "…"` makes the tick + evidence one atomic edit).
-  Exemption: gate and Ship tasks — their evidence is the gate report in
-  `notes/` or the PR URL, so no *Evidence:* line is required there.
+  **A box is never ticked without it.** For any check the tooling can run,
+  produce the evidence with `~/.sdd/scripts/spec-run.sh <spec-dir> T### --
+  <command>` — it runs the command, captures the real output (+exit +hash) into
+  `notes/evidence.md`, and ticks the box from that run. A bare
+  `~/.sdd/scripts/spec-task.sh done <spec-dir> T### --evidence "…"` (tick +
+  evidence, one atomic edit) is for manually-verified ACs. Exemption: gate and
+  Ship tasks — their evidence is the gate report in `notes/` or the PR URL, so
+  no *Evidence:* line is required there.
 - Tasks that can run in parallel are marked `[P]` after the ID.
 - **Umbrella specs only** (spec.md with `repos:` frontmatter): every non-gate,
   non-Ship task also carries `[repo:<name>]` after the ID — the declared repo it
@@ -60,13 +64,17 @@ updated: YYYY-MM-DD
 
 ## Tests
 
+> Each test **names the AC id it proves** in its title/description (e.g.
+> `it('AC-001: …')`) so the binding is checkable at the code layer —
+> `~/.sdd/scripts/spec-ac-coverage.sh <spec-dir>` fails any AC no test names.
+
 - [ ] **T005** — Integration test for happy path
   - *Files:* `tests/...`
-  - *Acceptance:* CI green; AC-001 covered
+  - *Acceptance:* CI green; test names AC-001
 
 - [ ] **T006** — Integration test for error path
   - *Files:* `tests/...`
-  - *Acceptance:* AC-002 covered
+  - *Acceptance:* test names AC-002
 
 ## Observability
 
@@ -88,7 +96,7 @@ updated: YYYY-MM-DD
 > resolves the `Agent:` fields; `/sdd:implement` runs the opponent first, then reality-check.
 >
 > - **Opponent** (`agents/opponent.agent.md`) — steelmans why the implementation is *wrong*. Default verdict **CHALLENGED**.
-> - **Reality-check** — verifies every AC-### has *evidence*. Resolved by (1) the project constitution's pin, (2) any project-local `.claude/agents/reality-check*.md`, (3) the hub default `agents/reality-check.agent.md`. Default verdict **NEEDS WORK**.
+> - **Reality-check** — verifies every AC-### has *evidence*. Runs the deterministic floor first (`spec-ac-coverage.sh` — every AC named by a test; `spec-evidence.sh` — every tick traces to real evidence), then verifies the rest by hand. Resolved by (1) the project constitution's pin, (2) any project-local `.claude/agents/reality-check*.md`, (3) the hub default `agents/reality-check.agent.md`. Default verdict **NEEDS WORK**.
 
 - [ ] **T009** — Opponent review: steelman why this implementation is wrong
   - *Agent:* `~/.sdd/agents/opponent.agent.md`

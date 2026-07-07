@@ -139,6 +139,46 @@ for skill_dir in "$KIT_DIR"/skills/sdd-*/; do
   fi
 done
 
+# Non-SDD skills (e.g. architecture skills in skills/): plain adapters — no
+# single-agent SDD preamble (they don't delegate to subagents) and no model
+# note (they have no SDD role). Their references/ files are NOT copied; the
+# generated bodies point at the stable ~/.sdd kit path instead.
+for skill_dir in "$KIT_DIR"/skills/*/; do
+  [[ -d "$skill_dir" ]] || continue
+  name="$(basename "$skill_dir")"
+  case "$name" in sdd-*) continue ;; esac
+  skill_file="$skill_dir/SKILL.md"
+  [[ -f "$skill_file" ]] || continue
+  desc="$(frontmatter_field "$skill_file" description)"
+
+  adapted_body="$(skill_body "$skill_file" \
+    | sed -e "s|\`references/|\`~/.sdd/skills/$name/references/|g" \
+          -e 's|`\.\./|`~/.sdd/skills/|g' \
+          -e 's|same skills folder as this skill; paths below are relative to this SKILL.md|installed by the SDD kit; paths below point into ~/.sdd|')"
+
+  if [[ -d "$HOME/.codex" ]]; then
+    out="$HOME/.codex/skills/$name/SKILL.md"
+    mkdir -p "$(dirname "$out")"
+    {
+      printf -- '---\nname: %s\ndescription: %s\nmetadata:\n  cli: codex\n---\n\n' "$name" "$desc"
+      printf '%s\n' "$adapted_body"
+    } > "$out"
+    echo "  ${GREEN}✓${RESET} codex: $name"
+    built=$((built+1))
+  fi
+
+  if [[ -d "$HOME/.copilot" ]]; then
+    out="$HOME/.copilot/agents/$name.agent.md"
+    mkdir -p "$(dirname "$out")"
+    {
+      printf -- '---\nname: %s\ndescription: %s Invoke with `copilot --agent %s`.\ntools: Read, Write, Edit, Bash\n---\n\n' "$name" "$desc" "$name"
+      printf '%s\n' "$adapted_body"
+    } > "$out"
+    echo "  ${GREEN}✓${RESET} copilot: $name"
+    built=$((built+1))
+  fi
+done
+
 # Copilot benefits from local copies of the gate personas (it lists agents by dir).
 if [[ -d "$HOME/.copilot" ]]; then
   for persona in opponent.agent.md reality-check.agent.md; do

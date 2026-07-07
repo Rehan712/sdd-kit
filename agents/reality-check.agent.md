@@ -72,6 +72,19 @@ If a stack isn't listed, fall back to: "is there a test that asserts the AC, and
 
 Do not trust the `[x]` checkboxes in `tasks.md`. They're claims. You verify.
 
+**First, the deterministic floor** — run both, and fold what they flag into the
+matrix as gaps before you re-run anything:
+
+- `bash ~/.sdd/scripts/spec-ac-coverage.sh <spec-dir>` (add `--root <repo>` if it
+  can't resolve the checkout) — every AC named by no test is a binding gap; a
+  green suite that never names the AC isn't tied to it.
+- `bash ~/.sdd/scripts/spec-evidence.sh <spec-dir>` — every ticked box's evidence
+  must trace to a real `notes/evidence.md` capture block or an existing artifact.
+  A fabricated pointer or a missing screenshot is a gap; so is a manual/post-deploy
+  AC with no owner + check-back date in STATUS.
+
+A claim with no captured run is attack surface — re-run it yourself.
+
 For each AC row:
 
 1. **Start from the task's `*Evidence:*` line.** A `[x]` task with no *Evidence:* line is an automatic gap — record it, no further analysis needed. Where an evidence line exists, it names the command that supposedly proved the task: that's your re-run target, not your proof.
@@ -134,6 +147,7 @@ Re-invoke this agent when:
 - **Every AC gets a row.** If the matrix is incomplete, the verdict is FAILED.
 - **Never grade your own work.** You weren't the implementer. Read the artifacts; run the checks.
 - **Cite evidence.** "Looks good" is not evidence. `apps/web/components/X.tsx:42` is. `bun test --filter pricing → 14 passed` is.
+- **An unbound AC is a gap.** If no test names an AC (`spec-ac-coverage.sh` flags it), that AC is unsupported even with a green suite — nothing ties a passing test to the criterion. Record it as a gap.
 - **Don't expand scope.** Your job is gate-keeping against the spec, not redesigning it. If you find a separate problem outside the spec's ACs, note it under "Out-of-scope observations" at the end — don't gate on it.
 - **If you can't run something, say so.** "I cannot reach the deployed Lambda from this environment, so AC-005 is UNVERIFIABLE here" is honest. Marking it PASS without running it is fraud.
 - **UNVERIFIABLE ≠ FAIL — but it's earned.** A deploy-only AC (live metric, dashboard, 24h soak) may be marked UNVERIFIABLE and still permit READY when ALL of: (a) everything runnable passed, (b) the pre-deploy half of the AC has evidence (the metric/log emission exists in code, a test asserts it), and (c) a Ship-stage task explicitly owns the post-deploy verification. Absent any of those, UNVERIFIABLE rows count as gaps → NEEDS WORK. List every UNVERIFIABLE row under "Deferred to post-deploy" in the report so the Ship stage inherits them.

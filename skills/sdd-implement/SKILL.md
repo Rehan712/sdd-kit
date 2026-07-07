@@ -76,15 +76,21 @@ Edit exactly the files the task names. Smallest change that satisfies
 acceptance + AC. No drive-by refactors; no error paths the plan didn't call
 for. A genuinely required sibling change = a new task, not scope creep.
 
-### 5. Verify acceptance
+### 5. Verify acceptance — run it, don't claim it
 
-Run the task's acceptance check for real (test command, curl, build). If it
-fails: diagnose, fix, re-run — never mark done. If it can't run locally
-(needs a deploy/fixture), say so explicitly and leave the box unticked or mark
-"ready, pending deploy" in the task notes — never fake-pass.
+Run the acceptance check through **`spec-run.sh`** so the evidence is a captured
+run, not a string you typed:
 
-On pass, capture the exact command + key output line. Long output → full run
-into `<spec-dir>/notes/evidence.md` under `## T###`, one quoted line in tasks.md.
+`bash ~/.sdd/scripts/spec-run.sh <spec-dir> T### --key '<line to quote>' -- <command>`
+
+(from `$WT`). It executes the command, records stdout+exit+hash into
+`notes/evidence.md`, and **on exit 0 ticks the box with a real evidence line**
+(it calls spec-task.sh for you — so skip the tick in step 6 for these). On
+non-zero it records the failed run and leaves the box unticked: diagnose, fix,
+re-run — never mark done. If the check can't run locally (needs a deploy/
+fixture), say so and leave the box unticked or mark "ready, pending deploy" in
+the task notes — never fake-pass. Truly manual acceptance (a screenshot, a
+dashboard reading) is ticked by hand in step 6, evidence still required.
 
 ### 5a. Pre-ship gates (opponent, then reality-check)
 
@@ -139,7 +145,10 @@ the next spec starts smarter.
 
 ### 6. Mark done — tick and evidence are ONE edit
 
-`bash ~/.sdd/scripts/spec-task.sh done <spec-dir> T### --evidence "<command> → <key output>"`
+Runnable acceptance is already ticked from step 5 (spec-run.sh did it). Tick by
+hand only for **manually-verified** ACs the tooling can't run (screenshot,
+dashboard) — evidence is still mandatory:
+`bash ~/.sdd/scripts/spec-task.sh done <spec-dir> T### --evidence "<what you observed>"`
 — it flips the box, writes the `*Evidence:*` line (+date), refuses evidence-less
 ticks on non-gate/non-Ship tasks, and bumps `updated:`. Then refresh STATUS
 ("Where things stand" / "Next action" — keep it ≤ 10 lines, file ≤ ~120;
@@ -168,13 +177,13 @@ summarize, offer the next. "Do all" → that's orchestrated mode, not a loop her
 1. Never write a path, ID, or verdict from memory — only from a file read or command run this session.
 2. Re-read the task's *Files:*/*Acceptance:*/*Refs:* and the AC text before implementing — satisfy exactly that.
 3. Unknown → ask or surface; a silent guess is the failure mode this workflow exists to prevent.
-4. Evidence is pasted command output, never "tests pass".
+4. Evidence is a captured run (`spec-run.sh`), never a typed "tests pass".
 5. Artifacts disagree → stop; spec wins; fix downstream, tell the user, then implement.
 
 ## Rules
 
 - One task per pass by default. Work only in `$WT` after pre-flight.
-- Never tick without passing acceptance + evidence (spec-task.sh enforces it — use it).
+- Never tick without passing acceptance + evidence. Run it via `spec-run.sh` (captures the real output and ticks atomically); reserve a bare `spec-task.sh done` for manually-verified ACs.
 - Never run a gate yourself; never expand a task's scope.
 - Honor constitutions and overlays; keep STATUS current and short.
 - **Hotfix escape hatch:** a genuine production emergency may bypass SDD —

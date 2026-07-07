@@ -60,7 +60,15 @@ an opinion, not a criterion. The feature is done when:
 - [ ] **AC-001:** <observable behavior, including the exact UI text / API response shape / metric>
 - [ ] **AC-002:** ...
 
-Reference REQ-### where the acceptance proves the requirement.
+Reference REQ-### where the acceptance proves the requirement. The test that
+proves an AC **names the AC id in its title/description** (e.g.
+`it('AC-001: returns 201', …)`) — that's what binds a passing test to the
+criterion; `spec-ac-coverage.sh` checks the binding at the code layer.
+
+An AC only verifiable after deploy (a live metric, a dashboard, a soak) is
+tagged `[DEPLOY]` — its evidence is a **committed artifact** (a screenshot file
+in the spec's `notes/`, an exported query) plus a named owner and check-back
+date in STATUS; `spec-evidence.sh` flags a `[DEPLOY]` AC that has neither.
 
 ## 7. Constraints
 
