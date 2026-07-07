@@ -52,7 +52,12 @@ Agent tool, `subagent_type: Explore`: find existing patterns to reuse, code
 this change must modify, contracts it must respect. Don't pre-decide — let
 exploration inform the design. If `~/.sdd/models.yml` exists, pass
 `~/.sdd/scripts/model-policy.sh get explore claude model` as the Agent tool's
-`model` param when it prints an alias (opus/sonnet/haiku); otherwise omit.
+`model` param when it prints an alias (opus/sonnet/haiku/fable); otherwise omit.
+
+**Explorers locate; you verify.** Explore agents may run on a cheaper tier —
+before a file path, hook point, or "no change needed" claim from a report
+becomes part of the design, re-read that code first-hand this session. A
+misread inherited into plan.md poisons every downstream phase.
 
 ### 5. Draft the plan
 

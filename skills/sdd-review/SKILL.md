@@ -58,6 +58,14 @@ code change under the re-gate rule.
 Report "checks still running" and either `spec-ci.sh watch` (babysitting) or
 hand the next action to the user. Nothing else to do — don't guess at results.
 
+### exit 3 — state unreadable (not a CI verdict)
+
+No PR recorded in STATUS (Ship stage hasn't run — point back to
+`/sdd:implement`), `gh` missing/unauthenticated (`gh auth status`; the user
+runs `gh auth login`), or a recorded PR that can't be read. Fix the tooling
+gap or hand it to the user — never infer PR state some other way; the script
+is the only reader (constitution §10.6).
+
 ### exit 0 — green, approved, mergeable
 
 1. Confirm both gate verdicts in STATUS are still CLEARED/READY **for the diff

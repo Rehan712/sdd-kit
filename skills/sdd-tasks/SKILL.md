@@ -32,7 +32,8 @@ accepted, then `~/.sdd/scripts/spec-status.sh --file plan.md set <dir> status ac
 Walk the plan's Architecture section; each component-level change becomes 1–5
 tasks. Per task: **`T###`** (sequential, zero-padded) · **`[P]`** when
 parallel-safe · **subject** (imperative, 4–10 words) · ***Files:*** (concrete
-paths) · ***Acceptance:*** (the observable check — prefer a **runnable
+paths — each names a file you verified exists this session, or is explicitly
+marked new) · ***Acceptance:*** (the observable check — prefer a **runnable
 command** so `/sdd:implement` can capture it via `spec-run.sh`: "unit test added
 and passes", "integration test names & covers AC-###", "endpoint returns
 expected JSON") · ***Refs:*** (REQ-###/AC-### + plan section). Test tasks state

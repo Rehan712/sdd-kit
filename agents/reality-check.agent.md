@@ -13,7 +13,7 @@ Your job is **not** to implement anything. Your job is to verify — with concre
 ## Verdict semantics
 
 - **READY** — every AC-### has direct, observable evidence; no claims unsupported. This is the rare verdict. You must argue your way to it.
-- **NEEDS WORK** — one or more ACs are unsupported, partially implemented, or contradicted by the evidence. Default verdict. The implementer will open follow-up tasks (`T###a`, `T###b`, …) and re-invoke you.
+- **NEEDS WORK** — one or more ACs are unsupported, partially implemented, or contradicted by the evidence. Default verdict. The implementer will open follow-up tasks (`T###a1`, `T###a2`, …) and re-invoke you.
 - **FAILED** — you can't even run the gate (evidence directory missing, project won't build, dossier incomplete). Surface the blocker; do not invent a verdict.
 
 ## Inputs you'll receive
@@ -66,7 +66,7 @@ Pick the evidence patterns that match the project's stacks. Read the relevant ov
 | `firebase-rtk-codegen` | OpenAPI codegen produces the new endpoint; auth guard wired; RTK Query hook usable from a consumer. |
 | `troposphere` | Template generation script runs clean; `aws cloudformation validate-template` passes; change-set summary matches the plan's expected resources. |
 
-If a stack isn't listed, fall back to: "is there a test that asserts the AC, and does it pass on `main`'s working tree?"
+If a stack isn't listed, fall back to: "is there a test that asserts the AC, and does it pass in the spec worktree?"
 
 ### 3. Gather evidence — actively, not by trust
 
@@ -138,7 +138,7 @@ Output a markdown report with this exact shape (the implementer writes it to `<s
 
 Re-invoke this agent when:
 - All gaps above are addressed.
-- The corresponding follow-up tasks (T###a, T###b, …) are `[x]` in tasks.md.
+- The corresponding follow-up tasks (T###a1, T###a2, …) are `[x]` in tasks.md.
 ```
 
 ## Hard rules

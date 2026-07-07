@@ -110,7 +110,7 @@ updated: YYYY-MM-DD
   - *Inputs:* every prior `[x]` task, `spec.md`, `plan.md`, `notes/opponent.md`
   - *Acceptance:* agent returns **READY** (not NEEDS WORK / FAILED); claim-vs-evidence gaps documented in `notes/reality-check.md`; all AC-### in `spec.md` mapped to concrete evidence
   - *Refs:* every AC-### in the spec
-  - *On NEEDS WORK:* open follow-up tasks here (T010a, T010b, …) for each fix the agent demanded; do not proceed to Ship until they're `[x]` and the gate is re-run
+  - *On NEEDS WORK:* open follow-up tasks here (T010a1, T010a2, …) for each fix the agent demanded; do not proceed to Ship until they're `[x]` and the gate is re-run
 
 ## Ship
 
