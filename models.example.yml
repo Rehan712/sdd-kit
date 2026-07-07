@@ -71,3 +71,21 @@ roles:
   explore: implementation      # point at a recon tier if you add one
   onboard: implementation      # /sdd:onboard repo research (like explore)
   review: implementation       # /sdd:review — PR babysitting + CI triage
+
+# DISPATCH (optional) — route a PHASE to the CLI that should RUN it, across
+# providers: e.g. plan on Claude Code, tasks on Codex (gpt-5.5), implement on
+# Copilot (claude-sonnet-5). The phase skills detect the mapping and offer
+# `scripts/spec-dispatch.sh <role> <spec-dir>`, which runs the target CLI
+# headlessly in the right working root and verifies the artifacts on return
+# (sdd-analyze / spec-evidence — provider-agnostic, same gates as always).
+#
+# Single-provider setups: OMIT this block entirely. No dispatch map = every
+# phase runs in the CLI you're typing in, exactly as before. Each mapped CLI
+# must be installed and authenticated on this machine (doctor checks).
+#
+# Dispatchable roles: plan, tasks, implement, retro. `specify` never (it's an
+# interview); `review` never (merge decisions are interactive).
+#
+# dispatch:
+#   tasks: codex
+#   implement: copilot

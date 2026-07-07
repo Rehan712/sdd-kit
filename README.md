@@ -131,6 +131,40 @@ After editing `models.yml` by hand, re-run `scripts/setup.sh` (or
 `apply-models.sh` + `sync.sh` + `build-adapters.sh`). `sdd-doctor.sh` flags a
 stale or missing build, and validates the policy file.
 
+### Cross-CLI dispatch (different providers per phase)
+
+Model tiering picks the model *within* whichever CLI you're typing in. The
+optional **`dispatch:`** map in `models.yml` goes one step further: it names
+the CLI that should *run* a phase, so one machine can plan on Claude Code
+(opus), write tasks on Codex (gpt-5.5), and implement on Copilot
+(claude-sonnet-5):
+
+```yaml
+dispatch:
+  tasks: codex
+  implement: copilot
+```
+
+When a phase skill sees its role mapped to a different CLI, it offers
+**`scripts/spec-dispatch.sh <role> <spec-dir>`** — the one dispatcher. It runs
+the target CLI headlessly (`codex exec` inside its workspace-write sandbox /
+`copilot -p --agent sdd-<phase>` / `claude -p`) with the phase's model from
+the same policy, in the right working root (for implement it pre-cuts the
+spec worktree and runs the guard first), captures the final message into the
+spec's `notes/`, flips `active_tool:` in STATUS.md, and **verifies the
+artifacts on return** with the kit's deterministic checkers (`sdd-analyze.sh`
+for tasks, plus `spec-evidence.sh` for implement). Artifacts are the
+interface — a foreign model's output passes the same gates as anyone else's.
+
+Boundaries, on purpose: `specify` is never dispatchable (it's an interview),
+`review` is never dispatchable (merge decisions are interactive), and umbrella
+specs run their phases interactively. A dispatched run is non-interactive by
+contract — the prompt forbids asking questions; unknowns become
+`[NEEDS CLARIFICATION]` markers and the run stops cleanly. **Single-provider
+setups: omit `dispatch:` entirely — nothing changes.** Each mapped CLI must be
+installed and authenticated; `sdd-doctor.sh` and `model-policy.sh check` flag
+mappings this machine can't honor.
+
 ## Multi-repo features (umbrella specs)
 
 A team's feature rarely lives in one repo — web + mobile + big-screen clients,
@@ -178,7 +212,7 @@ All in `scripts/` (stable path: `~/.sdd/scripts/`):
 |---|---|
 | `setup.sh` | install / repair everything on this machine |
 | `configure-models.sh` | wizard for the model policy (`models.yml`) — which model + effort runs each SDD role, per CLI |
-| `model-policy.sh` | query/validate the policy: `get <role> <cli> <field>`, `show`, `check` |
+| `model-policy.sh` | query/validate the policy: `get <role> <cli> <field>`, `dispatch [<role>]`, `show`, `check` |
 | `apply-models.sh` | stamp the policy into generated skill/agent copies under `build/` (Claude homes link there) |
 | `project-detect.sh` | cwd → registered project root (worktree-aware) |
 | `system-map.sh <cmd>` | query/validate the team topology: `list`, `show`, `path`, `deps`, `consumers`, `contracts`, `check` |
@@ -193,6 +227,7 @@ All in `scripts/` (stable path: `~/.sdd/scripts/`):
 | `spec-evidence.sh <spec-dir>` | evidence integrity (gate-time): every `[x]` box's `*Evidence:*` must trace to a real `notes/evidence.md` capture block or an on-disk artifact — catches fabricated pointers, missing screenshots, and manual/post-deploy ACs with no owner + check-back date |
 | `spec-pr.sh <spec-dir>` | push + open PR; **refuses unless both gates passed** (`--force` only with `--draft`); writes `pr:` + `phase: review` back into STATUS; umbrella: `--repo <name>`, once per repo |
 | `spec-ci.sh <cmd>` | the CI watcher: `check`/`watch`/`logs` — PR checks + review + mergeability via `gh`, aggregate written to STATUS `ci:`, distinct exit codes (0 green / 10 pending / 20 red / 30 changes-requested / 40 conflicts); umbrella-aware |
+| `spec-dispatch.sh <role> <spec-dir>` | run one phase on ANOTHER CLI/provider headlessly (models.yml `dispatch:` map or `--to`): right working root + model, output captured to `notes/`, artifacts verified on return; `--task T###`/`--all` for implement, `--dry-run` prints the command |
 | `sdd-status.sh` | dashboard of every spec in every project + hub umbrella specs (worktree-aware; `--open`, `--phase`, `--project`, `--tsv` for machines) |
 | `sync.sh` | verify/repair the per-item symlinks into Claude homes (`--check`); prunes stale links; `--remove` uninstalls them |
 | `build-adapters.sh` | regenerate Codex/Copilot adapters from the skills |

@@ -12,6 +12,13 @@ Phase 4 of the SDD workflow. Reads `tasks.md`, executes the next pending task
 `~/.sdd/templates/umbrella-guide.md` §Implement and follow it wherever it
 overrides this file. Everything below assumes single-repo.
 
+**Dispatched phase?** If `~/.sdd/scripts/model-policy.sh dispatch implement`
+prints a CLI other than the one you are running on, offer
+`bash ~/.sdd/scripts/spec-dispatch.sh implement <spec-dir> [--task T### | --all]`
+(it pre-cuts the worktree, runs that CLI headlessly inside it, and verifies
+with `sdd-analyze.sh` + `spec-evidence.sh` on return) and run locally only if
+the user declines. Prints nothing → run here as normal.
+
 ## Pre-flight (once per spec)
 
 1. **Read `STATUS.md`** — phase, locked decisions, open questions, existing

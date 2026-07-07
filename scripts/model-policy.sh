@@ -6,17 +6,25 @@
 # the ONE parser for that file — apply-models.sh, build-adapters.sh, and
 # sdd-doctor.sh consume it, and skills may call it at runtime.
 #
+# An optional `dispatch:` map routes a PHASE to the CLI that should run it
+# (cross-provider: e.g. tasks on Codex, implement on Copilot). No dispatch
+# map = every phase runs in the CLI you're typing in — single-provider
+# setups need none of this. `scripts/spec-dispatch.sh` consumes it.
+#
 # Usage:
 #   model-policy.sh get <role> <cli> <field>    # field: model | effort | tier
 #   model-policy.sh tier <tier> <cli> <field>   # field: model | effort
 #   model-policy.sh roles                       # role<TAB>tier lines
 #   model-policy.sh tiers                       # tier names
+#   model-policy.sh dispatch <role>             # CLI that runs the role, if mapped
+#   model-policy.sh dispatch                    # all mappings: role<TAB>cli lines
 #   model-policy.sh show                        # human table of the policy
 #   model-policy.sh check                       # validate; exit 1 on errors
 #   model-policy.sh --file <path> <cmd> ...     # use another policy file
 #
-# `get`/`tier` print the single value and exit 0. An unset value prints
-# nothing and exits 1 (callers treat that as "leave the CLI's default").
+# `get`/`tier`/`dispatch <role>` print the single value and exit 0. An unset
+# value prints nothing and exits 1 (callers treat that as "leave the CLI's
+# default" / "run locally").
 # A missing policy file exits 3 (policy not configured) for every command.
 
 set -euo pipefail
@@ -46,12 +54,14 @@ CMD="${1:-}"
 # Flatten models.yml to TSV:
 #   tier<TAB><name><TAB><key><TAB><value>
 #   role<TAB><name><TAB><tier>
+#   dispatch<TAB><role><TAB><cli>
 flatten() {
   awk '
     /^[[:space:]]*#/ { next }
     /^[[:space:]]*$/ { next }
     /^tiers:/ { sect="tiers"; next }
     /^roles:/ { sect="roles"; next }
+    /^dispatch:/ { sect="dispatch"; next }
     /^[^[:space:]]/ { sect=""; next }                # any other top-level key
     {
       line=$0
@@ -72,6 +82,8 @@ flatten() {
         if (indent>=4 && tier!="" && val!="") printf "tier\t%s\t%s\t%s\n", tier, key, val
       } else if (sect=="roles") {
         if (indent==2 && val!="") printf "role\t%s\t%s\n", key, val
+      } else if (sect=="dispatch") {
+        if (indent==2 && val!="") printf "dispatch\t%s\t%s\n", key, val
       }
     }
   ' "$POLICY"
@@ -92,6 +104,16 @@ case "$CMD" in
 
   tiers)
     flatten | awk -F'\t' '$1=="tier" { print $2 }' | awk '!seen[$0]++'
+    ;;
+
+  dispatch)
+    if [[ -n "${2:-}" ]]; then
+      v="$(flatten | awk -F'\t' -v r="$2" '$1=="dispatch" && $2==r { print $3; exit }')"
+      [[ -n "$v" ]] || exit 1
+      echo "$v"
+    else
+      flatten | awk -F'\t' '$1=="dispatch" { print $2 "\t" $3 }'
+    fi
     ;;
 
   tier)
@@ -122,6 +144,12 @@ case "$CMD" in
       printf '%-20s %-16s %-22s %-22s %-22s\n' "$role" "$tier" \
         "${cm:--}${ce:+ ($ce)}" "${xm:--}${xe:+ ($xe)}" "${pm:--}${pe:+ ($pe)}"
     done < <(flatten | awk -F'\t' '$1=="role" { print $2 "\t" $3 }')
+    dispatch_rows="$(flatten | awk -F'\t' '$1=="dispatch" { print "  " $2 " -> " $3 }')"
+    if [[ -n "$dispatch_rows" ]]; then
+      echo
+      echo "Dispatch (phase -> CLI that runs it; spec-dispatch.sh):"
+      echo "$dispatch_rows"
+    fi
     ;;
 
   check)
@@ -156,6 +184,26 @@ case "$CMD" in
     for known in specify plan tasks implement retro onboard orchestrator opponent reality-check security-reviewer test-engineer stack-expert explore; do
       grep -qx "$known" <<<"$roles" || warn "role '$known' not mapped — that phase/agent keeps the session default"
     done
+
+    # dispatch: — phase -> CLI routing (optional; consumed by spec-dispatch.sh)
+    while IFS=$'\t' read -r _ drole dcli; do
+      [[ -n "$drole" ]] || continue
+      case "$drole" in
+        plan|tasks|implement|retro) ;;
+        specify) fail "dispatch: 'specify' is an interview — it runs where the user is, never headless" ;;
+        review)  fail "dispatch: 'review' needs interactive judgment (merge decisions) — not dispatchable" ;;
+        *) fail "dispatch: unknown role '$drole' (dispatchable: plan, tasks, implement, retro)" ;;
+      esac
+      case "$dcli" in
+        claude|codex|copilot) ;;
+        *) fail "dispatch: role '$drole' -> unknown CLI '$dcli' (claude|codex|copilot)" ;;
+      esac
+      case "$dcli" in
+        claude|codex|copilot)
+          command -v "$dcli" >/dev/null 2>&1 \
+            || warn "dispatch: '$drole' -> '$dcli' but the $dcli CLI is not on PATH on this machine" ;;
+      esac
+    done < <(flatten | awk -F'\t' '$1=="dispatch"')
 
     if (( errors == 0 )); then
       echo "  ${GREEN}✓${RESET} model policy valid ($(wc -l <<<"$tiers" | tr -d ' ') tiers, $(wc -l <<<"$roles" | tr -d ' ') roles, $warnings warning(s))"
