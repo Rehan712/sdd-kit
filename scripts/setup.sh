@@ -28,7 +28,9 @@
 
 set -euo pipefail
 
-KIT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+# pwd -P (physical): invoked via ~/.sdd/scripts/setup.sh, a logical pwd would
+# yield KIT_DIR=~/.sdd and step 1's ln would turn ~/.sdd into a self-loop.
+KIT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd -P)"
 . "$KIT_DIR/scripts/lib.sh"
 
 init_colors
@@ -49,6 +51,10 @@ done
 echo "Installing SDD kit from: $KIT_DIR"
 
 # --- 1. ~/.sdd -> repo ---
+if [[ "$KIT_DIR" == "$HOME/.sdd" ]]; then
+  echo "  ${RED}✗${RESET} refusing to link ~/.sdd to itself — run setup.sh from the real clone" >&2
+  exit 1
+fi
 if [[ -L "$HOME/.sdd" ]]; then
   ln -sfn "$KIT_DIR" "$HOME/.sdd"
   echo "  ${GREEN}✓${RESET} ~/.sdd -> $KIT_DIR"
