@@ -32,9 +32,11 @@ accepted, then `~/.sdd/scripts/spec-status.sh --file plan.md set <dir> status ac
 Walk the plan's Architecture section; each component-level change becomes 1–5
 tasks. Per task: **`T###`** (sequential, zero-padded) · **`[P]`** when
 parallel-safe · **subject** (imperative, 4–10 words) · ***Files:*** (concrete
-paths) · ***Acceptance:*** (the observable check — "unit test added and
-passes", "integration test covers AC-###", "endpoint returns expected JSON") ·
-***Refs:*** (REQ-###/AC-### + plan section).
+paths) · ***Acceptance:*** (the observable check — prefer a **runnable
+command** so `/sdd:implement` can capture it via `spec-run.sh`: "unit test added
+and passes", "integration test names & covers AC-###", "endpoint returns
+expected JSON") · ***Refs:*** (REQ-###/AC-### + plan section). Test tasks state
+that the test **names the AC id** it proves (`spec-ac-coverage.sh` checks it).
 
 Every AC-### must be covered by at least one **implementation** task's Refs —
 gate tasks enumerate every AC by design, so they don't count
