@@ -22,21 +22,15 @@
 set -uo pipefail
 
 HUB_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+. "$HUB_DIR/scripts/lib.sh"
 REGISTRY="$HUB_DIR/registry.yml"
 
-GREEN=$'\033[32m'
-RED=$'\033[31m'
-YELLOW=$'\033[33m'
-DIM=$'\033[2m'
-RESET=$'\033[0m'
+init_colors
 
 errors=0
 warnings=0
 
-usage() {
-  sed -n '2,15p' "$0" | sed 's/^# \{0,1\}//'
-  exit 0
-}
+usage() { usage_from_header "$0"; exit 0; }
 
 pass()  { echo "  ${GREEN}✓${RESET} $1"; }
 fail()  { echo "  ${RED}✗${RESET} $1"; errors=$((errors+1)); }
@@ -154,53 +148,70 @@ check_tool_adapters() {
   echo "Tool adapters: Codex + Copilot copies of the hub skills"
   local codex="$HOME/.codex/skills"
   local copilot="$HOME/.copilot/agents"
+  local have_codex=0 have_copilot=0
+  [[ -d "$HOME/.codex" ]] && have_codex=1
+  [[ -d "$HOME/.copilot" ]] && have_copilot=1
 
-  for phase in specify plan tasks implement; do
-    local cf="$codex/sdd-$phase/SKILL.md"
-    if [[ -f "$cf" ]]; then
-      grep -q "STATUS.md" "$cf" && pass "codex sdd-$phase: STATUS.md wired" || warn "codex sdd-$phase: STATUS.md not wired"
-    else
-      warn "codex sdd-$phase/SKILL.md not found"
+  # No Codex/Copilot on this machine = nothing to check, not 14 warnings.
+  # (build-adapters.sh likewise only generates adapters when the CLI dir exists.)
+  if (( ! have_codex && ! have_copilot )); then
+    info "neither ~/.codex nor ~/.copilot exists — adapters not applicable on this machine"
+    echo
+    return
+  fi
+  (( have_codex ))   || info "~/.codex absent — skipping codex adapter checks"
+  (( have_copilot )) || info "~/.copilot absent — skipping copilot adapter checks"
+
+  # adapter_file <tool> <phase> — echoes that tool's adapter path, or nothing
+  # when the tool isn't installed here.
+  adapter_file() {
+    case "$1" in
+      codex)   (( have_codex ))   && echo "$codex/sdd-$2/SKILL.md" ;;
+      copilot) (( have_copilot )) && echo "$copilot/sdd-$2.agent.md" ;;
+    esac
+    return 0
+  }
+
+  local tool file
+  for tool in codex copilot; do
+    for phase in specify plan tasks implement; do
+      file="$(adapter_file "$tool" "$phase")"
+      [[ -z "$file" ]] && continue
+      if [[ -f "$file" ]]; then
+        grep -q "STATUS.md" "$file" && pass "$tool sdd-$phase: STATUS.md wired" || warn "$tool sdd-$phase: STATUS.md not wired"
+      else
+        warn "$tool sdd-$phase adapter not found (run scripts/build-adapters.sh)"
+      fi
+    done
+
+    file="$(adapter_file "$tool" implement)"
+    if [[ -n "$file" && -f "$file" ]]; then
+      grep -q "spec-worktree" "$file" && pass "$tool implement: worktree wired" || warn "$tool implement: spec-worktree not wired"
+      grep -q "opponent"      "$file" && pass "$tool implement: opponent wired" || warn "$tool implement: opponent gate not wired"
+      grep -q "sdd-analyze"   "$file" && pass "$tool implement: analyze wired"  || warn "$tool implement: sdd-analyze not wired"
+      grep -qi "retro"        "$file" && pass "$tool implement: retro wired"    || warn "$tool implement: retro not wired"
+      grep -q "Legacy specs"  "$file" && pass "$tool implement: legacy-gate backfill wired" || warn "$tool implement: legacy-gate backfill not wired"
     fi
-    local pf="$copilot/sdd-$phase.agent.md"
-    if [[ -f "$pf" ]]; then
-      grep -q "STATUS.md" "$pf" && pass "copilot sdd-$phase: STATUS.md wired" || warn "copilot sdd-$phase: STATUS.md not wired"
-    else
-      warn "copilot sdd-$phase.agent.md not found"
-    fi
+
+    file="$(adapter_file "$tool" tasks)"
+    [[ -n "$file" && -f "$file" ]] && { grep -q "sdd-analyze" "$file" && pass "$tool tasks: analyze wired" || warn "$tool tasks: sdd-analyze not wired"; }
+
+    file="$(adapter_file "$tool" plan)"
+    [[ -n "$file" && -f "$file" ]] && { grep -q "MET-" "$file" && pass "$tool plan: MET wiring present" || warn "$tool plan: MET-### wiring missing"; }
+
+    file="$(adapter_file "$tool" specify)"
+    [[ -n "$file" && -f "$file" ]] && { grep -q "MET-" "$file" && pass "$tool specify: metrics question present" || warn "$tool specify: MET-### question missing"; }
   done
 
-  for pair in "codex:$codex/sdd-implement/SKILL.md" "copilot:$copilot/sdd-implement.agent.md"; do
-    local tool="${pair%%:*}" file="${pair#*:}"
-    [[ -f "$file" ]] || { warn "$tool implement adapter not found"; continue; }
-    grep -q "spec-worktree" "$file" && pass "$tool implement: worktree wired" || warn "$tool implement: spec-worktree not wired"
-    grep -q "opponent"      "$file" && pass "$tool implement: opponent wired" || warn "$tool implement: opponent gate not wired"
-    grep -q "sdd-analyze"   "$file" && pass "$tool implement: analyze wired"  || warn "$tool implement: sdd-analyze not wired"
-    grep -qi "retro"        "$file" && pass "$tool implement: retro wired"    || warn "$tool implement: retro not wired"
-    grep -q "Legacy specs"  "$file" && pass "$tool implement: legacy-gate backfill wired" || warn "$tool implement: legacy-gate backfill not wired"
-  done
-
-  for pair in "codex:$codex/sdd-tasks/SKILL.md" "copilot:$copilot/sdd-tasks.agent.md"; do
-    local tool="${pair%%:*}" file="${pair#*:}"
-    [[ -f "$file" ]] || continue
-    grep -q "sdd-analyze" "$file" && pass "$tool tasks: analyze wired" || warn "$tool tasks: sdd-analyze not wired"
-  done
-
-  for pair in "codex:$codex/sdd-plan/SKILL.md" "copilot:$copilot/sdd-plan.agent.md"; do
-    local tool="${pair%%:*}" file="${pair#*:}"
-    [[ -f "$file" ]] || continue
-    grep -q "MET-" "$file" && pass "$tool plan: MET wiring present" || warn "$tool plan: MET-### wiring missing"
-  done
-
-  for pair in "codex:$codex/sdd-specify/SKILL.md" "copilot:$copilot/sdd-specify.agent.md"; do
-    local tool="${pair%%:*}" file="${pair#*:}"
-    [[ -f "$file" ]] || continue
-    grep -q "MET-" "$file" && pass "$tool specify: metrics question present" || warn "$tool specify: MET-### question missing"
-  done
-
-  [[ -f "$codex/sdd-retro/SKILL.md"   ]] && pass "codex sdd-retro present"   || warn "codex sdd-retro missing"
-  [[ -f "$copilot/sdd-retro.agent.md" ]] && pass "copilot sdd-retro present" || warn "copilot sdd-retro missing"
-  [[ -f "$copilot/opponent.agent.md" ]] && pass "copilot opponent.agent.md present" || warn "copilot opponent.agent.md missing (Codex reads the hub path inline)"
+  if (( have_codex )); then
+    [[ -f "$codex/sdd-retro/SKILL.md" ]] && pass "codex sdd-retro present" || warn "codex sdd-retro missing"
+    [[ -f "$codex/sdd-review/SKILL.md" ]] && pass "codex sdd-review present" || warn "codex sdd-review missing (re-run build-adapters.sh)"
+  fi
+  if (( have_copilot )); then
+    [[ -f "$copilot/sdd-retro.agent.md" ]] && pass "copilot sdd-retro present" || warn "copilot sdd-retro missing"
+    [[ -f "$copilot/sdd-review.agent.md" ]] && pass "copilot sdd-review present" || warn "copilot sdd-review missing (re-run build-adapters.sh)"
+    [[ -f "$copilot/opponent.agent.md" ]] && pass "copilot opponent.agent.md present" || warn "copilot opponent.agent.md missing (Codex reads the hub path inline)"
+  fi
   echo
 }
 
@@ -250,7 +261,7 @@ check_project() {
   if [[ -f "$proj/.specify/stack.yml" ]]; then
     pass "stack.yml present"
     local stacks
-    stacks=$(grep -E '^stacks:' "$proj/.specify/stack.yml" | head -1 | sed -E 's/^stacks:[[:space:]]*\[([^]]*)\].*/\1/' | tr -d ' ' | tr ',' ' ')
+    stacks=$(yml_list "$proj/.specify/stack.yml" stacks)
     if [[ -n "$stacks" ]]; then
       for s in $stacks; do
         if [[ -f "$HUB_DIR/templates/stack-overlays/$s.md" ]]; then
@@ -259,6 +270,8 @@ check_project() {
           fail "no overlay for stack '$s'"
         fi
       done
+    else
+      warn "stack.yml has no parseable stacks: entry (inline [a, b] or block list)"
     fi
   else
     warn "stack.yml missing"

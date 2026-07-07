@@ -7,8 +7,13 @@
 # happens and the manual command is printed to stderr (exit 3).
 #
 # GATE ENFORCEMENT: refuses to open the PR (exit 4) unless STATUS.md shows
-# opponent CLEARED and reality_check READY. `--force` overrides (use for
-# draft PRs opened mid-flight; the body will still show the real verdicts).
+# opponent CLEARED and reality_check READY. `--force` overrides ONLY together
+# with `--draft` (a mid-flight draft PR; the body still shows the real
+# verdicts). A non-draft PR can never skip the gates.
+#
+# WRITE-BACK: on success the PR URL is written into STATUS.md frontmatter
+# (`pr:`, plus `phase: review` for non-drafts; umbrella repos get `pr_<name>:`)
+# and `updated:` is bumped — no session has to remember to do it.
 #
 # UMBRELLA SPECS (spec.md has `repos:` frontmatter): the spec lives in the hub
 # and each declared repo ships its own PR — pass `--repo <name>` per repo.
@@ -18,16 +23,17 @@
 #   spec-pr.sh <spec-dir>
 #   spec-pr.sh --base <branch> <spec-dir>   # default base: dev
 #   spec-pr.sh --draft <spec-dir>
-#   spec-pr.sh --force <spec-dir>           # skip the gate check
+#   spec-pr.sh --force --draft <spec-dir>   # mid-flight draft, gates not yet run
 #   spec-pr.sh --repo <name> <spec-dir>     # umbrella: PR for one declared repo
 #   spec-pr.sh --help
 
 set -euo pipefail
 
 HUB_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+. "$HUB_DIR/scripts/lib.sh"
 SYSMAP="$HUB_DIR/scripts/system-map.sh"
 
-usage() { sed -n '2,26p' "$0" | sed 's/^# \{0,1\}//'; exit 0; }
+usage() { usage_from_header "$0"; exit 0; }
 
 BASE=""   # --base wins; else .specify/stack.yml `base_branch:`; else dev
 DRAFT=""
@@ -55,10 +61,8 @@ slug="$(basename "$spec_dir")"
 branch="spec/$slug"
 status="$spec_dir/STATUS.md"
 
-# Umbrella detection: `repos:` frontmatter in spec.md.
-declared_repos=""
-[[ -f "$spec_dir/spec.md" ]] && \
-  declared_repos="$(sed -n 's/^repos:[[:space:]]*\[\([^]]*\)\].*/\1/p' "$spec_dir/spec.md" | head -1 | tr -d ' ' | tr ',' ' ')"
+# Umbrella detection: `repos:` in spec.md FRONTMATTER (body text is ignored).
+declared_repos="$(spec_declared_repos "$spec_dir")"
 
 if [[ -n "$declared_repos" ]]; then
   if [[ -z "$REPO_NAME" ]]; then
@@ -77,12 +81,7 @@ fi
 # Resolve base branch: flag > project stack.yml `base_branch:` > dev.
 # Check the checkout itself first, then the main repo (a worktree checkout may
 # predate stack.yml being committed).
-read_base() {
-  # Missing stack.yml must mean "no answer", not death-by-pipefail under set -e.
-  [[ -f "$1/.specify/stack.yml" ]] || return 0
-  sed -n 's/^base_branch:[[:space:]]*//p' "$1/.specify/stack.yml" \
-    | head -1 | sed -E 's/[[:space:]]*#.*$//; s/[[:space:]]+$//'
-}
+read_base() { yml_get "$1/.specify/stack.yml" base_branch; }
 if [[ -z "$BASE" ]]; then
   BASE="$(read_base "$repo")"
   if [[ -z "$BASE" ]]; then
@@ -94,11 +93,6 @@ if [[ -z "$BASE" ]]; then
   BASE="${BASE:-dev}"
 fi
 
-# Read a frontmatter field, stripping any inline `# comment` and trailing space.
-field() { sed -n "s/^$1:[[:space:]]*//p" "$2" 2>/dev/null | head -1 | sed -E 's/[[:space:]]*#.*$//; s/[[:space:]]+$//'; }
-# Raw variant: no comment stripping (titles may legitimately contain '#').
-field_raw() { sed -n "s/^$1:[[:space:]]*//p" "$2" 2>/dev/null | head -1 | sed -E 's/^[[:space:]]+//; s/[[:space:]]+$//'; }
-
 # Run gh from the spec's worktree when STATUS.md names one; else the repo.
 # Umbrella: STATUS frontmatter worktree stays `none` — probe the conventional
 # per-repo worktree path instead.
@@ -107,19 +101,19 @@ if [[ -n "$declared_repos" ]]; then
   wt="$(dirname "$repo")/$(basename "$repo").worktrees/$slug"
   [[ -d "$wt" ]] && workdir="$wt"
 elif [[ -f "$status" ]]; then
-  wt="$(field worktree "$status")"
+  wt="$(fm_get "$status" worktree)"
   [[ -n "$wt" && "$wt" != "none" && -d "$wt" ]] && workdir="$wt"
 fi
 
 title="$slug"
-[[ -f "$spec_dir/spec.md" ]] && title="$(field_raw title "$spec_dir/spec.md")"
+[[ -f "$spec_dir/spec.md" ]] && title="$(fm_get_raw "$spec_dir/spec.md" title)"
 [[ -z "$title" ]] && title="$slug"
 [[ -n "$declared_repos" ]] && title="$title ($REPO_NAME)"
 
 opp="not-run"; rc="not-run"
 if [[ -f "$status" ]]; then
-  opp="$(field opponent "$status")"; opp="${opp:-not-run}"
-  rc="$(field reality_check "$status")"; rc="${rc:-not-run}"
+  opp="$(fm_get "$status" opponent)"; opp="${opp:-not-run}"
+  rc="$(fm_get "$status" reality_check)"; rc="${rc:-not-run}"
 fi
 
 # Gate check: both verdicts must lead with CLEARED / READY (any case — real
@@ -127,8 +121,11 @@ fi
 opp_lc="$(printf '%s' "$opp" | tr '[:upper:]' '[:lower:]')"
 rc_lc="$(printf '%s' "$rc" | tr '[:upper:]' '[:lower:]')"
 if [[ "$opp_lc" != cleared* || "$rc_lc" != ready* ]]; then
-  if (( FORCE )); then
-    echo "warning: opening PR with gates not passed (opponent: $opp / reality_check: $rc) — --force given" >&2
+  if (( FORCE )) && [[ -z "$DRAFT" ]]; then
+    echo "REFUSED: --force only applies to draft PRs (--force --draft) — a non-draft PR must pass the gates" >&2
+    exit 4
+  elif (( FORCE )); then
+    echo "warning: opening DRAFT PR with gates not passed (opponent: $opp / reality_check: $rc) — --force --draft given" >&2
   else
     echo "REFUSED: pre-ship gates not passed for $slug" >&2
     echo "  opponent:      $opp   (needs CLEARED)" >&2
@@ -141,7 +138,8 @@ fi
 git -C "$workdir" push -u origin "$branch" >&2
 
 if [[ -n "$declared_repos" ]]; then
-  others="$(tr ' ' '\n' <<< "$declared_repos" | grep -vx "$REPO_NAME" | paste -sd', ' -)"
+  # (paste -d takes a delimiter LIST — 'sd', ' would alternate. Join then space.)
+  others="$(tr ' ' '\n' <<< "$declared_repos" | grep -vx "$REPO_NAME" | paste -sd, - | sed 's/,/, /g')"
   body="$(cat <<EOF
 Implements the **$REPO_NAME** slice of umbrella spec \`$slug\` (hub: \`~/.sdd/specs/$slug/\`).
 
@@ -170,11 +168,30 @@ EOF
 )"
 fi
 
-if command -v gh >/dev/null 2>&1; then
-  ( cd "$workdir" && gh pr create --base "$BASE" --head "$branch" $DRAFT \
-      --title "$title" --body "$body" )
-else
+if ! command -v gh >/dev/null 2>&1; then
   echo "gh not found — branch pushed, open the PR manually:" >&2
   echo "  gh pr create --base $BASE --head $branch --title \"$title\"" >&2
   exit 3
+fi
+
+# Create the PR — or, on re-run, reuse the one that already exists (idempotent).
+pr_url="$( (cd "$workdir" && gh pr create --base "$BASE" --head "$branch" $DRAFT \
+              --title "$title" --body "$body") )" \
+  || pr_url="$( (cd "$workdir" && gh pr view "$branch" --json url -q .url 2>/dev/null) )" \
+  || { echo "gh pr create failed and no existing PR found for $branch" >&2; exit 3; }
+echo "$pr_url"
+
+# Write the PR back into STATUS.md so the dashboard and the next session see it
+# without relying on anyone remembering to edit the file.
+#   single-repo: pr: <url>, phase: review (drafts keep the current phase)
+#   umbrella:    pr_<repo>: <url> — the frontmatter mirror of the Repo matrix row
+if [[ -f "$status" ]]; then
+  if [[ -n "$declared_repos" ]]; then
+    fm_set "$status" "pr_$REPO_NAME" "$pr_url"
+  else
+    fm_set "$status" pr "$pr_url"
+    [[ -z "$DRAFT" ]] && fm_set "$status" phase "review"
+  fi
+  fm_set "$status" updated "$(date +%Y-%m-%d)"
+  echo "STATUS.md updated (pr${declared_repos:+_$REPO_NAME}:, updated:)" >&2
 fi

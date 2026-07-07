@@ -22,11 +22,12 @@
 set -euo pipefail
 
 HUB_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+. "$HUB_DIR/scripts/lib.sh"
 POLICY="$HUB_DIR/models.yml"
 
-GREEN=$'\033[32m'; RED=$'\033[31m'; YELLOW=$'\033[33m'; DIM=$'\033[2m'; RESET=$'\033[0m'
+init_colors
 
-usage() { sed -n '2,21p' "$0" | sed 's/^# \{0,1\}//'; exit 0; }
+usage() { usage_from_header "$0"; exit 0; }
 
 while (( $# )); do
   case "$1" in
@@ -55,8 +56,10 @@ flatten() {
     {
       line=$0
       sub(/[[:space:]]+#.*$/, "", line)             # inline comments
-      indent=0
-      while (substr(line, indent+1, 1)==" ") indent++
+      # Count tabs as indent too (2 cols each) — a tab-indented models.yml
+      # must not silently parse to zero tiers.
+      indent=0; ci=1
+      while ((c = substr(line, ci, 1)) == " " || c == "\t") { indent += (c=="\t" ? 2 : 1); ci++ }
       sub(/^[[:space:]]+/, "", line)
       eq=index(line, ":")
       if (eq==0) next

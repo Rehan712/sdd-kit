@@ -29,10 +29,11 @@
 set -euo pipefail
 
 KIT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+. "$KIT_DIR/scripts/lib.sh"
 
-GREEN=$'\033[32m'; YELLOW=$'\033[33m'; RESET=$'\033[0m'
+init_colors
 
-usage() { sed -n '2,27p' "$0" | sed 's/^# \{0,1\}//'; exit 0; }
+usage() { usage_from_header "$0"; exit 0; }
 
 NO_CLI=0
 NO_WIZARD=0

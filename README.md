@@ -35,8 +35,9 @@ scripts/setup.sh
 After install, `/sdd:onboard` researches every repo in `system-map.yml` and
 writes its standing brief (`briefs/<repo>.md`) — setup prints a hint whenever
 registered repos have no brief. Existing installs: add `onboard: implementation`
-to your machine-local `models.yml` roles (new installs get it from the example;
-`apply-models.sh` prints "role 'onboard' unmapped" until you do).
+and `review: implementation` to your machine-local `models.yml` roles (new
+installs get them from the example; `apply-models.sh` prints "role … unmapped"
+until you do).
 
 Per project, one-time: create `.specify/stack.yml` (the skills do this for you on
 first `/sdd:specify` if it's missing):
@@ -55,8 +56,9 @@ From inside any registered project (including its `<repo>.worktrees/*` checkouts
 | 1. Capture intent | `/sdd:specify "<feature>"` | `.specify/specs/NNN-slug/spec.md` (via interview: goals REQ-###, success metrics MET-###, acceptance criteria AC-###) |
 | 2. Design approach | `/sdd:plan` | `plan.md` — stack experts consulted, codebase explored |
 | 3. Break into tasks | `/sdd:tasks` | `tasks.md` — commit-sized tasks, each with files + acceptance check + refs; validated by `sdd-analyze.sh` |
-| 4. Execute | `/sdd:implement` | Code changes in a `spec/NNN-slug` worktree, checkboxes ticked, gates run |
-| 5. Learn | `/sdd:retro` | `notes/retro.md` + generalizable lessons filed into `knowledge/` |
+| 4. Execute | `/sdd:implement` | Code changes in a `spec/NNN-slug` worktree, checkboxes ticked (`spec-task.sh` — tick + evidence atomically), gates run |
+| 5. Drive the PR home | `/sdd:review` | CI watched via `spec-ci.sh`, red builds triaged into `T###c*` tasks, reviewer feedback into `T###r*`, re-gate rule applied, merge in contract order, worktree torn down |
+| 6. Learn | `/sdd:retro` | `notes/retro.md` + generalizable lessons filed into `knowledge/` |
 
 Every spec directory also carries **`STATUS.md`** — the living handoff record
 (phase, branch, worktree, PR, gate verdicts). Every tool reads it on entry and
@@ -74,9 +76,13 @@ Before any PR:
    — demands observable evidence for every AC-###. Default verdict **NEEDS WORK**;
    gaps become `T###a…` follow-up tasks.
 
-`spec-pr.sh` refuses to open a PR (exit 4) unless STATUS shows CLEARED + READY.
-Neither gate grades its own work: on Claude they run as separate subagents; on
-single-agent CLIs the adapter runs them as distinct review passes.
+`spec-pr.sh` refuses to open a PR (exit 4) unless STATUS shows CLEARED + READY
+(`--force` works only together with `--draft` — a non-draft PR can never skip
+the gates), and on success writes `pr:` + `phase: review` into STATUS.md
+itself. Neither gate grades its own work: on Claude they run as separate
+subagents; on single-agent CLIs the adapter runs them as distinct review
+passes. The gate loop is bounded: from round 3 the user arbitrates (waivers
+are explicit sign-offs in the STATUS Decisions log, never softened verdicts).
 
 Two conventions keep the loop honest end-to-end:
 
@@ -102,7 +108,8 @@ mid-tier model that's faster and cheaper. The mapping is the **model policy**:
   `opponent` `reality-check` `security-reviewer` → reasoning; `implement`
   `stack-expert` `test-engineer` `explore` → implementation. All of it is
   editable — add tiers (e.g. a cheap `recon` tier for exploration), remap roles,
-  or delete `models.yml` to run everything on the session model.
+  or delete `models.yml` to run everything on the session model. (`review` —
+  the PR-babysitting phase — maps to `implementation` by default.)
 - **`scripts/configure-models.sh`** is the wizard (runs on first `setup.sh`;
   re-run anytime). `scripts/model-policy.sh show` prints the current mapping;
   `check` validates it.
@@ -177,13 +184,20 @@ All in `scripts/` (stable path: `~/.sdd/scripts/`):
 | `system-map.sh <cmd>` | query/validate the team topology: `list`, `show`, `path`, `deps`, `consumers`, `contracts`, `check` |
 | `brief-status.sh <cmd>` | deterministic repo-brief freshness: `list` (TSV per repo), `check` (exit 1 on missing/stale), `repo <name>`; `--threshold N` (default 20), `--fetch` to opt into network |
 | `new-spec.sh "<title>"` | scaffold `.specify/specs/NNN-slug/` from templates; `--multi --repos a,b,c` scaffolds an umbrella spec in the hub `specs/` |
-| `spec-worktree.sh <spec-dir>` | cut/reuse branch `spec/NNN-slug` + sibling worktree from the project's base branch; umbrella: `--repo <name>` / `--all-repos` |
+| `spec-worktree.sh <spec-dir>` | cut/reuse branch `spec/NNN-slug` + sibling worktree from the project's base branch; `--remove [--delete-branch]` tears it down post-merge; umbrella: `--repo <name>` / `--all-repos` |
+| `spec-status.sh` | machine-side state mutations: `get`/`set`/`show` on STATUS.md frontmatter (enum-validated, bumps `updated:`); `--file spec.md` targets other artifacts |
+| `spec-task.sh` | tick tasks deterministically: `list`, `show`, `start`, `done T### --evidence "…"` (tick + evidence one atomic edit — refuses evidence-less ticks), `undo` |
 | `sdd-analyze.sh <spec-dir>` | deterministic spec↔plan↔tasks lint: AC coverage (implementation tasks only — gate refs don't count), ref integrity, acceptance checks, evidence on `[x]` tasks, gates present, no unresolved `[NEEDS CLARIFICATION]` markers; umbrella: `[repo:]` tag integrity + `[EXTERNAL:]` mirroring |
-| `spec-pr.sh <spec-dir>` | push + open PR; **refuses unless both gates passed** (`--force` to override); umbrella: `--repo <name>`, once per repo |
-| `sdd-status.sh` | dashboard of every spec in every project + hub umbrella specs (worktree-aware; `--open`, `--phase`, `--project`) |
-| `sync.sh` | verify/repair the per-item symlinks into Claude homes (`--check`) |
+| `spec-pr.sh <spec-dir>` | push + open PR; **refuses unless both gates passed** (`--force` only with `--draft`); writes `pr:` + `phase: review` back into STATUS; umbrella: `--repo <name>`, once per repo |
+| `spec-ci.sh <cmd>` | the CI watcher: `check`/`watch`/`logs` — PR checks + review + mergeability via `gh`, aggregate written to STATUS `ci:`, distinct exit codes (0 green / 10 pending / 20 red / 30 changes-requested / 40 conflicts); umbrella-aware |
+| `sdd-status.sh` | dashboard of every spec in every project + hub umbrella specs (worktree-aware; `--open`, `--phase`, `--project`, `--tsv` for machines) |
+| `sync.sh` | verify/repair the per-item symlinks into Claude homes (`--check`); prunes stale links; `--remove` uninstalls them |
 | `build-adapters.sh` | regenerate Codex/Copilot adapters from the skills |
 | `sdd-doctor.sh` | validate the kit, home wiring, adapters, system map, and any project's `.specify/` layout (`--all`, `--hub-only`) |
+
+(`lib.sh` is the shared parsing library the others source — fence-bound
+frontmatter reads/writes, YAML lists in inline or block form, registry
+entries with `~` expansion. All scripts honor `NO_COLOR` / non-TTY output.)
 
 Deterministic checks run as scripts; model judgment is reserved for design and
 adversarial review. That split is a design principle (constitution §10).
@@ -201,13 +215,17 @@ sdd-kit/
 ├── specs/                    # Umbrella specs — one dir per multi-repo feature
 ├── briefs/                   # Standing per-repo context — seeded by /sdd:onboard,
 │                             # written by plan, refreshed by retro (Source: sha tracked)
-├── skills/                   # CANONICAL skills: sdd-specify/plan/tasks/implement/retro/onboard
+├── skills/                   # CANONICAL skills: sdd-specify/plan/tasks/implement/
+│                             # review/retro/onboard
 ├── agents/                   # Gates (opponent, reality-check), security-reviewer,
-│                             # test-engineer, sdd-orchestrator, and stack experts:
-│                             # rust, javascript, python, aws, react
-├── templates/                # spec / plan / tasks / STATUS / ADR / brief templates
-│   └── stack-overlays/       # per-stack conventions: rust, javascript, python,
-│                             # aws, react, monorepo, troposphere
+│                             # test-engineer, sdd-orchestrator, and 12 stack experts
+│                             # (rust, javascript, python, aws, react, nextjs,
+│                             # loopback4, expo-rn, bun-monorepo, aws-cdk-lambda-ts,
+│                             # rust-aws-lambda, firebase-rtk-codegen)
+├── templates/                # spec/plan/tasks/STATUS/ADR/brief/retro templates,
+│                             # stack-routing.md (THE routing table), umbrella-guide.md
+│   └── stack-overlays/       # per-stack conventions — one per expert above,
+│                             # plus monorepo + troposphere (overlay-only)
 ├── knowledge/                # Cross-project lessons — grows via /sdd:retro
 └── scripts/                  # everything in the table above
 ```
@@ -215,8 +233,9 @@ sdd-kit/
 ## Customizing
 
 - **Add a stack**: write `templates/stack-overlays/<tag>.md` (+ optionally
-  `agents/<tag>-expert.md`), add the tag to your project's `stack.yml`, extend the
-  routing tables in `skills/sdd-plan` and `skills/sdd-implement`. Re-run `setup.sh`.
+  `agents/<tag>-expert.md`), add the tag to your project's `stack.yml`, and add
+  one row to `templates/stack-routing.md` — the single routing table every
+  skill and the orchestrator read. Re-run `setup.sh`.
 - **Project-specific rules**: `<project>/.specify/constitution.md` extends the kit
   constitution with overrides only. A project can pin its own reality-check agent
   there (`Reality-check agent: <path>` — resolution order: constitution pin →

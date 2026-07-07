@@ -20,12 +20,10 @@
 set -euo pipefail
 
 HUB_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+. "$HUB_DIR/scripts/lib.sh"
 REGISTRY="$HUB_DIR/registry.yml"
 
-usage() {
-  sed -n '2,21p' "$0" | sed 's/^# \{0,1\}//'
-  exit 0
-}
+usage() { usage_from_header "$0"; exit 0; }
 
 WITH_STACKS=0
 TARGET=""
@@ -50,37 +48,25 @@ fi
 
 ABS_TARGET="$(cd "$TARGET" && pwd)"
 
-# Extract `stacks: [a, b, c]` from a stack.yml, TAB-separated.
-stacks_from_yml() {
-  grep -E '^stacks:' "$1" | head -1 \
-    | sed -E 's/^stacks:[[:space:]]*\[([^]]*)\].*/\1/' | tr -d ' ' | tr ',' '\t'
-}
+# Extract `stacks:` from a stack.yml (inline [a, b] or block-list form), TAB-separated.
+stacks_from_yml() { yml_list "$1" stacks | tr ' ' '\t'; }
 
 # Match a path against registry.yml; sets REG_PATH / REG_STACKS on success.
+# registry_entries (lib.sh) handles ~ paths, quoting, and any field order.
 registry_match() {
   local probe="$1"
   REG_PATH=""; REG_STACKS=""
   [[ -f "$REGISTRY" ]] || return 1
-  local best_len=0 p_path p_stacks
-  while IFS=$'\t' read -r p_path p_stacks; do
+  local best_len=0 p_name p_path p_stacks
+  while IFS=$'\t' read -r p_name p_path p_stacks; do
     [[ -z "$p_path" ]] && continue
+    p_path="$(expand_tilde "$p_path")"
     if [[ "$probe" == "$p_path" || "$probe" == "$p_path"/* ]]; then
       if (( ${#p_path} > best_len )); then
-        REG_PATH="$p_path"; REG_STACKS="$p_stacks"; best_len=${#p_path}
+        REG_PATH="$p_path"; REG_STACKS="$(printf '%s' "$p_stacks" | tr ' ' '\t')"; best_len=${#p_path}
       fi
     fi
-  done < <(awk '
-    /^[[:space:]]*-[[:space:]]*name:/ { if (path) print path "\t" stacks; path=""; stacks="" }
-    /^[[:space:]]*path:/ { sub(/^[[:space:]]*path:[[:space:]]*/,""); path=$0 }
-    /^[[:space:]]*stacks:/ {
-      sub(/^[[:space:]]*stacks:[[:space:]]*\[/,"")
-      sub(/\][[:space:]]*$/,"")
-      gsub(/[[:space:]]/,"")
-      gsub(/,/,"\t")
-      stacks=$0
-    }
-    END { if (path) print path "\t" stacks }
-  ' "$REGISTRY")
+  done < <(registry_entries "$REGISTRY")
   [[ -n "$REG_PATH" ]]
 }
 

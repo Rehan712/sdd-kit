@@ -12,12 +12,15 @@ Read alongside `plan.md` when `stack.yml` includes `aws-cdk-lambda-ts`.
 
 ## Tagging (enforced)
 
-Every construct should inherit:
+Every construct inherits the **constitution §4.1 canonical tag set**, applied
+once at the stack root:
 
 ```ts
 Tags.of(this).add('Project', '<project-name>');
 Tags.of(this).add('Environment', props.env);
 Tags.of(this).add('Owner', '<team>');
+Tags.of(this).add('ManagedBy', 'cdk');
+// + CostCenter where applicable
 ```
 
 ## Lambda packaging

@@ -30,13 +30,14 @@
 set -euo pipefail
 
 KIT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+. "$KIT_DIR/scripts/lib.sh"
 
-GREEN=$'\033[32m'; DIM=$'\033[2m'; RESET=$'\033[0m'
+init_colors
 
-[[ "${1:-}" == "--help" || "${1:-}" == "-h" ]] && { sed -n '2,19p' "$0" | sed 's/^# \{0,1\}//'; exit 0; }
+[[ "${1:-}" == "--help" || "${1:-}" == "-h" ]] && { usage_from_header "$0"; exit 0; }
 
 PREAMBLE='> **Single-agent adaptation.** You are running on a CLI without subagents. Wherever
-> this skill says to delegate to an agent (a stack expert, the SDDOrchestrator, the
+> this skill says to delegate to an agent (a stack expert, the sdd-orchestrator, the
 > opponent or reality-check gate), do this instead:
 > - **Stack experts** — read the named agent file under `~/.sdd/agents/` and the matching
 >   overlay under `~/.sdd/templates/stack-overlays/`, and apply them as your senior-reviewer

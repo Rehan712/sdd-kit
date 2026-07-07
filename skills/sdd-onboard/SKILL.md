@@ -28,14 +28,10 @@ and **refreshes** them when they drift, so every spec starts warm.
 ~/.sdd/scripts/brief-status.sh list --fetch  # repo  brief  sha  behind  verdict
 ```
 
-Triage with `--fetch`: onboard/refresh is the kit's designated network path
-(it clones and fetches to research), so triage must fetch too — otherwise a
-remote-only repo whose cache clone has drifted reads `fresh` forever and never
-enters the refresh-stale work list. Post-o5, `--fetch` deepens only the shallow
-cache clones and does a plain `git fetch` on full checkouts (no shallowing);
-offline or auth failures are swallowed (`|| true`) so triage degrades to
-today's local-only counting. This is scoped to onboard — doctor, status, and
-`/sdd:plan` stay no-network (R5).
+Triage with `--fetch`: onboard/refresh is the kit's ONLY network path — without
+the fetch, a remote-only repo whose cache clone has drifted reads `fresh`
+forever and never enters the refresh work list. Offline/auth failures degrade
+to local-only counting; doctor, status, and `/sdd:plan` stay no-network.
 
 The verdict column decides the work list per the mode table. Repos with role
 `external` are included when reachable — their briefs help stub at contracts —
@@ -106,22 +102,11 @@ team-shared context: `git -C ~/.sdd add briefs/ && git commit` publishes them.
 
 ## Grounding rules — non-negotiable
 
-1. **Never write a path, ID, or verdict from memory.** Every file path, command,
-   and contract in a brief must come from the repo checkout read *in this
-   session* (by you or your Explore agent). If you can't point at its source,
-   leave it out.
-2. **Quote before you act.** Before writing a brief section, re-read the
-   template's instructions for that section and satisfy exactly what they say.
-3. **Unknown → ask or mark, never invent.** A repo you couldn't reach is
-   `skipped: <reason>` in the summary — never a brief assembled from
-   recollection or the repo's name.
-4. **Paste outputs, don't paraphrase.** Entry-point commands in a brief are the
-   actual commands found in the repo (package.json scripts, Makefile, CI), and
-   the run's evidence is `brief-status.sh check`'s actual output line.
-5. **On contradiction, stop.** If research contradicts `system-map.yml` (a
-   dependency or contract the map doesn't know), surface it and fix the map
-   (`system-map.sh check` must pass) — don't write a brief that quietly
-   disagrees with the topology.
+1. Every path, command, and contract in a brief comes from the checkout read this session — can't point at the source, leave it out.
+2. Re-read the brief template's section instructions before writing each section.
+3. Unreachable repo → `skipped: <reason>`, never a brief assembled from recollection.
+4. Entry-point commands are the actual ones found in the repo; the run's evidence is `brief-status.sh check`'s real output line.
+5. Research contradicts system-map.yml → surface it and fix the map (`system-map.sh check` passes); never a brief that quietly disagrees.
 
 ## Rules
 

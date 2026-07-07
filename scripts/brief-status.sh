@@ -26,11 +26,12 @@
 set -uo pipefail
 
 HUB_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+. "$HUB_DIR/scripts/lib.sh"
 SYSTEM_MAP="$HUB_DIR/scripts/system-map.sh"
 BRIEFS_DIR="$HUB_DIR/briefs"
 CACHE_DIR="$HUB_DIR/.cache/repos"
 
-GREEN=$'\033[32m'; RED=$'\033[31m'; RESET=$'\033[0m'
+init_colors
 
 # usage [exit-code]: print the header block as help. A nonzero code (a usage
 # error — e.g. an unknown subcommand) prints to stderr and exits with it, so a
@@ -38,9 +39,9 @@ GREEN=$'\033[32m'; RED=$'\033[31m'; RESET=$'\033[0m'
 usage() {
   local code="${1:-0}"
   if (( code == 0 )); then
-    sed -n '2,24p' "$0" | sed 's/^# \{0,1\}//'
+    usage_from_header "$0"
   else
-    sed -n '2,24p' "$0" | sed 's/^# \{0,1\}//' >&2
+    usage_from_header "$0" >&2
   fi
   exit "$code"
 }
@@ -69,7 +70,16 @@ THRESHOLD=$((10#$THRESHOLD))   # force base-10: a leading zero must not read as 
 # --- enumeration (single source of truth: system-map.sh) --------------------
 # system-map.sh list prints a formatted header row then one row per repo; the
 # repo name is column 1. We do NOT parse system-map.yml directly (CON-003 / R5).
-repo_names() { "$SYSTEM_MAP" list 2>/dev/null | awk 'NR>1 {print $1}'; }
+# A missing or unparseable map must be a visible failure, NOT "0 repos, all
+# green" — check the map's own exit status before trusting an empty list.
+repo_names() {
+  local out
+  if ! out="$("$SYSTEM_MAP" list 2>/dev/null)"; then
+    echo "cannot enumerate repos — system-map.sh list failed (missing or broken system-map.yml?)" >&2
+    return 1
+  fi
+  printf '%s\n' "$out" | awk 'NR>1 {print $1}'
+}
 
 # --- verdict computation ----------------------------------------------------
 # compute <repo> -> sets R_BRIEF R_SHA R_BEHIND R_VERDICT
@@ -175,17 +185,21 @@ compute() {
 }
 
 # --- subcommands ------------------------------------------------------------
+# Enumerate ONCE, up front — a process substitution would swallow repo_names'
+# exit status and turn a missing/broken map into "0 repos, all green".
 case "$CMD" in
   list)
+    ALL_REPOS="$(repo_names)" || exit 1
     while IFS= read -r repo; do
       [[ -z "$repo" ]] && continue
       compute "$repo"
       printf '%s\t%s\t%s\t%s\t%s\n' "$repo" "$R_BRIEF" "$R_SHA" "$R_BEHIND" "$R_VERDICT"
-    done < <(repo_names)
+    done <<< "$ALL_REPOS"
     exit 0
     ;;
 
   check)
+    ALL_REPOS="$(repo_names)" || exit 1
     total=0; present=0; missing=0; stale=0; unknown=0
     while IFS= read -r repo; do
       [[ -z "$repo" ]] && continue
@@ -197,7 +211,7 @@ case "$CMD" in
         unknown) unknown=$((unknown + 1)) ;;
         missing) missing=$((missing + 1)) ;;
       esac
-    done < <(repo_names)
+    done <<< "$ALL_REPOS"
 
     line="briefs: $present present, $missing missing, $stale stale, $unknown unknown (of $total; threshold $THRESHOLD)"
     if (( missing > 0 || stale > 0 )); then

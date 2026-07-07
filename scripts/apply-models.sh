@@ -27,13 +27,14 @@
 set -euo pipefail
 
 KIT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+. "$KIT_DIR/scripts/lib.sh"
 POLICY="$KIT_DIR/models.yml"
 BUILD="$KIT_DIR/build"
 MP="$KIT_DIR/scripts/model-policy.sh"
 
-GREEN=$'\033[32m'; RED=$'\033[31m'; YELLOW=$'\033[33m'; DIM=$'\033[2m'; RESET=$'\033[0m'
+init_colors
 
-usage() { sed -n '2,26p' "$0" | sed 's/^# \{0,1\}//'; exit 0; }
+usage() { usage_from_header "$0"; exit 0; }
 
 CLEAN=0
 for arg in "$@"; do
@@ -129,7 +130,11 @@ for agent in "$KIT_DIR"/agents/*.md; do
     stamped=$((stamped+1))
   else
     cp "$agent" "$BUILD/agents/$b"
-    echo "  ${DIM}·${RESET} agent $b — ${role:+role \'$role\' unmapped}${role:-no role mapping}, session default"
+    if [[ -n "$role" ]]; then
+      echo "  ${DIM}·${RESET} agent $b — role '$role' unmapped, session default"
+    else
+      echo "  ${DIM}·${RESET} agent $b — no role mapping, session default"
+    fi
     copied=$((copied+1))
   fi
 done

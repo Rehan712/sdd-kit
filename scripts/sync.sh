@@ -21,14 +21,17 @@
 # scripts/build-adapters.sh generates their adapted copies.
 #
 # Usage:
-#   sync.sh                # create/repair all links
+#   sync.sh                # create/repair all links (prunes stale kit links too)
 #   sync.sh --check        # verify only; exit 1 if anything is mis-wired
+#   sync.sh --remove       # uninstall: delete every link that points into the
+#                          # kit from every home (nothing else is touched)
 #   sync.sh --home <path>  # limit to one home (repeatable)
 #   sync.sh --help
 
 set -euo pipefail
 
 KIT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+. "$KIT_DIR/scripts/lib.sh"
 # Prefer the stable ~/.sdd path as the link target when it points at this repo,
 # so links survive the clone moving (re-run setup.sh after a move either way).
 TARGET_ROOT="$KIT_DIR"
@@ -36,17 +39,19 @@ if [[ -L "$HOME/.sdd" && "$(readlink "$HOME/.sdd")" == "$KIT_DIR" ]]; then
   TARGET_ROOT="$HOME/.sdd"
 fi
 
-GREEN=$'\033[32m'; RED=$'\033[31m'; YELLOW=$'\033[33m'; RESET=$'\033[0m'
+init_colors
 
-usage() { sed -n '2,22p' "$0" | sed 's/^# \{0,1\}//'; exit 0; }
+usage() { usage_from_header "$0"; exit 0; }
 
 CHECK=0
+REMOVE=0
 HOMES=()
 
 while (( $# )); do
   case "$1" in
     --help|-h) usage ;;
     --check) CHECK=1 ;;
+    --remove) REMOVE=1 ;;
     --home) shift; HOMES+=("${1:?--home needs a path}") ;;
     *) echo "unknown arg: $1" >&2; exit 2 ;;
   esac
@@ -57,15 +62,17 @@ if (( ${#HOMES[@]} == 0 )); then
   for d in "$HOME/.claude" "$HOME"/.claude_*; do
     [[ -d "$d" ]] || continue
     case "$(basename "$d")" in
-      *.bak|*.backup|*.old|*.orig|*.pre-sync.*) continue ;;
+      *.bak|*.backup|*.old|*.orig|*.pre-sync.*|*.pre-sdd.*|.sdd-displaced) continue ;;
     esac
     HOMES+=("$d")
   done
 fi
 
 if (( ${#HOMES[@]} == 0 )); then
-  echo "no Claude homes found (~/.claude or ~/.claude_*) — is Claude Code installed?" >&2
-  exit 1
+  # Not an error: Codex/Copilot-only machines are supported — their adapters
+  # come from build-adapters.sh. Failing here used to abort setup.sh entirely.
+  echo "no Claude homes found (~/.claude or ~/.claude_*) — nothing to link; skipping (Codex/Copilot adapters are generated separately)" >&2
+  exit 0
 fi
 
 problems=0
@@ -91,10 +98,14 @@ ensure_item_link() {
       echo "  ${RED}✗${RESET} $label: real file/dir shadows the kit (drift risk)"
       problems=$((problems+1))
     else
-      local bak="$link.pre-sdd.$(date +%Y%m%d%H%M%S)"
+      # Park displaced copies OUTSIDE skills/ and agents/ — a backup left in
+      # skills/ gets discovered by Claude Code as a duplicate skill.
+      local bakdir="$(dirname "$(dirname "$link")")/.sdd-displaced"
+      local bak="$bakdir/$(basename "$link").$(date +%Y%m%d%H%M%S)"
+      mkdir -p "$bakdir"
       mv "$link" "$bak"
       ln -s "$target" "$link"
-      echo "  ${YELLOW}!${RESET} $label: existing copy moved to $(basename "$bak"), linked to kit"
+      echo "  ${YELLOW}!${RESET} $label: existing copy moved to ${bak/#$HOME/~}, linked to kit"
       fixed=$((fixed+1))
     fi
   else
@@ -131,8 +142,43 @@ item_target() {
   fi
 }
 
+# points_into_kit <link> — true when the symlink's target is inside the kit
+# (via either the real clone path or the stable ~/.sdd alias).
+points_into_kit() {
+  local t; t="$(readlink "$1")"
+  [[ "$t" == "$KIT_DIR"/* || "$t" == "$HOME/.sdd/"* ]]
+}
+
+# prune_stale <home> — drop kit-owned links whose source item no longer exists
+# (renamed/removed skills and agents would otherwise dangle forever).
+# In --remove mode, drops ALL kit-owned links (the uninstall path).
+prune_stale() {
+  local home="$1" link name
+  for link in "$home"/skills/* "$home"/agents/*; do
+    [[ -L "$link" ]] || continue
+    points_into_kit "$link" || continue
+    name="$(basename "$link")"
+    if (( REMOVE )); then
+      rm "$link"; echo "  ${YELLOW}-${RESET} removed ${link/#$HOME/~}"
+      fixed=$((fixed+1))
+    elif [[ ! -e "$KIT_DIR/skills/$name" && ! -e "$KIT_DIR/agents/$name" ]]; then
+      if (( CHECK )); then
+        echo "  ${RED}✗${RESET} ${link/#$HOME/~}: stale kit link (item no longer in the kit)"
+        problems=$((problems+1))
+      else
+        rm "$link"; echo "  ${YELLOW}-${RESET} pruned stale link ${link/#$HOME/~}"
+        fixed=$((fixed+1))
+      fi
+    fi
+  done
+}
+
 for home in "${HOMES[@]}"; do
   echo "Home: $home"
+  if (( REMOVE )); then
+    prune_stale "$home"
+    continue
+  fi
   for skill_dir in "$KIT_DIR"/skills/sdd-*/; do
     [[ -d "$skill_dir" ]] || continue
     name="$(basename "$skill_dir")"
@@ -143,9 +189,14 @@ for home in "${HOMES[@]}"; do
     b="$(basename "$agent")"
     ensure_item_link "$home/agents/$b" "$(item_target agents "$b")" "agents/$b"
   done
+  prune_stale "$home"
 done
 
 echo "---"
+if (( REMOVE )); then
+  echo "removed: $fixed kit link(s). The clone itself, ~/.sdd, and any ~/.codex|~/.copilot adapters remain — delete those by hand if uninstalling for good."
+  exit 0
+fi
 if (( CHECK )); then
   if (( problems == 0 )); then
     echo "${GREEN}wired${RESET} — every home links to the kit"

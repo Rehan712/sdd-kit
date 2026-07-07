@@ -18,12 +18,17 @@
 # Prints the absolute worktree path as the LAST line of stdout; all diagnostics
 # go to stderr, so callers can do:  WT="$(spec-worktree.sh <spec-dir> | tail -1)"
 #
+# TEARDOWN (after merge): --remove detaches the worktree (refuses if it has
+# uncommitted changes); add --delete-branch to also delete spec/NNN-slug when
+# it's fully merged. Umbrella: combine with --repo <name> or --all-repos.
+#
 # Usage:
 #   spec-worktree.sh <spec-dir>                 # e.g. .../.specify/specs/004-foo
 #   spec-worktree.sh --project <repo> 004-foo   # by slug, repo explicit
 #   spec-worktree.sh --base <ref> <spec-dir>    # override base branch (default dev)
 #   spec-worktree.sh --repo <name> <spec-dir>   # umbrella: one declared repo
 #   spec-worktree.sh --all-repos <spec-dir>     # umbrella: every declared repo
+#   spec-worktree.sh --remove [--delete-branch] <spec-dir>   # post-merge teardown
 #   spec-worktree.sh --help
 
 set -euo pipefail
@@ -31,14 +36,17 @@ set -euo pipefail
 HUB_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 DETECT="$HUB_DIR/scripts/project-detect.sh"
 SYSMAP="$HUB_DIR/scripts/system-map.sh"
+. "$HUB_DIR/scripts/lib.sh"
 
-usage() { sed -n '2,30p' "$0" | sed 's/^# \{0,1\}//'; exit 0; }
+usage() { usage_from_header "$0"; exit 0; }
 
 BASE=""   # --base wins; else .specify/stack.yml `base_branch:`; else dev
 PROJECT=""
 SPEC_ARG=""
 REPO_NAME=""
 ALL_REPOS=0
+REMOVE=0
+DELETE_BRANCH=0
 
 while (( $# )); do
   case "$1" in
@@ -47,6 +55,8 @@ while (( $# )); do
     --project) shift; PROJECT="${1:?--project needs a path}" ;;
     --repo) shift; REPO_NAME="${1:?--repo needs a repo name}" ;;
     --all-repos) ALL_REPOS=1 ;;
+    --remove) REMOVE=1 ;;
+    --delete-branch) DELETE_BRANCH=1 ;;
     -*) echo "unknown flag: $1" >&2; exit 2 ;;
     *) SPEC_ARG="$1" ;;
   esac
@@ -67,19 +77,12 @@ else
   slug="$SPEC_ARG"
 fi
 
-# Umbrella = spec.md declares `repos:` frontmatter.
+# Umbrella = spec.md declares `repos:` in its FRONTMATTER (body text is ignored).
 declared_repos=""
-if [[ -n "$spec_dir" && -f "$spec_dir/spec.md" ]]; then
-  declared_repos="$(sed -n 's/^repos:[[:space:]]*\[\([^]]*\)\].*/\1/p' "$spec_dir/spec.md" | head -1 | tr -d ' ' | tr ',' ' ')"
-fi
+[[ -n "$spec_dir" ]] && declared_repos="$(spec_declared_repos "$spec_dir")"
 
 # Resolve base branch for a given repo: flag > its stack.yml `base_branch:` > dev.
-read_base() {
-  # Missing stack.yml must mean "no answer", not death-by-pipefail under set -e.
-  [[ -f "$1/.specify/stack.yml" ]] || return 0
-  sed -n 's/^base_branch:[[:space:]]*//p' "$1/.specify/stack.yml" \
-    | head -1 | sed -E 's/[[:space:]]*#.*$//; s/[[:space:]]+$//'
-}
+read_base() { yml_get "$1/.specify/stack.yml" base_branch; }
 resolve_base() {  # <repo> — echoes the base ref name
   local repo="$1" base="$BASE" common main_root
   if [[ -z "$base" ]]; then
@@ -103,9 +106,10 @@ cut_one() {
   wt="$(dirname "$repo")/$(basename "$repo").worktrees/$slug"
 
   # Reuse an existing worktree for this branch if there is one.
+  # (substr, not $2 — a worktree path may contain spaces.)
   existing="$(git -C "$repo" worktree list --porcelain | awk -v b="refs/heads/$branch" '
-    /^worktree /{ w=$2 }
-    /^branch /{ if ($2==b) print w }
+    /^worktree /{ w=substr($0, 10) }
+    /^branch /{ if (substr($0, 8)==b) print w }
   ')"
   if [[ -n "$existing" ]]; then
     echo "reusing existing worktree for $branch: $existing" >&2
@@ -146,22 +150,60 @@ cut_one() {
   echo "$wt"
 }
 
+# remove_one <repo-path> — detach the worktree for spec/$slug; optionally
+# delete the branch when fully merged. Refuses a dirty worktree.
+remove_one() {
+  local repo="$1" branch="spec/$slug" wt
+  wt="$(git -C "$repo" worktree list --porcelain | awk -v b="refs/heads/$branch" '
+    /^worktree /{ w=substr($0, 10) }
+    /^branch /{ if (substr($0, 8)==b) print w }
+  ')"
+  if [[ -z "$wt" ]]; then
+    echo "no worktree for $branch in $repo — nothing to remove" >&2
+    return 0
+  fi
+  if [[ -n "$(git -C "$wt" status --porcelain 2>/dev/null)" ]]; then
+    echo "REFUSED: worktree has uncommitted changes: $wt" >&2
+    echo "commit or stash them first; a --remove must never destroy work" >&2
+    return 1
+  fi
+  git -C "$repo" worktree remove "$wt" >&2
+  echo "removed worktree $wt" >&2
+  if (( DELETE_BRANCH )); then
+    if git -C "$repo" branch -d "$branch" >/dev/null 2>&1; then
+      echo "deleted branch $branch (was fully merged)" >&2
+    else
+      echo "branch $branch not fully merged — left in place (git -C $repo branch -D $branch to force)" >&2
+    fi
+  fi
+}
+
+# act_one <repo-path> — cut or remove, per mode.
+act_one() { if (( REMOVE )); then remove_one "$1"; else cut_one "$1"; fi; }
+
 # --- Umbrella dispatch ---
 if [[ -n "$declared_repos" ]]; then
   if [[ -n "$REPO_NAME" ]]; then
     grep -qw "$REPO_NAME" <<< "$declared_repos" \
       || { echo "repo '$REPO_NAME' is not declared by this umbrella spec (declared: $declared_repos)" >&2; exit 1; }
     repo_path="$("$SYSMAP" path "$REPO_NAME")" || exit 1
-    cut_one "$repo_path"
-    exit 0
+    act_one "$repo_path"
+    exit $?
   elif (( ALL_REPOS )); then
     rc=0
     for r in $declared_repos; do
-      if repo_path="$("$SYSMAP" path "$r")"; then
-        wt="$(cut_one "$repo_path" | tail -1)"
+      if ! repo_path="$("$SYSMAP" path "$r")"; then
+        echo "skipping $r — not resolvable on this machine" >&2
+        rc=1
+        continue
+      fi
+      if (( REMOVE )); then
+        remove_one "$repo_path" || rc=1
+      # One failing repo must not abort the loop — keep cutting the rest.
+      elif wt="$(cut_one "$repo_path" | tail -1)" && [[ -n "$wt" ]]; then
         printf '%s\t%s\n' "$r" "$wt"
       else
-        echo "skipping $r — not resolvable on this machine" >&2
+        echo "FAILED to cut worktree for $r — continuing with the rest" >&2
         rc=1
       fi
     done
@@ -176,7 +218,7 @@ fi
 [[ -n "$REPO_NAME" || "$ALL_REPOS" == 1 ]] && \
   { echo "--repo/--all-repos only apply to umbrella specs (spec.md with repos: frontmatter)" >&2; exit 2; }
 
-# --- Single-repo spec: resolve the one repo and cut ---
+# --- Single-repo spec: resolve the one repo and cut/remove ---
 if [[ -n "$spec_dir" ]]; then
   repo="$(git -C "$spec_dir" rev-parse --show-toplevel)"
 else
@@ -184,5 +226,19 @@ else
     PROJECT="$("$DETECT")" || { echo "cannot resolve project; pass --project or a spec-dir path" >&2; exit 1; }
   fi
   repo="$(cd "$PROJECT" && git rev-parse --show-toplevel)"
+  # Bare slug: the spec must exist in this repo — a typo'd slug must not
+  # silently cut a junk branch. (An umbrella slug resolves via the hub above.)
+  if [[ -d "$repo/.specify/specs/$slug" ]]; then
+    spec_dir="$repo/.specify/specs/$slug"
+    # Re-check umbrella-ness now that we can see spec.md.
+    declared_repos="$(spec_declared_repos "$spec_dir")"
+    [[ -n "$declared_repos" ]] && {
+      echo "$slug is an umbrella spec (declares: $declared_repos) — pass the hub spec dir with --repo/--all-repos" >&2
+      exit 2
+    }
+  elif (( ! REMOVE )); then
+    echo "no spec '$slug' in $repo/.specify/specs/ — check the slug (or pass the spec-dir path)" >&2
+    exit 1
+  fi
 fi
-cut_one "$repo"
+act_one "$repo"

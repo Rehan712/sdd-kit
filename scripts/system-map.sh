@@ -21,10 +21,11 @@
 set -uo pipefail
 
 HUB_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+. "$HUB_DIR/scripts/lib.sh"
 MAP="$HUB_DIR/system-map.yml"
 REGISTRY="$HUB_DIR/registry.yml"
 
-usage() { sed -n '2,19p' "$0" | sed 's/^# \{0,1\}//'; exit 0; }
+usage() { usage_from_header "$0"; exit 0; }
 
 CMD="${1:-}"
 NAME="${2:-}"
@@ -45,23 +46,34 @@ flatten() {
     /^repos:/      { emit(); section="repo"; next }
     /^contracts:/  { emit(); section="contract"; next }
     /^[[:space:]]*#/ { next }
+    # clean(v): strip an inline comment (a # PRECEDED BY WHITESPACE — per YAML,
+    # a bare # inside a value is data: "#team-channel", url#fragment), then
+    # surrounding quotes, then trailing space.
+    function clean(v) {
+      if (v ~ /^"/)         { sub(/^"/, "", v); sub(/".*$/, "", v) }
+      else if (v ~ /^\047/) { sub(/^\047/, "", v); sub(/\047.*$/, "", v) }
+      else                  { sub(/[[:space:]]+#.*$/, "", v) }
+      sub(/[[:space:]]+$/, "", v); return v
+    }
     /^[[:space:]]*-[[:space:]]*(name|id):/ {
       emit()
       line=$0; sub(/^[[:space:]]*-[[:space:]]*(name|id):[[:space:]]*/, "", line)
-      sub(/[[:space:]]*#.*$/, "", line); sub(/[[:space:]]+$/, "", line)
-      rec_name=line; next
+      rec_name=clean(line); next
     }
     section != "" && rec_name != "" && /^[[:space:]]+[a-z_]+:/ {
       line=$0
       sub(/^[[:space:]]+/, "", line)
       key=line; sub(/:.*/, "", key)
       val=line; sub(/^[a-z_]+:[[:space:]]*/, "", val)
-      sub(/[[:space:]]*#.*$/, "", val)
       if (val ~ /^\[/) {                        # list field: strip brackets, tighten commas
+        sub(/[[:space:]]+#.*$/, "", val)
         gsub(/^\[|\][[:space:]]*$/, "", val)
         gsub(/,[[:space:]]+/, ",", val)
+        gsub(/["\047]/, "", val)
+        sub(/[[:space:]]+$/, "", val)
+      } else {
+        val = clean(val)
       }
-      sub(/[[:space:]]+$/, "", val)
       f[key]=val
     }
     END { emit() }
@@ -75,12 +87,8 @@ names() { flatten | awk -F'\t' -v s="$1" '$1==s { print $2 }' | sort -u; }
 
 repo_exists() { names repo | grep -qx "$1"; }
 
-registry_path() {  # <name> — resolve local path from registry.yml
-  [[ -f "$REGISTRY" ]] || return 1
-  awk -v want="$1" '
-    /^[[:space:]]*-[[:space:]]*name:/ { sub(/^[[:space:]]*-[[:space:]]*name:[[:space:]]*/,""); name=$0 }
-    /^[[:space:]]*path:/ && name==want { sub(/^[[:space:]]*path:[[:space:]]*/,""); print; exit }
-  ' "$REGISTRY" | head -1
+registry_path() {  # <name> — local path from registry.yml (~ expanded, any field order)
+  registry_path_for "$REGISTRY" "$1"
 }
 
 case "$CMD" in
@@ -148,7 +156,7 @@ case "$CMD" in
     ;;
 
   check)
-    GREEN=$'\033[32m'; RED=$'\033[31m'; YELLOW=$'\033[33m'; RESET=$'\033[0m'
+    init_colors
     errors=0; warnings=0
     pass() { echo "  ${GREEN}✓${RESET} $1"; }
     fail() { echo "  ${RED}✗${RESET} $1"; errors=$((errors+1)); }

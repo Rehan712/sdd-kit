@@ -27,8 +27,9 @@ From the spec dir (worktree copy if STATUS names one, else the main checkout):
 - `notes/opponent.md` — every round: what was CHALLENGED, what held up.
 - `notes/reality-check.md` — what lacked evidence, what was demanded.
 - `notes/history.md` — rotated session detail, if present.
-- `tasks.md` — count the reopened/follow-up tasks (`T###o*`, `T###a`–`z`, `T###s*`).
-  Each one is a defect the original pass missed; the suffix tells you which gate caught it.
+- `tasks.md` — count the follow-up tasks (`T###<class><n>`: `o` opponent, `a`
+  reality-check, `s` security, `c` CI, `r` review feedback).
+  Each one is a defect the original pass missed; the class tells you which gate caught it.
   The *Evidence:* lines are the per-task acceptance record — a task whose evidence was
   weak or absent at gate time is itself a process finding.
 - `spec.md` — the Success metrics (MET-###): can any be measured yet?
@@ -63,33 +64,9 @@ and what upstream change (spec question, plan section, task granularity) would f
 
 ### 4. Write `notes/retro.md`
 
-```markdown
-# Retro — <spec slug>
-
-**Date:** <YYYY-MM-DD>
-**Shipped:** <PR URL / deploy date>
-**Rounds:** opponent <n>, reality-check <n>
-**Tasks:** <n> planned → <n> final (<n> gate follow-ups, <n> security follow-ups)
-
-## What the gates caught (defect classes)
-
-| # | Defect | Class | Caught by | Prevention |
-|---|--------|-------|-----------|------------|
-
-## Lessons filed
-
-- **<lesson>** → `knowledge/<file>.md` (applied)
-- **<lesson>** → `stack-overlays/<tag>.md` (applied)
-- **<lesson>** → project constitution (PROPOSED — awaiting owner)
-
-## Success metrics check
-
-- MET-001: <measured value / "not yet measurable, check <date>">
-
-## What went well
-
-- <keep-doing items — process, not praise>
-```
+From `~/.sdd/templates/retro-template.md` — defect table, lessons filed,
+MET-### check, keep-doing items. Also read `notes/ci.md` if the PR needed CI
+triage — recurring CI failure classes are overlay material.
 
 ### 5. Apply the durable edits
 
@@ -112,11 +89,11 @@ check-back date.
 
 ## Grounding rules — non-negotiable
 
-1. **Never write a path, ID, or verdict from memory.** Every finding, gate round, and task id you cite must come from a file you read *in this session*.
-2. **Quote before you act.** Lessons quote the gate report or follow-up task they came from.
-3. **Unknown → ask or mark, never invent.** If the evidence doesn't say why a defect happened, say "cause unclear" — don't fabricate a narrative.
-4. **Paste outputs, don't paraphrase.** Metrics checks (MET-###) report the actual query/dashboard value or "not yet measurable".
-5. **On contradiction, stop.** If STATUS, notes, and tasks.md tell different stories about a gate round, reconcile from the notes files (they're primary) and flag the drift.
+1. Never cite a finding, gate round, or task id from memory — only from a file read this session.
+2. Lessons quote the gate report or follow-up task they came from.
+3. Evidence doesn't say why a defect happened → "cause unclear", never a fabricated narrative.
+4. MET-### checks report the actual query/dashboard value or "not yet measurable, check <date>" — and that check-back date goes into the spec's STATUS Next action so it doesn't fall on the floor.
+5. STATUS, notes, and tasks.md disagree → the notes files are primary; reconcile and flag the drift.
 
 ## Rules
 

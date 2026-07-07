@@ -22,13 +22,11 @@
 set -euo pipefail
 
 HUB_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+. "$HUB_DIR/scripts/lib.sh"
 DETECT="$HUB_DIR/scripts/project-detect.sh"
 TEMPLATES="$HUB_DIR/templates"
 
-usage() {
-  sed -n '2,22p' "$0" | sed 's/^# \{0,1\}//'
-  exit 0
-}
+usage() { usage_from_header "$0"; exit 0; }
 
 PROJECT=""
 TITLE=""
@@ -38,13 +36,21 @@ REPOS=""
 while (( $# )); do
   case "$1" in
     --help|-h) usage ;;
-    --project) shift; PROJECT="$1" ;;
+    --project) shift; PROJECT="${1:?--project needs a path}" ;;
     --multi) MULTI=1 ;;
-    --repos) shift; REPOS="$1" ;;
+    --repos) shift; REPOS="${1:?--repos needs a comma-separated list}" ;;
+    -*) echo "unknown flag: $1" >&2; exit 2 ;;
     *) TITLE="$1" ;;
   esac
   shift
 done
+
+# --project takes a PATH (skills have passed repo names here by mistake).
+if [[ -n "$PROJECT" && ! -d "$PROJECT" ]]; then
+  echo "--project needs an existing directory, got: $PROJECT" >&2
+  echo "(for a repo NAME, resolve it first: scripts/system-map.sh path <name>)" >&2
+  exit 2
+fi
 
 if [[ -z "$TITLE" ]]; then
   echo "usage: new-spec.sh [--project PATH | --multi --repos a,b] \"<title>\"" >&2
@@ -111,7 +117,8 @@ if [[ -d "$dir" ]]; then
   exit 1
 fi
 
-mkdir -p "$dir"
+mkdir -p "$dir" "$dir/notes"
+touch "$dir/notes/.gitkeep"   # gate reports/evidence land here; survive commits
 today=$(date +%Y-%m-%d)
 
 # Escape sed replacement metacharacters (\, &, /) so titles like
@@ -195,6 +202,13 @@ if (( MULTI )); then
     }
     { print }
   ' "$dir/STATUS.md" > "$dir/STATUS.md.tmp" && mv "$dir/STATUS.md.tmp" "$dir/STATUS.md"
+
+  # The awk passes above key on template markers — verify the injections
+  # actually landed instead of silently producing a non-umbrella spec.
+  grep -q '^repos:' "$dir/spec.md" && grep -q '^## Repos in scope' "$dir/spec.md" \
+    || { echo "ERROR: umbrella injection failed for spec.md (template markers moved?)" >&2; exit 1; }
+  grep -q '^repos:' "$dir/STATUS.md" && grep -q '^## Repo matrix' "$dir/STATUS.md" \
+    || { echo "ERROR: umbrella injection failed for STATUS.md (template markers moved?)" >&2; exit 1; }
 fi
 
 echo "$dir"

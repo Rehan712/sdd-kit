@@ -12,7 +12,7 @@ Read alongside `plan.md` when `stack.yml` includes `bun-monorepo`.
 ## Bun specifics
 
 - **`bun install`** is the canonical install command. No `bun install --no-cache` workarounds in scripts.
-- **Workspace deps:** `"workspace:*"` in package.json (or `"workspace:^"` for looser pinning).
+- **Workspace deps:** `"workspace:*"` in package.json — nothing looser (the bun-monorepo-expert refuses `workspace:^`).
 - **`bun.lockb`** is committed; conflicts on it are resolved by rerunning `bun install`.
 - **Scripts:** prefer `bun run <script>` so the workspace context is preserved. `bun <script>` works too.
 

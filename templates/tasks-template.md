@@ -14,19 +14,23 @@ updated: YYYY-MM-DD
 - `T###` is the task ID. Reference from commit messages and PR descriptions.
 - *Files:* lists the paths the task touches.
 - *Acceptance:* the observable check that says the task is done.
-- *Evidence:* appended by `/sdd:implement` when acceptance passes — the exact
-  command + its key output line + date, e.g. `` `bun test api` → 14 passed (2026-07-04) ``.
-  **A box is never ticked without it.** `[x]` with no *Evidence:* is an unproven
-  claim: `sdd-analyze.sh` warns, and the reality-check gate treats it as a gap.
+- *Evidence:* appended when acceptance passes — the exact command + its key
+  output line + date, e.g. `` `bun test api` → 14 passed (2026-07-04) ``.
+  **A box is never ticked without it** (`~/.sdd/scripts/spec-task.sh done
+  <spec-dir> T### --evidence "…"` makes the tick + evidence one atomic edit).
+  Exemption: gate and Ship tasks — their evidence is the gate report in
+  `notes/` or the PR URL, so no *Evidence:* line is required there.
 - Tasks that can run in parallel are marked `[P]` after the ID.
 - **Umbrella specs only** (spec.md with `repos:` frontmatter): every non-gate,
   non-Ship task also carries `[repo:<name>]` after the ID — the declared repo it
   lands in. `~/.sdd/scripts/spec-worktree.sh --repo <name> <spec-dir>` gives you
   that repo's worktree. `sdd-analyze.sh` rejects untagged or mis-tagged tasks.
 - Use `[ ]` for not started, `[~]` for in-progress, `[x]` for done.
-- Follow-up ids: `T###o1, o2, …` = opponent findings and `T###a, b, …` =
-  reality-check gaps (both inserted under Reality Check); `T###s1, s2, …` =
-  security findings (inserted under the original task's stage).
+- Follow-up ids share ONE grammar — `T###<class><n>` under the task that
+  spawned them: `o` = opponent findings, `a` = reality-check gaps (both under
+  Reality Check), `s` = security findings (under the original task's stage),
+  `c` = CI failures and `r` = review feedback (both under Ship, opened by
+  `/sdd:review`). E.g. `T009o1`, `T010a1`, `T004s1`, `T011c1`, `T011r2`.
 - After editing this file, validate with `~/.sdd/scripts/sdd-analyze.sh <spec-dir>` —
   it checks AC coverage (gate refs don't count), refs, evidence, gates, and
   leftover `[NEEDS CLARIFICATION]` markers deterministically.
@@ -74,7 +78,7 @@ updated: YYYY-MM-DD
 
 - [ ] **T008** — Update README / API docs
   - *Files:* `README.md`, `docs/...`
-  - *Acceptance:* manual review
+  - *Acceptance:* every documented command/example in the diff actually runs (paste one); links resolve; the feature's spec ACs are reflected
 
 ## Reality Check (pre-ship gate)
 
@@ -102,16 +106,20 @@ updated: YYYY-MM-DD
 
 ## Ship
 
+> After T011, the PR lifecycle — CI triage (`T011c*`), review feedback
+> (`T011r*`), rebases, the merge, worktree teardown — belongs to **/sdd:review**
+> (deterministic state via `~/.sdd/scripts/spec-ci.sh`). T012 runs after merge.
+
 - [ ] **T011** — Open PR to the base branch (stack.yml `base_branch:`, default `dev`) referencing `spec.md` and `plan.md`
   - *Files:* (none — branch + PR)
-  - *Acceptance:* `~/.sdd/scripts/spec-pr.sh <spec-dir>` run; PR URL pasted into `STATUS.md` (`pr:`); review requested; both gate verdicts linked in the PR body
+  - *Acceptance:* `~/.sdd/scripts/spec-pr.sh <spec-dir>` prints the PR URL (it writes `pr:` + `phase: review` into STATUS.md itself); both gate verdicts in the PR body; reviewer requested (`gh pr edit --add-reviewer <handle>` or ask the user who)
 
-- [ ] **T012** — Roll out
-  - *Acceptance:* feature flag flipped / deploy verified / dashboards green for 24h; `STATUS.md` phase set to `shipped`
+- [ ] **T012** — Roll out (after /sdd:review reports the PR merged)
+  - *Acceptance:* feature flag flipped / deploy verified / dashboards green for 24h — with a named owner + check-back date for the 24h claim recorded in STATUS "Next action"; `STATUS.md` phase set to `shipped`; any ACs the reality-check deferred as UNVERIFIABLE now verified and noted in `notes/evidence.md`
 
 - [ ] **T013** — Retro: harvest lessons into the hub
   - *Acceptance:* `/sdd:retro` run; `notes/retro.md` written; any cross-project lesson appended to the hub `knowledge/`; `STATUS.md` `retro:` set to `done`
-  - *Refs:* `notes/opponent.md`, `notes/reality-check.md`, STATUS decisions log
+  - *Refs:* `notes/opponent.md`, `notes/reality-check.md`, `notes/ci.md` (if CI failed en route), STATUS decisions log
 
 ---
 

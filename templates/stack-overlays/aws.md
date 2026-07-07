@@ -7,7 +7,7 @@ Read alongside `plan.md` when the project's stack includes `aws`.
 - **IaC-first.** Every resource is defined in CDK or Terraform. The console is read-only in shared environments; console-created prod resources are incidents.
 - **IAM least privilege:** no `*` actions or resources. Use grant helpers (`grantReadData`, `grantInvoke`) or tightly scoped statements. One role per workload; no shared roles across different blast radii.
 - **Per-env isolation:** dev/staging/prod in separate accounts where possible; at minimum, separate stacks with distinct roles and zero cross-env ARN references.
-- **Tagging enforced at the stack/module root** so every resource inherits: `Project`, `Environment`, `Owner`. Untagged resources fail review.
+- **Tagging enforced at the stack/module root** so every resource inherits the constitution §4.1 canonical tag set. Untagged resources fail review.
 - **Secrets:** Secrets Manager or SSM Parameter Store (SecureString), referenced at deploy time. Never committed env files, never baked into images, never logged.
 - **Encryption at rest everywhere** — S3, EBS, RDS, DynamoDB, SQS, CloudWatch Logs. SSE is the floor; KMS with scoped key policies for sensitive data.
 

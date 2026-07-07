@@ -21,15 +21,15 @@ Cross-project AWS norms. Override per-project only with explicit justification i
 
 ## Tagging (required on every resource)
 
+The canonical tag set is constitution §4.1 — value formats:
+
 ```
 Project       = <project-name>
 Environment   = dev | staging | prod
 Owner         = <team>
 CostCenter    = <where applicable>
-ManagedBy     = cdk | terraform | manual
+ManagedBy     = cdk | terraform | manual   # `manual` never in production
 ```
-
-`ManagedBy=manual` should never appear in production.
 
 ## IAM
 

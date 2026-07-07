@@ -16,20 +16,25 @@
 # Usage:
 #   sdd-status.sh                    # all projects, all specs
 #   sdd-status.sh --project <name>   # one project (registry name or path)
-#   sdd-status.sh --phase <phase>    # filter: specify|plan|tasks|implement|review|shipped
-#   sdd-status.sh --open             # only specs not yet shipped
+#   sdd-status.sh --phase <phase>    # filter: specify|plan|tasks|implement|review|shipped|abandoned
+#   sdd-status.sh --open             # only specs not yet shipped/abandoned
+#   sdd-status.sh --tsv              # machine-readable: TAB-separated, no header
+#                                    # cols: project spec phase opponent
+#                                    #       reality_check ci pr updated src
 #   sdd-status.sh --help
 
 set -uo pipefail
 
 HUB_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+. "$HUB_DIR/scripts/lib.sh"
 REGISTRY="$HUB_DIR/registry.yml"
 
-usage() { sed -n '2,15p' "$0" | sed 's/^# \{0,1\}//'; exit 0; }
+usage() { usage_from_header "$0"; exit 0; }
 
 FILTER_PROJECT=""
 FILTER_PHASE=""
 OPEN_ONLY=0
+TSV=0
 
 while (( $# )); do
   case "$1" in
@@ -37,37 +42,51 @@ while (( $# )); do
     --project) shift; FILTER_PROJECT="${1:?--project needs a name}" ;;
     --phase) shift; FILTER_PHASE="${1:?--phase needs a phase}" ;;
     --open) OPEN_ONLY=1 ;;
+    --tsv) TSV=1 ;;
     *) echo "unknown arg: $1" >&2; exit 2 ;;
   esac
   shift
 done
 
-field() { sed -n "s/^$1:[[:space:]]*//p" "$2" 2>/dev/null | head -1 | sed -E 's/[[:space:]]*#.*$//; s/[[:space:]]+$//'; }
+if (( ! TSV )); then
+  printf '%-28s %-52s %-10s %-20s %-20s %-8s %-6s %-11s %s\n' PROJECT SPEC PHASE OPPONENT REALITY-CHECK CI PR UPDATED SRC
+  printf '%.0s-' {1..156}; echo
+fi
 
-printf '%-28s %-52s %-10s %-22s %-22s %-6s %-11s %s\n' PROJECT SPEC PHASE OPPONENT REALITY-CHECK PR UPDATED SRC
-printf '%.0s-' {1..150}; echo
+# date_num <YYYY-MM-DD-ish> — normalize to a comparable number (20260707);
+# anything unparseable becomes 0. A lexicographic compare would misorder
+# "2026-7-1" vs "2026-06-30" — this doesn't.
+date_num() {
+  printf '%s\n' "${1:-}" | awk -F- 'NF==3 && $1+0>0 { printf "%04d%02d%02d", $1, $2, $3; exit } { print 0 }'
+}
 
 # print_row <name> <slug> <status-file-or-empty> <source-mark>
 print_row() {
   local name="$1" slug="$2" st="$3" mark="$4"
-  local phase opp rc pr upd pr_short
+  local phase opp rc ci pr upd pr_short
   if [[ -n "$st" && -f "$st" ]]; then
-    phase="$(field phase "$st")"; phase="${phase:-?}"
-    opp="$(field opponent "$st")";  opp="${opp:-—}"
-    rc="$(field reality_check "$st")"; rc="${rc:-—}"
-    pr="$(field pr "$st")"; pr="${pr:-none}"
-    upd="$(field updated "$st")"; upd="${upd:-?}"
+    phase="$(fm_get "$st" phase)"; phase="${phase:-?}"
+    opp="$(fm_get "$st" opponent)";  opp="${opp:-—}"
+    rc="$(fm_get "$st" reality_check)"; rc="${rc:-—}"
+    ci="$(fm_get "$st" ci)"; ci="${ci:-—}"
+    pr="$(fm_get "$st" pr)"; pr="${pr:-none}"
+    upd="$(fm_get "$st" updated)"; upd="${upd:-?}"
   else
-    phase="?"; opp="—"; rc="—"; pr="none"; upd="?"
+    phase="?"; opp="—"; rc="—"; ci="—"; pr="none"; upd="?"
   fi
   [[ -n "$FILTER_PHASE" && "$phase" != "$FILTER_PHASE" ]] && return
-  (( OPEN_ONLY )) && [[ "$phase" == "shipped" ]] && return
+  (( OPEN_ONLY )) && [[ "$phase" == "shipped" || "$phase" == "abandoned" ]] && return
+  if (( TSV )); then
+    printf '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n' \
+      "$name" "$slug" "$phase" "$opp" "$rc" "$ci" "$pr" "$upd" "$mark"
+    return
+  fi
   # Shorten PR URLs to #NNN for the table.
   pr_short="$pr"
   [[ "$pr" =~ /pull/([0-9]+) ]] && pr_short="#${BASH_REMATCH[1]}"
   [[ "$pr" == "none" ]] && pr_short="—"
-  printf '%-28s %-52s %-10s %-22s %-22s %-6s %-11s %s\n' \
-    "$name" "${slug:0:52}" "$phase" "${opp:0:22}" "${rc:0:22}" "$pr_short" "${upd:0:11}" "$mark"
+  printf '%-28s %-52s %-10s %-20s %-20s %-8s %-6s %-11s %s\n' \
+    "$name" "${slug:0:52}" "$phase" "${opp:0:20}" "${rc:0:20}" "${ci:0:8}" "$pr_short" "${upd:0:11}" "$mark"
 }
 
 # Hub umbrella specs (multi-repo features) — STATUS truth lives in the hub
@@ -96,13 +115,15 @@ while IFS=$'\t' read -r name path; do
     # conventional worktree exists — probe that path too (the lying-field
     # case is exactly when the main copy is most wrong).
     if [[ -f "$st" ]]; then
-      wt="$(field worktree "$st")"
+      wt="$(fm_get "$st" worktree)"
       [[ -z "$wt" || "$wt" == "none" ]] && wt="$path.worktrees/$slug"
       wt_st="$wt/.specify/specs/$slug/STATUS.md"
       if [[ -f "$wt_st" ]]; then
-        upd_main="$(field updated "$st")"
-        upd_wt="$(field updated "$wt_st")"
-        if [[ "$upd_wt" > "$upd_main" ]]; then st="$wt_st"; mark="wt"; fi
+        upd_main="$(date_num "$(fm_get "$st" updated)")"
+        upd_wt="$(date_num "$(fm_get "$wt_st" updated)")"
+        # Numeric compare; on a tie (or both unparseable) prefer the worktree
+        # copy — during implement that's where the truth is being written.
+        if (( upd_wt >= upd_main )); then st="$wt_st"; mark="wt"; fi
       fi
     fi
     print_row "$name" "$slug" "$st" "$mark"
@@ -115,10 +136,9 @@ while IFS=$'\t' read -r name path; do
     seen="$seen$slug "
     print_row "$name" "$slug" "$wsd/STATUS.md" "wt-only"
   done
-done < <(awk '
-  /^[[:space:]]*-[[:space:]]*name:/ { sub(/^[[:space:]]*-[[:space:]]*name:[[:space:]]*/,""); name=$0 }
-  /^[[:space:]]*path:/ { sub(/^[[:space:]]*path:[[:space:]]*/,""); print name "\t" $0 }
-' "$REGISTRY")
+done < <(registry_entries "$REGISTRY" | while IFS=$'\t' read -r n p _; do
+  printf '%s\t%s\n' "$n" "$(expand_tilde "$p")"
+done)
 
 # Briefs summary — one-line rollup of repo-brief freshness (see
 # brief-status.sh). Sibling script, same dir as this one. Read-only
@@ -134,6 +154,8 @@ if brief_list="$("$BRIEF_STATUS" list 2>/dev/null)"; then
     [[ "$verdict" == "stale" ]] && briefs_stale=$((briefs_stale + 1))
   done <<< "$brief_list"
 fi
-briefs_line="briefs: $briefs_present/$briefs_total present, $briefs_stale stale"
-(( briefs_present < briefs_total || briefs_stale > 0 )) && briefs_line="$briefs_line (run /sdd:onboard)"
-echo "$briefs_line"
+if (( ! TSV )); then
+  briefs_line="briefs: $briefs_present/$briefs_total present, $briefs_stale stale"
+  (( briefs_present < briefs_total || briefs_stale > 0 )) && briefs_line="$briefs_line (run /sdd:onboard)"
+  echo "$briefs_line"
+fi

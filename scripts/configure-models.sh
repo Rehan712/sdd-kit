@@ -21,13 +21,14 @@
 set -euo pipefail
 
 KIT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+. "$KIT_DIR/scripts/lib.sh"
 POLICY="$KIT_DIR/models.yml"
 EXAMPLE="$KIT_DIR/models.example.yml"
 MP="$KIT_DIR/scripts/model-policy.sh"
 
-GREEN=$'\033[32m'; YELLOW=$'\033[33m'; DIM=$'\033[2m'; BOLD=$'\033[1m'; RESET=$'\033[0m'
+init_colors
 
-usage() { sed -n '2,19p' "$0" | sed 's/^# \{0,1\}//'; exit 0; }
+usage() { usage_from_header "$0"; exit 0; }
 
 DEFAULTS=0; NO_SYNC=0
 for arg in "$@"; do
@@ -43,7 +44,13 @@ done
 finish() {
   "$KIT_DIR/scripts/apply-models.sh"
   if (( ! NO_SYNC )); then
-    "$KIT_DIR/scripts/sync.sh" >/dev/null && echo "  ${GREEN}✓${RESET} Claude home links refreshed"
+    # A sync problem must not abort the wizard before adapters are built
+    # (set -e would otherwise kill us here on any non-zero exit).
+    if "$KIT_DIR/scripts/sync.sh" >/dev/null; then
+      echo "  ${GREEN}✓${RESET} Claude home links refreshed"
+    else
+      echo "  ${YELLOW}!${RESET} sync.sh reported a problem — run scripts/sync.sh to see it" >&2
+    fi
     "$KIT_DIR/scripts/build-adapters.sh"
   fi
   echo
@@ -89,8 +96,8 @@ ask() {
   echo "$a"
 }
 
-# ask_effort <prompt> <default> <allowed-regex> — re-asks until valid or unset.
-ask_effort() {
+# ask_choice <prompt> <default> <allowed-regex> — re-asks until valid or unset.
+ask_choice() {
   local a
   while true; do
     a="$(ask "$1" "$2")"
@@ -111,13 +118,13 @@ for tier in $("$MP" --file "$SRC" tiers); do
     *)              echo "${BOLD}Tier '$tier'${RESET}" ;;
   esac
 
-  m="$(ask "Claude model (opus|sonnet|haiku|fable)" "$(src_tier "$tier" claude model)")"
-  e="$(ask_effort "Claude effort" "$(src_tier "$tier" claude effort)" "low|medium|high|xhigh|max")"
+  m="$(ask_choice "Claude model (opus|sonnet|haiku|fable)" "$(src_tier "$tier" claude model)" "opus|sonnet|haiku|fable")"
+  e="$(ask_choice "Claude effort" "$(src_tier "$tier" claude effort)" "low|medium|high|xhigh|max")"
   printf '%s\tclaude_model\t%s\n%s\tclaude_effort\t%s\n' "$tier" "$m" "$tier" "$e" >> "$TIER_VALS"
 
   if (( HAVE_CODEX )); then
     m="$(ask "Codex model" "$(src_tier "$tier" codex model)")"
-    e="$(ask_effort "Codex effort" "$(src_tier "$tier" codex effort)" "minimal|low|medium|high|xhigh")"
+    e="$(ask_choice "Codex effort" "$(src_tier "$tier" codex effort)" "minimal|low|medium|high|xhigh")"
   else
     m="$(src_tier "$tier" codex model)"; e="$(src_tier "$tier" codex effort)"
   fi
@@ -125,7 +132,7 @@ for tier in $("$MP" --file "$SRC" tiers); do
 
   if (( HAVE_COPILOT )); then
     m="$(ask "Copilot model" "$(src_tier "$tier" copilot model)")"
-    e="$(ask_effort "Copilot effort" "$(src_tier "$tier" copilot effort)" "low|medium|high|xhigh|max")"
+    e="$(ask_choice "Copilot effort" "$(src_tier "$tier" copilot effort)" "low|medium|high|xhigh|max")"
   else
     m="$(src_tier "$tier" copilot model)"; e="$(src_tier "$tier" copilot effort)"
   fi

@@ -40,7 +40,7 @@ These shape acceptance criteria. If a requirement violates the constitution, fla
 
 ### 3. Bootstrap the spec directory
 
-Single-repo spec: run `~/.sdd/scripts/new-spec.sh --project "<project-root>" "<short title>"`, where `<project-root>` is the **absolute path** resolved in step 1 (the value `project-detect.sh` printed, or the registry `path:` for the project you picked) — **not** the bare project name. `--project` is a filesystem path: passing a name creates a nested `<name>/.specify/specs/001-…` relative to cwd instead of finding the project's real specs dir.
+Single-repo spec: run `~/.sdd/scripts/new-spec.sh --project "<project-root>" "<short title>"`, where `<project-root>` is the **absolute path** from step 1 (the script rejects non-directories, so a bare project name fails loudly).
 
 Umbrella spec: run `~/.sdd/scripts/new-spec.sh --multi --repos <name,name,…> "<short title>"` with the registry/system-map **names** (not paths) chosen in step 1. The script validates each name, rejects `external` repos, and scaffolds into `~/.sdd/specs/NNN-slug/` with `repos:` frontmatter, a "Repos in scope" section in spec.md, and a per-repo matrix in STATUS.md.
 
@@ -53,7 +53,7 @@ The script:
 
 Capture that path; it's where you'll write. The directory now also contains `STATUS.md` — the spec's living cross-tool memory (read by Claude/Codex/Copilot on entry, updated on exit).
 
-**Sanity-check the printed path** before writing: it must be `<project-root>/.specify/specs/NNN-slug` with `NNN` continuing the project's existing sequence. If you see `001` in a project that already has specs (or the path is relative / nested under another spec dir), you passed a name instead of an absolute path — `rm -rf` the stray dir and re-run with `<project-root>`.
+**Sanity-check the printed path**: `<project-root>/.specify/specs/NNN-slug`, with `NNN` continuing the project's existing sequence.
 
 ### 4. Interview the user
 
@@ -120,11 +120,11 @@ Tell the user:
 
 ## Grounding rules — non-negotiable
 
-1. **Never write a path, ID, or verdict from memory.** Every file path, spec/task/AC/REQ id, and status value you use must come from a file you read or a command you ran *in this session*. If you can't point at its source, resolve it before using it.
-2. **Quote before you act.** Before acting on an artifact, re-read the relevant lines and satisfy exactly what they say — not your recollection of them.
-3. **Unknown → ask or mark, never invent.** If the user or the artifacts don't answer a question, ask — or write `[NEEDS CLARIFICATION: <question>]` into the artifact. A silent guess is the failure mode this workflow exists to prevent.
-4. **Paste outputs, don't paraphrase.** Report any script/command result as the actual output lines, trimmed — never a summary like "it worked".
-5. **On contradiction, stop.** If artifacts disagree with each other or with what the user said, don't silently pick one: surface it, reconcile (spec wins over plan, plan over tasks), and say what you changed.
+1. Never write a path, ID, or verdict from memory — only from a file read or command run this session.
+2. Re-read the exact artifact lines before acting on them.
+3. Unknown → ask or write `[NEEDS CLARIFICATION: <question>]`; never guess silently.
+4. Paste real command output, never "it worked".
+5. Artifacts disagree → stop, reconcile (spec > plan > tasks), say what changed.
 
 ## Rules
 
@@ -140,4 +140,7 @@ Tell the user:
 - `<project>/.specify/specs/NNN-<slug>/spec.md` exists, with all template sections filled in (or explicitly marked "n/a").
 - Every remaining `[NEEDS CLARIFICATION]` marker is mirrored in Open questions — the user knows these block `/sdd:tasks`.
 - STATUS.md reflects the interview (decisions logged, phase `specify`, next action `/sdd:plan`).
+- If the user confirmed the spec is final (no open markers), its status is
+  `accepted`: `~/.sdd/scripts/spec-status.sh --file spec.md set <dir> status accepted`
+  — otherwise it stays `draft` and `/sdd:plan` handles acceptance.
 - The user has been told the path and the next step.

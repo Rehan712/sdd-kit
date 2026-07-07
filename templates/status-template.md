@@ -1,12 +1,13 @@
 ---
 spec: NNN-slug
-phase: specify          # specify | plan | tasks | implement | review | shipped
+phase: specify          # specify | plan | tasks | implement | review | shipped | abandoned
 active_tool: none       # claude | codex | copilot | none — who currently holds the spec
 branch: none            # spec/NNN-slug once cut, else none
 worktree: none          # absolute path once created, else none
-pr: none                # PR URL once opened, else none
-opponent: not-run       # not-run | CHALLENGED | CLEARED  (+ date)
+pr: none                # PR URL once opened — spec-pr.sh writes this itself
+opponent: not-run       # not-run | CHALLENGED | CLEARED | BLOCKED  (+ date)
 reality_check: not-run  # not-run | NEEDS WORK | FAILED | READY  (+ date)
+ci: not-run             # not-run | pending | green | red  (+ date) — spec-ci.sh writes this
 retro: not-run          # not-run | done (+ date) — /sdd:retro after ship
 updated: YYYY-MM-DD
 ---
@@ -17,6 +18,10 @@ updated: YYYY-MM-DD
 > on entry and updates it on exit.** It is the handoff record across tools and sessions.
 > Keep it short: state and decisions, not narrative. `tasks.md` owns the checklist;
 > this file owns the *why*, the *where* (branch/worktree/PR), and *what's next*.
+> Scripts mutate frontmatter via `~/.sdd/scripts/spec-status.sh set` — use it too;
+> it validates enum values and bumps `updated:` for you.
+> Abandoning a spec: set `phase: abandoned`, note why in Decisions, then
+> `spec-worktree.sh --remove --delete-branch <spec-dir>` to clean up.
 >
 > **Hard size rule:** "Where things stand" stays ≤ 10 lines and this file ≤ ~120 lines.
 > When a gate round or session log outgrows that, move the detail to `notes/history.md`

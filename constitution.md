@@ -35,9 +35,12 @@ Cross-project principles that govern all work across the projects in `~/.sdd/reg
 
 ## 4. AWS conventions *(for projects that deploy to AWS)*
 
-1. **Resources are tagged.** Every resource: `Project`, `Environment` (`dev`/`staging`/`prod`), `Owner`, `CostCenter` (where applicable).
+1. **Resources are tagged — THE canonical set** (every other file defers here):
+   `Project`, `Environment` (`dev`/`staging`/`prod`), `Owner`, `CostCenter`
+   (where applicable), `ManagedBy` (`cdk`/`terraform`/`manual` — `manual` never
+   in production).
 2. **Environment isolation.** `dev`, `staging`, `prod` live in separate AWS accounts or at minimum separate VPCs. No shared resources except read-only artifact buckets.
-3. **CDK over raw CloudFormation.** Infrastructure is TypeScript or Python CDK. SAM and Terraform are case-by-case.
+3. **CDK over raw CloudFormation.** Infrastructure is TypeScript or Python CDK. SAM and Terraform are case-by-case. Exception: a repo already standardized on troposphere (see that overlay) stays internally consistent — don't mix generators within a repo.
 4. **Lambdas are small and single-purpose.** Cold start matters. Bundle with esbuild (TS) or cargo-lambda (Rust). Avoid `aws-sdk` v2 in new code — use v3 modular clients.
 5. **Logs go to CloudWatch with structured JSON.** No `console.log("user " + id)`. Use a logger that emits `{level, msg, requestId, ...}`.
 

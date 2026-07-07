@@ -28,14 +28,17 @@
 
 set -uo pipefail
 
-usage() { sed -n '2,20p' "$0" | sed 's/^# \{0,1\}//'; exit 0; }
+HUB_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+. "$HUB_DIR/scripts/lib.sh"
+
+usage() { usage_from_header "$0"; exit 0; }
 
 [[ "${1:-}" == "--help" || "${1:-}" == "-h" ]] && usage
 SPEC_DIR="${1:-}"
 [[ -z "$SPEC_DIR" || ! -d "$SPEC_DIR" ]] && { echo "usage: sdd-analyze.sh <spec-dir>" >&2; exit 2; }
 SPEC_DIR="$(cd "$SPEC_DIR" && pwd)"
 
-GREEN=$'\033[32m'; RED=$'\033[31m'; YELLOW=$'\033[33m'; RESET=$'\033[0m'
+init_colors
 errors=0; warnings=0
 pass() { echo "  ${GREEN}✓${RESET} $1"; }
 fail() { echo "  ${RED}✗${RESET} $1"; errors=$((errors+1)); }
@@ -89,7 +92,7 @@ plan_refs=$(grep -oE '(AC|REQ)-[0-9]{3}' "$plan" | sort -u)
 # *Agent:* line; coverage counts the other tasks only.
 impl_refs=$(awk '
   function flush() { if (id != "" && !gate) print buf; id=""; buf=""; gate=0 }
-  /^- \[[ x~]\] \*\*T[0-9]{3}[a-z0-9]*\*\*/ { flush(); match($0, /T[0-9]{3}[a-z0-9]*/); id = substr($0, RSTART, RLENGTH) }
+  /^- \[[ xX~]\] \*\*T[0-9]{3}[a-z0-9]*\*\*/ { flush(); match($0, /T[0-9]{3}[a-z0-9]*/); id = substr($0, RSTART, RLENGTH) }
   /^##[^#]/ { flush() }
   /\*Agent:\*/ { gate=1 }
   { if (id != "") buf = buf " " $0 }
@@ -122,10 +125,10 @@ done
 # --- 5b. umbrella specs: [repo:<name>] tags ---
 # An umbrella spec (repos: frontmatter) spans repos; every implementation task
 # must say which repo it lands in, and every tag must name a declared repo.
-declared_repos="$(sed -n 's/^repos:[[:space:]]*\[\([^]]*\)\].*/\1/p' "$spec" | head -1 | tr -d ' ' | tr ',' ' ')"
+declared_repos="$(spec_declared_repos "$SPEC_DIR")"
 task_map="$(awk '
   /^##[^#]/ { sub(/^##[[:space:]]*/,""); stage=$0 }
-  /^- \[[ x~]\] \*\*T[0-9]{3}[a-z0-9]*\*\*/ {
+  /^- \[[ xX~]\] \*\*T[0-9]{3}[a-z0-9]*\*\*/ {
     match($0, /T[0-9]{3}[a-z0-9]*/); id=substr($0,RSTART,RLENGTH)
     tag=""
     if (match($0, /\[repo:[^]]+\]/)) tag=substr($0,RSTART+6,RLENGTH-7)
@@ -159,7 +162,9 @@ fi
 # (the o-task convention pairs *Defect:* with *Done:*).
 # Also emits one AGENTLINE record per task carrying an *Agent:* line, so gate
 # validation below sees the whole task block — not a fixed grep window.
-tmp="${TMPDIR:-/tmp}/sdd-analyze.$$"
+tmp="$(mktemp "${TMPDIR:-/tmp}/sdd-analyze.XXXXXX" 2>/dev/null)" \
+  || { echo "  ${RED}✗${RESET} cannot create a temp file under ${TMPDIR:-/tmp}"; exit 1; }
+trap 'rm -f "$tmp"' EXIT
 awk -v RED="$RED" -v YELLOW="$YELLOW" -v RESET="$RESET" '
   function flush() {
     if (id == "") return
@@ -176,12 +181,12 @@ awk -v RED="$RED" -v YELLOW="$YELLOW" -v RESET="$RESET" '
     id = ""
   }
   /^##[^#]/ { flush(); sub(/^##[[:space:]]*/,""); stage=$0 }
-  /^- \[[ x~]\] \*\*T[0-9]{3}[a-z0-9]*\*\*/ {
+  /^- \[[ xX~]\] \*\*T[0-9]{3}[a-z0-9]*\*\*/ {
     flush()
     match($0, /T[0-9]{3}[a-z0-9]*/); id = substr($0, RSTART, RLENGTH)
     subj = $0
     has_acc=0; has_refs=0; has_ev=0; is_gate=0
-    is_done = ($0 ~ /^- \[x\]/) ? 1 : 0
+    is_done = ($0 ~ /^- \[[xX]\]/) ? 1 : 0
     oos = ($0 ~ /OUT OF .*SCOPE/) ? 1 : 0
     if (seen[id]++) { printf "  %s✗%s duplicate task id %s\n", RED, RESET, id; errs++ }
     next
@@ -195,9 +200,12 @@ awk -v RED="$RED" -v YELLOW="$YELLOW" -v RESET="$RESET" '
     printf "TASKCOUNTS %d %d %d\n", length(seen), errs, warns
   }
 ' "$tasks" > "$tmp" || true
-task_summary=$(grep '^TASKCOUNTS' "$tmp")
+task_summary=$(grep '^TASKCOUNTS' "$tmp" || true)
 grep -v '^TASKCOUNTS\|^AGENTLINE' "$tmp" || true
-read -r _ tcount terrs twarns <<< "$task_summary"
+# An empty summary means the awk pass itself failed — count it as an error
+# instead of feeding empty vars into the arithmetic below.
+[[ -z "$task_summary" ]] && fail "task analysis pass produced no summary (awk failed?)"
+read -r _ tcount terrs twarns <<< "${task_summary:-TASKCOUNTS 0 0 0}"
 errors=$((errors + terrs)); warnings=$((warnings + twarns))
 (( tcount > 0 )) && pass "$tcount task(s) parsed" || fail "no tasks parsed from tasks.md"
 (( tcount > 25 )) && warn "$tcount tasks — past the ~25 guideline; consider splitting the spec"
