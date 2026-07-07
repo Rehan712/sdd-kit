@@ -98,10 +98,10 @@ mkdir -p "$BUILD/skills" "$BUILD/agents"
 stamped=0
 copied=0
 
-for skill_dir in "$KIT_DIR"/skills/sdd-*/; do
+for skill_dir in "$KIT_DIR"/skills/*/; do
   [[ -d "$skill_dir" ]] || continue
-  name="$(basename "$skill_dir")"          # sdd-plan
-  role="${name#sdd-}"                      # plan
+  name="$(basename "$skill_dir")"          # sdd-plan | aws-serverless-...
+  role="${name#sdd-}"                      # plan (non-sdd skills stay unmapped -> copied verbatim)
   cp -R "$skill_dir" "$BUILD/skills/$name"
   model="$("$MP" get "$role" claude model 2>/dev/null || true)"
   effort="$("$MP" get "$role" claude effort 2>/dev/null || true)"

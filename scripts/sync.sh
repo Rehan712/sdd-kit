@@ -179,7 +179,7 @@ for home in "${HOMES[@]}"; do
     prune_stale "$home"
     continue
   fi
-  for skill_dir in "$KIT_DIR"/skills/sdd-*/; do
+  for skill_dir in "$KIT_DIR"/skills/*/; do
     [[ -d "$skill_dir" ]] || continue
     name="$(basename "$skill_dir")"
     ensure_item_link "$home/skills/$name" "$(item_target skills "$name")" "skills/$name"
