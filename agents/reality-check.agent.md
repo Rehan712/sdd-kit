@@ -72,14 +72,18 @@ If a stack isn't listed, fall back to: "is there a test that asserts the AC, and
 
 Do not trust the `[x]` checkboxes in `tasks.md`. They're claims. You verify.
 
-**First, the deterministic floor:** run
-`bash ~/.sdd/scripts/spec-ac-coverage.sh <spec-dir>` (add `--root <repo>` if it
-can't resolve the checkout). Every AC it flags as named by no test is a binding
-gap on its own — a green suite that never names the AC isn't tied to it. Fold
-those into the matrix as gaps before you re-run anything. Also cross-check the
-captured runs in `notes/evidence.md`: a task's `*Evidence:*` line should trace
-to a real block there (spec-run.sh writes them); a claim with no captured run is
-attack surface — re-run it yourself.
+**First, the deterministic floor** — run both, and fold what they flag into the
+matrix as gaps before you re-run anything:
+
+- `bash ~/.sdd/scripts/spec-ac-coverage.sh <spec-dir>` (add `--root <repo>` if it
+  can't resolve the checkout) — every AC named by no test is a binding gap; a
+  green suite that never names the AC isn't tied to it.
+- `bash ~/.sdd/scripts/spec-evidence.sh <spec-dir>` — every ticked box's evidence
+  must trace to a real `notes/evidence.md` capture block or an existing artifact.
+  A fabricated pointer or a missing screenshot is a gap; so is a manual/post-deploy
+  AC with no owner + check-back date in STATUS.
+
+A claim with no captured run is attack surface — re-run it yourself.
 
 For each AC row:
 

@@ -96,7 +96,7 @@ updated: YYYY-MM-DD
 > resolves the `Agent:` fields; `/sdd:implement` runs the opponent first, then reality-check.
 >
 > - **Opponent** (`agents/opponent.agent.md`) — steelmans why the implementation is *wrong*. Default verdict **CHALLENGED**.
-> - **Reality-check** — verifies every AC-### has *evidence*. Resolved by (1) the project constitution's pin, (2) any project-local `.claude/agents/reality-check*.md`, (3) the hub default `agents/reality-check.agent.md`. Default verdict **NEEDS WORK**.
+> - **Reality-check** — verifies every AC-### has *evidence*. Runs the deterministic floor first (`spec-ac-coverage.sh` — every AC named by a test; `spec-evidence.sh` — every tick traces to real evidence), then verifies the rest by hand. Resolved by (1) the project constitution's pin, (2) any project-local `.claude/agents/reality-check*.md`, (3) the hub default `agents/reality-check.agent.md`. Default verdict **NEEDS WORK**.
 
 - [ ] **T009** — Opponent review: steelman why this implementation is wrong
   - *Agent:* `~/.sdd/agents/opponent.agent.md`

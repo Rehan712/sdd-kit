@@ -65,6 +65,11 @@ proves an AC **names the AC id in its title/description** (e.g.
 `it('AC-001: returns 201', …)`) — that's what binds a passing test to the
 criterion; `spec-ac-coverage.sh` checks the binding at the code layer.
 
+An AC only verifiable after deploy (a live metric, a dashboard, a soak) is
+tagged `[DEPLOY]` — its evidence is a **committed artifact** (a screenshot file
+in the spec's `notes/`, an exported query) plus a named owner and check-back
+date in STATUS; `spec-evidence.sh` flags a `[DEPLOY]` AC that has neither.
+
 ## 7. Constraints
 
 What we **cannot** change or must accommodate. Examples: external API rate limits, regulatory requirements, an existing schema we can't migrate yet, budget caps, deadline.
