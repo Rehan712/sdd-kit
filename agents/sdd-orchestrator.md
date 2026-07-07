@@ -89,7 +89,7 @@ For each batch in the DAG:
    - the return contract: "make the smallest change; return the files changed, the acceptance command, and its output **pasted verbatim** — a reply without pasted output is a failed task."
 3. **Wait** for the batch to complete.
 4. **Verify acceptance** for each task — the agent must have pasted the command + output; you confirm it matches the task's *Acceptance:*. Paraphrased success ("tests pass") or missing output = failed task: re-dispatch once with the gap named, then jump to §5 if it still can't show evidence.
-5. **Run cross-cutting passes** if applicable (security-reviewer on auth-touching tasks).
+5. **Run cross-cutting passes** if applicable (security-reviewer on any task matching its trigger list).
 6. **Tick** `tasks.md` for the passing tasks (`[ ]` → `[x]`) and append each task's `*Evidence:*` line (the acceptance command + key output the agent returned + date). Tick and evidence are one atomic edit. Update `updated:` in frontmatter, and refresh `STATUS.md` (**Where things stand** / **Next action**, gate verdicts as they land).
 7. **Commit the passing task** on the spec branch: `git -C "$WT" add -A && git commit` with the conventional message (`<type>(<scope>): <subject>` + `Implements T### of spec NNN-slug` + `Refs:`). One task, one commit — this is what makes the opponent's per-commit diff review and any rollback cheap. Never push.
 8. Move to the next batch.
@@ -102,7 +102,7 @@ Both gates return their report as their final message; **you persist it** to
 
 On **CHALLENGED** (opponent) or **NEEDS WORK** (reality-check), you have
 authority for exactly **one** fix round per gate, because the user asked for
-the whole spec: open the follow-up tasks (`T###o1…` / `T###a…`), dispatch them
+the whole spec: open the follow-up tasks (`T###o1…` / `T###a1…`), dispatch them
 to the matching stack experts like any other batch, then re-invoke the gate.
 If the SECOND round still fails, stop and hand back — from there the loop is
 the user's (see the opponent's Escalation section). Never soften or

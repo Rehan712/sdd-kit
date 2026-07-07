@@ -116,7 +116,7 @@ Gate tasks are **never run by you** — delegate via the Agent tool. Opponent
    with the persona file's full contents leading the dossier; if
    `~/.sdd/models.yml` exists, pass
    `~/.sdd/scripts/model-policy.sh get reality-check claude model` as the Agent
-   tool's `model` param when it prints an alias (opus/sonnet/haiku).
+   tool's `model` param when it prints an alias (opus/sonnet/haiku/fable).
 4. **Persist the returned report** to `<spec-dir>/notes/opponent.md` /
    `notes/reality-check.md` (append as `Round <n>` on re-runs) and record the
    verdict: `spec-status.sh set <dir> opponent "CLEARED (<date>)"` etc.

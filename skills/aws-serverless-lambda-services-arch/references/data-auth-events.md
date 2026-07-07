@@ -26,7 +26,7 @@ Scheduled recheck:      PK=RECHECK#{dueDayUtc}  SK=ENTITY#{...}  (daily sweep Qu
 
 Idioms:
 - **Uniqueness / dedup**: conditional `PutItem` with `attribute_not_exists(PK)`. A duplicate is a 200 no-op for webhook receivers.
-- **Append-only logs**: `PutItem` + `attribute_not_exists(SK)`, never `UpdateItem`. Timestamp-in-SK gives lexicographic time-range Queries (`SK BETWEEN AUDITLOG#{from} AND AUDITLOG#{to}￿`) — no GSI needed.
+- **Append-only logs**: `PutItem` + `attribute_not_exists(SK)`, never `UpdateItem`. Timestamp-in-SK gives lexicographic time-range Queries (`SK BETWEEN AUDITLOG#{from} AND AUDITLOG#{to}￿` — the `￿` sentinel makes the upper bound inclusive of all suffixes) — no GSI needed.
 - **State machines**: conditional status transitions (`ConditionExpression: status = :expected`) so duplicate worker invocations can't double-run.
 - **Optimistic concurrency**: `update_item` conditioned on `updatedAt = :prev`, retry ~3× on `ConditionalCheckFailedException`.
 - **TTL + grace**: `ttl = expiresAt + 7d grace` with lazy expiry checks in code; TTL rows for retention, audit rows with per-tier retention windows.

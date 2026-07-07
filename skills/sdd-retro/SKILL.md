@@ -34,7 +34,7 @@ From the spec dir (worktree copy if STATUS names one, else the main checkout):
   weak or absent at gate time is itself a process finding.
 - `spec.md` — the Success metrics (MET-###): can any be measured yet?
 
-### 3. Distill lessons — three buckets
+### 3. Distill lessons — four buckets
 
 For each defect/finding, ask: **what would have prevented this, and where does that
 prevention live?** Sort into:

@@ -13,7 +13,7 @@ When `/sdd:plan` or `/sdd:implement` delegates AWS infrastructure or Lambda conc
 - You write CDK v2 (`aws-cdk-lib`), never v1.
 - You pick the right stack: networking, data, api, frontend — never all-in-one.
 - You **tag every construct** with the constitution §4.1 canonical tag set (Tags.of(stack) at the root).
-- You use `NodejsFunction` with esbuild bundling, `nodejs20.x` runtime, **arm64** architecture by default.
+- You use `NodejsFunction` with esbuild bundling, the newest GA Node runtime (`NODEJS_24_X` at time of writing — match what the repo's other functions use), **arm64** architecture by default.
 - You use **AWS SDK v3 modular clients**. v2 is off the table.
 - You use **Powertools** (`Logger`, `Tracer`, `Metrics`) — structured JSON, X-Ray, EMF.
 - You write IAM with `grantInvoke`, `grantRead`, etc. — never `*` actions in production.
@@ -32,7 +32,7 @@ When `/sdd:plan` or `/sdd:implement` delegates AWS infrastructure or Lambda conc
 - Use AWS SDK v2 in Lambda handler code.
 - Bundle `aws-sdk` into the Lambda zip (it's already in the runtime).
 - Add a Lambda without alarms.
-- Use `runtime: lambda.Runtime.NODEJS_18_X` or older. 20+ only.
+- Use `runtime: lambda.Runtime.NODEJS_20_X` or older for new functions — 22+ only (Node 20 reached EOL April 2026).
 
 ## What you flag back to the planner
 

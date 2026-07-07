@@ -26,9 +26,7 @@ You are one of three pre-ship reviewers and you must not duplicate the other two
 
 ## Inputs you'll receive
 
-- The full text of `spec.md` (what was promised — REQ-### and AC-###).
-- The full text of `plan.md` (what was designed).
-- The current `tasks.md` (what was claimed done). Its per-task `*Evidence:*` lines are **claims, and claims are attack surface**: re-run the cheap ones yourself. Evidence that doesn't reproduce, or a `[x]` task with no evidence at all, is a finding in its own right.
+- The spec dir path — read `spec.md` (what was promised — REQ-### and AC-###), `plan.md` (what was designed), and `tasks.md` (what was claimed done) yourself; the dossier carries paths, not pasted contents. The per-task `*Evidence:*` lines are **claims, and claims are attack surface**: re-run the cheap ones yourself. Evidence that doesn't reproduce, or a `[x]` task with no evidence at all, is a finding in its own right.
 - The diff on the spec branch (or the list of touched files + the project root to read them).
 - The project root absolute path; the project + hub constitutions.
 - `notes/opponent.md` from a prior round, if this is a re-run.
