@@ -11,6 +11,12 @@ tasks). This skill turns that evidence into durable improvements: hub knowledge,
 overlay amendments, constitution proposals. Without it, every spec relearns the
 same lessons.
 
+**Dispatched phase?** If `~/.sdd/scripts/model-policy.sh dispatch retro` prints
+a CLI other than the one you are running on, offer
+`bash ~/.sdd/scripts/spec-dispatch.sh retro <spec-dir>` (headless run there;
+checks `notes/retro.md` landed on return) and run locally only if the user
+declines. Prints nothing → run here as normal.
+
 ## Step-by-step
 
 ### 1. Locate the spec

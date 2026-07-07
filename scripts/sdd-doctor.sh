@@ -119,6 +119,27 @@ check_model_policy() {
       warn "copilot adapters not model-pinned — run scripts/build-adapters.sh"
     fi
   fi
+  # dispatch: — every mapped CLI must be runnable from here (binary + adapters).
+  local drows
+  drows="$("$HUB_DIR/scripts/model-policy.sh" dispatch 2>/dev/null)"
+  if [[ -n "$drows" ]]; then
+    [[ -x "$HUB_DIR/scripts/spec-dispatch.sh" ]] && pass "scripts/spec-dispatch.sh (dispatch map present)" \
+      || fail "dispatch: map set but scripts/spec-dispatch.sh missing or not executable"
+    while IFS=$'\t' read -r drole dcli; do
+      [[ -n "$drole" ]] || continue
+      if ! command -v "$dcli" >/dev/null 2>&1; then
+        warn "dispatch: $drole -> $dcli, but the $dcli CLI is not on PATH"
+        continue
+      fi
+      case "$dcli" in
+        codex)   [[ -f "$HOME/.codex/skills/sdd-$drole/SKILL.md" ]] && pass "dispatch: $drole -> codex (adapter present)" \
+                   || warn "dispatch: $drole -> codex but ~/.codex/skills/sdd-$drole missing — run scripts/build-adapters.sh" ;;
+        copilot) [[ -f "$HOME/.copilot/agents/sdd-$drole.agent.md" ]] && pass "dispatch: $drole -> copilot (agent present)" \
+                   || warn "dispatch: $drole -> copilot but ~/.copilot/agents/sdd-$drole.agent.md missing — run scripts/build-adapters.sh" ;;
+        claude)  pass "dispatch: $drole -> claude (skills symlinked via sync.sh)" ;;
+      esac
+    done <<<"$drows"
+  fi
   echo
 }
 

@@ -12,6 +12,12 @@ next to it.
 `~/.sdd/templates/umbrella-guide.md` §Tasks for the `[repo:]` tagging and
 contract-first stage ordering that override the defaults below.
 
+**Dispatched phase?** If `~/.sdd/scripts/model-policy.sh dispatch tasks` prints
+a CLI other than the one you are running on, offer
+`bash ~/.sdd/scripts/spec-dispatch.sh tasks <spec-dir>` (headless run there;
+`sdd-analyze.sh` verifies the result on return) and run locally only if the
+user declines. Prints nothing → run here as normal.
+
 ## Step-by-step
 
 ### 1. Locate the plan
