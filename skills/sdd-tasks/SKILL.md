@@ -20,6 +20,12 @@ a CLI other than the one you are running on, offer
 `sdd-analyze.sh` verifies the result on return) and run locally only if the
 user declines. Prints nothing → run here as normal.
 
+**Autopilot?** Running under `/sdd:go`: apply the auto-mode contract in
+`~/.sdd/skills/sdd-go/SKILL.md` — never ask the user (unknown →
+`[NEEDS CLARIFICATION: …]` marker and the chain stops), auto-accept plan.md
+with a STATUS Decisions line instead of confirming, and dispatch a mapped
+phase directly instead of offering it.
+
 ## Step-by-step
 
 ### 1. Locate the plan

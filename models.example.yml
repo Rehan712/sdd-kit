@@ -24,7 +24,7 @@
 #   copilot_effort:  advisory — written into the adapter preamble text only
 #
 # ROLES map each SDD role to a tier:
-#   skills:  specify, plan, tasks, implement, retro, onboard
+#   skills:  specify, plan, tasks, implement, review, retro, onboard, go
 #   agents:  orchestrator, opponent, reality-check, security-reviewer,
 #            test-engineer, stack-expert (covers every agents/*-expert.md)
 #   runtime: explore (the Explore subagents /sdd:plan and /sdd:onboard fan out)
@@ -74,6 +74,7 @@ roles:
   explore: implementation      # point at a recon tier if you add one
   onboard: implementation      # /sdd:onboard repo research (like explore)
   review: implementation       # /sdd:review — PR babysitting + CI triage
+  go: reasoning                # /sdd:go autopilot conductor (chained phases keep their own tiers)
 
 # DISPATCH (optional) — route a PHASE to the CLI that should RUN it, across
 # providers: e.g. plan on Claude Code, tasks on Codex (gpt-5.5), implement on

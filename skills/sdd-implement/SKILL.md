@@ -21,6 +21,13 @@ prints a CLI other than the one you are running on, offer
 with `sdd-analyze.sh` + `spec-evidence.sh` on return) and run locally only if
 the user declines. Prints nothing → run here as normal.
 
+**Autopilot?** Running under `/sdd:go`: apply the auto-mode contract in
+`~/.sdd/skills/sdd-go/SKILL.md` — always orchestrated mode (`--all`) with the
+Open-PR stop-point, never ask the user (unknown → `[NEEDS CLARIFICATION: …]`
+marker and the chain stops), and where the bounded gate loop says the user
+arbitrates from round 3, stop the chain instead — autopilot has no waiver
+authority.
+
 ## Pre-flight (once per spec)
 
 1. **Read `STATUS.md`** — phase, locked decisions, open questions, existing
