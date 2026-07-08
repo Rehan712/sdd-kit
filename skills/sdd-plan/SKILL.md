@@ -12,7 +12,9 @@ implementation, writes `plan.md` next to it.
 Read `~/.sdd/templates/umbrella-guide.md` §Plan and follow it wherever it
 overrides this file.
 
-**Dispatched phase?** If `~/.sdd/scripts/model-policy.sh dispatch plan` prints
+**Dispatched phase?** Umbrella specs never dispatch — `spec-dispatch.sh` is
+single-repo only and refuses them (exit 5); skip this check and run here.
+Otherwise, if `~/.sdd/scripts/model-policy.sh dispatch plan` prints
 a CLI other than the one you are running on, this phase is configured to run
 there — offer `bash ~/.sdd/scripts/spec-dispatch.sh plan <spec-dir>` (headless
 run on that CLI; output captured to notes/, artifacts verified on return) and

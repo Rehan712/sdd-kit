@@ -20,6 +20,10 @@ Shared mechanics (all phases):
 - **STATUS:** frontmatter `branch:`/`worktree:` stay `none`; the **Repo
   matrix** table holds per-repo branch/worktree/PR/tasks-done. PR URLs also
   land as `pr_<name>:` frontmatter (spec-pr.sh writes them).
+- **Dispatch: never.** Umbrella specs are excluded from cross-CLI dispatch —
+  `spec-dispatch.sh` is single-repo only and refuses them (exit 5). Whatever
+  the models.yml `dispatch:` map says, every phase of an umbrella spec runs
+  interactively in the CLI you are in; don't offer or attempt a dispatch.
 - **Contract-first ordering** (`knowledge/cross-repo-contracts.md`): contract
   changes → infra → provider services → consumer apps; the same order for
   merge and deploy. Other teams' repos are never tasked — the spec records
