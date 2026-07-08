@@ -12,7 +12,9 @@ Phase 4 of the SDD workflow. Reads `tasks.md`, executes the next pending task
 `~/.sdd/templates/umbrella-guide.md` §Implement and follow it wherever it
 overrides this file. Everything below assumes single-repo.
 
-**Dispatched phase?** If `~/.sdd/scripts/model-policy.sh dispatch implement`
+**Dispatched phase?** Umbrella specs never dispatch — `spec-dispatch.sh` is
+single-repo only and refuses them (exit 5); skip this check and run here.
+Otherwise, if `~/.sdd/scripts/model-policy.sh dispatch implement`
 prints a CLI other than the one you are running on, offer
 `bash ~/.sdd/scripts/spec-dispatch.sh implement <spec-dir> [--task T### | --all]`
 (it pre-cuts the worktree, runs that CLI headlessly inside it, and verifies
