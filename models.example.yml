@@ -1,7 +1,10 @@
 # Model policy for the SDD kit — MACHINE-LOCAL configuration.
 #
 # setup.sh bootstraps models.yml (gitignored) from this file — or interactively
-# via scripts/configure-models.sh. Edit models.yml, not this example.
+# via scripts/configure-models.sh. Edit models.yml, not this example — by hand,
+# or from the command line: scripts/model-policy.sh update <role> <model>
+# (or set/unset tier|role|dispatch). CLI edits are validated before saving and
+# re-stamp the generated copies + adapters automatically.
 #
 # WHY: not every SDD phase deserves the same model. Design and adversarial
 # judgment (specify/plan/tasks, the two gates, security review) want the

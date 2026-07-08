@@ -113,6 +113,16 @@ mid-tier model that's faster and cheaper. The mapping is the **model policy**:
 - **`scripts/configure-models.sh`** is the wizard (runs on first `setup.sh`;
   re-run anytime). `scripts/model-policy.sh show` prints the current mapping;
   `check` validates it.
+- **One-off edits from the command line** — no wizard, no hand-editing:
+  `scripts/model-policy.sh update plan claude-opus-5 xhigh` changes the model
+  (+ effort) behind a role (it edits the tier the role points at and warns
+  which sibling roles share it); `set tier <tier> <cli> model|effort <value>`,
+  `set role <role> <tier>`, and `set dispatch <role> <cli>` (with matching
+  `unset`s) cover everything else in the file. Every edit is validated before
+  it is saved — a bad model id or effort never lands — and then re-stamps the
+  generated copies and CLI adapters automatically (`--no-apply` to skip).
+  Running Claude sessions load agent models at startup, so agent-model edits
+  apply from the next session.
 - **How it's applied per CLI** — each the strongest way that CLI allows:
   - *Claude Code:* `scripts/apply-models.sh` generates copies of every skill and
     agent under `build/` with `model:` + `effort:` stamped into the frontmatter,
@@ -128,8 +138,10 @@ mid-tier model that's faster and cheaper. The mapping is the **model policy**:
     the preamble suggests `--effort` when the session is set lower.
 
 After editing `models.yml` by hand, re-run `scripts/setup.sh` (or
-`apply-models.sh` + `sync.sh` + `build-adapters.sh`). `sdd-doctor.sh` flags a
-stale or missing build, and validates the policy file.
+`apply-models.sh` + `sync.sh` + `build-adapters.sh`) — or skip the hand-edit
+entirely and use `model-policy.sh update`/`set`, which does all of that for
+you. `sdd-doctor.sh` flags a stale or missing build, and validates the policy
+file.
 
 ### Cross-CLI dispatch (different providers per phase)
 
@@ -212,7 +224,7 @@ All in `scripts/` (stable path: `~/.sdd/scripts/`):
 |---|---|
 | `setup.sh` | install / repair everything on this machine |
 | `configure-models.sh` | wizard for the model policy (`models.yml`) — which model + effort runs each SDD role, per CLI |
-| `model-policy.sh` | query/validate the policy: `get <role> <cli> <field>`, `dispatch [<role>]`, `show`, `check` |
+| `model-policy.sh` | query/validate/edit the policy: `get <role> <cli> <field>`, `dispatch [<role>]`, `show`, `check`; edits via `update <role> <model> [<effort>]`, `set`/`unset` `tier`\|`role`\|`dispatch` — validated first, then auto re-stamps copies + adapters |
 | `apply-models.sh` | stamp the policy into generated skill/agent copies under `build/` (Claude homes link there) |
 | `project-detect.sh` | cwd → registered project root (worktree-aware) |
 | `system-map.sh <cmd>` | query/validate the team topology: `list`, `show`, `path`, `deps`, `consumers`, `contracts`, `check` |
