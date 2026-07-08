@@ -118,7 +118,7 @@ for tier in $("$MP" --file "$SRC" tiers); do
     *)              echo "${BOLD}Tier '$tier'${RESET}" ;;
   esac
 
-  m="$(ask_choice "Claude model (opus|sonnet|haiku|fable)" "$(src_tier "$tier" claude model)" "opus|sonnet|haiku|fable")"
+  m="$(ask_choice "Claude model (opus|sonnet|haiku|fable or claude-* id)" "$(src_tier "$tier" claude model)" "opus|sonnet|haiku|fable|inherit|claude-.+")"
   e="$(ask_choice "Claude effort" "$(src_tier "$tier" claude effort)" "low|medium|high|xhigh|max")"
   printf '%s\tclaude_model\t%s\n%s\tclaude_effort\t%s\n' "$tier" "$m" "$tier" "$e" >> "$TIER_VALS"
 
@@ -159,14 +159,17 @@ else
 fi
 
 # Capture before writing — when reconfiguring, $SRC IS $POLICY and must not be
-# read after the output redirect truncates it.
+# read after the output redirect truncates it. The dispatch: map is not part
+# of the wizard; carry it over verbatim so reconfiguring never drops it.
 TIERS_ORDERED="$("$MP" --file "$SRC" tiers)"
+DISPATCH_ROWS="$("$MP" --file "$SRC" dispatch 2>/dev/null || true)"
 
 {
   echo "# Model policy — MACHINE-LOCAL (gitignored). Written by configure-models.sh."
   echo "# Schema + docs: models.example.yml. Re-run scripts/configure-models.sh to"
-  echo "# change, or edit by hand and re-run scripts/apply-models.sh + sync.sh +"
-  echo "# build-adapters.sh (setup.sh does all three)."
+  echo "# change, use scripts/model-policy.sh update/set/unset for one-off edits"
+  echo "# (they re-stamp everything automatically), or edit by hand and re-run"
+  echo "# scripts/apply-models.sh + sync.sh + build-adapters.sh (setup.sh does all three)."
   echo
   echo "tiers:"
   for tier in $TIERS_ORDERED; do
@@ -179,6 +182,11 @@ TIERS_ORDERED="$("$MP" --file "$SRC" tiers)"
   echo
   echo "roles:"
   awk -F'\t' '{ printf "  %s: %s\n", $1, $2 }' "$ROLE_VALS"
+  if [[ -n "$DISPATCH_ROWS" ]]; then
+    echo
+    echo "dispatch:"
+    awk -F'\t' '{ printf "  %s: %s\n", $1, $2 }' <<<"$DISPATCH_ROWS"
+  fi
 } > "$POLICY.tmp"
 mv "$POLICY.tmp" "$POLICY"
 
