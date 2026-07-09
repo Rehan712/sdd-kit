@@ -34,10 +34,10 @@ scripts/setup.sh
 
 After install, `/sdd:onboard` researches every repo in `system-map.yml` and
 writes its standing brief (`briefs/<repo>.md`) — setup prints a hint whenever
-registered repos have no brief. Existing installs: add `onboard: implementation`
-and `review: implementation` to your machine-local `models.yml` roles (new
-installs get them from the example; `apply-models.sh` prints "role … unmapped"
-until you do).
+registered repos have no brief. Existing installs: add `onboard: implementation`,
+`review: implementation`, and `go: reasoning` to your machine-local `models.yml`
+roles (new installs get them from the example; `apply-models.sh` prints
+"role … unmapped" until you do).
 
 Per project, one-time: create `.specify/stack.yml` (the skills do this for you on
 first `/sdd:specify` if it's missing):
@@ -59,6 +59,18 @@ From inside any registered project (including its `<repo>.worktrees/*` checkouts
 | 4. Execute | `/sdd:implement` | Code changes in a `spec/NNN-slug` worktree, checkboxes ticked (`spec-task.sh` — tick + evidence atomically), gates run |
 | 5. Drive the PR home | `/sdd:review` | CI watched via `spec-ci.sh`, red builds triaged into `T###c*` tasks, reviewer feedback into `T###r*`, re-gate rule applied, merge in contract order, worktree torn down |
 | 6. Learn | `/sdd:retro` | `notes/retro.md` + generalizable lessons filed into `knowledge/` |
+
+**In a hurry? `/sdd:go` — autopilot ("yolo mode").** Once a spec exists, one
+command drives steps 2–4 end to end and opens the PR, without stopping for
+human review of `plan.md` or `tasks.md` (each auto-acceptance is logged in the
+STATUS Decisions log). What it *never* skips is the safety floor: the specify
+interview (no spec → it runs `/sdd:specify` interactively first),
+`[NEEDS CLARIFICATION]` markers (any unknown stops the chain instead of
+guessing), `sdd-analyze.sh`, both adversarial gates at full strength (a gate
+deadlock stops the chain — autopilot has no waiver authority), and the
+`spec-pr.sh` gate check. The chain always ends at the open PR; `/sdd:review`
+and the merge stay interactive. Umbrella specs are refused — multi-repo runs
+keep a human on the loop.
 
 Every spec directory also carries **`STATUS.md`** — the living handoff record
 (phase, branch, worktree, PR, gate verdicts). Every tool reads it on entry and
@@ -116,9 +128,12 @@ mid-tier model that's faster and cheaper. The mapping is the **model policy**:
 - **One-off edits from the command line** — no wizard, no hand-editing:
   `scripts/model-policy.sh update plan claude-opus-5 xhigh` changes the model
   (+ effort) behind a role (it edits the tier the role points at and warns
-  which sibling roles share it); `set tier <tier> <cli> model|effort <value>`,
-  `set role <role> <tier>`, and `set dispatch <role> <cli>` (with matching
-  `unset`s) cover everything else in the file. Every edit is validated before
+  which sibling roles share it — add `--solo` to split the role onto its own
+  cloned tier and leave the siblings untouched); `set tier <tier> <cli>
+  model|effort <value>`, `set role <role> <tier>`, and `set dispatch <role>
+  <cli>` (with matching `unset`s — `unset tier <tier>` with no field drops the
+  whole tier, refused while a role still points at it) cover everything else
+  in the file. Every edit is validated before
   it is saved — a bad model id or effort never lands — and then re-stamps the
   generated copies and CLI adapters automatically (`--no-apply` to skip).
   Running Claude sessions load agent models at startup, so agent-model edits
@@ -266,7 +281,7 @@ sdd-kit/
 ├── briefs/                   # Standing per-repo context — seeded by /sdd:onboard,
 │                             # written by plan, refreshed by retro (Source: sha tracked)
 ├── skills/                   # CANONICAL skills: sdd-specify/plan/tasks/implement/
-│                             # review/retro/onboard
+│                             # review/retro/onboard/go (autopilot)
 ├── agents/                   # Gates (opponent, reality-check), security-reviewer,
 │                             # test-engineer, sdd-orchestrator, and 12 stack experts
 │                             # (rust, javascript, python, aws, react, nextjs,

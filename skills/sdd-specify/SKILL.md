@@ -116,7 +116,9 @@ Tell the user:
 
 - The path to the new `spec.md`.
 - A 2-line summary of what the spec captures.
-- Suggested next command: `/sdd:plan`.
+- Suggested next command: `/sdd:plan` — or `/sdd:go` to autopilot the rest
+  (plan → tasks → implement → PR, no further check-ins; only offer it when
+  the spec is accepted with zero `[NEEDS CLARIFICATION]` markers).
 
 ## Grounding rules — non-negotiable
 

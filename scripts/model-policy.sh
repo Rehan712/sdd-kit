@@ -30,15 +30,21 @@
 # value never lands in models.yml — and then re-stamps the generated skill and
 # agent copies plus the Codex/Copilot adapters automatically, so the change is
 # live everywhere without a separate apply step:
-#   model-policy.sh update <role> <model> [<effort>] [--cli <cli>]
+#   model-policy.sh update <role> <model> [<effort>] [--cli <cli>] [--solo]
 #                                               # role-centric shortcut: edits the
 #                                               # tier the role points at (default
 #                                               # --cli claude); warns about sibling
-#                                               # roles sharing that tier
+#                                               # roles sharing that tier. --solo:
+#                                               # sharing siblings keep the old tier —
+#                                               # the role is split onto its own new
+#                                               # tier (named after the role, cloned
+#                                               # from the shared one) before the edit
 #   model-policy.sh set tier <tier> <cli> <model|effort> <value>
 #   model-policy.sh set role <role> <tier>      # remap a role to another tier
 #   model-policy.sh set dispatch <role> <cli>   # route a phase to another CLI
 #   model-policy.sh unset tier <tier> <cli> <model|effort>
+#   model-policy.sh unset tier <tier>           # drop the WHOLE tier (refused while
+#                                               # any role still points at it)
 #   model-policy.sh unset role <role>           # role falls back to session default
 #   model-policy.sh unset dispatch <role>       # phase runs locally again
 #   ... --no-apply                              # save only; skip the re-stamp
@@ -356,7 +362,7 @@ case "$CMD" in
       esac
     done < <(flatten | awk -F'\t' '$1=="tier"')
 
-    for known in specify plan tasks implement retro onboard orchestrator opponent reality-check security-reviewer test-engineer stack-expert explore; do
+    for known in specify plan tasks implement review retro onboard go orchestrator opponent reality-check security-reviewer test-engineer stack-expert explore; do
       grep -qx "$known" <<<"$roles" || warn "role '$known' not mapped — that phase/agent keeps the session default"
     done
 
@@ -367,6 +373,7 @@ case "$CMD" in
         plan|tasks|implement|retro) ;;
         specify) fail "dispatch: 'specify' is an interview — it runs where the user is, never headless" ;;
         review)  fail "dispatch: 'review' needs interactive judgment (merge decisions) — not dispatchable" ;;
+        go)      fail "dispatch: 'go' is the autopilot conductor — dispatch its inner phases (plan/tasks/implement) instead" ;;
         *) fail "dispatch: unknown role '$drole' (dispatchable: plan, tasks, implement, retro)" ;;
       esac
       case "$dcli" in
@@ -414,6 +421,7 @@ case "$CMD" in
           plan|tasks|implement|retro) ;;
           specify) echo "dispatch: 'specify' is an interview — it runs where the user is, never headless" >&2; exit 2 ;;
           review)  echo "dispatch: 'review' needs interactive judgment (merge decisions) — not dispatchable" >&2; exit 2 ;;
+          go)      echo "dispatch: 'go' is the autopilot conductor — dispatch its inner phases (plan/tasks/implement) instead" >&2; exit 2 ;;
           *) echo "dispatch: unknown role '$R' (dispatchable: plan, tasks, implement, retro)" >&2; exit 2 ;;
         esac
         require_cli "$CLI"
@@ -431,12 +439,24 @@ case "$CMD" in
     TSV="$(flatten)"
     case "$KIND" in
       tier)
-        T="${3:?tier name required}"; CLI="${4:?cli required}"; FIELD="${5:?field required (model|effort)}"
-        require_cli "$CLI"; require_field "$FIELD"
-        [[ -n "$(tier_field "$T" "${CLI}_${FIELD}")" ]] \
-          || { echo "nothing to unset: tier '$T' has no ${CLI}_${FIELD}" >&2; exit 1; }
-        TSV="$(tsv_delete "$TSV" tier "$T" "${CLI}_${FIELD}")"
-        write_policy "$TSV" "tier '$T': ${CLI}_${FIELD} removed (that CLI keeps its session default)"
+        T="${3:?tier name required}"
+        if [[ -z "${4:-}" ]]; then
+          # No <cli> <field> → drop the whole tier.
+          flatten | awk -F'\t' '$1=="tier" { print $2 }' | grep -qx "$T" \
+            || { echo "nothing to unset: tier '$T' is not defined" >&2; exit 1; }
+          pointing="$(flatten | awk -F'\t' -v t="$T" '$1=="role" && $3==t { print $2 }' | paste -sd, -)"
+          [[ -z "$pointing" ]] \
+            || { echo "tier '$T' is still in use by role(s): $pointing — remap them first (model-policy.sh set role <role> <tier>)" >&2; exit 2; }
+          TSV="$(tsv_delete "$TSV" tier "$T")"
+          write_policy "$TSV" "tier '$T' removed"
+        else
+          CLI="${4}"; FIELD="${5:?field required (model|effort)}"
+          require_cli "$CLI"; require_field "$FIELD"
+          [[ -n "$(tier_field "$T" "${CLI}_${FIELD}")" ]] \
+            || { echo "nothing to unset: tier '$T' has no ${CLI}_${FIELD}" >&2; exit 1; }
+          TSV="$(tsv_delete "$TSV" tier "$T" "${CLI}_${FIELD}")"
+          write_policy "$TSV" "tier '$T': ${CLI}_${FIELD} removed (that CLI keeps its session default)"
+        fi
         ;;
       role)
         R="${3:?role name required}"
@@ -456,11 +476,12 @@ case "$CMD" in
     ;;
 
   update)
-    ROLE=""; MODEL=""; EFFORT=""; CLI="claude"
+    ROLE=""; MODEL=""; EFFORT=""; CLI="claude"; SOLO=0
     shift  # past 'update'
     while (( $# )); do
       case "$1" in
         --cli) shift; CLI="${1:?--cli needs claude|codex|copilot}" ;;
+        --solo) SOLO=1 ;;
         -*) echo "unknown flag: $1" >&2; exit 2 ;;
         *) if [[ -z "$ROLE" ]]; then ROLE="$1"
            elif [[ -z "$MODEL" ]]; then MODEL="$1"
@@ -469,19 +490,37 @@ case "$CMD" in
       esac
       shift
     done
-    [[ -n "$ROLE" && -n "$MODEL" ]] || { echo "usage: model-policy.sh update <role> <model> [<effort>] [--cli <cli>]" >&2; exit 2; }
+    [[ -n "$ROLE" && -n "$MODEL" ]] || { echo "usage: model-policy.sh update <role> <model> [<effort>] [--cli <cli>] [--solo]" >&2; exit 2; }
     require_cli "$CLI"
     validate_field "$CLI" model "$MODEL"
     if [[ -n "$EFFORT" ]]; then validate_field "$CLI" effort "$EFFORT"; fi
     T="$(role_tier "$ROLE")"
     [[ -n "$T" ]] || { echo "role '$ROLE' is not mapped to a tier — map it first: model-policy.sh set role $ROLE <tier> (tiers: $(flatten | awk -F'\t' '$1=="tier" { print $2 }' | sort -u | paste -sd, -))" >&2; exit 2; }
     siblings="$(flatten | awk -F'\t' -v t="$T" -v r="$ROLE" '$1=="role" && $3==t && $2!=r { print $2 }' | paste -sd, -)"
-    if [[ -n "$siblings" ]]; then
-      echo "  ${YELLOW}!${RESET} tier '$T' is shared — this also updates: $siblings" >&2
-    fi
     TSV="$(flatten)"
+    desc=()
+    if (( SOLO )) && [[ -n "$siblings" ]]; then
+      # Split the role onto its own tier: clone the shared tier under the
+      # role's name, remap the role, and edit only the clone.
+      NEW="$ROLE"
+      require_name tier "$NEW"
+      if flatten | awk -F'\t' '$1=="tier" { print $2 }' | grep -qx "$NEW"; then
+        echo "cannot split: a tier named '$NEW' already exists — split manually (set tier / set role)" >&2; exit 2
+      fi
+      while IFS=$'\t' read -r key val; do
+        [[ -n "$key" ]] || continue
+        TSV="$(tsv_upsert "$TSV" tier "$NEW" "$key" "$val")"
+      done < <(flatten | awk -F'\t' -v t="$T" '$1=="tier" && $2==t { print $3 "\t" $4 }')
+      TSV="$(tsv_upsert "$TSV" role "$ROLE" "$NEW")"
+      desc+=("role '$ROLE' split onto its own tier '$NEW' (cloned from '$T'; $siblings keep '$T')")
+      T="$NEW"
+    elif [[ -n "$siblings" ]]; then
+      echo "  ${YELLOW}!${RESET} tier '$T' is shared — this also updates: $siblings (--solo to split the role off first)" >&2
+    elif (( SOLO )); then
+      echo "  ${DIM}· role '$ROLE' already has tier '$T' to itself — --solo not needed${RESET}" >&2
+    fi
     TSV="$(tsv_upsert "$TSV" tier "$T" "${CLI}_model" "$MODEL")"
-    desc=("role '$ROLE' (tier '$T'): ${CLI}_model = $MODEL")
+    desc+=("role '$ROLE' (tier '$T'): ${CLI}_model = $MODEL")
     if [[ -n "$EFFORT" ]]; then
       TSV="$(tsv_upsert "$TSV" tier "$T" "${CLI}_effort" "$EFFORT")"
       desc+=("role '$ROLE' (tier '$T'): ${CLI}_effort = $EFFORT")
