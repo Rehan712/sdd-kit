@@ -20,9 +20,14 @@ the two adversarial gates. Merging stays human — the chain ENDS at the open PR
   `spec-pr.sh`'s refusal to open a non-draft PR without CLEARED + READY.
 - **`/sdd:review`.** The chain stops at the PR; merge decisions are interactive.
 
-**Refuse to autopilot:** umbrella specs (`repos:` frontmatter) — their phases
-are interactive by design and multi-repo blast radius needs a human on the
-loop. Run their phases individually instead.
+**Umbrella specs** (`repos:` frontmatter, hub `specs/`) autopilot too — read
+`~/.sdd/templates/umbrella-guide.md` first and apply it wherever it overrides
+the phase skills. Two deltas vs single-repo: **implement never dispatches**
+(contract rule 5 does not apply to umbrella implement — the orchestrator
+needs the live repo table, so it always runs here; plan/tasks may still
+dispatch, hub-rooted), and the chain ends when EVERY declared repo's PR is
+open — `spec-pr.sh --repo` writes each `pr_<name>:` but leaves the phase to
+the caller, so set `phase: review` via `spec-status.sh` after the last one.
 
 ## Auto-mode contract
 
@@ -61,7 +66,8 @@ overrides** (the phase skills' "Autopilot?" blocks point back here):
   recently modified non-shipped spec; project root via `project-detect.sh`).
 - No spec dir and the user gave a feature description → `/sdd:specify` first
   (full interview — never abbreviated), then continue the chain.
-- Umbrella spec → refuse (see above), name the per-phase commands instead.
+- Umbrella spec → umbrella mode (see above): read
+  `~/.sdd/templates/umbrella-guide.md` before phase 3.
 - `grep -n "NEEDS CLARIFICATION" spec.md` — any marker → stop and list them;
   a clean spec is autopilot's input requirement.
 - Read `STATUS.md`: enter the chain at the phase it shows. Autopilot is
@@ -97,11 +103,17 @@ Stop-point for the orchestrator prompt: **through the Ship stage's "Open PR"
 task** — `spec-pr.sh` opens the PR and flips STATUS to `phase: review`.
 Roll-out and retro tasks stay unticked; they need a merged PR.
 
+Umbrella: pre-cut every worktree (`spec-worktree.sh --all-repos <spec-dir>`)
+and hand the orchestrator the hub spec dir, the repo table, and per-repo
+stack tags (umbrella-guide §Implement). Stop-point: through EVERY declared
+repo's "Open PR" task (`spec-pr.sh --repo <name>` each) — then set
+`phase: review` yourself via `spec-status.sh`.
+
 ### 6. Hand off
 
-Report: PR URL, gate verdicts (+ rounds), tasks done/total, where the
-evidence lives (`notes/evidence.md`), anything deferred or stubbed. Next:
-`/sdd:review` — interactive from here on.
+Report: PR URL (umbrella: one per declared repo), gate verdicts (+ rounds),
+tasks done/total, where the evidence lives (`notes/evidence.md`), anything
+deferred or stubbed. Next: `/sdd:review` — interactive from here on.
 
 ## Grounding rules — non-negotiable
 
@@ -124,8 +136,9 @@ evidence lives (`notes/evidence.md`), anything deferred or stubbed. Next:
 
 ## Done when
 
-- The chain reached the open PR (STATUS `phase: review`, `pr:` set) — or
-  stopped at a contract stop with a precise report of what's needed to resume.
+- The chain reached the open PR (STATUS `phase: review`, `pr:` set — umbrella:
+  `pr_<name>:` for every declared repo) — or stopped at a contract stop with a
+  precise report of what's needed to resume.
 - Every auto-acceptance has its STATUS Decisions line; no verdict was
   softened; all evidence is captured runs.
 - The user has the PR URL (or the stop report) and the next command.

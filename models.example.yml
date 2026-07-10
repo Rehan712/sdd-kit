@@ -88,7 +88,9 @@ roles:
 # must be installed and authenticated on this machine (doctor checks).
 #
 # Dispatchable roles: plan, tasks, implement, retro. `specify` never (it's an
-# interview); `review` never (merge decisions are interactive).
+# interview); `review` never (merge decisions are interactive). Umbrella specs:
+# plan/tasks/retro run hub-rooted; implement takes --repo <name> (one repo
+# slice per run); the cross-repo orchestrated --all never dispatches.
 #
 # dispatch:
 #   tasks: codex
