@@ -12,13 +12,13 @@ implementation, writes `plan.md` next to it.
 Read `~/.sdd/templates/umbrella-guide.md` §Plan and follow it wherever it
 overrides this file.
 
-**Dispatched phase?** Umbrella specs never dispatch — `spec-dispatch.sh` is
-single-repo only and refuses them (exit 5); skip this check and run here.
-Otherwise, if `~/.sdd/scripts/model-policy.sh dispatch plan` prints
+**Dispatched phase?** If `~/.sdd/scripts/model-policy.sh dispatch plan` prints
 a CLI other than the one you are running on, this phase is configured to run
 there — offer `bash ~/.sdd/scripts/spec-dispatch.sh plan <spec-dir>` (headless
-run on that CLI; output captured to notes/, artifacts verified on return) and
-run locally only if the user declines. Prints nothing → run here as normal.
+run on that CLI; output captured to notes/, artifacts verified on return;
+umbrella specs dispatch too — the run is rooted at the hub with declared repos
+as read-only context) and run locally only if the user declines. Prints
+nothing → run here as normal.
 
 **Autopilot?** Running under `/sdd:go`: apply the auto-mode contract in
 `~/.sdd/skills/sdd-go/SKILL.md` — never ask the user (unknown →

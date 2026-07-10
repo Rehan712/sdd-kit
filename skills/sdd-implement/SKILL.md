@@ -12,14 +12,15 @@ Phase 4 of the SDD workflow. Reads `tasks.md`, executes the next pending task
 `~/.sdd/templates/umbrella-guide.md` §Implement and follow it wherever it
 overrides this file. Everything below assumes single-repo.
 
-**Dispatched phase?** Umbrella specs never dispatch — `spec-dispatch.sh` is
-single-repo only and refuses them (exit 5); skip this check and run here.
-Otherwise, if `~/.sdd/scripts/model-policy.sh dispatch implement`
-prints a CLI other than the one you are running on, offer
-`bash ~/.sdd/scripts/spec-dispatch.sh implement <spec-dir> [--task T### | --all]`
-(it pre-cuts the worktree, runs that CLI headlessly inside it, and verifies
-with `sdd-analyze.sh` + `spec-evidence.sh` on return) and run locally only if
-the user declines. Prints nothing → run here as normal.
+**Dispatched phase?** If `~/.sdd/scripts/model-policy.sh dispatch implement`
+prints a CLI other than the one you are running on, offer the dispatch and
+run locally only if the user declines; prints nothing → run here as normal.
+Single-repo: `bash ~/.sdd/scripts/spec-dispatch.sh implement <spec-dir>
+[--task T### | --all]` (it pre-cuts the worktree, runs that CLI headlessly
+inside it, and verifies with `sdd-analyze.sh` + `spec-evidence.sh` on return).
+Umbrella: one repo slice at a time — add `--repo <name>` (the run executes
+only that repo's `[repo:]` tasks; gate and Ship tasks stay here). The
+orchestrated cross-repo `--all` never dispatches — it always runs here.
 
 **Autopilot?** Running under `/sdd:go`: apply the auto-mode contract in
 `~/.sdd/skills/sdd-go/SKILL.md` — always orchestrated mode (`--all`) with the

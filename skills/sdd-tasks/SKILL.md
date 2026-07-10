@@ -12,13 +12,12 @@ next to it.
 `~/.sdd/templates/umbrella-guide.md` §Tasks for the `[repo:]` tagging and
 contract-first stage ordering that override the defaults below.
 
-**Dispatched phase?** Umbrella specs never dispatch — `spec-dispatch.sh` is
-single-repo only and refuses them (exit 5); skip this check and run here.
-Otherwise, if `~/.sdd/scripts/model-policy.sh dispatch tasks` prints
-a CLI other than the one you are running on, offer
+**Dispatched phase?** If `~/.sdd/scripts/model-policy.sh dispatch tasks`
+prints a CLI other than the one you are running on, offer
 `bash ~/.sdd/scripts/spec-dispatch.sh tasks <spec-dir>` (headless run there;
-`sdd-analyze.sh` verifies the result on return) and run locally only if the
-user declines. Prints nothing → run here as normal.
+`sdd-analyze.sh` verifies the result on return; umbrella specs dispatch too —
+the run is rooted at the hub with declared repos as read-only context) and run
+locally only if the user declines. Prints nothing → run here as normal.
 
 **Autopilot?** Running under `/sdd:go`: apply the auto-mode contract in
 `~/.sdd/skills/sdd-go/SKILL.md` — never ask the user (unknown →

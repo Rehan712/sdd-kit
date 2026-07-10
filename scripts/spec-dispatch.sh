@@ -23,13 +23,20 @@
 #
 # Dispatchable roles: plan, tasks, implement, retro.
 #   specify — never (it's an interview);  review — never (interactive merges).
-# Umbrella specs (spec.md `repos:` frontmatter) are not dispatchable yet —
-# run those phases interactively.
+# Umbrella specs (spec.md `repos:` frontmatter, hub-owned artifacts):
+#   plan/tasks/retro dispatch with the HUB as the working root (declared repos
+#   are read-only context); implement dispatches ONE repo slice at a time via
+#   --repo <name> — that repo's spec worktree is the working root and the run
+#   executes only [repo:<name>] tasks, never gate or Ship tasks (those are
+#   spec-wide by design). Plain --all on an umbrella spec is refused (exit 5):
+#   the orchestrated cross-repo run stays interactive.
 #
 # Usage:
 #   spec-dispatch.sh <role> <spec-dir>            # role: plan|tasks|implement|retro
 #   spec-dispatch.sh implement <dir> --task T###  # exactly that task, then stop
 #   spec-dispatch.sh implement <dir> --all        # all remaining tasks
+#   spec-dispatch.sh implement <dir> --repo <name> [--task T### | --all]
+#                                                 # umbrella: one repo's slice
 #   spec-dispatch.sh <role> <dir> --to <cli>      # override the dispatch: map
 #   spec-dispatch.sh <role> <dir> --note "<text>" # extra context for the run
 #   spec-dispatch.sh <role> <dir> --dry-run       # print the command, run nothing
@@ -37,8 +44,9 @@
 #
 # Exit: 0 = dispatched + artifacts verified; 1 = ran but verification failed;
 #       2 = usage; 3 = no dispatch mapping (and no --to); 4 = target CLI or
-#       its adapters unavailable; 5 = umbrella spec (unsupported); 6 = the
-#       target CLI exited non-zero (captured output kept either way).
+#       its adapters unavailable; 5 = umbrella implement without --repo (the
+#       cross-repo --all never dispatches); 6 = the target CLI exited non-zero
+#       (captured output kept either way).
 
 set -uo pipefail
 
@@ -47,6 +55,7 @@ HUB_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 MP="$HUB_DIR/scripts/model-policy.sh"
 STATUS_SH="$HUB_DIR/scripts/spec-status.sh"
 WORKTREE_SH="$HUB_DIR/scripts/spec-worktree.sh"
+SYSMAP="$HUB_DIR/scripts/system-map.sh"
 
 init_colors
 
@@ -59,12 +68,14 @@ ALL=0
 TO=""
 NOTE=""
 DRY=0
+REPO_NAME=""
 
 while (( $# )); do
   case "$1" in
     --help|-h) usage ;;
     --task) shift; TASK="${1:?--task needs T###}" ;;
     --all) ALL=1 ;;
+    --repo) shift; REPO_NAME="${1:?--repo needs a repo name}" ;;
     --to) shift; TO="${1:?--to needs claude|codex|copilot}" ;;
     --note) shift; NOTE="${1:?--note needs text}" ;;
     --dry-run) DRY=1 ;;
@@ -85,20 +96,38 @@ esac
 [[ -n "$TASK" && "$ROLE" != "implement" ]] && { echo "--task only applies to implement" >&2; exit 2; }
 (( ALL )) && [[ "$ROLE" != "implement" ]] && { echo "--all only applies to implement" >&2; exit 2; }
 [[ -n "$TASK" ]] && (( ALL )) && { echo "--task and --all are mutually exclusive" >&2; exit 2; }
+[[ -n "$REPO_NAME" && "$ROLE" != "implement" ]] && { echo "--repo only applies to implement (umbrella hub phases run spec-wide at the hub)" >&2; exit 2; }
 
 SPEC_DIR="$(cd -- "$SPEC_ARG" 2>/dev/null && pwd)" || { echo "spec dir not found: $SPEC_ARG" >&2; exit 2; }
 [[ -f "$SPEC_DIR/spec.md" ]] || { echo "no spec.md in $SPEC_DIR" >&2; exit 2; }
 SLUG="$(basename "$SPEC_DIR")"
 
-# Umbrella specs: per-repo worktrees + hub-owned artifacts — not dispatchable yet.
-if [[ -n "$(fm_get "$SPEC_DIR/spec.md" repos)" || -n "$(fm_list "$SPEC_DIR/spec.md" repos)" ]]; then
-  echo "umbrella spec ($SLUG declares repos:) — dispatch is single-repo only; run the phase interactively" >&2
-  exit 5
-fi
+# Umbrella specs (repos: frontmatter): hub-rooted phases dispatch normally;
+# implement dispatches one declared repo's slice at a time (--repo <name>).
+UMBRELLA=0
+DECLARED_REPOS="$(spec_declared_repos "$SPEC_DIR")"
+[[ -n "$DECLARED_REPOS" ]] && UMBRELLA=1
 
-# Project root: <root>/.specify/specs/<slug> — refuse anything shaped differently.
-PROJ_ROOT="$(cd -- "$SPEC_DIR/../../.." && pwd)"
-[[ -d "$PROJ_ROOT/.specify/specs/$SLUG" ]] || { echo "spec dir is not at <project>/.specify/specs/<slug>: $SPEC_DIR" >&2; exit 2; }
+PROJ_ROOT=""
+if (( UMBRELLA )); then
+  # Umbrella spec dirs live at <hub>/specs/<slug> — refuse anything else.
+  [[ "$SPEC_DIR" == "$HUB_DIR/specs/$SLUG" ]] \
+    || { echo "umbrella spec ($SLUG declares repos:) must live at $HUB_DIR/specs/$SLUG — got: $SPEC_DIR" >&2; exit 2; }
+  if [[ "$ROLE" == "implement" && -z "$REPO_NAME" ]]; then
+    echo "umbrella spec ($SLUG): implement dispatches one repo slice at a time — pass --repo <name> (declared: $DECLARED_REPOS)" >&2
+    echo "the orchestrated cross-repo run never dispatches — run /sdd:implement --all interactively" >&2
+    exit 5
+  fi
+  if [[ -n "$REPO_NAME" ]] && ! grep -qw "$REPO_NAME" <<< "$DECLARED_REPOS"; then
+    echo "repo '$REPO_NAME' is not declared by this umbrella spec (declared: $DECLARED_REPOS)" >&2
+    exit 2
+  fi
+else
+  [[ -n "$REPO_NAME" ]] && { echo "--repo only applies to umbrella specs (spec.md with repos: frontmatter)" >&2; exit 2; }
+  # Project root: <root>/.specify/specs/<slug> — refuse anything shaped differently.
+  PROJ_ROOT="$(cd -- "$SPEC_DIR/../../.." && pwd)"
+  [[ -d "$PROJ_ROOT/.specify/specs/$SLUG" ]] || { echo "spec dir is not at <project>/.specify/specs/<slug>: $SPEC_DIR" >&2; exit 2; }
+fi
 
 # --- resolve the target CLI ---------------------------------------------------
 
@@ -125,30 +154,64 @@ esac
 
 ROOT="$PROJ_ROOT"
 LIVE_SPEC="$SPEC_DIR"
-EXTRA_DIRS=()   # dirs the run must reach beyond its working root
+EXTRA_DIRS=()   # dirs the run must WRITE beyond its working root
+READ_DIRS=()    # read-only context (claude/copilot --add-dir; codex reads freely)
+
+if (( UMBRELLA )) && [[ "$ROLE" != "implement" ]]; then
+  # Hub-rooted phases: the hub owns every artifact these phases write
+  # (the spec dir, briefs/, knowledge/); declared repos are read-only context.
+  ROOT="$HUB_DIR"
+  for r in $DECLARED_REPOS; do
+    if p="$("$SYSMAP" path "$r" 2>/dev/null)"; then
+      READ_DIRS+=("$p")
+    else
+      echo "warning: declared repo '$r' not resolvable on this machine — the run explores what it can reach" >&2
+    fi
+  done
+fi
 
 if [[ "$ROLE" == "implement" ]]; then
-  WT="$(fm_get "$SPEC_DIR/STATUS.md" worktree 2>/dev/null)"
-  if [[ -z "$WT" || "$WT" == "none" || ! -d "$WT" ]]; then
+  if (( UMBRELLA )); then
+    REPO_PATH="$("$SYSMAP" path "$REPO_NAME")" \
+      || { echo "cannot resolve repo '$REPO_NAME' (system-map.sh path) — register it on this machine first" >&2; exit 4; }
     if (( DRY )); then
-      WT="<worktree — spec-worktree.sh would cut/reuse it here>"
+      WT="<worktree — spec-worktree.sh --repo $REPO_NAME would cut/reuse it here>"
     else
-      WT="$("$WORKTREE_SH" "$SPEC_DIR" | tail -1)" || { echo "spec-worktree.sh failed — cannot dispatch implement" >&2; exit 4; }
+      WT="$("$WORKTREE_SH" --repo "$REPO_NAME" "$SPEC_DIR" | tail -1)" \
+        || { echo "spec-worktree.sh --repo $REPO_NAME failed — cannot dispatch implement" >&2; exit 4; }
     fi
-  fi
-  if [[ -d "$WT" ]]; then
-    # Worktree guard before handing the tree to a foreign agent.
-    branch="$(git -C "$WT" rev-parse --abbrev-ref HEAD 2>/dev/null)"
-    [[ "$branch" == "spec/$SLUG" ]] || { echo "worktree guard failed: $WT is on '$branch', expected spec/$SLUG" >&2; exit 4; }
-    LIVE_SPEC="$WT/.specify/specs/$SLUG"
-    [[ -d "$LIVE_SPEC" ]] || { echo "live spec dir missing in worktree: $LIVE_SPEC (commit the spec docs on the base branch first)" >&2; exit 4; }
+    if [[ -d "$WT" ]]; then
+      # Worktree guard before handing the tree to a foreign agent.
+      branch="$(git -C "$WT" rev-parse --abbrev-ref HEAD 2>/dev/null)"
+      [[ "$branch" == "spec/$SLUG" ]] || { echo "worktree guard failed: $WT is on '$branch', expected spec/$SLUG" >&2; exit 4; }
+    fi
+    # LIVE_SPEC stays the hub spec dir — umbrella artifacts never live in a repo.
+    ROOT="$WT"
+    EXTRA_DIRS+=("$REPO_PATH")   # worktree git ops write into the main repo's .git
+    EXTRA_DIRS+=("$HUB_DIR")     # tasks.md/STATUS.md/notes/ live in the hub spec dir
   else
-    LIVE_SPEC="$WT/.specify/specs/$SLUG"   # dry-run placeholder path
+    WT="$(fm_get "$SPEC_DIR/STATUS.md" worktree 2>/dev/null)"
+    if [[ -z "$WT" || "$WT" == "none" || ! -d "$WT" ]]; then
+      if (( DRY )); then
+        WT="<worktree — spec-worktree.sh would cut/reuse it here>"
+      else
+        WT="$("$WORKTREE_SH" "$SPEC_DIR" | tail -1)" || { echo "spec-worktree.sh failed — cannot dispatch implement" >&2; exit 4; }
+      fi
+    fi
+    if [[ -d "$WT" ]]; then
+      # Worktree guard before handing the tree to a foreign agent.
+      branch="$(git -C "$WT" rev-parse --abbrev-ref HEAD 2>/dev/null)"
+      [[ "$branch" == "spec/$SLUG" ]] || { echo "worktree guard failed: $WT is on '$branch', expected spec/$SLUG" >&2; exit 4; }
+      LIVE_SPEC="$WT/.specify/specs/$SLUG"
+      [[ -d "$LIVE_SPEC" ]] || { echo "live spec dir missing in worktree: $LIVE_SPEC (commit the spec docs on the base branch first)" >&2; exit 4; }
+    else
+      LIVE_SPEC="$WT/.specify/specs/$SLUG"   # dry-run placeholder path
+    fi
+    ROOT="$WT"
+    EXTRA_DIRS+=("$PROJ_ROOT")   # worktree git ops write into the main repo's .git
   fi
-  ROOT="$WT"
-  EXTRA_DIRS+=("$PROJ_ROOT")   # worktree git ops write into the main repo's .git
 fi
-if [[ "$ROLE" == "retro" ]]; then
+if [[ "$ROLE" == "retro" && "$ROOT" != "$HUB_DIR" ]]; then
   EXTRA_DIRS+=("$HUB_DIR")     # retro files lessons into hub knowledge/ + briefs/
 fi
 
@@ -159,9 +222,16 @@ CAP="$LIVE_SPEC/notes/dispatch-$ROLE-$TS.md"
 
 task_line=""
 if [[ "$ROLE" == "implement" ]]; then
-  if [[ -n "$TASK" ]]; then task_line="Execute exactly task $TASK, then stop."
-  elif (( ALL )); then task_line="Execute ALL remaining tasks in dependency order (orchestrated mode), then stop."
-  else task_line="Execute the next pending task, then stop."
+  if (( UMBRELLA )); then
+    if [[ -n "$TASK" ]]; then task_line="Execute exactly task $TASK (it must be tagged [repo:$REPO_NAME] — if it isn't, stop and report), then stop."
+    elif (( ALL )); then task_line="Execute ALL remaining tasks tagged [repo:$REPO_NAME] in dependency order, then stop."
+    else task_line="Execute the next pending task tagged [repo:$REPO_NAME], then stop."
+    fi
+  else
+    if [[ -n "$TASK" ]]; then task_line="Execute exactly task $TASK, then stop."
+    elif (( ALL )); then task_line="Execute ALL remaining tasks in dependency order (orchestrated mode), then stop."
+    else task_line="Execute the next pending task, then stop."
+    fi
   fi
 fi
 
@@ -172,13 +242,36 @@ case "$CLI" in
 esac
 
 wt_line=""
-[[ "$ROLE" == "implement" ]] && wt_line="The spec worktree is already cut: your working directory IS the worktree (branch spec/$SLUG). Run the worktree guard, skip re-cutting, and work only under it.
+if [[ "$ROLE" == "implement" ]]; then
+  if (( UMBRELLA )); then
+    wt_line="The [repo:$REPO_NAME] worktree is already cut: your working directory IS that worktree (branch spec/$SLUG). Run the worktree guard, skip re-cutting, and keep all code edits under it.
 "
+  else
+    wt_line="The spec worktree is already cut: your working directory IS the worktree (branch spec/$SLUG). Run the worktree guard, skip re-cutting, and work only under it.
+"
+  fi
+fi
+
+umb_line=""
+if (( UMBRELLA )); then
+  if [[ "$ROLE" == "implement" ]]; then
+    umb_line="UMBRELLA SPEC — $SLUG spans repos: $DECLARED_REPOS. This run owns ONLY the [repo:$REPO_NAME] slice:
+- The hub spec dir ($LIVE_SPEC) owns tasks.md/STATUS.md/notes/ — edit the artifacts there; never commit in the hub.
+- Code edits and commits happen ONLY in your working directory (the $REPO_NAME worktree).
+- Never execute gate tasks (an *Agent:* line / Reality Check stage) or Ship tasks — they are spec-wide and stay interactive.
+- A task whose dependencies land in another repo and are not [x] yet: skip it and report it as blocked.
+- Update the STATUS.md Repo matrix row for $REPO_NAME (branch/worktree/tasks done) as tasks land.
+"
+  else
+    umb_line="UMBRELLA SPEC — $SLUG spans repos: $DECLARED_REPOS. Your working directory is the hub, which owns all spec artifacts; read ~/.sdd/templates/umbrella-guide.md and follow its section for this phase. Declared repo checkouts are read-only context — resolve their paths with ~/.sdd/scripts/system-map.sh path <name>.
+"
+  fi
+fi
 
 PROMPT="NON-INTERACTIVE DISPATCHED RUN — sent from another CLI via ~/.sdd/scripts/spec-dispatch.sh.
 Execute the SDD $ROLE phase for the spec directory: $LIVE_SPEC
 $pointer
-$wt_line$task_line
+$umb_line$wt_line$task_line
 
 Rules for this run (they override any instruction to ask the user):
 - Never ask the user anything. An unknown you cannot resolve from the artifacts or code -> write [NEEDS CLARIFICATION: <question>] in the artifact where the answer belongs, mirror it in STATUS.md Open questions, and stop cleanly.
@@ -201,6 +294,7 @@ case "$CLI" in
       [[ -n "$m" ]] && CMD+=(-m "$m")
     fi
     CMD+=(-C "$ROOT" -s workspace-write)
+    # codex --add-dir grants WRITE; READ_DIRS stay off — workspace-write already reads the disk.
     for d in ${EXTRA_DIRS[@]+"${EXTRA_DIRS[@]}"}; do CMD+=(--add-dir "$d"); done
     CMD+=(--output-last-message "$CAP")
     CMD+=("$PROMPT")
@@ -212,7 +306,7 @@ case "$CLI" in
     [[ -n "$m" ]] && CMD+=(--model "$m")
     [[ -n "$e" ]] && CMD+=(--effort "$e")
     CMD+=(--add-dir "$HUB_DIR")
-    for d in ${EXTRA_DIRS[@]+"${EXTRA_DIRS[@]}"}; do [[ "$d" == "$HUB_DIR" ]] || CMD+=(--add-dir "$d"); done
+    for d in ${EXTRA_DIRS[@]+"${EXTRA_DIRS[@]}"} ${READ_DIRS[@]+"${READ_DIRS[@]}"}; do [[ "$d" == "$HUB_DIR" ]] || CMD+=(--add-dir "$d"); done
     ;;
   claude)
     CMD=(claude -p "$PROMPT" --dangerously-skip-permissions)
@@ -221,12 +315,13 @@ case "$CLI" in
     [[ -n "$m" ]] && CMD+=(--model "$m")
     [[ -n "$e" ]] && CMD+=(--effort "$e")
     CMD+=(--add-dir "$HUB_DIR")
-    for d in ${EXTRA_DIRS[@]+"${EXTRA_DIRS[@]}"}; do [[ "$d" == "$HUB_DIR" ]] || CMD+=(--add-dir "$d"); done
+    for d in ${EXTRA_DIRS[@]+"${EXTRA_DIRS[@]}"} ${READ_DIRS[@]+"${READ_DIRS[@]}"}; do [[ "$d" == "$HUB_DIR" ]] || CMD+=(--add-dir "$d"); done
     ;;
 esac
 
 if (( DRY )); then
   echo "dispatch:  $ROLE -> $CLI"
+  (( UMBRELLA )) && echo "umbrella:  repos: $DECLARED_REPOS${REPO_NAME:+ — this run: [repo:$REPO_NAME] slice}"
   echo "root:      $ROOT"
   echo "spec:      $LIVE_SPEC"
   echo "capture:   $CAP"
