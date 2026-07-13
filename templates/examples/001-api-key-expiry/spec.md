@@ -64,7 +64,7 @@ stop working 90 days after issue.
   REQ-001, REQ-003) — `bun test --filter keys.expired`.
 - [ ] **AC-003:** A request with a valid, unexpired key still authenticates —
   no regression (proves REQ-001's guard cuts nothing else) —
-  `bun test --filter keys.valid`.
+  `bun test test/keys.expiry.test.ts` (the suite's valid-key control case).
 - [ ] **AC-004:** `[DEPLOY]` The `auth.key_expired_rejects` metric is visible
   in CloudWatch within 24h of the flag flip — evidence is a screenshot
   committed to `notes/`, with owner + check-back date in STATUS.

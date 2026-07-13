@@ -28,8 +28,8 @@ updated: 2026-07-10
 
 - [ ] **T003** [hard] — Reject expired keys in auth middleware
   - *Files:* `src/middleware/auth.ts`
-  - *Acceptance:* expired key → `401 {"error":"key_expired"}` before handler dispatch; revoked-AND-expired → `key_revoked` wins (plan §4 seam ordering); valid keys unaffected; boundary `now == expires_at` counts as expired (plan R2)
-  - *Verify:* `bun test --filter keys.expired` → "3 pass"
+  - *Acceptance:* expired key → `401 {"error":"key_expired"}` before handler dispatch; revoked-AND-expired → `key_revoked` wins (plan §4 seam ordering); valid keys unaffected (the filter's valid-key control case); boundary `now == expires_at` counts as expired (plan R2)
+  - *Verify:* `bun test --filter keys.expired` → "3 pass" (expired + boundary + valid-control)
   - *Refs:* REQ-001, REQ-003, AC-002, AC-003, plan §2
 
 - [ ] **T004** [P] — Backfill script for existing keys
