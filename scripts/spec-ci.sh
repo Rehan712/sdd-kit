@@ -109,7 +109,7 @@ probe_one() {
 # aggregate — probes every PR; prints per-PR lines to stderr and the worst
 # state to stdout; empty output means no PRs recorded.
 aggregate() {
-  local worst="green" line label url state checks review merge
+  local worst="green" label url state checks review merge
   local urls; urls="$(pr_urls)"
   [[ -z "$urls" ]] && return 3
   while IFS=$'\t' read -r label url; do

@@ -148,4 +148,4 @@ if (( NO_TICK )); then
 fi
 
 evidence="$cmd_str → $keyline (see notes/evidence.md)"
-"$SPEC_TASK" done "$SPEC_DIR" "$TASK_ID" --evidence "$evidence"
+"$SPEC_TASK" "done" "$SPEC_DIR" "$TASK_ID" --evidence "$evidence"

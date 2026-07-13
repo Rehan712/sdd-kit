@@ -269,6 +269,22 @@ entries with `~` expansion. All scripts honor `NO_COLOR` / non-TTY output.)
 Deterministic checks run as scripts; model judgment is reserved for design and
 adversarial review. That split is a design principle (constitution §10).
 
+### Testing the kit itself
+
+The deterministic layer is only trustworthy if it's tested. `tests/` holds the
+kit's own suite — same zero-dependency floor as the scripts (bash 3.2 + BSD
+tools + git):
+
+```bash
+tests/run.sh              # all suites (lib, sdd-analyze, spec-task, spec-run, spec-ac-coverage)
+tests/run.sh task         # only files whose name contains "task"
+shellcheck -S warning -x scripts/*.sh tests/*.sh
+```
+
+CI runs both on Linux and macOS, plus a run with `bash` shimmed to `/bin/bash`
+3.2 so the compatibility claim is enforced, not assumed. Touching a script?
+Add the failure mode you just fixed as a test.
+
 ## What's in the box
 
 ```
@@ -294,7 +310,8 @@ sdd-kit/
 │   └── stack-overlays/       # per-stack conventions — one per expert above,
 │                             # plus monorepo + troposphere (overlay-only)
 ├── knowledge/                # Cross-project lessons — grows via /sdd:retro
-└── scripts/                  # everything in the table above
+├── scripts/                  # everything in the table above
+└── tests/                    # the kit's own test suite (tests/run.sh)
 ```
 
 ## Customizing

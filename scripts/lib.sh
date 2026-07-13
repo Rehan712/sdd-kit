@@ -114,6 +114,8 @@ _yml_list_from() {
 
 # expand_tilde <path> — expand a leading ~ or ~/ to $HOME.
 expand_tilde() {
+  # Matching a LITERAL leading ~/ is the point here (SC2088 false positive).
+  # shellcheck disable=SC2088
   case "${1:-}" in
     "~")   printf '%s\n' "$HOME" ;;
     "~/"*) printf '%s\n' "$HOME/${1#\~/}" ;;
@@ -178,6 +180,8 @@ registry_path_for() {
 # a TTY or NO_COLOR is set (https://no-color.org) — piped/CI output must not
 # be full of escape codes.
 init_colors() {
+  # The variables are consumed by the scripts that source this file.
+  # shellcheck disable=SC2034
   if [[ -n "${NO_COLOR:-}" || ! -t 1 ]]; then
     GREEN=""; RED=""; YELLOW=""; DIM=""; BOLD=""; RESET=""
   else

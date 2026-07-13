@@ -57,8 +57,8 @@ registry_match() {
   local probe="$1"
   REG_PATH=""; REG_STACKS=""
   [[ -f "$REGISTRY" ]] || return 1
-  local best_len=0 p_name p_path p_stacks
-  while IFS=$'\t' read -r p_name p_path p_stacks; do
+  local best_len=0 p_path p_stacks
+  while IFS=$'\t' read -r _ p_path p_stacks; do
     [[ -z "$p_path" ]] && continue
     p_path="$(expand_tilde "$p_path")"
     if [[ "$probe" == "$p_path" || "$probe" == "$p_path"/* ]]; then

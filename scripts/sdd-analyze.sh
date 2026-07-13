@@ -81,7 +81,6 @@ done < <(grep -o '\[EXTERNAL:[^]]*\]' "$spec" 2>/dev/null | sort -u || true)
 spec_acs=$(grep -oE 'AC-[0-9]{3}' "$spec" | sort -u)
 spec_reqs=$(grep -oE 'REQ-[0-9]{3}' "$spec" | sort -u)
 task_refs=$(grep -oE '(AC|REQ)-[0-9]{3}' "$tasks" | sort -u)
-plan_refs=$(grep -oE '(AC|REQ)-[0-9]{3}' "$plan" | sort -u)
 
 [[ -z "$spec_acs" ]] && fail "spec.md defines no AC-### ids" || pass "spec.md defines $(echo "$spec_acs" | wc -l | tr -d ' ') AC id(s)"
 [[ -z "$spec_reqs" ]] && warn "spec.md defines no REQ-### ids"
@@ -143,7 +142,7 @@ if [[ -n "$declared_repos" ]]; then
     if [[ -z "$ttag" ]]; then
       untagged="$untagged $tid"
     elif ! grep -qw "$ttag" <<< "$declared_repos"; then
-      badtag="$badtag $tid[repo:$ttag]"
+      badtag="$badtag ${tid}[repo:$ttag]"
     fi
   done <<< "$task_map"
   [[ -n "$untagged" ]] && fail "umbrella spec: task(s) missing a [repo:<name>] tag:$untagged"
@@ -231,10 +230,17 @@ check_gate() {  # <label> <subject-or-path-regex>
     else
       fail "$label gate Agent: line has no .md path: $line"
     fi
-  elif [[ -f "$agent_path" || -f "$proj_root/$agent_path" ]]; then
-    pass "$label gate present, agent file exists"
   else
-    fail "$label gate agent file not found: $agent_path"
+    # Absolute (incl. ~-expanded) paths are checked as-is; relative paths
+    # resolve against the PROJECT root — never the caller's cwd, which would
+    # make the verdict depend on where the operator happens to stand.
+    local resolved="$agent_path"
+    [[ "$agent_path" != /* ]] && resolved="$proj_root/$agent_path"
+    if [[ -f "$resolved" ]]; then
+      pass "$label gate present, agent file exists"
+    else
+      fail "$label gate agent file not found: $agent_path"
+    fi
   fi
 }
 check_gate "opponent" 'opponent'
