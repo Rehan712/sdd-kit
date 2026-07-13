@@ -67,6 +67,17 @@ test_ticked_box_without_evidence_warns() {
   assert_contains "$OUT" "warning(s), 0 errors" "warnings never block"
 }
 
+test_missing_verify_line_warns() {
+  local spec_dir; spec_dir="$(make_spec_dir)"
+  grep -v 'node --test test/validate.test.js' "$spec_dir/tasks.md" > "$spec_dir/tasks.md.tmp" \
+    && mv "$spec_dir/tasks.md.tmp" "$spec_dir/tasks.md"
+  run_rc 0 "$ANALYZE" "$spec_dir"
+  assert_contains "$OUT" "task T003 has no *Verify:* line" "warning fires"
+  assert_contains "$OUT" "warning(s), 0 errors" "warnings never block (legacy specs)"
+  assert_not_contains "$OUT" "task T009" "gate tasks are exempt"
+  assert_not_contains "$OUT" "task T011 has no *Verify:*" "Ship tasks are exempt"
+}
+
 test_task_without_acceptance_fails() {
   local spec_dir; spec_dir="$(make_spec_dir)"
   grep -v 'invalid-payload test passes' "$spec_dir/tasks.md" > "$spec_dir/tasks.md.tmp" \

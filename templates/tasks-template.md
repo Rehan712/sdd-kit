@@ -24,7 +24,24 @@ updated: YYYY-MM-DD
   evidence, one atomic edit) is for manually-verified ACs. Exemption: gate and
   Ship tasks — their evidence is the gate report in `notes/` or the PR URL, so
   no *Evidence:* line is required there.
+- *Verify:* the exact runnable command that proves the task, with the key
+  output to expect — `` *Verify:* `bun test --filter keys` → "14 passed" `` —
+  ready to paste into `spec-run.sh <spec-dir> T### --key '<key>' -- <command>`.
+  A check no command can prove uses `manual: <what to observe>` instead.
+  Required on every non-gate, non-Ship task; `sdd-analyze.sh` warns where it's
+  missing. (*Acceptance:* states the outcome; *Verify:* is the exact check —
+  a weaker implementer must never have to invent the command.)
 - Tasks that can run in parallel are marked `[P]` after the ID.
+- Tasks that need frontier reasoning are marked `[hard]` after the ID (marker
+  order: `**T###** [P] [hard] [repo:name]`). Tag at decompose time: novel
+  algorithms, tricky concurrency/ordering, cross-cutting changes are `[hard]`;
+  CRUD, wiring, and config are not. `/sdd:implement` and the orchestrator
+  dispatch `[hard]` tasks — and every failed-acceptance retry and gate
+  follow-up — on the `implement-hard` model-policy role when models.yml maps
+  it (escalate rather than repeat a failure at the tier that produced it).
+  Escalation currently takes effect on Claude Code (Agent-tool dispatch);
+  on Codex/Copilot the marker is inert metadata until the kit wires their
+  subagent mechanisms — the tag itself is CLI-agnostic, so tag regardless.
 - **Umbrella specs only** (spec.md with `repos:` frontmatter): every non-gate,
   non-Ship task also carries `[repo:<name>]` after the ID — the declared repo it
   lands in. `~/.sdd/scripts/spec-worktree.sh --repo <name> <spec-dir>` gives you
@@ -44,23 +61,27 @@ updated: YYYY-MM-DD
 - [ ] **T001** — Add dependencies and scaffolding
   - *Files:* `package.json` (or equivalent)
   - *Acceptance:* `bun install` / `pnpm install` / `cargo build` succeeds
+  - *Verify:* `bun install` → "done" (or the stack's equivalent)
 
 ## Backend (or "Domain layer")
 
 - [ ] **T002** — <name>
   - *Files:* `src/...`
   - *Acceptance:* unit test added, passes
+  - *Verify:* `bun test src/...` → "<n> pass"
   - *Refs:* REQ-001, REQ-002 (from spec)
 
 - [ ] **T003** [P] — <name>
   - *Files:* `src/...`
   - *Acceptance:* ...
+  - *Verify:* `<command>` → "<key output>"
 
 ## Frontend (if applicable)
 
 - [ ] **T004** — <name>
   - *Files:* `apps/web/...`
   - *Acceptance:* component renders; manual smoke OK at 375px and 1280px
+  - *Verify:* `manual: screenshots at 375px and 1280px match the mock`
 
 ## Tests
 
@@ -71,22 +92,26 @@ updated: YYYY-MM-DD
 - [ ] **T005** — Integration test for happy path
   - *Files:* `tests/...`
   - *Acceptance:* CI green; test names AC-001
+  - *Verify:* `bun test tests/...` → "AC-001" in a passing test title
 
 - [ ] **T006** — Integration test for error path
   - *Files:* `tests/...`
   - *Acceptance:* test names AC-002
+  - *Verify:* `bun test tests/...` → "AC-002" in a passing test title
 
 ## Observability
 
 - [ ] **T007** — Add metric / log / dashboard
   - *Files:* `infra/...`, `src/...`
   - *Acceptance:* metric visible in CloudWatch (or equivalent) on next deploy
+  - *Verify:* `<unit test asserting the emit>` → "<n> pass" (the live metric is the [DEPLOY] half)
 
 ## Docs
 
 - [ ] **T008** — Update README / API docs
   - *Files:* `README.md`, `docs/...`
   - *Acceptance:* every documented command/example in the diff actually runs (paste one); links resolve; the feature's spec ACs are reflected
+  - *Verify:* `<the documented command>` → "<its documented output>"
 
 ## Reality Check (pre-ship gate)
 

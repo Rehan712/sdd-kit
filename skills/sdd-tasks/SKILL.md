@@ -44,13 +44,18 @@ accepted, then `~/.sdd/scripts/spec-status.sh --file plan.md set <dir> status ac
 
 Walk the plan's Architecture section; each component-level change becomes 1–5
 tasks. Per task: **`T###`** (sequential, zero-padded) · **`[P]`** when
-parallel-safe · **subject** (imperative, 4–10 words) · ***Files:*** (concrete
+parallel-safe · **`[hard]`** when the task needs frontier reasoning (novel
+algorithm, tricky concurrency/ordering, cross-cutting change — not CRUD,
+wiring, or config; it routes to the `implement-hard` model-policy role at
+dispatch) · **subject** (imperative, 4–10 words) · ***Files:*** (concrete
 paths — each names a file you verified exists this session, or is explicitly
-marked new) · ***Acceptance:*** (the observable check — prefer a **runnable
-command** so `/sdd:implement` can capture it via `spec-run.sh`: "unit test added
+marked new) · ***Acceptance:*** (the observable check: "unit test added
 and passes", "integration test names & covers AC-###", "endpoint returns
-expected JSON") · ***Refs:*** (REQ-###/AC-### + plan section). Test tasks state
-that the test **names the AC id** it proves (`spec-ac-coverage.sh` checks it).
+expected JSON") · ***Verify:*** (the exact runnable command + expected key
+output, ready for `spec-run.sh` — or `manual: <what to observe>`; the
+implementer must never have to invent the check) · ***Refs:***
+(REQ-###/AC-### + plan section). Test tasks state that the test **names the
+AC id** it proves (`spec-ac-coverage.sh` checks it).
 
 Every AC-### must be covered by at least one **implementation** task's Refs —
 gate tasks enumerate every AC by design, so they don't count
@@ -86,12 +91,19 @@ From the template. Frontmatter: `tasks_for: NNN-slug`, `status: draft`,
 `created:`/`updated:` today. Tasks as `- [ ] **T###** …` so the checkbox
 tooling (`spec-task.sh`) can flip them.
 
+Calibrate against the golden example —
+`~/.sdd/templates/examples/001-api-key-expiry/tasks.md` is the bar: that
+density of *Verify:* commands, plan-section refs, and `[hard]` judgment, and
+no more prose than that.
+
 ### 6. Validate
 
 `bash ~/.sdd/scripts/sdd-analyze.sh <spec-dir>` — fix every error before
 handing off (AC coverage, ref integrity, acceptance lines, duplicate ids,
 gates resolvable, leftover placeholders, `[NEEDS CLARIFICATION]` markers —
-resolve those with the user, never delete silently).
+resolve those with the user, never delete silently). Missing *Verify:* lines
+are warnings so legacy specs stay green — but a tasks.md you just wrote must
+have zero of them.
 
 ### 7. Update STATUS.md
 

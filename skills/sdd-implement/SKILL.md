@@ -72,9 +72,10 @@ to finish from whatever the worktree already has). If the task is **blocked**
 (waiting on `[EXTERNAL: …]`, a deploy, or user input), don't dead-end: note the
 blocker in STATUS, skip to the next unblocked task, tell the user.
 
-Read: the task block (subject/files/acceptance/refs), the plan section its
-*Refs:* point to, the referenced REQ/AC text, sibling `[x]` tasks (don't redo),
-both constitutions, the project's stack overlay(s).
+Read: the task block (subject/files/acceptance/verify/refs), the plan section
+its *Refs:* point to — **pattern anchors and internal seams especially:
+transcribe them, don't re-decide them** — the referenced REQ/AC text, sibling
+`[x]` tasks (don't redo), both constitutions, the project's stack overlay(s).
 
 ### 3. Route
 
@@ -86,6 +87,14 @@ trigger list lives in `agents/security-reviewer.md`). After steps 4–5 on a tas
 matching a security trigger, run `security-reviewer`: CRITICAL/HIGH findings
 block — open `T###s<n>` follow-ups under the same stage and stop; MEDIUM/LOW
 get follow-ups or a note, no block.
+
+**Model escalation.** When dispatching via the Agent tool and
+`~/.sdd/models.yml` exists: for a task marked `[hard]`, for any re-dispatch
+after a failed acceptance, and for gate follow-ups (`T###o*`/`T###a*`), pass
+`~/.sdd/scripts/model-policy.sh get implement-hard claude model` as the
+Agent tool's `model` param when it prints an alias (opus/sonnet/haiku/fable).
+Escalate on retry — never repeat a failure at the tier that just produced it.
+Prints nothing / no policy → dispatch normally.
 
 ### 4. Implement
 
@@ -100,7 +109,11 @@ run, not a string you typed:
 
 `bash ~/.sdd/scripts/spec-run.sh <spec-dir> T### --key '<line to quote>' -- <command>`
 
-(from `$WT`). It executes the command, records stdout+exit+hash into
+(from `$WT`). The task's ***Verify:* line is the command and the `--key`** —
+run it verbatim; don't invent a different check. A `manual: …` Verify is the
+hand-tick path in step 6. Legacy tasks without a *Verify:* line: derive the
+command from *Acceptance:*, and write the derived command into the task's
+*Verify:* line while you're there. It executes the command, records stdout+exit+hash into
 `notes/evidence.md`, and **on exit 0 ticks the box with a real evidence line**
 (it calls spec-task.sh for you — so skip the tick in step 6 for these). On
 non-zero it records the failed run and leaves the box unticked: diagnose, fix,

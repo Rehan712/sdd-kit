@@ -36,10 +36,12 @@ Build an in-memory representation of every task:
 
 - `id` (e.g. `T003`)
 - `parallel` (boolean — `[P]` marker present)
+- `hard` (boolean — `[hard]` marker present; routes to the escalation model, §3)
 - `repo` (umbrella specs — the `[repo:<name>]` tag; selects the worktree from the repo table)
 - `subject`
 - `files` (paths)
 - `acceptance`
+- `verify` (the *Verify:* command + expected key output; legacy tasks may lack it)
 - `refs`
 - `stage` (Setup / Backend / API / Frontend / Tests / Observability / Docs / Reality Check / Ship — from the heading above the task)
 - `status` (`[ ]`, `[~]`, `[x]`)
@@ -78,17 +80,29 @@ the pass runs).
 
 For multi-stack single tasks (e.g., one task touches `apps/web/` *and* `services/api/`), split the work: dispatch each slice to its specialist in parallel, then merge. If you can't cleanly split it, dispatch to the stack expert whose files dominate and pass the other context in the prompt.
 
+**Model escalation.** Once per run, if `~/.sdd/models.yml` exists, read
+`~/.sdd/scripts/model-policy.sh get implement-hard claude model`. When it
+prints an alias (opus/sonnet/haiku/fable), pass it as the Agent tool's `model`
+param for: (a) any task marked `[hard]`, (b) any re-dispatch after a failed
+acceptance (§4.4), and (c) every gate follow-up batch (`T###o*`/`T###a*`,
+§5) — a defect a frontier gate found is not a task to hand back to the tier
+that produced it. Prints nothing / no policy → dispatch with no model
+override. Escalate on retry, always: repeating a failure at the same tier
+wastes the round.
+
 ### 4. Execute the plan
 
 For each batch in the DAG:
 
 1. **Announce** to stdout: `Batch N: T003 [P], T004 [P] → javascript-expert, aws-expert`.
-2. **Dispatch** each task in the batch via the Agent tool, in parallel if multiple. Each agent invocation gets a self-contained prompt containing:
+2. **Dispatch** each task in the batch via the Agent tool, in parallel if multiple. Each agent invocation gets a self-contained **task brief** — the dispatched agent starts blind and may run on a cheaper tier than you; under-briefing is the failure mode here, not over-briefing:
    - the **worktree path `$WT` as the working root**, with the instruction to verify `git -C "$WT" rev-parse --abbrev-ref HEAD` prints `spec/NNN-slug` **before the first edit** (wrong output → stop and report, don't edit);
-   - the task entry quoted verbatim, the relevant spec/plan/constitution slices;
-   - the return contract: "make the smallest change; return the files changed, the acceptance command, and its output **pasted verbatim** — a reply without pasted output is a failed task."
+   - the task entry quoted verbatim, **including its *Verify:* command**;
+   - the plan sections its *Refs:* point to — **pattern anchors and pre-decided internal seams quoted verbatim, never summarized** (a paraphrased signature is a re-negotiated signature);
+   - the referenced REQ/AC text, the stack overlay path, and any constitution rule that bites this specific task;
+   - the return contract: "make the smallest change; transcribe the plan's seams, don't redesign them; return the files changed, the *Verify:* command, and its output **pasted verbatim** — a reply without pasted output is a failed task."
 3. **Wait** for the batch to complete.
-4. **Verify acceptance** for each task — the agent must have pasted the command + output; you confirm it matches the task's *Acceptance:*. Paraphrased success ("tests pass") or missing output = failed task: re-dispatch once with the gap named, then jump to §5 if it still can't show evidence.
+4. **Verify acceptance** for each task — the agent must have pasted the command + output; you confirm it matches the task's *Acceptance:*/*Verify:*. Paraphrased success ("tests pass") or missing output = failed task: re-dispatch once with the gap named, **at the escalation model (§3)**, then jump to §5 if it still can't show evidence.
 5. **Run cross-cutting passes** if applicable (security-reviewer on any task matching its trigger list).
 6. **Tick** `tasks.md` for the passing tasks (`[ ]` → `[x]`) and append each task's `*Evidence:*` line (the acceptance command + key output the agent returned + date). Tick and evidence are one atomic edit. Update `updated:` in frontmatter, and refresh `STATUS.md` (**Where things stand** / **Next action**, gate verdicts as they land).
 7. **Commit the passing task** on the spec branch: `git -C "$WT" add -A && git commit` with the conventional message (`<type>(<scope>): <subject>` + `Implements T### of spec NNN-slug` + `Refs:`). One task, one commit — this is what makes the opponent's per-commit diff review and any rollback cheap. Never push.
@@ -103,7 +117,8 @@ Both gates return their report as their final message; **you persist it** to
 On **CHALLENGED** (opponent) or **NEEDS WORK** (reality-check), you have
 authority for exactly **one** fix round per gate, because the user asked for
 the whole spec: open the follow-up tasks (`T###o1…` / `T###a1…`), dispatch them
-to the matching stack experts like any other batch, then re-invoke the gate.
+to the matching stack experts like any other batch — **at the escalation
+model (§3)** — then re-invoke the gate.
 If the SECOND round still fails, stop and hand back — from there the loop is
 the user's (see the opponent's Escalation section). Never soften or
 reinterpret a verdict to keep going.
@@ -148,7 +163,7 @@ The user (or `/sdd:implement`) decides what to do next. Per-task commits on the 
 - **Never expand scope.** If you notice a sibling change is needed, open a new task; don't bundle it into someone else's task.
 - **Never silently parallelize file-colliding tasks.** When two `[P]` tasks touch the same file, downgrade to serial and note it.
 - **Stop on the first failure.** Don't accumulate broken state across batches.
-- **Be terse in dispatch prompts.** Stack experts already know their craft; you pass them the task, the relevant spec slice, and the acceptance check. No coaching.
+- **Brief for the tier below you.** Dispatch prompts are complete, not terse: the task verbatim, the plan's anchors and seams quoted, the *Verify:* command. Don't re-teach the craft — the persona has it — but hand over every decision the plan already made; a dispatched agent that has to re-derive or guess one is a briefing failure, and on a cheaper tier it will guess wrong.
 
 ## Output style
 

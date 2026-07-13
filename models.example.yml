@@ -27,7 +27,10 @@
 #   skills:  specify, plan, tasks, implement, review, retro, onboard, go
 #   agents:  orchestrator, opponent, reality-check, security-reviewer,
 #            test-engineer, stack-expert (covers every agents/*-expert.md)
-#   runtime: explore (the Explore subagents /sdd:plan and /sdd:onboard fan out)
+#   runtime: explore (the Explore subagents /sdd:plan and /sdd:onboard fan out);
+#            implement-hard (looked up at dispatch by /sdd:implement and the
+#            orchestrator for [hard]-tagged tasks, failed-acceptance retries,
+#            and gate follow-ups — escalation, never stamped into a file)
 #
 # HOW IT'S APPLIED
 #   scripts/apply-models.sh stamps model/effort into generated copies of the
@@ -53,11 +56,12 @@ tiers:
     copilot_model: claude-sonnet-4.5
     copilot_effort: high
 
-  # Add your own tiers, e.g. a cheap recon tier for codebase exploration,
-  # then point the `explore` role at it:
-  # recon:
-  #   claude_model: haiku
-  #   claude_effort: medium
+  # recon — cheap fan-out exploration; safe to run low because every claim is
+  # re-verified downstream (/sdd:plan re-reads explorer findings first-hand
+  # before anything enters the design, by grounding rule).
+  recon:
+    claude_model: haiku
+    claude_effort: medium
 
 roles:
   specify: reasoning
@@ -65,14 +69,20 @@ roles:
   tasks: reasoning
   retro: reasoning
   implement: implementation
+  implement-hard: reasoning    # [hard] tasks, failed-acceptance retries, gate
+                               # follow-ups — escalate instead of repeating a
+                               # failure at the tier that produced it
   orchestrator: reasoning
   opponent: reasoning
   reality-check: reasoning
   security-reviewer: reasoning
-  test-engineer: implementation
+  test-engineer: reasoning     # tests are specification artifacts — they bind
+                               # AC ids, and every gate trusts that binding; a
+                               # green-but-tautological suite is the one hole
+                               # the gates can't fully cover, so keep it strong
   stack-expert: implementation
-  explore: implementation      # point at a recon tier if you add one
-  onboard: implementation      # /sdd:onboard repo research (like explore)
+  explore: recon               # /sdd:plan fan-out; claims re-verified downstream
+  onboard: implementation      # briefs are durable planning inputs — keep mid-tier
   review: implementation       # /sdd:review — PR babysitting + CI triage
   go: reasoning                # /sdd:go autopilot conductor (chained phases keep their own tiers)
 

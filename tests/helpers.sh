@@ -124,17 +124,20 @@ updated: 2026-01-01
 - [ ] **T001** — Add scaffolding
   - *Files:* `src/`
   - *Acceptance:* build succeeds
+  - *Verify:* `npm run build` → "built"
 
 ## Backend
 
 - [ ] **T002** — Implement the thing endpoint
   - *Files:* `src/thing.js`
   - *Acceptance:* unit test passes
+  - *Verify:* `node --test test/thing.test.js` → "pass 1"
   - *Refs:* REQ-001, AC-001
 
 - [ ] **T003** — Validate payloads
   - *Files:* `src/validate.js`
   - *Acceptance:* invalid-payload test passes
+  - *Verify:* `node --test test/validate.test.js` → "pass 2"
   - *Refs:* AC-002
 
 ## Reality Check (pre-ship gate)

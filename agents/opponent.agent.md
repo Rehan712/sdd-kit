@@ -78,6 +78,12 @@ invoker must never have to reconstruct a verdict from prose).
    - **Where:** `path/to/file.ts:NN`.
    - **Wrong behavior:** what happens vs. what the AC/REQ required.
    - **Smallest fix:** the minimal change that closes it.
+   - **Root cause:** plan-gap | spec-gap | implementation-error.
+     `plan-gap` = the plan omitted or mis-decided this and the code followed it
+     faithfully; `spec-gap` = the spec itself is wrong or ambiguous here;
+     `implementation-error` = the plan was right and the code diverged from it.
+     The retro tunes the pipeline on this field — a wrong classification sends
+     the fix to the wrong phase.
    - **Blocks:** AC-### / REQ-###.
 2. ...
 

@@ -31,8 +31,10 @@ most recently modified spec dir in the resolved project. The spec should be `shi
 From the spec dir (worktree copy if STATUS names one, else the main checkout):
 
 - `STATUS.md` — decisions log, gate verdict history, handoff notes.
-- `notes/opponent.md` — every round: what was CHALLENGED, what held up.
-- `notes/reality-check.md` — what lacked evidence, what was demanded.
+- `notes/opponent.md` — every round: what was CHALLENGED, what held up, and
+  each finding's *Root cause:* (plan-gap / spec-gap / implementation-error).
+- `notes/reality-check.md` — what lacked evidence, what was demanded, and each
+  gap's *Root cause:* field.
 - `notes/history.md` — rotated session detail, if present.
 - `tasks.md` — count the follow-up tasks (`T###<class><n>`: `o` opponent, `a`
   reality-check, `s` security, `c` CI, `r` review feedback).
@@ -68,6 +70,18 @@ every public route, or dead routes get misclassified" is a lesson.
 Also capture **process lessons**: a stage that produced many follow-ups, an estimate
 that blew up (task count at tasks-time vs. final), a gate that had to run 3+ rounds —
 and what upstream change (spec question, plan section, task granularity) would fix it.
+
+**Total the gate findings' *Root cause:* fields** — the retro template has a
+Root-cause split line; it is the pipeline's tuning signal:
+
+- **plan-gap dominant** → the planner under-specified: file what plans must
+  pre-decide (a missing anchor class, a seam left implicit, an edge case the
+  template section should force) into the overlay or `knowledge/`.
+- **implementation-error dominant** → plans were right, execution struggled:
+  propose tagging more of this task class `[hard]` at decompose time, or a
+  bump to the `implement`/`implement-hard` roles in models.yml.
+- **spec-gap dominant** → the specify interview missed a question class; file
+  it into `knowledge/` so `/sdd:specify` asks it next time.
 
 ### 4. Write `notes/retro.md`
 
