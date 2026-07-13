@@ -39,6 +39,9 @@ updated: YYYY-MM-DD
   dispatch `[hard]` tasks — and every failed-acceptance retry and gate
   follow-up — on the `implement-hard` model-policy role when models.yml maps
   it (escalate rather than repeat a failure at the tier that produced it).
+  Escalation currently takes effect on Claude Code (Agent-tool dispatch);
+  on Codex/Copilot the marker is inert metadata until the kit wires their
+  subagent mechanisms — the tag itself is CLI-agnostic, so tag regardless.
 - **Umbrella specs only** (spec.md with `repos:` frontmatter): every non-gate,
   non-Ship task also carries `[repo:<name>]` after the ID — the declared repo it
   lands in. `~/.sdd/scripts/spec-worktree.sh --repo <name> <spec-dir>` gives you
