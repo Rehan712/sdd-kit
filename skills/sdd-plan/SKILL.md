@@ -78,9 +78,13 @@ misread inherited into plan.md poisons every downstream phase.
 Fill `plan.md` from the template — every section, or an explicit "n/a":
 
 1. **Approach** — one paragraph, referencing REQ-###.
-2. **Architecture** — components, file paths, what changes where.
+2. **Architecture** — components, file paths, what changes where, and a
+   **pattern anchor** per component: the existing file the implementer should
+   mimic (every NEW file names one, or says explicitly "no precedent").
 3. **Data model** — schemas, migrations.
-4. **API / contracts** — new/changed endpoints, event payloads.
+4. **API / contracts** — new/changed endpoints, event payloads, **and the
+   internal seams**: pre-decided signatures/types/constants at every task
+   boundary, so two implementer sessions never negotiate a function shape.
 5. **Dependencies** — packages, AWS resources, IAM.
 6. **Stack overlay notes** — per-tag callouts from overlays + experts.
 7. **Risks** — ranked likelihood × impact, each with a mitigation.
@@ -89,6 +93,14 @@ Fill `plan.md` from the template — every section, or an explicit "n/a":
 10. **References** — ADRs, code paths, links.
 
 Name the files, the IAM actions, the metric names. Vague plans produce vague code.
+
+**Write for the implementation tier.** The tasks this plan spawns may be
+executed by a cheaper model than you (models.yml `implement:` role). Pre-make
+every decision a mid-tier implementer would fumble — names, signatures, edge
+cases, the anchor file to copy — and spend no words on what any model already
+knows. Calibrate against the golden example:
+`~/.sdd/templates/examples/001-api-key-expiry/plan.md` is the bar for anchor
+and seam specificity.
 
 ### 6. Reconcile with the spec
 

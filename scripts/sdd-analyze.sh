@@ -9,6 +9,8 @@
 #   - every REQ-### is referenced by plan.md or tasks.md (warning)
 #   - every AC/REQ id referenced in tasks.md actually exists in spec.md
 #   - every task has an *Acceptance:* line; non-gate tasks have *Refs:*
+#   - every non-gate, non-Ship task has a *Verify:* line — the exact runnable
+#     command (or `manual: <what to observe>`) that proves it (warning)
 #   - every [x] non-gate, non-Ship task has an *Evidence:* line (warning)
 #   - no duplicate task ids
 #   - both pre-ship gates present; their Agent: files exist on disk
@@ -174,6 +176,9 @@ awk -v RED="$RED" -v YELLOW="$YELLOW" -v RESET="$RESET" '
     if (!has_refs && stage != "Setup" && stage != "Ship" && stage !~ /Reality/) {
       printf "  %s!%s task %s has no *Refs:* line (stage: %s)\n", YELLOW, RESET, id, stage; warns++
     }
+    if (!has_ver && !is_gate && !oos && stage != "Ship") {
+      printf "  %s!%s task %s has no *Verify:* line (exact command, or manual: <what to observe>)\n", YELLOW, RESET, id; warns++
+    }
     if (is_done && !has_ev && !is_gate && stage != "Ship") {
       printf "  %s!%s task %s is [x] but has no *Evidence:* line — a ticked box without evidence is an unproven claim\n", YELLOW, RESET, id; warns++
     }
@@ -184,7 +189,7 @@ awk -v RED="$RED" -v YELLOW="$YELLOW" -v RESET="$RESET" '
     flush()
     match($0, /T[0-9]{3}[a-z0-9]*/); id = substr($0, RSTART, RLENGTH)
     subj = $0
-    has_acc=0; has_refs=0; has_ev=0; is_gate=0
+    has_acc=0; has_refs=0; has_ev=0; has_ver=0; is_gate=0
     is_done = ($0 ~ /^- \[[xX]\]/) ? 1 : 0
     oos = ($0 ~ /OUT OF .*SCOPE/) ? 1 : 0
     if (seen[id]++) { printf "  %s✗%s duplicate task id %s\n", RED, RESET, id; errs++ }
@@ -192,6 +197,7 @@ awk -v RED="$RED" -v YELLOW="$YELLOW" -v RESET="$RESET" '
   }
   /\*Acceptance[^*]*:\*/ || /\*Done:\*/ { has_acc=1 }
   /\*Refs:\*/ { has_refs=1 }
+  /\*Verify:\*/ { has_ver=1 }
   /\*Evidence[^*]*:\*/ { has_ev=1 }
   /\*Agent:\*/ { is_gate=1; if (id != "") printf "AGENTLINE\t%s\t%s\t%s\n", id, subj, $0 }
   END {

@@ -9,6 +9,12 @@ stacks: [<from project stack.yml>]
 # Plan: <Spec Title>
 
 > The implementation strategy for `spec.md`. Answers **how**, not what.
+>
+> **Write for the implementation tier.** This plan may be executed by a smaller,
+> cheaper model than the one writing it. Spend words exactly where a mid-tier
+> implementer would go wrong — the gotcha, the edge case, the pattern anchor,
+> the pre-decided signature — and nowhere else. Vague plans produce vague code;
+> bloated plans get skimmed.
 
 ## 1. Approach
 
@@ -21,6 +27,12 @@ A diagram (ASCII or mermaid) or a tight bullet list of components. For each touc
 - The file path or module
 - What's changing (new / modified / deleted)
 - Why
+- **Pattern anchor** — the existing file to mimic (e.g. "like
+  `src/handlers/refund.ts`: same validation → call → metric → response shape").
+  Every NEW file names one; a file with no precedent says so explicitly
+  ("no precedent — conventions defined here") so the implementer knows it is
+  setting a pattern, not missing one. Anchors turn design work into
+  transcription work — they are the highest-leverage line in this plan.
 
 ## 3. Data model
 
@@ -40,6 +52,20 @@ External contracts that change:
 - Client/SDK changes
 
 If the contract is stable, say so explicitly: "No public API changes."
+
+### Internal seams (pre-decided)
+
+The signatures at task boundaries — decided **here**, not negotiated during
+implementation. When two tasks meet at a function, type, or module (one task
+implements it, another calls or tests it), write the seam down:
+
+- Function signatures: name, parameters, return type
+- Type/schema names and their fields
+- Module boundaries: which file exports what, shared constants by name
+
+Different implementer sessions must transcribe these, never re-derive them —
+the seam is where independently-implemented tasks drift apart. If a seam turns
+out wrong mid-implement, fix it here first (spec > plan > tasks), then continue.
 
 ## 5. Dependencies
 

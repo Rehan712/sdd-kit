@@ -362,7 +362,7 @@ case "$CMD" in
       esac
     done < <(flatten | awk -F'\t' '$1=="tier"')
 
-    for known in specify plan tasks implement review retro onboard go orchestrator opponent reality-check security-reviewer test-engineer stack-expert explore; do
+    for known in specify plan tasks implement implement-hard review retro onboard go orchestrator opponent reality-check security-reviewer test-engineer stack-expert explore; do
       grep -qx "$known" <<<"$roles" || warn "role '$known' not mapped — that phase/agent keeps the session default"
     done
 

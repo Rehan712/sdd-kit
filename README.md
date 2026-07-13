@@ -116,12 +116,16 @@ mid-tier model that's faster and cheaper. The mapping is the **model policy**:
   **tiers** (a model + reasoning effort per CLI) and maps **roles** to tiers.
   Shipped defaults: `reasoning` = Claude `opus (xhigh)` / Codex `gpt-5.5 (xhigh)`
   / Copilot `claude-opus-4.8`; `implementation` = `sonnet (high)` / `gpt-5.4 (high)`
-  / `claude-sonnet-4.5`. Roles: `specify` `plan` `tasks` `retro` `orchestrator`
-  `opponent` `reality-check` `security-reviewer` → reasoning; `implement`
-  `stack-expert` `test-engineer` `explore` → implementation. All of it is
-  editable — add tiers (e.g. a cheap `recon` tier for exploration), remap roles,
-  or delete `models.yml` to run everything on the session model. (`review` —
-  the PR-babysitting phase — maps to `implementation` by default.)
+  / `claude-sonnet-4.5`; `recon` = `haiku (medium)` for cheap fan-out
+  exploration. Roles: `specify` `plan` `tasks` `retro` `orchestrator`
+  `opponent` `reality-check` `security-reviewer` `test-engineer`
+  `implement-hard` → reasoning (test-engineer because tests are the AC binding
+  every gate trusts; `implement-hard` is the escalation role — `[hard]`-tagged
+  tasks, failed-acceptance retries, and gate follow-ups dispatch on it instead
+  of repeating a failure at the tier that produced it); `implement`
+  `stack-expert` `onboard` `review` → implementation; `explore` → recon. All
+  of it is editable — add tiers, remap roles, or delete `models.yml` to run
+  everything on the session model.
 - **`scripts/configure-models.sh`** is the wizard (runs on first `setup.sh`;
   re-run anytime). `scripts/model-policy.sh show` prints the current mapping;
   `check` validates it.
@@ -307,8 +311,11 @@ sdd-kit/
 │                             # rust-aws-lambda, firebase-rtk-codegen)
 ├── templates/                # spec/plan/tasks/STATUS/ADR/brief/retro templates,
 │                             # stack-routing.md (THE routing table), umbrella-guide.md
-│   └── stack-overlays/       # per-stack conventions — one per expert above,
-│                             # plus monorepo + troposphere (overlay-only)
+│   ├── stack-overlays/       # per-stack conventions — one per expert above,
+│   │                         # plus monorepo + troposphere (overlay-only)
+│   └── examples/             # the golden example (001-api-key-expiry): a complete
+│                             # spec→plan→tasks set the phase skills calibrate
+│                             # against — CI keeps it passing sdd-analyze
 ├── knowledge/                # Cross-project lessons — grows via /sdd:retro
 ├── scripts/                  # everything in the table above
 └── tests/                    # the kit's own test suite (tests/run.sh)

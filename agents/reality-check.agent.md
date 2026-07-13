@@ -131,7 +131,7 @@ Output a markdown report with this exact shape (the implementer writes it to `<s
 
 ## Gaps (if NEEDS WORK)
 
-1. **<short title>** — what's missing, which AC it blocks, the smallest change that would close it. Reference file paths.
+1. **<short title>** — what's missing, which AC it blocks, the smallest change that would close it. Reference file paths. End with *Root cause:* plan-gap | spec-gap | implementation-error (plan-gap = the plan never demanded this evidence; spec-gap = the AC itself is untestable as written; implementation-error = plan and AC were right, the work or its evidence is missing) — the retro tunes the upstream phases on this field.
 2. ...
 
 ## Re-run conditions

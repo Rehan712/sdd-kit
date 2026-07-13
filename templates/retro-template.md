@@ -7,8 +7,11 @@
 
 ## What the gates caught (defect classes)
 
-| # | Defect | Class | Caught by | Prevention |
-|---|--------|-------|-----------|------------|
+| # | Defect | Class | Root cause | Caught by | Prevention |
+|---|--------|-------|------------|-----------|------------|
+
+**Root-cause split:** plan-gap <n> · spec-gap <n> · implementation-error <n> — <one line: which upstream phase to tune, per the split>
+
 
 ## Lessons filed
 
