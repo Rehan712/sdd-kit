@@ -70,7 +70,7 @@ if (( MULTI )); then
       [[ "$role" == "external" ]] && { echo "repo '$r' has role 'external' — other teams' repos never receive tasks; record the dependency in the spec as [EXTERNAL: …] instead" >&2; exit 1; }
     else
       # No map yet: fall back to registry names.
-      grep -qE "^[[:space:]]*-[[:space:]]*name:[[:space:]]*$r[[:space:]]*$" "$HUB_DIR/registry.yml" 2>/dev/null \
+      grep -qE "^[[:space:]]*-[[:space:]]*name:[[:space:]]*${r}[[:space:]]*$" "$HUB_DIR/registry.yml" 2>/dev/null \
         || { echo "repo '$r' not in registry.yml (and no system-map.yml exists)" >&2; exit 1; }
     fi
   done

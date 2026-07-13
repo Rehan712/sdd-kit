@@ -107,7 +107,11 @@ check_model_policy() {
   fi
   if [[ -d "$HOME/.codex" ]]; then
     if ls "$HOME"/.codex/sdd-*.config.toml >/dev/null 2>&1; then
-      pass "codex sdd-* profiles present ($(ls "$HOME"/.codex/sdd-*.config.toml | xargs -n1 basename | sed 's/\.config\.toml//' | paste -sd', ' -))"
+      local profiles="" pf
+      for pf in "$HOME"/.codex/sdd-*.config.toml; do
+        profiles="$profiles${profiles:+, }$(basename "$pf" .config.toml)"
+      done
+      pass "codex sdd-* profiles present ($profiles)"
     else
       warn "no codex sdd-* profiles — run scripts/build-adapters.sh"
     fi
@@ -180,7 +184,10 @@ check_tool_adapters() {
     echo
     return
   fi
+  # Literal display text, not paths (SC2088 false positive).
+  # shellcheck disable=SC2088
   (( have_codex ))   || info "~/.codex absent — skipping codex adapter checks"
+  # shellcheck disable=SC2088
   (( have_copilot )) || info "~/.copilot absent — skipping copilot adapter checks"
 
   # adapter_file <tool> <phase> — echoes that tool's adapter path, or nothing

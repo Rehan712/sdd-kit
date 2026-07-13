@@ -100,8 +100,9 @@ ensure_item_link() {
     else
       # Park displaced copies OUTSIDE skills/ and agents/ — a backup left in
       # skills/ gets discovered by Claude Code as a duplicate skill.
-      local bakdir="$(dirname "$(dirname "$link")")/.sdd-displaced"
-      local bak="$bakdir/$(basename "$link").$(date +%Y%m%d%H%M%S)"
+      local bakdir bak
+      bakdir="$(dirname "$(dirname "$link")")/.sdd-displaced"
+      bak="$bakdir/$(basename "$link").$(date +%Y%m%d%H%M%S)"
       mkdir -p "$bakdir"
       mv "$link" "$bak"
       ln -s "$target" "$link"

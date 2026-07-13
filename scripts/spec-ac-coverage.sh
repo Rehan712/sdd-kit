@@ -80,11 +80,14 @@ fi
 (( ${#ROOTS[@]} )) || { echo "${RED}✗${RESET} no search root resolvable — pass --root <dir>" >&2; exit 1; }
 
 # --- enumerate test files under the roots -----------------------------------
-# Prune vendor/build/.specify; keep files whose path smells like a test.
+# Prune vendor/build/.specify; keep files whose REPO-RELATIVE path smells like
+# a test. Matching relative to the root matters: a checkout that merely LIVES
+# under e.g. ~/testing/ or ~/projects/spectrum/ must not turn every file into
+# a "test file" and make this gate vacuously green.
 list_test_files() {
   local root="$1" g
   local find_args=(
-    "$root"
+    .
     \( -name .git -o -name node_modules -o -name target -o -name dist -o -name build \
        -o -name .next -o -name .venv -o -name venv -o -name vendor -o -name coverage \
        -o -name .specify \) -prune -o
@@ -95,7 +98,7 @@ list_test_files() {
     find_args+=( -o -ipath "*$g*" -o -name "$g" )
   done
   find_args+=( \) -print )
-  find "${find_args[@]}" 2>/dev/null
+  ( cd "$root" && find "${find_args[@]}" 2>/dev/null ) | sed "s|^\./|$root/|"
 }
 
 TESTS_TMP="$(mktemp "${TMPDIR:-/tmp}/ac-cov.XXXXXX")" || exit 1
@@ -117,7 +120,8 @@ for ac in $spec_acs; do
     hits=""
   else
     # AC-001 must not match AC-0012 etc. AC ids are 3 digits so this is belt-and-braces.
-    hits="$(grep -lE "${ac}([^0-9]|$)" $(cat "$TESTS_TMP") 2>/dev/null || true)"
+    # xargs -0 so test paths with spaces survive (find output is newline-delimited).
+    hits="$(tr '\n' '\0' < "$TESTS_TMP" | xargs -0 grep -lE "${ac}([^0-9]|$)" 2>/dev/null || true)"
   fi
   if [[ -n "$hits" ]]; then
     n="$(printf '%s\n' "$hits" | grep -c .)"
