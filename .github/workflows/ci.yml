@@ -12,7 +12,7 @@ jobs:
   shellcheck:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: shellcheck (warning severity blocks)
         run: shellcheck -S warning -x scripts/*.sh tests/*.sh
 
@@ -23,7 +23,7 @@ jobs:
         os: [ubuntu-latest, macos-latest]
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: run the test suite
         run: tests/run.sh
 
@@ -33,7 +33,7 @@ jobs:
     # the kit's compatibility claim instead of assuming it.
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: run the test suite under bash 3.2
         run: |
           mkdir -p "$RUNNER_TEMP/b32shim"
