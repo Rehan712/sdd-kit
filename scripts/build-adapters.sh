@@ -48,8 +48,11 @@ CODEX_PREAMBLE='> **Codex adaptation.** Wherever this skill says to delegate to 
 >   pass — fresh read of the diff, that persona'\''s checklist, report format, and default
 >   adversarial verdict — and over-correct toward suspicion. Never skip a gate.
 > - **Escalation** — a task marked `[hard]`, any failed-acceptance retry, and every gate
->   follow-up (`T###o*`/`T###a*`) is delegated to the `sdd-implement-hard` subagent
->   (reasoning-tier model). Not installed → do it yourself and say so in the task notes.
+>   follow-up (`T###o*`/`T###a*`) is delegated to the `sdd-implement-hard` subagent:
+>   fresh context + the escalation brief. (Its TOML pins the reasoning-tier model, which
+>   applies where the installed Codex honors per-agent model fields; otherwise the model
+>   lever is running the session as `codex --profile sdd-reasoning`.) Not installed →
+>   do it yourself and say so in the task notes.
 > - **Stack experts** — read the named agent file under `~/.sdd/agents/` and the matching
 >   overlay under `~/.sdd/templates/stack-overlays/`, and apply them as your senior-reviewer
 >   lens while you do the work yourself.

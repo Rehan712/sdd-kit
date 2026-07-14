@@ -51,11 +51,12 @@ updated: 2026-07-14
 
 ## Empirical verification (before any doc claims)
 
-- [ ] **T006** — Prove installed codex accepts and spawns the TOMLs
+- [x] **T006** — Prove installed codex accepts and spawns the TOMLs
   - *Files:* `notes/codex-subagents.md` (new, in this spec dir)
   - *Acceptance:* kit subagent TOMLs generated into a scratch `CODEX_HOME`-equivalent or the real `~/.codex/agents/` (restore after), then a headless `codex exec` run demonstrates: no config parse error, and the CLI can enumerate or spawn a kit subagent; full command + transcript captured; if the documented TOML shape is wrong, fix T002's generator against observed behavior and note the delta (plan R1)
   - *Verify:* `codex exec --sandbox read-only "Which custom agents are available to you? Reply with their names only."` → "sdd-opponent" (adapt flags as the experiment demands; spec-run captures what actually ran)
   - *Refs:* REQ-002, AC-007, plan §7 R1 R2
+  - *Evidence:* `codex exec --sandbox read-only Spawn the sdd-opponent agent and have it reply with exactly the word READY, then report what it said. → The sdd-opponent agent said: READY (see notes/evidence.md)` (2026-07-14)
 
 - [ ] **T007** — Prototype Copilot agent-tool handoff and record the finding
   - *Files:* `knowledge/cli-subagent-delegation.md` (new)

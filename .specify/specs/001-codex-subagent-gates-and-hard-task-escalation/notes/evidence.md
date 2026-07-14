@@ -64,3 +64,36 @@ Captured acceptance runs, appended by `spec-run.sh`. One block per run.
   ok   test_junk_codex_effort_rejected
   -- 3/3 passed
 ```
+
+## T006 — 2026-07-14T11:52:53
+
+- **Command:** `codex exec --sandbox read-only Spawn the sdd-opponent agent and have it reply with exactly the word READY, then report what it said.`
+- **Cwd:** /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/9a8b00e2-e365-4923-8678-5b5adc87e90a/scratchpad/codex-probe/proj
+- **Exit:** 0
+- **Captured:** 2026-07-14T11:52:53 · sha256:287fa029fdc0 (over full output)
+
+```text
+Reading additional input from stdin...
+OpenAI Codex v0.144.4
+--------
+workdir: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/9a8b00e2-e365-4923-8678-5b5adc87e90a/scratchpad/codex-probe/proj
+model: gpt-5.6-terra
+provider: openai
+approval: on-request
+sandbox: read-only
+reasoning effort: medium
+reasoning summaries: none
+session id: 019f600b-2fa7-7ea0-9713-0a3ab0f20ce2
+--------
+user
+Spawn the sdd-opponent agent and have it reply with exactly the word READY, then report what it said.
+warning: Skill descriptions were shortened to fit the 2% skills context budget. Codex can still see every skill, but some descriptions are shorter. Disable unused skills or plugins to leave more room for the rest.
+codex
+I’ll delegate this exact handshake to an `sdd-opponent` agent.
+collab: Wait
+codex
+The sdd-opponent agent said: READY
+tokens used
+23 724
+The sdd-opponent agent said: READY
+```
