@@ -109,9 +109,10 @@ test_codex_adapters_delegate_copilot_adapters_persona_pass() {
   assert_contains "$OUT" "sdd-opponent" "AC-004: codex gates delegated"
   assert_contains "$OUT" "sdd-implement-hard" "AC-004: codex escalation delegated"
   assert_contains "$OUT" "fall back" "AC-004: persona-pass fallback stated"
-  assert_not_contains "$OUT" "You are running on a CLI without subagents" "AC-004: stale claim gone from codex"
+  assert_not_contains "$OUT" "Single-agent adaptation" "AC-004: stale claim gone from codex"
   OUT="$(cat "$SANDBOX/home/.copilot/agents/sdd-implement.agent.md")"
-  assert_contains "$OUT" "You are running on a CLI without subagents" "AC-004: copilot keeps persona-pass"
+  assert_contains "$OUT" "Single-agent adaptation" "AC-004: copilot keeps persona-pass"
+  assert_contains "$OUT" "does not yet wire delegation" "AC-004: copilot preamble is honest about why"
   assert_not_contains "$OUT" "sdd-implement-hard" "AC-004: copilot promises no delegation"
 }
 

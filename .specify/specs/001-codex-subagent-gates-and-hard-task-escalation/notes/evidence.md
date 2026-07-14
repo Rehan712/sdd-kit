@@ -132,3 +132,14 @@ agents/reality-check.agent.md
 agents/opponent.agent.md
 agents/reality-check.agent.md
 ```
+
+## T009 — 2026-07-14T12:01:51
+
+- **Command:** `sh -c grep -q "sdd-opponent\|~/.codex/agents" README.md && grep -q "sdd-\*.toml" constitution.md && echo "README + constitution both name the codex subagents"`
+- **Cwd:** /Users/babar/projects/sdd-kit-public.worktrees/001-codex-subagent-gates-and-hard-task-escalation
+- **Exit:** 0
+- **Captured:** 2026-07-14T12:01:51 · sha256:1a54d9366983 (over full output)
+
+```text
+README + constitution both name the codex subagents
+```

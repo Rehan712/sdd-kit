@@ -59,9 +59,11 @@ CODEX_PREAMBLE='> **Codex adaptation.** Wherever this skill says to delegate to 
 > - **Orchestrated mode (--all)** — run the task loop yourself, one task at a time, in
 >   dependency order, delegating per the rules above.'
 
-COPILOT_PREAMBLE='> **Single-agent adaptation.** You are running on a CLI without subagents. Wherever
-> this skill says to delegate to an agent (a stack expert, the sdd-orchestrator, the
-> opponent or reality-check gate), do this instead:
+COPILOT_PREAMBLE='> **Single-agent adaptation.** The SDD kit does not yet wire delegation on this CLI
+> (Copilot'\''s custom-agent handoff is proven — see `~/.sdd/knowledge/cli-subagent-delegation.md`
+> — wiring it is a planned follow-up). Until then, wherever this skill says to delegate
+> to an agent (a stack expert, the sdd-orchestrator, the opponent or reality-check gate),
+> do this instead:
 > - **Stack experts** — read the named agent file under `~/.sdd/agents/` and the matching
 >   overlay under `~/.sdd/templates/stack-overlays/`, and apply them as your senior-reviewer
 >   lens while you do the work yourself.

@@ -75,11 +75,12 @@ updated: 2026-07-14
   - *Evidence:* `sh -c ! grep -q "without subagents" agents/opponent.agent.md agents/reality-check.agent.md && grep -l "sdd-opponent" agents/opponent.agent.md && grep -l "sdd-reality-check" agents/reality-check.agent.md → agents/reality-check.agent.md (see notes/evidence.md)` (2026-07-14)
   - Depends on: T006, T007
 
-- [ ] **T009** [P] — Correct constitution §10.5 and README per-CLI section
-  - *Files:* `constitution.md`, `README.md`
+- [x] **T009** [P] — Correct constitution §10.5 and README per-CLI section
+  - *Files:* `constitution.md`, `README.md`, `scripts/build-adapters.sh` (COPILOT_PREAMBLE's "CLI without subagents" claim is false post-T007 — reworded, persona-pass behavior unchanged), `tests/test-build-adapters.sh` (AC-004 assertions track the new phrasing)
   - *Acceptance:* §10.5's "on single-agent CLIs they run as distinct review passes" reworded to subagent-when-available + persona-pass fallback; README gates blurb (~line 95) and the Codex bullet in "How it's applied per CLI" describe profiles (phase tier) + generated `~/.codex/agents/sdd-*.toml` (gates/escalation); Copilot wording matches T007's finding
   - *Verify:* `sh -c 'grep -c "sdd-opponent\|~/.codex/agents" README.md constitution.md'` → count ≥1 per file
   - *Refs:* REQ-004, AC-006, plan §2
+  - *Evidence:* `sh -c grep -q "sdd-opponent\|~/.codex/agents" README.md && grep -q "sdd-\*.toml" constitution.md && echo "README + constitution both name the codex subagents" → README + constitution both name the codex subagents (see notes/evidence.md)` (2026-07-14)
   - Depends on: T006, T007
 
 ## Reality Check (pre-ship gate)
