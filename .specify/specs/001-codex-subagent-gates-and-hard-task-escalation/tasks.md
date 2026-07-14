@@ -85,7 +85,7 @@ updated: 2026-07-14
 
 ## Reality Check (pre-ship gate)
 
-- [ ] **T010** — Opponent review: steelman why this implementation is wrong
+- [x] **T010** — Opponent review: steelman why this implementation is wrong
   - *Agent:* `~/.sdd/agents/opponent.agent.md`
   - *Inputs:* the diff on this branch, `spec.md`, `plan.md`, every `[x]` task
   - *Acceptance:* agent returns **CLEARED** (not CHALLENGED); findings written to `notes/opponent.md`

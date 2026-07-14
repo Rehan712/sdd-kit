@@ -85,3 +85,35 @@ Re-verified all three Round 1 fixes (hold), regenerated the real TOMLs and parse
 ## Follow-up tasks proposed
 
 - T010o4 — Re-run the Copilot probe with pinned models distinct from the session default (capture discriminating evidence), or downgrade the claim (→ Finding 1)
+
+---
+
+# Opponent review — Round 3
+
+**Date:** 2026-07-14
+**Verdict:** CLEARED
+**Round:** 3
+
+## What I attacked
+
+Re-ran every cheap deterministic claim (adapters 6/6, model-policy 3/3, full suite green; shellcheck clean). Attacked the Round-2 fix: checked the discriminating T010o4 capture for internal consistency across evidence.md / knowledge file / commit message and pressure-tested its logic for an inheritance loophole. Regression-ran build-adapters.sh against a sandbox kit with a real models.yml and parsed all three TOMLs with a real TOML parser. Re-verified both Round-1 doc-integrity fixes hold on HEAD.
+
+## Findings
+
+None. Every attack held.
+
+## Held up
+
+- **Round-2 crux:** a single inherited session default can only produce ONE model across children; the T010o4 capture (sha256:ed3cb1d6e84c) shows three distinct child models in one session — the inheritance hypothesis is falsified by the committed transcript alone. The knowledge file states exactly this and no more; the invalid-id textual warning is correctly demoted to anecdote while the captured fallback stands.
+- **Shipping generator:** three TOMLs parse; full persona bodies embedded; unmapped-role skip and key-omission paths degrade without breaking; prune keys off the kit marker only.
+- **No shipped doc overpromises Copilot:** persona-pass + "wiring is a follow-up" everywhere; the "proven" verdict lives only in knowledge/, where REQ-006 puts it.
+- **Round-1 fixes hold:** no stray 0.144.1; no "match Claude"; whitelist widening symmetric across both validation sites, claude/copilot untouched.
+
+## Minor (non-blocking — not gated)
+
+- `scripts/build-adapters.sh:9` header comment "Copilot CLI is single-agent" is terser than the recorded finding; internal comment, no output/behavior change.
+- The scratch agent profiles carrying the pins live in an uncommitted temp dir; the three-distinct-models inference holds from the committed transcript alone.
+
+## Follow-up tasks proposed
+
+None — verdict is CLEARED.

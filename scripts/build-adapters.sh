@@ -6,8 +6,9 @@
 #
 #   adapted frontmatter  +  a per-CLI adaptation preamble  +  the skill body
 #
-# Copilot CLI is single-agent: its preamble reinterprets subagent delegation
-# (adopt the persona as a distinct pass; treat stack experts as lenses).
+# Copilot's preamble reinterprets subagent delegation as persona passes
+# (the kit doesn't wire Copilot's custom-agent handoff yet — proven possible,
+# see knowledge/cli-subagent-delegation.md; wiring it is a follow-up).
 # Codex CLI has real subagents: its preamble instructs delegation to the
 # kit-generated subagents below, with the persona-pass as fallback.
 # Re-run after any skill change (setup.sh calls this).
