@@ -1,18 +1,22 @@
 #!/usr/bin/env bash
 # build-adapters.sh — generate Codex + Copilot adapters from the canonical skills.
 #
-# Codex CLI and Copilot CLI are single-agent tools: they can't spawn the
-# subagents the Claude skills delegate to. Instead of hand-maintaining
-# diverging copies, this script generates each adapter as:
+# Instead of hand-maintaining diverging copies, this script generates each
+# adapter as:
 #
-#   adapted frontmatter  +  a single-agent adaptation preamble  +  the skill body
+#   adapted frontmatter  +  a per-CLI adaptation preamble  +  the skill body
 #
-# The preamble tells the agent how to reinterpret subagent delegation
-# (adopt the persona as a distinct pass; treat stack experts as lenses).
+# Copilot's preamble reinterprets subagent delegation as persona passes
+# (the kit doesn't wire Copilot's custom-agent handoff yet — proven possible,
+# see knowledge/cli-subagent-delegation.md; wiring it is a follow-up).
+# Codex CLI has real subagents: its preamble instructs delegation to the
+# kit-generated subagents below, with the persona-pass as fallback.
 # Re-run after any skill change (setup.sh calls this).
 #
 # Installs to:
 #   ~/.codex/skills/sdd-<phase>/SKILL.md        (if ~/.codex exists)
+#   ~/.codex/agents/sdd-{opponent,reality-check,implement-hard}.toml
+#                                               (if ~/.codex exists + models.yml)
 #   ~/.copilot/agents/sdd-<phase>.agent.md      (if ~/.copilot exists)
 #   plus copies of the gate personas for Copilot.
 #
@@ -21,9 +25,10 @@
 #   Copilot: `model:` pinned in the generated agent frontmatter (per-agent
 #            effort isn't supported; the preamble tells the agent to ask for
 #            `--effort` when the session doesn't match).
-#   Codex:   skills can't pin models, so a per-tier profile file is written
-#            (~/.codex/sdd-<tier>.config.toml — `codex --profile sdd-<tier>`)
-#            and the preamble tells the agent to steer the user to it.
+#   Codex:   sessions pin models via per-tier profile files
+#            (~/.codex/sdd-<tier>.config.toml — `codex --profile sdd-<tier>`);
+#            the gates and [hard]-escalation pin theirs via the generated
+#            subagent TOMLs (per-agent model + model_reasoning_effort).
 #
 # Usage: build-adapters.sh [--help]
 
@@ -36,9 +41,30 @@ init_colors
 
 [[ "${1:-}" == "--help" || "${1:-}" == "-h" ]] && { usage_from_header "$0"; exit 0; }
 
-PREAMBLE='> **Single-agent adaptation.** You are running on a CLI without subagents. Wherever
-> this skill says to delegate to an agent (a stack expert, the sdd-orchestrator, the
-> opponent or reality-check gate), do this instead:
+CODEX_PREAMBLE='> **Codex adaptation.** Wherever this skill says to delegate to an agent, do this:
+> - **Gates (opponent / reality-check)** — delegate the gate to the kit subagent
+>   `sdd-opponent` / `sdd-reality-check` (`~/.sdd` generates them into `~/.codex/agents/`);
+>   it reviews with fresh context — never grade your own work when the subagent exists.
+>   If it is not installed, fall back to adopting the persona file as a DISTINCT review
+>   pass — fresh read of the diff, that persona'\''s checklist, report format, and default
+>   adversarial verdict — and over-correct toward suspicion. Never skip a gate.
+> - **Escalation** — a task marked `[hard]`, any failed-acceptance retry, and every gate
+>   follow-up (`T###o*`/`T###a*`) is delegated to the `sdd-implement-hard` subagent:
+>   fresh context + the escalation brief. (Its TOML pins the reasoning-tier model, which
+>   applies where the installed Codex honors per-agent model fields; otherwise the model
+>   lever is running the session as `codex --profile sdd-reasoning`.) Not installed →
+>   do it yourself and say so in the task notes.
+> - **Stack experts** — read the named agent file under `~/.sdd/agents/` and the matching
+>   overlay under `~/.sdd/templates/stack-overlays/`, and apply them as your senior-reviewer
+>   lens while you do the work yourself.
+> - **Orchestrated mode (--all)** — run the task loop yourself, one task at a time, in
+>   dependency order, delegating per the rules above.'
+
+COPILOT_PREAMBLE='> **Single-agent adaptation.** The SDD kit does not yet wire delegation on this CLI
+> (Copilot'\''s custom-agent handoff is proven — see `~/.sdd/knowledge/cli-subagent-delegation.md`
+> — wiring it is a planned follow-up). Until then, wherever this skill says to delegate
+> to an agent (a stack expert, the sdd-orchestrator, the opponent or reality-check gate),
+> do this instead:
 > - **Stack experts** — read the named agent file under `~/.sdd/agents/` and the matching
 >   overlay under `~/.sdd/templates/stack-overlays/`, and apply them as your senior-reviewer
 >   lens while you do the work yourself.
@@ -88,6 +114,30 @@ copilot_note() {
     "${m:-the session model}" "${e:+; the phase wants effort \`$e\`}" "${e:-high}"
 }
 
+# codex_subagent_toml <name> <role> <description> <instructions-file> — one
+# Codex subagent TOML on stdout: kit marker, identity, the role's tier model +
+# effort (keys omitted when that CLI field is unset), and the instructions in
+# a multi-line LITERAL string so persona backslashes survive unprocessed. A
+# persona containing ''' would silently truncate the literal — fail the build
+# loudly instead.
+codex_subagent_toml() {
+  local name="$1" role="$2" desc="$3" instr="$4" m e
+  if grep -qF "'''" "$instr"; then
+    echo "  ${RED}✗${RESET} $instr contains ''' — cannot embed in a TOML literal string" >&2
+    return 1
+  fi
+  m="$(policy "$role" codex model)"; e="$(policy "$role" codex effort)"
+  desc="${desc//\\/\\\\}"; desc="${desc//\"/\\\"}"   # TOML basic-string escapes
+  echo "# Generated by sdd-kit (build-adapters.sh) from models.yml — do not edit."
+  echo "name = \"$name\""
+  echo "description = \"$desc\""
+  [[ -n "$m" ]] && echo "model = \"$m\""
+  [[ -n "$e" ]] && echo "model_reasoning_effort = \"$e\""
+  echo "developer_instructions = '''"
+  cat "$instr"
+  echo "'''"
+}
+
 # stamp_frontmatter <src> <model> — persona copy with `model:` injected (stdout).
 stamp_frontmatter() {
   awk -v model="$2" '
@@ -113,7 +163,7 @@ for skill_dir in "$KIT_DIR"/skills/sdd-*/; do
     {
       printf -- '---\nname: %s\ndescription: %s\nmetadata:\n  short-description: %s (SDD)\n  cli: codex\n---\n\n' \
         "$phase" "$desc" "${phase#sdd-}"
-      printf '%s\n\n' "$PREAMBLE"
+      printf '%s\n\n' "$CODEX_PREAMBLE"
       codex_note "$role"
       skill_body "$skill_file"
     } > "$out"
@@ -130,7 +180,7 @@ for skill_dir in "$KIT_DIR"/skills/sdd-*/; do
     {
       printf -- '---\nname: %s\ndescription: %s Invoke with `copilot --agent %s`.\ntools: Read, Write, Edit, Bash\n%s---\n\n' \
         "$phase" "$desc" "$phase" "$cp_model_line"
-      printf '%s\n\n' "$PREAMBLE"
+      printf '%s\n\n' "$COPILOT_PREAMBLE"
       copilot_note "$role"
       skill_body "$skill_file"
     } > "$out"
@@ -213,6 +263,70 @@ if [[ -d "$HOME/.codex" ]] && (( HAVE_POLICY )); then
     case " $keep " in
       *" $(basename "$f") "*) ;;
       *) rm "$f"; echo "  ${DIM}-${RESET} codex: pruned stale $(basename "$f")" ;;
+    esac
+  done
+fi
+
+# Codex subagents: on Codex the gates run as REAL subagents (fresh context —
+# no self-grading) and [hard]/retry/follow-up work escalates to a reasoning-
+# tier implementer. Generated from the canonical personas + models.yml into
+# ~/.codex/agents/, pruned by the same kit-marker rule as the tier profiles.
+# A TOML without the marker is user-authored and is never touched.
+if [[ -d "$HOME/.codex" ]] && (( HAVE_POLICY )); then
+  mkdir -p "$HOME/.codex/agents"
+  tmp_instr="$(mktemp "${TMPDIR:-/tmp}/sdd-adapters.XXXXXX")"
+  trap 'rm -f "$tmp_instr"' EXIT
+  keep_agents=""
+  for subagent in \
+    "sdd-opponent|opponent|$KIT_DIR/agents/opponent.agent.md" \
+    "sdd-reality-check|reality-check|$KIT_DIR/agents/reality-check.agent.md" \
+    "sdd-implement-hard|implement-hard|"; do
+    name="${subagent%%|*}"; rest="${subagent#*|}"
+    role="${rest%%|*}"; persona="${rest#*|}"
+    # An unmapped role means the user opted that role out of the policy —
+    # generate nothing and let the prune below collect a leftover TOML (the
+    # skill preambles fall back to persona-pass / do-it-yourself).
+    if [[ -z "$(policy "$role" codex tier)" ]]; then
+      echo "  ${DIM}·${RESET} codex: subagent $name skipped (role '$role' not in models.yml)"
+      continue
+    fi
+    if [[ -n "$persona" ]]; then
+      desc="$(frontmatter_field "$persona" description)"
+      skill_body "$persona" > "$tmp_instr"
+    else
+      # implement-hard has no persona file (on Claude it is a runtime role);
+      # its instructions live here.
+      desc="SDD kit escalation implementer: [hard] tasks, failed-acceptance retries, and gate follow-ups (T###o*/T###a*)."
+      cat > "$tmp_instr" <<'EOF'
+You are the SDD kit's escalation implementer, spawned for a task marked
+[hard], a failed-acceptance retry, or a gate follow-up (T###o*/T###a*).
+Work only in the worktree named in your brief; before the first edit,
+`git rev-parse --abbrev-ref HEAD` there must print the spec branch you were
+given — anything else: stop and report, don't edit.
+Implement exactly the quoted task: the smallest change satisfying its
+*Acceptance:* and *Refs:*. Transcribe the plan's pattern anchors and internal
+seams verbatim — never re-derive or redesign them.
+Run the task's *Verify:* command and return: the files you changed, the
+command, and its output pasted verbatim. A reply without pasted output is a
+failed task. Unknowns: surface them — never guess silently.
+EOF
+    fi
+    out="$HOME/.codex/agents/$name.toml"
+    if codex_subagent_toml "$name" "$role" "$desc" "$tmp_instr" > "$out"; then
+      keep_agents="$keep_agents $name.toml"
+      echo "  ${GREEN}✓${RESET} codex: subagent $name (role $role)"
+      built=$((built+1))
+    else
+      rm -f "$out"
+      exit 1
+    fi
+  done
+  for f in "$HOME"/.codex/agents/sdd-*.toml; do
+    [[ -f "$f" ]] || continue
+    head -1 "$f" | grep -qF "Generated by sdd-kit" || continue
+    case " $keep_agents " in
+      *" $(basename "$f") "*) ;;
+      *) rm "$f"; echo "  ${DIM}-${RESET} codex: pruned stale subagent $(basename "$f")" ;;
     esac
   done
 fi

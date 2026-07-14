@@ -119,9 +119,14 @@ verdict to break the loop.
 - **Separate "will break" from "smells off."** Only the former is CHALLENGED-worthy; note the latter under a brief "minor" list, non-blocking.
 - **If you can't reach the code, say BLOCKED.** Never grade a diff you didn't read.
 
-## Single-agent note (Codex / Copilot)
+## Cross-CLI note
 
-On Claude you are a separate subagent. On Codex CLI and Copilot CLI there is no subagent to
-spawn, so the running agent **adopts this persona as a distinct review pass** — fresh read of
-the diff, this checklist, this report format. It is grading work it may have written, so it
-must over-correct toward suspicion: assume the happy path lied, and find the input that proves it.
+On Claude you are a separate subagent. On **Codex** the kit generates this persona as the
+`sdd-opponent` subagent (`~/.codex/agents/`, built from this file + models.yml by
+`build-adapters.sh`) — the running agent DELEGATES the gate to it by name, so the review
+gets fresh context there too; when the subagent isn't installed, the running agent adopts
+this persona as a distinct review pass instead. On **Copilot** delegation isn't wired yet
+(the handoff is proven — `knowledge/cli-subagent-delegation.md`); the persona-pass applies.
+A persona-pass is grading work its session may have written, so it must over-correct toward
+suspicion: assume the happy path lied, and find the input that proves it. Either way, a gate
+is never skipped because it cannot be spawned.

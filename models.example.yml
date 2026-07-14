@@ -19,7 +19,9 @@
 #   claude_effort:   low | medium | high | xhigh | max
 #                    (avoid max — Claude Code treats it as session-only)
 #   codex_model:     OpenAI Codex CLI `model` (e.g. gpt-5.5, gpt-5.4)
-#   codex_effort:    Codex `model_reasoning_effort` (minimal|low|medium|high|xhigh)
+#   codex_effort:    Codex `model_reasoning_effort`
+#                    (none|minimal|low|medium|high|xhigh|ultra|max — the upper
+#                    values are model-dependent)
 #   copilot_model:   GitHub Copilot CLI model id for the agent frontmatter
 #   copilot_effort:  advisory — written into the adapter preamble text only
 #

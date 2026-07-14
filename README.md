@@ -92,9 +92,13 @@ Before any PR:
 (`--force` works only together with `--draft` — a non-draft PR can never skip
 the gates), and on success writes `pr:` + `phase: review` into STATUS.md
 itself. Neither gate grades its own work: on Claude they run as separate
-subagents; on single-agent CLIs the adapter runs them as distinct review
-passes. The gate loop is bounded: from round 3 the user arbitrates (waivers
-are explicit sign-offs in the STATUS Decisions log, never softened verdicts).
+subagents; on Codex the kit generates them as true subagents too
+(`~/.codex/agents/sdd-opponent.toml` + `sdd-reality-check.toml`, built by
+`build-adapters.sh` from the personas + models.yml); where no subagent is
+available (Copilot today, or the TOMLs not installed) the adapter runs them
+as distinct review passes. The gate loop is bounded: from round 3 the user
+arbitrates (waivers are explicit sign-offs in the STATUS Decisions log,
+never softened verdicts).
 
 Two conventions keep the loop honest end-to-end:
 
@@ -148,13 +152,21 @@ mid-tier model that's faster and cheaper. The mapping is the **model policy**:
     and `sync.sh` points the home symlinks there. `/sdd:plan` runs on the
     reasoning tier even in a sonnet session; stack experts dispatched by the
     orchestrator run on the implementation tier.
-  - *Codex CLI:* skills can't pin models, so the kit writes one profile per tier
-    (`~/.codex/sdd-<tier>.config.toml` → `codex --profile sdd-reasoning`), and
+  - *Codex CLI:* sessions pin models via one profile per tier
+    (`~/.codex/sdd-<tier>.config.toml` → `codex --profile sdd-reasoning`);
     each adapter's preamble tells the agent to steer the session to its phase's
-    tier via `/model` or a relaunch.
+    tier via `/model` or a relaunch. The gates and `[hard]`-escalation ship as
+    generated **subagents** (`~/.codex/agents/sdd-{opponent,reality-check,implement-hard}.toml`)
+    the adapters delegate to by name — fresh-context review instead of
+    persona passes. Their TOMLs carry the tier's model + effort; note current
+    Codex (0.144.4) spawns them on the session model (see
+    `knowledge/cli-subagent-delegation.md`), so the profile stays the model lever.
   - *Copilot CLI:* each generated `sdd-<phase>` agent (and the gate persona
     copies) gets `model:` pinned in its frontmatter; effort is session-level, so
-    the preamble suggests `--effort` when the session is set lower.
+    the preamble suggests `--effort` when the session is set lower. Copilot's
+    custom-agent handoff is empirically proven (model pin included — same
+    knowledge file), but the kit doesn't wire gate delegation through it yet;
+    the adapters keep the persona-pass until that follow-up spec ships.
 
 After editing `models.yml` by hand, re-run `scripts/setup.sh` (or
 `apply-models.sh` + `sync.sh` + `build-adapters.sh`) — or skip the hand-edit
