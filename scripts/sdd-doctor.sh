@@ -105,17 +105,27 @@ check_model_policy() {
       pass "build/ fresh (skills + agents stamped)"
     fi
   fi
-  if [[ -d "$HOME/.codex" ]]; then
-    if ls "$HOME"/.codex/sdd-*.config.toml >/dev/null 2>&1; then
+  # Every codex home gets adapters: ~/.codex plus ~/.codex_* profile homes
+  # (the CODEX_HOME=~/.codex_gym pattern) — check each one.
+  local codex_home home_tag
+  for codex_home in "$HOME/.codex" "$HOME"/.codex_*; do
+    [[ -d "$codex_home" ]] || continue
+    home_tag="${codex_home##*/}"
+    if ls "$codex_home"/sdd-*.config.toml >/dev/null 2>&1; then
       local profiles="" pf
-      for pf in "$HOME"/.codex/sdd-*.config.toml; do
+      for pf in "$codex_home"/sdd-*.config.toml; do
         profiles="$profiles${profiles:+, }$(basename "$pf" .config.toml)"
       done
-      pass "codex sdd-* profiles present ($profiles)"
+      pass "$home_tag sdd-* profiles present ($profiles)"
     else
-      warn "no codex sdd-* profiles — run scripts/build-adapters.sh"
+      warn "no sdd-* profiles in $home_tag — run scripts/build-adapters.sh"
     fi
-  fi
+    if [[ "$codex_home" != "$HOME/.codex" ]]; then
+      [[ -f "$codex_home/skills/sdd-implement/SKILL.md" ]] \
+        && pass "$home_tag sdd skills installed" \
+        || warn "$home_tag has no sdd skills — run scripts/build-adapters.sh"
+    fi
+  done
   if [[ -d "$HOME/.copilot" ]] && "$HUB_DIR/scripts/model-policy.sh" get plan copilot model >/dev/null 2>&1; then
     if grep -q '^model:' "$HOME/.copilot/agents/sdd-plan.agent.md" 2>/dev/null; then
       pass "copilot adapters model-pinned"

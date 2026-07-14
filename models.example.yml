@@ -22,6 +22,16 @@
 #   codex_effort:    Codex `model_reasoning_effort`
 #                    (none|minimal|low|medium|high|xhigh|ultra|max — the upper
 #                    values are model-dependent)
+#   codex_sandbox:   Codex `sandbox_mode` for the tier's profile
+#                    (read-only | workspace-write | danger-full-access)
+#   codex_approval:  Codex `approval_policy` for the tier's profile
+#                    (untrusted | on-failure | on-request | never).
+#                    Subagents spawned in a session INHERIT the session's
+#                    configured sandbox/approval — permission keys in the
+#                    subagent TOMLs are not honored (codex-cli 0.144.x) — so
+#                    these two keys are the lever that lets gate/escalation
+#                    subagents run without per-command prompts: launch the
+#                    session as `codex --profile sdd-<tier>`.
 #   copilot_model:   GitHub Copilot CLI model id for the agent frontmatter
 #   copilot_effort:  advisory — written into the adapter preamble text only
 #
@@ -38,8 +48,9 @@
 #   scripts/apply-models.sh stamps model/effort into generated copies of the
 #   skills + agents under build/ (Claude homes symlink to those), and
 #   scripts/build-adapters.sh stamps the Codex/Copilot adapters and writes
-#   the sdd profiles into ~/.codex/config.toml. Re-run scripts/setup.sh
-#   (or those two scripts) after editing this file.
+#   the sdd-<tier> profile files into every codex home (~/.codex plus any
+#   ~/.codex_* profile home). Re-run scripts/setup.sh (or those two scripts)
+#   after editing this file.
 
 tiers:
   reasoning:            # deep design + adversarial judgment — strongest models

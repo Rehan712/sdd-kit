@@ -28,8 +28,10 @@ scripts/setup.sh
    (see [Model tiering](#model-tiering-which-model-runs-each-phase)).
 4. Symlinks each SDD skill and agent into every Claude home (`~/.claude`,
    `~/.claude_*`) — one link per item, your other skills are untouched.
-5. Generates Codex (`~/.codex`) and Copilot (`~/.copilot`) adapters from the
-   canonical skills, if those CLIs are installed (`--no-cli` to skip).
+5. Generates Codex (`~/.codex`, plus every `~/.codex_*` profile home — the
+   `CODEX_HOME=~/.codex_gym codex` pattern) and Copilot (`~/.copilot`)
+   adapters from the canonical skills, if those CLIs are installed
+   (`--no-cli` to skip).
 6. Runs `sdd-doctor.sh` to verify.
 
 After install, `/sdd:onboard` researches every repo in `system-map.yml` and
