@@ -19,11 +19,12 @@ updated: 2026-07-14
   - *Refs:* REQ-003, AC-004, plan §2 §4
   - *Evidence:* `shellcheck -S warning -x scripts/build-adapters.sh → (no output) (see notes/evidence.md)` (2026-07-14)
 
-- [ ] **T002** [hard] — Generate and prune Codex subagent TOMLs
+- [x] **T002** [hard] — Generate and prune Codex subagent TOMLs
   - *Files:* `scripts/build-adapters.sh`
   - *Acceptance:* new `codex_subagent_toml()` (plan §4 seam signature) + a generation block after the tier-profile block, same `[[ -d ~/.codex ]] && HAVE_POLICY` guard: writes `~/.codex/agents/sdd-{opponent,reality-check,implement-hard}.toml` (kit-marker first line; persona body in `'''` literal with a hard-fail guard if a persona contains `'''`; model/effort per role via the existing `policy()` helper, keys omitted when unset); prunes only marker-bearing stale `sdd-*.toml`
   - *Verify:* `shellcheck -S warning -x scripts/build-adapters.sh` → "" (exit 0; functional proof lands with T004)
   - *Refs:* REQ-002, AC-001, AC-002, AC-003, plan §2 §3 §4
+  - *Evidence:* `shellcheck -S warning -x scripts/build-adapters.sh → (no output) (see notes/evidence.md)` (2026-07-14)
 
 - [ ] **T003** [P] — Widen codex effort whitelist to documented values
   - *Files:* `scripts/model-policy.sh`, `models.example.yml`
