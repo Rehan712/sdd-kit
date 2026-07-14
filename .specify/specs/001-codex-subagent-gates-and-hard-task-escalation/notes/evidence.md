@@ -33,3 +33,19 @@ Captured acceptance runs, appended by `spec-run.sh`. One block per run.
   ✓ tier 'reasoning': codex_effort = ultra
   · stamped copies not refreshed — run scripts/apply-models.sh + build-adapters.sh when ready
 ```
+
+## T004 — 2026-07-14T11:46:40
+
+- **Command:** `bash tests/run.sh build-adapters`
+- **Cwd:** /Users/babar/projects/sdd-kit-public.worktrees/001-codex-subagent-gates-and-hard-task-escalation
+- **Exit:** 0
+- **Captured:** 2026-07-14T11:46:40 · sha256:7dddfca1df43 (over full output)
+
+```text
+== test-build-adapters.sh
+  ok   test_codex_adapters_delegate_copilot_adapters_persona_pass
+  ok   test_degrades_without_policy_or_codex_home
+  ok   test_prune_respects_kit_marker_and_role_unmapping
+  ok   test_subagent_tomls_carry_identity_policy_and_persona
+  -- 4/4 passed
+```

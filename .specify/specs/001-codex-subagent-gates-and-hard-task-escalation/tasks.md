@@ -35,11 +35,12 @@ updated: 2026-07-14
 
 ## Tests
 
-- [ ] **T004** — Adapter test suite (hermetic sandbox kit)
+- [x] **T004** — Adapter test suite (hermetic sandbox kit)
   - *Files:* `tests/test-build-adapters.sh`
   - *Acceptance:* new suite copies the kit into `$SANDBOX/kit` (git ls-files set), runs with `HOME=$SANDBOX/home` (plan §4 hermeticity seam); tests name AC-001 (TOML fields/stamps), AC-002 (marker prune + user-file survival), AC-003 (no policy / no ~/.codex degradation), AC-004 (codex adapters carry delegation text, copilot adapters persona-pass)
   - *Verify:* `bash tests/run.sh build-adapters` → "passed"
   - *Refs:* AC-001, AC-002, AC-003, AC-004, plan §2
+  - *Evidence:* `bash tests/run.sh build-adapters → -- 4/4 passed (see notes/evidence.md)` (2026-07-14)
 
 - [ ] **T005** [P] — Model-policy effort test suite
   - *Files:* `tests/test-model-policy.sh`

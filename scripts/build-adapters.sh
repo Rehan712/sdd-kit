@@ -277,6 +277,13 @@ if [[ -d "$HOME/.codex" ]] && (( HAVE_POLICY )); then
     "sdd-implement-hard|implement-hard|"; do
     name="${subagent%%|*}"; rest="${subagent#*|}"
     role="${rest%%|*}"; persona="${rest#*|}"
+    # An unmapped role means the user opted that role out of the policy —
+    # generate nothing and let the prune below collect a leftover TOML (the
+    # skill preambles fall back to persona-pass / do-it-yourself).
+    if [[ -z "$(policy "$role" codex tier)" ]]; then
+      echo "  ${DIM}·${RESET} codex: subagent $name skipped (role '$role' not in models.yml)"
+      continue
+    fi
     if [[ -n "$persona" ]]; then
       desc="$(frontmatter_field "$persona" description)"
       skill_body "$persona" > "$tmp_instr"
