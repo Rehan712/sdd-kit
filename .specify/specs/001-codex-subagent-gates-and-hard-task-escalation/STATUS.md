@@ -1,9 +1,9 @@
 ---
 spec: 001-codex-subagent-gates-and-hard-task-escalation
-phase: tasks          # specify | plan | tasks | implement | review | shipped | abandoned
+phase: implement          # specify | plan | tasks | implement | review | shipped | abandoned
 active_tool: claude     # claude | codex | copilot | none — who currently holds the spec
-branch: none            # spec/001-codex-subagent-gates-and-hard-task-escalation once cut, else none
-worktree: none          # absolute path once created, else none
+branch: spec/001-codex-subagent-gates-and-hard-task-escalation            # spec/001-codex-subagent-gates-and-hard-task-escalation once cut, else none
+worktree: /Users/babar/projects/sdd-kit-public.worktrees/001-codex-subagent-gates-and-hard-task-escalation          # absolute path once created, else none
 pr: none                # PR URL once opened — spec-pr.sh writes this itself
 opponent: not-run       # not-run | CHALLENGED | CLEARED | BLOCKED  (+ date)
 reality_check: not-run  # not-run | NEEDS WORK | FAILED | READY  (+ date)

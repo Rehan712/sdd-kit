@@ -1,6 +1,6 @@
 ---
 tasks_for: 001-codex-subagent-gates-and-hard-task-escalation
-status: draft
+status: in-progress
 created: 2026-07-14
 updated: 2026-07-14
 ---
@@ -12,11 +12,12 @@ updated: 2026-07-14
 
 ## Backend (build-adapters.sh + model-policy.sh)
 
-- [ ] **T001** — Split adapter preamble into per-CLI variants
+- [x] **T001** — Split adapter preamble into per-CLI variants
   - *Files:* `scripts/build-adapters.sh`
   - *Acceptance:* `PREAMBLE` becomes `CODEX_PREAMBLE` (delegation wording from plan §4 seams, transcribed: gates → `sdd-opponent`/`sdd-reality-check` with persona-pass fallback; `[hard]`/retries/gate follow-ups → `sdd-implement-hard`) and `COPILOT_PREAMBLE` (today's persona-pass text unchanged); each SDD adapter loop uses its CLI's variant
   - *Verify:* `shellcheck -S warning -x scripts/build-adapters.sh` → "" (exit 0; functional proof lands with T004)
   - *Refs:* REQ-003, AC-004, plan §2 §4
+  - *Evidence:* `shellcheck -S warning -x scripts/build-adapters.sh → (no output) (see notes/evidence.md)` (2026-07-14)
 
 - [ ] **T002** [hard] — Generate and prune Codex subagent TOMLs
   - *Files:* `scripts/build-adapters.sh`

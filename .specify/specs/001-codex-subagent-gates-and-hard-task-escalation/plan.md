@@ -1,6 +1,6 @@
 ---
 plan_for: 001-codex-subagent-gates-and-hard-task-escalation
-status: accepted
+status: implementing
 created: 2026-07-14
 updated: 2026-07-14
 stacks: []

@@ -36,7 +36,23 @@ init_colors
 
 [[ "${1:-}" == "--help" || "${1:-}" == "-h" ]] && { usage_from_header "$0"; exit 0; }
 
-PREAMBLE='> **Single-agent adaptation.** You are running on a CLI without subagents. Wherever
+CODEX_PREAMBLE='> **Codex adaptation.** Wherever this skill says to delegate to an agent, do this:
+> - **Gates (opponent / reality-check)** — delegate the gate to the kit subagent
+>   `sdd-opponent` / `sdd-reality-check` (`~/.sdd` generates them into `~/.codex/agents/`);
+>   it reviews with fresh context — never grade your own work when the subagent exists.
+>   If it is not installed, fall back to adopting the persona file as a DISTINCT review
+>   pass — fresh read of the diff, that persona'\''s checklist, report format, and default
+>   adversarial verdict — and over-correct toward suspicion. Never skip a gate.
+> - **Escalation** — a task marked `[hard]`, any failed-acceptance retry, and every gate
+>   follow-up (`T###o*`/`T###a*`) is delegated to the `sdd-implement-hard` subagent
+>   (reasoning-tier model). Not installed → do it yourself and say so in the task notes.
+> - **Stack experts** — read the named agent file under `~/.sdd/agents/` and the matching
+>   overlay under `~/.sdd/templates/stack-overlays/`, and apply them as your senior-reviewer
+>   lens while you do the work yourself.
+> - **Orchestrated mode (--all)** — run the task loop yourself, one task at a time, in
+>   dependency order, delegating per the rules above.'
+
+COPILOT_PREAMBLE='> **Single-agent adaptation.** You are running on a CLI without subagents. Wherever
 > this skill says to delegate to an agent (a stack expert, the sdd-orchestrator, the
 > opponent or reality-check gate), do this instead:
 > - **Stack experts** — read the named agent file under `~/.sdd/agents/` and the matching
@@ -113,7 +129,7 @@ for skill_dir in "$KIT_DIR"/skills/sdd-*/; do
     {
       printf -- '---\nname: %s\ndescription: %s\nmetadata:\n  short-description: %s (SDD)\n  cli: codex\n---\n\n' \
         "$phase" "$desc" "${phase#sdd-}"
-      printf '%s\n\n' "$PREAMBLE"
+      printf '%s\n\n' "$CODEX_PREAMBLE"
       codex_note "$role"
       skill_body "$skill_file"
     } > "$out"
@@ -130,7 +146,7 @@ for skill_dir in "$KIT_DIR"/skills/sdd-*/; do
     {
       printf -- '---\nname: %s\ndescription: %s Invoke with `copilot --agent %s`.\ntools: Read, Write, Edit, Bash\n%s---\n\n' \
         "$phase" "$desc" "$phase" "$cp_model_line"
-      printf '%s\n\n' "$PREAMBLE"
+      printf '%s\n\n' "$COPILOT_PREAMBLE"
       copilot_note "$role"
       skill_body "$skill_file"
     } > "$out"

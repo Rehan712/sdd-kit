@@ -1,7 +1,7 @@
 ---
 spec_id: 001-codex-subagent-gates-and-hard-task-escalation
 title: Codex subagent gates and hard-task escalation
-status: accepted
+status: implementing
 created: 2026-07-14
 updated: 2026-07-14
 owners: [Rehan712]
