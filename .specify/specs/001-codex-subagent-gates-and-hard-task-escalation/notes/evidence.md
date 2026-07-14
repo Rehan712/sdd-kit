@@ -120,3 +120,15 @@ The sdd-opponent agent said: READY
 agents/opponent.agent.md
 agents/reality-check.agent.md
 ```
+
+## T008 — 2026-07-14T11:59:52
+
+- **Command:** `sh -c ! grep -q "without subagents" agents/opponent.agent.md agents/reality-check.agent.md && grep -l "sdd-opponent" agents/opponent.agent.md && grep -l "sdd-reality-check" agents/reality-check.agent.md`
+- **Cwd:** /Users/babar/projects/sdd-kit-public.worktrees/001-codex-subagent-gates-and-hard-task-escalation
+- **Exit:** 0
+- **Captured:** 2026-07-14T11:59:52 · sha256:b8eecd965cc3 (over full output)
+
+```text
+agents/opponent.agent.md
+agents/reality-check.agent.md
+```

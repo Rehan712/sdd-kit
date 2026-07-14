@@ -67,11 +67,12 @@ updated: 2026-07-14
 
 ## Docs (only claims T006/T007 proved)
 
-- [ ] **T008** — Rewrite gate personas' cross-CLI notes
+- [x] **T008** — Rewrite gate personas' cross-CLI notes
   - *Files:* `agents/opponent.agent.md`, `agents/reality-check.agent.md`
   - *Acceptance:* opponent's "Single-agent note" replaced with per-CLI text (Codex: kit subagent `sdd-opponent`, fresh context, persona-pass fallback when TOMLs absent; Copilot: per T007's finding); reality-check gains the matching note (anchor: opponent's rewritten section, reality-check verdicts); no "CLI without subagents" phrasing survives in either
-  - *Verify:* `sh -c 'grep -L "without subagents" agents/opponent.agent.md agents/reality-check.agent.md && grep -l "sdd-opponent" agents/opponent.agent.md'` → both filenames then opponent path
+  - *Verify:* `sh -c '! grep -q "without subagents" agents/opponent.agent.md agents/reality-check.agent.md && grep -l "sdd-opponent" agents/opponent.agent.md && grep -l "sdd-reality-check" agents/reality-check.agent.md'` → both persona paths (stale phrase absent) — original `grep -L` form always exited 1 by design; amended 2026-07-14
   - *Refs:* REQ-004, AC-006, plan §2
+  - *Evidence:* `sh -c ! grep -q "without subagents" agents/opponent.agent.md agents/reality-check.agent.md && grep -l "sdd-opponent" agents/opponent.agent.md && grep -l "sdd-reality-check" agents/reality-check.agent.md → agents/reality-check.agent.md (see notes/evidence.md)` (2026-07-14)
   - Depends on: T006, T007
 
 - [ ] **T009** [P] — Correct constitution §10.5 and README per-CLI section
