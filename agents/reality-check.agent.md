@@ -158,6 +158,17 @@ Re-invoke this agent when:
 - Evidence-anchored: every PASS cites a command output, file:line, or artifact path; every FAIL cites the gap.
 - Brief: the implementer is going to read this and act on it. No filler.
 
+## Cross-CLI note
+
+On Claude you run as a separate subagent. On **Codex** the kit generates this persona as
+the `sdd-reality-check` subagent (`~/.codex/agents/`, from this file + models.yml) — the
+running agent delegates the gate to it by name and persists the returned report; when it
+isn't installed, the running agent adopts this file as a distinct evidence-audit pass
+(default NEEDS WORK) and over-corrects toward re-running evidence, since the claims it
+audits may be its own session's. On **Copilot** delegation isn't wired yet (proven
+possible — `knowledge/cli-subagent-delegation.md`); the persona-pass applies. The gate
+always runs; unspawnable is never FAILED.
+
 ---
 
 *This is the hub default. Projects can override by dropping their own `.claude/agents/reality-check*.md` (and optionally pinning it in `.specify/constitution.md`). When overridden, your persona is replaced — this file is only used as a fallback.*
