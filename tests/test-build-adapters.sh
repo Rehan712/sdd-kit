@@ -116,6 +116,22 @@ test_codex_adapters_delegate_copilot_adapters_persona_pass() {
   assert_not_contains "$OUT" "sdd-implement-hard" "AC-004: copilot promises no delegation"
 }
 
+# AC-006: no stale "no subagents on Codex" claim survives in the four doc
+# surfaces; the corrected sections name the generated subagents.
+test_stale_single_agent_claims_are_gone() {
+  local f
+  for f in agents/opponent.agent.md agents/reality-check.agent.md constitution.md README.md; do
+    OUT="$(cat "$KIT_DIR/$f")"
+    assert_not_contains "$OUT" "without subagents" "AC-006: stale claim survives in $f"
+    assert_not_contains "$OUT" "there is no subagent to spawn" "AC-006: stale claim survives in $f"
+    assert_not_contains "$OUT" "Single-agent note" "AC-006: stale heading survives in $f"
+  done
+  OUT="$(cat "$KIT_DIR/constitution.md")"
+  assert_contains "$OUT" "codex/agents" "AC-006: constitution names the subagent path"
+  OUT="$(cat "$KIT_DIR/README.md")"
+  assert_contains "$OUT" "sdd-reality-check" "AC-006: README names the generated gates"
+}
+
 # AC-007 / AC-008: the empirical findings are pinned as a versioned knowledge
 # artifact — both CLIs carry a dated, version-stamped Finding line, so the
 # claims the docs make trace to captured probes (transcripts in the spec's
