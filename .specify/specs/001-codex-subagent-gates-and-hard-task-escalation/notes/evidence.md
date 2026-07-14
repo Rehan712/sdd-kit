@@ -49,3 +49,18 @@ Captured acceptance runs, appended by `spec-run.sh`. One block per run.
   ok   test_subagent_tomls_carry_identity_policy_and_persona
   -- 4/4 passed
 ```
+
+## T005 — 2026-07-14T11:47:16
+
+- **Command:** `bash tests/run.sh model-policy`
+- **Cwd:** /Users/babar/projects/sdd-kit-public.worktrees/001-codex-subagent-gates-and-hard-task-escalation
+- **Exit:** 0
+- **Captured:** 2026-07-14T11:47:16 · sha256:ae5cf0a11eed (over full output)
+
+```text
+== test-model-policy.sh
+  ok   test_claude_effort_whitelist_unchanged
+  ok   test_documented_codex_efforts_accepted
+  ok   test_junk_codex_effort_rejected
+  -- 3/3 passed
+```

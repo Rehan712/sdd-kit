@@ -42,11 +42,12 @@ updated: 2026-07-14
   - *Refs:* AC-001, AC-002, AC-003, AC-004, plan §2
   - *Evidence:* `bash tests/run.sh build-adapters → -- 4/4 passed (see notes/evidence.md)` (2026-07-14)
 
-- [ ] **T005** [P] — Model-policy effort test suite
+- [x] **T005** [P] — Model-policy effort test suite
   - *Files:* `tests/test-model-policy.sh`
   - *Acceptance:* new suite (against `--file` sandbox policies only) names AC-005: `ultra`/`max`/`none` accepted for codex, junk value rejected, `check` green on a policy using them, claude effort unchanged (still rejects `ultra`)
   - *Verify:* `bash tests/run.sh model-policy` → "passed"
   - *Refs:* AC-005, plan §2
+  - *Evidence:* `bash tests/run.sh model-policy → -- 3/3 passed (see notes/evidence.md)` (2026-07-14)
 
 ## Empirical verification (before any doc claims)
 
