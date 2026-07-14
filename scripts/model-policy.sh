@@ -166,7 +166,7 @@ validate_field() {
       ;;
     effort)
       local allowed="low|medium|high|xhigh|max"
-      [[ "$cli" == "codex" ]] && allowed="minimal|low|medium|high|xhigh"
+      [[ "$cli" == "codex" ]] && allowed="none|minimal|low|medium|high|xhigh|ultra|max"
       if [[ ! "$val" =~ ^($allowed)$ ]]; then
         echo "invalid $cli effort '$val' (allowed: ${allowed//|/, })" >&2
         exit 2
@@ -352,7 +352,7 @@ case "$CMD" in
         claude_effort|copilot_effort)
           [[ "$val" =~ ^(low|medium|high|xhigh|max)$ ]] || fail "tier '$tier': $key '$val' not in low|medium|high|xhigh|max" ;;
         codex_effort)
-          [[ "$val" =~ ^(minimal|low|medium|high|xhigh)$ ]] || fail "tier '$tier': codex_effort '$val' not in minimal|low|medium|high|xhigh" ;;
+          [[ "$val" =~ ^(none|minimal|low|medium|high|xhigh|ultra|max)$ ]] || fail "tier '$tier': codex_effort '$val' not in none|minimal|low|medium|high|xhigh|ultra|max" ;;
         claude_model)
           # Hard error: an invalid value here stamps into every generated agent
           # and Claude Code refuses to spawn them (model-not-found at launch).

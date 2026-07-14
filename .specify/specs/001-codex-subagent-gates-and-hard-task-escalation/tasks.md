@@ -26,11 +26,12 @@ updated: 2026-07-14
   - *Refs:* REQ-002, AC-001, AC-002, AC-003, plan §2 §3 §4
   - *Evidence:* `shellcheck -S warning -x scripts/build-adapters.sh → (no output) (see notes/evidence.md)` (2026-07-14)
 
-- [ ] **T003** [P] — Widen codex effort whitelist to documented values
+- [x] **T003** [P] — Widen codex effort whitelist to documented values
   - *Files:* `scripts/model-policy.sh`, `models.example.yml`
   - *Acceptance:* both validation sites (`validate_field`, `check`) accept `none|minimal|low|medium|high|xhigh|ultra|max` for codex and reject junk; error text and the models.example.yml comment list the same set
   - *Verify:* `sh -c 't=$(mktemp); cp models.example.yml "$t"; scripts/model-policy.sh --file "$t" set tier reasoning codex effort ultra'` → "codex_effort = ultra"
   - *Refs:* REQ-005, AC-005, plan §2 §4
+  - *Evidence:* `sh -c t=$(mktemp); cp models.example.yml "$t"; scripts/model-policy.sh --file "$t" set tier reasoning codex effort ultra → ✓ tier 'reasoning': codex_effort = ultra (see notes/evidence.md)` (2026-07-14)
 
 ## Tests
 
