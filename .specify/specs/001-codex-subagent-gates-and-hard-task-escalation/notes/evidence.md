@@ -195,3 +195,57 @@ Resume     copilot --resume=9ef8f523-4f9f-4515-b7b3-484fab471d96
 ```text
 5
 ```
+
+## T010o4 — 2026-07-14T15:01:29
+
+- **Command:** `copilot -p Hand off to each of the custom agents sdd-proto-a, sdd-proto-b, and sdd-proto-x in turn, each with the task 'confirm readiness'. Report each agent's reply. --allow-all --no-color`
+- **Cwd:** /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/9a8b00e2-e365-4923-8678-5b5adc87e90a/scratchpad/copilot-probe
+- **Exit:** 0
+- **Captured:** 2026-07-14T15:01:29 · sha256:ed3cb1d6e84c (over full output)
+
+```text
+Launching all three agents in parallel.
+
+● Sdd-proto-a(claude-sonnet-5) Confirm readiness
+  └ Agent started in background with agent_id: sdd-proto-a. You'll be notified wh...
+
+● Sdd-proto-b(gpt-5.6-terra) Confirm readiness
+  └ Agent started in background with agent_id: sdd-proto-b. You'll be notified wh...
+
+● Sdd-proto-x(claude-sonnet-4.6) Confirm readiness
+  └ Agent started in background with agent_id: sdd-proto-x. You'll be notified wh...
+
+PINNED-BPINNED-XPINNED-AAll three agents are running. Waiting for their replies…
+
+<system_notification>Background agent sdd-proto-a (agent_id: sdd-proto-a) has completed.</system_notification>
+
+<system_notification>Background agent sdd-proto-b (agent_id: sdd-proto-b) has completed.</system_notification>
+
+<system_notification>Background agent sdd-proto-x (agent_id: sdd-proto-x) has completed.</system_notification>
+
+All three completed. Retrieving results now.
+
+● Read (Sdd-proto-a agent — Confirm readiness)
+  └ Completed
+
+● Read (Sdd-proto-b agent — Confirm readiness)
+  └ Completed
+
+● Read (Sdd-proto-x agent — Confirm readiness)
+  └ Completed
+
+Here are the replies from each agent:
+
+| Agent | Reply |
+|---|---|
+| **sdd-proto-a** | `PINNED-A` |
+| **sdd-proto-b** | `PINNED-B` |
+| **sdd-proto-x** | `PINNED-X` |
+
+
+
+Changes    +0 -0
+AI Credits 14.3 (20s)
+Tokens     ↑ 82.2k (50.8k cached, 31.4k written) • ↓ 890 (82 reasoning)
+Resume     copilot --resume=98ec5766-07c9-485e-9174-692f0a0ce7a0
+```

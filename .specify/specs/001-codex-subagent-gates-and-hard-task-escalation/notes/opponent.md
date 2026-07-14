@@ -51,3 +51,37 @@ where it breaks.
 - T010o1 — Capture the Copilot probe for real (run under `spec-run.sh`, paste transcript into `knowledge/cli-subagent-delegation.md`) OR downgrade the shipped "proven" claims until captured (→ Finding 1)
 - T010o2 — Reconcile the codex version stamp (0.144.1 vs captured 0.144.4) across the knowledge file and `notes/codex-subagents.md` (→ Finding 2)
 - T010o3 — Reword `spec.md` §1 + user story so the `[hard]`-escalation promise matches the hedged generated docs (→ Finding 3)
+
+---
+
+# Opponent review — Round 2
+
+**Date:** 2026-07-14
+**Verdict:** CHALLENGED
+**Round:** 2
+
+## What I attacked
+
+Re-verified all three Round 1 fixes (hold), regenerated the real TOMLs and parsed them with tomllib (pass), re-ran suites + shellcheck (green), then pressure-tested the content of the now-captured Copilot probe against the claims drawn from it.
+
+## Findings
+
+1. **Copilot "per-agent model IS honored" is not established by the captured probe — the experiment pinned the session-default model** — *severity:* wrong-result (doc-integrity)
+   - **Where:** `knowledge/cli-subagent-delegation.md` (pin `gpt-5.6-terra` → spawn line `Sdd-proto-hard(gpt-5.6-terra)` → concludes "IS honored"); the capture records no Copilot session-default banner. The sibling Codex probe names `gpt-5.6-terra` as a session default — so the observation is equally consistent with "pin ignored, child inherited the default." REQ-006 required a **distinct** `model:`; pinning a value equal to a known default is the one choice that can't prove honoring.
+   - **Smallest fix:** Re-run pinning a model known to differ from the session default (capture discriminating evidence), OR downgrade the claim to "not independently confirmed."
+   - **Root cause:** implementation-error.
+   - **Blocks:** REQ-006 (distinct-model clause), AC-008 (doc-integrity).
+
+## Minor (non-blocking)
+
+- "verbatim" isn't verbatim: the knowledge transcript adds a command line, drops a raw streaming line and the metrics block. Substance preserved; hygiene only.
+- The invalid-model fallback-warning claim is stated as observed but uncaptured.
+
+## Held up
+
+- All three Round 1 fixes verified and hold (captured probe exists; stamps reconciled to 0.144.4; spec promise aligned).
+- Generator correctness on real inputs (three TOMLs parse; full persona bodies embedded); tests 6/6 + 3/3, full suite green; shellcheck clean; prune/degradation paths as specified.
+
+## Follow-up tasks proposed
+
+- T010o4 — Re-run the Copilot probe with pinned models distinct from the session default (capture discriminating evidence), or downgrade the claim (→ Finding 1)

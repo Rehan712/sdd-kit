@@ -5,7 +5,7 @@ active_tool: claude     # claude | codex | copilot | none — who currently hold
 branch: spec/001-codex-subagent-gates-and-hard-task-escalation            # spec/001-codex-subagent-gates-and-hard-task-escalation once cut, else none
 worktree: /Users/babar/projects/sdd-kit-public.worktrees/001-codex-subagent-gates-and-hard-task-escalation          # absolute path once created, else none
 pr: none                # PR URL once opened — spec-pr.sh writes this itself
-opponent: CHALLENGED (2026-07-14)       # not-run | CHALLENGED | CLEARED | BLOCKED  (+ date)
+opponent: CHALLENGED round 2 (2026-07-14)       # not-run | CHALLENGED | CLEARED | BLOCKED  (+ date)
 reality_check: not-run  # not-run | NEEDS WORK | FAILED | READY  (+ date)
 ci: not-run             # not-run | pending | green | red  (+ date) — spec-ci.sh writes this
 retro: not-run          # not-run | done (+ date) — /sdd:retro after ship

@@ -108,6 +108,14 @@ updated: 2026-07-14
   - *Refs:* AC-007, AC-008
   - *Evidence:* `sh -c ! grep -rn "0\.144\.1" knowledge/cli-subagent-delegation.md .specify/specs/001-codex-subagent-gates-and-hard-task-escalation/notes/codex-subagents.md | grep -v "auto-updated\|may have run" && grep -c "0\.144\.4" knowledge/cli-subagent-delegation.md → 3 (see notes/evidence.md)` (2026-07-14)
 
+- [x] **T010o4** — Discriminating Copilot model-pin probe (or downgrade the claim)
+  - *Files:* `knowledge/cli-subagent-delegation.md`
+  - *Defect:* the "per-agent model IS honored" claim rests on a probe that pinned `gpt-5.6-terra` — a known session-default — so the capture cannot discriminate honored-vs-inherited (opponent Round 2 Finding 1); the fallback-warning claim is also uncaptured
+  - *Done:* one captured session hands off to agents pinning TWO distinct valid models (+ one invalid id); if the spawn lines show their respective models the claim stands with discriminating evidence cited, otherwise it is downgraded to "not independently confirmed"; the fallback warning is captured or its claim removed; the knowledge transcript is labeled abridged with a pointer to the full capture
+  - *Verify:* `copilot -p "Hand off to each of the custom agents sdd-proto-a, sdd-proto-b, and sdd-proto-x in turn, each with the task 'confirm readiness'. Report each agent's reply." --allow-all --no-color` → spawn lines for all three agents
+  - *Refs:* REQ-006, AC-008
+  - *Evidence:* `captured run T010o4 (sha256:ed3cb1d6e84c): one session, three parallel handoffs — spawn lines Sdd-proto-a(claude-sonnet-5), Sdd-proto-b(gpt-5.6-terra), Sdd-proto-x(claude-sonnet-4.6 fallback for invalid pin) — two distinct pins → two distinct child models; knowledge file updated to cite it` (2026-07-14)
+
 - [x] **T010o3** — Align spec.md's escalation promise with the recorded reality
   - *Files:* `spec.md` (this spec dir — §1 problem framing, §5 user story)
   - *Defect:* spec text promises "[hard] escalation semantics match Claude" / "no longer silently runs at the implementation tier" — unmet on the installed Codex (model pin not honored); the generated docs hedge correctly, the durable spec doesn't (opponent Finding 3)

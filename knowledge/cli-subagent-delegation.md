@@ -30,10 +30,10 @@ v0.144.4, and conclusions were identical throughout.)
 
 - Custom agents = `.github/agents/*.agent.md` (project) or
   `~/.copilot/agents/` (personal; where the SDD kit installs). Both scopes
-  hand off headlessly. The captured probe (spec-run block `T010o1` in
-  `sdd-kit-public/001`'s `notes/evidence.md`, sha256:3f5e4d23af7d) — agent
-  profile pinned `model: gpt-5.6-terra`, prompt asked the plain session to
-  hand off:
+  hand off headlessly. Abridged transcript of the captured probe (full
+  capture: spec-run block `T010o1` in `sdd-kit-public/001`'s
+  `notes/evidence.md`, sha256:3f5e4d23af7d) — agent profile pinned
+  `model: gpt-5.6-terra`, prompt asked the plain session to hand off:
 
   ```text
   $ copilot -p "Hand this task off to the sdd-proto-hard custom agent:
@@ -51,11 +51,18 @@ v0.144.4, and conclusions were identical throughout.)
   **`ESCALATED-BY-PROTO`**
   ```
 
-- **Per-agent `model:` frontmatter IS honored** (the transcript names the
-  model in the spawn line), with a loud fallback warning when the id is
-  invalid: `Warning: Custom agent "…" specifies model "…" which is not
-  available; using "claude-sonnet-4.6" instead`.
-- Handoffs run as background agents and the parent waits and reports.
+- **Per-agent `model:` frontmatter IS honored — discriminating capture.**
+  One session (spec-run block `T010o4`, sha256:ed3cb1d6e84c) handed off to
+  three agents at once: pins `claude-sonnet-5`, `gpt-5.6-terra`, and an
+  invalid id produced spawn lines `Sdd-proto-a(claude-sonnet-5)`,
+  `Sdd-proto-b(gpt-5.6-terra)`, `Sdd-proto-x(claude-sonnet-4.6)` — two
+  distinct valid pins yielded two distinct child models in the same session
+  (no single session default can explain that), and the invalid pin fell
+  back to `claude-sonnet-4.6`, visible in its spawn line. (An uncaptured
+  first probe also printed a textual warning on the invalid-id fallback;
+  treat the wording as anecdote, the fallback itself is captured.)
+- Handoffs run as background agents — spawned in parallel when asked — and
+  the parent waits and reports each reply.
 
 ## What this means for the kit
 
