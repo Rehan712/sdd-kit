@@ -159,7 +159,7 @@ mid-tier model that's faster and cheaper. The mapping is the **model policy**:
     generated **subagents** (`~/.codex/agents/sdd-{opponent,reality-check,implement-hard}.toml`)
     the adapters delegate to by name — fresh-context review instead of
     persona passes. Their TOMLs carry the tier's model + effort; note current
-    Codex (0.144.1) spawns them on the session model (see
+    Codex (0.144.4) spawns them on the session model (see
     `knowledge/cli-subagent-delegation.md`), so the profile stays the model lever.
   - *Copilot CLI:* each generated `sdd-<phase>` agent (and the gate persona
     copies) gets `model:` pinned in its frontmatter; effort is session-level, so

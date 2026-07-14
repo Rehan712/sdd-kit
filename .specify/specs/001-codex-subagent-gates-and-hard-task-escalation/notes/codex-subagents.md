@@ -1,6 +1,6 @@
 # Empirical: kit subagent TOMLs on installed Codex (T006 / AC-007)
 
-**Date:** 2026-07-14 · **codex-cli 0.144.1** · `multi_agent` feature: stable,
+**Date:** 2026-07-14 · **codex-cli 0.144.4** (auto-updated from 0.144.1 mid-session; captured banner v0.144.4) · `multi_agent` feature: stable,
 enabled (`codex features list`). Method: TOMLs generated hermetically by this
 branch's `build-adapters.sh` (policy: `codex_model: gpt-5.6-sol`,
 `codex_effort: xhigh` on all three roles), staged in a scratch git repo;
@@ -28,7 +28,7 @@ under `~/.codex/sessions/2026/07/14/`.
    coherent, and safe."* — the persona's adversarial role and default-negative
    verdict, in the subagent's own words.
 
-## What the docs promised but 0.144.1 does NOT deliver
+## What the docs promised but 0.144.4 does NOT deliver
 
 4. **Per-agent `model` pinning is not honored.** Policy pinned
    `gpt-5.6-sol`; every child rollout ran `gpt-5.6-terra` (the session
@@ -37,7 +37,7 @@ under `~/.codex/sessions/2026/07/14/`.
    The kit keeps emitting both keys — they are documented, harmless when
    ignored, and will bind when Codex honors them — but no kit doc may claim
    per-task model escalation on Codex today. What `sdd-implement-hard` buys
-   on 0.144.1: fresh context + the escalation instructions, at the session's
+   on 0.144.4: fresh context + the escalation instructions, at the session's
    model. Running the session under `codex --profile sdd-reasoning` remains
    the model lever.
 5. **Agent enumeration is not a capability.** "Which custom agents are

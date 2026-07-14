@@ -13,7 +13,7 @@ project: sdd-kit-public
 > On Codex CLI the kit's two adversarial gates run as persona passes — the
 > agent grading work it may have written — and `[hard]`-task escalation is
 > inert. Codex has shipped real subagents (GA since v0.115.0; installed:
-> 0.144.1) with per-agent `model` + `model_reasoning_effort`. This spec makes
+> 0.144.4) with per-agent `model` + `model_reasoning_effort`. This spec makes
 > `build-adapters.sh` generate kit subagents from the model policy so gates get
 > fresh-context review and `[hard]` tasks escalate on Codex, updates the
 > now-stale "single-agent" documentation, and empirically prototypes the
@@ -26,8 +26,12 @@ The kit's Codex adapters carry a preamble written when Codex was single-agent:
 review pass." That claim is stale (Codex docs: subagents as per-agent TOML
 files under `~/.codex/agents/`, delegation triggerable from skill instructions),
 and it costs real integrity: a self-grading gate is structurally weaker than a
-fresh-context one, and a `[hard]` task on Codex silently runs at the
-implementation tier.
+fresh-context one, and a `[hard]` task on Codex gets neither fresh context nor
+an escalation brief. (Empirical note, discovered during T006: the installed
+Codex does not honor per-agent `model` fields, so what escalation delivers on
+Codex **today** is fresh context + the reasoning-tier brief at the session's
+model; the pinned model binds when Codex honors the documented field. The
+session-level lever remains `codex --profile sdd-reasoning`.)
 
 **REQ-001:** On Codex, the opponent and reality-check gates must run as true
 subagents with fresh context (never self-grading persona passes) whenever the
@@ -79,8 +83,10 @@ persona-pass when they are not.
 
 - I can have the opponent gate attack the diff with fresh context so that the
   verdict isn't produced by the same context that wrote the code.
-- I can tag a task `[hard]` and have Codex delegate it to the reasoning-tier
-  subagent so that escalation semantics match Claude.
+- I can tag a task `[hard]` and have Codex delegate it to the
+  `sdd-implement-hard` subagent so that it gets fresh context and the
+  escalation brief (and the reasoning-tier model once Codex honors the
+  per-agent `model` field its docs describe).
 - If I never installed the kit subagents, the gates still run (persona-pass
   fallback) rather than being skipped.
 
@@ -119,7 +125,7 @@ persona-pass when they are not.
   read-only) with the generated agents installed demonstrates the CLI accepts
   the TOMLs (no config error) and can enumerate/spawn a kit subagent; output
   committed to the spec's `notes/` (proves REQ-002 end-to-end on the installed
-  codex 0.144.1).
+  codex 0.144.4).
 - [ ] **AC-008:** The Copilot prototype ran headlessly with a scratch
   `.github/agents/` profile; the captured transcript and a works/doesn't-work
   finding are in `knowledge/cli-subagent-delegation.md` (new file), and no

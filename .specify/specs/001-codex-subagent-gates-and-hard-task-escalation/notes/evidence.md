@@ -143,3 +143,55 @@ agents/reality-check.agent.md
 ```text
 README + constitution both name the codex subagents
 ```
+
+## T010o1 — 2026-07-14T12:15:07
+
+- **Command:** `copilot -p Hand this task off to the sdd-proto-hard custom agent: 'confirm readiness'. Report exactly what it returned. --allow-all --no-color`
+- **Cwd:** /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/9a8b00e2-e365-4923-8678-5b5adc87e90a/scratchpad/copilot-probe
+- **Exit:** 0
+- **Captured:** 2026-07-14T12:15:07 · sha256:3f5e4d23af7d (over full output)
+
+```text
+● Sdd-proto-hard(gpt-5.6-terra) confirm readiness
+  └ Agent started in background with agent_id: confirm-readiness. You'll be notif...
+
+ESCALATED-BY-PROTOWaiting for the sdd-proto-hard agent to complete…
+
+<system_notification>Background agent confirm-readiness completed</system_notification>
+
+● Read (Sdd-proto-hard agent — confirm readiness)
+  └ Completed
+
+The sdd-proto-hard agent returned:
+
+**`ESCALATED-BY-PROTO`**
+
+
+
+Changes    +0 -0
+AI Credits 11.9 (13s)
+Tokens     ↑ 76.8k (50.2k cached, 26.6k written) • ↓ 326 (44 reasoning)
+Resume     copilot --resume=9ef8f523-4f9f-4515-b7b3-484fab471d96
+```
+
+## T010o2 — 2026-07-14T12:18:19
+
+- **Command:** `sh -c ! grep -rn "0\.144\.1" knowledge/cli-subagent-delegation.md .specify/specs/001-codex-subagent-gates-and-hard-task-escalation/notes/codex-subagents.md | grep -v "auto-updated\|may have run" && grep -c "0\.144\.4" knowledge/cli-subagent-delegation.md`
+- **Cwd:** /Users/babar/projects/sdd-kit-public.worktrees/001-codex-subagent-gates-and-hard-task-escalation
+- **Exit:** 0
+- **Captured:** 2026-07-14T12:18:19 · sha256:1121cfccd591 (over full output)
+
+```text
+3
+```
+
+## T010o3 — 2026-07-14T12:18:19
+
+- **Command:** `sh -c ! grep -q "match Claude" .specify/specs/001-codex-subagent-gates-and-hard-task-escalation/spec.md && grep -c "fresh context" .specify/specs/001-codex-subagent-gates-and-hard-task-escalation/spec.md`
+- **Cwd:** /Users/babar/projects/sdd-kit-public.worktrees/001-codex-subagent-gates-and-hard-task-escalation
+- **Exit:** 0
+- **Captured:** 2026-07-14T12:18:19 · sha256:f0b5c2c2211c (over full output)
+
+```text
+5
+```

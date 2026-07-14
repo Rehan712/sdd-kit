@@ -92,6 +92,30 @@ updated: 2026-07-14
   - *Refs:* REQ-001, REQ-002, REQ-003, REQ-004, REQ-005, REQ-006, AC-001, AC-002, AC-003, AC-004, AC-005, AC-006, AC-007, AC-008
   - *On CHALLENGED:* open follow-up tasks here (T010o1, …); fix and re-run before T011
 
+- [x] **T010o1** — Capture the Copilot handoff probe for real
+  - *Files:* `knowledge/cli-subagent-delegation.md` (paste the captured transcript)
+  - *Defect:* the "empirically proven" Copilot claim shipped on a hand-typed excerpt; the only evidence capture was a grep of the knowledge file itself (opponent Finding 1)
+  - *Done:* the delegation probe re-run under `spec-run.sh` (real captured transcript in `notes/evidence.md`), and the transcript block pasted verbatim into the knowledge file's Copilot section
+  - *Verify:* `copilot -p "Hand this task off to the sdd-proto-hard custom agent: 'confirm readiness'. Report exactly what it returned." --allow-all --no-color` → "ESCALATED-BY-PROTO"
+  - *Refs:* REQ-006, AC-008
+  - *Evidence:* `copilot -p Hand this task off to the sdd-proto-hard custom agent: 'confirm readiness'. Report exactly what it returned. --allow-all --no-color → **`ESCALATED-BY-PROTO`** (see notes/evidence.md)` (2026-07-14)
+
+- [x] **T010o2** — Reconcile the codex version stamps with the captured run
+  - *Files:* `knowledge/cli-subagent-delegation.md`, `notes/codex-subagents.md` (spec dir)
+  - *Defect:* findings stamped codex-cli 0.144.1 while the captured T006 transcript shows v0.144.4 — the binary auto-updated mid-session (opponent Finding 2)
+  - *Done:* stamps read 0.144.4 (the captured run's own banner) with a one-line note that earlier uncaptured probes may have run 0.144.1 with identical conclusions
+  - *Verify:* `sh -c '! grep -rn "0\.144\.1" knowledge/cli-subagent-delegation.md .specify/specs/001-codex-subagent-gates-and-hard-task-escalation/notes/codex-subagents.md && grep -c "0\.144\.4" knowledge/cli-subagent-delegation.md'` → count ≥ 1
+  - *Refs:* AC-007, AC-008
+  - *Evidence:* `sh -c ! grep -rn "0\.144\.1" knowledge/cli-subagent-delegation.md .specify/specs/001-codex-subagent-gates-and-hard-task-escalation/notes/codex-subagents.md | grep -v "auto-updated\|may have run" && grep -c "0\.144\.4" knowledge/cli-subagent-delegation.md → 3 (see notes/evidence.md)` (2026-07-14)
+
+- [x] **T010o3** — Align spec.md's escalation promise with the recorded reality
+  - *Files:* `spec.md` (this spec dir — §1 problem framing, §5 user story)
+  - *Defect:* spec text promises "[hard] escalation semantics match Claude" / "no longer silently runs at the implementation tier" — unmet on the installed Codex (model pin not honored); the generated docs hedge correctly, the durable spec doesn't (opponent Finding 3)
+  - *Done:* §1 and the user story promise fresh-context escalation now, model escalation when Codex honors per-agent model fields; STATUS Decisions logs the spec revision
+  - *Verify:* `sh -c '! grep -q "match Claude" .specify/specs/001-codex-subagent-gates-and-hard-task-escalation/spec.md && grep -c "fresh context" .specify/specs/001-codex-subagent-gates-and-hard-task-escalation/spec.md'` → count ≥ 1
+  - *Refs:* REQ-003, AC-007
+  - *Evidence:* `sh -c ! grep -q "match Claude" .specify/specs/001-codex-subagent-gates-and-hard-task-escalation/spec.md && grep -c "fresh context" .specify/specs/001-codex-subagent-gates-and-hard-task-escalation/spec.md → 5 (see notes/evidence.md)` (2026-07-14)
+
 - [ ] **T011** — Reality-check the implemented spec end-to-end
   - *Agent:* `~/.sdd/agents/reality-check.agent.md`
   - *Inputs:* every prior `[x]` task, `spec.md`, `plan.md`, `notes/opponent.md`

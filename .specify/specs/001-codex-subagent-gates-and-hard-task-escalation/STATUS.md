@@ -5,7 +5,7 @@ active_tool: claude     # claude | codex | copilot | none — who currently hold
 branch: spec/001-codex-subagent-gates-and-hard-task-escalation            # spec/001-codex-subagent-gates-and-hard-task-escalation once cut, else none
 worktree: /Users/babar/projects/sdd-kit-public.worktrees/001-codex-subagent-gates-and-hard-task-escalation          # absolute path once created, else none
 pr: none                # PR URL once opened — spec-pr.sh writes this itself
-opponent: not-run       # not-run | CHALLENGED | CLEARED | BLOCKED  (+ date)
+opponent: CHALLENGED (2026-07-14)       # not-run | CHALLENGED | CLEARED | BLOCKED  (+ date)
 reality_check: not-run  # not-run | NEEDS WORK | FAILED | READY  (+ date)
 ci: not-run             # not-run | pending | green | red  (+ date) — spec-ci.sh writes this
 retro: not-run          # not-run | done (+ date) — /sdd:retro after ship
@@ -58,6 +58,11 @@ Next: implement (worktree cut on first run).
   tests/test-build-adapters.sh for AC-006/007/008; COPILOT_PREAMBLE truth-fix
   in T009); T008's Verify used `grep -L` whose exit code can never be 0 —
   amended to `! grep -q` form / owner.
+- 2026-07-14 — Opponent Round 1: CHALLENGED (3 findings — uncaptured copilot
+  claim; version-stamp drift after codex auto-updated 0.144.1→0.144.4
+  mid-session; spec §1/§5 overpromised [hard] semantics). SPEC REVISED per
+  Finding 3: escalation promise reworded to fresh-context-now,
+  model-pin-when-honored — REQ/AC ids unchanged / opponent + owner.
 
 ## Open questions / blockers
 
