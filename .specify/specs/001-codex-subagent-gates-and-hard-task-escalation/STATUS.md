@@ -47,6 +47,17 @@ Next: implement (worktree cut on first run).
 - 2026-07-14 — AC-007 (codex accepts TOMLs) runs EARLY in the Tests stage so a
   wrong TOML shape is fixed against observed behavior before doc tasks land /
   plan R1.
+- 2026-07-14 — No stack expert matches bash+markdown kit work (stacks: []);
+  tasks executed by the session directly; user declined the implement→copilot
+  dispatch for this spec / user + owner.
+- 2026-07-14 — Empirical: codex 0.144.1 spawns kit subagents from both scopes,
+  instructions load, per-agent model pin NOT honored (session model used);
+  copilot 1.0.70 handoff works INCLUDING model pin. Docs phrased accordingly;
+  copilot gate delegation deferred to a follow-up spec / notes/codex-subagents.md.
+- 2026-07-14 — T007/T009 Files amended (+ binding tests in
+  tests/test-build-adapters.sh for AC-006/007/008; COPILOT_PREAMBLE truth-fix
+  in T009); T008's Verify used `grep -L` whose exit code can never be 0 —
+  amended to `! grep -q` form / owner.
 
 ## Open questions / blockers
 
