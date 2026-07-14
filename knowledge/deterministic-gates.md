@@ -62,4 +62,26 @@ acceptance and evidence must record that run (the triggering input, the captured
 output, and — for a "never does Y" clause — proof Y didn't happen, e.g. an
 unchanged checksum). *(learned: sdd-kit/001 — reality-check gap T020a: AC-009 was
 "verified" by skill-text grep; the prescribed plan-run against a stale brief was
-missing until the gate demanded it.)*
+missing until the gate demanded it.)* The self-attesting variant is the same
+failure: a Verify that greps the artifact *making* the claim ("finding: works")
+proves the claim was written, not that it is true. An empirical-claim task's
+Verify must re-run the probe itself (spec-run capture of the real CLI/system),
+never inspect the prose that asserts it. *(learned: sdd-kit-public/001 —
+opponent R1 F1 / T010o1: "empirically proven" Copilot handoff shipped on a
+hand-typed excerpt; the only capture was a grep of the knowledge file itself.)*
+
+## Empirical probes must be able to falsify the null hypothesis
+
+A probe that "confirms" a capability is worthless if the null hypothesis
+(default/inherited behavior) predicts the same observation. Design the
+experiment so success and inheritance look *different*: pin values known to
+differ from the environment's defaults — one session with several distinct
+pins falsifies inheritance outright, where a single pin equal to the session
+default can never discriminate. Two hygiene corollaries: stamp tool versions
+from the captured run's own banner (binaries auto-update mid-session), and
+when the probe discovers reality differs from the spec's promise, revise the
+spec's own §1/user story in the same pass — hedging only the generated docs
+leaves the durable artifact overpromising. *(learned: sdd-kit-public/001 —
+opponent R2 F1 / T010o4: "model pin honored" was pinned to the session-default
+model; R1 F2 / T010o2: 0.144.1 stamp vs captured 0.144.4 banner; R1 F3 /
+T010o3: spec kept "escalation matches Claude" after the capture disproved it.)*

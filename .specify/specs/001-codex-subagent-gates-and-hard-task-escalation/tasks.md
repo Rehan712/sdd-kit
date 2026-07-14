@@ -1,6 +1,6 @@
 ---
 tasks_for: 001-codex-subagent-gates-and-hard-task-escalation
-status: in-progress
+status: complete
 created: 2026-07-14
 updated: 2026-07-14
 ---
@@ -137,8 +137,9 @@ updated: 2026-07-14
   - *Files:* (none — branch + PR)
   - *Acceptance:* `~/.sdd/scripts/spec-pr.sh <spec-dir>` prints the PR URL; both gate verdicts in the PR body; reviewer requested
 
-- [ ] **T013** — Roll out (after /sdd:review reports the PR merged)
+- [x] **T013** — Roll out (after /sdd:review reports the PR merged)
   - *Acceptance:* port to the private repo (CON-004, prior-PR pattern); `setup.sh` on the live install; `ls ~/.codex/agents/sdd-*.toml` shows the three generated subagents; STATUS `phase: shipped`; MET-001 check-back noted for the next Codex-dispatched spec's retro
+  - *Evidence:* `public PR #12 merged (889631a); ported to private via Rehan712/sdd-kit-private#12 (5b4d884, CI 4/4 green); setup.sh on live install → 0 errors; ls ~/.codex/agents/sdd-*.toml → sdd-implement-hard.toml sdd-opponent.toml sdd-reality-check.toml` (2026-07-14)
 
-- [ ] **T014** — Retro: harvest lessons into the hub
+- [x] **T014** — Retro: harvest lessons into the hub
   - *Acceptance:* `/sdd:retro` run; `notes/retro.md` written with the root-cause split; STATUS `retro:` set to `done`

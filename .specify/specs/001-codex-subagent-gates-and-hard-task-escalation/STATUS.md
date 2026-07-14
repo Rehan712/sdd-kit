@@ -1,14 +1,14 @@
 ---
 spec: 001-codex-subagent-gates-and-hard-task-escalation
-phase: review          # specify | plan | tasks | implement | review | shipped | abandoned
+phase: shipped          # specify | plan | tasks | implement | review | shipped | abandoned
 active_tool: claude     # claude | codex | copilot | none — who currently holds the spec
 branch: spec/001-codex-subagent-gates-and-hard-task-escalation            # spec/001-codex-subagent-gates-and-hard-task-escalation once cut, else none
 worktree: /Users/babar/projects/sdd-kit-public.worktrees/001-codex-subagent-gates-and-hard-task-escalation          # absolute path once created, else none
 pr: https://github.com/Rehan712/sdd-kit/pull/12                # PR URL once opened — spec-pr.sh writes this itself
 opponent: CLEARED (2026-07-14, round 3)       # not-run | CHALLENGED | CLEARED | BLOCKED  (+ date)
 reality_check: READY (2026-07-14)  # not-run | NEEDS WORK | FAILED | READY  (+ date)
-ci: not-run             # not-run | pending | green | red  (+ date) — spec-ci.sh writes this
-retro: not-run          # not-run | done (+ date) — /sdd:retro after ship
+ci: green (2026-07-14)  # not-run | pending | green | red  (+ date) — spec-ci.sh writes this
+retro: done (2026-07-14) # not-run | done (+ date) — /sdd:retro after ship
 updated: 2026-07-14
 ---
 
@@ -16,10 +16,14 @@ updated: 2026-07-14
 
 ## Where things stand
 
-Both gates passed — opponent CLEARED (round 3; 4 findings fixed with
-captured evidence en route), reality-check READY (8/8 ACs). PR open:
-https://github.com/Rehan712/sdd-kit/pull/12. T013 (merge → port to private
-repo → live setup.sh) and T014 (retro) wait on the merge.
+Shipped. Public PR #12 merged (889631a); ported to the private repo per
+CON-004 (Rehan712/sdd-kit-private#12, squash 5b4d884, CI 4/4 green);
+`setup.sh` re-run on the live install (~/.sdd → private clone) — the three
+kit subagents are materialized at `~/.codex/agents/sdd-{opponent,
+reality-check,implement-hard}.toml` with the model policy stamped in.
+Retro done: 2 lessons filed into `knowledge/deterministic-gates.md`
+(root-cause split 0/1/3 — all implementation-errors were evidence-integrity,
+not code). Spec closed.
 
 ## Decisions log
 
@@ -64,6 +68,11 @@ repo → live setup.sh) and T014 (retro) wait on the merge.
   Finding 3: escalation promise reworded to fresh-context-now,
   model-pin-when-honored — REQ/AC ids unchanged / opponent + owner.
 
+- 2026-07-14 — Shipped: private port merged (sdd-kit-private#12), setup.sh
+  run, TOMLs live. MET-001 check-back: the NEXT Codex-dispatched spec's retro
+  must confirm its gate reports record subagent (fresh-context) runs, not
+  persona passes / owner.
+
 ## Open questions / blockers
 
 (none)
@@ -76,4 +85,6 @@ installed on this machine — the empirical ACs must run here.
 
 ## Next action
 
-`/sdd:review` — CI triage, review feedback, merge. After merge: T013 rollout + T014 retro.
+(spec closed) MET-001 check-back: at the NEXT Codex-dispatched spec's retro,
+confirm its gate reports' Agent lines name the sdd-* subagents, not persona
+passes.
