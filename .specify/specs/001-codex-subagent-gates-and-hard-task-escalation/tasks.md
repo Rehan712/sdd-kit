@@ -133,7 +133,7 @@ updated: 2026-07-14
 
 ## Ship
 
-- [ ] **T012** — Open PR to main referencing spec.md and plan.md
+- [x] **T012** — Open PR to main referencing spec.md and plan.md
   - *Files:* (none — branch + PR)
   - *Acceptance:* `~/.sdd/scripts/spec-pr.sh <spec-dir>` prints the PR URL; both gate verdicts in the PR body; reviewer requested
 

@@ -1,10 +1,10 @@
 ---
 spec: 001-codex-subagent-gates-and-hard-task-escalation
-phase: implement          # specify | plan | tasks | implement | review | shipped | abandoned
+phase: review          # specify | plan | tasks | implement | review | shipped | abandoned
 active_tool: claude     # claude | codex | copilot | none — who currently holds the spec
 branch: spec/001-codex-subagent-gates-and-hard-task-escalation            # spec/001-codex-subagent-gates-and-hard-task-escalation once cut, else none
 worktree: /Users/babar/projects/sdd-kit-public.worktrees/001-codex-subagent-gates-and-hard-task-escalation          # absolute path once created, else none
-pr: none                # PR URL once opened — spec-pr.sh writes this itself
+pr: https://github.com/Rehan712/sdd-kit/pull/12                # PR URL once opened — spec-pr.sh writes this itself
 opponent: CLEARED (2026-07-14, round 3)       # not-run | CHALLENGED | CLEARED | BLOCKED  (+ date)
 reality_check: READY (2026-07-14)  # not-run | NEEDS WORK | FAILED | READY  (+ date)
 ci: not-run             # not-run | pending | green | red  (+ date) — spec-ci.sh writes this
@@ -16,10 +16,10 @@ updated: 2026-07-14
 
 ## Where things stand
 
-tasks.md written and validated (sdd-analyze: consistent, 0 warnings) — 14
-tasks: 3 backend, 2 test suites, 2 empirical (codex accepts TOMLs; copilot
-handoff prototype), 2 docs (gated on the empirical outcomes), gates, ship.
-Next: implement (worktree cut on first run).
+Both gates passed — opponent CLEARED (round 3; 4 findings fixed with
+captured evidence en route), reality-check READY (8/8 ACs). PR open:
+https://github.com/Rehan712/sdd-kit/pull/12. T013 (merge → port to private
+repo → live setup.sh) and T014 (retro) wait on the merge.
 
 ## Decisions log
 
@@ -76,4 +76,4 @@ installed on this machine — the empirical ACs must run here.
 
 ## Next action
 
-`/sdd:plan`
+`/sdd:review` — CI triage, review feedback, merge. After merge: T013 rollout + T014 retro.
