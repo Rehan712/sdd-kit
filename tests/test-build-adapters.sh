@@ -115,4 +115,20 @@ test_codex_adapters_delegate_copilot_adapters_persona_pass() {
   assert_not_contains "$OUT" "sdd-implement-hard" "AC-004: copilot promises no delegation"
 }
 
+# AC-007 / AC-008: the empirical findings are pinned as a versioned knowledge
+# artifact — both CLIs carry a dated, version-stamped Finding line, so the
+# claims the docs make trace to captured probes (transcripts in the spec's
+# notes/), not to memory.
+test_delegation_findings_artifact_present_and_shaped() {
+  local k="$KIT_DIR/knowledge/cli-subagent-delegation.md"
+  [[ -f "$k" ]] || { t_fail "AC-007/AC-008: knowledge/cli-subagent-delegation.md missing"; return; }
+  OUT="$(cat "$k")"
+  assert_contains "$OUT" "Codex CLI (codex-cli 0.144" "AC-007: codex finding is version-stamped"
+  assert_contains "$OUT" "Copilot CLI (1.0" "AC-008: copilot finding is version-stamped"
+  local n
+  n="$(grep -c '^\*\*Finding:' "$k")"
+  assert_eq 2 "$n" "AC-007/AC-008: one Finding verdict per CLI"
+  assert_contains "$OUT" "NOT honored" "AC-007: the codex model-pin delta is recorded, not papered over"
+}
+
 t_run_all

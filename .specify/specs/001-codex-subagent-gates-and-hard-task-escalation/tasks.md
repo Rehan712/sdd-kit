@@ -58,11 +58,12 @@ updated: 2026-07-14
   - *Refs:* REQ-002, AC-007, plan §7 R1 R2
   - *Evidence:* `codex exec --sandbox read-only Spawn the sdd-opponent agent and have it reply with exactly the word READY, then report what it said. → The sdd-opponent agent said: READY (see notes/evidence.md)` (2026-07-14)
 
-- [ ] **T007** — Prototype Copilot agent-tool handoff and record the finding
-  - *Files:* `knowledge/cli-subagent-delegation.md` (new)
+- [x] **T007** — Prototype Copilot agent-tool handoff and record the finding
+  - *Files:* `knowledge/cli-subagent-delegation.md` (new), `tests/test-build-adapters.sh` (AC-007/AC-008 binding test on the knowledge artifact)
   - *Acceptance:* scratch dir with `.github/agents/sdd-proto-hard.agent.md` (distinct `model:`); headless `copilot -p` run asks the session to hand the task to that agent; transcript captured; knowledge file states the dated works/doesn't finding for BOTH CLIs with excerpts and `(learned: sdd-kit-public/001)`; timeboxed — "could not demonstrate" is a valid finding (plan R3)
   - *Verify:* `grep -iE "finding: (works|does not|partial)" knowledge/cli-subagent-delegation.md` → the verdict line
   - *Refs:* REQ-006, AC-008, plan §2 §7 R3
+  - *Evidence:* `grep -icE finding: (works|does not|partial) knowledge/cli-subagent-delegation.md → 2 (see notes/evidence.md)` (2026-07-14)
 
 ## Docs (only claims T006/T007 proved)
 

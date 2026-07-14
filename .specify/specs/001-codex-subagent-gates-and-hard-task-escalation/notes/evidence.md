@@ -97,3 +97,14 @@ tokens used
 23 724
 The sdd-opponent agent said: READY
 ```
+
+## T007 — 2026-07-14T11:57:53
+
+- **Command:** `grep -icE finding: (works|does not|partial) knowledge/cli-subagent-delegation.md`
+- **Cwd:** /Users/babar/projects/sdd-kit-public.worktrees/001-codex-subagent-gates-and-hard-task-escalation
+- **Exit:** 0
+- **Captured:** 2026-07-14T11:57:53 · sha256:53c234e5e847 (over full output)
+
+```text
+2
+```
