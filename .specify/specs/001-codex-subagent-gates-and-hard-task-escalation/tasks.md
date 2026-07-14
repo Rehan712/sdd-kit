@@ -124,7 +124,7 @@ updated: 2026-07-14
   - *Refs:* REQ-003, AC-007
   - *Evidence:* `sh -c ! grep -q "match Claude" .specify/specs/001-codex-subagent-gates-and-hard-task-escalation/spec.md && grep -c "fresh context" .specify/specs/001-codex-subagent-gates-and-hard-task-escalation/spec.md → 5 (see notes/evidence.md)` (2026-07-14)
 
-- [ ] **T011** — Reality-check the implemented spec end-to-end
+- [x] **T011** — Reality-check the implemented spec end-to-end
   - *Agent:* `~/.sdd/agents/reality-check.agent.md`
   - *Inputs:* every prior `[x]` task, `spec.md`, `plan.md`, `notes/opponent.md`
   - *Acceptance:* agent returns **READY** (not NEEDS WORK / FAILED); all AC-### mapped to concrete evidence in `notes/reality-check.md`
