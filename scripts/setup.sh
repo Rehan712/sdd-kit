@@ -16,8 +16,9 @@
 #   4. Links every SDD skill and agent into each Claude home (~/.claude and
 #      ~/.claude_*), one symlink per item — your other skills/agents are
 #      untouched. Runs scripts/sync.sh under the hood.
-#   5. If ~/.codex or ~/.copilot exist, generates their adapters from the
-#      canonical skills via scripts/build-adapters.sh (model policy applied).
+#   5. If ~/.codex (or any ~/.codex_* profile home) or ~/.copilot exist,
+#      generates their adapters from the canonical skills via
+#      scripts/build-adapters.sh (model policy applied).
 #   6. Runs scripts/sdd-doctor.sh to verify the install.
 #
 # Usage:

@@ -24,6 +24,35 @@ v0.144.4, and conclusions were identical throughout.)
 - Enumeration ("which agents do you have?") is not a capability — replies
   "None"/"root" even with agents installed. Always delegate by name.
 
+### Addendum: spawn mechanics + subagent permissions (codex-cli 0.144.4) — 2026-07-15
+
+Probes: scratch-repo `codex exec` spawns with a marker agent
+(`nickname_candidates` as the plaintext loaded-or-not observable), child
+rollout `turn_context` inspected for effective `sandbox_policy` /
+`approval_policy`.
+
+- **`agent_type` selects the agent — `task_name` is only a label.** The
+  `spawn_agent` schema is `message`, `task_name`, `agent_type`, `model`,
+  `reasoning_effort`, `service_tier`, `fork_turns`, `fork_context`. A spawn
+  with `task_name="sdd-opponent"` but no `agent_type` runs a GENERIC child
+  that never loads the persona (captured: generic nickname, instructions
+  ignored). The generated preambles now say `agent_type` explicitly.
+- **Per-agent TOML permission keys are documented-shaped but NOT honored,
+  like `model`:** an agent TOML carrying `sandbox_mode = "workspace-write"` +
+  `approval_policy = "never"` parsed cleanly, loaded (nickname bound), and
+  the child still ran the parent session's `read-only` / `on-request`.
+- **Spawn-time permission args don't exist:** passing `approval_policy` to
+  `spawn_agent` is a hard error — `unknown field 'approval_policy'`.
+- **What DOES work: subagents inherit the parent session's configured
+  policy.** A session launched `codex --profile permprobe` whose profile file
+  set `approval_policy = "never"` + `sandbox_mode = "workspace-write"` spawned
+  children running exactly that policy (child `turn_context` captured). The
+  kit therefore emits `codex_sandbox` / `codex_approval` from models.yml into
+  the `sdd-<tier>.config.toml` profiles — launching `codex --profile
+  sdd-<tier>` is the one lever that stops per-command approval prompts in
+  kit subagents. The TUI's in-session permission toggle does NOT propagate
+  to subagents; only session-start config does.
+
 ## Copilot CLI (1.0.70) — 2026-07-14
 
 **Finding: works** — including the model pin.

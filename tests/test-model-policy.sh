@@ -47,4 +47,26 @@ test_claude_effort_whitelist_unchanged() {
   assert_contains "$OUT" "invalid claude effort 'ultra'" "AC-005: claude set unchanged"
 }
 
+# codex_sandbox / codex_approval: the documented Codex values are accepted,
+# junk and non-codex CLIs are refused before anything is written, and check
+# validates the stored keys.
+test_codex_sandbox_and_approval_policy_fields() {
+  local p; p="$(sandbox_policy)"
+  run_rc 0 "$MP" --file "$p" set tier reasoning codex sandbox workspace-write
+  assert_contains "$OUT" "codex_sandbox = workspace-write" "sandbox accepted"
+  run_rc 0 "$MP" --file "$p" set tier reasoning codex approval never
+  assert_contains "$OUT" "codex_approval = never" "approval accepted"
+  run_rc 0 "$MP" --file "$p" check
+  assert_contains "$OUT" "model policy valid" "check green with sandbox/approval set"
+  run_rc 0 "$MP" --file "$p" tier reasoning codex sandbox
+  assert_eq "workspace-write" "$OUT" "tier query reads sandbox back"
+  run_rc 2 "$MP" --file "$p" set tier reasoning codex sandbox everything
+  assert_contains "$OUT" "invalid codex sandbox 'everything'" "junk sandbox refused"
+  run_rc 2 "$MP" --file "$p" set tier reasoning claude sandbox read-only
+  assert_contains "$OUT" "codex-only" "sandbox refused for non-codex CLI"
+  OUT="$(cat "$p")"
+  assert_contains "$OUT" "codex_sandbox: workspace-write" "file keeps the valid value"
+  assert_not_contains "$OUT" "everything" "refused value never lands in the file"
+}
+
 t_run_all

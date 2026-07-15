@@ -13,10 +13,11 @@
 # kit-generated subagents below, with the persona-pass as fallback.
 # Re-run after any skill change (setup.sh calls this).
 #
-# Installs to:
-#   ~/.codex/skills/sdd-<phase>/SKILL.md        (if ~/.codex exists)
-#   ~/.codex/agents/sdd-{opponent,reality-check,implement-hard}.toml
-#                                               (if ~/.codex exists + models.yml)
+# Installs to (in EVERY codex home: ~/.codex plus any ~/.codex_* directory —
+# the `CODEX_HOME=~/.codex_gym codex` alternate-profile pattern):
+#   <codex-home>/skills/sdd-<phase>/SKILL.md    (if the home exists)
+#   <codex-home>/agents/sdd-{opponent,reality-check,implement-hard}.toml
+#                                               (if the home exists + models.yml)
 #   ~/.copilot/agents/sdd-<phase>.agent.md      (if ~/.copilot exists)
 #   plus copies of the gate personas for Copilot.
 #
@@ -26,7 +27,7 @@
 #            effort isn't supported; the preamble tells the agent to ask for
 #            `--effort` when the session doesn't match).
 #   Codex:   sessions pin models via per-tier profile files
-#            (~/.codex/sdd-<tier>.config.toml — `codex --profile sdd-<tier>`);
+#            (<codex-home>/sdd-<tier>.config.toml — `codex --profile sdd-<tier>`);
 #            the gates and [hard]-escalation pin theirs via the generated
 #            subagent TOMLs (per-agent model + model_reasoning_effort).
 #
@@ -41,7 +42,29 @@ init_colors
 
 [[ "${1:-}" == "--help" || "${1:-}" == "-h" ]] && { usage_from_header "$0"; exit 0; }
 
+# Every Codex home on this machine: ~/.codex plus any ~/.codex_* sibling
+# (the `CODEX_HOME=~/.codex_gym codex` alternate-profile pattern). Adapters
+# install into each so alternate profiles get the same skills, subagents,
+# and tier profiles on every rebuild. Expand with the ${arr[@]+...} guard —
+# empty arrays trip `set -u` on bash 3.2 (macOS /bin/bash).
+CODEX_HOMES=()
+for _ch in "$HOME/.codex" "$HOME"/.codex_*; do
+  [[ -d "$_ch" ]] && CODEX_HOMES+=("$_ch")
+done
+# codex_label <home> — short display tag: `codex` for ~/.codex, else e.g.
+# `codex(.codex_gym)` so multi-home output stays attributable.
+codex_label() {
+  [[ "$1" == "$HOME/.codex" ]] && echo "codex" || echo "codex(${1##*/})"
+}
+
 CODEX_PREAMBLE='> **Codex adaptation.** Wherever this skill says to delegate to an agent, do this:
+> - **Spawning a kit subagent** — pass its name as the `agent_type` argument of
+>   `spawn_agent` (e.g. `agent_type="sdd-opponent"`). `task_name` is only a display
+>   label — it does NOT select the agent, and a spawn without `agent_type` runs a
+>   generic child that never loads the persona. Subagents inherit this SESSION'\''s
+>   configured sandbox/approval policy (per-agent TOML permission keys are not
+>   honored by installed Codex) — for unattended gate runs, launch the session as
+>   `codex --profile sdd-<tier>` so the kit profile'\''s policy applies.
 > - **Gates (opponent / reality-check)** — delegate the gate to the kit subagent
 >   `sdd-opponent` / `sdd-reality-check` (`~/.sdd` generates them into `~/.codex/agents/`);
 >   it reviews with fresh context — never grade your own work when the subagent exists.
@@ -157,8 +180,8 @@ for skill_dir in "$KIT_DIR"/skills/sdd-*/; do
   role="${phase#sdd-}"                             # e.g. specify
   desc="$(frontmatter_field "$skill_file" description)"
 
-  if [[ -d "$HOME/.codex" ]]; then
-    out="$HOME/.codex/skills/$phase/SKILL.md"
+  for ch in ${CODEX_HOMES[@]+"${CODEX_HOMES[@]}"}; do
+    out="$ch/skills/$phase/SKILL.md"
     mkdir -p "$(dirname "$out")"
     {
       printf -- '---\nname: %s\ndescription: %s\nmetadata:\n  short-description: %s (SDD)\n  cli: codex\n---\n\n' \
@@ -167,9 +190,9 @@ for skill_dir in "$KIT_DIR"/skills/sdd-*/; do
       codex_note "$role"
       skill_body "$skill_file"
     } > "$out"
-    echo "  ${GREEN}✓${RESET} codex: $phase"
+    echo "  ${GREEN}✓${RESET} $(codex_label "$ch"): $phase"
     built=$((built+1))
-  fi
+  done
 
   if [[ -d "$HOME/.copilot" ]]; then
     out="$HOME/.copilot/agents/$phase.agent.md"
@@ -206,16 +229,16 @@ for skill_dir in "$KIT_DIR"/skills/*/; do
           -e 's|`\.\./|`~/.sdd/skills/|g' \
           -e 's|same skills folder as this skill; paths below are relative to this SKILL.md|installed by the SDD kit; paths below point into ~/.sdd|')"
 
-  if [[ -d "$HOME/.codex" ]]; then
-    out="$HOME/.codex/skills/$name/SKILL.md"
+  for ch in ${CODEX_HOMES[@]+"${CODEX_HOMES[@]}"}; do
+    out="$ch/skills/$name/SKILL.md"
     mkdir -p "$(dirname "$out")"
     {
       printf -- '---\nname: %s\ndescription: %s\nmetadata:\n  cli: codex\n---\n\n' "$name" "$desc"
       printf '%s\n' "$adapted_body"
     } > "$out"
-    echo "  ${GREEN}✓${RESET} codex: $name"
+    echo "  ${GREEN}✓${RESET} $(codex_label "$ch"): $name"
     built=$((built+1))
-  fi
+  done
 
   if [[ -d "$HOME/.copilot" ]]; then
     out="$HOME/.copilot/agents/$name.agent.md"
@@ -241,41 +264,64 @@ fi
 
 # Codex per-tier profile files: `codex --profile sdd-<tier>` runs that tier's
 # model + reasoning effort. Stale sdd-*.config.toml (removed tiers) are pruned.
-if [[ -d "$HOME/.codex" ]] && (( HAVE_POLICY )); then
-  keep=""
-  while IFS= read -r tier; do
-    m="$("$MP" tier "$tier" codex model 2>/dev/null || true)"
-    e="$("$MP" tier "$tier" codex effort 2>/dev/null || true)"
-    [[ -n "$m$e" ]] || continue
-    out="$HOME/.codex/sdd-$tier.config.toml"
-    {
-      echo "# Generated by sdd-kit (build-adapters.sh) from models.yml — do not edit."
-      echo "# Usage: codex --profile sdd-$tier"
-      [[ -n "$m" ]] && echo "model = \"$m\""
-      [[ -n "$e" ]] && echo "model_reasoning_effort = \"$e\""
-    } > "$out"
-    keep="$keep sdd-$tier.config.toml"
-    echo "  ${GREEN}✓${RESET} codex: profile sdd-$tier (${m:-session model}${e:+, $e})"
-    built=$((built+1))
-  done < <("$MP" tiers)
-  for f in "$HOME"/.codex/sdd-*.config.toml; do
-    [[ -f "$f" ]] || continue
-    case " $keep " in
-      *" $(basename "$f") "*) ;;
-      *) rm "$f"; echo "  ${DIM}-${RESET} codex: pruned stale $(basename "$f")" ;;
-    esac
+if (( HAVE_POLICY )); then
+  for ch in ${CODEX_HOMES[@]+"${CODEX_HOMES[@]}"}; do
+    keep=""
+    while IFS= read -r tier; do
+      m="$("$MP" tier "$tier" codex model 2>/dev/null || true)"
+      e="$("$MP" tier "$tier" codex effort 2>/dev/null || true)"
+      # Optional permission policy for the tier's sessions. Subagents inherit
+      # the SESSION's configured sandbox/approval (proven on codex-cli 0.144.4;
+      # per-agent TOML keys and spawn args are not honored) — so these profile
+      # keys are the one lever that stops gate/escalation subagents from
+      # prompting for every command.
+      sb="$("$MP" tier "$tier" codex sandbox 2>/dev/null || true)"
+      ap="$("$MP" tier "$tier" codex approval 2>/dev/null || true)"
+      [[ -n "$m$e$sb$ap" ]] || continue
+      out="$ch/sdd-$tier.config.toml"
+      # Marker rule, write side: a profile file we didn't generate (Codex
+      # persists session state into the active profile's config) is the
+      # user's — keep it, never clobber.
+      if [[ -f "$out" ]] && ! head -1 "$out" | grep -qF "Generated by sdd-kit"; then
+        keep="$keep sdd-$tier.config.toml"
+        echo "  ${DIM}·${RESET} $(codex_label "$ch"): sdd-$tier.config.toml is not kit-generated — left untouched"
+        continue
+      fi
+      {
+        echo "# Generated by sdd-kit (build-adapters.sh) from models.yml — do not edit."
+        echo "# Usage: codex --profile sdd-$tier"
+        [[ -n "$m" ]] && echo "model = \"$m\""
+        [[ -n "$e" ]] && echo "model_reasoning_effort = \"$e\""
+        [[ -n "$sb" ]] && echo "sandbox_mode = \"$sb\""
+        [[ -n "$ap" ]] && echo "approval_policy = \"$ap\""
+      } > "$out"
+      keep="$keep sdd-$tier.config.toml"
+      echo "  ${GREEN}✓${RESET} $(codex_label "$ch"): profile sdd-$tier (${m:-session model}${e:+, $e}${sb:+, $sb}${ap:+, approval $ap})"
+      built=$((built+1))
+    done < <("$MP" tiers)
+    for f in "$ch"/sdd-*.config.toml; do
+      [[ -f "$f" ]] || continue
+      head -1 "$f" | grep -qF "Generated by sdd-kit" || continue
+      case " $keep " in
+        *" $(basename "$f") "*) ;;
+        *) rm "$f"; echo "  ${DIM}-${RESET} $(codex_label "$ch"): pruned stale $(basename "$f")" ;;
+      esac
+    done
   done
 fi
 
 # Codex subagents: on Codex the gates run as REAL subagents (fresh context —
 # no self-grading) and [hard]/retry/follow-up work escalates to a reasoning-
 # tier implementer. Generated from the canonical personas + models.yml into
-# ~/.codex/agents/, pruned by the same kit-marker rule as the tier profiles.
-# A TOML without the marker is user-authored and is never touched.
-if [[ -d "$HOME/.codex" ]] && (( HAVE_POLICY )); then
-  mkdir -p "$HOME/.codex/agents"
+# each codex home's agents/, pruned by the same kit-marker rule as the tier
+# profiles. A TOML without the marker is user-authored and is never touched.
+if (( ${#CODEX_HOMES[@]} )) && (( HAVE_POLICY )); then
   tmp_instr="$(mktemp "${TMPDIR:-/tmp}/sdd-adapters.XXXXXX")"
   trap 'rm -f "$tmp_instr"' EXIT
+fi
+for ch in ${CODEX_HOMES[@]+"${CODEX_HOMES[@]}"}; do
+  (( HAVE_POLICY )) || break
+  mkdir -p "$ch/agents"
   keep_agents=""
   for subagent in \
     "sdd-opponent|opponent|$KIT_DIR/agents/opponent.agent.md" \
@@ -287,7 +333,7 @@ if [[ -d "$HOME/.codex" ]] && (( HAVE_POLICY )); then
     # generate nothing and let the prune below collect a leftover TOML (the
     # skill preambles fall back to persona-pass / do-it-yourself).
     if [[ -z "$(policy "$role" codex tier)" ]]; then
-      echo "  ${DIM}·${RESET} codex: subagent $name skipped (role '$role' not in models.yml)"
+      echo "  ${DIM}·${RESET} $(codex_label "$ch"): subagent $name skipped (role '$role' not in models.yml)"
       continue
     fi
     if [[ -n "$persona" ]]; then
@@ -311,25 +357,25 @@ command, and its output pasted verbatim. A reply without pasted output is a
 failed task. Unknowns: surface them — never guess silently.
 EOF
     fi
-    out="$HOME/.codex/agents/$name.toml"
+    out="$ch/agents/$name.toml"
     if codex_subagent_toml "$name" "$role" "$desc" "$tmp_instr" > "$out"; then
       keep_agents="$keep_agents $name.toml"
-      echo "  ${GREEN}✓${RESET} codex: subagent $name (role $role)"
+      echo "  ${GREEN}✓${RESET} $(codex_label "$ch"): subagent $name (role $role)"
       built=$((built+1))
     else
       rm -f "$out"
       exit 1
     fi
   done
-  for f in "$HOME"/.codex/agents/sdd-*.toml; do
+  for f in "$ch"/agents/sdd-*.toml; do
     [[ -f "$f" ]] || continue
     head -1 "$f" | grep -qF "Generated by sdd-kit" || continue
     case " $keep_agents " in
       *" $(basename "$f") "*) ;;
-      *) rm "$f"; echo "  ${DIM}-${RESET} codex: pruned stale subagent $(basename "$f")" ;;
+      *) rm "$f"; echo "  ${DIM}-${RESET} $(codex_label "$ch"): pruned stale subagent $(basename "$f")" ;;
     esac
   done
-fi
+done
 
 if (( built == 0 )); then
   echo "  ${DIM}·${RESET} neither ~/.codex nor ~/.copilot found — no adapters built"

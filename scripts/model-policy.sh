@@ -13,7 +13,8 @@
 #
 # Usage:
 #   model-policy.sh get <role> <cli> <field>    # field: model | effort | tier
-#   model-policy.sh tier <tier> <cli> <field>   # field: model | effort
+#   model-policy.sh tier <tier> <cli> <field>   # field: model | effort |
+#                                               #        sandbox | approval (codex)
 #   model-policy.sh roles                       # role<TAB>tier lines
 #   model-policy.sh tiers                       # tier names
 #   model-policy.sh dispatch <role>             # CLI that runs the role, if mapped
@@ -39,10 +40,14 @@
 #                                               # the role is split onto its own new
 #                                               # tier (named after the role, cloned
 #                                               # from the shared one) before the edit
-#   model-policy.sh set tier <tier> <cli> <model|effort> <value>
+#   model-policy.sh set tier <tier> <cli> <model|effort|sandbox|approval> <value>
+#                                               # sandbox/approval are codex-only:
+#                                               # sandbox_mode + approval_policy in
+#                                               # the tier's profile file — subagents
+#                                               # inherit them from the session
 #   model-policy.sh set role <role> <tier>      # remap a role to another tier
 #   model-policy.sh set dispatch <role> <cli>   # route a phase to another CLI
-#   model-policy.sh unset tier <tier> <cli> <model|effort>
+#   model-policy.sh unset tier <tier> <cli> <model|effort|sandbox|approval>
 #   model-policy.sh unset tier <tier>           # drop the WHOLE tier (refused while
 #                                               # any role still points at it)
 #   model-policy.sh unset role <role>           # role falls back to session default
@@ -172,11 +177,25 @@ validate_field() {
         exit 2
       fi
       ;;
+    sandbox)
+      [[ "$cli" == "codex" ]] || { echo "sandbox is a codex-only field (sandbox_mode in the tier profile)" >&2; exit 2; }
+      if [[ ! "$val" =~ ^(read-only|workspace-write|danger-full-access)$ ]]; then
+        echo "invalid codex sandbox '$val' (allowed: read-only, workspace-write, danger-full-access)" >&2
+        exit 2
+      fi
+      ;;
+    approval)
+      [[ "$cli" == "codex" ]] || { echo "approval is a codex-only field (approval_policy in the tier profile)" >&2; exit 2; }
+      if [[ ! "$val" =~ ^(untrusted|on-failure|on-request|never)$ ]]; then
+        echo "invalid codex approval '$val' (allowed: untrusted, on-failure, on-request, never)" >&2
+        exit 2
+      fi
+      ;;
   esac
 }
 
 require_cli()   { [[ "$1" =~ ^(claude|codex|copilot)$ ]] || { echo "unknown CLI '$1' (claude|codex|copilot)" >&2; exit 2; }; }
-require_field() { [[ "$1" =~ ^(model|effort)$ ]]         || { echo "unknown field '$1' (model|effort)" >&2; exit 2; }; }
+require_field() { [[ "$1" =~ ^(model|effort|sandbox|approval)$ ]] || { echo "unknown field '$1' (model|effort|sandbox|approval)" >&2; exit 2; }; }
 require_name()  { [[ "$2" =~ ^[A-Za-z0-9_-]+$ ]]         || { echo "invalid $1 name '$2' (letters, digits, '-', '_' only)" >&2; exit 2; }; }
 
 # emit_policy — canonical models.yml from flatten-format TSV on stdin. Tier /
@@ -198,7 +217,7 @@ emit_policy() {
       print "# generated copies + CLI adapters), or the scripts/configure-models.sh wizard."
       print ""
       print "tiers:"
-      nschema=split("claude_model claude_effort codex_model codex_effort copilot_model copilot_effort", schema, " ")
+      nschema=split("claude_model claude_effort codex_model codex_effort codex_sandbox codex_approval copilot_model copilot_effort", schema, " ")
       for (i=1; i<=tn; i++) {
         t=torder[i]
         print "  " t ":"
@@ -353,6 +372,10 @@ case "$CMD" in
           [[ "$val" =~ ^(low|medium|high|xhigh|max)$ ]] || fail "tier '$tier': $key '$val' not in low|medium|high|xhigh|max" ;;
         codex_effort)
           [[ "$val" =~ ^(none|minimal|low|medium|high|xhigh|ultra|max)$ ]] || fail "tier '$tier': codex_effort '$val' not in none|minimal|low|medium|high|xhigh|ultra|max" ;;
+        codex_sandbox)
+          [[ "$val" =~ ^(read-only|workspace-write|danger-full-access)$ ]] || fail "tier '$tier': codex_sandbox '$val' not in read-only|workspace-write|danger-full-access" ;;
+        codex_approval)
+          [[ "$val" =~ ^(untrusted|on-failure|on-request|never)$ ]] || fail "tier '$tier': codex_approval '$val' not in untrusted|on-failure|on-request|never" ;;
         claude_model)
           # Hard error: an invalid value here stamps into every generated agent
           # and Claude Code refuses to spawn them (model-not-found at launch).
