@@ -118,7 +118,10 @@ if (( UMBRELLA )); then
     echo "the orchestrated cross-repo run never dispatches — run /sdd:implement --all interactively" >&2
     exit 5
   fi
-  if [[ -n "$REPO_NAME" ]] && ! grep -qw "$REPO_NAME" <<< "$DECLARED_REPOS"; then
+  # Exact-token match (grep -w treats '-' as a boundary: '--repo alpha' would
+  # pass when only 'alpha-api' is declared, then die at repo resolution with a
+  # misleading exit 4) — same rule as spec-worktree.sh.
+  if [[ -n "$REPO_NAME" ]] && ! printf '%s\n' "$DECLARED_REPOS" | tr ' ' '\n' | grep -Fqx "$REPO_NAME"; then
     echo "repo '$REPO_NAME' is not declared by this umbrella spec (declared: $DECLARED_REPOS)" >&2
     exit 2
   fi
