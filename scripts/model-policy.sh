@@ -19,6 +19,8 @@
 #   model-policy.sh tiers                       # tier names
 #   model-policy.sh dispatch <role>             # CLI that runs the role, if mapped
 #   model-policy.sh dispatch                    # all mappings: role<TAB>cli lines
+#   model-policy.sh limit <present|short|long|fallback|backoff_minutes>
+#                                               # query optional usage-limit policy
 #   model-policy.sh show                        # human table of the policy
 #   model-policy.sh check                       # validate; exit 1 on errors
 #   model-policy.sh --file <path> <cmd> ...     # use another policy file
@@ -47,11 +49,13 @@
 #                                               # inherit them from the session
 #   model-policy.sh set role <role> <tier>      # remap a role to another tier
 #   model-policy.sh set dispatch <role> <cli>   # route a phase to another CLI
+#   model-policy.sh set on_limit <short|long|fallback|backoff_minutes> <value>
 #   model-policy.sh unset tier <tier> <cli> <model|effort|sandbox|approval>
 #   model-policy.sh unset tier <tier>           # drop the WHOLE tier (refused while
 #                                               # any role still points at it)
 #   model-policy.sh unset role <role>           # role falls back to session default
 #   model-policy.sh unset dispatch <role>       # phase runs locally again
+#   model-policy.sh unset on_limit [<key>]       # remove one key, or the whole block
 #   ... --no-apply                              # save only; skip the re-stamp
 #
 # Edits rewrite models.yml canonically (schema order, standard header) — inline
@@ -104,6 +108,8 @@ set -- "$CMD" ${_args[@]+"${_args[@]}"}
 #   tier<TAB><name><TAB><key><TAB><value>
 #   role<TAB><name><TAB><tier>
 #   dispatch<TAB><role><TAB><cli>
+#   limit<TAB>__present<TAB>1
+#   limit<TAB><short|long|fallback|backoff_minutes><TAB><value>
 flatten() {
   awk '
     /^[[:space:]]*#/ { next }
@@ -111,6 +117,7 @@ flatten() {
     /^tiers:/ { sect="tiers"; next }
     /^roles:/ { sect="roles"; next }
     /^dispatch:/ { sect="dispatch"; next }
+    /^on_limit:[[:space:]]*$/ { sect="on_limit"; print "limit\t__present\t1"; next }
     /^[^[:space:]]/ { sect=""; next }                # any other top-level key
     {
       line=$0
@@ -133,6 +140,16 @@ flatten() {
         if (indent==2 && val!="") printf "role\t%s\t%s\n", key, val
       } else if (sect=="dispatch") {
         if (indent==2 && val!="") printf "dispatch\t%s\t%s\n", key, val
+      } else if (sect=="on_limit") {
+        if (indent==2) {
+          if (key=="fallback") {
+            sub(/^\[/, "", val); sub(/\]$/, "", val)
+            gsub(/[[:space:]]/, "", val)
+            printf "limit\t%s\t%s\n", key, val
+          } else if (val!="") {
+            printf "limit\t%s\t%s\n", key, val
+          }
+        }
       }
     }
   ' "$POLICY"
@@ -144,6 +161,18 @@ tier_field() {  # <tier> <key>
 
 role_tier() {  # <role>
   flatten | awk -F'\t' -v r="$1" '$1=="role" && $2==r { print $3; exit }'
+}
+
+limit_present() {
+  [[ "$(flatten | awk -F'\t' '$1=="limit" && $2=="__present" { found=1 } END { print found ? 1 : 0 }')" == "1" ]]
+}
+
+limit_field() {  # <short|long|fallback|backoff_minutes>
+  flatten | awk -F'\t' -v k="$1" '$1=="limit" && $2==k { print $3; exit }'
+}
+
+limit_key_configured() {
+  flatten | awk -F'\t' -v k="$1" '$1=="limit" && $2==k { found=1 } END { exit(found ? 0 : 1) }'
 }
 
 # --- editing -------------------------------------------------------------------
@@ -198,6 +227,55 @@ require_cli()   { [[ "$1" =~ ^(claude|codex|copilot)$ ]] || { echo "unknown CLI 
 require_field() { [[ "$1" =~ ^(model|effort|sandbox|approval)$ ]] || { echo "unknown field '$1' (model|effort|sandbox|approval)" >&2; exit 2; }; }
 require_name()  { [[ "$2" =~ ^[A-Za-z0-9_-]+$ ]]         || { echo "invalid $1 name '$2' (letters, digits, '-', '_' only)" >&2; exit 2; }; }
 
+require_limit_key() {
+  [[ "$1" =~ ^(short|long|fallback|backoff_minutes)$ ]] \
+    || { echo "unknown on_limit key '$1' (short|long|fallback|backoff_minutes)" >&2; exit 2; }
+}
+
+normalize_limit_fallback() {
+  local value="$1" cli seen="," normalized=""
+  local -a clis
+  [[ "$value" != *$'\t'* && "$value" != *$'\n'* ]] \
+    || { echo "invalid on_limit fallback: value must not contain tabs or newlines" >&2; exit 2; }
+  [[ -z "$value" ]] && return 0
+  [[ "$value" != ,* && "$value" != *, && "$value" != *,,* ]] \
+    || { echo "invalid on_limit fallback '$value' (comma-separated CLIs required)" >&2; exit 2; }
+  IFS=, read -r -a clis <<< "$value"
+  for cli in "${clis[@]}"; do
+    require_cli "$cli"
+    case "$seen" in
+      *",$cli,"*) echo "duplicate on_limit fallback CLI '$cli'" >&2; exit 2 ;;
+    esac
+    seen="${seen}${cli},"
+    normalized="${normalized:+$normalized,}$cli"
+  done
+  printf '%s\n' "$normalized"
+}
+
+normalize_limit_backoff() {
+  local value="$1" normalized
+  [[ "$value" =~ ^[0-9]+$ ]] \
+    || { echo "invalid on_limit backoff_minutes '$value' (base-10 integer 1..10080)" >&2; exit 2; }
+  normalized="$(printf '%s\n' "$value" | sed 's/^0*//')"
+  [[ -n "$normalized" ]] || normalized=0
+  [[ "$normalized" -ge 1 && "$normalized" -le 10080 ]] \
+    || { echo "invalid on_limit backoff_minutes '$value' (base-10 integer 1..10080)" >&2; exit 2; }
+  printf '%s\n' "$normalized"
+}
+
+validate_limit_value() {
+  local key="$1" value="$2"
+  case "$key" in
+    short|long)
+      [[ "$value" =~ ^(park|delegate|fail)$ ]] \
+        || { echo "invalid on_limit $key action '$value' (park|delegate|fail)" >&2; exit 2; }
+      printf '%s\n' "$value"
+      ;;
+    fallback) normalize_limit_fallback "$value" ;;
+    backoff_minutes) normalize_limit_backoff "$value" ;;
+  esac
+}
+
 # emit_policy — canonical models.yml from flatten-format TSV on stdin. Tier /
 # role / dispatch order is first-seen; per-tier keys in schema order, then any
 # custom keys. Inline comments are not preserved (schema: models.example.yml).
@@ -210,6 +288,7 @@ emit_policy() {
     }
     $1=="role"     { if (!($2 in rseen)) { rseen[$2]=1; rorder[++rn]=$2 }; rval[$2]=$3; next }
     $1=="dispatch" { if (!($2 in dseen)) { dseen[$2]=1; dorder[++dn]=$2 }; dval[$2]=$3; next }
+    $1=="limit"    { if (!($2 in lseen)) { lseen[$2]=1; lorder[++ln]=$2 }; lval[$2]=$3; next }
     END {
       print "# Model policy — MACHINE-LOCAL (gitignored). Written by model-policy.sh."
       print "# Schema + docs: models.example.yml. Query: model-policy.sh show. Change:"
@@ -237,6 +316,30 @@ emit_policy() {
         print ""
         print "dispatch:"
         for (i=1; i<=dn; i++) print "  " dorder[i] ": " dval[dorder[i]]
+      }
+      if ("__present" in lval) {
+        print ""
+        print "on_limit:"
+        nlimit=split("short long fallback backoff_minutes", limits, " ")
+        for (s=1; s<=nlimit; s++) {
+          key=limits[s]
+          if (key in lval) {
+            if (key=="fallback") {
+              ncli=split(lval[key], clis, ",")
+              if (lval[key]=="") print "  fallback: []"
+              else {
+                line=""
+                for (c=1; c<=ncli; c++) line=line (c==1 ? "" : ", ") clis[c]
+                print "  fallback: [" line "]"
+              }
+            } else print "  " key ": " lval[key]
+          }
+        }
+        for (i=1; i<=ln; i++) {
+          key=lorder[i]
+          known=(key=="__present" || key=="short" || key=="long" || key=="fallback" || key=="backoff_minutes")
+          if (!known) print "  " key ": " lval[key]
+        }
       }
     }
   '
@@ -312,6 +415,32 @@ case "$CMD" in
     else
       flatten | awk -F'\t' '$1=="dispatch" { print $2 "\t" $3 }'
     fi
+    ;;
+
+  limit)
+    KEY="${2:?limit key required (present|short|long|fallback|backoff_minutes)}"
+    case "$KEY" in
+      present)
+        if limit_present; then echo true; else echo false; fi
+        ;;
+      short|long|fallback|backoff_minutes)
+        limit_present || exit 1
+        v="$(limit_field "$KEY")"
+        if [[ -z "$v" ]]; then
+          case "$KEY" in
+            short) echo park ;;
+            long) echo delegate ;;
+            fallback) echo ;;
+            backoff_minutes) echo 60 ;;
+          esac
+        elif [[ "$KEY" == "backoff_minutes" ]]; then
+          normalize_limit_backoff "$v"
+        else
+          echo "$v"
+        fi
+        ;;
+      *) echo "unknown limit key '$KEY' (present|short|long|fallback|backoff_minutes)" >&2; exit 2 ;;
+    esac
     ;;
 
   tier)
@@ -410,6 +539,47 @@ case "$CMD" in
       esac
     done < <(flatten | awk -F'\t' '$1=="dispatch"')
 
+    # on_limit: — opt-in usage-limit handling policy.
+    limit_presence="$(flatten | awk -F'\t' '$1=="limit" && $2=="__present" { count++ } END { print count+0 }')"
+    if [[ "$limit_presence" -gt 1 ]]; then
+      fail "on_limit: duplicate blocks"
+    fi
+    if [[ "$limit_presence" -eq 1 ]]; then
+      while IFS=$'\t' read -r _ key val; do
+        [[ "$key" == "__present" ]] && continue
+        case "$key" in
+          short|long)
+            [[ "$val" =~ ^(park|delegate|fail)$ ]] \
+              || fail "on_limit: $key action '$val' is not park|delegate|fail"
+            ;;
+          fallback)
+            if [[ -n "$val" ]]; then
+              seen=","; duplicate=""
+              IFS=, read -r -a fallback_clis <<< "$val"
+              for cli in "${fallback_clis[@]}"; do
+                [[ "$cli" =~ ^(claude|codex|copilot)$ ]] \
+                  || fail "on_limit: fallback CLI '$cli' is not claude|codex|copilot"
+                case "$seen" in *",$cli,"*) duplicate="$cli" ;; esac
+                seen="${seen}${cli},"
+              done
+              [[ -z "$duplicate" ]] || fail "on_limit: duplicate fallback CLI '$duplicate'"
+            fi
+            ;;
+          backoff_minutes)
+            if ! ( normalize_limit_backoff "$val" >/dev/null 2>&1 ); then
+              fail "on_limit: invalid backoff_minutes '$val' (base-10 integer 1..10080)"
+            fi
+            ;;
+          *) fail "on_limit: unknown key '$key'" ;;
+        esac
+      done < <(flatten | awk -F'\t' '$1=="limit"')
+
+      duplicate_keys="$(flatten | awk -F'\t' '$1=="limit" && $2!="__present" { count[$2]++ } END { for (key in count) if (count[key] > 1) print key }')"
+      while IFS= read -r key; do
+        [[ -z "$key" ]] || fail "on_limit: duplicate key '$key'"
+      done <<<"$duplicate_keys"
+    fi
+
     if (( errors == 0 )); then
       echo "  ${GREEN}✓${RESET} model policy valid ($(wc -l <<<"$tiers" | tr -d ' ') tiers, $(wc -l <<<"$roles" | tr -d ' ') roles, $warnings warning(s))"
       exit 0
@@ -419,7 +589,7 @@ case "$CMD" in
     ;;
 
   set)
-    KIND="${2:?set what? (tier|role|dispatch)}"
+    KIND="${2:?set what? (tier|role|dispatch|on_limit)}"
     TSV="$(flatten)"
     case "$KIND" in
       tier)
@@ -453,12 +623,20 @@ case "$CMD" in
         TSV="$(tsv_upsert "$TSV" dispatch "$R" "$CLI")"
         write_policy "$TSV" "dispatch: $R -> $CLI"
         ;;
-      *) echo "unknown set target '$KIND' (tier|role|dispatch)" >&2; exit 2 ;;
+      on_limit)
+        KEY="${3:?on_limit key required (short|long|fallback|backoff_minutes)}"; VAL="${4:?value required}"
+        require_limit_key "$KEY"
+        VAL="$(validate_limit_value "$KEY" "$VAL")"
+        TSV="$(tsv_upsert "$TSV" limit __present 1)"
+        TSV="$(tsv_upsert "$TSV" limit "$KEY" "$VAL")"
+        write_policy "$TSV" "on_limit: $KEY = ${VAL:-[]}"
+        ;;
+      *) echo "unknown set target '$KIND' (tier|role|dispatch|on_limit)" >&2; exit 2 ;;
     esac
     ;;
 
   unset)
-    KIND="${2:?unset what? (tier|role|dispatch)}"
+    KIND="${2:?unset what? (tier|role|dispatch|on_limit)}"
     TSV="$(flatten)"
     case "$KIND" in
       tier)
@@ -494,7 +672,27 @@ case "$CMD" in
         TSV="$(tsv_delete "$TSV" dispatch "$R")"
         write_policy "$TSV" "dispatch mapping for '$R' removed (runs locally again)"
         ;;
-      *) echo "unknown unset target '$KIND' (tier|role|dispatch)" >&2; exit 2 ;;
+      on_limit)
+        if ! limit_present; then
+          echo "nothing to unset: on_limit is not configured" >&2
+          exit 1
+        fi
+        if [[ -z "${3:-}" ]]; then
+          TSV="$(tsv_delete "$TSV" limit __present)"
+          TSV="$(tsv_delete "$TSV" limit short)"
+          TSV="$(tsv_delete "$TSV" limit long)"
+          TSV="$(tsv_delete "$TSV" limit fallback)"
+          TSV="$(tsv_delete "$TSV" limit backoff_minutes)"
+          write_policy "$TSV" "on_limit block removed (automatic usage-limit actions disabled)"
+        else
+          KEY="$3"; require_limit_key "$KEY"
+          limit_key_configured "$KEY" \
+            || { echo "nothing to unset: on_limit has no '$KEY' value" >&2; exit 1; }
+          TSV="$(tsv_delete "$TSV" limit "$KEY")"
+          write_policy "$TSV" "on_limit: $KEY removed (present-block default applies)"
+        fi
+        ;;
+      *) echo "unknown unset target '$KIND' (tier|role|dispatch|on_limit)" >&2; exit 2 ;;
     esac
     ;;
 

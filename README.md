@@ -212,6 +212,37 @@ setups: omit `dispatch:` entirely — nothing changes.** Each mapped CLI must be
 installed and authenticated; `sdd-doctor.sh` and `model-policy.sh check` flag
 mappings this machine can't honor.
 
+### When a provider hits its usage limit
+
+Usage-limit recovery applies only to **dispatched** runs. It is off by default:
+when `models.yml` has no `on_limit:` block, the dispatcher reports the
+classified limit and exits without scheduling, retrying, or switching
+providers. Add an explicit policy only when those automatic actions are wanted:
+
+```yaml
+on_limit:
+  short: park
+  long: delegate
+  fallback: [claude, copilot]
+  backoff_minutes: 60
+```
+
+The parser accepts exactly the `short`, `long`, `fallback`, and
+`backoff_minutes` keys. `short` and `long` accept `park`, `delegate`, or
+`fail`; a present block defaults to `short: park`, `long: delegate`, an empty
+`fallback`, and `backoff_minutes: 60`. A short limit is automatically parked
+for resume. For a long limit with `delegate`, the dispatcher tries ready fallback
+CLIs in `fallback` order (never the provider that just limited); if none is
+ready, it parks instead. Remove `on_limit:` to stop future automatic actions.
+
+For manual recovery, use the copy-pasteable park or `--to` command printed by
+the limit report. Inspect existing parked work with
+`scripts/spec-resume.sh list`, and cancel a unit you no longer want resumed
+with `scripts/spec-resume.sh cancel <unit-id>`. Existing units remain until
+they resume successfully or are cancelled. Interactive sessions cannot recover
+automatically after their CLI turn ends; follow the manual recipe in
+[`knowledge/usage-limit-handling.md`](knowledge/usage-limit-handling.md).
+
 ## Multi-repo features (umbrella specs)
 
 A team's feature rarely lives in one repo — web + mobile + big-screen clients,

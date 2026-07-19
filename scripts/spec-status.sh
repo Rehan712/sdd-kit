@@ -18,6 +18,7 @@
 #   spec-status.sh get  <spec-dir> <field>
 #   spec-status.sh set  <spec-dir> <field> <value>
 #   spec-status.sh show <spec-dir>                  # full frontmatter
+#   spec-status.sh append-decision <spec-dir> <text>
 #   spec-status.sh --file spec.md set <spec-dir> status accepted
 #                                                   # target another artifact
 #                                                   # (spec.md|plan.md|tasks.md)
@@ -98,6 +99,58 @@ case "$CMD" in
     ;;
   show)
     frontmatter_block "$FILE"
+    ;;
+  append-decision)
+    text="${ARGS[2]:-}"
+    [[ "$TARGET_FILE" == "STATUS.md" ]] || { echo "append-decision only supports STATUS.md" >&2; exit 2; }
+    [[ -n "$text" ]] || { echo "usage: spec-status.sh append-decision <spec-dir> <text>" >&2; exit 2; }
+    case "$text" in
+      *$'\n'*|*$'\r'*) echo "append-decision text must be one line" >&2; exit 2 ;;
+    esac
+
+    decisions_count="$(awk '/^## Decisions log[[:space:]]*$/ { count++ } END { print count+0 }' "$FILE")"
+    [[ "$decisions_count" == "1" ]] || {
+      echo "append-decision requires exactly one ## Decisions log section (found $decisions_count)" >&2
+      exit 1
+    }
+
+    today="$(date +%Y-%m-%d)"
+    tmp="$(mktemp "${TMPDIR:-/tmp}/spec_status.XXXXXX")" || exit 1
+    awk -v today="$today" -v text="$text" '
+      NR == 1 && $0 == "---" { in_frontmatter=1; print; next }
+      in_frontmatter && /^updated:[[:space:]]*/ {
+        print "updated: " today
+        updated=1
+        next
+      }
+      in_frontmatter && /^---[[:space:]]*$/ {
+        if (!updated) print "updated: " today
+        in_frontmatter=0
+        print
+        next
+      }
+      /^## Decisions log[[:space:]]*$/ {
+        in_decisions=1
+        print
+        next
+      }
+      in_decisions && /^##[[:space:]]/ {
+        print "- " today " — " text
+        appended=1
+        in_decisions=0
+        print ""
+        print
+        next
+      }
+      { print }
+      END {
+        if (in_decisions && !appended) print "- " today " — " text
+      }
+    ' "$FILE" > "$tmp" && mv "$tmp" "$FILE" || {
+      rm -f "$tmp"
+      exit 1
+    }
+    echo "STATUS.md: appended decision" >&2
     ;;
   *)
     echo "unknown command: $CMD" >&2

@@ -90,10 +90,15 @@ check_model_policy() {
     echo
     return
   fi
-  if "$HUB_DIR/scripts/model-policy.sh" check >/dev/null 2>&1; then
+  local policy_check
+  if policy_check="$("$HUB_DIR/scripts/model-policy.sh" check 2>&1)"; then
     pass "models.yml valid"
   else
     fail "models.yml invalid — run scripts/model-policy.sh check"
+    # Keep the parser's on_limit-specific validation visible.  A generic
+    # "models.yml invalid" is not actionable when the recovery policy is the
+    # only malformed part of an otherwise usable policy.
+    printf '%s\n' "$policy_check" | sed 's/^/    /'
   fi
   if [[ ! -f "$HUB_DIR/build/.stamp" ]]; then
     fail "build/ missing — run scripts/apply-models.sh then scripts/sync.sh (homes are serving un-stamped files)"
@@ -154,6 +159,100 @@ check_model_policy() {
       esac
     done <<<"$drows"
   fi
+
+  # on_limit is global, but adapters are role-specific.  Check every configured
+  # fallback against each dispatched role through the same conservative probe
+  # used by spec-dispatch.sh; this never spends a provider turn to test auth.
+  local limit_present fallback_csv fallback_cli fallback_role ready_output reason
+  limit_present="$("$HUB_DIR/scripts/model-policy.sh" limit present 2>/dev/null || true)"
+  if [[ "$limit_present" == "true" ]]; then
+    pass "on_limit policy configured"
+    fallback_csv="$("$HUB_DIR/scripts/model-policy.sh" limit fallback 2>/dev/null || true)"
+    if [[ -z "$fallback_csv" ]]; then
+      info "on_limit fallback list is empty — delegate will park when exhausted"
+    elif [[ -z "$drows" ]]; then
+      warn "on_limit fallbacks configured but no dispatch roles are mapped — adapter readiness cannot be checked"
+    else
+      while IFS= read -r fallback_role; do
+        [[ -n "$fallback_role" ]] || continue
+        IFS=, read -r -a fallback_clis <<<"$fallback_csv"
+        for fallback_cli in "${fallback_clis[@]}"; do
+          if ready_output="$("$HUB_DIR/scripts/spec-dispatch-ready.sh" "$fallback_cli" "$fallback_role" 2>&1)"; then
+            pass "on_limit fallback: $fallback_cli ready for $fallback_role"
+          else
+            reason="$(printf '%s\n' "$ready_output" | head -1)"
+            warn "on_limit fallback: $fallback_cli unavailable for $fallback_role — ${reason:-readiness probe failed}"
+          fi
+        done
+      done < <(printf '%s\n' "$drows" | awk -F'\t' '{ print $1 }')
+    fi
+  fi
+  echo
+}
+
+# Resume reconciliation intentionally lives outside check_model_policy():
+# parked work must stay observable after models.yml is removed or never existed.
+check_resume_reconciliation() {
+  echo "Usage-limit recovery: parked resume units + scheduler"
+
+  local resume="$HUB_DIR/scripts/spec-resume.sh"
+  local scheduler="${SDD_RESUME_SCHEDULER:-$HUB_DIR/scripts/spec-resume-scheduler.sh}"
+  local units jobs unit_id state run_at retry_count max_retries job_id
+  local known_units="" pending_units=""
+
+  if [[ ! -x "$resume" ]]; then
+    fail "scripts/spec-resume.sh missing or not executable — cannot reconcile parked units"
+    echo
+    return
+  fi
+  if ! units="$("$resume" list --tsv 2>&1)"; then
+    fail "could not list parked resume units"
+    printf '%s\n' "$units" | sed 's/^/    /'
+    echo
+    return
+  fi
+
+  while IFS=$'\t' read -r unit_id state run_at retry_count max_retries _; do
+    [[ -n "$unit_id" ]] || continue
+    known_units="${known_units}${unit_id}"$'\n'
+    case "$state" in
+      pending)
+        warn "resume: pending unit $unit_id (run_at=$run_at retries=$retry_count/$max_retries)"
+        pending_units="${pending_units}${unit_id}"$'\n'
+        ;;
+      failed)
+        warn "resume: failed unit $unit_id (retries=$retry_count/$max_retries)"
+        ;;
+    esac
+  done <<<"$units"
+
+  if [[ ! -x "$scheduler" ]]; then
+    warn "resume scheduler is not executable: $scheduler — cannot check scheduler orphans"
+    echo
+    return
+  fi
+  if ! jobs="$($scheduler list 2>&1)"; then
+    warn "could not list resume scheduler entries"
+    printf '%s\n' "$jobs" | sed 's/^/    /'
+    echo
+    return
+  fi
+
+  # Pending units require a one-shot job. Failed units are deliberately kept
+  # without jobs for diagnosis, so they are surfaced above but not orphaned.
+  while IFS= read -r unit_id; do
+    [[ -n "$unit_id" ]] || continue
+    if ! printf '%s' "$jobs" | grep -Fqx -- "$unit_id"; then
+      warn "resume orphan: pending unit $unit_id has no scheduler job"
+    fi
+  done <<<"$pending_units"
+
+  while IFS= read -r job_id; do
+    [[ -n "$job_id" ]] || continue
+    if ! printf '%s' "$known_units" | grep -Fqx -- "$job_id"; then
+      warn "resume orphan: scheduler job $job_id has no resume unit"
+    fi
+  done <<<"$jobs"
   echo
 }
 
@@ -343,6 +442,7 @@ main() {
     --hub-only)
       check_hub
       check_model_policy
+      check_resume_reconciliation
       check_claude_homes
       check_tool_adapters
       check_briefs
@@ -350,6 +450,7 @@ main() {
     --all)
       check_hub
       check_model_policy
+      check_resume_reconciliation
       check_claude_homes
       check_tool_adapters
       check_briefs
@@ -365,6 +466,7 @@ main() {
     *)
       check_hub
       check_model_policy
+      check_resume_reconciliation
       check_claude_homes
       check_tool_adapters
       check_briefs

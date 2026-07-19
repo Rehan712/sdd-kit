@@ -118,3 +118,16 @@ roles:
 # dispatch:
 #   tasks: codex
 #   implement: copilot
+
+# USAGE-LIMIT RECOVERY (optional) — applies only to dispatched runs. Omit this
+# block to keep automatic handling off: a classified limit is reported, but no
+# provider is switched and no resume job is scheduled. These are the exact
+# parser keys. `short` and `long` accept park, delegate, or fail; a present
+# block defaults to short=park, long=delegate, fallback=[], backoff_minutes=60.
+# `fallback` is an ordered list of ready CLIs; exhausted delegation parks.
+#
+# on_limit:
+#   short: park
+#   long: delegate
+#   fallback: [claude, copilot]
+#   backoff_minutes: 60
