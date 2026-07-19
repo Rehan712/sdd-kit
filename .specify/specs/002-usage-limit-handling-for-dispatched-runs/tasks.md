@@ -1,159 +1,139 @@
 ---
 tasks_for: 002-usage-limit-handling-for-dispatched-runs
-status: draft  # draft | in-progress | complete
+status: accepted
 created: 2026-07-19
 updated: 2026-07-19
 ---
 
 # Tasks: Usage limit handling for dispatched runs
 
-> Dependency-ordered checklist. Each task is small enough to be a single commit and has an explicit acceptance check.
-
-**Conventions:**
-
-- `T###` is the task ID. Reference from commit messages and PR descriptions.
-- *Files:* lists the paths the task touches.
-- *Acceptance:* the observable check that says the task is done.
-- *Evidence:* appended when acceptance passes — the exact command + its key
-  output line + date, e.g. `` `bun test api` → 14 passed (2026-07-04) ``.
-  **A box is never ticked without it.** For any check the tooling can run,
-  produce the evidence with `~/.sdd/scripts/spec-run.sh <spec-dir> T### --
-  <command>` — it runs the command, captures the real output (+exit +hash) into
-  `notes/evidence.md`, and ticks the box from that run. A bare
-  `~/.sdd/scripts/spec-task.sh done <spec-dir> T### --evidence "…"` (tick +
-  evidence, one atomic edit) is for manually-verified ACs. Exemption: gate and
-  Ship tasks — their evidence is the gate report in `notes/` or the PR URL, so
-  no *Evidence:* line is required there.
-- *Verify:* the exact runnable command that proves the task, with the key
-  output to expect — `` *Verify:* `bun test --filter keys` → "14 passed" `` —
-  ready to paste into `spec-run.sh <spec-dir> T### --key '<key>' -- <command>`.
-  A check no command can prove uses `manual: <what to observe>` instead.
-  Required on every non-gate, non-Ship task; `sdd-analyze.sh` warns where it's
-  missing. (*Acceptance:* states the outcome; *Verify:* is the exact check —
-  a weaker implementer must never have to invent the command.)
-- Tasks that can run in parallel are marked `[P]` after the ID.
-- Tasks that need frontier reasoning are marked `[hard]` after the ID (marker
-  order: `**T###** [P] [hard] [repo:name]`). Tag at decompose time: novel
-  algorithms, tricky concurrency/ordering, cross-cutting changes are `[hard]`;
-  CRUD, wiring, and config are not. `/sdd:implement` and the orchestrator
-  dispatch `[hard]` tasks — and every failed-acceptance retry and gate
-  follow-up — on the `implement-hard` model-policy role when models.yml maps
-  it (escalate rather than repeat a failure at the tier that produced it).
-  Escalation currently takes effect on Claude Code (Agent-tool dispatch);
-  on Codex/Copilot the marker is inert metadata until the kit wires their
-  subagent mechanisms — the tag itself is CLI-agnostic, so tag regardless.
-- **Umbrella specs only** (spec.md with `repos:` frontmatter): every non-gate,
-  non-Ship task also carries `[repo:<name>]` after the ID — the declared repo it
-  lands in. `~/.sdd/scripts/spec-worktree.sh --repo <name> <spec-dir>` gives you
-  that repo's worktree. `sdd-analyze.sh` rejects untagged or mis-tagged tasks.
-- Use `[ ]` for not started, `[~]` for in-progress, `[x]` for done.
-- Follow-up ids share ONE grammar — `T###<class><n>` under the task that
-  spawned them: `o` = opponent findings, `a` = reality-check gaps (both under
-  Reality Check), `s` = security findings (under the original task's stage),
-  `c` = CI failures and `r` = review feedback (both under Ship, opened by
-  `/sdd:review`). E.g. `T009o1`, `T010a1`, `T004s1`, `T011c1`, `T011r2`.
-- After editing this file, validate with `~/.sdd/scripts/sdd-analyze.sh <spec-dir>` —
-  it checks AC coverage (gate refs don't count), refs, evidence, gates, and
-  leftover `[NEEDS CLARIFICATION]` markers deterministically.
+> Dependency-ordered checklist. Each task is small enough to be a single commit
+> and has an explicit acceptance check.
 
 ## Setup
 
-- [ ] **T001** — Add dependencies and scaffolding
-  - *Files:* `package.json` (or equivalent)
-  - *Acceptance:* `bun install` / `pnpm install` / `cargo build` succeeds
-  - *Verify:* `bun install` → "done" (or the stack's equivalent)
+- [ ] **T001** [hard] — Build deterministic provider limit classifier
+  - *Files:* `scripts/usage-limit-patterns.tsv` (new), `scripts/usage-limit.sh` (new), `tests/fixtures/usage-limits/` (new), `tests/test-usage-limits.sh` (new)
+  - *Acceptance:* tests named AC-001 and AC-002 prove all planned Claude, Codex, and Copilot hard-failure fixtures classify with the correct kind/reset, the four ordinary-failure fixtures return `none`, and Bash 3.2/BSD-compatible parsing uses only the single TSV pattern table
+  - *Verify:* `tests/run.sh limits` → `"== test-usage-limits.sh"` and exit 0
+  - *Refs:* REQ-001, REQ-002, AC-001, AC-002, MET-002, plan §2 Architecture and Dispatch flow, plan §3 Pattern table and classifier result, plan R1/R3/R7
 
-## Backend (or "Domain layer")
+## Domain and policy
 
-- [ ] **T002** — <name>
-  - *Files:* `src/...`
-  - *Acceptance:* unit test added, passes
-  - *Verify:* `bun test src/...` → "<n> pass"
-  - *Refs:* REQ-001, REQ-002 (from spec)
+- [ ] **T002** [P] — Extend model policy with limit actions
+  - *Files:* `scripts/model-policy.sh`, `scripts/configure-models.sh`, `tests/test-model-policy.sh`
+  - *Acceptance:* tests named AC-008 prove absent-versus-present defaults, valid getters, canonical `set`/`unset` round-trips, ordered fallback preservation through the wizard, and rejection of invalid actions, CLIs, duplicates, and backoff values
+  - *Verify:* `tests/run.sh model-policy` → `"== test-model-policy.sh"` and exit 0
+  - *Refs:* REQ-004, AC-008, CON-002, plan §2 Architecture, plan §3 `models.yml` policy, plan §4 Public CLI changes
 
-- [ ] **T003** [P] — <name>
-  - *Files:* `src/...`
-  - *Acceptance:* ...
-  - *Verify:* `<command>` → "<key output>"
+- [ ] **T003** [P] — Append STATUS decisions through validated API
+  - *Files:* `scripts/spec-status.sh`, `tests/test-spec-status.sh` (new)
+  - *Acceptance:* the focused suite proves `append-decision` inserts one dated entry at the end of the unique Decisions log, bumps `updated:`, and refuses missing or duplicate sections without corrupting STATUS.md
+  - *Verify:* `tests/run.sh spec-status` → `"== test-spec-status.sh"` and exit 0
+  - *Refs:* REQ-005, REQ-006, plan §2 Architecture, plan §4 Public CLI changes and Internal seams
 
-## Frontend (if applicable)
+- [ ] **T004** [P] — Probe fallback CLI readiness consistently
+  - *Files:* `scripts/spec-dispatch-ready.sh` (new), `tests/test-usage-limits.sh`
+  - *Acceptance:* fixture tests prove each CLI is ready only when its binary, role adapter, and read-only authentication probe succeed, with the auth-checker override and concise unavailable reasons covering every failure seam
+  - *Verify:* `tests/run.sh limits` → `"== test-usage-limits.sh"` and exit 0
+  - *Refs:* REQ-006, REQ-007, AC-006, AC-009, plan §2 Architecture, plan §4 Public CLI changes, plan R5
 
-- [ ] **T004** — <name>
-  - *Files:* `apps/web/...`
-  - *Acceptance:* component renders; manual smoke OK at 375px and 1280px
-  - *Verify:* `manual: screenshots at 375px and 1280px match the mock`
+- [ ] **T005** [hard] — Implement one-shot resume scheduler seam
+  - *Files:* `scripts/spec-resume-scheduler.sh` (new), `tests/test-usage-limits.sh`
+  - *Acceptance:* scheduler-stub tests prove idempotent `add`, `remove`, and `list`, minute-up launchd registration on Darwin, marked due-check cron registration elsewhere, state-root preservation, and remove-before-replay one-shot behavior without touching the real scheduler
+  - *Verify:* `tests/run.sh limits` → `"== test-usage-limits.sh"` and exit 0
+  - *Refs:* REQ-005, AC-004, AC-005, CON-001, plan §2 Architecture, plan §3 Resume unit, plan §4 scheduler contract and Internal seams, plan R4/R6
+
+- [ ] **T006** [hard] — Persist and replay bounded resume units
+  - *Files:* `scripts/spec-resume.sh` (new), `tests/test-usage-limits.sh`
+  - *Depends on:* T003, T005
+  - *Acceptance:* tests named AC-005 prove deterministic private units preserve cwd plus adversarial argv byte-for-byte, `list`/`cancel` reconcile scheduler state, success removes the unit, generic failure marks it failed, repeat exit 7 re-parks only through the nested dispatcher, and attempt three stops without a new job
+  - *Verify:* `tests/run.sh limits` → `"== test-usage-limits.sh"` and exit 0
+  - *Refs:* REQ-005, AC-004, AC-005, CON-003, CON-004, plan §3 Resume unit, plan §4 resume CLI and Internal seams, plan R2/R4/R6
+
+## Dispatch integration
+
+- [ ] **T007** [hard] — Capture and classify failed dispatch attempts
+  - *Files:* `scripts/spec-dispatch.sh`, `tests/test-usage-limits.sh`
+  - *Depends on:* T001, T002
+  - *Acceptance:* tests named AC-003 and AC-007 prove every provider attempt tees combined output into aggregate and per-attempt captures, Codex retains its true exit status, ordinary failures keep exit 6, and a classified limit with no policy or `fail` exits 7 with kind/reset plus shell-safe manual park and `--to` commands while invoking neither scheduler nor readiness fallback
+  - *Verify:* `tests/run.sh limits` → `"== test-usage-limits.sh"` and exit 0
+  - *Refs:* REQ-001, REQ-003, REQ-004, AC-003, AC-007, CON-002, plan §2 Dispatch flow, plan §4 Public CLI changes and Internal seams, plan R1/R8
+
+- [ ] **T008** [hard] — Route park policy through resume units
+  - *Files:* `scripts/spec-dispatch.sh`, `tests/test-usage-limits.sh`
+  - *Depends on:* T003, T005, T006, T007
+  - *Acceptance:* tests named AC-004 and AC-005 prove `short: park` persists the untouched original dispatcher argv and cwd, schedules exactly once at parsed-reset-or-backoff plus deterministic jitter, records the unit event through `spec-status.sh`, and lets a nested exit 7 enforce the retry cap without duplicate jobs
+  - *Verify:* `tests/run.sh limits` → `"== test-usage-limits.sh"` and exit 0
+  - *Refs:* REQ-004, REQ-005, AC-004, AC-005, CON-003, CON-004, plan §2 Dispatch flow, plan §3 Resume unit, plan §4 Internal seams
+
+- [ ] **T009** [hard] — Delegate long limits across ready fallbacks
+  - *Files:* `scripts/spec-dispatch.sh`, `tests/test-usage-limits.sh`
+  - *Depends on:* T003, T004, T007, T008
+  - *Acceptance:* tests named AC-006 prove ordered fallback selection skips the limited and already-attempted CLIs, records readiness skip reasons and from/to decisions, caps the loop at three non-recursive attempts, sends the first success through the unchanged role verifier, classifies only the current slice, and parks when fallbacks exhaust
+  - *Verify:* `tests/run.sh limits` → `"== test-usage-limits.sh"` and exit 0
+  - *Refs:* REQ-001, REQ-006, AC-006, CON-004, plan §2 Dispatch flow, plan §4 Internal seams, plan R5/R8
 
 ## Tests
 
-> Each test **names the AC id it proves** in its title/description (e.g.
-> `it('AC-001: …')`) so the binding is checkable at the code layer —
-> `~/.sdd/scripts/spec-ac-coverage.sh <spec-dir>` fails any AC no test names.
+> Every behavioral test names the AC id it proves so
+> `scripts/spec-ac-coverage.sh` can bind acceptance claims to executable checks.
 
-- [ ] **T005** — Integration test for happy path
-  - *Files:* `tests/...`
-  - *Acceptance:* CI green; test names AC-001
-  - *Verify:* `bun test tests/...` → "AC-001" in a passing test title
-
-- [ ] **T006** — Integration test for error path
-  - *Files:* `tests/...`
-  - *Acceptance:* test names AC-002
-  - *Verify:* `bun test tests/...` → "AC-002" in a passing test title
+- [ ] **T010** — Bind acceptance IDs and run regressions
+  - *Files:* `tests/test-usage-limits.sh`, `tests/test-model-policy.sh`, `tests/test-executable-bits.sh`
+  - *Acceptance:* test descriptions bind AC-001 through AC-009 and AC-011 to happy/error coverage, all new scripts are executable, every existing suite remains green, and all changed scripts pass shellcheck at warning severity
+  - *Verify:* `bash -c 'tests/run.sh && shellcheck -S warning -x scripts/*.sh tests/*.sh'` → `"== test-usage-limits.sh"` and exit 0
+  - *Refs:* REQ-001, REQ-002, REQ-003, REQ-004, REQ-005, REQ-006, REQ-007, AC-001, AC-002, AC-003, AC-004, AC-005, AC-006, AC-007, AC-008, AC-009, AC-011, plan §5 Dependencies, plan §6 Stack overlay notes, plan §8 Release checks
 
 ## Observability
 
-- [ ] **T007** — Add metric / log / dashboard
-  - *Files:* `infra/...`, `src/...`
-  - *Acceptance:* metric visible in CloudWatch (or equivalent) on next deploy
-  - *Verify:* `<unit test asserting the emit>` → "<n> pass" (the live metric is the [DEPLOY] half)
+- [ ] **T011** — Diagnose limit policy and resume orphans
+  - *Files:* `scripts/sdd-doctor.sh`, `tests/test-usage-limits.sh`
+  - *Depends on:* T002, T004, T005, T006
+  - *Acceptance:* tests named AC-009 prove doctor reports invalid limit policy, unavailable or adapter-missing fallbacks, every pending/failed unit, unit-without-job and job-without-unit orphans, and performs resume reconciliation even when models.yml is absent
+  - *Verify:* `tests/run.sh limits` → `"== test-usage-limits.sh"` and exit 0
+  - *Refs:* REQ-007, AC-009, plan §2 Architecture, plan §4 Internal seams, plan R5/R6
 
 ## Docs
 
-- [ ] **T008** — Update README / API docs
-  - *Files:* `README.md`, `docs/...`
-  - *Acceptance:* every documented command/example in the diff actually runs (paste one); links resolve; the feature's spec ACs are reflected
-  - *Verify:* `<the documented command>` → "<its documented output>"
+- [ ] **T012** — Document limit policy and recovery workflows
+  - *Files:* `README.md`, `models.example.yml`, `knowledge/usage-limit-handling.md` (new), `tests/test-usage-limits.sh`
+  - *Acceptance:* a test named AC-010 proves all three documents use the parser's exact `short`, `long`, `fallback`, and `backoff_minutes` keys; README explains automatic and manual recovery; the knowledge note cites empirical message provenance, warns about drift, and gives the interactive-session recipe; the example block remains commented out
+  - *Verify:* `tests/run.sh limits` → `"== test-usage-limits.sh"` and exit 0
+  - *Refs:* REQ-008, AC-010, CON-002, plan §2 Architecture, plan §8 Activation/Reversibility/Observability, plan §9 interactive-session deferral
 
 ## Reality Check (pre-ship gate)
 
-> Every spec gets this stage: **two adversarial gates, both blocking, run in order.**
-> Neither grades its own work — on Claude each is delegated via the Agent tool; on
-> Codex/Copilot the agent adopts the persona as a distinct review pass. `/sdd:tasks`
-> resolves the `Agent:` fields; `/sdd:implement` runs the opponent first, then reality-check.
->
-> - **Opponent** (`agents/opponent.agent.md`) — steelmans why the implementation is *wrong*. Default verdict **CHALLENGED**.
-> - **Reality-check** — verifies every AC-### has *evidence*. Runs the deterministic floor first (`spec-ac-coverage.sh` — every AC named by a test; `spec-evidence.sh` — every tick traces to real evidence), then verifies the rest by hand. Resolved by (1) the project constitution's pin, (2) any project-local `.claude/agents/reality-check*.md`, (3) the hub default `agents/reality-check.agent.md`. Default verdict **NEEDS WORK**.
-
-- [ ] **T009** — Opponent review: steelman why this implementation is wrong
+- [ ] **T013** — Opponent review: steelman why this implementation is wrong
   - *Agent:* `~/.sdd/agents/opponent.agent.md`
   - *Inputs:* the diff on this branch, `spec.md`, `plan.md`, every `[x]` task
   - *Acceptance:* agent returns **CLEARED** (not CHALLENGED); findings written to `notes/opponent.md`
-  - *Refs:* every REQ-### / AC-### in the spec
-  - *On CHALLENGED:* open follow-up tasks here (T009o1, T009o2, …) for each defect; fix and re-run before T010
+  - *Refs:* REQ-001, REQ-002, REQ-003, REQ-004, REQ-005, REQ-006, REQ-007, REQ-008, AC-001, AC-002, AC-003, AC-004, AC-005, AC-006, AC-007, AC-008, AC-009, AC-010, AC-011
+  - *On CHALLENGED:* open follow-up tasks here (T013o1, T013o2, …) for each defect; fix and re-run before T014
 
-- [ ] **T010** — Reality-check the implemented spec end-to-end
-  - *Agent:* `<resolved by /sdd:tasks — project-local path or hub default>`
+- [ ] **T014** — Reality-check the implemented spec end-to-end
+  - *Agent:* `~/.sdd/agents/reality-check.agent.md`
   - *Inputs:* every prior `[x]` task, `spec.md`, `plan.md`, `notes/opponent.md`
-  - *Acceptance:* agent returns **READY** (not NEEDS WORK / FAILED); claim-vs-evidence gaps documented in `notes/reality-check.md`; all AC-### in `spec.md` mapped to concrete evidence
-  - *Refs:* every AC-### in the spec
-  - *On NEEDS WORK:* open follow-up tasks here (T010a1, T010a2, …) for each fix the agent demanded; do not proceed to Ship until they're `[x]` and the gate is re-run
+  - *Acceptance:* agent returns **READY** (not NEEDS WORK / FAILED); claim-vs-evidence gaps documented in `notes/reality-check.md`; all AC-### mapped to concrete evidence
+  - *Refs:* AC-001, AC-002, AC-003, AC-004, AC-005, AC-006, AC-007, AC-008, AC-009, AC-010, AC-011
+  - *On NEEDS WORK:* open follow-up tasks here (T014a1, T014a2, …); do not proceed to Ship until they are `[x]` and the gate is re-run
 
 ## Ship
 
-> After T011, the PR lifecycle — CI triage (`T011c*`), review feedback
-> (`T011r*`), rebases, the merge, worktree teardown — belongs to **/sdd:review**
-> (deterministic state via `~/.sdd/scripts/spec-ci.sh`). T012 runs after merge.
-
-- [ ] **T011** — Open PR to the base branch (stack.yml `base_branch:`, default `dev`) referencing `spec.md` and `plan.md`
+- [ ] **T015** — Open PR to main referencing spec and plan
   - *Files:* (none — branch + PR)
-  - *Acceptance:* `~/.sdd/scripts/spec-pr.sh <spec-dir>` prints the PR URL (it writes `pr:` + `phase: review` into STATUS.md itself); both gate verdicts in the PR body; reviewer requested (`gh pr edit --add-reviewer <handle>` or ask the user who)
+  - *Acceptance:* `~/.sdd/scripts/spec-pr.sh <spec-dir>` prints the PR URL, writes `pr:` and `phase: review` into STATUS.md, includes both gate verdicts in the PR body, and requests a reviewer
 
-- [ ] **T012** — Roll out (after /sdd:review reports the PR merged)
-  - *Acceptance:* feature flag flipped / deploy verified / dashboards green for 24h — with a named owner + check-back date for the 24h claim recorded in STATUS "Next action"; `STATUS.md` phase set to `shipped`; any ACs the reality-check deferred as UNVERIFIABLE now verified and noted in `notes/evidence.md`
+- [ ] **T016** — Roll out provider limit handling after merge
+  - *Acceptance:* `scripts/sync.sh --check` and `scripts/sdd-doctor.sh` pass from merged `main`; default-off policy remains inert; pending units are inspected; MET-001 observation owner and check-back trigger are recorded in STATUS.md; phase is `shipped`
+  - *Refs:* MET-001, MET-002, CON-002, CON-005, plan §8
 
-- [ ] **T013** — Retro: harvest lessons into the hub
-  - *Acceptance:* `/sdd:retro` run; `notes/retro.md` written; any cross-project lesson appended to the hub `knowledge/`; `STATUS.md` `retro:` set to `done`
-  - *Refs:* `notes/opponent.md`, `notes/reality-check.md`, `notes/ci.md` (if CI failed en route), STATUS decisions log
+- [ ] **T017** — Retro: harvest lessons into the hub
+  - *Acceptance:* `/sdd:retro` runs, `notes/retro.md` records classifier/scheduler/fallback lessons and the MET-001 result or explicit not-yet-observed status, cross-project lessons are filed in `knowledge/`, and STATUS.md `retro:` is `done`
+  - *Refs:* `notes/opponent.md`, `notes/reality-check.md`, `notes/ci.md` (if CI failed en route), STATUS decisions log, plan §8 MET-001/MET-002
 
 ---
 
-*Workflow:* Once a task is done, tick its checkbox. Run `/sdd:implement` to execute the next pending task. When all tasks are `[x]`, set frontmatter `status: complete`.
+*Workflow:* Once a task is done, tick its checkbox. Run `/sdd:implement` to
+execute the next pending task. When all tasks are `[x]`, set frontmatter
+`status: complete`.

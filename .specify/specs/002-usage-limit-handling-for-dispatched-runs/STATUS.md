@@ -1,7 +1,7 @@
 ---
 spec: 002-usage-limit-handling-for-dispatched-runs
-phase: specify          # specify | plan | tasks | implement | review | shipped | abandoned
-active_tool: none       # claude | codex | copilot | none — who currently holds the spec
+phase: tasks          # specify | plan | tasks | implement | review | shipped | abandoned
+active_tool: codex       # claude | codex | copilot | none — who currently holds the spec
 branch: none            # spec/002-usage-limit-handling-for-dispatched-runs once cut, else none
 worktree: none          # absolute path once created, else none
 pr: none                # PR URL once opened — spec-pr.sh writes this itself
@@ -30,9 +30,10 @@ updated: 2026-07-19
 
 ## Where things stand
 
-Spec written and accepted (design settled in the 2026-07-19 session discussion;
-message formats grounded in the GitHub issues cited in spec §9). Nothing
-blocking — next is /sdd:plan.
+Tasks phase complete: 17 dependency-ordered tasks cover classifier/policy,
+resume/scheduler, dispatch, doctor, tests, docs, both gates, and ship; 3 are
+parallel-safe and 6 are `[hard]`. All 11 ACs have implementation coverage and
+`sdd-analyze.sh` is green. No blockers or clarification markers remain.
 
 ## Decisions log
 
@@ -44,6 +45,24 @@ Append-only, newest last. Each entry: `date — decision — rationale / who dec
   limits, no action without on_limit opt-in); Rehan712.
 - 2026-07-19 — Detection lives in the dispatch wrapper, never the model — a
   limit kills the session's turn before the model can act; session discussion.
+- 2026-07-19 — models.yml codex model IDs were transposed (gpt-sol-5.6 /
+  gpt-terra-5.6); first plan dispatch died on account 400s. Fixed to
+  gpt-5.6-sol / gpt-5.6-terra via model-policy.sh after verifying both IDs
+  with codex exec probes — /sdd:go autopilot.
+- 2026-07-19 — `plan.md` auto-accepted (`/sdd:go` autopilot) — user
+  pre-authorized the removed plan checkpoint at `/sdd:go`.
+- 2026-07-19 — Absent `on_limit:` remains inert; a present block defaults to
+  short=park, long=delegate, fallback=[], backoff=60m — preserves explicit
+  opt-in while making long-window failover the configured happy path.
+- 2026-07-19 — Resume units persist cwd + NUL-delimited original argv under the
+  machine state root, use deterministic ids, 0–300s jitter, and three replay
+  attempts — byte-identical replay with bounded retries and no `eval`.
+- 2026-07-19 — Provider failures use one table-driven classifier and exit 7;
+  fallbacks stay in one dispatch loop and rejoin the existing verifier —
+  classification/delegation cannot weaken artifact checks or reach gates.
+- 2026-07-20 — `tasks.md` auto-accepted (`/sdd:go` autopilot) — user
+  pre-authorized the removed tasks checkpoint at `/sdd:go`; sdd-analyze
+  passed (17 tasks, 11/11 ACs covered, both gates present).
 
 ## Open questions / blockers
 
@@ -58,4 +77,4 @@ override — tests never touch real launchd/cron.
 
 ## Next action
 
-`/sdd:plan` (then tasks → implement --all → PR, chained via /sdd:go).
+`/sdd:implement --all` (the spec worktree is cut on the first implement pass).
