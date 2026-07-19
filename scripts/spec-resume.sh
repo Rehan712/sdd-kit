@@ -300,7 +300,11 @@ cancel() {
     release_lock "$unit_id"; echo "no valid resume unit: $unit_id" >&2; exit 1;
   }
   live_spec="$U_LIVE_SPEC"; role="$U_ROLE"; kind="$U_KIND"
-  "$SCHEDULER" remove "$unit_id"
+  if ! "$SCHEDULER" remove "$unit_id"; then
+    release_lock "$unit_id"
+    echo "scheduler removal failed; resume unit kept: $unit_id" >&2
+    exit 1
+  fi
   rm -rf "$dir"
   release_lock "$unit_id"
   status_event "$live_spec" "cancelled resume unit $unit_id for $role $kind" || exit 1

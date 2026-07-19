@@ -68,6 +68,8 @@ Append-only, newest last. Each entry: `date — decision — rationale / who dec
 
 - 2026-07-20 — Chain stopped at opponent Round-3 arbitration per /sdd:go contract rule 4 (autopilot has no waiver authority) — T013o3 pending the user's decision: rework cancel-path lock handling or signed waiver.
 
+- 2026-07-20 — Round-3 arbitration: user chose fix + audit. Audit of all four scheduler-call sites in spec-resume.sh: park/add and run/remove already release the lock on failure; list holds no lock; cancel/remove was the only remaining defect — fixed (T013o3) with recovery test. Opponent re-gate authorized as Round 4.
+
 ## Open questions / blockers
 
 - Opponent Round 3 requires human arbitration before T013o3 can be executed;

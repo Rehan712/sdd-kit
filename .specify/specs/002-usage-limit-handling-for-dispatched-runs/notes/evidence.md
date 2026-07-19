@@ -914,3 +914,38 @@ Captured acceptance runs, appended by `spec-run.sh`. One block per run.
   ok   test_T013o1_clock_only_horizons_follow_configured_park_policy
   -- 22/22 passed
 ```
+
+## T013o3 — 2026-07-20T01:43:25
+
+- **Command:** `tests/run.sh limits`
+- **Cwd:** /Users/babar/projects/sdd-kit-public.worktrees/002-usage-limit-handling-for-dispatched-runs
+- **Exit:** 0
+- **Captured:** 2026-07-20T01:43:25 · sha256:9c373c3989b8 (over full output)
+
+```text
+== test-usage-limits.sh
+  ok   test_AC_001_classifies_every_planned_provider_limit_fixture
+  ok   test_AC_001_ordinary_failures_including_limit_word_are_none
+  ok   test_AC_002_pattern_table_is_the_only_provider_message_source_and_bash_32_safe
+  ok   test_AC_002_unparseable_horizon_is_unknown_and_bad_usage_is_refused
+  ok   test_AC_003_and_AC_007_codex_attempt_capture_classifies_and_stays_manual_without_policy
+  ok   test_AC_003_fail_policy_is_manual_and_ordinary_dispatch_failures_keep_exit_six
+  ok   test_AC_004_and_AC_005_park_policy_replays_original_dispatch_once_per_retry
+  ok   test_AC_004_cron_add_list_and_remove_are_marked_and_idempotent
+  ok   test_AC_004_launchd_add_list_and_remove_are_one_shot_and_idempotent
+  ok   test_AC_005_generic_failure_marks_failed_and_list_cancel_reconcile_scheduler
+  ok   test_AC_005_repeat_limit_reparks_via_nested_dispatcher_and_stops_at_three
+  ok   test_AC_005_resume_replays_adversarial_argv_and_success_removes_unit
+  ok   test_AC_005_scheduler_remove_failure_releases_lock_and_retries_same_unit
+  ok   test_AC_006_and_AC_009_readiness_requires_binary_adapter_and_authentication
+  ok   test_AC_006_auth_checker_override_does_not_bypass_binary_or_adapter_checks
+  ok   test_AC_006_delegate_caps_three_attempts_and_parks_when_exhausted
+  ok   test_AC_006_delegate_classifies_only_the_current_attempt_slice
+  ok   test_AC_006_delegate_uses_ordered_ready_fallback_and_preserves_verification
+  ok   test_AC_009_doctor_reconciles_pending_failed_and_both_orphan_classes_without_models
+  ok   test_AC_009_doctor_reports_invalid_limit_policy_and_unready_fallbacks
+  ok   test_AC_010_documents_exact_limit_policy_keys_and_recovery_workflows
+  ok   test_T013o1_clock_only_horizons_follow_configured_park_policy
+  ok   test_T013o3_cancel_scheduler_remove_failure_releases_lock_and_recovers
+  -- 23/23 passed
+```

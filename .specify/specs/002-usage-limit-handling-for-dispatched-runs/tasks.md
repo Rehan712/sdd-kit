@@ -137,11 +137,12 @@ updated: 2026-07-20
   - *Refs:* REQ-005, AC-005, notes/opponent.md Round 2 Finding 1
   - *Evidence:* `tests/run.sh limits → == test-usage-limits.sh (see notes/evidence.md)` (2026-07-20)
 
-- [ ] **T013o3** [hard] — Recover safely from cancellation scheduler removal failure
+- [x] **T013o3** [hard] — Recover safely from cancellation scheduler removal failure
   - *Files:* `scripts/spec-resume.sh`, `tests/test-usage-limits.sh`
   - *Acceptance:* a failed scheduler `remove` during `cancel` releases the unit lock, preserves the unit/job for retry, and a later successful cancellation removes that same unit cleanly
   - *Verify:* `tests/run.sh limits` → `"== test-usage-limits.sh"` and exit 0
   - *Refs:* REQ-005, AC-005, notes/opponent.md Round 3 Finding 1
+  - *Evidence:* `tests/run.sh limits → -- 23/23 passed (see notes/evidence.md)` (2026-07-20)
 
 - [ ] **T014** — Reality-check the implemented spec end-to-end
   - *Agent:* `~/.sdd/agents/reality-check.agent.md`

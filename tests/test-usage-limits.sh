@@ -733,6 +733,40 @@ test_AC_005_scheduler_remove_failure_releases_lock_and_retries_same_unit() {
     "AC-005: same unit retries scheduler removal after recovery"
 }
 
+# T013o3 (AC-005): a transient scheduler remove failure during cancel must
+# release the unit lock and keep the pending unit and its job, so cancel can
+# retry once the scheduler recovers — never a stale lock or an orphaned job.
+test_T013o3_cancel_scheduler_remove_failure_releases_lock_and_recovers() {
+  local child unit
+  resume_fixture
+  child="$(resume_recorder)"
+  export RESUME_RECORDED_CWD="$SANDBOX/cancel-failure-cwd.nul"
+  export RESUME_RECORDED_ARGV="$SANDBOX/cancel-failure-argv.nul"
+
+  run_rc 0 park_resume "$child" 'cancel recovery unit'
+  unit="$(printf '%s\n' "$OUT" | tail -1)"
+
+  export RESUME_SCHEDULER_FAIL_REMOVE=1
+  run_rc 1 run_resume cancel "$unit"
+  unset RESUME_SCHEDULER_FAIL_REMOVE
+  [[ -d "$RESUME_ROOT/$unit" ]] || t_fail "T013o3: remove failure keeps the unit"
+  assert_contains "$(cat "$RESUME_ROOT/$unit/unit.tsv")" $'state\tpending' \
+    "T013o3: remove failure does not advance the unit state"
+  [[ ! -e "$RESUME_ROOT/.$unit.lock" ]] || t_fail "T013o3: remove failure releases the unit lock"
+  assert_contains "$(cat "$RESUME_SCHEDULER_JOBS")" "$unit" \
+    "T013o3: remove failure preserves the scheduler job"
+
+  run_rc 0 run_resume cancel "$unit"
+  [[ ! -e "$RESUME_ROOT/$unit" ]] || t_fail "T013o3: recovered cancel removes the unit"
+  [[ ! -e "$RESUME_ROOT/.$unit.lock" ]] || t_fail "T013o3: recovered cancel releases the unit lock"
+  assert_eq 2 "$(grep -c "^remove $unit$" "$RESUME_SCHEDULER_LOG")" \
+    "T013o3: cancel retries scheduler removal after recovery"
+  ! grep -q "$unit" "$RESUME_SCHEDULER_JOBS" || \
+    t_fail "T013o3: recovered cancel removes the scheduler job"
+  assert_contains "$(cat "$RESUME_SPEC/STATUS.md")" "cancelled resume unit $unit" \
+    "T013o3: recovered cancel records the STATUS event"
+}
+
 test_AC_005_generic_failure_marks_failed_and_list_cancel_reconcile_scheduler() {
   local child unit
   resume_fixture
