@@ -46,7 +46,7 @@
 #       2 = usage; 3 = no dispatch mapping (and no --to); 4 = target CLI or
 #       its adapters unavailable; 5 = umbrella implement without --repo (the
 #       cross-repo --all never dispatches); 6 = the target CLI exited non-zero
-#       (captured output kept either way).
+#       (captured output kept either way); 7 = provider usage limit classified.
 
 set -uo pipefail
 
@@ -69,6 +69,11 @@ TO=""
 NOTE=""
 DRY=0
 REPO_NAME=""
+
+# Keep this replay input lossless. Limit handling must never try to rebuild the
+# invocation from flags that the parser has normalized or consumed.
+ORIGINAL_CWD="$PWD"
+ORIGINAL_ARGV=("$0" "$@")
 
 while (( $# )); do
   case "$1" in
@@ -285,8 +290,14 @@ Rules for this run (they override any instruction to ask the user):
 
 # --- build the target CLI's command -------------------------------------------
 
-CMD=("$CLI")
-case "$CLI" in
+# build_command <cli> <codex-last-message-file>
+# The aggregate capture is written by run_attempt below. Codex's native
+# --output-last-message output therefore has its own sidecar rather than
+# racing with tee over the aggregate capture.
+build_command() {
+  local attempt_cli="$1" last_message="$2" tier m e d
+  CMD=("$attempt_cli")
+  case "$attempt_cli" in
   codex)
     CMD=(codex exec)
     tier="$("$MP" get "$ROLE" codex tier 2>/dev/null)" || tier=""
@@ -299,7 +310,7 @@ case "$CLI" in
     CMD+=(-C "$ROOT" -s workspace-write)
     # codex --add-dir grants WRITE; READ_DIRS stay off — workspace-write already reads the disk.
     for d in ${EXTRA_DIRS[@]+"${EXTRA_DIRS[@]}"}; do CMD+=(--add-dir "$d"); done
-    CMD+=(--output-last-message "$CAP")
+    CMD+=(--output-last-message "$last_message")
     CMD+=("$PROMPT")
     ;;
   copilot)
@@ -321,6 +332,9 @@ case "$CLI" in
     for d in ${EXTRA_DIRS[@]+"${EXTRA_DIRS[@]}"} ${READ_DIRS[@]+"${READ_DIRS[@]}"}; do [[ "$d" == "$HUB_DIR" ]] || CMD+=(--add-dir "$d"); done
     ;;
 esac
+}
+
+build_command "$CLI" "$CAP.last-message"
 
 if (( DRY )); then
   echo "dispatch:  $ROLE -> $CLI"
@@ -343,24 +357,159 @@ bash "$STATUS_SH" set "$LIVE_SPEC" active_tool "$CLI" >/dev/null 2>&1 \
 echo "dispatching $ROLE -> $CLI (root: $ROOT)" >&2
 started=$(date +%s)
 
+# run_attempt <cli> <attempt-number>
+# Every provider follows this exact pipe. `pipefail` preserves the provider's
+# status even when tee succeeds, while the aggregate and attempt captures get
+# the same combined stdout/stderr transcript.
+run_attempt() {
+  local attempt_cli="$1" attempt_number="$2" attempt_cap last_message attempt_rc=0
+  attempt_cap="$LIVE_SPEC/notes/dispatch-$ROLE-$TS-attempt-$attempt_number-$attempt_cli.md"
+  last_message="$attempt_cap.last-message"
+  build_command "$attempt_cli" "$last_message"
+  : > "$attempt_cap"
+  { echo "# Dispatched $ROLE -> $attempt_cli (attempt $attempt_number) — $(date '+%Y-%m-%d %H:%M:%S')"; echo; } \
+    | tee -a "$CAP" "$attempt_cap" >/dev/null
+  ( cd "$ROOT" && "${CMD[@]}" ) 2>&1 | tee -a "$CAP" "$attempt_cap" || attempt_rc=$?
+  if [[ -f "$last_message" ]]; then
+    { echo; echo "# Provider final message"; cat "$last_message"; } | tee -a "$CAP" "$attempt_cap" >/dev/null
+    rm -f "$last_message"
+  fi
+  return "$attempt_rc"
+}
+
+attempted_cli() { # <cli> <attempted-cli...>
+  local candidate="$1" attempted
+  shift
+  for attempted in "$@"; do
+    [[ "$candidate" == "$attempted" ]] && return 0
+  done
+  return 1
+}
+
+# select_fallback <role> <attempted-cli...>
+# The readiness probe's human reason is retained in the aggregate capture, but
+# never written to an attempt slice: only provider output is classifier input.
+select_fallback() {
+  local fallback candidate readiness readiness_text
+  fallback="$("$MP" limit fallback 2>/dev/null || true)"
+  [[ -n "$fallback" ]] || return 1
+  IFS=, read -r -a fallback_clis <<< "$fallback"
+  for candidate in "${fallback_clis[@]}"; do
+    if attempted_cli "$candidate" "$@"; then
+      printf '# Fallback skipped: %s (already attempted)\n' "$candidate" | tee -a "$CAP" >/dev/null
+      continue
+    fi
+    readiness="$LIVE_SPEC/notes/dispatch-$ROLE-$TS-readiness-$candidate.txt"
+    if "$HUB_DIR/scripts/spec-dispatch-ready.sh" "$candidate" "$ROLE" >"$readiness" 2>&1; then
+      printf '# Fallback selected: %s\n' "$candidate" | tee -a "$CAP" >/dev/null
+      rm -f "$readiness"
+      printf '%s\n' "$candidate"
+      return 0
+    fi
+    readiness_text="$(tr '\n' ' ' < "$readiness")"
+    readiness_text="${readiness_text% }"
+    printf '# Fallback skipped: %s (%s)\n' "$candidate" "$readiness_text" | tee -a "$CAP" >/dev/null
+    rm -f "$readiness"
+  done
+  return 1
+}
+
+park_classified() { # <kind> <reset>
+  local park_kind="$1" park_reset="$2" backoff_minutes
+  backoff_minutes="$("$MP" limit backoff_minutes 2>/dev/null || true)"
+  [[ "$backoff_minutes" =~ ^[0-9]+$ ]] || backoff_minutes=60
+  park_cmd=("$HUB_DIR/scripts/spec-resume.sh" park --spec "$LIVE_SPEC" --role "$ROLE" --kind "$park_kind")
+  if [[ -n "$park_reset" ]]; then
+    park_cmd+=(--reset "$park_reset")
+  else
+    park_cmd+=(--backoff-minutes "$backoff_minutes")
+  fi
+  park_cmd+=(-- "${ORIGINAL_ARGV[@]}")
+
+  # spec-resume owns idempotency, reset/backoff jitter, scheduler registration,
+  # STATUS events, and the nested retry cap. Do not recurse from this process.
+  if ! (cd "$ORIGINAL_CWD" && "${park_cmd[@]}"); then
+    echo "  ${RED}✗${RESET} could not park the classified dispatch — inspect $CAP" >&2
+  fi
+}
+
+: > "$CAP"
 rc=0
-case "$CLI" in
-  codex)
-    "${CMD[@]}" || rc=$?
-    ;;
-  copilot|claude)
-    { echo "# Dispatched $ROLE -> $CLI — $(date '+%Y-%m-%d %H:%M:%S')"; echo; } > "$CAP"
-    ( cd "$ROOT" && "${CMD[@]}" ) 2>&1 | tee -a "$CAP" || rc=$?
-    ;;
-esac
+attempt_number=1
+current_cli="$CLI"
+attempted_clis=()
+while :; do
+  attempted_clis+=("$current_cli")
+  rc=0
+  run_attempt "$current_cli" "$attempt_number" || rc=$?
+  (( rc == 0 )) && break
+
+  attempt_cap="$LIVE_SPEC/notes/dispatch-$ROLE-$TS-attempt-$attempt_number-$current_cli.md"
+  classification="$("$HUB_DIR/scripts/usage-limit.sh" classify "$current_cli" "$attempt_cap" 2>/dev/null || true)"
+  IFS=$'\t' read -r verdict kind reset _ <<< "$classification"
+  if [[ "$verdict" != "limit" ]]; then
+    echo >&2
+    echo "elapsed: $(( $(date +%s) - started ))s — captured: $CAP" >&2
+    echo "  ${RED}✗${RESET} $current_cli exited $rc — inspect $CAP; artifacts NOT verified" >&2
+    exit 6
+  fi
+
+  limit_present="$("$MP" limit present 2>/dev/null || true)"
+  action=""
+  if [[ "$limit_present" == "true" && "$kind" != "unknown" ]]; then
+    action="$("$MP" limit "$kind" 2>/dev/null || true)"
+  fi
+
+  # No policy and explicit fail remain deliberately side-effect free. The
+  # original argv/cwd snapshot is used below, rather than any parser state.
+  if [[ "$limit_present" != "true" || "$kind" == "unknown" || "$action" == "fail" ]]; then
+    echo >&2
+    echo "elapsed: $(( $(date +%s) - started ))s — captured: $CAP" >&2
+    echo "  ${YELLOW}!${RESET} provider usage limit: cli=$current_cli kind=$kind reset=${reset:-unknown} — artifacts NOT verified" >&2
+    printf 'manual park: cd -- %q && ' "$ORIGINAL_CWD"
+    manual_park=("$HUB_DIR/scripts/spec-resume.sh" park --spec "$LIVE_SPEC" --role "$ROLE" --kind "$kind")
+    [[ -n "$reset" ]] && manual_park+=(--reset "$reset")
+    manual_park+=(-- "${ORIGINAL_ARGV[@]}")
+    printf '%q ' "${manual_park[@]}"
+    printf '\n'
+    for manual_cli in claude codex copilot; do
+      [[ "$manual_cli" == "$current_cli" ]] && continue
+      printf 'manual fallback (%s): ' "$manual_cli"
+      printf '%q ' "${ORIGINAL_ARGV[@]}" --to "$manual_cli"
+      printf '\n'
+    done
+    exit 7
+  fi
+
+  if [[ "$action" == "park" ]]; then
+    echo >&2
+    echo "elapsed: $(( $(date +%s) - started ))s — captured: $CAP" >&2
+    park_classified "$kind" "$reset"
+    exit 7
+  fi
+
+  if [[ "$action" == "delegate" ]] && (( attempt_number < 3 )); then
+    next_cli="$(select_fallback "$ROLE" "${attempted_clis[@]}")" || next_cli=""
+    if [[ -n "$next_cli" ]]; then
+      "$STATUS_SH" append-decision "$LIVE_SPEC" \
+        "delegated role=$ROLE kind=$kind from=$current_cli to=$next_cli reset=${reset:-unknown}" >/dev/null \
+        || echo "  ${YELLOW}!${RESET} could not record provider failover in STATUS.md" >&2
+      current_cli="$next_cli"
+      attempt_number=$((attempt_number + 1))
+      continue
+    fi
+  fi
+
+  # A delegate policy with no ready fallback (or after the third provider)
+  # parks the original argv. This is intentionally a loop, not a re-exec.
+  echo >&2
+  echo "elapsed: $(( $(date +%s) - started ))s — captured: $CAP" >&2
+  park_classified "$kind" "$reset"
+  exit 7
+done
 
 echo >&2
 echo "elapsed: $(( $(date +%s) - started ))s — captured: $CAP" >&2
-
-if (( rc != 0 )); then
-  echo "  ${RED}✗${RESET} $CLI exited $rc — inspect $CAP; artifacts NOT verified" >&2
-  exit 6
-fi
 
 # --- verify the artifacts (deterministic, provider-agnostic) --------------------
 

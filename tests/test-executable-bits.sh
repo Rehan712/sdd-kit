@@ -7,7 +7,9 @@
 
 . "$(dirname -- "${BASH_SOURCE[0]}")/helpers.sh"
 
-test_every_kit_script_is_executable() {
+# AC-011: every script that can be invoked directly, including the new limit
+# classifier, readiness seam, and resume tools, must retain its executable bit.
+test_AC_011_every_kit_script_is_executable() {
   local f bad=""
   for f in "$KIT_DIR"/scripts/*.sh "$KIT_DIR"/tests/run.sh; do
     [[ -x "$f" ]] || bad="$bad ${f##*/}"

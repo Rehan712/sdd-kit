@@ -1,7 +1,7 @@
 ---
 spec_id: 002-usage-limit-handling-for-dispatched-runs
 title: Usage limit handling for dispatched runs
-status: accepted
+status: implementing
 created: 2026-07-19
 updated: 2026-07-19
 owners: [Rehan712]

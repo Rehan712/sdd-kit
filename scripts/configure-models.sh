@@ -159,10 +159,18 @@ else
 fi
 
 # Capture before writing — when reconfiguring, $SRC IS $POLICY and must not be
-# read after the output redirect truncates it. The dispatch: map is not part
-# of the wizard; carry it over verbatim so reconfiguring never drops it.
+# read after the output redirect truncates it. The dispatch: and on_limit:
+# maps are not part of the wizard; carry them over so reconfiguring never drops
+# an explicit dispatch route or usage-limit opt-in.
 TIERS_ORDERED="$("$MP" --file "$SRC" tiers)"
 DISPATCH_ROWS="$("$MP" --file "$SRC" dispatch 2>/dev/null || true)"
+LIMIT_PRESENT="$("$MP" --file "$SRC" limit present 2>/dev/null || true)"
+if [[ "$LIMIT_PRESENT" == "true" ]]; then
+  LIMIT_SHORT="$("$MP" --file "$SRC" limit short)"
+  LIMIT_LONG="$("$MP" --file "$SRC" limit long)"
+  LIMIT_FALLBACK="$("$MP" --file "$SRC" limit fallback)"
+  LIMIT_BACKOFF="$("$MP" --file "$SRC" limit backoff_minutes)"
+fi
 
 {
   echo "# Model policy — MACHINE-LOCAL (gitignored). Written by configure-models.sh."
@@ -186,6 +194,18 @@ DISPATCH_ROWS="$("$MP" --file "$SRC" dispatch 2>/dev/null || true)"
     echo
     echo "dispatch:"
     awk -F'\t' '{ printf "  %s: %s\n", $1, $2 }' <<<"$DISPATCH_ROWS"
+  fi
+  if [[ "$LIMIT_PRESENT" == "true" ]]; then
+    echo
+    echo "on_limit:"
+    echo "  short: $LIMIT_SHORT"
+    echo "  long: $LIMIT_LONG"
+    if [[ -n "$LIMIT_FALLBACK" ]]; then
+      echo "  fallback: [${LIMIT_FALLBACK//,/, }]"
+    else
+      echo "  fallback: []"
+    fi
+    echo "  backoff_minutes: $LIMIT_BACKOFF"
   fi
 } > "$POLICY.tmp"
 mv "$POLICY.tmp" "$POLICY"
