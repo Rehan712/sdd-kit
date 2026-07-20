@@ -1,10 +1,10 @@
 ---
 spec: 002-usage-limit-handling-for-dispatched-runs
-phase: implement          # specify | plan | tasks | implement | review | shipped | abandoned
+phase: review          # specify | plan | tasks | implement | review | shipped | abandoned
 active_tool: claude       # claude | codex | copilot | none — who currently holds the spec
 branch: spec/002-usage-limit-handling-for-dispatched-runs            # spec/002-usage-limit-handling-for-dispatched-runs once cut, else none
 worktree: /Users/babar/projects/sdd-kit-public.worktrees/002-usage-limit-handling-for-dispatched-runs          # absolute path once created, else none
-pr: none                # PR URL once opened — spec-pr.sh writes this itself
+pr: https://github.com/Rehan712/sdd-kit/pull/15                # PR URL once opened — spec-pr.sh writes this itself
 opponent: CLEARED (2026-07-20, Round 5)       # not-run | CHALLENGED | CLEARED | BLOCKED  (+ date)
 reality_check: READY (2026-07-20)  # not-run | NEEDS WORK | FAILED | READY  (+ date)
 ci: not-run             # not-run | pending | green | red  (+ date) — spec-ci.sh writes this

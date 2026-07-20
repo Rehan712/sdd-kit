@@ -176,9 +176,10 @@ updated: 2026-07-20
 
 ## Ship
 
-- [ ] **T015** — Open PR to main referencing spec and plan
+- [x] **T015** — Open PR to main referencing spec and plan
   - *Files:* (none — branch + PR)
   - *Acceptance:* `~/.sdd/scripts/spec-pr.sh <spec-dir>` prints the PR URL, writes `pr:` and `phase: review` into STATUS.md, includes both gate verdicts in the PR body, and requests a reviewer
+  - *Evidence:* `spec-pr.sh opened https://github.com/Rehan712/sdd-kit/pull/15 (gates CLEARED+READY enforced); STATUS pr:+phase updated` (2026-07-20)
 
 - [ ] **T016** — Roll out provider limit handling after merge
   - *Acceptance:* `scripts/sync.sh --check` and `scripts/sdd-doctor.sh` pass from merged `main`; default-off policy remains inert; pending units are inspected; MET-001 observation owner and check-back trigger are recorded in STATUS.md; phase is `shipped`
