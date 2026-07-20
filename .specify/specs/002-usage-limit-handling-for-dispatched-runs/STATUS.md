@@ -1,13 +1,13 @@
 ---
 spec: 002-usage-limit-handling-for-dispatched-runs
 phase: review          # specify | plan | tasks | implement | review | shipped | abandoned
-active_tool: claude       # claude | codex | copilot | none — who currently holds the spec
-branch: spec/002-usage-limit-handling-for-dispatched-runs            # spec/002-usage-limit-handling-for-dispatched-runs once cut, else none
-worktree: /Users/babar/projects/sdd-kit-public.worktrees/002-usage-limit-handling-for-dispatched-runs          # absolute path once created, else none
+active_tool: none       # claude | codex | copilot | none — who currently holds the spec
+branch: none            # spec/002-usage-limit-handling-for-dispatched-runs once cut, else none
+worktree: none          # absolute path once created, else none
 pr: https://github.com/Rehan712/sdd-kit/pull/15                # PR URL once opened — spec-pr.sh writes this itself
 opponent: CLEARED (2026-07-20, Round 5)       # not-run | CHALLENGED | CLEARED | BLOCKED  (+ date)
 reality_check: READY (2026-07-20)  # not-run | NEEDS WORK | FAILED | READY  (+ date)
-ci: red (2026-07-20)             # not-run | pending | green | red  (+ date) — spec-ci.sh writes this
+ci: green (2026-07-20)             # not-run | pending | green | red  (+ date) — spec-ci.sh writes this
 retro: not-run          # not-run | done (+ date) — /sdd:retro after ship
 updated: 2026-07-20
 ---
@@ -30,10 +30,10 @@ updated: 2026-07-20
 
 ## Where things stand
 
-All implementation and gate-follow-up tasks (T001–T012, T013o1–o6) are
-evidenced and committed. Opponent CLEARED (Round 5, after 6 fixed findings);
-reality-check READY (all 11 ACs re-run). Ship: open the PR (T015). Rollout
-(T016) and retro (T017) wait for the merge.
+Merged to main (PR #15, ba74c63). Both gates passed (opponent CLEARED Round 5,
+reality-check READY); CI green; worktree + branch torn down; spec.md/plan.md
+status shipped. Remaining: T016 rollout, then T017 retro. Port to the private
+kit repo follows this merge (CON-005).
 
 ## Decisions log
 
@@ -74,6 +74,8 @@ Append-only, newest last. Each entry: `date — decision — rationale / who dec
 
 - 2026-07-20 — CI red on ubuntu only: wizard test used BSD script CLI; fixed portably (T015c1, util-linux -q -e -c branch). Test-only mechanical fix — no re-gate per the re-gate rule.
 
+- 2026-07-20 — PR #15 squash-merged to main as ba74c63 (user approved merge-when-green); worktree + spec branch torn down; spec.md/plan.md status -> shipped. Next: T016 rollout, then /sdd:retro.
+
 ## Open questions / blockers
 
 (none)
@@ -87,4 +89,5 @@ override — tests never touch real launchd/cron.
 
 ## Next action
 
-`/sdd:review` — CI triage, review feedback, merge, worktree teardown.
+`/sdd:implement T016` (rollout — verify sync/doctor from merged main, record
+MET-001 owner), then `/sdd:retro`. Then port kit files to sdd-kit-private.

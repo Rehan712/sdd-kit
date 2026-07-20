@@ -1,6 +1,6 @@
 ---
 plan_for: 002-usage-limit-handling-for-dispatched-runs
-status: implementing  # draft | accepted | implementing | shipped
+status: shipped  # draft | accepted | implementing | shipped
 created: 2026-07-19
 updated: 2026-07-19
 stacks: []
