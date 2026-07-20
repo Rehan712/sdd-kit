@@ -1060,3 +1060,23 @@ Captured acceptance runs, appended by `spec-run.sh`. One block per run.
   ok   test_T013o5_metadata_write_failure_releases_lock_and_unit_recovers
   -- 25/25 passed
 ```
+
+## T015c1 — 2026-07-20T07:09:33
+
+- **Command:** `tests/run.sh model-policy`
+- **Cwd:** /Users/babar/projects/sdd-kit-public.worktrees/002-usage-limit-handling-for-dispatched-runs
+- **Exit:** 0
+- **Captured:** 2026-07-20T07:09:33 · sha256:e1cdc6ba8ed4 (over full output)
+
+```text
+== test-model-policy.sh
+  ok   test_AC_008_usage_limit_policy_absent_and_present_defaults
+  ok   test_AC_008_usage_limit_policy_rejects_invalid_values
+  ok   test_AC_008_usage_limit_policy_set_unset_round_trip
+  ok   test_AC_008_usage_limit_policy_wizard_preserves_ordered_fallback
+  ok   test_claude_effort_whitelist_unchanged
+  ok   test_codex_sandbox_and_approval_policy_fields
+  ok   test_documented_codex_efforts_accepted
+  ok   test_junk_codex_effort_rejected
+  -- 8/8 passed
+```

@@ -165,7 +165,14 @@ on_limit:
   fallback: [copilot, claude]
   backoff_minutes: 90
 EOF
-  run_rc 0 bash -c "printf '\\n\\n\\n' | env HOME='$home' script -q '$transcript' '$kit/scripts/configure-models.sh' --no-sync"
+  # `script` grants the wizard a pty, but BSD (macOS) and util-linux (Linux)
+  # disagree on its CLI: BSD takes the command positionally, util-linux needs
+  # -c and only returns the child's exit code with -e.
+  if script --version 2>/dev/null | grep -q util-linux; then
+    run_rc 0 bash -c "printf '\\n\\n\\n' | env HOME='$home' script -q -e -c '$kit/scripts/configure-models.sh --no-sync' '$transcript'"
+  else
+    run_rc 0 bash -c "printf '\\n\\n\\n' | env HOME='$home' script -q '$transcript' '$kit/scripts/configure-models.sh' --no-sync"
+  fi
   policy="$(cat "$p")"
   assert_contains "$policy" "short: fail" "AC-008: wizard preserves short action"
   assert_contains "$policy" "fallback: [copilot, claude]" "AC-008: wizard preserves fallback order"

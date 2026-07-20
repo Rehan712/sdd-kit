@@ -181,6 +181,13 @@ updated: 2026-07-20
   - *Acceptance:* `~/.sdd/scripts/spec-pr.sh <spec-dir>` prints the PR URL, writes `pr:` and `phase: review` into STATUS.md, includes both gate verdicts in the PR body, and requests a reviewer
   - *Evidence:* `spec-pr.sh opened https://github.com/Rehan712/sdd-kit/pull/15 (gates CLEARED+READY enforced); STATUS pr:+phase updated` (2026-07-20)
 
+- [x] **T015c1** — Portable pty invocation for the wizard test on GNU script
+  - *Files:* `tests/test-model-policy.sh`
+  - *Acceptance:* test_AC_008_usage_limit_policy_wizard_preserves_ordered_fallback passes on util-linux `script` (Ubuntu CI) and BSD `script` (macOS) — GNU form uses `-q -e -c`, BSD keeps the positional command; the ubuntu-latest CI check goes green
+  - *Verify:* `tests/run.sh model-policy` → exit 0 locally; CI `tests (ubuntu-latest)` green
+  - *Refs:* AC-008, AC-011, notes/ci.md run 29715420768
+  - *Evidence:* `tests/run.sh model-policy → -- 8/8 passed (see notes/evidence.md)` (2026-07-20)
+
 - [ ] **T016** — Roll out provider limit handling after merge
   - *Acceptance:* `scripts/sync.sh --check` and `scripts/sdd-doctor.sh` pass from merged `main`; default-off policy remains inert; pending units are inspected; MET-001 observation owner and check-back trigger are recorded in STATUS.md; phase is `shipped`
   - *Refs:* MET-001, MET-002, CON-002, CON-005, plan §8

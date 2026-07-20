@@ -7,7 +7,7 @@ worktree: /Users/babar/projects/sdd-kit-public.worktrees/002-usage-limit-handlin
 pr: https://github.com/Rehan712/sdd-kit/pull/15                # PR URL once opened — spec-pr.sh writes this itself
 opponent: CLEARED (2026-07-20, Round 5)       # not-run | CHALLENGED | CLEARED | BLOCKED  (+ date)
 reality_check: READY (2026-07-20)  # not-run | NEEDS WORK | FAILED | READY  (+ date)
-ci: not-run             # not-run | pending | green | red  (+ date) — spec-ci.sh writes this
+ci: red (2026-07-20)             # not-run | pending | green | red  (+ date) — spec-ci.sh writes this
 retro: not-run          # not-run | done (+ date) — /sdd:retro after ship
 updated: 2026-07-20
 ---
@@ -71,6 +71,8 @@ Append-only, newest last. Each entry: `date — decision — rationale / who dec
 - 2026-07-20 — Round-3 arbitration: user chose fix + audit. Audit of all four scheduler-call sites in spec-resume.sh: park/add and run/remove already release the lock on failure; list holds no lock; cancel/remove was the only remaining defect — fixed (T013o3) with recovery test. Opponent re-gate authorized as Round 4.
 
 - 2026-07-20 — Opponent Round 4 CHALLENGED with three new findings; proceeded under the user's Round-3 arbitration precedent (fix, never waive) and standing continue instruction: T013o4 park-time PATH capture/replay (launchd/cron fire with stock PATH), T013o5 structural EXIT-trap lock release (the class-level fix the gate asked for), T013o6 minute-less weekly/model-bucket clocks. Round 5 is the bound — a new challenge there stops for the user.
+
+- 2026-07-20 — CI red on ubuntu only: wizard test used BSD script CLI; fixed portably (T015c1, util-linux -q -e -c branch). Test-only mechanical fix — no re-gate per the re-gate rule.
 
 ## Open questions / blockers
 
