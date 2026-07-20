@@ -116,12 +116,13 @@ updated: 2026-07-20
 
 ## Reality Check (pre-ship gate)
 
-- [ ] **T013** — Opponent review: steelman why this implementation is wrong
+- [x] **T013** — Opponent review: steelman why this implementation is wrong
   - *Agent:* `~/.sdd/agents/opponent.agent.md`
   - *Inputs:* the diff on this branch, `spec.md`, `plan.md`, every `[x]` task
   - *Acceptance:* agent returns **CLEARED** (not CHALLENGED); findings written to `notes/opponent.md`
   - *Refs:* REQ-001, REQ-002, REQ-003, REQ-004, REQ-005, REQ-006, REQ-007, REQ-008, AC-001, AC-002, AC-003, AC-004, AC-005, AC-006, AC-007, AC-008, AC-009, AC-010, AC-011
   - *On CHALLENGED:* open follow-up tasks here (T013o1, T013o2, …) for each defect; fix and re-run before T014
+  - *Evidence:* `Opponent CLEARED (2026-07-20, Round 5) after 5 rounds / 6 findings, all fixed and re-verified from failure paths — notes/opponent.md; STATUS frontmatter updated by the gate agent` (2026-07-20)
 
 - [x] **T013o1** [hard] — Recognize clock-only provider reset horizons
   - *Files:* `scripts/usage-limit-patterns.tsv`, `scripts/usage-limit.sh`, `tests/fixtures/usage-limits/`, `tests/test-usage-limits.sh`

@@ -301,3 +301,77 @@ as shipped).
   unwritable-unit-dir case (→ Finding 2).
 - T013o6 — Allow minute-less clocks in the weekly and model-weekly pattern
   rows with fixtures through the dispatch policy path (→ Finding 3).
+
+## Round 5
+
+# Opponent review — 002-usage-limit-handling-for-dispatched-runs
+
+**Date:** 2026-07-20
+**Verdict:** CLEARED
+**Round:** 5
+
+## What I attacked
+
+I re-verified all three Round 4 repairs (commit b5530e4) from their failure
+paths with my own stubs, independent of the suite, then attacked the new
+machinery itself: the EXIT-trap lock lifecycle under bash 3.2 subshell and
+command-substitution semantics, the busy-timeout path (a trap must never
+release a lock the process failed to acquire), the nested-dispatcher exit-7
+re-park under a stripped scheduler environment, environment leakage beyond
+PATH, legacy units lacking path.nul, and classifier false-positive regressions.
+Full suite green (12 suites, 25/25 limits), `shellcheck -S warning -x` clean.
+
+## Findings
+
+None substantive. Carried-over minor list (non-blocking, unchanged from
+Round 4): (a) a pipe-epoch reset already in the past still parks a launchd
+entry whose calendar date never fires — flooring `run_at` at now+1min in
+`scripts/spec-resume.sh:175` remains worthwhile; (b) launchd one-shot entries
+survive sleep but not a powered-off night (cron's every-minute epoch check
+does) — a knowledge-doc caveat; (c) `flatten` accepts `on_limit:` only with
+nothing after the colon (`scripts/model-policy.sh:120`) while `dispatch:`
+tolerates an inline comment; (d) STATUS `active_tool` keeps the original CLI
+after a successful delegation. New minor, same tier: a unit parked before
+b5530e4 lacks `path.nul`, so `run` refuses it ("payload missing", exit 1,
+before scheduler remove — job retained, no stale lock) and `cancel` fully
+recovers it (reproduced); acceptable for an unshipped feature, worth one line
+in the docs if any dev machine has in-flight units.
+
+## Held up
+
+- **T013o4 (parked PATH):** parked under a marker PATH plus a marker env var,
+  fired under the plist's exact environment (`env -i
+  PATH=/usr/bin:/bin:/usr/sbin:/sbin HOME=… SDD_RESUME_ROOT=…`): the replayed
+  probe resolved `claude` at `~/.local/bin` via the restored PATH, the marker
+  env var was ABSENT at replay (only PATH travels), and the unit was removed
+  on success. The Round 4 repro that returned exit 4 now returns 0.
+- **T013o5 (trap-scoped lock):** `chmod 555 <unit-dir>` mid-run — `mktemp`
+  fails after the scheduler job was consumed, `run` exits 1 with NO stale
+  lock, state pending, argv never executed; after `chmod 755` the same unit
+  replays and is removed. The previously stranded double-orphan is gone.
+- **Busy-timeout vs trap:** with a foreign `.lock` in place, both `run` and
+  `cancel` exit 1 "busy" and the foreign lock SURVIVES — `HELD_LOCK` is set
+  only after a successful acquire, so the EXIT trap cannot release another
+  process's lock.
+- **bash 3.2 trap semantics:** on `/bin/bash 3.2.57`, the EXIT trap fires
+  exactly once at main-shell exit — not in `$()` command substitutions, not in
+  `( )` subshells, not when the replay subshell exits nonzero — so no
+  premature lock release exists around the replay or the metadata reads.
+- **Nested exit-7 re-park:** fired a unit under the stripped scheduler env
+  whose replay re-parks the same unit and exits 7 (the repeat-limit path):
+  `run` returned 7, the unit is pending with retry_count 1, a fresh scheduler
+  job exists, no stale lock, and — critically — the re-parked `path.nul`
+  still carries the ORIGINAL parking PATH (the replay's export propagates to
+  the nested park), so resolvability survives every re-park hop.
+- **T013o6 (minute-less weekly clocks):** my Round 4 captures ("Weekly limit
+  reached… will reset at 8pm (America/New_York)", "You've hit your Opus
+  limit… 8pm", "You've hit your weekly limit… 8pm") now classify
+  `long 1704139200`; the four ordinary-failure fixtures (including the
+  limit-word one) remain `none`, and session wording still classifies `short`
+  ahead of the weekly rows.
+- **Rounds 1–3 repairs:** re-ran green in the suite (clock-only park path,
+  run/cancel scheduler-remove failure release + recovery); nothing regressed.
+
+## Follow-up tasks proposed
+
+(none — the minor list above is optional polish, not gate material)
