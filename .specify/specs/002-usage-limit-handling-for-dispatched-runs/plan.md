@@ -158,6 +158,7 @@ Every command has deterministic id `sha256(cwd NUL argv...)` (using the same
 |---|---|
 | `argv.nul` | every original argv element followed by NUL; never shell source text |
 | `cwd.nul` | original working directory followed by NUL |
+| `path.nul` | the parking shell's PATH followed by NUL — restored for the replay because scheduler-fired runs get the stock system PATH (Round 4, T013o4) |
 | `unit.tsv` | `state`, `live_spec`, `role`, `kind`, `reset_epoch`, `run_at_epoch`, `retry_count`, `max_retries`, `last_exit`, `created_at`, `updated_at` |
 
 `state` is `pending|running|failed`. The fixed retry cap is 3 scheduler-fired

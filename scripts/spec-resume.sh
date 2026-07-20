@@ -47,6 +47,15 @@ hash_unit() { # <cwd> <argv...>
 unit_dir() { printf '%s/%s\n' "$STATE_ROOT" "$1"; }
 lock_dir() { printf '%s/.%s.lock\n' "$STATE_ROOT" "$1"; }
 
+# The EXIT trap is the structural guarantee that no failure path — including a
+# set -e escape between acquire and release — can leave a stale lock behind.
+HELD_LOCK=""
+release_held_lock() {
+  [[ -z "$HELD_LOCK" ]] || rmdir "$(lock_dir "$HELD_LOCK")" 2>/dev/null || true
+  HELD_LOCK=""
+}
+trap release_held_lock EXIT
+
 acquire_lock() { # <unit-id>
   local lock attempts=0
   lock="$(lock_dir "$1")"
@@ -59,9 +68,13 @@ acquire_lock() { # <unit-id>
     fi
     sleep 0.1
   done
+  HELD_LOCK="$1"
 }
 
-release_lock() { rmdir "$(lock_dir "$1")" 2>/dev/null || true; }
+release_lock() {
+  rmdir "$(lock_dir "$1")" 2>/dev/null || true
+  [[ "$HELD_LOCK" != "$1" ]] || HELD_LOCK=""
+}
 
 metadata_reset() {
   U_STATE=""; U_LIVE_SPEC=""; U_ROLE=""; U_KIND=""; U_RESET_EPOCH=""
@@ -186,6 +199,10 @@ park() {
   write_metadata "$dir"
   printf '%s\0' "${argv[@]}" > "$dir/argv.nul"
   printf '%s\0' "$cwd" > "$dir/cwd.nul"
+  # Scheduler-fired replays run with the stock system PATH; the parking
+  # shell's PATH is what resolves the provider CLIs, so it travels in the
+  # unit payload (never the whole environment).
+  printf '%s\0' "$PATH" > "$dir/path.nul"
   if ! "$SCHEDULER" add "$unit_id" "$run_at" "$STATE_ROOT"; then
     U_STATE="failed"; U_LAST_EXIT=1; U_UPDATED_AT="$(date +%s)"
     write_metadata "$dir"
@@ -213,6 +230,14 @@ read_cwd_file() { # <path>
   done < "$1"
 }
 
+read_path_file() { # <path>
+  local value
+  RESUME_PATH=()
+  while IFS= read -r -d '' value; do
+    RESUME_PATH+=("$value")
+  done < "$1"
+}
+
 run_unit() {
   local unit_id="$1" dir now rc live_spec role kind
   valid_unit_id "$unit_id" || usage
@@ -226,7 +251,7 @@ run_unit() {
   [[ "$U_STATE" == "pending" ]] || {
     release_lock "$unit_id"; echo "resume unit is not pending: $unit_id" >&2; exit 1;
   }
-  [[ -f "$dir/argv.nul" && -f "$dir/cwd.nul" ]] || {
+  [[ -f "$dir/argv.nul" && -f "$dir/cwd.nul" && -f "$dir/path.nul" ]] || {
     release_lock "$unit_id"; echo "resume unit payload missing: $unit_id" >&2; exit 1;
   }
   if ! "$SCHEDULER" remove "$unit_id"; then
@@ -239,7 +264,8 @@ run_unit() {
 
   read_cwd_file "$dir/cwd.nul"
   read_argv_file "$dir/argv.nul"
-  [[ ${#RESUME_CWD[@]} -eq 1 && ${#RESUME_ARGV[@]} -gt 0 && -d "${RESUME_CWD[0]}" ]] || {
+  read_path_file "$dir/path.nul"
+  [[ ${#RESUME_CWD[@]} -eq 1 && ${#RESUME_ARGV[@]} -gt 0 && ${#RESUME_PATH[@]} -eq 1 && -d "${RESUME_CWD[0]}" ]] || {
     acquire_lock "$unit_id" || exit 1
     load_metadata "$dir" && { U_STATE="failed"; U_LAST_EXIT=1; U_UPDATED_AT="$(date +%s)"; write_metadata "$dir"; }
     release_lock "$unit_id"
@@ -247,7 +273,7 @@ run_unit() {
     exit 1
   }
 
-  if (cd "${RESUME_CWD[0]}" && "${RESUME_ARGV[@]}"); then rc=0; else rc=$?; fi
+  if (cd "${RESUME_CWD[0]}" && export PATH="${RESUME_PATH[0]}" && "${RESUME_ARGV[@]}"); then rc=0; else rc=$?; fi
 
   acquire_lock "$unit_id" || exit 1
   if [[ ! -d "$dir" ]] || ! load_metadata "$dir"; then

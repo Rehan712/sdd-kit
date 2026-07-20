@@ -45,8 +45,11 @@ on_limit:
 `short` and `long` each select `park`, `delegate`, or `fail`. A present block
 defaults to `short: park`, `long: delegate`, `fallback: []`, and
 `backoff_minutes: 60`. Parking preserves the dispatched command for one-shot
-resume. Delegation tries the ordered, ready `fallback` CLIs and parks when it
-cannot find one. Remove `on_limit:` to disable future automatic actions; use
+resume, along with the parking shell's PATH — launchd/cron fire with the stock
+system PATH, and the stored PATH is what resolves the provider CLIs at replay
+time (only PATH travels; never the whole environment). Delegation tries the
+ordered, ready `fallback` CLIs and parks when it cannot find one. Remove
+`on_limit:` to disable future automatic actions; use
 `scripts/spec-resume.sh list` and `scripts/spec-resume.sh cancel <unit-id>` to
 inspect or cancel already parked work.
 

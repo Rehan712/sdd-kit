@@ -70,6 +70,8 @@ Append-only, newest last. Each entry: `date — decision — rationale / who dec
 
 - 2026-07-20 — Round-3 arbitration: user chose fix + audit. Audit of all four scheduler-call sites in spec-resume.sh: park/add and run/remove already release the lock on failure; list holds no lock; cancel/remove was the only remaining defect — fixed (T013o3) with recovery test. Opponent re-gate authorized as Round 4.
 
+- 2026-07-20 — Opponent Round 4 CHALLENGED with three new findings; proceeded under the user's Round-3 arbitration precedent (fix, never waive) and standing continue instruction: T013o4 park-time PATH capture/replay (launchd/cron fire with stock PATH), T013o5 structural EXIT-trap lock release (the class-level fix the gate asked for), T013o6 minute-less weekly/model-bucket clocks. Round 5 is the bound — a new challenge there stops for the user.
+
 ## Open questions / blockers
 
 - Opponent Round 3 requires human arbitration before T013o3 can be executed;

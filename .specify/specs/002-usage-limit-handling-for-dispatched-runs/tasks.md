@@ -144,6 +144,27 @@ updated: 2026-07-20
   - *Refs:* REQ-005, AC-005, notes/opponent.md Round 3 Finding 1
   - *Evidence:* `tests/run.sh limits → -- 23/23 passed (see notes/evidence.md)` (2026-07-20)
 
+- [x] **T013o4** [hard] — Restore the parked PATH for scheduler-fired replays
+  - *Files:* `scripts/spec-resume.sh`, `tests/test-usage-limits.sh`
+  - *Acceptance:* park persists the parking shell's PATH in the unit payload (`path.nul`); run restores it for the replayed argv, proven by a replay under a stock scheduler PATH observing the parked PATH — launchd/cron-fired resumes can resolve the provider CLIs without capturing the whole environment
+  - *Verify:* `tests/run.sh limits` → `"== test-usage-limits.sh"` and exit 0
+  - *Refs:* REQ-005, AC-005, MET-001, notes/opponent.md Round 4 Finding 1
+  - *Evidence:* `tests/run.sh limits → -- 25/25 passed (see notes/evidence.md)` (2026-07-20)
+
+- [x] **T013o5** [hard] — Guarantee lock release on any exit while a unit lock is held
+  - *Files:* `scripts/spec-resume.sh`, `tests/test-usage-limits.sh`
+  - *Acceptance:* an unexpected failure between lock acquire and release (metadata storage breaking mid-run) exits nonzero without leaving `.<unit>.lock`, and the same unit runs cleanly once storage recovers — enforced structurally (EXIT trap), not per call site
+  - *Verify:* `tests/run.sh limits` → `"== test-usage-limits.sh"` and exit 0
+  - *Refs:* REQ-005, AC-005, notes/opponent.md Round 4 Finding 2
+  - *Evidence:* `tests/run.sh limits → -- 25/25 passed (see notes/evidence.md)` (2026-07-20)
+
+- [x] **T013o6** — Classify minute-less weekly and model-bucket reset clocks
+  - *Files:* `scripts/usage-limit-patterns.tsv`, `tests/fixtures/usage-limits/`, `tests/test-usage-limits.sh`
+  - *Acceptance:* weekly and Opus/Sonnet-bucket limit messages with minute-less clocks ("will reset at 8pm", "Resets 8pm") classify `long` with an extracted reset epoch, with fixtures for both detectors
+  - *Verify:* `tests/run.sh limits` → `"== test-usage-limits.sh"` and exit 0
+  - *Refs:* REQ-002, AC-001, notes/opponent.md Round 4 Finding 3
+  - *Evidence:* `tests/run.sh limits → -- 25/25 passed (see notes/evidence.md)` (2026-07-20)
+
 - [ ] **T014** — Reality-check the implemented spec end-to-end
   - *Agent:* `~/.sdd/agents/reality-check.agent.md`
   - *Inputs:* every prior `[x]` task, `spec.md`, `plan.md`, `notes/opponent.md`

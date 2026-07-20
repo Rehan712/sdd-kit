@@ -25,8 +25,12 @@ test_AC_001_classifies_every_planned_provider_limit_fixture() {
   assert_eq $'limit\tshort\t1704117600\tclaude-session-clock' "$OUT"
   run_rc 0 classify claude claude-weekly-clock.txt
   assert_eq $'limit\tlong\t1704151800\tclaude-weekly-clock' "$OUT"
+  run_rc 0 classify claude claude-weekly-clock-no-minutes.txt
+  assert_eq $'limit\tlong\t1704139200\tclaude-weekly-clock' "$OUT"
   run_rc 0 classify claude claude-model-weekly.txt
   assert_eq $'limit\tlong\t1704151800\tclaude-model-weekly' "$OUT"
+  run_rc 0 classify claude claude-model-weekly-no-minutes.txt
+  assert_eq $'limit\tlong\t1704139200\tclaude-model-weekly' "$OUT"
 
   run_rc 0 classify codex codex-short-clock.txt
   assert_eq $'limit\tshort\t1704072600\tcodex-usage-horizon' "$OUT"
@@ -664,6 +668,7 @@ resume_recorder() {
 #!/usr/bin/env bash
 printf '%s\0' "$PWD" > "$RESUME_RECORDED_CWD"
 printf '%s\0' "$@" > "$RESUME_RECORDED_ARGV"
+[[ -z "${RESUME_RECORDED_PATH:-}" ]] || printf '%s\0' "$PATH" > "$RESUME_RECORDED_PATH"
 exit "${RESUME_CHILD_EXIT:-0}"
 EOF
   chmod +x "$program"
@@ -765,6 +770,71 @@ test_T013o3_cancel_scheduler_remove_failure_releases_lock_and_recovers() {
     t_fail "T013o3: recovered cancel removes the scheduler job"
   assert_contains "$(cat "$RESUME_SPEC/STATUS.md")" "cancelled resume unit $unit" \
     "T013o3: recovered cancel records the STATUS event"
+}
+
+# T013o4 (AC-005): scheduler-fired replays run with the stock system PATH, so
+# the replay must execute under the PATH captured at park time — that is what
+# resolves the provider CLIs when launchd/cron fire the resume.
+test_T013o4_replay_restores_the_parked_path_under_a_stock_scheduler_path() {
+  local child unit parked_path recorded_path
+  resume_fixture
+  child="$(resume_recorder)"
+  export RESUME_RECORDED_CWD="$SANDBOX/path-cwd.nul"
+  export RESUME_RECORDED_ARGV="$SANDBOX/path-argv.nul"
+  export RESUME_RECORDED_PATH="$SANDBOX/path-path.nul"
+  parked_path="$SANDBOX/park bin:$PATH"
+
+  OUT="$(cd "$RESUME_CWD" && env PATH="$parked_path" \
+    SDD_RESUME_ROOT="$RESUME_ROOT" SDD_RESUME_SCHEDULER="$RESUME_SCHEDULER" \
+    SDD_RESUME_JITTER_SECONDS=0 RESUME_SCHEDULER_LOG="$RESUME_SCHEDULER_LOG" \
+    RESUME_SCHEDULER_JOBS="$RESUME_SCHEDULER_JOBS" \
+    "$RESUME" park --spec "$RESUME_SPEC" --role implement --kind short \
+    --backoff-minutes 1 -- "$child" 'path replay')" \
+    || t_fail "T013o4: park under the marker PATH succeeds"
+  unit="$(printf '%s\n' "$OUT" | tail -1)"
+  [[ -f "$RESUME_ROOT/$unit/path.nul" ]] || t_fail "T013o4: park persists path.nul"
+
+  run_rc 0 env PATH="/usr/bin:/bin" \
+    SDD_RESUME_ROOT="$RESUME_ROOT" SDD_RESUME_SCHEDULER="$RESUME_SCHEDULER" \
+    SDD_RESUME_JITTER_SECONDS=0 RESUME_SCHEDULER_LOG="$RESUME_SCHEDULER_LOG" \
+    RESUME_SCHEDULER_JOBS="$RESUME_SCHEDULER_JOBS" \
+    RESUME_RECORDED_CWD="$RESUME_RECORDED_CWD" \
+    RESUME_RECORDED_ARGV="$RESUME_RECORDED_ARGV" \
+    RESUME_RECORDED_PATH="$RESUME_RECORDED_PATH" \
+    "$RESUME" run "$unit"
+  recorded_path="$(tr -d '\0' < "$RESUME_RECORDED_PATH")"
+  assert_eq "$parked_path" "$recorded_path" \
+    "T013o4: replay runs under the parked PATH, not the scheduler's stock PATH"
+}
+
+# T013o5 (AC-005): any failure while the unit lock is held — here metadata
+# storage breaking mid-run — must release the lock on exit so the same unit
+# stays manageable once storage recovers.
+test_T013o5_metadata_write_failure_releases_lock_and_unit_recovers() {
+  local child unit
+  resume_fixture
+  child="$(resume_recorder)"
+  export RESUME_RECORDED_CWD="$SANDBOX/meta-cwd.nul"
+  export RESUME_RECORDED_ARGV="$SANDBOX/meta-argv.nul"
+
+  run_rc 0 park_resume "$child" 'metadata recovery unit'
+  unit="$(printf '%s\n' "$OUT" | tail -1)"
+
+  chmod 555 "$RESUME_ROOT/$unit"
+  run_rc 1 run_resume run "$unit"
+  chmod 755 "$RESUME_ROOT/$unit"
+  [[ ! -e "$RESUME_ROOT/.$unit.lock" ]] || \
+    t_fail "T013o5: metadata write failure releases the unit lock on exit"
+  [[ ! -e "$RESUME_RECORDED_ARGV" ]] || \
+    t_fail "T013o5: metadata write failure does not execute stored argv"
+  assert_contains "$(cat "$RESUME_ROOT/$unit/unit.tsv")" $'state\tpending' \
+    "T013o5: metadata write failure leaves the unit pending"
+
+  run_rc 0 run_resume run "$unit"
+  [[ -e "$RESUME_RECORDED_ARGV" ]] || \
+    t_fail "T013o5: recovered storage replays the stored argv"
+  [[ ! -e "$RESUME_ROOT/$unit" ]] || \
+    t_fail "T013o5: recovered replay removes the unit"
 }
 
 test_AC_005_generic_failure_marks_failed_and_list_cancel_reconcile_scheduler() {

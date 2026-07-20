@@ -152,3 +152,152 @@ and a verified repair.
 ## Follow-up tasks proposed
 
 - T013o3 — Release the resume-unit lock when scheduler removal fails during cancel, and verify retry after scheduler recovery (→ Finding 1).
+
+## Round 4
+
+# Opponent review — 002-usage-limit-handling-for-dispatched-runs
+
+**Date:** 2026-07-20
+**Verdict:** CHALLENGED
+**Round:** 4
+
+## What I attacked
+
+I re-verified the Round 3 repair independently (own scheduler stub, not the
+suite): a failing `remove` during `cancel` now exits 1 with the lock released
+and the pending unit + job preserved, and a post-recovery `cancel` cleans up
+and records the STATUS event. The full suite (all suites green, 23/23 limits)
+and `shellcheck -S warning -x scripts/*.sh tests/*.sh` pass. I then attacked
+the surfaces tests cannot see: the environment the real scheduler gives a
+fired unit, the remaining lock-held failure windows the o2/o3 fixes did not
+cover, and the pattern rows the o1 repair did not touch.
+
+## Findings
+
+1. **A scheduler-fired resume replays into an environment where no provider CLI exists** — *severity:* wrong-result
+   - **Scenario:** Any parked dispatch on a normal install. The generated
+     launchd plist sets only `SDD_RESUME_ROOT`
+     (`scripts/spec-resume-scheduler.sh:78-82`); the cron entry likewise
+     (`scripts/spec-resume-scheduler.sh:125`). launchd user agents and cron
+     run with the stock system PATH and never source the user's profile. On
+     this host `claude` is at `~/.local/bin`, `codex`/`copilot` at
+     `/opt/homebrew/bin` — none reachable. Reproduced: parked a unit whose
+     argv mirrors the dispatch guard, replayed it under the plist's declared
+     environment (`env -i PATH=/usr/bin:/bin:/usr/sbin:/sbin HOME=…
+     SDD_RESUME_ROOT=… spec-resume.sh run <unit>`): the guard at
+     `scripts/spec-dispatch.sh:155` fails, `run` exits 4, and the unit is
+     marked `failed` with `last_exit 4` after consuming a retry.
+   - **Where:** `scripts/spec-resume-scheduler.sh:78-82` (launchd), `:125`
+     (cron); the replay then dies at `scripts/spec-dispatch.sh:155` (and would
+     die at `:299`/`:302` even without the guard — bare CLI names).
+   - **Wrong behavior:** The feature's headline path — overnight park, fire at
+     reset, "find the tasks finished in the morning" — fails on every real
+     firing on a standard brew/npm install. The user discovers a failed unit
+     hours later, which is precisely the outcome REQ-001 forbids. Every test
+     stubs the scheduler seam, so the suite cannot observe this.
+   - **Smallest fix:** Capture the parking process's `PATH` (unit metadata or
+     scheduler args) and set it in the plist `EnvironmentVariables` and the
+     cron entry's `env` invocation; add a seam-level assertion that `add`
+     embeds the captured PATH.
+   - **Root cause:** plan-gap. The plan designed the scheduler seam only as
+     "replaceable by env in tests" (plan.md §files) and never decided the
+     fired job's runtime environment; the implementation faithfully emits an
+     entry with no environment capture.
+   - **Blocks:** REQ-005 / AC-005, MET-001, CON-003 (the replay is
+     argv-identical but not behavior-identical).
+
+2. **A metadata write failure strands the unit behind a stale lock with its scheduler job already gone** — *severity:* wrong-result
+   - **Scenario:** The unit dir becomes unwritable between park and fire
+     (ENOSPC, permission drift — reproduced with `chmod 555 <unit-dir>`).
+     `spec-resume.sh run <unit>`: lock acquired, scheduler `remove` succeeds
+     (job deleted), then `write_metadata` fails (`mktemp: Permission denied`)
+     and `set -e` kills the script before `release_lock`. Result: state
+     `pending`, scheduler job gone, `.<unit>.lock` stale. After storage
+     recovers, both `run` and `cancel` exit 1 `resume unit is busy` forever —
+     reproduced end to end.
+   - **Where:** `scripts/spec-resume.sh:237` (`write_metadata "$dir"` between
+     the successful `remove` at `:232` and `release_lock` at `:238`); the same
+     window exists in `park` at `:186-188` (metadata/argv/cwd writes while
+     locked).
+   - **Wrong behavior:** A recoverable storage hiccup makes the parked run
+     permanently unmanageable — worse than the o2/o3 cases because the
+     one-shot job is already deleted, so nothing will ever fire, and doctor's
+     orphan warning is the only trace. Violates REQ-005/AC-005's recoverable
+     lifecycle; the Round 3 escalation named exactly this class ("wherever it
+     holds the per-unit lock").
+   - **Smallest fix:** Stop hand-guarding one call site at a time: scope the
+     lock with `trap 'release_lock "$unit_id"' EXIT` (cleared after normal
+     release), or explicitly check every write under the lock the way the
+     scheduler calls now are. Add a fixture with an unwritable unit dir
+     asserting no stale lock.
+   - **Root cause:** implementation-error. The plan's lock lifecycle requires
+     atomic, recoverable unit operations; o1–o3 patched individual sites while
+     `set -e` still escapes the acquire/release window at the remaining ones.
+   - **Blocks:** REQ-005 / AC-005.
+
+3. **Claude weekly and Opus-bucket limits with minute-less clocks still classify as `none`** — *severity:* wrong-result
+   - **Scenario:** `Weekly limit reached. Your limit will reset at 8pm
+     (America/New_York).` and `You've hit your Opus limit. Your limit will
+     reset at 8pm.` → `usage-limit.sh classify claude <capture> --now
+     1704067200` returns `none`, exit 1 (reproduced). With `8:00pm` the same
+     messages classify `long`. The Round 1 concession (minute-less clocks are
+     real Claude reset wording, issue 5977) was applied to the session row and
+     the central extractor only.
+   - **Where:** `scripts/usage-limit-patterns.tsv:4-5` — both weekly rows
+     still require `[0-9]{1,2}:[0-9]{2}`, unlike the repaired session row
+     (`:3`) and codex row (`:6`).
+   - **Wrong behavior:** A real weekly/per-model limit message falls through
+     as generic exit 6 — no park, no delegate — defeating the `long: delegate`
+     policy for exactly the multi-day windows where delegation matters most.
+   - **Smallest fix:** Make minutes optional (`(:[0-9]{2})?`) in rows 4-5 and
+     add weekly/Opus minute-less fixtures asserting `long` through the
+     dispatch policy path.
+   - **Root cause:** implementation-error. The T013o1 repair broadened the
+     shared clock grammar but narrowed the table edit to one provider row;
+     the plan (and Round 1 finding) covered all clock rows.
+   - **Blocks:** REQ-002 / AC-001, REQ-006.
+
+Minor (non-blocking): (a) a pipe-epoch reset already in the past parks a
+launchd entry whose calendar date never fires — floor `run_at` at now plus one
+minute (`scripts/spec-resume.sh:162`); (b) launchd one-shot entries survive
+sleep but not a powered-off night, unlike the cron backend's every-minute
+epoch check — worth a line in knowledge/usage-limit-handling.md; (c) `flatten`
+recognizes `on_limit:` only with nothing after the colon
+(`scripts/model-policy.sh:120`), so a hand-added inline comment silently
+disables the whole policy while `dispatch:` tolerates one; (d) STATUS
+`active_tool` keeps the original CLI after a successful delegation.
+
+## Held up
+
+- Round 3 repair (cancel/remove failure): failing remove → exit 1, no stale
+  lock, unit pending, job preserved; recovered cancel removes unit + job and
+  records the STATUS event (independent stub repro, not just the suite test).
+- Round 1/2 repairs re-ran green (session/codex minute-less fixtures through
+  the park policy path; run-path remove failure releases the lock).
+- Adversarial argv replay (spaces, quotes, globs, empty, newline) is
+  byte-exact via NUL records; cancel-during-replay is handled
+  (`scripts/spec-resume.sh:253-256`); delegate skips the limited CLI, caps at
+  three attempts, and parks on exhaustion (suite).
+
+## Escalation
+
+Round 4 surfaces new substantive defects, so per the bounded loop the user
+arbitrates. The SPEC is not the problem: all three findings are delivery
+gaps against requirements the spec states clearly. Findings 1 and 2 indicate
+the implementation approach around the scheduler seam and lock lifecycle needs
+one structural pass (environment capture at park time; trap-scoped lock
+release) rather than another per-call-site patch; finding 3 is a two-line data
+edit completing an already-conceded repair. The user decides: rework via
+T013o4–T013o6, or accept the residual risk with a signed waiver in STATUS.md
+Decisions (noting that finding 1 means auto-resume will not work in production
+as shipped).
+
+## Follow-up tasks proposed
+
+- T013o4 — Capture PATH (parking environment) into scheduler entries so fired
+  resumes can find the provider CLIs; assert it at the seam (→ Finding 1).
+- T013o5 — Make the per-unit lock release structural (trap-scoped or checked
+  writes) so no failure between acquire and release strands a unit; cover the
+  unwritable-unit-dir case (→ Finding 2).
+- T013o6 — Allow minute-less clocks in the weekly and model-weekly pattern
+  rows with fixtures through the dispatch policy path (→ Finding 3).
