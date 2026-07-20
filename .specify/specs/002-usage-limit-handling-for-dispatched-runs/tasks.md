@@ -166,12 +166,13 @@ updated: 2026-07-20
   - *Refs:* REQ-002, AC-001, notes/opponent.md Round 4 Finding 3
   - *Evidence:* `tests/run.sh limits → -- 25/25 passed (see notes/evidence.md)` (2026-07-20)
 
-- [ ] **T014** — Reality-check the implemented spec end-to-end
+- [x] **T014** — Reality-check the implemented spec end-to-end
   - *Agent:* `~/.sdd/agents/reality-check.agent.md`
   - *Inputs:* every prior `[x]` task, `spec.md`, `plan.md`, `notes/opponent.md`
   - *Acceptance:* agent returns **READY** (not NEEDS WORK / FAILED); claim-vs-evidence gaps documented in `notes/reality-check.md`; all AC-### mapped to concrete evidence
   - *Refs:* AC-001, AC-002, AC-003, AC-004, AC-005, AC-006, AC-007, AC-008, AC-009, AC-010, AC-011
   - *On NEEDS WORK:* open follow-up tasks here (T014a1, T014a2, …); do not proceed to Ship until they are `[x]` and the gate is re-run
+  - *Evidence:* `Reality-check READY (2026-07-20) — all 11 ACs re-run by the gate agent (25/25 limits, 8/8 model-policy, full suite, shellcheck, fixture re-classification, AC-010 grep parity); report notes/reality-check.md; spec-evidence/sdd-analyze/spec-ac-coverage all green` (2026-07-20)
 
 ## Ship
 

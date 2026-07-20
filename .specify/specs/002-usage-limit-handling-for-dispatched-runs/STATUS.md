@@ -6,7 +6,7 @@ branch: spec/002-usage-limit-handling-for-dispatched-runs            # spec/002-
 worktree: /Users/babar/projects/sdd-kit-public.worktrees/002-usage-limit-handling-for-dispatched-runs          # absolute path once created, else none
 pr: none                # PR URL once opened — spec-pr.sh writes this itself
 opponent: CLEARED (2026-07-20, Round 5)       # not-run | CHALLENGED | CLEARED | BLOCKED  (+ date)
-reality_check: not-run  # not-run | NEEDS WORK | FAILED | READY  (+ date)
+reality_check: READY (2026-07-20)  # not-run | NEEDS WORK | FAILED | READY  (+ date)
 ci: not-run             # not-run | pending | green | red  (+ date) — spec-ci.sh writes this
 retro: not-run          # not-run | done (+ date) — /sdd:retro after ship
 updated: 2026-07-20
@@ -30,10 +30,10 @@ updated: 2026-07-20
 
 ## Where things stand
 
-Implementation tasks T001–T012 plus T013o1/T013o2 are evidenced; analyzer and
-evidence integrity are green. Opponent Round 3 remains CHALLENGED on cancel
-scheduler-removal lock handling; T013o3 is queued for human-arbitrated resume.
-Commits cannot be made here because the worktree gitdir rejects index locks.
+All implementation and gate-follow-up tasks (T001–T012, T013o1–o6) are
+evidenced and committed. Opponent CLEARED (Round 5, after 6 fixed findings);
+reality-check READY (all 11 ACs re-run). Ship: open the PR (T015). Rollout
+(T016) and retro (T017) wait for the merge.
 
 ## Decisions log
 
@@ -74,8 +74,7 @@ Append-only, newest last. Each entry: `date — decision — rationale / who dec
 
 ## Open questions / blockers
 
-- Opponent Round 3 requires human arbitration before T013o3 can be executed;
-  this dispatched run has no waiver authority.
+(none)
 
 ## Handoff note
 
@@ -86,4 +85,4 @@ override — tests never touch real launchd/cron.
 
 ## Next action
 
-Arbitrate Opponent Round 3; then execute T013o3 and re-run the opponent gate.
+`/sdd:review` — CI triage, review feedback, merge, worktree teardown.
