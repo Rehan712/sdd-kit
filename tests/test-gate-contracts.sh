@@ -68,4 +68,20 @@ test_instruction_contracts() {
   assert_not_contains "$tasks_skill" '| ID | Components | Category | Trigger |'
 }
 
+# AC-002: each shipped default gives concrete stack scenarios, exclusions and
+# distinct optional checkpoint / mandatory full-suite guidance.
+defaults_contract() {
+  local name text
+  for name in "$@"; do
+    text="$(cat "$KIT_DIR/templates/stack-overlays/$name.md")"
+    assert_contains "$text" '## Failure-mode and checkpoint defaults'
+    assert_contains "$text" 'explicit exclusions'
+    assert_contains "$text" 'Required `gate_checks` separately cover the full suite'
+    assert_contains "$text" 'Optional `checkpoints` use exact authored task-stage names'
+    assert_eq 3 "$(printf '%s\n' "$text" | sed -n '/## Failure-mode and checkpoint defaults/,$p' | awk '/^- / {n++} END {print n+0}')" "$name scenario prompts"
+  done
+}
+
+test_defaults_t006() { defaults_contract rust rust-aws-lambda nextjs aws-cdk-lambda-ts; }
+
 t_run_all

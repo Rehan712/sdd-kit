@@ -51,3 +51,21 @@ Next.js caches aggressively. Be explicit:
 - `useEffect(() => { fetch(...) }, [])` instead of an RSC `await fetch(...)`.
 - Inline event handlers passed from server to client (won't serialize).
 - Hard-coded English strings — wrap with the project's i18n function.
+
+## Failure-mode and checkpoint defaults
+
+Use the [verification contract](../verification-contract.md). Fill applicable
+scenario prompts as concrete FM/INV rows with test families in the plan; record
+explicit exclusions with a component/category and reason. Shared scenarios use
+one row listing all affected components.
+
+- Boundary: server-only credentials never cross the server/client serialization boundary; exercise the client import path.
+- State/data integrity: mutate cached data as one user, then read as another; test cache keys and invalidation without cross-user disclosure.
+- Partial failure: invoke a server action directly with missing or stale authorization; reject before mutation and render the declared error state.
+
+Optional `checkpoints` use exact authored task-stage names: run the focused
+component tests when its stage finishes and integration after consumers land.
+Start from `npm test -- --run`, adapting to existing project scripts and test scope.
+Required `gate_checks` separately cover the full suite (`npm test -- --run`)
+and mandatory static checks (`npm run lint; npm run typecheck; npm run build`); checkpoints never replace that list.
+Commands here are planning defaults, not an assertion that a project has them.
