@@ -225,7 +225,7 @@ keeps each edit task to at most five files instead of combining unrelated work.
   - *Refs:* REQ-014, AC-014, FM-002, FM-004, FM-005, plan §2, §6
   - *Evidence:* `bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-build-adapters.sh → -- 8/8 passed (notes/evidence.md, T013, sha256:609e2f9c87a6); FM-002,FM-004,FM-005, → task Tests locators; bootstrap no-tick capture` (2026-09-06)
 
-- [ ] **T014** [hard] — Record class-wide reports and honest tallies
+- [x] **T014** [hard] — Record class-wide reports and honest tallies
   - *Files:* `agents/opponent.agent.md`, `agents/reality-check.agent.md`, `scripts/verification-lib.sh` (new in T002), `scripts/spec-gate.sh` (new), `tests/test-gate-contracts.sh` (new in T001)
   - *Acceptance:* Add AC-010/AC-012/AC-017 schema/tally cases for stable classes/prior findings, all locations, retained review scope and severity, canonical identities and unclassified legacy 002's five rounds/six blockers; leave carry-forward disabled.
   - *Verify kind:* test
@@ -233,6 +233,7 @@ keeps each edit task to at most five files instead of combining unrelated work.
   - *Verify:* `bash tests/test-gate-contracts.sh` → all suites `passed`, exit 0
   - *Reuse:* local
   - *Refs:* REQ-010, REQ-011, REQ-012, REQ-013, REQ-015, AC-010, AC-012, AC-017, FM-019, FM-020, INV-005, INV-006, plan §3.3, §4.3
+  - *Evidence:* `bash tests/test-gate-contracts.sh → -- 13/13 passed (notes/evidence.md, T014, sha256:7dcb3a982827); FM-019,FM-020,INV-005,INV-006, → task Tests locators; bootstrap no-tick capture` (2026-09-06)
 
 - [ ] **T015** [hard] — Establish owner-only verification transaction primitives
   - *Files:* `scripts/verification-lib.sh` (new in T002), `tests/test-verification.sh` (new in T003)

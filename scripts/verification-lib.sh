@@ -710,3 +710,158 @@ vf_bindings() { # <spec-dir> <plan|tasks|through-stage> <stage-or-empty> <output
   rm -f "$records" "$maps" "$inventory"; rmdir "$tmpdir" 2>/dev/null || true
   [[ "$warnings" -ge 0 ]]
 }
+
+# SHA-256 is mandatory for new proof. Read stdin to avoid filename escaping.
+vf_hash() {
+  if command -v shasum >/dev/null 2>&1; then shasum -a 256 < "$1" | awk '{print $1}'
+  elif command -v sha256sum >/dev/null 2>&1; then sha256sum < "$1" | awk '{print $1}'
+  else echo 'verification prerequisite: SHA-256 unavailable' >&2; return 3; fi
+}
+
+vf_utc_valid() {
+  LC_ALL=C awk -v t="$1" 'BEGIN {
+    if (t !~ /^[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]T[0-9][0-9]:[0-9][0-9]:[0-9][0-9]Z$/) exit 1
+    y=substr(t,1,4)+0; m=substr(t,6,2)+0; d=substr(t,9,2)+0
+    split("31 28 31 30 31 30 31 31 30 31 30 31", days," ")
+    if (y%4==0 && (y%100!=0 || y%400==0)) days[2]=29
+    if(y<1 || m<1 || m>12 || d<1 || d>days[m] || substr(t,12,2)+0>23 || substr(t,15,2)+0>59 || substr(t,18,2)+0>59) exit 1
+  }'
+}
+
+# Report catalog: twelve NUL fields, round records followed by findings.
+# round,n,utc,source,floor,verdict,style,date,"","","",""
+# finding,n,id,class,status,prior,severity,locations,root,trigger,reproduced,blocks
+# Historical records remain readable and explicitly unclassified.
+vf_reports() (
+  local file="$1" gate="$2" output="$3" tmp
+  tmp="$(mktemp "${output}.XXXXXX")" || return 3
+  trap 'rm -f "$tmp"' EXIT
+  [[ -e "$file" ]] || { : > "$output"; return 0; }
+  _vf_reject_nul "$file" "$file" || return 3
+  VF_REPORT_FILE="$file" awk -v gate="$gate" '
+    function err(s) {print "report recovery: " ENVIRON["VF_REPORT_FILE"] ":" NR ": " s "; reconcile canonical records" > "/dev/stderr"; bad=1}
+    function clean(s) {gsub(/^[[:space:]]+|[[:space:]]+$/, "", s); return s}
+    function value(s) {sub(/^.*\*\*[^*]+:\*\*[ ]*/, "", s); return clean(s)}
+    function emit(a,b,c,d,e,f,g,h,i,j,k,l) {printf "%s%c%s%c%s%c%s%c%s%c%s%c%s%c%s%c%s%c%s%c%s%c%s%c",a,0,b,0,c,0,d,0,e,0,f,0,g,0,h,0,i,0,j,0,k,0,l,0}
+    function finding() {
+      if (!fid) return
+      if (style=="canonical") {
+        if (fid !~ /^[A-Z][A-Z0-9]*-[0-9]+$/ || cls !~ /^[a-z][a-z0-9]*(-[a-z0-9]+)*$/ || status !~ /^(new|open|resolved|reopened)$/ || prior=="" || root !~ /^(plan-gap|spec-gap|implementation-error)$/ || trigger=="" || repro=="" || loc !~ /[^ ]+:[0-9]+/) err("incomplete finding " fid)
+        if (sev !~ /^(data-loss|wrong-result|regression|crash|minor|degraded)$/) err("unknown severity")
+        if (seenfinding[n SUBSEP fid]++) err("duplicate finding ID")
+        if (status!="resolved") {if (sev ~ /^(minor|degraded)$/) minors++; else blockers++}
+      }
+      emit("finding",n,fid,cls,status,prior,sev,loc,root,trigger,repro,blocks)
+      fid=cls=status=prior=sev=loc=root=trigger=repro=blocks=""
+    }
+    function flush() {
+      finding()
+      if (!active) return
+      if(style=="legacy" && gate=="reality-check" && declared=="" && n==1) declared=1
+      if(n !~ /^[1-9][0-9]*$/ || n!=last+1 || declared!=n || !verdict || !date) err("missing, duplicate or nonsequential round identity")
+      if(gate=="opponent" && verdict !~ /^(CLEARED|CHALLENGED|BLOCKED)$/) err("invalid opponent verdict")
+      if(gate=="reality-check" && verdict !~ /^(READY|NEEDS WORK|FAILED)$/) err("invalid reality-check verdict")
+      if(style=="canonical") {
+        if (!ended || !utc || source !~ /^[a-f0-9]+$/ || length(source)!=64 || floor !~ /^FLOOR-[A-Za-z0-9.-]+$/) err("incomplete canonical identity")
+        if(gate=="opponent" && (!counted || blockers!=wantb || minors!=wantm)) err("finding totals disagree")
+        if(gate=="opponent" && ((verdict=="CLEARED" && blockers) || (verdict=="CHALLENGED" && !blockers))) err("verdict disagrees with blocking findings")
+      }
+      emit("round",n,utc,source,floor,verdict,style,date,"","","","")
+      last=n; active=0
+    }
+    BEGIN {tick=sprintf("%c",96); fence=tick tick tick}
+    {line=$0; sub(/^[ ]*/,"",line)}
+    index(line,fence)==1 || index(line,"~~~")==1 {fenced=!fenced; next}
+    fenced || /^[ ]*>/ {next}
+    /^## Round [1-9][0-9]*$/ {
+      flush(); n=$3; active=1; style="canonical"; declared=date=verdict=utc=source=floor=""; ended=counted=blockers=minors=0; next
+    }
+    /^# (Opponent review|Reality Check)/ {
+      if (!active) {n=last+1; active=1; style="legacy"; declared=date=verdict=utc=source=floor=""; ended=counted=blockers=minors=0}
+      else if (!declared && !utc) style="legacy"
+      next
+    }
+    /^## Round/ {err("malformed round heading"); next}
+    /^\*\*(Round|Timestamp|Source|Floor|Date|Verdict):\*\*/ {
+      if (!active || ended) {err("identity outside active round"); next}
+      key=$0; sub(/:\*\*.*/,"",key)
+      if(seenfield[n SUBSEP key]++) err("duplicate identity field")
+      v=value($0)
+      if(key=="**Round") declared=v
+      if(key=="**Timestamp") {utc=v; date=substr(v,1,10); style="canonical"}
+      if(key=="**Source") source=v
+      if(key=="**Floor") floor=v
+      if(key=="**Date") date=v
+      if(key=="**Verdict") verdict=v
+      next
+    }
+    /^<!-- gate-round-end:/ {
+      finding(); if($0!="<!-- gate-round-end: " gate ":" n " -->" || ended) err("completion marker mismatch"); ended=1; next
+    }
+    /^\*\*Blocking:\*\*/ {
+      wantb=$2; wantm=$5; counted=1
+      if(wantb !~ /^[0-9]+$/ || wantm !~ /^[0-9]+$/) err("malformed totals")
+      next
+    }
+    /^### Finding / {finding(); if(!active || ended) err("finding outside round"); fid=$3; next}
+    style=="legacy" && /^[0-9]+\. .*severity:/ {
+      finding(); fid="legacy-" n "-" ++legacyid; cls="unclassified"; status="new"; prior="none"
+      sev=$0; sub(/^.*severity:\*[ ]*/,"",sev); sev=clean(sev); next
+    }
+    fid && /^[ ]*- \*\*(Class|Status|Prior|Severity|Where|Root cause|Scenario|Reproduced|Blocks):\*\*/ {
+      v=value($0)
+      if($0 ~ /\*\*Class:/) cls=v
+      if($0 ~ /\*\*Status:/) status=v
+      if($0 ~ /\*\*Prior:/) prior=v
+      if($0 ~ /\*\*Severity:/) sev=v
+      if($0 ~ /\*\*Where:/) loc=v
+      if($0 ~ /\*\*Root cause:/) root=v
+      if($0 ~ /\*\*Scenario:/) trigger=v
+      if($0 ~ /\*\*Reproduced:/) repro=v
+      if($0 ~ /\*\*Blocks:/) blocks=v
+    }
+    END {flush(); if(fenced) err("unclosed code fence"); if(bad) exit 3}
+  ' "$file" > "$tmp" || return 3
+  local fields=() v
+  while IFS= read -r -d '' v; do
+    fields+=("$v")
+    if (( ${#fields[@]} == 12 )); then
+      if [[ "${fields[0]}" == round && "${fields[6]}" == canonical ]]; then
+        vf_utc_valid "${fields[2]}" || { echo 'report recovery: invalid UTC calendar timestamp' >&2; return 3; }
+      fi
+      fields=()
+    fi
+  done < "$tmp"
+  mv "$tmp" "$output"
+)
+
+vf_tally() (
+  local spec="$1" tmp gate v f=() rounds blockers=0 minors=0 unclassified=0 locations=0
+  tmp="$(mktemp -d "${TMPDIR:-/tmp}/vf-tally.XXXXXX")" || return 3
+  trap 'rm -rf "$tmp"' EXIT
+  : > "$tmp/classes"
+  for gate in opponent reality-check; do
+    vf_reports "$spec/notes/$gate.md" "$gate" "$tmp/report" || return 3
+    rounds=0
+    while IFS= read -r -d '' v; do
+      f+=("$v"); (( ${#f[@]} == 12 )) || continue
+      case "${f[0]}" in
+        round) rounds=$((rounds+1));;
+        finding)
+          if [[ "${f[4]}" != resolved ]]; then
+            case "${f[6]}" in minor|degraded) minors=$((minors+1));; *) blockers=$((blockers+1));; esac
+          fi
+          [[ "${f[3]}" != unclassified ]] || unclassified=$((unclassified+1))
+          locations=$((locations+$(printf '%s\n' "${f[7]}" | awk '{n=0; while(match($0,/[^ `,]+:[0-9]+/)){n++; $0=substr($0,RSTART+RLENGTH)}; print n}')))
+          printf '%s\t%s\t%s\t%s\n' "${f[3]}" "${f[2]}" "${f[4]}" "${f[5]}" >> "$tmp/classes";;
+      esac
+      f=()
+    done < "$tmp/report"
+    printf '%s rounds=%s\n' "$gate" "$rounds"
+  done
+  printf 'blocking=%s minor=%s locations=%s unclassified=%s\n' "$blockers" "$minors" "$locations" "$unclassified"
+  LC_ALL=C awk -F '\t' '
+    $1!="unclassified" {total[$1]++; if($3=="new" || $3=="reopened") {if(seen[$1]++) recur[$1]++}}
+    END {for(c in total) printf "class=%s findings=%d recurrences=%d\n",c,total[c],recur[c]+0}
+  ' "$tmp/classes" | LC_ALL=C sort
+)

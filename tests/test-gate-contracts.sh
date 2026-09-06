@@ -133,4 +133,78 @@ test_briefs_t013() {
 
 test_all_brief_modes() { brief_contract "$KIT_DIR"/agents/*-expert.md "$KIT_DIR/agents/test-engineer.md"; }
 
+report_fixture() {
+  local n="$1" status="$2" verdict="$3" blocks="$4"
+  cat <<EOF
+## Round $n
+**Round:** $n
+**Timestamp:** 2026-09-06T12:00:0${n}Z
+**Source:** aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+**Floor:** FLOOR-fixture
+**Verdict:** $verdict
+**Blocking:** $blocks · **Minor:** 0
+### Finding O-001
+- **Class:** lock-lifecycle
+- **Status:** $status
+- **Prior:** none
+- **Severity:** wrong-result
+- **Scenario:** failed acquisition followed by cleanup
+- **Where:** scripts/run.sh:4, scripts/cancel.sh:8
+- **Reproduced:** concrete trigger at listed sites
+- **Root cause:** implementation-error
+- **Blocks:** AC-022
+<!-- gate-round-end: opponent:$n -->
+EOF
+}
+
+test_reports_and_tally() {
+  # AC-010/AC-012/AC-017: legacy counts stay unclassified; a new/open/resolved/
+  # reopened sequence counts only the reopened class as a recurrence.
+  local spec="$SANDBOX/spec" round
+  mkdir -p "$spec/notes"
+  run_rc 0 bash "$SCRIPTS/spec-gate.sh" tally "$KIT_DIR/.specify/specs/002-usage-limit-handling-for-dispatched-runs"
+  assert_contains "$OUT" 'opponent rounds=5'
+  assert_contains "$OUT" 'reality-check rounds=1'
+  assert_contains "$OUT" 'blocking=6 minor=0'
+  assert_contains "$OUT" 'unclassified=6'
+  report_fixture 1 new CHALLENGED 1 > "$spec/notes/opponent.md"
+  report_fixture 2 open CHALLENGED 1 >> "$spec/notes/opponent.md"
+  report_fixture 3 resolved CLEARED 0 >> "$spec/notes/opponent.md"
+  report_fixture 4 reopened CHALLENGED 1 >> "$spec/notes/opponent.md"
+  run_rc 0 bash "$SCRIPTS/spec-gate.sh" tally "$spec"
+  assert_contains "$OUT" 'opponent rounds=4'
+  assert_contains "$OUT" 'locations=8'
+  assert_contains "$OUT" 'class=lock-lifecycle findings=4 recurrences=1'
+  cp "$spec/notes/opponent.md" "$SANDBOX/valid"
+  printf '\140\140\140markdown\n## Round 99\n**Round:** 99\n\140\140\140\n> **Round:** 88\n' >> "$spec/notes/opponent.md"
+  run_rc 0 bash "$SCRIPTS/spec-gate.sh" tally "$spec"
+  assert_contains "$OUT" 'opponent rounds=4'
+  for round in '2026-02-30T12:00:01Z' '2026-09-06T25:00:01Z'; do
+    sed "s/2026-09-06T12:00:01Z/$round/" "$SANDBOX/valid" > "$spec/notes/opponent.md"
+    run_rc 3 bash "$SCRIPTS/spec-gate.sh" tally "$spec"
+    assert_contains "$OUT" 'invalid UTC'
+  done
+  sed '/gate-round-end: opponent:4/d' "$SANDBOX/valid" > "$spec/notes/opponent.md"
+  run_rc 3 bash "$SCRIPTS/spec-gate.sh" tally "$spec"
+  assert_contains "$OUT" 'incomplete canonical identity'
+  report_fixture 1 new CLEARED 1 > "$spec/notes/opponent.md"
+  run_rc 3 bash "$SCRIPTS/spec-gate.sh" tally "$spec"
+  assert_contains "$OUT" 'verdict disagrees'
+}
+
+test_review_scope_contracts() {
+  local opponent reality
+  opponent="$(cat "$KIT_DIR/agents/opponent.agent.md")"
+  reality="$(cat "$KIT_DIR/agents/reality-check.agent.md")"
+  assert_contains "$opponent" 'attack covered and omitted cases'
+  assert_contains "$opponent" 'defect on unchanged code'
+  assert_contains "$opponent" 'every established blocker'
+  assert_contains "$opponent" '**Reproduced:**'
+  assert_contains "$opponent" '**Class:**'
+  assert_contains "$opponent" '**Blocking:**'
+  assert_contains "$opponent" 'severity to meet a cost/round target'
+  assert_contains "$reality" 'Every round includes every AC'
+  assert_contains "$reality" 'Same filenames never suffice'
+}
+
 t_run_all

@@ -368,3 +368,27 @@ Captured acceptance runs, appended by `spec-run.sh`. One block per run.
   ok   test_subagent_tomls_carry_identity_policy_and_persona
   -- 8/8 passed
 ```
+
+## T014 — 2026-09-06T20:20:14
+
+- **Command:** `bash tests/test-gate-contracts.sh`
+- **Cwd:** /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline
+- **Exit:** 0
+- **Captured:** 2026-09-06T20:20:14 · sha256:7dcb3a982827 (over full output)
+
+```text
+  ok   test_all_brief_modes
+  ok   test_all_overlay_defaults
+  ok   test_briefs_t010
+  ok   test_briefs_t011
+  ok   test_briefs_t012
+  ok   test_briefs_t013
+  ok   test_defaults_t006
+  ok   test_defaults_t007
+  ok   test_defaults_t008
+  ok   test_defaults_t009
+  ok   test_instruction_contracts
+  ok   test_reports_and_tally
+  ok   test_review_scope_contracts
+  -- 13/13 passed
+```

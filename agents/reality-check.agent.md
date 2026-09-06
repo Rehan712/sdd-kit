@@ -72,24 +72,18 @@ If a stack isn't listed, fall back to: "is there a test that asserts the AC, and
 
 Do not trust the `[x]` checkboxes in `tasks.md`. They're claims. You verify.
 
-**First, the deterministic floor** — run both, and fold what they flag into the
-matrix as gaps before you re-run anything:
-
-- `bash ~/.sdd/scripts/spec-ac-coverage.sh <spec-dir>` (add `--root <repo>` if it
-  can't resolve the checkout) — every AC named by no test is a binding gap; a
-  green suite that never names the AC isn't tied to it.
-- `bash ~/.sdd/scripts/spec-evidence.sh <spec-dir>` — every ticked box's evidence
-  must trace to a real `notes/evidence.md` capture block or an existing artifact.
-  A fabricated pointer or a missing screenshot is a gap; so is a manual/post-deploy
-  AC with no owner + check-back date in STATUS.
-
-A claim with no captured run is attack surface — re-run it yourself.
+**First, the deterministic floor:** consume the current result of
+`spec-gate.sh floor <spec-dir>` and its validated command captures. It runs the
+analyzer, AC coverage and evidence integrity checks plus declared gate_checks.
+Do not duplicate unchanged validated suite execution. Missing, stale, damaged
+or unknown-validity proof must be refreshed before reliance. New investigations
+may execute additional checks; shared execution never substitutes for judgment.
 
 For each AC row:
 
 1. **Start from the task's `*Evidence:*` line.** A `[x]` task with no *Evidence:* line is an automatic gap — record it, no further analysis needed. Where an evidence line exists, it names the command that supposedly proved the task: that's your re-run target, not your proof.
 2. **Locate the code change** — read the files the corresponding task said it touched. Confirm the change is actually there.
-3. **Re-run the acceptance check yourself** if it's runnable (test command, curl, `cdk synth`, build). Capture the output. Evidence that doesn't reproduce is a FAIL, whatever the line says.
+3. **Validate current evidence** using the floor captures. Re-run a missing, invalid or uncertain check and capture its actual exit; a filename or an old green log is not freshness.
 4. **Compare** the AC's stated outcome to what the run actually showed.
 5. **Note the gap** if any, with specifics: file path, line number, command output, missing artifact.
 
@@ -108,9 +102,11 @@ Skim the project constitution and hub constitution for principles that *override
 Output a markdown report with this exact shape (the implementer writes it to `<spec-dir>/notes/reality-check.md`):
 
 ```markdown
-# Reality Check — <spec slug>
-
-**Date:** <YYYY-MM-DD>
+## Round <script-granted integer>
+**Round:** <same integer>
+**Timestamp:** <YYYY-MM-DDTHH:MM:SSZ>
+**Source:** <reviewed whole-source input digest>
+**Floor:** <current FLOOR-id>
 **Verdict:** READY | NEEDS WORK | FAILED
 **Agent:** reality-check (hub default) | <project agent path if overridden>
 
@@ -120,10 +116,10 @@ Output a markdown report with this exact shape (the implementer writes it to `<s
 
 ## AC matrix
 
-| AC | Criterion | Evidence | Verdict |
-|----|-----------|----------|---------|
-| AC-001 | <quote> | <command output / file:line / screenshot path> | PASS / FAIL / MISSING |
-| ... | | | |
+| AC | Criterion / revision | Evidence | Affected inputs | Verdict |
+|----|----------------------|----------|-----------------|---------|
+| AC-001 | <full criterion and digest> | <capture/artifact references> | <whole-source digest; implementation/test paths> | PASS / FAIL / MISSING |
+| ... | | | | |
 
 ## Constitution check
 
@@ -139,7 +135,27 @@ Output a markdown report with this exact shape (the implementer writes it to `<s
 Re-invoke this agent when:
 - All gaps above are addressed.
 - The corresponding follow-up tasks (T###a1, T###a2, …) are `[x]` in tasks.md.
+<!-- gate-round-end: reality-check:<same integer> -->
 ```
+
+## Invocation and incremental review
+
+The invoker supplies a current floor, script-granted round and reviewed input
+identity before each independent invocation, then uses `round --complete` to
+persist the returned canonical report. Rounds 1–3 are allowed; exit 4 denies
+round 4+ without exact-gate/exact-next-round user authorization with a later UTC
+timestamp in STATUS Decisions. Reconcile interrupted reservations first.
+
+Every round includes every AC, full criterion/revision, evidence references and
+affected-input mapping. From round 2 require the prior reviewed source manifest
+and diff including relevant staged, dirty and untracked changes. In v1 the
+whole-source impact set is conservative: any shared input change may invalidate
+all rows. FAIL/MISSING, changed criteria, dependencies, unknown impact and an
+uncertain earlier review require renewed evaluation. Carry-forward remains
+disabled until the runtime validation and its negative fixtures are installed;
+then `carried (round n)` requires unchanged criterion, transitive inputs and
+currently valid evidence. Same filenames never suffice. A floor execution is
+not a semantic PASS, and independent source access remains unrestricted.
 
 ## Hard rules
 
