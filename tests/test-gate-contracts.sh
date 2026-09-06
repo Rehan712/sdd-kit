@@ -123,4 +123,8 @@ test_briefs_t011() {
   brief_contract "$KIT_DIR/agents/javascript-expert.md" "$KIT_DIR/agents/react-expert.md" "$KIT_DIR/agents/bun-monorepo-expert.md" "$KIT_DIR/agents/loopback4-expert.md"
 }
 
+test_briefs_t012() {
+  brief_contract "$KIT_DIR/agents/aws-expert.md" "$KIT_DIR/agents/python-expert.md" "$KIT_DIR/agents/expo-rn-expert.md" "$KIT_DIR/agents/firebase-rtk-codegen-expert.md"
+}
+
 t_run_all

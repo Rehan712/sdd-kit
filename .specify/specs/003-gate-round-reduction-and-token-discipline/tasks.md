@@ -204,7 +204,7 @@ keeps each edit task to at most five files instead of combining unrelated work.
   - *Integration owner:* T027
   - *Evidence:* `bash tests/test-gate-contracts.sh → -- 8/8 passed (notes/evidence.md, T011, sha256:8d8e94845058); FM-004,FM-005, → task Tests locators; bootstrap no-tick capture` (2026-09-06)
 
-- [ ] **T012** — Separate platform expert briefing modes
+- [x] **T012** — Separate platform expert briefing modes
   - *Files:* `agents/aws-expert.md`, `agents/python-expert.md`, `agents/expo-rn-expert.md`, `agents/firebase-rtk-codegen-expert.md`, `tests/test-gate-contracts.sh` (new in T001)
   - *Acceptance:* Extend AC-014 mode/revision/omission cases to the remaining experts without changing their stack guidance, models or higher-priority obligations.
   - *Verify kind:* test
@@ -213,6 +213,7 @@ keeps each edit task to at most five files instead of combining unrelated work.
   - *Reuse:* local
   - *Refs:* REQ-014, AC-014, FM-004, FM-005, plan §2, §6
   - *Integration owner:* T027
+  - *Evidence:* `bash tests/test-gate-contracts.sh → -- 9/9 passed (notes/evidence.md, T012, sha256:49e830668618); FM-004,FM-005, → task Tests locators; bootstrap no-tick capture` (2026-09-06)
 
 - [ ] **T013** — Verify test-engineer modes through generated adapters
   - *Files:* `agents/test-engineer.md`, `tests/test-gate-contracts.sh` (new in T001), `tests/test-build-adapters.sh`
