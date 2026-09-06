@@ -150,7 +150,7 @@ keeps each edit task to at most five files instead of combining unrelated work.
   - *Integration owner:* T027
   - *Evidence:* `bash tests/test-gate-contracts.sh → -- 2/2 passed (notes/evidence.md, T006, sha256:c933ee933ed1); FM-001, → task Tests locators; bootstrap no-tick capture` (2026-09-06)
 
-- [ ] **T007** — Add JavaScript and application-stack defaults
+- [x] **T007** — Add JavaScript and application-stack defaults
   - *Files:* `templates/stack-overlays/javascript.md`, `templates/stack-overlays/react.md`, `templates/stack-overlays/bun-monorepo.md`, `templates/stack-overlays/loopback4.md`, `tests/test-gate-contracts.sh` (new in T001)
   - *Acceptance:* Extend AC-002 cases for these four overlays, including JavaScript/React's three-scenario minimum, async/state/error boundaries and their appropriate stage commands.
   - *Verify kind:* test
@@ -159,6 +159,7 @@ keeps each edit task to at most five files instead of combining unrelated work.
   - *Reuse:* local
   - *Refs:* REQ-003, REQ-008, AC-002, FM-001, plan §6
   - *Integration owner:* T027
+  - *Evidence:* `bash tests/test-gate-contracts.sh → -- 3/3 passed (notes/evidence.md, T007, sha256:2d2aa9369d48); FM-001, → task Tests locators; bootstrap no-tick capture` (2026-09-06)
 
 - [ ] **T008** — Add mobile and platform-stack defaults
   - *Files:* `templates/stack-overlays/expo-rn.md`, `templates/stack-overlays/firebase-rtk-codegen.md`, `templates/stack-overlays/python.md`, `templates/stack-overlays/aws.md`, `tests/test-gate-contracts.sh` (new in T001)

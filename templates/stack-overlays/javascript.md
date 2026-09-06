@@ -43,3 +43,21 @@ src/
 - Hand-written interfaces duplicating a zod schema, guaranteed to desynchronize.
 - `JSON.parse` results typed by assertion instead of validated by schema.
 - Barrel files (`index.ts` re-exporting everything) creating import cycles and killing tree-shaking.
+
+## Failure-mode and checkpoint defaults
+
+Use the [verification contract](../verification-contract.md). Fill applicable
+scenario prompts as concrete FM/INV rows with test families in the plan; record
+explicit exclusions with a component/category and reason. Shared scenarios use
+one row listing all affected components.
+
+- Boundary: malformed external input and absent optional fields are rejected or normalized by the declared schema.
+- Partial failure: a rejected async operation is awaited and mapped once; assert no unhandled rejection or success response.
+- State/data integrity: overlapping updates and aborted requests preserve the decided state and do not publish partial results.
+
+Optional `checkpoints` use exact authored task-stage names: run the focused
+component tests when its stage finishes and integration after consumers land.
+Start from `npm test -- --run`, adapting to existing project scripts and test scope.
+Required `gate_checks` separately cover the full suite (`npm test -- --run`)
+and mandatory static checks (`npm run lint; npm run typecheck`); checkpoints never replace that list.
+Commands here are planning defaults, not an assertion that a project has them.

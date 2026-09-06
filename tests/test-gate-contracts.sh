@@ -84,4 +84,6 @@ defaults_contract() {
 
 test_defaults_t006() { defaults_contract rust rust-aws-lambda nextjs aws-cdk-lambda-ts; }
 
+test_defaults_t007() { defaults_contract javascript react bun-monorepo loopback4; }
+
 t_run_all
