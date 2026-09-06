@@ -126,7 +126,7 @@ keeps each edit task to at most five files instead of combining unrelated work.
   - *Refs:* REQ-002, REQ-004, REQ-005, AC-006, AC-017, FM-001, INV-005, plan §2, §3.1
   - *Evidence:* `bash tests/test-gate-contracts.sh → -- 1/1 passed (notes/evidence.md, T004, sha256:8d191b7cf017); FM-001, INV-005 → tests/test-gate-contracts.sh::test_instruction_contracts; bootstrap no-tick capture` (2026-09-06)
 
-- [~] **T005** [P] — Refresh the calibrated verification example
+- [x] **T005** [P] — Refresh the calibrated verification example
   - *Depends on:* T002
   - *Files:* `templates/examples/001-api-key-expiry/spec.md`, `templates/examples/001-api-key-expiry/plan.md`, `templates/examples/001-api-key-expiry/tasks.md`, `templates/examples/001-api-key-expiry/README.md`, `tests/test-golden-example.sh`
   - *Acceptance:* Add AC-005 fixtures proving concrete FM/INV families, non-gate bindings and appropriate Verify kinds pass the updated analyzer with zero warnings in a sandbox project; shipped 001/002 remain untouched.
@@ -135,6 +135,7 @@ keeps each edit task to at most five files instead of combining unrelated work.
   - *Verify:* `bash tests/test-golden-example.sh` → all suites `passed`, exit 0
   - *Reuse:* local
   - *Refs:* REQ-002, REQ-004, REQ-005, AC-005, FM-002, plan §3.1, §7
+  - *Evidence:* `bash tests/test-golden-example.sh → -- 3/3 passed (notes/evidence.md, T005, sha256:c5596e4df60e); FM-002 → tests/test-golden-example.sh::test_verification_golden; bootstrap no-tick capture` (2026-09-06)
 
 ## Backend
 
