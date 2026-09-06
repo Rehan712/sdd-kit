@@ -337,3 +337,34 @@ Captured acceptance runs, appended by `spec-run.sh`. One block per run.
   ok   test_instruction_contracts
   -- 9/9 passed
 ```
+
+## T013 — 2026-09-06T20:16:20
+
+- **Command:** `bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-build-adapters.sh`
+- **Cwd:** /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline
+- **Exit:** 0
+- **Captured:** 2026-09-06T20:16:20 · sha256:609e2f9c87a6 (over full output)
+
+```text
+  ok   test_all_brief_modes
+  ok   test_all_overlay_defaults
+  ok   test_briefs_t010
+  ok   test_briefs_t011
+  ok   test_briefs_t012
+  ok   test_briefs_t013
+  ok   test_defaults_t006
+  ok   test_defaults_t007
+  ok   test_defaults_t008
+  ok   test_defaults_t009
+  ok   test_instruction_contracts
+  -- 11/11 passed
+  ok   test_adapters_install_into_every_codex_home
+  ok   test_brief_modes
+  ok   test_codex_adapters_delegate_copilot_adapters_persona_pass
+  ok   test_degrades_without_policy_or_codex_home
+  ok   test_delegation_findings_artifact_present_and_shaped
+  ok   test_prune_respects_kit_marker_and_role_unmapping
+  ok   test_stale_single_agent_claims_are_gone
+  ok   test_subagent_tomls_carry_identity_policy_and_persona
+  -- 8/8 passed
+```

@@ -215,7 +215,7 @@ keeps each edit task to at most five files instead of combining unrelated work.
   - *Integration owner:* T027
   - *Evidence:* `bash tests/test-gate-contracts.sh → -- 9/9 passed (notes/evidence.md, T012, sha256:49e830668618); FM-004,FM-005, → task Tests locators; bootstrap no-tick capture` (2026-09-06)
 
-- [ ] **T013** — Verify test-engineer modes through generated adapters
+- [x] **T013** — Verify test-engineer modes through generated adapters
   - *Files:* `agents/test-engineer.md`, `tests/test-gate-contracts.sh` (new in T001), `tests/test-build-adapters.sh`
   - *Acceptance:* Finish AC-014 mode examples and enumerate all expert/test personas, then regenerate through existing scripts in a sandbox and assert both modes survive adapters without editing generated files or real homes.
   - *Verify kind:* test
@@ -223,6 +223,7 @@ keeps each edit task to at most five files instead of combining unrelated work.
   - *Verify:* `bash tests/test-gate-contracts.sh && bash tests/test-build-adapters.sh` → all suites `passed`, exit 0
   - *Reuse:* local
   - *Refs:* REQ-014, AC-014, FM-002, FM-004, FM-005, plan §2, §6
+  - *Evidence:* `bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-build-adapters.sh → -- 8/8 passed (notes/evidence.md, T013, sha256:609e2f9c87a6); FM-002,FM-004,FM-005, → task Tests locators; bootstrap no-tick capture` (2026-09-06)
 
 - [ ] **T014** [hard] — Record class-wide reports and honest tallies
   - *Files:* `agents/opponent.agent.md`, `agents/reality-check.agent.md`, `scripts/verification-lib.sh` (new in T002), `scripts/spec-gate.sh` (new), `tests/test-gate-contracts.sh` (new in T001)

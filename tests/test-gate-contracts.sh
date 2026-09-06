@@ -127,4 +127,10 @@ test_briefs_t012() {
   brief_contract "$KIT_DIR/agents/aws-expert.md" "$KIT_DIR/agents/python-expert.md" "$KIT_DIR/agents/expo-rn-expert.md" "$KIT_DIR/agents/firebase-rtk-codegen-expert.md"
 }
 
+test_briefs_t013() {
+  brief_contract "$KIT_DIR/agents/test-engineer.md"
+}
+
+test_all_brief_modes() { brief_contract "$KIT_DIR"/agents/*-expert.md "$KIT_DIR/agents/test-engineer.md"; }
+
 t_run_all

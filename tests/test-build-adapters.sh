@@ -192,4 +192,20 @@ test_adapters_install_into_every_codex_home() {
     || t_fail "multi-home: live subagent TOML lost on re-run"
 }
 
+# AC-014: supported generation retains both modes for every brief consumer.
+test_brief_modes() {
+  local kit file generated
+  kit="$(stage_kit)"
+  run_rc 0 env HOME="$SANDBOX/home" bash "$kit/scripts/apply-models.sh"
+  run_rc 0 run_adapters "$kit"
+  for file in "$kit"/agents/*-expert.md "$kit/agents/test-engineer.md"; do
+    generated="$kit/build/agents/$(basename "$file")"
+    assert_contains "$(cat "$generated")" '**Planning consultation:**'
+    assert_contains "$(cat "$generated")" '**Implementation:**'
+    assert_contains "$(cat "$generated")" 'Source revision:'
+    assert_contains "$(cat "$generated")" 'Failure modes: none'
+    run_rc 0 cmp "$file" "$generated"
+  done
+}
+
 t_run_all
