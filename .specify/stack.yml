@@ -2,3 +2,18 @@
 # No stack overlay matches bash+markdown tooling; overlays list stays empty.
 stacks: []
 base_branch: main
+gate_checks:
+  - 'bash tests/run.sh'
+  - 'shellcheck -S warning -x scripts/*.sh tests/*.sh'
+checkpoints:
+  Backend:
+    - 'bash tests/run.sh'
+  API:
+    - 'bash tests/run.sh'
+# Reuse remains disabled until T023 proves the negative provenance fixtures.
+reuse_checks: []
+verification_tools:
+  - 'bash'
+  - 'git'
+  - 'shellcheck'
+verification_inputs: []

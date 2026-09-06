@@ -105,6 +105,23 @@ check_bindings() { # <plan|tasks>
 
 spec="$SPEC_DIR/spec.md"; plan="$SPEC_DIR/plan.md"; tasks="$SPEC_DIR/tasks.md"; status="$SPEC_DIR/STATUS.md"
 
+check_config() {
+  local config_result rc=0 line saw_error=0
+  config_result="$(vf_project_config "$SPEC_DIR" "$analysis_phase" "$SPEC_DIR/../../stack.yml" 2>&1)" || rc=$?
+  while IFS= read -r line; do
+    case "$line" in
+      error:*) fail "${line#error: }"; saw_error=1 ;;
+      warning:*) warn "${line#warning: }" ;;
+      ?*) fail "verification configuration parser: $line"; saw_error=1 ;;
+    esac
+  done <<< "$config_result"
+  if (( rc != 0 && saw_error == 0 )); then
+    fail "verification configuration parser failed with exit $rc"
+  elif (( rc == 0 )) && [[ -z "$config_result" ]]; then
+    pass "verification command configuration valid"
+  fi
+}
+
 if [[ -n "$phase_override" ]]; then
   analysis_phase="$phase_override"
 else
@@ -121,6 +138,8 @@ for f in "${required_artifacts[@]}"; do
   [[ -f "$f" ]] && pass "$(basename "$f") present" || fail "$(basename "$f") missing"
 done
 (( errors > 0 )) && { echo "---"; echo "${RED}$errors error(s)${RESET} — fix missing artifacts first"; exit 1; }
+
+check_config
 
 # --- 1b. unresolved clarification markers ---
 # /sdd:specify and /sdd:plan write [NEEDS CLARIFICATION: …] instead of guessing.

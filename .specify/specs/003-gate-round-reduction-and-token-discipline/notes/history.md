@@ -55,3 +55,25 @@ the stable diff, actual secret scan and large-input NUL rejection (exit 1).
 Applied checks: input validation, injection, secrets, diagnostics, constitution.
 No remaining security findings. This is bootstrap evidence, not provenance
 or reuse authorization; refresh through new acceptance tooling when it lands.
+
+## T003 local completion — 2026-09-06
+
+Delegate t003_config reached its usage limit before saving any code. The user
+explicitly requested completing the current task here and stopping for handoff;
+parent implemented T003 without changing models or dispatching another provider.
+vf_config publishes a fresh directory: commands.nul has kind/stage/command
+triples; reuse/tools/inputs/stages.nul have single-field records; meta.nul has
+version/gate_count/stage_validation key/value pairs. vf_project_config shares
+new-contract/legacy and phase policy between analyzer and doctor. Reuse is off.
+FM-006 and FM-011 map to tests/test-verification.sh::test_config_grammar:
+exact-byte quoting/pipelines, invalid-key/list/map/stage rejection, no parsing
+side effects, phase deferral, and new-versus-legacy analyzer/doctor behavior.
+Final T003 no-tick capture: 2026-09-06T19:54:05, 1/1 passed, exit 0,
+sha256:ce28c7d7bf6a. Independent t002_security review returned STATUS: clean for
+T003/T003f1; actual secret scan found zero matches, metadata never executes.
+Targeted ShellCheck passed. Full-suite run in
+/private/tmp/sdd-spec003-t003-suite.log had 13 passing suites and one executable
+bit failure on the T002 library; executable mode is now fixed and that suite
+rerun passed 1/1. This is local evidence, not T027 platform-matrix clearance.
+Integration also exposed annotated Files ownership false warnings; the necessary
+T003f1 companion completes that correction with authoring fixture compatibility.

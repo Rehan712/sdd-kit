@@ -25,6 +25,170 @@ VF_FAILURE_BYTES=8192
 # shellcheck disable=SC2034
 VF_DIAGNOSTIC_LINES=20
 
+# vf_config <stack-file> <tasks-file-or-empty> <new-output-dir>
+# commands.nul: repeated (gate_checks|checkpoints, stage-or-empty, command).
+# reuse.nul/tools.nul/inputs.nul/stages.nul: single-field records.
+# meta.nul: key/value pairs (version, gate_count, stage_validation).
+# Missing configuration yields an empty catalog; vf_project_config applies
+# version policy. Fresh directories prevent reuse of a failed parse result.
+vf_config() (
+  [[ "$#" -eq 3 ]] || { echo 'error: vf_config needs stack, tasks, output directory' >&2; return 2; }
+  local stack="$1" tasks_file="$2" output="$3" stage_map tmp
+  [[ ! -e "$output" && ! -L "$output" ]] || {
+    printf 'error: %s: output already exists; use a fresh catalog directory\n' "$output" >&2; return 1;
+  }
+  tmp="$(mktemp -d "$output.tmp.XXXXXX")" || return 1
+  trap 'rm -rf "$tmp"' EXIT
+  stage_map="$tmp/stage-map"
+  : > "$stage_map"
+  if [[ -n "$tasks_file" && -f "$tasks_file" ]]; then
+    _vf_reject_nul "$tasks_file" "$tasks_file" || return 1
+    awk '
+      BEGIN { tick=sprintf("%c",96); fence=tick tick tick }
+      { line=$0; sub(/^[[:space:]]*/, "", line) }
+      index(line,fence)==1 || index(line,"~~~")==1 { fenced=!fenced; next }
+      fenced || /^[[:space:]]*>/ { next }
+      /^## / { stage=substr($0,4); sub(/[[:space:]]+$/, "", stage) }
+      /^- \[[ xX~]\] \*\*T[0-9][0-9][0-9][a-z0-9]*\*\*/ {
+        if (stage!="" && !seen[stage]++) print stage
+      }
+    ' "$tasks_file" > "$stage_map" || return 1
+  fi
+  local input=/dev/null
+  if [[ -e "$stack" ]]; then
+    [[ -f "$stack" && -r "$stack" ]] || { printf 'error: %s:1: unreadable configuration\n' "$stack" >&2; return 1; }
+    _vf_reject_nul "$stack" "$stack:1" || return 1
+    input="$stack"
+  fi
+  # awk -v interprets backslashes; environment transport preserves path bytes.
+  VF_CONFIG_PATH="$stack" VF_CONFIG_OUT="$tmp" VF_CONFIG_STAGES="$stage_map" awk '
+    function error(message) {
+      printf "error: %s:%d: %s\n", ENVIRON["VF_CONFIG_PATH"], NR ? NR : 1, message > "/dev/stderr"
+      errors++
+    }
+    function trim(s) { sub(/^[ ]+/, "", s); sub(/[ ]+$/, "", s); return s }
+    function emit(file,s) { printf "%s%c", s, 0 > (dir "/" file) }
+    function scalar(s,    i,c,out,closed,tail) {
+      scalar_ok=0; out=""
+      if (substr(s,1,1)!=quote) { error("expected single-quoted scalar"); return "" }
+      for (i=2;i<=length(s);i++) {
+        c=substr(s,i,1)
+        if (c==quote) {
+          if (substr(s,i+1,1)==quote) { out=out quote; i++ }
+          else {
+            tail=substr(s,i+1)
+            if (tail!="" && tail !~ /^ +(#.*)?$/) { error("trailing scalar content"); return "" }
+            closed=1; break
+          }
+        } else out=out c
+      }
+      if (!closed) { error("unterminated scalar; multiline scalars are unsupported"); return "" }
+      if (trim(out)=="") { error("empty verification scalar"); return "" }
+      if (out ~ /\$[({A-Za-z_]/) { error("interpolation is unsupported"); return "" }
+      scalar_ok=1; return out
+    }
+    BEGIN {
+      dir=ENVIRON["VF_CONFIG_OUT"]; quote=sprintf("%c",39)
+      while ((getline stage < ENVIRON["VF_CONFIG_STAGES"])>0) { stages[stage]=1; stage_count++ }
+      close(ENVIRON["VF_CONFIG_STAGES"])
+      files[1]="commands.nul"; files[2]="reuse.nul"; files[3]="tools.nul"
+      files[4]="inputs.nul"; files[5]="stages.nul"; files[6]="meta.nul"
+      for (i=1;i<=6;i++) printf "%s","" > (dir "/" files[i])
+    }
+    /^[ ]*(#.*)?$/ { next }
+    {
+      if ($0 ~ /[[:cntrl:]]/) { error("tabs/control bytes are unsupported"); next }
+      if ($0 !~ /^ /) {
+        if ($0 !~ /^[A-Za-z_][A-Za-z0-9_-]*:/) { error("expected top-level key"); next }
+        key=$0; sub(/:.*/, "", key)
+        if (seen[key]++) error("duplicate key " key)
+        value=substr($0,length(key)+2); value=trim(value)
+        if (value ~ /^#/) value=""
+        context=""; current_stage=""; closed_list=0
+        if (key=="gate_checks" || key=="reuse_checks" || key=="verification_tools" ||
+            key=="verification_inputs" || key=="checkpoints") {
+          context=key
+          if (value ~ /^\[\]( +#.*)?$/ && key!="checkpoints") closed_list=1
+          else if (value!="") error("expected block " (key=="checkpoints" ? "map" : "list") " for " key)
+        } else if (key ~ /^(gate_|checkpoint|reuse_|verification_)/) error("unknown verification key " key)
+        next
+      }
+      if (context=="") next
+      if (closed_list) { error("entries after an inline empty list"); next }
+      if (context=="checkpoints" && $0 ~ /^  [^ ]/ && $0 !~ /^  -/) {
+        line=substr($0,3)
+        colon=index(line,":")
+        if (!colon) { error("expected checkpoint stage mapping"); next }
+        current_stage=substr(line,1,colon-1)
+        value=trim(substr(line,colon+1))
+        if (current_stage !~ /^[A-Za-z][A-Za-z0-9 ()\/_-]*$/) { error("invalid checkpoint stage"); next }
+        if (seen_stage[current_stage]++) error("duplicate checkpoint stage " current_stage)
+        if (stage_count && !(current_stage in stages)) error("unknown checkpoint stage " current_stage)
+        emit("stages.nul", current_stage)
+        stage_empty=(value ~ /^\[\]( +#.*)?$/)
+        if (value!="" && value !~ /^#/ && !stage_empty) error("expected checkpoint block list or []")
+        next
+      }
+      if (context=="checkpoints") {
+        if (current_stage=="" || stage_empty || $0 !~ /^    - /) { error("invalid checkpoint list indentation"); next }
+        value=scalar(substr($0,7))
+      } else {
+        if ($0 !~ /^  - /) { error("invalid verification list indentation"); next }
+        value=scalar(substr($0,5))
+      }
+      if (!scalar_ok) next
+      if (context=="gate_checks" || context=="checkpoints") {
+        emit("commands.nul",context); emit("commands.nul",current_stage); emit("commands.nul",value)
+        if (context=="gate_checks") gate_count++
+      } else if (context=="reuse_checks") emit("reuse.nul",value)
+      else if (context=="verification_tools") emit("tools.nul",value)
+      else emit("inputs.nul",value)
+    }
+    END {
+      emit("meta.nul","version"); emit("meta.nul","1")
+      emit("meta.nul","gate_count"); emit("meta.nul",gate_count+0)
+      emit("meta.nul","stage_validation"); emit("meta.nul",stage_count ? "checked" : "deferred")
+      for (i=1;i<=6;i++) if (close(dir "/" files[i])!=0) errors++
+      exit errors ? 1 : 0
+    }
+  ' "$input" || return 1
+  rm "$stage_map" || return 1
+  mv "$tmp" "$output"
+)
+
+# Shared analyzer/doctor policy. Legacy gaps warn; explicit v1 gaps fail.
+vf_project_config() (
+  [[ "$#" -eq 3 ]] || return 2
+  local spec_dir="$1" mode="$2" stack="$3" tmp tasks_file="" rc=0 key value count=0 contract declared
+  tmp="$(mktemp -d)" || return 1
+  trap 'rm -rf "$tmp"' EXIT
+  contract="$(fm_get "$spec_dir/spec.md" verification_contract)"
+  declared="$(frontmatter_block "$spec_dir/spec.md" | grep -c '^verification_contract:' || true)"
+  if [[ "$declared" -gt 1 || ( "$declared" -eq 1 && "$contract" != 1 ) ]]; then
+    printf 'error: %s/spec.md:1: unsupported or duplicate verification_contract %s\n' "$spec_dir" "$contract" >&2
+    return 1
+  fi
+  # Project checkpoints target the active v1 decomposition. Shipped legacy
+  # specs may have different stages; do not retrofit their task inventories.
+  [[ "$mode" == plan || "$declared" -eq 0 ]] || tasks_file="$spec_dir/tasks.md"
+  vf_config "$stack" "$tasks_file" "$tmp/catalog" || return $?
+  while IFS= read -r -d '' key && IFS= read -r -d '' value; do
+    [[ "$key" != gate_count ]] || count="$value"
+  done < "$tmp/catalog/meta.nul"
+  if [[ "$declared" -eq 0 && -s "$tmp/catalog/stages.nul" ]]; then
+    printf 'warning: %s:1: legacy checkpoint bindings are undeclared; stage membership deferred\n' "$stack" >&2
+  fi
+  if [[ "$count" -eq 0 ]]; then
+    if [[ "$contract" == 1 ]]; then
+      printf 'error: %s:1: verification_contract 1 requires nonempty gate_checks\n' "$stack" >&2
+      rc=1
+    else
+      printf 'warning: %s:1: legacy configuration has no gate_checks; no automatic floor clearance\n' "$stack" >&2
+    fi
+  fi
+  return "$rc"
+)
+
 _VF_LIB_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 if ! type fm_get >/dev/null 2>&1; then
   # shellcheck source=scripts/lib.sh

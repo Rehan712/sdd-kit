@@ -93,7 +93,7 @@ keeps each edit task to at most five files instead of combining unrelated work.
   - *Refs:* REQ-002, REQ-004, REQ-005, AC-001, AC-003, AC-004, AC-006, AC-023, FM-001, FM-002, FM-003, INV-005, plan §3.1, §4.1
   - *Evidence:* `bash tests/test-sdd-analyze.sh → -- 18/18 passed (notes/evidence.md, T002 2026-09-06T10:41:22, sha256:20ac89cdff35); FM-001/FM-002/FM-003/INV-005 → tests/test-sdd-analyze.sh::test_verification_bindings; bootstrap no-tick worker return accepted; independent security clean (notes/history.md)` (2026-09-06)
 
-- [ ] **T003** [P] [hard] — Parse verification commands without losing arguments
+- [x] **T003** [P] [hard] — Parse verification commands without losing arguments
   - *Depends on:* T002
   - *Files:* `scripts/verification-lib.sh` (new in T002), `scripts/sdd-analyze.sh`, `scripts/sdd-doctor.sh`, `tests/test-verification.sh` (new), `.specify/stack.yml`
   - *Acceptance:* Implement vf_config with AC-011 fixtures for lossless quoting, malformed/duplicate/unknown keys and stages, phase deferral and legacy warnings; declare the real suite/ShellCheck gate_checks and Backend/API checkpoints while keeping reuse disabled.
@@ -102,8 +102,19 @@ keeps each edit task to at most five files instead of combining unrelated work.
   - *Verify:* `bash tests/test-verification.sh` → all suites `passed`, exit 0
   - *Reuse:* local
   - *Refs:* REQ-007, REQ-008, AC-011, AC-023, FM-006, FM-011, plan §3.1, §4.1, §6
+  - *Evidence:* `bash tests/test-verification.sh → -- 1/1 passed (notes/evidence.md, T003 2026-09-06T19:54:05, sha256:ce28c7d7bf6a); FM-006/FM-011 → tests/test-verification.sh::test_config_grammar; bootstrap no-tick capture; independent security clean (notes/history.md)` (2026-09-06)
 
-- [ ] **T004** [P] — Teach planning and task-local test ownership
+- [~] **T003f1** — Keep authoring fixtures valid under gate configuration
+  - *Files:* `tests/helpers.sh`, `tests/test-sdd-analyze.sh`
+  - *Acceptance:* Existing clean authoring fixtures declare their illustrative gate list; new-contract and legacy regressions still pass, and removing legacy configuration explicitly warns without failing.
+  - *Verify kind:* test
+  - *Tests:* `tests/test-sdd-analyze.sh::test_verification_bindings`
+  - *Verify:* `bash tests/test-sdd-analyze.sh` → all suites `passed`, exit 0
+  - *Reuse:* local
+  - *Refs:* REQ-007, AC-011, AC-023, FM-002, plan §3.1, §7
+  - *Notes:* Required sibling fixture adjustment discovered during T003 integration; no shipped spec rewrite or weakening of missing-configuration checks.
+
+- [~] **T004** [P] — Teach planning and task-local test ownership
   - *Depends on:* T002
   - *Files:* `skills/sdd-plan/SKILL.md`, `skills/sdd-tasks/SKILL.md`, `tests/test-gate-contracts.sh` (new in T001)
   - *Acceptance:* Add AC-006/AC-017 instruction assertions for planning-time families, task-time bindings, same-commit behavioral tests and integration-only Tests stages without copying the grammar into both skills.
@@ -113,7 +124,7 @@ keeps each edit task to at most five files instead of combining unrelated work.
   - *Reuse:* local
   - *Refs:* REQ-002, REQ-004, REQ-005, AC-006, AC-017, FM-001, INV-005, plan §2, §3.1
 
-- [ ] **T005** [P] — Refresh the calibrated verification example
+- [~] **T005** [P] — Refresh the calibrated verification example
   - *Depends on:* T002
   - *Files:* `templates/examples/001-api-key-expiry/spec.md`, `templates/examples/001-api-key-expiry/plan.md`, `templates/examples/001-api-key-expiry/tasks.md`, `templates/examples/001-api-key-expiry/README.md`, `tests/test-golden-example.sh`
   - *Acceptance:* Add AC-005 fixtures proving concrete FM/INV families, non-gate bindings and appropriate Verify kinds pass the updated analyzer with zero warnings in a sandbox project; shipped 001/002 remain untouched.

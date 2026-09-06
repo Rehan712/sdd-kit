@@ -75,6 +75,8 @@ Append-only, newest last. Each entry: `date — decision — rationale / who dec
 
 - 2026-09-06 — T002 hard-task agent hit its usage limit before final return. Parent preserved partial work and captured exact Verify (18/18 passed), with targeted ShellCheck/diff-check clean; task remains in-progress and uncommitted pending delegated completion/security review. Stopped per the invoked workflow; no fabricated acceptance or later dispatch.
 
+- 2026-09-06 — User requested finishing the current task here, then stopping for handoff. T003 hard-task delegate reached its usage limit before saving changes; parent completed T003 under this explicit instruction, preserving separate security review. T004/T005 remain prepared and unaccepted. T003f1 is the necessary fixture/authoring compatibility companion; no subsequent task will start.
+
 ## Open questions / blockers
 
 - [ ] (@Rehan712, non-blocking) Which governed project's next spec is the first MET-001 measurement point.
