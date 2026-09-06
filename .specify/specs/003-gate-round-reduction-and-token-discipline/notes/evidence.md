@@ -392,3 +392,16 @@ Captured acceptance runs, appended by `spec-run.sh`. One block per run.
   ok   test_review_scope_contracts
   -- 13/13 passed
 ```
+
+## T015 — 2026-09-06T20:21:14
+
+- **Command:** `bash tests/test-verification.sh`
+- **Cwd:** /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline
+- **Exit:** 0
+- **Captured:** 2026-09-06T20:21:14 · sha256:0e92dde043a9 (over full output)
+
+```text
+  ok   test_config_grammar
+  ok   test_owned_transactions
+  -- 2/2 passed
+```

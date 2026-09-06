@@ -235,7 +235,7 @@ keeps each edit task to at most five files instead of combining unrelated work.
   - *Refs:* REQ-010, REQ-011, REQ-012, REQ-013, REQ-015, AC-010, AC-012, AC-017, FM-019, FM-020, INV-005, INV-006, plan §3.3, §4.3
   - *Evidence:* `bash tests/test-gate-contracts.sh → -- 13/13 passed (notes/evidence.md, T014, sha256:7dcb3a982827); FM-019,FM-020,INV-005,INV-006, → task Tests locators; bootstrap no-tick capture` (2026-09-06)
 
-- [ ] **T015** [hard] — Establish owner-only verification transaction primitives
+- [x] **T015** [hard] — Establish owner-only verification transaction primitives
   - *Files:* `scripts/verification-lib.sh` (new in T002), `tests/test-verification.sh` (new in T003)
   - *Acceptance:* Add AC-020/AC-022 fixtures proving failed acquisition/foreign locks survive cleanup, owned locks release on exit/signals and incomplete same-parent publications cannot appear completed.
   - *Verify kind:* test
@@ -243,6 +243,7 @@ keeps each edit task to at most five files instead of combining unrelated work.
   - *Verify:* `bash tests/test-verification.sh` → all suites `passed`, exit 0
   - *Reuse:* local
   - *Refs:* REQ-006, REQ-009, AC-020, AC-022, FM-007, FM-008, INV-003, plan §3.2, §4.2, §4.4
+  - *Evidence:* `bash tests/test-verification.sh → -- 2/2 passed (notes/evidence.md, T015, sha256:0e92dde043a9); FM-007,FM-008,INV-003, → task Tests locators; bootstrap no-tick capture` (2026-09-06)
 
 - [ ] **T016** [hard] — Fingerprint complete semantic verification inputs
   - *Files:* `scripts/verification-lib.sh` (new in T002), `tests/test-verification.sh` (new in T003), `tests/helpers.sh`

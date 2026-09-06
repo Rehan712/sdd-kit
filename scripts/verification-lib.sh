@@ -865,3 +865,73 @@ vf_tally() (
     END {for(c in total) printf "class=%s findings=%d recurrences=%d\n",c,total[c],recur[c]+0}
   ' "$tmp/classes" | LC_ALL=C sort
 )
+
+# Writers initialize once at their entry point. Never trust inherited lock state.
+vf_writer_init() {
+  VF_LOCK_PATH= VF_LOCK_TOKEN= VF_STAGING=
+  trap 'vf_writer_cleanup' EXIT
+  trap 'exit 130' INT
+  trap 'exit 143' TERM
+  trap 'exit 129' HUP
+}
+vf_writer_cleanup() {
+  if [[ -n "${VF_STAGING:-}" && -d "$VF_STAGING" && ! -L "$VF_STAGING" ]]; then
+    rm -rf "$VF_STAGING"
+  fi
+  vf_unlock
+}
+vf_lock() {
+  local spec="$1" path token
+  [[ -z "${VF_LOCK_PATH:-}" ]] || { echo 'verification lock: nested acquisition refused' >&2; return 3; }
+  mkdir -p "$spec/notes/verification" || return 3
+  path="$spec/notes/verification/lock"
+  token="$$-$RANDOM-$RANDOM"
+  mkdir "$path" 2>/dev/null || {
+    printf 'verification lock exists: %s; inspect owner and reconcile interrupted writer\n' "$path" >&2; return 3;
+  }
+  # Assignment follows successful acquisition. Failure before mkdir cannot own it.
+  if ! printf '%s\n' "$token" > "$path/owner"; then rmdir "$path" 2>/dev/null || :; return 3; fi
+  VF_LOCK_TOKEN="$token" VF_LOCK_PATH="$path"
+}
+vf_unlock() {
+  if [[ -n "${VF_LOCK_PATH:-}" && ! -L "$VF_LOCK_PATH" && -f "$VF_LOCK_PATH/owner" && ! -L "$VF_LOCK_PATH/owner" ]] &&
+      [[ "$(cat "$VF_LOCK_PATH/owner")" == "${VF_LOCK_TOKEN:-}" ]]; then
+    rm "$VF_LOCK_PATH/owner" && rmdir "$VF_LOCK_PATH"
+  fi
+  VF_LOCK_PATH= VF_LOCK_TOKEN=
+}
+
+# COMPLETE is written last. Required files and their order are caller-owned.
+vf_seal() {
+  local dir="$1" file; shift
+  [[ ! -e "$dir/COMPLETE" ]] || return 3
+  { printf 'verification:1\n'
+    for file in "$@"; do
+      [[ "$file" != */* && -f "$dir/$file" && ! -L "$dir/$file" ]] || return 3
+      printf '%s %s\n' "$(vf_hash "$dir/$file")" "$file"
+    done
+  } > "$dir/COMPLETE.tmp" || return 3
+  mv "$dir/COMPLETE.tmp" "$dir/COMPLETE"
+}
+vf_integrity() (
+  local dir="$1" file expected actual; shift
+  [[ -d "$dir" && ! -L "$dir" && -f "$dir/COMPLETE" && ! -L "$dir/COMPLETE" ]] || {
+    echo 'capture integrity: missing COMPLETE or linked directory' >&2; return 3;
+  }
+  expected='verification:1'
+  for file in "$@"; do
+    [[ -f "$dir/$file" && ! -L "$dir/$file" ]] || { echo "capture integrity: missing $file" >&2; return 3; }
+    actual="$(vf_hash "$dir/$file")" || return 3
+    expected="$expected
+$actual $file"
+  done
+  [[ "$(cat "$dir/COMPLETE")" == "$expected" ]] || { echo 'capture integrity: COMPLETE/digest mismatch' >&2; return 3; }
+)
+vf_publish() {
+  local staging="$1" final="$2"; shift 2
+  [[ "${staging%/*}" == "${final%/*}" && ! -e "$final" && ! -L "$final" ]] || {
+    echo 'verification publication: requires fresh same-parent destination' >&2; return 3;
+  }
+  vf_integrity "$staging" "$@" || return 3
+  mv "$staging" "$final"
+}

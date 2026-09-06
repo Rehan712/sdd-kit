@@ -143,4 +143,28 @@ test_config_grammar() {
   assert_contains "$OUT" 'expected block list'
 }
 
+# AC-020/AC-022 / INV-003: lock ownership survives failed acquisition, errors
+# and signals; no reader can mistake incomplete publication for a capture.
+test_owned_transactions() {
+  local spec="$SANDBOX/spec" lib="$SCRIPTS/verification-lib.sh"
+  mkdir -p "$spec/notes/verification/lock"
+  printf 'foreign-owner\n' > "$spec/notes/verification/lock/owner"
+  run_rc 3 bash -c '. "$1"; vf_writer_init; vf_lock "$2"' _ "$lib" "$spec"
+  assert_eq foreign-owner "$(cat "$spec/notes/verification/lock/owner")"
+  rm -rf "$spec/notes/verification/lock"
+  run_rc 7 bash -c '. "$1"; vf_writer_init; vf_lock "$2" || exit; exit 7' _ "$lib" "$spec"
+  [[ ! -e "$spec/notes/verification/lock" ]] || t_fail 'AC-022: owned lock leaked on failure'
+  run_rc 143 bash -c '. "$1"; vf_writer_init; vf_lock "$2" || exit; kill -TERM $$; exit 9' _ "$lib" "$spec"
+  [[ ! -e "$spec/notes/verification/lock" ]] || t_fail 'AC-022: owned lock leaked on signal'
+  run_rc 0 bash -c '. "$1"; vf_writer_init; vf_lock "$2" || exit; printf replacement > "$VF_LOCK_PATH/owner"' _ "$lib" "$spec"
+  assert_eq replacement "$(cat "$spec/notes/verification/lock/owner")" 'AC-022: replaced owner survives cleanup'
+  mkdir "$SANDBOX/staging"
+  printf full-log > "$SANDBOX/staging/output.log"
+  run_rc 3 bash -c '. "$1"; vf_publish "$2" "$3" output.log' _ "$lib" "$SANDBOX/staging" "$SANDBOX/final"
+  [[ ! -e "$SANDBOX/final" ]] || t_fail 'AC-020: incomplete publication became visible'
+  run_rc 0 bash -c '. "$1"; vf_seal "$2" output.log && vf_publish "$2" "$3" output.log && vf_integrity "$3" output.log' _ "$lib" "$SANDBOX/staging" "$SANDBOX/final"
+  printf damaged >> "$SANDBOX/final/output.log"
+  run_rc 3 bash -c '. "$1"; vf_integrity "$2" output.log' _ "$lib" "$SANDBOX/final"
+}
+
 t_run_all
