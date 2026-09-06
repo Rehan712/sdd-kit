@@ -115,7 +115,7 @@ keeps each edit task to at most five files instead of combining unrelated work.
   - *Notes:* Required sibling fixture adjustment discovered during T003 integration; no shipped spec rewrite or weakening of missing-configuration checks.
   - *Evidence:* `bash tests/test-sdd-analyze.sh → -- 18/18 passed (notes/evidence.md, T003f1 2026-09-06T19:56:35, sha256:20ac89cdff35); FM-002 → tests/test-sdd-analyze.sh::test_verification_bindings; configured legacy/new fixtures and exact annotated Files ownership; independent security clean` (2026-09-06)
 
-- [~] **T004** [P] — Teach planning and task-local test ownership
+- [x] **T004** [P] — Teach planning and task-local test ownership
   - *Depends on:* T002
   - *Files:* `skills/sdd-plan/SKILL.md`, `skills/sdd-tasks/SKILL.md`, `tests/test-gate-contracts.sh` (new in T001)
   - *Acceptance:* Add AC-006/AC-017 instruction assertions for planning-time families, task-time bindings, same-commit behavioral tests and integration-only Tests stages without copying the grammar into both skills.
@@ -124,6 +124,7 @@ keeps each edit task to at most five files instead of combining unrelated work.
   - *Verify:* `bash tests/test-gate-contracts.sh` → all suites `passed`, exit 0
   - *Reuse:* local
   - *Refs:* REQ-002, REQ-004, REQ-005, AC-006, AC-017, FM-001, INV-005, plan §2, §3.1
+  - *Evidence:* `bash tests/test-gate-contracts.sh → -- 1/1 passed (notes/evidence.md, T004, sha256:8d191b7cf017); FM-001, INV-005 → tests/test-gate-contracts.sh::test_instruction_contracts; bootstrap no-tick capture` (2026-09-06)
 
 - [~] **T005** [P] — Refresh the calibrated verification example
   - *Depends on:* T002

@@ -5,10 +5,12 @@
 . "$(dirname -- "${BASH_SOURCE[0]}")/helpers.sh"
 
 test_instruction_contracts() {
-  local contract spec plan
+  local contract spec plan plan_skill tasks_skill
   contract="$(cat "$KIT_DIR/templates/verification-contract.md")"
   spec="$(cat "$KIT_DIR/templates/spec-template.md")"
   plan="$(cat "$KIT_DIR/templates/plan-template.md")"
+  plan_skill="$(cat "$KIT_DIR/skills/sdd-plan/SKILL.md")"
+  tasks_skill="$(cat "$KIT_DIR/skills/sdd-tasks/SKILL.md")"
 
   # AC-001: a shared row, concrete trigger/behavior, compact exclusion and
   # planning-time family replace unbound generic risk prose.
@@ -35,6 +37,35 @@ test_instruction_contracts() {
   assert_contains "$contract" 'Untyped AC checks offering only build, typecheck or'
   assert_contains "$contract" 'same task'
   assert_contains "$contract" 'Schema examples here establish authoring intent; runtime negative'
+
+  # AC-006/AC-017: these assertions prove the authoring instructions only;
+  # test_verification_bindings owns executable local-ownership validation.
+  assert_contains "$plan_skill" '(../../templates/verification-contract.md)'
+  assert_contains "$plan_skill" 'Define stable FM-### rows'
+  assert_contains "$plan_skill" 'always/never promises into INV-### rows'
+  assert_contains "$plan_skill" 'Share rows across affected components'
+  assert_contains "$plan_skill" 'intended concrete locators'
+  assert_contains "$plan_skill" 'Planning needs no future task IDs'
+  assert_contains "$plan_skill" 'decomposition binds these families to owning tasks later'
+  assert_contains "$plan_skill" 'independent review still judges their assertions'
+  assert_contains "$plan_skill" '--phase plan'
+  assert_contains "$tasks_skill" '(../../templates/verification-contract.md)'
+  assert_contains "$tasks_skill" 'every applicable planned FM/INV row to a non-gate task through Refs'
+  assert_contains "$tasks_skill" 'concrete locators from the plan'
+  assert_contains "$tasks_skill" 'adds or extends its covering tests in the same task'
+  assert_contains "$tasks_skill" 'and commit'
+  assert_contains "$tasks_skill" 'extending an existing test family is valid'
+  assert_contains "$tasks_skill" 'never an excuse to'
+  assert_contains "$tasks_skill" 'defer local tests'
+  assert_contains "$tasks_skill" 'Tests (integration spanning tasks or stacks only)'
+  assert_contains "$tasks_skill" 'behavioral follow-ups under Reality Check or Ship still need these bindings'
+  assert_contains "$tasks_skill" 'Bindings do not establish semantic coverage'
+  assert_contains "$tasks_skill" '--phase tasks'
+  assert_contains "$tasks_skill" 'warnings at a new task handoff'
+  assert_not_contains "$tasks_skill" 'Tests (happy + error per AC)'
+  # Both phases refer to the same schema rather than repeating its tables.
+  assert_not_contains "$plan_skill" '| ID | Components | Category | Trigger |'
+  assert_not_contains "$tasks_skill" '| ID | Components | Category | Trigger |'
 }
 
 t_run_all

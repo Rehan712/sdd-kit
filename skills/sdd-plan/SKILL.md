@@ -87,12 +87,36 @@ Fill `plan.md` from the template — every section, or an explicit "n/a":
    boundary, so two implementer sessions never negotiate a function shape.
 5. **Dependencies** — packages, AWS resources, IAM.
 6. **Stack overlay notes** — per-tag callouts from overlays + experts.
-7. **Risks** — ranked likelihood × impact, each with a mitigation.
+7. **Risks, failure modes and verification** — ranked likelihood × impact,
+   concrete FM/INV rows, exclusions and typed test families as described below.
 8. **Rollout** — flags, deploy order, observability, how each MET-### gets measured.
 9. **Out of scope** — what came up but won't ship here.
 10. **References** — ADRs, code paths, links.
 
 Name the files, the IAM actions, the metric names. Vague plans produce vague code.
+
+**Define proof before task numbers.** Read the shared
+[`verification contract`](../../templates/verification-contract.md); it owns the
+FM/INV table, verification-kind and locator grammar. Define stable FM-### rows
+for concrete triggering inputs/sequences and their decided behavior. Turn
+always/never promises into INV-### rows naming their scope and every enforcement
+site. Share rows across affected components, register typed test families with
+intended concrete locators, and record inapplicable component/category pairs
+with reasons. Apply the project's stack defaults or explain their exclusion.
+Planning needs no future task IDs or existing future test files; task
+decomposition binds these families to owning tasks later.
+
+Decide which behavioral tests each implementation component adds or extends
+alongside its behavior. Reserve the Tests stage for integration spanning tasks
+or stacks; a later integration owner cannot replace local behavioral proof.
+Bindings locate tests; independent review still judges their assertions and
+attacks covered and omitted scenarios. Choose the project's actual full-suite
+and mandatory static `gate_checks` separately from optional stage checkpoints;
+checkpoint stage membership waits for real task decomposition.
+
+Run `bash ~/.sdd/scripts/sdd-analyze.sh <spec-dir> --phase plan` before handoff.
+Fix errors and authoring warnings in a new plan; do not invent task numbers to
+satisfy task-phase checks. Existing legacy warnings remain advisory.
 
 **Write for the implementation tier.** The tasks this plan spawns may be
 executed by a cheaper model than you (models.yml `implement:` role). Pre-make

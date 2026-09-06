@@ -54,15 +54,32 @@ and passes", "integration test names & covers AC-###", "endpoint returns
 expected JSON") · ***Verify:*** (the exact runnable command + expected key
 output, ready for `spec-run.sh` — or `manual: <what to observe>`; the
 implementer must never have to invent the check) · ***Refs:***
-(REQ-###/AC-### + plan section). Test tasks state that the test **names the
+(REQ-###/AC-###, applicable FM-###/INV-### + plan section). Test tasks state that the test **names the
 AC id** it proves (`spec-ac-coverage.sh` checks it).
+
+**Bind the plan's proof to the behavior task.** Read the shared
+[`verification contract`](../../templates/verification-contract.md); use its
+typed fields and locator grammar without creating another schema here. Assign
+every applicable planned FM/INV row to a non-gate task through Refs. Its Tests
+field names concrete locators from the plan's typed family registry, and Verify
+runs the actual tests or declared behavioral assertion. Keep family and task
+kinds consistent; do not relabel automated proof static/manual to evade a check.
+
+A behavior-changing task adds or extends its covering tests in the same task
+and commit. Name the owned test files in Files and their assertions in
+Acceptance; extending an existing test family is valid. An Integration owner
+names a real later integration task for spanning proof, never an excuse to
+defer local tests. Actual gate reviews and shipping administration are exempt;
+behavioral follow-ups under Reality Check or Ship still need these bindings.
+Bindings do not establish semantic coverage; independent gates inspect the
+assertions and may attack a covered FM/INV row.
 
 Every AC-### must be covered by at least one **implementation** task's Refs —
 gate tasks enumerate every AC by design, so they don't count
 (`sdd-analyze.sh` enforces exactly this).
 
 Stage order (template gives the skeleton): Setup → Backend/domain → API →
-Frontend → Tests (happy + error per AC) → Observability → Docs → Reality
+Frontend → Tests (integration spanning tasks or stacks only) → Observability → Docs → Reality
 Check → Ship. Same-stage tasks on disjoint files get `[P]`.
 
 #### Pre-ship gates (always insert both, in order)
@@ -103,7 +120,10 @@ handing off (AC coverage, ref integrity, acceptance lines, duplicate ids,
 gates resolvable, leftover placeholders, `[NEEDS CLARIFICATION]` markers —
 resolve those with the user, never delete silently). Missing *Verify:* lines
 are warnings so legacy specs stay green — but a tasks.md you just wrote must
-have zero of them.
+have zero of them. Also resolve missing FM/INV ownership and deferred-local-test
+warnings at a new task handoff; warnings remain advisory for legacy specs.
+Use `--phase tasks` when STATUS still names plan, so the new task bindings are
+actually checked instead of only validating the earlier planning artifact.
 
 ### 7. Update STATUS.md
 
