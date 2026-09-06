@@ -263,3 +263,20 @@ Captured acceptance runs, appended by `spec-run.sh`. One block per run.
   ok   test_instruction_contracts
   -- 4/4 passed
 ```
+
+## T009 — 2026-09-06T20:14:57
+
+- **Command:** `bash tests/test-gate-contracts.sh`
+- **Cwd:** /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline
+- **Exit:** 0
+- **Captured:** 2026-09-06T20:14:57 · sha256:43e181334dbe (over full output)
+
+```text
+  ok   test_all_overlay_defaults
+  ok   test_defaults_t006
+  ok   test_defaults_t007
+  ok   test_defaults_t008
+  ok   test_defaults_t009
+  ok   test_instruction_contracts
+  -- 6/6 passed
+```

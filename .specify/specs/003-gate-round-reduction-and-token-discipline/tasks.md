@@ -172,7 +172,7 @@ keeps each edit task to at most five files instead of combining unrelated work.
   - *Integration owner:* T027
   - *Evidence:* `bash tests/test-gate-contracts.sh → -- 4/4 passed (notes/evidence.md, T008, sha256:12499981ed6d); FM-001, → task Tests locators; bootstrap no-tick capture` (2026-09-06)
 
-- [ ] **T009** — Finish defaults and enumerate every overlay
+- [x] **T009** — Finish defaults and enumerate every overlay
   - *Files:* `templates/stack-overlays/monorepo.md`, `templates/stack-overlays/troposphere.md`, `tests/test-gate-contracts.sh` (new in T001)
   - *Acceptance:* Complete AC-002 defaults and add the directory-wide enumeration assertion so all 14 current overlays and any newly shipped overlay must satisfy the contract.
   - *Verify kind:* test
@@ -180,6 +180,7 @@ keeps each edit task to at most five files instead of combining unrelated work.
   - *Verify:* `bash tests/test-gate-contracts.sh` → all suites `passed`, exit 0
   - *Reuse:* local
   - *Refs:* REQ-003, REQ-008, AC-002, FM-001, FM-002, plan §6
+  - *Evidence:* `bash tests/test-gate-contracts.sh → -- 6/6 passed (notes/evidence.md, T009, sha256:43e181334dbe); FM-001,FM-002, → task Tests locators; bootstrap no-tick capture` (2026-09-06)
 
 - [ ] **T010** — Separate compiled-stack expert briefing modes
   - *Files:* `agents/rust-expert.md`, `agents/rust-aws-lambda-expert.md`, `agents/aws-cdk-lambda-ts-expert.md`, `agents/nextjs-expert.md`, `tests/test-gate-contracts.sh` (new in T001)

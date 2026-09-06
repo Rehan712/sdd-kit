@@ -88,4 +88,13 @@ test_defaults_t007() { defaults_contract javascript react bun-monorepo loopback4
 
 test_defaults_t008() { defaults_contract expo-rn firebase-rtk-codegen python aws; }
 
+test_defaults_t009() { defaults_contract monorepo troposphere; }
+
+test_all_overlay_defaults() {
+  local file
+  for file in "$KIT_DIR"/templates/stack-overlays/*.md; do
+    defaults_contract "$(basename "$file" .md)"
+  done
+}
+
 t_run_all
