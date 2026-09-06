@@ -57,6 +57,21 @@ run_rc() {
 
 # --- fixtures -----------------------------------------------------------------
 
+# Authoring fixtures declare illustrative checks; these commands are data for
+# analyzer tests, never fabricated execution proof for the fixture application.
+make_fixture_gate_config() {
+  mkdir -p "$1/.specify"
+  cat > "$1/.specify/stack.yml" <<'EOF'
+stacks: []
+gate_checks:
+  - 'bash tests/check.sh'
+reuse_checks: []
+verification_tools:
+  - 'bash'
+verification_inputs: []
+EOF
+}
+
 # make_spec_dir — a minimal project in $SANDBOX/proj whose one spec passes
 # sdd-analyze.sh cleanly (artifacts, AC coverage, gates, agent files).
 # Echoes the spec dir path.
@@ -64,6 +79,7 @@ make_spec_dir() {
   local proj="$SANDBOX/proj"
   local spec_dir="$proj/.specify/specs/001-test-feature"
   mkdir -p "$spec_dir" "$proj/agents"
+  make_fixture_gate_config "$proj"
   echo "adversarial reviewer stub" > "$proj/agents/opponent.agent.md"
   echo "evidence auditor stub" > "$proj/agents/reality-check.agent.md"
 
@@ -170,6 +186,7 @@ make_verification_spec_dir() {
   local proj="$SANDBOX/$name"
   local spec_dir="$proj/.specify/specs/003-verification-fixture"
   mkdir -p "$spec_dir" "$proj/agents"
+  make_fixture_gate_config "$proj"
   echo "adversarial reviewer stub" > "$proj/agents/opponent.agent.md"
   echo "evidence auditor stub" > "$proj/agents/reality-check.agent.md"
 

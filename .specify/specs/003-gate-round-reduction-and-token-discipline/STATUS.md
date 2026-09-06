@@ -1,7 +1,7 @@
 ---
 spec: 003-gate-round-reduction-and-token-discipline
 phase: implement          # specify | plan | tasks | implement | review | shipped | abandoned
-active_tool: codex        # claude | codex | copilot | none — who currently holds the spec
+active_tool: none        # claude | codex | copilot | none — who currently holds the spec
 branch: spec/003-gate-round-reduction-and-token-discipline            # spec/003-gate-round-reduction-and-token-discipline once cut, else none
 worktree: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline          # absolute path once created, else none
 pr: none                # PR URL once opened — spec-pr.sh writes this itself
@@ -30,10 +30,11 @@ updated: 2026-09-06
 
 ## Where things stand
 
-T001 committed as 897b45b with captured bootstrap acceptance.
-T002 accepted from the hard-task return and fresh 18/18 no-tick capture;
-independent security review is clean. Assigned ShellCheck/diff-check pass.
-T003 is next; T004/T005 are parallel-safe after the T002 commit.
+Stopped at the user's requested handoff point after T003 and its T003f1 fix.
+T001/T002/T003/T003f1 are accepted with captured evidence and clean security
+reviews where required; T003 commit is 9d8099e (T002: 8a0d737).
+T004/T005 remain [~]: prepared, uncommitted source changes; local checks passed.
+Final analyzer: one task-count warning, zero errors. ShellCheck/diff-check pass.
 No gate has started. Reuse remains disabled until T023.
 Linux Docker image and macOS Bash 3.2 execution routes are ready for T027.
 
@@ -84,15 +85,18 @@ Append-only, newest last. Each entry: `date — decision — rationale / who dec
 
 ## Handoff note
 
-Resume from the guarded spec worktree, not the original untracked main copy.
-T002 is accepted; notes/evidence.md holds the fresh 10:41:22 18/18 no-tick
-capture (sha256:20ac89cdff35). Worker/security returns are in notes/history.md.
-The 12-field NUL catalog is documented in verification-lib.sh. The live plan
-registry now has an explicit Kind column matching the normative grammar.
-See notes/history.md for the quota interruption, file ownership and platform route.
-T003/T004/T005 may run in parallel only after T002 is accepted/committed.
+Use the worktree above; the untracked original spec copy on main is stale.
+T004 owns skills/sdd-plan, skills/sdd-tasks and tests/test-gate-contracts.sh;
+T005 owns the four golden-example documents and tests/test-golden-example.sh.
+Their changes are saved but not accepted: finish from the diff, capture exact
+Verify with --no-tick, inspect FM/INV mappings and commit each task separately.
+Local T004/T005 checks passed 1/1 and 3/3; no acceptance was fabricated.
+T003 config catalogs and the original 12-field bindings catalog are documented
+in verification-lib.sh. See notes/history.md for schemas, evidence and quota
+events. Reuse/carry remain disabled; platform-matrix verification is still T027.
 
 ## Next action
 
-Continue T003 configuration parsing, then remaining tasks in dependency order.
-Existing stop-point is T032; T033/T034 are post-merge.
+On a new resume request, reconcile and accept T004, then T005; next is T006.
+Do not automatically resume: user requested a stop. T030/T031 gates and T032
+Open PR are pending; T033/T034 remain post-merge.

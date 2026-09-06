@@ -104,15 +104,16 @@ keeps each edit task to at most five files instead of combining unrelated work.
   - *Refs:* REQ-007, REQ-008, AC-011, AC-023, FM-006, FM-011, plan §3.1, §4.1, §6
   - *Evidence:* `bash tests/test-verification.sh → -- 1/1 passed (notes/evidence.md, T003 2026-09-06T19:54:05, sha256:ce28c7d7bf6a); FM-006/FM-011 → tests/test-verification.sh::test_config_grammar; bootstrap no-tick capture; independent security clean (notes/history.md)` (2026-09-06)
 
-- [~] **T003f1** — Keep authoring fixtures valid under gate configuration
-  - *Files:* `tests/helpers.sh`, `tests/test-sdd-analyze.sh`
-  - *Acceptance:* Existing clean authoring fixtures declare their illustrative gate list; new-contract and legacy regressions still pass, and removing legacy configuration explicitly warns without failing.
+- [x] **T003f1** — Keep authoring fixtures valid under gate configuration
+  - *Files:* `tests/helpers.sh`, `tests/test-sdd-analyze.sh`, `scripts/verification-lib.sh`
+  - *Acceptance:* Existing clean authoring fixtures declare their illustrative gate list; missing legacy configuration warns without failing; exact test ownership accepts supported new-file annotations while rejecting lookalike paths.
   - *Verify kind:* test
   - *Tests:* `tests/test-sdd-analyze.sh::test_verification_bindings`
   - *Verify:* `bash tests/test-sdd-analyze.sh` → all suites `passed`, exit 0
   - *Reuse:* local
-  - *Refs:* REQ-007, AC-011, AC-023, FM-002, plan §3.1, §7
+  - *Refs:* REQ-005, REQ-007, AC-006, AC-011, AC-023, FM-002, plan §3.1, §7
   - *Notes:* Required sibling fixture adjustment discovered during T003 integration; no shipped spec rewrite or weakening of missing-configuration checks.
+  - *Evidence:* `bash tests/test-sdd-analyze.sh → -- 18/18 passed (notes/evidence.md, T003f1 2026-09-06T19:56:35, sha256:20ac89cdff35); FM-002 → tests/test-sdd-analyze.sh::test_verification_bindings; configured legacy/new fixtures and exact annotated Files ownership; independent security clean` (2026-09-06)
 
 - [~] **T004** [P] — Teach planning and task-local test ownership
   - *Depends on:* T002

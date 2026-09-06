@@ -77,3 +77,26 @@ bit failure on the T002 library; executable mode is now fixed and that suite
 rerun passed 1/1. This is local evidence, not T027 platform-matrix clearance.
 Integration also exposed annotated Files ownership false warnings; the necessary
 T003f1 companion completes that correction with authoring fixture compatibility.
+
+## Stop-point / T003f1 — 2026-09-06
+
+T003f1 supplies explicit gate lists to the clean authoring fixtures, preserves
+legacy missing-list warnings, and corrects exact Files ownership for the
+documented '(new)' / '(new in T###)' annotations. Lookalike .backup paths still
+fail ownership. Capture 2026-09-06T19:56:35: test-sdd-analyze 18/18 passed,
+exit 0, sha256:20ac89cdff35; FM-002 maps to test_verification_bindings.
+The independent security reviewer rechecked the final parser delta and returned
+STATUS: clean. Final config rerun 1/1, T004 instruction check 1/1, and T005 golden
+check 3/3 passed. All scripts/tests warning-level ShellCheck and diff-check passed.
+Live analyzer has exactly one task-count warning (35 tasks), zero errors.
+
+T004/T005 were edited in the allowed parallel batch before the stop request.
+Their changes remain uncommitted and [~]; they have local checks but no captured
+acceptance or completion receipts. No editing agent remains active.
+T004 files: skills/sdd-plan/SKILL.md, skills/sdd-tasks/SKILL.md,
+tests/test-gate-contracts.sh. T005 files: templates/examples/001-api-key-expiry/
+spec.md, plan.md, tasks.md, README.md; tests/test-golden-example.sh.
+On resume, reconcile those diffs and run their exact no-tick Verify commands,
+then accept/commit separately. Do not restart T002/T003 or use the main checkout.
+No gates, push, PR, global installation or private-clone port occurred.
+User explicitly requested stopping here; STATUS active_tool is none.

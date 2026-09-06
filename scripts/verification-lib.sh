@@ -538,7 +538,9 @@ vf_bindings() { # <spec-dir> <plan|tasks|through-stage> <stage-or-empty> <output
       function files_has(files,want,    a,n,i,path) {
         n=split(files,a,/,/)
         for (i=1;i<=n;i++) {
-          path=strip_ticks(a[i])
+          path=trim(a[i])
+          sub(/[[:space:]]+\(new( in T[0-9][0-9][0-9][a-z0-9]*)?\)$/, "", path)
+          path=strip_ticks(path)
           if (path==want) return 1
         }
         return 0

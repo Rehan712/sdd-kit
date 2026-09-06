@@ -204,6 +204,15 @@ test_verification_bindings() {
   run_rc 0 bash -c '. "$1"; printf "%s %s %s %s\n" "$VF_SCHEMA" "$VF_SUCCESS_BYTES" "$VF_FAILURE_BYTES" "$VF_DIAGNOSTIC_LINES"' _ "$SCRIPTS/verification-lib.sh"
   assert_eq '1 2048 8192 20' "$OUT" 'AC-004: public contract constants'
 
+  # AC-011/AC-023: clean fixtures declare checks. A missing legacy list is an
+  # explicit gap, never an error or a claim that the application suite ran.
+  fixture="$(make_spec_dir)"
+  run_rc 0 "$ANALYZE" "$fixture"
+  assert_contains "$OUT" consistent 'AC-023: configured legacy authoring stays clean'
+  rm "$fixture/../../stack.yml"
+  run_rc 0 "$ANALYZE" "$fixture"
+  assert_contains "$OUT" 'legacy configuration has no gate_checks' 'AC-011: missing legacy checks warn'
+
   # AC-001: plan-phase input has no task inventory, task IDs or files yet.
   spec_dir="$(make_verification_spec_dir planning)"
   rm "$spec_dir/tasks.md"
@@ -289,6 +298,13 @@ test_verification_bindings() {
   verification_edit_fixture "$spec_dir/tasks.md" 's/`src\/parser.sh`, `tests\/check.sh`/`src\/parser.sh`, `tests\/check.sh.backup`/'
   run_rc 0 "$ANALYZE" "$spec_dir"
   assert_contains "$OUT" 'defers all local coverage' 'AC-006: Files ownership uses an exact path token'
+
+  for value in '(new)' '(new in T002)'; do
+    spec_dir="$(make_verification_spec_dir annotated-files)"
+    verification_edit_fixture "$spec_dir/tasks.md" "s|\`tests/check.sh\`|\`tests/check.sh\` $value|"
+    run_rc 0 "$ANALYZE" "$spec_dir"
+    assert_not_contains "$OUT" 'defers all local coverage' 'AC-006: supported new-file annotation retains exact ownership'
+  done
 
   # AC-006: neither the Ship stage nor an Agent field can exempt a defect fix.
   spec_dir="$(make_verification_spec_dir followup)"
