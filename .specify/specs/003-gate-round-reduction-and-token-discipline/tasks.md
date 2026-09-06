@@ -161,7 +161,7 @@ keeps each edit task to at most five files instead of combining unrelated work.
   - *Integration owner:* T027
   - *Evidence:* `bash tests/test-gate-contracts.sh → -- 3/3 passed (notes/evidence.md, T007, sha256:2d2aa9369d48); FM-001, → task Tests locators; bootstrap no-tick capture` (2026-09-06)
 
-- [ ] **T008** — Add mobile and platform-stack defaults
+- [x] **T008** — Add mobile and platform-stack defaults
   - *Files:* `templates/stack-overlays/expo-rn.md`, `templates/stack-overlays/firebase-rtk-codegen.md`, `templates/stack-overlays/python.md`, `templates/stack-overlays/aws.md`, `tests/test-gate-contracts.sh` (new in T001)
   - *Acceptance:* Extend AC-002 cases with stack-specific boundary/state/failure prompts and useful checkpoint commands for all four overlays rather than generic copied rows.
   - *Verify kind:* test
@@ -170,6 +170,7 @@ keeps each edit task to at most five files instead of combining unrelated work.
   - *Reuse:* local
   - *Refs:* REQ-003, REQ-008, AC-002, FM-001, plan §6
   - *Integration owner:* T027
+  - *Evidence:* `bash tests/test-gate-contracts.sh → -- 4/4 passed (notes/evidence.md, T008, sha256:12499981ed6d); FM-001, → task Tests locators; bootstrap no-tick capture` (2026-09-06)
 
 - [ ] **T009** — Finish defaults and enumerate every overlay
   - *Files:* `templates/stack-overlays/monorepo.md`, `templates/stack-overlays/troposphere.md`, `tests/test-gate-contracts.sh` (new in T001)

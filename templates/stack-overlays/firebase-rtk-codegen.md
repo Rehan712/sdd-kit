@@ -61,3 +61,21 @@ Don't try to read tokens from localStorage manually; let Firebase SDK manage ref
 
 - Mock the API surface with **`msw`** + the generated types; don't mock at the `fetch` level.
 - For Firebase: use the **Firebase Emulator Suite** for Auth + Firestore in CI; never test against production.
+
+## Failure-mode and checkpoint defaults
+
+Use the [verification contract](../verification-contract.md). Fill applicable
+scenario prompts as concrete FM/INV rows with test families in the plan; record
+explicit exclusions with a component/category and reason. Shared scenarios use
+one row listing all affected components.
+
+- Boundary: expired tokens and cross-user Firebase reads fail in emulator security-rule tests before any write.
+- State/data integrity: a mutation invalidates the declared RTK Query tags, including lists and detail cache entries.
+- Regression: change the OpenAPI response schema, regenerate clients, and test consumers against the new contract with no handwritten generated fields.
+
+Optional `checkpoints` use exact authored task-stage names: run the focused
+component tests when its stage finishes and integration after consumers land.
+Start from `npm test -- --run`, adapting to existing project scripts and test scope.
+Required `gate_checks` separately cover the full suite (`npm test -- --run`)
+and mandatory static checks (`npm run codegen; npm run typecheck`); checkpoints never replace that list.
+Commands here are planning defaults, not an assertion that a project has them.

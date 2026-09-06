@@ -86,4 +86,6 @@ test_defaults_t006() { defaults_contract rust rust-aws-lambda nextjs aws-cdk-lam
 
 test_defaults_t007() { defaults_contract javascript react bun-monorepo loopback4; }
 
+test_defaults_t008() { defaults_contract expo-rn firebase-rtk-codegen python aws; }
+
 t_run_all
