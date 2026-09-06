@@ -32,7 +32,7 @@ updated: 2026-09-06
 
 Implementation resumed in Codex on the spec branch/worktree above.
 Preflight analyzer: one task-count warning, zero errors; no prior code edits.
-34 tasks; bootstrap T001 next. Reuse stays disabled until T023.
+T001 complete with captured bootstrap proof; T002 analyzer is next. Reuse stays disabled until T023.
 Local macOS Bash 3.2 and Docker Linux engine are available for AC-019;
 actual platform suite/ShellCheck captures remain pending T027.
 

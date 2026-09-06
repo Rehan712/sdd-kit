@@ -2,7 +2,7 @@
 tasks_for: 003-gate-round-reduction-and-token-discipline
 status: in-progress  # draft | in-progress | complete
 created: 2026-09-05
-updated: 2026-09-05
+updated: 2026-09-06
 ---
 
 # Tasks: Gate round reduction and token discipline
@@ -72,7 +72,7 @@ keeps each edit task to at most five files instead of combining unrelated work.
 
 ## Setup
 
-- [ ] **T001** — Define the versioned verification authoring contract
+- [x] **T001** — Define the versioned verification authoring contract
   - *Files:* `templates/verification-contract.md` (new), `templates/spec-template.md`, `templates/plan-template.md`, `tests/test-gate-contracts.sh` (new)
   - *Acceptance:* Add AC-001/AC-004 schema assertions for the single grammar, opt-in marker, concrete FM/INV rows, exclusions and phase-correct examples; reference later runtime cases without claiming they already pass.
   - *Verify kind:* test
@@ -81,6 +81,7 @@ keeps each edit task to at most five files instead of combining unrelated work.
   - *Reuse:* local
   - *Refs:* REQ-002, REQ-004, REQ-005, AC-001, AC-004, FM-001, INV-005, plan §3.1, §4.4
   - *Integration owner:* T027
+  - *Evidence:* `bash tests/test-gate-contracts.sh → -- 1/1 passed (notes/evidence.md, T001 2026-09-06T02:28:16, sha256:8d191b7cf017); FM-001 and INV-005 → tests/test-gate-contracts.sh::test_instruction_contracts; bootstrap no-tick capture` (2026-09-06)
 
 - [ ] **T002** [hard] — Validate phase-aware failure and test bindings
   - *Files:* `scripts/verification-lib.sh` (new), `scripts/sdd-analyze.sh`, `templates/tasks-template.md`, `tests/test-sdd-analyze.sh`, `tests/helpers.sh`
