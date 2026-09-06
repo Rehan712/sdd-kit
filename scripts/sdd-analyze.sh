@@ -23,7 +23,7 @@
 # Run it: at the end of /sdd:tasks, in /sdd:implement pre-flight, or any time.
 #
 # Usage:
-#   sdd-analyze.sh <spec-dir>     # e.g. .../.specify/specs/004-foo
+#   sdd-analyze.sh <spec-dir> [--phase plan|tasks]
 #   sdd-analyze.sh --help
 #
 # Exit: 0 = clean (warnings allowed), 1 = errors found, 2 = usage.
@@ -32,12 +32,26 @@ set -uo pipefail
 
 HUB_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 . "$HUB_DIR/scripts/lib.sh"
+. "$HUB_DIR/scripts/verification-lib.sh"
 
 usage() { usage_from_header "$0"; exit 0; }
 
 [[ "${1:-}" == "--help" || "${1:-}" == "-h" ]] && usage
 SPEC_DIR="${1:-}"
-[[ -z "$SPEC_DIR" || ! -d "$SPEC_DIR" ]] && { echo "usage: sdd-analyze.sh <spec-dir>" >&2; exit 2; }
+[[ -z "$SPEC_DIR" || ! -d "$SPEC_DIR" ]] && { echo "usage: sdd-analyze.sh <spec-dir> [--phase plan|tasks]" >&2; exit 2; }
+shift
+phase_override=""
+while (( $# )); do
+  case "$1" in
+    --phase)
+      shift; phase_override="${1:-}"
+      [[ "$phase_override" == plan || "$phase_override" == tasks ]] \
+        || { echo "--phase must be plan or tasks" >&2; exit 2; }
+      ;;
+    *) echo "unknown argument: $1" >&2; exit 2 ;;
+  esac
+  shift
+done
 SPEC_DIR="$(cd "$SPEC_DIR" && pwd)"
 
 init_colors
@@ -46,12 +60,64 @@ pass() { echo "  ${GREEN}✓${RESET} $1"; }
 fail() { echo "  ${RED}✗${RESET} $1"; errors=$((errors+1)); }
 warn() { echo "  ${YELLOW}!${RESET} $1"; warnings=$((warnings+1)); }
 
+finish() {
+  echo "---"
+  if (( errors == 0 && warnings == 0 )); then
+    echo "${GREEN}consistent${RESET} — spec/plan/tasks line up"
+    exit 0
+  elif (( errors == 0 )); then
+    echo "${YELLOW}$warnings warning(s)${RESET}, 0 errors"
+    exit 0
+  else
+    echo "${RED}$errors error(s)${RESET}, $warnings warning(s)"
+    exit 1
+  fi
+}
+
+check_bindings() { # <plan|tasks>
+  local mode="$1" diag catalog rc=0 saw_error=0 line
+  diag="$(mktemp "${TMPDIR:-/tmp}/sdd-analyze-bindings.XXXXXX" 2>/dev/null)" || {
+    fail "cannot create verification binding diagnostics file"
+    return
+  }
+  catalog="$(mktemp "${TMPDIR:-/tmp}/sdd-analyze-catalog.XXXXXX" 2>/dev/null)" || {
+    rm -f "$diag"; fail "cannot create verification binding catalog file"; return
+  }
+  vf_bindings "$SPEC_DIR" "$mode" "" "$catalog" 2> "$diag" || rc=$?
+  while IFS= read -r line; do
+    case "$line" in
+      error:*) saw_error=1; fail "verification contract: ${line#error: }" ;;
+      warning:*) warn "verification contract: ${line#warning: }" ;;
+      ?*) saw_error=1; fail "verification binding parser: $line" ;;
+    esac
+  done < "$diag"
+  if (( rc != 0 && saw_error == 0 )); then
+    fail "verification binding parser failed with exit $rc"
+  elif (( rc == 0 )); then
+    if [[ -n "$(fm_get "$spec" verification_contract)" ]]; then
+      pass "verification contract bindings valid for $mode phase"
+    else
+      pass "legacy verification contract remains compatible"
+    fi
+  fi
+  rm -f "$diag" "$catalog"
+}
+
 spec="$SPEC_DIR/spec.md"; plan="$SPEC_DIR/plan.md"; tasks="$SPEC_DIR/tasks.md"; status="$SPEC_DIR/STATUS.md"
+
+if [[ -n "$phase_override" ]]; then
+  analysis_phase="$phase_override"
+else
+  status_phase="$(fm_get "$status" phase)"
+  case "$status_phase" in specify|plan) analysis_phase=plan ;; *) analysis_phase=tasks ;; esac
+fi
 
 echo "Analyzing: $SPEC_DIR"
 
 # --- 1. artifacts present ---
-for f in "$spec" "$plan" "$tasks" "$status"; do
+required_artifacts=("$spec" "$plan")
+[[ "$analysis_phase" == tasks ]] && required_artifacts+=("$tasks" "$status")
+for f in "${required_artifacts[@]}"; do
   [[ -f "$f" ]] && pass "$(basename "$f") present" || fail "$(basename "$f") missing"
 done
 (( errors > 0 )) && { echo "---"; echo "${RED}$errors error(s)${RESET} — fix missing artifacts first"; exit 1; }
@@ -64,6 +130,26 @@ if [[ -n "$nc" ]]; then
   fail "unresolved [NEEDS CLARIFICATION] marker(s) — resolve before tasking/implementing:"$'\n'"$(echo "$nc" | sed 's/^/      /')"
 else
   pass "no unresolved [NEEDS CLARIFICATION] markers"
+fi
+
+# Plan mode deliberately stops before task IDs, future test files, gates and
+# task ownership. It validates only the upstream definitions that tasking will
+# consume. STATUS merely chooses the default mode; an explicit plan override
+# does not require STATUS or tasks.md to exist.
+if [[ "$analysis_phase" == plan ]]; then
+  spec_acs=$(grep -oE 'AC-[0-9]{3}' "$spec" | sort -u)
+  spec_reqs=$(grep -oE 'REQ-[0-9]{3}' "$spec" | sort -u)
+  [[ -z "$spec_acs" ]] && fail "spec.md defines no AC-### ids" || pass "spec.md defines $(echo "$spec_acs" | wc -l | tr -d ' ') AC id(s)"
+  [[ -z "$spec_reqs" ]] && warn "spec.md defines no REQ-### ids"
+  unref=""
+  for req in $spec_reqs; do
+    grep -q "$req" "$plan" || unref="$unref $req"
+  done
+  [[ -n "$unref" ]] && warn "REQ(s) not referenced by plan.md:$unref"
+  check_bindings plan
+  leftovers=$(grep -nE '<(Title|Spec Title|One-line title|role|name|handle|slug)>|NNN-slug' "$spec" "$plan" 2>/dev/null | grep -v 'template' | head -5 || true)
+  [[ -n "$leftovers" ]] && warn "template placeholders remain:"$'\n'"$(echo "$leftovers" | sed 's/^/      /')"
+  finish
 fi
 
 # --- 1c. external dependencies mirrored in STATUS ---
@@ -167,6 +253,19 @@ tmp="$(mktemp "${TMPDIR:-/tmp}/sdd-analyze.XXXXXX" 2>/dev/null)" \
   || { echo "  ${RED}✗${RESET} cannot create a temp file under ${TMPDIR:-/tmp}"; exit 1; }
 trap 'rm -f "$tmp"' EXIT
 awk -v RED="$RED" -v YELLOW="$YELLOW" -v RESET="$RESET" '
+  function verify_command(s, rest,close_pos) {
+    sub(/^.*\*Verify:\*[[:space:]]*/,"",s)
+    if (substr(s,1,1)!="`") return ""
+    rest=substr(s,2); close_pos=index(rest,"`")
+    if (close_pos<=1) return ""
+    return substr(rest,1,close_pos-1)
+  }
+  function weak_verify(s, low) {
+    low=tolower(verify_command(s))
+    if (low ~ /(^|[[:space:]\/])(test|tests)([[:space:]\/.:_-]|$)/ ||
+        low ~ /node[[:space:]]+--test|cargo[[:space:]]+test|pytest|bats/) return 0
+    return low ~ /(^|[[:space:]])(grep|rg|diff)([[:space:]]|$)|typecheck|tsc[[:space:]]+--noemit|(^|[[:space:]])[^[:space:]]*build([[:space:]]|$)|test[[:space:]]+-[ef][[:space:]]/
+  }
   function flush() {
     if (id == "") return
     if (!has_acc) {
@@ -179,6 +278,9 @@ awk -v RED="$RED" -v YELLOW="$YELLOW" -v RESET="$RESET" '
     if (!has_ver && !is_gate && !oos && stage != "Ship") {
       printf "  %s!%s task %s has no *Verify:* line (exact command, or manual: <what to observe>)\n", YELLOW, RESET, id; warns++
     }
+    if (has_ver && !has_kind && refs_text ~ /AC-[0-9][0-9][0-9]/ && weak_verify(verify_text)) {
+      printf "  %s!%s task %s has an untyped AC Verify that offers only build/typecheck/text-presence evidence\n", YELLOW, RESET, id; warns++
+    }
     if (is_done && !has_ev && !is_gate && stage != "Ship") {
       printf "  %s!%s task %s is [x] but has no *Evidence:* line — a ticked box without evidence is an unproven claim\n", YELLOW, RESET, id; warns++
     }
@@ -189,15 +291,17 @@ awk -v RED="$RED" -v YELLOW="$YELLOW" -v RESET="$RESET" '
     flush()
     match($0, /T[0-9]{3}[a-z0-9]*/); id = substr($0, RSTART, RLENGTH)
     subj = $0
-    has_acc=0; has_refs=0; has_ev=0; has_ver=0; is_gate=0
+    has_acc=0; has_refs=0; has_ev=0; has_ver=0; has_kind=0; is_gate=0
+    refs_text=""; verify_text=""
     is_done = ($0 ~ /^- \[[xX]\]/) ? 1 : 0
     oos = ($0 ~ /OUT OF .*SCOPE/) ? 1 : 0
     if (seen[id]++) { printf "  %s✗%s duplicate task id %s\n", RED, RESET, id; errs++ }
     next
   }
   /\*Acceptance[^*]*:\*/ || /\*Done:\*/ { has_acc=1 }
-  /\*Refs:\*/ { has_refs=1 }
-  /\*Verify:\*/ { has_ver=1 }
+  /\*Refs:\*/ { has_refs=1; refs_text=$0 }
+  /\*Verify kind:\*/ { has_kind=1 }
+  /\*Verify:\*/ { has_ver=1; verify_text=$0 }
   /\*Evidence[^*]*:\*/ { has_ev=1 }
   /\*Agent:\*/ { is_gate=1; if (id != "") printf "AGENTLINE\t%s\t%s\t%s\n", id, subj, $0 }
   END {
@@ -214,6 +318,9 @@ read -r _ tcount terrs twarns <<< "${task_summary:-TASKCOUNTS 0 0 0}"
 errors=$((errors + terrs)); warnings=$((warnings + twarns))
 (( tcount > 0 )) && pass "$tcount task(s) parsed" || fail "no tasks parsed from tasks.md"
 (( tcount > 25 )) && warn "$tcount tasks — past the ~25 guideline; consider splitting the spec"
+
+# --- 6b. versioned FM/INV/family/task bindings ---
+check_bindings tasks
 
 # --- 7. pre-ship gates present, Agent: files exist ---
 # Project root = the ancestor holding .specify (spec dir is <root>/.specify/specs/NNN-slug).
@@ -257,14 +364,4 @@ rm -f "$tmp"
 leftovers=$(grep -nE '<(Title|Spec Title|One-line title|role|name|handle|slug)>|NNN-slug' "$spec" "$tasks" 2>/dev/null | grep -v 'template' | head -5 || true)
 [[ -n "$leftovers" ]] && warn "template placeholders remain:"$'\n'"$(echo "$leftovers" | sed 's/^/      /')"
 
-echo "---"
-if (( errors == 0 && warnings == 0 )); then
-  echo "${GREEN}consistent${RESET} — spec/plan/tasks line up"
-  exit 0
-elif (( errors == 0 )); then
-  echo "${YELLOW}$warnings warning(s)${RESET}, 0 errors"
-  exit 0
-else
-  echo "${RED}$errors error(s)${RESET}, $warnings warning(s)"
-  exit 1
-fi
+finish

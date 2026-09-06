@@ -162,4 +162,201 @@ test_stray_repo_tags_without_umbrella_warn() {
   assert_contains "$OUT" "spec.md declares no repos:" "tags without umbrella are flagged"
 }
 
+# Each mutation changes an authored contract, then observes the public analyzer
+# or binding API. No source-text match substitutes for parser behavior.
+verification_edit_fixture() {
+  sed "$2" "$1" > "$1.tmp" && mv "$1.tmp" "$1"
+}
+
+test_verification_bindings() {
+  local spec_dir catalog value fields index record_types mapped_one=0 mapped_two=0
+  local fixture shipped shipped_count=0
+
+  # AC-001/AC-003/AC-004: concrete shared rows and every explicit proof kind
+  # are valid at task handoff even before their planned test files exist.
+  spec_dir="$(make_verification_spec_dir clean)"
+  run_rc 0 "$ANALYZE" "$spec_dir"
+  assert_contains "$OUT" 'consistent' 'AC-004: shell/custom/static/manual family kinds'
+  [[ ! -e "$spec_dir/../../../tests/check.sh" ]] || t_fail 'AC-001: fixture unexpectedly contains future tests'
+  catalog="$SANDBOX/catalog.nul"
+  run_rc 0 bash -c '. "$1"; vf_bindings "$2" tasks "" "$3"' _ \
+    "$SCRIPTS/verification-lib.sh" "$spec_dir" "$catalog"
+  fields=()
+  while IFS= read -r -d '' value; do fields+=("$value"); done < "$catalog"
+  assert_eq 0 "$((${#fields[@]} % 12))" 'AC-003: catalog records have exactly twelve fields'
+  assert_eq meta "${fields[0]:-}" 'AC-003: catalog starts with schema identity'
+  assert_eq 1 "${fields[1]:-}" 'AC-003: schema is versioned'
+  record_types=' '
+  for ((index=0; index<${#fields[@]}; index+=12)); do
+    record_types="$record_types${fields[index]} "
+    if [[ "${fields[index]}" == binding && "${fields[index+1]}" == FM-001 ]]; then
+      case "${fields[index+2]}:${fields[index+5]}:${fields[index+6]}:${fields[index+7]}" in
+        T001:test:shell-family:tests/check.sh::test_ac_001_shared) mapped_one=1 ;;
+        T002:assertion:assertion-family:scripts/check-contract.sh::assert_ac_002_contract) mapped_two=1 ;;
+      esac
+    fi
+  done
+  for value in meta definition family task test binding; do
+    assert_contains "$record_types" " $value " "AC-003: typed $value record"
+  done
+  assert_eq 1 "$mapped_one" 'AC-003: shared FM binds the actual shell family'
+  assert_eq 1 "$mapped_two" 'AC-003: shared FM also binds the actual assertion family'
+  run_rc 0 bash -c '. "$1"; printf "%s %s %s %s\n" "$VF_SCHEMA" "$VF_SUCCESS_BYTES" "$VF_FAILURE_BYTES" "$VF_DIAGNOSTIC_LINES"' _ "$SCRIPTS/verification-lib.sh"
+  assert_eq '1 2048 8192 20' "$OUT" 'AC-004: public contract constants'
+
+  # AC-001: plan-phase input has no task inventory, task IDs or files yet.
+  spec_dir="$(make_verification_spec_dir planning)"
+  rm "$spec_dir/tasks.md"
+  verification_edit_fixture "$spec_dir/STATUS.md" 's/phase: tasks/phase: plan/'
+  run_rc 0 "$ANALYZE" "$spec_dir"
+  assert_contains "$OUT" consistent 'AC-001: STATUS selects planning without tasks'
+  rm "$spec_dir/STATUS.md"
+  run_rc 0 "$ANALYZE" "$spec_dir" --phase plan
+  assert_contains "$OUT" consistent 'AC-001: explicit plan phase needs only spec and plan'
+  run_rc 1 "$ANALYZE" "$spec_dir" --phase tasks
+  assert_contains "$OUT" 'tasks.md missing' 'AC-003: task handoff requires decomposition'
+
+  # AC-003: duplicate definitions and dangling refs fail, independently of
+  # the well-formed surrounding shared bindings.
+  for value in FM-001 INV-001; do
+    spec_dir="$(make_verification_spec_dir "duplicate-$value")"
+    awk -v id="$value" 'index($0,"| " id " | ")==1 {print} {print}' \
+      "$spec_dir/plan.md" > "$spec_dir/plan.md.tmp" && mv "$spec_dir/plan.md.tmp" "$spec_dir/plan.md"
+    run_rc 1 "$ANALYZE" "$spec_dir"
+    assert_contains "$OUT" "duplicate failure/invariant definition $value" 'AC-003: duplicate definitions fail'
+  done
+  spec_dir="$(make_verification_spec_dir dangling-ref)"
+  verification_edit_fixture "$spec_dir/tasks.md" 's/AC-001, FM-001/AC-001, FM-099/'
+  run_rc 1 "$ANALYZE" "$spec_dir"
+  assert_contains "$OUT" 'undefined failure/invariant FM-099' 'AC-003: an ID mention cannot define a row'
+  spec_dir="$(make_verification_spec_dir dangling-family)"
+  verification_edit_fixture "$spec_dir/plan.md" 's/| shell-family, assertion-family |/| absent-family |/'
+  run_rc 1 "$ANALYZE" "$spec_dir"
+  assert_contains "$OUT" 'undefined verification family absent-family' 'AC-003: row families must resolve'
+  spec_dir="$(make_verification_spec_dir traversing-locator)"
+  verification_edit_fixture "$spec_dir/plan.md" 's|tests/check.sh::test_ac_001_shared|tests/../../outside.sh::test_ac_001_shared|'
+  run_rc 1 "$ANALYZE" "$spec_dir"
+  assert_contains "$OUT" 'malformed concrete locator' 'AC-003: locator files cannot traverse outside the repository'
+  spec_dir="$(make_verification_spec_dir nul-plan)"
+  {
+    printf '\0'
+    awk 'BEGIN { for (i=0; i<1000000; i++) printf "a" }'
+    cat "$spec_dir/plan.md"
+  } > "$spec_dir/plan.md.tmp" && mv "$spec_dir/plan.md.tmp" "$spec_dir/plan.md"
+  run_rc 1 "$ANALYZE" "$spec_dir"
+  assert_contains "$OUT" 'plan.md contains a NUL byte' 'AC-003: large catalog inputs cannot hide NUL via pipefail'
+
+  # AC-004: explicit malformed schemas are not silently treated as legacy.
+  spec_dir="$(make_verification_spec_dir missing-kind-column)"
+  verification_edit_fixture "$spec_dir/plan.md" 's/| Family | Kind | Criteria | Concrete locators |/| Family | Criteria | Concrete locators |/'
+  run_rc 1 "$ANALYZE" "$spec_dir"
+  assert_contains "$OUT" 'malformed verification registry header' 'AC-004: kinds cannot be inferred from prose'
+  spec_dir="$(make_verification_spec_dir invalid-kind)"
+  verification_edit_fixture "$spec_dir/plan.md" 's/| shell-family | test |/| shell-family | build |/'
+  run_rc 1 "$ANALYZE" "$spec_dir"
+  assert_contains "$OUT" 'invalid kind' 'AC-004: only defined proof kinds are accepted'
+  spec_dir="$(make_verification_spec_dir unknown-version)"
+  verification_edit_fixture "$spec_dir/spec.md" 's/verification_contract: 1/verification_contract: 2/'
+  run_rc 1 "$ANALYZE" "$spec_dir"
+  assert_contains "$OUT" 'unsupported verification_contract' 'AC-023: explicit unknown version is an error'
+  spec_dir="$(make_verification_spec_dir wrong-task-kind)"
+  verification_edit_fixture "$spec_dir/tasks.md" 's/Verify kind:\* test/Verify kind:* manual/'
+  run_rc 1 "$ANALYZE" "$spec_dir"
+  assert_contains "$OUT" 'conflicts with family' 'AC-004: automated proof cannot be relabeled manual'
+
+  # AC-001/AC-003: incompleteness warns at the right phase; it never invents
+  # behavioral proof or retroactively converts legacy specs into new ones.
+  spec_dir="$(make_verification_spec_dir placeholder-plan)"
+  verification_edit_fixture "$spec_dir/plan.md" 's/Reject the binding before execution/<decided behavior>/'
+  run_rc 0 "$ANALYZE" "$spec_dir" --phase plan
+  assert_contains "$OUT" 'placeholder' 'AC-001: unfinished decided behavior warns'
+  run_rc 0 "$ANALYZE" "$spec_dir" --phase tasks
+  assert_contains "$OUT" 'placeholder' 'AC-001: task handoff preserves the placeholder warning classification'
+  assert_not_contains "$OUT" 'undefined failure/invariant FM-001' 'AC-003: a placeholder row is not a dangling ID'
+  spec_dir="$(make_verification_spec_dir unassigned-row)"
+  verification_edit_fixture "$spec_dir/tasks.md" 's/AC-003, FM-002/AC-003/'
+  run_rc 0 "$ANALYZE" "$spec_dir"
+  assert_contains "$OUT" 'FM-002 has no non-gate task owner' 'AC-003: unassigned applicable row warns'
+
+  # AC-006: retaining a later integration owner does not excuse deleting
+  # all of the behavior task's local test ownership.
+  spec_dir="$(make_verification_spec_dir deferred-tests)"
+  verification_edit_fixture "$spec_dir/tasks.md" 's/`src\/parser.sh`, `tests\/check.sh`/`src\/parser.sh`/'
+  run_rc 0 "$ANALYZE" "$spec_dir"
+  assert_contains "$OUT" 'defers all local coverage' 'AC-006: missing local ownership warns'
+  assert_contains "$OUT" 'Integration owner does not excuse local tests' 'AC-006: later task is not a local-proof exemption'
+  spec_dir="$(make_verification_spec_dir similar-test-path)"
+  verification_edit_fixture "$spec_dir/tasks.md" 's/`src\/parser.sh`, `tests\/check.sh`/`src\/parser.sh`, `tests\/check.sh.backup`/'
+  run_rc 0 "$ANALYZE" "$spec_dir"
+  assert_contains "$OUT" 'defers all local coverage' 'AC-006: Files ownership uses an exact path token'
+
+  # AC-006: neither the Ship stage nor an Agent field can exempt a defect fix.
+  spec_dir="$(make_verification_spec_dir followup)"
+  cat >> "$spec_dir/tasks.md" <<'EOF'
+
+- [ ] **T009o1** — Fix the parser regression
+  - *Files:* `src/parser.sh`
+  - *Agent:* agents/opponent.agent.md
+  - *Acceptance:* Reject the reproduced malformed binding.
+  - *Refs:* AC-001, FM-001
+EOF
+  run_rc 1 "$ANALYZE" "$spec_dir"
+  assert_contains "$OUT" 'T009o1 has no *Verify kind:*' 'AC-006: Agent-bearing follow-up requires typed proof'
+  cat >> "$spec_dir/tasks.md" <<'EOF'
+  - *Verify kind:* test
+  - *Tests:* `tests/check.sh::test_ac_001_shared`
+  - *Verify:* `bash tests/check.sh` → passed
+EOF
+  verification_edit_fixture "$spec_dir/tasks.md" 's/`src\/parser.sh`$/`src\/parser.sh`, `tests\/check.sh`/'
+  run_rc 0 "$ANALYZE" "$spec_dir"
+  assert_contains "$OUT" consistent 'AC-006: a typed follow-up with its covering test passes'
+
+  # AC-001/AC-003: fenced/quoted examples are not definitions, and ordinary
+  # table grammar does not depend on a particular section title.
+  spec_dir="$(make_verification_spec_dir quoted-examples)"
+  cat >> "$spec_dir/plan.md" <<'EOF'
+
+```markdown
+### Failure modes
+| ID | Components | Category | Trigger | Decided behavior | Test families |
+|---|---|---|---|---|---|
+| FM-001 | fake | boundary | quoted example | does not define a row | missing-family |
+```
+
+> | FM-001 | fake | boundary | quoted example | does not define a row | missing-family |
+EOF
+  run_rc 0 "$ANALYZE" "$spec_dir"
+  assert_contains "$OUT" consistent 'AC-003: quoted/fenced examples do not add definitions'
+
+  # AC-004: real shell runners remain valid; an untyped build/text-only
+  # command warns even if its displayed expected output says tests passed.
+  for fixture in build text; do
+    spec_dir="$(make_spec_dir)"
+    if [[ "$fixture" == build ]]; then
+      verification_edit_fixture "$spec_dir/tasks.md" 's/`node --test test\/thing.test.js`/`npm run build`/'
+    else
+      verification_edit_fixture "$spec_dir/tasks.md" 's/`node --test test\/thing.test.js`/`grep AC-001 README.md`/'
+    fi
+    run_rc 0 "$ANALYZE" "$spec_dir"
+    assert_contains "$OUT" 'untyped AC Verify' 'AC-004: weak untyped command warns without breaking legacy'
+  done
+  spec_dir="$(make_spec_dir)"
+  verification_edit_fixture "$spec_dir/tasks.md" 's/`node --test test\/thing.test.js`/`bash tests\/check.sh`/'
+  run_rc 0 "$ANALYZE" "$spec_dir"
+  assert_not_contains "$OUT" 'untyped AC Verify' 'AC-004: shell test runners need no framework wrapper'
+
+  # AC-023: run the actual shipped artifacts unchanged in an isolated project
+  # with local persona stubs so the test does not depend on an installed hub.
+  for shipped in "$KIT_DIR"/.specify/specs/001-* "$KIT_DIR"/.specify/specs/002-*; do
+    [[ -d "$shipped" ]] || continue
+    shipped_count=$((shipped_count+1))
+    spec_dir="$(make_spec_dir)"
+    for value in spec.md plan.md tasks.md STATUS.md; do cp "$shipped/$value" "$spec_dir/$value"; done
+    verification_edit_fixture "$spec_dir/tasks.md" 's|~/.sdd/agents/|agents/|g'
+    run_rc 0 "$ANALYZE" "$spec_dir"
+    assert_contains "$OUT" 'legacy verification contract remains compatible' 'AC-023: shipped artifact compatibility is not current freshness'
+  done
+  assert_eq 2 "$shipped_count" 'AC-023: both shipped specs were actually checked'
+}
+
 t_run_all

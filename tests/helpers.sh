@@ -161,6 +161,161 @@ EOF
   echo "$spec_dir"
 }
 
+# make_verification_spec_dir [name] — a new-contract fixture with concrete,
+# shared FM/INV rows and one family/task for each verification kind. Files and
+# literals are declarations only at task handoff; acceptance owns their later
+# existence checks.
+make_verification_spec_dir() {
+  local name="${1:-verification-proj}"
+  local proj="$SANDBOX/$name"
+  local spec_dir="$proj/.specify/specs/003-verification-fixture"
+  mkdir -p "$spec_dir" "$proj/agents"
+  echo "adversarial reviewer stub" > "$proj/agents/opponent.agent.md"
+  echo "evidence auditor stub" > "$proj/agents/reality-check.agent.md"
+
+  cat > "$spec_dir/spec.md" <<'EOF'
+---
+spec_id: 003-verification-fixture
+project: verification-proj
+verification_contract: 1
+---
+# Spec: Verification fixture
+
+## Goals
+
+- REQ-001 — run the shell test
+- REQ-002 — run the custom behavioral assertion
+- REQ-003 — check the static schema
+- REQ-004 — record the release observation
+
+## Acceptance criteria
+
+- AC-001 — the shared boundary behavior has an executable shell test
+- AC-002 — a custom command proves the second shared behavior
+- AC-003 — the documentation schema is statically checked
+- AC-004 — the release artifact is observed by a human
+EOF
+
+  cat > "$spec_dir/plan.md" <<'EOF'
+---
+plan_for: 003-verification-fixture
+---
+# Plan: Verification fixture
+
+REQ-001, REQ-002, REQ-003 and REQ-004 use the families below.
+
+## Risks, failure modes and verification
+
+| ID | Components | Category | Trigger | Decided behavior | Test families |
+|---|---|---|---|---|---|
+| FM-001 | parser, runner | boundary | A shared malformed binding reaches either component | Reject the binding before execution | shell-family, assertion-family |
+| FM-002 | docs | regression | The documented schema drifts | Fail the static schema check | static-family |
+
+| ID | Scope | Promise | Enforcement sites | Test families |
+|---|---|---|---|---|
+| INV-001 | release | Every manual result names its artifact | Release checklist | manual-family |
+
+Exclusions: docs / concurrency/ordering — documentation has no shared mutable state.
+
+| Family | Kind | Criteria | Concrete locators |
+|---|---|---|---|
+| shell-family | test | AC-001 | `tests/check.sh::test_ac_001_shared` |
+| assertion-family | assertion | AC-002 | `scripts/check-contract.sh::assert_ac_002_contract` |
+| static-family | static | AC-003 | `tests/static.sh::test_ac_003_schema` |
+| manual-family | manual | AC-004 | release-observation |
+| integration-family | test | AC-001, AC-002 | `tests/integration.sh::test_ac_001_002_integration` |
+EOF
+
+  cat > "$spec_dir/STATUS.md" <<'EOF'
+---
+spec: 003-verification-fixture
+phase: tasks
+branch: none
+---
+# Status
+
+## Blockers
+
+(none)
+EOF
+
+  cat > "$spec_dir/tasks.md" <<'EOF'
+---
+tasks_for: 003-verification-fixture
+status: draft
+---
+# Tasks: Verification fixture
+
+## Backend
+
+- [ ] **T001** — Cover the shared shell boundary
+  - *Files:* `src/parser.sh`, `tests/check.sh`
+  - *Acceptance:* Add and pass the shared boundary shell test.
+  - *Verify kind:* test
+  - *Tests:* `tests/check.sh::test_ac_001_shared`
+  - *Verify:* `bash tests/check.sh` → passed
+  - *Reuse:* local
+  - *Refs:* REQ-001, AC-001, FM-001
+  - *Integration owner:* T005
+
+- [ ] **T002** — Cover the shared custom assertion
+  - *Files:* `src/runner.sh`, `scripts/check-contract.sh`
+  - *Acceptance:* Add and pass the custom behavioral assertion.
+  - *Verify kind:* assertion
+  - *Tests:* `scripts/check-contract.sh::assert_ac_002_contract`
+  - *Verify:* `bash scripts/check-contract.sh` → passed
+  - *Refs:* REQ-002, AC-002, FM-001
+  - *Integration owner:* T005
+
+## Docs
+
+- [ ] **T003** — Check the static schema
+  - *Files:* `docs/schema.md`, `tests/static.sh`
+  - *Acceptance:* Add and pass the static documentation schema check.
+  - *Verify kind:* static
+  - *Tests:* `tests/static.sh::test_ac_003_schema`
+  - *Verify:* `bash tests/static.sh` → passed
+  - *Refs:* REQ-003, AC-003, FM-002
+
+- [ ] **T004** — Observe the release artifact
+  - *Files:* `artifacts/release.txt`
+  - *Acceptance:* Record the observer and digest for the release artifact.
+  - *Verify kind:* manual
+  - *Tests:* release-observation
+  - *Verify:* `manual: inspect the release artifact and record its digest`
+  - *Refs:* REQ-004, AC-004, INV-001
+
+## Tests
+
+- [ ] **T005** — Compose the cross-task integration
+  - *Files:* `tests/integration.sh`
+  - *Acceptance:* Add and pass the parser/runner integration test.
+  - *Verify kind:* test
+  - *Tests:* `tests/integration.sh::test_ac_001_002_integration`
+  - *Verify:* `bash tests/integration.sh` → passed
+  - *Refs:* REQ-001, REQ-002, AC-001, AC-002
+
+## Reality Check (pre-ship gate)
+
+- [ ] **T009** — Opponent review
+  - *Agent:* agents/opponent.agent.md
+  - *Acceptance:* agent returns CLEARED
+  - *Refs:* AC-001, AC-002, AC-003, AC-004
+
+- [ ] **T010** — Reality-check
+  - *Agent:* agents/reality-check.agent.md
+  - *Acceptance:* agent returns READY
+  - *Refs:* AC-001, AC-002, AC-003, AC-004
+
+## Ship
+
+- [ ] **T011** — Open the PR
+  - *Acceptance:* PR URL recorded
+EOF
+
+  echo "$spec_dir"
+}
+
 # tag_task <tasks.md> <T###> <repo> — add a [repo:<name>] tag to one task line.
 tag_task() {
   local f="$1" id="$2" repo="$3"

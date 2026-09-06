@@ -83,7 +83,7 @@ keeps each edit task to at most five files instead of combining unrelated work.
   - *Integration owner:* T027
   - *Evidence:* `bash tests/test-gate-contracts.sh → -- 1/1 passed (notes/evidence.md, T001 2026-09-06T02:28:16, sha256:8d191b7cf017); FM-001 and INV-005 → tests/test-gate-contracts.sh::test_instruction_contracts; bootstrap no-tick capture` (2026-09-06)
 
-- [ ] **T002** [hard] — Validate phase-aware failure and test bindings
+- [x] **T002** [hard] — Validate phase-aware failure and test bindings
   - *Files:* `scripts/verification-lib.sh` (new), `scripts/sdd-analyze.sh`, `templates/tasks-template.md`, `tests/test-sdd-analyze.sh`, `tests/helpers.sh`
   - *Acceptance:* Implement vf_bindings and typed task fields with AC-001/AC-003/AC-004/AC-006/AC-023 fixtures for shared/duplicate/dangling IDs, phase boundaries, valid shell/custom/static/manual kinds, deferred local coverage, proof-required behavioral follow-ups and unchanged shipped-spec exit 0.
   - *Verify kind:* test
@@ -91,6 +91,7 @@ keeps each edit task to at most five files instead of combining unrelated work.
   - *Verify:* `bash tests/test-sdd-analyze.sh` → all suites `passed`, exit 0
   - *Reuse:* local
   - *Refs:* REQ-002, REQ-004, REQ-005, AC-001, AC-003, AC-004, AC-006, AC-023, FM-001, FM-002, FM-003, INV-005, plan §3.1, §4.1
+  - *Evidence:* `bash tests/test-sdd-analyze.sh → -- 18/18 passed (notes/evidence.md, T002 2026-09-06T10:41:22, sha256:20ac89cdff35); FM-001/FM-002/FM-003/INV-005 → tests/test-sdd-analyze.sh::test_verification_bindings; bootstrap no-tick worker return accepted; independent security clean (notes/history.md)` (2026-09-06)
 
 - [ ] **T003** [P] [hard] — Parse verification commands without losing arguments
   - *Depends on:* T002

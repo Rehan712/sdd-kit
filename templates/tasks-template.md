@@ -11,19 +11,33 @@ updated: YYYY-MM-DD
 
 **Conventions:**
 
+- Use the [verification contract](verification-contract.md) as the single
+  grammar for typed verification, FM/INV references and plan-family locators.
+  Planning defines families without task IDs; decomposition assigns the
+  non-gate tasks that own each applicable row. Do not invent another grammar.
 - `T###` is the task ID. Reference from commit messages and PR descriptions.
 - *Files:* lists the paths the task touches.
 - *Acceptance:* the observable check that says the task is done.
+- *Verify kind:* declares the kind from the plan's registered family.
+- *Tests:* names concrete locators from that family; *Refs:* includes every
+  required FM/INV ID as well as the AC/REQ and plan section.
+- **Tests travel with behavior.** Add or extend the covering test in the same
+  task and commit as the implementation. Include its file in *Files:* and its
+  behavioral assertion in *Acceptance:*. A later integration owner does not
+  excuse missing local proof. Tests-stage tasks compose cross-task/stack work.
+- *Reuse:* is optional; default `never`. Choose `local` only for deterministic
+  checks with completely declared inputs. *Integration owner:* optionally
+  names a real later integration task for a named spanning criterion.
 - *Evidence:* appended when acceptance passes — the exact command + its key
   output line + date, e.g. `` `bun test api` → 14 passed (2026-07-04) ``.
-  **A box is never ticked without it.** For any check the tooling can run,
-  produce the evidence with `~/.sdd/scripts/spec-run.sh <spec-dir> T### --
-  <command>` — it runs the command, captures the real output (+exit +hash) into
-  `notes/evidence.md`, and ticks the box from that run. A bare
-  `~/.sdd/scripts/spec-task.sh done <spec-dir> T### --evidence "…"` (tick +
-  evidence, one atomic edit) is for manually-verified ACs. Exemption: gate and
-  Ship tasks — their evidence is the gate report in `notes/` or the PR URL, so
-  no *Evidence:* line is required there.
+  **A box is never ticked without it.** New-contract workers capture without
+  ticking; the invoker validates their returns before attaching evidence and
+  ticking through `spec-gate.sh accept` (verification contract). A manual
+  criterion requires its declared artifact observation; it cannot exempt an
+  automated check. Legacy captures retain their established readable format.
+  Actual gate review and Ship administration use their report or PR artifact.
+  Behavioral follow-ups still require typed tests, refs and captured proof,
+  including tasks placed in Reality Check or Ship or given an *Agent:* field.
 - *Verify:* the exact runnable command that proves the task, with the key
   output to expect — `` *Verify:* `bun test --filter keys` → "14 passed" `` —
   ready to paste into `spec-run.sh <spec-dir> T### --key '<key>' -- <command>`.
@@ -31,6 +45,9 @@ updated: YYYY-MM-DD
   Required on every non-gate, non-Ship task; `sdd-analyze.sh` warns where it's
   missing. (*Acceptance:* states the outcome; *Verify:* is the exact check —
   a weaker implementer must never have to invent the command.)
+  Missing ownership and untyped build/typecheck/text-only AC proof warn;
+  malformed kinds, duplicate definitions and dangling refs are errors.
+  A newly authored task list has zero test-ownership or Verify warnings.
 - Tasks that can run in parallel are marked `[P]` after the ID.
 - Tasks that need frontier reasoning are marked `[hard]` after the ID (marker
   order: `**T###** [P] [hard] [repo:name]`). Tag at decompose time: novel
@@ -61,30 +78,43 @@ updated: YYYY-MM-DD
 - [ ] **T001** — Add dependencies and scaffolding
   - *Files:* `package.json` (or equivalent)
   - *Acceptance:* `bun install` / `pnpm install` / `cargo build` succeeds
+  - *Verify kind:* assertion
+  - *Tests:* <registered setup assertion locator for this criterion>
   - *Verify:* `bun install` → "done" (or the stack's equivalent)
+  - *Refs:* <setup REQ/AC and applicable plan FM/INV rows>
 
 ## Backend (or "Domain layer")
 
 - [ ] **T002** — <name>
-  - *Files:* `src/...`
-  - *Acceptance:* unit test added, passes
+  - *Files:* `src/...`, <covering test file>
+  - *Acceptance:* behavior and its local test added or extended in this task; test passes
+  - *Verify kind:* test
+  - *Tests:* <repo-relative-file::literal-test-name from the plan registry>
   - *Verify:* `bun test src/...` → "<n> pass"
-  - *Refs:* REQ-001, REQ-002 (from spec)
+  - *Refs:* REQ-001, AC-001, FM-001, INV-001, plan §7 (replace with assigned rows)
 
 - [ ] **T003** [P] — <name>
-  - *Files:* `src/...`
-  - *Acceptance:* ...
+  - *Files:* `src/...`, <covering test file>
+  - *Acceptance:* <behavior and same-task added/extended assertion>
+  - *Verify kind:* assertion
+  - *Tests:* <registered custom behavioral assertion locator>
   - *Verify:* `<command>` → "<key output>"
+  - *Refs:* <AC/REQ and applicable plan FM/INV rows>
 
 ## Frontend (if applicable)
 
 - [ ] **T004** — <name>
-  - *Files:* `apps/web/...`
-  - *Acceptance:* component renders; manual smoke OK at 375px and 1280px
-  - *Verify:* `manual: screenshots at 375px and 1280px match the mock`
+  - *Files:* `apps/web/...`, `tests/ui.spec.ts`
+  - *Acceptance:* add/extend component assertions at 375px and 1280px in this task
+  - *Verify kind:* test
+  - *Tests:* `tests/ui.spec.ts::AC-001 responsive component`
+  - *Verify:* `bunx playwright test tests/ui.spec.ts` → passed
+  - *Refs:* <UI AC/REQ and applicable plan FM/INV rows>
 
 ## Tests
 
+> Only integration spanning tasks or stacks remains here; each implementation
+> task already owns its local happy/error/boundary tests in the same commit.
 > Each test **names the AC id it proves** in its title/description (e.g.
 > `it('AC-001: …')`) so the binding is checkable at the code layer —
 > `~/.sdd/scripts/spec-ac-coverage.sh <spec-dir>` fails any AC no test names.
@@ -92,26 +122,38 @@ updated: YYYY-MM-DD
 - [ ] **T005** — Integration test for happy path
   - *Files:* `tests/...`
   - *Acceptance:* CI green; test names AC-001
+  - *Verify kind:* test
+  - *Tests:* <registered cross-task integration locator>
   - *Verify:* `bun test tests/...` → "AC-001" in a passing test title
+  - *Refs:* <integration AC/REQ and applicable plan FM/INV rows>
 
 - [ ] **T006** — Integration test for error path
   - *Files:* `tests/...`
   - *Acceptance:* test names AC-002
+  - *Verify kind:* test
+  - *Tests:* <registered cross-task error integration locator>
   - *Verify:* `bun test tests/...` → "AC-002" in a passing test title
+  - *Refs:* <integration AC/REQ and applicable plan FM/INV rows>
 
 ## Observability
 
 - [ ] **T007** — Add metric / log / dashboard
-  - *Files:* `infra/...`, `src/...`
-  - *Acceptance:* metric visible in CloudWatch (or equivalent) on next deploy
+  - *Files:* `infra/...`, `src/...`, <covering metric test file>
+  - *Acceptance:* add/extend the local metric-emission test; name a post-deploy owner for the live observation
+  - *Verify kind:* test
+  - *Tests:* <registered metric-emission test locator>
   - *Verify:* `<unit test asserting the emit>` → "<n> pass" (the live metric is the [DEPLOY] half)
+  - *Refs:* <metric AC/REQ and applicable plan FM/INV rows>
 
 ## Docs
 
 - [ ] **T008** — Update README / API docs
   - *Files:* `README.md`, `docs/...`
   - *Acceptance:* every documented command/example in the diff actually runs (paste one); links resolve; the feature's spec ACs are reflected
-  - *Verify:* `<the documented command>` → "<its documented output>"
+  - *Verify kind:* manual
+  - *Tests:* <plan-declared documentation artifact observation name>
+  - *Verify:* `manual: record the documented example's observed result, observer, UTC and artifact digest`
+  - *Refs:* <explicitly manual documentation criterion and applicable FM/INV rows>
 
 ## Reality Check (pre-ship gate)
 

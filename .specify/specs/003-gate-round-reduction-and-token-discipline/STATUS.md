@@ -30,11 +30,12 @@ updated: 2026-09-06
 
 ## Where things stand
 
-Implementation resumed in Codex on the spec branch/worktree above.
-Preflight analyzer: one task-count warning, zero errors; no prior code edits.
-T001 complete with captured bootstrap proof; T002 analyzer is next. Reuse stays disabled until T023.
-Local macOS Bash 3.2 and Docker Linux engine are available for AC-019;
-actual platform suite/ShellCheck captures remain pending T027.
+T001 committed as 897b45b with captured bootstrap acceptance.
+T002 accepted from the hard-task return and fresh 18/18 no-tick capture;
+independent security review is clean. Assigned ShellCheck/diff-check pass.
+T003 is next; T004/T005 are parallel-safe after the T002 commit.
+No gate has started. Reuse remains disabled until T023.
+Linux Docker image and macOS Bash 3.2 execution routes are ready for T027.
 
 ## Decisions log
 
@@ -70,6 +71,10 @@ Append-only, newest last. Each entry: `date — decision — rationale / who dec
 - 2026-09-06 — User invoked /sdd:implement --all and explicitly requested continuation here; run in this Codex session without provider/model handoff. Spec and plan acceptance remains in force; task list accepted for execution. Use required hard-task and independent gate roles locally.
 - 2026-09-06 — Authored spec docs were untracked on main; copied them intact to the guarded spec worktree for the initial spec-branch commit, preserving the original checkout. Normal stop-point is T032 Open PR; T033/T034 remain post-merge.
 
+- 2026-09-06 — Normalized plan verification registry to the explicit Family/Kind/Criteria/Concrete locators columns: all kinds were already decided as test in adjacent prose. This is a downstream schema correction, not a requirement or test-ownership change; parser will not infer kind from prose.
+
+- 2026-09-06 — T002 hard-task agent hit its usage limit before final return. Parent preserved partial work and captured exact Verify (18/18 passed), with targeted ShellCheck/diff-check clean; task remains in-progress and uncommitted pending delegated completion/security review. Stopped per the invoked workflow; no fabricated acceptance or later dispatch.
+
 ## Open questions / blockers
 
 - [ ] (@Rehan712, non-blocking) Which governed project's next spec is the first MET-001 measurement point.
@@ -77,15 +82,15 @@ Append-only, newest last. Each entry: `date — decision — rationale / who dec
 
 ## Handoff note
 
-Start from tasks.md's execution contract and accepted plan seams.
-T001–T018 bootstrap the tooling; T019 enables deterministic accept, T023
-enables validated reuse, T026 supplies live-probe fixtures, and T029–T031
-provide real worker/gate observations. No tasks are ticked or implementation
-tests claimed by tasking. Worktree creation belongs to /sdd:implement.
-The current analyzer does not implement the new FM/INV grammar yet; the
-tasking pass also checks those bindings directly without altering scripts.
-After T032, /sdd:review owns CI/feedback/merge; private parity remains post-merge.
+Resume from the guarded spec worktree, not the original untracked main copy.
+T002 is accepted; notes/evidence.md holds the fresh 10:41:22 18/18 no-tick
+capture (sha256:20ac89cdff35). Worker/security returns are in notes/history.md.
+The 12-field NUL catalog is documented in verification-lib.sh. The live plan
+registry now has an explicit Kind column matching the normative grammar.
+See notes/history.md for the quota interruption, file ownership and platform route.
+T003/T004/T005 may run in parallel only after T002 is accepted/committed.
 
 ## Next action
 
-Execute T001–T029 in dependency order, independent T030/T031 gates, then T032 PR.
+Continue T003 configuration parsing, then remaining tasks in dependency order.
+Existing stop-point is T032; T033/T034 are post-merge.
