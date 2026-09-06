@@ -193,7 +193,7 @@ keeps each edit task to at most five files instead of combining unrelated work.
   - *Integration owner:* T027
   - *Evidence:* `bash tests/test-gate-contracts.sh → -- 7/7 passed (notes/evidence.md, T010, sha256:1b5b3a1a0af0); FM-004,FM-005, → task Tests locators; bootstrap no-tick capture` (2026-09-06)
 
-- [ ] **T011** — Separate application expert briefing modes
+- [x] **T011** — Separate application expert briefing modes
   - *Files:* `agents/javascript-expert.md`, `agents/react-expert.md`, `agents/bun-monorepo-expert.md`, `agents/loopback4-expert.md`, `tests/test-gate-contracts.sh` (new in T001)
   - *Acceptance:* Extend AC-014 cases for the four personas, preserving planning authority while requiring implementation omission/conflict reporting instead of re-deriving supplied decisions.
   - *Verify kind:* test
@@ -202,6 +202,7 @@ keeps each edit task to at most five files instead of combining unrelated work.
   - *Reuse:* local
   - *Refs:* REQ-014, AC-014, FM-004, FM-005, plan §2, §6
   - *Integration owner:* T027
+  - *Evidence:* `bash tests/test-gate-contracts.sh → -- 8/8 passed (notes/evidence.md, T011, sha256:8d8e94845058); FM-004,FM-005, → task Tests locators; bootstrap no-tick capture` (2026-09-06)
 
 - [ ] **T012** — Separate platform expert briefing modes
   - *Files:* `agents/aws-expert.md`, `agents/python-expert.md`, `agents/expo-rn-expert.md`, `agents/firebase-rtk-codegen-expert.md`, `tests/test-gate-contracts.sh` (new in T001)

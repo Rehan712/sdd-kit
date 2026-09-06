@@ -119,4 +119,8 @@ test_briefs_t010() {
   brief_contract "$KIT_DIR/agents/rust-expert.md" "$KIT_DIR/agents/rust-aws-lambda-expert.md" "$KIT_DIR/agents/aws-cdk-lambda-ts-expert.md" "$KIT_DIR/agents/nextjs-expert.md"
 }
 
+test_briefs_t011() {
+  brief_contract "$KIT_DIR/agents/javascript-expert.md" "$KIT_DIR/agents/react-expert.md" "$KIT_DIR/agents/bun-monorepo-expert.md" "$KIT_DIR/agents/loopback4-expert.md"
+}
+
 t_run_all
