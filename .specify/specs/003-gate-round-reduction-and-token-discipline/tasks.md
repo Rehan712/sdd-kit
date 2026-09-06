@@ -182,7 +182,7 @@ keeps each edit task to at most five files instead of combining unrelated work.
   - *Refs:* REQ-003, REQ-008, AC-002, FM-001, FM-002, plan §6
   - *Evidence:* `bash tests/test-gate-contracts.sh → -- 6/6 passed (notes/evidence.md, T009, sha256:43e181334dbe); FM-001,FM-002, → task Tests locators; bootstrap no-tick capture` (2026-09-06)
 
-- [ ] **T010** — Separate compiled-stack expert briefing modes
+- [x] **T010** — Separate compiled-stack expert briefing modes
   - *Files:* `agents/rust-expert.md`, `agents/rust-aws-lambda-expert.md`, `agents/aws-cdk-lambda-ts-expert.md`, `agents/nextjs-expert.md`, `tests/test-gate-contracts.sh` (new in T001)
   - *Acceptance:* Add AC-014 assertions for planning consultation versus authoritative implementation slices, revision/binding fields, existing-slice recovery and higher-priority-rule precedence in all four personas.
   - *Verify kind:* test
@@ -191,6 +191,7 @@ keeps each edit task to at most five files instead of combining unrelated work.
   - *Reuse:* local
   - *Refs:* REQ-014, AC-014, FM-004, FM-005, plan §2, §6
   - *Integration owner:* T027
+  - *Evidence:* `bash tests/test-gate-contracts.sh → -- 7/7 passed (notes/evidence.md, T010, sha256:1b5b3a1a0af0); FM-004,FM-005, → task Tests locators; bootstrap no-tick capture` (2026-09-06)
 
 - [ ] **T011** — Separate application expert briefing modes
   - *Files:* `agents/javascript-expert.md`, `agents/react-expert.md`, `agents/bun-monorepo-expert.md`, `agents/loopback4-expert.md`, `tests/test-gate-contracts.sh` (new in T001)

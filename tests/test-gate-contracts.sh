@@ -97,4 +97,26 @@ test_all_overlay_defaults() {
   done
 }
 
+# AC-014: mode instructions retain planning judgment and bound implementation
+# context without removing independent gate access or higher-priority rules.
+brief_contract() {
+  local file text
+  for file in "$@"; do
+    text="$(cat "$file")"
+    assert_contains "$text" '**Planning consultation:**'
+    assert_contains "$text" '**Implementation:**'
+    assert_contains "$text" 'Source revision:'
+    assert_contains "$text" 'required FM/INV'
+    assert_contains "$text" 'missing slice; only a new decision changes the plan'
+    assert_contains "$text" 'Higher-priority instructions and project-local rules prevail'
+    assert_contains "$text" '--from-task --no-tick --summary'
+    assert_contains "$text" 'workers never tick tasks'
+    assert_not_contains "$text" "Read the task's spec/plan refs, then"
+  done
+}
+
+test_briefs_t010() {
+  brief_contract "$KIT_DIR/agents/rust-expert.md" "$KIT_DIR/agents/rust-aws-lambda-expert.md" "$KIT_DIR/agents/aws-cdk-lambda-ts-expert.md" "$KIT_DIR/agents/nextjs-expert.md"
+}
+
 t_run_all
