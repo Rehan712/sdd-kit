@@ -97,4 +97,16 @@ test_unknown_task_and_bad_usage() {
   assert_contains "$(cat "$spec_dir/tasks.md")" "updated: 2026-01-01" "no mutation on any failure"
 }
 
+# AC-022: proof-bearing follow-ups cannot hide behind a Ship/Agent exemption.
+test_versioned_done_guard() {
+  local spec
+  spec="$(make_verification_git_dir guard)"
+  sed 's/## Backend/## Ship/' "$spec/tasks.md" > "$SANDBOX/tasks"
+  cp "$SANDBOX/tasks" "$spec/tasks.md"
+  run_rc 3 "$SCRIPTS/spec-task.sh" "done" "$spec" T001 --evidence 'typed claim'
+  assert_contains "$OUT" 'requires spec-gate accept'
+  assert_contains "$(cat "$spec/tasks.md")" '- [ ] **T001**'
+  run_rc 2 "$SCRIPTS/spec-task.sh" "done" "$spec" '../outside' --evidence 'typed claim'
+}
+
 t_run_all

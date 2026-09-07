@@ -264,7 +264,9 @@ capture_validity_cases() {
   run_rc 3 capture_check_fixture "$spec" "$cap" "$SANDBOX/current" current
   mv "$SANDBOX/log" "$spec/notes/captures/$cap/output.log"
   # AC-023: historical completion survives a stale proof rejection.
-  run_rc 0 "$SCRIPTS/spec-task.sh" "done" "$spec" T001 --evidence "$cap captured passing test"
+  # Seed historical completion, as if accepted before the guarded writer existed.
+  sed 's/^- \[ \] \*\*T001\*\*/- [x] **T001**/' "$spec/tasks.md" > "$SANDBOX/historical-tasks"
+  cp "$SANDBOX/historical-tasks" "$spec/tasks.md"
   before="$(cat "$spec/tasks.md")"
   printf 'value=bad\n' > "$repo/src/parser.sh"
   run_rc 0 capture_check_fixture "$spec" "$cap" '' integrity

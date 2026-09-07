@@ -619,7 +619,7 @@ vf_bindings() { # <spec-dir> <plan|tasks|through-stage> <stage-or-empty> <output
       function flush(    exempt,followup,reuse,owner,i) {
         if (id=="") return
         followup=(id ~ /^T[0-9][0-9][0-9][oascr][0-9]+$/)
-        exempt=!followup && (has_agent || task_stage=="Ship")
+        exempt=!followup && !field_seen["Verify kind"] && (has_agent || task_stage=="Ship")
         if (!exempt) {
           if (!field_seen["Refs"]) diag("error","task " id " has no *Refs:* binding field")
           if (!field_seen["Verify kind"]) diag("error","task " id " has no *Verify kind:* field")
@@ -939,7 +939,7 @@ vf_publish() {
 # Exclusions are generated paths only, never entire notes/.specify directories.
 vf_bookkeeping_path() {
   case "$1" in
-    .specify/specs/*/notes/captures/*|.specify/specs/*/notes/verification/*|.specify/specs/*/notes/evidence.md|.specify/specs/*/notes/opponent.md|.specify/specs/*/notes/reality-check.md) return 0;;
+    .specify/specs/*/.tasks.accept.*|.specify/specs/*/notes/captures/*|.specify/specs/*/notes/verification/*|.specify/specs/*/notes/evidence.md|.specify/specs/*/notes/opponent.md|.specify/specs/*/notes/reality-check.md) return 0;;
   esac
   return 1
 }
@@ -1246,3 +1246,199 @@ vf_evidence_current() (
   done < <(bash "$(dirname -- "${BASH_SOURCE[0]}")/spec-task.sh" list "$spec")
   echo 'current evidence: all completed task checks have valid current captures'
 )
+# Parse only an explicit return block. All emitted records have four NUL fields.
+vf_return_parse() {
+  _vf_reject_nul "$1" "$1" || return 3
+  [[ "$(wc -c < "$1")" -le 65536 ]] || { echo 'return exceeds 64 KiB' >&2; return 3; }
+  awk '
+    function err(s) {print "return: " s > "/dev/stderr"; bad=1}
+    function trim(s) {sub(/^[ ]+/,"",s); sub(/[ ]+$/,"",s); return s}
+    function rec(a,b,c,d) {printf "%s%c%s%c%s%c%s%c",a,0,b,0,c,0,d,0}
+    /^Verification-Return:/ {if(started++) err("duplicate block"); if($0!="Verification-Return: 1") err("unsupported version"); next}
+    !started {next}
+    /^Task: / {if(task++) err("duplicate Task"); rec("task",substr($0,7),"",""); next}
+    /^Captures: / {if(caps++) err("duplicate Captures"); rec("captures",substr($0,11),"",""); next}
+    /^Summary: / {summaries++; rec("summary",substr($0,10),"",""); next}
+    /^Manual observation: / {if(manual++) err("duplicate manual observation"); rec("manual",substr($0,21),"",""); next}
+    /^Failure modes:/ {if(modes++) err("duplicate Failure modes"); if($0=="Failure modes: none") rec("none","","",""); else if($0!="Failure modes:") err("malformed Failure modes"); next}
+    /^[ ]*$/ {next}
+    modes && /^(FM|INV)-[0-9][0-9][0-9],/ {
+      if(split($0,a,",")!=3) err("mapping needs ID, locator, capture")
+      else rec("mapping",trim(a[1]),trim(a[2]),trim(a[3])); next
+    }
+    {err("unexpected field or malformed mapping")}
+    END {if(!started || task!=1 || caps!=1 || modes!=1 || !summaries) err("incomplete verification return"); if(bad) exit 3}
+  ' "$1" > "$2"
+}
+
+vf_return_check() (
+  local spec="$1" task="$2" return_file="$3" receipt="$4" tmp repo v i found summary f=() cap ids=() summaries=() mappings=() manual='' none=0 name path digest observer utc result extra before
+  [[ -f "$return_file" && ! -L "$return_file" ]] || { echo 'return file missing or linked' >&2; return 3; }
+  spec="$(cd "$spec" && pwd -P)" || return 3
+  repo="$(git -C "$spec" rev-parse --show-toplevel)" || return 3
+  tmp="$(mktemp -d "$spec/notes/verification/return.XXXXXX")" || return 3
+  trap 'rm -rf "$tmp"' EXIT
+  vf_binding_snapshot "$spec" "$tmp/bindings" || return 3
+  vf_task_info "$tmp/bindings" "$task" || return 3
+  before="$(vf_snapshot "$spec" "$repo" "$repo" "$tmp/inputs")" || return 3
+  vf_return_parse "$return_file" "$tmp/return" || return 3
+  while IFS= read -r -d '' v; do
+    f+=("$v"); (( ${#f[@]} == 4 )) || continue
+    case "${f[0]}" in
+      task) [[ "${f[1]}" == "$task" ]] || { echo 'return: wrong task' >&2; return 3; };;
+      captures)
+        if [[ "${f[1]}" != none ]]; then
+          IFS=',' read -r -a ids <<< "${f[1]}"
+          for ((i=0;i<${#ids[@]};i++)); do ids[i]="$(printf '%s' "${ids[i]}" | sed 's/^ *//;s/ *$//')"; done
+        fi;;
+      summary) summaries+=("${f[1]}");;
+      manual) manual="${f[1]}";;
+      none) none=1;;
+      mapping) mappings+=("${f[1]}" "${f[2]}" "${f[3]}");;
+    esac
+    f=()
+  done < "$tmp/return"
+  : > "$tmp/required"
+  while IFS= read -r -d '' v; do
+    f+=("$v"); (( ${#f[@]} == 12 )) || continue
+    if [[ "${f[0]}" == binding && "${f[2]}" == "$task" ]]; then printf '%s\t%s\n' "${f[1]}" "${f[7]}" >> "$tmp/required"; fi
+    f=()
+  done < "$tmp/bindings"
+  LC_ALL=C sort -u "$tmp/required" > "$tmp/want"
+  if [[ -s "$tmp/want" ]]; then (( none == 0 && ${#mappings[@]} > 0 )) || { echo 'return: required Failure modes are missing' >&2; return 3; }
+  else (( none == 1 && ${#mappings[@]} == 0 )) || { echo 'return: empty required set must explicitly be none' >&2; return 3; }; fi
+  if [[ "${VF_TASK[5]}" == manual ]]; then
+    [[ ${#ids[@]} == 0 && -n "$manual" ]] || { echo 'manual acceptance requires an observation and Captures: none' >&2; return 3; }
+    IFS=',' read -r name path digest observer utc result extra <<< "$manual"
+    for v in name path digest observer utc result; do
+      printf -v "$v" '%s' "$(printf '%s' "${!v}" | sed 's/^ *//;s/ *$//')"
+    done
+    [[ -z "$extra" && -n "$observer" && "$result" == PASS:* && "$name" == "${VF_TASK[7]}" ]] || { echo 'manual observation fields do not match the planned family' >&2; return 3; }
+    case "$path" in /*|../*|*/../*|*/..|..) return 3;; esac
+    [[ -f "$repo/$path" && ! -L "$repo/$path" && "$digest" == "$(vf_hash "$repo/$path")" ]] || { echo 'manual artifact missing or digest mismatch' >&2; return 3; }
+    vf_utc_valid "$utc" || return 3
+  else
+    [[ -z "$manual" && ${#ids[@]} -gt 0 && ${#ids[@]} -eq ${#summaries[@]} ]] || { echo 'automated return needs captured checks and canonical summaries' >&2; return 3; }
+    : > "$tmp/caps"
+    for cap in "${ids[@]}"; do
+      grep -Fx -- "$cap" "$tmp/caps" >/dev/null && { echo 'return: duplicate capture' >&2; return 3; }
+      printf '%s\n' "$cap" >> "$tmp/caps"
+      vf_capture_check "$spec" "$cap" "$tmp/inputs" current || return 3
+      vf_task_capture_matches "$tmp/bindings" "$task" "$spec/notes/captures/$cap" || { echo 'return: capture command/test bindings do not prove this task Verify; use --from-task' >&2; return 3; }
+      vf_meta_load "$spec/notes/captures/$cap/meta.nul" "$VF_CAPTURE_KEYS" || return 3
+      [[ "$(vf_meta_get no_tick)" == 1 ]] || { echo 'return: worker must use --no-tick' >&2; return 3; }
+      v="$(cat "$spec/notes/captures/$cap/summary.txt")"; found=0
+      for summary in "${summaries[@]}"; do [[ "$summary" != "$v" ]] || found=$((found+1)); done
+      (( found == 1 )) || { echo 'return: summary is not the authentic capture summary' >&2; return 3; }
+    done
+  fi
+  : > "$tmp/got"
+  for ((i=0;i<${#mappings[@]};i+=3)); do
+    printf '%s\t%s\n' "${mappings[i]}" "${mappings[i+1]}" >> "$tmp/got"
+    if [[ "${VF_TASK[5]}" == manual ]]; then [[ "${mappings[i+2]}" == manual ]] || return 3
+    else grep -Fx -- "${mappings[i+2]}" "$tmp/caps" >/dev/null || { echo 'return: mapping names unknown capture' >&2; return 3; }; fi
+  done
+  LC_ALL=C sort "$tmp/got" > "$tmp/actual"
+  cmp -s "$tmp/want" "$tmp/actual" || { echo 'return: missing, extra, duplicate or unknown FM/INV test binding' >&2; return 3; }
+  # The catalog is authoritative; locators must exist in source at acceptance.
+  while IFS= read -r -d '' v; do
+    f+=("$v"); (( ${#f[@]} == 12 )) || continue
+    if [[ "${f[0]}" == test && "${f[2]}" == "$task" && "${f[5]}" != manual ]]; then
+      path="${f[7]%%::*}"; name="${f[7]#*::}"
+      [[ -f "$repo/$path" ]] && grep -F -- "$name" "$repo/$path" >/dev/null || { echo "return: unknown test declaration ${f[7]}" >&2; return 3; }
+    fi
+    f=()
+  done < "$tmp/bindings"
+  [[ "$before" == "$(vf_snapshot "$spec" "$repo" "$repo" "$tmp/after")" ]] || { echo 'return: inputs changed during validation' >&2; return 3; }
+  printf '%s\0' version 1 task "$task" return_digest "$(vf_hash "$return_file")" binding_digest "$(vf_hash "$tmp/bindings")" input "$before" captures "${ids[*]:-none}" manual "$manual" > "$receipt"
+)
+
+vf_tasks_rewrite() { # task-file id box evidence output; one rewrite including date
+  VF_EVIDENCE="$4" awk -v id="$2" -v box="$3" -v today="$(date +%Y-%m-%d)" '
+    function leave() {if(on && ev!="" && !written) {print "  - *Evidence:* " ev; written=1}; on=0}
+    BEGIN {ev=ENVIRON["VF_EVIDENCE"]}
+    NR==1 && $0=="---" {fm=1; print; next}
+    fm && /^updated:/ {print "updated: " today; updated=1; next}
+    fm && $0=="---" {if(!updated) print "updated: " today; fm=0; print; next}
+    /^- \[[ xX~]\] \*\*T[0-9][0-9][0-9][a-z0-9]*\*\*/ {
+      leave(); match($0,/T[0-9][0-9][0-9][a-z0-9]*/)
+      if(substr($0,RSTART,RLENGTH)==id) {sub(/^- \[[ xX~]\]/,"- [" box "]"); on=1; found++}
+      print; next
+    }
+    /^## / {leave()}
+    on && /^[ ]*- \*Evidence:\*/ {if(ev!="") {print "  - *Evidence:* " ev; written=1} else print; next}
+    on && !/^[ ]*- \*/ {leave()}
+    {print}
+    END {leave(); if(found!=1) exit 3}
+  ' "$1" > "$5"
+}
+
+vf_accept_audit() {
+  local spec="$1" task="$2" ret="$3" outcome="$4" reason="$5" before="$6" after="$7" tmp final
+  mkdir -p "$spec/notes/verification/accept-events" || return 3
+  tmp="$(mktemp -d "$spec/notes/verification/accept-events/.event.XXXXXX")" || return 3
+  printf '%s\0' version 1 task "$task" return_digest "$ret" outcome "$outcome" reason "$reason" before "$before" after "$after" timestamp "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > "$tmp/meta.nul"
+  vf_seal "$tmp" meta.nul || return 3
+  final="${tmp%/*}/ACCEPT-${tmp##*.}"
+  vf_publish "$tmp" "$final" meta.nul
+}
+
+vf_accept_transaction() {
+  local spec="$1" task="$2" return_file="$3" tasks before after ret tmp prepared evidence old reason rc
+  spec="$(cd "$spec" && pwd -P)" || return 3
+  tasks="$spec/tasks.md"
+  vf_lock "$spec" || return 3
+  before="$(vf_hash "$tasks")" || return 3
+  ret=missing; [[ ! -f "$return_file" ]] || ret="$(vf_hash "$return_file")"
+  mkdir -p "$spec/notes/verification/accepted/$task" || return 3
+  tmp="$(mktemp -d "$spec/notes/verification/accepted/$task/.accept.XXXXXX")" || return 3
+  VF_STAGING="$tmp"
+  # Reconcile every prepared transaction before accepting another return.
+  for old in "$spec/notes/verification/accepted/$task"/ACC-*; do
+    [[ -d "$old" && ! -e "$old/COMMITTED" ]] || continue
+    vf_integrity "$old" meta.nul return.txt tasks.after digests.nul || return 3
+    vf_meta_load "$old/digests.nul" 'before after' || return 3
+    if [[ "$before" == "$(vf_meta_get after)" ]]; then
+      printf '%s\n' "$(vf_hash "$old/COMPLETE")" > "$old/COMMITTED"
+    elif [[ "$before" == "$(vf_meta_get before)" ]]; then
+      vf_return_check "$spec" "$task" "$old/return.txt" "$tmp/revalidated" || return 3
+      prepared="$(mktemp "$spec/.tasks.accept.XXXXXX")" || return 3
+      cp "$old/tasks.after" "$prepared" && mv "$prepared" "$tasks" || return 3
+      printf '%s\n' "$(vf_hash "$old/COMPLETE")" > "$old/COMMITTED"
+      before="$(vf_hash "$tasks")"
+    else echo 'accept recovery: tasks match neither prepared before nor after; reconcile concurrent edits' >&2; return 3; fi
+  done
+  if vf_return_check "$spec" "$task" "$return_file" "$tmp/meta.nul" > "$tmp/validation.log" 2>&1; then rc=0; else rc=$?; fi
+  if (( rc )); then
+    reason="$(cat "$tmp/validation.log")"
+    vf_accept_audit "$spec" "$task" "$ret" rejected "$reason" "$before" "$(vf_hash "$tasks")" || return 3
+    printf 'accept rejected: %s %s\n' "$task" "$reason" | head -c "$VF_FAILURE_BYTES"
+    return 3
+  fi
+  vf_meta_load "$tmp/meta.nul" 'version task return_digest binding_digest input captures manual' || return 3
+  evidence="$(vf_meta_get captures) verified by spec-gate accept; return sha256:$ret"
+  # Idempotence needs current validation and a receipt for this exact return.
+  for old in "$spec/notes/verification/accepted/$task"/ACC-*; do
+    [[ -d "$old" && -f "$old/COMMITTED" ]] || continue
+    vf_integrity "$old" meta.nul return.txt tasks.after digests.nul || return 3
+    if [[ "$(vf_hash "$old/return.txt")" == "$ret" ]] && grep -qE "^- \[x\] \*\*$task\*\*" "$tasks"; then
+      vf_accept_audit "$spec" "$task" "$ret" already-accepted current "$before" "$before" || return 3
+      printf 'accept already-accepted task=%s return=%s\n' "$task" "$ret"; return 0
+    fi
+  done
+  cp "$return_file" "$tmp/return.txt" || return 3
+  vf_tasks_rewrite "$tasks" "$task" x "$evidence" "$tmp/tasks.after" || return 3
+  after="$(vf_hash "$tmp/tasks.after")" || return 3
+  printf '%s\0' before "$before" after "$after" > "$tmp/digests.nul"
+  rm "$tmp/validation.log"
+  [[ "$before" == "$(vf_hash "$tasks")" ]] || { echo 'accept: task file changed concurrently' >&2; return 3; }
+  vf_seal "$tmp" meta.nul return.txt tasks.after digests.nul || return 3
+  old="${tmp%/*}/ACC-${tmp##*.}"
+  vf_publish "$tmp" "$old" meta.nul return.txt tasks.after digests.nul || return 3
+  VF_STAGING=''
+  prepared="$(mktemp "$spec/.tasks.accept.XXXXXX")" || return 3
+  cp "$old/tasks.after" "$prepared" && mv "$prepared" "$tasks" || return 3
+  printf '%s\n' "$(vf_hash "$old/COMPLETE")" > "$old/COMMITTED"
+  vf_accept_audit "$spec" "$task" "$ret" accepted current "$before" "$after" || return 3
+  printf 'accept accepted task=%s return=%s\n' "$task" "$ret"
+}
