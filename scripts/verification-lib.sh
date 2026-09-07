@@ -979,6 +979,7 @@ vf_path_record() { # <repo> <relative path> <output> <scratch>
 # tracked/index and untracked ordering; no GNU sort -z or line-split filenames.
 vf_snapshot() (
   local spec="$1" repo="$2" cwd="$3" output="$4" tmp path record head oid mode stage key value tool resolved
+  spec="$(cd "$spec" && pwd -P)" || return 3
   repo="$(cd "$repo" && pwd -P)" || return 3
   cwd="$(cd "$cwd" && pwd -P)" || return 3
   [[ "$(git -C "$repo" rev-parse --show-toplevel 2>/dev/null)" == "$repo" ]] || {
@@ -1165,3 +1166,83 @@ vf_capture() { # spec binding cwd policy -- argv...
   VF_CAPTURE_DIR="$final"
   return "$rc"
 }
+vf_capture_check() (
+  local spec="$1" id="$2" manifest="$3" predicate="$4" dir key v exit_code before after seq check shell_path repo cwd policy ledger other f ocheck oinput oexit oseq
+  [[ "$id" =~ ^CAP-[1-9][0-9]*-[A-Za-z0-9]+$ ]] || { echo 'capture integrity: invalid capture ID' >&2; return 3; }
+  case "$predicate" in integrity|current|reuse) ;; *) return 2;; esac
+  dir="$spec/notes/captures/$id"
+  vf_integrity "$dir" "${VF_CAPTURE_FILES[@]}" || return 3
+  ledger="$spec/notes/verification/captures/$id"
+  [[ -f "$ledger" && ! -L "$ledger" ]] && cmp -s "$dir/COMPLETE" "$ledger" || { echo 'capture integrity: ledger disagreement or missing provenance' >&2; return 3; }
+  vf_meta_load "$dir/meta.nul" "$VF_CAPTURE_KEYS" || return 3
+  for key in $VF_CAPTURE_KEYS; do vf_meta_get "$key" >/dev/null || return 3; done
+  [[ "$(vf_meta_get version)" == 1 && "$(vf_meta_get id)" == "$id" && "$(vf_meta_get kind)" == command ]] || return 3
+  seq="$(vf_meta_get sequence)"; [[ "$seq" =~ ^[1-9][0-9]*$ && "$id" == CAP-"$seq"-* ]] || return 3
+  vf_utc_valid "$(vf_meta_get start)" && vf_utc_valid "$(vf_meta_get end)" || return 3
+  [[ "$(vf_meta_get start)" < "$(vf_meta_get end)" || "$(vf_meta_get start)" == "$(vf_meta_get end)" ]] || return 3
+  exit_code="$(vf_meta_get exit)"; [[ "$exit_code" =~ ^[0-9]+$ && ${#exit_code} -le 3 && "$exit_code" -le 255 ]] || return 3
+  [[ "$(vf_meta_get no_tick)" =~ ^[01]$ ]] || return 3
+  before="$(vf_meta_get input_before)"; after="$(vf_meta_get input_after)"
+  [[ "$before" == "$(vf_hash "$dir/inputs.nul")" && "$after" == "$(vf_hash "$dir/inputs-after.nul")" ]] || {
+    echo 'capture integrity: input manifest mismatch' >&2; return 3;
+  }
+  [[ "$(vf_meta_get output_digest)" == "$(vf_hash "$dir/output.log")" && "$(vf_meta_get output_bytes)" == "$(wc -c < "$dir/output.log" | tr -d ' ')" ]] || return 3
+  check="$(vf_meta_get check)"; shell_path="$(vf_meta_get shell)"; repo="$(vf_meta_get repo)"; cwd="$(vf_meta_get cwd)"; policy="$(vf_meta_get policy)"
+  case "$policy" in local|never) ;; *) return 3;; esac
+  # Integrity authenticates the stored observation, including its failure.
+  [[ "$predicate" != integrity ]] || return 0
+  [[ "$exit_code" == 0 ]] || { echo "capture failed: exit $exit_code" >&2; return 3; }
+  [[ "$before" == "$after" ]] || { echo 'capture stale: inputs changed during execution' >&2; return 3; }
+  [[ -f "$manifest" && "$before" == "$(vf_hash "$manifest")" ]] || { echo 'capture stale: current inputs changed; refresh verification' >&2; return 3; }
+  [[ "$predicate" != reuse || "$policy" == local ]] || { echo 'capture freshness: unknown/external/time policy requires execution' >&2; return 3; }
+  [[ -f "$shell_path" ]] || return 3
+  v="$( { cat "$dir/argv.nul"; printf '%s\0' "$shell_path" "$(vf_hash "$shell_path")" "$repo" "$cwd" "$policy"; } | vf_hash /dev/stdin)"
+  [[ "$check" == "$v" ]] || { echo 'capture stale: command/shell/cwd identity changed' >&2; return 3; }
+  for other in "$spec"/notes/verification/captures/CAP-*; do
+    [[ -f "$other" ]] || continue
+    f="${other##*/}"
+    vf_capture_check "$spec" "$f" '' integrity >/dev/null || { echo "capture ledger: damaged record $f" >&2; return 3; }
+    vf_meta_load "$spec/notes/captures/$f/meta.nul" "$VF_CAPTURE_KEYS" || return 3
+    oseq="$(vf_meta_get sequence)"; ocheck="$(vf_meta_get check)"; oinput="$(vf_meta_get input_before)"; oexit="$(vf_meta_get exit)"
+    if (( oseq > seq )) && [[ "$ocheck" == "$check" && "$oinput" == "$before" && "$oexit" != 0 ]]; then
+      echo "capture superseded: later failed run $f for the same check and inputs" >&2; return 3
+    fi
+  done
+)
+
+vf_task_capture_matches() (
+  local catalog="$1" task="$2" dir="$3" tmp
+  vf_task_info "$catalog" "$task" || return 3
+  tmp="$(mktemp "${TMPDIR:-/tmp}/vf-argv.XXXXXX")" || return 3
+  trap 'rm -f "$tmp"' EXIT
+  printf '%s\0' "$(command -v bash)" -o pipefail -c "$VF_TASK_COMMAND" > "$tmp"
+  cmp -s "$tmp" "$dir/argv.nul" && cmp -s "$catalog" "$dir/bindings.nul"
+)
+
+# Discover current proof without changing historical completion or receipts.
+vf_task_current() (
+  local spec="$1" task="$2" catalog="$3" manifest="$4" predicate="${5:-current}" dir found=''
+  for dir in "$spec"/notes/captures/CAP-*; do
+    [[ -d "$dir" ]] || continue
+    vf_task_capture_matches "$catalog" "$task" "$dir" || continue
+    if vf_capture_check "$spec" "${dir##*/}" "$manifest" "$predicate" >/dev/null 2>&1; then found="${dir##*/}"; fi
+  done
+  [[ -n "$found" ]] || { echo "current evidence missing/stale: $task; refresh its Verify (historical completion preserved)" >&2; return 3; }
+  printf '%s\n' "$found"
+)
+
+vf_evidence_current() (
+  local spec="$1" repo tmp task state stage subject
+  repo="$(git -C "$spec" rev-parse --show-toplevel 2>/dev/null)" || return 3
+  tmp="$(mktemp -d "${TMPDIR:-/tmp}/vf-evidence.XXXXXX")" || return 3
+  trap 'rm -rf "$tmp"' EXIT
+  vf_binding_snapshot "$spec" "$tmp/bindings" || return 3
+  vf_snapshot "$spec" "$repo" "$repo" "$tmp/inputs" >/dev/null || return 3
+  while IFS=$'\t' read -r task state stage subject; do
+    [[ "$state" == "done" ]] || continue
+    # Only exempt true administrative tasks absent from the typed catalog.
+    vf_task_info "$tmp/bindings" "$task" >/dev/null 2>&1 || continue
+    vf_task_current "$spec" "$task" "$tmp/bindings" "$tmp/inputs" || return 3
+  done < <(bash "$(dirname -- "${BASH_SOURCE[0]}")/spec-task.sh" list "$spec")
+  echo 'current evidence: all completed task checks have valid current captures'
+)

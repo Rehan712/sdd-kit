@@ -265,7 +265,7 @@ keeps each edit task to at most five files instead of combining unrelated work.
   - *Refs:* REQ-006, REQ-009, REQ-016, AC-020, AC-021, FM-006, FM-008, FM-009, INV-003, plan §3.2, §4.1, §4.4
   - *Evidence:* `CAP-1-G083Nw (notes/captures/CAP-1-G083Nw/output.log): bash tests/test-spec-run.sh && bash tests/test-verification.sh → 6/6 and 3/3 passed, exit 0; FM-006/FM-008/FM-009/INV-003 map to test_bounded_capture and test_owned_transactions; input-before equals input-after` (2026-09-07)
 
-- [ ] **T018** [hard] — Reject stale or damaged current evidence
+- [x] **T018** [hard] — Reject stale or damaged current evidence
   - *Files:* `scripts/verification-lib.sh` (new in T002), `scripts/spec-evidence.sh`, `tests/test-verification.sh` (new in T003)
   - *Acceptance:* Add AC-020/AC-023 executable cases for tampered/truncated/missing provenance, later failed same-input runs and input changes during execution, reproducing the old passing-log/failing-code gap without granting reuse or undoing historical tasks.
   - *Verify kind:* test
@@ -273,6 +273,7 @@ keeps each edit task to at most five files instead of combining unrelated work.
   - *Verify:* `bash tests/test-verification.sh` → all suites `passed`, exit 0
   - *Reuse:* local
   - *Refs:* REQ-009, AC-020, AC-023, FM-010, FM-014, INV-001, plan §3.2, §4.4
+  - *Evidence:* `CAP-2-fvXXB7 (notes/captures/CAP-2-fvXXB7/output.log): bash tests/test-verification.sh → 3/3 passed, exit 0; FM-010/FM-014/INV-001 → tests/test-verification.sh::test_capture_provenance; current and damaged evidence predicates tested` (2026-09-07)
 
 - [ ] **T019** [hard] — Accept verified returns in one transaction
   - *Files:* `scripts/verification-lib.sh` (new in T002), `scripts/spec-gate.sh` (new in T014), `scripts/spec-task.sh`, `tests/test-spec-gate.sh` (new), `tests/test-spec-task.sh`

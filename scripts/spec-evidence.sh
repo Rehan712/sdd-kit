@@ -23,7 +23,7 @@
 # is the gate report / PR URL, matching spec-task.sh and sdd-analyze.sh.
 #
 # Usage:
-#   spec-evidence.sh <spec-dir>
+#   spec-evidence.sh <spec-dir> [--current]
 #   spec-evidence.sh --help
 #
 # Exit: 0 = clean (warnings allowed), 1 = integrity errors, 2 = usage.
@@ -43,6 +43,13 @@ SPEC_DIR="$(cd "$SPEC_DIR" && pwd)"
 SPEC="$SPEC_DIR/spec.md"; TASKS="$SPEC_DIR/tasks.md"; STATUS="$SPEC_DIR/STATUS.md"
 EVID="$SPEC_DIR/notes/evidence.md"; RC="$SPEC_DIR/notes/reality-check.md"
 [[ -f "$TASKS" ]] || { echo "no tasks.md in $SPEC_DIR" >&2; exit 1; }
+
+# Legacy evidence remains readable; new contracts need current proof by default.
+. "$HUB_DIR/scripts/verification-lib.sh"
+if [[ "${2:-}" == --current || "$(fm_get "$SPEC" verification_contract 2>/dev/null || :)" == 1 ]]; then
+  vf_evidence_current "$SPEC_DIR"
+  exit $?
+fi
 
 errors=0; warnings=0
 pass() { echo "  ${GREEN}✓${RESET} $1"; }

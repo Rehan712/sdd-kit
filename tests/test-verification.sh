@@ -238,6 +238,62 @@ break"
   run_rc 0 snapshot_fixture "$spec" "$repo" "$SANDBOX/manifest"
   [[ "$OUT" != "$changed" ]] || t_fail 'AC-020: plan semantic change missed'
 
+  capture_validity_cases
+
+}
+
+capture_check_fixture() {
+  bash -c '. "$1"; vf_capture_check "$2" "$3" "$4" "$5"' _ "$SCRIPTS/verification-lib.sh" "$@"
+}
+
+capture_validity_cases() {
+  local spec repo cap later before file
+  spec="$(make_verification_git_dir validity)"
+  repo="$(cd "$spec/../../.." && pwd -P)"
+  run_rc 0 "$SCRIPTS/spec-run.sh" "$spec" T001 --cwd "$repo" --from-task --no-tick --summary
+  cap="$(printf '%s' "$OUT" | sed -n 's/^capture=\([^ ]*\).*/\1/p')"
+  run_rc 0 snapshot_fixture "$spec" "$repo" "$SANDBOX/current"
+  run_rc 0 capture_check_fixture "$spec" "$cap" "$SANDBOX/current" current
+  for file in output.log COMPLETE argv.nul inputs.nul bindings.nul meta.nul; do
+    cp "$spec/notes/captures/$cap/$file" "$SANDBOX/saved"
+    printf tampered >> "$spec/notes/captures/$cap/$file"
+    run_rc 3 capture_check_fixture "$spec" "$cap" "$SANDBOX/current" current
+    cp "$SANDBOX/saved" "$spec/notes/captures/$cap/$file"
+  done
+  mv "$spec/notes/captures/$cap/output.log" "$SANDBOX/log"
+  run_rc 3 capture_check_fixture "$spec" "$cap" "$SANDBOX/current" current
+  mv "$SANDBOX/log" "$spec/notes/captures/$cap/output.log"
+  # AC-023: historical completion survives a stale proof rejection.
+  run_rc 0 "$SCRIPTS/spec-task.sh" "done" "$spec" T001 --evidence "$cap captured passing test"
+  before="$(cat "$spec/tasks.md")"
+  printf 'value=bad\n' > "$repo/src/parser.sh"
+  run_rc 0 capture_check_fixture "$spec" "$cap" '' integrity
+  run_rc 0 snapshot_fixture "$spec" "$repo" "$SANDBOX/current"
+  run_rc 3 capture_check_fixture "$spec" "$cap" "$SANDBOX/current" current
+  assert_contains "$OUT" 'current inputs changed'
+  run_rc 3 "$SCRIPTS/spec-evidence.sh" "$spec"
+  assert_eq "$before" "$(cat "$spec/tasks.md")"
+  # AC-020: a command mutating its own inputs cannot create current proof.
+  run_rc 0 "$SCRIPTS/spec-run.sh" "$spec" T001 --cwd "$repo" --no-tick --summary -- bash -c 'echo changed >> src/parser.sh'
+  later="$(printf '%s' "$OUT" | sed -n 's/^capture=\([^ ]*\).*/\1/p')"
+  run_rc 0 snapshot_fixture "$spec" "$repo" "$SANDBOX/current"
+  run_rc 3 capture_check_fixture "$spec" "$later" "$SANDBOX/current" current
+  assert_contains "$OUT" 'inputs changed during execution'
+  # AC-020: external state has no reuse policy; its later failed observation
+  # nevertheless supersedes an older same-input success for initial acceptance.
+  printf 'value=good\n' > "$repo/src/parser.sh"
+  printf '\n[[ ! -f ../switch ]] || exit 9\n' >> "$repo/tests/check.sh"
+  sed 's/Reuse:\* local/Reuse:* never/' "$spec/tasks.md" > "$SANDBOX/tasks"
+  cp "$SANDBOX/tasks" "$spec/tasks.md"
+  run_rc 0 "$SCRIPTS/spec-run.sh" "$spec" T001 --cwd "$repo" --from-task --no-tick --summary
+  cap="$(printf '%s' "$OUT" | sed -n 's/^capture=\([^ ]*\).*/\1/p')"
+  run_rc 0 snapshot_fixture "$spec" "$repo" "$SANDBOX/current"
+  run_rc 3 capture_check_fixture "$spec" "$cap" "$SANDBOX/current" reuse
+  assert_contains "$OUT" 'policy requires execution'
+  touch "$repo/../switch"
+  run_rc 9 "$SCRIPTS/spec-run.sh" "$spec" T001 --cwd "$repo" --from-task --no-tick --summary
+  run_rc 3 capture_check_fixture "$spec" "$cap" "$SANDBOX/current" current
+  assert_contains "$OUT" 'later failed run'
 }
 
 t_run_all

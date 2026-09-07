@@ -425,3 +425,9 @@ Captured acceptance runs, appended by `spec-run.sh`. One block per run.
 Captured run, exit 0. Full log: `notes/captures/CAP-1-G083Nw/output.log`.
 
 capture=CAP-1-G083Nw command=/bin/bash -o pipefail -c bash tests/test-spec-run.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=6afa5129adcacc389d7dd247ba059bc93f6abec84371466d3b7f5f19daa2bbd2 input=7ddeca901e592669a05dc262a94d224054c5b200de566212667b44333bed711c log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-1-G083Nw/output.log [complete metadata: capture directory]
+
+## CAP-2-fvXXB7 — 2026-09-07T05:09:57Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-2-fvXXB7/output.log`.
+
+capture=CAP-2-fvXXB7 command=/bin/bash -o pipefail -c bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=b0307d5f3643923c85b2aa7d758ae3f0bf12a603f48312482e8cbeddb222d636 input=c3647b8eb1498d931e28244badb369909fdf3e3e456361528380bac8100a5705 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-2-fvXXB7/output.log [complete metadata: capture directory]
