@@ -167,4 +167,43 @@ test_floor() {
   assert_contains "$OUT" 'worktree mismatch'
 }
 
+# AC-008: completed-through proof and retained bindings gate the next stage.
+test_checkpoints() {
+  local spec repo cap
+  spec="$(make_verification_git_dir checkpoint)"
+  repo="$(cd "$spec/../../.." && pwd -P)"
+  cat >> "$repo/.specify/stack.yml" <<'EOF'
+checkpoints:
+  Backend:
+    - 'false | true'
+EOF
+  run_rc 1 bash -c 'bash "$1" checkpoint "$2" Backend && touch "$3"' _ "$SCRIPTS/spec-gate.sh" "$spec" "$SANDBOX/next-stage"
+  [[ ! -e "$SANDBOX/next-stage" ]] || t_fail 'AC-008: failing pipeline advanced stage'
+  sed '/^checkpoints:/,$d' "$repo/.specify/stack.yml" > "$SANDBOX/stack"
+  cp "$SANDBOX/stack" "$repo/.specify/stack.yml"
+  # Future ACs, not-yet-created tests and the explicit T005 integration owner
+  # do not become gaps before their stages complete.
+  run_rc 0 "$SCRIPTS/spec-gate.sh" checkpoint "$spec" Backend
+  assert_contains "$OUT" 'no checkpoint commands'
+  run_rc 0 "$SCRIPTS/spec-run.sh" "$spec" T001 --cwd "$repo" --from-task --no-tick --summary
+  cap="$(printf '%s' "$OUT" | sed -n 's/^capture=\([^ ]*\).*/\1/p')"
+  accept_return "$spec" T001 "$cap" "$SANDBOX/return"
+  run_rc 0 "$SCRIPTS/spec-gate.sh" accept "$spec" T001 "$SANDBOX/return"
+  run_rc 0 "$SCRIPTS/spec-gate.sh" checkpoint "$spec" Backend
+  assert_contains "$OUT" 'completed-task coverage checked'
+  run_rc 0 "$SCRIPTS/spec-ac-coverage.sh" "$spec" --through-stage Backend
+  cp "$repo/tests/check.sh" "$SANDBOX/check-before"
+  sed 's/test_ac_001_shared/renamed_without_binding/g' "$repo/tests/check.sh" > "$SANDBOX/check"
+  cp "$SANDBOX/check" "$repo/tests/check.sh"
+  run_rc 3 "$SCRIPTS/spec-gate.sh" checkpoint "$spec" Backend
+  assert_contains "$OUT" 'unknown test'
+  cp "$SANDBOX/check-before" "$repo/tests/check.sh"
+
+  sed 's/REQ-001, AC-001, FM-001/REQ-001, AC-001/' "$spec/tasks.md" > "$SANDBOX/tasks"
+  cp "$SANDBOX/tasks" "$spec/tasks.md"
+  run_rc 3 "$SCRIPTS/spec-gate.sh" checkpoint "$spec" Backend
+  assert_contains "$OUT" 'lost prior binding'
+  [[ ! -e "$SANDBOX/next-stage" ]] || t_fail 'AC-008: lost binding advanced stage'
+}
+
 t_run_all

@@ -22,6 +22,7 @@
 #   spec-ac-coverage.sh <spec-dir>                     # single repo: root = git toplevel
 #   spec-ac-coverage.sh <spec-dir> --root <dir> ...    # search these roots (repeatable)
 #   spec-ac-coverage.sh <spec-dir> --tests '*_test.go' # extra test-path glob (repeatable)
+#   spec-ac-coverage.sh <spec-dir> --through-stage <stage> # completed coverage
 #   spec-ac-coverage.sh --help
 #
 # Umbrella specs (spec.md repos: frontmatter): with no --root, each declared repo's
@@ -42,9 +43,11 @@ usage() { usage_from_header "$0"; exit 0; }
 ROOTS=()
 EXTRA_GLOBS=()
 ARGS=()
+THROUGH_STAGE=""
 while (( $# )); do
   case "$1" in
     --help|-h) usage ;;
+    --through-stage) shift; THROUGH_STAGE="${1:?--through-stage needs a stage}" ;;
     --root)  shift; ROOTS+=("${1:?--root needs a directory}") ;;
     --tests) shift; EXTRA_GLOBS+=("${1:?--tests needs a glob}") ;;
     -*) echo "unknown flag: $1" >&2; exit 2 ;;
@@ -58,6 +61,16 @@ SPEC_DIR="${ARGS[0]:-}"
 SPEC_DIR="$(cd "$SPEC_DIR" && pwd)"
 SPEC="$SPEC_DIR/spec.md"
 [[ -f "$SPEC" ]] || { echo "no spec.md in $SPEC_DIR" >&2; exit 1; }
+
+if [[ -n "$THROUGH_STAGE" ]]; then
+  . "$HUB_DIR/scripts/verification-lib.sh"
+  mkdir -p "$SPEC_DIR/notes/verification" || exit 3
+  coverage_tmp="$(mktemp "$SPEC_DIR/notes/verification/coverage-check.XXXXXX")" || exit 3
+  trap 'rm -f "$coverage_tmp"' EXIT
+  vf_completed_coverage "$SPEC_DIR" "$THROUGH_STAGE" "$coverage_tmp" || exit 3
+  echo "completed-through coverage valid: $THROUGH_STAGE"
+  exit 0
+fi
 
 # --- resolve search roots ---------------------------------------------------
 if (( ${#ROOTS[@]} == 0 )); then

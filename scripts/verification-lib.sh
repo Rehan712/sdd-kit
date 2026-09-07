@@ -712,11 +712,15 @@ vf_bindings() { # <spec-dir> <plan|tasks|through-stage> <stage-or-empty> <output
 }
 
 # SHA-256 is mandatory for new proof. Read stdin to avoid filename escaping.
-vf_hash() {
-  if command -v shasum >/dev/null 2>&1; then shasum -a 256 < "$1" | awk '{print $1}'
-  elif command -v sha256sum >/dev/null 2>&1; then sha256sum < "$1" | awk '{print $1}'
+vf_hash() (
+  set -o pipefail
+  local digest
+  if command -v shasum >/dev/null 2>&1; then digest="$(shasum -a 256 < "$1" | awk '{print $1}')" || return 3
+  elif command -v sha256sum >/dev/null 2>&1; then digest="$(sha256sum < "$1" | awk '{print $1}')" || return 3
   else echo 'verification prerequisite: SHA-256 unavailable' >&2; return 3; fi
-}
+  [[ "$digest" =~ ^[a-f0-9]{64}$ ]] || { echo 'verification prerequisite: invalid SHA-256 result' >&2; return 3; }
+  printf '%s\n' "$digest"
+)
 
 vf_utc_valid() {
   LC_ALL=C awk -v t="$1" 'BEGIN {
@@ -948,11 +952,11 @@ vf_semantic_file() { # <repo-relative path> <input-file> <output-file>
     .specify/specs/*/STATUS.md)
       awk '/^## Decisions/ {on=1; print; next} /^## / {on=0} on {print}' "$2" > "$3";;
     .specify/specs/*/spec.md|.specify/specs/*/plan.md|.specify/specs/*/tasks.md)
-      awk '
+      awk -v document="$1" '
         NR==1 && $0=="---" {fm=1; print; next}
         fm && $0=="---" {fm=0; print; next}
         fm && /^(status|updated):/ {next}
-        /^[ ]*- \*Evidence:\*/ {next}
+        document ~ /\/tasks\.md$/ && /^[ ]*- \*Evidence:\*/ {next}
         {sub(/^- \[[ xX~]\] /,"- [ ] "); print}
       ' "$2" > "$3";;
     *) cp "$2" "$3";;
@@ -1150,7 +1154,10 @@ vf_capture() { # spec binding cwd policy -- argv...
   (cd "$cwd" && "$@") > "$staging/output.log" 2>&1
   rc=$?
   end="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
-  after="$(vf_snapshot "$spec" "$repo" "$cwd" "$staging/inputs-after.nul")" || after=unknown
+  if ! after="$(vf_snapshot "$spec" "$repo" "$cwd" "$staging/inputs-after.nul")"; then
+    : > "$staging/inputs-after.nul"
+    after="$(vf_hash "$staging/inputs-after.nul")" || return 3
+  fi
   key=''
   if [[ -n "${VF_KEY_PATTERN:-}" ]]; then key="$(grep -E -- "$VF_KEY_PATTERN" "$staging/output.log" | tail -1 || :)"; fi
   [[ -n "$key" ]] || key="$(awk 'NF {line=$0} END {print line}' "$staging/output.log")"
@@ -1217,12 +1224,15 @@ vf_capture_check() (
 )
 
 vf_task_capture_matches() (
-  local catalog="$1" task="$2" dir="$3" tmp
+  local catalog="$1" task="$2" dir="$3" tmp repo
   vf_task_info "$catalog" "$task" || return 3
   tmp="$(mktemp "${TMPDIR:-/tmp}/vf-argv.XXXXXX")" || return 3
   trap 'rm -f "$tmp"' EXIT
   printf '%s\0' "$(command -v bash)" -o pipefail -c "$VF_TASK_COMMAND" > "$tmp"
-  cmp -s "$tmp" "$dir/argv.nul" && cmp -s "$catalog" "$dir/bindings.nul"
+  cmp -s "$tmp" "$dir/argv.nul" && cmp -s "$catalog" "$dir/bindings.nul" || return 3
+  vf_meta_load "$dir/meta.nul" "$VF_CAPTURE_KEYS" || return 3
+  repo="$(vf_meta_get repo)" || return 3
+  vf_locators_exist "$catalog" "$task" "$repo"
 )
 
 # Discover current proof without changing historical completion or receipts.
@@ -1641,3 +1651,136 @@ vf_manual_current() (
   done
   (( found )) || { echo "manual evidence gap: $task needs current artifact-backed acceptance" >&2; return 3; }
 )
+vf_coverage_catalog() { # raw selected binding catalog -> fixed triples task,id,locator
+  local catalog="$1" output="$2" value fields=() id
+  : > "$output"
+  while IFS= read -r -d '' value; do
+    fields+=("$value"); (( ${#fields[@]} == 12 )) || continue
+    if [[ "${fields[4]}" == "done" ]]; then
+      case "${fields[0]}" in
+        binding) printf '%s\0' "${fields[2]}" "${fields[1]}" "${fields[7]}" >> "$output";;
+        test)
+          while IFS= read -r id; do
+            [[ -z "$id" ]] || printf '%s\0' "${fields[2]}" "$id" "${fields[7]}" >> "$output"
+          done < <(printf '%s\n' "${fields[8]}" | grep -oE 'AC-[0-9]{3}' | LC_ALL=C sort -u);;
+      esac
+    fi
+    fields=()
+  done < "$catalog"
+}
+vf_coverage_lines() {
+  local task id locator
+  while IFS= read -r -d '' task && IFS= read -r -d '' id && IFS= read -r -d '' locator; do
+    printf '%s\t%s\t%s\n' "$task" "$id" "$locator"
+  done < "$1"
+}
+vf_completed_coverage() (
+  local spec="$1" stage="$2" output="$3" tmp task value fields=() ref receipt found previous
+  tmp="$(mktemp -d "$spec/notes/verification/coverage.XXXXXX")" || return 3
+  trap 'rm -rf "$tmp"' EXIT
+  vf_bindings "$spec" through-stage "$stage" "$tmp/raw" || return 3
+  vf_coverage_catalog "$tmp/raw" "$output" || return 3
+  vf_bindings "$spec" tasks '' "$tmp/all" || return 3
+  vf_coverage_catalog "$tmp/all" "$tmp/all-coverage" || return 3
+  vf_coverage_lines "$tmp/all-coverage" > "$tmp/current"
+  while IFS= read -r -d '' value; do
+    fields+=("$value"); (( ${#fields[@]} == 12 )) || continue
+    if [[ "${fields[0]}" == task && "${fields[4]}" == "done" ]]; then
+      task="${fields[2]}"
+      local roots="$tmp/roots" repo
+      vf_gate_roots "$spec" "$roots" || return 3
+      repo="$(vf_gate_task_repo "$spec" "$task" "$roots")" || return 3
+      vf_locators_exist "$tmp/all" "$task" "$repo" || return 3
+      # A receipt authenticates historical acceptance; current task execution
+      # is refreshed separately without undoing that historical state.
+      found=0
+      for receipt in "$spec/notes/verification/accepted/$task"/ACC-*; do
+        [[ -f "$receipt/COMMITTED" ]] || continue
+        vf_integrity "$receipt" meta.nul return.txt tasks.after digests.nul || return 3
+        [[ "$(cat "$receipt/COMMITTED")" == "$(vf_hash "$receipt/COMPLETE")" ]] || return 3
+        found=1
+      done
+      (( found )) || { echo "checkpoint acceptance gap: $task has no captured acceptance; refresh bootstrap receipt" >&2; return 3; }
+      while IFS= read -r ref; do
+        [[ -n "$ref" ]] || continue
+        if ! awk -F '\t' -v task="$task" -v ref="$ref" '$1==task && $2==ref {found=1} END {exit !found}' "$tmp/current"; then
+          echo "checkpoint binding gap: $task $ref has no covering test" >&2; return 3
+        fi
+      done < <(printf '%s\n' "${fields[8]}" | grep -oE '(AC|FM|INV)-[0-9]{3}' | LC_ALL=C sort -u)
+    fi
+    fields=()
+  done < "$tmp/raw"
+  # Previously established bindings must survive even if a task/Ref vanished.
+  for previous in "$spec"/notes/verification/checkpoints/CHECKPOINT-*; do
+    [[ -d "$previous" ]] || continue
+    vf_integrity "$previous" meta.nul commands.nul bindings.nul inputs.nul roots.nul coverage.nul || return 3
+    vf_coverage_lines "$previous/coverage.nul" > "$tmp/prior"
+    awk -F '\t' 'FILENAME==ARGV[1] {current[$0]=1; next} !($0 in current) {print "checkpoint lost prior binding: " $0 > "/dev/stderr"; bad=1} END {exit bad ? 3 : 0}' "$tmp/current" "$tmp/prior" || return 3
+  done
+)
+
+vf_gate_checkpoint() {
+  local spec="$1" stage="$2" tmp repo source after task kind check_stage command policy v index=0 id final commands=0
+  spec="$(cd "$spec" && pwd -P)" || return 3
+  mkdir -p "$spec/notes/verification/checkpoints" || return 3
+  tmp="$(mktemp -d "$spec/notes/verification/checkpoints/.checkpoint.XXXXXX")" || return 3
+  VF_GATE_FRESH="$tmp/fresh"; : > "$VF_GATE_FRESH"; : > "$tmp/commands.nul"
+  vf_gate_roots "$spec" "$tmp/roots.nul" || return 3
+  vf_binding_snapshot "$spec" "$tmp/bindings.nul" || return 3
+  if [[ "$(fm_get "$spec/spec.md" verification_contract)" == 1 ]]; then
+    vf_completed_coverage "$spec" "$stage" "$tmp/coverage.nul" || return 3
+  else
+    echo 'checkpoint legacy warning: missing typed acceptance/bindings may be gaps' >&2
+    : > "$tmp/coverage.nul"
+  fi
+  source="$(vf_gate_snapshot "$spec" "$tmp/roots.nul" "$tmp/inputs.nul")" || return 3
+  vf_bindings "$spec" through-stage "$stage" "$tmp/selected" || return 3
+  while IFS= read -r -d '' v; do
+    local fields=()
+    fields+=("$v")
+    # Read the remaining eleven fields without dropping empty values.
+    local i
+    for ((i=1;i<12;i++)); do IFS= read -r -d '' v || return 3; fields+=("$v"); done
+    [[ "${fields[0]}" == task && "${fields[4]}" == "done" ]] || continue
+    task="${fields[2]}"
+    if [[ "${fields[5]}" == manual ]]; then vf_manual_current "$spec" "$task" || return 3; continue; fi
+    vf_task_info "$tmp/bindings.nul" "$task" || return 3
+    repo="$(vf_gate_task_repo "$spec" "$task" "$tmp/roots.nul")" || return 3
+    vf_gate_execute "$spec" "$tmp/bindings.nul" "$repo" "${VF_TASK[10]}" "$tmp/commands.nul" "task:$task" -- "$(command -v bash)" -o pipefail -c "$VF_TASK_COMMAND" || return $?
+  done < "$tmp/selected"
+  while IFS= read -r -d '' repo; do
+    vf_config "$repo/.specify/stack.yml" "$spec/tasks.md" "$tmp/config-$index" || return 3
+    while IFS= read -r -d '' kind && IFS= read -r -d '' check_stage && IFS= read -r -d '' command; do
+      [[ "$kind" == checkpoints && "$check_stage" == "$stage" ]] || continue
+      policy=never
+      while IFS= read -r -d '' v; do [[ "$v" != "$command" ]] || policy=local; done < "$tmp/config-$index/reuse.nul"
+      vf_gate_execute "$spec" "$tmp/bindings.nul" "$repo" "$policy" "$tmp/commands.nul" checkpoint -- "$(command -v bash)" -o pipefail -c "$command" || return $?
+      commands=$((commands+1))
+    done < "$tmp/config-$index/commands.nul"
+    index=$((index+1))
+  done < "$tmp/roots.nul"
+  after="$(vf_gate_snapshot "$spec" "$tmp/roots.nul" "$tmp/after")" || return 3
+  [[ "$source" == "$after" ]] || { echo 'checkpoint inputs changed during execution' >&2; return 3; }
+  id="CHECKPOINT-${tmp##*.}"
+  printf '%s\0' version 1 id "$id" kind checkpoint stage "$stage" start "$(date -u +%Y-%m-%dT%H:%M:%SZ)" end "$(date -u +%Y-%m-%dT%H:%M:%SZ)" source "$source" exit 0 > "$tmp/meta.nul"
+  vf_lock "$spec" || return 3
+  vf_seal "$tmp" meta.nul commands.nul bindings.nul inputs.nul roots.nul coverage.nul || return 3
+  final="${tmp%/*}/$id"
+  vf_publish "$tmp" "$final" meta.nul commands.nul bindings.nul inputs.nul roots.nul coverage.nul || return 3
+  vf_unlock
+  (( commands )) || printf 'no checkpoint commands; completed-task coverage checked\n'
+  vf_gate_result_summary "$final"
+}
+
+# Declaration location is necessary evidence; semantic adequacy remains review.
+vf_locators_exist() {
+  local catalog="$1" task="$2" repo="$3" value fields=() path name
+  while IFS= read -r -d '' value; do
+    fields+=("$value"); (( ${#fields[@]} == 12 )) || continue
+    if [[ "${fields[0]}" == test && "${fields[2]}" == "$task" && "${fields[5]}" != manual ]]; then
+      path="${fields[7]%%::*}"; name="${fields[7]#*::}"
+      [[ -f "$repo/$path" ]] && grep -F -- "$name" "$repo/$path" >/dev/null || { echo "verification binding: unknown test ${fields[7]}" >&2; return 3; }
+    fi
+    fields=()
+  done < "$catalog"
+}

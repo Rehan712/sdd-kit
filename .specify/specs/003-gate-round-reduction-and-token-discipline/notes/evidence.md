@@ -443,3 +443,9 @@ capture=CAP-3-F6tBsK command=/bin/bash -o pipefail -c bash tests/test-spec-task.
 Captured run, exit 0. Full log: `notes/captures/CAP-4-9AgF6L/output.log`.
 
 capture=CAP-4-9AgF6L command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh  key=  -- 4/4 passed exit=0 output=cdb4b2552579056efd0d71394daf96b1e0eec3f7fb5c181409a84acd360c1c0a input=5b5743f2067d7fc7a4e14992a803ee578e5213d1f13d8f3b719c78894d2a6f5c log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-4-9AgF6L/output.log [complete metadata: capture directory]
+
+## CAP-5-lU4jNB — 2026-09-07T15:19:26Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-5-lU4jNB/output.log`.
+
+capture=CAP-5-lU4jNB command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh  key=  -- 5/5 passed exit=0 output=4528bb4c2538df3714e146a03bb7da7fbc1b353905f89f8698df12fbffdaf8d1 input=651c45acbed3ca24f274837a0b58eeef80f809f6ab4ff340ed28ffceed64edce log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-5-lU4jNB/output.log [complete metadata: capture directory]

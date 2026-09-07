@@ -296,7 +296,7 @@ keeps each edit task to at most five files instead of combining unrelated work.
   - *Integration owner:* T027
   - *Evidence:* CAP-4-9AgF6L verified by spec-gate accept; return sha256:f85c6d1f9363281fb9e33a338adc6c768367602c60b91e31a46fc39af8acb7cb
 
-- [ ] **T021** [hard] — Checkpoint completed and retained coverage bindings
+- [x] **T021** [hard] — Checkpoint completed and retained coverage bindings
   - *Files:* `scripts/spec-gate.sh` (new in T014), `scripts/spec-ac-coverage.sh`, `scripts/verification-lib.sh` (new in T002), `tests/test-spec-gate.sh` (new in T019)
   - *Acceptance:* Add AC-008 cases for exact failure/pipeline exits, no-command coverage checks, lost completed/prior bindings, future ACs and explicit integration owners, with the next-stage counter unchanged on failure.
   - *Verify kind:* test
@@ -305,6 +305,7 @@ keeps each edit task to at most five files instead of combining unrelated work.
   - *Reuse:* local
   - *Refs:* REQ-008, REQ-009, AC-008, FM-012, FM-013, FM-015, INV-004, plan §3.3, §4.1, §4.3
   - *Integration owner:* T027
+  - *Evidence:* CAP-5-lU4jNB verified by spec-gate accept; return sha256:b6a19d62e54ddfe235cb0b8c6e4a346b6058270ae7f55d02382f8458ee9dedc0
 
 - [ ] **T022** [hard] — Enforce round reservations and scoped authorization
   - *Files:* `scripts/spec-gate.sh` (new in T014), `scripts/verification-lib.sh` (new in T002), `tests/test-spec-gate.sh` (new in T019), `tests/test-verification.sh` (new in T003)
