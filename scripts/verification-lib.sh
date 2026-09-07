@@ -868,7 +868,7 @@ vf_tally() (
 
 # Writers initialize once at their entry point. Never trust inherited lock state.
 vf_writer_init() {
-  VF_LOCK_PATH= VF_LOCK_TOKEN= VF_STAGING=
+  VF_LOCK_PATH='' VF_LOCK_TOKEN='' VF_STAGING=''
   trap 'vf_writer_cleanup' EXIT
   trap 'exit 130' INT
   trap 'exit 143' TERM
@@ -898,7 +898,7 @@ vf_unlock() {
       [[ "$(cat "$VF_LOCK_PATH/owner")" == "${VF_LOCK_TOKEN:-}" ]]; then
     rm "$VF_LOCK_PATH/owner" && rmdir "$VF_LOCK_PATH"
   fi
-  VF_LOCK_PATH= VF_LOCK_TOKEN=
+  VF_LOCK_PATH='' VF_LOCK_TOKEN=''
 }
 
 # COMPLETE is written last. Required files and their order are caller-owned.
@@ -935,3 +935,108 @@ vf_publish() {
   vf_integrity "$staging" "$@" || return 3
   mv "$staging" "$final"
 }
+
+# Exclusions are generated paths only, never entire notes/.specify directories.
+vf_bookkeeping_path() {
+  case "$1" in
+    .specify/specs/*/notes/captures/*|.specify/specs/*/notes/verification/*|.specify/specs/*/notes/evidence.md|.specify/specs/*/notes/opponent.md|.specify/specs/*/notes/reality-check.md) return 0;;
+  esac
+  return 1
+}
+vf_semantic_file() { # <repo-relative path> <input-file> <output-file>
+  case "$1" in
+    .specify/specs/*/STATUS.md)
+      awk '/^## Decisions/ {on=1; print; next} /^## / {on=0} on {print}' "$2" > "$3";;
+    .specify/specs/*/spec.md|.specify/specs/*/plan.md|.specify/specs/*/tasks.md)
+      awk '
+        NR==1 && $0=="---" {fm=1; print; next}
+        fm && $0=="---" {fm=0; print; next}
+        fm && /^(status|updated):/ {next}
+        /^[ ]*- \*Evidence:\*/ {next}
+        {sub(/^- \[[ xX~]\] /,"- [ ] "); print}
+      ' "$2" > "$3";;
+    *) cp "$2" "$3";;
+  esac
+}
+vf_path_record() { # <repo> <relative path> <output> <scratch>
+  local repo="$1" path="$2" output="$3" scratch="$4" type mode digest link=''
+  if vf_bookkeeping_path "$path"; then return 0; fi
+  if [[ -L "$repo/$path" ]]; then
+    type='link'; link="$(readlink "$repo/$path"; printf .)"; link="${link%.}"; digest=''; mode=120000
+    # Target content is an input even when the target is outside the repository.
+    if [[ -f "$repo/$path" ]]; then digest="$(vf_hash "$repo/$path")" || return 3
+    elif [[ -d "$repo/$path" ]]; then echo "verification inputs: directory symlink requires explicit target files: $path" >&2; return 3; fi
+  elif [[ -f "$repo/$path" ]]; then
+    type='file'; mode=100644; [[ ! -x "$repo/$path" ]] || mode=100755
+    vf_semantic_file "$path" "$repo/$path" "$scratch/semantic" || return 3
+    digest="$(vf_hash "$scratch/semantic")" || return 3
+  elif [[ ! -e "$repo/$path" ]]; then type=missing; mode=''; digest=''
+  else echo "verification inputs: unsupported file type: $path" >&2; return 3; fi
+  printf '%s\0' path "$path" "$type" "$mode" "$digest" "$link" >> "$output"
+}
+
+# Fixed arity six-field input records. Git supplies NUL-safe deterministic
+# tracked/index and untracked ordering; no GNU sort -z or line-split filenames.
+vf_snapshot() (
+  local spec="$1" repo="$2" cwd="$3" output="$4" tmp path record head oid mode stage key value tool resolved
+  repo="$(cd "$repo" && pwd -P)" || return 3
+  cwd="$(cd "$cwd" && pwd -P)" || return 3
+  [[ "$(git -C "$repo" rev-parse --show-toplevel 2>/dev/null)" == "$repo" ]] || {
+    echo 'verification inputs: Git worktree root required' >&2; return 3;
+  }
+  tmp="$(mktemp -d "${TMPDIR:-/tmp}/vf-snapshot.XXXXXX")" || return 3
+  trap 'rm -rf "$tmp"' EXIT
+  vf_config "$repo/.specify/stack.yml" "$spec/tasks.md" "$tmp/config" || return 3
+  printf '%s\0' version 1 "$repo" "$cwd" '' '' > "$tmp/inputs"
+  git -C "$repo" ls-files --stage -z > "$tmp/index" || return 3
+  git -C "$repo" ls-files --cached --others --exclude-standard -z > "$tmp/paths" || return 3
+  while IFS= read -r -d '' record; do
+    path="${record#*$'\t'}"; head="${record%%$'\t'*}"
+    vf_bookkeeping_path "$path" && continue
+    read -r mode oid stage <<< "$head"
+    [[ "$mode" != 160000 ]] || { echo "verification inputs: submodule requires explicit transitive inputs: $path" >&2; return 3; }
+    git -C "$repo" cat-file blob "$oid" > "$tmp/blob" || return 3
+    vf_semantic_file "$path" "$tmp/blob" "$tmp/semantic" || return 3
+    printf '%s\0' index "$path" "$mode" "$stage" "$(vf_hash "$tmp/semantic")" '' >> "$tmp/inputs"
+  done < "$tmp/index"
+  while IFS= read -r -d '' path; do vf_path_record "$repo" "$path" "$tmp/inputs" "$tmp" || return 3; done < "$tmp/paths"
+  while IFS= read -r -d '' path; do
+    case "$path" in /*|../*|*/../*|*/..|..) echo 'verification inputs must be repo relative' >&2; return 3;; esac
+    [[ -e "$repo/$path" || -L "$repo/$path" ]] || { echo "verification input missing: $path" >&2; return 3; }
+    if [[ -d "$repo/$path" && ! -L "$repo/$path" ]]; then
+      # find ordering is not canonical across platforms. Hash each record then
+      # sort its digest; paths themselves remain intact in each framed record.
+      find "$repo/$path" \( -type f -o -type l \) -print0 > "$tmp/extra" || return 3
+      : > "$tmp/extra-hashes"
+      while IFS= read -r -d '' record; do
+        : > "$tmp/path-record"
+        vf_path_record "$repo" "${record#"$repo/"}" "$tmp/path-record" "$tmp" || return 3
+        vf_hash "$tmp/path-record" >> "$tmp/extra-hashes" || return 3
+      done < "$tmp/extra"
+      LC_ALL=C sort "$tmp/extra-hashes" > "$tmp/sorted"
+      printf '%s\0' declared-directory "$path" "$(vf_hash "$tmp/sorted")" '' '' '' >> "$tmp/inputs"
+    else vf_path_record "$repo" "$path" "$tmp/inputs" "$tmp" || return 3; fi
+  done < "$tmp/config/inputs.nul"
+  # compgen emits names only. Values are hashed without ever persisting secrets.
+  compgen -e | LC_ALL=C sort > "$tmp/env-names"
+  while IFS= read -r key; do
+    case "$key" in PWD|OLDPWD|SHLVL|_) continue;; esac
+    value="${!key}"
+    printf '%s\0' environment "$key" present "$(printf '%s' "$value" | vf_hash /dev/stdin)" '' '' >> "$tmp/inputs"
+  done < "$tmp/env-names"
+  { printf '%s\0' bash; cat "$tmp/config/tools.nul"; } > "$tmp/tools"
+  while IFS= read -r -d '' tool; do
+    resolved="$(command -v "$tool")" || { echo "verification tool missing: $tool" >&2; return 3; }
+    [[ -f "$resolved" && -x "$resolved" ]] || { echo "verification tool is not an executable file: $tool" >&2; return 3; }
+    printf '%s\0' tool "$tool" "$resolved" "$(vf_hash "$resolved")" '' '' >> "$tmp/inputs"
+  done < "$tmp/tools"
+  # The referenced spec can be outside the repository for an umbrella check.
+  for path in spec.md plan.md tasks.md STATUS.md; do
+    [[ -f "$spec/$path" ]] || continue
+    vf_semantic_file ".specify/specs/active/$path" "$spec/$path" "$tmp/semantic" || return 3
+    printf '%s\0' document "$spec/$path" "$(vf_hash "$tmp/semantic")" '' '' '' >> "$tmp/inputs"
+  done
+  cp "$tmp/inputs" "$output" || return 3
+  vf_hash "$output"
+)
+

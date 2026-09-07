@@ -2,7 +2,7 @@
 tasks_for: 003-gate-round-reduction-and-token-discipline
 status: in-progress  # draft | in-progress | complete
 created: 2026-09-05
-updated: 2026-09-06
+updated: 2026-09-07
 ---
 
 # Tasks: Gate round reduction and token discipline
@@ -245,7 +245,7 @@ keeps each edit task to at most five files instead of combining unrelated work.
   - *Refs:* REQ-006, REQ-009, AC-020, AC-022, FM-007, FM-008, INV-003, plan §3.2, §4.2, §4.4
   - *Evidence:* `bash tests/test-verification.sh → -- 2/2 passed (notes/evidence.md, T015, sha256:0e92dde043a9); FM-007,FM-008,INV-003, → task Tests locators; bootstrap no-tick capture` (2026-09-06)
 
-- [ ] **T016** [hard] — Fingerprint complete semantic verification inputs
+- [x] **T016** [hard] — Fingerprint complete semantic verification inputs
   - *Files:* `scripts/verification-lib.sh` (new in T002), `tests/test-verification.sh` (new in T003), `tests/helpers.sh`
   - *Acceptance:* Implement vf_snapshot with AC-020 mutations of staged/dirty/untracked source, tests/helpers/fixtures, locks/config, ignored declarations, paths/modes/links, hashed environment/tools and semantic documents while narrowly excluding bookkeeping.
   - *Verify kind:* test
@@ -253,6 +253,7 @@ keeps each edit task to at most five files instead of combining unrelated work.
   - *Verify:* `bash tests/test-verification.sh` → all suites `passed`, exit 0
   - *Reuse:* local
   - *Refs:* REQ-009, AC-020, FM-005, FM-007, FM-010, FM-014, plan §3.2, §4.4
+  - *Evidence:* `bash tests/test-verification.sh → -- 3/3 passed (notes/evidence.md, T016, sha256:b0307d5f3643); FM-005,FM-007,FM-010,FM-014, → task Tests locators; bootstrap no-tick capture` (2026-09-07)
 
 - [ ] **T017** [hard] — Capture complete runs with bounded summaries
   - *Files:* `scripts/verification-lib.sh` (new in T002), `scripts/spec-run.sh`, `tests/test-spec-run.sh`, `tests/test-verification.sh` (new in T003)

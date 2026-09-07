@@ -167,4 +167,77 @@ test_owned_transactions() {
   run_rc 3 bash -c '. "$1"; vf_integrity "$2" output.log' _ "$lib" "$SANDBOX/final"
 }
 
+snapshot_fixture() {
+  bash -c '. "$1"; vf_snapshot "$2" "$3" "$3" "$4"' _ "$SCRIPTS/verification-lib.sh" "$1" "$2" "$3"
+}
+
+# AC-020: every semantic input class invalidates; bookkeeping alone does not.
+test_capture_provenance() {
+  local spec repo baseline changed path
+  spec="$(make_verification_git_dir snapshot)"
+  repo="$(cd "$spec/../../.." && pwd -P)"
+  run_rc 0 snapshot_fixture "$spec" "$repo" "$SANDBOX/manifest"
+  baseline="$OUT"
+  for path in src/parser.sh tests/check.sh lockfile config.yml 'untracked name'; do
+    printf changed >> "$repo/$path"
+    run_rc 0 snapshot_fixture "$spec" "$repo" "$SANDBOX/manifest"
+    [[ "$OUT" != "$baseline" ]] || t_fail "AC-020: mutation missed: $path"
+    git -C "$repo" checkout -- "$path" 2>/dev/null || rm "$repo/$path"
+  done
+  printf changed >> "$repo/src/parser.sh"
+  git -C "$repo" add src/parser.sh
+  git -C "$repo" show HEAD:src/parser.sh > "$repo/src/parser.sh"
+  run_rc 0 snapshot_fixture "$spec" "$repo" "$SANDBOX/manifest"
+  [[ "$OUT" != "$baseline" ]] || t_fail 'AC-020: staged-only mutation missed'
+  git -C "$repo" reset -q HEAD -- src/parser.sh
+  chmod +x "$repo/src/parser.sh"
+  run_rc 0 snapshot_fixture "$spec" "$repo" "$SANDBOX/manifest"
+  [[ "$OUT" != "$baseline" ]] || t_fail 'AC-020: executable mode missed'
+  chmod -x "$repo/src/parser.sh"
+  mkdir -p "$spec/notes/captures/CAP-dummy" "$spec/notes/verification"
+  printf bookkeeping > "$spec/notes/evidence.md"
+  printf bookkeeping > "$spec/notes/captures/CAP-dummy/output.log"
+  printf bookkeeping > "$spec/notes/opponent.md"
+  run_rc 0 snapshot_fixture "$spec" "$repo" "$SANDBOX/manifest"
+  assert_eq "$baseline" "$OUT" 'AC-020: generated bookkeeping stays reusable'
+  sed 's/^- \[ \] /- [x] /' "$spec/tasks.md" > "$SANDBOX/tasks"
+  cp "$SANDBOX/tasks" "$spec/tasks.md"
+  printf '  - *Evidence:* generated capture\n' >> "$spec/tasks.md"
+  run_rc 0 snapshot_fixture "$spec" "$repo" "$SANDBOX/manifest"
+  assert_eq "$baseline" "$OUT" 'AC-020: checkbox/evidence bookkeeping excluded'
+  printf '\n## Decisions log\n- preserve this semantic decision\n' >> "$spec/STATUS.md"
+  run_rc 0 snapshot_fixture "$spec" "$repo" "$SANDBOX/manifest"
+  [[ "$OUT" != "$baseline" ]] || t_fail 'AC-020: STATUS decision omitted'
+  changed="$OUT"
+  run_rc 0 env VF_TEST_SECRET=not-persisted bash -c '. "$1"; vf_snapshot "$2" "$3" "$3" "$4"' _ "$SCRIPTS/verification-lib.sh" "$spec" "$repo" "$SANDBOX/manifest"
+  [[ "$OUT" != "$changed" ]] || t_fail 'AC-020: exported environment omitted'
+  assert_not_contains "$(tr '\000' '\n' < "$SANDBOX/manifest")" not-persisted
+  ln -s src/parser.sh "$repo/link"
+  run_rc 0 snapshot_fixture "$spec" "$repo" "$SANDBOX/manifest"
+  [[ "$OUT" != "$changed" ]] || t_fail 'AC-020: symlink omitted'
+  # AC-020: ignored declarations, odd filenames and tool content are inputs.
+  printf 'ignored/\n' > "$repo/.gitignore"
+  mkdir "$repo/ignored"
+  printf first > "$repo/ignored/tool"
+  chmod +x "$repo/ignored/tool"
+  printf "verification_inputs:\n  - 'ignored'\n" > "$SANDBOX/declared"
+  sed '/^verification_inputs:/d' "$repo/.specify/stack.yml" > "$SANDBOX/stack"
+  cat "$SANDBOX/stack" "$SANDBOX/declared" > "$repo/.specify/stack.yml"
+  run_rc 0 snapshot_fixture "$spec" "$repo" "$SANDBOX/manifest"
+  changed="$OUT"
+  printf second > "$repo/ignored/tool"
+  run_rc 0 snapshot_fixture "$spec" "$repo" "$SANDBOX/manifest"
+  [[ "$OUT" != "$changed" ]] || t_fail 'AC-020: ignored declared input missed'
+  changed="$OUT"
+  printf odd > "$repo/line
+break"
+  run_rc 0 snapshot_fixture "$spec" "$repo" "$SANDBOX/manifest"
+  [[ "$OUT" != "$changed" ]] || t_fail 'AC-020: newline path missed'
+  changed="$OUT"
+  printf semantic >> "$spec/plan.md"
+  run_rc 0 snapshot_fixture "$spec" "$repo" "$SANDBOX/manifest"
+  [[ "$OUT" != "$changed" ]] || t_fail 'AC-020: plan semantic change missed'
+
+}
+
 t_run_all

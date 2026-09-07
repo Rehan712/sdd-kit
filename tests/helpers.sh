@@ -374,3 +374,23 @@ t_run_all() {
   echo "  -- $((total-failed))/$total passed"
   (( failed == 0 ))
 }
+
+# Git-backed execution fixture; existing non-Git authoring fixtures stay intact.
+make_verification_git_dir() {
+  local spec repo
+  spec="$(make_verification_spec_dir "${1:-execution}")"
+  repo="$(cd "$spec/../../.." && pwd -P)"
+  mkdir -p "$repo/src" "$repo/tests" "$repo/scripts" "$repo/docs"
+  printf 'value=good\n' > "$repo/src/parser.sh"
+  cat > "$repo/tests/check.sh" <<'EOF'
+#!/usr/bin/env bash
+# AC-001
+ test_ac_001_shared() { . src/parser.sh; [[ "$value" == good ]]; }
+test_ac_001_shared || exit 1
+echo passed
+EOF
+  git -C "$repo" init -q
+  git -C "$repo" add .
+  git -C "$repo" -c user.name=Fixture -c user.email=fixture@example.invalid commit -qm fixture
+  printf '%s\n' "$spec"
+}
