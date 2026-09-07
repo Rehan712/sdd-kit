@@ -285,7 +285,7 @@ keeps each edit task to at most five files instead of combining unrelated work.
   - *Refs:* REQ-006, REQ-009, AC-022, FM-006, FM-010, INV-001, INV-002, INV-003, plan §3.2, §4.2
   - *Evidence:* CAP-3-F6tBsK verified by spec-gate accept; return sha256:28ba4c1dedc5aa5b508c026fd792b196804f79f5d765932ccc9e627facbfebbd
 
-- [ ] **T020** [hard] — Run the fresh deterministic gate floor
+- [x] **T020** [hard] — Run the fresh deterministic gate floor
   - *Files:* `scripts/spec-gate.sh` (new in T014), `scripts/verification-lib.sh` (new in T002), `tests/test-spec-gate.sh` (new in T019)
   - *Acceptance:* Add AC-007 counters for all three checkers, every gate_check, correct existing worktree/cwd, current-evidence refresh and nonzero-before-gate refusal, recording bounded floor captures with reuse still disabled.
   - *Verify kind:* test
@@ -294,6 +294,7 @@ keeps each edit task to at most five files instead of combining unrelated work.
   - *Reuse:* local
   - *Refs:* REQ-007, REQ-009, REQ-016, AC-007, FM-011, FM-012, FM-013, INV-001, INV-004, plan §3.3, §4.1, §4.3
   - *Integration owner:* T027
+  - *Evidence:* CAP-4-9AgF6L verified by spec-gate accept; return sha256:f85c6d1f9363281fb9e33a338adc6c768367602c60b91e31a46fc39af8acb7cb
 
 - [ ] **T021** [hard] — Checkpoint completed and retained coverage bindings
   - *Files:* `scripts/spec-gate.sh` (new in T014), `scripts/spec-ac-coverage.sh`, `scripts/verification-lib.sh` (new in T002), `tests/test-spec-gate.sh` (new in T019)

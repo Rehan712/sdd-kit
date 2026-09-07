@@ -1031,6 +1031,11 @@ vf_snapshot() (
     [[ -f "$resolved" && -x "$resolved" ]] || { echo "verification tool is not an executable file: $tool" >&2; return 3; }
     printf '%s\0' tool "$tool" "$resolved" "$(vf_hash "$resolved")" '' '' >> "$tmp/inputs"
   done < "$tmp/tools"
+  for tool in lib.sh verification-lib.sh spec-run.sh spec-task.sh spec-gate.sh sdd-analyze.sh spec-ac-coverage.sh spec-evidence.sh; do
+    resolved="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)/$tool"
+    [[ -f "$resolved" ]] || { echo "verification harness missing: $tool" >&2; return 3; }
+    printf '%s\0' harness "$resolved" "$(vf_hash "$resolved")" '' '' '' >> "$tmp/inputs"
+  done
   # The referenced spec can be outside the repository for an umbrella check.
   for path in spec.md plan.md tasks.md STATUS.md; do
     [[ -f "$spec/$path" ]] || continue
@@ -1114,6 +1119,7 @@ vf_summary() {
 vf_capture() { # spec binding cwd policy -- argv...
   local spec="$1" binding="$2" cwd="$3" policy="$4"; shift 4
   [[ "${1:-}" == -- && $# -gt 1 ]] || return 2; shift
+  VF_CAPTURE_ID="" VF_CAPTURE_DIR=""
   local repo parent staging id seq before after rc start end check shell_identity final key output_digest
   spec="$(cd "$spec" && pwd -P)" || return 3
   cwd="$(cd "$cwd" && pwd -P)" || return 3
@@ -1242,7 +1248,8 @@ vf_evidence_current() (
     [[ "$state" == "done" ]] || continue
     # Only exempt true administrative tasks absent from the typed catalog.
     vf_task_info "$tmp/bindings" "$task" >/dev/null 2>&1 || continue
-    vf_task_current "$spec" "$task" "$tmp/bindings" "$tmp/inputs" || return 3
+    if [[ "${VF_TASK[5]}" == manual ]]; then vf_manual_current "$spec" "$task" || return 3
+    else vf_task_current "$spec" "$task" "$tmp/bindings" "$tmp/inputs" || return 3; fi
   done < <(bash "$(dirname -- "${BASH_SOURCE[0]}")/spec-task.sh" list "$spec")
   echo 'current evidence: all completed task checks have valid current captures'
 )
@@ -1442,3 +1449,195 @@ vf_accept_transaction() {
   vf_accept_audit "$spec" "$task" "$ret" accepted current "$before" "$after" || return 3
   printf 'accept accepted task=%s return=%s\n' "$task" "$ret"
 }
+# Read-only worktree resolution. Never create or fall back to a base checkout.
+vf_gate_roots() {
+  local spec="$1" output="$2" repo declared name path branch wt count expected
+  : > "$output"
+  declared="$(spec_declared_repos "$spec")"
+  if [[ -z "$declared" ]]; then
+    repo="$(git -C "$spec" rev-parse --show-toplevel 2>/dev/null)" || return 3
+    repo="$(cd "$repo" && pwd -P)" || return 3
+    expected="$(fm_get "$spec/STATUS.md" worktree 2>/dev/null || :)"
+    if [[ -n "$expected" && "$expected" != none ]]; then
+      [[ -d "$expected" && "$(cd "$expected" && pwd -P)" == "$repo" ]] || { echo 'gate worktree mismatch: reconcile STATUS worktree' >&2; return 3; }
+    fi
+    branch="$(fm_get "$spec/STATUS.md" branch 2>/dev/null || :)"
+    if [[ -n "$branch" && "$branch" != none ]]; then
+      [[ "$(git -C "$repo" symbolic-ref --quiet --short HEAD)" == "$branch" ]] || { echo 'gate branch mismatch' >&2; return 3; }
+    fi
+    printf '%s\0' "$repo" > "$output"
+  else
+    for name in $declared; do
+      path="$(bash "$HUB_DIR/scripts/system-map.sh" path "$name")" || return 3
+      branch="refs/heads/spec/$(basename "$spec")"
+      wt="$(git -C "$path" worktree list --porcelain | awk -v branch="$branch" '/^worktree / {p=substr($0,10)} /^branch / && substr($0,8)==branch {print p}')" || return 3
+      count="$(printf '%s\n' "$wt" | awk 'NF {n++} END {print n+0}')"
+      [[ "$count" == 1 && -d "$wt" ]] || { echo "gate worktree missing/ambiguous for $name" >&2; return 3; }
+      printf '%s\0' "$(cd "$wt" && pwd -P)" >> "$output"
+    done
+  fi
+}
+vf_gate_snapshot() (
+  local spec="$1" roots="$2" out="$3" repo tmp
+  tmp="$(mktemp "${TMPDIR:-/tmp}/vf-gate-inputs.XXXXXX")" || return 3
+  trap 'rm -f "$tmp"' EXIT
+  : > "$out"
+  while IFS= read -r -d '' repo; do
+    vf_snapshot "$spec" "$repo" "$repo" "$tmp" >/dev/null || return 3
+    cat "$tmp" >> "$out"
+  done < "$roots"
+  vf_hash "$out"
+)
+
+# All invocations revalidate artifacts; T023 enables previous-invocation reuse.
+VF_REUSE_ENABLED=0
+vf_gate_execute() { # spec catalog repo policy commands-file kind -- argv...
+  local spec="$1" catalog="$2" repo="$3" policy="$4" records="$5" kind="$6"; shift 6
+  [[ "$1" == -- ]] || return 2; shift
+  local tmp dir cap='' cached=0 rc=0 argv
+  tmp="$(mktemp -d "$spec/notes/verification/execute.XXXXXX")" || return 3
+  printf '%s\0' "$@" > "$tmp/argv"
+  vf_snapshot "$spec" "$repo" "$repo" "$tmp/inputs" >/dev/null || { rm -rf "$tmp"; return 3; }
+  # Reuse only exact argv + cwd + inputs and explicit local policy. Captures
+  # made in this invocation can serve duplicate commands after current checks.
+  if [[ "$policy" == local ]]; then
+    for dir in "$spec"/notes/captures/CAP-*; do
+      [[ -d "$dir" ]] || continue
+      cmp -s "$tmp/argv" "$dir/argv.nul" && cmp -s "$catalog" "$dir/bindings.nul" || continue
+      if (( ! VF_REUSE_ENABLED )); then
+        grep -Fx "${dir##*/}" "$VF_GATE_FRESH" >/dev/null || continue
+      fi
+      if vf_capture_check "$spec" "${dir##*/}" "$tmp/inputs" reuse >/dev/null 2>&1; then cap="${dir##*/}"; cached=1; fi
+    done
+  fi
+  if [[ -z "$cap" ]]; then
+    VF_NO_TICK=1
+    vf_capture "$spec" "$catalog" "$repo" "$policy" -- "$@" || rc=$?
+    cap="${VF_CAPTURE_ID:-}"
+    [[ -n "$cap" ]] || { rm -rf "$tmp"; return "${rc:-3}"; }
+    printf '%s\n' "$cap" >> "$VF_GATE_FRESH"
+  fi
+  printf -v argv '%s ' "$@"
+  printf '%s\0' "$kind" "$repo" "$repo" "$argv" "$cap" "$cached" >> "$records"
+  if (( rc )); then vf_summary "$spec/notes/captures/$cap" failure; rm -rf "$tmp"; return "$rc"; fi
+  vf_capture_check "$spec" "$cap" "$tmp/inputs" current || { rm -rf "$tmp"; return 3; }
+  rm -rf "$tmp"
+}
+
+vf_gate_task_repo() { # spec task roots -> physical root
+  local spec="$1" task="$2" roots="$3" name path branch wt
+  name="$(bash "$HUB_DIR/scripts/spec-task.sh" show "$spec" "$task" | head -1 | sed -n 's/.*\[repo:\([^]]*\)\].*/\1/p')"
+  if [[ -n "$name" ]]; then
+    path="$(bash "$HUB_DIR/scripts/system-map.sh" path "$name")" || return 3
+    branch="refs/heads/spec/$(basename "$spec")"
+    wt="$(git -C "$path" worktree list --porcelain | awk -v branch="$branch" '/^worktree / {p=substr($0,10)} /^branch / && substr($0,8)==branch {print p}')" || return 3
+    [[ -d "$wt" ]] || return 3
+    printf '%s\n' "$(cd "$wt" && pwd -P)"
+  else IFS= read -r -d '' path < "$roots"; printf '%s\n' "$path"; fi
+}
+
+# Current floor: refresh exact completed-task checks, execute mandatory checks,
+# then seal current command/result identities. No model verdict is inferred.
+vf_gate_floor() {
+  local spec="$1" tmp repo task state stage subject source after root_index=0 kind command check_stage policy v id final start records
+  spec="$(cd "$spec" && pwd -P)" || return 3
+  mkdir -p "$spec/notes/verification/floors" || return 3
+  tmp="$(mktemp -d "$spec/notes/verification/floors/.floor.XXXXXX")" || return 3
+  records="$tmp/commands.nul"; : > "$records"
+  VF_GATE_FRESH="$tmp/fresh"; : > "$VF_GATE_FRESH"
+  vf_gate_roots "$spec" "$tmp/roots.nul" || return 3
+  vf_binding_snapshot "$spec" "$tmp/bindings.nul" || return 3
+  source="$(vf_gate_snapshot "$spec" "$tmp/roots.nul" "$tmp/inputs.nul")" || return 3
+  start="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+  # Configuration gaps are fatal even for a legacy spec. A no-op is no floor.
+  while IFS= read -r -d '' repo; do
+    vf_config "$repo/.specify/stack.yml" "$spec/tasks.md" "$tmp/config-$root_index" || return 3
+    vf_meta_load "$tmp/config-$root_index/meta.nul" 'version gate_count stage_validation' || return 3
+    [[ "$(vf_meta_get gate_count)" -gt 0 ]] || { echo "floor gap: missing nonempty gate_checks in $repo/.specify/stack.yml" >&2; return 3; }
+    root_index=$((root_index+1))
+  done < "$tmp/roots.nul"
+  while IFS=$'\t' read -r task state stage subject; do
+    [[ "$state" == "done" ]] || continue
+    vf_task_info "$tmp/bindings.nul" "$task" >/dev/null 2>&1 || continue
+    if [[ "${VF_TASK[5]}" == manual ]]; then
+      vf_manual_current "$spec" "$task" || return 3
+      continue
+    fi
+    repo="$(vf_gate_task_repo "$spec" "$task" "$tmp/roots.nul")" || return 3
+    vf_gate_execute "$spec" "$tmp/bindings.nul" "$repo" "${VF_TASK[10]}" "$records" "task:$task" -- "$(command -v bash)" -o pipefail -c "$VF_TASK_COMMAND" || return $?
+  done < <(bash "$HUB_DIR/scripts/spec-task.sh" list "$spec")
+  IFS= read -r -d '' repo < "$tmp/roots.nul"
+  for command in sdd-analyze spec-ac-coverage spec-evidence; do
+    # AC coverage receives the actual existing worktrees, including umbrellas.
+    local args=("$(command -v bash)" "$HUB_DIR/scripts/$command.sh" "$spec")
+    if [[ "$command" == spec-ac-coverage ]]; then while IFS= read -r -d '' v; do args+=(--root "$v"); done < "$tmp/roots.nul"; fi
+    vf_gate_execute "$spec" "$tmp/bindings.nul" "$repo" never "$records" "checker:$command" -- "${args[@]}" || return $?
+  done
+  root_index=0
+  while IFS= read -r -d '' repo; do
+    while IFS= read -r -d '' kind && IFS= read -r -d '' check_stage && IFS= read -r -d '' command; do
+      [[ "$kind" == gate_checks ]] || continue
+      policy=never
+      while IFS= read -r -d '' v; do [[ "$v" != "$command" ]] || policy=local; done < "$tmp/config-$root_index/reuse.nul"
+      vf_gate_execute "$spec" "$tmp/bindings.nul" "$repo" "$policy" "$records" gate_check -- "$(command -v bash)" -o pipefail -c "$command" || return $?
+    done < "$tmp/config-$root_index/commands.nul"
+    root_index=$((root_index+1))
+  done < "$tmp/roots.nul"
+  after="$(vf_gate_snapshot "$spec" "$tmp/roots.nul" "$tmp/after")" || return 3
+  [[ "$source" == "$after" ]] || { echo 'floor stale: source inputs changed during verification' >&2; return 3; }
+  id="FLOOR-${tmp##*.}"
+  printf '%s\0' version 1 id "$id" kind floor stage '' start "$start" end "$(date -u +%Y-%m-%dT%H:%M:%SZ)" source "$source" exit 0 > "$tmp/meta.nul"
+  vf_lock "$spec" || return 3
+  vf_seal "$tmp" meta.nul commands.nul bindings.nul inputs.nul roots.nul || return 3
+  final="${tmp%/*}/$id"
+  vf_publish "$tmp" "$final" meta.nul commands.nul bindings.nul inputs.nul roots.nul || return 3
+  printf '%s\n' "$id" > "$spec/notes/verification/floor-latest.tmp" && mv "$spec/notes/verification/floor-latest.tmp" "$spec/notes/verification/floor-latest" || return 3
+  printf '\n## GATE-FLOOR\n\nResult: %s; source: %s; exit: 0; command records: `notes/verification/floors/%s/commands.nul`.\n' "$id" "$source" "$id" >> "$spec/notes/evidence.md"
+  vf_unlock
+  vf_gate_result_summary "$final"
+}
+vf_gate_result_summary() {
+  local dir="$1" v f=() executed=0 reused=0
+  vf_meta_load "$dir/meta.nul" 'version id kind stage start end source exit' || return 3
+  while IFS= read -r -d '' v; do
+    f+=("$v"); (( ${#f[@]} == 6 )) || continue
+    if [[ "${f[5]}" == 1 ]]; then reused=$((reused+1)); else executed=$((executed+1)); fi
+    f=()
+  done < "$dir/commands.nul"
+  printf 'result=%s source=%s exit=%s executed=%s cache-hits=%s records=%s/commands.nul\n' "$(vf_meta_get id)" "$(vf_meta_get source)" "$(vf_meta_get exit)" "$executed" "$reused" "$dir" | head -c "$VF_SUCCESS_BYTES"
+}
+
+vf_floor_validate() (
+  local spec="$1" id="$2" dir tmp source v f=() repo
+  [[ "$id" =~ ^FLOOR-[A-Za-z0-9]+$ ]] || { echo 'floor identity invalid' >&2; return 3; }
+  dir="$spec/notes/verification/floors/$id"
+  vf_integrity "$dir" meta.nul commands.nul bindings.nul inputs.nul roots.nul || return 3
+  vf_meta_load "$dir/meta.nul" 'version id kind stage start end source exit' || return 3
+  [[ "$(vf_meta_get exit)" == 0 && "$(vf_meta_get id)" == "$id" ]] || return 3
+  source="$(vf_meta_get source)"
+  tmp="$(mktemp -d "$spec/notes/verification/floor-check.XXXXXX")" || return 3
+  trap 'rm -rf "$tmp"' EXIT
+  vf_gate_roots "$spec" "$tmp/roots" || return 3
+  cmp -s "$tmp/roots" "$dir/roots.nul" || return 3
+  [[ "$source" == "$(vf_gate_snapshot "$spec" "$tmp/roots" "$tmp/inputs")" ]] || { echo 'floor stale: refresh floor for current inputs' >&2; return 3; }
+  while IFS= read -r -d '' v; do
+    f+=("$v"); (( ${#f[@]} == 6 )) || continue
+    repo="${f[1]}"
+    vf_snapshot "$spec" "$repo" "$repo" "$tmp/repo-inputs" >/dev/null || return 3
+    vf_capture_check "$spec" "${f[4]}" "$tmp/repo-inputs" current || return 3
+    f=()
+  done < "$dir/commands.nul"
+  printf '%s\n' "$source"
+)
+
+vf_manual_current() (
+  local spec="$1" task="$2" receipt tmp found=0
+  tmp="$(mktemp "$spec/notes/verification/manual.XXXXXX")" || return 3
+  trap 'rm -f "$tmp"' EXIT
+  for receipt in "$spec/notes/verification/accepted/$task"/ACC-*; do
+    [[ -f "$receipt/COMMITTED" ]] || continue
+    vf_integrity "$receipt" meta.nul return.txt tasks.after digests.nul || return 3
+    if vf_return_check "$spec" "$task" "$receipt/return.txt" "$tmp" >/dev/null 2>&1; then found=1; fi
+  done
+  (( found )) || { echo "manual evidence gap: $task needs current artifact-backed acceptance" >&2; return 3; }
+)

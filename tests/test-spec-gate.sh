@@ -107,4 +107,64 @@ test_prepared_before_recovery() {
   run_rc 0 cmp "$SANDBOX/concurrent-tasks" "$spec/tasks.md"
 }
 
+# AC-007: real checkers and suite commands execute in the existing worktree.
+floor_fixture() {
+  local spec="$1" repo kit check counter
+  repo="$(cd "$spec/../../.." && pwd -P)"
+  kit="$SANDBOX/floor-kit"
+  mkdir -p "$kit"
+  cp -R "$KIT_DIR/scripts" "$kit/scripts"
+  for check in sdd-analyze spec-ac-coverage spec-evidence; do
+    mv "$kit/scripts/$check.sh" "$kit/scripts/$check-real.sh"
+    counter="$SANDBOX/$check-count"
+    printf '#!/usr/bin/env bash\nprintf x >> %q\nexec bash %q "$@"\n' "$counter" "$kit/scripts/$check-real.sh" > "$kit/scripts/$check.sh"
+  done
+  printf '\nprintf x >> %q\n' "$SANDBOX/suite-count" >> "$repo/tests/check.sh"
+  printf '#!/usr/bin/env bash\n# AC-002 AC-003 AC-004\nprintf x >> %q\nprintf "static passed\\n"\n' "$SANDBOX/static-count" > "$repo/tests/static.sh"
+  cat > "$repo/.specify/stack.yml" <<'EOF'
+stacks: []
+gate_checks:
+  - 'bash tests/check.sh'
+  - 'bash tests/static.sh'
+reuse_checks: []
+verification_tools:
+  - 'bash'
+verification_inputs: []
+EOF
+  printf '%s\n' "$kit/scripts/spec-gate.sh"
+}
+
+test_floor() {
+  local spec repo gate id records check
+  spec="$(make_verification_git_dir floor)"
+  repo="$(cd "$spec/../../.." && pwd -P)"
+  gate="$(floor_fixture "$spec")"
+  run_rc 0 bash "$gate" floor "$spec"
+  assert_contains "$OUT" 'executed=5'
+  id="$(printf '%s' "$OUT" | sed -n 's/^result=\([^ ]*\).*/\1/p')"
+  records="$spec/notes/verification/floors/$id/commands.nul"
+  for check in sdd-analyze spec-ac-coverage spec-evidence; do
+    assert_eq x "$(cat "$SANDBOX/$check-count")" "AC-007: $check executed"
+    assert_contains "$(tr '\000' '\n' < "$records")" "checker:$check"
+  done
+  assert_eq x "$(cat "$SANDBOX/suite-count")"
+  assert_eq x "$(cat "$SANDBOX/static-count")"
+  assert_contains "$(cat "$spec/notes/evidence.md")" '## GATE-FLOOR'
+  # Reuse is deliberately disabled until T023; unchanged checks still rerun.
+  run_rc 0 bash "$gate" floor "$spec"
+  assert_eq xx "$(cat "$SANDBOX/suite-count")"
+  printf '\nexit 7\n' >> "$repo/tests/static.sh"
+  run_rc 7 bash "$gate" floor "$spec"
+  assert_contains "$OUT" 'exit=7'
+  [[ ! -e "$SANDBOX/model-called" ]] || t_fail 'AC-007: failing floor dispatched model'
+  printf 'stacks: []\n' > "$repo/.specify/stack.yml"
+  run_rc 3 bash "$gate" floor "$spec"
+  assert_contains "$OUT" 'missing nonempty gate_checks'
+  # A proper frontmatter worktree mismatch fails before any command runs.
+  awk '/^branch: none$/ {print; print "worktree: /nonexistent/spec-worktree"; next} {print}' "$spec/STATUS.md" > "$SANDBOX/status"
+  cp "$SANDBOX/status" "$spec/STATUS.md"
+  run_rc 3 bash "$gate" floor "$spec"
+  assert_contains "$OUT" 'worktree mismatch'
+}
+
 t_run_all
