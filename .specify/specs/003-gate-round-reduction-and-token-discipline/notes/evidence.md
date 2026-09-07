@@ -419,3 +419,9 @@ Captured acceptance runs, appended by `spec-run.sh`. One block per run.
   ok   test_owned_transactions
   -- 3/3 passed
 ```
+
+## CAP-1-G083Nw — 2026-09-07T05:02:31Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-1-G083Nw/output.log`.
+
+capture=CAP-1-G083Nw command=/bin/bash -o pipefail -c bash tests/test-spec-run.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=6afa5129adcacc389d7dd247ba059bc93f6abec84371466d3b7f5f19daa2bbd2 input=7ddeca901e592669a05dc262a94d224054c5b200de566212667b44333bed711c log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-1-G083Nw/output.log [complete metadata: capture directory]

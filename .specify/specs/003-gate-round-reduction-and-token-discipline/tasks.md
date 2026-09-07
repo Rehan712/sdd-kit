@@ -255,7 +255,7 @@ keeps each edit task to at most five files instead of combining unrelated work.
   - *Refs:* REQ-009, AC-020, FM-005, FM-007, FM-010, FM-014, plan §3.2, §4.4
   - *Evidence:* `bash tests/test-verification.sh → -- 3/3 passed (notes/evidence.md, T016, sha256:b0307d5f3643); FM-005,FM-007,FM-010,FM-014, → task Tests locators; bootstrap no-tick capture` (2026-09-07)
 
-- [ ] **T017** [hard] — Capture complete runs with bounded summaries
+- [x] **T017** [hard] — Capture complete runs with bounded summaries
   - *Files:* `scripts/verification-lib.sh` (new in T002), `scripts/spec-run.sh`, `tests/test-spec-run.sh`, `tests/test-verification.sh` (new in T003)
   - *Acceptance:* Add AC-021 capture/output and transaction cases proving full logs, COMPLETE/digests, before/after identities, exact argv/from-task pipefail execution, real exits, measured output bounds and legacy key/default/no-tick compatibility.
   - *Verify kind:* test
@@ -263,6 +263,7 @@ keeps each edit task to at most five files instead of combining unrelated work.
   - *Verify:* `bash tests/test-spec-run.sh && bash tests/test-verification.sh` → all suites `passed`, exit 0
   - *Reuse:* local
   - *Refs:* REQ-006, REQ-009, REQ-016, AC-020, AC-021, FM-006, FM-008, FM-009, INV-003, plan §3.2, §4.1, §4.4
+  - *Evidence:* `CAP-1-G083Nw (notes/captures/CAP-1-G083Nw/output.log): bash tests/test-spec-run.sh && bash tests/test-verification.sh → 6/6 and 3/3 passed, exit 0; FM-006/FM-008/FM-009/INV-003 map to test_bounded_capture and test_owned_transactions; input-before equals input-after` (2026-09-07)
 
 - [ ] **T018** [hard] — Reject stale or damaged current evidence
   - *Files:* `scripts/verification-lib.sh` (new in T002), `scripts/spec-evidence.sh`, `tests/test-verification.sh` (new in T003)

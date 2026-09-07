@@ -49,4 +49,41 @@ test_usage_errors() {
   assert_contains "$(cat "$spec_dir/tasks.md")" "updated: 2026-01-01" "no mutation on failure"
 }
 
+# AC-021: full logs, actual argv/exits, pipeline failure and measured byte bounds.
+test_bounded_capture() {
+  local spec repo cap bytes before lib="$SCRIPTS/verification-lib.sh"
+  spec="$(make_verification_git_dir bounded)"
+  repo="$(cd "$spec/../../.." && pwd -P)"
+  before="$(cat "$spec/tasks.md")"
+  run_rc 0 "$SPEC_RUN" "$spec" T001 --cwd "$repo" --from-task --no-tick --summary
+  assert_contains "$OUT" 'exit=0'
+  assert_contains "$OUT" 'key=passed'
+  assert_eq 1 "$(printf '%s\n' "$OUT" | wc -l | tr -d ' ')" 'AC-021: one success line'
+  cap="$(printf '%s' "$OUT" | sed -n 's/^capture=\([^ ]*\).*/\1/p')"
+  [[ -f "$spec/notes/captures/$cap/COMPLETE" ]] || t_fail 'AC-021: capture is incomplete'
+  assert_eq "$before" "$(cat "$spec/tasks.md")" 'AC-021: no tick'
+  run_rc 0 bash -c '. "$1"; vf_integrity "$2" "${VF_CAPTURE_FILES[@]}"' _ "$lib" "$spec/notes/captures/$cap"
+  run_rc 0 "$SPEC_RUN" "$spec" T001 --cwd "$repo" --no-tick --summary --key passed -- bash -c 'printf "passed\n"; awk "BEGIN {for(i=0;i<4000;i++) print i, \"diagnostic line\"}"'
+  assert_contains "$OUT" 'key=passed'
+  bytes="$(printf '%s\n' "$OUT" | wc -c | tr -d ' ')"
+  [[ "$bytes" -le 2048 ]] || t_fail 'AC-021: success exceeds 2 KiB'
+  cap="$(printf '%s' "$OUT" | sed -n 's/^capture=\([^ ]*\).*/\1/p')"
+  assert_eq 4001 "$(wc -l < "$spec/notes/captures/$cap/output.log" | tr -d ' ')" 'AC-021: log never truncated'
+  run_rc 7 "$SPEC_RUN" "$spec" T001 --cwd "$repo" --no-tick --summary -- bash -c 'awk "BEGIN {for(i=0;i<100;i++) print i, \"failure line\"}"; exit 7'
+  assert_contains "$OUT" 'exit=7'
+  bytes="$(printf '%s\n' "$OUT" | wc -c | tr -d ' ')"
+  [[ "$bytes" -le 8192 ]] || t_fail 'AC-021: failure exceeds 8 KiB'
+  [[ "$(printf '%s\n' "$OUT" | wc -l)" -le 21 ]] || t_fail 'AC-021: more than 20 diagnostic lines'
+  sed 's/`bash tests\/check.sh`/`false | true`/' "$spec/tasks.md" > "$SANDBOX/tasks"
+  cp "$SANDBOX/tasks" "$spec/tasks.md"
+  run_rc 1 "$SPEC_RUN" "$spec" T001 --cwd "$repo" --from-task --no-tick --summary
+  assert_contains "$OUT" 'exit=1'
+  run_rc 0 "$SPEC_RUN" "$spec" T001 --cwd "$repo" --no-tick --summary -- printf '%s\n' 'two  spaces' 'a*b' 'line
+break'
+  cap="$(printf '%s' "$OUT" | sed -n 's/^capture=\([^ ]*\).*/\1/p')"
+  printf '%s\0' printf '%s\n' 'two  spaces' 'a*b' 'line
+break' > "$SANDBOX/argv"
+  run_rc 0 cmp "$SANDBOX/argv" "$spec/notes/captures/$cap/argv.nul"
+}
+
 t_run_all

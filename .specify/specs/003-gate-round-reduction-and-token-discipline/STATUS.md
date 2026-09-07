@@ -1,7 +1,7 @@
 ---
 spec: 003-gate-round-reduction-and-token-discipline
 phase: implement          # specify | plan | tasks | implement | review | shipped | abandoned
-active_tool: none        # claude | codex | copilot | none — who currently holds the spec
+active_tool: codex        # claude | codex | copilot | none — who currently holds the spec
 branch: spec/003-gate-round-reduction-and-token-discipline            # spec/003-gate-round-reduction-and-token-discipline once cut, else none
 worktree: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline          # absolute path once created, else none
 pr: none                # PR URL once opened — spec-pr.sh writes this itself
@@ -9,7 +9,7 @@ opponent: not-run       # not-run | CHALLENGED | CLEARED | BLOCKED  (+ date)
 reality_check: not-run  # not-run | NEEDS WORK | FAILED | READY  (+ date)
 ci: not-run             # not-run | pending | green | red  (+ date) — spec-ci.sh writes this
 retro: not-run          # not-run | done (+ date) — /sdd:retro after ship
-updated: 2026-09-06
+updated: 2026-09-07
 ---
 
 # STATUS — Gate round reduction and token discipline
@@ -30,13 +30,12 @@ updated: 2026-09-06
 
 ## Where things stand
 
-Stopped at the user's requested handoff point after T003 and its T003f1 fix.
-T001/T002/T003/T003f1 are accepted with captured evidence and clean security
-reviews where required; T003 commit is 9d8099e (T002: 8a0d737).
-T004/T005 remain [~]: prepared, uncommitted source changes; local checks passed.
-Final analyzer: one task-count warning, zero errors. ShellCheck/diff-check pass.
-No gate has started. Reuse remains disabled until T023.
-Linux Docker image and macOS Bash 3.2 execution routes are ready for T027.
+T001–T016 (plus T003f1) are accepted and committed in the existing worktree.
+T017 capture/summary runtime and tests are in progress; task remains unticked.
+Implementation runs directly here at the user’s request, without sdd:implement.
+The requested independent opponent review will run after implementation checks.
+Reuse remains disabled pending T023. No live gate or PR has been started.
+Linux Docker and macOS Bash 3.2 routes remain available for T027.
 
 ## Decisions log
 
@@ -85,18 +84,15 @@ Append-only, newest last. Each entry: `date — decision — rationale / who dec
 
 ## Handoff note
 
-Use the worktree above; the untracked original spec copy on main is stale.
-T004 owns skills/sdd-plan, skills/sdd-tasks and tests/test-gate-contracts.sh;
-T005 owns the four golden-example documents and tests/test-golden-example.sh.
-Their changes are saved but not accepted: finish from the diff, capture exact
-Verify with --no-tick, inspect FM/INV mappings and commit each task separately.
-Local T004/T005 checks passed 1/1 and 3/3; no acceptance was fabricated.
-T003 config catalogs and the original 12-field bindings catalog are documented
-in verification-lib.sh. See notes/history.md for schemas, evidence and quota
-events. Reuse/carry remain disabled; platform-matrix verification is still T027.
+Continue in this worktree; original spec documents on main are stale.
+T004–T016 were completed locally with real no-tick captures and separate commits.
+T017 adds versioned captures, exact argv/from-task execution and bounded output;
+its saved tests and source changes are not yet accepted. Use the current diff.
+The user requested direct implementation and only an opponent agent at the end;
+do not dispatch implementation workers or invoke the sdd:implement skill.
+T031 and Ship tasks remain pending, with no fabricated clearance or rollout.
 
 ## Next action
 
-On a new resume request, reconcile and accept T004, then T005; next is T006.
-Do not automatically resume: user requested a stop. T030/T031 gates and T032
-Open PR are pending; T033/T034 remain post-merge.
+Finish T017 verification, then T018 current-evidence rejection, T019 acceptance,
+and the remaining runtime/invoker/integration tasks through the opponent review.

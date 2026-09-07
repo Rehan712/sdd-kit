@@ -1040,3 +1040,128 @@ vf_snapshot() (
   vf_hash "$output"
 )
 
+# Normalize the mutable state column; task text and binding changes remain inputs.
+vf_binding_snapshot() (
+  local spec="$1" out="$2" tmp value fields=()
+  tmp="$(mktemp "${TMPDIR:-/tmp}/vf-bindings.XXXXXX")" || return 3
+  trap 'rm -f "$tmp"' EXIT
+  vf_bindings "$spec" tasks '' "$tmp" || return 3
+  : > "$out"
+  while IFS= read -r -d '' value; do
+    fields+=("$value"); (( ${#fields[@]} == 12 )) || continue
+    case "${fields[0]}" in task|test|binding) fields[4]='';; esac
+    printf '%s\0' "${fields[@]}" >> "$out"
+    fields=()
+  done < "$tmp"
+  (( ${#fields[@]} == 0 ))
+)
+vf_task_info() { # catalog task -> VF_TASK (twelve fields)
+  local value fields=()
+  VF_TASK=()
+  while IFS= read -r -d '' value; do
+    fields+=("$value"); (( ${#fields[@]} == 12 )) || continue
+    if [[ "${fields[0]}" == task && "${fields[2]}" == "$2" ]]; then VF_TASK=("${fields[@]}"); VF_TASK_COMMAND="${fields[9]#\`}"; VF_TASK_COMMAND="${VF_TASK_COMMAND%%\`*}"; return 0; fi
+    fields=()
+  done < "$1"
+  echo "verification task missing: $2" >&2; return 3
+}
+
+# Strict unique known NUL key/value metadata; data is never sourced as shell.
+vf_meta_load() {
+  local file="$1" key value allowed=" $2 " old
+  VF_META_KEYS=() VF_META_VALUES=()
+  [[ -f "$file" && ! -L "$file" ]] || return 3
+  while :; do
+    key=''
+    if ! IFS= read -r -d '' key; then [[ -z "$key" ]] || return 3; break; fi
+    IFS= read -r -d '' value || return 3
+    case "$allowed" in *" $key "*) ;; *) echo "metadata: unknown key $key" >&2; return 3;; esac
+    for old in ${VF_META_KEYS[@]+"${VF_META_KEYS[@]}"}; do [[ "$old" != "$key" ]] || { echo "metadata: duplicate key $key" >&2; return 3; }; done
+    VF_META_KEYS+=("$key"); VF_META_VALUES+=("$value")
+  done < "$file"
+}
+vf_meta_get() {
+  local i
+  for ((i=0;i<${#VF_META_KEYS[@]};i++)); do
+    if [[ "${VF_META_KEYS[i]}" == "$1" ]]; then printf '%s' "${VF_META_VALUES[i]}"; return 0; fi
+  done
+  echo "metadata: missing $1" >&2; return 3
+}
+VF_CAPTURE_KEYS='version id sequence kind start end repo cwd check shell input_before input_after no_tick exit output_digest output_bytes policy key'
+VF_CAPTURE_FILES=(meta.nul argv.nul inputs.nul inputs-after.nul bindings.nul output.log summary.txt)
+
+vf_escape() {
+  # Display bytes only. Preserve full fields in metadata and the complete log.
+  LC_ALL=C awk 'BEGIN {ORS=""} {if(NR>1) printf "\\n"; gsub(/\\/,"\\\\"); gsub(/[[:cntrl:]]/,"?"); printf "%s",$0}'
+}
+vf_summary() {
+  local dir="$1" mode="$2" cap command key log exit_code digest input
+  vf_meta_load "$dir/meta.nul" "$VF_CAPTURE_KEYS" || return 3
+  cap="$(vf_meta_get id)"; exit_code="$(vf_meta_get exit)"
+  digest="$(vf_meta_get output_digest)"; input="$(vf_meta_get input_before)"
+  command="$(tr '\000' ' ' < "$dir/argv.nul" | vf_escape | head -c 450)"
+  key="$(vf_meta_get key | vf_escape | head -c 450)"
+  log="$(printf '%s' "${dir%/*}/$cap/output.log" | vf_escape | head -c 350)"
+  printf 'capture=%s command=%s key=%s exit=%s output=%s input=%s log=%s [complete metadata: capture directory]\n' \
+    "$cap" "$command" "$key" "$exit_code" "$digest" "$input" "$log" | head -c "$VF_SUCCESS_BYTES"
+  if [[ "$mode" == failure ]]; then
+    LC_ALL=C tail -n "$VF_DIAGNOSTIC_LINES" "$dir/output.log" | \
+      LC_ALL=C awk '{gsub(/[[:cntrl:]]/,"?"); print}' | head -c $((VF_FAILURE_BYTES-VF_SUCCESS_BYTES))
+  fi
+}
+
+vf_capture() { # spec binding cwd policy -- argv...
+  local spec="$1" binding="$2" cwd="$3" policy="$4"; shift 4
+  [[ "${1:-}" == -- && $# -gt 1 ]] || return 2; shift
+  local repo parent staging id seq before after rc start end check shell_identity final key output_digest
+  spec="$(cd "$spec" && pwd -P)" || return 3
+  cwd="$(cd "$cwd" && pwd -P)" || return 3
+  repo="$(git -C "$cwd" rev-parse --show-toplevel 2>/dev/null)" || { echo 'capture requires a Git worktree' >&2; return 3; }
+  case "$policy" in local|never) ;; *) return 2;; esac
+  vf_lock "$spec" || return 3
+  parent="$spec/notes/captures"
+  mkdir -p "$parent" "$spec/notes/verification/captures" || return 3
+  staging="$(mktemp -d "$parent/.capture.XXXXXX")" || return 3
+  VF_STAGING="$staging"
+  seq=0
+  if [[ -f "$spec/notes/verification/sequence" ]]; then
+    seq="$(cat "$spec/notes/verification/sequence")"
+    [[ "$seq" =~ ^[0-9]+$ && ${#seq} -lt 10 ]] || { echo 'capture ledger: invalid sequence; reconcile' >&2; return 3; }
+  fi
+  seq=$((seq+1))
+  printf '%s\n' "$seq" > "$spec/notes/verification/sequence.tmp" && mv "$spec/notes/verification/sequence.tmp" "$spec/notes/verification/sequence" || return 3
+  id="CAP-$seq-${staging##*.}"
+  final="$parent/$id"
+  cp "$binding" "$staging/bindings.nul" || return 3
+  printf '%s\0' "$@" > "$staging/argv.nul"
+  shell_identity="$(command -v bash)"
+  before="$(vf_snapshot "$spec" "$repo" "$cwd" "$staging/inputs.nul")" || return 3
+  { cat "$staging/argv.nul"; printf '%s\0' "$shell_identity" "$(vf_hash "$shell_identity")" "$repo" "$cwd" "$policy"; } > "$staging/check"
+  check="$(vf_hash "$staging/check")" || return 3
+  rm "$staging/check"
+  start="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+  (cd "$cwd" && "$@") > "$staging/output.log" 2>&1
+  rc=$?
+  end="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+  after="$(vf_snapshot "$spec" "$repo" "$cwd" "$staging/inputs-after.nul")" || after=unknown
+  key=''
+  if [[ -n "${VF_KEY_PATTERN:-}" ]]; then key="$(grep -E -- "$VF_KEY_PATTERN" "$staging/output.log" | tail -1 || :)"; fi
+  [[ -n "$key" ]] || key="$(awk 'NF {line=$0} END {print line}' "$staging/output.log")"
+  [[ -n "$key" ]] || key='(no output)'
+  output_digest="$(vf_hash "$staging/output.log")" || return 3
+  printf '%s\0' version 1 id "$id" sequence "$seq" kind command start "$start" end "$end" \
+    repo "$repo" cwd "$cwd" check "$check" shell "$shell_identity" input_before "$before" input_after "$after" \
+    no_tick "${VF_NO_TICK:-1}" exit "$rc" output_digest "$output_digest" \
+    output_bytes "$(wc -c < "$staging/output.log" | tr -d ' ')" policy "$policy" key "$key" > "$staging/meta.nul"
+  # Render using the final log reference, without exposing a staging path.
+  vf_summary "$staging" success > "$staging/summary.txt"
+  vf_seal "$staging" "${VF_CAPTURE_FILES[@]}" || return 3
+  vf_publish "$staging" "$final" "${VF_CAPTURE_FILES[@]}" || return 3
+  VF_STAGING=''
+  cp "$final/COMPLETE" "$spec/notes/verification/captures/$id" || return 3
+  { printf '\n## %s — %s\n\n' "$id" "$end"; printf 'Captured run, exit %s. Full log: `notes/captures/%s/output.log`.\n\n' "$rc" "$id"; cat "$final/summary.txt"; } >> "$spec/notes/evidence.md" || return 3
+  vf_unlock
+  VF_CAPTURE_ID="$id"
+  VF_CAPTURE_DIR="$final"
+  return "$rc"
+}
