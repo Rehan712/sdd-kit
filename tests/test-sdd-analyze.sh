@@ -204,6 +204,15 @@ test_verification_bindings() {
   run_rc 0 bash -c '. "$1"; printf "%s %s %s %s\n" "$VF_SCHEMA" "$VF_SUCCESS_BYTES" "$VF_FAILURE_BYTES" "$VF_DIAGNOSTIC_LINES"' _ "$SCRIPTS/verification-lib.sh"
   assert_eq '1 2048 8192 20' "$OUT" 'AC-004: public contract constants'
 
+  # AC-006: one covered criterion or FM must not hide another unbound AC.
+  spec_dir="$(make_verification_spec_dir partial-criteria)"
+  verification_edit_fixture "$spec_dir/tasks.md" 's/REQ-001, AC-001, FM-001/REQ-001, AC-001, AC-002, FM-001/'
+  run_rc 0 "$ANALYZE" "$spec_dir"
+  assert_contains "$OUT" 'T001 AC-002 has no declared test-family binding'
+  verification_edit_fixture "$spec_dir/plan.md" 's/| shell-family | test | AC-001 |/| shell-family | test | AC-001, AC-002 |/'
+  run_rc 0 "$ANALYZE" "$spec_dir"
+  assert_not_contains "$OUT" 'has no declared test-family binding'
+
   # AC-011/AC-023: clean fixtures declare checks. A missing legacy list is an
   # explicit gap, never an error or a claim that the application suite ran.
   fixture="$(make_spec_dir)"
@@ -238,10 +247,147 @@ test_verification_bindings() {
   verification_edit_fixture "$spec_dir/tasks.md" 's/AC-001, FM-001/AC-001, FM-099/'
   run_rc 1 "$ANALYZE" "$spec_dir"
   assert_contains "$OUT" 'undefined failure/invariant FM-099' 'AC-003: an ID mention cannot define a row'
+  # AC-003/FM-016: a definition row reproduced inside a nested example fence is
+  # quoted text, so its task reference stays undefined; rows after the closed
+  # example still define, proving the tracker reopens.
+  spec_dir="$(make_verification_spec_dir nested-fence-row)"
+  awk -v t="$(printf '\140\140\140')" -v q="$(printf '\140\140\140\140')" \
+    'index($0,"| FM-001 | ")==1 { print q "markdown"; print t "text"; print; print t; print q; next } {print}' \
+    "$spec_dir/plan.md" > "$spec_dir/plan.md.tmp" && mv "$spec_dir/plan.md.tmp" "$spec_dir/plan.md"
+  run_rc 1 "$ANALYZE" "$spec_dir"
+  assert_contains "$OUT" 'undefined failure/invariant FM-001' 'AC-003: a nested-fence row defined a failure mode'
+  assert_not_contains "$OUT" 'undefined failure/invariant FM-002' 'AC-003: rows after a closed nested example were suppressed'
   spec_dir="$(make_verification_spec_dir dangling-family)"
   verification_edit_fixture "$spec_dir/plan.md" 's/| shell-family, assertion-family |/| absent-family |/'
   run_rc 1 "$ANALYZE" "$spec_dir"
   assert_contains "$OUT" 'undefined verification family absent-family' 'AC-003: row families must resolve'
+  # AC-003/FM-016: a whole task block quoted inside a fence is not a task, so
+  # it cannot claim ownership of an applicable row and silence the warning.
+  spec_dir="$(make_verification_spec_dir quoted-task)"
+  verification_edit_fixture "$spec_dir/tasks.md" 's/AC-003, FM-002/AC-003/'
+  {
+    printf '\n\140\140\140markdown\n## Docs\n- [ ] **T098** — quoted owner\n'
+    printf -- '  - *Files:* `docs/schema.md`\n  - *Acceptance:* quoted example\n'
+    printf -- '  - *Verify kind:* static\n  - *Tests:* `tests/static.sh::test_ac_003_schema`\n'
+    printf -- '  - *Verify:* `bash tests/static.sh` → passed\n  - *Refs:* AC-003, FM-002\n'
+    printf '\140\140\140\n'
+  } >> "$spec_dir/tasks.md"
+  run_rc 0 "$ANALYZE" "$spec_dir"
+  assert_contains "$OUT" 'FM-002 has no non-gate task owner' 'AC-003: a quoted task block claimed row ownership'
+  # AC-003/FM-016: four columns of indentation is code, not a definition row.
+  spec_dir="$(make_verification_spec_dir indented-row)"
+  awk 'index($0,"| FM-001 | ")==1 { print "    " $0; next } {print}' \
+    "$spec_dir/plan.md" > "$spec_dir/plan.md.tmp" && mv "$spec_dir/plan.md.tmp" "$spec_dir/plan.md"
+  run_rc 1 "$ANALYZE" "$spec_dir"
+  assert_contains "$OUT" 'undefined failure/invariant FM-001' 'AC-003: an indented row defined a failure mode'
+  # AC-003/FM-016: an indented HEADER must not reopen a table section either,
+  # or an unindented row placed after the quoted example gets attributed to it.
+  spec_dir="$(make_verification_spec_dir indented-header)"
+  {
+    printf '\n    | ID | Components | Category | Trigger | Decided behavior | Test families |\n'
+    printf '| FM-001 | parser | boundary | duplicate smuggled behind an indented header | Reject it | shell-family |\n'
+  } >> "$spec_dir/plan.md"
+  run_rc 0 "$ANALYZE" "$spec_dir"
+  assert_not_contains "$OUT" 'duplicate failure/invariant definition FM-001' 'AC-003: an indented header reopened a table section'
+  # AC-003/FM-016: an HTML-commented task block is quoted in the binding
+  # scanners too, so it cannot claim ownership of an applicable row, and a
+  # commented definition row does not define one.
+  spec_dir="$(make_verification_spec_dir commented-task)"
+  verification_edit_fixture "$spec_dir/tasks.md" 's/AC-003, FM-002/AC-003/'
+  {
+    printf -- '\n<!--\n## Docs\n- [ ] **T093** — quoted owner\n'
+    printf -- '  - *Files:* `docs/schema.md`\n  - *Acceptance:* quoted example\n'
+    printf -- '  - *Verify kind:* static\n  - *Tests:* `tests/static.sh::test_ac_003_schema`\n'
+    printf -- '  - *Verify:* `bash tests/static.sh` → passed\n  - *Refs:* AC-003, FM-002\n'
+    printf -- '-->\n'
+  } >> "$spec_dir/tasks.md"
+  run_rc 0 "$ANALYZE" "$spec_dir"
+  assert_contains "$OUT" 'FM-002 has no non-gate task owner' 'AC-003: a commented task block claimed row ownership'
+  spec_dir="$(make_verification_spec_dir commented-row)"
+  awk 'index($0,"| FM-001 | ")==1 { print "<!--"; print; print "-->"; next } {print}' \
+    "$spec_dir/plan.md" > "$spec_dir/plan.md.tmp" && mv "$spec_dir/plan.md.tmp" "$spec_dir/plan.md"
+  run_rc 1 "$ANALYZE" "$spec_dir"
+  assert_contains "$OUT" 'undefined failure/invariant FM-001' 'AC-003: a commented row defined a failure mode'
+  assert_not_contains "$OUT" 'undefined failure/invariant FM-002' 'AC-003: rows after a closed comment were suppressed'
+  # AC-003/FM-016: an indented opener is code, so it cannot suppress the real
+  # definition table or task inventory that follows. These two fixtures make
+  # the opener precede the whole relevant extent; removing the indentation
+  # guard makes each analyzer run lose its authored records.
+  spec_dir="$(make_verification_spec_dir indented-comment-before-definitions)"
+  awk '/^## Risks, failure modes and verification$/ && !inserted {print "    <!--"; inserted=1} {print}' \
+    "$spec_dir/plan.md" > "$spec_dir/plan.md.tmp" && mv "$spec_dir/plan.md.tmp" "$spec_dir/plan.md"
+  run_rc 0 "$ANALYZE" "$spec_dir"
+  assert_contains "$OUT" consistent 'AC-003: indented comment opener swallowed definition rows'
+  spec_dir="$(make_verification_spec_dir indented-comment-before-tasks)"
+  awk '/^## Backend$/ && !inserted {print "    <!--"; inserted=1} {print}' \
+    "$spec_dir/tasks.md" > "$spec_dir/tasks.md.tmp" && mv "$spec_dir/tasks.md.tmp" "$spec_dir/tasks.md"
+  run_rc 0 "$ANALYZE" "$spec_dir"
+  assert_contains "$OUT" consistent 'AC-003: indented comment opener swallowed task blocks'
+
+  # The analyzer has three independent raw tasks.md passes: implementation AC
+  # coverage, umbrella tags and per-task structure. A commented example cannot
+  # satisfy the first or become a malformed/untagged task in the other two.
+  spec_dir="$(make_verification_spec_dir commented-coverage-task)"
+  verification_edit_fixture "$spec_dir/tasks.md" 's/REQ-002, AC-002, FM-001/REQ-002, FM-001/'
+  verification_edit_fixture "$spec_dir/tasks.md" 's/REQ-001, REQ-002, AC-001, AC-002/REQ-001, REQ-002, AC-001/'
+  {
+    printf -- '\n<!--\n## Example\n- [ ] **T098** — quoted AC owner\n'
+    printf -- '  - *Files:* `src/example.sh`\n  - *Refs:* AC-002\n-->\n'
+  } >> "$spec_dir/tasks.md"
+  run_rc 1 "$ANALYZE" "$spec_dir"
+  assert_contains "$OUT" 'AC(s) not covered by any implementation task (gate Refs don'\''t count): AC-002' \
+    'AC-003: commented example task supplied implementation AC coverage'
+  assert_not_contains "$OUT" 'task T098 has no *Acceptance:*' 'AC-003: commented example entered task structure validation'
+
+  spec_dir="$(make_verification_spec_dir commented-umbrella-task)"
+  make_umbrella "$spec_dir" '[proj]'
+  for value in T001 T002 T003 T004 T005; do tag_task "$spec_dir/tasks.md" "$value" proj; done
+  printf -- '\n<!--\n## Example\n- [ ] **T098** — quoted untagged task\n-->\n' >> "$spec_dir/tasks.md"
+  run_rc 0 "$ANALYZE" "$spec_dir"
+  assert_not_contains "$OUT" 'T098' 'AC-003: commented example entered a raw tasks.md pass'
+
+  # O-002 round 4: condition-1 raw HTML is the same quoting class as a fence or
+  # a comment. A task block inside <script> renders nowhere -- the GitHub
+  # sanitizer deletes it outright -- so it can neither claim an applicable
+  # FM/INV row nor supply implementation AC coverage. Those are the two
+  # analyzer passes the round-4 reviewer drove to a wrong result.
+  spec_dir="$(make_verification_spec_dir script-task)"
+  verification_edit_fixture "$spec_dir/tasks.md" 's/AC-003, FM-002/AC-003/'
+  {
+    printf -- '\n<script>\n</style>\n## Docs\n- [ ] **T093** — hidden owner\n'
+    printf -- '  - *Files:* `docs/schema.md`\n  - *Acceptance:* hidden example\n'
+    printf -- '  - *Verify kind:* static\n  - *Tests:* `tests/static.sh::test_ac_003_schema`\n'
+    printf -- '  - *Verify:* `bash tests/static.sh` → passed\n  - *Refs:* AC-003, FM-002\n'
+    printf -- '</script>\n'
+  } >> "$spec_dir/tasks.md"
+  run_rc 0 "$ANALYZE" "$spec_dir"
+  assert_contains "$OUT" 'FM-002 has no non-gate task owner' 'AC-003: a script-hidden task block claimed row ownership'
+
+  spec_dir="$(make_verification_spec_dir script-coverage-task)"
+  verification_edit_fixture "$spec_dir/tasks.md" 's/REQ-002, AC-002, FM-001/REQ-002, FM-001/'
+  verification_edit_fixture "$spec_dir/tasks.md" 's/REQ-001, REQ-002, AC-001, AC-002/REQ-001, REQ-002, AC-001/'
+  {
+    printf -- '\n<script>\n</style>\n## Example\n- [ ] **T098** — hidden AC owner\n'
+    printf -- '  - *Files:* `src/example.sh`\n  - *Refs:* AC-002\n</script>\n'
+  } >> "$spec_dir/tasks.md"
+  run_rc 1 "$ANALYZE" "$spec_dir"
+  assert_contains "$OUT" 'AC(s) not covered by any implementation task (gate Refs don'"'"'t count): AC-002' \
+    'AC-003: script-hidden example task supplied implementation AC coverage'
+
+  # The boundary control, without which the rule above could suppress ALL raw
+  # HTML and still pass: <details> is CommonMark condition 6, its content is
+  # rendered prose a reader sees, so the same task block IS a record and does
+  # cover AC-002.
+  spec_dir="$(make_verification_spec_dir details-coverage-task)"
+  verification_edit_fixture "$spec_dir/tasks.md" 's/REQ-002, AC-002, FM-001/REQ-002, FM-001/'
+  verification_edit_fixture "$spec_dir/tasks.md" 's/REQ-001, REQ-002, AC-001, AC-002/REQ-001, REQ-002, AC-001/'
+  {
+    printf -- '\n<details>\n## Example\n- [ ] **T098** — visible AC owner\n'
+    printf -- '  - *Files:* `src/example.sh`\n  - *Refs:* AC-002\n</details>\n'
+  } >> "$spec_dir/tasks.md"
+  run_rc 1 "$ANALYZE" "$spec_dir"
+  assert_not_contains "$OUT" 'not covered by any implementation task (gate Refs don'"'"'t count): AC-002' \
+    'AC-003: a visible <details> task block was suppressed as if it were hidden'
   spec_dir="$(make_verification_spec_dir traversing-locator)"
   verification_edit_fixture "$spec_dir/plan.md" 's|tests/check.sh::test_ac_001_shared|tests/../../outside.sh::test_ac_001_shared|'
   run_rc 1 "$ANALYZE" "$spec_dir"

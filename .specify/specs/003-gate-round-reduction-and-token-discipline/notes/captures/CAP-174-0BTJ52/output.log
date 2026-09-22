@@ -1,0 +1,60 @@
+  ok   test_all_brief_modes
+  ok   test_all_overlay_defaults
+  ok   test_briefs_t010
+  ok   test_briefs_t011
+  ok   test_briefs_t012
+  ok   test_briefs_t013
+  ok   test_defaults_t006
+  ok   test_defaults_t007
+  ok   test_defaults_t008
+  ok   test_defaults_t009
+  ok   test_instruction_contracts
+  ok   test_invoker_protocol
+  FAIL test_reports_and_tally
+       assert: AC-012: unclosed comment had no END diagnostic missing substring: unclosed HTML comment
+           in: report recovery: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.JF16Bc/comment-extent/notes/opponent.md:25: incomplete canonical identity; reconcile canonical records
+       report recovery: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.JF16Bc/comment-extent/notes/opponent.md:25: missing required report section: held up / follow-up tasks; reconcile canonical records
+       report recovery: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.JF16Bc/comment-extent/notes/opponent.md:25: finding totals disagree; reconcile canonical records
+       report recovery: /var/folders/qp/82x5sgg10_z71
+       assert: expected exit 0, got 3: bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-gate.sh tally /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.JF16Bc/spec
+           output: report recovery: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.JF16Bc/spec/notes/opponent.md:97: content after the round completion marker; reconcile canonical records
+       report recovery: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.JF16Bc/spec/notes/opponent.md:98: content after the round completion marker; reconcile canonical records
+       report recovery: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.JF16Bc/spec/notes/opponent.md:99: content after the round completion marker; reconcile canonical records
+       report recovery: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn
+       assert: output missing substring: opponent rounds=4
+           in: report recovery: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.JF16Bc/spec/notes/opponent.md:97: content after the round completion marker; reconcile canonical records
+       report recovery: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.JF16Bc/spec/notes/opponent.md:98: content after the round completion marker; reconcile canonical records
+       report recovery: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.JF16Bc/spec/notes/opponent.md:99: content after the round completion marker; reconcile canonical records
+       report recovery: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn
+       assert: expected exit 0, got 3: bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-gate.sh tally /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.JF16Bc/spec
+           output: report recovery: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.JF16Bc/spec/notes/opponent.md:97: content after the round completion marker; reconcile canonical records
+       report recovery: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.JF16Bc/spec/notes/opponent.md:98: content after the round completion marker; reconcile canonical records
+       report recovery: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.JF16Bc/spec/notes/opponent.md:99: content after the round completion marker; reconcile canonical records
+       report recovery: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn
+       assert: AC-010: a nested-fence heading was counted as a round missing substring: opponent rounds=4
+           in: report recovery: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.JF16Bc/spec/notes/opponent.md:97: content after the round completion marker; reconcile canonical records
+       report recovery: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.JF16Bc/spec/notes/opponent.md:98: content after the round completion marker; reconcile canonical records
+       report recovery: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.JF16Bc/spec/notes/opponent.md:99: content after the round completion marker; reconcile canonical records
+       report recovery: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn
+       assert: expected exit 0, got 3: bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-gate.sh tally /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.JF16Bc/spec
+           output: report recovery: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.JF16Bc/spec/notes/opponent.md:97: content after the round completion marker; reconcile canonical records
+       report recovery: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.JF16Bc/spec/notes/opponent.md:98: content after the round completion marker; reconcile canonical records
+       report recovery: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.JF16Bc/spec/notes/opponent.md:99: content after the round completion marker; reconcile canonical records
+       report recovery: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn
+       assert: AC-010: a real round after a closed example was suppressed missing substring: opponent rounds=5
+           in: report recovery: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.JF16Bc/spec/notes/opponent.md:97: content after the round completion marker; reconcile canonical records
+       report recovery: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.JF16Bc/spec/notes/opponent.md:98: content after the round completion marker; reconcile canonical records
+       report recovery: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.JF16Bc/spec/notes/opponent.md:99: content after the round completion marker; reconcile canonical records
+       report recovery: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn
+       assert: expected exit 0, got 3: bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-gate.sh tally /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.JF16Bc/spec
+           output: report recovery: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.JF16Bc/spec/notes/opponent.md:97: content after the round completion marker; reconcile canonical records
+       report recovery: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.JF16Bc/spec/notes/opponent.md:98: content after the round completion marker; reconcile canonical records
+       report recovery: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.JF16Bc/spec/notes/opponent.md:99: content after the round completion marker; reconcile canonical records
+       report recovery: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn
+       assert: AC-010: a commented round heading was counted missing substring: opponent rounds=4
+           in: report recovery: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.JF16Bc/spec/notes/opponent.md:97: content after the round completion marker; reconcile canonical records
+       report recovery: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.JF16Bc/spec/notes/opponent.md:98: content after the round completion marker; reconcile canonical records
+       report recovery: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.JF16Bc/spec/notes/opponent.md:99: content after the round completion marker; reconcile canonical records
+       report recovery: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn
+  ok   test_review_scope_contracts
+  -- 13/14 passed

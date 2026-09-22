@@ -196,8 +196,9 @@ task_refs=$(grep -oE '(AC|REQ)-[0-9]{3}' "$tasks" | sort -u)
 # The two gate tasks enumerate every AC by design, so counting their Refs would
 # make this check vacuously green. A task is a gate iff its block carries an
 # *Agent:* line; coverage counts the other tasks only.
-impl_refs=$(awk '
+impl_refs=$(awk "$_VF_AWK_FENCE"'
   function flush() { if (id != "" && !gate) print buf; id=""; buf=""; gate=0 }
+  vf_quoted($0) { next }
   /^- \[[ xX~]\] \*\*T[0-9]{3}[a-z0-9]*\*\*/ { flush(); match($0, /T[0-9]{3}[a-z0-9]*/); id = substr($0, RSTART, RLENGTH) }
   /^##[^#]/ { flush() }
   /\*Agent:\*/ { gate=1 }
@@ -232,7 +233,8 @@ done
 # An umbrella spec (repos: frontmatter) spans repos; every implementation task
 # must say which repo it lands in, and every tag must name a declared repo.
 declared_repos="$(spec_declared_repos "$SPEC_DIR")"
-task_map="$(awk '
+task_map="$(awk "$_VF_AWK_FENCE"'
+  vf_quoted($0) { next }
   /^##[^#]/ { sub(/^##[[:space:]]*/,""); stage=$0 }
   /^- \[[ xX~]\] \*\*T[0-9]{3}[a-z0-9]*\*\*/ {
     match($0, /T[0-9]{3}[a-z0-9]*/); id=substr($0,RSTART,RLENGTH)
@@ -271,7 +273,7 @@ fi
 tmp="$(mktemp "${TMPDIR:-/tmp}/sdd-analyze.XXXXXX" 2>/dev/null)" \
   || { echo "  ${RED}✗${RESET} cannot create a temp file under ${TMPDIR:-/tmp}"; exit 1; }
 trap 'rm -f "$tmp"' EXIT
-awk -v RED="$RED" -v YELLOW="$YELLOW" -v RESET="$RESET" '
+awk -v RED="$RED" -v YELLOW="$YELLOW" -v RESET="$RESET" "$_VF_AWK_FENCE"'
   function verify_command(s, rest,close_pos) {
     sub(/^.*\*Verify:\*[[:space:]]*/,"",s)
     if (substr(s,1,1)!="`") return ""
@@ -305,6 +307,7 @@ awk -v RED="$RED" -v YELLOW="$YELLOW" -v RESET="$RESET" '
     }
     id = ""
   }
+  vf_quoted($0) { next }
   /^##[^#]/ { flush(); sub(/^##[[:space:]]*/,""); stage=$0 }
   /^- \[[ xX~]\] \*\*T[0-9]{3}[a-z0-9]*\*\*/ {
     flush()

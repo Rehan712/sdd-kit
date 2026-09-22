@@ -4,7 +4,7 @@ title: Gate round reduction and token discipline
 status: implementing  # draft | accepted | implementing | shipped | rejected
 verification_contract: 1
 created: 2026-09-04
-updated: 2026-09-05
+updated: 2026-09-15
 owners: [Rehan712]
 project: sdd-kit-public
 ---

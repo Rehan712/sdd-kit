@@ -23,6 +23,9 @@ verification_tools:
   - 'bash'
 verification_inputs:
   - 'fixtures/space name\literal'
+verification_environment:
+  - 'CI'
+  - 'PROJECT_MODE'
 EOF
 }
 
@@ -41,6 +44,8 @@ test_config_grammar() {
   run_rc 0 cmp "$expected" "$catalog/commands.nul"
   printf '%s\0' 'fixtures/space name\literal' > "$expected"
   run_rc 0 cmp "$expected" "$catalog/inputs.nul"
+  printf '%s\0' CI PROJECT_MODE > "$expected"
+  run_rc 0 cmp "$expected" "$catalog/environment.nul"
   while IFS= read -r -d '' key && IFS= read -r -d '' val; do
     [[ "$key" != gate_count ]] || assert_eq 2 "$val" 'AC-011: both required commands retained'
     [[ "$key" != stage_validation ]] || assert_eq checked "$val" 'AC-011: actual tasks constrain stages'
@@ -75,8 +80,40 @@ test_config_grammar() {
     $'checkpoints:\n  Backend: []\n    - \'true\'' \
     $'checkpoints:\n    - \'true\'' \
     $'verification_tools: [bash]' \
+    $'verification_environment: [CI]' \
+    $'verification_environment:\n  - \'bad-name\'' \
+    $'verification_environment:\n  - \'1BAD\'' \
     $'gate_checks:\n  - \'$(touch marker)\'' \
-    $'gate_checks:\n  - \'$SECRET\''; do
+    $'gate_checks:\n  - \'$SECRET\'' \
+    $'gate_checks:\n  - \'${SECRET}\'' \
+    $'gate_checks:\n  - \'true $0\'' \
+    $'gate_checks:\n  - \'true $1\'' \
+    $'gate_checks:\n  - \'true $?\'' \
+    $'gate_checks:\n  - \'true $$\'' \
+    $'gate_checks:\n  - \'true $!\'' \
+    $'gate_checks:\n  - \'true $-\'' \
+    $'gate_checks:\n  - \'true $*\'' \
+    $'gate_checks:\n  - \'true $@\'' \
+    $'gate_checks:\n  - \'true $#\'' \
+    $'gate_checks:\n  - \'true $((1+1))\'' \
+    $'reuse_checks:\n  - \'true $1\'' \
+    $'verification_tools:\n  - \'bash $1\'' \
+    $'verification_inputs:\n  - \'src/$1\'' \
+    $'checkpoints:\n  Backend:\n    - \'true $1\'' \
+    $'gate_checks:\n  - \'test `date -u +%Y` = 2026\'' \
+    $'gate_checks:\n  - \'echo `id -un`\'' \
+    $'gate_checks:\n  - \'echo `echo `id -un``\'' \
+    $'reuse_checks:\n  - \'test `date -u +%Y` = 2026\'' \
+    $'checkpoints:\n  Backend:\n    - \'echo `id -un`\'' \
+    $'gate_checks:\n  - \'diff <(date -u +%Y) baseline.txt\'' \
+    $'gate_checks:\n  - \'bash tests/run.sh > >(tee log)\'' \
+    $'reuse_checks:\n  - \'diff <(date -u +%Y) baseline.txt\'' \
+    $'checkpoints:\n  Backend:\n    - \'cat <(date -u +%Y)\'' \
+    $'verification_tools:\n  - \'bash <(true)\'' \
+    $'verification_inputs:\n  - \'src/<(true)\'' \
+    $'gate_checks:\n  - \'ls ~/private\'' \
+    $'gate_checks:\n  - \'bash tests/run.sh ~\'' \
+    $'verification_inputs:\n  - \'~/fixtures\''; do
     sample=$((sample+1))
     printf '%s\n' "$malformed" > "$stack"
     run_rc 1 config_parse "$stack" "$spec_dir/tasks.md" "$SANDBOX/invalid-$sample"
@@ -86,6 +123,43 @@ test_config_grammar() {
   printf 'gate_checks:\n  - '\''true'\''\0\n' > "$stack"
   run_rc 1 config_parse "$stack" "$spec_dir/tasks.md" "$SANDBOX/nul"
   assert_contains "$OUT" 'NUL byte' 'AC-011: authored NUL cannot corrupt the catalog'
+
+  # AC-011/FM-011: a dollar Bash would not expand is a literal, so closing the
+  # expansion grammar must not reject an end-anchored pattern or a group.
+  cat > "$stack" <<'LITERAL'
+gate_checks:
+  - 'grep -c ''^ok$'' notes.txt'
+  - 'grep -Ec ''(warn$|error)'' notes.txt'
+LITERAL
+  run_rc 0 config_parse "$stack" "$spec_dir/tasks.md" "$SANDBOX/literal-dollar"
+  printf '%s\0' gate_checks "" "grep -c '^ok\$' notes.txt" \
+    gate_checks "" "grep -Ec '(warn\$|error)' notes.txt" > "$expected"
+  run_rc 0 cmp "$expected" "$SANDBOX/literal-dollar/commands.nul"
+
+  # AC-011/REQ-009: brace expansion is deterministic and stays legal, and a
+  # tilde that is not word-initial is a literal character, so neither may be
+  # swept up by closing the command-substitution and tilde cases.
+  cat > "$stack" <<'DETERMINISTIC'
+gate_checks:
+  - 'bash tests/run.sh --report a{1,2}.txt'
+  - 'grep -c a~b notes.txt'
+DETERMINISTIC
+  run_rc 0 config_parse "$stack" "$spec_dir/tasks.md" "$SANDBOX/deterministic"
+  printf '%s\0' gate_checks "" 'bash tests/run.sh --report a{1,2}.txt' \
+    gate_checks "" 'grep -c a~b notes.txt' > "$expected"
+  run_rc 0 cmp "$expected" "$SANDBOX/deterministic/commands.nul"
+
+  # AC-011/REQ-009: closing the third spelling of command substitution must not
+  # sweep up a plain redirection, which splices no command output.
+  cat > "$stack" <<'REDIRECTION'
+gate_checks:
+  - 'bash tests/run.sh > out.log'
+  - 'bash tests/run.sh 2>&1 | tee out.log'
+REDIRECTION
+  run_rc 0 config_parse "$stack" "$spec_dir/tasks.md" "$SANDBOX/redirection"
+  printf '%s\0' gate_checks "" 'bash tests/run.sh > out.log' \
+    gate_checks "" 'bash tests/run.sh 2>&1 | tee out.log' > "$expected"
+  run_rc 0 cmp "$expected" "$SANDBOX/redirection/commands.nul"
 
   # AC-011/FM-006: parsing never executes the command. The declared check
   # boundary can execute its unchanged string with real pipeline status.
@@ -111,6 +185,21 @@ test_config_grammar() {
   printf '\140\140\140markdown\n## Future\n- [ ] **T099** — quoted\n\140\140\140\n' >> "$spec_dir/tasks.md"
   run_rc 1 config_parse "$stack" "$spec_dir/tasks.md" "$SANDBOX/fenced-stage"
   assert_contains "$OUT" 'unknown checkpoint stage Future'
+  # AC-011/FM-016: the stage scanner shares the nested-fence grammar. An inner
+  # shorter fence or another fence character must not expose a quoted task
+  # block as a declared stage.
+  printf '\140\140\140\140markdown\n\140\140\140text\n## Future\n- [ ] **T098** — quoted in a nested example\n\140\140\140\n~~~text\n## Future\n- [ ] **T097** — quoted with another fence character\n~~~\n\140\140\140\140\n' >> "$spec_dir/tasks.md"
+  run_rc 1 config_parse "$stack" "$spec_dir/tasks.md" "$SANDBOX/nested-fenced-stage"
+  assert_contains "$OUT" 'unknown checkpoint stage Future' 'AC-011: a nested-fence example declared a stage'
+  # AC-011/FM-016: an HTML-commented task block is quoted too, in the same
+  # scanner, including a mid-line opener.
+  printf -- '<!--\n## Future\n- [ ] **T095** — quoted in a comment\n-->\n' >> "$spec_dir/tasks.md"
+  printf -- 'superseded <!--\n## Future\n- [ ] **T094** — quoted after a mid-line opener\n-->\n' >> "$spec_dir/tasks.md"
+  run_rc 1 config_parse "$stack" "$spec_dir/tasks.md" "$SANDBOX/commented-stage"
+  assert_contains "$OUT" 'unknown checkpoint stage Future' 'AC-011: a commented task block declared a stage'
+  # Control: a real stage after the closed example is recognized again.
+  printf '\n## Future\n- [ ] **T096** — real stage after the closed example\n' >> "$spec_dir/tasks.md"
+  run_rc 0 config_parse "$stack" "$spec_dir/tasks.md" "$SANDBOX/nested-real-stage"
   # Restore the fixture: the legacy analyzer task scan predates fenced examples.
   spec_dir="$(make_verification_spec_dir config)"
 
@@ -173,7 +262,7 @@ snapshot_fixture() {
 
 # AC-020: every semantic input class invalidates; bookkeeping alone does not.
 test_capture_provenance() {
-  local spec repo baseline changed path
+  local spec repo baseline changed declared path
   spec="$(make_verification_git_dir snapshot)"
   repo="$(cd "$spec/../../.." && pwd -P)"
   run_rc 0 snapshot_fixture "$spec" "$repo" "$SANDBOX/manifest"
@@ -209,9 +298,41 @@ test_capture_provenance() {
   run_rc 0 snapshot_fixture "$spec" "$repo" "$SANDBOX/manifest"
   [[ "$OUT" != "$baseline" ]] || t_fail 'AC-020: STATUS decision omitted'
   changed="$OUT"
+  # AC-016/AC-020: undeclared process-local variables are outside the closed
+  # input set. The harness effort setting varies between independent gate
+  # invocations and must not turn a byte-identical worktree into stale proof.
+  run_rc 0 env CLAUDE_EFFORT=fixture-only bash -c '. "$1"; vf_snapshot "$2" "$3" "$3" "$4"' _ "$SCRIPTS/verification-lib.sh" "$spec" "$repo" "$SANDBOX/manifest"
+  assert_eq "$changed" "$OUT" 'AC-016: undeclared harness environment changed source identity'
+  # O-010 round 4: the fixture above picked ONE undeclared name, and the family
+  # whose membership still came from the ambient process survived it for two
+  # rounds. LC_CTYPE and LC_ALL are the names macOS Terminal, OpenSSH SendEnv
+  # and most CI images export by default, so they are exactly the ones a second
+  # process differs by -- and the fixed names once hashed beside the declaration
+  # are read by no check for its result. Membership is the declaration alone.
+  local undeclared
+  for undeclared in LC_CTYPE=en_US.UTF-8 LC_ALL=en_US.UTF-8 LC_TELEPHONE=en_US.UTF-8 \
+                    LC_UNKNOWN_CATEGORY=1 LANG=C SHELL=/bin/zsh TMPDIR="$SANDBOX/alt-tmp/"; do
+    mkdir -p "$SANDBOX/alt-tmp"
+    run_rc 0 env "$undeclared" bash -c '. "$1"; vf_snapshot "$2" "$3" "$3" "$4"' _ "$SCRIPTS/verification-lib.sh" "$spec" "$repo" "$SANDBOX/manifest"
+    assert_eq "$changed" "$OUT" "AC-016: undeclared $undeclared changed source identity across invocations"
+  done
+  # PATH is pinned far more precisely by the tool and harness records, so a
+  # reordering that changes no resolved binary must not invalidate proof.
+  run_rc 0 env PATH="/usr/bin:$PATH" bash -c '. "$1"; vf_snapshot "$2" "$3" "$3" "$4"' _ "$SCRIPTS/verification-lib.sh" "$spec" "$repo" "$SANDBOX/manifest"
+  assert_eq "$changed" "$OUT" 'AC-016: a reordered PATH invalidated a byte-identical worktree'
+  # A project can add a real environment dependency explicitly. Presence and
+  # value then affect identity, while only the value hash reaches the manifest.
+  printf "verification_environment:\n  - 'VF_TEST_SECRET'\n" >> "$repo/.specify/stack.yml"
   run_rc 0 env VF_TEST_SECRET=not-persisted bash -c '. "$1"; vf_snapshot "$2" "$3" "$3" "$4"' _ "$SCRIPTS/verification-lib.sh" "$spec" "$repo" "$SANDBOX/manifest"
-  [[ "$OUT" != "$changed" ]] || t_fail 'AC-020: exported environment omitted'
+  declared="$OUT"
   assert_not_contains "$(tr '\000' '\n' < "$SANDBOX/manifest")" not-persisted
+  run_rc 0 env VF_TEST_SECRET=changed-value bash -c '. "$1"; vf_snapshot "$2" "$3" "$3" "$4"' _ "$SCRIPTS/verification-lib.sh" "$spec" "$repo" "$SANDBOX/manifest"
+  [[ "$OUT" != "$declared" ]] || t_fail 'AC-020: declared environment change omitted'
+  assert_not_contains "$(tr '\000' '\n' < "$SANDBOX/manifest")" changed-value
+  sed '/^verification_environment:/,$d' "$repo/.specify/stack.yml" > "$SANDBOX/stack-without-environment"
+  cp "$SANDBOX/stack-without-environment" "$repo/.specify/stack.yml"
+  run_rc 0 snapshot_fixture "$spec" "$repo" "$SANDBOX/manifest"
+  assert_eq "$changed" "$OUT" 'AC-020: removing the declaration did not restore the closed input set'
   ln -s src/parser.sh "$repo/link"
   run_rc 0 snapshot_fixture "$spec" "$repo" "$SANDBOX/manifest"
   [[ "$OUT" != "$changed" ]] || t_fail 'AC-020: symlink omitted'
@@ -238,6 +359,22 @@ break"
   run_rc 0 snapshot_fixture "$spec" "$repo" "$SANDBOX/manifest"
   [[ "$OUT" != "$changed" ]] || t_fail 'AC-020: plan semantic change missed'
 
+
+  # AC-020: working directory and declared tool bytes are independent inputs.
+  run_rc 0 snapshot_fixture "$spec" "$repo" "$SANDBOX/cwd-before"
+  changed="$OUT"
+  run_rc 0 bash -c '. "$1"; vf_snapshot "$2" "$3" "$3/src" "$4"' _ "$SCRIPTS/verification-lib.sh" "$spec" "$repo" "$SANDBOX/cwd-after"
+  [[ "$OUT" != "$changed" ]] || t_fail 'AC-020: cwd change missed'
+  mkdir "$SANDBOX/tool-bin"
+  printf '#!/usr/bin/env bash\nexit 0\n' > "$SANDBOX/tool-bin/probe-tool"
+  chmod +x "$SANDBOX/tool-bin/probe-tool"
+  awk '{print} /^verification_tools:/ {printf "  - %cprobe-tool%c\n",39,39}' "$repo/.specify/stack.yml" > "$SANDBOX/tool-stack"
+  cp "$SANDBOX/tool-stack" "$repo/.specify/stack.yml"
+  run_rc 0 env PATH="$SANDBOX/tool-bin:$PATH" bash -c '. "$1"; vf_snapshot "$2" "$3" "$3" "$4"' _ "$SCRIPTS/verification-lib.sh" "$spec" "$repo" "$SANDBOX/tool-before"
+  changed="$OUT"
+  printf '#!/usr/bin/env bash\nexit 1\n' > "$SANDBOX/tool-bin/probe-tool"
+  run_rc 0 env PATH="$SANDBOX/tool-bin:$PATH" bash -c '. "$1"; vf_snapshot "$2" "$3" "$3" "$4"' _ "$SCRIPTS/verification-lib.sh" "$spec" "$repo" "$SANDBOX/tool-after"
+  [[ "$OUT" != "$changed" ]] || t_fail 'AC-020: declared executable mutation missed'
   capture_validity_cases
 
 }

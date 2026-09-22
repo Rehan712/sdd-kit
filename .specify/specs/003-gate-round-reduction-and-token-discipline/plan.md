@@ -2,7 +2,7 @@
 plan_for: 003-gate-round-reduction-and-token-discipline
 status: implementing  # draft | accepted | implementing | shipped
 created: 2026-09-04
-updated: 2026-09-05
+updated: 2026-09-08
 stacks: []
 ---
 
@@ -114,6 +114,7 @@ verification_tools:
   - 'git'
   - 'shellcheck'
 verification_inputs: []
+verification_environment: []
 ~~~
 
 `gate_checks` is required and nonempty for new contracts; checkpoints are
@@ -177,10 +178,14 @@ Identity rules (REQ-009, AC-013, AC-020):
    checkbox state, generated Evidence fields, status/updated fields and the
    explicitly generated capture/report/ledger paths. STATUS Decisions remain
    inputs. Do not exclude all Markdown, .specify, notes or ignored files.
-4. Snapshot exported environment values as hashes (never persist raw secrets),
-   including presence/unset distinctions; exclude only named transport noise
-   (`PWD`, `OLDPWD`, `SHLVL`, `_`, internal verification bookkeeping).
-   Snapshot shell and declared resolved tool binaries; PATH is relevant.
+4. Snapshot a declared environment set as hashes (never persist raw secrets).
+   Membership is EXACTLY the project's `verification_environment` list of shell
+   identifiers -- no fixed names beside it. Preserve present/unset distinctions
+   for declared names; ignore undeclared session settings, including the LC_*
+   family, whose membership must not be read from the ambient process.
+   Projects must declare additional variables their checks depend on.
+   Snapshot shell and declared resolved tool binaries; those records pin tool
+   identity, so PATH itself is not hashed.
    Unknown external dependencies mean no reuse. No dependency-graph inference
    or external TTL policy is implemented in v1.
 5. Compare snapshots before/after execution and again at acceptance/gating.
@@ -198,8 +203,10 @@ covers the required test/criterion binding; identical text in unrelated logs
 does not qualify. New task bindings change semantic inputs (AC-007, AC-022).
 
 An acceptance receipt names task ID, return digest, semantic task revision,
-capture IDs and binding digest. Repeated acceptance of the same still-valid
-receipt returns `already-accepted` without rewriting tasks.md. Stale historical
+capture IDs and binding digest. An intact committed receipt for the exact return
+and an already checked task returns `already-accepted` before currency validation,
+without rewriting tasks.md or auditing drift as a rejection. This acknowledges
+historical acceptance, never current proof. Stale historical
 acceptance never unticks or reimplements a task: refresh current verification,
 record its current proof separately, and preserve the historical receipt.
 
@@ -215,7 +222,11 @@ Keep the familiar append-only `notes/opponent.md` and
 blocks, not arbitrary heading counts. New blocks start `## Round <integer>` and
 end `<!-- gate-round-end: <gate>:<integer> -->`. They have `**Round:** <integer>`,
 `**Timestamp:** <UTC>`, `**Source:** <input-id>`, `**Floor:** <floor-id>`,
-verdict and completion marker. Parse outside fenced code/blockquotes only.
+verdict and completion marker. Parse outside quoted content only, where the
+quoted set is DERIVED from the CommonMark HTML-block start conditions rather
+than enumerated: fences, blockquotes, indented code, and conditions 1-5
+(`<script`/`<style`/`<textarea`/`<pre`, `<!--`, `<?`, `<!`+letter, `<![CDATA[`).
+Conditions 6 and 7, `<details>` included, render visibly and are records.
 The verification ledger reserves the granted number and records the completed
 block digest; incomplete/duplicate/mismatched data stops further invocation.
 The legacy reader recognizes the initial report plus later Round headings in
@@ -226,6 +237,17 @@ Opponent findings have stable finding IDs, `Class: lowercase-hyphen-slug`,
 `Reproduced:`, triggering input, all file:line locations, prior finding ID(s)
 and status (`new|open|resolved|reopened`). Include blocking/minor and raw location
 counts, searched sibling sites, attacked surfaces and unexamined extent.
+Resolved claims require the finding's OWN ID: either that ID appeared in an
+earlier round of this gate, or that same ID appears in a declared prior-review
+manifest. `Prior` is recorded for the reader and never carries the claim, so no
+value of it can resolve a brand-new finding -- binding to a prior ID, and then
+to one of the same recorded Class, each failed because both are fields the
+report's own author writes. Prior-review manifests resolve under the spec's
+notes/verification/reports directory for canonical and temporary report paths
+alike. Report comments respect code indentation and
+raw closers; unterminated comments are errors. Any nonblank content after a
+completion marker and before the next real round heading is an attribution error,
+including quoted content.
 Persist IDs across rechecks. Legacy reports have no inferred Class (AC-010).
 
 Each reality-check AC row records criterion text/revision, result, evidence
@@ -516,18 +538,18 @@ exit/byte measurements and unchanged-file comparisons.
 
 | Family | Kind | Criteria | Concrete locators |
 |---|---|---|---|
-| authoring | test | AC-001, AC-003, AC-004, AC-005, AC-006, AC-023: phase modes, shared/excluded rows, malformed/dangling IDs, kinds, same-task tests, zero-warning golden, untouched 001/002 exit 0. | `tests/test-sdd-analyze.sh::test_verification_bindings`; `tests/test-golden-example.sh::test_verification_golden` |
-| config | test | AC-011: actual stack commands, malformed/unknown/duplicate map keys, spaces/quotes, doctor/analyzer consistency, new versus legacy. | `tests/test-verification.sh::test_config_grammar` |
+| authoring | test | AC-001, AC-003, AC-004, AC-005, AC-006, AC-011, AC-023: phase modes, shared/excluded rows, malformed/dangling IDs, kinds, same-task tests, zero-warning golden, untouched 001/002 exit 0. | `tests/test-sdd-analyze.sh::test_verification_bindings`; `tests/test-golden-example.sh::test_verification_golden` |
+| config | test | AC-011, AC-023: actual stack commands, malformed/unknown/duplicate map keys, spaces/quotes, doctor/analyzer consistency, new versus legacy. | `tests/test-verification.sh::test_config_grammar` |
 | capture | test | AC-019, AC-021: actual verbose success/failure, byte/line bounds, full-log digest, argv/key/default/no-tick compatibility, real exits including pipeline. | `tests/test-spec-run.sh::test_bounded_capture` |
-| provenance | test | AC-013, AC-020: independent mutations of source/staged/dirty/untracked/helper/test/fixture/lock/config/tool/env/criterion/cwd/command; tamper/truncation/old format/later failure/during-run; unchanged hit, bookkeeping hit, volatile miss; old failing-test/sound-evidence repro. | `tests/test-verification.sh::test_capture_provenance` |
+| provenance | test | AC-013, AC-020, AC-023: independent mutations of source/staged/dirty/untracked/helper/test/fixture/lock/config/tool/env/criterion/cwd/command; tamper/truncation/old format/later failure/during-run; unchanged hit, bookkeeping hit, volatile miss; old failing-test/sound-evidence repro. | `tests/test-verification.sh::test_capture_provenance` |
 | transactions | test | AC-020, AC-022: owned/foreign/failed-acquisition cleanup, concurrent publications, interruptions before/after each commit point, retry/pending recovery, tasks byte identity. | `tests/test-verification.sh::test_owned_transactions` |
 | acceptance | test | AC-022: missing/extra/duplicate/none mapping, unknown locator/capture, forged summary, failed/stale/changed-source return, valid once/idempotent, artifact-backed manual and automated-bypass refusal. | `tests/test-spec-gate.sh::test_acceptance` |
 | floor | test | AC-007: all three checkers and all gate commands observed, correct repo/cwd, fresh integrity each call, one unchanged suite across gates, source/command/cwd invalidation, missing config stop. | `tests/test-spec-gate.sh::test_floor` |
 | checkpoints | test | AC-008: real failure codes, no commands with delta, removed completed/prior bindings, pending future and explicit integration owner, checkpoint-to-floor reuse, next-stage counter zero. | `tests/test-spec-gate.sh::test_checkpoints` |
 | rounds | test | AC-009: both gates 1–3/denied 4, same-day exact waiver/revision, reject old/unscoped/wrong gate/round, round 5 still denied, quoted headings, malformed/duplicate/pending/date-only reconciliation. | `tests/test-spec-gate.sh::test_rounds` |
 | reports | test | AC-010, AC-012, AC-013, AC-017: full schema/matrix, stable prior IDs and class recurrence across files/root causes, open recheck not recurrence, raw sites/unknown data; untouched 002 five rounds/six blockers/unclassified, annotated copy detects clock and lock recurrence. | `tests/test-gate-contracts.sh::test_reports_and_tally` |
-| guidance | test | AC-002, AC-012, AC-014, AC-017, AC-018: enumerate overlays/personas, modes/revisions/omissions, retained gate scope/severity, metrics fields, docs/help and executable examples, regenerated adapters. | `tests/test-gate-contracts.sh::test_instruction_contracts`; `tests/test-build-adapters.sh::test_brief_modes` |
-| wiring | test | AC-015, AC-016: stub workers/gates exercise actual scripts, incomplete return unchanged then accepted once, floor/cap stop counters, stage barrier, shared gate suite; live-probe positive/negative fixtures without a future-report dependency. | `tests/test-gate-contracts.sh::test_invoker_protocol` |
+| guidance | test | AC-001, AC-002, AC-004, AC-006, AC-012, AC-014, AC-015, AC-017, AC-018: enumerate overlays/personas, modes/revisions/omissions, retained gate scope/severity, metrics fields, docs/help and executable examples, regenerated adapters. | `tests/test-gate-contracts.sh::test_instruction_contracts`; `tests/test-build-adapters.sh::test_brief_modes` |
+| wiring | test | AC-015, AC-016, AC-019: stub workers/gates exercise actual scripts, incomplete return unchanged then accepted once, floor/cap stop counters, stage barrier, shared gate suite; live-probe positive/negative fixtures without a future-report dependency. | `tests/test-gate-contracts.sh::test_invoker_protocol` |
 
 Cross-cutting Tests-stage work may compose these already-shipped local fixtures
 and run the compatibility matrix; it must not own all local negative cases after

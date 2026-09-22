@@ -43,7 +43,7 @@ Parse `spec.md` and extract every `AC-###`. Build a table:
 | AC | Stated criterion | Evidence required | Evidence found | Verdict |
 |----|------------------|-------------------|----------------|---------|
 
-You fill rows 3–5. **Every AC gets a row.** No skipping.
+Use the canonical report columns below; include the full whitespace-normalized criterion followed by `; sha256:<criterion digest>`. You fill the evidence and verdict cells. **Every AC gets a row.** No skipping.
 
 ### 2. Choose evidence per stack
 
@@ -118,7 +118,7 @@ Output a markdown report with this exact shape (the implementer writes it to `<s
 
 | AC | Criterion / revision | Evidence | Affected inputs | Verdict |
 |----|----------------------|----------|-----------------|---------|
-| AC-001 | <full criterion and digest> | <capture/artifact references> | <whole-source digest; implementation/test paths> | PASS / FAIL / MISSING |
+| AC-001 | <full criterion and digest> | <CAP-id>; review: <semantic evidence and artifact/path references> | <exact whole-source digest> | PASS / FAIL / MISSING / carried (round n) |
 | ... | | | | |
 
 ## Constitution check
@@ -151,10 +151,8 @@ affected-input mapping. From round 2 require the prior reviewed source manifest
 and diff including relevant staged, dirty and untracked changes. In v1 the
 whole-source impact set is conservative: any shared input change may invalidate
 all rows. FAIL/MISSING, changed criteria, dependencies, unknown impact and an
-uncertain earlier review require renewed evaluation. Carry-forward remains
-disabled until the runtime validation and its negative fixtures are installed;
-then `carried (round n)` requires unchanged criterion, transitive inputs and
-currently valid evidence. Same filenames never suffice. A floor execution is
+uncertain earlier review require renewed evaluation. `carried (round n)` requires unchanged criterion, transitive inputs and
+currently valid local evidence from an authentic completed PASS row. Carry references point to a renewed PASS, never another carried row. Evidence cells use `CAP-id; review: <semantic explanation>`; the referenced observation must be current. Same filenames never suffice. A floor execution is
 not a semantic PASS, and independent source access remains unrestricted.
 
 ## Hard rules
