@@ -1,0 +1,10 @@
+Verification-Return: 1
+Task: T025
+Captures: CAP-25-YLM9sI
+Summary: capture=CAP-25-YLM9sI command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=c89f7d9e3ceea159e64bb75defc10d0c11ca84dee772071cbdfc2c36232f3fdb input=7c6cb6d6835e01d0b9ac27fcb010ce6f5ab62e17f796dda097415e6c2321f6f9 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-25-YLM9sI/output.log [complete metadata: capture directory]
+Failure modes:
+FM-004, tests/test-gate-contracts.sh::test_instruction_contracts, CAP-25-YLM9sI
+FM-004, tests/test-gate-contracts.sh::test_invoker_protocol, CAP-25-YLM9sI
+FM-007, tests/test-gate-contracts.sh::test_invoker_protocol, CAP-25-YLM9sI
+FM-013, tests/test-gate-contracts.sh::test_invoker_protocol, CAP-25-YLM9sI
+INV-004, tests/test-gate-contracts.sh::test_invoker_protocol, CAP-25-YLM9sI

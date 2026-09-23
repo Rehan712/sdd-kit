@@ -59,8 +59,10 @@ done
 SPEC_DIR="${ARGS[0]:-}"
 [[ -z "$SPEC_DIR" || ! -d "$SPEC_DIR" ]] && { echo "usage: spec-ac-coverage.sh <spec-dir>" >&2; exit 2; }
 SPEC_DIR="$(cd "$SPEC_DIR" && pwd)"
-SPEC="$SPEC_DIR/spec.md"
-[[ -f "$SPEC" ]] || { echo "no spec.md in $SPEC_DIR" >&2; exit 1; }
+# Suffixed name on purpose; see spec-evidence.sh — a caller-exported $SPEC
+# must survive this script unchanged.
+SPEC_FILE="$SPEC_DIR/spec.md"
+[[ -f "$SPEC_FILE" ]] || { echo "no spec.md in $SPEC_DIR" >&2; exit 1; }
 
 if [[ -n "$THROUGH_STAGE" ]]; then
   . "$HUB_DIR/scripts/verification-lib.sh"
@@ -123,7 +125,7 @@ done | sort -u > "$TESTS_TMP"
 test_count="$(grep -c . "$TESTS_TMP" || true)"
 
 # --- per-AC coverage --------------------------------------------------------
-spec_acs="$(grep -oE 'AC-[0-9]{3}' "$SPEC" | sort -u)"
+spec_acs="$(grep -oE 'AC-[0-9]{3}' "$SPEC_FILE" | sort -u)"
 [[ -z "$spec_acs" ]] && { echo "${YELLOW}!${RESET} spec.md defines no AC-### ids — nothing to check"; exit 0; }
 
 echo "AC↔test binding for $(basename "$SPEC_DIR")  (roots: ${ROOTS[*]}; $test_count test file(s))"

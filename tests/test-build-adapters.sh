@@ -194,7 +194,7 @@ test_adapters_install_into_every_codex_home() {
 
 # AC-014: supported generation retains both modes for every brief consumer.
 test_brief_modes() {
-  local kit file generated
+  local kit file generated phase
   kit="$(stage_kit)"
   run_rc 0 env HOME="$SANDBOX/home" bash "$kit/scripts/apply-models.sh"
   run_rc 0 run_adapters "$kit"
@@ -206,6 +206,16 @@ test_brief_modes() {
     assert_contains "$(cat "$generated")" 'Failure modes: none'
     run_rc 0 cmp "$file" "$generated"
   done
+  for phase in implement go review; do
+    generated="$SANDBOX/home/.codex/skills/sdd-$phase/SKILL.md"
+    assert_contains "$(cat "$generated")" '--from-task --no-tick --summary'
+    assert_contains "$(cat "$generated")" 'batch barrier'
+    assert_contains "$(cat "$generated")" 'exit 4'
+    generated="$SANDBOX/home/.copilot/agents/sdd-$phase.agent.md"
+    assert_contains "$(cat "$generated")" 'spec-gate.sh'
+  done
+  assert_contains "$(cat "$SANDBOX/home/.codex/agents/sdd-opponent.toml")" 'Class:'
+  assert_contains "$(cat "$SANDBOX/home/.codex/agents/sdd-reality-check.toml")" 'carried (round n)'
 }
 
 t_run_all

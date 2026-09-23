@@ -100,3 +100,60 @@ On resume, reconcile those diffs and run their exact no-tick Verify commands,
 then accept/commit separately. Do not restart T002/T003 or use the main checkout.
 No gates, push, PR, global installation or private-clone port occurred.
 User explicitly requested stopping here; STATUS active_tool is none.
+
+## T025 / T026 — 2026-09-08
+
+Direct implementation continued in this worktree, no workers dispatched.
+
+T025: the prepared invoker edits were substantively complete but left three
+places still contradicting the protocol they install. skills/sdd-review/SKILL.md
+exit-30 step 3 ("Fix, evidence, commit") and its follow-up grammar ("evidence on
+tick") kept the legacy path while exit-20 had been converted; skills/sdd-implement/
+SKILL.md "Done when" routed the tick "via spec-task.sh". Fixed all three. §6 now
+names `spec-task.sh done --evidence` explicitly and scopes it to gate/Ship
+administration tasks that own no *Verify kind:*/*Tests:* family — before, §6
+referred to "the legacy evidence bookkeeping path" without naming a tool, which
+left T030–T034's tick mechanism undocumented. New assertions in
+invoker_instruction_cases: 'Only its exit 0 accepts the task' required in all
+four; 'spec-task.sh' forbidden in orchestrator/go/review; both /sdd:review fix
+paths asserted to route through accept via a count assertion.
+
+T026: probe-gate-contract.sh and probe_fixture_cases were complete for the
+positive path, tamper and source-change negatives. The probe's
+rejection-precedes-acceptance guard had no fixture, which is the one branch
+standing between real and fabricated live-wiring evidence. Added it: move the
+genuine control aside, re-run the incomplete return post-acceptance (it carries
+the post-tick task digest and a later stamp), assert the probe still refuses,
+restore, re-assert PASS. Mutation-tested by deleting the before/after/timestamp
+conditions from the probe — suite drops to 13/14 on exactly those assertions.
+
+Acceptance: CAP-25-YLM9sI, `bash tests/test-gate-contracts.sh` 14/14 passed,
+exit 0. T025 return sha256:0f374e98…, T026 return sha256:e6e4eefb… against the
+same capture (documented reuse; identical Verify, unchanged source).
+
+Backend checkpoint then ran for the first time to completion of its refresh
+phase: test-sdd-analyze 18/18, test-verification 3/3, test-golden-example 3/3,
+test-gate-contracts + test-build-adapters 14/14 and 8/8, test-spec-run +
+test-verification 3/3 (CAP-26–CAP-31). It failed at CAP-32-d3je9z,
+test-spec-gate.sh 4/6, with `No space left on device`: the fixture could not copy
+the kit, so every assertion failed on a nonexistent CLI path. Environment, not
+code. Host free space was draining ~750 MB/min into a 60 GB Docker.raw whose
+daemon does not answer `docker ps`. Docker left running — the user recovered it
+deliberately without deleting volumes. Removed only leaked sddkit.* sandboxes
+(~17 MB). No checkpoint receipt, floor, gate, commit, push or PR was produced.
+
+Retried after clearing the leaked sandboxes, and both stage checkpoints then
+completed — the first COMPLETE stage receipts this spec has produced. Backend
+CHECKPOINT-Q71sAv: exit 0, executed=12, cache-hits=14, roughly 90 minutes; its
+refresh re-ran every completed Backend task's exact Verify, including the
+test-spec-gate.sh command that had failed 4/6 on ENOSPC, which passed 6/6.
+API CHECKPOINT-S7Zswo: exit 0, executed=0, cache-hits=27, seconds — unchanged
+source made every command a validated reuse hit. Both carry source c3cfe9ff….
+
+Noted but deliberately not fixed (T021's code, outside T025/T026): at
+scripts/verification-lib.sh:1793 a checkpoint stamps `start` and `end` from
+`date` at seal time, so the 90-minute Backend run records start==end and a
+`start` equal to its end. The floor at :1627 stamps `start` from a captured
+variable and only `end` from `date`. Validation asserts start<=end only, and no
+freshness decision reads checkpoint `start`, so nothing a gate decides is wrong;
+it is a reporting-integrity defect needing a follow-up owner.

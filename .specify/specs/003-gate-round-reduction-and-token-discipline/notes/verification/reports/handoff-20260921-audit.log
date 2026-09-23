@@ -1,0 +1,49 @@
+opponent sealed rounds=8
+opponent pending=0
+reality-check sealed rounds=1
+reality-check pending=0
+reality report canonical/returned/ledger=e5f957dbd67335502a151c5198881e32310fb4a003363c684384565c9ddaa748
+Decisions unchanged=1bf7b3198f8bb5860c45df18b4e1d8e6ffa99f3270070a5b49929866af98f64c
+lock=absent HEAD=0d55c62b01cd3e2295ca34b048a212780dd92c00
+- [ ] **T030** — Opponent review: attack classes before clearance
+- [ ] **T031** — Reality-check every criterion against current proof
+- [ ] **T032** — Open the guarded PR to main
+- [ ] **T033** — Roll out only after verified merge
+- [ ] **T034** — Harvest the retro and assign quality follow-up
+09a0a919de9c51fa8843e086936d1c4d1810bc0d623b0a5d2968264d2e699c6f
+CAP-367-g14RVk current validation exit=0
+CAP-384-nH42Di current validation exit=0
+CAP-385-oU69jN current validation exit=0
+CAP-386-fmjMGY current validation exit=0
+CAP-387-kPL8E3 current validation exit=0
+CAP-388-6uDX8d current validation exit=0
+ACCEPT-ASelAO outcome=rejected before=341712784365c9c2368391bfa9a4f18a429f83467a4d16fc4d3d572b7fafbbc6 after=341712784365c9c2368391bfa9a4f18a429f83467a4d16fc4d3d572b7fafbbc6 timestamp=2026-09-20T22:52:46Z
+ACCEPT-5U1YH6 outcome=accepted before=341712784365c9c2368391bfa9a4f18a429f83467a4d16fc4d3d572b7fafbbc6 after=c68fb11eb93d74a85ea5ff303c146c10094a7befcb4adc235e8e3785eee1db43 timestamp=2026-09-20T22:53:06Z
+T029 committed receipt integrity exit=0
+FLOOR-NbXfe5 integrity exit=0
+AC rows=23 PASS=21 FAIL=1 MISSING=1
+opponent rounds=8
+reality-check rounds=1
+blocking=22 minor=9 locations=255 unclassified=0
+class=config-interpolation-validation findings=3 recurrences=1
+class=gate-report-schema-validation findings=9 recurrences=8
+class=live-control-semantic-validation findings=3 recurrences=0
+class=post-pr-followup-binding-schema findings=3 recurrences=0
+class=return-envelope-parsing findings=3 recurrences=0
+class=round-authorization-grammar findings=10 recurrences=8
+class=round-block-attribution findings=5 recurrences=2
+class=round-record-reparse-divergence findings=1 recurrences=0
+class=verification-input-identity findings=5 recurrences=4
+finding-observations=42 distinct-finding-ids=12 reopened=25
+severity-downgrades=4
+execution-observations=50 check-executions=248 cache-hits=1905 captures=382 full-log-bytes=568306 returned-summary-bytes=210131 usage=unknown baseline-usage=unknown
+round authorization denied: opponent round 9 needs an exact-round user waiver/spec revision after round 8
+  candidate authorization lines were found and refused:
+  STATUS.md:164 authorizes round=4, not round=9
+  STATUS.md:202 authorizes round=5, not round=9
+  STATUS.md:208 refused: waiver needs exactly 5 "; "-separated fields, found 6 — a "; " inside reason= splits the entry
+  STATUS.md:218 authorizes round=6, not round=9
+  STATUS.md:246 authorizes round=7, not round=9
+  STATUS.md:284 authorizes round=8, not round=9
+waiver actual exit=4
+handoff audit PASS
