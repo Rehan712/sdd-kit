@@ -1,0 +1,8 @@
+PASS baseline test-verification:test_capture_provenance rc=0
+PASS baseline test-gate-contracts:test_reports_and_tally rc=0
+PASS baseline test-gate-contracts:test_instruction_contracts rc=0
+PASS M1-old-broad-predicate KILLED test-verification:test_capture_provenance rc=1: assert: AC-020: another spec's untracked notes/opponent.md left the identity unchanged
+PASS M2-no-exclusion KILLED test-verification:test_capture_provenance rc=1: assert: AC-020: generated bookkeeping stays reusable
+PASS M3-anchor-empty KILLED test-verification:test_capture_provenance rc=1: assert: AC-020: generated bookkeeping stays reusable
+PASS M4-index-pass-broad KILLED test-verification:test_capture_provenance rc=1: assert: AC-020: a staged-only change to another spec's notes/opponent.md left the identity unchanged
+PASS M5-path-pass-broad KILLED test-verification:test_capture_provenance rc=1: assert: AC-020: another spec's untracked notes/opponent.md left the identity unchanged

@@ -26,7 +26,7 @@ orchestrated cross-repo `--all` never dispatches — it always runs here.
 `~/.sdd/skills/sdd-go/SKILL.md` — always orchestrated mode (`--all`) with the
 Open-PR stop-point, never ask the user (unknown → `[NEEDS CLARIFICATION: …]`
 marker and the chain stops), and where the bounded gate loop says the user
-arbitrates from round 3, stop the chain instead — autopilot has no waiver
+authorization is required for round 4+, stop the chain instead — autopilot has no waiver
 authority.
 
 ## Pre-flight (once per spec)
@@ -61,7 +61,7 @@ authority.
 | User said… | Mode | Behavior |
 |---|---|---|
 | `/sdd:implement` · `/sdd:implement T###` · "next task" | **single-task** | You run steps 1–8 below for one task. |
-| `--all` · "implement the spec" · "do all of them" | **orchestrated** | Hand `tasks.md` to the `sdd-orchestrator` agent via the Agent tool. Prompt contains: `$WT`, the live spec dir path, project root + stack tags, the user's stop-point, both constitution paths. It owns steps 3–8, batches `[P]` tasks, commits per task, runs the gates with one bounded fix round, and reports. Resuming an aborted `--all` run is just `--all` again — it skips `[x]`, reconciles `[~]` against the worktree. |
+| `--all` · "implement the spec" · "do all of them" | **orchestrated** | Hand `tasks.md` to the `sdd-orchestrator` agent via the Agent tool. Prompt contains: `$WT`, the live spec dir path, project root + stack tags, the user's stop-point, both constitution paths. It owns steps 3–8, batches `[P]` tasks, commits per task, runs the gates with script-enforced round reservations, and reports. Resuming an aborted `--all` run is just `--all` again — it skips `[x]`, reconciles `[~]` against the worktree. |
 
 ## Single-task flow
 
@@ -104,23 +104,9 @@ for. A genuinely required sibling change = a new task, not scope creep.
 
 ### 5. Verify acceptance — run it, don't claim it
 
-Run the acceptance check through **`spec-run.sh`** so the evidence is a captured
-run, not a string you typed:
-
-`bash ~/.sdd/scripts/spec-run.sh <spec-dir> T### --key '<line to quote>' -- <command>`
-
-(from `$WT`). The task's ***Verify:* line is the command and the `--key`** —
-run it verbatim; don't invent a different check. A `manual: …` Verify is the
-hand-tick path in step 6. Legacy tasks without a *Verify:* line: derive the
-command from *Acceptance:*, and write the derived command into the task's
-*Verify:* line while you're there. It executes the command, records stdout+exit+hash into
-`notes/evidence.md`, and **on exit 0 ticks the box with a real evidence line**
-(it calls spec-task.sh for you — so skip the tick in step 6 for these). On
-non-zero it records the failed run and leaves the box unticked: diagnose, fix,
-re-run — never mark done. If the check can't run locally (needs a deploy/
-fixture), say so and leave the box unticked or mark "ready, pending deploy" in
-the task notes — never fake-pass. Truly manual acceptance (a screenshot, a
-dashboard reading) is ticked by hand in step 6, evidence still required.
+Follow the deterministic protocol below: workers capture exact task Verify with
+--from-task --no-tick --summary; the invoker accepts the structured return.
+A failed acceptance gets one escalation retry, then stops dispatch.
 
 ### 5a. Pre-ship gates (opponent, then reality-check)
 
@@ -147,17 +133,12 @@ Gate tasks are **never run by you** — delegate via the Agent tool. Opponent
    `~/.sdd/models.yml` exists, pass
    `~/.sdd/scripts/model-policy.sh get reality-check claude model` as the Agent
    tool's `model` param when it prints an alias (opus/sonnet/haiku/fable).
-4. **Persist the returned report** to `<spec-dir>/notes/opponent.md` /
-   `notes/reality-check.md` (append as `Round <n>` on re-runs) and record the
-   verdict: `spec-status.sh set <dir> opponent "CLEARED (<date>)"` etc.
-5. **Outcome.** CLEARED → tick, proceed to reality-check. READY → tick,
-   proceed to Ship. CHALLENGED / NEEDS WORK → leave `[ ]`, open one follow-up
-   per finding (`T###o<n>` / `T###a<n>`, each citing its AC/REQ), fix as
-   normal tasks, re-invoke the gate. **Bounded:** from round 3 the user
-   arbitrates (see the opponent's Escalation section); a waiver is the user's
-   explicit sign-off recorded in STATUS Decisions — never a softened verdict.
-   FAILED / BLOCKED / empty-or-errored Agent call → surface it and stop;
-   never self-certify or write "looks fine to me".
+4. **Complete** through spec-gate round --complete after the floor and reservation
+   required below. Record the validated verdict in STATUS.
+5. **Outcome.** CLEARED → opponent task complete; READY → reality-check complete.
+   CHALLENGED / NEEDS WORK → class-wide follow-ups with sibling sweeps and tests,
+   a fresh floor and another permitted reservation. BLOCKED / FAILED / empty
+   response stops dispatch; never self-certify.
 
 ### 5b. Ship
 
@@ -175,15 +156,13 @@ the next spec starts smarter.
 
 ### 6. Mark done — tick and evidence are ONE edit
 
-Runnable acceptance is already ticked from step 5 (spec-run.sh did it). Tick by
-hand only for **manually-verified** ACs the tooling can't run (screenshot,
-dashboard) — evidence is still mandatory:
-`bash ~/.sdd/scripts/spec-task.sh done <spec-dir> T### --evidence "<what you observed>"`
-— it flips the box, writes the `*Evidence:*` line (+date), refuses evidence-less
-ticks on non-gate/non-Ship tasks, and bumps `updated:`. Then refresh STATUS
-("Where things stand" / "Next action" — keep it ≤ 10 lines, file ≤ ~120;
-rotate gate-round detail into `notes/history.md`). All tasks `[x]` →
-`spec-status.sh --file tasks.md set <dir> status complete`.
+Use spec-gate accept as described below for automated and declared manual
+proof; it is the only path that ticks an implementation task, and it writes the
+*Evidence:* line itself. Gate and Ship administration tasks — the ones with no
+*Verify kind:*/*Tests:* family, whose artifact is a gate report or a PR —
+retain the legacy bookkeeping path,
+`bash ~/.sdd/scripts/spec-task.sh done <spec-dir> T### --evidence "<observed>"`.
+Refresh STATUS after acceptance. Mark tasks.md complete only when all tasks are [x].
 
 ### 7. Propose a commit (don't run it)
 
@@ -213,7 +192,7 @@ summarize, offer the next. "Do all" → that's orchestrated mode, not a loop her
 ## Rules
 
 - One task per pass by default. Work only in `$WT` after pre-flight.
-- Never tick without passing acceptance + evidence. Run it via `spec-run.sh` (captures the real output and ticks atomically); reserve a bare `spec-task.sh done` for manually-verified ACs.
+- Only spec-gate accept ticks new-contract implementation tasks after validated proof.
 - Never run a gate yourself; never expand a task's scope.
 - Honor constitutions and overlays; keep STATUS current and short.
 - **Hotfix escape hatch:** a genuine production emergency may bypass SDD —
@@ -227,7 +206,68 @@ summarize, offer the next. "Do all" → that's orchestrated mode, not a loop her
 
 ## Done when
 
-- The task's box is `[x]` with its *Evidence:* line (via spec-task.sh), code
-  matches its *Files:*, acceptance verified with pasted output (or the
-  impossibility reported), a commit message proposed, and the user has the
+- The task's box is `[x]` with its *Evidence:* line (written by the accepting
+  script, not by hand), code matches its *Files:*, acceptance verified through
+  deterministic acceptance (or the impossibility reported), a commit message proposed, and the user has the
   next action.
+
+## Deterministic implementation and gate protocol
+
+Use the worktree-local scripts when changing the kit itself; otherwise use the
+installed scripts. Let S be that scripts directory, SPEC the live spec path.
+Read the task verbatim and provide an authoritative brief: exact source revision,
+decided anchors/seams, REQ/AC text, required FM/INV tests, Verify and acceptance.
+Planning consultation may propose decisions; implementation requests only a
+missing slice unless a new decision is required.
+
+1. Finish all source edits in a batch before any acceptance capture. Workers
+   never tick tasks. Wait for every editing worker at this batch barrier; no
+   new editing batch, commit or source mutation until captures and acceptance
+   finish. Refresh historical [x] proof when stale; never reopen implementation
+   solely because proof aged.
+2. Run `bash "$S/spec-run.sh" "$SPEC" T### --from-task --no-tick --summary`.
+   Return the exact Verification-Return block in the shared
+   [verification contract](../../templates/verification-contract.md): authentic
+   capture IDs, canonical summaries and every required FM/INV-to-test mapping.
+   Manual tasks use the declared artifact observation grammar, never a fabricated
+   command exit or bare evidence text.
+3. The invoker runs `bash "$S/spec-gate.sh" accept "$SPEC" T### "$R"`, with
+   `R="$SPEC/notes/verification/returns/T###.txt"`: a return is spec
+   bookkeeping, and a stray return.txt in the worktree changes the input
+   manifest, so acceptance rejects the fresh capture as stale.
+   Only its exit 0 accepts the task. Missing, forged, failed or stale returns
+   leave tasks unchanged. On failure allow one escalation retry with the gap
+   named and the existing implement-hard policy; a second failure stops
+   dispatch. Intentional negative controls are recorded separately from retries.
+   Keep full logs on disk; pass bounded summaries and referenced diagnostics.
+4. After acceptance/commits at each exact authored stage boundary run
+   `bash "$S/spec-gate.sh" checkpoint "$SPEC" "$STAGE"`. Nonzero stops
+   next-stage dispatch, including when no stage commands exist but retained
+   completed-task coverage fails.
+5. Before EACH independent gate invocation run
+   `bash "$S/spec-gate.sh" floor "$SPEC"`, then
+   `bash "$S/spec-gate.sh" round "$SPEC" "$GATE"`.
+   Nonzero from either stops gate dispatch; exit 4 is the round-cap refusal,
+   never a report to reinterpret. Pass the granted round, source and floor,
+   full spec/task paths, source manifests, prior reports, and staged/dirty/
+   untracked diff to the gate. Valid execution can be shared; semantic verdicts
+   remain independent. Opponent precedes reality-check; both keep their defaults.
+6. Persist the returned report only through
+   `bash "$S/spec-gate.sh" round "$SPEC" "$GATE" --complete "$P"`, with
+   `P="$SPEC/notes/verification/reports/$GATE.md"` — a report left beside the
+   code changes the manifest that the next capture and floor verify.
+   Reconcile interrupted reservations explicitly with --reconcile; never reset
+   history or infer a review completed. Rounds 1–3 are permitted for EACH gate.
+   Round 4+ needs exact-gate/exact-next-round user waiver or accepted spec
+   revision, UTC ordered after the prior report, in STATUS Decisions. Autopilot
+   cannot authorize itself. A waiver authorizes one invocation, never clearance.
+   Validate the entry when it is written with
+   `bash "$S/spec-gate.sh" waiver "$SPEC" "$GATE" <round>`: same grammar and
+   the same diagnostics as the reservation, reserving nothing and changing no
+   state. A waiver that has never been parsed is not an authorization.
+7. For CHALLENGED/NEEDS WORK, create follow-ups by stable defect Class with all
+   known sites and a sibling sweep/test in the same fix; retain every established
+   blocker. Re-review changed, affected and previously unexamined surfaces,
+   including unchanged code with a concretely triggered defect. Never narrow
+   severity or scope to hit a round/cost target. Keep security-reviewer authority,
+   configured models and separate gate roles unchanged.

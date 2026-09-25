@@ -12,10 +12,15 @@ EXAMPLE="$KIT_DIR/templates/examples/001-api-key-expiry"
 # (~/.sdd/agents/…) for sandbox stubs, so the test is hermetic on machines
 # with or without a live ~/.sdd.
 stage_example() {
-  local proj="$SANDBOX/proj"
+  local proj="$SANDBOX/proj" rel=templates/examples/001-api-key-expiry
   local spec_dir="$proj/.specify/specs/001-api-key-expiry"
   mkdir -p "$proj/.specify/specs" "$proj/agents"
-  cp -R "$EXAMPLE" "$spec_dir"
+  # The example as the input identity enumerates it (copy_kit's directory
+  # selector), so a developer's ignored file beside it never arrives: this
+  # suite is reuse-checked (O-015 second review).
+  rm -rf "$SANDBOX/example-copy"
+  copy_kit "$KIT_DIR" "$SANDBOX/example-copy" "$rel" && mv "$SANDBOX/example-copy/$rel" "$spec_dir" \
+    || fixture_build_failed 'stage_example example copy'
   cat > "$proj/.specify/stack.yml" <<'EOF'
 stacks: [javascript, aws]
 gate_checks:
@@ -106,6 +111,32 @@ test_verification_golden() {
   run_rc 0 "$ANALYZE" "$spec_dir" --phase tasks
   assert_contains "$OUT" 'FM-003 has no non-gate task owner' 'AC-005: missing ownership warns'
   assert_contains "$OUT" 'INV-002 has no non-gate task owner' 'AC-005: missing invariant binding warns'
+}
+
+# O-015 second review: stage_example copies the example as the input identity
+# enumerates it, so an ignored file beside it in a developer's kit never
+# reaches the staged spec the analyzer then judges.
+test_stage_example_copies_only_enumerated_files() {
+  local host="$SANDBOX/host-kit" rel=templates/examples/001-api-key-expiry spec_dir
+  make_host_kit "$host" || t_fail 'cannot build the host kit'
+  printf '%s/zz-local.md\n' "$rel" >> "$host/.git/info/exclude"
+  printf 'local notes\n' > "$host/$rel/zz-local.md"
+  spec_dir="$(EXAMPLE="$host/$rel" on_host_kit "$host" stage_example)"
+  [[ -f "$spec_dir/tasks.md" ]] || t_fail 'stage_example did not stage the example tasks.md'
+  [[ ! -e "$spec_dir/zz-local.md" ]] || t_fail "stage_example staged the host kit's ignored file"
+}
+
+# O-015 review 6: stage_example runs inside a command substitution, where a
+# t_fail was lost and its text captured into the returned path; a failed copy
+# is now recorded, and the path returned is the sandbox path alone.
+test_stage_example_failure_is_named_and_stays_in_the_sandbox() {
+  local sub="$SANDBOX/failing-sandbox" nokit="$SANDBOX/not-a-kit" printed
+  mkdir -p "$sub" "$nokit"
+  printed="$(SANDBOX="$sub" on_host_kit "$nokit" stage_example 2>/dev/null)"
+  [[ "$printed" == "$sub"/* && "$printed" != *$'\n'* ]] \
+    || t_fail "stage_example handed its caller something other than a sandbox path: '$printed'"
+  assert_contains "$(cat "$sub/.fixture-build-failed" 2>/dev/null)" 'stage_example example copy' \
+    'stage_example left no record of the failed copy'
 }
 
 t_run_all

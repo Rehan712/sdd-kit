@@ -1,0 +1,54 @@
+  | live worktree porcelain digest before: b96320d3fd538f0368066b4aeb8029c80f330de857f44d7734e1be4227a5982b
+PASS live enumeration rc (want=0 got=0)
+PASS copy extraction rc (want=0 got=0)
+PASS copy committed (want=0 got=0)
+== F2 ambient global git configuration decides fixture commits; the identity is unchanged
+PASS F2 plain enumeration rc (want=0 got=0)
+PASS F2 hooks enumeration rc (want=0 got=0)
+PASS F2 the kit enumeration is identical under the hooks configuration (want=0 got=0)
+PASS F2 sign enumeration rc (want=0 got=0)
+PASS F2 the kit enumeration is identical under the sign configuration (want=0 got=0)
+PASS F2 the input identity is identical under the hooks configuration (want=7e98ed31c7babdf7be21076a2969a2a25b6ae4604b23f96ccfdc90162e2a14d8 got=7e98ed31c7babdf7be21076a2969a2a25b6ae4604b23f96ccfdc90162e2a14d8)
+  | identity 7e98ed31c7babdf7be21076a2969a2a25b6ae4604b23f96ccfdc90162e2a14d8
+PASS F2 make_verification_git_dir under hooks leaves no commit, silently (want=1 got=1)
+  | HEAD=NONE org pre-commit policy: commit rejected
+PASS F2 make_verification_git_dir under sign leaves no commit, silently (want=1 got=1)
+  | HEAD=NONE fatal: cannot exec '/private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/1c1e945f-3f81-4ba8-8888-8263f1ca2273/scratchpad/v4/work/gcfg/no-such-gpg': No such file or directory error: g
+PASS F2 test_capture_provenance fails under the hooks configuration (want=1 got=1)
+  | fatal: invalid object name 'HEAD'. assert: AC-020: generated bookkeeping stays reusable assert: AC-020: checkbox/evidence bookkeeping excluded 
+PASS F2 control: test_capture_provenance passes without it (want=0 got=0)
+PASS F2: copy unchanged (want=!! tests/.one-verification.sh got=!! tests/.one-verification.sh)
+== F1 the HOME binding of git_config_pinned is not proven by the XDG fixture
+PASS F1 baseline XDG block (want=0 got=0)
+PASS F1 unmutated block with a replacing ~/.gitconfig (want=0 got=0)
+PASS F1 M-home applied (want=0 got=0)
+PASS F1 M-home SURVIVES with the ambient HOME (want=0 got=0)
+PASS F1 M-home fails with a replacing ~/.gitconfig (want=1 got=1)
+PASS F1 on the precondition (want=1 got=1)
+PASS F1 M-nosys applied (want=0 got=0)
+PASS F1 M-nosys SURVIVES (no system file to plant here) (want=0 got=0)
+  | system config origin: 
+PASS F1: copy unchanged (want=!! tests/.one-verification.sh got=!! tests/.one-verification.sh)
+== F3 E03 is killed by the delta's own git-environment fixture
+PASS F3 baseline git-environment block (want=0 got=0)
+PASS F3 E03 applied (want=0 got=0)
+PASS F3 E03 fails the block (want=1 got=1)
+  | assert: AC-020: an exported GIT_INDEX_FILE changed the input identity assert: expected exit 0, got 3: snapshot_fixture /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/1c1e945f-3f81-4ba8-8888-8263f1 assert: AC-020: an exported GIT_DIR stopped or moved the input identity 
+PASS F3: copy unchanged (want=!! tests/.one-verification.sh got=!! tests/.one-verification.sh)
+== F4 single-file copies of live-kit files outside copy_kit
+  | 6 single cp lines naming a kit alias:
+  |   tests/test-build-adapters.sh:235:  cp "$KIT_DIR/models.example.yml" "$target"
+  |   tests/test-gate-contracts.sh:1799:  mkdir "$kit/tests"; cp "$KIT_DIR/tests/probe-gate-contract.sh" "$kit/tests/"
+  |   tests/test-gate-contracts.sh:1848:  mkdir "$kit/tests"; cp "$KIT_DIR/tests/probe-gate-contract.sh" "$kit/tests/"
+  |   tests/test-model-policy.sh:192:  cp "$KIT_DIR/models.example.yml" "$target"
+  |   tests/test-usage-limits.sh:238:  cp "$SCRIPTS/spec-resume.sh" "$DISPATCH_KIT/scripts/spec-resume.sh"
+  |   tests/test-verification.sh:210:  cp "$SCRIPTS/lib.sh" "$SCRIPTS/verification-lib.sh" "$doctor_dir/"
+PASS F4 every copied file is a tracked file named by a literal (want=0 got=0)
+== F2 reach: the whole suite once under the rejecting global hook
+  | run.sh under hooks 23:01:24Z - 23:19:39Z, rc=1
+PASS F2 reach: the suite fails under the hooks configuration (want=1 got=1)
+  | total 142/143
+PASS reach: copy unchanged (want=!! tests/.one-verification.sh got=!! tests/.one-verification.sh)
+  | live worktree porcelain digest after: b96320d3fd538f0368066b4aeb8029c80f330de857f44d7734e1be4227a5982b
+PASS live worktree unchanged (want=b96320d3fd538f0368066b4aeb8029c80f330de857f44d7734e1be4227a5982b got=b96320d3fd538f0368066b4aeb8029c80f330de857f44d7734e1be4227a5982b)
+verify-4 failures=0

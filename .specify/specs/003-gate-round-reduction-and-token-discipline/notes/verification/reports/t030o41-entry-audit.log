@@ -1,0 +1,39 @@
+worktree porcelain digest before: b3e969eed1f7c3ca185464cc16f0fbf2075289d3166e15c6565aaf8ec1c19b88
+PASS snapshot rc 0
+PASS source == handoff source (aaba009243f3661c08769ab63b27186bdb8f8ed0b330eaec982e6bd8fafb7ea4)
+PASS Decisions == handoff Decisions (73b31d4928e2ce193e1c7d04006c24638aa734727dd77a0c4a64913cd2320e40)
+PASS HEAD == handoff HEAD (0d55c62)
+  analyze|   ✓ opponent gate present, agent file exists
+  analyze|   ✓ reality-check gate present, agent file exists
+  analyze| ---
+  analyze| 1 warning(s), 0 errors
+PASS analyzer exit 0 (0)
+PASS analyzer: 1 warning(s), 0 errors
+PASS no held lock
+PASS no .capture.* staging anywhere under notes/
+PASS opponent: no pending reservation
+PASS reality-check: no pending reservation
+PASS no staged .reservation-* in either gate
+PASS T030 unchecked
+PASS T031 unchecked
+PASS T032 unchecked
+PASS T033 unchecked
+PASS T034 unchecked
+PASS T030o41 unchecked
+PASS T030o41 Verify is the T027 command
+PASS T027 Verify is the same command
+  w11| round authorization denied: opponent round 11 needs an exact-round user waiver/spec revision after round 10
+  w11|   candidate authorization lines were found and refused:
+  w11|   STATUS.md:176 authorizes round=4, not round=11
+  w11|   STATUS.md:214 authorizes round=5, not round=11
+  w11|   STATUS.md:220 refused: waiver needs exactly 5 "; "-separated fields, found 6 — a "; " inside reason= splits the entry
+  w11|   STATUS.md:230 authorizes round=6, not round=11
+  w11|   STATUS.md:258 authorizes round=7, not round=11
+  w11|   STATUS.md:296 authorizes round=8, not round=11
+  w11|   STATUS.md:339 authorizes round=9, not round=11
+  w11|   STATUS.md:369 authorizes round=10, not round=11
+PASS round 11 refused at exit 4 (4)
+PASS FLOOR-qQEv7w no longer current
+worktree porcelain digest after: b3e969eed1f7c3ca185464cc16f0fbf2075289d3166e15c6565aaf8ec1c19b88
+PASS worktree status unchanged by this audit
+entry audit failures=0

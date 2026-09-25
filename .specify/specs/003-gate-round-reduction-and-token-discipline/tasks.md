@@ -2,7 +2,7 @@
 tasks_for: 003-gate-round-reduction-and-token-discipline
 status: in-progress  # draft | in-progress | complete
 created: 2026-09-05
-updated: 2026-09-07
+updated: 2026-09-25
 ---
 
 # Tasks: Gate round reduction and token discipline
@@ -81,7 +81,7 @@ keeps each edit task to at most five files instead of combining unrelated work.
   - *Reuse:* local
   - *Refs:* REQ-002, REQ-004, REQ-005, AC-001, AC-004, FM-001, INV-005, plan §3.1, §4.4
   - *Integration owner:* T027
-  - *Evidence:* `bash tests/test-gate-contracts.sh → -- 1/1 passed (notes/evidence.md, T001 2026-09-06T02:28:16, sha256:8d191b7cf017); FM-001 and INV-005 → tests/test-gate-contracts.sh::test_instruction_contracts; bootstrap no-tick capture` (2026-09-06)
+  - *Evidence:* CAP-13-APrAYv verified by spec-gate accept; return sha256:42a5204db5040542601f95449b108c89e3abc28cbbe63e3082e7a85cc602ce21
 
 - [x] **T002** [hard] — Validate phase-aware failure and test bindings
   - *Files:* `scripts/verification-lib.sh` (new), `scripts/sdd-analyze.sh`, `templates/tasks-template.md`, `tests/test-sdd-analyze.sh`, `tests/helpers.sh`
@@ -91,7 +91,7 @@ keeps each edit task to at most five files instead of combining unrelated work.
   - *Verify:* `bash tests/test-sdd-analyze.sh` → all suites `passed`, exit 0
   - *Reuse:* local
   - *Refs:* REQ-002, REQ-004, REQ-005, AC-001, AC-003, AC-004, AC-006, AC-023, FM-001, FM-002, FM-003, INV-005, plan §3.1, §4.1
-  - *Evidence:* `bash tests/test-sdd-analyze.sh → -- 18/18 passed (notes/evidence.md, T002 2026-09-06T10:41:22, sha256:20ac89cdff35); FM-001/FM-002/FM-003/INV-005 → tests/test-sdd-analyze.sh::test_verification_bindings; bootstrap no-tick worker return accepted; independent security clean (notes/history.md)` (2026-09-06)
+  - *Evidence:* CAP-21-dKb6XY verified by spec-gate accept; return sha256:8cc6358199d897240a361512ad43a50adfe3d3c5770fbcdec72af11187edd9fa
 
 - [x] **T003** [P] [hard] — Parse verification commands without losing arguments
   - *Depends on:* T002
@@ -102,7 +102,7 @@ keeps each edit task to at most five files instead of combining unrelated work.
   - *Verify:* `bash tests/test-verification.sh` → all suites `passed`, exit 0
   - *Reuse:* local
   - *Refs:* REQ-007, REQ-008, AC-011, AC-023, FM-006, FM-011, plan §3.1, §4.1, §6
-  - *Evidence:* `bash tests/test-verification.sh → -- 1/1 passed (notes/evidence.md, T003 2026-09-06T19:54:05, sha256:ce28c7d7bf6a); FM-006/FM-011 → tests/test-verification.sh::test_config_grammar; bootstrap no-tick capture; independent security clean (notes/history.md)` (2026-09-06)
+  - *Evidence:* CAP-15-4eF31Y verified by spec-gate accept; return sha256:dfd9192db5bd1246c88ab052399d8f3a99f9037e732f846a4e0c8ace0dbf6967
 
 - [x] **T003f1** — Keep authoring fixtures valid under gate configuration
   - *Files:* `tests/helpers.sh`, `tests/test-sdd-analyze.sh`, `scripts/verification-lib.sh`
@@ -113,7 +113,7 @@ keeps each edit task to at most five files instead of combining unrelated work.
   - *Reuse:* local
   - *Refs:* REQ-005, REQ-007, AC-006, AC-011, AC-023, FM-002, plan §3.1, §7
   - *Notes:* Required sibling fixture adjustment discovered during T003 integration; no shipped spec rewrite or weakening of missing-configuration checks.
-  - *Evidence:* `bash tests/test-sdd-analyze.sh → -- 18/18 passed (notes/evidence.md, T003f1 2026-09-06T19:56:35, sha256:20ac89cdff35); FM-002 → tests/test-sdd-analyze.sh::test_verification_bindings; configured legacy/new fixtures and exact annotated Files ownership; independent security clean` (2026-09-06)
+  - *Evidence:* CAP-14-jVE3FM verified by spec-gate accept; return sha256:871b20e0e128cf6a974f33a235f09222aee2540a9c97c0005e597b976823af41
 
 - [x] **T004** [P] — Teach planning and task-local test ownership
   - *Depends on:* T002
@@ -124,7 +124,7 @@ keeps each edit task to at most five files instead of combining unrelated work.
   - *Verify:* `bash tests/test-gate-contracts.sh` → all suites `passed`, exit 0
   - *Reuse:* local
   - *Refs:* REQ-002, REQ-004, REQ-005, AC-006, AC-017, FM-001, INV-005, plan §2, §3.1
-  - *Evidence:* `bash tests/test-gate-contracts.sh → -- 1/1 passed (notes/evidence.md, T004, sha256:8d191b7cf017); FM-001, INV-005 → tests/test-gate-contracts.sh::test_instruction_contracts; bootstrap no-tick capture` (2026-09-06)
+  - *Evidence:* CAP-13-APrAYv verified by spec-gate accept; return sha256:6b329efb5abc20189f6a852f76a98ba7d2f528fa206c545038d4f28cf24c8c07
 
 - [x] **T005** [P] — Refresh the calibrated verification example
   - *Depends on:* T002
@@ -135,7 +135,7 @@ keeps each edit task to at most five files instead of combining unrelated work.
   - *Verify:* `bash tests/test-golden-example.sh` → all suites `passed`, exit 0
   - *Reuse:* local
   - *Refs:* REQ-002, REQ-004, REQ-005, AC-005, FM-002, plan §3.1, §7
-  - *Evidence:* `bash tests/test-golden-example.sh → -- 3/3 passed (notes/evidence.md, T005, sha256:c5596e4df60e); FM-002 → tests/test-golden-example.sh::test_verification_golden; bootstrap no-tick capture` (2026-09-06)
+  - *Evidence:* CAP-16-VBzeMz verified by spec-gate accept; return sha256:c135715b01ce47330666ae2393e814236c632266dfbdd257e4f33950d7c2b71a
 
 ## Backend
 
@@ -148,7 +148,7 @@ keeps each edit task to at most five files instead of combining unrelated work.
   - *Reuse:* local
   - *Refs:* REQ-003, REQ-008, AC-002, FM-001, plan §6
   - *Integration owner:* T027
-  - *Evidence:* `bash tests/test-gate-contracts.sh → -- 2/2 passed (notes/evidence.md, T006, sha256:c933ee933ed1); FM-001, → task Tests locators; bootstrap no-tick capture` (2026-09-06)
+  - *Evidence:* CAP-13-APrAYv verified by spec-gate accept; return sha256:99c23313db9a2a4d5fe9a4ab0d479d71968a5f96fc696b54ff202f4d57ed2d4f
 
 - [x] **T007** — Add JavaScript and application-stack defaults
   - *Files:* `templates/stack-overlays/javascript.md`, `templates/stack-overlays/react.md`, `templates/stack-overlays/bun-monorepo.md`, `templates/stack-overlays/loopback4.md`, `tests/test-gate-contracts.sh` (new in T001)
@@ -159,7 +159,7 @@ keeps each edit task to at most five files instead of combining unrelated work.
   - *Reuse:* local
   - *Refs:* REQ-003, REQ-008, AC-002, FM-001, plan §6
   - *Integration owner:* T027
-  - *Evidence:* `bash tests/test-gate-contracts.sh → -- 3/3 passed (notes/evidence.md, T007, sha256:2d2aa9369d48); FM-001, → task Tests locators; bootstrap no-tick capture` (2026-09-06)
+  - *Evidence:* CAP-13-APrAYv verified by spec-gate accept; return sha256:a34bf841e79646c985a463cfcda1bc0927b7957c435e264d0a56151901bdec3c
 
 - [x] **T008** — Add mobile and platform-stack defaults
   - *Files:* `templates/stack-overlays/expo-rn.md`, `templates/stack-overlays/firebase-rtk-codegen.md`, `templates/stack-overlays/python.md`, `templates/stack-overlays/aws.md`, `tests/test-gate-contracts.sh` (new in T001)
@@ -170,7 +170,7 @@ keeps each edit task to at most five files instead of combining unrelated work.
   - *Reuse:* local
   - *Refs:* REQ-003, REQ-008, AC-002, FM-001, plan §6
   - *Integration owner:* T027
-  - *Evidence:* `bash tests/test-gate-contracts.sh → -- 4/4 passed (notes/evidence.md, T008, sha256:12499981ed6d); FM-001, → task Tests locators; bootstrap no-tick capture` (2026-09-06)
+  - *Evidence:* CAP-13-APrAYv verified by spec-gate accept; return sha256:9d006c920dbdb1aca7213869aba27e6401a66d92e6b8e32a214e14ff8280cc32
 
 - [x] **T009** — Finish defaults and enumerate every overlay
   - *Files:* `templates/stack-overlays/monorepo.md`, `templates/stack-overlays/troposphere.md`, `tests/test-gate-contracts.sh` (new in T001)
@@ -180,7 +180,7 @@ keeps each edit task to at most five files instead of combining unrelated work.
   - *Verify:* `bash tests/test-gate-contracts.sh` → all suites `passed`, exit 0
   - *Reuse:* local
   - *Refs:* REQ-003, REQ-008, AC-002, FM-001, FM-002, plan §6
-  - *Evidence:* `bash tests/test-gate-contracts.sh → -- 6/6 passed (notes/evidence.md, T009, sha256:43e181334dbe); FM-001,FM-002, → task Tests locators; bootstrap no-tick capture` (2026-09-06)
+  - *Evidence:* CAP-13-APrAYv verified by spec-gate accept; return sha256:cae08708a95cfbf2f8ec7060e245e5ed4d5735a7775f018862299129d714da76
 
 - [x] **T010** — Separate compiled-stack expert briefing modes
   - *Files:* `agents/rust-expert.md`, `agents/rust-aws-lambda-expert.md`, `agents/aws-cdk-lambda-ts-expert.md`, `agents/nextjs-expert.md`, `tests/test-gate-contracts.sh` (new in T001)
@@ -191,7 +191,7 @@ keeps each edit task to at most five files instead of combining unrelated work.
   - *Reuse:* local
   - *Refs:* REQ-014, AC-014, FM-004, FM-005, plan §2, §6
   - *Integration owner:* T027
-  - *Evidence:* `bash tests/test-gate-contracts.sh → -- 7/7 passed (notes/evidence.md, T010, sha256:1b5b3a1a0af0); FM-004,FM-005, → task Tests locators; bootstrap no-tick capture` (2026-09-06)
+  - *Evidence:* CAP-13-APrAYv verified by spec-gate accept; return sha256:a7be45127c078316f5716b272a48db75726dfd4998604d35eea80e206f3d47c6
 
 - [x] **T011** — Separate application expert briefing modes
   - *Files:* `agents/javascript-expert.md`, `agents/react-expert.md`, `agents/bun-monorepo-expert.md`, `agents/loopback4-expert.md`, `tests/test-gate-contracts.sh` (new in T001)
@@ -202,7 +202,7 @@ keeps each edit task to at most five files instead of combining unrelated work.
   - *Reuse:* local
   - *Refs:* REQ-014, AC-014, FM-004, FM-005, plan §2, §6
   - *Integration owner:* T027
-  - *Evidence:* `bash tests/test-gate-contracts.sh → -- 8/8 passed (notes/evidence.md, T011, sha256:8d8e94845058); FM-004,FM-005, → task Tests locators; bootstrap no-tick capture` (2026-09-06)
+  - *Evidence:* CAP-13-APrAYv verified by spec-gate accept; return sha256:7cb5e0c2db3cea45ffbf8ae2f4819fe7bed8b5e8b1bbfb6caee522cc9668dda0
 
 - [x] **T012** — Separate platform expert briefing modes
   - *Files:* `agents/aws-expert.md`, `agents/python-expert.md`, `agents/expo-rn-expert.md`, `agents/firebase-rtk-codegen-expert.md`, `tests/test-gate-contracts.sh` (new in T001)
@@ -213,7 +213,7 @@ keeps each edit task to at most five files instead of combining unrelated work.
   - *Reuse:* local
   - *Refs:* REQ-014, AC-014, FM-004, FM-005, plan §2, §6
   - *Integration owner:* T027
-  - *Evidence:* `bash tests/test-gate-contracts.sh → -- 9/9 passed (notes/evidence.md, T012, sha256:49e830668618); FM-004,FM-005, → task Tests locators; bootstrap no-tick capture` (2026-09-06)
+  - *Evidence:* CAP-13-APrAYv verified by spec-gate accept; return sha256:577196358084b949f98f8e94efa0b98d3fc9b48b95e0e84d1c8e578fcd3ef278
 
 - [x] **T013** — Verify test-engineer modes through generated adapters
   - *Files:* `agents/test-engineer.md`, `tests/test-gate-contracts.sh` (new in T001), `tests/test-build-adapters.sh`
@@ -223,7 +223,7 @@ keeps each edit task to at most five files instead of combining unrelated work.
   - *Verify:* `bash tests/test-gate-contracts.sh && bash tests/test-build-adapters.sh` → all suites `passed`, exit 0
   - *Reuse:* local
   - *Refs:* REQ-014, AC-014, FM-002, FM-004, FM-005, plan §2, §6
-  - *Evidence:* `bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-build-adapters.sh → -- 8/8 passed (notes/evidence.md, T013, sha256:609e2f9c87a6); FM-002,FM-004,FM-005, → task Tests locators; bootstrap no-tick capture` (2026-09-06)
+  - *Evidence:* CAP-17-nUBCdM verified by spec-gate accept; return sha256:0539541a54d9dc82a4af35832b9e4a42ce99ba081f22b67b925dd514820bb81d
 
 - [x] **T014** [hard] — Record class-wide reports and honest tallies
   - *Files:* `agents/opponent.agent.md`, `agents/reality-check.agent.md`, `scripts/verification-lib.sh` (new in T002), `scripts/spec-gate.sh` (new), `tests/test-gate-contracts.sh` (new in T001)
@@ -233,7 +233,7 @@ keeps each edit task to at most five files instead of combining unrelated work.
   - *Verify:* `bash tests/test-gate-contracts.sh` → all suites `passed`, exit 0
   - *Reuse:* local
   - *Refs:* REQ-010, REQ-011, REQ-012, REQ-013, REQ-015, AC-010, AC-012, AC-017, FM-019, FM-020, INV-005, INV-006, plan §3.3, §4.3
-  - *Evidence:* `bash tests/test-gate-contracts.sh → -- 13/13 passed (notes/evidence.md, T014, sha256:7dcb3a982827); FM-019,FM-020,INV-005,INV-006, → task Tests locators; bootstrap no-tick capture` (2026-09-06)
+  - *Evidence:* CAP-13-APrAYv verified by spec-gate accept; return sha256:4e95d859e2575828d35aaae58b71ce4cad25282079616ed2276ccf9812db8f6b
 
 - [x] **T015** [hard] — Establish owner-only verification transaction primitives
   - *Files:* `scripts/verification-lib.sh` (new in T002), `tests/test-verification.sh` (new in T003)
@@ -243,7 +243,7 @@ keeps each edit task to at most five files instead of combining unrelated work.
   - *Verify:* `bash tests/test-verification.sh` → all suites `passed`, exit 0
   - *Reuse:* local
   - *Refs:* REQ-006, REQ-009, AC-020, AC-022, FM-007, FM-008, INV-003, plan §3.2, §4.2, §4.4
-  - *Evidence:* `bash tests/test-verification.sh → -- 2/2 passed (notes/evidence.md, T015, sha256:0e92dde043a9); FM-007,FM-008,INV-003, → task Tests locators; bootstrap no-tick capture` (2026-09-06)
+  - *Evidence:* CAP-15-4eF31Y verified by spec-gate accept; return sha256:6d846f8ac37c320a98b53033df7a1a912bb3a456b345b04d18b568b06298a84f
 
 - [x] **T016** [hard] — Fingerprint complete semantic verification inputs
   - *Files:* `scripts/verification-lib.sh` (new in T002), `tests/test-verification.sh` (new in T003), `tests/helpers.sh`
@@ -253,7 +253,7 @@ keeps each edit task to at most five files instead of combining unrelated work.
   - *Verify:* `bash tests/test-verification.sh` → all suites `passed`, exit 0
   - *Reuse:* local
   - *Refs:* REQ-009, AC-020, FM-005, FM-007, FM-010, FM-014, plan §3.2, §4.4
-  - *Evidence:* `bash tests/test-verification.sh → -- 3/3 passed (notes/evidence.md, T016, sha256:b0307d5f3643); FM-005,FM-007,FM-010,FM-014, → task Tests locators; bootstrap no-tick capture` (2026-09-07)
+  - *Evidence:* CAP-15-4eF31Y verified by spec-gate accept; return sha256:f1c99477275f5fe2b4babdb3106470b6f1687b357d6820c9ae75c62b7d0ad190
 
 - [x] **T017** [hard] — Capture complete runs with bounded summaries
   - *Files:* `scripts/verification-lib.sh` (new in T002), `scripts/spec-run.sh`, `tests/test-spec-run.sh`, `tests/test-verification.sh` (new in T003)
@@ -263,7 +263,7 @@ keeps each edit task to at most five files instead of combining unrelated work.
   - *Verify:* `bash tests/test-spec-run.sh && bash tests/test-verification.sh` → all suites `passed`, exit 0
   - *Reuse:* local
   - *Refs:* REQ-006, REQ-009, REQ-016, AC-020, AC-021, FM-006, FM-008, FM-009, INV-003, plan §3.2, §4.1, §4.4
-  - *Evidence:* `CAP-1-G083Nw (notes/captures/CAP-1-G083Nw/output.log): bash tests/test-spec-run.sh && bash tests/test-verification.sh → 6/6 and 3/3 passed, exit 0; FM-006/FM-008/FM-009/INV-003 map to test_bounded_capture and test_owned_transactions; input-before equals input-after` (2026-09-07)
+  - *Evidence:* CAP-18-l2UUu5 verified by spec-gate accept; return sha256:2c06596c364c9d1ffd013a5d25bb77605ef424ce64ccff7e84dae95d19c5841d
 
 - [x] **T018** [hard] — Reject stale or damaged current evidence
   - *Files:* `scripts/verification-lib.sh` (new in T002), `scripts/spec-evidence.sh`, `tests/test-verification.sh` (new in T003)
@@ -273,7 +273,7 @@ keeps each edit task to at most five files instead of combining unrelated work.
   - *Verify:* `bash tests/test-verification.sh` → all suites `passed`, exit 0
   - *Reuse:* local
   - *Refs:* REQ-009, AC-020, AC-023, FM-010, FM-014, INV-001, plan §3.2, §4.4
-  - *Evidence:* `CAP-2-fvXXB7 (notes/captures/CAP-2-fvXXB7/output.log): bash tests/test-verification.sh → 3/3 passed, exit 0; FM-010/FM-014/INV-001 → tests/test-verification.sh::test_capture_provenance; current and damaged evidence predicates tested` (2026-09-07)
+  - *Evidence:* CAP-19-YqoEuW verified by spec-gate accept; return sha256:206e6d6c150debc3f066dfa71c75f00064c392f9920fb1cb237b6b346ccda1ec
 
 - [x] **T019** [hard] — Accept verified returns in one transaction
   - *Files:* `scripts/verification-lib.sh` (new in T002), `scripts/spec-gate.sh` (new in T014), `scripts/spec-task.sh`, `tests/test-spec-gate.sh` (new), `tests/test-spec-task.sh`
@@ -307,7 +307,7 @@ keeps each edit task to at most five files instead of combining unrelated work.
   - *Integration owner:* T027
   - *Evidence:* CAP-5-lU4jNB verified by spec-gate accept; return sha256:b6a19d62e54ddfe235cb0b8c6e4a346b6058270ae7f55d02382f8458ee9dedc0
 
-- [ ] **T022** [hard] — Enforce round reservations and scoped authorization
+- [x] **T022** [hard] — Enforce round reservations and scoped authorization
   - *Files:* `scripts/spec-gate.sh` (new in T014), `scripts/verification-lib.sh` (new in T002), `tests/test-spec-gate.sh` (new in T019), `tests/test-verification.sh` (new in T003)
   - *Acceptance:* Add AC-009 cases for both gates, exact rounds/UTC/calendar validation, denied fourth and subsequent runs, one-round user waivers/revisions, quoted/malformed/duplicate/legacy reports, interruption recovery and serialized reservations with recurring-class output.
   - *Verify kind:* test
@@ -315,8 +315,9 @@ keeps each edit task to at most five files instead of combining unrelated work.
   - *Verify:* `bash tests/test-spec-gate.sh && bash tests/test-verification.sh` → all suites `passed`, exit 0
   - *Reuse:* local
   - *Refs:* REQ-012, REQ-015, AC-009, FM-016, FM-017, FM-018, INV-003, INV-004, plan §3.3, §4.1, §4.3
+  - *Evidence:* CAP-9-FZwaR4 verified by spec-gate accept; return sha256:7385bc8a188f76ce0654da500b90d45072e6d58c9686f03544cb99a26ef17211
 
-- [ ] **T023** [hard] — Enable reuse after negative provenance fixtures
+- [x] **T023** [hard] — Enable reuse after negative provenance fixtures
   - *Files:* `scripts/verification-lib.sh` (new in T002), `scripts/spec-gate.sh` (new in T014), `tests/test-verification.sh` (new in T003), `tests/test-spec-gate.sh` (new in T019), `.specify/stack.yml`
   - *Acceptance:* Complete AC-007/AC-008/AC-020 reuse cases before enabling local opt-in: unchanged suite executes once across gates/checkpoints, source/command/cwd/tool/environment changes miss, integrity reruns after bookkeeping, and unknown/external/time checks never reuse.
   - *Verify kind:* test
@@ -325,8 +326,9 @@ keeps each edit task to at most five files instead of combining unrelated work.
   - *Reuse:* local
   - *Refs:* REQ-007, REQ-008, REQ-009, AC-007, AC-008, AC-020, FM-010, FM-012, FM-014, INV-001, plan §3.2, §4.3, §8
   - *Integration owner:* T027
+  - *Evidence:* CAP-10-rSCipE verified by spec-gate accept; return sha256:1629bfbcb30fee1c680a080317bf9dafb69229f4e90f34a2446c77d9b74ea853
 
-- [ ] **T024** [hard] — Validate incremental reality-check evidence matrices
+- [x] **T024** [hard] — Validate incremental reality-check evidence matrices
   - *Files:* `agents/reality-check.agent.md`, `scripts/verification-lib.sh` (new in T002), `scripts/spec-gate.sh` (new in T014), `tests/test-verification.sh` (new in T003), `tests/test-gate-contracts.sh` (new in T001)
   - *Acceptance:* Add AC-013 matrix fixtures that include every AC, carry only valid unchanged rows, invalidate each specified source/dependency/criterion mutation and unknown impact, and use current floor captures without treating execution as semantic PASS.
   - *Verify kind:* test
@@ -335,10 +337,396 @@ keeps each edit task to at most five files instead of combining unrelated work.
   - *Reuse:* local
   - *Refs:* REQ-009, REQ-013, AC-013, FM-010, FM-020, INV-001, INV-005, plan §3.3, §4.3
   - *Integration owner:* T027
+  - *Evidence:* CAP-11-VYrZH0 verified by spec-gate accept; return sha256:55c8135c667ef0be58c5077d6cfd4712a069cefb77ea6e6e5656136e22523809
+
+- [x] **T030o1** — Accept permitted narrative around the return envelope
+  - *Files:* `scripts/verification-lib.sh`, `tests/test-spec-gate.sh`, `templates/verification-contract.md`
+  - *Acceptance:* A return whose complete `Verification-Return: 1` block is preceded or followed by ordinary prose is accepted; inside the block every field stays strictly validated, so missing, extra, duplicate, unknown or malformed mappings still reject and leave task state unchanged.
+  - *Verify kind:* test
+  - *Tests:* `tests/test-spec-gate.sh::test_acceptance`
+  - *Verify:* `bash tests/test-spec-gate.sh` → all suites `passed`, exit 0
+  - *Reuse:* local
+  - *Refs:* REQ-006, AC-022, FM-006, plan §4.2
+  - *Notes:* Owns opponent finding O-001. `vf_return_parse` is the sole runtime consumer through `vf_return_check`; delimit the block rather than loosening field validation, and add leading- and trailing-narrative positives beside negatives proving in-block strictness is unchanged.
+  - *Evidence:* CAP-89-0bLgSL verified by spec-gate accept; return sha256:0b9f15fef55f01885acfe1a6486efabc7bb46629dae0c909d61e0b07f95eff74
+
+- [x] **T030o2** — Validate round authorizations against the whole line
+  - *Files:* `scripts/verification-lib.sh`, `tests/test-spec-gate.sh`, `templates/verification-contract.md`
+  - *Acceptance:* Only an exact `- <UTC> — waiver:`/`spec-revision:` Decisions line authorizes a round past the cap; text inserted between timestamp and separator, leading or trailing text, altered separators and malformed timestamps all fail closed on both branches, while a valid authorization still grants exactly its named gate and round.
+  - *Verify kind:* test
+  - *Tests:* `tests/test-spec-gate.sh::test_rounds`
+  - *Verify:* `bash tests/test-spec-gate.sh` → all suites `passed`, exit 0
+  - *Reuse:* local
+  - *Refs:* REQ-012, AC-009, FM-016, plan §3.3, §4.3
+  - *Notes:* Owns opponent finding O-002. Validate the whole line instead of a permissive prefix plus a fixed 20-character substring; the waiver and spec-revision branches share one matcher, so the negatives cover the shared parser once.
+  - *Evidence:* CAP-90-vaH6bG verified by spec-gate accept; return sha256:56d1ce8d16938f376be2fb1681190fe11e1b3a5cc147016812bc591517aa6a8a
+
+- [x] **T030o4** — Enforce the full gate-report schema at completion
+  - *Files:* `scripts/verification-lib.sh`, `tests/test-gate-contracts.sh`, `tests/test-spec-gate.sh`
+  - *Acceptance:* `round --complete` refuses a report omitting any required top-level section — including `### What I attacked` and the searched/unexamined scope record — or any required finding field, including `Wrong behavior` and `Class-wide fix`; a canonical report still validates and its tally is unchanged.
+  - *Verify kind:* test
+  - *Tests:* `tests/test-gate-contracts.sh::test_reports_and_tally`
+  - *Verify:* `bash tests/test-gate-contracts.sh` → all suites `passed`, exit 0
+  - *Reuse:* local
+  - *Refs:* REQ-010, REQ-012, AC-012, FM-019, plan §3.3, §4.3
+  - *Notes:* Owns opponent finding O-004. `vf_reports` is the schema validator `round --complete` calls, so a scope-less CLEARED report is canonizable today; add one omission negative per required section and per required finding field.
+  - *Evidence:* CAP-91-myxn7k verified by spec-gate accept; return sha256:ea37e3664b05444c53983140e181dced8e3be3c8bea52215faf79fb3756f0843
+
+- [x] **T030o5** — Close the configuration shell-expansion grammar
+  - *Files:* `scripts/verification-lib.sh`, `tests/test-verification.sh`
+  - *Acceptance:* Configuration scalars reject every unescaped shell expansion the grammar forbids — `$1`, `$?`, `$$`, `$!`, `$-`, `$*`, `$@` and arithmetic expansion beside the existing `$NAME`, `${…}` and `$(…)` — with the named configuration failure; valid commands keep working across the gate, checkpoint, reuse, tool and input lists that share the parser.
+  - *Verify kind:* test
+  - *Tests:* `tests/test-verification.sh::test_config_grammar`
+  - *Verify:* `bash tests/test-verification.sh` → all suites `passed`, exit 0
+  - *Reuse:* local
+  - *Refs:* REQ-007, REQ-008, AC-011, FM-011, plan §3.1
+  - *Notes:* Owns opponent finding O-005. One shared scalar parser serves every list, so the fix is single-site and the negatives enumerate the forms; execution strings are the affected consumer because Bash expands them at run time.
+  - *Evidence:* CAP-92-pit8L4 verified by spec-gate accept; return sha256:b7c14e3fdecfcf12a2c955fc40dd161c2d32dc002efa0623efee433bee432d33
+
+- [x] **T030o11** — Refuse content after a completed round marker
+  - *Files:* `scripts/verification-lib.sh`, `tests/test-spec-gate.sh`
+  - *Acceptance:* A report carrying any non-blank line after a round completion marker and before the next `## Round n` heading is refused, so a round-2 preamble can no longer be absorbed into round 1; completion additionally re-verifies every previously sealed round digest against the combined file before publishing, and a shift fails the completion instead of wedging later invocations. Legacy reports without markers keep their current behavior and round 1 keeps digest 1ac95178.
+  - *Verify kind:* test
+  - *Tests:* `tests/test-spec-gate.sh::test_rounds`
+  - *Verify:* `bash tests/test-spec-gate.sh` → all suites `passed`, exit 0
+  - *Reuse:* local
+  - *Refs:* REQ-012, AC-009, FM-016, plan §3.3, §4.3
+  - *Notes:* Owns opponent finding O-007 and closes O-004's after-marker variant. Takes the second of the two alternatives the report offered: `vf_report_block` accumulation is left alone because changing it could alter already-sealed digests, including round 1's own. Recovery needs no ledger edit — correct the report and re-run `--complete`.
+  - *Evidence:* CAP-113-uM6Ym4 verified by spec-gate accept; return sha256:0196769d8e69e27b6e2ec2983dc4553aed627263a4e2dd41971bda21f17fa80f
+
+- [x] **T030o7** — Suppress quoted round authorizations
+  - *Files:* `scripts/verification-lib.sh`, `tests/test-spec-gate.sh`
+  - *Acceptance:* Only an unquoted Decisions bullet authorizes an extra round: a byte-identical authorization line inside a fenced block, a tilde-fenced block, an indented code block or a blockquote authorizes nothing, on both the waiver and spec-revision branches, while a real unquoted line still grants exactly its named gate and round.
+  - *Verify kind:* test
+  - *Tests:* `tests/test-spec-gate.sh::test_rounds`
+  - *Verify:* `bash tests/test-spec-gate.sh` → all suites `passed`, exit 0
+  - *Reuse:* local
+  - *Refs:* REQ-012, AC-009, FM-016, plan §3.3, §4.3
+  - *Notes:* Owns opponent finding O-002, reopened because T030o2 anchored the line grammar without the fence/blockquote suppression its three sibling parsers already have. Deliberately does not change `vf_semantic_file`: the manifest must keep hashing fenced Decisions content, and that asymmetry is argued in STATUS Decisions.
+  - *Evidence:* CAP-114-MtMR9N verified by spec-gate accept; return sha256:67f9ae55c235c13ddf3de3a05a0f05b0ca3c13e87d69c545e0b3a0089a668df9
+
+- [x] **T030o9** — Require real content in every report section
+  - *Files:* `scripts/verification-lib.sh`, `tests/test-gate-contracts.sh`
+  - *Acceptance:* Each required report section must contain at least one non-blank, non-heading line, so a bare heading no longer satisfies the schema for either gate, and a canonical finding recorded as `Status: resolved` is refused when `Prior` is `none` or names no valid finding ID, so a report cannot keep a blocking finding and still count zero blockers.
+  - *Verify kind:* test
+  - *Tests:* `tests/test-gate-contracts.sh::test_reports_and_tally`
+  - *Verify:* `bash tests/test-gate-contracts.sh` → all suites `passed`, exit 0
+  - *Reuse:* local
+  - *Refs:* REQ-010, REQ-011, AC-012, FM-019, plan §3.3, §4.3
+  - *Notes:* Owns opponent finding O-004, reopened because T030o4 only tested heading deletion. Enforces `Prior` non-none rather than the report's stricter cross-round rule, which would reject the already-canonized round 1; the reasoning is in STATUS Decisions. The after-marker shape is closed by T030o11.
+  - *Evidence:* CAP-116-EEJH8Y verified by spec-gate accept; return sha256:fac5016eef3d58d6590ae3d5fbe043a35b4afec4ae89d05e1ea521c19c9cfbf7
+
+- [x] **T030o10** — Reject backtick substitution in configuration
+  - *Files:* `scripts/verification-lib.sh`, `tests/test-verification.sh`, `templates/verification-contract.md`
+  - *Acceptance:* Configuration scalars reject unescaped backtick command substitution, including nested backticks, and reject word-initial tilde expansion because it depends on the caller environment; brace expansion stays permitted as deterministic, the enforced set is stated in the contract template, and a literal end anchor such as `grep -c '^ok$'` still parses byte-for-byte.
+  - *Verify kind:* test
+  - *Tests:* `tests/test-verification.sh::test_config_grammar`
+  - *Verify:* `bash tests/test-verification.sh` → all suites `passed`, exit 0
+  - *Reuse:* local
+  - *Refs:* REQ-007, REQ-008, REQ-009, AC-011, FM-011, plan §3.1
+  - *Notes:* Owns opponent finding O-005, reopened because T030o5 enumerated exactly the dollar forms the prior finding named and its own comment overclaimed the coverage. A backticked check is invocation- or time-dependent yet reusable under an identity that does not record what ran, which REQ-009 forbids.
+  - *Evidence:* CAP-117-hc1bP6 verified by spec-gate accept; return sha256:371ce5915065dc35e8c316afca8fec19cf45bfc79bdde9041446e596078321ee
+
+- [x] **T030o12** [hard] — Close the fence grammar in every quoted-content parser
+  - *Files:* `scripts/verification-lib.sh`, `tests/test-spec-gate.sh`, `tests/test-gate-contracts.sh`, `tests/test-verification.sh`, `tests/test-sdd-analyze.sh`, `templates/verification-contract.md`
+  - *Acceptance:* One shared tracker replaces all six single-boolean fence togglers: a block closes only on a run of the same character at least as long as its opener and carrying no info string, and an indent of four or more columns is content. A quoted round authorization, round heading, reality-check matrix row, task stage or failure-mode definition row inside a nested example then authorizes and defines nothing, on both gates and both authorization forms, while a real record after a closed example is still parsed and opponent round 1 keeps report digest 1ac95178.
+  - *Verify kind:* test
+  - *Tests:* `tests/test-spec-gate.sh::test_rounds`, `tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-verification.sh::test_config_grammar`, `tests/test-sdd-analyze.sh::test_verification_bindings`
+  - *Verify:* `bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-verification.sh && bash tests/test-sdd-analyze.sh` → all suites `passed`, exit 0
+  - *Reuse:* local
+  - *Refs:* REQ-002, REQ-008, REQ-012, REQ-013, AC-003, AC-009, AC-010, AC-011, AC-013, FM-001, FM-011, FM-016, FM-020, plan §3.1, §3.3, §4.3
+  - *Notes:* Owns opponent finding O-002, reopened a second time. T030o7 added the suppression but kept one toggled boolean, so an inner shorter run or the other fence character switched it off and exposed the quoted authorization. The five sibling parsers the round-1 report named from source are repaired by the same tracker and each carries its own case. The preserved local probe under `notes/verification/handoff/round2-self-attack/` went from 8 erroneous authorizations in 20 cases to 0. Six files rather than the preamble's five: a class-wide repair touches every consumer of the class, and the sixth is the contract template that now states the authority-versus-obligation rule the sweep follows.
+  - *Evidence:* CAP-133-Ev1OW5 verified by spec-gate accept; return sha256:c2b28bf63ac6d0a3eeaa9be47c5533eab419b5006251631e6380fad732cf6263
+
+- [x] **T030o13** [hard] — Suppress HTML-commented content in every authority parser
+  - *Files:* `scripts/verification-lib.sh`, `tests/test-spec-gate.sh`, `tests/test-gate-contracts.sh`, `tests/test-verification.sh`, `tests/test-sdd-analyze.sh`, `templates/verification-contract.md`
+  - *Acceptance:* The shared quoted-content tracker gains HTML-comment state, so a waiver, spec-revision, `## Round` heading, reality-check matrix row, task stage, task block or plan definition row inside `<!-- ... -->` authorizes and defines nothing, on both gates and both authorization forms. Tokens inside inline code spans neither open nor close a comment, so the canonical reports still validate and round 1 keeps digest 1ac95178; the anchored `<!-- gate-round-end: gate:n -->` marker stays readable; an unclosed comment keeps suppressing; and a mid-line opener suppresses the following lines. A real record after a closed comment is still parsed.
+  - *Verify kind:* test
+  - *Tests:* `tests/test-spec-gate.sh::test_rounds`, `tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-verification.sh::test_config_grammar`, `tests/test-sdd-analyze.sh::test_verification_bindings`
+  - *Verify:* `bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-verification.sh && bash tests/test-sdd-analyze.sh` → all suites `passed`, exit 0
+  - *Reuse:* local
+  - *Refs:* REQ-002, REQ-008, REQ-012, REQ-013, AC-003, AC-009, AC-010, AC-011, AC-013, FM-001, FM-011, FM-016, FM-020, plan §3.1, §3.3, §4.3
+  - *Notes:* Owns opponent finding O-002, reopened a third time. T030o12 derived its enforced set from the spellings the round-1 report named; an HTML comment is the quoting form this kit itself uses for machine-read markers and was left live in all seven authority parsers. The suppression is code-span aware because a naive scan would enter comment state at the round-2 report's own O-002 text and wedge every later gate invocation. `<details>`/raw-HTML stays live by decision, recorded in STATUS: its content is rendered, so it is a visible record rather than a hidden instruction.
+  - *Evidence:* CAP-157-uvthVs verified by spec-gate accept; return sha256:2e53a2eb88e7ef62ff0bea515c95937047fbc9fd1fea0c8b8d1ca5134a81ecad
+
+- [x] **T030o14** [hard] — Require a resolved finding to name a real prior finding
+  - *Files:* `scripts/verification-lib.sh`, `tests/test-gate-contracts.sh`
+  - *Acceptance:* `Status: resolved` is accepted only when the finding ID appeared in an earlier round of that gate, or `Prior` names an ID that did, or `Prior` names an ID recorded in a declared prior-review manifest under `notes/verification/reports/`. A brand-new blocking finding neutralized with a fabricated `Prior` is refused with a named diagnostic instead of tallying zero blockers, on both gates. Round 1's `O-006`, whose `Prior` refers to the uncounted 2026-09-09 provisional review, still validates from that manifest, and both sealed rounds still parse.
+  - *Verify kind:* test
+  - *Tests:* `tests/test-gate-contracts.sh::test_reports_and_tally`
+  - *Verify:* `bash tests/test-gate-contracts.sh` → all suites `passed`, exit 0
+  - *Reuse:* local
+  - *Refs:* REQ-010, REQ-011, REQ-012, AC-012, FM-019, INV-006, plan §3.3, §4.3
+  - *Notes:* Owns opponent finding O-004, reopened a third time. T030o9's rule tested the shape of `Prior`, not its existence, so one fabricated token bought a zero-blocker clearance, and the repository's own fixture asserted that shape as legitimate. Takes the report's manifest alternative rather than its `prior == fid` escape hatch, which any new finding could satisfy by naming itself.
+  - *Evidence:* CAP-153-FAla8S verified by spec-gate accept; return sha256:94959f0ebdf0e8f940b82a7ea7fe8df97acfc38e6c7a167713e507752d7c24b6
+
+- [x] **T030o15** — Reject process substitution in verification configuration
+  - *Files:* `scripts/verification-lib.sh`, `tests/test-verification.sh`, `templates/verification-contract.md`
+  - *Acceptance:* Configuration scalars reject unescaped `<(` and `>(` in every list — gate_checks, reuse_checks, checkpoints, verification_tools and verification_inputs — with the same named diagnostic the other substitution spellings use, while a plain redirection such as `bash tests/run.sh > out.log` and the existing literal-dollar and brace positives still parse byte-for-byte. The source comment and the contract state the set that is actually enforced instead of claiming completeness.
+  - *Verify kind:* test
+  - *Tests:* `tests/test-verification.sh::test_config_grammar`
+  - *Verify:* `bash tests/test-verification.sh` → all suites `passed`, exit 0
+  - *Reuse:* local
+  - *Refs:* REQ-007, REQ-008, REQ-009, AC-011, FM-011, plan §3.1
+  - *Notes:* Owns opponent finding O-005, reopened a third time. Process substitution is the third Bash spelling that runs a command and splices its result, and is as invocation- and clock-dependent as the two already rejected, so a check declared that way was reusable under an identity that does not record what ran.
+  - *Evidence:* CAP-154-iPa3xR verified by spec-gate accept; return sha256:ca3262d0a8339d6bc9ad10b117288d571ddf8e1bebbfd6d137adfc4c1b3ed82e
+
+- [x] **T030o16** — Refuse every shape of content after a completed round marker
+  - *Files:* `scripts/verification-lib.sh`, `tests/test-spec-gate.sh`
+  - *Acceptance:* A `**Blocking:**` totals line or a legacy `# Opponent review` heading placed after a round completion marker is refused by the report validator with its file:line diagnostic, like every other non-blank line there, instead of reaching the later sealed-digest guard. The clean report still completes and both sealed digests are unchanged.
+  - *Verify kind:* test
+  - *Tests:* `tests/test-spec-gate.sh::test_rounds`
+  - *Verify:* `bash tests/test-spec-gate.sh` → all suites `passed`, exit 0
+  - *Reuse:* local
+  - *Refs:* REQ-012, AC-009, FM-016, plan §3.3, §4.3
+  - *Notes:* Owns opponent finding O-008. Minor and non-blocking because T030o11's second guard already refuses the completion; the defect is that T030o11's stated acceptance was not met and the operator gets the wrong diagnostic.
+  - *Evidence:* CAP-155-8dBolN verified by spec-gate accept; return sha256:2c59e7689b5e8db5dfc5aa23984b3abe7709c23305a72f68d0a33f4073ca999b
+
+- [x] **T030o17** — Anchor the Decisions section on its exact heading
+  - *Files:* `scripts/verification-lib.sh`, `tests/test-spec-gate.sh`
+  - *Acceptance:* Both the round-authorization scanner and the input manifest recognize only the template's exact `## Decisions log` heading, so a second heading such as `## Decisions we rejected` authorizes nothing and is not hashed as the decisions log; the two views stay in step and this spec's own STATUS still authorizes and hashes exactly as before.
+  - *Verify kind:* test
+  - *Tests:* `tests/test-spec-gate.sh::test_rounds`
+  - *Verify:* `bash tests/test-spec-gate.sh` → all suites `passed`, exit 0
+  - *Reuse:* local
+  - *Refs:* REQ-009, REQ-012, AC-009, FM-016, plan §3.3, §4.3
+  - *Notes:* Owns opponent finding O-009. Minor and non-blocking because the shipped status template declares exactly one Decisions heading, so no existing artifact is affected; the manifest parser is changed in the same commit so the two views cannot disagree about what the log is.
+  - *Evidence:* CAP-156-UYhU8o verified by spec-gate accept; return sha256:3376cbeb2498eb084b173c7dee41b7b1936003d6ee0228e1a61b80e077df3086
+
+- [x] **T030o22** — Locate the prior-review manifest from the spec, not the report path
+  - *Files:* `scripts/verification-lib.sh`, `tests/test-gate-contracts.sh`
+  - *Acceptance:* `vf_reports` resolves `<gate>-findings-*.md` from the spec directory supplied by its callers, so `round --complete` and `--reconcile` — which validate a temporary `combined.md` under `notes/verification/round-check.XXXX/` — see the same manifest the canonical path sees. A completed round whose only resolved finding is legitimised by the manifest seals instead of being refused, and the existing canonical/tally behaviour is unchanged.
+  - *Verify kind:* test
+  - *Tests:* `tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-spec-gate.sh::test_rounds`
+  - *Verify:* `bash tests/test-gate-contracts.sh && bash tests/test-spec-gate.sh` → all suites `passed`, exit 0
+  - *Reuse:* local
+  - *Refs:* REQ-010, REQ-012, AC-009, AC-012, FM-016, plan §3.3, §4.3
+  - *Notes:* Found by round 3 refusing to complete. Repaired before anything else because neither `--complete` nor `--reconcile` could run until it was. Self-trapping in the worst way: repairing it changes the source identity, so the round it refused can no longer be completed as CHALLENGED, which is why round 3 is reconciled as BLOCKED with its report preserved.
+  - *Evidence:* CAP-175-XuyzhE verified by spec-gate accept; return sha256:2de6a59a25f023a855314eb2ec472bf5a6776f369745143e1e766fdc2b7ad4c0
+
+- [x] **T030o18** [hard] — Derive comment extent from the markdown, not a token scan
+  - *Files:* `scripts/verification-lib.sh`, `scripts/sdd-analyze.sh`, `tests/test-spec-gate.sh`, `tests/test-gate-contracts.sh`, `tests/test-sdd-analyze.sh`, `templates/verification-contract.md`
+  - *Acceptance:* `vf_comment` gains the `ind > 4` content guard `vf_fence` already has, so an indented comment opener is an indented code block — visible to every reader — and cannot swallow a finding, a task block or a definition row. The closer side stops disagreeing with what a renderer sees, an unclosed comment gets an END diagnostic beside the unclosed-fence one instead of failing silently, and the three raw tasks.md passes in `sdd-analyze.sh` use the shared tracker so a quoted example task cannot supply `Refs:` to AC coverage. A genuinely commented finding is still uncounted.
+  - *Verify kind:* test
+  - *Tests:* `tests/test-spec-gate.sh::test_rounds`, `tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-sdd-analyze.sh::test_verification_bindings`
+  - *Verify:* `bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-sdd-analyze.sh` → all suites `passed`, exit 0
+  - *Reuse:* local
+  - *Refs:* REQ-002, REQ-004, REQ-010, REQ-011, REQ-015, AC-003, AC-009, AC-012, FM-001, FM-016, FM-019, INV-005, plan §3.1, §3.3, §4.3
+  - *Notes:* Owns O-002, reopened a fourth time. The divergence flipped direction this round: the enforced set was still a spelling list, and an indented opener is content to a reader but a marker to the parser, so a data-loss finding tallied zero blockers. `<!DOCTYPE`/`<?`/`<![CDATA[` are recorded as extent for the same derivation rather than chased as separate spellings.
+  - *Evidence:* CAP-176-Akofnw verified by spec-gate accept; return sha256:3db6e1087ed48f35b650072a340fc3fe04fd0fc7c3e59cb218e8e7827765c25e
+
+- [x] **T030o19** [hard] — Bind a resolved claim to the finding it resolves
+  - *Files:* `scripts/verification-lib.sh`, `tests/test-gate-contracts.sh`, `templates/verification-contract.md`
+  - *Acceptance:* `Status: resolved` is accepted only when the finding's own ID appeared in an earlier round of that gate, or `Prior` names an ID whose recorded `Class` matches this finding's class — manifest entries carry a class for that purpose. A brand-new data-loss finding neutralised with a real but unrelated `Prior` is refused and counted, on both gates, and the fixture that certified that shape becomes a negative beside a real same-ID cross-round positive. Both sealed rounds still parse.
+  - *Verify kind:* test
+  - *Tests:* `tests/test-gate-contracts.sh::test_reports_and_tally`
+  - *Verify:* `bash tests/test-gate-contracts.sh` → all suites `passed`, exit 0
+  - *Reuse:* local
+  - *Refs:* REQ-010, REQ-011, REQ-012, REQ-015, AC-012, FM-019, INV-006, plan §3.3, §4.3
+  - *Notes:* Owns O-004, reopened a fourth time, root cause plan-gap. T030o14's acceptance criterion was the wrong rule implemented faithfully: it proved that some prior finding exists, never that the claim was about that finding, and the fixture I wrote asserted the attack as correct. The cost of the attack had dropped from inventing a token to copying one printed in the same file.
+  - *Evidence:* CAP-177-koEjAU verified by spec-gate accept; return sha256:4e92c6b7901ea89de8221cb3344fd20cb66a793a85be349f183c189be39534db
+
+- [x] **T030o20** [hard] — Hash a declared environment set and decide idempotence by receipt
+  - *Files:* `scripts/verification-lib.sh`, `templates/verification-contract.md`, `.specify/stack.yml`, `tests/test-verification.sh`, `tests/test-spec-gate.sh`, `tests/test-gate-contracts.sh`
+  - *Acceptance:* `vf_snapshot` hashes only a declared closed set — as first implemented by this task, the project `verification_environment:` declaration plus a fixed name list, SUPERSEDED by T030o25 under which membership is exactly the declaration and nothing beside it — so a byte-identical worktree yields the same source identity from a different process, and an undeclared variable such as the harness's own effort setting no longer invalidates a floor, a capture or the AC-016 probe. Independently, the already-accepted receipt check runs before currency validation, so re-accepting an accepted return is idempotent across a changed environment and writes no rejection audit event.
+  - *Verify kind:* test
+  - *Tests:* `tests/test-verification.sh::test_capture_provenance`, `tests/test-spec-gate.sh::test_acceptance`, `tests/test-gate-contracts.sh::test_invoker_protocol`
+  - *Verify:* `bash tests/test-verification.sh && bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh` → all suites `passed`, exit 0
+  - *Reuse:* local
+  - *Refs:* REQ-006, REQ-009, REQ-012, AC-016, AC-020, AC-022, FM-010, FM-014, INV-001, INV-002, plan §3.2, §4.2
+  - *Notes:* Owns O-010, new, root cause plan-gap. Resolved in favour of the implementation rather than a spec revision: AC-016 requires the live observation to be checked at reality-check, which is a separate invocation by design, so an identity no second process can reproduce is a session fingerprint rather than an input identity. Exactly one record of 2116 differed when the reviewer measured it.
+  - *Evidence:* CAP-178-mpDcyA verified by spec-gate accept; return sha256:95e29e2151082c74bedbffca731af2829804c4c25fd845a07a6c2db3fe1f1b4d
+
+- [x] **T030o21** — Refuse quoted content after a completed round marker
+  - *Files:* `scripts/verification-lib.sh`, `tests/test-spec-gate.sh`
+  - *Acceptance:* A fenced, HTML-commented or blockquoted preamble placed after a round completion marker is refused by the report validator with its file:line diagnostic, like plain prose, instead of reaching the later sealed-digest guard. The clean report still completes and both sealed digests are unchanged.
+  - *Verify kind:* test
+  - *Tests:* `tests/test-spec-gate.sh::test_rounds`
+  - *Verify:* `bash tests/test-spec-gate.sh` → all suites `passed`, exit 0
+  - *Reuse:* local
+  - *Refs:* REQ-012, AC-009, FM-016, plan §3.3, §4.3
+  - *Notes:* Owns O-008, reopened. T030o16 again covered exactly the two shapes the previous report listed; `vf_quoted` consumes the line before the after-marker guard runs. `vf_report_block` accumulation stays unchanged so sealed digests cannot move.
+  - *Evidence:* CAP-179-2OoHpK verified by spec-gate accept; return sha256:2473b87bf7df3b09369058c91a014732c176213daeca4eabb33b9744e590dee1
+
+- [x] **T030o23** [hard] — Derive suppressed extent from the markdown block grammar
+  - *Files:* `scripts/verification-lib.sh`, `scripts/sdd-analyze.sh`, `tests/test-spec-gate.sh`, `tests/test-gate-contracts.sh`, `tests/test-sdd-analyze.sh`, `templates/verification-contract.md`
+  - *Acceptance:* The suppressed set is DERIVED from the CommonMark HTML-block conditions (CommonMark 0.31.2 §4.6) and the contract cites that derivation instead of listing spellings. Conditions 1 (`<script`/`<style`/`<textarea`/`<pre`, ending on the matching close tag), 3 (`<?` … `?>`), 4 (`<!` + ASCII letter … `>`) and 5 (`<![CDATA[` … `]]>`) suppress beside the existing condition 2, fences, blockquotes and indented code; conditions 6 and 7 — block-level and complete-tag HTML, `<details>` included — do not, because their content renders visibly. An opener inside a matched inline code span stays literal, as for comments. All `vf_quoted` call sites and the three raw tasks.md passes in `sdd-analyze.sh` inherit the one site: a condition-1-wrapped waiver authorizes nothing, a condition-1-wrapped task block supplies no AC coverage and claims no FM/INV ownership, and a `<details>`-wrapped record still counts. Closing this closes the recorded `<!DOCTYPE`/`<?`/`<![CDATA[` residual.
+  - *Verify kind:* test
+  - *Tests:* `tests/test-spec-gate.sh::test_rounds`, `tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-sdd-analyze.sh::test_verification_bindings`
+  - *Verify:* `bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-sdd-analyze.sh` → all suites `passed`, exit 0
+  - *Reuse:* local
+  - *Refs:* REQ-002, REQ-004, REQ-010, REQ-011, REQ-015, AC-003, AC-009, AC-012, FM-001, FM-016, FM-019, INV-005, plan §3.1, §3.3, §4.3
+  - *Notes:* Owns O-002, reopened a FOURTH time. Every prior repair encoded the previous report's named spellings, so the next unnamed member survived: fences, then comments, then indented openers, now condition-1 raw HTML. The criterion above is deliberately written as a derivation with its source cited, because an enumerated criterion is satisfiable while the class stays open. `<pre>` and `<textarea>` suppress for the quoted-record reason a fence does, `<script>` and `<style>` because no reader sees their content; both directions agree.
+  - *Evidence:* CAP-202-EJzhKK verified by spec-gate accept; return sha256:522322e6cf92e280328ce3c5ab930d1fc07f61513163f38861d9e450a0d1ec64
+
+- [x] **T030o24** [hard] — Bind a resolved claim to its own identity, not a label
+  - *Files:* `scripts/verification-lib.sh`, `tests/test-gate-contracts.sh`, `templates/verification-contract.md`
+  - *Acceptance:* `Status: resolved` is accepted only when the finding's OWN ID appeared in an earlier round of that gate, or when that same ID appears in a declared prior-review manifest. The different-ID `Prior` branch is removed outright: round 1's real `O-006` passes without it, proven by re-parsing the unchanged canonical `notes/opponent.md`. A brand-new data-loss finding carrying a real ID and a copied `Class` is refused on both gates and still counted by tally. The two shipped fixtures that asserted that shape completes at rc=0 become negatives asserting the refusal, beside a same-ID cross-round positive and a same-ID manifest positive.
+  - *Verify kind:* test
+  - *Tests:* `tests/test-gate-contracts.sh::test_reports_and_tally`
+  - *Verify:* `bash tests/test-gate-contracts.sh` → all suites `passed`, exit 0
+  - *Reuse:* local
+  - *Refs:* REQ-010, REQ-011, REQ-012, REQ-015, AC-012, FM-019, INV-006, plan §3.3, §4.3
+  - *Notes:* Owns O-004, reopened a FOURTH time, root cause plan-gap for the second round running. T030o19's rule was implemented faithfully and was itself the defect: `Class` is a field the finding's author chooses, so requiring it to match raised the attack cost from copying one token printed in the file to copying two. The different-ID path served no real record in this repository — it existed only for the attack.
+  - *Evidence:* CAP-203-KfCQSW verified by spec-gate accept; return sha256:36961b8fee184ba84598e8c26b609412de3416cb303b28efb20ba844f553417b
+
+- [x] **T030o25** [hard] — Take the environment set's membership from the declaration
+  - *Files:* `scripts/verification-lib.sh`, `templates/verification-contract.md`, `tests/test-verification.sh`, `tests/test-spec-gate.sh`, `tests/test-gate-contracts.sh`
+  - *Acceptance:* `vf_snapshot` takes the environment record MEMBERSHIP from the declaration and nothing else: the set is EXACTLY `verification_environment:`, with no fixed name list beside it. Any variable the project has not declared — `LC_CTYPE` and `LC_ALL` included, the two that macOS Terminal, OpenSSH SendEnv and most CI images export by default — leaves the source identity byte-identical, so a sealed capture still returns `current` rc=0 from a different shell. A DECLARED variable still moves identity by presence and by value, with only the value hash reaching the manifest. `PATH`, `SHELL`, `LANG` and `TMPDIR` are dropped with the reason recorded against the existing `tool`/`harness` records. A fixture re-validates a sealed capture from a subshell exporting an `LC_` name and a reordered `PATH`.
+  - *Verify kind:* test
+  - *Tests:* `tests/test-verification.sh::test_capture_provenance`, `tests/test-spec-gate.sh::test_acceptance`, `tests/test-gate-contracts.sh::test_invoker_protocol`
+  - *Verify:* `bash tests/test-verification.sh && bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh` → all suites `passed`, exit 0
+  - *Reuse:* local
+  - *Refs:* REQ-006, REQ-009, REQ-012, AC-016, AC-020, AC-022, FM-010, FM-014, INV-001, INV-002, plan §3.2, §4.2
+  - *Notes:* Owns O-010, reopened. T030o20 closed the set for every name except the one family it took from `compgen -e`, so the membership itself still came from the environment. AC-016 requires the live observation to be checked at reality-check — a separate invocation by design — so an identity a second shell cannot re-derive is a session fingerprint, not an input identity. ACCEPTANCE CORRECTED DURING IMPLEMENTATION: this task was first written as `the LC_* family is a closed literal list recorded present/unset`, which was drafted from the reviewer first suggested option and does NOT close the class — a fixed list records `LC_CTYPE` present in one shell and unset in another, so the digest still moves between two processes reading a byte-identical tree. Caught by probing the rule before trusting it, which is the habit round 3 and round 4 both said was missing.
+  - *Evidence:* CAP-204-j1KEKV verified by spec-gate accept; return sha256:84652e833adf1b6148100f3ae43b83df3dd6909fb514f0249b76c3fdc79439e6
+
+- [x] **T030o29** [hard] — Bind every token the count reads, not only the one a round named
+  - *Files:* `scripts/verification-lib.sh`, `tests/test-gate-contracts.sh`
+  - *Acceptance:* Extent is DERIVED from what the tally and the verdict check actually read — `vf_reports`' blocking/minor increment and the CLEARED/CHALLENGED agreement check — not from the field round 6 happened to name. For every finding ID the gate has seen, in canonical rounds and in declared prior-review manifests, the first recorded severity TIER (data-loss/wrong-result/regression/crash versus minor/degraded) is history-bound, and a CLEARING verdict is refused when it rests on a non-resolved observation below that tier. A non-clearing round may still re-characterise, and `vf_tally` reports `severity-downgrades` so no downgrade is silent. Executable negatives cover the CLEARED attack; controls cover honest re-characterisation inside a CHALLENGED round, a genuine same-tier resolution, and an upgrade.
+  - *Verify kind:* test
+  - *Tests:* `tests/test-gate-contracts.sh::test_reports_and_tally`
+  - *Verify:* `bash tests/test-gate-contracts.sh` → all suites `passed`, exit 0
+  - *Reuse:* local
+  - *Refs:* REQ-010, REQ-011, REQ-012, REQ-015, AC-012, FM-019, INV-006, plan §3.3, §4.3
+  - *Notes:* Owns O-004, reopened a fifth time, root cause plan-gap. Round 5 bound `Class`, which the tally never reads; `Severity` is the sole input to the blocking count, so the same outcome was reachable through the sibling field in the same statement. The report's own proposed fix was itself the wrong rule and would have rejected the round-6 report that proposed it — O-002 is recorded there at degraded after five rounds at wrong-result — so the rule binds where the attack lands instead of where the reviewer pointed. Deliberately NOT closed here: a round can still reach CLEARED by omitting a known open finding entirely, which is pre-existing model behaviour rather than this class, and the reality-check gate enforces no totals at all, so its clearing verdict has no equivalent guard.
+  - *Evidence:* CAP-272-I4rOZq verified by spec-gate accept; return sha256:dfb1a6a54944b2b46d2206a4eae26fad0de89f19faf3828391a5a46f96036388
+
+- [x] **T030o30** [hard] — Bind a superseded-rule guard to the phrase, not to one file handle
+  - *Files:* `tests/test-gate-contracts.sh`, `tests/test-verification.sh`, `.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md`
+  - *Acceptance:* The absent-phrase guard binds to the PHRASE across every artifact whose content the input manifest hashes as current source — the complement of `vf_bookkeeping_path` — minus `STATUS.md`, whose Decisions log is an append-only record of what was true when each entry was written. The two file-scoped `assert_not_contains "$contract"` guards are replaced rather than kept, and the scanner assembles its needle from fragments so it matches neither its own source nor needs a self-exemption. T030o20's stale acceptance line is repaired as a RECORD repair that names T030o25 as superseding it, without restating the superseded membership as current.
+  - *Verify kind:* test
+  - *Tests:* `tests/test-gate-contracts.sh::test_instruction_contracts`
+  - *Verify:* `bash tests/test-gate-contracts.sh` → all suites `passed`, exit 0
+  - *Reuse:* local
+  - *Refs:* REQ-009, AC-012, AC-018, FM-019, INV-006, plan §3.2, §4.2
+  - *Notes:* Owns O-010, reopened a third time, root cause plan-gap. Round 5 corrected one line and bound the regression guard to that one file handle, so the class closed at exactly one member while `tasks.md` still asserted the fixed list as current membership — and a stale ACCEPTED criterion is worse than stale prose, because this spec's standing rule is that the record outranks warm proof. Correction to the round-6 report, recorded rather than quietly dropped: its `Where` list names `notes/verification/dossier/README.md:66` as a second survivor, but that sentence continues "are no longer hashed" and states the CORRECT rule — the quoted fragment breaks across a line. One genuine survivor, not two.
+  - *Evidence:* CAP-273-7RW12J verified by spec-gate accept; return sha256:56d3b79dbed0a9bd3b3d3aab7ad022e290d3ae0566a65ab6179858aab9ec07f5
+
+- [x] **T030o31** — Name the line and the clause of every refused authorization
+  - *Files:* `scripts/verification-lib.sh`, `scripts/spec-gate.sh`, `tests/test-spec-gate.sh`
+  - *Acceptance:* Every candidate authorization `vf_round_authorized` discards is reported with its `STATUS.md` line number and the specific clause that failed — field count with the reason a `"; "` inside `reason=` splits the entry, wrong round, wrong predecessor, malformed `by=`/`reason=`/`revision=`, unordered or future timestamp — and a log containing no candidate for the gate says so instead of listing none. Candidate detection is deliberately wider than the grammar, so an entry that fails before its gate field can be read is still named. `spec-gate.sh waiver <spec-dir> <gate> <round>` validates an authorization when it is written, reserves nothing and changes no state, and reports an already-completed round as completed rather than denied.
+  - *Verify kind:* test
+  - *Tests:* `tests/test-spec-gate.sh::test_rounds`
+  - *Verify:* `bash tests/test-spec-gate.sh` → all suites `passed`, exit 0
+  - *Reuse:* local
+  - *Refs:* REQ-012, AC-009, FM-016, INV-004, plan §3.3, §4.3
+  - *Notes:* Owns O-002, reopened a sixth time, root cause implementation-error, severity degraded. Fail-closed is the safe direction and the round cap held, so no gate decision was wrong; what was wrong is that the refusal named nothing, leaving the operator unable to distinguish a malformed waiver from no waiver at all. The recorded cost on this spec was a handoff asserting round 6 was already authorized when its waiver split into six fields, and one cold floor re-execution. The reviewer searched for an accept-side dual and found none; this task does not assume one exists.
+  - *Evidence:* CAP-274-BdOYW1 verified by spec-gate accept; return sha256:a852b9489953f88056c720c5c184a0eeea91420a917766de6133c4dcdd316710
+
+- [x] **T030o32** — Refuse a duplicate per-round singleton
+  - *Files:* `scripts/verification-lib.sh`, `tests/test-gate-contracts.sh`
+  - *Acceptance:* Any field the round validator reduces to one value refuses a second occurrence instead of letting the last write win. The totals line carries the same `seenfield` guard its sibling identity fields already had, so a second `**Blocking:**` line inside one round is refused with a named diagnostic rather than silently replacing the totals the reader sees above the findings. The audit backing the extent is recorded: identity fields and finding fields already carried duplicate guards, and the totals line was the only per-round singleton without one.
+  - *Verify kind:* test
+  - *Tests:* `tests/test-gate-contracts.sh::test_reports_and_tally`
+  - *Verify:* `bash tests/test-gate-contracts.sh` → all suites `passed`, exit 0
+  - *Reuse:* local
+  - *Refs:* REQ-010, AC-012, FM-019, INV-006, plan §3.3, §4.3
+  - *Notes:* Owns O-011, new, root cause implementation-error, severity degraded. It cannot by itself move a gate decision, because the surviving totals must still equal the real counts and the verdict check reads the real counts — but the machine-checked record and the reader-visible record could disagree inside one sealed round, which is the record-integrity property this spec exists to protect.
+  - *Evidence:* CAP-275-mDGzk7 verified by spec-gate accept; return sha256:c7ebbd2c3c3e0d341dd62c97b2de4571361af164ff773ac4d0ff2652c60aa818
+
+- [x] **T030o33** [hard] — Consume every round field from the catalog that validated it
+  - *Files:* `scripts/verification-lib.sh`, `tests/test-gate-contracts.sh`, `tests/test-spec-gate.sh`
+  - *Acceptance:* Extent is DERIVED from the round-record production `vf_reports` enforces, not from the field one report named. That production is the identity rule at `scripts/verification-lib.sh:1083-1094` — `value()` at :968 strips `[ ]*` and trims, `seenfield` at :1086 refuses a duplicate field, `vf_quoted` at :1066 makes it blind to quoted content — emitting `round,n,utc,source,floor,verdict,style,date` at :1063. The rule enforced: EVERY field of that record is consumed by downstream readers from the emitted catalog, and no second parser re-derives one. The sweep is the call graph of report-text readers that run after `vf_reports`, which is exactly `vf_reality_matrix` (verdict) and `vf_report_block`, whose divergence is DELIBERATE because the sealed digest must cover quoted lines and which is therefore a digest input and never a field source. `vf_reality_matrix` takes the verdict as a parameter from `vf_gate_round`, fails closed on any value the catalog could not have produced, and the second parse is deleted. Negatives are per divergence class rather than per spelling — whitespace the identity production tolerates, quoted content it skips, a verdict the catalog refuses — each asserting end to end through `spec-gate.sh round --complete` that a round carrying a `FAIL`/`MISSING` row is refused whatever the text spells, with the one-space READY positive over all-PASS rows retained.
+  - *Verify kind:* test
+  - *Tests:* `tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-spec-gate.sh::test_rounds`
+  - *Verify:* `bash tests/test-gate-contracts.sh && bash tests/test-spec-gate.sh` → all suites `passed`, exit 0
+  - *Reuse:* local
+  - *Refs:* REQ-013, AC-013, AC-009, AC-012, FM-016, FM-019, INV-004, INV-006, plan §3.3, §4.3
+  - *Notes:* Owns O-012, new, root cause implementation-error. Numbered first rather than the report own T030o34, because it is a PREREQUISITE for T031 and not merely a finding: `vf_reality_matrix:2520` is the only semantic guard on the reality-check side, that gate has run zero rounds, and the divergence disarms it with a typing slip no reviewer of rendered Markdown can see. Reproduced before repair: with `**Verdict:**  READY` (two spaces) `vf_reports` emits catalog verdict READY at rc=0 while the matrix returned 0 over a `MISSING` row; `**Verdict:**READY` and a fenced duplicate verdict behaved identically. The direct-call cases isolate the parameter in BOTH directions (text NEEDS WORK with catalog READY must refuse; text READY with catalog NEEDS WORK must permit), because a one-directional case still passes under a parser that reads the text. Deliberately NOT changed: `vf_report_block` accumulation, for the 2026-09-10 reason that altering it would move already sealed round digests.
+  - *Evidence:* CAP-313-P3hRbH verified by spec-gate accept; return sha256:acd6dccaa1286560b8b0d7cb59fd0ef9d41f024fa52f2aba797604038ff7ff8b
+
+- [x] **T030o34** [hard] — Stop an uncorroborable resolution from buying a clearing verdict
+  - *Files:* `scripts/verification-lib.sh`, `tests/test-gate-contracts.sh`
+  - *Acceptance:* Extent is DERIVED from the predicate the parser evaluates, not from the field a report named. The blocking count at `scripts/verification-lib.sh:1013` is one predicate over exactly two author-written tokens, `Status` and `Severity`, and the clearance check reads that count. `Severity` is bindable to history because the gate has seen the ID before; `Status: resolved` is NOT — it asserts a repair that no data available to `vf_reports` can corroborate — so the suppression may not be worth a CLEARING verdict. "Rests on" is read off the same predicate: an observation rests on the suppression exactly when this gate own ROUND record already counted that ID, which is history the report making the claim cannot rewrite. A declared prior-review manifest is not a round and was never counted, so a first round may still resolve a manifest-recorded finding and clear. The rule is gate-neutral by derivation — `CLEARED` for opponent, `READY` for reality-check — and the refusal names the findings. The two shipped POSITIVES that certified the attack at rc=0, `tests/test-gate-contracts.sh:286-289` and `:456-458`, become negatives; the same-ID manifest positive modelled on the real round-1 O-006 is kept, on both the tally and the `--complete`/`--reconcile` paths.
+  - *Verify kind:* test
+  - *Tests:* `tests/test-gate-contracts.sh::test_reports_and_tally`
+  - *Verify:* `bash tests/test-gate-contracts.sh` → all suites `passed`, exit 0
+  - *Reuse:* local
+  - *Refs:* REQ-010, REQ-011, REQ-015, AC-012, FM-019, INV-006, plan §3.3, §4.3
+  - *Notes:* Owns O-004, reopened a SIXTH time, root cause plan-gap. THE PREFERRED RULE WAS MEASURED AND REJECTED BEFORE IMPLEMENTING IT, which is the point of this batch: counting every recorded finding at its recorded tier — the option the round-7 report prefers — computes `blocking=6` for round 1 against its declared 5, `6/3` for round 2 against `3/2` and `7/3` for round 3 against `3/1`, so it rejects three sealed rounds whose digests cannot be edited without wedging every later reserve, complete and reconcile. Measured against the real recorded history in `notes/opponent.md` before any code was written. The enforced rule is therefore the report own stated minimum, and it accepts every sealed round of this gate (all seven are non-clearing) and both shipped specs (001 round 3 and 002 round 5 cleared with no findings at all). CONSEQUENCE ACCEPTED AND RECORDED: the round that announces a repair is not the round that clears — a gate clears in a round that has nothing left to list, which is the shape both shipped gates actually have. EXTENT NOT CLOSED, argued rather than skipped: a round can still reach CLEARED by omitting a known open finding entirely, which needs cross-round open-state tracking and is a spec-level change; `vf_tally:1178` carries the same `status != resolved` suppression but feeds a printf and decides nothing, so it is a metric and not this class; and the sibling totals/downgrade checks at :1079-1081 stay opponent-only because they read the opponent-only totals line, which is the recorded reality-check totals gap and belongs to T031.
+  - *Evidence:* CAP-314-0FfJM3 verified by spec-gate accept; return sha256:681479bc9fba6e7c33d19d1ad1209d709b0f466201d43cd3ae7f5b5e7ab4c6fa
+
+- [x] **T030o35** — Give every clause of the authorization grammar a diagnostic, and the checker a reader
+  - *Files:* `scripts/verification-lib.sh`, `tests/test-spec-gate.sh`, `tests/test-gate-contracts.sh`, `README.md`, `skills/sdd-implement/SKILL.md`, `skills/sdd-go/SKILL.md`, `skills/sdd-review/SKILL.md`, `agents/sdd-orchestrator.md`
+  - *Acceptance:* Extent is DERIVED from the production the parser enforces — `- <UTC> — <kind>: gate=<g>; round=<n>; after=<n-1>; by=<b>; reason=<r>[; revision=<v>]` — in which every clause has exactly one refusal path and NO refusal path may be silent, so a clause added later inherits the obligation instead of needing to be listed. The gate clause is the one case needing a distinction rather than a note added blindly, and the grammar supplies it: `gate=<g>` ranges over the gates that exist, so a value naming another KNOWN gate is that gate record and is correctly skipped in silence, while any other value is a malformed candidate for the gate being asked about and must be named with its line. The gate set is read from one library constant rather than restated. Candidate detection also covers a `<kind>:` written without its trailing space, while prose naming the tokens in code spans stays a non-candidate so the refusal list remains readable. The authoring half is closed where it is open — by DOCUMENTATION: `spec-gate.sh waiver` is named in README operator command list and in the round-cap paragraph the four invoker documents share, and the guard that keeps it there DERIVES the subcommand set from the dispatcher in `scripts/spec-gate.sh` instead of enumerating verbs.
+  - *Verify kind:* test
+  - *Tests:* `tests/test-spec-gate.sh::test_rounds`, `tests/test-gate-contracts.sh::test_instruction_contracts`
+  - *Verify:* `bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh` → all suites `passed`, exit 0
+  - *Reuse:* local
+  - *Refs:* REQ-012, AC-009, AC-018, FM-016, FM-019, INV-004, INV-006, plan §3.3, §4.3
+  - *Notes:* Owns O-002, reopened a SEVENTH time, root cause implementation-error, severity degraded. No gate decision is wrong and the round cap holds; what is wrong is that `:2303` asserted the OPPOSITE of the truth, telling the operator that no candidate authorization exists while one sat a character away from valid and four unrelated historical lines were listed. Reproduced through the shipped entrypoint, not only the library, because `spec-gate.sh waiver` exists precisely so the operator meets the diagnostic when they write the entry. The documentation half was inert for a reason the previous guard could not see: `public_workflow_cases` enumerated five verbs, so `waiver` shipped with its own `--help` line and no mention in any document an operator reads. EXTENT NOT CLOSED: the round-3 residual `<!DOCTYPE`/`<?`/`<![CDATA[` suppressed extent is implemented and covered elsewhere and is unrelated to the diagnostic; and asking about round 4+ before round 3 exists still reports the date-only reconciliation message, which is a nonsensical question rather than this class.
+  - *Evidence:* CAP-315-zAjbad verified by spec-gate accept; return sha256:d5b00da30d862d4f70465a4876c0ed39ff76d025ebedaea6e6c9ee5197b1dcbb
+
+- [x] **T030o36** — Bind a superseded-rule guard to the proposition and to the manifest own file set
+  - *Files:* `tests/test-gate-contracts.sh`
+  - *Acceptance:* Both halves are DERIVED rather than restated. SCOPE comes from the enumeration the input manifest itself uses — `git ls-files --cached --others --exclude-standard` filtered through `vf_bookkeeping_path` (`scripts/verification-lib.sh:1320`, the same predicate `vf_snapshot` applies at :1376 and :1383), minus `STATUS.md`, whose Decisions log records what was true when each entry was written — so the guard set is the manifest set by construction and cannot drift when a new extension appears or a directory is named `captures` outside the anchored bookkeeping path. The NEEDLE matches the proposition, not one rendering of it: each candidate is normalized to a whitespace-collapsed stream with backticks and asterisks stripped, and a claim is a MEMBERSHIP predicate GOVERNING any of the names, in any order and any subset, in either direction, with no negation in the connective — the same names under the opposite claim state the current rule and must not be flagged. The live tree is asserted clean and the SAME expression is run against a constructed tree carrying every shape this class has escaped through, so the guard is not proven only on the tree it already passes.
+  - *Verify kind:* test
+  - *Tests:* `tests/test-gate-contracts.sh::test_instruction_contracts`
+  - *Verify:* `bash tests/test-gate-contracts.sh` → all suites `passed`, exit 0
+  - *Reuse:* local
+  - *Refs:* REQ-009, AC-012, AC-018, FM-019, INV-006, plan §3.2, §4.2
+  - *Notes:* Owns O-010, reopened a FOURTH time, root cause plan-gap, severity degraded. Round 6 bound the guard to one file handle and round 7 defeated the replacement literal with the shapes this repository own conventions produce. TESTING THE RULE BEFORE TRUSTING IT FOUND TWO DEFECTS IN THE PROPOSED NORMALIZATION. First: stripping underscores, which the round-7 report names, DELETES THE NEEDLE — `LC_` is one of the names searched for, and an `LC_*`-only claim escaped a normalizer that stripped it; measured, then underscores kept. Second: a bare participle is not a membership claim — this repository writes "`LC_CTYPE` and `LC_ALL` included" meaning "among them", which a normalizing matcher read as a claim, so the reverse direction requires a passive verb phrase. A third was found by mutation: the negation window began AT the predicate, so "no longer includes PATH" — how English negates this proposition in the forward shape — read as the superseded claim. Correction to the round-7 `Where` list, recorded rather than dropped: it names `tests/test-gate-contracts.sh:56-62`, which is the guard and not a surviving claim; the live tree carried no survivor at round 7 and carries none now.
+  - *Evidence:* CAP-316-I1tieA verified by spec-gate accept; return sha256:c227afeec54ff1d061f3a2e5d0bb5c967164e6f9a7ba5fda126b688606467cf6
+
+- [x] **T030o37** [hard] — Preserve the strictest observed severity tier and isolate whitespace normalization
+  - *Files:* `scripts/verification-lib.sh`, `tests/test-gate-contracts.sh`
+  - *Acceptance:* Derive the comparison state from every writer consumed by `vf_reports` finding()/flush(): Severity has two tiers (`minor|degraded` versus all four blocking severities), and the history fold must retain the strictest tier for each finding ID across manifest and round observations regardless of order. A non-resolved lower-tier observation may not buy opponent CLEARED; non-clearing re-characterisation remains valid. Apply the same sticky fold to `vf_tally` canonical round observations, keyed by gate and ID. Extend the existing escalation positive through a third-round downgrade, assert the exact refusal and metric, and vary tier order, lifecycle status, and repeated downgrades. Re-measure against real 001/002/003 history before implementation. D1: derive fixtures from `superseded_environment_scan` whitespace production `[[:space:]]+`; internal whitespace in a passive predicate must collapse while a whitespace-separated negation must remain effective. Mutation-isolate permissive and over-strict variants; restore byte-identically with cmp.
+  - *Verify kind:* test
+  - *Tests:* `tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-gate-contracts.sh::test_instruction_contracts`
+  - *Verify:* `bash tests/test-gate-contracts.sh` → all suites `passed`, exit 0
+  - *Reuse:* local
+  - *Refs:* REQ-010, REQ-011, REQ-015, AC-012, AC-017, AC-018, FM-019, INV-006, plan §3.3, §4.3
+  - *Notes:* Owns round-8 O-004 and the D1 fixture gap. History precheck on an isolated candidate library: 002 and 003 return 0 with byte-identical catalogs; 001 retains identical pre-existing duplicate-identity diagnostics at exit 3. No gate round is part of this task.
+  - *Evidence:* CAP-366-H7QjI6 verified by spec-gate accept; return sha256:329c68620c2b2418aca93e4f25f3a3eef2546fbcb55dd0bd52f6c897cec6104a
+
+- [x] **T030o38** — Fail closed when the dispatcher cannot be fully classified for documentation
+  - *Files:* `tests/test-gate-contracts.sh`
+  - *Acceptance:* Derive coverage from Bash's `case WORD in [PATTERN [| PATTERN]...) COMMANDS ;;]... esac` production (`help case`) and the command_name dispatcher in `scripts/spec-gate.sh`. Every clause must either yield all literal alternatives, be the final catch-all, or fail with an unclassifiable-dispatcher diagnostic; no line may silently vanish. Optional opening parentheses, whitespace indentation and digits in literal verbs preserve classification. Unsupported patterns, quoting, multiline/nested clauses or terminators fail closed rather than claiming a complete set. Every classified verb must appear in the help synopsis, help detail and README. Mutate each syntactic dimension and verify all three missing-documentation diagnostics; retain equivalent documented-dispatcher controls and unknown-clause refusal controls. Check the current dispatcher before implementation and retain the real report history unchanged.
+  - *Verify kind:* test
+  - *Tests:* `tests/test-gate-contracts.sh::test_instruction_contracts`
+  - *Verify:* `bash tests/test-gate-contracts.sh` → all suites `passed`, exit 0
+  - *Reuse:* local
+  - *Refs:* REQ-015, REQ-016, AC-018, FM-019, INV-006, plan §3.3, §4.3
+  - *Notes:* Owns round-8 O-002 documentation discovery only. This is a fail-closed static subset, not a general Bash parser. No authorization, floor or gate round is part of this task.
+  - *Evidence:* CAP-366-H7QjI6 verified by spec-gate accept; return sha256:fe2790a493c4a398808da47ecc0cd432ac33a51f766171121b8d6c29936b566a
+
+- [x] **T030o39** [hard] — Anchor generated bookkeeping to the verified spec and refuse bookkeeping declared as an input
+  - *Files:* `scripts/verification-lib.sh`, `templates/verification-contract.md`, `tests/test-verification.sh`, `tests/test-gate-contracts.sh`, `.specify/specs/003-gate-round-reduction-and-token-discipline/plan.md`
+  - *Acceptance:* Derive the excluded set from the 2026-09-23 Decisions reading of REQ-009: generated bookkeeping is the six path shapes (`.tasks.accept.*`, `notes/captures/`, `notes/verification/`, `notes/evidence.md`, `notes/opponent.md`, `notes/reality-check.md`) of the VERIFIED spec only, anchored to its repo-relative directory when that is `.specify/specs/<name>` inside the snapshotted repository, and otherwise empty so nothing is excluded. Every consumer takes the anchor from the spec whose capture or floor it computes: the index pass, the path pass and the declared-input pass of `vf_snapshot`, and `vf_path_record`. A `verification_inputs:` path inside that bookkeeping, exactly or as a declared directory wholly within it, is refused by name at exit 3 and never skipped silently; a declared directory's members that are the verified spec's own bookkeeping are skipped by the enumeration's rule. Location is physical: links and `..` resolve through the filesystem (`cd -P`); the anchor is string work on physical paths with no git discovery, so an exported `GIT_DIR` cannot move it; letter case folds exactly where the filesystem holding the spec folds, probed there rather than read from `core.ignorecase`; and a declared repository root is refused by name too. The O-010 scan applies the same predicate with each path anchored to the spec that contains it. Negatives in both directions, through a real capture: editing or adding another spec's gate report, findings manifest, capture or floor record changes the identity and makes `reuse` refuse with `capture stale: current inputs changed`, while the same edit to the verified spec's own records does not. Plan §3.2 step 3 and `templates/verification-contract.md` state the anchored rule and the refusal.
+  - *Verify kind:* test
+  - *Tests:* `tests/test-verification.sh::test_capture_provenance`, `tests/test-gate-contracts.sh::test_instruction_contracts`
+  - *Verify:* `bash tests/test-verification.sh && bash tests/test-gate-contracts.sh` → all suites `passed`, exit 0
+  - *Reuse:* local
+  - *Refs:* REQ-009, AC-018, AC-020, FM-010, FM-014, FM-019, INV-001, INV-006, plan §3.2, §4.2
+  - *Notes:* Owns round-9 O-013. The anchoring reading is the user's 2026-09-23 Decisions entry, not a spec revision. The reviewer's proposed scan scope was measured and replaced by per-path anchoring (Decisions, 2026-09-23). No gate round, floor or hosted-CI run is part of this task.
+  - *Evidence:* CAP-411-B8GLAC verified by spec-gate accept; return sha256:27f3ea2c2ddc11eabf6286bf04b351107a98eada3a37e288fad06a42dfae6535
+
+- [x] **T030o40** — Make the severity-downgrade metric the guard's own computation and kill the two unisolated guards
+  - *Files:* `scripts/verification-lib.sh`, `tests/test-gate-contracts.sh`
+  - *Acceptance:* Derive the metric from the guard it measures (REQ-011, MET-002). `vf_reports` evaluates the lowered-tier predicate once per finding observation against the history its manifest and round writers share; `flush()` refuses a CLEARED verdict that rests on it; each counted observation is emitted as a `downgrade` catalog record that `vf_tally` counts per gate, and no second fold remains in `vf_tally`. A declared manifest tier followed by a lower non-resolved round tier yields `severity-downgrades=1`. The same ID on the other gate yields 0, and no manifest crosses gates. Every existing tier fixture keeps its count, and on the real record 003 reports 5 and 002 reports 0. The dispatcher reader refuses a clause line whose body holds a second clause, such as `  probe) :;; probe3) echo probe3; exit 0;;`, which bash executes as two verbs, with the named AC-018 diagnostic, so deleting that refusal fails a fixture.
+  - *Verify kind:* test
+  - *Tests:* `tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-gate-contracts.sh::test_instruction_contracts`
+  - *Verify:* `bash tests/test-verification.sh && bash tests/test-gate-contracts.sh` → all suites `passed`, exit 0
+  - *Reuse:* local
+  - *Refs:* REQ-011, REQ-015, AC-012, AC-017, AC-018, FM-019, INV-006, plan §3.3, §4.3
+  - *Notes:* Owns round-9 O-014 and both Held-up isolation gaps. Shares T030o39's Verify command so one capture on unchanged source can serve both acceptances. No gate round, floor or hosted-CI run is part of this task.
+  - *Evidence:* CAP-411-B8GLAC verified by spec-gate accept; return sha256:9e9938a290947e9052071c2506952b052f323a5ccd4de9141aa1b9391ae86202
+
+- [x] **T030o41** [hard] — Make every reuse-checked reader read what the input identity hashes
+  - *Files:* `scripts/verification-lib.sh`, `templates/verification-contract.md`, `README.md`, `.specify/stack.yml`, `.github/workflows/ci.yml`, `.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md`, `tests/helpers.sh`, `tests/run.sh`, `tests/shellcheck.sh` (new), `tests/test-gate-contracts.sh`, `tests/test-verification.sh`, `tests/test-sdd-analyze.sh`, `tests/test-usage-limits.sh`, `tests/test-model-policy.sh`, `tests/test-build-adapters.sh`, `tests/test-executable-bits.sh`, `tests/test-spec-gate.sh`, `tests/test-spec-dispatch.sh`, `tests/test-golden-example.sh`, `tests/test-spec-ac-coverage.sh`
+  - *Acceptance:* Derive the obligation from the identity (REQ-009, AC-020): a reuse-checked command's verdict is a function of the input identity, so it reads the repository only as `vf_snapshot` hashes it. Paths come from one enumeration function, `vf_source_paths` (Git worktree root required, NUL-framed `git ls-files --cached --others --exclude-standard`, a git failure is a failure), which `vf_snapshot`'s path pass also calls; content comes from `vf_path_content` (a link's target as it is, a file through `vf_semantic_file`, always from the repository-rooted path), which `vf_path_record` also calls; both leave the identity's records unchanged. The readers are derived from the production, not the reports: the reuse-checked commands' own file lists, every glob a suite makes over the live kit, whole-kit copies and the scripts run on them, spec records read in place, and the environment and configuration the programs consult. So `tests/run.sh` lists suites through `vf_source_paths`; `tests/shellcheck.sh` runs ShellCheck over the enumerated `scripts/*.sh` and `tests/*.sh` with `SHELLCHECK_OPTS` unset and `--norc`, and is the ShellCheck command everywhere; live-kit globs in suites come from a `kit_files` helper; the O-010 scan folds case where the identity does and reads every name; the AC-023 loop takes its shipped set from the enumeration and each artifact from `vf_path_content`; `copy_kit` copies the enumerated hub content without `.specify/specs/`, is used for every copy of live-kit content, whole or one directory, and never uses an EXIT trap; `stage_kit`'s writer never writes through a link; the 002 tally test reads an enumerated copy of 002's `notes/`; a reader enumerates under exactly the environment and configuration the identity enumerates under, so suites start with only the kit's own `SDD_*` and `XDG_STATE_HOME` unset, never a variable git consults for its configuration; git's repository-local variables (the names `git rev-parse --local-env-vars` prints) are unset for every git process the kernel runs, never for the snapshot's own environment records, so a declared one is hashed by its value, and they are unset when a suite starts, so a repository is named by its path alone and no fixture can write a caller's index; every git command in the suites that writes a repository, apart from the one deliberately raw negative control, runs through one helper with none of the caller's git environment and a pinned, empty git configuration and template, and a fixture repository that cannot be built fails its test by name whatever the caller does with the status, while leaving no caller a path outside its sandbox; git reads and the kit's code under test keep the ambient configuration; a fixture that plants git configuration pins all of git's global and system configuration and proves each pinned input it can plant; a host-kit fixture binds every load-time alias that names a live-kit directory in its scope to the host, so it judges whatever spelling its site reads; `tests/run.sh`, `tests/shellcheck.sh` and `tests/helpers.sh` unset `CDPATH`, `BASH_ENV` and `ENV` before resolving a path; `vf_source_paths` accepts the root by directory identity, not by spelling; host-kit repositories always have `.git/info`; README states that both commands need a Git worktree root. Each site has a fixture in both directions against a host kit or tree carrying the ignored, directory-shaped, differently-spelled or ambient input, with exact diagnostics, and an in-repository spec in a hub-style `specs/` directory, outside `.specify/specs/`, has an empty anchor.
+  - *Verify kind:* test
+  - *Tests:* `tests/test-gate-contracts.sh::test_instruction_contracts`, `tests/test-verification.sh::test_capture_provenance`, `tests/test-sdd-analyze.sh::test_verification_bindings`, `tests/test-gate-contracts.sh::test_reports_and_tally`
+  - *Verify:* `bash tests/run.sh && bash tests/shellcheck.sh` → all suites `passed`, exit 0
+  - *Reuse:* local
+  - *Refs:* REQ-009, AC-010, AC-018, AC-020, AC-023, FM-002, FM-010, FM-014, FM-019, INV-001, INV-006, plan §3.2, §4.2
+  - *Notes:* Owns round-10 O-015 and the round-10 Held-up isolation gap, plus the sibling readers the report did not name: two reproduced before repair (`notes/verification/reports/o015-repro.{sh,log,rc}`) and the rest found by the two independent review passes (`notes/verification/reports/t030o41-review.md`) and by the second pair (`notes/verification/reports/t030o41-review2-passC.md`, `t030o41-review2-passD.md`), including the pre-existing git-environment data loss the user chose to include, and by the focused reviews of the later repairs (`notes/verification/reports/t030o41-review3-partial.md`, `t030o41-review4.md`), including the pre-existing fixture-repository configuration the user chose to include. The harness-level bash startup environment is recorded in Decisions and is not part of this task. The user chose one task and then chose to expand it to every measured member (Decisions, 2026-09-24). Changing T027's Verify to the pinned ShellCheck command makes T027's sealed acceptance historical. No gate round, floor or hosted-CI run is part of this task.
+  - *Evidence:* CAP-455-RNmM6l verified by spec-gate accept; return sha256:e34f4a3d716bf37274e832308f04c3d39254e6638982d4252f9dfb9fcecf103d
 
 ## API
 
-- [ ] **T025** [hard] — Wire every invoker to deterministic acceptance
+- [x] **T025** [hard] — Wire every invoker to deterministic acceptance
   - *Files:* `agents/sdd-orchestrator.md`, `skills/sdd-implement/SKILL.md`, `skills/sdd-go/SKILL.md`, `skills/sdd-review/SKILL.md`, `tests/test-gate-contracts.sh` (new in T001)
   - *Acceptance:* Add AC-015 executable stub sequences plus entrypoint assertions proving no-tick/accept, one escalation retry, batch barriers, checkpoints, fresh floors and round refusal stop dispatch, replacing old cap/re-gate prose in all four invokers.
   - *Verify kind:* test
@@ -347,10 +735,33 @@ keeps each edit task to at most five files instead of combining unrelated work.
   - *Reuse:* local
   - *Refs:* REQ-006, REQ-007, REQ-008, REQ-009, REQ-012, REQ-014, REQ-016, AC-015, FM-004, FM-007, FM-013, INV-004, plan §4.2, §4.3, §8
   - *Integration owner:* T027
+  - *Evidence:* CAP-25-YLM9sI verified by spec-gate accept; return sha256:0f374e981fae0459e64f6d37160f1481388730ee7863f6b28e48dfddfec3abc7
+
+- [x] **T030o6** — Bind sdd-review CI and feedback follow-ups
+  - *Files:* `skills/sdd-review/SKILL.md`, `tests/test-gate-contracts.sh`, `tests/test-spec-gate.sh`
+  - *Acceptance:* The `c` and `r` follow-ups /sdd:review prescribes carry the full typed binding the validator requires — `Verify kind`, a plan-registered `Tests` locator and an executable `Verify` — and an executable fixture builds the instructed block, proves the older three-field shape can neither capture nor tick, then captures the typed one with `--from-task --no-tick --summary` and accepts it deterministically.
+  - *Verify kind:* test
+  - *Tests:* `tests/test-gate-contracts.sh::test_instruction_contracts`, `tests/test-spec-gate.sh::test_acceptance`
+  - *Verify:* `bash tests/test-gate-contracts.sh && bash tests/test-spec-gate.sh` → all suites `passed`, exit 0
+  - *Reuse:* local
+  - *Refs:* REQ-005, REQ-006, AC-015, AC-022, FM-009, plan §4.2, §4.3
+  - *Notes:* Owns opponent finding O-006. The three-field shape the skill prescribes cannot produce a `--from-task` capture, so the documented post-PR fix path stalls before re-gating; keep the Ship exemption off follow-ups and update the plan registry only if a genuinely new family is needed.
+  - *Evidence:* CAP-93-t1qHWF verified by spec-gate accept; return sha256:6e6e6180316b806804c996cc1cf1807e113470158c7e595550d4314d200740dd
 
 ## Tests
 
-- [ ] **T026** — Add the noncircular live-wiring probe checker
+- [x] **T027f1** — Preserve the checkpoint execution start timestamp
+  - *Files:* `scripts/verification-lib.sh`, `tests/test-spec-gate.sh`
+  - *Acceptance:* A checkpoint's sealed start/end interval brackets an observed command execution; capture start before verification instead of stamping both boundaries at publication. Preserve failure and coverage behavior.
+  - *Verify kind:* test
+  - *Tests:* `tests/test-spec-gate.sh::test_checkpoints`
+  - *Verify:* `bash tests/test-spec-gate.sh` → all suites `passed`, exit 0
+  - *Reuse:* local
+  - *Refs:* REQ-008, AC-008, FM-012, plan §3.3, §4.3
+  - *Notes:* Owns the reporting defect recorded in the 2026-09-09 handoff; direct implementation continues under the user's existing instruction.
+  - *Evidence:* CAP-46-MEsdpq verified by spec-gate accept; return sha256:79c09504daf672b42609c41def5ada1b1e2e05ba563cbb3f8b50dbcc19a02f68
+
+- [x] **T026** — Add the noncircular live-wiring probe checker
   - *Files:* `tests/probe-gate-contract.sh` (new), `tests/test-gate-contracts.sh` (new in T001)
   - *Acceptance:* Add AC-016 positive/negative sandbox fixtures for genuine rejection/acceptance digests and gate/floor identities, accepting an active reality-check reservation before its completed report while rejecting missing observations without making the default suite require live reports.
   - *Verify kind:* test
@@ -359,20 +770,44 @@ keeps each edit task to at most five files instead of combining unrelated work.
   - *Reuse:* local
   - *Refs:* REQ-006, REQ-007, REQ-012, REQ-016, AC-016, FM-018, INV-004, plan §2, §8
   - *Notes:* This task accepts the probe's fixtures only; T029 supplies the real worker control, and T030/T031 supply the actual gate observations.
+  - *Evidence:* CAP-25-YLM9sI verified by spec-gate accept; return sha256:e6e4eefbd752292e0b7fcd9c7c482916cd5300ffe66ecdd8f84845e99d54f57e
 
-- [ ] **T027** — Exercise cross-component and portability integration
+- [x] **T027** — Exercise cross-component and portability integration
   - *Files:* `tests/test-gate-contracts.sh` (new in T001), `tests/test-build-adapters.sh`
   - *Acceptance:* Add cross-component AC-007/AC-008/AC-013/AC-015/AC-019 integration cases composing existing local tests, enumerate all overlays/personas, regenerate final adapters in sandboxes and retain actual suite/ShellCheck platform evidence without treating a local run as the remote matrix.
   - *Verify kind:* test
   - *Tests:* `tests/test-gate-contracts.sh::test_invoker_protocol`, `tests/test-spec-gate.sh::test_floor`, `tests/test-spec-gate.sh::test_checkpoints`, `tests/test-verification.sh::test_capture_provenance`, `tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-gate-contracts.sh::test_instruction_contracts`, `tests/test-build-adapters.sh::test_brief_modes`, `tests/test-spec-run.sh::test_bounded_capture`
-  - *Verify:* `bash tests/run.sh && shellcheck -S warning -x scripts/*.sh tests/*.sh` → all suites `passed`, exit 0
+  - *Verify:* `bash tests/run.sh && bash tests/shellcheck.sh` → all suites `passed`, exit 0
   - *Reuse:* local
   - *Refs:* REQ-001, REQ-003, REQ-007, REQ-008, REQ-009, REQ-013, REQ-014, AC-002, AC-007, AC-008, AC-013, AC-014, AC-015, AC-019, FM-002, FM-007, FM-012, FM-013, INV-001, INV-004, plan §5, §7, §8
   - *Notes:* AC-019 needs actual Linux/macOS/Bash-3.2 execution evidence before T031 READY, plus the normal PR CI afterward; if no authorized executor is available, stop implementation and request an execution route rather than inventing a PASS.
+  - *Evidence:* CAP-47-pAxlby verified by spec-gate accept; return sha256:c06ea61a688d86e89ae6ea547043ead4d9f156cc729e2d03bd48be5cf5df9fab
+
+- [x] **T030o3** — Require the incomplete-return reason in the live probe
+  - *Files:* `scripts/verification-lib.sh`, `tests/probe-gate-contract.sh`, `tests/test-gate-contracts.sh`
+  - *Acceptance:* The AC-016 probe passes only when the rejected control was refused for a missing required FM/INV mapping; forged-summary, wrong-task and stale-capture rejections are typed as different classes and refused as substitutes, while the ordering, unchanged-task-digest and gate-identity checks stay in force.
+  - *Verify kind:* test
+  - *Tests:* `tests/test-gate-contracts.sh::test_invoker_protocol`
+  - *Verify:* `bash tests/test-gate-contracts.sh` → all suites `passed`, exit 0
+  - *Reuse:* local
+  - *Refs:* REQ-006, AC-016, FM-018, plan §4.3, §8
+  - *Notes:* Owns opponent finding O-003. The accept event already persists a free-text `reason`; add a typed class beside it so the probe discriminates instead of trusting any nonzero exit. Extends T026's checker, so it sits in Tests although the enabling field is kernel-side. The 2026-09-09 live control did reject for the right reason — this turns that from luck into a checked fact.
+  - *Evidence:* CAP-94-JMKWcl verified by spec-gate accept; return sha256:ace274951104fdf9904194a2d7d7c7238810c2197ced010ddbc3242c4b38394d
+
+- [x] **T030o8** — Keep mapping rows contiguous and split rejection classes
+  - *Files:* `scripts/verification-lib.sh`, `tests/probe-gate-contract.sh`, `tests/test-spec-gate.sh`, `tests/test-gate-contracts.sh`
+  - *Acceptance:* The Failure modes section ends only at the first non-blank line that is not a well-formed mapping row, and the parser reports that it ended early instead of silently discarding later rows; an incomplete set after an early end is typed `truncated-envelope` while a genuine missing, extra, duplicate or unknown row stays `binding-mismatch`, the AC-016 probe requires the row-level class, permitted trailing narrative beginning with an `FM-` or `INV-` token is accepted, and the capture arm separates `capture-integrity` from `stale-capture`.
+  - *Verify kind:* test
+  - *Tests:* `tests/test-spec-gate.sh::test_acceptance`, `tests/test-gate-contracts.sh::test_invoker_protocol`
+  - *Verify:* `bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh` → all suites `passed`, exit 0
+  - *Reuse:* local
+  - *Refs:* REQ-006, AC-016, AC-022, FM-006, FM-018, plan §4.2, §4.3
+  - *Notes:* Owns opponent findings O-003 and O-001 — the report folds O-001 into this fix. Reopened because T030o1 and T030o3 interact: prose between `Failure modes:` and the rows dropped complete rows, rejected as "required Failure modes are missing", and typed `binding-mismatch`, which is the very class the probe requires as proof of the incomplete-copy control. The sealed control ACCEPT-KsToLg keeps `binding-mismatch` because its rows were genuinely removed, not truncated.
+  - *Evidence:* CAP-115-sIpzTu verified by spec-gate accept; return sha256:558cdc23ea64f14d304bed4f2fdc1cdffdd9ecbb1d53ec4bbaeeec1ece2ad4b5
 
 ## Observability
 
-- [ ] **T028** — Record cost and quality without invented savings
+- [x] **T028** — Record cost and quality without invented savings
   - *Files:* `templates/retro-template.md`, `skills/sdd-retro/SKILL.md`, `tests/test-gate-contracts.sh` (new in T001)
   - *Acceptance:* Add AC-017 assertions for stable class versus process root cause, raw sites/reopened findings, actual-or-unknown usage/baselines, execution/reuse/byte counts and a named 14-day observation owner/check-back.
   - *Verify kind:* test
@@ -380,18 +815,20 @@ keeps each edit task to at most five files instead of combining unrelated work.
   - *Verify:* `bash tests/test-gate-contracts.sh` → all suites `passed`, exit 0
   - *Reuse:* local
   - *Refs:* REQ-001, REQ-015, AC-017, FM-019, FM-020, INV-006, plan §8
+  - *Evidence:* CAP-72-DRCsRw verified by spec-gate accept; return sha256:d20cfbec2e79468a9360cef9f48b6761a8d5e7b04e2e636876e29eb1b49a8821
 
 ## Docs
 
-- [ ] **T029** — Document and exercise the public verification workflow
-  - *Files:* `README.md`, `constitution.md`, `templates/verification-contract.md` (new in T001), `tests/test-gate-contracts.sh` (new in T001)
+- [x] **T029** — Document and exercise the public verification workflow
+  - *Files:* `README.md`, `constitution.md`, `templates/verification-contract.md` (new in T001), `tests/test-gate-contracts.sh` (new in T001), `scripts/spec-evidence.sh`, `scripts/spec-ac-coverage.sh`
   - *Acceptance:* Add AC-018 fixtures that execute documented examples and all five help entries, explain compatibility/freshness/no-tick/summary/class/scope/cap rules, and preserve models, separate gates and security-review authority.
   - *Verify kind:* test
   - *Tests:* `tests/test-gate-contracts.sh::test_instruction_contracts`
   - *Verify:* `bash tests/test-gate-contracts.sh` → all suites `passed`, exit 0
   - *Reuse:* local
   - *Refs:* REQ-001, REQ-007, REQ-008, REQ-009, REQ-010, REQ-011, REQ-012, REQ-015, REQ-016, AC-018, FM-001, INV-005, plan §3, §4, §8
-  - *Notes:* For AC-016's real control, the invoker rejects one deliberately incomplete copy of this worker's no-tick return, records unchanged task digests, then accepts the intact original; an intentional control is not a failed worker retry.
+  - *Notes:* For AC-016's real control, the invoker rejects one deliberately incomplete copy of this worker's no-tick return, records unchanged task digests, then accepts the intact original; an intentional control is not a failed worker retry. Executing the published example found two defects it had to fix to run at all: a `return.txt` written into the worktree changed the input manifest and made its own fresh capture stale (returns and reports now live under `notes/verification/`), and `spec-evidence.sh`/`spec-ac-coverage.sh` overwrote a caller-exported `$SPEC`, so a reader following the documented variable names got "current evidence missing/stale" on valid proof. Both were reproduced before the fix.
+  - *Evidence:* CAP-367-g14RVk verified by spec-gate accept; return sha256:3cc2c1731f8f1011922d1d67bf173a494b0a9da3f922a65167ee9160c24341db
 
 ## Reality Check (pre-ship gate)
 

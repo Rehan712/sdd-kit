@@ -1,0 +1,260 @@
+--- a/templates/verification-contract.md
++++ b/templates/verification-contract.md
+@@ -200,9 +200,10 @@
+ `fixture_git`, with none of the caller's git environment and a pinned, empty
+ git configuration and template, so a user's hooks, signing, template, line
+ ending or filter settings, or a hook's environment, cannot decide what a
+-fixture repository holds; a fixture repository that cannot be built fails its
+-test by name. Git reads keep the ambient configuration, as the kernel under
+-test does. The harness itself runs each command under `bash`, which reads
++fixture repository holds, and git never climbs out of the fixture's sandbox to
++find a repository; a fixture that cannot build its repository or copy its kit
++content fails its test by name, and still hands its caller its sandbox path.
++Git reads keep the ambient configuration, as the kernel under test does. The harness itself runs each command under `bash`, which reads
+ `BASH_ENV` and its other startup variables before any check starts; that input
+ is not yet part of the identity. Nor are the kernel's own reads of a fixture
+ repository pinned: a user's global excludes can hide a file a fixture plants
+--- a/tests/helpers.sh
++++ b/tests/helpers.sh
+@@ -453,9 +453,13 @@
+ # configuration or attributes, an empty template directory and a fixed
+ # identity. So a user's hooks, signing, template, line-ending or filter
+ # settings, or a hook's environment, cannot decide whether a fixture repository
+-# exists or what it holds (O-015 reviews 4 and 5). Git READS, and the kit's own
+-# code under test, keep the ambient environment: the kit's enumeration must
+-# match the input identity's, and the kernel is the product.
++# exists or what it holds (O-015 reviews 4 and 5). It also pins where a
++# repository may be found: GIT_CEILING_DIRECTORIES stops the search at
++# $SANDBOX, so a write in a directory whose own repository was never built
++# fails instead of climbing into an enclosing one -- a TMPDIR inside a Git
++# worktree (review 6). No fixture repository is $SANDBOX itself. Git READS, and
++# the kit's own code under test, keep the ambient environment: the kit's
++# enumeration must match the input identity's, and the kernel is the product.
+ fixture_git() {
+   local name scrub=()
+   mkdir -p "$SANDBOX/.fixture-git/template" || return 1
+@@ -464,16 +468,19 @@
+   done
+   env ${scrub[@]+"${scrub[@]}"} HOME="$SANDBOX/.fixture-git" XDG_CONFIG_HOME="$SANDBOX/.fixture-git/.config" \
+     GIT_CONFIG_NOSYSTEM=1 GIT_ATTR_NOSYSTEM=1 GIT_TEMPLATE_DIR="$SANDBOX/.fixture-git/template" \
++    GIT_CEILING_DIRECTORIES="$SANDBOX" \
+     git -c user.name=Fixture -c user.email=fixture@example.invalid "$@"
+ }
+ 
+-# fixture_build_failed <what> — a fixture could not build its own repository.
+-# The diagnostic is printed and recorded in $SANDBOX/.fixture-build-failed,
+-# and t_run_all fails any test that leaves that record, naming the build,
+-# whatever the caller did with the status: a helper run as a command
+-# substitution cannot fail its test itself (O-015 review 5).
++# fixture_build_failed <what> — a fixture could not build its own repository or
++# copy the kit content it needs. The diagnostic is printed and recorded in
++# $SANDBOX/.fixture-build-failed, and t_run_all fails any test that leaves that
++# record, naming the build, whatever the caller did with the status: a helper
++# run as a command substitution cannot fail its test itself (O-015 review 5).
++# Such a helper still prints its sandbox path, so no caller resolves a path
++# outside the sandbox (review 6).
+ fixture_build_failed() {
+-  printf 'cannot build the %s fixture repository\n' "$1" >&2
++  printf 'cannot build the %s fixture\n' "$1" >&2
+   printf '%s\n' "$1" >> "$SANDBOX/.fixture-build-failed"
+ }
+ 
+@@ -542,7 +549,7 @@
+     if [[ -s "$SANDBOX/.fixture-build-failed" ]]; then
+       rc=1
+       out="$out
+-assert: a fixture repository could not be built: $(tr '\n' ' ' < "$SANDBOX/.fixture-build-failed")"
++assert: a fixture could not be built: $(tr '\n' ' ' < "$SANDBOX/.fixture-build-failed")"
+     fi
+     if (( rc == 0 )); then
+       echo "  ok   $fn"
+--- a/tests/test-verification.sh
++++ b/tests/test-verification.sh
+@@ -418,6 +418,16 @@
+   fi
+   run_rc 0 env SDD_RESUME_JITTER_SECONDS=301 XDG_STATE_HOME="$SANDBOX/ambient-state" \
+     bash -c '. "$1/tests/helpers.sh"; [[ -z "${SDD_RESUME_JITTER_SECONDS+set}${XDG_STATE_HOME+set}" ]]' _ "$KIT_DIR"
++  # Git's repository-local names are cleared when a suite starts, judged where
++  # that happens (review 6: fixture_git now clears them for its own writes, so
++  # the nested-build assertion below no longer sees this clearing). Every name
++  # git lists is exported with a value first.
++  local localenv name
++  localenv=()
++  for name in $(git rev-parse --local-env-vars); do localenv+=("$name=$SANDBOX/ambient-$name"); done
++  run_rc 0 env "${localenv[@]}" bash -c '. "$1/tests/helpers.sh"
++    for n in $(git rev-parse --local-env-vars); do [[ -z "${!n+set}" ]] || { echo "still set after load: $n"; exit 1; }; done' _ "$KIT_DIR"
++  assert_not_contains "$OUT" 'still set after load' "AC-020: a suite kept git's repository-local environment"
+ 
+   # Second review: a suite enumerates under the configuration the identity
+   # enumerates under. An ignore rule git reaches through XDG_CONFIG_HOME hides
+@@ -577,7 +587,7 @@
+       make_verification_git_dir failing 2> "$SANDBOX/failing.err")"; then
+     t_fail 'AC-020: a fixture repository that could not be built returned success'
+   fi
+-  assert_contains "$(cat "$SANDBOX/failing.err")" 'cannot build the make_verification_git_dir failing fixture repository' \
++  assert_contains "$(cat "$SANDBOX/failing.err")" 'cannot build the make_verification_git_dir failing fixture' \
+     'AC-020: a fixture repository that could not be built was not reported by name'
+   assert_contains "$(cat "$failing/.fixture-build-failed" 2>/dev/null)" 'make_verification_git_dir failing' \
+     'AC-020: a failed fixture build left no record for the runner'
+@@ -588,14 +598,33 @@
+   cat > "$SANDBOX/nested-suite.sh" <<NESTED
+ . "$KIT_DIR/tests/helpers.sh"
+ test_ignores_a_failed_build() { local spec; spec="\$(make_verification_git_dir ignored)"; : "\$spec"; }
+-test_builds_nothing() { :; }
++test_zz_builds_nothing() { :; }
+ t_run_all # the nested suite's own runner
+ NESTED
+   PATH="$shim:$PATH" run_rc 1 bash "$SANDBOX/nested-suite.sh"
+   assert_contains "$OUT" 'FAIL test_ignores_a_failed_build' 'AC-020: a test that ignored a failed fixture build passed'
+-  assert_contains "$OUT" 'a fixture repository could not be built: make_verification_git_dir ignored' \
++  assert_contains "$OUT" 'a fixture could not be built: make_verification_git_dir ignored' \
+     'AC-020: the runner did not name the fixture build that failed'
+-  assert_contains "$OUT" 'ok   test_builds_nothing' 'AC-020: the runner failed a test that built nothing'
++  # The clean test sorts after the failing one, so a record leaking forward
++  # would fail it.
++  assert_contains "$OUT" 'ok   test_zz_builds_nothing' 'AC-020: the runner failed a test that built nothing'
++  # Review 6: after a build fails, a later write in the directory whose own
++  # repository was never built stays in the sandbox rather than climbing into
++  # a repository that encloses it (a TMPDIR inside a Git worktree).
++  local enclosing="$SANDBOX/enclosing" commits index
++  mkdir -p "$enclosing/inner-sandbox"
++  fixture_git -C "$enclosing" init -q || fixture_build_failed enclosing
++  printf 'x\n' > "$enclosing/pending.txt"
++  { fixture_git -C "$enclosing" add pending.txt && fixture_git -C "$enclosing" commit -qm one; } \
++    || fixture_build_failed enclosing
++  commits="$(git -C "$enclosing" rev-list --count HEAD)"; index="$(git -C "$enclosing" ls-files --stage)"
++  PATH="$shim:$PATH" SANDBOX="$enclosing/inner-sandbox" \
++    bash -c '. "$1/tests/helpers.sh"; spec="$(make_verification_git_dir climbing 2>/dev/null)"
++      repo="$(cd "$spec/../../.." && pwd -P)"; PATH="${PATH#*:}"; fixture_git -C "$repo" add -A > /dev/null 2>&1' _ "$KIT_DIR"
++  assert_eq "$commits" "$(git -C "$enclosing" rev-list --count HEAD)" \
++    'AC-020: a write after a failed fixture build committed into an enclosing repository'
++  assert_eq "$index" "$(git -C "$enclosing" ls-files --stage)" \
++    'AC-020: a write after a failed fixture build staged files in an enclosing repository'
+ }
+ 
+ # Round 10's isolation gap: the anchor exists only for .specify/specs/<name>
+--- a/tests/test-build-adapters.sh
++++ b/tests/test-build-adapters.sh
+@@ -17,7 +17,9 @@
+ stage_kit() {
+   local kit="$SANDBOX/kit"
+   mkdir -p "$kit" "$SANDBOX/home/.codex" "$SANDBOX/home/.copilot"
+-  copy_kit "$KIT_DIR" "$kit" >&2 || { echo 'stage_kit: cannot stage the kit copy' >&2; return 1; }
++  # A failed copy is recorded and the sandbox path still printed: the callers
++  # write through it without checking the status (O-015 review 6).
++  copy_kit "$KIT_DIR" "$kit" >&2 || { fixture_build_failed 'stage_kit kit copy'; echo "$kit"; return 1; }
+   write_policy_file "$kit"
+   echo "$kit"
+ }
+@@ -247,6 +249,20 @@
+   [[ -f "$SANDBOX/link-kit/models.yml" && ! -L "$SANDBOX/link-kit/models.yml" ]] \
+     || t_fail 'write_policy_file left models.yml a link'
+   assert_eq "$before" "$(cksum < "$target")" 'write_policy_file wrote through a models.yml link'
++}
++
++# O-015 review 6: stage_kit's output is a path its callers write through, so a
++# failed copy is recorded and the sandbox path is still printed.
++test_stage_kit_failure_is_named_and_stays_in_the_sandbox() {
++  local sub="$SANDBOX/failing-sandbox" nokit="$SANDBOX/not-a-kit" printed
++  mkdir -p "$sub" "$nokit"
++  if printed="$(SANDBOX="$sub" on_host_kit "$nokit" stage_kit 2>/dev/null)"; then
++    t_fail 'stage_kit reported success for a copy that failed'
++  fi
++  [[ "$printed" == "$sub"/* && "$printed" != *$'\n'* ]] \
++    || t_fail "stage_kit handed its caller a path outside the sandbox: '$printed'"
++  assert_contains "$(cat "$sub/.fixture-build-failed" 2>/dev/null)" 'stage_kit kit copy' \
++    'stage_kit left no record of the failed copy'
+ }
+ 
+ t_run_all
+--- a/tests/test-golden-example.sh
++++ b/tests/test-golden-example.sh
+@@ -20,7 +20,7 @@
+   # suite is reuse-checked (O-015 second review).
+   rm -rf "$SANDBOX/example-copy"
+   copy_kit "$KIT_DIR" "$SANDBOX/example-copy" "$rel" && mv "$SANDBOX/example-copy/$rel" "$spec_dir" \
+-    || t_fail 'cannot copy the example as the input identity enumerates it'
++    || fixture_build_failed 'stage_example example copy'
+   cat > "$proj/.specify/stack.yml" <<'EOF'
+ stacks: [javascript, aws]
+ gate_checks:
+@@ -126,4 +126,17 @@
+   [[ ! -e "$spec_dir/zz-local.md" ]] || t_fail "stage_example staged the host kit's ignored file"
+ }
+ 
++# O-015 review 6: stage_example runs inside a command substitution, where a
++# t_fail was lost and its text captured into the returned path; a failed copy
++# is now recorded, and the path returned is the sandbox path alone.
++test_stage_example_failure_is_named_and_stays_in_the_sandbox() {
++  local sub="$SANDBOX/failing-sandbox" nokit="$SANDBOX/not-a-kit" printed
++  mkdir -p "$sub" "$nokit"
++  printed="$(SANDBOX="$sub" on_host_kit "$nokit" stage_example 2>/dev/null)"
++  [[ "$printed" == "$sub"/* && "$printed" != *$'\n'* ]] \
++    || t_fail "stage_example handed its caller something other than a sandbox path: '$printed'"
++  assert_contains "$(cat "$sub/.fixture-build-failed" 2>/dev/null)" 'stage_example example copy' \
++    'stage_example left no record of the failed copy'
++}
++
+ t_run_all
+--- a/tests/test-spec-gate.sh
++++ b/tests/test-spec-gate.sh
+@@ -305,7 +305,7 @@
+   mkdir -p "$kit"
+   # The kit's scripts as the input identity enumerates them (copy_kit's directory selector), so a
+   # developer's ignored entry under scripts/ never arrives (O-015 second review).
+-  copy_kit "$KIT_DIR" "$kit" scripts || t_fail 'AC-007: cannot stage the kit scripts'
++  copy_kit "$KIT_DIR" "$kit" scripts || fixture_build_failed 'floor_fixture kit scripts'
+   for check in sdd-analyze spec-ac-coverage spec-evidence; do
+     mv "$kit/scripts/$check.sh" "$kit/scripts/$check-real.sh"
+     counter="$SANDBOX/$check-count"
+@@ -1002,6 +1002,20 @@
+   staged="$SANDBOX/floor-kit-$(basename "$repo")/scripts"
+   [[ -f "$staged/spec-gate.sh" ]] || t_fail 'AC-007: floor_fixture did not stage an enumerated script'
+   [[ ! -e "$staged/zz-local.sh" ]] || t_fail "AC-007: floor_fixture staged the host kit's ignored script"
++}
++
++# O-015 review 6: floor_fixture runs inside a command substitution, where a
++# t_fail was lost and its text captured into the returned path; a failed copy
++# is now recorded, and the path returned is the sandbox path alone.
++test_floor_fixture_failure_is_named_and_stays_in_the_sandbox() {
++  local sub="$SANDBOX/failing-sandbox" nokit="$SANDBOX/not-a-kit" spec printed
++  mkdir -p "$sub" "$nokit"
++  spec="$(make_verification_git_dir floorfail)"
++  printed="$(SANDBOX="$sub" on_host_kit "$nokit" floor_fixture "$spec" 2>/dev/null)"
++  [[ "$printed" == "$sub"/* && "$printed" != *$'\n'* ]] \
++    || t_fail "floor_fixture handed its caller something other than a sandbox path: '$printed'"
++  assert_contains "$(cat "$sub/.fixture-build-failed" 2>/dev/null)" 'floor_fixture kit scripts' \
++    'floor_fixture left no record of the failed copy'
+ }
+ 
+ t_run_all
+--- a/tests/test-spec-dispatch.sh
++++ b/tests/test-spec-dispatch.sh
+@@ -15,7 +15,7 @@
+   mkdir -p "$kit" "$dir"
+   # The kit's scripts as the input identity enumerates them (copy_kit's directory selector), so a
+   # developer's ignored entry under scripts/ never arrives (O-015 second review).
+-  copy_kit "$KIT_DIR" "$kit" scripts || { echo 'stage_umbrella: cannot stage the kit scripts' >&2; return 1; }
++  copy_kit "$KIT_DIR" "$kit" scripts || { fixture_build_failed 'stage_umbrella kit scripts'; echo "$dir"; return 1; }
+   cat > "$dir/spec.md" <<'EOF'
+ ---
+ spec: 001-demo
+@@ -63,4 +63,18 @@
+   [[ ! -e "$SANDBOX/kit/scripts/zz-local.sh" ]] || t_fail "stage_umbrella staged the host kit's ignored script"
+ }
+ 
++# O-015 review 6: stage_umbrella's output is a path its callers use, so a
++# failed copy is recorded and the sandbox path is still printed.
++test_stage_umbrella_failure_is_named_and_stays_in_the_sandbox() {
++  local sub="$SANDBOX/failing-sandbox" nokit="$SANDBOX/not-a-kit" printed
++  mkdir -p "$sub" "$nokit"
++  if printed="$(SANDBOX="$sub" on_host_kit "$nokit" stage_umbrella 2>/dev/null)"; then
++    t_fail 'stage_umbrella reported success for a copy that failed'
++  fi
++  [[ "$printed" == "$sub"/* && "$printed" != *$'\n'* ]] \
++    || t_fail "stage_umbrella handed its caller a path outside the sandbox: '$printed'"
++  assert_contains "$(cat "$sub/.fixture-build-failed" 2>/dev/null)" 'stage_umbrella kit scripts' \
++    'stage_umbrella left no record of the failed copy'
++}
++
+ t_run_all

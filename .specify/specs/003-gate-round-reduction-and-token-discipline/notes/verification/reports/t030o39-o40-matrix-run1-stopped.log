@@ -1,0 +1,15 @@
+PASS baseline test-verification:test_capture_provenance rc=0
+PASS baseline test-gate-contracts:test_reports_and_tally rc=0
+PASS baseline test-gate-contracts:test_instruction_contracts rc=0
+PASS M1-old-broad-predicate KILLED test-verification:test_capture_provenance rc=1: assert: AC-020: another spec's untracked notes/opponent.md left the identity unchanged
+PASS M2-no-exclusion KILLED test-verification:test_capture_provenance rc=1: assert: AC-020: generated bookkeeping stays reusable
+PASS M3-anchor-empty KILLED test-verification:test_capture_provenance rc=1: assert: AC-020: generated bookkeeping stays reusable
+PASS M4-index-pass-broad KILLED test-verification:test_capture_provenance rc=1: assert: AC-020: a staged-only change to another spec's notes/opponent.md left the identity unchanged
+PASS M5-path-pass-broad KILLED test-verification:test_capture_provenance rc=1: assert: AC-020: another spec's untracked notes/opponent.md left the identity unchanged
+PASS M6-no-refusal KILLED test-verification:test_capture_provenance rc=1: assert: expected exit 3, got 0: snapshot_fixture /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/35c9f4cc-c83d-4af8-aa2a-a8e3cf46ab0d/scratchpad/mut/tmp/sddk
+PASS M7-lexical-refusal KILLED test-verification:test_capture_provenance rc=1: assert: expected exit 3, got 0: snapshot_fixture /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/35c9f4cc-c83d-4af8-aa2a-a8e3cf46ab0d/scratchpad/mut/tmp/sddk
+PASS M8-no-link-follow KILLED test-verification:test_capture_provenance rc=1: assert: expected exit 3, got 0: snapshot_fixture /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/35c9f4cc-c83d-4af8-aa2a-a8e3cf46ab0d/scratchpad/mut/tmp/sddk
+PASS M9-no-member-skip KILLED test-verification:test_capture_provenance rc=1: assert: AC-020: the verified spec's own records were counted inside a declared directory
+FAIL M10-scan-unanchored want=KILLED got=SURVIVED 
+FAIL M11-scan-fixed-anchor want=KILLED got=SURVIVED 
+FAIL M12-tally-seedless-fold want=KILLED got=SURVIVED 

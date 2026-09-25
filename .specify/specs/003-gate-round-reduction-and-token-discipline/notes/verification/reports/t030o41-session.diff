@@ -1,0 +1,461 @@
+--- a/scripts/verification-lib.sh
++++ b/scripts/verification-lib.sh
+@@ -1428,6 +1428,19 @@
+   printf '%s\0' path "$path" "$type" "$mode" "$digest" "$link" >> "$output"
+ }
+ 
++# The source enumeration: tracked and untracked-but-not-ignored paths,
++# NUL-framed, relative to the repository root. vf_snapshot hashes exactly this
++# set, so a reader whose verdict must be a function of the input identity -- a
++# reuse-checked check, or a test fixture copying the kit -- enumerates through
++# it as well: two spellings of "the source" are two things that can drift.
++# A git failure is a failure, never an empty and therefore clean tree.
++vf_source_paths() { # <physical repo root> <output>
++  [[ "$(git -C "$1" rev-parse --show-toplevel 2>/dev/null)" == "$1" ]] || {
++    echo 'verification inputs: Git worktree root required' >&2; return 3;
++  }
++  git -C "$1" ls-files --cached --others --exclude-standard -z > "$2" || return 3
++}
++
+ # Fixed arity six-field input records. Git supplies NUL-safe deterministic
+ # tracked/index and untracked ordering; no GNU sort -z or line-split filenames.
+ vf_snapshot() (
+@@ -1445,7 +1458,7 @@
+   vf_config "$repo/.specify/stack.yml" "$spec/tasks.md" "$tmp/config" || return 3
+   printf '%s\0' version 1 "$repo" "$cwd" '' '' > "$tmp/inputs"
+   git -C "$repo" ls-files --stage -z > "$tmp/index" || return 3
+-  git -C "$repo" ls-files --cached --others --exclude-standard -z > "$tmp/paths" || return 3
++  vf_source_paths "$repo" "$tmp/paths" || return 3
+   while IFS= read -r -d '' record; do
+     path="${record#*$'\t'}"; head="${record%%$'\t'*}"
+     vf_bookkeeping_path "$path" "$own" "$fold" && continue
+--- a/templates/verification-contract.md
++++ b/templates/verification-contract.md
+@@ -169,6 +169,17 @@
+ valid execution, never automatic semantic PASS, and may attack covered or
+ previously unexamined unchanged surfaces.
+ 
++A reused success is sound only while the check's verdict is a function of that
++identity, so a check opted into reuse reads the repository only as the snapshot
++hashes it: paths from the same enumeration (tracked files and untracked files
++git does not ignore), without the verified spec's generated bookkeeping, and
++spec, plan and tasks content without the lines the snapshot drops (`status:`
++and `updated:` frontmatter, task Evidence lines, checkbox state), with STATUS
++read only for its Decisions log. A check that depends on an ignored path
++declares it under `verification_inputs`; one that reads the dropped lines stays
++off `reuse_checks`. The kit's own suites read through `vf_source_paths` and
++`vf_semantic_file`, the functions the snapshot itself calls.
++
+ The implementation plan owns runtime interfaces and their test families:
+ capture/provenance, acceptance, floor/checkpoints, round reservations and report
+ validation. Schema examples here establish authoring intent; runtime negative
+--- a/tests/helpers.sh
++++ b/tests/helpers.sh
+@@ -348,6 +348,28 @@
+     { print }
+   ' "$spec" > "$spec.tmp" && mv "$spec.tmp" "$spec"
+ }
++
++# copy_kit <kit root> <dest> — the kit exactly as the input identity enumerates
++# it (vf_source_paths): tracked and untracked-but-not-ignored paths, never
++# machine-local ignored files such as system-map.yml or models.yml, and never
++# .git. The suites that copy the kit are reuse-checked, so a copy that carried
++# bytes the identity does not hash would let those bytes decide a reusable
++# verdict (O-015, round 10). An indexed path deleted from the working tree is
++# recorded by the identity as missing and has nothing to copy.
++copy_kit() (
++  set -o pipefail
++  local src list present path
++  src="$(cd "$1" && pwd -P)" || exit 1
++  list="$(mktemp "${TMPDIR:-/tmp}/kit-paths.XXXXXX")" || exit 1
++  present="$(mktemp "${TMPDIR:-/tmp}/kit-paths.XXXXXX")" || { rm -f "$list"; exit 1; }
++  trap 'rm -f "$list" "$present"' EXIT
++  bash -c '. "$1/verification-lib.sh"; vf_source_paths "$2" "$3"' _ "$SCRIPTS" "$src" "$list" \
++    || { echo "copy_kit: cannot enumerate $1" >&2; exit 1; }
++  while IFS= read -r -d '' path; do
++    [[ ! -e "$src/$path" && ! -L "$src/$path" ]] || printf '%s\0' "$path"
++  done < "$list" > "$present"
++  mkdir -p "$2" && ( cd "$src" && tar --null -T "$present" -cf - ) | ( cd "$2" && tar -xf - )
++)
+ 
+ # --- runner --------------------------------------------------------------------
+ 
+--- a/tests/test-gate-contracts.sh
++++ b/tests/test-gate-contracts.sh
+@@ -15,11 +15,13 @@
+ # own conventions produce.
+ #
+ # SCOPE is taken from the enumeration the input manifest itself uses --
+-# `git ls-files --cached --others --exclude-standard` filtered through
+-# `vf_bookkeeping_path`, the same predicate vf_snapshot applies -- rather than
+-# restated as a find(1) filter, so it cannot drift when a new extension appears
+-# or a directory is named `captures` somewhere the anchored bookkeeping path
+-# does not cover. That predicate excludes only the VERIFIED spec's generated
++# `vf_source_paths`, the very function vf_snapshot's path pass calls, filtered
++# through `vf_bookkeeping_path`, the same predicate vf_snapshot applies --
++# rather than restated as a find(1) filter or a second git command line, so it
++# cannot drift when a new extension appears, a directory is named `captures`
++# somewhere the anchored bookkeeping path does not cover, or git quotes a name.
++# A tree that cannot be enumerated is an error, never an empty and therefore
++# clean tree. That predicate excludes only the VERIFIED spec's generated
+ # records, and the scan anchors each path to the spec that CONTAINS it: a
+ # spec's generated gate records are historical copies whichever spec is being
+ # verified, while another spec's non-generated notes stay in scope. Measured
+@@ -30,6 +32,14 @@
+ # STATUS.md is the one further subtraction: its Decisions log is an
+ # append-only record of what was true when each entry was written.
+ #
++# CONTENT is read the same way: each file passes through `vf_semantic_file`,
++# the function that decides which of its bytes the identity hashes, and only
++# that output is scanned. This guard runs inside reuse-checked commands, so its
++# verdict must be a function of the input identity. Round 10 (O-015) showed the
++# raw bytes are not: a sentence on a spec's Evidence line or `status:`/`updated:`
++# line failed this suite while the identity -- and so every reusable PASS of
++# it -- stayed unchanged.
++#
+ # The NEEDLE matches the PROPOSITION. Each candidate is normalized to a single
+ # whitespace-collapsed stream with backticks and asterisks stripped, so a hard
+ # wrap, a code span or emphasis cannot hide the claim --
+@@ -39,17 +49,22 @@
+ # connective between them: the same names under the opposite claim ("are
+ # dropped", "are no longer hashed", "No name is hashed because ...") state the
+ # CURRENT rule and are exactly what the replacement text says.
+-superseded_environment_scan() ( # root -> one line per surviving claim
+-  local root="$1" path own
++superseded_environment_scan() ( # root -> one line per surviving claim; exit 1, by name, when the tree cannot be read
++  local root path own list semantic
+   . "$SCRIPTS/lib.sh"
+   . "$SCRIPTS/verification-lib.sh"
+-  cd "$root" || return 1
+-  git ls-files --cached --others --exclude-standard 2>/dev/null | while IFS= read -r path; do
++  root="$(cd "$1" && pwd -P)" && cd "$root" || return 1
++  list="$(mktemp "${TMPDIR:-/tmp}/env-scan.XXXXXX")" || return 1
++  semantic="$(mktemp "${TMPDIR:-/tmp}/env-scan.XXXXXX")" || { rm -f "$list"; return 1; }
++  trap 'rm -f "$list" "$semantic"' EXIT
++  vf_source_paths "$root" "$list" || { echo "superseded_environment_scan: cannot enumerate $1" >&2; return 1; }
++  while IFS= read -r -d '' path; do
+     own=''
+     case "$path" in .specify/specs/*/*) own="${path#.specify/specs/}"; own=".specify/specs/${own%%/*}";; esac
+     vf_bookkeeping_path "$path" "$own" && continue
+     case "$path" in STATUS.md|*/STATUS.md) continue;; esac
+     [[ -f "$path" ]] || continue
++    vf_semantic_file "$path" "$path" "$semantic" || { echo "superseded_environment_scan: cannot read $path" >&2; return 1; }
+     LC_ALL=C awk -v path="$path" '
+       function negated(gap) {
+         return gap ~ /(^| )(no|not|never|none|nothing|neither|nor|without)( |[.,;:])/ ||
+@@ -94,14 +109,17 @@
+           rest = after
+         }
+       }
+-    ' "$path"
+-  done
++    ' "$semantic" || return 1
++  done < "$list"
+ )
+ 
+ superseded_environment_cases() {
+   local tree name shape reported
+-  # The live tree carries the replacement text and must be clean.
+-  assert_eq '' "$(superseded_environment_scan "$KIT_DIR")" \
++  # The live tree carries the replacement text and must be clean. The scan's
++  # exit is asserted as well as its output: a tree it cannot read prints
++  # nothing, and nothing is exactly what a clean tree prints.
++  reported="$(superseded_environment_scan "$KIT_DIR")" || t_fail 'AC-018: the superseded-rule scan could not read the live tree'
++  assert_eq '' "$reported" \
+     'AC-018: superseded fixed-environment membership survives in a current artifact'
+ 
+   # A guard proven only on the tree it already passes proves nothing, so the
+@@ -151,7 +169,7 @@
+   # D1: line joining alone does not normalize whitespace INSIDE a predicate.
+   # Both a tab and repeated spaces are members of [[:space:]]+.
+   printf '%s\tis\talways  hashed by the snapshot.\n' "$n_path" > "$tree/inner-whitespace.md"
+-  reported="$(superseded_environment_scan "$tree")"
++  reported="$(superseded_environment_scan "$tree")" || t_fail 'AC-018: the scan could not read its fixture tree'
+   for shape in verbatim.md hardwrapped.md backticked.md reordered.md subset.md \
+       other-extension.txt other-extension.yaml captures/basename.md names-first.md \
+       family-only.md inner-whitespace.md; do
+@@ -170,7 +188,7 @@
+   mkdir -p "$tree/.specify/specs/004-y/notes"
+   printf 'The snapshot %s %s and %s.\n' "$v_inc" "$n_path" "$n_tmp" > "$tree/.specify/specs/004-y/notes/opponent.md"
+   printf 'The snapshot %s %s and %s.\n' "$v_inc" "$n_path" "$n_tmp" > "$tree/.specify/specs/004-y/notes/history.md"
+-  reported="$(superseded_environment_scan "$tree")"
++  reported="$(superseded_environment_scan "$tree")" || t_fail 'AC-018: the scan could not read its fixture tree'
+   assert_not_contains "$reported" 'notes/captures/sealed.md' \
+     'AC-018: a sealed bookkeeping copy was treated as a current claim'
+   assert_not_contains "$reported" 'STATUS.md' \
+@@ -202,8 +220,74 @@
+   # passive verb phrase rather than a bare participle.
+   printf 'Any variable the project has not declared — `%sCTYPE` and `%sALL` included, the two most CI images export by default — leaves the source identity byte-identical.\n' \
+     "$n_lc_prefix" "$n_lc_prefix" > "$tree/among-them.md"
+-  assert_eq '' "$(superseded_environment_scan "$tree")" \
++  reported="$(superseded_environment_scan "$tree")" || t_fail 'AC-018: the scan could not read its fixture tree'
++  assert_eq '' "$reported" \
+     'AC-018: the guard flagged a sentence stating the replacement rule'
++
++  # O-015, round 10: the scan reads what the identity hashes, in both
++  # directions. A claim on a spec's Evidence line or on a status:/updated:
++  # frontmatter line is bookkeeping vf_semantic_file drops, so it is neither
++  # reported nor visible to the identity; the same claim on a body line is
++  # both. Visibility is asserted through the function vf_snapshot hashes.
++  local spec_rel=.specify/specs/004-y claim f base quoted
++  claim="$(printf 'the macOS job %s %s and %s shims for Bash 3.2' "$v_inc2" "$n_path" "$n_tmp")"
++  rm -rf "$tree"; mkdir -p "$tree/$spec_rel" "$SANDBOX/env-base"; git -C "$tree" init -q
++  printf -- '---\nstatus: shipped\nupdated: 2026-09-24\n---\n\n# Spec\n' > "$SANDBOX/env-base/spec.md"
++  printf -- '---\nstatus: shipped\nupdated: 2026-09-24\n---\n\n# Plan\n' > "$SANDBOX/env-base/plan.md"
++  printf -- '---\nstatus: in-progress\nupdated: 2026-09-24\n---\n\n- [x] **T001** — Task\n  - *Evidence:* hosted CI green (2026-09-24)\n' \
++    > "$SANDBOX/env-base/tasks.md"
++  printf -- '---\nstatus: shipped  # %s\nupdated: 2026-09-24\n---\n\n# Spec\n' "$claim" > "$tree/$spec_rel/spec.md"
++  printf -- '---\nstatus: shipped\nupdated: 2026-09-24  # %s\n---\n\n# Plan\n' "$claim" > "$tree/$spec_rel/plan.md"
++  printf -- '---\nstatus: in-progress\nupdated: 2026-09-24\n---\n\n- [x] **T001** — Task\n  - *Evidence:* hosted CI green; %s (2026-09-24)\n' \
++    "$claim" > "$tree/$spec_rel/tasks.md"
++  reported="$(superseded_environment_scan "$tree")" || t_fail 'AC-018: the scan could not read its fixture tree'
++  assert_eq '' "$reported" \
++    'AC-020: a claim on a line the identity drops was scanned, so a reusable PASS of this suite could fail (O-015)'
++  for f in spec.md plan.md tasks.md; do
++    base="$(semantic_digest "$spec_rel/$f" "$SANDBOX/env-base/$f")"
++    [[ -n "$base" && "$base" == "$(semantic_digest "$spec_rel/$f" "$tree/$spec_rel/$f")" ]] \
++      || t_fail "AC-020: the identity saw the dropped-line claim in $f, so this fixture no longer isolates O-015"
++  done
++  printf '\n%s.\n' "$claim" >> "$tree/$spec_rel/tasks.md"
++  reported="$(superseded_environment_scan "$tree")" || t_fail 'AC-018: the scan could not read its fixture tree'
++  assert_contains "$reported" "$spec_rel/tasks.md ::" 'AC-018: a claim on a spec body line escaped the scan'
++  base="$(semantic_digest "$spec_rel/tasks.md" "$SANDBOX/env-base/tasks.md")"
++  [[ -n "$base" && "$base" != "$(semantic_digest "$spec_rel/tasks.md" "$tree/$spec_rel/tasks.md")" ]] \
++    || t_fail 'AC-020: a claim on a spec body line was invisible to the identity'
++
++  # Names git quotes when it is not asked for NUL framing -- non-ASCII under
++  # core.quotePath, a double quote, a control character -- are read like any
++  # other name, because the enumeration is the identity's own.
++  for quoted in "caf$(printf '\303\251').md" 'say"hi".md' "tab$(printf '\t')name.md"; do
++    printf 'The snapshot %s %s.\n' "$v_inc2" "$n_path" > "$tree/$quoted"
++  done
++  reported="$(superseded_environment_scan "$tree")" || t_fail 'AC-018: the scan could not read its fixture tree'
++  for quoted in "caf$(printf '\303\251').md" 'say"hi".md' "tab$(printf '\t')name.md"; do
++    assert_contains "$reported" "$quoted ::" "AC-018: a claim in a file whose name git quotes escaped the scan: $quoted"
++  done
++
++  # A tree the enumeration cannot read fails by name. Before O-015 a git
++  # failure printed nothing, and nothing is what a clean tree prints.
++  mkdir -p "$SANDBOX/env-not-a-repo"
++  printf 'The snapshot %s %s.\n' "$v_inc2" "$n_path" > "$SANDBOX/env-not-a-repo/claim.md"
++  run_rc 1 superseded_environment_scan "$SANDBOX/env-not-a-repo"
++  assert_contains "$OUT" 'superseded_environment_scan: cannot enumerate' \
++    'AC-018: a tree outside any repository was read as clean'
++  export GIT_DIR="$SANDBOX/no-such-git-dir"
++  run_rc 1 superseded_environment_scan "$tree"
++  unset GIT_DIR
++  assert_contains "$OUT" 'superseded_environment_scan: cannot enumerate' \
++    'AC-018: a failing git was read as an empty, clean tree'
++  # A subdirectory is not the manifest's root, so git succeeding there is not
++  # enough: its listing would silently narrow the scope to one directory.
++  run_rc 1 superseded_environment_scan "$tree/$spec_rel"
++  assert_contains "$OUT" 'superseded_environment_scan: cannot enumerate' \
++    'AC-018: a repository subdirectory was scanned as if it were the whole source'
++}
++
++semantic_digest() { # <repo-relative path> <file> -> digest of the bytes vf_snapshot hashes for it
++  bash -c '. "$1/lib.sh"; . "$1/verification-lib.sh"; vf_semantic_file "$2" "$3" "$4" && vf_hash "$4"' \
++    _ "$SCRIPTS" "$1" "$2" "$SANDBOX/semantic-digest"
+ }
+ 
+ test_instruction_contracts() {
+@@ -241,6 +325,9 @@
+   assert_contains "$contract" '`Prior` is recorded for the reader and never carries the claim.'
+   assert_contains "$contract" 'DERIVED from the CommonMark HTML-block start conditions'
+   assert_contains "$contract" 'exactly `verification_environment:`'
++  # O-015: the obligation every reuse opt-in carries, stated for projects.
++  assert_contains "$contract" 'reads the repository only as the snapshot'
++  assert_contains "$contract" 'off `reuse_checks`'
+   superseded_environment_cases
+ 
+   # AC-004: one explicit grammar admits real shell/custom checks and
+--- a/tests/test-verification.sh
++++ b/tests/test-verification.sh
+@@ -377,7 +377,69 @@
+   [[ "$OUT" != "$changed" ]] || t_fail 'AC-020: declared executable mutation missed'
+   capture_validity_cases
+   bookkeeping_anchor_cases
++  outside_layout_anchor_cases
++  kit_copy_cases
+ 
++}
++
++# Round 10's isolation gap: the anchor exists only for .specify/specs/<name>
++# inside the repository. An in-repository spec in any other layout -- a hub's
++# specs/<name> umbrella, say -- gets an EMPTY anchor, which excludes nothing,
++# so its own records are inputs. That is the deny-side direction.
++outside_layout_anchor_cases() {
++  local spec repo outside base
++  spec="$(make_verification_git_dir outside)"
++  repo="$(cd "$spec/../../.." && pwd -P)"
++  outside="$repo/specs/004-outside"
++  mkdir -p "$repo/specs"; cp -R "$spec" "$outside"
++  run_rc 0 bash -c '. "$1"; vf_bookkeeping_anchor "$2" "$3" 0' _ "$SCRIPTS/verification-lib.sh" \
++    "$(cd "$outside" && pwd -P)" "$repo"
++  assert_eq '' "$OUT" 'AC-020: an in-repository spec outside .specify/specs/<name> was given an anchor'
++  run_rc 0 snapshot_fixture "$outside" "$repo" "$SANDBOX/outside-base"
++  base="$OUT"
++  mkdir -p "$outside/notes"; printf '## Round 1\n' >> "$outside/notes/opponent.md"
++  run_rc 0 snapshot_fixture "$outside" "$repo" "$SANDBOX/outside-edited"
++  [[ "$OUT" != "$base" ]] \
++    || t_fail "AC-020: an outside-layout spec's own notes/opponent.md was excluded; an empty anchor excludes nothing"
++}
++
++# O-015 sibling, round 10: copy_kit copies exactly what the identity
++# enumerates. A whole-kit copy made with cp -R carried the host's ignored
++# system-map.yml into the doctor fixture and failed it with the identity
++# unchanged.
++kit_copy_cases() {
++  local src="$SANDBOX/kit-src" dest="$SANDBOX/kit-dest" name present absent
++  name="caf$(printf '\303\251').md"
++  mkdir -p "$src/docs" "$src/build"
++  git -C "$src" init -q
++  printf 'build/\nmodels.yml\nsystem-map.yml\n' > "$src/.gitignore"
++  printf 'tracked\n' > "$src/docs/tracked.md"
++  printf 'deleted\n' > "$src/docs/deleted.md"
++  git -C "$src" add . && git -C "$src" -c user.name=Fixture -c user.email=fixture@example.invalid commit -qm fixture
++  rm "$src/docs/deleted.md"
++  printf 'untracked\n' > "$src/docs/untracked.md"
++  printf 'non-ascii\n' > "$src/docs/$name"
++  ln -s tracked.md "$src/docs/link.md"
++  printf 'repos: [unclosed\n' > "$src/system-map.yml"
++  printf 'tiers: [unclosed\n' > "$src/models.yml"
++  printf 'stale adapter\n' > "$src/build/adapter.md"
++  run_rc 0 copy_kit "$src" "$dest"
++  for present in .gitignore docs/tracked.md docs/untracked.md "docs/$name"; do
++    [[ -f "$dest/$present" ]] || t_fail "AC-020: copy_kit dropped the enumerated path $present"
++  done
++  [[ -L "$dest/docs/link.md" ]] || t_fail 'AC-020: copy_kit did not keep an enumerated symlink as a link'
++  for absent in system-map.yml models.yml build .git docs/deleted.md; do
++    [[ ! -e "$dest/$absent" && ! -L "$dest/$absent" ]] \
++      || t_fail "AC-020: copy_kit carried $absent, which the input identity does not hash"
++  done
++  # A source the enumeration cannot read fails by name and claims no copy.
++  mkdir -p "$SANDBOX/not-a-kit"; printf 'x\n' > "$SANDBOX/not-a-kit/file.md"
++  run_rc 1 copy_kit "$SANDBOX/not-a-kit" "$SANDBOX/kit-none"
++  assert_contains "$OUT" 'copy_kit: cannot enumerate' 'AC-020: an unreadable kit was copied as if it were whole'
++  # A subdirectory of a repository is not a kit root: git succeeds there, but
++  # its listing is not the identity's enumeration.
++  run_rc 1 copy_kit "$src/docs" "$SANDBOX/kit-sub"
++  assert_contains "$OUT" 'copy_kit: cannot enumerate' 'AC-020: a repository subdirectory was copied as a whole kit'
+ }
+ 
+ capture_check_fixture() {
+--- a/tests/test-sdd-analyze.sh
++++ b/tests/test-sdd-analyze.sh
+@@ -507,18 +507,55 @@
+   run_rc 0 "$ANALYZE" "$spec_dir"
+   assert_not_contains "$OUT" 'untyped AC Verify' 'AC-004: shell test runners need no framework wrapper'
+ 
+-  # AC-023: run the actual shipped artifacts unchanged in an isolated project
+-  # with local persona stubs so the test does not depend on an installed hub.
++  # AC-023: run the actual shipped artifacts in an isolated project with local
++  # persona stubs so the test does not depend on an installed hub. They are
++  # read as the input identity hashes them (shipped_analyzer_case).
+   for shipped in "$KIT_DIR"/.specify/specs/001-* "$KIT_DIR"/.specify/specs/002-*; do
+     [[ -d "$shipped" ]] || continue
+     shipped_count=$((shipped_count+1))
+-    spec_dir="$(make_spec_dir)"
+-    for value in spec.md plan.md tasks.md STATUS.md; do cp "$shipped/$value" "$spec_dir/$value"; done
+-    verification_edit_fixture "$spec_dir/tasks.md" 's|~/.sdd/agents/|agents/|g'
+-    run_rc 0 "$ANALYZE" "$spec_dir"
++    shipped_analyzer_case "$KIT_DIR" ".specify/specs/$(basename "$shipped")" 0
+     assert_contains "$OUT" 'legacy verification contract remains compatible' 'AC-023: shipped artifact compatibility is not current freshness'
+   done
+   assert_eq 2 "$shipped_count" 'AC-023: both shipped specs were actually checked'
++
++  # O-015 sibling, round 10, both directions. Text on a copied shipped spec's
++  # Evidence line is bookkeeping the identity drops, so it cannot change this
++  # verdict; the same text on a body line is source and must. Before the
++  # repair an Agent field marker or an unclosed comment opener on an Evidence
++  # line failed the analyzer with the identity unchanged.
++  local root="$SANDBOX/shipped" rel probe
++  rel=".specify/specs/$(basename "$KIT_DIR"/.specify/specs/002-*)"
++  for probe in 'cross-checked with *Agent:* agents/opponent-retired.md' '<!-- earlier wording kept for the record'; do
++    rm -rf "$root"; mkdir -p "$root/$rel"
++    for value in spec.md plan.md tasks.md STATUS.md; do cp "$KIT_DIR/$rel/$value" "$root/$rel/$value"; done
++    awk -v p="$probe" '!done && /^[ ]*- \*Evidence:\*/ {print $0 "; " p; done=1; next} {print}' \
++      "$KIT_DIR/$rel/tasks.md" > "$root/$rel/tasks.md"
++    shipped_analyzer_case "$root" "$rel" 0
++    assert_contains "$OUT" 'legacy verification contract remains compatible' \
++      "AC-023: text on a shipped Evidence line changed the analyzer verdict: $probe"
++    awk -v p="$probe" '!done && /^[ ]*- \*Evidence:\*/ {print; print "  " p; done=1; next} {print}' \
++      "$KIT_DIR/$rel/tasks.md" > "$root/$rel/tasks.md"
++    shipped_analyzer_case "$root" "$rel" 1
++    assert_contains "$OUT" 'opponent gate' "AC-023: the same text on a body line did not reach the analyzer: $probe"
++  done
+ }
+ 
++# AC-023/O-015: the analyzer reads each shipped artifact as the input identity
++# hashes it -- through vf_semantic_file under its repository-relative name --
++# because this suite is reuse-checked and a reused PASS must be a function of
++# that identity. The lines vf_semantic_file drops (Evidence lines, checkbox
++# state, status:/updated:, STATUS outside its Decisions log) are REQ-009
++# bookkeeping, not part of the compatibility claim.
++shipped_analyzer_case() { # <repository root> <repo-relative spec dir> <expected exit>; sets OUT
++  local spec_dir value
++  spec_dir="$(make_spec_dir)"
++  for value in spec.md plan.md tasks.md STATUS.md; do
++    bash -c '. "$1/verification-lib.sh"; vf_semantic_file "$2" "$3" "$4"' \
++      _ "$SCRIPTS" "$2/$value" "$1/$2/$value" "$spec_dir/$value" \
++      || t_fail "AC-023: cannot read $2/$value as the identity hashes it"
++  done
++  verification_edit_fixture "$spec_dir/tasks.md" 's|~/.sdd/agents/|agents/|g'
++  run_rc "$3" "$ANALYZE" "$spec_dir"
++}
++
+ t_run_all
+--- a/tests/test-usage-limits.sh
++++ b/tests/test-usage-limits.sh
+@@ -895,7 +895,9 @@
+   DOCTOR_ROOT="$SANDBOX/doctor-resume-root"
+   DOCTOR_SCHEDULER="$SANDBOX/doctor-resume-scheduler"
+   DOCTOR_JOBS="$SANDBOX/doctor-scheduler-jobs"
+-  cp -R "$KIT_DIR" "$DOCTOR_KIT"
++  # The kit as the input identity sees it: a host's machine-local system-map.yml,
++  # models.yml or build/ must not decide this reuse-checked verdict (O-015).
++  copy_kit "$KIT_DIR" "$DOCTOR_KIT" || t_fail 'AC-009: cannot copy the kit for the doctor fixture'
+   mkdir -p "$DOCTOR_HOME" "$DOCTOR_BIN" "$DOCTOR_ROOT" "$DOCTOR_KIT/build"
+   : > "$DOCTOR_KIT/registry.yml"
+   : > "$DOCTOR_KIT/build/.stamp"
+@@ -996,6 +998,28 @@
+     "AC-009: doctor reports a unit-without-job orphan"
+   assert_contains "$OUT" "resume orphan: scheduler job $job_only has no resume unit" \
+     "AC-009: doctor reports a job-without-unit orphan"
++}
++
++# O-015 sibling, round 10: the doctor fixture copies the kit as the input
++# identity enumerates it. A host kit's machine-local system-map.yml and
++# models.yml are ignored and unhashed, and this suite is reuse-checked, so
++# neither may reach the fixture. Before the repair the fixture's cp -R carried
++# an invalid system-map.yml in and failed the doctor with the identity unchanged.
++test_AC_009_doctor_fixture_excludes_machine_local_kit_files() {
++  local host="$SANDBOX/host-kit" name
++  copy_kit "$KIT_DIR" "$host" || t_fail 'AC-009: cannot build the host kit'
++  git -C "$host" init -q
++  printf 'repos: [unclosed\n' > "$host/system-map.yml"
++  printf 'tiers: [unclosed\n' > "$host/models.yml"
++  KIT_DIR="$host" doctor_fixture
++  for name in system-map.yml models.yml; do
++    [[ ! -e "$DOCTOR_KIT/$name" ]] || t_fail "AC-009: the doctor fixture carried the host's ignored $name"
++  done
++  run_rc 0 run_doctor
++  assert_not_contains "$OUT" 'system-map.yml invalid' \
++    "AC-009: the host's ignored system-map.yml decided the doctor verdict"
++  assert_contains "$OUT" 'models.yml not configured' \
++    "AC-009: the host's ignored models.yml reached the doctor fixture"
+ }
+ 
+ # AC-010: public policy docs must stay aligned with the parser and preserve the
+--- a/tests/test-model-policy.sh
++++ b/tests/test-model-policy.sh
+@@ -149,7 +149,8 @@
+ test_AC_008_usage_limit_policy_wizard_preserves_ordered_fallback() {
+   local kit p home transcript policy
+   kit="$SANDBOX/kit"; home="$SANDBOX/home"; transcript="$SANDBOX/wizard.typescript"
+-  cp -R "$KIT_DIR" "$kit"
++  # The kit as the input identity sees it, never the host's machine-local files (O-015).
++  copy_kit "$KIT_DIR" "$kit" || t_fail 'AC-008: cannot copy the kit for the wizard fixture'
+   p="$kit/models.yml"
+   mkdir -p "$home"
+   cat > "$p" <<'EOF'

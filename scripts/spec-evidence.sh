@@ -40,13 +40,16 @@ usage() { usage_from_header "$0"; exit 0; }
 SPEC_DIR="${1:-}"
 [[ -z "$SPEC_DIR" || ! -d "$SPEC_DIR" ]] && { echo "usage: spec-evidence.sh <spec-dir>" >&2; exit 2; }
 SPEC_DIR="$(cd "$SPEC_DIR" && pwd)"
-SPEC="$SPEC_DIR/spec.md"; TASKS="$SPEC_DIR/tasks.md"; STATUS="$SPEC_DIR/STATUS.md"
+# Suffixed names on purpose: the documented workflow tells callers to use
+# "$SPEC", and the verification checks fingerprint the exported environment.
+# Rewriting a caller-exported name here would make every capture look stale.
+SPEC_FILE="$SPEC_DIR/spec.md"; TASKS_FILE="$SPEC_DIR/tasks.md"; STATUS_FILE="$SPEC_DIR/STATUS.md"
 EVID="$SPEC_DIR/notes/evidence.md"; RC="$SPEC_DIR/notes/reality-check.md"
-[[ -f "$TASKS" ]] || { echo "no tasks.md in $SPEC_DIR" >&2; exit 1; }
+[[ -f "$TASKS_FILE" ]] || { echo "no tasks.md in $SPEC_DIR" >&2; exit 1; }
 
 # Legacy evidence remains readable; new contracts need current proof by default.
 . "$HUB_DIR/scripts/verification-lib.sh"
-if [[ "${2:-}" == --current || "$(fm_get "$SPEC" verification_contract 2>/dev/null || :)" == 1 ]]; then
+if [[ "${2:-}" == --current || "$(fm_get "$SPEC_FILE" verification_contract 2>/dev/null || :)" == 1 ]]; then
   vf_evidence_current "$SPEC_DIR"
   exit $?
 fi
@@ -77,7 +80,7 @@ records="$(awk '
     line=$0; sub(/^[[:space:]]*-[[:space:]]*\*Evidence[^*]*:\*[[:space:]]*/,"",line); ev=line
   }
   END { flush() }
-' "$TASKS")"
+' "$TASKS_FILE")"
 
 checked=0
 while IFS=$'\t' read -r id stage is_gate is_done ev; do
@@ -122,8 +125,8 @@ done <<< "$records"
 
 # --- 4. manual / post-deploy ACs need an owner + check-back date -------------
 manual_acs=""
-if [[ -f "$SPEC" ]]; then
-  manual_acs="$(grep -E 'AC-[0-9]{3}' "$SPEC" | grep -iE '\[DEPLOY\]|\[MANUAL\]|UNVERIFIABLE' \
+if [[ -f "$SPEC_FILE" ]]; then
+  manual_acs="$(grep -E 'AC-[0-9]{3}' "$SPEC_FILE" | grep -iE '\[DEPLOY\]|\[MANUAL\]|UNVERIFIABLE' \
                  | grep -oE 'AC-[0-9]{3}' | sort -u || true)"
 fi
 if [[ -f "$RC" ]]; then
@@ -138,7 +141,7 @@ fi
 
 if [[ -n "$manual_acs" ]]; then
   has_checkback=0
-  if [[ -f "$STATUS" ]] && grep -qE '\b(20|21)[0-9]{2}-[0-1][0-9]-[0-3][0-9]\b' "$STATUS"; then
+  if [[ -f "$STATUS_FILE" ]] && grep -qE '\b(20|21)[0-9]{2}-[0-1][0-9]-[0-3][0-9]\b' "$STATUS_FILE"; then
     has_checkback=1
   fi
   n="$(printf '%s\n' "$manual_acs" | grep -c .)"

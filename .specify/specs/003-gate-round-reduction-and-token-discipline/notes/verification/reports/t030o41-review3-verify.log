@@ -1,0 +1,41 @@
+== R3-2 the pre-delta copy lines survive their new fixtures
+ 2 files changed, 2 insertions(+), 3 deletions(-)
+PASS R3-2 golden pre-delta line restored (want=1 got=1)
+PASS R3-2 dispatch pre-delta line restored (want=1 got=1)
+PASS R3-2 golden fixture passes over the pre-delta line (survives) (want=0 got=0)
+PASS R3-2 dispatch fixture passes over the pre-delta line (survives) (want=0 got=0)
+== R3-3 GIT_CONFIG_GLOBAL with a core.excludesFile fails the XDG fixture
+PASS R3-3 the kit enumeration is identical under that GIT_CONFIG_GLOBAL (want=0 got=0)
+PASS R3-3 reuse_command_input_cases fails under it (want=1 got=1)
+  | precondition assertion lines: 1
+PASS R3-3 control: passes without it (want=0 got=0)
+PASS copy status unchanged (want=!! tests/.one-build-adapters.sh
+!! tests/.one-executable-bits.sh
+!! tests/.one-gate-contracts.sh
+!! tests/.one-golden-example.sh
+!! tests/.one-lib.sh
+!! tests/.one-model-policy.sh
+!! tests/.one-sdd-analyze.sh
+!! tests/.one-spec-ac-coverage.sh
+!! tests/.one-spec-dispatch.sh
+!! tests/.one-spec-gate.sh
+!! tests/.one-spec-run.sh
+!! tests/.one-spec-status.sh
+!! tests/.one-spec-task.sh
+!! tests/.one-usage-limits.sh
+!! tests/.one-verification.sh got=!! tests/.one-build-adapters.sh
+!! tests/.one-executable-bits.sh
+!! tests/.one-gate-contracts.sh
+!! tests/.one-golden-example.sh
+!! tests/.one-lib.sh
+!! tests/.one-model-policy.sh
+!! tests/.one-sdd-analyze.sh
+!! tests/.one-spec-ac-coverage.sh
+!! tests/.one-spec-dispatch.sh
+!! tests/.one-spec-gate.sh
+!! tests/.one-spec-run.sh
+!! tests/.one-spec-status.sh
+!! tests/.one-spec-task.sh
+!! tests/.one-usage-limits.sh
+!! tests/.one-verification.sh)
+verify-r3 failures=0

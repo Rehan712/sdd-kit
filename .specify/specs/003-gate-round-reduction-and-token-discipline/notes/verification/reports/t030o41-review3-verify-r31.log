@@ -1,0 +1,11 @@
+Invoker reproduction of review-3 finding R3-1, 2026-09-24, BEFORE any repair.
+Fixture: make_verification_git_dir from the pre-delta copy's tests/helpers.sh (scratch
+SANDBOX, not the worktree), then `verification_environment: ['GIT_PREFIX']` appended
+to its .specify/stack.yml. vf_snapshot run read-only from each library, GIT_PREFIX=one/two:
+  post-delta (live scripts/)   GIT_PREFIX=one -> e0f030c667ace39e [GIT_PREFIX unset]
+  post-delta (live scripts/)   GIT_PREFIX=two -> e0f030c667ace39e [GIT_PREFIX unset]
+  pre-delta  (v2/copy scripts) GIT_PREFIX=one -> a51cf2ed1323f5db [GIT_PREFIX present 7692c3ad...]
+  pre-delta  (v2/copy scripts) GIT_PREFIX=two -> 532d087c37cb0c30 [GIT_PREFIX present 3fc4ccfe...]
+Confirmed: the delta's whole-subshell vf_git_local_unset in vf_snapshot makes a declared
+git-local name constant ("unset") in the identity, while the harness runs the check with
+the ambient value. Regression introduced by the delta; not repaired in this session.

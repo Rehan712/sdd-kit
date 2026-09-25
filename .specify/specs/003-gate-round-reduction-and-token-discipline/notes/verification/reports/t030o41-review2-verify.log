@@ -1,0 +1,52 @@
+  | live worktree porcelain digest before: f894ce5dd9e1d1dec72c07cfba607d11c3580b4a494764f78cc66e1e48d9553c
+PASS live enumeration rc (want=0 got=0)
+PASS copy extraction rc (want=0 got=0)
+PASS copy committed (want=0 got=0)
+PASS pre-repair run.sh reconstructed (want=0 got=0)
+PASS pre-repair run.sh globs its suites (want=1 got=1)
+PASS baseline snapshot rc (want=0 got=0)
+  | baseline identity b60ad2eca12531c398faa98bfd272ef4eae14b382a4da580bea8177fd9fecc7f
+== D1 the suite-start XDG_* reset changes what git ignores inside a suite
+PASS D1 the planted script is ignored under that environment (want=!! scripts/zz-local.sh got=!! scripts/zz-local.sh)
+PASS D1 identity unchanged by the planted ignored script (want=b60ad2eca12531c398faa98bfd272ef4eae14b382a4da580bea8177fd9fecc7f got=b60ad2eca12531c398faa98bfd272ef4eae14b382a4da580bea8177fd9fecc7f)
+PASS D1 bash tests/run.sh executable fails (want=1 got=1)
+PASS D1 on the ignored script (want=1 got=1)
+PASS D1 control: without the file it passes (want=0 got=0)
+PASS D1: copy clean (want= got=)
+== D3 a leftover cp -R of the live scripts/ feeds the README workflow snapshot
+PASS D3 baseline test_instruction_contracts (want=0 got=0)
+PASS D3 identity unchanged by the ignored absolute directory link (want=b60ad2eca12531c398faa98bfd272ef4eae14b382a4da580bea8177fd9fecc7f got=b60ad2eca12531c398faa98bfd272ef4eae14b382a4da580bea8177fd9fecc7f)
+PASS D3 test_instruction_contracts fails (want=1 got=1)
+PASS D3 through the copied link (want=1 got=1)
+PASS D3: copy clean (want= got=)
+== D4 a case-variant spelling of the kit path
+PASS D4 the spelling differs (want=1 got=1)
+PASS D4 and names the same directory (want=1 got=1)
+PASS D4 post-repair run.sh through that spelling fails (want=1 got=1)
+PASS D4 on enumeration (want=1 got=1)
+PASS D4 pre-repair run.sh through that spelling passes (want=0 got=0)
+  |   -- 13/13 passed 
+PASS D4 shellcheck.sh from a case-variant cwd fails (want=2 got=2)
+PASS D4 control: shellcheck.sh from the on-disk spelling passes (want=0 got=0)
+PASS D4: copy clean (want= got=)
+== D5 a kit that is not a Git worktree
+PASS D5 post-repair run.sh in an export fails (want=1 got=1)
+PASS D5 pre-repair run.sh in an export passes (want=0 got=0)
+PASS D5 shellcheck.sh in an export exits 2 (want=2 got=2)
+== D7 host-kit fixtures assume a template-made .git/info
+  | identity under that HOME: b60ad2eca12531c398faa98bfd272ef4eae14b382a4da580bea8177fd9fecc7f (baseline b60ad2eca12531c398faa98bfd272ef4eae14b382a4da580bea8177fd9fecc7f)
+PASS D7 bash tests/run.sh executable fails (want=1 got=1)
+PASS D7 on the missing info/exclude (want=1 got=1)
+PASS D7: copy clean (want= got=)
+== D2 the leftover-spec fixture copies from a glob of the live kit
+PASS D2 identity unchanged by an empty leftover directory (want=b60ad2eca12531c398faa98bfd272ef4eae14b382a4da580bea8177fd9fecc7f got=b60ad2eca12531c398faa98bfd272ef4eae14b382a4da580bea8177fd9fecc7f)
+  | D2 fixture rc=0
+PASS D2 its planting cp failed silently (want=1 got=1)
+PASS D2: copy clean (want= got=)
+== D6 trap scope under set -u (minimal, /bin/bash)
+  | substitution: trap sees CALLER;trap sees CALLER;
+PASS D6 the EXIT trap read the caller variable on an unbound-variable error (want=1 got=1)
+  | bash under test: GNU bash, version 3.2.57(1)-release (arm64-apple-darwin25)
+  | live worktree porcelain digest after: f894ce5dd9e1d1dec72c07cfba607d11c3580b4a494764f78cc66e1e48d9553c
+PASS live worktree unchanged (want=f894ce5dd9e1d1dec72c07cfba607d11c3580b4a494764f78cc66e1e48d9553c got=f894ce5dd9e1d1dec72c07cfba607d11c3580b4a494764f78cc66e1e48d9553c)
+verify failures=0

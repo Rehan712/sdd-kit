@@ -1,0 +1,38 @@
+worktree porcelain digest before: 099933954b294dba808b744ac975a5296920edbee3460cfdf0b06dc994ab2b89
+PASS live .specify/specs/003-gate-round-reduction-and-token-discipline/STATUS.md equals cur/ before the swap
+PASS live .specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md equals cur/ before the swap
+PASS live scripts/verification-lib.sh equals cur/ before the swap
+PASS live templates/verification-contract.md equals cur/ before the swap
+PASS live tests/helpers.sh equals cur/ before the swap
+PASS live tests/test-build-adapters.sh equals cur/ before the swap
+PASS live tests/test-executable-bits.sh equals cur/ before the swap
+PASS live tests/test-gate-contracts.sh equals cur/ before the swap
+PASS live tests/test-golden-example.sh equals cur/ before the swap
+PASS live tests/test-model-policy.sh equals cur/ before the swap
+PASS live tests/test-spec-dispatch.sh equals cur/ before the swap
+PASS live tests/test-spec-gate.sh equals cur/ before the swap
+PASS live tests/test-usage-limits.sh equals cur/ before the swap
+PASS live tests/test-verification.sh equals cur/ before the swap
+post identity before the swap: 3c2109451e59e34496b12c4d3c1a486552985e3d8790d954eff364a782a5456b 5795c06d026aa22d9cc62fca592e5e26591dc818da183e08c2d52112f0c949db
+pre identity (rc=0): 0ab7f1236538080c432db57d65abf1d6c54c83b46ec6eff946f92595d590c4c5 b7c824037432a9fe5c7ea839eb3a57ac81f562448a0cc8fb4bdb38118e4faedf
+PASS pre source == handoff source 0ab7f1236538080c432db57d65abf1d6c54c83b46ec6eff946f92595d590c4c5
+PASS pre Decisions == handoff Decisions b7c824037432a9fe5c7ea839eb3a57ac81f562448a0cc8fb4bdb38118e4faedf
+PASS live .specify/specs/003-gate-round-reduction-and-token-discipline/STATUS.md restored byte-identical
+PASS live .specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md restored byte-identical
+PASS live scripts/verification-lib.sh restored byte-identical
+PASS live templates/verification-contract.md restored byte-identical
+PASS live tests/helpers.sh restored byte-identical
+PASS live tests/test-build-adapters.sh restored byte-identical
+PASS live tests/test-executable-bits.sh restored byte-identical
+PASS live tests/test-gate-contracts.sh restored byte-identical
+PASS live tests/test-golden-example.sh restored byte-identical
+PASS live tests/test-model-policy.sh restored byte-identical
+PASS live tests/test-spec-dispatch.sh restored byte-identical
+PASS live tests/test-spec-gate.sh restored byte-identical
+PASS live tests/test-usage-limits.sh restored byte-identical
+PASS live tests/test-verification.sh restored byte-identical
+post identity after the restore: 3c2109451e59e34496b12c4d3c1a486552985e3d8790d954eff364a782a5456b 5795c06d026aa22d9cc62fca592e5e26591dc818da183e08c2d52112f0c949db
+PASS post identity unchanged by the swap
+worktree porcelain digest after: 099933954b294dba808b744ac975a5296920edbee3460cfdf0b06dc994ab2b89
+PASS worktree status unchanged
+pre-verify failures=0

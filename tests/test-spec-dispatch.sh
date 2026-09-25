@@ -13,7 +13,9 @@
 stage_umbrella() {
   local kit="$SANDBOX/kit" dir="$SANDBOX/kit/specs/001-demo"
   mkdir -p "$kit" "$dir"
-  cp -R "$KIT_DIR/scripts" "$kit/scripts"
+  # The kit's scripts as the input identity enumerates them (copy_kit's directory selector), so a
+  # developer's ignored entry under scripts/ never arrives (O-015 second review).
+  copy_kit "$KIT_DIR" "$kit" scripts || { fixture_build_failed 'stage_umbrella kit scripts'; echo "$dir"; return 1; }
   cat > "$dir/spec.md" <<'EOF'
 ---
 spec: 001-demo
@@ -46,6 +48,33 @@ test_undeclared_repo_refused_and_declared_accepted_past_the_guard() {
   # no --to, the next stop is exit 3 (no mapping) — never the exit-2 refusal.
   run_rc 3 bash "$SANDBOX/kit/scripts/spec-dispatch.sh" implement "$dir" --repo alpha-api
   assert_contains "$OUT" "no dispatch mapping"
+}
+
+# O-015 second review: stage_umbrella copies the kit's scripts as the input
+# identity enumerates them, so an ignored script in a developer's kit never
+# reaches the staged dispatcher's kit.
+test_stage_umbrella_copies_only_enumerated_scripts() {
+  local host="$SANDBOX/host-kit"
+  make_host_kit "$host" || t_fail 'cannot build the host kit'
+  printf 'scripts/zz-local.sh\n' >> "$host/.git/info/exclude"
+  printf 'echo local\n' > "$host/scripts/zz-local.sh"
+  on_host_kit "$host" stage_umbrella > /dev/null
+  [[ -f "$SANDBOX/kit/scripts/spec-dispatch.sh" ]] || t_fail 'stage_umbrella did not stage the dispatcher'
+  [[ ! -e "$SANDBOX/kit/scripts/zz-local.sh" ]] || t_fail "stage_umbrella staged the host kit's ignored script"
+}
+
+# O-015 review 6: stage_umbrella's output is a path its callers use, so a
+# failed copy is recorded and the sandbox path is still printed.
+test_stage_umbrella_failure_is_named_and_stays_in_the_sandbox() {
+  local sub="$SANDBOX/failing-sandbox" nokit="$SANDBOX/not-a-kit" printed
+  mkdir -p "$sub" "$nokit"
+  if printed="$(SANDBOX="$sub" on_host_kit "$nokit" stage_umbrella 2>/dev/null)"; then
+    t_fail 'stage_umbrella reported success for a copy that failed'
+  fi
+  [[ "$printed" == "$sub"/* && "$printed" != *$'\n'* ]] \
+    || t_fail "stage_umbrella handed its caller a path outside the sandbox: '$printed'"
+  assert_contains "$(cat "$sub/.fixture-build-failed" 2>/dev/null)" 'stage_umbrella kit scripts' \
+    'stage_umbrella left no record of the failed copy'
 }
 
 t_run_all
