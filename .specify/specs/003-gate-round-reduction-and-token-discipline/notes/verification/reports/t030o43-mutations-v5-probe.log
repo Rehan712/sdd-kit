@@ -1,0 +1,39 @@
+== baseline shard 0/1 15:31:59Z
+PASS B report_manifest_locale_cases unmutated passes
+PASS B round_locale_cases unmutated passes
+PASS B floor_parse_fault_cases unmutated passes
+PASS B acceptance_parse_fault_cases unmutated passes
+PASS B checkpoint_parse_fault_cases unmutated passes
+PASS B analyzer_locale_and_fault_cases unmutated passes
+PASS B harness_locale_cases unmutated passes
+PASS B reuse_command_input_cases unmutated passes
+== the pin
+== status reads
+== after the review
+== review 2: the whitespace step (_VF_AWK_WS) and its members
+== review 2: the prior-review manifest pass, keyed on its field lines
+== review 3 (session 9): the manifest pass
+== review 3 (session 9): canonical reports and the matrix
+== review 3 (session 9): values as written and stages
+== review 4 (session 9): the manifest pass
+== session 10: TMPDIR spelled as the physical path of its directory (tests/helpers.sh)
+PASS T01 literal applies once in tests/helpers.sh
+PASS T01 KILLED (judge rc)
+PASS T01 diagnostic: AC-020: a suite kept the spelling of TMPDIR=
+PASS T02 literal applies once in tests/helpers.sh
+PASS T02 KILLED (judge rc)
+PASS T02 diagnostic: a task reference inventory that could not be read read as no dangling ref (T030o43)
+PASS T03 literal applies once in tests/helpers.sh
+PASS T03 KILLED (judge rc)
+PASS T03 diagnostic: made a sandbox a program prints differently (T030o43)
+PASS T04 literal applies once in tests/helpers.sh
+PASS T04 KILLED (judge rc)
+PASS T04 diagnostic: AC-020: a suite without TMPDIR did not export the physical /tmp (T030o43)
+PASS T05 literal applies once in tests/helpers.sh
+PASS T05 KILLED (judge rc)
+PASS T05 diagnostic: AC-020: a TMPDIR naming no directory was not refused by name (T030o43)
+PASS T06 literal applies once in tests/helpers.sh
+PASS T06 KILLED (judge rc)
+PASS T06 diagnostic: AC-020: a suite without TMPDIR did not export the physical /tmp (T030o43)
+== done shard 0/1 15:41:13Z rows=153
+t030o43-mutations failures=0

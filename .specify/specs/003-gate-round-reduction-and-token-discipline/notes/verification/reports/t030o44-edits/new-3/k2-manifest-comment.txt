@@ -1,0 +1,40 @@
+    # The pass reads by the canonical finding's own field grammar, keyed on
+    # the lines that carry a record rather than on a heading it might not see
+    # (T030o43 reviews 1 to 4), and what it cannot read it refuses by name,
+    # never reads as prose (O-018). A heading is an ATX heading (up to three
+    # spaces, a run of `#`, then a space, a tab or the end). One whose first
+    # word is `Finding` in any case and whose second is a finding ID opens a
+    # finding, a title allowed after; any other heading vf_finding_heading
+    # reads as a Finding heading is refused. A finding is the section its
+    # heading opens: a heading as shallow as that one closes it, and a deeper
+    # heading is one of its lines, classified like any other (O-019). A line
+    # not read as a heading whose text, after leading whitespace or invisible
+    # characters, is a `#` run and the word Finding is refused by name, so a
+    # finding's fields cannot fall into the one above it (R3-F3). A field is
+    # decided by its label, read by vf_label from the line as written and as
+    # rendered (R3-F2, R4-F2, O-018): Class or Severity. Inside a finding such
+    # a line must be a dash, whitespace and `**Class:**` or `**Severity:**`, at
+    # any indentation, appear once, and carry a value of its grammar, which is
+    # the text after that label and nothing further (R3-F1); anything else --
+    # a heading, or a label behind inline HTML, included -- is refused by name.
+    # The list item a field line opens holds that line only: a line that would
+    # continue its paragraph, or any further text inside the item, is read by
+    # a reader as part of the field and is refused by name, unless the pass
+    # reads that line as a field line of its own (T030o44 review F10). Every finding needs one readable Class and one readable Severity,
+    # so a tier the pass does not read is refused with its finding, never
+    # dropped (O-018). The shared tracker skips quoted content, and as a line
+    # reader without CommonMark's containers it can quote content a renderer
+    # shows, so a quoted Finding heading, and inside a finding a quoted line
+    # that carries a record of it (vf_record), is refused by name, never
+    # skipped (T030o44 review F4); a quoted field line outside any finding
+    # attaches to none. Outside any finding that
+    # written spelling is refused, and any other such line is prose only while
+    # nothing since the last heading can hold a finding's record: a finding
+    # ID on the heading or a line, or a heading whose second word is Finding
+    # (R3-F5, R4-F1). Quoting left open at the end, and a manifest from which
+    # no finding is read (R4-F4), are refused by name. A finding whose opening
+    # line is no heading at all (a setext heading, raw HTML, a bold line, a
+    # heading inside a list item) is recorded extent: its Class and Severity
+    # lines are refused, inside another finding as second fields and outside
+    # any once its ID is seen. A byte-order mark on the first line is not
+    # part of it.

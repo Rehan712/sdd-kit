@@ -1,0 +1,19 @@
+Hosted CI portability verification — 2026-09-23 (after the T030o39/T030o40 repairs)
+Workflow: .github/workflows/ci.yml, unmodified (it is part of the snapshot tree).
+Run: https://github.com/Rehan712/sdd-kit/actions/runs/35854215839 — attempt 1, event pull_request, draft do-not-merge PR #17.
+Source identity: d27bab536454eead9135c5d502962488e653eef8277006b50eeb5d43b22b4466 (sha256 of ci-20260923/snapshot/inputs.nul; equal to CAP-411-B8GLAC and CAP-412-59sk66 input_before).
+Snapshot: commit b458f96e53074420477f1d70eceb931af3203e16, tree 3e638490ed9a92bcdb8faff9fdd529b4e7021a15, parent 0d55c62b01cd3e2295ca34b048a212780dd92c00; built through a temporary index (real index, HEAD and spec branch unchanged).
+Mapping (ci-20260923/build.log, build.rc = 0): 5,837 listed paths = 5,837 tree entries; 176/176 manifest path records equal their tree entries after vf_semantic_file, with equal modes (170 as on 2026-09-22 plus 001/002's six gate-report files, which are ordinary source under the O-013 anchoring); the other 5,661 entries all satisfy the ANCHORED vf_bookkeeping_path (anchor .specify/specs/003-gate-round-reduction-and-token-discipline, fold=1).
+Tested commit: GitHub merge 18c1e6b8dbc5c83b7189c7651ff0a0c6073b7435 (parents f4a0e4e = main, b458f96e = snapshot); its tree is 3e638490…, identical to the snapshot (collect.log, via the GitHub API). All four jobs fetched and checked out that merge ref.
+Jobs (conclusion; runner image; interpreter/tool; result):
+- shellcheck: success; ubuntu-24.04 20260920.314.1; ShellCheck 0.9.0-1 per that image's manifest; step shell /usr/bin/bash; `shellcheck -S warning -x scripts/*.sh tests/*.sh`.
+- tests (ubuntu-latest): success; ubuntu-24.04 20260920.314.1; Bash 5.2.21(1)-release; 15 suites, 130/130, 130 ok lines, 0 FAIL lines.
+- tests (macos-latest): success; macos-26-arm64 20260907.0351.1; Bash 3.2.57(1)-release, the only bash that image's manifest lists; 15 suites, 130/130, 0 FAIL lines.
+- tests-bash32: success; macos-26-arm64 20260907.0351.1; /bin/bash 3.2.57 via the workflow's PATH shim; 15 suites, 130/130, 0 FAIL lines.
+Exits: every job conclusion is success (run-35854215839/jobs.json); no "Process completed with exit code" line appears in any job log; the suite's failure marker ("  FAIL <fn>", tests/helpers.sh:369) occurs zero times. Remaining indented non-ok lines are actions/checkout input echoes and git's detached-HEAD hint.
+Tool identities: runner image names and versions from each job's "Set up job" log; Bash/ShellCheck versions from the actions/runner-images manifests at those exact image versions, fetched 2026-09-22 and reused (ci-20260922/runner-images/ubuntu24-20260920.314.md, macos-26-arm64-20260907.0351.md) because both images are identical to that run's. The workflow was not edited to print versions, because that would change the source under test.
+Case-sensitivity note: the Ubuntu jobs run the non-folding branch of the T030o39 fixtures (including the case-swapped alias guard) and the macOS jobs the folding branch; locally both branches also ran (tests/test-verification.sh 3/3 on APFS and on a case-sensitive APFS image).
+Credentials: pushes and PR operations ran as Rehan712 through a process-scoped GH_TOKEN; the active gh account (gymcoachpro) was never switched, and the token was never printed.
+Limits: Bash 5 is exercised on Ubuntu only (the macOS image lists no Homebrew bash). Normal CI on the eventual guarded PR (T032) is still required before merge. This evidence binds source d27bab53…; any later source change makes it historical.
+Cleanup: PR #17 closed unmerged at 2026-09-23T11:48:18Z; branch ci-snapshot/spec-003-20260923 deleted (ci-20260923/pr-final-state.txt: state=CLOSED, mergedAt=null, remote branch absent). GitHub retains the closed PR and its commit publicly.
+Collector: ci-20260923/collect.sh, collect.log, collect.rc = 0 (collect result: PASS); finish.sh, finish.log, finish.rc = 0.

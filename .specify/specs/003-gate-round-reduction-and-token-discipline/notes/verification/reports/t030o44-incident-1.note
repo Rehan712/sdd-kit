@@ -1,0 +1,18 @@
+INCIDENT, 2026-10-01 (session 12), caused by the invoker. To collect the diagnostics the manifest refusal table's rows
+produce, the invoker ran, with the live worktree as the working directory, a command that SOURCED
+tests/helpers.sh and tests/test-gate-contracts.sh in order to reuse tier_round_fixture. A suite file ends in
+`t_run_all`, so sourcing it began running the whole test-gate-contracts suite IN THE LIVE WORKTREE, which the
+standing rules forbid (exploratory runs go in standalone copies). Its output went to /dev/null.
+- Start: immediately after the scratch file .../scratchpad/s12/refuse-diags/rows was written, 2026-10-01T17:55:51Z.
+- Stopped: about 2.5 minutes later. The invoker found the process tree with ps (pids 2655, 54691, 54692, 89161, an
+  orphan 97205, and the tool shell 2636) and sent SIGTERM to each; a re-check found none left. The independent
+  reviewer's processes under /private/tmp/rev-t030o44 were not touched.
+- Damage check, against that marker file: `find <worktree> -path <worktree>/.git -prune -o -newer <marker> -print`
+  printed nothing (no file or directory under the worktree was modified, created or deleted afterwards: a creation
+  or deletion changes its parent directory's mtime), and the same find over the worktree's git directory
+  (.git/worktrees/003-...) and over the main repository's .git printed nothing; `git status --porcelain` shows no
+  deleted tracked file; scripts/verification-lib.sh, tests/test-gate-contracts.sh, tests/test-spec-gate.sh and
+  templates/verification-contract.md still hash as t030o44-edits/post-apply-2.sha256 records.
+- Cause: a helper was borrowed by sourcing a whole suite file. Rule kept from it: a helper needed outside a suite is
+  extracted (awk the one function out into a scratch file) and never sourced with its suite, and nothing from
+  tests/ is sourced with the live worktree as the working directory.

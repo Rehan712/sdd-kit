@@ -1,0 +1,41 @@
+@@OLD
+. "$HUB_DIR/scripts/lib.sh"
+
+init_colors
+@@NEW
+. "$HUB_DIR/scripts/lib.sh"
+# The kernel pins the harness's own parsing to LC_ALL=C when it loads, so it
+# loads before any program reads a byte of the spec (O-017).
+. "$HUB_DIR/scripts/verification-lib.sh"
+
+init_colors
+@@END
+@@OLD
+# Legacy evidence remains readable; new contracts need current proof by default.
+. "$HUB_DIR/scripts/verification-lib.sh"
+if [[ "${2:-}" == --current || "$(fm_get "$SPEC_FILE" verification_contract 2>/dev/null || :)" == 1 ]]; then
+@@NEW
+# Legacy evidence remains readable; new contracts need current proof by default.
+# A frontmatter that cannot be read is a failure, never the legacy check.
+evidence_contract="$(vf_fm_value "$SPEC_FILE" verification_contract)" || exit 3
+if [[ "${2:-}" == --current || "$evidence_contract" == 1 ]]; then
+@@END
+@@OLD
+  END { flush() }
+' "$TASKS_FILE")"
+@@NEW
+  END { flush() }
+' "$TASKS_FILE")" || { fail "tasks.md could not be parsed for its task records"; records=''; }
+@@END
+@@OLD
+  for art in $(printf '%s\n' "$ev" | grep -oiE '[[:graph:]]+\.(png|jpg|jpeg|gif|svg|pdf)' || true); do
+@@NEW
+  arts="$(printf '%s\n' "$ev" | grep -oiE '[[:graph:]]+\.(png|jpg|jpeg|gif|svg|pdf)')"; arts_rc=$?
+  (( arts_rc < 2 )) || fail "$id evidence could not be searched for artifact names"
+  for art in $arts; do
+@@END
+@@OLD
+done <<< "$records"
+@@NEW
+done < <(printf '%s\n' "$records")
+@@END

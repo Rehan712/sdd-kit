@@ -1,0 +1,75 @@
+== baselines
+== kill K52-fixture-git-unpinned
+  | fixture_repository_cases rc=1
+  |   assert: AC-020: make_verification_git_dir failed under a user's git configuration
+  |   assert: AC-020: a user's git hooks, signing or template left the fixture repository without a commit
+PASS K52-fixture-git-unpinned KILLED (want=1 got=1)
+== kill K53-fixture-git-honours-a-template
+  | fixture_repository_cases rc=1
+  |   assert: AC-020: make_verification_git_dir failed under a user's git configuration
+  |   assert: AC-020: a user's git hooks, signing or template left the fixture repository without a commit
+PASS K53-fixture-git-honours-a-template KILLED (want=1 got=1)
+== kill K54-fixture-git-reads-global-configuration
+  | fixture_repository_cases rc=1
+  |   assert: AC-020: make_verification_git_dir failed under a user's git configuration
+  |   assert: AC-020: a user's git hooks, signing or template left the fixture repository without a commit
+PASS K54-fixture-git-reads-global-configuration KILLED (want=1 got=1)
+== equiv E10-fixture-git-reads-system-attributes
+  | fixture_repository_cases rc=0
+PASS E10-fixture-git-reads-system-attributes SURVIVES (argued equivalent) (want=1 got=1)
+== kill K55-fixture-build-failure-ignored
+  | fixture_repository_cases rc=1
+  |   assert: expected exit 1, got 0: make_verification_git_dir failing
+  |   assert: AC-020: a fixture repository that could not be built was not reported missing substring: make_verification_git_dir: cannot build the fixture repository
+PASS K55-fixture-build-failure-ignored KILLED (want=1 got=1)
+== kill K56-git-host-builds-with-raw-git
+  | fixture_repository_cases rc=1
+  |   assert: AC-020: a template's hook reached a host repository
+  |   assert: AC-020: a template's info/exclude reached a host repository
+PASS K56-git-host-builds-with-raw-git KILLED (want=1 got=1)
+== kill K66-make-verification-git-dir-pre-repair
+  | fixture_repository_cases rc=1
+  |   assert: AC-020: a user's git hooks, signing or template left the fixture repository without a commit
+  |   assert: AC-020: a template's info/exclude kept files out of the fixture repository missing substring: tests/check.sh
+PASS K66-make-verification-git-dir-pre-repair KILLED (want=1 got=1)
+== kill K57-kit-copy-fixture-pre-repair
+  | kit_copy_cases@hostile rc=1
+  |   assert: AC-020: copy_kit dropped the enumerated path .gitignore
+  |   assert: AC-020: copy_kit dropped the enumerated path docs/tracked.md
+PASS K57-kit-copy-fixture-pre-repair KILLED (want=1 got=1)
+== kill K59-scan-tree-1-built-with-raw-git
+  | superseded_environment_cases@hostile rc=1
+  |   assert: AC-018: the superseded claim survived as verbatim.md missing substring: verbatim.md
+  |   assert: AC-018: the superseded claim survived as hardwrapped.md missing substring: hardwrapped.md
+PASS K59-scan-tree-1-built-with-raw-git KILLED (want=1 got=1)
+== kill K60-scan-tree-2-built-with-raw-git
+  | superseded_environment_cases@hostile rc=0
+FAIL K60-scan-tree-2-built-with-raw-git KILLED (want=1 got=0)
+== kill K63-scan-tree-3-built-with-raw-git
+  | superseded_environment_cases@hostile rc=1
+  |   assert: AC-018: a claim on a spec body line escaped the scan missing substring: .specify/specs/004-y/tasks.md ::
+  |   assert: AC-018: a claim in a file whose name git quotes escaped the scan: café.md missing substring: café.md ::
+PASS K63-scan-tree-3-built-with-raw-git KILLED (want=1 got=1)
+== kill K64-tally-host-built-with-raw-git
+  | test_empty_record_directories_do_not_decide_the_002_tally@hostile rc=1
+  |   assert: expected exit 0, got 2: bash /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/1c1e945f-3f81-4ba8-8888-8263f1ca2273/scratchpad/t030o41-mut/copy/scripts/spec-gate.sh tally 
+  |   assert: output missing substring: opponent rounds=5
+PASS K64-tally-host-built-with-raw-git KILLED (want=1 got=1)
+== kill K65-doctor-host-built-with-raw-git
+  | test_AC_009_doctor_fixture_excludes_machine_local_kit_files@hostile rc=1
+  |   assert: expected exit 0, got 127: run_doctor
+  |   assert: AC-009: the host's ignored models.yml reached the doctor fixture missing substring: models.yml not configured
+PASS K65-doctor-host-built-with-raw-git KILLED (want=1 got=1)
+== equiv E11-letterless-spec-fixture-pre-repair
+  | bookkeeping_anchor_cases@hostile rc=0
+PASS E11-letterless-spec-fixture-pre-repair SURVIVES (argued equivalent) (want=1 got=1)
+== equiv E12-ac-coverage-root-built-with-raw-git
+  | test_default_root_is_the_git_toplevel@hostile rc=0
+PASS E12-ac-coverage-root-built-with-raw-git SURVIVES (argued equivalent) (want=1 got=1)
+== equiv E13-index-edits-with-raw-git
+  | test_capture_provenance@hostile rc=0
+PASS E13-index-edits-with-raw-git SURVIVES (argued equivalent) (want=1 got=1)
+== equiv E14-ignored-nested-clone-built-with-raw-git
+  | test_ignored_local_scripts_do_not_reach_the_documented_workflow@hostile rc=0
+PASS E14-ignored-nested-clone-built-with-raw-git SURVIVES (argued equivalent) (want=1 got=1)
+matrix failures=1

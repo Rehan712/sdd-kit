@@ -1,0 +1,21 @@
+@@OLD
+  printf '# Prior review\n\n### Finding G-042\n- **Class:** tier-binding\n- **Severity:** data-loss\n' \
+    > "$spec/notes/verification/reports/opponent-findings-review.md"
+  fault_bin "$SANDBOX/fault-manifest-sort" sort 'manifest-locale.nul.'
+@@NEW
+  # The same field grammar a canonical finding obeys: a finding with no Class,
+  # a Class or a Severity it does not define, is refused, never dropped.
+  local body
+  for body in '### Finding G-042\n- **Severity:** data-loss\n' \
+      '### Finding G-042\n- **Class:** Tier-Binding\n- **Severity:** data-loss\n' \
+      '### Finding G-042\n- **Class:** tier-binding\n- **Severity:** data loss\n'; do
+    printf '# Prior review\n\n%b' "$body" > "$spec/notes/verification/reports/opponent-findings-review.md"
+    run_rc 3 bash -c '. "$1"; vf_reports "$2" opponent "$3" "$4"' _ \
+      "$SCRIPTS/verification-lib.sh" "$report" "$SANDBOX/manifest-locale.nul" "$spec"
+    assert_contains "$OUT" 'prior-review manifest could not be parsed' \
+      "AC-012: a manifest finding its grammar cannot read was not refused by name: $body (T030o43 review)"
+  done
+  printf '# Prior review\n\n### Finding G-042\n- **Class:** tier-binding\n- **Severity:** data-loss\n' \
+    > "$spec/notes/verification/reports/opponent-findings-review.md"
+  fault_bin "$SANDBOX/fault-manifest-sort" sort 'manifest-locale.nul.'
+@@END

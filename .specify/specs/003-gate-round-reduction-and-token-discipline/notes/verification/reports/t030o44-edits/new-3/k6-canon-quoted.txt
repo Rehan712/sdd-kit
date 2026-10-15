@@ -1,0 +1,29 @@
+    # A Class, Severity or Status field decides a binding, a tier or a count
+    # by its value, and a reader reads the whole list item its line opens: a
+    # line that would continue its paragraph, or any further text inside the
+    # item, is read there as part of the field, so that item holds the field
+    # line only, or a line this pass reads as a field line of its own
+    # (T030o44 review F10). It is checked before quoting is, because
+    # the tracker can quote a line a renderer continues the paragraph with.
+    itemfield != "" {
+      if ($0 ~ /^[ \t]*$/) itemblank=1
+      else {
+        ii=match($0, /[^ ]/) - 1; fl=($0 ~ /^[ ]*- \*\*(Class|Status|Prior|Severity|Where|Root cause|Scenario|Reproduced|Blocks|Wrong behavior|Class-wide fix):\*\*/)
+        if (substr($0, ii + 1, 1) == "\t" || (!fl && (ii >= itemind + 2 || (!itemblank && !vf_block_start(substr($0, ii + 1))))))
+          err("a " itemfield " field whose list item holds more than its line in finding " itemid)
+        itemfield=""
+      }
+    }
+    vf_quoted($0) {
+      # Quoting does not exempt a line from the after-marker rule: a fenced,
+      # commented or blockquoted preamble is still content the accumulator
+      # would attribute to the sealed round above it.
+      if (ended && $0 !~ /^[ ]*$/) err("content after the round completion marker")
+      # The tracker is a line reader that does not track CommonMark containers,
+      # so what it quotes can be content a renderer shows (T030o44 review F4):
+      # in a canonical round, a quoted Finding heading, or inside a finding a
+      # quoted line that carries a record of it, is refused by name, never
+      # skipped. A quoted field line outside any finding attaches to none.
+      else if (style=="canonical" && active && (shape=vf_record($0)) != "" && (fid != "" || shape == "Finding heading")) err("quoted content carries a " shape)
+      next
+    }

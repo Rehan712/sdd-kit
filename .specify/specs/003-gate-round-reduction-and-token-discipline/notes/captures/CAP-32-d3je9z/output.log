@@ -1,0 +1,96 @@
+  ok   test_acceptance
+  ok   test_checkpoints
+  ok   test_floor
+  ok   test_manual_acceptance
+  FAIL test_prepared_before_recovery
+       assert: expected exit 0, got 3: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-gate.sh accept /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.wGG1UA/recovery/.specify/specs/003-verification-fixture T001 /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.wGG1UA/return
+           output: mktemp: mkdtemp failed on /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.wGG1UA/recovery/.specify/specs/003-verification-fixture/notes/verification/accept-events/.event.sUqg5C: No space left on device
+       cp: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.wGG1UA/concurrent-tasks: No space left on device
+       assert: output missing substring: neither prepared before nor after
+           in: verification lock exists: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.wGG1UA/recovery/.specify/specs/003-verification-fixture/notes/verification/lock; inspect owner and reconcile interrupted writer
+       assert: expected exit 0, got 2: cmp /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.wGG1UA/concurrent-tasks /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.wGG1UA/recovery/.specify/specs/003-verification-fixture/tasks.md
+           output: cmp: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.wGG1UA/concurrent-tasks: No such file or directory
+  FAIL test_rounds
+       error: could not write config file /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.rb2B2x/authorization/.git/config: No space left on device
+       fatal: could not set 'core.logallrefupdates' to 'true'
+       fatal: not a git repository (or any of the parent directories): .git
+       fatal: not a git repository (or any of the parent directories): .git
+       assert: expected exit 0, got 4: vf_round_authorized /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.rb2B2x/authorization/.specify/specs/003-verification-fixture opponent 4 2026-01-01T23:59:59Z
+           output: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/verification-lib.sh: line 1827: cannot create temp file for here document: No space left on device
+       round authorization denied: opponent round 4 needs an exact-round user waiver/spec revision after round 3
+       tests/test-spec-gate.sh: line 335: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.rb2B2x/spec-revision: No space left on device
+       cp: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.rb2B2x/spec-revision: No such file or directory
+       assert: expected exit 0, got 4: vf_round_authorized /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.rb2B2x/authorization/.specify/specs/003-verification-fixture reality-check 4 2026-01-01T00:00:00Z
+           output: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/verification-lib.sh: line 1827: cannot create temp file for here document: No space left on device
+       round authorization denied: reality-check round 4 needs an exact-round user waiver/spec revision after round 3
+       mkdir: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.rb2B2x/rounds: No space left on device
+       mkdir: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.rb2B2x/rounds: No space left on device
+       mkdir: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.rb2B2x/rounds: No space left on device
+       tests/helpers.sh: line 64: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.rb2B2x/rounds/.specify/stack.yml: No such file or directory
+       tests/helpers.sh: line 190: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.rb2B2x/rounds/agents/opponent.agent.md: No such file or directory
+       tests/helpers.sh: line 191: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.rb2B2x/rounds/agents/reality-check.agent.md: No such file or directory
+       tests/helpers.sh: line 193: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.rb2B2x/rounds/.specify/specs/003-verification-fixture/spec.md: No such file or directory
+       tests/helpers.sh: line 216: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.rb2B2x/rounds/.specify/specs/003-verification-fixture/plan.md: No such file or directory
+       tests/helpers.sh: line 246: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.rb2B2x/rounds/.specify/specs/003-verification-fixture/STATUS.md: No such file or directory
+       tests/helpers.sh: line 259: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.rb2B2x/rounds/.specify/specs/003-verification-fixture/tasks.md: No such file or directory
+       tests/helpers.sh: line 382: cd: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.rb2B2x/rounds/.specify/specs/003-verification-fixture/../../..: No such file or directory
+       mkdir: /src: Read-only file system
+       mkdir: /tests: Read-only file system
+       mkdir: /scripts: Read-only file system
+       mkdir: /docs: Read-only file system
+       tests/helpers.sh: line 384: /src/parser.sh: No such file or directory
+       tests/helpers.sh: line 385: /tests/check.sh: No such file or directory
+       error: could not lock config file /Users/babar/projects/sdd-kit-public/.git/config: No space left on device
+       error: could not lock config file /Users/babar/projects/sdd-kit-public/.git/config: No space left on device
+       error: could not lock config file /Users/babar/projects/sdd-kit-public/.git/config: No space left on device
+       fatal: could not set 'core.repositoryformatversion' to '0'
+       fatal: Unable to create '/Users/babar/projects/sdd-kit-public/.git/worktrees/003-gate-round-reduction-and-token-discipline/index.lock': No space left on device
+       fatal: Unable to create '/Users/babar/projects/sdd-kit-public/.git/worktrees/003-gate-round-reduction-and-token-discipline/index.lock': No space left on device
+       tests/test-spec-gate.sh: line 113: cd: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.rb2B2x/rounds/.specify/specs/003-verification-fixture/../../..: No such file or directory
+       mkdir: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.rb2B2x/floor-kit-: No space left on device
+       cp: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.rb2B2x/floor-kit-/scripts: No such file or directory
+       mv: rename /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.rb2B2x/floor-kit-/scripts/sdd-analyze.sh to /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.rb2B2x/floor-kit-/scripts/sdd-analyze-real.sh: No such file or directory
+       tests/test-spec-gate.sh: line 120: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.rb2B2x/floor-kit-/scripts/sdd-analyze.sh: No such file or directory
+       mv: rename /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.rb2B2x/floor-kit-/scripts/spec-ac-coverage.sh to /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.rb2B2x/floor-kit-/scripts/spec-ac-coverage-real.sh: No such file or directory
+       tests/test-spec-gate.sh: line 120: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.rb2B2x/floor-kit-/scripts/spec-ac-coverage.sh: No such file or directory
+       mv: rename /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.rb2B2x/floor-kit-/scripts/spec-evidence.sh to /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.rb2B2x/floor-kit-/scripts/spec-evidence-real.sh: No such file or directory
+       tests/test-spec-gate.sh: line 120: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.rb2B2x/floor-kit-/scripts/spec-evidence.sh: No such file or directory
+       tests/test-spec-gate.sh: line 122: /tests/check.sh: No such file or directory
+       tests/test-spec-gate.sh: line 123: /tests/static.sh: No such file or directory
+       tests/test-spec-gate.sh: line 124: /.specify/stack.yml: No such file or directory
+       assert: expected exit 0, got 127: bash /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.rb2B2x/floor-kit-/scripts/spec-gate.sh floor /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.rb2B2x/rounds/.specify/specs/003-verification-fixture
+           output: bash: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.rb2B2x/floor-kit-/scripts/spec-gate.sh: No such file or directory
+       assert: expected exit 0, got 127: bash /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.rb2B2x/floor-kit-/scripts/spec-gate.sh round /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.rb2B2x/rounds/.specify/specs/003-verification-fixture opponent
+           output: bash: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.rb2B2x/floor-kit-/scripts/spec-gate.sh: No such file or directory
+       assert: output missing substring: round=1 gate=opponent
+           in: bash: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.rb2B2x/floor-kit-/scripts/spec-gate.sh: No such file or directory
+       assert: expected exit 3, got 127: bash /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.rb2B2x/floor-kit-/scripts/spec-gate.sh round /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.rb2B2x/rounds/.specify/specs/003-verification-fixture opponent
+           output: bash: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.rb2B2x/floor-kit-/scripts/spec-gate.sh: No such file or directory
+       assert: output missing substring: interrupted invocation
+           in: bash: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.rb2B2x/floor-kit-/scripts/spec-gate.sh: No such file or directory
+       tests/test-spec-gate.sh: line 211: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.rb2B2x/report.md: No space left on device
+       tests/test-spec-gate.sh: line 251: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.rb2B2x/bad-report: No space left on device
+       assert: expected exit 3, got 127: bash /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.rb2B2x/floor-kit-/scripts/spec-gate.sh round /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.rb2B2x/rounds/.specify/specs/003-verification-fixture opponent --complete /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.rb2B2x/bad-report
+           output: bash: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.rb2B2x/floor-kit-/scripts/spec-gate.sh: No such file or directory
+       assert: output missing substring: identities/timestamp differ
+           in: bash: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.rb2B2x/floor-kit-/scripts/spec-gate.sh: No such file or directory
+       assert: expected exit 0, got 127: bash /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.rb2B2x/floor-kit-/scripts/spec-gate.sh round /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.rb2B2x/rounds/.specify/specs/003-verification-fixture opponent --complete /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.rb2B2x/report.md
+           output: bash: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.rb2B2x/floor-kit-/scripts/spec-gate.sh: No such file or directory
+       assert: output missing substring: round completed
+           in: bash: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.rb2B2x/floor-kit-/scripts/spec-gate.sh: No such file or directory
+       assert: expected exit 0, got 127: bash /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.rb2B2x/floor-kit-/scripts/spec-gate.sh round /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.rb2B2x/rounds/.specify/specs/003-verification-fixture opponent
+           output: bash: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.rb2B2x/floor-kit-/scripts/spec-gate.sh: No such file or directory
+       assert: output missing substring: round=2 gate=opponent
+           in: bash: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.rb2B2x/floor-kit-/scripts/spec-gate.sh: No such file or directory
+       assert: expected exit 3, got 127: bash /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.rb2B2x/floor-kit-/scripts/spec-gate.sh round /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.rb2B2x/rounds/.specify/specs/003-verification-fixture opponent
+           output: bash: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.rb2B2x/floor-kit-/scripts/spec-gate.sh: No such file or directory
+       assert: output missing substring: interrupted invocation
+           in: bash: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.rb2B2x/floor-kit-/scripts/spec-gate.sh: No such file or directory
+       tests/test-spec-gate.sh: line 211: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.rb2B2x/report.md: No space left on device
+       tests/test-spec-gate.sh: line 257: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.rb2B2x/rounds/.specify/specs/003-verification-fixture/notes/opponent.md: No such file or directory
+       tests/test-spec-gate.sh: line 258: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.rb2B2x/rounds/.specify/specs/003-verification-fixture/notes/opponent.md: No such file or directory
+       assert: expected exit 0, got 127: bash /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.rb2B2x/floor-kit-/scripts/spec-gate.sh round /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.rb2B2x/rounds/.specify/specs/003-verification-fixture opponent --complete /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.rb2B2x/report.md
+           output: bash: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.rb2B2x/floor-kit-/scripts/spec-gate.sh: No such file or directory
+       assert: output missing substring: round completed
+           in: bash: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.rb2B2x/floor-kit-/scripts/spec-gate.sed: stdout: No space left on device
+  -- 4/6 passed

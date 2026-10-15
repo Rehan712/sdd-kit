@@ -1,0 +1,37 @@
+@@OLD
+  # O-019: a field line under a sub-heading of the manifest finding is read, so
+  # the CLEARED completion is refused on the manifest tier itself.
+@@NEW
+  # The T030o44 review's mechanisms, one spelling each, end to end: a second
+  # manifest tier the label reader reads as written or as rendered (an
+  # autolink, a named reference, an empty link), and a Severity item that holds
+  # more than its line.
+  for row in '- <Severity:data-loss>|a second Severity line in finding G-042' \
+             '- &nbsp;Severity: data-loss|a second Severity line in finding G-042' \
+             '- [](x)**Severity:** data-loss|a second Severity line in finding G-042' \
+             '  data-loss|a Severity field whose list item holds more than its line in finding G-042'; do
+    printf '# Prior review\n\n### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n%s\n' "${row%%|*}" > "$manifest"
+    for l in C en_US.UTF-8; do
+      run_rc 3 in_locale "$l" bash "$cli" round "$spec" opponent --complete "$report"
+      assert_contains "$OUT" "${row#*|}" "AC-009: a CLEARED completion over a second manifest tier written as ${row%%|*} was not refused under LANG=$l (T030o44 review)"
+    done
+  done
+  # O-019: a field line under a sub-heading of the manifest finding is read, so
+  # the CLEARED completion is refused on the manifest tier itself.
+@@END
+@@OLD
+  assert_contains "$OUT" 'duplicate finding field' 'AC-009: an indented second Severity lowered a new finding at completion (O-018)'
+@@NEW
+  assert_contains "$OUT" 'duplicate finding field' 'AC-009: an indented second Severity lowered a new finding at completion (O-018)'
+  # A second tier the quoting tracker hides after an empty comment, and a
+  # Severity value continued past its line, are refused at completion (T030o44
+  # review F4, F10).
+  for row in '- **Severity:** minor\n\n<!-->\n\n- **Severity:** data-loss\n\nThe tier above is the one we stand by. -->|quoted content carries a Severity line' \
+             '- **Severity:** minor\n  data-loss|a Severity field whose list item holds more than its line in finding G-050'; do
+    record_line_report "$res" 1 CLEARED 0 1 '### Finding G-050' dup-binding new "${row%%|*}" > "$SANDBOX/record-lines-dup.md"
+    for l in C en_US.UTF-8; do
+      run_rc 3 in_locale "$l" bash "$cli" round "$spec" opponent --complete "$SANDBOX/record-lines-dup.md"
+      assert_contains "$OUT" "${row#*|}" "AC-009: a CLEARED completion over a second tier written as ${row%%|*} was not refused under LANG=$l (T030o44 review)"
+    done
+  done
+@@END

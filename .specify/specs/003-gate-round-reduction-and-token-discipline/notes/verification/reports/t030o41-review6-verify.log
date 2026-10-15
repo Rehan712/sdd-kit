@@ -1,0 +1,35 @@
+  | live worktree porcelain digest before: 01fcac9e38492e6040df7e7d2188284d4beeb7f1d57be32d78108022225bda6e
+PASS live enumeration rc (want=0 got=0)
+PASS copy extraction rc (want=0 got=0)
+PASS copy committed (want=0 got=0)
+== R6-4 K33 survives: the suite-start clearing of git-local names is unjudged
+PASS R6-4 K33 applied (want=0 got=0)
+PASS R6-4 reuse_command_input_cases passes with K33 (want=0 got=0)
+== R6-3 E19 changes a verdict under a failing init
+PASS R6-3 unmutated: the refused init fails the test by name (want=1 got=1)
+PASS R6-3 with the record naming it (want=1 got=1)
+PASS R6-3 E19 site literal applied (want=0 got=0)
+PASS R6-3 with the check removed the test passes with no repository (want=0 got=0)
+== R6-1 after a failed init, a later fixture write climbs into an enclosing repository
+  | repo=/private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/1c1e945f-3f81-4ba8-8888-8263f1ca2273/scratchpad/v6/work/enclosing/sb/probe
+PASS R6-1 the enclosing repository index changed (want=1 got=1)
+  | enclosing index entries now: 12
+== R6-2 copy helpers on a failed copy (mechanism only)
+  | stage_kit: rc=1 printed=[]
+PASS R6-2 stage_kit prints nothing on a failed copy (want=1 got=1)
+  | stage_example: printed=[assert: cannot copy the example as the input identity enumerates it /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/1c1e945f-3f81-4ba8-8888-8263f1ca2273/scratchpad/v6/work/sb-ex/
+PASS R6-2 stage_example captures an assert line into the path (want=1 got=1)
+  | floor_fixture: printed=[assert: AC-007: cannot stage the kit scripts /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/1c1e945f-3f81-4ba8-8888-8263f1ca2273/scratchpad/v6/work/sb-fl/floor-kit-fl/scripts/sp
+PASS R6-2 floor_fixture captures an assert line into the path (want=1 got=1)
+PASS copy unchanged (want=!! tests/.one-build-adapters.sh
+!! tests/.one-golden-example.sh
+!! tests/.one-spec-ac-coverage.sh
+!! tests/.one-spec-gate.sh
+!! tests/.one-verification.sh got=!! tests/.one-build-adapters.sh
+!! tests/.one-golden-example.sh
+!! tests/.one-spec-ac-coverage.sh
+!! tests/.one-spec-gate.sh
+!! tests/.one-verification.sh)
+  | live worktree porcelain digest after: 01fcac9e38492e6040df7e7d2188284d4beeb7f1d57be32d78108022225bda6e
+PASS live worktree unchanged (want=01fcac9e38492e6040df7e7d2188284d4beeb7f1d57be32d78108022225bda6e got=01fcac9e38492e6040df7e7d2188284d4beeb7f1d57be32d78108022225bda6e)
+verify-6 failures=0

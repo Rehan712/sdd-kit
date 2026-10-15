@@ -144,9 +144,13 @@ check_config
 # --- 1b. unresolved clarification markers ---
 # /sdd:specify and /sdd:plan write [NEEDS CLARIFICATION: …] instead of guessing.
 # None may survive into tasking/implementation.
-nc=$(grep -n '\[NEEDS CLARIFICATION' "$spec" "$plan" 2>/dev/null | head -5 || true)
-if [[ -n "$nc" ]]; then
-  fail "unresolved [NEEDS CLARIFICATION] marker(s) — resolve before tasking/implementing:"$'\n'"$(echo "$nc" | sed 's/^/      /')"
+# The search's status is read: an absent marker is the passing result, so a
+# search that failed must not read as one (O-017).
+nc="$(grep -n '\[NEEDS CLARIFICATION' "$spec" "$plan")"; nc_rc=$?
+if (( nc_rc > 1 )); then
+  fail "spec.md and plan.md could not be searched for [NEEDS CLARIFICATION] markers (grep exit $nc_rc)"
+elif [[ -n "$nc" ]]; then
+  fail "unresolved [NEEDS CLARIFICATION] marker(s) — resolve before tasking/implementing:"$'\n'"$(printf '%s\n' "$nc" | head -5 | sed 's/^/      /')"
 else
   pass "no unresolved [NEEDS CLARIFICATION] markers"
 fi
@@ -185,9 +189,10 @@ while IFS= read -r ext; do
 done < <(grep -o '\[EXTERNAL:[^]]*\]' "$spec" 2>/dev/null | sort -u || true)
 
 # --- 2. id inventories ---
-spec_acs=$(grep -oE 'AC-[0-9]{3}' "$spec" | sort -u)
+# Checked inventories: a short one hides an uncovered AC or a dangling ref.
+spec_acs="$(vf_ids 'AC-[0-9]{3}' "$spec")" || fail "spec.md could not be read for its AC ids"
 spec_reqs=$(grep -oE 'REQ-[0-9]{3}' "$spec" | sort -u)
-task_refs=$(grep -oE '(AC|REQ)-[0-9]{3}' "$tasks" | sort -u)
+task_refs="$(vf_ids '(AC|REQ)-[0-9]{3}' "$tasks")" || fail "tasks.md could not be read for its AC and REQ references"
 
 [[ -z "$spec_acs" ]] && fail "spec.md defines no AC-### ids" || pass "spec.md defines $(echo "$spec_acs" | wc -l | tr -d ' ') AC id(s)"
 [[ -z "$spec_reqs" ]] && warn "spec.md defines no REQ-### ids"
@@ -196,8 +201,9 @@ task_refs=$(grep -oE '(AC|REQ)-[0-9]{3}' "$tasks" | sort -u)
 # The two gate tasks enumerate every AC by design, so counting their Refs would
 # make this check vacuously green. A task is a gate iff its block carries an
 # *Agent:* line; coverage counts the other tasks only.
-impl_refs=$(awk '
+impl_refs=$(awk "$_VF_AWK_TEXT"'
   function flush() { if (id != "" && !gate) print buf; id=""; buf=""; gate=0 }
+  vf_quoted($0) { next }
   /^- \[[ xX~]\] \*\*T[0-9]{3}[a-z0-9]*\*\*/ { flush(); match($0, /T[0-9]{3}[a-z0-9]*/); id = substr($0, RSTART, RLENGTH) }
   /^##[^#]/ { flush() }
   /\*Agent:\*/ { gate=1 }
@@ -232,8 +238,9 @@ done
 # An umbrella spec (repos: frontmatter) spans repos; every implementation task
 # must say which repo it lands in, and every tag must name a declared repo.
 declared_repos="$(spec_declared_repos "$SPEC_DIR")"
-task_map="$(awk '
-  /^##[^#]/ { sub(/^##[[:space:]]*/,""); stage=$0 }
+task_map="$(awk "$_VF_AWK_TEXT"'
+  vf_quoted($0) { next }
+  /^##[^#]/ { stage=vf_heading_text(vf_original) }
   /^- \[[ xX~]\] \*\*T[0-9]{3}[a-z0-9]*\*\*/ {
     match($0, /T[0-9]{3}[a-z0-9]*/); id=substr($0,RSTART,RLENGTH)
     tag=""
@@ -271,7 +278,7 @@ fi
 tmp="$(mktemp "${TMPDIR:-/tmp}/sdd-analyze.XXXXXX" 2>/dev/null)" \
   || { echo "  ${RED}✗${RESET} cannot create a temp file under ${TMPDIR:-/tmp}"; exit 1; }
 trap 'rm -f "$tmp"' EXIT
-awk -v RED="$RED" -v YELLOW="$YELLOW" -v RESET="$RESET" '
+awk -v RED="$RED" -v YELLOW="$YELLOW" -v RESET="$RESET" "$_VF_AWK_TEXT"'
   function verify_command(s, rest,close_pos) {
     sub(/^.*\*Verify:\*[[:space:]]*/,"",s)
     if (substr(s,1,1)!="`") return ""
@@ -305,7 +312,8 @@ awk -v RED="$RED" -v YELLOW="$YELLOW" -v RESET="$RESET" '
     }
     id = ""
   }
-  /^##[^#]/ { flush(); sub(/^##[[:space:]]*/,""); stage=$0 }
+  vf_quoted($0) { next }
+  /^##[^#]/ { flush(); stage=vf_heading_text(vf_original) }
   /^- \[[ xX~]\] \*\*T[0-9]{3}[a-z0-9]*\*\*/ {
     flush()
     match($0, /T[0-9]{3}[a-z0-9]*/); id = substr($0, RSTART, RLENGTH)
@@ -353,8 +361,9 @@ check_gate() {  # <label> <subject-or-path-regex>
   fi
   line="${rec##*$'\t'}"
   # The path is the first .md token after the label; annotations (italic or plain
-  # parentheticals, backticks) may surround it.
-  agent_path=$(echo "$line" | sed -E 's/.*\*Agent:\*[[:space:]]*//; s/`//g' | grep -oE '[^ 	)(]+\.md' | head -1 || true)
+  # parentheticals, backticks) may surround it. The line was read through the
+  # kernel's whitespace step, so any whitespace, a U+00A0 included, ends a token.
+  agent_path=$(echo "$line" | sed -E 's/.*\*Agent:\*[[:space:]]*//; s/`//g' | grep -oE '[^[:space:])(]+\.md' | head -1 || true)
   agent_path="${agent_path/#\~\//$HOME/}"   # [[ -f ]] doesn't expand ~
   if [[ -z "$agent_path" ]]; then
     if echo "$line" | grep -q '<'; then

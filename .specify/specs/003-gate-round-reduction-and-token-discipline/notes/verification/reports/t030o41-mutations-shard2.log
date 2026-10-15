@@ -1,0 +1,172 @@
+== baselines
+== kill K03-scan-swallows-enumeration-failure
+  | superseded_environment_cases rc=1
+  |   assert: AC-018: a tree outside any repository was read as clean missing substring: superseded_environment_scan: cannot enumerate
+  |   assert: AC-018: a failing git was read as an empty, clean tree missing substring: superseded_environment_scan: cannot enumerate
+PASS K03-scan-swallows-enumeration-failure KILLED (want=1 got=1)
+== kill K06-scan-normalizes-links-by-name
+  | superseded_environment_cases rc=1
+  |   assert: AC-018: a claim the identity hashes through a link's target escaped the scan missing substring: .specify/specs/005-z/tasks.md ::
+PASS K06-scan-normalizes-links-by-name KILLED (want=1 got=1)
+== equiv E01-live-scan-exit-unasserted
+  | superseded_environment_cases rc=0
+PASS E01-live-scan-exit-unasserted SURVIVES (argued equivalent) (want=1 got=1)
+== kill K09-anchor-layout-clause-deleted
+  | outside_layout_anchor_cases rc=1
+  |   assert: AC-020: an in-repository spec outside .specify/specs/<name> was given an anchor
+  |   assert: AC-020: an outside-layout spec's own notes/opponent.md was excluded; an empty anchor excludes nothing
+PASS K09-anchor-layout-clause-deleted KILLED (want=1 got=1)
+== kill K12-shipped-set-from-a-glob
+  | test_leftover_spec_directories_do_not_decide_the_shipped_loop rc=1
+  |   assert: AC-023: cannot read .specify/specs/001-stale/spec.md as the identity hashes it
+  |   assert: AC-023: cannot read .specify/specs/001-stale/plan.md as the identity hashes it
+PASS K12-shipped-set-from-a-glob KILLED (want=1 got=1)
+== kill K14-copy-kit-is-cp-R
+  | kit_copy_cases rc=1
+  |   assert: AC-020: copy_kit carried system-map.yml, which the input identity does not hash verbatim
+  |   assert: AC-020: copy_kit carried models.yml, which the input identity does not hash verbatim
+PASS K14-copy-kit-is-cp-R KILLED (want=1 got=1)
+== kill K17-copy-kit-copies-spec-directories
+  | kit_copy_cases rc=1
+  |   assert: AC-020: copy_kit carried .specify/specs, which the input identity does not hash verbatim
+PASS K17-copy-kit-copies-spec-directories KILLED (want=1 got=1)
+== over O03-copy-kit-tracked-only
+  | kit_copy_cases rc=1
+  |   assert: AC-020: copy_kit dropped the enumerated path docs/untracked.md
+  |   assert: AC-020: copy_kit dropped the enumerated path docs/café.md
+PASS O03-copy-kit-tracked-only KILLED (want=1 got=1)
+== kill K21-stage-kit-is-the-old-tar
+  | test_stage_kit_excludes_and_never_writes_through_a_host_models_yml rc=1
+  |   assert: stage_kit carried the host's ignored registry.yml into the staged kit
+PASS K21-stage-kit-is-the-old-tar KILLED (want=1 got=1)
+== kill K23-run-sh-globs-its-suites
+  | reuse_command_input_cases rc=1
+  |   assert: expected exit 2, got 1: bash /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/1c1e945f-3f81-4ba8-8888-8263f1ca2273/scratchpad/t030o41-mut-shard2/tmp/sddkit.lyDq3x/host-ki
+  |   assert: AC-020: tests/run.sh ran an ignored local suite missing substring: no test file matches 'zz-local'
+PASS K23-run-sh-globs-its-suites KILLED (want=1 got=1)
+== kill K26-shellcheck-globs-its-files
+  | reuse_command_input_cases rc=1
+  |   assert: expected exit 0, got 1: env CDPATH=. SHELLCHECK_OPTS=--enable=check-unassigned-uppercase bash -c cd "$1" && bash tests/shellcheck.sh _ /private/tmp/claude-501/-Users-babar-projects-s
+  |   assert: AC-020: tests/shellcheck.sh linted an ignored local script unexpectedly contains: zz-local.sh
+PASS K26-shellcheck-globs-its-files KILLED (want=1 got=1)
+== kill K29-overlay-check-globs
+  | test_ignored_local_overlays_and_personas_do_not_decide_the_checks rc=1
+  |   assert: output missing substring: ## Failure-mode and checkpoint defaults
+  |   assert: output missing substring: explicit exclusions
+PASS K29-overlay-check-globs KILLED (want=1 got=1)
+== kill K32-contract-obligation-deleted
+  | test_instruction_contracts rc=1
+  |   assert: output missing substring: reads the repository only as the snapshot
+PASS K32-contract-obligation-deleted KILLED (want=1 got=1)
+== kill K34b-source-paths-keeps-git-local-environment
+  | reuse_command_input_cases rc=1
+  |   assert: AC-020: an exported GIT_INDEX_FILE redirected the enumeration to a foreign index unexpectedly contains: only-in-foreign.md
+  |   assert: expected exit 0, got 3: env GIT_DIR=/private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/1c1e945f-3f81-4ba8-8888-8263f1ca2273/scratchpad/t030o41-mut-shard2/tmp/sddkit.WFV30F/
+PASS K34b-source-paths-keeps-git-local-environment KILLED (want=1 got=1)
+== kill K36-run-sh-keeps-CDPATH
+  | reuse_command_input_cases rc=1
+  |   assert: expected exit 2, got 1: env CDPATH=. bash -c cd "$1" && bash tests/run.sh zz-none _ /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/1c1e945f-3f81-4ba8-8888-8263f1ca2273/
+  |   assert: AC-020: an exported CDPATH decided tests/run.sh missing substring: no test file matches 'zz-none'
+PASS K36-run-sh-keeps-CDPATH KILLED (want=1 got=1)
+== kill K39-host-repo-without-info-dir
+  | reuse_command_input_cases rc=1
+  |   assert: expected exit 2, got 1: bash /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/1c1e945f-3f81-4ba8-8888-8263f1ca2273/scratchpad/t030o41-mut-shard2/tmp/sddkit.soyZno/host-ki
+  |   assert: AC-020: tests/run.sh ran an ignored local suite missing substring: no test file matches 'zz-local'
+PASS K39-host-repo-without-info-dir KILLED (want=1 got=1)
+== kill K42-stage-umbrella-copies-with-cp-R
+  | test_stage_umbrella_copies_only_enumerated_scripts rc=1
+  |   assert: stage_umbrella staged the host kit's ignored script
+PASS K42-stage-umbrella-copies-with-cp-R KILLED (want=1 got=1)
+== over O04-suites-clear-every-XDG-name
+  | reuse_command_input_cases rc=1
+  |   assert: expected exit 0, got 1: git_config_pinned /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/1c1e945f-3f81-4ba8-8888-8263f1ca2273/scratchpad/t030o41-mut-shard2/tmp/sddkit.V
+  |          assert: tracked without the executable bit: zz-xdg.sh
+PASS O04-suites-clear-every-XDG-name KILLED (want=1 got=1)
+== kill K48-snapshot-root-check-inherits-git-environment
+  | reuse_command_input_cases rc=1
+  |   assert: expected exit 0, got 3: snapshot_fixture /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/1c1e945f-3f81-4ba8-8888-8263f1ca2273/scratchpad/t030o41-mut-shard2/tmp/sddkit.A4
+  |   assert: AC-020: an exported GIT_DIR stopped or moved the input identity
+PASS K48-snapshot-root-check-inherits-git-environment KILLED (want=1 got=1)
+== equiv E07-config-pin-keeps-GIT_CONFIG_SYSTEM-under-NOSYSTEM
+  | reuse_command_input_cases rc=0
+PASS E07-config-pin-keeps-GIT_CONFIG_SYSTEM-under-NOSYSTEM SURVIVES (argued equivalent) (want=1 got=1)
+== witness W03-K46-survives-without-the-SCRIPTS-binding
+  | test_ignored_local_scripts_do_not_reach_the_dispatch_grammar_kit rc=0
+PASS W03-K46-survives-without-the-SCRIPTS-binding SURVIVES (witness) (want=1 got=1)
+== kill K62-config-pin-leaves-XDG_CONFIG_HOME
+  | reuse_command_input_cases rc=1
+  |   assert: expected exit 0, got 1: env CDPATH=. SHELLCHECK_OPTS=--enable=check-unassigned-uppercase bash -c cd "$1" && bash tests/shellcheck.sh _ /private/tmp/claude-501/-Users-babar-projects-s
+  |   assert: AC-020: precondition: the XDG ignore rule does not hide the script from the identity unexpectedly contains: zz-xdg.sh
+PASS K62-config-pin-leaves-XDG_CONFIG_HOME KILLED (want=1 got=1)
+== kill K52-fixture-git-unpinned
+  | fixture_repository_cases rc=1
+  |   assert: AC-020: make_verification_git_dir failed under a user's git configuration or a hook's environment
+  |   assert: AC-020: a user's git configuration or a hook's environment left the fixture repository without a commit
+PASS K52-fixture-git-unpinned KILLED (want=1 got=1)
+== kill K58-fixture-git-reads-the-caller-XDG_CONFIG_HOME
+  | fixture_repository_cases rc=1
+  |   assert: AC-020: make_verification_git_dir failed under a user's git configuration or a hook's environment
+  |   assert: AC-020: a user's git configuration or a hook's environment left the fixture repository without a commit
+PASS K58-fixture-git-reads-the-caller-XDG_CONFIG_HOME KILLED (want=1 got=1)
+== equiv E17-fixture-git-reads-the-system-files
+  | fixture_repository_cases rc=0
+PASS E17-fixture-git-reads-the-system-files SURVIVES (argued equivalent) (want=1 got=1)
+== kill K67-runner-ignores-the-build-failure-record
+  | fixture_repository_cases rc=1
+  |   assert: expected exit 1, got 0: bash /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/1c1e945f-3f81-4ba8-8888-8263f1ca2273/scratchpad/t030o41-mut-shard2/tmp/sddkit.9fqdzI/nested-
+  |   assert: AC-020: a test that ignored a failed fixture build passed missing substring: FAIL test_ignores_a_failed_build
+PASS K67-runner-ignores-the-build-failure-record KILLED (want=1 got=1)
+== kill K56-git-host-builds-with-raw-git
+  | fixture_repository_cases rc=1
+  |   assert: AC-020: git_host failed under a user's git configuration or a hook's environment
+  |   assert: AC-020: a template's hook reached a host repository
+PASS K56-git-host-builds-with-raw-git KILLED (want=1 got=1)
+== kill K59-scan-tree-1-built-with-raw-git
+  | superseded_environment_cases@hostile rc=1
+  |   assert: AC-018: the scan could not read its fixture tree
+  |   assert: AC-018: the superseded claim survived as verbatim.md missing substring: verbatim.md
+PASS K59-scan-tree-1-built-with-raw-git KILLED (want=1 got=1)
+== kill K64-tally-host-built-with-raw-git
+  | test_empty_record_directories_do_not_decide_the_002_tally@hostile rc=1
+  |   assert: AC-010: cannot copy shipped 002 records as the identity hashes them
+  |   assert: expected exit 0, got 2: bash /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/1c1e945f-3f81-4ba8-8888-8263f1ca2273/scratchpad/t030o41-mut-shard2/copy/scripts/spec-gate.sh
+PASS K64-tally-host-built-with-raw-git KILLED (want=1 got=1)
+== equiv E12-ac-coverage-root-built-with-raw-git
+  | test_default_root_is_the_git_toplevel@hostile rc=0
+PASS E12-ac-coverage-root-built-with-raw-git SURVIVES (argued equivalent) (want=1 got=1)
+== equiv E14-ignored-nested-clone-built-with-raw-git
+  | test_ignored_local_scripts_do_not_reach_the_documented_workflow@hostile rc=0
+PASS E14-ignored-nested-clone-built-with-raw-git SURVIVES (argued equivalent) (want=1 got=1)
+== record R03-letterless-spec-build-check-removed
+  | unmutated bookkeeping_anchor_cases@no-writes rc=1
+PASS R03-letterless-spec-build-check-removed unmutated judge records letterless-spec (want=0 got=0)
+  | bookkeeping_anchor_cases@no-writes rc=1
+  |   assert: expected exit 0, got 3: snapshot_fixture /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/1c1e945f-3f81-4ba8-8888-8263f1ca2273/scratchpad/t030o41-mut-shard2/tmp/sddkit.MO
+  |   assert: expected exit 0, got 3: snapshot_fixture /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/1c1e945f-3f81-4ba8-8888-8263f1ca2273/scratchpad/t030o41-mut-shard2/tmp/sddkit.MO
+PASS R03-letterless-spec-build-check-removed KILLED (want=1 got=1)
+== record R06-scan-tree-3-build-check-removed
+  | unmutated superseded_environment_cases@no-writes rc=1
+PASS R06-scan-tree-3-build-check-removed unmutated judge records scan-tree-3 (want=0 got=0)
+  | superseded_environment_cases@no-writes rc=1
+  |   assert: AC-018: the scan could not read its fixture tree
+  |   assert: AC-018: the superseded claim survived as verbatim.md missing substring: verbatim.md
+PASS R06-scan-tree-3-build-check-removed KILLED (want=1 got=1)
+== record R09-doctor-host-build-check-removed
+  | unmutated test_AC_009_doctor_fixture_excludes_machine_local_kit_files@no-writes rc=1
+PASS R09-doctor-host-build-check-removed unmutated judge records doctor-host (want=0 got=0)
+  | test_AC_009_doctor_fixture_excludes_machine_local_kit_files@no-writes rc=1
+  |   assert: AC-009: cannot copy the kit for the doctor fixture
+  |   assert: expected exit 0, got 127: run_doctor
+PASS R09-doctor-host-build-check-removed KILLED (want=1 got=1)
+== kill K76-stage-kit-failure-prints-no-path
+  | test_stage_kit_failure_is_named_and_stays_in_the_sandbox rc=1
+  |   assert: stage_kit handed its caller a path outside the sandbox: ''
+  |   assert: stage_kit left no record of the failed copy missing substring: stage_kit kit copy
+PASS K76-stage-kit-failure-prints-no-path KILLED (want=1 got=1)
+== kill K79-stage-umbrella-failure-prints-no-path
+  | test_stage_umbrella_failure_is_named_and_stays_in_the_sandbox rc=1
+  |   assert: stage_umbrella handed its caller a path outside the sandbox: ''
+  |   assert: stage_umbrella left no record of the failed copy missing substring: stage_umbrella kit scripts
+PASS K79-stage-umbrella-failure-prints-no-path KILLED (want=1 got=1)
+matrix rows in this run: shard 2/3, rows 0..107 seen
+matrix failures=0

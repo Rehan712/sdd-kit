@@ -1,0 +1,76 @@
+== baselines
+== kill K70-fixture-git-keeps-the-caller-git-environment
+  | fixture_repository_cases rc=1
+  |   assert: AC-020: make_verification_git_dir failed under a user's git configuration or a hook's environment
+  |   assert: AC-020: a user's git configuration or a hook's environment left the fixture repository without a commit
+PASS K70-fixture-git-keeps-the-caller-git-environment KILLED (want=1 got=1)
+== kill K54-fixture-git-reads-the-caller-HOME
+  | fixture_repository_cases rc=1
+  |   assert: AC-020: make_verification_git_dir failed under a user's git configuration or a hook's environment
+  |   assert: AC-020: a user's git configuration or a hook's environment left the fixture repository without a commit
+PASS K54-fixture-git-reads-the-caller-HOME KILLED (want=1 got=1)
+== kill K58-fixture-git-reads-the-caller-XDG_CONFIG_HOME
+  | fixture_repository_cases rc=1
+  |   assert: AC-020: make_verification_git_dir failed under a user's git configuration or a hook's environment
+  |   assert: AC-020: a user's git configuration or a hook's environment left the fixture repository without a commit
+PASS K58-fixture-git-reads-the-caller-XDG_CONFIG_HOME KILLED (want=1 got=1)
+== kill K71-fixture-git-without-the-fixed-identity
+  | fixture_repository_cases rc=1
+  |   assert: AC-020: a hook's environment replaced the fixture identity
+PASS K71-fixture-git-without-the-fixed-identity KILLED (want=1 got=1)
+== equiv E16-fixture-git-leaves-the-installation-template
+  | fixture_repository_cases rc=1
+  |   assert: AC-020: a template's info/exclude reached a host repository
+  | reuse_command_input_cases rc=0
+FAIL E16-fixture-git-leaves-the-installation-template SURVIVES (argued equivalent) (want=2 got=1)
+== equiv E18-fixture-git-template-directory-not-created
+  | fixture_repository_cases rc=0
+  | reuse_command_input_cases rc=0
+PASS E18-fixture-git-template-directory-not-created SURVIVES (argued equivalent) (want=2 got=2)
+== kill K55-fixture-build-failure-returns-success
+  | fixture_repository_cases rc=1
+  |   assert: AC-020: a fixture repository that could not be built returned success
+PASS K55-fixture-build-failure-returns-success KILLED (want=1 got=1)
+== kill K67-runner-ignores-the-build-failure-record
+  | fixture_repository_cases rc=1
+  |   assert: expected exit 1, got 0: bash /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/1c1e945f-3f81-4ba8-8888-8263f1ca2273/scratchpad/t030o41-mut/tmp/sddkit.JsD0QK/nested-suite.s
+  |   assert: AC-020: a test that ignored a failed fixture build passed missing substring: FAIL test_ignores_a_failed_build
+PASS K67-runner-ignores-the-build-failure-record KILLED (want=1 got=1)
+== kill K68-failed-build-prints-no-sandbox-path
+  | fixture_repository_cases rc=1
+  |   assert: AC-020: a failed fixture build handed its caller a path outside the sandbox: ''
+PASS K68-failed-build-prints-no-sandbox-path KILLED (want=1 got=1)
+== kill K69-failed-build-left-unrecorded
+  | fixture_repository_cases rc=1
+  |   assert: AC-020: a fixture repository that could not be built was not reported by name missing substring: cannot build the make_verification_git_dir failing fixture repository
+  |   assert: AC-020: a failed fixture build left no record for the runner missing substring: make_verification_git_dir failing
+PASS K69-failed-build-left-unrecorded KILLED (want=1 got=1)
+== kill K60-scan-tree-2-built-with-raw-git
+  | superseded_environment_cases@hostile rc=1
+  |   assert: AC-018: the scan could not read its fixture tree
+  |   assert: AC-018: the control tree was not scanned: its superseded canary went unreported missing substring: canary.md :: 
+PASS K60-scan-tree-2-built-with-raw-git KILLED (want=1 got=1)
+== equiv E11-letterless-spec-fixture-pre-repair
+  | bookkeeping_anchor_cases@hostile rc=0
+PASS E11-letterless-spec-fixture-pre-repair SURVIVES (argued equivalent) (want=1 got=1)
+== kill K72-index-writes-with-raw-git
+  | test_capture_provenance@hostile rc=1
+  |   assert: AC-020: generated bookkeeping stays reusable
+  |   assert: AC-020: checkbox/evidence bookkeeping excluded
+PASS K72-index-writes-with-raw-git KILLED (want=1 got=1)
+== equiv E13-index-removal-and-config-with-raw-git
+  | test_capture_provenance@hostile rc=1
+  |   assert: AC-020: the verified spec's own notes/captures/CAP-1-x/output.log changed the identity
+  |   assert: AC-020: the verified spec's own .tasks.accept.x changed the identity
+FAIL E13-index-removal-and-config-with-raw-git SURVIVES (argued equivalent) (want=1 got=0)
+== equiv E19-site-build-checks-removed
+  | superseded_environment_cases@hostile rc=0
+  | kit_copy_cases@hostile rc=0
+  | bookkeeping_anchor_cases@hostile rc=0
+  | test_empty_record_directories_do_not_decide_the_002_tally@hostile rc=0
+  | test_AC_009_doctor_fixture_excludes_machine_local_kit_files@hostile rc=0
+  | test_default_root_is_the_git_toplevel@hostile rc=0
+  | test_ignored_local_scripts_do_not_reach_the_documented_workflow@hostile rc=0
+  | reuse_command_input_cases rc=0
+PASS E19-site-build-checks-removed SURVIVES (argued equivalent) (want=8 got=8)
+matrix failures=2

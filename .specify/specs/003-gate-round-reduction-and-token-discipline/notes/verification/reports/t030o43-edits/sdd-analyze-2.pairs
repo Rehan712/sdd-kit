@@ -1,0 +1,25 @@
+@@OLD
+impl_refs=$(awk "$_VF_AWK_FENCE"'
+@@NEW
+impl_refs=$(awk "$_VF_AWK_TEXT"'
+@@END
+@@OLD
+task_map="$(awk "$_VF_AWK_FENCE"'
+@@NEW
+task_map="$(awk "$_VF_AWK_TEXT"'
+@@END
+@@OLD
+awk -v RED="$RED" -v YELLOW="$YELLOW" -v RESET="$RESET" "$_VF_AWK_FENCE"'
+@@NEW
+awk -v RED="$RED" -v YELLOW="$YELLOW" -v RESET="$RESET" "$_VF_AWK_TEXT"'
+@@END
+@@OLD
+  # The path is the first .md token after the label; annotations (italic or plain
+  # parentheticals, backticks) may surround it.
+  agent_path=$(echo "$line" | sed -E 's/.*\*Agent:\*[[:space:]]*//; s/`//g' | grep -oE '[^ 	)(]+\.md' | head -1 || true)
+@@NEW
+  # The path is the first .md token after the label; annotations (italic or plain
+  # parentheticals, backticks) may surround it. The line was read through the
+  # kernel's whitespace step, so any whitespace, a U+00A0 included, ends a token.
+  agent_path=$(echo "$line" | sed -E 's/.*\*Agent:\*[[:space:]]*//; s/`//g' | grep -oE '[^[:space:])(]+\.md' | head -1 || true)
+@@END

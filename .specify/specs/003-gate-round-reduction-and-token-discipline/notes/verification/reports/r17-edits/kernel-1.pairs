@@ -1,0 +1,240 @@
+@@OLD
+# space) is read whole; it can only add a label. A third reading keeps the
+# letters and digits of every code span (6.1: a backtick string closed by a
+# backtick string of the same length) and makes its other characters inert,
+@@NEW
+# space) is read whole; it can only add a label. A third reading keeps the
+# letters and digits of every code span (6.1, read left to right with 2.4
+# escapes taken in pairs: a backtick run closed by the next run of the same
+# length; round 16, O-018) and makes its other characters inert,
+@@END
+@@OLD
+# boundary error has to fall on the refusing side: vf_para <line>, called on
+# every line before quoting is read, keeps a run of non-blank lines that only
+# a blank line, a line in a code fence or an ATX heading ends, reads each line
+# without its indentation and block-quote markers, and takes every line of the
+# run as a candidate paragraph start; vf_para_label names the Class or
+# Severity line that the text joined from any earlier candidate whose own line
+# carries no label makes of the run, once per run, or is "". A boundary the
+# reader misses or invents cannot hide a label, since some candidate starts at
+# the boundary a renderer keeps, and text joined past a boundary can only add
+# a label.
+@@NEW
+# boundary error has to fall on the refusing side: vf_para <line>, called on
+# every line before quoting is read, keeps a run of non-blank lines that only
+# a blank line (spaces and tabs, 2.1) or an ATX heading of one to six marks
+# (4.2) ends, never a line the shared tracker calls fenced, since the tracker
+# opens fences a renderer does not (round 16, O-018 and O-022), reads each
+# line without its indentation and block-quote markers, and takes every line
+# of the run as a candidate paragraph start; vf_para_label names the Class or
+# Severity line that the text joined from any earlier candidate whose own line
+# carries no label makes of the run, once per run, or is "". A boundary the
+# reader misses or invents cannot hide a label, since some candidate starts at
+# the boundary a renderer keeps, and text joined past a boundary can only add
+# a label. A candidate is dropped once its text is settled (vf_settled; round
+# 16, O-023): every construct a reading resolves across lines (a code span, a
+# bracket pair, a link destination, a raw-HTML construct) is closed within
+# it, and every reading of it, and of the text after each br or block-level
+# tag in it, already holds its first word, so no later line can change how
+# any reading of it begins; a candidate not shown settled is kept.
+# Inside a finding the grammar is narrowed rather than rendered (round 16,
+# O-018; the user's decision of 2026-10-08): vf_para also sets vf_narrow to
+# the reason a line breaks it, or "": a form feed or vertical tab, a carriage
+# return that does not end the line (both read on the line as written), or a
+# `<` that may open raw HTML or an autolink (6.5, 6.6, 4.6: one followed by a
+# letter, `/`, `!` or `?`) outside every code span. vf_cm_scan places code
+# spans by 6.1 read left to right (2.4 escapes taken in pairs, a backtick run
+# closed only by the next run of the same length) for every state a paragraph
+# may enter the line in: no open span, or a span an earlier line of the run
+# left open, read both as an opener and as literal text; the states reset at
+# the run's ends. A `<` is inside a code span only when every such reading
+# places it there, so a span the reader invents cannot hide one. Both readers
+# refuse such a line by name inside a finding.
+@@END
+@@OLD
+function vf_label_inert(s,   out, rest, i, n, k, off, b, f, j, ch) {
+  b = sprintf("%c", 96); out = ""
+  while (match(s, b "+")) {
+    i = RSTART; n = RLENGTH
+    if (i > 1 && substr(s, i - 1, 1) == "\\") {out = out substr(s, 1, i + n - 1); s = substr(s, i + n); continue}
+    rest = substr(s, i + n); off = 0; k = 0
+    while (match(rest, b "+")) {
+      if (RLENGTH == n) {k = off + RSTART; break}
+      off += RSTART + RLENGTH - 1; rest = substr(rest, RSTART + RLENGTH)
+    }
+    if (!k) {out = out substr(s, 1, i + n - 1); s = substr(s, i + n); continue}
+    f = ""
+    for (j = i; j < i + n + k - 1 + n; j++) {ch = substr(s, j, 1); f = f ((ch ~ /[A-Za-z0-9]/) ? ch : "\002")}
+    out = out substr(s, 1, i - 1) f; s = substr(s, i + n + k - 1 + n)
+  }
+  return out s
+}
+@@NEW
+function vf_cm_punct(c) {
+  if (vf_cm_p == "") vf_cm_p = "!\"#$%&()*+,-./:;<=>?@[\\]^_{|}~" sprintf("%c%c", 39, 96)
+  return c != "" && index(vf_cm_p, c) > 0
+}
+function vf_cm_close(s, from, r,   b, rest, off) {
+  b = sprintf("%c", 96); rest = substr(s, from); off = from - 1
+  while (match(rest, b "+")) {
+    if (RLENGTH == r) return off + RSTART + RLENGTH
+    off += RSTART + RLENGTH - 1; rest = substr(rest, RSTART + RLENGTH)
+  }
+  return 0
+}
+function vf_cm_scan(s, st,   b, re, n, i, c, j, r, k) {
+  b = sprintf("%c", 96); re = "[\\\\<" b "]"; vf_cm_out = 0; vf_cm_exits = ""; n = length(s); i = 1
+  if (st > 0) {k = vf_cm_close(s, 1, st); if (!k) {vf_cm_exits = " " st; return}; i = k}
+  while (i <= n && match(substr(s, i), re)) {
+    i += RSTART - 1; c = substr(s, i, 1)
+    if (c == "\\") {i += (i < n && vf_cm_punct(substr(s, i + 1, 1))) ? 2 : 1; continue}
+    if (c == "<") {if (substr(s, i + 1, 1) ~ /[A-Za-z\/!?]/) vf_cm_out = 1; i++; continue}
+    j = i; while (j <= n && substr(s, j, 1) == b) j++
+    r = j - i; k = vf_cm_close(s, j, r)
+    if (!k) {vf_cm_exits = vf_cm_exits " " r; i = j; continue}
+    i = k
+  }
+  vf_cm_exits = vf_cm_exits " 0"
+}
+function vf_label_inert(s,   b, re, n, i, p, c, j, r, k, out, f) {
+  b = sprintf("%c", 96); re = "[\\\\" b "]"; out = ""; n = length(s); i = 1
+  while (i <= n && match(substr(s, i), re)) {
+    p = i + RSTART - 1; out = out substr(s, i, p - i); i = p; c = substr(s, i, 1)
+    if (c == "\\") {k = (i < n && vf_cm_punct(substr(s, i + 1, 1))) ? 2 : 1; out = out substr(s, i, k); i += k; continue}
+    j = i; while (j <= n && substr(s, j, 1) == b) j++
+    r = j - i; k = vf_cm_close(s, j, r)
+    if (!k) {out = out substr(s, i, r); i = j; continue}
+    f = substr(s, i, k - i); gsub(/[^A-Za-z0-9]/, "\002", f); out = out f; i = k
+  }
+  return out substr(s, i)
+}
+function vf_settled_lead(t) {
+  while (t ~ /^([^A-Za-z0-9]|[0-9]+[.)]|\[[ xX]\])/) {
+    if (match(t, /^([0-9]+[.)]|\[[ xX]\])/)) t = substr(t, RLENGTH + 1)
+    else t = substr(t, 2)
+  }
+  return t != ""
+}
+function vf_settled_html(s,   p, e, rest) {
+  if (vf_lbl_tag == "") vf_label_html("")
+  p = 0
+  while ((e = index(substr(s, p + 1), "<")) > 0) {
+    p += e; rest = substr(s, p)
+    if (rest !~ /^<[A-Za-z\/!?]/) continue
+    if (substr(rest, 1, 4) == "<!--") {if (!index(substr(rest, 3), "-->")) return 0; continue}
+    if (substr(rest, 1, 9) == "<![CDATA[") {if (!index(rest, "]]>")) return 0; continue}
+    if (substr(rest, 1, 2) == "<?") {if (!index(substr(rest, 3), "?>")) return 0; continue}
+    if (rest ~ /^<![A-Za-z]/) {if (!index(rest, ">")) return 0; continue}
+    if (!match(rest, vf_lbl_tag) && !match(rest, /^<\/[A-Za-z][A-Za-z0-9-]*[ \t]*>/)) return 0
+  }
+  return 1
+}
+function vf_settled_brackets(s,   p, d, c) {
+  gsub(/\\[][]/, "\003", s)
+  p = 0; d = 0
+  while (match(substr(s, p + 1), /[][]/)) {
+    p += RSTART; c = substr(s, p, 1)
+    if (c == "[") d++
+    else if (!d--) return 0
+  }
+  if (d) return 0
+  p = 0
+  while ((c = index(substr(s, p + 1), "](")) > 0) {p += c; if (!vf_label_dest(s, p + 1)) return 0}
+  return 1
+}
+function vf_settled_breaks(s, c,   p, e, rest, nm, L, x) {
+  if (vf_lbl_blocks == "") vf_label_breaks("", "", "")
+  p = 0
+  while ((e = index(substr(c, p + 1), "<")) > 0) {
+    p += e; rest = substr(c, p)
+    if (!match(rest, vf_lbl_tag) && !match(rest, /^<\/[A-Za-z][A-Za-z0-9-]*[ \t]*>/)) continue
+    L = RLENGTH; nm = tolower(substr(rest, 1, L)); sub(/^<\/?/, "", nm); sub(/[^a-z0-9].*$/, "", nm)
+    if (nm != "br" && !index(vf_lbl_blocks, " " nm " ")) continue
+    x = substr(s, p + L)
+    if (!vf_settled_lead(x) || !vf_settled_lead(vf_label_render(x, 0)) || !vf_settled_lead(vf_label_render(x, 1)) || !vf_settled_lead(vf_label_render(substr(c, p + L), 0))) return 0
+  }
+  return 1
+}
+function vf_settled(j,   c) {
+  if (index(j, "<") && !vf_settled_html(j)) return 0
+  vf_cm_scan(j, 0); if (vf_cm_exits != " 0") return 0
+  c = index(j, sprintf("%c", 96)) ? vf_label_inert(j) : j
+  if (!vf_settled_brackets(j) || (c != j && !vf_settled_brackets(c))) return 0
+  if (!vf_settled_lead(j) || !vf_settled_lead(vf_label_render(j, 0)) || !vf_settled_lead(vf_label_render(j, 1))) return 0
+  if (c != j && (!vf_settled_lead(vf_label_render(c, 0)) || !vf_settled_lead(vf_label_render(c, 1)))) return 0
+  return !index(c, "<") || vf_settled_breaks(j, c)
+}
+@@END
+@@OLD
+function vf_para(s,   t, q, k) {
+  if (FNR == 1) vf_run_n = vf_run_refused = 0
+  t = s; sub(/^[ \t]*(>[ \t]*)*/, "", t)
+  q = s; while (match(q, /^ ? ? ?>[ ]?/)) q = substr(q, RLENGTH + 1)
+  if (fenced || t ~ /^[[:space:]]*$/ || q ~ /^ ? ? ?#+([ \t]|$)/) {vf_run_n = vf_run_refused = vf_para_cont = 0; return}
+  vf_para_cont = (vf_run_n > 0)
+  for (k = 1; k <= vf_run_n; k++) vf_run_text[k] = vf_run_text[k] " " t
+  vf_run_n++; vf_run_text[vf_run_n] = t; vf_run_line[vf_run_n] = s; vf_run_own[vf_run_n] = "?"
+}
+function vf_para_label(   k, l) {
+  if (!vf_para_cont || vf_run_refused) return ""
+  for (k = 1; k < vf_run_n; k++) {
+    if (vf_run_own[k] == "?") vf_run_own[k] = vf_label(vf_run_line[k], "class severity")
+    if (vf_run_own[k] != "") continue
+    l = vf_label(vf_run_text[k], "class severity")
+    if (l != "") {vf_run_refused = 1; return (l == "class") ? "Class line" : "Severity line"}
+  }
+  return ""
+}
+@@NEW
+function vf_para(s,   t, q, k, x, i, n, done, ex) {
+  if (FNR == 1) {vf_run_n = vf_run_refused = 0; vf_cm_states = " 0"}
+  t = s; sub(/^[ \t]*(>[ \t]*)*/, "", t)
+  q = s; while (match(q, /^ ? ? ?>[ ]?/)) q = substr(q, RLENGTH + 1)
+  vf_narrow = ""
+  if (index(vf_original, sprintf("%c", 12)) || index(vf_original, sprintf("%c", 11))) vf_narrow = "a form feed or vertical tab"
+  else if ((k = index(vf_original, "\r")) && k < length(vf_original)) vf_narrow = "a carriage return inside a line"
+  n = split(vf_cm_states " 0", x, " "); done = " "; ex = ""
+  for (i = 1; i <= n; i++) {
+    if (index(done, " " x[i] " ")) continue
+    done = done x[i] " "; vf_cm_scan(t, x[i] + 0); ex = ex vf_cm_exits
+    if (vf_cm_out && vf_narrow == "") vf_narrow = "raw HTML outside a code span"
+  }
+  vf_cm_states = ex
+  if (t == "" || t == "\r" || q ~ /^ ? ? ?(#|##|###|####|#####|######)([ \t]|$)/) {vf_run_n = vf_run_refused = vf_para_cont = 0; vf_cm_states = " 0"; return}
+  vf_para_cont = (vf_run_n > 0)
+  for (k = 1; k <= vf_run_n; k++) if (!vf_run_done[k]) vf_run_text[k] = vf_run_text[k] " " t
+  vf_run_n++; vf_run_text[vf_run_n] = t; vf_run_line[vf_run_n] = s; vf_run_own[vf_run_n] = "?"; vf_run_done[vf_run_n] = 0
+}
+function vf_para_label(   k, l) {
+  if (!vf_para_cont || vf_run_refused) return ""
+  for (k = 1; k < vf_run_n; k++) {
+    if (vf_run_done[k]) continue
+    if (vf_run_own[k] == "?") vf_run_own[k] = vf_label(vf_run_line[k], "class severity")
+    if (vf_run_own[k] != "") {vf_run_done[k] = 1; continue}
+    l = vf_label(vf_run_text[k], "class severity")
+    if (l != "") {vf_run_refused = 1; return (l == "class") ? "Class line" : "Severity line"}
+    if (vf_settled(vf_run_text[k])) vf_run_done[k] = 1
+  }
+  return ""
+}
+@@END
+@@OLD
+      {vf_para($0)}
+      vf_quoted($0) {
+        shape=vf_record($0); if (shape == "" && id != "") shape=vf_para_label()
+@@NEW
+      {vf_para($0)}
+      id != "" && vf_narrow != "" {bad(vf_narrow " in finding " id)}
+      vf_quoted($0) {
+        shape=vf_record($0); if (shape == "" && id != "") shape=vf_para_label()
+@@END
+@@OLD
+    {vf_para($0)}
+    vf_quoted($0) {
+      if (active && $0 !~ /^[[:space:]]*$/) body=1
+@@NEW
+    {vf_para($0)}
+    style=="canonical" && active && !ended && fid != "" && vf_narrow != "" {err(vf_narrow " in finding " fid)}
+    vf_quoted($0) {
+      if (active && $0 !~ /^[[:space:]]*$/) body=1
+@@END

@@ -1,0 +1,15 @@
+    # A field line outside any finding is a record the count never sees,
+    # whatever line opened the finding to its author, and inside a finding a
+    # line whose label vf_label reads as Class or Severity, and which is not
+    # the line of that field, carries a Class or a tier this pass would not read.
+    # Both are refused by name (O-018), as the manifest pass refuses them.
+    style=="canonical" && !ended && !fid && /^[ ]*- \*\*(Class|Status|Prior|Severity|Where|Root cause|Scenario|Reproduced|Blocks|Wrong behavior|Class-wide fix):\*\*/ {err("a finding field outside any Finding"); next}
+    style=="canonical" && fid && !/^[ ]*- \*\*(Class|Status|Prior|Severity|Where|Root cause|Scenario|Reproduced|Blocks|Wrong behavior|Class-wide fix):\*\*/ {
+      lbl=vf_label($0, "class severity")
+      if (lbl != "") err("a " (lbl == "class" ? "Class" : "Severity") " line this grammar cannot read in finding " fid)
+    }
+    fid && /^[ ]*- \*\*(Class|Status|Prior|Severity|Where|Root cause|Scenario|Reproduced|Blocks|Wrong behavior|Class-wide fix):\*\*/ {
+      # The key is the label of the field, not the spelling of the line, so an indented
+      # second Severity is the same field (O-018).
+      key=$0; sub(/:\*\*.*/,"",key); sub(/^[ ]*/,"",key)
+      if(seenfindingfield[n SUBSEP fid SUBSEP key]++) err("duplicate finding field")

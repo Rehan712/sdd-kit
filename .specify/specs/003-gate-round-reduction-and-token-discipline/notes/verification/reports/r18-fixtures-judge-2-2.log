@@ -1,0 +1,42 @@
+start 2026-10-13T18:33:47Z shard 2/3; TMPDIR=/private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/245cf187-c32f-4b54-ba96-d52a7f6b603b/scratchpad/r18-fixtures-2-2/tmp/
+PASS K: the four files hash as r18-edits/post-apply-1
+PASS K: tgc-2.pairs applied, each block exactly once
+PASS K: the suite still parses
+PASS C04: the mutant applies exactly once
+== C04 (report_record_line_cases report_record_line_cases): 8 failing assertions
+PASS C04 fails on: a manifest tier written as angle-destination-escaped-gt was not refused
+PASS C04 fails on: a second tier written as angle-destination-escaped-gt was not refused
+PASS C07: the mutant applies exactly once
+== C07 (report_record_line_cases report_record_line_cases): 8 failing assertions
+PASS C07 fails on: a manifest tier written as destination-escaped-paren was not refused
+PASS C07 fails on: a second tier written as destination-escaped-paren was not refused
+PASS C10: the mutant applies exactly once
+== C10 (report_record_line_cases report_record_line_cases): 8 failing assertions
+PASS C10 fails on: a manifest tier written as destination-nested-parens was not refused
+PASS C10 fails on: a second tier written as destination-nested-parens was not refused
+PASS C15: the mutant applies exactly once
+== C15 (report_record_line_cases report_record_line_cases): 8 failing assertions
+PASS C15 fails on: a manifest tier written as title-escaped-quote was not refused
+PASS C15 fails on: a second tier written as title-escaped-quote was not refused
+PASS C19: the mutant applies exactly once
+== C19 (report_record_line_cases report_record_line_cases): 8 failing assertions
+PASS C19 fails on: a manifest tier written as destination-space-at-line-end was not refused
+PASS C19 fails on: a second tier written as destination-space-at-line-end was not refused
+PASS F08: the mutant applies exactly once
+== F08 (report_record_line_cases report_record_line_cases): 8 failing assertions
+PASS F08 fails on: a manifest tier written as fence-after-tab was not refused
+PASS F08 fails on: a canonical finding whose tail is fence-after-tab was not refused
+PASS S03: the mutant applies exactly once
+== S03 (report_record_line_cases report_record_line_cases): 8 failing assertions
+PASS S03 fails on: a manifest tier written as ordered-number-then-image was not refused
+PASS S03 fails on: a second tier written as ordered-number-then-image was not refused
+PASS H03: the mutant applies exactly once
+== H03 (report_record_line_cases report_record_line_cases): 4 failing assertions
+PASS H03 fails on: a manifest tier written as heading-tag-on-deeper-heading was not refused
+PASS R03: the mutant applies exactly once
+== R03 (report_record_line_cases report_record_line_cases): 8 failing assertions
+PASS R03 fails on: a manifest tier written as definition-after-quote-marker was not refused
+PASS R03 fails on: a second tier written as definition-after-quote-marker was not refused
+PASS live worktree status outside notes/verification/ unchanged
+end 2026-10-13T18:39:54Z
+r18-fixtures-judge-2 shard 2/3 failures=0

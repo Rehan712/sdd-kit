@@ -1,0 +1,415 @@
+host: Darwin 25.4.0; bash on PATH: GNU bash, version 3.2.57(1)-release (arm64-apple-darwin25); TMPDIR=/private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-repro/tmp/
+start 2026-10-09T08:49:26Z
+PASS CUR: the four files hash as r17-edits/post-apply-2
+PASS PRE: r17-session.diff reverses cleanly
+PASS PRE: the four files hash as r17-edits/pre-apply
+== O-018 direct: G-042 at minor (manifest) or a new G-050 at minor (canonical), a blank line, then the case
+-- r1-autolink-digit-br (o18)
+  | marked:      <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<p>Note <a href="mailto:1%60@a.b">1`@a.b</a><br>Severity: data-loss, tick: `.</p>~
+  | markdown-it: <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<p>Note <a href="mailto:1%60@a.b">1`@a.b</a><br>Severity: data-loss, tick: `.</p>~
+PASS O-018 M r1-autolink-digit-br cur C: sealed in silence (rc 0)
+PASS O-018 M r1-autolink-digit-br cur C: stderr empty
+PASS O-018 K r1-autolink-digit-br cur C: sealed in silence (rc 0)
+PASS O-018 K r1-autolink-digit-br cur C: stderr empty
+PASS O-018 K r1-autolink-digit-br cur C: G-050 recorded at minor
+PASS O-018 M r1-autolink-digit-br cur en_US.UTF-8: sealed in silence (rc 0)
+PASS O-018 M r1-autolink-digit-br cur en_US.UTF-8: stderr empty
+PASS O-018 K r1-autolink-digit-br cur en_US.UTF-8: sealed in silence (rc 0)
+PASS O-018 K r1-autolink-digit-br cur en_US.UTF-8: stderr empty
+PASS O-018 K r1-autolink-digit-br cur en_US.UTF-8: G-050 recorded at minor
+PASS O-018 M r1-autolink-digit-br pre C: sealed in silence (rc 0)
+PASS O-018 M r1-autolink-digit-br pre C: stderr empty
+PASS O-018 K r1-autolink-digit-br pre C: sealed in silence (rc 0)
+PASS O-018 K r1-autolink-digit-br pre C: stderr empty
+PASS O-018 K r1-autolink-digit-br pre C: G-050 recorded at minor
+PASS O-018 M r1-autolink-digit-br pre en_US.UTF-8: sealed in silence (rc 0)
+PASS O-018 M r1-autolink-digit-br pre en_US.UTF-8: stderr empty
+PASS O-018 K r1-autolink-digit-br pre en_US.UTF-8: sealed in silence (rc 0)
+PASS O-018 K r1-autolink-digit-br pre en_US.UTF-8: stderr empty
+PASS O-018 K r1-autolink-digit-br pre en_US.UTF-8: G-050 recorded at minor
+-- r2-autolink-digit-pre (o18)
+  | marked:      <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<p>Note <a href="mailto:1%60@a.b">1`@a.b</a><pre>Severity: data-loss</pre>`</p>~
+  | markdown-it: <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<p>Note <a href="mailto:1%60@a.b">1`@a.b</a><pre>Severity: data-loss</pre>`</p>~
+PASS O-018 M r2-autolink-digit-pre cur C: sealed in silence (rc 0)
+PASS O-018 M r2-autolink-digit-pre cur C: stderr empty
+PASS O-018 K r2-autolink-digit-pre cur C: sealed in silence (rc 0)
+PASS O-018 K r2-autolink-digit-pre cur C: stderr empty
+PASS O-018 K r2-autolink-digit-pre cur C: G-050 recorded at minor
+PASS O-018 M r2-autolink-digit-pre cur en_US.UTF-8: sealed in silence (rc 0)
+PASS O-018 M r2-autolink-digit-pre cur en_US.UTF-8: stderr empty
+PASS O-018 K r2-autolink-digit-pre cur en_US.UTF-8: sealed in silence (rc 0)
+PASS O-018 K r2-autolink-digit-pre cur en_US.UTF-8: stderr empty
+PASS O-018 K r2-autolink-digit-pre cur en_US.UTF-8: G-050 recorded at minor
+PASS O-018 M r2-autolink-digit-pre pre C: sealed in silence (rc 0)
+PASS O-018 M r2-autolink-digit-pre pre C: stderr empty
+PASS O-018 K r2-autolink-digit-pre pre C: sealed in silence (rc 0)
+PASS O-018 K r2-autolink-digit-pre pre C: stderr empty
+PASS O-018 K r2-autolink-digit-pre pre C: G-050 recorded at minor
+PASS O-018 M r2-autolink-digit-pre pre en_US.UTF-8: sealed in silence (rc 0)
+PASS O-018 M r2-autolink-digit-pre pre en_US.UTF-8: stderr empty
+PASS O-018 K r2-autolink-digit-pre pre en_US.UTF-8: sealed in silence (rc 0)
+PASS O-018 K r2-autolink-digit-pre pre en_US.UTF-8: stderr empty
+PASS O-018 K r2-autolink-digit-pre pre en_US.UTF-8: G-050 recorded at minor
+-- r3-autolink-underscore-p (o18)
+  | marked:      <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<p>Note <a href="mailto:_%60@a.b">_`@a.b</a><p>Severity: data-loss `</p>~
+  | markdown-it: <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<p>Note <a href="mailto:_%60@a.b">_`@a.b</a><p>Severity: data-loss `</p>~
+PASS O-018 M r3-autolink-underscore-p cur C: sealed in silence (rc 0)
+PASS O-018 M r3-autolink-underscore-p cur C: stderr empty
+PASS O-018 K r3-autolink-underscore-p cur C: sealed in silence (rc 0)
+PASS O-018 K r3-autolink-underscore-p cur C: stderr empty
+PASS O-018 K r3-autolink-underscore-p cur C: G-050 recorded at minor
+PASS O-018 M r3-autolink-underscore-p cur en_US.UTF-8: sealed in silence (rc 0)
+PASS O-018 M r3-autolink-underscore-p cur en_US.UTF-8: stderr empty
+PASS O-018 K r3-autolink-underscore-p cur en_US.UTF-8: sealed in silence (rc 0)
+PASS O-018 K r3-autolink-underscore-p cur en_US.UTF-8: stderr empty
+PASS O-018 K r3-autolink-underscore-p cur en_US.UTF-8: G-050 recorded at minor
+PASS O-018 M r3-autolink-underscore-p pre C: sealed in silence (rc 0)
+PASS O-018 M r3-autolink-underscore-p pre C: stderr empty
+PASS O-018 K r3-autolink-underscore-p pre C: sealed in silence (rc 0)
+PASS O-018 K r3-autolink-underscore-p pre C: stderr empty
+PASS O-018 K r3-autolink-underscore-p pre C: G-050 recorded at minor
+PASS O-018 M r3-autolink-underscore-p pre en_US.UTF-8: sealed in silence (rc 0)
+PASS O-018 M r3-autolink-underscore-p pre en_US.UTF-8: stderr empty
+PASS O-018 K r3-autolink-underscore-p pre en_US.UTF-8: sealed in silence (rc 0)
+PASS O-018 K r3-autolink-underscore-p pre en_US.UTF-8: stderr empty
+PASS O-018 K r3-autolink-underscore-p pre en_US.UTF-8: G-050 recorded at minor
+-- r4-destination-br (o18)
+  | marked:      <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<p><a href="u%60v">x</a><br>Severity: data-loss, tick: `.</p>~
+  | markdown-it: <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<p><a href="u%60v">x</a><br>Severity: data-loss, tick: `.</p>~
+PASS O-018 M r4-destination-br cur C: sealed in silence (rc 0)
+PASS O-018 M r4-destination-br cur C: stderr empty
+PASS O-018 K r4-destination-br cur C: sealed in silence (rc 0)
+PASS O-018 K r4-destination-br cur C: stderr empty
+PASS O-018 K r4-destination-br cur C: G-050 recorded at minor
+PASS O-018 M r4-destination-br cur en_US.UTF-8: sealed in silence (rc 0)
+PASS O-018 M r4-destination-br cur en_US.UTF-8: stderr empty
+PASS O-018 K r4-destination-br cur en_US.UTF-8: sealed in silence (rc 0)
+PASS O-018 K r4-destination-br cur en_US.UTF-8: stderr empty
+PASS O-018 K r4-destination-br cur en_US.UTF-8: G-050 recorded at minor
+PASS O-018 M r4-destination-br pre C: sealed in silence (rc 0)
+PASS O-018 M r4-destination-br pre C: stderr empty
+PASS O-018 K r4-destination-br pre C: sealed in silence (rc 0)
+PASS O-018 K r4-destination-br pre C: stderr empty
+PASS O-018 K r4-destination-br pre C: G-050 recorded at minor
+PASS O-018 M r4-destination-br pre en_US.UTF-8: sealed in silence (rc 0)
+PASS O-018 M r4-destination-br pre en_US.UTF-8: stderr empty
+PASS O-018 K r4-destination-br pre en_US.UTF-8: sealed in silence (rc 0)
+PASS O-018 K r4-destination-br pre en_US.UTF-8: stderr empty
+PASS O-018 K r4-destination-br pre en_US.UTF-8: G-050 recorded at minor
+-- r5-title-br (o18)
+  | marked:      <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<p><a href="u" title="`">x</a><br>Severity: data-loss, tick: `.</p>~
+  | markdown-it: <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<p><a href="u" title="`">x</a><br>Severity: data-loss, tick: `.</p>~
+PASS O-018 M r5-title-br cur C: sealed in silence (rc 0)
+PASS O-018 M r5-title-br cur C: stderr empty
+PASS O-018 K r5-title-br cur C: sealed in silence (rc 0)
+PASS O-018 K r5-title-br cur C: stderr empty
+PASS O-018 K r5-title-br cur C: G-050 recorded at minor
+PASS O-018 M r5-title-br cur en_US.UTF-8: sealed in silence (rc 0)
+PASS O-018 M r5-title-br cur en_US.UTF-8: stderr empty
+PASS O-018 K r5-title-br cur en_US.UTF-8: sealed in silence (rc 0)
+PASS O-018 K r5-title-br cur en_US.UTF-8: stderr empty
+PASS O-018 K r5-title-br cur en_US.UTF-8: G-050 recorded at minor
+PASS O-018 M r5-title-br pre C: sealed in silence (rc 0)
+PASS O-018 M r5-title-br pre C: stderr empty
+PASS O-018 K r5-title-br pre C: sealed in silence (rc 0)
+PASS O-018 K r5-title-br pre C: stderr empty
+PASS O-018 K r5-title-br pre C: G-050 recorded at minor
+PASS O-018 M r5-title-br pre en_US.UTF-8: sealed in silence (rc 0)
+PASS O-018 M r5-title-br pre en_US.UTF-8: stderr empty
+PASS O-018 K r5-title-br pre en_US.UTF-8: sealed in silence (rc 0)
+PASS O-018 K r5-title-br pre en_US.UTF-8: stderr empty
+PASS O-018 K r5-title-br pre en_US.UTF-8: G-050 recorded at minor
+-- r6-angle-destination-pre (derived)
+  | marked:      <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<p><a href="1%60b">x</a><pre>Severity: data-loss</pre>`</p>~
+  | markdown-it: <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<p><a href="1%60b">x</a><pre>Severity: data-loss</pre>`</p>~
+  | r6-angle-destination-pre cur C: manifest rc=0  | canonical rc=0  G050-minor=1
+  | r6-angle-destination-pre cur en_US.UTF-8: manifest rc=0  | canonical rc=0  G050-minor=1
+  | r6-angle-destination-pre pre C: manifest rc=0  | canonical rc=0  G050-minor=1
+  | r6-angle-destination-pre pre en_US.UTF-8: manifest rc=0  | canonical rc=0  G050-minor=1
+-- r7-image-destination-pre (derived)
+  | marked:      <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<p><img src="u%60v" alt="x"><pre>Severity: data-loss</pre>`</p>~
+  | markdown-it: <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<p><img src="u%60v" alt="x"><pre>Severity: data-loss</pre>`</p>~
+.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/r18-repro.sh: line 75: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-repro/work/K-r7-image-destination-pre-cur-C.nul: No such file or directory
+  | r7-image-destination-pre cur C: manifest rc=3 manifest line 7: a second Severity line in finding G-042: ![x](u`v)<pre>Severity: data-loss</pre>` | canonical rc=3 line 16: a Severity line this grammar cannot read in finding G-050; reconcile canonical records G050-minor=0
+.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/r18-repro.sh: line 75: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-repro/work/K-r7-image-destination-pre-cur-en_US.UTF-8.nul: No such file or directory
+  | r7-image-destination-pre cur en_US.UTF-8: manifest rc=3 manifest line 7: a second Severity line in finding G-042: ![x](u`v)<pre>Severity: data-loss</pre>` | canonical rc=3 line 16: a Severity line this grammar cannot read in finding G-050; reconcile canonical records G050-minor=0
+.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/r18-repro.sh: line 75: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-repro/work/K-r7-image-destination-pre-pre-C.nul: No such file or directory
+  | r7-image-destination-pre pre C: manifest rc=3 manifest line 7: a second Severity line in finding G-042: ![x](u`v)<pre>Severity: data-loss</pre>` | canonical rc=3 line 16: a Severity line this grammar cannot read in finding G-050; reconcile canonical records G050-minor=0
+.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/r18-repro.sh: line 75: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-repro/work/K-r7-image-destination-pre-pre-en_US.UTF-8.nul: No such file or directory
+  | r7-image-destination-pre pre en_US.UTF-8: manifest rc=3 manifest line 7: a second Severity line in finding G-042: ![x](u`v)<pre>Severity: data-loss</pre>` | canonical rc=3 line 16: a Severity line this grammar cannot read in finding G-050; reconcile canonical records G050-minor=0
+-- d1-autolink-backtick-start (derived)
+  | marked:      <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<p>Note <a href="mailto:%60a@b.c">`a@b.c</a><br>Severity: data-loss, tick: `.</p>~
+  | markdown-it: <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<p>Note <a href="mailto:%60a@b.c">`a@b.c</a><br>Severity: data-loss, tick: `.</p>~
+  | d1-autolink-backtick-start cur C: manifest rc=0  | canonical rc=0  G050-minor=1
+  | d1-autolink-backtick-start cur en_US.UTF-8: manifest rc=0  | canonical rc=0  G050-minor=1
+  | d1-autolink-backtick-start pre C: manifest rc=0  | canonical rc=0  G050-minor=1
+  | d1-autolink-backtick-start pre en_US.UTF-8: manifest rc=0  | canonical rc=0  G050-minor=1
+-- d2-autolink-plus (derived)
+  | marked:      <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<p>Note <a href="mailto:+1%60@a.b">+1`@a.b</a><br>Severity: data-loss, tick: `.</p>~
+  | markdown-it: <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<p>Note <a href="mailto:+1%60@a.b">+1`@a.b</a><br>Severity: data-loss, tick: `.</p>~
+  | d2-autolink-plus cur C: manifest rc=0  | canonical rc=0  G050-minor=1
+  | d2-autolink-plus cur en_US.UTF-8: manifest rc=0  | canonical rc=0  G050-minor=1
+  | d2-autolink-plus pre C: manifest rc=0  | canonical rc=0  G050-minor=1
+  | d2-autolink-plus pre en_US.UTF-8: manifest rc=0  | canonical rc=0  G050-minor=1
+-- d3-title-spans-lines (derived)
+  | marked:      <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<p><a href="u" title="~`">x</a><br>Severity: data-loss, tick: `.</p>~
+  | markdown-it: <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<p><a href="u" title="~`">x</a><br>Severity: data-loss, tick: `.</p>~
+.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/r18-repro.sh: line 75: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-repro/work/K-d3-title-spans-lines-cur-C.nul: No such file or directory
+  | d3-title-spans-lines cur C: manifest rc=3 manifest line 8: a second Severity line in finding G-042: `')<br>Severity: data-loss, tick: `. | canonical rc=3 line 17: a Severity line this grammar cannot read in finding G-050; reconcile canonical records G050-minor=0
+.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/r18-repro.sh: line 75: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-repro/work/K-d3-title-spans-lines-cur-en_US.UTF-8.nul: No such file or directory
+  | d3-title-spans-lines cur en_US.UTF-8: manifest rc=3 manifest line 8: a second Severity line in finding G-042: `')<br>Severity: data-loss, tick: `. | canonical rc=3 line 17: a Severity line this grammar cannot read in finding G-050; reconcile canonical records G050-minor=0
+.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/r18-repro.sh: line 75: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-repro/work/K-d3-title-spans-lines-pre-C.nul: No such file or directory
+  | d3-title-spans-lines pre C: manifest rc=3 manifest line 8: a second Severity line in finding G-042: `')<br>Severity: data-loss, tick: `. | canonical rc=3 line 17: a Severity line this grammar cannot read in finding G-050; reconcile canonical records G050-minor=0
+.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/r18-repro.sh: line 75: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-repro/work/K-d3-title-spans-lines-pre-en_US.UTF-8.nul: No such file or directory
+  | d3-title-spans-lines pre en_US.UTF-8: manifest rc=3 manifest line 8: a second Severity line in finding G-042: `')<br>Severity: data-loss, tick: `. | canonical rc=3 line 17: a Severity line this grammar cannot read in finding G-050; reconcile canonical records G050-minor=0
+-- d4-destination-on-next-line (derived)
+  | marked:      <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<p><a href="u%60v">x</a><br>Severity: data-loss, tick: `.</p>~
+  | markdown-it: <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<p><a href="u%60v">x</a><br>Severity: data-loss, tick: `.</p>~
+  | d4-destination-on-next-line cur C: manifest rc=0  | canonical rc=0  G050-minor=1
+  | d4-destination-on-next-line cur en_US.UTF-8: manifest rc=0  | canonical rc=0  G050-minor=1
+  | d4-destination-on-next-line pre C: manifest rc=0  | canonical rc=0  G050-minor=1
+  | d4-destination-on-next-line pre en_US.UTF-8: manifest rc=0  | canonical rc=0  G050-minor=1
+-- c0-control-pre (control)
+  | marked:      <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<p>Note <pre>Severity: data-loss</pre>`</p>~
+  | markdown-it: <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<p>Note <pre>Severity: data-loss</pre>`</p>~
+PASS O-018 M c0-control-pre cur C: refused (rc 3)
+PASS O-018 M c0-control-pre cur C: by name
+PASS O-018 K c0-control-pre cur C: refused (rc 3)
+PASS O-018 K c0-control-pre cur C: by name
+PASS O-018 M c0-control-pre cur en_US.UTF-8: refused (rc 3)
+PASS O-018 M c0-control-pre cur en_US.UTF-8: by name
+PASS O-018 K c0-control-pre cur en_US.UTF-8: refused (rc 3)
+PASS O-018 K c0-control-pre cur en_US.UTF-8: by name
+  | cases that also seal on PRE in both passes: r1-autolink-digit-br:C r1-autolink-digit-br:en_US.UTF-8 r2-autolink-digit-pre:C r2-autolink-digit-pre:en_US.UTF-8 r3-autolink-underscore-p:C r3-autolink-underscore-p:en_US.UTF-8 r4-destination-br:C r4-destination-br:en_US.UTF-8 r5-title-br:C r5-title-br:en_US.UTF-8 r6-angle-destination-pre:C r6-angle-destination-pre:en_US.UTF-8 d1-autolink-backtick-start:C d1-autolink-backtick-start:en_US.UTF-8 d2-autolink-plus:C d2-autolink-plus:en_US.UTF-8 d4-destination-on-next-line:C d4-destination-on-next-line:en_US.UTF-8
+  | d5-label-tick (derived) cur C: manifest rc=0  | canonical rc=0 
+  | d5-label-tick (derived) cur en_US.UTF-8: manifest rc=0  | canonical rc=0 
+  | d5-label-tick (derived) pre C: manifest rc=0  | canonical rc=0 
+  | d5-label-tick (derived) pre en_US.UTF-8: manifest rc=0  | canonical rc=0 
+  | marked:      <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<p><a href="/u">x</a><br>Severity: data-loss, tick: `.</p>~
+  | markdown-it: <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<p>[x][a<code>b]&lt;br&gt;Severity: data-loss, tick: </code>.</p>~
+== O-024 direct: the reviewer cases (canonical A, B, C after every field but Severity; manifest M, M2), CUR and PRE
+-- canonical A
+  | marked:      <h3>Finding G-050</h3>~<ul>~<li><strong>Class:</strong> tier-binding</li>~<li><strong>Status:</strong> new</li>~<li><strong>Prior:</strong> none</li>~<li><strong>Scenario:</strong> a recorded trigger</li>~<li><strong>Where:</strong> scripts/run.sh:9</li>~<li><strong>Reproduced:</strong> concrete trigger at that site</li>~<li><strong>Root cause:</strong> implementation-error</li>~<li><strong>Blocks
+  | markdown-it: <h3>Finding G-050</h3>~<ul>~<li><strong>Class:</strong> tier-binding</li>~<li><strong>Status:</strong> new</li>~<li><strong>Prior:</strong> none</li>~<li><strong>Scenario:</strong> a recorded trigger</li>~<li><strong>Where:</strong> scripts/run.sh:9</li>~<li><strong>Reproduced:</strong> concrete trigger at that site</li>~<li><strong>Root cause:</strong> implementation-error</li>~<li><strong>Blocks
+PASS O-024 K A cur C: sealed in silence (rc 0)
+PASS O-024 K A cur C: stderr empty
+PASS O-024 K A cur C: G-050 recorded at minor
+PASS O-024 K A cur en_US.UTF-8: sealed in silence (rc 0)
+PASS O-024 K A cur en_US.UTF-8: stderr empty
+PASS O-024 K A cur en_US.UTF-8: G-050 recorded at minor
+PASS O-024 K A pre C: sealed in silence (rc 0)
+PASS O-024 K A pre C: stderr empty
+PASS O-024 K A pre C: G-050 recorded at minor
+PASS O-024 K A pre en_US.UTF-8: sealed in silence (rc 0)
+PASS O-024 K A pre en_US.UTF-8: stderr empty
+PASS O-024 K A pre en_US.UTF-8: G-050 recorded at minor
+-- canonical B
+  | marked:      <h3>Finding G-050</h3>~<ul>~<li><strong>Class:</strong> tier-binding</li>~<li><strong>Status:</strong> new</li>~<li><strong>Prior:</strong> none</li>~<li><strong>Scenario:</strong> a recorded trigger</li>~<li><strong>Where:</strong> scripts/run.sh:9</li>~<li><strong>Reproduced:</strong> concrete trigger at that site</li>~<li><strong>Root cause:</strong> implementation-error</li>~<li><strong>Blocks
+  | markdown-it: <h3>Finding G-050</h3>~<ul>~<li><strong>Class:</strong> tier-binding</li>~<li><strong>Status:</strong> new</li>~<li><strong>Prior:</strong> none</li>~<li><strong>Scenario:</strong> a recorded trigger</li>~<li><strong>Where:</strong> scripts/run.sh:9</li>~<li><strong>Reproduced:</strong> concrete trigger at that site</li>~<li><strong>Root cause:</strong> implementation-error</li>~<li><strong>Blocks
+PASS O-024 K B cur C: sealed in silence (rc 0)
+PASS O-024 K B cur C: stderr empty
+PASS O-024 K B cur C: G-050 recorded at minor
+PASS O-024 K B cur en_US.UTF-8: sealed in silence (rc 0)
+PASS O-024 K B cur en_US.UTF-8: stderr empty
+PASS O-024 K B cur en_US.UTF-8: G-050 recorded at minor
+PASS O-024 K B pre C: sealed in silence (rc 0)
+PASS O-024 K B pre C: stderr empty
+PASS O-024 K B pre C: G-050 recorded at minor
+PASS O-024 K B pre en_US.UTF-8: sealed in silence (rc 0)
+PASS O-024 K B pre en_US.UTF-8: stderr empty
+PASS O-024 K B pre en_US.UTF-8: G-050 recorded at minor
+-- canonical CC
+  | marked:      <h3>Finding G-050</h3>~<ul>~<li><strong>Class:</strong> tier-binding</li>~<li><strong>Status:</strong> new</li>~<li><strong>Prior:</strong> none</li>~<li><strong>Scenario:</strong> a recorded trigger</li>~<li><strong>Where:</strong> scripts/run.sh:9</li>~<li><strong>Reproduced:</strong> concrete trigger at that site</li>~<li><strong>Root cause:</strong> implementation-error</li>~<li><strong>Blocks
+  | markdown-it: <h3>Finding G-050</h3>~<ul>~<li><strong>Class:</strong> tier-binding</li>~<li><strong>Status:</strong> new</li>~<li><strong>Prior:</strong> none</li>~<li><strong>Scenario:</strong> a recorded trigger</li>~<li><strong>Where:</strong> scripts/run.sh:9</li>~<li><strong>Reproduced:</strong> concrete trigger at that site</li>~<li><strong>Root cause:</strong> implementation-error</li>~<li><strong>Blocks
+PASS O-024 K CC cur C: sealed in silence (rc 0)
+PASS O-024 K CC cur C: stderr empty
+PASS O-024 K CC cur C: G-050 recorded at minor
+PASS O-024 K CC cur en_US.UTF-8: sealed in silence (rc 0)
+PASS O-024 K CC cur en_US.UTF-8: stderr empty
+PASS O-024 K CC cur en_US.UTF-8: G-050 recorded at minor
+PASS O-024 K CC pre C: sealed in silence (rc 0)
+PASS O-024 K CC pre C: stderr empty
+PASS O-024 K CC pre C: G-050 recorded at minor
+PASS O-024 K CC pre en_US.UTF-8: sealed in silence (rc 0)
+PASS O-024 K CC pre en_US.UTF-8: stderr empty
+PASS O-024 K CC pre en_US.UTF-8: G-050 recorded at minor
+-- canonical X1
+  | marked:      <h3>Finding G-050</h3>~<ul>~<li><strong>Class:</strong> tier-binding</li>~<li><strong>Status:</strong> new</li>~<li><strong>Prior:</strong> none</li>~<li><strong>Scenario:</strong> a recorded trigger</li>~<li><strong>Where:</strong> scripts/run.sh:9</li>~<li><strong>Reproduced:</strong> concrete trigger at that site</li>~<li><strong>Root cause:</strong> implementation-error</li>~<li><strong>Blocks
+  | markdown-it: <h3>Finding G-050</h3>~<ul>~<li><strong>Class:</strong> tier-binding</li>~<li><strong>Status:</strong> new</li>~<li><strong>Prior:</strong> none</li>~<li><strong>Scenario:</strong> a recorded trigger</li>~<li><strong>Where:</strong> scripts/run.sh:9</li>~<li><strong>Reproduced:</strong> concrete trigger at that site</li>~<li><strong>Root cause:</strong> implementation-error</li>~<li><strong>Blocks
+  | X1 cur C: canonical rc=0  G050-minor=1
+  | X1 cur en_US.UTF-8: canonical rc=0  G050-minor=1
+  | X1 pre C: canonical rc=0  G050-minor=1
+  | X1 pre en_US.UTF-8: canonical rc=0  G050-minor=1
+-- canonical X2
+  | marked:      <h3>Finding G-050</h3>~<ul>~<li><p><strong>Class:</strong> tier-binding</p>~</li>~<li><p><strong>Status:</strong> new</p>~</li>~<li><p><strong>Prior:</strong> none</p>~</li>~<li><p><strong>Scenario:</strong> a recorded trigger</p>~</li>~<li><p><strong>Where:</strong> scripts/run.sh:9</p>~</li>~<li><p><strong>Reproduced:</strong> concrete trigger at that site</p>~</li>~<li><p><strong>Root cause:</s
+  | markdown-it: <h3>Finding G-050</h3>~<ul>~<li>~<p><strong>Class:</strong> tier-binding</p>~</li>~<li>~<p><strong>Status:</strong> new</p>~</li>~<li>~<p><strong>Prior:</strong> none</p>~</li>~<li>~<p><strong>Scenario:</strong> a recorded trigger</p>~</li>~<li>~<p><strong>Where:</strong> scripts/run.sh:9</p>~</li>~<li>~<p><strong>Reproduced:</strong> concrete trigger at that site</p>~</li>~<li>~<p><strong>Root ca
+  | X2 cur C: canonical rc=0  G050-minor=1
+  | X2 cur en_US.UTF-8: canonical rc=0  G050-minor=1
+  | X2 pre C: canonical rc=0  G050-minor=1
+  | X2 pre en_US.UTF-8: canonical rc=0  G050-minor=1
+-- canonical X3
+  | marked:      <h3>Finding G-050</h3>~<ul>~<li><strong>Class:</strong> tier-binding</li>~<li><strong>Status:</strong> new</li>~<li><strong>Prior:</strong> none</li>~<li><strong>Scenario:</strong> a recorded trigger</li>~<li><strong>Where:</strong> scripts/run.sh:9</li>~<li><strong>Reproduced:</strong> concrete trigger at that site</li>~<li><strong>Root cause:</strong> implementation-error</li>~<li><strong>Blocks
+  | markdown-it: <h3>Finding G-050</h3>~<ul>~<li><strong>Class:</strong> tier-binding</li>~<li><strong>Status:</strong> new</li>~<li><strong>Prior:</strong> none</li>~<li><strong>Scenario:</strong> a recorded trigger</li>~<li><strong>Where:</strong> scripts/run.sh:9</li>~<li><strong>Reproduced:</strong> concrete trigger at that site</li>~<li><strong>Root cause:</strong> implementation-error</li>~<li><strong>Blocks
+  | X3 cur C: canonical rc=0  G050-minor=1
+  | X3 cur en_US.UTF-8: canonical rc=0  G050-minor=1
+  | X3 pre C: canonical rc=0  G050-minor=1
+  | X3 pre en_US.UTF-8: canonical rc=0  G050-minor=1
+-- canonical X4
+  | marked:      <h3>Finding G-050</h3>~<ul>~<li><strong>Class:</strong> tier-binding</li>~<li><strong>Status:</strong> new</li>~<li><strong>Prior:</strong> none</li>~<li><strong>Scenario:</strong> a recorded trigger</li>~<li><strong>Where:</strong> scripts/run.sh:9</li>~<li><strong>Reproduced:</strong> concrete trigger at that site</li>~<li><strong>Root cause:</strong> implementation-error</li>~<li><strong>Blocks
+  | markdown-it: <h3>Finding G-050</h3>~<ul>~<li><strong>Class:</strong> tier-binding</li>~<li><strong>Status:</strong> new</li>~<li><strong>Prior:</strong> none</li>~<li><strong>Scenario:</strong> a recorded trigger</li>~<li><strong>Where:</strong> scripts/run.sh:9</li>~<li><strong>Reproduced:</strong> concrete trigger at that site</li>~<li><strong>Root cause:</strong> implementation-error</li>~<li><strong>Blocks
+  | X4 cur C: canonical rc=0  G050-minor=1
+  | X4 cur en_US.UTF-8: canonical rc=0  G050-minor=1
+  | X4 pre C: canonical rc=0  G050-minor=1
+  | X4 pre en_US.UTF-8: canonical rc=0  G050-minor=1
+-- manifest M
+  | marked:      <h3>Finding G-042</h3>~<ul>~<li><strong>Class:</strong> tier-binding</li>~</ul>~<ul>~<li><pre><code>### x~</code></pre>~</li>~<li><strong>Severity</strong>: data-loss</li>~</ul>~
+  | markdown-it: <h3>Finding G-042</h3>~<ul>~<li><strong>Class:</strong> tier-binding</li>~</ul>~<ul>~<li>~<pre><code>### x~</code></pre>~</li>~<li><strong>Severity</strong>: data-loss</li>~</ul>~
+PASS O-024 M M cur C: sealed in silence (rc 0)
+PASS O-024 M M cur C: stderr empty
+PASS O-024 M M cur en_US.UTF-8: sealed in silence (rc 0)
+PASS O-024 M M cur en_US.UTF-8: stderr empty
+PASS O-024 M M pre C: sealed in silence (rc 0)
+PASS O-024 M M pre C: stderr empty
+PASS O-024 M M pre en_US.UTF-8: sealed in silence (rc 0)
+PASS O-024 M M pre en_US.UTF-8: stderr empty
+-- manifest M1
+  | marked:      <h3>Finding G-042</h3>~<ul>~<li><strong>Class:</strong> tier-binding</li>~</ul>~
+  | markdown-it: <h3>Finding G-042</h3>~<ul>~<li><strong>Class:</strong> tier-binding</li>~</ul>~
+PASS O-024 M M1 cur C: sealed in silence (rc 0)
+PASS O-024 M M1 cur C: stderr empty
+PASS O-024 M M1 cur en_US.UTF-8: sealed in silence (rc 0)
+PASS O-024 M M1 cur en_US.UTF-8: stderr empty
+PASS O-024 M M1 pre C: sealed in silence (rc 0)
+PASS O-024 M M1 pre C: stderr empty
+PASS O-024 M M1 pre en_US.UTF-8: sealed in silence (rc 0)
+PASS O-024 M M1 pre en_US.UTF-8: stderr empty
+-- manifest M2
+  | marked:      <h3>Finding G-042</h3>~<ul>~<li><strong>Class:</strong> tier-binding</li>~<li><strong>Severity:</strong> minor</li>~<li><pre><code>### x~</code></pre>~</li>~<li><strong>Severity</strong>: data-loss</li>~</ul>~
+  | markdown-it: <h3>Finding G-042</h3>~<ul>~<li><strong>Class:</strong> tier-binding</li>~<li><strong>Severity:</strong> minor</li>~<li>~<pre><code>### x~</code></pre>~</li>~<li><strong>Severity</strong>: data-loss</li>~</ul>~
+PASS O-024 M M2 cur C: sealed in silence (rc 0)
+PASS O-024 M M2 cur C: stderr empty
+PASS O-024 M M2 cur en_US.UTF-8: sealed in silence (rc 0)
+PASS O-024 M M2 cur en_US.UTF-8: stderr empty
+PASS O-024 M M2 pre C: sealed in silence (rc 0)
+PASS O-024 M M2 pre C: stderr empty
+PASS O-024 M M2 pre en_US.UTF-8: sealed in silence (rc 0)
+PASS O-024 M M2 pre en_US.UTF-8: stderr empty
+-- manifest X1
+  | marked:      <h3>Finding G-042</h3>~<ul>~<li><strong>Class:</strong> tier-binding</li>~<li><strong>Severity:</strong> minor</li>~<li>note<pre><code>~</code></pre>~</li>~</ul>~<pre><code>### x~</code></pre>~<ul>~<li><strong>Severity</strong>: data-loss</li>~<li>y<pre><code>~</code></pre>~</li>~</ul>~
+  | markdown-it: <h3>Finding G-042</h3>~<ul>~<li><strong>Class:</strong> tier-binding</li>~<li><strong>Severity:</strong> minor</li>~<li>note<pre><code></code></pre>~</li>~</ul>~<pre><code>### x~</code></pre>~<ul>~<li><strong>Severity</strong>: data-loss</li>~<li>y<pre><code></code></pre>~</li>~</ul>~
+  | X1 cur C: manifest rc=0 
+  | X1 cur en_US.UTF-8: manifest rc=0 
+  | X1 pre C: manifest rc=0 
+  | X1 pre en_US.UTF-8: manifest rc=0 
+-- manifest X2
+  | marked:      <h3>Finding G-042</h3>~<ul>~<li><p><strong>Class:</strong> tier-binding</p>~</li>~<li><p><strong>Severity:</strong> minor</p>~</li>~<li><p>note</p>~<pre><code>### x~</code></pre>~</li>~<li><p><strong>Severity</strong>: data-loss</p>~</li>~</ul>~
+  | markdown-it: <h3>Finding G-042</h3>~<ul>~<li>~<p><strong>Class:</strong> tier-binding</p>~</li>~<li>~<p><strong>Severity:</strong> minor</p>~</li>~<li>~<p>note</p>~<pre><code>### x~</code></pre>~</li>~<li>~<p><strong>Severity</strong>: data-loss</p>~</li>~</ul>~
+  | X2 cur C: manifest rc=0 
+  | X2 cur en_US.UTF-8: manifest rc=0 
+  | X2 pre C: manifest rc=0 
+  | X2 pre en_US.UTF-8: manifest rc=0 
+-- manifest X3
+  | marked:      <h3>Finding G-042</h3>~<ul>~<li><strong>Class:</strong> tier-binding</li>~<li></li>~</ul>~
+  | markdown-it: <h3>Finding G-042</h3>~<ul>~<li><strong>Class:</strong> tier-binding</li>~<li></li>~</ul>~
+  | X3 cur C: manifest rc=0 
+  | X3 cur en_US.UTF-8: manifest rc=0 
+  | X3 pre C: manifest rc=0 
+  | X3 pre en_US.UTF-8: manifest rc=0 
+-- manifest X4
+  | marked:      <h3>Finding G-042</h3>~<ul>~<li><strong>Class:</strong> tier-binding</li>~</ul>~
+  | markdown-it: <h3>Finding G-042</h3>~<ul>~<li><strong>Class:</strong> tier-binding</li>~</ul>~
+  | X4 cur C: manifest rc=0 
+  | X4 cur en_US.UTF-8: manifest rc=0 
+  | X4 pre C: manifest rc=0 
+  | X4 pre en_US.UTF-8: manifest rc=0 
+== the minor: the narrowed check is judged before the line's own heading opens or closes a finding (CUR)
+PASS minor H1 C: the first Finding heading carrying a b tag parses (rc 0)
+PASS minor H2 C: a later Finding heading carrying a b tag is refused (rc 3)
+PASS minor H2 C: refused under the previous finding
+PASS minor H3 C: a section heading that closes the finding, carrying a b tag, is refused (rc 3)
+PASS minor H3 C: refused under the finding it closes
+PASS minor H1 en_US.UTF-8: the first Finding heading carrying a b tag parses (rc 0)
+PASS minor H2 en_US.UTF-8: a later Finding heading carrying a b tag is refused (rc 3)
+PASS minor H2 en_US.UTF-8: refused under the previous finding
+PASS minor H3 en_US.UTF-8: a section heading that closes the finding, carrying a b tag, is refused (rc 3)
+PASS minor H3 en_US.UTF-8: refused under the finding it closes
+== E: end to end through spec-gate.sh on CUR; fixture, floor and reservation built under C each time
+PASS E m-r1-autolink-digit-br C: fixture, floor and round-1 reservation
+  | E m-r1-autolink-digit-br C: complete rc=0 round completed gate=opponent round=1 verdict=CLEARED report=bc4e41b6ad0825a946654275b7a922640038795d65d0fde259000151d6b3ea3b
+  |   tally rc=0 opponent rounds=1 blocking=0 minor=1 locations=1 unclassified=0 severity-downgrades=0 
+PASS E m-r1-autolink-digit-br C: CLEARED sealed (rc 0)
+PASS E m-r1-autolink-digit-br C: the completion line
+PASS E m-r1-autolink-digit-br C: the tally counts the finding at minor
+PASS E m-r4-destination-br C: fixture, floor and round-1 reservation
+  | E m-r4-destination-br C: complete rc=0 round completed gate=opponent round=1 verdict=CLEARED report=2cd75fa9f6502167964e7ae3a6f5b8b9ccd26e3b938f8d32d9ad409c997a661b
+  |   tally rc=0 opponent rounds=1 blocking=0 minor=1 locations=1 unclassified=0 severity-downgrades=0 
+PASS E m-r4-destination-br C: CLEARED sealed (rc 0)
+PASS E m-r4-destination-br C: the completion line
+PASS E m-r4-destination-br C: the tally counts the finding at minor
+PASS E k-r2 C: fixture, floor and round-1 reservation
+  | E k-r2 C: complete rc=0 round completed gate=opponent round=1 verdict=CLEARED report=ba5bfb1f3dfe33570c2b40b9a79a7fc3853ac60790b22129a86488ed38451359
+  |   tally rc=0 opponent rounds=1 blocking=0 minor=1 locations=1 unclassified=0 severity-downgrades=0 
+PASS E k-r2 C: CLEARED sealed (rc 0)
+PASS E k-r2 C: the completion line
+PASS E k-r2 C: the tally counts the finding at minor
+PASS E k-c0 C: fixture, floor and round-1 reservation
+  | E k-c0 C: complete rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-repro/sb-k-c0-C/r18/
+  |   tally rc=0 opponent rounds=0 blocking=0 minor=0 locations=0 unclassified=0 severity-downgrades=0 
+PASS E k-c0 C: the control is refused (rc 3)
+PASS E k-c0 C: by name
+PASS E k-cc C: fixture, floor and round-1 reservation
+  | E k-cc C: complete rc=0 round completed gate=opponent round=1 verdict=CLEARED report=a91ed2a6165df18a82ea5ad0866355f93531911d8239276c40d1ff8cfd7510e6
+  |   tally rc=0 opponent rounds=1 blocking=0 minor=1 locations=1 unclassified=0 severity-downgrades=0 
+PASS E k-cc C: CLEARED sealed (rc 0)
+PASS E k-cc C: the completion line
+PASS E k-cc C: the tally counts the finding at minor
+PASS E m-m C: fixture, floor and round-1 reservation
+  | E m-m C: complete rc=0 round completed gate=opponent round=1 verdict=CLEARED report=27d2b92f7c7fa3857a6d6d70251f12c0ea6f40fd92151cfd5e02c78e541ee9ea
+  |   tally rc=0 opponent rounds=1 blocking=0 minor=1 locations=1 unclassified=0 severity-downgrades=0 
+PASS E m-m C: CLEARED sealed (rc 0)
+PASS E m-m C: the completion line
+PASS E m-m C: the tally counts the finding at minor
+PASS E m-r1-autolink-digit-br en_US.UTF-8: fixture, floor and round-1 reservation
+  | E m-r1-autolink-digit-br en_US.UTF-8: complete rc=0 round completed gate=opponent round=1 verdict=CLEARED report=6064bac3262143e68d9e551a12639c939ef58ba3223c48547ba2329736e8fed0
+  |   tally rc=0 opponent rounds=1 blocking=0 minor=1 locations=1 unclassified=0 severity-downgrades=0 
+PASS E m-r1-autolink-digit-br en_US.UTF-8: CLEARED sealed (rc 0)
+PASS E m-r1-autolink-digit-br en_US.UTF-8: the completion line
+PASS E m-r1-autolink-digit-br en_US.UTF-8: the tally counts the finding at minor
+PASS E m-r4-destination-br en_US.UTF-8: fixture, floor and round-1 reservation
+  | E m-r4-destination-br en_US.UTF-8: complete rc=0 round completed gate=opponent round=1 verdict=CLEARED report=0745735684129ee2891e9ee702153cd4c00faebddfe3a547d3d1a99569895b45
+  |   tally rc=0 opponent rounds=1 blocking=0 minor=1 locations=1 unclassified=0 severity-downgrades=0 
+PASS E m-r4-destination-br en_US.UTF-8: CLEARED sealed (rc 0)
+PASS E m-r4-destination-br en_US.UTF-8: the completion line
+PASS E m-r4-destination-br en_US.UTF-8: the tally counts the finding at minor
+PASS E k-r2 en_US.UTF-8: fixture, floor and round-1 reservation
+  | E k-r2 en_US.UTF-8: complete rc=0 round completed gate=opponent round=1 verdict=CLEARED report=a59cabd54032a693468ca7a65a83e18cb06d292ebe356afd7f74d58e2fde01ec
+  |   tally rc=0 opponent rounds=1 blocking=0 minor=1 locations=1 unclassified=0 severity-downgrades=0 
+PASS E k-r2 en_US.UTF-8: CLEARED sealed (rc 0)
+PASS E k-r2 en_US.UTF-8: the completion line
+PASS E k-r2 en_US.UTF-8: the tally counts the finding at minor
+PASS E k-c0 en_US.UTF-8: fixture, floor and round-1 reservation
+  | E k-c0 en_US.UTF-8: complete rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-repro/sb-k-c0-en_US.
+  |   tally rc=0 opponent rounds=0 blocking=0 minor=0 locations=0 unclassified=0 severity-downgrades=0 
+PASS E k-c0 en_US.UTF-8: the control is refused (rc 3)
+PASS E k-c0 en_US.UTF-8: by name
+PASS E k-cc en_US.UTF-8: fixture, floor and round-1 reservation
+  | E k-cc en_US.UTF-8: complete rc=0 round completed gate=opponent round=1 verdict=CLEARED report=6e609c899998bc70518835c58aa6157c0316917edb3963d063f269cd41a1a91d
+  |   tally rc=0 opponent rounds=1 blocking=0 minor=1 locations=1 unclassified=0 severity-downgrades=0 
+PASS E k-cc en_US.UTF-8: CLEARED sealed (rc 0)
+PASS E k-cc en_US.UTF-8: the completion line
+PASS E k-cc en_US.UTF-8: the tally counts the finding at minor
+PASS E m-m en_US.UTF-8: fixture, floor and round-1 reservation
+  | E m-m en_US.UTF-8: complete rc=0 round completed gate=opponent round=1 verdict=CLEARED report=9d6ae06ae51dd88f05f757310929c7cbf70fcb3c4b3073731e689563b5c6eb5f
+  |   tally rc=0 opponent rounds=1 blocking=0 minor=1 locations=1 unclassified=0 severity-downgrades=0 
+PASS E m-m en_US.UTF-8: CLEARED sealed (rc 0)
+PASS E m-m en_US.UTF-8: the completion line
+PASS E m-m en_US.UTF-8: the tally counts the finding at minor
+== O-023: one canonical round, timed on CUR (the reviewer V and U runs)
+  | CUR U (a bracket in a code span on every line): n=50 1s rc=0; n=100 11s rc=0
+  | CUR V (one bracket in a code span, then n lines): n=200 41s rc=0; n=400 300s rc=0
+PASS O-023: CUR parses the 400-line V run (rc 0)
+PASS O-023: CUR takes 30 s or more on the 400-line V run (T030o50 bound missed)
+PASS O-023: doubling the V run from 200 to 400 lines more than quadruples its time
+PASS live worktree status outside notes/verification/ unchanged
+end 2026-10-09T09:01:25Z
+r18-repro failures=0

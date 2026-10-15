@@ -1,0 +1,66 @@
+@@OLD
+test_verification_bindings() {
+  local spec_dir catalog value fields index record_types mapped_one=0 mapped_two=0
+@@NEW
+# AC-023/FM-002/INV-005 — O-017's analyzer sibling and T030o43. The analyzer
+# reads the spec under LC_ALL=C, so a byte the caller's locale cannot decode no
+# longer hides a clarification marker or an AC id; and its own searches and
+# the verification parsers it runs read their status, so a read that failed is
+# an error, never an absence that passes.
+analyzer_locale_and_fault_cases() {
+  local spec_dir f
+  spec_dir="$(make_verification_spec_dir analyzerlocale)"
+  run_rc 0 "$ANALYZE" "$spec_dir"
+  cp "$spec_dir/spec.md" "$SANDBOX/analyzer-spec"
+  if [[ "$(uname -s)" == Darwin && -n "$(printf '\222 [NEEDS CLARIFICATION: x]\n' | in_locale en_US.UTF-8 grep -n '\[NEEDS CLARIFICATION')" ]]; then
+    t_fail 'AC-023: precondition: an unpinned grep under en_US.UTF-8 must miss a marker after 0x92 0x20 (O-017)'
+  fi
+  printf '\nA fixture line \222 [NEEDS CLARIFICATION: fixture marker]\n' >> "$spec_dir/spec.md"
+  run_rc 1 in_locale en_US.UTF-8 "$ANALYZE" "$spec_dir"
+  assert_contains "$OUT" 'unresolved [NEEDS CLARIFICATION] marker(s)' \
+    'AC-023: a clarification marker after an undecodable byte read as absent under en_US.UTF-8 (O-017)'
+  cp "$SANDBOX/analyzer-spec" "$spec_dir/spec.md"
+  printf '\n- \222 AC-998 is a criterion no task covers\n' >> "$spec_dir/spec.md"
+  run_rc 1 in_locale en_US.UTF-8 "$ANALYZE" "$spec_dir"
+  assert_contains "$OUT" 'not covered by any implementation task' \
+    'AC-023: an AC id after an undecodable byte was missed under en_US.UTF-8 (O-017)'
+  assert_contains "$OUT" 'AC-998' 'AC-023: the uncovered id is named'
+  cp "$SANDBOX/analyzer-spec" "$spec_dir/spec.md"
+  run_rc 0 "$ANALYZE" "$spec_dir"
+  f="$SANDBOX/fault-nc"; fault_bin "$f" grep '\[NEEDS CLARIFICATION'
+  run_rc 1 env PATH="$f:$PATH" "$ANALYZE" "$spec_dir"
+  assert_contains "$OUT" 'spec.md and plan.md could not be searched for [NEEDS CLARIFICATION] markers' \
+    'AC-023: a marker search that failed read as no marker (T030o43)'
+  f="$SANDBOX/fault-acs"; fault_bin "$f" grep 'AC-[0-9]{3}'
+  run_rc 1 env PATH="$f:$PATH" "$ANALYZE" "$spec_dir"
+  assert_contains "$OUT" 'spec.md could not be read for its AC ids' \
+    'AC-023: an AC inventory that could not be read read as no uncovered AC (T030o43)'
+  assert_contains "$OUT" 'verification contract: vf_bindings could not read the criteria and requirements of spec.md' \
+    'AC-023: the binding parser read an AC inventory that failed (T030o43)'
+  f="$SANDBOX/fault-refs"; fault_bin "$f" grep '(AC|REQ)-[0-9]{3}' "$spec_dir/tasks.md"
+  run_rc 1 env PATH="$f:$PATH" "$ANALYZE" "$spec_dir"
+  assert_contains "$OUT" 'tasks.md could not be read for its AC and REQ references' \
+    'AC-023: a task reference inventory that could not be read read as no dangling ref (T030o43)'
+  f="$SANDBOX/fault-count"; fault_bin "$f" awk '$2=="error"'
+  run_rc 1 env PATH="$f:$PATH" "$ANALYZE" "$spec_dir"
+  assert_contains "$OUT" 'verification contract: vf_bindings could not count its diagnostics' \
+    'AC-023: a diagnostic count that failed published a catalog carrying errors (T030o43)'
+  f="$SANDBOX/fault-fm-count"; fault_bin "$f" awk '# vf_fm_count'
+  run_rc 1 env PATH="$f:$PATH" "$ANALYZE" "$spec_dir"
+  assert_contains "$OUT" "✗ $spec_dir/spec.md: frontmatter could not be counted for verification_contract" \
+    'AC-023: the configuration policy counted an unreadable frontmatter as no contract (T030o43)'
+  assert_contains "$OUT" "verification contract: $spec_dir/spec.md: frontmatter could not be counted for verification_contract" \
+    'AC-023: the binding parser counted an unreadable frontmatter as no contract (T030o43)'
+  f="$SANDBOX/fault-fm-value"
+  fault_bin "$f" awk 'key=verification_contract'; fault_bin "$f" sed '^verification_contract:'
+  run_rc 1 env PATH="$f:$PATH" "$ANALYZE" "$spec_dir"
+  assert_contains "$OUT" "✗ $spec_dir/spec.md: frontmatter could not be read for verification_contract" \
+    'AC-023: the configuration policy read an unreadable frontmatter as no contract (T030o43)'
+  assert_contains "$OUT" "verification contract: $spec_dir/spec.md: frontmatter could not be read for verification_contract" \
+    'AC-023: the binding parser read an unreadable frontmatter as no contract (T030o43)'
+}
+
+test_verification_bindings() {
+  analyzer_locale_and_fault_cases
+  local spec_dir catalog value fields index record_types mapped_one=0 mapped_two=0
+@@END

@@ -1,0 +1,76 @@
+    # The pass reads by the canonical finding's own field grammar, keyed on
+    # the lines that carry a record rather than on a heading it might not see
+    # (T030o43 reviews 1 to 3). A heading is an ATX heading (up to three
+    # spaces, a run of `#`, then a space, a tab or the end); every heading
+    # closes the finding before it, and one whose first word is `Finding` in
+    # any case and whose second is a finding ID opens one, a title allowed
+    # after. A line not read as a heading whose text, after leading
+    # whitespace or invisible characters, is a `#` run and the word Finding
+    # is refused by name, so a finding's fields cannot fall into the one
+    # above it (R3-F3). A field is decided by its label (R3-F2): a line whose
+    # first word, after indentation, a bullet or ordered-list marker and
+    # emphasis, is Class or Severity in any case, and which is either an
+    # emphasized label or not continued by a letter, digit or hyphen. Inside
+    # a finding such a line must be written `- **Class:**` or
+    # `- **Severity:**` at any indentation, as the canonical parser reads it,
+    # appear once, and carry a value of its grammar, which is the text after
+    # that label and nothing further (R3-F1). Outside any finding the written
+    # spelling is refused, and any other such line is prose until a finding
+    # ID appears after the last heading, because only a finding's record can
+    # carry a Class or a tier (R3-F5). A finding with no Class, a field or ID
+    # the grammar cannot read and quoting left open at the end are each
+    # refused by name, so no spelling loses a finding. A byte-order mark on
+    # the first line is not part of it.
+    awk "$_VF_AWK_TEXT"'
+      function bad(why) {printf "manifest line %d: %s: %s\n", FNR, why, vf_original > "/dev/stderr"; failed=1}
+      function flushm() {
+        if(id!="" && cls=="") bad("finding " id " has no readable Class")
+        if(id!="" && cls!="") print id ":" cls ":" sev
+        id=""; cls=""; sev=""; classes=0; severities=0
+      }
+      function value(s, label) {sub("^[ ]*-[[:space:]]+[*][*]" label ":[*][*]", "", s); gsub(/^[[:space:]]+|[[:space:]]+$/, "", s); return s}
+      function fieldname(s,   t, w, emph) {
+        t=s; sub(/^[[:space:]]+/, "", t)
+        if (t ~ /^([-*+]|[0-9]+[.)])[[:space:]]/) sub(/^([-*+]|[0-9]+[.)])[[:space:]]+/, "", t)
+        emph=(t ~ /^[*_]/); sub(/^[*_]+/, "", t)
+        if (!match(t, /^[A-Za-z]+/)) return ""
+        w=tolower(substr(t, 1, RLENGTH)); if (w != "class" && w != "severity") return ""
+        t=substr(t, RLENGTH + 1)
+        if (emph && t ~ /^[*_]/) return w
+        sub(/^[*_[:space:]]+/, "", t)
+        return (t ~ /^[A-Za-z0-9-]/) ? "" : w
+      }
+      FNR == 1 {sub(/^\357\273\277/, "")}
+      vf_quoted($0) {next}
+      /^ ? ? ?#+([ \t]|$)/ {
+        flushm(); heading=$0; sub(/^ +/, "", heading); split(heading, word, /[[:space:]]+/)
+        if (tolower(word[2]) == "finding" && word[3] ~ /^[A-Za-z][A-Za-z0-9]*-[0-9]/) {
+          if (word[3] ~ /^[A-Z][A-Z0-9]*-[0-9]+$/) id=word[3]
+          else bad("a Finding heading whose ID this grammar cannot read")
+        }
+        idseen=(heading ~ /[A-Za-z][A-Za-z0-9]*-[0-9]/)
+        next
+      }
+      /^([[:space:]]|[\200-\377])*#+([[:space:]]|[\200-\377])*[Ff][Ii][Nn][Dd][Ii][Nn][Gg]([^A-Za-z]|$)/ {
+        flushm(); idseen=1; bad("a Finding heading this grammar cannot read"); next
+      }
+      {
+        field=fieldname($0)
+        if (field != "class" && field != "severity") {if ($0 ~ /[A-Za-z][A-Za-z0-9]*-[0-9]/) idseen=1; next}
+        strict=(field == "class") ? ($0 ~ /^[ ]*-[[:space:]]+\*\*Class:\*\*/) : ($0 ~ /^[ ]*-[[:space:]]+\*\*Severity:\*\*/)
+        if (id == "") {
+          if (strict || idseen || $0 ~ /[A-Za-z][A-Za-z0-9]*-[0-9]/) bad("a " field " line outside any Finding")
+          next
+        }
+        if (field == "class") {
+          if (classes++) {bad("a second Class line in finding " id); next}
+          if (!strict) {bad("a Class line this grammar cannot read"); cls="-"; next}
+          cls=value($0, "Class")
+          if (cls !~ /^[a-z][a-z0-9]*(-[a-z0-9]+)*$/) {bad("a Class this grammar cannot read"); cls="-"}
+          next
+        }
+        if (severities++) {bad("a second Severity line in finding " id); next}
+        if (!strict) {bad("a Severity line this grammar cannot read"); next}
+        sev=value($0, "Severity")
+        if (sev !~ /^(data-loss|wrong-result|regression|crash|minor|degraded)$/) {bad("a Severity this grammar cannot read"); sev=""}
+      }

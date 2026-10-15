@@ -1,0 +1,11 @@
+o018-measure run 1 (2026-10-01T06:40:45Z to 07:07:11Z), rc 1: 488 PASS, 14 FAIL, every FAIL a fault of the
+measurement's own section D, not a difference between CUR and D. (1) The analyzer and spec-ac-coverage.sh print
+the kit's absolute path, which differs between the two copies (cur/ and d/), and the comparison did not normalize
+it. (2) 001's vf_reports exits 3 on both kits (its recorded legacy errors) and writes no catalog, so cmp found no
+file on either side and the check read that as a difference. o018-measure-run1-history.txt is the same
+comparison redone by the invoker on run 1's own work files before the script removed them, with the kit path
+normalized and a catalog absent on both kits counted equal: every tally, analyzer, ac-coverage and catalog
+comparison for 001, 002 and 003 under both locales is identical, as are the round-13/14 waiver checks and the
+368 snapshot records outside verification-lib.sh. Sections A, B, C and E passed in run 1 as recorded in its log.
+The script is corrected (o018-measure.sh; run 1's kept as o018-measure-run1.sh) and re-run as the measurement of
+record.

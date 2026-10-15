@@ -1,0 +1,7 @@
+  # Real and plausible manifests parse (R2-F3): a line that merely mentions a
+  # field is prose, a heading as shallow as the Finding heading closes it, and a
+  # fenced example is quoted. A finding that carries a Class alone is no longer
+  # one of them: every manifest finding needs one readable Severity (O-018), so
+  # the shipped class-only row is a refusal in report_record_line_cases. A
+  # CHALLENGED round that re-records the finding at its manifest Class and tier
+  # has nothing to refuse.

@@ -1,0 +1,28 @@
+== host (rc=0)
+platform=Darwin awk=/usr/bin/awk version=/usr/bin/awk: unknown option -W ignored
+record NF=2 split-default=2 split-space=2 reassigned NF=2 class=1
+  byte=\013
+record NF=2 split-default=2 split-space=2 reassigned NF=2 class=1
+  byte=\014
+record NF=2 split-default=2 split-space=2 reassigned NF=2 class=1
+  byte=\015
+case control                rc=0 ids=[G-042$ ] 
+case heading-id-nbsp        rc=3 ids=[G-042$ ] report recovery: heading-id-nbsp/notes/opponent.md:24: incomplete finding G-042<VT>; reconcile canonical records
+case heading-id-nbsp-title  rc=3 ids=[G-042$ ] report recovery: heading-id-nbsp-title/notes/opponent.md:24: incomplete finding G-042<VT>—; reconcile canonical records
+case totals-nbsp            rc=3 ids=[G-042$ ] report recovery: totals-nbsp/notes/opponent.md:7: malformed totals; reconcile canonical records|report recovery: totals-nbsp/notes/opponent.md:24: finding totals disagree; reconcile canonical records
+case totals-nbsp-count      rc=3 ids=[G-042$ ] report recovery: totals-nbsp-count/notes/opponent.md:7: malformed totals; reconcile canonical records|report recovery: totals-nbsp-count/notes/opponent.md:24: finding totals disagree; reconcile canoni
+== container (rc=0)
+platform=Linux awk=/usr/bin/mawk version=mawk 1.3.4 20200120
+record NF=2 split-default=2 split-space=2 reassigned NF=2 class=1
+  byte=\013
+record NF=2 split-default=2 split-space=2 reassigned NF=2 class=1
+  byte=\014
+record NF=2 split-default=2 split-space=2 reassigned NF=2 class=1
+  byte=\015
+case control                rc=0 ids=[G-042$ ] 
+case heading-id-nbsp        rc=3 ids=[G-042$ ] report recovery: heading-id-nbsp/notes/opponent.md:24: incomplete finding G-042<VT>; reconcile canonical records
+case heading-id-nbsp-title  rc=3 ids=[G-042$ ] report recovery: heading-id-nbsp-title/notes/opponent.md:24: incomplete finding G-042<VT>—; reconcile canonical records
+case totals-nbsp            rc=3 ids=[G-042$ ] report recovery: totals-nbsp/notes/opponent.md:7: malformed totals; reconcile canonical records|report recovery: totals-nbsp/notes/opponent.md:24: finding totals disagree; reconcile canonical records
+case totals-nbsp-count      rc=3 ids=[G-042$ ] report recovery: totals-nbsp-count/notes/opponent.md:7: malformed totals; reconcile canonical records|report recovery: totals-nbsp-count/notes/opponent.md:24: finding totals disagree; reconcile canoni
+== differences host vs container (excluding the platform line)
+none

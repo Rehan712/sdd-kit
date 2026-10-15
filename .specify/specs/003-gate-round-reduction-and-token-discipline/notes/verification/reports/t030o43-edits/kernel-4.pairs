@@ -1,0 +1,137 @@
+@@OLD
+    awk "$_VF_AWK_FENCE"'
+      function flushm() {if(id!="" && cls!="") print id ":" cls ":" sev; id=""; cls=""; sev=""}
+      vf_quoted($0) {next}
+      /^#+ Finding [A-Z][A-Z0-9]*-[0-9]+[[:space:]]*$/ {flushm(); id=$NF; next}
+      id != "" && /^-[[:space:]]+\*\*Class:\*\*/ {
+        cls=$0; sub(/^.*\*\*Class:\*\*[[:space:]]*/, "", cls)
+        gsub(/[[:space:]]/, "", cls)
+      }
+      id != "" && /^-[[:space:]]+\*\*Severity:\*\*/ {
+        sev=$0; sub(/^.*\*\*Severity:\*\*[[:space:]]*/, "", sev)
+        gsub(/[[:space:]]/, "", sev)
+      }
+      END {flushm()}
+    ' "$manifest" > "$tmp" || {
+      printf 'report recovery: %s: prior-review manifest could not be parsed; reconcile canonical records\n' "$manifest" >&2; return 3; }
+    records="$(LC_ALL=C sort -u "$tmp")" || return 3
+@@NEW
+    # Every line that carries a manifest record's marker must parse as that
+    # record, by the same field grammar a canonical finding obeys. The grammar
+    # is ASCII, and under the harness pin a byte >= 0x80 is in no character
+    # class, so a heading or field line written with a non-ASCII space no
+    # longer matched it -- and was skipped in silence, which dropped the
+    # finding, its strictest tier and its Class (T030o43 review F1).
+    awk "$_VF_AWK_FENCE"'
+      function bad(why) {printf "manifest line %d: %s: %s\n", FNR, why, $0 > "/dev/stderr"; failed=1}
+      function flushm() {
+        if(id!="" && cls=="") bad("finding " id " has no readable Class")
+        if(id!="" && cls!="") print id ":" cls ":" sev
+        id=""; cls=""; sev=""
+      }
+      vf_quoted($0) {next}
+      /^#+ Finding [A-Z][A-Z0-9]*-[0-9]+[[:space:]]*$/ {flushm(); id=$NF; next}
+      /^#+[^A-Za-z]*Finding([^A-Za-z]|$)/ {flushm(); bad("a Finding heading this grammar cannot read"); next}
+      id != "" && /^-[[:space:]]+\*\*Class:\*\*/ {
+        cls=$0; sub(/^.*\*\*Class:\*\*[[:space:]]*/, "", cls)
+        gsub(/[[:space:]]/, "", cls)
+        if (cls !~ /^[a-z][a-z0-9]*(-[a-z0-9]+)*$/) {bad("a Class this grammar cannot read"); cls="-"}
+        next
+      }
+      id != "" && /^-[[:space:]]+\*\*Severity:\*\*/ {
+        sev=$0; sub(/^.*\*\*Severity:\*\*[[:space:]]*/, "", sev)
+        gsub(/[[:space:]]/, "", sev)
+        if (sev !~ /^(data-loss|wrong-result|regression|crash|minor|degraded)$/) bad("a Severity this grammar cannot read")
+        next
+      }
+      id != "" && /\*\*(Class|Severity):\*\*/ {bad("a Class or Severity line this grammar cannot read")}
+      END {flushm(); if (failed) exit 3}
+    ' "$manifest" > "$tmp" || {
+      printf 'report recovery: %s: prior-review manifest could not be parsed; reconcile canonical records\n' "$manifest" >&2; return 3; }
+    records="$(LC_ALL=C sort -u "$tmp")" ||
+      { printf 'report recovery: %s: prior-review manifest records could not be sorted\n' "$manifest" >&2; return 3; }
+@@END
+@@OLD
+    cursec!="" && $0 !~ /^[[:space:]]*$/ && $0 !~ /^#+[ ]/ {secbody[n SUBSEP cursec]=1}
+@@NEW
+    cursec!="" && !vf_blank($0) && $0 !~ /^#+[ ]/ {secbody[n SUBSEP cursec]=1}
+@@END
+@@OLD
+    function clean(s) {gsub(/^[[:space:]]+|[[:space:]]+$/, "", s); return s}
+    function value(s) {sub(/^.*\*\*[^*]+:\*\*[ ]*/, "", s); return clean(s)}
+@@NEW
+    function clean(s) {gsub(/^[[:space:]]+|[[:space:]]+$/, "", s); return s}
+    function value(s) {sub(/^.*\*\*[^*]+:\*\*[ ]*/, "", s); return clean(s)}
+    # Blank is what a reader sees as blank. A section body is author text in
+    # any script, so a line of only Unicode White_Space characters (their
+    # UTF-8 encodings, which under the harness pin are in no class) is as empty
+    # as a line of ASCII blanks; any other byte is content (T030o43 review).
+    function vf_blank(s) {
+      gsub(/[ \t\r\f\013]|\302[\205\240]|\341\232\200|\342\200[\200-\212\250\251\257]|\342\201\237|\343\200\200/, "", s)
+      return s == ""
+    }
+@@END
+@@OLD
+      awk '/^## Decisions log[[:space:]]*$/ {on=1; print; next} /^## / {on=0} on {print}' "$2" > "$3";;
+@@NEW
+      # The identity keeps more, never less: the section starts at the first
+      # line that begins "## Decisions log", whatever follows on that line,
+      # so a heading carrying a byte the grammar cannot read can no longer
+      # take the whole log out of the input identity (T030o43 review).
+      awk '/^## Decisions log/ && !seen {on=1; seen=1; print; next} /^## / {on=0} on {print}' "$2" > "$3";;
+@@END
+@@OLD
+  [[ "$(wc -c < "$1")" -le 65536 ]] || { echo 'return exceeds 64 KiB' >&2; return 3; }
+@@NEW
+  # The size is read with its status: an empty count compared as 0 and let
+  # any return past the bound (T030o43 review F3).
+  local size
+  size="$(wc -c < "$1")" && [[ "$size" =~ ^[[:space:]]*[0-9]+[[:space:]]*$ ]] ||
+    { echo 'return: its size could not be read' >&2; return 3; }
+  (( size <= 65536 )) || { echo 'return exceeds 64 KiB' >&2; return 3; }
+@@END
+@@OLD
+  [[ -n "$out" ]] || return 0
+  printf '%s\n' "$out" | LC_ALL=C sort -u
+)
+@@NEW
+  [[ -n "$out" ]] || return 0
+  printf '%s\n' "$out" | LC_ALL=C sort -u - ||
+    { printf 'error: %s: ids matching %s could not be sorted\n' "$2" "$1" >&2; return 3; }
+)
+@@END
+@@OLD
+# The harness's own parsing runs under the C locale (O-017, round 12). Every
+# grammar the kit parses is ASCII, so C reads every record a UTF-8 or
+# single-byte locale reads, and decodes every byte, where they do not: under a
+# UTF-8 locale macOS awk dies at the first byte it cannot decode, and grep
+# stops matching there and still exits 0. One cp1252 apostrophe in a
+# prior-review manifest dropped the history a clearing verdict is checked
+# against, and a clarification marker after such a byte read as absent. The
+@@NEW
+# The harness's own parsing runs under the C locale (O-017, round 12). Every
+# grammar the kit parses is ASCII. Under C each byte is one character, so no
+# byte can end a parse, where under a UTF-8 locale macOS awk dies at the first
+# byte it cannot decode and grep stops matching there and still exits 0: one
+# cp1252 apostrophe in a prior-review manifest dropped the history a clearing
+# verdict is checked against, and a clarification marker after such a byte
+# read as absent. Under C a byte >= 0x80 is also in no character class, so a
+# record written with a non-ASCII space or letter where the grammar wants ASCII
+# does not match it; each parser that decides with it refuses such a line, or,
+# where it decides what must be covered, keeps more (T030o43 review). The
+@@END
+@@OLD
+# once, here, and every harness entry script loads this library directly after
+# lib.sh, before any program reads a repository or bookkeeping byte; the export
+# reaches each process it starts. lib.sh stays unpinned, so 002's dispatcher,
+# which sources it but not this library, and the provider CLIs it starts keep
+# the user's locale.
+@@NEW
+# once, here, and every harness entry script loads this library directly after
+# lib.sh, before any program reads a repository or bookkeeping byte; the export
+# reaches each process it starts. sdd-doctor.sh loads it too, so the doctor's
+# checks, and the provider readiness probes it starts (which judge by exit
+# status alone), run under C as well. lib.sh stays unpinned, so 002's
+# dispatcher, which sources it but not this library, and the provider CLIs it
+# starts keep the user's locale.
+@@END

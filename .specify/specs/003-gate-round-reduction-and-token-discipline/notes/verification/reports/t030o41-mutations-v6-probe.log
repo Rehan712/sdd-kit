@@ -1,0 +1,123 @@
+== baselines
+== kill K21-stage-kit-is-the-old-tar
+  | test_stage_kit_excludes_and_never_writes_through_a_host_models_yml rc=1
+  |   assert: stage_kit carried the host's ignored registry.yml into the staged kit
+PASS K21-stage-kit-is-the-old-tar KILLED (want=1 got=1)
+== kill K33-suites-keep-git-local-environment
+  | reuse_command_input_cases rc=1
+  |   assert: expected exit 0, got 1: env GIT_ALTERNATE_OBJECT_DIRECTORIES=/private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/1c1e945f-3f81-4ba8-8888-8263f1ca2273/scratchpad/t030o41-mut/
+  |   assert: AC-020: a suite kept git's repository-local environment unexpectedly contains: still set after load
+PASS K33-suites-keep-git-local-environment KILLED (want=1 got=1)
+== kill K41-floor-fixture-copies-with-cp-R
+  | test_floor_fixture_stages_only_enumerated_scripts rc=1
+  |   assert: AC-007: floor_fixture staged the host kit's ignored script
+PASS K41-floor-fixture-copies-with-cp-R KILLED (want=1 got=1)
+== kill K42-stage-umbrella-copies-with-cp-R
+  | test_stage_umbrella_copies_only_enumerated_scripts rc=1
+  |   assert: stage_umbrella staged the host kit's ignored script
+PASS K42-stage-umbrella-copies-with-cp-R KILLED (want=1 got=1)
+== kill K44-stage-example-copies-with-cp-R
+  | test_stage_example_copies_only_enumerated_files rc=1
+  |   assert: stage_example staged the host kit's ignored file
+PASS K44-stage-example-copies-with-cp-R KILLED (want=1 got=1)
+== witness W02-K44-survives-without-the-EXAMPLE-binding
+  | test_stage_example_copies_only_enumerated_files rc=0
+PASS W02-K44-survives-without-the-EXAMPLE-binding SURVIVES (witness) (want=1 got=1)
+== kill K52-fixture-git-unpinned
+  | fixture_repository_cases rc=1
+  |   assert: AC-020: make_verification_git_dir failed under a user's git configuration or a hook's environment
+  |   assert: AC-020: a user's git configuration or a hook's environment left the fixture repository without a commit
+PASS K52-fixture-git-unpinned KILLED (want=1 got=1)
+== record R01-git-host-build-check-removed
+  | unmutated fixture_repository_cases@no-writes rc=1
+PASS R01-git-host-build-check-removed unmutated judge records host repository at (want=0 got=0)
+  | fixture_repository_cases@no-writes rc=1
+  |   assert: AC-020: make_verification_git_dir failed under a user's git configuration or a hook's environment
+  |   assert: AC-020: a user's git configuration or a hook's environment left the fixture repository without a commit
+PASS R01-git-host-build-check-removed KILLED (want=1 got=1)
+== record R02-kit-copy-build-checks-removed
+  | unmutated kit_copy_cases@no-writes rc=1
+PASS R02-kit-copy-build-checks-removed unmutated judge records kit-copy (want=0 got=0)
+  | kit_copy_cases@no-writes rc=1
+  |   assert: expected exit 0, got 1: copy_kit /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/1c1e945f-3f81-4ba8-8888-8263f1ca2273/scratchpad/t030o41-mut/tmp/sddkit.hlQl3B/kit-src /p
+  |   assert: AC-020: copy_kit dropped the enumerated path .gitignore
+PASS R02-kit-copy-build-checks-removed KILLED (want=1 got=1)
+== record R03-letterless-spec-build-check-removed
+  | unmutated bookkeeping_anchor_cases@no-writes rc=1
+PASS R03-letterless-spec-build-check-removed unmutated judge records letterless-spec (want=0 got=0)
+  | bookkeeping_anchor_cases@no-writes rc=1
+  |   assert: expected exit 0, got 3: snapshot_fixture /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/1c1e945f-3f81-4ba8-8888-8263f1ca2273/scratchpad/t030o41-mut/tmp/sddkit.Eo211H/an
+  |   assert: expected exit 0, got 3: snapshot_fixture /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/1c1e945f-3f81-4ba8-8888-8263f1ca2273/scratchpad/t030o41-mut/tmp/sddkit.Eo211H/an
+PASS R03-letterless-spec-build-check-removed KILLED (want=1 got=1)
+== record R04-scan-tree-1-build-check-removed
+  | unmutated superseded_environment_cases@no-writes rc=1
+PASS R04-scan-tree-1-build-check-removed unmutated judge records scan-tree-1 (want=0 got=0)
+  | superseded_environment_cases@no-writes rc=1
+  |   assert: AC-018: the scan could not read its fixture tree
+  |   assert: AC-018: the superseded claim survived as verbatim.md missing substring: verbatim.md
+PASS R04-scan-tree-1-build-check-removed KILLED (want=1 got=1)
+== record R05-scan-tree-2-build-check-removed
+  | unmutated superseded_environment_cases@no-writes rc=1
+PASS R05-scan-tree-2-build-check-removed unmutated judge records scan-tree-2 (want=0 got=0)
+  | superseded_environment_cases@no-writes rc=1
+  |   assert: AC-018: the scan could not read its fixture tree
+  |   assert: AC-018: the superseded claim survived as verbatim.md missing substring: verbatim.md
+PASS R05-scan-tree-2-build-check-removed KILLED (want=1 got=1)
+== record R06-scan-tree-3-build-check-removed
+  | unmutated superseded_environment_cases@no-writes rc=1
+PASS R06-scan-tree-3-build-check-removed unmutated judge records scan-tree-3 (want=0 got=0)
+  | superseded_environment_cases@no-writes rc=1
+  |   assert: AC-018: the scan could not read its fixture tree
+  |   assert: AC-018: the superseded claim survived as verbatim.md missing substring: verbatim.md
+PASS R06-scan-tree-3-build-check-removed KILLED (want=1 got=1)
+== record R07-tally-host-build-check-removed
+  | unmutated test_empty_record_directories_do_not_decide_the_002_tally@no-writes rc=1
+PASS R07-tally-host-build-check-removed unmutated judge records tally-host (want=0 got=0)
+  | test_empty_record_directories_do_not_decide_the_002_tally@no-writes rc=1
+  |   assert: AC-010: cannot copy shipped 002 records as the identity hashes them
+  |   assert: expected exit 0, got 2: bash /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/1c1e945f-3f81-4ba8-8888-8263f1ca2273/scratchpad/t030o41-mut/copy/scripts/spec-gate.sh tally 
+PASS R07-tally-host-build-check-removed KILLED (want=1 got=1)
+== record R08-nested-clone-build-check-removed
+  | unmutated test_ignored_local_scripts_do_not_reach_the_documented_workflow@no-writes rc=1
+PASS R08-nested-clone-build-check-removed unmutated judge records nested-clone (want=0 got=0)
+  | test_ignored_local_scripts_do_not_reach_the_documented_workflow@no-writes rc=1
+  |   assert: cannot build the host kit
+  |   assert: documented fixture: cannot copy the kit scripts
+PASS R08-nested-clone-build-check-removed KILLED (want=1 got=1)
+== record R09-doctor-host-build-check-removed
+  | unmutated test_AC_009_doctor_fixture_excludes_machine_local_kit_files@no-writes rc=1
+PASS R09-doctor-host-build-check-removed unmutated judge records doctor-host (want=0 got=0)
+  | test_AC_009_doctor_fixture_excludes_machine_local_kit_files@no-writes rc=1
+  |   assert: AC-009: cannot copy the kit for the doctor fixture
+  |   assert: expected exit 0, got 127: run_doctor
+PASS R09-doctor-host-build-check-removed KILLED (want=1 got=1)
+== record R10-ac-coverage-build-check-removed
+  | unmutated test_default_root_is_the_git_toplevel@no-writes rc=1
+PASS R10-ac-coverage-build-check-removed unmutated judge records ac-coverage-project (want=0 got=0)
+  | test_default_root_is_the_git_toplevel@no-writes rc=0
+PASS R10-ac-coverage-build-check-removed KILLED (want=1 got=1)
+== kill K75-fixture-git-climbs-out-of-the-sandbox
+  | fixture_repository_cases rc=1
+  |   assert: AC-020: a write after a failed fixture build staged files in an enclosing repository
+PASS K75-fixture-git-climbs-out-of-the-sandbox KILLED (want=1 got=1)
+== kill K76-stage-kit-failure-prints-no-path
+  | test_stage_kit_failure_is_named_and_stays_in_the_sandbox rc=1
+  |   assert: stage_kit handed its caller a path outside the sandbox: ''
+  |   assert: stage_kit left no record of the failed copy missing substring: stage_kit kit copy
+PASS K76-stage-kit-failure-prints-no-path KILLED (want=1 got=1)
+== kill K77-stage-example-failure-lost-in-a-substitution
+  | test_stage_example_failure_is_named_and_stays_in_the_sandbox rc=1
+  |   assert: stage_example handed its caller something other than a sandbox path: 'assert: cannot copy the example as the input identity enumerates it
+  |   assert: stage_example left no record of the failed copy missing substring: stage_example example copy
+PASS K77-stage-example-failure-lost-in-a-substitution KILLED (want=1 got=1)
+== kill K78-floor-fixture-failure-lost-in-a-substitution
+  | test_floor_fixture_failure_is_named_and_stays_in_the_sandbox rc=1
+  |   assert: floor_fixture handed its caller something other than a sandbox path: 'assert: AC-007: cannot stage the kit scripts
+  |   assert: floor_fixture left no record of the failed copy missing substring: floor_fixture kit scripts
+PASS K78-floor-fixture-failure-lost-in-a-substitution KILLED (want=1 got=1)
+== kill K79-stage-umbrella-failure-prints-no-path
+  | test_stage_umbrella_failure_is_named_and_stays_in_the_sandbox rc=1
+  |   assert: stage_umbrella handed its caller a path outside the sandbox: ''
+  |   assert: stage_umbrella left no record of the failed copy missing substring: stage_umbrella kit scripts
+PASS K79-stage-umbrella-failure-prints-no-path KILLED (want=1 got=1)
+matrix failures=0

@@ -1,0 +1,51 @@
+@@OLD
+             '- [`]`](u)Severity: data-loss|a second Severity line in finding G-042' \
+             '- Note<br>Severity: data-loss|a second Severity line in finding G-042'; do
+@@NEW
+             '- [`]`](u)Severity: data-loss|a second Severity line in finding G-042' \
+             '- Note<br>Severity: data-loss|a second Severity line in finding G-042' \
+             '- Note<pre>Severity: data-loss</pre>|raw HTML outside a code span in finding G-042' \
+             $'- Note\r\rSeverity: data-loss|a carriage return inside a line in finding G-042' \
+             $'- Note\fSeverity: data-loss|a form feed or vertical tab in finding G-042' \
+             '- [\\`]`](u)Severity: data-loss|a second Severity line in finding G-042' \
+             $'\n![x\n####### y](u)Severity: data-loss|a second Severity line in finding G-042' \
+             $'\n```a`b\n\n![x\ny](u)Severity: data-loss\n```|quoted content carries a Severity line'; do
+@@END
+@@OLD
+  # more than its line. Round 15's mechanisms follow, one spelling each
+  # (T030o47): a paragraph boundary the reader misses (a sibling ordered item)
+  # or invents (an indented list marker), a code span that holds a bracket, and
+  # a rendered line start (a br tag).
+@@NEW
+  # more than its line. Round 15's mechanisms follow, one spelling each
+  # (T030o47): a paragraph boundary the reader misses (a sibling ordered item)
+  # or invents (an indented list marker), a code span that holds a bracket, and
+  # a rendered line start (a br tag). Round 16's follow (O-018, O-022): raw HTML
+  # inside a finding, a carriage return inside a line, a form feed, a code span
+  # placed with 2.4's escapes, an image split by a line of seven marks, and an
+  # image after a backtick line the tracker fences and a renderer does not.
+@@END
+@@OLD
+             '- **Severity:** minor\n\nNote\n> <b\n> title="x">Severity: data-loss</b>|quoted content carries a Severity line'; do
+@@NEW
+             '- **Severity:** minor\n\nNote\n> <b\n> title="x">Severity: data-loss</b>|quoted content carries a Severity line' \
+             '- **Severity:** minor\n\nNote<pre>Severity: data-loss</pre>|raw HTML outside a code span in finding G-050' \
+             '- **Severity:** minor\n\nNote\r\rSeverity: data-loss|a carriage return inside a line in finding G-050' \
+             '- **Severity:** minor\n\n![x\n####### y](u)Severity: data-loss|a Severity line this grammar cannot read in finding G-050'; do
+@@END
+@@OLD
+  # The round that completes carries a block-level HTML block directly after its
+  # Severity line, which ends that line's item (O-021).
+  record_line_report "$res" 2 CHALLENGED 1 0 '### Finding G-042' tier-binding open '- **Severity:** data-loss\n<details>\nx\n</details>\n' > "$report"
+  run_rc 0 bash "$cli" round "$spec" opponent --complete "$report"
+@@NEW
+  # An HTML block directly after a Severity line is raw HTML inside a finding,
+  # refused by name at completion (round 16, O-018); the round that completes
+  # carries a fence there, which ends that line's item (O-021).
+  record_line_report "$res" 2 CHALLENGED 1 0 '### Finding G-042' tier-binding open '- **Severity:** data-loss\n<details>\nx\n</details>\n' > "$report"
+  run_rc 3 bash "$cli" round "$spec" opponent --complete "$report"
+  assert_contains "$OUT" 'raw HTML outside a code span in finding G-042' \
+    'AC-009: a round 2 with an HTML block after a field line was not refused as raw HTML (round 16, O-018)'
+  record_line_report "$res" 2 CHALLENGED 1 0 '### Finding G-042' tier-binding open '- **Severity:** data-loss\n````text\nplain output\n````\n' > "$report"
+  run_rc 0 bash "$cli" round "$spec" opponent --complete "$report"
+@@END

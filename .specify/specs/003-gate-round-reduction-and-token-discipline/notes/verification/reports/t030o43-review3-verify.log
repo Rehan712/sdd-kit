@@ -1,0 +1,148 @@
+== control: the canonical manifest refuses the CLEARED round in every kit and locale
+PASS control CUR C: rc=3 report recovery: m/control/notes/opponent.md:24: clearing verdict rests on 1 lowered severity tier(s) of known findings; reconcile canonical records
+PASS control CUR en_US.UTF-8: rc=3 report recovery: m/control/notes/opponent.md:24: clearing verdict rests on 1 lowered severity tier(s) of known findings; reconcile canonical records
+PASS control REV C: rc=3 report recovery: m/control/notes/opponent.md:24: clearing verdict rests on 1 lowered severity tier(s) of known findings; reconcile canonical records
+PASS control REV en_US.UTF-8: rc=3 report recovery: m/control/notes/opponent.md:24: clearing verdict rests on 1 lowered severity tier(s) of known findings; reconcile canonical records
+PASS control PRE C: rc=3 report recovery: m/control/notes/opponent.md:24: clearing verdict rests on 1 lowered severity tier(s) of known findings; reconcile canonical records
+PASS control PRE en_US.UTF-8: rc=3 report recovery: m/control/notes/opponent.md:24: clearing verdict rests on 1 lowered severity tier(s) of known findings; reconcile canonical records
+== R3-F1: the value after the LAST bold label on a field line
+PASS F1 sev-then-prior CUR C (seals: the regression): rc=0 
+PASS F1 sev-then-prior REV C (refused by name): rc=3 manifest line 5: a Severity this grammar cannot read: - **Severity:** data-loss; **Prior:** minor|report recovery: m/sev-then-prior/notes/verification/reports/opponent-findings-review.md: prior-review manifest could not be parsed; reconcile canonical records
+PASS F1 sev-minor-then-prior-dataloss CUR C (the LAST value read): rc=3 report recovery: m/sev-minor-then-dl/notes/opponent.md:24: clearing verdict rests on 1 lowered severity tier(s) of known findings; reconcile canonical records
+PASS F1 class-then-status CUR C (Class bound to open): rc=3 report recovery: m/class-then-status/notes/opponent.md:24: finding G-042 changes Class from open to tier-binding; reconcile canonical records|report recovery: m/class-then-status/notes/opponent.md:24: clearing verdict rests on 1 lowered severity tier(s) of known findings; reconcile canonical records
+PASS F1 class-then-status REV C: rc=3 manifest line 4: a Class this grammar cannot read: - **Class:** tier-binding; **Status:** open|report recovery: m/class-then-status/notes/verification/reports/opponent-findings-review.md: prior-review manifest could not be parsed; reconcile canonical records
+PASS F1 sev-then-prior CUR en_US.UTF-8 (seals: the regression): rc=0 
+PASS F1 sev-then-prior REV en_US.UTF-8 (refused by name): rc=3 manifest line 5: a Severity this grammar cannot read: - **Severity:** data-loss; **Prior:** minor|report recovery: m/sev-then-prior/notes/verification/reports/opponent-findings-review.md: prior-review manifest could not be parsed; reconcile canonical records
+PASS F1 sev-minor-then-prior-dataloss CUR en_US.UTF-8 (the LAST value read): rc=3 report recovery: m/sev-minor-then-dl/notes/opponent.md:24: clearing verdict rests on 1 lowered severity tier(s) of known findings; reconcile canonical records
+PASS F1 class-then-status CUR en_US.UTF-8 (Class bound to open): rc=3 report recovery: m/class-then-status/notes/opponent.md:24: finding G-042 changes Class from open to tier-binding; reconcile canonical records|report recovery: m/class-then-status/notes/opponent.md:24: clearing verdict rests on 1 lowered severity tier(s) of known findings; reconcile canonical records
+PASS F1 class-then-status REV en_US.UTF-8: rc=3 manifest line 4: a Class this grammar cannot read: - **Class:** tier-binding; **Status:** open|report recovery: m/class-then-status/notes/verification/reports/opponent-findings-review.md: prior-review manifest could not be parsed; reconcile canonical records
+  info F1 sev-then-prior PRE en_US.UTF-8: rc=3 report recovery: m/sev-then-prior/notes/opponent.md:24: clearing verdict rests on 1 lowered severity tier(s) of known findings; reconcile canonical records
+== R3-F2: a Severity label not followed immediately by a colon is prose (the tier drops)
+PASS F2 space-colon CUR C (seals): rc=0 
+PASS F2 space-colon CUR en_US.UTF-8 (seals): rc=0 
+PASS F2 space-colon REV C (seals): rc=0 
+PASS F2 space-colon REV en_US.UTF-8 (seals): rc=0 
+  info F2 space-colon PRE en_US.UTF-8: rc=0 
+PASS F2 nbsp-colon CUR C (seals): rc=0 
+PASS F2 nbsp-colon CUR en_US.UTF-8 (seals): rc=0 
+PASS F2 nbsp-colon REV C (seals): rc=0 
+PASS F2 nbsp-colon REV en_US.UTF-8 (seals): rc=0 
+  info F2 nbsp-colon PRE en_US.UTF-8: rc=0 
+PASS F2 nnbsp-colon CUR C (seals): rc=0 
+PASS F2 nnbsp-colon CUR en_US.UTF-8 (seals): rc=0 
+PASS F2 nnbsp-colon REV C (seals): rc=0 
+PASS F2 nnbsp-colon REV en_US.UTF-8 (seals): rc=0 
+  info F2 nnbsp-colon PRE en_US.UTF-8: rc=0 
+PASS F2 bold-space-colon CUR C (seals): rc=0 
+PASS F2 bold-space-colon CUR en_US.UTF-8 (seals): rc=0 
+PASS F2 bold-space-colon REV C (seals): rc=0 
+PASS F2 bold-space-colon REV en_US.UTF-8 (seals): rc=0 
+  info F2 bold-space-colon PRE en_US.UTF-8: rc=0 
+PASS F2 emdash CUR C (seals): rc=0 
+PASS F2 emdash CUR en_US.UTF-8 (seals): rc=0 
+PASS F2 emdash REV C (seals): rc=0 
+PASS F2 emdash REV en_US.UTF-8 (seals): rc=0 
+  info F2 emdash PRE en_US.UTF-8: rc=0 
+PASS F2 fullwidth-colon CUR C (seals): rc=0 
+PASS F2 fullwidth-colon CUR en_US.UTF-8 (seals): rc=0 
+PASS F2 fullwidth-colon REV C (seals): rc=0 
+PASS F2 fullwidth-colon REV en_US.UTF-8 (seals): rc=0 
+  info F2 fullwidth-colon PRE en_US.UTF-8: rc=0 
+PASS F2 ordered CUR C (seals): rc=0 
+PASS F2 ordered CUR en_US.UTF-8 (seals): rc=0 
+PASS F2 ordered REV C (refused by name: a regression in CUR): rc=3 manifest line 5: a Class or Severity line this grammar cannot read: 1. **Severity:** data-loss|report recovery: m/f2-ordered/notes/verification/reports/opponent-findings-review.md: prior-review manifest could not be parsed; reconcile canonical records
+PASS F2 ordered REV en_US.UTF-8 (refused by name: a regression in CUR): rc=3 manifest line 5: a Class or Severity line this grammar cannot read: 1. **Severity:** data-loss|report recovery: m/f2-ordered/notes/verification/reports/opponent-findings-review.md: prior-review manifest could not be parsed; reconcile canonical records
+  info F2 ordered PRE en_US.UTF-8: rc=0 
+PASS F2 nocolon CUR C (seals): rc=0 
+PASS F2 nocolon CUR en_US.UTF-8 (seals): rc=0 
+PASS F2 nocolon REV C (seals): rc=0 
+PASS F2 nocolon REV en_US.UTF-8 (seals): rc=0 
+  info F2 nocolon PRE en_US.UTF-8: rc=0 
+== R3-F3: a Finding line not read as a heading moves a Class-less finding's Severity into the finding above
+PASS F3 nbsp-after-hashes CUR C (seals: the regression): rc=0 
+PASS F3 nbsp-after-hashes REV C (refused by review 2's catch-all): rc=3 manifest line 5: a Finding heading this grammar cannot read: ### Finding G-042|report recovery: m/f3-nbsp-after/notes/verification/reports/opponent-findings-review.md: prior-review manifest could not be parsed; reconcile canonical records
+PASS F3 readable control CUR C: rc=3 manifest line 6: finding G-042 has no readable Class: - **Severity:** data-loss|report recovery: m/f3-readable/notes/verification/reports/opponent-findings-review.md: prior-review manifest could not be parsed; reconcile canonical records
+PASS F3 tab CUR C (seals, pre-existing): rc=0 
+PASS F3 tab REV C (seals, pre-existing): rc=0 
+PASS F3 zwsp CUR C (seals, pre-existing): rc=0 
+PASS F3 zwsp REV C (seals, pre-existing): rc=0 
+PASS F3 nbsp-before CUR C (seals, pre-existing): rc=0 
+PASS F3 nbsp-before REV C (seals, pre-existing): rc=0 
+PASS F3 nbsp-after-hashes CUR en_US.UTF-8 (seals: the regression): rc=0 
+PASS F3 nbsp-after-hashes REV en_US.UTF-8 (refused by review 2's catch-all): rc=3 manifest line 5: a Finding heading this grammar cannot read: ### Finding G-042|report recovery: m/f3-nbsp-after/notes/verification/reports/opponent-findings-review.md: prior-review manifest could not be parsed; reconcile canonical records
+PASS F3 readable control CUR en_US.UTF-8: rc=3 manifest line 6: finding G-042 has no readable Class: - **Severity:** data-loss|report recovery: m/f3-readable/notes/verification/reports/opponent-findings-review.md: prior-review manifest could not be parsed; reconcile canonical records
+PASS F3 tab CUR en_US.UTF-8 (seals, pre-existing): rc=0 
+PASS F3 tab REV en_US.UTF-8 (seals, pre-existing): rc=0 
+PASS F3 zwsp CUR en_US.UTF-8 (seals, pre-existing): rc=0 
+PASS F3 zwsp REV en_US.UTF-8 (seals, pre-existing): rc=0 
+PASS F3 nbsp-before CUR en_US.UTF-8 (seals, pre-existing): rc=0 
+PASS F3 nbsp-before REV en_US.UTF-8 (seals, pre-existing): rc=0 
+== R3-F4: Tests locators and manual observation names are taken from the mapped line
+PASS F4 locator CUR (VT in the catalog, locators refused): bindings rc=0$|verification binding: unknown test tests/my\vcheck.sh::test\|_ac_001_shared$|locators rc=3$|tests/my\vcheck.sh::test_ac_001_shared$|`tests/my\vcheck.sh::test_ac_001_shared`$
+PASS F4 locator CUR catalog carries VT: bindings rc=0$|verification binding: unknown test tests/my\vcheck.sh::test\|_ac_001_shared$|locators rc=3$|tests/my\vcheck.sh::test_ac_001_shared$|`tests/my\vcheck.sh::test_ac_001_shared`$
+PASS F4 locator REV (as written, locators pass): bindings rc=0$|locators rc=0$|tests/my\302\240check.sh::test_ac_001_shared$|`tests/my\302\240check.sh::test_ac_001_shared`$
+PASS F4 manual observation CUR: catalog locator: release\vobservation$|return name:     release\302\240observation$|names DIFFER -> manual observation fields do not match the \|planned family$
+PASS F4 manual observation REV: catalog locator: release\302\240observation$|return name:     release\302\240observation$|names EQUAL$
+== R3-F5: prose that starts Class: or Severity: is now refused by name
+PASS F5 summary-prose CUR C: rc=3 manifest line 9: a class line outside any Finding: - Class: tier-binding, one finding|manifest line 10: a severity line outside any Finding: - Severity: all blocking|report recovery: m/f5-summary/notes/verification/reports/opponent-findings-review.md: prior-review manifest could not be parsed; recon
+PASS F5 intro-prose CUR C: rc=3 manifest line 3: a severity line outside any Finding: Severity: every finding below is blocking.|report recovery: m/f5-intro/notes/verification/reports/opponent-findings-review.md: prior-review manifest could not be parsed; reconcile canonical records
+PASS F5 nested-mention CUR C: rc=3 manifest line 7: a second Severity line in finding G-042:   - Severity: raised from minor after the repro|report recovery: m/f5-nested/notes/verification/reports/opponent-findings-review.md: prior-review manifest could not be parsed; reconcile canonical records
+PASS F5 summary REV C (accepted): rc=0 
+PASS F5 intro REV C (accepted): rc=0 
+PASS F5 nested REV C (accepted): rc=0 
+PASS F5 summary-prose CUR en_US.UTF-8: rc=3 manifest line 9: a class line outside any Finding: - Class: tier-binding, one finding|manifest line 10: a severity line outside any Finding: - Severity: all blocking|report recovery: m/f5-summary/notes/verification/reports/opponent-findings-review.md: prior-review manifest could not be parsed; recon
+PASS F5 intro-prose CUR en_US.UTF-8: rc=3 manifest line 3: a severity line outside any Finding: Severity: every finding below is blocking.|report recovery: m/f5-intro/notes/verification/reports/opponent-findings-review.md: prior-review manifest could not be parsed; reconcile canonical records
+PASS F5 nested-mention CUR en_US.UTF-8: rc=3 manifest line 7: a second Severity line in finding G-042:   - Severity: raised from minor after the repro|report recovery: m/f5-nested/notes/verification/reports/opponent-findings-review.md: prior-review manifest could not be parsed; reconcile canonical records
+PASS F5 summary REV en_US.UTF-8 (accepted): rc=0 
+PASS F5 intro REV en_US.UTF-8 (accepted): rc=0 
+PASS F5 nested REV en_US.UTF-8 (accepted): rc=0 
+== R3-F6 (macOS half): a Finding heading whose ID is followed by a U+00A0
+  info F6 CUR C: rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/4a6b1e85-443f-4b6d-84e7-893614ebf421/scratchpad/t030o43-r3v/f6/notes/opponent.md:2
+  info F6 CUR en_US.UTF-8: rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/4a6b1e85-443f-4b6d-84e7-893614ebf421/scratchpad/t030o43-r3v/f6/notes/opponent.md:2
+  info F6 REV C: rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/4a6b1e85-443f-4b6d-84e7-893614ebf421/scratchpad/t030o43-r3v/f6/notes/opponent.md:2
+  info F6 REV en_US.UTF-8: rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/4a6b1e85-443f-4b6d-84e7-893614ebf421/scratchpad/t030o43-r3v/f6/notes/opponent.md:2
+== R3-F7: the STATUS identity view omits the quoting state entering the Decisions log
+PASS F7 CUR identity views: IDENTICAL
+PASS F7 CUR authorization a/b: a=4 b=0
+PASS F7 REV identity views: IDENTICAL
+PASS F7 REV authorization a/b: a=4 b=0
+== R3-F8: a matrix criterion cell copied as written no longer equals the AC catalog
+  info F8 CUR catalog text: one criterion$
+PASS F8 CUR cell as written: DIFFER
+  info F8 REV catalog text: one\302\240criterion$
+PASS F8 REV cell as written: EQUAL
+== R3-F9: vf_fm_value and fm_get disagree on verification_contract:<U+00A0>1 (E02's premise)
+PASS F9 CUR readers: vf_fm_value=1$ fm_get=\302\2401$
+PASS F9 no checkpoint fixture feeds the U+00A0 contract: 0
+== R3-F10: the artifact-name wrapper set is an enumeration
+PASS F10 german CUR C: rc=1 names artifact '„shots/a.png'
+PASS F10 german CUR en_US.UTF-8: rc=1 names artifact '„shots/a.png'
+PASS F10 german REV C: rc=1 names artifact '„shots/a.png'
+PASS F10 german REV en_US.UTF-8: rc=1 names artifact '„shots/a.png'
+PASS F10 swedish CUR C: rc=1 names artifact '”shots/a.png'
+PASS F10 swedish CUR en_US.UTF-8: rc=1 names artifact '”shots/a.png'
+PASS F10 swedish REV C: rc=1 names artifact '”shots/a.png'
+PASS F10 swedish REV en_US.UTF-8: rc=1 names artifact '”shots/a.png'
+PASS F10 lenticular CUR C: rc=1 names artifact '【shots/a.png'
+PASS F10 lenticular CUR en_US.UTF-8: rc=1 names artifact '【shots/a.png'
+PASS F10 lenticular REV C: rc=1 names artifact '【shots/a.png'
+PASS F10 lenticular REV en_US.UTF-8: rc=1 names artifact '【shots/a.png'
+PASS F10 danish CUR C: rc=1 names artifact '»shots/a.png'
+PASS F10 danish CUR en_US.UTF-8: rc=1 names artifact '»shots/a.png'
+PASS F10 danish REV C: rc=1 names artifact '»shots/a.png'
+PASS F10 danish REV en_US.UTF-8: rc=1 names artifact '»shots/a.png'
+PASS F10 ascii CUR C: rc=0 
+PASS F10 ascii CUR en_US.UTF-8: rc=0 
+  info F10 ascii REV C: rc=1
+  info F10 ascii REV en_US.UTF-8: rc=1
+== R3-F11: the checkpoint-stage fixture proves vf_config only
+  | [suffix=] config rc=0 | through-stage rc=0
+  | [suffix= 302 240 ] config rc=0 | error: unknown task stage for through-stage: Backend through-stage rc=1
+  | [suffix= ] config rc=0 | error: unknown task stage for through-stage: Backend through-stage rc=1
+PASS F11 CUR U+00A0 suffix: [suffix= 302 240 ] config rc=0 | error: unknown task stage for through-stage: Backend through-stage rc=1
+PASS F11 CUR ASCII space suffix (pre-existing): [suffix= ] config rc=0 | error: unknown task stage for through-stage: Backend through-stage rc=1
+  | [suffix=] config rc=0 | through-stage rc=0
+  | [suffix= 302 240 ] error: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/4a6b1e85-443f-4b6d-84e7-893614ebf421/scratchpad/t030o43-r3v/tmp/sb.DVhil9/stack.yml:5: unknown checkpoint stage Backend config rc=1 | error: unknown task stage for through-stage: Backend through-stage rc=1
+  | [suffix= ] config rc=0 | error: unknown task stage for through-stage: Backend through-stage rc=1
+PASS F11 REV U+00A0 suffix: [suffix= 302 240 ] error: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/4a6b1e85-443f-4b6d-84e7-893614ebf421/scratchpad/t030o43-r3v/tmp/sb.DVhil9/stack.yml:5: unknown checkpoint stage Backend config rc=1 | error: unknown task stage for through-stage: Backend through-stage rc=1
+t030o43-review3-verify checks=112 failures=0

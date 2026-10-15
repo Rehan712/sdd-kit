@@ -1,0 +1,20 @@
+r14-floor-1 (2026-10-02, session 13): floor attempt 1 for round 14 FAILED, rc 1 (r14-floor-1.rc, wrapper rc 1),
+09:45:29Z to 11:38:05Z, and sealed nothing; floor-latest stayed FLOOR-w6mznu.
+- Cause: the disk filled. Free disk (r14-floor-1.samples.log, one sample a minute) was 14-15 GiB through the first
+  hour and 12.5 GiB at 11:32:33Z, then fell to 10.34 (11:33), 8.79, 7.47, 4.10, 0.56 (11:37:34Z) and 0.11 GiB
+  (11:38:05Z): about 12 GiB in six minutes. At that point the floor was running capture CAP-556-VYLWD0 (the Verify
+  chain `bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && ...`), whose writes then failed
+  (`sed: stdout: No space left on device`; a stub the fixture writes could not be created), so the chain ended
+  16/18 at exit 1 and the floor stopped (r14-floor-1.log). The disk stayed full after the floor returned: the
+  invoker's own shell could not start (ENOSPC on its output file) until the user freed space.
+- What filled it is NOT established. The invoker could not run `du` while the disk was full. The same suites
+  passed earlier the same day with no comparable use of disk (the capture of record CAP-544-cjPQ2j and the dev8
+  runs), and the space did not come back when the floor returned, so a writer outside the floor is the likelier
+  cause; that is an inference, not a measurement.
+- Power: the Mac left AC at 10:26:31Z and was back on AC at 10:29:14Z (battery 100% throughout).
+- State after the failure (re-derived 12:15Z with t030o44-freeze.sh): source 75a92e76..., Decisions ff0a033e...,
+  HEAD 0d55c62, no lock, round 14 authorized, round 15 refused, 550 captures (CAP-545 to CAP-556 banked by attempt
+  1; CAP-556 failed and is re-executed by the next floor). Attempt 1's staging directory
+  notes/verification/floors/.floor.AbbrYe is kept, as the older ones are.
+- After the user freed space (13 GiB free, on AC), floor attempt 2 (r14-floor.sh 2) started at 12:15:42Z with
+  Decisions still frozen.

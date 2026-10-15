@@ -1,0 +1,57 @@
+applied 8 block(s) to /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/cf8105b0-c4fe-410c-afe8-3a2a37d75d11/scratchpad/t030o43-rm/P/scripts/verification-lib.sh
+applied 2 block(s) to /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/cf8105b0-c4fe-410c-afe8-3a2a37d75d11/scratchpad/t030o43-rm/P/scripts/spec-evidence.sh
+== F1: a U+00A0 after the dash of a manifest field line
+  F1-class U C: rc=0 | 
+  F1-class U en_US.UTF-8: rc=0 | 
+  F1-class P C: rc=3 | manifest line 2: a Class or Severity line this grammar cannot read: - **Class:** tier-binding
+  F1-class P en_US.UTF-8: rc=3 | manifest line 2: a Class or Severity line this grammar cannot read: - **Class:** tier-binding
+  F1-severity U C: rc=0 | 
+  F1-severity U en_US.UTF-8: rc=0 | 
+  F1-severity P C: rc=3 | manifest line 3: a Class or Severity line this grammar cannot read: - **Severity:** data-loss
+  F1-severity P en_US.UTF-8: rc=3 | manifest line 3: a Class or Severity line this grammar cannot read: - **Severity:** data-loss
+  F1-classbind U C: rc=0 | 
+  F1-classbind U en_US.UTF-8: rc=0 | 
+  F1-classbind P C: rc=3 | manifest line 2: a Class or Severity line this grammar cannot read: - **Class:** tier-binding
+  F1-classbind P en_US.UTF-8: rc=3 | manifest line 2: a Class or Severity line this grammar cannot read: - **Class:** tier-binding
+== derived: a U+00A0 at the end of the manifest Finding heading
+  D1-heading U C: rc=0 | 
+  D1-heading U en_US.UTF-8: rc=0 | 
+  D1-heading P C: rc=3 | manifest line 1: a Finding heading this grammar cannot read: ### Finding G-042 
+  D1-heading P en_US.UTF-8: rc=3 | manifest line 1: a Finding heading this grammar cannot read: ### Finding G-042 
+== derived: a required report section whose only body line is a U+00A0
+  D2-section U C: rc=0 | 
+  D2-section U en_US.UTF-8: rc=0 | 
+  D2-section P C: rc=3 | report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/cf8105b0-c4fe-410c-afe8-3a2a37d7
+  D2-section P en_US.UTF-8: rc=3 | report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/cf8105b0-c4fe-410c-afe8-3a2a37d7
+== derived: a U+00A0 after the Decisions log heading, and the identity
+  D3 U C: two Decisions logs hash to the same bytes (0 bytes kept)
+  D3 U en_US.UTF-8: two Decisions logs hash to the same bytes (0 bytes kept)
+  D3 P C: two Decisions logs hash to the differ bytes (50 bytes kept)
+  D3 P en_US.UTF-8: two Decisions logs hash to the differ bytes (50 bytes kept)
+== derived: a U+00A0 after the verification_contract colon, and spec-evidence.sh
+  D4 U C: rc=0 Evidence integrity: 099-ev / sound — every ticked box traces to real evidence
+  D4 U en_US.UTF-8: rc=0 Evidence integrity: 099-ev / sound — every ticked box traces to real evidence
+  D4 P C: rc=3 unsupported verification contract:  1 / unsupported verification contract:  1
+  D4 P en_US.UTF-8: rc=3 unsupported verification contract:  1 / unsupported verification contract:  1
+== F2: legacy artifact names with non-ASCII letters
+  F2 U C shots/café.png (missing): rc=0   ✓ 1 ticked task(s) checked for evidence integrity 
+  F2 U en_US.UTF-8 shots/café.png (missing): rc=0   ✓ 1 ticked task(s) checked for evidence integrity 
+  F2 U C shots/écran.png (exists): rc=0   ✗ T001 names artifact 'cran.png' in its evidence, but no such file exists   ✓ 1 ticked task(s) checked for evidence integrity 
+  F2 U en_US.UTF-8 shots/écran.png (exists): rc=0   ✗ T001 names artifact 'cran.png' in its evidence, but no such file exists   ✓ 1 ticked task(s) checked for evidence integrity 
+  F2 P C shots/café.png (missing): rc=0   ✗ T001 names artifact 'shots/café.png' in its evidence, but no such file exists   ✓ 1 ticked task(s) checked for evidence integrity 
+  F2 P en_US.UTF-8 shots/café.png (missing): rc=0   ✗ T001 names artifact 'shots/café.png' in its evidence, but no such file exists   ✓ 1 ticked task(s) checked for evidence integrity 
+  F2 P C shots/écran.png (exists): rc=0   ✓ 1 ticked task(s) checked for evidence integrity 
+  F2 P en_US.UTF-8 shots/écran.png (exists): rc=0   ✓ 1 ticked task(s) checked for evidence integrity 
+== F3: the return size bound under a failing wc
+  return bytes: 81084
+  F3 P plain: rc=3 return exceeds 64 KiB
+  F3 P fault: rc=3 wc: injected fault
+== history: tally for 001, 002 and 003, P against U
+  tally 001-codex-subagent-gates-and-hard-task-escalation C: identical (rc=3)
+  tally 001-codex-subagent-gates-and-hard-task-escalation en_US.UTF-8: identical (rc=3)
+  tally 002-usage-limit-handling-for-dispatched-runs C: identical (rc=0)
+  tally 002-usage-limit-handling-for-dispatched-runs en_US.UTF-8: identical (rc=0)
+  tally 003-gate-round-reduction-and-token-discipline C: identical (rc=0)
+  tally 003-gate-round-reduction-and-token-discipline en_US.UTF-8: identical (rc=0)
+== history: the snapshot, P against U, outside the edited files
+  snapshot records outside the two edited files: identical (358 records)

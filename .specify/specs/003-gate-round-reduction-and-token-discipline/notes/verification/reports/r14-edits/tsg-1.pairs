@@ -1,0 +1,100 @@
+@@OLD
+  printf '<!-- gate-round-end: opponent:%s -->\n' "$2"
+}
+
+# AC-009/AC-012 — O-018 and O-019 end to end (round 13, T030o44): a CLEARED
+# round whose report or prior-review manifest carried a record line neither
+# reader read or refused sealed through `round --complete`, with the tier lost
+# from the tally. A refused completion leaves the reservation in place, so one
+# fixture serves every case, and the valid report completes after them.
+@@NEW
+  printf '<!-- gate-round-end: opponent:%s -->\n' "$2"
+}
+
+# record_style_report <reservation-output> <n> <verdict> <blocking> <minor> <finding>...
+# The reservation's round with a report title under its heading and its Timestamp after its Held-up
+# section (round 14, O-020); each <finding> is heading:class:status:severity.
+record_style_report() {
+  local res="$1" n="$2" verdict="$3" b="$4" m="$5" src floor stamp f h c st sv
+  shift 5
+  src="$(printf '%s' "$res" | sed -n 's/.* source=\([^ ]*\).*/\1/p')"
+  floor="$(printf '%s' "$res" | sed -n 's/.* floor=\([^ ]*\).*/\1/p')"
+  stamp="$(printf '%s' "$res" | sed -n 's/.* reserved=\([^ ]*\).*/\1/p')"
+  printf '## Round %s\n# Opponent review — fixture\n**Round:** %s\n**Source:** %s\n**Floor:** %s\n' "$n" "$n" "$src" "$floor"
+  printf '**Verdict:** %s\n**Blocking:** %s · **Minor:** %s\n### What I attacked\nFinding records read by both readers.\n' "$verdict" "$b" "$m"
+  for f in "$@"; do
+    IFS=: read -r h c st sv <<< "$f"
+    printf '%s\n- **Class:** %s\n- **Status:** %s\n- **Prior:** none\n- **Severity:** %s\n' "$h" "$c" "$st" "$sv"
+    printf -- '- **Scenario:** a recorded trigger\n- **Where:** scripts/run.sh:9\n- **Reproduced:** concrete trigger at that site\n'
+    printf -- '- **Root cause:** implementation-error\n- **Blocks:** AC-012\n- **Wrong behavior:** observed versus required\n'
+    printf -- '- **Class-wide fix:** read or refuse every record line\n'
+  done
+  printf '### Held up / follow-up tasks\nFixture disposition recorded.\n**Timestamp:** %s\n<!-- gate-round-end: opponent:%s -->\n' "$stamp" "$n"
+}
+
+# AC-009/AC-012 — O-018 and O-019 end to end (round 13, T030o44): a CLEARED
+# round whose report or prior-review manifest carried a record line neither
+# reader read or refused sealed through `round --complete`, with the tier lost
+# from the tally. A refused completion leaves the reservation in place, so one
+# fixture serves every case, and the valid report completes after them. Round
+# 14's mechanisms follow, one spelling each (T030o45, T030o46): a title with a
+# late Timestamp (O-020), brackets that nest, a construct that spans lines,
+# emphasis and an invisible character inside the word (O-018), and a block
+# after a field line that ends its item (O-021).
+@@END
+@@OLD
+             '- [](x)**Severity:** data-loss|a second Severity line in finding G-042' \
+             '  data-loss|a Severity field whose list item holds more than its line in finding G-042'; do
+@@NEW
+             '- [](x)**Severity:** data-loss|a second Severity line in finding G-042' \
+             '  data-loss|a Severity field whose list item holds more than its line in finding G-042' \
+             '- [![badge](y.png)](z)Severity: data-loss|a second Severity line in finding G-042' \
+             $'- <b\ntitle="x">Severity: data-loss</b>|a second Severity line in finding G-042' \
+             '- S*everity:* data-loss|a second Severity line in finding G-042' \
+             $'- Sev\342\200\213erity: data-loss|a second Severity line in finding G-042'; do
+@@END
+@@OLD
+             '- **Severity:** minor\n  data-loss|a Severity field whose list item holds more than its line in finding G-050'; do
+@@NEW
+             '- **Severity:** minor\n  data-loss|a Severity field whose list item holds more than its line in finding G-050' \
+             '- **Severity:** minor\n- <abbr title="the tier this\nfinding carries">Severity:</abbr> data-loss|a Severity line this grammar cannot read in finding G-050' \
+             '- **Severity:** minor\n- <!-- a\nb --> Severity: data-loss|quoted content carries a Severity line'; do
+@@END
+@@OLD
+  record_line_report "$res" 1 CHALLENGED 1 0 '### Finding G-042' tier-binding open '- **Severity:** data-loss' > "$report"
+  run_rc 0 bash "$cli" round "$spec" opponent --complete "$report"
+  assert_contains "$OUT" 'round completed gate=opponent round=1 verdict=CHALLENGED'
+@@NEW
+  # A title and a late Timestamp let a CLEARED round seal over a blocking
+  # finding it never counted (O-020); the switch is refused at completion.
+  record_style_report "$res" 1 CLEARED 0 1 '### Finding G-099:silent-loss:new:data-loss' '### Finding G-100:minor-slip:new:minor' > "$SANDBOX/record-lines-style.md"
+  for l in C en_US.UTF-8; do
+    run_rc 3 in_locale "$l" bash "$cli" round "$spec" opponent --complete "$SANDBOX/record-lines-style.md"
+    assert_contains "$OUT" 'a Timestamp line after the body of a round its title made legacy' \
+      "AC-009: a CLEARED completion under a title and a late Timestamp was not refused under LANG=$l (O-020)"
+  done
+  record_line_report "$res" 1 CHALLENGED 1 0 '### Finding G-042' tier-binding open '- **Severity:** data-loss' > "$report"
+  run_rc 0 bash "$cli" round "$spec" opponent --complete "$report"
+  assert_contains "$OUT" 'round completed gate=opponent round=1 verdict=CHALLENGED'
+@@END
+@@OLD
+  record_line_report "$res" 2 CLEARED 0 1 '### Finding G-042' tier-binding open '- **Severity:** minor' > "$report"
+  run_rc 3 bash "$cli" round "$spec" opponent --complete "$report"
+  assert_contains "$OUT" 'clearing verdict rests on 1 lowered severity tier(s) of known findings' \
+    'AC-009: the canonical control at a lowered tier completed (O-018)'
+  record_line_report "$res" 2 CHALLENGED 1 0 '### Finding G-042' tier-binding open '- **Severity:** data-loss' > "$report"
+@@NEW
+  record_style_report "$res" 2 CLEARED 0 0 '#### Finding G-042:tier-binding:open:minor' > "$SANDBOX/record-lines-style.md"
+  for l in C en_US.UTF-8; do
+    run_rc 3 in_locale "$l" bash "$cli" round "$spec" opponent --complete "$SANDBOX/record-lines-style.md"
+    assert_contains "$OUT" 'a Timestamp line after the body of a round its title made legacy' \
+      "AC-009: a CLEARED round 2 under a title, a late Timestamp and #### Finding G-042 was not refused under LANG=$l (O-020)"
+  done
+  record_line_report "$res" 2 CLEARED 0 1 '### Finding G-042' tier-binding open '- **Severity:** minor' > "$report"
+  run_rc 3 bash "$cli" round "$spec" opponent --complete "$report"
+  assert_contains "$OUT" 'clearing verdict rests on 1 lowered severity tier(s) of known findings' \
+    'AC-009: the canonical control at a lowered tier completed (O-018)'
+  # The round that completes carries a block-level HTML block directly after its
+  # Severity line, which ends that line's item (O-021).
+  record_line_report "$res" 2 CHALLENGED 1 0 '### Finding G-042' tier-binding open '- **Severity:** data-loss\n<details>\nx\n</details>\n' > "$report"
+@@END

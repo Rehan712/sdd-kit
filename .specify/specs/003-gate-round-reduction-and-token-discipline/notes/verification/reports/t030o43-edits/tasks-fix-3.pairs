@@ -1,0 +1,10 @@
+@@OLD
+Every grammar the harness parses is ASCII: under `LC_ALL=C` each byte is one character, so no byte can end a parse, and a byte >= 0x80 is in no character class, so a record line or token the ASCII grammar cannot read is refused by name, or, where the parser decides what must be covered, kept whole.
+@@NEW
+Every grammar the harness parses is ASCII, and under `LC_ALL=C` each byte is one character, so no byte can end a parse. A byte >= 0x80 is in no character class there, so every parser of author text reads the 19 non-ASCII Unicode White_Space characters as whitespace through one shared step before any rule of its own, mapped to a byte every class-based test reads as whitespace and no literal grammar does, so CommonMark structure and literal separators read as they did before the pin; it takes a value it passes on (the Verify command it runs, a frontmatter value) from the line as written, trimmed at its ends; and a grammar token it cannot read is refused by name. `vf_report_block` alone reads the report as written, because its output is a sealed digest.
+@@END
+@@OLD
+a manifest heading or field line, or a required report section, carrying a U+00A0 is refused in every locale, a Decisions heading carrying one still starts the hashed section, and a non-ASCII artifact name is taken whole;
+@@NEW
+the prior-review manifest pass reads by the canonical field grammar keyed on its field lines, so every spelling of a finding is either read or refused by name, never dropped; a value, field or section of only such whitespace is empty; the input identity's Decisions view covers every line the authorization scanner reads, from each line that begins `## Decisions log`, quoted or not, to the next unquoted heading; an artifact name or Agent path ends at any whitespace and a non-ASCII letter is part of it; a `verification_contract` key routes three ways by count in every reader;
+@@END

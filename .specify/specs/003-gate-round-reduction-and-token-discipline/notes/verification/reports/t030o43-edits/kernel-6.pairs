@@ -1,0 +1,382 @@
+@@OLD
+# U+3000) to one VT byte. VT is in [[:space:]], so every class-based trim,
+# separator and emptiness test reads the character as whitespace, as a UTF-8
+# locale read U+00A0. VT is neither a space, a tab nor a default field
+# separator, so every literal grammar -- CommonMark indentation, fences and
+# block quotes, the canonical field line's single space, a `; ` separator --
+# reads the line exactly as every locale read it before the pin, and the
+# fence tracker below reaches the same state on the mapped line as on the
+# line as written, which is what vf_report_block reads. ASCII whitespace is
+# left alone. vf_original keeps the line as written: a value the harness
+# passes on (the Verify command it runs, a frontmatter path it compares) and
+# a line it hashes are taken from it, and vf_wstrim trims the same
+# whitespace from their ends only.
+_VF_AWK_WS='
+function vf_ws(s) {
+  gsub(/\302[\205\240]|\341\232\200|\342\200[\200-\212\250\251\257]|\342\201\237|\343\200\200/, "\013", s)
+  return s
+}
+function vf_wstrim(s) {
+  sub(/^([[:space:]]|\302[\205\240]|\341\232\200|\342\200[\200-\212\250\251\257]|\342\201\237|\343\200\200)+/, "", s)
+  sub(/([[:space:]]|\302[\205\240]|\341\232\200|\342\200[\200-\212\250\251\257]|\342\201\237|\343\200\200)+$/, "", s)
+  return s
+}
+'
+@@NEW
+# U+3000) to one VT byte. VT is in [[:space:]], so every class-based trim,
+# separator and emptiness test reads the character as whitespace, as a UTF-8
+# locale read U+00A0. VT is neither a space nor a tab, so every literal
+# grammar -- CommonMark indentation, fences and block quotes, the canonical
+# field line's single space, a `; ` separator -- reads the line exactly as
+# every locale read it before the pin, and the fence tracker below reaches
+# the same state on the mapped line as on the line as written, which is what
+# vf_report_block reads. ASCII whitespace is left alone. No member splits a
+# mapped line by awk's default field splitting, whose blanks are not the same
+# in every awk (mawk's source counts VT among them; macOS awk, gawk and the
+# mawk measured do not): vf_fields splits on ASCII blanks explicitly
+# (T030o43 review 3, R3-F6). The mapped line decides what a line is. Every
+# value a member passes on -- into a catalog or a record, to another
+# program, or into a comparison with a value that did not come through the
+# step -- is taken from vf_original, the line as written, by the anchor the
+# mapped line was matched with, and trimmed at its ends by vf_wstrim, the same
+# whitespace (R3-F4). A value whose grammar admits no whitespace (an ID, a
+# Class, a status, a severity, a verdict, a timestamp, a digest) reads the
+# same from either line; a name (an artifact name, an Agent path) is a token
+# that ends at any whitespace, so it is read from the mapped line.
+_VF_AWK_WS='
+function vf_ws(s) {
+  gsub(/\302[\205\240]|\341\232\200|\342\200[\200-\212\250\251\257]|\342\201\237|\343\200\200/, "\013", s)
+  return s
+}
+function vf_wsclass() {
+  return "([[:space:]]|\302[\205\240]|\341\232\200|\342\200[\200-\212\250\251\257]|\342\201\237|\343\200\200)"
+}
+function vf_wstrim(s) {
+  sub(/^([[:space:]]|\302[\205\240]|\341\232\200|\342\200[\200-\212\250\251\257]|\342\201\237|\343\200\200)+/, "", s)
+  sub(/([[:space:]]|\302[\205\240]|\341\232\200|\342\200[\200-\212\250\251\257]|\342\201\237|\343\200\200)+$/, "", s)
+  return s
+}
+function vf_fields(s, a) {
+  sub(/^[ \t]+/, "", s); sub(/[ \t]+$/, "", s)
+  return split(s, a, /[ \t]+/)
+}
+function vf_heading_text(s) {
+  sub(/^#+/, "", s)
+  return vf_wstrim(s)
+}
+'
+@@END
+@@OLD
+      /^## / { stage=substr($0,4); sub(/[[:space:]]+$/, "", stage) }
+@@NEW
+      /^## / { stage=vf_heading_text(vf_original) }
+@@END
+@@OLD
+    function trim(s) { sub(/^[[:space:]]+/, "", s); sub(/[[:space:]]+$/, "", s); return s }
+    function clean_cell(s) { s=trim(s); gsub(SUBSEP, "|", s); return s }
+    function row(line,    n,i) {
+      gsub(/\\\|/, SUBSEP, line)
+      sub(/^[[:space:]]*\|/, "", line); sub(/\|[[:space:]]*$/, "", line)
+@@NEW
+    # Cells are read from the row as written, trimmed by the whitespace set:
+    # a task compares a family, criterion or locator with them, and the
+    # harness opens a locator (T030o43 review 3, R3-F4).
+    function trim(s) { return vf_wstrim(s) }
+    function clean_cell(s) { s=trim(s); gsub(SUBSEP, "|", s); return s }
+    function row(line,    n,i) {
+      gsub(/\\\|/, SUBSEP, line)
+      sub("^" vf_wsclass() "*[|]", "", line); sub("[|]" vf_wsclass() "*$", "", line)
+@@END
+@@OLD
+      n=row($0)
+@@NEW
+      n=row(vf_original)
+@@END
+@@OLD
+      /^##[^#]/ { stage=$0; sub(/^##[[:space:]]*/,"",stage) }
+@@NEW
+      /^##[^#]/ { stage=vf_heading_text(vf_original) }
+@@END
+@@OLD
+      function trim(s) { sub(/^[[:space:]]+/,"",s); sub(/[[:space:]]+$/, "", s); return s }
+@@NEW
+      function trim(s) { return vf_wstrim(s) }
+@@END
+@@OLD
+          sub(/[[:space:]]+\(new( in T[0-9][0-9][0-9][a-z0-9]*)?\)$/, "", path)
+@@NEW
+          sub(vf_wsclass() "+[(]new( in T[0-9][0-9][0-9][a-z0-9]*)?[)]$", "", path)
+@@END
+@@OLD
+          if (t ~ /^(plan[[:space:]]+)?§[0-9]/) continue
+@@NEW
+          if (vf_ws(t) ~ /^(plan[[:space:]]+)?§[0-9]/) continue
+@@END
+@@OLD
+      FNR==NR {
+        if ($1=="F") { family_n++; family_name[family_n]=$2; family_kind[family_n]=$3; family_criteria[family_n]=$4; family_loc[family_n]=$5 }
+        else if ($1=="I") { def_type[$2]=$3; if (!def_seen[$2]++) def_ids[++def_n]=$2 }
+        else if ($1=="D") { def_family[$2 SUBSEP $4]=1 }
+        else if ($1=="T") { task_order[$2]=$3; task_stage_by_id[$2]=$4 }
+        next
+      }
+@@NEW
+      # The maps hold the plan and inventory values as written; the step
+      # maps every input line, so their fields are split from vf_original.
+      FNR==NR {
+        split(vf_original, mf, FS)
+        if (mf[1]=="F") { family_n++; family_name[family_n]=mf[2]; family_kind[family_n]=mf[3]; family_criteria[family_n]=mf[4]; family_loc[family_n]=mf[5] }
+        else if (mf[1]=="I") { def_type[mf[2]]=mf[3]; if (!def_seen[mf[2]]++) def_ids[++def_n]=mf[2] }
+        else if (mf[1]=="D") { def_family[mf[2] SUBSEP mf[4]]=1 }
+        else if (mf[1]=="T") { task_order[mf[2]]=mf[3]; task_stage_by_id[mf[2]]=mf[4] }
+        next
+      }
+@@END
+@@OLD
+      /^##[^#]/ { flush(); task_stage=$0; sub(/^##[[:space:]]*/,"",task_stage); next }
+@@NEW
+      /^##[^#]/ { flush(); task_stage=vf_heading_text(vf_original); next }
+@@END
+@@OLD
+      id!="" && /\*Files:\*/ { set_field("Files",after($0,"Files")); next }
+      id!="" && /\*Acceptance[^*]*:\*/ { if (!field_seen["Acceptance"]) set_field("Acceptance",$0); next }
+      id!="" && /\*Verify kind:\*/ { set_field("Verify kind",after($0,"Verify kind")); next }
+      id!="" && /\*Tests:\*/ { set_field("Tests",after($0,"Tests")); next }
+      # The command the harness runs and records is the one written: its
+      # value comes from the line as written, trimmed at its ends, and its
+      # syntax is judged on the line read through the whitespace step.
+      id!="" && /\*Verify:\*/ { set_field("Verify",after_written(vf_original,"Verify")); verify_read=after($0,"Verify"); next }
+      id!="" && /\*Reuse:\*/ { set_field("Reuse",after($0,"Reuse")); next }
+      id!="" && /\*Refs:\*/ { set_field("Refs",after($0,"Refs")); next }
+      id!="" && /\*Integration owner:\*/ { set_field("Integration owner",after($0,"Integration owner")); next }
+@@NEW
+      # Every field value is taken from the line as written and trimmed at
+      # its ends (R3-F4): the catalog records it, the harness opens a Tests
+      # locator, compares it and a manual observation name with the return of the
+      # return, and runs the Verify command. The line read through the
+      # whitespace step decides which field a line is, and the Verify syntax
+      # is judged on it.
+      id!="" && /\*Files:\*/ { set_field("Files",after_written(vf_original,"Files")); next }
+      id!="" && /\*Acceptance[^*]*:\*/ { if (!field_seen["Acceptance"]) set_field("Acceptance",$0); next }
+      id!="" && /\*Verify kind:\*/ { set_field("Verify kind",after_written(vf_original,"Verify kind")); next }
+      id!="" && /\*Tests:\*/ { set_field("Tests",after_written(vf_original,"Tests")); next }
+      id!="" && /\*Verify:\*/ { set_field("Verify",after_written(vf_original,"Verify")); verify_read=after($0,"Verify"); next }
+      id!="" && /\*Reuse:\*/ { set_field("Reuse",after_written(vf_original,"Reuse")); next }
+      id!="" && /\*Refs:\*/ { set_field("Refs",after_written(vf_original,"Refs")); next }
+      id!="" && /\*Integration owner:\*/ { set_field("Integration owner",after_written(vf_original,"Integration owner")); next }
+@@END
+@@OLD
+    # The pass reads by the canonical finding's own field grammar, keyed on
+    # the lines that carry a record rather than on a heading it might not see
+    # (T030o43 reviews 1 and 2). A heading is an ATX heading (up to three
+    # spaces, a run of `#`, then a space, a tab or the end); every heading
+    # closes the finding before it, and one whose first word is `Finding` in
+    # any case and whose second is a finding ID opens one, a title allowed
+    # after. A field is a line whose first word, after indentation, a list
+    # marker and emphasis, is Class or Severity in any case with a colon inside
+    # or outside the emphasis. It must be written `- **Class:**` or
+    # `- **Severity:**` at any indentation, as the canonical parser reads it,
+    # sit inside a finding, appear once in it, and carry a value of its
+    # grammar. Any other line is prose, even one that mentions a field. A
+    # finding with no Class, a field outside a finding, a second field, a
+    # field or ID the grammar cannot read and quoting left open at the end are
+    # each refused by name, so no spelling loses a finding: its fields fall
+    # outside it, or into the one above, and both refuse. A byte-order mark on
+    # the first line is not part of it.
+    awk "$_VF_AWK_TEXT"'
+      function bad(why) {printf "manifest line %d: %s: %s\n", FNR, why, vf_original > "/dev/stderr"; failed=1}
+      function flushm() {
+        if(id!="" && cls=="") bad("finding " id " has no readable Class")
+        if(id!="" && cls!="") print id ":" cls ":" sev
+        id=""; cls=""; sev=""; classes=0; severities=0
+      }
+      function value(s) {sub(/^.*\*\*[^*]+:\*\*[ ]*/, "", s); gsub(/^[[:space:]]+|[[:space:]]+$/, "", s); return s}
+      function fieldname(s,   t, w) {
+        t=s; sub(/^[[:space:]]+/, "", t)
+        if (t ~ /^[-*+][[:space:]]/) sub(/^[-*+][[:space:]]+/, "", t)
+        sub(/^[*_]+/, "", t)
+        if (!match(t, /^[A-Za-z]+/)) return ""
+        w=tolower(substr(t, 1, RLENGTH)); t=substr(t, RLENGTH + 1); sub(/^[*_]+/, "", t)
+        return (substr(t, 1, 1) == ":") ? w : ""
+      }
+      FNR == 1 {sub(/^\357\273\277/, "")}
+      vf_quoted($0) {next}
+      /^ ? ? ?#+([ \t]|$)/ {
+        flushm(); heading=$0; sub(/^ +/, "", heading); split(heading, word, /[[:space:]]+/)
+        if (tolower(word[2]) == "finding" && word[3] ~ /^[A-Za-z][A-Za-z0-9]*-[0-9]/) {
+          if (word[3] ~ /^[A-Z][A-Z0-9]*-[0-9]+$/) id=word[3]
+          else bad("a Finding heading whose ID this grammar cannot read")
+        }
+        next
+      }
+      {
+        field=fieldname($0)
+        if (field != "class" && field != "severity") next
+        if (id == "") {bad("a " field " line outside any Finding"); next}
+        if (field == "class") {
+          if (classes++) {bad("a second Class line in finding " id); next}
+          if ($0 !~ /^[ ]*-[[:space:]]+\*\*Class:\*\*/) {bad("a Class line this grammar cannot read"); cls="-"; next}
+          cls=value($0)
+          if (cls !~ /^[a-z][a-z0-9]*(-[a-z0-9]+)*$/) {bad("a Class this grammar cannot read"); cls="-"}
+          next
+        }
+        if (severities++) {bad("a second Severity line in finding " id); next}
+        if ($0 !~ /^[ ]*-[[:space:]]+\*\*Severity:\*\*/) {bad("a Severity line this grammar cannot read"); next}
+        sev=value($0)
+        if (sev !~ /^(data-loss|wrong-result|regression|crash|minor|degraded)$/) {bad("a Severity this grammar cannot read"); sev=""}
+      }
+@@NEW
+    # The pass reads by the canonical finding's own field grammar, keyed on
+    # the lines that carry a record rather than on a heading it might not see
+    # (T030o43 reviews 1 to 3). A heading is an ATX heading (up to three
+    # spaces, a run of `#`, then a space, a tab or the end); every heading
+    # closes the finding before it, and one whose first word is `Finding` in
+    # any case and whose second is a finding ID opens one, a title allowed
+    # after. A line not read as a heading whose text, after leading
+    # whitespace or invisible characters, is a `#` run and the word Finding
+    # is refused by name, so a finding's fields cannot fall into the one
+    # above it (R3-F3). A field is decided by its label (R3-F2): a line whose
+    # first word, after indentation, a bullet or ordered-list marker and
+    # emphasis, is Class or Severity in any case, and which is either an
+    # emphasized label or not continued by a letter, digit or hyphen. Inside
+    # a finding such a line must be written `- **Class:**` or
+    # `- **Severity:**` at any indentation, as the canonical parser reads it,
+    # appear once, and carry a value of its grammar, which is the text after
+    # that label and nothing further (R3-F1). Outside any finding the written
+    # spelling is refused, and any other such line is prose until a finding
+    # ID appears after the last heading, because only a finding's record can
+    # carry a Class or a tier (R3-F5). A finding with no Class, a field or ID
+    # the grammar cannot read and quoting left open at the end are each
+    # refused by name, so no spelling loses a finding. A byte-order mark on
+    # the first line is not part of it.
+    awk "$_VF_AWK_TEXT"'
+      function bad(why) {printf "manifest line %d: %s: %s\n", FNR, why, vf_original > "/dev/stderr"; failed=1}
+      function flushm() {
+        if(id!="" && cls=="") bad("finding " id " has no readable Class")
+        if(id!="" && cls!="") print id ":" cls ":" sev
+        id=""; cls=""; sev=""; classes=0; severities=0
+      }
+      function value(s, label) {sub("^[ ]*-[[:space:]]+[*][*]" label ":[*][*]", "", s); gsub(/^[[:space:]]+|[[:space:]]+$/, "", s); return s}
+      function fieldname(s,   t, w, emph) {
+        t=s; sub(/^[[:space:]]+/, "", t)
+        if (t ~ /^([-*+]|[0-9]+[.)])[[:space:]]/) sub(/^([-*+]|[0-9]+[.)])[[:space:]]+/, "", t)
+        emph=(t ~ /^[*_]/); sub(/^[*_]+/, "", t)
+        if (!match(t, /^[A-Za-z]+/)) return ""
+        w=tolower(substr(t, 1, RLENGTH)); if (w != "class" && w != "severity") return ""
+        t=substr(t, RLENGTH + 1)
+        if (emph && t ~ /^[*_]/) return w
+        sub(/^[*_[:space:]]+/, "", t)
+        return (t ~ /^[A-Za-z0-9-]/) ? "" : w
+      }
+      FNR == 1 {sub(/^\357\273\277/, "")}
+      vf_quoted($0) {next}
+      /^ ? ? ?#+([ \t]|$)/ {
+        flushm(); heading=$0; sub(/^ +/, "", heading); split(heading, word, /[[:space:]]+/)
+        if (tolower(word[2]) == "finding" && word[3] ~ /^[A-Za-z][A-Za-z0-9]*-[0-9]/) {
+          if (word[3] ~ /^[A-Z][A-Z0-9]*-[0-9]+$/) id=word[3]
+          else bad("a Finding heading whose ID this grammar cannot read")
+        }
+        idseen=(heading ~ /[A-Za-z][A-Za-z0-9]*-[0-9]/)
+        next
+      }
+      /^([[:space:]]|[\200-\377])*#+([[:space:]]|[\200-\377])*[Ff][Ii][Nn][Dd][Ii][Nn][Gg]([^A-Za-z]|$)/ {
+        flushm(); idseen=1; bad("a Finding heading this grammar cannot read"); next
+      }
+      {
+        field=fieldname($0)
+        if (field != "class" && field != "severity") {if ($0 ~ /[A-Za-z][A-Za-z0-9]*-[0-9]/) idseen=1; next}
+        strict=(field == "class") ? ($0 ~ /^[ ]*-[[:space:]]+\*\*Class:\*\*/) : ($0 ~ /^[ ]*-[[:space:]]+\*\*Severity:\*\*/)
+        if (id == "") {
+          if (strict || idseen || $0 ~ /[A-Za-z][A-Za-z0-9]*-[0-9]/) bad("a " field " line outside any Finding")
+          next
+        }
+        if (field == "class") {
+          if (classes++) {bad("a second Class line in finding " id); next}
+          if (!strict) {bad("a Class line this grammar cannot read"); cls="-"; next}
+          cls=value($0, "Class")
+          if (cls !~ /^[a-z][a-z0-9]*(-[a-z0-9]+)*$/) {bad("a Class this grammar cannot read"); cls="-"}
+          next
+        }
+        if (severities++) {bad("a second Severity line in finding " id); next}
+        if (!strict) {bad("a Severity line this grammar cannot read"); next}
+        sev=value($0, "Severity")
+        if (sev !~ /^(data-loss|wrong-result|regression|crash|minor|degraded)$/) {bad("a Severity this grammar cannot read"); sev=""}
+      }
+@@END
+@@OLD
+    function clean(s) {gsub(/^[[:space:]]+|[[:space:]]+$/, "", s); return s}
+    function value(s) {sub(/^.*\*\*[^*]+:\*\*[ ]*/, "", s); return clean(s)}
+@@NEW
+    function clean(s) {return vf_wstrim(s)}
+    # A field value is the text after the FIRST bold label of the line, taken from
+    # the line as written: a second label further on stays in the value and
+    # fails its grammar, rather than supplying the value (T030o43 review 3).
+    function value(s) {sub(/^[^*]*\*\*[^*]+:\*\*/, "", s); return clean(s)}
+@@END
+@@OLD
+      flush(); n=$3; active=1; style="canonical"; declared=date=verdict=utc=source=floor=cursec=suppressed=""; ended=counted=blockers=minors=downgraded=0; next
+@@NEW
+      flush(); n=substr($0, 10); active=1; style="canonical"; declared=date=verdict=utc=source=floor=cursec=suppressed=""; ended=counted=blockers=minors=downgraded=0; next
+@@END
+@@OLD
+      if(seenfield[n SUBSEP key]++) err("duplicate identity field")
+      v=value($0)
+@@NEW
+      if(seenfield[n SUBSEP key]++) err("duplicate identity field")
+      v=value(vf_original)
+@@END
+@@OLD
+      wantb=$2; wantm=$5; counted=1
+@@NEW
+      vf_fields($0, tw); wantb=tw[2]; wantm=tw[5]; counted=1
+@@END
+@@OLD
+    /^### Finding / {finding(); if(!active || ended) err("finding outside round"); fid=$3; cursec=""; next}
+@@NEW
+    /^### Finding / {finding(); if(!active || ended) err("finding outside round"); vf_fields(vf_original, hw); fid=hw[3]; cursec=""; next}
+@@END
+@@OLD
+    style=="legacy" && /^[0-9]+\. .*severity:/ {
+      finding(); fid="legacy-" n "-" ++legacyid; cls="unclassified"; status="new"; prior="none"
+      sev=$0; sub(/^.*severity:\*[ ]*/,"",sev); sev=clean(sev); next
+    }
+    style=="legacy" && inwhere && !/^[ ]*- \*\*/ {loc=loc " " clean($0)}
+@@NEW
+    style=="legacy" && /^[0-9]+\. .*severity:/ {
+      finding(); fid="legacy-" n "-" ++legacyid; cls="unclassified"; status="new"; prior="none"
+      sev=vf_original; sub(/^.*severity:\*[ ]*/,"",sev); sev=clean(sev); next
+    }
+    style=="legacy" && inwhere && !/^[ ]*- \*\*/ {loc=loc " " clean(vf_original)}
+@@END
+@@OLD
+      if(seenfindingfield[n SUBSEP fid SUBSEP key]++) err("duplicate finding field")
+      v=value($0)
+@@NEW
+      if(seenfindingfield[n SUBSEP fid SUBSEP key]++) err("duplicate finding field")
+      v=value(vf_original)
+@@END
+@@OLD
+    id!="" && NF {text=text " " $0}
+@@NEW
+    id!="" && /[^[:space:]]/ {text=text " " $0}
+@@END
+@@OLD
+  awk -F '|' "$_VF_AWK_TEXT"'
+    function trim(s) {sub(/^[ ]*/,"",s); sub(/[ ]*$/, "",s); return s}
+    vf_quoted($0) {next}
+    /^\| AC-[0-9][0-9][0-9] / {
+      if(NF!=7 || seen[trim($2)]++) {print "matrix: malformed/duplicate row" > "/dev/stderr"; bad=1; next}
+      for(i=2;i<=6;i++) printf "%s%c",trim($i),0
+@@NEW
+  awk -F '|' "$_VF_AWK_TEXT"'
+    function trim(s) {sub(/^[ ]*/,"",s); sub(/[ ]*$/, "",s); return s}
+    # The criterion cell is compared with the AC catalog, whose text is the
+    # criterion with every run of whitespace read as one space; the cell is
+    # read by the same rule, so a criterion copied as the spec writes it is
+    # the same criterion (T030o43 review 3, R3-F8).
+    function criterion(s) {gsub(/[[:space:]]+/, " ", s); return trim(s)}
+    vf_quoted($0) {next}
+    /^\| AC-[0-9][0-9][0-9] / {
+      if(NF!=7 || seen[trim($2)]++) {print "matrix: malformed/duplicate row" > "/dev/stderr"; bad=1; next}
+      for(i=2;i<=6;i++) printf "%s%c",(i==3 ? criterion($i) : trim($i)),0
+@@END

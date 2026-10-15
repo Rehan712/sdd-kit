@@ -1,0 +1,14 @@
+start 2026-10-13T20:23:57Z shard 0/1; TMPDIR=/private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/245cf187-c32f-4b54-ba96-d52a7f6b603b/scratchpad/r18-fixtures-3-0/tmp/
+PASS K: the four files hash as r18-edits/post-apply-2
+PASS K: tgc-3.pairs applied, each block exactly once
+PASS K: the suite still parses
+== K: both functions pass with the new rows on the repaired kernel
+PASS K report_record_line_cases passes
+PASS K report_manifest_locale_cases passes
+PASS D04: the mutant applies exactly once
+== D04 (report_record_line_cases report_record_line_cases): 8 failing assertions
+PASS D04 fails on: a manifest tier written as entity-then-code-span-holding-image-across-lines was not refused
+PASS D04 fails on: a second tier written as entity-then-code-span-holding-image-across-lines was not refused
+PASS live worktree status outside notes/verification/ unchanged
+end 2026-10-13T20:25:35Z
+r18-fixtures-judge-3 failures=0

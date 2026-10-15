@@ -1,0 +1,17 @@
+@@OLD
+  # read, because library functions run under an explicit `bash`; LANG and the
+  # locale categories change no record either: the harness runs under the
+  # caller's locale, pins `LC_ALL=C` at the sites where collation actually
+  # matters, and fails closed in a locale that cannot decode the kit's bytes
+  # (Shift-JIS, or a UTF-8 locale over an invalid byte; T030o42 review), while
+  # a check whose programs read the locale pins it or declares it; TMPDIR
+  # decides where temporary files are written, never what a check concludes.
+@@NEW
+  # read, because library functions run under an explicit `bash`; LANG and the
+  # locale categories change no record either: the harness runs its own
+  # parsing under `LC_ALL=C` (vf_locale_pin above), which decodes every byte
+  # and reads every ASCII grammar the kit writes as any other locale would,
+  # and gives the caller's LC_ALL back to the command a capture runs, while a
+  # check whose programs read the locale pins it or declares it (O-017); TMPDIR
+  # decides where temporary files are written, never what a check concludes.
+@@END

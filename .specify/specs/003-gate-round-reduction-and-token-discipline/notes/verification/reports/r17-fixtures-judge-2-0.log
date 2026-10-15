@@ -1,0 +1,92 @@
+start 2026-10-08T17:14:05Z shard 0/2; TMPDIR=/private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17-fixtures-2-0/tmp/
+PASS K: the four files hash as r17-edits/post-apply-1
+PASS K: tgc-2.pairs applied, each block exactly once
+PASS K: the suite still parses
+== K: both functions pass with the new rows on the repaired kernel
+PASS K report_record_line_cases passes
+PASS K report_manifest_locale_cases passes
+PASS E01a: the mutant applies exactly once
+== E01a (report_manifest_locale_cases report_record_line_cases): 12 failing assertions
+PASS E01a fails on: a plausible manifest (image-split-by-blank-line) was refused
+PASS E01a fails on: a plausible manifest (span-tag-after-a-lone-backtick-paragraph) was refused
+PASS E01a fails on: a canonical finding with a-image-split-by-blank-line was refused
+PASS E01a fails on: a canonical finding with a-span-tag-after-a-lone-backtick-paragraph was refused
+PASS E03: the mutant applies exactly once
+== E03 (report_manifest_locale_cases report_record_line_cases): 12 failing assertions
+PASS E03 fails on: a plausible manifest (image-split-by-six-marks) was refused
+PASS E03 fails on: a plausible manifest (quoted-image-split-by-six-marks) was refused
+PASS E03 fails on: a canonical finding with a-image-split-by-six-marks was refused
+PASS E03 fails on: a canonical finding with a-quoted-image-split-by-six-marks was refused
+PASS E06: the mutant applies exactly once
+== E06 (report_manifest_locale_cases report_record_line_cases): 6 failing assertions
+PASS E06 fails on: a plausible manifest (quoted-image-split-by-six-marks) was refused
+PASS E06 fails on: a canonical finding with a-quoted-image-split-by-six-marks was refused
+PASS C04: the mutant applies exactly once
+== C04 (report_record_line_cases report_record_line_cases): 16 failing assertions
+PASS C04 fails on: a manifest tier written as tag-after-span-closing-next-line was not refused
+PASS C04 fails on: a second tier written as tag-after-span-closing-next-line was not refused
+PASS C04 fails on: a manifest tier written as tag-after-span-closing-two-lines-later was not refused
+PASS C04 fails on: a second tier written as tag-after-span-closing-two-lines-later was not refused
+PASS C06: the mutant applies exactly once
+== C06 (report_record_line_cases report_record_line_cases): 8 failing assertions
+PASS C06 fails on: a manifest tier written as tag-after-span-closing-two-lines-later was not refused
+PASS C06 fails on: a second tier written as tag-after-span-closing-two-lines-later was not refused
+PASS S01: the mutant applies exactly once
+== S01 (report_record_line_cases report_record_line_cases): 52 failing assertions
+PASS S01 fails on: a manifest tier written as image-alt-across-three-lines was not refused
+PASS S01 fails on: a second tier written as image-alt-across-three-lines was not refused
+PASS S01 fails on: a manifest tier written as link-title-across-three-lines was not refused
+PASS S01 fails on: a second tier written as link-title-across-three-lines was not refused
+  | also: assert: AC-012: a manifest tier written as image-alt-holding-code-span-across-lines was not refused by name under LANG=C (O-018) missing substring: a second Severity line in finding G-042
+  | also: assert: AC-012: a manifest tier written as image-alt-holding-code-span-across-lines was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a second Severity line in finding G-042
+  | also: assert: AC-012: a manifest tier written as image-alt-code-span-closing-two-lines-later was not refused by name under LANG=C (O-018) missing substring: a second Severity line in finding G-042
+  | also: assert: AC-012: a manifest tier written as image-alt-code-span-closing-two-lines-later was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a second Severity line in finding G-042
+  | also: assert: AC-012: a manifest tier written as tag-attribute-across-three-lines was not refused by name under LANG=C (O-018) missing substring: a second Severity line in finding G-042
+  | also: assert: AC-012: a manifest tier written as tag-attribute-across-three-lines was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a second Severity line in finding G-042
+PASS S04: the mutant applies exactly once
+== S04 (report_record_line_cases report_record_line_cases): 8 failing assertions
+PASS S04 fails on: a manifest tier written as image-alt-code-span-closing-two-lines-later was not refused
+PASS S04 fails on: a second tier written as image-alt-code-span-closing-two-lines-later was not refused
+PASS S05j: the mutant applies exactly once
+== S05j (report_record_line_cases report_record_line_cases): 32 failing assertions
+PASS S05j fails on: a manifest tier written as image-alt-across-three-lines was not refused
+PASS S05j fails on: a second tier written as image-alt-across-three-lines was not refused
+PASS S05j fails on: a manifest tier written as link-title-across-three-lines was not refused
+PASS S05j fails on: a second tier written as link-title-across-three-lines was not refused
+  | also: assert: AC-012: a manifest tier written as image-after-stray-bracket-across-three-lines was not refused by name under LANG=C (O-018) missing substring: a second Severity line in finding G-042
+  | also: assert: AC-012: a manifest tier written as image-after-stray-bracket-across-three-lines was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a second Severity line in finding G-04
+  | also: assert: AC-012: a manifest tier written as image-alt-holding-escaped-bracket-across-lines was not refused by name under LANG=C (O-018) missing substring: a second Severity line in finding G-042
+  | also: assert: AC-012: a manifest tier written as image-alt-holding-escaped-bracket-across-lines was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a second Severity line in finding G-
+  | also: assert: AC-012: a second tier written as image-after-stray-bracket-across-three-lines was not refused by name under LANG=C (O-018) missing substring: a Severity line this grammar cannot read in findin
+  | also: assert: AC-012: a second tier written as image-after-stray-bracket-across-three-lines was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a Severity line this grammar cannot read
+PASS S06: the mutant applies exactly once
+== S06 (report_record_line_cases report_record_line_cases): 8 failing assertions
+PASS S06 fails on: a manifest tier written as image-after-stray-bracket-across-three-lines was not refused
+PASS S06 fails on: a second tier written as image-after-stray-bracket-across-three-lines was not refused
+PASS S06c: the mutant applies exactly once
+== S06c (report_record_line_cases report_record_line_cases): 8 failing assertions
+PASS S06c fails on: a manifest tier written as link-title-across-three-lines was not refused
+PASS S06c fails on: a second tier written as link-title-across-three-lines was not refused
+PASS S18: the mutant applies exactly once
+== S18 (report_record_line_cases report_record_line_cases): 4 failing assertions
+PASS S18 fails on: a manifest tier written as tag-attribute-across-three-lines was not refused
+PASS S18 fails on: a second tier written as tag-attribute-across-three-lines was not refused
+PASS N04d: the mutant applies exactly once
+== N04d (report_record_line_cases report_record_line_cases): 8 failing assertions
+PASS N04d fails on: a manifest tier written as pi-in-prose was not refused
+PASS N04d fails on: a second tier written as pi-in-prose was not refused
+PASS X06c: the mutant applies exactly once
+== X06c (report_manifest_locale_cases): 2 failing assertions
+PASS X06c fails on: a plausible manifest (outside-span-tag) was refused
+PASS N06f: the mutant applies exactly once
+== N06f (report_record_line_cases report_record_line_cases): 128 failing assertions
+PASS N06f fails on: raw HTML in Held-up prose outside every finding was refused
+  | also: assert: AC-012: a Where value quoting a tag as code was refused under LANG=C (round 16, O-018) unexpectedly contains: report recovery
+  | also: assert: AC-012: a Where value quoting a tag as code was refused under LANG=en_US.UTF-8 (round 16, O-018) unexpectedly contains: report recovery
+  | also: assert: AC-012: a Severity line followed by a four-backtick-fence was refused under LANG=C (O-021) unexpectedly contains: report recovery
+  | also: assert: AC-012: a Severity line followed by a four-backtick-fence was refused under LANG=en_US.UTF-8 (O-021) unexpectedly contains: report recovery
+  | also: assert: AC-012: a Severity line followed by a tilde-fence was refused under LANG=C (O-021) unexpectedly contains: report recovery
+  | also: assert: AC-012: a Severity line followed by a tilde-fence was refused under LANG=en_US.UTF-8 (O-021) unexpectedly contains: report recovery
+PASS live worktree status outside notes/verification/ unchanged
+end 2026-10-08T17:22:17Z
+r17-fixtures-judge-2 shard 0/2 failures=0

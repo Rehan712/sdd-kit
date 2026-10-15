@@ -1,0 +1,30 @@
+== baseline shard 0/1 18:01:15Z
+PASS B report_record_line_cases unmutated passes
+PASS B report_manifest_locale_cases unmutated passes
+PASS B report_round_style_cases unmutated passes
+PASS B report_prior_binding_cases unmutated passes
+PASS B report_severity_tier_cases unmutated passes
+PASS B shipped_002_tally_case unmutated passes
+PASS B round_record_line_cases unmutated passes
+PASS B round_locale_cases unmutated passes
+== the label reader (vf_label_word, vf_label_html, vf_label_links, vf_label_render, vf_label, vf_finding_heading)
+== T030o43 rows carried to their spelling in vf_label_word
+== the record shapes a quoted line may carry (vf_record) and the quoted-record refusal
+== the field-item rule (vf_block_start and both passes)
+== the manifest pass
+== the canonical pass
+== the canonical conjuncts that keep legacy rounds as they were (T030o44 review F6; O03 of v1 is now a kill)
+== the round style decided before its body (T030o45, O-020)
+== the rendered reading: the bracket fixpoint, the escape, the checkbox, emphasis inside a word, hiding (T030o46, O-018)
+== the paragraph step and the paragraph checks (T030o46, T030o47; O-018)
+== the blocks that end a field item (T030o46, O-021)
+== the code-span reading, the reading after a rendered line start, the field-value reading (T030o47, O-018)
+== the narrowed grammar inside a finding (T030o48, O-018): vf_narrow, the `<` class, its call in each pass
+PASS G08 literal applies once in scripts/verification-lib.sh
+PASS G08 KILLED (kill, judge rc)
+PASS G08 diagnostic: a manifest tier written as plaintext-in-prose was not refused by name under LANG=C (O-018)
+== the code-span scan and the code-span reading (T030o48, O-018): 6.1 read left to right, 2.4 escapes in pairs
+== the run ends only at a blank line or a heading of one to six marks, never at a fenced line (T030o48, T030o49)
+== a settled candidate is dropped (T030o50, O-023): vf_settled and the reader that drops
+== done shard 0/1 18:03:08Z rows=227
+r17-mutations failures=0

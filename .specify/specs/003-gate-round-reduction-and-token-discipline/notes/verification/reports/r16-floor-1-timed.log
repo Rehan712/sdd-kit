@@ -1,0 +1,7 @@
+Timestamp               Ty Process[PID:TID]
+2026-10-08 09:28:56.256 Df timed[383:5fe9fba] [com.apple.timed:text] Received time Thu Oct  8 09:28:52 2026±0.01 from "NTP"
+2026-10-08 09:28:56.257 Df timed[383:5fe9fba] [com.apple.timed:data] TDTF,RejectATime,rejects,0,innv,-3.975286,predTime,813137336.221024,rtc,9332662.826615,utc,813137332.245738,unc,0.005225,source,NTP
+2026-10-08 09:28:52.248 Df timed[383:5fe9fba] [com.apple.settimeofday:] settimeofday({0x6ac74634,0x3c675}) == 0
+2026-10-08 09:28:52.248 Df timed[383:5fe9fba] [com.apple.timed:text] Setting system time to Thu Oct  8 09:28:52 2026 from TMTimeSynthesizer
+2026-10-08 09:28:52.257 Df timed[383:5fe9fba] [com.apple.timed:data] cmd,apply,src,settimeofday,rtc_s,9332662.827490166,rtc_unc_s,0.000500003,t_s,813137332.246613026,unc_s,0.005224603,mach,10430408442760,adjust,-3.975301027,success,1,after_m,10430408442774
+2026-10-08 09:28:52.257 Df timed[383:5fe9fba] [com.apple.timed:data] cmd,apply,src,adjtime,rtc_s,9332662.838587791,rtc_unc_s,0.000500003,t_s,813137332.257710218,unc_s,0.005224603,mach,10430408708839,adjust,0.000016212,success,1,after_m,10430408708849

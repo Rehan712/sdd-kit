@@ -1,0 +1,8 @@
+t030o44-mutations-run1-shard{0,1}.{log,rc,start,end} (2026-10-02, matrix v2, first run): shard 1 exit 0 (152 PASS); shard 0
+rc 1 (the task notification said exit 0) on one row only, L13 (an image's alt text kept in the rendered reading),
+which survived because its fixture rows wrote the image as `![x](y)`: the word reader skips `[x]` as a task
+checkbox by design, so the mutant still read the label after it, and the rows passed for the wrong reason. The
+rows now write `![logo](y)` (t030o44-edits/tgc-7.pairs, t030o44-apply-6.*), which the mutant reads as the word
+logo. Every other row behaved as recorded: 77 kills and 21 over-corrections killed with their exact diagnostics,
+5 argued equivalents surviving, 7 baselines passing, every restore identical. dev7 was stopped for the same
+change before any suite finished and judges nothing (t030o44-dev7-*-stopped.*). The run of record follows.

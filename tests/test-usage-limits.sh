@@ -88,7 +88,9 @@ dispatch_fixture() { # <models.yml body> <provider stdout> <provider stderr> <ex
   DISPATCH_PROVIDER_STDERR="$provider_stderr"
   DISPATCH_PROVIDER_EXIT="$provider_exit"
   mkdir -p "$DISPATCH_KIT" "$DISPATCH_HOME/.codex/skills/sdd-plan" "$DISPATCH_BIN"
-  cp -R "$SCRIPTS" "$DISPATCH_KIT/scripts"
+  # The kit's scripts as the input identity enumerates them (copy_kit's directory selector), so a
+  # developer's ignored entry under scripts/ never arrives (O-015 second review).
+  copy_kit "$KIT_DIR" "$DISPATCH_KIT" scripts || t_fail 'AC-003: cannot stage the kit scripts for the dispatch fixture'
   printf '%s\n' "$policy" > "$DISPATCH_KIT/models.yml"
   : > "$DISPATCH_HOME/.codex/skills/sdd-plan/SKILL.md"
   cat > "$DISPATCH_BIN/provider-stub" <<'EOF'
@@ -895,7 +897,9 @@ doctor_fixture() {
   DOCTOR_ROOT="$SANDBOX/doctor-resume-root"
   DOCTOR_SCHEDULER="$SANDBOX/doctor-resume-scheduler"
   DOCTOR_JOBS="$SANDBOX/doctor-scheduler-jobs"
-  cp -R "$KIT_DIR" "$DOCTOR_KIT"
+  # The kit as the input identity sees it: a host's machine-local system-map.yml,
+  # models.yml or build/ must not decide this reuse-checked verdict (O-015).
+  copy_kit "$KIT_DIR" "$DOCTOR_KIT" || t_fail 'AC-009: cannot copy the kit for the doctor fixture'
   mkdir -p "$DOCTOR_HOME" "$DOCTOR_BIN" "$DOCTOR_ROOT" "$DOCTOR_KIT/build"
   : > "$DOCTOR_KIT/registry.yml"
   : > "$DOCTOR_KIT/build/.stamp"
@@ -996,6 +1000,41 @@ test_AC_009_doctor_reconciles_pending_failed_and_both_orphan_classes_without_mod
     "AC-009: doctor reports a unit-without-job orphan"
   assert_contains "$OUT" "resume orphan: scheduler job $job_only has no resume unit" \
     "AC-009: doctor reports a job-without-unit orphan"
+}
+
+# O-015 sibling, round 10: the doctor fixture copies the kit as the input
+# identity enumerates it. A host kit's machine-local system-map.yml and
+# models.yml are ignored and unhashed, and this suite is reuse-checked, so
+# neither may reach the fixture. Before the repair the fixture's cp -R carried
+# an invalid system-map.yml in and failed the doctor with the identity unchanged.
+test_AC_009_doctor_fixture_excludes_machine_local_kit_files() {
+  local host="$SANDBOX/host-kit" name
+  copy_kit "$KIT_DIR" "$host" || t_fail 'AC-009: cannot build the host kit'
+  fixture_git -C "$host" init -q || fixture_build_failed doctor-host
+  printf 'repos: [unclosed\n' > "$host/system-map.yml"
+  printf 'tiers: [unclosed\n' > "$host/models.yml"
+  FIXTURES="$host/tests/fixtures/usage-limits" on_host_kit "$host" doctor_fixture
+  for name in system-map.yml models.yml; do
+    [[ ! -e "$DOCTOR_KIT/$name" ]] || t_fail "AC-009: the doctor fixture carried the host's ignored $name"
+  done
+  run_rc 0 run_doctor
+  assert_not_contains "$OUT" 'system-map.yml invalid' \
+    "AC-009: the host's ignored system-map.yml decided the doctor verdict"
+  assert_contains "$OUT" 'models.yml not configured' \
+    "AC-009: the host's ignored models.yml reached the doctor fixture"
+}
+
+# O-015 second review: the dispatch fixture copies the kit's scripts as the
+# input identity enumerates them, so an ignored script in a developer's kit
+# never reaches the staged dispatcher's kit.
+test_AC_003_dispatch_fixture_copies_only_enumerated_scripts() {
+  local host="$SANDBOX/host-kit"
+  make_host_kit "$host" || t_fail 'AC-003: cannot build the host kit'
+  printf 'scripts/zz-local.sh\n' >> "$host/.git/info/exclude"
+  printf 'echo local\n' > "$host/scripts/zz-local.sh"
+  FIXTURES="$host/tests/fixtures/usage-limits" on_host_kit "$host" dispatch_fixture 'tiers: {}' '' '' 0
+  [[ -f "$DISPATCH_KIT/scripts/spec-dispatch.sh" ]] || t_fail 'AC-003: the dispatch fixture did not stage the dispatcher'
+  [[ ! -e "$DISPATCH_KIT/scripts/zz-local.sh" ]] || t_fail "AC-003: the dispatch fixture staged the host kit's ignored script"
 }
 
 # AC-010: public policy docs must stay aligned with the parser and preserve the

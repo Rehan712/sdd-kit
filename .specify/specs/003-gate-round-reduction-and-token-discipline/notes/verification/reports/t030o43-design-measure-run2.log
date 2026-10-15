@@ -1,0 +1,369 @@
+kits: CUR PRE D DS built; D edits applied
+== A: prior-review manifest (a CLEARED round re-records G-042 open at minor; the manifest records data-loss)
+  control: PRE-UTF8 rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/45f0cb89-8b3e-41f3-b84f-074518924365/scratchpad/t030o43-dm/m-control/notes/opponent.md:24: clearing verdict rests on 1 lowered severity tier(s) of known findings; reconcile canonical | CUR rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/45f0cb89-8b3e-41f3-b84f-074518924365/scratchpad/t030o43-dm/m-control/notes/opponent.md:24: clearing verdict rests on 1 lowered severity tier(s) of known findings; reconcile canonical
+PASS A control D C
+PASS A control D en_US.UTF-8
+  r1-class-nbsp: PRE-UTF8 rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/45f0cb89-8b3e-41f3-b84f-074518924365/scratchpad/t030o43-dm/m-r1-class-nbsp/notes/opponent.md:24: clearing verdict rests on 1 lowered severity tier(s) of known findings; reconcile can | CUR rc=3 manifest line 2: a Class or Severity line this grammar cannot read: - **Class:** tier-binding/manifest line 3: finding G-042 has no readable Class: - **Severity:** data-loss/prior-review manifest could not be parsed; reconcile canonical records/
+PASS A r1-class-nbsp D C
+PASS A r1-class-nbsp D en_US.UTF-8
+  r1-severity-nbsp: PRE-UTF8 rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/45f0cb89-8b3e-41f3-b84f-074518924365/scratchpad/t030o43-dm/m-r1-severity-nbsp/notes/opponent.md:24: clearing verdict rests on 1 lowered severity tier(s) of known findings; reconcile  | CUR rc=3 manifest line 3: a Class or Severity line this grammar cannot read: - **Severity:** data-loss/prior-review manifest could not be parsed; reconcile canonical records/
+PASS A r1-severity-nbsp D C
+PASS A r1-severity-nbsp D en_US.UTF-8
+  r1-classbind-nbsp: PRE-UTF8 rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/45f0cb89-8b3e-41f3-b84f-074518924365/scratchpad/t030o43-dm/m-r1-classbind-nbsp/notes/opponent.md:24: finding G-042 changes Class from tier-binding to silent-data-loss; reconcile cano | CUR rc=3 manifest line 2: a Class or Severity line this grammar cannot read: - **Class:** tier-binding/manifest line 3: finding G-042 has no readable Class: - **Severity:** data-loss/prior-review manifest could not be parsed; reconcile canonical records/
+PASS A r1-classbind-nbsp D C
+PASS A r1-classbind-nbsp D en_US.UTF-8
+  r1-heading-nbsp-after-id: PRE-UTF8 rc=0  | CUR rc=3 manifest line 1: a Finding heading this grammar cannot read: ### Finding G-042 /prior-review manifest could not be parsed; reconcile canonical records/
+PASS A r1-heading-nbsp-after-id D C
+PASS A r1-heading-nbsp-after-id D en_US.UTF-8
+  r1-heading-nbsp-after-hashes: PRE-UTF8 rc=0  | CUR rc=3 manifest line 1: a Finding heading this grammar cannot read: ### Finding G-042/prior-review manifest could not be parsed; reconcile canonical records/
+PASS A r1-heading-nbsp-after-hashes D C
+PASS A r1-heading-nbsp-after-hashes D en_US.UTF-8
+  r2-lower-finding: PRE-UTF8 rc=0  | CUR rc=0 
+PASS A r2-lower-finding D C
+PASS A r2-lower-finding D en_US.UTF-8
+  r2-upper-finding: PRE-UTF8 rc=0  | CUR rc=0 
+PASS A r2-upper-finding D C
+PASS A r2-upper-finding D en_US.UTF-8
+  r2-leading-space: PRE-UTF8 rc=0  | CUR rc=0 
+PASS A r2-leading-space D C
+PASS A r2-leading-space D en_US.UTF-8
+  r2-word-before: PRE-UTF8 rc=0  | CUR rc=0 
+PASS A r2-word-before D C
+PASS A r2-word-before D en_US.UTF-8
+  r2-bom: PRE-UTF8 rc=0  | CUR rc=0 
+PASS A r2-bom D C
+PASS A r2-bom D en_US.UTF-8
+  r2-nbsp-before-hashes: PRE-UTF8 rc=0  | CUR rc=0 
+PASS A r2-nbsp-before-hashes D C
+PASS A r2-nbsp-before-hashes D en_US.UTF-8
+  r2-zwsp-before-hashes: PRE-UTF8 rc=0  | CUR rc=0 
+PASS A r2-zwsp-before-hashes D C
+PASS A r2-zwsp-before-hashes D en_US.UTF-8
+  r2-crlf: PRE-UTF8 rc=0  | CUR rc=0 
+PASS A r2-crlf D C
+PASS A r2-crlf D en_US.UTF-8
+  r2-crlf-classbind: PRE-UTF8 rc=0  | CUR rc=0 
+PASS A r2-crlf-classbind D C
+PASS A r2-crlf-classbind D en_US.UTF-8
+  r2-severity-unbolded: PRE-UTF8 rc=0  | CUR rc=0 
+PASS A r2-severity-unbolded D C
+PASS A r2-severity-unbolded D en_US.UTF-8
+  r2-severity-colon-outside: PRE-UTF8 rc=0  | CUR rc=0 
+PASS A r2-severity-colon-outside D C
+PASS A r2-severity-colon-outside D en_US.UTF-8
+  r2-severity-lowercase: PRE-UTF8 rc=0  | CUR rc=0 
+PASS A r2-severity-lowercase D C
+PASS A r2-severity-lowercase D en_US.UTF-8
+  r2-severity-italic: PRE-UTF8 rc=0  | CUR rc=0 
+PASS A r2-severity-italic D C
+PASS A r2-severity-italic D en_US.UTF-8
+  r2-severity-twice: PRE-UTF8 rc=0  | CUR rc=0 
+PASS A r2-severity-twice D C
+PASS A r2-severity-twice D en_US.UTF-8
+  r2-unclosed-fence: PRE-UTF8 rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/45f0cb89-8b3e-41f3-b84f-074518924365/scratchpad/t030o43-dm/m-r2-unclosed-fence/notes/opponent.md:24: clearing verdict rests on 1 lowered severity tier(s) of known findings; reconcile | CUR rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/45f0cb89-8b3e-41f3-b84f-074518924365/scratchpad/t030o43-dm/m-r2-unclosed-fence/notes/opponent.md:24: clearing verdict rests on 1 lowered severity tier(s) of known findings; reconcile
+FAIL A r2-unclosed-fence D C (want text [prior-review manifest could not be parsed] in [rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/45f0cb89-8b3e-41f3-b84f-074518924365/scratchpad/t030o43-dm/m-r2-unclosed-fence/notes/opponent.md:24: clearing verdict rests on 1 lowered severity tier(s) of known findings; reconcile])
+FAIL A r2-unclosed-fence D en_US.UTF-8 (want text [prior-review manifest could not be parsed] in [rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/45f0cb89-8b3e-41f3-b84f-074518924365/scratchpad/t030o43-dm/m-r2-unclosed-fence/notes/opponent.md:24: clearing verdict rests on 1 lowered severity tier(s) of known findings; reconcile])
+  r2-unclosed-comment: PRE-UTF8 rc=0  | CUR rc=0 
+PASS A r2-unclosed-comment D C
+PASS A r2-unclosed-comment D en_US.UTF-8
+  r2-unclosed-pre: PRE-UTF8 rc=0  | CUR rc=0 
+PASS A r2-unclosed-pre D C
+PASS A r2-unclosed-pre D en_US.UTF-8
+  r2-merge-into-previous: PRE-UTF8 rc=0  | CUR rc=0 
+FAIL A r2-merge-into-previous D C (want text [clearing verdict rests on 1 lowered severity tier] in [rc=0 ])
+FAIL A r2-merge-into-previous D en_US.UTF-8 (want text [clearing verdict rests on 1 lowered severity tier] in [rc=0 ])
+  r2-titled-heading: PRE-UTF8 rc=0  | CUR rc=3 manifest line 1: a Finding heading this grammar cannot read: ### Finding G-042 — tier binding lost/prior-review manifest could not be parsed; reconcile canonical records/
+PASS A r2-titled-heading D C
+PASS A r2-titled-heading D en_US.UTF-8
+  indented-2: PRE-UTF8 rc=0  | CUR rc=3 manifest line 2: a Class or Severity line this grammar cannot read:   - **Class:** tier-binding/manifest line 3: a Class or Severity line this grammar cannot read:   - **Severity:** data-loss/manifest line 3: finding G-042 has no readable Class:   - **Severity
+PASS A indented-2 D C
+PASS A indented-2 D en_US.UTF-8
+  indented-4-severity: PRE-UTF8 rc=0  | CUR rc=3 manifest line 3: a Class or Severity line this grammar cannot read:     - **Severity:** data-loss/prior-review manifest could not be parsed; reconcile canonical records/
+PASS A indented-4-severity D C
+PASS A indented-4-severity D en_US.UTF-8
+  class-with-space: PRE-UTF8 rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/45f0cb89-8b3e-41f3-b84f-074518924365/scratchpad/t030o43-dm/m-class-with-space/notes/opponent.md:24: finding G-042 changes Class from tierbinding to tier-binding; reconcile canonical  | CUR rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/45f0cb89-8b3e-41f3-b84f-074518924365/scratchpad/t030o43-dm/m-class-with-space/notes/opponent.md:24: finding G-042 changes Class from tierbinding to tier-binding; reconcile canonical 
+PASS A class-with-space D C
+PASS A class-with-space D en_US.UTF-8
+  field-outside-finding: PRE-UTF8 rc=0  | CUR rc=0 
+PASS A field-outside-finding D C
+PASS A field-outside-finding D en_US.UTF-8
+  id-ill-cased: PRE-UTF8 rc=0  | CUR rc=3 manifest line 1: a Finding heading this grammar cannot read: ### Finding g-042/prior-review manifest could not be parsed; reconcile canonical records/
+FAIL A id-ill-cased D C (want text [prior-review manifest could not be parsed] in [rc=3 manifest line 1: a Finding heading whose ID this grammar cannot read: ### Finding g-042/manifest line 2: a class line outside any Finding: - **Class:** tier-binding/manifest line 3: a severity line outside any Finding: - **Severity:** data-loss/])
+FAIL A id-ill-cased D en_US.UTF-8 (want text [prior-review manifest could not be parsed] in [rc=3 manifest line 1: a Finding heading whose ID this grammar cannot read: ### Finding g-042/manifest line 2: a class line outside any Finding: - **Class:** tier-binding/manifest line 3: a severity line outside any Finding: - **Severity:** data-loss/])
+  -- a finding between two lines that begin with a U+00A0 and a fence run (not a fence to any reader)
+  nbsp-fence-pair: PRE-UTF8 rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/45f0cb89-8b3e-41f3-b84f-074518924365/scratchpad/t030o43-dm/m-nbsp-fence-pair/notes/opponent.md:24: clearing verdict rests on 1 lowered severity tier(s) of known findings; reconcile c | CUR rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/45f0cb89-8b3e-41f3-b84f-074518924365/scratchpad/t030o43-dm/m-nbsp-fence-pair/notes/opponent.md:24: clearing verdict rests on 1 lowered severity tier(s) of known findings; reconcile c
+PASS A nbsp-fence-pair D C
+PASS A nbsp-fence-pair D en_US.UTF-8
+  nbsp-fence-pair DS C: rc=0 
+  nbsp-fence-pair DS en_US.UTF-8: rc=0 
+  -- every non-ASCII White_Space character after the dash of the Class line
+PASS A ws-1 (c285) D C
+PASS A ws-1 (c285) D en_US.UTF-8
+PASS A ws-2 (c2a0) D C
+PASS A ws-2 (c2a0) D en_US.UTF-8
+PASS A ws-3 (e19a80) D C
+PASS A ws-3 (e19a80) D en_US.UTF-8
+PASS A ws-4 (e28080) D C
+PASS A ws-4 (e28080) D en_US.UTF-8
+PASS A ws-5 (e28081) D C
+PASS A ws-5 (e28081) D en_US.UTF-8
+PASS A ws-6 (e28082) D C
+PASS A ws-6 (e28082) D en_US.UTF-8
+PASS A ws-7 (e28083) D C
+PASS A ws-7 (e28083) D en_US.UTF-8
+PASS A ws-8 (e28084) D C
+PASS A ws-8 (e28084) D en_US.UTF-8
+PASS A ws-9 (e28085) D C
+PASS A ws-9 (e28085) D en_US.UTF-8
+PASS A ws-10 (e28086) D C
+PASS A ws-10 (e28086) D en_US.UTF-8
+PASS A ws-11 (e28087) D C
+PASS A ws-11 (e28087) D en_US.UTF-8
+PASS A ws-12 (e28088) D C
+PASS A ws-12 (e28088) D en_US.UTF-8
+PASS A ws-13 (e28089) D C
+PASS A ws-13 (e28089) D en_US.UTF-8
+PASS A ws-14 (e2808a) D C
+PASS A ws-14 (e2808a) D en_US.UTF-8
+PASS A ws-15 (e280a8) D C
+PASS A ws-15 (e280a8) D en_US.UTF-8
+PASS A ws-16 (e280a9) D C
+PASS A ws-16 (e280a9) D en_US.UTF-8
+PASS A ws-17 (e280af) D C
+PASS A ws-17 (e280af) D en_US.UTF-8
+PASS A ws-18 (e2819f) D C
+PASS A ws-18 (e2819f) D en_US.UTF-8
+PASS A ws-19 (e38080) D C
+PASS A ws-19 (e38080) D en_US.UTF-8
+== B: plausible manifests parse (a CHALLENGED round re-records O-017 at its manifest Class and tier: rc=0)
+  o017-block: PRE rc=0  | CUR rc=3 manifest line 12: a Class or Severity line this grammar cannot read:   - **The inputs.** The manifest has six lines: `# Prior review`, a blank, `### Finding G-042`, `- **Class:** tier-binding`, `- **Severity:** data-loss`, and `- **Scenario:** the operator` + 
+PASS B o017-block D C
+PASS B o017-block D en_US.UTF-8
+  trailing-section: PRE rc=0  | CUR rc=3 manifest line 6: a Class or Severity line this grammar cannot read: - T030o43 fixes the **Severity:** handling/manifest line 7: a Class or Severity line this grammar cannot read: - **T001** — fix it; its **Severity:** stays data-loss/prior-review manifest co
+PASS B trailing-section D C
+PASS B trailing-section D en_US.UTF-8
+  prose-mention: PRE rc=0  | CUR rc=3 manifest line 4: a Class or Severity line this grammar cannot read: - **Scenario:** the **Class:** field was lost; a field line written `- **Class:**` was skipped/manifest line 5: a Class or Severity line this grammar cannot read: - **Class-wide fix:** make e
+PASS B prose-mention D C
+PASS B prose-mention D en_US.UTF-8
+  class-only: PRE rc=0  | CUR rc=0 
+PASS B class-only D C
+PASS B class-only D en_US.UTF-8
+  finding-summary: PRE rc=0  | CUR rc=3 manifest line 5: a Finding heading this grammar cannot read: ## Finding summary/prior-review manifest could not be parsed; reconcile canonical records/
+PASS B finding-summary D C
+PASS B finding-summary D en_US.UTF-8
+  -- the reviewer's indented code example of a second Severity inside a finding: read as the canonical parser reads it, and refused as a second field
+PASS B indented-code D C
+PASS B indented-code D en_US.UTF-8
+== C: canonical report fields and sections
+PASS C section-body ws-1 D C
+PASS C section-body ws-1 D en_US.UTF-8
+PASS C section-body ws-2 D C
+PASS C section-body ws-2 D en_US.UTF-8
+PASS C section-body ws-3 D C
+PASS C section-body ws-3 D en_US.UTF-8
+PASS C section-body ws-4 D C
+PASS C section-body ws-4 D en_US.UTF-8
+PASS C section-body ws-5 D C
+PASS C section-body ws-5 D en_US.UTF-8
+PASS C section-body ws-6 D C
+PASS C section-body ws-6 D en_US.UTF-8
+PASS C section-body ws-7 D C
+PASS C section-body ws-7 D en_US.UTF-8
+PASS C section-body ws-8 D C
+PASS C section-body ws-8 D en_US.UTF-8
+PASS C section-body ws-9 D C
+PASS C section-body ws-9 D en_US.UTF-8
+PASS C section-body ws-10 D C
+PASS C section-body ws-10 D en_US.UTF-8
+PASS C section-body ws-11 D C
+PASS C section-body ws-11 D en_US.UTF-8
+PASS C section-body ws-12 D C
+PASS C section-body ws-12 D en_US.UTF-8
+PASS C section-body ws-13 D C
+PASS C section-body ws-13 D en_US.UTF-8
+PASS C section-body ws-14 D C
+PASS C section-body ws-14 D en_US.UTF-8
+PASS C section-body ws-15 D C
+PASS C section-body ws-15 D en_US.UTF-8
+PASS C section-body ws-16 D C
+PASS C section-body ws-16 D en_US.UTF-8
+PASS C section-body ws-17 D C
+PASS C section-body ws-17 D en_US.UTF-8
+PASS C section-body ws-18 D C
+PASS C section-body ws-18 D en_US.UTF-8
+PASS C section-body ws-19 D C
+PASS C section-body ws-19 D en_US.UTF-8
+  field Scenario U+00A0: PRE-UTF8 rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/45f0cb89-8b3e-41f3-b84f-074518924365/scratchpad/t030o43-dm/c-field-Scenario/notes/opponent.md:24: incomplete finding G-042; reconcile canonical records/ | CUR rc=0 
+PASS C field Scenario D C
+PASS C field Scenario D en_US.UTF-8
+  field Reproduced U+00A0: PRE-UTF8 rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/45f0cb89-8b3e-41f3-b84f-074518924365/scratchpad/t030o43-dm/c-field-Reproduced/notes/opponent.md:24: incomplete finding G-042; reconcile canonical records/ | CUR rc=0 
+PASS C field Reproduced D C
+PASS C field Reproduced D en_US.UTF-8
+  field Wrong behavior U+00A0: PRE-UTF8 rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/45f0cb89-8b3e-41f3-b84f-074518924365/scratchpad/t030o43-dm/c-field-Wrong-behavior/notes/opponent.md:24: incomplete finding G-042; reconcile canonical records/ | CUR rc=0 
+PASS C field Wrong behavior D C
+PASS C field Wrong behavior D en_US.UTF-8
+  field Class-wide fix U+00A0: PRE-UTF8 rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/45f0cb89-8b3e-41f3-b84f-074518924365/scratchpad/t030o43-dm/c-field-Class-wide-fix/notes/opponent.md:24: incomplete finding G-042; reconcile canonical records/ | CUR rc=0 
+PASS C field Class-wide fix D C
+PASS C field Class-wide fix D en_US.UTF-8
+  field Prior U+00A0: PRE-UTF8 rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/45f0cb89-8b3e-41f3-b84f-074518924365/scratchpad/t030o43-dm/c-field-Prior/notes/opponent.md:24: incomplete finding G-042; reconcile canonical records/ | CUR rc=0 
+PASS C field Prior D C
+PASS C field Prior D en_US.UTF-8
+  -- the raw digest reader and the validator agree on quoting: a line that begins with a U+00A0 and a fence run
+PASS C fence state D: mapped line == line as written
+  fence state DS: mapped=1 written=0
+== D: the Decisions section in the input identity (R2-F1): pairs that differ only by one waiver line
+  fenced-earlier: identity PRE=differ CUR=same D=differ DS=differ; D scanner reads the waiver: rc=0
+PASS D fenced-earlier: D identity differs
+PASS D fenced-earlier: the scanner reads it, so the identity hashes it
+  archived-earlier: identity PRE=differ CUR=same D=differ DS=differ; D scanner reads the waiver: rc=0
+PASS D archived-earlier: D identity differs
+PASS D archived-earlier: the scanner reads it, so the identity hashes it
+  duplicate-later: identity PRE=differ CUR=same D=differ DS=differ; D scanner reads the waiver: rc=0
+PASS D duplicate-later: D identity differs
+PASS D duplicate-later: the scanner reads it, so the identity hashes it
+  fenced-round-inside: identity PRE=same CUR=same D=differ DS=differ; D scanner reads the waiver: rc=0
+PASS D fenced-round-inside: D identity differs
+PASS D fenced-round-inside: the scanner reads it, so the identity hashes it
+  heading-nbsp: identity PRE=same CUR=differ D=differ DS=differ; D scanner reads the waiver: rc=0
+PASS D heading-nbsp: D identity differs
+PASS D heading-nbsp: the scanner reads it, so the identity hashes it
+  -- end to end: vf_snapshot of a repository holding the duplicate-later STATUS, without and with the waiver
+  snapshot CUR: b7c47c223116fe68 b7c47c223116fe68
+  snapshot D: bb4c591c33215d76 d112b8c57d1fd333
+PASS D snapshot: two identities
+== E: task bindings (the v1 fixture spec of tests/helpers.sh)
+  manual observation U+00A0: PRE-UTF8 rc=1 error: task T004 manual Verify must be manual: <observation> | CUR rc=0 
+PASS E manual observation U+00A0 D C
+PASS E manual observation U+00A0 D en_US.UTF-8
+  placeholder U+00A0: PRE-UTF8 rc=1 warning: verification family manual-family has blank or placeholder criteria/locator | CUR rc=0 
+PASS E placeholder U+00A0 D C
+PASS E placeholder U+00A0 D en_US.UTF-8
+  -- a Verify command written with a U+00A0 inside it is run and recorded as written
+  CUR: written
+  D: written
+PASS E D runs the Verify command as written
+  DS: written
+  -- a Verify value that begins with a U+00A0 before its backticks
+  CUR: rc=1 error: task T001 Verify must contain one backtick-delimited command
+PASS E leading U+00A0 before the Verify backticks D C
+PASS E leading U+00A0 before the Verify backticks D en_US.UTF-8
+== F: frontmatter and contract routing
+  CUR worktree= / t m p / M y 302 240 P r o j e c t s / w t \n  contract=[ 1] branch=[spec/x]
+  D worktree= / t m p / M y 302 240 P r o j e c t s / w t \n  contract=[1] branch=[spec/x]
+  DS worktree= / t m p / M y 302 240 P r o j e c t s / w t \n  contract=[1] branch=[spec/x]
+PASS F D worktree value is the path as written
+PASS F D a U+00A0 after the contract colon reads as 1
+PASS F D an inline comment is dropped
+PASS F D a U+00A0 before an inline comment ends the value
+  [verification_contract:|] spec-evidence: CUR exit=3 unsupported verification contract: ---
+PASS F D spec-evidence refuses [verification_contract:|]
+  [verification_contract:|] spec-task: CUR exit=3 unsupported verification contract
+PASS F D spec-task refuses [verification_contract:|]
+  [verification_contract:|] spec-run: CUR exit=3 unsupported verification contract
+PASS F D spec-run refuses [verification_contract:|]
+  [verification_contract: ""|] spec-evidence: CUR exit=0 sound — every ticked box traces to real evidence
+PASS F D spec-evidence refuses [verification_contract: ""|]
+  [verification_contract: ""|] spec-task: CUR exit=0 T001	done	Backend	x
+PASS F D spec-task refuses [verification_contract: ""|]
+  [verification_contract: ""|] spec-run: CUR exit=0 ✓ T001 acceptance passed (--no-tick: not ticking)
+PASS F D spec-run refuses [verification_contract: ""|]
+  [verification_contract: ''|] spec-evidence: CUR exit=0 sound — every ticked box traces to real evidence
+PASS F D spec-evidence refuses [verification_contract: ''|]
+  [verification_contract: ''|] spec-task: CUR exit=0 T001	done	Backend	x
+PASS F D spec-task refuses [verification_contract: ''|]
+  [verification_contract: ''|] spec-run: CUR exit=0 ✓ T001 acceptance passed (--no-tick: not ticking)
+PASS F D spec-run refuses [verification_contract: ''|]
+  [verification_contract: 2|] spec-evidence: CUR exit=3 unsupported verification contract: 2---
+PASS F D spec-evidence refuses [verification_contract: 2|]
+  [verification_contract: 2|] spec-task: CUR exit=3 unsupported verification contract
+PASS F D spec-task refuses [verification_contract: 2|]
+  [verification_contract: 2|] spec-run: CUR exit=3 unsupported verification contract
+PASS F D spec-run refuses [verification_contract: 2|]
+  [verification_contract: 1|verification_contract: 1|] spec-evidence: CUR exit=3 error: vf_bindings requires spec.md and plan.md
+PASS F D spec-evidence refuses [verification_contract: 1|verification_contract: 1|]
+  [verification_contract: 1|verification_contract: 1|] spec-task: CUR exit=0 T001	done	Backend	x
+PASS F D spec-task refuses [verification_contract: 1|verification_contract: 1|]
+  [verification_contract: 1|verification_contract: 1|] spec-run: CUR exit=3 error: vf_bindings requires spec.md and plan.md
+PASS F D spec-run refuses [verification_contract: 1|verification_contract: 1|]
+PASS F D spec-task lists a legacy spec
+== G: legacy evidence and artifact names (spec-evidence.sh, legacy spec)
+  nbsp-only: PRE-UTF8 exit=1 no *Evidence:* line | CUR exit=0 
+PASS G nbsp-only D C
+PASS G nbsp-only D en_US.UTF-8
+  nbsp-separated: PRE-UTF8 exit=0  | CUR exit=1 names artifact 'screenshot shots/a.png'
+PASS G nbsp-separated D C
+PASS G nbsp-separated D en_US.UTF-8
+  narrow-nbsp-separated: PRE-UTF8 exit=0  | CUR exit=1 names artifact 'screenshot shots/a.png'
+PASS G narrow-nbsp-separated D C
+PASS G narrow-nbsp-separated D en_US.UTF-8
+  em-space-separated: PRE-UTF8 exit=0  | CUR exit=1 names artifact 'screenshot shots/a.png'
+PASS G em-space-separated D C
+PASS G em-space-separated D en_US.UTF-8
+  ideographic-space-separated: PRE-UTF8 exit=0  | CUR exit=1 names artifact '截图　shots/a.png'
+PASS G ideographic-space-separated D C
+PASS G ideographic-space-separated D en_US.UTF-8
+  curly-quoted: PRE-UTF8 exit=1 names artifact '“shots/a.png' | CUR exit=1 names artifact '“shots/a.png'
+PASS G curly-quoted D C
+PASS G curly-quoted D en_US.UTF-8
+  guillemets: PRE-UTF8 exit=1 names artifact '«shots/a.png' | CUR exit=1 names artifact '«shots/a.png'
+PASS G guillemets D C
+PASS G guillemets D en_US.UTF-8
+  backticked: PRE-UTF8 exit=1 names artifact '`shots/a.png' | CUR exit=1 names artifact '`shots/a.png'
+PASS G backticked D C
+PASS G backticked D en_US.UTF-8
+  missing-quoted: PRE-UTF8 exit=1 names artifact '“shots/missing.png' | CUR exit=1 names artifact '“shots/missing.png'
+PASS G missing-quoted D C
+PASS G missing-quoted D en_US.UTF-8
+  missing-accented: PRE-UTF8 exit=1 names artifact 'shots/café.png' | CUR exit=1 names artifact 'shots/café.png'
+PASS G missing-accented D C
+PASS G missing-accented D en_US.UTF-8
+  existing-accented: PRE-UTF8 exit=0  | CUR exit=0 
+PASS G existing-accented D C
+PASS G existing-accented D en_US.UTF-8
+  fullwidth-colon-glued: PRE-UTF8 exit=1 names artifact '截图：shots/a.png' | CUR exit=1 names artifact '截图：shots/a.png'
+PASS G fullwidth-colon-glued D C
+PASS G fullwidth-colon-glued D en_US.UTF-8
+  glob-not-a-pattern: PRE-UTF8 exit=0  | CUR exit=0 
+PASS G glob-not-a-pattern D C
+PASS G glob-not-a-pattern D en_US.UTF-8
+== H: the analyzer's gate Agent path
+  PRE-UTF8 exit=0   ✓ opponent gate present, agent file exists | CUR exit=1   ✗ opponent gate agent file not found:  agents/opponent.agent.md
+PASS H agent path after a U+00A0 D C
+PASS H agent path after a U+00A0 D en_US.UTF-8
+== I: recorded history and the input identity, D against CUR
+FAIL I no file in the enumeration holds a non-ASCII White_Space character (want=[] got=[.specify/specs/001-codex-subagent-gates-and-hard-task-escalation/notes/evidence.md .specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20260923/snapshot/index .specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20260925/snapshot/index .specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/t030o43-review-measure.log .specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/t030o43-review2-verify.log .specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/t030o43-review2.md ])
+PASS I 001 tally C identical (rc=3)
+PASS I 001 sdd-analyze C identical (rc=0)
+PASS I 001 spec-ac-coverage C identical (rc=0)
+PASS I 001 spec-evidence C identical (rc=0)
+PASS I 001 tally en_US.UTF-8 identical (rc=3)
+PASS I 001 sdd-analyze en_US.UTF-8 identical (rc=0)
+PASS I 001 spec-ac-coverage en_US.UTF-8 identical (rc=0)
+PASS I 001 spec-evidence en_US.UTF-8 identical (rc=0)
+PASS I 002 tally C identical (rc=0)
+PASS I 002 sdd-analyze C identical (rc=0)
+PASS I 002 spec-ac-coverage C identical (rc=0)
+PASS I 002 spec-evidence C identical (rc=0)
+PASS I 002 tally en_US.UTF-8 identical (rc=0)
+PASS I 002 sdd-analyze en_US.UTF-8 identical (rc=0)
+PASS I 002 spec-ac-coverage en_US.UTF-8 identical (rc=0)
+PASS I 002 spec-evidence en_US.UTF-8 identical (rc=0)
+PASS I 003 tally C identical (rc=0)
+PASS I 003 sdd-analyze C identical (rc=0)
+PASS I 003 spec-ac-coverage C identical (rc=0)
+PASS I 003 tally en_US.UTF-8 identical (rc=0)
+PASS I 003 sdd-analyze en_US.UTF-8 identical (rc=0)
+PASS I 003 spec-ac-coverage en_US.UTF-8 identical (rc=0)
+PASS I round-13 waiver D == CUR
+PASS I round-14 refusal D == CUR
+  STATUS semantic views: 3 files
+PASS I every STATUS semantic view D == CUR
+FAIL I snapshot records outside the edited files and harness records: D == CUR (C) (want=[bbf67bc7a786d95929e8e703b2407255d37d40f9  -] got=[869d0831863d48118efe391181e7ac256e16c001  -])
+FAIL I snapshot records outside the edited files and harness records: D == CUR (en_US.UTF-8) (want=[bbf67bc7a786d95929e8e703b2407255d37d40f9  -] got=[869d0831863d48118efe391181e7ac256e16c001  -])
+PASS I the D snapshot is one digest in both locales
+  records compared: 352
+== J: review 1 F3 (the return size read) is unchanged
+PASS J D a wc fault is refused by name
+PASS live worktree status outside notes/verification/ unchanged
+t030o43-design-measure failures=9
+kept: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/45f0cb89-8b3e-41f3-b84f-074518924365/scratchpad/t030o43-dm

@@ -1,0 +1,61 @@
+  | live worktree porcelain digest before: 0e15451329dddc5ae0e3fb9648b36c0e34f6728d80d50fc748ffa033866be47b
+  | ambient: LANG=C.UTF-8 LC_ALL=unset LC_CTYPE=UTF-8 LC_TIME=unset TZ=unset
+== 0. build two copies from the live manifest enumeration
+PASS live enumeration rc (want=0 got=0)
+PASS extraction into copy1 rc (want=0 got=0)
+PASS copy1 committed (want=0 got=0)
+PASS extraction into copy2 rc (want=0 got=0)
+PASS copy2 committed (want=0 got=0)
+== A0. the consulted behaviour: date %p for 2024-01-01T15:45:00Z
+  | LC_ALL=C TZ=UTC date '+%I:%M %p' -> [03:45 PM]
+  | LC_ALL=C.UTF-8 TZ=UTC date '+%I:%M %p' -> [03:45 PM]
+  | LC_ALL=en_US.UTF-8 TZ=UTC date '+%I:%M %p' -> [03:45 PM]
+  | LC_ALL=en_GB.UTF-8 TZ=UTC date '+%I:%M %p' -> [03:45 p.m.]
+  | LC_ALL=de_DE.UTF-8 TZ=UTC date '+%I:%M %p' -> [03:45 ]
+  | LC_ALL=fr_FR.UTF-8 TZ=UTC date '+%I:%M %p' -> [03:45 ]
+== A1. the identity does not see the locale
+PASS ambient snapshot rc (want=0 got=0)
+PASS en_GB snapshot rc (want=0 got=0)
+PASS de_DE snapshot rc (want=0 got=0)
+  | identity ambient=32ee4795fd390607292f9c246a4ec9afd4f2d7e1a50b8e811c5f78b7568579d9 en_GB=32ee4795fd390607292f9c246a4ec9afd4f2d7e1a50b8e811c5f78b7568579d9 de_DE=32ee4795fd390607292f9c246a4ec9afd4f2d7e1a50b8e811c5f78b7568579d9
+PASS manifest cmp-identical under LC_ALL=en_GB.UTF-8 (want=0 got=0)
+PASS manifest cmp-identical under LANG=de_DE.UTF-8 (want=0 got=0)
+PASS no environment record in the manifest (verification_environment: []) (want=0 got=0)
+== A2. the affected suite does see it (bash tests/test-usage-limits.sh)
+PASS test-usage-limits.sh under ambient rc (want=0 got=0)
+  | ambient: 27/27 failed: 
+PASS test-usage-limits.sh under en_GB rc (want=1 got=1)
+  | en_GB: 24/27 failed: test_AC_001_classifies_every_planned_provider_limit_fixture test_AC_004_and_AC_005_park_policy_replays_original_dispatch_once_per_retry test_T013o1_clock_only_horizons_follow_configured_park_policy 
+PASS test-usage-limits.sh under de_DE rc (want=1 got=1)
+  | de_DE: 25/27 failed: test_AC_001_classifies_every_planned_provider_limit_fixture test_AC_004_and_AC_005_park_policy_replays_original_dispatch_once_per_retry 
+PASS test-usage-limits.sh under C rc (want=0 got=0)
+  | C: 27/27 failed: 
+  | en_GB            expected: limit	short	1704123900	claude-session-clock
+  | en_GB            actual:   limit	short		claude-session-clock
+  | de_DE            expected: limit	short	1704123900	claude-session-clock
+  | de_DE            actual:   limit	short	1704080700	claude-session-clock
+PASS copy1 unchanged by the A2 suite runs (want=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 got=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855)
+== B. end to end (copy 1 captures and checks reuse; copy 2 runs fresh under en_GB, in parallel)
+PASS T030o41 Verify is the two reuse-checked commands (want=1 got=1)
+  | started capture (pid 65785) and fresh en_GB suite (pid 65786) at 19:42:17Z
+  | both returned at 20:26:01Z
+PASS capture of T030o41 Verify under the ambient locale rc (want=0 got=0)
+  | capture=CAP-499-JwEIgf summary: capture=CAP-499-JwEIgf command=/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh  key=  -- 3/3 passed exit=0 output=b150ad3c2adee17324471b5021f9d78f292fabb354dcc1009742d11f71d50699 input=32ee4795fd390607292f9c246a4ec9af
+  | capture command: /bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh 
+  | capture totals: 147/147
+PASS ambient snapshot after the capture rc (want=0 got=0)
+PASS en_GB snapshot after the capture rc (want=0 got=0)
+  | identity ambient=32ee4795fd390607292f9c246a4ec9afd4f2d7e1a50b8e811c5f78b7568579d9 en_GB=32ee4795fd390607292f9c246a4ec9afd4f2d7e1a50b8e811c5f78b7568579d9 capture input_before=32ee4795fd390607292f9c246a4ec9afd4f2d7e1a50b8e811c5f78b7568579d9
+PASS en_GB identity equals the capture input (want=32ee4795fd390607292f9c246a4ec9afd4f2d7e1a50b8e811c5f78b7568579d9 got=32ee4795fd390607292f9c246a4ec9afd4f2d7e1a50b8e811c5f78b7568579d9)
+PASS vf_capture_check CAP-499-JwEIgf reuse under en_GB: accepted (the wrong result) (want=0 got=0)
+PASS binding snapshot under en_GB rc (want=0 got=0)
+PASS binding snapshot cmp-equal to the capture (the floor match condition) (want=0 got=0)
+PASS vf_task_current T030o41 reuse under en_GB rc (want=0 got=0)
+PASS vf_task_current names the ambient capture (want=CAP-499-JwEIgf got=CAP-499-JwEIgf)
+PASS fresh bash tests/run.sh under en_GB rc (the verdict the reuse hides) (want=1 got=1)
+  | fresh en_GB totals: 144/147 failed: test_AC_001_classifies_every_planned_provider_limit_fixture test_AC_004_and_AC_005_park_policy_replays_original_dispatch_once_per_retry test_T013o1_clock_only_horizons_follow_configured_park_policy 
+PASS copy2 unchanged by the fresh suite run (want=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 got=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855)
+PASS copy1 unchanged outside its records by the capture (want=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 got=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855)
+  | live worktree porcelain digest after: 8a9b20dae9188d4b6dad464dd585a8a20d7e338abeb150dc61f614177c0ebb85
+FAIL live worktree unchanged (want=0e15451329dddc5ae0e3fb9648b36c0e34f6728d80d50fc748ffa033866be47b got=8a9b20dae9188d4b6dad464dd585a8a20d7e338abeb150dc61f614177c0ebb85)
+o016-repro failures=1

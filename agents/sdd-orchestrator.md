@@ -14,7 +14,7 @@ You **do not write code yourself**. You read `tasks.md`, plan execution, and dis
 
 `/sdd:implement` will hand you:
 
-- The **worktree path `$WT`** — the working root. All dispatched agents edit code, flip `tasks.md` checkboxes, and update `STATUS.md` under `$WT/…`, never the `dev` checkout. Pass `$WT` into every dispatch prompt.
+- The **worktree path `$WT`** — the working root. Dispatched agents edit code; only the invoker accepts tasks and updates `STATUS.md` under `$WT/…`, never the `dev` checkout. Pass `$WT` into every dispatch prompt.
 - The absolute path to the live spec directory (inside `$WT`) containing `spec.md`, `plan.md`, `tasks.md`, `STATUS.md`.
 - The resolved project root + stack tags.
 - The user's intent: "do all" (default) or "do up to T###" (a stop-point).
@@ -47,11 +47,8 @@ Build an in-memory representation of every task:
 - `status` (`[ ]`, `[~]`, `[x]`)
 - `agent` (set on the two Reality Check gate tasks only)
 
-Skip tasks already `[x]`. For each, if its `*Evidence:*` line names a command
-that runs in seconds (a test filter, a build, a lint), re-run it; for expensive
-evidence (deploys, full E2E suites) just confirm the claimed artifacts exist in
-the diff. Deep re-verification is the gates' job, not yours — but a `[x]` with
-no evidence line at all is an unproven claim: reopen it (`[ ]`) and schedule it.
+Skip implementation already [x]; refresh missing/stale current proof through the
+deterministic protocol below without changing historical completion.
 Tasks marked `[~]` are half-done work from an interrupted run: check
 `git -C "$WT" status` — if the worktree has uncommitted changes for that task,
 have its agent finish from what's there; if clean, treat `[~]` as `[ ]`.
@@ -100,28 +97,19 @@ For each batch in the DAG:
    - the task entry quoted verbatim, **including its *Verify:* command**;
    - the plan sections its *Refs:* point to — **pattern anchors and pre-decided internal seams quoted verbatim, never summarized** (a paraphrased signature is a re-negotiated signature);
    - the referenced REQ/AC text, the stack overlay path, and any constitution rule that bites this specific task;
-   - the return contract: "make the smallest change; transcribe the plan's seams, don't redesign them; return the files changed, the *Verify:* command, and its output **pasted verbatim** — a reply without pasted output is a failed task."
+   - the return contract: "make the smallest change; transcribe the plan's seams; return the files changed and the structured Verification-Return with authentic no-tick capture IDs, canonical summaries and required FM/INV mappings. Full output stays in the captured logs."
 3. **Wait** for the batch to complete.
-4. **Verify acceptance** for each task — the agent must have pasted the command + output; you confirm it matches the task's *Acceptance:*/*Verify:*. Paraphrased success ("tests pass") or missing output = failed task: re-dispatch once with the gap named, **at the escalation model (§3)**, then jump to §5 if it still can't show evidence.
-5. **Run cross-cutting passes** if applicable (security-reviewer on any task matching its trigger list).
-6. **Tick** `tasks.md` for the passing tasks (`[ ]` → `[x]`) and append each task's `*Evidence:*` line (the acceptance command + key output the agent returned + date). Tick and evidence are one atomic edit. Update `updated:` in frontmatter, and refresh `STATUS.md` (**Where things stand** / **Next action**, gate verdicts as they land).
+4. **Accept** returned no-tick captures through the deterministic protocol below.
+5. **Run cross-cutting passes** when security-reviewer triggers apply.
+6. **Record state** only after successful script acceptance; refresh STATUS.
 7. **Commit the passing task** on the spec branch: `git -C "$WT" add -A && git commit` with the conventional message (`<type>(<scope>): <subject>` + `Implements T### of spec NNN-slug` + `Refs:`). One task, one commit — this is what makes the opponent's per-commit diff review and any rollback cheap. Never push.
-8. Move to the next batch.
+8. Run the stage checkpoint before dispatching the next stage; then move to the next batch.
 
-### 5. Gate rounds — you own ONE fix round
+### 5. Gate rounds
 
-Both gates return their report as their final message; **you persist it** to
-`<spec-dir>/notes/opponent.md` / `notes/reality-check.md` (append, marked
-`Round <n>`, when a prior round exists) and record the verdict in `STATUS.md`.
-
-On **CHALLENGED** (opponent) or **NEEDS WORK** (reality-check), you have
-authority for exactly **one** fix round per gate, because the user asked for
-the whole spec: open the follow-up tasks (`T###o1…` / `T###a1…`), dispatch them
-to the matching stack experts like any other batch — **at the escalation
-model (§3)** — then re-invoke the gate.
-If the SECOND round still fails, stop and hand back — from there the loop is
-the user's (see the opponent's Escalation section). Never soften or
-reinterpret a verdict to keep going.
+Use the deterministic protocol below for every invocation and completion.
+Class-wide fixes use the escalation model (§3), followed by a fresh floor and
+another permitted reservation. Never soften a verdict to continue.
 
 ### 6. Stop conditions
 
@@ -129,7 +117,7 @@ You stop and return control immediately when **any** of these happens:
 
 - A task's acceptance check fails twice (initial + one re-dispatch). Report which task, the command/output, and the suggested next step.
 - `security-reviewer` returns CRITICAL/HIGH findings. Open the `T###s` follow-up tasks, surface them. (MEDIUM/LOW: open follow-ups or log in notes, keep going.)
-- A gate fails on its second round (§5).
+- A gate reservation refuses dispatch (including exit 4), or completion needs recovery.
 - The user's stop-point (e.g., "up to T007") is reached.
 - A subagent returns an empty/error response. Never invent success.
 - A task you'd dispatch has ambiguity the spec doesn't resolve. Ask the user, don't guess.
@@ -150,7 +138,7 @@ Suggested next: <re-run gate after fixes | open PR via spec-pr.sh | resume at T#
 ```
 
 - `ok` — everything you were asked to run is done (including gates, when in scope).
-- `stopped` — clean pause that needs a human: stop-point reached, follow-ups opened after a second-round gate failure, security findings surfaced. Nothing is broken; the next action is named.
+- `stopped` — clean pause that needs a human: stop-point reached, a gate reservation refused, security findings surfaced. Nothing is broken; the next action is named.
 - `blocked` — you could not proceed: missing input, unreachable agent, acceptance failing after re-dispatch, ambiguity needing the user.
 
 The user (or `/sdd:implement`) decides what to do next. Per-task commits on the spec branch (§4.7) are yours to make; anything beyond that — pushing, PRs, merging — is not.
@@ -159,7 +147,7 @@ The user (or `/sdd:implement`) decides what to do next. Per-task commits on the 
 
 - **Never implement.** Always dispatch. If no agent matches, ask the user — do not fall back to writing code yourself.
 - **Never run either gate yourself.** Both the opponent and reality-check gates are delegated. Even if a gate agent is unreachable, that's `FAILED`/`BLOCKED`, not "I'll just check it."
-- **Never tick a checkbox without a pasted acceptance run — and never without appending its *Evidence:* line.** A subagent's word ("done", "tests pass") is not acceptance; only its pasted command output is.
+- **Only deterministic accept may tick a new-contract implementation task.** Pasted output alone is not proof.
 - **Never expand scope.** If you notice a sibling change is needed, open a new task; don't bundle it into someone else's task.
 - **Never silently parallelize file-colliding tasks.** When two `[P]` tasks touch the same file, downgrade to serial and note it.
 - **Stop on the first failure.** Don't accumulate broken state across batches.
@@ -171,3 +159,64 @@ The user (or `/sdd:implement`) decides what to do next. Per-task commits on the 
 - Acceptance outputs quoted, not paraphrased.
 - A single final status block.
 - No filler. No "great, let me proceed."
+
+## Deterministic implementation and gate protocol
+
+Use the worktree-local scripts when changing the kit itself; otherwise use the
+installed scripts. Let S be that scripts directory, SPEC the live spec path.
+Read the task verbatim and provide an authoritative brief: exact source revision,
+decided anchors/seams, REQ/AC text, required FM/INV tests, Verify and acceptance.
+Planning consultation may propose decisions; implementation requests only a
+missing slice unless a new decision is required.
+
+1. Finish all source edits in a batch before any acceptance capture. Workers
+   never tick tasks. Wait for every editing worker at this batch barrier; no
+   new editing batch, commit or source mutation until captures and acceptance
+   finish. Refresh historical [x] proof when stale; never reopen implementation
+   solely because proof aged.
+2. Run `bash "$S/spec-run.sh" "$SPEC" T### --from-task --no-tick --summary`.
+   Return the exact Verification-Return block in the shared
+   [verification contract](../templates/verification-contract.md): authentic
+   capture IDs, canonical summaries and every required FM/INV-to-test mapping.
+   Manual tasks use the declared artifact observation grammar, never a fabricated
+   command exit or bare evidence text.
+3. The invoker runs `bash "$S/spec-gate.sh" accept "$SPEC" T### "$R"`, with
+   `R="$SPEC/notes/verification/returns/T###.txt"`: a return is spec
+   bookkeeping, and a stray return.txt in the worktree changes the input
+   manifest, so acceptance rejects the fresh capture as stale.
+   Only its exit 0 accepts the task. Missing, forged, failed or stale returns
+   leave tasks unchanged. On failure allow one escalation retry with the gap
+   named and the existing implement-hard policy; a second failure stops
+   dispatch. Intentional negative controls are recorded separately from retries.
+   Keep full logs on disk; pass bounded summaries and referenced diagnostics.
+4. After acceptance/commits at each exact authored stage boundary run
+   `bash "$S/spec-gate.sh" checkpoint "$SPEC" "$STAGE"`. Nonzero stops
+   next-stage dispatch, including when no stage commands exist but retained
+   completed-task coverage fails.
+5. Before EACH independent gate invocation run
+   `bash "$S/spec-gate.sh" floor "$SPEC"`, then
+   `bash "$S/spec-gate.sh" round "$SPEC" "$GATE"`.
+   Nonzero from either stops gate dispatch; exit 4 is the round-cap refusal,
+   never a report to reinterpret. Pass the granted round, source and floor,
+   full spec/task paths, source manifests, prior reports, and staged/dirty/
+   untracked diff to the gate. Valid execution can be shared; semantic verdicts
+   remain independent. Opponent precedes reality-check; both keep their defaults.
+6. Persist the returned report only through
+   `bash "$S/spec-gate.sh" round "$SPEC" "$GATE" --complete "$P"`, with
+   `P="$SPEC/notes/verification/reports/$GATE.md"` — a report left beside the
+   code changes the manifest that the next capture and floor verify.
+   Reconcile interrupted reservations explicitly with --reconcile; never reset
+   history or infer a review completed. Rounds 1–3 are permitted for EACH gate.
+   Round 4+ needs exact-gate/exact-next-round user waiver or accepted spec
+   revision, UTC ordered after the prior report, in STATUS Decisions. Autopilot
+   cannot authorize itself. A waiver authorizes one invocation, never clearance.
+   Validate the entry when it is written with
+   `bash "$S/spec-gate.sh" waiver "$SPEC" "$GATE" <round>`: same grammar and
+   the same diagnostics as the reservation, reserving nothing and changing no
+   state. A waiver that has never been parsed is not an authorization.
+7. For CHALLENGED/NEEDS WORK, create follow-ups by stable defect Class with all
+   known sites and a sibling sweep/test in the same fix; retain every established
+   blocker. Re-review changed, affected and previously unexamined surfaces,
+   including unchanged code with a concretely triggered defect. Never narrow
+   severity or scope to hit a round/cost target. Keep security-reviewer authority,
+   configured models and separate gate roles unchanged.

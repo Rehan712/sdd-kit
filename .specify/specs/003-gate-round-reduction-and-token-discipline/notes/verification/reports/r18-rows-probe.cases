@@ -1,0 +1,7 @@
+# kind|tag|body (after the minor tier, or the whole manifest for W)|diagnostic
+R|s03-as-tgc2|\n1. ![q\n](u)Severity: data-loss\n|a second Severity line in finding G-042
+R|s03-line-inside|\n1. ![q\nx\n](u)Severity: data-loss\n|a second Severity line in finding G-042
+R|s10-as-tgc2|\n![ `]` x\n](u)Severity: data-loss\n|a second Severity line in finding G-042
+R|s10-line-inside|\n![ `]` x\ny\n](u)Severity: data-loss\n|a second Severity line in finding G-042
+W|s09-as-tgc2|### Finding G-041\n- **Class:** tier-binding\n- **Severity:** minor\n## Notes\n\nG-042 is discussed below.\nNote<br>&nbsp;![q\n](u)Severity: data-loss\n|a severity line outside any Finding
+W|s09-line-inside|### Finding G-041\n- **Class:** tier-binding\n- **Severity:** minor\n## Notes\n\nG-042 is discussed below.\nNote<br>&nbsp;![q\nx\n](u)Severity: data-loss\n|a severity line outside any Finding

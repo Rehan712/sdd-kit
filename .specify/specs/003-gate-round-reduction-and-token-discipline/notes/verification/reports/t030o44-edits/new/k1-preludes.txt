@@ -1,0 +1,65 @@
+# _VF_AWK_LABEL — how both readers of finding records decide that a line
+# carries a record (O-018). vf_label <line> <labels> returns the label the
+# line carries when the first word of its rendered text is one of <labels>
+# (a space-separated lower-case list) in any case, and the line is an
+# emphasized label (the emphasis closes right after the word, or the
+# emphasized span ends in a colon inside or right after it) or the word is not
+# continued by a letter, digit or hyphen; otherwise "". The rendered text is
+# taken from CommonMark rather than from spellings a review reported: inline
+# raw HTML renders as nothing (comments, open and closing tags, processing
+# instructions and declarations, CommonMark 6.6), a numeric character
+# reference renders as its character (2.5), and the first word is the one
+# after any run of characters that are not letters or digits (indentation,
+# heading markers, any list marker, emphasis, backslash escapes), ordered-list
+# numbers and task checkboxes. vf_finding_heading <line> is true when the text
+# of an ATX heading is the word Finding in any case, not continued by a letter
+# or digit, followed, after anything that is not a letter or digit, by a
+# finding ID.
+_VF_AWK_LABEL='
+function vf_label_hex(h,   i, n) {
+  n = 0; h = tolower(h)
+  for (i = 1; i <= length(h); i++) n = n * 16 + index("0123456789abcdef", substr(h, i, 1)) - 1
+  return n
+}
+function vf_label(s, labels,   t, w, emph, lead, span, rest, i, n) {
+  while ((i = index(s, "<!--")) > 0) {
+    n = index(substr(s, i + 4), "-->")
+    s = n ? substr(s, 1, i - 1) substr(s, i + n + 6) : substr(s, 1, i - 1)
+  }
+  gsub(/<\/?[A-Za-z][A-Za-z0-9-]*[^>]*>|<[?!][^>]*>/, "", s)
+  while (match(s, /&#[0-9]+;|&#[xX][0-9A-Fa-f]+;/)) {
+    t = substr(s, RSTART + 2, RLENGTH - 3)
+    n = (t ~ /^[xX]/) ? vf_label_hex(substr(t, 2)) : t + 0
+    s = substr(s, 1, RSTART - 1) ((n > 32 && n < 127) ? sprintf("%c", n) : "\001") substr(s, RSTART + RLENGTH)
+  }
+  t = s; lead = ""
+  while (t ~ /^([^A-Za-z0-9]|[0-9]+[.)]|\[[ xX]\])/) {
+    if (match(t, /^([0-9]+[.)]|\[[ xX]\])/)) {lead = lead substr(t, 1, RLENGTH); t = substr(t, RLENGTH + 1)}
+    else {lead = lead substr(t, 1, 1); t = substr(t, 2)}
+  }
+  emph = (lead ~ /[*_]$/)
+  if (!match(t, /^[A-Za-z]+/)) return ""
+  w = tolower(substr(t, 1, RLENGTH)); if (!index(" " labels " ", " " w " ")) return ""
+  t = substr(t, RLENGTH + 1)
+  if (emph && t ~ /^[*_]/) return w
+  if (emph && t !~ /^[A-Za-z0-9-]/) {
+    span = t; sub(/[*_].*$/, "", span)
+    if (span ~ /:[[:space:]]*$/) return w
+    rest = substr(t, length(span) + 1)
+    if (rest ~ /^[*_]/) {sub(/^[*_]+/, "", rest); if (rest ~ /^:/) return w}
+  }
+  sub(/^[*_[:space:]]+/, "", t)
+  return (t ~ /^[A-Za-z0-9-]/) ? "" : w
+}
+function vf_finding_heading(s,   t) {
+  t = s; sub(/^ *#+/, "", t); sub(/^([[:space:]]|[\200-\377])+/, "", t)
+  if (tolower(substr(t, 1, 7)) != "finding" || substr(t, 8, 1) ~ /[A-Za-z0-9]/) return 0
+  t = substr(t, 8); sub(/^[^A-Za-z0-9]+/, "", t)
+  return t ~ /^[A-Za-z][A-Za-z0-9]*-[0-9]/
+}
+'
+# The preludes of a parser of author text: the whitespace reading, the label
+# reading, then the fence tracker when the parser suppresses quoted content,
+# then the step. vf_report_block alone takes the fence tracker without the
+# step, because its output is a sealed digest of the report as written.
+_VF_AWK_TEXT="$_VF_AWK_WS$_VF_AWK_LABEL$_VF_AWK_FENCE$_VF_AWK_WSLINE"

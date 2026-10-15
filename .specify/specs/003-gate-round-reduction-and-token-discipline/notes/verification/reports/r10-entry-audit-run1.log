@@ -1,0 +1,69 @@
+opponent sealed rounds=9 last-time=2026-09-23T00:11:31Z pending=0
+reality-check sealed rounds=1 last-time=2026-09-20T22:56:29Z pending=0
+PASS opponent ledger has exactly ROUND-1..ROUND-9
+FAIL no staged .reservation-* in either gate
+PASS opponent round 1 block digest == sealed 1ac95178f408b2ae
+PASS opponent round 2 block digest == sealed 5170b08212a51a9b
+PASS opponent round 3 block digest == sealed 3de48d658a33a909
+PASS opponent round 4 block digest == sealed d044652efcb90251
+PASS opponent round 5 block digest == sealed 0898afcc62cf8716
+PASS opponent round 6 block digest == sealed cc1b86cb05959b85
+PASS opponent round 7 block digest == sealed 9f98e50c63046c9f
+PASS opponent round 8 block digest == sealed b391edbf50604425
+PASS opponent round 9 block digest == sealed 2aae626e3c600201
+PASS reality-check round 1 block digest == sealed e5f957db...
+PASS reality-check round 1 sealed == e5f957dbd673...
+PASS opponent round 9 sealed == 2aae626e3c60...
+PASS source == 6c6291c2... (6c6291c2b37d35fb82c67c42c173ae042bb116c742f1c84a5dfa9c1c77c04c2d)
+PASS Decisions digest == f6722f8a... (f6722f8ab1e0dd1340eb07b1cd940d6bc1e5d935fb58987cc3ffb0869612ee44)
+PASS floor-latest == FLOOR-oejTDu
+  FLOOR-oejTDu validate rc=3 stderr=floor stale: refresh floor for current inputs
+PASS FLOOR-oejTDu refused at exit 3 as stale
+PASS CAP-411-B8GLAC input_before == d27bab53... (historical)
+PASS CAP-412-59sk66 input_before == d27bab53... (historical)
+PASS no held lock
+PASS no .capture.* staging anywhere under notes/
+PASS HEAD == 0d55c62 (0d55c62)
+PASS T030 unchecked
+PASS T031 unchecked
+PASS T032 unchecked
+PASS T033 unchecked
+PASS T034 unchecked
+PASS T030o39 checked
+PASS T030o40 checked
+  w10| authorized: opponent round 10
+PASS round 10 authorized at exit 0
+  w11| round authorization denied: opponent round 11 needs an exact-round user waiver/spec revision after round 10
+  w11|   candidate authorization lines were found and refused:
+  w11|   STATUS.md:172 authorizes round=4, not round=11
+  w11|   STATUS.md:210 authorizes round=5, not round=11
+  w11|   STATUS.md:216 refused: waiver needs exactly 5 "; "-separated fields, found 6 — a "; " inside reason= splits the entry
+  w11|   STATUS.md:226 authorizes round=6, not round=11
+  w11|   STATUS.md:254 authorizes round=7, not round=11
+  w11|   STATUS.md:292 authorizes round=8, not round=11
+  w11|   STATUS.md:335 authorizes round=9, not round=11
+  w11|   STATUS.md:365 authorizes round=10, not round=11
+PASS round 11 refused at exit 4 with 8 candidates (8)
+PASS waiver line present verbatim
+PASS tally exit 0
+  opponent rounds=9
+  reality-check rounds=1
+  blocking=23 minor=10 locations=291 unclassified=0
+  class=config-interpolation-validation findings=3 recurrences=1
+  class=gate-report-schema-validation findings=11 recurrences=9
+  class=live-control-semantic-validation findings=3 recurrences=0
+  class=post-pr-followup-binding-schema findings=3 recurrences=0
+  class=return-envelope-parsing findings=3 recurrences=0
+  class=round-authorization-grammar findings=11 recurrences=8
+  class=round-block-attribution findings=5 recurrences=2
+  class=round-record-reparse-divergence findings=1 recurrences=0
+  class=verification-input-identity findings=6 recurrences=5
+  finding-observations=46 distinct-finding-ids=14 reopened=25
+  severity-downgrades=5
+  execution-observations=52 check-executions=290 cache-hits=2007 captures=426 full-log-bytes=642112 returned-summary-bytes=234941 usage=unknown baseline-usage=unknown
+PASS tally opponent rounds=9
+PASS tally blocking=23 minor=10 locations=291 unclassified=0
+PASS tally severity-downgrades=5
+PASS tripwire: source unchanged by this audit
+PASS tripwire: non-bookkeeping git status unchanged
+entry audit failures=1

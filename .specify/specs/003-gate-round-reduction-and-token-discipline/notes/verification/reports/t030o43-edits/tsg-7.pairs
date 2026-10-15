@@ -1,0 +1,17 @@
+@@OLD
+  local label want evidence l
+  while IFS='|' read -r label want evidence; do
+@@NEW
+  # From the spec directory, where a pattern would find the files it names.
+  local label want evidence l here="$PWD"
+  cd "$legacy" || t_fail 'fixture: the legacy spec directory'
+  while IFS='|' read -r label want evidence; do
+@@END
+@@OLD
+not-a-pattern|1|screenshot shots/*.png
+NAMES
+@@NEW
+not-a-pattern|1|screenshot shots/*.png
+NAMES
+  cd "$here" || t_fail 'fixture: back from the legacy spec directory'
+@@END

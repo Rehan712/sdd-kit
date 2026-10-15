@@ -1,0 +1,75 @@
+part=a start=2026-09-30T14:38:05Z
+applied 1 block(s) to /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-m11-a/D/tests/helpers.sh
+applied 1 block(s) to /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-m11-a/D/tests/test-verification.sh
+applied 1 block(s) to /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-m11-a/D/templates/verification-contract.md
+applied 1 block(s) to /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-m11-a/D/scripts/verification-lib.sh
+kits: CUR D built; D candidate applied
+== A: the TMPDIR a suite exports after tests/helpers.sh loads (physical: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-m11-a/tmp)
+PASS A D [/private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-m11-a/tmp] exports the physical path
+  info A CUR [/private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-m11-a/tmp]: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-m11-a/tmp|1
+PASS A D [/private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-m11-a/tmp/] exports the physical path
+  info A CUR [/private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-m11-a/tmp/]: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-m11-a/tmp/|1
+PASS A D [/private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-m11-a/tmp//] exports the physical path
+  info A CUR [/private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-m11-a/tmp//]: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-m11-a/tmp//|1
+PASS A D [/private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-m11-a/tmp/./] exports the physical path
+  info A CUR [/private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-m11-a/tmp/./]: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-m11-a/tmp/./|1
+PASS A D [/private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-m11-a/tmp/sub/..] exports the physical path
+  info A CUR [/private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-m11-a/tmp/sub/..]: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-m11-a/tmp/sub/..|1
+PASS A D [/private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-m11-a/tmplink] exports the physical path
+  info A CUR [/private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-m11-a/tmplink]: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-m11-a/tmplink|1
+PASS A D [/private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-m11-a/tmplink/] exports the physical path
+  info A CUR [/private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-m11-a/tmplink/]: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-m11-a/tmplink/|1
+PASS A D [/private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-m11-a/tmplink/sub/../] exports the physical path
+  info A CUR [/private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-m11-a/tmplink/sub/../]: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-m11-a/tmplink/sub/../|1
+PASS A D [UNSET] exports the physical path
+  info A CUR [UNSET]: unset|0
+PASS A D a TMPDIR naming no directory stops the suite by name, and nothing else is printed
+== B: the member CAP-521-Q8OdIp failed on (tests/test-sdd-analyze.sh::analyzer_locale_and_fault_cases)
+PASS B CUR trailing-slash TMPDIR fails (the capture reproduced)
+PASS B CUR the fault-injected task-reference read is the failing assertion
+PASS B CUR TMPDIR without the slash passes
+PASS B D [/private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-m11-a/tmp/] passes
+PASS B D [/private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-m11-a/tmp//./] passes
+PASS B D [/private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-m11-a/tmplink/] passes
+PASS B D [UNSET] passes
+== C: the new fixture (tests/test-verification.sh::reuse_command_input_cases) and its mutant
+PASS C D [/private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-m11-a/tmp/] the fixture passes
+PASS C D [UNSET] the fixture passes
+PASS C mutant (CUR helpers.sh in D) is killed
+PASS C mutant diagnostic: the spelling kept
+PASS C mutant diagnostic: the nested sandbox
+PASS C D helpers.sh restored byte-identical
+PASS C logical mutant applied
+PASS C logical-only mutant (cd && pwd) is killed by the symlink spellings
+PASS C logical-only mutant diagnostic names a symlink spelling
+PASS C logical-only mutant leaves the non-symlink spellings passing
+PASS C D helpers.sh restored again
+PASS CUR copy unchanged by part a
+PASS D copy unchanged by part a
+== D: the input identity (records outside the edited files and the harness unchanged)
+PASS D snapshot of CUR exit 0
+PASS D snapshot of D exit 0
+  differing records: 18
+  | < harness	KIT/scripts/verification-lib.sh
+  | > harness	KIT/scripts/verification-lib.sh
+  | < index	scripts/verification-lib.sh
+  | > index	scripts/verification-lib.sh
+  | < index	templates/verification-contract.md
+  | > index	templates/verification-contract.md
+  | < index	tests/helpers.sh
+  | > index	tests/helpers.sh
+  | < index	tests/test-verification.sh
+  | > index	tests/test-verification.sh
+  | < path	scripts/verification-lib.sh
+  | > path	scripts/verification-lib.sh
+  | < path	templates/verification-contract.md
+  | > path	templates/verification-contract.md
+  | < path	tests/helpers.sh
+  | > path	tests/helpers.sh
+  | < path	tests/test-verification.sh
+  | > path	tests/test-verification.sh
+PASS D records differ only for the four edited files and the harness
+== E: ShellCheck on D
+PASS E D tests/shellcheck.sh exit 0
+PASS live worktree status outside notes/verification/ unchanged
+t030o43-measure-11 part=a passes=35 failures=0 end=2026-09-30T14:44:15Z

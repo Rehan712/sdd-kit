@@ -1,0 +1,641 @@
+--- a/scripts/verification-lib.sh
++++ b/scripts/verification-lib.sh
+@@ -1444,18 +1444,41 @@
+ # set, so a reader whose verdict must be a function of the input identity -- a
+ # reuse-checked check, or a test fixture copying the kit -- enumerates through
+ # it as well: two spellings of "the source" are two things that can drift.
+-# A git failure is a failure, never an empty and therefore clean tree.
+-vf_source_paths() { # <physical repo root> <output>
+-  [[ "$(git -C "$1" rev-parse --show-toplevel 2>/dev/null)" == "$1" ]] || {
++# A git failure is a failure, never an empty and therefore clean tree. The root
++# is accepted by directory identity, not spelling: bash's `pwd -P` keeps a case
++# the caller typed where git reports the on-disk one, and both name one
++# directory on a folding filesystem.
++vf_source_paths() ( # <repo root> <output>
++  vf_git_local_unset || return 3
++  [[ "$(git -C "$1" rev-parse --show-toplevel 2>/dev/null)" -ef "$1" ]] || {
+     echo 'verification inputs: Git worktree root required' >&2; return 3;
+   }
+   git -C "$1" ls-files --cached --others --exclude-standard -z > "$2" || return 3
++)
++
++# Git's repository-local environment: the names `git rev-parse
++# --local-env-vars` prints (GIT_DIR, GIT_INDEX_FILE, GIT_WORK_TREE, ...), which
++# git exports to its hooks and which redirect every git command inheriting
++# them -- to another index, another repository. The kernel names a repository
++# by its path alone, so it runs git with none of them set, and the kit's suites
++# unset them when they start (tests/helpers.sh): a reader resolving the same
++# path then enumerates exactly what the identity hashes, and no fixture can
++# write a caller's index. The list comes from git itself, which prints it even
++# when those variables are broken.
++vf_git_local_unset() {
++  local name names
++  names="$(git rev-parse --local-env-vars)" || return 3
++  for name in $names; do unset "$name"; done
+ }
++vf_git() ( vf_git_local_unset || return 3; exec git "$@" )
+ 
+ # Fixed arity six-field input records. Git supplies NUL-safe deterministic
+ # tracked/index and untracked ordering; no GNU sort -z or line-split filenames.
+ vf_snapshot() (
+   local spec="$1" repo="$2" cwd="$3" output="$4" tmp path record head oid mode stage key value tool resolved own real fold=0
++  # Once for the whole subshell: its per-entry `git cat-file` calls run
++  # without git's repository-local environment too (see vf_git_local_unset).
++  vf_git_local_unset || return 3
+   spec="$(cd "$spec" && pwd -P)" || return 3
+   repo="$(cd "$repo" && pwd -P)" || return 3
+   cwd="$(cd "$cwd" && pwd -P)" || return 3
+@@ -1661,7 +1684,7 @@
+   local repo parent staging id seq before after rc start end check shell_identity final key output_digest
+   spec="$(cd "$spec" && pwd -P)" || return 3
+   cwd="$(cd "$cwd" && pwd -P)" || return 3
+-  repo="$(git -C "$cwd" rev-parse --show-toplevel 2>/dev/null)" || { echo 'capture requires a Git worktree' >&2; return 3; }
++  repo="$(vf_git -C "$cwd" rev-parse --show-toplevel 2>/dev/null)" || { echo 'capture requires a Git worktree' >&2; return 3; }
+   case "$policy" in local|never) ;; *) return 2;; esac
+   vf_lock "$spec" || return 3
+   parent="$spec/notes/captures"
+@@ -2061,7 +2084,7 @@
+   : > "$output"
+   declared="$(spec_declared_repos "$spec")"
+   if [[ -z "$declared" ]]; then
+-    repo="$(git -C "$spec" rev-parse --show-toplevel 2>/dev/null)" || return 3
++    repo="$(vf_git -C "$spec" rev-parse --show-toplevel 2>/dev/null)" || return 3
+     repo="$(cd "$repo" && pwd -P)" || return 3
+     expected="$(fm_get "$spec/STATUS.md" worktree 2>/dev/null || :)"
+     if [[ -n "$expected" && "$expected" != none ]]; then
+@@ -2069,14 +2092,14 @@
+     fi
+     branch="$(fm_get "$spec/STATUS.md" branch 2>/dev/null || :)"
+     if [[ -n "$branch" && "$branch" != none ]]; then
+-      [[ "$(git -C "$repo" symbolic-ref --quiet --short HEAD)" == "$branch" ]] || { echo 'gate branch mismatch' >&2; return 3; }
++      [[ "$(vf_git -C "$repo" symbolic-ref --quiet --short HEAD)" == "$branch" ]] || { echo 'gate branch mismatch' >&2; return 3; }
+     fi
+     printf '%s\0' "$repo" > "$output"
+   else
+     for name in $declared; do
+       path="$(bash "$HUB_DIR/scripts/system-map.sh" path "$name")" || return 3
+       branch="refs/heads/spec/$(basename "$spec")"
+-      wt="$(git -C "$path" worktree list --porcelain | awk -v branch="$branch" '/^worktree / {p=substr($0,10)} /^branch / && substr($0,8)==branch {print p}')" || return 3
++      wt="$(vf_git -C "$path" worktree list --porcelain | awk -v branch="$branch" '/^worktree / {p=substr($0,10)} /^branch / && substr($0,8)==branch {print p}')" || return 3
+       count="$(printf '%s\n' "$wt" | awk 'NF {n++} END {print n+0}')"
+       [[ "$count" == 1 && -d "$wt" ]] || { echo "gate worktree missing/ambiguous for $name" >&2; return 3; }
+       printf '%s\0' "$(cd "$wt" && pwd -P)" >> "$output"
+@@ -2136,7 +2159,7 @@
+   if [[ -n "$name" ]]; then
+     path="$(bash "$HUB_DIR/scripts/system-map.sh" path "$name")" || return 3
+     branch="refs/heads/spec/$(basename "$spec")"
+-    wt="$(git -C "$path" worktree list --porcelain | awk -v branch="$branch" '/^worktree / {p=substr($0,10)} /^branch / && substr($0,8)==branch {print p}')" || return 3
++    wt="$(vf_git -C "$path" worktree list --porcelain | awk -v branch="$branch" '/^worktree / {p=substr($0,10)} /^branch / && substr($0,8)==branch {print p}')" || return 3
+     [[ -d "$wt" ]] || return 3
+     printf '%s\n' "$(cd "$wt" && pwd -P)"
+   else IFS= read -r -d '' path < "$roots"; printf '%s\n' "$path"; fi
+--- a/templates/verification-contract.md
++++ b/templates/verification-contract.md
+@@ -179,13 +179,22 @@
+ its Decisions log. That covers the check's own file list, any glob or
+ directory walk it makes, and any copy it reads. It also reads no environment
+ variable the project has not declared and no configuration outside the
+-repository. A check that depends on an ignored path declares it under
+-`verification_inputs`; one that reads the dropped lines, or configuration it
+-cannot pin, stays off `reuse_checks`. The kit's own suites read through
+-`vf_source_paths` and `vf_path_content`, the functions the snapshot itself
+-calls; `tests/run.sh` lists its suites that way, `tests/shellcheck.sh` lints
+-the enumerated scripts with no rc file and `SHELLCHECK_OPTS` unset, and a
+-suite starts with the kit's own `SDD_*` and `XDG_*` variables cleared.
++repository, except what decides the enumeration itself: git's own
++configuration, such as its global excludes, which the snapshot reads the same
++way as long as the check runs in the snapshot's environment. Git's
++repository-local variables (`GIT_DIR`, `GIT_INDEX_FILE` and the rest) decide
++nothing, because the snapshot runs git without them. A check that depends on
++an ignored path declares it under `verification_inputs`; one that reads the
++dropped lines, or configuration it cannot pin, stays off `reuse_checks`. The
++kit's own suites read through `vf_source_paths` and `vf_path_content`, the
++functions the snapshot itself calls, and copy kit content only through
++`copy_kit`; `tests/run.sh` lists its suites that way, `tests/shellcheck.sh`
++lints the enumerated scripts with no rc file and `SHELLCHECK_OPTS` unset, both
++clear `CDPATH`, `BASH_ENV` and `ENV` before resolving a path, and a suite
++starts with the kit's own `SDD_*` variables, `XDG_STATE_HOME` and git's
++repository-local variables cleared. The harness itself runs each command
++under `bash`, which reads `BASH_ENV` and its other startup variables before
++any check starts; that input is not yet part of the identity.
+ 
+ The implementation plan owns runtime interfaces and their test families:
+ capture/provenance, acceptance, floor/checkpoints, round reservations and report
+--- a/README.md
++++ b/README.md
+@@ -335,7 +335,10 @@
+ 
+ Both commands are reuse-checked, so each reads only what the input identity
+ hashes: the suites and scripts git enumerates, never an ignored local file or
+-configuration outside the repository.
++configuration outside the repository. They therefore need a Git worktree root,
++such as a clone of the kit: they list what they run through the same git
++enumeration the identity uses, and outside a worktree they stop with
++"cannot enumerate the kit" rather than guess.
+ 
+ CI runs both on Linux and macOS, plus a run with `bash` shimmed to `/bin/bash`
+ 3.2 so the compatibility claim is enforced, not assumed. Touching a script?
+--- a/.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md
++++ b/.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md
+@@ -714,14 +714,14 @@
+   - *Evidence:* CAP-411-B8GLAC verified by spec-gate accept; return sha256:9e9938a290947e9052071c2506952b052f323a5ccd4de9141aa1b9391ae86202
+ 
+ - [ ] **T030o41** [hard] — Make every reuse-checked reader read what the input identity hashes
+-  - *Files:* `scripts/verification-lib.sh`, `templates/verification-contract.md`, `README.md`, `.specify/stack.yml`, `.github/workflows/ci.yml`, `.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md`, `tests/helpers.sh`, `tests/run.sh`, `tests/shellcheck.sh` (new), `tests/test-gate-contracts.sh`, `tests/test-verification.sh`, `tests/test-sdd-analyze.sh`, `tests/test-usage-limits.sh`, `tests/test-model-policy.sh`, `tests/test-build-adapters.sh`, `tests/test-executable-bits.sh`
+-  - *Acceptance:* Derive the obligation from the identity (REQ-009, AC-020): a reuse-checked command's verdict is a function of the input identity, so it reads the repository only as `vf_snapshot` hashes it. Paths come from one enumeration function, `vf_source_paths` (Git worktree root required, NUL-framed `git ls-files --cached --others --exclude-standard`, a git failure is a failure), which `vf_snapshot`'s path pass also calls; content comes from `vf_path_content` (a link's target as it is, a file through `vf_semantic_file`, always from the repository-rooted path), which `vf_path_record` also calls; both leave the identity's records unchanged. The readers are derived from the production, not the reports: the reuse-checked commands' own file lists, every glob a suite makes over the live kit, whole-kit copies and the scripts run on them, spec records read in place, and the environment and configuration the programs consult. So `tests/run.sh` lists suites through `vf_source_paths`; `tests/shellcheck.sh` runs ShellCheck over the enumerated `scripts/*.sh` and `tests/*.sh` with `SHELLCHECK_OPTS` unset and `--norc`, and is the ShellCheck command everywhere; live-kit globs in suites come from a `kit_files` helper; the O-010 scan folds case where the identity does and reads every name; the AC-023 loop takes its shipped set from the enumeration and each artifact from `vf_path_content`; `copy_kit` copies the enumerated hub content without `.specify/specs/`, is used for every whole-kit copy, and never uses an EXIT trap; `stage_kit`'s writer never writes through a link; the 002 tally test reads an enumerated copy of 002's `notes/`; suites start with every `SDD_*` and `XDG_*` variable unset. Each site has a fixture in both directions against a host kit or tree carrying the ignored, directory-shaped, differently-spelled or ambient input, with exact diagnostics, and an in-repository spec in a hub-style `specs/` directory, outside `.specify/specs/`, has an empty anchor.
++  - *Files:* `scripts/verification-lib.sh`, `templates/verification-contract.md`, `README.md`, `.specify/stack.yml`, `.github/workflows/ci.yml`, `.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md`, `tests/helpers.sh`, `tests/run.sh`, `tests/shellcheck.sh` (new), `tests/test-gate-contracts.sh`, `tests/test-verification.sh`, `tests/test-sdd-analyze.sh`, `tests/test-usage-limits.sh`, `tests/test-model-policy.sh`, `tests/test-build-adapters.sh`, `tests/test-executable-bits.sh`, `tests/test-spec-gate.sh`, `tests/test-spec-dispatch.sh`, `tests/test-golden-example.sh`
++  - *Acceptance:* Derive the obligation from the identity (REQ-009, AC-020): a reuse-checked command's verdict is a function of the input identity, so it reads the repository only as `vf_snapshot` hashes it. Paths come from one enumeration function, `vf_source_paths` (Git worktree root required, NUL-framed `git ls-files --cached --others --exclude-standard`, a git failure is a failure), which `vf_snapshot`'s path pass also calls; content comes from `vf_path_content` (a link's target as it is, a file through `vf_semantic_file`, always from the repository-rooted path), which `vf_path_record` also calls; both leave the identity's records unchanged. The readers are derived from the production, not the reports: the reuse-checked commands' own file lists, every glob a suite makes over the live kit, whole-kit copies and the scripts run on them, spec records read in place, and the environment and configuration the programs consult. So `tests/run.sh` lists suites through `vf_source_paths`; `tests/shellcheck.sh` runs ShellCheck over the enumerated `scripts/*.sh` and `tests/*.sh` with `SHELLCHECK_OPTS` unset and `--norc`, and is the ShellCheck command everywhere; live-kit globs in suites come from a `kit_files` helper; the O-010 scan folds case where the identity does and reads every name; the AC-023 loop takes its shipped set from the enumeration and each artifact from `vf_path_content`; `copy_kit` copies the enumerated hub content without `.specify/specs/`, is used for every copy of live-kit content, whole or one directory, and never uses an EXIT trap; `stage_kit`'s writer never writes through a link; the 002 tally test reads an enumerated copy of 002's `notes/`; a reader enumerates under exactly the environment and configuration the identity enumerates under, so suites start with only the kit's own `SDD_*` and `XDG_STATE_HOME` unset, never a variable git consults for its configuration; git's repository-local variables (the names `git rev-parse --local-env-vars` prints) are unset both where the kernel runs git and when a suite starts, so a repository is named by its path alone and no fixture can write a caller's index; `tests/run.sh`, `tests/shellcheck.sh` and `tests/helpers.sh` unset `CDPATH`, `BASH_ENV` and `ENV` before resolving a path; `vf_source_paths` accepts the root by directory identity, not by spelling; host-kit repositories always have `.git/info`; README states that both commands need a Git worktree root. Each site has a fixture in both directions against a host kit or tree carrying the ignored, directory-shaped, differently-spelled or ambient input, with exact diagnostics, and an in-repository spec in a hub-style `specs/` directory, outside `.specify/specs/`, has an empty anchor.
+   - *Verify kind:* test
+   - *Tests:* `tests/test-gate-contracts.sh::test_instruction_contracts`, `tests/test-verification.sh::test_capture_provenance`, `tests/test-sdd-analyze.sh::test_verification_bindings`, `tests/test-gate-contracts.sh::test_reports_and_tally`
+   - *Verify:* `bash tests/run.sh && bash tests/shellcheck.sh` → all suites `passed`, exit 0
+   - *Reuse:* local
+   - *Refs:* REQ-009, AC-010, AC-018, AC-020, AC-023, FM-002, FM-010, FM-014, FM-019, INV-001, INV-006, plan §3.2, §4.2
+-  - *Notes:* Owns round-10 O-015 and the round-10 Held-up isolation gap, plus the sibling readers the report did not name: two reproduced before repair (`notes/verification/reports/o015-repro.{sh,log,rc}`) and the rest found by the two independent review passes (`notes/verification/reports/t030o41-review.md`). The user chose one task and then chose to expand it to every measured member (Decisions, 2026-09-24). Changing T027's Verify to the pinned ShellCheck command makes T027's sealed acceptance historical. No gate round, floor or hosted-CI run is part of this task.
++  - *Notes:* Owns round-10 O-015 and the round-10 Held-up isolation gap, plus the sibling readers the report did not name: two reproduced before repair (`notes/verification/reports/o015-repro.{sh,log,rc}`) and the rest found by the two independent review passes (`notes/verification/reports/t030o41-review.md`) and by the second pair (`notes/verification/reports/t030o41-review2-passC.md`, `t030o41-review2-passD.md`), including the pre-existing git-environment data loss the user chose to include. The harness-level bash startup environment is recorded in Decisions and is not part of this task. The user chose one task and then chose to expand it to every measured member (Decisions, 2026-09-24). Changing T027's Verify to the pinned ShellCheck command makes T027's sealed acceptance historical. No gate round, floor or hosted-CI run is part of this task.
+ 
+ ## API
+ 
+--- a/tests/helpers.sh
++++ b/tests/helpers.sh
+@@ -10,6 +10,13 @@
+ #
+ # Everything here is bash-3.2 and BSD-tool safe, like the scripts under test.
+ 
++# Bash's own environment, cleared before any path is resolved: CDPATH makes a
++# relative `cd` search elsewhere and print the directory into a substitution,
++# and BASH_ENV/ENV make every nested non-interactive shell source a file from
++# outside the repository first. None of them is consulted by git, so clearing
++# them cannot change what a suite enumerates (O-015 second review).
++unset CDPATH BASH_ENV ENV
++
+ KIT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+ # Consumed by the test files that source this helper.
+ # shellcheck disable=SC2034
+@@ -18,15 +25,24 @@
+ TODAY="$(date +%Y-%m-%d)"
+ export NO_COLOR=1   # assertions match plain text, never escape codes
+ 
+-# The kit's own configuration namespace (SDD_*) and the XDG base-directory
+-# family its scripts consult are cleared when a suite starts. The suites are
+-# reuse-checked and the input identity declares no environment
+-# (verification_environment: []), so an ambient knob such as
+-# SDD_RESUME_JITTER_SECONDS must not decide a verdict (O-015 review,
+-# 2026-09-24). A test that needs one sets it for the command it runs.
+-for _t_env in $(compgen -e); do
+-  case "$_t_env" in SDD_*|XDG_*) unset "$_t_env";; esac
++# A suite enumerates the kit under exactly the environment and configuration
++# the input identity enumerates under, so only names no enumeration consults
++# are cleared when it starts. The suites are reuse-checked and the identity
++# declares no environment (verification_environment: []), so the kit's own
++# knobs -- SDD_* and XDG_STATE_HOME, the only names its scripts read besides
++# HOME, TMPDIR and NO_COLOR -- must not decide a verdict (O-015 review,
++# 2026-09-24). HOME and XDG_CONFIG_HOME stay: git reads its global
++# configuration and excludes through them, and clearing them made the suites
++# skip ignore rules the identity applies (second review). Git's
++# repository-local variables (GIT_DIR, GIT_INDEX_FILE, ...) are cleared too,
++# exactly as the kernel clears them wherever it runs git
++# (vf_git_local_unset): a hook exports them, and inherited they would point
++# every fixture's git at the caller's index. A test that needs a knob sets it
++# for the command it runs.
++for _t_env in $(compgen -e); do
++  case "$_t_env" in SDD_*|XDG_STATE_HOME) unset "$_t_env";; esac
+ done
++for _t_env in $(git rev-parse --local-env-vars); do unset "$_t_env"; done
+ unset _t_env
+ 
+ _t_fail=0
+@@ -414,11 +430,19 @@
+ 
+ # make_host_kit <dest> — a copy of the kit that is its own Git worktree, for
+ # fixtures that plant what a developer's live kit could hold: an ignored file,
+-# a symlink, an empty directory. Echoes nothing; returns copy_kit's status.
++# a symlink, an empty directory. Echoes nothing; fails when the copy or the
++# repository cannot be made.
+ make_host_kit() {
+-  copy_kit "$KIT_DIR" "$1" && git -C "$1" init -q
++  copy_kit "$KIT_DIR" "$1" && git_host "$1"
+ }
+ 
++# git_host <dir> — make <dir> a Git worktree whose .git/info exists, so a
++# fixture can append ignore rules to .git/info/exclude. Git creates info/ only
++# from its template directory, and a user's init.templateDir may hold none.
++git_host() {
++  mkdir -p "$1" && git -C "$1" init -q && mkdir -p "$1/.git/info"
++}
++
+ # kit_files <dir> <basename glob> — NUL-framed repository-relative paths of the
+ # enumerated files directly inside <dir> of $KIT_DIR whose basename matches the
+ # glob: the counterpart of "$KIT_DIR/<dir>/<glob>" that sees only what the
+--- a/tests/run.sh
++++ b/tests/run.sh
+@@ -14,6 +14,11 @@
+ #       2 = no test file matches the filter.
+ 
+ set -u
++# Bash's own environment, cleared before any path is resolved: CDPATH makes a
++# relative `cd` search elsewhere and print into the substitution below, and
++# BASH_ENV/ENV would make every suite's shell source a file from outside the
++# repository first (O-015 second review; tests/helpers.sh clears them too).
++unset CDPATH BASH_ENV ENV
+ 
+ TESTS_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+ FILTER="${1:-}"
+--- a/tests/shellcheck.sh
++++ b/tests/shellcheck.sh
+@@ -8,9 +8,15 @@
+ # and the XDG one) and SHELLCHECK_OPTS is unset.
+ #
+ # Usage: bash tests/shellcheck.sh
+-# Exit: ShellCheck's own status; 2 when the kit cannot be enumerated.
++# Exit: ShellCheck's own status; 2 when the kit cannot be enumerated or holds
++# no script, the same code ShellCheck uses for files it could not process --
++# the stderr line says which. Any non-zero status fails the check.
+ 
+ set -u
++# CDPATH would make the relative `cd` below search elsewhere and print into the
++# substitution; BASH_ENV/ENV would reach any shell this spawns (O-015 second
++# review).
++unset CDPATH BASH_ENV ENV
+ 
+ ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd -P)"
+ . "$ROOT/scripts/verification-lib.sh"
+--- a/tests/test-gate-contracts.sh
++++ b/tests/test-gate-contracts.sh
+@@ -294,11 +294,21 @@
+   run_rc 1 superseded_environment_scan "$SANDBOX/env-not-a-repo"
+   assert_contains "$OUT" 'superseded_environment_scan: cannot enumerate' \
+     'AC-018: a tree outside any repository was read as clean'
+-  export GIT_DIR="$SANDBOX/no-such-git-dir"
+-  run_rc 1 superseded_environment_scan "$tree"
+-  unset GIT_DIR
++  # A failing git fails the scan by name. (A GIT_DIR exported at a missing
++  # directory no longer makes git fail here: the kernel names a repository by
++  # its path alone, exactly as the identity does -- second review, F4.)
++  mkdir -p "$SANDBOX/failing-git"
++  printf '#!/bin/sh\necho "git: simulated failure" >&2\nexit 128\n' > "$SANDBOX/failing-git/git"
++  chmod +x "$SANDBOX/failing-git/git"
++  PATH="$SANDBOX/failing-git:$PATH" run_rc 1 superseded_environment_scan "$tree"
+   assert_contains "$OUT" 'superseded_environment_scan: cannot enumerate' \
+     'AC-018: a failing git was read as an empty, clean tree'
++  # Parity: with a hook's GIT_DIR exported, the scan reads the tree the
++  # identity hashes, and still reports the claim on the spec body line.
++  export GIT_DIR="$SANDBOX/no-such-git-dir"
++  reported="$(superseded_environment_scan "$tree")" || t_fail 'AC-018: an exported GIT_DIR stopped the scan, although the identity ignores it'
++  unset GIT_DIR
++  assert_contains "$reported" "$spec_rel/tasks.md ::" 'AC-018: an exported GIT_DIR hid a claim the identity hashes'
+   # A subdirectory is not the manifest's root, so git succeeding there is not
+   # enough: its listing would silently narrow the scope to one directory.
+   run_rc 1 superseded_environment_scan "$tree/$spec_rel"
+@@ -1681,7 +1691,11 @@
+   spec="$(make_verification_git_dir documented)"
+   repo="$(cd "$spec/../../.." && pwd -P)"
+   floor_fixture "$spec" > /dev/null
+-  cp -R "$KIT_DIR/scripts/." "$repo/scripts/"
++  # The kit's scripts as the input identity enumerates them (copy_kit's
++  # directory selector): an ignored entry under a developer's scripts/ -- a
++  # directory link, a nested clone -- would otherwise become an input of this
++  # fixture repository's own identity (O-015 second review).
++  copy_kit "$KIT_DIR" "$repo" scripts || { t_fail 'documented fixture: cannot copy the kit scripts'; return; }
+   awk '/^### Versioned verification workflow/ {on=1}
+        on && /^```bash$/ {block=1; next}
+        block && /^```$/ {exit}
+@@ -1719,6 +1733,22 @@
+     t_fail 'documented workflow left a return/report file in the worktree'
+ }
+ 
++# O-015 second review: an ignored entry under a developer's scripts/ -- a
++# directory link, a nested clone -- is not kit content. Copied into the
++# documented workflow's fixture repository it became an untracked input there,
++# which that repository's identity refuses, and the workflow failed while the
++# kit's own identity stayed unchanged.
++test_ignored_local_scripts_do_not_reach_the_documented_workflow() {
++  local host="$SANDBOX/host-kit"
++  make_host_kit "$host" || t_fail 'cannot build the host kit'
++  printf 'scripts/zz-dir\nscripts/zz-tool/\n' >> "$host/.git/info/exclude"
++  mkdir -p "$SANDBOX/outside-dir" "$host/scripts/zz-tool"
++  printf 'outside\n' > "$SANDBOX/outside-dir/note.md"
++  ln -s "$SANDBOX/outside-dir" "$host/scripts/zz-dir"
++  git -C "$host/scripts/zz-tool" init -q
++  KIT_DIR="$host" documented_example_cases
++}
++
+ metrics_instruction_cases() {
+   local file text lower
+   for file in templates/retro-template.md skills/sdd-retro/SKILL.md; do
+--- a/tests/test-verification.sh
++++ b/tests/test-verification.sh
+@@ -389,19 +389,25 @@
+ # neither SHELLCHECK_OPTS nor a .shellcheckrc outside the kit; and a suite
+ # starts with the kit's own SDD_* and XDG_* knobs cleared.
+ reuse_command_input_cases() {
+-  local host="$SANDBOX/host-kit"
++  local host="$SANDBOX/host-kit" swapped foreign before base spec repo lib="$SCRIPTS/verification-lib.sh"
+   make_host_kit "$host" || t_fail 'AC-020: cannot build the host kit'
+   printf 'tests/test-zz-local.sh\nscripts/zz-local.sh\n' >> "$host/.git/info/exclude"
+   printf '#!/usr/bin/env bash\necho local-suite-ran\nexit 1\n' > "$host/tests/test-zz-local.sh"
+   run_rc 2 bash "$host/tests/run.sh" zz-local
+   assert_contains "$OUT" "no test file matches 'zz-local'" 'AC-020: tests/run.sh ran an ignored local suite'
+   assert_not_contains "$OUT" 'local-suite-ran' 'AC-020: tests/run.sh ran an ignored local suite'
++  # Second review: run as `bash tests/...` from the kit root, each command
++  # resolves its own directory with a relative cd, which an exported CDPATH
++  # would redirect and print into the substitution.
++  run_rc 2 env CDPATH=. bash -c 'cd "$1" && bash tests/run.sh zz-none' _ "$host"
++  assert_contains "$OUT" "no test file matches 'zz-none'" 'AC-020: an exported CDPATH decided tests/run.sh'
+   if command -v shellcheck > /dev/null 2>&1; then
+     printf '#!/usr/bin/env bash\nunused_value=1\ncd /tmp\n' > "$host/scripts/zz-local.sh"
+     # The host kit's parent is the sandbox, so ShellCheck's upward rc search
+     # would reach this file without --norc.
+     printf 'enable=check-unassigned-uppercase\n' > "$SANDBOX/.shellcheckrc"
+-    run_rc 0 env SHELLCHECK_OPTS='--enable=check-unassigned-uppercase' bash "$host/tests/shellcheck.sh"
++    run_rc 0 env CDPATH=. SHELLCHECK_OPTS='--enable=check-unassigned-uppercase' \
++      bash -c 'cd "$1" && bash tests/shellcheck.sh' _ "$host"
+     assert_not_contains "$OUT" 'zz-local.sh' 'AC-020: tests/shellcheck.sh linted an ignored local script'
+     # Control: once enumerated, the same script IS linted, so the probe is live.
+     sed '/^scripts\/zz-local\.sh$/d' "$host/.git/info/exclude" > "$SANDBOX/exclude" && cat "$SANDBOX/exclude" > "$host/.git/info/exclude"
+@@ -411,6 +417,73 @@
+   fi
+   run_rc 0 env SDD_RESUME_JITTER_SECONDS=301 XDG_STATE_HOME="$SANDBOX/ambient-state" \
+     bash -c '. "$1/tests/helpers.sh"; [[ -z "${SDD_RESUME_JITTER_SECONDS+set}${XDG_STATE_HOME+set}" ]]' _ "$KIT_DIR"
++
++  # Second review: a suite enumerates under the configuration the identity
++  # enumerates under. An ignore rule git reaches through XDG_CONFIG_HOME hides
++  # a non-executable script from the identity, so it is hidden inside the suite
++  # too (clearing XDG_CONFIG_HOME exposed it). HOME and the system config are
++  # pinned so a user's own core.excludesFile cannot replace the rule. The same
++  # run goes through a relative cd under CDPATH, which helpers.sh must clear
++  # before it resolves the kit.
++  # (The ShellCheck control above left scripts/zz-local.sh enumerated and
++  # non-executable; it is not this probe.)
++  rm -f "$host/scripts/zz-local.sh"
++  mkdir -p "$SANDBOX/xdg/git" "$SANDBOX/xdg-home"
++  printf 'scripts/zz-xdg.sh\n' > "$SANDBOX/xdg/git/ignore"
++  printf 'echo local\n' > "$host/scripts/zz-xdg.sh"; chmod 644 "$host/scripts/zz-xdg.sh"
++  run_rc 0 env HOME="$SANDBOX/xdg-home" XDG_CONFIG_HOME="$SANDBOX/xdg" GIT_CONFIG_NOSYSTEM=1 \
++    bash -c '. "$1"; vf_source_paths "$2" "$3" && tr "\0" "\n" < "$3"' _ "$lib" "$host" "$SANDBOX/xdg-list"
++  assert_not_contains "$OUT" 'zz-xdg.sh' 'AC-020: precondition: the XDG ignore rule does not hide the script from the identity'
++  run_rc 0 env HOME="$SANDBOX/xdg-home" XDG_CONFIG_HOME="$SANDBOX/xdg" GIT_CONFIG_NOSYSTEM=1 CDPATH=. \
++    bash -c 'cd "$1" && bash tests/test-executable-bits.sh' _ "$host"
++  assert_not_contains "$OUT" 'zz-xdg.sh' "AC-020: a suite read a script the identity's git configuration ignores"
++  rm -f "$host/scripts/zz-xdg.sh"
++
++  # Second review: the root is accepted by directory identity, not spelling.
++  # Where the filesystem folds case, a case-variant spelling of the kit path
++  # names the kit, and both commands enumerate it.
++  if bash -c '. "$1"; vf_case_folds "$2"' _ "$lib" "$SANDBOX"; then
++    swapped="$(dirname "$host")/$(basename "$host" | tr 'a-z' 'A-Z')"
++    run_rc 2 bash "$swapped/tests/run.sh" zz-none
++    assert_contains "$OUT" "no test file matches 'zz-none'" 'AC-020: tests/run.sh refused a case-variant spelling of the kit path'
++  fi
++
++  # Second review (F4): git's repository-local environment. A hook exports
++  # GIT_INDEX_FILE or GIT_DIR; the kernel names a repository by its path
++  # alone, so neither redirects the enumeration, and a suite clears them, so
++  # no fixture's git writes the caller's index.
++  git_host "$SANDBOX/foreign" || t_fail 'AC-020: cannot build the foreign repository'
++  printf 'x\n' > "$SANDBOX/foreign/only-in-foreign.md"
++  git -C "$SANDBOX/foreign" add only-in-foreign.md
++  foreign="$SANDBOX/foreign-index"; cp "$SANDBOX/foreign/.git/index" "$foreign"
++  before="$(cksum < "$foreign")"
++  run_rc 0 env GIT_INDEX_FILE="$foreign" \
++    bash -c '. "$1"; vf_source_paths "$2" "$3" && tr "\0" "\n" < "$3"' _ "$lib" "$host" "$SANDBOX/foreign-list"
++  assert_not_contains "$OUT" 'only-in-foreign.md' 'AC-020: an exported GIT_INDEX_FILE redirected the enumeration to a foreign index'
++  assert_contains "$OUT" 'tests/run.sh' 'AC-020: the enumeration under an exported GIT_INDEX_FILE lost the kit'
++  run_rc 0 env GIT_DIR="$SANDBOX/no-such-git-dir" \
++    bash -c '. "$1"; vf_source_paths "$2" "$3" && tr "\0" "\n" < "$3"' _ "$lib" "$host" "$SANDBOX/gitdir-list"
++  assert_contains "$OUT" 'tests/run.sh' 'AC-020: an exported GIT_DIR redirected the enumeration'
++  # The identity itself: vf_snapshot clears them once for all its git calls,
++  # so a foreign index changes none of its records.
++  spec="$(make_verification_git_dir foreign-snap)"
++  repo="$(cd "$spec/../../.." && pwd -P)"
++  run_rc 0 snapshot_fixture "$spec" "$repo" "$SANDBOX/snap-base"
++  base="$OUT"
++  GIT_INDEX_FILE="$foreign" run_rc 0 snapshot_fixture "$spec" "$repo" "$SANDBOX/snap-foreign"
++  assert_eq "$base" "$OUT" 'AC-020: an exported GIT_INDEX_FILE changed the input identity'
++  mkdir -p "$SANDBOX/nested"
++  run_rc 0 env GIT_INDEX_FILE="$foreign" \
++    bash -c '. "$1/tests/helpers.sh"; SANDBOX="$2"; make_verification_git_dir nested > /dev/null' _ "$KIT_DIR" "$SANDBOX/nested"
++  assert_eq "$before" "$(cksum < "$foreign")" "AC-020: a fixture's git wrote the caller's index through an inherited GIT_INDEX_FILE"
++
++  # Second review: git creates .git/info only from its template directory, so
++  # a host repository made under an empty init.templateDir still gets one for
++  # the fixtures' ignore rules.
++  mkdir -p "$SANDBOX/empty-template"
++  GIT_TEMPLATE_DIR="$SANDBOX/empty-template" git_host "$SANDBOX/no-template-host"
++  [[ -d "$SANDBOX/no-template-host/.git/info" ]] \
++    || t_fail 'AC-020: a host repository made without git templates has no .git/info for its ignore rules'
+ }
+ 
+ # Round 10's isolation gap: the anchor exists only for .specify/specs/<name>
+--- a/tests/test-sdd-analyze.sh
++++ b/tests/test-sdd-analyze.sh
+@@ -559,8 +559,8 @@
+ # glob that an ignored or empty leftover would satisfy, and each file's bytes
+ # come from vf_path_content (shipped_analyzer_case). Counts into the caller's
+ # shipped_count and names shipped 002 in the caller's rel002.
+-shipped_specs_case() {
+-  local path name rel
++shipped_spec_rels() { # -> $SANDBOX/shipped-rels, NUL-framed; names 002 in the caller's rel002
++  local path name
+   bash -c '. "$1/verification-lib.sh"; vf_source_paths "$2" "$3"' \
+     _ "$SCRIPTS" "$(cd "$KIT_DIR" && pwd -P)" "$SANDBOX/kit-paths" \
+     || t_fail 'AC-023: cannot enumerate the kit as the input identity does'
+@@ -572,6 +572,11 @@
+     printf '%s\0' ".specify/specs/$name" >> "$SANDBOX/shipped-rels"
+     [[ "$name" != 002-* ]] || rel002=".specify/specs/$name"
+   done < "$SANDBOX/kit-paths"
++}
++
++shipped_specs_case() {
++  local rel
++  shipped_spec_rels
+   while IFS= read -r -d '' rel; do
+     shipped_count=$((shipped_count+1))
+     shipped_analyzer_case "$KIT_DIR" "$rel" 0
+@@ -584,14 +589,22 @@
+ # a branch switch, or one whose files git ignores -- is not a shipped spec and
+ # must not decide the AC-023 loop.
+ test_leftover_spec_directories_do_not_decide_the_shipped_loop() {
+-  local host="$SANDBOX/host-specs" shipped_count=0 rel002='' spec
+-  mkdir -p "$host"; git -C "$host" init -q
+-  for spec in "$KIT_DIR"/.specify/specs/001-* "$KIT_DIR"/.specify/specs/002-*; do
+-    copy_kit "$KIT_DIR" "$host" ".specify/specs/${spec##*/}" || t_fail 'AC-023: cannot build the host tree'
+-  done
++  local host="$SANDBOX/host-specs" shipped_count=0 rel002='' rel first=''
++  git_host "$host" || t_fail 'AC-023: cannot build the host tree'
++  # The host is built from the identity's enumeration too, never from a glob
++  # of the live kit, which a leftover there would empty (second review).
++  shipped_spec_rels
++  while IFS= read -r -d '' rel; do
++    copy_kit "$KIT_DIR" "$host" "$rel" || t_fail 'AC-023: cannot build the host tree'
++    [[ -n "$first" ]] || first="$rel"
++  done < "$SANDBOX/shipped-rels"
+   mkdir -p "$host/.specify/specs/002-zz-scratch" "$host/.specify/specs/001-stale"
+   printf '.specify/specs/001-stale/\n' >> "$host/.git/info/exclude"
+-  cp "$KIT_DIR/.specify/specs/${spec##*/}/tasks.md" "$host/.specify/specs/001-stale/tasks.md"
++  cp "$host/$first/tasks.md" "$host/.specify/specs/001-stale/tasks.md" \
++    || t_fail 'AC-023: cannot plant the ignored leftover spec'
++  [[ -f "$host/.specify/specs/001-stale/tasks.md" ]] \
++    || t_fail 'AC-023: the ignored leftover spec holds no tasks.md, so the probe tests nothing'
++  rel002=''
+   KIT_DIR="$host" shipped_specs_case
+ }
+ 
+--- a/tests/test-usage-limits.sh
++++ b/tests/test-usage-limits.sh
+@@ -88,7 +88,9 @@
+   DISPATCH_PROVIDER_STDERR="$provider_stderr"
+   DISPATCH_PROVIDER_EXIT="$provider_exit"
+   mkdir -p "$DISPATCH_KIT" "$DISPATCH_HOME/.codex/skills/sdd-plan" "$DISPATCH_BIN"
+-  cp -R "$SCRIPTS" "$DISPATCH_KIT/scripts"
++  # The kit's scripts as the input identity enumerates them (copy_kit's directory selector), so a
++  # developer's ignored entry under scripts/ never arrives (O-015 second review).
++  copy_kit "$KIT_DIR" "$DISPATCH_KIT" scripts || t_fail 'AC-003: cannot stage the kit scripts for the dispatch fixture'
+   printf '%s\n' "$policy" > "$DISPATCH_KIT/models.yml"
+   : > "$DISPATCH_HOME/.codex/skills/sdd-plan/SKILL.md"
+   cat > "$DISPATCH_BIN/provider-stub" <<'EOF'
+@@ -1022,6 +1024,19 @@
+     "AC-009: the host's ignored models.yml reached the doctor fixture"
+ }
+ 
++# O-015 second review: the dispatch fixture copies the kit's scripts as the
++# input identity enumerates them, so an ignored script in a developer's kit
++# never reaches the staged dispatcher's kit.
++test_AC_003_dispatch_fixture_copies_only_enumerated_scripts() {
++  local host="$SANDBOX/host-kit"
++  make_host_kit "$host" || t_fail 'AC-003: cannot build the host kit'
++  printf 'scripts/zz-local.sh\n' >> "$host/.git/info/exclude"
++  printf 'echo local\n' > "$host/scripts/zz-local.sh"
++  KIT_DIR="$host" dispatch_fixture 'tiers: {}' '' '' 0
++  [[ -f "$DISPATCH_KIT/scripts/spec-dispatch.sh" ]] || t_fail 'AC-003: the dispatch fixture did not stage the dispatcher'
++  [[ ! -e "$DISPATCH_KIT/scripts/zz-local.sh" ]] || t_fail "AC-003: the dispatch fixture staged the host kit's ignored script"
++}
++
+ # AC-010: public policy docs must stay aligned with the parser and preserve the
+ # default-off, explicitly-commented example contract.
+ test_AC_010_documents_exact_limit_policy_keys_and_recovery_workflows() {
+--- a/tests/test-model-policy.sh
++++ b/tests/test-model-policy.sh
+@@ -182,4 +182,18 @@
+   assert_contains "$OUT" "model policy valid" "AC-008: wizard output remains valid"
+ }
+ 
++# O-015 second review: the wizard fixture copies the kit as the input identity
++# enumerates it, so a developer's ignored models.yml -- here a link to a policy
++# outside the kit -- neither reaches the fixture nor is written through by it.
++test_AC_008_wizard_fixture_never_writes_through_a_host_models_yml() {
++  local host="$SANDBOX/host-kit" target="$SANDBOX/dotfiles/models.yml" before
++  make_host_kit "$host" || t_fail 'AC-008: cannot build the host kit'
++  mkdir -p "$SANDBOX/dotfiles"
++  cp "$KIT_DIR/models.example.yml" "$target"
++  before="$(cksum < "$target")"
++  ln -s "$target" "$host/models.yml"
++  KIT_DIR="$host" test_AC_008_usage_limit_policy_wizard_preserves_ordered_fallback
++  assert_eq "$before" "$(cksum < "$target")" "AC-008: the wizard fixture wrote through the host kit's models.yml link"
++}
++
+ t_run_all
+--- a/tests/test-spec-gate.sh
++++ b/tests/test-spec-gate.sh
+@@ -303,7 +303,9 @@
+   repo="$(cd "$spec/../../.." && pwd -P)"
+   kit="$SANDBOX/floor-kit-$(basename "$repo")"
+   mkdir -p "$kit"
+-  cp -R "$KIT_DIR/scripts" "$kit/scripts"
++  # The kit's scripts as the input identity enumerates them (copy_kit's directory selector), so a
++  # developer's ignored entry under scripts/ never arrives (O-015 second review).
++  copy_kit "$KIT_DIR" "$kit" scripts || t_fail 'AC-007: cannot stage the kit scripts'
+   for check in sdd-analyze spec-ac-coverage spec-evidence; do
+     mv "$kit/scripts/$check.sh" "$kit/scripts/$check-real.sh"
+     counter="$SANDBOX/$check-count"
+@@ -984,6 +986,22 @@
+   printf -- '\n## Decisions we rejected\n\n- 2026-01-05T00:00:04Z — waiver: gate=opponent; round=10; after=9; by=fixture-user; reason=asked for and refused\n' >> "$spec/STATUS.md"
+   run_rc 4 vf_round_authorized "$spec" opponent 10 2026-01-04T23:59:59Z
+   assert_contains "$OUT" 'authorization denied' 'AC-009: a second Decisions heading authorized a round'
++}
++
++# O-015 second review: floor_fixture stages the kit's scripts as the input
++# identity enumerates them, so an ignored script in a developer's kit never
++# reaches the staged kit whose checkers the floor then runs.
++test_floor_fixture_stages_only_enumerated_scripts() {
++  local host="$SANDBOX/host-kit" spec repo staged
++  make_host_kit "$host" || t_fail 'AC-007: cannot build the host kit'
++  printf 'scripts/zz-local.sh\n' >> "$host/.git/info/exclude"
++  printf 'echo local\n' > "$host/scripts/zz-local.sh"
++  spec="$(make_verification_git_dir floorhost)"
++  repo="$(cd "$spec/../../.." && pwd -P)"
++  KIT_DIR="$host" floor_fixture "$spec" > /dev/null
++  staged="$SANDBOX/floor-kit-$(basename "$repo")/scripts"
++  [[ -f "$staged/spec-gate.sh" ]] || t_fail 'AC-007: floor_fixture did not stage an enumerated script'
++  [[ ! -e "$staged/zz-local.sh" ]] || t_fail "AC-007: floor_fixture staged the host kit's ignored script"
+ }
+ 
+ t_run_all
+--- a/tests/test-spec-dispatch.sh
++++ b/tests/test-spec-dispatch.sh
+@@ -13,7 +13,9 @@
+ stage_umbrella() {
+   local kit="$SANDBOX/kit" dir="$SANDBOX/kit/specs/001-demo"
+   mkdir -p "$kit" "$dir"
+-  cp -R "$KIT_DIR/scripts" "$kit/scripts"
++  # The kit's scripts as the input identity enumerates them (copy_kit's directory selector), so a
++  # developer's ignored entry under scripts/ never arrives (O-015 second review).
++  copy_kit "$KIT_DIR" "$kit" scripts || { echo 'stage_umbrella: cannot stage the kit scripts' >&2; return 1; }
+   cat > "$dir/spec.md" <<'EOF'
+ ---
+ spec: 001-demo
+@@ -48,4 +50,17 @@
+   assert_contains "$OUT" "no dispatch mapping"
+ }
+ 
++# O-015 second review: stage_umbrella copies the kit's scripts as the input
++# identity enumerates them, so an ignored script in a developer's kit never
++# reaches the staged dispatcher's kit.
++test_stage_umbrella_copies_only_enumerated_scripts() {
++  local host="$SANDBOX/host-kit"
++  make_host_kit "$host" || t_fail 'cannot build the host kit'
++  printf 'scripts/zz-local.sh\n' >> "$host/.git/info/exclude"
++  printf 'echo local\n' > "$host/scripts/zz-local.sh"
++  KIT_DIR="$host" stage_umbrella > /dev/null
++  [[ -f "$SANDBOX/kit/scripts/spec-dispatch.sh" ]] || t_fail 'stage_umbrella did not stage the dispatcher'
++  [[ ! -e "$SANDBOX/kit/scripts/zz-local.sh" ]] || t_fail "stage_umbrella staged the host kit's ignored script"
++}
++
+ t_run_all
+--- a/tests/test-golden-example.sh
++++ b/tests/test-golden-example.sh
+@@ -12,10 +12,15 @@
+ # (~/.sdd/agents/…) for sandbox stubs, so the test is hermetic on machines
+ # with or without a live ~/.sdd.
+ stage_example() {
+-  local proj="$SANDBOX/proj"
++  local proj="$SANDBOX/proj" rel=templates/examples/001-api-key-expiry
+   local spec_dir="$proj/.specify/specs/001-api-key-expiry"
+   mkdir -p "$proj/.specify/specs" "$proj/agents"
+-  cp -R "$EXAMPLE" "$spec_dir"
++  # The example as the input identity enumerates it (copy_kit's directory
++  # selector), so a developer's ignored file beside it never arrives: this
++  # suite is reuse-checked (O-015 second review).
++  rm -rf "$SANDBOX/example-copy"
++  copy_kit "$KIT_DIR" "$SANDBOX/example-copy" "$rel" && mv "$SANDBOX/example-copy/$rel" "$spec_dir" \
++    || t_fail 'cannot copy the example as the input identity enumerates it'
+   cat > "$proj/.specify/stack.yml" <<'EOF'
+ stacks: [javascript, aws]
+ gate_checks:
+@@ -108,4 +113,17 @@
+   assert_contains "$OUT" 'INV-002 has no non-gate task owner' 'AC-005: missing invariant binding warns'
+ }
+ 
++# O-015 second review: stage_example copies the example as the input identity
++# enumerates it, so an ignored file beside it in a developer's kit never
++# reaches the staged spec the analyzer then judges.
++test_stage_example_copies_only_enumerated_files() {
++  local host="$SANDBOX/host-kit" rel=templates/examples/001-api-key-expiry spec_dir
++  make_host_kit "$host" || t_fail 'cannot build the host kit'
++  printf '%s/zz-local.md\n' "$rel" >> "$host/.git/info/exclude"
++  printf 'local notes\n' > "$host/$rel/zz-local.md"
++  spec_dir="$(KIT_DIR="$host" stage_example)"
++  [[ -f "$spec_dir/tasks.md" ]] || t_fail 'stage_example did not stage the example tasks.md'
++  [[ ! -e "$spec_dir/zz-local.md" ]] || t_fail "stage_example staged the host kit's ignored file"
++}
++
+ t_run_all

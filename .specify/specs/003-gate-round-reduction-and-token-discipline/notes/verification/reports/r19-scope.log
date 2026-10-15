@@ -1,0 +1,38 @@
+FLOOR-OgYGoP source=567cb6e04411ca525cb059fc247ab7ac34b1c52718f969d3478734ee69a7228e records=370
+FLOOR-GCDl2x source=1f0774ddf738539f83236db08fa7f8847c3e9a276964fc5582730ed6bd5c8a66 records=370
+
+== FLOOR-OgYGoP -> FLOOR-GCDl2x: differing records (- old, + new; kind path only) ==
++ path .specify/specs/003-gate-round-reduction-and-token-discipline/STATUS.md
+- path .specify/specs/003-gate-round-reduction-and-token-discipline/STATUS.md
++ path .specify/specs/003-gate-round-reduction-and-token-discipline/spec.md
+- path .specify/specs/003-gate-round-reduction-and-token-discipline/spec.md
++ path .specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md
+- path .specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md
++ document /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/STATUS.md
+- document /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/STATUS.md
++ document /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/spec.md
+- document /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/spec.md
++ document /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md
+- document /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md
++ harness /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/verification-lib.sh
+- harness /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/verification-lib.sh
++ path scripts/verification-lib.sh
+- path scripts/verification-lib.sh
++ path templates/verification-contract.md
+- path templates/verification-contract.md
++ path tests/test-gate-contracts.sh
+- path tests/test-gate-contracts.sh
++ path tests/test-spec-gate.sh
+- path tests/test-spec-gate.sh
+== distinct paths ==
+.specify/specs/003-gate-round-reduction-and-token-discipline/STATUS.md
+.specify/specs/003-gate-round-reduction-and-token-discipline/spec.md
+.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md
+/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/STATUS.md
+/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/spec.md
+/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md
+/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/verification-lib.sh
+scripts/verification-lib.sh
+templates/verification-contract.md
+tests/test-gate-contracts.sh
+tests/test-spec-gate.sh

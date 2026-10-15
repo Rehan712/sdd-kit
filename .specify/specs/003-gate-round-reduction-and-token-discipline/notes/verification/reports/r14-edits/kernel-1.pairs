@@ -1,0 +1,269 @@
+@@OLD
+# ordered-list numbers and task checkboxes. The line is read twice, and a
+# label either reading yields is returned, so a reading that approximates what
+# a renderer shows can only make a line refuse, never let a visible label pass
+# (T030o44 review F1, F9, F11): as written, and as rendered. The rendered
+# reading takes out inline raw HTML by CommonMark 0.31.2's own productions
+# (6.6: an open tag with its attributes, a quoted value holding `>` included,
+# a closing tag, a comment, which `<!-->` and `<!--->` complete, a processing
+# instruction, a declaration, a CDATA section; one left open hides the rest
+# of the line), takes out a link's destination and title, a reference link's
+# label and an image whole (6.3, 6.4), renders a footnote reference as its
+# number, a numeric character reference as its character and a named one as a
+# character that is no letter or digit (2.5; no named reference renders as an
+# ASCII letter or digit). vf_finding_heading <line> is true when the text of an
+@@NEW
+# ordered-list numbers and task checkboxes. The line is read as written and as
+# rendered, and a label any reading yields is returned, so a reading that
+# approximates what a renderer shows can only make a line refuse, never let a
+# visible label pass (T030o44 review F1, F9, F11). The rendered reading takes
+# out inline raw HTML by CommonMark 0.31.2's own productions (6.6: an open tag
+# with its attributes, a quoted value holding `>` included, a closing tag, a
+# comment, which `<!-->` and `<!--->` complete, a processing instruction, a
+# declaration, a CDATA section; one left open hides the rest of the line);
+# reduces bracket pairs innermost first, to a fixpoint, since link text may
+# hold balanced brackets and images (6.3, 6.4; round 14, O-018): an image
+# becomes a character that is no letter or digit, a link or a reference link
+# its text between two such characters, a footnote reference its number, any
+# other pair its text, a task checkbox stays, and a bracket a backslash escapes
+# is literal (2.4); renders a numeric character reference as its character and
+# a named one as a character that is no letter or digit (2.5; no named
+# reference renders as an ASCII letter or digit); and takes out a run of `*`
+# between two letters or digits, which emphasis may hold inside a word (6.2).
+# A second rendered reading also takes out every named reference, every
+# numeric one beyond ASCII and every byte outside ASCII, so a word a renderer
+# shows whole across an invisible character (a soft hyphen, a zero-width
+# space) is read whole; it can only add a label. vf_finding_heading <line> is true when the text of an
+@@END
+@@OLD
+# vf_block_start <text> is true when a line, without its indentation, starts a
+# block that ends a list item's paragraph: a list item with text (an ordered
+# one only when numbered 1, the only number that may interrupt a paragraph),
+# an ATX heading, a block quote, a code fence a renderer opens (a backtick
+# fence's info string holds no backtick), a comment, an HTML block of the
+# other kinds that may interrupt a paragraph (CommonMark 4.6 conditions 1, 3, 4
+# and 5, read by the tracker's own vf_raw_start) or a thematic break. Any other
+# line may continue the paragraph, which is the deny side.
+@@NEW
+# vf_block_start <text> is true when a line, without its indentation, starts a
+# block that ends a paragraph: a list item with text (an ordered one only when
+# numbered 1, the only number that may interrupt a paragraph), an ATX heading,
+# a block quote, a code fence a renderer opens (4.5: three or more backticks
+# whose info string holds no backtick, or three or more tildes), an HTML block
+# of any kind but the seventh, which alone cannot interrupt a paragraph (4.6:
+# conditions 1, 3, 4 and 5 read by the tracker's own vf_raw_start, a comment,
+# and the block-level tag names of condition 6), or a thematic break. Any
+# other line may continue the paragraph, which is the deny side (round 14,
+# O-021). A reader reads a record by paragraph, not only by line, since an
+# inline construct may span lines (6.3, 6.6; round 14, O-018): vf_para <line>,
+# called on every line before quoting is read, joins the line to the paragraph
+# before it unless the line is blank, starts a block, follows an ATX heading
+# or sits in a code fence, and reads the line without its block-quote markers;
+# vf_para_label names the Class or Severity line a continuation line makes of
+# a paragraph whose first line carried no label, once per paragraph, or is "".
+@@END
+@@OLD
+function vf_label_links(s,   out, i, j, k, m) {
+  out = ""
+  while (match(s, /!?\[[^]]*\]/)) {
+    i = RSTART; j = RSTART + RLENGTH; m = 0
+    if (substr(s, j, 1) == "(") m = vf_label_dest(s, j)
+    else if (substr(s, j, 1) == "[" && (k = index(substr(s, j + 1), "]"))) m = j + k + 1
+    if (m) {out = out substr(s, 1, i - 1) (substr(s, i, 1) == "!" ? "" : substr(s, i, j - i)); s = substr(s, m)}
+    else {out = out substr(s, 1, j - 1); s = substr(s, j)}
+  }
+  return out s
+}
+function vf_label_render(s,   t, n) {
+  s = vf_label_html(s)
+  gsub(/\[\^[^]]*\]/, "\001", s)
+  s = vf_label_links(s)
+  while (match(s, /&#[0-9]+;|&#[xX][0-9A-Fa-f]+;/)) {
+    t = substr(s, RSTART + 2, RLENGTH - 3)
+    n = (t ~ /^[xX]/) ? vf_label_hex(substr(t, 2)) : t + 0
+    s = substr(s, 1, RSTART - 1) ((n > 32 && n < 127) ? sprintf("%c", n) : "\001") substr(s, RSTART + RLENGTH)
+  }
+  gsub(/&[A-Za-z][A-Za-z0-9]*;/, "\001", s)
+  return s
+}
+function vf_label(s, labels,   w) {
+  w = vf_label_word(vf_label_render(s), labels)
+  return (w != "") ? w : vf_label_word(s, labels)
+}
+@@NEW
+function vf_label_links(s,   pos, i, j, k, m, b, lb, inner) {
+  gsub(/\\[][]/, "\003", s)
+  pos = 1
+  while (match(substr(s, pos), /!?\[[^][]*\]/)) {
+    i = pos + RSTART - 1; j = i + RLENGTH; b = (substr(s, i, 1) == "!"); lb = i + b
+    inner = substr(s, lb + 1, j - lb - 2); m = 0
+    if (substr(s, j, 1) == "(") m = vf_label_dest(s, j)
+    else if (substr(s, j, 1) == "[" && (k = index(substr(s, j + 1), "]"))) m = j + k + 1
+    if (m) {s = substr(s, 1, i - 1) (b ? "\001" : "\001" inner "\001") substr(s, m); pos = 1; continue}
+    if (!b && inner ~ /^[ xX]$/) {pos = j; continue}
+    s = substr(s, 1, lb - 1) "\001" inner "\001" substr(s, j); pos = 1
+  }
+  return s
+}
+function vf_label_render(s, hide,   t, n) {
+  s = vf_label_html(s)
+  gsub(/\[\^[^]]*\]/, "\001", s)
+  s = vf_label_links(s)
+  while (match(s, /&#[0-9]+;|&#[xX][0-9A-Fa-f]+;/)) {
+    t = substr(s, RSTART + 2, RLENGTH - 3)
+    n = (t ~ /^[xX]/) ? vf_label_hex(substr(t, 2)) : t + 0
+    s = substr(s, 1, RSTART - 1) ((n > 32 && n < 127) ? sprintf("%c", n) : ((hide && n > 126) ? "" : "\001")) substr(s, RSTART + RLENGTH)
+  }
+  gsub(/&[A-Za-z][A-Za-z0-9]*;/, hide ? "" : "\001", s)
+  while (match(s, /[A-Za-z0-9]\*+[A-Za-z0-9]/)) s = substr(s, 1, RSTART) substr(s, RSTART + RLENGTH - 1)
+  if (hide) gsub(/[\200-\377]/, "", s)
+  return s
+}
+function vf_label(s, labels,   w) {
+  w = vf_label_word(vf_label_render(s, 0), labels)
+  if (w == "") w = vf_label_word(vf_label_render(s, 1), labels)
+  return (w != "") ? w : vf_label_word(s, labels)
+}
+@@END
+@@OLD
+  if (t ~ ("^" b b b "[^" b "]*$")) return 1
+  return (t ~ /^(\*[ \t]*\*[ \t]*\*[* \t]*|-[ \t]*-[ \t]*-[- \t]*|_[ \t]*_[ \t]*_[_ \t]*)$/)
+}
+'
+@@NEW
+  if (t ~ ("^" b b b b "*[^" b "]*$")) return 1
+  if (tolower(t) ~ /^<\/?(address|article|aside|base|basefont|blockquote|body|caption|center|col|colgroup|dd|details|dialog|dir|div|dl|dt|fieldset|figcaption|figure|footer|form|frame|frameset|h1|h2|h3|h4|h5|h6|head|header|hr|html|iframe|legend|li|link|main|menu|menuitem|nav|noframes|ol|optgroup|option|p|param|search|section|summary|table|tbody|td|tfoot|th|thead|title|tr|track|ul)([ \t>]|\/>|$)/) return 1
+  return (t ~ /^(\*[ \t]*\*[ \t]*\*[* \t]*|-[ \t]*-[ \t]*-[- \t]*|_[ \t]*_[ \t]*_[_ \t]*)$/)
+}
+function vf_para(s,   t) {
+  t = s; sub(/^[ \t]*(>[ \t]*)*/, "", t)
+  if (fenced || t ~ /^[[:space:]]*$/) {vf_para_text = vf_para_line = vf_para_first = ""; vf_para_cont = vf_para_open = 0; return}
+  vf_para_cont = (vf_para_open && !vf_block_start(t))
+  if (vf_para_cont) vf_para_text = vf_para_text " " t
+  else {vf_para_text = t; vf_para_line = s; vf_para_first = "?"}
+  vf_para_open = (t !~ /^#+([ \t]|$)/)
+}
+function vf_para_label(   l) {
+  if (!vf_para_cont) return ""
+  if (vf_para_first == "?") vf_para_first = vf_label(vf_para_line, "class severity")
+  if (vf_para_first != "") return ""
+  l = vf_label(vf_para_text, "class severity")
+  if (l == "") return ""
+  vf_para_first = "refused"
+  return (l == "class") ? "Class line" : "Severity line"
+}
+'
+@@END
+@@OLD
+    # reads that line as a field line of its own (T030o44 review F10). Every finding needs one readable Class and one readable Severity,
+@@NEW
+    # reads that line as a field line of its own (T030o44 review F10). A label
+    # is read by paragraph as well as by line (vf_para), so a line that
+    # continues a paragraph whose joined text carries a label its first line
+    # did not is read as a field line this grammar cannot read, quoted or not
+    # (round 14, O-018). Every finding needs one readable Class and one readable Severity,
+@@END
+@@OLD
+      vf_quoted($0) {shape=vf_record($0); if (shape != "" && (id != "" || shape == "Finding heading")) bad("quoted content carries a " shape); next}
+@@NEW
+      {vf_para($0)}
+      vf_quoted($0) {
+        shape=vf_record($0); if (shape == "" && id != "") shape=vf_para_label()
+        if (shape != "" && (id != "" || shape == "Finding heading")) bad("quoted content carries a " shape)
+        next
+      }
+@@END
+@@OLD
+      {
+        field=fieldname($0)
+        if (field != "class" && field != "severity") {if ($0 ~ /[A-Za-z][A-Za-z0-9]*-[0-9]/) idseen=1; next}
+        strict=(field == "class") ? ($0 ~ /^[ ]*-[[:space:]]+\*\*Class:\*\*/) : ($0 ~ /^[ ]*-[[:space:]]+\*\*Severity:\*\*/)
+@@NEW
+      {
+        pl=vf_para_label(); field=fieldname($0); pfield=0
+        if (field == "" && pl != "") {field=(pl == "Class line") ? "class" : "severity"; pfield=1}
+        if (field != "class" && field != "severity") {if ($0 ~ /[A-Za-z][A-Za-z0-9]*-[0-9]/) idseen=1; next}
+        strict=!pfield && ((field == "class") ? ($0 ~ /^[ ]*-[[:space:]]+\*\*Class:\*\*/) : ($0 ~ /^[ ]*-[[:space:]]+\*\*Severity:\*\*/))
+@@END
+@@OLD
+    vf_quoted($0) {
+      # Quoting does not exempt a line from the after-marker rule: a fenced,
+@@NEW
+    {vf_para($0)}
+    vf_quoted($0) {
+      if (active && $0 !~ /^[[:space:]]*$/) body=1
+      # Quoting does not exempt a line from the after-marker rule: a fenced,
+@@END
+@@OLD
+      # quoted line that carries a record of it, is refused by name, never
+      # skipped. A quoted field line outside any finding attaches to none.
+      else if (style=="canonical" && active && (shape=vf_record($0)) != "" && (fid != "" || shape == "Finding heading")) err("quoted content carries a " shape)
+      next
+    }
+@@NEW
+      # quoted line that carries a record of it, or whose paragraph does
+      # (round 14, O-018), is refused by name, never skipped. A quoted field
+      # line outside any finding attaches to none.
+      else if (style=="canonical" && active) {
+        shape=vf_record($0); if (shape == "" && fid != "") shape=vf_para_label()
+        if (shape != "" && (fid != "" || shape == "Finding heading")) err("quoted content carries a " shape)
+      }
+      next
+    }
+@@END
+@@OLD
+      flush(); n=substr($0, 10); active=1; style="canonical"; declared=date=verdict=utc=source=floor=cursec=suppressed=""; ended=counted=blockers=minors=downgraded=0; next
+@@NEW
+      flush(); n=substr($0, 10); active=1; style="canonical"; declared=date=verdict=utc=source=floor=cursec=suppressed=""; ended=counted=blockers=minors=downgraded=body=0; next
+@@END
+@@OLD
+    /^# (Opponent review|Reality Check)/ {
+      if (ended) {err("content after the round completion marker"); next}
+      if (!active) {n=last+1; active=1; style="legacy"; declared=date=verdict=utc=source=floor=suppressed=""; ended=counted=blockers=minors=downgraded=0}
+      else if (!declared && !utc) style="legacy"
+      next
+    }
+@@NEW
+    # The style of a round decides which rules judge its lines, so it is decided
+    # before the round has a body (round 14, O-020). The round heading makes a
+    # round canonical, a report title read before its Round and Timestamp lines
+    # makes it legacy, and a Timestamp line makes it canonical; once the round
+    # has a body -- any non-blank line but its heading, its title and its
+    # identity fields -- a title that would make it legacy, or a Timestamp
+    # line that would make it canonical, is refused by name. Otherwise the
+    # lines before the switch were judged by the rules of one style while the
+    # round was sealed by the other: a title and a late Timestamp skipped every
+    # canonical rule of finding() and of the record readers, the count
+    # included, while flush() judged the round canonical.
+    /^# (Opponent review|Reality Check)/ {
+      if (ended) {err("content after the round completion marker"); next}
+      if (!active) {n=last+1; active=1; style="legacy"; declared=date=verdict=utc=source=floor=suppressed=""; ended=counted=blockers=minors=downgraded=body=0}
+      else if (!declared && !utc) {if (style=="canonical" && body) err("a report title after the body of a canonical round"); style="legacy"}
+      next
+    }
+@@END
+@@OLD
+      if(key=="**Timestamp") {utc=v; date=substr(v,1,10); style="canonical"}
+@@NEW
+      if(key=="**Timestamp") {if (style=="legacy" && body) err("a Timestamp line after the body of a round its title made legacy"); utc=v; date=substr(v,1,10); style="canonical"}
+@@END
+@@OLD
+      if(key=="**Verdict") verdict=v
+      next
+    }
+    /^<!-- gate-round-end:/ {
+@@NEW
+      if(key=="**Verdict") verdict=v
+      next
+    }
+    active && $0 !~ /^[[:space:]]*$/ {body=1}
+    /^<!-- gate-round-end:/ {
+@@END
+@@OLD
+      lbl=vf_label($0, "class severity")
+      if (lbl != "") err("a " (lbl == "class" ? "Class" : "Severity") " line this grammar cannot read in finding " fid)
+@@NEW
+      pl=vf_para_label(); lbl=vf_label($0, "class severity")
+      if (lbl == "" && pl != "") lbl=(pl == "Class line") ? "class" : "severity"
+      if (lbl != "") err("a " (lbl == "class" ? "Class" : "Severity") " line this grammar cannot read in finding " fid)
+@@END

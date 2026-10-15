@@ -1,0 +1,29 @@
+== control: the plain manifest refuses the CLEARED round (rc=3) in every kit
+  control: PRE rc=3 | REV rc=3 | CUR C rc=3 CUR UTF-8 rc=3
+== R2-F2: spellings the pass drops in silence (rc=0 = the CLEARED round sealed)
+  lower-finding: PRE rc=0 | REV rc=0 | CUR C rc=0 CUR UTF-8 rc=0
+  leading-space: PRE rc=0 | REV rc=0 | CUR C rc=0 CUR UTF-8 rc=0
+  word-before: PRE rc=0 | REV rc=0 | CUR C rc=0 CUR UTF-8 rc=0
+  bom: PRE rc=0 | REV rc=0 | CUR C rc=0 CUR UTF-8 rc=0
+  nbsp-before-hashes: PRE rc=0 | REV rc=0 | CUR C rc=0 CUR UTF-8 rc=0
+  crlf: PRE rc=0 | REV rc=0 | CUR C rc=0 CUR UTF-8 rc=0
+  severity-unbolded: PRE rc=0 | REV rc=0 | CUR C rc=0 CUR UTF-8 rc=0
+  unclosed-fence: PRE rc=3 | REV rc=3 | CUR C rc=3 CUR UTF-8 rc=3
+== R2-F3: plausible manifests the current pass refuses (rc=3 in CUR where PRE/REV read rc=3 via the tier guard is not the point: see the diagnostic)
+  o017-block: PRE rc=0 | REV rc=0 | CUR rc=3 manifest line 12: a Class or Severity line this grammar cannot read:   - **The inputs.** T
+  trailing-section: PRE rc=0 | REV rc=0 | CUR rc=3 manifest line 6: a Class or Severity line this grammar cannot read: - T030o43 fixes the **
+  prose-mention: PRE rc=0 | REV rc=0 | CUR rc=3 manifest line 4: a Class or Severity line this grammar cannot read: - **Scenario:** the **
+== R2-F4: a U+00A0-only value, refused pre-delta under en_US.UTF-8, read as present now
+  finding Scenario U+00A0: PRE UTF-8 rc=3 | CUR C rc=0 UTF-8 rc=0
+  legacy Evidence U+00A0 PRE C: exit=0 sound — every ticked box traces to real evidence
+  legacy Evidence U+00A0 PRE en_US.UTF-8: exit=1 1 error(s), 0 warning(s)
+  legacy Evidence U+00A0 CUR C: exit=0 sound — every ticked box traces to real evidence
+  legacy Evidence U+00A0 CUR en_US.UTF-8: exit=0 sound — every ticked box traces to real evidence
+== R2-F5: an artifact name after a U+00A0 (shots/a.png exists)
+  artifact PRE C: exit=0 
+  artifact PRE en_US.UTF-8: exit=0 
+  artifact CUR C: exit=1 names artifact 'screenshot shots/a.png'
+  artifact CUR en_US.UTF-8: exit=1 names artifact 'screenshot shots/a.png'
+== R2-F6: an empty verification_contract value
+  spec-evidence.sh: exit=0 sound — every ticked box traces to real evidence
+  vf_bindings: exit=1 error: vf_bindings requires spec.md and plan.md

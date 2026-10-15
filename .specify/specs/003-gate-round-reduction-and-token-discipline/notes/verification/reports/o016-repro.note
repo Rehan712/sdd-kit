@@ -1,0 +1,17 @@
+o016-repro.rc reads 1 on ONE line, `FAIL live worktree unchanged`, and every O-016
+expectation passed (A1 identity, A2 suite verdicts, B end to end).
+
+Cause: the script's live tripwire hashed the WHOLE `git status --porcelain -uall`,
+which includes <spec>/notes/verification/reports/. While it ran, the invoker wrote
+o016-measure.sh, o016-measure.log, o016-live-midrun.txt and later this script's own
+.log/.rc there, so the digest moved by the receipts alone. That is the invoker's
+tripwire scope, not a write by a suite into the live tree.
+
+Proper check (o016-live-check.sh, receipt o016-live-check-repro.{log,rc}, exit 0):
+- git status --porcelain --ignored -uall outside <spec>/notes/verification/ equals the
+  mid-run baseline 66ef051e... recorded at 2026-09-26T19:45:53Z (o016-live-midrun.txt);
+- the source identity is still 37cfccef3868bfd3939995882b5383d2f691b811cbb0dd0a754fe4bee68f16e1,
+  which the entry audit recorded before either script started.
+(Its third section lists the historical untracked ledger records under notes/verification/;
+it is informational and decides nothing.) o016-measure.sh has the same tripwire scope, and
+the same check is run for it.

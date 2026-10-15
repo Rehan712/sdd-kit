@@ -1,0 +1,23 @@
+  | live worktree porcelain digest before: 82131a3c83ec467554b52efe65d981545c82a3897228c63ba6c112abbaf1255c
+PASS live enumeration rc (want=0 got=0)
+PASS copy extraction rc (want=0 got=0)
+PASS copy committed (want=0 got=0)
+PASS baseline snapshot rc (want=0 got=0)
+== F3 an exported CDPATH, or a BASH_ENV file, decides the reuse-checked commands
+PASS F3 baseline shellcheck.sh (want=0 got=0)
+FAIL F3 identity unchanged under CDPATH=. (want=38384dd4a9d9c36baf141aa4fb90eb9f650900b9f5e7f58ccd5442e22a35b544 got=)
+PASS F3 CDPATH=. bash tests/shellcheck.sh fails (want=2 got=2)
+PASS F3 on enumeration (want=1 got=1)
+PASS F3 the pre-repair ShellCheck command under CDPATH=. passes (regression) (want=0 got=0)
+  | CDPATH=. bash tests/run.sh zz-none rc=1 (pre-existing TESTS_DIR derivation)
+PASS F3 a BASH_ENV file setting an unexported CDPATH fails shellcheck.sh (want=2 got=2)
+  | a BASH_ENV file defining a git function, under the capture harness's own bash -o pipefail -c: rc=2
+PASS F3 harness class: BASH_ENV code runs in every captured command (want=1 got=1)
+== F4 fixtures inherit git repo-local environment and write to a foreign index
+PASS F4 test_instruction_contracts still passes (want=0 got=0)
+PASS F4 the foreign index was rewritten by the suite (want=1 got=1)
+  | foreign index now lists fixture paths: 4
+PASS F4 the copy own index untouched (want= got=)
+  | live worktree porcelain digest after: 3323f009909968e841f374614061b3ea9643dd93b2be6bd254639820c14fb338
+FAIL live worktree unchanged (want=82131a3c83ec467554b52efe65d981545c82a3897228c63ba6c112abbaf1255c got=3323f009909968e841f374614061b3ea9643dd93b2be6bd254639820c14fb338)
+verify-c failures=2

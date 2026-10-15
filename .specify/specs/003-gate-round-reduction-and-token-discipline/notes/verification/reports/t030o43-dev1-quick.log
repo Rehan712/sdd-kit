@@ -1,0 +1,18 @@
+PASS shellcheck exit 0
+PASS shellcheck left its copy unchanged
+  | 
+PASS test-verification exit 0
+PASS test-verification left its copy unchanged
+  |   -- 3/3 passed 
+FAIL test-gate-contracts exit 0 (want=0 got=1)
+PASS test-gate-contracts left its copy unchanged
+  |   FAIL test_instruction_contracts   -- 17/18 passed 
+PASS test-spec-gate exit 0
+PASS test-spec-gate left its copy unchanged
+  |   -- 8/8 passed 
+PASS test-sdd-analyze exit 0
+PASS test-sdd-analyze left its copy unchanged
+  |   -- 19/19 passed 
+PASS live worktree status outside notes/verification/ unchanged
+t030o43-dev quick failures=1
+kept: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/cf8105b0-c4fe-410c-afe8-3a2a37d75d11/scratchpad/t030o43-dev-quick

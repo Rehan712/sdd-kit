@@ -1,0 +1,321 @@
+host: Darwin 25.4.0; bash on PATH: GNU bash, version 3.2.57(1)-release (arm64-apple-darwin25); TMPDIR=/private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/e2d77d58-9c99-46f9-9615-671a691952d5/scratchpad/r19-repro/tmp/
+start 2026-10-14T17:10:12Z
+PASS CUR: the four files hash as r18-edits/post-apply-3
+PASS PRE: r18-session.diff reverses cleanly
+PASS PRE: the four files hash as r18-edits/pre-apply
+== direct: G-042 at minor (manifest) or a new G-050 at minor (canonical), a blank line, then the case
+-- u1-url-br (o18)
+  | marked:      <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<p>Note <a href="http://a.b/%60">http://a.b/`</a><br>Severity: data-loss, tick: `.</p>~
+  | markdown-it: <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<p>Note http://a.b/<code>&lt;br&gt;Severity: data-loss, tick: </code>.</p>~
+PASS O-018 M u1-url-br cur C: sealed in silence (rc 0)
+PASS O-018 M u1-url-br cur C: stderr empty
+PASS O-018 K u1-url-br cur C: sealed in silence (rc 0)
+PASS O-018 K u1-url-br cur C: stderr empty
+PASS O-018 K u1-url-br cur C: G-050 recorded at minor
+PASS O-018 M u1-url-br cur en_US.UTF-8: sealed in silence (rc 0)
+PASS O-018 M u1-url-br cur en_US.UTF-8: stderr empty
+PASS O-018 K u1-url-br cur en_US.UTF-8: sealed in silence (rc 0)
+PASS O-018 K u1-url-br cur en_US.UTF-8: stderr empty
+PASS O-018 K u1-url-br cur en_US.UTF-8: G-050 recorded at minor
+  | u1-url-br pre C: manifest rc=0  | canonical rc=0 
+  | u1-url-br pre en_US.UTF-8: manifest rc=0  | canonical rc=0 
+-- u2-https-br (o18)
+  | marked:      <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<p>Note <a href="https://a.b/x%60">https://a.b/x`</a><br>Severity: data-loss, tick: `.</p>~
+  | markdown-it: <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<p>Note https://a.b/x<code>&lt;br&gt;Severity: data-loss, tick: </code>.</p>~
+PASS O-018 M u2-https-br cur C: sealed in silence (rc 0)
+PASS O-018 M u2-https-br cur C: stderr empty
+PASS O-018 K u2-https-br cur C: sealed in silence (rc 0)
+PASS O-018 K u2-https-br cur C: stderr empty
+PASS O-018 K u2-https-br cur C: G-050 recorded at minor
+PASS O-018 M u2-https-br cur en_US.UTF-8: sealed in silence (rc 0)
+PASS O-018 M u2-https-br cur en_US.UTF-8: stderr empty
+PASS O-018 K u2-https-br cur en_US.UTF-8: sealed in silence (rc 0)
+PASS O-018 K u2-https-br cur en_US.UTF-8: stderr empty
+PASS O-018 K u2-https-br cur en_US.UTF-8: G-050 recorded at minor
+  | u2-https-br pre C: manifest rc=0  | canonical rc=0 
+  | u2-https-br pre en_US.UTF-8: manifest rc=0  | canonical rc=0 
+-- u3-www-br (o18)
+  | marked:      <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<p>Note <a href="http://www.a.b/x%60">www.a.b/x`</a><br>Severity: data-loss, tick: `.</p>~
+  | markdown-it: <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<p>Note www.a.b/x<code>&lt;br&gt;Severity: data-loss, tick: </code>.</p>~
+PASS O-018 M u3-www-br cur C: sealed in silence (rc 0)
+PASS O-018 M u3-www-br cur C: stderr empty
+PASS O-018 K u3-www-br cur C: sealed in silence (rc 0)
+PASS O-018 K u3-www-br cur C: stderr empty
+PASS O-018 K u3-www-br cur C: G-050 recorded at minor
+PASS O-018 M u3-www-br cur en_US.UTF-8: sealed in silence (rc 0)
+PASS O-018 M u3-www-br cur en_US.UTF-8: stderr empty
+PASS O-018 K u3-www-br cur en_US.UTF-8: sealed in silence (rc 0)
+PASS O-018 K u3-www-br cur en_US.UTF-8: stderr empty
+PASS O-018 K u3-www-br cur en_US.UTF-8: G-050 recorded at minor
+  | u3-www-br pre C: manifest rc=0  | canonical rc=0 
+  | u3-www-br pre en_US.UTF-8: manifest rc=0  | canonical rc=0 
+-- u4-ftp-pre (o18)
+  | marked:      <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<p>Note <a href="ftp://a.b/%60">ftp://a.b/`</a><pre>Severity: data-loss</pre>`</p>~
+  | markdown-it: <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<p>Note ftp://a.b/<code>&lt;pre&gt;Severity: data-loss&lt;/pre&gt;</code></p>~
+PASS O-018 M u4-ftp-pre cur C: sealed in silence (rc 0)
+PASS O-018 M u4-ftp-pre cur C: stderr empty
+PASS O-018 K u4-ftp-pre cur C: sealed in silence (rc 0)
+PASS O-018 K u4-ftp-pre cur C: stderr empty
+PASS O-018 K u4-ftp-pre cur C: G-050 recorded at minor
+PASS O-018 M u4-ftp-pre cur en_US.UTF-8: sealed in silence (rc 0)
+PASS O-018 M u4-ftp-pre cur en_US.UTF-8: stderr empty
+PASS O-018 K u4-ftp-pre cur en_US.UTF-8: sealed in silence (rc 0)
+PASS O-018 K u4-ftp-pre cur en_US.UTF-8: stderr empty
+PASS O-018 K u4-ftp-pre cur en_US.UTF-8: G-050 recorded at minor
+  | u4-ftp-pre pre C: manifest rc=0  | canonical rc=0 
+  | u4-ftp-pre pre en_US.UTF-8: manifest rc=0  | canonical rc=0 
+-- f1-shortcut-br (o18)
+  | marked:      <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<p>Note <a href="/u">a`b</a><br>Severity: data-loss, tick: `.</p>~
+  | markdown-it: <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<p>Note [a<code>b]&lt;br&gt;Severity: data-loss, tick: </code>.</p>~
+PASS O-018 M f1-shortcut-br cur C: sealed in silence (rc 0)
+PASS O-018 M f1-shortcut-br cur C: stderr empty
+PASS O-018 K f1-shortcut-br cur C: sealed in silence (rc 0)
+PASS O-018 K f1-shortcut-br cur C: stderr empty
+PASS O-018 K f1-shortcut-br cur C: G-050 recorded at minor
+PASS O-018 M f1-shortcut-br cur en_US.UTF-8: sealed in silence (rc 0)
+PASS O-018 M f1-shortcut-br cur en_US.UTF-8: stderr empty
+PASS O-018 K f1-shortcut-br cur en_US.UTF-8: sealed in silence (rc 0)
+PASS O-018 K f1-shortcut-br cur en_US.UTF-8: stderr empty
+PASS O-018 K f1-shortcut-br cur en_US.UTF-8: G-050 recorded at minor
+  | f1-shortcut-br pre C: manifest rc=0  | canonical rc=0 
+  | f1-shortcut-br pre en_US.UTF-8: manifest rc=0  | canonical rc=0 
+-- f2-collapsed-br (o18)
+  | marked:      <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<p>Note <a href="/u">a`b</a><br>Severity: data-loss, tick: `.</p>~
+  | markdown-it: <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<p>Note [a<code>b][]&lt;br&gt;Severity: data-loss, tick: </code>.</p>~
+PASS O-018 M f2-collapsed-br cur C: sealed in silence (rc 0)
+PASS O-018 M f2-collapsed-br cur C: stderr empty
+PASS O-018 K f2-collapsed-br cur C: sealed in silence (rc 0)
+PASS O-018 K f2-collapsed-br cur C: stderr empty
+PASS O-018 K f2-collapsed-br cur C: G-050 recorded at minor
+PASS O-018 M f2-collapsed-br cur en_US.UTF-8: sealed in silence (rc 0)
+PASS O-018 M f2-collapsed-br cur en_US.UTF-8: stderr empty
+PASS O-018 K f2-collapsed-br cur en_US.UTF-8: sealed in silence (rc 0)
+PASS O-018 K f2-collapsed-br cur en_US.UTF-8: stderr empty
+PASS O-018 K f2-collapsed-br cur en_US.UTF-8: G-050 recorded at minor
+  | f2-collapsed-br pre C: manifest rc=0  | canonical rc=0 
+  | f2-collapsed-br pre en_US.UTF-8: manifest rc=0  | canonical rc=0 
+-- f3-image-br (o18)
+  | marked:      <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<p>Note <img src="/u" alt="a`b"><br>Severity: data-loss, tick: `.</p>~
+  | markdown-it: <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<p>Note ![a<code>b]&lt;br&gt;Severity: data-loss, tick: </code>.</p>~
+PASS O-018 M f3-image-br cur C: sealed in silence (rc 0)
+PASS O-018 M f3-image-br cur C: stderr empty
+PASS O-018 K f3-image-br cur C: sealed in silence (rc 0)
+PASS O-018 K f3-image-br cur C: stderr empty
+PASS O-018 K f3-image-br cur C: G-050 recorded at minor
+PASS O-018 M f3-image-br cur en_US.UTF-8: sealed in silence (rc 0)
+PASS O-018 M f3-image-br cur en_US.UTF-8: stderr empty
+PASS O-018 K f3-image-br cur en_US.UTF-8: sealed in silence (rc 0)
+PASS O-018 K f3-image-br cur en_US.UTF-8: stderr empty
+PASS O-018 K f3-image-br cur en_US.UTF-8: G-050 recorded at minor
+  | f3-image-br pre C: manifest rc=0  | canonical rc=0 
+  | f3-image-br pre en_US.UTF-8: manifest rc=0  | canonical rc=0 
+-- t1-table (o25)
+  | marked:      <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<table>~<thead>~<tr>~<th>Step</th>~<th>Result</th>~</tr>~</thead>~<tbody><tr>~<td>ran</td>~<td><strong>Severity:</strong> data-loss</td>~</tr>~</tbody></table>~
+  | markdown-it: <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<table>~<thead>~<tr>~<th>Step</th>~<th>Result</th>~</tr>~</thead>~<tbody>~<tr>~<td>ran</td>~<td><strong>Severity:</strong> data-loss</td>~</tr>~</tbody>~</table>~
+PASS O-025 M t1-table cur C: sealed in silence (rc 0)
+PASS O-025 M t1-table cur C: stderr empty
+PASS O-025 K t1-table cur C: sealed in silence (rc 0)
+PASS O-025 K t1-table cur C: stderr empty
+PASS O-025 K t1-table cur C: G-050 recorded at minor
+PASS O-025 M t1-table cur en_US.UTF-8: sealed in silence (rc 0)
+PASS O-025 M t1-table cur en_US.UTF-8: stderr empty
+PASS O-025 K t1-table cur en_US.UTF-8: sealed in silence (rc 0)
+PASS O-025 K t1-table cur en_US.UTF-8: stderr empty
+PASS O-025 K t1-table cur en_US.UTF-8: G-050 recorded at minor
+  | t1-table pre C: manifest rc=0  | canonical rc=0 
+  | t1-table pre en_US.UTF-8: manifest rc=0  | canonical rc=0 
+-- t2-table-item (o25)
+  | marked:      <ul>~<li><p><strong>Severity:</strong> minor</p>~</li>~<li><p>Steps:</p>~<table>~<thead>~<tr>~<th align="left">Step</th>~<th align="right">Result</th>~</tr>~</thead>~<tbody><tr>~<td align="left">ran</td>~<td align="right"><strong>Severity:</strong> data-loss</td>~</tr>~</tbody></table>~</li>~</ul>~
+  | markdown-it: <ul>~<li>~<p><strong>Severity:</strong> minor</p>~</li>~<li>~<p>Steps:</p>~<table>~<thead>~<tr>~<th style="text-align:left">Step</th>~<th style="text-align:right">Result</th>~</tr>~</thead>~<tbody>~<tr>~<td style="text-align:left">ran</td>~<td style="text-align:right"><strong>Severity:</strong> data-loss</td>~</tr>~</tbody>~</table>~</li>~</ul>~
+PASS O-025 M t2-table-item cur C: sealed in silence (rc 0)
+PASS O-025 M t2-table-item cur C: stderr empty
+PASS O-025 K t2-table-item cur C: sealed in silence (rc 0)
+PASS O-025 K t2-table-item cur C: stderr empty
+PASS O-025 K t2-table-item cur C: G-050 recorded at minor
+PASS O-025 M t2-table-item cur en_US.UTF-8: sealed in silence (rc 0)
+PASS O-025 M t2-table-item cur en_US.UTF-8: stderr empty
+PASS O-025 K t2-table-item cur en_US.UTF-8: sealed in silence (rc 0)
+PASS O-025 K t2-table-item cur en_US.UTF-8: stderr empty
+PASS O-025 K t2-table-item cur en_US.UTF-8: G-050 recorded at minor
+  | t2-table-item pre C: manifest rc=0  | canonical rc=0 
+  | t2-table-item pre en_US.UTF-8: manifest rc=0  | canonical rc=0 
+-- c0-br (control=raw HTML outside a code span in finding G-050)
+  | marked:      <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<p>Note <br>Severity: data-loss.</p>~
+  | markdown-it: <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<p>Note <br>Severity: data-loss.</p>~
+PASS control M c0-br cur C: refused (rc 3)
+  | manifest: manifest line 7: raw HTML outside a code span in finding G-042: Note <br>Severity: data-loss.
+PASS control K c0-br cur C: refused (rc 3)
+PASS control K c0-br cur C: by name
+PASS control M c0-br cur en_US.UTF-8: refused (rc 3)
+  | manifest: manifest line 7: raw HTML outside a code span in finding G-042: Note <br>Severity: data-loss.
+PASS control K c0-br cur en_US.UTF-8: refused (rc 3)
+PASS control K c0-br cur en_US.UTF-8: by name
+  | c0-br pre C: manifest rc=3 manifest line 7: raw HTML outside a code span in finding G-042: Note <br>Severity: data-loss. | canonical rc=3 line 16: raw HTML outside a code span in finding G-050; reconcile canonical records
+  | c0-br pre en_US.UTF-8: manifest rc=3 manifest line 7: raw HTML outside a code span in finding G-042: Note <br>Severity: data-loss. | canonical rc=3 line 16: raw HTML outside a code span in finding G-050; reconcile canonical records
+-- c1-one-column (control=a Severity line this grammar cannot read in finding G-050)
+  | marked:      <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<table>~<thead>~<tr>~<th>Result</th>~</tr>~</thead>~<tbody><tr>~<td><strong>Severity:</strong> data-loss</td>~</tr>~</tbody></table>~
+  | markdown-it: <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<table>~<thead>~<tr>~<th>Result</th>~</tr>~</thead>~<tbody>~<tr>~<td><strong>Severity:</strong> data-loss</td>~</tr>~</tbody>~</table>~
+PASS control M c1-one-column cur C: refused (rc 3)
+  | manifest: manifest line 9: a second Severity line in finding G-042: | **Severity:** data-loss |
+PASS control K c1-one-column cur C: refused (rc 3)
+PASS control K c1-one-column cur C: by name
+PASS control M c1-one-column cur en_US.UTF-8: refused (rc 3)
+  | manifest: manifest line 9: a second Severity line in finding G-042: | **Severity:** data-loss |
+PASS control K c1-one-column cur en_US.UTF-8: refused (rc 3)
+PASS control K c1-one-column cur en_US.UTF-8: by name
+  | c1-one-column pre C: manifest rc=3 manifest line 9: a second Severity line in finding G-042: | **Severity:** data-loss | | canonical rc=3 line 18: a Severity line this grammar cannot read in finding G-050; reconcile canonical records
+  | c1-one-column pre en_US.UTF-8: manifest rc=3 manifest line 9: a second Severity line in finding G-042: | **Severity:** data-loss | | canonical rc=3 line 18: a Severity line this grammar cannot read in finding G-050; reconcile canonical records
+-- c2-td (control=raw HTML outside a code span in finding G-050)
+  | marked:      <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<p>Note <td><strong>Severity:</strong> data-loss</td></p>~
+  | markdown-it: <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<p>Note <td><strong>Severity:</strong> data-loss</td></p>~
+PASS control M c2-td cur C: refused (rc 3)
+  | manifest: manifest line 7: raw HTML outside a code span in finding G-042: Note <td>**Severity:** data-loss</td>
+PASS control K c2-td cur C: refused (rc 3)
+PASS control K c2-td cur C: by name
+PASS control M c2-td cur en_US.UTF-8: refused (rc 3)
+  | manifest: manifest line 7: raw HTML outside a code span in finding G-042: Note <td>**Severity:** data-loss</td>
+PASS control K c2-td cur en_US.UTF-8: refused (rc 3)
+PASS control K c2-td cur en_US.UTF-8: by name
+  | c2-td pre C: manifest rc=3 manifest line 7: raw HTML outside a code span in finding G-042: Note <td>**Severity:** data-loss</td> | canonical rc=3 line 16: raw HTML outside a code span in finding G-050; reconcile canonical records
+  | c2-td pre en_US.UTF-8: manifest rc=3 manifest line 7: raw HTML outside a code span in finding G-042: Note <td>**Severity:** data-loss</td> | canonical rc=3 line 16: raw HTML outside a code span in finding G-050; reconcile canonical records
+-- p1-url (positive)
+  | marked:      <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<p>See <a href="https://x.example/a">https://x.example/a</a> and <code>code</code> here.</p>~
+  | markdown-it: <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<p>See https://x.example/a and <code>code</code> here.</p>~
+PASS positive M p1-url cur C: parses (rc 0)
+PASS positive K p1-url cur C: parses (rc 0)
+PASS positive M p1-url cur en_US.UTF-8: parses (rc 0)
+PASS positive K p1-url cur en_US.UTF-8: parses (rc 0)
+  | p1-url pre C: manifest rc=0  | canonical rc=0 
+  | p1-url pre en_US.UTF-8: manifest rc=0  | canonical rc=0 
+-- p2-link-code (positive)
+  | marked:      <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<p>See <a href="u">the <code>x</code> doc</a> and <code>code</code>.</p>~
+  | markdown-it: <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<p>See <a href="u">the <code>x</code> doc</a> and <code>code</code>.</p>~
+PASS positive M p2-link-code cur C: parses (rc 0)
+PASS positive K p2-link-code cur C: parses (rc 0)
+PASS positive M p2-link-code cur en_US.UTF-8: parses (rc 0)
+PASS positive K p2-link-code cur en_US.UTF-8: parses (rc 0)
+  | p2-link-code pre C: manifest rc=0  | canonical rc=0 
+  | p2-link-code pre en_US.UTF-8: manifest rc=0  | canonical rc=0 
+-- p3-ref (positive)
+  | marked:      <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<p>See [the doc][ref] and [x][] here.</p>~
+  | markdown-it: <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<p>See [the doc][ref] and [x][] here.</p>~
+PASS positive M p3-ref cur C: parses (rc 0)
+PASS positive K p3-ref cur C: parses (rc 0)
+PASS positive M p3-ref cur en_US.UTF-8: parses (rc 0)
+PASS positive K p3-ref cur en_US.UTF-8: parses (rc 0)
+  | p3-ref pre C: manifest rc=0  | canonical rc=0 
+  | p3-ref pre en_US.UTF-8: manifest rc=0  | canonical rc=0 
+-- p4-pipe (positive)
+  | marked:      <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<p>It reads a | b and <code>c | d</code> here.</p>~
+  | markdown-it: <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<p>It reads a | b and <code>c | d</code> here.</p>~
+PASS positive M p4-pipe cur C: parses (rc 0)
+PASS positive K p4-pipe cur C: parses (rc 0)
+PASS positive M p4-pipe cur en_US.UTF-8: parses (rc 0)
+PASS positive K p4-pipe cur en_US.UTF-8: parses (rc 0)
+  | p4-pipe pre C: manifest rc=0  | canonical rc=0 
+  | p4-pipe pre en_US.UTF-8: manifest rc=0  | canonical rc=0 
+  | members that also seal on PRE in both passes: u1-url-br:C u1-url-br:en_US.UTF-8 u2-https-br:C u2-https-br:en_US.UTF-8 u3-www-br:C u3-www-br:en_US.UTF-8 u4-ftp-pre:C u4-ftp-pre:en_US.UTF-8 f1-shortcut-br:C f1-shortcut-br:en_US.UTF-8 f2-collapsed-br:C f2-collapsed-br:en_US.UTF-8 f3-image-br:C f3-image-br:en_US.UTF-8 t1-table:C t1-table:en_US.UTF-8 t2-table-item:C t2-table-item:en_US.UTF-8
+== E: end to end through spec-gate.sh on CUR; fixture, floor and reservation built under C each time
+PASS E m-u1-url-br C: fixture, floor and round-1 reservation
+  | E m-u1-url-br C: complete rc=0 round completed gate=opponent round=1 verdict=CLEARED report=6fdee7f8bb467add32d271d1132b2d72f3b170c45d4a75d5eedfc9ecfc44a476
+  |   tally rc=0 opponent rounds=1 blocking=0 minor=1 locations=1 unclassified=0 severity-downgrades=0 
+PASS E m-u1-url-br C: CLEARED sealed (rc 0)
+PASS E m-u1-url-br C: the completion line
+PASS E m-u1-url-br C: the tally counts the finding at minor
+PASS E k-u1-url-br C: fixture, floor and round-1 reservation
+  | E k-u1-url-br C: complete rc=0 round completed gate=opponent round=1 verdict=CLEARED report=c2e9bd5b1d6c71a090e159ccc5485bdda5afdf6b7375fc8192501517e65e5bb1
+  |   tally rc=0 opponent rounds=1 blocking=0 minor=1 locations=1 unclassified=0 severity-downgrades=0 
+PASS E k-u1-url-br C: CLEARED sealed (rc 0)
+PASS E k-u1-url-br C: the completion line
+PASS E k-u1-url-br C: the tally counts the finding at minor
+PASS E m-f1-shortcut-br C: fixture, floor and round-1 reservation
+  | E m-f1-shortcut-br C: complete rc=0 round completed gate=opponent round=1 verdict=CLEARED report=0e15d3e075f0c9ddf7153cf2417cf08e581046eee3f679cf042ec94e7e54a354
+  |   tally rc=0 opponent rounds=1 blocking=0 minor=1 locations=1 unclassified=0 severity-downgrades=0 
+PASS E m-f1-shortcut-br C: CLEARED sealed (rc 0)
+PASS E m-f1-shortcut-br C: the completion line
+PASS E m-f1-shortcut-br C: the tally counts the finding at minor
+PASS E k-f1-shortcut-br C: fixture, floor and round-1 reservation
+  | E k-f1-shortcut-br C: complete rc=0 round completed gate=opponent round=1 verdict=CLEARED report=37622a5b93d7ca84a2e0f150824a523b00825eb7363ea2a2a71de92d646c52b0
+  |   tally rc=0 opponent rounds=1 blocking=0 minor=1 locations=1 unclassified=0 severity-downgrades=0 
+PASS E k-f1-shortcut-br C: CLEARED sealed (rc 0)
+PASS E k-f1-shortcut-br C: the completion line
+PASS E k-f1-shortcut-br C: the tally counts the finding at minor
+PASS E m-t1-table C: fixture, floor and round-1 reservation
+  | E m-t1-table C: complete rc=0 round completed gate=opponent round=1 verdict=CLEARED report=41f122833f173e1a06fdbd2e20008ddf978b96f97ee05755d6a7f50aadb1967c
+  |   tally rc=0 opponent rounds=1 blocking=0 minor=1 locations=1 unclassified=0 severity-downgrades=0 
+PASS E m-t1-table C: CLEARED sealed (rc 0)
+PASS E m-t1-table C: the completion line
+PASS E m-t1-table C: the tally counts the finding at minor
+PASS E k-t1-table C: fixture, floor and round-1 reservation
+  | E k-t1-table C: complete rc=0 round completed gate=opponent round=1 verdict=CLEARED report=671b91e483761cc34fb67fa926477e8183468c0b1435025e138de7c3c791a433
+  |   tally rc=0 opponent rounds=1 blocking=0 minor=1 locations=1 unclassified=0 severity-downgrades=0 
+PASS E k-t1-table C: CLEARED sealed (rc 0)
+PASS E k-t1-table C: the completion line
+PASS E k-t1-table C: the tally counts the finding at minor
+PASS E k-c0 C: fixture, floor and round-1 reservation
+  | E k-c0 C: complete rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/e2d77d58-9c99-46f9-9615-671a691952d5/scratchpad/r19-repro/sb-k-c0-C/r19/
+  |   tally rc=0 opponent rounds=0 blocking=0 minor=0 locations=0 unclassified=0 severity-downgrades=0 
+PASS E k-c0 C: the control is refused (rc 3)
+PASS E k-c0 C: by name
+PASS E m-u1-url-br en_US.UTF-8: fixture, floor and round-1 reservation
+  | E m-u1-url-br en_US.UTF-8: complete rc=0 round completed gate=opponent round=1 verdict=CLEARED report=785a01f180a603e5ac36a44cb50eb37c256271b2195e5f2670911520b09fce88
+  |   tally rc=0 opponent rounds=1 blocking=0 minor=1 locations=1 unclassified=0 severity-downgrades=0 
+PASS E m-u1-url-br en_US.UTF-8: CLEARED sealed (rc 0)
+PASS E m-u1-url-br en_US.UTF-8: the completion line
+PASS E m-u1-url-br en_US.UTF-8: the tally counts the finding at minor
+PASS E k-u1-url-br en_US.UTF-8: fixture, floor and round-1 reservation
+  | E k-u1-url-br en_US.UTF-8: complete rc=0 round completed gate=opponent round=1 verdict=CLEARED report=00af9eca1e6e35b082113e448608d252b7188ce214091a2643ffdf3bde1f13cd
+  |   tally rc=0 opponent rounds=1 blocking=0 minor=1 locations=1 unclassified=0 severity-downgrades=0 
+PASS E k-u1-url-br en_US.UTF-8: CLEARED sealed (rc 0)
+PASS E k-u1-url-br en_US.UTF-8: the completion line
+PASS E k-u1-url-br en_US.UTF-8: the tally counts the finding at minor
+PASS E m-f1-shortcut-br en_US.UTF-8: fixture, floor and round-1 reservation
+  | E m-f1-shortcut-br en_US.UTF-8: complete rc=0 round completed gate=opponent round=1 verdict=CLEARED report=85eb1c7544610e1686940ce5123eeb9e0193c354aa33112acb3099458ef687e9
+  |   tally rc=0 opponent rounds=1 blocking=0 minor=1 locations=1 unclassified=0 severity-downgrades=0 
+PASS E m-f1-shortcut-br en_US.UTF-8: CLEARED sealed (rc 0)
+PASS E m-f1-shortcut-br en_US.UTF-8: the completion line
+PASS E m-f1-shortcut-br en_US.UTF-8: the tally counts the finding at minor
+PASS E k-f1-shortcut-br en_US.UTF-8: fixture, floor and round-1 reservation
+  | E k-f1-shortcut-br en_US.UTF-8: complete rc=0 round completed gate=opponent round=1 verdict=CLEARED report=1ec2ff00e0000ddfbcd4f610913fd4da970d4f991a4fa50ca73fcb9945a7dbfb
+  |   tally rc=0 opponent rounds=1 blocking=0 minor=1 locations=1 unclassified=0 severity-downgrades=0 
+PASS E k-f1-shortcut-br en_US.UTF-8: CLEARED sealed (rc 0)
+PASS E k-f1-shortcut-br en_US.UTF-8: the completion line
+PASS E k-f1-shortcut-br en_US.UTF-8: the tally counts the finding at minor
+PASS E m-t1-table en_US.UTF-8: fixture, floor and round-1 reservation
+  | E m-t1-table en_US.UTF-8: complete rc=0 round completed gate=opponent round=1 verdict=CLEARED report=ed294320c8335cf00e898432d4336b2724292873ad510024aeeac30f9896c154
+  |   tally rc=0 opponent rounds=1 blocking=0 minor=1 locations=1 unclassified=0 severity-downgrades=0 
+PASS E m-t1-table en_US.UTF-8: CLEARED sealed (rc 0)
+PASS E m-t1-table en_US.UTF-8: the completion line
+PASS E m-t1-table en_US.UTF-8: the tally counts the finding at minor
+PASS E k-t1-table en_US.UTF-8: fixture, floor and round-1 reservation
+  | E k-t1-table en_US.UTF-8: complete rc=0 round completed gate=opponent round=1 verdict=CLEARED report=5e9ba83786f5cdaf24820051da346f0c3e043d6faf99f7eea09faa3a97fbbddb
+  |   tally rc=0 opponent rounds=1 blocking=0 minor=1 locations=1 unclassified=0 severity-downgrades=0 
+PASS E k-t1-table en_US.UTF-8: CLEARED sealed (rc 0)
+PASS E k-t1-table en_US.UTF-8: the completion line
+PASS E k-t1-table en_US.UTF-8: the tally counts the finding at minor
+PASS E k-c0 en_US.UTF-8: fixture, floor and round-1 reservation
+  | E k-c0 en_US.UTF-8: complete rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/e2d77d58-9c99-46f9-9615-671a691952d5/scratchpad/r19-repro/sb-k-c0-en_US.
+  |   tally rc=0 opponent rounds=0 blocking=0 minor=0 locations=0 unclassified=0 severity-downgrades=0 
+PASS E k-c0 en_US.UTF-8: the control is refused (rc 3)
+PASS E k-c0 en_US.UTF-8: by name
+== O-023: vf_settled on the reviewer texts, CUR and PRE (1 settles the candidate)
+PASS O-023 settled, link-led text, CUR leaves it unsettled: - [the log](x) shows exit 0
+PASS O-023 settled, link-led text, PRE settled it: - [the log](x) shows exit 0
+PASS O-023 settled, link-led text, CUR leaves it unsettled:   - ![badge](y.png) step 3
+PASS O-023 settled, link-led text, PRE settled it:   - ![badge](y.png) step 3
+PASS O-023 settled, link-led text, CUR leaves it unsettled: 1. [step](u) ran
+PASS O-023 settled, link-led text, PRE settled it: 1. [step](u) ran
+PASS O-023 settled, link-led text, CUR leaves it unsettled: - `[y]` holds
+PASS O-023 settled, link-led text, PRE settled it: - `[y]` holds
+PASS O-023 settled, round-17 shape, CUR settles it: - **Reproduced:** the opening bracket `[` is quoted
+PASS O-023 settled, round-17 shape, PRE left it unsettled: - **Reproduced:** the opening bracket `[` is quoted
+== O-023: one canonical round, timed (the reviewer link-led run: T030o53 timing shape with its link moved to the front)
+  | CUR: n=50 2.89s rc=0; n=100 29.86s rc=0
+  | PRE: n=100 0.09s rc=0; n=400 0.29s rc=0
+PASS O-023: CUR parses the 100-line run (rc 0)
+PASS O-023: PRE parses the 400-line run (rc 0)
+PASS O-023: doubling the CUR run from 50 to 100 lines more than quadruples its time
+PASS O-023: CUR at 100 lines is slower than PRE at 400
+PASS live worktree status outside notes/verification/ unchanged
+end 2026-10-14T17:18:09Z
+r19-repro failures=0

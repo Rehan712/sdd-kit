@@ -1,0 +1,94 @@
+@@OLD
+  # matrix row L18).
+@@NEW
+  # matrix row L18). Round 15's members follow (O-018 reopened, T030o47): a
+  # second tier after a paragraph boundary the reader misses (a sibling
+  # ordered item of any number or delimiter, a setext underline, a block-quote
+  # marker, nested or not) or invents (a line indented four spaces that begins
+  # with a list, heading or ordered marker), behind a code span that holds a
+  # bracket, and after a rendered line start (a br tag in four spellings, a p
+  # or div tag inside the line, a br inside a Where value).
+@@END
+@@OLD
+second-tier-tag-then-reference|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- <b>Severity</b>&nbsp;data-loss\n|a second Severity line in finding G-042: - <b>Severity</b>&nbsp;data-loss
+@@NEW
+second-tier-tag-then-reference|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- <b>Severity</b>&nbsp;data-loss\n|a second Severity line in finding G-042: - <b>Severity</b>&nbsp;data-loss
+paragraph-ordered-sibling|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n1. a\n2. <b\ntitle="x">Severity: data-loss</b>\n|a second Severity line in finding G-042: title="x">Severity: data-loss</b>
+paragraph-ordered-paren|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n1) a\n2) <b\ntitle="x">Severity: data-loss</b>\n|a second Severity line in finding G-042: title="x">Severity: data-loss</b>
+paragraph-zero-one|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\nText\n01. <b\ntitle="x">Severity: data-loss</b>\n|a second Severity line in finding G-042: title="x">Severity: data-loss</b>
+paragraph-setext|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\nA remark\n===\n<b\ntitle="x">Severity: data-loss</b>\n|a second Severity line in finding G-042: title="x">Severity: data-loss</b>
+paragraph-block-quote|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\nNote\n> <b\n> title="x">Severity: data-loss</b>\n|quoted content carries a Severity line: > title="x">Severity: data-loss</b>
+paragraph-nested-quote|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\nNote\n> > <b\n> > title="x">Severity: data-loss</b>\n|quoted content carries a Severity line: > > title="x">Severity: data-loss</b>
+paragraph-indented-list-marker|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n<b title="a\n    - b">Severity: data-loss</b>\n|a second Severity line in finding G-042:     - b">Severity: data-loss</b>
+paragraph-indented-heading-marker|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n<b title="a\n    # b">Severity: data-loss</b>\n|a second Severity line in finding G-042:     # b">Severity: data-loss</b>
+paragraph-indented-ordered-marker|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n<b title="a\n    1. b">Severity: data-loss</b>\n|a second Severity line in finding G-042:     1. b">Severity: data-loss</b>
+code-span-in-link|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n[`]`](u)Severity: data-loss\n|a second Severity line in finding G-042: [`]`](u)Severity: data-loss
+code-span-in-image|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n![`]`](u)Severity: data-loss\n|a second Severity line in finding G-042: ![`]`](u)Severity: data-loss
+br-in-prose|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\nNote<br>Severity: data-loss\n|a second Severity line in finding G-042: Note<br>Severity: data-loss
+br-self-closing|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\nNote<br/>Severity: data-loss\n|a second Severity line in finding G-042: Note<br/>Severity: data-loss
+br-spaced|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\nNote<br />Severity: data-loss\n|a second Severity line in finding G-042: Note<br />Severity: data-loss
+br-upper|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\nNote<BR>Severity: data-loss\n|a second Severity line in finding G-042: Note<BR>Severity: data-loss
+p-inside-line|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\nNote<p>Severity: data-loss\n|a second Severity line in finding G-042: Note<p>Severity: data-loss
+div-inside-line|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\nNote <div>Severity: data-loss</div>\n|a second Severity line in finding G-042: Note <div>Severity: data-loss</div>
+br-in-where|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- **Where:** a.sh:1<br><b>Severity:</b> data-loss\n|a second Severity line in finding G-042: - **Where:** a.sh:1<br><b>Severity:</b> data-loss
+@@END
+@@OLD
+tag-then-reference|- **Severity:** minor\n- <b>Severity</b>&nbsp;data-loss|a Severity line this grammar cannot read in finding G-050
+@@NEW
+tag-then-reference|- **Severity:** minor\n- <b>Severity</b>&nbsp;data-loss|a Severity line this grammar cannot read in finding G-050
+paragraph-ordered-sibling|- **Severity:** minor\n\n1. a\n2. <b\ntitle="x">Severity: data-loss</b>|a Severity line this grammar cannot read in finding G-050
+paragraph-ordered-paren|- **Severity:** minor\n\n1) a\n2) <b\ntitle="x">Severity: data-loss</b>|a Severity line this grammar cannot read in finding G-050
+paragraph-zero-one|- **Severity:** minor\n\nText\n01. <b\ntitle="x">Severity: data-loss</b>|a Severity line this grammar cannot read in finding G-050
+paragraph-setext|- **Severity:** minor\n\nA remark\n===\n<b\ntitle="x">Severity: data-loss</b>|a Severity line this grammar cannot read in finding G-050
+paragraph-block-quote|- **Severity:** minor\n\nNote\n> <b\n> title="x">Severity: data-loss</b>|quoted content carries a Severity line
+paragraph-nested-quote|- **Severity:** minor\n\nNote\n> > <b\n> > title="x">Severity: data-loss</b>|quoted content carries a Severity line
+paragraph-indented-list-marker|- **Severity:** minor\n\n<b title="a\n    - b">Severity: data-loss</b>|a Severity line this grammar cannot read in finding G-050
+paragraph-indented-heading-marker|- **Severity:** minor\n\n<b title="a\n    # b">Severity: data-loss</b>|a Severity line this grammar cannot read in finding G-050
+paragraph-indented-ordered-marker|- **Severity:** minor\n\n<b title="a\n    1. b">Severity: data-loss</b>|a Severity line this grammar cannot read in finding G-050
+code-span-in-link|- **Severity:** minor\n\n[`]`](u)Severity: data-loss|a Severity line this grammar cannot read in finding G-050
+code-span-in-image|- **Severity:** minor\n\n![`]`](u)Severity: data-loss|a Severity line this grammar cannot read in finding G-050
+br-in-prose|- **Severity:** minor\n\nNote<br>Severity: data-loss|a Severity line this grammar cannot read in finding G-050
+br-upper|- **Severity:** minor\n\nNote<BR>Severity: data-loss|a Severity line this grammar cannot read in finding G-050
+p-inside-line|- **Severity:** minor\n\nNote<p>Severity: data-loss|a Severity line this grammar cannot read in finding G-050
+div-inside-line|- **Severity:** minor\n\nNote <div>Severity: data-loss</div>|a Severity line this grammar cannot read in finding G-050
+@@END
+@@OLD
+  # A field line followed directly by a block a renderer starts there holds
+  # its item alone (round 14, O-021): every HTML block but the seventh kind,
+@@NEW
+  # A rendered line start inside a field value: after a br or a block-level
+  # tag a renderer starts a new line, so a Where value carrying one before a
+  # tier is refused, and one carrying no tier parses (round 15, O-018).
+  for l in C en_US.UTF-8; do
+    record_round 1 CLEARED 0 1 '### Finding G-050' dup-binding new '- **Severity:** minor' |
+      sed 's#^- \*\*Where:\*\* scripts/run.sh:9$#- **Where:** a.sh:1<br><b>Severity:</b> data-loss#' > "$report"
+    run_rc 3 record_line_vf "$l" "$report" "$spec"
+    assert_contains "$OUT" 'a Severity line this grammar cannot read in finding G-050' \
+      "AC-012: a second tier written as br-in-where was not refused by name under LANG=$l (O-018)"
+    record_round 1 CHALLENGED 1 0 '### Finding G-050' dup-binding new '- **Severity:** data-loss' |
+      sed 's#^- \*\*Where:\*\* scripts/run.sh:9$#- **Where:** a.sh:1<br>b.sh:2 and <p>c.sh:3#' > "$report"
+    run_rc 0 record_line_vf "$l" "$report" "$spec"
+    assert_not_contains "$OUT" 'report recovery' "AC-012: a Where value with br and p tags and no tier was refused under LANG=$l (O-018)"
+  done
+  # A field line followed directly by a block a renderer starts there holds
+  # its item alone (round 14, O-021): every HTML block but the seventh kind,
+@@END
+@@OLD
+heading-then-attribute-line|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n\n#### <abbr\ntitle="t">Severity: data-loss</abbr>\n
+@@NEW
+heading-then-attribute-line|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n\n#### <abbr\ntitle="t">Severity: data-loss</abbr>\n
+code-span-brackets-prose|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n- The `[x]` notation and `<b>` tags are prose.\n
+br-prose|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n- Line one<br>line two names no tier.\n
+ordered-list-prose|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n\n1. first step\n2. second step reads the tier\n3. third\n
+indented-continuation-prose|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n\nA sentence that wraps\n    onto an indented line, no tier.\n
+setext-prose|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n\nA remark\n===\nThe text under it.\n
+@@END
+@@OLD
+a-heading-then-attribute-line|### Finding G-042|#### <abbr\ntitle="t">Severity: data-loss</abbr>\n
+@@NEW
+a-heading-then-attribute-line|### Finding G-042|#### <abbr\ntitle="t">Severity: data-loss</abbr>\n
+a-code-span-brackets|### Finding G-042|  - The `[x]` notation and `<b>` tags are prose.\n
+a-br-prose|### Finding G-042|  - Line one<br>line two names no tier.\n
+a-ordered-list-prose|### Finding G-042|\n1. first step\n2. second step reads the tier\n3. third\n\n
+a-indented-continuation|### Finding G-042|\nA sentence that wraps\n    onto an indented line, no tier.\n\n
+@@END

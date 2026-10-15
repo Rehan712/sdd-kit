@@ -1,0 +1,46 @@
+PASS source == c2536743... (c2536743df65d193c2bd9530443400b80d69923ccf6f73b72f572db06e7cadce)
+PASS Decisions digest == df18ccde... (df18ccdee684b14c47ea29381dedc75788dbc171ac5fc4b49aacc7fede71621a)
+PASS HEAD == 0d55c62 (0d55c62)
+PASS no held lock
+opponent sealed rounds=12 last-time=2026-09-27T14:36:02Z pending=0
+reality-check sealed rounds=1 last-time=2026-09-20T22:56:29Z pending=0
+PASS opponent ledger has exactly ROUND-1..ROUND-12
+PASS reality-check ledger has exactly ROUND-1
+PASS no staged .reservation-* in either gate
+PASS opponent round 1 block digest == sealed 1ac95178f408b2ae
+PASS opponent round 2 block digest == sealed 5170b08212a51a9b
+PASS opponent round 3 block digest == sealed 3de48d658a33a909
+PASS opponent round 4 block digest == sealed d044652efcb90251
+PASS opponent round 5 block digest == sealed 0898afcc62cf8716
+PASS opponent round 6 block digest == sealed cc1b86cb05959b85
+PASS opponent round 7 block digest == sealed 9f98e50c63046c9f
+PASS opponent round 8 block digest == sealed b391edbf50604425
+PASS opponent round 9 block digest == sealed 2aae626e3c600201
+PASS opponent round 10 block digest == sealed 9a32b0929d7acc5a
+PASS opponent round 11 block digest == sealed f13a332b34a800da
+PASS opponent round 12 block digest == sealed 4539d729b5402bfa
+PASS floor-latest == FLOOR-0334B2
+PASS FLOOR-0334B2 refused at exit 3 as stale (historical)
+PASS no .capture.* staging anywhere under notes/
+PASS captures == 514 (514)
+PASS T030 unchecked
+PASS T031 unchecked
+PASS T032 unchecked
+PASS T033 unchecked
+PASS T034 unchecked
+PASS T030o43 unchecked
+PASS T030o39 checked
+PASS T030o40 checked
+PASS T030o41 checked
+PASS T030o42 checked
+PASS round 13 authorized at exit 0
+PASS round 14 refused at exit 4 (10 candidates)
+PASS analyzer exit 0 (1 warning(s), 0 errors)
+PASS tally exit 0
+PASS tally byte-identical to r12-tally.log
+  host: /dev/disk3s1s1   228Gi    12Gi    17Gi    41%    458k  179M    0%   /
+  swap: total = 2048.00M  used = 638.19M  free = 1409.81M  (encrypted)
+  power: Now drawing from 'Battery Power'  -InternalBattery-0 (id=23134307)	16%; discharging; 1:26 remaining present: true 
+PASS tripwire: source unchanged by this audit
+PASS tripwire: non-bookkeeping git status unchanged
+entry audit failures=0

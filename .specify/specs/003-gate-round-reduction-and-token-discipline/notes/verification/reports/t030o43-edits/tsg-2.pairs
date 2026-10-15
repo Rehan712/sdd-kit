@@ -1,0 +1,57 @@
+@@OLD
+  cp "$spec/spec.md" "$SANDBOX/floorfault-spec"
+  printf '\n- \222 AC-998 is a criterion no test names\n' >> "$spec/spec.md"
+@@NEW
+  # A contract value that is neither absent nor 1 is refused, never read as
+  # the legacy check (T030o43 review): a U+00A0 after the colon is a value.
+  cp "$spec/spec.md" "$SANDBOX/floorfault-spec"
+  sed "s/^verification_contract: 1\$/verification_contract:$(printf '\302\240')1/" "$SANDBOX/floorfault-spec" > "$spec/spec.md"
+  run_rc 3 bash "$SCRIPTS/spec-evidence.sh" "$spec"
+  assert_contains "$OUT" 'unsupported verification contract' \
+    'AC-007: a contract value spec-evidence.sh cannot read sent it down the legacy check (T030o43 review)'
+  cp "$SANDBOX/floorfault-spec" "$spec/spec.md"
+  printf '\n- \222 AC-998 is a criterion no test names\n' >> "$spec/spec.md"
+@@END
+@@OLD
+  f="$SANDBOX/fault-artifacts"; fault_bin "$f" grep 'png|jpg'
+  run_rc 1 env PATH="$f:$PATH" bash "$SCRIPTS/spec-evidence.sh" "$legacy"
+  assert_contains "$OUT" 'T001 evidence could not be searched for artifact names' \
+    'AC-007: artifact names that could not be searched read as none named (T030o43)'
+@@NEW
+  f="$SANDBOX/fault-artifacts"; fault_bin "$f" grep 'png|jpg'
+  run_rc 1 env PATH="$f:$PATH" bash "$SCRIPTS/spec-evidence.sh" "$legacy"
+  assert_contains "$OUT" 'T001 evidence could not be searched for artifact names' \
+    'AC-007: artifact names that could not be searched read as none named (T030o43)'
+  # A non-ASCII artifact name is taken whole: a missing one fails and an
+  # existing one passes, in every locale (T030o43 review F2).
+  mkdir -p "$legacy/shots"; : > "$legacy/shots/écran.png"
+  local name l
+  for name in café écran; do
+    printf -- '---\nspec: 001-legacy\n---\n\n## Backend\n\n- [x] **T001** — Legacy task\n  - *Acceptance:* legacy\n  - *Evidence:* screenshot shots/%s.png\n' "$name" > "$legacy/tasks.md"
+    for l in C en_US.UTF-8; do
+      if [[ "$name" == café ]]; then
+        run_rc 1 in_locale "$l" bash "$SCRIPTS/spec-evidence.sh" "$legacy"
+        assert_contains "$OUT" "names artifact 'shots/café.png'" \
+          "AC-007: a missing non-ASCII artifact name passed under LANG=$l (T030o43 review)"
+      else
+        run_rc 0 in_locale "$l" bash "$SCRIPTS/spec-evidence.sh" "$legacy"
+        assert_not_contains "$OUT" 'names artifact' \
+          "AC-007: an existing non-ASCII artifact name was cut short under LANG=$l (T030o43 review)"
+      fi
+    done
+  done
+@@END
+@@OLD
+  # A declared LC_ALL through spec-gate.sh accept, which execs spec-task.sh.
+@@NEW
+  # The size bound reads its count with its status (T030o43 review F3).
+  { printf 'Verification-Return: 1\nTask: T001\nCaptures: %s\nSummary: s\nFailure modes: none\n' "$cap"
+    head -c 70000 /dev/zero | tr '\000' 'x'; printf '\n'; } > "$SANDBOX/big-return.txt"
+  run_rc 3 bash -c '. "$1"; vf_return_parse "$2" "$3"' _ "$SCRIPTS/verification-lib.sh" "$SANDBOX/big-return.txt" "$SANDBOX/big.nul"
+  assert_contains "$OUT" 'return exceeds 64 KiB' 'fixture: the size bound'
+  f="$SANDBOX/fault-wc"; fault_bin "$f" wc -c
+  run_rc 3 env PATH="$f:$PATH" bash -c '. "$1"; vf_return_parse "$2" "$3"' _ "$SCRIPTS/verification-lib.sh" "$SANDBOX/big-return.txt" "$SANDBOX/big.nul"
+  assert_contains "$OUT" 'return: its size could not be read' \
+    'AC-022: a size that could not be read let a return past the 64 KiB bound (T030o43 review)'
+  # A declared LC_ALL through spec-gate.sh accept, which execs spec-task.sh.
+@@END

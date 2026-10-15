@@ -1,0 +1,9 @@
+@@OLD
+  f="$SANDBOX/fault-refs"; fault_bin "$f" grep '(AC|REQ)-[0-9]{3}' "$spec_dir/tasks.md"
+@@NEW
+  f="$SANDBOX/fault-ids-sort"; fault_bin "$f" sort '=-u' '=-'
+  run_rc 1 env PATH="$f:$PATH" "$ANALYZE" "$spec_dir"
+  assert_contains "$OUT" 'ids matching AC-[0-9]{3} could not be sorted' \
+    'AC-023: an id inventory that could not be sorted read as a short one (T030o43 review)'
+  f="$SANDBOX/fault-refs"; fault_bin "$f" grep '(AC|REQ)-[0-9]{3}' "$spec_dir/tasks.md"
+@@END

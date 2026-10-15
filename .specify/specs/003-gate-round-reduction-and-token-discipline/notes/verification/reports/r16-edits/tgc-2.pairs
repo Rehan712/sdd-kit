@@ -1,0 +1,12 @@
+@@OLD
+second-tier-code-span-tag|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- `<Severity>` data-loss\n|a second Severity line in finding G-042: - `<Severity>` data-loss
+@@NEW
+second-tier-code-span-tag|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- `<Severity>` data-loss\n|a second Severity line in finding G-042: - `<Severity>` data-loss
+second-tier-footnote-literal|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- [^Severity] data-loss\n|a second Severity line in finding G-042: - [^Severity] data-loss
+@@END
+@@OLD
+tag-then-reference|- **Severity:** minor\n- <b>Severity</b>&nbsp;data-loss|a Severity line this grammar cannot read in finding G-050
+@@NEW
+tag-then-reference|- **Severity:** minor\n- <b>Severity</b>&nbsp;data-loss|a Severity line this grammar cannot read in finding G-050
+footnote-literal|- **Severity:** minor\n- [^Severity] data-loss|a Severity line this grammar cannot read in finding G-050
+@@END

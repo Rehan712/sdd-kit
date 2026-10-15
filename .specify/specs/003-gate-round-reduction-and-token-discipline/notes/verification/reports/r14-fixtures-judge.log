@@ -1,0 +1,43 @@
+start 2026-10-02T18:03:34Z; TMPDIR=/private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0975ee40-5cb7-4b98-9d44-c2f005ef40ac/scratchpad/s14/r14-fixtures/tmp/
+PASS FX: the four files hash as recorded before this repair
+PASS FX: tgc-1.pairs applied, each block exactly once
+PASS FX: tsg-1.pairs applied, each block exactly once
+PASS DX: kernel-1.pairs applied
+PASS DX: vc-1.pairs applied
+PASS FX: both suites still parse
+PASS DX: both suites still parse
+== DX: every changed fixture function passes on the repaired kernel
+PASS DX report_manifest_locale_cases passes
+PASS DX report_record_line_cases passes
+PASS DX report_round_style_cases passes
+PASS DX round_record_line_cases passes
+== FX: on the unrepaired kernel each fails, on the rows the repair exists for and on no other
+PASS FX report_manifest_locale_cases fails
+  | FX report_manifest_locale_cases: 8 failing assertions
+PASS FX report_record_line_cases fails
+  | FX report_record_line_cases: 148 failing assertions
+PASS FX report_round_style_cases fails
+  | FX report_round_style_cases: 42 failing assertions
+PASS FX round_record_line_cases fails
+  | FX round_record_line_cases: 38 failing assertions
+PASS FX report_manifest_locale_cases: no failing assertion outside the new rows
+PASS FX report_record_line_cases: no failing assertion outside the new rows
+PASS FX report_round_style_cases: no failing assertion outside the new rows
+PASS FX round_record_line_cases: its first failing assertion is the first new row (the linked image, end to end)
+  the round-14 rows each fail on FX (sampled by label):
+PASS FX fails on: written as nested-badge was not refused
+PASS FX fails on: written as split-tag was not refused
+PASS FX fails on: written as zero-width-space was not refused
+PASS FX fails on: written as comment-across-quoted was not refused
+PASS FX fails on: a second tier written as wrapped-abbr-title
+PASS FX fails on: a second tier written as blockquoted-tag-split
+PASS FX fails on: a plausible manifest (severity-then-details) was refused
+PASS FX fails on: followed by a details-block was refused
+PASS FX fails on: a title and a late Timestamp let a round with uncounted-blocking seal
+PASS FX fails on: a round its title opens sealed
+PASS FX fails on: a title after the body of a canonical round was read
+PASS FX fails on: a reality-check round sealed its legacy-judged body
+PASS FX fails on: whose only body before its late Timestamp is quoted sealed
+PASS live worktree status outside notes/verification/ unchanged
+end 2026-10-02T18:05:50Z
+r14-fixtures-judge failures=0

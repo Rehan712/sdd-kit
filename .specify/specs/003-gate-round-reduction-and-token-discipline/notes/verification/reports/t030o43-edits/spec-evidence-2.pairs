@@ -1,0 +1,17 @@
+@@OLD
+evidence_contract="$(vf_fm_value "$SPEC_FILE" verification_contract)" || exit 3
+@@NEW
+evidence_contract="$(vf_fm_value "$SPEC_FILE" verification_contract)" || exit 3
+# Three ways, as every other reader of the contract routes it: absent is
+# legacy, 1 is current, anything else is refused, never the legacy check.
+[[ -z "$evidence_contract" || "$evidence_contract" == 1 ]] ||
+  { echo "unsupported verification contract: $evidence_contract" >&2; exit 3; }
+@@END
+@@OLD
+  arts="$(printf '%s\n' "$ev" | grep -oiE '[[:graph:]]+\.(png|jpg|jpeg|gif|svg|pdf)')"; arts_rc=$?
+@@NEW
+  # Any byte that is not a blank or a control character belongs to the name:
+  # under the harness pin [[:graph:]] is ASCII only, which cut a non-ASCII
+  # artifact name short or missed it (T030o43 review F2).
+  arts="$(printf '%s\n' "$ev" | grep -oiE '[^[:space:][:cntrl:]]+\.(png|jpg|jpeg|gif|svg|pdf)')"; arts_rc=$?
+@@END

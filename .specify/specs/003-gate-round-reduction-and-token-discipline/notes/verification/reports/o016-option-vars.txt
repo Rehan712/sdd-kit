@@ -1,0 +1,13 @@
+# Deliberately set option variables, measured in the PINNED copy o016m/p4 (tests/usage-limits suite), 2026-09-26
+uname under UNAME_SYSNAME=Linux: Linux
+UNAME_SYSNAME=Linux rc=1 20/27
+GREP_OPTIONS=-v: STOPPED by the invoker after about 5 minutes, no rc. With grep inverted, the
+  suite runner itself misbehaved: it ran helper functions as tests ("FAIL t_fail", "$1: unbound
+  variable" at helpers.sh:50 and test-usage-limits.sh:521). That already shows the variable decides
+  the verdict; running arbitrary helpers without arguments was not safe to let continue.
+TAR_WRITER_OPTIONS: not reached (stopped before it).
+After the stop: no test process left, copy o016m/p4 `git status --porcelain --ignored -uall` empty
+(unchanged), and the live worktree's status outside notes/verification/ still 66ef051e... (the
+o016-live-midrun.txt baseline).
+Also measured separately (2026-09-26, same session): `printf 'a\n' | GREP_OPTIONS=-v /usr/bin/grep a`
+prints nothing and exits 1 (macOS grep 2.6.0-FreeBSD honours GREP_OPTIONS).

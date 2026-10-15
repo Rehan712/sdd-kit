@@ -1,0 +1,20 @@
+== baseline shard 0/1 10:03:03Z
+== the label reader (vf_label_word, vf_label_html, vf_label_links, vf_label_render, vf_label, vf_finding_heading)
+== T030o43 rows carried to their spelling in vf_label_word
+PASS N02 literal applies once in scripts/verification-lib.sh
+PASS N02 KILLED (kill, judge rc)
+FAIL N02 diagnostic: a manifest spelled fullwidth-colon-severity was not refused by its own diagnostic (T030o44) (want=1 got=0)
+PASS N32 literal applies once in scripts/verification-lib.sh
+PASS N32 KILLED (kill, judge rc)
+FAIL N32 diagnostic: a manifest spelled bullet-character-severity was not refused by its own diagnostic (T030o44) (want=1 got=0)
+== the record shapes a quoted line may carry (vf_record) and the quoted-record refusal
+== the field-item rule (vf_block_start and both passes)
+== the manifest pass
+== the canonical pass
+== the canonical conjuncts that keep legacy rounds as they were (T030o44 review F6; O03 of v1 is now a kill)
+== the round style decided before its body (T030o45, O-020)
+== the rendered reading: the bracket fixpoint, the escape, the checkbox, emphasis inside a word, hiding (T030o46, O-018)
+== the paragraph step and the paragraph checks (T030o46, O-018)
+== the blocks that end a field item (T030o46, O-021)
+== done shard 0/1 10:03:27Z rows=144
+r14-mutations failures=2

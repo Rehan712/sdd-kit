@@ -1,0 +1,207 @@
+@@OLD
+  errors="$(awk -F "$us" '$1=="D" && $2=="error" {n++} END{print n+0}' "$records")"
+  warnings="$(awk -F "$us" '$1=="D" && $2=="warning" {n++} END{print n+0}' "$records")"
+@@NEW
+  # An empty count is not zero errors: a failed count used to publish a catalog
+  # that carried errors.
+  if ! errors="$(awk -F "$us" '$1=="D" && $2=="error" {n++} END{print n+0}' "$records")" ||
+     ! warnings="$(awk -F "$us" '$1=="D" && $2=="warning" {n++} END{print n+0}' "$records")"; then
+    printf 'error: vf_bindings could not count its diagnostics\n' >&2
+    rm -f "$records" "$maps" "$inventory"; rmdir "$tmpdir" 2>/dev/null || true
+    return 1
+  fi
+@@END
+@@OLD
+  LC_ALL=C awk -F '\t' '
+    $1!="unclassified" {total[$1]++; if($3=="new" || $3=="reopened") {if(seen[$1]++) recur[$1]++}}
+    END {for(c in total) printf "class=%s findings=%d recurrences=%d\n",c,total[c],recur[c]+0}
+  ' "$tmp/classes" | LC_ALL=C sort
+  awk -F '\t' '{ids[$1 SUBSEP $2]=1; observations++; if($3=="reopened") reopened++}
+    END {for(k in ids) distinct++; printf "finding-observations=%d distinct-finding-ids=%d reopened=%d\n", observations,distinct,reopened}' "$tmp/classes"
+@@NEW
+  # A MET-002 line that could not be computed is a failed tally, never a
+  # silently missing line at exit 0.
+  LC_ALL=C awk -F '\t' '
+    $1!="unclassified" {total[$1]++; if($3=="new" || $3=="reopened") {if(seen[$1]++) recur[$1]++}}
+    END {for(c in total) printf "class=%s findings=%d recurrences=%d\n",c,total[c],recur[c]+0}
+  ' "$tmp/classes" > "$tmp/class-lines" || { echo 'tally: the class table could not be computed' >&2; return 3; }
+  LC_ALL=C sort "$tmp/class-lines" || { echo 'tally: the class table could not be sorted' >&2; return 3; }
+  awk -F '\t' '{ids[$1 SUBSEP $2]=1; observations++; if($3=="reopened") reopened++}
+    END {for(k in ids) distinct++; printf "finding-observations=%d distinct-finding-ids=%d reopened=%d\n", observations,distinct,reopened}' "$tmp/classes" ||
+    { echo 'tally: the finding observations could not be counted' >&2; return 3; }
+@@END
+@@OLD
+      LC_ALL=C sort "$tmp/extra-hashes" > "$tmp/sorted"
+@@NEW
+      LC_ALL=C sort -o "$tmp/sorted" "$tmp/extra-hashes" || { echo "verification inputs: declared directory digests could not be sorted: $path" >&2; return 3; }
+@@END
+@@OLD
+  } | LC_ALL=C sort -u > "$tmp/env-names"
+  while IFS= read -r key; do
+    [[ -n "$key" ]] || continue
+    if [[ -n "${!key+set}" ]]; then
+      printf '%s\0' environment "$key" present "$(printf '%s' "${!key}" | vf_hash /dev/stdin)" '' '' >> "$tmp/inputs"
+    else
+      printf '%s\0' environment "$key" unset '' '' '' >> "$tmp/inputs"
+    fi
+  done < "$tmp/env-names"
+@@NEW
+  } | LC_ALL=C sort -u -o "$tmp/env-names" || { echo 'verification inputs: declared environment names could not be sorted' >&2; return 3; }
+  while IFS= read -r key; do
+    [[ -n "$key" ]] || continue
+    vf_caller_env "$key" "$tmp/env-value"; value=$?
+    if (( value == 0 )); then
+      printf '%s\0' environment "$key" present "$(vf_hash "$tmp/env-value")" '' '' >> "$tmp/inputs"
+    elif (( value == 1 )); then
+      printf '%s\0' environment "$key" unset '' '' '' >> "$tmp/inputs"
+    else echo "verification inputs: declared environment value could not be recorded: $key" >&2; return 3; fi
+  done < "$tmp/env-names"
+@@END
+@@OLD
+  (cd "$cwd" && "$@") > "$staging/output.log" 2>&1
+@@NEW
+  (cd "$cwd" && vf_caller_locale && "$@") > "$staging/output.log" 2>&1
+@@END
+@@OLD
+  vf_gate_roots "$spec" "$tmp/roots" || return 3
+  while IFS=$'\t' read -r task state stage subject; do
+    [[ "$state" == "done" ]] || continue
+    # Only exempt true administrative tasks absent from the typed catalog.
+@@NEW
+  vf_gate_roots "$spec" "$tmp/roots" || return 3
+  # The list is read to a file with its status: a list that stopped early
+  # used to leave completed tasks unchecked.
+  bash "$(dirname -- "${BASH_SOURCE[0]}")/spec-task.sh" list "$spec" > "$tmp/tasks" ||
+    { echo 'current evidence: the task list could not be read' >&2; return 3; }
+  while IFS=$'\t' read -r task state stage subject; do
+    [[ "$state" == "done" ]] || continue
+    # Only exempt true administrative tasks absent from the typed catalog.
+@@END
+@@OLD
+  done < <(bash "$(dirname -- "${BASH_SOURCE[0]}")/spec-task.sh" list "$spec")
+  echo 'current evidence: all completed task checks have valid current captures'
+@@NEW
+  done < "$tmp/tasks"
+  echo 'current evidence: all completed task checks have valid current captures'
+@@END
+@@OLD
+  LC_ALL=C sort -u "$tmp/required" > "$tmp/want"
+@@NEW
+  LC_ALL=C sort -u -o "$tmp/want" "$tmp/required" || { echo 'return: the required bindings could not be sorted' >&2; return 3; }
+@@END
+@@OLD
+  LC_ALL=C sort "$tmp/got" > "$tmp/actual"
+@@NEW
+  LC_ALL=C sort -o "$tmp/actual" "$tmp/got" || { echo 'return: the returned bindings could not be sorted' >&2; return 3; }
+@@END
+@@OLD
+    expected="$(fm_get "$spec/STATUS.md" worktree 2>/dev/null || :)"
+@@NEW
+    expected="$(vf_fm_value "$spec/STATUS.md" worktree)" || return 3
+@@END
+@@OLD
+    branch="$(fm_get "$spec/STATUS.md" branch 2>/dev/null || :)"
+@@NEW
+    branch="$(vf_fm_value "$spec/STATUS.md" branch)" || return 3
+@@END
+@@OLD
+  while IFS=$'\t' read -r task state stage subject; do
+    [[ "$state" == "done" ]] || continue
+    vf_task_info "$tmp/bindings.nul" "$task" >/dev/null 2>&1 || continue
+    if [[ "${VF_TASK[5]}" == manual ]]; then
+      vf_manual_current "$spec" "$task" || return 3
+      continue
+    fi
+@@NEW
+  # Read with its status: a list that stopped early used to leave completed
+  # tasks' Verify unrefreshed while the floor sealed.
+  bash "$HUB_DIR/scripts/spec-task.sh" list "$spec" > "$tmp/tasks.tsv" ||
+    { echo 'floor gap: the task list could not be read' >&2; return 3; }
+  while IFS=$'\t' read -r task state stage subject; do
+    [[ "$state" == "done" ]] || continue
+    vf_task_info "$tmp/bindings.nul" "$task" >/dev/null 2>&1 || continue
+    if [[ "${VF_TASK[5]}" == manual ]]; then
+      vf_manual_current "$spec" "$task" || return 3
+      continue
+    fi
+@@END
+@@OLD
+  done < <(bash "$HUB_DIR/scripts/spec-task.sh" list "$spec")
+  IFS= read -r -d '' repo < "$tmp/roots.nul"
+@@NEW
+  done < "$tmp/tasks.tsv"
+  rm -f "$tmp/tasks.tsv"
+  IFS= read -r -d '' repo < "$tmp/roots.nul"
+@@END
+@@OLD
+        test)
+          while IFS= read -r id; do
+            [[ -z "$id" ]] || printf '%s\0' "${fields[2]}" "$id" "${fields[7]}" >> "$output"
+          done < <(printf '%s\n' "${fields[8]}" | grep -oE 'AC-[0-9]{3}' | LC_ALL=C sort -u);;
+@@NEW
+        test)
+          # Checked: a short inventory used to record fewer coverage bindings.
+          ids="$(printf '%s\n' "${fields[8]}" | vf_ids 'AC-[0-9]{3}' -)" ||
+            { echo "checkpoint coverage: the criteria of ${fields[2]} could not be read" >&2; return 3; }
+          for id in $ids; do printf '%s\0' "${fields[2]}" "$id" "${fields[7]}" >> "$output"; done;;
+@@END
+@@OLD
+vf_coverage_catalog() { # raw selected binding catalog -> fixed triples task,id,locator
+  local catalog="$1" output="$2" value fields=() id
+@@NEW
+vf_coverage_catalog() { # raw selected binding catalog -> fixed triples task,id,locator
+  local catalog="$1" output="$2" value fields=() id ids
+@@END
+@@OLD
+      while IFS= read -r ref; do
+        [[ -n "$ref" ]] || continue
+        if ! awk -F '\t' -v task="$task" -v ref="$ref" '$1==task && $2==ref {found=1} END {exit !found}' "$tmp/current"; then
+          echo "checkpoint binding gap: $task $ref has no covering test" >&2; return 3
+        fi
+      done < <(printf '%s\n' "${fields[8]}" | grep -oE '(AC|FM|INV)-[0-9]{3}' | LC_ALL=C sort -u)
+@@NEW
+      # Checked: a short inventory used to skip the binding-gap check.
+      refs="$(printf '%s\n' "${fields[8]}" | vf_ids '(AC|FM|INV)-[0-9]{3}' -)" ||
+        { echo "checkpoint coverage: the references of $task could not be read" >&2; return 3; }
+      for ref in $refs; do
+        if ! awk -F '\t' -v task="$task" -v ref="$ref" '$1==task && $2==ref {found=1} END {exit !found}' "$tmp/current"; then
+          echo "checkpoint binding gap: $task $ref has no covering test" >&2; return 3
+        fi
+      done
+@@END
+@@OLD
+  local spec="$1" stage="$2" output="$3" tmp task value fields=() ref receipt found previous
+@@NEW
+  local spec="$1" stage="$2" output="$3" tmp task value fields=() ref refs receipt found previous
+@@END
+@@OLD
+  vf_binding_snapshot "$spec" "$tmp/bindings.nul" || return 3
+  if [[ "$(fm_get "$spec/spec.md" verification_contract)" == 1 ]]; then
+@@NEW
+  vf_binding_snapshot "$spec" "$tmp/bindings.nul" || return 3
+  # The contract is the one vf_bindings read, checked, and wrote into the
+  # catalog's meta record; no second parser re-derives it (the O-012 rule).
+  local catalog_contract='' i
+  { for ((i=0;i<9;i++)); do IFS= read -r -d '' catalog_contract || { catalog_contract=''; break; }; done; } < "$tmp/bindings.nul"
+  if [[ "$catalog_contract" == 1 ]]; then
+@@END
+@@OLD
+  line="$(awk -v gate="$gate" -v round="$round" -v rejects="$rejects" -v gates="$VF_GATES" "$_VF_AWK_FENCE"'
+@@NEW
+  # Read with its status. A parse that died part-way can only lose
+  # authorizations, which denies, but the refusal then claimed that no
+  # candidate existed; it names the parse instead (O-017).
+  line="$(awk -v gate="$gate" -v round="$round" -v rejects="$rejects" -v gates="$VF_GATES" "$_VF_AWK_FENCE"'
+@@END
+@@OLD
+      print stamp "\t" kind "\t" (kind=="spec-revision" ? substr(f[5],10) : "none")
+    }
+  ' "$spec/STATUS.md")"
+@@NEW
+      print stamp "\t" kind "\t" (kind=="spec-revision" ? substr(f[5],10) : "none")
+    }
+  ' "$spec/STATUS.md")" || {
+    echo "round authorization denied: $gate round $round: the Decisions log in STATUS.md could not be parsed, so no authorization was read" >&2
+    return 4
+  }
+@@END

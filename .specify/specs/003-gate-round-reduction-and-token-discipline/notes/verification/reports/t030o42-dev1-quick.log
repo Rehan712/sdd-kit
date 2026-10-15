@@ -1,0 +1,11 @@
+  | live status outside notes/verification/ before: 66ef051e755c1b13355590f5a1e96fe82d515a6eaf70fbab45fe281caec945be
+PASS copy c1 built (want=0 got=0)
+== ShellCheck (bash tests/shellcheck.sh)
+PASS bash tests/shellcheck.sh (want=0 got=0)
+== the new fixture, then its test function
+PASS reuse_command_locale_cases (21:13:35Z - 21:13:52Z) (want=0 got=0)
+PASS test_capture_provenance (21:13:52Z - 21:18:46Z) (want=0 got=0)
+PASS copy c1 unchanged by the quick runs (want=cbda977f3efce504c1c011f7bb58d4bb24878bf2f1d718c37394b5d517918106 got=cbda977f3efce504c1c011f7bb58d4bb24878bf2f1d718c37394b5d517918106)
+  | live status outside notes/verification/ after: 66ef051e755c1b13355590f5a1e96fe82d515a6eaf70fbab45fe281caec945be
+PASS live worktree unchanged outside notes/verification/ (want=66ef051e755c1b13355590f5a1e96fe82d515a6eaf70fbab45fe281caec945be got=66ef051e755c1b13355590f5a1e96fe82d515a6eaf70fbab45fe281caec945be)
+t030o42-dev dev1q failures=0

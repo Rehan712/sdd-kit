@@ -1,0 +1,19 @@
+R s03-as-tgc2
+  | marked rc=0 <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<ol>~<li><img src="u" alt="q~">Severity: data-loss</li>~</ol>
+  | mdit   rc=0 <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<ol>~<li><img src="u" alt="q~">Severity: data-loss</li>~</ol>
+R s03-line-inside
+  | marked rc=0 <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<ol>~<li><img src="u" alt="q~x~">Severity: data-loss</li>~</ol>
+  | mdit   rc=0 <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<ol>~<li><img src="u" alt="q~x~">Severity: data-loss</li>~</ol>
+R s10-as-tgc2
+  | marked rc=0 <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<p><img src="u" alt=" ] x~">Severity: data-loss</p>
+  | mdit   rc=0 <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<p><img src="u" alt="  x~">Severity: data-loss</p>
+R s10-line-inside
+  | marked rc=0 <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<p><img src="u" alt=" ] x~y~">Severity: data-loss</p>
+  | mdit   rc=0 <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<p><img src="u" alt="  x~y~">Severity: data-loss</p>
+W s09-as-tgc2
+  | marked rc=0 <h3>Finding G-041</h3>~<ul>~<li><strong>Class:</strong> tier-binding</li>~<li><strong>Severity:</strong> minor</li>~</ul>~<h2>Notes</h2>~<p>G-042 is discussed below.~Note<br>&nbsp;<img src="u" alt="q~">Severity: data-loss</p>
+  | mdit   rc=0 <h3>Finding G-041</h3>~<ul>~<li><strong>Class:</strong> tier-binding</li>~<li><strong>Severity:</strong> minor</li>~</ul>~<h2>Notes</h2>~<p>G-042 is discussed below.~Note<br> <img src="u" alt="q~">Severity: data-loss</p>
+W s09-line-inside
+  | marked rc=0 <h3>Finding G-041</h3>~<ul>~<li><strong>Class:</strong> tier-binding</li>~<li><strong>Severity:</strong> minor</li>~</ul>~<h2>Notes</h2>~<p>G-042 is discussed below.~Note<br>&nbsp;<img src="u" alt="q~x~">Severity: data-loss</p>
+  | mdit   rc=0 <h3>Finding G-041</h3>~<ul>~<li><strong>Class:</strong> tier-binding</li>~<li><strong>Severity:</strong> minor</li>~</ul>~<h2>Notes</h2>~<p>G-042 is discussed below.~Note<br> <img src="u" alt="q~x~">Severity: data-loss</p>
+r18-rows-render failures=0

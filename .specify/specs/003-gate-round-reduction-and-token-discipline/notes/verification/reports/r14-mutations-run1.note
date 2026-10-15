@@ -1,0 +1,18 @@
+r14-mutations run 1 (matrix v3 of record, first run; 2026-10-07, session 15), kept as r14-mutations-run1-shard{0,1}.{log,rc,start,end},
+with the script version it ran as r14-mutations-v3-run1.sh. Both shards ran on the final tree (the four files as
+r14-edits/post-apply-2.sha256), 09:54:50Z to 10:21:42Z (shard 0) and 10:16:07Z (shard 1).
+- Shard 1: rc 0. Shard 0: rc 1 on two verdicts only, both diagnostics: N02 and N32 were KILLED (judge rc), but not by the
+  row each names. Every one of the 144 rows ran exactly once: 104 kill and 31 over-correction mutants killed, the 9 argued
+  equivalents surviving (L05, L19, R03b, Q08, B12, S06, P17, P18, P19), the 8 baselines passing; no restore failed.
+- Cause, measured with an investigation copy of the matrix that keeps each judge's output (r15-matrix-inv.sh, run on
+  ONLY=N02,N32 without baselines: r15-matrix-inv-n02-n32.log): T030o46's second rendered reading drops every byte outside
+  ASCII, so it also reads the fullwidth-colon spelling (`**Severity：**` becomes the emphasized label `**Severity**`) and
+  the U+2022-bullet spelling; those rows are refused with their own diagnostics either way and no longer isolate the two
+  guards. N02's mutant is killed by bare-class-word (a label word that ends its line), N32's by checkbox-severity.
+- N32's mutant removes two branches at once (the general non-letter skip and the checkbox skip). A narrower mutant that
+  keeps the checkbox skip (r15-matrix-inv-n32-narrow.diff) survives report_manifest_locale_cases
+  (r15-matrix-inv-n32-narrow-ml.log) and is killed in report_record_line_cases by the heading-label rows, whose `#` lead
+  is a non-letter (r15-matrix-inv-n32-narrow-rl.{log,out}), so that branch is still isolated.
+- Correction: N02 and N32 now name bare-class-word and checkbox-severity, with the reason beside the rows; no fixture and
+  no code changed. Probe r14-mutations-probe3.{log,rc}: exit 0, both rows killed with the named diagnostics, the 8
+  baselines passing. The run of record follows as r14-mutations-shard{0,1}.*.

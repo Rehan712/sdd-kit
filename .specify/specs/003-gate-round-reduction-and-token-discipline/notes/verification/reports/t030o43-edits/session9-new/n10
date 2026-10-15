@@ -1,0 +1,1 @@
+      /^##[^#]/ { flush(); task_stage=vf_heading_text(vf_original); next }

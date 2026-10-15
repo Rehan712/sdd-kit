@@ -1,0 +1,101 @@
+--- a/scripts/verification-lib.sh
++++ b/scripts/verification-lib.sh
+@@ -1914,7 +1914,10 @@
+   # and reads every ASCII grammar the kit writes as any other locale would,
+   # and gives the caller's LC_ALL back to the command a capture runs, while a
+   # check whose programs read the locale pins it or declares it (O-017); TMPDIR
+-  # decides where temporary files are written, never what a check concludes.
++  # decides where temporary files are written, while its spelling can decide a
++  # check that compares a path under it with one a program prints, so the kit's
++  # own suites set it to the physical path of that directory (tests/helpers.sh)
++  # and a project's check that does so pins it the same way or declares it.
+   #
+   # A project whose checks genuinely depend on one of these declares it in
+   # `verification_environment:`, and the declared path already proves presence
+--- a/templates/verification-contract.md
++++ b/templates/verification-contract.md
+@@ -375,7 +375,10 @@
+ them, as the kit's own reuse-checked commands pin `LC_ALL=C` when they start;
+ the harness gives the caller's `LC_ALL` back to the command a capture runs,
+ and the record of a declared `LC_ALL` carries that value, and
+-`TMPDIR` decides where temporary files go, never what a check concludes. A
++`TMPDIR` decides where temporary files go, while its spelling (a trailing or
++doubled slash, a symlink) can decide a check that compares a path under it
++with the path a program prints, so the kit's own suites set it to the physical
++path of the directory it names when they start. A
+ fixed list including them fails the cross-invocation test that matters:
+ `LC_CTYPE` and `LC_ALL` are exported by default by macOS Terminal, OpenSSH
+ `SendEnv` and most CI images, so recording them present in one shell and unset
+--- a/tests/helpers.sh
++++ b/tests/helpers.sh
+@@ -25,6 +25,23 @@
+ # LANG and every category, and gettext ignores LANGUAGE in the C locale. It is
+ # exported, so every program the suite runs inherits it.
+ export LC_ALL=C
++# TMPDIR, spelled as the physical path of the directory it names (T030o43,
++# CAP-521-Q8OdIp). Every sandbox and temporary path a suite makes begins with
++# it, and a program under test canonicalizes a path it is given, lexically
++# (`cd && pwd`, which collapses `//` and resolves `.` and `..`) or physically
++# (`cd -P`, `pwd -P`, which also resolve symlinks). A fixture that compared a
++# printed path, or matched an argument, with the caller's spelling decided its
++# verdict by that spelling: macOS's default TMPDIR ends in `/`, so a sandbox
++# was `.../T//sddkit.*` while the analyzer printed `.../T/sddkit.*`, and the
++# suite failed where every run under a TMPDIR written without the slash
++# passed. The physical path is a fixed point of both canonicalizations, so
++# every spelling of one directory (a trailing or doubled slash, `.`, `..`, a
++# symlink, or no TMPDIR at all, which is /tmp) gives a suite one string. It
++# names the same directory, so where temporary files go is unchanged. It is
++# exported, so every program the suite runs inherits it.
++_t_tmpdir="$(cd -P -- "${TMPDIR:-/tmp}" 2> /dev/null && pwd -P)" || {
++  printf 'tests/helpers.sh: TMPDIR does not name a directory: %s\n' "${TMPDIR:-/tmp}" >&2; exit 2; }
++export TMPDIR="$_t_tmpdir"; unset _t_tmpdir
+ 
+ KIT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+ # Consumed by the test files that source this helper.
+--- a/tests/test-verification.sh
++++ b/tests/test-verification.sh
+@@ -587,6 +587,33 @@
+   fi
+   run_rc 0 env SDD_RESUME_JITTER_SECONDS=301 XDG_STATE_HOME="$SANDBOX/ambient-state" \
+     bash -c '. "$1/tests/helpers.sh"; [[ -z "${SDD_RESUME_JITTER_SECONDS+set}${XDG_STATE_HOME+set}" ]]' _ "$KIT_DIR"
++  # TMPDIR is set to the physical path of the directory it names when a suite
++  # starts (T030o43, CAP-521-Q8OdIp): every spelling of one directory gives the
++  # same exported string, no TMPDIR gives the physical /tmp, a TMPDIR naming no
++  # directory stops the suite by name, and a nested suite's sandbox is a fixed
++  # point of both canonicalizations a program under test applies, so no
++  # spelling can reach a verdict that compares a path under it.
++  local tdir tlink tphys tsp
++  tdir="$SANDBOX/tmp-real"; tlink="$SANDBOX/tmp-link"
++  { mkdir -p "$tdir/sub" && ln -s tmp-real "$tlink"; } || t_fail 'AC-020: cannot build the TMPDIR fixture'
++  tphys="$(cd -P -- "$tdir" && pwd -P)"
++  for tsp in "$tdir" "$tdir/" "$tdir//" "$tdir/./" "$tdir/sub/.." "$tlink" "$tlink/" "$tlink/sub/../"; do
++    run_rc 0 env TMPDIR="$tsp" bash -c '. "$1/tests/helpers.sh"; printf "%s|" "$TMPDIR"; env | grep "^TMPDIR="' _ "$KIT_DIR"
++    assert_eq "$tphys|TMPDIR=$tphys" "$OUT" "AC-020: a suite kept the spelling of TMPDIR=$tsp (T030o43)"
++  done
++  run_rc 0 env -u TMPDIR bash -c '. "$1/tests/helpers.sh"; printf "%s|" "$TMPDIR"; env | grep "^TMPDIR="' _ "$KIT_DIR"
++  tphys="$(cd -P -- /tmp && pwd -P)"
++  assert_eq "$tphys|TMPDIR=$tphys" "$OUT" 'AC-020: a suite without TMPDIR did not export the physical /tmp (T030o43)'
++  run_rc 2 env TMPDIR="$SANDBOX/no-such-dir" bash -c '. "$1/tests/helpers.sh"; echo helpers-loaded' _ "$KIT_DIR"
++  assert_contains "$OUT" "TMPDIR does not name a directory: $SANDBOX/no-such-dir" \
++    'AC-020: a TMPDIR naming no directory was not refused by name (T030o43)'
++  assert_not_contains "$OUT" 'helpers-loaded' 'AC-020: a suite ran under a TMPDIR naming no directory (T030o43)'
++  printf '%s\n' '. "$1/tests/helpers.sh"' \
++    'test_sandbox_is_canonical() { [[ "$(cd "$SANDBOX" && pwd)" == "$SANDBOX" && "$(cd -P "$SANDBOX" && pwd -P)" == "$SANDBOX" ]] || t_fail "sandbox not canonical: $SANDBOX"; }' \
++    't_run_all' > "$SANDBOX/tmp-nested.sh"
++  run_rc 0 env TMPDIR="$tlink/" bash "$SANDBOX/tmp-nested.sh" "$KIT_DIR"
++  assert_contains "$OUT" '-- 1/1 passed' \
++    'AC-020: a suite under a symlinked TMPDIR with a trailing slash made a sandbox a program prints differently (T030o43)'
+   # Git's repository-local names are cleared when a suite starts, judged where
+   # that happens (review 6: fixture_git now clears them for its own writes, so
+   # the nested-build assertion below no longer sees this clearing). Every name
+--- a/.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md
++++ b/.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md
+@@ -737,7 +737,7 @@
+ 
+ - [ ] **T030o43** — Run the harness's own parsing under the C locale and never let a parse failure read as a pass
+   - *Files:* `scripts/verification-lib.sh`, `scripts/spec-run.sh`, `scripts/spec-task.sh`, `scripts/sdd-analyze.sh`, `scripts/spec-ac-coverage.sh`, `scripts/spec-evidence.sh`, `templates/verification-contract.md`, `tests/helpers.sh`, `tests/test-verification.sh`, `tests/test-gate-contracts.sh`, `tests/test-spec-gate.sh`, `tests/test-sdd-analyze.sh`
+-  - *Acceptance:* Derive the pin's member from the harness, not from the sites round 12 named (REQ-009, REQ-011, AC-012, AC-020): the file set the input identity records as `harness`, and every process it starts except the captured command. Every grammar the harness parses is ASCII, and under `LC_ALL=C` each byte is one character, so no byte can end a parse. A byte >= 0x80 is in no character class there, so every parser of author text reads the 19 non-ASCII Unicode White_Space characters as whitespace through one shared step before any rule of its own, mapped to a byte every class-based test reads as whitespace and no literal grammar does, so CommonMark structure and literal separators read as they did before the pin; it takes every value it passes on into a catalog or a record, to another program or into a comparison from the line as written, trimmed at its ends, and never splits a mapped line by awk's default field splitting; and a grammar token it cannot read is refused by name. `vf_report_block` alone reads the report as written, because its output is a sealed digest. `verification-lib.sh` exports `LC_ALL=C` when it loads, and each of the six harness entry scripts loads it directly after `lib.sh`, before any program reads a repository or bookkeeping byte; `lib.sh` is unchanged. The caller's `LC_ALL` (a value, empty, or unset) is kept in the exported `SDD_HARNESS_CALLER_LC_ALL` for the harness processes a harness process starts; the captured command (`vf_capture`, and `spec-run.sh`'s legacy run) gets it back exactly and never sees the record, and the record of a declared `LC_ALL` carries the caller's value. No parse failure reads as a passing result: every harness parser whose output decides a record, an identity or a verdict, and whose failure would read as an absence that passes, reads its exit status and fails closed with a diagnostic naming the parse, among them the prior-review manifest pass and the Decisions-log authorization parse (the members, derived from every text-program call in the harness, are recorded in Decisions). With every `LC_*` removed and `LANG` at `en_US.UTF-8`, `de_DE.UTF-8`, `C.UTF-8` and `ja_JP.SJIS`, a manifest carrying an undecodable byte, a Class binding and a UTF-8 manifest under Shift-JIS each refuse exactly as under C, through `vf_reports` and end to end through `spec-gate.sh round --complete`; the analyzer's clarification marker and AC inventory, and `spec-ac-coverage.sh`'s AC inventory, refuse the byte as under C; the prior-review manifest pass reads by the canonical field grammar keyed on its field lines, decides a field line by its label and takes its value after that label only, refuses by name a line not read as a heading that is a `#` run and the word Finding, and reads a Class or Severity line outside any finding as prose only while nothing since the last heading can hold a finding's record (a finding ID, a heading whose second word is Finding, or a heading deeper than the Finding heading it follows), and refuses a manifest from which it reads no finding, so every finding opened by a heading, or by a line that looks like one, is either read or refused by name; a value, field or section of only such whitespace is empty; the input identity's Decisions view covers every line the authorization scanner reads, from each line that begins `## Decisions log`, quoted or not, to the next unquoted heading; an artifact name or Agent path ends at any whitespace and a non-ASCII letter is part of it; a `verification_contract` key routes three ways by count in every reader; a matrix criterion is compared by the AC catalog's whitespace rule; a stage heading is its text trimmed at both ends in every reader that compares it; on macOS each locale must be one an unpinned awk cannot decode the byte under. Every harness entry script runs its programs under `LC_ALL=C`; the captured command sees the caller's `LC_ALL` unset, empty or set; a declared `LC_ALL` gives two identities for two caller values; and a fault injected into each member parser fails its operation closed with its exact diagnostic. Removing the pin, an entry script's early load, the restore, the caller-value record or any status read fails a fixture with an exact diagnostic. The contract and the kernel comment say the harness runs its own parsing under `LC_ALL=C`, gives the caller's `LC_ALL` back to the command it captures, and never lets a parse failure read as a pass. The input identity's records are unchanged apart from the edited files and the harness records.
++  - *Acceptance:* Derive the pin's member from the harness, not from the sites round 12 named (REQ-009, REQ-011, AC-012, AC-020): the file set the input identity records as `harness`, and every process it starts except the captured command. Every grammar the harness parses is ASCII, and under `LC_ALL=C` each byte is one character, so no byte can end a parse. A byte >= 0x80 is in no character class there, so every parser of author text reads the 19 non-ASCII Unicode White_Space characters as whitespace through one shared step before any rule of its own, mapped to a byte every class-based test reads as whitespace and no literal grammar does, so CommonMark structure and literal separators read as they did before the pin; it takes every value it passes on into a catalog or a record, to another program or into a comparison from the line as written, trimmed at its ends, and never splits a mapped line by awk's default field splitting; and a grammar token it cannot read is refused by name. `vf_report_block` alone reads the report as written, because its output is a sealed digest. `verification-lib.sh` exports `LC_ALL=C` when it loads, and each of the six harness entry scripts loads it directly after `lib.sh`, before any program reads a repository or bookkeeping byte; `lib.sh` is unchanged. The caller's `LC_ALL` (a value, empty, or unset) is kept in the exported `SDD_HARNESS_CALLER_LC_ALL` for the harness processes a harness process starts; the captured command (`vf_capture`, and `spec-run.sh`'s legacy run) gets it back exactly and never sees the record, and the record of a declared `LC_ALL` carries the caller's value. No parse failure reads as a passing result: every harness parser whose output decides a record, an identity or a verdict, and whose failure would read as an absence that passes, reads its exit status and fails closed with a diagnostic naming the parse, among them the prior-review manifest pass and the Decisions-log authorization parse (the members, derived from every text-program call in the harness, are recorded in Decisions). With every `LC_*` removed and `LANG` at `en_US.UTF-8`, `de_DE.UTF-8`, `C.UTF-8` and `ja_JP.SJIS`, a manifest carrying an undecodable byte, a Class binding and a UTF-8 manifest under Shift-JIS each refuse exactly as under C, through `vf_reports` and end to end through `spec-gate.sh round --complete`; the analyzer's clarification marker and AC inventory, and `spec-ac-coverage.sh`'s AC inventory, refuse the byte as under C; the prior-review manifest pass reads by the canonical field grammar keyed on its field lines, decides a field line by its label and takes its value after that label only, refuses by name a line not read as a heading that is a `#` run and the word Finding, and reads a Class or Severity line outside any finding as prose only while nothing since the last heading can hold a finding's record (a finding ID, a heading whose second word is Finding, or a heading deeper than the Finding heading it follows), and refuses a manifest from which it reads no finding, so every finding opened by a heading, or by a line that looks like one, is either read or refused by name; a value, field or section of only such whitespace is empty; the input identity's Decisions view covers every line the authorization scanner reads, from each line that begins `## Decisions log`, quoted or not, to the next unquoted heading; an artifact name or Agent path ends at any whitespace and a non-ASCII letter is part of it; a `verification_contract` key routes three ways by count in every reader; a matrix criterion is compared by the AC catalog's whitespace rule; a stage heading is its text trimmed at both ends in every reader that compares it; on macOS each locale must be one an unpinned awk cannot decode the byte under. Every harness entry script runs its programs under `LC_ALL=C`; the captured command sees the caller's `LC_ALL` unset, empty or set; a declared `LC_ALL` gives two identities for two caller values; and a fault injected into each member parser fails its operation closed with its exact diagnostic. The kit's suites set `TMPDIR` to the physical path of the directory it names when they start (`/tmp` when it is unset), so its spelling (a trailing or doubled slash, `.` or `..`, a symlink) cannot decide a verdict that compares a path under it, and a `TMPDIR` naming no directory stops a suite by name. Removing the pin, an entry script's early load, the restore, the caller-value record, any status read or the `TMPDIR` canonicalization fails a fixture with an exact diagnostic. The contract and the kernel comment say the harness runs its own parsing under `LC_ALL=C`, gives the caller's `LC_ALL` back to the command it captures, and never lets a parse failure read as a pass, and that the spelling of `TMPDIR` can decide a check that compares a path under it, which the kit's suites pin. The input identity's records are unchanged apart from the edited files and the harness records.
+   - *Verify kind:* test
+   - *Tests:* `tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-spec-gate.sh::test_rounds`, `tests/test-sdd-analyze.sh::test_verification_bindings`, `tests/test-verification.sh::test_capture_provenance`, `tests/test-spec-gate.sh::test_floor`, `tests/test-spec-gate.sh::test_acceptance`, `tests/test-spec-gate.sh::test_checkpoints`
+   - *Verify:* `bash tests/run.sh && bash tests/shellcheck.sh` → all suites `passed`, exit 0

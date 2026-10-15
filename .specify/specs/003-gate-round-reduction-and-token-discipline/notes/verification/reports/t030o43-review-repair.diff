@@ -1,0 +1,374 @@
+--- a/scripts/verification-lib.sh
++++ b/scripts/verification-lib.sh
+@@ -376,19 +376,24 @@
+ fi
+ 
+ # The harness's own parsing runs under the C locale (O-017, round 12). Every
+-# grammar the kit parses is ASCII, so C reads every record a UTF-8 or
+-# single-byte locale reads, and decodes every byte, where they do not: under a
+-# UTF-8 locale macOS awk dies at the first byte it cannot decode, and grep
+-# stops matching there and still exits 0. One cp1252 apostrophe in a
+-# prior-review manifest dropped the history a clearing verdict is checked
+-# against, and a clarification marker after such a byte read as absent. The
++# grammar the kit parses is ASCII. Under C each byte is one character, so no
++# byte can end a parse, where under a UTF-8 locale macOS awk dies at the first
++# byte it cannot decode and grep stops matching there and still exits 0: one
++# cp1252 apostrophe in a prior-review manifest dropped the history a clearing
++# verdict is checked against, and a clarification marker after such a byte
++# read as absent. Under C a byte >= 0x80 is also in no character class, so a
++# record written with a non-ASCII space or letter where the grammar wants ASCII
++# does not match it; each parser that decides with it refuses such a line, or,
++# where it decides what must be covered, keeps more (T030o43 review). The
+ # member is the harness itself: the files vf_snapshot records as `harness`, and
+ # every process they start except the command a capture runs. The pin is placed
+ # once, here, and every harness entry script loads this library directly after
+ # lib.sh, before any program reads a repository or bookkeeping byte; the export
+-# reaches each process it starts. lib.sh stays unpinned, so 002's dispatcher,
+-# which sources it but not this library, and the provider CLIs it starts keep
+-# the user's locale.
++# reaches each process it starts. sdd-doctor.sh loads it too, so the doctor's
++# checks, and the provider readiness probes it starts (which judge by exit
++# status alone), run under C as well. lib.sh stays unpinned, so 002's
++# dispatcher, which sources it but not this library, and the provider CLIs it
++# starts keep the user's locale.
+ #
+ # The caller's LC_ALL (a value, empty, or unset) is kept in the exported
+ # SDD_HARNESS_CALLER_LC_ALL, `unset` or `set:<value>`, so a harness process
+@@ -475,7 +480,8 @@
+   out="$(grep -oE -- "$1" "$2")"; rc=$?
+   (( rc < 2 )) || { printf 'error: %s: ids matching %s could not be read\n' "$2" "$1" >&2; return 3; }
+   [[ -n "$out" ]] || return 0
+-  printf '%s\n' "$out" | LC_ALL=C sort -u
++  printf '%s\n' "$out" | LC_ALL=C sort -u - ||
++    { printf 'error: %s: ids matching %s could not be sorted\n' "$2" "$1" >&2; return 3; }
+ )
+ 
+ _vf_reject_nul() { # <file> <display-name>
+@@ -1072,28 +1078,54 @@
+     # so an awk that dies part-way loses the finding in progress and every one
+     # after it -- the strictest tier and Class binding three guards read. Its
+     # status used to be read by nobody (O-017), so it is read here.
++    # Every line that carries a manifest record's marker must parse as that
++    # record, by the same field grammar a canonical finding obeys. The grammar
++    # is ASCII, and under the harness pin a byte >= 0x80 is in no character
++    # class, so a heading or field line written with a non-ASCII space no
++    # longer matched it -- and was skipped in silence, which dropped the
++    # finding, its strictest tier and its Class (T030o43 review F1).
+     awk "$_VF_AWK_FENCE"'
+-      function flushm() {if(id!="" && cls!="") print id ":" cls ":" sev; id=""; cls=""; sev=""}
++      function bad(why) {printf "manifest line %d: %s: %s\n", FNR, why, $0 > "/dev/stderr"; failed=1}
++      function flushm() {
++        if(id!="" && cls=="") bad("finding " id " has no readable Class")
++        if(id!="" && cls!="") print id ":" cls ":" sev
++        id=""; cls=""; sev=""
++      }
+       vf_quoted($0) {next}
+       /^#+ Finding [A-Z][A-Z0-9]*-[0-9]+[[:space:]]*$/ {flushm(); id=$NF; next}
++      /^#+[^A-Za-z]*Finding([^A-Za-z]|$)/ {flushm(); bad("a Finding heading this grammar cannot read"); next}
+       id != "" && /^-[[:space:]]+\*\*Class:\*\*/ {
+         cls=$0; sub(/^.*\*\*Class:\*\*[[:space:]]*/, "", cls)
+         gsub(/[[:space:]]/, "", cls)
++        if (cls !~ /^[a-z][a-z0-9]*(-[a-z0-9]+)*$/) {bad("a Class this grammar cannot read"); cls="-"}
++        next
+       }
+       id != "" && /^-[[:space:]]+\*\*Severity:\*\*/ {
+         sev=$0; sub(/^.*\*\*Severity:\*\*[[:space:]]*/, "", sev)
+         gsub(/[[:space:]]/, "", sev)
++        if (sev !~ /^(data-loss|wrong-result|regression|crash|minor|degraded)$/) bad("a Severity this grammar cannot read")
++        next
+       }
+-      END {flushm()}
++      id != "" && /\*\*(Class|Severity):\*\*/ {bad("a Class or Severity line this grammar cannot read")}
++      END {flushm(); if (failed) exit 3}
+     ' "$manifest" > "$tmp" || {
+       printf 'report recovery: %s: prior-review manifest could not be parsed; reconcile canonical records\n' "$manifest" >&2; return 3; }
+-    records="$(LC_ALL=C sort -u "$tmp")" || return 3
++    records="$(LC_ALL=C sort -u "$tmp")" ||
++      { printf 'report recovery: %s: prior-review manifest records could not be sorted\n' "$manifest" >&2; return 3; }
+     [[ -z "$records" ]] || priorids="$priorids${records//$'\n'/ } "
+   done
+   VF_REPORT_FILE="$file" awk -v gate="$gate" -v priorids="$priorids" "$_VF_AWK_FENCE"'
+     function err(s) {print "report recovery: " ENVIRON["VF_REPORT_FILE"] ":" NR ": " s "; reconcile canonical records" > "/dev/stderr"; bad=1}
+     function clean(s) {gsub(/^[[:space:]]+|[[:space:]]+$/, "", s); return s}
+     function value(s) {sub(/^.*\*\*[^*]+:\*\*[ ]*/, "", s); return clean(s)}
++    # Blank is what a reader sees as blank. A section body is author text in
++    # any script, so a line of only Unicode White_Space characters (their
++    # UTF-8 encodings, which under the harness pin are in no class) is as empty
++    # as a line of ASCII blanks; any other byte is content (T030o43 review).
++    function vf_blank(s) {
++      gsub(/[ \t\r\f\013]|\302[\205\240]|\341\232\200|\342\200[\200-\212\250\251\257]|\342\201\237|\343\200\200/, "", s)
++      return s == ""
++    }
+     function emit(a,b,c,d,e,f,g,h,i,j,k,l) {printf "%s%c%s%c%s%c%s%c%s%c%s%c%s%c%s%c%s%c%s%c%s%c%s%c",a,0,b,0,c,0,d,0,e,0,f,0,g,0,h,0,i,0,j,0,k,0,l,0}
+     BEGIN {
+       manifestn=split(priorids, manifestrecords, /[ ]+/)
+@@ -1288,7 +1320,7 @@
+     # A heading alone is not a record: require at least one non-blank, non-heading
+     # line under it. Finding blocks and the completion marker close the section so
+     # their own lines cannot be counted as another section body.
+-    cursec!="" && $0 !~ /^[[:space:]]*$/ && $0 !~ /^#+[ ]/ {secbody[n SUBSEP cursec]=1}
++    cursec!="" && !vf_blank($0) && $0 !~ /^#+[ ]/ {secbody[n SUBSEP cursec]=1}
+     style=="legacy" && /^[0-9]+\. .*severity:/ {
+       finding(); fid="legacy-" n "-" ++legacyid; cls="unclassified"; status="new"; prior="none"
+       sev=$0; sub(/^.*severity:\*[ ]*/,"",sev); sev=clean(sev); next
+@@ -1523,7 +1555,11 @@
+ vf_semantic_file() { # <repo-relative path> <input-file> <output-file>
+   case "$1" in
+     .specify/specs/*/STATUS.md)
+-      awk '/^## Decisions log[[:space:]]*$/ {on=1; print; next} /^## / {on=0} on {print}' "$2" > "$3";;
++      # The identity keeps more, never less: the section starts at the first
++      # line that begins "## Decisions log", whatever follows on that line,
++      # so a heading carrying a byte the grammar cannot read can no longer
++      # take the whole log out of the input identity (T030o43 review).
++      awk '/^## Decisions log/ && !seen {on=1; seen=1; print; next} /^## / {on=0} on {print}' "$2" > "$3";;
+     .specify/specs/*/spec.md|.specify/specs/*/plan.md|.specify/specs/*/tasks.md)
+       awk -v document="$1" '
+         NR==1 && $0=="---" {fm=1; print; next}
+@@ -1972,7 +2008,12 @@
+ # Parse only an explicit return block. All emitted records have four NUL fields.
+ vf_return_parse() {
+   _vf_reject_nul "$1" "$1" || return 3
+-  [[ "$(wc -c < "$1")" -le 65536 ]] || { echo 'return exceeds 64 KiB' >&2; return 3; }
++  # The size is read with its status: an empty count compared as 0 and let
++  # any return past the bound (T030o43 review F3).
++  local size
++  size="$(wc -c < "$1")" && [[ "$size" =~ ^[[:space:]]*[0-9]+[[:space:]]*$ ]] ||
++    { echo 'return: its size could not be read' >&2; return 3; }
++  (( size <= 65536 )) || { echo 'return exceeds 64 KiB' >&2; return 3; }
+   awk '
+     function err(s) {print "return: " s > "/dev/stderr"; bad=1}
+     function trim(s) {sub(/^[ ]+/,"",s); sub(/[ ]+$/,"",s); return s}
+--- a/scripts/spec-evidence.sh
++++ b/scripts/spec-evidence.sh
+@@ -53,6 +53,10 @@
+ # Legacy evidence remains readable; new contracts need current proof by default.
+ # A frontmatter that cannot be read is a failure, never the legacy check.
+ evidence_contract="$(vf_fm_value "$SPEC_FILE" verification_contract)" || exit 3
++# Three ways, as every other reader of the contract routes it: absent is
++# legacy, 1 is current, anything else is refused, never the legacy check.
++[[ -z "$evidence_contract" || "$evidence_contract" == 1 ]] ||
++  { echo "unsupported verification contract: $evidence_contract" >&2; exit 3; }
+ if [[ "${2:-}" == --current || "$evidence_contract" == 1 ]]; then
+   vf_evidence_current "$SPEC_DIR"
+   exit $?
+@@ -112,7 +116,10 @@
+   esac
+ 
+   # 3. named screenshot/PDF artifact must exist on disk
+-  arts="$(printf '%s\n' "$ev" | grep -oiE '[[:graph:]]+\.(png|jpg|jpeg|gif|svg|pdf)')"; arts_rc=$?
++  # Any byte that is not a blank or a control character belongs to the name:
++  # under the harness pin [[:graph:]] is ASCII only, which cut a non-ASCII
++  # artifact name short or missed it (T030o43 review F2).
++  arts="$(printf '%s\n' "$ev" | grep -oiE '[^[:space:][:cntrl:]]+\.(png|jpg|jpeg|gif|svg|pdf)')"; arts_rc=$?
+   (( arts_rc < 2 )) || fail "$id evidence could not be searched for artifact names"
+   for art in $arts; do
+     art="${art%[.,;:)]}"   # trim trailing punctuation
+--- a/templates/verification-contract.md
++++ b/templates/verification-contract.md
+@@ -356,9 +356,11 @@
+ digest and by the harness records, `SHELL` is never read because library
+ functions run under an explicit `bash`, `LANG` and the locale categories
+ change no record the harness writes (it runs its own parsing under
+-`LC_ALL=C`, which decodes every byte and reads every ASCII grammar the kit
+-writes as any other locale would, and a parse that fails never reads as a
+-passing result), while a check whose programs read them pins them or declares
++`LC_ALL=C`, where each byte is one character, so no byte can end a parse, and
++a byte >= 0x80 is in no character class, so a record line its ASCII grammar
++cannot read is refused by name or, where the harness decides what must be
++covered, kept whole; and a parse that fails never reads as a passing result),
++while a check whose programs read them pins them or declares
+ them, as the kit's own reuse-checked commands pin `LC_ALL=C` when they start;
+ the harness gives the caller's `LC_ALL` back to the command a capture runs,
+ and the record of a declared `LC_ALL` carries that value, and
+--- a/tests/test-gate-contracts.sh
++++ b/tests/test-gate-contracts.sh
+@@ -983,7 +983,56 @@
+       "$SCRIPTS/verification-lib.sh" "$report" "$SANDBOX/manifest-locale.nul" "$spec"
+     assert_contains "$OUT" 'finding G-042 changes Class from tier-binding to silent-data-loss' \
+       "AC-012: a Class the manifest bound changed under LANG=$l (O-017)"
++  done
++  # T030o43 review F1: under the pin a byte >= 0x80 is in no character class,
++  # so a manifest heading or field line written with a U+00A0 where the
++  # grammar wants a space does not match it. The pass refuses such a line by
++  # name, in every locale, instead of dropping the finding in silence.
++  local line nb=$'\302\240'
++  for line in "-$nb**Class:** tier-binding" "-$nb**Severity:** data-loss" "### Finding G-042$nb" "###${nb}Finding G-042"; do
++    case "$line" in
++      *Finding*) printf '# Prior review\n\n%s\n- **Class:** tier-binding\n- **Severity:** data-loss\n' "$line";;
++      *Class*) printf '# Prior review\n\n### Finding G-042\n%s\n- **Severity:** data-loss\n' "$line";;
++      *) printf '# Prior review\n\n### Finding G-042\n- **Class:** tier-binding\n%s\n' "$line";;
++    esac > "$spec/notes/verification/reports/opponent-findings-review.md"
++    tier_round_fixture 1 '' G-042:tier-binding:open:minor > "$report"
++    for l in C en_US.UTF-8; do
++      run_rc 3 in_locale "$l" bash -c '. "$1"; vf_reports "$2" opponent "$3" "$4"' _ \
++        "$SCRIPTS/verification-lib.sh" "$report" "$SANDBOX/manifest-locale.nul" "$spec"
++      assert_contains "$OUT" 'prior-review manifest could not be parsed' \
++        "AC-012: a manifest line carrying a U+00A0 was dropped in silence under LANG=$l (T030o43 review)"
++    done
+   done
++  # The same field grammar a canonical finding obeys: a finding with no Class,
++  # a Class or a Severity it does not define, is refused, never dropped.
++  local body
++  for body in '### Finding G-042\n- **Severity:** data-loss\n' \
++      '### Finding G-042\n- **Class:** Tier-Binding\n- **Severity:** data-loss\n' \
++      '### Finding G-042\n- **Class:** tier-binding\n- **Severity:** data loss\n'; do
++    printf '# Prior review\n\n%b' "$body" > "$spec/notes/verification/reports/opponent-findings-review.md"
++    run_rc 3 bash -c '. "$1"; vf_reports "$2" opponent "$3" "$4"' _ \
++      "$SCRIPTS/verification-lib.sh" "$report" "$SANDBOX/manifest-locale.nul" "$spec"
++    assert_contains "$OUT" 'prior-review manifest could not be parsed' \
++      "AC-012: a manifest finding its grammar cannot read was not refused by name: $body (T030o43 review)"
++  done
++  printf '# Prior review\n\n### Finding G-042\n- **Class:** tier-binding\n- **Severity:** data-loss\n' \
++    > "$spec/notes/verification/reports/opponent-findings-review.md"
++  fault_bin "$SANDBOX/fault-manifest-sort" sort 'manifest-locale.nul.'
++  run_rc 3 env PATH="$SANDBOX/fault-manifest-sort:$PATH" bash -c '. "$1"; vf_reports "$2" opponent "$3" "$4"' _ \
++    "$SCRIPTS/verification-lib.sh" "$report" "$SANDBOX/manifest-locale.nul" "$spec"
++  assert_contains "$OUT" 'prior-review manifest records could not be sorted' \
++    'AC-012: manifest records that could not be sorted were read as none (T030o43 review)'
++  # A required section whose only body line is a U+00A0 is as empty as a
++  # blank one, in every locale.
++  local blank_spec="$SANDBOX/section-blank"; mkdir -p "$blank_spec/notes"
++  tier_round_fixture 1 '' G-042:tier-binding:new:data-loss |
++    sed "s/^Severity tier binding across rounds of one gate\.\$/$nb/" > "$blank_spec/notes/opponent.md"
++  for l in C en_US.UTF-8; do
++    run_rc 3 in_locale "$l" bash -c '. "$1"; vf_reports "$2" opponent "$3" "$4"' _ \
++      "$SCRIPTS/verification-lib.sh" "$blank_spec/notes/opponent.md" "$SANDBOX/section-blank.nul" "$blank_spec"
++    assert_contains "$OUT" 'empty required report section: what i attacked' \
++      "AC-012: a required section holding only a U+00A0 counted as a body under LANG=$l (T030o43 review)"
++  done
+   # The status half (T030o43): a manifest pass that dies is refused by name,
+   # never read as a manifest that records nothing.
+   fault_bin "$SANDBOX/fault-manifest" awk 'function flushm'
+@@ -1002,6 +1051,10 @@
+   run_rc 3 env PATH="$SANDBOX/fault-tally-class:$PATH" bash "$SCRIPTS/spec-gate.sh" tally "$spec"
+   assert_contains "$OUT" 'tally: the class table could not be computed' \
+     'AC-017: a class table that could not be computed went missing from the tally (O-017)'
++  fault_bin "$SANDBOX/fault-tally-sort" sort 'class-lines'
++  run_rc 3 env PATH="$SANDBOX/fault-tally-sort:$PATH" bash "$SCRIPTS/spec-gate.sh" tally "$spec"
++  assert_contains "$OUT" 'tally: the class table could not be sorted' \
++    'AC-017: a class table that could not be sorted went missing from the tally (T030o43 review)'
+   fault_bin "$SANDBOX/fault-tally-obs" awk 'distinct++'
+   run_rc 3 env PATH="$SANDBOX/fault-tally-obs:$PATH" bash "$SCRIPTS/spec-gate.sh" tally "$spec"
+   assert_contains "$OUT" 'tally: the finding observations could not be counted' \
+--- a/tests/test-spec-gate.sh
++++ b/tests/test-spec-gate.sh
+@@ -69,6 +69,15 @@
+   assert_contains "$OUT" 'frontmatter could not be read for verification_contract' \
+     'AC-022: an unreadable frontmatter sent spec-run.sh down the legacy path (T030o43)'
+   assert_eq "$evidence_before" "$(cat "$spec/notes/evidence.md")" 'AC-022: the legacy path recorded a run'
++  # The size bound reads its count with its status (T030o43 review F3).
++  { printf 'Verification-Return: 1\nTask: T001\nCaptures: %s\nSummary: s\nFailure modes: none\n' "$cap"
++    head -c 70000 /dev/zero | tr '\000' 'x'; printf '\n'; } > "$SANDBOX/big-return.txt"
++  run_rc 3 bash -c '. "$1"; vf_return_parse "$2" "$3"' _ "$SCRIPTS/verification-lib.sh" "$SANDBOX/big-return.txt" "$SANDBOX/big.nul"
++  assert_contains "$OUT" 'return exceeds 64 KiB' 'fixture: the size bound'
++  f="$SANDBOX/fault-wc"; fault_bin "$f" wc -c
++  run_rc 3 env PATH="$f:$PATH" bash -c '. "$1"; vf_return_parse "$2" "$3"' _ "$SCRIPTS/verification-lib.sh" "$SANDBOX/big-return.txt" "$SANDBOX/big.nul"
++  assert_contains "$OUT" 'return: its size could not be read' \
++    'AC-022: a size that could not be read let a return past the 64 KiB bound (T030o43 review)'
+   # A declared LC_ALL through spec-gate.sh accept, which execs spec-task.sh.
+   spec="$(make_verification_git_dir acceptlocale)"
+   repo="$(cd "$spec/../../.." && pwd -P)"
+@@ -415,7 +424,14 @@
+   run_rc 3 env PATH="$f:$PATH" bash "$SCRIPTS/spec-evidence.sh" "$spec"
+   assert_contains "$OUT" 'frontmatter could not be read for verification_contract' \
+     'AC-007: an unreadable frontmatter swapped the current-evidence check for the legacy one (T030o43)'
++  # A contract value that is neither absent nor 1 is refused, never read as
++  # the legacy check (T030o43 review): a U+00A0 after the colon is a value.
+   cp "$spec/spec.md" "$SANDBOX/floorfault-spec"
++  sed "s/^verification_contract: 1\$/verification_contract:$(printf '\302\240')1/" "$SANDBOX/floorfault-spec" > "$spec/spec.md"
++  run_rc 3 bash "$SCRIPTS/spec-evidence.sh" "$spec"
++  assert_contains "$OUT" 'unsupported verification contract' \
++    'AC-007: a contract value spec-evidence.sh cannot read sent it down the legacy check (T030o43 review)'
++  cp "$SANDBOX/floorfault-spec" "$spec/spec.md"
+   printf '\n- \222 AC-998 is a criterion no test names\n' >> "$spec/spec.md"
+   if [[ "$(uname -s)" == Darwin && -n "$(printf '\222 AC-998\n' | in_locale en_US.UTF-8 grep -oE 'AC-[0-9]{3}')" ]]; then
+     t_fail 'AC-007: precondition: an unpinned grep under en_US.UTF-8 must miss an id after 0x92 0x20 (O-017)'
+@@ -445,6 +461,24 @@
+   run_rc 1 env PATH="$f:$PATH" bash "$SCRIPTS/spec-evidence.sh" "$legacy"
+   assert_contains "$OUT" 'T001 evidence could not be searched for artifact names' \
+     'AC-007: artifact names that could not be searched read as none named (T030o43)'
++  # A non-ASCII artifact name is taken whole: a missing one fails and an
++  # existing one passes, in every locale (T030o43 review F2).
++  mkdir -p "$legacy/shots"; : > "$legacy/shots/écran.png"
++  local name l
++  for name in café écran; do
++    printf -- '---\nspec: 001-legacy\n---\n\n## Backend\n\n- [x] **T001** — Legacy task\n  - *Acceptance:* legacy\n  - *Evidence:* screenshot shots/%s.png\n' "$name" > "$legacy/tasks.md"
++    for l in C en_US.UTF-8; do
++      if [[ "$name" == café ]]; then
++        run_rc 1 in_locale "$l" bash "$SCRIPTS/spec-evidence.sh" "$legacy"
++        assert_contains "$OUT" "names artifact 'shots/café.png'" \
++          "AC-007: a missing non-ASCII artifact name passed under LANG=$l (T030o43 review)"
++      else
++        run_rc 0 in_locale "$l" bash "$SCRIPTS/spec-evidence.sh" "$legacy"
++        assert_not_contains "$OUT" 'names artifact' \
++          "AC-007: an existing non-ASCII artifact name was cut short under LANG=$l (T030o43 review)"
++      fi
++    done
++  done
+ }
+ 
+ test_floor() {
+--- a/tests/test-verification.sh
++++ b/tests/test-verification.sh
+@@ -429,6 +429,13 @@
+     assert_contains "$OUT" "key=seen=$want record=<unset> exit=0" \
+       "AC-020: a captured command did not get the caller's LC_ALL ($v) back (O-017)"
+   done
++  # A record inherited beside an LC_ALL other than C means LC_ALL was set after
++  # the harness last pinned it, so that value is the caller's (T030o43 review).
++  run_rc 0 in_locale C env SDD_HARNESS_CALLER_LC_ALL=set:C LC_ALL=en_US.UTF-8 \
++    "$SCRIPTS/spec-run.sh" "$spec" T001 --cwd "$repo" --no-tick --summary -- \
++    bash -c 'printf "seen=%s record=%s\n" "${LC_ALL-<unset>}" "${SDD_HARNESS_CALLER_LC_ALL-<unset>}"'
++  assert_contains "$OUT" 'key=seen=en_US.UTF-8 record=<unset> exit=0' \
++    "AC-020: a record inherited beside another LC_ALL replaced the caller's value (T030o43 review)"
+   # The legacy run restores it too.
+   legacy="$SANDBOX/legacy-run/.specify/specs/001-legacy"; mkdir -p "$legacy"
+   printf -- '---\nspec: 001-legacy\nstatus: accepted\n---\n\n- AC-001: legacy criterion\n' > "$legacy/spec.md"
+@@ -448,6 +455,23 @@
+     "environment	LC_ALL	present	$want" "AC-020: a declared LC_ALL was not hashed by the caller's value (O-017)"
+   cmp -s "$SANDBOX/declared-en_US.UTF-8.nul" "$SANDBOX/declared-de_DE.UTF-8.nul" &&
+     t_fail "AC-020: two caller values of a declared LC_ALL gave one identity (O-017)"
++  # An unset caller LC_ALL is recorded unset, not as the pin's C.
++  run_rc 0 in_locale C env -u LC_ALL bash -c '. "$1"; vf_snapshot "$2" "$3" "$3" "$4"' _ \
++    "$SCRIPTS/verification-lib.sh" "$spec" "$repo" "$SANDBOX/declared-unset.nul"
++  run_rc 0 in_locale C env LC_ALL=C bash -c '. "$1"; vf_snapshot "$2" "$3" "$3" "$4"' _ \
++    "$SCRIPTS/verification-lib.sh" "$spec" "$repo" "$SANDBOX/declared-C.nul"
++  assert_contains "$(tr '\000' '\n' < "$SANDBOX/declared-unset.nul" | paste - - - - - -)" "environment	LC_ALL	unset" \
++    'AC-020: an unset caller LC_ALL was recorded as the pin (T030o43 review)'
++  cmp -s "$SANDBOX/declared-unset.nul" "$SANDBOX/declared-C.nul" &&
++    t_fail 'AC-020: an unset caller LC_ALL and LC_ALL=C gave one identity (T030o43 review)'
++  # The identity keeps more, never less: a Decisions heading carrying a U+00A0
++  # still starts the section the identity hashes (T030o43 review).
++  printf -- '---\nspec: x\n---\n\n## Decisions log\302\240\n\n- 2026-09-06 — one decision\n' > "$SANDBOX/status-a.md"
++  printf -- '---\nspec: x\n---\n\n## Decisions log\302\240\n\n- 2026-09-06 — another decision\n' > "$SANDBOX/status-b.md"
++  bash -c '. "$1"; vf_semantic_file "$2" "$3" "$4" && vf_semantic_file "$2" "$5" "$6"' _ "$SCRIPTS/verification-lib.sh" \
++    .specify/specs/x/STATUS.md "$SANDBOX/status-a.md" "$SANDBOX/status-a.sem" "$SANDBOX/status-b.md" "$SANDBOX/status-b.sem"
++  cmp -s "$SANDBOX/status-a.sem" "$SANDBOX/status-b.sem" &&
++    t_fail 'AC-020: a Decisions log under a heading carrying a U+00A0 left the input identity (T030o43 review)'
+   # The sorts whose output the identity hashes read their status.
+   fault_bin "$SANDBOX/fault-env-names" sort 'env-names'
+   run_rc 3 env PATH="$SANDBOX/fault-env-names:$PATH" bash -c '. "$1"; vf_snapshot "$2" "$3" "$3" "$4"' _ \
+--- a/tests/test-sdd-analyze.sh
++++ b/tests/test-sdd-analyze.sh
+@@ -203,6 +203,10 @@
+     'AC-023: an AC inventory that could not be read read as no uncovered AC (T030o43)'
+   assert_contains "$OUT" 'verification contract: vf_bindings could not read the criteria and requirements of spec.md' \
+     'AC-023: the binding parser read an AC inventory that failed (T030o43)'
++  f="$SANDBOX/fault-ids-sort"; fault_bin "$f" sort '=-u' '=-'
++  run_rc 1 env PATH="$f:$PATH" "$ANALYZE" "$spec_dir"
++  assert_contains "$OUT" 'ids matching AC-[0-9]{3} could not be sorted' \
++    'AC-023: an id inventory that could not be sorted read as a short one (T030o43 review)'
+   f="$SANDBOX/fault-refs"; fault_bin "$f" grep '(AC|REQ)-[0-9]{3}' "$spec_dir/tasks.md"
+   run_rc 1 env PATH="$f:$PATH" "$ANALYZE" "$spec_dir"
+   assert_contains "$OUT" 'tasks.md could not be read for its AC and REQ references' \
+--- a/.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md
++++ b/.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md
+@@ -737,7 +737,7 @@
+ 
+ - [ ] **T030o43** — Run the harness's own parsing under the C locale and never let a parse failure read as a pass
+   - *Files:* `scripts/verification-lib.sh`, `scripts/spec-run.sh`, `scripts/spec-task.sh`, `scripts/sdd-analyze.sh`, `scripts/spec-ac-coverage.sh`, `scripts/spec-evidence.sh`, `templates/verification-contract.md`, `tests/helpers.sh`, `tests/test-verification.sh`, `tests/test-gate-contracts.sh`, `tests/test-spec-gate.sh`, `tests/test-sdd-analyze.sh`
+-  - *Acceptance:* Derive the pin's member from the harness, not from the sites round 12 named (REQ-009, REQ-011, AC-012, AC-020): the file set the input identity records as `harness`, and every process it starts except the captured command. Every grammar the harness parses is ASCII, so `LC_ALL=C` reads every record a UTF-8 or single-byte locale reads and decodes every byte. `verification-lib.sh` exports `LC_ALL=C` when it loads, and each of the six harness entry scripts loads it directly after `lib.sh`, before any program reads a repository or bookkeeping byte; `lib.sh` is unchanged. The caller's `LC_ALL` (a value, empty, or unset) is kept in the exported `SDD_HARNESS_CALLER_LC_ALL` for the harness processes a harness process starts; the captured command (`vf_capture`, and `spec-run.sh`'s legacy run) gets it back exactly and never sees the record, and the record of a declared `LC_ALL` carries the caller's value. No parse failure reads as a passing result: every harness parser whose output decides a record, an identity or a verdict, and whose failure would read as an absence that passes, reads its exit status and fails closed with a diagnostic naming the parse, among them the prior-review manifest pass and the Decisions-log authorization parse (the members, derived from every text-program call in the harness, are recorded in Decisions). With every `LC_*` removed and `LANG` at `en_US.UTF-8`, `de_DE.UTF-8`, `C.UTF-8` and `ja_JP.SJIS`, a manifest carrying an undecodable byte, a Class binding and a UTF-8 manifest under Shift-JIS each refuse exactly as under C, through `vf_reports` and end to end through `spec-gate.sh round --complete`; the analyzer's clarification marker and AC inventory, and `spec-ac-coverage.sh`'s AC inventory, refuse the byte as under C; on macOS each locale must be one an unpinned awk cannot decode the byte under. Every harness entry script runs its programs under `LC_ALL=C`; the captured command sees the caller's `LC_ALL` unset, empty or set; a declared `LC_ALL` gives two identities for two caller values; and a fault injected into each member parser fails its operation closed with its exact diagnostic. Removing the pin, an entry script's early load, the restore, the caller-value record or any status read fails a fixture with an exact diagnostic. The contract and the kernel comment say the harness runs its own parsing under `LC_ALL=C`, gives the caller's `LC_ALL` back to the command it captures, and never lets a parse failure read as a pass. The input identity's records are unchanged apart from the edited files and the harness records.
++  - *Acceptance:* Derive the pin's member from the harness, not from the sites round 12 named (REQ-009, REQ-011, AC-012, AC-020): the file set the input identity records as `harness`, and every process it starts except the captured command. Every grammar the harness parses is ASCII: under `LC_ALL=C` each byte is one character, so no byte can end a parse, and a byte >= 0x80 is in no character class, so a record line or token the ASCII grammar cannot read is refused by name, or, where the parser decides what must be covered, kept whole. `verification-lib.sh` exports `LC_ALL=C` when it loads, and each of the six harness entry scripts loads it directly after `lib.sh`, before any program reads a repository or bookkeeping byte; `lib.sh` is unchanged. The caller's `LC_ALL` (a value, empty, or unset) is kept in the exported `SDD_HARNESS_CALLER_LC_ALL` for the harness processes a harness process starts; the captured command (`vf_capture`, and `spec-run.sh`'s legacy run) gets it back exactly and never sees the record, and the record of a declared `LC_ALL` carries the caller's value. No parse failure reads as a passing result: every harness parser whose output decides a record, an identity or a verdict, and whose failure would read as an absence that passes, reads its exit status and fails closed with a diagnostic naming the parse, among them the prior-review manifest pass and the Decisions-log authorization parse (the members, derived from every text-program call in the harness, are recorded in Decisions). With every `LC_*` removed and `LANG` at `en_US.UTF-8`, `de_DE.UTF-8`, `C.UTF-8` and `ja_JP.SJIS`, a manifest carrying an undecodable byte, a Class binding and a UTF-8 manifest under Shift-JIS each refuse exactly as under C, through `vf_reports` and end to end through `spec-gate.sh round --complete`; the analyzer's clarification marker and AC inventory, and `spec-ac-coverage.sh`'s AC inventory, refuse the byte as under C; a manifest heading or field line, or a required report section, carrying a U+00A0 is refused in every locale, a Decisions heading carrying one still starts the hashed section, and a non-ASCII artifact name is taken whole; on macOS each locale must be one an unpinned awk cannot decode the byte under. Every harness entry script runs its programs under `LC_ALL=C`; the captured command sees the caller's `LC_ALL` unset, empty or set; a declared `LC_ALL` gives two identities for two caller values; and a fault injected into each member parser fails its operation closed with its exact diagnostic. Removing the pin, an entry script's early load, the restore, the caller-value record or any status read fails a fixture with an exact diagnostic. The contract and the kernel comment say the harness runs its own parsing under `LC_ALL=C`, gives the caller's `LC_ALL` back to the command it captures, and never lets a parse failure read as a pass. The input identity's records are unchanged apart from the edited files and the harness records.
+   - *Verify kind:* test
+   - *Tests:* `tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-spec-gate.sh::test_rounds`, `tests/test-sdd-analyze.sh::test_verification_bindings`, `tests/test-verification.sh::test_capture_provenance`, `tests/test-spec-gate.sh::test_floor`, `tests/test-spec-gate.sh::test_acceptance`, `tests/test-spec-gate.sh::test_checkpoints`
+   - *Verify:* `bash tests/run.sh && bash tests/shellcheck.sh` → all suites `passed`, exit 0

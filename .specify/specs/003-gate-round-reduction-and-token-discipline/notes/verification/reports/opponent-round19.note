@@ -1,0 +1,12 @@
+Provenance of opponent-round19.md (session 22, 2026-10-15).
+
+The independent opponent (subagent type opponent, dispatched 2026-10-15T07:29:47Z with opponent-round19-brief.md,
+sha256 f6721f57...) wrote opponent-round19.md itself (file time 08:08Z) and returned the same block as the message of
+its one SubagentHandback call, with no usage-limit stop. r19-persist-report.py compared that message, taken from the
+agent's own transcript (no retyping), to the file (r19-persist.{log,rc}, exit 0: "existing report equals the returned
+block"): it starts `## Round 19`, ends with the completion marker and one newline, and holds no carriage return.
+sha256 a99077db6dc4193ef8d0551d858140ed3d7ad25a9e317ec3e0402c87203388cf, 15767 bytes, 128 lines; timestamp
+2026-10-15T08:06:13Z; verdict CLEARED, Blocking 0, Minor 3 (O-026, O-027, O-028, all new, minor under REQ-011 as
+revised). The agent removed its copy (/private/tmp/opp19 absent at return). The worktree states before the
+reservation, at it and at return are byte-identical (r19-state-{prereserve,reserved,returned}.*: 5548 paths, entries
+digest 79126c7c...). The Mac ran on AC; free disk was 7.8 GiB at reservation and 8.2 GiB at return.
