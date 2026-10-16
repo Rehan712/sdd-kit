@@ -1,0 +1,11 @@
+  awk -F '|' "$_VF_AWK_TEXT"'
+    function trim(s) {sub(/^[ ]*/,"",s); sub(/[ ]*$/, "",s); return s}
+    # The criterion cell is compared with the AC catalog, whose text is the
+    # criterion with every run of whitespace read as one space; the cell is
+    # read by the same rule, so a criterion copied as the spec writes it is
+    # the same criterion (T030o43 review 3, R3-F8).
+    function criterion(s) {gsub(/[[:space:]]+/, " ", s); return trim(s)}
+    vf_quoted($0) {next}
+    /^\| AC-[0-9][0-9][0-9] / {
+      if(NF!=7 || seen[trim($2)]++) {print "matrix: malformed/duplicate row" > "/dev/stderr"; bad=1; next}
+      for(i=2;i<=6;i++) printf "%s%c",(i==3 ? criterion($i) : trim($i)),0

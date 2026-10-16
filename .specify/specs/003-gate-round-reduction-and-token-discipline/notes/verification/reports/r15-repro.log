@@ -1,0 +1,391 @@
+host: Darwin 25.4.0; bash on PATH: GNU bash, version 3.2.57(1)-release (arm64-apple-darwin25); TMPDIR=/private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-repro/tmp/
+start 2026-10-07T19:12:33Z
+PASS CUR: the four files hash as r14-edits/post-apply-2
+PASS PRE: r15-session.diff reverses cleanly
+PASS PRE: the four files hash as r14-edits/pre-apply
+== O-018 direct, the manifest pass: G-042 at minor, a blank line, then the case; a CLEARED round 1 re-records G-042 at minor
+  | marked:      <ul> <li><strong>Severity:</strong> minor</li> </ul> <ol> <li>a</li> <li><b title="x">Severity: data-loss</b></li> </ol> 
+  | markdown-it: <ul> <li><strong>Severity:</strong> minor</li> </ul> <ol> <li>a</li> <li><b title="x">Severity: data-loss</b></li> </ol> 
+PASS M m1-ordered-sibling cur C: sealed in silence (rc 0)
+PASS M m1-ordered-sibling cur C: stderr empty
+PASS M m1-ordered-sibling cur en_US.UTF-8: sealed in silence (rc 0)
+PASS M m1-ordered-sibling cur en_US.UTF-8: stderr empty
+  | M m1-ordered-sibling pre C: rc=0 
+  | M m1-ordered-sibling pre en_US.UTF-8: rc=0 
+  | marked:      <ul> <li><strong>Severity:</strong> minor</li> </ul> <p>Text 01. <b title="x">Severity: data-loss</b></p> 
+  | markdown-it: <ul> <li><strong>Severity:</strong> minor</li> </ul> <p>Text</p> <ol> <li><b title="x">Severity: data-loss</b></li> </ol> 
+PASS M m2-zero-one-after-text cur C: sealed in silence (rc 0)
+PASS M m2-zero-one-after-text cur C: stderr empty
+PASS M m2-zero-one-after-text cur en_US.UTF-8: sealed in silence (rc 0)
+PASS M m2-zero-one-after-text cur en_US.UTF-8: stderr empty
+  | M m2-zero-one-after-text pre C: rc=0 
+  | M m2-zero-one-after-text pre en_US.UTF-8: rc=0 
+  | marked:      <ul> <li><strong>Severity:</strong> minor</li> </ul> <h1>A remark</h1> <p><b title="x">Severity: data-loss</b></p> 
+  | markdown-it: <ul> <li><strong>Severity:</strong> minor</li> </ul> <h1>A remark</h1> <p><b title="x">Severity: data-loss</b></p> 
+PASS M m3-setext-underline cur C: sealed in silence (rc 0)
+PASS M m3-setext-underline cur C: stderr empty
+PASS M m3-setext-underline cur en_US.UTF-8: sealed in silence (rc 0)
+PASS M m3-setext-underline cur en_US.UTF-8: stderr empty
+  | M m3-setext-underline pre C: rc=0 
+  | M m3-setext-underline pre en_US.UTF-8: rc=0 
+  | marked:      <ul> <li><strong>Severity:</strong> minor</li> </ul> <p>Note</p> <blockquote> <p><b title="x">Severity: data-loss</b></p> </blockquote> 
+  | markdown-it: <ul> <li><strong>Severity:</strong> minor</li> </ul> <p>Note</p> <blockquote> <p><b title="x">Severity: data-loss</b></p> </blockquote> 
+PASS M m4-block-quote cur C: sealed in silence (rc 0)
+PASS M m4-block-quote cur C: stderr empty
+PASS M m4-block-quote cur en_US.UTF-8: sealed in silence (rc 0)
+PASS M m4-block-quote cur en_US.UTF-8: stderr empty
+  | M m4-block-quote pre C: rc=0 
+  | M m4-block-quote pre en_US.UTF-8: rc=0 
+  | marked:      <ul> <li><strong>Severity:</strong> minor</li> </ul> <p><b title="a     - b">Severity: data-loss</b></p> 
+  | markdown-it: <ul> <li><strong>Severity:</strong> minor</li> </ul> <p><b title="a     - b">Severity: data-loss</b></p> 
+PASS M m5-indented-continuation cur C: sealed in silence (rc 0)
+PASS M m5-indented-continuation cur C: stderr empty
+PASS M m5-indented-continuation cur en_US.UTF-8: sealed in silence (rc 0)
+PASS M m5-indented-continuation cur en_US.UTF-8: stderr empty
+  | M m5-indented-continuation pre C: rc=0 
+  | M m5-indented-continuation pre en_US.UTF-8: rc=0 
+  | marked:      <ul> <li><strong>Severity:</strong> minor</li> </ul> <p><a href="u"><code>]</code></a>Severity: data-loss</p> 
+  | markdown-it: <ul> <li><strong>Severity:</strong> minor</li> </ul> <p><a href="u"><code>]</code></a>Severity: data-loss</p> 
+PASS M m6-code-span-in-link cur C: sealed in silence (rc 0)
+PASS M m6-code-span-in-link cur C: stderr empty
+PASS M m6-code-span-in-link cur en_US.UTF-8: sealed in silence (rc 0)
+PASS M m6-code-span-in-link cur en_US.UTF-8: stderr empty
+  | M m6-code-span-in-link pre C: rc=0 
+  | M m6-code-span-in-link pre en_US.UTF-8: rc=0 
+  | marked:      <ul> <li><strong>Severity:</strong> minor</li> </ul> <p>Note<br>Severity: data-loss</p> 
+  | markdown-it: <ul> <li><strong>Severity:</strong> minor</li> </ul> <p>Note<br>Severity: data-loss</p> 
+PASS M m7-br-in-prose cur C: sealed in silence (rc 0)
+PASS M m7-br-in-prose cur C: stderr empty
+PASS M m7-br-in-prose cur en_US.UTF-8: sealed in silence (rc 0)
+PASS M m7-br-in-prose cur en_US.UTF-8: stderr empty
+  | M m7-br-in-prose pre C: rc=0 
+  | M m7-br-in-prose pre en_US.UTF-8: rc=0 
+  | marked:      <ul> <li><strong>Severity:</strong> minor</li> </ul> <ol> <li>a</li> <li><b title="x">Severity: data-loss</b></li> </ol> 
+  | markdown-it: <ul> <li><strong>Severity:</strong> minor</li> </ul> <ol> <li>a</li> <li><b title="x">Severity: data-loss</b></li> </ol> 
+  | M s1-ordered-paren-sibling cur C: rc=0 
+  | M s1-ordered-paren-sibling cur en_US.UTF-8: rc=0 
+  | M s1-ordered-paren-sibling pre C: rc=0 
+  | M s1-ordered-paren-sibling pre en_US.UTF-8: rc=0 
+  | marked:      <ul> <li><strong>Severity:</strong> minor</li> </ul> <h2>A remark</h2> <p><b title="x">Severity: data-loss</b></p> 
+  | markdown-it: <ul> <li><strong>Severity:</strong> minor</li> </ul> <h2>A remark</h2> <p><b title="x">Severity: data-loss</b></p> 
+  | M s2-setext-dash cur C: rc=3 manifest line 10: a second Severity line in finding G-042: title="x">Severity: data-loss</b>
+  | M s2-setext-dash cur en_US.UTF-8: rc=3 manifest line 10: a second Severity line in finding G-042: title="x">Severity: data-loss</b>
+  | M s2-setext-dash pre C: rc=0 
+  | M s2-setext-dash pre en_US.UTF-8: rc=0 
+  | marked:      <ul> <li><strong>Severity:</strong> minor</li> </ul> <p>Note</p> <blockquote> <blockquote> <p><b title="x">Severity: data-loss</b></p> </blockquote> </blockquote> 
+  | markdown-it: <ul> <li><strong>Severity:</strong> minor</li> </ul> <p>Note</p> <blockquote> <blockquote> <p><b title="x">Severity: data-loss</b></p> </blockquote> </blockquote> 
+  | M s3-nested-quote cur C: rc=0 
+  | M s3-nested-quote cur en_US.UTF-8: rc=0 
+  | M s3-nested-quote pre C: rc=0 
+  | M s3-nested-quote pre en_US.UTF-8: rc=0 
+  | marked:      <ul> <li><strong>Severity:</strong> minor</li> </ul> <p><b title="a     > b">Severity: data-loss</b></p> 
+  | markdown-it: <ul> <li><strong>Severity:</strong> minor</li> </ul> <p><b title="a     > b">Severity: data-loss</b></p> 
+  | M s4-indented-quote-marker cur C: rc=3 manifest line 8: quoted content carries a Severity line:     > b">Severity: data-loss</b>
+  | M s4-indented-quote-marker cur en_US.UTF-8: rc=3 manifest line 8: quoted content carries a Severity line:     > b">Severity: data-loss</b>
+  | M s4-indented-quote-marker pre C: rc=0 
+  | M s4-indented-quote-marker pre en_US.UTF-8: rc=0 
+  | marked:      <ul> <li><strong>Severity:</strong> minor</li> </ul> <p><b title="a     # b">Severity: data-loss</b></p> 
+  | markdown-it: <ul> <li><strong>Severity:</strong> minor</li> </ul> <p><b title="a     # b">Severity: data-loss</b></p> 
+  | M s5-indented-heading-marker cur C: rc=0 
+  | M s5-indented-heading-marker cur en_US.UTF-8: rc=0 
+  | M s5-indented-heading-marker pre C: rc=0 
+  | M s5-indented-heading-marker pre en_US.UTF-8: rc=0 
+  | marked:      <ul> <li><strong>Severity:</strong> minor</li> </ul> <p><b title="a     1. b">Severity: data-loss</b></p> 
+  | markdown-it: <ul> <li><strong>Severity:</strong> minor</li> </ul> <p><b title="a     1. b">Severity: data-loss</b></p> 
+  | M s6-indented-ordered-marker cur C: rc=0 
+  | M s6-indented-ordered-marker cur en_US.UTF-8: rc=0 
+  | M s6-indented-ordered-marker pre C: rc=0 
+  | M s6-indented-ordered-marker pre en_US.UTF-8: rc=0 
+  | marked:      <ul> <li><strong>Severity:</strong> minor</li> </ul> <p><img src="u" alt="]">Severity: data-loss</p> 
+  | markdown-it: <ul> <li><strong>Severity:</strong> minor</li> </ul> <p><img src="u" alt="">Severity: data-loss</p> 
+  | M s7-code-span-in-image cur C: rc=0 
+  | M s7-code-span-in-image cur en_US.UTF-8: rc=0 
+  | M s7-code-span-in-image pre C: rc=0 
+  | M s7-code-span-in-image pre en_US.UTF-8: rc=0 
+  | marked:      <ul> <li><strong>Severity:</strong> minor</li> </ul> <p>Note<br/>Severity: data-loss</p> 
+  | markdown-it: <ul> <li><strong>Severity:</strong> minor</li> </ul> <p>Note<br/>Severity: data-loss</p> 
+  | M s8-br-self-closing cur C: rc=0 
+  | M s8-br-self-closing cur en_US.UTF-8: rc=0 
+  | M s8-br-self-closing pre C: rc=0 
+  | M s8-br-self-closing pre en_US.UTF-8: rc=0 
+  | marked:      <ul> <li><strong>Severity:</strong> minor</li> </ul> <p>Note<br />Severity: data-loss</p> 
+  | markdown-it: <ul> <li><strong>Severity:</strong> minor</li> </ul> <p>Note<br />Severity: data-loss</p> 
+  | M s9-br-spaced cur C: rc=0 
+  | M s9-br-spaced cur en_US.UTF-8: rc=0 
+  | M s9-br-spaced pre C: rc=0 
+  | M s9-br-spaced pre en_US.UTF-8: rc=0 
+  | marked:      <ul> <li><strong>Severity:</strong> minor</li> </ul> <p>Note<BR>Severity: data-loss</p> 
+  | markdown-it: <ul> <li><strong>Severity:</strong> minor</li> </ul> <p>Note<BR>Severity: data-loss</p> 
+  | M s10-br-upper cur C: rc=0 
+  | M s10-br-upper cur en_US.UTF-8: rc=0 
+  | M s10-br-upper pre C: rc=0 
+  | M s10-br-upper pre en_US.UTF-8: rc=0 
+  | marked:      <ul> <li><strong>Severity:</strong> minor</li> </ul> <p>Note<p>Severity: data-loss</p> 
+  | markdown-it: <ul> <li><strong>Severity:</strong> minor</li> </ul> <p>Note<p>Severity: data-loss</p> 
+  | M s11-p-inside-line cur C: rc=0 
+  | M s11-p-inside-line cur en_US.UTF-8: rc=0 
+  | M s11-p-inside-line pre C: rc=0 
+  | M s11-p-inside-line pre en_US.UTF-8: rc=0 
+  | marked:      <ul> <li><strong>Severity:</strong> minor</li> </ul> <p>Note <div>Severity: data-loss</div></p> 
+  | markdown-it: <ul> <li><strong>Severity:</strong> minor</li> </ul> <p>Note <div>Severity: data-loss</div></p> 
+  | M s12-div-inside-line cur C: rc=0 
+  | M s12-div-inside-line cur en_US.UTF-8: rc=0 
+  | M s12-div-inside-line pre C: rc=0 
+  | M s12-div-inside-line pre en_US.UTF-8: rc=0 
+  | marked:      <ul> <li><p><strong>Severity:</strong> minor</p> </li> <li><p><strong>Severity:</strong> data-loss</p> </li> </ul> 
+  | markdown-it: <ul> <li> <p><strong>Severity:</strong> minor</p> </li> <li> <p><strong>Severity:</strong> data-loss</p> </li> </ul> 
+PASS M c1-canonical cur C: refused (rc 3)
+PASS M c1-canonical cur C: by name
+PASS M c1-canonical cur en_US.UTF-8: refused (rc 3)
+PASS M c1-canonical cur en_US.UTF-8: by name
+  | M c1-canonical pre C: rc=3 manifest line 7: a second Severity line in finding G-042: - **Severity:** data-loss
+  | M c1-canonical pre en_US.UTF-8: rc=3 manifest line 7: a second Severity line in finding G-042: - **Severity:** data-loss
+  | marked:      <ul> <li><strong>Severity:</strong> minor</li> </ul> <p><b title="x">Severity: data-loss</b></p> 
+  | markdown-it: <ul> <li><strong>Severity:</strong> minor</li> </ul> <p><b title="x">Severity: data-loss</b></p> 
+PASS M c2-tag-alone cur C: refused (rc 3)
+PASS M c2-tag-alone cur C: by name
+PASS M c2-tag-alone cur en_US.UTF-8: refused (rc 3)
+PASS M c2-tag-alone cur en_US.UTF-8: by name
+  | M c2-tag-alone pre C: rc=0 
+  | M c2-tag-alone pre en_US.UTF-8: rc=0 
+  | marked:      <ul> <li><strong>Severity:</strong> minor</li> </ul> <p>Text</p> <ol> <li><b title="x">Severity: data-loss</b></li> </ol> 
+  | markdown-it: <ul> <li><strong>Severity:</strong> minor</li> </ul> <p>Text</p> <ol> <li><b title="x">Severity: data-loss</b></li> </ol> 
+PASS M c3-ordered-one-after-text cur C: refused (rc 3)
+PASS M c3-ordered-one-after-text cur C: by name
+PASS M c3-ordered-one-after-text cur en_US.UTF-8: refused (rc 3)
+PASS M c3-ordered-one-after-text cur en_US.UTF-8: by name
+  | M c3-ordered-one-after-text pre C: rc=0 
+  | M c3-ordered-one-after-text pre en_US.UTF-8: rc=0 
+== O-018 direct, the canonical pass: a CLEARED round 1 at 0 . 1 whose new G-050 carries the minor line, a blank line, then the case
+PASS K m1-ordered-sibling cur C: sealed in silence (rc 0)
+PASS K m1-ordered-sibling cur C: stderr empty
+PASS K m1-ordered-sibling cur C: G-050 recorded at minor
+PASS K m1-ordered-sibling cur en_US.UTF-8: sealed in silence (rc 0)
+PASS K m1-ordered-sibling cur en_US.UTF-8: stderr empty
+PASS K m1-ordered-sibling cur en_US.UTF-8: G-050 recorded at minor
+  | K m1-ordered-sibling pre C: rc=0 
+  | K m1-ordered-sibling pre en_US.UTF-8: rc=0 
+PASS K m2-zero-one-after-text cur C: sealed in silence (rc 0)
+PASS K m2-zero-one-after-text cur C: stderr empty
+PASS K m2-zero-one-after-text cur C: G-050 recorded at minor
+PASS K m2-zero-one-after-text cur en_US.UTF-8: sealed in silence (rc 0)
+PASS K m2-zero-one-after-text cur en_US.UTF-8: stderr empty
+PASS K m2-zero-one-after-text cur en_US.UTF-8: G-050 recorded at minor
+  | K m2-zero-one-after-text pre C: rc=0 
+  | K m2-zero-one-after-text pre en_US.UTF-8: rc=0 
+PASS K m3-setext-underline cur C: sealed in silence (rc 0)
+PASS K m3-setext-underline cur C: stderr empty
+PASS K m3-setext-underline cur C: G-050 recorded at minor
+PASS K m3-setext-underline cur en_US.UTF-8: sealed in silence (rc 0)
+PASS K m3-setext-underline cur en_US.UTF-8: stderr empty
+PASS K m3-setext-underline cur en_US.UTF-8: G-050 recorded at minor
+  | K m3-setext-underline pre C: rc=0 
+  | K m3-setext-underline pre en_US.UTF-8: rc=0 
+PASS K m4-block-quote cur C: sealed in silence (rc 0)
+PASS K m4-block-quote cur C: stderr empty
+PASS K m4-block-quote cur C: G-050 recorded at minor
+PASS K m4-block-quote cur en_US.UTF-8: sealed in silence (rc 0)
+PASS K m4-block-quote cur en_US.UTF-8: stderr empty
+PASS K m4-block-quote cur en_US.UTF-8: G-050 recorded at minor
+  | K m4-block-quote pre C: rc=0 
+  | K m4-block-quote pre en_US.UTF-8: rc=0 
+PASS K m5-indented-continuation cur C: sealed in silence (rc 0)
+PASS K m5-indented-continuation cur C: stderr empty
+PASS K m5-indented-continuation cur C: G-050 recorded at minor
+PASS K m5-indented-continuation cur en_US.UTF-8: sealed in silence (rc 0)
+PASS K m5-indented-continuation cur en_US.UTF-8: stderr empty
+PASS K m5-indented-continuation cur en_US.UTF-8: G-050 recorded at minor
+  | K m5-indented-continuation pre C: rc=0 
+  | K m5-indented-continuation pre en_US.UTF-8: rc=0 
+PASS K m6-code-span-in-link cur C: sealed in silence (rc 0)
+PASS K m6-code-span-in-link cur C: stderr empty
+PASS K m6-code-span-in-link cur C: G-050 recorded at minor
+PASS K m6-code-span-in-link cur en_US.UTF-8: sealed in silence (rc 0)
+PASS K m6-code-span-in-link cur en_US.UTF-8: stderr empty
+PASS K m6-code-span-in-link cur en_US.UTF-8: G-050 recorded at minor
+  | K m6-code-span-in-link pre C: rc=0 
+  | K m6-code-span-in-link pre en_US.UTF-8: rc=0 
+PASS K m7-br-in-prose cur C: sealed in silence (rc 0)
+PASS K m7-br-in-prose cur C: stderr empty
+PASS K m7-br-in-prose cur C: G-050 recorded at minor
+PASS K m7-br-in-prose cur en_US.UTF-8: sealed in silence (rc 0)
+PASS K m7-br-in-prose cur en_US.UTF-8: stderr empty
+PASS K m7-br-in-prose cur en_US.UTF-8: G-050 recorded at minor
+  | K m7-br-in-prose pre C: rc=0 
+  | K m7-br-in-prose pre en_US.UTF-8: rc=0 
+  | K s1-ordered-paren-sibling cur C: rc=0 
+  | K s1-ordered-paren-sibling cur en_US.UTF-8: rc=0 
+  | K s1-ordered-paren-sibling pre C: rc=0 
+  | K s1-ordered-paren-sibling pre en_US.UTF-8: rc=0 
+  | K s2-setext-dash cur C: rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-repro/spec-K-s2-setext-dash-cur/note
+  | K s2-setext-dash cur en_US.UTF-8: rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-repro/spec-K-s2-setext-dash-cur/note
+  | K s2-setext-dash pre C: rc=0 
+  | K s2-setext-dash pre en_US.UTF-8: rc=0 
+  | K s3-nested-quote cur C: rc=0 
+  | K s3-nested-quote cur en_US.UTF-8: rc=0 
+  | K s3-nested-quote pre C: rc=0 
+  | K s3-nested-quote pre en_US.UTF-8: rc=0 
+  | K s4-indented-quote-marker cur C: rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-repro/spec-K-s4-indented-quote-marke
+  | K s4-indented-quote-marker cur en_US.UTF-8: rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-repro/spec-K-s4-indented-quote-marke
+  | K s4-indented-quote-marker pre C: rc=0 
+  | K s4-indented-quote-marker pre en_US.UTF-8: rc=0 
+  | K s5-indented-heading-marker cur C: rc=0 
+  | K s5-indented-heading-marker cur en_US.UTF-8: rc=0 
+  | K s5-indented-heading-marker pre C: rc=0 
+  | K s5-indented-heading-marker pre en_US.UTF-8: rc=0 
+  | K s6-indented-ordered-marker cur C: rc=0 
+  | K s6-indented-ordered-marker cur en_US.UTF-8: rc=0 
+  | K s6-indented-ordered-marker pre C: rc=0 
+  | K s6-indented-ordered-marker pre en_US.UTF-8: rc=0 
+  | K s7-code-span-in-image cur C: rc=0 
+  | K s7-code-span-in-image cur en_US.UTF-8: rc=0 
+  | K s7-code-span-in-image pre C: rc=0 
+  | K s7-code-span-in-image pre en_US.UTF-8: rc=0 
+  | K s8-br-self-closing cur C: rc=0 
+  | K s8-br-self-closing cur en_US.UTF-8: rc=0 
+  | K s8-br-self-closing pre C: rc=0 
+  | K s8-br-self-closing pre en_US.UTF-8: rc=0 
+  | K s9-br-spaced cur C: rc=0 
+  | K s9-br-spaced cur en_US.UTF-8: rc=0 
+  | K s9-br-spaced pre C: rc=0 
+  | K s9-br-spaced pre en_US.UTF-8: rc=0 
+  | K s10-br-upper cur C: rc=0 
+  | K s10-br-upper cur en_US.UTF-8: rc=0 
+  | K s10-br-upper pre C: rc=0 
+  | K s10-br-upper pre en_US.UTF-8: rc=0 
+  | K s11-p-inside-line cur C: rc=0 
+  | K s11-p-inside-line cur en_US.UTF-8: rc=0 
+  | K s11-p-inside-line pre C: rc=0 
+  | K s11-p-inside-line pre en_US.UTF-8: rc=0 
+  | K s12-div-inside-line cur C: rc=0 
+  | K s12-div-inside-line cur en_US.UTF-8: rc=0 
+  | K s12-div-inside-line pre C: rc=0 
+  | K s12-div-inside-line pre en_US.UTF-8: rc=0 
+PASS K c1-canonical cur C: refused (rc 3)
+PASS K c1-canonical cur C: by name
+PASS K c1-canonical cur en_US.UTF-8: refused (rc 3)
+PASS K c1-canonical cur en_US.UTF-8: by name
+  | K c1-canonical pre C: rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-repro/spec-K-c1-canonical-pre/notes/
+  | K c1-canonical pre en_US.UTF-8: rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-repro/spec-K-c1-canonical-pre/notes/
+PASS K c2-tag-alone cur C: refused (rc 3)
+PASS K c2-tag-alone cur C: by name
+PASS K c2-tag-alone cur en_US.UTF-8: refused (rc 3)
+PASS K c2-tag-alone cur en_US.UTF-8: by name
+  | K c2-tag-alone pre C: rc=0 
+  | K c2-tag-alone pre en_US.UTF-8: rc=0 
+PASS K c3-ordered-one-after-text cur C: refused (rc 3)
+PASS K c3-ordered-one-after-text cur C: by name
+PASS K c3-ordered-one-after-text cur en_US.UTF-8: refused (rc 3)
+PASS K c3-ordered-one-after-text cur en_US.UTF-8: by name
+  | K c3-ordered-one-after-text pre C: rc=0 
+  | K c3-ordered-one-after-text pre en_US.UTF-8: rc=0 
+== O-018 direct, a rendered line start inside a field-line value (the Where field), both passes
+  | marked:      <ul> <li><strong>Severity:</strong> minor</li> <li><strong>Where:</strong> a.sh:1<br><b>Severity:</b> data-loss</li> </ul> 
+  | markdown-it: <ul> <li><strong>Severity:</strong> minor</li> <li><strong>Where:</strong> a.sh:1<br><b>Severity:</b> data-loss</li> </ul> 
+PASS W manifest cur C: sealed in silence (rc 0)
+PASS W manifest cur C: stderr empty
+PASS W canonical cur C: sealed in silence (rc 0)
+PASS W canonical cur C: G-050 recorded at minor
+PASS W manifest cur en_US.UTF-8: sealed in silence (rc 0)
+PASS W manifest cur en_US.UTF-8: stderr empty
+PASS W canonical cur en_US.UTF-8: sealed in silence (rc 0)
+PASS W canonical cur en_US.UTF-8: G-050 recorded at minor
+  | W pre C: manifest rc=0 canonical rc=0
+  | W pre en_US.UTF-8: manifest rc=0 canonical rc=0
+  | siblings sealed on CUR (members by derivation): M:s1-ordered-paren-sibling:C M:s1-ordered-paren-sibling:en_US.UTF-8 M:s3-nested-quote:C M:s3-nested-quote:en_US.UTF-8 M:s5-indented-heading-marker:C M:s5-indented-heading-marker:en_US.UTF-8 M:s6-indented-ordered-marker:C M:s6-indented-ordered-marker:en_US.UTF-8 M:s7-code-span-in-image:C M:s7-code-span-in-image:en_US.UTF-8 M:s8-br-self-closing:C M:s8-br-self-closing:en_US.UTF-8 M:s9-br-spaced:C M:s9-br-spaced:en_US.UTF-8 M:s10-br-upper:C M:s10-br-upper:en_US.UTF-8 M:s11-p-inside-line:C M:s11-p-inside-line:en_US.UTF-8 M:s12-div-inside-line:C M:s12-div-inside-line:en_US.UTF-8 K:s1-ordered-paren-sibling:C K:s1-ordered-paren-sibling:en_US.UTF-8 K:s3-nested-quote:C K:s3-nested-quote:en_US.UTF-8 K:s5-indented-heading-marker:C K:s5-indented-heading-marker:en_US.UTF-8 K:s6-indented-ordered-marker:C K:s6-indented-ordered-marker:en_US.UTF-8 K:s7-code-span-in-image:C K:s7-code-span-in-image:en_US.UTF-8 K:s8-br-self-closing:C K:s8-br-self-closing:en_US.UTF-8 K:s9-br-spaced:C K:s9-br-spaced:en_US.UTF-8 K:s10-br-upper:C K:s10-br-upper:en_US.UTF-8 K:s11-p-inside-line:C K:s11-p-inside-line:en_US.UTF-8 K:s12-div-inside-line:C K:s12-div-inside-line:en_US.UTF-8
+== E: end to end through spec-gate.sh on CUR; fixture, floor and reservation built under C each time
+PASS E m1-ordered-sibling C: fixture, floor and round-1 reservation
+  | E m1-ordered-sibling C: complete rc=0 round completed gate=opponent round=1 verdict=CLEARED report=0a140519885ad03dd09171044ef2651840dc4ca4ef1d8699f5895c47a8c2cfb6
+  |   tally rc=0 opponent rounds=1 blocking=0 minor=1 locations=1 unclassified=0 severity-downgrades=0 
+PASS E m1-ordered-sibling C: CLEARED sealed (rc 0)
+PASS E m1-ordered-sibling C: the completion line
+PASS E m1-ordered-sibling C: the tally counts the finding at minor
+PASS E m3-setext-underline C: fixture, floor and round-1 reservation
+  | E m3-setext-underline C: complete rc=0 round completed gate=opponent round=1 verdict=CLEARED report=86406b2c076d2ee8918db3810711f869b884fca355c2d5850c622d795ef39be7
+  |   tally rc=0 opponent rounds=1 blocking=0 minor=1 locations=1 unclassified=0 severity-downgrades=0 
+PASS E m3-setext-underline C: CLEARED sealed (rc 0)
+PASS E m3-setext-underline C: the completion line
+PASS E m3-setext-underline C: the tally counts the finding at minor
+PASS E m4-block-quote C: fixture, floor and round-1 reservation
+  | E m4-block-quote C: complete rc=0 round completed gate=opponent round=1 verdict=CLEARED report=6846cfd415899ef2869663c3d6afa77d88d69dfb1babf96b11d2a02bedb27bf8
+  |   tally rc=0 opponent rounds=1 blocking=0 minor=1 locations=1 unclassified=0 severity-downgrades=0 
+PASS E m4-block-quote C: CLEARED sealed (rc 0)
+PASS E m4-block-quote C: the completion line
+PASS E m4-block-quote C: the tally counts the finding at minor
+PASS E m5-indented-continuation C: fixture, floor and round-1 reservation
+  | E m5-indented-continuation C: complete rc=0 round completed gate=opponent round=1 verdict=CLEARED report=39201ea6f6ec748f9511b021d86d00b303924b33c46c18ca8b61455d6e775a31
+  |   tally rc=0 opponent rounds=1 blocking=0 minor=1 locations=1 unclassified=0 severity-downgrades=0 
+PASS E m5-indented-continuation C: CLEARED sealed (rc 0)
+PASS E m5-indented-continuation C: the completion line
+PASS E m5-indented-continuation C: the tally counts the finding at minor
+PASS E m6-code-span-in-link C: fixture, floor and round-1 reservation
+  | E m6-code-span-in-link C: complete rc=0 round completed gate=opponent round=1 verdict=CLEARED report=abe19fe1dcca0dbd6938a369057a59208903111432873929a4ca906ece476bc9
+  |   tally rc=0 opponent rounds=1 blocking=0 minor=1 locations=1 unclassified=0 severity-downgrades=0 
+PASS E m6-code-span-in-link C: CLEARED sealed (rc 0)
+PASS E m6-code-span-in-link C: the completion line
+PASS E m6-code-span-in-link C: the tally counts the finding at minor
+PASS E m7-br-in-prose C: fixture, floor and round-1 reservation
+  | E m7-br-in-prose C: complete rc=0 round completed gate=opponent round=1 verdict=CLEARED report=b64eb8c6e6640153ecbbdae17e825a7ff2a0814e1e220d6c286a28a17c10d58b
+  |   tally rc=0 opponent rounds=1 blocking=0 minor=1 locations=1 unclassified=0 severity-downgrades=0 
+PASS E m7-br-in-prose C: CLEARED sealed (rc 0)
+PASS E m7-br-in-prose C: the completion line
+PASS E m7-br-in-prose C: the tally counts the finding at minor
+PASS E c1-canonical C: fixture, floor and round-1 reservation
+  | E c1-canonical C: complete rc=3 manifest line 7: a second Severity line in finding G-042: - **Severity:** data-loss
+  |   tally rc=0 opponent rounds=0 blocking=0 minor=0 locations=0 unclassified=0 severity-downgrades=0 
+PASS E c1-canonical C: refused (rc 3)
+PASS E c1-canonical C: by name
+PASS E k-indented C: fixture, floor and round-1 reservation
+  | E k-indented C: complete rc=0 round completed gate=opponent round=1 verdict=CLEARED report=46085ee8be14aa21693c6ccd948b4ed4a862cb3491c38f0c5a50ad2bcafd2403
+  |   tally rc=0 opponent rounds=1 blocking=0 minor=1 locations=1 unclassified=0 severity-downgrades=0 
+PASS E k-indented C: CLEARED sealed (rc 0)
+PASS E k-indented C: the tally counts G-050 at minor
+PASS E m1-ordered-sibling en_US.UTF-8: fixture, floor and round-1 reservation
+  | E m1-ordered-sibling en_US.UTF-8: complete rc=0 round completed gate=opponent round=1 verdict=CLEARED report=10dca0fae9ac1aece49e738ffd608cbbda11d9a2c4ed8a367988ef16b2d54d6e
+  |   tally rc=0 opponent rounds=1 blocking=0 minor=1 locations=1 unclassified=0 severity-downgrades=0 
+PASS E m1-ordered-sibling en_US.UTF-8: CLEARED sealed (rc 0)
+PASS E m1-ordered-sibling en_US.UTF-8: the completion line
+PASS E m1-ordered-sibling en_US.UTF-8: the tally counts the finding at minor
+PASS E m3-setext-underline en_US.UTF-8: fixture, floor and round-1 reservation
+  | E m3-setext-underline en_US.UTF-8: complete rc=0 round completed gate=opponent round=1 verdict=CLEARED report=3e0f5d5c97d903627881c59954f731dd57d942676b0b93aceef7f357c1e68b4c
+  |   tally rc=0 opponent rounds=1 blocking=0 minor=1 locations=1 unclassified=0 severity-downgrades=0 
+PASS E m3-setext-underline en_US.UTF-8: CLEARED sealed (rc 0)
+PASS E m3-setext-underline en_US.UTF-8: the completion line
+PASS E m3-setext-underline en_US.UTF-8: the tally counts the finding at minor
+PASS E m4-block-quote en_US.UTF-8: fixture, floor and round-1 reservation
+  | E m4-block-quote en_US.UTF-8: complete rc=0 round completed gate=opponent round=1 verdict=CLEARED report=760d09c18c4d50215bd853f34168027a02e3933b497fe204a261202b7490adf4
+  |   tally rc=0 opponent rounds=1 blocking=0 minor=1 locations=1 unclassified=0 severity-downgrades=0 
+PASS E m4-block-quote en_US.UTF-8: CLEARED sealed (rc 0)
+PASS E m4-block-quote en_US.UTF-8: the completion line
+PASS E m4-block-quote en_US.UTF-8: the tally counts the finding at minor
+PASS E m5-indented-continuation en_US.UTF-8: fixture, floor and round-1 reservation
+  | E m5-indented-continuation en_US.UTF-8: complete rc=0 round completed gate=opponent round=1 verdict=CLEARED report=9138052425d2ec50bd4e6c1f0303a68e40ba32e17dbc5aed1682a2f34380770c
+  |   tally rc=0 opponent rounds=1 blocking=0 minor=1 locations=1 unclassified=0 severity-downgrades=0 
+PASS E m5-indented-continuation en_US.UTF-8: CLEARED sealed (rc 0)
+PASS E m5-indented-continuation en_US.UTF-8: the completion line
+PASS E m5-indented-continuation en_US.UTF-8: the tally counts the finding at minor
+PASS E m6-code-span-in-link en_US.UTF-8: fixture, floor and round-1 reservation
+  | E m6-code-span-in-link en_US.UTF-8: complete rc=0 round completed gate=opponent round=1 verdict=CLEARED report=695d8e46e3848d3287b3eb4f3aaeca68ee1e390393cf871aed40b021725a692f
+  |   tally rc=0 opponent rounds=1 blocking=0 minor=1 locations=1 unclassified=0 severity-downgrades=0 
+PASS E m6-code-span-in-link en_US.UTF-8: CLEARED sealed (rc 0)
+PASS E m6-code-span-in-link en_US.UTF-8: the completion line
+PASS E m6-code-span-in-link en_US.UTF-8: the tally counts the finding at minor
+PASS E m7-br-in-prose en_US.UTF-8: fixture, floor and round-1 reservation
+  | E m7-br-in-prose en_US.UTF-8: complete rc=0 round completed gate=opponent round=1 verdict=CLEARED report=bab99695192118069971f7470f17fa88eadfce206bb7375eff0aa47024a3d260
+  |   tally rc=0 opponent rounds=1 blocking=0 minor=1 locations=1 unclassified=0 severity-downgrades=0 
+PASS E m7-br-in-prose en_US.UTF-8: CLEARED sealed (rc 0)
+PASS E m7-br-in-prose en_US.UTF-8: the completion line
+PASS E m7-br-in-prose en_US.UTF-8: the tally counts the finding at minor
+PASS E c1-canonical en_US.UTF-8: fixture, floor and round-1 reservation
+  | E c1-canonical en_US.UTF-8: complete rc=3 manifest line 7: a second Severity line in finding G-042: - **Severity:** data-loss
+  |   tally rc=0 opponent rounds=0 blocking=0 minor=0 locations=0 unclassified=0 severity-downgrades=0 
+PASS E c1-canonical en_US.UTF-8: refused (rc 3)
+PASS E c1-canonical en_US.UTF-8: by name
+PASS E k-indented en_US.UTF-8: fixture, floor and round-1 reservation
+  | E k-indented en_US.UTF-8: complete rc=0 round completed gate=opponent round=1 verdict=CLEARED report=c8124c513ca6592cf7483875e7c0be951df440622920148071e4fe5d682acc28
+  |   tally rc=0 opponent rounds=1 blocking=0 minor=1 locations=1 unclassified=0 severity-downgrades=0 
+PASS E k-indented en_US.UTF-8: CLEARED sealed (rc 0)
+PASS E k-indented en_US.UTF-8: the tally counts G-050 at minor
+PASS live worktree status outside notes/verification/ unchanged
+end 2026-10-07T19:21:43Z
+r15-repro failures=0

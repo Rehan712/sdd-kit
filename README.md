@@ -98,15 +98,18 @@ subagents; on Codex the kit generates them as true subagents too
 (`~/.codex/agents/sdd-opponent.toml` + `sdd-reality-check.toml`, built by
 `build-adapters.sh` from the personas + models.yml); where no subagent is
 available (Copilot today, or the TOMLs not installed) the adapter runs them
-as distinct review passes. The gate loop is bounded: from round 3 the user
-arbitrates (waivers are explicit sign-offs in the STATUS Decisions log,
-never softened verdicts).
+as distinct review passes. Each invocation requires a current floor and an atomic
+round reservation. Rounds 1–3 are allowed per gate; round 4+ requires exact-gate,
+exact-next-round authorization with an ordered UTC timestamp in STATUS Decisions.
+A waiver permits one invocation and never softens a verdict. Check the entry
+with `spec-gate.sh waiver <spec-dir> <gate> <round>` as soon as it is written:
+it reports the exact clause that fails, reserves nothing and changes no state.
 
 Two conventions keep the loop honest end-to-end:
 
 - **Evidence lines.** A task checkbox is only ticked together with an
-  `*Evidence:*` line (the acceptance command + its key output). Gates re-run
-  evidence instead of trusting it; `[x]` with no evidence counts as not done.
+  `*Evidence:*` line (the acceptance command + its key output). Gates validate current
+  proof and refresh stale checks; historical completion is preserved.
 - **Clarification markers.** Unresolved decisions are written as
   `[NEEDS CLARIFICATION: <question>]`, never guessed; `sdd-analyze.sh` blocks
   tasking/implementation while any marker remains.
@@ -327,8 +330,15 @@ tools + git):
 ```bash
 tests/run.sh              # all suites (lib, sdd-analyze, spec-task, spec-run, spec-ac-coverage)
 tests/run.sh task         # only files whose name contains "task"
-shellcheck -S warning -x scripts/*.sh tests/*.sh
+bash tests/shellcheck.sh  # ShellCheck over the enumerated scripts/*.sh and tests/*.sh, no rc files, SHELLCHECK_OPTS unset
 ```
+
+Both commands are reuse-checked, so each reads only what the input identity
+hashes: the suites and scripts git enumerates, never an ignored local file or
+configuration outside the repository. They therefore need a Git worktree root,
+such as a clone of the kit: they list what they run through the same git
+enumeration the identity uses, and outside a worktree they stop with
+"cannot enumerate the kit" rather than guess.
 
 CI runs both on Linux and macOS, plus a run with `bash` shimmed to `/bin/bash`
 3.2 so the compatibility claim is enforced, not assumed. Touching a script?
@@ -401,3 +411,59 @@ repo names to wherever they're checked out locally.
 The workflow follows the spec-kit school of spec-driven development
 ([github/spec-kit](https://github.com/github/spec-kit)), extended with adversarial
 pre-ship gates, cross-tool STATUS handoff, worktree isolation, and a retro loop.
+
+### Versioned verification workflow
+
+New specs opt in with `verification_contract: 1`. The
+[verification contract](templates/verification-contract.md) defines typed tests,
+shared FM/INV rows, command configuration, structured returns and report grammar.
+Legacy captures remain readable; current gates still require proof freshness.
+Required `gate_checks` cover the full suite and mandatory static checks. Optional
+`checkpoints` add commands for exact task-stage names; completed-task coverage is
+checked even when a stage has no commands. Integrity verifies stored artifacts;
+freshness verifies that their inputs still describe the current source.
+
+From the existing spec worktree, use the local scripts when developing the kit:
+
+```bash
+# Returns and reports are spec bookkeeping, never worktree files: a stray
+# return.txt beside the code changes the input manifest, and acceptance then
+# rejects the fresh capture as stale.
+VERIFY="$SPEC/notes/verification"; mkdir -p "$VERIFY/returns" "$VERIFY/reports"
+bash scripts/spec-run.sh "$SPEC" "$TASK" --from-task --no-tick --summary
+# Save the authentic Verification-Return block as "$VERIFY/returns/$TASK.txt".
+bash scripts/spec-gate.sh accept "$SPEC" "$TASK" "$VERIFY/returns/$TASK.txt"
+bash scripts/spec-gate.sh checkpoint "$SPEC" "$STAGE"
+bash scripts/spec-gate.sh floor "$SPEC"
+bash scripts/spec-gate.sh round "$SPEC" opponent
+# Delegate the independent review with the granted identities, then:
+bash scripts/spec-gate.sh round "$SPEC" opponent --complete "$VERIFY/reports/opponent.md"
+# Check what the NEXT round needs, and check a round-4+ authorization the
+# moment you write it: same grammar and the same diagnostics as the
+# reservation, reserving nothing and changing no state. A waiver validated only
+# by attempting a reservation costs a floor to discover it never parsed.
+bash scripts/spec-gate.sh waiver "$SPEC" opponent 2
+bash scripts/spec-gate.sh tally "$SPEC"
+```
+
+Five public entrypoints expose `--help`: spec-run.sh, spec-task.sh,
+spec-evidence.sh, spec-ac-coverage.sh and spec-gate.sh. Full logs and SHA-256
+metadata remain under spec-local notes/captures; --summary bounds returned
+success output to 2048 bytes and failure output to 8192 bytes/20 diagnostic
+lines without changing the actual exit code.
+
+Finish batch edits before capture/acceptance. Workers never tick; the invoker
+rejects incomplete or forged returns without changing tasks. Checkpoint failure
+stops the next stage even when only retained-coverage checks apply. A fresh floor
+executes analyzer, coverage, evidence integrity and every required gate_checks
+command. Only exact local checks explicitly opted into reuse may reuse complete
+unchanged inputs; unknown/external/time-dependent checks execute again. Stale
+proof refreshes verification while preserving historical completion.
+
+The opponent retains every established blocker, stable Class, all known sites
+and searched/unexamined scope. Root cause remains a separate process label.
+Reality-check includes every AC and carries only validated unchanged prior PASS
+rows; an executed suite does not decide semantic coverage. A reservation refusal
+stops dispatch. Use --reconcile for interrupted reports; never reset history.
+Models, separate gates and security-review authority retain their existing roles.
+Measure actual usage or record unknown; compare cost alongside 14-day defects.

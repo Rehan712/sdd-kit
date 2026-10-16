@@ -1,0 +1,101 @@
+reality-check ROUND-2 reservation: source=1f0774ddf738539f83236db08fa7f8847c3e9a276964fc5582730ed6bd5c8a66 floor=FLOOR-GCDl2x reserved=2026-10-15T09:23:14Z
+PASS reality-check ROUND-2 reservation integrity
+PASS reality-check ROUND-2 sealed (report.sha256 present)
+PASS opponent ROUND-19 on the same floor and source
+opponent sealed rounds=19 pending=0
+reality-check sealed rounds=2 pending=0
+PASS no staged .reservation-* in either gate
+PASS opponent round 1 canonical block == sealed 1ac95178f408b2ae
+PASS opponent round 2 canonical block == sealed 5170b08212a51a9b
+PASS opponent round 3 canonical block == sealed 3de48d658a33a909
+PASS opponent round 4 canonical block == sealed d044652efcb90251
+PASS opponent round 5 canonical block == sealed 0898afcc62cf8716
+PASS opponent round 6 canonical block == sealed cc1b86cb05959b85
+PASS opponent round 7 canonical block == sealed 9f98e50c63046c9f
+PASS opponent round 8 canonical block == sealed b391edbf50604425
+PASS opponent round 9 canonical block == sealed 2aae626e3c600201
+PASS opponent round 10 canonical block == sealed 9a32b0929d7acc5a
+PASS opponent round 11 canonical block == sealed f13a332b34a800da
+PASS opponent round 12 canonical block == sealed 4539d729b5402bfa
+PASS opponent round 13 canonical block == sealed 2ddbed640c662e36
+PASS opponent round 14 canonical block == sealed 6c94ac54f19b5d00
+PASS opponent round 15 canonical block == sealed 241cebc5c2bbba6b
+PASS opponent round 16 canonical block == sealed fb9bcfb41b40059e
+PASS opponent round 17 canonical block == sealed f94bb2e5f44779f1
+PASS opponent round 18 canonical block == sealed aeb8c870ffbcbf9f
+PASS opponent round 19 canonical block == sealed a99077db6dc4193e
+PASS returned opponent report block == sealed round-19 digest
+PASS reality-check round 1 canonical block == sealed
+PASS reality-check round 2 canonical block == sealed
+PASS returned reality-check report block == sealed round-2 digest
+PASS reserved and returned worktree entries byte-identical
+PASS reserved and returned state records equal (label/taken aside)
+PASS source == reserved source (1f0774ddf738539f83236db08fa7f8847c3e9a276964fc5582730ed6bd5c8a66)
+PASS source == frozen source 1f0774dd... (1f0774ddf738539f83236db08fa7f8847c3e9a276964fc5582730ed6bd5c8a66)
+PASS Decisions digest unchanged 2b58bbe7... (2b58bbe7be71a9ce18f4df7cf5f641d272b589702580dfcbc4fd7e53f7a2025e)
+PASS floor-latest == reserved floor (FLOOR-GCDl2x)
+PASS FLOOR-GCDl2x validates current for the reserved source
+PASS no held lock
+PASS no .capture.* staging anywhere under notes/
+PASS HEAD == 0d55c62 (0d55c62)
+PASS T030 unchecked
+PASS T031 unchecked
+PASS T032 unchecked
+PASS T033 unchecked
+PASS T034 unchecked
+PASS T029 checked
+PASS T030o39 checked
+PASS T030o40 checked
+PASS T030o41 checked
+PASS T030o42 checked
+PASS T030o43 checked
+PASS T030o44 checked
+PASS T030o45 checked
+PASS T030o46 checked
+PASS T030o47 checked
+PASS T030o48 checked
+PASS T030o49 checked
+PASS T030o50 checked
+PASS T030o51 checked
+PASS T030o52 checked
+PASS T030o53 checked
+PASS T030o54 checked
+PASS T030o55 checked
+PASS T030o56 checked
+PASS prereserve and reserved worktree entries byte-identical
+  w19| opponent round 19 is already completed; the next round is 20
+PASS round 19 reported completed at exit 0
+  w20| round authorization denied: opponent round 20 needs an exact-round user waiver/spec revision after round 19
+  w20|   candidate authorization lines were found and refused:
+  w20|   STATUS.md:248 authorizes round=4, not round=20
+  w20|   STATUS.md:286 authorizes round=5, not round=20
+  w20|   STATUS.md:292 refused: waiver needs exactly 5 "; "-separated fields, found 6 — a "; " inside reason= splits the entry
+  w20|   STATUS.md:302 authorizes round=6, not round=20
+  w20|   STATUS.md:330 authorizes round=7, not round=20
+  w20|   STATUS.md:368 authorizes round=8, not round=20
+  w20|   STATUS.md:411 authorizes round=9, not round=20
+  w20|   STATUS.md:441 authorizes round=10, not round=20
+  w20|   STATUS.md:489 authorizes round=11, not round=20
+  w20|   STATUS.md:495 authorizes round=12, not round=20
+PASS round 20 refused at exit 4 (10 candidates)
+PASS round 20 refusal names no line that authorizes round=20
+PASS tally exit 0
+PASS tally opponent rounds=19
+PASS tally reality-check rounds=2
+  opponent rounds=19
+  reality-check rounds=2
+  blocking=36 minor=18 locations=517 unclassified=0
+  class=config-interpolation-validation findings=3 recurrences=1
+  class=gate-report-schema-validation findings=33 recurrences=27
+  class=harness-locale-decoding findings=2 recurrences=0
+  class=live-control-semantic-validation findings=3 recurrences=0
+  class=post-pr-followup-binding-schema findings=3 recurrences=0
+  class=return-envelope-parsing findings=3 recurrences=0
+  class=round-authorization-grammar findings=11 recurrences=8
+  class=round-block-attribution findings=5 recurrences=2
+  class=round-record-reparse-divergence findings=1 recurrences=0
+  class=verification-input-identity findings=11 recurrences=7
+  finding-observations=75 distinct-finding-ids=28 reopened=32
+  severity-downgrades=5
+  execution-observations=63 check-executions=503 cache-hits=2660 captures=671 full-log-bytes=1135904 returned-summary-bytes=372578 usage=unknown baseline-usage=unknown
+final audit failures=0

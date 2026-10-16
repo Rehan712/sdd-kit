@@ -1,0 +1,237 @@
+== baseline shard 0/2 13:37:32Z
+PASS B report_manifest_locale_cases unmutated passes
+PASS B round_locale_cases unmutated passes
+PASS B floor_parse_fault_cases unmutated passes
+PASS B acceptance_parse_fault_cases unmutated passes
+PASS B checkpoint_parse_fault_cases unmutated passes
+PASS B analyzer_locale_and_fault_cases unmutated passes
+PASS B harness_locale_cases unmutated passes
+== the pin
+PASS K01 literal applies once in scripts/verification-lib.sh
+PASS K01 KILLED (judge rc)
+PASS K01 diagnostic: ran a program of its own under the caller's locale (O-017)
+PASS K03 literal applies once in scripts/verification-lib.sh
+PASS K03 KILLED (judge rc)
+PASS K03 diagnostic: a captured command did not get the caller's LC_ALL (en_US.UTF-8) back (O-017)
+PASS K05 literal applies once in scripts/verification-lib.sh
+PASS K05 KILLED (judge rc)
+PASS K05 diagnostic: two caller values of a declared LC_ALL gave one identity (O-017)
+PASS K07 literal applies once in scripts/verification-lib.sh
+PASS K07 KILLED (judge rc)
+PASS K07 diagnostic: a captured command did not get the caller's LC_ALL (unset) back (O-017)
+PASS E01 literal applies once in scripts/spec-task.sh
+PASS E01 literal applies once in scripts/spec-task.sh
+PASS E01 literal applies once in scripts/spec-evidence.sh
+PASS E01 literal applies once in scripts/spec-evidence.sh
+PASS E01 SURVIVES as argued (equiv)
+== status reads
+PASS S03 literal applies once in scripts/verification-lib.sh
+PASS S03 KILLED (judge rc)
+PASS S03 diagnostic: the configuration policy counted an unreadable frontmatter as no contract (T030o43)
+PASS S05 literal applies once in scripts/verification-lib.sh
+PASS S05 KILLED (judge rc)
+PASS S05 diagnostic: the binding parser counted an unreadable frontmatter as no contract (T030o43)
+PASS S07 literal applies once in scripts/verification-lib.sh
+PASS S07 KILLED (judge rc)
+PASS S07 diagnostic: an unreadable worktree skipped the gate's mismatch check (T030o43)
+PASS S09 literal applies once in scripts/spec-run.sh
+PASS S09 KILLED (judge rc)
+PASS S09 diagnostic: an unreadable frontmatter sent spec-run.sh down the legacy path (T030o43)
+PASS S11 literal applies once in scripts/spec-evidence.sh
+PASS S11 KILLED (judge rc)
+PASS S11 diagnostic: an unreadable frontmatter swapped the current-evidence check for the legacy one (T030o43)
+PASS S13 literal applies once in scripts/sdd-analyze.sh
+PASS S13 KILLED (judge rc)
+PASS S13 diagnostic: an AC inventory that could not be read read as no uncovered AC (T030o43)
+PASS S15 literal applies once in scripts/sdd-analyze.sh
+PASS S15 KILLED (judge rc)
+PASS S15 diagnostic: a marker search that failed read as no marker (T030o43)
+PASS S17 literal applies once in scripts/verification-lib.sh
+PASS S17 KILLED (judge rc)
+PASS S17 diagnostic: the binding parser read an AC inventory that failed (T030o43)
+PASS S19 literal applies once in scripts/verification-lib.sh
+PASS S19 KILLED (judge rc)
+PASS S19 diagnostic: a declared name list that could not be sorted left the declared names unhashed (O-017)
+PASS S21 literal applies once in scripts/verification-lib.sh
+PASS S21 KILLED (judge rc)
+PASS S21 diagnostic: a required-binding sort that failed accepted a return owing FM rows as none (T030o43)
+PASS S23 literal applies once in scripts/verification-lib.sh
+PASS S23 KILLED (judge rc)
+PASS S23 diagnostic: a task list that could not be read left completed tasks unchecked (T030o43)
+PASS S25 literal applies once in scripts/verification-lib.sh
+PASS S25 KILLED (judge rc)
+PASS S25 diagnostic: criteria that could not be read recorded fewer coverage bindings (T030o43)
+PASS S27 literal applies once in scripts/spec-evidence.sh
+PASS S27 KILLED (judge rc)
+PASS S27 diagnostic: task records that could not be parsed read as no ticked tasks (T030o43)
+PASS S29 literal applies once in scripts/verification-lib.sh
+PASS S29 KILLED (judge rc)
+PASS S29 diagnostic: a class table that could not be computed went missing from the tally (O-017)
+== after the review
+PASS S01b literal applies once in scripts/verification-lib.sh
+PASS S01b KILLED (judge rc)
+PASS S01b diagnostic: a manifest pass that died was read as a manifest recording nothing (O-017)
+PASS K10 literal applies once in scripts/verification-lib.sh
+PASS K10 KILLED (judge rc)
+PASS K10 diagnostic: an unset caller LC_ALL was recorded as the pin (T030o43 review)
+== review 2: the whitespace step (_VF_AWK_WS) and its members
+PASS W02 literal applies once in scripts/verification-lib.sh
+PASS W02 KILLED (judge rc)
+PASS W02 diagnostic: a manifest finding spelled nbsp-fence-pair was dropped (T030o43 review 2)
+PASS W04 literal applies once in scripts/verification-lib.sh
+PASS W04 KILLED (judge rc)
+PASS W04 diagnostic: the Verify command was not run as written (T030o43 review 2)
+PASS W06 literal applies once in scripts/verification-lib.sh
+PASS W06 KILLED (judge rc)
+PASS W06 diagnostic: a frontmatter path was not read as written (T030o43 review 2)
+PASS W08 literal applies once in scripts/verification-lib.sh
+PASS W08 KILLED (judge rc)
+PASS W08 diagnostic: a U+00A0 around a frontmatter value was read as part of it (T030o43 review 2)
+PASS W10 literal applies once in scripts/verification-lib.sh
+PASS W10 KILLED (judge rc)
+PASS W10 diagnostic: spec-evidence read the contract key [verification_contract:] as the legacy path (T030o43 review 2)
+PASS W12 literal applies once in scripts/spec-run.sh
+PASS W12 KILLED (judge rc)
+PASS W12 diagnostic: spec-run read the contract key [verification_contract:] as the legacy path (T030o43 review 2)
+PASS W14 literal applies once in scripts/spec-evidence.sh
+PASS W14 KILLED (judge rc)
+PASS W14 diagnostic: spec-evidence read the contract key [verification_contract:] as the legacy path (T030o43 review 2)
+PASS W16 literal applies once in scripts/verification-lib.sh
+PASS W16 KILLED (judge rc)
+PASS W16 diagnostic: a waiver the scanner reads left the input identity (fenced-round-inside, T030o43 review 2)
+PASS W18 literal applies once in scripts/verification-lib.sh
+PASS W18 KILLED (judge rc)
+PASS W18 diagnostic: the Decisions view kept less than written (fenced-content, T030o43 review 2)
+PASS W20 literal applies once in scripts/verification-lib.sh
+PASS W20 SURVIVES as argued (equiv)
+PASS W22 literal applies once in scripts/verification-lib.sh
+PASS W22 KILLED (judge rc)
+PASS W22 diagnostic: a required section holding only White_Space character 1 counted as a body (T030o43 review 2)
+PASS W24 literal applies once in scripts/verification-lib.sh
+PASS W24 KILLED (judge rc)
+PASS W24 diagnostic: the scanner did not read the waiver (nbsp-heading, fixture)
+PASS W26 literal applies once in scripts/verification-lib.sh
+PASS W26 KILLED (judge rc)
+PASS W26 diagnostic: a manual observation of a U+00A0 alone was read as an observation (T030o43 review 2)
+PASS W28 literal applies once in scripts/verification-lib.sh
+PASS W28 SURVIVES as argued (equiv)
+PASS W30 literal applies once in scripts/verification-lib.sh
+PASS W30 KILLED (judge rc)
+PASS W30 diagnostic: a matrix criterion cell written as the spec writes it did not equal the AC catalog (T030o43 review 3)
+PASS W32 literal applies once in scripts/sdd-analyze.sh
+PASS W32 KILLED (judge rc)
+PASS W32 diagnostic: a U+00A0 inside an Agent line did not end the token before the path (T030o43 review 2)
+PASS W34 literal applies once in scripts/spec-evidence.sh
+PASS W34 KILLED (judge rc)
+PASS W34 diagnostic: an Evidence of a U+00A0 alone read as evidence (T030o43 review 2)
+PASS W36 literal applies once in scripts/spec-evidence.sh
+PASS W36 KILLED (judge rc)
+PASS W36 diagnostic: a missing artifact (not-a-pattern) passed under LANG=C (T030o43 review 2)
+PASS W38 literal applies once in scripts/spec-task.sh
+PASS W38 KILLED (judge rc)
+PASS W38 diagnostic: the task list kept a U+00A0 in a stage the kernel reads without it (T030o43 review 2)
+== review 2: the prior-review manifest pass, keyed on its field lines
+PASS M02 literal applies once in scripts/verification-lib.sh
+PASS M02 KILLED (judge rc)
+PASS M02 diagnostic: a manifest finding spelled one-leading-space was dropped (T030o43 review 2)
+PASS M04 literal applies once in scripts/verification-lib.sh
+PASS M04 SURVIVES as argued (equiv)
+PASS M06 literal applies once in scripts/verification-lib.sh
+PASS M06 KILLED (judge rc)
+PASS M06 diagnostic: a manifest spelled field-outside-finding was not refused by name (T030o43 review 2)
+PASS M08 literal applies once in scripts/verification-lib.sh
+PASS M08 KILLED (judge rc)
+PASS M08 diagnostic: a manifest spelled second-severity was not refused by name (T030o43 review 2)
+PASS M10 literal applies once in scripts/verification-lib.sh
+PASS M10 SURVIVES as argued (equiv)
+PASS M12 literal applies once in scripts/verification-lib.sh
+PASS M12 KILLED (judge rc)
+PASS M12 diagnostic: a manifest spelled severity-grammar was not refused by name (T030o43 review 2)
+PASS M14 literal applies once in scripts/verification-lib.sh
+PASS M14 KILLED (judge rc)
+PASS M14 diagnostic: a manifest spelled fence-left-open was not refused by name (T030o43 review 2)
+PASS M16 literal applies once in scripts/verification-lib.sh
+PASS M16 KILLED (judge rc)
+PASS M16 diagnostic: a manifest spelled raw-block-left-open was not refused by name (T030o43 review 2)
+PASS M18 literal applies once in scripts/verification-lib.sh
+PASS M18 KILLED (judge rc)
+PASS M18 diagnostic: a manifest finding spelled lowercase-finding was dropped (T030o43 review 2)
+PASS M20 literal applies once in scripts/verification-lib.sh
+PASS M20 KILLED (judge rc)
+PASS M20 diagnostic: a manifest finding spelled indented-fields was dropped (T030o43 review 2)
+PASS M22 literal applies once in scripts/verification-lib.sh
+PASS M22 KILLED (judge rc)
+PASS M22 diagnostic: a manifest spelled class-with-space was not refused by name (T030o43 review 2)
+PASS M24 literal applies once in scripts/verification-lib.sh
+PASS M24 KILLED (judge rc)
+PASS M24 diagnostic: a plausible manifest (recorded-finding-text) was refused (T030o43 review 2)
+PASS S42 literal applies once in scripts/verification-lib.sh
+PASS S42 KILLED (judge rc)
+PASS S42 diagnostic: manifest records that could not be sorted were read as none (T030o43 review)
+PASS S44 literal applies once in scripts/verification-lib.sh
+PASS S44 KILLED (judge rc)
+PASS S44 diagnostic: an id inventory that could not be sorted read as a short one (T030o43 review)
+== review 3 (session 9): the manifest pass
+PASS N01 literal applies once in scripts/verification-lib.sh
+PASS N01 KILLED (judge rc)
+PASS N01 diagnostic: a manifest spelled severity-then-prior was not refused by name (T030o43 review 2)
+PASS N03 literal applies once in scripts/verification-lib.sh
+PASS N03 KILLED (judge rc)
+PASS N03 diagnostic: a manifest spelled ordered-severity was not refused by name (T030o43 review 2)
+PASS N05 literal applies once in scripts/verification-lib.sh
+PASS N05 KILLED (judge rc)
+PASS N05 diagnostic: a manifest spelled nbsp-after-hashes-below-class-only was not refused by name (T030o43 review 2)
+PASS N07 literal applies once in scripts/verification-lib.sh
+PASS N07 KILLED (judge rc)
+PASS N07 diagnostic: a manifest spelled word-before-finding-unbolded was not refused by name (T030o43 review 2)
+PASS N09 literal applies once in scripts/verification-lib.sh
+PASS N09 KILLED (judge rc)
+PASS N09 diagnostic: a manifest spelled bold-finding-line-unbolded was not refused by name (T030o43 review 2)
+== review 3 (session 9): canonical reports and the matrix
+PASS N11 literal applies once in scripts/verification-lib.sh
+PASS N11 KILLED (judge rc)
+PASS N11 diagnostic: a canonical Severity value was read after a second bold label (T030o43 review 3)
+PASS N13 literal applies once in scripts/verification-lib.sh
+PASS N13 KILLED (judge rc)
+PASS N13 diagnostic: a canonical Finding ID was not named as written (T030o43 review 3)
+PASS N15 literal applies once in scripts/verification-lib.sh
+PASS N15 KILLED (judge rc)
+PASS N15 diagnostic: a matrix criterion cell written as the spec writes it did not equal the AC catalog (T030o43 review 3)
+PASS W41 literal applies once in scripts/verification-lib.sh
+PASS W41 SURVIVES as argued (equiv)
+== review 3 (session 9): values as written and stages
+PASS N16 literal applies once in scripts/verification-lib.sh
+PASS N16 KILLED (judge rc)
+PASS N16 diagnostic: a Tests locator written with a U+00A0 did not bind or was not found as written (T030o43 review 3)
+PASS N18 literal applies once in scripts/verification-lib.sh
+PASS N18 KILLED (judge rc)
+PASS N18 diagnostic: a Tests locator written with a U+00A0 did not bind or was not found as written (T030o43 review 3)
+PASS N20 literal applies once in scripts/verification-lib.sh
+PASS N20 KILLED (judge rc)
+PASS N20 diagnostic: a Files entry ending in a U+00A0 and (new) did not own its test file (T030o43 review 3)
+PASS N22 literal applies once in scripts/verification-lib.sh
+PASS N22 KILLED (judge rc)
+PASS N22 diagnostic: a registry row after a U+00A0 was not read as that row (T030o43 review 3)
+PASS N24 literal applies once in scripts/verification-lib.sh
+PASS N24 KILLED (judge rc)
+PASS N24 diagnostic: a Backend heading ending in c2a0 was not the stage through-stage names (T030o43 review 3)
+PASS N26 literal applies once in scripts/verification-lib.sh
+PASS N26 KILLED (judge rc)
+PASS N26 diagnostic: a stage heading with a U+00A0 after "## " was not the stage a checkpoint names (T030o43 review 3)
+PASS N28 literal applies once in scripts/spec-task.sh
+PASS N28 KILLED (judge rc)
+PASS N28 diagnostic: the task list did not show a stage and a subject as written (T030o43 review 3)
+PASS W43 literal applies once in scripts/sdd-analyze.sh
+PASS W43 SURVIVES as argued (equiv)
+== review 4 (session 9): the manifest pass
+PASS N31 literal applies once in scripts/verification-lib.sh
+PASS N31 KILLED (judge rc)
+PASS N31 diagnostic: a manifest spelled nonbreaking-hyphen-id-unbolded was not refused by name (T030o43 review 2)
+PASS N33 literal applies once in scripts/verification-lib.sh
+PASS N33 KILLED (judge rc)
+PASS N33 diagnostic: a manifest spelled multiword-emphasized-severity was not refused by name (T030o43 review 2)
+PASS N35 literal applies once in scripts/verification-lib.sh
+PASS N35 KILLED (judge rc)
+PASS N35 diagnostic: a plausible manifest (summary-with-subsection) was refused (T030o43 review 2)
+== done shard 0/2 13:49:15Z rows=147
+t030o43-mutations failures=0

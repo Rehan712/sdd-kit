@@ -1,0 +1,42 @@
+# U+3000) to one VT byte. VT is in [[:space:]], so every class-based trim,
+# separator and emptiness test reads the character as whitespace, as a UTF-8
+# locale read U+00A0. VT is neither a space nor a tab, so every literal
+# grammar -- CommonMark indentation, fences and block quotes, the canonical
+# field line's single space, a `; ` separator -- reads the line exactly as
+# every locale read it before the pin, and the fence tracker below reaches
+# the same state on the mapped line as on the line as written, which is what
+# vf_report_block reads. ASCII whitespace is left alone. No member splits a
+# mapped line by awk's default field splitting, whose blanks are not the same
+# in every awk (mawk's source counts VT among them; macOS awk, gawk and the
+# mawk measured do not): vf_fields splits on ASCII blanks explicitly
+# (T030o43 review 3, R3-F6). The mapped line decides what a line is. Every
+# value a member passes on -- into a catalog or a record, to another
+# program, or into a comparison with a value that did not come through the
+# step -- is taken from vf_original, the line as written, by the anchor the
+# mapped line was matched with, and trimmed at its ends by vf_wstrim, the same
+# whitespace (R3-F4). A value whose grammar admits no whitespace (an ID, a
+# Class, a status, a severity, a verdict, a timestamp, a digest) reads the
+# same from either line; a name (an artifact name, an Agent path) is a token
+# that ends at any whitespace, so it is read from the mapped line.
+_VF_AWK_WS='
+function vf_ws(s) {
+  gsub(/\302[\205\240]|\341\232\200|\342\200[\200-\212\250\251\257]|\342\201\237|\343\200\200/, "\013", s)
+  return s
+}
+function vf_wsclass() {
+  return "([[:space:]]|\302[\205\240]|\341\232\200|\342\200[\200-\212\250\251\257]|\342\201\237|\343\200\200)"
+}
+function vf_wstrim(s) {
+  sub(/^([[:space:]]|\302[\205\240]|\341\232\200|\342\200[\200-\212\250\251\257]|\342\201\237|\343\200\200)+/, "", s)
+  sub(/([[:space:]]|\302[\205\240]|\341\232\200|\342\200[\200-\212\250\251\257]|\342\201\237|\343\200\200)+$/, "", s)
+  return s
+}
+function vf_fields(s, a) {
+  sub(/^[ \t]+/, "", s); sub(/[ \t]+$/, "", s)
+  return split(s, a, /[ \t]+/)
+}
+function vf_heading_text(s) {
+  sub(/^#+/, "", s)
+  return vf_wstrim(s)
+}
+'

@@ -1,0 +1,20 @@
+@@OLD
+task_scan() {
+  awk '
+    function flush() {
+@@NEW
+task_scan() {
+  awk "$_VF_AWK_TEXT_UNFENCED"'
+    function flush() {
+@@END
+@@OLD
+# A frontmatter that cannot be read is a failure, never the legacy path, which
+# would tick a versioned task on --evidence alone.
+CONTRACT="$(vf_fm_value "$SPEC_DIR/spec.md" verification_contract)" || exit 3
+[[ -z "$CONTRACT" || "$CONTRACT" == 1 ]] || { echo 'unsupported verification contract' >&2; exit 3; }
+@@NEW
+# A frontmatter that cannot be read, and a contract key that is not exactly
+# one key of value 1, are failures, never the legacy path, which would tick a
+# versioned task on --evidence alone (vf_contract).
+CONTRACT="$(vf_contract "$SPEC_DIR/spec.md")" || exit 3
+@@END

@@ -1,0 +1,224 @@
+== baselines
+== kill K01-scan-reads-raw-bytes
+PASS K01-scan-reads-raw-bytes applied (dry run)
+== kill K02-scan-enumerates-without-nul-framing
+PASS K02-scan-enumerates-without-nul-framing applied (dry run)
+== kill K03-scan-swallows-enumeration-failure
+PASS K03-scan-swallows-enumeration-failure applied (dry run)
+== kill K04-scan-never-folds-case
+PASS K04-scan-never-folds-case applied (dry run)
+== kill K05-scan-passes-names-through-awk-v
+PASS K05-scan-passes-names-through-awk-v applied (dry run)
+== kill K06-scan-normalizes-links-by-name
+PASS K06-scan-normalizes-links-by-name applied (dry run)
+== kill K07-scan-skips-unreadable-files
+PASS K07-scan-skips-unreadable-files applied (dry run)
+== over O01-scan-skips-every-spec-file
+PASS O01-scan-skips-every-spec-file applied (dry run)
+== equiv E01-live-scan-exit-unasserted
+PASS E01-live-scan-exit-unasserted applied (dry run)
+== equiv E02-awk-failure-diagnostic-removed
+PASS E02-awk-failure-diagnostic-removed applied (dry run)
+== kill K08-source-paths-drops-root-check
+PASS K08-source-paths-drops-root-check applied (dry run)
+== kill K09-anchor-layout-clause-deleted
+PASS K09-anchor-layout-clause-deleted applied (dry run)
+== kill K10-path-content-normalizes-links
+PASS K10-path-content-normalizes-links applied (dry run)
+== equiv E04-link-digest-direct (identity compared directly; E03 is a kill since v4, K51)
+PASS E04 baseline snapshot rc (want=0 got=0)
+PASS E04 applied (want=0 got=0)
+PASS E04 snapshot rc (want=0 got=0)
+PASS E04 every record not naming verification-lib.sh is identical, the link record included (want=0 got=0)
+PASS E04 the probe tree holds a link record (want=1 got=1)
+== kill K11-analyzer-loop-reads-raw-bytes
+PASS K11-analyzer-loop-reads-raw-bytes applied (dry run)
+== kill K12-shipped-set-from-a-glob
+PASS K12-shipped-set-from-a-glob applied (dry run)
+== kill K13-probe-anchored-on-a-dropped-line
+PASS K13-probe-anchored-on-a-dropped-line applied (dry run)
+== over O02-analyzer-strips-markers-everywhere
+PASS O02-analyzer-strips-markers-everywhere applied (dry run)
+== kill K14-copy-kit-is-cp-R
+PASS K14-copy-kit-is-cp-R applied (dry run)
+== kill K15-copy-kit-swallows-enumeration-failure
+PASS K15-copy-kit-swallows-enumeration-failure applied (dry run)
+== kill K16-copy-kit-copies-deleted-paths
+PASS K16-copy-kit-copies-deleted-paths applied (dry run)
+== kill K17-copy-kit-copies-spec-directories
+PASS K17-copy-kit-copies-spec-directories applied (dry run)
+== kill K18-copy-kit-ignores-the-selector
+PASS K18-copy-kit-ignores-the-selector applied (dry run)
+== kill K19-copy-kit-trap-and-exit
+PASS K19-copy-kit-trap-and-exit applied (dry run)
+== over O03-copy-kit-tracked-only
+PASS O03-copy-kit-tracked-only applied (dry run)
+== equiv E05-copy-kit-without-pipefail
+PASS E05-copy-kit-without-pipefail applied (dry run)
+== kill K20-doctor-fixture-is-cp-R
+PASS K20-doctor-fixture-is-cp-R applied (dry run)
+== kill K21-stage-kit-is-the-old-tar
+PASS K21-stage-kit-is-the-old-tar applied (dry run)
+== kill K22-policy-writer-follows-links
+PASS K22-policy-writer-follows-links applied (dry run)
+== kill K45-wizard-fixture-is-cp-R
+PASS K45-wizard-fixture-is-cp-R applied (dry run)
+== kill K23-run-sh-globs-its-suites
+PASS K23-run-sh-globs-its-suites applied (dry run)
+== kill K24-shellcheck-reads-rc-files
+PASS K24-shellcheck-reads-rc-files applied (dry run)
+== kill K25-shellcheck-reads-SHELLCHECK_OPTS
+PASS K25-shellcheck-reads-SHELLCHECK_OPTS applied (dry run)
+== kill K26-shellcheck-globs-its-files
+PASS K26-shellcheck-globs-its-files applied (dry run)
+== kill K27-suites-keep-ambient-kit-knobs
+PASS K27-suites-keep-ambient-kit-knobs applied (dry run)
+== kill K28-executable-check-globs
+PASS K28-executable-check-globs applied (dry run)
+== kill K29-overlay-check-globs
+PASS K29-overlay-check-globs applied (dry run)
+== kill K30-persona-check-globs
+PASS K30-persona-check-globs applied (dry run)
+== kill K31-tally-reads-records-in-place
+PASS K31-tally-reads-records-in-place applied (dry run)
+== kill K32-contract-obligation-deleted
+PASS K32-contract-obligation-deleted applied (dry run)
+== kill K33-suites-keep-git-local-environment
+PASS K33-suites-keep-git-local-environment applied (dry run)
+== kill K34-kernel-keeps-git-local-environment
+PASS K34-kernel-keeps-git-local-environment applied (dry run)
+== kill K34b-source-paths-keeps-git-local-environment
+PASS K34b-source-paths-keeps-git-local-environment applied (dry run)
+== kill K34c-snapshot-keeps-git-local-environment
+PASS K34c-snapshot-keeps-git-local-environment applied (dry run)
+== kill K35-root-compared-by-spelling
+PASS K35-root-compared-by-spelling applied (dry run)
+== kill K36-run-sh-keeps-CDPATH
+PASS K36-run-sh-keeps-CDPATH applied (dry run)
+== kill K37-shellcheck-sh-keeps-CDPATH
+PASS K37-shellcheck-sh-keeps-CDPATH applied (dry run)
+== kill K38-helpers-keep-CDPATH
+PASS K38-helpers-keep-CDPATH applied (dry run)
+== kill K39-host-repo-without-info-dir
+PASS K39-host-repo-without-info-dir applied (dry run)
+== kill K40-documented-workflow-copies-with-cp-R
+PASS K40-documented-workflow-copies-with-cp-R applied (dry run)
+== kill K41-floor-fixture-copies-with-cp-R
+PASS K41-floor-fixture-copies-with-cp-R applied (dry run)
+== kill K42-stage-umbrella-copies-with-cp-R
+PASS K42-stage-umbrella-copies-with-cp-R applied (dry run)
+== kill K43-dispatch-fixture-copies-with-cp-R
+PASS K43-dispatch-fixture-copies-with-cp-R applied (dry run)
+== kill K44-stage-example-copies-with-cp-R
+PASS K44-stage-example-copies-with-cp-R applied (dry run)
+== over O04-suites-clear-every-XDG-name
+PASS O04-suites-clear-every-XDG-name applied (dry run)
+== kill K46-dispatch-grammar-globs-live-scripts
+PASS K46-dispatch-grammar-globs-live-scripts applied (dry run)
+== kill K47-snapshot-clears-git-environment-for-its-whole-shell
+PASS K47-snapshot-clears-git-environment-for-its-whole-shell applied (dry run)
+== kill K48-snapshot-root-check-inherits-git-environment
+PASS K48-snapshot-root-check-inherits-git-environment applied (dry run)
+== kill K49-config-pin-keeps-GIT_CONFIG_GLOBAL
+PASS K49-config-pin-keeps-GIT_CONFIG_GLOBAL applied (dry run)
+== kill K50-config-pin-reads-the-system-level
+PASS K50-config-pin-reads-the-system-level applied (dry run)
+== equiv E07-config-pin-keeps-GIT_CONFIG_SYSTEM-under-NOSYSTEM
+PASS E07-config-pin-keeps-GIT_CONFIG_SYSTEM-under-NOSYSTEM applied (dry run)
+== witness W01-K43-survives-without-the-SCRIPTS-binding
+PASS W01-K43-survives-without-the-SCRIPTS-binding applied (dry run)
+== witness W02-K44-survives-without-the-EXAMPLE-binding
+PASS W02-K44-survives-without-the-EXAMPLE-binding applied (dry run)
+== witness W03-K46-survives-without-the-SCRIPTS-binding
+PASS W03-K46-survives-without-the-SCRIPTS-binding applied (dry run)
+== kill K51-snapshot-enumerates-with-raw-git
+PASS K51-snapshot-enumerates-with-raw-git applied (dry run)
+== kill K61-config-pin-leaves-HOME
+PASS K61-config-pin-leaves-HOME applied (dry run)
+== kill K62-config-pin-leaves-XDG_CONFIG_HOME
+PASS K62-config-pin-leaves-XDG_CONFIG_HOME applied (dry run)
+== equiv E08-config-pin-reads-the-system-level-alone
+PASS E08-config-pin-reads-the-system-level-alone applied (dry run)
+== equiv E09-inert-FIXTURES-bindings-dropped
+PASS E09-inert-FIXTURES-bindings-dropped applied (dry run)
+== kill K52-fixture-git-unpinned
+PASS K52-fixture-git-unpinned applied (dry run)
+== kill K70-fixture-git-keeps-the-caller-git-environment
+PASS K70-fixture-git-keeps-the-caller-git-environment applied (dry run)
+== kill K54-fixture-git-reads-the-caller-HOME
+PASS K54-fixture-git-reads-the-caller-HOME applied (dry run)
+== kill K58-fixture-git-reads-the-caller-XDG_CONFIG_HOME
+PASS K58-fixture-git-reads-the-caller-XDG_CONFIG_HOME applied (dry run)
+== kill K71-fixture-git-without-the-fixed-identity
+PASS K71-fixture-git-without-the-fixed-identity applied (dry run)
+== kill K73-fixture-git-leaves-the-installation-template
+PASS K73-fixture-git-leaves-the-installation-template applied (dry run)
+== equiv E17-fixture-git-reads-the-system-files
+PASS E17-fixture-git-reads-the-system-files applied (dry run)
+== equiv E18-fixture-git-template-directory-not-created
+PASS E18-fixture-git-template-directory-not-created applied (dry run)
+== kill K55-fixture-build-failure-returns-success
+PASS K55-fixture-build-failure-returns-success applied (dry run)
+== kill K67-runner-ignores-the-build-failure-record
+PASS K67-runner-ignores-the-build-failure-record applied (dry run)
+== kill K68-failed-build-prints-no-sandbox-path
+PASS K68-failed-build-prints-no-sandbox-path applied (dry run)
+== kill K69-failed-build-left-unrecorded
+PASS K69-failed-build-left-unrecorded applied (dry run)
+== kill K56-git-host-builds-with-raw-git
+PASS K56-git-host-builds-with-raw-git applied (dry run)
+== kill K66-make-verification-git-dir-pre-repair
+PASS K66-make-verification-git-dir-pre-repair applied (dry run)
+== kill K57-kit-copy-fixture-pre-repair
+PASS K57-kit-copy-fixture-pre-repair applied (dry run)
+== kill K59-scan-tree-1-built-with-raw-git
+PASS K59-scan-tree-1-built-with-raw-git applied (dry run)
+== kill K60-scan-tree-2-built-with-raw-git
+PASS K60-scan-tree-2-built-with-raw-git applied (dry run)
+== kill K63-scan-tree-3-built-with-raw-git
+PASS K63-scan-tree-3-built-with-raw-git applied (dry run)
+== kill K64-tally-host-built-with-raw-git
+PASS K64-tally-host-built-with-raw-git applied (dry run)
+== kill K65-doctor-host-built-with-raw-git
+PASS K65-doctor-host-built-with-raw-git applied (dry run)
+== equiv E11-letterless-spec-fixture-pre-repair
+PASS E11-letterless-spec-fixture-pre-repair applied (dry run)
+== equiv E12-ac-coverage-root-built-with-raw-git
+PASS E12-ac-coverage-root-built-with-raw-git applied (dry run)
+== kill K72-index-writes-with-raw-git
+PASS K72-index-writes-with-raw-git applied (dry run)
+== equiv E13-repository-config-with-raw-git
+PASS E13-repository-config-with-raw-git applied (dry run)
+== equiv E14-ignored-nested-clone-built-with-raw-git
+PASS E14-ignored-nested-clone-built-with-raw-git applied (dry run)
+== record R01-git-host-build-check-removed
+PASS R01-git-host-build-check-removed applied (dry run)
+== record R02-kit-copy-build-checks-removed
+PASS R02-kit-copy-build-checks-removed applied (dry run)
+== record R03-letterless-spec-build-check-removed
+PASS R03-letterless-spec-build-check-removed applied (dry run)
+== record R04-scan-tree-1-build-check-removed
+PASS R04-scan-tree-1-build-check-removed applied (dry run)
+== record R05-scan-tree-2-build-check-removed
+PASS R05-scan-tree-2-build-check-removed applied (dry run)
+== record R06-scan-tree-3-build-check-removed
+PASS R06-scan-tree-3-build-check-removed applied (dry run)
+== record R07-tally-host-build-check-removed
+PASS R07-tally-host-build-check-removed applied (dry run)
+== record R08-nested-clone-build-check-removed
+PASS R08-nested-clone-build-check-removed applied (dry run)
+== record R09-doctor-host-build-check-removed
+PASS R09-doctor-host-build-check-removed applied (dry run)
+== record R10-ac-coverage-build-check-removed
+PASS R10-ac-coverage-build-check-removed applied (dry run)
+== kill K75-fixture-git-climbs-out-of-the-sandbox
+PASS K75-fixture-git-climbs-out-of-the-sandbox applied (dry run)
+== kill K76-stage-kit-failure-prints-no-path
+PASS K76-stage-kit-failure-prints-no-path applied (dry run)
+== kill K77-stage-example-failure-lost-in-a-substitution
+PASS K77-stage-example-failure-lost-in-a-substitution applied (dry run)
+== kill K78-floor-fixture-failure-lost-in-a-substitution
+PASS K78-floor-fixture-failure-lost-in-a-substitution applied (dry run)
+== kill K79-stage-umbrella-failure-prints-no-path
+PASS K79-stage-umbrella-failure-prints-no-path applied (dry run)
+matrix failures=0

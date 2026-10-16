@@ -1,0 +1,23 @@
+@@OLD
+hidden-finding-outside|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n## Notes\n\n<!--\n### Finding G-043\n- **Class:** other-binding\n- **Severity:** data-loss\n-->\n|quoted content carries a Finding heading: ### Finding G-043
+ROWS
+@@NEW
+hidden-finding-outside|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n## Notes\n\n<!--\n### Finding G-043\n- **Class:** other-binding\n- **Severity:** data-loss\n-->\n|quoted content carries a Finding heading: ### Finding G-043
+value-tab-paragraph|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n\tdata-loss\n|a Severity field whose list item holds more than its line in finding G-042
+ROWS
+@@END
+@@OLD
+value-continued-lazy|- **Severity:** minor\ndata-loss|a Severity field whose list item holds more than its line in finding G-050
+ROWS
+@@NEW
+value-continued-lazy|- **Severity:** minor\ndata-loss|a Severity field whose list item holds more than its line in finding G-050
+value-second-paragraph|- **Severity:** minor\n\n  data-loss|a Severity field whose list item holds more than its line in finding G-050
+value-tab-paragraph|- **Severity:** minor\n\n\tdata-loss|a Severity field whose list item holds more than its line in finding G-050
+ROWS
+@@END
+@@OLD
+a-quoted-example|### Finding G-042|  - The lines `#### Severity: data-loss` and `- <b>Severity:</b> minor` are refused.\n
+@@NEW
+a-quoted-example|### Finding G-042|  - The lines `#### Severity: data-loss` and `- <b>Severity:</b> minor` are refused.\n
+a-empty-comment-then-prose|### Finding G-042|  - <!--> note --> Severity: as noted.\n
+@@END

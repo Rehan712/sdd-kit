@@ -1,0 +1,677 @@
+--- a/scripts/verification-lib.sh
++++ b/scripts/verification-lib.sh
+@@ -246,11 +246,71 @@
+   return vf_comment(s)
+ }
+ '
+-# The preludes of a parser of author text: the whitespace reading, then the
+-# fence tracker when the parser suppresses quoted content, then the step.
+-# vf_report_block alone takes the fence tracker without the step, because its
+-# output is a sealed digest of the report as written.
+-_VF_AWK_TEXT="$_VF_AWK_WS$_VF_AWK_FENCE$_VF_AWK_WSLINE"
++# _VF_AWK_LABEL — how both readers of finding records decide that a line
++# carries a record (O-018). vf_label <line> <labels> returns the label the
++# line carries when the first word of its rendered text is one of <labels>
++# (a space-separated lower-case list) in any case, and the line is an
++# emphasized label (the emphasis closes right after the word, or the
++# emphasized span ends in a colon inside or right after it) or the word is not
++# continued by a letter, digit or hyphen; otherwise "". The rendered text is
++# taken from CommonMark rather than from spellings a review reported: inline
++# raw HTML renders as nothing (comments, open and closing tags, processing
++# instructions and declarations, CommonMark 6.6), a numeric character
++# reference renders as its character (2.5), and the first word is the one
++# after any run of characters that are not letters or digits (indentation,
++# heading markers, any list marker, emphasis, backslash escapes), ordered-list
++# numbers and task checkboxes. vf_finding_heading <line> is true when the text
++# of an ATX heading is the word Finding in any case, not continued by a letter
++# or digit, followed, after anything that is not a letter or digit, by a
++# finding ID.
++_VF_AWK_LABEL='
++function vf_label_hex(h,   i, n) {
++  n = 0; h = tolower(h)
++  for (i = 1; i <= length(h); i++) n = n * 16 + index("0123456789abcdef", substr(h, i, 1)) - 1
++  return n
++}
++function vf_label(s, labels,   t, w, emph, lead, span, rest, i, n) {
++  while ((i = index(s, "<!--")) > 0) {
++    n = index(substr(s, i + 4), "-->")
++    s = n ? substr(s, 1, i - 1) substr(s, i + n + 6) : substr(s, 1, i - 1)
++  }
++  gsub(/<\/?[A-Za-z][A-Za-z0-9-]*[^>]*>|<[?!][^>]*>/, "", s)
++  while (match(s, /&#[0-9]+;|&#[xX][0-9A-Fa-f]+;/)) {
++    t = substr(s, RSTART + 2, RLENGTH - 3)
++    n = (t ~ /^[xX]/) ? vf_label_hex(substr(t, 2)) : t + 0
++    s = substr(s, 1, RSTART - 1) ((n > 32 && n < 127) ? sprintf("%c", n) : "\001") substr(s, RSTART + RLENGTH)
++  }
++  t = s; lead = ""
++  while (t ~ /^([^A-Za-z0-9]|[0-9]+[.)]|\[[ xX]\])/) {
++    if (match(t, /^([0-9]+[.)]|\[[ xX]\])/)) {lead = lead substr(t, 1, RLENGTH); t = substr(t, RLENGTH + 1)}
++    else {lead = lead substr(t, 1, 1); t = substr(t, 2)}
++  }
++  emph = (lead ~ /[*_]$/)
++  if (!match(t, /^[A-Za-z]+/)) return ""
++  w = tolower(substr(t, 1, RLENGTH)); if (!index(" " labels " ", " " w " ")) return ""
++  t = substr(t, RLENGTH + 1)
++  if (emph && t ~ /^[*_]/) return w
++  if (emph && t !~ /^[A-Za-z0-9-]/) {
++    span = t; sub(/[*_].*$/, "", span)
++    if (span ~ /:[[:space:]]*$/) return w
++    rest = substr(t, length(span) + 1)
++    if (rest ~ /^[*_]/) {sub(/^[*_]+/, "", rest); if (rest ~ /^:/) return w}
++  }
++  sub(/^[*_[:space:]]+/, "", t)
++  return (t ~ /^[A-Za-z0-9-]/) ? "" : w
++}
++function vf_finding_heading(s,   t) {
++  t = s; sub(/^ *#+/, "", t); sub(/^([[:space:]]|[\200-\377])+/, "", t)
++  if (tolower(substr(t, 1, 7)) != "finding" || substr(t, 8, 1) ~ /[A-Za-z0-9]/) return 0
++  t = substr(t, 8); sub(/^[^A-Za-z0-9]+/, "", t)
++  return t ~ /^[A-Za-z][A-Za-z0-9]*-[0-9]/
++}
++'
++# The preludes of a parser of author text: the whitespace reading, the label
++# reading, then the fence tracker when the parser suppresses quoted content,
++# then the step. vf_report_block alone takes the fence tracker without the
++# step, because its output is a sealed digest of the report as written.
++_VF_AWK_TEXT="$_VF_AWK_WS$_VF_AWK_LABEL$_VF_AWK_FENCE$_VF_AWK_WSLINE"
+ _VF_AWK_TEXT_UNFENCED="$_VF_AWK_WS$_VF_AWK_WSLINE"
+ 
+ # vf_config <stack-file> <tasks-file-or-empty> <new-output-dir>
+@@ -1177,79 +1237,70 @@
+     # status used to be read by nobody (O-017), so it is read here.
+     # The pass reads by the canonical finding's own field grammar, keyed on
+     # the lines that carry a record rather than on a heading it might not see
+-    # (T030o43 reviews 1 to 4). A heading is an ATX heading (up to three
+-    # spaces, a run of `#`, then a space, a tab or the end); every heading
+-    # closes the finding before it, and one whose first word is `Finding` in
+-    # any case and whose second is a finding ID opens one, a title allowed
+-    # after. A line not read as a heading whose text, after leading
+-    # whitespace or invisible characters, is a `#` run and the word Finding
+-    # is refused by name, so a finding's fields cannot fall into the one
+-    # above it (R3-F3). A field is decided by its label (R3-F2, R4-F2): a line
+-    # whose first word, after any run of characters that are not letters or
+-    # digits (indentation, any list marker, emphasis), ordered-list numbers
+-    # and task checkboxes, is Class or Severity in any case, and which is an
+-    # emphasized label (the emphasis closes right after the word, or the
+-    # emphasized span ends in a colon inside or right after it) or is not
+-    # continued by a letter, digit or hyphen. Inside a finding such a line
++    # (T030o43 reviews 1 to 4), and what it cannot read it refuses by name,
++    # never reads as prose (O-018). A heading is an ATX heading (up to three
++    # spaces, a run of `#`, then a space, a tab or the end). One whose first
++    # word is `Finding` in any case and whose second is a finding ID opens a
++    # finding, a title allowed after; any other heading vf_finding_heading
++    # reads as a Finding heading is refused. A finding is the section its
++    # heading opens: a heading as shallow as that one closes it, and a deeper
++    # heading is one of its lines, classified like any other (O-019). A line
++    # not read as a heading whose text, after leading whitespace or invisible
++    # characters, is a `#` run and the word Finding is refused by name, so a
++    # finding's fields cannot fall into the one above it (R3-F3). A field is
++    # decided by its label, read from the line's rendered text by vf_label
++    # (R3-F2, R4-F2, O-018): Class or Severity. Inside a finding such a line
+     # must be a dash, whitespace and `**Class:**` or `**Severity:**`, at any
+     # indentation, appear once, and carry a value of its grammar, which is the
+-    # text after that label and nothing further (R3-F1); anything else is
+-    # refused by name. Outside any finding that written spelling is refused,
+-    # and any other such line is prose only while nothing since the last
+-    # heading can hold a finding's record: a finding ID on the heading or a
+-    # line, a heading whose second word is Finding, or a heading deeper than
+-    # the Finding heading it follows, which the canonical grammar reads as
+-    # part of that finding (R3-F5, R4-F1). A finding with no Class, a field or
+-    # ID the grammar cannot read, quoting left open at the end, and a manifest
+-    # from which no finding is read (R4-F4) are each refused by name. A
+-    # finding whose opening line is no heading at all (a setext heading, raw
+-    # HTML, a bold line, a heading inside a list item) is recorded extent. A
+-    # byte-order mark on the first line is not part of it.
++    # text after that label and nothing further (R3-F1); anything else -- a
++    # heading, or a label behind inline HTML, included -- is refused by name.
++    # Every finding needs one readable Class and one readable Severity, so a
++    # tier the pass does not read (a quoted one included) is refused with its
++    # finding, never dropped (O-018). Outside any finding that written
++    # spelling is refused, and any other such line is prose only while
++    # nothing since the last heading can hold a finding's record: a finding
++    # ID on the heading or a line, or a heading whose second word is Finding
++    # (R3-F5, R4-F1). Quoting left open at the end, and a manifest from which
++    # no finding is read (R4-F4), are refused by name. A finding whose opening
++    # line is no heading at all (a setext heading, raw HTML, a bold line, a
++    # heading inside a list item) is recorded extent: its Class and Severity
++    # lines are refused, inside another finding as second fields and outside
++    # any once its ID is seen. A byte-order mark on the first line is not
++    # part of it.
+     awk "$_VF_AWK_TEXT"'
+       function bad(why) {printf "manifest line %d: %s: %s\n", FNR, why, vf_original > "/dev/stderr"; failed=1}
+       function flushm() {
+         if(id!="" && cls=="") bad("finding " id " has no readable Class")
++        if(id!="" && !severities) bad("finding " id " has no readable Severity")
+         if(id!="" && cls!="") {print id ":" cls ":" sev; recorded++}
+         id=""; cls=""; sev=""; classes=0; severities=0
+       }
+       function value(s, label) {sub("^[ ]*-[[:space:]]+[*][*]" label ":[*][*]", "", s); gsub(/^[[:space:]]+|[[:space:]]+$/, "", s); return s}
+-      function fieldname(s,   t, w, emph, lead, span, rest) {
+-        t=s; lead=""
+-        while (t ~ /^([^A-Za-z0-9]|[0-9]+[.)]|\[[ xX]\])/) {
+-          if (match(t, /^([0-9]+[.)]|\[[ xX]\])/)) {lead=lead substr(t, 1, RLENGTH); t=substr(t, RLENGTH + 1)}
+-          else {lead=lead substr(t, 1, 1); t=substr(t, 2)}
+-        }
+-        emph=(lead ~ /[*_]$/)
+-        if (!match(t, /^[A-Za-z]+/)) return ""
+-        w=tolower(substr(t, 1, RLENGTH)); if (w != "class" && w != "severity") return ""
+-        t=substr(t, RLENGTH + 1)
+-        if (emph && t ~ /^[*_]/) return w
+-        if (emph && t !~ /^[A-Za-z0-9-]/) {
+-          span=t; sub(/[*_].*$/, "", span)
+-          if (span ~ /:[[:space:]]*$/) return w
+-          rest=substr(t, length(span) + 1)
+-          if (rest ~ /^[*_]/) {sub(/^[*_]+/, "", rest); if (rest ~ /^:/) return w}
+-        }
+-        sub(/^[*_[:space:]]+/, "", t)
+-        return (t ~ /^[A-Za-z0-9-]/) ? "" : w
+-      }
++      function fieldname(s) {return vf_label(s, "class severity")}
+       FNR == 1 {sub(/^\357\273\277/, "")}
+       vf_quoted($0) {next}
+       /^ ? ? ?#+([ \t]|$)/ {
+-        flushm(); heading=$0; sub(/^ +/, "", heading); split(heading, word, /[[:space:]]+/)
++        heading=$0; sub(/^ +/, "", heading); split(heading, word, /[[:space:]]+/)
+         hl=match(heading, /[^#]/); hl=(hl ? hl - 1 : length(heading))
+         if (tolower(word[2]) == "finding" && word[3] ~ /^[A-Za-z][A-Za-z0-9]*-[0-9]/) {
++          flushm(); idseen=1
+           if (word[3] ~ /^[A-Z][A-Z0-9]*-[0-9]+$/) {id=word[3]; flevel=hl}
+           else bad("a Finding heading whose ID this grammar cannot read")
+-        } else if (flevel && hl <= flevel) flevel=0
+-        idseen=(heading ~ /[A-Za-z][A-Za-z0-9]*-[0-9]/) || tolower(word[2]) == "finding" || (flevel && hl > flevel)
+-        next
++          next
++        }
++        if (vf_finding_heading($0)) {flushm(); flevel=0; idseen=1; bad("a Finding heading this grammar cannot read"); next}
++        if (id == "" || hl <= flevel) {
++          flushm(); flevel=0
++          idseen=(heading ~ /[A-Za-z][A-Za-z0-9]*-[0-9]/) || tolower(word[2]) == "finding"
++          next
++        }
++        subheading=1
+       }
+-      /^([[:space:]]|[\200-\377])*#+([[:space:]]|[\200-\377])*[Ff][Ii][Nn][Dd][Ii][Nn][Gg]([^A-Za-z]|$)/ {
++      !subheading && /^([[:space:]]|[\200-\377])*#+([[:space:]]|[\200-\377])*[Ff][Ii][Nn][Dd][Ii][Nn][Gg]([^A-Za-z]|$)/ {
+         flushm(); idseen=1; bad("a Finding heading this grammar cannot read"); next
+       }
+       {
+-        field=fieldname($0)
++        subheading=0; field=fieldname($0)
+         if (field != "class" && field != "severity") {if ($0 ~ /[A-Za-z][A-Za-z0-9]*-[0-9]/) idseen=1; next}
+         strict=(field == "class") ? ($0 ~ /^[ ]*-[[:space:]]+\*\*Class:\*\*/) : ($0 ~ /^[ ]*-[[:space:]]+\*\*Severity:\*\*/)
+         if (id == "") {
+@@ -1477,6 +1528,18 @@
+       next
+     }
+     /^### Finding / {finding(); if(!active || ended) err("finding outside round"); vf_fields(vf_original, hw); fid=hw[3]; cursec=""; next}
++    # Only `### Finding <ID>` opens a finding here, while a reader sees one in
++    # any heading vf_finding_heading reads as a Finding heading: Finding in any
++    # case and a finding ID, at any level, whatever separates them. Such a
++    # heading is refused by name, never read as a section, and so is a line not
++    # read as a heading that is a `#` run and the word Finding, as the manifest
++    # pass refuses it (O-018).
++    style=="canonical" && !ended && /^ ? ? ?#+([ \t]|$)/ && vf_finding_heading($0) {err("a Finding heading this grammar cannot read"); next}
++    style=="canonical" && !ended && !/^ ? ? ?#+([ \t]|$)/ && /^([[:space:]]|[\200-\377])*#+([[:space:]]|[\200-\377])*[Ff][Ii][Nn][Dd][Ii][Nn][Gg]([^A-Za-z]|$)/ {err("a Finding heading this grammar cannot read"); next}
++    # A finding is the section its heading opens: a heading as shallow as `###`
++    # closes it, and a deeper one is one of its lines (O-018, the canonical half
++    # of the O-019 rule), so a field line after a section heading is outside it.
++    style=="canonical" && fid && /^ ? ? ?(#|##|###)([ \t]|$)/ {finding()}
+     # Round, review and finding headings are consumed above, so what remains
+     # here is a section heading. Level is not fixed by the templates.
+     /^#+[ ]/ {
+@@ -1493,8 +1556,20 @@
+     }
+     style=="legacy" && inwhere && !/^[ ]*- \*\*/ {loc=loc " " clean(vf_original)}
+     /^[ ]*- \*\*/ {inwhere=0}
++    # A field line outside any finding is a record the count never sees,
++    # whatever line opened the finding to its author, and inside a finding a
++    # line whose label vf_label reads as Class or Severity, and which is not
++    # the line of that field, carries a Class or a tier this pass would not read.
++    # Both are refused by name (O-018), as the manifest pass refuses them.
++    style=="canonical" && !ended && !fid && /^[ ]*- \*\*(Class|Status|Prior|Severity|Where|Root cause|Scenario|Reproduced|Blocks|Wrong behavior|Class-wide fix):\*\*/ {err("a finding field outside any Finding"); next}
++    style=="canonical" && fid && !/^[ ]*- \*\*(Class|Status|Prior|Severity|Where|Root cause|Scenario|Reproduced|Blocks|Wrong behavior|Class-wide fix):\*\*/ {
++      lbl=vf_label($0, "class severity")
++      if (lbl != "") err("a " (lbl == "class" ? "Class" : "Severity") " line this grammar cannot read in finding " fid)
++    }
+     fid && /^[ ]*- \*\*(Class|Status|Prior|Severity|Where|Root cause|Scenario|Reproduced|Blocks|Wrong behavior|Class-wide fix):\*\*/ {
+-      key=$0; sub(/:\*\*.*/,"",key)
++      # The key is the label of the field, not the spelling of the line, so an indented
++      # second Severity is the same field (O-018).
++      key=$0; sub(/:\*\*.*/,"",key); sub(/^[ ]*/,"",key)
+       if(seenfindingfield[n SUBSEP fid SUBSEP key]++) err("duplicate finding field")
+       v=value(vf_original)
+       if($0 ~ /\*\*Class:/) cls=v
+--- a/tests/test-gate-contracts.sh
++++ b/tests/test-gate-contracts.sh
+@@ -1093,9 +1093,12 @@
+ inline-finding-manifest|refuse|## Findings\n\n- **G-042** (tier-binding) — Severity data-loss\n
+ SHAPES
+   # Real and plausible manifests parse (R2-F3): a line that merely mentions a
+-  # field is prose, a heading closes the finding above it, a fenced example is
+-  # quoted, and a Class-only finding is a record. A CHALLENGED round that
+-  # re-records the finding at its manifest Class and tier has nothing to refuse.
++  # field is prose, a heading as shallow as the Finding heading closes it, and a
++  # fenced example is quoted. A finding that carries a Class alone is no longer
++  # one of them: every manifest finding needs one readable Severity (O-018), so
++  # the shipped class-only row is a refusal in report_record_line_cases. A
++  # CHALLENGED round that re-records the finding at its manifest Class and tier
++  # has nothing to refuse.
+   tier_round_fixture 1 '' O-017:harness-locale-decoding:open:wrong-result > "$report"
+   while IFS='|' read -r label shape; do
+     printf '%b' "$shape" > "$spec/notes/verification/reports/opponent-findings-review.md"
+@@ -1107,7 +1110,6 @@
+ recorded-finding-text|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Status:** new\n- **Severity:** wrong-result\n- **Where:** scripts/verification-lib.sh:955-968\n- **The inputs.** The manifest has six lines: a heading, a Class, a Severity and a Scenario.\n- **Class-wide fix:** make every `**Severity:**` line parse by the canonical grammar\n
+ trailing-section|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n\n## Follow-up\n- T030o43 fixes the **Severity:** handling\n- **T001** — fix it; its **Severity:** stays data-loss\n
+ prose-mention|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n- **Scenario:** the **Class:** field was lost; a line written `-\302\240**Class:**` was skipped\n
+-class-only|## Findings\n\n### Finding O-017\n- **Class:** harness-locale-decoding\n
+ finding-summary|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n\n## Finding summary\nOne finding.\n\n```text\n- **Severity:** minor\n```\n
+ summary-prose|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n\n## Summary\n\n- Class: harness-locale-decoding, one finding\n- Severity: all blocking\n
+ introduction-prose|# Prior review\n\nSeverity: every finding below is blocking.\n\n### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n
+@@ -1232,10 +1234,176 @@
+   run_rc 3 env PATH="$SANDBOX/fault-tally-obs:$PATH" bash "$SCRIPTS/spec-gate.sh" tally "$spec"
+   assert_contains "$OUT" 'tally: the finding observations could not be counted' \
+     'AC-017: finding observations that could not be counted went missing from the tally (O-017)'
++}
++
++# AC-012/FM-019/INV-006 — O-018 and O-019 (round 13, T030o44). Both readers of
++# finding records read a record line by what renders as one, through the one
++# label reader vf_label, and refuse by name a line they cannot read; neither
++# reads it as prose. The members are derived from the rendered text, not from
++# the spellings round 13 named: a heading that carries a label, a label behind
++# inline HTML or a character reference, a quoted or absent tier, a Finding
++# heading the pass cannot open, a field line outside any finding, and a second
++# field the duplicate key missed because it was keyed by spelling.
++# record_round <n> <verdict> <blocking> <minor> <heading> <class> <status> <severity lines> [<extra lines>]
++# (the heading, severity and extra lines through printf %b; the extra lines go after the Scenario)
++record_round() {
++  printf '## Round %s\n**Round:** %s\n**Timestamp:** 2026-09-06T12:00:0%sZ\n' "$1" "$1" "$1"
++  printf '**Source:** aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\n**Floor:** FLOOR-fixture\n'
++  printf '**Verdict:** %s\n**Blocking:** %s · **Minor:** %s\n' "$2" "$3" "$4"
++  printf '### What I attacked\nFinding records read by both readers.\n'
++  printf '%b\n- **Class:** %s\n- **Status:** %s\n- **Prior:** none\n%b\n' "$5" "$6" "$7" "$8"
++  printf -- '- **Scenario:** a recorded trigger\n%b' "${9:-}"
++  printf -- '- **Where:** scripts/run.sh:9\n- **Reproduced:** concrete trigger at that site\n'
++  printf -- '- **Root cause:** implementation-error\n- **Blocks:** AC-012\n- **Wrong behavior:** observed versus required\n'
++  printf -- '- **Class-wide fix:** read or refuse every record line\n### Held up / follow-up tasks\nFixture disposition recorded.\n'
++  printf '<!-- gate-round-end: opponent:%s -->\n' "$1"
++}
++
++record_line_vf() { # <locale> <report> <spec>
++  in_locale "$1" bash -c '. "$1"; vf_reports "$2" opponent "$3" "$4"' _ "$SCRIPTS/verification-lib.sh" "$2" "$SANDBOX/record-lines.nul" "$3"
++}
++
++report_record_line_cases() {
++  local spec report l tag body want heading sevs r1 low
++  low='clearing verdict rests on 1 lowered severity tier(s) of known findings'
++  spec="$SANDBOX/record-lines"; report="$spec/notes/opponent.md"
++  mkdir -p "$spec/notes/verification/reports"
++  # The manifest member: a CLEARED round 1 re-records G-042 open at minor over
++  # a manifest whose G-042 carries data-loss on a line the pass must read or
++  # refuse. Every finding needs one readable Severity, so a tier the pass does
++  # not read, a quoted one included, is refused with its finding.
++  while IFS='|' read -r tag body want; do
++    printf '# Prior review\n\n%b' "$body" > "$spec/notes/verification/reports/opponent-findings-review.md"
++    tier_round_fixture 1 '' G-042:tier-binding:open:minor > "$report"
++    for l in C en_US.UTF-8; do
++      run_rc 3 record_line_vf "$l" "$report" "$spec"
++      assert_contains "$OUT" "$want" "AC-012: a manifest tier written as $tag was not refused by name under LANG=$l (O-018)"
++    done
++  done <<'ROWS'
++heading-label|### Finding G-042\n- **Class:** tier-binding\n\n#### Severity: data-loss\n|a Severity line this grammar cannot read: #### Severity: data-loss
++heading-body|### Finding G-042\n- **Class:** tier-binding\n\n#### Severity\n\ndata-loss\n|a Severity line this grammar cannot read: #### Severity
++heading-under-level-two|## Finding G-042\n- **Class:** tier-binding\n\n### Severity: data-loss\n|a Severity line this grammar cannot read: ### Severity: data-loss
++html-tag|### Finding G-042\n- **Class:** tier-binding\n- <b>Severity:</b> data-loss\n|a Severity line this grammar cannot read: - <b>Severity:</b> data-loss
++html-block|### Finding G-042\n- **Class:** tier-binding\n<h4>Severity: data-loss</h4>\n|a Severity line this grammar cannot read: <h4>Severity: data-loss</h4>
++character-reference|### Finding G-042\n- **Class:** tier-binding\n- &#x53;everity: data-loss\n|a Severity line this grammar cannot read: - &#x53;everity: data-loss
++inline-comment|### Finding G-042\n- **Class:** tier-binding\n- <!-- tier --> Severity: data-loss\n|a Severity line this grammar cannot read: - <!-- tier --> Severity: data-loss
++second-tier-behind-html|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- <b>Severity:</b> data-loss\n|a second Severity line in finding G-042
++blockquoted-tier|### Finding G-042\n- **Class:** tier-binding\n> - **Severity:** data-loss\n|finding G-042 has no readable Severity
++fenced-tier|### Finding G-042\n- **Class:** tier-binding\n```text\n- **Severity:** data-loss\n```\n|finding G-042 has no readable Severity
++commented-tier|### Finding G-042\n- **Class:** tier-binding\n<!-- - **Severity:** data-loss -->\n|finding G-042 has no readable Severity
++no-tier|### Finding G-042\n- **Class:** tier-binding\n|finding G-042 has no readable Severity
++class-only-shipped|## Findings\n\n### Finding O-017\n- **Class:** harness-locale-decoding\n|finding O-017 has no readable Severity
++dash-separated-heading|### Finding \342\200\224 G-042\n- **Class:** tier-binding\n- **Severity:** data-loss\n|a Finding heading this grammar cannot read
++ROWS
++  # O-019: a heading deeper than the Finding heading is one of its lines, so
++  # the canonical field lines under it are read: the CLEARED round is refused
++  # on the manifest tier, and a CHALLENGED round at that tier parses.
++  while IFS='|' read -r tag body; do
++    printf '# Prior review\n\n%b' "$body" > "$spec/notes/verification/reports/opponent-findings-review.md"
++    for l in C en_US.UTF-8; do
++      tier_round_fixture 1 '' G-042:tier-binding:open:minor > "$report"
++      run_rc 3 record_line_vf "$l" "$report" "$spec"
++      assert_contains "$OUT" "$low" "AC-012: a manifest field line under a sub-heading ($tag) was not read under LANG=$l (O-019)"
++      assert_not_contains "$OUT" 'outside any Finding' "AC-012: a manifest field line under a sub-heading ($tag) was read as outside its finding (O-019)"
++      tier_round_fixture 1 '' G-042:tier-binding:open:data-loss > "$report"
++      run_rc 0 record_line_vf "$l" "$report" "$spec"
++    done
++  done <<'ROWS'
++notes-sub-heading|### Finding G-042\n- **Class:** tier-binding\n#### Notes\nReproduced twice.\n- **Severity:** data-loss\n
++details-sub-heading|### Finding G-042\n#### Details\n- **Class:** tier-binding\n- **Severity:** data-loss\n
++two-levels|### Finding G-042\n#### Details\n##### Evidence\n- **Class:** tier-binding\n- **Severity:** data-loss\n
++finding-summary-sub-heading|### Finding G-042\n- **Class:** tier-binding\n#### Finding summary\n- **Severity:** data-loss\n
++ROWS
++  rm -rf "$spec/notes/verification"
++  # The canonical member: round 1 is CHALLENGED with G-042 open at data-loss,
++  # and round 2 is CLEARED at 0 . 0 and re-lists G-042 at minor under a line
++  # that opens a finding to a reader but is not `### Finding <ID>`. The
++  # canonical heading at minor and 0 . 1 is the control.
++  r1="$(record_round 1 CHALLENGED 1 0 '### Finding G-042' tier-binding new '- **Severity:** data-loss')"
++  { printf '%s\n\n' "$r1"; record_round 2 CLEARED 0 1 '### Finding G-042' tier-binding open '- **Severity:** minor'; } > "$report"
++  run_rc 3 record_line_vf C "$report" "$spec"
++  assert_contains "$OUT" "$low" 'AC-012: the canonical control at a lowered tier sealed (O-018)'
++  while IFS='|' read -r tag heading want; do
++    { printf '%s\n\n' "$r1"; record_round 2 CLEARED 0 0 "$heading" tier-binding open '- **Severity:** minor'; } > "$report"
++    for l in C en_US.UTF-8; do
++      run_rc 3 record_line_vf "$l" "$report" "$spec"
++      assert_contains "$OUT" "$want" "AC-012: a finding opened by $tag was not refused by name under LANG=$l (O-018)"
++    done
++  done <<'ROWS'
++level-four|#### Finding G-042|a Finding heading this grammar cannot read
++tab|### Finding\tG-042|a Finding heading this grammar cannot read
++two-spaces|###  Finding G-042|a Finding heading this grammar cannot read
++no-break-space|### Finding\302\240G-042|a Finding heading this grammar cannot read
++lowercase|### finding G-042|a Finding heading this grammar cannot read
++uppercase|### FINDING G-042|a Finding heading this grammar cannot read
++level-two|## Finding G-042|a Finding heading this grammar cannot read
++leading-space| ### Finding G-042|a Finding heading this grammar cannot read
++tab-after-hashes|###\tFinding G-042|a Finding heading this grammar cannot read
++colon|### Finding: G-042|a Finding heading this grammar cannot read
++no-break-space-before-hashes|\302\240### Finding G-042|a Finding heading this grammar cannot read
++bold-line|**Finding G-042**|a finding field outside any Finding
++list-item|- ### Finding G-042|a finding field outside any Finding
++ROWS
++  # The duplicate key is the field's label, and inside a finding a line whose
++  # label is Class or Severity is that field's line or is refused: a new G-050
++  # under CLEARED at 0 . 1 cannot record minor past a data-loss line.
++  while IFS='|' read -r tag sevs want; do
++    record_round 1 CLEARED 0 1 '### Finding G-050' dup-binding new "$sevs" > "$report"
++    for l in C en_US.UTF-8; do
++      run_rc 3 record_line_vf "$l" "$report" "$spec"
++      assert_contains "$OUT" "$want" "AC-012: a second tier written as $tag was not refused by name under LANG=$l (O-018)"
++    done
++  done <<'ROWS'
++indented-second|- **Severity:** data-loss\n  - **Severity:** minor|duplicate finding field
++indented-first|  - **Severity:** data-loss\n- **Severity:** minor|duplicate finding field
++unread-first|- **Severity**: data-loss\n- **Severity:** minor|a Severity line this grammar cannot read in finding G-050
++behind-html|- **Severity:** minor\n  - <b>Severity:</b> data-loss|a Severity line this grammar cannot read in finding G-050
++character-reference|- **Severity:** minor\n  - &#83;everity: data-loss|a Severity line this grammar cannot read in finding G-050
++sub-heading|- **Severity:** minor\n#### Severity: data-loss|a Severity line this grammar cannot read in finding G-050
++class-reference|- **Severity:** minor\n  - &#x43;lass: other-class|a Class line this grammar cannot read in finding G-050
++ROWS
++  # A finding is closed by a heading as shallow as `###`, so a field line after
++  # a section heading is outside it, while prose there, and a sub-heading,
++  # title, lead-in or quoted example inside a finding, still parse. A line in a
++  # finding that BEGINS with a code span holding a label is refused, the safe
++  # direction recorded in Decisions.
++  record_round 1 CHALLENGED 1 0 '### Finding G-042' tier-binding new '- **Severity:** data-loss' |
++    sed 's/^Fixture disposition recorded\.$/- **Severity:** minor/' > "$report"
++  run_rc 3 record_line_vf C "$report" "$spec"
++  assert_contains "$OUT" 'a finding field outside any Finding' 'AC-012: a field line after a section heading was read into the finding above it (O-018)'
++  record_round 1 CHALLENGED 1 0 '### Finding G-042' tier-binding new '- **Severity:** data-loss' |
++    sed 's/^Fixture disposition recorded\.$/- Severity: all blocking, as recorded./' > "$report"
++  run_rc 0 record_line_vf C "$report" "$spec"
++  while IFS='|' read -r tag heading body; do
++    record_round 1 CHALLENGED 1 0 "$heading" tier-binding new '- **Severity:** data-loss' "$body" > "$report"
++    for l in C en_US.UTF-8; do
++      run_rc 0 record_line_vf "$l" "$report" "$spec"
++      assert_not_contains "$OUT" 'report recovery' "AC-012: a canonical finding with $tag was refused under LANG=$l (O-018)"
++    done
++  done <<'ROWS'
++a-notes-sub-heading|### Finding G-042|#### Notes\nReproduced twice, once per locale.\n
++a-details-sub-heading|### Finding G-042|#### Details\n- **The manifest member.** A heading carries the tier.\n
++a-title|### Finding G-042 — tier read|
++a-lead-in|### Finding G-042|  - **Class binding.** The record is read.\n  - Severity was re-read twice.\n
++a-quoted-example|### Finding G-042|  - The lines `#### Severity: data-loss` and `- <b>Severity:</b> minor` are refused.\n
++ROWS
++  record_round 1 CHALLENGED 1 0 '### Finding G-042' tier-binding new '- **Severity:** data-loss' '  - `#### Severity: data-loss` is the heading form.\n' > "$report"
++  run_rc 3 record_line_vf C "$report" "$spec"
++  assert_contains "$OUT" 'a Severity line this grammar cannot read in finding G-042' \
++    'AC-012: a finding line beginning with a code span holding a label was read as prose (T030o44)'
++  # The canonical rules stop at the completion marker, so a field line or a
++  # Finding-like heading after it keeps the after-marker refusal it had.
++  for tag in '- **Severity:** minor' '#### Finding G-043'; do
++    { record_round 1 CHALLENGED 1 0 '### Finding G-042' tier-binding new '- **Severity:** data-loss'; printf '%s\n' "$tag"; } > "$report"
++    run_rc 3 record_line_vf C "$report" "$spec"
++    assert_contains "$OUT" 'content after the round completion marker' \
++      "AC-012: $tag after the completion marker lost the after-marker refusal (T030o44)"
++  done
+ }
+ 
+ test_reports_and_tally() {
+   report_manifest_locale_cases
++  report_record_line_cases
+   matrix_runtime_cases
+   cost_metric_cases
+   report_prior_binding_cases
+@@ -1414,7 +1582,7 @@
+   cp "$spec/notes/opponent.md" "$spec/notes/verification/reports/opponent.md"
+   run_rc 3 bash "$SCRIPTS/spec-gate.sh" tally "$spec"
+   assert_contains "$OUT" 'resolved finding O-042 has no earlier round of this gate and no declared prior-review record' 'AC-012: a copy of the report vouched for its own IDs'
+-  printf '# Provisional review\n\n## Finding O-041\n\n- **Class:** unrelated-class\n' \
++  printf '# Provisional review\n\n## Finding O-041\n\n- **Class:** unrelated-class\n- **Severity:** data-loss\n' \
+     > "$spec/notes/verification/reports/opponent-findings-2026-09-09.md"
+   run_rc 3 bash "$SCRIPTS/spec-gate.sh" tally "$spec"
+   assert_contains "$OUT" 'resolved finding O-042 has no earlier round of this gate and no declared prior-review record' 'AC-012: an unrelated manifest Prior neutralized a blocking finding'
+@@ -1422,13 +1590,13 @@
+   # the attack that survived three repairs -- Class is a field this report also
+   # writes, so matching it binds the claim to nothing the author does not
+   # control. Only the finding own ID counts, so a same-class Prior is refused.
+-  printf '# Provisional review\n\n## Finding O-041\n\n- **Class:** silent-data-loss\n' \
++  printf '# Provisional review\n\n## Finding O-041\n\n- **Class:** silent-data-loss\n- **Severity:** data-loss\n' \
+     > "$spec/notes/verification/reports/opponent-findings-2026-09-09.md"
+   run_rc 3 bash "$SCRIPTS/spec-gate.sh" tally "$spec"
+   assert_contains "$OUT" 'resolved finding O-042 has no earlier round of this gate and no declared prior-review record' 'AC-012: a same-class manifest Prior neutralized a brand-new data-loss finding'
+   # The same-ID manifest positive: this is the shape round 1 O-006 actually
+   # has, and it must keep working or the canonical record stops parsing.
+-  printf '# Provisional review\n\n## Finding O-042\n\n- **Class:** silent-data-loss\n' \
++  printf '# Provisional review\n\n## Finding O-042\n\n- **Class:** silent-data-loss\n- **Severity:** data-loss\n' \
+     > "$spec/notes/verification/reports/opponent-findings-2026-09-09.md"
+   run_rc 0 bash "$SCRIPTS/spec-gate.sh" tally "$spec"
+   # The prior manifest is authored Markdown too. A same-class entry quoted in
+@@ -1436,23 +1604,23 @@
+   # review, and cannot authorize a resolved claim. A manifest that records no
+   # finding is refused on its own (T030o43 review 4), so each of these carries
+   # one real, unrelated finding and the quoted entry is still what is tested.
+-  printf '## Finding O-041\n\n- **Class:** unrelated-class\n\n\140\140\140markdown\n## Finding O-042\n- **Class:** silent-data-loss\n\140\140\140\n' \
++  printf '## Finding O-041\n\n- **Class:** unrelated-class\n- **Severity:** data-loss\n\n\140\140\140markdown\n## Finding O-042\n- **Class:** silent-data-loss\n\140\140\140\n' \
+     > "$spec/notes/verification/reports/opponent-findings-2026-09-09.md"
+   run_rc 3 bash "$SCRIPTS/spec-gate.sh" tally "$spec"
+   assert_contains "$OUT" 'resolved finding O-042 has no earlier round of this gate and no declared prior-review record' 'AC-012: fenced manifest entry authorized a resolved claim'
+-  printf '## Finding O-041\n\n- **Class:** unrelated-class\n\n<!--\n## Finding O-042\n- **Class:** silent-data-loss\n-->\n' \
++  printf '## Finding O-041\n\n- **Class:** unrelated-class\n- **Severity:** data-loss\n\n<!--\n## Finding O-042\n- **Class:** silent-data-loss\n-->\n' \
+     > "$spec/notes/verification/reports/opponent-findings-2026-09-09.md"
+   run_rc 3 bash "$SCRIPTS/spec-gate.sh" tally "$spec"
+   assert_contains "$OUT" 'resolved finding O-042 has no earlier round of this gate and no declared prior-review record' 'AC-012: commented manifest entry authorized a resolved claim'
+   # O-002 round 4: condition-1 raw HTML renders nothing, so a manifest entry
+   # hidden inside it is not a record a reader can see either.
+-  printf '## Finding O-041\n\n- **Class:** unrelated-class\n\n<script>\n## Finding O-042\n- **Class:** silent-data-loss\n</script>\n' \
++  printf '## Finding O-041\n\n- **Class:** unrelated-class\n- **Severity:** data-loss\n\n<script>\n## Finding O-042\n- **Class:** silent-data-loss\n</script>\n' \
+     > "$spec/notes/verification/reports/opponent-findings-2026-09-09.md"
+   run_rc 3 bash "$SCRIPTS/spec-gate.sh" tally "$spec"
+   assert_contains "$OUT" 'resolved finding O-042 has no earlier round of this gate and no declared prior-review record' 'AC-012: script-hidden manifest entry authorized a resolved claim'
+   # The indentation rule is shared here too: only the opener line is code, so
+   # the live manifest entry following it remains visible.
+-  printf '    <!--\n## Finding O-042\n- **Class:** silent-data-loss\n' \
++  printf '    <!--\n## Finding O-042\n- **Class:** silent-data-loss\n- **Severity:** data-loss\n' \
+     > "$spec/notes/verification/reports/opponent-findings-2026-09-09.md"
+   run_rc 0 bash "$SCRIPTS/spec-gate.sh" tally "$spec"
+   assert_contains "$OUT" 'blocking=0 minor=0'
+@@ -1462,7 +1630,7 @@
+   load_gate_fixtures
+   spec="$(make_verification_git_dir schema_round)"
+   mkdir -p "$spec/notes/verification/reports"
+-  printf '# Provisional review\n\n## Finding O-041\n\n- **Class:** silent-data-loss\n' \
++  printf '# Provisional review\n\n## Finding O-041\n\n- **Class:** silent-data-loss\n- **Severity:** data-loss\n' \
+     > "$spec/notes/verification/reports/opponent-findings-fixture.md"
+   cli="$(floor_fixture "$spec")"
+   run_rc 0 bash "$cli" floor "$spec"
+@@ -1511,7 +1679,7 @@
+   fi
+   # O-004 round 5: completion must bind the same ID to the Class established
+   # by prior review, rather than letting the returned report redefine it.
+-  printf '# Provisional review\n\n## Finding O-041\n\n- **Class:** return-envelope-parsing\n' \
++  printf '# Provisional review\n\n## Finding O-041\n\n- **Class:** return-envelope-parsing\n- **Severity:** data-loss\n' \
+     > "$spec/notes/verification/reports/opponent-findings-fixture.md"
+   inject "$report" O-041 O-041 "$SANDBOX/schema-round-class-drift.md"
+   run_rc 3 bash "$cli" round "$spec" opponent --complete "$SANDBOX/schema-round-class-drift.md"
+@@ -1522,7 +1690,7 @@
+   fi
+   # The same-ID manifest positive still seals, on the same temporary
+   # combined.md path -- which is what T030o22 exists to keep working.
+-  printf '# Provisional review\n\n## Finding O-041\n\n- **Class:** silent-data-loss\n' \
++  printf '# Provisional review\n\n## Finding O-041\n\n- **Class:** silent-data-loss\n- **Severity:** data-loss\n' \
+     > "$spec/notes/verification/reports/opponent-findings-fixture.md"
+   inject "$report" O-041 O-041 "$SANDBOX/schema-round-ownid.md"
+   run_rc 0 bash "$cli" round "$spec" opponent --complete "$SANDBOX/schema-round-ownid.md"
+@@ -1533,7 +1701,7 @@
+   # resolves through the manifest anchored at the spec directory.
+   spec="$(make_verification_git_dir schema_reconcile)"
+   mkdir -p "$spec/notes/verification/reports"
+-  printf '# Provisional review\n\n## Finding O-041\n\n- **Class:** silent-data-loss\n' \
++  printf '# Provisional review\n\n## Finding O-041\n\n- **Class:** silent-data-loss\n- **Severity:** data-loss\n' \
+     > "$spec/notes/verification/reports/opponent-findings-fixture.md"
+   cli="$(floor_fixture "$spec")"
+   run_rc 0 bash "$cli" floor "$spec"
+@@ -1565,13 +1733,13 @@
+   printf '\n# drift after reservation\n' >> "$(cd "$spec/../../.." && pwd -P)/src/parser.sh"
+   run_rc 3 bash "$cli" round "$spec" opponent --reconcile "$report"
+   assert_contains "$OUT" 'resolved finding O-042 has no earlier round of this gate and no declared prior-review record' 'AC-012: reconcile canonized a same-class Prior attack'
+-  printf '# Provisional review\n\n## Finding O-041\n\n- **Class:** return-envelope-parsing\n' \
++  printf '# Provisional review\n\n## Finding O-041\n\n- **Class:** return-envelope-parsing\n- **Severity:** data-loss\n' \
+     > "$spec/notes/verification/reports/opponent-findings-fixture.md"
+   blocked_with O-041 O-041 "$report"
+   run_rc 3 bash "$cli" round "$spec" opponent --reconcile "$report"
+   assert_contains "$OUT" 'finding O-041 changes Class from return-envelope-parsing to silent-data-loss' \
+     'AC-012: reconciliation accepted Class drift for a manifest finding ID'
+-  printf '# Provisional review\n\n## Finding O-041\n\n- **Class:** silent-data-loss\n' \
++  printf '# Provisional review\n\n## Finding O-041\n\n- **Class:** silent-data-loss\n- **Severity:** data-loss\n' \
+     > "$spec/notes/verification/reports/opponent-findings-fixture.md"
+   blocked_with O-041 O-041 "$report"
+   run_rc 0 bash "$cli" round "$spec" opponent --reconcile "$report"
+--- a/tests/test-spec-gate.sh
++++ b/tests/test-spec-gate.sh
+@@ -788,10 +788,90 @@
+     'AC-009: a Decisions parse that died was not refused by name (O-017)'
+   assert_not_contains "$OUT" 'no candidate authorization line for this gate was found' \
+     'AC-009: a Decisions parse that died was reported as a log with no candidate (O-017)'
++}
++
++# record_line_report <reservation-output> <n> <verdict> <blocking> <minor> <heading> <class> <status> <severity lines>
++# A canonical round carrying the reservation's identity; heading and severity lines through printf %b.
++record_line_report() {
++  local src floor stamp
++  src="$(printf '%s' "$1" | sed -n 's/.* source=\([^ ]*\).*/\1/p')"
++  floor="$(printf '%s' "$1" | sed -n 's/.* floor=\([^ ]*\).*/\1/p')"
++  stamp="$(printf '%s' "$1" | sed -n 's/.* reserved=\([^ ]*\).*/\1/p')"
++  printf '## Round %s\n**Round:** %s\n**Timestamp:** %s\n**Source:** %s\n**Floor:** %s\n' "$2" "$2" "$stamp" "$src" "$floor"
++  printf '**Verdict:** %s\n**Blocking:** %s · **Minor:** %s\n### What I attacked\nFinding records read by both readers.\n' "$3" "$4" "$5"
++  printf '%b\n- **Class:** %s\n- **Status:** %s\n- **Prior:** none\n%b\n' "$6" "$7" "$8" "$9"
++  printf -- '- **Scenario:** a recorded trigger\n- **Where:** scripts/run.sh:9\n- **Reproduced:** concrete trigger at that site\n'
++  printf -- '- **Root cause:** implementation-error\n- **Blocks:** AC-012\n- **Wrong behavior:** observed versus required\n'
++  printf -- '- **Class-wide fix:** read or refuse every record line\n### Held up / follow-up tasks\nFixture disposition recorded.\n'
++  printf '<!-- gate-round-end: opponent:%s -->\n' "$2"
++}
++
++# AC-009/AC-012 — O-018 and O-019 end to end (round 13, T030o44): a CLEARED
++# round whose report or prior-review manifest carried a record line neither
++# reader read or refused sealed through `round --complete`, with the tier lost
++# from the tally. A refused completion leaves the reservation in place, so one
++# fixture serves every case, and the valid report completes after them.
++round_record_line_cases() {
++  local spec cli res manifest report l row
++  spec="$(make_verification_git_dir recordlines)"
++  cli="$(floor_fixture "$spec")"
++  run_rc 0 bash "$cli" floor "$spec"
++  run_rc 0 bash "$cli" round "$spec" opponent
++  res="$OUT"
++  manifest="$spec/notes/verification/reports/opponent-findings-review.md"
++  mkdir -p "$spec/notes/verification/reports"
++  report="$SANDBOX/record-lines-report.md"
++  record_line_report "$res" 1 CLEARED 0 1 '### Finding G-042' tier-binding open '- **Severity:** minor' > "$report"
++  for row in '#### Severity: data-loss|a Severity line this grammar cannot read: #### Severity: data-loss' \
++             '- <b>Severity:</b> data-loss|a Severity line this grammar cannot read: - <b>Severity:</b> data-loss' \
++             '> - **Severity:** data-loss|finding G-042 has no readable Severity'; do
++    printf '# Prior review\n\n### Finding G-042\n- **Class:** tier-binding\n\n%s\n' "${row%%|*}" > "$manifest"
++    for l in C en_US.UTF-8; do
++      run_rc 3 in_locale "$l" bash "$cli" round "$spec" opponent --complete "$report"
++      assert_contains "$OUT" "${row#*|}" "AC-009: a CLEARED completion over a manifest tier written as ${row%%|*} was not refused under LANG=$l (O-018)"
++    done
++  done
++  # O-019: a field line under a sub-heading of the manifest finding is read, so
++  # the CLEARED completion is refused on the manifest tier itself.
++  printf '# Prior review\n\n### Finding G-042\n- **Class:** tier-binding\n#### Notes\nReproduced twice.\n- **Severity:** data-loss\n' > "$manifest"
++  run_rc 3 bash "$cli" round "$spec" opponent --complete "$report"
++  assert_contains "$OUT" 'clearing verdict rests on 1 lowered severity tier(s) of known findings' \
++    'AC-009: a manifest field line under a sub-heading was not read at completion (O-019)'
++  record_line_report "$res" 1 CLEARED 0 1 '### Finding G-050' dup-binding new '- **Severity:** data-loss\n  - **Severity:** minor' > "$SANDBOX/record-lines-dup.md"
++  run_rc 3 bash "$cli" round "$spec" opponent --complete "$SANDBOX/record-lines-dup.md"
++  assert_contains "$OUT" 'duplicate finding field' 'AC-009: an indented second Severity lowered a new finding at completion (O-018)'
++  record_line_report "$res" 1 CHALLENGED 1 0 '### Finding G-042' tier-binding open '- **Severity:** data-loss' > "$report"
++  run_rc 0 bash "$cli" round "$spec" opponent --complete "$report"
++  assert_contains "$OUT" 'round completed gate=opponent round=1 verdict=CHALLENGED'
++  # Round 2 is CLEARED at 0 . 0 and re-lists G-042 at minor under a line that
++  # opens a finding to a reader but is not `### Finding <ID>`.
++  run_rc 0 bash "$cli" round "$spec" opponent
++  res="$OUT"
++  for row in '#### Finding G-042|a Finding heading this grammar cannot read' \
++             '### Finding\tG-042|a Finding heading this grammar cannot read' \
++             '### Finding\302\240G-042|a Finding heading this grammar cannot read' \
++             '**Finding G-042**|a finding field outside any Finding'; do
++    record_line_report "$res" 2 CLEARED 0 0 "${row%%|*}" tier-binding open '- **Severity:** minor' > "$report"
++    for l in C en_US.UTF-8; do
++      run_rc 3 in_locale "$l" bash "$cli" round "$spec" opponent --complete "$report"
++      assert_contains "$OUT" "${row#*|}" "AC-009: a CLEARED round 2 under ${row%%|*} was not refused under LANG=$l (O-018)"
++    done
++  done
++  record_line_report "$res" 2 CLEARED 0 1 '### Finding G-042' tier-binding open '- **Severity:** minor' > "$report"
++  run_rc 3 bash "$cli" round "$spec" opponent --complete "$report"
++  assert_contains "$OUT" 'clearing verdict rests on 1 lowered severity tier(s) of known findings' \
++    'AC-009: the canonical control at a lowered tier completed (O-018)'
++  record_line_report "$res" 2 CHALLENGED 1 0 '### Finding G-042' tier-binding open '- **Severity:** data-loss' > "$report"
++  run_rc 0 bash "$cli" round "$spec" opponent --complete "$report"
++  assert_contains "$OUT" 'round completed gate=opponent round=2 verdict=CHALLENGED'
++  run_rc 0 bash "$cli" tally "$spec"
++  assert_contains "$OUT" 'opponent rounds=2'
++  assert_contains "$OUT" 'blocking=2 minor=0'
+ }
+ 
+ test_rounds() {
+   round_locale_cases
++  round_record_line_cases
+   round_authorization_cases
+   round_preamble_cases
+   round_verdict_source_cases
+--- a/templates/verification-contract.md
++++ b/templates/verification-contract.md
+@@ -351,12 +351,24 @@
+ validates a temporary report. A canonical report never vouches for its own IDs.
+ Manifest definitions use the same quoted-content rules as other declarations;
+ fenced, commented, blockquoted or raw-HTML-hidden examples cannot establish a
+-prior finding. A manifest field line is decided by its label and must be a
+-dash, whitespace and `**Class:**` or `**Severity:**`, its value the text after
+-that label only. A field line, a Finding heading or a line that looks like one
+-that the pass cannot read is refused by name, and so is a manifest from which
+-it reads no finding; a Class or Severity line outside a finding is prose only
+-while nothing since the last heading can hold a finding's record.
++prior finding. A field line, in a manifest or in a canonical report, is decided
++by its label, read from the line's rendered text: inline raw HTML renders as
++nothing, a numeric character reference renders as its character, and the label
++is the first word after any indentation, heading marker, list marker or
++emphasis. A manifest field line must be a dash, whitespace and `**Class:**` or
++`**Severity:**`, its value the text after that label only, and every manifest
++finding needs one readable Class and one readable Severity, so a tier the pass
++does not read is refused with its finding rather than dropped. A finding is the
++section its Finding heading opens: a heading as shallow as that one closes it,
++and a deeper heading is one of its lines. A field line, a Finding heading or a
++line that looks like one that the pass cannot read is refused by name, and so
++is a manifest from which it reads no finding; a Class or Severity line outside
++a manifest finding is prose only while nothing since the last heading can hold
++a finding's record. In a canonical report, only `### Finding <ID>` opens a
++finding and any other heading that reads as a Finding heading is refused; a
++finding field line outside any finding is refused; inside a finding, a Class or
++Severity line that is not that field's own line is refused; and a field's
++duplicate is found by its label, whatever its indentation.
+ 
+ The capture input manifest records environment variables whose MEMBERSHIP is
+ exactly `verification_environment:` — the declaration and nothing beside it.

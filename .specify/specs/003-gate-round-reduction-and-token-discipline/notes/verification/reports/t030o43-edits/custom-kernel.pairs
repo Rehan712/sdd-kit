@@ -1,0 +1,78 @@
+@@OLD
+  contract="$(vf_fm_value "$spec_dir/spec.md" verification_contract)" || return 1
+  declared="$(vf_fm_count "$spec_dir/spec.md" verification_contract)" || return 1
+@@NEW
+  contract="$(fm_get "$spec_dir/spec.md" verification_contract)"
+  declared="$(frontmatter_block "$spec_dir/spec.md" | grep -c '^verification_contract:' || true)"
+@@END
+@@OLD
+  contract_count="$(vf_fm_count "$spec" verification_contract)" || return 1
+@@NEW
+  contract_count="$(frontmatter_block "$spec" | grep -c '^verification_contract:' || true)"
+@@END
+@@OLD
+  contract="$(vf_fm_value "$spec" verification_contract)" || return 1
+@@NEW
+  contract="$(fm_get "$spec" verification_contract)"
+@@END
+@@OLD
+  us=$'\034'
+  # The criteria and requirements spec.md defines, read once and checked: a
+  # short inventory refuses every reference past it, and a failed read says so.
+  if ! acs="$(vf_ids 'AC-[0-9]{3}' "$spec")" || ! reqs="$(vf_ids 'REQ-[0-9]{3}' "$spec")"; then
+    printf 'error: vf_bindings could not read the criteria and requirements of spec.md\n' >&2
+    rm -f "$records" "$maps" "$inventory"; rmdir "$tmpdir" 2>/dev/null || true
+    return 1
+  fi
+
+@@NEW
+  us=$'\034'
+
+@@END
+@@OLD
+      -v specacs=" ${acs//$'\n'/ } " \
+      "$_VF_AWK_FENCE"'
+@@NEW
+      -v specacs=" $(grep -oE 'AC-[0-9]{3}' "$spec" | sort -u | tr '\n' ' ')" \
+      "$_VF_AWK_FENCE"'
+@@END
+@@OLD
+        -v specacs=" ${acs//$'\n'/ } " \
+        -v specreqs=" ${reqs//$'\n'/ } " \
+@@NEW
+        -v specacs=" $(grep -oE 'AC-[0-9]{3}' "$spec" | sort -u | tr '\n' ' ')" \
+        -v specreqs=" $(grep -oE 'REQ-[0-9]{3}' "$spec" | sort -u | tr '\n' ' ')" \
+@@END
+@@OLD
+  local spec plan tasks contract contract_count tmpdir records maps inventory acs reqs
+@@NEW
+  local spec plan tasks contract contract_count tmpdir records maps inventory
+@@END
+@@OLD
+    _vf_reject_nul "$manifest" "$manifest" || return 3
+    # The pass records a finding only at the next Finding heading or at END,
+    # so an awk that dies part-way loses the finding in progress and every one
+    # after it -- the strictest tier and Class binding three guards read. Its
+    # status used to be read by nobody (O-017), so it is read here.
+    awk "$_VF_AWK_FENCE"'
+@@NEW
+    _vf_reject_nul "$manifest" "$manifest" || return 3
+    priorids="$priorids$(awk "$_VF_AWK_FENCE"'
+@@END
+@@OLD
+      END {flushm()}
+    ' "$manifest" > "$tmp" || {
+      printf 'report recovery: %s: prior-review manifest could not be parsed; reconcile canonical records\n' "$manifest" >&2; return 3; }
+    records="$(LC_ALL=C sort -u "$tmp")" || return 3
+    [[ -z "$records" ]] || priorids="$priorids${records//$'\n'/ } "
+  done
+@@NEW
+      END {flushm()}
+    ' "$manifest" | sort -u | tr '\n' ' ')"
+  done
+@@END
+@@OLD
+  local file="$1" gate="$2" output="$3" spec="${4:-}" tmp manifest records priorids=' '
+@@NEW
+  local file="$1" gate="$2" output="$3" spec="${4:-}" tmp manifest priorids=' '
+@@END

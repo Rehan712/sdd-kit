@@ -1,0 +1,8 @@
+    # Cells are read from the row as written, trimmed by the whitespace set:
+    # a task compares a family, criterion or locator with them, and the
+    # harness opens a locator (T030o43 review 3, R3-F4).
+    function trim(s) { return vf_wstrim(s) }
+    function clean_cell(s) { s=trim(s); gsub(SUBSEP, "|", s); return s }
+    function row(line,    n,i) {
+      gsub(/\\\|/, SUBSEP, line)
+      sub("^" vf_wsclass() "*[|]", "", line); sub("[|]" vf_wsclass() "*$", "", line)

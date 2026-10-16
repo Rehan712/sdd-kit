@@ -1,0 +1,14 @@
+Provenance of opponent-round16.md (session 17, 2026-10-08).
+
+The independent opponent (dispatched with opponent-round16-brief.md) returned its report as the
+final message of its run. Its file tool refused it the report path (a Write to its own draft file
+was refused with "Subagents should return findings as text, not write report files"), so it never
+wrote opponent-round16.md, and it removed its work directory /private/tmp/opp16.
+
+The invoker persisted the returned block: the `message` of the run's final hand-back call, taken
+from the agent's own transcript by a script (no retyping), written as-is. Checks: that message
+equals the extracted block exactly (starts `## Round 16`, ends with the completion marker and one
+newline, no carriage return); the persisted file is cmp-identical to it; sha256
+fb9bcfb41b40059e5d8f2af86dc6042877a5a9e3887414484214c6c6bcf621cc, 15746 bytes, 130 lines.
+An earlier draft in the transcript differs only in two placeholders the agent filled before
+returning (the Timestamp and the M2 suites sentence); the returned block is the one persisted.

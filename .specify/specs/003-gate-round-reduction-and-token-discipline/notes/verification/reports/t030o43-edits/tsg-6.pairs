@@ -1,0 +1,15 @@
+@@OLD
+  printf -- '---\nspec: 001-legacy\n---\n\n## Backend\n\n- [x] **T001** — Legacy task\n  - *Acceptance:* legacy\n' > "$legacy/tasks.md"
+  f="$SANDBOX/fault-records"
+@@NEW
+  printf -- '---\nspec: 001-legacy\n---\n\n## Backend\n\n- [x] **T001** — Legacy task\n  - *Acceptance:* legacy\n' > "$legacy/tasks.md"
+  # The task list reads a stage heading's whitespace as the kernel does, so a
+  # task under "## <U+00A0>Ship" is in the Ship stage for both.
+  printf -- '---\nspec: 001-legacy\n---\n\n## \302\240Ship\n\n- [x] **T001** — Legacy task\n' > "$SANDBOX/ship-tasks.md"
+  cp "$legacy/tasks.md" "$SANDBOX/legacy-tasks"; cp "$SANDBOX/ship-tasks.md" "$legacy/tasks.md"
+  run_rc 0 bash "$SCRIPTS/spec-task.sh" list "$legacy"
+  assert_eq $'T001\tdone\tShip\tLegacy task' "$OUT" \
+    'AC-007: the task list kept a U+00A0 in a stage the kernel reads without it (T030o43 review 2)'
+  cp "$SANDBOX/legacy-tasks" "$legacy/tasks.md"
+  f="$SANDBOX/fault-records"
+@@END

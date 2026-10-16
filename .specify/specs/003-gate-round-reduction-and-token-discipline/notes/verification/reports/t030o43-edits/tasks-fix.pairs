@@ -1,0 +1,10 @@
+@@OLD
+  - *Files:* `scripts/verification-lib.sh`, `scripts/spec-run.sh`, `scripts/spec-task.sh`, `scripts/spec-gate.sh`, `scripts/sdd-analyze.sh`,
+@@NEW
+  - *Files:* `scripts/verification-lib.sh`, `scripts/spec-run.sh`, `scripts/spec-task.sh`, `scripts/sdd-analyze.sh`,
+@@END
+@@OLD
+gets it back exactly and never sees the record, and a declared `LC_ALL` is hashed by the caller's value.
+@@NEW
+gets it back exactly and never sees the record, and the record of a declared `LC_ALL` carries the caller's value.
+@@END

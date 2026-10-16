@@ -1,0 +1,38 @@
+FLOOR-QeBcq3 source=1fba08ed13e83cbca56ef731047f39c3668dfa47c4ff81873de63ee2eea3b0b0 records=370
+FLOOR-0334B2 source=bb996df97887231e1fd50ebce39b2d3b7f918e3896917ea0031a59b227198254 records=370
+
+== FLOOR-QeBcq3 -> FLOOR-0334B2: differing records (- old, + new; kind path only) ==
++ path .specify/specs/003-gate-round-reduction-and-token-discipline/STATUS.md
+- path .specify/specs/003-gate-round-reduction-and-token-discipline/STATUS.md
++ path .specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md
+- path .specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md
++ document /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/STATUS.md
+- document /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/STATUS.md
++ document /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md
+- document /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md
++ harness /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/verification-lib.sh
+- harness /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/verification-lib.sh
++ path scripts/verification-lib.sh
+- path scripts/verification-lib.sh
++ path templates/verification-contract.md
+- path templates/verification-contract.md
++ path tests/helpers.sh
+- path tests/helpers.sh
++ path tests/run.sh
+- path tests/run.sh
++ path tests/shellcheck.sh
+- path tests/shellcheck.sh
++ path tests/test-verification.sh
+- path tests/test-verification.sh
+== distinct paths ==
+.specify/specs/003-gate-round-reduction-and-token-discipline/STATUS.md
+.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md
+/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/STATUS.md
+/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md
+/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/verification-lib.sh
+scripts/verification-lib.sh
+templates/verification-contract.md
+tests/helpers.sh
+tests/run.sh
+tests/shellcheck.sh
+tests/test-verification.sh

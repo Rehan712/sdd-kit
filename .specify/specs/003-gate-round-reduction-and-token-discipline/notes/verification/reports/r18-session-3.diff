@@ -1,0 +1,18 @@
+--- a/tests/test-gate-contracts.sh
++++ b/tests/test-gate-contracts.sh
+@@ -1588,6 +1588,7 @@
+ break-image-outside-finding-after-id|### Finding G-041\n- **Class:** tier-binding\n- **Severity:** minor\n## Notes\n\nG-042 is discussed below.\nNote<br>&nbsp;![q\nx\n](u)Severity: data-loss\n|a severity line outside any Finding
+ tag-image-alt-code-span-outside-finding-after-id|### Finding G-041\n- **Class:** tier-binding\n- **Severity:** minor\n## Notes\n\nG-042 is discussed below.\n\n<b>![ `]` x\ny\n](u)Severity: data-loss\n|a severity line outside any Finding
+ image-title-across-lines-outside-finding-after-id|### Finding G-041\n- **Class:** tier-binding\n- **Severity:** minor\n## Notes\n\nG-042 is discussed below.\n\n![ `]` x ](u "a\ny\nb")Severity: data-loss\n|a severity line outside any Finding
++entity-then-code-span-holding-image-across-lines|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n&amp;`![Severity: data-loss](u) z\ny\nw`\n|a second Severity line in finding G-042
+ ROWS
+   # O-019: a heading deeper than the Finding heading is one of its lines, so
+   # the canonical field lines under it are read: the CLEARED round is refused
+@@ -1763,6 +1764,7 @@
+ heading-tag-on-deeper-heading|- **Severity:** minor\n\n#### Notes <b>x</b>\nA note.|raw HTML outside a code span in finding G-050
+ definition-after-quote-marker|- **Severity:** minor\n\n> [a]: /u|a link reference definition in finding G-050
+ title-tag-inside-finding|- **Severity:** minor\n\n# Opponent review <b>x</b>|raw HTML outside a code span in finding G-050
++entity-then-code-span-holding-image-across-lines|- **Severity:** minor\n\n&amp;`![Severity: data-loss](u) z\ny\nw`|a Severity line this grammar cannot read in finding G-050
+ ROWS
+   # The extent of a finding, and the lines a reader sees, come from constructs both
+   # readers follow (round 17, O-024): inside a canonical finding a code fence

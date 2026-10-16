@@ -1,0 +1,11 @@
+r16-mutations-probe (2026-10-07T21:13:04Z to 21:29:42Z, rc 1; its task notification reported exit 0, which was the
+wrapper's) probed matrix v4's 42 new, rewritten and paragraph-section rows (r16-mutations-probe.ids) on the repaired
+live tree, with every baseline. 127 PASS and one FAIL: X12, recorded as an argued equivalent, was KILLED by the
+heading-label rows of report_record_line_cases. Its argument was wrong: without the early return in vf_label, a line
+with no code span falls through to the reading after a rendered line start, which reads only after a tag, so the
+label the first readings found is lost (a line like `#### Severity: data-loss` is no longer refused). The guard is
+judged, so X12 is relabelled a kill row named for the heading-label diagnostic, with no fixture or code changed
+(r15-mutations.sh and its generator r15-mutations-gen.py; the versions the probe ran are kept as
+r15-mutations-v4-probe.sh and r15-mutations-gen-v4-probe.py). Every other probed row behaved as recorded. Matrix v4 is
+then 171 rows: 121 kills, 39 over-corrections and 11 argued equivalents. X12 is re-probed alone in
+r16-mutations-probe2.{log,rc,start,end}.

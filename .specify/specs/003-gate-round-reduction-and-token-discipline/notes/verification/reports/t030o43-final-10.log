@@ -1,0 +1,16 @@
+PASS S9: helpers-1 reversed once
+PASS S9: tv-5 reversed once
+PASS S9: vc-6 reversed once
+PASS S9: kernel-8 reversed once
+PASS S9: tasks-fix-6 reversed once
+PASS PRE: session 9's final.diff reverses cleanly onto S9
+PASS PRE: no reject or backup files
+PASS session 9 final.diff kept as -9
+PASS final.diff names 13 files
+PASS session10.diff names 5 files
++++ b/scripts/verification-lib.sh
++++ b/templates/verification-contract.md
++++ b/tests/helpers.sh
++++ b/tests/test-verification.sh
++++ b/.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md
+t030o43-final-10 failures=0

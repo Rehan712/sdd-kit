@@ -1,0 +1,92 @@
+@@OLD
+  reuse_command_locale_cases
+  fixture_repository_cases
+
+}
+@@NEW
+  reuse_command_locale_cases
+  harness_locale_cases
+  fixture_repository_cases
+
+}
+
+# locale_probe_bin <dir> <log> — an awk and a grep first on PATH that append
+# "<program> <LC_ALL as they see it>" to <log> and then run the real program.
+locale_probe_bin() {
+  local dir="$1" log="$2" p
+  mkdir -p "$dir" || return 1
+  for p in awk grep; do
+    printf '#!/bin/bash\nprintf "%%s %%s\\n" %q "${LC_ALL-<unset>}" >> %q\nexec %q "$@"\n' \
+      "$p" "$log" "$(command -v "$p")" > "$dir/$p" && chmod +x "$dir/$p" || return 1
+  done
+}
+
+# AC-020/FM-010/FM-014/INV-001 — O-017, round 12. The harness runs its own
+# parsing under LC_ALL=C whoever calls it: every harness entry script, started
+# from a shell in another locale, runs its programs under C. The one program a
+# harness starts that is not its own parsing, the command a capture runs, gets
+# the caller's LC_ALL back exactly (unset, empty or a value) and never the
+# record the harness keeps it in. A declared LC_ALL is hashed by the caller's
+# value, so two caller values are two identities. And the kernel's sorts whose
+# output the identity hashes read their status (T030o43).
+harness_locale_cases() {
+  local spec repo probe seen entry v want args legacy
+  spec="$(make_verification_git_dir harnesslocale)"
+  repo="$(cd "$spec/../../.." && pwd -P)"
+  probe="$SANDBOX/locale-probe"; seen="$SANDBOX/locale-seen"
+  locale_probe_bin "$probe" "$seen" || t_fail 'fixture: locale probe'
+  for entry in 'sdd-analyze.sh|spec' 'spec-ac-coverage.sh|spec' 'spec-evidence.sh|spec' \
+      'spec-task.sh|list spec' 'spec-gate.sh|tally spec' 'spec-run.sh|spec T001 --no-tick --summary -- true'; do
+    : > "$seen"
+    args=(); for v in ${entry#*|}; do [[ "$v" == spec ]] && v="$spec"; args+=("$v"); done
+    ( cd "$repo" && in_locale en_US.UTF-8 env LC_ALL=en_US.UTF-8 PATH="$probe:$PATH" \
+        bash "$SCRIPTS/${entry%%|*}" "${args[@]}" ) > "$SANDBOX/locale-entry.out" 2>&1
+    [[ -s "$seen" ]] || t_fail "fixture: ${entry%%|*} ran no awk and no grep"
+    assert_eq '' "$(grep -v ' C$' "$seen")" \
+      "AC-020: ${entry%%|*} ran a program of its own under the caller's locale (O-017)"
+  done
+  # The captured command: the caller's LC_ALL, exactly, and not the record.
+  for v in unset empty en_US.UTF-8; do
+    case "$v" in unset) args=(-u LC_ALL); want='<unset>';; empty) args=(LC_ALL=); want='';; *) args=(LC_ALL="$v"); want="$v";; esac
+    run_rc 0 in_locale C env "${args[@]}" "$SCRIPTS/spec-run.sh" "$spec" T001 --cwd "$repo" --no-tick --summary -- \
+      bash -c 'printf "seen=%s record=%s\n" "${LC_ALL-<unset>}" "${SDD_HARNESS_CALLER_LC_ALL-<unset>}"'
+    assert_contains "$OUT" "key=seen=$want record=<unset> exit=0" \
+      "AC-020: a captured command did not get the caller's LC_ALL ($v) back (O-017)"
+  done
+  # The legacy run restores it too.
+  legacy="$SANDBOX/legacy-run/.specify/specs/001-legacy"; mkdir -p "$legacy"
+  printf -- '---\nspec: 001-legacy\nstatus: accepted\n---\n\n- AC-001: legacy criterion\n' > "$legacy/spec.md"
+  printf -- '---\nspec: 001-legacy\n---\n\n## Backend\n\n- [ ] **T001** — Legacy task\n  - *Acceptance:* legacy\n' > "$legacy/tasks.md"
+  run_rc 0 in_locale C env LC_ALL=en_US.UTF-8 "$SCRIPTS/spec-run.sh" "$legacy" T001 --no-tick -- \
+    bash -c 'printf "legacy-seen=%s\n" "${LC_ALL-<unset>}"'
+  assert_contains "$(cat "$legacy/notes/evidence.md")" 'legacy-seen=en_US.UTF-8' \
+    "AC-020: the legacy run did not get the caller's LC_ALL back (O-017)"
+  # A declared LC_ALL is hashed by the caller's value.
+  printf "verification_environment:\n  - 'LC_ALL'\n" >> "$repo/.specify/stack.yml"
+  for v in en_US.UTF-8 de_DE.UTF-8; do
+    run_rc 0 in_locale C env LC_ALL="$v" bash -c '. "$1"; vf_snapshot "$2" "$3" "$3" "$4"' _ \
+      "$SCRIPTS/verification-lib.sh" "$spec" "$repo" "$SANDBOX/declared-$v.nul"
+  done
+  want="$(printf '%s' en_US.UTF-8 | bash -c '. "$1"; vf_hash /dev/stdin' _ "$SCRIPTS/verification-lib.sh")"
+  assert_contains "$(tr '\000' '\n' < "$SANDBOX/declared-en_US.UTF-8.nul" | paste - - - - - -)" \
+    "environment	LC_ALL	present	$want" "AC-020: a declared LC_ALL was not hashed by the caller's value (O-017)"
+  cmp -s "$SANDBOX/declared-en_US.UTF-8.nul" "$SANDBOX/declared-de_DE.UTF-8.nul" &&
+    t_fail "AC-020: two caller values of a declared LC_ALL gave one identity (O-017)"
+  # The sorts whose output the identity hashes read their status.
+  fault_bin "$SANDBOX/fault-env-names" sort 'env-names'
+  run_rc 3 env PATH="$SANDBOX/fault-env-names:$PATH" bash -c '. "$1"; vf_snapshot "$2" "$3" "$3" "$4"' _ \
+    "$SCRIPTS/verification-lib.sh" "$spec" "$repo" "$SANDBOX/declared-fault.nul"
+  assert_contains "$OUT" 'declared environment names could not be sorted' \
+    'AC-020: a declared name list that could not be sorted left the declared names unhashed (O-017)'
+  sed "s/^verification_inputs: \[\]$/verification_inputs:\n  - 'docs'/" "$repo/.specify/stack.yml" > "$SANDBOX/stack-dir"
+  cp "$SANDBOX/stack-dir" "$repo/.specify/stack.yml"
+  printf 'declared\n' > "$repo/docs/member.txt"
+  run_rc 0 snapshot_fixture "$spec" "$repo" "$SANDBOX/declared-dir.nul"
+  assert_contains "$(tr '\000' '\n' < "$SANDBOX/declared-dir.nul")" 'declared-directory' 'fixture: the declared directory'
+  fault_bin "$SANDBOX/fault-extra" sort 'extra-hashes'
+  run_rc 3 env PATH="$SANDBOX/fault-extra:$PATH" bash -c '. "$1"; vf_snapshot "$2" "$3" "$3" "$4"' _ \
+    "$SCRIPTS/verification-lib.sh" "$spec" "$repo" "$SANDBOX/declared-dir-fault.nul"
+  assert_contains "$OUT" 'declared directory digests could not be sorted: docs' \
+    'AC-020: declared directory digests that could not be sorted were hashed anyway (O-017)'
+}
+@@END

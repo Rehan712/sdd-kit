@@ -1,0 +1,59 @@
+== baseline shard 0/1 17:32:02Z
+PASS B report_record_line_cases unmutated passes
+PASS B report_manifest_locale_cases unmutated passes
+PASS B report_prior_binding_cases unmutated passes
+PASS B report_severity_tier_cases unmutated passes
+PASS B shipped_002_tally_case unmutated passes
+PASS B round_record_line_cases unmutated passes
+PASS B round_locale_cases unmutated passes
+== the label reader (vf_label, vf_finding_heading)
+PASS L07 literal applies once in scripts/verification-lib.sh
+PASS L07 KILLED (kill, judge rc)
+PASS L07 diagnostic: a finding opened by tab-after-hashes was not refused by name under LANG=C (O-018)
+PASS L09 literal applies once in scripts/verification-lib.sh
+PASS L09 KILLED (over, judge rc)
+PASS L09 diagnostic: a canonical finding with a-lead-in was refused under LANG=C (O-018)
+== T030o43 rows carried to their new spelling (the label rule moved into vf_label)
+PASS M19 literal applies once in scripts/verification-lib.sh
+FAIL M19 KILLED (kill, judge rc) (want=1 got=0)
+FAIL M19 diagnostic: a manifest spelled lowercase-severity was not refused by name (T030o43 review 2) (want=1 got=0)
+== the manifest pass
+PASS K02 literal applies once in scripts/verification-lib.sh
+PASS K02 KILLED (kill, judge rc)
+PASS K02 diagnostic: a manifest field line under a sub-heading (notes-sub-heading) was not read under LANG=C (O-019)
+PASS K04 literal applies once in scripts/verification-lib.sh
+PASS K04 KILLED (over, judge rc)
+PASS K04 diagnostic: a manifest field line under a sub-heading (finding-summary-sub-heading) was not read under LANG=C (O-019)
+PASS K05 literal applies once in scripts/verification-lib.sh
+PASS K05 KILLED (kill, judge rc)
+PASS K05 diagnostic: a manifest tier written as heading-label was not refused by name under LANG=C (O-018)
+PASS N05 literal applies once in scripts/verification-lib.sh
+PASS N05 KILLED (kill, judge rc)
+PASS N05 diagnostic: a manifest spelled nbsp-after-hashes-below-class-only was not refused by name (T030o43 review 2)
+PASS K06 literal applies once in scripts/verification-lib.sh
+PASS K06 KILLED (kill, judge rc)
+PASS K06 diagnostic: a manifest tier written as subheading-then-hidden-finding was not refused by name under LANG=C (O-018)
+PASS M23 literal applies once in scripts/verification-lib.sh
+PASS M23 KILLED (kill, judge rc)
+PASS M23 diagnostic: a manifest finding spelled before-another was dropped (T030o43 review 2)
+== the canonical pass
+PASS C02 literal applies once in scripts/verification-lib.sh
+PASS C02 KILLED (kill, judge rc)
+PASS C02 diagnostic: a finding opened by no-break-space-before-hashes was not refused by name under LANG=C (O-018)
+PASS C04 literal applies once in scripts/verification-lib.sh
+PASS C04 KILLED (kill, judge rc)
+PASS C04 diagnostic: a finding opened by bold-line was not refused by name under LANG=C (O-018)
+PASS C07 literal applies once in scripts/verification-lib.sh
+PASS C07 KILLED (kill, judge rc)
+PASS C07 diagnostic: #### Finding G-043 after the completion marker lost the after-marker refusal (T030o44)
+PASS C08 literal applies once in scripts/verification-lib.sh
+PASS C08 KILLED (kill, judge rc)
+PASS C08 diagnostic: - **Severity:** minor after the completion marker lost the after-marker refusal (T030o44)
+PASS O01 literal applies once in scripts/verification-lib.sh
+PASS O01 KILLED (over, judge rc)
+PASS O01 diagnostic: a canonical finding with a-notes-sub-heading was refused under LANG=C (O-018)
+PASS O03 literal applies once in scripts/verification-lib.sh
+FAIL O03 KILLED (over, judge rc) (want=1 got=0)
+FAIL O03 diagnostic: a finding field outside any Finding (want=1 got=0)
+== done shard 0/1 17:34:46Z rows=35
+t030o44-mutations failures=4

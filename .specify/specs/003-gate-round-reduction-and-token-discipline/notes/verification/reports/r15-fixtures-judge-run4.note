@@ -1,0 +1,5 @@
+r15-fixtures-judge run 4 (2026-10-07, exit 0), kept as -run4 with its script and the pairs it judged (r15-edits/tgc-1-run4.pairs),
+on the adopted candidate. Writing the matrix showed that a code-span reading that honoured an escaped backtick as an opener,
+or ended a span at a closer of another length, would lose real members, so two member rows were added in both passes
+(an escaped backtick before a code span holding a bracket; a code span holding a backtick and a bracket), each checked to
+seal on CUR, be refused on D and be lost by exactly its own mutant; the judge of record follows.

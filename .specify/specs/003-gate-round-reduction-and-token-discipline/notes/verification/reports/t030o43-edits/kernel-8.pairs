@@ -1,0 +1,10 @@
+@@OLD
+  # check whose programs read the locale pins it or declares it (O-017); TMPDIR
+  # decides where temporary files are written, never what a check concludes.
+@@NEW
+  # check whose programs read the locale pins it or declares it (O-017); TMPDIR
+  # decides where temporary files are written, while its spelling can decide a
+  # check that compares a path under it with one a program prints, so the kit's
+  # own suites set it to the physical path of that directory (tests/helpers.sh)
+  # and a project's check that does so pins it the same way or declares it.
+@@END

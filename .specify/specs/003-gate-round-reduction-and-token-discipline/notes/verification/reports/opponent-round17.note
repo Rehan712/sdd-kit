@@ -1,0 +1,12 @@
+Provenance of opponent-round17.md (session 18, 2026-10-09).
+
+The independent opponent (dispatched 2026-10-09T00:12Z with opponent-round17-brief.md) stopped after its first probes
+on a session usage limit (HTTP 429, "resets 4:10am Europe/Stockholm"), wrote nothing in the worktree, and was resumed
+by message after the reset (06:59Z), keeping its context and its copy under /private/tmp/opp17, which it removed when
+it finished. It never wrote opponent-round17.md: it returned the report as the message of its one SubagentHandback
+call. The invoker persisted that message, taken from the agent's own transcript by r17-persist-report.py (no
+retyping; r17-persist.{log,rc}, exit 0): it starts `## Round 17`, ends with the completion marker, holds no carriage
+return, and was returned without a final newline, so the file adds exactly one after the marker. sha256
+f94bb2e5f44779f1a9c6d76a42dcc520c484e15bd3b8fdaefb5c140e3c94a73b, 16549 bytes, 129 lines; timestamp
+2026-10-09T07:39:13Z. The worktree states before the reservation, at it and at return are byte-identical
+(r17-state-{prereserve,reserved,returned}.*: 5196 paths, entries digest 559ce8c2...).

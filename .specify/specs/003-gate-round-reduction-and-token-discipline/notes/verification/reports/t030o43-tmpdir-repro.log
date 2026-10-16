@@ -1,0 +1,21 @@
+== no-slash: TMPDIR=[/private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-tmpdir-repro/c/tmp]
+  rc=0   -- 19/19 passed 
+  failed assertions: 0
+PASS no-slash left its copy unchanged
+PASS no-slash exit 0
+== trailing-slash: TMPDIR=[/private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-tmpdir-repro/c/tmp/]
+  rc=1   FAIL test_verification_bindings   -- 18/19 passed 
+  failed assertions: 6
+  |        assert: expected exit 1, got 0: env PATH=/private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t03
+  |        assert: AC-023: a task reference inventory that could not be read read as no dangling ref (T030o43) missing substring: tasks.md could not be read for its
+  |        assert: AC-023: the configuration policy counted an unreadable frontmatter as no contract (T030o43) missing substring: ✗ /private/tmp/claude-501/-Users-b
+  |        assert: AC-023: the binding parser counted an unreadable frontmatter as no contract (T030o43) missing substring: verification contract: /private/tmp/clau
+  |        assert: AC-023: the configuration policy read an unreadable frontmatter as no contract (T030o43) missing substring: ✗ /private/tmp/claude-501/-Users-baba
+  |        assert: AC-023: the binding parser read an unreadable frontmatter as no contract (T030o43) missing substring: verification contract: /private/tmp/claude-
+PASS trailing-slash left its copy unchanged
+PASS trailing-slash exit 1
+PASS trailing-slash fails test_verification_bindings only
+PASS the failing test is test_verification_bindings
+FAIL five failed assertions, as in CAP-521-Q8OdIp (want=5 got=6)
+PASS live worktree status outside notes/verification/ unchanged
+t030o43-tmpdir-repro failures=1

@@ -1,0 +1,36 @@
+@@OLD
+whole across an invisible character is read whole; a third reading keeps a
+code span's letters and digits and makes its other characters inert, so a
+bracket or a tag inside one opens or closes nothing; and the label is also
+read after each `<br>` or block-level tag outside code spans, where a
+renderer starts a new line, in prose and in the value of a canonical field
+line. The label is the first word after any run of characters that are not
+letters or digits, ordered-list numbers and task checkboxes, and it is read
+from each line and from each run of non-blank lines, joined from every line
+of the run, since an inline construct may span lines and a line reader cannot
+place every paragraph boundary where a renderer does: a run ends only at a
+blank line, a fenced line or an ATX heading, so a boundary the reader misses
+or invents can only make a line refuse. The other canonical fields are
+@@NEW
+whole across an invisible character is read whole; a third reading keeps a
+code span's letters and digits and makes its other characters inert, so a
+bracket or a tag inside one opens or closes nothing, with code spans placed
+by CommonMark's left-to-right reading (backslash escapes taken in pairs, a
+backtick run closed only by the next run of the same length); and the label
+is also read after each `<br>` or block-level tag outside code spans, where a
+renderer starts a new line, in prose and in the value of a canonical field
+line. The label is the first word after any run of characters that are not
+letters or digits, ordered-list numbers and task checkboxes, and it is read
+from each line and from each run of non-blank lines, joined from every line
+of the run, since an inline construct may span lines and a line reader cannot
+place every paragraph boundary where a renderer does: a run ends only at a
+blank line (spaces and tabs only) or an ATX heading of one to six marks, never
+at a line the fence tracker calls fenced, so a boundary the reader misses or
+invents can only make a line refuse; a line of a run stops being re-read once
+nothing a later line adds can change how it begins. Inside a finding the
+grammar is narrowed rather than rendered: a line that carries raw HTML or an
+autolink (a `<` followed by a letter, `/`, `!` or `?`) outside every code
+span, a form feed or vertical tab, or a carriage return that does not end the
+line is refused by name, so a report writes markup inside a finding only as
+code, between backticks. The other canonical fields are
+@@END

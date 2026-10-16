@@ -35,6 +35,9 @@ set -uo pipefail
 
 HUB_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 . "$HUB_DIR/scripts/lib.sh"
+# The kernel pins the harness's own parsing to LC_ALL=C when it loads, so it
+# loads before any program reads a byte of the spec (O-017).
+. "$HUB_DIR/scripts/verification-lib.sh"
 SPEC_TASK="$HUB_DIR/scripts/spec-task.sh"
 
 usage() { usage_from_header "$0"; exit 0; }
@@ -79,9 +82,9 @@ RUN_CWD="${RUN_CWD:-$PWD}"
 [[ -d "$RUN_CWD" ]] || { echo "--cwd is not a directory: $RUN_CWD" >&2; exit 2; }
 
 # Versioned capture path is additive; legacy default output/ticking stays below.
-. "$HUB_DIR/scripts/verification-lib.sh"
-contract="$(fm_get "$SPEC_DIR/spec.md" verification_contract 2>/dev/null || :)"
-if [[ -n "$contract" && "$contract" != 1 ]]; then echo 'unsupported verification contract' >&2; exit 3; fi
+# A frontmatter that cannot be read, and a contract key that is not exactly
+# one key of value 1, are failures, never the legacy path (vf_contract).
+contract="$(vf_contract "$SPEC_DIR/spec.md")" || exit 3
 if [[ "$contract" == 1 ]] || (( SUMMARY || FROM_TASK )); then
   (( FROM_TASK == 0 || ${#CMD[@]} == 0 )) || { echo '--from-task and explicit command are exclusive' >&2; exit 2; }
   vf_writer_init
@@ -137,7 +140,7 @@ ts="$(date +%Y-%m-%dT%H:%M:%S)"
 echo "\$ $cmd_str" >&2
 # No `set -e` in this script, so a non-zero command does not abort us — we want
 # its exit code. Not a pipeline, so pipefail is irrelevant here.
-( cd "$RUN_CWD" && "${CMD[@]}" ) >"$out" 2>&1
+( cd "$RUN_CWD" && vf_caller_locale && "${CMD[@]}" ) >"$out" 2>&1
 rc=$?
 
 # Echo the captured output so the operator sees exactly what ran.

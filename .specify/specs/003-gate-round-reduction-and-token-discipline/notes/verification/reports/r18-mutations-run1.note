@@ -1,0 +1,23 @@
+r18-mutations run 1 (session 20, 2026-10-13T19:27:45Z to 21:02:53Z; the script it ran kept as
+r18-mutations-v6-run1.sh, receipts r18-mutations-run1-shard{0,1,2}.{log,rc,start,end}; shard 0 exit 0, shards 1 and
+2 rc 1), on the tree with tgc-2 applied: every one of the 303 rows ran exactly once and behaved as recorded, every
+restore byte-identical and all eight baselines passing, except three carried v5 rows of the settled test, whose
+behaviour T030o53's reading of brackets up to each reading's first word changed. D04 (vf_settled's open-code-span
+condition) survived its row: the image bracket that row leaves open lies before the first word, so the head bracket
+test keeps that candidate already. It is not equivalent: a code span left open across lines after an entity, holding
+an image, puts no bracket before any reading's first word, so the open span alone keeps the candidate, and once the
+span closes the inert reading's first word is the tier (r18-rows-probe-3.{cases,mut.nul,log,rc},
+r18-rows-render-3.{log,rc}); that row was added in both passes as r18-edits/tgc-3.pairs (build-fixtures-3.py),
+judged in a standalone copy (r18-fixtures-judge-3.{sh,log,rc,start,end}, exit 0: the repaired kernel passes both
+changed functions, and D04 fails on both new rows), and applied after a hash check (r18-apply-3.{sh,log,rc}, exit 0,
+r18-edits/post-apply-3.sha256; delta r18-session-3.diff, whole delta r18-session.diff). D02 (a settled candidate
+never dropped), argued equivalent in v5 because only the cost changes, is a kill now: the 400-line timing row
+T030o53 added bounds that cost, and its judge had run for over ten minutes when the invoker stopped the one awk
+parsing that row at 20:30:03Z (the judge then failed with the row taking 624 s, not under 60 s, and the shard went
+on); without a bound that run would take hours, so v6 runs each judge in its own process group under a 900 s
+watchdog (pattern: t030o39-o40-mutations.sh) that stops it whole and records the diagnostic the D02 row now names.
+D11 (the escape step of vf_settled_brackets) survived its row too, and is an argued equivalent now: the rendered
+readings take escaped brackets out before they pair brackets, so a bracket that only an escaped one would close
+stays open before the first word there; an escaped bracket before the first word is refused under it as well
+(r18-rows-probe-4.{cases,mut.nul,log,rc}). All three are corrected in r18-mutations-gen.py; the run of record
+re-runs every row on the tree with tgc-3 applied.

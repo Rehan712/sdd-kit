@@ -1,0 +1,33 @@
+opponent sealed rounds=9 pending=0
+reality-check sealed rounds=1 pending=0
+opponent round 1-9 sealed digests checked
+PASS source == d27bab53... (d27bab536454eead9135c5d502962488e653eef8277006b50eeb5d43b22b4466)
+Decisions digest=05d41ba2e9fa404c1f87204a565bb4f303ca7233784ad5b77bcab2aa5e320b5b
+PASS FLOOR-oejTDu current
+PASS no held lock
+PASS HEAD == 0d55c62 (0d55c62)
+PASS T030 unchecked
+PASS T031 unchecked
+PASS T032 unchecked
+PASS T033 unchecked
+PASS T034 unchecked
+PASS T030o39 checked
+PASS T030o40 checked
+PASS round-10 refused at exit 4 with 7 candidates
+PASS tally exit 0
+  opponent rounds=9
+  reality-check rounds=1
+  blocking=23 minor=10 locations=291 unclassified=0
+  class=config-interpolation-validation findings=3 recurrences=1
+  class=gate-report-schema-validation findings=11 recurrences=9
+  class=live-control-semantic-validation findings=3 recurrences=0
+  class=post-pr-followup-binding-schema findings=3 recurrences=0
+  class=return-envelope-parsing findings=3 recurrences=0
+  class=round-authorization-grammar findings=11 recurrences=8
+  class=round-block-attribution findings=5 recurrences=2
+  class=round-record-reparse-divergence findings=1 recurrences=0
+  class=verification-input-identity findings=6 recurrences=5
+  finding-observations=46 distinct-finding-ids=14 reopened=25
+  severity-downgrades=5
+  execution-observations=52 check-executions=290 cache-hits=2007 captures=426 full-log-bytes=642112 returned-summary-bytes=234941 usage=unknown baseline-usage=unknown
+final audit failures=0

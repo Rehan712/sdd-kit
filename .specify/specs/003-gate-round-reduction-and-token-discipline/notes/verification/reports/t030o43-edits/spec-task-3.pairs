@@ -1,0 +1,17 @@
+@@OLD
+    /^##[^#]/ { flush(); sub(/^##[[:space:]]*/,""); stage=$0 }
+@@NEW
+    /^##[^#]/ { flush(); stage=vf_heading_text(vf_original) }
+@@END
+@@OLD
+      subj = $0
+      sub(/^- \[[ xX~]\] \*\*T[0-9]{3}[a-z0-9]*\*\*[[:space:]]*/, "", subj)
+      while (subj ~ /^\[[^]]*\][[:space:]]*/) sub(/^\[[^]]*\][[:space:]]*/, "", subj)
+      sub(/^(—|-)[[:space:]]*/, "", subj)
+@@NEW
+      # The subject is displayed as written, trimmed by the whitespace set.
+      subj = vf_original
+      sub(/^- \[[ xX~]\] \*\*T[0-9]{3}[a-z0-9]*\*\*/, "", subj); subj = vf_wstrim(subj)
+      while (subj ~ /^\[[^]]*\]/) { sub(/^\[[^]]*\]/, "", subj); subj = vf_wstrim(subj) }
+      if (sub(/^(—|-)/, "", subj)) subj = vf_wstrim(subj)
+@@END

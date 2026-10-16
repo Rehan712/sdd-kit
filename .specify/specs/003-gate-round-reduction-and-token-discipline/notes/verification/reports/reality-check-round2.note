@@ -1,0 +1,13 @@
+Provenance of reality-check-round2.md (session 22, 2026-10-15).
+
+The independent reality-check reviewer (subagent type reality-check, hub default; dispatched 2026-10-15T10:00:41Z with
+reality-check-round2-brief.md, sha256 052662af...) wrote reality-check-round2.md itself and returned the same block as the
+message of its one SubagentHandback call, with no usage-limit stop. It also wrote rc2-review-checks.log and
+rc2-review-probes.txt (its scratch probes). rc2-persist-report.py compared the returned message, taken from the agent's
+own transcript (no retyping), to the file (rc2-persist.{log,rc}, exit 0: "existing report equals the returned block"):
+it starts `## Round 2`, ends with the completion marker and one newline, and holds no carriage return. sha256
+461c29c87123638ff98512ba1b39b101875e932b056f17d67f1e9b465c84fd1e, 36987 bytes, 95 lines; timestamp 2026-10-15T10:25:59Z;
+verdict NEEDS WORK: 18 PASS; AC-007, AC-009, AC-010, AC-020 and AC-022 FAIL, each for named cases with no fixture (gaps 1
+to 4, root cause implementation-error); AC-016 and AC-019, round 1's failures, PASS. The worktree states before the
+reservation, at it and at return are byte-identical (r19-state-rc2-{prereserve,reserved,returned}.*: 5548 paths, entries
+digest 18f9240b...). The Mac ran on battery from about 09:07Z (81% to 52%); free disk about 8 GiB.

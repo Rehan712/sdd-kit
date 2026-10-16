@@ -1,0 +1,42 @@
+PASS runner copy drops only the t_run_all line (want=1 got=1)
+PASS runner copy is ignored by the copy identity (want= got=)
+== O-013 V1: one-line edit to shipped 002 gate report
+PASS snapshot before rc (want=0 got=0)
+PASS test_reports_and_tally before edit (want=0 got=0)
+PASS edit landed on 002 opponent.md:238 (want=1 got=1)
+PASS snapshot after rc (want=0 got=0)
+identity before=a003d2f49ad7e8b649c5b152c7b8f5528650cc31508a3dceda54cd0d1ccf4564 after=a003d2f49ad7e8b649c5b152c7b8f5528650cc31508a3dceda54cd0d1ccf4564
+PASS identity unchanged by the edit (O-013) (want=a003d2f49ad7e8b649c5b152c7b8f5528650cc31508a3dceda54cd0d1ccf4564 got=a003d2f49ad7e8b649c5b152c7b8f5528650cc31508a3dceda54cd0d1ccf4564)
+PASS manifests cmp-identical (want=0 got=0)
+PASS test_reports_and_tally after edit fails (want=1 got=1)
+assert: output missing substring: blocking=6 minor=0
+PASS copy restored (want= got=)
+== O-013 V2: a findings manifest added under 002 notes/verification/reports/
+PASS identity unchanged by an added 002 manifest (want=a003d2f49ad7e8b649c5b152c7b8f5528650cc31508a3dceda54cd0d1ccf4564 got=a003d2f49ad7e8b649c5b152c7b8f5528650cc31508a3dceda54cd0d1ccf4564)
+002 tally with the added manifest: rc=0 opponent rounds=5 reality-check rounds=1 blocking=6 minor=0 locations=8 unclassified=6 finding-observations=6 distinct-finding-ids=6 reopened=0 severity-downgra
+PASS copy restored (want= got=)
+== O-013 V3: the same path declared under verification_inputs:
+PASS declaration landed (want=1 got=1)
+PASS declared snapshot rc (want=0 got=0)
+PASS declared+edited snapshot rc (want=0 got=0)
+PASS declared input still blind to the edit (O-013 :1345) (want=27290d467261034a9c1ff31b4df3cde6925929034c68a0583864498e4a028fe0 got=27290d467261034a9c1ff31b4df3cde6925929034c68a0583864498e4a028fe0)
+PASS no identity record names the declared path (want=0 got=0)
+PASS no diagnostic printed for the dropped declaration (want=0 got=0)
+PASS copy restored (want= got=)
+== Isolation gap 1: tally gate key at verification-lib.sh:1243
+PASS line 1243 is the gate key (want=1 got=1)
+PASS mutation landed (want=1 got=1)
+PASS ID-only key SURVIVES test_reports_and_tally (want=0 got=0)
+PASS copy restored (want= got=)
+== Isolation gap 2: multi-clause refusal at tests/test-gate-contracts.sh:1305
+PASS test_instruction_contracts baseline (want=0 got=0)
+PASS line 1305 is the multi-clause refusal (want=1 got=1)
+PASS deleted refusal SURVIVES test_instruction_contracts (want=0 got=0)
+PASS copy restored (want= got=)
+== O-014: manifest tier then a lower round tier, live library, scratch fixture
+PASS CLEARED round resting on the manifest-seeded downgrade is refused (want=3 got=3)
+PASS refusal names the lowered tier (want=1 got=1)
+PASS same observation in a CHALLENGED round validates (want=0 got=0)
+PASS tally rc (want=0 got=0)
+PASS O-014 reproduced: tally misses the downgrade the guard just counted (want=severity-downgrades=0 got=severity-downgrades=0)
+repro failures=0

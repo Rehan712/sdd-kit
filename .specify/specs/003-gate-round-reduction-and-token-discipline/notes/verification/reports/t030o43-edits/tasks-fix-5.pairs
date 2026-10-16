@@ -1,0 +1,5 @@
+@@OLD
+reads a Class or Severity line outside any finding as prose only until a finding ID appears after the last heading, so every spelling of a finding is either read or refused by name, never dropped;
+@@NEW
+reads a Class or Severity line outside any finding as prose only while nothing since the last heading can hold a finding's record (a finding ID, a heading whose second word is Finding, or a heading deeper than the Finding heading it follows), and refuses a manifest from which it reads no finding, so every finding opened by a heading, or by a line that looks like one, is either read or refused by name;
+@@END

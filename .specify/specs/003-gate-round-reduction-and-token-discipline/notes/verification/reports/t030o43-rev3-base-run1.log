@@ -1,0 +1,51 @@
+FAIL pre-rebuild-2
+4 out of 6 hunks failed--saving rejects to 'scripts/verification-lib.sh.rej'
+2 out of 2 hunks failed--saving rejects to 'scripts/spec-evidence.sh.rej'
+1 out of 1 hunks failed--saving rejects to 'templates/verification-contract.md.rej'
+1 out of 2 hunks failed--saving rejects to 'tests/test-gate-contracts.sh.rej'
+2 out of 3 hunks failed--saving rejects to 'tests/test-spec-gate.sh.rej'
+1 out of 2 hunks failed--saving rejects to 'tests/test-verification.sh.rej'
+1 out of 1 hunks failed--saving rejects to '.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md.rej'
+FAIL reverse t030o43-review-repair.diff
+6 out of 29 hunks failed--saving rejects to 'scripts/verification-lib.sh.rej'
+1 out of 3 hunks failed--saving rejects to 'scripts/spec-run.sh.rej'
+1 out of 2 hunks failed--saving rejects to 'scripts/spec-task.sh.rej'
+3 out of 5 hunks failed--saving rejects to 'scripts/spec-evidence.sh.rej'
+1 out of 2 hunks failed--saving rejects to 'templates/verification-contract.md.rej'
+1 out of 1 hunks failed--saving rejects to 'tests/test-gate-contracts.sh.rej'
+1 out of 1 hunks failed--saving rejects to 'tests/test-verification.sh.rej'
+1 out of 4 hunks failed--saving rejects to 'tests/test-spec-gate.sh.rej'
+1 out of 1 hunks failed--saving rejects to 'tests/test-sdd-analyze.sh.rej'
+1 out of 1 hunks failed--saving rejects to '.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md.rej'
+FAIL reverse t030o43-session.diff
+FAIL leftover /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/45f0cb89-8b3e-41f3-b84f-074518924365/scratchpad/rev3base/A/tests/test-verification.sh.rej.orig
+FAIL leftover /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/45f0cb89-8b3e-41f3-b84f-074518924365/scratchpad/rev3base/A/tests/test-spec-gate.sh.rej
+FAIL leftover /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/45f0cb89-8b3e-41f3-b84f-074518924365/scratchpad/rev3base/A/tests/test-gate-contracts.sh.rej.orig
+FAIL leftover /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/45f0cb89-8b3e-41f3-b84f-074518924365/scratchpad/rev3base/A/tests/test-sdd-analyze.sh.rej
+FAIL leftover /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/45f0cb89-8b3e-41f3-b84f-074518924365/scratchpad/rev3base/A/tests/test-gate-contracts.sh.rej
+FAIL leftover /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/45f0cb89-8b3e-41f3-b84f-074518924365/scratchpad/rev3base/A/tests/test-spec-gate.sh.rej.orig
+FAIL leftover /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/45f0cb89-8b3e-41f3-b84f-074518924365/scratchpad/rev3base/A/tests/test-verification.sh.rej
+FAIL leftover /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/45f0cb89-8b3e-41f3-b84f-074518924365/scratchpad/rev3base/A/scripts/spec-task.sh.rej
+FAIL leftover /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/45f0cb89-8b3e-41f3-b84f-074518924365/scratchpad/rev3base/A/scripts/spec-evidence.sh.rej.orig
+FAIL leftover /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/45f0cb89-8b3e-41f3-b84f-074518924365/scratchpad/rev3base/A/scripts/spec-run.sh.rej
+FAIL leftover /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/45f0cb89-8b3e-41f3-b84f-074518924365/scratchpad/rev3base/A/scripts/verification-lib.sh.rej
+FAIL leftover /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/45f0cb89-8b3e-41f3-b84f-074518924365/scratchpad/rev3base/A/scripts/spec-evidence.sh.rej
+FAIL leftover /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/45f0cb89-8b3e-41f3-b84f-074518924365/scratchpad/rev3base/A/scripts/verification-lib.sh.rej.orig
+FAIL leftover /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/45f0cb89-8b3e-41f3-b84f-074518924365/scratchpad/rev3base/A/templates/verification-contract.md.rej.orig
+FAIL leftover /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/45f0cb89-8b3e-41f3-b84f-074518924365/scratchpad/rev3base/A/templates/verification-contract.md.rej
+FAIL leftover /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/45f0cb89-8b3e-41f3-b84f-074518924365/scratchpad/rev3base/A/.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md.rej
+FAIL leftover /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/45f0cb89-8b3e-41f3-b84f-074518924365/scratchpad/rev3base/A/.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md.rej.orig
+FAIL rebuilt scripts/verification-lib.sh: want=db9b8a4f792099bb8957459c80b4af742cf0000b95f6fc27d3b85d27e001aa0b got=ee7ac2e04bafd536e5d0a4c32ac304dd381171f797f02f82bfd2e8b31de300db
+FAIL rebuilt scripts/spec-run.sh: want=a82b92e08c78327be98c054fba7377d1802f4d47ee2278a38dfa906e56dfc793 got=49918300ff92b24b3078fe85c05826684fa09032c487accd5d63d4c5a920d432
+FAIL rebuilt scripts/spec-task.sh: want=1a6de9d2c326acbe168fc5157681a211a0a5ae6bea423d876604696cde7def2c got=98b47a3763ab5e3698262d1aa7cec3b34e37dec65ba3f90de2f403c6c24418f2
+FAIL rebuilt scripts/spec-evidence.sh: want=0b91ce4e78f22cbe87822a355517333385a0a91e6d4816074ab055861e639601 got=c99a58f2562f5858a0d68407cee6f8f3dd664127e5380872efeb53c3b7b005f7
+PASS rebuilt scripts/spec-ac-coverage.sh equals its 70c71885 record
+FAIL rebuilt scripts/sdd-analyze.sh: want=a03084fda2fb3363e1b19e525315a53f61a5efb3b9d5c2413b541b26046a3177 got=9c9c183304b1dbc5adaa5a41e17f6e891cd5888241ff577ce0ce6828ae6a3e34
+FAIL rebuilt templates/verification-contract.md: want=1df1e0726265199e10192170daf9948c7ebd0393c6c05101c4a80037a220780e got=785fffa296f7ae6de3cf60e525a3797fe02c974ee4e07365ccdb98b99b6d62d7
+PASS rebuilt tests/helpers.sh equals its 70c71885 record
+FAIL rebuilt tests/test-gate-contracts.sh: want=0f49ad489bdfb1b4543c2cf2112e77ae1471eaf68970854793d3b1749ec8ec23 got=5fc2a9a568b2fc5e3b84361a6111dd18865a244ddc91abb4be9f09146fbb25e9
+FAIL rebuilt tests/test-verification.sh: want=878ab2ce8fd7c183b324b589faae028b7677768f12a9bf17d1dbc0191126b43f got=0f6ea44f521e26b5f220ec1b0501b4a0a68bc47cf9adc4e13b90b5c6fe94e4c2
+FAIL rebuilt tests/test-spec-gate.sh: want=186fc91585696a597b884c65996e87a663774e850d52cf85fa2dc593684cfdde got=4c2e1d499e611dedf4619f209a3f3bc6ccb1358f00dba2f5a7ef0fb59444fc5b
+FAIL rebuilt tests/test-sdd-analyze.sh: want=7f6353c09d6879cf78db604eb19cbe4e2e24f5f6a10b06bda57e68664f432041 got=ea7ffd71988971691019643fd0d3f6189c7ba77b377340b0863e684227a47a48
+FAIL rebuilt .specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md: want=c5f18e640fc7f4708b30d3148ec9506838323dc00c9de6eaa7ffdd326f44428b got=92ebc195548d7e6c4ffb86aaf6bdc0356233695fabe2de609626dc18fbbe950d
+t030o43-pre-rebuild-2 failures=13

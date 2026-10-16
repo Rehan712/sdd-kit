@@ -1,0 +1,18 @@
+Hosted CI portability verification — 2026-10-15 (after T030o54 to T030o56 were accepted and opponent round 19 CLEARED)
+Workflow: .github/workflows/ci.yml, unmodified by this route (it is part of the snapshot tree).
+Run: https://github.com/Rehan712/sdd-kit/actions/runs/38706127101 — attempt 1, event pull_request, draft do-not-merge PR #19.
+Source identity: 1f0774ddf738539f83236db08fa7f8847c3e9a276964fc5582730ed6bd5c8a66 (sha256 of ci-20261015/snapshot/inputs.nul; equal to the freeze point, to CAP-656-JZJTKB's input, to FLOOR-GCDl2x and to opponent ROUND-19's reserved source).
+Snapshot: commit 5ebc8ef0186fd7e5e6569029b0637c7ec8215240, tree cebddfdcff7198bc43a237e0536cadef9dd8b442, parent 0d55c62; built through a temporary index (real index, HEAD and spec branch unchanged: index digest e8901b4c… before and after, HEAD 0d55c62).
+Mapping (ci-20261015/build.log, build.rc = 0): 11,822 listed paths = 11,822 tree entries; 177/177 manifest path records equal their tree entries after vf_semantic_file, with equal modes; the other 11,645 entries satisfy the anchored vf_bookkeeping_path (anchor .specify/specs/003-gate-round-reduction-and-token-discipline, fold=1).
+Tested commit: GitHub merge 71c6eb4b59abdad34e933f243949ed475a320486 (parents f4a0e4e = main, 5ebc8ef0 = snapshot); its tree is cebddfdc…, identical to the snapshot (collect-2.log, via the GitHub API).
+Jobs (conclusion; runner image; result):
+- shellcheck: success; ubuntu-24.04 20261012.334.1; step `shellcheck (warning severity blocks)`.
+- tests (ubuntu-latest): success; ubuntu-24.04 20261012.334.1; 15 suites, 147/147, 0 FAIL lines; the case-sensitive (non-folding) branch of the fixtures runs here.
+- tests (macos-latest): success; macos-26-arm64 20261013.0424.1; 15 suites, 147/147, 0 FAIL lines.
+- tests-bash32: success; macos-26-arm64 20260907.0351.1; /bin/bash via the workflow's PATH shim (macOS ships bash 3.2; the log does not print the version); 15 suites, 147/147, 0 FAIL lines.
+Exits: every job conclusion is success (run-38706127101-2/jobs.json); no "Process completed with exit code" line in any job log.
+Collector: the first collection (collect.sh inside finish.sh; collect.log, collect.rc = 1) fetched 0 bytes per job log, because gh 2.102.0 refuses to print a response holding terminal escape sequences without --allow-escape-sequences (run-38706127101/*.err); it therefore could not identify the tested merge commit. collect-2.sh is collect.sh with that one flag added (and a comment); its run (collect-2.log, collect-2.rc = 0, into run-38706127101-2/) printed "collect result: PASS". The CI run itself was unaffected.
+Credentials: push and PR operations ran as Rehan712 through a process-scoped GH_TOKEN; the active gh account was never switched (gh-accounts-before.txt = gh-accounts-after.txt) and the token was never printed.
+Approval: the user's decision of 2026-10-14 in Decisions, item 3 (ci-20261015/approval.txt), conditional on round 19 CLEARED, which it is.
+Limits: normal CI on the eventual guarded PR (T032) is still required before merge. This evidence binds source 1f0774dd…; any later source change makes it historical.
+Cleanup: PR #19 closed unmerged at 2026-10-15T09:02:52Z; branch ci-snapshot/spec-003-20261015 deleted (ci-20261015/pr-final-state.txt: state=CLOSED, mergedAt=null, remote branch absent). GitHub retains the closed PR and its commit publicly. finish.sh, finish.log, finish.rc = 0 (pr-close and branch-delete exit 0).

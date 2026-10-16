@@ -1,0 +1,11 @@
+Container: sdd003-gates-20260909
+Image: sdd-spec003-verification:local (sha256:fdbdb0bbf7d3a06691fc70afbda937ac31998d49ee7f67d9fb6c77996823f7fa)
+UID:GID: 501:20; network: none; /tmp: executable 1 GiB tmpfs.
+Working directory and writable bind: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline
+Read-only Git common directory: /Users/babar/projects/sdd-kit-public/.git
+HOME: /tmp/sdd003-home; .sdd/agents links to this worktree's agents.
+This is the existing worktree/branch, not a copied checkout. The analyzer verified the branch and artifacts. Linux tool/environment identities deliberately force refresh of prior macOS captures. Keep validator and round-completion calls in this same environment. Host review may inspect these same files directly.
+Wrapper: bash <spec>/notes/verification/handoff/linux-gate.sh scripts/spec-gate.sh <operation> <spec> [...]
+Stop the owned container after work completes; no unrelated containers or volumes are changed.
+
+Handoff: container stopped at user request after T027. start-linux-gate.sh records the validated setup for a future authorized resume. No Linux gate/checkpoint succeeded yet.

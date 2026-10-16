@@ -1,0 +1,34 @@
+@@OLD
+  run_rc 0 env SDD_RESUME_JITTER_SECONDS=301 XDG_STATE_HOME="$SANDBOX/ambient-state" \
+    bash -c '. "$1/tests/helpers.sh"; [[ -z "${SDD_RESUME_JITTER_SECONDS+set}${XDG_STATE_HOME+set}" ]]' _ "$KIT_DIR"
+@@NEW
+  run_rc 0 env SDD_RESUME_JITTER_SECONDS=301 XDG_STATE_HOME="$SANDBOX/ambient-state" \
+    bash -c '. "$1/tests/helpers.sh"; [[ -z "${SDD_RESUME_JITTER_SECONDS+set}${XDG_STATE_HOME+set}" ]]' _ "$KIT_DIR"
+  # TMPDIR is set to the physical path of the directory it names when a suite
+  # starts (T030o43, CAP-521-Q8OdIp): every spelling of one directory gives the
+  # same exported string, no TMPDIR gives the physical /tmp, a TMPDIR naming no
+  # directory stops the suite by name, and a nested suite's sandbox is a fixed
+  # point of both canonicalizations a program under test applies, so no
+  # spelling can reach a verdict that compares a path under it.
+  local tdir tlink tphys tsp
+  tdir="$SANDBOX/tmp-real"; tlink="$SANDBOX/tmp-link"
+  { mkdir -p "$tdir/sub" && ln -s tmp-real "$tlink"; } || t_fail 'AC-020: cannot build the TMPDIR fixture'
+  tphys="$(cd -P -- "$tdir" && pwd -P)"
+  for tsp in "$tdir" "$tdir/" "$tdir//" "$tdir/./" "$tdir/sub/.." "$tlink" "$tlink/" "$tlink/sub/../"; do
+    run_rc 0 env TMPDIR="$tsp" bash -c '. "$1/tests/helpers.sh"; printf "%s|" "$TMPDIR"; env | grep "^TMPDIR="' _ "$KIT_DIR"
+    assert_eq "$tphys|TMPDIR=$tphys" "$OUT" "AC-020: a suite kept the spelling of TMPDIR=$tsp (T030o43)"
+  done
+  run_rc 0 env -u TMPDIR bash -c '. "$1/tests/helpers.sh"; printf "%s|" "$TMPDIR"; env | grep "^TMPDIR="' _ "$KIT_DIR"
+  tphys="$(cd -P -- /tmp && pwd -P)"
+  assert_eq "$tphys|TMPDIR=$tphys" "$OUT" 'AC-020: a suite without TMPDIR did not export the physical /tmp (T030o43)'
+  run_rc 2 env TMPDIR="$SANDBOX/no-such-dir" bash -c '. "$1/tests/helpers.sh"; echo helpers-loaded' _ "$KIT_DIR"
+  assert_contains "$OUT" "TMPDIR does not name a directory: $SANDBOX/no-such-dir" \
+    'AC-020: a TMPDIR naming no directory was not refused by name (T030o43)'
+  assert_not_contains "$OUT" 'helpers-loaded' 'AC-020: a suite ran under a TMPDIR naming no directory (T030o43)'
+  printf '%s\n' '. "$1/tests/helpers.sh"' \
+    'test_sandbox_is_canonical() { [[ "$(cd "$SANDBOX" && pwd)" == "$SANDBOX" && "$(cd -P "$SANDBOX" && pwd -P)" == "$SANDBOX" ]] || t_fail "sandbox not canonical: $SANDBOX"; }' \
+    't_run_all' > "$SANDBOX/tmp-nested.sh"
+  run_rc 0 env TMPDIR="$tlink/" bash "$SANDBOX/tmp-nested.sh" "$KIT_DIR"
+  assert_contains "$OUT" '-- 1/1 passed' \
+    'AC-020: a suite under a symlinked TMPDIR with a trailing slash made a sandbox a program prints differently (T030o43)'
+@@END

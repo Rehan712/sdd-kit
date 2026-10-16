@@ -1,0 +1,36 @@
+@@OLD
+  # The legacy run restores it too.
+@@NEW
+  # A record inherited beside an LC_ALL other than C means LC_ALL was set after
+  # the harness last pinned it, so that value is the caller's (T030o43 review).
+  run_rc 0 in_locale C env SDD_HARNESS_CALLER_LC_ALL=set:C LC_ALL=en_US.UTF-8 \
+    "$SCRIPTS/spec-run.sh" "$spec" T001 --cwd "$repo" --no-tick --summary -- \
+    bash -c 'printf "seen=%s record=%s\n" "${LC_ALL-<unset>}" "${SDD_HARNESS_CALLER_LC_ALL-<unset>}"'
+  assert_contains "$OUT" 'key=seen=en_US.UTF-8 record=<unset> exit=0' \
+    "AC-020: a record inherited beside another LC_ALL replaced the caller's value (T030o43 review)"
+  # The legacy run restores it too.
+@@END
+@@OLD
+  cmp -s "$SANDBOX/declared-en_US.UTF-8.nul" "$SANDBOX/declared-de_DE.UTF-8.nul" &&
+    t_fail "AC-020: two caller values of a declared LC_ALL gave one identity (O-017)"
+@@NEW
+  cmp -s "$SANDBOX/declared-en_US.UTF-8.nul" "$SANDBOX/declared-de_DE.UTF-8.nul" &&
+    t_fail "AC-020: two caller values of a declared LC_ALL gave one identity (O-017)"
+  # An unset caller LC_ALL is recorded unset, not as the pin's C.
+  run_rc 0 in_locale C env -u LC_ALL bash -c '. "$1"; vf_snapshot "$2" "$3" "$3" "$4"' _ \
+    "$SCRIPTS/verification-lib.sh" "$spec" "$repo" "$SANDBOX/declared-unset.nul"
+  run_rc 0 in_locale C env LC_ALL=C bash -c '. "$1"; vf_snapshot "$2" "$3" "$3" "$4"' _ \
+    "$SCRIPTS/verification-lib.sh" "$spec" "$repo" "$SANDBOX/declared-C.nul"
+  assert_contains "$(tr '\000' '\n' < "$SANDBOX/declared-unset.nul" | paste - - - - - -)" "environment	LC_ALL	unset" \
+    'AC-020: an unset caller LC_ALL was recorded as the pin (T030o43 review)'
+  cmp -s "$SANDBOX/declared-unset.nul" "$SANDBOX/declared-C.nul" &&
+    t_fail 'AC-020: an unset caller LC_ALL and LC_ALL=C gave one identity (T030o43 review)'
+  # The identity keeps more, never less: a Decisions heading carrying a U+00A0
+  # still starts the section the identity hashes (T030o43 review).
+  printf -- '---\nspec: x\n---\n\n## Decisions log\302\240\n\n- 2026-09-06 — one decision\n' > "$SANDBOX/status-a.md"
+  printf -- '---\nspec: x\n---\n\n## Decisions log\302\240\n\n- 2026-09-06 — another decision\n' > "$SANDBOX/status-b.md"
+  bash -c '. "$1"; vf_semantic_file "$2" "$3" "$4" && vf_semantic_file "$2" "$5" "$6"' _ "$SCRIPTS/verification-lib.sh" \
+    .specify/specs/x/STATUS.md "$SANDBOX/status-a.md" "$SANDBOX/status-a.sem" "$SANDBOX/status-b.md" "$SANDBOX/status-b.sem"
+  cmp -s "$SANDBOX/status-a.sem" "$SANDBOX/status-b.sem" &&
+    t_fail 'AC-020: a Decisions log under a heading carrying a U+00A0 left the input identity (T030o43 review)'
+@@END

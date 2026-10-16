@@ -1,0 +1,6 @@
+      function flushm() {
+        if(id!="" && cls=="") bad("finding " id " has no readable Class")
+        if(id!="" && !severities) bad("finding " id " has no readable Severity")
+        if(id!="" && cls!="") {print id ":" cls ":" sev; recorded++}
+        id=""; cls=""; sev=""; classes=0; severities=0
+      }

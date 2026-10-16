@@ -1,0 +1,212 @@
+== F01 report_record_line_cases rc=1 failing-asserts=40
+  | assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-disc-c/tmp/sddkit.EC5A3L/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-proje
+  | assert: AC-012: a manifest tier written as fence-after-list-marker was not refused by name under LANG=C (O-018) missing substring: a code fence that may be inside a list item in finding G-042
+  | assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-disc-c/tmp/sddkit.EC5A3L/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-b
+  | assert: AC-012: a manifest tier written as fence-after-list-marker was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a code fence that may be inside a list item in finding G-042
+  | assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-disc-c/tmp/sddkit.EC5A3L/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-proje
+  | assert: AC-012: a manifest tier written as fence-swapping-phase was not refused by name under LANG=C (O-018) missing substring: a code fence that may be inside a list item in finding G-042
+  | assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-disc-c/tmp/sddkit.EC5A3L/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-b
+  | assert: AC-012: a manifest tier written as fence-swapping-phase was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a code fence that may be inside a list item in finding G-042
+== F01 report_manifest_locale_cases rc=0 failing-asserts=0
+== F01 round_record_line_cases rc=1 failing-asserts=51
+  | assert: expected exit 3, got 0: in_locale C bash /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-disc-c/tmp/sddkit.ObApyx/floor-kit-recordlines/scripts/spec-gate.sh round /private/tmp/claude-501/
+  | assert: AC-009: a CLEARED completion over a second manifest tier written as - ```
+  | assert: AC-009: a CLEARED completion over a second manifest tier written as - ```
+  | assert: AC-009: an indented second Severity lowered a new finding at completion (O-018) missing substring: duplicate finding field
+  | assert: AC-009: a CLEARED completion over a second tier written as - **Severity:** minor\n\n<!-->\n\n- **Severity:** data-loss\n\nThe tier above is the one we stand by. --> was not refused under LANG=C (T030o44 review) missing substring: quoted content carries
+  | assert: AC-009: a CLEARED completion over a second tier written as - **Severity:** minor\n\n<!-->\n\n- **Severity:** data-loss\n\nThe tier above is the one we stand by. --> was not refused under LANG=en_US.UTF-8 (T030o44 review) missing substring: quoted conte
+  | assert: AC-009: a CLEARED completion over a second tier written as - **Severity:** minor\n  data-loss was not refused under LANG=C (T030o44 review) missing substring: a Severity field whose list item holds more than its line in finding G-050
+  | assert: AC-009: a CLEARED completion over a second tier written as - **Severity:** minor\n  data-loss was not refused under LANG=en_US.UTF-8 (T030o44 review) missing substring: a Severity field whose list item holds more than its line in finding G-050
+== F02 report_record_line_cases rc=1 failing-asserts=16
+  | assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-disc-c/tmp/sddkit.hj5BMp/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-proje
+  | assert: AC-012: a manifest tier written as fence-after-list-marker was not refused by name under LANG=C (O-018) missing substring: a code fence that may be inside a list item in finding G-042
+  | assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-disc-c/tmp/sddkit.hj5BMp/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-b
+  | assert: AC-012: a manifest tier written as fence-after-list-marker was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a code fence that may be inside a list item in finding G-042
+  | assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-disc-c/tmp/sddkit.hj5BMp/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-proje
+  | assert: AC-012: a manifest tier written as fence-after-ordered-marker was not refused by name under LANG=C (O-018) missing substring: a code fence that may be inside a list item in finding G-042
+  | assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-disc-c/tmp/sddkit.hj5BMp/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-b
+  | assert: AC-012: a manifest tier written as fence-after-ordered-marker was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a code fence that may be inside a list item in finding G-042
+== F02 report_manifest_locale_cases rc=0 failing-asserts=0
+== F03 report_record_line_cases rc=1 failing-asserts=8
+  | assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-disc-c/tmp/sddkit.nPyQXH/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-proje
+  | assert: AC-012: a manifest tier written as fence-after-ordered-marker was not refused by name under LANG=C (O-018) missing substring: a code fence that may be inside a list item in finding G-042
+  | assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-disc-c/tmp/sddkit.nPyQXH/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-b
+  | assert: AC-012: a manifest tier written as fence-after-ordered-marker was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a code fence that may be inside a list item in finding G-042
+  | assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-disc-c/tmp/sddkit.nPyQXH/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-proje
+  | assert: AC-012: a canonical finding whose tail is fence-after-ordered-marker was not refused by name under LANG=C (round 17, O-024) missing substring: a code fence that may be inside a list item in finding G-050
+  | assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-disc-c/tmp/sddkit.nPyQXH/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-b
+  | assert: AC-012: a canonical finding whose tail is fence-after-ordered-marker was not refused by name under LANG=en_US.UTF-8 (round 17, O-024) missing substring: a code fence that may be inside a list item in finding G-050
+== F03 report_manifest_locale_cases rc=0 failing-asserts=0
+== F04 report_record_line_cases rc=1 failing-asserts=8
+  | assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-disc-c/tmp/sddkit.R1ggAz/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-proje
+  | assert: AC-012: a manifest tier written as fence-after-ordered-marker was not refused by name under LANG=C (O-018) missing substring: a code fence that may be inside a list item in finding G-042
+  | assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-disc-c/tmp/sddkit.R1ggAz/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-b
+  | assert: AC-012: a manifest tier written as fence-after-ordered-marker was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a code fence that may be inside a list item in finding G-042
+  | assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-disc-c/tmp/sddkit.R1ggAz/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-proje
+  | assert: AC-012: a canonical finding whose tail is fence-after-ordered-marker was not refused by name under LANG=C (round 17, O-024) missing substring: a code fence that may be inside a list item in finding G-050
+  | assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-disc-c/tmp/sddkit.R1ggAz/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-b
+  | assert: AC-012: a canonical finding whose tail is fence-after-ordered-marker was not refused by name under LANG=en_US.UTF-8 (round 17, O-024) missing substring: a code fence that may be inside a list item in finding G-050
+== F04 report_manifest_locale_cases rc=0 failing-asserts=0
+== F05 report_record_line_cases rc=1 failing-asserts=12
+  | assert: expected exit 0, got 3: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-disc-c/tmp/sddkit.gdnG2G/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-proje
+  | assert: AC-012: a Severity line followed by a four-backtick-fence was refused under LANG=C (O-021) unexpectedly contains: report recovery
+  | assert: expected exit 0, got 3: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-disc-c/tmp/sddkit.gdnG2G/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-b
+  | assert: AC-012: a Severity line followed by a four-backtick-fence was refused under LANG=en_US.UTF-8 (O-021) unexpectedly contains: report recovery
+  | assert: expected exit 0, got 3: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-disc-c/tmp/sddkit.gdnG2G/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-proje
+  | assert: AC-012: a Severity line followed by a tilde-fence was refused under LANG=C (O-021) unexpectedly contains: report recovery
+  | assert: expected exit 0, got 3: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-disc-c/tmp/sddkit.gdnG2G/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-b
+  | assert: AC-012: a Severity line followed by a tilde-fence was refused under LANG=en_US.UTF-8 (O-021) unexpectedly contains: report recovery
+== F05 report_manifest_locale_cases rc=1 failing-asserts=10
+  | assert: expected exit 0, got 3: bash -c . "$1"; vf_reports "$2" opponent "$3" "$4" _ /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-disc-c/copy/scripts/verification-lib.sh /private/tmp/claude-50
+  | assert: AC-012: a plausible manifest (severity-then-fenced-block) was refused (T030o43 review 2) unexpectedly contains: prior-review manifest could not be parsed
+  | assert: expected exit 0, got 3: bash -c . "$1"; vf_reports "$2" opponent "$3" "$4" _ /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-disc-c/copy/scripts/verification-lib.sh /private/tmp/claude-50
+  | assert: AC-012: a plausible manifest (quoted-output-without-record) was refused (T030o43 review 2) unexpectedly contains: prior-review manifest could not be parsed
+  | assert: expected exit 0, got 3: bash -c . "$1"; vf_reports "$2" opponent "$3" "$4" _ /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-disc-c/copy/scripts/verification-lib.sh /private/tmp/claude-50
+  | assert: AC-012: a plausible manifest (severity-then-tilde-fence) was refused (T030o43 review 2) unexpectedly contains: prior-review manifest could not be parsed
+  | assert: expected exit 0, got 3: bash -c . "$1"; vf_reports "$2" opponent "$3" "$4" _ /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-disc-c/copy/scripts/verification-lib.sh /private/tmp/claude-50
+  | assert: AC-012: a plausible manifest (severity-then-four-backtick-fence) was refused (T030o43 review 2) unexpectedly contains: prior-review manifest could not be parsed
+== F06 report_record_line_cases rc=1 failing-asserts=4
+  | assert: expected exit 0, got 3: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-disc-c/tmp/sddkit.mwNl79/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-proje
+  | assert: AC-012: a Severity line followed by a tilde-fence was refused under LANG=C (O-021) unexpectedly contains: report recovery
+  | assert: expected exit 0, got 3: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-disc-c/tmp/sddkit.mwNl79/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-b
+  | assert: AC-012: a Severity line followed by a tilde-fence was refused under LANG=en_US.UTF-8 (O-021) unexpectedly contains: report recovery
+== F06 report_manifest_locale_cases rc=1 failing-asserts=2
+  | assert: expected exit 0, got 3: bash -c . "$1"; vf_reports "$2" opponent "$3" "$4" _ /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-disc-c/copy/scripts/verification-lib.sh /private/tmp/claude-50
+  | assert: AC-012: a plausible manifest (severity-then-tilde-fence) was refused (T030o43 review 2) unexpectedly contains: prior-review manifest could not be parsed
+== F07 report_record_line_cases rc=1 failing-asserts=24
+  | assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-disc-c/tmp/sddkit.0q7LQJ/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-proje
+  | assert: AC-012: a manifest tier written as fence-swapping-phase was not refused by name under LANG=C (O-018) missing substring: a code fence that may be inside a list item in finding G-042
+  | assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-disc-c/tmp/sddkit.0q7LQJ/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-b
+  | assert: AC-012: a manifest tier written as fence-swapping-phase was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a code fence that may be inside a list item in finding G-042
+  | assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-disc-c/tmp/sddkit.0q7LQJ/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-proje
+  | assert: AC-012: a manifest tier written as fence-four-spaces-in-item was not refused by name under LANG=C (O-018) missing substring: a code fence that may be inside a list item in finding G-042
+  | assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-disc-c/tmp/sddkit.0q7LQJ/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-b
+  | assert: AC-012: a manifest tier written as fence-four-spaces-in-item was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a code fence that may be inside a list item in finding G-042
+== F07 report_manifest_locale_cases rc=0 failing-asserts=0
+== F08 report_record_line_cases rc=0 failing-asserts=0
+== F08 report_manifest_locale_cases rc=0 failing-asserts=0
+== R01 report_record_line_cases rc=1 failing-asserts=44
+  | assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-disc-c/tmp/sddkit.rEc1A4/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-proje
+  | assert: AC-012: a manifest tier written as definition-hiding-severity was not refused by name under LANG=C (O-018) missing substring: a link reference definition in finding G-042
+  | assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-disc-c/tmp/sddkit.rEc1A4/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-b
+  | assert: AC-012: a manifest tier written as definition-hiding-severity was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a link reference definition in finding G-042
+  | assert: AC-012: a manifest tier written as definition-then-fence was not refused by name under LANG=C (O-018) missing substring: a link reference definition in finding G-042
+  | assert: AC-012: a manifest tier written as definition-then-fence was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a link reference definition in finding G-042
+  | assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-disc-c/tmp/sddkit.rEc1A4/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-proje
+  | assert: AC-012: a manifest tier written as definition-in-list-item was not refused by name under LANG=C (O-018) missing substring: a link reference definition in finding G-042
+== R01 report_manifest_locale_cases rc=0 failing-asserts=0
+== R01 round_record_line_cases rc=1 failing-asserts=51
+  | assert: expected exit 3, got 0: in_locale C bash /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-disc-c/tmp/sddkit.TE9Gnq/floor-kit-recordlines/scripts/spec-gate.sh round /private/tmp/claude-501/
+  | assert: AC-009: a CLEARED completion over a manifest tier hidden in a link reference definition was not refused under LANG=C (round 17, O-024) missing substring: a link reference definition in finding G-042
+  | assert: AC-009: a CLEARED completion over a manifest tier hidden in a link reference definition was not refused under LANG=en_US.UTF-8 (round 17, O-024) missing substring: a link reference definition in finding G-042
+  | assert: AC-009: an indented second Severity lowered a new finding at completion (O-018) missing substring: duplicate finding field
+  | assert: AC-009: a CLEARED completion over a second tier written as - **Severity:** minor\n\n<!-->\n\n- **Severity:** data-loss\n\nThe tier above is the one we stand by. --> was not refused under LANG=C (T030o44 review) missing substring: quoted content carries
+  | assert: AC-009: a CLEARED completion over a second tier written as - **Severity:** minor\n\n<!-->\n\n- **Severity:** data-loss\n\nThe tier above is the one we stand by. --> was not refused under LANG=en_US.UTF-8 (T030o44 review) missing substring: quoted conte
+  | assert: AC-009: a CLEARED completion over a second tier written as - **Severity:** minor\n  data-loss was not refused under LANG=C (T030o44 review) missing substring: a Severity field whose list item holds more than its line in finding G-050
+  | assert: AC-009: a CLEARED completion over a second tier written as - **Severity:** minor\n  data-loss was not refused under LANG=en_US.UTF-8 (T030o44 review) missing substring: a Severity field whose list item holds more than its line in finding G-050
+== R02 report_record_line_cases rc=1 failing-asserts=8
+  | assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-disc-c/tmp/sddkit.AS2Hkf/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-proje
+  | assert: AC-012: a manifest tier written as definition-in-list-item was not refused by name under LANG=C (O-018) missing substring: a link reference definition in finding G-042
+  | assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-disc-c/tmp/sddkit.AS2Hkf/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-b
+  | assert: AC-012: a manifest tier written as definition-in-list-item was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a link reference definition in finding G-042
+  | assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-disc-c/tmp/sddkit.AS2Hkf/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-proje
+  | assert: AC-012: a canonical finding whose tail is definition-in-list-item was not refused by name under LANG=C (round 17, O-024) missing substring: a link reference definition in finding G-050
+  | assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-disc-c/tmp/sddkit.AS2Hkf/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-b
+  | assert: AC-012: a canonical finding whose tail is definition-in-list-item was not refused by name under LANG=en_US.UTF-8 (round 17, O-024) missing substring: a link reference definition in finding G-050
+== R02 report_manifest_locale_cases rc=0 failing-asserts=0
+== R03 report_record_line_cases rc=0 failing-asserts=0
+== R03 report_manifest_locale_cases rc=0 failing-asserts=0
+== R04 report_record_line_cases rc=1 failing-asserts=8
+  | assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-disc-c/tmp/sddkit.MLpMtU/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-proje
+  | assert: AC-012: a manifest tier written as definition-in-list-item was not refused by name under LANG=C (O-018) missing substring: a link reference definition in finding G-042
+  | assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-disc-c/tmp/sddkit.MLpMtU/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-b
+  | assert: AC-012: a manifest tier written as definition-in-list-item was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a link reference definition in finding G-042
+  | assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-disc-c/tmp/sddkit.MLpMtU/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-proje
+  | assert: AC-012: a canonical finding whose tail is definition-in-list-item was not refused by name under LANG=C (round 17, O-024) missing substring: a link reference definition in finding G-050
+  | assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-disc-c/tmp/sddkit.MLpMtU/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-b
+  | assert: AC-012: a canonical finding whose tail is definition-in-list-item was not refused by name under LANG=en_US.UTF-8 (round 17, O-024) missing substring: a link reference definition in finding G-050
+== R04 report_manifest_locale_cases rc=0 failing-asserts=0
+== R05 report_record_line_cases rc=1 failing-asserts=8
+  | assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-disc-c/tmp/sddkit.z7ql0n/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-proje
+  | assert: AC-012: a manifest tier written as definition-escaped-label was not refused by name under LANG=C (O-018) missing substring: a link reference definition in finding G-042
+  | assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-disc-c/tmp/sddkit.z7ql0n/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-b
+  | assert: AC-012: a manifest tier written as definition-escaped-label was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a link reference definition in finding G-042
+  | assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-disc-c/tmp/sddkit.z7ql0n/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-proje
+  | assert: AC-012: a canonical finding whose tail is definition-escaped-label was not refused by name under LANG=C (round 17, O-024) missing substring: a link reference definition in finding G-050
+  | assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-disc-c/tmp/sddkit.z7ql0n/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-b
+  | assert: AC-012: a canonical finding whose tail is definition-escaped-label was not refused by name under LANG=en_US.UTF-8 (round 17, O-024) missing substring: a link reference definition in finding G-050
+== R05 report_manifest_locale_cases rc=0 failing-asserts=0
+== R06 report_record_line_cases rc=0 failing-asserts=0
+== R06 report_manifest_locale_cases rc=0 failing-asserts=0
+== R07 report_record_line_cases rc=1 failing-asserts=8
+  | assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-disc-c/tmp/sddkit.Q2ahur/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-proje
+  | assert: AC-012: a manifest tier written as definition-label-across-lines was not refused by name under LANG=C (O-018) missing substring: a link reference definition in finding G-042
+  | assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-disc-c/tmp/sddkit.Q2ahur/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-b
+  | assert: AC-012: a manifest tier written as definition-label-across-lines was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a link reference definition in finding G-042
+  | assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-disc-c/tmp/sddkit.Q2ahur/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-proje
+  | assert: AC-012: a canonical finding whose tail is definition-label-across-lines was not refused by name under LANG=C (round 17, O-024) missing substring: a link reference definition in finding G-050
+  | assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-disc-c/tmp/sddkit.Q2ahur/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-b
+  | assert: AC-012: a canonical finding whose tail is definition-label-across-lines was not refused by name under LANG=en_US.UTF-8 (round 17, O-024) missing substring: a link reference definition in finding G-050
+== R07 report_manifest_locale_cases rc=0 failing-asserts=0
+== R08 report_record_line_cases rc=1 failing-asserts=8
+  | assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-disc-c/tmp/sddkit.L6rPyZ/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-proje
+  | assert: AC-012: a manifest tier written as definition-label-across-lines was not refused by name under LANG=C (O-018) missing substring: a link reference definition in finding G-042
+  | assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-disc-c/tmp/sddkit.L6rPyZ/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-b
+  | assert: AC-012: a manifest tier written as definition-label-across-lines was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a link reference definition in finding G-042
+  | assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-disc-c/tmp/sddkit.L6rPyZ/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-proje
+  | assert: AC-012: a canonical finding whose tail is definition-label-across-lines was not refused by name under LANG=C (round 17, O-024) missing substring: a link reference definition in finding G-050
+  | assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-disc-c/tmp/sddkit.L6rPyZ/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-b
+  | assert: AC-012: a canonical finding whose tail is definition-label-across-lines was not refused by name under LANG=en_US.UTF-8 (round 17, O-024) missing substring: a link reference definition in finding G-050
+== R08 report_manifest_locale_cases rc=0 failing-asserts=0
+== R09 report_record_line_cases rc=0 failing-asserts=0
+== R09 report_manifest_locale_cases rc=0 failing-asserts=0
+== R10 report_record_line_cases rc=0 failing-asserts=0
+== R10 report_manifest_locale_cases rc=0 failing-asserts=0
+== R11 report_record_line_cases rc=1 failing-asserts=46
+  | assert: AC-012: a manifest tier written as br-in-link-text was not refused by name under LANG=C (O-018) missing substring: raw HTML outside a code span in finding G-042
+  | assert: AC-012: a manifest tier written as br-in-link-text was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: raw HTML outside a code span in finding G-042
+  | assert: AC-012: a manifest tier written as p-in-link-text was not refused by name under LANG=C (O-018) missing substring: raw HTML outside a code span in finding G-042
+  | assert: AC-012: a manifest tier written as p-in-link-text was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: raw HTML outside a code span in finding G-042
+  | assert: AC-012: a manifest tier written as destination-holding-backtick was not refused by name under LANG=C (O-018) missing substring: a backtick inside a link destination, title or label in finding G-042
+  | assert: AC-012: a manifest tier written as destination-holding-backtick was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a backtick inside a link destination, title or label in finding G-042
+  | assert: AC-012: a manifest tier written as title-holding-backtick was not refused by name under LANG=C (O-018) missing substring: a backtick inside a link destination, title or label in finding G-042
+  | assert: AC-012: a manifest tier written as title-holding-backtick was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a backtick inside a link destination, title or label in finding G-042
+== R11 report_manifest_locale_cases rc=1 failing-asserts=6
+  | assert: expected exit 0, got 3: bash -c . "$1"; vf_reports "$2" opponent "$3" "$4" _ /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-disc-c/copy/scripts/verification-lib.sh /private/tmp/claude-50
+  | assert: AC-012: a plausible manifest (wrapped-link-text) was refused (T030o43 review 2) unexpectedly contains: prior-review manifest could not be parsed
+  | assert: expected exit 0, got 3: bash -c . "$1"; vf_reports "$2" opponent "$3" "$4" _ /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-disc-c/copy/scripts/verification-lib.sh /private/tmp/claude-50
+  | assert: AC-012: a plausible manifest (wrapped-link-at-line-start) was refused (T030o43 review 2) unexpectedly contains: prior-review manifest could not be parsed
+  | assert: expected exit 0, got 3: bash -c . "$1"; vf_reports "$2" opponent "$3" "$4" _ /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-disc-c/copy/scripts/verification-lib.sh /private/tmp/claude-50
+  | assert: AC-012: a plausible manifest (task-checkboxes) was refused (T030o43 review 2) unexpectedly contains: prior-review manifest could not be parsed
+== S01 report_record_line_cases rc=1 failing-asserts=36
+  | assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-disc-c/tmp/sddkit.gos30K/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-proje
+  | assert: AC-012: a manifest tier written as image-alt-across-three-lines was not refused by name under LANG=C (O-018) missing substring: a second Severity line in finding G-042
+  | assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-disc-c/tmp/sddkit.gos30K/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-b
+  | assert: AC-012: a manifest tier written as image-alt-across-three-lines was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a second Severity line in finding G-042
+  | assert: AC-012: a manifest tier written as link-title-across-three-lines was not refused by name under LANG=C (O-018) missing substring: a second Severity line in finding G-042
+  | assert: AC-012: a manifest tier written as link-title-across-three-lines was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a second Severity line in finding G-042
+  | assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-disc-c/tmp/sddkit.gos30K/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-proje
+  | assert: AC-012: a manifest tier written as image-alt-holding-code-span-across-lines was not refused by name under LANG=C (O-018) missing substring: a second Severity line in finding G-042
+== S01 report_manifest_locale_cases rc=0 failing-asserts=0
+== S02 report_record_line_cases rc=1 failing-asserts=1
+  | assert: AC-012: a 400-line run under a bracket quoted in a code span took 339 s, not under 60 s (round 17, O-023)
+== S02 report_manifest_locale_cases rc=0 failing-asserts=0
+== S03 report_record_line_cases rc=0 failing-asserts=0
+== S03 report_manifest_locale_cases rc=0 failing-asserts=0
+== S04 report_record_line_cases rc=0 failing-asserts=0
+== S04 report_manifest_locale_cases rc=0 failing-asserts=0
+== S05 report_record_line_cases rc=0 failing-asserts=0
+== S05 report_manifest_locale_cases rc=0 failing-asserts=0
+== S06 report_record_line_cases rc=1 failing-asserts=4
+  | assert: AC-012: a manifest tier written as link-title-across-three-lines was not refused by name under LANG=C (O-018) missing substring: a second Severity line in finding G-042
+  | assert: AC-012: a manifest tier written as link-title-across-three-lines was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a second Severity line in finding G-042
+  | assert: AC-012: a second tier written as link-title-across-three-lines was not refused by name under LANG=C (O-018) missing substring: a Severity line this grammar cannot read in finding G-050
+  | assert: AC-012: a second tier written as link-title-across-three-lines was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a Severity line this grammar cannot read in finding G-050
+== S06 report_manifest_locale_cases rc=0 failing-asserts=0
+== S07 report_record_line_cases rc=0 failing-asserts=0
+== S07 report_manifest_locale_cases rc=0 failing-asserts=0
+== S08 report_record_line_cases rc=0 failing-asserts=0
+== S08 report_manifest_locale_cases rc=0 failing-asserts=0
+== S09 report_record_line_cases rc=0 failing-asserts=0
+== S09 report_manifest_locale_cases rc=0 failing-asserts=0
+r18-discover c done 09:42:42Z

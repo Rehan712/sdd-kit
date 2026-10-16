@@ -1,0 +1,5 @@
+User decision, 2026-10-16 (session 23), after opponent round 20 sealed CHALLENGED (1 blocking O-029 + 3 minor), asked:
+"Opponent round 20 is CHALLENGED on O-029 (a test-only weakness in the new AC-009 fixture; code is correct). How should I proceed?"
+Chosen: "Draft PR now, fix later (Recommended)": fastest (~15 min). Skip reality-check round 3 (it can't be READY: AC-019 has no CI, and O-029 would stale it). Commit, push, open the draft PR with --force showing opponent CHALLENGED. Fix O-029 (test-only) on the PR branch later, together with CI when the Actions limit resets, then re-gate before merge.
+Not chosen: reality-check round 3 then the draft PR (~1.5 h); fix O-029 now, new floor, round 21, reality-check round 3, then the PR (~8 h).
+Minor findings O-030, O-031 (minor) and O-032 (degraded) do not stop the sequence (the user's instruction of 2026-10-15, r20-user-decision-2.txt).

@@ -1,0 +1,46 @@
+== baseline shard 0/1 21:05:11Z
+PASS B report_record_line_cases unmutated passes
+PASS B report_manifest_locale_cases unmutated passes
+PASS B report_round_style_cases unmutated passes
+PASS B report_prior_binding_cases unmutated passes
+PASS B report_severity_tier_cases unmutated passes
+PASS B shipped_002_tally_case unmutated passes
+PASS B round_record_line_cases unmutated passes
+PASS B round_locale_cases unmutated passes
+== the label reader (vf_label_word, vf_label_html, vf_label_links, vf_label_render, vf_label, vf_finding_heading)
+== T030o43 rows carried to their spelling in vf_label_word
+== the record shapes a quoted line may carry (vf_record) and the quoted-record refusal
+== the field-item rule (vf_block_start and both passes)
+== the manifest pass
+== the canonical pass
+== the canonical conjuncts that keep legacy rounds as they were (T030o44 review F6; O03 of v1 is now a kill)
+== the round style decided before its body (T030o45, O-020)
+== the rendered reading: the bracket fixpoint, the escape, the checkbox, emphasis inside a word, hiding (T030o46, O-018)
+== the paragraph step and the paragraph checks (T030o46, T030o47; O-018)
+== the blocks that end a field item (T030o46, O-021)
+== the code-span reading, the reading after a rendered line start, the field-value reading (T030o47, O-018)
+== the narrowed grammar inside a finding (T030o48, O-018): vf_narrow, the `<` class, its call in each pass
+== the code-span scan and the code-span reading (T030o48, O-018): 6.1 read left to right, 2.4 escapes in pairs
+== the run ends only at a blank line or a heading of one to six marks, never at a fenced line (T030o48, T030o49)
+== a settled candidate is dropped (T030o50, O-023): vf_settled and the reader that drops
+PASS D02 literal applies once in scripts/verification-lib.sh
+.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/r18-mutations.sh: line 45:  6777 Terminated: 15          ( cd "$C" && awk '$0 != "t_run_all"' "tests/$1" > "tests/.one-$1" && bash -c '. "tests/.one-$1"
+      SANDBOX="$(mktemp -d "${TMPDIR:-/tmp}/sddkit.XXXXXX")"; export SANDBOX
+      out="$( ( _t_fail=0; "$2"; exit "$_t_fail" ) 2>&1 )"; rc=$?
+      [[ ! -s "$SANDBOX/.fixture-build-failed" ]] || { rc=1; out="$out
+build-failure record: $(cat "$SANDBOX/.fixture-build-failed")"; }
+      rm -rf "$SANDBOX"; printf "%s\n" "$out"; exit "$rc"' _ "$1" "$2" ) > "$w/judge.out" 2>&1
+PASS D02 KILLED (kill, judge rc)
+PASS D02 diagnostic: watchdog: judge stopped after
+PASS D04 literal applies once in scripts/verification-lib.sh
+PASS D04 KILLED (kill, judge rc)
+PASS D04 diagnostic: a manifest tier written as entity-then-code-span-holding-image-across-lines was not refused by name under LANG=C (O-018)
+PASS D11 literal applies once in scripts/verification-lib.sh
+PASS D11 SURVIVES as argued (equiv)
+== the narrowed grammar further (T030o51, O-018): the autolink class and its reason
+== destinations, titles and labels read before a later backtick (T030o51, O-018): vf_cm_scan, vf_cm_dest, vf_cm_label
+== a fence that may be inside a list item, and a link reference definition (T030o52, O-024)
+== the narrowed check judged after the heading on a line, in both passes (the round-17 minor, T030o51)
+== the settled test read up to the first word of each reading (T030o53, O-023)
+== done shard 0/1 21:24:03Z rows=303
+r18-mutations failures=0

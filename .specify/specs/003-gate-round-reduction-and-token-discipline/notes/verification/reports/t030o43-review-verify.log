@@ -1,0 +1,53 @@
+== F1: a U+00A0 after the dash of a manifest field line
+  F1-class PRE C: rc=0 | 
+  F1-class PRE en_US.UTF-8: rc=3 | report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/cf8105b0-c4fe-410c-afe8-3a2a37d7
+  F1-class POST C: rc=0 | 
+  F1-class POST en_US.UTF-8: rc=0 | 
+  F1-severity PRE C: rc=0 | 
+  F1-severity PRE en_US.UTF-8: rc=3 | report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/cf8105b0-c4fe-410c-afe8-3a2a37d7
+  F1-severity POST C: rc=0 | 
+  F1-severity POST en_US.UTF-8: rc=0 | 
+  F1-classbind PRE C: rc=0 | 
+  F1-classbind PRE en_US.UTF-8: rc=3 | report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/cf8105b0-c4fe-410c-afe8-3a2a37d7
+  F1-classbind POST C: rc=0 | 
+  F1-classbind POST en_US.UTF-8: rc=0 | 
+== derived: a U+00A0 at the end of the manifest Finding heading
+  D1-heading PRE C: rc=0 | 
+  D1-heading PRE en_US.UTF-8: rc=0 | 
+  D1-heading POST C: rc=0 | 
+  D1-heading POST en_US.UTF-8: rc=0 | 
+== derived: a required report section whose only body line is a U+00A0
+  D2-section PRE C: rc=0 | 
+  D2-section PRE en_US.UTF-8: rc=3 | report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/cf8105b0-c4fe-410c-afe8-3a2a37d7
+  D2-section POST C: rc=0 | 
+  D2-section POST en_US.UTF-8: rc=0 | 
+== derived: a U+00A0 after the Decisions log heading, and the identity
+  D3 PRE C: two Decisions logs hash to the same bytes (0 bytes kept)
+  D3 PRE en_US.UTF-8: two Decisions logs hash to the differ bytes (50 bytes kept)
+  D3 POST C: two Decisions logs hash to the same bytes (0 bytes kept)
+  D3 POST en_US.UTF-8: two Decisions logs hash to the same bytes (0 bytes kept)
+== derived: a U+00A0 after the verification_contract colon, and spec-evidence.sh
+  D4 PRE C: rc=0 Evidence integrity: 099-ev / sound — every ticked box traces to real evidence
+  D4 PRE en_US.UTF-8: rc=3 error: vf_bindings requires spec.md and plan.md / error: vf_bindings requires spec.md and plan.md
+  D4 POST C: rc=0 Evidence integrity: 099-ev / sound — every ticked box traces to real evidence
+  D4 POST en_US.UTF-8: rc=0 Evidence integrity: 099-ev / sound — every ticked box traces to real evidence
+== F2: legacy artifact names with non-ASCII letters
+  F2 PRE C shots/café.png (missing): rc=0   ✓ 1 ticked task(s) checked for evidence integrity 
+  F2 PRE en_US.UTF-8 shots/café.png (missing): rc=0   ✗ T001 names artifact 'shots/café.png' in its evidence, but no such file exists   ✓ 1 ticked task(s) checked for evidence integrity 
+  F2 PRE C shots/écran.png (exists): rc=0   ✗ T001 names artifact 'cran.png' in its evidence, but no such file exists   ✓ 1 ticked task(s) checked for evidence integrity 
+  F2 PRE en_US.UTF-8 shots/écran.png (exists): rc=0   ✓ 1 ticked task(s) checked for evidence integrity 
+  F2 POST C shots/café.png (missing): rc=0   ✓ 1 ticked task(s) checked for evidence integrity 
+  F2 POST en_US.UTF-8 shots/café.png (missing): rc=0   ✓ 1 ticked task(s) checked for evidence integrity 
+  F2 POST C shots/écran.png (exists): rc=0   ✗ T001 names artifact 'cran.png' in its evidence, but no such file exists   ✓ 1 ticked task(s) checked for evidence integrity 
+  F2 POST en_US.UTF-8 shots/écran.png (exists): rc=0   ✗ T001 names artifact 'cran.png' in its evidence, but no such file exists   ✓ 1 ticked task(s) checked for evidence integrity 
+== F3: the return size bound under a failing wc
+  return bytes: 81084
+  F3 POST plain: rc=3 return exceeds 64 KiB
+  F3 POST fault: rc=0 wc: injected fault
+== F4: the five guards the fixtures do not reach (code read, plus X1 and X2 by hand)
+  X1 an inherited set:C record with LC_ALL=en_US.UTF-8: key=seen=en_US.UTF-8
+  X2 caller LC_ALL unset: environment	LC_ALL	unset
+  X2 caller LC_ALL C: environment	LC_ALL	present
+  X3-X5: the manifest sort, the tally class-table sort and vf_ids' sort: 2 of the three carry no diagnostic and no fixture fault
+== F5: the kernel loaded outside the eight harness files
+scripts/sdd-analyze.sh scripts/sdd-doctor.sh scripts/spec-ac-coverage.sh scripts/spec-evidence.sh scripts/spec-gate.sh scripts/spec-run.sh scripts/spec-task.sh scripts/verification-lib.sh 

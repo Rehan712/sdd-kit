@@ -1,0 +1,18 @@
+r18-fixtures-judge-2 run 3 (session 20, 2026-10-13T18:20Z to 18:27Z): the judge (kept as
+r18-fixtures-judge-2-run3.sh) over r18-edits/tgc-2.pairs with the S03, S09 and S10 rows carrying one line inside
+their image (kept as r18-edits/tgc-2-run3.pairs, from r18-edits/build-fixtures-2-run3.py, sha256 6c56d609...), exit
+0 in each shard (receipts renamed r18-fixtures-judge-2-run3-{0,1,2}.* with their .out and .asserts files): K passed
+both functions, and each of the 26 mutants failed on every row named for it, S03, S09 and S10 included. It is
+superseded, not wrong: before tgc-2 was applied, the session-19 list of mutants to be argued equivalent was checked
+against the kernel, and three of them change a verdict the rows did not reach (r18-rows-probe-2.{cases,log,rc},
+r18-rows-render-2.{cases,log,rc}). R03 (the block-quote marker taken out of the definition reader's prefix) lets a
+link reference definition after `> ` inside a finding pass, which the narrowed grammar refuses by name, and in
+markdown-it such a definition swallows lazy continuation lines, a field line among them. S07 (the inert reading's
+own bracket test dropped) drops, outside every finding after a finding ID, a candidate whose image alt begins with a
+code span holding `]` and whose title spans lines, so the tier the image's completion leaves first is not read; S08
+(the bracket tests of the inert reading's two rendered readings dropped) does the same after an inline tag before
+such an image. Each row is refused on the repaired kernel and under the other eight candidates, seals under exactly
+its own mutant, and both renderers show the tier as the first visible text after the image (the two outside rows) or
+render the definition as nothing (the definition row). The three rows were added to tgc-2 (build-fixtures-2.py) and
+to the judge (R03, S07, S08), and run 4 judges all 29 mutants on the extended pairs. The other six of that list stay
+argued equivalents (A08 as G07, B07, H08, R10, S04, S05), their arguments written beside their rows in matrix v6.

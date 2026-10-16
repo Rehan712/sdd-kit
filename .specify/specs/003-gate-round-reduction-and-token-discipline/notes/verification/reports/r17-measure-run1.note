@@ -1,0 +1,12 @@
+r17-measure run 1 (r17-measure-run1.{sh,log,rc,time}, suite log r17-measure-run1-suite.log), 2026-10-08T13:52:01Z to
+14:26:21Z: rc 1 on 8 checks, all one case and a fault of the script, not of the candidate. The B1 long-run positive
+passed a Severity part that repeated the Scenario and Reproduced fields the finding helper already writes, so CUR and
+D both refuse it at rc 3 with the same `duplicate finding field` diagnostics (identical stderr). Every other check
+passed (1056 PASS): each round-16 member, the fence sibling and the derived siblings refused by name on D in both
+passes and both locales; B1 positives parse on both kits; B2's consequences refused on D; B3 the real manifest and
+the fifteen returned files parse; C the whole history identical CUR against D, the seventeen sealed digests equal to
+D's blocks, the waiver checks for rounds 16 and 17, the snapshot records outside the two candidate files (366); 003's
+tally 100 s on D against 104 s on CUR; E the run reader on D under 1 s at 400 lines (CUR 49 s at 100). The full
+suite on D: 145/147, failing test_reports_and_tally and test_rounds only on fixture rows that assert raw HTML inside a
+finding parses (the recorded consequence of the user's narrowed grammar), and one end-to-end round built from them.
+The corrected script writes that finding in full with its long Reproduced field; its run is r17-measure.{log,rc,time}.

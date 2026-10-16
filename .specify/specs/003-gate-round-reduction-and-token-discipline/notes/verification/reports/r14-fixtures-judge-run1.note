@@ -1,0 +1,8 @@
+r14-fixtures-judge run 1 (2026-10-02T18:00:12Z to 18:02:37Z, rc 1), kept as run, with its script (r14-fixtures-judge-run1.sh)
+and its per-function outputs (r14-fixtures-judge-run1-{fx,dx}-*.out). Every check of the fixtures passed: on DX (the
+candidate kernel with the new fixtures) all four changed fixture functions pass; on FX (the unrepaired kernel with the new
+fixtures) each fails, the three direct ones on new rows alone and the end-to-end one first at the first new row. The one
+FAIL is a fault of the judge itself, not of a fixture: the sampled-label check ran `cat ... | grep -q` under
+`set -o pipefail`, so when grep matched early and exited, cat was killed by SIGPIPE and the pipeline reported failure. That
+happened for the first label, `written as nested-badge was not refused`, which run1-fx-report_record_line_cases.out shows
+at line 3 (and line 7, under en_US.UTF-8). The check now reads the files with grep directly; the run of record follows.

@@ -4,7 +4,7 @@ title: Gate round reduction and token discipline
 status: implementing  # draft | accepted | implementing | shipped | rejected
 verification_contract: 1
 created: 2026-09-04
-updated: 2026-09-05
+updated: 2026-09-15
 owners: [Rehan712]
 project: sdd-kit-public
 ---
@@ -196,7 +196,15 @@ need to judge correctness.
   blocks as wrong-result. The report keeps `Reproduced:` per finding and
   `**Blocking:** n · **Minor:** n`. Missing required evidence is handled
   by the floor/reality-check even if no reproduced behavioral defect exists.
-  Severity never changes merely to meet a round or cost target.
+  Severity never changes merely to meet a round or cost target. Threat
+  model (the user's revision of 2026-10-14): gate reports are
+  trusted-author input, written by the kit's own gate agents and read
+  by people as well as by the tally, so a rendering divergence in a
+  report (markdown a renderer shows differently from how the documented
+  report grammar reads it, which that grammar neither reads nor
+  refuses) is degraded, hence minor, and is recorded for a follow-up
+  spec; a report written in the documented grammar that the gate
+  misreads still blocks as wrong-result.
 - **REQ-012 (round cap and report identity):** Before every invocation,
   `spec-gate.sh round <spec-dir> <opponent|reality-check>` determines the
   next number from that gate's canonical reports. Both report templates use

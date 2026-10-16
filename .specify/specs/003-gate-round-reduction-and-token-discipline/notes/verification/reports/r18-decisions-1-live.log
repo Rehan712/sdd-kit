@@ -1,0 +1,15 @@
+PASS the batch holds no placeholder
+PASS the batch holds exactly one authorization line, for round 18
+PASS the batch holds no other authorization line
+PASS live before the batch: round 18 refused at exit 4
+PASS live STATUS.md equals the validated scratch copy
+PASS live tasks.md equals the validated scratch copy
+PASS live round 17 still reported completed
+PASS live round 18 authorized
+PASS live round 19 refused at exit 4
+PASS live analyzer exit 0 with 0 errors
+PASS live the T030o51 block present and unticked
+PASS live the T030o52 block present and unticked
+PASS live the T030o53 block present and unticked
+PASS live the batch is the last Decisions entries
+r18-decisions-1-apply live failures=0

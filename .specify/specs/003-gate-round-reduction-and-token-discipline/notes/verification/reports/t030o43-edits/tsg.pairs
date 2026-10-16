@@ -1,0 +1,223 @@
+@@OLD
+test_acceptance() {
+  local spec repo cap original bad before file receipt rejected_before
+@@NEW
+# AC-022/FM-010/INV-001 — T030o43. Acceptance reads its own parsers' status:
+# the required bindings, the returned bindings and the frontmatter that picks
+# the contract. A sort that failed used to leave the required set empty, and a
+# return owing FM rows was then accepted as `none`; a frontmatter that could
+# not be read chose the legacy path, which ticks a versioned task on
+# --evidence alone. And a declared LC_ALL is one identity through the exec
+# chain `spec-gate.sh accept` takes (O-017): the caller's value, not the pin.
+acceptance_parse_fault_cases() {
+  local spec repo cap f before evidence_before
+  spec="$(make_verification_git_dir acceptfault)"
+  repo="$(cd "$spec/../../.." && pwd -P)"
+  run_rc 0 "$SCRIPTS/spec-run.sh" "$spec" T001 --cwd "$repo" --from-task --no-tick --summary
+  cap="$(printf '%s' "$OUT" | sed -n 's/^capture=\([^ ]*\).*/\1/p')"
+  { printf 'Verification-Return: 1\nTask: T001\nCaptures: %s\nSummary: ' "$cap"
+    cat "$spec/notes/captures/$cap/summary.txt"
+    printf 'Failure modes: none\n'; } > "$SANDBOX/none-return.txt"
+  before="$(cat "$spec/tasks.md")"
+  run_rc 3 "$SCRIPTS/spec-gate.sh" accept "$spec" T001 "$SANDBOX/none-return.txt"
+  assert_contains "$OUT" 'required Failure modes are missing' 'fixture: a return owing FM-001 claims none'
+  f="$SANDBOX/fault-required"; fault_bin "$f" sort '/required'
+  run_rc 3 env PATH="$f:$PATH" "$SCRIPTS/spec-gate.sh" accept "$spec" T001 "$SANDBOX/none-return.txt"
+  assert_contains "$OUT" 'the required bindings could not be sorted' \
+    'AC-022: a required-binding sort that failed accepted a return owing FM rows as none (T030o43)'
+  assert_eq "$before" "$(cat "$spec/tasks.md")" 'AC-022: a failed sort changed tasks bytes'
+  accept_return "$spec" T001 "$cap" "$SANDBOX/good-return.txt"
+  f="$SANDBOX/fault-got"; fault_bin "$f" sort '/got'
+  run_rc 3 env PATH="$f:$PATH" "$SCRIPTS/spec-gate.sh" accept "$spec" T001 "$SANDBOX/good-return.txt"
+  assert_contains "$OUT" 'the returned bindings could not be sorted' \
+    'AC-022: a returned-binding sort that failed was not refused by name (T030o43)'
+  assert_eq "$before" "$(cat "$spec/tasks.md")" 'AC-022: a failed sort changed tasks bytes'
+  # The contract read. The awk fault reaches the checked reader and the sed
+  # fault reaches lib.sh's fm_get, so either reader, failing, is caught.
+  f="$SANDBOX/fault-contract"
+  fault_bin "$f" awk 'key=verification_contract'; fault_bin "$f" sed '^verification_contract:'
+  run_rc 3 env PATH="$f:$PATH" "$SCRIPTS/spec-task.sh" "done" "$spec" T002 --evidence fabricated
+  assert_contains "$OUT" 'frontmatter could not be read for verification_contract' \
+    'AC-022: an unreadable frontmatter let spec-task.sh tick a versioned task on --evidence (T030o43)'
+  assert_eq "$before" "$(cat "$spec/tasks.md")" 'AC-022: an unreadable frontmatter changed tasks bytes'
+  evidence_before="$(cat "$spec/notes/evidence.md")"
+  run_rc 3 env PATH="$f:$PATH" "$SCRIPTS/spec-run.sh" "$spec" T002 --cwd "$repo" --no-tick -- true
+  assert_contains "$OUT" 'frontmatter could not be read for verification_contract' \
+    'AC-022: an unreadable frontmatter sent spec-run.sh down the legacy path (T030o43)'
+  assert_eq "$evidence_before" "$(cat "$spec/notes/evidence.md")" 'AC-022: the legacy path recorded a run'
+  # A declared LC_ALL through spec-gate.sh accept, which execs spec-task.sh.
+  spec="$(make_verification_git_dir acceptlocale)"
+  repo="$(cd "$spec/../../.." && pwd -P)"
+  printf "verification_environment:\n  - 'LC_ALL'\n" >> "$repo/.specify/stack.yml"
+  run_rc 0 in_locale C env LC_ALL=en_US.UTF-8 "$SCRIPTS/spec-run.sh" "$spec" T001 --cwd "$repo" --from-task --no-tick --summary
+  cap="$(printf '%s' "$OUT" | sed -n 's/^capture=\([^ ]*\).*/\1/p')"
+  accept_return "$spec" T001 "$cap" "$SANDBOX/locale-return.txt"
+  before="$(cat "$spec/tasks.md")"
+  run_rc 3 in_locale C env LC_ALL=de_DE.UTF-8 "$SCRIPTS/spec-gate.sh" accept "$spec" T001 "$SANDBOX/locale-return.txt"
+  assert_contains "$OUT" 'capture stale' 'AC-022: another caller LC_ALL accepted a capture its identity does not hash (O-017)'
+  assert_eq "$before" "$(cat "$spec/tasks.md")" 'AC-022: a stale capture changed tasks bytes'
+  run_rc 0 in_locale C env LC_ALL=en_US.UTF-8 "$SCRIPTS/spec-gate.sh" accept "$spec" T001 "$SANDBOX/locale-return.txt"
+  assert_contains "$OUT" 'accept accepted' \
+    "AC-022: the exec chain of spec-gate.sh accept hashed a declared LC_ALL by the pin, not the caller's value (O-017)"
+}
+
+test_acceptance() {
+  acceptance_parse_fault_cases
+  local spec repo cap original bad before file receipt rejected_before
+@@END
+@@OLD
+test_floor() {
+  local spec repo gate id records check
+@@NEW
+# AC-007/FM-014/INV-001 — T030o43 and O-017's checker sibling. The floor, the
+# evidence check and spec-ac-coverage.sh read their own parsers' status: a
+# task list, a worktree or branch frontmatter, or a spec inventory that could
+# not be read fails them by name, where each used to read as no completed
+# tasks, no recorded worktree, or a spec with nothing to check. And an AC id
+# after a byte the caller's locale cannot decode is still an AC id (the pin).
+floor_parse_fault_cases() {
+  local spec repo cli f key legacy
+  spec="$(make_verification_git_dir floorfault)"
+  repo="$(cd "$spec/../../.." && pwd -P)"
+  cli="$(floor_fixture "$spec")"
+  f="$SANDBOX/fault-list"; fault_bin "$f" awk 'is_gate = 0; proof_kind = 0; next'
+  run_rc 3 env PATH="$f:$PATH" bash "$cli" floor "$spec"
+  assert_contains "$OUT" 'floor gap: the task list could not be read' \
+    "AC-007: a task list that could not be read left completed tasks' Verify unrefreshed (T030o43)"
+  run_rc 3 env PATH="$f:$PATH" bash "$SCRIPTS/spec-evidence.sh" "$spec"
+  assert_contains "$OUT" 'current evidence: the task list could not be read' \
+    'AC-007: a task list that could not be read left completed tasks unchecked (T030o43)'
+  for key in worktree branch; do
+    f="$SANDBOX/fault-$key"; fault_bin "$f" awk "key=$key"; fault_bin "$f" sed "^$key:"
+    run_rc 3 env PATH="$f:$PATH" bash "$cli" floor "$spec"
+    assert_contains "$OUT" "frontmatter could not be read for $key" \
+      "AC-007: an unreadable $key skipped the gate's mismatch check (T030o43)"
+  done
+  f="$SANDBOX/fault-contract-evidence"
+  fault_bin "$f" awk 'key=verification_contract'; fault_bin "$f" sed '^verification_contract:'
+  run_rc 3 env PATH="$f:$PATH" bash "$SCRIPTS/spec-evidence.sh" "$spec"
+  assert_contains "$OUT" 'frontmatter could not be read for verification_contract' \
+    'AC-007: an unreadable frontmatter swapped the current-evidence check for the legacy one (T030o43)'
+  cp "$spec/spec.md" "$SANDBOX/floorfault-spec"
+  printf '\n- \222 AC-998 is a criterion no test names\n' >> "$spec/spec.md"
+  if [[ "$(uname -s)" == Darwin && -n "$(printf '\222 AC-998\n' | in_locale en_US.UTF-8 grep -oE 'AC-[0-9]{3}')" ]]; then
+    t_fail 'AC-007: precondition: an unpinned grep under en_US.UTF-8 must miss an id after 0x92 0x20 (O-017)'
+  fi
+  run_rc 1 in_locale en_US.UTF-8 bash "$SCRIPTS/spec-ac-coverage.sh" "$spec"
+  assert_contains "$OUT" 'AC-998 — no test file names it' \
+    'AC-007: spec-ac-coverage.sh read no AC id after an undecodable byte under en_US.UTF-8 (O-017)'
+  cp "$SANDBOX/floorfault-spec" "$spec/spec.md"
+  f="$SANDBOX/fault-acs"; fault_bin "$f" grep 'AC-[0-9]{3}'
+  run_rc 3 env PATH="$f:$PATH" bash "$SCRIPTS/spec-ac-coverage.sh" "$spec"
+  assert_contains "$OUT" 'spec.md could not be read for its AC ids' \
+    'AC-007: an AC inventory that could not be read let spec-ac-coverage.sh find nothing to check (T030o43)'
+  # The legacy evidence check reads its task records and artifact names.
+  legacy="$SANDBOX/legacy-evidence/.specify/specs/001-legacy"; mkdir -p "$legacy"
+  printf -- '---\nspec: 001-legacy\nstatus: accepted\n---\n\n- AC-001: legacy criterion\n' > "$legacy/spec.md"
+  printf -- '---\nspec: 001-legacy\n---\n\n## Backend\n\n- [x] **T001** — Legacy task\n  - *Acceptance:* legacy\n' > "$legacy/tasks.md"
+  run_rc 1 bash "$SCRIPTS/spec-evidence.sh" "$legacy"
+  assert_contains "$OUT" 'T001 is [x] with no *Evidence:* line' 'fixture: the legacy evidence check'
+  f="$SANDBOX/fault-records"; fault_bin "$f" awk 'is_done = ($0 ~ /^- \[[xX]\]/) ? 1 : 0'
+  run_rc 1 env PATH="$f:$PATH" bash "$SCRIPTS/spec-evidence.sh" "$legacy"
+  assert_contains "$OUT" 'tasks.md could not be parsed for its task records' \
+    'AC-007: task records that could not be parsed read as no ticked tasks (T030o43)'
+  printf '  - *Evidence:* screenshot shots/missing.png\n' >> "$legacy/tasks.md"
+  run_rc 1 bash "$SCRIPTS/spec-evidence.sh" "$legacy"
+  assert_contains "$OUT" "names artifact 'shots/missing.png'" 'fixture: the legacy artifact check'
+  f="$SANDBOX/fault-artifacts"; fault_bin "$f" grep 'png|jpg'
+  run_rc 1 env PATH="$f:$PATH" bash "$SCRIPTS/spec-evidence.sh" "$legacy"
+  assert_contains "$OUT" 'T001 evidence could not be searched for artifact names' \
+    'AC-007: artifact names that could not be searched read as none named (T030o43)'
+}
+
+test_floor() {
+  floor_parse_fault_cases
+  local spec repo gate id records check
+@@END
+@@OLD
+# AC-008: completed-through proof and retained bindings gate the next stage.
+test_checkpoints() {
+  local spec repo cap checkpoint observed start end
+@@NEW
+# AC-008/FM-012/INV-004 — T030o43. The completed-through coverage reads its
+# inventories with their status: criteria or references that could not be
+# read used to record fewer coverage bindings and skip the binding-gap check,
+# and the checkpoint sealed.
+checkpoint_parse_fault_cases() {
+  local spec repo cap f
+  spec="$(make_verification_git_dir checkpointfault)"
+  repo="$(cd "$spec/../../.." && pwd -P)"
+  run_rc 0 "$SCRIPTS/spec-run.sh" "$spec" T001 --cwd "$repo" --from-task --no-tick --summary
+  cap="$(printf '%s' "$OUT" | sed -n 's/^capture=\([^ ]*\).*/\1/p')"
+  accept_return "$spec" T001 "$cap" "$SANDBOX/checkpoint-return"
+  run_rc 0 "$SCRIPTS/spec-gate.sh" accept "$spec" T001 "$SANDBOX/checkpoint-return"
+  f="$SANDBOX/fault-criteria"; fault_bin "$f" grep 'AC-[0-9]{3}' '=-'
+  run_rc 3 env PATH="$f:$PATH" "$SCRIPTS/spec-gate.sh" checkpoint "$spec" Backend
+  assert_contains "$OUT" 'checkpoint coverage: the criteria of T001 could not be read' \
+    'AC-008: criteria that could not be read recorded fewer coverage bindings (T030o43)'
+  f="$SANDBOX/fault-refs"; fault_bin "$f" grep '(AC|FM|INV)-[0-9]{3}' '=-'
+  run_rc 3 env PATH="$f:$PATH" "$SCRIPTS/spec-gate.sh" checkpoint "$spec" Backend
+  assert_contains "$OUT" 'checkpoint coverage: the references of T001 could not be read' \
+    'AC-008: references that could not be read skipped the binding-gap check (T030o43)'
+  run_rc 0 "$SCRIPTS/spec-gate.sh" checkpoint "$spec" Backend
+  assert_contains "$OUT" 'completed-task coverage checked' 'fixture: the checkpoint seals unfaulted'
+}
+
+# AC-008: completed-through proof and retained bindings gate the next stage.
+test_checkpoints() {
+  checkpoint_parse_fault_cases
+  local spec repo cap checkpoint observed start end
+@@END
+@@OLD
+test_rounds() {
+  round_authorization_cases
+@@NEW
+# AC-009/AC-012/FM-016 — O-017, end to end through the shipped entrypoint. A
+# CLEARED completion over a manifest line the caller's locale cannot decode is
+# refused as under C; a waiver below such a line in the Decisions log still
+# authorizes; and a Decisions parse that dies is refused by name, never
+# reported as a log with no candidate (T030o43).
+round_locale_cases() {
+  local spec cli res src floor stamp status f
+  spec="$(make_verification_git_dir roundlocale)"
+  cli="$(floor_fixture "$spec")"
+  run_rc 0 bash "$cli" floor "$spec"
+  run_rc 0 bash "$cli" round "$spec" opponent
+  res="$OUT"
+  src="$(printf '%s' "$res" | sed -n 's/.* source=\([^ ]*\).*/\1/p')"
+  floor="$(printf '%s' "$res" | sed -n 's/.* floor=\([^ ]*\).*/\1/p')"
+  stamp="$(printf '%s' "$res" | sed -n 's/.* reserved=\([^ ]*\).*/\1/p')"
+  mkdir -p "$spec/notes/verification/reports"
+  printf '# Prior review\n\n### Finding G-042\n- **Class:** tier-binding\n- **Severity:** data-loss\n- **Scenario:** the operator\222 s key vanished\n' \
+    > "$spec/notes/verification/reports/opponent-findings-review.md"
+  { printf '## Round 1\n**Round:** 1\n**Timestamp:** %s\n**Source:** %s\n**Floor:** %s\n' "$stamp" "$src" "$floor"
+    printf '**Verdict:** CLEARED\n**Blocking:** 0 · **Minor:** 1\n### What I attacked\nManifest tier binding read across a locale.\n'
+    printf '### Finding G-042\n- **Class:** tier-binding\n- **Status:** open\n- **Prior:** none\n- **Severity:** minor\n'
+    printf -- '- **Scenario:** a recorded trigger\n- **Where:** scripts/run.sh:9\n- **Reproduced:** concrete trigger at that site\n'
+    printf -- '- **Root cause:** implementation-error\n- **Blocks:** AC-012\n- **Wrong behavior:** observed versus required\n'
+    printf -- '- **Class-wide fix:** read the manifest under C\n### Held up / follow-up tasks\nFixture disposition recorded.\n'
+    printf '<!-- gate-round-end: opponent:1 -->\n'; } > "$SANDBOX/locale-report.md"
+  if [[ "$(uname -s)" == Darwin ]] && ! locale_hostile en_US.UTF-8; then
+    t_fail 'AC-009: precondition: en_US.UTF-8 is not a locale an unpinned awk fails to decode 0x92 0x20 under (O-017)'
+  fi
+  run_rc 3 in_locale en_US.UTF-8 bash "$cli" round "$spec" opponent --complete "$SANDBOX/locale-report.md"
+  assert_contains "$OUT" 'clearing verdict rests on 1 lowered severity tier(s) of known findings' \
+    'AC-009: a CLEARED completion over an undecodable manifest line sealed under en_US.UTF-8 (O-017)'
+  status="$SANDBOX/waiver-locale"; mkdir -p "$status"
+  printf -- '---\nspec: w\n---\n\n## Decisions log\n\n- 2026-09-06 — a note carrying a \222 byte\n- %s — waiver: gate=opponent; round=4; after=3; by=fixture; reason=fixture authorization\n' \
+    "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > "$status/STATUS.md"
+  run_rc 0 in_locale en_US.UTF-8 bash -c '. "$1"; vf_round_authorized "$2" opponent 4 2026-09-06T12:00:03Z' _ \
+    "$SCRIPTS/verification-lib.sh" "$status"
+  f="$SANDBOX/fault-waiver"; fault_bin "$f" awk 'function knowngate'
+  run_rc 4 env PATH="$f:$PATH" bash -c '. "$1"; vf_round_authorized "$2" opponent 4 2026-09-06T12:00:03Z' _ \
+    "$SCRIPTS/verification-lib.sh" "$status"
+  assert_contains "$OUT" 'the Decisions log in STATUS.md could not be parsed' \
+    'AC-009: a Decisions parse that died was not refused by name (O-017)'
+  assert_not_contains "$OUT" 'no candidate authorization line for this gate was found' \
+    'AC-009: a Decisions parse that died was reported as a log with no candidate (O-017)'
+}
+
+test_rounds() {
+  round_locale_cases
+  round_authorization_cases
+@@END

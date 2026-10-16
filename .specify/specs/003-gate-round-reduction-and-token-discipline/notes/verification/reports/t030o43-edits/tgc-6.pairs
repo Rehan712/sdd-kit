@@ -1,0 +1,78 @@
+@@OLD
+raw-block-left-open|refuse|### Finding G-041\n- **Class:** other-class\n<pre>\n### Finding G-042\n- **Class:** tier-binding\n- **Severity:** data-loss\n
+SHAPES
+@@NEW
+raw-block-left-open|refuse|### Finding G-041\n- **Class:** other-class\n<pre>\n### Finding G-042\n- **Class:** tier-binding\n- **Severity:** data-loss\n
+severity-then-prior|refuse|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** data-loss; **Prior:** minor\n
+minor-then-prior|refuse|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor; **Prior:** data-loss\n
+class-then-status|refuse|### Finding G-042\n- **Class:** tier-binding; **Status:** open\n- **Severity:** data-loss\n
+space-colon-severity|refuse|### Finding G-042\n- **Class:** tier-binding\n- **Severity :** data-loss\n
+nbsp-colon-severity|refuse|### Finding G-042\n- **Class:** tier-binding\n- **Severity\302\240:** data-loss\n
+nnbsp-colon-severity|refuse|### Finding G-042\n- **Class:** tier-binding\n- **Severity\342\200\257:** data-loss\n
+bold-space-colon-severity|refuse|### Finding G-042\n- **Class:** tier-binding\n- **Severity** : data-loss\n
+emdash-severity|refuse|### Finding G-042\n- **Class:** tier-binding\n- **Severity** — data-loss\n
+fullwidth-colon-severity|refuse|### Finding G-042\n- **Class:** tier-binding\n- **Severity：** data-loss\n
+ordered-severity|refuse|### Finding G-042\n- **Class:** tier-binding\n1. **Severity:** data-loss\n
+separatorless-severity|refuse|### Finding G-042\n- **Class:** tier-binding\n- **Severity** data-loss\n
+nested-severity-prose|refuse|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** data-loss\n- **Scenario:** the tier moved\n  - Severity: raised from minor after the repro\n
+nbsp-after-hashes-below-class-only|refuse|### Finding G-041\n- **Class:** other-class\n###\302\240Finding G-042\n- **Severity:** data-loss\n
+tab-before-hashes-below-class-only|refuse|### Finding G-041\n- **Class:** other-class\n\t### Finding G-042\n- **Severity:** data-loss\n
+zwsp-before-hashes-below-class-only|refuse|### Finding G-041\n- **Class:** other-class\n\342\200\213### Finding G-042\n- **Severity:** data-loss\n
+nbsp-before-hashes-below-class-only|refuse|### Finding G-041\n- **Class:** other-class\n\302\240### Finding G-042\n- **Severity:** data-loss\n
+no-space-after-hashes-below-class-only|refuse|### Finding G-041\n- **Class:** other-class\n###Finding G-042\n- **Severity:** data-loss\n
+indented-heading-below-class-only|refuse|### Finding G-041\n- **Class:** other-class\n    ### Finding G-042\n- **Severity:** data-loss\n
+word-before-finding-unbolded|refuse|### Opponent finding G-042\n- Class: tier-binding\n- Severity: data-loss\n
+bold-finding-line-unbolded|refuse|## Summary\n\n**Finding G-042**\n- Severity: data-loss\n
+colon-finding-heading-unbolded|refuse|### Finding: G-042\n- Class: tier-binding\n- Severity: data-loss\n
+id-on-an-outside-line|refuse|## Summary\n\n- Severity: data-loss (G-042)\n
+SHAPES
+@@END
+@@OLD
+finding-summary|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n\n## Finding summary\nOne finding.\n\n```text\n- **Severity:** minor\n```\n
+SHAPES
+@@NEW
+finding-summary|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n\n## Finding summary\nOne finding.\n\n```text\n- **Severity:** minor\n```\n
+summary-prose|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n\n## Summary\n\n- Class: harness-locale-decoding, one finding\n- Severity: all blocking\n
+introduction-prose|# Prior review\n\nSeverity: every finding below is blocking.\n\n### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n
+SHAPES
+@@END
+@@OLD
+  assert_eq 'one criterion with spaces' "$OUT" \
+    "AC-012: the AC catalog kept a non-ASCII space in a criterion's canonical text (T030o43 review 2)"
+@@NEW
+  assert_eq 'one criterion with spaces' "$OUT" \
+    "AC-012: the AC catalog kept a non-ASCII space in a criterion's canonical text (T030o43 review 2)"
+  # A reality-check matrix cell is compared with that catalog by the catalog's
+  # own whitespace rule, so a criterion copied as the spec writes it is the
+  # same criterion (T030o43 review 3, R3-F8).
+  bash -c '. "$1"; vf_ac_catalog "$2" "$3" || exit 9
+    text="$(tr "\000" "\n" < "$3" | sed -n 2p)"; dig="$(tr "\000" "\n" < "$3" | sed -n 3p)"
+    printf "| AC-001 | one\302\240criterion\342\200\203with\343\200\200spaces; sha256:%s | CAP-1; review: x | %s | PASS |\n" "$dig" aaaa > "$4"
+    vf_matrix_parse "$4" "$5" || exit 8
+    [[ "$(tr "\000" "\n" < "$5" | sed -n 2p)" == "$text; sha256:$dig" ]]' _ "$SCRIPTS/verification-lib.sh" \
+    "$SANDBOX/ac-catalog" "$SANDBOX/ac-catalog.nul" "$SANDBOX/ac-matrix.md" "$SANDBOX/ac-matrix.nul" ||
+    t_fail 'AC-013: a matrix criterion cell written as the spec writes it did not equal the AC catalog (T030o43 review 3)'
+  # A canonical field value is the text after its line's FIRST bold label,
+  # taken from the line as written (T030o43 review 3, R3-F1 and R3-F4): a
+  # second label stays in the value and fails its grammar, a Where value keeps
+  # a U+00A0 inside it, and a Finding heading's ID is named as written.
+  local nbw=$'\302\240'
+  tier_round_fixture 1 '' G-042:tier-binding:open:minor |
+    sed 's/^- \*\*Severity:\*\* minor$/- **Severity:** data-loss; **Prior:** minor/' > "$blank_spec/notes/opponent.md"
+  bash -c '. "$1"; vf_reports "$2" opponent "$3" "$4"' _ "$SCRIPTS/verification-lib.sh" \
+    "$blank_spec/notes/opponent.md" "$SANDBOX/section-blank.nul" "$blank_spec" > "$SANDBOX/canonical.out" 2>&1
+  assert_contains "$(cat "$SANDBOX/canonical.out")" 'unknown severity' \
+    'AC-012: a canonical Severity value was read after a second bold label (T030o43 review 3)'
+  tier_round_fixture 1 '' G-042:tier-binding:new:data-loss |
+    sed "s#^- \*\*Where:\*\* scripts/run.sh:9\$#- **Where:** scripts/my${nbw}run.sh:9#" > "$blank_spec/notes/opponent.md"
+  run_rc 0 bash -c '. "$1"; vf_reports "$2" opponent "$3" "$4"' _ \
+    "$SCRIPTS/verification-lib.sh" "$blank_spec/notes/opponent.md" "$SANDBOX/section-blank.nul" "$blank_spec"
+  [[ "$(tr '\000' '\n' < "$SANDBOX/section-blank.nul" | grep -c -F "scripts/my${nbw}run.sh:9")" == 1 ]] ||
+    t_fail 'AC-012: a canonical Where value was not taken as written (T030o43 review 3)'
+  tier_round_fixture 1 '' G-042:tier-binding:new:data-loss |
+    sed "s/^### Finding G-042\$/### Finding G-042${nbw}/" > "$blank_spec/notes/opponent.md"
+  run_rc 3 bash -c '. "$1"; vf_reports "$2" opponent "$3" "$4"' _ \
+    "$SCRIPTS/verification-lib.sh" "$blank_spec/notes/opponent.md" "$SANDBOX/section-blank.nul" "$blank_spec"
+  assert_contains "$OUT" "incomplete finding G-042${nbw};" \
+    'AC-012: a canonical Finding ID was not named as written (T030o43 review 3)'
+@@END

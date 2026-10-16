@@ -29,12 +29,15 @@
 # checkout is resolved via system-map.sh and all are searched.
 #
 # Exit: 0 = every AC has >=1 test reference; 1 = one or more ACs unreferenced or
-#       no root resolvable; 2 = usage.
+#       no root resolvable; 2 = usage; 3 = spec.md could not be read.
 
 set -uo pipefail
 
 HUB_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 . "$HUB_DIR/scripts/lib.sh"
+# The kernel pins the harness's own parsing to LC_ALL=C when it loads, so it
+# loads before any program reads a byte of the spec, on every path (O-017).
+. "$HUB_DIR/scripts/verification-lib.sh"
 SYSMAP="$HUB_DIR/scripts/system-map.sh"
 
 init_colors
@@ -59,11 +62,12 @@ done
 SPEC_DIR="${ARGS[0]:-}"
 [[ -z "$SPEC_DIR" || ! -d "$SPEC_DIR" ]] && { echo "usage: spec-ac-coverage.sh <spec-dir>" >&2; exit 2; }
 SPEC_DIR="$(cd "$SPEC_DIR" && pwd)"
-SPEC="$SPEC_DIR/spec.md"
-[[ -f "$SPEC" ]] || { echo "no spec.md in $SPEC_DIR" >&2; exit 1; }
+# Suffixed name on purpose; see spec-evidence.sh — a caller-exported $SPEC
+# must survive this script unchanged.
+SPEC_FILE="$SPEC_DIR/spec.md"
+[[ -f "$SPEC_FILE" ]] || { echo "no spec.md in $SPEC_DIR" >&2; exit 1; }
 
 if [[ -n "$THROUGH_STAGE" ]]; then
-  . "$HUB_DIR/scripts/verification-lib.sh"
   mkdir -p "$SPEC_DIR/notes/verification" || exit 3
   coverage_tmp="$(mktemp "$SPEC_DIR/notes/verification/coverage-check.XXXXXX")" || exit 3
   trap 'rm -f "$coverage_tmp"' EXIT
@@ -123,7 +127,8 @@ done | sort -u > "$TESTS_TMP"
 test_count="$(grep -c . "$TESTS_TMP" || true)"
 
 # --- per-AC coverage --------------------------------------------------------
-spec_acs="$(grep -oE 'AC-[0-9]{3}' "$SPEC" | sort -u)"
+# Checked: an empty inventory exits 0 below, so a failed read must not look empty.
+spec_acs="$(vf_ids 'AC-[0-9]{3}' "$SPEC_FILE")" || { echo "${RED}✗${RESET} spec.md could not be read for its AC ids" >&2; exit 3; }
 [[ -z "$spec_acs" ]] && { echo "${YELLOW}!${RESET} spec.md defines no AC-### ids — nothing to check"; exit 0; }
 
 echo "AC↔test binding for $(basename "$SPEC_DIR")  (roots: ${ROOTS[*]}; $test_count test file(s))"

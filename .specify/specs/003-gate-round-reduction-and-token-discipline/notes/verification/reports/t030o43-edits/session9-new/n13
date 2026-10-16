@@ -1,0 +1,5 @@
+    function clean(s) {return vf_wstrim(s)}
+    # A field value is the text after the FIRST bold label of the line, taken from
+    # the line as written: a second label further on stays in the value and
+    # fails its grammar, rather than supplying the value (T030o43 review 3).
+    function value(s) {sub(/^[^*]*\*\*[^*]+:\*\*/, "", s); return clean(s)}

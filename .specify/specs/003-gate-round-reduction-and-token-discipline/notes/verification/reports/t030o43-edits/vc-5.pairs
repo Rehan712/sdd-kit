@@ -1,0 +1,13 @@
+@@OLD
+prior finding. A manifest field line is decided by its label and must be
+written `- **Class:**` or `- **Severity:**`, its value the text after that
+label only; a finding, a field or a heading the pass cannot read is refused by
+name, never dropped.
+@@NEW
+prior finding. A manifest field line is decided by its label and must be a
+dash, whitespace and `**Class:**` or `**Severity:**`, its value the text after
+that label only. A field line, a Finding heading or a line that looks like one
+that the pass cannot read is refused by name, and so is a manifest from which
+it reads no finding; a Class or Severity line outside a finding is prose only
+while nothing since the last heading can hold a finding's record.
+@@END

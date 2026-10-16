@@ -1,0 +1,10 @@
+spec_dir="$(make_verification_spec_dir stageproj)"; proj="${spec_dir%/.specify/*}"
+cp "$spec_dir/tasks.md" "$SANDBOX/orig-tasks"
+for suffix in '' $'\302\240' ' '; do
+  sed "s/^## Backend\$/## Backend$suffix/" "$SANDBOX/orig-tasks" > "$spec_dir/tasks.md"
+  printf 'stacks: []\ngate_checks:\n  - %sbash tests/check.sh%s\ncheckpoints:\n  Backend: []\n' "'" "'" > "$SANDBOX/stack.yml"
+  rm -rf "$SANDBOX/cat"
+  c="$(bash -c '. "$1/verification-lib.sh"; vf_config "$2" "$3" "$4" 2>&1; echo "config rc=$?"' _ "$SCRIPTS" "$SANDBOX/stack.yml" "$spec_dir/tasks.md" "$SANDBOX/cat")"
+  b="$(bash -c '. "$1/verification-lib.sh"; vf_bindings "$2" through-stage Backend "$3" 2>&1; echo "through-stage rc=$?"' _ "$SCRIPTS" "$spec_dir" "$SANDBOX/b.nul")"
+  printf '[suffix=%s] %s | %s\n' "$(printf '%s' "$suffix" | LC_ALL=C od -An -c | tr -s ' ')" "$(echo $c)" "$(echo $b)"
+done

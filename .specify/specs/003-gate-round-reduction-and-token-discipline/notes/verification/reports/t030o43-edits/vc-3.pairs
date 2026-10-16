@@ -1,0 +1,27 @@
+@@OLD
+property that separates a record from a hidden instruction. The decisions log
+is the template's exact `## Decisions log` heading, in both views.
+@@NEW
+property that separates a record from a hidden instruction. The authorization
+scanner reads the decisions log under the template's exact `## Decisions log`
+heading. The input manifest keeps a superset: from every line that begins
+`## Decisions log`, quoted or not, to the next `## ` heading the fence tracker
+does not quote, so it never keeps less than the scanner reads, and quoting
+decides only that a heading quoted inside the log does not end it.
+@@END
+@@OLD
+change no record the harness writes (it runs its own parsing under
+`LC_ALL=C`, where each byte is one character, so no byte can end a parse, and
+a byte >= 0x80 is in no character class, so a record line its ASCII grammar
+cannot read is refused by name or, where the harness decides what must be
+covered, kept whole; and a parse that fails never reads as a passing result),
+while a check whose programs read them pins them or declares
+@@NEW
+change no record the harness writes (it runs its own parsing under
+`LC_ALL=C`, where each byte is one character, so no byte can end a parse;
+every parser of author text reads the non-ASCII Unicode White_Space
+characters as whitespace through one shared step and takes a value it passes
+on from the line as written; and a parse that fails, or a grammar token it
+cannot read, is refused by name rather than read as an absence),
+while a check whose programs read them pins them or declares
+@@END

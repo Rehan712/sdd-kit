@@ -1,0 +1,178 @@
+== baselines
+== kill K02-scan-enumerates-without-nul-framing
+  | superseded_environment_cases rc=1
+  |   assert: AC-018: a claim in a file whose name git quotes escaped the scan: café.md missing substring: café.md ::
+  |   assert: AC-018: a claim in a file whose name git quotes escaped the scan: say"hi".md missing substring: say"hi".md ::
+PASS K02-scan-enumerates-without-nul-framing KILLED (want=1 got=1)
+== kill K05-scan-passes-names-through-awk-v
+  | superseded_environment_cases rc=1
+  |   assert: AC-018: a healthy tree with unusual names failed the scan
+  |   assert: AC-018: a claim in a file named new
+PASS K05-scan-passes-names-through-awk-v KILLED (want=1 got=1)
+== over O01-scan-skips-every-spec-file
+  | superseded_environment_cases rc=1
+  |   assert: AC-018: another spec's current notes escaped the superseded-rule scan missing substring: 004-y/notes/history.md
+  |   assert: AC-018: a claim on a spec body line escaped the scan missing substring: .specify/specs/004-y/tasks.md ::
+PASS O01-scan-skips-every-spec-file KILLED (want=1 got=1)
+== kill K08-source-paths-drops-root-check
+  | superseded_environment_cases rc=1
+  |   assert: expected exit 1, got 0: superseded_environment_scan /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/1c1e945f-3f81-4ba8-8888-8263f1ca2273/scratchpad/t030o41-mut-shard1/tm
+  |   assert: AC-018: a repository subdirectory was scanned as if it were the whole source missing substring: superseded_environment_scan: cannot enumerate
+  | kit_copy_cases rc=1
+  |   assert: expected exit 1, got 0: copy_kit /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/1c1e945f-3f81-4ba8-8888-8263f1ca2273/scratchpad/t030o41-mut-shard1/tmp/sddkit.OQRv7E/kit
+  |   assert: AC-020: a repository subdirectory was copied as a whole kit missing substring: copy_kit: cannot enumerate
+PASS K08-source-paths-drops-root-check KILLED (want=1 got=1)
+== kill K11-analyzer-loop-reads-raw-bytes
+  | test_verification_bindings rc=1
+  |   assert: expected exit 0, got 1: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/1c1e945f-3f81-4ba8-8888-8263f1ca2273/scratchpad/t030o41-mut-shard1/copy/scripts/sdd-analyze.sh /p
+  |   assert: AC-023: in the identity's view, text on a shipped Evidence line changed the analyzer verdict: cross-checked with *Agent:* agents/opponent-retired.md unexpectedly contains: opponent g
+PASS K11-analyzer-loop-reads-raw-bytes KILLED (want=1 got=1)
+== over O02-analyzer-strips-markers-everywhere
+  | test_verification_bindings rc=1
+  |   assert: expected exit 1, got 0: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/1c1e945f-3f81-4ba8-8888-8263f1ca2273/scratchpad/t030o41-mut-shard1/copy/scripts/sdd-analyze.sh /p
+  |   assert: AC-023: the same text on a body line did not reach the analyzer: cross-checked with *Agent:* agents/opponent-retired.md missing substring: opponent gate agent file not found: agents/
+PASS O02-analyzer-strips-markers-everywhere KILLED (want=1 got=1)
+== kill K16-copy-kit-copies-deleted-paths
+  | kit_copy_cases rc=1
+  |   assert: expected exit 0, got 1: copy_kit /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/1c1e945f-3f81-4ba8-8888-8263f1ca2273/scratchpad/t030o41-mut-shard1/tmp/sddkit.qFSUj1/kit
+PASS K16-copy-kit-copies-deleted-paths KILLED (want=1 got=1)
+== kill K19-copy-kit-trap-and-exit
+  | kit_copy_cases rc=1
+  |   assert: AC-020: a failing copy_kit removed a path named by its caller's variables
+PASS K19-copy-kit-trap-and-exit KILLED (want=1 got=1)
+== kill K20-doctor-fixture-is-cp-R
+  | test_AC_009_doctor_fixture_excludes_machine_local_kit_files rc=1
+  |   assert: AC-009: the doctor fixture carried the host's ignored system-map.yml
+  |   assert: AC-009: the doctor fixture carried the host's ignored models.yml
+PASS K20-doctor-fixture-is-cp-R KILLED (want=1 got=1)
+== kill K45-wizard-fixture-is-cp-R
+  | test_AC_008_wizard_fixture_never_writes_through_a_host_models_yml rc=1
+  |   assert: AC-008: the wizard fixture wrote through the host kit's models.yml link
+PASS K45-wizard-fixture-is-cp-R KILLED (want=1 got=1)
+== kill K25-shellcheck-reads-SHELLCHECK_OPTS
+  | reuse_command_input_cases rc=1
+  |   assert: expected exit 0, got 1: env CDPATH=. SHELLCHECK_OPTS=--enable=check-unassigned-uppercase bash -c cd "$1" && bash tests/shellcheck.sh _ /private/tmp/claude-501/-Users-babar-projects-s
+PASS K25-shellcheck-reads-SHELLCHECK_OPTS KILLED (want=1 got=1)
+== kill K28-executable-check-globs
+  | test_AC_011_ignored_local_scripts_do_not_decide_the_executable_check rc=1
+  |   assert: tracked without the executable bit: zz-local.sh
+PASS K28-executable-check-globs KILLED (want=1 got=1)
+== kill K31-tally-reads-records-in-place
+  | test_empty_record_directories_do_not_decide_the_002_tally rc=1
+  |   assert: expected exit 0, got 3: bash /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/1c1e945f-3f81-4ba8-8888-8263f1ca2273/scratchpad/t030o41-mut-shard1/copy/scripts/spec-gate.sh
+  |   assert: output missing substring: execution-observations=0 check-executions=0 cache-hits=0 captures=0 full-log-bytes=0 returned-summary-bytes=0 usage=unknown baseline-usage=unknown
+PASS K31-tally-reads-records-in-place KILLED (want=1 got=1)
+== kill K34-kernel-keeps-git-local-environment
+  | reuse_command_input_cases rc=1
+  |   assert: AC-020: an exported GIT_INDEX_FILE redirected the enumeration to a foreign index unexpectedly contains: only-in-foreign.md
+  |   assert: expected exit 0, got 3: env GIT_DIR=/private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/1c1e945f-3f81-4ba8-8888-8263f1ca2273/scratchpad/t030o41-mut-shard1/tmp/sddkit.uaXtEF/
+  | superseded_environment_cases rc=1
+  |   assert: AC-018: an exported GIT_DIR stopped the scan, although the identity ignores it
+  |   assert: AC-018: an exported GIT_DIR hid a claim the identity hashes missing substring: .specify/specs/004-y/tasks.md ::
+PASS K34-kernel-keeps-git-local-environment KILLED (want=1 got=1)
+== kill K35-root-compared-by-spelling
+  | reuse_command_input_cases rc=1
+  |   assert: expected exit 2, got 1: bash /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/1c1e945f-3f81-4ba8-8888-8263f1ca2273/scratchpad/t030o41-mut-shard1/tmp/sddkit.WJ5y0p/HOST-KI
+  |   assert: AC-020: tests/run.sh refused a case-variant spelling of the kit path missing substring: no test file matches 'zz-none'
+PASS K35-root-compared-by-spelling KILLED (want=1 got=1)
+== kill K38-helpers-keep-CDPATH
+  | reuse_command_input_cases rc=1
+  |   assert: expected exit 0, got 1: git_config_pinned /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/1c1e945f-3f81-4ba8-8888-8263f1ca2273/scratchpad/t030o41-mut-shard1/tmp/sddkit.T
+  |          assert: AC-011: cannot enumerate the kit scripts
+PASS K38-helpers-keep-CDPATH KILLED (want=1 got=1)
+== kill K41-floor-fixture-copies-with-cp-R
+  | test_floor_fixture_stages_only_enumerated_scripts rc=1
+  |   assert: AC-007: floor_fixture staged the host kit's ignored script
+PASS K41-floor-fixture-copies-with-cp-R KILLED (want=1 got=1)
+== kill K44-stage-example-copies-with-cp-R
+  | test_stage_example_copies_only_enumerated_files rc=1
+  |   assert: stage_example staged the host kit's ignored file
+PASS K44-stage-example-copies-with-cp-R KILLED (want=1 got=1)
+== kill K47-snapshot-clears-git-environment-for-its-whole-shell
+  | reuse_command_input_cases rc=1
+  |   assert: AC-020: two values of a declared git repository-local variable gave one identity
+  |   assert: AC-020: a declared git repository-local variable was recorded as unset missing substring: environment
+PASS K47-snapshot-clears-git-environment-for-its-whole-shell KILLED (want=1 got=1)
+== kill K50-config-pin-reads-the-system-level
+  | reuse_command_input_cases rc=1
+  |   assert: AC-020: precondition: the XDG ignore rule does not hide the script from the identity unexpectedly contains: zz-xdg.sh
+  |   assert: expected exit 0, got 1: git_config_pinned /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/1c1e945f-3f81-4ba8-8888-8263f1ca2273/scratchpad/t030o41-mut-shard1/tmp/sddkit.L
+PASS K50-config-pin-reads-the-system-level KILLED (want=1 got=1)
+== witness W02-K44-survives-without-the-EXAMPLE-binding
+  | test_stage_example_copies_only_enumerated_files rc=0
+PASS W02-K44-survives-without-the-EXAMPLE-binding SURVIVES (witness) (want=1 got=1)
+== kill K61-config-pin-leaves-HOME
+  | reuse_command_input_cases rc=1
+  |   assert: expected exit 0, got 1: env CDPATH=. SHELLCHECK_OPTS=--enable=check-unassigned-uppercase bash -c cd "$1" && bash tests/shellcheck.sh _ /private/tmp/claude-501/-Users-babar-projects-s
+  |   assert: AC-020: precondition: the XDG ignore rule does not hide the script from the identity unexpectedly contains: zz-xdg.sh
+PASS K61-config-pin-leaves-HOME KILLED (want=1 got=1)
+== equiv E09-inert-FIXTURES-bindings-dropped
+  | test_AC_009_doctor_fixture_excludes_machine_local_kit_files rc=0
+  | test_AC_003_dispatch_fixture_copies_only_enumerated_scripts rc=0
+PASS E09-inert-FIXTURES-bindings-dropped SURVIVES (argued equivalent) (want=2 got=2)
+== kill K54-fixture-git-reads-the-caller-HOME
+  | fixture_repository_cases rc=1
+  |   assert: AC-020: make_verification_git_dir failed under a user's git configuration or a hook's environment
+  |   assert: AC-020: a user's git configuration or a hook's environment left the fixture repository without a commit
+PASS K54-fixture-git-reads-the-caller-HOME KILLED (want=1 got=1)
+== kill K73-fixture-git-leaves-the-installation-template
+  | fixture_repository_cases rc=1
+  |   assert: AC-020: a template's info/exclude reached a host repository
+PASS K73-fixture-git-leaves-the-installation-template KILLED (want=1 got=1)
+== kill K55-fixture-build-failure-returns-success
+  | fixture_repository_cases rc=1
+  |   assert: AC-020: a fixture repository that could not be built returned success
+PASS K55-fixture-build-failure-returns-success KILLED (want=1 got=1)
+== kill K69-failed-build-left-unrecorded
+  | fixture_repository_cases rc=1
+  |   assert: AC-020: a fixture repository that could not be built was not reported by name missing substring: cannot build the make_verification_git_dir failing fixture
+  |   assert: AC-020: a failed fixture build left no record for the runner missing substring: make_verification_git_dir failing
+PASS K69-failed-build-left-unrecorded KILLED (want=1 got=1)
+== kill K57-kit-copy-fixture-pre-repair
+  | kit_copy_cases@hostile rc=1
+  |   assert: expected exit 0, got 1: copy_kit /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/1c1e945f-3f81-4ba8-8888-8263f1ca2273/scratchpad/t030o41-mut-shard1/tmp/sddkit.bOSSBS/kit
+  |   assert: AC-020: copy_kit dropped the enumerated path .gitignore
+PASS K57-kit-copy-fixture-pre-repair KILLED (want=1 got=1)
+== kill K63-scan-tree-3-built-with-raw-git
+  | superseded_environment_cases@hostile rc=1
+  |   assert: AC-018: the scan could not read its fixture tree
+  |   assert: AC-018: the scan could not read its fixture tree
+PASS K63-scan-tree-3-built-with-raw-git KILLED (want=1 got=1)
+== equiv E11-letterless-spec-fixture-pre-repair
+  | bookkeeping_anchor_cases@hostile rc=0
+PASS E11-letterless-spec-fixture-pre-repair SURVIVES (argued equivalent) (want=1 got=1)
+== equiv E13-repository-config-with-raw-git
+  | test_capture_provenance@hostile rc=0
+PASS E13-repository-config-with-raw-git SURVIVES (argued equivalent) (want=1 got=1)
+== record R02-kit-copy-build-checks-removed
+  | unmutated kit_copy_cases@no-writes rc=1
+PASS R02-kit-copy-build-checks-removed unmutated judge records kit-copy (want=0 got=0)
+  | kit_copy_cases@no-writes rc=1
+  |   assert: expected exit 0, got 1: copy_kit /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/1c1e945f-3f81-4ba8-8888-8263f1ca2273/scratchpad/t030o41-mut-shard1/tmp/sddkit.2PjsTU/kit
+  |   assert: AC-020: copy_kit dropped the enumerated path .gitignore
+PASS R02-kit-copy-build-checks-removed KILLED (want=1 got=1)
+== record R05-scan-tree-2-build-check-removed
+  | unmutated superseded_environment_cases@no-writes rc=1
+PASS R05-scan-tree-2-build-check-removed unmutated judge records scan-tree-2 (want=0 got=0)
+  | superseded_environment_cases@no-writes rc=1
+  |   assert: AC-018: the scan could not read its fixture tree
+  |   assert: AC-018: the superseded claim survived as verbatim.md missing substring: verbatim.md
+PASS R05-scan-tree-2-build-check-removed KILLED (want=1 got=1)
+== record R08-nested-clone-build-check-removed
+  | unmutated test_ignored_local_scripts_do_not_reach_the_documented_workflow@no-writes rc=1
+PASS R08-nested-clone-build-check-removed unmutated judge records nested-clone (want=0 got=0)
+  | test_ignored_local_scripts_do_not_reach_the_documented_workflow@no-writes rc=1
+  |   assert: cannot build the host kit
+  |   assert: documented fixture: cannot copy the kit scripts
+PASS R08-nested-clone-build-check-removed KILLED (want=1 got=1)
+== kill K75-fixture-git-climbs-out-of-the-sandbox
+  | fixture_repository_cases rc=1
+  |   assert: AC-020: a write after a failed fixture build staged files in an enclosing repository
+PASS K75-fixture-git-climbs-out-of-the-sandbox KILLED (want=1 got=1)
+== kill K78-floor-fixture-failure-lost-in-a-substitution
+  | test_floor_fixture_failure_is_named_and_stays_in_the_sandbox rc=1
+  |   assert: floor_fixture handed its caller something other than a sandbox path: 'assert: AC-007: cannot stage the kit scripts
+  |   assert: floor_fixture left no record of the failed copy missing substring: floor_fixture kit scripts
+PASS K78-floor-fixture-failure-lost-in-a-substitution KILLED (want=1 got=1)
+matrix rows in this run: shard 1/3, rows 0..107 seen
+matrix failures=0

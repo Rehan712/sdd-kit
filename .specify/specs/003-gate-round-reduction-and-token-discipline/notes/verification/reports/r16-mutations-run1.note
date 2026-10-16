@@ -1,0 +1,11 @@
+r16-mutations run 1 (2026-10-07T21:34:09Z to 22:05:13Z), matrix v4 in two shards on the repaired tree, after the probe and
+X12's relabel (the script it ran is kept as r15-mutations-v4-run1.sh): shard 1 exit 0; shard 0 rc 1 on one row only.
+Every one of the 171 rows ran exactly once: 159 killed with their exact diagnostics, the 11 argued equivalents surviving,
+every baseline passing, every restore byte-identical, no watchdog. The one failure: L17, a kill row carried unchanged from
+v3 (so outside the probe), SURVIVED. L17 drops the reading as written (vf_label_read's fallback); its only row,
+`- \`<Severity>\` data-loss`, is now read by T030o47's code-span reading too, so the guard was shielded, as session 15's
+L18 was. The reading as written alone still reads a visible tier behind an undefined footnote reference,
+`- [^Severity] data-loss`, which markdown-it 12.3.2 and marked 17.0.5 render literally while the rendered readings take it
+for a footnote number (r16-l17-probe.{sh,cases,log,rc}, run on copies of the kernel in the scratchpad). That row and its canonical twin are
+added by r16-edits/tgc-2.pairs, judged first in standalone copies (r16-fixtures-judge-2.*), then applied, L17 renamed to
+the new row and probed, the dev runs repeated on the final tree, and the matrix of record re-run in full.
