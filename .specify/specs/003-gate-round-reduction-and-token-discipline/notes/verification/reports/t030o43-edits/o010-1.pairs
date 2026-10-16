@@ -1,0 +1,9 @@
+@@OLD
+# value cannot be written. LC_ALL is the one name the harness changes, so a
+# declared LC_ALL is hashed by the value the caller, and the captured command,
+# has, never by the pin.
+@@NEW
+# value cannot be written. LC_ALL is the one name the harness changes, so the
+# record of a declared LC_ALL carries the value the caller, and the captured
+# command, has, never the pin's.
+@@END

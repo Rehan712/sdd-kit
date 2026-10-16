@@ -1,0 +1,246 @@
+assert: AC-012: a manifest tier written as heading-label was not refused by name under LANG=C (O-018) missing substring: a Severity line this grammar cannot read: #### Severity: data-loss
+    in: manifest line 6: finding G-042 has no readable Severity: #### Severity: data-loss
+report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines/notes/verification/reports/opponent-findings-review.md: prior-review manifest could not be parsed; reconcile canonical records
+assert: AC-012: a manifest tier written as heading-label was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a Severity line this grammar cannot read: #### Severity: data-loss
+    in: manifest line 6: finding G-042 has no readable Severity: #### Severity: data-loss
+report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines/notes/verification/reports/opponent-findings-review.md: prior-review manifest could not be parsed; reconcile canonical records
+assert: AC-012: a manifest tier written as heading-body was not refused by name under LANG=C (O-018) missing substring: a Severity line this grammar cannot read: #### Severity
+    in: manifest line 8: finding G-042 has no readable Severity: data-loss
+report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines/notes/verification/reports/opponent-findings-review.md: prior-review manifest could not be parsed; reconcile canonical records
+assert: AC-012: a manifest tier written as heading-body was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a Severity line this grammar cannot read: #### Severity
+    in: manifest line 8: finding G-042 has no readable Severity: data-loss
+report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines/notes/verification/reports/opponent-findings-review.md: prior-review manifest could not be parsed; reconcile canonical records
+assert: AC-012: a manifest tier written as heading-under-level-two was not refused by name under LANG=C (O-018) missing substring: a Severity line this grammar cannot read: ### Severity: data-loss
+    in: manifest line 6: finding G-042 has no readable Severity: ### Severity: data-loss
+report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines/notes/verification/reports/opponent-findings-review.md: prior-review manifest could not be parsed; reconcile canonical records
+assert: AC-012: a manifest tier written as heading-under-level-two was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a Severity line this grammar cannot read: ### Severity: data-loss
+    in: manifest line 6: finding G-042 has no readable Severity: ### Severity: data-loss
+report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines/notes/verification/reports/opponent-findings-review.md: prior-review manifest could not be parsed; reconcile canonical records
+assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines
+    output: 
+assert: AC-012: a manifest tier written as second-tier-autolink was not refused by name under LANG=C (O-018) missing substring: a second Severity line in finding G-042: - <Severity:data-loss>
+    in: 
+assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines
+    output: 
+assert: AC-012: a manifest tier written as second-tier-autolink was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a second Severity line in finding G-042: - <Severity:data-loss>
+    in: 
+assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines
+    output: 
+assert: AC-012: a manifest tier written as second-tier-non-tag was not refused by name under LANG=C (O-018) missing substring: a second Severity line in finding G-042: - <Severity: data-loss>
+    in: 
+assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines
+    output: 
+assert: AC-012: a manifest tier written as second-tier-non-tag was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a second Severity line in finding G-042: - <Severity: data-loss>
+    in: 
+assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines
+    output: 
+assert: AC-012: a manifest tier written as second-tier-empty-link was not refused by name under LANG=C (O-018) missing substring: a second Severity line in finding G-042: - [](x)**Severity:** data-loss
+    in: 
+assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines
+    output: 
+assert: AC-012: a manifest tier written as second-tier-empty-link was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a second Severity line in finding G-042: - [](x)**Severity:** data-loss
+    in: 
+assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines
+    output: 
+assert: AC-012: a manifest tier written as second-tier-link-title was not refused by name under LANG=C (O-018) missing substring: a second Severity line in finding G-042: - [](#a "t")Severity: data-loss
+    in: 
+assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines
+    output: 
+assert: AC-012: a manifest tier written as second-tier-link-title was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a second Severity line in finding G-042: - [](#a "t")Severity: data-loss
+    in: 
+assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines
+    output: 
+assert: AC-012: a manifest tier written as second-tier-image was not refused by name under LANG=C (O-018) missing substring: a second Severity line in finding G-042: - ![logo](y)Severity: data-loss
+    in: 
+assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines
+    output: 
+assert: AC-012: a manifest tier written as second-tier-image was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a second Severity line in finding G-042: - ![logo](y)Severity: data-loss
+    in: 
+assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines
+    output: 
+assert: AC-012: a manifest tier written as second-tier-reference-link was not refused by name under LANG=C (O-018) missing substring: a second Severity line in finding G-042: - [][r]Severity: data-loss
+    in: 
+assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines
+    output: 
+assert: AC-012: a manifest tier written as second-tier-reference-link was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a second Severity line in finding G-042: - [][r]Severity: data-loss
+    in: 
+assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines
+    output: 
+assert: AC-012: a manifest tier written as second-tier-footnote was not refused by name under LANG=C (O-018) missing substring: a second Severity line in finding G-042: - [^1]Severity: data-loss
+    in: 
+assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines
+    output: 
+assert: AC-012: a manifest tier written as second-tier-footnote was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a second Severity line in finding G-042: - [^1]Severity: data-loss
+    in: 
+assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines
+    output: 
+assert: AC-012: a manifest tier written as second-tier-nested-destination was not refused by name under LANG=C (O-018) missing substring: a second Severity line in finding G-042: - [](a(b)c)Severity: data-loss
+    in: 
+assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines
+    output: 
+assert: AC-012: a manifest tier written as second-tier-nested-destination was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a second Severity line in finding G-042: - [](a(b)c)Severity: data-loss
+    in: 
+assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines
+    output: 
+assert: AC-012: a manifest tier written as second-tier-code-span-tag was not refused by name under LANG=C (O-018) missing substring: a second Severity line in finding G-042: - `<Severity>` data-loss
+    in: 
+assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines
+    output: 
+assert: AC-012: a manifest tier written as second-tier-code-span-tag was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a second Severity line in finding G-042: - `<Severity>` data-loss
+    in: 
+assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines
+    output: 
+assert: AC-012: a manifest tier written as second-tier-code-span-opener was not refused by name under LANG=C (O-018) missing substring: a second Severity line in finding G-042: - `<!--` Severity: data-loss
+    in: 
+assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines
+    output: 
+assert: AC-012: a manifest tier written as second-tier-code-span-opener was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a second Severity line in finding G-042: - `<!--` Severity: data-loss
+    in: 
+assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines
+    output: 
+assert: AC-012: a manifest tier written as second-tier-blockquoted was not refused by name under LANG=C (O-018) missing substring: quoted content carries a Severity line: > - **Severity:** data-loss
+    in: 
+assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines
+    output: 
+assert: AC-012: a manifest tier written as second-tier-blockquoted was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: quoted content carries a Severity line: > - **Severity:** data-loss
+    in: 
+assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines
+    output: 
+assert: AC-012: a manifest tier written as nested-badge was not refused by name under LANG=C (O-018) missing substring: a second Severity line in finding G-042: - [![badge](y.png)](z)Severity: data-loss
+    in: 
+assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines
+    output: 
+assert: AC-012: a manifest tier written as nested-badge was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a second Severity line in finding G-042: - [![badge](y.png)](z)Severity: data-loss
+    in: 
+assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines
+    output: 
+assert: AC-012: a manifest tier written as nested-badge-empty-alt was not refused by name under LANG=C (O-018) missing substring: a second Severity line in finding G-042: - [![](y)](z)Severity: data-loss
+    in: 
+assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines
+    output: 
+assert: AC-012: a manifest tier written as nested-badge-empty-alt was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a second Severity line in finding G-042: - [![](y)](z)Severity: data-loss
+    in: 
+assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines
+    output: 
+assert: AC-012: a manifest tier written as nested-brackets was not refused by name under LANG=C (O-018) missing substring: a second Severity line in finding G-042: - [[]](x)Severity: data-loss
+    in: 
+assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines
+    output: 
+assert: AC-012: a manifest tier written as nested-brackets was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a second Severity line in finding G-042: - [[]](x)Severity: data-loss
+    in: 
+assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines
+    output: 
+assert: AC-012: a manifest tier written as escaped-bracket-alt was not refused by name under LANG=C (O-018) missing substring: a second Severity line in finding G-042: - ![a\]b](y)Severity: data-loss
+    in: 
+assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines
+    output: 
+assert: AC-012: a manifest tier written as escaped-bracket-alt was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a second Severity line in finding G-042: - ![a\]b](y)Severity: data-loss
+    in: 
+assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines
+    output: 
+assert: AC-012: a manifest tier written as empty-link-across was not refused by name under LANG=C (O-018) missing substring: a second Severity line in finding G-042: ](x)Severity: data-loss
+    in: 
+assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines
+    output: 
+assert: AC-012: a manifest tier written as empty-link-across was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a second Severity line in finding G-042: ](x)Severity: data-loss
+    in: 
+assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines
+    output: 
+assert: AC-012: a manifest tier written as link-title-across was not refused by name under LANG=C (O-018) missing substring: a second Severity line in finding G-042: "t")Severity: data-loss
+    in: 
+assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines
+    output: 
+assert: AC-012: a manifest tier written as link-title-across was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a second Severity line in finding G-042: "t")Severity: data-loss
+    in: 
+assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines
+    output: 
+assert: AC-012: a manifest tier written as image-alt-across was not refused by name under LANG=C (O-018) missing substring: a second Severity line in finding G-042: dge](y)Severity: data-loss
+    in: 
+assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines
+    output: 
+assert: AC-012: a manifest tier written as image-alt-across was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a second Severity line in finding G-042: dge](y)Severity: data-loss
+    in: 
+assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines
+    output: 
+assert: AC-012: a second tier written as sub-heading was not refused by name under LANG=C (O-018) missing substring: a Severity line this grammar cannot read in finding G-050
+    in: 
+assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines
+    output: 
+assert: AC-012: a second tier written as sub-heading was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a Severity line this grammar cannot read in finding G-050
+    in: 
+assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines
+    output: 
+assert: AC-012: a second tier written as second-tier-autolink was not refused by name under LANG=C (O-018) missing substring: a Severity line this grammar cannot read in finding G-050
+    in: 
+assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines
+    output: 
+assert: AC-012: a second tier written as second-tier-autolink was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a Severity line this grammar cannot read in finding G-050
+    in: 
+assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines
+    output: 
+assert: AC-012: a second tier written as second-tier-non-tag was not refused by name under LANG=C (O-018) missing substring: a Severity line this grammar cannot read in finding G-050
+    in: 
+assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines
+    output: 
+assert: AC-012: a second tier written as second-tier-non-tag was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a Severity line this grammar cannot read in finding G-050
+    in: 
+assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines
+    output: 
+assert: AC-012: a second tier written as second-tier-empty-link was not refused by name under LANG=C (O-018) missing substring: a Severity line this grammar cannot read in finding G-050
+    in: 
+assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines
+    output: 
+assert: AC-012: a second tier written as second-tier-empty-link was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a Severity line this grammar cannot read in finding G-050
+    in: 
+assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines
+    output: 
+assert: AC-012: a second tier written as second-tier-image was not refused by name under LANG=C (O-018) missing substring: a Severity line this grammar cannot read in finding G-050
+    in: 
+assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines
+    output: 
+assert: AC-012: a second tier written as second-tier-image was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a Severity line this grammar cannot read in finding G-050
+    in: 
+assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines
+    output: 
+assert: AC-012: a second tier written as second-tier-blockquoted was not refused by name under LANG=C (O-018) missing substring: quoted content carries a Severity line
+    in: 
+assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines
+    output: 
+assert: AC-012: a second tier written as second-tier-blockquoted was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: quoted content carries a Severity line
+    in: 
+assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines
+    output: 
+assert: AC-012: a second tier written as nested-badge was not refused by name under LANG=C (O-018) missing substring: a Severity line this grammar cannot read in finding G-050
+    in: 
+assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines
+    output: 
+assert: AC-012: a second tier written as nested-badge was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a Severity line this grammar cannot read in finding G-050
+    in: 
+assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines
+    output: 
+assert: AC-012: a second tier written as nested-brackets was not refused by name under LANG=C (O-018) missing substring: a Severity line this grammar cannot read in finding G-050
+    in: 
+assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines
+    output: 
+assert: AC-012: a second tier written as nested-brackets was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a Severity line this grammar cannot read in finding G-050
+    in: 
+assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines
+    output: 
+assert: AC-012: a second tier written as link-title-across was not refused by name under LANG=C (O-018) missing substring: a Severity line this grammar cannot read in finding G-050
+    in: 
+assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines
+    output: 
+assert: AC-012: a second tier written as link-title-across was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a Severity line this grammar cannot read in finding G-050
+    in: 
+assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines
+    output: 
+assert: AC-012: a finding line beginning with a label (  (class) line outside any Finding in both locales.) was read as prose (T030o44 review F2) missing substring: line this grammar cannot read in finding G-042
+    in: 
+assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines
+    output: 
+assert: AC-012: a finding line beginning with a label (  - "Severity" here is the tier the count reads.) was read as prose (T030o44 review F2) missing substring: line this grammar cannot read in finding G-042
+    in: 
+assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-inv-0/tmp/sddkit.hhWcg0/record-lines
+    output: 
+assert: AC-012: a finding line beginning with a code span holding a label was read as prose (T030o44) missing substring: a Severity line this grammar cannot read in finding G-042
+    in: 

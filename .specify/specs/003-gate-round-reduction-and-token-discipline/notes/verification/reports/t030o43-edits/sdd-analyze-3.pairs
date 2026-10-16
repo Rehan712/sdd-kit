@@ -1,0 +1,10 @@
+@@OLD
+  /^##[^#]/ { sub(/^##[[:space:]]*/,""); stage=$0 }
+@@NEW
+  /^##[^#]/ { stage=vf_heading_text(vf_original) }
+@@END
+@@OLD
+  /^##[^#]/ { flush(); sub(/^##[[:space:]]*/,""); stage=$0 }
+@@NEW
+  /^##[^#]/ { flush(); stage=vf_heading_text(vf_original) }
+@@END

@@ -1,0 +1,40 @@
+# ENVIRONMENT sections (macOS man pages, 2026-09-26) of the 38 programs the full suite ran through PATH (o016-census-counts.txt), names only.
+# Locale names are the POSIX set; programs whose page has no ENVIRONMENT section still call setlocale() where their STANDARDS/strftime(3)/regex(3) behaviour depends on it (date %p: LC_TIME).
+awk       POSIXLY_CORRECT 
+basename  <no ENVIRONMENT section>
+cat       <no ENVIRONMENT section>
+chmod     <no ENVIRONMENT section>
+cksum     <no ENVIRONMENT section>
+cmp       <no ENVIRONMENT section>
+cp        <no ENVIRONMENT section>
+cut       LANG LC_ALL LC_CTYPE 
+date      <no ENVIRONMENT section>
+dirname   <no ENVIRONMENT section>
+env       PATH 
+find      LANG LC_ALL LC_COLLATE LC_CTYPE LC_MESSAGES LC_TIME 
+grep      GNU GREP_OPTIONS 
+head      <no ENVIRONMENT section>
+id        <no ENVIRONMENT section>
+ln        <no ENVIRONMENT section>
+mkdir     <no ENVIRONMENT section>
+mktemp    <no ENVIRONMENT section>
+mv        <no ENVIRONMENT section>
+od        LANG LC_ALL LC_CTYPE 
+paste     <no ENVIRONMENT section>
+readlink  <no ENVIRONMENT section>
+rm        <no ENVIRONMENT section>
+rmdir     <no ENVIRONMENT section>
+script    SCRIPT SHELL 
+sed       COLUMNS LANG LC_ALL LC_COLLATE LC_CTYPE 
+sh        <no ENVIRONMENT section>
+shasum    <no ENVIRONMENT section>
+sleep     <no ENVIRONMENT section>
+sort      GNU GNUSORT_COMPATIBLE_BLANKS GNUSORT_NUMERIC_COMPATIBILITY LANG LC_ALL LC_COLLATE LC_CTYPE LC_MESSAGES LC_NUMERIC LC_TIME TMPDIR 
+tail      <no ENVIRONMENT section>
+tar       LANG TAPE TAR_READER_OPTIONS TAR_WRITER_OPTIONS 
+tee       <no ENVIRONMENT section>
+touch     <no ENVIRONMENT section>
+tr        LANG LC_ALL LC_COLLATE LC_CTYPE 
+uname     UNAME_ UNAME_MACHINE UNAME_NODENAME UNAME_RELEASE UNAME_SYSNAME UNAME_VERSION 
+wc        LANG LC_ALL LC_CTYPE 
+xargs     <no ENVIRONMENT section>

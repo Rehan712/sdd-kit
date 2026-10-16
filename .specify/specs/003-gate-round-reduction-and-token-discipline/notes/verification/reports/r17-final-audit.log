@@ -1,0 +1,88 @@
+ROUND-17 reservation: source=54c64d8346fe2459204e68de298f193bb5ea0abe8de86c00de159f05eac07129 floor=FLOOR-QCFkfi reserved=2026-10-09T00:10:44Z
+PASS ROUND-17 reservation integrity
+PASS ROUND-17 sealed (report.sha256 present)
+opponent sealed rounds=17 pending=0
+reality-check sealed rounds=1 pending=0
+PASS no staged .reservation-* in either gate
+PASS opponent round 1 canonical block == sealed 1ac95178f408b2ae
+PASS opponent round 2 canonical block == sealed 5170b08212a51a9b
+PASS opponent round 3 canonical block == sealed 3de48d658a33a909
+PASS opponent round 4 canonical block == sealed d044652efcb90251
+PASS opponent round 5 canonical block == sealed 0898afcc62cf8716
+PASS opponent round 6 canonical block == sealed cc1b86cb05959b85
+PASS opponent round 7 canonical block == sealed 9f98e50c63046c9f
+PASS opponent round 8 canonical block == sealed b391edbf50604425
+PASS opponent round 9 canonical block == sealed 2aae626e3c600201
+PASS opponent round 10 canonical block == sealed 9a32b0929d7acc5a
+PASS opponent round 11 canonical block == sealed f13a332b34a800da
+PASS opponent round 12 canonical block == sealed 4539d729b5402bfa
+PASS opponent round 13 canonical block == sealed 2ddbed640c662e36
+PASS opponent round 14 canonical block == sealed 6c94ac54f19b5d00
+PASS opponent round 15 canonical block == sealed 241cebc5c2bbba6b
+PASS opponent round 16 canonical block == sealed fb9bcfb41b40059e
+PASS opponent round 17 canonical block == sealed f94bb2e5f44779f1
+PASS returned report block == sealed round-17 digest
+PASS reality-check round 1 canonical block == sealed
+PASS reserved and returned worktree entries byte-identical
+PASS reserved and returned state records equal (label/taken aside)
+PASS source == reserved source (54c64d8346fe2459204e68de298f193bb5ea0abe8de86c00de159f05eac07129)
+PASS source == frozen source 54c64d83... (54c64d8346fe2459204e68de298f193bb5ea0abe8de86c00de159f05eac07129)
+PASS Decisions digest unchanged b5c78e14... (b5c78e14a2ac1ae41f43ef2c2168311c1e1376e214edebaac94da1c1a4ccb6ec)
+PASS floor-latest == reserved floor (FLOOR-QCFkfi)
+PASS FLOOR-QCFkfi validates current for the reserved source
+PASS no held lock
+PASS no .capture.* staging anywhere under notes/
+PASS HEAD == 0d55c62 (0d55c62)
+PASS T030 unchecked
+PASS T031 unchecked
+PASS T032 unchecked
+PASS T033 unchecked
+PASS T034 unchecked
+PASS T030o39 checked
+PASS T030o40 checked
+PASS T030o41 checked
+PASS T030o42 checked
+PASS T030o43 checked
+PASS T030o44 checked
+PASS T030o45 checked
+PASS T030o46 checked
+PASS T030o47 checked
+PASS T030o48 checked
+PASS T030o49 checked
+PASS T030o50 checked
+PASS prereserve and reserved worktree entries byte-identical
+  w17| opponent round 17 is already completed; the next round is 18
+PASS round 17 reported completed at exit 0
+  w18| round authorization denied: opponent round 18 needs an exact-round user waiver/spec revision after round 17
+  w18|   candidate authorization lines were found and refused:
+  w18|   STATUS.md:236 authorizes round=4, not round=18
+  w18|   STATUS.md:274 authorizes round=5, not round=18
+  w18|   STATUS.md:280 refused: waiver needs exactly 5 "; "-separated fields, found 6 — a "; " inside reason= splits the entry
+  w18|   STATUS.md:290 authorizes round=6, not round=18
+  w18|   STATUS.md:318 authorizes round=7, not round=18
+  w18|   STATUS.md:356 authorizes round=8, not round=18
+  w18|   STATUS.md:399 authorizes round=9, not round=18
+  w18|   STATUS.md:429 authorizes round=10, not round=18
+  w18|   STATUS.md:477 authorizes round=11, not round=18
+  w18|   STATUS.md:483 authorizes round=12, not round=18
+PASS round 18 refused at exit 4 (10 candidates)
+PASS round 18 refusal names no line that authorizes round=18
+PASS tally exit 0
+PASS tally opponent rounds=17
+  opponent rounds=17
+  reality-check rounds=1
+  blocking=34 minor=14 locations=474 unclassified=0
+  class=config-interpolation-validation findings=3 recurrences=1
+  class=gate-report-schema-validation findings=27 recurrences=21
+  class=harness-locale-decoding findings=2 recurrences=0
+  class=live-control-semantic-validation findings=3 recurrences=0
+  class=post-pr-followup-binding-schema findings=3 recurrences=0
+  class=return-envelope-parsing findings=3 recurrences=0
+  class=round-authorization-grammar findings=11 recurrences=8
+  class=round-block-attribution findings=5 recurrences=2
+  class=round-record-reparse-divergence findings=1 recurrences=0
+  class=verification-input-identity findings=11 recurrences=7
+  finding-observations=69 distinct-finding-ids=24 reopened=30
+  severity-downgrades=5
+  execution-observations=61 check-executions=461 cache-hits=2527 captures=627 full-log-bytes=1048721 returned-summary-bytes=347860 usage=unknown baseline-usage=unknown
+final audit failures=0

@@ -1,0 +1,1 @@
+run1 exit 1 is diff(1)'s "files differ" status surfacing through pipefail on the last pipeline of the script; the output is complete. Script amended to exit on its own checks; re-run as r10-scope.{log,rc}.

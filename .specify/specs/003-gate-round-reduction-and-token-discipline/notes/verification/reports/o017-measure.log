@@ -1,0 +1,71 @@
+PASS rule: lib.sh helpers appended
+PASS rule literal applies once: scripts/spec-run.sh
+PASS rule literal applies once: scripts/spec-task.sh
+PASS rule literal applies once: scripts/spec-gate.sh
+PASS rule literal applies once: scripts/sdd-analyze.sh
+PASS rule literal applies once: scripts/spec-ac-coverage.sh
+PASS rule literal applies once: scripts/spec-evidence.sh
+PASS rule literal applies once: scripts/verification-lib.sh
+PASS rule literal applies once: scripts/verification-lib.sh
+PASS rule literal applies once: scripts/spec-run.sh
+PASS rule literal applies once: scripts/verification-lib.sh
+PASS rule literal applies once: scripts/verification-lib.sh
+PASS rule literal applies once: scripts/verification-lib.sh
+PASS rule literal applies once: scripts/verification-lib.sh
+PASS rule: P parses
+== M1: the repro cases give the C result under every locale
+PASS M1 A under C: refused (rc 3)
+PASS M1 A under C: the lowered-tier refusal
+PASS M1 A under en_US.UTF-8: refused (rc 3)
+PASS M1 A under en_US.UTF-8: the lowered-tier refusal
+PASS M1 A under de_DE.UTF-8: refused (rc 3)
+PASS M1 A under de_DE.UTF-8: the lowered-tier refusal
+PASS M1 A under C.UTF-8: refused (rc 3)
+PASS M1 A under C.UTF-8: the lowered-tier refusal
+PASS M1 A under ja_JP.SJIS: refused (rc 3)
+PASS M1 A under ja_JP.SJIS: the lowered-tier refusal
+PASS M1 A under ambient: refused (rc 3)
+PASS M1 A under ambient: the lowered-tier refusal
+PASS M1 C under C: refused (rc 3)
+PASS M1 C under C: the Class refusal
+PASS M1 C under en_US.UTF-8: refused (rc 3)
+PASS M1 C under en_US.UTF-8: the Class refusal
+PASS M1 C under de_DE.UTF-8: refused (rc 3)
+PASS M1 C under de_DE.UTF-8: the Class refusal
+PASS M1 C under C.UTF-8: refused (rc 3)
+PASS M1 C under C.UTF-8: the Class refusal
+PASS M1 D under ja_JP.SJIS: refused (rc 3)
+PASS M1 E: fixture, floor and reservation
+PASS M1 E under en_US.UTF-8: the CLEARED completion is refused (rc 3)
+PASS M1 E under en_US.UTF-8: the lowered-tier refusal
+PASS M1 F under en_US.UTF-8: the marker fails the analyzer (rc 1)
+PASS M1 F: the marker diagnostic
+PASS M1 G under en_US.UTF-8: spec-ac-coverage refuses (rc 1)
+PASS M1 G: AC-998 has no test
+PASS M1 G under en_US.UTF-8: the analyzer refuses (rc 1)
+PASS M1 H under en_US.UTF-8: authorized (rc 0)
+== M2: the recorded history, tally byte-identical to U
+PASS M2 tally 001-codex-subagent-gates-and-hard-task-escalation under C equals U (output and rc)
+PASS M2 tally 001-codex-subagent-gates-and-hard-task-escalation under en_US.UTF-8 equals U (output and rc)
+PASS M2 tally 002-usage-limit-handling-for-dispatched-runs under C equals U (output and rc)
+PASS M2 tally 002-usage-limit-handling-for-dispatched-runs under en_US.UTF-8 equals U (output and rc)
+PASS M2 tally 003-gate-round-reduction-and-token-discipline under C equals U (output and rc)
+PASS M2 tally 003-gate-round-reduction-and-token-discipline under en_US.UTF-8 equals U (output and rc)
+== M3: snapshot records equal U except the harness records
+FAIL M3 records under C equal U except harness (want=same got=differ)
+  | records compared: 363; harness records differ as expected: 8
+FAIL M3 records under en_US.UTF-8 equal U except harness (want=same got=differ)
+  | records compared: 363; harness records differ as expected: 8
+== M4/M5: the captured command and a declared LC_ALL
+PASS M4 fixture
+PASS M4 caller LC_ALL unset: the command sees it unset
+PASS M4 caller LC_ALL=en_US.UTF-8: the command sees it
+PASS M4 caller LC_ALL empty: the command sees it empty
+  | an empty value shows as an empty key field: 1 line(s)
+PASS M5 declared LC_ALL=unset: P hashes the caller value exactly as U
+PASS M5 declared LC_ALL=en_US.UTF-8: P hashes the caller value exactly as U
+PASS M5 declared LC_ALL=de_DE.UTF-8: P hashes the caller value exactly as U
+PASS M5 two caller values give two records
+  | P records: environment	LC_ALL	unset / environment	LC_ALL	present
+PASS live worktree status outside notes/verification/ unchanged
+o017-measure failures=2

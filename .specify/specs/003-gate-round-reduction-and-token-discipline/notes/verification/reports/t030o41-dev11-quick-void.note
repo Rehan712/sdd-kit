@@ -1,0 +1,3 @@
+dev11 quick runs 1 and 2 are VOID, kept for the record.
+Run 1 (rc 2): the runner-shape guard refused tests/test-verification.sh, because the new nested-suite heredoc held a line exactly `t_run_all`; fixed by suffixing a comment.
+Run 2 (stopped by the invoker, rc file empty): fixture_repository_cases wrote `SANDBOX="$failing" PATH="$SANDBOX/fixture-failing-git:$PATH"`, and bash expands prefix assignments left to right, so PATH named a shim directory that did not exist and the deliberate build failure succeeded; ShellCheck flagged the same line (SC2097/SC2098), which also failed reuse_command_input_cases through its nested ShellCheck run. Fixed with a precomputed $shim. Neither was a finding against the repaired code.

@@ -1,0 +1,370 @@
+﻿2026-10-15T08:30:29.9734570Z Current runner version: '2.337.0'
+2026-10-15T08:30:29.9752340Z ##[group]Runner Image Provisioner
+2026-10-15T08:30:29.9753020Z Hosted Compute Agent
+2026-10-15T08:30:29.9753420Z Version: 20261012.601
+2026-10-15T08:30:29.9753840Z Commit: f3dc54e1fb89da6852db922499a0233137369e1d
+2026-10-15T08:30:29.9754340Z Build Date: 2026-10-12T17:48:21Z
+2026-10-15T08:30:29.9754790Z Worker ID: {2a664ef2-4296-455f-aa52-3d697379446a}
+2026-10-15T08:30:29.9755270Z Region: westus
+2026-10-15T08:30:29.9755640Z Cloud: MacCloud
+2026-10-15T08:30:29.9756020Z ##[endgroup]
+2026-10-15T08:30:29.9757090Z ##[group]Operating System
+2026-10-15T08:30:29.9757790Z macOS
+2026-10-15T08:30:29.9758260Z 26.6.2
+2026-10-15T08:30:29.9758820Z 25G83
+2026-10-15T08:30:29.9759180Z ##[endgroup]
+2026-10-15T08:30:29.9759560Z ##[group]Runner Image
+2026-10-15T08:30:29.9760040Z Image: macos-26-arm64
+2026-10-15T08:30:29.9760560Z Version: 20261013.0424.1
+2026-10-15T08:30:29.9761640Z Included Software: https://github.com/actions/runner-images/blob/macos-26-arm64/20261013.0424/images/macos/macos-26-arm64-Readme.md
+2026-10-15T08:30:29.9762960Z Image Release: https://github.com/actions/runner-images/releases/tag/macos-26-arm64%2F20261013.0424
+2026-10-15T08:30:29.9763820Z ##[endgroup]
+2026-10-15T08:30:29.9765050Z ##[group]GITHUB_TOKEN Permissions
+2026-10-15T08:30:29.9766900Z Contents: read
+2026-10-15T08:30:29.9767380Z Metadata: read
+2026-10-15T08:30:29.9767820Z Packages: read
+2026-10-15T08:30:29.9768250Z ##[endgroup]
+2026-10-15T08:30:29.9769980Z Secret source: Actions
+2026-10-15T08:30:29.9770740Z Cache mode: write
+2026-10-15T08:30:29.9771380Z Prepare workflow directory
+2026-10-15T08:30:30.0140770Z Prepare all required actions
+2026-10-15T08:30:30.0180820Z Getting action download info
+2026-10-15T08:30:30.2871260Z Download action repository 'actions/checkout@v5' (SHA:fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09)
+2026-10-15T08:30:30.6971650Z Complete job name: tests (macos-latest)
+2026-10-15T08:30:30.7826300Z ##[group]Run actions/checkout@v5
+2026-10-15T08:30:30.7827040Z with:
+2026-10-15T08:30:30.7827590Z   repository: Rehan712/sdd-kit
+2026-10-15T08:30:30.7838060Z   token: ***
+2026-10-15T08:30:30.7838620Z   ssh-strict: true
+2026-10-15T08:30:30.7839180Z   ssh-user: git
+2026-10-15T08:30:30.7839820Z   persist-credentials: true
+2026-10-15T08:30:30.7840600Z   clean: true
+2026-10-15T08:30:30.7841890Z   sparse-checkout-cone-mode: true
+2026-10-15T08:30:30.7843360Z   fetch-depth: 1
+2026-10-15T08:30:30.7843840Z   fetch-tags: false
+2026-10-15T08:30:30.7844380Z   show-progress: true
+2026-10-15T08:30:30.7844810Z   lfs: false
+2026-10-15T08:30:30.7845210Z   submodules: false
+2026-10-15T08:30:30.7846170Z   set-safe-directory: true
+2026-10-15T08:30:30.7846690Z   allow-unsafe-pr-checkout: false
+2026-10-15T08:30:30.7848000Z ##[endgroup]
+2026-10-15T08:30:31.3373250Z Syncing repository: Rehan712/sdd-kit
+2026-10-15T08:30:31.3375140Z ##[group]Getting Git version info
+2026-10-15T08:30:31.3375950Z Working directory is '/Users/runner/work/sdd-kit/sdd-kit'
+2026-10-15T08:30:31.3377050Z [command]/opt/homebrew/bin/git version
+2026-10-15T08:30:31.3707500Z git version 2.56.0
+2026-10-15T08:30:31.3769700Z ##[endgroup]
+2026-10-15T08:30:31.3892800Z Copying '/Users/runner/.gitconfig' to '/Users/runner/work/_temp/fa92d2a1-af16-4c7f-acc1-835489b9f487/.gitconfig'
+2026-10-15T08:30:31.3925770Z Temporarily overriding HOME='/Users/runner/work/_temp/fa92d2a1-af16-4c7f-acc1-835489b9f487' before making global git config changes
+2026-10-15T08:30:31.3928840Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-15T08:30:31.3931440Z [command]/opt/homebrew/bin/git config --global --add safe.directory /Users/runner/work/sdd-kit/sdd-kit
+2026-10-15T08:30:31.4128680Z Deleting the contents of '/Users/runner/work/sdd-kit/sdd-kit'
+2026-10-15T08:30:31.4136760Z ##[group]Initializing the repository
+2026-10-15T08:30:31.4140330Z [command]/opt/homebrew/bin/git init /Users/runner/work/sdd-kit/sdd-kit
+2026-10-15T08:30:31.5047670Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-10-15T08:30:31.5050800Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-10-15T08:30:31.5051560Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-10-15T08:30:31.5052360Z hint: call:
+2026-10-15T08:30:31.5052700Z hint:
+2026-10-15T08:30:31.5053710Z hint: 	git config --global init.defaultBranch <name>
+2026-10-15T08:30:31.5055340Z hint:
+2026-10-15T08:30:31.5057370Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-10-15T08:30:31.5059300Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-10-15T08:30:31.5060880Z hint:
+2026-10-15T08:30:31.5061880Z hint: 	git branch -m <name>
+2026-10-15T08:30:31.5062980Z hint:
+2026-10-15T08:30:31.5064880Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-10-15T08:30:31.5071960Z Initialized empty Git repository in /Users/runner/work/sdd-kit/sdd-kit/.git/
+2026-10-15T08:30:31.5090480Z [command]/opt/homebrew/bin/git remote add origin https://github.com/Rehan712/sdd-kit
+2026-10-15T08:30:31.5271830Z ##[endgroup]
+2026-10-15T08:30:31.5274580Z ##[group]Disabling automatic garbage collection
+2026-10-15T08:30:31.5276340Z [command]/opt/homebrew/bin/git config --local gc.auto 0
+2026-10-15T08:30:31.5337830Z ##[endgroup]
+2026-10-15T08:30:31.5338920Z ##[group]Setting up auth
+2026-10-15T08:30:31.5355610Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-15T08:30:31.5493570Z [command]/opt/homebrew/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-15T08:30:31.7148980Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-15T08:30:31.7435300Z [command]/opt/homebrew/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-15T08:30:31.8981330Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-15T08:30:31.9079490Z [command]/opt/homebrew/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-15T08:30:32.0739430Z [command]/opt/homebrew/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-10-15T08:30:32.0845490Z ##[endgroup]
+2026-10-15T08:30:32.0846860Z ##[group]Fetching the repository
+2026-10-15T08:30:32.0858070Z [command]/opt/homebrew/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +71c6eb4b59abdad34e933f243949ed475a320486:refs/remotes/pull/19/merge
+2026-10-15T08:30:33.3541650Z From https://github.com/Rehan712/sdd-kit
+2026-10-15T08:30:33.3546460Z  * [new ref]         71c6eb4b59abdad34e933f243949ed475a320486 -> pull/19/merge
+2026-10-15T08:30:33.3552880Z ##[endgroup]
+2026-10-15T08:30:33.3554500Z ##[group]Determining the checkout info
+2026-10-15T08:30:33.3556490Z ##[endgroup]
+2026-10-15T08:30:33.3556950Z [command]/opt/homebrew/bin/git sparse-checkout disable
+2026-10-15T08:30:33.3758680Z [command]/opt/homebrew/bin/git config --local --unset-all extensions.worktreeConfig
+2026-10-15T08:30:33.3939200Z ##[group]Checking out the ref
+2026-10-15T08:30:33.3946470Z [command]/opt/homebrew/bin/git checkout --progress --force refs/remotes/pull/19/merge
+2026-10-15T08:30:34.4935950Z Updating files:  36% (4373/11822)
+2026-10-15T08:30:34.5190150Z Updating files:  37% (4375/11822)
+2026-10-15T08:30:34.5360390Z Updating files:  38% (4493/11822)
+2026-10-15T08:30:34.5642230Z Updating files:  39% (4611/11822)
+2026-10-15T08:30:34.5826400Z Updating files:  40% (4729/11822)
+2026-10-15T08:30:34.6059090Z Updating files:  41% (4848/11822)
+2026-10-15T08:30:34.6302140Z Updating files:  42% (4966/11822)
+2026-10-15T08:30:34.6524110Z Updating files:  43% (5084/11822)
+2026-10-15T08:30:34.6812000Z Updating files:  44% (5202/11822)
+2026-10-15T08:30:34.7103380Z Updating files:  45% (5320/11822)
+2026-10-15T08:30:34.7274180Z Updating files:  46% (5439/11822)
+2026-10-15T08:30:34.7488180Z Updating files:  47% (5557/11822)
+2026-10-15T08:30:34.7769710Z Updating files:  48% (5675/11822)
+2026-10-15T08:30:34.8037470Z Updating files:  49% (5793/11822)
+2026-10-15T08:30:34.8377620Z Updating files:  50% (5911/11822)
+2026-10-15T08:30:34.8688250Z Updating files:  51% (6030/11822)
+2026-10-15T08:30:34.8916280Z Updating files:  52% (6148/11822)
+2026-10-15T08:30:34.9058630Z Updating files:  53% (6266/11822)
+2026-10-15T08:30:34.9198370Z Updating files:  54% (6384/11822)
+2026-10-15T08:30:34.9526990Z Updating files:  55% (6503/11822)
+2026-10-15T08:30:34.9774410Z Updating files:  56% (6621/11822)
+2026-10-15T08:30:34.9939420Z Updating files:  57% (6739/11822)
+2026-10-15T08:30:35.0155040Z Updating files:  58% (6857/11822)
+2026-10-15T08:30:35.0405490Z Updating files:  59% (6975/11822)
+2026-10-15T08:30:35.0878270Z Updating files:  60% (7094/11822)
+2026-10-15T08:30:35.3201710Z Updating files:  61% (7212/11822)
+2026-10-15T08:30:35.3315560Z Updating files:  62% (7330/11822)
+2026-10-15T08:30:35.3507370Z Updating files:  63% (7448/11822)
+2026-10-15T08:30:35.3680810Z Updating files:  64% (7567/11822)
+2026-10-15T08:30:35.3822140Z Updating files:  65% (7685/11822)
+2026-10-15T08:30:35.4033340Z Updating files:  66% (7803/11822)
+2026-10-15T08:30:35.4162260Z Updating files:  67% (7921/11822)
+2026-10-15T08:30:35.4183060Z Updating files:  68% (8039/11822)
+2026-10-15T08:30:35.4484170Z Updating files:  68% (8054/11822)
+2026-10-15T08:30:35.4957520Z Updating files:  69% (8158/11822)
+2026-10-15T08:30:35.5149950Z Updating files:  70% (8276/11822)
+2026-10-15T08:30:35.5411460Z Updating files:  71% (8394/11822)
+2026-10-15T08:30:35.5600950Z Updating files:  72% (8512/11822)
+2026-10-15T08:30:35.5802880Z Updating files:  73% (8631/11822)
+2026-10-15T08:30:35.6168590Z Updating files:  74% (8749/11822)
+2026-10-15T08:30:35.6342540Z Updating files:  75% (8867/11822)
+2026-10-15T08:30:35.6499470Z Updating files:  76% (8985/11822)
+2026-10-15T08:30:35.6657090Z Updating files:  77% (9103/11822)
+2026-10-15T08:30:35.6886430Z Updating files:  78% (9222/11822)
+2026-10-15T08:30:35.7097180Z Updating files:  79% (9340/11822)
+2026-10-15T08:30:35.7326300Z Updating files:  80% (9458/11822)
+2026-10-15T08:30:35.7503090Z Updating files:  81% (9576/11822)
+2026-10-15T08:30:35.7785750Z Updating files:  82% (9695/11822)
+2026-10-15T08:30:35.7932290Z Updating files:  83% (9813/11822)
+2026-10-15T08:30:35.8040100Z Updating files:  84% (9931/11822)
+2026-10-15T08:30:35.8204570Z Updating files:  85% (10049/11822)
+2026-10-15T08:30:35.8450220Z Updating files:  86% (10167/11822)
+2026-10-15T08:30:35.8746140Z Updating files:  87% (10286/11822)
+2026-10-15T08:30:35.8992800Z Updating files:  88% (10404/11822)
+2026-10-15T08:30:35.9362970Z Updating files:  89% (10522/11822)
+2026-10-15T08:30:35.9516650Z Updating files:  90% (10640/11822)
+2026-10-15T08:30:35.9733570Z Updating files:  91% (10759/11822)
+2026-10-15T08:30:35.9959200Z Updating files:  92% (10877/11822)
+2026-10-15T08:30:36.0267800Z Updating files:  93% (10995/11822)
+2026-10-15T08:30:36.0491480Z Updating files:  94% (11113/11822)
+2026-10-15T08:30:36.0707070Z Updating files:  95% (11231/11822)
+2026-10-15T08:30:36.0918060Z Updating files:  96% (11350/11822)
+2026-10-15T08:30:36.1109080Z Updating files:  97% (11468/11822)
+2026-10-15T08:30:36.1290170Z Updating files:  98% (11586/11822)
+2026-10-15T08:30:36.1526780Z Updating files:  99% (11704/11822)
+2026-10-15T08:30:36.1528880Z Updating files: 100% (11822/11822)
+2026-10-15T08:30:36.1530620Z Updating files: 100% (11822/11822), done.
+2026-10-15T08:30:36.1740760Z HEAD is now at 71c6eb4 Merge 5ebc8ef0186fd7e5e6569029b0637c7ec8215240 into f4a0e4e31df29b53ccb9e088d3b8d0cd58f8e12f
+2026-10-15T08:30:36.1863550Z ##[endgroup]
+2026-10-15T08:30:36.2062510Z [command]/opt/homebrew/bin/git log -1 --format=%H
+2026-10-15T08:30:36.2134770Z 71c6eb4b59abdad34e933f243949ed475a320486
+2026-10-15T08:30:36.2647380Z ##[group]Run tests/run.sh
+2026-10-15T08:30:36.2655440Z [36;1mtests/run.sh[0m
+2026-10-15T08:30:36.2802680Z shell: /bin/bash -e {0}
+2026-10-15T08:30:36.2803020Z ##[endgroup]
+2026-10-15T08:30:37.9641870Z == test-build-adapters.sh
+2026-10-15T08:30:46.3505500Z   ok   test_adapters_install_into_every_codex_home
+2026-10-15T08:30:51.9169580Z   ok   test_brief_modes
+2026-10-15T08:30:55.2528710Z   ok   test_codex_adapters_delegate_copilot_adapters_persona_pass
+2026-10-15T08:30:57.9364330Z   ok   test_degrades_without_policy_or_codex_home
+2026-10-15T08:30:57.9670730Z   ok   test_delegation_findings_artifact_present_and_shaped
+2026-10-15T08:31:03.4997720Z   ok   test_prune_respects_kit_marker_and_role_unmapping
+2026-10-15T08:31:05.0524850Z   ok   test_stage_kit_excludes_and_never_writes_through_a_host_models_yml
+2026-10-15T08:31:05.1020510Z   ok   test_stage_kit_failure_is_named_and_stays_in_the_sandbox
+2026-10-15T08:31:05.1364700Z   ok   test_stale_single_agent_claims_are_gone
+2026-10-15T08:31:08.3657150Z   ok   test_subagent_tomls_carry_identity_policy_and_persona
+2026-10-15T08:31:08.3874440Z   -- 10/10 passed
+2026-10-15T08:31:08.3914240Z == test-executable-bits.sh
+2026-10-15T08:31:11.4975850Z   ok   test_AC_011_every_kit_script_is_executable
+2026-10-15T08:31:13.2676090Z   ok   test_AC_011_ignored_local_scripts_do_not_decide_the_executable_check
+2026-10-15T08:31:13.2912130Z   -- 2/2 passed
+2026-10-15T08:31:13.2953870Z == test-gate-contracts.sh
+2026-10-15T08:31:14.8575810Z   ok   test_all_brief_modes
+2026-10-15T08:31:16.3601680Z   ok   test_all_overlay_defaults
+2026-10-15T08:31:16.3857830Z   ok   test_briefs_t010
+2026-10-15T08:31:16.4085360Z   ok   test_briefs_t011
+2026-10-15T08:31:16.4304100Z   ok   test_briefs_t012
+2026-10-15T08:31:16.4412740Z   ok   test_briefs_t013
+2026-10-15T08:31:16.4849860Z   ok   test_defaults_t006
+2026-10-15T08:31:16.5245850Z   ok   test_defaults_t007
+2026-10-15T08:31:16.5616780Z   ok   test_defaults_t008
+2026-10-15T08:31:16.5904120Z   ok   test_defaults_t009
+2026-10-15T08:31:18.0612760Z   ok   test_empty_record_directories_do_not_decide_the_002_tally
+2026-10-15T08:31:19.7732330Z   ok   test_ignored_local_overlays_and_personas_do_not_decide_the_checks
+2026-10-15T08:31:21.7572910Z   ok   test_ignored_local_scripts_do_not_reach_the_dispatch_grammar_kit
+2026-10-15T08:33:24.0728030Z   ok   test_ignored_local_scripts_do_not_reach_the_documented_workflow
+2026-10-15T08:35:17.3564260Z   ok   test_instruction_contracts
+2026-10-15T08:39:52.6664730Z   ok   test_invoker_protocol
+2026-10-15T08:43:25.9502940Z   ok   test_reports_and_tally
+2026-10-15T08:43:26.0524910Z   ok   test_review_scope_contracts
+2026-10-15T08:43:26.0548200Z   -- 18/18 passed
+2026-10-15T08:43:26.0580760Z == test-golden-example.sh
+2026-10-15T08:43:26.1005520Z   ok   test_golden_example_demonstrates_the_conventions
+2026-10-15T08:43:27.5752090Z   ok   test_golden_example_passes_sdd_analyze_with_zero_warnings
+2026-10-15T08:43:28.9023120Z   ok   test_stage_example_copies_only_enumerated_files
+2026-10-15T08:43:28.9742970Z   ok   test_stage_example_failure_is_named_and_stays_in_the_sandbox
+2026-10-15T08:43:31.1075850Z   ok   test_verification_golden
+2026-10-15T08:43:31.1114870Z   -- 5/5 passed
+2026-10-15T08:43:31.1152590Z == test-lib.sh
+2026-10-15T08:43:31.1715750Z   ok   test_expand_tilde
+2026-10-15T08:43:31.2004450Z   ok   test_fm_get_no_frontmatter_is_empty
+2026-10-15T08:43:31.2628900Z   ok   test_fm_get_reads_only_the_fence
+2026-10-15T08:43:31.2953090Z   ok   test_fm_list_inline_and_block
+2026-10-15T08:43:31.3297580Z   ok   test_fm_set_appends_missing_key_inside_fence
+2026-10-15T08:43:31.3458410Z   ok   test_fm_set_refuses_file_without_frontmatter
+2026-10-15T08:43:31.3764210Z   ok   test_fm_set_replaces_and_keeps_inline_comment
+2026-10-15T08:43:31.3959600Z   ok   test_registry_entries_parses_entries_in_any_field_order
+2026-10-15T08:43:31.4142470Z   ok   test_registry_path_for_expands_tilde
+2026-10-15T08:43:31.4337740Z   ok   test_spec_declared_repos
+2026-10-15T08:43:31.4464660Z   ok   test_usage_from_header
+2026-10-15T08:43:31.4601580Z   ok   test_yml_clean_hash_needs_preceding_space
+2026-10-15T08:43:31.5053520Z   ok   test_yml_get_and_list
+2026-10-15T08:43:31.5054450Z   -- 13/13 passed
+2026-10-15T08:43:31.5055390Z == test-model-policy.sh
+2026-10-15T08:43:31.8216240Z   ok   test_AC_008_usage_limit_policy_absent_and_present_defaults
+2026-10-15T08:43:32.0319230Z   ok   test_AC_008_usage_limit_policy_rejects_invalid_values
+2026-10-15T08:43:33.1415380Z   ok   test_AC_008_usage_limit_policy_set_unset_round_trip
+2026-10-15T08:43:36.2398080Z   ok   test_AC_008_usage_limit_policy_wizard_preserves_ordered_fallback
+2026-10-15T08:43:39.5726880Z   ok   test_AC_008_wizard_fixture_never_writes_through_a_host_models_yml
+2026-10-15T08:43:39.6162310Z   ok   test_claude_effort_whitelist_unchanged
+2026-10-15T08:43:39.9908990Z   ok   test_codex_sandbox_and_approval_policy_fields
+2026-10-15T08:43:40.6821310Z   ok   test_documented_codex_efforts_accepted
+2026-10-15T08:43:40.7066810Z   ok   test_junk_codex_effort_rejected
+2026-10-15T08:43:40.7094050Z   -- 9/9 passed
+2026-10-15T08:43:40.7122570Z == test-sdd-analyze.sh
+2026-10-15T08:43:40.9598410Z   ok   test_clean_fixture_is_consistent
+2026-10-15T08:43:41.1806180Z   ok   test_dangling_ref_fails
+2026-10-15T08:43:41.4504190Z   ok   test_duplicate_task_id_fails
+2026-10-15T08:43:41.8980580Z   ok   test_external_marker_must_be_mirrored_in_status
+2026-10-15T08:43:42.1320360Z   ok   test_gate_agent_placeholder_fails
+2026-10-15T08:43:47.1149690Z   ok   test_leftover_spec_directories_do_not_decide_the_shipped_loop
+2026-10-15T08:43:47.2096470Z   ok   test_missing_artifact_is_an_error
+2026-10-15T08:43:47.5555150Z   ok   test_missing_gate_agent_file_fails
+2026-10-15T08:43:47.8818620Z   ok   test_missing_verify_line_warns
+2026-10-15T08:43:48.1936670Z   ok   test_needs_clarification_blocks
+2026-10-15T08:43:48.5285660Z   ok   test_stray_repo_tags_without_umbrella_warn
+2026-10-15T08:43:48.9031240Z   ok   test_task_without_acceptance_fails
+2026-10-15T08:43:49.3272290Z   ok   test_ticked_box_without_evidence_warns
+2026-10-15T08:43:49.7952410Z   ok   test_umbrella_declared_repo_with_no_tasks_warns
+2026-10-15T08:43:50.1722640Z   ok   test_umbrella_tagged_tasks_pass
+2026-10-15T08:43:50.5788810Z   ok   test_umbrella_undeclared_repo_tag_fails
+2026-10-15T08:43:50.8291530Z   ok   test_umbrella_untagged_tasks_fail
+2026-10-15T08:43:51.0795080Z   ok   test_uncovered_ac_fails_and_gate_refs_do_not_count
+2026-10-15T08:44:17.9283690Z   ok   test_verification_bindings
+2026-10-15T08:44:17.9684650Z   -- 19/19 passed
+2026-10-15T08:44:17.9719020Z == test-spec-ac-coverage.sh
+2026-10-15T08:44:18.1145980Z   ok   test_all_acs_bound_passes
+2026-10-15T08:44:18.2555320Z   ok   test_default_root_is_the_git_toplevel
+2026-10-15T08:44:18.4150390Z   ok   test_extra_test_glob_extends_the_net
+2026-10-15T08:44:18.5204660Z   ok   test_longer_ids_do_not_satisfy_shorter_acs
+2026-10-15T08:44:18.5925040Z   ok   test_no_acs_in_spec_is_a_noop_not_a_crash
+2026-10-15T08:44:18.6722530Z   ok   test_root_path_containing_test_does_not_classify_everything
+2026-10-15T08:44:18.7464270Z   ok   test_spec_dir_itself_never_counts_as_coverage
+2026-10-15T08:44:18.8575670Z   ok   test_test_paths_with_spaces_are_counted
+2026-10-15T08:44:18.9596930Z   ok   test_unreferenced_ac_fails_referenced_ac_passes
+2026-10-15T08:44:18.9632320Z   -- 9/9 passed
+2026-10-15T08:44:18.9662580Z == test-spec-dispatch.sh
+2026-10-15T08:44:20.1048330Z   ok   test_repo_match_is_token_exact
+2026-10-15T08:44:21.3497940Z   ok   test_stage_umbrella_copies_only_enumerated_scripts
+2026-10-15T08:44:21.3933900Z   ok   test_stage_umbrella_failure_is_named_and_stays_in_the_sandbox
+2026-10-15T08:44:22.6481330Z   ok   test_undeclared_repo_refused_and_declared_accepted_past_the_guard
+2026-10-15T08:44:22.6526840Z   -- 4/4 passed
+2026-10-15T08:44:22.6559100Z == test-spec-gate.sh
+2026-10-15T08:45:19.3013780Z   ok   test_acceptance
+2026-10-15T08:46:08.3589040Z   ok   test_checkpoints
+2026-10-15T08:49:24.1411610Z   ok   test_floor
+2026-10-15T08:49:24.3412530Z   ok   test_floor_fixture_failure_is_named_and_stays_in_the_sandbox
+2026-10-15T08:49:25.6211150Z   ok   test_floor_fixture_stages_only_enumerated_scripts
+2026-10-15T08:49:32.5191830Z   ok   test_manual_acceptance
+2026-10-15T08:49:43.6427770Z   ok   test_prepared_before_recovery
+2026-10-15T08:56:21.1867060Z   ok   test_rounds
+2026-10-15T08:56:21.3188800Z   -- 8/8 passed
+2026-10-15T08:56:21.3239470Z == test-spec-run.sh
+2026-10-15T08:56:34.0776130Z   ok   test_bounded_capture
+2026-10-15T08:56:34.1982710Z   ok   test_failing_command_keeps_box_unticked_but_records
+2026-10-15T08:56:34.3850290Z   ok   test_key_flag_picks_the_evidence_line
+2026-10-15T08:56:34.4875980Z   ok   test_no_tick_captures_only
+2026-10-15T08:56:34.6585380Z   ok   test_passing_command_records_and_ticks
+2026-10-15T08:56:34.7344600Z   ok   test_usage_errors
+2026-10-15T08:56:34.7367460Z   -- 6/6 passed
+2026-10-15T08:56:34.7386660Z == test-spec-status.sh
+2026-10-15T08:56:34.7941670Z   ok   test_append_decision_adds_dated_entry_at_end_and_updates_frontmatter
+2026-10-15T08:56:34.8497270Z   ok   test_append_decision_refuses_duplicate_sections_without_mutation
+2026-10-15T08:56:34.8815310Z   ok   test_append_decision_refuses_missing_section_without_mutation
+2026-10-15T08:56:34.8844380Z   -- 3/3 passed
+2026-10-15T08:56:34.8865010Z == test-spec-task.sh
+2026-10-15T08:56:35.0762330Z   ok   test_done_rerun_replaces_evidence_not_duplicates
+2026-10-15T08:56:35.1720570Z   ok   test_done_with_evidence_is_one_atomic_edit
+2026-10-15T08:56:35.2200260Z   ok   test_done_without_evidence_is_refused
+2026-10-15T08:56:35.3101050Z   ok   test_follow_up_ids_never_match_their_parent
+2026-10-15T08:56:35.4796680Z   ok   test_gate_and_ship_tasks_are_exempt_from_evidence
+2026-10-15T08:56:35.5468210Z   ok   test_list_reports_id_state_stage_subject
+2026-10-15T08:56:35.6465650Z   ok   test_preformatted_evidence_is_not_double_wrapped
+2026-10-15T08:56:35.7308500Z   ok   test_start_marks_in_progress
+2026-10-15T08:56:35.8676110Z   ok   test_undo_unticks_but_keeps_evidence
+2026-10-15T08:56:35.9835030Z   ok   test_unknown_task_and_bad_usage
+2026-10-15T08:56:36.1400340Z   ok   test_versioned_done_guard
+2026-10-15T08:56:36.1456360Z   -- 11/11 passed
+2026-10-15T08:56:36.1476520Z == test-usage-limits.sh
+2026-10-15T08:56:36.5361240Z   ok   test_AC_001_classifies_every_planned_provider_limit_fixture
+2026-10-15T08:56:36.6218040Z   ok   test_AC_001_ordinary_failures_including_limit_word_are_none
+2026-10-15T08:56:36.6481470Z   ok   test_AC_002_pattern_table_is_the_only_provider_message_source_and_bash_32_safe
+2026-10-15T08:56:36.7022890Z   ok   test_AC_002_unparseable_horizon_is_unknown_and_bad_usage_is_refused
+2026-10-15T08:56:37.9518440Z   ok   test_AC_003_and_AC_007_codex_attempt_capture_classifies_and_stays_manual_without_policy
+2026-10-15T08:56:39.1961080Z   ok   test_AC_003_dispatch_fixture_copies_only_enumerated_scripts
+2026-10-15T08:56:41.7529590Z   ok   test_AC_003_fail_policy_is_manual_and_ordinary_dispatch_failures_keep_exit_six
+2026-10-15T08:56:44.0665360Z   ok   test_AC_004_and_AC_005_park_policy_replays_original_dispatch_once_per_retry
+2026-10-15T08:56:44.2265300Z   ok   test_AC_004_cron_add_list_and_remove_are_marked_and_idempotent
+2026-10-15T08:56:44.3902280Z   ok   test_AC_004_launchd_add_list_and_remove_are_one_shot_and_idempotent
+2026-10-15T08:56:44.5965890Z   ok   test_AC_005_generic_failure_marks_failed_and_list_cancel_reconcile_scheduler
+2026-10-15T08:56:45.0250120Z   ok   test_AC_005_repeat_limit_reparks_via_nested_dispatcher_and_stops_at_three
+2026-10-15T08:56:45.2422470Z   ok   test_AC_005_resume_replays_adversarial_argv_and_success_removes_unit
+2026-10-15T08:56:45.5076900Z   ok   test_AC_005_scheduler_remove_failure_releases_lock_and_retries_same_unit
+2026-10-15T08:56:45.6666440Z   ok   test_AC_006_and_AC_009_readiness_requires_binary_adapter_and_authentication
+2026-10-15T08:56:45.7091080Z   ok   test_AC_006_auth_checker_override_does_not_bypass_binary_or_adapter_checks
+2026-10-15T08:56:47.0366580Z   ok   test_AC_006_delegate_caps_three_attempts_and_parks_when_exhausted
+2026-10-15T08:56:48.2418520Z   ok   test_AC_006_delegate_classifies_only_the_current_attempt_slice
+2026-10-15T08:56:49.5667250Z   ok   test_AC_006_delegate_uses_ordered_ready_fallback_and_preserves_verification
+2026-10-15T08:56:50.6757350Z   ok   test_AC_009_doctor_fixture_excludes_machine_local_kit_files
+2026-10-15T08:56:51.7845330Z   ok   test_AC_009_doctor_reconciles_pending_failed_and_both_orphan_classes_without_models
+2026-10-15T08:56:54.2702840Z   ok   test_AC_009_doctor_reports_invalid_limit_policy_and_unready_fallbacks
+2026-10-15T08:56:54.2992460Z   ok   test_AC_010_documents_exact_limit_policy_keys_and_recovery_workflows
+2026-10-15T08:56:55.7890820Z   ok   test_T013o1_clock_only_horizons_follow_configured_park_policy
+2026-10-15T08:56:55.9720710Z   ok   test_T013o3_cancel_scheduler_remove_failure_releases_lock_and_recovers
+2026-10-15T08:56:56.1418330Z   ok   test_T013o4_replay_restores_the_parked_path_under_a_stock_scheduler_path
+2026-10-15T08:56:56.3644380Z   ok   test_T013o5_metadata_write_failure_releases_lock_and_unit_recovers
+2026-10-15T08:56:56.3668340Z   -- 27/27 passed
+2026-10-15T08:56:56.3691720Z == test-verification.sh
+2026-10-15T08:59:39.3191880Z   ok   test_capture_provenance
+2026-10-15T08:59:46.0215700Z   ok   test_config_grammar
+2026-10-15T08:59:46.3230020Z   ok   test_owned_transactions
+2026-10-15T08:59:46.3270490Z   -- 3/3 passed
+2026-10-15T08:59:46.3883230Z Post job cleanup.
+2026-10-15T08:59:46.8595590Z [command]/opt/homebrew/bin/git version
+2026-10-15T08:59:46.8693080Z git version 2.56.0
+2026-10-15T08:59:46.8736640Z Copying '/Users/runner/.gitconfig' to '/Users/runner/work/_temp/18aa7a69-31eb-4f9b-9ac5-ffdf243f10dd/.gitconfig'
+2026-10-15T08:59:46.8746690Z Temporarily overriding HOME='/Users/runner/work/_temp/18aa7a69-31eb-4f9b-9ac5-ffdf243f10dd' before making global git config changes
+2026-10-15T08:59:46.8748910Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-15T08:59:46.8750850Z [command]/opt/homebrew/bin/git config --global --add safe.directory /Users/runner/work/sdd-kit/sdd-kit
+2026-10-15T08:59:46.8840990Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-15T08:59:46.9065300Z [command]/opt/homebrew/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-15T08:59:47.2935420Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-15T08:59:47.3050630Z http.https://github.com/.extraheader
+2026-10-15T08:59:47.3069870Z [command]/opt/homebrew/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-10-15T08:59:47.3192060Z [command]/opt/homebrew/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-15T08:59:47.4468570Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-15T08:59:47.4550950Z [command]/opt/homebrew/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-15T08:59:47.5922600Z Cleaning up orphan processes

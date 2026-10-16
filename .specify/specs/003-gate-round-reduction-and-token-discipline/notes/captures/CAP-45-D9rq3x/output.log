@@ -1,0 +1,12 @@
+  ok   test_acceptance
+  FAIL test_checkpoints
+       assert: expected exit 0, got 3: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-gate.sh checkpoint /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.9coef8/checkpoint/.specify/specs/003-verification-fixture Backend
+           output: error: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.9coef8/checkpoint/.specify/stack.yml:10: interpolation is unsupported
+       assert: expected exit 0, got 3: vf_integrity /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.9coef8/checkpoint/.specify/specs/003-verification-fixture/notes/verification/checkpoints/ meta.nul commands.nul bindings.nul inputs.nul roots.nul coverage.nul
+           output: capture integrity: missing COMPLETE or linked directory
+       assert: checkpoint metadata
+       metadata: missing start
+       metadata: missing end
+       cat: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T//sddkit.9coef8/checkpoint-observed: No such file or directory
+       assert: checkpoint interval omits command execution
+/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/verification-lib.sh: line 1143:  7192 Terminated: 15          "$@"

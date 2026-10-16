@@ -1,0 +1,31 @@
+@@OLD
+whole across an invisible character is read whole. The label is the first
+word after any run of characters that are not letters or digits,
+ordered-list numbers and task checkboxes, and it is read from each line and
+from each paragraph, a line joined with the lines that continue it, since an
+inline construct may span lines. The other canonical fields are
+@@NEW
+whole across an invisible character is read whole; a third reading keeps a
+code span's letters and digits and makes its other characters inert, so a
+bracket or a tag inside one opens or closes nothing; and the label is also
+read after each `<br>` or block-level tag outside code spans, where a
+renderer starts a new line, in prose and in the value of a canonical field
+line. The label is the first word after any run of characters that are not
+letters or digits, ordered-list numbers and task checkboxes, and it is read
+from each line and from each run of non-blank lines, joined from every line
+of the run, since an inline construct may span lines and a line reader cannot
+place every paragraph boundary where a renderer does: a run ends only at a
+blank line, a fenced line or an ATX heading, so a boundary the reader misses
+or invents can only make a line refuse. The other canonical fields are
+@@END
+@@OLD
+reads it as a field line of its own. A paragraph ends at a blank line or at a
+line that starts a block that may interrupt it: a list item, an ATX heading, a
+block quote, a code fence, an HTML block of any kind but the seventh, or a
+thematic break. Quoting is read by a line tracker that
+@@NEW
+reads it as a field line of its own. That item ends at a blank line or at a
+line that starts a block that may interrupt a paragraph: a list item, an ATX
+heading, a block quote, a code fence, an HTML block of any kind but the
+seventh, or a thematic break. Quoting is read by a line tracker that
+@@END

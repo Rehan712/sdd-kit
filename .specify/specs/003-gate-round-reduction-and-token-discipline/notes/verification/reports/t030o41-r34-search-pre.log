@@ -1,0 +1,96 @@
+== load-time aliases (top-level assignments in tests/*.sh)
+tests/helpers.sh:20:KIT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+tests/helpers.sh:23:SCRIPTS="$KIT_DIR/scripts"
+tests/probe-gate-contract.sh:7:HUB_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+tests/run.sh:23:TESTS_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+tests/shellcheck.sh:21:ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd -P)"
+tests/test-golden-example.sh:8:ANALYZE="$SCRIPTS/sdd-analyze.sh"
+tests/test-golden-example.sh:9:EXAMPLE="$KIT_DIR/templates/examples/001-api-key-expiry"
+tests/test-model-policy.sh:7:MP="$SCRIPTS/model-policy.sh"
+tests/test-sdd-analyze.sh:5:ANALYZE="$SCRIPTS/sdd-analyze.sh"
+tests/test-spec-ac-coverage.sh:5:AC_COV="$SCRIPTS/spec-ac-coverage.sh"
+tests/test-spec-run.sh:5:SPEC_RUN="$SCRIPTS/spec-run.sh"
+tests/test-spec-status.sh:5:SPEC_STATUS="$SCRIPTS/spec-status.sh"
+tests/test-spec-task.sh:5:SPEC_TASK="$SCRIPTS/spec-task.sh"
+tests/test-usage-limits.sh:8:CLASSIFIER="$SCRIPTS/usage-limit.sh"
+tests/test-usage-limits.sh:9:SCHEDULER="$SCRIPTS/spec-resume-scheduler.sh"
+tests/test-usage-limits.sh:10:FIXTURES="$KIT_DIR/tests/fixtures/usage-limits"
+== alias names: AC_COV|ANALYZE|CLASSIFIER|EXAMPLE|FILTER|FIXTURES|HUB_DIR|KIT_DIR|KIT_MARKER|MP|NOW|ROOT|SCHEDULER|SCRIPTS|SPEC_RUN|SPEC_STATUS|SPEC_TASK|TESTS_DIR|TODAY
+== directory-or-glob reads (candidates), excluding comments and the alias definitions
+tests/helpers.sh:410 [bare] "$SCRIPTS"
+    if ! bash -c '. "$1/verification-lib.sh"; vf_source_paths "$2" "$3"' _ "$SCRIPTS" "$src" "$work/list"; then
+tests/helpers.sh:436 [bare] "$KIT_DIR"
+    copy_kit "$KIT_DIR" "$1" && git_host "$1"
+tests/helpers.sh:453 [bare] "$KIT_DIR"
+    root="$(cd "$KIT_DIR" && pwd -P)" || return 1
+tests/helpers.sh:455 [bare] "$SCRIPTS"
+    if bash -c '. "$1/verification-lib.sh"; vf_source_paths "$2" "$3"' _ "$SCRIPTS" "$root" "$list"; then
+tests/helpers.sh:462 [bare] $KIT_DIR"
+    echo "kit_files: cannot enumerate $KIT_DIR" >&2; rc=1
+tests/test-build-adapters.sh:20 [bare] "$KIT_DIR"
+    copy_kit "$KIT_DIR" "$kit" >&2 || { echo 'stage_kit: cannot stage the kit copy' >&2; return 1; }
+tests/test-build-adapters.sh:134 [variable-member] "$KIT_DIR/$f"
+    OUT="$(cat "$KIT_DIR/$f")"
+tests/test-executable-bits.sh:20 [variable-member] "$KIT_DIR/$f"
+    [[ -x "$KIT_DIR/$f" ]] || bad="$bad ${f##*/}"
+tests/test-gate-contracts.sh:142 [bare] "$KIT_DIR"
+    reported="$(superseded_environment_scan "$KIT_DIR")" || t_fail 'AC-018: the superseded-rule scan could not read the live tree'
+tests/test-gate-contracts.sh:367 [bare] "$SCRIPTS"
+    _ "$SCRIPTS" "$1" "$2" "$SANDBOX/semantic-digest"
+tests/test-gate-contracts.sh:459 [variable-member] "$KIT_DIR/templates/stack-overlays/$name.md"
+    text="$(cat "$KIT_DIR/templates/stack-overlays/$name.md")"
+tests/test-gate-contracts.sh:525 [variable-member] "$KIT_DIR/$file"
+    while IFS= read -r -d '' file; do personas+=("$KIT_DIR/$file"); done < "$list"
+tests/test-gate-contracts.sh:549 [bare] "$KIT_DIR"
+    copy_kit "$KIT_DIR" "$copy" "$rel/notes" || t_fail 'AC-010: cannot copy shipped 002 records as the identity hashes them'
+tests/test-gate-contracts.sh:568 [bare] "$KIT_DIR"
+    copy_kit "$KIT_DIR" "$host" "$rel/notes" || t_fail 'AC-010: cannot build the host tree'
+tests/test-gate-contracts.sh:1472 [variable-member] "$KIT_DIR/$file"
+    text="$(cat "$KIT_DIR/$file")"
+tests/test-gate-contracts.sh:1507 [variable-member] "$KIT_DIR/$file"
+    assert_not_contains "$(cat "$KIT_DIR/$file")" 'spec-task.sh'
+tests/test-gate-contracts.sh:1596 [glob] "$SCRIPTS/"*.sh
+    cp "$SCRIPTS/"*.sh "$kit/scripts/"
+tests/test-gate-contracts.sh:1645 [variable-member] "$KIT_DIR/$document"
+    text="$(tr '\n' ' ' < "$KIT_DIR/$document")"
+tests/test-gate-contracts.sh:1657 [variable-member] "$SCRIPTS/$script.sh"
+    run_rc 0 bash "$SCRIPTS/$script.sh" --help
+tests/test-gate-contracts.sh:1698 [bare] "$KIT_DIR"
+    copy_kit "$KIT_DIR" "$repo" scripts || { t_fail 'documented fixture: cannot copy the kit scripts'; return; }
+tests/test-gate-contracts.sh:1755 [variable-member] "$KIT_DIR/$file"
+    text="$(cat "$KIT_DIR/$file")"
+tests/test-golden-example.sh:22 [bare] "$KIT_DIR"
+    copy_kit "$KIT_DIR" "$SANDBOX/example-copy" "$rel" && mv "$SANDBOX/example-copy/$rel" "$spec_dir" \
+tests/test-model-policy.sh:153 [bare] "$KIT_DIR"
+    copy_kit "$KIT_DIR" "$kit" || t_fail 'AC-008: cannot copy the kit for the wizard fixture'
+tests/test-sdd-analyze.sh:537 [bare] "$SCRIPTS"
+    _ "$SCRIPTS" "$KIT_DIR" "$rel002/$value" "$root/$rel002/$value" \
+tests/test-sdd-analyze.sh:537 [bare] "$KIT_DIR"
+    _ "$SCRIPTS" "$KIT_DIR" "$rel002/$value" "$root/$rel002/$value" \
+tests/test-sdd-analyze.sh:565 [bare] "$SCRIPTS"
+    _ "$SCRIPTS" "$(cd "$KIT_DIR" && pwd -P)" "$SANDBOX/kit-paths" \
+tests/test-sdd-analyze.sh:565 [bare] "$KIT_DIR"
+    _ "$SCRIPTS" "$(cd "$KIT_DIR" && pwd -P)" "$SANDBOX/kit-paths" \
+tests/test-sdd-analyze.sh:582 [bare] "$KIT_DIR"
+    shipped_analyzer_case "$KIT_DIR" "$rel" 0
+tests/test-sdd-analyze.sh:598 [bare] "$KIT_DIR"
+    copy_kit "$KIT_DIR" "$host" "$rel" || t_fail 'AC-023: cannot build the host tree'
+tests/test-sdd-analyze.sh:622 [bare] "$SCRIPTS"
+    _ "$SCRIPTS" "$1" "$2/$value" "$spec_dir/$value" \
+tests/test-spec-dispatch.sh:18 [bare] "$KIT_DIR"
+    copy_kit "$KIT_DIR" "$kit" scripts || { echo 'stage_umbrella: cannot stage the kit scripts' >&2; return 1; }
+tests/test-spec-gate.sh:308 [bare] "$KIT_DIR"
+    copy_kit "$KIT_DIR" "$kit" scripts || t_fail 'AC-007: cannot stage the kit scripts'
+tests/test-usage-limits.sh:14 [variable-member] "$FIXTURES/$2"
+    TZ=UTC "$CLASSIFIER" classify "$1" "$FIXTURES/$2" --now "$NOW"
+tests/test-usage-limits.sh:93 [bare] "$KIT_DIR"
+    copy_kit "$KIT_DIR" "$DISPATCH_KIT" scripts || t_fail 'AC-003: cannot stage the kit scripts for the dispatch fixture'
+tests/test-usage-limits.sh:902 [bare] "$KIT_DIR"
+    copy_kit "$KIT_DIR" "$DOCTOR_KIT" || t_fail 'AC-009: cannot copy the kit for the doctor fixture'
+tests/test-usage-limits.sh:1012 [bare] "$KIT_DIR"
+    copy_kit "$KIT_DIR" "$host" || t_fail 'AC-009: cannot build the host kit'
+tests/test-verification.sh:419 [bare] "$KIT_DIR"
+    bash -c '. "$1/tests/helpers.sh"; [[ -z "${SDD_RESUME_JITTER_SECONDS+set}${XDG_STATE_HOME+set}" ]]' _ "$KIT_DIR"
+tests/test-verification.sh:477 [bare] "$KIT_DIR"
+    bash -c '. "$1/tests/helpers.sh"; SANDBOX="$2"; make_verification_git_dir nested > /dev/null' _ "$KIT_DIR" "$SANDBOX/nested"
+== candidates: 38

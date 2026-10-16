@@ -1,0 +1,148 @@
+== baseline shard 0/1 21:13:30Z
+PASS B report_record_line_cases unmutated passes
+PASS B report_manifest_locale_cases unmutated passes
+PASS B report_round_style_cases unmutated passes
+PASS B report_prior_binding_cases unmutated passes
+PASS B report_severity_tier_cases unmutated passes
+PASS B shipped_002_tally_case unmutated passes
+PASS B round_record_line_cases unmutated passes
+PASS B round_locale_cases unmutated passes
+== the label reader (vf_label_word, vf_label_html, vf_label_links, vf_label_render, vf_label, vf_finding_heading)
+== T030o43 rows carried to their spelling in vf_label_word
+== the record shapes a quoted line may carry (vf_record) and the quoted-record refusal
+== the field-item rule (vf_block_start and both passes)
+== the manifest pass
+== the canonical pass
+== the canonical conjuncts that keep legacy rounds as they were (T030o44 review F6; O03 of v1 is now a kill)
+== the round style decided before its body (T030o45, O-020)
+== the rendered reading: the bracket fixpoint, the escape, the checkbox, emphasis inside a word, hiding (T030o46, O-018)
+== the paragraph step and the paragraph checks (T030o46, T030o47; O-018)
+PASS P10 literal applies once in scripts/verification-lib.sh
+PASS P10 KILLED (kill, judge rc)
+PASS P10 diagnostic: a manifest tier written as paragraph-block-quote was not refused by name under LANG=C (O-018)
+PASS P11 literal applies once in scripts/verification-lib.sh
+PASS P11 KILLED (over, judge rc)
+PASS P11 diagnostic: a plausible manifest (fenced-tag-example) was refused (T030o43 review 2)
+PASS P11c literal applies once in scripts/verification-lib.sh
+PASS P11c KILLED (over, judge rc)
+PASS P11c diagnostic: a canonical finding with a-fenced-tag-example was refused under LANG=C (O-018)
+PASS P11b literal applies once in scripts/verification-lib.sh
+PASS P11b KILLED (over, judge rc)
+PASS P11b diagnostic: a plausible manifest (blank-line-ends-run) was refused (T030o43 review 2)
+PASS P11bc literal applies once in scripts/verification-lib.sh
+PASS P11bc KILLED (over, judge rc)
+PASS P11bc diagnostic: a canonical finding with a-blank-line-ends-run was refused under LANG=C (O-018)
+PASS P12 literal applies once in scripts/verification-lib.sh
+PASS P12 KILLED (over, judge rc)
+PASS P12 diagnostic: a plausible manifest (heading-then-attribute-line) was refused (T030o43 review 2)
+PASS P12c literal applies once in scripts/verification-lib.sh
+PASS P12c KILLED (over, judge rc)
+PASS P12c diagnostic: a canonical finding with a-heading-then-attribute-line was refused under LANG=C (O-018)
+PASS P12i literal applies once in scripts/verification-lib.sh
+PASS P12i KILLED (kill, judge rc)
+PASS P12i diagnostic: a manifest tier written as paragraph-indented-heading-marker was not refused by name under LANG=C (O-018)
+PASS P12q literal applies once in scripts/verification-lib.sh
+PASS P12q KILLED (over, judge rc)
+PASS P12q diagnostic: a plausible manifest (quoted-heading-then-attribute-line) was refused (T030o43 review 2)
+PASS P12qc literal applies once in scripts/verification-lib.sh
+PASS P12qc KILLED (over, judge rc)
+PASS P12qc diagnostic: a canonical finding with a-quoted-heading-then-attribute-line was refused under LANG=C (O-018)
+PASS P13 literal applies once in scripts/verification-lib.sh
+PASS P13 KILLED (kill, judge rc)
+PASS P13 diagnostic: a manifest tier written as split-tag was not refused by name under LANG=C (O-018)
+PASS P13e literal applies once in scripts/verification-lib.sh
+PASS P13e KILLED (kill, judge rc)
+PASS P13e diagnostic: a CLEARED completion over a second manifest tier written as - <b
+PASS P14 literal applies once in scripts/verification-lib.sh
+PASS P14 KILLED (kill, judge rc)
+PASS P14 diagnostic: a second tier written as split-tag was not refused by name under LANG=C (O-018)
+PASS P14e literal applies once in scripts/verification-lib.sh
+PASS P14e KILLED (kill, judge rc)
+PASS P14e diagnostic: a CLEARED completion over a second tier written as - **Severity:** minor\n- <abbr
+PASS P15 literal applies once in scripts/verification-lib.sh
+PASS P15 KILLED (kill, judge rc)
+PASS P15 diagnostic: a manifest tier written as comment-across-quoted was not refused by name under LANG=C (O-018)
+PASS P16 literal applies once in scripts/verification-lib.sh
+PASS P16 KILLED (kill, judge rc)
+PASS P16 diagnostic: a second tier written as comment-across-quoted was not refused by name under LANG=C (O-018)
+PASS P16e literal applies once in scripts/verification-lib.sh
+PASS P16e KILLED (kill, judge rc)
+PASS P16e diagnostic: a CLEARED completion over a second tier written as - **Severity:** minor\n- <!-- a
+PASS P17 literal applies once in scripts/verification-lib.sh
+PASS P17 KILLED (over, judge rc)
+PASS P17 diagnostic: expected exit 0, got 3: record_line_vf C
+PASS P18 literal applies once in scripts/verification-lib.sh
+PASS P18 SURVIVES as argued (equiv)
+PASS P19 literal applies once in scripts/verification-lib.sh
+PASS P19 SURVIVES as argued (equiv)
+PASS P20 literal applies once in scripts/verification-lib.sh
+PASS P20 SURVIVES as argued (equiv)
+PASS P21 literal applies once in scripts/verification-lib.sh
+PASS P21 SURVIVES as argued (equiv)
+PASS P22 literal applies once in scripts/verification-lib.sh
+PASS P22 KILLED (kill, judge rc)
+PASS P22 diagnostic: a manifest tier written as paragraph-ordered-sibling was not refused by name under LANG=C (O-018)
+PASS P23 literal applies once in scripts/verification-lib.sh
+PASS P23 KILLED (kill, judge rc)
+PASS P23 diagnostic: a manifest tier written as paragraph-ordered-sibling was not refused by name under LANG=C (O-018)
+== the blocks that end a field item (T030o46, O-021)
+== the code-span reading, the reading after a rendered line start, the field-value reading (T030o47, O-018)
+PASS X01 literal applies once in scripts/verification-lib.sh
+PASS X01 KILLED (kill, judge rc)
+PASS X01 diagnostic: a manifest tier written as code-span-in-link was not refused by name under LANG=C (O-018)
+PASS X02 literal applies once in scripts/verification-lib.sh
+PASS X02 KILLED (kill, judge rc)
+PASS X02 diagnostic: a manifest tier written as code-span-in-link was not refused by name under LANG=C (O-018)
+PASS X03 literal applies once in scripts/verification-lib.sh
+PASS X03 KILLED (kill, judge rc)
+PASS X03 diagnostic: a manifest tier written as code-span-then-soft-hyphen was not refused by name under LANG=C (O-018)
+PASS X04 literal applies once in scripts/verification-lib.sh
+PASS X04 KILLED (kill, judge rc)
+PASS X04 diagnostic: a manifest tier written as br-in-prose was not refused by name under LANG=C (O-018)
+PASS X05 literal applies once in scripts/verification-lib.sh
+PASS X05 KILLED (kill, judge rc)
+PASS X05 diagnostic: a manifest tier written as closing-p-inside-line was not refused by name under LANG=C (O-018)
+PASS X06a literal applies once in scripts/verification-lib.sh
+PASS X06a KILLED (kill, judge rc)
+PASS X06a diagnostic: a manifest tier written as p-inside-line was not refused by name under LANG=C (O-018)
+PASS X06b literal applies once in scripts/verification-lib.sh
+PASS X06b KILLED (kill, judge rc)
+PASS X06b diagnostic: a manifest tier written as br-in-prose was not refused by name under LANG=C (O-018)
+PASS X06c literal applies once in scripts/verification-lib.sh
+PASS X06c KILLED (over, judge rc)
+PASS X06c diagnostic: a plausible manifest (span-in-prose) was refused (T030o43 review 2)
+PASS X07 literal applies once in scripts/verification-lib.sh
+PASS X07 KILLED (kill, judge rc)
+PASS X07 diagnostic: a manifest tier written as br-then-code-span was not refused by name under LANG=C (O-018)
+PASS X08 literal applies once in scripts/verification-lib.sh
+PASS X08 KILLED (kill, judge rc)
+PASS X08 diagnostic: a manifest tier written as br-then-soft-hyphen was not refused by name under LANG=C (O-018)
+PASS X09 literal applies once in scripts/verification-lib.sh
+PASS X09 KILLED (kill, judge rc)
+PASS X09 diagnostic: a second tier written as br-in-where was not refused by name under LANG=C (O-018)
+PASS X10 literal applies once in scripts/verification-lib.sh
+PASS X10 KILLED (kill, judge rc)
+PASS X10 diagnostic: a canonical rule reached a legacy round, or the round lost its Blocks (T030o44 review F6)
+PASS X11 literal applies once in scripts/verification-lib.sh
+PASS X11 SURVIVES as argued (equiv)
+PASS X12 literal applies once in scripts/verification-lib.sh
+FAIL X12 SURVIVES as argued (equiv) (want=0 got=1)
+  |   assert: AC-012: a manifest tier written as heading-label was not refused by name under LANG=C (O-018) missing substring: a Severity line this grammar cannot read: #### Severity: data-loss
+  |   assert: AC-012: a manifest tier written as heading-label was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a Severity line this grammar cannot read: #### Severity: data-loss
+  |   assert: AC-012: a manifest tier written as heading-body was not refused by name under LANG=C (O-018) missing substring: a Severity line this grammar cannot read: #### Severity
+  |   assert: AC-012: a manifest tier written as heading-body was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a Severity line this grammar cannot read: #### Severity
+  |   assert: AC-012: a manifest tier written as heading-under-level-two was not refused by name under LANG=C (O-018) missing substring: a Severity line this grammar cannot read: ### Severity: data-loss
+PASS X13 literal applies once in scripts/verification-lib.sh
+PASS X13 KILLED (kill, judge rc)
+PASS X13 diagnostic: a manifest tier written as escaped-backtick-then-code-span was not refused by name under LANG=C (O-018)
+PASS X14 literal applies once in scripts/verification-lib.sh
+PASS X14 KILLED (kill, judge rc)
+PASS X14 diagnostic: a manifest tier written as code-span-holding-a-backtick was not refused by name under LANG=C (O-018)
+PASS X15 literal applies once in scripts/verification-lib.sh
+PASS X15 KILLED (over, judge rc)
+PASS X15 diagnostic: a plausible manifest (code-span-word-before-label) was refused (T030o43 review 2)
+PASS X15c literal applies once in scripts/verification-lib.sh
+PASS X15c KILLED (over, judge rc)
+PASS X15c diagnostic: a canonical finding with a-code-span-word-before-label was refused under LANG=C (O-018)
+== done shard 0/1 21:29:37Z rows=171
+r15-mutations failures=1

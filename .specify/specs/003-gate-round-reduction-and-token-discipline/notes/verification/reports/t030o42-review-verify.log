@@ -1,0 +1,32 @@
+== F1a: the harness under locales (clean tree)
+snapshot C                      rc=0 digest=38909f0b20ba65a0 err=
+snapshot C.UTF-8                rc=0 digest=38909f0b20ba65a0 err=
+snapshot en_US.UTF-8            rc=0 digest=38909f0b20ba65a0 err=
+snapshot ISO8859-1              rc=0 digest=38909f0b20ba65a0 err=
+cut: stdin: Illegal byte sequence
+snapshot SJIS                   rc=3 digest= err=awk: towc: multibyte conversion failure on: '
+== F1b: one invalid UTF-8 byte in the T030o42 subject line
+grep: illegal byte sequence
+  | byte planted:  line(s)
+snapshot bad-C                  rc=0 digest=f5315364f57d131d err=
+cut: stdin: Illegal byte sequence
+snapshot bad-C.UTF-8            rc=3 digest= err=awk: towc: multibyte conversion failure on: '
+cut: stdin: Illegal byte sequence
+snapshot bad-en_US.UTF-8        rc=3 digest= err=awk: towc: multibyte conversion failure on: '
+  | analyzer with the byte under C: rc=0 1 warning(s), 0 errors
+  | analyzer with the byte under en_US.UTF-8: rc=1 12 error(s), 0 warning(s)
+  | tasks.md restored: clean
+== F1c: glob order under collation
+  | C: -- -y B CAP-1-Z CAP-1-a CAP-10-a CAP-9-b _x a
+  | C.UTF-8: -- -y B CAP-1-Z CAP-1-a CAP-10-a CAP-9-b _x a
+  | en_US.UTF-8: _x -- -y a B CAP-1-a CAP-1-Z CAP-10-a CAP-9-b
+== F2: every suite loads helpers.sh first (the first non-comment line after set -u)
+  | suites checked: 15
+== F3: date(1) ENVIRONMENT section
+  | ENVIRONMENT
+  |      The following environment variable affects the execution of date:
+  | 
+  |      TZ      The timezone to use when displaying dates.  The normal format is
+  | 	     a pathname relative to /usr/share/zoneinfo.  For example, the
+  | 	     command “TZ=America/Los_Angeles date” displays the current time
+  | the census regex required names of three or more characters: 0 match(es) for TZ

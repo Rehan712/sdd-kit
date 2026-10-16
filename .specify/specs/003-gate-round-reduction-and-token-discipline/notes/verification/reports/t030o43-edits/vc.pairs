@@ -1,0 +1,27 @@
+@@OLD
+first command, having only resolved its own directory. `LC_ALL` overrides
+`LANG` and every locale category.
+@@NEW
+first command, having only resolved its own directory. `LC_ALL` overrides
+`LANG` and every locale category. The harness pins its own parsing the same
+way: the kernel exports `LC_ALL=C` when it loads, each harness entry script
+loads it before any program reads a byte of the spec, and the command a
+capture runs gets the caller's `LC_ALL` back exactly.
+@@END
+@@OLD
+functions run under an explicit `bash`, `LANG` and the locale categories
+change no record the harness writes (it runs under the caller's locale, pins
+`LC_ALL=C` where collation matters, and fails closed in a locale that cannot
+decode the kit's bytes, such as Shift-JIS, or a UTF-8 locale over an invalid
+byte), while a check whose programs read them pins them or declares them, as
+the kit's own reuse-checked commands pin `LC_ALL=C` when they start, and
+@@NEW
+functions run under an explicit `bash`, `LANG` and the locale categories
+change no record the harness writes (it runs its own parsing under
+`LC_ALL=C`, which decodes every byte and reads every ASCII grammar the kit
+writes as any other locale would, and a parse that fails never reads as a
+passing result), while a check whose programs read them pins them or declares
+them, as the kit's own reuse-checked commands pin `LC_ALL=C` when they start;
+the harness gives the caller's `LC_ALL` back to the command a capture runs,
+and hashes a declared `LC_ALL` by that value, and
+@@END

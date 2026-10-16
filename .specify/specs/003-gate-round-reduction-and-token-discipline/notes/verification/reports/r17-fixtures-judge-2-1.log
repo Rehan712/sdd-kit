@@ -1,0 +1,83 @@
+start 2026-10-08T17:14:05Z shard 1/2; TMPDIR=/private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17-fixtures-2-1/tmp/
+PASS K: the four files hash as r17-edits/post-apply-1
+PASS K: tgc-2.pairs applied, each block exactly once
+PASS K: the suite still parses
+PASS E01b: the mutant applies exactly once
+== E01b (report_manifest_locale_cases): 2 failing assertions
+PASS E01b fails on: a plausible manifest (image-split-by-crlf-blank-line) was refused
+PASS E04: the mutant applies exactly once
+== E04 (report_manifest_locale_cases report_record_line_cases): 12 failing assertions
+PASS E04 fails on: a plausible manifest (image-split-by-six-marks) was refused
+PASS E04 fails on: a plausible manifest (quoted-image-split-by-six-marks) was refused
+PASS E04 fails on: a canonical finding with a-image-split-by-six-marks was refused
+PASS E04 fails on: a canonical finding with a-quoted-image-split-by-six-marks was refused
+PASS E08: the mutant applies exactly once
+== E08 (report_manifest_locale_cases report_record_line_cases): 6 failing assertions
+PASS E08 fails on: a plausible manifest (span-tag-after-a-lone-backtick-paragraph) was refused
+PASS E08 fails on: a canonical finding with a-span-tag-after-a-lone-backtick-paragraph was refused
+PASS C05: the mutant applies exactly once
+== C05 (report_record_line_cases report_record_line_cases): 24 failing assertions
+PASS C05 fails on: a manifest tier written as tag-after-span-closing-next-line was not refused
+PASS C05 fails on: a second tier written as tag-after-span-closing-next-line was not refused
+PASS C05 fails on: a manifest tier written as tag-after-span-closing-two-lines-later was not refused
+PASS C05 fails on: a second tier written as tag-after-span-closing-two-lines-later was not refused
+  | also: assert: AC-012: a manifest tier written as image-alt-code-span-closing-two-lines-later was not refused by name under LANG=C (O-018) missing substring: a second Severity line in finding G-042
+  | also: assert: AC-012: a manifest tier written as image-alt-code-span-closing-two-lines-later was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a second Severity line in finding G-042
+  | also: assert: AC-012: a second tier written as image-alt-code-span-closing-two-lines-later was not refused by name under LANG=C (O-018) missing substring: a Severity line this grammar cannot read in finding
+  | also: assert: AC-012: a second tier written as image-alt-code-span-closing-two-lines-later was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a Severity line this grammar cannot read 
+PASS C08: the mutant applies exactly once
+== C08 (report_record_line_cases report_record_line_cases): 16 failing assertions
+PASS C08 fails on: a manifest tier written as tag-after-span-closing-next-line was not refused
+PASS C08 fails on: a second tier written as tag-after-span-closing-next-line was not refused
+PASS C08 fails on: a manifest tier written as tag-after-span-closing-two-lines-later was not refused
+PASS C08 fails on: a second tier written as tag-after-span-closing-two-lines-later was not refused
+PASS S03: the mutant applies exactly once
+== S03 (report_record_line_cases report_record_line_cases): 4 failing assertions
+PASS S03 fails on: a manifest tier written as tag-attribute-across-three-lines was not refused
+PASS S03 fails on: a second tier written as tag-attribute-across-three-lines was not refused
+PASS S05: the mutant applies exactly once
+== S05 (report_record_line_cases report_record_line_cases): 40 failing assertions
+PASS S05 fails on: a manifest tier written as image-alt-across-three-lines was not refused
+PASS S05 fails on: a second tier written as image-alt-across-three-lines was not refused
+PASS S05 fails on: a manifest tier written as link-title-across-three-lines was not refused
+PASS S05 fails on: a second tier written as link-title-across-three-lines was not refused
+PASS S05 fails on: a manifest tier written as image-alt-holding-code-span-across-lines was not refused
+PASS S05 fails on: a second tier written as image-alt-holding-code-span-across-lines was not refused
+PASS S05 fails on: a manifest tier written as image-alt-holding-escaped-bracket-across-lines was not refused
+PASS S05 fails on: a second tier written as image-alt-holding-escaped-bracket-across-lines was not refused
+  | also: assert: AC-012: a manifest tier written as image-after-stray-bracket-across-three-lines was not refused by name under LANG=C (O-018) missing substring: a second Severity line in finding G-042
+  | also: assert: AC-012: a manifest tier written as image-after-stray-bracket-across-three-lines was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a second Severity line in finding G-04
+  | also: assert: AC-012: a second tier written as image-after-stray-bracket-across-three-lines was not refused by name under LANG=C (O-018) missing substring: a Severity line this grammar cannot read in findin
+  | also: assert: AC-012: a second tier written as image-after-stray-bracket-across-three-lines was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a Severity line this grammar cannot read
+PASS S05c: the mutant applies exactly once
+== S05c (report_record_line_cases report_record_line_cases): 8 failing assertions
+PASS S05c fails on: a manifest tier written as image-alt-holding-code-span-across-lines was not refused
+PASS S05c fails on: a second tier written as image-alt-holding-code-span-across-lines was not refused
+PASS S06b: the mutant applies exactly once
+== S06b (report_record_line_cases report_record_line_cases): 24 failing assertions
+PASS S06b fails on: a manifest tier written as image-alt-across-three-lines was not refused
+PASS S06b fails on: a second tier written as image-alt-across-three-lines was not refused
+PASS S06b fails on: a manifest tier written as image-alt-holding-code-span-across-lines was not refused
+PASS S06b fails on: a second tier written as image-alt-holding-code-span-across-lines was not refused
+  | also: assert: AC-012: a manifest tier written as image-alt-holding-escaped-bracket-across-lines was not refused by name under LANG=C (O-018) missing substring: a second Severity line in finding G-042
+  | also: assert: AC-012: a manifest tier written as image-alt-holding-escaped-bracket-across-lines was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a second Severity line in finding G-
+  | also: assert: AC-012: a second tier written as image-alt-holding-escaped-bracket-across-lines was not refused by name under LANG=C (O-018) missing substring: a Severity line this grammar cannot read in find
+  | also: assert: AC-012: a second tier written as image-alt-holding-escaped-bracket-across-lines was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a Severity line this grammar cannot re
+PASS S06e: the mutant applies exactly once
+== S06e (report_record_line_cases report_record_line_cases): 8 failing assertions
+PASS S06e fails on: a manifest tier written as image-alt-holding-escaped-bracket-across-lines was not refused
+PASS S06e fails on: a second tier written as image-alt-holding-escaped-bracket-across-lines was not refused
+PASS X16n: the mutant applies exactly once
+== X16n (report_record_line_cases report_record_line_cases): 8 failing assertions
+PASS X16n fails on: a manifest tier written as image-alt-holding-an-unclosed-run-then-a-span was not refused
+PASS X16n fails on: a second tier written as image-alt-holding-an-unclosed-run-then-a-span was not refused
+PASS L01b: the mutant applies exactly once
+== L01b (report_manifest_locale_cases): 2 failing assertions
+PASS L01b fails on: a plausible manifest (outside-comment-closer) was refused
+PASS N05o: the mutant applies exactly once
+== N05o (report_manifest_locale_cases): 4 failing assertions
+PASS N05o fails on: a plausible manifest (outside-comment-closer) was refused
+PASS N05o fails on: a plausible manifest (outside-span-tag) was refused
+PASS live worktree status outside notes/verification/ unchanged
+end 2026-10-08T17:20:58Z
+r17-fixtures-judge-2 shard 1/2 failures=0

@@ -1,0 +1,5 @@
+    style=="legacy" && /^[0-9]+\. .*severity:/ {
+      finding(); fid="legacy-" n "-" ++legacyid; cls="unclassified"; status="new"; prior="none"
+      sev=vf_original; sub(/^.*severity:\*[ ]*/,"",sev); sev=clean(sev); next
+    }
+    style=="legacy" && inwhere && !/^[ ]*- \*\*/ {loc=loc " " clean(vf_original)}

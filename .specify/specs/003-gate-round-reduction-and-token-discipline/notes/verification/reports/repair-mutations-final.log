@@ -1,0 +1,63 @@
+PASS baseline rc=0
+PASS round-first rc=1
+assert: expected exit 3, got 0: bash -c . "$1"; vf_reports "$2" "$3" "$4" "$5" _ /private/tmp/sdd003-mutations.0byVDv/scripts/verification-lib.sh /private/tmp/sdd003-mutations.0byVDv/case.EfrTzj/tier-opponent/notes/opponent.md opponent /private/tmp/sdd003-mutations.0byVDv/case.EfrTzj/tier-walkback.nul /private/tmp/sdd003-mutations.0byVDv/case.EfrTzj/tier-opponent
+assert: AC-012: escalation followed by a downgrade cleared missing substring: clearing verdict rests on 1 lowered severity tier(s) of known findings
+assert: expected exit 3, got 0: bash -c . "$1"; vf_reports "$2" opponent "$3" "$4" _ /private/tmp/sdd003-mutations.0byVDv/scripts/verification-lib.sh /private/tmp/sdd003-mutations.0byVDv/case.EfrTzj/tier-opponent/notes/opponent.md /private/tmp/sdd003-mutations.0byVDv/case.EfrTzj/tier-order.nul /private/tmp/sdd003-mutations.0byVDv/case.EfrTzj/tier-opponent
+PASS round-last rc=1
+assert: expected exit 3, got 0: bash -c . "$1"; vf_reports "$2" opponent "$3" "$4" _ /private/tmp/sdd003-mutations.0byVDv/scripts/verification-lib.sh /private/tmp/sdd003-mutations.0byVDv/case.l0XRMs/tier-opponent/notes/opponent.md /private/tmp/sdd003-mutations.0byVDv/case.l0XRMs/tier-manifest.nul /private/tmp/sdd003-mutations.0byVDv/case.l0XRMs/tier-opponent
+assert: AC-012: round observation weakened the strictest manifest tier missing substring: clearing verdict rests on 1 lowered severity tier(s) of known findings
+PASS round-all-blocking rc=1
+assert: expected exit 0, got 3: bash /private/tmp/sdd003-mutations.0byVDv/scripts/spec-gate.sh tally /private/tmp/sdd003-mutations.0byVDv/case.QyyDev/tier-opponent
+assert: AC-017: non-downgrades were counted missing substring: severity-downgrades=0
+PASS manifest-first rc=1
+assert: expected exit 3, got 0: bash -c . "$1"; vf_reports "$2" opponent "$3" "$4" _ /private/tmp/sdd003-mutations.0byVDv/scripts/verification-lib.sh /private/tmp/sdd003-mutations.0byVDv/case.1BYE0j/tier-opponent/notes/opponent.md /private/tmp/sdd003-mutations.0byVDv/case.1BYE0j/tier-manifest.nul /private/tmp/sdd003-mutations.0byVDv/case.1BYE0j/tier-opponent
+assert: AC-012: round observation weakened the strictest manifest tier missing substring: clearing verdict rests on 1 lowered severity tier(s) of known findings
+PASS tally-first rc=1
+assert: AC-017: sticky tier lost repeated downgrades missing substring: severity-downgrades=2
+assert: AC-017: sticky tier lost repeated downgrades missing substring: severity-downgrades=2
+assert: AC-017: sticky tier lost repeated downgrades missing substring: severity-downgrades=2
+PASS tally-last rc=1
+assert: AC-017: sticky tier lost repeated downgrades missing substring: severity-downgrades=2
+assert: AC-017: sticky tier lost repeated downgrades missing substring: severity-downgrades=2
+assert: AC-017: sticky tier lost repeated downgrades missing substring: severity-downgrades=2
+PASS tally-all-blocking rc=1
+assert: AC-017: non-downgrades were counted missing substring: severity-downgrades=0
+PASS forbid-recharacterisation rc=1
+assert: expected exit 0, got 3: bash -c . "$1"; vf_reports "$2" "$3" "$4" "$5" _ /private/tmp/sdd003-mutations.0byVDv/scripts/verification-lib.sh /private/tmp/sdd003-mutations.0byVDv/case.AcTQ3I/tier-opponent/notes/opponent.md opponent /private/tmp/sdd003-mutations.0byVDv/case.AcTQ3I/tier-challenged.nul /private/tmp/sdd003-mutations.0byVDv/case.AcTQ3I/tier-opponent
+assert: expected exit 0, got 3: bash /private/tmp/sdd003-mutations.0byVDv/scripts/spec-gate.sh tally /private/tmp/sdd003-mutations.0byVDv/case.AcTQ3I/tier-opponent
+assert: AC-017: sticky tier lost repeated downgrades missing substring: severity-downgrades=2
+PASS d1-no-collapse rc=1
+assert: AC-018: the superseded claim survived as inner-whitespace.md missing substring: inner-whitespace.md
+assert: AC-018: the guard flagged a sentence stating the replacement rule
+PASS d1-no-negation rc=1
+assert: AC-018: superseded fixed-environment membership survives in a current artifact
+assert: AC-018: the guard flagged a sentence stating the replacement rule
+PASS cli-old-reader rc=1
+assert: expected exit 1, got 0: gate_documentation_check /private/tmp/sdd003-mutations.0byVDv/case.gn6k20/dispatch-kit/scripts/spec-gate.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/README.md
+assert: output missing substring: AC-018: the --help synopsis and the dispatcher disagree on the subcommand set
+assert: output missing substring: AC-018: spec-gate.sh probe has no --help detail line
+PASS cli-no-open-paren rc=1
+assert: expected exit 1, got 3: gate_documentation_check /private/tmp/sdd003-mutations.0byVDv/case.prPVEx/dispatch-kit/scripts/spec-gate.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/README.md
+assert: output missing substring: AC-018: the --help synopsis and the dispatcher disagree on the subcommand set
+assert: output missing substring: AC-018: spec-gate.sh probe has no --help detail line
+PASS cli-narrow-verbs rc=1
+assert: expected exit 1, got 3: gate_documentation_check /private/tmp/sdd003-mutations.0byVDv/case.VDDHT1/dispatch-kit/scripts/spec-gate.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/README.md
+assert: output missing substring: AC-018: the --help synopsis and the dispatcher disagree on the subcommand set
+assert: output missing substring: AC-018: spec-gate.sh probe2 has no --help detail line
+PASS cli-silent-clause rc=1
+assert: expected exit 3, got 0: gate_dispatch_verbs /private/tmp/sdd003-mutations.0byVDv/case.xfRQE5/dispatch-kit/scripts/spec-gate.sh
+assert: output missing substring: AC-018: unclassifiable spec-gate.sh dispatcher clause
+assert: expected exit 3, got 0: gate_dispatch_verbs /private/tmp/sdd003-mutations.0byVDv/case.xfRQE5/dispatch-kit/scripts/spec-gate.sh
+PASS cli-no-synopsis rc=1
+assert: output missing substring: AC-018: the --help synopsis and the dispatcher disagree on the subcommand set
+assert: output missing substring: AC-018: the --help synopsis and the dispatcher disagree on the subcommand set
+assert: output missing substring: AC-018: the --help synopsis and the dispatcher disagree on the subcommand set
+PASS cli-no-detail rc=1
+assert: output missing substring: AC-018: spec-gate.sh probe has no --help detail line
+assert: AC-018: spec-gate.sh probe appears in no operator-facing document missing substring: spec-gate.sh probe 
+assert: output missing substring: AC-018: spec-gate.sh probe has no --help detail line
+PASS cli-no-readme rc=1
+assert: output missing substring: AC-018: spec-gate.sh probe appears in no operator-facing document
+assert: AC-018: spec-gate.sh probe has no --help detail line missing substring:   probe <spec-dir>
+assert: output missing substring: AC-018: spec-gate.sh probe appears in no operator-facing document
+byte-identical restore/live comparison complete; artifacts=/private/tmp/sdd003-mutations.0byVDv exit=0

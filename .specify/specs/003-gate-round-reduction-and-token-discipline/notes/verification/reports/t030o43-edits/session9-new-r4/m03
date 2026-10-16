@@ -1,0 +1,11 @@
+      END {
+        flushm()
+        if (fenced) bad("a code fence is left open")
+        if (commented) bad("an HTML comment is left open")
+        if (rawkind) bad("a raw HTML block is left open")
+        # A declared manifest exists to vouch for findings, so one from which
+        # the pass reads none is refused, never read as a record of nothing
+        # (T030o43 review 4, R4-F4).
+        if (!recorded && !failed) {printf "manifest: records no finding this grammar can read\n" > "/dev/stderr"; failed=1}
+        if (failed) exit 3
+      }

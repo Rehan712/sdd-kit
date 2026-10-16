@@ -1,0 +1,43 @@
+PASS baseline test-verification:test_capture_provenance rc=0
+PASS baseline test-gate-contracts:test_reports_and_tally rc=0
+PASS baseline test-gate-contracts:test_instruction_contracts rc=0
+PASS baseline-cs test-verification:test_capture_provenance rc=0
+PASS M1-old-broad-predicate KILLED test-verification:test_capture_provenance rc=1: assert: AC-020: another spec's untracked notes/opponent.md left the identity unchanged
+PASS M2-no-exclusion KILLED test-verification:test_capture_provenance rc=1: assert: AC-020: generated bookkeeping stays reusable
+PASS M3-anchor-empty KILLED test-verification:test_capture_provenance rc=1: assert: AC-020: generated bookkeeping stays reusable
+PASS M4-index-pass-broad KILLED test-verification:test_capture_provenance rc=1: assert: AC-020: a staged-only change to another spec's notes/opponent.md left the identity unchanged
+PASS M5-path-pass-broad KILLED test-verification:test_capture_provenance rc=1: assert: AC-020: another spec's untracked notes/opponent.md left the identity unchanged
+PASS M6-no-refusal KILLED test-verification:test_capture_provenance rc=1: assert: expected exit 3, got 0: snapshot_fixture /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/35c9f4cc-c83d-4af8-aa2a-a8e3cf46ab0d/scratchpad/mut/tmp/sddk
+PASS M7-lexical-refusal KILLED test-verification:test_capture_provenance rc=1: assert: expected exit 3, got 0: snapshot_fixture /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/35c9f4cc-c83d-4af8-aa2a-a8e3cf46ab0d/scratchpad/mut/tmp/sddk
+PASS M8-no-link-follow KILLED test-verification:test_capture_provenance rc=1: assert: expected exit 3, got 0: snapshot_fixture /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/35c9f4cc-c83d-4af8-aa2a-a8e3cf46ab0d/scratchpad/mut/tmp/sddk
+PASS M9-no-member-skip KILLED test-verification:test_capture_provenance rc=1: assert: AC-020: the verified spec's own records were counted inside declared directory .specify
+PASS M10-scan-unanchored KILLED test-gate-contracts:test_instruction_contracts rc=1: assert: AC-018: superseded fixed-environment membership survives in a current artifact
+PASS M11-scan-fixed-anchor KILLED test-gate-contracts:test_instruction_contracts rc=1: assert: AC-018: superseded fixed-environment membership survives in a current artifact
+PASS M17-no-fold-probe KILLED test-verification:test_capture_provenance rc=1: assert: expected exit 3, got 0: snapshot_fixture /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/35c9f4cc-c83d-4af8-aa2a-a8e3cf46ab0d/scratchpad/mut/tmp/sddk
+PASS M25-probe-does-not-climb KILLED test-verification:test_capture_provenance rc=1: assert: AC-020: a letterless spec typed in another case leaked its own records into its identity
+PASS M24-no-alias-guard-cs KILLED test-verification:test_capture_provenance rc=1: assert: AC-020: a case-swapped alias symlink folded a sibling spec into this spec's own records
+PASS M18-fold-from-git-config KILLED test-verification:test_capture_provenance rc=1: assert: expected exit 3, got 0: snapshot_fixture /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/35c9f4cc-c83d-4af8-aa2a-a8e3cf46ab0d/scratchpad/mut/tmp/sddk
+PASS M19-logical-cd KILLED test-verification:test_capture_provenance rc=1: assert: expected exit 3, got 0: snapshot_fixture /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/35c9f4cc-c83d-4af8-aa2a-a8e3cf46ab0d/scratchpad/mut/tmp/sddk
+PASS M23-anchor-from-git-discovery KILLED test-verification:test_capture_provenance rc=1: assert: AC-020: an exported GIT_DIR leaked the spec's own records into its identity
+PASS M20-no-root-refusal KILLED test-verification:test_capture_provenance rc=1: assert: expected exit 3, got 0: snapshot_fixture /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/35c9f4cc-c83d-4af8-aa2a-a8e3cf46ab0d/scratchpad/mut/tmp/sddk
+PASS M21-lexical-member-base KILLED test-verification:test_capture_provenance rc=1: assert: AC-020: the verified spec's own records were counted inside declared directory ./.specify
+/private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/35c9f4cc-c83d-4af8-aa2a-a8e3cf46ab0d/scratchpad/mut/run-matrix.sh: line 21:  6522 Terminated: 15          ( cd "$C" && exec bash -c '. "tests/.one-$1.sh"
+      SANDBOX="$(mktemp -d "${TMPDIR:-/tmp}/sddkit.XXXXXX")"; export SANDBOX
+      out="$( ( _t_fail=0; "$2"; exit "$_t_fail" ) 2>&1 )"; rc=$?
+      rm -rf "$SANDBOX"; printf "%s\n" "$out" > "$3"; exit "$rc"' _ "$1" "$2" "$W/$3.out" )
+PASS M22-unbounded-link-loop KILLED test-verification:test_capture_provenance rc=124: watchdog: killed after 420s
+PASS M12-tally-seedless-fold KILLED test-gate-contracts:test_reports_and_tally rc=1: assert: AC-017: the tally missed a lowered tier the guard counted from a prior-review manifest missing substring: severity-downgrades=1
+PASS M13-tally-id-only-fold KILLED test-gate-contracts:test_reports_and_tally rc=1: assert: AC-017: the tally missed a lowered tier the guard counted from a prior-review manifest missing substring: severity-downgrades=1
+PASS M14-no-downgrade-emit KILLED test-gate-contracts:test_reports_and_tally rc=1: assert: AC-017: sticky tier lost repeated downgrades missing substring: severity-downgrades=2
+PASS M15-manifest-across-gates KILLED test-gate-contracts:test_reports_and_tally rc=1: assert: AC-017: one gate lowered the tier of the same finding ID recorded by the other gate missing substring: severity-downgrades=0
+PASS M16-no-multi-clause-refusal KILLED test-gate-contracts:test_instruction_contracts rc=1: assert: expected exit 3, got 0: gate_dispatch_verbs /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/35c9f4cc-c83d-4af8-aa2a-a8e3cf46ab0d/scratchpad/mut/tmp/s
+PASS E1-predicate-canonical-only SURVIVED test-gate-contracts:test_reports_and_tally rc=0: 
+PASS E2-declared-calls-anchored SURVIVED test-verification:test_capture_provenance rc=0: 
+PASS C1-refuse-every-declared-dir KILLED test-verification:test_capture_provenance rc=1: assert: expected exit 0, got 3: snapshot_fixture /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/35c9f4cc-c83d-4af8-aa2a-a8e3cf46ab0d/scratchpad/mut/tmp/sddk
+PASS C2-refuse-other-spec-report KILLED test-verification:test_capture_provenance rc=1: assert: expected exit 0, got 3: snapshot_fixture /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/35c9f4cc-c83d-4af8-aa2a-a8e3cf46ab0d/scratchpad/mut/tmp/sddk
+PASS C3-count-resolved KILLED test-gate-contracts:test_reports_and_tally rc=1: assert: AC-017: non-downgrades were counted missing substring: severity-downgrades=0
+PASS final scripts/verification-lib.sh byte-identical to live
+PASS final tests/test-gate-contracts.sh byte-identical to live
+PASS final tests/test-verification.sh byte-identical to live
+matrix failures=0
+window 2026-09-23T10:05:29Z..2026-09-23T11:06:02Z

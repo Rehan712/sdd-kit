@@ -1,0 +1,25 @@
+  | live worktree porcelain digest before: 9f4a995da2dc0a3a43b0b3ba8d03ec053009a62d99b6f12034e4a13b11da23e8
+== ShellCheck (the pinned command)
+PASS bash tests/shellcheck.sh (want=0 got=0)
+PASS shellcheck: copy unchanged (want=0 got=0)
+== new and changed fixtures, one function at a time
+PASS reuse_command_input_cases (want=0 got=0)
+PASS kit_copy_cases (want=0 got=0)
+PASS outside_layout_anchor_cases (want=0 got=0)
+PASS superseded_environment_cases (want=0 got=0)
+PASS test_ignored_local_scripts_do_not_reach_the_documented_workflow (want=0 got=0)
+PASS test_ignored_local_overlays_and_personas_do_not_decide_the_checks (want=0 got=0)
+PASS test_empty_record_directories_do_not_decide_the_002_tally (want=0 got=0)
+PASS test_leftover_spec_directories_do_not_decide_the_shipped_loop (want=0 got=0)
+PASS test_floor_fixture_stages_only_enumerated_scripts (want=0 got=0)
+PASS test_stage_umbrella_copies_only_enumerated_scripts (want=0 got=0)
+PASS test_stage_example_copies_only_enumerated_files (want=0 got=0)
+PASS test_AC_008_wizard_fixture_never_writes_through_a_host_models_yml (want=0 got=0)
+PASS test_AC_003_dispatch_fixture_copies_only_enumerated_scripts (want=0 got=0)
+PASS test_AC_011_every_kit_script_is_executable (want=0 got=0)
+PASS test_AC_011_ignored_local_scripts_do_not_decide_the_executable_check (want=0 got=0)
+PASS test_stage_kit_excludes_and_never_writes_through_a_host_models_yml (want=0 got=0)
+PASS fixtures: copy unchanged (want=0 got=0)
+  | live worktree porcelain digest after: 9f4a995da2dc0a3a43b0b3ba8d03ec053009a62d99b6f12034e4a13b11da23e8
+PASS live worktree unchanged (want=9f4a995da2dc0a3a43b0b3ba8d03ec053009a62d99b6f12034e4a13b11da23e8 got=9f4a995da2dc0a3a43b0b3ba8d03ec053009a62d99b6f12034e4a13b11da23e8)
+dev8 failures=0

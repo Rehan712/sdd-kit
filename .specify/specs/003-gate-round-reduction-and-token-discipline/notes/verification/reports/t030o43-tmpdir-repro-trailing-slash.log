@@ -1,0 +1,78 @@
+  ok   test_clean_fixture_is_consistent
+  ok   test_dangling_ref_fails
+  ok   test_duplicate_task_id_fails
+  ok   test_external_marker_must_be_mirrored_in_status
+  ok   test_gate_agent_placeholder_fails
+  ok   test_leftover_spec_directories_do_not_decide_the_shipped_loop
+  ok   test_missing_artifact_is_an_error
+  ok   test_missing_gate_agent_file_fails
+  ok   test_missing_verify_line_warns
+  ok   test_needs_clarification_blocks
+  ok   test_stray_repo_tags_without_umbrella_warn
+  ok   test_task_without_acceptance_fails
+  ok   test_ticked_box_without_evidence_warns
+  ok   test_umbrella_declared_repo_with_no_tasks_warns
+  ok   test_umbrella_tagged_tasks_pass
+  ok   test_umbrella_undeclared_repo_tag_fails
+  ok   test_umbrella_untagged_tasks_fail
+  ok   test_uncovered_ac_fails_and_gate_refs_do_not_count
+  FAIL test_verification_bindings
+       assert: expected exit 1, got 0: env PATH=/private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-tmpdir-repro/c/tmp//sddkit.wOx3Eg/fault-refs:/Users/babar/.nvm/versions/node/v24.19.0/bin:/Users/babar/.local/bin:/Users/babar/.local/bin:/Users/babar/.bun/bin:/Users/babar/.antigravity/antigravity/bin:/opt/homebrew/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/opt/pkg/env/active/bin:/opt/pmk/env/global/bin:/Library/Apple/usr/bin:/Users/babar/.cargo/bin:/Users/babar/Library/Android/sdk/emulator:/Users/babar/Library/Android/sdk/platform-tools /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-tmpdir-repro/c/kit/scripts/sdd-analyze.sh /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-tmpdir-repro/c/tmp//sddkit.wOx3Eg/analyzerlocale/.specify/specs/003-verification-fixture
+           output: Analyzing: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-tmpdir-repro/c/tmp/sddkit.wOx3Eg/analyzerlocale/.specify/specs/003-verification-fixture
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 4 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 8 task(s) parsed
+         ✓ verification contract bindings valid for t
+       assert: AC-023: a task reference inventory that could not be read read as no dangling ref (T030o43) missing substring: tasks.md could not be read for its AC and REQ references
+           in: Analyzing: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-tmpdir-repro/c/tmp/sddkit.wOx3Eg/analyzerlocale/.specify/specs/003-verification-fixture
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 4 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 8 task(s) parsed
+         ✓ verification contract bindings valid for t
+       assert: AC-023: the configuration policy counted an unreadable frontmatter as no contract (T030o43) missing substring: ✗ /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-tmpdir-repro/c/tmp//sddkit.wOx3Eg/analyzerlocale/.specify/specs/003-verification-fixture/spec.md: frontmatter could not be counted for verification_contract
+           in: Analyzing: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-tmpdir-repro/c/tmp/sddkit.wOx3Eg/analyzerlocale/.specify/specs/003-verification-fixture
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✗ verification configuration parser: awk: injected fault
+         ✗ /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-tmpdir-repro/c/tmp/sddkit.wOx3Eg/analyzerlocale/.specify/specs/003-verification-fixture/spec.md: frontmatter 
+       assert: AC-023: the binding parser counted an unreadable frontmatter as no contract (T030o43) missing substring: verification contract: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-tmpdir-repro/c/tmp//sddkit.wOx3Eg/analyzerlocale/.specify/specs/003-verification-fixture/spec.md: frontmatter could not be counted for verification_contract
+           in: Analyzing: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-tmpdir-repro/c/tmp/sddkit.wOx3Eg/analyzerlocale/.specify/specs/003-verification-fixture
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✗ verification configuration parser: awk: injected fault
+         ✗ /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-tmpdir-repro/c/tmp/sddkit.wOx3Eg/analyzerlocale/.specify/specs/003-verification-fixture/spec.md: frontmatter 
+       assert: AC-023: the configuration policy read an unreadable frontmatter as no contract (T030o43) missing substring: ✗ /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-tmpdir-repro/c/tmp//sddkit.wOx3Eg/analyzerlocale/.specify/specs/003-verification-fixture/spec.md: frontmatter could not be read for verification_contract
+           in: Analyzing: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-tmpdir-repro/c/tmp/sddkit.wOx3Eg/analyzerlocale/.specify/specs/003-verification-fixture
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✗ verification configuration parser: awk: injected fault
+         ✗ /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-tmpdir-repro/c/tmp/sddkit.wOx3Eg/analyzerlocale/.specify/specs/003-verification-fixture/spec.md: frontmatter 
+       assert: AC-023: the binding parser read an unreadable frontmatter as no contract (T030o43) missing substring: verification contract: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-tmpdir-repro/c/tmp//sddkit.wOx3Eg/analyzerlocale/.specify/specs/003-verification-fixture/spec.md: frontmatter could not be read for verification_contract
+           in: Analyzing: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-tmpdir-repro/c/tmp/sddkit.wOx3Eg/analyzerlocale/.specify/specs/003-verification-fixture
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✗ verification configuration parser: awk: injected fault
+         ✗ /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-tmpdir-repro/c/tmp/sddkit.wOx3Eg/analyzerlocale/.specify/specs/003-verification-fixture/spec.md: frontmatter 
+  -- 18/19 passed

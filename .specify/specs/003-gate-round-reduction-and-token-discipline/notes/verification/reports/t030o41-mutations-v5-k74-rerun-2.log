@@ -1,0 +1,7 @@
+== baselines
+== kill K74-index-removal-with-raw-git
+  | test_capture_provenance@hostile rc=1
+  |   assert: AC-020: the verified spec's own notes/reality-check.md changed the identity
+  |   assert: AC-020: the verified spec's own notes/evidence.md changed the identity
+PASS K74-index-removal-with-raw-git KILLED (want=1 got=1)
+matrix failures=0

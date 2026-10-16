@@ -1,0 +1,8 @@
+162c162
+<   "$VL" 'while (t ~ /^([^A-Za-z0-9]|[0-9]+[.)]|\[[ xX]\])/) {' 'while (t ~ /^([[:space:]*+_-]|[0-9]+[.)])/) {'
+---
+>   "$VL" 'while (t ~ /^([^A-Za-z0-9]|[0-9]+[.)]|\[[ xX]\])/) {' 'while (t ~ /^([[:space:]*+_-]|[0-9]+[.)]|\[[ xX]\])/) {'
+161c161
+< row N32 kill 'a manifest spelled bullet-character-severity was not refused by its own diagnostic (T030o44)' "$GC" "$ML" \
+---
+> row N32 kill 'a manifest spelled bullet-character-severity was not refused by its own diagnostic (T030o44)' "$GC" "$RL" \

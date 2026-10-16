@@ -1,0 +1,20 @@
+@@OLD
+  # (O-021's refusal twin).
+@@NEW
+  # (O-021's refusal twin). A second tier behind a closing tag and a named
+  # reference is read by the first rendered reading alone, since the second
+  # one joins the word to the next, which isolates that reading (session 15,
+  # matrix row L18).
+@@END
+@@OLD
+second-tier-quoted-gt|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- <b title="a>b">Severity:</b> data-loss\n|a second Severity line in finding G-042: - <b title="a>b">Severity:</b> data-loss
+@@NEW
+second-tier-quoted-gt|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- <b title="a>b">Severity:</b> data-loss\n|a second Severity line in finding G-042: - <b title="a>b">Severity:</b> data-loss
+second-tier-tag-then-reference|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- <b>Severity</b>&nbsp;data-loss\n|a second Severity line in finding G-042: - <b>Severity</b>&nbsp;data-loss
+@@END
+@@OLD
+character-reference|- **Severity:** minor\n  - &#83;everity: data-loss|a Severity line this grammar cannot read in finding G-050
+@@NEW
+character-reference|- **Severity:** minor\n  - &#83;everity: data-loss|a Severity line this grammar cannot read in finding G-050
+tag-then-reference|- **Severity:** minor\n- <b>Severity</b>&nbsp;data-loss|a Severity line this grammar cannot read in finding G-050
+@@END

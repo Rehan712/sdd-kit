@@ -1,0 +1,39 @@
+  | live status outside notes/verification/ before: 66ef051e755c1b13355590f5a1e96fe82d515a6eaf70fbab45fe281caec945be
+PASS copy c1 built (want=0 got=0)
+== ShellCheck (bash tests/shellcheck.sh)
+PASS bash tests/shellcheck.sh (want=0 got=0)
+== the new fixture, then its test function
+PASS reuse_command_locale_cases (00:02:08Z - 00:02:29Z) (want=0 got=0)
+PASS test_capture_provenance (00:02:29Z - 00:07:32Z) (want=0 got=0)
+PASS copy c1 unchanged by the quick runs (want=cbda977f3efce504c1c011f7bb58d4bb24878bf2f1d718c37394b5d517918106 got=cbda977f3efce504c1c011f7bb58d4bb24878bf2f1d718c37394b5d517918106)
+PASS copy c2 built (want=0 got=0)
+PASS copy c3 built (want=0 got=0)
+== full suite x3 in parallel, started 00:07:49Z
+  | returned 00:34:33Z
+PASS bash tests/run.sh (plain) (want=0 got=0)
+  | plain: 147/147 
+PASS bash tests/run.sh (de_DE) (want=0 got=0)
+  | de_DE: 147/147 
+PASS bash tests/run.sh (en_GB) (want=0 got=0)
+  | en_GB: 147/147 
+  | plain   -- 10/10 passed
+  | plain   -- 2/2 passed
+  | plain   -- 18/18 passed
+  | plain   -- 5/5 passed
+  | plain   -- 13/13 passed
+  | plain   -- 9/9 passed
+  | plain   -- 19/19 passed
+  | plain   -- 9/9 passed
+  | plain   -- 4/4 passed
+  | plain   -- 8/8 passed
+  | plain   -- 6/6 passed
+  | plain   -- 3/3 passed
+  | plain   -- 11/11 passed
+  | plain   -- 27/27 passed
+  | plain   -- 3/3 passed
+PASS copy c1 unchanged by the full suite (want=cbda977f3efce504c1c011f7bb58d4bb24878bf2f1d718c37394b5d517918106 got=cbda977f3efce504c1c011f7bb58d4bb24878bf2f1d718c37394b5d517918106)
+PASS copy c2 unchanged by the full suite (want=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 got=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855)
+PASS copy c3 unchanged by the full suite (want=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 got=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855)
+  | live status outside notes/verification/ after: 66ef051e755c1b13355590f5a1e96fe82d515a6eaf70fbab45fe281caec945be
+PASS live worktree unchanged outside notes/verification/ (want=66ef051e755c1b13355590f5a1e96fe82d515a6eaf70fbab45fe281caec945be got=66ef051e755c1b13355590f5a1e96fe82d515a6eaf70fbab45fe281caec945be)
+t030o42-dev dev1 failures=0

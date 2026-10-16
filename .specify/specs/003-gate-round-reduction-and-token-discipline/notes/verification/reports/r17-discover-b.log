@@ -1,0 +1,112 @@
+== C03 report_record_line_cases rc=1 failing-asserts=8
+  | assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-b/tmp/sddkit.8Uvg6L/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-bab
+  | assert: AC-012: a manifest tier written as code-span-holding-a-backtick was not refused by name under LANG=C (O-018) missing substring: a second Severity line in finding G-042: [`` ` ] ``](u)Severity: data-loss
+  | assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-b/tmp/sddkit.8Uvg6L/record-lines/notes/opponent.md /private/tmp/claude-501/
+  | assert: AC-012: a manifest tier written as code-span-holding-a-backtick was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a second Severity line in finding G-042: [`` ` ] ``](u)Severity: data-loss
+  | assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-b/tmp/sddkit.8Uvg6L/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-bab
+  | assert: AC-012: a second tier written as code-span-holding-a-backtick was not refused by name under LANG=C (O-018) missing substring: a Severity line this grammar cannot read in finding G-050
+  | assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-b/tmp/sddkit.8Uvg6L/record-lines/notes/opponent.md /private/tmp/claude-501/
+  | assert: AC-012: a second tier written as code-span-holding-a-backtick was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a Severity line this grammar cannot read in finding G-050
+== C03 report_manifest_locale_cases rc=0 failing-asserts=0
+== C04 report_record_line_cases rc=0 failing-asserts=0
+== C04 report_manifest_locale_cases rc=0 failing-asserts=0
+== C05 report_record_line_cases rc=0 failing-asserts=0
+== C05 report_manifest_locale_cases rc=0 failing-asserts=0
+== C06 report_record_line_cases rc=0 failing-asserts=0
+== C06 report_manifest_locale_cases rc=0 failing-asserts=0
+== C07 report_record_line_cases rc=1 failing-asserts=16
+  | assert: expected exit 0, got 3: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-b/tmp/sddkit.xdKnZs/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-bab
+  | assert: AC-012: a Where value quoting a tag as code was refused under LANG=C (round 16, O-018) unexpectedly contains: report recovery
+  | assert: expected exit 0, got 3: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-b/tmp/sddkit.xdKnZs/record-lines/notes/opponent.md /private/tmp/claude-501/
+  | assert: AC-012: a Where value quoting a tag as code was refused under LANG=en_US.UTF-8 (round 16, O-018) unexpectedly contains: report recovery
+  | assert: expected exit 0, got 3: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-b/tmp/sddkit.xdKnZs/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-bab
+  | assert: AC-012: a canonical finding with a-quoted-example was refused under LANG=C (O-018) unexpectedly contains: report recovery
+  | assert: expected exit 0, got 3: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-b/tmp/sddkit.xdKnZs/record-lines/notes/opponent.md /private/tmp/claude-501/
+  | assert: AC-012: a canonical finding with a-quoted-example was refused under LANG=en_US.UTF-8 (O-018) unexpectedly contains: report recovery
+== C07 report_manifest_locale_cases rc=1 failing-asserts=4
+  | assert: expected exit 0, got 3: bash -c . "$1"; vf_reports "$2" opponent "$3" "$4" _ /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-b/copy/scripts/verification-lib.sh /private/tmp/c
+  | assert: AC-012: a plausible manifest (code-span-brackets-prose) was refused (T030o43 review 2) unexpectedly contains: prior-review manifest could not be parsed
+  | assert: expected exit 0, got 3: bash -c . "$1"; vf_reports "$2" opponent "$3" "$4" _ /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-b/copy/scripts/verification-lib.sh /private/tmp/c
+  | assert: AC-012: a plausible manifest (code-span-tags-prose) was refused (T030o43 review 2) unexpectedly contains: prior-review manifest could not be parsed
+== C08 report_record_line_cases rc=0 failing-asserts=0
+== C08 report_manifest_locale_cases rc=0 failing-asserts=0
+== C09 report_record_line_cases rc=0 failing-asserts=0
+== C09 report_manifest_locale_cases rc=0 failing-asserts=0
+== X13n report_record_line_cases rc=1 failing-asserts=16
+  | assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-b/tmp/sddkit.CUzNJn/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-bab
+  | assert: AC-012: a manifest tier written as escaped-backtick-then-code-span was not refused by name under LANG=C (O-018) missing substring: a second Severity line in finding G-042: [\` `]`](u)Severity: data-loss
+  | assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-b/tmp/sddkit.CUzNJn/record-lines/notes/opponent.md /private/tmp/claude-501/
+  | assert: AC-012: a manifest tier written as escaped-backtick-then-code-span was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a second Severity line in finding G-042: [\` `]`](u)Severity: data-loss
+  | assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-b/tmp/sddkit.CUzNJn/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-bab
+  | assert: AC-012: a manifest tier written as escaped-first-backtick was not refused by name under LANG=C (O-018) missing substring: a second Severity line in finding G-042
+  | assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-b/tmp/sddkit.CUzNJn/record-lines/notes/opponent.md /private/tmp/claude-501/
+  | assert: AC-012: a manifest tier written as escaped-first-backtick was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a second Severity line in finding G-042
+== X13n report_manifest_locale_cases rc=0 failing-asserts=0
+== X15n report_record_line_cases rc=1 failing-asserts=4
+  | assert: expected exit 0, got 3: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-b/tmp/sddkit.fkSscU/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-bab
+  | assert: AC-012: a canonical finding with a-code-span-word-before-label was refused under LANG=C (O-018) unexpectedly contains: report recovery
+  | assert: expected exit 0, got 3: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-b/tmp/sddkit.fkSscU/record-lines/notes/opponent.md /private/tmp/claude-501/
+  | assert: AC-012: a canonical finding with a-code-span-word-before-label was refused under LANG=en_US.UTF-8 (O-018) unexpectedly contains: report recovery
+== X15n report_manifest_locale_cases rc=1 failing-asserts=2
+  | assert: expected exit 0, got 3: bash -c . "$1"; vf_reports "$2" opponent "$3" "$4" _ /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-b/copy/scripts/verification-lib.sh /private/tmp/c
+  | assert: AC-012: a plausible manifest (code-span-word-before-label) was refused (T030o43 review 2) unexpectedly contains: prior-review manifest could not be parsed
+== X16n report_record_line_cases rc=0 failing-asserts=0
+== X16n report_manifest_locale_cases rc=0 failing-asserts=0
+== S01 report_record_line_cases rc=0 failing-asserts=0
+== S01 report_manifest_locale_cases rc=0 failing-asserts=0
+== S01 round_record_line_cases rc=0 failing-asserts=0
+== S02 report_record_line_cases rc=0 failing-asserts=0
+== S02 report_manifest_locale_cases rc=0 failing-asserts=0
+== S03 report_record_line_cases rc=0 failing-asserts=0
+== S03 report_manifest_locale_cases rc=0 failing-asserts=0
+== S04 report_record_line_cases rc=0 failing-asserts=0
+== S04 report_manifest_locale_cases rc=0 failing-asserts=0
+== S05 report_record_line_cases rc=0 failing-asserts=0
+== S05 report_manifest_locale_cases rc=0 failing-asserts=0
+== S05j report_record_line_cases rc=0 failing-asserts=0
+== S05j report_manifest_locale_cases rc=0 failing-asserts=0
+== S05c report_record_line_cases rc=0 failing-asserts=0
+== S05c report_manifest_locale_cases rc=0 failing-asserts=0
+== S06 report_record_line_cases rc=0 failing-asserts=0
+== S06 report_manifest_locale_cases rc=0 failing-asserts=0
+== S06b report_record_line_cases rc=0 failing-asserts=0
+== S06b report_manifest_locale_cases rc=0 failing-asserts=0
+== S06c report_record_line_cases rc=0 failing-asserts=0
+== S06c report_manifest_locale_cases rc=0 failing-asserts=0
+== S06e report_record_line_cases rc=0 failing-asserts=0
+== S06e report_manifest_locale_cases rc=0 failing-asserts=0
+== S07 report_record_line_cases rc=0 failing-asserts=0
+== S07 report_manifest_locale_cases rc=0 failing-asserts=0
+== S08 report_record_line_cases rc=0 failing-asserts=0
+== S08 report_manifest_locale_cases rc=0 failing-asserts=0
+== S09 report_record_line_cases rc=0 failing-asserts=0
+== S09 report_manifest_locale_cases rc=0 failing-asserts=0
+== S10 report_record_line_cases rc=0 failing-asserts=0
+== S10 report_manifest_locale_cases rc=0 failing-asserts=0
+== S11 report_record_line_cases rc=0 failing-asserts=0
+== S11 report_manifest_locale_cases rc=0 failing-asserts=0
+== S12 report_record_line_cases rc=1 failing-asserts=96
+  | assert: AC-012: a manifest tier written as wrapped-abbr-title was not refused by name under LANG=C (O-018) missing substring: a second Severity line in finding G-042: finding carries">Severity:</abbr> data-loss
+  | assert: AC-012: a manifest tier written as wrapped-abbr-title was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a second Severity line in finding G-042: finding carries">Severity:</abbr> data-loss
+  | assert: AC-012: a manifest tier written as split-tag was not refused by name under LANG=C (O-018) missing substring: a second Severity line in finding G-042: title="x">Severity: data-loss</b>
+  | assert: AC-012: a manifest tier written as split-tag was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a second Severity line in finding G-042: title="x">Severity: data-loss</b>
+  | assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-b/tmp/sddkit.zF2M5Q/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-bab
+  | assert: AC-012: a manifest tier written as empty-link-across was not refused by name under LANG=C (O-018) missing substring: a second Severity line in finding G-042: ](x)Severity: data-loss
+  | assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-b/tmp/sddkit.zF2M5Q/record-lines/notes/opponent.md /private/tmp/claude-501/
+  | assert: AC-012: a manifest tier written as empty-link-across was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a second Severity line in finding G-042: ](x)Severity: data-loss
+== S12 report_manifest_locale_cases rc=1 failing-asserts=2
+  | assert: expected exit 0, got 3: bash -c . "$1"; vf_reports "$2" opponent "$3" "$4" _ /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-b/copy/scripts/verification-lib.sh /private/tmp/c
+  | assert: AC-012: a plausible manifest (recorded-finding-text) was refused (T030o43 review 2) unexpectedly contains: prior-review manifest could not be parsed
+== S13 report_record_line_cases rc=0 failing-asserts=0
+== S13 report_manifest_locale_cases rc=0 failing-asserts=0
+== S14 report_record_line_cases rc=0 failing-asserts=0
+== S14 report_manifest_locale_cases rc=0 failing-asserts=0
+== S15 report_record_line_cases rc=0 failing-asserts=0
+== S15 report_manifest_locale_cases rc=0 failing-asserts=0
+== S16 report_record_line_cases rc=0 failing-asserts=0
+== S16 report_manifest_locale_cases rc=0 failing-asserts=0
+== S17 report_record_line_cases rc=0 failing-asserts=0
+== S17 report_manifest_locale_cases rc=0 failing-asserts=0
+== S18 report_record_line_cases rc=0 failing-asserts=0
+== S18 report_manifest_locale_cases rc=0 failing-asserts=0
+r17-discover b done 17:10:35Z

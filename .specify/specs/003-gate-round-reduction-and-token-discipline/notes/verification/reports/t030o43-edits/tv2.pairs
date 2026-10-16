@@ -1,0 +1,6 @@
+@@OLD
+  sed "s/^verification_inputs: \[\]$/verification_inputs:\n  - 'docs'/" "$repo/.specify/stack.yml" > "$SANDBOX/stack-dir"
+@@NEW
+  awk '$0 == "verification_inputs: []" {print "verification_inputs:"; print "  - \047docs\047"; next} {print}' \
+    "$repo/.specify/stack.yml" > "$SANDBOX/stack-dir"
+@@END

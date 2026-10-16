@@ -1,0 +1,564 @@
+--- a/scripts/verification-lib.sh
++++ b/scripts/verification-lib.sh
+@@ -316,24 +316,45 @@
+ # reader misses or invents cannot hide a label, since some candidate starts at
+ # the boundary a renderer keeps, and text joined past a boundary can only add
+ # a label. A candidate is dropped once its text is settled (vf_settled; round
+-# 16, O-023): every construct a reading resolves across lines (a code span, a
+-# bracket pair, a link destination, a raw-HTML construct) is closed within
+-# it, and every reading of it, and of the text after each br or block-level
+-# tag in it, already holds its first word, so no later line can change how
+-# any reading of it begins; a candidate not shown settled is kept.
++# 16, O-023): every code span and raw-HTML construct in it is closed, and
++# every reading of it, and of the text after each br or block-level tag in
++# it, already holds its first word with no bracket pair or link destination
++# that opens at or before that word left open in that reading (vf_settled_word;
++# round 17, O-023: a bracket after the first word, quoted in a code span or
++# not, cannot change how the reading begins, while one before it can, since
++# an image a later line completes takes the word away), so no later line can
++# change how any reading of it begins; a candidate not shown settled is kept.
+ # Inside a finding the grammar is narrowed rather than rendered (round 16,
+-# O-018; the user's decision of 2026-10-08): vf_para also sets vf_narrow to
+-# the reason a line breaks it, or "": a form feed or vertical tab, a carriage
+-# return that does not end the line (both read on the line as written), or a
+-# `<` that may open raw HTML or an autolink (6.5, 6.6, 4.6: one followed by a
+-# letter, `/`, `!` or `?`) outside every code span. vf_cm_scan places code
++# O-018; the user's decisions of 2026-10-08 and 2026-10-09): vf_para also sets
++# vf_narrow to the reason a line breaks it, or "": a form feed or vertical
++# tab, a carriage return that does not end the line (both read on the line as
++# written); a code fence that may be inside a list item, three or more
++# backticks or tildes after indentation or a list marker (4.5, 5.2: the shared
++# tracker opens a fence at the start of a line only, and a renderer ends a
++# fence a list item opens with that item, so a line in it can close a finding
++# to the passes and the tracker can quote what a renderer shows; round 17,
++# O-024); a link reference definition, a line whose text after indentation,
++# list markers and block-quote markers begins with a bracket closed at once
++# by `]:`, or a later line of its run that closes such a bracket left open at
++# the end of its line by `]:`, since a label may span lines (4.7: a definition
++# renders nothing, and its title may span lines and hold a field line; round
++# 17, O-024); or, outside every code span, a `<` that may open raw
++# HTML (6.6, 4.6: one followed by a letter, `/`, `!` or `?`), a `<` that may
++# open an autolink (6.5: one followed by a digit or a symbol an email address
++# may begin with), or an inline link's destination or title, or a full
++# reference link's label, that holds a backtick or does not end on its line
++# (6.3, 6.5: each is read before a later backtick can open a code span, so a
++# backtick inside it opens none and a code span the reader pairs it into
++# hides nothing; round 17, O-018). vf_cm_scan places code
+ # spans by 6.1 read left to right (2.4 escapes taken in pairs, a backtick run
+ # closed only by the next run of the same length) for every state a paragraph
+ # may enter the line in: no open span, or a span an earlier line of the run
+ # left open, read both as an opener and as literal text; the states reset at
+-# the run's ends. A `<` is inside a code span only when every such reading
+-# places it there, so a span the reader invents cannot hide one. Both readers
+-# refuse such a line by name inside a finding.
++# the run's ends. A `<`, a destination, a title or a label is inside a code
++# span only when every such reading places it there, so a span the reader
++# invents cannot hide one. Both readers refuse such a line by name inside a
++# finding, judged after the line's own heading has opened or closed a finding
++# (round 17).
+ _VF_AWK_LABEL='
+ function vf_label_hex(h,   i, n) {
+   n = 0; h = tolower(h)
+@@ -451,13 +472,62 @@
+   }
+   return 0
+ }
++function vf_cm_dest(s, j,   n, c, depth, q) {
++  n = length(s); j++
++  while (j <= n && substr(s, j, 1) ~ /[ \t]/) j++
++  if (j > n) return -1
++  if (substr(s, j, 1) == "<") {
++    j++
++    while (j <= n && (c = substr(s, j, 1)) != ">") {if (c == "\\") j++; else if (c == "<") return 0; j++}
++    if (j > n) return 0
++    j++
++  } else {
++    depth = 0
++    while (j <= n) {
++      c = substr(s, j, 1)
++      if (c == "\\") {j += 2; continue}
++      if (c ~ /[ \t]/) break
++      if (c == "(") depth++
++      else if (c == ")") {if (!depth) break; depth--}
++      j++
++    }
++    if (j > n) return -1
++  }
++  while (j <= n && substr(s, j, 1) ~ /[ \t]/) j++
++  if (j > n) return -1
++  c = substr(s, j, 1)
++  if (c == "\"" || c == sprintf("%c", 39) || c == "(") {
++    q = (c == "(") ? ")" : c; j++
++    while (j <= n && substr(s, j, 1) != q) {if (substr(s, j, 1) == "\\") j++; j++}
++    if (j > n) return -1
++    j++
++    while (j <= n && substr(s, j, 1) ~ /[ \t]/) j++
++    if (j > n) return -1
++  }
++  return (substr(s, j, 1) == ")") ? j + 1 : 0
++}
++function vf_cm_label(s, j,   n, c) {
++  n = length(s); j++
++  while (j <= n && (c = substr(s, j, 1)) != "]") {if (c == "\\") j++; else if (c == "[") return 0; j++}
++  return (j > n) ? -1 : j + 1
++}
+ function vf_cm_scan(s, st,   b, re, n, i, c, j, r, k) {
+-  b = sprintf("%c", 96); re = "[\\\\<" b "]"; vf_cm_out = 0; vf_cm_exits = ""; n = length(s); i = 1
++  b = sprintf("%c", 96); re = "[]\\\\<" b "]"; vf_cm_out = vf_cm_auto = vf_cm_link = 0; vf_cm_exits = ""; n = length(s); i = 1
++  if (vf_cm_ac == "") vf_cm_ac = "[0-9.#$%&*+=^_{|}~" sprintf("%c", 39) b "-]"
+   if (st > 0) {k = vf_cm_close(s, 1, st); if (!k) {vf_cm_exits = " " st; return}; i = k}
+   while (i <= n && match(substr(s, i), re)) {
+     i += RSTART - 1; c = substr(s, i, 1)
+     if (c == "\\") {i += (i < n && vf_cm_punct(substr(s, i + 1, 1))) ? 2 : 1; continue}
+-    if (c == "<") {if (substr(s, i + 1, 1) ~ /[A-Za-z\/!?]/) vf_cm_out = 1; i++; continue}
++    if (c == "<") {c = substr(s, i + 1, 1); if (c ~ /[A-Za-z\/!?]/) vf_cm_out = 1; else if (c ~ vf_cm_ac) vf_cm_auto = 1; i++; continue}
++    if (c == "]") {
++      c = substr(s, i + 1, 1)
++      if (c == "(" || c == "[") {
++        k = (c == "(") ? vf_cm_dest(s, i + 1) : vf_cm_label(s, i + 1)
++        if (k < 0) {if (!vf_cm_link) vf_cm_link = 2}
++        else if (k && index(substr(s, i + 1, k - i - 1), b)) vf_cm_link = 1
++      }
++      i++; continue
++    }
+     j = i; while (j <= n && substr(s, j, 1) == b) j++
+     r = j - i; k = vf_cm_close(s, j, r)
+     if (!k) {vf_cm_exits = vf_cm_exits " " r; i = j; continue}
+@@ -484,6 +554,18 @@
+   }
+   return t != ""
+ }
++function vf_settled_head(t,   h) {
++  h = ""
++  while (t ~ /^([^A-Za-z0-9]|[0-9]+[.)]|\[[ xX]\])/) {
++    if (match(t, /^([0-9]+[.)]|\[[ xX]\])/)) {h = h substr(t, 1, RLENGTH); t = substr(t, RLENGTH + 1)}
++    else {h = h substr(t, 1, 1); t = substr(t, 2)}
++  }
++  match(t, /^[A-Za-z0-9]*/)
++  return h substr(t, 1, RLENGTH)
++}
++function vf_settled_word(t) {
++  return vf_settled_lead(t) && vf_settled_brackets(vf_settled_head(t))
++}
+ function vf_settled_html(s,   p, e, rest) {
+   if (vf_lbl_tag == "") vf_label_html("")
+   p = 0
+@@ -520,7 +602,7 @@
+     L = RLENGTH; nm = tolower(substr(rest, 1, L)); sub(/^<\/?/, "", nm); sub(/[^a-z0-9].*$/, "", nm)
+     if (nm != "br" && !index(vf_lbl_blocks, " " nm " ")) continue
+     x = substr(s, p + L)
+-    if (!vf_settled_lead(x) || !vf_settled_lead(vf_label_render(x, 0)) || !vf_settled_lead(vf_label_render(x, 1)) || !vf_settled_lead(vf_label_render(substr(c, p + L), 0))) return 0
++    if (!vf_settled_word(x) || !vf_settled_word(vf_label_render(x, 0)) || !vf_settled_word(vf_label_render(x, 1)) || !vf_settled_word(vf_label_render(substr(c, p + L), 0))) return 0
+   }
+   return 1
+ }
+@@ -528,9 +610,8 @@
+   if (index(j, "<") && !vf_settled_html(j)) return 0
+   vf_cm_scan(j, 0); if (vf_cm_exits != " 0") return 0
+   c = index(j, sprintf("%c", 96)) ? vf_label_inert(j) : j
+-  if (!vf_settled_brackets(j) || (c != j && !vf_settled_brackets(c))) return 0
+-  if (!vf_settled_lead(j) || !vf_settled_lead(vf_label_render(j, 0)) || !vf_settled_lead(vf_label_render(j, 1))) return 0
+-  if (c != j && (!vf_settled_lead(vf_label_render(c, 0)) || !vf_settled_lead(vf_label_render(c, 1)))) return 0
++  if (!vf_settled_word(j) || !vf_settled_word(vf_label_render(j, 0)) || !vf_settled_word(vf_label_render(j, 1))) return 0
++  if (c != j && (!vf_settled_word(c) || !vf_settled_word(vf_label_render(c, 0)) || !vf_settled_word(vf_label_render(c, 1)))) return 0
+   return !index(c, "<") || vf_settled_breaks(j, c)
+ }
+ function vf_label_breaks(s, c, labels,   p, e, rest, nm, w, L) {
+@@ -581,21 +662,38 @@
+   if (tolower(t) ~ /^<\/?(address|article|aside|base|basefont|blockquote|body|caption|center|col|colgroup|dd|details|dialog|dir|div|dl|dt|fieldset|figcaption|figure|footer|form|frame|frameset|h1|h2|h3|h4|h5|h6|head|header|hr|html|iframe|legend|li|link|main|menu|menuitem|nav|noframes|ol|optgroup|option|p|param|search|section|summary|table|tbody|td|tfoot|th|thead|title|tr|track|ul)([ \t>]|\/>|$)/) return 1
+   return (t ~ /^(\*[ \t]*\*[ \t]*\*[* \t]*|-[ \t]*-[ \t]*-[- \t]*|_[ \t]*_[ \t]*_[_ \t]*)$/)
+ }
+-function vf_para(s,   t, q, k, x, i, n, done, ex) {
+-  if (FNR == 1) {vf_run_n = vf_run_refused = 0; vf_cm_states = " 0"}
++function vf_para_refdef(s, t,   k, n, c) {
++  if (!vf_def_open) {
++    t = s; sub(/^([ \t]|>|([-+*]|[0-9]+[.)])[ \t])*/, "", t)
++    if (substr(t, 1, 1) != "[") return 0
++    k = 2
++  } else k = 1
++  n = length(t)
++  while (k <= n && (c = substr(t, k, 1)) != "]") {if (c == "\\") k++; else if (c == "[") {vf_def_open = 0; return 0}; k++}
++  vf_def_open = (k > n)
++  return k <= n && substr(t, k + 1, 1) == ":"
++}
++function vf_para(s,   t, q, k, x, i, n, done, ex, f, d) {
++  if (FNR == 1) {vf_run_n = vf_run_refused = vf_def_open = 0; vf_cm_states = " 0"}
+   t = s; sub(/^[ \t]*(>[ \t]*)*/, "", t)
+   q = s; while (match(q, /^ ? ? ?>[ ]?/)) q = substr(q, RLENGTH + 1)
+-  vf_narrow = ""
++  vf_narrow = ""; f = sprintf("%c%c%c", 96, 96, 96); d = vf_para_refdef(s, t)
+   if (index(vf_original, sprintf("%c", 12)) || index(vf_original, sprintf("%c", 11))) vf_narrow = "a form feed or vertical tab"
+   else if ((k = index(vf_original, "\r")) && k < length(vf_original)) vf_narrow = "a carriage return inside a line"
++  else if (s ~ ("^[ \t]*(([-+*]|[0-9]+[.)])[ \t]+)*(" f "|~~~)") && s !~ ("^(" f "|~~~)")) vf_narrow = "a code fence that may be inside a list item"
++  else if (d) vf_narrow = "a link reference definition"
+   n = split(vf_cm_states " 0", x, " "); done = " "; ex = ""
+   for (i = 1; i <= n; i++) {
+     if (index(done, " " x[i] " ")) continue
+     done = done x[i] " "; vf_cm_scan(t, x[i] + 0); ex = ex vf_cm_exits
+-    if (vf_cm_out && vf_narrow == "") vf_narrow = "raw HTML outside a code span"
++    if (vf_narrow != "") continue
++    if (vf_cm_out) vf_narrow = "raw HTML outside a code span"
++    else if (vf_cm_link == 1) vf_narrow = "a backtick inside a link destination, title or label"
++    else if (vf_cm_link) vf_narrow = "a link destination, title or label that does not end on its line"
++    else if (vf_cm_auto) vf_narrow = "an autolink outside a code span"
+   }
+   vf_cm_states = ex
+-  if (t == "" || t == "\r" || q ~ /^ ? ? ?(#|##|###|####|#####|######)([ \t]|$)/) {vf_run_n = vf_run_refused = vf_para_cont = 0; vf_cm_states = " 0"; return}
++  if (t == "" || t == "\r" || q ~ /^ ? ? ?(#|##|###|####|#####|######)([ \t]|$)/) {vf_run_n = vf_run_refused = vf_para_cont = vf_def_open = 0; vf_cm_states = " 0"; return}
+   vf_para_cont = (vf_run_n > 0)
+   for (k = 1; k <= vf_run_n; k++) if (!vf_run_done[k]) vf_run_text[k] = vf_run_text[k] " " t
+   vf_run_n++; vf_run_text[vf_run_n] = t; vf_run_line[vf_run_n] = s; vf_run_own[vf_run_n] = "?"; vf_run_done[vf_run_n] = 0
+@@ -1606,9 +1704,12 @@
+           itemfield=""
+         }
+       }
+-      {vf_para($0)}
+-      id != "" && vf_narrow != "" {bad(vf_narrow " in finding " id)}
+-      vf_quoted($0) {
++      # The narrowed check is judged after the heading on a line has opened or
++      # closed a finding (round 17): a heading reads it under the finding it
++      # opens or stays in, never under one it closes.
++      {vf_para($0); vq=vf_quoted($0)}
++      id != "" && vf_narrow != "" && (vq || !/^ ? ? ?#+([ \t]|$)/) {bad(vf_narrow " in finding " id)}
++      vq {
+         shape=vf_record($0); if (shape == "" && id != "") shape=vf_para_label()
+         if (shape != "" && (id != "" || shape == "Finding heading")) bad("quoted content carries a " shape)
+         next
+@@ -1618,7 +1719,7 @@
+         hl=match(heading, /[^#]/); hl=(hl ? hl - 1 : length(heading))
+         if (tolower(word[2]) == "finding" && word[3] ~ /^[A-Za-z][A-Za-z0-9]*-[0-9]/) {
+           flushm(); idseen=1
+-          if (word[3] ~ /^[A-Z][A-Z0-9]*-[0-9]+$/) {id=word[3]; flevel=hl}
++          if (word[3] ~ /^[A-Z][A-Z0-9]*-[0-9]+$/) {id=word[3]; flevel=hl; if (vf_narrow != "") bad(vf_narrow " in finding " id)}
+           else bad("a Finding heading whose ID this grammar cannot read")
+           next
+         }
+@@ -1628,6 +1729,7 @@
+           idseen=(heading ~ /[A-Za-z][A-Za-z0-9]*-[0-9]/) || tolower(word[2]) == "finding"
+           next
+         }
++        if (vf_narrow != "") bad(vf_narrow " in finding " id)
+       }
+       !/^ ? ? ?#+([ \t]|$)/ && /^([[:space:]]|[\200-\377])*#+([[:space:]]|[\200-\377])*[Ff][Ii][Nn][Dd][Ii][Nn][Gg]([^A-Za-z]|$)/ {
+         flushm(); idseen=1; bad("a Finding heading this grammar cannot read"); next
+@@ -1833,9 +1935,12 @@
+         itemfield=""
+       }
+     }
+-    {vf_para($0)}
+-    style=="canonical" && active && !ended && fid != "" && vf_narrow != "" {err(vf_narrow " in finding " fid)}
+-    vf_quoted($0) {
++    # The narrowed check is judged after the heading on a line has opened or
++    # closed a finding (round 17): a heading reads it under the finding it
++    # opens or stays in, never under one it closes.
++    {vf_para($0); vq=vf_quoted($0)}
++    style=="canonical" && active && !ended && fid != "" && vf_narrow != "" && (vq || !/^ ? ? ?#+([ \t]|$)/) {err(vf_narrow " in finding " fid)}
++    vq {
+       if (active && $0 !~ /^[[:space:]]*$/) body=1
+       # Quoting does not exempt a line from the after-marker rule: a fenced,
+       # commented or blockquoted preamble is still content the accumulator
+@@ -1868,6 +1973,7 @@
+     # canonical rule of finding() and of the record readers, the count
+     # included, while flush() judged the round canonical.
+     /^# (Opponent review|Reality Check)/ {
++      if (style=="canonical" && active && !ended && fid != "" && vf_narrow != "") err(vf_narrow " in finding " fid)
+       if (ended) {err("content after the round completion marker"); next}
+       if (!active) {n=last+1; active=1; style="legacy"; declared=date=verdict=utc=source=floor=suppressed=""; ended=counted=blockers=minors=downgraded=body=0}
+       else if (!declared && !utc) {if (style=="canonical" && body) err("a report title after the body of a canonical round"); style="legacy"}
+@@ -1902,7 +2008,7 @@
+       if(wantb !~ /^[0-9]+$/ || wantm !~ /^[0-9]+$/) err("malformed totals")
+       next
+     }
+-    /^### Finding / {finding(); if(!active || ended) err("finding outside round"); vf_fields(vf_original, hw); fid=hw[3]; cursec=""; next}
++    /^### Finding / {finding(); if(!active || ended) err("finding outside round"); vf_fields(vf_original, hw); fid=hw[3]; cursec=""; if (style=="canonical" && active && !ended && fid != "" && vf_narrow != "") err(vf_narrow " in finding " fid); next}
+     # Only `### Finding <ID>` opens a finding here, while a reader sees one in
+     # any heading vf_finding_heading reads as a Finding heading: Finding in any
+     # case and a finding ID, at any level, whatever separates them. Such a
+@@ -1915,6 +2021,7 @@
+     # closes it, and a deeper one is one of its lines (O-018, the canonical half
+     # of the O-019 rule), so a field line after a section heading is outside it.
+     style=="canonical" && fid && /^ ? ? ?(#|##|###)([ \t]|$)/ {finding()}
++    style=="canonical" && active && !ended && fid != "" && vf_narrow != "" && /^ ? ? ?#+([ \t]|$)/ {err(vf_narrow " in finding " fid)}
+     # Round, review and finding headings are consumed above, so what remains
+     # here is a section heading. Level is not fixed by the templates.
+     /^#+[ ]/ {
+--- a/templates/verification-contract.md
++++ b/templates/verification-contract.md
+@@ -379,11 +379,21 @@
+ at a line the fence tracker calls fenced, so a boundary the reader misses or
+ invents can only make a line refuse; a line of a run stops being re-read once
+ nothing a later line adds can change how it begins. Inside a finding the
+-grammar is narrowed rather than rendered: a line that carries raw HTML or an
+-autolink (a `<` followed by a letter, `/`, `!` or `?`) outside every code
+-span, a form feed or vertical tab, or a carriage return that does not end the
+-line is refused by name, so a report writes markup inside a finding only as
+-code, between backticks. The other canonical fields are
++grammar is narrowed rather than rendered: a line is refused by name when it
++carries, outside every code span, raw HTML or an autolink (a `<` followed by
++a letter, a digit, or a symbol an email address may begin with), or an inline
++link's destination or title, or a full reference link's label, that holds a
++backtick or does not end on its line; when it carries a form feed or vertical
++tab, or a carriage return that does not end the line; when it opens a code
++fence anywhere but at the start of the line (after indentation or a list
++marker, where a list item may open a fence the fence tracker does not
++follow); or when it begins or closes a link reference definition's label (a
++bracket at the start of a line closed by `]:` on that line, or on a later line
++of its paragraph, since a label may span lines). The check
++is judged after the line's own heading has opened or closed a finding. So a
++report writes markup inside a finding only as code, between backticks, writes
++a code example inside a finding as a fence at the start of a line, and keeps
++link definitions outside every finding. The other canonical fields are
+ decided by their spelling. A manifest field line must be a dash, whitespace
+ and `**Class:**` or `**Severity:**`, its value the text after that label only,
+ and every manifest finding needs one readable Class and one readable Severity,
+--- a/tests/test-gate-contracts.sh
++++ b/tests/test-gate-contracts.sh
+@@ -1157,6 +1157,17 @@
+ span-tag-after-a-lone-backtick-paragraph|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n\nNote `a\n\nb` <b>` c\n
+ outside-comment-closer|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n\n## Notes\n\nO-017 is discussed below.\n- <!--> note --> Severity: as noted.\n
+ outside-span-tag|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n\n## Notes\n\nO-017 is discussed below.\nNote <span>Severity: as noted</span> stays prose.\n
++quoted-destination-member|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n- The form `` [x](u`v)<br>Severity: data-loss, tick: `. `` stays quoted.\n
++quoted-autolink-member|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n- The form `` Note <1`@a.b><pre>Severity: data-loss</pre>` `` stays quoted.\n
++link-title-then-code|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n- See [the doc](u "a title") and `code` after it.\n
++reference-links-prose|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n- See [the doc][ref] and [x][] here.\n
++lt-before-a-space|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n- It takes < 30 s and > 2 s.\n
++wrapped-link-at-line-start|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n\n[a note that\nwraps](u) here.\n
++escaped-bracket-at-line-start|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n\n\\[a]: is not a definition here.\n
++task-checkboxes|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n- [x] done\n- [ ] open\n
++column-zero-fence-after-blank|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n\n```text\nplain\n```\n
++heading-with-tag-closes-finding|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n### Notes <b>x</b>\nA note.\n
++narrowed-constructs-outside|[ref]: https://x.example\n\n### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n## Notes\n\nNote <1@x.example>, [a](u`v) and c <= d.\n- ```\n  x\n- y\n
+ SHAPES
+   # Raw HTML or an autolink inside a manifest finding, outside every code span,
+   # is refused by name, so the rows above that carried it are refusals now
+@@ -1331,7 +1342,7 @@
+ }
+ 
+ report_record_line_cases() {
+-  local spec report l tag body want heading sevs r1 low
++  local spec report l tag body want heading sevs r1 low tail t0
+   low='clearing verdict rests on 1 lowered severity tier(s) of known findings'
+   spec="$SANDBOX/record-lines"; report="$spec/notes/opponent.md"
+   mkdir -p "$spec/notes/verification/reports"
+@@ -1372,7 +1383,15 @@
+   # placed by 6.1 with 2.4's escapes taken in pairs; an image split by a line of
+   # seven or eight marks, which ends no run; and an image split after a
+   # backtick line whose info string holds a backtick, which the tracker fences
+-  # and a renderer does not, since a run never ends at a fenced line.
++  # and a renderer does not, since a run never ends at a fenced line. Round 17's
++  # members follow (O-018 reopened, O-024): inside a finding the grammar is
++  # narrowed further, so a `<` that may open an autolink (a digit or a symbol an
++  # email address may begin with), an inline link's destination or title, or a
++  # full reference link's label, holding a backtick or not ending on its line,
++  # a code fence that may be inside a list item, and a link reference
++  # definition, its label on one line or across lines, are each refused by
++  # name; so are the stated consequences (`c <= d`, a fence indented under a
++  # list item, a definition line).
+   while IFS='|' read -r tag body want; do
+     printf '# Prior review\n\n%b' "$body" > "$spec/notes/verification/reports/opponent-findings-review.md"
+     tier_round_fixture 1 '' G-042:tier-binding:open:minor > "$report"
+@@ -1517,6 +1536,32 @@
+ image-after-stray-bracket-across-three-lines|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n]![a\nb\nc](u)Severity: data-loss\n|a second Severity line in finding G-042
+ image-alt-holding-escaped-bracket-across-lines|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n![a\\]\nb\nc](u)Severity: data-loss\n|a second Severity line in finding G-042
+ image-alt-holding-an-unclosed-run-then-a-span|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n![``a `]`](u)Severity: data-loss\n|a second Severity line in finding G-042
++autolink-digit-br|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\nNote <1`@a.b><br>Severity: data-loss, tick: `.\n|an autolink outside a code span in finding G-042
++autolink-digit-pre|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\nNote <1`@a.b><pre>Severity: data-loss</pre>`\n|an autolink outside a code span in finding G-042
++autolink-underscore-p|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\nNote <_`@a.b><p>Severity: data-loss `\n|an autolink outside a code span in finding G-042
++autolink-backtick-start|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\nNote <`a@b.c><br>Severity: data-loss, tick: `.\n|an autolink outside a code span in finding G-042
++autolink-plus|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\nNote <+1`@a.b><br>Severity: data-loss, tick: `.\n|an autolink outside a code span in finding G-042
++destination-holding-backtick|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n[x](u`v)<br>Severity: data-loss, tick: `.\n|a backtick inside a link destination, title or label in finding G-042
++title-holding-backtick|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n[x](u "`")<br>Severity: data-loss, tick: `.\n|a backtick inside a link destination, title or label in finding G-042
++angle-destination-holding-backtick|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n[x](<1`b>)<pre>Severity: data-loss</pre>`\n|a backtick inside a link destination, title or label in finding G-042
++label-holding-backtick|[a`b]: /u\n\n### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n[x][a`b]<br>Severity: data-loss, tick: `.\n|a backtick inside a link destination, title or label in finding G-042
++title-across-lines|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n[x](u '\ny`')<br>Severity: data-loss, tick: `.\n|a link destination, title or label that does not end on its line in finding G-042
++destination-on-next-line|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n[x](\nu`v)<br>Severity: data-loss, tick: `.\n|a link destination, title or label that does not end on its line in finding G-042
++label-across-lines|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n[x][a\nb`]<br>Severity: data-loss, tick: `.\n|a link destination, title or label that does not end on its line in finding G-042
++fence-after-list-marker|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- ```\n  ### x\n- **Severity**: data-loss\n|a code fence that may be inside a list item in finding G-042
++fence-swapping-phase|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- note\n  ```\n```\n### x\n```\n- **Severity**: data-loss\n- y\n  ```\n|a code fence that may be inside a list item in finding G-042
++fence-four-spaces-in-item|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- note\n\n    ```\n  ### x\n    ```\n- **Severity**: data-loss\n|a code fence that may be inside a list item in finding G-042
++fence-after-ordered-marker|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n1. ~~~\n   ### x\n- **Severity**: data-loss\n|a code fence that may be inside a list item in finding G-042
++definition-hiding-severity|### Finding G-042\n- **Class:** tier-binding\n\n[a]: /u '\n    - **Severity:** minor\n    - x'\n|a link reference definition in finding G-042
++definition-then-fence|### Finding G-042\n- **Class:** tier-binding\n\n[a]: /u '\n    - **Severity:** minor\n    - x'\n\n- ```\n  ### x\n- **Severity**: data-loss\n|a link reference definition in finding G-042
++definition-in-list-item|### Finding G-042\n- **Class:** tier-binding\n- [a]: /u '\n      - **Severity:** minor\n      - x'\n|a link reference definition in finding G-042
++definition-label-across-lines|### Finding G-042\n- **Class:** tier-binding\n\n[a\nb]: /u '\n    - **Severity:** minor\n    - x'\n|a link reference definition in finding G-042
++definition-escaped-label|### Finding G-042\n- **Class:** tier-binding\n\n[a\\]b]: /u '\n    - **Severity:** minor\n    - x'\n|a link reference definition in finding G-042
++lt-equals-prose|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\nIt holds when c <= d.\n|an autolink outside a code span in finding G-042
++indented-fence-in-item|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- step\n  ```\n  bash x\n  ```\n|a code fence that may be inside a list item in finding G-042
++definition-line|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n[a]: https://x.example\n|a link reference definition in finding G-042
++heading-tag-on-first-finding|### Finding G-042 <b>x</b>\n- **Class:** tier-binding\n- **Severity:** minor\n|raw HTML outside a code span in finding G-042
++heading-tag-on-later-finding|### Finding G-041\n- **Class:** tier-binding\n- **Severity:** minor\n### Finding G-042 <b>x</b>\n- **Class:** tier-binding\n- **Severity:** minor\n|raw HTML outside a code span in finding G-042
+ ROWS
+   # O-019: a heading deeper than the Finding heading is one of its lines, so
+   # the canonical field lines under it are read: the CLEARED round is refused
+@@ -1661,7 +1706,78 @@
+ image-after-stray-bracket-across-three-lines|- **Severity:** minor\n\n]![a\nb\nc](u)Severity: data-loss|a Severity line this grammar cannot read in finding G-050
+ image-alt-holding-escaped-bracket-across-lines|- **Severity:** minor\n\n![a\\]\nb\nc](u)Severity: data-loss|a Severity line this grammar cannot read in finding G-050
+ image-alt-holding-an-unclosed-run-then-a-span|- **Severity:** minor\n\n![``a `]`](u)Severity: data-loss|a Severity line this grammar cannot read in finding G-050
++autolink-digit-br|- **Severity:** minor\n\nNote <1`@a.b><br>Severity: data-loss, tick: `.|an autolink outside a code span in finding G-050
++autolink-digit-pre|- **Severity:** minor\n\nNote <1`@a.b><pre>Severity: data-loss</pre>`|an autolink outside a code span in finding G-050
++autolink-underscore-p|- **Severity:** minor\n\nNote <_`@a.b><p>Severity: data-loss `|an autolink outside a code span in finding G-050
++autolink-backtick-start|- **Severity:** minor\n\nNote <`a@b.c><br>Severity: data-loss, tick: `.|an autolink outside a code span in finding G-050
++autolink-plus|- **Severity:** minor\n\nNote <+1`@a.b><br>Severity: data-loss, tick: `.|an autolink outside a code span in finding G-050
++destination-holding-backtick|- **Severity:** minor\n\n[x](u`v)<br>Severity: data-loss, tick: `.|a backtick inside a link destination, title or label in finding G-050
++title-holding-backtick|- **Severity:** minor\n\n[x](u "`")<br>Severity: data-loss, tick: `.|a backtick inside a link destination, title or label in finding G-050
++angle-destination-holding-backtick|- **Severity:** minor\n\n[x](<1`b>)<pre>Severity: data-loss</pre>`|a backtick inside a link destination, title or label in finding G-050
++label-holding-backtick|- **Severity:** minor\n\n[x][a`b]<br>Severity: data-loss, tick: `.|a backtick inside a link destination, title or label in finding G-050
++title-across-lines|- **Severity:** minor\n\n[x](u '\ny`')<br>Severity: data-loss, tick: `.|a link destination, title or label that does not end on its line in finding G-050
++destination-on-next-line|- **Severity:** minor\n\n[x](\nu`v)<br>Severity: data-loss, tick: `.|a link destination, title or label that does not end on its line in finding G-050
++label-across-lines|- **Severity:** minor\n\n[x][a\nb`]<br>Severity: data-loss, tick: `.|a link destination, title or label that does not end on its line in finding G-050
++lt-equals-prose|- **Severity:** minor\n\nIt holds when c <= d.|an autolink outside a code span in finding G-050
++indented-fence-in-item|- **Severity:** minor\n\n- step\n  ```\n  bash x\n  ```|a code fence that may be inside a list item in finding G-050
++definition-line|- **Severity:** minor\n\n[a]: https://x.example|a link reference definition in finding G-050
+ ROWS
++  # The extent of a finding, and the lines a reader sees, come from constructs both
++  # readers follow (round 17, O-024): inside a canonical finding a code fence
++  # that may be inside a list item and a link reference definition are refused
++  # by name, so a fence a list item opens cannot hide a line both passes read
++  # as closing the finding, and a definition cannot carry a field line no
++  # renderer shows. Each tail follows every field of the finding.
++  while IFS='|' read -r tag tail want; do
++    record_round 1 CLEARED 0 1 '### Finding G-050' tier-binding new '' |
++      awk -v t="$tail" 'index($0, "### Held up") == 1 {printf "%s", t} {print}' > "$report"
++    for l in C en_US.UTF-8; do
++      run_rc 3 record_line_vf "$l" "$report" "$spec"
++      assert_contains "$OUT" "$want" "AC-012: a canonical finding whose tail is $tag was not refused by name under LANG=$l (round 17, O-024)"
++    done
++  done <<'ROWS'
++fence-after-list-marker|- **Severity:** minor\n- ```\n  ### x\n- **Severity**: data-loss\n|a code fence that may be inside a list item in finding G-050
++fence-swapping-phase|- **Severity:** minor\n- note\n  ```\n```\n### x\n```\n- **Severity**: data-loss\n- y\n  ```\n|a code fence that may be inside a list item in finding G-050
++fence-four-spaces-in-item|- **Severity:** minor\n- note\n\n    ```\n  ### x\n    ```\n- **Severity**: data-loss\n|a code fence that may be inside a list item in finding G-050
++fence-after-ordered-marker|- **Severity:** minor\n1. ~~~\n   ### x\n- **Severity**: data-loss\n|a code fence that may be inside a list item in finding G-050
++definition-hiding-severity|\n[a]: /u '\n    - **Severity:** minor\n    - x'\n|a link reference definition in finding G-050
++definition-then-fence|\n[a]: /u '\n    - **Severity:** minor\n    - x'\n\n- ```\n  ### x\n- **Severity**: data-loss\n|a link reference definition in finding G-050
++definition-in-list-item|- [a]: /u '\n      - **Severity:** minor\n      - x'\n|a link reference definition in finding G-050
++definition-label-across-lines|\n[a\nb]: /u '\n    - **Severity:** minor\n    - x'\n|a link reference definition in finding G-050
++definition-escaped-label|\n[a\\]b]: /u '\n    - **Severity:** minor\n    - x'\n|a link reference definition in finding G-050
++ROWS
++  # The narrowed check is judged after the heading on a line has opened or
++  # closed a finding (round 17): a Finding heading carrying raw HTML is refused
++  # under the finding it opens, the first one of a round included, and a
++  # section heading that closes a finding is outside it.
++  for l in C en_US.UTF-8; do
++    record_round 1 CHALLENGED 1 0 '### Finding G-050 <b>x</b>' dup-binding new '- **Severity:** data-loss' > "$report"
++    run_rc 3 record_line_vf "$l" "$report" "$spec"
++    assert_contains "$OUT" 'raw HTML outside a code span in finding G-050' \
++      "AC-012: the first Finding heading of a round carried raw HTML under LANG=$l (round 17)"
++    record_round 1 CHALLENGED 2 0 '### Finding G-050' dup-binding new '- **Severity:** data-loss' |
++      awk -v t="### Finding G-051 <b>x</b>\n- **Class:** dup-binding\n- **Status:** new\n- **Prior:** none\n- **Severity:** data-loss\n- **Scenario:** a recorded trigger\n- **Where:** scripts/run.sh:9\n- **Reproduced:** concrete trigger at that site\n- **Root cause:** implementation-error\n- **Blocks:** AC-012\n- **Wrong behavior:** observed versus required\n- **Class-wide fix:** read or refuse every record line\n" 'index($0, "### Held up") == 1 {printf "%s", t} {print}' > "$report"
++    run_rc 3 record_line_vf "$l" "$report" "$spec"
++    assert_contains "$OUT" 'raw HTML outside a code span in finding G-051' \
++      "AC-012: a later Finding heading carrying raw HTML was not refused under the finding it opens under LANG=$l (round 17)"
++    assert_not_contains "$OUT" 'in finding G-050' \
++      "AC-012: a later Finding heading carrying raw HTML was refused under the finding it closes under LANG=$l (round 17)"
++    record_round 1 CHALLENGED 1 0 '### Finding G-050' dup-binding new '- **Severity:** data-loss' |
++      awk 'index($0, "### Held up") == 1 {print "### Notes <b>x</b>"; print "A note."} {print}' > "$report"
++    run_rc 0 record_line_vf "$l" "$report" "$spec"
++    assert_not_contains "$OUT" 'report recovery' \
++      "AC-012: a section heading that closes a finding was refused as raw HTML inside it under LANG=$l (round 17)"
++  done
++  # A candidate is settled on what opens at or before the first word of each of
++  # its readings (round 17, O-023): one bracket quoted in a code span above a
++  # long run keeps no later line re-read, so a 400-line Reproduced field parses
++  # in seconds, where the round-17 tree took about 300 s.
++  record_round 1 CHALLENGED 1 0 '### Finding G-050' dup-binding new '- **Severity:** data-loss' |
++    awk -v n=400 'index($0, "- **Reproduced:**") == 1 {print "- **Reproduced:** the opening bracket `[` is quoted in a code span here"; for (i = 0; i < n; i++) printf "  - step %d: ran `vf_reports x` against [the copy](https://x.example/%d) and saw *exit 0* with `rc=%d` here, fine\n", i, i, i; next} {print}' > "$report"
++  t0=$SECONDS
++  run_rc 0 record_line_vf C "$report" "$spec"
++  assert_not_contains "$OUT" 'report recovery' 'AC-012: a 400-line run under a bracket quoted in a code span was refused (round 17, O-023)'
++  (( SECONDS - t0 < 60 )) || t_fail "AC-012: a 400-line run under a bracket quoted in a code span took $((SECONDS - t0)) s, not under 60 s (round 17, O-023)"
+   # A rendered line start inside a field value: after a br or a block-level
+   # tag a renderer starts a new line, so a Where value carrying one before a
+   # tier is refused, and one carrying no tier parses (round 15, O-018).
+@@ -1837,6 +1953,15 @@
+ a-image-split-by-six-marks|### Finding G-042|\n![x\n###### h\ny](u)Severity: data-loss\n\n
+ a-quoted-image-split-by-six-marks|### Finding G-042|\n> ![x\n> ###### h\n> y](u)Severity: data-loss\n\n
+ a-span-tag-after-a-lone-backtick-paragraph|### Finding G-042|\nNote `a\n\nb` <b>` c\n\n
++a-quoted-destination-member|### Finding G-042|  - The form `` [x](u`v)<br>Severity: data-loss, tick: `. `` stays quoted.\n
++a-quoted-autolink-member|### Finding G-042|  - The form `` Note <1`@a.b><pre>Severity: data-loss</pre>` `` stays quoted.\n
++a-link-title-then-code|### Finding G-042|  - See [the doc](u "a title") and `code` after it.\n
++a-reference-links|### Finding G-042|  - See [the doc][ref] and [x][] here.\n
++a-lt-before-a-space|### Finding G-042|  - It takes < 30 s and > 2 s.\n
++a-wrapped-link-at-line-start|### Finding G-042|\n[a note that\nwraps](u) here.\n\n
++a-escaped-bracket-at-line-start|### Finding G-042|\n\\[a]: is not a definition here.\n\n
++a-column-zero-fence|### Finding G-042|\n```text\nplain\n```\n\n
++a-task-checkboxes|### Finding G-042|  - [x] done\n  - [ ] open\n
+ ROWS
+   # Raw HTML or an autolink inside a canonical finding, outside every code
+   # span, is refused by name (round 16, O-018; the user's decision of
+--- a/tests/test-spec-gate.sh
++++ b/tests/test-spec-gate.sh
+@@ -837,7 +837,7 @@
+ # emphasis and an invisible character inside the word (O-018), and a block
+ # after a field line that ends its item (O-021).
+ round_record_line_cases() {
+-  local spec cli res manifest report l row
++  local spec cli res manifest report l row tail
+   spec="$(make_verification_git_dir recordlines)"
+   cli="$(floor_fixture "$spec")"
+   run_rc 0 bash "$cli" floor "$spec"
+@@ -866,6 +866,8 @@
+   # inside a finding, a carriage return inside a line, a form feed, a code span
+   # placed with 2.4's escapes, an image split by a line of seven marks, and an
+   # image after a backtick line the tracker fences and a renderer does not.
++  # Round 17's follow (O-018, O-024): a `<` that may open an autolink, a link
++  # destination holding a backtick, and a fence after a list marker.
+   for row in '- <Severity:data-loss>|a second Severity line in finding G-042' \
+              '- &nbsp;Severity: data-loss|a second Severity line in finding G-042' \
+              '- [](x)**Severity:** data-loss|a second Severity line in finding G-042' \
+@@ -883,13 +885,24 @@
+              $'- Note\fSeverity: data-loss|a form feed or vertical tab in finding G-042' \
+              '- [\\`]`](u)Severity: data-loss|a second Severity line in finding G-042' \
+              $'\n![x\n####### y](u)Severity: data-loss|a second Severity line in finding G-042' \
+-             $'\n```a`b\n\n![x\ny](u)Severity: data-loss\n```|quoted content carries a Severity line'; do
++             $'\n```a`b\n\n![x\ny](u)Severity: data-loss\n```|quoted content carries a Severity line' \
++             $'\nNote <1`@a.b><br>Severity: data-loss, tick: `.|an autolink outside a code span in finding G-042' \
++             $'\n[x](u`v)<br>Severity: data-loss, tick: `.|a backtick inside a link destination, title or label in finding G-042' \
++             $'- ```\n  ### x\n- **Severity**: data-loss|a code fence that may be inside a list item in finding G-042'; do
+     printf '# Prior review\n\n### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n%s\n' "${row%%|*}" > "$manifest"
+     for l in C en_US.UTF-8; do
+       run_rc 3 in_locale "$l" bash "$cli" round "$spec" opponent --complete "$report"
+       assert_contains "$OUT" "${row#*|}" "AC-009: a CLEARED completion over a second manifest tier written as ${row%%|*} was not refused under LANG=$l (T030o44 review)"
+     done
+   done
++  # Round 17 (O-024): a link reference definition renders nothing yet carries
++  # a field line, so it is refused by name inside a finding at completion.
++  printf '# Prior review\n\n### Finding G-042\n- **Class:** tier-binding\n\n[a]: /u %s\n    - **Severity:** minor\n    - x%s\n' "'" "'" > "$manifest"
++  for l in C en_US.UTF-8; do
++    run_rc 3 in_locale "$l" bash "$cli" round "$spec" opponent --complete "$report"
++    assert_contains "$OUT" 'a link reference definition in finding G-042' \
++      "AC-009: a CLEARED completion over a manifest tier hidden in a link reference definition was not refused under LANG=$l (round 17, O-024)"
++  done
+   # O-019: a field line under a sub-heading of the manifest finding is read, so
+   # the CLEARED completion is refused on the manifest tier itself.
+   printf '# Prior review\n\n### Finding G-042\n- **Class:** tier-binding\n#### Notes\nReproduced twice.\n- **Severity:** data-loss\n' > "$manifest"
+@@ -910,13 +923,29 @@
+              '- **Severity:** minor\n\nNote\n> <b\n> title="x">Severity: data-loss</b>|quoted content carries a Severity line' \
+              '- **Severity:** minor\n\nNote<pre>Severity: data-loss</pre>|raw HTML outside a code span in finding G-050' \
+              '- **Severity:** minor\n\nNote\r\rSeverity: data-loss|a carriage return inside a line in finding G-050' \
+-             '- **Severity:** minor\n\n![x\n####### y](u)Severity: data-loss|a Severity line this grammar cannot read in finding G-050'; do
++             '- **Severity:** minor\n\n![x\n####### y](u)Severity: data-loss|a Severity line this grammar cannot read in finding G-050' \
++             '- **Severity:** minor\n\nNote <1`@a.b><pre>Severity: data-loss</pre>`|an autolink outside a code span in finding G-050' \
++             '- **Severity:** minor\n\n[x](u "`")<br>Severity: data-loss, tick: `.|a backtick inside a link destination, title or label in finding G-050'; do
+     record_line_report "$res" 1 CLEARED 0 1 '### Finding G-050' dup-binding new "${row%%|*}" > "$SANDBOX/record-lines-dup.md"
+     for l in C en_US.UTF-8; do
+       run_rc 3 in_locale "$l" bash "$cli" round "$spec" opponent --complete "$SANDBOX/record-lines-dup.md"
+       assert_contains "$OUT" "${row#*|}" "AC-009: a CLEARED completion over a second tier written as ${row%%|*} was not refused under LANG=$l (T030o44 review)"
+     done
+   done
++  # Round 17 (O-024): after every field of a canonical finding, a definition
++  # carries the minor tier no renderer shows and a fence a list item opens
++  # hides the line the passes read as closing the finding, so the data-loss
++  # item after it fell outside every finding; both are refused at completion.
++  tail=$'\n[a]: /u \'\n    - **Severity:** minor\n    - x\'\n\n- ```\n  ### x\n- **Severity**: data-loss\n'
++  record_line_report "$res" 1 CLEARED 0 1 '### Finding G-050' tier-binding new '' |
++    TAIL="$tail" awk 'index($0, "### Held up") == 1 {printf "%s", ENVIRON["TAIL"]} {print}' > "$SANDBOX/record-lines-o024.md"
++  for l in C en_US.UTF-8; do
++    run_rc 3 in_locale "$l" bash "$cli" round "$spec" opponent --complete "$SANDBOX/record-lines-o024.md"
++    assert_contains "$OUT" 'a link reference definition in finding G-050' \
++      "AC-009: a CLEARED completion over a tier hidden in a link reference definition was not refused under LANG=$l (round 17, O-024)"
++    assert_contains "$OUT" 'a code fence that may be inside a list item in finding G-050' \
++      "AC-009: a CLEARED completion over a finding a list-item fence closed early was not refused under LANG=$l (round 17, O-024)"
++  done
+   # A title and a late Timestamp let a CLEARED round seal over a blocking
+   # finding it never counted (O-020); the switch is refused at completion.
+   record_style_report "$res" 1 CLEARED 0 1 '### Finding G-099:silent-loss:new:data-loss' '### Finding G-100:minor-slip:new:minor' > "$SANDBOX/record-lines-style.md"

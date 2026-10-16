@@ -1,0 +1,39 @@
+== baseline 00:04:06Z
+PASS B0 unmutated fixture passes
+PASS B1 unmutated ShellCheck passes
+== kill rows
+PASS K1 literal applies once in tests/helpers.sh
+PASS K1 KILLED (judge rc)
+PASS K1 diagnostic: AC-020: a suite did not export LC_ALL=C to the programs it runs (O-016)
+PASS K2 literal applies once in tests/helpers.sh
+PASS K2 KILLED (judge rc)
+PASS K2 diagnostic: AC-020: a suite did not export LC_ALL=C to the programs it runs (O-016)
+PASS K3 literal applies once in tests/run.sh
+PASS K3 KILLED (judge rc)
+PASS K3 diagnostic: AC-020: bash tests/run.sh ran a suite under the caller's locale (O-016)
+PASS K4 literal applies once in tests/shellcheck.sh
+PASS K4 KILLED (judge rc)
+PASS K4 diagnostic: AC-020: bash tests/shellcheck.sh ran ShellCheck under the caller's locale (O-016)
+PASS K5 literal applies once in .specify/stack.yml
+PASS K5 KILLED (judge rc)
+PASS K5 diagnostic: AC-020: reuse-checked command has no locale probe: bash tests/run.sh verification
+PASS K6 literal applies once in tests/helpers.sh
+PASS K6 literal applies once in tests/test-verification.sh
+PASS K6 KILLED (judge rc)
+PASS K6 diagnostic: AC-020: a usage-limits case followed LANG=en_GB.UTF-8 (O-016)
+PASS K6b literal applies once in tests/helpers.sh
+PASS K6b literal applies once in tests/test-verification.sh
+PASS K6b KILLED (judge rc)
+PASS K6b diagnostic: AC-020: a usage-limits case followed LANG=de_DE.UTF-8 (O-016)
+PASS K7 literal applies once in tests/test-verification.sh
+PASS K7 KILLED (judge rc)
+PASS K7 diagnostic: AC-020: precondition: macOS ships en_GB.UTF-8 and de_DE.UTF-8, but only 0 of them changed date %p
+PASS K8 literal applies once in tests/test-verification.sh
+PASS K8 KILLED (judge rc)
+PASS K8 diagnostic: AC-020: precondition: macOS ships en_GB.UTF-8 and de_DE.UTF-8, but only 0 of them changed date %p
+== argued rows
+PASS E1 literal applies once in tests/run.sh
+PASS E1 literal applies once in tests/run.sh
+PASS E1 SURVIVES as argued (equiv)
+== done 00:06:42Z
+t030o42-mutations failures=0

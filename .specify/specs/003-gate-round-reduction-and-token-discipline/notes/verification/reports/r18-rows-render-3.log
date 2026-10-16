@@ -1,0 +1,7 @@
+R d04-as-v5
+  | marked rc=0 <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<p><img src="u" alt="x ] y ">Severity: data-loss</p>
+  | mdit   rc=0 <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<p><img src="u" alt="x ">Severity: data-loss</p>
+R entity-then-code-span-holding-image-across-lines
+  | marked rc=0 <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<p>&amp;<code>![Severity: data-loss](u) z y w</code></p>
+  | mdit   rc=0 <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<p>&amp;<code>![Severity: data-loss](u) z y w</code></p>
+r18-rows-render failures=0

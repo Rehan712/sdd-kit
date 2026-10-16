@@ -1,0 +1,73 @@
+@@OLD
+  assert_eq "$cmd" "$OUT" 'AC-023: the Verify command was not run as written (T030o43 review 2)'
+  cp "$SANDBOX/analyzer-tasks" "$spec_dir/tasks.md"
+}
+@@NEW
+  assert_eq "$cmd" "$OUT" 'AC-023: the Verify command was not run as written (T030o43 review 2)'
+  # Every value a parser passes on is taken from the line as written (T030o43
+  # review 3, R3-F4): a Tests locator and its registry row written with a
+  # U+00A0 inside the file name bind, the harness finds the file, and the
+  # catalog holds the name as written; a manual observation name so written
+  # equals the name a worker's return gives it.
+  local proj="${spec_dir%/.specify/*}" v suffix
+  sed "s#tests/check.sh::test_ac_001_shared#tests/my${nb}check.sh::test_ac_001_shared#" "$SANDBOX/analyzer-plan" > "$spec_dir/plan.md"
+  sed "s#tests/check.sh::test_ac_001_shared#tests/my${nb}check.sh::test_ac_001_shared#; s#\`tests/check.sh\`#\`tests/my${nb}check.sh\`#" "$SANDBOX/analyzer-tasks" > "$spec_dir/tasks.md"
+  mkdir -p "$proj/tests"; printf 'test_ac_001_shared() { :; }\n' > "$proj/tests/my${nb}check.sh"
+  bash -c '. "$1"; vf_bindings "$2" tasks "" "$3" && vf_locators_exist "$3" T001 "$4"' _ "$SCRIPTS/verification-lib.sh" \
+    "$spec_dir" "$SANDBOX/written.nul" "$proj" > "$SANDBOX/written.out" 2>&1 ||
+    t_fail "AC-023: a Tests locator written with a U+00A0 did not bind or was not found as written (T030o43 review 3): $(head -c 300 "$SANDBOX/written.out")"
+  v="$(tr '\0' '\n' < "$SANDBOX/written.nul" | grep -c -F "tests/my${nb}check.sh::test_ac_001_shared")"
+  [[ "$v" -ge 2 ]] || t_fail 'AC-023: the binding catalog did not hold a Tests locator as written (T030o43 review 3)'
+  rm -f "$proj/tests/my${nb}check.sh"
+  sed "s#| release-observation |#| release${nb}observation |#" "$SANDBOX/analyzer-plan" > "$spec_dir/plan.md"
+  sed "s#\*Tests:\* release-observation#*Tests:* release${nb}observation#" "$SANDBOX/analyzer-tasks" > "$spec_dir/tasks.md"
+  printf 'Verification-Return: 1\nTask: T004\nCaptures: none\nSummary: x\nManual observation: release%sobservation, artifacts/release.txt, abc, someone, 2026-09-27T00:00:00Z, PASS: ok\nFailure modes:\nINV-001, release%sobservation, manual\n' "$nb" "$nb" > "$SANDBOX/written-return.txt"
+  bash -c '. "$1"; vf_bindings "$2" tasks "" "$3" && vf_task_info "$3" T004 && vf_return_parse "$4" "$5" || exit 9
+    name="$(tr "\0" "\n" < "$5" | sed -n "/^manual$/{n;p;}" | cut -d, -f1)"
+    [[ -n "$name" && "$name" == "${VF_TASK[7]}" ]]' _ "$SCRIPTS/verification-lib.sh" "$spec_dir" "$SANDBOX/written.nul" \
+    "$SANDBOX/written-return.txt" "$SANDBOX/written-return.nul" > "$SANDBOX/written.out" 2>&1 ||
+    t_fail 'AC-023: a manual observation name written with a U+00A0 did not equal the return that names it (T030o43 review 3)'
+  # A value processed further reads the same whitespace: a Refs list with a
+  # U+00A0 after each comma and a plan reference written plan<U+00A0>§ are
+  # its references, a Files entry ending in a U+00A0 and (new) owns its test
+  # file, and a registry row after a U+00A0 is a row.
+  cp "$SANDBOX/analyzer-plan" "$spec_dir/plan.md"
+  perl -0pe 's/\Q  - *Refs:* REQ-001, AC-001, FM-001\E/  - *Refs:* REQ-001,\xc2\xa0AC-001,\xc2\xa0FM-001,\xc2\xa0plan\xc2\xa0\xc2\xa73.2/; s/\Q  - *Files:* `src\/parser.sh`, `tests\/check.sh`\E/  - *Files:* `src\/parser.sh`, `tests\/check.sh`\xc2\xa0(new)/' \
+    "$SANDBOX/analyzer-tasks" > "$spec_dir/tasks.md"
+  [[ "$(grep -c $'\302\240' "$spec_dir/tasks.md")" == 2 ]] || t_fail 'fixture: the Refs and Files edits did not apply'
+  bash -c '. "$1"; vf_bindings "$2" tasks "" "$3"' _ "$SCRIPTS/verification-lib.sh" "$spec_dir" "$SANDBOX/written.nul" > "$SANDBOX/written.out" 2>&1 ||
+    t_fail "AC-023: a Refs list with a U+00A0 after a comma, or a plan reference after one, was refused (T030o43 review 3): $(head -c 300 "$SANDBOX/written.out")"
+  assert_not_contains "$(cat "$SANDBOX/written.out")" 'task T001 defers all local coverage' \
+    'AC-023: a Files entry ending in a U+00A0 and (new) did not own its test file (T030o43 review 3)'
+  cp "$SANDBOX/analyzer-tasks" "$spec_dir/tasks.md"
+  sed "s/^| manual-family | manual | AC-004 | release-observation |\$/${nb}| manual-family | manual | AC-004 | release-observation |/" "$SANDBOX/analyzer-plan" > "$spec_dir/plan.md"
+  bash -c '. "$1"; vf_bindings "$2" tasks "" "$3"' _ "$SCRIPTS/verification-lib.sh" "$spec_dir" "$SANDBOX/written.nul" > "$SANDBOX/written.out" 2>&1 ||
+    t_fail "AC-023: a registry row after a U+00A0 was not read as that row (T030o43 review 3): $(head -c 300 "$SANDBOX/written.out")"
+  cp "$SANDBOX/analyzer-plan" "$spec_dir/plan.md"
+  # A stage heading is its text trimmed at both ends in every reader that
+  # compares it (R3-F11): through-stage names "## Backend" written with a
+  # trailing U+00A0 or space, and so does its catalog's task record.
+  for suffix in "$nb" ' '; do
+    sed "s/^## Backend\$/## Backend$suffix/" "$SANDBOX/analyzer-tasks" > "$spec_dir/tasks.md"
+    bash -c '. "$1"; vf_bindings "$2" through-stage Backend "$3" && vf_task_info "$3" T001 && [[ "${VF_TASK[3]}" == Backend ]]' _ \
+      "$SCRIPTS/verification-lib.sh" "$spec_dir" "$SANDBOX/stage.nul" > "$SANDBOX/stage.out" 2>&1 ||
+      t_fail "AC-023: a Backend heading ending in $(printf '%s' "$suffix" | od -An -tx1 | tr -d ' ') was not the stage through-stage names (T030o43 review 3): $(head -c 200 "$SANDBOX/stage.out")"
+  done
+  sed "s/^## Backend\$/## ${nb}Backend/" "$SANDBOX/analyzer-tasks" > "$SANDBOX/stage-tasks.md"
+  run_rc 0 bash -c '. "$1"; vf_config "$2" "$3" "$4"' _ "$SCRIPTS/verification-lib.sh" \
+    "$SANDBOX/stage-stack.yml" "$SANDBOX/stage-tasks.md" "$SANDBOX/stage-catalog-leading"
+  assert_not_contains "$OUT" 'unknown checkpoint stage' \
+    'AC-023: a stage heading with a U+00A0 after "## " was not the stage a checkpoint names (T030o43 review 3)'
+  sed "s/^## Backend\$/## Backend${nb}/; s/^- \[ \] \*\*T001\*\* — Cover the shared shell boundary\$/- [ ] **T001**${nb}— Cover${nb}the shared shell boundary${nb}/" \
+    "$SANDBOX/analyzer-tasks" > "$spec_dir/tasks.md"
+  run_rc 0 "$SCRIPTS/spec-task.sh" list "$spec_dir"
+  assert_contains "$OUT" "T001"$'\t'"todo"$'\t'"Backend"$'\t'"Cover${nb}the shared shell boundary"$'\n' \
+    'AC-023: the task list did not show a stage and a subject as written (T030o43 review 3)'
+  awk -v nb="$nb" '/^## Docs$/ {print "## Setup" nb; next} /^  - \*Refs:\* REQ-003, AC-003, FM-002$/ {next} {print}' \
+    "$SANDBOX/analyzer-tasks" > "$spec_dir/tasks.md"
+  "$ANALYZE" "$spec_dir" > "$SANDBOX/stage.out" 2>&1
+  assert_not_contains "$(cat "$SANDBOX/stage.out")" 'task T003 has no *Refs:* line' \
+    'AC-023: the analyzer did not read a Setup heading ending in a U+00A0 as Setup (T030o43 review 3)'
+  cp "$SANDBOX/analyzer-tasks" "$spec_dir/tasks.md"
+}
+@@END

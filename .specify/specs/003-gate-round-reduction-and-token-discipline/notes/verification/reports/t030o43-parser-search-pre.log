@@ -1,0 +1,152 @@
+scripts/lib.sh:25:     *)   v="$(printf '%s' "$v" | sed -E 's/[[:space:]]+#.*$//; s/[[:space:]]+$//')" ;;
+scripts/lib.sh:35:   awk 'NR==1 { if ($0 != "---") exit; next }
+scripts/lib.sh:43:   raw="$(frontmatter_block "$1" | sed -n "s/^$2:[[:space:]]*//p" | head -1)"
+scripts/lib.sh:50:   frontmatter_block "$1" | sed -n "s/^$2:[[:space:]]*//p" | head -1 \
+scripts/lib.sh:51:     | sed -E 's/^[[:space:]]+//; s/[[:space:]]+$//'
+scripts/lib.sh:64:   [[ "$(head -1 "$file")" == "---" ]] \
+scripts/lib.sh:67:   awk -v key="$key" -v val="$value" '
+scripts/lib.sh:84:   raw="$(sed -n "s/^$2:[[:space:]]*//p" "${1:-/dev/null}" 2>/dev/null | head -1)"
+scripts/lib.sh:94:   printf '%s\n' "$1" | awk -v key="$2" '
+scripts/lib.sh:133:   awk '
+scripts/lib.sh:172:   line="$(registry_entries "$1" | awk -F'\t' -v n="$2" '$1==n { print $2; exit }')"
+scripts/lib.sh:200:   awk 'NR==1 { next }
+scripts/verification-lib.sh:209:     awk "$_VF_AWK_FENCE"'
+scripts/verification-lib.sh:224:   VF_CONFIG_PATH="$stack" VF_CONFIG_OUT="$tmp" VF_CONFIG_STAGES="$stage_map" awk '
+scripts/verification-lib.sh:240:             if (tail!="" && tail !~ /^ +(#.*)?$/) { error("trailing scalar content"); return "" }
+scripts/verification-lib.sh:346:   declared="$(frontmatter_block "$spec_dir/spec.md" | grep -c '^verification_contract:' || true)"
+scripts/verification-lib.sh:379:   if LC_ALL=C od -An -v -t u1 "$1" | grep -E '(^|[[:space:]])0([[:space:]]|$)' >/dev/null; then
+scripts/verification-lib.sh:438:   contract_count="$(frontmatter_block "$spec" | grep -c '^verification_contract:' || true)"
+scripts/verification-lib.sh:465:   awk -v OFS="$us" -v mapfile="$maps" \
+scripts/verification-lib.sh:466:       -v specacs=" $(grep -oE 'AC-[0-9]{3}' "$spec" | sort -u | tr '\n' ' ')" \
+scripts/verification-lib.sh:655:     awk -v OFS="$us" "$_VF_AWK_FENCE"'
+scripts/verification-lib.sh:688:     awk -F "$us" -v OFS="$us" -v selected="$selected" -v phase="$phase" \
+scripts/verification-lib.sh:689:         -v specacs=" $(grep -oE 'AC-[0-9]{3}' "$spec" | sort -u | tr '\n' ' ')" \
+scripts/verification-lib.sh:690:         -v specreqs=" $(grep -oE 'REQ-[0-9]{3}' "$spec" | sort -u | tr '\n' ' ')" \
+scripts/verification-lib.sh:877:   errors="$(awk -F "$us" '$1=="D" && $2=="error" {n++} END{print n+0}' "$records")"
+scripts/verification-lib.sh:878:   warnings="$(awk -F "$us" '$1=="D" && $2=="warning" {n++} END{print n+0}' "$records")"
+scripts/verification-lib.sh:912:   if command -v shasum >/dev/null 2>&1; then digest="$(shasum -a 256 < "$1" | awk '{print $1}')" || return 3
+scripts/verification-lib.sh:913:   elif command -v sha256sum >/dev/null 2>&1; then digest="$(sha256sum < "$1" | awk '{print $1}')" || return 3
+scripts/verification-lib.sh:920:   LC_ALL=C awk -v t="$1" 'BEGIN {
+scripts/verification-lib.sh:955:     priorids="$priorids$(awk "$_VF_AWK_FENCE"'
+scripts/verification-lib.sh:968:     ' "$manifest" | sort -u | tr '\n' ' ')"
+scripts/verification-lib.sh:970:   VF_REPORT_FILE="$file" awk -v gate="$gate" -v priorids="$priorids" "$_VF_AWK_FENCE"'
+scripts/verification-lib.sh:1230:           locations=$((locations+$(printf '%s\n' "${f[7]}" | awk '{n=0; while(match($0,/[^ `,]+:[0-9]+/)){n++; $0=substr($0,RSTART+RLENGTH)}; print n}')))
+scripts/verification-lib.sh:1239:   LC_ALL=C awk -F '\t' '
+scripts/verification-lib.sh:1242:   ' "$tmp/classes" | LC_ALL=C sort
+scripts/verification-lib.sh:1243:   awk -F '\t' '{ids[$1 SUBSEP $2]=1; observations++; if($3=="reopened") reopened++}
+scripts/verification-lib.sh:1357:     alt="$(dirname -- "$d")/$(basename -- "$d" | tr 'a-zA-Z' 'A-Za-z')"
+scripts/verification-lib.sh:1399:       awk '/^## Decisions log[[:space:]]*$/ {on=1; print; next} /^## / {on=0} on {print}' "$2" > "$3";;
+scripts/verification-lib.sh:1401:       awk -v document="$1" '
+scripts/verification-lib.sh:1534:       find "$repo/${real:-$path}" \( -type f -o -type l \) -print0 > "$tmp/extra" || return 3
+scripts/verification-lib.sh:1542:       LC_ALL=C sort "$tmp/extra-hashes" > "$tmp/sorted"
+scripts/verification-lib.sh:1590:   } | LC_ALL=C sort -u > "$tmp/env-names"
+scripts/verification-lib.sh:1673:   LC_ALL=C awk 'BEGIN {ORS=""} {if(NR>1) printf "\\n"; gsub(/\\/,"\\\\"); gsub(/[[:cntrl:]]/,"?"); printf "%s",$0}'
+scripts/verification-lib.sh:1680:   command="$(tr '\000' ' ' < "$dir/argv.nul" | vf_escape | head -c 450)"
+scripts/verification-lib.sh:1681:   key="$(vf_meta_get key | vf_escape | head -c 450)"
+scripts/verification-lib.sh:1682:   log="$(printf '%s' "${dir%/*}/$cap/output.log" | vf_escape | head -c 350)"
+scripts/verification-lib.sh:1684:     "$cap" "$command" "$key" "$exit_code" "$digest" "$input" "$log" | head -c "$VF_SUCCESS_BYTES"
+scripts/verification-lib.sh:1686:     LC_ALL=C tail -n "$VF_DIAGNOSTIC_LINES" "$dir/output.log" | \
+scripts/verification-lib.sh:1687:       LC_ALL=C awk '{gsub(/[[:cntrl:]]/,"?"); print}' | head -c $((VF_FAILURE_BYTES-VF_SUCCESS_BYTES))
+scripts/verification-lib.sh:1730:   if [[ -n "${VF_KEY_PATTERN:-}" ]]; then key="$(grep -E -- "$VF_KEY_PATTERN" "$staging/output.log" | tail -1 || :)"; fi
+scripts/verification-lib.sh:1731:   [[ -n "$key" ]] || key="$(awk 'NF {line=$0} END {print line}' "$staging/output.log")"
+scripts/verification-lib.sh:1737:     output_bytes "$(wc -c < "$staging/output.log" | tr -d ' ')" policy "$policy" key "$key" > "$staging/meta.nul"
+scripts/verification-lib.sh:1770:   [[ "$(vf_meta_get output_digest)" == "$(vf_hash "$dir/output.log")" && "$(vf_meta_get output_bytes)" == "$(wc -c < "$dir/output.log" | tr -d ' ')" ]] || return 3
+scripts/verification-lib.sh:1789:     [[ "$(awk '$2=="meta.nul" {print $1}' "$other")" == "$(vf_hash "$spec/notes/captures/$f/meta.nul")" ]] || return 3
+scripts/verification-lib.sh:1843:   [[ "$(wc -c < "$1")" -le 65536 ]] || { echo 'return exceeds 64 KiB' >&2; return 3; }
+scripts/verification-lib.sh:1844:   awk '
+scripts/verification-lib.sh:1894:           for ((i=0;i<${#ids[@]};i++)); do ids[i]="$(printf '%s' "${ids[i]}" | sed 's/^ *//;s/ *$//')"; done
+scripts/verification-lib.sh:1910:   LC_ALL=C sort -u "$tmp/required" > "$tmp/want"
+scripts/verification-lib.sh:1922:       printf -v "$v" '%s' "$(printf '%s' "${!v}" | sed 's/^ *//;s/ *$//')"
+scripts/verification-lib.sh:1932:       grep -Fx -- "$cap" "$tmp/caps" >/dev/null && { echo 'return: duplicate capture' >&2; return 3; }
+scripts/verification-lib.sh:1949:   LC_ALL=C sort "$tmp/got" > "$tmp/actual"
+scripts/verification-lib.sh:1960:       [[ -f "$repo/$path" ]] && grep -F -- "$name" "$repo/$path" >/dev/null || { echo "return: unknown test declaration ${f[7]}" >&2; return 3; }
+scripts/verification-lib.sh:1969:   VF_EVIDENCE="$4" awk -v id="$2" -v box="$3" -v today="$(date +%Y-%m-%d)" '
+scripts/verification-lib.sh:2061:     if [[ "$(vf_hash "$old/return.txt")" == "$ret" ]] && grep -qE "^- \[x\] \*\*$task\*\*" "$tasks"; then
+scripts/verification-lib.sh:2071:     printf 'accept rejected: %s %s\n' "$task" "$reason" | head -c "$VF_FAILURE_BYTES"
+scripts/verification-lib.sh:2113:       wt="$(vf_git -C "$path" worktree list --porcelain | awk -v branch="$branch" '/^worktree / {p=substr($0,10)} /^branch / && substr($0,8)==branch {print p}')" || return 3
+scripts/verification-lib.sh:2114:       count="$(printf '%s\n' "$wt" | awk 'NF {n++} END {print n+0}')"
+scripts/verification-lib.sh:2148:         grep -Fx "${dir##*/}" "$VF_GATE_FRESH" >/dev/null || continue
+scripts/verification-lib.sh:2169:   name="$(bash "$HUB_DIR/scripts/spec-task.sh" show "$spec" "$task" | head -1 | sed -n 's/.*\[repo:\([^]]*\)\].*/\1/p')"
+scripts/verification-lib.sh:2173:     wt="$(vf_git -C "$path" worktree list --porcelain | awk -v branch="$branch" '/^worktree / {p=substr($0,10)} /^branch / && substr($0,8)==branch {print p}')" || return 3
+scripts/verification-lib.sh:2247:   printf 'result=%s source=%s exit=%s executed=%s cache-hits=%s records=%s/commands.nul\n' "$(vf_meta_get id)" "$(vf_meta_get source)" "$(vf_meta_get exit)" "$executed" "$reused" "$dir" | head -c "$VF_SUCCESS_BYTES"
+scripts/verification-lib.sh:2295:           done < <(printf '%s\n' "${fields[8]}" | grep -oE 'AC-[0-9]{3}' | LC_ALL=C sort -u);;
+scripts/verification-lib.sh:2336:         if ! awk -F '\t' -v task="$task" -v ref="$ref" '$1==task && $2==ref {found=1} END {exit !found}' "$tmp/current"; then
+scripts/verification-lib.sh:2339:       done < <(printf '%s\n' "${fields[8]}" | grep -oE '(AC|FM|INV)-[0-9]{3}' | LC_ALL=C sort -u)
+scripts/verification-lib.sh:2348:     awk -F '\t' 'FILENAME==ARGV[1] {current[$0]=1; next} !($0 in current) {print "checkpoint lost prior binding: " $0 > "/dev/stderr"; bad=1} END {exit bad ? 3 : 0}' "$tmp/current" "$tmp/prior" || return 3
+scripts/verification-lib.sh:2413:       [[ -f "$repo/$path" ]] && grep -F -- "$name" "$repo/$path" >/dev/null || { echo "verification binding: unknown test ${fields[7]}" >&2; return 3; }
+scripts/verification-lib.sh:2420:   awk -v wanted="$2" "$_VF_AWK_FENCE"'
+scripts/verification-lib.sh:2465:   line="$(awk -v gate="$gate" -v round="$round" -v rejects="$rejects" -v gates="$VF_GATES" "$_VF_AWK_FENCE"'
+scripts/verification-lib.sh:2542:     head -n 10 "$rejects" >&2
+scripts/verification-lib.sh:2682:   awk '
+scripts/verification-lib.sh:2700:   awk -F '|' "$_VF_AWK_FENCE"'
+scripts/verification-lib.sh:2739:     expected="$(printf '%s' "$text" | sed 's/|/\&#124;/g'); sha256:$digest"
+scripts/verification-lib.sh:2818:     bytes=$((bytes+$(wc -c < "$dir/output.log")))
+scripts/verification-lib.sh:2819:     summary_bytes=$((summary_bytes+$(wc -c < "$dir/summary.txt")))
+scripts/spec-run.sh:76: grep -qE "\*\*$TASK_ID\*\*" "$TASKS" || { echo "task $TASK_ID not found in $TASKS" >&2; exit 1; }
+scripts/spec-run.sh:122:     shasum -a 256 "$1" | awk '{print "sha256:" substr($1,1,12)}'
+scripts/spec-run.sh:124:     sha256sum "$1" | awk '{print "sha256:" substr($1,1,12)}'
+scripts/spec-run.sh:126:     cksum "$1" | awk '{print "cksum:" $1}'
+scripts/spec-run.sh:149:   keyline="$(grep -E -- "$KEY" "$out" | tail -1 || true)"
+scripts/spec-run.sh:151: [[ -z "${keyline:-}" ]] && keyline="$(awk 'NF{last=$0} END{print last}' "$out")"
+scripts/spec-run.sh:152: keyline="$(printf '%s' "$keyline" | sed -E 's/[[:cntrl:]]//g; s/^[[:space:]]+//; s/[[:space:]]+$//')"
+scripts/spec-run.sh:162: lines="$(wc -l < "$out" | tr -d ' ')"
+scripts/spec-run.sh:171:     head -n 120 "$out"
+scripts/spec-run.sh:173:     tail -n 120 "$out"
+scripts/spec-task.sh:55:   awk '
+scripts/spec-task.sh:81: task_row() { task_scan | awk -F'\t' -v id="$1" '$1 == id { print; exit }'; }
+scripts/spec-task.sh:89:   EV_TEXT="$evidence" awk -v id="$id" -v box="$box" '
+scripts/spec-task.sh:145:   [[ "$(cut -f4 <<< "$row")" == 1 ]] || { echo 'REFUSED: versioned task requires spec-gate accept / --return-file' >&2; exit 3; }
+scripts/spec-task.sh:151:     task_scan | awk -F'\t' '{ printf "%s\t%s\t%s\t%s\n", $1, $2, $3, $5 }'
+scripts/spec-task.sh:155:     awk -v id="$TASK_ID" '
+scripts/spec-task.sh:175:     exempt="$(cut -f4 <<< "$row")"
+scripts/sdd-analyze.sh:147: nc=$(grep -n '\[NEEDS CLARIFICATION' "$spec" "$plan" 2>/dev/null | head -5 || true)
+scripts/sdd-analyze.sh:149:   fail "unresolved [NEEDS CLARIFICATION] marker(s) — resolve before tasking/implementing:"$'\n'"$(echo "$nc" | sed 's/^/      /')"
+scripts/sdd-analyze.sh:159:   spec_acs=$(grep -oE 'AC-[0-9]{3}' "$spec" | sort -u)
+scripts/sdd-analyze.sh:160:   spec_reqs=$(grep -oE 'REQ-[0-9]{3}' "$spec" | sort -u)
+scripts/sdd-analyze.sh:161:   [[ -z "$spec_acs" ]] && fail "spec.md defines no AC-### ids" || pass "spec.md defines $(echo "$spec_acs" | wc -l | tr -d ' ') AC id(s)"
+scripts/sdd-analyze.sh:165:     grep -q "$req" "$plan" || unref="$unref $req"
+scripts/sdd-analyze.sh:169:   leftovers=$(grep -nE '<(Title|Spec Title|One-line title|role|name|handle|slug)>|NNN-slug' "$spec" "$plan" 2>/dev/null | grep -v 'template' | head -5 || true)
+scripts/sdd-analyze.sh:170:   [[ -n "$leftovers" ]] && warn "template placeholders remain:"$'\n'"$(echo "$leftovers" | sed 's/^/      /')"
+scripts/sdd-analyze.sh:181:   key="$(printf '%s' "$ext" | sed -E 's/^\[EXTERNAL:[[:space:]]*//; s/[[:space:]]+(—|--|-)[[:space:]].*$//; s/\][[:space:]]*$//')"
+scripts/sdd-analyze.sh:182:   if [[ -n "$key" ]] && ! grep -qF "$key" "$status"; then
+scripts/sdd-analyze.sh:185: done < <(grep -o '\[EXTERNAL:[^]]*\]' "$spec" 2>/dev/null | sort -u || true)
+scripts/sdcandidates=151
+d-analyze.sh:188: spec_acs=$(grep -oE 'AC-[0-9]{3}' "$spec" | sort -u)
+scripts/sdd-analyze.sh:189: spec_reqs=$(grep -oE 'REQ-[0-9]{3}' "$spec" | sort -u)
+scripts/sdd-analyze.sh:190: task_refs=$(grep -oE '(AC|REQ)-[0-9]{3}' "$tasks" | sort -u)
+scripts/sdd-analyze.sh:192: [[ -z "$spec_acs" ]] && fail "spec.md defines no AC-### ids" || pass "spec.md defines $(echo "$spec_acs" | wc -l | tr -d ' ') AC id(s)"
+scripts/sdd-analyze.sh:199: impl_refs=$(awk "$_VF_AWK_FENCE"'
+scripts/sdd-analyze.sh:207: ' "$tasks" | grep -oE '(AC|REQ)-[0-9]{3}' | sort -u)
+scripts/sdd-analyze.sh:210:   grep -q "^$ac$" <<< "$impl_refs" || uncovered="$uncovered $ac"
+scripts/sdd-analyze.sh:221:   { grep -q "$req" "$plan" || grep -q "$req" "$tasks"; } || unref="$unref $req"
+scripts/sdd-analyze.sh:228:   grep -q "$id" "$spec" || dangling="$dangling $id"
+scripts/sdd-analyze.sh:236: task_map="$(awk "$_VF_AWK_FENCE"'
+scripts/sdd-analyze.sh:253:     elif ! grep -qw "$ttag" <<< "$declared_repos"; then
+scripts/sdd-analyze.sh:261:     grep -q "\[repo:$r\]" "$tasks" || warn "declared repo '$r' has no tasks — drop it from repos: or task it"
+scripts/sdd-analyze.sh:264:   stray="$(grep -oE '\[repo:[^]]+\]' "$tasks" | sort -u | paste -sd' ' - || true)"
+scripts/sdd-analyze.sh:276: awk -v RED="$RED" -v YELLOW="$YELLOW" -v RESET="$RESET" "$_VF_AWK_FENCE"'
+scripts/sdd-analyze.sh:334: task_summary=$(grep '^TASKCOUNTS' "$tmp" || true)
+scripts/sdd-analyze.sh:335: grep -v '^TASKCOUNTS\|^AGENTLINE' "$tmp" || true
+scripts/sdd-analyze.sh:352:   rec=$(grep '^AGENTLINE' "$tmp" | grep -iE "$pat" | head -1 || true)
+scripts/sdd-analyze.sh:360:   agent_path=$(echo "$line" | sed -E 's/.*\*Agent:\*[[:space:]]*//; s/`//g' | grep -oE '[^ 	)(]+\.md' | head -1 || true)
+scripts/sdd-analyze.sh:363:     if echo "$line" | grep -q '<'; then
+scripts/sdd-analyze.sh:386: leftovers=$(grep -nE '<(Title|Spec Title|One-line title|role|name|handle|slug)>|NNN-slug' "$spec" "$tasks" 2>/dev/null | grep -v 'template' | head -5 || true)
+scripts/sdd-analyze.sh:387: [[ -n "$leftovers" ]] && warn "template placeholders remain:"$'\n'"$(echo "$leftovers" | sed 's/^/      /')"
+scripts/spec-ac-coverage.sh:116:   ( cd "$root" && find "${find_args[@]}" 2>/dev/null ) | sed "s|^\./|$root/|"
+scripts/spec-ac-coverage.sh:124: done | sort -u > "$TESTS_TMP"
+scripts/spec-ac-coverage.sh:125: test_count="$(grep -c . "$TESTS_TMP" || true)"
+scripts/spec-ac-coverage.sh:128: spec_acs="$(grep -oE 'AC-[0-9]{3}' "$SPEC_FILE" | sort -u)"
+scripts/spec-ac-coverage.sh:139:     hits="$(tr '\n' '\0' < "$TESTS_TMP" | xargs -0 grep -lE "${ac}([^0-9]|$)" 2>/dev/null || true)"
+scripts/spec-ac-coverage.sh:142:     n="$(printf '%s\n' "$hits" | grep -c .)"
+scripts/spec-ac-coverage.sh:144:     printf '%s\n' "$hits" | sed "s#^#      #"
+scripts/spec-evidence.sh:71: records="$(awk '
+scripts/spec-evidence.sh:104:       elif ! grep -qE "^##[[:space:]]+${id}([^0-9A-Za-z]|$)" "$EVID"; then
+scripts/spec-evidence.sh:111:   for art in $(printf '%s\n' "$ev" | grep -oiE '[[:graph:]]+\.(png|jpg|jpeg|gif|svg|pdf)' || true); do
+scripts/spec-evidence.sh:129:   manual_acs="$(grep -E 'AC-[0-9]{3}' "$SPEC_FILE" | grep -iE '\[DEPLOY\]|\[MANUAL\]|UNVERIFIABLE' \
+scripts/spec-evidence.sh:130:                  | grep -oE 'AC-[0-9]{3}' | sort -u || true)"
+scripts/spec-evidence.sh:134:   deferred="$(awk '
+scripts/spec-evidence.sh:138:   ' "$RC" | grep -oE 'AC-[0-9]{3}' | sort -u || true)"
+scripts/spec-evidence.sh:139:   manual_acs="$(printf '%s\n%s\n' "$manual_acs" "$deferred" | grep -oE 'AC-[0-9]{3}' | sort -u || true)"
+scripts/spec-evidence.sh:144:   if [[ -f "$STATUS_FILE" ]] && grep -qE '\b(20|21)[0-9]{2}-[0-1][0-9]-[0-3][0-9]\b' "$STATUS_FILE"; then
+scripts/spec-evidence.sh:147:   n="$(printf '%s\n' "$manual_acs" | grep -c .)"
+scripts/spec-evidence.sh:151:     warn "$n manual/post-deploy AC(s) ($(printf '%s' "$manual_acs" | paste -sd' ' -)) but STATUS.md names no owner + check-back date"

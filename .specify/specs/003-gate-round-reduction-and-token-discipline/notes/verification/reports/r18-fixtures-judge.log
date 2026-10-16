@@ -1,0 +1,66 @@
+start 2026-10-09T09:17:30Z; TMPDIR=/private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/18f5e657-a32a-40a0-b1b0-223f21466058/scratchpad/r18-fixtures/tmp/
+PASS FX: the four files hash as r18-edits/pre-apply
+PASS FX: tgc-1.pairs applied, each block exactly once
+PASS FX: tsg-1.pairs applied, each block exactly once
+PASS DX: kernel-1.pairs applied
+PASS DX: vc-1.pairs applied
+PASS FX: both suites still parse
+PASS DX: both suites still parse
+== DX: every changed fixture function passes on the repaired kernel
+PASS DX report_manifest_locale_cases passes
+PASS DX report_record_line_cases passes
+PASS DX round_record_line_cases passes
+== FX: on the unrepaired kernel
+PASS FX report_manifest_locale_cases fails
+PASS FX report_manifest_locale_cases: no failing assertion outside the relaxed row and its exit check
+PASS FX report_manifest_locale_cases: the relaxed row fails
+PASS FX report_record_line_cases fails
+  | FX report_record_line_cases: 211 failing assertions
+PASS FX report_record_line_cases: no failing assertion outside the new rows and their exit checks
+PASS FX report_record_line_cases fails on the row autolink-digit-br (manifest or canonical, both locales)
+PASS FX report_record_line_cases fails on the row autolink-digit-pre (manifest or canonical, both locales)
+PASS FX report_record_line_cases fails on the row autolink-underscore-p (manifest or canonical, both locales)
+PASS FX report_record_line_cases fails on the row autolink-backtick-start (manifest or canonical, both locales)
+PASS FX report_record_line_cases fails on the row autolink-plus (manifest or canonical, both locales)
+PASS FX report_record_line_cases fails on the row destination-holding-backtick (manifest or canonical, both locales)
+PASS FX report_record_line_cases fails on the row title-holding-backtick (manifest or canonical, both locales)
+PASS FX report_record_line_cases fails on the row angle-destination-holding-backtick (manifest or canonical, both locales)
+PASS FX report_record_line_cases fails on the row label-holding-backtick (manifest or canonical, both locales)
+PASS FX report_record_line_cases fails on the row title-across-lines (manifest or canonical, both locales)
+PASS FX report_record_line_cases fails on the row destination-on-next-line (manifest or canonical, both locales)
+PASS FX report_record_line_cases fails on the row label-across-lines (manifest or canonical, both locales)
+PASS FX report_record_line_cases fails on the row fence-after-list-marker (manifest or canonical, both locales)
+PASS FX report_record_line_cases fails on the row fence-swapping-phase (manifest or canonical, both locales)
+PASS FX report_record_line_cases fails on the row fence-four-spaces-in-item (manifest or canonical, both locales)
+PASS FX report_record_line_cases fails on the row fence-after-ordered-marker (manifest or canonical, both locales)
+PASS FX report_record_line_cases fails on the row definition-hiding-severity (manifest or canonical, both locales)
+PASS FX report_record_line_cases fails on the row definition-then-fence (manifest or canonical, both locales)
+PASS FX report_record_line_cases fails on the row definition-in-list-item (manifest or canonical, both locales)
+PASS FX report_record_line_cases fails on the row definition-label-across-lines (manifest or canonical, both locales)
+PASS FX report_record_line_cases fails on the row definition-escaped-label (manifest or canonical, both locales)
+PASS FX report_record_line_cases fails on the row lt-equals-prose (manifest or canonical, both locales)
+PASS FX report_record_line_cases fails on the row indented-fence-in-item (manifest or canonical, both locales)
+PASS FX report_record_line_cases fails on the row definition-line (manifest or canonical, both locales)
+PASS FX report_record_line_cases fails on the row heading-tag-on-first-finding (manifest or canonical, both locales)
+PASS FX report_record_line_cases fails on the row heading-tag-on-later-finding (manifest or canonical, both locales)
+PASS FX report_record_line_cases fails on the tail fence-after-list-marker under both locales
+PASS FX report_record_line_cases fails on the tail fence-swapping-phase under both locales
+PASS FX report_record_line_cases fails on the tail fence-four-spaces-in-item under both locales
+PASS FX report_record_line_cases fails on the tail fence-after-ordered-marker under both locales
+PASS FX report_record_line_cases fails on the tail definition-hiding-severity under both locales
+PASS FX report_record_line_cases fails on the tail definition-then-fence under both locales
+PASS FX report_record_line_cases fails on the tail definition-in-list-item under both locales
+PASS FX report_record_line_cases fails on the tail definition-label-across-lines under both locales
+PASS FX report_record_line_cases fails on the tail definition-escaped-label under both locales
+PASS FX report_record_line_cases fails on the minor: the first Finding heading of a round carried raw HTML, under both locales
+PASS FX report_record_line_cases fails on the minor: not refused under the finding it opens, under both locales
+PASS FX report_record_line_cases fails on the minor: refused under the finding it closes, under both locales
+PASS FX report_record_line_cases fails on the minor: a section heading that closes a finding was refused as raw HTML inside it, under both locales
+PASS FX report_record_line_cases fails on the 400-line timing row
+  | the timing row on FX: assert: AC-012: a 400-line run under a bracket quoted in a code span took 412 s, not under 60 s (round 17, O-023)
+PASS FX round_record_line_cases fails
+PASS FX round_record_line_cases: its first failing assertion is its first new row (an autolink, end to end)
+  | first: assert: AC-009: a CLEARED completion over a second manifest tier written as  Note <1`@a.b><br>Severity: data-loss, tick: `. was not refused under LANG=C (T030o44 review) missing substring: an autolink
+PASS live worktree status outside notes/verification/ unchanged
+end 2026-10-09T09:28:33Z
+r18-fixtures-judge failures=0

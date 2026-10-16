@@ -1,0 +1,24 @@
+    # A field line outside any finding is a record the count never sees,
+    # whatever line opened the finding to its author, and inside a finding a
+    # line whose label vf_label reads as Class or Severity, and which is not
+    # the line of that field, carries a Class or a tier this pass would not read.
+    # Both are refused by name (O-018), as the manifest pass refuses them, in a
+    # canonical round of either gate, since the tally counts the findings of
+    # both (T030o44 review F5). The second refuses prose too: any line inside a
+    # finding whose first word, as written or as rendered, is Class or Severity
+    # and is not continued by a letter, digit or hyphen (`class, not one
+    # spelling of it`), so a report puts another word first (T030o44 review F2).
+    style=="canonical" && !ended && !fid && /^[ ]*- \*\*(Class|Status|Prior|Severity|Where|Root cause|Scenario|Reproduced|Blocks|Wrong behavior|Class-wide fix):\*\*/ {err("a finding field outside any Finding"); next}
+    style=="canonical" && fid && !/^[ ]*- \*\*(Class|Status|Prior|Severity|Where|Root cause|Scenario|Reproduced|Blocks|Wrong behavior|Class-wide fix):\*\*/ {
+      lbl=vf_label($0, "class severity")
+      if (lbl != "") err("a " (lbl == "class" ? "Class" : "Severity") " line this grammar cannot read in finding " fid)
+    }
+    fid && /^[ ]*- \*\*(Class|Status|Prior|Severity|Where|Root cause|Scenario|Reproduced|Blocks|Wrong behavior|Class-wide fix):\*\*/ {
+      # The key is the label of the field, not the spelling of the line, so an
+      # indented second Severity is the same field (O-018), in a round of either
+      # style: an indented duplicate in a legacy round is refused too (T030o44
+      # review F3).
+      key=$0; sub(/:\*\*.*/,"",key); sub(/^[ ]*/,"",key)
+      if(seenfindingfield[n SUBSEP fid SUBSEP key]++) err("duplicate finding field")
+      v=value(vf_original)
+      if (style=="canonical" && key ~ /^- \*\*(Class|Severity|Status)$/) {itemfield=substr(key, 5); itemind=match($0, /[^ ]/) - 1; itemblank=0; itemid=fid}

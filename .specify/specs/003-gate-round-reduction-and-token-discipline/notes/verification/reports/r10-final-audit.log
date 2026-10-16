@@ -1,0 +1,64 @@
+ROUND-10 reservation: source=6c6291c2b37d35fb82c67c42c173ae042bb116c742f1c84a5dfa9c1c77c04c2d floor=FLOOR-qQEv7w reserved=2026-09-24T02:31:44Z
+PASS ROUND-10 reservation integrity
+PASS ROUND-10 sealed (report.sha256 present)
+opponent sealed rounds=10 pending=0
+reality-check sealed rounds=1 pending=0
+PASS no staged .reservation-* in either gate
+PASS opponent round 1 canonical block == sealed 1ac95178f408b2ae
+PASS opponent round 2 canonical block == sealed 5170b08212a51a9b
+PASS opponent round 3 canonical block == sealed 3de48d658a33a909
+PASS opponent round 4 canonical block == sealed d044652efcb90251
+PASS opponent round 5 canonical block == sealed 0898afcc62cf8716
+PASS opponent round 6 canonical block == sealed cc1b86cb05959b85
+PASS opponent round 7 canonical block == sealed 9f98e50c63046c9f
+PASS opponent round 8 canonical block == sealed b391edbf50604425
+PASS opponent round 9 canonical block == sealed 2aae626e3c600201
+PASS opponent round 10 canonical block == sealed 9a32b0929d7acc5a
+PASS returned report block == sealed round-10 digest
+PASS reality-check round 1 canonical block == sealed
+PASS source == reserved source (6c6291c2b37d35fb82c67c42c173ae042bb116c742f1c84a5dfa9c1c77c04c2d)
+PASS source == 6c6291c2... (the authorization batch source)
+PASS Decisions digest unchanged f6722f8a... (f6722f8ab1e0dd1340eb07b1cd940d6bc1e5d935fb58987cc3ffb0869612ee44)
+PASS floor-latest == reserved floor (FLOOR-qQEv7w)
+PASS FLOOR-qQEv7w validates current for the reserved source
+PASS no held lock
+PASS no .capture.* staging anywhere under notes/
+PASS HEAD == 0d55c62 (0d55c62)
+PASS T030 unchecked
+PASS T031 unchecked
+PASS T032 unchecked
+PASS T033 unchecked
+PASS T034 unchecked
+PASS T030o39 checked
+PASS T030o40 checked
+  w10| opponent round 10 is already completed; the next round is 11
+PASS round 10 reported completed at exit 0
+  w11| round authorization denied: opponent round 11 needs an exact-round user waiver/spec revision after round 10
+  w11|   candidate authorization lines were found and refused:
+  w11|   STATUS.md:174 authorizes round=4, not round=11
+  w11|   STATUS.md:212 authorizes round=5, not round=11
+  w11|   STATUS.md:218 refused: waiver needs exactly 5 "; "-separated fields, found 6 — a "; " inside reason= splits the entry
+  w11|   STATUS.md:228 authorizes round=6, not round=11
+  w11|   STATUS.md:256 authorizes round=7, not round=11
+  w11|   STATUS.md:294 authorizes round=8, not round=11
+  w11|   STATUS.md:337 authorizes round=9, not round=11
+  w11|   STATUS.md:367 authorizes round=10, not round=11
+PASS round 11 refused at exit 4 with 8 candidates (8)
+PASS tally exit 0
+PASS tally opponent rounds=10
+  opponent rounds=10
+  reality-check rounds=1
+  blocking=24 minor=10 locations=326 unclassified=0
+  class=config-interpolation-validation findings=3 recurrences=1
+  class=gate-report-schema-validation findings=12 recurrences=9
+  class=live-control-semantic-validation findings=3 recurrences=0
+  class=post-pr-followup-binding-schema findings=3 recurrences=0
+  class=return-envelope-parsing findings=3 recurrences=0
+  class=round-authorization-grammar findings=11 recurrences=8
+  class=round-block-attribution findings=5 recurrences=2
+  class=round-record-reparse-divergence findings=1 recurrences=0
+  class=verification-input-identity findings=8 recurrences=6
+  finding-observations=49 distinct-finding-ids=15 reopened=25
+  severity-downgrades=5
+  execution-observations=53 check-executions=312 cache-hits=2058 captures=448 full-log-bytes=679093 returned-summary-bytes=247346 usage=unknown baseline-usage=unknown
+final audit failures=0

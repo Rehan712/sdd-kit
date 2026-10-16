@@ -1,0 +1,19 @@
+    /^### Finding / {finding(); if(!active || ended) err("finding outside round"); vf_fields(vf_original, hw); fid=hw[3]; cursec=""; next}
+    # Only `### Finding <ID>` opens a finding here, while a reader sees one in
+    # any heading vf_finding_heading reads as a Finding heading: Finding in any
+    # case and a finding ID, at any level, whatever separates them. Such a
+    # heading is refused by name, never read as a section, and so is a line not
+    # read as a heading that is a `#` run and the word Finding, as the manifest
+    # pass refuses it (O-018).
+    style=="canonical" && !ended && /^ ? ? ?#+([ \t]|$)/ && vf_finding_heading($0) {err("a Finding heading this grammar cannot read"); next}
+    style=="canonical" && !ended && !/^ ? ? ?#+([ \t]|$)/ && /^([[:space:]]|[\200-\377])*#+([[:space:]]|[\200-\377])*[Ff][Ii][Nn][Dd][Ii][Nn][Gg]([^A-Za-z]|$)/ {err("a Finding heading this grammar cannot read"); next}
+    # A finding is the section its heading opens: a heading as shallow as `###`
+    # closes it, and a deeper one is one of its lines (O-018, the canonical half
+    # of the O-019 rule), so a field line after a section heading is outside it.
+    style=="canonical" && fid && /^ ? ? ?(#|##|###)([ \t]|$)/ {finding()}
+    # Round, review and finding headings are consumed above, so what remains
+    # here is a section heading. Level is not fixed by the templates.
+    /^#+[ ]/ {
+      heading=$0; sub(/^#+[ ]+/,"",heading); cursec=tolower(clean(heading))
+      section[n SUBSEP cursec]=1
+    }

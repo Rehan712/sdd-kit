@@ -1,0 +1,14 @@
+Provenance of opponent-round18.md (session 21, 2026-10-14).
+
+The independent opponent (dispatched 2026-10-14T12:24:31Z with opponent-round18-brief.md, sha256 86614ab6...) wrote
+opponent-round18.md itself (file time 13:23:19Z) and then stopped on a session usage limit (HTTP 429, "resets 6:50pm
+Europe/Stockholm") before returning. At the reset the invoker recorded the file (sha256 aeb8c870..., 18188 bytes) and
+resumed the agent by message (16:51:03Z), keeping its context and its copy under /private/tmp/opp18 (686M), with the
+instruction not to modify the file if it was final. It left the file unchanged, removed its copy, and returned the
+report as the message of its one SubagentHandback call. r18-persist-report.py compared that message, taken from the
+agent's own transcript (no retyping), to the file (r18-persist.{log,rc}, exit 0: "existing report equals the returned
+block"): it starts `## Round 18`, ends with the completion marker and one newline, and holds no carriage return.
+sha256 aeb8c870ffbcbf9fedf422f5f33bb7ac4950cf9443437cfca6bc5e5e44513932, 18188 bytes, 136 lines; timestamp
+2026-10-14T13:22:23Z. The worktree states before the reservation, at it and at return are byte-identical
+(r18-state-{prereserve,reserved,returned}.*: 5372 paths, entries digest c0ebb467...). The Mac ran on battery from
+12:24Z through the return (100% to 38%); free disk stayed above 9.6 GiB.

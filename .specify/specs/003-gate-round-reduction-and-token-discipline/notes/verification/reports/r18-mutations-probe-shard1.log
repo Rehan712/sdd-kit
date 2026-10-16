@@ -1,0 +1,123 @@
+== baseline shard 1/3 19:03:19Z
+== the label reader (vf_label_word, vf_label_html, vf_label_links, vf_label_render, vf_label, vf_finding_heading)
+PASS L15 literal applies once in scripts/verification-lib.sh
+PASS L15 KILLED (kill, judge rc)
+PASS L15 diagnostic: a manifest tier written as second-tier-nested-destination was not refused by name under LANG=C (O-018)
+== T030o43 rows carried to their spelling in vf_label_word
+== the record shapes a quoted line may carry (vf_record) and the quoted-record refusal
+== the field-item rule (vf_block_start and both passes)
+== the manifest pass
+PASS K05 literal applies once in scripts/verification-lib.sh
+PASS K05 KILLED (kill, judge rc)
+PASS K05 diagnostic: a manifest tier written as heading-label was not refused by name under LANG=C (O-018)
+== the canonical pass
+== the canonical conjuncts that keep legacy rounds as they were (T030o44 review F6; O03 of v1 is now a kill)
+== the round style decided before its body (T030o45, O-020)
+== the rendered reading: the bracket fixpoint, the escape, the checkbox, emphasis inside a word, hiding (T030o46, O-018)
+== the paragraph step and the paragraph checks (T030o46, T030o47; O-018)
+== the blocks that end a field item (T030o46, O-021)
+== the code-span reading, the reading after a rendered line start, the field-value reading (T030o47, O-018)
+== the narrowed grammar inside a finding (T030o48, O-018): vf_narrow, the `<` class, its call in each pass
+PASS G06e literal applies once in scripts/verification-lib.sh
+PASS G06e KILLED (kill, judge rc)
+PASS G06e diagnostic: a CLEARED completion over a second manifest tier written as - Note<pre>Severity: data-loss</pre> was not refused
+PASS G12 literal applies once in scripts/verification-lib.sh
+PASS G12 KILLED (over, judge rc)
+PASS G12 diagnostic: a plausible manifest (escaped-lt-prose) was refused (T030o43 review 2)
+PASS G15 literal applies once in scripts/verification-lib.sh
+PASS G15 KILLED (kill, judge rc)
+PASS G15 diagnostic: a second tier written as pre-in-prose was not refused by name under LANG=C (O-018)
+PASS G18 literal applies once in scripts/verification-lib.sh
+PASS G18 SURVIVES as argued (equiv)
+== the code-span scan and the code-span reading (T030o48, O-018): 6.1 read left to right, 2.4 escapes in pairs
+== the run ends only at a blank line or a heading of one to six marks, never at a fenced line (T030o48, T030o49)
+== a settled candidate is dropped (T030o50, O-023): vf_settled and the reader that drops
+PASS D07 literal applies once in scripts/verification-lib.sh
+PASS D07 KILLED (kill, judge rc)
+PASS D07 diagnostic: a manifest tier written as image-alt-beginning-with-code-span-across-lines was not refused by name under LANG=C (O-018)
+PASS D13 literal applies once in scripts/verification-lib.sh
+PASS D13 KILLED (kill, judge rc)
+PASS D13 diagnostic: a manifest tier written as image-alt-beginning-with-code-span-across-lines was not refused by name under LANG=C (O-018)
+PASS D19 literal applies once in scripts/verification-lib.sh
+PASS D19 KILLED (kill, judge rc)
+PASS D19 diagnostic: a manifest tier written as break-image-outside-finding-after-id was not refused by name under LANG=C (O-018)
+== the narrowed grammar further (T030o51, O-018): the autolink class and its reason
+PASS VA02 literal applies once in scripts/verification-lib.sh
+PASS VA02 KILLED (kill, judge rc)
+PASS VA02 diagnostic: a manifest tier written as autolink-digit-br was not refused by name under LANG=C (O-018)
+PASS VA05 literal applies once in scripts/verification-lib.sh
+PASS VA05 KILLED (kill, judge rc)
+PASS VA05 diagnostic: a manifest tier written as autolink-plus was not refused by name under LANG=C (O-018)
+== destinations, titles and labels read before a later backtick (T030o51, O-018): vf_cm_scan, vf_cm_dest, vf_cm_label
+PASS VB01 literal applies once in scripts/verification-lib.sh
+PASS VB01 KILLED (kill, judge rc)
+PASS VB01 diagnostic: a manifest tier written as destination-holding-backtick was not refused by name under LANG=C (O-018)
+PASS VB04 literal applies once in scripts/verification-lib.sh
+PASS VB04 KILLED (kill, judge rc)
+PASS VB04 diagnostic: a manifest tier written as title-across-lines was not refused by name under LANG=C (O-018)
+PASS VB07 literal applies once in scripts/verification-lib.sh
+PASS VB07 SURVIVES as argued (equiv)
+PASS VC01 literal applies once in scripts/verification-lib.sh
+PASS VC01 KILLED (kill, judge rc)
+PASS VC01 diagnostic: a manifest tier written as destination-after-space was not refused by name under LANG=C (O-018)
+PASS VC04 literal applies once in scripts/verification-lib.sh
+PASS VC04 KILLED (kill, judge rc)
+PASS VC04 diagnostic: a manifest tier written as angle-destination-escaped-gt was not refused by name under LANG=C (O-018)
+PASS VC07 literal applies once in scripts/verification-lib.sh
+PASS VC07 KILLED (kill, judge rc)
+PASS VC07 diagnostic: a manifest tier written as destination-escaped-paren was not refused by name under LANG=C (O-018)
+PASS VC10 literal applies once in scripts/verification-lib.sh
+PASS VC10 KILLED (kill, judge rc)
+PASS VC10 diagnostic: a manifest tier written as destination-nested-parens was not refused by name under LANG=C (O-018)
+PASS VC13 literal applies once in scripts/verification-lib.sh
+PASS VC13 KILLED (kill, judge rc)
+PASS VC13 diagnostic: a manifest tier written as title-across-lines was not refused by name under LANG=C (O-018)
+PASS VC16 literal applies once in scripts/verification-lib.sh
+PASS VC16 KILLED (kill, judge rc)
+PASS VC16 diagnostic: a manifest tier written as title-across-lines was not refused by name under LANG=C (O-018)
+PASS VC19 literal applies once in scripts/verification-lib.sh
+PASS VC19 KILLED (kill, judge rc)
+PASS VC19 diagnostic: a manifest tier written as destination-space-at-line-end was not refused by name under LANG=C (O-018)
+PASS VL03 literal applies once in scripts/verification-lib.sh
+PASS VL03 KILLED (kill, judge rc)
+PASS VL03 diagnostic: a manifest tier written as label-across-lines was not refused by name under LANG=C (O-018)
+== a fence that may be inside a list item, and a link reference definition (T030o52, O-024)
+PASS VF02 literal applies once in scripts/verification-lib.sh
+PASS VF02 KILLED (kill, judge rc)
+PASS VF02 diagnostic: a manifest tier written as fence-after-list-marker was not refused by name under LANG=C (O-018)
+PASS VF05 literal applies once in scripts/verification-lib.sh
+PASS VF05 KILLED (over, judge rc)
+PASS VF05 diagnostic: a Severity line followed by a four-backtick-fence was refused under LANG=C (O-021)
+PASS VF08 literal applies once in scripts/verification-lib.sh
+PASS VF08 KILLED (kill, judge rc)
+PASS VF08 diagnostic: a manifest tier written as fence-after-tab was not refused by name under LANG=C (O-018)
+PASS VR02 literal applies once in scripts/verification-lib.sh
+PASS VR02 KILLED (kill, judge rc)
+PASS VR02 diagnostic: a manifest tier written as definition-in-list-item was not refused by name under LANG=C (O-018)
+PASS VR05 literal applies once in scripts/verification-lib.sh
+PASS VR05 KILLED (kill, judge rc)
+PASS VR05 diagnostic: a manifest tier written as definition-escaped-label was not refused by name under LANG=C (O-018)
+PASS VR08 literal applies once in scripts/verification-lib.sh
+PASS VR08 KILLED (kill, judge rc)
+PASS VR08 diagnostic: a manifest tier written as definition-label-across-lines was not refused by name under LANG=C (O-018)
+PASS VR11 literal applies once in scripts/verification-lib.sh
+PASS VR11 KILLED (over, judge rc)
+PASS VR11 diagnostic: a plausible manifest (wrapped-link-text) was refused (T030o43 review 2)
+== the narrowed check judged after the heading on a line, in both passes (the round-17 minor, T030o51)
+PASS VH03 literal applies once in scripts/verification-lib.sh
+PASS VH03 KILLED (kill, judge rc)
+PASS VH03 diagnostic: a manifest tier written as heading-tag-on-deeper-heading was not refused by name under LANG=C (O-018)
+PASS VH06 literal applies once in scripts/verification-lib.sh
+PASS VH06 KILLED (kill, judge rc)
+PASS VH06 diagnostic: the first Finding heading of a round carried raw HTML under LANG=C (round 17)
+PASS VH09 literal applies once in scripts/verification-lib.sh
+PASS VH09 KILLED (kill, judge rc)
+PASS VH09 diagnostic: a manifest tier written as second-tier-after-empty-comment was not refused by name under LANG=C (O-018)
+== the settled test read up to the first word of each reading (T030o53, O-023)
+PASS VS04 literal applies once in scripts/verification-lib.sh
+PASS VS04 SURVIVES as argued (equiv)
+PASS VS08 literal applies once in scripts/verification-lib.sh
+PASS VS08 KILLED (kill, judge rc)
+PASS VS08 diagnostic: a manifest tier written as tag-image-alt-code-span-outside-finding-after-id was not refused by name under LANG=C (O-018)
+== done shard 1/3 19:22:43Z rows=303
+r18-mutations failures=0

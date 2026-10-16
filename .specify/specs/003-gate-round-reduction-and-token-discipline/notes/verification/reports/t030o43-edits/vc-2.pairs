@@ -1,0 +1,13 @@
+@@OLD
+change no record the harness writes (it runs its own parsing under
+`LC_ALL=C`, which decodes every byte and reads every ASCII grammar the kit
+writes as any other locale would, and a parse that fails never reads as a
+passing result), while a check whose programs read them pins them or declares
+@@NEW
+change no record the harness writes (it runs its own parsing under
+`LC_ALL=C`, where each byte is one character, so no byte can end a parse, and
+a byte >= 0x80 is in no character class, so a record line its ASCII grammar
+cannot read is refused by name or, where the harness decides what must be
+covered, kept whole; and a parse that fails never reads as a passing result),
+while a check whose programs read them pins them or declares
+@@END

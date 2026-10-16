@@ -1,0 +1,9 @@
+r17-repro run 1 (r17-repro-run1.{sh,log,rc,time}), 2026-10-08T13:13:09Z to 13:25:18Z: rc 1 on two checks only,
+both a fault of the script, not of the reproduction. For O-022's block-quote case (b5-eight-hash-quote) on PRE in
+the canonical pass the script required the diagnostic `a Severity line this grammar cannot read in finding G-050`;
+PRE refuses it at rc 3 with `quoted content carries a Severity line`, the quoted-line diagnostic the reviewer reported
+for the quote case. Every other check passed (281 PASS): every O-018 member and the Where-value carriage return seal
+in silence on CUR in both passes and both locales and on PRE too; O-022's cases seal on CUR and are refused on PRE;
+each mechanism seals a CLEARED round end to end; the controls are refused. The corrected script accepts the quoted
+diagnostic for the quote case; its run is r17-repro.{log,rc,time}. The PRE list's label is also corrected: it holds
+the br control, which is a round-15 member and predates T030o47.

@@ -1,0 +1,11 @@
+spec_dir="$(make_verification_spec_dir obsproj)"; proj="${spec_dir%/.specify/*}"
+nb=$'\302\240'
+sed "s#| release-observation |#| release${nb}observation |#" "$spec_dir/plan.md" > "$spec_dir/p" && mv "$spec_dir/p" "$spec_dir/plan.md"
+sed "s#\*Tests:\* release-observation#*Tests:* release${nb}observation#" "$spec_dir/tasks.md" > "$spec_dir/t" && mv "$spec_dir/t" "$spec_dir/tasks.md"
+printf 'Verification-Return: 1\nTask: T004\nCaptures: none\nSummary: x\nManual observation: release%sobservation, artifacts/release.txt, abc, someone, 2026-09-27T00:00:00Z, PASS: ok\nFailure modes:\nINV-001, release%sobservation, manual\n' "$nb" "$nb" > "$SANDBOX/ret.txt"
+bash -c '. "$1/verification-lib.sh"; vf_bindings "$2" tasks "" "$3" || exit 9; vf_task_info "$3" T004 || exit 8
+  printf "catalog locator: %s\n" "${VF_TASK[7]}"
+  vf_return_parse "$4" "$5" || exit 7
+  name="$(tr "\0" "\n" < "$5" | sed -n "/^manual$/{n;p;}" | cut -d, -f1)"
+  printf "return name:     %s\n" "$name"
+  [[ "$name" == "${VF_TASK[7]}" ]] && echo "names EQUAL" || echo "names DIFFER -> manual observation fields do not match the planned family"' _ "$SCRIPTS" "$spec_dir" "$SANDBOX/b.nul" "$SANDBOX/ret.txt" "$SANDBOX/ret.nul" 2>&1 | LC_ALL=C sed -n l

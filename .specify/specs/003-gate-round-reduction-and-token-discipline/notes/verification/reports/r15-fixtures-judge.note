@@ -1,0 +1,7 @@
+r15-fixtures-judge (session 15, 2026-10-07T19:48:10Z to 19:50:42Z, exit 0) judged r15-edits/tgc-1.pairs as it stood then,
+now kept as r15-edits/tgc-1-run5.pairs. Session 16, re-reading the task block against the pairs before writing the batch,
+found that its canonical table lacked the br-self-closing and br-spaced rows that its manifest table holds, so the
+Acceptance ("every round-15 member and each derived sibling in both passes") was not true of the fixtures. The two
+canonical rows were added to tgc-1.pairs, and the judge of record is now r16-fixtures-judge.{sh,log,rc,time}
+(2026-10-07T21:07:51Z to 21:10:24Z, exit 0, 31 PASS): the same checks, with the count of new member assertions at 96
+(24 manifest rows, 23 canonical rows and the br-in-where case, two locales) where this run counted 92.

@@ -1,0 +1,165 @@
+@@OLD
+# A second rendered reading also takes out every named reference, every
+# numeric one beyond ASCII and every byte outside ASCII, so a word a renderer
+# shows whole across an invisible character (a soft hyphen, a zero-width
+# space) is read whole; it can only add a label. vf_finding_heading <line> is true when the text of an
+@@NEW
+# A second rendered reading also takes out every named reference, every
+# numeric one beyond ASCII and every byte outside ASCII, so a word a renderer
+# shows whole across an invisible character (a soft hyphen, a zero-width
+# space) is read whole; it can only add a label. A third reading takes every
+# code span (6.1: a backtick string closed by a backtick string of the same
+# length) as inert, since a code span binds tighter than link brackets and raw
+# HTML, so a bracket or a tag inside one opens or closes nothing; and the label
+# is also read after each br tag and each block-level tag (4.6 condition 6)
+# outside code spans, where a renderer starts a new line or block (round 15,
+# O-018). Each of these can only add a label too. vf_finding_heading <line> is true when the text of an
+@@END
+@@OLD
+# and the block-level tag names of condition 6), or a thematic break. Any
+# other line may continue the paragraph, which is the deny side (round 14,
+# O-021). A reader reads a record by paragraph, not only by line, since an
+# inline construct may span lines (6.3, 6.6; round 14, O-018): vf_para <line>,
+# called on every line before quoting is read, joins the line to the paragraph
+# before it unless the line is blank, starts a block, follows an ATX heading
+# or sits in a code fence, and reads the line without its block-quote markers;
+# vf_para_label names the Class or Severity line a continuation line makes of
+# a paragraph whose first line carried no label, once per paragraph, or is "".
+@@NEW
+# and the block-level tag names of condition 6), or a thematic break. Any
+# other line may continue the paragraph, so the item rule that asks refuses
+# it, which is the deny side there (round 14, O-021). A reader reads a record
+# by paragraph, not only by line, since an inline construct may span lines
+# (6.3, 6.6; round 14, O-018), and a line reader cannot place every paragraph
+# boundary where a renderer does (a sibling list item of any number, a setext
+# underline, a block-quote marker, a line indented four or more spaces that
+# continues a paragraph: 4.3, 4.4, 4.8, 5.1, 5.2; round 15, O-018), so every
+# boundary error has to fall on the refusing side: vf_para <line>, called on
+# every line before quoting is read, keeps a run of non-blank lines that only
+# a blank line, a line in a code fence or an ATX heading ends, reads each line
+# without its indentation and block-quote markers, and takes every line of the
+# run as a candidate paragraph start; vf_para_label names the Class or
+# Severity line that the text joined from any earlier candidate whose own line
+# carries no label makes of the run, once per run, or is "". A boundary the
+# reader misses or invents cannot hide a label, since some candidate starts at
+# the boundary a renderer keeps, and text joined past a boundary can only add
+# a label.
+@@END
+@@OLD
+function vf_label(s, labels,   w) {
+  w = vf_label_word(vf_label_render(s, 0), labels)
+  if (w == "") w = vf_label_word(vf_label_render(s, 1), labels)
+  return (w != "") ? w : vf_label_word(s, labels)
+}
+@@NEW
+function vf_label_read(s, labels,   w) {
+  w = vf_label_word(vf_label_render(s, 0), labels)
+  if (w == "") w = vf_label_word(vf_label_render(s, 1), labels)
+  return (w != "") ? w : vf_label_word(s, labels)
+}
+function vf_label_inert(s,   out, rest, i, n, k, off, b, f) {
+  b = sprintf("%c", 96); out = ""
+  while (match(s, b "+")) {
+    i = RSTART; n = RLENGTH
+    if (i > 1 && substr(s, i - 1, 1) == "\\") {out = out substr(s, 1, i + n - 1); s = substr(s, i + n); continue}
+    rest = substr(s, i + n); off = 0; k = 0
+    while (match(rest, b "+")) {
+      if (RLENGTH == n) {k = off + RSTART; break}
+      off += RSTART + RLENGTH - 1; rest = substr(rest, RSTART + RLENGTH)
+    }
+    if (!k) {out = out substr(s, 1, i + n - 1); s = substr(s, i + n); continue}
+    f = ""; while (length(f) < n + k - 1 + n) f = f "\002"
+    out = out substr(s, 1, i - 1) f; s = substr(s, i + n + k - 1 + n)
+  }
+  return out s
+}
+function vf_label_breaks(s, c, labels,   p, e, rest, nm, w, L) {
+  if (vf_lbl_tag == "") vf_label_html("")
+  if (vf_lbl_blocks == "") vf_lbl_blocks = " address article aside base basefont blockquote body caption center col colgroup dd details dialog dir div dl dt fieldset figcaption figure footer form frame frameset h1 h2 h3 h4 h5 h6 head header hr html iframe legend li link main menu menuitem nav noframes ol optgroup option p param search section summary table tbody td tfoot th thead title tr track ul "
+  p = 0
+  while ((e = index(substr(c, p + 1), "<")) > 0) {
+    p += e; rest = substr(c, p)
+    if (!match(rest, vf_lbl_tag) && !match(rest, /^<\/[A-Za-z][A-Za-z0-9-]*[ \t]*>/)) continue
+    L = RLENGTH; nm = tolower(substr(rest, 1, L)); sub(/^<\/?/, "", nm); sub(/[^a-z0-9].*$/, "", nm)
+    if (nm != "br" && !index(vf_lbl_blocks, " " nm " ")) continue
+    w = vf_label_read(substr(s, p + L), labels)
+    if (w == "") w = vf_label_word(vf_label_render(substr(c, p + L), 0), labels)
+    if (w != "") return w
+  }
+  return ""
+}
+function vf_label(s, labels,   w, c) {
+  w = vf_label_read(s, labels)
+  if (w != "") return w
+  c = index(s, sprintf("%c", 96)) ? vf_label_inert(s) : s
+  if (c != s) {
+    w = vf_label_word(vf_label_render(c, 0), labels)
+    if (w == "") w = vf_label_word(vf_label_render(c, 1), labels)
+    if (w != "") return w
+  }
+  return index(c, "<") ? vf_label_breaks(s, c, labels) : ""
+}
+@@END
+@@OLD
+function vf_para(s,   t) {
+  t = s; sub(/^[ \t]*(>[ \t]*)*/, "", t)
+  if (fenced || t ~ /^[[:space:]]*$/) {vf_para_text = vf_para_line = vf_para_first = ""; vf_para_cont = vf_para_open = 0; return}
+  vf_para_cont = (vf_para_open && !vf_block_start(t))
+  if (vf_para_cont) vf_para_text = vf_para_text " " t
+  else {vf_para_text = t; vf_para_line = s; vf_para_first = "?"}
+  vf_para_open = (t !~ /^#+([ \t]|$)/)
+}
+function vf_para_label(   l) {
+  if (!vf_para_cont) return ""
+  if (vf_para_first == "?") vf_para_first = vf_label(vf_para_line, "class severity")
+  if (vf_para_first != "") return ""
+  l = vf_label(vf_para_text, "class severity")
+  if (l == "") return ""
+  vf_para_first = "refused"
+  return (l == "class") ? "Class line" : "Severity line"
+}
+@@NEW
+function vf_para(s,   t, q, k) {
+  if (FNR == 1) vf_run_n = vf_run_refused = 0
+  t = s; sub(/^[ \t]*(>[ \t]*)*/, "", t)
+  q = s; while (match(q, /^ ? ? ?>[ ]?/)) q = substr(q, RLENGTH + 1)
+  if (fenced || t ~ /^[[:space:]]*$/ || q ~ /^ ? ? ?#+([ \t]|$)/) {vf_run_n = vf_run_refused = vf_para_cont = 0; return}
+  vf_para_cont = (vf_run_n > 0)
+  for (k = 1; k <= vf_run_n; k++) vf_run_text[k] = vf_run_text[k] " " t
+  vf_run_n++; vf_run_text[vf_run_n] = t; vf_run_line[vf_run_n] = s; vf_run_own[vf_run_n] = "?"
+}
+function vf_para_label(   k, l) {
+  if (!vf_para_cont || vf_run_refused) return ""
+  for (k = 1; k < vf_run_n; k++) {
+    if (vf_run_own[k] == "?") vf_run_own[k] = vf_label(vf_run_line[k], "class severity")
+    if (vf_run_own[k] != "") continue
+    l = vf_label(vf_run_text[k], "class severity")
+    if (l != "") {vf_run_refused = 1; return (l == "class") ? "Class line" : "Severity line"}
+  }
+  return ""
+}
+@@END
+@@OLD
+    # reads that line as a field line of its own (T030o44 review F10). A label
+    # is read by paragraph as well as by line (vf_para), so a line that
+    # continues a paragraph whose joined text carries a label its first line
+    # did not is read as a field line this grammar cannot read, quoted or not
+    # (round 14, O-018). Every finding needs one readable Class and one readable Severity,
+@@NEW
+    # reads that line as a field line of its own (T030o44 review F10). A label
+    # is read by paragraph as well as by line (vf_para), so a line after which
+    # the text joined from an earlier line of its run carries a label that
+    # earlier line did not is read as a field line this grammar cannot read,
+    # quoted or not (round 14 and round 15, O-018). Every finding needs one readable Class and one readable Severity,
+@@END
+@@OLD
+      key=$0; sub(/:\*\*.*/,"",key); sub(/^[ ]*/,"",key)
+      if(seenfindingfield[n SUBSEP fid SUBSEP key]++) err("duplicate finding field")
+@@NEW
+      key=$0; sub(/:\*\*.*/,"",key); sub(/^[ ]*/,"",key)
+      if(seenfindingfield[n SUBSEP fid SUBSEP key]++) err("duplicate finding field")
+      # A field value is read for a rendered line start too: after a br or a
+      # block-level tag a renderer starts a new line, which may carry a tier
+      # (round 15, O-018).
+      if (style=="canonical" && index($0, "<") && (lbl=vf_label_breaks($0, vf_label_inert($0), "class severity")) != "") err("a " (lbl == "class" ? "Class" : "Severity") " line this grammar cannot read in finding " fid)
+@@END

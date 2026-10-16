@@ -1,0 +1,23 @@
+start 2026-10-07T22:07:42Z; TMPDIR=/private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/8f3490be-6c65-4ce9-9066-1a72670d586e/scratchpad/s16/r16-fixtures-2/tmp/
+PASS K: the four files hash as r16-edits/pre-apply (r15-edits/post-apply-1)
+PASS K: tgc-2.pairs applied, each block exactly once
+PASS K: the suite still parses
+PASS L: the L17 mutant applies exactly once
+PASS P: the kernel hashes as r15-edits/pre-apply
+== K: report_record_line_cases passes with the new rows on the repaired kernel
+PASS K report_record_line_cases passes
+== L: the L17 mutant fails on the two new rows and on no other
+PASS L report_record_line_cases fails
+  | L: 8 failing assertions
+PASS L: no failing assertion outside the new rows
+PASS L fails on: written as second-tier-footnote-literal under LANG=C
+PASS L fails on: written as second-tier-footnote-literal under LANG=en_US.UTF-8
+PASS L fails on: written as footnote-literal under LANG=C
+PASS L fails on: written as footnote-literal under LANG=en_US.UTF-8
+== P: on the kernel before T030o47 the two new rows are refused too (the reading as written predates it)
+PASS P report_record_line_cases fails (on the round-15 rows)
+  | P: 192 failing assertions
+PASS P: no failing assertion names the two new rows
+PASS live worktree status outside notes/verification/ unchanged
+end 2026-10-07T22:08:55Z
+r16-fixtures-judge-2 failures=0

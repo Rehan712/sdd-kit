@@ -1,0 +1,63 @@
+@@OLD
+test_reports_and_tally() {
+  matrix_runtime_cases
+@@NEW
+# AC-012/AC-017/FM-019 — O-017, round 12, harness-locale-decoding. The harness
+# parses a prior-review manifest under LC_ALL=C whatever the caller's locale,
+# so a byte the caller's locale cannot decode no longer kills the pass that
+# seeds a finding's strictest tier and its Class. Each locale is first proved
+# live, one an unpinned awk cannot decode the byte under; then the same bytes
+# are refused exactly as under C: a CLEARED round resting on a lowered tier of a
+# manifest-recorded blocking finding, and a Class the manifest bound.
+report_manifest_locale_cases() {
+  local spec report l
+  spec="$SANDBOX/manifest-locale"; report="$spec/notes/opponent.md"
+  mkdir -p "$spec/notes/verification/reports"
+  # 0x92 0x20: a cp1252 apostrophe and a space, which no UTF-8 and no
+  # Shift-JIS locale decodes.
+  printf '# Prior review\n\n### Finding G-042\n- **Class:** tier-binding\n- **Severity:** data-loss\n- **Scenario:** the operator\222 s key vanished\n' \
+    > "$spec/notes/verification/reports/opponent-findings-review.md"
+  for l in C en_US.UTF-8 de_DE.UTF-8 C.UTF-8 ja_JP.SJIS; do
+    if [[ "$l" != C && "$(uname -s)" == Darwin ]] && ! locale_hostile "$l"; then
+      t_fail "AC-012: precondition: $l is not a locale an unpinned awk fails to decode 0x92 0x20 under (O-017)"
+      continue
+    fi
+    tier_round_fixture 1 '' G-042:tier-binding:open:minor > "$report"
+    run_rc 3 in_locale "$l" bash -c '. "$1"; vf_reports "$2" opponent "$3" "$4"' _ \
+      "$SCRIPTS/verification-lib.sh" "$report" "$SANDBOX/manifest-locale.nul" "$spec"
+    assert_contains "$OUT" 'clearing verdict rests on 1 lowered severity tier(s) of known findings' \
+      "AC-012: a CLEARED round rested on a lowered manifest tier under LANG=$l (O-017)"
+    tier_round_fixture 1 '' G-042:silent-data-loss:open:wrong-result > "$report"
+    run_rc 3 in_locale "$l" bash -c '. "$1"; vf_reports "$2" opponent "$3" "$4"' _ \
+      "$SCRIPTS/verification-lib.sh" "$report" "$SANDBOX/manifest-locale.nul" "$spec"
+    assert_contains "$OUT" 'finding G-042 changes Class from tier-binding to silent-data-loss' \
+      "AC-012: a Class the manifest bound changed under LANG=$l (O-017)"
+  done
+  # The status half (T030o43): a manifest pass that dies is refused by name,
+  # never read as a manifest that records nothing.
+  fault_bin "$SANDBOX/fault-manifest" awk 'function flushm'
+  tier_round_fixture 1 '' G-042:tier-binding:open:minor > "$report"
+  run_rc 3 env PATH="$SANDBOX/fault-manifest:$PATH" bash -c '. "$1"; vf_reports "$2" opponent "$3" "$4"' _ \
+    "$SCRIPTS/verification-lib.sh" "$report" "$SANDBOX/manifest-locale.nul" "$spec"
+  assert_contains "$OUT" 'prior-review manifest could not be parsed' \
+    'AC-012: a manifest pass that died was read as a manifest recording nothing (O-017)'
+  # MET-002's lines are computed with their status read, so a tally line
+  # that could not be computed fails the tally instead of going missing.
+  spec="$SANDBOX/tally-fault"; mkdir -p "$spec/notes"
+  tier_round_fixture 1 '' G-042:tier-binding:new:data-loss > "$spec/notes/opponent.md"
+  run_rc 0 bash "$SCRIPTS/spec-gate.sh" tally "$spec"
+  assert_contains "$OUT" 'class=tier-binding findings=1 recurrences=0' 'fixture: the tally class table'
+  fault_bin "$SANDBOX/fault-tally-class" awk 'recur[$1]'
+  run_rc 3 env PATH="$SANDBOX/fault-tally-class:$PATH" bash "$SCRIPTS/spec-gate.sh" tally "$spec"
+  assert_contains "$OUT" 'tally: the class table could not be computed' \
+    'AC-017: a class table that could not be computed went missing from the tally (O-017)'
+  fault_bin "$SANDBOX/fault-tally-obs" awk 'distinct++'
+  run_rc 3 env PATH="$SANDBOX/fault-tally-obs:$PATH" bash "$SCRIPTS/spec-gate.sh" tally "$spec"
+  assert_contains "$OUT" 'tally: the finding observations could not be counted' \
+    'AC-017: finding observations that could not be counted went missing from the tally (O-017)'
+}
+
+test_reports_and_tally() {
+  report_manifest_locale_cases
+  matrix_runtime_cases
+@@END

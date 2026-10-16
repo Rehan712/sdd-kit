@@ -1,0 +1,7 @@
+@@OLD
+the harness gives the caller's `LC_ALL` back to the command a capture runs,
+and hashes a declared `LC_ALL` by that value, and
+@@NEW
+the harness gives the caller's `LC_ALL` back to the command a capture runs,
+and the record of a declared `LC_ALL` carries that value, and
+@@END

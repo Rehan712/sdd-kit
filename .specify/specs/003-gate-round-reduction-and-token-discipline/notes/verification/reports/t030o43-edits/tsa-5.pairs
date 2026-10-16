@@ -1,0 +1,21 @@
+@@OLD
+  run_rc 0 "$ANALYZE" "$spec_dir"
+  assert_contains "$OUT" 'opponent gate present, agent file exists' \
+    'AC-023: a gate Agent path after a U+00A0 read the U+00A0 into the path (T030o43 review 2)'
+@@NEW
+  run_rc 0 "$ANALYZE" "$spec_dir"
+  assert_contains "$OUT" 'opponent gate present, agent file exists' \
+    'AC-023: a gate Agent path after a U+00A0 read the U+00A0 into the path (T030o43 review 2)'
+  sed "s/^  - \*Agent:\* agents\/opponent.agent.md\$/  - *Agent:* see${nb}agents\/opponent.agent.md/" "$SANDBOX/analyzer-tasks" > "$spec_dir/tasks.md"
+  run_rc 0 "$ANALYZE" "$spec_dir"
+  assert_contains "$OUT" 'opponent gate present, agent file exists' \
+    'AC-023: a U+00A0 inside an Agent line did not end the token before the path (T030o43 review 2)'
+  # A stage heading's whitespace is read as whitespace, so a checkpoint
+  # declared for Backend names the stage written "## Backend<U+00A0>".
+  printf 'stacks: []\ngate_checks:\n  - %sbash tests/check.sh%s\ncheckpoints:\n  Backend: []\n' "'" "'" > "$SANDBOX/stage-stack.yml"
+  sed "s/^## Backend\$/## Backend$nb/" "$SANDBOX/analyzer-tasks" > "$SANDBOX/stage-tasks.md"
+  run_rc 0 bash -c '. "$1"; vf_config "$2" "$3" "$4"' _ "$SCRIPTS/verification-lib.sh" \
+    "$SANDBOX/stage-stack.yml" "$SANDBOX/stage-tasks.md" "$SANDBOX/stage-catalog"
+  assert_not_contains "$OUT" 'unknown checkpoint stage' \
+    'AC-023: a stage heading ending in a U+00A0 was not the stage a checkpoint names (T030o43 review 2)'
+@@END

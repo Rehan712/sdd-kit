@@ -1,0 +1,18 @@
+r18-fixtures-judge-2 run 2 (session 19, 2026-10-09; kept by session 20, 2026-10-13): the judge as it stands, over
+r18-edits/tgc-2.pairs as then built (kept as r18-edits/tgc-2-run2.pairs, from r18-edits/build-fixtures-2-run2.py),
+rc 1 in each shard (receipts renamed r18-fixtures-judge-2-run2-{0,1,2}.* with their .out and .asserts files). K
+passed both functions, and every named row failed under its mutant except three, whose rows sealed under them with
+no failing assertion: S03 (ordered-number-then-image), S09 (break-image-outside-finding-after-id) and S10
+(image-alt-beginning-with-code-span-across-lines). Cause, found by reading the kernel and measured by
+r18-rows-probe.{sh,cases,log,rc}: each row completed its construct on the line right after the one that opened it.
+vf_para_label judges a candidate only from the next line of its run on, and on each line reads the candidate's label
+before it asks vf_settled whether to drop it, so the first time the candidate that opens the construct is judged is
+on the completing line, where the label is already read. A mutant of the settled test can change a result only when
+the candidate is dropped on a line between the one that opens the construct and the one that completes it. In the
+probe, each row as written is refused on the repaired kernel and under all three mutants. With one line inside the
+construct (alt text continued on a second line) each is refused on the repaired kernel and under the other two
+mutants, and seals (rc 0) under exactly its own mutant; marked 17.0.5 and markdown-it 12.3.2 render each corrected
+row with the tier as the first visible text after the image (r18-rows-render.{sh,log,rc}). So none of the three
+mutants is equivalent, and the rows are corrected rather than the mutants argued: build-fixtures-2.py adds that line
+to the three rows in both passes, and the judge itself is unchanged. Run 2 judges the other 23 mutants as recorded
+in its logs; run 3 re-judges all 26 on the corrected pairs.

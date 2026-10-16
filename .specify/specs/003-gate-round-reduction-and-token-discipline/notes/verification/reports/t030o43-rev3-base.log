@@ -1,0 +1,28 @@
+PASS P scripts/verification-lib.sh equals its 70c71885 record
+PASS P scripts/spec-run.sh equals its 70c71885 record
+PASS P scripts/spec-task.sh equals its 70c71885 record
+PASS P scripts/spec-evidence.sh equals its 70c71885 record
+PASS P scripts/spec-ac-coverage.sh equals its 70c71885 record
+PASS P scripts/sdd-analyze.sh equals its 70c71885 record
+PASS P templates/verification-contract.md equals its 70c71885 record
+PASS P tests/helpers.sh equals its 70c71885 record
+PASS P tests/test-gate-contracts.sh equals its 70c71885 record
+PASS P tests/test-verification.sh equals its 70c71885 record
+PASS P tests/test-spec-gate.sh equals its 70c71885 record
+PASS P tests/test-sdd-analyze.sh equals its 70c71885 record
+PASS P .specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md equals its 70c71885 record
+PASS scripts/verification-lib.sh: A == B
+PASS scripts/spec-run.sh: A == B
+PASS scripts/spec-task.sh: A == B
+PASS scripts/spec-evidence.sh: A == B
+PASS scripts/spec-ac-coverage.sh: A == B
+PASS scripts/sdd-analyze.sh: A == B
+PASS templates/verification-contract.md: A == B
+PASS tests/helpers.sh: A == B
+PASS tests/test-gate-contracts.sh: A == B
+PASS tests/test-verification.sh: A == B
+PASS tests/test-spec-gate.sh: A == B
+PASS tests/test-sdd-analyze.sh: A == B
+PASS .specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md: A == B
+session-8 delta: 11 files, 1007 lines
+t030o43-rev3-base failures=0

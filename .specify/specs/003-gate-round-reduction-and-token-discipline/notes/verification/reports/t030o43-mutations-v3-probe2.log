@@ -1,0 +1,21 @@
+== baseline shard 0/1 22:34:14Z
+PASS B report_manifest_locale_cases unmutated passes
+PASS B round_locale_cases unmutated passes
+PASS B floor_parse_fault_cases unmutated passes
+PASS B acceptance_parse_fault_cases unmutated passes
+PASS B checkpoint_parse_fault_cases unmutated passes
+PASS B analyzer_locale_and_fault_cases unmutated passes
+PASS B harness_locale_cases unmutated passes
+== the pin
+== status reads
+== after the review
+== review 2: the whitespace step (_VF_AWK_WS) and its members
+PASS W36 literal applies once in scripts/spec-evidence.sh
+PASS W36 KILLED (judge rc)
+PASS W36 diagnostic: a missing artifact (not-a-pattern) passed under LANG=C (T030o43 review 2)
+== review 2: the prior-review manifest pass, keyed on its field lines
+PASS M19 literal applies once in scripts/verification-lib.sh
+PASS M19 KILLED (judge rc)
+PASS M19 diagnostic: a manifest spelled lowercase-severity was not refused by name (T030o43 review 2)
+== done shard 0/1 22:35:41Z rows=108
+t030o43-mutations failures=0

@@ -1,0 +1,625 @@
+--- a/scripts/verification-lib.sh
++++ b/scripts/verification-lib.sh
+@@ -41,25 +41,44 @@
+ # (U+0085, U+00A0, U+1680, U+2000-U+200A, U+2028, U+2029, U+202F, U+205F and
+ # U+3000) to one VT byte. VT is in [[:space:]], so every class-based trim,
+ # separator and emptiness test reads the character as whitespace, as a UTF-8
+-# locale read U+00A0. VT is neither a space, a tab nor a default field
+-# separator, so every literal grammar -- CommonMark indentation, fences and
+-# block quotes, the canonical field line's single space, a `; ` separator --
+-# reads the line exactly as every locale read it before the pin, and the
+-# fence tracker below reaches the same state on the mapped line as on the
+-# line as written, which is what vf_report_block reads. ASCII whitespace is
+-# left alone. vf_original keeps the line as written: a value the harness
+-# passes on (the Verify command it runs, a frontmatter path it compares) and
+-# a line it hashes are taken from it, and vf_wstrim trims the same
+-# whitespace from their ends only.
++# locale read U+00A0. VT is neither a space nor a tab, so every literal
++# grammar -- CommonMark indentation, fences and block quotes, the canonical
++# field line's single space, a `; ` separator -- reads the line exactly as
++# every locale read it before the pin, and the fence tracker below reaches
++# the same state on the mapped line as on the line as written, which is what
++# vf_report_block reads. ASCII whitespace is left alone. No member splits a
++# mapped line by awk's default field splitting, whose blanks are not the same
++# in every awk (mawk's source counts VT among them; macOS awk, gawk and the
++# mawk measured do not): vf_fields splits on ASCII blanks explicitly
++# (T030o43 review 3, R3-F6). The mapped line decides what a line is. Every
++# value a member passes on -- into a catalog or a record, to another
++# program, or into a comparison with a value that did not come through the
++# step -- is taken from vf_original, the line as written, by the anchor the
++# mapped line was matched with, and trimmed at its ends by vf_wstrim, the same
++# whitespace (R3-F4). A value whose grammar admits no whitespace (an ID, a
++# Class, a status, a severity, a verdict, a timestamp, a digest) reads the
++# same from either line; a name (an artifact name, an Agent path) is a token
++# that ends at any whitespace, so it is read from the mapped line.
+ _VF_AWK_WS='
+ function vf_ws(s) {
+   gsub(/\302[\205\240]|\341\232\200|\342\200[\200-\212\250\251\257]|\342\201\237|\343\200\200/, "\013", s)
+   return s
+ }
++function vf_wsclass() {
++  return "([[:space:]]|\302[\205\240]|\341\232\200|\342\200[\200-\212\250\251\257]|\342\201\237|\343\200\200)"
++}
+ function vf_wstrim(s) {
+   sub(/^([[:space:]]|\302[\205\240]|\341\232\200|\342\200[\200-\212\250\251\257]|\342\201\237|\343\200\200)+/, "", s)
+   sub(/([[:space:]]|\302[\205\240]|\341\232\200|\342\200[\200-\212\250\251\257]|\342\201\237|\343\200\200)+$/, "", s)
+   return s
++}
++function vf_fields(s, a) {
++  sub(/^[ \t]+/, "", s); sub(/[ \t]+$/, "", s)
++  return split(s, a, /[ \t]+/)
++}
++function vf_heading_text(s) {
++  sub(/^#+/, "", s)
++  return vf_wstrim(s)
+ }
+ '
+ # The step itself: the first rule of every parser of author text.
+@@ -251,7 +270,7 @@
+     _vf_reject_nul "$tasks_file" "$tasks_file" || return 1
+     awk "$_VF_AWK_TEXT"'
+       vf_quoted($0) { next }
+-      /^## / { stage=substr($0,4); sub(/[[:space:]]+$/, "", stage) }
++      /^## / { stage=vf_heading_text(vf_original) }
+       /^- \[[ xX~]\] \*\*T[0-9][0-9][0-9][a-z0-9]*\*\*/ {
+         if (stage!="" && !seen[stage]++) print stage
+       }
+@@ -643,11 +662,14 @@
+   awk -v OFS="$us" -v mapfile="$maps" \
+       -v specacs=" ${acs//$'\n'/ } " \
+       "$_VF_AWK_TEXT"'
+-    function trim(s) { sub(/^[[:space:]]+/, "", s); sub(/[[:space:]]+$/, "", s); return s }
++    # Cells are read from the row as written, trimmed by the whitespace set:
++    # a task compares a family, criterion or locator with them, and the
++    # harness opens a locator (T030o43 review 3, R3-F4).
++    function trim(s) { return vf_wstrim(s) }
+     function clean_cell(s) { s=trim(s); gsub(SUBSEP, "|", s); return s }
+     function row(line,    n,i) {
+       gsub(/\\\|/, SUBSEP, line)
+-      sub(/^[[:space:]]*\|/, "", line); sub(/\|[[:space:]]*$/, "", line)
++      sub("^" vf_wsclass() "*[|]", "", line); sub("[|]" vf_wsclass() "*$", "", line)
+       n=split(line, cell, /\|/)
+       for (i=1; i<=n; i++) cell[i]=clean_cell(cell[i])
+       return n
+@@ -749,7 +771,7 @@
+       if (in_table) { in_table=0; section="" }
+     }
+     !vf_indented($0) && /^[[:space:]]*\|/ {
+-      n=row($0)
++      n=row(vf_original)
+       if (cell[1]=="ID") {
+         if (n==6 && cell[2]=="Components" && cell[3]=="Category" && cell[4]=="Trigger" && cell[5]=="Decided behavior" && cell[6]=="Test families") {
+           section="fm"; header[section]=1; in_table=1
+@@ -832,7 +854,7 @@
+   if [[ "$phase" != plan ]]; then
+     awk -v OFS="$us" "$_VF_AWK_TEXT"'
+       vf_quoted($0) { next }
+-      /^##[^#]/ { stage=$0; sub(/^##[[:space:]]*/,"",stage) }
++      /^##[^#]/ { stage=vf_heading_text(vf_original) }
+       /^- \[[ xX~]\] \*\*T[0-9][0-9][0-9][a-z0-9]*\*\*/ {
+         match($0,/T[0-9][0-9][0-9][a-z0-9]*/); id=substr($0,RSTART,RLENGTH)
+         if (!(stage in stage_seen)) { stage_seen[stage]=1; stage_order++; stages[stage_order]=stage }
+@@ -867,7 +889,7 @@
+         -v specacs=" ${acs//$'\n'/ } " \
+         -v specreqs=" ${reqs//$'\n'/ } " \
+         "$_VF_AWK_TEXT"'
+-      function trim(s) { sub(/^[[:space:]]+/,"",s); sub(/[[:space:]]+$/, "", s); return s }
++      function trim(s) { return vf_wstrim(s) }
+       function strip_ticks(s) { s=trim(s); if (s ~ /^`.*`$/) { sub(/^`/,"",s); sub(/`$/,"",s) } return s }
+       function diag(level,message) { print "D",level,message; if (level=="error") errs++; else warns++ }
+       function safe(s) {
+@@ -901,7 +923,7 @@
+         n=split(files,a,/,/)
+         for (i=1;i<=n;i++) {
+           path=trim(a[i])
+-          sub(/[[:space:]]+\(new( in T[0-9][0-9][0-9][a-z0-9]*)?\)$/, "", path)
++          sub(vf_wsclass() "+[(]new( in T[0-9][0-9][0-9][a-z0-9]*)?[)]$", "", path)
+           path=strip_ticks(path)
+           if (path==want) return 1
+         }
+@@ -928,7 +950,7 @@
+         n=split(refs,a,/,/)
+         for(i=1;i<=n;i++) {
+           t=trim(a[i])
+-          if (t ~ /^(plan[[:space:]]+)?§[0-9]/) continue
++          if (vf_ws(t) ~ /^(plan[[:space:]]+)?§[0-9]/) continue
+           if (t ~ /^(AC|REQ|FM|INV)-/) {
+             if (t !~ /^(AC|REQ|FM|INV)-[0-9][0-9][0-9]$/) { diag("error","task " id " has malformed Ref token: " t); continue }
+             if (ref_seen[t]++) { diag("error","task " id " repeats Ref " t); continue }
+@@ -1017,32 +1039,38 @@
+         }
+         id=""; delete field; delete field_seen; has_agent=0; verify_read=""
+       }
++      # The maps hold the plan and inventory values as written; the step
++      # maps every input line, so their fields are split from vf_original.
+       FNR==NR {
+-        if ($1=="F") { family_n++; family_name[family_n]=$2; family_kind[family_n]=$3; family_criteria[family_n]=$4; family_loc[family_n]=$5 }
+-        else if ($1=="I") { def_type[$2]=$3; if (!def_seen[$2]++) def_ids[++def_n]=$2 }
+-        else if ($1=="D") { def_family[$2 SUBSEP $4]=1 }
+-        else if ($1=="T") { task_order[$2]=$3; task_stage_by_id[$2]=$4 }
++        split(vf_original, mf, FS)
++        if (mf[1]=="F") { family_n++; family_name[family_n]=mf[2]; family_kind[family_n]=mf[3]; family_criteria[family_n]=mf[4]; family_loc[family_n]=mf[5] }
++        else if (mf[1]=="I") { def_type[mf[2]]=mf[3]; if (!def_seen[mf[2]]++) def_ids[++def_n]=mf[2] }
++        else if (mf[1]=="D") { def_family[mf[2] SUBSEP mf[4]]=1 }
++        else if (mf[1]=="T") { task_order[mf[2]]=mf[3]; task_stage_by_id[mf[2]]=mf[4] }
+         next
+       }
+       vf_quoted($0) { next }
+-      /^##[^#]/ { flush(); task_stage=$0; sub(/^##[[:space:]]*/,"",task_stage); next }
++      /^##[^#]/ { flush(); task_stage=vf_heading_text(vf_original); next }
+       /^- \[[ xX~]\] \*\*T[0-9][0-9][0-9][a-z0-9]*\*\*/ {
+         flush(); match($0,/T[0-9][0-9][0-9][a-z0-9]*/); id=substr($0,RSTART,RLENGTH)
+         state_char=substr($0,4,1); task_state=(state_char=="x"||state_char=="X")?"done":(state_char=="~"?"active":"pending")
+         if (task_seen[id]++) diag("error","duplicate task id " id)
+         next
+       }
+-      id!="" && /\*Files:\*/ { set_field("Files",after($0,"Files")); next }
++      # Every field value is taken from the line as written and trimmed at
++      # its ends (R3-F4): the catalog records it, the harness opens a Tests
++      # locator, compares it and a manual observation name with the return of the
++      # return, and runs the Verify command. The line read through the
++      # whitespace step decides which field a line is, and the Verify syntax
++      # is judged on it.
++      id!="" && /\*Files:\*/ { set_field("Files",after_written(vf_original,"Files")); next }
+       id!="" && /\*Acceptance[^*]*:\*/ { if (!field_seen["Acceptance"]) set_field("Acceptance",$0); next }
+-      id!="" && /\*Verify kind:\*/ { set_field("Verify kind",after($0,"Verify kind")); next }
+-      id!="" && /\*Tests:\*/ { set_field("Tests",after($0,"Tests")); next }
+-      # The command the harness runs and records is the one written: its
+-      # value comes from the line as written, trimmed at its ends, and its
+-      # syntax is judged on the line read through the whitespace step.
++      id!="" && /\*Verify kind:\*/ { set_field("Verify kind",after_written(vf_original,"Verify kind")); next }
++      id!="" && /\*Tests:\*/ { set_field("Tests",after_written(vf_original,"Tests")); next }
+       id!="" && /\*Verify:\*/ { set_field("Verify",after_written(vf_original,"Verify")); verify_read=after($0,"Verify"); next }
+-      id!="" && /\*Reuse:\*/ { set_field("Reuse",after($0,"Reuse")); next }
+-      id!="" && /\*Refs:\*/ { set_field("Refs",after($0,"Refs")); next }
+-      id!="" && /\*Integration owner:\*/ { set_field("Integration owner",after($0,"Integration owner")); next }
++      id!="" && /\*Reuse:\*/ { set_field("Reuse",after_written(vf_original,"Reuse")); next }
++      id!="" && /\*Refs:\*/ { set_field("Refs",after_written(vf_original,"Refs")); next }
++      id!="" && /\*Integration owner:\*/ { set_field("Integration owner",after_written(vf_original,"Integration owner")); next }
+       id!="" && /\*Agent:\*/ { has_agent=1; next }
+       END {
+         flush()
+@@ -1146,20 +1174,26 @@
+     # status used to be read by nobody (O-017), so it is read here.
+     # The pass reads by the canonical finding's own field grammar, keyed on
+     # the lines that carry a record rather than on a heading it might not see
+-    # (T030o43 reviews 1 and 2). A heading is an ATX heading (up to three
++    # (T030o43 reviews 1 to 3). A heading is an ATX heading (up to three
+     # spaces, a run of `#`, then a space, a tab or the end); every heading
+     # closes the finding before it, and one whose first word is `Finding` in
+     # any case and whose second is a finding ID opens one, a title allowed
+-    # after. A field is a line whose first word, after indentation, a list
+-    # marker and emphasis, is Class or Severity in any case with a colon inside
+-    # or outside the emphasis. It must be written `- **Class:**` or
++    # after. A line not read as a heading whose text, after leading
++    # whitespace or invisible characters, is a `#` run and the word Finding
++    # is refused by name, so a finding's fields cannot fall into the one
++    # above it (R3-F3). A field is decided by its label (R3-F2): a line whose
++    # first word, after indentation, a bullet or ordered-list marker and
++    # emphasis, is Class or Severity in any case, and which is either an
++    # emphasized label or not continued by a letter, digit or hyphen. Inside
++    # a finding such a line must be written `- **Class:**` or
+     # `- **Severity:**` at any indentation, as the canonical parser reads it,
+-    # sit inside a finding, appear once in it, and carry a value of its
+-    # grammar. Any other line is prose, even one that mentions a field. A
+-    # finding with no Class, a field outside a finding, a second field, a
+-    # field or ID the grammar cannot read and quoting left open at the end are
+-    # each refused by name, so no spelling loses a finding: its fields fall
+-    # outside it, or into the one above, and both refuse. A byte-order mark on
++    # appear once, and carry a value of its grammar, which is the text after
++    # that label and nothing further (R3-F1). Outside any finding the written
++    # spelling is refused, and any other such line is prose until a finding
++    # ID appears after the last heading, because only a finding's record can
++    # carry a Class or a tier (R3-F5). A finding with no Class, a field or ID
++    # the grammar cannot read and quoting left open at the end are each
++    # refused by name, so no spelling loses a finding. A byte-order mark on
+     # the first line is not part of it.
+     awk "$_VF_AWK_TEXT"'
+       function bad(why) {printf "manifest line %d: %s: %s\n", FNR, why, vf_original > "/dev/stderr"; failed=1}
+@@ -1168,14 +1202,17 @@
+         if(id!="" && cls!="") print id ":" cls ":" sev
+         id=""; cls=""; sev=""; classes=0; severities=0
+       }
+-      function value(s) {sub(/^.*\*\*[^*]+:\*\*[ ]*/, "", s); gsub(/^[[:space:]]+|[[:space:]]+$/, "", s); return s}
+-      function fieldname(s,   t, w) {
++      function value(s, label) {sub("^[ ]*-[[:space:]]+[*][*]" label ":[*][*]", "", s); gsub(/^[[:space:]]+|[[:space:]]+$/, "", s); return s}
++      function fieldname(s,   t, w, emph) {
+         t=s; sub(/^[[:space:]]+/, "", t)
+-        if (t ~ /^[-*+][[:space:]]/) sub(/^[-*+][[:space:]]+/, "", t)
+-        sub(/^[*_]+/, "", t)
++        if (t ~ /^([-*+]|[0-9]+[.)])[[:space:]]/) sub(/^([-*+]|[0-9]+[.)])[[:space:]]+/, "", t)
++        emph=(t ~ /^[*_]/); sub(/^[*_]+/, "", t)
+         if (!match(t, /^[A-Za-z]+/)) return ""
+-        w=tolower(substr(t, 1, RLENGTH)); t=substr(t, RLENGTH + 1); sub(/^[*_]+/, "", t)
+-        return (substr(t, 1, 1) == ":") ? w : ""
++        w=tolower(substr(t, 1, RLENGTH)); if (w != "class" && w != "severity") return ""
++        t=substr(t, RLENGTH + 1)
++        if (emph && t ~ /^[*_]/) return w
++        sub(/^[*_[:space:]]+/, "", t)
++        return (t ~ /^[A-Za-z0-9-]/) ? "" : w
+       }
+       FNR == 1 {sub(/^\357\273\277/, "")}
+       vf_quoted($0) {next}
+@@ -1185,22 +1222,30 @@
+           if (word[3] ~ /^[A-Z][A-Z0-9]*-[0-9]+$/) id=word[3]
+           else bad("a Finding heading whose ID this grammar cannot read")
+         }
++        idseen=(heading ~ /[A-Za-z][A-Za-z0-9]*-[0-9]/)
+         next
+       }
++      /^([[:space:]]|[\200-\377])*#+([[:space:]]|[\200-\377])*[Ff][Ii][Nn][Dd][Ii][Nn][Gg]([^A-Za-z]|$)/ {
++        flushm(); idseen=1; bad("a Finding heading this grammar cannot read"); next
++      }
+       {
+         field=fieldname($0)
+-        if (field != "class" && field != "severity") next
+-        if (id == "") {bad("a " field " line outside any Finding"); next}
++        if (field != "class" && field != "severity") {if ($0 ~ /[A-Za-z][A-Za-z0-9]*-[0-9]/) idseen=1; next}
++        strict=(field == "class") ? ($0 ~ /^[ ]*-[[:space:]]+\*\*Class:\*\*/) : ($0 ~ /^[ ]*-[[:space:]]+\*\*Severity:\*\*/)
++        if (id == "") {
++          if (strict || idseen || $0 ~ /[A-Za-z][A-Za-z0-9]*-[0-9]/) bad("a " field " line outside any Finding")
++          next
++        }
+         if (field == "class") {
+           if (classes++) {bad("a second Class line in finding " id); next}
+-          if ($0 !~ /^[ ]*-[[:space:]]+\*\*Class:\*\*/) {bad("a Class line this grammar cannot read"); cls="-"; next}
+-          cls=value($0)
++          if (!strict) {bad("a Class line this grammar cannot read"); cls="-"; next}
++          cls=value($0, "Class")
+           if (cls !~ /^[a-z][a-z0-9]*(-[a-z0-9]+)*$/) {bad("a Class this grammar cannot read"); cls="-"}
+           next
+         }
+         if (severities++) {bad("a second Severity line in finding " id); next}
+-        if ($0 !~ /^[ ]*-[[:space:]]+\*\*Severity:\*\*/) {bad("a Severity line this grammar cannot read"); next}
+-        sev=value($0)
++        if (!strict) {bad("a Severity line this grammar cannot read"); next}
++        sev=value($0, "Severity")
+         if (sev !~ /^(data-loss|wrong-result|regression|crash|minor|degraded)$/) {bad("a Severity this grammar cannot read"); sev=""}
+       }
+       END {
+@@ -1218,8 +1263,11 @@
+   done
+   VF_REPORT_FILE="$file" awk -v gate="$gate" -v priorids="$priorids" "$_VF_AWK_TEXT"'
+     function err(s) {print "report recovery: " ENVIRON["VF_REPORT_FILE"] ":" NR ": " s "; reconcile canonical records" > "/dev/stderr"; bad=1}
+-    function clean(s) {gsub(/^[[:space:]]+|[[:space:]]+$/, "", s); return s}
+-    function value(s) {sub(/^.*\*\*[^*]+:\*\*[ ]*/, "", s); return clean(s)}
++    function clean(s) {return vf_wstrim(s)}
++    # A field value is the text after the FIRST bold label of the line, taken from
++    # the line as written: a second label further on stays in the value and
++    # fails its grammar, rather than supplying the value (T030o43 review 3).
++    function value(s) {sub(/^[^*]*\*\*[^*]+:\*\*/, "", s); return clean(s)}
+     function emit(a,b,c,d,e,f,g,h,i,j,k,l) {printf "%s%c%s%c%s%c%s%c%s%c%s%c%s%c%s%c%s%c%s%c%s%c%s%c",a,0,b,0,c,0,d,0,e,0,f,0,g,0,h,0,i,0,j,0,k,0,l,0}
+     BEGIN {
+       manifestn=split(priorids, manifestrecords, /[ ]+/)
+@@ -1368,7 +1416,7 @@
+       next
+     }
+     /^## Round [1-9][0-9]*$/ {
+-      flush(); n=$3; active=1; style="canonical"; declared=date=verdict=utc=source=floor=cursec=suppressed=""; ended=counted=blockers=minors=downgraded=0; next
++      flush(); n=substr($0, 10); active=1; style="canonical"; declared=date=verdict=utc=source=floor=cursec=suppressed=""; ended=counted=blockers=minors=downgraded=0; next
+     }
+     /^# (Opponent review|Reality Check)/ {
+       if (ended) {err("content after the round completion marker"); next}
+@@ -1381,7 +1429,7 @@
+       if (!active || ended) {err("identity outside active round"); next}
+       key=$0; sub(/:\*\*.*/,"",key)
+       if(seenfield[n SUBSEP key]++) err("duplicate identity field")
+-      v=value($0)
++      v=value(vf_original)
+       if(key=="**Round") declared=v
+       if(key=="**Timestamp") {utc=v; date=substr(v,1,10); style="canonical"}
+       if(key=="**Source") source=v
+@@ -1400,11 +1448,11 @@
+       # totals line did not, so a second totals line further down the round
+       # silently replaced the one the reader sees above the findings.
+       if(seenfield[n SUBSEP "**Blocking"]++) err("duplicate totals field")
+-      wantb=$2; wantm=$5; counted=1
++      vf_fields($0, tw); wantb=tw[2]; wantm=tw[5]; counted=1
+       if(wantb !~ /^[0-9]+$/ || wantm !~ /^[0-9]+$/) err("malformed totals")
+       next
+     }
+-    /^### Finding / {finding(); if(!active || ended) err("finding outside round"); fid=$3; cursec=""; next}
++    /^### Finding / {finding(); if(!active || ended) err("finding outside round"); vf_fields(vf_original, hw); fid=hw[3]; cursec=""; next}
+     # Round, review and finding headings are consumed above, so what remains
+     # here is a section heading. Level is not fixed by the templates.
+     /^#+[ ]/ {
+@@ -1417,14 +1465,14 @@
+     cursec!="" && $0 !~ /^[[:space:]]*$/ && $0 !~ /^#+[ ]/ {secbody[n SUBSEP cursec]=1}
+     style=="legacy" && /^[0-9]+\. .*severity:/ {
+       finding(); fid="legacy-" n "-" ++legacyid; cls="unclassified"; status="new"; prior="none"
+-      sev=$0; sub(/^.*severity:\*[ ]*/,"",sev); sev=clean(sev); next
++      sev=vf_original; sub(/^.*severity:\*[ ]*/,"",sev); sev=clean(sev); next
+     }
+-    style=="legacy" && inwhere && !/^[ ]*- \*\*/ {loc=loc " " clean($0)}
++    style=="legacy" && inwhere && !/^[ ]*- \*\*/ {loc=loc " " clean(vf_original)}
+     /^[ ]*- \*\*/ {inwhere=0}
+     fid && /^[ ]*- \*\*(Class|Status|Prior|Severity|Where|Root cause|Scenario|Reproduced|Blocks|Wrong behavior|Class-wide fix):\*\*/ {
+       key=$0; sub(/:\*\*.*/,"",key)
+       if(seenfindingfield[n SUBSEP fid SUBSEP key]++) err("duplicate finding field")
+-      v=value($0)
++      v=value(vf_original)
+       if($0 ~ /\*\*Class:/) cls=v
+       if($0 ~ /\*\*Status:/) status=v
+       if($0 ~ /\*\*Prior:/) prior=v
+@@ -2981,7 +3029,7 @@
+       text=substr($0,RSTART+RLENGTH); sub(/^(:\*\*|\*\*:|\*\*|:)?[ ]*(—[ ]*)?/,"",text); next
+     }
+     /^#/ || /^- / {flush()}
+-    id!="" && NF {text=text " " $0}
++    id!="" && /[^[:space:]]/ {text=text " " $0}
+     END {flush(); if(bad) exit 3}
+   ' "$spec/spec.md" > "$tmp" || return 3
+   : > "$output"
+@@ -2993,10 +3041,15 @@
+ vf_matrix_parse() {
+   awk -F '|' "$_VF_AWK_TEXT"'
+     function trim(s) {sub(/^[ ]*/,"",s); sub(/[ ]*$/, "",s); return s}
++    # The criterion cell is compared with the AC catalog, whose text is the
++    # criterion with every run of whitespace read as one space; the cell is
++    # read by the same rule, so a criterion copied as the spec writes it is
++    # the same criterion (T030o43 review 3, R3-F8).
++    function criterion(s) {gsub(/[[:space:]]+/, " ", s); return trim(s)}
+     vf_quoted($0) {next}
+     /^\| AC-[0-9][0-9][0-9] / {
+       if(NF!=7 || seen[trim($2)]++) {print "matrix: malformed/duplicate row" > "/dev/stderr"; bad=1; next}
+-      for(i=2;i<=6;i++) printf "%s%c",trim($i),0
++      for(i=2;i<=6;i++) printf "%s%c",(i==3 ? criterion($i) : trim($i)),0
+     }
+     END {if(bad) exit 3}
+   ' "$1" > "$2"
+--- a/scripts/spec-task.sh
++++ b/scripts/spec-task.sh
+@@ -62,17 +62,18 @@
+       printf "%s\t%s\t%s\t%d\t%s\n", id, state, stage, exempt, subj
+       id=""
+     }
+-    /^##[^#]/ { flush(); sub(/^##[[:space:]]*/,""); stage=$0 }
++    /^##[^#]/ { flush(); stage=vf_heading_text(vf_original) }
+     /^- \[[ xX~]\] \*\*T[0-9]{3}[a-z0-9]*\*\*/ {
+       flush()
+       match($0, /T[0-9]{3}[a-z0-9]*/); id = substr($0, RSTART, RLENGTH)
+       state = "todo"
+       if ($0 ~ /^- \[[xX]\]/) state = "done"
+       else if ($0 ~ /^- \[~\]/) state = "doing"
+-      subj = $0
+-      sub(/^- \[[ xX~]\] \*\*T[0-9]{3}[a-z0-9]*\*\*[[:space:]]*/, "", subj)
+-      while (subj ~ /^\[[^]]*\][[:space:]]*/) sub(/^\[[^]]*\][[:space:]]*/, "", subj)
+-      sub(/^(—|-)[[:space:]]*/, "", subj)
++      # The subject is displayed as written, trimmed by the whitespace set.
++      subj = vf_original
++      sub(/^- \[[ xX~]\] \*\*T[0-9]{3}[a-z0-9]*\*\*/, "", subj); subj = vf_wstrim(subj)
++      while (subj ~ /^\[[^]]*\]/) { sub(/^\[[^]]*\]/, "", subj); subj = vf_wstrim(subj) }
++      if (sub(/^(—|-)/, "", subj)) subj = vf_wstrim(subj)
+       is_gate = 0; proof_kind = 0; next
+     }
+     /\*Agent:\*/ { is_gate = 1 }
+--- a/scripts/sdd-analyze.sh
++++ b/scripts/sdd-analyze.sh
+@@ -240,7 +240,7 @@
+ declared_repos="$(spec_declared_repos "$SPEC_DIR")"
+ task_map="$(awk "$_VF_AWK_TEXT"'
+   vf_quoted($0) { next }
+-  /^##[^#]/ { sub(/^##[[:space:]]*/,""); stage=$0 }
++  /^##[^#]/ { stage=vf_heading_text(vf_original) }
+   /^- \[[ xX~]\] \*\*T[0-9]{3}[a-z0-9]*\*\*/ {
+     match($0, /T[0-9]{3}[a-z0-9]*/); id=substr($0,RSTART,RLENGTH)
+     tag=""
+@@ -313,7 +313,7 @@
+     id = ""
+   }
+   vf_quoted($0) { next }
+-  /^##[^#]/ { flush(); sub(/^##[[:space:]]*/,""); stage=$0 }
++  /^##[^#]/ { flush(); stage=vf_heading_text(vf_original) }
+   /^- \[[ xX~]\] \*\*T[0-9]{3}[a-z0-9]*\*\*/ {
+     flush()
+     match($0, /T[0-9]{3}[a-z0-9]*/); id = substr($0, RSTART, RLENGTH)
+--- a/templates/verification-contract.md
++++ b/templates/verification-contract.md
+@@ -351,7 +351,10 @@
+ validates a temporary report. A canonical report never vouches for its own IDs.
+ Manifest definitions use the same quoted-content rules as other declarations;
+ fenced, commented, blockquoted or raw-HTML-hidden examples cannot establish a
+-prior finding.
++prior finding. A manifest field line is decided by its label and must be
++written `- **Class:**` or `- **Severity:**`, its value the text after that
++label only; a finding, a field or a heading the pass cannot read is refused by
++name, never dropped.
+ 
+ The capture input manifest records environment variables whose MEMBERSHIP is
+ exactly `verification_environment:` — the declaration and nothing beside it.
+@@ -362,8 +365,9 @@
+ change no record the harness writes (it runs its own parsing under
+ `LC_ALL=C`, where each byte is one character, so no byte can end a parse;
+ every parser of author text reads the non-ASCII Unicode White_Space
+-characters as whitespace through one shared step and takes a value it passes
+-on from the line as written; and a parse that fails, or a grammar token it
++characters as whitespace through one shared step, takes every value it passes
++on from the line as written, and never splits such a line by awk's default
++field splitting; and a parse that fails, or a grammar token it
+ cannot read, is refused by name rather than read as an absence),
+ while a check whose programs read them pins them or declares
+ them, as the kit's own reuse-checked commands pin `LC_ALL=C` when they start;
+--- a/tests/test-gate-contracts.sh
++++ b/tests/test-gate-contracts.sh
+@@ -1057,6 +1057,28 @@
+ fence-left-open|refuse|### Finding G-041\n- **Class:** other-class\n```text\n### Finding G-042\n- **Class:** tier-binding\n- **Severity:** data-loss\n
+ comment-left-open|refuse|### Finding G-041\n- **Class:** other-class\n- **Scenario:** see <!-- never closed\n### Finding G-042\n- **Class:** tier-binding\n- **Severity:** data-loss\n
+ raw-block-left-open|refuse|### Finding G-041\n- **Class:** other-class\n<pre>\n### Finding G-042\n- **Class:** tier-binding\n- **Severity:** data-loss\n
++severity-then-prior|refuse|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** data-loss; **Prior:** minor\n
++minor-then-prior|refuse|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor; **Prior:** data-loss\n
++class-then-status|refuse|### Finding G-042\n- **Class:** tier-binding; **Status:** open\n- **Severity:** data-loss\n
++space-colon-severity|refuse|### Finding G-042\n- **Class:** tier-binding\n- **Severity :** data-loss\n
++nbsp-colon-severity|refuse|### Finding G-042\n- **Class:** tier-binding\n- **Severity\302\240:** data-loss\n
++nnbsp-colon-severity|refuse|### Finding G-042\n- **Class:** tier-binding\n- **Severity\342\200\257:** data-loss\n
++bold-space-colon-severity|refuse|### Finding G-042\n- **Class:** tier-binding\n- **Severity** : data-loss\n
++emdash-severity|refuse|### Finding G-042\n- **Class:** tier-binding\n- **Severity** — data-loss\n
++fullwidth-colon-severity|refuse|### Finding G-042\n- **Class:** tier-binding\n- **Severity：** data-loss\n
++ordered-severity|refuse|### Finding G-042\n- **Class:** tier-binding\n1. **Severity:** data-loss\n
++separatorless-severity|refuse|### Finding G-042\n- **Class:** tier-binding\n- **Severity** data-loss\n
++nested-severity-prose|refuse|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** data-loss\n- **Scenario:** the tier moved\n  - Severity: raised from minor after the repro\n
++nbsp-after-hashes-below-class-only|refuse|### Finding G-041\n- **Class:** other-class\n###\302\240Finding G-042\n- **Severity:** data-loss\n
++tab-before-hashes-below-class-only|refuse|### Finding G-041\n- **Class:** other-class\n\t### Finding G-042\n- **Severity:** data-loss\n
++zwsp-before-hashes-below-class-only|refuse|### Finding G-041\n- **Class:** other-class\n\342\200\213### Finding G-042\n- **Severity:** data-loss\n
++nbsp-before-hashes-below-class-only|refuse|### Finding G-041\n- **Class:** other-class\n\302\240### Finding G-042\n- **Severity:** data-loss\n
++no-space-after-hashes-below-class-only|refuse|### Finding G-041\n- **Class:** other-class\n###Finding G-042\n- **Severity:** data-loss\n
++indented-heading-below-class-only|refuse|### Finding G-041\n- **Class:** other-class\n    ### Finding G-042\n- **Severity:** data-loss\n
++word-before-finding-unbolded|refuse|### Opponent finding G-042\n- Class: tier-binding\n- Severity: data-loss\n
++bold-finding-line-unbolded|refuse|## Summary\n\n**Finding G-042**\n- Severity: data-loss\n
++colon-finding-heading-unbolded|refuse|### Finding: G-042\n- Class: tier-binding\n- Severity: data-loss\n
++id-on-an-outside-line|refuse|## Summary\n\n- Severity: data-loss (G-042)\n
+ SHAPES
+   # Real and plausible manifests parse (R2-F3): a line that merely mentions a
+   # field is prose, a heading closes the finding above it, a fenced example is
+@@ -1075,6 +1097,8 @@
+ prose-mention|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n- **Scenario:** the **Class:** field was lost; a line written `-\302\240**Class:**` was skipped\n
+ class-only|## Findings\n\n### Finding O-017\n- **Class:** harness-locale-decoding\n
+ finding-summary|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n\n## Finding summary\nOne finding.\n\n```text\n- **Severity:** minor\n```\n
++summary-prose|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n\n## Summary\n\n- Class: harness-locale-decoding, one finding\n- Severity: all blocking\n
++introduction-prose|# Prior review\n\nSeverity: every finding below is blocking.\n\n### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n
+ SHAPES
+   printf '# Prior review\n\n### Finding G-042\n- **Class:** tier-binding\n- **Severity:** data-loss\n' \
+     > "$spec/notes/verification/reports/opponent-findings-review.md"
+@@ -1126,6 +1150,39 @@
+     "$SCRIPTS/verification-lib.sh" "$SANDBOX/ac-catalog" "$SANDBOX/ac-catalog.nul"
+   assert_eq 'one criterion with spaces' "$OUT" \
+     "AC-012: the AC catalog kept a non-ASCII space in a criterion's canonical text (T030o43 review 2)"
++  # A reality-check matrix cell is compared with that catalog by the catalog's
++  # own whitespace rule, so a criterion copied as the spec writes it is the
++  # same criterion (T030o43 review 3, R3-F8).
++  bash -c '. "$1"; vf_ac_catalog "$2" "$3" || exit 9
++    text="$(tr "\000" "\n" < "$3" | sed -n 2p)"; dig="$(tr "\000" "\n" < "$3" | sed -n 3p)"
++    printf "| AC-001 | one\302\240criterion\342\200\203with\343\200\200spaces; sha256:%s | CAP-1; review: x | %s | PASS |\n" "$dig" aaaa > "$4"
++    vf_matrix_parse "$4" "$5" || exit 8
++    [[ "$(tr "\000" "\n" < "$5" | sed -n 2p)" == "$text; sha256:$dig" ]]' _ "$SCRIPTS/verification-lib.sh" \
++    "$SANDBOX/ac-catalog" "$SANDBOX/ac-catalog.nul" "$SANDBOX/ac-matrix.md" "$SANDBOX/ac-matrix.nul" ||
++    t_fail 'AC-013: a matrix criterion cell written as the spec writes it did not equal the AC catalog (T030o43 review 3)'
++  # A canonical field value is the text after its line's FIRST bold label,
++  # taken from the line as written (T030o43 review 3, R3-F1 and R3-F4): a
++  # second label stays in the value and fails its grammar, a Where value keeps
++  # a U+00A0 inside it, and a Finding heading's ID is named as written.
++  local nbw=$'\302\240'
++  tier_round_fixture 1 '' G-042:tier-binding:open:minor |
++    sed 's/^- \*\*Severity:\*\* minor$/- **Severity:** data-loss; **Prior:** minor/' > "$blank_spec/notes/opponent.md"
++  bash -c '. "$1"; vf_reports "$2" opponent "$3" "$4"' _ "$SCRIPTS/verification-lib.sh" \
++    "$blank_spec/notes/opponent.md" "$SANDBOX/section-blank.nul" "$blank_spec" > "$SANDBOX/canonical.out" 2>&1
++  assert_contains "$(cat "$SANDBOX/canonical.out")" 'unknown severity' \
++    'AC-012: a canonical Severity value was read after a second bold label (T030o43 review 3)'
++  tier_round_fixture 1 '' G-042:tier-binding:new:data-loss |
++    sed "s#^- \*\*Where:\*\* scripts/run.sh:9\$#- **Where:** scripts/my${nbw}run.sh:9#" > "$blank_spec/notes/opponent.md"
++  run_rc 0 bash -c '. "$1"; vf_reports "$2" opponent "$3" "$4"' _ \
++    "$SCRIPTS/verification-lib.sh" "$blank_spec/notes/opponent.md" "$SANDBOX/section-blank.nul" "$blank_spec"
++  [[ "$(tr '\000' '\n' < "$SANDBOX/section-blank.nul" | grep -c -F "scripts/my${nbw}run.sh:9")" == 1 ]] ||
++    t_fail 'AC-012: a canonical Where value was not taken as written (T030o43 review 3)'
++  tier_round_fixture 1 '' G-042:tier-binding:new:data-loss |
++    sed "s/^### Finding G-042\$/### Finding G-042${nbw}/" > "$blank_spec/notes/opponent.md"
++  run_rc 3 bash -c '. "$1"; vf_reports "$2" opponent "$3" "$4"' _ \
++    "$SCRIPTS/verification-lib.sh" "$blank_spec/notes/opponent.md" "$SANDBOX/section-blank.nul" "$blank_spec"
++  assert_contains "$OUT" "incomplete finding G-042${nbw};" \
++    'AC-012: a canonical Finding ID was not named as written (T030o43 review 3)'
+   # The status half (T030o43): a manifest pass that dies is refused by name,
+   # never read as a manifest that records nothing.
+   fault_bin "$SANDBOX/fault-manifest" awk 'function flushm'
+--- a/tests/test-spec-gate.sh
++++ b/tests/test-spec-gate.sh
+@@ -589,6 +589,16 @@
+     'AC-008: references that could not be read skipped the binding-gap check (T030o43)'
+   run_rc 0 "$SCRIPTS/spec-gate.sh" checkpoint "$spec" Backend
+   assert_contains "$OUT" 'completed-task coverage checked' 'fixture: the checkpoint seals unfaulted'
++  # A contract written with a U+00A0 before its 1 is the current contract to
++  # every reader, the checkpoint's own included (T030o43 review 3, R3-F9), so
++  # the checkpoint judges completed coverage and refuses a lost binding.
++  sed "s/^verification_contract: 1\$/verification_contract:$(printf '\302\240')1/" "$spec/spec.md" > "$SANDBOX/checkpoint-spec"
++  cp "$SANDBOX/checkpoint-spec" "$spec/spec.md"
++  sed 's/REQ-001, AC-001, FM-001/REQ-001, AC-001/' "$spec/tasks.md" > "$SANDBOX/checkpoint-tasks"
++  cp "$SANDBOX/checkpoint-tasks" "$spec/tasks.md"
++  run_rc 3 "$SCRIPTS/spec-gate.sh" checkpoint "$spec" Backend
++  assert_contains "$OUT" 'lost prior binding' \
++    'AC-008: a checkpoint read a contract written with a U+00A0 as legacy and skipped coverage (T030o43 review 3)'
+ }
+ 
+ # AC-008: completed-through proof and retained bindings gate the next stage.
+--- a/tests/test-sdd-analyze.sh
++++ b/tests/test-sdd-analyze.sh
+@@ -274,7 +274,71 @@
+   run_rc 0 bash -c '. "$1"; vf_bindings "$2" tasks "" "$3" 2>/dev/null && vf_task_info "$3" T001 && printf "%s" "$VF_TASK_COMMAND"' _ \
+     "$SCRIPTS/verification-lib.sh" "$spec_dir" "$SANDBOX/verify-written.nul"
+   assert_eq "$cmd" "$OUT" 'AC-023: the Verify command was not run as written (T030o43 review 2)'
++  # Every value a parser passes on is taken from the line as written (T030o43
++  # review 3, R3-F4): a Tests locator and its registry row written with a
++  # U+00A0 inside the file name bind, the harness finds the file, and the
++  # catalog holds the name as written; a manual observation name so written
++  # equals the name a worker's return gives it.
++  local proj="${spec_dir%/.specify/*}" v suffix
++  sed "s#tests/check.sh::test_ac_001_shared#tests/my${nb}check.sh::test_ac_001_shared#" "$SANDBOX/analyzer-plan" > "$spec_dir/plan.md"
++  sed "s#tests/check.sh::test_ac_001_shared#tests/my${nb}check.sh::test_ac_001_shared#; s#\`tests/check.sh\`#\`tests/my${nb}check.sh\`#" "$SANDBOX/analyzer-tasks" > "$spec_dir/tasks.md"
++  mkdir -p "$proj/tests"; printf 'test_ac_001_shared() { :; }\n' > "$proj/tests/my${nb}check.sh"
++  bash -c '. "$1"; vf_bindings "$2" tasks "" "$3" && vf_locators_exist "$3" T001 "$4"' _ "$SCRIPTS/verification-lib.sh" \
++    "$spec_dir" "$SANDBOX/written.nul" "$proj" > "$SANDBOX/written.out" 2>&1 ||
++    t_fail "AC-023: a Tests locator written with a U+00A0 did not bind or was not found as written (T030o43 review 3): $(head -c 300 "$SANDBOX/written.out")"
++  v="$(tr '\0' '\n' < "$SANDBOX/written.nul" | grep -c -F "tests/my${nb}check.sh::test_ac_001_shared")"
++  [[ "$v" -ge 2 ]] || t_fail 'AC-023: the binding catalog did not hold a Tests locator as written (T030o43 review 3)'
++  rm -f "$proj/tests/my${nb}check.sh"
++  sed "s#| release-observation |#| release${nb}observation |#" "$SANDBOX/analyzer-plan" > "$spec_dir/plan.md"
++  sed "s#\*Tests:\* release-observation#*Tests:* release${nb}observation#" "$SANDBOX/analyzer-tasks" > "$spec_dir/tasks.md"
++  printf 'Verification-Return: 1\nTask: T004\nCaptures: none\nSummary: x\nManual observation: release%sobservation, artifacts/release.txt, abc, someone, 2026-09-27T00:00:00Z, PASS: ok\nFailure modes:\nINV-001, release%sobservation, manual\n' "$nb" "$nb" > "$SANDBOX/written-return.txt"
++  bash -c '. "$1"; vf_bindings "$2" tasks "" "$3" && vf_task_info "$3" T004 && vf_return_parse "$4" "$5" || exit 9
++    name="$(tr "\0" "\n" < "$5" | sed -n "/^manual$/{n;p;}" | cut -d, -f1)"
++    [[ -n "$name" && "$name" == "${VF_TASK[7]}" ]]' _ "$SCRIPTS/verification-lib.sh" "$spec_dir" "$SANDBOX/written.nul" \
++    "$SANDBOX/written-return.txt" "$SANDBOX/written-return.nul" > "$SANDBOX/written.out" 2>&1 ||
++    t_fail 'AC-023: a manual observation name written with a U+00A0 did not equal the return that names it (T030o43 review 3)'
++  # A value processed further reads the same whitespace: a Refs list with a
++  # U+00A0 after each comma and a plan reference written plan<U+00A0>§ are
++  # its references, a Files entry ending in a U+00A0 and (new) owns its test
++  # file, and a registry row after a U+00A0 is a row.
++  cp "$SANDBOX/analyzer-plan" "$spec_dir/plan.md"
++  perl -0pe 's/\Q  - *Refs:* REQ-001, AC-001, FM-001\E/  - *Refs:* REQ-001,\xc2\xa0AC-001,\xc2\xa0FM-001,\xc2\xa0plan\xc2\xa0\xc2\xa73.2/; s/\Q  - *Files:* `src\/parser.sh`, `tests\/check.sh`\E/  - *Files:* `src\/parser.sh`, `tests\/check.sh`\xc2\xa0(new)/' \
++    "$SANDBOX/analyzer-tasks" > "$spec_dir/tasks.md"
++  [[ "$(grep -c $'\302\240' "$spec_dir/tasks.md")" == 2 ]] || t_fail 'fixture: the Refs and Files edits did not apply'
++  bash -c '. "$1"; vf_bindings "$2" tasks "" "$3"' _ "$SCRIPTS/verification-lib.sh" "$spec_dir" "$SANDBOX/written.nul" > "$SANDBOX/written.out" 2>&1 ||
++    t_fail "AC-023: a Refs list with a U+00A0 after a comma, or a plan reference after one, was refused (T030o43 review 3): $(head -c 300 "$SANDBOX/written.out")"
++  assert_not_contains "$(cat "$SANDBOX/written.out")" 'task T001 defers all local coverage' \
++    'AC-023: a Files entry ending in a U+00A0 and (new) did not own its test file (T030o43 review 3)'
+   cp "$SANDBOX/analyzer-tasks" "$spec_dir/tasks.md"
++  sed "s/^| manual-family | manual | AC-004 | release-observation |\$/${nb}| manual-family | manual | AC-004 | release-observation |/" "$SANDBOX/analyzer-plan" > "$spec_dir/plan.md"
++  bash -c '. "$1"; vf_bindings "$2" tasks "" "$3"' _ "$SCRIPTS/verification-lib.sh" "$spec_dir" "$SANDBOX/written.nul" > "$SANDBOX/written.out" 2>&1 ||
++    t_fail "AC-023: a registry row after a U+00A0 was not read as that row (T030o43 review 3): $(head -c 300 "$SANDBOX/written.out")"
++  cp "$SANDBOX/analyzer-plan" "$spec_dir/plan.md"
++  # A stage heading is its text trimmed at both ends in every reader that
++  # compares it (R3-F11): through-stage names "## Backend" written with a
++  # trailing U+00A0 or space, and so does its catalog's task record.
++  for suffix in "$nb" ' '; do
++    sed "s/^## Backend\$/## Backend$suffix/" "$SANDBOX/analyzer-tasks" > "$spec_dir/tasks.md"
++    bash -c '. "$1"; vf_bindings "$2" through-stage Backend "$3" && vf_task_info "$3" T001 && [[ "${VF_TASK[3]}" == Backend ]]' _ \
++      "$SCRIPTS/verification-lib.sh" "$spec_dir" "$SANDBOX/stage.nul" > "$SANDBOX/stage.out" 2>&1 ||
++      t_fail "AC-023: a Backend heading ending in $(printf '%s' "$suffix" | od -An -tx1 | tr -d ' ') was not the stage through-stage names (T030o43 review 3): $(head -c 200 "$SANDBOX/stage.out")"
++  done
++  sed "s/^## Backend\$/## ${nb}Backend/" "$SANDBOX/analyzer-tasks" > "$SANDBOX/stage-tasks.md"
++  run_rc 0 bash -c '. "$1"; vf_config "$2" "$3" "$4"' _ "$SCRIPTS/verification-lib.sh" \
++    "$SANDBOX/stage-stack.yml" "$SANDBOX/stage-tasks.md" "$SANDBOX/stage-catalog-leading"
++  assert_not_contains "$OUT" 'unknown checkpoint stage' \
++    'AC-023: a stage heading with a U+00A0 after "## " was not the stage a checkpoint names (T030o43 review 3)'
++  sed "s/^## Backend\$/## Backend${nb}/; s/^- \[ \] \*\*T001\*\* — Cover the shared shell boundary\$/- [ ] **T001**${nb}— Cover${nb}the shared shell boundary${nb}/" \
++    "$SANDBOX/analyzer-tasks" > "$spec_dir/tasks.md"
++  run_rc 0 "$SCRIPTS/spec-task.sh" list "$spec_dir"
++  assert_contains "$OUT" "T001"$'\t'"todo"$'\t'"Backend"$'\t'"Cover${nb}the shared shell boundary"$'\n' \
++    'AC-023: the task list did not show a stage and a subject as written (T030o43 review 3)'
++  awk -v nb="$nb" '/^## Docs$/ {print "## Setup" nb; next} /^  - \*Refs:\* REQ-003, AC-003, FM-002$/ {next} {print}' \
++    "$SANDBOX/analyzer-tasks" > "$spec_dir/tasks.md"
++  "$ANALYZE" "$spec_dir" > "$SANDBOX/stage.out" 2>&1
++  assert_not_contains "$(cat "$SANDBOX/stage.out")" 'task T003 has no *Refs:* line' \
++    'AC-023: the analyzer did not read a Setup heading ending in a U+00A0 as Setup (T030o43 review 3)'
++  cp "$SANDBOX/analyzer-tasks" "$spec_dir/tasks.md"
+ }
+ 
+ test_verification_bindings() {
+--- a/.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md
++++ b/.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md
+@@ -737,7 +737,7 @@
+ 
+ - [ ] **T030o43** — Run the harness's own parsing under the C locale and never let a parse failure read as a pass
+   - *Files:* `scripts/verification-lib.sh`, `scripts/spec-run.sh`, `scripts/spec-task.sh`, `scripts/sdd-analyze.sh`, `scripts/spec-ac-coverage.sh`, `scripts/spec-evidence.sh`, `templates/verification-contract.md`, `tests/helpers.sh`, `tests/test-verification.sh`, `tests/test-gate-contracts.sh`, `tests/test-spec-gate.sh`, `tests/test-sdd-analyze.sh`
+-  - *Acceptance:* Derive the pin's member from the harness, not from the sites round 12 named (REQ-009, REQ-011, AC-012, AC-020): the file set the input identity records as `harness`, and every process it starts except the captured command. Every grammar the harness parses is ASCII, and under `LC_ALL=C` each byte is one character, so no byte can end a parse. A byte >= 0x80 is in no character class there, so every parser of author text reads the 19 non-ASCII Unicode White_Space characters as whitespace through one shared step before any rule of its own, mapped to a byte every class-based test reads as whitespace and no literal grammar does, so CommonMark structure and literal separators read as they did before the pin; it takes a value it passes on (the Verify command it runs, a frontmatter value) from the line as written, trimmed at its ends; and a grammar token it cannot read is refused by name. `vf_report_block` alone reads the report as written, because its output is a sealed digest. `verification-lib.sh` exports `LC_ALL=C` when it loads, and each of the six harness entry scripts loads it directly after `lib.sh`, before any program reads a repository or bookkeeping byte; `lib.sh` is unchanged. The caller's `LC_ALL` (a value, empty, or unset) is kept in the exported `SDD_HARNESS_CALLER_LC_ALL` for the harness processes a harness process starts; the captured command (`vf_capture`, and `spec-run.sh`'s legacy run) gets it back exactly and never sees the record, and the record of a declared `LC_ALL` carries the caller's value. No parse failure reads as a passing result: every harness parser whose output decides a record, an identity or a verdict, and whose failure would read as an absence that passes, reads its exit status and fails closed with a diagnostic naming the parse, among them the prior-review manifest pass and the Decisions-log authorization parse (the members, derived from every text-program call in the harness, are recorded in Decisions). With every `LC_*` removed and `LANG` at `en_US.UTF-8`, `de_DE.UTF-8`, `C.UTF-8` and `ja_JP.SJIS`, a manifest carrying an undecodable byte, a Class binding and a UTF-8 manifest under Shift-JIS each refuse exactly as under C, through `vf_reports` and end to end through `spec-gate.sh round --complete`; the analyzer's clarification marker and AC inventory, and `spec-ac-coverage.sh`'s AC inventory, refuse the byte as under C; the prior-review manifest pass reads by the canonical field grammar keyed on its field lines, so every spelling of a finding is either read or refused by name, never dropped; a value, field or section of only such whitespace is empty; the input identity's Decisions view covers every line the authorization scanner reads, from each line that begins `## Decisions log`, quoted or not, to the next unquoted heading; an artifact name or Agent path ends at any whitespace and a non-ASCII letter is part of it; a `verification_contract` key routes three ways by count in every reader; on macOS each locale must be one an unpinned awk cannot decode the byte under. Every harness entry script runs its programs under `LC_ALL=C`; the captured command sees the caller's `LC_ALL` unset, empty or set; a declared `LC_ALL` gives two identities for two caller values; and a fault injected into each member parser fails its operation closed with its exact diagnostic. Removing the pin, an entry script's early load, the restore, the caller-value record or any status read fails a fixture with an exact diagnostic. The contract and the kernel comment say the harness runs its own parsing under `LC_ALL=C`, gives the caller's `LC_ALL` back to the command it captures, and never lets a parse failure read as a pass. The input identity's records are unchanged apart from the edited files and the harness records.
++  - *Acceptance:* Derive the pin's member from the harness, not from the sites round 12 named (REQ-009, REQ-011, AC-012, AC-020): the file set the input identity records as `harness`, and every process it starts except the captured command. Every grammar the harness parses is ASCII, and under `LC_ALL=C` each byte is one character, so no byte can end a parse. A byte >= 0x80 is in no character class there, so every parser of author text reads the 19 non-ASCII Unicode White_Space characters as whitespace through one shared step before any rule of its own, mapped to a byte every class-based test reads as whitespace and no literal grammar does, so CommonMark structure and literal separators read as they did before the pin; it takes every value it passes on into a catalog or a record, to another program or into a comparison from the line as written, trimmed at its ends, and never splits a mapped line by awk's default field splitting; and a grammar token it cannot read is refused by name. `vf_report_block` alone reads the report as written, because its output is a sealed digest. `verification-lib.sh` exports `LC_ALL=C` when it loads, and each of the six harness entry scripts loads it directly after `lib.sh`, before any program reads a repository or bookkeeping byte; `lib.sh` is unchanged. The caller's `LC_ALL` (a value, empty, or unset) is kept in the exported `SDD_HARNESS_CALLER_LC_ALL` for the harness processes a harness process starts; the captured command (`vf_capture`, and `spec-run.sh`'s legacy run) gets it back exactly and never sees the record, and the record of a declared `LC_ALL` carries the caller's value. No parse failure reads as a passing result: every harness parser whose output decides a record, an identity or a verdict, and whose failure would read as an absence that passes, reads its exit status and fails closed with a diagnostic naming the parse, among them the prior-review manifest pass and the Decisions-log authorization parse (the members, derived from every text-program call in the harness, are recorded in Decisions). With every `LC_*` removed and `LANG` at `en_US.UTF-8`, `de_DE.UTF-8`, `C.UTF-8` and `ja_JP.SJIS`, a manifest carrying an undecodable byte, a Class binding and a UTF-8 manifest under Shift-JIS each refuse exactly as under C, through `vf_reports` and end to end through `spec-gate.sh round --complete`; the analyzer's clarification marker and AC inventory, and `spec-ac-coverage.sh`'s AC inventory, refuse the byte as under C; the prior-review manifest pass reads by the canonical field grammar keyed on its field lines, decides a field line by its label and takes its value after that label only, refuses by name a line not read as a heading that is a `#` run and the word Finding, and reads a Class or Severity line outside any finding as prose only until a finding ID appears after the last heading, so every spelling of a finding is either read or refused by name, never dropped; a value, field or section of only such whitespace is empty; the input identity's Decisions view covers every line the authorization scanner reads, from each line that begins `## Decisions log`, quoted or not, to the next unquoted heading; an artifact name or Agent path ends at any whitespace and a non-ASCII letter is part of it; a `verification_contract` key routes three ways by count in every reader; a matrix criterion is compared by the AC catalog's whitespace rule; a stage heading is its text trimmed at both ends in every reader that compares it; on macOS each locale must be one an unpinned awk cannot decode the byte under. Every harness entry script runs its programs under `LC_ALL=C`; the captured command sees the caller's `LC_ALL` unset, empty or set; a declared `LC_ALL` gives two identities for two caller values; and a fault injected into each member parser fails its operation closed with its exact diagnostic. Removing the pin, an entry script's early load, the restore, the caller-value record or any status read fails a fixture with an exact diagnostic. The contract and the kernel comment say the harness runs its own parsing under `LC_ALL=C`, gives the caller's `LC_ALL` back to the command it captures, and never lets a parse failure read as a pass. The input identity's records are unchanged apart from the edited files and the harness records.
+   - *Verify kind:* test
+   - *Tests:* `tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-spec-gate.sh::test_rounds`, `tests/test-sdd-analyze.sh::test_verification_bindings`, `tests/test-verification.sh::test_capture_provenance`, `tests/test-spec-gate.sh::test_floor`, `tests/test-spec-gate.sh::test_acceptance`, `tests/test-spec-gate.sh::test_checkpoints`
+   - *Verify:* `bash tests/run.sh && bash tests/shellcheck.sh` → all suites `passed`, exit 0

@@ -1,0 +1,16 @@
+@@OLD
+image-title-across-lines-outside-finding-after-id|### Finding G-041\n- **Class:** tier-binding\n- **Severity:** minor\n## Notes\n\nG-042 is discussed below.\n\n![ `]` x ](u "a\ny\nb")Severity: data-loss\n|a severity line outside any Finding
+ROWS
+@@NEW
+image-title-across-lines-outside-finding-after-id|### Finding G-041\n- **Class:** tier-binding\n- **Severity:** minor\n## Notes\n\nG-042 is discussed below.\n\n![ `]` x ](u "a\ny\nb")Severity: data-loss\n|a severity line outside any Finding
+entity-then-code-span-holding-image-across-lines|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n&amp;`![Severity: data-loss](u) z\ny\nw`\n|a second Severity line in finding G-042
+ROWS
+@@END
+@@OLD
+title-tag-inside-finding|- **Severity:** minor\n\n# Opponent review <b>x</b>|raw HTML outside a code span in finding G-050
+ROWS
+@@NEW
+title-tag-inside-finding|- **Severity:** minor\n\n# Opponent review <b>x</b>|raw HTML outside a code span in finding G-050
+entity-then-code-span-holding-image-across-lines|- **Severity:** minor\n\n&amp;`![Severity: data-loss](u) z\ny\nw`|a Severity line this grammar cannot read in finding G-050
+ROWS
+@@END

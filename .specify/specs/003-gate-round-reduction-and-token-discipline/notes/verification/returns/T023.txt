@@ -1,0 +1,12 @@
+Verification-Return: 1
+Task: T023
+Captures: CAP-10-rSCipE
+Summary: capture=CAP-10-rSCipE command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=1e7cb98767b063c47d9b91e7f2304ba6ecc36bbdc8319e4e7ae51594753470ce input=9dee1f12f9f436232e8706eb941d54837e1953756aeb0e28d66a29011571fa01 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-10-rSCipE/output.log [complete metadata: capture directory]
+Failure modes:
+FM-010, tests/test-verification.sh::test_capture_provenance, CAP-10-rSCipE
+FM-012, tests/test-spec-gate.sh::test_checkpoints, CAP-10-rSCipE
+FM-012, tests/test-spec-gate.sh::test_floor, CAP-10-rSCipE
+FM-014, tests/test-spec-gate.sh::test_floor, CAP-10-rSCipE
+FM-014, tests/test-verification.sh::test_capture_provenance, CAP-10-rSCipE
+INV-001, tests/test-spec-gate.sh::test_floor, CAP-10-rSCipE
+INV-001, tests/test-verification.sh::test_capture_provenance, CAP-10-rSCipE

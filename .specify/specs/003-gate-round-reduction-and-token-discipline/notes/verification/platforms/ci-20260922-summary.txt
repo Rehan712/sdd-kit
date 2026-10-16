@@ -1,0 +1,17 @@
+Hosted CI portability verification — 2026-09-22
+Workflow: .github/workflows/ci.yml, unmodified (it is part of the snapshot tree).
+Run: https://github.com/Rehan712/sdd-kit/actions/runs/35774044069 — attempt 1, event pull_request, draft do-not-merge PR #16.
+Source identity: aa18111b6dbe36a6d75e923129802ffa7c688dddedc9a7ec811c350dd7bc66c4 (sha256 of ci-20260922/snapshot-inputs.nul).
+Snapshot: commit 15b7bb5d64343e12f9dbfc51c2df92d0274b2784, tree 13b18cd7eea837a226209348e65c7a336623a274, parent 0d55c62b01cd3e2295ca34b048a212780dd92c00; built through a temporary index (real index, HEAD and spec branch unchanged).
+Mapping (ci-20260922/build.log, exit 0): 170/170 manifest path records equal their tree entries after vf_semantic_file, with equal modes; the other 5,318 of 5,488 entries all satisfy vf_bookkeeping_path (001: 3, 002: 3, 003: 5,312).
+Tested commit: GitHub merge 55d1325e98d231150a75ea6f80a19ac4779c5edb (parents f4a0e4e = main, 15b7bb5d = snapshot); its tree is 13b18cd7…, identical to the snapshot. All four jobs fetched and checked out that same merge ref.
+Jobs (conclusion; runner image; interpreter/tool; result):
+- shellcheck: success; ubuntu-24.04 20260907.300.1; ShellCheck 0.9.0-1 per that image's manifest; step shell /usr/bin/bash; `shellcheck -S warning -x scripts/*.sh tests/*.sh`.
+- tests (ubuntu-latest): success; ubuntu-24.04 20260920.314.1; Bash 5.2.21(1)-release; 15 suites, 130/130, 130 ok lines, 0 FAIL lines.
+- tests (macos-latest): success; macos-26-arm64 20260907.0351.1; Bash 3.2.57(1)-release is the only bash that image's manifest lists; 15 suites, 130/130, 0 FAIL lines.
+- tests-bash32: success; macos-26-arm64 20260907.0351.1; /bin/bash 3.2.57 via the workflow's PATH shim; 15 suites, 130/130, 0 FAIL lines.
+Exits: every step conclusion is success (run-35774044069/jobs.json); no "Process completed with exit code" line appears in any job log. The suite's failure marker ("  FAIL <fn>", tests/helpers.sh:369) occurs zero times. Remaining indented non-ok lines are actions/checkout input echoes and git's detached-HEAD hint.
+Tool identities: runner image names and versions from each job's "Set up job" log; Bash/ShellCheck versions from the actions/runner-images manifests at those exact image versions (ci-20260922/runner-images/, fetched 2026-09-22). The workflow was not edited to print versions, because that would change the source under test.
+Limits: Bash 5 is exercised on Ubuntu only (the macOS image lists no Homebrew bash). Normal CI on the eventual guarded PR (T032) is still required before merge. This evidence binds source aa18111b…; any later source change makes it historical.
+Cleanup: PR #16 closed unmerged at 2026-09-22T19:52:18Z; branch ci-snapshot/spec-003-20260922 deleted (pr-final-state.txt). GitHub retains the closed PR and its commit publicly.
+Collector: ci-20260922/collect.sh, collect.log, collect.rc = 0.

@@ -1,0 +1,7 @@
+r18-fixtures-judge-2 run 1 (session 19, 2026-10-09): stopped by the invoker a few minutes in, before any shard finished,
+because planning matrix v6 showed one more row was needed: with the head-based settled test, v5's D13 (the line
+of vf_settled that reads the inert code-span reading) is killed by no row, and the member it guards (an image whose
+alt text begins with a code span holding a bracket, completed on the next line before a tier) is caught only
+through that reading. The row image-alt-beginning-with-code-span-across-lines was added to tgc-2 in both passes
+(r18-edits/build-fixtures-2.py) with its mutant S10, and the judge re-run in full as r18-fixtures-judge-2-{0,1,2}.*.
+Run 1 judges nothing; its partial logs are kept as r18-fixtures-judge-2-run1-*.

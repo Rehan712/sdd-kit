@@ -1,0 +1,20 @@
+@@OLD
+characters as whitespace through one shared step and takes a value it passes
+on from the line as written; and a parse that fails, or a grammar token it
+@@NEW
+characters as whitespace through one shared step, takes every value it passes
+on from the line as written, and never splits such a line by awk's default
+field splitting; and a parse that fails, or a grammar token it
+@@END
+@@OLD
+Manifest definitions use the same quoted-content rules as other declarations;
+fenced, commented, blockquoted or raw-HTML-hidden examples cannot establish a
+prior finding.
+@@NEW
+Manifest definitions use the same quoted-content rules as other declarations;
+fenced, commented, blockquoted or raw-HTML-hidden examples cannot establish a
+prior finding. A manifest field line is decided by its label and must be
+written `- **Class:**` or `- **Severity:**`, its value the text after that
+label only; a finding, a field or a heading the pass cannot read is refused by
+name, never dropped.
+@@END

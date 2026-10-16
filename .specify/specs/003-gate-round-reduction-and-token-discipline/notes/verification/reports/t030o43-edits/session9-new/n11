@@ -1,0 +1,14 @@
+      # Every field value is taken from the line as written and trimmed at
+      # its ends (R3-F4): the catalog records it, the harness opens a Tests
+      # locator, compares it and a manual observation name with the return of the
+      # return, and runs the Verify command. The line read through the
+      # whitespace step decides which field a line is, and the Verify syntax
+      # is judged on it.
+      id!="" && /\*Files:\*/ { set_field("Files",after_written(vf_original,"Files")); next }
+      id!="" && /\*Acceptance[^*]*:\*/ { if (!field_seen["Acceptance"]) set_field("Acceptance",$0); next }
+      id!="" && /\*Verify kind:\*/ { set_field("Verify kind",after_written(vf_original,"Verify kind")); next }
+      id!="" && /\*Tests:\*/ { set_field("Tests",after_written(vf_original,"Tests")); next }
+      id!="" && /\*Verify:\*/ { set_field("Verify",after_written(vf_original,"Verify")); verify_read=after($0,"Verify"); next }
+      id!="" && /\*Reuse:\*/ { set_field("Reuse",after_written(vf_original,"Reuse")); next }
+      id!="" && /\*Refs:\*/ { set_field("Refs",after_written(vf_original,"Refs")); next }
+      id!="" && /\*Integration owner:\*/ { set_field("Integration owner",after_written(vf_original,"Integration owner")); next }

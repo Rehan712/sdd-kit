@@ -1,0 +1,1202 @@
+--- a/scripts/verification-lib.sh
++++ b/scripts/verification-lib.sh
+@@ -342,8 +342,8 @@
+   local spec_dir="$1" mode="$2" stack="$3" tmp tasks_file="" rc=0 key value count=0 contract declared
+   tmp="$(mktemp -d)" || return 1
+   trap 'rm -rf "$tmp"' EXIT
+-  contract="$(fm_get "$spec_dir/spec.md" verification_contract)"
+-  declared="$(frontmatter_block "$spec_dir/spec.md" | grep -c '^verification_contract:' || true)"
++  contract="$(vf_fm_value "$spec_dir/spec.md" verification_contract)" || return 1
++  declared="$(vf_fm_count "$spec_dir/spec.md" verification_contract)" || return 1
+   if [[ "$declared" -gt 1 || ( "$declared" -eq 1 && "$contract" != 1 ) ]]; then
+     printf 'error: %s/spec.md:1: unsupported or duplicate verification_contract %s\n' "$spec_dir" "$contract" >&2
+     return 1
+@@ -374,6 +374,109 @@
+   # shellcheck source=scripts/lib.sh
+   . "$_VF_LIB_DIR/lib.sh"
+ fi
++
++# The harness's own parsing runs under the C locale (O-017, round 12). Every
++# grammar the kit parses is ASCII, so C reads every record a UTF-8 or
++# single-byte locale reads, and decodes every byte, where they do not: under a
++# UTF-8 locale macOS awk dies at the first byte it cannot decode, and grep
++# stops matching there and still exits 0. One cp1252 apostrophe in a
++# prior-review manifest dropped the history a clearing verdict is checked
++# against, and a clarification marker after such a byte read as absent. The
++# member is the harness itself: the files vf_snapshot records as `harness`, and
++# every process they start except the command a capture runs. The pin is placed
++# once, here, and every harness entry script loads this library directly after
++# lib.sh, before any program reads a repository or bookkeeping byte; the export
++# reaches each process it starts. lib.sh stays unpinned, so 002's dispatcher,
++# which sources it but not this library, and the provider CLIs it starts keep
++# the user's locale.
++#
++# The caller's LC_ALL (a value, empty, or unset) is kept in the exported
++# SDD_HARNESS_CALLER_LC_ALL, `unset` or `set:<value>`, so a harness process
++# started by another (`accept` execs spec-task.sh; the floor runs
++# `spec-task.sh list`) still knows it. A process takes the record afresh only
++# when it starts with none, or with LC_ALL other than C, which means LC_ALL
++# was set after the harness last pinned it. A caller who exports the record by
++# hand gets exactly what exporting that LC_ALL would give.
++vf_locale_pin() {
++  if [[ -z "${SDD_HARNESS_CALLER_LC_ALL:-}" || "${LC_ALL-}" != C ]]; then
++    if [[ -n "${LC_ALL+set}" ]]; then SDD_HARNESS_CALLER_LC_ALL="set:$LC_ALL"; else SDD_HARNESS_CALLER_LC_ALL='unset'; fi
++    export SDD_HARNESS_CALLER_LC_ALL
++  fi
++  export LC_ALL=C
++}
++# The command a capture runs is the one program the harness starts that is
++# not its own parsing: it gets the caller's LC_ALL back exactly, and not the
++# record. Call this only in the subshell that runs that command.
++vf_caller_locale() {
++  case "${SDD_HARNESS_CALLER_LC_ALL:-}" in
++    unset) unset LC_ALL;;
++    set:*) export LC_ALL="${SDD_HARNESS_CALLER_LC_ALL#set:}";;
++  esac
++  unset SDD_HARNESS_CALLER_LC_ALL
++}
++# vf_caller_env <name> <output>: the caller's value of <name>, written to
++# <output> with status 0; status 1 when the caller has it unset; 3 when the
++# value cannot be written. LC_ALL is the one name the harness changes, so the
++# record of a declared LC_ALL carries the value the caller, and the captured
++# command, has, never the pin's.
++vf_caller_env() {
++  if [[ "$1" == LC_ALL ]]; then
++    case "${SDD_HARNESS_CALLER_LC_ALL:-}" in
++      unset) return 1;;
++      set:*) printf '%s' "${SDD_HARNESS_CALLER_LC_ALL#set:}" > "$2" || return 3; return 0;;
++    esac
++  fi
++  [[ -n "${!1+set}" ]] || return 1
++  printf '%s' "${!1}" > "$2" || return 3
++}
++vf_locale_pin
++
++# The frontmatter reads the harness decides with. lib.sh's fm_get treats every
++# failure as "no value", which is right for its other callers and wrong here: a
++# frontmatter parse that failed read as no verification_contract, and no
++# contract selects the legacy path, which downgrades v1 binding errors to
++# warnings, skips checkpoint coverage, ticks a v1 task on --evidence alone and
++# swaps vf_evidence_current for the legacy check; a failed worktree or branch
++# read skipped the gate's mismatch checks. These read the same block fm_get
++# reads (the lines between an opening `---` on line 1 and the next `---`), keep
++# its value rules (first line setting the key; a quoted value up to its closing
++# quote; otherwise an inline ` #` comment and trailing blanks dropped), and fail
++# with status 3 when the parse fails, so no parse failure reads as a passing
++# result (T030o43).
++vf_fm_value() { # <file> <key> -> the value, or nothing when the key is absent
++  [[ -f "$1" ]] || return 0
++  awk -v key="$2" '# vf_fm_value
++    NR == 1 { if ($0 != "---") exit; next }
++    /^---[[:space:]]*$/ { exit }
++    index($0, key ":") == 1 {
++      v = substr($0, length(key) + 2); sub(/^[[:space:]]+/, "", v)
++      q = substr(v, 1, 1)
++      if (q == "\"" || q == "\047") { v = substr(v, 2); sub(q ".*$", "", v) }
++      else { sub(/[[:space:]]+#.*$/, "", v); sub(/[[:space:]]+$/, "", v) }
++      print v; exit
++    }
++  ' "$1" || { printf 'error: %s: frontmatter could not be read for %s\n' "$1" "$2" >&2; return 3; }
++}
++vf_fm_count() { # <file> <key> -> how many frontmatter lines set the key
++  [[ -f "$1" ]] || { echo 0; return 0; }
++  awk -v name="$2" '# vf_fm_count
++    NR == 1 { if ($0 != "---") exit; next }
++    /^---[[:space:]]*$/ { exit }
++    index($0, name ":") == 1 { n++ }
++    END { print n + 0 }
++  ' "$1" || { printf 'error: %s: frontmatter could not be counted for %s\n' "$1" "$2" >&2; return 3; }
++}
++# vf_ids <ERE> <file|-> -> every distinct match, one per line, sorted. No match
++# is an empty result; a file grep cannot read is status 3. For grep the locale
++# pin is the repair (its decoding failure never shows in its status: it stops
++# matching at the byte and exits 0); this reads every other failure.
++vf_ids() (
++  local out rc
++  out="$(grep -oE -- "$1" "$2")"; rc=$?
++  (( rc < 2 )) || { printf 'error: %s: ids matching %s could not be read\n' "$2" "$1" >&2; return 3; }
++  [[ -n "$out" ]] || return 0
++  printf '%s\n' "$out" | LC_ALL=C sort -u
++)
+ 
+ _vf_reject_nul() { # <file> <display-name>
+   if LC_ALL=C od -An -v -t u1 "$1" | grep -E '(^|[[:space:]])0([[:space:]]|$)' >/dev/null; then
+@@ -399,7 +502,7 @@
+ 
+ vf_bindings() { # <spec-dir> <plan|tasks|through-stage> <stage-or-empty> <output-file>
+   local spec_dir="${1:-}" phase="${2:-}" stage="${3:-}" output="${4:-}"
+-  local spec plan tasks contract contract_count tmpdir records maps inventory
++  local spec plan tasks contract contract_count tmpdir records maps inventory acs reqs
+   local us errors warnings selected stage_list target_found out_tmp
+ 
+   case "$phase" in
+@@ -435,12 +538,12 @@
+     _vf_reject_nul "$tasks" tasks.md || return 1
+   fi
+ 
+-  contract_count="$(frontmatter_block "$spec" | grep -c '^verification_contract:' || true)"
++  contract_count="$(vf_fm_count "$spec" verification_contract)" || return 1
+   if [[ "$contract_count" -gt 1 ]]; then
+     printf 'error: spec.md declares verification_contract more than once\n' >&2
+     return 1
+   fi
+-  contract="$(fm_get "$spec" verification_contract)"
++  contract="$(vf_fm_value "$spec" verification_contract)" || return 1
+   if [[ "$contract_count" -eq 0 ]]; then
+     _vf_catalog_meta "$output" "$phase" legacy "$stage"
+     return $?
+@@ -458,12 +561,19 @@
+   records="$tmpdir/records"; maps="$tmpdir/maps"; inventory="$tmpdir/inventory"
+   : > "$records"; : > "$maps"; : > "$inventory"
+   us=$'\034'
++  # The criteria and requirements spec.md defines, read once and checked: a
++  # short inventory refuses every reference past it, and a failed read says so.
++  if ! acs="$(vf_ids 'AC-[0-9]{3}' "$spec")" || ! reqs="$(vf_ids 'REQ-[0-9]{3}' "$spec")"; then
++    printf 'error: vf_bindings could not read the criteria and requirements of spec.md\n' >&2
++    rm -f "$records" "$maps" "$inventory"; rmdir "$tmpdir" 2>/dev/null || true
++    return 1
++  fi
+ 
+   # Parse only the normative v1 plan tables. Table prose never supplies a
+   # missing field: an explicit contract with a three-column registry is an
+   # error instead of an inferred kind.
+   awk -v OFS="$us" -v mapfile="$maps" \
+-      -v specacs=" $(grep -oE 'AC-[0-9]{3}' "$spec" | sort -u | tr '\n' ' ')" \
++      -v specacs=" ${acs//$'\n'/ } " \
+       "$_VF_AWK_FENCE"'
+     function trim(s) { sub(/^[[:space:]]+/, "", s); sub(/[[:space:]]+$/, "", s); return s }
+     function clean_cell(s) { s=trim(s); gsub(SUBSEP, "|", s); return s }
+@@ -686,8 +796,8 @@
+     fi
+ 
+     awk -F "$us" -v OFS="$us" -v selected="$selected" -v phase="$phase" \
+-        -v specacs=" $(grep -oE 'AC-[0-9]{3}' "$spec" | sort -u | tr '\n' ' ')" \
+-        -v specreqs=" $(grep -oE 'REQ-[0-9]{3}' "$spec" | sort -u | tr '\n' ' ')" \
++        -v specacs=" ${acs//$'\n'/ } " \
++        -v specreqs=" ${reqs//$'\n'/ } " \
+         "$_VF_AWK_FENCE"'
+       function trim(s) { sub(/^[[:space:]]+/,"",s); sub(/[[:space:]]+$/, "", s); return s }
+       function strip_ticks(s) { s=trim(s); if (s ~ /^`.*`$/) { sub(/^`/,"",s); sub(/`$/,"",s) } return s }
+@@ -874,8 +984,14 @@
+     }
+   fi
+ 
+-  errors="$(awk -F "$us" '$1=="D" && $2=="error" {n++} END{print n+0}' "$records")"
+-  warnings="$(awk -F "$us" '$1=="D" && $2=="warning" {n++} END{print n+0}' "$records")"
++  # An empty count is not zero errors: a failed count used to publish a catalog
++  # that carried errors.
++  if ! errors="$(awk -F "$us" '$1=="D" && $2=="error" {n++} END{print n+0}' "$records")" ||
++     ! warnings="$(awk -F "$us" '$1=="D" && $2=="warning" {n++} END{print n+0}' "$records")"; then
++    printf 'error: vf_bindings could not count its diagnostics\n' >&2
++    rm -f "$records" "$maps" "$inventory"; rmdir "$tmpdir" 2>/dev/null || true
++    return 1
++  fi
+   while IFS="$us" read -r tag level message rest; do
+     [[ "$tag" == D ]] || continue
+     printf '%s: %s\n' "$level" "$message" >&2
+@@ -931,7 +1047,7 @@
+ # finding,n,id,class,status,prior,severity,locations,root,trigger,reproduced,blocks
+ # Historical records remain readable and explicitly unclassified.
+ vf_reports() (
+-  local file="$1" gate="$2" output="$3" spec="${4:-}" tmp manifest priorids=' '
++  local file="$1" gate="$2" output="$3" spec="${4:-}" tmp manifest records priorids=' '
+   tmp="$(mktemp "${output}.XXXXXX")" || return 3
+   trap 'rm -f "$tmp"' EXIT
+   [[ -e "$file" ]] || { : > "$output"; return 0; }
+@@ -952,7 +1068,11 @@
+   for manifest in "$spec/notes/verification/reports/$gate-findings-"*.md; do
+     [[ -f "$manifest" ]] || continue
+     _vf_reject_nul "$manifest" "$manifest" || return 3
+-    priorids="$priorids$(awk "$_VF_AWK_FENCE"'
++    # The pass records a finding only at the next Finding heading or at END,
++    # so an awk that dies part-way loses the finding in progress and every one
++    # after it -- the strictest tier and Class binding three guards read. Its
++    # status used to be read by nobody (O-017), so it is read here.
++    awk "$_VF_AWK_FENCE"'
+       function flushm() {if(id!="" && cls!="") print id ":" cls ":" sev; id=""; cls=""; sev=""}
+       vf_quoted($0) {next}
+       /^#+ Finding [A-Z][A-Z0-9]*-[0-9]+[[:space:]]*$/ {flushm(); id=$NF; next}
+@@ -965,7 +1085,10 @@
+         gsub(/[[:space:]]/, "", sev)
+       }
+       END {flushm()}
+-    ' "$manifest" | sort -u | tr '\n' ' ')"
++    ' "$manifest" > "$tmp" || {
++      printf 'report recovery: %s: prior-review manifest could not be parsed; reconcile canonical records\n' "$manifest" >&2; return 3; }
++    records="$(LC_ALL=C sort -u "$tmp")" || return 3
++    [[ -z "$records" ]] || priorids="$priorids${records//$'\n'/ } "
+   done
+   VF_REPORT_FILE="$file" awk -v gate="$gate" -v priorids="$priorids" "$_VF_AWK_FENCE"'
+     function err(s) {print "report recovery: " ENVIRON["VF_REPORT_FILE"] ":" NR ": " s "; reconcile canonical records" > "/dev/stderr"; bad=1}
+@@ -1236,12 +1359,16 @@
+     printf '%s rounds=%s\n' "$gate" "$rounds"
+   done
+   printf 'blocking=%s minor=%s locations=%s unclassified=%s\n' "$blockers" "$minors" "$locations" "$unclassified"
++  # A MET-002 line that could not be computed is a failed tally, never a
++  # silently missing line at exit 0.
+   LC_ALL=C awk -F '\t' '
+     $1!="unclassified" {total[$1]++; if($3=="new" || $3=="reopened") {if(seen[$1]++) recur[$1]++}}
+     END {for(c in total) printf "class=%s findings=%d recurrences=%d\n",c,total[c],recur[c]+0}
+-  ' "$tmp/classes" | LC_ALL=C sort
++  ' "$tmp/classes" > "$tmp/class-lines" || { echo 'tally: the class table could not be computed' >&2; return 3; }
++  LC_ALL=C sort "$tmp/class-lines" || { echo 'tally: the class table could not be sorted' >&2; return 3; }
+   awk -F '\t' '{ids[$1 SUBSEP $2]=1; observations++; if($3=="reopened") reopened++}
+-    END {for(k in ids) distinct++; printf "finding-observations=%d distinct-finding-ids=%d reopened=%d\n", observations,distinct,reopened}' "$tmp/classes"
++    END {for(k in ids) distinct++; printf "finding-observations=%d distinct-finding-ids=%d reopened=%d\n", observations,distinct,reopened}' "$tmp/classes" ||
++    { echo 'tally: the finding observations could not be counted' >&2; return 3; }
+   # A severity downgrade is refused only where it buys a clearing verdict, so
+   # honest re-characterisation stays legal -- which means it must not be
+   # SILENT. Counting it here is the other half of that trade: MET-002 can see
+@@ -1539,7 +1666,7 @@
+         vf_path_record "$repo" "${record#"$repo/"}" "$tmp/path-record" "$tmp" '' || return 3
+         vf_hash "$tmp/path-record" >> "$tmp/extra-hashes" || return 3
+       done < "$tmp/extra"
+-      LC_ALL=C sort "$tmp/extra-hashes" > "$tmp/sorted"
++      LC_ALL=C sort -o "$tmp/sorted" "$tmp/extra-hashes" || { echo "verification inputs: declared directory digests could not be sorted: $path" >&2; return 3; }
+       printf '%s\0' declared-directory "$path" "$(vf_hash "$tmp/sorted")" '' '' '' >> "$tmp/inputs"
+     else vf_path_record "$repo" "$path" "$tmp/inputs" "$tmp" '' || return 3; fi
+   done < "$tmp/config/inputs.nul"
+@@ -1571,11 +1698,11 @@
+   # by the `harness` records, so it added no identity those lack while
+   # invalidating captures on a reordering that changes nothing; SHELL is never
+   # read, because library functions run under an explicit `bash`; LANG and the
+-  # locale categories change no record either: the harness runs under the
+-  # caller's locale, pins `LC_ALL=C` at the sites where collation actually
+-  # matters, and fails closed in a locale that cannot decode the kit's bytes
+-  # (Shift-JIS, or a UTF-8 locale over an invalid byte; T030o42 review), while
+-  # a check whose programs read the locale pins it or declares it; TMPDIR
++  # locale categories change no record either: the harness runs its own
++  # parsing under `LC_ALL=C` (vf_locale_pin above), which decodes every byte
++  # and reads every ASCII grammar the kit writes as any other locale would,
++  # and gives the caller's LC_ALL back to the command a capture runs, while a
++  # check whose programs read the locale pins it or declares it (O-017); TMPDIR
+   # decides where temporary files are written, never what a check concludes.
+   #
+   # A project whose checks genuinely depend on one of these declares it in
+@@ -1587,14 +1714,15 @@
+   # a second process reproduces exactly, which is the cross-invocation property
+   # AC-016 depends on and the reason O-010 blocks.
+   { while IFS= read -r -d '' key; do printf '%s\n' "$key"; done < "$tmp/config/environment.nul"
+-  } | LC_ALL=C sort -u > "$tmp/env-names"
++  } | LC_ALL=C sort -u -o "$tmp/env-names" || { echo 'verification inputs: declared environment names could not be sorted' >&2; return 3; }
+   while IFS= read -r key; do
+     [[ -n "$key" ]] || continue
+-    if [[ -n "${!key+set}" ]]; then
+-      printf '%s\0' environment "$key" present "$(printf '%s' "${!key}" | vf_hash /dev/stdin)" '' '' >> "$tmp/inputs"
+-    else
++    vf_caller_env "$key" "$tmp/env-value"; value=$?
++    if (( value == 0 )); then
++      printf '%s\0' environment "$key" present "$(vf_hash "$tmp/env-value")" '' '' >> "$tmp/inputs"
++    elif (( value == 1 )); then
+       printf '%s\0' environment "$key" unset '' '' '' >> "$tmp/inputs"
+-    fi
++    else echo "verification inputs: declared environment value could not be recorded: $key" >&2; return 3; fi
+   done < "$tmp/env-names"
+   { printf '%s\0' bash; cat "$tmp/config/tools.nul"; } > "$tmp/tools"
+   while IFS= read -r -d '' tool; do
+@@ -1719,7 +1847,7 @@
+   check="$(vf_hash "$staging/check")" || return 3
+   rm "$staging/check"
+   start="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+-  (cd "$cwd" && "$@") > "$staging/output.log" 2>&1
++  (cd "$cwd" && vf_caller_locale && "$@") > "$staging/output.log" 2>&1
+   rc=$?
+   end="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+   if ! after="$(vf_snapshot "$spec" "$repo" "$cwd" "$staging/inputs-after.nul")"; then
+@@ -1826,6 +1954,10 @@
+   trap 'rm -rf "$tmp"' EXIT
+   vf_binding_snapshot "$spec" "$tmp/bindings" || return 3
+   vf_gate_roots "$spec" "$tmp/roots" || return 3
++  # The list is read to a file with its status: a list that stopped early
++  # used to leave completed tasks unchecked.
++  bash "$(dirname -- "${BASH_SOURCE[0]}")/spec-task.sh" list "$spec" > "$tmp/tasks" ||
++    { echo 'current evidence: the task list could not be read' >&2; return 3; }
+   while IFS=$'\t' read -r task state stage subject; do
+     [[ "$state" == "done" ]] || continue
+     # Only exempt true administrative tasks absent from the typed catalog.
+@@ -1834,7 +1966,7 @@
+     vf_snapshot "$spec" "$repo" "$repo" "$tmp/inputs" >/dev/null || return 3
+     if [[ "${VF_TASK[5]}" == manual ]]; then vf_manual_current "$spec" "$task" || return 3
+     else vf_task_current "$spec" "$task" "$tmp/bindings" "$tmp/inputs" || return 3; fi
+-  done < <(bash "$(dirname -- "${BASH_SOURCE[0]}")/spec-task.sh" list "$spec")
++  done < "$tmp/tasks"
+   echo 'current evidence: all completed task checks have valid current captures'
+ )
+ # Parse only an explicit return block. All emitted records have four NUL fields.
+@@ -1907,7 +2039,7 @@
+     if [[ "${f[0]}" == binding && "${f[2]}" == "$task" ]]; then printf '%s\t%s\n' "${f[1]}" "${f[7]}" >> "$tmp/required"; fi
+     f=()
+   done < "$tmp/bindings"
+-  LC_ALL=C sort -u "$tmp/required" > "$tmp/want"
++  LC_ALL=C sort -u -o "$tmp/want" "$tmp/required" || { echo 'return: the required bindings could not be sorted' >&2; return 3; }
+   if [[ -s "$tmp/want" ]]; then
+     if (( none != 0 || ${#mappings[@]} == 0 )); then
+       if (( truncated )); then echo 'return: Failure modes section ended at narrative before any mapping row; keep the rows contiguous' >&2
+@@ -1946,7 +2078,7 @@
+     if [[ "${VF_TASK[5]}" == manual ]]; then [[ "${mappings[i+2]}" == manual ]] || return 3
+     else grep -Fx -- "${mappings[i+2]}" "$tmp/caps" >/dev/null || { echo 'return: mapping names unknown capture' >&2; return 3; }; fi
+   done
+-  LC_ALL=C sort "$tmp/got" > "$tmp/actual"
++  LC_ALL=C sort -o "$tmp/actual" "$tmp/got" || { echo 'return: the returned bindings could not be sorted' >&2; return 3; }
+   if ! cmp -s "$tmp/want" "$tmp/actual"; then
+     if (( truncated )); then echo 'return: Failure modes section ended at narrative before all mapping rows; keep the rows contiguous' >&2
+     else echo 'return: missing, extra, duplicate or unknown FM/INV test binding' >&2; fi
+@@ -2097,11 +2229,11 @@
+   if [[ -z "$declared" ]]; then
+     repo="$(vf_git -C "$spec" rev-parse --show-toplevel 2>/dev/null)" || return 3
+     repo="$(cd "$repo" && pwd -P)" || return 3
+-    expected="$(fm_get "$spec/STATUS.md" worktree 2>/dev/null || :)"
++    expected="$(vf_fm_value "$spec/STATUS.md" worktree)" || return 3
+     if [[ -n "$expected" && "$expected" != none ]]; then
+       [[ -d "$expected" && "$(cd "$expected" && pwd -P)" == "$repo" ]] || { echo 'gate worktree mismatch: reconcile STATUS worktree' >&2; return 3; }
+     fi
+-    branch="$(fm_get "$spec/STATUS.md" branch 2>/dev/null || :)"
++    branch="$(vf_fm_value "$spec/STATUS.md" branch)" || return 3
+     if [[ -n "$branch" && "$branch" != none ]]; then
+       [[ "$(vf_git -C "$repo" symbolic-ref --quiet --short HEAD)" == "$branch" ]] || { echo 'gate branch mismatch' >&2; return 3; }
+     fi
+@@ -2196,6 +2328,10 @@
+     [[ "$(vf_meta_get gate_count)" -gt 0 ]] || { echo "floor gap: missing nonempty gate_checks in $repo/.specify/stack.yml" >&2; return 3; }
+     root_index=$((root_index+1))
+   done < "$tmp/roots.nul"
++  # Read with its status: a list that stopped early used to leave completed
++  # tasks' Verify unrefreshed while the floor sealed.
++  bash "$HUB_DIR/scripts/spec-task.sh" list "$spec" > "$tmp/tasks.tsv" ||
++    { echo 'floor gap: the task list could not be read' >&2; return 3; }
+   while IFS=$'\t' read -r task state stage subject; do
+     [[ "$state" == "done" ]] || continue
+     vf_task_info "$tmp/bindings.nul" "$task" >/dev/null 2>&1 || continue
+@@ -2205,7 +2341,8 @@
+     fi
+     repo="$(vf_gate_task_repo "$spec" "$task" "$tmp/roots.nul")" || return 3
+     vf_gate_execute "$spec" "$tmp/bindings.nul" "$repo" "${VF_TASK[10]}" "$records" "task:$task" -- "$(command -v bash)" -o pipefail -c "$VF_TASK_COMMAND" || return $?
+-  done < <(bash "$HUB_DIR/scripts/spec-task.sh" list "$spec")
++  done < "$tmp/tasks.tsv"
++  rm -f "$tmp/tasks.tsv"
+   IFS= read -r -d '' repo < "$tmp/roots.nul"
+   for command in sdd-analyze spec-ac-coverage spec-evidence; do
+     # AC coverage receives the actual existing worktrees, including umbrellas.
+@@ -2282,7 +2419,7 @@
+   (( found )) || { echo "manual evidence gap: $task needs current artifact-backed acceptance" >&2; return 3; }
+ )
+ vf_coverage_catalog() { # raw selected binding catalog -> fixed triples task,id,locator
+-  local catalog="$1" output="$2" value fields=() id
++  local catalog="$1" output="$2" value fields=() id ids
+   : > "$output"
+   while IFS= read -r -d '' value; do
+     fields+=("$value"); (( ${#fields[@]} == 12 )) || continue
+@@ -2290,9 +2427,10 @@
+       case "${fields[0]}" in
+         binding) printf '%s\0' "${fields[2]}" "${fields[1]}" "${fields[7]}" >> "$output";;
+         test)
+-          while IFS= read -r id; do
+-            [[ -z "$id" ]] || printf '%s\0' "${fields[2]}" "$id" "${fields[7]}" >> "$output"
+-          done < <(printf '%s\n' "${fields[8]}" | grep -oE 'AC-[0-9]{3}' | LC_ALL=C sort -u);;
++          # Checked: a short inventory used to record fewer coverage bindings.
++          ids="$(printf '%s\n' "${fields[8]}" | vf_ids 'AC-[0-9]{3}' -)" ||
++            { echo "checkpoint coverage: the criteria of ${fields[2]} could not be read" >&2; return 3; }
++          for id in $ids; do printf '%s\0' "${fields[2]}" "$id" "${fields[7]}" >> "$output"; done;;
+       esac
+     fi
+     fields=()
+@@ -2305,7 +2443,7 @@
+   done < "$1"
+ }
+ vf_completed_coverage() (
+-  local spec="$1" stage="$2" output="$3" tmp task value fields=() ref receipt found previous
++  local spec="$1" stage="$2" output="$3" tmp task value fields=() ref refs receipt found previous
+   tmp="$(mktemp -d "$spec/notes/verification/coverage.XXXXXX")" || return 3
+   trap 'rm -rf "$tmp"' EXIT
+   vf_bindings "$spec" through-stage "$stage" "$tmp/raw" || return 3
+@@ -2331,12 +2469,14 @@
+         found=1
+       done
+       (( found )) || { echo "checkpoint acceptance gap: $task has no captured acceptance; refresh bootstrap receipt" >&2; return 3; }
+-      while IFS= read -r ref; do
+-        [[ -n "$ref" ]] || continue
++      # Checked: a short inventory used to skip the binding-gap check.
++      refs="$(printf '%s\n' "${fields[8]}" | vf_ids '(AC|FM|INV)-[0-9]{3}' -)" ||
++        { echo "checkpoint coverage: the references of $task could not be read" >&2; return 3; }
++      for ref in $refs; do
+         if ! awk -F '\t' -v task="$task" -v ref="$ref" '$1==task && $2==ref {found=1} END {exit !found}' "$tmp/current"; then
+           echo "checkpoint binding gap: $task $ref has no covering test" >&2; return 3
+         fi
+-      done < <(printf '%s\n' "${fields[8]}" | grep -oE '(AC|FM|INV)-[0-9]{3}' | LC_ALL=C sort -u)
++      done
+     fi
+     fields=()
+   done < "$tmp/raw"
+@@ -2358,7 +2498,11 @@
+   VF_GATE_FRESH="$tmp/fresh"; : > "$VF_GATE_FRESH"; : > "$tmp/commands.nul"
+   vf_gate_roots "$spec" "$tmp/roots.nul" || return 3
+   vf_binding_snapshot "$spec" "$tmp/bindings.nul" || return 3
+-  if [[ "$(fm_get "$spec/spec.md" verification_contract)" == 1 ]]; then
++  # The contract is the one vf_bindings read, checked, and wrote into the
++  # catalog's meta record; no second parser re-derives it (the O-012 rule).
++  local catalog_contract='' i
++  { for ((i=0;i<9;i++)); do IFS= read -r -d '' catalog_contract || { catalog_contract=''; break; }; done; } < "$tmp/bindings.nul"
++  if [[ "$catalog_contract" == 1 ]]; then
+     vf_completed_coverage "$spec" "$stage" "$tmp/coverage.nul" || return 3
+   else
+     echo 'checkpoint legacy warning: missing typed acceptance/bindings may be gaps' >&2
+@@ -2462,6 +2606,9 @@
+   # the line and the clause, so the operator sees WHICH entry failed and WHY.
+   rejects="$(mktemp "${TMPDIR:-/tmp}/vf-waiver.XXXXXX")" || return 4
+   trap 'rm -f "$rejects"' EXIT
++  # Read with its status. A parse that died part-way can only lose
++  # authorizations, which denies, but the refusal then claimed that no
++  # candidate existed; it names the parse instead (O-017).
+   line="$(awk -v gate="$gate" -v round="$round" -v rejects="$rejects" -v gates="$VF_GATES" "$_VF_AWK_FENCE"'
+     # The grammar is the whole line: the UTC stamp is anchored right after the
+     # bullet and nothing may sit between it and the separator, so no permissive
+@@ -2523,7 +2670,10 @@
+       if (kind=="spec-revision" && f[5]!~/^revision=[^;]+$/) {note("refused: revision= is missing, empty or contains \";\""); next}
+       print stamp "\t" kind "\t" (kind=="spec-revision" ? substr(f[5],10) : "none")
+     }
+-  ' "$spec/STATUS.md")"
++  ' "$spec/STATUS.md")" || {
++    echo "round authorization denied: $gate round $round: the Decisions log in STATUS.md could not be parsed, so no authorization was read" >&2
++    return 4
++  }
+   now="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+   while IFS=$'\t' read -r stamp kind revision; do
+     [[ -n "$stamp" ]] || continue
+--- a/scripts/spec-run.sh
++++ b/scripts/spec-run.sh
+@@ -35,6 +35,9 @@
+ 
+ HUB_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+ . "$HUB_DIR/scripts/lib.sh"
++# The kernel pins the harness's own parsing to LC_ALL=C when it loads, so it
++# loads before any program reads a byte of the spec (O-017).
++. "$HUB_DIR/scripts/verification-lib.sh"
+ SPEC_TASK="$HUB_DIR/scripts/spec-task.sh"
+ 
+ usage() { usage_from_header "$0"; exit 0; }
+@@ -79,8 +82,8 @@
+ [[ -d "$RUN_CWD" ]] || { echo "--cwd is not a directory: $RUN_CWD" >&2; exit 2; }
+ 
+ # Versioned capture path is additive; legacy default output/ticking stays below.
+-. "$HUB_DIR/scripts/verification-lib.sh"
+-contract="$(fm_get "$SPEC_DIR/spec.md" verification_contract 2>/dev/null || :)"
++# A frontmatter that cannot be read is a failure, never the legacy path.
++contract="$(vf_fm_value "$SPEC_DIR/spec.md" verification_contract)" || exit 3
+ if [[ -n "$contract" && "$contract" != 1 ]]; then echo 'unsupported verification contract' >&2; exit 3; fi
+ if [[ "$contract" == 1 ]] || (( SUMMARY || FROM_TASK )); then
+   (( FROM_TASK == 0 || ${#CMD[@]} == 0 )) || { echo '--from-task and explicit command are exclusive' >&2; exit 2; }
+@@ -137,7 +140,7 @@
+ echo "\$ $cmd_str" >&2
+ # No `set -e` in this script, so a non-zero command does not abort us — we want
+ # its exit code. Not a pipeline, so pipefail is irrelevant here.
+-( cd "$RUN_CWD" && "${CMD[@]}" ) >"$out" 2>&1
++( cd "$RUN_CWD" && vf_caller_locale && "${CMD[@]}" ) >"$out" 2>&1
+ rc=$?
+ 
+ # Echo the captured output so the operator sees exactly what ran.
+--- a/scripts/spec-task.sh
++++ b/scripts/spec-task.sh
+@@ -25,6 +25,9 @@
+ 
+ HUB_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+ . "$HUB_DIR/scripts/lib.sh"
++# The kernel pins the harness's own parsing to LC_ALL=C when it loads, so it
++# loads before any program reads a byte of the spec (O-017).
++. "$HUB_DIR/scripts/verification-lib.sh"
+ 
+ usage() { usage_from_header "$0"; exit 0; }
+ 
+@@ -119,8 +122,9 @@
+   fm_set "$TASKS" updated "$(date +%Y-%m-%d)" 2>/dev/null || true
+ }
+ 
+-. "$HUB_DIR/scripts/verification-lib.sh"
+-CONTRACT="$(fm_get "$SPEC_DIR/spec.md" verification_contract 2>/dev/null || :)"
++# A frontmatter that cannot be read is a failure, never the legacy path, which
++# would tick a versioned task on --evidence alone.
++CONTRACT="$(vf_fm_value "$SPEC_DIR/spec.md" verification_contract)" || exit 3
+ [[ -z "$CONTRACT" || "$CONTRACT" == 1 ]] || { echo 'unsupported verification contract' >&2; exit 3; }
+ if [[ "$CMD" != list ]]; then
+   [[ "$TASK_ID" =~ ^T[0-9][0-9][0-9][a-z0-9]*$ ]] || { echo 'invalid task ID' >&2; exit 2; }
+--- a/scripts/spec-evidence.sh
++++ b/scripts/spec-evidence.sh
+@@ -32,6 +32,9 @@
+ 
+ HUB_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+ . "$HUB_DIR/scripts/lib.sh"
++# The kernel pins the harness's own parsing to LC_ALL=C when it loads, so it
++# loads before any program reads a byte of the spec (O-017).
++. "$HUB_DIR/scripts/verification-lib.sh"
+ 
+ init_colors
+ usage() { usage_from_header "$0"; exit 0; }
+@@ -48,8 +51,9 @@
+ [[ -f "$TASKS_FILE" ]] || { echo "no tasks.md in $SPEC_DIR" >&2; exit 1; }
+ 
+ # Legacy evidence remains readable; new contracts need current proof by default.
+-. "$HUB_DIR/scripts/verification-lib.sh"
+-if [[ "${2:-}" == --current || "$(fm_get "$SPEC_FILE" verification_contract 2>/dev/null || :)" == 1 ]]; then
++# A frontmatter that cannot be read is a failure, never the legacy check.
++evidence_contract="$(vf_fm_value "$SPEC_FILE" verification_contract)" || exit 3
++if [[ "${2:-}" == --current || "$evidence_contract" == 1 ]]; then
+   vf_evidence_current "$SPEC_DIR"
+   exit $?
+ fi
+@@ -80,7 +84,7 @@
+     line=$0; sub(/^[[:space:]]*-[[:space:]]*\*Evidence[^*]*:\*[[:space:]]*/,"",line); ev=line
+   }
+   END { flush() }
+-' "$TASKS_FILE")"
++' "$TASKS_FILE")" || { fail "tasks.md could not be parsed for its task records"; records=''; }
+ 
+ checked=0
+ while IFS=$'\t' read -r id stage is_gate is_done ev; do
+@@ -108,7 +112,9 @@
+   esac
+ 
+   # 3. named screenshot/PDF artifact must exist on disk
+-  for art in $(printf '%s\n' "$ev" | grep -oiE '[[:graph:]]+\.(png|jpg|jpeg|gif|svg|pdf)' || true); do
++  arts="$(printf '%s\n' "$ev" | grep -oiE '[[:graph:]]+\.(png|jpg|jpeg|gif|svg|pdf)')"; arts_rc=$?
++  (( arts_rc < 2 )) || fail "$id evidence could not be searched for artifact names"
++  for art in $arts; do
+     art="${art%[.,;:)]}"   # trim trailing punctuation
+     if [[ -e "$art" || -e "$SPEC_DIR/$art" || ( -n "$repo_root" && -e "$repo_root/$art" ) ]]; then
+       :
+@@ -118,7 +124,7 @@
+       fail "$id names artifact '$art' in its evidence, but no such file exists"
+     fi
+   done
+-done <<< "$records"
++done < <(printf '%s\n' "$records")
+ 
+ (( checked > 0 )) && pass "$checked ticked task(s) checked for evidence integrity" \
+   || pass "no ticked implementation tasks yet — nothing to verify"
+--- a/scripts/spec-ac-coverage.sh
++++ b/scripts/spec-ac-coverage.sh
+@@ -29,12 +29,15 @@
+ # checkout is resolved via system-map.sh and all are searched.
+ #
+ # Exit: 0 = every AC has >=1 test reference; 1 = one or more ACs unreferenced or
+-#       no root resolvable; 2 = usage.
++#       no root resolvable; 2 = usage; 3 = spec.md could not be read.
+ 
+ set -uo pipefail
+ 
+ HUB_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+ . "$HUB_DIR/scripts/lib.sh"
++# The kernel pins the harness's own parsing to LC_ALL=C when it loads, so it
++# loads before any program reads a byte of the spec, on every path (O-017).
++. "$HUB_DIR/scripts/verification-lib.sh"
+ SYSMAP="$HUB_DIR/scripts/system-map.sh"
+ 
+ init_colors
+@@ -65,7 +68,6 @@
+ [[ -f "$SPEC_FILE" ]] || { echo "no spec.md in $SPEC_DIR" >&2; exit 1; }
+ 
+ if [[ -n "$THROUGH_STAGE" ]]; then
+-  . "$HUB_DIR/scripts/verification-lib.sh"
+   mkdir -p "$SPEC_DIR/notes/verification" || exit 3
+   coverage_tmp="$(mktemp "$SPEC_DIR/notes/verification/coverage-check.XXXXXX")" || exit 3
+   trap 'rm -f "$coverage_tmp"' EXIT
+@@ -125,7 +127,8 @@
+ test_count="$(grep -c . "$TESTS_TMP" || true)"
+ 
+ # --- per-AC coverage --------------------------------------------------------
+-spec_acs="$(grep -oE 'AC-[0-9]{3}' "$SPEC_FILE" | sort -u)"
++# Checked: an empty inventory exits 0 below, so a failed read must not look empty.
++spec_acs="$(vf_ids 'AC-[0-9]{3}' "$SPEC_FILE")" || { echo "${RED}✗${RESET} spec.md could not be read for its AC ids" >&2; exit 3; }
+ [[ -z "$spec_acs" ]] && { echo "${YELLOW}!${RESET} spec.md defines no AC-### ids — nothing to check"; exit 0; }
+ 
+ echo "AC↔test binding for $(basename "$SPEC_DIR")  (roots: ${ROOTS[*]}; $test_count test file(s))"
+--- a/scripts/sdd-analyze.sh
++++ b/scripts/sdd-analyze.sh
+@@ -144,9 +144,13 @@
+ # --- 1b. unresolved clarification markers ---
+ # /sdd:specify and /sdd:plan write [NEEDS CLARIFICATION: …] instead of guessing.
+ # None may survive into tasking/implementation.
+-nc=$(grep -n '\[NEEDS CLARIFICATION' "$spec" "$plan" 2>/dev/null | head -5 || true)
+-if [[ -n "$nc" ]]; then
+-  fail "unresolved [NEEDS CLARIFICATION] marker(s) — resolve before tasking/implementing:"$'\n'"$(echo "$nc" | sed 's/^/      /')"
++# The search's status is read: an absent marker is the passing result, so a
++# search that failed must not read as one (O-017).
++nc="$(grep -n '\[NEEDS CLARIFICATION' "$spec" "$plan")"; nc_rc=$?
++if (( nc_rc > 1 )); then
++  fail "spec.md and plan.md could not be searched for [NEEDS CLARIFICATION] markers (grep exit $nc_rc)"
++elif [[ -n "$nc" ]]; then
++  fail "unresolved [NEEDS CLARIFICATION] marker(s) — resolve before tasking/implementing:"$'\n'"$(printf '%s\n' "$nc" | head -5 | sed 's/^/      /')"
+ else
+   pass "no unresolved [NEEDS CLARIFICATION] markers"
+ fi
+@@ -185,9 +189,10 @@
+ done < <(grep -o '\[EXTERNAL:[^]]*\]' "$spec" 2>/dev/null | sort -u || true)
+ 
+ # --- 2. id inventories ---
+-spec_acs=$(grep -oE 'AC-[0-9]{3}' "$spec" | sort -u)
++# Checked inventories: a short one hides an uncovered AC or a dangling ref.
++spec_acs="$(vf_ids 'AC-[0-9]{3}' "$spec")" || fail "spec.md could not be read for its AC ids"
+ spec_reqs=$(grep -oE 'REQ-[0-9]{3}' "$spec" | sort -u)
+-task_refs=$(grep -oE '(AC|REQ)-[0-9]{3}' "$tasks" | sort -u)
++task_refs="$(vf_ids '(AC|REQ)-[0-9]{3}' "$tasks")" || fail "tasks.md could not be read for its AC and REQ references"
+ 
+ [[ -z "$spec_acs" ]] && fail "spec.md defines no AC-### ids" || pass "spec.md defines $(echo "$spec_acs" | wc -l | tr -d ' ') AC id(s)"
+ [[ -z "$spec_reqs" ]] && warn "spec.md defines no REQ-### ids"
+--- a/templates/verification-contract.md
++++ b/templates/verification-contract.md
+@@ -194,7 +194,10 @@
+ `tests/helpers.sh` for every suite, export `LC_ALL=C` right after clearing
+ `CDPATH`, `BASH_ENV` and `ENV`, and a suite loads `tests/helpers.sh` as its
+ first command, having only resolved its own directory. `LC_ALL` overrides
+-`LANG` and every locale category.
++`LANG` and every locale category. The harness pins its own parsing the same
++way: the kernel exports `LC_ALL=C` when it loads, each harness entry script
++loads it before any program reads a byte of the spec, and the command a
++capture runs gets the caller's `LC_ALL` back exactly.
+ A check that depends on an ignored path declares it under
+ `verification_inputs`; one that reads the dropped lines, or configuration it
+ cannot pin, stays off `reuse_checks`. The kit's own suites read through
+@@ -352,11 +355,13 @@
+ already pinned precisely by each declared tool's resolved path and content
+ digest and by the harness records, `SHELL` is never read because library
+ functions run under an explicit `bash`, `LANG` and the locale categories
+-change no record the harness writes (it runs under the caller's locale, pins
+-`LC_ALL=C` where collation matters, and fails closed in a locale that cannot
+-decode the kit's bytes, such as Shift-JIS, or a UTF-8 locale over an invalid
+-byte), while a check whose programs read them pins them or declares them, as
+-the kit's own reuse-checked commands pin `LC_ALL=C` when they start, and
++change no record the harness writes (it runs its own parsing under
++`LC_ALL=C`, which decodes every byte and reads every ASCII grammar the kit
++writes as any other locale would, and a parse that fails never reads as a
++passing result), while a check whose programs read them pins them or declares
++them, as the kit's own reuse-checked commands pin `LC_ALL=C` when they start;
++the harness gives the caller's `LC_ALL` back to the command a capture runs,
++and the record of a declared `LC_ALL` carries that value, and
+ `TMPDIR` decides where temporary files go, never what a check concludes. A
+ fixed list including them fails the cross-invocation test that matters:
+ `LC_CTYPE` and `LC_ALL` are exported by default by macOS Terminal, OpenSSH
+--- a/tests/helpers.sh
++++ b/tests/helpers.sh
+@@ -538,6 +538,48 @@
+   fi
+   rm -f "$list"
+   return "$rc"
++}
++
++# in_locale <LANG> <command...> — run the command with every LC_* name removed
++# and LANG set, so a fixture can judge a harness under the caller's locale even
++# though this file exports LC_ALL=C for the suite (O-017).
++in_locale() {
++  local l="$1" name args=(); shift
++  for name in $(compgen -e); do case "$name" in LC_*) args+=(-u "$name");; esac; done
++  env ${args[@]+"${args[@]}"} LANG="$l" "$@"
++}
++
++# locale_hostile <LANG> — true when an UNPINNED awk cannot decode the bytes
++# 0x92 0x20 under that locale, which no UTF-8 and no Shift-JIS locale can on
++# macOS (awk dies with "towc: multibyte conversion failure"). A locale fixture
++# checks this first, so it cannot pass on a locale that was never live.
++locale_hostile() {
++  ! printf '\222 a\n' | in_locale "$1" awk '/a/ {n++} END {print n}' >/dev/null 2>&1
++}
++
++# fault_bin <dir> <program> <marker>... — write <dir>/<program>, which runs the
++# real one unless EVERY marker is found among its arguments (a marker matches
++# any argument containing it; a marker "=x" matches only an argument that is
++# exactly x), and then prints nothing and exits 2: a parser that died before
++# its output reached the reader, as macOS awk dies at a byte it cannot decode.
++# Put <dir> first on PATH for the one command under test (T030o43).
++fault_bin() {
++  local dir="$1" prog="$2" real m; shift 2
++  real="$(command -v "$prog")" || return 1
++  mkdir -p "$dir" || return 1
++  {
++    printf '#!/bin/bash\n'
++    printf 'hit=1\n'
++    for m in "$@"; do
++      if [[ "$m" == =* ]]; then
++        printf 'f=0; for a in "$@"; do [[ "$a" == %q ]] && f=1; done; (( f )) || hit=0\n' "${m#=}"
++      else
++        printf 'f=0; for a in "$@"; do case "$a" in *%q*) f=1;; esac; done; (( f )) || hit=0\n' "$m"
++      fi
++    done
++    printf 'if (( hit )); then printf "%%s\\n" "%s: injected fault" >&2; exit 2; fi\n' "$prog"
++    printf 'exec %q "$@"\n' "$real"
++  } > "$dir/$prog" && chmod +x "$dir/$prog"
+ }
+ 
+ # --- runner --------------------------------------------------------------------
+--- a/tests/test-gate-contracts.sh
++++ b/tests/test-gate-contracts.sh
+@@ -951,9 +951,65 @@
+     "$valid" > "$spec/notes/opponent.md"
+   run_rc 3 bash "$SCRIPTS/spec-gate.sh" tally "$spec"
+   assert_contains "$OUT" 'unclosed HTML comment' 'AC-012: unclosed comment had no END diagnostic'
++}
++
++# AC-012/AC-017/FM-019 — O-017, round 12, harness-locale-decoding. The harness
++# parses a prior-review manifest under LC_ALL=C whatever the caller's locale,
++# so a byte the caller's locale cannot decode no longer kills the pass that
++# seeds a finding's strictest tier and its Class. Each locale is first proved
++# live, one an unpinned awk cannot decode the byte under; then the same bytes
++# are refused exactly as under C: a CLEARED round resting on a lowered tier of a
++# manifest-recorded blocking finding, and a Class the manifest bound.
++report_manifest_locale_cases() {
++  local spec report l
++  spec="$SANDBOX/manifest-locale"; report="$spec/notes/opponent.md"
++  mkdir -p "$spec/notes/verification/reports"
++  # 0x92 0x20: a cp1252 apostrophe and a space, which no UTF-8 and no
++  # Shift-JIS locale decodes.
++  printf '# Prior review\n\n### Finding G-042\n- **Class:** tier-binding\n- **Severity:** data-loss\n- **Scenario:** the operator\222 s key vanished\n' \
++    > "$spec/notes/verification/reports/opponent-findings-review.md"
++  for l in C en_US.UTF-8 de_DE.UTF-8 C.UTF-8 ja_JP.SJIS; do
++    if [[ "$l" != C && "$(uname -s)" == Darwin ]] && ! locale_hostile "$l"; then
++      t_fail "AC-012: precondition: $l is not a locale an unpinned awk fails to decode 0x92 0x20 under (O-017)"
++      continue
++    fi
++    tier_round_fixture 1 '' G-042:tier-binding:open:minor > "$report"
++    run_rc 3 in_locale "$l" bash -c '. "$1"; vf_reports "$2" opponent "$3" "$4"' _ \
++      "$SCRIPTS/verification-lib.sh" "$report" "$SANDBOX/manifest-locale.nul" "$spec"
++    assert_contains "$OUT" 'clearing verdict rests on 1 lowered severity tier(s) of known findings' \
++      "AC-012: a CLEARED round rested on a lowered manifest tier under LANG=$l (O-017)"
++    tier_round_fixture 1 '' G-042:silent-data-loss:open:wrong-result > "$report"
++    run_rc 3 in_locale "$l" bash -c '. "$1"; vf_reports "$2" opponent "$3" "$4"' _ \
++      "$SCRIPTS/verification-lib.sh" "$report" "$SANDBOX/manifest-locale.nul" "$spec"
++    assert_contains "$OUT" 'finding G-042 changes Class from tier-binding to silent-data-loss' \
++      "AC-012: a Class the manifest bound changed under LANG=$l (O-017)"
++  done
++  # The status half (T030o43): a manifest pass that dies is refused by name,
++  # never read as a manifest that records nothing.
++  fault_bin "$SANDBOX/fault-manifest" awk 'function flushm'
++  tier_round_fixture 1 '' G-042:tier-binding:open:minor > "$report"
++  run_rc 3 env PATH="$SANDBOX/fault-manifest:$PATH" bash -c '. "$1"; vf_reports "$2" opponent "$3" "$4"' _ \
++    "$SCRIPTS/verification-lib.sh" "$report" "$SANDBOX/manifest-locale.nul" "$spec"
++  assert_contains "$OUT" 'prior-review manifest could not be parsed' \
++    'AC-012: a manifest pass that died was read as a manifest recording nothing (O-017)'
++  # MET-002's lines are computed with their status read, so a tally line
++  # that could not be computed fails the tally instead of going missing.
++  spec="$SANDBOX/tally-fault"; mkdir -p "$spec/notes"
++  tier_round_fixture 1 '' G-042:tier-binding:new:data-loss > "$spec/notes/opponent.md"
++  run_rc 0 bash "$SCRIPTS/spec-gate.sh" tally "$spec"
++  assert_contains "$OUT" 'class=tier-binding findings=1 recurrences=0' 'fixture: the tally class table'
++  fault_bin "$SANDBOX/fault-tally-class" awk 'recur[$1]'
++  run_rc 3 env PATH="$SANDBOX/fault-tally-class:$PATH" bash "$SCRIPTS/spec-gate.sh" tally "$spec"
++  assert_contains "$OUT" 'tally: the class table could not be computed' \
++    'AC-017: a class table that could not be computed went missing from the tally (O-017)'
++  fault_bin "$SANDBOX/fault-tally-obs" awk 'distinct++'
++  run_rc 3 env PATH="$SANDBOX/fault-tally-obs:$PATH" bash "$SCRIPTS/spec-gate.sh" tally "$spec"
++  assert_contains "$OUT" 'tally: the finding observations could not be counted' \
++    'AC-017: finding observations that could not be counted went missing from the tally (O-017)'
+ }
+ 
+ test_reports_and_tally() {
++  report_manifest_locale_cases
+   matrix_runtime_cases
+   cost_metric_cases
+   report_prior_binding_cases
+--- a/tests/test-verification.sh
++++ b/tests/test-verification.sh
+@@ -381,8 +381,92 @@
+   kit_copy_cases
+   reuse_command_input_cases
+   reuse_command_locale_cases
++  harness_locale_cases
+   fixture_repository_cases
+ 
++}
++
++# locale_probe_bin <dir> <log> — an awk and a grep first on PATH that append
++# "<program> <LC_ALL as they see it>" to <log> and then run the real program.
++locale_probe_bin() {
++  local dir="$1" log="$2" p
++  mkdir -p "$dir" || return 1
++  for p in awk grep; do
++    printf '#!/bin/bash\nprintf "%%s %%s\\n" %q "${LC_ALL-<unset>}" >> %q\nexec %q "$@"\n' \
++      "$p" "$log" "$(command -v "$p")" > "$dir/$p" && chmod +x "$dir/$p" || return 1
++  done
++}
++
++# AC-020/FM-010/FM-014/INV-001 — O-017, round 12. The harness runs its own
++# parsing under LC_ALL=C whoever calls it: every harness entry script, started
++# from a shell in another locale, runs its programs under C. The one program a
++# harness starts that is not its own parsing, the command a capture runs, gets
++# the caller's LC_ALL back exactly (unset, empty or a value) and never the
++# record the harness keeps it in. The record of a declared LC_ALL carries the
++# caller's value, so two caller values are two identities. And the kernel's sorts whose
++# output the identity hashes read their status (T030o43).
++harness_locale_cases() {
++  local spec repo probe seen entry v want args legacy
++  spec="$(make_verification_git_dir harnesslocale)"
++  repo="$(cd "$spec/../../.." && pwd -P)"
++  probe="$SANDBOX/locale-probe"; seen="$SANDBOX/locale-seen"
++  locale_probe_bin "$probe" "$seen" || t_fail 'fixture: locale probe'
++  for entry in 'sdd-analyze.sh|spec' 'spec-ac-coverage.sh|spec' 'spec-evidence.sh|spec' \
++      'spec-task.sh|list spec' 'spec-gate.sh|tally spec' 'spec-run.sh|spec T001 --no-tick --summary -- true'; do
++    : > "$seen"
++    args=(); for v in ${entry#*|}; do [[ "$v" == spec ]] && v="$spec"; args+=("$v"); done
++    ( cd "$repo" && in_locale en_US.UTF-8 env LC_ALL=en_US.UTF-8 PATH="$probe:$PATH" \
++        bash "$SCRIPTS/${entry%%|*}" "${args[@]}" ) > "$SANDBOX/locale-entry.out" 2>&1
++    [[ -s "$seen" ]] || t_fail "fixture: ${entry%%|*} ran no awk and no grep"
++    assert_eq '' "$(grep -v ' C$' "$seen")" \
++      "AC-020: ${entry%%|*} ran a program of its own under the caller's locale (O-017)"
++  done
++  # The captured command: the caller's LC_ALL, exactly, and not the record.
++  for v in unset empty en_US.UTF-8; do
++    case "$v" in unset) args=(-u LC_ALL); want='<unset>';; empty) args=(LC_ALL=); want='';; *) args=(LC_ALL="$v"); want="$v";; esac
++    run_rc 0 in_locale C env "${args[@]}" "$SCRIPTS/spec-run.sh" "$spec" T001 --cwd "$repo" --no-tick --summary -- \
++      bash -c 'printf "seen=%s record=%s\n" "${LC_ALL-<unset>}" "${SDD_HARNESS_CALLER_LC_ALL-<unset>}"'
++    assert_contains "$OUT" "key=seen=$want record=<unset> exit=0" \
++      "AC-020: a captured command did not get the caller's LC_ALL ($v) back (O-017)"
++  done
++  # The legacy run restores it too.
++  legacy="$SANDBOX/legacy-run/.specify/specs/001-legacy"; mkdir -p "$legacy"
++  printf -- '---\nspec: 001-legacy\nstatus: accepted\n---\n\n- AC-001: legacy criterion\n' > "$legacy/spec.md"
++  printf -- '---\nspec: 001-legacy\n---\n\n## Backend\n\n- [ ] **T001** — Legacy task\n  - *Acceptance:* legacy\n' > "$legacy/tasks.md"
++  run_rc 0 in_locale C env LC_ALL=en_US.UTF-8 "$SCRIPTS/spec-run.sh" "$legacy" T001 --no-tick -- \
++    bash -c 'printf "legacy-seen=%s\n" "${LC_ALL-<unset>}"'
++  assert_contains "$(cat "$legacy/notes/evidence.md")" 'legacy-seen=en_US.UTF-8' \
++    "AC-020: the legacy run did not get the caller's LC_ALL back (O-017)"
++  # The record of a declared LC_ALL carries the caller's value.
++  printf "verification_environment:\n  - 'LC_ALL'\n" >> "$repo/.specify/stack.yml"
++  for v in en_US.UTF-8 de_DE.UTF-8; do
++    run_rc 0 in_locale C env LC_ALL="$v" bash -c '. "$1"; vf_snapshot "$2" "$3" "$3" "$4"' _ \
++      "$SCRIPTS/verification-lib.sh" "$spec" "$repo" "$SANDBOX/declared-$v.nul"
++  done
++  want="$(printf '%s' en_US.UTF-8 | bash -c '. "$1"; vf_hash /dev/stdin' _ "$SCRIPTS/verification-lib.sh")"
++  assert_contains "$(tr '\000' '\n' < "$SANDBOX/declared-en_US.UTF-8.nul" | paste - - - - - -)" \
++    "environment	LC_ALL	present	$want" "AC-020: a declared LC_ALL was not hashed by the caller's value (O-017)"
++  cmp -s "$SANDBOX/declared-en_US.UTF-8.nul" "$SANDBOX/declared-de_DE.UTF-8.nul" &&
++    t_fail "AC-020: two caller values of a declared LC_ALL gave one identity (O-017)"
++  # The sorts whose output the identity hashes read their status.
++  fault_bin "$SANDBOX/fault-env-names" sort 'env-names'
++  run_rc 3 env PATH="$SANDBOX/fault-env-names:$PATH" bash -c '. "$1"; vf_snapshot "$2" "$3" "$3" "$4"' _ \
++    "$SCRIPTS/verification-lib.sh" "$spec" "$repo" "$SANDBOX/declared-fault.nul"
++  assert_contains "$OUT" 'declared environment names could not be sorted' \
++    'AC-020: a declared name list that could not be sorted left the declared names unhashed (O-017)'
++  awk '$0 == "verification_inputs: []" {print "verification_inputs:"; print "  - \047docs\047"; next} {print}' \
++    "$repo/.specify/stack.yml" > "$SANDBOX/stack-dir"
++  cp "$SANDBOX/stack-dir" "$repo/.specify/stack.yml"
++  printf 'declared\n' > "$repo/docs/member.txt"
++  run_rc 0 snapshot_fixture "$spec" "$repo" "$SANDBOX/declared-dir.nul"
++  assert_contains "$(tr '\000' '\n' < "$SANDBOX/declared-dir.nul")" 'declared-directory' 'fixture: the declared directory'
++  # The marker names the file by its prefix: the full name beside PATH on the
++  # next line would read to the O-010 scan as a membership claim.
++  fault_bin "$SANDBOX/fault-extra" sort '/extra-h'
++  run_rc 3 env PATH="$SANDBOX/fault-extra:$PATH" bash -c '. "$1"; vf_snapshot "$2" "$3" "$3" "$4"' _ \
++    "$SCRIPTS/verification-lib.sh" "$spec" "$repo" "$SANDBOX/declared-dir-fault.nul"
++  assert_contains "$OUT" 'declared directory digests could not be sorted: docs' \
++    'AC-020: declared directory digests that could not be sorted were hashed anyway (O-017)'
+ }
+ 
+ # O-015 review: the reuse-checked commands themselves read only what the input
+--- a/tests/test-spec-gate.sh
++++ b/tests/test-spec-gate.sh
+@@ -24,9 +24,69 @@
+     fi
+   done
+   printf '%s\n' "$count"
++}
++
++# AC-022/FM-010/INV-001 — T030o43. Acceptance reads its own parsers' status:
++# the required bindings, the returned bindings and the frontmatter that picks
++# the contract. A sort that failed used to leave the required set empty, and a
++# return owing FM rows was then accepted as `none`; a frontmatter that could
++# not be read chose the legacy path, which ticks a versioned task on
++# --evidence alone. And a declared LC_ALL is one identity through the exec
++# chain `spec-gate.sh accept` takes (O-017): the caller's value, not the pin.
++acceptance_parse_fault_cases() {
++  local spec repo cap f before evidence_before
++  spec="$(make_verification_git_dir acceptfault)"
++  repo="$(cd "$spec/../../.." && pwd -P)"
++  run_rc 0 "$SCRIPTS/spec-run.sh" "$spec" T001 --cwd "$repo" --from-task --no-tick --summary
++  cap="$(printf '%s' "$OUT" | sed -n 's/^capture=\([^ ]*\).*/\1/p')"
++  { printf 'Verification-Return: 1\nTask: T001\nCaptures: %s\nSummary: ' "$cap"
++    cat "$spec/notes/captures/$cap/summary.txt"
++    printf 'Failure modes: none\n'; } > "$SANDBOX/none-return.txt"
++  before="$(cat "$spec/tasks.md")"
++  run_rc 3 "$SCRIPTS/spec-gate.sh" accept "$spec" T001 "$SANDBOX/none-return.txt"
++  assert_contains "$OUT" 'required Failure modes are missing' 'fixture: a return owing FM-001 claims none'
++  f="$SANDBOX/fault-required"; fault_bin "$f" sort '/required'
++  run_rc 3 env PATH="$f:$PATH" "$SCRIPTS/spec-gate.sh" accept "$spec" T001 "$SANDBOX/none-return.txt"
++  assert_contains "$OUT" 'the required bindings could not be sorted' \
++    'AC-022: a required-binding sort that failed accepted a return owing FM rows as none (T030o43)'
++  assert_eq "$before" "$(cat "$spec/tasks.md")" 'AC-022: a failed sort changed tasks bytes'
++  accept_return "$spec" T001 "$cap" "$SANDBOX/good-return.txt"
++  f="$SANDBOX/fault-got"; fault_bin "$f" sort '/got'
++  run_rc 3 env PATH="$f:$PATH" "$SCRIPTS/spec-gate.sh" accept "$spec" T001 "$SANDBOX/good-return.txt"
++  assert_contains "$OUT" 'the returned bindings could not be sorted' \
++    'AC-022: a returned-binding sort that failed was not refused by name (T030o43)'
++  assert_eq "$before" "$(cat "$spec/tasks.md")" 'AC-022: a failed sort changed tasks bytes'
++  # The contract read. The awk fault reaches the checked reader and the sed
++  # fault reaches lib.sh's fm_get, so either reader, failing, is caught.
++  f="$SANDBOX/fault-contract"
++  fault_bin "$f" awk 'key=verification_contract'; fault_bin "$f" sed '^verification_contract:'
++  run_rc 3 env PATH="$f:$PATH" "$SCRIPTS/spec-task.sh" "done" "$spec" T002 --evidence fabricated
++  assert_contains "$OUT" 'frontmatter could not be read for verification_contract' \
++    'AC-022: an unreadable frontmatter let spec-task.sh tick a versioned task on --evidence (T030o43)'
++  assert_eq "$before" "$(cat "$spec/tasks.md")" 'AC-022: an unreadable frontmatter changed tasks bytes'
++  evidence_before="$(cat "$spec/notes/evidence.md")"
++  run_rc 3 env PATH="$f:$PATH" "$SCRIPTS/spec-run.sh" "$spec" T002 --cwd "$repo" --no-tick -- true
++  assert_contains "$OUT" 'frontmatter could not be read for verification_contract' \
++    'AC-022: an unreadable frontmatter sent spec-run.sh down the legacy path (T030o43)'
++  assert_eq "$evidence_before" "$(cat "$spec/notes/evidence.md")" 'AC-022: the legacy path recorded a run'
++  # A declared LC_ALL through spec-gate.sh accept, which execs spec-task.sh.
++  spec="$(make_verification_git_dir acceptlocale)"
++  repo="$(cd "$spec/../../.." && pwd -P)"
++  printf "verification_environment:\n  - 'LC_ALL'\n" >> "$repo/.specify/stack.yml"
++  run_rc 0 in_locale C env LC_ALL=en_US.UTF-8 "$SCRIPTS/spec-run.sh" "$spec" T001 --cwd "$repo" --from-task --no-tick --summary
++  cap="$(printf '%s' "$OUT" | sed -n 's/^capture=\([^ ]*\).*/\1/p')"
++  accept_return "$spec" T001 "$cap" "$SANDBOX/locale-return.txt"
++  before="$(cat "$spec/tasks.md")"
++  run_rc 3 in_locale C env LC_ALL=de_DE.UTF-8 "$SCRIPTS/spec-gate.sh" accept "$spec" T001 "$SANDBOX/locale-return.txt"
++  assert_contains "$OUT" 'capture stale' 'AC-022: another caller LC_ALL accepted a capture its identity does not hash (O-017)'
++  assert_eq "$before" "$(cat "$spec/tasks.md")" 'AC-022: a stale capture changed tasks bytes'
++  run_rc 0 in_locale C env LC_ALL=en_US.UTF-8 "$SCRIPTS/spec-gate.sh" accept "$spec" T001 "$SANDBOX/locale-return.txt"
++  assert_contains "$OUT" 'accept accepted' \
++    "AC-022: through the exec chain of spec-gate.sh accept, the record of a declared LC_ALL carried the pin, not the caller's value (O-017)"
+ }
+ 
+ test_acceptance() {
++  acceptance_parse_fault_cases
+   local spec repo cap original bad before file receipt rejected_before
+   spec="$(make_verification_git_dir acceptance)"
+   repo="$(cd "$spec/../../.." && pwd -P)"
+@@ -326,7 +386,69 @@
+   printf '%s\n' "$kit/scripts/spec-gate.sh"
+ }
+ 
++# AC-007/FM-014/INV-001 — T030o43 and O-017's checker sibling. The floor, the
++# evidence check and spec-ac-coverage.sh read their own parsers' status: a
++# task list, a worktree or branch frontmatter, or a spec inventory that could
++# not be read fails them by name, where each used to read as no completed
++# tasks, no recorded worktree, or a spec with nothing to check. And an AC id
++# after a byte the caller's locale cannot decode is still an AC id (the pin).
++floor_parse_fault_cases() {
++  local spec repo cli f key legacy
++  spec="$(make_verification_git_dir floorfault)"
++  repo="$(cd "$spec/../../.." && pwd -P)"
++  cli="$(floor_fixture "$spec")"
++  f="$SANDBOX/fault-list"; fault_bin "$f" awk 'is_gate = 0; proof_kind = 0; next'
++  run_rc 3 env PATH="$f:$PATH" bash "$cli" floor "$spec"
++  assert_contains "$OUT" 'floor gap: the task list could not be read' \
++    "AC-007: a task list that could not be read left completed tasks' Verify unrefreshed (T030o43)"
++  run_rc 3 env PATH="$f:$PATH" bash "$SCRIPTS/spec-evidence.sh" "$spec"
++  assert_contains "$OUT" 'current evidence: the task list could not be read' \
++    'AC-007: a task list that could not be read left completed tasks unchecked (T030o43)'
++  for key in worktree branch; do
++    f="$SANDBOX/fault-$key"; fault_bin "$f" awk "key=$key"; fault_bin "$f" sed "^$key:"
++    run_rc 3 env PATH="$f:$PATH" bash "$cli" floor "$spec"
++    assert_contains "$OUT" "frontmatter could not be read for $key" \
++      "AC-007: an unreadable $key skipped the gate's mismatch check (T030o43)"
++  done
++  f="$SANDBOX/fault-contract-evidence"
++  fault_bin "$f" awk 'key=verification_contract'; fault_bin "$f" sed '^verification_contract:'
++  run_rc 3 env PATH="$f:$PATH" bash "$SCRIPTS/spec-evidence.sh" "$spec"
++  assert_contains "$OUT" 'frontmatter could not be read for verification_contract' \
++    'AC-007: an unreadable frontmatter swapped the current-evidence check for the legacy one (T030o43)'
++  cp "$spec/spec.md" "$SANDBOX/floorfault-spec"
++  printf '\n- \222 AC-998 is a criterion no test names\n' >> "$spec/spec.md"
++  if [[ "$(uname -s)" == Darwin && -n "$(printf '\222 AC-998\n' | in_locale en_US.UTF-8 grep -oE 'AC-[0-9]{3}')" ]]; then
++    t_fail 'AC-007: precondition: an unpinned grep under en_US.UTF-8 must miss an id after 0x92 0x20 (O-017)'
++  fi
++  run_rc 1 in_locale en_US.UTF-8 bash "$SCRIPTS/spec-ac-coverage.sh" "$spec"
++  assert_contains "$OUT" 'AC-998 — no test file names it' \
++    'AC-007: spec-ac-coverage.sh read no AC id after an undecodable byte under en_US.UTF-8 (O-017)'
++  cp "$SANDBOX/floorfault-spec" "$spec/spec.md"
++  f="$SANDBOX/fault-acs"; fault_bin "$f" grep 'AC-[0-9]{3}'
++  run_rc 3 env PATH="$f:$PATH" bash "$SCRIPTS/spec-ac-coverage.sh" "$spec"
++  assert_contains "$OUT" 'spec.md could not be read for its AC ids' \
++    'AC-007: an AC inventory that could not be read let spec-ac-coverage.sh find nothing to check (T030o43)'
++  # The legacy evidence check reads its task records and artifact names.
++  legacy="$SANDBOX/legacy-evidence/.specify/specs/001-legacy"; mkdir -p "$legacy"
++  printf -- '---\nspec: 001-legacy\nstatus: accepted\n---\n\n- AC-001: legacy criterion\n' > "$legacy/spec.md"
++  printf -- '---\nspec: 001-legacy\n---\n\n## Backend\n\n- [x] **T001** — Legacy task\n  - *Acceptance:* legacy\n' > "$legacy/tasks.md"
++  run_rc 1 bash "$SCRIPTS/spec-evidence.sh" "$legacy"
++  assert_contains "$OUT" 'T001 is [x] with no *Evidence:* line' 'fixture: the legacy evidence check'
++  f="$SANDBOX/fault-records"; fault_bin "$f" awk 'is_done = ($0 ~ /^- \[[xX]\]/) ? 1 : 0'
++  run_rc 1 env PATH="$f:$PATH" bash "$SCRIPTS/spec-evidence.sh" "$legacy"
++  assert_contains "$OUT" 'tasks.md could not be parsed for its task records' \
++    'AC-007: task records that could not be parsed read as no ticked tasks (T030o43)'
++  printf '  - *Evidence:* screenshot shots/missing.png\n' >> "$legacy/tasks.md"
++  run_rc 1 bash "$SCRIPTS/spec-evidence.sh" "$legacy"
++  assert_contains "$OUT" "names artifact 'shots/missing.png'" 'fixture: the legacy artifact check'
++  f="$SANDBOX/fault-artifacts"; fault_bin "$f" grep 'png|jpg'
++  run_rc 1 env PATH="$f:$PATH" bash "$SCRIPTS/spec-evidence.sh" "$legacy"
++  assert_contains "$OUT" 'T001 evidence could not be searched for artifact names' \
++    'AC-007: artifact names that could not be searched read as none named (T030o43)'
++}
++
+ test_floor() {
++  floor_parse_fault_cases
+   local spec repo gate id records check
+   spec="$(make_verification_git_dir floor)"
+   repo="$(cd "$spec/../../.." && pwd -P)"
+@@ -359,10 +481,35 @@
+   assert_contains "$OUT" 'worktree mismatch'
+   rm -f "$SANDBOX/"*-count
+   reuse_floor_cases
++}
++
++# AC-008/FM-012/INV-004 — T030o43. The completed-through coverage reads its
++# inventories with their status: criteria or references that could not be
++# read used to record fewer coverage bindings and skip the binding-gap check,
++# and the checkpoint sealed.
++checkpoint_parse_fault_cases() {
++  local spec repo cap f
++  spec="$(make_verification_git_dir checkpointfault)"
++  repo="$(cd "$spec/../../.." && pwd -P)"
++  run_rc 0 "$SCRIPTS/spec-run.sh" "$spec" T001 --cwd "$repo" --from-task --no-tick --summary
++  cap="$(printf '%s' "$OUT" | sed -n 's/^capture=\([^ ]*\).*/\1/p')"
++  accept_return "$spec" T001 "$cap" "$SANDBOX/checkpoint-return"
++  run_rc 0 "$SCRIPTS/spec-gate.sh" accept "$spec" T001 "$SANDBOX/checkpoint-return"
++  f="$SANDBOX/fault-criteria"; fault_bin "$f" grep 'AC-[0-9]{3}' '=-'
++  run_rc 3 env PATH="$f:$PATH" "$SCRIPTS/spec-gate.sh" checkpoint "$spec" Backend
++  assert_contains "$OUT" 'checkpoint coverage: the criteria of T001 could not be read' \
++    'AC-008: criteria that could not be read recorded fewer coverage bindings (T030o43)'
++  f="$SANDBOX/fault-refs"; fault_bin "$f" grep '(AC|FM|INV)-[0-9]{3}' '=-'
++  run_rc 3 env PATH="$f:$PATH" "$SCRIPTS/spec-gate.sh" checkpoint "$spec" Backend
++  assert_contains "$OUT" 'checkpoint coverage: the references of T001 could not be read' \
++    'AC-008: references that could not be read skipped the binding-gap check (T030o43)'
++  run_rc 0 "$SCRIPTS/spec-gate.sh" checkpoint "$spec" Backend
++  assert_contains "$OUT" 'completed-task coverage checked' 'fixture: the checkpoint seals unfaulted'
+ }
+ 
+ # AC-008: completed-through proof and retained bindings gate the next stage.
+ test_checkpoints() {
++  checkpoint_parse_fault_cases
+   local spec repo cap checkpoint observed start end
+   spec="$(make_verification_git_dir checkpoint)"
+   repo="$(cd "$spec/../../.." && pwd -P)"
+@@ -504,7 +651,53 @@
+ 
+ # AC-009: both gates reserve/count canonical invocations; exact authorization
+ # consumes one round only. A pending invocation is never silently reset.
++# AC-009/AC-012/FM-016 — O-017, end to end through the shipped entrypoint. A
++# CLEARED completion over a manifest line the caller's locale cannot decode is
++# refused as under C; a waiver below such a line in the Decisions log still
++# authorizes; and a Decisions parse that dies is refused by name, never
++# reported as a log with no candidate (T030o43).
++round_locale_cases() {
++  local spec cli res src floor stamp status f
++  spec="$(make_verification_git_dir roundlocale)"
++  cli="$(floor_fixture "$spec")"
++  run_rc 0 bash "$cli" floor "$spec"
++  run_rc 0 bash "$cli" round "$spec" opponent
++  res="$OUT"
++  src="$(printf '%s' "$res" | sed -n 's/.* source=\([^ ]*\).*/\1/p')"
++  floor="$(printf '%s' "$res" | sed -n 's/.* floor=\([^ ]*\).*/\1/p')"
++  stamp="$(printf '%s' "$res" | sed -n 's/.* reserved=\([^ ]*\).*/\1/p')"
++  mkdir -p "$spec/notes/verification/reports"
++  printf '# Prior review\n\n### Finding G-042\n- **Class:** tier-binding\n- **Severity:** data-loss\n- **Scenario:** the operator\222 s key vanished\n' \
++    > "$spec/notes/verification/reports/opponent-findings-review.md"
++  { printf '## Round 1\n**Round:** 1\n**Timestamp:** %s\n**Source:** %s\n**Floor:** %s\n' "$stamp" "$src" "$floor"
++    printf '**Verdict:** CLEARED\n**Blocking:** 0 · **Minor:** 1\n### What I attacked\nManifest tier binding read across a locale.\n'
++    printf '### Finding G-042\n- **Class:** tier-binding\n- **Status:** open\n- **Prior:** none\n- **Severity:** minor\n'
++    printf -- '- **Scenario:** a recorded trigger\n- **Where:** scripts/run.sh:9\n- **Reproduced:** concrete trigger at that site\n'
++    printf -- '- **Root cause:** implementation-error\n- **Blocks:** AC-012\n- **Wrong behavior:** observed versus required\n'
++    printf -- '- **Class-wide fix:** read the manifest under C\n### Held up / follow-up tasks\nFixture disposition recorded.\n'
++    printf '<!-- gate-round-end: opponent:1 -->\n'; } > "$SANDBOX/locale-report.md"
++  if [[ "$(uname -s)" == Darwin ]] && ! locale_hostile en_US.UTF-8; then
++    t_fail 'AC-009: precondition: en_US.UTF-8 is not a locale an unpinned awk fails to decode 0x92 0x20 under (O-017)'
++  fi
++  run_rc 3 in_locale en_US.UTF-8 bash "$cli" round "$spec" opponent --complete "$SANDBOX/locale-report.md"
++  assert_contains "$OUT" 'clearing verdict rests on 1 lowered severity tier(s) of known findings' \
++    'AC-009: a CLEARED completion over an undecodable manifest line sealed under en_US.UTF-8 (O-017)'
++  status="$SANDBOX/waiver-locale"; mkdir -p "$status"
++  printf -- '---\nspec: w\n---\n\n## Decisions log\n\n- 2026-09-06 — a note carrying a \222 byte\n- %s — waiver: gate=opponent; round=4; after=3; by=fixture; reason=fixture authorization\n' \
++    "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > "$status/STATUS.md"
++  run_rc 0 in_locale en_US.UTF-8 bash -c '. "$1"; vf_round_authorized "$2" opponent 4 2026-09-06T12:00:03Z' _ \
++    "$SCRIPTS/verification-lib.sh" "$status"
++  f="$SANDBOX/fault-waiver"; fault_bin "$f" awk 'function knowngate'
++  run_rc 4 env PATH="$f:$PATH" bash -c '. "$1"; vf_round_authorized "$2" opponent 4 2026-09-06T12:00:03Z' _ \
++    "$SCRIPTS/verification-lib.sh" "$status"
++  assert_contains "$OUT" 'the Decisions log in STATUS.md could not be parsed' \
++    'AC-009: a Decisions parse that died was not refused by name (O-017)'
++  assert_not_contains "$OUT" 'no candidate authorization line for this gate was found' \
++    'AC-009: a Decisions parse that died was reported as a log with no candidate (O-017)'
++}
++
+ test_rounds() {
++  round_locale_cases
+   round_authorization_cases
+   round_preamble_cases
+   round_verdict_source_cases
+--- a/tests/test-sdd-analyze.sh
++++ b/tests/test-sdd-analyze.sh
+@@ -168,7 +168,66 @@
+   sed "$2" "$1" > "$1.tmp" && mv "$1.tmp" "$1"
+ }
+ 
++# AC-023/FM-002/INV-005 — O-017's analyzer sibling and T030o43. The analyzer
++# reads the spec under LC_ALL=C, so a byte the caller's locale cannot decode no
++# longer hides a clarification marker or an AC id; and its own searches and
++# the verification parsers it runs read their status, so a read that failed is
++# an error, never an absence that passes.
++analyzer_locale_and_fault_cases() {
++  local spec_dir f
++  spec_dir="$(make_verification_spec_dir analyzerlocale)"
++  run_rc 0 "$ANALYZE" "$spec_dir"
++  cp "$spec_dir/spec.md" "$SANDBOX/analyzer-spec"
++  if [[ "$(uname -s)" == Darwin && -n "$(printf '\222 [NEEDS CLARIFICATION: x]\n' | in_locale en_US.UTF-8 grep -n '\[NEEDS CLARIFICATION')" ]]; then
++    t_fail 'AC-023: precondition: an unpinned grep under en_US.UTF-8 must miss a marker after 0x92 0x20 (O-017)'
++  fi
++  printf '\nA fixture line \222 [NEEDS CLARIFICATION: fixture marker]\n' >> "$spec_dir/spec.md"
++  run_rc 1 in_locale en_US.UTF-8 "$ANALYZE" "$spec_dir"
++  assert_contains "$OUT" 'unresolved [NEEDS CLARIFICATION] marker(s)' \
++    'AC-023: a clarification marker after an undecodable byte read as absent under en_US.UTF-8 (O-017)'
++  cp "$SANDBOX/analyzer-spec" "$spec_dir/spec.md"
++  printf '\n- \222 AC-998 is a criterion no task covers\n' >> "$spec_dir/spec.md"
++  run_rc 1 in_locale en_US.UTF-8 "$ANALYZE" "$spec_dir"
++  assert_contains "$OUT" 'not covered by any implementation task' \
++    'AC-023: an AC id after an undecodable byte was missed under en_US.UTF-8 (O-017)'
++  assert_contains "$OUT" 'AC-998' 'AC-023: the uncovered id is named'
++  cp "$SANDBOX/analyzer-spec" "$spec_dir/spec.md"
++  run_rc 0 "$ANALYZE" "$spec_dir"
++  f="$SANDBOX/fault-nc"; fault_bin "$f" grep '\[NEEDS CLARIFICATION'
++  run_rc 1 env PATH="$f:$PATH" "$ANALYZE" "$spec_dir"
++  assert_contains "$OUT" 'spec.md and plan.md could not be searched for [NEEDS CLARIFICATION] markers' \
++    'AC-023: a marker search that failed read as no marker (T030o43)'
++  f="$SANDBOX/fault-acs"; fault_bin "$f" grep 'AC-[0-9]{3}'
++  run_rc 1 env PATH="$f:$PATH" "$ANALYZE" "$spec_dir"
++  assert_contains "$OUT" 'spec.md could not be read for its AC ids' \
++    'AC-023: an AC inventory that could not be read read as no uncovered AC (T030o43)'
++  assert_contains "$OUT" 'verification contract: vf_bindings could not read the criteria and requirements of spec.md' \
++    'AC-023: the binding parser read an AC inventory that failed (T030o43)'
++  f="$SANDBOX/fault-refs"; fault_bin "$f" grep '(AC|REQ)-[0-9]{3}' "$spec_dir/tasks.md"
++  run_rc 1 env PATH="$f:$PATH" "$ANALYZE" "$spec_dir"
++  assert_contains "$OUT" 'tasks.md could not be read for its AC and REQ references' \
++    'AC-023: a task reference inventory that could not be read read as no dangling ref (T030o43)'
++  f="$SANDBOX/fault-count"; fault_bin "$f" awk '$2=="error"'
++  run_rc 1 env PATH="$f:$PATH" "$ANALYZE" "$spec_dir"
++  assert_contains "$OUT" 'verification contract: vf_bindings could not count its diagnostics' \
++    'AC-023: a diagnostic count that failed published a catalog carrying errors (T030o43)'
++  f="$SANDBOX/fault-fm-count"; fault_bin "$f" awk '# vf_fm_count'
++  run_rc 1 env PATH="$f:$PATH" "$ANALYZE" "$spec_dir"
++  assert_contains "$OUT" "✗ $spec_dir/spec.md: frontmatter could not be counted for verification_contract" \
++    'AC-023: the configuration policy counted an unreadable frontmatter as no contract (T030o43)'
++  assert_contains "$OUT" "verification contract: $spec_dir/spec.md: frontmatter could not be counted for verification_contract" \
++    'AC-023: the binding parser counted an unreadable frontmatter as no contract (T030o43)'
++  f="$SANDBOX/fault-fm-value"
++  fault_bin "$f" awk 'key=verification_contract'; fault_bin "$f" sed '^verification_contract:'
++  run_rc 1 env PATH="$f:$PATH" "$ANALYZE" "$spec_dir"
++  assert_contains "$OUT" "✗ $spec_dir/spec.md: frontmatter could not be read for verification_contract" \
++    'AC-023: the configuration policy read an unreadable frontmatter as no contract (T030o43)'
++  assert_contains "$OUT" "verification contract: $spec_dir/spec.md: frontmatter could not be read for verification_contract" \
++    'AC-023: the binding parser read an unreadable frontmatter as no contract (T030o43)'
++}
++
+ test_verification_bindings() {
++  analyzer_locale_and_fault_cases
+   local spec_dir catalog value fields index record_types mapped_one=0 mapped_two=0
+   local fixture shipped_count=0
+ 
+--- a/.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md
++++ b/.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md
+@@ -736,8 +736,8 @@
+   - *Evidence:* CAP-499-rKuH6Z verified by spec-gate accept; return sha256:7b457257938f719fb7401738586b6f7a8939bb87d02e3a9a0f853280264c22da
+ 
+ - [ ] **T030o43** — Run the harness's own parsing under the C locale and never let a parse failure read as a pass
+-  - *Files:* `scripts/verification-lib.sh`, `scripts/spec-run.sh`, `scripts/spec-task.sh`, `scripts/spec-gate.sh`, `scripts/sdd-analyze.sh`, `scripts/spec-ac-coverage.sh`, `scripts/spec-evidence.sh`, `templates/verification-contract.md`, `tests/helpers.sh`, `tests/test-verification.sh`, `tests/test-gate-contracts.sh`, `tests/test-spec-gate.sh`, `tests/test-sdd-analyze.sh`
+-  - *Acceptance:* Derive the pin's member from the harness, not from the sites round 12 named (REQ-009, REQ-011, AC-012, AC-020): the file set the input identity records as `harness`, and every process it starts except the captured command. Every grammar the harness parses is ASCII, so `LC_ALL=C` reads every record a UTF-8 or single-byte locale reads and decodes every byte. `verification-lib.sh` exports `LC_ALL=C` when it loads, and each of the six harness entry scripts loads it directly after `lib.sh`, before any program reads a repository or bookkeeping byte; `lib.sh` is unchanged. The caller's `LC_ALL` (a value, empty, or unset) is kept in the exported `SDD_HARNESS_CALLER_LC_ALL` for the harness processes a harness process starts; the captured command (`vf_capture`, and `spec-run.sh`'s legacy run) gets it back exactly and never sees the record, and a declared `LC_ALL` is hashed by the caller's value. No parse failure reads as a passing result: every harness parser whose output decides a record, an identity or a verdict, and whose failure would read as an absence that passes, reads its exit status and fails closed with a diagnostic naming the parse, among them the prior-review manifest pass and the Decisions-log authorization parse (the members, derived from every text-program call in the harness, are recorded in Decisions). With every `LC_*` removed and `LANG` at `en_US.UTF-8`, `de_DE.UTF-8`, `C.UTF-8` and `ja_JP.SJIS`, a manifest carrying an undecodable byte, a Class binding and a UTF-8 manifest under Shift-JIS each refuse exactly as under C, through `vf_reports` and end to end through `spec-gate.sh round --complete`; the analyzer's clarification marker and AC inventory, and `spec-ac-coverage.sh`'s AC inventory, refuse the byte as under C; on macOS each locale must be one an unpinned awk cannot decode the byte under. Every harness entry script runs its programs under `LC_ALL=C`; the captured command sees the caller's `LC_ALL` unset, empty or set; a declared `LC_ALL` gives two identities for two caller values; and a fault injected into each member parser fails its operation closed with its exact diagnostic. Removing the pin, an entry script's early load, the restore, the caller-value record or any status read fails a fixture with an exact diagnostic. The contract and the kernel comment say the harness runs its own parsing under `LC_ALL=C`, gives the caller's `LC_ALL` back to the command it captures, and never lets a parse failure read as a pass. The input identity's records are unchanged apart from the edited files and the harness records.
++  - *Files:* `scripts/verification-lib.sh`, `scripts/spec-run.sh`, `scripts/spec-task.sh`, `scripts/sdd-analyze.sh`, `scripts/spec-ac-coverage.sh`, `scripts/spec-evidence.sh`, `templates/verification-contract.md`, `tests/helpers.sh`, `tests/test-verification.sh`, `tests/test-gate-contracts.sh`, `tests/test-spec-gate.sh`, `tests/test-sdd-analyze.sh`
++  - *Acceptance:* Derive the pin's member from the harness, not from the sites round 12 named (REQ-009, REQ-011, AC-012, AC-020): the file set the input identity records as `harness`, and every process it starts except the captured command. Every grammar the harness parses is ASCII, so `LC_ALL=C` reads every record a UTF-8 or single-byte locale reads and decodes every byte. `verification-lib.sh` exports `LC_ALL=C` when it loads, and each of the six harness entry scripts loads it directly after `lib.sh`, before any program reads a repository or bookkeeping byte; `lib.sh` is unchanged. The caller's `LC_ALL` (a value, empty, or unset) is kept in the exported `SDD_HARNESS_CALLER_LC_ALL` for the harness processes a harness process starts; the captured command (`vf_capture`, and `spec-run.sh`'s legacy run) gets it back exactly and never sees the record, and the record of a declared `LC_ALL` carries the caller's value. No parse failure reads as a passing result: every harness parser whose output decides a record, an identity or a verdict, and whose failure would read as an absence that passes, reads its exit status and fails closed with a diagnostic naming the parse, among them the prior-review manifest pass and the Decisions-log authorization parse (the members, derived from every text-program call in the harness, are recorded in Decisions). With every `LC_*` removed and `LANG` at `en_US.UTF-8`, `de_DE.UTF-8`, `C.UTF-8` and `ja_JP.SJIS`, a manifest carrying an undecodable byte, a Class binding and a UTF-8 manifest under Shift-JIS each refuse exactly as under C, through `vf_reports` and end to end through `spec-gate.sh round --complete`; the analyzer's clarification marker and AC inventory, and `spec-ac-coverage.sh`'s AC inventory, refuse the byte as under C; on macOS each locale must be one an unpinned awk cannot decode the byte under. Every harness entry script runs its programs under `LC_ALL=C`; the captured command sees the caller's `LC_ALL` unset, empty or set; a declared `LC_ALL` gives two identities for two caller values; and a fault injected into each member parser fails its operation closed with its exact diagnostic. Removing the pin, an entry script's early load, the restore, the caller-value record or any status read fails a fixture with an exact diagnostic. The contract and the kernel comment say the harness runs its own parsing under `LC_ALL=C`, gives the caller's `LC_ALL` back to the command it captures, and never lets a parse failure read as a pass. The input identity's records are unchanged apart from the edited files and the harness records.
+   - *Verify kind:* test
+   - *Tests:* `tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-spec-gate.sh::test_rounds`, `tests/test-sdd-analyze.sh::test_verification_bindings`, `tests/test-verification.sh::test_capture_provenance`, `tests/test-spec-gate.sh::test_floor`, `tests/test-spec-gate.sh::test_acceptance`, `tests/test-spec-gate.sh::test_checkpoints`
+   - *Verify:* `bash tests/run.sh && bash tests/shellcheck.sh` → all suites `passed`, exit 0

@@ -1,0 +1,10 @@
+Floor attempt 1 for round 20 (r20-floor.sh 1), 2026-10-15 (session 23): FAILED at rc 3, sealed nothing.
+Started 17:31:07Z on AC with 6.4 GiB free. At 19:26:35Z the Mac left AC (the user unplugged the charger for about
+an hour and asked to continue on battery; 100%, then 94% at the failure). From about 19:44Z free disk fell from about
+9 GiB to 0.12 GiB in about six minutes (r20-floor-1.samples.log); the processes writing were another session's builds
+in ~/projects/memvault (cargo clippy, cargo check, cargo test -p vault-service, vitest), not this floor. At 19:49:53Z
+the floor's own snapshot copy failed: `cp: ... vf-snapshot.dZ748H/blob: could not copy extended attributes to
+.../semantic: No space left on device` (r20-floor-1.log), rc 3, wrapper rc 3. The user then freed space (9.0 GiB
+free at 20:22Z); nothing was reclaimed or stopped by the invoker. After the failure: no lock held, floor-latest still
+FLOOR-GCDl2x, no .capture.* staging; the attempt left its staging directory floors/.floor.UFirJt (as earlier failed
+floors left theirs) and twelve complete, sealed captures CAP-679 to CAP-690, each exit 0. Attempt 2 is launched on AC.

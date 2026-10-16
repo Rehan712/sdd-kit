@@ -1,0 +1,23 @@
+PASS live before the batch: round 20 refused at exit 4
+  | appended 6 entries; waiver 2026-10-15T17:03:04Z
+  | e68299f202d8327a41afbb490e527484489f0bb40267a674d933b5d332ba5777  .specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md
+  | a5c7a0d0bcd16de00816974842fe52556c4bcc002ab8a528960b8c8f3dc96ea6  tests/test-spec-gate.sh
+  | 8b07ca66699440bd4eb6ea6a41df8775d7d927af7d32752a4646f002681f55a1  tests/test-verification.sh
+  | f927e872de6b5256111191a4472321fc0e03f540b1eec3aa91aa31aff7cb1962  tests/test-gate-contracts.sh
+PASS live .specify/specs/003-gate-round-reduction-and-token-discipline/STATUS.md equals the validated scratch copy
+PASS live .specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md equals the validated scratch copy
+PASS live tests/test-gate-contracts.sh equals the validated scratch copy
+PASS live tests/test-spec-gate.sh equals the validated scratch copy
+PASS live tests/test-verification.sh equals the validated scratch copy
+PASS live round 19 still reported completed
+PASS live round 20 authorized
+PASS live round 21 refused at exit 4
+PASS live analyzer exit 0 with 0 errors
+PASS live the T031a1 block present and unticked
+PASS live the T031a2 block present and unticked
+PASS live the T031a3 block present and unticked
+PASS live the T031a4 block present and unticked
+PASS live exactly one authorization line for round 20
+PASS live the freezing entry is the last Decisions entry
+PASS live the three suites hash as apply-code printed
+r20-batch-apply live failures=0

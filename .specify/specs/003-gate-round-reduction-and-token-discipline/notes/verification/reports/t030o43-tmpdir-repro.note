@@ -1,0 +1,8 @@
+t030o43-tmpdir-repro.rc reads 1 on the script's own "five failed assertions" check alone. The invoker had
+miscounted CAP-521-Q8OdIp's output: that capture's output.log holds six `assert:` lines (one `expected exit
+1, got 0` for the task-reference fault plus its missing diagnostic, and four frontmatter diagnostics), and
+the trailing-slash run holds the same six, differing only in the PATH value and the sandbox path they print.
+Every other check passed: with TMPDIR written without a trailing slash, tests/test-sdd-analyze.sh ran 19/19
+at exit 0; with one, 18/19 at exit 1, failing test_verification_bindings only; each run left the copy
+unchanged; the live status outside notes/verification/ was unchanged. The two suite logs are kept beside
+this note as t030o43-tmpdir-repro-{no-slash,trailing-slash}.log; the scratch copy was removed.

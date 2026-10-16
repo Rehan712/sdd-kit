@@ -1,0 +1,200 @@
+--- a/tests/helpers.sh
++++ b/tests/helpers.sh
+@@ -16,6 +16,15 @@
+ # outside the repository first. None of them is consulted by git, so clearing
+ # them cannot change what a suite enumerates (O-015 second review).
+ unset CDPATH BASH_ENV ENV
++# The locale, pinned before anything else runs (O-016, round 11). The programs
++# a suite runs read it whatever the suite itself reads: date formats %p from
++# LC_TIME; tr, sed, grep and awk take their character classes from LC_CTYPE;
++# sort collates by LC_COLLATE; git's messages follow LC_MESSAGES. The input
++# identity hashes no undeclared name, so a verdict that followed the caller's
++# locale would be reused from a shell whose locale fails it. LC_ALL overrides
++# LANG and every category, and gettext ignores LANGUAGE in the C locale. It is
++# exported, so every program the suite runs inherits it.
++export LC_ALL=C
+ 
+ KIT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+ # Consumed by the test files that source this helper.
+--- a/tests/run.sh
++++ b/tests/run.sh
+@@ -19,6 +19,9 @@
+ # BASH_ENV/ENV would make every suite's shell source a file from outside the
+ # repository first (O-015 second review; tests/helpers.sh clears them too).
+ unset CDPATH BASH_ENV ENV
++# The locale is pinned as in tests/helpers.sh, and here too so that a suite
++# which does not source helpers.sh still runs under it (O-016, round 11).
++export LC_ALL=C
+ 
+ TESTS_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+ FILTER="${1:-}"
+--- a/tests/shellcheck.sh
++++ b/tests/shellcheck.sh
+@@ -17,6 +17,11 @@
+ # substitution; BASH_ENV/ENV would reach any shell this spawns (O-015 second
+ # review).
+ unset CDPATH BASH_ENV ENV
++# The locale is pinned as in tests/helpers.sh, so no locale category can decide
++# this reuse-checked command's verdict (O-016, round 11). Measured, ShellCheck's
++# output here is the same under nine locale settings; the pin makes that hold
++# by construction rather than by observation.
++export LC_ALL=C
+ 
+ ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd -P)"
+ . "$ROOT/scripts/verification-lib.sh"
+--- a/tests/test-verification.sh
++++ b/tests/test-verification.sh
+@@ -380,6 +380,7 @@
+   outside_layout_anchor_cases
+   kit_copy_cases
+   reuse_command_input_cases
++  reuse_command_locale_cases
+   fixture_repository_cases
+ 
+ }
+@@ -522,6 +523,77 @@
+   GIT_TEMPLATE_DIR="$SANDBOX/empty-template" git_host "$SANDBOX/no-template-host"
+   [[ -d "$SANDBOX/no-template-host/.git/info" ]] \
+     || t_fail 'AC-020: a host repository made without git templates has no .git/info for its ignore rules'
++}
++
++# locale_pm <env arguments...> — what date prints for %p at 2024-01-01T15:45:00Z
++# in the environment the arguments give, BSD or GNU date alike.
++locale_pm() {
++  env "$@" TZ=UTC bash -c 'if date -r 0 >/dev/null 2>&1; then date -r 1704123900 +%p; else date -d @1704123900 +%p; fi'
++}
++
++# O-016 (round 11): the programs a reuse-checked command runs read the locale
++# whatever the command itself reads -- date formats %p from LC_TIME, tr, sed,
++# grep and awk take character classes from LC_CTYPE, sort collates by
++# LC_COLLATE, git's messages follow LC_MESSAGES -- while the input identity
++# hashes no undeclared name (verification_environment: []). A PASS captured in
++# one shell was reused from a shell whose locale fails it. So every
++# reuse-checked command the kit ships exports LC_ALL=C when it starts, and so
++# does tests/helpers.sh for a suite run on its own (a task's Verify). The
++# commands are taken from the kit's own reuse_checks, so one added there
++# without a probe fails here by name. Each probe starts from a shell with
++# LC_ALL and every other exported LC_* name removed and LANG set, and a
++# program the command runs must see LC_ALL=C. The three usage-limits cases
++# round 11 saw fail then run under each hostile locale this host has
++# installed, which on macOS must be both.
++reuse_command_locale_cases() {
++  local host="$SANDBOX/locale-host" cfg="$SANDBOX/locale-config" cmd l c_pm live=0 name
++  local nolc=()
++  for name in $(compgen -e); do case "$name" in LC_*) nolc+=(-u "$name");; esac; done
++  make_host_kit "$host" || t_fail 'AC-020: cannot build the locale host kit'
++  run_rc 0 bash -c '. "$1"; vf_config "$2" "" "$3"' _ "$SCRIPTS/verification-lib.sh" "$KIT_DIR/.specify/stack.yml" "$cfg"
++  [[ -s "$cfg/reuse.nul" ]] || t_fail 'AC-020: precondition: the kit declares no reuse-checked command'
++  mkdir -p "$SANDBOX/locale-bin"
++  printf '#!/bin/sh\nprintf "shellcheck saw LC_ALL=%%s\\n" "${LC_ALL-unset}"\n' > "$SANDBOX/locale-bin/shellcheck"
++  chmod +x "$SANDBOX/locale-bin/shellcheck"
++  while IFS= read -r -d '' cmd; do
++    case "$cmd" in
++      'bash tests/run.sh')
++        # A suite that does not source helpers.sh sees only what run.sh exports.
++        printf '#!/usr/bin/env bash\n[[ "${LC_ALL-unset}" == C ]] || { echo "locale probe saw LC_ALL=${LC_ALL-unset}"; exit 1; }\necho locale-probe-pinned\n' \
++          > "$host/tests/test-zz-locale.sh"
++        run_rc 0 env ${nolc[@]+"${nolc[@]}"} LANG=de_DE.UTF-8 bash -c 'cd "$1" && bash tests/run.sh zz-locale' _ "$host"
++        assert_contains "$OUT" 'locale-probe-pinned' "AC-020: bash tests/run.sh ran a suite under the caller's locale (O-016)"
++        rm -f "$host/tests/test-zz-locale.sh";;
++      'bash tests/shellcheck.sh')
++        run_rc 0 env ${nolc[@]+"${nolc[@]}"} LANG=de_DE.UTF-8 PATH="$SANDBOX/locale-bin:$PATH" bash -c 'cd "$1" && bash tests/shellcheck.sh' _ "$host"
++        assert_contains "$OUT" 'shellcheck saw LC_ALL=C' "AC-020: bash tests/shellcheck.sh ran ShellCheck under the caller's locale (O-016)";;
++      *) t_fail "AC-020: reuse-checked command has no locale probe: $cmd";;
++    esac
++  done < "$cfg/reuse.nul"
++  # helpers.sh exports the pin, so every program a suite runs inherits it.
++  run_rc 0 env ${nolc[@]+"${nolc[@]}"} LANG=de_DE.UTF-8 \
++    bash -c '. "$1/tests/helpers.sh"; printf "%s " "${LC_ALL-unset}"; env | grep -x "LC_ALL=C" || echo not-exported' _ "$KIT_DIR"
++  assert_eq 'C LC_ALL=C' "$OUT" 'AC-020: a suite did not export LC_ALL=C to the programs it runs (O-016)'
++  # Behaviour, where a hostile locale is live on this host: the cases that
++  # consult it pass from a shell in that locale, each in its own sandbox.
++  c_pm="$(locale_pm LC_ALL=C)"
++  awk '$0 != "t_run_all"' "$host/tests/test-usage-limits.sh" > "$host/tests/.cases-usage-limits.sh"
++  for l in en_GB.UTF-8 de_DE.UTF-8; do
++    [[ "$(locale_pm ${nolc[@]+"${nolc[@]}"} LANG="$l")" != "$c_pm" ]] || continue
++    live=$((live+1))
++    run_rc 0 env ${nolc[@]+"${nolc[@]}"} LANG="$l" bash -c '. "$1"; rc=0
++      for t in test_AC_001_classifies_every_planned_provider_limit_fixture \
++               test_AC_004_and_AC_005_park_policy_replays_original_dispatch_once_per_retry \
++               test_T013o1_clock_only_horizons_follow_configured_park_policy; do
++        SANDBOX="$2/$t"; export SANDBOX; mkdir -p "$SANDBOX"
++        ( _t_fail=0; "$t"; exit "$_t_fail" ) || { echo "FAIL $t"; rc=1; }
++        [[ ! -s "$SANDBOX/.fixture-build-failed" ]] || { echo "FAIL $t: cannot build $(cat "$SANDBOX/.fixture-build-failed")"; rc=1; }
++      done
++      exit "$rc"' _ "$host/tests/.cases-usage-limits.sh" "$SANDBOX/cases-$l"
++    assert_not_contains "$OUT" 'FAIL test_' "AC-020: a usage-limits case followed LANG=$l (O-016)"
++  done
++  [[ "$(uname)" != Darwin || "$live" == 2 ]] \
++    || t_fail "AC-020: precondition: macOS ships en_GB.UTF-8 and de_DE.UTF-8, but only $live of them changed date %p"
+ }
+ 
+ # O-015 review 4: a fixture builds its own repositories through fixture_git,
+--- a/templates/verification-contract.md
++++ b/templates/verification-contract.md
+@@ -177,15 +177,22 @@
+ plan and tasks files without the lines the snapshot drops (`status:` and
+ `updated:` frontmatter, task Evidence lines, checkbox state); STATUS only for
+ its Decisions log. That covers the check's own file list, any glob or
+-directory walk it makes, and any copy it reads. It also reads no environment
+-variable the project has not declared and no configuration outside the
+-repository, except what decides the enumeration itself: git's own
++directory walk it makes, and any copy it reads. No environment variable the
++project has not declared, and no configuration outside the repository,
++decides its verdict, except what decides the enumeration itself: git's own
+ configuration, such as its global excludes, which the snapshot reads the same
+ way as long as the check runs in the snapshot's environment. Git's
+ repository-local variables (`GIT_DIR`, `GIT_INDEX_FILE` and the rest) decide
+ nothing about the enumeration, because the snapshot runs git without them.
+ Only git runs without them, so a check that reads one declares it under
+ `verification_environment`, and its value is hashed like any declared name.
++The programs a check runs consult the environment whether or not the check
++itself reads it: `date` formats `%p` from `LC_TIME`, `tr`, `sed`, `grep` and
++awk take their character classes from `LC_CTYPE`, `sort` collates by
++`LC_COLLATE`, and git's messages follow `LC_MESSAGES`. A check pins such a
++name where it starts, or declares it; the kit's reuse-checked commands, and
++`tests/helpers.sh` for every suite, export `LC_ALL=C` before they run anything
++else, and `LC_ALL` overrides `LANG` and every locale category.
+ A check that depends on an ignored path declares it under
+ `verification_inputs`; one that reads the dropped lines, or configuration it
+ cannot pin, stays off `reuse_checks`. The kit's own suites read through
+@@ -343,14 +350,17 @@
+ already pinned precisely by each declared tool's resolved path and content
+ digest and by the harness records, `SHELL` is never read because library
+ functions run under an explicit `bash`, `LANG` and the locale categories are
+-not read either (the harness pins `LC_ALL=C` where collation matters), and
++not read by the harness either (it pins `LC_ALL=C` where collation matters),
++while a check whose programs read them pins them or declares them, as the
++kit's own reuse-checked commands pin `LC_ALL=C` when they start, and
+ `TMPDIR` decides where temporary files go, never what a check concludes. A
+ fixed list including them fails the cross-invocation test that matters:
+ `LC_CTYPE` and `LC_ALL` are exported by default by macOS Terminal, OpenSSH
+ `SendEnv` and most CI images, so recording them present in one shell and unset
+ in another moves the digest for a byte-identical worktree. A project whose
+-checks genuinely depend on a variable declares it; presence and value then
+-affect identity, and only the value hash reaches the manifest.
++checks genuinely depend on a variable pins it where each check starts, so its
++value cannot reach the verdict, or declares it; a declared name's presence and
++value then affect identity, and only the value hash reaches the manifest.
+ 
+ Reality-check rows use the full normalized criterion plus `; sha256:<digest>`,
+ `CAP-id; review: <semantic explanation and artifact/path references>`, the exact
+--- a/.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md
++++ b/.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md
+@@ -723,6 +723,16 @@
+   - *Refs:* REQ-009, AC-010, AC-018, AC-020, AC-023, FM-002, FM-010, FM-014, FM-019, INV-001, INV-006, plan §3.2, §4.2
+   - *Notes:* Owns round-10 O-015 and the round-10 Held-up isolation gap, plus the sibling readers the report did not name: two reproduced before repair (`notes/verification/reports/o015-repro.{sh,log,rc}`) and the rest found by the two independent review passes (`notes/verification/reports/t030o41-review.md`) and by the second pair (`notes/verification/reports/t030o41-review2-passC.md`, `t030o41-review2-passD.md`), including the pre-existing git-environment data loss the user chose to include, and by the focused reviews of the later repairs (`notes/verification/reports/t030o41-review3-partial.md`, `t030o41-review4.md`), including the pre-existing fixture-repository configuration the user chose to include. The harness-level bash startup environment is recorded in Decisions and is not part of this task. The user chose one task and then chose to expand it to every measured member (Decisions, 2026-09-24). Changing T027's Verify to the pinned ShellCheck command makes T027's sealed acceptance historical. No gate round, floor or hosted-CI run is part of this task.
+   - *Evidence:* CAP-455-RNmM6l verified by spec-gate accept; return sha256:e34f4a3d716bf37274e832308f04c3d39254e6638982d4252f9dfb9fcecf103d
++
++- [ ] **T030o42** — Pin the locale where every reuse-checked command the kit ships starts
++  - *Files:* `tests/helpers.sh`, `tests/run.sh`, `tests/shellcheck.sh`, `tests/test-verification.sh`, `templates/verification-contract.md`
++  - *Acceptance:* Derive the member from what the programs a reuse-checked command runs consult, not from the command's own variable reads (REQ-009, AC-020). `date` formats `%p` from `LC_TIME`; `tr`, `sed`, `cut`, `wc`, `od`, awk and grep take character classes from `LC_CTYPE`; `sort` and `find` collate by `LC_COLLATE`; git's messages follow `LC_MESSAGES`; and the input identity hashes no undeclared name. So every command in the kit's own `reuse_checks` (`tests/run.sh`, `tests/shellcheck.sh`) exports `LC_ALL=C` right after it clears `CDPATH`, `BASH_ENV` and `ENV`, before any other program runs, and `tests/helpers.sh` does the same when a suite starts, so a suite run on its own is pinned too. `LC_ALL` overrides `LANG` and every category. A fixture takes the commands from the kit's `reuse_checks` and fails by name on one it has no probe for. It runs each on a host kit from a shell with `LC_ALL` unset and `LANG=de_DE.UTF-8`, where a program the command runs must see `LC_ALL=C`; a shell that loads `tests/helpers.sh` must export it; and the three usage-limits cases round 11 saw fail pass under `LANG=en_GB.UTF-8` and `LANG=de_DE.UTF-8` on a host where those locales change `date`'s `%p`, which macOS must be. Removing any pin, or its export, fails the fixture with an exact diagnostic. The contract says no undeclared variable decides a check's verdict, names what the programs consult, and says a check pins such a name or declares it, as the kit's commands pin `LC_ALL=C`. The input identity's records are unchanged.
++  - *Verify kind:* test
++  - *Tests:* `tests/test-verification.sh::test_capture_provenance`
++  - *Verify:* `bash tests/run.sh && bash tests/shellcheck.sh` → all suites `passed`, exit 0
++  - *Reuse:* local
++  - *Refs:* REQ-009, AC-020, FM-010, FM-014, INV-001, plan §3.2, §4.2
++  - *Notes:* Owns round-11 O-016, reproduced before repair (`notes/verification/reports/o016-repro.{sh,log,rc,note}`), with the rule measured before adoption (`notes/verification/reports/o016-measure.{sh,log,rc}`). Option variables a program reads only when someone sets them (`UNAME_SYSNAME`, `GREP_OPTIONS` and the rest measured on 2026-09-26) belong to the recorded harness-level environment item, not to this task. Shipped 002's own locale-dependent reset parsing in `scripts/usage-limit.sh` is outside this spec and is not repaired; the pin removes only the reuse half. No gate round, floor or hosted-CI run is part of this task.
+ 
+ ## API
+ 

@@ -1,0 +1,11 @@
+Verification-Return: 1
+Task: T030o44
+Captures: CAP-544-cjPQ2j
+Summary: capture=CAP-544-cjPQ2j command=/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh  key=  -- 3/3 passed exit=0 output=b150ad3c2adee17324471b5021f9d78f292fabb354dcc1009742d11f71d50699 input=75a92e76ef6817868f99e8ca6f477de33f2d97d3d839488de1e9a6acf8701415 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-544-cjPQ2j/output.log [complete metadata: capture directory]
+Failure modes:
+FM-016, tests/test-spec-gate.sh::test_rounds, CAP-544-cjPQ2j
+FM-019, tests/test-gate-contracts.sh::test_reports_and_tally, CAP-544-cjPQ2j
+INV-004, tests/test-spec-gate.sh::test_rounds, CAP-544-cjPQ2j
+INV-006, tests/test-gate-contracts.sh::test_reports_and_tally, CAP-544-cjPQ2j
+parse rc=0 records=7
+check rc=0 

@@ -1,0 +1,21 @@
+capture=CAP-521-Q8OdIp command=/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh  key=  -- 3/3 passed exit=1 output=98fb96bcfdc1802055cd308de9e762465b67951da2d5b27e65428501d94fe60c input=ecbca9d295a38c14e001b11fcaefcd1849ed6e8b65fb5824722a4ab565a43d0d log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-521-Q8OdIp/output.log [complete metadata: capture directory]
+  ok   test_AC_005_scheduler_remove_failure_releases_lock_and_retries_same_unit
+  ok   test_AC_006_and_AC_009_readiness_requires_binary_adapter_and_authentication
+  ok   test_AC_006_auth_checker_override_does_not_bypass_binary_or_adapter_checks
+  ok   test_AC_006_delegate_caps_three_attempts_and_parks_when_exhausted
+  ok   test_AC_006_delegate_classifies_only_the_current_attempt_slice
+  ok   test_AC_006_delegate_uses_ordered_ready_fallback_and_preserves_verification
+  ok   test_AC_009_doctor_fixture_excludes_machine_local_kit_files
+  ok   test_AC_009_doctor_reconciles_pending_failed_and_both_orphan_classes_without_models
+  ok   test_AC_009_doctor_reports_invalid_limit_policy_and_unready_fallbacks
+  ok   test_AC_010_documents_exact_limit_policy_keys_and_recovery_workflows
+  ok   test_T013o1_clock_only_horizons_follow_configured_park_policy
+  ok   test_T013o3_cancel_scheduler_remove_failure_releases_lock_and_recovers
+  ok   test_T013o4_replay_restores_the_parked_path_under_a_stock_scheduler_path
+  ok   test_T013o5_metadata_write_failure_releases_lock_and_unit_recovers
+  -- 27/27 passed
+== test-verification.sh
+  ok   test_capture_provenance
+  ok   test_config_grammar
+  ok   test_owned_transactions
+  -- 3/3 passed

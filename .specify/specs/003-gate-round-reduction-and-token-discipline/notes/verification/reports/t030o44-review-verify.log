@@ -1,0 +1,221 @@
+host: Darwin 25.4.0; bash on PATH: GNU bash, version 3.2.57(1)-release (arm64-apple-darwin25); TMPDIR=/private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/512efee2-5748-4ebb-ba93-8afa08f5a48f/scratchpad/s12/t030o44-rv/tmp/
+PASS PRE: both session diffs reverse cleanly
+PASS PRE: hashes as recorded before apply 1
+== F1 (blocking): the HTML strip is not the inline-HTML grammar
+PASS F1-control CUR C
+PASS F1-control PRE C
+PASS F1-control CUR C says
+PASS F1-control CUR en_US.UTF-8
+PASS F1-control PRE en_US.UTF-8
+PASS F1-control CUR en_US.UTF-8 says
+PASS F1-quoted-gt CUR C
+PASS F1-quoted-gt PRE C
+PASS F1-quoted-gt CUR C: stderr empty
+PASS F1-quoted-gt CUR en_US.UTF-8
+PASS F1-quoted-gt PRE en_US.UTF-8
+PASS F1-quoted-gt CUR en_US.UTF-8: stderr empty
+PASS F1-autolink CUR C
+PASS F1-autolink PRE C
+PASS F1-autolink PRE C says
+PASS F1-autolink CUR C: stderr empty
+PASS F1-autolink CUR en_US.UTF-8
+PASS F1-autolink PRE en_US.UTF-8
+PASS F1-autolink PRE en_US.UTF-8 says
+PASS F1-autolink CUR en_US.UTF-8: stderr empty
+PASS F1-not-a-tag CUR C
+PASS F1-not-a-tag PRE C
+PASS F1-not-a-tag PRE C says
+PASS F1-not-a-tag CUR C: stderr empty
+PASS F1-not-a-tag CUR en_US.UTF-8
+PASS F1-not-a-tag PRE en_US.UTF-8
+PASS F1-not-a-tag PRE en_US.UTF-8 says
+PASS F1-not-a-tag CUR en_US.UTF-8: stderr empty
+PASS F1c-quoted-gt CUR C
+PASS F1c-quoted-gt PRE C
+PASS F1c-quoted-gt CUR C: G-050 recorded at minor
+PASS F1c-quoted-gt CUR en_US.UTF-8
+PASS F1c-quoted-gt PRE en_US.UTF-8
+PASS F1c-quoted-gt CUR en_US.UTF-8: G-050 recorded at minor
+PASS F1c-autolink CUR C
+PASS F1c-autolink PRE C
+PASS F1c-autolink CUR C: G-050 recorded at minor
+PASS F1c-autolink CUR en_US.UTF-8
+PASS F1c-autolink PRE en_US.UTF-8
+PASS F1c-autolink CUR en_US.UTF-8: G-050 recorded at minor
+PASS F1c-not-a-tag CUR C
+PASS F1c-not-a-tag PRE C
+PASS F1c-not-a-tag CUR C: G-050 recorded at minor
+PASS F1c-not-a-tag CUR en_US.UTF-8
+PASS F1c-not-a-tag PRE en_US.UTF-8
+PASS F1c-not-a-tag CUR en_US.UTF-8: G-050 recorded at minor
+PASS F1c-control CUR C
+PASS F1c-control PRE C
+PASS F1c-control CUR C says
+PASS F1c-control CUR en_US.UTF-8
+PASS F1c-control PRE en_US.UTF-8
+PASS F1c-control CUR en_US.UTF-8 says
+== F4 (blocking): <!--> and <!---> open a comment in the quoting tracker; siblings
+PASS F4-empty-comment CUR C
+PASS F4-empty-comment PRE C
+PASS F4-empty-comment CUR C: G-050 recorded at minor
+PASS F4-empty-comment CUR en_US.UTF-8
+PASS F4-empty-comment PRE en_US.UTF-8
+PASS F4-empty-comment CUR en_US.UTF-8: G-050 recorded at minor
+PASS F4-empty-comment-3 CUR C
+PASS F4-empty-comment-3 PRE C
+PASS F4-empty-comment-3 CUR C: G-050 recorded at minor
+PASS F4-empty-comment-3 CUR en_US.UTF-8
+PASS F4-empty-comment-3 PRE en_US.UTF-8
+PASS F4-empty-comment-3 CUR en_US.UTF-8: G-050 recorded at minor
+PASS F4-attribute CUR C
+PASS F4-attribute PRE C
+PASS F4-attribute CUR C: G-050 recorded at minor
+PASS F4-attribute CUR en_US.UTF-8
+PASS F4-attribute PRE en_US.UTF-8
+PASS F4-attribute CUR en_US.UTF-8: G-050 recorded at minor
+PASS F4-fence-info CUR C
+PASS F4-fence-info PRE C
+PASS F4-fence-info CUR C: G-050 recorded at minor
+PASS F4-fence-info CUR en_US.UTF-8
+PASS F4-fence-info PRE en_US.UTF-8
+PASS F4-fence-info CUR en_US.UTF-8: G-050 recorded at minor
+PASS F4m-empty-comment CUR C
+PASS F4m-empty-comment PRE C
+PASS F4m-empty-comment CUR C: stderr empty
+PASS F4m-empty-comment CUR en_US.UTF-8
+PASS F4m-empty-comment PRE en_US.UTF-8
+PASS F4m-empty-comment CUR en_US.UTF-8: stderr empty
+== F9 (blocking): a named character reference before the label
+PASS F9-nbsp CUR C
+PASS F9-nbsp PRE C
+PASS F9-nbsp CUR C: stderr empty
+PASS F9-nbsp CUR en_US.UTF-8
+PASS F9-nbsp PRE en_US.UTF-8
+PASS F9-nbsp CUR en_US.UTF-8: stderr empty
+PASS F9-ensp CUR C
+PASS F9-ensp PRE C
+PASS F9-ensp CUR C: stderr empty
+PASS F9-ensp CUR en_US.UTF-8
+PASS F9-ensp PRE en_US.UTF-8
+PASS F9-ensp CUR en_US.UTF-8: stderr empty
+PASS F9-numeric-control CUR C
+PASS F9-numeric-control PRE C
+PASS F9-numeric-control CUR C says
+PASS F9-numeric-control CUR en_US.UTF-8
+PASS F9-numeric-control PRE en_US.UTF-8
+PASS F9-numeric-control CUR en_US.UTF-8 says
+PASS F9c-nbsp CUR C
+PASS F9c-nbsp PRE C
+PASS F9c-nbsp CUR C: G-050 recorded at minor
+PASS F9c-nbsp CUR en_US.UTF-8
+PASS F9c-nbsp PRE en_US.UTF-8
+PASS F9c-nbsp CUR en_US.UTF-8: G-050 recorded at minor
+== F10 (blocking): a value continued on the next line
+PASS F10c CUR C
+PASS F10c PRE C
+PASS F10c CUR C: G-050 recorded at minor
+PASS F10c CUR en_US.UTF-8
+PASS F10c PRE en_US.UTF-8
+PASS F10c CUR en_US.UTF-8: G-050 recorded at minor
+PASS F10m CUR C
+PASS F10m PRE C
+PASS F10m CUR C: stderr empty
+PASS F10m CUR en_US.UTF-8
+PASS F10m PRE en_US.UTF-8
+PASS F10m CUR en_US.UTF-8: stderr empty
+== F11 (blocking): a label after an empty link or image
+PASS F11-empty-link CUR C
+PASS F11-empty-link PRE C
+PASS F11-empty-link CUR C: stderr empty
+PASS F11-empty-link CUR en_US.UTF-8
+PASS F11-empty-link PRE en_US.UTF-8
+PASS F11-empty-link CUR en_US.UTF-8: stderr empty
+PASS F11-titled-link CUR C
+PASS F11-titled-link PRE C
+PASS F11-titled-link CUR C: stderr empty
+PASS F11-titled-link CUR en_US.UTF-8
+PASS F11-titled-link PRE en_US.UTF-8
+PASS F11-titled-link CUR en_US.UTF-8: stderr empty
+PASS F11c-empty-link CUR C
+PASS F11c-empty-link PRE C
+PASS F11c-empty-link CUR C: G-050 recorded at minor
+PASS F11c-empty-link CUR en_US.UTF-8
+PASS F11c-empty-link PRE en_US.UTF-8
+PASS F11c-empty-link CUR en_US.UTF-8: G-050 recorded at minor
+== F2 (minor): the in-finding label rule refuses ordinary prose
+PASS F2 CUR refuses:   class, not one spelling of it.
+PASS F2 CUR names it:   class, not one spelling of it.
+PASS F2 PRE parses:   class, not one spelling of it.
+PASS F2 CUR refuses:   (class) line outside any Finding in both locales.
+PASS F2 CUR names it:   (class) line outside any Finding in both locales.
+PASS F2 PRE parses:   (class) line outside any Finding in both locales.
+PASS F2 CUR refuses:   - Severity: unchanged from round 12.
+PASS F2 CUR names it:   - Severity: unchanged from round 12.
+PASS F2 PRE parses:   - Severity: unchanged from round 12.
+PASS F2 CUR refuses:   - Class, Status and Prior are unchanged.
+PASS F2 CUR names it:   - Class, Status and Prior are unchanged.
+PASS F2 PRE parses:   - Class, Status and Prior are unchanged.
+PASS F2 CUR refuses:   - "Severity" here is the tier the count reads.
+PASS F2 CUR names it:   - "Severity" here is the tier the count reads.
+PASS F2 PRE parses:   - "Severity" here is the tier the count reads.
+PASS F2 CUR refuses:   - Severity/Class binding held.
+PASS F2 CUR names it:   - Severity/Class binding held.
+PASS F2 PRE parses:   - Severity/Class binding held.
+== F3 (minor): the duplicate-key change reaches legacy rounds
+PASS F3 CUR refuses the legacy round
+PASS F3 CUR: duplicate finding field
+PASS F3 PRE reads it
+== F5 (minor): the canonical rules reach reality-check reports
+PASS F5 CUR refuses gap field bullets
+PASS F5 CUR: a finding field outside any Finding
+PASS F5 PRE reads them
+PASS F5 CUR refuses a Finding-like gap heading
+PASS F5 CUR: a Finding heading this grammar cannot read
+PASS F5 PRE reads it
+== F1 and F4 end to end through spec-gate.sh on CUR (under C)
+PASS E F1: fixture, floor, reservation
+PASS E F1: CLEARED completes over the quoted-> tier
+PASS E F1: verdict line
+PASS E F4: fixture, floor, reservation
+PASS E F4: CLEARED completes over the hidden tier
+PASS E F4: tally blocking=0 minor=1
+== F6 (minor): the style=="canonical" conjuncts and the comment loop, mutated in a third copy
+PASS F6 legacy round: CUR reads it
+PASS F6 MA literal applies once
+PASS F6 MA survives report_record_line_cases
+PASS F6 MA survives shipped_002_tally_case
+PASS F6 MA changes the legacy round (refused)
+PASS F6 MB literal applies once
+PASS F6 MB survives report_record_line_cases
+PASS F6 MB survives shipped_002_tally_case
+PASS F6 MB changes the legacy round (refused)
+PASS F6 MC literal applies once
+PASS F6 MC survives report_record_line_cases
+PASS F6 MC survives shipped_002_tally_case
+PASS F6 MC changes the legacy round (refused)
+PASS F6 MD literal applies once
+FAIL F6 MD survives report_record_line_cases (want=0 got=1)
+PASS F6 MD survives shipped_002_tally_case
+  | F6 MD on the legacy round: rc=0 (the reviewer: rc 0 with the Blocks field lost)
+PASS F6 ME literal applies once
+PASS F6 ME survives report_record_line_cases
+PASS F6 ME survives shipped_002_tally_case
+PASS F6 ME changes the legacy round (refused)
+PASS F6 MM4 literal applies once
+PASS F6 MM4 survives report_record_line_cases
+PASS F6-mm4-cur CUR C
+PASS F6-mm4-cur PRE C
+PASS F6-mm4-cur CUR C says
+PASS F6-mm4-cur CUR en_US.UTF-8
+PASS F6-mm4-cur PRE en_US.UTF-8
+PASS F6-mm4-cur CUR en_US.UTF-8 says
+== F7 (minor): cited from t030o44-o43matrix-shard{0,1}.log
+PASS F7 M13 survived on the T030o44 tree
+PASS F7 M14 survived on the T030o44 tree
+PASS F7 M15 survived on the T030o44 tree
+PASS F7 M16 survived on the T030o44 tree
+== F8 (minor, wording): the contract sentence on rendered text
+PASS F8 the contract claims every field line is decided by its rendered label
+PASS F8 the canonical pass label-reads Class and Severity only
+PASS live worktree status outside notes/verification/ unchanged
+t030o44-review-verify failures=1

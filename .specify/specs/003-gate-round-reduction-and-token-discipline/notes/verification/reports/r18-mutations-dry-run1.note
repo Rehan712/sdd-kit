@@ -1,0 +1,6 @@
+r18-mutations dry run 1 (session 20, 2026-10-13): rc 1 on two carried v5 rows whose literals no longer occur exactly
+once in the repaired kernel, every other literal applying exactly once (301 PASS). L15 (`if (c == "(") depth++` in
+vf_label_dest) now also occurs in vf_cm_dest, so it takes the lines after it to the end of vf_label_dest's bare-
+destination branch, which vf_cm_dest ends differently; K05's anchor (the end of the manifest pass's heading branch)
+gained the narrowed check the round-17 minor placed there, so its inserted next follows that check. Both corrected in
+r18-mutations-gen.py, with no fixture or kernel change; dry run 2 is r18-mutations-dry.{log,rc}.

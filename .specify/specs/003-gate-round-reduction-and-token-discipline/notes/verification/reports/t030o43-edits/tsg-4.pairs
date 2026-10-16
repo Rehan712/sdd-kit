@@ -1,0 +1,55 @@
+@@OLD
+  # A non-ASCII artifact name is taken whole: a missing one fails and an
+  # existing one passes, in every locale (T030o43 review F2).
+  mkdir -p "$legacy/shots"; : > "$legacy/shots/écran.png"
+  local name l
+  for name in café écran; do
+    printf -- '---\nspec: 001-legacy\n---\n\n## Backend\n\n- [x] **T001** — Legacy task\n  - *Acceptance:* legacy\n  - *Evidence:* screenshot shots/%s.png\n' "$name" > "$legacy/tasks.md"
+    for l in C en_US.UTF-8; do
+      if [[ "$name" == café ]]; then
+        run_rc 1 in_locale "$l" bash "$SCRIPTS/spec-evidence.sh" "$legacy"
+        assert_contains "$OUT" "names artifact 'shots/café.png'" \
+          "AC-007: a missing non-ASCII artifact name passed under LANG=$l (T030o43 review)"
+      else
+        run_rc 0 in_locale "$l" bash "$SCRIPTS/spec-evidence.sh" "$legacy"
+        assert_not_contains "$OUT" 'names artifact' \
+          "AC-007: an existing non-ASCII artifact name was cut short under LANG=$l (T030o43 review)"
+      fi
+    done
+  done
+@@NEW
+  # An artifact name is a run of bytes that are neither whitespace nor
+  # control: a U+00A0, a U+202F, an em space or an ideographic space ends it
+  # as an ASCII space does, a non-ASCII letter is part of it, a closed set of
+  # opening quotes and brackets glued to its front is not, and it is never a
+  # pattern. A missing name fails and an existing one passes, in every locale
+  # (T030o43 reviews 1 and 2).
+  mkdir -p "$legacy/shots"; : > "$legacy/shots/écran.png"; : > "$legacy/shots/a.png"
+  local label want evidence l
+  while IFS='|' read -r label want evidence; do
+    printf -- '---\nspec: 001-legacy\n---\n\n## Backend\n\n- [x] **T001** — Legacy task\n  - *Acceptance:* legacy\n  - *Evidence:* %b\n' "$evidence" > "$legacy/tasks.md"
+    for l in C en_US.UTF-8; do
+      run_rc "$want" in_locale "$l" bash "$SCRIPTS/spec-evidence.sh" "$legacy"
+      if (( want )); then
+        assert_contains "$OUT" 'in its evidence, but no such file exists' \
+          "AC-007: a missing artifact ($label) passed under LANG=$l (T030o43 review 2)"
+      else
+        assert_not_contains "$OUT" 'names artifact' \
+          "AC-007: an existing artifact ($label) failed under LANG=$l (T030o43 review 2)"
+      fi
+    done
+  done <<'NAMES'
+missing-accented|1|screenshot shots/café.png
+existing-accented|0|screenshot shots/écran.png
+after-nbsp|0|screenshot\302\240shots/a.png
+after-narrow-nbsp|0|screenshot\342\200\257shots/a.png
+after-em-space|0|screenshot\342\200\203shots/a.png
+after-ideographic-space|0|\346\210\252\345\233\276\343\200\200shots/a.png
+curly-quoted|0|\342\200\234shots/a.png\342\200\235
+guillemets|0|\302\253shots/a.png\302\273
+backticked|0|`shots/a.png`
+missing-curly-quoted|1|\342\200\234shots/missing.png\342\200\235
+not-a-pattern|1|screenshot shots/*.png
+NAMES
+}
+@@END

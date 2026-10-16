@@ -1,0 +1,50 @@
+start 2026-10-13T18:33:47Z shard 0/3; TMPDIR=/private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/245cf187-c32f-4b54-ba96-d52a7f6b603b/scratchpad/r18-fixtures-2-0/tmp/
+PASS K: the four files hash as r18-edits/post-apply-1
+PASS K: tgc-2.pairs applied, each block exactly once
+PASS K: the suite still parses
+== K: both functions pass with the new rows on the repaired kernel
+PASS K report_record_line_cases passes
+PASS K report_manifest_locale_cases passes
+PASS C01: the mutant applies exactly once
+== C01 (report_record_line_cases report_record_line_cases): 8 failing assertions
+PASS C01 fails on: a manifest tier written as destination-after-space was not refused
+PASS C01 fails on: a second tier written as destination-after-space was not refused
+PASS C05: the mutant applies exactly once
+== C05 (report_manifest_locale_cases report_record_line_cases): 6 failing assertions
+PASS C05 fails on: a plausible manifest (invalid-angle-destination-holding-lt) was refused
+PASS C05 fails on: a canonical finding with a-invalid-angle-destination-holding-lt was refused
+PASS C08: the mutant applies exactly once
+== C08 (report_manifest_locale_cases report_record_line_cases): 12 failing assertions
+PASS C08 fails on: a plausible manifest (destination-with-space-then-code) was refused
+PASS C08 fails on: a canonical finding with a-destination-with-space-then-code was refused
+  | also: assert: AC-012: a plausible manifest (destination-then-code-span) was refused (T030o43 review 2) unexpectedly contains: prior-review manifest could not be parsed
+  | also: assert: AC-012: a canonical finding with a-destination-then-code-span was refused under LANG=C (O-018) unexpectedly contains: report recovery
+  | also: assert: AC-012: a canonical finding with a-destination-then-code-span was refused under LANG=en_US.UTF-8 (O-018) unexpectedly contains: report recovery
+PASS C11: the mutant applies exactly once
+== C11 (report_record_line_cases report_record_line_cases): 8 failing assertions
+PASS C11 fails on: a manifest tier written as bare-destination-at-line-end was not refused
+PASS C11 fails on: a second tier written as bare-destination-at-line-end was not refused
+PASS C17: the mutant applies exactly once
+== C17 (report_record_line_cases report_record_line_cases): 8 failing assertions
+PASS C17 fails on: a manifest tier written as title-then-line-end was not refused
+PASS C17 fails on: a second tier written as title-then-line-end was not refused
+PASS L01: the mutant applies exactly once
+== L01 (report_record_line_cases report_record_line_cases): 8 failing assertions
+PASS L01 fails on: a manifest tier written as label-escaped-bracket was not refused
+PASS L01 fails on: a second tier written as label-escaped-bracket was not refused
+PASS R06: the mutant applies exactly once
+== R06 (report_manifest_locale_cases report_record_line_cases): 6 failing assertions
+PASS R06 fails on: a plausible manifest (nested-bracket-then-colon-at-line-start) was refused
+PASS R06 fails on: a canonical finding with a-nested-bracket-then-colon-at-line-start was refused
+PASS S09: the mutant applies exactly once
+== S09 (report_record_line_cases report_record_line_cases): 4 failing assertions
+PASS S09 fails on: a manifest tier written as break-image-outside-finding-after-id was not refused
+PASS H05: the mutant applies exactly once
+== H05 (report_record_line_cases report_record_line_cases): 4 failing assertions
+PASS H05 fails on: a second tier written as title-tag-inside-finding was not refused
+PASS S07: the mutant applies exactly once
+== S07 (report_record_line_cases report_record_line_cases): 4 failing assertions
+PASS S07 fails on: a manifest tier written as image-title-across-lines-outside-finding-after-id was not refused
+PASS live worktree status outside notes/verification/ unchanged
+end 2026-10-13T18:41:27Z
+r18-fixtures-judge-2 shard 0/3 failures=0

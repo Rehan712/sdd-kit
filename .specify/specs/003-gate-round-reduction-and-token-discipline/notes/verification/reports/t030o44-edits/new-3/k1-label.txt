@@ -1,0 +1,155 @@
+# _VF_AWK_LABEL — how both readers of finding records decide that a line
+# carries a record (O-018). vf_label <line> <labels> returns the label the
+# line carries when the first word of its text is one of <labels> (a
+# space-separated lower-case list) in any case, and the line is an emphasized
+# label (the emphasis closes right after the word, or the emphasized span ends
+# in a colon inside or right after it) or the word is not continued by a
+# letter, digit or hyphen; otherwise "". The first word is the one after any
+# run of characters that are not letters or digits (indentation, heading
+# markers, any list marker, emphasis, backslash escapes, quotes, brackets),
+# ordered-list numbers and task checkboxes. The line is read twice, and a
+# label either reading yields is returned, so a reading that approximates what
+# a renderer shows can only make a line refuse, never let a visible label pass
+# (T030o44 review F1, F9, F11): as written, and as rendered. The rendered
+# reading takes out inline raw HTML by CommonMark 0.31.2's own productions
+# (6.6: an open tag with its attributes, a quoted value holding `>` included,
+# a closing tag, a comment, which `<!-->` and `<!--->` complete, a processing
+# instruction, a declaration, a CDATA section; one left open hides the rest
+# of the line), takes out a link's destination and title, a reference link's
+# label and an image whole (6.3, 6.4), renders a footnote reference as its
+# number, a numeric character reference as its character and a named one as a
+# character that is no letter or digit (2.5; no named reference renders as an
+# ASCII letter or digit). vf_finding_heading <line> is true when the text of an
+# ATX heading is the word Finding in any case, not continued by a letter or
+# digit, followed, after anything that is not a letter or digit, by a finding
+# ID. vf_record <line> names the record a line carries to either reader (a
+# finding field line, a Class or Severity line, a Finding heading) or is "".
+# vf_block_start <text> is true when a line, without its indentation, starts a
+# block that ends a list item's paragraph: a list item with text (an ordered
+# one only when numbered 1, the only number that may interrupt a paragraph),
+# an ATX heading, a block quote, a code fence a renderer opens (a backtick
+# fence's info string holds no backtick), a comment, an HTML block of the
+# other kinds that may interrupt a paragraph (CommonMark 4.6 conditions 1, 3, 4
+# and 5, read by the tracker's own vf_raw_start) or a thematic break. Any other
+# line may continue the paragraph, which is the deny side.
+_VF_AWK_LABEL='
+function vf_label_hex(h,   i, n) {
+  n = 0; h = tolower(h)
+  for (i = 1; i <= length(h); i++) n = n * 16 + index("0123456789abcdef", substr(h, i, 1)) - 1
+  return n
+}
+function vf_label_word(t, labels,   w, emph, lead, span, rest) {
+  lead = ""
+  while (t ~ /^([^A-Za-z0-9]|[0-9]+[.)]|\[[ xX]\])/) {
+    if (match(t, /^([0-9]+[.)]|\[[ xX]\])/)) {lead = lead substr(t, 1, RLENGTH); t = substr(t, RLENGTH + 1)}
+    else {lead = lead substr(t, 1, 1); t = substr(t, 2)}
+  }
+  emph = (lead ~ /[*_]$/)
+  if (!match(t, /^[A-Za-z]+/)) return ""
+  w = tolower(substr(t, 1, RLENGTH)); if (!index(" " labels " ", " " w " ")) return ""
+  t = substr(t, RLENGTH + 1)
+  if (emph && t ~ /^[*_]/) return w
+  if (emph && t !~ /^[A-Za-z0-9-]/) {
+    span = t; sub(/[*_].*$/, "", span)
+    if (span ~ /:[[:space:]]*$/) return w
+    rest = substr(t, length(span) + 1)
+    if (rest ~ /^[*_]/) {sub(/^[*_]+/, "", rest); if (rest ~ /^:/) return w}
+  }
+  sub(/^[*_[:space:]]+/, "", t)
+  return (t ~ /^[A-Za-z0-9-]/) ? "" : w
+}
+function vf_label_html(s,   out, rest, n) {
+  if (vf_lbl_tag == "") {
+    vf_lbl_q = sprintf("%c", 39)
+    vf_lbl_tag = "^<[A-Za-z][A-Za-z0-9-]*([ \t]+[A-Za-z_:][A-Za-z0-9_.:-]*([ \t]*=[ \t]*([^ \t\"" vf_lbl_q "=<>" sprintf("%c", 96) "]+|" vf_lbl_q "[^" vf_lbl_q "]*" vf_lbl_q "|\"[^\"]*\"))?)*[ \t]*/?>"
+  }
+  out = ""
+  while ((n = index(s, "<")) > 0) {
+    out = out substr(s, 1, n - 1); rest = substr(s, n)
+    if (substr(rest, 1, 4) == "<!--") {n = index(substr(rest, 3), "-->"); s = n ? substr(rest, n + 5) : ""; continue}
+    if (substr(rest, 1, 9) == "<![CDATA[") {n = index(rest, "]]>"); s = n ? substr(rest, n + 3) : ""; continue}
+    if (substr(rest, 1, 2) == "<?") {n = index(substr(rest, 3), "?>"); s = n ? substr(rest, n + 4) : ""; continue}
+    if (rest ~ /^<![A-Za-z]/) {n = index(rest, ">"); s = n ? substr(rest, n + 1) : ""; continue}
+    if (match(rest, vf_lbl_tag) || match(rest, /^<\/[A-Za-z][A-Za-z0-9-]*[ \t]*>/)) {s = substr(rest, RLENGTH + 1); continue}
+    out = out "<"; s = substr(rest, 2)
+  }
+  return out s
+}
+function vf_label_dest(s, j,   n, c, depth, q) {
+  n = length(s); j++
+  while (j <= n && substr(s, j, 1) ~ /[ \t]/) j++
+  if (substr(s, j, 1) == "<") {
+    while (j <= n && substr(s, j, 1) != ">") {if (substr(s, j, 1) == "\\") j++; j++}
+    if (j > n) return 0
+    j++
+  } else {
+    depth = 0
+    while (j <= n) {
+      c = substr(s, j, 1)
+      if (c == "\\") {j += 2; continue}
+      if (c ~ /[ \t]/) break
+      if (c == "(") depth++
+      else if (c == ")") {if (!depth) break; depth--}
+      j++
+    }
+  }
+  while (j <= n && substr(s, j, 1) ~ /[ \t]/) j++
+  c = substr(s, j, 1)
+  if (c == "\"" || c == vf_lbl_q || c == "(") {
+    q = (c == "(") ? ")" : c; j++
+    while (j <= n && substr(s, j, 1) != q) {if (substr(s, j, 1) == "\\") j++; j++}
+    if (j > n) return 0
+    j++
+    while (j <= n && substr(s, j, 1) ~ /[ \t]/) j++
+  }
+  return (substr(s, j, 1) == ")") ? j + 1 : 0
+}
+function vf_label_links(s,   out, i, j, k, m) {
+  out = ""
+  while (match(s, /!?\[[^]]*\]/)) {
+    i = RSTART; j = RSTART + RLENGTH; m = 0
+    if (substr(s, j, 1) == "(") m = vf_label_dest(s, j)
+    else if (substr(s, j, 1) == "[" && (k = index(substr(s, j + 1), "]"))) m = j + k + 1
+    if (m) {out = out substr(s, 1, i - 1) (substr(s, i, 1) == "!" ? "" : substr(s, i, j - i)); s = substr(s, m)}
+    else {out = out substr(s, 1, j - 1); s = substr(s, j)}
+  }
+  return out s
+}
+function vf_label_render(s,   t, n) {
+  s = vf_label_html(s)
+  gsub(/\[\^[^]]*\]/, "\001", s)
+  s = vf_label_links(s)
+  while (match(s, /&#[0-9]+;|&#[xX][0-9A-Fa-f]+;/)) {
+    t = substr(s, RSTART + 2, RLENGTH - 3)
+    n = (t ~ /^[xX]/) ? vf_label_hex(substr(t, 2)) : t + 0
+    s = substr(s, 1, RSTART - 1) ((n > 32 && n < 127) ? sprintf("%c", n) : "\001") substr(s, RSTART + RLENGTH)
+  }
+  gsub(/&[A-Za-z][A-Za-z0-9]*;/, "\001", s)
+  return s
+}
+function vf_label(s, labels,   w) {
+  w = vf_label_word(vf_label_render(s), labels)
+  return (w != "") ? w : vf_label_word(s, labels)
+}
+function vf_finding_heading(s,   t) {
+  t = s; sub(/^ *#+/, "", t); sub(/^([[:space:]]|[\200-\377])+/, "", t)
+  if (tolower(substr(t, 1, 7)) != "finding" || substr(t, 8, 1) ~ /[A-Za-z0-9]/) return 0
+  t = substr(t, 8); sub(/^[^A-Za-z0-9]+/, "", t)
+  return t ~ /^[A-Za-z][A-Za-z0-9]*-[0-9]/
+}
+function vf_record(s,   l) {
+  l = vf_label(s, "class severity")
+  if (l != "") return (l == "class") ? "Class line" : "Severity line"
+  if (s ~ /^[ ]*-[[:space:]]+\*\*(Class|Status|Prior|Severity|Where|Root cause|Scenario|Reproduced|Blocks|Wrong behavior|Class-wide fix):\*\*/) return "finding field line"
+  if (s ~ /^ ? ? ?#+([ \t]|$)/) return (vf_finding_heading(s) || s ~ /^### Finding /) ? "Finding heading" : ""
+  if (s ~ /^([[:space:]]|[\200-\377])*#+([[:space:]]|[\200-\377])*[Ff][Ii][Nn][Dd][Ii][Nn][Gg]([^A-Za-z]|$)/) return "Finding heading"
+  return ""
+}
+function vf_block_start(t,   b) {
+  b = sprintf("%c", 96)
+  if (t ~ /^[-+*][ \t]+[^ \t]/ || t ~ /^1[.)][ \t]+[^ \t]/) return 1
+  if (t ~ /^(#|##|###|####|#####|######)([ \t]|$)/ || t ~ /^>/ || t ~ /^<!--/ || t ~ /^~~~/ || vf_raw_start(t)) return 1
+  if (t ~ ("^" b b b "[^" b "]*$")) return 1
+  return (t ~ /^(\*[ \t]*\*[ \t]*\*[* \t]*|-[ \t]*-[ \t]*-[- \t]*|_[ \t]*_[ \t]*_[_ \t]*)$/)
+}
+'

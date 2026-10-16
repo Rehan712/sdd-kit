@@ -1,0 +1,189 @@
+##### capcheck.py
+import hashlib,os,sys,glob
+spec=sys.argv[1]; cur=sys.argv[2]; ids=sys.argv[3:]
+H=lambda b: hashlib.sha256(b).hexdigest()
+FILES=["meta.nul","argv.nul","inputs.nul","inputs-after.nul","bindings.nul","output.log","summary.txt"]
+KEYS="version id sequence kind start end repo cwd check shell input_before input_after no_tick exit output_digest output_bytes policy key".split()
+def meta(p):
+    d=open(p,"rb").read().split(b"\0")
+    assert d[-1]==b""; d=d[:-1]; assert len(d)%2==0
+    m={}
+    for i in range(0,len(d),2):
+        k=d[i].decode(); assert k in KEYS and k not in m, k; m[k]=d[i+1].decode()
+    assert set(m)==set(KEYS); return m
+allmeta={}
+for led in glob.glob(spec+"/notes/verification/captures/CAP-*"):
+    cid=os.path.basename(led); allmeta[cid]=meta(spec+"/notes/captures/"+cid+"/meta.nul")
+ok=True
+for cid in ids:
+    d=spec+"/notes/captures/"+cid
+    exp="verification:1\n"+"\n".join(H(open(d+"/"+f,"rb").read())+" "+f for f in FILES)
+    comp=open(d+"/COMPLETE").read()
+    r=[]
+    r.append(("seal", comp.rstrip("\n")==exp))
+    r.append(("ledger", open(spec+"/notes/verification/captures/"+cid,"rb").read()==open(d+"/COMPLETE","rb").read()))
+    m=meta(d+"/meta.nul")
+    r.append(("id/seq", m["id"]==cid and cid.startswith("CAP-"+m["sequence"]+"-") and m["kind"]=="command" and m["version"]=="1"))
+    r.append(("exit0", m["exit"]=="0"))
+    r.append(("inputs", m["input_before"]==H(open(d+"/inputs.nul","rb").read())==m["input_after"]==H(open(d+"/inputs-after.nul","rb").read())))
+    r.append(("current", m["input_before"]==cur))
+    log=open(d+"/output.log","rb").read()
+    r.append(("output", m["output_digest"]==H(log) and m["output_bytes"]==str(len(log))))
+    sh=m["shell"]
+    chk=H(open(d+"/argv.nul","rb").read()+b"\0".join(x.encode() for x in [sh,H(open(sh,"rb").read()),m["repo"],m["cwd"],m["policy"]])+b"\0")
+    r.append(("check", chk==m["check"]))
+    later=[o for o,om in allmeta.items() if int(om["sequence"])>int(m["sequence"]) and om["check"]==m["check"] and om["input_before"]==m["input_before"] and om["exit"]!="0"]
+    r.append(("no-later-fail", not later))
+    good=all(v for _,v in r); ok&=good
+    argv=open(d+"/argv.nul","rb").read().split(b"\0")[:-1]
+    print(cid, "OK" if good else "BAD "+str([k for k,v in r if not v]), m["start"], m["end"], m["policy"], "|", (b" ".join(argv[-1:]).decode()[:90]), "| key:", m["key"][:100])
+print("ALL-OK" if ok else "SOME-BAD")
+##### focused.sh
+#!/bin/bash
+# Focused reality-check round-2 probes, run ONLY against the standalone scratch copy $SC.
+set -u
+SC="$1"
+export TMPDIR="$2"
+SANDBOX="$(mktemp -d "${TMPDIR}rc2sb.XXXXXX")"; SANDBOX="$(cd "$SANDBOX" && pwd -P)"
+KIT_DIR="$SC"; SCRIPTS="$SC/scripts"; ANALYZE="$SC/scripts/sdd-analyze.sh"
+. "$SC/tests/helpers.sh"
+echo "== A: AC-001 plan without FM/INV rows, Exclusions or registry (phase plan)"
+spec="$(make_verification_spec_dir missingrows)"
+awk '!/^\| (FM|INV)-[0-9]/ && !/^Exclusions:/ && !/^\| [a-z]+-family \|/' "$spec/plan.md" > "$spec/plan.tmp" && mv "$spec/plan.tmp" "$spec/plan.md"
+rm -f "$spec/tasks.md"
+"$ANALYZE" "$spec" --phase plan > "$SANDBOX/a.out" 2>&1; echo "analyzer rc=$?"
+grep -E 'no concrete|Exclusions entry|warning|error' "$SANDBOX/a.out"
+echo "== B: AC-023 legacy spec, no gate_checks: analyzer vs floor"
+spec="$(make_verification_git_dir legacyfloor)"; repo="$(cd "$spec/../../.." && pwd -P)"
+sed '/^verification_contract:/d' "$spec/spec.md" > "$spec/s.tmp" && mv "$spec/s.tmp" "$spec/spec.md"
+printf 'stacks: []\n' > "$repo/.specify/stack.yml"
+fixture_git -C "$repo" add -A >/dev/null && fixture_git -C "$repo" commit -qm legacy
+"$ANALYZE" "$spec" > "$SANDBOX/b1.out" 2>&1; echo "analyzer rc=$?"; grep -E 'legacy|warning|error' "$SANDBOX/b1.out"
+bash "$SC/scripts/spec-gate.sh" floor "$spec" > "$SANDBOX/b2.out" 2>&1; echo "floor rc=$?"; tail -3 "$SANDBOX/b2.out"
+ls "$spec/notes/verification/floors" 2>/dev/null | grep -c FLOOR- | sed 's/^/sealed floors: /'
+rm -rf "$SANDBOX"
+##### focused2.sh
+#!/bin/bash
+# Focused round-2 probes against the standalone scratch copy only (never the worktree).
+set -u
+SC="$1"; export TMPDIR="$2"
+SANDBOX="$(mktemp -d "${TMPDIR}rc2sb2.XXXXXX")"; SANDBOX="$(cd "$SANDBOX" && pwd -P)"
+KIT_DIR="$SC"; SCRIPTS="$SC/scripts"
+. "$SC/tests/helpers.sh"
+G="$SCRIPTS/spec-gate.sh"; R="$SCRIPTS/spec-run.sh"
+ret() { # spec task cap file [rows]
+  { printf 'Verification-Return: 1\nTask: %s\nCaptures: %s\nSummary: ' "$2" "$3"; cat "$1/notes/captures/$3/summary.txt"
+    printf '%s' "${5-Failure modes:
+FM-001, tests/check.sh::test_ac_001_shared, $3
+}"; } > "$4"; }
+show() { printf '%s rc=%s | %s\n' "$1" "$2" "$(printf '%s' "$3" | grep -v '^$' | tail -1 | cut -c1-150)"; }
+spec="$(make_verification_git_dir acc)"; repo="$(cd "$spec/../../.." && pwd -P)"
+o="$("$R" "$spec" T001 --cwd "$repo" --from-task --no-tick --summary 2>&1)"; cap="$(printf '%s' "$o" | sed -n 's/^capture=\([^ ]*\).*/\1/p')"
+before="$(shasum -a 256 < "$spec/tasks.md")"
+echo "== AC-022 probes (cap=$cap)"
+ret "$spec" T001 "$cap" "$SANDBOX/nofm" ''; o="$("$G" accept "$spec" T001 "$SANDBOX/nofm" 2>&1)"; show 'no Failure modes block' $? "$o"
+ret "$spec" T001 "$cap" "$SANDBOX/good0"; sed "s/$cap/CAP-999-zzzzzz/g" "$SANDBOX/good0" > "$SANDBOX/unk"
+o="$("$G" accept "$spec" T001 "$SANDBOX/unk" 2>&1)"; show 'nonexistent capture' $? "$o"
+o2="$("$R" "$spec" T001 --cwd "$repo" --no-tick --summary -- bash -c 'echo test_ac_001_shared passed' 2>&1)"; ucap="$(printf '%s' "$o2" | sed -n 's/^capture=\([^ ]*\).*/\1/p')"
+ret "$spec" T001 "$ucap" "$SANDBOX/unrel"; o="$("$G" accept "$spec" T001 "$SANDBOX/unrel" 2>&1)"; show 'unrelated log naming the test' $? "$o"
+cp "$repo/tests/check.sh" "$SANDBOX/check.bak"; printf 'exit 5\n' >> "$repo/tests/check.sh"
+o3="$("$R" "$spec" T001 --cwd "$repo" --from-task --no-tick --summary 2>&1)"; fcap="$(printf '%s' "$o3" | sed -n 's/^capture=\([^ ]*\).*/\1/p')"
+ret "$spec" T001 "$fcap" "$SANDBOX/failed"; o="$("$G" accept "$spec" T001 "$SANDBOX/failed" 2>&1)"; show 'failed capture' $? "$o"
+cp "$SANDBOX/check.bak" "$repo/tests/check.sh"
+echo "tasks unchanged after invalid returns: $([[ "$before" == "$(shasum -a 256 < "$spec/tasks.md")" ]] && echo yes || echo NO)"
+mkdir -p "$repo/artifacts"; printf observed-release > "$repo/artifacts/release.txt"; d="$(shasum -a 256 < "$repo/artifacts/release.txt" | awk '{print $1}')"
+printf 'Verification-Return: 1\nTask: T004\nCaptures: none\nSummary: observed\nManual observation: release-observation, artifacts/release.txt, %s, fixture-observer, 2026-09-06T12:00:00Z, PASS: ok\nFailure modes:\nINV-001, release-observation, manual\n' "$d" > "$SANDBOX/manual"
+rm "$repo/artifacts/release.txt"; o="$("$G" accept "$spec" T004 "$SANDBOX/manual" 2>&1)"; show 'manual artifact missing' $? "$o"
+cp "$spec/tasks.md" "$SANDBOX/tasks.before"; ret "$spec" T001 "$cap" "$SANDBOX/good"
+o="$("$G" accept "$spec" T001 "$SANDBOX/good" 2>&1)"; show 'valid return' $? "$o"
+diff "$SANDBOX/tasks.before" "$spec/tasks.md" | grep '^[<>]' | cut -c1-160
+echo "== AC-022 explicit none for a task owing no rows"
+cat >> "$spec/tasks.md" <<'T'
+
+- [ ] **T006** — Shell check with no failure-mode rows
+  - *Files:* `src/parser.sh`, `tests/check.sh`
+  - *Acceptance:* the shell family passes
+  - *Verify kind:* test
+  - *Tests:* `tests/check.sh::test_ac_001_shared`
+  - *Verify:* `bash tests/check.sh` → passed
+  - *Refs:* REQ-001, AC-001
+T
+o="$("$R" "$spec" T006 --cwd "$repo" --from-task --no-tick --summary 2>&1)"; ncap="$(printf '%s' "$o" | sed -n 's/^capture=\([^ ]*\).*/\1/p')"; show 'capture T006' $? "$o"
+ret "$spec" T006 "$ncap" "$SANDBOX/none" 'Failure modes: none
+'; o="$("$G" accept "$spec" T006 "$SANDBOX/none" 2>&1)"; show 'none accepted' $? "$o"
+echo "== AC-007/AC-020 changed gate command re-executes"
+spec="$(make_verification_git_dir cmd)"; repo="$(cd "$spec/../../.." && pwd -P)"
+printf '\nprintf x >> %q\n' "$SANDBOX/suite-count" >> "$repo/tests/check.sh"
+cat > "$repo/.specify/stack.yml" <<'Y'
+stacks: []
+gate_checks:
+  - 'bash tests/check.sh'
+reuse_checks:
+  - 'bash tests/check.sh'
+verification_tools:
+  - 'bash'
+verification_inputs: []
+Y
+"$G" floor "$spec" >/dev/null 2>&1; echo "floor1 rc=$? suite=$(cat "$SANDBOX/suite-count")"
+o="$("$G" floor "$spec" 2>&1)"; echo "floor2 rc=$? suite=$(cat "$SANDBOX/suite-count") $(printf '%s' "$o" | grep -o 'executed=[0-9]* cache-hits=[0-9]*')"
+cat > "$repo/.specify/stack.yml" <<'Y'
+stacks: []
+gate_checks:
+  - 'bash ./tests/check.sh'
+reuse_checks:
+  - 'bash ./tests/check.sh'
+verification_tools:
+  - 'bash'
+verification_inputs: []
+Y
+o="$("$G" floor "$spec" 2>&1)"; echo "floor3 (command changed) rc=$? suite=$(cat "$SANDBOX/suite-count") $(printf '%s' "$o" | grep -o 'executed=[0-9]* cache-hits=[0-9]*')"
+echo "== AC-021 escaping and long fields"
+spec="$(make_verification_git_dir esc)"; repo="$(cd "$spec/../../.." && pwd -P)"
+long="$(awk 'BEGIN{for(i=0;i<900;i++) printf "k"}')"
+o="$("$R" "$spec" T001 --cwd "$repo" --no-tick --summary -- printf 'first\nkey\033[31m%s\ttab\n' "$long" 2>&1)"; rc=$?
+printf 'rc=%s lines=%s bytes=%s has-ESC=%s ref=%s\n' "$rc" "$(printf '%s\n' "$o" | wc -l | tr -d ' ')" "$(printf '%s\n' "$o" | wc -c | tr -d ' ')" "$(printf '%s' "$o" | LC_ALL=C grep -c $'\033')" "$(printf '%s' "$o" | grep -c 'complete metadata: capture directory')"
+o="$("$R" "$spec" T001 --cwd "$repo" --no-tick --summary -- printf '%s\n' 'line
+break' 2>&1)"; printf 'multiline-argv summary lines=%s\n' "$(printf '%s\n' "$o" | wc -l | tr -d ' ')"
+rm -rf "$SANDBOX"
+##### focused3.sh
+#!/bin/bash
+# AC-007/AC-020 probe: a changed gate command must execute again (scratch copy only).
+set -u
+SC="$1"; export TMPDIR="$2"
+SANDBOX="$(mktemp -d "${TMPDIR}rc2sb3.XXXXXX")"; SANDBOX="$(cd "$SANDBOX" && pwd -P)"
+KIT_DIR="$SC"; SCRIPTS="$SC/scripts"
+. "$SC/tests/helpers.sh"
+G="$SCRIPTS/spec-gate.sh"
+spec="$(make_verification_git_dir cmd)"; repo="$(cd "$spec/../../.." && pwd -P)"
+printf '\nprintf x >> %q\n' "$SANDBOX/suite-count" >> "$repo/tests/check.sh"
+printf '#!/usr/bin/env bash\n# AC-002 AC-003 AC-004\nprintf "static passed\\n"\n' > "$repo/tests/static.sh"
+cfg() { printf "stacks: []\ngate_checks:\n  - '%s'\n  - 'bash tests/static.sh'\nreuse_checks:\n  - '%s'\nverification_tools:\n  - 'bash'\nverification_inputs: []\n" "$1" "$1" > "$repo/.specify/stack.yml"; }
+cfg 'bash tests/check.sh'
+for n in 1 2; do o="$("$G" floor "$spec" 2>&1)"; echo "floor$n rc=$? suite=$(cat "$SANDBOX/suite-count" 2>/dev/null) $(printf '%s' "$o" | grep -o 'executed=[0-9]* cache-hits=[0-9]*')"; [[ -s "$SANDBOX/suite-count" ]] || printf '%s\n' "$o" | tail -5; done
+cfg 'bash ./tests/check.sh'
+o="$("$G" floor "$spec" 2>&1)"; echo "floor3 command-changed rc=$? suite=$(cat "$SANDBOX/suite-count") $(printf '%s' "$o" | grep -o 'executed=[0-9]* cache-hits=[0-9]*')"
+rm -rf "$SANDBOX"
+##### focused4.sh
+#!/bin/bash
+# AC-009 probe: legacy date-only history vs explicit timestamp reconciliation (scratch copy only).
+set -u
+SC="$1"; export TMPDIR="$2"
+SANDBOX="$(mktemp -d "${TMPDIR}rc2sb4.XXXXXX")"; SANDBOX="$(cd "$SANDBOX" && pwd -P)"
+KIT_DIR="$SC"; SCRIPTS="$SC/scripts"
+. "$SC/tests/helpers.sh"
+G="$SCRIPTS/spec-gate.sh"
+spec="$(make_verification_git_dir legacyround)"; repo="$(cd "$spec/../../.." && pwd -P)"
+printf '#!/usr/bin/env bash\n# AC-002 AC-003 AC-004\nprintf "static passed\\n"\n' > "$repo/tests/static.sh"
+printf "stacks: []\ngate_checks:\n  - 'bash tests/check.sh'\n  - 'bash tests/static.sh'\nreuse_checks: []\nverification_tools:\n  - 'bash'\nverification_inputs: []\n" > "$repo/.specify/stack.yml"
+mkdir -p "$spec/notes"; cp "$SC/.specify/specs/002-usage-limit-handling-for-dispatched-runs/notes/opponent.md" "$spec/notes/opponent.md"
+o="$("$G" tally "$spec" 2>&1)"; echo "tally rc=$? $(printf '%s' "$o" | head -1)"
+o="$("$G" floor "$spec" 2>&1)"; echo "floor rc=$?"
+o="$("$G" round "$spec" opponent 2>&1)"; echo "round(no reconcile) rc=$? | $(printf '%s' "$o" | grep -i 'date-only\|denied\|round=' | head -2 | tr '\n' ' ')"
+now="$(date -u +%Y-%m-%dT%H:%M:%SZ)"; dig="$(shasum -a 256 < "$spec/notes/opponent.md" | awk '{print $1}')"
+printf '%s\0' round 5 timestamp "$now" report_digest "$dig" > "$SANDBOX/reconcile.nul"
+o="$("$G" round "$spec" opponent --reconcile "$SANDBOX/reconcile.nul" 2>&1)"; echo "reconcile rc=$? | $(printf '%s' "$o" | tail -1)"
+sleep 1; w="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+printf '\n## Decisions log\n- %s — waiver: gate=opponent; round=6; after=5; by=probe; reason=legacy ordering probe\n' "$w" >> "$spec/STATUS.md"
+o="$("$G" waiver "$spec" opponent 6 2>&1)"; echo "waiver rc=$? | $(printf '%s' "$o" | tail -1)"
+o="$("$G" floor "$spec" 2>&1)"; o="$("$G" round "$spec" opponent 2>&1)"; echo "round after reconcile rc=$? | $(printf '%s' "$o" | tail -1 | cut -c1-120)"
+rm -rf "$SANDBOX"

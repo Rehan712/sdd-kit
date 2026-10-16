@@ -1,0 +1,1 @@
+run1 exit 1 is a defect in the audit script itself: `ls -A dir1 dir2 | grep ^\.` matched ls header lines (".specify/specs/...:"), not a staged reservation. find -name ".*" over both gate ledgers returned 0 entries. Check replaced with find; audit re-run as r10-entry-audit.{log,rc}.

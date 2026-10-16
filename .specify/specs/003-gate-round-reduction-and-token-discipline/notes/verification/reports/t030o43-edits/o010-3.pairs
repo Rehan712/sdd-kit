@@ -1,0 +1,12 @@
+@@OLD
+# record the harness keeps it in. A declared LC_ALL is hashed by the caller's
+# value, so two caller values are two identities. And the kernel's sorts whose
+@@NEW
+# record the harness keeps it in. The record of a declared LC_ALL carries the
+# caller's value, so two caller values are two identities. And the kernel's sorts whose
+@@END
+@@OLD
+  # A declared LC_ALL is hashed by the caller's value.
+@@NEW
+  # The record of a declared LC_ALL carries the caller's value.
+@@END

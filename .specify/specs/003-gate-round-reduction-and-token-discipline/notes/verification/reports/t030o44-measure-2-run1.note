@@ -1,0 +1,18 @@
+t030o44-measure-2 run 1 (2026-10-02T07:42:38Z to 07:49:51Z, rc 1, 671 PASS, 18 FAIL), kept as run, with its script
+(t030o44-measure-2-run1.sh) and candidate (t030o44-edits/kernel-3-run1.pairs). Every failure is one of two faults,
+neither a defect of the rule being measured:
+1. The candidate itself (kernel-3-run1.pairs): its last block, built from new-3/k7-canon-fields.txt, took that
+   text's lines 12 to 18 where the block needed lines 12 to 19, so the canonical field rule's line that opens the
+   item check (itemfield) was not in D. The canonical F10 rows (f10-continued-indented, f10-continued-lazy,
+   status-continued) therefore sealed on D, and f1-quoted-gt-nested printed only its label diagnostic (14 FAIL).
+   The manifest pass, which carries its own item lines, refused every F10 row as measured. Corrected in
+   kernel-3.pairs (k7 lines 12 to 19); the same correction adds the nested-field exception (vf_field_item),
+   found by reading the shipped `indented-fields` read row before the rerun.
+2. The measurement's own comparison of the stage maps: vf_config refuses 001's and 002's tasks.md on both kits
+   alike (`unknown checkpoint stage Backend` / `API`, the kit's stack.yml naming stages those specs lack) and writes
+   no catalog, and the check ran `diff -r` on two missing directories (4 FAIL). Corrected to compare the
+   directories only when either exists, the diagnostics always.
+Everything else passed in run 1: every manifest member and sibling, every canonical member but the F10 rows, every
+positive, the twelve returned round reports read as manifests, the minors' rows, and the whole recorded history
+(tally, analyzer, ac-coverage, every report catalog and diagnostic, every extracted round block with all 14 sealed
+digests of 003 equal to D's blocks, the binding catalogs, the semantic views, the waiver checks and the snapshot).

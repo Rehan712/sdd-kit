@@ -1,0 +1,8 @@
+@@OLD
+`TMPDIR` decides where temporary files go, never what a check concludes. A
+@@NEW
+`TMPDIR` decides where temporary files go, while its spelling (a trailing or
+doubled slash, a symlink) can decide a check that compares a path under it
+with the path a program prints, so the kit's own suites set it to the physical
+path of the directory it names when they start. A
+@@END

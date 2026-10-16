@@ -59,7 +59,7 @@ test_extra_test_glob_extends_the_net() {
 
 test_default_root_is_the_git_toplevel() {
   local spec_dir; spec_dir="$(make_spec_dir)"
-  git init -q "$SANDBOX/proj"
+  fixture_git init -q "$SANDBOX/proj" || fixture_build_failed ac-coverage-project
   mkdir -p "$SANDBOX/proj/tests"
   printf 'AC-001 AC-002\n' > "$SANDBOX/proj/tests/all.test.js"
   run_rc 0 "$AC_COV" "$spec_dir"

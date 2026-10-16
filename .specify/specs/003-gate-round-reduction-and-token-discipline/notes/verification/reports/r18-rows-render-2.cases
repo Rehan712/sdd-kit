@@ -1,0 +1,6 @@
+# Session 20: rows for the discovery mutants session 19 listed as to be argued equivalent (r18-discover-mutants.py).
+# kind|tag|body (after the minor tier, or the whole manifest for W)|diagnostic
+R|definition-after-quote-marker|\n> [a]: /u\n|a link reference definition in finding G-042
+W|image-title-across-lines-outside-finding-after-id|### Finding G-041\n- **Class:** tier-binding\n- **Severity:** minor\n## Notes\n\nG-042 is discussed below.\n\n![ `]` x ](u "a\ny\nb")Severity: data-loss\n|a severity line outside any Finding
+W|tag-image-alt-code-span-outside-finding-after-id|### Finding G-041\n- **Class:** tier-binding\n- **Severity:** minor\n## Notes\n\nG-042 is discussed below.\n\n<b>![ `]` x\ny\n](u)Severity: data-loss\n|a severity line outside any Finding
+W|quoted-definition-hiding-a-field-line|### Finding G-042\n- **Class:** tier-binding\n\n> [a]: /u '\n    - **Severity:** minor\n    - x'\n\n- **Severity:** data-loss\n|none

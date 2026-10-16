@@ -1,0 +1,12 @@
+== baselines
+== kill K73-fixture-git-leaves-the-installation-template
+  | fixture_repository_cases rc=1
+  |   assert: AC-020: a template's info/exclude reached a host repository
+PASS K73-fixture-git-leaves-the-installation-template KILLED (want=1 got=1)
+== kill K74-index-removal-with-raw-git
+  | test_capture_provenance@hostile rc=0
+FAIL K74-index-removal-with-raw-git KILLED (want=1 got=0)
+== equiv E13-repository-config-with-raw-git
+  | test_capture_provenance@hostile rc=0
+PASS E13-repository-config-with-raw-git SURVIVES (argued equivalent) (want=1 got=1)
+matrix failures=1

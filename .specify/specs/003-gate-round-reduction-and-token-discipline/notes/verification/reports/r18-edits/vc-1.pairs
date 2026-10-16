@@ -1,0 +1,25 @@
+@@OLD
+nothing a later line adds can change how it begins. Inside a finding the
+grammar is narrowed rather than rendered: a line that carries raw HTML or an
+autolink (a `<` followed by a letter, `/`, `!` or `?`) outside every code
+span, a form feed or vertical tab, or a carriage return that does not end the
+line is refused by name, so a report writes markup inside a finding only as
+code, between backticks. The other canonical fields are
+@@NEW
+nothing a later line adds can change how it begins. Inside a finding the
+grammar is narrowed rather than rendered: a line is refused by name when it
+carries, outside every code span, raw HTML or an autolink (a `<` followed by
+a letter, a digit, or a symbol an email address may begin with), or an inline
+link's destination or title, or a full reference link's label, that holds a
+backtick or does not end on its line; when it carries a form feed or vertical
+tab, or a carriage return that does not end the line; when it opens a code
+fence anywhere but at the start of the line (after indentation or a list
+marker, where a list item may open a fence the fence tracker does not
+follow); or when it begins or closes a link reference definition's label (a
+bracket at the start of a line closed by `]:` on that line, or on a later line
+of its paragraph, since a label may span lines). The check
+is judged after the line's own heading has opened or closed a finding. So a
+report writes markup inside a finding only as code, between backticks, writes
+a code example inside a finding as a fence at the start of a line, and keeps
+link definitions outside every finding. The other canonical fields are
+@@END

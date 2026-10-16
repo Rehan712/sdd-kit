@@ -1,0 +1,36 @@
+start 2026-10-07T19:45:13Z; TMPDIR=/private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-fixtures/tmp/
+PASS FX: the four files hash as r15-edits/pre-apply
+PASS FX: tgc-1.pairs applied, each block exactly once
+PASS FX: tsg-1.pairs applied, each block exactly once
+PASS DX: kernel-1.pairs applied
+PASS DX: vc-1.pairs applied
+PASS FX: both suites still parse
+PASS DX: both suites still parse
+== DX: every changed fixture function passes on the repaired kernel
+PASS DX report_manifest_locale_cases passes
+PASS DX report_record_line_cases passes
+PASS DX round_record_line_cases passes
+== FX: on the unrepaired kernel
+PASS FX report_manifest_locale_cases passes (it gains positives only, which parse on both kits)
+PASS FX report_record_line_cases fails
+  | FX report_record_line_cases: 168 failing assertions
+PASS FX report_record_line_cases: no failing assertion outside the new member rows and their exit checks
+PASS FX report_record_line_cases fails on: written as paragraph-ordered-sibling
+PASS FX report_record_line_cases fails on: written as paragraph-setext
+PASS FX report_record_line_cases fails on: written as paragraph-block-quote
+PASS FX report_record_line_cases fails on: written as paragraph-indented-list-marker
+PASS FX report_record_line_cases fails on: written as code-span-in-link
+PASS FX report_record_line_cases fails on: written as br-in-prose
+PASS FX report_record_line_cases fails on: written as div-inside-line
+PASS FX report_record_line_cases fails on: written as br-then-code-span
+PASS FX report_record_line_cases fails on: written as code-span-then-soft-hyphen
+PASS FX report_record_line_cases fails on: written as closing-p-inside-line
+PASS FX report_record_line_cases fails on: written as br-then-soft-hyphen
+PASS FX report_record_line_cases fails on: written as br-in-where
+PASS FX report_record_line_cases: every new member case fails, under both locales (22 manifest rows; 19 canonical rows and the br-in-where case)
+PASS FX round_record_line_cases fails
+PASS FX round_record_line_cases: its first failing assertion is a new row (the ordered sibling, end to end)
+  | first: assert: AC-009: a CLEARED completion over a second manifest tier written as 
+PASS live worktree status outside notes/verification/ unchanged
+end 2026-10-07T19:47:40Z
+r15-fixtures-judge failures=0

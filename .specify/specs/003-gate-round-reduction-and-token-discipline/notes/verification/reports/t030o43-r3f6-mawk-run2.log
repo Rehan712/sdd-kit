@@ -1,0 +1,51 @@
+== host (rc=0)
+platform=Darwin awk=/usr/bin/awk version=awk version 20200816
+record NF=2 split-default=2 split-space=2 reassigned NF=2 class=1
+  byte=\013
+record NF=2 split-default=2 split-space=2 reassigned NF=2 class=1
+  byte=\014
+record NF=2 split-default=2 split-space=2 reassigned NF=2 class=1
+  byte=\015
+case control                rc=0 ids=[G-042$ ] 
+/private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/4a6b1e85-443f-4b6d-84e7-893614ebf421/scratchpad/t030o43-r3f6/probe.sh: line 24: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/4a6b1e85-443f-4b6d-84e7-893614ebf421/scratchpad/t030o43-r3f6/work/out.nul: No such file or directory
+case heading-id-nbsp        rc=3 ids=[] report recovery: heading-id-nbsp/notes/opponent.md:24: incomplete finding G-042<VT>; reconcile canonical records
+/private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/4a6b1e85-443f-4b6d-84e7-893614ebf421/scratchpad/t030o43-r3f6/probe.sh: line 24: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/4a6b1e85-443f-4b6d-84e7-893614ebf421/scratchpad/t030o43-r3f6/work/out.nul: No such file or directory
+case heading-id-nbsp-title  rc=3 ids=[] report recovery: heading-id-nbsp-title/notes/opponent.md:24: incomplete finding G-042<VT>—; reconcile canonical records
+/private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/4a6b1e85-443f-4b6d-84e7-893614ebf421/scratchpad/t030o43-r3f6/probe.sh: line 24: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/4a6b1e85-443f-4b6d-84e7-893614ebf421/scratchpad/t030o43-r3f6/work/out.nul: No such file or directory
+case totals-nbsp            rc=3 ids=[] report recovery: totals-nbsp/notes/opponent.md:7: malformed totals; reconcile canonical records|report recovery: totals-nbsp/notes/opponent.md:24: finding totals disagree; reconcile canonical records
+/private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/4a6b1e85-443f-4b6d-84e7-893614ebf421/scratchpad/t030o43-r3f6/probe.sh: line 24: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/4a6b1e85-443f-4b6d-84e7-893614ebf421/scratchpad/t030o43-r3f6/work/out.nul: No such file or directory
+case totals-nbsp-count      rc=3 ids=[] report recovery: totals-nbsp-count/notes/opponent.md:7: malformed totals; reconcile canonical records|report recovery: totals-nbsp-count/notes/opponent.md:24: finding totals disagree; reconcile canoni
+== container (rc=0)
+platform=Linux awk=/usr/bin/mawk version=awk: not an option: --version
+record NF=2 split-default=2 split-space=2 reassigned NF=2 class=1
+  byte=\013
+record NF=2 split-default=2 split-space=2 reassigned NF=2 class=1
+  byte=\014
+record NF=2 split-default=2 split-space=2 reassigned NF=2 class=1
+  byte=\015
+case control                rc=0 ids=[G-042$ ] 
+/probe.sh: line 24: /work/out.nul: No such file or directory
+case heading-id-nbsp        rc=3 ids=[] report recovery: heading-id-nbsp/notes/opponent.md:24: incomplete finding G-042<VT>; reconcile canonical records
+/probe.sh: line 24: /work/out.nul: No such file or directory
+case heading-id-nbsp-title  rc=3 ids=[] report recovery: heading-id-nbsp-title/notes/opponent.md:24: incomplete finding G-042<VT>—; reconcile canonical records
+/probe.sh: line 24: /work/out.nul: No such file or directory
+case totals-nbsp            rc=3 ids=[] report recovery: totals-nbsp/notes/opponent.md:7: malformed totals; reconcile canonical records|report recovery: totals-nbsp/notes/opponent.md:24: finding totals disagree; reconcile canonical records
+/probe.sh: line 24: /work/out.nul: No such file or directory
+case totals-nbsp-count      rc=3 ids=[] report recovery: totals-nbsp-count/notes/opponent.md:7: malformed totals; reconcile canonical records|report recovery: totals-nbsp-count/notes/opponent.md:24: finding totals disagree; reconcile canoni
+== differences host vs container (excluding the platform line)
+8c8
+< /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/4a6b1e85-443f-4b6d-84e7-893614ebf421/scratchpad/t030o43-r3f6/probe.sh: line 24: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/4a6b1e85-443f-4b6d-84e7-893614ebf421/scratchpad/t030o43-r3f6/work/out.nul: No such file or directory
+---
+> /probe.sh: line 24: /work/out.nul: No such file or directory
+10c10
+< /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/4a6b1e85-443f-4b6d-84e7-893614ebf421/scratchpad/t030o43-r3f6/probe.sh: line 24: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/4a6b1e85-443f-4b6d-84e7-893614ebf421/scratchpad/t030o43-r3f6/work/out.nul: No such file or directory
+---
+> /probe.sh: line 24: /work/out.nul: No such file or directory
+12c12
+< /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/4a6b1e85-443f-4b6d-84e7-893614ebf421/scratchpad/t030o43-r3f6/probe.sh: line 24: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/4a6b1e85-443f-4b6d-84e7-893614ebf421/scratchpad/t030o43-r3f6/work/out.nul: No such file or directory
+---
+> /probe.sh: line 24: /work/out.nul: No such file or directory
+14c14
+< /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/4a6b1e85-443f-4b6d-84e7-893614ebf421/scratchpad/t030o43-r3f6/probe.sh: line 24: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/4a6b1e85-443f-4b6d-84e7-893614ebf421/scratchpad/t030o43-r3f6/work/out.nul: No such file or directory
+---
+> /probe.sh: line 24: /work/out.nul: No such file or directory
