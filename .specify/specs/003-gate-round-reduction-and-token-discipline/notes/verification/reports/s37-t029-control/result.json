@@ -1,0 +1,173 @@
+{
+  "started": "2026-10-28T11:49:20.582564+00:00",
+  "task": "T029",
+  "capture": "CAP-819-05nYhW",
+  "source": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+  "before": {
+    "head": "2049f65960cc91e9e30bbd5ff1e11fc0fdf7cbd9",
+    "protected": {
+      "/Users/babar/projects/sdd-kit-public/.git/worktrees/003-gate-round-reduction-and-token-discipline/index": {
+        "sha256": "c492d7ea95abf8e8c335001f20c62ff50bc6f1e2179d7a07d30811181b3dd700",
+        "mode": 420,
+        "mtimeNs": 1792957592613445716
+      },
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/STATUS.md": {
+        "sha256": "569eba99f2f1860ccb083c72f88e3a1cc21ce49be31547d5ce34cc75f1415099",
+        "mode": 384,
+        "mtimeNs": 1793178169511231380
+      },
+      "scripts/sdd-analyze.sh": {
+        "sha256": "c43de9e92df5657a3a94091a73bccb9abe37f9e1c3c3f6ccf6cb1cfa64f3a3f2",
+        "mode": 493,
+        "mtimeNs": 1793088116020109886
+      },
+      "tests/test-sdd-analyze.sh": {
+        "sha256": "e5b5cde870b2da8c086a41f3a3824b401262343225108c7f3bab716324150c9a",
+        "mode": 420,
+        "mtimeNs": 1793183737724792921
+      },
+      "tests/test-gate-contracts.sh": {
+        "sha256": "7bc13dde14004bf4ba967c0f64ec120b19bdde641643a6a7436d154c222f893c",
+        "mode": 420,
+        "mtimeNs": 1792956408250063378
+      }
+    },
+    "tasks": {
+      "sha256": "b5c663f7299074826b1e00a9a23a2041ec210d4fa2d66af455498e40411a855c",
+      "mode": 384,
+      "mtimeNs": 1793184827802227362
+    }
+  },
+  "intactReturnSha256": "0828776bf6a8018c6cd5768e04c3344ffd1f09d5fb94f5d4a49d38ec36ce4412",
+  "incompleteReturnSha256": "00bd958d816ccb53df8a7fc5cc09beec2e81c43ab7c8d0a379e0fad392faca63",
+  "steps": [
+    {
+      "name": "reject",
+      "argv": [
+        "bash",
+        "scripts/spec-gate.sh",
+        "accept",
+        ".specify/specs/003-gate-round-reduction-and-token-discipline",
+        "T029",
+        ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/returns/T029-incomplete.txt"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "started": "2026-10-28T11:49:20.584974+00:00",
+      "ended": "2026-10-28T11:50:10.419430+00:00",
+      "seconds": 49.833,
+      "exit": 3
+    },
+    {
+      "name": "accept",
+      "argv": [
+        "bash",
+        "scripts/spec-gate.sh",
+        "accept",
+        ".specify/specs/003-gate-round-reduction-and-token-discipline",
+        "T029",
+        ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/returns/T029.txt"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "started": "2026-10-28T11:50:10.439623+00:00",
+      "ended": "2026-10-28T11:51:42.399047+00:00",
+      "seconds": 91.958,
+      "exit": 0
+    },
+    {
+      "name": "seal-check",
+      "argv": [
+        "bash",
+        "-c",
+        ". scripts/lib.sh; . scripts/verification-lib.sh; vf_integrity \"$1\" meta.nul && vf_integrity \"$2\" meta.nul && vf_integrity \"$3\" meta.nul return.txt tasks.after digests.nul && test \"$(cat \"$3/COMMITTED\")\" = \"$(vf_hash \"$3/COMPLETE\")\"",
+        "_",
+        ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/accept-events/ACCEPT-0LHiyU",
+        ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/accept-events/ACCEPT-1F42D0",
+        ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/accepted/T029/ACC-5OLy1X"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "started": "2026-10-28T11:51:42.444727+00:00",
+      "ended": "2026-10-28T11:51:42.872943+00:00",
+      "seconds": 0.427,
+      "exit": 0
+    }
+  ],
+  "exit": 0,
+  "accepted": true,
+  "rejectedEvent": "ACCEPT-0LHiyU",
+  "rejectionClass": "binding-mismatch",
+  "rejectionTimestamp": "2026-10-28T11:50:10Z",
+  "rejectedTaskBytesUnchanged": true,
+  "afterReject": {
+    "protected": {
+      "/Users/babar/projects/sdd-kit-public/.git/worktrees/003-gate-round-reduction-and-token-discipline/index": {
+        "sha256": "c492d7ea95abf8e8c335001f20c62ff50bc6f1e2179d7a07d30811181b3dd700",
+        "mode": 420,
+        "mtimeNs": 1792957592613445716
+      },
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/STATUS.md": {
+        "sha256": "569eba99f2f1860ccb083c72f88e3a1cc21ce49be31547d5ce34cc75f1415099",
+        "mode": 384,
+        "mtimeNs": 1793178169511231380
+      },
+      "scripts/sdd-analyze.sh": {
+        "sha256": "c43de9e92df5657a3a94091a73bccb9abe37f9e1c3c3f6ccf6cb1cfa64f3a3f2",
+        "mode": 493,
+        "mtimeNs": 1793088116020109886
+      },
+      "tests/test-sdd-analyze.sh": {
+        "sha256": "e5b5cde870b2da8c086a41f3a3824b401262343225108c7f3bab716324150c9a",
+        "mode": 420,
+        "mtimeNs": 1793183737724792921
+      },
+      "tests/test-gate-contracts.sh": {
+        "sha256": "7bc13dde14004bf4ba967c0f64ec120b19bdde641643a6a7436d154c222f893c",
+        "mode": 420,
+        "mtimeNs": 1792956408250063378
+      }
+    },
+    "tasks": {
+      "sha256": "b5c663f7299074826b1e00a9a23a2041ec210d4fa2d66af455498e40411a855c",
+      "mode": 384,
+      "mtimeNs": 1793184827802227362
+    }
+  },
+  "acceptedReceipt": "ACC-5OLy1X",
+  "acceptedEvent": "ACCEPT-1F42D0",
+  "acceptTimestamp": "2026-10-28T11:51:42Z",
+  "afterAccept": {
+    "protected": {
+      "/Users/babar/projects/sdd-kit-public/.git/worktrees/003-gate-round-reduction-and-token-discipline/index": {
+        "sha256": "c492d7ea95abf8e8c335001f20c62ff50bc6f1e2179d7a07d30811181b3dd700",
+        "mode": 420,
+        "mtimeNs": 1792957592613445716
+      },
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/STATUS.md": {
+        "sha256": "569eba99f2f1860ccb083c72f88e3a1cc21ce49be31547d5ce34cc75f1415099",
+        "mode": 384,
+        "mtimeNs": 1793178169511231380
+      },
+      "scripts/sdd-analyze.sh": {
+        "sha256": "c43de9e92df5657a3a94091a73bccb9abe37f9e1c3c3f6ccf6cb1cfa64f3a3f2",
+        "mode": 493,
+        "mtimeNs": 1793088116020109886
+      },
+      "tests/test-sdd-analyze.sh": {
+        "sha256": "e5b5cde870b2da8c086a41f3a3824b401262343225108c7f3bab716324150c9a",
+        "mode": 420,
+        "mtimeNs": 1793183737724792921
+      },
+      "tests/test-gate-contracts.sh": {
+        "sha256": "7bc13dde14004bf4ba967c0f64ec120b19bdde641643a6a7436d154c222f893c",
+        "mode": 420,
+        "mtimeNs": 1792956408250063378
+      }
+    },
+    "tasks": {
+      "sha256": "3d0b827856d89b6b1ae08b096dd5277920375f26f5fc1c97cc3e45f1f569b3d7",
+      "mode": 384,
+      "mtimeNs": 1793188302176228237
+    }
+  },
+  "ended": "2026-10-28T11:51:42.886855+00:00",
+  "tasksBytesFinalizedBeforeSnapshot": true
+}

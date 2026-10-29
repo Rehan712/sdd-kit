@@ -1,0 +1,137 @@
+mutant midnight     rc=1 killed
+    | expected exit 4, got 0: bash /private/tmp/opp22/tmp/sddkit.JPaFUE/floor-kit-legacyround/scripts/spec-gate.sh waiver /private/tmp/opp22/tmp/sddkit.JPaFUE/legacyround/.specify/specs/003-verificati
+    | AC-009: a waiver dated before the reconciled completion authorized the next round
+mutant readcheck    rc=1 killed
+    | expected exit 3, got 0: bash /private/tmp/opp22/tmp/sddkit.pjycov/floor-kit-legacyround/scripts/spec-gate.sh waiver /private/tmp/opp22/tmp/sddkit.pjycov/legacyround/.specify/specs/003-verificati
+    | AC-009: a reconcile record outlived an edit of its history and authorized round 6
+    | expected exit 3, got 0: bash /private/tmp/opp22/tmp/sddkit.pjycov/floor-kit-legacyround/scripts/spec-gate.sh round /private/tmp/opp22/tmp/sddkit.pjycov/legacyround/.specify/specs/003-verificatio
+    | AC-009: a reconcile record outlived an edit of its history and reserved round 6
+    | expected exit 0, got 3: bash /private/tmp/opp22/tmp/sddkit.pjycov/floor-kit-legacyround/scripts/spec-gate.sh round /private/tmp/opp22/tmp/sddkit.pjycov/legacyround/.specify/specs/003-verificatio
+    | AC-009: an exact waiver after reconciliation did not reserve the next round
+mutant readdigest   rc=1 killed
+    | expected exit 3, got 0: bash /private/tmp/opp22/tmp/sddkit.iQqIpA/floor-kit-legacyround/scripts/spec-gate.sh waiver /private/tmp/opp22/tmp/sddkit.iQqIpA/legacyround/.specify/specs/003-verificati
+    | AC-009: a reconcile record outlived an edit of its history and authorized round 6
+    | expected exit 3, got 0: bash /private/tmp/opp22/tmp/sddkit.iQqIpA/floor-kit-legacyround/scripts/spec-gate.sh round /private/tmp/opp22/tmp/sddkit.iQqIpA/legacyround/.specify/specs/003-verificatio
+    | AC-009: a reconcile record outlived an edit of its history and reserved round 6
+    | expected exit 0, got 3: bash /private/tmp/opp22/tmp/sddkit.iQqIpA/floor-kit-legacyround/scripts/spec-gate.sh round /private/tmp/opp22/tmp/sddkit.iQqIpA/legacyround/.specify/specs/003-verificatio
+    | AC-009: an exact waiver after reconciliation did not reserve the next round
+mutant readround    rc=0 SURVIVED
+mutant reccheck     rc=1 killed
+    | expected exit 3, got 0: bash /private/tmp/opp22/tmp/sddkit.pMGnfL/floor-kit-legacyround/scripts/spec-gate.sh round /private/tmp/opp22/tmp/sddkit.pMGnfL/legacyround/.specify/specs/003-verificatio
+    | AC-009: a reconcile record with a wrong digest wrote legacy-time.nul
+    | expected exit 4, got 3: bash /private/tmp/opp22/tmp/sddkit.pMGnfL/floor-kit-legacyround/scripts/spec-gate.sh round /private/tmp/opp22/tmp/sddkit.pMGnfL/legacyround/.specify/specs/003-verificatio
+    | AC-009: a reconcile record with a wrong digest left the history able to order an authorization
+    | expected exit 3, got 0: bash /private/tmp/opp22/tmp/sddkit.pMGnfL/floor-kit-legacyround/scripts/spec-gate.sh round /private/tmp/opp22/tmp/sddkit.pMGnfL/legacyround/.specify/specs/003-verificatio
+    | AC-009: a reconcile record with a wrong round wrote legacy-time.nul
+    | expected exit 4, got 3: bash /private/tmp/opp22/tmp/sddkit.pMGnfL/floor-kit-legacyround/scripts/spec-gate.sh round /private/tmp/opp22/tmp/sddkit.pMGnfL/legacyround/.specify/specs/003-verificatio
+    | AC-009: a reconcile record with a wrong round left the history able to order an authorization
+mutant recdigest    rc=1 killed
+    | expected exit 3, got 0: bash /private/tmp/opp22/tmp/sddkit.TzIxKe/floor-kit-legacyround/scripts/spec-gate.sh round /private/tmp/opp22/tmp/sddkit.TzIxKe/legacyround/.specify/specs/003-verificatio
+    | AC-009: a reconcile record with a wrong digest wrote legacy-time.nul
+    | expected exit 4, got 3: bash /private/tmp/opp22/tmp/sddkit.TzIxKe/floor-kit-legacyround/scripts/spec-gate.sh round /private/tmp/opp22/tmp/sddkit.TzIxKe/legacyround/.specify/specs/003-verificatio
+    | AC-009: a reconcile record with a wrong digest left the history able to order an authorization
+mutant recround     rc=1 killed
+    | expected exit 3, got 0: bash /private/tmp/opp22/tmp/sddkit.vbKPtg/floor-kit-legacyround/scripts/spec-gate.sh round /private/tmp/opp22/tmp/sddkit.vbKPtg/legacyround/.specify/specs/003-verificatio
+    | AC-009: a reconcile record with a wrong round wrote legacy-time.nul
+    | expected exit 4, got 3: bash /private/tmp/opp22/tmp/sddkit.vbKPtg/floor-kit-legacyround/scripts/spec-gate.sh round /private/tmp/opp22/tmp/sddkit.vbKPtg/legacyround/.specify/specs/003-verificatio
+    | AC-009: a reconcile record with a wrong round left the history able to order an authorization
+mutant recguard     rc=1 SURVIVED
+Traceback (most recent call last):
+  File "/private/tmp/opp22/scripts/mutants-r22.py", line 56, in <module>
+    open(p, 'w', encoding='utf-8').write(t)
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+OSError: [Errno 28] No space left on device: 'scripts/verification-lib.sh'
+mutant recbefore failed to apply
+cp: scripts/verification-lib.sh: No space left on device
+Traceback (most recent call last):
+  File "/private/tmp/opp22/scripts/mutants-r22.py", line 56, in <module>
+    open(p, 'w', encoding='utf-8').write(t)
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+OSError: [Errno 28] No space left on device: 'scripts/verification-lib.sh'
+mutant endofday failed to apply
+mutant clamp        rc=1 killed
+    | AC-009: cannot copy shipped 002 records as the identity hashes them
+    | expected exit 4, got 126: bash scripts/apply-models.shscripts/brief-status.shscripts/build-adapters.shscripts/configure-models.shscripts/lib.shscripts/model-policy.shscripts/new-spec.shscripts/p
+    | AC-009: date-only history ordered an authorization without reconciliation
+    | expected exit 3, got 126: bash scripts/apply-models.shscripts/brief-status.shscripts/build-adapters.shscripts/configure-models.shscripts/lib.shscripts/model-policy.shscripts/new-spec.shscripts/p
+    | expected exit 4, got 126: bash scripts/apply-models.shscripts/brief-status.shscripts/build-adapters.shscripts/configure-models.shscripts/lib.shscripts/model-policy.shscripts/new-spec.shscripts/p
+    | AC-009: a reconcile record with a wrong digest left the history able to order an authorization
+    | expected exit 3, got 126: bash scripts/apply-models.shscripts/brief-status.shscripts/build-adapters.shscripts/configure-models.shscripts/lib.shscripts/model-policy.shscripts/new-spec.shscripts/p
+    | expected exit 4, got 126: bash scripts/apply-models.shscripts/brief-status.shscripts/build-adapters.shscripts/configure-models.shscripts/lib.shscripts/model-policy.shscripts/new-spec.shscripts/p
+    | AC-009: a reconcile record with a wrong round left the history able to order an authorization
+    | expected exit 3, got 126: bash scripts/apply-models.shscripts/brief-status.shscripts/build-adapters.shscripts/configure-models.shscripts/lib.shscripts/model-policy.shscripts/new-spec.shscripts/p
+    | expected exit 4, got 126: bash scripts/apply-models.shscripts/brief-status.shscripts/build-adapters.shscripts/configure-models.shscripts/lib.shscripts/model-policy.shscripts/new-spec.shscripts/p
+    | AC-009: a reconcile record with a timestamp before the history's date left the history able to order an authorization
+    | expected exit 3, got 126: bash scripts/apply-models.shscripts/brief-status.shscripts/build-adapters.shscripts/configure-models.shscripts/lib.shscripts/model-policy.shscripts/new-spec.shscripts/p
+    | expected exit 4, got 126: bash scripts/apply-models.shscripts/brief-status.shscripts/build-adapters.shscripts/configure-models.shscripts/lib.shscripts/model-policy.shscripts/new-spec.shscripts/p
+    | AC-009: a reconcile record with a future timestamp left the history able to order an authorization
+    | expected exit 0, got 126: bash scripts/apply-models.shscripts/brief-status.shscripts/build-adapters.shscripts/configure-models.shscripts/lib.shscripts/model-policy.shscripts/new-spec.shscripts/p
+    | output
+    | expected exit 4, got 126: bash scripts/apply-models.shscripts/brief-status.shscripts/build-adapters.shscripts/configure-models.shscripts/lib.shscripts/model-policy.shscripts/new-spec.shscripts/p
+    | AC-009: a waiver dated before the reconciled completion authorized the next round
+    | expected exit 0, got 126: bash scripts/apply-models.shscripts/brief-status.shscripts/build-adapters.shscripts/configure-models.shscripts/lib.shscripts/model-policy.shscripts/new-spec.shscripts/p
+    | AC-009: an exact waiver after reconciliation was not authorized
+    | expected exit 0, got 126: bash scripts/apply-models.shscripts/brief-status.shscripts/build-adapters.shscripts/configure-models.shscripts/lib.shscripts/model-policy.shscripts/new-spec.shscripts/p
+    | expected exit 3, got 126: bash scripts/apply-models.shscripts/brief-status.shscripts/build-adapters.shscripts/configure-models.shscripts/lib.shscripts/model-policy.shscripts/new-spec.shscripts/p
+    | expected exit 3, got 126: bash scripts/apply-models.shscripts/brief-status.shscripts/build-adapters.shscripts/configure-models.shscripts/lib.shscripts/model-policy.shscripts/new-spec.shscripts/p
+    | expected exit 0, got 126: bash scripts/apply-models.shscripts/brief-status.shscripts/build-adapters.shscripts/configure-models.shscripts/lib.shscripts/model-policy.shscripts/new-spec.shscripts/p
+    | expected exit 0, got 126: bash scripts/apply-models.shscripts/brief-status.shscripts/build-adapters.shscripts/configure-models.shscripts/lib.shscripts/model-policy.shscripts/new-spec.shscripts/p
+    | AC-009: an exact waiver after reconciliation did not reserve the next round
+mutant future       rc=1 killed
+    | AC-009: cannot copy shipped 002 records as the identity hashes them
+    | expected exit 4, got 127: bash /private/tmp/opp22/tmp/sddkit.gwQNmT/floor-kit-legacyround/scripts/spec-gate.sh round /private/tmp/opp22/tmp/sddkit.gwQNmT/legacyround/.specify/specs/003-verificat
+    | AC-009: date-only history ordered an authorization without reconciliation
+    | expected exit 3, got 127: bash /private/tmp/opp22/tmp/sddkit.gwQNmT/floor-kit-legacyround/scripts/spec-gate.sh round /private/tmp/opp22/tmp/sddkit.gwQNmT/legacyround/.specify/specs/003-verificat
+    | expected exit 4, got 127: bash /private/tmp/opp22/tmp/sddkit.gwQNmT/floor-kit-legacyround/scripts/spec-gate.sh round /private/tmp/opp22/tmp/sddkit.gwQNmT/legacyround/.specify/specs/003-verificat
+    | AC-009: a reconcile record with a wrong digest left the history able to order an authorization
+    | expected exit 3, got 127: bash /private/tmp/opp22/tmp/sddkit.gwQNmT/floor-kit-legacyround/scripts/spec-gate.sh round /private/tmp/opp22/tmp/sddkit.gwQNmT/legacyround/.specify/specs/003-verificat
+    | expected exit 4, got 127: bash /private/tmp/opp22/tmp/sddkit.gwQNmT/floor-kit-legacyround/scripts/spec-gate.sh round /private/tmp/opp22/tmp/sddkit.gwQNmT/legacyround/.specify/specs/003-verificat
+    | AC-009: a reconcile record with a wrong round left the history able to order an authorization
+    | expected exit 3, got 127: bash /private/tmp/opp22/tmp/sddkit.gwQNmT/floor-kit-legacyround/scripts/spec-gate.sh round /private/tmp/opp22/tmp/sddkit.gwQNmT/legacyround/.specify/specs/003-verificat
+    | expected exit 4, got 127: bash /private/tmp/opp22/tmp/sddkit.gwQNmT/floor-kit-legacyround/scripts/spec-gate.sh round /private/tmp/opp22/tmp/sddkit.gwQNmT/legacyround/.specify/specs/003-verificat
+    | AC-009: a reconcile record with a timestamp before the history's date left the history able to order an authorization
+    | expected exit 3, got 127: bash /private/tmp/opp22/tmp/sddkit.gwQNmT/floor-kit-legacyround/scripts/spec-gate.sh round /private/tmp/opp22/tmp/sddkit.gwQNmT/legacyround/.specify/specs/003-verificat
+    | expected exit 4, got 127: bash /private/tmp/opp22/tmp/sddkit.gwQNmT/floor-kit-legacyround/scripts/spec-gate.sh round /private/tmp/opp22/tmp/sddkit.gwQNmT/legacyround/.specify/specs/003-verificat
+    | AC-009: a reconcile record with a future timestamp left the history able to order an authorization
+    | expected exit 0, got 127: bash /private/tmp/opp22/tmp/sddkit.gwQNmT/floor-kit-legacyround/scripts/spec-gate.sh round /private/tmp/opp22/tmp/sddkit.gwQNmT/legacyround/.specify/specs/003-verificat
+    | output
+    | expected exit 4, got 127: bash /private/tmp/opp22/tmp/sddkit.gwQNmT/floor-kit-legacyround/scripts/spec-gate.sh waiver /private/tmp/opp22/tmp/sddkit.gwQNmT/legacyround/.specify/specs/003-verifica
+    | AC-009: a waiver dated before the reconciled completion authorized the next round
+    | expected exit 0, got 127: bash /private/tmp/opp22/tmp/sddkit.gwQNmT/floor-kit-legacyround/scripts/spec-gate.sh waiver /private/tmp/opp22/tmp/sddkit.gwQNmT/legacyround/.specify/specs/003-verifica
+    | AC-009: an exact waiver after reconciliation was not authorized
+    | expected exit 0, got 127: bash /private/tmp/opp22/tmp/sddkit.gwQNmT/floor-kit-legacyround/scripts/spec-gate.sh floor /private/tmp/opp22/tmp/sddkit.gwQNmT/legacyround/.specify/specs/003-verificat
+    | expected exit 3, got 127: bash /private/tmp/opp22/tmp/sddkit.gwQNmT/floor-kit-legacyround/scripts/spec-gate.sh waiver /private/tmp/opp22/tmp/sddkit.gwQNmT/legacyround/.specify/specs/003-verifica
+    | expected exit 3, got 127: bash /private/tmp/opp22/tmp/sddkit.gwQNmT/floor-kit-legacyround/scripts/spec-gate.sh round /private/tmp/opp22/tmp/sddkit.gwQNmT/legacyround/.specify/specs/003-verificat
+    | expected exit 0, got 127: bash /private/tmp/opp22/tmp/sddkit.gwQNmT/floor-kit-legacyround/scripts/spec-gate.sh floor /private/tmp/opp22/tmp/sddkit.gwQNmT/legacyround/.specify/specs/003-verificat
+    | expected exit 0, got 127: bash /private/tmp/opp22/tmp/sddkit.gwQNmT/floor-kit-legacyround/scripts/spec-gate.sh round /private/tmp/opp22/tmp/sddkit.gwQNmT/legacyround/.specify/specs/003-verificat
+    | AC-009: an exact waiver after reconciliation did not reserve the next round
+    | a fixture could not be built: floor_fixture kit scripts 
+mutant combined     rc=1 killed
+    | AC-009: cannot copy shipped 002 records as the identity hashes them
+    | expected exit 4, got 127: bash /private/tmp/opp22/tmp/sddkit.cqxBrE/floor-kit-legacyround/scripts/spec-gate.sh round /private/tmp/opp22/tmp/sddkit.cqxBrE/legacyround/.specify/specs/003-verificat
+    | AC-009: date-only history ordered an authorization without reconciliation
+    | expected exit 3, got 127: bash /private/tmp/opp22/tmp/sddkit.cqxBrE/floor-kit-legacyround/scripts/spec-gate.sh round /private/tmp/opp22/tmp/sddkit.cqxBrE/legacyround/.specify/specs/003-verificat
+    | expected exit 4, got 127: bash /private/tmp/opp22/tmp/sddkit.cqxBrE/floor-kit-legacyround/scripts/spec-gate.sh round /private/tmp/opp22/tmp/sddkit.cqxBrE/legacyround/.specify/specs/003-verificat
+    | AC-009: a reconcile record with a wrong digest left the history able to order an authorization
+    | expected exit 3, got 127: bash /private/tmp/opp22/tmp/sddkit.cqxBrE/floor-kit-legacyround/scripts/spec-gate.sh round /private/tmp/opp22/tmp/sddkit.cqxBrE/legacyround/.specify/specs/003-verificat
+    | expected exit 4, got 127: bash /private/tmp/opp22/tmp/sddkit.cqxBrE/floor-kit-legacyround/scripts/spec-gate.sh round /private/tmp/opp22/tmp/sddkit.cqxBrE/legacyround/.specify/specs/003-verificat
+    | AC-009: a reconcile record with a wrong round left the history able to order an authorization
+    | expected exit 3, got 127: bash /private/tmp/opp22/tmp/sddkit.cqxBrE/floor-kit-legacyround/scripts/spec-gate.sh round /private/tmp/opp22/tmp/sddkit.cqxBrE/legacyround/.specify/specs/003-verificat
+    | expected exit 4, got 127: bash /private/tmp/opp22/tmp/sddkit.cqxBrE/floor-kit-legacyround/scripts/spec-gate.sh round /private/tmp/opp22/tmp/sddkit.cqxBrE/legacyround/.specify/specs/003-verificat
+    | AC-009: a reconcile record with a timestamp before the history's date left the history able to order an authorization
+    | expected exit 3, got 127: bash /private/tmp/opp22/tmp/sddkit.cqxBrE/floor-kit-legacyround/scripts/spec-gate.sh round /private/tmp/opp22/tmp/sddkit.cqxBrE/legacyround/.specify/specs/003-verificat
+    | expected exit 4, got 127: bash /private/tmp/opp22/tmp/sddkit.cqxBrE/floor-kit-legacyround/scripts/spec-gate.sh round /private/tmp/opp22/tmp/sddkit.cqxBrE/legacyround/.specify/specs/003-verificat
+    | AC-009: a reconcile record with a future timestamp left the history able to order an authorization
+    | expected exit 0, got 127: bash /private/tmp/opp22/tmp/sddkit.cqxBrE/floor-kit-legacyround/scripts/spec-gate.sh round /private/tmp/opp22/tmp/sddkit.cqxBrE/legacyround/.specify/specs/003-verificat
+    | output
+    | expected exit 4, got 127: bash /private/tmp/opp22/tmp/sddkit.cqxBrE/floor-kit-legacyround/scripts/spec-gate.sh waiver /private/tmp/opp22/tmp/sddkit.cqxBrE/legacyround/.specify/specs/003-verifica
+    | AC-009: a waiver dated before the reconciled completion authorized the next round
+    | expected exit 0, got 127: bash /private/tmp/opp22/tmp/sddkit.cqxBrE/floor-kit-legacyround/scripts/spec-gate.sh waiver /private/tmp/opp22/tmp/sddkit.cqxBrE/legacyround/.specify/specs/003-verifica
+    | AC-009: an exact waiver after reconciliation was not authorized
+    | expected exit 0, got 127: bash /private/tmp/opp22/tmp/sddkit.cqxBrE/floor-kit-legacyround/scripts/spec-gate.sh floor /private/tmp/opp22/tmp/sddkit.cqxBrE/legacyround/.specify/specs/003-verificat
+    | expected exit 3, got 127: bash /private/tmp/opp22/tmp/sddkit.cqxBrE/floor-kit-legacyround/scripts/spec-gate.sh waiver /private/tmp/opp22/tmp/sddkit.cqxBrE/legacyround/.specify/specs/003-verifica
+    | expected exit 3, got 127: bash /private/tmp/opp22/tmp/sddkit.cqxBrE/floor-kit-legacyround/scripts/spec-gate.sh round /private/tmp/opp22/tmp/sddkit.cqxBrE/legacyround/.specify/specs/003-verificat
+    | expected exit 0, got 127: bash /private/tmp/opp22/tmp/sddkit.cqxBrE/floor-kit-legacyround/scripts/spec-gate.sh floor /private/tmp/opp22/tmp/sddkit.cqxBrE/legacyround/.specify/specs/003-verificat
+    | expected exit 0, got 127: bash /private/tmp/opp22/tmp/sddkit.cqxBrE/floor-kit-legacyround/scripts/spec-gate.sh round /private/tmp/opp22/tmp/sddkit.cqxBrE/legacyround/.specify/specs/003-verificat
+    | AC-009: an exact waiver after reconciliation did not reserve the next round
+    | a fixture could not be built: floor_fixture kit scripts 

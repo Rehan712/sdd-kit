@@ -1,0 +1,122 @@
+[
+  {
+    "command": "grep>out.txt AC-001 README.md",
+    "argv": [
+      "/bin/bash",
+      "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+      "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "exit": 0,
+    "warned": true,
+    "consistent": false
+  },
+  {
+    "command": "grep>|out.txt AC-001 README.md",
+    "argv": [
+      "/bin/bash",
+      "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+      "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "exit": 0,
+    "warned": false,
+    "consistent": true
+  },
+  {
+    "command": "grep >|out.txt AC-001 README.md",
+    "argv": [
+      "/bin/bash",
+      "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+      "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "exit": 0,
+    "warned": true,
+    "consistent": false
+  },
+  {
+    "command": "/usr/bin/grep>|out.txt AC-001 README.md",
+    "argv": [
+      "/bin/bash",
+      "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+      "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "exit": 0,
+    "warned": false,
+    "consistent": true
+  },
+  {
+    "command": "./tools/rg>|out.txt AC-001 README.md",
+    "argv": [
+      "/bin/bash",
+      "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+      "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "exit": 0,
+    "warned": false,
+    "consistent": true
+  },
+  {
+    "command": "tests/diff>|out.txt actual expected",
+    "argv": [
+      "/bin/bash",
+      "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+      "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "exit": 0,
+    "warned": false,
+    "consistent": true
+  },
+  {
+    "command": "test -e README.md",
+    "argv": [
+      "/bin/bash",
+      "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+      "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "exit": 0,
+    "warned": true,
+    "consistent": false
+  },
+  {
+    "command": "[ -e README.md ]",
+    "argv": [
+      "/bin/bash",
+      "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+      "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "exit": 0,
+    "warned": false,
+    "consistent": true
+  },
+  {
+    "command": "[ -f README.md ]",
+    "argv": [
+      "/bin/bash",
+      "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+      "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "exit": 0,
+    "warned": false,
+    "consistent": true
+  },
+  {
+    "command": "[[ -e README.md ]]",
+    "argv": [
+      "/bin/bash",
+      "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+      "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "exit": 0,
+    "warned": false,
+    "consistent": true
+  }
+]

@@ -1,0 +1,420 @@
+{
+  "at": "2026-10-29T11:26:10Z",
+  "reservation": {
+    "version": "1",
+    "gate": "opponent",
+    "round": "26",
+    "floor": "FLOOR-LxJkv3",
+    "source": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+    "reserved": "2026-10-29T11:11:14Z"
+  },
+  "reservation_seals": {
+    "meta.nul": {
+      "expected": "8b2ce27d15808d5b730f2de76955e8a01b65349c0bfc2099738d8520ed5f0f53",
+      "actual": "8b2ce27d15808d5b730f2de76955e8a01b65349c0bfc2099738d8520ed5f0f53",
+      "match": true
+    }
+  },
+  "pending": true,
+  "floor_seals": {
+    "meta.nul": {
+      "expected": "a62cbfba00fa738a75ba463cd1c06374529b48f53a0a4955e9d6ae5940d99fce",
+      "actual": "a62cbfba00fa738a75ba463cd1c06374529b48f53a0a4955e9d6ae5940d99fce",
+      "match": true
+    },
+    "commands.nul": {
+      "expected": "218a380ff662bc9be567d6ad83b7a0ec1532d355a6c248ed1da8c02b0a8ff1fc",
+      "actual": "218a380ff662bc9be567d6ad83b7a0ec1532d355a6c248ed1da8c02b0a8ff1fc",
+      "match": true
+    },
+    "bindings.nul": {
+      "expected": "8766df908be5d8f628c3880af34ae761dd1c9c4946e8da08da3e566c8c0c788a",
+      "actual": "8766df908be5d8f628c3880af34ae761dd1c9c4946e8da08da3e566c8c0c788a",
+      "match": true
+    },
+    "inputs.nul": {
+      "expected": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+      "actual": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+      "match": true
+    },
+    "roots.nul": {
+      "expected": "8af367bcbcf5956d1dbbad28748fbb59f4c37efe13b23df4abb035cfad1179f8",
+      "actual": "8af367bcbcf5956d1dbbad28748fbb59f4c37efe13b23df4abb035cfad1179f8",
+      "match": true
+    }
+  },
+  "source_record_count": 371,
+  "important_source_records": [
+    [
+      "path",
+      "scripts/sdd-analyze.sh",
+      "file",
+      "100755",
+      "c43de9e92df5657a3a94091a73bccb9abe37f9e1c3c3f6ccf6cb1cfa64f3a3f2",
+      ""
+    ],
+    [
+      "path",
+      "tests/test-gate-contracts.sh",
+      "file",
+      "100644",
+      "7bc13dde14004bf4ba967c0f64ec120b19bdde641643a6a7436d154c222f893c",
+      ""
+    ],
+    [
+      "path",
+      "tests/test-sdd-analyze.sh",
+      "file",
+      "100644",
+      "e5b5cde870b2da8c086a41f3a3824b401262343225108c7f3bab716324150c9a",
+      ""
+    ],
+    [
+      "harness",
+      "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/lib.sh",
+      "3ba6a15b907e65db63f74563512f7258ec16a940700b3a326642c6e1120a22c8",
+      "",
+      "",
+      ""
+    ],
+    [
+      "harness",
+      "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/verification-lib.sh",
+      "015859de8d68d5cbaffa3ea9078a74584f364312b09cd3c739731fd6716a6c36",
+      "",
+      "",
+      ""
+    ],
+    [
+      "harness",
+      "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-run.sh",
+      "3d768c616a4cf96a316db3c18fe5204e02a8ec07793e7a7b380b23a91204885b",
+      "",
+      "",
+      ""
+    ],
+    [
+      "harness",
+      "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-task.sh",
+      "41230339d3da6f048011b57133f15d37ea1d6c1344944f2f6f6c8a1261ed83c0",
+      "",
+      "",
+      ""
+    ],
+    [
+      "harness",
+      "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-gate.sh",
+      "79f20eee19fb9b5b863f423516b52d7333fe1149520fedaa402a39471b43be82",
+      "",
+      "",
+      ""
+    ],
+    [
+      "harness",
+      "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+      "c43de9e92df5657a3a94091a73bccb9abe37f9e1c3c3f6ccf6cb1cfa64f3a3f2",
+      "",
+      "",
+      ""
+    ],
+    [
+      "harness",
+      "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-ac-coverage.sh",
+      "cf5c493ec7f2ae6c3f5d71ac8a2d2d8f00e3940958084eeb77eca379e9f2bf8b",
+      "",
+      "",
+      ""
+    ],
+    [
+      "harness",
+      "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-evidence.sh",
+      "500be1c03a46646a8cc1c316185b0ea0819dc61e0db37cbbddd0e77b5d5f2043",
+      "",
+      "",
+      ""
+    ]
+  ],
+  "raw_entries_sha256": "3ca12e69830dd1f06b6b985847aafd6b54614c068e22167598b00ee835825731",
+  "raw_entries_identical": true,
+  "raw_entries_count": 6860,
+  "floor_record_count": 101,
+  "floor_executed": 5,
+  "floor_reused": 96,
+  "unique_capture_count": 22,
+  "captures": {
+    "CAP-818-fLEvh7": {
+      "seals": {
+        "meta.nul": {
+          "expected": "47c2d43cd995c212769311f37783138c75b4d06f6df6c2ccd68f0a742e80c858",
+          "actual": "47c2d43cd995c212769311f37783138c75b4d06f6df6c2ccd68f0a742e80c858",
+          "match": true
+        },
+        "argv.nul": {
+          "expected": "a193b9b8454686d43618a97cd684b331c6e36a0e968611582be2ce0aee872844",
+          "actual": "a193b9b8454686d43618a97cd684b331c6e36a0e968611582be2ce0aee872844",
+          "match": true
+        },
+        "inputs.nul": {
+          "expected": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+          "actual": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+          "match": true
+        },
+        "inputs-after.nul": {
+          "expected": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+          "actual": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+          "match": true
+        },
+        "bindings.nul": {
+          "expected": "8766df908be5d8f628c3880af34ae761dd1c9c4946e8da08da3e566c8c0c788a",
+          "actual": "8766df908be5d8f628c3880af34ae761dd1c9c4946e8da08da3e566c8c0c788a",
+          "match": true
+        },
+        "output.log": {
+          "expected": "f9166fdc124954abb48f7c8ed789d96a1ce68c06a9da6df0d9d49a79a07aca5a",
+          "actual": "f9166fdc124954abb48f7c8ed789d96a1ce68c06a9da6df0d9d49a79a07aca5a",
+          "match": true
+        },
+        "summary.txt": {
+          "expected": "16d287c2efafb07cee1c26b8168f5c6da3732af758da56d23b61000206ec39b0",
+          "actual": "16d287c2efafb07cee1c26b8168f5c6da3732af758da56d23b61000206ec39b0",
+          "match": true
+        }
+      },
+      "exit": "0",
+      "no_tick": "1",
+      "input_before": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+      "input_after": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+      "argv": [
+        "/bin/bash",
+        "-o",
+        "pipefail",
+        "-c",
+        "bash tests/test-sdd-analyze.sh"
+      ],
+      "last_output_lines": [
+        "  ok   test_umbrella_untagged_tasks_fail",
+        "  ok   test_uncovered_ac_fails_and_gate_refs_do_not_count",
+        "  ok   test_verification_bindings",
+        "  -- 19/19 passed"
+      ]
+    },
+    "CAP-819-05nYhW": {
+      "seals": {
+        "meta.nul": {
+          "expected": "eb1abf4055977d9acce792c4b84b900f347366b40d55ee423b736c5384a31b8c",
+          "actual": "eb1abf4055977d9acce792c4b84b900f347366b40d55ee423b736c5384a31b8c",
+          "match": true
+        },
+        "argv.nul": {
+          "expected": "102caf17909a3ea4ebccfc8fd6c902f01d85ad68ea0347db6357c47efbeb3832",
+          "actual": "102caf17909a3ea4ebccfc8fd6c902f01d85ad68ea0347db6357c47efbeb3832",
+          "match": true
+        },
+        "inputs.nul": {
+          "expected": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+          "actual": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+          "match": true
+        },
+        "inputs-after.nul": {
+          "expected": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+          "actual": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+          "match": true
+        },
+        "bindings.nul": {
+          "expected": "8766df908be5d8f628c3880af34ae761dd1c9c4946e8da08da3e566c8c0c788a",
+          "actual": "8766df908be5d8f628c3880af34ae761dd1c9c4946e8da08da3e566c8c0c788a",
+          "match": true
+        },
+        "output.log": {
+          "expected": "e2bd5dfbf6ddcf901317732547649b3e2028c869384acc1e688d65a77c738b33",
+          "actual": "e2bd5dfbf6ddcf901317732547649b3e2028c869384acc1e688d65a77c738b33",
+          "match": true
+        },
+        "summary.txt": {
+          "expected": "4774e4cb874fd6a86647c0672936955717056b4dc4ef57142b28e89343692e8a",
+          "actual": "4774e4cb874fd6a86647c0672936955717056b4dc4ef57142b28e89343692e8a",
+          "match": true
+        }
+      },
+      "exit": "0",
+      "no_tick": "1",
+      "input_before": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+      "input_after": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+      "argv": [
+        "/bin/bash",
+        "-o",
+        "pipefail",
+        "-c",
+        "bash tests/test-gate-contracts.sh"
+      ],
+      "last_output_lines": [
+        "  ok   test_invoker_protocol",
+        "  ok   test_reports_and_tally",
+        "  ok   test_review_scope_contracts",
+        "  -- 18/18 passed"
+      ]
+    },
+    "CAP-838-AGMe8j": {
+      "seals": {
+        "meta.nul": {
+          "expected": "d72586d63be5681eaccbea9a999d74b8e7290cc6cb6378a67edcf408d3038a99",
+          "actual": "d72586d63be5681eaccbea9a999d74b8e7290cc6cb6378a67edcf408d3038a99",
+          "match": true
+        },
+        "argv.nul": {
+          "expected": "8907432de42ccedbcf8a52304c03a23bc0f24b0c6e1975db443db46f09c5ead0",
+          "actual": "8907432de42ccedbcf8a52304c03a23bc0f24b0c6e1975db443db46f09c5ead0",
+          "match": true
+        },
+        "inputs.nul": {
+          "expected": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+          "actual": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+          "match": true
+        },
+        "inputs-after.nul": {
+          "expected": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+          "actual": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+          "match": true
+        },
+        "bindings.nul": {
+          "expected": "8766df908be5d8f628c3880af34ae761dd1c9c4946e8da08da3e566c8c0c788a",
+          "actual": "8766df908be5d8f628c3880af34ae761dd1c9c4946e8da08da3e566c8c0c788a",
+          "match": true
+        },
+        "output.log": {
+          "expected": "6a0d0cbdb2a06233f658a7f7d1983a585e3ae4d791d0c3590b9fc7dde6a6d37c",
+          "actual": "6a0d0cbdb2a06233f658a7f7d1983a585e3ae4d791d0c3590b9fc7dde6a6d37c",
+          "match": true
+        },
+        "summary.txt": {
+          "expected": "712a51f0026fac9eae6798f005f207215887137f6f7962416a37bd20112e4c7a",
+          "actual": "712a51f0026fac9eae6798f005f207215887137f6f7962416a37bd20112e4c7a",
+          "match": true
+        }
+      },
+      "exit": "0",
+      "no_tick": "1",
+      "input_before": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+      "input_after": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline"
+      ],
+      "last_output_lines": [
+        "  \u2713 opponent gate present, agent file exists",
+        "  \u2713 reality-check gate present, agent file exists",
+        "---",
+        "1 warning(s), 0 errors"
+      ]
+    },
+    "CAP-841-xkIIRp": {
+      "seals": {
+        "meta.nul": {
+          "expected": "42bc036df846ee9ad7587d7e0656fc3b26f4fd4221574d8e93cff22defcc6401",
+          "actual": "42bc036df846ee9ad7587d7e0656fc3b26f4fd4221574d8e93cff22defcc6401",
+          "match": true
+        },
+        "argv.nul": {
+          "expected": "b65a0a75b3ebdd391cacbb7766adc4c3246397b3ec2ff635fc832858fe86bf59",
+          "actual": "b65a0a75b3ebdd391cacbb7766adc4c3246397b3ec2ff635fc832858fe86bf59",
+          "match": true
+        },
+        "inputs.nul": {
+          "expected": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+          "actual": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+          "match": true
+        },
+        "inputs-after.nul": {
+          "expected": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+          "actual": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+          "match": true
+        },
+        "bindings.nul": {
+          "expected": "8766df908be5d8f628c3880af34ae761dd1c9c4946e8da08da3e566c8c0c788a",
+          "actual": "8766df908be5d8f628c3880af34ae761dd1c9c4946e8da08da3e566c8c0c788a",
+          "match": true
+        },
+        "output.log": {
+          "expected": "b150ad3c2adee17324471b5021f9d78f292fabb354dcc1009742d11f71d50699",
+          "actual": "b150ad3c2adee17324471b5021f9d78f292fabb354dcc1009742d11f71d50699",
+          "match": true
+        },
+        "summary.txt": {
+          "expected": "0fca1cab518f17d090f8ea40b86d1bc8be238d3fadaf3d7197a7da9a886ecf97",
+          "actual": "0fca1cab518f17d090f8ea40b86d1bc8be238d3fadaf3d7197a7da9a886ecf97",
+          "match": true
+        }
+      },
+      "exit": "0",
+      "no_tick": "1",
+      "input_before": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+      "input_after": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+      "argv": [
+        "/bin/bash",
+        "-o",
+        "pipefail",
+        "-c",
+        "bash tests/run.sh"
+      ],
+      "last_output_lines": [
+        "  ok   test_capture_provenance",
+        "  ok   test_config_grammar",
+        "  ok   test_owned_transactions",
+        "  -- 3/3 passed"
+      ]
+    },
+    "CAP-842-ygeARx": {
+      "seals": {
+        "meta.nul": {
+          "expected": "091af4be757d8f431a46ed92a502c479feb3ff9ad2d84e2132f98cd8beddb99e",
+          "actual": "091af4be757d8f431a46ed92a502c479feb3ff9ad2d84e2132f98cd8beddb99e",
+          "match": true
+        },
+        "argv.nul": {
+          "expected": "45a6d5fec01435d35bf4a18bbfafa8b0a894a677b31cb40eeac3511189acb18b",
+          "actual": "45a6d5fec01435d35bf4a18bbfafa8b0a894a677b31cb40eeac3511189acb18b",
+          "match": true
+        },
+        "inputs.nul": {
+          "expected": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+          "actual": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+          "match": true
+        },
+        "inputs-after.nul": {
+          "expected": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+          "actual": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+          "match": true
+        },
+        "bindings.nul": {
+          "expected": "8766df908be5d8f628c3880af34ae761dd1c9c4946e8da08da3e566c8c0c788a",
+          "actual": "8766df908be5d8f628c3880af34ae761dd1c9c4946e8da08da3e566c8c0c788a",
+          "match": true
+        },
+        "output.log": {
+          "expected": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "actual": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "match": true
+        },
+        "summary.txt": {
+          "expected": "72d3ae417d9c210f719026b1cb9de1a6d8c441398a6c71d14ed2e083973bc023",
+          "actual": "72d3ae417d9c210f719026b1cb9de1a6d8c441398a6c71d14ed2e083973bc023",
+          "match": true
+        }
+      },
+      "exit": "0",
+      "no_tick": "1",
+      "input_before": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+      "input_after": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+      "argv": [
+        "/bin/bash",
+        "-o",
+        "pipefail",
+        "-c",
+        "bash tests/shellcheck.sh"
+      ],
+      "last_output_lines": []
+    }
+  },
+  "kernel_floor_validator_rerun": false
+}

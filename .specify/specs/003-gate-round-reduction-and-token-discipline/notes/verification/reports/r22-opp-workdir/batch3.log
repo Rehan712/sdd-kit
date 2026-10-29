@@ -1,0 +1,246 @@
+## A: round 21 fixture (old) unmutated and under new mutants
+old fixture unmutated rc=0
+mutant samedaymid   rc=1 killed
+    | expected exit 4, got 0: bash /private/tmp/opp22/tmp/sddkit.Sx7Eq3/floor-kit-legacyround/scripts/spec-gate.sh waiver /private/tmp/opp22/tmp/sddkit.Sx7Eq3/legacyround/.specify/specs/003-verificati
+    | AC-009: a waiver dated before the reconciled completion authorized the next round
+mutant laterday     rc=1 killed
+    | expected exit 0, got 3: bash /private/tmp/opp22/tmp/sddkit.DGXCEj/floor-kit-legacyround/scripts/spec-gate.sh round /private/tmp/opp22/tmp/sddkit.DGXCEj/legacyround/.specify/specs/003-verificatio
+    | output
+    | AC-009: a waiver dated before the reconciled completion authorized the next round
+    | expected exit 0, got 4: bash /private/tmp/opp22/tmp/sddkit.DGXCEj/floor-kit-legacyround/scripts/spec-gate.sh waiver /private/tmp/opp22/tmp/sddkit.DGXCEj/legacyround/.specify/specs/003-verificati
+    | AC-009: an exact waiver after reconciliation was not authorized
+    | expected exit 3, got 4: bash /private/tmp/opp22/tmp/sddkit.DGXCEj/floor-kit-legacyround/scripts/spec-gate.sh waiver /private/tmp/opp22/tmp/sddkit.DGXCEj/legacyround/.specify/specs/003-verificati
+    | expected exit 3, got 4: bash /private/tmp/opp22/tmp/sddkit.DGXCEj/floor-kit-legacyround/scripts/spec-gate.sh round /private/tmp/opp22/tmp/sddkit.DGXCEj/legacyround/.specify/specs/003-verificatio
+    | expected exit 0, got 4: bash /private/tmp/opp22/tmp/sddkit.DGXCEj/floor-kit-legacyround/scripts/spec-gate.sh round /private/tmp/opp22/tmp/sddkit.DGXCEj/legacyround/.specify/specs/003-verificatio
+    | AC-009: an exact waiver after reconciliation did not reserve the next round
+mutant hour         rc=1 killed
+    | AC-009: a waiver dated before the reconciled completion authorized the next round
+mutant minute       rc=1 killed
+    | AC-009: a waiver dated before the reconciled completion authorized the next round
+mutant maxeod       rc=0 SURVIVED
+## B: prototype fixture unmutated and under mutants
+proto unmutated rc=0
+mutant midnight     rc=1 killed
+    | expected exit 4, got 0: bash /private/tmp/opp22/tmp/sddkit.pNmBVp/floor-kit-legacyround/scripts/spec-gate.sh waiver /private/tmp/opp22/tmp/sddkit.pNmBVp/legacyround/.specify/specs/003-verificati
+    | PROTO: a same-day waiver one second before the reconciled completion authorized the next round
+    | expected exit 4, got 0: bash /private/tmp/opp22/tmp/sddkit.pNmBVp/floor-kit-legacyround/scripts/spec-gate.sh waiver /private/tmp/opp22/tmp/sddkit.pNmBVp/legacyround/.specify/specs/003-verificati
+    | AC-009: a waiver dated before the reconciled completion authorized the next round
+mutant endofday     rc=1 killed
+    | PROTO: a same-day waiver one second before the reconciled completion authorized the next round
+    | expected exit 0, got 4: bash /private/tmp/opp22/tmp/sddkit.9xcRpQ/floor-kit-legacyround/scripts/spec-gate.sh waiver /private/tmp/opp22/tmp/sddkit.9xcRpQ/legacyround/.specify/specs/003-verificati
+    | PROTO: a same-day waiver one second after the reconciled completion was not authorized
+    | expected exit 4, got 0: bash /private/tmp/opp22/tmp/sddkit.9xcRpQ/floor-kit-legacyround/scripts/spec-gate.sh waiver /private/tmp/opp22/tmp/sddkit.9xcRpQ/legacyround/.specify/specs/003-verificati
+    | AC-009: a waiver dated before the reconciled completion authorized the next round
+mutant clamp        rc=1 killed
+    | expected exit 4, got 0: bash /private/tmp/opp22/tmp/sddkit.eDq6GN/floor-kit-legacyround/scripts/spec-gate.sh waiver /private/tmp/opp22/tmp/sddkit.eDq6GN/legacyround/.specify/specs/003-verificati
+    | AC-009: a waiver dated before the reconciled completion authorized the next round
+mutant readcheck    rc=1 killed
+    | expected exit 3, got 0: bash /private/tmp/opp22/tmp/sddkit.TwC2ax/floor-kit-legacyround/scripts/spec-gate.sh waiver /private/tmp/opp22/tmp/sddkit.TwC2ax/legacyround/.specify/specs/003-verificati
+    | AC-009: a reconcile record outlived an edit of its history and authorized round 6
+    | expected exit 3, got 0: bash /private/tmp/opp22/tmp/sddkit.TwC2ax/floor-kit-legacyround/scripts/spec-gate.sh round /private/tmp/opp22/tmp/sddkit.TwC2ax/legacyround/.specify/specs/003-verificatio
+    | AC-009: a reconcile record outlived an edit of its history and reserved round 6
+    | expected exit 0, got 3: bash /private/tmp/opp22/tmp/sddkit.TwC2ax/floor-kit-legacyround/scripts/spec-gate.sh round /private/tmp/opp22/tmp/sddkit.TwC2ax/legacyround/.specify/specs/003-verificatio
+    | AC-009: an exact waiver after reconciliation did not reserve the next round
+mutant readdigest   rc=1 killed
+    | expected exit 3, got 0: bash /private/tmp/opp22/tmp/sddkit.d73huH/floor-kit-legacyround/scripts/spec-gate.sh waiver /private/tmp/opp22/tmp/sddkit.d73huH/legacyround/.specify/specs/003-verificati
+    | AC-009: a reconcile record outlived an edit of its history and authorized round 6
+    | expected exit 3, got 0: bash /private/tmp/opp22/tmp/sddkit.d73huH/floor-kit-legacyround/scripts/spec-gate.sh round /private/tmp/opp22/tmp/sddkit.d73huH/legacyround/.specify/specs/003-verificatio
+    | AC-009: a reconcile record outlived an edit of its history and reserved round 6
+    | expected exit 0, got 3: bash /private/tmp/opp22/tmp/sddkit.d73huH/floor-kit-legacyround/scripts/spec-gate.sh round /private/tmp/opp22/tmp/sddkit.d73huH/legacyround/.specify/specs/003-verificatio
+    | AC-009: an exact waiver after reconciliation did not reserve the next round
+mutant reccheck     rc=1 killed
+    | expected exit 3, got 0: bash /private/tmp/opp22/tmp/sddkit.lGQk3A/floor-kit-legacyround/scripts/spec-gate.sh round /private/tmp/opp22/tmp/sddkit.lGQk3A/legacyround/.specify/specs/003-verificatio
+    | AC-009: a reconcile record with a wrong digest wrote legacy-time.nul
+    | expected exit 4, got 3: bash /private/tmp/opp22/tmp/sddkit.lGQk3A/floor-kit-legacyround/scripts/spec-gate.sh round /private/tmp/opp22/tmp/sddkit.lGQk3A/legacyround/.specify/specs/003-verificatio
+    | AC-009: a reconcile record with a wrong digest left the history able to order an authorization
+    | expected exit 3, got 0: bash /private/tmp/opp22/tmp/sddkit.lGQk3A/floor-kit-legacyround/scripts/spec-gate.sh round /private/tmp/opp22/tmp/sddkit.lGQk3A/legacyround/.specify/specs/003-verificatio
+    | AC-009: a reconcile record with a wrong round wrote legacy-time.nul
+    | expected exit 4, got 3: bash /private/tmp/opp22/tmp/sddkit.lGQk3A/floor-kit-legacyround/scripts/spec-gate.sh round /private/tmp/opp22/tmp/sddkit.lGQk3A/legacyround/.specify/specs/003-verificatio
+    | AC-009: a reconcile record with a wrong round left the history able to order an authorization
+mutant recguard     rc=1 killed
+    | expected exit 3, got 0: bash /private/tmp/opp22/tmp/sddkit.vP3NLL/floor-kit-legacyround/scripts/spec-gate.sh round /private/tmp/opp22/tmp/sddkit.vP3NLL/legacyround/.specify/specs/003-verificatio
+    | AC-009: a reconcile record with a timestamp before the history's date wrote legacy-time.nul
+    | AC-009: a reconcile record with a timestamp before the history's date left the history able to order an authorization
+    | expected exit 3, got 0: bash /private/tmp/opp22/tmp/sddkit.vP3NLL/floor-kit-legacyround/scripts/spec-gate.sh round /private/tmp/opp22/tmp/sddkit.vP3NLL/legacyround/.specify/specs/003-verificatio
+    | AC-009: a reconcile record with a future timestamp wrote legacy-time.nul
+    | AC-009: a reconcile record with a future timestamp left the history able to order an authorization
+mutant future       rc=1 killed
+    | expected exit 3, got 0: bash /private/tmp/opp22/tmp/sddkit.WdSm5P/floor-kit-legacyround/scripts/spec-gate.sh round /private/tmp/opp22/tmp/sddkit.WdSm5P/legacyround/.specify/specs/003-verificatio
+    | AC-009: a reconcile record with a future timestamp wrote legacy-time.nul
+    | AC-009: a reconcile record with a future timestamp left the history able to order an authorization
+mutant samedaymid   rc=1 killed
+    | expected exit 4, got 0: bash /private/tmp/opp22/tmp/sddkit.TrSboa/floor-kit-legacyround/scripts/spec-gate.sh waiver /private/tmp/opp22/tmp/sddkit.TrSboa/legacyround/.specify/specs/003-verificati
+    | PROTO: a same-day waiver one second before the reconciled completion authorized the next round
+mutant hour         rc=1 killed
+    | expected exit 4, got 0: bash /private/tmp/opp22/tmp/sddkit.7Lyd1x/floor-kit-legacyround/scripts/spec-gate.sh waiver /private/tmp/opp22/tmp/sddkit.7Lyd1x/legacyround/.specify/specs/003-verificati
+    | PROTO: a same-day waiver one second before the reconciled completion authorized the next round
+    | expected exit 4, got 0: bash /private/tmp/opp22/tmp/sddkit.7Lyd1x/floor-kit-legacyround/scripts/spec-gate.sh waiver /private/tmp/opp22/tmp/sddkit.7Lyd1x/legacyround/.specify/specs/003-verificati
+    | AC-009: a waiver dated before the reconciled completion authorized the next round
+mutant minute       rc=1 killed
+    | expected exit 4, got 0: bash /private/tmp/opp22/tmp/sddkit.gKtGIN/floor-kit-legacyround/scripts/spec-gate.sh waiver /private/tmp/opp22/tmp/sddkit.gKtGIN/legacyround/.specify/specs/003-verificati
+    | PROTO: a same-day waiver one second before the reconciled completion authorized the next round
+    | expected exit 4, got 0: bash /private/tmp/opp22/tmp/sddkit.gKtGIN/floor-kit-legacyround/scripts/spec-gate.sh waiver /private/tmp/opp22/tmp/sddkit.gKtGIN/legacyround/.specify/specs/003-verificati
+    | AC-009: a waiver dated before the reconciled completion authorized the next round
+mutant maxeod       rc=1 killed
+    | PROTO: a same-day waiver one second before the reconciled completion authorized the next round
+    | expected exit 0, got 4: bash /private/tmp/opp22/tmp/sddkit.gaTu7J/floor-kit-legacyround/scripts/spec-gate.sh waiver /private/tmp/opp22/tmp/sddkit.gaTu7J/legacyround/.specify/specs/003-verificati
+    | PROTO: a same-day waiver one second after the reconciled completion was not authorized
+mutant laterday     rc=1 killed
+    | expected exit 0, got 3: bash /private/tmp/opp22/tmp/sddkit.DG7pn8/floor-kit-legacyround/scripts/spec-gate.sh round /private/tmp/opp22/tmp/sddkit.DG7pn8/legacyround/.specify/specs/003-verificatio
+    | PROTO: a record on the history's own date was not reconciled
+    | PROTO: a same-day waiver one second before the reconciled completion authorized the next round
+    | expected exit 0, got 4: bash /private/tmp/opp22/tmp/sddkit.DG7pn8/floor-kit-legacyround/scripts/spec-gate.sh waiver /private/tmp/opp22/tmp/sddkit.DG7pn8/legacyround/.specify/specs/003-verificati
+    | PROTO: a same-day waiver one second after the reconciled completion was not authorized
+mutant nextmid      rc=1 killed
+    | PROTO: a same-day waiver one second before the reconciled completion authorized the next round
+    | expected exit 0, got 4: bash /private/tmp/opp22/tmp/sddkit.y5O91G/floor-kit-legacyround/scripts/spec-gate.sh waiver /private/tmp/opp22/tmp/sddkit.y5O91G/legacyround/.specify/specs/003-verificati
+    | PROTO: a same-day waiver one second after the reconciled completion was not authorized
+    | expected exit 4, got 0: bash /private/tmp/opp22/tmp/sddkit.y5O91G/floor-kit-legacyround/scripts/spec-gate.sh waiver /private/tmp/opp22/tmp/sddkit.y5O91G/legacyround/.specify/specs/003-verificati
+    | AC-009: a waiver dated before the reconciled completion authorized the next round
+mutant clampnext    rc=1 killed
+    | expected exit 4, got 0: bash /private/tmp/opp22/tmp/sddkit.LKwJSy/floor-kit-legacyround/scripts/spec-gate.sh waiver /private/tmp/opp22/tmp/sddkit.LKwJSy/legacyround/.specify/specs/003-verificati
+    | AC-009: a waiver dated before the reconciled completion authorized the next round
+mutant noon         rc=1 killed
+    | expected exit 4, got 0: bash /private/tmp/opp22/tmp/sddkit.j7mP7v/floor-kit-legacyround/scripts/spec-gate.sh waiver /private/tmp/opp22/tmp/sddkit.j7mP7v/legacyround/.specify/specs/003-verificati
+    | PROTO: a same-day waiver one second before the reconciled completion authorized the next round
+    | expected exit 4, got 0: bash /private/tmp/opp22/tmp/sddkit.j7mP7v/floor-kit-legacyround/scripts/spec-gate.sh waiver /private/tmp/opp22/tmp/sddkit.j7mP7v/legacyround/.specify/specs/003-verificati
+    | AC-009: a waiver dated before the reconciled completion authorized the next round
+## C: probes
+== probe under none (suite rc=0)
+  trunc-hour reconcile(2026-07-21T06:45:30Z) rc=0 out=[reconciled legacy gate=opponent round=5 timestamp=2026-07-21T06:45:30Z]
+  trunc-hour waiver(2026-07-21T06:30:00Z) rc=4 out=[round authorization denied: opponent round 6 needs an exact-round user waiver/spec revision after round 5   candidate authorization lines were found and refused:   2026-07-21T06:30:00Z refused: not after the previous round completion at 2026-07-21T06:45:30Z]
+  trunc-hour floor rc=0
+  trunc-hour round rc=4 out=[round authorization denied: opponent round 6 needs an exact-round user waiver/spec revision after round 5   candidate authorization lines were found and refused:   2026-07-21T06:30:00Z refused: not af]
+  trunc-minute reconcile(2026-07-21T06:45:30Z) rc=0 out=[reconciled legacy gate=opponent round=5 timestamp=2026-07-21T06:45:30Z]
+  trunc-minute waiver(2026-07-21T06:45:10Z) rc=4 out=[round authorization denied: opponent round 6 needs an exact-round user waiver/spec revision after round 5   candidate authorization lines were found and refused:   2026-07-21T06:45:10Z refused: not after the previous round completion at 2026-07-21T06:45:30Z]
+  trunc-minute floor rc=0
+  trunc-minute round rc=4 out=[round authorization denied: opponent round 6 needs an exact-round user waiver/spec revision after round 5   candidate authorization lines were found and refused:   2026-07-21T06:45:10Z refused: not af]
+  sameday-early reconcile(2026-07-20T18:00:00Z) rc=0 out=[reconciled legacy gate=opponent round=5 timestamp=2026-07-20T18:00:00Z]
+  sameday-early waiver(2026-07-20T12:00:00Z) rc=4 out=[round authorization denied: opponent round 6 needs an exact-round user waiver/spec revision after round 5   candidate authorization lines were found and refused:   2026-07-20T12:00:00Z refused: not after the previous round completion at 2026-07-20T18:00:00Z]
+  sameday-early floor rc=0
+  sameday-early round rc=4 out=[round authorization denied: opponent round 6 needs an exact-round user waiver/spec revision after round 5   candidate authorization lines were found and refused:   2026-07-20T12:00:00Z refused: not af]
+  sameday-after reconcile(2026-07-20T18:00:00Z) rc=0 out=[reconciled legacy gate=opponent round=5 timestamp=2026-07-20T18:00:00Z]
+  sameday-after waiver(2026-07-20T19:00:00Z) rc=0 out=[authorized: opponent round 6]
+  sameday-after floor rc=0
+  sameday-after round rc=0 out=[round=6 gate=opponent source=061d936b1edf8a2a362b3c7b2baaef02e8414fdcec82dd8c164f5dadf95f686e floor=FLOOR-dC5Ums reserved=2026-10-17T15:03:16Z]
+  sameday-after ROUND-6 RESERVED
+== probe under hour (suite rc=0)
+  trunc-hour reconcile(2026-07-21T06:45:30Z) rc=0 out=[reconciled legacy gate=opponent round=5 timestamp=2026-07-21T06:45:30Z]
+  trunc-hour waiver(2026-07-21T06:30:00Z) rc=0 out=[authorized: opponent round 6]
+  trunc-hour floor rc=0
+  trunc-hour round rc=0 out=[round=6 gate=opponent source=0cd57ded7781107b7ffb2140d586f04414d00aef6c42de055a636235e595ba24 floor=FLOOR-w0oTy8 reserved=2026-10-17T15:03:40Z]
+  trunc-hour ROUND-6 RESERVED
+  trunc-minute reconcile(2026-07-21T06:45:30Z) rc=0 out=[reconciled legacy gate=opponent round=5 timestamp=2026-07-21T06:45:30Z]
+  trunc-minute waiver(2026-07-21T06:45:10Z) rc=0 out=[authorized: opponent round 6]
+  trunc-minute floor rc=0
+  trunc-minute round rc=0 out=[round=6 gate=opponent source=714ef24ac9275f61daaf2f48f5a37a117fedf91f30ad6b8573e4e1eeb64bf6f0 floor=FLOOR-9jHoio reserved=2026-10-17T15:04:03Z]
+  trunc-minute ROUND-6 RESERVED
+  sameday-early reconcile(2026-07-20T18:00:00Z) rc=0 out=[reconciled legacy gate=opponent round=5 timestamp=2026-07-20T18:00:00Z]
+  sameday-early waiver(2026-07-20T12:00:00Z) rc=4 out=[round authorization denied: opponent round 6 needs an exact-round user waiver/spec revision after round 5   candidate authorization lines were found and refused:   2026-07-20T12:00:00Z refused: not after the previous round completion at 2026-07-20T18:00:00Z]
+  sameday-early floor rc=0
+  sameday-early round rc=4 out=[round authorization denied: opponent round 6 needs an exact-round user waiver/spec revision after round 5   candidate authorization lines were found and refused:   2026-07-20T12:00:00Z refused: not af]
+  sameday-after reconcile(2026-07-20T18:00:00Z) rc=0 out=[reconciled legacy gate=opponent round=5 timestamp=2026-07-20T18:00:00Z]
+  sameday-after waiver(2026-07-20T19:00:00Z) rc=0 out=[authorized: opponent round 6]
+  sameday-after floor rc=0
+  sameday-after round rc=0 out=[round=6 gate=opponent source=e0766fca0d57176e9f198a77de12359ab22f5f0b26ed21d94f38bebab10e4a72 floor=FLOOR-EAQ1ta reserved=2026-10-17T15:04:46Z]
+  sameday-after ROUND-6 RESERVED
+== probe under minute (suite rc=0)
+  trunc-hour reconcile(2026-07-21T06:45:30Z) rc=0 out=[reconciled legacy gate=opponent round=5 timestamp=2026-07-21T06:45:30Z]
+  trunc-hour waiver(2026-07-21T06:30:00Z) rc=4 out=[round authorization denied: opponent round 6 needs an exact-round user waiver/spec revision after round 5   candidate authorization lines were found and refused:   2026-07-21T06:30:00Z refused: not after the previous round completion at 2026-07-21T06:45:00Z]
+  trunc-hour floor rc=0
+  trunc-hour round rc=4 out=[round authorization denied: opponent round 6 needs an exact-round user waiver/spec revision after round 5   candidate authorization lines were found and refused:   2026-07-21T06:30:00Z refused: not af]
+  trunc-minute reconcile(2026-07-21T06:45:30Z) rc=0 out=[reconciled legacy gate=opponent round=5 timestamp=2026-07-21T06:45:30Z]
+  trunc-minute waiver(2026-07-21T06:45:10Z) rc=0 out=[authorized: opponent round 6]
+  trunc-minute floor rc=0
+  trunc-minute round rc=0 out=[round=6 gate=opponent source=b448a89d9eab464966c1fca58889f66996f62f86438d6385baf396741560557c floor=FLOOR-BXEKHq reserved=2026-10-17T15:05:29Z]
+  trunc-minute ROUND-6 RESERVED
+  sameday-early reconcile(2026-07-20T18:00:00Z) rc=0 out=[reconciled legacy gate=opponent round=5 timestamp=2026-07-20T18:00:00Z]
+  sameday-early waiver(2026-07-20T12:00:00Z) rc=4 out=[round authorization denied: opponent round 6 needs an exact-round user waiver/spec revision after round 5   candidate authorization lines were found and refused:   2026-07-20T12:00:00Z refused: not after the previous round completion at 2026-07-20T18:00:00Z]
+  sameday-early floor rc=0
+  sameday-early round rc=4 out=[round authorization denied: opponent round 6 needs an exact-round user waiver/spec revision after round 5   candidate authorization lines were found and refused:   2026-07-20T12:00:00Z refused: not af]
+  sameday-after reconcile(2026-07-20T18:00:00Z) rc=0 out=[reconciled legacy gate=opponent round=5 timestamp=2026-07-20T18:00:00Z]
+  sameday-after waiver(2026-07-20T19:00:00Z) rc=0 out=[authorized: opponent round 6]
+  sameday-after floor rc=0
+  sameday-after round rc=0 out=[round=6 gate=opponent source=0c1cc6be85966852ec94bd478fac5cda66fcefa4d9939b06c916ce77c9811d65 floor=FLOOR-Umcfsz reserved=2026-10-17T15:06:11Z]
+  sameday-after ROUND-6 RESERVED
+== probe under samedaymid (suite rc=0)
+  trunc-hour reconcile(2026-07-21T06:45:30Z) rc=0 out=[reconciled legacy gate=opponent round=5 timestamp=2026-07-21T06:45:30Z]
+  trunc-hour waiver(2026-07-21T06:30:00Z) rc=4 out=[round authorization denied: opponent round 6 needs an exact-round user waiver/spec revision after round 5   candidate authorization lines were found and refused:   2026-07-21T06:30:00Z refused: not after the previous round completion at 2026-07-21T06:45:30Z]
+  trunc-hour floor rc=0
+  trunc-hour round rc=4 out=[round authorization denied: opponent round 6 needs an exact-round user waiver/spec revision after round 5   candidate authorization lines were found and refused:   2026-07-21T06:30:00Z refused: not af]
+  trunc-minute reconcile(2026-07-21T06:45:30Z) rc=0 out=[reconciled legacy gate=opponent round=5 timestamp=2026-07-21T06:45:30Z]
+  trunc-minute waiver(2026-07-21T06:45:10Z) rc=4 out=[round authorization denied: opponent round 6 needs an exact-round user waiver/spec revision after round 5   candidate authorization lines were found and refused:   2026-07-21T06:45:10Z refused: not after the previous round completion at 2026-07-21T06:45:30Z]
+  trunc-minute floor rc=0
+  trunc-minute round rc=4 out=[round authorization denied: opponent round 6 needs an exact-round user waiver/spec revision after round 5   candidate authorization lines were found and refused:   2026-07-21T06:45:10Z refused: not af]
+  sameday-early reconcile(2026-07-20T18:00:00Z) rc=0 out=[reconciled legacy gate=opponent round=5 timestamp=2026-07-20T18:00:00Z]
+  sameday-early waiver(2026-07-20T12:00:00Z) rc=0 out=[authorized: opponent round 6]
+  sameday-early floor rc=0
+  sameday-early round rc=0 out=[round=6 gate=opponent source=e313fba9c3eaa329661dab5e6e0d5a8160e445688b408f6676e97288f27c2eef floor=FLOOR-iFwdn0 reserved=2026-10-17T15:07:13Z]
+  sameday-early ROUND-6 RESERVED
+  sameday-after reconcile(2026-07-20T18:00:00Z) rc=0 out=[reconciled legacy gate=opponent round=5 timestamp=2026-07-20T18:00:00Z]
+  sameday-after waiver(2026-07-20T19:00:00Z) rc=0 out=[authorized: opponent round 6]
+  sameday-after floor rc=0
+  sameday-after round rc=0 out=[round=6 gate=opponent source=d7da474314be1132a1b3f00b7cc85c7719a2276702b665659ddbea541e7cc5dd floor=FLOOR-Ci52oj reserved=2026-10-17T15:07:37Z]
+  sameday-after ROUND-6 RESERVED
+== probe under laterday (suite rc=0)
+  trunc-hour reconcile(2026-07-21T06:45:30Z) rc=0 out=[reconciled legacy gate=opponent round=5 timestamp=2026-07-21T06:45:30Z]
+  trunc-hour waiver(2026-07-21T06:30:00Z) rc=4 out=[round authorization denied: opponent round 6 needs an exact-round user waiver/spec revision after round 5   candidate authorization lines were found and refused:   2026-07-21T06:30:00Z refused: not after the previous round completion at 2026-07-21T06:45:30Z]
+  trunc-hour floor rc=0
+  trunc-hour round rc=4 out=[round authorization denied: opponent round 6 needs an exact-round user waiver/spec revision after round 5   candidate authorization lines were found and refused:   2026-07-21T06:30:00Z refused: not af]
+  trunc-minute reconcile(2026-07-21T06:45:30Z) rc=0 out=[reconciled legacy gate=opponent round=5 timestamp=2026-07-21T06:45:30Z]
+  trunc-minute waiver(2026-07-21T06:45:10Z) rc=4 out=[round authorization denied: opponent round 6 needs an exact-round user waiver/spec revision after round 5   candidate authorization lines were found and refused:   2026-07-21T06:45:10Z refused: not after the previous round completion at 2026-07-21T06:45:30Z]
+  trunc-minute floor rc=0
+  trunc-minute round rc=4 out=[round authorization denied: opponent round 6 needs an exact-round user waiver/spec revision after round 5   candidate authorization lines were found and refused:   2026-07-21T06:45:10Z refused: not af]
+  sameday-early reconcile(2026-07-20T18:00:00Z) rc=3 out=[]
+  sameday-early waiver(2026-07-20T12:00:00Z) rc=4 out=[round authorization: date-only history needs timestamped digest reconciliation]
+  sameday-early floor rc=0
+  sameday-early round rc=4 out=[round authorization: date-only history needs timestamped digest reconciliation opponent rounds=5 reality-check rounds=0 blocking=6 minor=0 locations=8 unclassified=6 finding-observations=6 distinct-fi]
+  sameday-after reconcile(2026-07-20T18:00:00Z) rc=3 out=[]
+  sameday-after waiver(2026-07-20T19:00:00Z) rc=4 out=[round authorization: date-only history needs timestamped digest reconciliation]
+  sameday-after floor rc=0
+  sameday-after round rc=4 out=[round authorization: date-only history needs timestamped digest reconciliation opponent rounds=5 reality-check rounds=0 blocking=6 minor=0 locations=8 unclassified=6 finding-observations=6 distinct-fi]
+== probe under maxeod (suite rc=0)
+  trunc-hour reconcile(2026-07-21T06:45:30Z) rc=0 out=[reconciled legacy gate=opponent round=5 timestamp=2026-07-21T06:45:30Z]
+  trunc-hour waiver(2026-07-21T06:30:00Z) rc=4 out=[round authorization denied: opponent round 6 needs an exact-round user waiver/spec revision after round 5   candidate authorization lines were found and refused:   2026-07-21T06:30:00Z refused: not after the previous round completion at 2026-07-21T06:45:30Z]
+  trunc-hour floor rc=0
+  trunc-hour round rc=4 out=[round authorization denied: opponent round 6 needs an exact-round user waiver/spec revision after round 5   candidate authorization lines were found and refused:   2026-07-21T06:30:00Z refused: not af]
+  trunc-minute reconcile(2026-07-21T06:45:30Z) rc=0 out=[reconciled legacy gate=opponent round=5 timestamp=2026-07-21T06:45:30Z]
+  trunc-minute waiver(2026-07-21T06:45:10Z) rc=4 out=[round authorization denied: opponent round 6 needs an exact-round user waiver/spec revision after round 5   candidate authorization lines were found and refused:   2026-07-21T06:45:10Z refused: not after the previous round completion at 2026-07-21T06:45:30Z]
+  trunc-minute floor rc=0
+  trunc-minute round rc=4 out=[round authorization denied: opponent round 6 needs an exact-round user waiver/spec revision after round 5   candidate authorization lines were found and refused:   2026-07-21T06:45:10Z refused: not af]
+  sameday-early reconcile(2026-07-20T18:00:00Z) rc=0 out=[reconciled legacy gate=opponent round=5 timestamp=2026-07-20T18:00:00Z]
+  sameday-early waiver(2026-07-20T12:00:00Z) rc=4 out=[round authorization denied: opponent round 6 needs an exact-round user waiver/spec revision after round 5   candidate authorization lines were found and refused:   2026-07-20T12:00:00Z refused: not after the previous round completion at 2026-07-20T23:59:59Z]
+  sameday-early floor rc=0
+  sameday-early round rc=4 out=[round authorization denied: opponent round 6 needs an exact-round user waiver/spec revision after round 5   candidate authorization lines were found and refused:   2026-07-20T12:00:00Z refused: not af]
+  sameday-after reconcile(2026-07-20T18:00:00Z) rc=0 out=[reconciled legacy gate=opponent round=5 timestamp=2026-07-20T18:00:00Z]
+  sameday-after waiver(2026-07-20T19:00:00Z) rc=4 out=[round authorization denied: opponent round 6 needs an exact-round user waiver/spec revision after round 5   candidate authorization lines were found and refused:   2026-07-20T19:00:00Z refused: not after the previous round completion at 2026-07-20T23:59:59Z]
+  sameday-after floor rc=0
+  sameday-after round rc=4 out=[round authorization denied: opponent round 6 needs an exact-round user waiver/spec revision after round 5   candidate authorization lines were found and refused:   2026-07-20T19:00:00Z refused: not af]
+== probe under none (suite rc=0)
+  o032 reconcile rc=0 out=[reconciled legacy gate=opponent round=5 timestamp=2026-07-21T06:17:43Z]
+  o032 re-reconcile(edited digest) rc=3 out=[]
+  badhour reconcile(2026-07-20T25:00:00Z) rc=3 out=[] record-written=no
+  badhour waiver(now) rc=4 out=[round authorization: date-only history needs timestamped digest reconciliation]
+  badhour re-reconcile(good) rc=0 out=[reconciled legacy gate=opponent round=5 timestamp=2026-07-21T06:17:43Z]
+  badhour floor rc=0
+  badhour round rc=0 out=[round=6 gate=opponent source=103a14870466e7ef5330d8c3a74c510a622bb9a4c6dc461f31b014a39f2257b2 floor=FLOOR-9ULR1R reserved=2026-10-17T15:10:37Z]
+  dateonly reconcile(2026-07-20) rc=3 out=[] record-written=no
+  dateonly waiver(now) rc=4 out=[round authorization: date-only history needs timestamped digest reconciliation]
+  dateonly re-reconcile(good) rc=0 out=[reconciled legacy gate=opponent round=5 timestamp=2026-07-21T06:17:43Z]
+  dateonly floor rc=0
+  dateonly round rc=0 out=[round=6 gate=opponent source=53be4e8714d59294b7d80c5f7ac71262bde4e4053215b0190aac11cc3e4e0abd floor=FLOOR-kZ09hT reserved=2026-10-17T15:11:01Z]
+== probe under recvalid (suite rc=0)
+  o032 reconcile rc=0 out=[reconciled legacy gate=opponent round=5 timestamp=2026-07-21T06:17:43Z]
+  o032 re-reconcile(edited digest) rc=3 out=[]
+  badhour reconcile(2026-07-20T25:00:00Z) rc=0 out=[reconciled legacy gate=opponent round=5 timestamp=2026-07-20T25:00:00Z] record-written=yes
+  badhour waiver(now) rc=3 out=[]
+  badhour re-reconcile(good) rc=3 out=[]
+  badhour floor rc=0
+  badhour round rc=3 out=[]
+  dateonly reconcile(2026-07-20) rc=0 out=[reconciled legacy gate=opponent round=5 timestamp=2026-07-20] record-written=yes
+  dateonly waiver(now) rc=3 out=[]
+  dateonly re-reconcile(good) rc=3 out=[]
+  dateonly floor rc=0
+  dateonly round rc=3 out=[]
+batch3-kernel-clean
+done

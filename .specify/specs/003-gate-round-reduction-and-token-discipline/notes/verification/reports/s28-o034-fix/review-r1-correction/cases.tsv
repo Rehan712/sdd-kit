@@ -1,0 +1,119 @@
+weak	npm run build
+weak	npm run typecheck
+weak	tsc --noEmit
+weak	grep AC-001 README.md
+weak	tsc --noEmit tests/unit.ts
+weak	npm run typecheck -- --project tests/tsconfig.json
+weak	grep AC-001 tests/check.sh
+weak	npm run build -- --outDir tests/build
+weak	test -e README.md
+weak	test -f README.md
+weak	grep pytest README.md
+weak	rg bats README.md
+weak	diff fixtures/test.txt actual.txt
+weak	grep test README.md
+weak	grep tests README.md
+weak	grep "node --test" README.md
+weak	grep "cargo test" README.md
+weak	grep AC-001 scripts/test-check.sh
+weak	test -e tests/check.sh
+weak	test -f tests/check.sh
+weak	rg /usr/bin/pytest README.md
+weak	diff fixtures/bats.txt actual.txt
+weak	bash --rcfile tests/env.sh -c "npm run typecheck"
+weak	npm<tests/test-typecheck.txt run typecheck
+weak	npm <tests/test-typecheck.txt run typecheck
+weak	tsc>tests/test-typecheck.log --noEmit
+weak	tsc >tests/test-typecheck.log --noEmit
+weak	grep<tools/pytest typecheck
+weak	grep <tools/pytest typecheck
+weak	grep<tools/npm test typecheck.txt
+weak	grep <tools/npm test typecheck.txt
+weak	npm<tests/check.txt run typecheck
+weak	npm <tests/check.txt run typecheck
+weak	npm>tests/check.txt run typecheck
+weak	npm >tests/check.txt run typecheck
+weak	npm<tests/check.txt run build
+weak	npm <tests/check.txt run build
+weak	npm>tests/check.txt run build
+weak	npm >tests/check.txt run build
+weak	tsc<input.txt --noEmit
+weak	tsc <input.txt --noEmit
+weak	tsc>input.txt --noEmit
+weak	tsc >input.txt --noEmit
+weak	grep<input.txt AC-001 README.md
+weak	grep <input.txt AC-001 README.md
+weak	grep>input.txt AC-001 README.md
+weak	grep >input.txt AC-001 README.md
+weak	rg<tools/pytest AC-001 README.md
+weak	rg <tools/pytest AC-001 README.md
+weak	rg>tools/pytest AC-001 README.md
+weak	rg >tools/pytest AC-001 README.md
+weak	diff<tools/bats actual.txt expected.txt
+weak	diff <tools/bats actual.txt expected.txt
+weak	diff>tools/bats actual.txt expected.txt
+weak	diff >tools/bats actual.txt expected.txt
+weak	test<tests/check.txt -e README.md
+weak	test <tests/check.txt -e README.md
+weak	test>tests/check.txt -e README.md
+weak	test >tests/check.txt -e README.md
+weak	grep<tools/bash tests/typecheck.sh
+weak	grep <tools/bash tests/typecheck.sh
+weak	grep>tools/bash tests/typecheck.sh
+weak	grep >tools/bash tests/typecheck.sh
+weak	grep<tests/check.sh typecheck.txt
+weak	grep <tests/check.sh typecheck.txt
+weak	grep>tests/check.sh typecheck.txt
+weak	grep >tests/check.sh typecheck.txt
+weak	tsc 2>output.txt --noEmit
+weak	npm2>output.txt test typecheck.txt
+runner	bash tests/check.sh
+runner	sh tests/check.sh
+runner	./tests/check.sh
+runner	bash -e tests/typecheck.sh
+runner	/bin/bash tests/typecheck.sh
+runner	./scripts/test-build.sh
+runner	node --test test/typecheck.test.js
+runner	cargo test --test build
+runner	pytest tests/typecheck.py
+runner	/usr/bin/pytest tests/typecheck.py
+runner	bats tests/build.bats
+runner	python3 -m pytest tests/typecheck.py
+runner	npm test -- --grep typecheck
+runner	npm run test -- --grep typecheck
+runner	/usr/local/bin/npm test -- --grep typecheck
+runner	pnpm test --filter typecheck
+runner	yarn run test --grep typecheck
+runner	make test TARGET=typecheck
+runner	bun test tests/typecheck.test.ts
+runner	go test ./typecheck
+runner	bash<input.txt tests/typecheck.sh
+runner	bash <input.txt tests/typecheck.sh
+runner	bash>input.txt tests/typecheck.sh
+runner	bash >input.txt tests/typecheck.sh
+runner	./tests/check-typecheck.sh<input.txt
+runner	./tests/check-typecheck.sh <input.txt
+runner	./tests/check-typecheck.sh>input.txt
+runner	./tests/check-typecheck.sh >input.txt
+runner	node<input.txt --test test/typecheck.test.js
+runner	node <input.txt --test test/typecheck.test.js
+runner	node>input.txt --test test/typecheck.test.js
+runner	node >input.txt --test test/typecheck.test.js
+runner	cargo<input.txt test --test typecheck
+runner	cargo <input.txt test --test typecheck
+runner	cargo>input.txt test --test typecheck
+runner	cargo >input.txt test --test typecheck
+runner	pytest<input.txt tests/typecheck.py
+runner	pytest <input.txt tests/typecheck.py
+runner	pytest>input.txt tests/typecheck.py
+runner	pytest >input.txt tests/typecheck.py
+runner	/usr/bin/python3<input.txt -m pytest tests/typecheck.py
+runner	/usr/bin/python3 <input.txt -m pytest tests/typecheck.py
+runner	/usr/bin/python3>input.txt -m pytest tests/typecheck.py
+runner	/usr/bin/python3 >input.txt -m pytest tests/typecheck.py
+runner	npm<input.txt run test -- --grep typecheck
+runner	npm <input.txt run test -- --grep typecheck
+runner	npm>input.txt run test -- --grep typecheck
+runner	npm >input.txt run test -- --grep typecheck
+runner	npm 2>output.txt run test -- --grep typecheck
+runner	bash 0<input.txt -e tests/typecheck.sh

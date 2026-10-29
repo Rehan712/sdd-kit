@@ -1,0 +1,20 @@
+{
+  "task": "T031a6",
+  "capture": "CAP-768-sy4sk5",
+  "command": [
+    "bash",
+    "scripts/spec-gate.sh",
+    "accept",
+    ".specify/specs/003-gate-round-reduction-and-token-discipline",
+    "T031a6",
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/returns/T031a6.txt"
+  ],
+  "started": "2026-10-25T19:46:56.025274+00:00",
+  "ended": "2026-10-25T19:47:18.230179+00:00",
+  "seconds": 22.204,
+  "exit": 0,
+  "tasksBefore": "6d611aee0bddb0a9b4b0665c1b65974dbed91674212ebe9d50998e7b4418e3da",
+  "tasksAfter": "d1f829c82436168de21ddbfce847cb8833034036021280c82784ee17485815ed",
+  "stdout": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s26-rc3-test-fixes/invalidation/accept.stdout",
+  "stderr": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s26-rc3-test-fixes/invalidation/accept.stderr"
+}

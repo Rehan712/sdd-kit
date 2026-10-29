@@ -1,0 +1,92 @@
+{
+  "capture": "CAP-845-hwbWOH",
+  "complete": {
+    "mode": 420,
+    "mtimeNs": 1793311910529302278,
+    "sha256": "6d97dc97966b059ebd1ec75e613de795b2d137012b849535e92ce7bc5afbd120",
+    "size": 552,
+    "type": "file"
+  },
+  "ledger": {
+    "mode": 420,
+    "mtimeNs": 1793311910981735634,
+    "sha256": "6d97dc97966b059ebd1ec75e613de795b2d137012b849535e92ce7bc5afbd120",
+    "size": 552,
+    "type": "file"
+  },
+  "metadata": {
+    "check": "4b7f6c9b5f0df725e563898e3969549378a848152b48c9b6985cfb1517a462c1",
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "end": "2026-10-29T22:11:30Z",
+    "exit": "0",
+    "id": "CAP-845-hwbWOH",
+    "input_after": "7d4f17221f13d850cb7db06cdbb6261119ca97b52228adeac74d82f6496a9bff",
+    "input_before": "7d4f17221f13d850cb7db06cdbb6261119ca97b52228adeac74d82f6496a9bff",
+    "key": "  -- 19/19 passed",
+    "kind": "command",
+    "no_tick": "1",
+    "output_bytes": "862",
+    "output_digest": "f9166fdc124954abb48f7c8ed789d96a1ce68c06a9da6df0d9d49a79a07aca5a",
+    "policy": "local",
+    "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "sequence": "845",
+    "shell": "/bin/bash",
+    "start": "2026-10-29T22:07:42Z",
+    "version": "1"
+  },
+  "nativeCommand": {
+    "GIT_OPTIONAL_LOCKS": "0",
+    "argv": [
+      "bash",
+      "scripts/spec-run.sh",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline",
+      "T031a5o1",
+      "--from-task",
+      "--no-tick",
+      "--summary"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "end": "2026-10-29T22:11:51.103301+00:00",
+    "endNs": 1793311911103387000,
+    "exit": 0,
+    "nativePid": 64393,
+    "start": "2026-10-29T22:07:15.906214+00:00",
+    "startNs": 1793311635906221000,
+    "stderrBytes": 0,
+    "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdoutBytes": 498,
+    "stdoutSha256": "2834911ae2901bc451e8f0fa5a097be7aa1c23770943db42b2344892564e0a5a"
+  },
+  "nativeStdoutExactSummary": true,
+  "outputTail": [
+    "  ok   test_clean_fixture_is_consistent",
+    "  ok   test_dangling_ref_fails",
+    "  ok   test_duplicate_task_id_fails",
+    "  ok   test_external_marker_must_be_mirrored_in_status",
+    "  ok   test_gate_agent_placeholder_fails",
+    "  ok   test_leftover_spec_directories_do_not_decide_the_shipped_loop",
+    "  ok   test_missing_artifact_is_an_error",
+    "  ok   test_missing_gate_agent_file_fails",
+    "  ok   test_missing_verify_line_warns",
+    "  ok   test_needs_clarification_blocks",
+    "  ok   test_stray_repo_tags_without_umbrella_warn",
+    "  ok   test_task_without_acceptance_fails",
+    "  ok   test_ticked_box_without_evidence_warns",
+    "  ok   test_umbrella_declared_repo_with_no_tasks_warns",
+    "  ok   test_umbrella_tagged_tasks_pass",
+    "  ok   test_umbrella_undeclared_repo_tag_fails",
+    "  ok   test_umbrella_untagged_tasks_fail",
+    "  ok   test_uncovered_ac_fails_and_gate_refs_do_not_count",
+    "  ok   test_verification_bindings",
+    "  -- 19/19 passed"
+  ],
+  "sevenMemberHashes": {
+    "argv.nul": "a193b9b8454686d43618a97cd684b331c6e36a0e968611582be2ce0aee872844",
+    "bindings.nul": "8766df908be5d8f628c3880af34ae761dd1c9c4946e8da08da3e566c8c0c788a",
+    "inputs-after.nul": "7d4f17221f13d850cb7db06cdbb6261119ca97b52228adeac74d82f6496a9bff",
+    "inputs.nul": "7d4f17221f13d850cb7db06cdbb6261119ca97b52228adeac74d82f6496a9bff",
+    "meta.nul": "c7396c69e1a82cb54938070bd7286940d996f73fcc70c0854150509ec92ea3ef",
+    "output.log": "f9166fdc124954abb48f7c8ed789d96a1ce68c06a9da6df0d9d49a79a07aca5a",
+    "summary.txt": "2834911ae2901bc451e8f0fa5a097be7aa1c23770943db42b2344892564e0a5a"
+  }
+}

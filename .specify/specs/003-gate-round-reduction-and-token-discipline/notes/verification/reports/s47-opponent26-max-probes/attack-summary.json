@@ -1,0 +1,71 @@
+{
+  "first_batch_count": 181,
+  "first_batch_groups": {
+    "numeric-and-operands": {
+      "count": 8,
+      "met_expectation": 8
+    },
+    "op25-noclobber": {
+      "count": 48,
+      "met_expectation": 48
+    },
+    "original-op24": {
+      "count": 9,
+      "met_expectation": 9
+    },
+    "qualified-weak-control": {
+      "count": 4,
+      "met_expectation": 4
+    },
+    "qualified-weak-executable": {
+      "count": 16,
+      "met_expectation": 0
+    },
+    "runner-redirect": {
+      "count": 48,
+      "met_expectation": 48
+    },
+    "weak-redirect": {
+      "count": 48,
+      "met_expectation": 48
+    }
+  },
+  "second_batch_count": 29,
+  "second_batch_warning_omissions": 20,
+  "total_public_cases": 210,
+  "explicit_combined_kind_control": 1,
+  "total_public_analyzer_invocations": 211,
+  "warning_omission_observations": 36,
+  "unique_warning_omission_commands": 28,
+  "unique_omission_commands": [
+    "./test/npm run build",
+    "./test/npm run typecheck",
+    "./test/test -f README.md",
+    "./test/tsc --noEmit tests/unit.ts",
+    "./tests/node_modules/.bin/npm run build",
+    "./tests/node_modules/.bin/npm run typecheck",
+    "./tests/node_modules/.bin/test -f README.md",
+    "./tests/node_modules/.bin/tsc --noEmit tests/unit.ts",
+    "./tests/npm run build",
+    "./tests/npm run typecheck",
+    "./tests/npm&>out.txt run typecheck",
+    "./tests/npm<&0 run typecheck",
+    "./tests/npm<>input.txt run typecheck",
+    "./tests/npm<input.txt run typecheck",
+    "./tests/npm>&1 run typecheck",
+    "./tests/npm>>out.txt run typecheck",
+    "./tests/npm>out.txt run typecheck",
+    "./tests/npm>|out.txt run typecheck",
+    "./tests/test -f README.md",
+    "./tests/tsc --noEmit tests/unit.ts",
+    "./tools/tests/npm run build",
+    "./tools/tests/npm run typecheck",
+    "./tools/tests/test -f README.md",
+    "./tools/tests/tsc --noEmit tests/unit.ts",
+    "tests/npm run build",
+    "tests/npm run typecheck",
+    "tests/test -f README.md",
+    "tests/tsc --noEmit tests/unit.ts"
+  ],
+  "real_binary_file_presence_controls": 4
+}

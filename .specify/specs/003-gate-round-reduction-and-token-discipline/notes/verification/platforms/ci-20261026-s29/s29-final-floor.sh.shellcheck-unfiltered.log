@@ -1,0 +1,24 @@
+
+In /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s29-final-floor.sh line 30:
+[[ "$?" == 0 ]] || exit 96
+   ^--^ SC2181 (style): Check exit code directly with e.g. 'if mycmd;', not indirectly with $?.
+
+
+In /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s29-final-floor.sh line 46:
+  printf 'captures-before=%s\n' "$(ls -d "$s"/notes/captures/CAP-* | wc -l | tr -d ' ')"
+                                   ^-----------------------------^ SC2012 (info): Use find instead of ls to better handle non-alphanumeric filenames.
+
+
+In /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s29-final-floor.sh line 61:
+caffeinate -i -m -s bash -c 'bash scripts/spec-gate.sh floor "$1" > "$2" 2>&1; printf "%s\n" "$?" > "$3"' \
+                            ^-- SC2016 (info): Expressions don't expand in single quotes, use double quotes for that.
+
+
+In /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s29-final-floor.sh line 67:
+  printf 'captures-after=%s\n' "$(ls -d "$s"/notes/captures/CAP-* | wc -l | tr -d ' ')"
+                                  ^-----------------------------^ SC2012 (info): Use find instead of ls to better handle non-alphanumeric filenames.
+
+For more information:
+  https://www.shellcheck.net/wiki/SC2012 -- Use find instead of ls to better ...
+  https://www.shellcheck.net/wiki/SC2016 -- Expressions don't expand in singl...
+  https://www.shellcheck.net/wiki/SC2181 -- Check exit code directly with e.g...

@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "bash",
+    "-c",
+    "HUB_DIR=\"$PWD\"; . scripts/lib.sh; . scripts/verification-lib.sh; vf_binding_snapshot \"$1\" \"$2\" && vf_semantic_file \"$1/STATUS.md\" \"$1/STATUS.md\" \"$3\"",
+    "_",
+    ".specify/specs/003-gate-round-reduction-and-token-discipline",
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s34-t029-worker/current-bindings.nul",
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s34-t029-worker/status-decisions.semantic"
+  ],
+  "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+  "start": "2026-10-28T09:13:33.678285+00:00",
+  "end": "2026-10-28T09:13:35.135871+00:00",
+  "exit": 0
+}

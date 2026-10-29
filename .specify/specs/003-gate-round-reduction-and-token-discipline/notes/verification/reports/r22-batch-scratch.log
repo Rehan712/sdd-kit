@@ -1,0 +1,13 @@
+PASS scratch before the batch: round 22 refused at exit 4
+  | appended 5 entries; waiver 2026-10-16T20:48:33Z
+  | b78c7465da71524446b63d5399cc4ca7c756cb79742f5da20bd69e0d0146fbcf  .specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md
+  | bf297cb17efa680525d2d917de68af6278a7642f803f90ba0f37333c179e831e  tests/test-spec-gate.sh
+PASS scratch round 21 still reported completed
+PASS scratch round 22 authorized
+PASS scratch round 23 refused at exit 4
+PASS scratch analyzer exit 0 with 0 errors
+PASS scratch the T031a4o2 block present and unticked
+PASS scratch exactly one authorization line for round 22
+PASS scratch the freezing entry is the last Decisions entry
+PASS scratch the suite hashes as apply-code printed
+r22-batch-apply scratch failures=0

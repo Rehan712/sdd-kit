@@ -1,0 +1,134 @@
+{
+  "recordedAt": "2026-10-25T20:12:05.324327+00:00",
+  "workdir": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+  "gitOptionalLocks": "0",
+  "headBefore": "2049f65960cc91e9e30bbd5ff1e11fc0fdf7cbd9",
+  "headAfter": "2049f65960cc91e9e30bbd5ff1e11fc0fdf7cbd9",
+  "headFileBeforeSha256": "36b441e5337734d73e547a921b682069ccd54788152cff695f469a8e54e84134",
+  "headFileAfterSha256": "36b441e5337734d73e547a921b682069ccd54788152cff695f469a8e54e84134",
+  "headBytesUnchanged": true,
+  "indexBeforeSha256": "c492d7ea95abf8e8c335001f20c62ff50bc6f1e2179d7a07d30811181b3dd700",
+  "indexAfterSha256": "c492d7ea95abf8e8c335001f20c62ff50bc6f1e2179d7a07d30811181b3dd700",
+  "indexBytes": 2200525,
+  "indexBytesUnchanged": true,
+  "indexMtimeBeforeNs": 1792957592613445716,
+  "indexMtimeAfterNs": 1792957592613445716,
+  "statusBeforeSha256": "48a84ed86b352bfcd134ce291caba6b1f13fab48c32451f0420afdc3ca87f973",
+  "statusAfterSha256": "28919a358c30407ccb0fff041f436768353b2f002c54e1db351ea57efe5e7d88",
+  "statusBeforeBytes": 769706,
+  "statusAfterBytes": 772414,
+  "protectedFilesChecked": 13063,
+  "protectedFileChanges": [
+    {
+      "path": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s26-next-session-prompt.md",
+      "before": {
+        "sha256": "c966b0af0233dd2df216ee1c38a1e61c5a866390c69aa3926cadb0e68095bfe9",
+        "bytes": 21803
+      },
+      "after": {
+        "sha256": "cb9eb54c833115b18d8c49fb314bf574e32c50daa58bf5868ed1eb75d316642f",
+        "bytes": 24203
+      }
+    }
+  ],
+  "concurrentChangeNote": "The first preservation assertion detected s26-next-session-prompt.md changing during this task. This implementation never wrote that path. Its new bytes are left intact and copied to an s27 report for provenance. Writer identity is not inferred. Every other protected file matches baseline.",
+  "pendingReservations": [],
+  "verificationLockAbsent": true,
+  "indexLockAbsent": true,
+  "matchingLiveFloorGateProcesses": [],
+  "newGateReservationsCreated": false,
+  "validation": [
+    {
+      "check": "opponent-waiver",
+      "command": [
+        "bash",
+        "scripts/spec-gate.sh",
+        "waiver",
+        ".specify/specs/003-gate-round-reduction-and-token-discipline",
+        "opponent",
+        "24"
+      ],
+      "start": "2026-10-25T20:11:06.651395+00:00",
+      "end": "2026-10-25T20:11:09.619116+00:00",
+      "exit": 0,
+      "stdout": "authorized: opponent round 24\n",
+      "stderr": ""
+    },
+    {
+      "check": "reality-check-waiver",
+      "command": [
+        "bash",
+        "scripts/spec-gate.sh",
+        "waiver",
+        ".specify/specs/003-gate-round-reduction-and-token-discipline",
+        "reality-check",
+        "4"
+      ],
+      "start": "2026-10-25T20:11:09.619564+00:00",
+      "end": "2026-10-25T20:11:09.860461+00:00",
+      "exit": 0,
+      "stdout": "authorized: reality-check round 4\n",
+      "stderr": ""
+    },
+    {
+      "check": "diff-whitespace",
+      "command": [
+        "git",
+        "diff",
+        "--check",
+        "--",
+        ".specify/specs/003-gate-round-reduction-and-token-discipline/STATUS.md"
+      ],
+      "start": "2026-10-25T20:11:09.860898+00:00",
+      "end": "2026-10-25T20:11:09.876647+00:00",
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "blocker": null,
+  "scope": "This implementation wrote only STATUS.md and new s27-authorization-1-* reports. No captures, floor, formal gates, CI, push, merge or app/code/test/plan/spec/tasks/script edits.",
+  "approvalTimestamp": "2026-10-25T20:07:52Z",
+  "rounds": [
+    {
+      "gate": "opponent",
+      "round": 23,
+      "metadata": {
+        "version": "1",
+        "gate": "opponent",
+        "round": "23",
+        "floor": "FLOOR-il41Kn",
+        "source": "a7e7dd326b27c7565c26349485c440af26f718a7f16e400ea42ed6961d03cd1a",
+        "reserved": "2026-10-25T13:14:19Z"
+      },
+      "seal": "verification:1\n6ad88188c822144516b0077de196a6331cdf4fea6dd52f42aa0a1a691139cfc1 meta.nul\n",
+      "reportSha256": "b58071ed44cd327664acbae9784374f4e6334c8f8caa664e48b6796d3d922acc",
+      "canonicalCompletedTimestamp": "2026-10-25T14:43:15Z",
+      "completionCommandStart": "2026-10-25T14:49:51Z",
+      "completionCommandEnd": "2026-10-25T15:08:39Z",
+      "completionExit": 0,
+      "sealMtimeUtc": "2026-10-25T13:14:19.783570+00:00",
+      "reportDigestMtimeUtc": "2026-10-25T15:08:39.027918+00:00"
+    },
+    {
+      "gate": "reality-check",
+      "round": 3,
+      "metadata": {
+        "version": "1",
+        "gate": "reality-check",
+        "round": "3",
+        "floor": "FLOOR-il41Kn",
+        "source": "a7e7dd326b27c7565c26349485c440af26f718a7f16e400ea42ed6961d03cd1a",
+        "reserved": "2026-10-25T16:24:18Z"
+      },
+      "seal": "verification:1\nb9c9f3f14633ced26a5562cde32824ab6d63af7f5168f6f3cd62aff5fedaab37 meta.nul\n",
+      "reportSha256": "54509ec3402f1ff4a751c4b4de9d7596e47b5bfa5e678c23577ad443c0d497c4",
+      "canonicalCompletedTimestamp": "2026-10-25T18:03:53Z",
+      "completionCommandStart": "2026-10-25T18:21:40Z",
+      "completionCommandEnd": "2026-10-25T18:44:21Z",
+      "completionExit": 0,
+      "sealMtimeUtc": "2026-10-25T16:24:18.685838+00:00",
+      "reportDigestMtimeUtc": "2026-10-25T18:44:21.689219+00:00"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "taskId": "node:delegated-task:command%3Amcp%3Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%3Adelegate-task%3Asdd003-s27-t029-audit-absolute-path-recon-r1",
+  "childThreadId": "thread:delegated-task:command%3Amcp%3Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%3Adelegate-task%3Asdd003-s27-t029-audit-absolute-path-recon-r1",
+  "childRunId": "run:thread:thread%3Adelegated-task%3Acommand%253Amcp%253Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%253Adelegate-task%253Asdd003-s27-t029-audit-absolute-path-recon-r1:ordinal:1",
+  "childNodeId": "node:delegated-task:command%3Amcp%3Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%3Adelegate-task%3Asdd003-s27-t029-audit-absolute-path-recon-r1",
+  "status": "completed",
+  "workState": "result_available",
+  "hasPendingChildRuns": false,
+  "latestTerminalRunId": "run:thread:thread%3Adelegated-task%3Acommand%253Amcp%253Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%253Adelegate-task%253Asdd003-s27-t029-audit-absolute-path-recon-r1:ordinal:1",
+  "latestTerminalStatus": "completed",
+  "latestTerminalSummary": null,
+  "latestTerminalResultContextTransferId": null,
+  "providerInstanceId": "codex_codex_gym",
+  "model": "gpt-6-luna",
+  "options": [
+    {
+      "id": "reasoningEffort",
+      "value": "medium"
+    },
+    {
+      "id": "serviceTier",
+      "value": "default"
+    }
+  ],
+  "summary": "- Asserted the exact root `/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline`; the helper exists at the requested path.\n- `vf_accept_audit` writes to `notes/verification/accept-events/ACCEPT-*`. Found **ACCEPT-Gixty0** at `.../accept-events/ACCEPT-Gixty0`: status `rejected`, reason `return: missing, extra, duplicate or unknown FM/INV test binding`, task `T029`, return digest `1f573c893caeb0a4e8e938606d01fd12e0927ca010893f025c6f72b82495112a`, before and after task hashes both `d1f829c82436168de21ddbfce847cb8833034036021280c82784ee17485815ed`, timestamp `2026-10-25T20:39:01Z`, class `binding-mismatch`.\n- The rejection stdout records that same binding error. `result.json` says exit 3 and unchanged task hash; its outer exit 1 is the control script’s result, not the acceptance command’s exit.\n- Current T029 evidence is `CAP-766-iRGuhY` with return digest `2eff1b…c34cb47`. `tasks.md` currently matches the mapping’s raw hash. The helper requires raw bytes, Git blob, mode, and semantic hash to match `source-mapping.tsv`; a later intact-return Evidence replacement would change the raw hash and Git blob. The normalized task semantic hash may remain stable because `vf_semantic_file` excludes Evidence lines and normalizes checkbox state, but that does not satisfy the helper’s raw mapping assertions.\n- Smallest next step: preserve the current mapped `tasks.md` and proof; refresh/regenerate the S27 source mapping and dependent snapshot artifacts for the Evidence replacement, then run the planned intact acceptance and verify its event/receipt. Keep the strict raw checks; no guard relaxation.\n\nSkipped tests, acceptance, gates, and snapshots as requested. No missing-event or ownership issue was found.",
+  "resultContextTransferId": "context-transfer:type:subagent_result:source-thread:thread%3Adelegated-task%3Acommand%253Amcp%253Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%253Adelegate-task%253Asdd003-s27-t029-audit-absolute-path-recon-r1:target-thread:2ce93492-409f-4930-a9e5-173544a4c8c6:f283a829-310a-48e6-980f-5eb8399484aa",
+  "hasPendingQuestion": false,
+  "pendingApproval": null,
+  "waitTimedOut": false
+}

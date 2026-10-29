@@ -1,0 +1,85 @@
+{
+  "build-snapshot.sh_bash32_syntax": {
+    "argv": [
+      "/bin/bash",
+      "-n",
+      "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261026-s29/build-snapshot.sh"
+    ],
+    "exit": 0
+  },
+  "build-snapshot.sh_shellcheck": {
+    "argv": [
+      "shellcheck",
+      "--shell=bash",
+      "--exclude=SC2034",
+      "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261026-s29/build-snapshot.sh"
+    ],
+    "exit": 1,
+    "unfiltered_exit": 1,
+    "excluded": "SC2034: sourced HUB_DIR configuration; identical prior builder/verifier diagnostic"
+  },
+  "verify-prepublish.sh_bash32_syntax": {
+    "argv": [
+      "/bin/bash",
+      "-n",
+      "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261026-s29/verify-prepublish.sh"
+    ],
+    "exit": 0
+  },
+  "verify-prepublish.sh_shellcheck": {
+    "argv": [
+      "shellcheck",
+      "--shell=bash",
+      "--exclude=SC2034",
+      "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261026-s29/verify-prepublish.sh"
+    ],
+    "exit": 1,
+    "unfiltered_exit": 1,
+    "excluded": "SC2034: sourced HUB_DIR configuration; identical prior builder/verifier diagnostic"
+  },
+  "collect.sh_bash32_syntax": {
+    "argv": [
+      "/bin/bash",
+      "-n",
+      "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261026-s29/collect.sh"
+    ],
+    "exit": 0
+  },
+  "collect.sh_shellcheck": {
+    "argv": [
+      "shellcheck",
+      "--shell=bash",
+      "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261026-s29/collect.sh"
+    ],
+    "exit": 0
+  },
+  "s29-final-floor.sh_bash32_syntax": {
+    "argv": [
+      "/bin/bash",
+      "-n",
+      "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s29-final-floor.sh"
+    ],
+    "exit": 0
+  },
+  "s29-final-floor.sh_shellcheck": {
+    "argv": [
+      "shellcheck",
+      "--shell=bash",
+      "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s29-final-floor.sh"
+    ],
+    "exit": 1
+  },
+  "floor_launch_bash32_syntax": {
+    "exit": 0
+  },
+  "native_wait_wrapper_bash32_syntax": {
+    "exit": 0
+  },
+  "seven_offline_collector_controls": {
+    "argv": [
+      "python3",
+      "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261026-s29/test-collector.py"
+    ],
+    "exit": 0
+  }
+}

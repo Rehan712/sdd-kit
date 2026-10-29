@@ -1,0 +1,12 @@
+{
+  "command": [
+    "gh",
+    "api",
+    "repos/Rehan712/sdd-kit",
+    "--jq",
+    "{full_name: .full_name, permissions: .permissions}"
+  ],
+  "exit_code": 0,
+  "stdout": "{\"full_name\":\"Rehan712/sdd-kit\",\"permissions\":{\"admin\":false,\"maintain\":false,\"pull\":true,\"push\":false,\"triage\":false}}\n",
+  "stderr": ""
+}

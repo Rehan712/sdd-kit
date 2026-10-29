@@ -1,0 +1,94 @@
+{
+  "at": "2026-10-29T22:18:22.557568+00:00",
+  "sourceExpected": "7d4f17221f13d850cb7db06cdbb6261119ca97b52228adeac74d82f6496a9bff",
+  "controlVerified": true,
+  "control": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s57-t029-control/result.json",
+  "analyzerAcceptance": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s59-analyzer-accept/result.json",
+  "tasksAfterLatestAcceptance": {
+    "path": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md",
+    "sha256": "49a1dbedb00bfdab05ac1890ca06a0ee5ca6a8d54d26c2904c18337fda72d425",
+    "mtime_ns": 1793312074060855555,
+    "size": 184198,
+    "mode": "0o600"
+  },
+  "T029BlockStillMatches": true,
+  "latestWholeFileOnly": "ACC-zmvoA1/tasks.after",
+  "sealedReceipts": [
+    {
+      "path": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/accepted/T029/ACC-nP1KDk",
+      "completeSha256": "b7214bd7799060ded19ab978b4e0c9fb2f4770b06992ed10eede8f54ec8817de",
+      "meta": {
+        "version": "1",
+        "task": "T029",
+        "return_digest": "41f438660fef9e7b8efe7da5cff8358ce56f8d846c5c6450bc64c81b0596ffeb",
+        "binding_digest": "8766df908be5d8f628c3880af34ae761dd1c9c4946e8da08da3e566c8c0c788a",
+        "input": "7d4f17221f13d850cb7db06cdbb6261119ca97b52228adeac74d82f6496a9bff",
+        "captures": "CAP-844-GCqKod",
+        "manual": ""
+      }
+    },
+    {
+      "path": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/accept-events/ACCEPT-FWY9e6",
+      "completeSha256": "8254a7e26c16372680bf0bb204ea9957fa8ad323dabdb6a2e560c2d21d5c7dc9",
+      "meta": {
+        "version": "1",
+        "task": "T029",
+        "return_digest": "41f438660fef9e7b8efe7da5cff8358ce56f8d846c5c6450bc64c81b0596ffeb",
+        "outcome": "accepted",
+        "reason": "current",
+        "class": "none",
+        "before": "859042532b2b0c71136b6db6184008fb354a697b190e77accae10ec1ea166575",
+        "after": "2380332731cede88cbcef942aed51847a80a1dd23166b03dc3b80f9381f1d9bd",
+        "timestamp": "2026-10-29T22:00:25Z"
+      }
+    },
+    {
+      "path": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/accepted/T031a5o1/ACC-zmvoA1",
+      "completeSha256": "5b30e58dbb8afd87d9399c9fa6e495a395ce5942c14c97a80bba503941be9001",
+      "meta": {
+        "version": "1",
+        "task": "T031a5o1",
+        "return_digest": "d09ad15d376d5a60c7da068edf44f913a5d442999e30279d0537ca3c526334ff",
+        "binding_digest": "8766df908be5d8f628c3880af34ae761dd1c9c4946e8da08da3e566c8c0c788a",
+        "input": "7d4f17221f13d850cb7db06cdbb6261119ca97b52228adeac74d82f6496a9bff",
+        "captures": "CAP-845-hwbWOH",
+        "manual": ""
+      }
+    },
+    {
+      "path": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/accept-events/ACCEPT-7BJ9u1",
+      "completeSha256": "effd0f626dc766603d83666bd359ca0bc6076ae30a4bf90ad1b6b7b9117f325a",
+      "meta": {
+        "version": "1",
+        "task": "T031a5o1",
+        "return_digest": "d09ad15d376d5a60c7da068edf44f913a5d442999e30279d0537ca3c526334ff",
+        "outcome": "accepted",
+        "reason": "current",
+        "class": "none",
+        "before": "2380332731cede88cbcef942aed51847a80a1dd23166b03dc3b80f9381f1d9bd",
+        "after": "49a1dbedb00bfdab05ac1890ca06a0ee5ca6a8d54d26c2904c18337fda72d425",
+        "timestamp": "2026-10-29T22:14:34Z"
+      }
+    },
+    {
+      "path": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/accept-events/ACCEPT-oovEKE",
+      "completeSha256": "198aca918b8525332ded2063b39764e049ef818338708681b34f95b5830dfc0b",
+      "meta": {
+        "version": "1",
+        "task": "T029",
+        "return_digest": "20832861a4ddb14f1dc3943e44eda0f2cb96efd898c75b05c9fee468f96dae98",
+        "outcome": "rejected",
+        "reason": "return: missing, extra, duplicate or unknown FM/INV test binding",
+        "class": "binding-mismatch",
+        "before": "859042532b2b0c71136b6db6184008fb354a697b190e77accae10ec1ea166575",
+        "after": "859042532b2b0c71136b6db6184008fb354a697b190e77accae10ec1ea166575",
+        "timestamp": "2026-10-29T21:59:24Z"
+      }
+    }
+  ],
+  "preexistingFiles": 22469,
+  "collisions": false,
+  "parentInvocationPresentAtBaseline": false,
+  "parentWritesConcurrently": false,
+  "historicalStrictPreservation": false
+}

@@ -1,0 +1,30 @@
+{
+  "taskId": "node:delegated-task:command%3Amcp%3Afab79580-a405-41cc-8cf9-2b0c1f103a41%3Adelegate-task%3Asdd003-s28-rc4-evidence-locators-recon-r1",
+  "childThreadId": "thread:delegated-task:command%3Amcp%3Afab79580-a405-41cc-8cf9-2b0c1f103a41%3Adelegate-task%3Asdd003-s28-rc4-evidence-locators-recon-r1",
+  "childRunId": "run:thread:thread%3Adelegated-task%3Acommand%253Amcp%253Afab79580-a405-41cc-8cf9-2b0c1f103a41%253Adelegate-task%253Asdd003-s28-rc4-evidence-locators-recon-r1:ordinal:1",
+  "childNodeId": "node:delegated-task:command%3Amcp%3Afab79580-a405-41cc-8cf9-2b0c1f103a41%3Adelegate-task%3Asdd003-s28-rc4-evidence-locators-recon-r1",
+  "status": "completed",
+  "workState": "result_available",
+  "hasPendingChildRuns": false,
+  "latestTerminalRunId": "run:thread:thread%3Adelegated-task%3Acommand%253Amcp%253Afab79580-a405-41cc-8cf9-2b0c1f103a41%253Adelegate-task%253Asdd003-s28-rc4-evidence-locators-recon-r1:ordinal:1",
+  "latestTerminalStatus": "completed",
+  "latestTerminalSummary": null,
+  "latestTerminalResultContextTransferId": null,
+  "providerInstanceId": "codex_codex_gym",
+  "model": "gpt-6-luna",
+  "options": [
+    {
+      "id": "reasoningEffort",
+      "value": "medium"
+    },
+    {
+      "id": "serviceTier",
+      "value": "default"
+    }
+  ],
+  "summary": "Created the navigation-only index at [s28-rc4-evidence-locators.json](/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/s28-rc4-evidence-locators.json).\n\nIt records all 23 criteria with whitespace-normalized text and criterion SHA-256, plus task, test-family, current capture, and command locators. The floor has 100 command records, 22 unique current CAP IDs and 22 unique command strings: 21 executions and 79 cache hits. The index preserves that distinction and marks AC-016 and AC-019 for direct review, including the T029 proof and hosted CI run.\n\nThe reusable catalog locations are `vf_bindings` and `vf_ac_catalog` in `scripts/verification-lib.sh`. This index is navigation only; it assigns no verdict and does not treat captures as semantic PASS evidence.\n\nSkipped capture validation, tests, and live probes as instructed. No source or existing bookkeeping was changed.",
+  "resultContextTransferId": "context-transfer:type:subagent_result:source-thread:thread%3Adelegated-task%3Acommand%253Amcp%253Afab79580-a405-41cc-8cf9-2b0c1f103a41%253Adelegate-task%253Asdd003-s28-rc4-evidence-locators-recon-r1:target-thread:2ce93492-409f-4930-a9e5-173544a4c8c6:b451cc92-cd67-4c04-875c-f9a1f18a7fa3",
+  "hasPendingQuestion": false,
+  "pendingApproval": null,
+  "waitTimedOut": false
+}

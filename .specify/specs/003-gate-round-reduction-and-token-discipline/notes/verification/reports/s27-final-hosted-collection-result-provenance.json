@@ -1,0 +1,30 @@
+{
+  "taskId": "node:delegated-task:command%3Amcp%3Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%3Adelegate-task%3Asdd003-s27-final-hosted-ci-collection-high-r1",
+  "childThreadId": "thread:delegated-task:command%3Amcp%3Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%3Adelegate-task%3Asdd003-s27-final-hosted-ci-collection-high-r1",
+  "childRunId": "run:thread:thread%3Adelegated-task%3Acommand%253Amcp%253Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%253Adelegate-task%253Asdd003-s27-final-hosted-ci-collection-high-r1:ordinal:1",
+  "childNodeId": "node:delegated-task:command%3Amcp%3Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%3Adelegate-task%3Asdd003-s27-final-hosted-ci-collection-high-r1",
+  "status": "completed",
+  "workState": "result_available",
+  "hasPendingChildRuns": false,
+  "latestTerminalRunId": "run:thread:thread%3Adelegated-task%3Acommand%253Amcp%253Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%253Adelegate-task%253Asdd003-s27-final-hosted-ci-collection-high-r1:ordinal:1",
+  "latestTerminalStatus": "completed",
+  "latestTerminalSummary": null,
+  "latestTerminalResultContextTransferId": null,
+  "providerInstanceId": "codex_codex_gym",
+  "model": "gpt-6.1-sol",
+  "options": [
+    {
+      "id": "reasoningEffort",
+      "value": "high"
+    },
+    {
+      "id": "serviceTier",
+      "value": "default"
+    }
+  ],
+  "summary": "PASS: collected actual hosted proof from [run 40233074338, attempt 1](https://github.com/Rehan712/sdd-kit/actions/runs/40233074338).\n\n- All four jobs succeeded: `shellcheck`, `tests (ubuntu-latest)`, `tests (macos-latest)`, `tests-bash32`.\n- Every job log binds checkout merge `13ffb1ebb4439eb9c8fd47585b6d8d10f45dba0c`.\n- Tested tree: `d685ec420ba6ce338e72727638e1ccff0bbb3846`.\n- Merge parent includes final snapshot `5aee77672d03a2c7811e28e55172817da6dee012`.\n- Source: `c7a82b3ae3b900dcb02a4839decad74db1a13457c5bab9ff859625a5357f0be6`.\n- Unchanged collector exited **0**. Strict bindings **BEFORE/AFTER passed**, including frozen-manifest equality, all **177 + 8 + 4** mappings, and protected HEAD/index/STATUS/tasks stability.\n\nPreserved raw logs, API metadata, download exits, receipts, substitution diffs, and hashes for 61 artifacts. Only three output-path substitutions per verifier copy; syntax checks passed.\n\n[Handoff](/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261025-s27-final/hosted-audit-20261025T213229Z/handoff.md) · [Result](/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261025-s27-final/hosted-audit-20261025T213229Z/result.json) · [Proof manifest](/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261025-s27-final/hosted-audit-20261025T213229Z/artifact-sha256.json)\n\nNo CI reruns, remote writes, polling, floor runs, or gates launched. Floor/gate completion remains unverified here; PR21 remains draft and unwatched.",
+  "resultContextTransferId": "context-transfer:type:subagent_result:source-thread:thread%3Adelegated-task%3Acommand%253Amcp%253Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%253Adelegate-task%253Asdd003-s27-final-hosted-ci-collection-high-r1:target-thread:2ce93492-409f-4930-a9e5-173544a4c8c6:ee516019-cee3-4ba2-8686-35526292c556",
+  "hasPendingQuestion": false,
+  "pendingApproval": null,
+  "waitTimedOut": false
+}

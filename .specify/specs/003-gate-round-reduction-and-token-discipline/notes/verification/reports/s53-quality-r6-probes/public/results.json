@@ -1,0 +1,1427 @@
+{
+  "scratch": "/private/tmp/sdd-o034-quality-r6-anzknwzn",
+  "script_sha256": "c7edfab2574756e5fac2cb019e853f27067f1eb7b6759657c77c49960ff41be7",
+  "public_analyzer_sha256": "f2809d24b5bec01fa4ca8ab4d689c5e9585472989e66798aabc9597d80f176fd",
+  "count": 140,
+  "passing": 140,
+  "failures": [],
+  "results": [
+    {
+      "group": "original-op24",
+      "command": "tsc --noEmit tests/unit.ts",
+      "expected_warning": true,
+      "id": 1,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.18202781677246094
+    },
+    {
+      "group": "original-op24",
+      "command": "npm run typecheck -- --project tests/tsconfig.json",
+      "expected_warning": true,
+      "id": 2,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17884182929992676
+    },
+    {
+      "group": "original-op24",
+      "command": "grep AC-001 tests/check.sh",
+      "expected_warning": true,
+      "id": 3,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.1782243251800537
+    },
+    {
+      "group": "original-op24",
+      "command": "npm run build -- --outDir tests/build",
+      "expected_warning": true,
+      "id": 4,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.1784501075744629
+    },
+    {
+      "group": "original-op24",
+      "command": "test -e README.md",
+      "expected_warning": true,
+      "id": 5,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17853474617004395
+    },
+    {
+      "group": "original-op24",
+      "command": "test -f README.md",
+      "expected_warning": true,
+      "id": 6,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.1784677505493164
+    },
+    {
+      "group": "original-op24",
+      "command": "grep pytest README.md",
+      "expected_warning": true,
+      "id": 7,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17807817459106445
+    },
+    {
+      "group": "original-op24",
+      "command": "rg bats README.md",
+      "expected_warning": true,
+      "id": 8,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17964696884155273
+    },
+    {
+      "group": "original-op24",
+      "command": "diff fixtures/test.txt actual.txt",
+      "expected_warning": true,
+      "id": 9,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.1785891056060791
+    },
+    {
+      "group": "op26-exact",
+      "command": "./test/npm run build",
+      "expected_warning": true,
+      "id": 10,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17628097534179688
+    },
+    {
+      "group": "op26-exact",
+      "command": "./test/npm run typecheck",
+      "expected_warning": true,
+      "id": 11,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.1790940761566162
+    },
+    {
+      "group": "op26-exact",
+      "command": "./test/test -f README.md",
+      "expected_warning": true,
+      "id": 12,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17872309684753418
+    },
+    {
+      "group": "op26-exact",
+      "command": "./test/tsc --noEmit tests/unit.ts",
+      "expected_warning": true,
+      "id": 13,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.179610013961792
+    },
+    {
+      "group": "op26-exact",
+      "command": "./tests/node_modules/.bin/npm run build",
+      "expected_warning": true,
+      "id": 14,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17855501174926758
+    },
+    {
+      "group": "op26-exact",
+      "command": "./tests/node_modules/.bin/npm run typecheck",
+      "expected_warning": true,
+      "id": 15,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17891407012939453
+    },
+    {
+      "group": "op26-exact",
+      "command": "./tests/node_modules/.bin/test -f README.md",
+      "expected_warning": true,
+      "id": 16,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17911601066589355
+    },
+    {
+      "group": "op26-exact",
+      "command": "./tests/node_modules/.bin/tsc --noEmit tests/unit.ts",
+      "expected_warning": true,
+      "id": 17,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.1793680191040039
+    },
+    {
+      "group": "op26-exact",
+      "command": "./tests/npm run build",
+      "expected_warning": true,
+      "id": 18,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.1785881519317627
+    },
+    {
+      "group": "op26-exact",
+      "command": "./tests/npm run typecheck",
+      "expected_warning": true,
+      "id": 19,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17915797233581543
+    },
+    {
+      "group": "op26-exact",
+      "command": "./tests/npm&>out.txt run typecheck",
+      "expected_warning": true,
+      "id": 20,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17781519889831543
+    },
+    {
+      "group": "op26-exact",
+      "command": "./tests/npm<&0 run typecheck",
+      "expected_warning": true,
+      "id": 21,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.1791832447052002
+    },
+    {
+      "group": "op26-exact",
+      "command": "./tests/npm<>input.txt run typecheck",
+      "expected_warning": true,
+      "id": 22,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17906785011291504
+    },
+    {
+      "group": "op26-exact",
+      "command": "./tests/npm<input.txt run typecheck",
+      "expected_warning": true,
+      "id": 23,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17875409126281738
+    },
+    {
+      "group": "op26-exact",
+      "command": "./tests/npm>&1 run typecheck",
+      "expected_warning": true,
+      "id": 24,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.178131103515625
+    },
+    {
+      "group": "op26-exact",
+      "command": "./tests/npm>>out.txt run typecheck",
+      "expected_warning": true,
+      "id": 25,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17947077751159668
+    },
+    {
+      "group": "op26-exact",
+      "command": "./tests/npm>out.txt run typecheck",
+      "expected_warning": true,
+      "id": 26,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17873120307922363
+    },
+    {
+      "group": "op26-exact",
+      "command": "./tests/npm>|out.txt run typecheck",
+      "expected_warning": true,
+      "id": 27,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17977523803710938
+    },
+    {
+      "group": "op26-exact",
+      "command": "./tests/test -f README.md",
+      "expected_warning": true,
+      "id": 28,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17823481559753418
+    },
+    {
+      "group": "op26-exact",
+      "command": "./tests/tsc --noEmit tests/unit.ts",
+      "expected_warning": true,
+      "id": 29,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17815518379211426
+    },
+    {
+      "group": "op26-exact",
+      "command": "./tools/tests/npm run build",
+      "expected_warning": true,
+      "id": 30,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17916584014892578
+    },
+    {
+      "group": "op26-exact",
+      "command": "./tools/tests/npm run typecheck",
+      "expected_warning": true,
+      "id": 31,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17717599868774414
+    },
+    {
+      "group": "op26-exact",
+      "command": "./tools/tests/test -f README.md",
+      "expected_warning": true,
+      "id": 32,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17938995361328125
+    },
+    {
+      "group": "op26-exact",
+      "command": "./tools/tests/tsc --noEmit tests/unit.ts",
+      "expected_warning": true,
+      "id": 33,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.1793053150177002
+    },
+    {
+      "group": "op26-exact",
+      "command": "tests/npm run build",
+      "expected_warning": true,
+      "id": 34,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17841100692749023
+    },
+    {
+      "group": "op26-exact",
+      "command": "tests/npm run typecheck",
+      "expected_warning": true,
+      "id": 35,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17894601821899414
+    },
+    {
+      "group": "op26-exact",
+      "command": "tests/test -f README.md",
+      "expected_warning": true,
+      "id": 36,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17721080780029297
+    },
+    {
+      "group": "op26-exact",
+      "command": "tests/tsc --noEmit tests/unit.ts",
+      "expected_warning": true,
+      "id": 37,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17890477180480957
+    },
+    {
+      "group": "directory-siblings",
+      "command": "tools/tests/deep/tsc --noEmit tests/unit.ts",
+      "expected_warning": true,
+      "id": 38,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.18089890480041504
+    },
+    {
+      "group": "directory-siblings",
+      "command": "tools/tests/deep/npm run build",
+      "expected_warning": true,
+      "id": 39,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17897415161132812
+    },
+    {
+      "group": "directory-siblings",
+      "command": "tools/tests/deep/pnpm run build",
+      "expected_warning": true,
+      "id": 40,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.1791057586669922
+    },
+    {
+      "group": "directory-siblings",
+      "command": "tools/tests/deep/yarn typecheck",
+      "expected_warning": true,
+      "id": 41,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17780733108520508
+    },
+    {
+      "group": "directory-siblings",
+      "command": "tools/tests/deep/bun build",
+      "expected_warning": true,
+      "id": 42,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.1772611141204834
+    },
+    {
+      "group": "directory-siblings",
+      "command": "tools/tests/deep/go build",
+      "expected_warning": true,
+      "id": 43,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.1795814037322998
+    },
+    {
+      "group": "directory-siblings",
+      "command": "tools/tests/deep/make build",
+      "expected_warning": true,
+      "id": 44,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17988181114196777
+    },
+    {
+      "group": "directory-siblings",
+      "command": "tools/tests/deep/cargo build",
+      "expected_warning": true,
+      "id": 45,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.18077492713928223
+    },
+    {
+      "group": "directory-siblings",
+      "command": "tools/tests/deep/test -f tests/check.sh",
+      "expected_warning": true,
+      "id": 46,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17758893966674805
+    },
+    {
+      "group": "directory-siblings",
+      "command": "./tests/node_modules/.bin/tsc --noEmit tests/unit.ts",
+      "expected_warning": true,
+      "id": 47,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.1709129810333252
+    },
+    {
+      "group": "directory-siblings",
+      "command": "./tests/node_modules/.bin/npm run build",
+      "expected_warning": true,
+      "id": 48,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17547297477722168
+    },
+    {
+      "group": "directory-siblings",
+      "command": "./tests/node_modules/.bin/pnpm run build",
+      "expected_warning": true,
+      "id": 49,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.1790452003479004
+    },
+    {
+      "group": "directory-siblings",
+      "command": "./tests/node_modules/.bin/yarn typecheck",
+      "expected_warning": true,
+      "id": 50,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17502212524414062
+    },
+    {
+      "group": "directory-siblings",
+      "command": "./tests/node_modules/.bin/bun build",
+      "expected_warning": true,
+      "id": 51,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.1773221492767334
+    },
+    {
+      "group": "directory-siblings",
+      "command": "./tests/node_modules/.bin/go build",
+      "expected_warning": true,
+      "id": 52,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17714905738830566
+    },
+    {
+      "group": "directory-siblings",
+      "command": "./tests/node_modules/.bin/make build",
+      "expected_warning": true,
+      "id": 53,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.18004322052001953
+    },
+    {
+      "group": "directory-siblings",
+      "command": "./tests/node_modules/.bin/cargo build",
+      "expected_warning": true,
+      "id": 54,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17896389961242676
+    },
+    {
+      "group": "directory-siblings",
+      "command": "./tests/node_modules/.bin/test -f tests/check.sh",
+      "expected_warning": true,
+      "id": 55,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.1798999309539795
+    },
+    {
+      "group": "directory-siblings",
+      "command": "/opt/tests/toolchain/tsc --noEmit tests/unit.ts",
+      "expected_warning": true,
+      "id": 56,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17959809303283691
+    },
+    {
+      "group": "directory-siblings",
+      "command": "/opt/tests/toolchain/npm run build",
+      "expected_warning": true,
+      "id": 57,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.1794297695159912
+    },
+    {
+      "group": "directory-siblings",
+      "command": "/opt/tests/toolchain/pnpm run build",
+      "expected_warning": true,
+      "id": 58,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17847824096679688
+    },
+    {
+      "group": "directory-siblings",
+      "command": "/opt/tests/toolchain/yarn typecheck",
+      "expected_warning": true,
+      "id": 59,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17793583869934082
+    },
+    {
+      "group": "directory-siblings",
+      "command": "/opt/tests/toolchain/bun build",
+      "expected_warning": true,
+      "id": 60,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.1785261631011963
+    },
+    {
+      "group": "directory-siblings",
+      "command": "/opt/tests/toolchain/go build",
+      "expected_warning": true,
+      "id": 61,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17844676971435547
+    },
+    {
+      "group": "directory-siblings",
+      "command": "/opt/tests/toolchain/make build",
+      "expected_warning": true,
+      "id": 62,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17839598655700684
+    },
+    {
+      "group": "directory-siblings",
+      "command": "/opt/tests/toolchain/cargo build",
+      "expected_warning": true,
+      "id": 63,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17817401885986328
+    },
+    {
+      "group": "directory-siblings",
+      "command": "/opt/tests/toolchain/test -f tests/check.sh",
+      "expected_warning": true,
+      "id": 64,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.18675804138183594
+    },
+    {
+      "group": "directory-siblings",
+      "command": "../test/../tests/tsc --noEmit tests/unit.ts",
+      "expected_warning": true,
+      "id": 65,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.22715973854064941
+    },
+    {
+      "group": "directory-siblings",
+      "command": "../test/../tests/npm run build",
+      "expected_warning": true,
+      "id": 66,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.19694805145263672
+    },
+    {
+      "group": "directory-siblings",
+      "command": "../test/../tests/pnpm run build",
+      "expected_warning": true,
+      "id": 67,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.18808293342590332
+    },
+    {
+      "group": "directory-siblings",
+      "command": "../test/../tests/yarn typecheck",
+      "expected_warning": true,
+      "id": 68,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.1914808750152588
+    },
+    {
+      "group": "directory-siblings",
+      "command": "../test/../tests/bun build",
+      "expected_warning": true,
+      "id": 69,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.19257497787475586
+    },
+    {
+      "group": "directory-siblings",
+      "command": "../test/../tests/go build",
+      "expected_warning": true,
+      "id": 70,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.1837918758392334
+    },
+    {
+      "group": "directory-siblings",
+      "command": "../test/../tests/make build",
+      "expected_warning": true,
+      "id": 71,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17853379249572754
+    },
+    {
+      "group": "directory-siblings",
+      "command": "../test/../tests/cargo build",
+      "expected_warning": true,
+      "id": 72,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17836284637451172
+    },
+    {
+      "group": "directory-siblings",
+      "command": "../test/../tests/test -f tests/check.sh",
+      "expected_warning": true,
+      "id": 73,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17860817909240723
+    },
+    {
+      "group": "redirect-siblings",
+      "command": "./tools/tests/deep/npm<in.txt run build",
+      "expected_warning": true,
+      "id": 74,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17914390563964844
+    },
+    {
+      "group": "redirect-siblings",
+      "command": "./tests/node_modules/.bin/tsc <in.txt --noEmit tests/unit.ts",
+      "expected_warning": true,
+      "id": 75,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.1788177490234375
+    },
+    {
+      "group": "redirect-siblings",
+      "command": "./tests/test -f<in.txt README.md",
+      "expected_warning": true,
+      "id": 76,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17841005325317383
+    },
+    {
+      "group": "redirect-runner",
+      "command": "./tools/tests/deep/npm<in.txt run test -- --grep typecheck",
+      "expected_warning": false,
+      "id": 77,
+      "passed": true,
+      "observed_warning": false,
+      "exit": 0,
+      "seconds": 0.17904901504516602
+    },
+    {
+      "group": "redirect-text",
+      "command": "./tests/grep<in.txt pytest tests/check.sh",
+      "expected_warning": true,
+      "id": 78,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17868900299072266
+    },
+    {
+      "group": "redirect-siblings",
+      "command": "./tools/tests/deep/npm>out.txt run build",
+      "expected_warning": true,
+      "id": 79,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17778491973876953
+    },
+    {
+      "group": "redirect-siblings",
+      "command": "./tests/node_modules/.bin/tsc >out.txt --noEmit tests/unit.ts",
+      "expected_warning": true,
+      "id": 80,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17924785614013672
+    },
+    {
+      "group": "redirect-siblings",
+      "command": "./tests/test -f>out.txt README.md",
+      "expected_warning": true,
+      "id": 81,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17833495140075684
+    },
+    {
+      "group": "redirect-runner",
+      "command": "./tools/tests/deep/npm>out.txt run test -- --grep typecheck",
+      "expected_warning": false,
+      "id": 82,
+      "passed": true,
+      "observed_warning": false,
+      "exit": 0,
+      "seconds": 0.1790180206298828
+    },
+    {
+      "group": "redirect-text",
+      "command": "./tests/grep>out.txt pytest tests/check.sh",
+      "expected_warning": true,
+      "id": 83,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.1793680191040039
+    },
+    {
+      "group": "redirect-siblings",
+      "command": "./tools/tests/deep/npm>>out.txt run build",
+      "expected_warning": true,
+      "id": 84,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17855310440063477
+    },
+    {
+      "group": "redirect-siblings",
+      "command": "./tests/node_modules/.bin/tsc >>out.txt --noEmit tests/unit.ts",
+      "expected_warning": true,
+      "id": 85,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17891788482666016
+    },
+    {
+      "group": "redirect-siblings",
+      "command": "./tests/test -f>>out.txt README.md",
+      "expected_warning": true,
+      "id": 86,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17792201042175293
+    },
+    {
+      "group": "redirect-runner",
+      "command": "./tools/tests/deep/npm>>out.txt run test -- --grep typecheck",
+      "expected_warning": false,
+      "id": 87,
+      "passed": true,
+      "observed_warning": false,
+      "exit": 0,
+      "seconds": 0.17869901657104492
+    },
+    {
+      "group": "redirect-text",
+      "command": "./tests/grep>>out.txt pytest tests/check.sh",
+      "expected_warning": true,
+      "id": 88,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17828798294067383
+    },
+    {
+      "group": "redirect-siblings",
+      "command": "./tools/tests/deep/npm>|out.txt run build",
+      "expected_warning": true,
+      "id": 89,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17888998985290527
+    },
+    {
+      "group": "redirect-siblings",
+      "command": "./tests/node_modules/.bin/tsc >|out.txt --noEmit tests/unit.ts",
+      "expected_warning": true,
+      "id": 90,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17858409881591797
+    },
+    {
+      "group": "redirect-siblings",
+      "command": "./tests/test -f>|out.txt README.md",
+      "expected_warning": true,
+      "id": 91,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17916512489318848
+    },
+    {
+      "group": "redirect-runner",
+      "command": "./tools/tests/deep/npm>|out.txt run test -- --grep typecheck",
+      "expected_warning": false,
+      "id": 92,
+      "passed": true,
+      "observed_warning": false,
+      "exit": 0,
+      "seconds": 0.17821478843688965
+    },
+    {
+      "group": "redirect-text",
+      "command": "./tests/grep>|out.txt pytest tests/check.sh",
+      "expected_warning": true,
+      "id": 93,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.1856071949005127
+    },
+    {
+      "group": "redirect-siblings",
+      "command": "./tools/tests/deep/npm<>in.txt run build",
+      "expected_warning": true,
+      "id": 94,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17931008338928223
+    },
+    {
+      "group": "redirect-siblings",
+      "command": "./tests/node_modules/.bin/tsc <>in.txt --noEmit tests/unit.ts",
+      "expected_warning": true,
+      "id": 95,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.1787271499633789
+    },
+    {
+      "group": "redirect-siblings",
+      "command": "./tests/test -f<>in.txt README.md",
+      "expected_warning": true,
+      "id": 96,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17958498001098633
+    },
+    {
+      "group": "redirect-runner",
+      "command": "./tools/tests/deep/npm<>in.txt run test -- --grep typecheck",
+      "expected_warning": false,
+      "id": 97,
+      "passed": true,
+      "observed_warning": false,
+      "exit": 0,
+      "seconds": 0.17856311798095703
+    },
+    {
+      "group": "redirect-text",
+      "command": "./tests/grep<>in.txt pytest tests/check.sh",
+      "expected_warning": true,
+      "id": 98,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.1796867847442627
+    },
+    {
+      "group": "redirect-siblings",
+      "command": "./tools/tests/deep/npm<&0 run build",
+      "expected_warning": true,
+      "id": 99,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17825579643249512
+    },
+    {
+      "group": "redirect-siblings",
+      "command": "./tests/node_modules/.bin/tsc <&0 --noEmit tests/unit.ts",
+      "expected_warning": true,
+      "id": 100,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17905592918395996
+    },
+    {
+      "group": "redirect-siblings",
+      "command": "./tests/test -f<&0 README.md",
+      "expected_warning": true,
+      "id": 101,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17858171463012695
+    },
+    {
+      "group": "redirect-runner",
+      "command": "./tools/tests/deep/npm<&0 run test -- --grep typecheck",
+      "expected_warning": false,
+      "id": 102,
+      "passed": true,
+      "observed_warning": false,
+      "exit": 0,
+      "seconds": 0.18751215934753418
+    },
+    {
+      "group": "redirect-text",
+      "command": "./tests/grep<&0 pytest tests/check.sh",
+      "expected_warning": true,
+      "id": 103,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17870402336120605
+    },
+    {
+      "group": "redirect-siblings",
+      "command": "./tools/tests/deep/npm>&1 run build",
+      "expected_warning": true,
+      "id": 104,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.18287086486816406
+    },
+    {
+      "group": "redirect-siblings",
+      "command": "./tests/node_modules/.bin/tsc >&1 --noEmit tests/unit.ts",
+      "expected_warning": true,
+      "id": 105,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17995119094848633
+    },
+    {
+      "group": "redirect-siblings",
+      "command": "./tests/test -f>&1 README.md",
+      "expected_warning": true,
+      "id": 106,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17888212203979492
+    },
+    {
+      "group": "redirect-runner",
+      "command": "./tools/tests/deep/npm>&1 run test -- --grep typecheck",
+      "expected_warning": false,
+      "id": 107,
+      "passed": true,
+      "observed_warning": false,
+      "exit": 0,
+      "seconds": 0.17829608917236328
+    },
+    {
+      "group": "redirect-text",
+      "command": "./tests/grep>&1 pytest tests/check.sh",
+      "expected_warning": true,
+      "id": 108,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17949485778808594
+    },
+    {
+      "group": "redirect-siblings",
+      "command": "./tools/tests/deep/npm&>out.txt run build",
+      "expected_warning": true,
+      "id": 109,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.1786191463470459
+    },
+    {
+      "group": "redirect-siblings",
+      "command": "./tests/node_modules/.bin/tsc &>out.txt --noEmit tests/unit.ts",
+      "expected_warning": true,
+      "id": 110,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.1842360496520996
+    },
+    {
+      "group": "redirect-siblings",
+      "command": "./tests/test -f&>out.txt README.md",
+      "expected_warning": true,
+      "id": 111,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17968392372131348
+    },
+    {
+      "group": "redirect-runner",
+      "command": "./tools/tests/deep/npm&>out.txt run test -- --grep typecheck",
+      "expected_warning": false,
+      "id": 112,
+      "passed": true,
+      "observed_warning": false,
+      "exit": 0,
+      "seconds": 0.17911505699157715
+    },
+    {
+      "group": "redirect-text",
+      "command": "./tests/grep&>out.txt pytest tests/check.sh",
+      "expected_warning": true,
+      "id": 113,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.18367695808410645
+    },
+    {
+      "group": "boundaries",
+      "command": "<tests/typecheck.txt ./tests/npm run build",
+      "expected_warning": true,
+      "id": 114,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17739391326904297
+    },
+    {
+      "group": "boundaries",
+      "command": "0<tests/check.txt ./tests/test -e README.md",
+      "expected_warning": true,
+      "id": 115,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17779183387756348
+    },
+    {
+      "group": "boundaries",
+      "command": "./tests/npm 2>tests/check.log run build",
+      "expected_warning": true,
+      "id": 116,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.1789228916168213
+    },
+    {
+      "group": "boundaries",
+      "command": "./tests/npm 2&>out.txt test typecheck.txt",
+      "expected_warning": true,
+      "id": 117,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.1788177490234375
+    },
+    {
+      "group": "boundaries",
+      "command": "npm2>out.txt test typecheck.txt",
+      "expected_warning": true,
+      "id": 118,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17779183387756348
+    },
+    {
+      "group": "boundaries",
+      "command": "./tests/npm >&- run build",
+      "expected_warning": true,
+      "id": 119,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17748498916625977
+    },
+    {
+      "group": "boundaries",
+      "command": "/usr/bin/grep >| out.txt tests README.md",
+      "expected_warning": true,
+      "id": 120,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.1784360408782959
+    },
+    {
+      "group": "boundaries",
+      "command": "./tests/rg AC-001 ./tests/npm",
+      "expected_warning": true,
+      "id": 121,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.18015718460083008
+    },
+    {
+      "group": "boundaries",
+      "command": "./tests/diff tests/a.txt tests/b.txt",
+      "expected_warning": true,
+      "id": 122,
+      "passed": true,
+      "observed_warning": true,
+      "exit": 0,
+      "seconds": 0.17830801010131836
+    },
+    {
+      "group": "runner-and-operands",
+      "command": "./tests/npm test -- --grep typecheck",
+      "expected_warning": false,
+      "id": 123,
+      "passed": true,
+      "observed_warning": false,
+      "exit": 0,
+      "seconds": 0.17922592163085938
+    },
+    {
+      "group": "runner-and-operands",
+      "command": "tools/tests/pnpm run test tests/build.ts",
+      "expected_warning": false,
+      "id": 124,
+      "passed": true,
+      "observed_warning": false,
+      "exit": 0,
+      "seconds": 0.17847394943237305
+    },
+    {
+      "group": "runner-and-operands",
+      "command": "/opt/tests/yarn test typecheck",
+      "expected_warning": false,
+      "id": 125,
+      "passed": true,
+      "observed_warning": false,
+      "exit": 0,
+      "seconds": 0.17777299880981445
+    },
+    {
+      "group": "runner-and-operands",
+      "command": "./tests/bun test tests/typecheck.ts",
+      "expected_warning": false,
+      "id": 126,
+      "passed": true,
+      "observed_warning": false,
+      "exit": 0,
+      "seconds": 0.17964911460876465
+    },
+    {
+      "group": "runner-and-operands",
+      "command": "./tests/go test ./build",
+      "expected_warning": false,
+      "id": 127,
+      "passed": true,
+      "observed_warning": false,
+      "exit": 0,
+      "seconds": 0.1784827709197998
+    },
+    {
+      "group": "runner-and-operands",
+      "command": "./tests/make test TARGET=typecheck",
+      "expected_warning": false,
+      "id": 128,
+      "passed": true,
+      "observed_warning": false,
+      "exit": 0,
+      "seconds": 0.1793839931488037
+    },
+    {
+      "group": "runner-and-operands",
+      "command": "./tests/cargo test --test build",
+      "expected_warning": false,
+      "id": 129,
+      "passed": true,
+      "observed_warning": false,
+      "exit": 0,
+      "seconds": 0.1784219741821289
+    },
+    {
+      "group": "runner-and-operands",
+      "command": "/opt/tests/node --test tests/typecheck.js",
+      "expected_warning": false,
+      "id": 130,
+      "passed": true,
+      "observed_warning": false,
+      "exit": 0,
+      "seconds": 0.1783599853515625
+    },
+    {
+      "group": "runner-and-operands",
+      "command": "./tests/python3 -m pytest tests/build.py",
+      "expected_warning": false,
+      "id": 131,
+      "passed": true,
+      "observed_warning": false,
+      "exit": 0,
+      "seconds": 0.18003511428833008
+    },
+    {
+      "group": "runner-and-operands",
+      "command": "./tests/pytest tests/typecheck.py",
+      "expected_warning": false,
+      "id": 132,
+      "passed": true,
+      "observed_warning": false,
+      "exit": 0,
+      "seconds": 0.18166399002075195
+    },
+    {
+      "group": "runner-and-operands",
+      "command": "./tests/bats tests/build.bats",
+      "expected_warning": false,
+      "id": 133,
+      "passed": true,
+      "observed_warning": false,
+      "exit": 0,
+      "seconds": 0.18800902366638184
+    },
+    {
+      "group": "runner-and-operands",
+      "command": "bash -ex ./tests/typecheck.sh",
+      "expected_warning": false,
+      "id": 134,
+      "passed": true,
+      "observed_warning": false,
+      "exit": 0,
+      "seconds": 0.181776762008667
+    },
+    {
+      "group": "runner-and-operands",
+      "command": "./tests/check-build.sh /usr/bin/grep",
+      "expected_warning": false,
+      "id": 135,
+      "passed": true,
+      "observed_warning": false,
+      "exit": 0,
+      "seconds": 0.18205499649047852
+    },
+    {
+      "group": "runner-and-operands",
+      "command": "node scripts/assert-content.js ./tests/grep AC-001 README.md",
+      "expected_warning": false,
+      "id": 136,
+      "passed": true,
+      "observed_warning": false,
+      "exit": 0,
+      "seconds": 0.1826169490814209
+    },
+    {
+      "group": "runner-and-operands",
+      "command": "node scripts/assert-content.js ./tools/rg AC-001 README.md",
+      "expected_warning": false,
+      "id": 137,
+      "passed": true,
+      "observed_warning": false,
+      "exit": 0,
+      "seconds": 0.1823287010192871
+    },
+    {
+      "group": "runner-and-operands",
+      "command": "./tests/npmish --grep text",
+      "expected_warning": false,
+      "id": 138,
+      "passed": true,
+      "observed_warning": false,
+      "exit": 0,
+      "seconds": 0.18306803703308105
+    },
+    {
+      "group": "runner-and-operands",
+      "command": "./tests/test-helper.sh tests/unit.ts",
+      "expected_warning": false,
+      "id": 139,
+      "passed": true,
+      "observed_warning": false,
+      "exit": 0,
+      "seconds": 0.1806621551513672
+    },
+    {
+      "group": "runner-and-operands",
+      "command": "./tools/contest.py README.md",
+      "expected_warning": false,
+      "id": 140,
+      "passed": true,
+      "observed_warning": false,
+      "exit": 0,
+      "seconds": 0.17900514602661133
+    }
+  ],
+  "load_101": {
+    "tasks": 101,
+    "warnings": 50,
+    "expected_warnings": 50,
+    "seconds": 0.19059014320373535,
+    "exit": 0,
+    "passed": true
+  },
+  "explicit_kinds": {
+    "exit": 0,
+    "consistent": true,
+    "passed": true,
+    "helper_sha256": "b7bc6ff9fffa3350c206a7bf25a0ef23517a98f1797ef3f199ac7cdfe240e9b2"
+  },
+  "path_stubs": false,
+  "verify_data_executed": false,
+  "full_suite_capture_floor_gate_static_rerun": false
+}

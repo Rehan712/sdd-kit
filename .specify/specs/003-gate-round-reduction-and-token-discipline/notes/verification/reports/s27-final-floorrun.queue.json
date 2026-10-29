@@ -1,0 +1,32 @@
+{
+  "queuedAt": "2026-10-25T20:58:58.944653+00:00",
+  "pid": 8439,
+  "argv": [
+    "nohup",
+    "bash",
+    "-c",
+    "set -uo pipefail\nr=\"$1\"\nwhile ! pmset -g batt | head -1 | grep -q 'AC Power'; do\n  printf 'waiting-for-AC=%s\\n' \"$(date -u +%Y-%m-%dT%H:%M:%SZ)\" >> \"$r/s27-final-floorrun.wait.log\"\n  sleep 60\ndone\nprintf 'AC-confirmed=%s\\n' \"$(date -u +%Y-%m-%dT%H:%M:%SZ)\" >> \"$r/s27-final-floorrun.wait.log\"\npython3 -c 'from pathlib import Path\nimport json,csv,hashlib,shutil,os,datetime\nroot=Path('\"'\"'/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline'\"'\"')\nspec=root/'\"'\"'.specify/specs/003-gate-round-reduction-and-token-discipline'\"'\"'\nv=spec/'\"'\"'notes/verification'\"'\"';p=v/'\"'\"'platforms/ci-20261025-s27-final'\"'\"'\nfree=shutil.disk_usage(root).free\nassert free>=8*1024**3,'\"'\"'Less than 8GiB free; floor not started'\"'\"'\nassert not (v/'\"'\"'lock'\"'\"').exists(),'\"'\"'Verification lock exists; floor not started'\"'\"'\npending=[str(d) for d in (v/'\"'\"'rounds'\"'\"').glob('\"'\"'*/ROUND-*'\"'\"') if d.is_dir() and not (d/'\"'\"'report.sha256'\"'\"').is_file()]\nassert not pending,'\"'\"'Pending round reservation; floor not started: '\"'\"'+repr(pending)\nrows=list(csv.DictReader((p/'\"'\"'source-mapping.tsv'\"'\"').open(),delimiter='\"'\"'\\t'\"'\"'))\nfor row in rows:\n path=root/row['\"'\"'path'\"'\"']\n assert hashlib.sha256(path.read_bytes()).hexdigest()==row['\"'\"'raw_sha256'\"'\"'],'\"'\"'Frozen source bytes changed: '\"'\"'+row['\"'\"'path'\"'\"']\n assert ('\"'\"'100755'\"'\"' if os.access(path,os.X_OK) else '\"'\"'100644'\"'\"')==row['\"'\"'mode'\"'\"'],'\"'\"'Frozen mode changed: '\"'\"'+row['\"'\"'path'\"'\"']\nprint(json.dumps({'\"'\"'time'\"'\"':datetime.datetime.now(datetime.timezone.utc).isoformat(),'\"'\"'freeBytes'\"'\"':free,'\"'\"'mappedFiles'\"'\"':len(rows),'\"'\"'pendingReservations'\"'\"':pending,'\"'\"'verificationLock'\"'\"':False,'\"'\"'sourceBytes'\"'\"':'\"'\"'UNCHANGED'\"'\"'}))\n' >> \"$r/s27-final-floorrun.wait.log\" 2>&1 || exit 96\n/usr/bin/time -p -o \"$r/s27-final-floorrun.time\" bash \"$r/s27-final-floor.sh\" 1 > \"$r/s27-final-floorrun.wrapper.log\" 2>&1\nrc=$?\nprintf '%s\\n' \"$rc\" > \"$r/s27-final-floorrun.wrapper.rc\"\nexit \"$rc\"\n",
+    "_",
+    "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports"
+  ],
+  "helperArgv": [
+    "bash",
+    "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s27-final-floor.sh",
+    "1"
+  ],
+  "frozenSource": "c7a82b3ae3b900dcb02a4839decad74db1a13457c5bab9ff859625a5357f0be6",
+  "tree": "d685ec420ba6ce338e72727638e1ccff0bbb3846",
+  "currentSnapshotCommit": "5aee77672d03a2c7811e28e55172817da6dee012",
+  "controlResult": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s27-t029-control/completion-result.json",
+  "queuePreflight": {
+    "time": "2026-10-25T20:58:58.937425+00:00",
+    "freeBytes": 12031918080,
+    "mappedFiles": 177,
+    "pendingReservations": [],
+    "verificationLock": false,
+    "sourceBytes": "UNCHANGED"
+  },
+  "state": "WAITING_FOR_ACTUAL_AC",
+  "floorRunYet": false,
+  "addedPreExecutionGuard": "Recheck 8GiB disk, no verification lock/pending reservation, all177 frozen raw files/modes immediately after actual AC; existing helper performs full source/HEAD/index/STATUS/tasks checks before floor"
+}

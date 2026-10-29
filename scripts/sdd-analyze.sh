@@ -286,11 +286,20 @@ awk -v RED="$RED" -v YELLOW="$YELLOW" -v RESET="$RESET" "$_VF_AWK_TEXT"'
     if (close_pos<=1) return ""
     return substr(rest,1,close_pos-1)
   }
-  function weak_verify(s, low) {
-    low=tolower(verify_command(s))
-    if (low ~ /(^|[[:space:]\/])(test|tests)([[:space:]\/.:_-]|$)/ ||
-        low ~ /node[[:space:]]+--test|cargo[[:space:]]+test|pytest|bats/) return 0
-    return low ~ /(^|[[:space:]])(grep|rg|diff)([[:space:]]|$)|typecheck|tsc[[:space:]]+--noemit|(^|[[:space:]])[^[:space:]]*build([[:space:]]|$)|test[[:space:]]+-[ef][[:space:]]/
+  function weak_verify(command, low) {
+    low=tolower(command)
+    # shortcut: handle unquoted file/FD redirects and direct runners; use Verify kind for quoting, heredocs or wrappers.
+    gsub(/(^|[[:space:]])[0-9]+([<>]&|<>|>>|>\||[<>])[[:space:]]*[^[:space:]<>&|;()"\\\047]+/, " ", low)
+    gsub(/([<>]&|&>|<>|>>|>\||[<>])[[:space:]]*[^[:space:]<>&|;()"\\\047]+/, " ", low)
+    sub(/^[[:space:]]+/, "", low)
+    # A known tool keeps its meaning under a test-looking executable path.
+    if (low ~ /^([^[:space:]<>&|;()]*\/)?(tsc|npm|pnpm|yarn|bun|go|make|cargo|test)([[:space:]<>&|;()]|$)/)
+      sub(/^[^[:space:]<>&|;()]*\//, "", low)
+    if (low ~ /^([^[:space:]<>&|;()]*\/)?(grep|rg|diff)([[:space:]<>&|;()]|$)/) return 1
+    if (low ~ /^(([^[:space:]<>&|;()]*\/)?(bash|sh|zsh)[[:space:]]+(-[euxv]+[[:space:]]+)*)?([^[:space:]<>&|;()]*\/)?tests?[\/.:_-][^[:space:]<>&|;()]*([[:space:]<>&|;()]|$)/ ||
+        low ~ /^([^[:space:]<>&|;()]*\/)?(node[[:space:]]+--test|cargo[[:space:]]+test|(python[23]?[[:space:]]+-m[[:space:]]+)?pytest|bats)([[:space:]<>&|;()]|$)/ ||
+        low ~ /^([^[:space:]<>&|;()]*\/)?((npm|pnpm|yarn)[[:space:]]+(run[[:space:]]+)?test|(bun|go|make)[[:space:]]+test)([[:space:]<>&|;()]|$)/) return 0
+    return low ~ /typecheck|tsc[[:space:]]+--noemit|(^|[[:space:]])[^[:space:]]*build([[:space:]<>&|;()]|$)|test[[:space:]]+-[ef][[:space:]]/
   }
   function flush() {
     if (id == "") return
@@ -304,7 +313,7 @@ awk -v RED="$RED" -v YELLOW="$YELLOW" -v RESET="$RESET" "$_VF_AWK_TEXT"'
     if (!has_ver && !is_gate && !oos && stage != "Ship") {
       printf "  %s!%s task %s has no *Verify:* line (exact command, or manual: <what to observe>)\n", YELLOW, RESET, id; warns++
     }
-    if (has_ver && !has_kind && refs_text ~ /AC-[0-9][0-9][0-9]/ && weak_verify(verify_text)) {
+    if (has_ver && !has_kind && refs_text ~ /AC-[0-9][0-9][0-9]/ && weak_verify(verify_command(verify_text))) {
       printf "  %s!%s task %s has an untyped AC Verify that offers only build/typecheck/text-presence evidence\n", YELLOW, RESET, id; warns++
     }
     if (is_done && !has_ev && !is_gate && stage != "Ship") {

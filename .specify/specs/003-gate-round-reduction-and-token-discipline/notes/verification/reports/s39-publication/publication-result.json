@@ -1,0 +1,161 @@
+{
+  "startedAt": "2026-10-28T12:04:23.769175+00:00",
+  "source": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+  "commit": "25347ba729886ae0bea029c594ac00f0bc48e767",
+  "tree": "c68b9a3ab0c39c555d5cb28afa6420cd9a2600b7",
+  "pr": "https://github.com/Rehan712/sdd-kit/pull/21",
+  "steps": [
+    {
+      "name": "actor",
+      "argv": [
+        "gh",
+        "api",
+        "user",
+        "--jq",
+        ".login"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "startedAt": "2026-10-28T12:04:23.769977+00:00",
+      "exit": 0,
+      "seconds": 0.635,
+      "endedAt": "2026-10-28T12:04:24.406021+00:00"
+    },
+    {
+      "name": "permissions",
+      "argv": [
+        "gh",
+        "api",
+        "repos/Rehan712/sdd-kit"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "startedAt": "2026-10-28T12:04:24.408447+00:00",
+      "exit": 0,
+      "seconds": 0.732,
+      "endedAt": "2026-10-28T12:04:25.141584+00:00"
+    },
+    {
+      "name": "remote-before",
+      "argv": [
+        "git",
+        "-c",
+        "credential.helper=",
+        "-c",
+        "credential.helper=!gh auth git-credential",
+        "-c",
+        "push.followTags=false",
+        "-c",
+        "push.recurseSubmodules=no",
+        "-c",
+        "push.gpgSign=false",
+        "ls-remote",
+        "--refs",
+        "origin",
+        "refs/heads/ci-snapshot/spec-003-20261025-s26"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "startedAt": "2026-10-28T12:04:25.142526+00:00",
+      "exit": 0,
+      "seconds": 0.595,
+      "endedAt": "2026-10-28T12:04:25.737852+00:00"
+    },
+    {
+      "name": "pr-before",
+      "argv": [
+        "gh",
+        "api",
+        "repos/Rehan712/sdd-kit/pulls/21",
+        "--header",
+        "Cache-Control: no-cache"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "startedAt": "2026-10-28T12:04:25.739064+00:00",
+      "exit": 0,
+      "seconds": 0.811,
+      "endedAt": "2026-10-28T12:04:26.551373+00:00"
+    },
+    {
+      "name": "push",
+      "argv": [
+        "git",
+        "-c",
+        "credential.helper=",
+        "-c",
+        "credential.helper=!gh auth git-credential",
+        "-c",
+        "push.followTags=false",
+        "-c",
+        "push.recurseSubmodules=no",
+        "-c",
+        "push.gpgSign=false",
+        "push",
+        "--no-verify",
+        "--porcelain",
+        "--force-with-lease=refs/heads/ci-snapshot/spec-003-20261025-s26:08210681770b65c6ccdfa2571b80a79a09e03154",
+        "origin",
+        "25347ba729886ae0bea029c594ac00f0bc48e767:refs/heads/ci-snapshot/spec-003-20261025-s26"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "startedAt": "2026-10-28T12:04:26.593851+00:00",
+      "exit": 0,
+      "seconds": 16.549,
+      "endedAt": "2026-10-28T12:04:43.143806+00:00"
+    },
+    {
+      "name": "remote-after",
+      "argv": [
+        "git",
+        "-c",
+        "credential.helper=",
+        "-c",
+        "credential.helper=!gh auth git-credential",
+        "-c",
+        "push.followTags=false",
+        "-c",
+        "push.recurseSubmodules=no",
+        "-c",
+        "push.gpgSign=false",
+        "ls-remote",
+        "--refs",
+        "origin",
+        "refs/heads/ci-snapshot/spec-003-20261025-s26"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "startedAt": "2026-10-28T12:04:43.145900+00:00",
+      "exit": 0,
+      "seconds": 0.54,
+      "endedAt": "2026-10-28T12:04:43.686490+00:00"
+    },
+    {
+      "name": "body-update",
+      "argv": [
+        "gh",
+        "api",
+        "--method",
+        "PATCH",
+        "repos/Rehan712/sdd-kit/pulls/21",
+        "--input",
+        "-"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "startedAt": "2026-10-28T12:04:43.688689+00:00",
+      "exit": 0,
+      "seconds": 2.833,
+      "endedAt": "2026-10-28T12:04:46.523099+00:00"
+    }
+  ],
+  "pushCompleted": true,
+  "credentialHandling": "Existing Rehan712 keyring credential only in subprocess environment; active account/config unchanged",
+  "verifiedRemoteHeadLease": "08210681770b65c6ccdfa2571b80a79a09e03154",
+  "remoteLeaseObservedAt": "2026-10-28T12:04:26.592520+00:00",
+  "pushCount": 1,
+  "remoteHeadVerified": "25347ba729886ae0bea029c594ac00f0bc48e767",
+  "endedAt": "2026-10-28T12:04:46.575361+00:00",
+  "exit": 0,
+  "prObservedHead": "25347ba729886ae0bea029c594ac00f0bc48e767",
+  "prHeadCaughtUp": true,
+  "draft": true,
+  "bodyUpdated": true,
+  "protectedStateUnchanged": true,
+  "noMerge": true,
+  "featurePR20Untouched": true
+}

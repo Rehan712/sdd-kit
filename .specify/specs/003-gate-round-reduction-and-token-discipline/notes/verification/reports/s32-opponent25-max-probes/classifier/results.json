@@ -1,0 +1,681 @@
+{
+  "results": [
+    {
+      "number": 1,
+      "kind": "weak",
+      "command": "tsc --noEmit tests/unit.ts",
+      "argv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": true,
+      "ok": true
+    },
+    {
+      "number": 2,
+      "kind": "weak",
+      "command": "npm run typecheck -- --project tests/tsconfig.json",
+      "argv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": true,
+      "ok": true
+    },
+    {
+      "number": 3,
+      "kind": "weak",
+      "command": "grep AC-001 tests/check.sh",
+      "argv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": true,
+      "ok": true
+    },
+    {
+      "number": 4,
+      "kind": "weak",
+      "command": "npm run build -- --outDir tests/build",
+      "argv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": true,
+      "ok": true
+    },
+    {
+      "number": 5,
+      "kind": "weak",
+      "command": "test -e README.md",
+      "argv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": true,
+      "ok": true
+    },
+    {
+      "number": 6,
+      "kind": "weak",
+      "command": "test -f README.md",
+      "argv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": true,
+      "ok": true
+    },
+    {
+      "number": 7,
+      "kind": "weak",
+      "command": "grep pytest README.md",
+      "argv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": true,
+      "ok": true
+    },
+    {
+      "number": 8,
+      "kind": "weak",
+      "command": "rg bats README.md",
+      "argv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": true,
+      "ok": true
+    },
+    {
+      "number": 9,
+      "kind": "weak",
+      "command": "diff fixtures/test.txt actual.txt",
+      "argv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": true,
+      "ok": true
+    },
+    {
+      "number": 10,
+      "kind": "weak",
+      "command": "npm<tests/test-typecheck.txt run typecheck",
+      "argv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": true,
+      "ok": true
+    },
+    {
+      "number": 11,
+      "kind": "weak",
+      "command": "grep<tools/npm test typecheck.txt",
+      "argv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": true,
+      "ok": true
+    },
+    {
+      "number": 12,
+      "kind": "weak",
+      "command": "/usr/bin/grep<input.txt AC-001 tests/check.sh",
+      "argv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": true,
+      "ok": true
+    },
+    {
+      "number": 13,
+      "kind": "weak",
+      "command": "./tools/diff>output.txt fixtures/test.txt actual.txt",
+      "argv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": true,
+      "ok": true
+    },
+    {
+      "number": 14,
+      "kind": "weak",
+      "command": ">tests/node 3<input.txt /usr/bin/grep AC-001 README.md",
+      "argv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": true,
+      "ok": true
+    },
+    {
+      "number": 15,
+      "kind": "weak",
+      "command": "20<input.txt 2>tests/pytest ./tools/rg AC-001 README.md",
+      "argv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": true,
+      "ok": true
+    },
+    {
+      "number": 16,
+      "kind": "weak",
+      "command": "./tests/diff 7>tests/check.sh old.txt new.txt",
+      "argv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": true,
+      "ok": true
+    },
+    {
+      "number": 17,
+      "kind": "weak",
+      "command": "/opt/test-tools/grep>>tests/bats.out AC-001 README.md",
+      "argv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": true,
+      "ok": true
+    },
+    {
+      "number": 18,
+      "kind": "weak",
+      "command": "/opt/test-tools/rg<>tests/check.sh AC-001 README.md",
+      "argv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": true,
+      "ok": true
+    },
+    {
+      "number": 19,
+      "kind": "weak",
+      "command": "\t/opt/test-tools/diff\told.txt\tnew.txt",
+      "argv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": true,
+      "ok": true
+    },
+    {
+      "number": 20,
+      "kind": "weak",
+      "command": "npm 10<tests/check.txt 20>tools/pytest run typecheck",
+      "argv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": true,
+      "ok": true
+    },
+    {
+      "number": 21,
+      "kind": "weak",
+      "command": "/opt/tools/tsc 123>tests/node --noEmit",
+      "argv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": true,
+      "ok": true
+    },
+    {
+      "number": 22,
+      "kind": "weak",
+      "command": "test 3<input.txt -f README.md 4>tests/check.sh",
+      "argv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": true,
+      "ok": true
+    },
+    {
+      "number": 23,
+      "kind": "weak",
+      "command": "test 3<input.txt -e README.md 4>tests/check.sh",
+      "argv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": true,
+      "ok": true
+    },
+    {
+      "number": 24,
+      "kind": "weak",
+      "command": "npm 2>tests/out 3<tests/in run build",
+      "argv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": true,
+      "ok": true
+    },
+    {
+      "number": 25,
+      "kind": "weak",
+      "command": "grep AC-001 tests/check.sh 2>>tests/typecheck.log",
+      "argv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": true,
+      "ok": true
+    },
+    {
+      "number": 26,
+      "kind": "weak",
+      "command": "npm3>tests/node test typecheck.txt",
+      "argv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": true,
+      "ok": true
+    },
+    {
+      "number": 27,
+      "kind": "clean",
+      "command": "bash -e -x tests/typecheck.sh",
+      "argv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": false,
+      "ok": true
+    },
+    {
+      "number": 28,
+      "kind": "clean",
+      "command": "/bin/sh -eu tests/typecheck.sh",
+      "argv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": false,
+      "ok": true
+    },
+    {
+      "number": 29,
+      "kind": "clean",
+      "command": "zsh -v tests/typecheck.sh",
+      "argv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": false,
+      "ok": true
+    },
+    {
+      "number": 30,
+      "kind": "clean",
+      "command": "/usr/local/bin/cargo test --test build",
+      "argv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": false,
+      "ok": true
+    },
+    {
+      "number": 31,
+      "kind": "clean",
+      "command": "/usr/bin/python -m pytest tests/typecheck.py",
+      "argv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": false,
+      "ok": true
+    },
+    {
+      "number": 32,
+      "kind": "clean",
+      "command": "/usr/bin/python2 -m pytest tests/typecheck.py",
+      "argv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": false,
+      "ok": true
+    },
+    {
+      "number": 33,
+      "kind": "clean",
+      "command": "/usr/bin/node --test typecheck.test.js",
+      "argv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": false,
+      "ok": true
+    },
+    {
+      "number": 34,
+      "kind": "clean",
+      "command": "/usr/local/bin/bats tests/build.bats",
+      "argv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": false,
+      "ok": true
+    },
+    {
+      "number": 35,
+      "kind": "clean",
+      "command": "/opt/tools/pnpm run test --filter typecheck",
+      "argv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": false,
+      "ok": true
+    },
+    {
+      "number": 36,
+      "kind": "clean",
+      "command": "/opt/tools/yarn test --grep build",
+      "argv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": false,
+      "ok": true
+    },
+    {
+      "number": 37,
+      "kind": "clean",
+      "command": "bun test --filter typecheck",
+      "argv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": false,
+      "ok": true
+    },
+    {
+      "number": 38,
+      "kind": "clean",
+      "command": "make test TARGET=build",
+      "argv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": false,
+      "ok": true
+    },
+    {
+      "number": 39,
+      "kind": "clean",
+      "command": "20<input.txt 2>output.txt bash -e tests/typecheck.sh",
+      "argv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": false,
+      "ok": true
+    },
+    {
+      "number": 40,
+      "kind": "clean",
+      "command": "bash -e 0<input.txt -x 2>output.txt tests/typecheck.sh",
+      "argv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": false,
+      "ok": true
+    },
+    {
+      "number": 41,
+      "kind": "clean",
+      "command": "./tests/check.sh 13<input.txt 20>output.txt typecheck",
+      "argv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": false,
+      "ok": true
+    },
+    {
+      "number": 42,
+      "kind": "clean",
+      "command": "cargo 20<input.txt 2>output.txt test --test build",
+      "argv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": false,
+      "ok": true
+    },
+    {
+      "number": 43,
+      "kind": "clean",
+      "command": "/usr/bin/python3 3<input.txt -m 4>output.txt pytest typecheck.py",
+      "argv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": false,
+      "ok": true
+    },
+    {
+      "number": 44,
+      "kind": "clean",
+      "command": "npm 10<input.txt run 20>output.txt test -- --grep typecheck",
+      "argv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": false,
+      "ok": true
+    },
+    {
+      "number": 45,
+      "kind": "clean",
+      "command": "node 3<input.txt --test 20>output.txt typecheck.test.js",
+      "argv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": false,
+      "ok": true
+    },
+    {
+      "number": 46,
+      "kind": "clean",
+      "command": "node scripts/assert-content.js tests/grep AC-001 README.md",
+      "argv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": false,
+      "ok": true
+    },
+    {
+      "number": 47,
+      "kind": "clean",
+      "command": "node scripts/assert-content.js ./test-tools/rg AC-001 README.md",
+      "argv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": false,
+      "ok": true
+    },
+    {
+      "number": 48,
+      "kind": "clean",
+      "command": "bash scripts/assert-content.sh /usr/bin/diff old.txt new.txt",
+      "argv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": false,
+      "ok": true
+    }
+  ],
+  "counts": {
+    "weak": 26,
+    "clean": 22,
+    "passed": 48
+  }
+}

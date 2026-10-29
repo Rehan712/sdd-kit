@@ -1,0 +1,1776 @@
+{
+  "at": "2026-10-29T10:37:11.686311+00:00",
+  "floorId": "FLOOR-LxJkv3",
+  "floorLatestBefore": "FLOOR-qoRY6H",
+  "floorLatestAfter": "FLOOR-LxJkv3",
+  "floorMeta": {
+    "version": "1",
+    "id": "FLOOR-LxJkv3",
+    "kind": "floor",
+    "stage": "",
+    "start": "2026-10-29T06:53:07Z",
+    "end": "2026-10-29T10:35:30Z",
+    "source": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+    "exit": "0"
+  },
+  "floorSeal": "verification:1\na62cbfba00fa738a75ba463cd1c06374529b48f53a0a4955e9d6ae5940d99fce meta.nul\n218a380ff662bc9be567d6ad83b7a0ec1532d355a6c248ed1da8c02b0a8ff1fc commands.nul\n8766df908be5d8f628c3880af34ae761dd1c9c4946e8da08da3e566c8c0c788a bindings.nul\nf156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 inputs.nul\n8af367bcbcf5956d1dbbad28748fbb59f4c37efe13b23df4abb035cfad1179f8 roots.nul\n",
+  "records": [
+    {
+      "kind": "task:T001",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh ",
+      "capture": "CAP-819-05nYhW",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T002",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-sdd-analyze.sh ",
+      "capture": "CAP-818-fLEvh7",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T003",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-verification.sh ",
+      "capture": "CAP-820-3rZll1",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T003f1",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-sdd-analyze.sh ",
+      "capture": "CAP-818-fLEvh7",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T004",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh ",
+      "capture": "CAP-819-05nYhW",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T005",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-golden-example.sh ",
+      "capture": "CAP-821-PunhEv",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T006",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh ",
+      "capture": "CAP-819-05nYhW",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T007",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh ",
+      "capture": "CAP-819-05nYhW",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T008",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh ",
+      "capture": "CAP-819-05nYhW",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T009",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh ",
+      "capture": "CAP-819-05nYhW",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T010",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh ",
+      "capture": "CAP-819-05nYhW",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T011",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh ",
+      "capture": "CAP-819-05nYhW",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T012",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh ",
+      "capture": "CAP-819-05nYhW",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T013",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-build-adapters.sh ",
+      "capture": "CAP-822-SHhBLf",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T014",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh ",
+      "capture": "CAP-819-05nYhW",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T015",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-verification.sh ",
+      "capture": "CAP-820-3rZll1",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T016",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-verification.sh ",
+      "capture": "CAP-820-3rZll1",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T017",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-spec-run.sh && bash tests/test-verification.sh ",
+      "capture": "CAP-823-V0snkv",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T018",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-verification.sh ",
+      "capture": "CAP-820-3rZll1",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T019",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-spec-task.sh && bash tests/test-spec-gate.sh && bash tests/test-verification.sh ",
+      "capture": "CAP-824-uwaOpM",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T020",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-spec-gate.sh ",
+      "capture": "CAP-825-1XtXfy",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T021",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-spec-gate.sh ",
+      "capture": "CAP-825-1XtXfy",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T022",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-verification.sh ",
+      "capture": "CAP-826-JCf2n0",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T023",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh ",
+      "capture": "CAP-827-QUzbWz",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T024",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-gate-contracts.sh ",
+      "capture": "CAP-828-INyKFb",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T030o1",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-spec-gate.sh ",
+      "capture": "CAP-825-1XtXfy",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T030o2",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-spec-gate.sh ",
+      "capture": "CAP-825-1XtXfy",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T030o4",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh ",
+      "capture": "CAP-819-05nYhW",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T030o5",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-verification.sh ",
+      "capture": "CAP-820-3rZll1",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T030o11",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-spec-gate.sh ",
+      "capture": "CAP-825-1XtXfy",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T030o7",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-spec-gate.sh ",
+      "capture": "CAP-825-1XtXfy",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T030o9",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh ",
+      "capture": "CAP-819-05nYhW",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T030o10",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-verification.sh ",
+      "capture": "CAP-820-3rZll1",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T030o12",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-verification.sh && bash tests/test-sdd-analyze.sh ",
+      "capture": "CAP-829-bbEFOb",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T030o13",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-verification.sh && bash tests/test-sdd-analyze.sh ",
+      "capture": "CAP-829-bbEFOb",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T030o14",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh ",
+      "capture": "CAP-819-05nYhW",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T030o15",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-verification.sh ",
+      "capture": "CAP-820-3rZll1",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T030o16",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-spec-gate.sh ",
+      "capture": "CAP-825-1XtXfy",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T030o17",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-spec-gate.sh ",
+      "capture": "CAP-825-1XtXfy",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T030o22",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-spec-gate.sh ",
+      "capture": "CAP-830-CsCffj",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T030o18",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-sdd-analyze.sh ",
+      "capture": "CAP-831-9Jnoio",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T030o19",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh ",
+      "capture": "CAP-819-05nYhW",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T030o20",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh ",
+      "capture": "CAP-832-yMZbdL",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T030o21",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-spec-gate.sh ",
+      "capture": "CAP-825-1XtXfy",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T030o23",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-sdd-analyze.sh ",
+      "capture": "CAP-831-9Jnoio",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T030o24",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh ",
+      "capture": "CAP-819-05nYhW",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T030o25",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh ",
+      "capture": "CAP-832-yMZbdL",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T030o29",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh ",
+      "capture": "CAP-819-05nYhW",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T030o30",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh ",
+      "capture": "CAP-819-05nYhW",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T030o31",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-spec-gate.sh ",
+      "capture": "CAP-825-1XtXfy",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T030o32",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh ",
+      "capture": "CAP-819-05nYhW",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T030o33",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-spec-gate.sh ",
+      "capture": "CAP-830-CsCffj",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T030o34",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh ",
+      "capture": "CAP-819-05nYhW",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T030o35",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh ",
+      "capture": "CAP-833-iRYlHe",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T030o36",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh ",
+      "capture": "CAP-819-05nYhW",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T030o37",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh ",
+      "capture": "CAP-819-05nYhW",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T030o38",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh ",
+      "capture": "CAP-819-05nYhW",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T030o39",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-gate-contracts.sh ",
+      "capture": "CAP-828-INyKFb",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T030o40",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-gate-contracts.sh ",
+      "capture": "CAP-828-INyKFb",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T030o41",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+      "capture": "CAP-834-BGiAv1",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T030o42",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+      "capture": "CAP-834-BGiAv1",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T030o43",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+      "capture": "CAP-834-BGiAv1",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T030o44",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+      "capture": "CAP-834-BGiAv1",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T030o45",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+      "capture": "CAP-834-BGiAv1",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T030o46",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+      "capture": "CAP-834-BGiAv1",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T030o47",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+      "capture": "CAP-834-BGiAv1",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T030o48",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+      "capture": "CAP-834-BGiAv1",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T030o49",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+      "capture": "CAP-834-BGiAv1",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T030o50",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+      "capture": "CAP-834-BGiAv1",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T030o51",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+      "capture": "CAP-834-BGiAv1",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T030o52",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+      "capture": "CAP-834-BGiAv1",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T030o53",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+      "capture": "CAP-834-BGiAv1",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T030o54",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+      "capture": "CAP-834-BGiAv1",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T030o55",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+      "capture": "CAP-834-BGiAv1",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T030o56",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+      "capture": "CAP-834-BGiAv1",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T025",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh ",
+      "capture": "CAP-819-05nYhW",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T030o6",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-spec-gate.sh ",
+      "capture": "CAP-830-CsCffj",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T027f1",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-spec-gate.sh ",
+      "capture": "CAP-825-1XtXfy",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T026",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh ",
+      "capture": "CAP-819-05nYhW",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T027",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+      "capture": "CAP-834-BGiAv1",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T030o3",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh ",
+      "capture": "CAP-819-05nYhW",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T030o8",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh ",
+      "capture": "CAP-833-iRYlHe",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T031a1",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+      "capture": "CAP-834-BGiAv1",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T031a2",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+      "capture": "CAP-834-BGiAv1",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T031a3",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+      "capture": "CAP-834-BGiAv1",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T031a4",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+      "capture": "CAP-834-BGiAv1",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T031a1o1",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+      "capture": "CAP-834-BGiAv1",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T031a3o1",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+      "capture": "CAP-834-BGiAv1",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T031a4o1",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+      "capture": "CAP-834-BGiAv1",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T031a4o2",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+      "capture": "CAP-834-BGiAv1",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T031a4o3",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+      "capture": "CAP-834-BGiAv1",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T031a5",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-sdd-analyze.sh ",
+      "capture": "CAP-818-fLEvh7",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T031a5o1",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-sdd-analyze.sh ",
+      "capture": "CAP-818-fLEvh7",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T031a6",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh ",
+      "capture": "CAP-819-05nYhW",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T028",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh ",
+      "capture": "CAP-819-05nYhW",
+      "cached": "1"
+    },
+    {
+      "kind": "task:T029",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh ",
+      "capture": "CAP-819-05nYhW",
+      "cached": "1"
+    },
+    {
+      "kind": "checker:sdd-analyze",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline ",
+      "capture": "CAP-838-AGMe8j",
+      "cached": "0"
+    },
+    {
+      "kind": "checker:spec-ac-coverage",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-ac-coverage.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline --root /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline ",
+      "capture": "CAP-839-i8knEa",
+      "cached": "0"
+    },
+    {
+      "kind": "checker:spec-evidence",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-evidence.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline ",
+      "capture": "CAP-840-VAwVZK",
+      "cached": "0"
+    },
+    {
+      "kind": "gate_check",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/run.sh ",
+      "capture": "CAP-841-xkIIRp",
+      "cached": "0"
+    },
+    {
+      "kind": "gate_check",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "command": "/bin/bash -o pipefail -c bash tests/shellcheck.sh ",
+      "capture": "CAP-842-ygeARx",
+      "cached": "0"
+    }
+  ],
+  "counts": {
+    "records": 101,
+    "executed": 5,
+    "reused": 96,
+    "uniqueCaptures": 22,
+    "newCaptures": 5,
+    "byKind": {
+      "task": 96,
+      "checker": 3,
+      "gate_check": 2
+    }
+  },
+  "captureInvocations": {
+    "CAP-818-fLEvh7": {
+      "meta": {
+        "version": "1",
+        "id": "CAP-818-fLEvh7",
+        "sequence": "818",
+        "kind": "command",
+        "start": "2026-10-28T10:41:50Z",
+        "end": "2026-10-28T10:47:33Z",
+        "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "check": "4b7f6c9b5f0df725e563898e3969549378a848152b48c9b6985cfb1517a462c1",
+        "shell": "/bin/bash",
+        "input_before": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+        "input_after": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+        "no_tick": "1",
+        "exit": "0",
+        "output_digest": "f9166fdc124954abb48f7c8ed789d96a1ce68c06a9da6df0d9d49a79a07aca5a",
+        "output_bytes": "862",
+        "policy": "local",
+        "key": "  -- 19/19 passed"
+      },
+      "argv": [
+        "/bin/bash",
+        "-o",
+        "pipefail",
+        "-c",
+        "bash tests/test-sdd-analyze.sh"
+      ],
+      "seal": "verification:1\n47c2d43cd995c212769311f37783138c75b4d06f6df6c2ccd68f0a742e80c858 meta.nul\na193b9b8454686d43618a97cd684b331c6e36a0e968611582be2ce0aee872844 argv.nul\nf156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 inputs.nul\nf156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 inputs-after.nul\n8766df908be5d8f628c3880af34ae761dd1c9c4946e8da08da3e566c8c0c788a bindings.nul\nf9166fdc124954abb48f7c8ed789d96a1ce68c06a9da6df0d9d49a79a07aca5a output.log\n16d287c2efafb07cee1c26b8168f5c6da3732af758da56d23b61000206ec39b0 summary.txt\n",
+      "newCapture": false
+    },
+    "CAP-819-05nYhW": {
+      "meta": {
+        "version": "1",
+        "id": "CAP-819-05nYhW",
+        "sequence": "819",
+        "kind": "command",
+        "start": "2026-10-28T11:15:44Z",
+        "end": "2026-10-28T11:45:43Z",
+        "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "check": "90a24b4b485e387a27b9bf813d3c91e9bda58741005a354c59364c345a22f4b5",
+        "shell": "/bin/bash",
+        "input_before": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+        "input_after": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+        "no_tick": "1",
+        "exit": "0",
+        "output_digest": "e2bd5dfbf6ddcf901317732547649b3e2028c869384acc1e688d65a77c738b33",
+        "output_bytes": "688",
+        "policy": "local",
+        "key": "  -- 18/18 passed"
+      },
+      "argv": [
+        "/bin/bash",
+        "-o",
+        "pipefail",
+        "-c",
+        "bash tests/test-gate-contracts.sh"
+      ],
+      "seal": "verification:1\neb1abf4055977d9acce792c4b84b900f347366b40d55ee423b736c5384a31b8c meta.nul\n102caf17909a3ea4ebccfc8fd6c902f01d85ad68ea0347db6357c47efbeb3832 argv.nul\nf156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 inputs.nul\nf156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 inputs-after.nul\n8766df908be5d8f628c3880af34ae761dd1c9c4946e8da08da3e566c8c0c788a bindings.nul\ne2bd5dfbf6ddcf901317732547649b3e2028c869384acc1e688d65a77c738b33 output.log\n4774e4cb874fd6a86647c0672936955717056b4dc4ef57142b28e89343692e8a summary.txt\n",
+      "newCapture": false
+    },
+    "CAP-820-3rZll1": {
+      "meta": {
+        "version": "1",
+        "id": "CAP-820-3rZll1",
+        "sequence": "820",
+        "kind": "command",
+        "start": "2026-10-28T13:18:24Z",
+        "end": "2026-10-28T13:30:30Z",
+        "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "check": "48fb2bc883f9f3ff6fe4d6c1d7f4b2e10c2263bb14d586169aa2c166a22105ec",
+        "shell": "/bin/bash",
+        "input_before": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+        "input_after": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+        "no_tick": "1",
+        "exit": "0",
+        "output_digest": "b0307d5f3643923c85b2aa7d758ae3f0bf12a603f48312482e8cbeddb222d636",
+        "output_bytes": "105",
+        "policy": "local",
+        "key": "  -- 3/3 passed"
+      },
+      "argv": [
+        "/bin/bash",
+        "-o",
+        "pipefail",
+        "-c",
+        "bash tests/test-verification.sh"
+      ],
+      "seal": "verification:1\n805cccb45524f718795e530784be5d53c625e9be25fbe02eecdaef2265820f30 meta.nul\n2048b163fc5b34b05ed4317dd54ef76815e3fc49d2f557edd32c6f9ac44270e9 argv.nul\nf156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 inputs.nul\nf156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 inputs-after.nul\n8766df908be5d8f628c3880af34ae761dd1c9c4946e8da08da3e566c8c0c788a bindings.nul\nb0307d5f3643923c85b2aa7d758ae3f0bf12a603f48312482e8cbeddb222d636 output.log\n5d9e9e057c9b583c312504c8bfdcb5ad043841b534b8158f8400f7b5c539e73a summary.txt\n",
+      "newCapture": false
+    },
+    "CAP-821-PunhEv": {
+      "meta": {
+        "version": "1",
+        "id": "CAP-821-PunhEv",
+        "sequence": "821",
+        "kind": "command",
+        "start": "2026-10-28T13:34:59Z",
+        "end": "2026-10-28T13:35:18Z",
+        "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "check": "d72f0e7d8ebcf8669af4952d4e8143c36cbb3e933bd61e49be36f5a318478c44",
+        "shell": "/bin/bash",
+        "input_before": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+        "input_after": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+        "no_tick": "1",
+        "exit": "0",
+        "output_digest": "dc54db17fc456b716d3c4bacdc0e09fda5c2df8fd46442fa54ea9b855e779182",
+        "output_bytes": "292",
+        "policy": "local",
+        "key": "  -- 5/5 passed"
+      },
+      "argv": [
+        "/bin/bash",
+        "-o",
+        "pipefail",
+        "-c",
+        "bash tests/test-golden-example.sh"
+      ],
+      "seal": "verification:1\nb9a6836dcf35261a9c17db74362b9081e069f22a176c4782c36839dff6c87fde meta.nul\n78982e537c17b28556d8bd6070e9aca288b2abc0df1a06ec1bddae8c71047aa9 argv.nul\nf156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 inputs.nul\nf156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 inputs-after.nul\n8766df908be5d8f628c3880af34ae761dd1c9c4946e8da08da3e566c8c0c788a bindings.nul\ndc54db17fc456b716d3c4bacdc0e09fda5c2df8fd46442fa54ea9b855e779182 output.log\n2815678145e43f416800f033156cd3389a86fff249a4539df0112d6d694bb72b summary.txt\n",
+      "newCapture": false
+    },
+    "CAP-822-SHhBLf": {
+      "meta": {
+        "version": "1",
+        "id": "CAP-822-SHhBLf",
+        "sequence": "822",
+        "kind": "command",
+        "start": "2026-10-28T13:42:58Z",
+        "end": "2026-10-28T14:02:20Z",
+        "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "check": "c25a863051afb509ba04b7d5b86a1562bbc90411949df1665309ec04b698610c",
+        "shell": "/bin/bash",
+        "input_before": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+        "input_after": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+        "no_tick": "1",
+        "exit": "0",
+        "output_digest": "30e3c37ef9cd95137d04ac561e5cffcfcd29854d9a0c3902906b94c2d462b9f8",
+        "output_bytes": "1260",
+        "policy": "local",
+        "key": "  -- 10/10 passed"
+      },
+      "argv": [
+        "/bin/bash",
+        "-o",
+        "pipefail",
+        "-c",
+        "bash tests/test-gate-contracts.sh && bash tests/test-build-adapters.sh"
+      ],
+      "seal": "verification:1\nd02548a41c215fb75899467a8dd638642235915c8109b9fa1bb6f82cc6b44301 meta.nul\n245ec48d6b652edbe9e19342e9202dd569be9139c6e510052f5903473c5c2ec5 argv.nul\nf156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 inputs.nul\nf156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 inputs-after.nul\n8766df908be5d8f628c3880af34ae761dd1c9c4946e8da08da3e566c8c0c788a bindings.nul\n30e3c37ef9cd95137d04ac561e5cffcfcd29854d9a0c3902906b94c2d462b9f8 output.log\naf6949963e89b60ed0320921c12555464d1076c329bb524cf2e9ea986324585d summary.txt\n",
+      "newCapture": false
+    },
+    "CAP-823-V0snkv": {
+      "meta": {
+        "version": "1",
+        "id": "CAP-823-V0snkv",
+        "sequence": "823",
+        "kind": "command",
+        "start": "2026-10-28T14:04:35Z",
+        "end": "2026-10-28T14:10:44Z",
+        "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "check": "6dd03eb99bbc2b4e853874e25bdad7719347d7fba4910214268b2f6748df29a4",
+        "shell": "/bin/bash",
+        "input_before": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+        "input_after": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+        "no_tick": "1",
+        "exit": "0",
+        "output_digest": "6afa5129adcacc389d7dd247ba059bc93f6abec84371466d3b7f5f19daa2bbd2",
+        "output_bytes": "358",
+        "policy": "local",
+        "key": "  -- 3/3 passed"
+      },
+      "argv": [
+        "/bin/bash",
+        "-o",
+        "pipefail",
+        "-c",
+        "bash tests/test-spec-run.sh && bash tests/test-verification.sh"
+      ],
+      "seal": "verification:1\n99a994887d85f2f08f4da6371b83e550c8c3a54e5e3cc3ddb86116a1b646e92b meta.nul\n0c49ed45c0f3d0ac449e93903599a84a80b4d90133ecb2b6693d93a8e4572df5 argv.nul\nf156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 inputs.nul\nf156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 inputs-after.nul\n8766df908be5d8f628c3880af34ae761dd1c9c4946e8da08da3e566c8c0c788a bindings.nul\n6afa5129adcacc389d7dd247ba059bc93f6abec84371466d3b7f5f19daa2bbd2 output.log\nf0f5f63236a323f52ce579597c4ccae121d10e6e1b270cdf188d9faf4ab19750 summary.txt\n",
+      "newCapture": false
+    },
+    "CAP-824-uwaOpM": {
+      "meta": {
+        "version": "1",
+        "id": "CAP-824-uwaOpM",
+        "sequence": "824",
+        "kind": "command",
+        "start": "2026-10-28T14:12:06Z",
+        "end": "2026-10-28T14:33:36Z",
+        "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "check": "35873f714f3c9452d2dac4f703ee409b428497bf118fde536e641a42d30784b2",
+        "shell": "/bin/bash",
+        "input_before": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+        "input_after": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+        "no_tick": "1",
+        "exit": "0",
+        "output_digest": "92e0f6ae9eb40c2f7ffccbed611018798c37aebeb5ad3d5c438bbe7232566791",
+        "output_bytes": "930",
+        "policy": "local",
+        "key": "  -- 3/3 passed"
+      },
+      "argv": [
+        "/bin/bash",
+        "-o",
+        "pipefail",
+        "-c",
+        "bash tests/test-spec-task.sh && bash tests/test-spec-gate.sh && bash tests/test-verification.sh"
+      ],
+      "seal": "verification:1\nc388f87b682449195d0492da3e4c584df2be43c307231a66fb285728a3c71f0f meta.nul\n12df2d6eb813aec4806aa7f920cebcd4de5ce74b591b9c7fc43c9e492b4490c7 argv.nul\nf156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 inputs.nul\nf156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 inputs-after.nul\n8766df908be5d8f628c3880af34ae761dd1c9c4946e8da08da3e566c8c0c788a bindings.nul\n92e0f6ae9eb40c2f7ffccbed611018798c37aebeb5ad3d5c438bbe7232566791 output.log\n2a60891e88079f72570368c22b3667c84efc4b77d8bbd40cc743125ad743a68e summary.txt\n",
+      "newCapture": false
+    },
+    "CAP-825-1XtXfy": {
+      "meta": {
+        "version": "1",
+        "id": "CAP-825-1XtXfy",
+        "sequence": "825",
+        "kind": "command",
+        "start": "2026-10-28T14:34:32Z",
+        "end": "2026-10-28T14:49:01Z",
+        "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "check": "4e719a025da454b4d606cc1e5517f414ae002f79710b6d4034def452b2ef2420",
+        "shell": "/bin/bash",
+        "input_before": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+        "input_after": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+        "no_tick": "1",
+        "exit": "0",
+        "output_digest": "ce84a8f1d4f2042d5862aaccf523b5c2cad467528205d0937715b65aca1aed5f",
+        "output_bytes": "292",
+        "policy": "local",
+        "key": "  -- 8/8 passed"
+      },
+      "argv": [
+        "/bin/bash",
+        "-o",
+        "pipefail",
+        "-c",
+        "bash tests/test-spec-gate.sh"
+      ],
+      "seal": "verification:1\ne15071310486716b6b027596e8c7d8f37aba654bab955ede24f578a009db98b2 meta.nul\nb810a12d3e34916b11228e826bdfe95636fefffd74c77ab853bfbe46f0862fff argv.nul\nf156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 inputs.nul\nf156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 inputs-after.nul\n8766df908be5d8f628c3880af34ae761dd1c9c4946e8da08da3e566c8c0c788a bindings.nul\nce84a8f1d4f2042d5862aaccf523b5c2cad467528205d0937715b65aca1aed5f output.log\n386328ba23b7a105e50ab51a0f1719aa53d328ce2d83cfc63ff2cfc376cb855e summary.txt\n",
+      "newCapture": false
+    },
+    "CAP-826-JCf2n0": {
+      "meta": {
+        "version": "1",
+        "id": "CAP-826-JCf2n0",
+        "sequence": "826",
+        "kind": "command",
+        "start": "2026-10-28T14:50:11Z",
+        "end": "2026-10-28T15:08:36Z",
+        "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "check": "3e56b3620b24e72b914a1d392f7dc93b93380f0a22c91035b4bf37b15836b993",
+        "shell": "/bin/bash",
+        "input_before": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+        "input_after": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+        "no_tick": "1",
+        "exit": "0",
+        "output_digest": "eaed840fc7e1da90d7fbc574f13167212b5c09e43b1adc486bd8fb879c84e61f",
+        "output_bytes": "397",
+        "policy": "local",
+        "key": "  -- 3/3 passed"
+      },
+      "argv": [
+        "/bin/bash",
+        "-o",
+        "pipefail",
+        "-c",
+        "bash tests/test-spec-gate.sh && bash tests/test-verification.sh"
+      ],
+      "seal": "verification:1\n1a3fc173cc3548c0d63eed60a45f7c86d059243abbd1cb7c9de0620758ed6773 meta.nul\nc479c2f69e8eb1ff836050cdbca0f405e9ac97d699f4dfd4491751971f2627cc argv.nul\nf156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 inputs.nul\nf156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 inputs-after.nul\n8766df908be5d8f628c3880af34ae761dd1c9c4946e8da08da3e566c8c0c788a bindings.nul\neaed840fc7e1da90d7fbc574f13167212b5c09e43b1adc486bd8fb879c84e61f output.log\n2f3b0db8f774a56e161632461f53c7324e62a317fef99d88851a900ad98642a2 summary.txt\n",
+      "newCapture": false
+    },
+    "CAP-827-QUzbWz": {
+      "meta": {
+        "version": "1",
+        "id": "CAP-827-QUzbWz",
+        "sequence": "827",
+        "kind": "command",
+        "start": "2026-10-28T15:09:27Z",
+        "end": "2026-10-28T15:27:03Z",
+        "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "check": "af07753077298eaf9ed7991dbf114b353c4c2e0760912c72f4746c7109d8296d",
+        "shell": "/bin/bash",
+        "input_before": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+        "input_after": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+        "no_tick": "1",
+        "exit": "0",
+        "output_digest": "54b9f0a22b923c2d0091384a9699e48ecf699315a1a65541bb4fc4c4ea1f18cb",
+        "output_bytes": "397",
+        "policy": "local",
+        "key": "  -- 8/8 passed"
+      },
+      "argv": [
+        "/bin/bash",
+        "-o",
+        "pipefail",
+        "-c",
+        "bash tests/test-verification.sh && bash tests/test-spec-gate.sh"
+      ],
+      "seal": "verification:1\ne801d03734d4ebb3847cb9210b91f706c51a1923319ff6d4b0064e9e0d71a7b2 meta.nul\n789b7d7dc13805ed0e811b3158d9de4998eb1f93f079c82d2d6e77d285d299cd argv.nul\nf156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 inputs.nul\nf156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 inputs-after.nul\n8766df908be5d8f628c3880af34ae761dd1c9c4946e8da08da3e566c8c0c788a bindings.nul\n54b9f0a22b923c2d0091384a9699e48ecf699315a1a65541bb4fc4c4ea1f18cb output.log\n1f9d40cdc3c3245516d5786acfc272c67c85f66ab01f782297ec66876fe0c77e summary.txt\n",
+      "newCapture": false
+    },
+    "CAP-828-INyKFb": {
+      "meta": {
+        "version": "1",
+        "id": "CAP-828-INyKFb",
+        "sequence": "828",
+        "kind": "command",
+        "start": "2026-10-28T15:27:53Z",
+        "end": "2026-10-28T15:43:46Z",
+        "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "check": "ffec3c40ad6f198d88cc3b4b4fbd5408a815039d54c78430bef7e13b09127afe",
+        "shell": "/bin/bash",
+        "input_before": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+        "input_after": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+        "no_tick": "1",
+        "exit": "0",
+        "output_digest": "3c87a1f9bf70014c150ad6a98d52d0712b28b5673ae59e8b28a1f03a9dc92ff5",
+        "output_bytes": "793",
+        "policy": "local",
+        "key": "  -- 18/18 passed"
+      },
+      "argv": [
+        "/bin/bash",
+        "-o",
+        "pipefail",
+        "-c",
+        "bash tests/test-verification.sh && bash tests/test-gate-contracts.sh"
+      ],
+      "seal": "verification:1\ndf019cafcba0639a5dbb9b15f7424c0f6dfcb96c2ccf29173d2f71da0a514d27 meta.nul\nd2a4865cfc81a47ee97cf620e04116d633fa32d991dd22e9124b354c5ed5cd1a argv.nul\nf156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 inputs.nul\nf156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 inputs-after.nul\n8766df908be5d8f628c3880af34ae761dd1c9c4946e8da08da3e566c8c0c788a bindings.nul\n3c87a1f9bf70014c150ad6a98d52d0712b28b5673ae59e8b28a1f03a9dc92ff5 output.log\ncf648c487e84f3e888b1c58be828dfaf53418ee1d88a8f812dd423a74910a8a2 summary.txt\n",
+      "newCapture": false
+    },
+    "CAP-829-bbEFOb": {
+      "meta": {
+        "version": "1",
+        "id": "CAP-829-bbEFOb",
+        "sequence": "829",
+        "kind": "command",
+        "start": "2026-10-28T15:47:09Z",
+        "end": "2026-10-28T16:14:59Z",
+        "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "check": "b64c8e8d7e3e780d370daea4c3b7a29510294945f269f75484858412f3c16d2b",
+        "shell": "/bin/bash",
+        "input_before": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+        "input_after": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+        "no_tick": "1",
+        "exit": "0",
+        "output_digest": "41657457f44cc1f57e09e2ad86e8a53a74aad41f03dc1ca71aa130ae7943ebc5",
+        "output_bytes": "1947",
+        "policy": "local",
+        "key": "  -- 19/19 passed"
+      },
+      "argv": [
+        "/bin/bash",
+        "-o",
+        "pipefail",
+        "-c",
+        "bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-verification.sh && bash tests/test-sdd-analyze.sh"
+      ],
+      "seal": "verification:1\n0d639f664fb7749e60fc4db1fbae39c08e4a82ec937fc536d3827a3bcd5b072f meta.nul\nb7c6bd3a31f0e869191efc03ca73e4beb63fe6485ec03b7138a0611a21b8732a argv.nul\nf156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 inputs.nul\nf156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 inputs-after.nul\n8766df908be5d8f628c3880af34ae761dd1c9c4946e8da08da3e566c8c0c788a bindings.nul\n41657457f44cc1f57e09e2ad86e8a53a74aad41f03dc1ca71aa130ae7943ebc5 output.log\n30984f2c417b72389ed9fcf2be8efd1775b2f9df086abc73fd2d8858183f66c6 summary.txt\n",
+      "newCapture": false
+    },
+    "CAP-830-CsCffj": {
+      "meta": {
+        "version": "1",
+        "id": "CAP-830-CsCffj",
+        "sequence": "830",
+        "kind": "command",
+        "start": "2026-10-28T16:17:03Z",
+        "end": "2026-10-28T16:39:01Z",
+        "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "check": "b58c3144b556a7af9e6cb2b2be84df8338b5c61dd44c5dd7b2fc393a6908fdd6",
+        "shell": "/bin/bash",
+        "input_before": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+        "input_after": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+        "no_tick": "1",
+        "exit": "0",
+        "output_digest": "3b10b8d711d8f1e2776ce8d3c566044bc2bab6db387d1a97bbeadfae9e27a756",
+        "output_bytes": "980",
+        "policy": "local",
+        "key": "  -- 8/8 passed"
+      },
+      "argv": [
+        "/bin/bash",
+        "-o",
+        "pipefail",
+        "-c",
+        "bash tests/test-gate-contracts.sh && bash tests/test-spec-gate.sh"
+      ],
+      "seal": "verification:1\n7e89aa3f73d3c2c98ab3a91f7b5f59ef580d89b4c305e81e13972dd62a522266 meta.nul\nfe47c3758329b850a1238507206c9fe0d1567e689384423a5f820eb6ae7868fb argv.nul\nf156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 inputs.nul\nf156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 inputs-after.nul\n8766df908be5d8f628c3880af34ae761dd1c9c4946e8da08da3e566c8c0c788a bindings.nul\n3b10b8d711d8f1e2776ce8d3c566044bc2bab6db387d1a97bbeadfae9e27a756 output.log\nbf70659d8ddf8e56514ddfbc38b975f22916988a8f58c32c69f0ccd03bf0db90 summary.txt\n",
+      "newCapture": false
+    },
+    "CAP-831-9Jnoio": {
+      "meta": {
+        "version": "1",
+        "id": "CAP-831-9Jnoio",
+        "sequence": "831",
+        "kind": "command",
+        "start": "2026-10-28T16:39:43Z",
+        "end": "2026-10-28T17:03:14Z",
+        "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "check": "661bd956e32bc8bb102b0bc5505d7602cbd7199e22cd8d0c90a776341f2c11d5",
+        "shell": "/bin/bash",
+        "input_before": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+        "input_after": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+        "no_tick": "1",
+        "exit": "0",
+        "output_digest": "2f8d38f0a97fadd4499b71f914d1807d157d1b700cb97d4e4ebf99c03c9d022a",
+        "output_bytes": "1842",
+        "policy": "local",
+        "key": "  -- 19/19 passed"
+      },
+      "argv": [
+        "/bin/bash",
+        "-o",
+        "pipefail",
+        "-c",
+        "bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-sdd-analyze.sh"
+      ],
+      "seal": "verification:1\n3393716b864a33c6170651e5c1e7003aad860ffc29b1150404e01029a079f2c2 meta.nul\nfe0a8509eda349665acebc22665ac31263823fcd7c4443ceb67cf557921b676b argv.nul\nf156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 inputs.nul\nf156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 inputs-after.nul\n8766df908be5d8f628c3880af34ae761dd1c9c4946e8da08da3e566c8c0c788a bindings.nul\n2f8d38f0a97fadd4499b71f914d1807d157d1b700cb97d4e4ebf99c03c9d022a output.log\nd221e56afcefe257b33abe83d45f2ed6876dfaf8c2fdd2883dbe9cfdf1422dc5 summary.txt\n",
+      "newCapture": false
+    },
+    "CAP-832-yMZbdL": {
+      "meta": {
+        "version": "1",
+        "id": "CAP-832-yMZbdL",
+        "sequence": "832",
+        "kind": "command",
+        "start": "2026-10-28T17:04:15Z",
+        "end": "2026-10-28T17:32:49Z",
+        "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "check": "b60171a2f3240b38f65a81bbb93ff242b3848ef43a6efa1dd07b5b7adcf4365c",
+        "shell": "/bin/bash",
+        "input_before": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+        "input_after": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+        "no_tick": "1",
+        "exit": "0",
+        "output_digest": "574f03c0c565372d75397dd9b169d43c48a9e10df69ca03bb1000b795be3d478",
+        "output_bytes": "1085",
+        "policy": "local",
+        "key": "  -- 18/18 passed"
+      },
+      "argv": [
+        "/bin/bash",
+        "-o",
+        "pipefail",
+        "-c",
+        "bash tests/test-verification.sh && bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh"
+      ],
+      "seal": "verification:1\n4187e5251969c4d1c425263567c395254e7c518735d2eeec323b5a72fb232c29 meta.nul\n9781003bdf98904e40d8897bfbe9e2b734dd192836303af6c9d9cc20ebfc8b44 argv.nul\nf156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 inputs.nul\nf156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 inputs-after.nul\n8766df908be5d8f628c3880af34ae761dd1c9c4946e8da08da3e566c8c0c788a bindings.nul\n574f03c0c565372d75397dd9b169d43c48a9e10df69ca03bb1000b795be3d478 output.log\nf77d9aa205131e45f57bbb292e250907fa64aaf02388d03e992ed94b04b8b3c9 summary.txt\n",
+      "newCapture": false
+    },
+    "CAP-833-iRYlHe": {
+      "meta": {
+        "version": "1",
+        "id": "CAP-833-iRYlHe",
+        "sequence": "833",
+        "kind": "command",
+        "start": "2026-10-28T17:36:24Z",
+        "end": "2026-10-28T17:58:38Z",
+        "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "check": "f0f01deac6bccf509ca9734c360f28f54982a020166c14f6ff7c5ab6843180fd",
+        "shell": "/bin/bash",
+        "input_before": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+        "input_after": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+        "no_tick": "1",
+        "exit": "0",
+        "output_digest": "67612af507b659daf52b99440e4b75b0d53668dcbdd360085dd60783ad1d4917",
+        "output_bytes": "980",
+        "policy": "local",
+        "key": "  -- 18/18 passed"
+      },
+      "argv": [
+        "/bin/bash",
+        "-o",
+        "pipefail",
+        "-c",
+        "bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh"
+      ],
+      "seal": "verification:1\n82d7a3db8e935de024981fa5569ecf37322caa79fff3bf464fbc81d461715316 meta.nul\n452f3a0da0596cdfb364304b5078fe02edf7e7a1f2e95786a61b4bf6e3012abc argv.nul\nf156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 inputs.nul\nf156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 inputs-after.nul\n8766df908be5d8f628c3880af34ae761dd1c9c4946e8da08da3e566c8c0c788a bindings.nul\n67612af507b659daf52b99440e4b75b0d53668dcbdd360085dd60783ad1d4917 output.log\n23a7c56825d13b26cdba6a8b805e58adae7de93410d02f756ef1805c9dd60790 summary.txt\n",
+      "newCapture": false
+    },
+    "CAP-834-BGiAv1": {
+      "meta": {
+        "version": "1",
+        "id": "CAP-834-BGiAv1",
+        "sequence": "834",
+        "kind": "command",
+        "start": "2026-10-28T18:00:44Z",
+        "end": "2026-10-28T18:32:16Z",
+        "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "check": "484f9c2101a11795779ab8b79222c130e6d6a59e0fbef5933651c3f3d198b1a6",
+        "shell": "/bin/bash",
+        "input_before": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+        "input_after": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+        "no_tick": "1",
+        "exit": "0",
+        "output_digest": "b150ad3c2adee17324471b5021f9d78f292fabb354dcc1009742d11f71d50699",
+        "output_bytes": "8249",
+        "policy": "local",
+        "key": "  -- 3/3 passed"
+      },
+      "argv": [
+        "/bin/bash",
+        "-o",
+        "pipefail",
+        "-c",
+        "bash tests/run.sh && bash tests/shellcheck.sh"
+      ],
+      "seal": "verification:1\nbe5256fe5dfb6edf4003a17636881f4c3513bcb1aa48df80d7b17ecc8c4c91d6 meta.nul\n0971c9579d22b01752c47b5be6a0ba681ba4aac1dca00c463f1897dfe43402a0 argv.nul\nf156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 inputs.nul\nf156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 inputs-after.nul\n8766df908be5d8f628c3880af34ae761dd1c9c4946e8da08da3e566c8c0c788a bindings.nul\nb150ad3c2adee17324471b5021f9d78f292fabb354dcc1009742d11f71d50699 output.log\nfbb4faca838c8cc1f7c50d163b65070e7c25229e878626c5a515e7f36ecf2639 summary.txt\n",
+      "newCapture": false
+    },
+    "CAP-838-AGMe8j": {
+      "meta": {
+        "version": "1",
+        "id": "CAP-838-AGMe8j",
+        "sequence": "838",
+        "kind": "command",
+        "start": "2026-10-29T07:28:12Z",
+        "end": "2026-10-29T07:28:13Z",
+        "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "check": "e9fd9cbe721e6440bb9f1bac103705326616353ab6530c3c61ed7ee6752f31bc",
+        "shell": "/bin/bash",
+        "input_before": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+        "input_after": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+        "no_tick": "1",
+        "exit": "0",
+        "output_digest": "6a0d0cbdb2a06233f658a7f7d1983a585e3ae4d791d0c3590b9fc7dde6a6d37c",
+        "output_bytes": "759",
+        "policy": "never",
+        "key": "1 warning(s), 0 errors"
+      },
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline"
+      ],
+      "seal": "verification:1\nd72586d63be5681eaccbea9a999d74b8e7290cc6cb6378a67edcf408d3038a99 meta.nul\n8907432de42ccedbcf8a52304c03a23bc0f24b0c6e1975db443db46f09c5ead0 argv.nul\nf156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 inputs.nul\nf156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 inputs-after.nul\n8766df908be5d8f628c3880af34ae761dd1c9c4946e8da08da3e566c8c0c788a bindings.nul\n6a0d0cbdb2a06233f658a7f7d1983a585e3ae4d791d0c3590b9fc7dde6a6d37c output.log\n712a51f0026fac9eae6798f005f207215887137f6f7962416a37bd20112e4c7a summary.txt\n",
+      "newCapture": true
+    },
+    "CAP-839-i8knEa": {
+      "meta": {
+        "version": "1",
+        "id": "CAP-839-i8knEa",
+        "sequence": "839",
+        "kind": "command",
+        "start": "2026-10-29T07:28:53Z",
+        "end": "2026-10-29T07:28:53Z",
+        "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "check": "e93a36b2019bc5f34bc65be8d4bce040e8f82a315398c161ef195467ca6e1008",
+        "shell": "/bin/bash",
+        "input_before": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+        "input_after": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+        "no_tick": "1",
+        "exit": "0",
+        "output_digest": "f73c8f5d85d60868683fbbbc8b089edf595bcc9720bf68afb771f5ad57e016ce",
+        "output_bytes": "11945",
+        "policy": "never",
+        "key": "bound \u2014 every AC is named by at least one test file"
+      },
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-ac-coverage.sh",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline",
+        "--root",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline"
+      ],
+      "seal": "verification:1\n337a292dd64f3495d8d63272ada5703622899f801e05b401613028ed61113a07 meta.nul\nd6645efc7b394eb2d2162c438f5009295a85a25fbd614dea88f86ef55c0bd799 argv.nul\nf156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 inputs.nul\nf156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 inputs-after.nul\n8766df908be5d8f628c3880af34ae761dd1c9c4946e8da08da3e566c8c0c788a bindings.nul\nf73c8f5d85d60868683fbbbc8b089edf595bcc9720bf68afb771f5ad57e016ce output.log\ndf5c0d0152f953a2788734fb05b2b506393097af46333639ee0161e8db969e39 summary.txt\n",
+      "newCapture": true
+    },
+    "CAP-840-VAwVZK": {
+      "meta": {
+        "version": "1",
+        "id": "CAP-840-VAwVZK",
+        "sequence": "840",
+        "kind": "command",
+        "start": "2026-10-29T07:29:33Z",
+        "end": "2026-10-29T10:03:00Z",
+        "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "check": "734f211746e009e6578ddf557d23c51b2e0c4c40f9a3c9657879a5d3d17f91f2",
+        "shell": "/bin/bash",
+        "input_before": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+        "input_after": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+        "no_tick": "1",
+        "exit": "0",
+        "output_digest": "465b69e2fe91bed30f7a7a4da4e00a3106d3e9fefaf33b5be91ce5b36530f334",
+        "output_bytes": "1512",
+        "policy": "never",
+        "key": "current evidence: all completed task checks have valid current captures"
+      },
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-evidence.sh",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline"
+      ],
+      "seal": "verification:1\nd55b8ad547160b6d969b41c127f48888174774aa5b81ec87b36e609b24f2c65e meta.nul\n3237817fb3908ab9639f90bf9a62290b3a9baa28b869633a30f002628871667e argv.nul\nf156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 inputs.nul\nf156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 inputs-after.nul\n8766df908be5d8f628c3880af34ae761dd1c9c4946e8da08da3e566c8c0c788a bindings.nul\n465b69e2fe91bed30f7a7a4da4e00a3106d3e9fefaf33b5be91ce5b36530f334 output.log\na5d2105feb27bc129ec61b8ab1decfed0f9b1195ef5974710c5e4336a1936ef8 summary.txt\n",
+      "newCapture": true
+    },
+    "CAP-841-xkIIRp": {
+      "meta": {
+        "version": "1",
+        "id": "CAP-841-xkIIRp",
+        "sequence": "841",
+        "kind": "command",
+        "start": "2026-10-29T10:03:42Z",
+        "end": "2026-10-29T10:33:49Z",
+        "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "check": "f9cc985eff1d2cee5949cda2003b859ac0606a4cd7da04ee1883351eca52a458",
+        "shell": "/bin/bash",
+        "input_before": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+        "input_after": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+        "no_tick": "1",
+        "exit": "0",
+        "output_digest": "b150ad3c2adee17324471b5021f9d78f292fabb354dcc1009742d11f71d50699",
+        "output_bytes": "8249",
+        "policy": "local",
+        "key": "  -- 3/3 passed"
+      },
+      "argv": [
+        "/bin/bash",
+        "-o",
+        "pipefail",
+        "-c",
+        "bash tests/run.sh"
+      ],
+      "seal": "verification:1\n42bc036df846ee9ad7587d7e0656fc3b26f4fd4221574d8e93cff22defcc6401 meta.nul\nb65a0a75b3ebdd391cacbb7766adc4c3246397b3ec2ff635fc832858fe86bf59 argv.nul\nf156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 inputs.nul\nf156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 inputs-after.nul\n8766df908be5d8f628c3880af34ae761dd1c9c4946e8da08da3e566c8c0c788a bindings.nul\nb150ad3c2adee17324471b5021f9d78f292fabb354dcc1009742d11f71d50699 output.log\n0fca1cab518f17d090f8ea40b86d1bc8be238d3fadaf3d7197a7da9a886ecf97 summary.txt\n",
+      "newCapture": true
+    },
+    "CAP-842-ygeARx": {
+      "meta": {
+        "version": "1",
+        "id": "CAP-842-ygeARx",
+        "sequence": "842",
+        "kind": "command",
+        "start": "2026-10-29T10:34:31Z",
+        "end": "2026-10-29T10:35:04Z",
+        "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "check": "72567d3db511e085db7d73f9091525a8dec6b710cae1597a1d9695bc4a8eef49",
+        "shell": "/bin/bash",
+        "input_before": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+        "input_after": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+        "no_tick": "1",
+        "exit": "0",
+        "output_digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "output_bytes": "0",
+        "policy": "local",
+        "key": "(no output)"
+      },
+      "argv": [
+        "/bin/bash",
+        "-o",
+        "pipefail",
+        "-c",
+        "bash tests/shellcheck.sh"
+      ],
+      "seal": "verification:1\n091af4be757d8f431a46ed92a502c479feb3ff9ad2d84e2132f98cd8beddb99e meta.nul\n45a6d5fec01435d35bf4a18bbfafa8b0a894a677b31cb40eeac3511189acb18b argv.nul\nf156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 inputs.nul\nf156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 inputs-after.nul\n8766df908be5d8f628c3880af34ae761dd1c9c4946e8da08da3e566c8c0c788a bindings.nul\ne3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 output.log\n72d3ae417d9c210f719026b1cb9de1a6d8c441398a6c71d14ed2e083973bc023 summary.txt\n",
+      "newCapture": true
+    }
+  },
+  "newCaptureLogs": {
+    "CAP-838-AGMe8j": {
+      "bytes": 759,
+      "sha256": "6a0d0cbdb2a06233f658a7f7d1983a585e3ae4d791d0c3590b9fc7dde6a6d37c",
+      "text": "Analyzing: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 23 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  \u2713 101 task(s) parsed\n  ! 101 tasks \u2014 past the ~25 guideline; consider splitting the spec\n  \u2713 verification contract bindings valid for tasks phase\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\n1 warning(s), 0 errors\n",
+      "meta": {
+        "version": "1",
+        "id": "CAP-838-AGMe8j",
+        "sequence": "838",
+        "kind": "command",
+        "start": "2026-10-29T07:28:12Z",
+        "end": "2026-10-29T07:28:13Z",
+        "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "check": "e9fd9cbe721e6440bb9f1bac103705326616353ab6530c3c61ed7ee6752f31bc",
+        "shell": "/bin/bash",
+        "input_before": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+        "input_after": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+        "no_tick": "1",
+        "exit": "0",
+        "output_digest": "6a0d0cbdb2a06233f658a7f7d1983a585e3ae4d791d0c3590b9fc7dde6a6d37c",
+        "output_bytes": "759",
+        "policy": "never",
+        "key": "1 warning(s), 0 errors"
+      },
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline"
+      ],
+      "seal": "verification:1\nd72586d63be5681eaccbea9a999d74b8e7290cc6cb6378a67edcf408d3038a99 meta.nul\n8907432de42ccedbcf8a52304c03a23bc0f24b0c6e1975db443db46f09c5ead0 argv.nul\nf156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 inputs.nul\nf156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 inputs-after.nul\n8766df908be5d8f628c3880af34ae761dd1c9c4946e8da08da3e566c8c0c788a bindings.nul\n6a0d0cbdb2a06233f658a7f7d1983a585e3ae4d791d0c3590b9fc7dde6a6d37c output.log\n712a51f0026fac9eae6798f005f207215887137f6f7962416a37bd20112e4c7a summary.txt\n"
+    },
+    "CAP-839-i8knEa": {
+      "bytes": 11945,
+      "sha256": "f73c8f5d85d60868683fbbbc8b089edf595bcc9720bf68afb771f5ad57e016ce",
+      "text": "AC\u2194test binding for 003-gate-round-reduction-and-token-discipline  (roots: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline; 57 test file(s))\n  \u2713 AC-001 \u2014 named in 12 test file(s)\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-ac-coverage.sh\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/templates/examples/001-api-key-expiry/spec.md\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/templates/spec-template.md\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/helpers.sh\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-build-adapters.sh\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-gate-contracts.sh\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-sdd-analyze.sh\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-spec-ac-coverage.sh\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-spec-dispatch.sh\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-spec-gate.sh\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-usage-limits.sh\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-verification.sh\n  \u2713 AC-002 \u2014 named in 10 test file(s)\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/templates/examples/001-api-key-expiry/spec.md\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/templates/spec-template.md\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/helpers.sh\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-build-adapters.sh\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-gate-contracts.sh\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-golden-example.sh\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-sdd-analyze.sh\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-spec-ac-coverage.sh\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-spec-gate.sh\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-usage-limits.sh\n  \u2713 AC-003 \u2014 named in 7 test file(s)\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/agents/test-engineer.md\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/templates/examples/001-api-key-expiry/spec.md\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/helpers.sh\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-build-adapters.sh\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-sdd-analyze.sh\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-spec-gate.sh\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-usage-limits.sh\n  \u2713 AC-004 \u2014 named in 7 test file(s)\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/templates/examples/001-api-key-expiry/spec.md\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/helpers.sh\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-build-adapters.sh\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-gate-contracts.sh\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-sdd-analyze.sh\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-spec-gate.sh\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-usage-limits.sh\n  \u2713 AC-005 \u2014 named in 3 test file(s)\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-golden-example.sh\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-model-policy.sh\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-usage-limits.sh\n  \u2713 AC-006 \u2014 named in 4 test file(s)\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-build-adapters.sh\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-gate-contracts.sh\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-sdd-analyze.sh\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-usage-limits.sh\n  \u2713 AC-007 \u2014 named in 4 test file(s)\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-build-adapters.sh\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-spec-gate.sh\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-usage-limits.sh\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-verification.sh\n  \u2713 AC-008 \u2014 named in 3 test file(s)\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-build-adapters.sh\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-model-policy.sh\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-spec-gate.sh\n  \u2713 AC-009 \u2014 named in 3 test file(s)\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-gate-contracts.sh\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-spec-gate.sh\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-usage-limits.sh\n  \u2713 AC-010 \u2014 named in 3 test file(s)\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-gate-contracts.sh\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-usage-limits.sh\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-verification.sh\n  \u2713 AC-011 \u2014 named in 3 test file(s)\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-executable-bits.sh\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-sdd-analyze.sh\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-verification.sh\n  \u2713 AC-012 \u2014 named in 2 test file(s)\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-gate-contracts.sh\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-spec-gate.sh\n  \u2713 AC-013 \u2014 named in 2 test file(s)\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-gate-contracts.sh\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-spec-gate.sh\n  \u2713 AC-014 \u2014 named in 2 test file(s)\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-build-adapters.sh\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-gate-contracts.sh\n  \u2713 AC-015 \u2014 named in 2 test file(s)\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-gate-contracts.sh\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-spec-gate.sh\n  \u2713 AC-016 \u2014 named in 4 test file(s)\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/probe-gate-contract.sh\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-gate-contracts.sh\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-spec-gate.sh\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-verification.sh\n  \u2713 AC-017 \u2014 named in 1 test file(s)\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-gate-contracts.sh\n  \u2713 AC-018 \u2014 named in 2 test file(s)\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-gate-contracts.sh\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-spec-gate.sh\n  \u2713 AC-019 \u2014 named in 1 test file(s)\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-gate-contracts.sh\n  \u2713 AC-020 \u2014 named in 3 test file(s)\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-gate-contracts.sh\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-spec-gate.sh\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-verification.sh\n  \u2713 AC-021 \u2014 named in 1 test file(s)\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-spec-run.sh\n  \u2713 AC-022 \u2014 named in 4 test file(s)\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-gate-contracts.sh\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-spec-gate.sh\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-spec-task.sh\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-verification.sh\n  \u2713 AC-023 \u2014 named in 2 test file(s)\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-sdd-analyze.sh\n      /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-verification.sh\n---\nbound \u2014 every AC is named by at least one test file\n",
+      "meta": {
+        "version": "1",
+        "id": "CAP-839-i8knEa",
+        "sequence": "839",
+        "kind": "command",
+        "start": "2026-10-29T07:28:53Z",
+        "end": "2026-10-29T07:28:53Z",
+        "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "check": "e93a36b2019bc5f34bc65be8d4bce040e8f82a315398c161ef195467ca6e1008",
+        "shell": "/bin/bash",
+        "input_before": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+        "input_after": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+        "no_tick": "1",
+        "exit": "0",
+        "output_digest": "f73c8f5d85d60868683fbbbc8b089edf595bcc9720bf68afb771f5ad57e016ce",
+        "output_bytes": "11945",
+        "policy": "never",
+        "key": "bound \u2014 every AC is named by at least one test file"
+      },
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-ac-coverage.sh",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline",
+        "--root",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline"
+      ],
+      "seal": "verification:1\n337a292dd64f3495d8d63272ada5703622899f801e05b401613028ed61113a07 meta.nul\nd6645efc7b394eb2d2162c438f5009295a85a25fbd614dea88f86ef55c0bd799 argv.nul\nf156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 inputs.nul\nf156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 inputs-after.nul\n8766df908be5d8f628c3880af34ae761dd1c9c4946e8da08da3e566c8c0c788a bindings.nul\nf73c8f5d85d60868683fbbbc8b089edf595bcc9720bf68afb771f5ad57e016ce output.log\ndf5c0d0152f953a2788734fb05b2b506393097af46333639ee0161e8db969e39 summary.txt\n"
+    },
+    "CAP-840-VAwVZK": {
+      "bytes": 1512,
+      "sha256": "465b69e2fe91bed30f7a7a4da4e00a3106d3e9fefaf33b5be91ce5b36530f334",
+      "text": "CAP-819-05nYhW\nCAP-818-fLEvh7\nCAP-820-3rZll1\nCAP-818-fLEvh7\nCAP-819-05nYhW\nCAP-821-PunhEv\nCAP-819-05nYhW\nCAP-819-05nYhW\nCAP-819-05nYhW\nCAP-819-05nYhW\nCAP-819-05nYhW\nCAP-819-05nYhW\nCAP-819-05nYhW\nCAP-822-SHhBLf\nCAP-819-05nYhW\nCAP-820-3rZll1\nCAP-820-3rZll1\nCAP-823-V0snkv\nCAP-820-3rZll1\nCAP-824-uwaOpM\nCAP-825-1XtXfy\nCAP-825-1XtXfy\nCAP-826-JCf2n0\nCAP-827-QUzbWz\nCAP-828-INyKFb\nCAP-825-1XtXfy\nCAP-825-1XtXfy\nCAP-819-05nYhW\nCAP-820-3rZll1\nCAP-825-1XtXfy\nCAP-825-1XtXfy\nCAP-819-05nYhW\nCAP-820-3rZll1\nCAP-829-bbEFOb\nCAP-829-bbEFOb\nCAP-819-05nYhW\nCAP-820-3rZll1\nCAP-825-1XtXfy\nCAP-825-1XtXfy\nCAP-830-CsCffj\nCAP-831-9Jnoio\nCAP-819-05nYhW\nCAP-832-yMZbdL\nCAP-825-1XtXfy\nCAP-831-9Jnoio\nCAP-819-05nYhW\nCAP-832-yMZbdL\nCAP-819-05nYhW\nCAP-819-05nYhW\nCAP-825-1XtXfy\nCAP-819-05nYhW\nCAP-830-CsCffj\nCAP-819-05nYhW\nCAP-833-iRYlHe\nCAP-819-05nYhW\nCAP-819-05nYhW\nCAP-819-05nYhW\nCAP-828-INyKFb\nCAP-828-INyKFb\nCAP-834-BGiAv1\nCAP-834-BGiAv1\nCAP-834-BGiAv1\nCAP-834-BGiAv1\nCAP-834-BGiAv1\nCAP-834-BGiAv1\nCAP-834-BGiAv1\nCAP-834-BGiAv1\nCAP-834-BGiAv1\nCAP-834-BGiAv1\nCAP-834-BGiAv1\nCAP-834-BGiAv1\nCAP-834-BGiAv1\nCAP-834-BGiAv1\nCAP-834-BGiAv1\nCAP-834-BGiAv1\nCAP-819-05nYhW\nCAP-830-CsCffj\nCAP-825-1XtXfy\nCAP-819-05nYhW\nCAP-834-BGiAv1\nCAP-819-05nYhW\nCAP-833-iRYlHe\nCAP-834-BGiAv1\nCAP-834-BGiAv1\nCAP-834-BGiAv1\nCAP-834-BGiAv1\nCAP-834-BGiAv1\nCAP-834-BGiAv1\nCAP-834-BGiAv1\nCAP-834-BGiAv1\nCAP-834-BGiAv1\nCAP-818-fLEvh7\nCAP-818-fLEvh7\nCAP-819-05nYhW\nCAP-819-05nYhW\nCAP-819-05nYhW\ncurrent evidence: all completed task checks have valid current captures\n",
+      "meta": {
+        "version": "1",
+        "id": "CAP-840-VAwVZK",
+        "sequence": "840",
+        "kind": "command",
+        "start": "2026-10-29T07:29:33Z",
+        "end": "2026-10-29T10:03:00Z",
+        "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "check": "734f211746e009e6578ddf557d23c51b2e0c4c40f9a3c9657879a5d3d17f91f2",
+        "shell": "/bin/bash",
+        "input_before": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+        "input_after": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+        "no_tick": "1",
+        "exit": "0",
+        "output_digest": "465b69e2fe91bed30f7a7a4da4e00a3106d3e9fefaf33b5be91ce5b36530f334",
+        "output_bytes": "1512",
+        "policy": "never",
+        "key": "current evidence: all completed task checks have valid current captures"
+      },
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-evidence.sh",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline"
+      ],
+      "seal": "verification:1\nd55b8ad547160b6d969b41c127f48888174774aa5b81ec87b36e609b24f2c65e meta.nul\n3237817fb3908ab9639f90bf9a62290b3a9baa28b869633a30f002628871667e argv.nul\nf156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 inputs.nul\nf156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 inputs-after.nul\n8766df908be5d8f628c3880af34ae761dd1c9c4946e8da08da3e566c8c0c788a bindings.nul\n465b69e2fe91bed30f7a7a4da4e00a3106d3e9fefaf33b5be91ce5b36530f334 output.log\na5d2105feb27bc129ec61b8ab1decfed0f9b1195ef5974710c5e4336a1936ef8 summary.txt\n"
+    },
+    "CAP-841-xkIIRp": {
+      "bytes": 8249,
+      "sha256": "b150ad3c2adee17324471b5021f9d78f292fabb354dcc1009742d11f71d50699",
+      "text": "== test-build-adapters.sh\n  ok   test_adapters_install_into_every_codex_home\n  ok   test_brief_modes\n  ok   test_codex_adapters_delegate_copilot_adapters_persona_pass\n  ok   test_degrades_without_policy_or_codex_home\n  ok   test_delegation_findings_artifact_present_and_shaped\n  ok   test_prune_respects_kit_marker_and_role_unmapping\n  ok   test_stage_kit_excludes_and_never_writes_through_a_host_models_yml\n  ok   test_stage_kit_failure_is_named_and_stays_in_the_sandbox\n  ok   test_stale_single_agent_claims_are_gone\n  ok   test_subagent_tomls_carry_identity_policy_and_persona\n  -- 10/10 passed\n== test-executable-bits.sh\n  ok   test_AC_011_every_kit_script_is_executable\n  ok   test_AC_011_ignored_local_scripts_do_not_decide_the_executable_check\n  -- 2/2 passed\n== test-gate-contracts.sh\n  ok   test_all_brief_modes\n  ok   test_all_overlay_defaults\n  ok   test_briefs_t010\n  ok   test_briefs_t011\n  ok   test_briefs_t012\n  ok   test_briefs_t013\n  ok   test_defaults_t006\n  ok   test_defaults_t007\n  ok   test_defaults_t008\n  ok   test_defaults_t009\n  ok   test_empty_record_directories_do_not_decide_the_002_tally\n  ok   test_ignored_local_overlays_and_personas_do_not_decide_the_checks\n  ok   test_ignored_local_scripts_do_not_reach_the_dispatch_grammar_kit\n  ok   test_ignored_local_scripts_do_not_reach_the_documented_workflow\n  ok   test_instruction_contracts\n  ok   test_invoker_protocol\n  ok   test_reports_and_tally\n  ok   test_review_scope_contracts\n  -- 18/18 passed\n== test-golden-example.sh\n  ok   test_golden_example_demonstrates_the_conventions\n  ok   test_golden_example_passes_sdd_analyze_with_zero_warnings\n  ok   test_stage_example_copies_only_enumerated_files\n  ok   test_stage_example_failure_is_named_and_stays_in_the_sandbox\n  ok   test_verification_golden\n  -- 5/5 passed\n== test-lib.sh\n  ok   test_expand_tilde\n  ok   test_fm_get_no_frontmatter_is_empty\n  ok   test_fm_get_reads_only_the_fence\n  ok   test_fm_list_inline_and_block\n  ok   test_fm_set_appends_missing_key_inside_fence\n  ok   test_fm_set_refuses_file_without_frontmatter\n  ok   test_fm_set_replaces_and_keeps_inline_comment\n  ok   test_registry_entries_parses_entries_in_any_field_order\n  ok   test_registry_path_for_expands_tilde\n  ok   test_spec_declared_repos\n  ok   test_usage_from_header\n  ok   test_yml_clean_hash_needs_preceding_space\n  ok   test_yml_get_and_list\n  -- 13/13 passed\n== test-model-policy.sh\n  ok   test_AC_008_usage_limit_policy_absent_and_present_defaults\n  ok   test_AC_008_usage_limit_policy_rejects_invalid_values\n  ok   test_AC_008_usage_limit_policy_set_unset_round_trip\n  ok   test_AC_008_usage_limit_policy_wizard_preserves_ordered_fallback\n  ok   test_AC_008_wizard_fixture_never_writes_through_a_host_models_yml\n  ok   test_claude_effort_whitelist_unchanged\n  ok   test_codex_sandbox_and_approval_policy_fields\n  ok   test_documented_codex_efforts_accepted\n  ok   test_junk_codex_effort_rejected\n  -- 9/9 passed\n== test-sdd-analyze.sh\n  ok   test_clean_fixture_is_consistent\n  ok   test_dangling_ref_fails\n  ok   test_duplicate_task_id_fails\n  ok   test_external_marker_must_be_mirrored_in_status\n  ok   test_gate_agent_placeholder_fails\n  ok   test_leftover_spec_directories_do_not_decide_the_shipped_loop\n  ok   test_missing_artifact_is_an_error\n  ok   test_missing_gate_agent_file_fails\n  ok   test_missing_verify_line_warns\n  ok   test_needs_clarification_blocks\n  ok   test_stray_repo_tags_without_umbrella_warn\n  ok   test_task_without_acceptance_fails\n  ok   test_ticked_box_without_evidence_warns\n  ok   test_umbrella_declared_repo_with_no_tasks_warns\n  ok   test_umbrella_tagged_tasks_pass\n  ok   test_umbrella_undeclared_repo_tag_fails\n  ok   test_umbrella_untagged_tasks_fail\n  ok   test_uncovered_ac_fails_and_gate_refs_do_not_count\n  ok   test_verification_bindings\n  -- 19/19 passed\n== test-spec-ac-coverage.sh\n  ok   test_all_acs_bound_passes\n  ok   test_default_root_is_the_git_toplevel\n  ok   test_extra_test_glob_extends_the_net\n  ok   test_longer_ids_do_not_satisfy_shorter_acs\n  ok   test_no_acs_in_spec_is_a_noop_not_a_crash\n  ok   test_root_path_containing_test_does_not_classify_everything\n  ok   test_spec_dir_itself_never_counts_as_coverage\n  ok   test_test_paths_with_spaces_are_counted\n  ok   test_unreferenced_ac_fails_referenced_ac_passes\n  -- 9/9 passed\n== test-spec-dispatch.sh\n  ok   test_repo_match_is_token_exact\n  ok   test_stage_umbrella_copies_only_enumerated_scripts\n  ok   test_stage_umbrella_failure_is_named_and_stays_in_the_sandbox\n  ok   test_undeclared_repo_refused_and_declared_accepted_past_the_guard\n  -- 4/4 passed\n== test-spec-gate.sh\n  ok   test_acceptance\n  ok   test_checkpoints\n  ok   test_floor\n  ok   test_floor_fixture_failure_is_named_and_stays_in_the_sandbox\n  ok   test_floor_fixture_stages_only_enumerated_scripts\n  ok   test_manual_acceptance\n  ok   test_prepared_before_recovery\n  ok   test_rounds\n  -- 8/8 passed\n== test-spec-run.sh\n  ok   test_bounded_capture\n  ok   test_failing_command_keeps_box_unticked_but_records\n  ok   test_key_flag_picks_the_evidence_line\n  ok   test_no_tick_captures_only\n  ok   test_passing_command_records_and_ticks\n  ok   test_usage_errors\n  -- 6/6 passed\n== test-spec-status.sh\n  ok   test_append_decision_adds_dated_entry_at_end_and_updates_frontmatter\n  ok   test_append_decision_refuses_duplicate_sections_without_mutation\n  ok   test_append_decision_refuses_missing_section_without_mutation\n  -- 3/3 passed\n== test-spec-task.sh\n  ok   test_done_rerun_replaces_evidence_not_duplicates\n  ok   test_done_with_evidence_is_one_atomic_edit\n  ok   test_done_without_evidence_is_refused\n  ok   test_follow_up_ids_never_match_their_parent\n  ok   test_gate_and_ship_tasks_are_exempt_from_evidence\n  ok   test_list_reports_id_state_stage_subject\n  ok   test_preformatted_evidence_is_not_double_wrapped\n  ok   test_start_marks_in_progress\n  ok   test_undo_unticks_but_keeps_evidence\n  ok   test_unknown_task_and_bad_usage\n  ok   test_versioned_done_guard\n  -- 11/11 passed\n== test-usage-limits.sh\n  ok   test_AC_001_classifies_every_planned_provider_limit_fixture\n  ok   test_AC_001_ordinary_failures_including_limit_word_are_none\n  ok   test_AC_002_pattern_table_is_the_only_provider_message_source_and_bash_32_safe\n  ok   test_AC_002_unparseable_horizon_is_unknown_and_bad_usage_is_refused\n  ok   test_AC_003_and_AC_007_codex_attempt_capture_classifies_and_stays_manual_without_policy\n  ok   test_AC_003_dispatch_fixture_copies_only_enumerated_scripts\n  ok   test_AC_003_fail_policy_is_manual_and_ordinary_dispatch_failures_keep_exit_six\n  ok   test_AC_004_and_AC_005_park_policy_replays_original_dispatch_once_per_retry\n  ok   test_AC_004_cron_add_list_and_remove_are_marked_and_idempotent\n  ok   test_AC_004_launchd_add_list_and_remove_are_one_shot_and_idempotent\n  ok   test_AC_005_generic_failure_marks_failed_and_list_cancel_reconcile_scheduler\n  ok   test_AC_005_repeat_limit_reparks_via_nested_dispatcher_and_stops_at_three\n  ok   test_AC_005_resume_replays_adversarial_argv_and_success_removes_unit\n  ok   test_AC_005_scheduler_remove_failure_releases_lock_and_retries_same_unit\n  ok   test_AC_006_and_AC_009_readiness_requires_binary_adapter_and_authentication\n  ok   test_AC_006_auth_checker_override_does_not_bypass_binary_or_adapter_checks\n  ok   test_AC_006_delegate_caps_three_attempts_and_parks_when_exhausted\n  ok   test_AC_006_delegate_classifies_only_the_current_attempt_slice\n  ok   test_AC_006_delegate_uses_ordered_ready_fallback_and_preserves_verification\n  ok   test_AC_009_doctor_fixture_excludes_machine_local_kit_files\n  ok   test_AC_009_doctor_reconciles_pending_failed_and_both_orphan_classes_without_models\n  ok   test_AC_009_doctor_reports_invalid_limit_policy_and_unready_fallbacks\n  ok   test_AC_010_documents_exact_limit_policy_keys_and_recovery_workflows\n  ok   test_T013o1_clock_only_horizons_follow_configured_park_policy\n  ok   test_T013o3_cancel_scheduler_remove_failure_releases_lock_and_recovers\n  ok   test_T013o4_replay_restores_the_parked_path_under_a_stock_scheduler_path\n  ok   test_T013o5_metadata_write_failure_releases_lock_and_unit_recovers\n  -- 27/27 passed\n== test-verification.sh\n  ok   test_capture_provenance\n  ok   test_config_grammar\n  ok   test_owned_transactions\n  -- 3/3 passed\n",
+      "meta": {
+        "version": "1",
+        "id": "CAP-841-xkIIRp",
+        "sequence": "841",
+        "kind": "command",
+        "start": "2026-10-29T10:03:42Z",
+        "end": "2026-10-29T10:33:49Z",
+        "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "check": "f9cc985eff1d2cee5949cda2003b859ac0606a4cd7da04ee1883351eca52a458",
+        "shell": "/bin/bash",
+        "input_before": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+        "input_after": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+        "no_tick": "1",
+        "exit": "0",
+        "output_digest": "b150ad3c2adee17324471b5021f9d78f292fabb354dcc1009742d11f71d50699",
+        "output_bytes": "8249",
+        "policy": "local",
+        "key": "  -- 3/3 passed"
+      },
+      "argv": [
+        "/bin/bash",
+        "-o",
+        "pipefail",
+        "-c",
+        "bash tests/run.sh"
+      ],
+      "seal": "verification:1\n42bc036df846ee9ad7587d7e0656fc3b26f4fd4221574d8e93cff22defcc6401 meta.nul\nb65a0a75b3ebdd391cacbb7766adc4c3246397b3ec2ff635fc832858fe86bf59 argv.nul\nf156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 inputs.nul\nf156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 inputs-after.nul\n8766df908be5d8f628c3880af34ae761dd1c9c4946e8da08da3e566c8c0c788a bindings.nul\nb150ad3c2adee17324471b5021f9d78f292fabb354dcc1009742d11f71d50699 output.log\n0fca1cab518f17d090f8ea40b86d1bc8be238d3fadaf3d7197a7da9a886ecf97 summary.txt\n"
+    },
+    "CAP-842-ygeARx": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "text": "",
+      "meta": {
+        "version": "1",
+        "id": "CAP-842-ygeARx",
+        "sequence": "842",
+        "kind": "command",
+        "start": "2026-10-29T10:34:31Z",
+        "end": "2026-10-29T10:35:04Z",
+        "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "check": "72567d3db511e085db7d73f9091525a8dec6b710cae1597a1d9695bc4a8eef49",
+        "shell": "/bin/bash",
+        "input_before": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+        "input_after": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+        "no_tick": "1",
+        "exit": "0",
+        "output_digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "output_bytes": "0",
+        "policy": "local",
+        "key": "(no output)"
+      },
+      "argv": [
+        "/bin/bash",
+        "-o",
+        "pipefail",
+        "-c",
+        "bash tests/shellcheck.sh"
+      ],
+      "seal": "verification:1\n091af4be757d8f431a46ed92a502c479feb3ff9ad2d84e2132f98cd8beddb99e meta.nul\n45a6d5fec01435d35bf4a18bbfafa8b0a894a677b31cb40eeac3511189acb18b argv.nul\nf156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 inputs.nul\nf156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 inputs-after.nul\n8766df908be5d8f628c3880af34ae761dd1c9c4946e8da08da3e566c8c0c788a bindings.nul\ne3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 output.log\n72d3ae417d9c210f719026b1cb9de1a6d8c441398a6c71d14ed2e083973bc023 summary.txt\n"
+    }
+  },
+  "rawFloorLog": "result=FLOOR-LxJkv3 source=f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 exit=0 executed=5 cache-hits=96 records=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/floors/FLOOR-LxJkv3/commands.nul\n",
+  "rawWrapperLog": "floor-preflight-free-bytes=15556235264 required=8589934592\nfloor attempt 1 exit=0\n{\"at\": \"2026-10-29T06:47:49.464661+00:00\", \"source\": \"f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0\", \"cwd\": \"/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline\", \"preflightPassed\": false, \"phase\": \"native-timed-argv-returned\", \"blocker\": \"Unchanged required helper rewrites preexisting frozen pack outputs, conflicting with explicit bytes/modes/mtimes preservation.\", \"helperSha256\": \"a5d40f648cefe6e55ba731053bfc0bb3272665e4d8dc4a8e0d6859a4225ff69b\", \"runnerSha256\": \"3298a2864a4f55b626c203b28c770ac905048af433d2c603c4ef40a30c95947e\", \"startedAt\": \"2026-10-29T06:52:24.572603+00:00\", \"wrapperPid\": 3762, \"power\": \"Now drawing from 'AC Power'\\n -InternalBattery-0 (id=23068771)\\t100%; charged; 0:00 remaining present: true\\n\", \"freeBytes\": 15571943424, \"timedArgv\": [\"/usr/bin/time\", \"-p\", \"-o\", \"/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s44-final-floorrun.time\", \"/bin/bash\", \"/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s44-final-floor.sh\", \"1\"], \"endedAt\": \"2026-10-29T10:35:44.753137+00:00\", \"exit\": 0, \"elapsedSeconds\": 13399.926596292}\n",
+  "rawTimedResult": "real 13399.99\nuser 6742.92\nsys 5446.79\n",
+  "rawHelperPreAndPost": "start=2026-10-29T06:52:52Z\n/dev/disk3s1s1   228Gi    12Gi    13Gi    48%    458k  136M    0%   /\ntotal = 1024.00M  used = 264.00M  free = 760.00M  (encrypted)\ncaptures-before=830\nfloor-latest-before=FLOOR-qoRY6H\nend=2026-10-29T10:35:31Z\ncaptures-after=835\nfloor-latest-after=FLOOR-LxJkv3\n/dev/disk3s1s1   228Gi    12Gi    22Gi    35%    458k  233M    0%   /\ntotal = 1024.00M  used = 256.00M  free = 768.00M  (encrypted)\n",
+  "rawSamples": "06:52:52Z avail=12.93GiB swap_used=264.00M power=AC Power/100%\n06:53:52Z avail=12.58GiB swap_used=264.00M power=AC Power/100%\n06:54:52Z avail=11.52GiB swap_used=264.00M power=AC Power/100%\n06:55:52Z avail=11.53GiB swap_used=264.00M power=AC Power/100%\n06:56:52Z avail=11.55GiB swap_used=264.00M power=AC Power/100%\n06:57:52Z avail=11.55GiB swap_used=264.00M power=AC Power/100%\n06:58:52Z avail=11.54GiB swap_used=264.00M power=AC Power/100%\n06:59:52Z avail=10.87GiB swap_used=264.00M power=AC Power/100%\n07:00:53Z avail=9.72GiB swap_used=264.00M power=AC Power/100%\n07:01:53Z avail=8.78GiB swap_used=264.00M power=AC Power/100%\n07:02:53Z avail=7.71GiB swap_used=264.00M power=AC Power/100%\n07:03:53Z avail=6.32GiB swap_used=264.00M power=AC Power/100%\n07:04:53Z avail=5.11GiB swap_used=264.00M power=AC Power/100%\n07:05:53Z avail=4.99GiB swap_used=264.00M power=AC Power/100%\n07:06:53Z avail=4.99GiB swap_used=264.00M power=AC Power/100%\n07:07:53Z avail=4.92GiB swap_used=264.00M power=AC Power/100%\n07:08:53Z avail=4.90GiB swap_used=264.00M power=AC Power/100%\n07:09:53Z avail=4.90GiB swap_used=264.00M power=AC Power/100%\n07:10:53Z avail=4.92GiB swap_used=264.00M power=AC Power/100%\n07:11:53Z avail=4.91GiB swap_used=264.00M power=AC Power/100%\n07:12:53Z avail=5.82GiB swap_used=264.00M power=AC Power/100%\n07:13:53Z avail=5.81GiB swap_used=264.00M power=AC Power/100%\n07:14:53Z avail=5.81GiB swap_used=264.00M power=AC Power/100%\n07:15:53Z avail=5.91GiB swap_used=264.00M power=AC Power/100%\n07:16:53Z avail=5.82GiB swap_used=264.00M power=AC Power/100%\n07:17:53Z avail=5.82GiB swap_used=264.00M power=AC Power/100%\n07:18:53Z avail=5.81GiB swap_used=264.00M power=AC Power/100%\n07:19:53Z avail=5.81GiB swap_used=264.00M power=AC Power/100%\n07:20:54Z avail=5.79GiB swap_used=264.00M power=AC Power/100%\n07:21:54Z avail=5.79GiB swap_used=264.00M power=AC Power/100%\n07:22:54Z avail=5.78GiB swap_used=264.00M power=AC Power/100%\n07:23:54Z avail=5.77GiB swap_used=264.00M power=AC Power/100%\n07:24:54Z avail=5.78GiB swap_used=264.00M power=AC Power/100%\n07:25:54Z avail=5.77GiB swap_used=264.00M power=AC Power/100%\n07:26:54Z avail=5.77GiB swap_used=264.00M power=AC Power/100%\n07:27:54Z avail=5.76GiB swap_used=264.00M power=AC Power/100%\n07:28:54Z avail=5.76GiB swap_used=264.00M power=AC Power/100%\n07:29:54Z avail=5.77GiB swap_used=264.00M power=AC Power/100%\n07:30:54Z avail=5.77GiB swap_used=264.00M power=AC Power/100%\n07:31:54Z avail=5.77GiB swap_used=264.00M power=AC Power/100%\n07:32:54Z avail=5.78GiB swap_used=264.00M power=AC Power/100%\n07:33:54Z avail=5.78GiB swap_used=264.00M power=AC Power/100%\n07:34:54Z avail=5.77GiB swap_used=264.00M power=AC Power/100%\n07:35:54Z avail=5.77GiB swap_used=264.00M power=AC Power/100%\n07:36:54Z avail=5.77GiB swap_used=264.00M power=AC Power/100%\n07:37:54Z avail=5.77GiB swap_used=264.00M power=AC Power/100%\n07:38:54Z avail=5.77GiB swap_used=264.00M power=AC Power/100%\n07:39:54Z avail=5.77GiB swap_used=264.00M power=AC Power/100%\n07:40:54Z avail=5.77GiB swap_used=264.00M power=AC Power/100%\n07:41:54Z avail=5.79GiB swap_used=264.00M power=AC Power/100%\n07:42:54Z avail=5.78GiB swap_used=264.00M power=AC Power/100%\n07:43:54Z avail=5.78GiB swap_used=264.00M power=AC Power/100%\n07:44:54Z avail=5.78GiB swap_used=264.00M power=AC Power/100%\n07:45:55Z avail=5.78GiB swap_used=264.00M power=AC Power/100%\n07:46:55Z avail=5.78GiB swap_used=256.00M power=AC Power/100%\n07:47:55Z avail=5.78GiB swap_used=256.00M power=AC Power/100%\n07:48:55Z avail=5.78GiB swap_used=256.00M power=AC Power/100%\n07:49:55Z avail=5.77GiB swap_used=256.00M power=AC Power/100%\n07:50:55Z avail=5.78GiB swap_used=256.00M power=AC Power/100%\n07:51:55Z avail=5.78GiB swap_used=256.00M power=AC Power/100%\n07:52:55Z avail=5.80GiB swap_used=256.00M power=AC Power/100%\n07:53:55Z avail=5.79GiB swap_used=256.00M power=AC Power/100%\n07:54:55Z avail=5.79GiB swap_used=256.00M power=AC Power/100%\n07:55:55Z avail=5.79GiB swap_used=256.00M power=AC Power/100%\n07:56:55Z avail=5.79GiB swap_used=256.00M power=AC Power/100%\n07:57:55Z avail=5.78GiB swap_used=256.00M power=AC Power/100%\n07:58:55Z avail=5.79GiB swap_used=256.00M power=AC Power/100%\n07:59:55Z avail=5.79GiB swap_used=256.00M power=AC Power/100%\n08:00:55Z avail=5.79GiB swap_used=256.00M power=AC Power/100%\n08:01:55Z avail=5.79GiB swap_used=256.00M power=AC Power/100%\n08:02:55Z avail=5.79GiB swap_used=256.00M power=AC Power/100%\n08:03:55Z avail=5.78GiB swap_used=256.00M power=AC Power/100%\n08:04:55Z avail=5.78GiB swap_used=256.00M power=AC Power/100%\n08:05:55Z avail=5.78GiB swap_used=256.00M power=AC Power/100%\n08:06:55Z avail=5.78GiB swap_used=256.00M power=AC Power/100%\n08:07:55Z avail=5.79GiB swap_used=256.00M power=AC Power/100%\n08:08:55Z avail=5.79GiB swap_used=256.00M power=AC Power/100%\n08:09:55Z avail=5.56GiB swap_used=256.00M power=AC Power/100%\n08:10:55Z avail=5.99GiB swap_used=256.00M power=AC Power/100%\n08:11:56Z avail=5.75GiB swap_used=256.00M power=AC Power/100%\n08:12:56Z avail=6.29GiB swap_used=256.00M power=AC Power/100%\n08:13:56Z avail=6.28GiB swap_used=256.00M power=AC Power/100%\n08:14:56Z avail=6.28GiB swap_used=256.00M power=AC Power/100%\n08:15:56Z avail=6.29GiB swap_used=256.00M power=AC Power/100%\n08:16:56Z avail=6.30GiB swap_used=256.00M power=AC Power/100%\n08:17:56Z avail=6.30GiB swap_used=256.00M power=AC Power/100%\n08:18:56Z avail=6.30GiB swap_used=256.00M power=AC Power/100%\n08:19:56Z avail=6.30GiB swap_used=256.00M power=AC Power/100%\n08:20:56Z avail=6.30GiB swap_used=256.00M power=AC Power/100%\n08:21:56Z avail=6.30GiB swap_used=256.00M power=AC Power/100%\n08:22:56Z avail=6.30GiB swap_used=256.00M power=AC Power/100%\n08:23:56Z avail=6.30GiB swap_used=256.00M power=AC Power/100%\n08:24:56Z avail=6.30GiB swap_used=256.00M power=AC Power/100%\n08:25:56Z avail=6.30GiB swap_used=256.00M power=AC Power/100%\n08:26:56Z avail=6.30GiB swap_used=256.00M power=AC Power/100%\n08:27:56Z avail=6.30GiB swap_used=256.00M power=AC Power/100%\n08:28:56Z avail=6.30GiB swap_used=256.00M power=AC Power/100%\n08:29:56Z avail=6.30GiB swap_used=256.00M power=AC Power/100%\n08:30:56Z avail=6.29GiB swap_used=256.00M power=AC Power/100%\n08:31:56Z avail=6.30GiB swap_used=256.00M power=AC Power/100%\n08:32:56Z avail=6.30GiB swap_used=256.00M power=AC Power/100%\n08:33:56Z avail=6.30GiB swap_used=256.00M power=AC Power/100%\n08:34:56Z avail=6.30GiB swap_used=256.00M power=AC Power/100%\n08:35:56Z avail=24.66GiB swap_used=256.00M power=AC Power/100%\n08:36:56Z avail=24.47GiB swap_used=256.00M power=AC Power/100%\n08:37:56Z avail=24.48GiB swap_used=256.00M power=AC Power/100%\n08:38:57Z avail=24.48GiB swap_used=256.00M power=AC Power/100%\n08:39:57Z avail=24.49GiB swap_used=256.00M power=AC Power/100%\n08:40:57Z avail=24.49GiB swap_used=256.00M power=AC Power/100%\n08:41:57Z avail=24.48GiB swap_used=256.00M power=AC Power/100%\n08:42:57Z avail=24.47GiB swap_used=256.00M power=Battery Power/100%\n08:43:57Z avail=24.48GiB swap_used=256.00M power=Battery Power/100%\n08:44:57Z avail=24.47GiB swap_used=256.00M power=Battery Power/100%\n08:45:57Z avail=24.47GiB swap_used=256.00M power=Battery Power/100%\n08:46:57Z avail=24.47GiB swap_used=256.00M power=Battery Power/100%\n08:47:57Z avail=24.47GiB swap_used=256.00M power=Battery Power/100%\n08:48:57Z avail=24.47GiB swap_used=256.00M power=Battery Power/100%\n08:49:57Z avail=24.46GiB swap_used=256.00M power=Battery Power/100%\n08:50:57Z avail=24.46GiB swap_used=256.00M power=Battery Power/100%\n08:51:57Z avail=24.43GiB swap_used=256.00M power=Battery Power/100%\n08:52:57Z avail=24.44GiB swap_used=256.00M power=Battery Power/99%\n08:53:57Z avail=24.43GiB swap_used=256.00M power=Battery Power/99%\n08:54:57Z avail=24.43GiB swap_used=256.00M power=Battery Power/99%\n08:55:57Z avail=24.43GiB swap_used=256.00M power=Battery Power/99%\n08:56:57Z avail=24.43GiB swap_used=256.00M power=Battery Power/98%\n08:57:57Z avail=24.43GiB swap_used=256.00M power=Battery Power/98%\n08:58:57Z avail=24.43GiB swap_used=256.00M power=Battery Power/98%\n08:59:58Z avail=24.42GiB swap_used=256.00M power=Battery Power/97%\n09:00:58Z avail=24.43GiB swap_used=256.00M power=Battery Power/97%\n09:01:58Z avail=24.43GiB swap_used=256.00M power=Battery Power/97%\n09:02:58Z avail=24.43GiB swap_used=256.00M power=Battery Power/96%\n09:03:58Z avail=24.43GiB swap_used=256.00M power=Battery Power/96%\n09:04:58Z avail=24.42GiB swap_used=256.00M power=Battery Power/96%\n09:05:58Z avail=24.42GiB swap_used=256.00M power=Battery Power/96%\n09:06:58Z avail=24.41GiB swap_used=256.00M power=Battery Power/95%\n09:07:58Z avail=24.42GiB swap_used=256.00M power=Battery Power/95%\n09:08:58Z avail=24.42GiB swap_used=256.00M power=Battery Power/95%\n09:09:58Z avail=24.42GiB swap_used=256.00M power=Battery Power/94%\n09:10:58Z avail=24.42GiB swap_used=256.00M power=Battery Power/94%\n09:11:58Z avail=24.31GiB swap_used=256.00M power=Battery Power/94%\n09:12:58Z avail=23.66GiB swap_used=256.00M power=Battery Power/93%\n09:13:58Z avail=23.64GiB swap_used=256.00M power=Battery Power/93%\n09:14:58Z avail=23.64GiB swap_used=256.00M power=Battery Power/92%\n09:15:58Z avail=23.64GiB swap_used=256.00M power=Battery Power/92%\n09:16:58Z avail=23.64GiB swap_used=256.00M power=Battery Power/92%\n09:17:58Z avail=23.64GiB swap_used=256.00M power=Battery Power/91%\n09:18:58Z avail=23.64GiB swap_used=256.00M power=Battery Power/91%\n09:19:58Z avail=23.64GiB swap_used=256.00M power=Battery Power/91%\n09:20:58Z avail=23.63GiB swap_used=256.00M power=Battery Power/91%\n09:21:58Z avail=23.63GiB swap_used=256.00M power=Battery Power/90%\n09:22:58Z avail=23.64GiB swap_used=256.00M power=Battery Power/90%\n09:23:58Z avail=23.61GiB swap_used=256.00M power=Battery Power/90%\n09:24:58Z avail=23.61GiB swap_used=256.00M power=Battery Power/89%\n09:25:58Z avail=23.61GiB swap_used=256.00M power=Battery Power/89%\n09:26:59Z avail=23.60GiB swap_used=256.00M power=Battery Power/89%\n09:27:59Z avail=23.61GiB swap_used=256.00M power=Battery Power/88%\n09:28:59Z avail=23.61GiB swap_used=256.00M power=Battery Power/88%\n09:29:59Z avail=23.61GiB swap_used=256.00M power=Battery Power/88%\n09:30:59Z avail=23.61GiB swap_used=256.00M power=Battery Power/88%\n09:31:59Z avail=23.61GiB swap_used=256.00M power=Battery Power/87%\n09:32:59Z avail=23.62GiB swap_used=256.00M power=Battery Power/87%\n09:33:59Z avail=23.62GiB swap_used=256.00M power=Battery Power/87%\n09:34:59Z avail=23.61GiB swap_used=256.00M power=Battery Power/86%\n09:35:59Z avail=23.61GiB swap_used=256.00M power=Battery Power/86%\n09:36:59Z avail=23.61GiB swap_used=256.00M power=Battery Power/86%\n09:37:59Z avail=23.61GiB swap_used=256.00M power=Battery Power/85%\n09:38:59Z avail=23.60GiB swap_used=256.00M power=Battery Power/85%\n09:39:59Z avail=23.61GiB swap_used=256.00M power=Battery Power/85%\n09:40:59Z avail=23.60GiB swap_used=256.00M power=Battery Power/84%\n09:41:59Z avail=23.62GiB swap_used=256.00M power=Battery Power/84%\n09:42:59Z avail=23.62GiB swap_used=256.00M power=Battery Power/84%\n09:43:59Z avail=23.62GiB swap_used=256.00M power=Battery Power/84%\n09:44:59Z avail=23.62GiB swap_used=256.00M power=Battery Power/83%\n09:45:59Z avail=23.62GiB swap_used=256.00M power=Battery Power/83%\n09:46:59Z avail=23.62GiB swap_used=256.00M power=Battery Power/83%\n09:47:59Z avail=23.61GiB swap_used=256.00M power=Battery Power/82%\n09:48:59Z avail=23.61GiB swap_used=256.00M power=Battery Power/82%\n09:49:59Z avail=23.63GiB swap_used=256.00M power=Battery Power/82%\n09:50:59Z avail=23.63GiB swap_used=256.00M power=Battery Power/81%\n09:51:59Z avail=23.63GiB swap_used=256.00M power=Battery Power/81%\n09:53:00Z avail=23.63GiB swap_used=256.00M power=Battery Power/81%\n09:54:00Z avail=23.63GiB swap_used=256.00M power=Battery Power/80%\n09:55:00Z avail=23.63GiB swap_used=256.00M power=Battery Power/80%\n09:56:00Z avail=23.62GiB swap_used=256.00M power=Battery Power/80%\n09:57:00Z avail=23.63GiB swap_used=256.00M power=Battery Power/80%\n09:58:00Z avail=23.63GiB swap_used=256.00M power=Battery Power/79%\n09:59:00Z avail=23.62GiB swap_used=256.00M power=Battery Power/79%\n10:00:00Z avail=23.62GiB swap_used=256.00M power=Battery Power/79%\n10:01:00Z avail=23.63GiB swap_used=256.00M power=Battery Power/78%\n10:02:00Z avail=23.63GiB swap_used=256.00M power=Battery Power/78%\n10:03:00Z avail=23.63GiB swap_used=256.00M power=Battery Power/78%\n10:04:00Z avail=23.67GiB swap_used=256.00M power=Battery Power/77%\n10:05:00Z avail=23.66GiB swap_used=256.00M power=Battery Power/77%\n10:06:00Z avail=23.66GiB swap_used=256.00M power=Battery Power/77%\n10:07:00Z avail=23.66GiB swap_used=256.00M power=Battery Power/76%\n10:08:00Z avail=23.66GiB swap_used=256.00M power=Battery Power/76%\n10:09:00Z avail=23.67GiB swap_used=256.00M power=Battery Power/76%\n10:10:00Z avail=23.66GiB swap_used=256.00M power=Battery Power/75%\n10:11:00Z avail=23.67GiB swap_used=256.00M power=Battery Power/75%\n10:12:00Z avail=22.88GiB swap_used=256.00M power=Battery Power/74%\n10:13:00Z avail=23.04GiB swap_used=256.00M power=Battery Power/74%\n10:14:00Z avail=22.08GiB swap_used=256.00M power=Battery Power/72%\n10:15:00Z avail=21.82GiB swap_used=256.00M power=Battery Power/72%\n10:16:00Z avail=22.28GiB swap_used=256.00M power=Battery Power/72%\n10:17:00Z avail=22.28GiB swap_used=256.00M power=Battery Power/71%\n10:18:01Z avail=22.28GiB swap_used=256.00M power=Battery Power/71%\n10:19:01Z avail=22.28GiB swap_used=256.00M power=Battery Power/71%\n10:20:01Z avail=22.27GiB swap_used=256.00M power=Battery Power/70%\n10:21:01Z avail=22.27GiB swap_used=256.00M power=Battery Power/70%\n10:22:01Z avail=22.28GiB swap_used=256.00M power=Battery Power/70%\n10:23:01Z avail=22.28GiB swap_used=256.00M power=Battery Power/70%\n10:24:01Z avail=22.28GiB swap_used=256.00M power=Battery Power/69%\n10:25:01Z avail=22.28GiB swap_used=256.00M power=Battery Power/69%\n10:26:01Z avail=22.27GiB swap_used=256.00M power=Battery Power/69%\n10:27:01Z avail=22.27GiB swap_used=256.00M power=Battery Power/68%\n10:28:01Z avail=22.26GiB swap_used=256.00M power=Battery Power/68%\n10:29:01Z avail=22.26GiB swap_used=256.00M power=Battery Power/68%\n10:30:01Z avail=22.27GiB swap_used=256.00M power=Battery Power/67%\n10:31:01Z avail=22.27GiB swap_used=256.00M power=Battery Power/67%\n10:32:01Z avail=22.27GiB swap_used=256.00M power=Battery Power/67%\n10:33:01Z avail=22.26GiB swap_used=256.00M power=Battery Power/66%\n10:34:01Z avail=22.26GiB swap_used=256.00M power=Battery Power/66%\n10:35:01Z avail=22.26GiB swap_used=256.00M power=Battery Power/66%\n10:35:31Z avail=22.26GiB swap_used=256.00M power=Battery Power/65%\nfloor returned; rc file: 0\n",
+  "bindingBefore": {
+    "source": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+    "tree": "c68b9a3ab0c39c555d5cb28afa6420cd9a2600b7",
+    "parent": "2049f65960cc91e9e30bbd5ff1e11fc0fdf7cbd9",
+    "source_files": 177,
+    "harness_records": 8,
+    "document_records": 4,
+    "mapping": "PASS",
+    "parent_index": "PASS",
+    "head_index": "UNCHANGED",
+    "tree_modes": {
+      "100644": 20143,
+      "100755": 80,
+      "120000": 1
+    },
+    "state_after": {
+      "head": "2049f65960cc91e9e30bbd5ff1e11fc0fdf7cbd9",
+      "index_path": "/Users/babar/projects/sdd-kit-public/.git/worktrees/003-gate-round-reduction-and-token-discipline/index",
+      "index_sha256": "c492d7ea95abf8e8c335001f20c62ff50bc6f1e2179d7a07d30811181b3dd700",
+      "index_bytes": 2200525,
+      "index_mtime_ns": 1792957592613445716,
+      "head_file_sha256": "36b441e5337734d73e547a921b682069ccd54788152cff695f469a8e54e84134",
+      "head_file_mtime_ns": 1788654328953442318,
+      "refs_sha256": "6464016d4181a924a884c63f283a4a793c3df76878a56d6e9811201e932b3a41"
+    },
+    "global_refs_changed_since_baseline": true
+  },
+  "bindingAfter": {
+    "source": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+    "tree": "c68b9a3ab0c39c555d5cb28afa6420cd9a2600b7",
+    "parent": "2049f65960cc91e9e30bbd5ff1e11fc0fdf7cbd9",
+    "source_files": 177,
+    "harness_records": 8,
+    "document_records": 4,
+    "mapping": "PASS",
+    "parent_index": "PASS",
+    "head_index": "UNCHANGED",
+    "tree_modes": {
+      "100644": 20143,
+      "100755": 80,
+      "120000": 1
+    },
+    "state_after": {
+      "head": "2049f65960cc91e9e30bbd5ff1e11fc0fdf7cbd9",
+      "index_path": "/Users/babar/projects/sdd-kit-public/.git/worktrees/003-gate-round-reduction-and-token-discipline/index",
+      "index_sha256": "c492d7ea95abf8e8c335001f20c62ff50bc6f1e2179d7a07d30811181b3dd700",
+      "index_bytes": 2200525,
+      "index_mtime_ns": 1792957592613445716,
+      "head_file_sha256": "36b441e5337734d73e547a921b682069ccd54788152cff695f469a8e54e84134",
+      "head_file_mtime_ns": 1788654328953442318,
+      "refs_sha256": "6464016d4181a924a884c63f283a4a793c3df76878a56d6e9811201e932b3a41"
+    },
+    "global_refs_changed_since_baseline": true
+  },
+  "actualFloorExit": 0,
+  "actualWrapperExit": 0,
+  "phaseCompleted": {
+    "at": "2026-10-29T06:47:49.464661+00:00",
+    "source": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "preflightPassed": false,
+    "phase": "native-timed-argv-returned",
+    "blocker": "Unchanged required helper rewrites preexisting frozen pack outputs, conflicting with explicit bytes/modes/mtimes preservation.",
+    "helperSha256": "a5d40f648cefe6e55ba731053bfc0bb3272665e4d8dc4a8e0d6859a4225ff69b",
+    "runnerSha256": "3298a2864a4f55b626c203b28c770ac905048af433d2c603c4ef40a30c95947e",
+    "startedAt": "2026-10-29T06:52:24.572603+00:00",
+    "wrapperPid": 3762,
+    "power": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=23068771)\t100%; charged; 0:00 remaining present: true\n",
+    "freeBytes": 15571943424,
+    "timedArgv": [
+      "/usr/bin/time",
+      "-p",
+      "-o",
+      "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s44-final-floorrun.time",
+      "/bin/bash",
+      "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s44-final-floor.sh",
+      "1"
+    ],
+    "endedAt": "2026-10-29T10:35:44.753137+00:00",
+    "exit": 0,
+    "elapsedSeconds": 13399.926596292
+  },
+  "nativeAwait": {
+    "at": "2026-10-29T10:35:44.758016+00:00",
+    "runnerPid": 3762,
+    "returncode": 0,
+    "observerWaitSeconds": 13399.987625791999
+  },
+  "kernelValidatorOrExtraSuiteInvoked": false
+}

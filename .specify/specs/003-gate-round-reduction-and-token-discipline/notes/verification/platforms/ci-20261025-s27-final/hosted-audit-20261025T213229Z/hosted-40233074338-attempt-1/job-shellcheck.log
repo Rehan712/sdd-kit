@@ -1,0 +1,141 @@
+﻿2026-10-25T20:56:03.7457805Z Current runner version: '2.338.0'
+2026-10-25T20:56:03.7483676Z ##[group]Runner Image Provisioner
+2026-10-25T20:56:03.7484857Z Hosted Compute Agent
+2026-10-25T20:56:03.7485706Z Version: 20261021.618
+2026-10-25T20:56:03.7486381Z Commit: 21505ad2541d5be6135ed84fc33697146cf75b8e
+2026-10-25T20:56:03.7487202Z Build Date: 2026-10-21T00:45:21Z
+2026-10-25T20:56:03.7487899Z Worker ID: {ea2eac51-4eb1-4824-b0f1-308be89c43c3}
+2026-10-25T20:56:03.7488645Z Region: northcentralus
+2026-10-25T20:56:03.7489294Z Cloud: Azure
+2026-10-25T20:56:03.7489826Z ##[endgroup]
+2026-10-25T20:56:03.7491716Z ##[group]Operating System
+2026-10-25T20:56:03.7492878Z Ubuntu
+2026-10-25T20:56:03.7493429Z 24.04.5
+2026-10-25T20:56:03.7494030Z LTS
+2026-10-25T20:56:03.7494545Z ##[endgroup]
+2026-10-25T20:56:03.7495136Z ##[group]Runner Image
+2026-10-25T20:56:03.7495746Z Image: ubuntu-24.04
+2026-10-25T20:56:03.7496344Z Version: 20261012.334.1
+2026-10-25T20:56:03.7497678Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261012.334/images/ubuntu/Ubuntu2404-Readme.md
+2026-10-25T20:56:03.7499310Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261012.334
+2026-10-25T20:56:03.7500305Z ##[endgroup]
+2026-10-25T20:56:03.7501586Z ##[group]GITHUB_TOKEN Permissions
+2026-10-25T20:56:03.7503978Z Contents: read
+2026-10-25T20:56:03.7504594Z Metadata: read
+2026-10-25T20:56:03.7505257Z Packages: read
+2026-10-25T20:56:03.7505856Z ##[endgroup]
+2026-10-25T20:56:03.7508039Z Secret source: Actions
+2026-10-25T20:56:03.7509035Z Cache mode: write
+2026-10-25T20:56:03.7509939Z Prepare workflow directory
+2026-10-25T20:56:03.7905769Z Prepare all required actions
+2026-10-25T20:56:03.7976824Z Getting action download info
+2026-10-25T20:56:04.0439796Z Download action repository 'actions/checkout@v5' (SHA:fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09)
+2026-10-25T20:56:04.2429543Z Complete job name: shellcheck
+2026-10-25T20:56:04.3187134Z ##[group]Run actions/checkout@v5
+2026-10-25T20:56:04.3188035Z with:
+2026-10-25T20:56:04.3188480Z   repository: Rehan712/sdd-kit
+2026-10-25T20:56:04.3192715Z   token: ***
+2026-10-25T20:56:04.3193171Z   ssh-strict: true
+2026-10-25T20:56:04.3193619Z   ssh-user: git
+2026-10-25T20:56:04.3194065Z   persist-credentials: true
+2026-10-25T20:56:04.3194589Z   clean: true
+2026-10-25T20:56:04.3195030Z   sparse-checkout-cone-mode: true
+2026-10-25T20:56:04.3195647Z   fetch-depth: 1
+2026-10-25T20:56:04.3196078Z   fetch-tags: false
+2026-10-25T20:56:04.3196523Z   show-progress: true
+2026-10-25T20:56:04.3196967Z   lfs: false
+2026-10-25T20:56:04.3197376Z   submodules: false
+2026-10-25T20:56:04.3197831Z   set-safe-directory: true
+2026-10-25T20:56:04.3198337Z   allow-unsafe-pr-checkout: false
+2026-10-25T20:56:04.3199153Z ##[endgroup]
+2026-10-25T20:56:04.4197311Z Syncing repository: Rehan712/sdd-kit
+2026-10-25T20:56:04.4199960Z ##[group]Getting Git version info
+2026-10-25T20:56:04.4201166Z Working directory is '/home/runner/work/sdd-kit/sdd-kit'
+2026-10-25T20:56:04.4203031Z [command]/usr/bin/git version
+2026-10-25T20:56:04.4275773Z git version 2.55.0
+2026-10-25T20:56:04.4301551Z ##[endgroup]
+2026-10-25T20:56:04.4320086Z Temporarily overriding HOME='/home/runner/work/_temp/b31e8403-d98a-49d3-9293-d5cca36be4fa' before making global git config changes
+2026-10-25T20:56:04.4323337Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-25T20:56:04.4326345Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/sdd-kit/sdd-kit
+2026-10-25T20:56:04.4379812Z Deleting the contents of '/home/runner/work/sdd-kit/sdd-kit'
+2026-10-25T20:56:04.4384033Z ##[group]Initializing the repository
+2026-10-25T20:56:04.4387836Z [command]/usr/bin/git init /home/runner/work/sdd-kit/sdd-kit
+2026-10-25T20:56:04.4497174Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-10-25T20:56:04.4499136Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-10-25T20:56:04.4501102Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-10-25T20:56:04.4503717Z hint: call:
+2026-10-25T20:56:04.4504807Z hint:
+2026-10-25T20:56:04.4506116Z hint: 	git config --global init.defaultBranch <name>
+2026-10-25T20:56:04.4507473Z hint:
+2026-10-25T20:56:04.4508877Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-10-25T20:56:04.4510740Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-10-25T20:56:04.4512321Z hint:
+2026-10-25T20:56:04.4513069Z hint: 	git branch -m <name>
+2026-10-25T20:56:04.4513884Z hint:
+2026-10-25T20:56:04.4514976Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-10-25T20:56:04.4516327Z Initialized empty Git repository in /home/runner/work/sdd-kit/sdd-kit/.git/
+2026-10-25T20:56:04.4520132Z [command]/usr/bin/git remote add origin https://github.com/Rehan712/sdd-kit
+2026-10-25T20:56:04.4570550Z ##[endgroup]
+2026-10-25T20:56:04.4571916Z ##[group]Disabling automatic garbage collection
+2026-10-25T20:56:04.4576065Z [command]/usr/bin/git config --local gc.auto 0
+2026-10-25T20:56:04.4608426Z ##[endgroup]
+2026-10-25T20:56:04.4609786Z ##[group]Setting up auth
+2026-10-25T20:56:04.4616694Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-25T20:56:04.4658178Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-25T20:56:04.5045176Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-25T20:56:04.5083581Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-25T20:56:04.5309601Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-25T20:56:04.5346270Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-25T20:56:04.5571671Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-10-25T20:56:04.5614511Z ##[endgroup]
+2026-10-25T20:56:04.5615465Z ##[group]Fetching the repository
+2026-10-25T20:56:04.5624909Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +13ffb1ebb4439eb9c8fd47585b6d8d10f45dba0c:refs/remotes/pull/21/merge
+2026-10-25T20:56:05.6560689Z From https://github.com/Rehan712/sdd-kit
+2026-10-25T20:56:05.6563944Z  * [new ref]         13ffb1ebb4439eb9c8fd47585b6d8d10f45dba0c -> pull/21/merge
+2026-10-25T20:56:05.6567861Z ##[endgroup]
+2026-10-25T20:56:05.6569612Z ##[group]Determining the checkout info
+2026-10-25T20:56:05.6571144Z ##[endgroup]
+2026-10-25T20:56:05.6573677Z [command]/usr/bin/git sparse-checkout disable
+2026-10-25T20:56:05.6637538Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-10-25T20:56:05.6672672Z ##[group]Checking out the ref
+2026-10-25T20:56:05.6676568Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/21/merge
+2026-10-25T20:56:06.5485030Z Note: switching to 'refs/remotes/pull/21/merge'.
+2026-10-25T20:56:06.5486707Z 
+2026-10-25T20:56:06.5487138Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-10-25T20:56:06.5488140Z changes and commit them, and you can discard any commits you make in this
+2026-10-25T20:56:06.5489066Z state without impacting any branches by switching back to a branch.
+2026-10-25T20:56:06.5489612Z 
+2026-10-25T20:56:06.5490000Z If you want to create a new branch to retain commits you create, you may
+2026-10-25T20:56:06.5490845Z do so (now or later) by using -c with the switch command. Example:
+2026-10-25T20:56:06.5491318Z 
+2026-10-25T20:56:06.5491536Z   git switch -c <new-branch-name>
+2026-10-25T20:56:06.5492240Z 
+2026-10-25T20:56:06.5492502Z Or undo this operation with:
+2026-10-25T20:56:06.5492835Z 
+2026-10-25T20:56:06.5493760Z   git switch -
+2026-10-25T20:56:06.5494221Z 
+2026-10-25T20:56:06.5494753Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-10-25T20:56:06.5495346Z 
+2026-10-25T20:56:06.5496022Z HEAD is now at 13ffb1e Merge 5aee77672d03a2c7811e28e55172817da6dee012 into f4a0e4e31df29b53ccb9e088d3b8d0cd58f8e12f
+2026-10-25T20:56:06.5533687Z ##[endgroup]
+2026-10-25T20:56:06.5580566Z [command]/usr/bin/git log -1 --format=%H
+2026-10-25T20:56:06.5608308Z 13ffb1ebb4439eb9c8fd47585b6d8d10f45dba0c
+2026-10-25T20:56:06.5833336Z ##[group]Run bash tests/shellcheck.sh
+2026-10-25T20:56:06.5833816Z [36;1mbash tests/shellcheck.sh[0m
+2026-10-25T20:56:06.6093806Z shell: /usr/bin/bash -e {0}
+2026-10-25T20:56:06.6094297Z ##[endgroup]
+2026-10-25T20:57:03.3081470Z Post job cleanup.
+2026-10-25T20:57:03.3962998Z [command]/usr/bin/git version
+2026-10-25T20:57:03.4009461Z git version 2.55.0
+2026-10-25T20:57:03.4054998Z Temporarily overriding HOME='/home/runner/work/_temp/edf375f4-ebde-4aba-92d7-e55c2b54f3f1' before making global git config changes
+2026-10-25T20:57:03.4056217Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-25T20:57:03.4060980Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/sdd-kit/sdd-kit
+2026-10-25T20:57:03.4103576Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-25T20:57:03.4141532Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-25T20:57:03.4420783Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-25T20:57:03.4448178Z http.https://github.com/.extraheader
+2026-10-25T20:57:03.4460761Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-10-25T20:57:03.4497485Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-25T20:57:03.4798827Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-25T20:57:03.4844564Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-25T20:57:03.5255205Z Cleaning up orphan processes

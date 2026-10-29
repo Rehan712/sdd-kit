@@ -1,0 +1,37 @@
+{
+  "recordedAt": "2026-10-28T10:37:58.639Z",
+  "actualInvocation": {
+    "taskId": "node:delegated-task:command%3Amcp%3A1f3cd44c-e930-4955-b272-b45788f5db02%3Adelegate-task%3Asdd003-s36-fixture-portability-verification-current-provider-high-r1",
+    "childThreadId": "thread:delegated-task:command%3Amcp%3A1f3cd44c-e930-4955-b272-b45788f5db02%3Adelegate-task%3Asdd003-s36-fixture-portability-verification-current-provider-high-r1",
+    "link": "[Spec 003 fixture portability verification and fresh capture \u00b7 sol HIGH](t3-thread://v1/thread:delegated-task:command%3Amcp%3A1f3cd44c-e930-4955-b272-b45788f5db02%3Adelegate-task%3Asdd003-s36-fixture-portability-verification-current-provider-high-r1)",
+    "childRunId": "run:thread:thread%3Adelegated-task%3Acommand%253Amcp%253A1f3cd44c-e930-4955-b272-b45788f5db02%253Adelegate-task%253Asdd003-s36-fixture-portability-verification-current-provider-high-r1:ordinal:1",
+    "childNodeId": "node:delegated-task:command%3Amcp%3A1f3cd44c-e930-4955-b272-b45788f5db02%3Adelegate-task%3Asdd003-s36-fixture-portability-verification-current-provider-high-r1",
+    "status": "running",
+    "workState": "working",
+    "hasPendingChildRuns": false,
+    "latestTerminalRunId": null,
+    "latestTerminalStatus": null,
+    "latestTerminalSummary": null,
+    "latestTerminalResultContextTransferId": null,
+    "providerInstanceId": "codex_codex_gym",
+    "model": "gpt-6.1-sol",
+    "options": [
+      {
+        "id": "reasoningEffort",
+        "value": "high"
+      },
+      {
+        "id": "serviceTier",
+        "value": "default"
+      }
+    ],
+    "summary": null,
+    "resultContextTransferId": null,
+    "hasPendingQuestion": false,
+    "pendingApproval": null,
+    "waitTimedOut": true,
+    "next": "Completion wakes this thread, so end your turn. Do not wait on it or poll it."
+  },
+  "selectionVerified": true,
+  "scope": "Fixture verification and one genuine no-tick capture only; no acceptance/CI/floor/gate/source edits"
+}

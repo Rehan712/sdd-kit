@@ -1,0 +1,36 @@
+{
+  "at": "2026-10-29T06:46:44.416056+00:00",
+  "reason": "UNCHANGED_REQUIRED_HELPER_WRITES_PROTECTED_FROZEN_PACK",
+  "helperBindingCallCount": 2,
+  "writeSites": [
+    {
+      "path": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s38/verify-prepublish.sh",
+      "line": 11,
+      "text": "source_id=\"$(vf_snapshot \"$s\" \"$PWD\" \"$PWD\" \"$out/inputs-after.nul\")\""
+    },
+    {
+      "path": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s38/verify-prepublish.sh",
+      "line": 114,
+      "text": "(owned / 'verification-final.json').write_text(json.dumps(result, indent=2) + '\\n')"
+    }
+  ],
+  "protectedExistingOutputs": {
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s38/inputs-after.nul": {
+      "mode": "0o644",
+      "mtime_ns": 1793219745465292032,
+      "size": 46619,
+      "kind": "file",
+      "sha256": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s38/verification-final.json": {
+      "mode": "0o644",
+      "mtime_ns": 1793219746214786634,
+      "size": 1054,
+      "kind": "file",
+      "sha256": "7194964f27012e472a3c328c2dd3126f989e07f8d6de9dc3a411416201229337"
+    }
+  },
+  "constraint": "Preserve all preexisting files bytes/modes/mtimes and frozen pack unchanged; allowed writes do not include these pack outputs.",
+  "floorLaunched": false,
+  "helperInvocations": 0
+}

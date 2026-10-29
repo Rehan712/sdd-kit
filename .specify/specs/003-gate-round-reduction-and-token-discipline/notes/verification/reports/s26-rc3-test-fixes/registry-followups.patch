@@ -1,0 +1,71 @@
+--- a/.specify/specs/003-gate-round-reduction-and-token-discipline/plan.md
++++ b/.specify/specs/003-gate-round-reduction-and-token-discipline/plan.md
+@@ -495,12 +495,12 @@
+ | FM-002 | A, E | regression | Legacy/golden spec or regenerated adapter loses its contract | Legacy analyzer stays green; golden/new examples have zero warnings; modes retained | authoring, guidance |
+ | FM-003 | A | concurrency/ordering | Plan has no tasks yet; local tests deferred to future Tests task | Planning valid without task numbers; task handoff rejects gaps and warns on deferred local proof | authoring |
+ | FM-004 | A | partial failure | Worker brief omits/conflicts with an existing decision | Supply missing slice first; new decision returns to plan; bounded escalation | guidance, wiring |
+-| FM-005 | A, B, E | state/data integrity | Spec/plan/Verify changes after briefing/capture | Refresh brief and proof; manual/static relabel cannot bypass automated criterion | provenance, acceptance, guidance |
++| FM-005 | A, B, E | state/data integrity | Spec/plan/Verify changes after briefing/capture | Refresh brief and proof; manual/static relabel cannot bypass automated criterion | provenance, acceptance, reports, guidance |
+ | FM-006 | B, C | boundary | Spaces/quotes/pipeline/control bytes/large output or wrong return IDs | Lossless execution; exact binding validation; bounded escaped display with raw log | capture, config, acceptance |
+ | FM-007 | B, C, D | concurrency/ordering | Competing writers, foreign lock, edit during verification | Owner-only lock cleanup; stable batch barrier; changed-input proof refused | provenance, transactions, wiring |
+ | FM-008 | B, C | partial failure | Nonzero command, signal, disk/publish failure, incomplete capture | Preserve command exit; no complete proof/tick; retain diagnosable interrupted state | capture, transactions |
+ | FM-009 | B | regression | Existing --key/default argv/no-tick or legacy done usage | Preserve legacy semantics; summary additive; new non-exempt tick uses acceptance | capture, acceptance |
+-| FM-010 | B, D | state/data integrity | Tampered/old log, stale source/tool/env, later failed run, forged return | Integrity/freshness checked independently; reject reuse/current PASS and invalid acceptance | provenance, acceptance |
++| FM-010 | B, D | state/data integrity | Tampered/old log, stale source/tool/env, later failed run, forged return | Integrity/freshness checked independently; reject reuse/current PASS and invalid acceptance | provenance, acceptance, reports |
+ | FM-011 | C | boundary | Missing gate list, malformed YAML, unknown stage or wrong worktree | Named configuration failure; legacy warning does not clear floor; no main-checkout fallback | config, floor |
+ | FM-012 | C | concurrency/ordering | Same command across stages/gates/repos; stage not finished | Only exact valid identity deduplicates; checkpoint runs after completed batch | floor, checkpoints |
+ | FM-013 | C | partial failure | Checker/checkpoint/pipeline fails | Real nonzero exit, gate/next-stage invocation count remains zero | floor, checkpoints, wiring |
+@@ -524,7 +524,7 @@
+ 
+ | ID | Scope | Promise | Enforcement sites | Test families |
+ |---|---|---|---|---|
+-| INV-001 | B, C, D | A relied-on automated PASS has complete, successful, matching real evidence | Shared vf_capture_check at acceptance, floor, resume and carry evaluation | provenance, acceptance, floor |
++| INV-001 | B, C, D | A relied-on automated PASS has complete, successful, matching real evidence | Shared vf_capture_check at acceptance, floor, resume and carry evaluation | provenance, acceptance, floor, reports |
+ | INV-002 | B | An invalid return does not alter task state; valid retry is idempotent | spec-task validated-return transaction with one final tasks rename | acceptance, transactions |
+ | INV-003 | B, C, D | Cleanup releases only acquired ownership; half-writes are not completed state | vf_lock/vf_unlock and COMPLETE/pending transaction validation | transactions |
+ | INV-004 | C, D | No gate/next stage is invoked after failed floor/checkpoint or denied round | Common invoker sequence; stub and live observation counters | floor, checkpoints, rounds, wiring |
+@@ -544,13 +544,13 @@
+ | authoring | test | AC-001, AC-003, AC-004, AC-005, AC-006, AC-011, AC-023: phase modes, shared/excluded rows, malformed/dangling IDs, kinds, same-task tests, zero-warning golden, untouched 001/002 exit 0. | `tests/test-sdd-analyze.sh::test_verification_bindings`; `tests/test-golden-example.sh::test_verification_golden` |
+ | config | test | AC-011, AC-023: actual stack commands, malformed/unknown/duplicate map keys, spaces/quotes, doctor/analyzer consistency, new versus legacy. | `tests/test-verification.sh::test_config_grammar` |
+ | capture | test | AC-019, AC-021: actual verbose success/failure, byte/line bounds, full-log digest, argv/key/default/no-tick compatibility, real exits including pipeline. | `tests/test-spec-run.sh::test_bounded_capture` |
+-| provenance | test | AC-013, AC-020, AC-023: independent mutations of source/staged/dirty/untracked/helper/test/fixture/lock/config/tool/env/criterion/cwd/command; tamper/truncation/old format/later failure/during-run; unchanged hit, bookkeeping hit, volatile miss; old failing-test/sound-evidence repro. | `tests/test-verification.sh::test_capture_provenance` |
++| provenance | test | AC-013, AC-020, AC-023: source/staged/dirty/untracked/test/fixture/lock/config/tool/env/cwd/command snapshots and capture currency; tamper/truncation/old format/later failure/during-run; unchanged hit, bookkeeping hit, volatile miss; old failing-test/sound-evidence repro. Real transitive-helper and criterion-text saved-success/PASS cases are exercised in reports. | `tests/test-verification.sh::test_capture_provenance` |
+ | transactions | test | AC-020, AC-022: owned/foreign/failed-acquisition cleanup, concurrent publications, interruptions before/after each commit point, retry/pending recovery, tasks byte identity. | `tests/test-verification.sh::test_owned_transactions` |
+ | acceptance | test | AC-022: missing/extra/duplicate/none mapping, unknown locator/capture, forged summary, failed/stale/changed-source return, valid once/idempotent, artifact-backed manual and automated-bypass refusal. | `tests/test-spec-gate.sh::test_acceptance` |
+ | floor | test | AC-007: all three checkers and all gate commands observed, correct repo/cwd, fresh integrity each call, one unchanged suite across gates, source/command/cwd invalidation, missing config stop. | `tests/test-spec-gate.sh::test_floor` |
+ | checkpoints | test | AC-008: real failure codes, no commands with delta, removed completed/prior bindings, pending future and explicit integration owner, checkpoint-to-floor reuse, next-stage counter zero. | `tests/test-spec-gate.sh::test_checkpoints` |
+ | rounds | test | AC-009: both gates 1–3/denied 4, same-day exact waiver/revision, reject old/unscoped/wrong gate/round, round 5 still denied, quoted headings, malformed/duplicate/pending/date-only reconciliation. | `tests/test-spec-gate.sh::test_rounds` |
+-| reports | test | AC-010, AC-012, AC-013, AC-017: full schema/matrix, stable prior IDs and class recurrence across files/root causes, open recheck not recurrence, raw sites/unknown data; untouched 002 five rounds/six blockers/unclassified, annotated copy detects clock and lock recurrence. | `tests/test-gate-contracts.sh::test_reports_and_tally` |
++| reports | test | AC-010, AC-012, AC-013, AC-017, AC-020: full schema/matrix; saved-success/PASS invalidation for consumed source/helper/fixture/lock/config and actual criterion text; stable prior IDs and class recurrence across files/root causes, open recheck not recurrence, raw sites/unknown data; untouched 002 five rounds/six blockers/unclassified, annotated copy detects clock and lock recurrence. | `tests/test-gate-contracts.sh::test_reports_and_tally` |
+ | guidance | test | AC-001, AC-002, AC-004, AC-006, AC-012, AC-014, AC-015, AC-017, AC-018: enumerate overlays/personas, modes/revisions/omissions, retained gate scope/severity, metrics fields, docs/help and executable examples, regenerated adapters. | `tests/test-gate-contracts.sh::test_instruction_contracts`; `tests/test-build-adapters.sh::test_brief_modes` |
+ | wiring | test | AC-015, AC-016, AC-019: stub workers/gates exercise actual scripts, incomplete return unchanged then accepted once, floor/cap stop counters, stage barrier, shared gate suite; live-probe positive/negative fixtures without a future-report dependency. | `tests/test-gate-contracts.sh::test_invoker_protocol` |
+ 
+--- a/.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md
++++ b/.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md
+@@ -1071,6 +1071,26 @@
+   - *Evidence:* CAP-744-sgOYqc verified by spec-gate accept; return sha256:ccb0850adfbb58f0e9ae6a3d1e1ec1b379e22fa37746aceb45ca80f75aa33d0a
+ 
+ 
++- [ ] **T031a5** — Exercise both untyped typecheck-warning branches
++  - *Files:* `tests/test-sdd-analyze.sh`
++  - *Acceptance:* AC-004 fixtures invoke the analyzer with untyped `npm run typecheck` and `tsc --noEmit`, require exit 0 plus the `untyped AC Verify` warning, and retain build/text/shell and explicit test/assertion/static/manual controls.
++  - *Verify kind:* test
++  - *Tests:* `tests/test-sdd-analyze.sh::test_verification_bindings`
++  - *Verify:* `bash tests/test-sdd-analyze.sh` → all suites `passed`, exit 0
++  - *Reuse:* local
++  - *Refs:* REQ-005, AC-004, FM-001, INV-005, plan §7
++  - *Notes:* Closes reality-check round 3 gap 1 (`notes/verification/reports/reality-check-round3.md`). Test-only coverage of behavior the reviewer found correct; no runtime classifier change. No new gate round, floor or hosted-CI run is part of this task.
++
++- [ ] **T031a6** — Invalidate saved success and carried PASS on real input revisions
++  - *Files:* `tests/test-gate-contracts.sh`, `.specify/specs/003-gate-round-reduction-and-token-discipline/plan.md`
++  - *Acceptance:* AC-013/AC-020 fixtures first capture a genuinely passing check that reaches a transitive helper through implementation and consumes fixture/configuration/locked-dependency inputs. Independently mutate implementation, helper, fixture, lock, configuration and actual referenced spec AC text; reject old capture current/reuse and saved/carried PASS while its old log stays byte-identical, then restore each input and require success. Retain existing matrix omissions, unknown impact, verdict and digest-corruption controls; assign actual saved-PASS coverage to the reports family.
++  - *Verify kind:* test
++  - *Tests:* `tests/test-gate-contracts.sh::test_reports_and_tally`
++  - *Verify:* `bash tests/test-gate-contracts.sh` → all suites `passed`, exit 0
++  - *Reuse:* local
++  - *Refs:* REQ-009, AC-013, AC-020, FM-005, FM-010, FM-020, INV-001, INV-005, plan §7
++  - *Notes:* Closes reality-check round 3 gap 2 (`notes/verification/reports/reality-check-round3.md`). Adds shipped regression proof for runtime paths already checked by the reviewer; no kernel or O-032 recovery change. No new gate round, floor or hosted-CI run is part of this task.
++
+ ## Observability
+ 
+ - [x] **T028** — Record cost and quality without invented savings

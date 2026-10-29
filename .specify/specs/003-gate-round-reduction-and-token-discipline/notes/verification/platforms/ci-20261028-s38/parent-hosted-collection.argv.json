@@ -1,0 +1,23 @@
+{
+  "status": "PREPARED_NOT_EXECUTED",
+  "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+  "argv_template": [
+    "python3",
+    "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s38/hosted-s38-audit/collect-hosted.py",
+    "<ACTUAL_RUN_ID>",
+    "<ACTUAL_RUN_ATTEMPT>"
+  ],
+  "requires": "Parent obtains actual completed successful CI run/attempt for this exact published commit, then substitutes the two numeric arguments and provides scoped GH_TOKEN through its secret tool. No run is selected or queried here.",
+  "source": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+  "head": "25347ba729886ae0bea029c594ac00f0bc48e767",
+  "tree": "c68b9a3ab0c39c555d5cb28afa6420cd9a2600b7",
+  "checks": [
+    "Strict 177+177+8+4+4 before/after source binding",
+    "Exact run, attempt, workflow, head and all four successful job identities",
+    "Raw logs retain full checked-out tested merge SHA in every job",
+    "Tested merge tree equals snapshot tree and parents include snapshot head",
+    "PR21 still open/draft on exact head",
+    "All evidence artifacts sealed after before/after comparison"
+  ],
+  "current_hosted_result": "UNKNOWN"
+}

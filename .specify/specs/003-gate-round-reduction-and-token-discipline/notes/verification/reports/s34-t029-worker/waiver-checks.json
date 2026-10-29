@@ -1,0 +1,50 @@
+[
+  {
+    "argv": [
+      "bash",
+      "scripts/spec-gate.sh",
+      "waiver",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline",
+      "opponent",
+      "26"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "start": "2026-10-28T09:06:42.867336+00:00",
+    "end": "2026-10-28T09:06:46.284638+00:00",
+    "exit": 0,
+    "expectedExit": 0,
+    "expectedDiagnosticFound": true
+  },
+  {
+    "argv": [
+      "bash",
+      "scripts/spec-gate.sh",
+      "waiver",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline",
+      "reality-check",
+      "4"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "start": "2026-10-28T09:06:46.285270+00:00",
+    "end": "2026-10-28T09:06:46.583642+00:00",
+    "exit": 0,
+    "expectedExit": 0,
+    "expectedDiagnosticFound": true
+  },
+  {
+    "argv": [
+      "bash",
+      "scripts/spec-gate.sh",
+      "waiver",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline",
+      "opponent",
+      "27"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "start": "2026-10-28T09:06:46.584404+00:00",
+    "end": "2026-10-28T09:06:49.970578+00:00",
+    "exit": 4,
+    "expectedExit": 4,
+    "expectedDiagnosticFound": true
+  }
+]

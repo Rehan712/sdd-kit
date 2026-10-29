@@ -1,0 +1,30 @@
+{
+  "taskId": "node:delegated-task:command%3Amcp%3Ae6315556-7380-4d31-903f-24b14ad55a20%3Adelegate-task%3Asdd003-s29-harness-temp-audit-luna-r2",
+  "childThreadId": "thread:delegated-task:command%3Amcp%3Ae6315556-7380-4d31-903f-24b14ad55a20%3Adelegate-task%3Asdd003-s29-harness-temp-audit-luna-r2",
+  "childRunId": "run:thread:thread%3Adelegated-task%3Acommand%253Amcp%253Ae6315556-7380-4d31-903f-24b14ad55a20%253Adelegate-task%253Asdd003-s29-harness-temp-audit-luna-r2:ordinal:1",
+  "childNodeId": "node:delegated-task:command%3Amcp%3Ae6315556-7380-4d31-903f-24b14ad55a20%3Adelegate-task%3Asdd003-s29-harness-temp-audit-luna-r2",
+  "status": "completed",
+  "workState": "result_available",
+  "hasPendingChildRuns": false,
+  "latestTerminalRunId": "run:thread:thread%3Adelegated-task%3Acommand%253Amcp%253Ae6315556-7380-4d31-903f-24b14ad55a20%253Adelegate-task%253Asdd003-s29-harness-temp-audit-luna-r2:ordinal:1",
+  "latestTerminalStatus": "completed",
+  "latestTerminalSummary": null,
+  "latestTerminalResultContextTransferId": null,
+  "providerInstanceId": "codex_codex_gym",
+  "model": "gpt-6-luna",
+  "options": [
+    {
+      "id": "reasoningEffort",
+      "value": "medium"
+    },
+    {
+      "id": "serviceTier",
+      "value": "default"
+    }
+  ],
+  "summary": "## Harness temp audit\n\nThe inspected harness code creates only these temp names:\n\n- `sddkit.XXXXXX` \u2014 per-test sandbox from [tests/helpers.sh](/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/helpers.sh:611), removed after each test.\n- `copy-kit.XXXXXX` \u2014 short-lived copy staging directory, removed on success and failure.\n- `env-scan.XXXXXX` \u2014 short-lived environment scan directory, removed on return.\n- `kit-files.XXXXXX` and `run-suites.XXXXXX` \u2014 temporary files, removed after use.\n\nI checked only those directory patterns directly beneath the inherited `TMPDIR` (`/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T`) and `/private/tmp`. **No matching directories existed**, so there are no candidate sizes, markers, open files, or reclaimable bytes to attribute. No generic `tmp.*` scan was done.\n\nThe harness cleanup paths and the absence of leftover candidates provide no evidence that this kit\u2019s tests account for the reported disk growth. Current disk availability is **1,139,812 KiB (~1.09 GiB)** at 21:13:39 UTC on 2026-10-26; the prior reported 1.22 GiB was ~1.93 GiB earlier. Power status wasn\u2019t checked.\n\nThe saved CAP794 log and seals were not inspected, so their durability is **unknown** here. No files were changed or removed.\n\nSkipped: checking unrelated temp names, process tables, open files, and power status because no matching candidates existed. Risk: another run could leave differently named or non-directory temp artifacts outside the inspected patterns.",
+  "resultContextTransferId": "context-transfer:type:subagent_result:source-thread:thread%3Adelegated-task%3Acommand%253Amcp%253Ae6315556-7380-4d31-903f-24b14ad55a20%253Adelegate-task%253Asdd003-s29-harness-temp-audit-luna-r2:target-thread:2ce93492-409f-4930-a9e5-173544a4c8c6:fa152e9c-22bc-4958-ba58-4a2816432b29",
+  "hasPendingQuestion": false,
+  "pendingApproval": null,
+  "waitTimedOut": false
+}

@@ -1,0 +1,71 @@
+{
+  "actual_invocation": {
+    "childNodeId": "node:delegated-task:command%3Amcp%3A1f3cd44c-e930-4955-b272-b45788f5db02%3Adelegate-task%3Asdd003-s37-t029-f156-current-provider-high-r1",
+    "childRunId": "run:thread:thread%3Adelegated-task%3Acommand%253Amcp%253A1f3cd44c-e930-4955-b272-b45788f5db02%253Adelegate-task%253Asdd003-s37-t029-f156-current-provider-high-r1:ordinal:1",
+    "childThreadId": "thread:delegated-task:command%3Amcp%3A1f3cd44c-e930-4955-b272-b45788f5db02%3Adelegate-task%3Asdd003-s37-t029-f156-current-provider-high-r1",
+    "hasPendingChildRuns": false,
+    "hasPendingQuestion": false,
+    "latestTerminalResultContextTransferId": null,
+    "latestTerminalRunId": null,
+    "latestTerminalStatus": null,
+    "latestTerminalSummary": null,
+    "link": "[Spec 003 T029 control refresh after fixture Ship \u00b7 sol HIGH](t3-thread://v1/thread:delegated-task:command%3Amcp%3A1f3cd44c-e930-4955-b272-b45788f5db02%3Adelegate-task%3Asdd003-s37-t029-f156-current-provider-high-r1)",
+    "model": "gpt-6.1-sol",
+    "next": "Completion wakes this thread, so end your turn. Do not wait on it or poll it.",
+    "options": [
+      {
+        "id": "reasoningEffort",
+        "value": "high"
+      },
+      {
+        "id": "serviceTier",
+        "value": "default"
+      }
+    ],
+    "pendingApproval": null,
+    "providerInstanceId": "codex_codex_gym",
+    "resultContextTransferId": null,
+    "status": "running",
+    "summary": null,
+    "taskId": "node:delegated-task:command%3Amcp%3A1f3cd44c-e930-4955-b272-b45788f5db02%3Adelegate-task%3Asdd003-s37-t029-f156-current-provider-high-r1",
+    "waitTimedOut": true,
+    "workState": "working"
+  },
+  "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+  "index": {
+    "mode": "0o644",
+    "mtime_ns": 1792957592613445716,
+    "sha256": "c492d7ea95abf8e8c335001f20c62ff50bc6f1e2179d7a07d30811181b3dd700",
+    "size": 2200525,
+    "type": "file"
+  },
+  "inspected_process_count": 723,
+  "inventory_time": "2026-10-28T11:15:00.232040+00:00",
+  "locks_staging_absent": true,
+  "owned_directory_was_absent": true,
+  "parent_receipt": {
+    "initial_observation": "Absent at initial baseline inspection; present at subsequent staging/receipt inspection and before both saved status and inventory.",
+    "inventory_observation": {
+      "mode": "0o644",
+      "mtime_ns": 1793186019091461670,
+      "sha256": "bbcc33c8b2d62e09f1d32c1103e75c678a8a0ec7f8c99126137e4c7cc04a4ab7",
+      "size": 1835,
+      "type": "file"
+    },
+    "path": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s37-t029-worker-invocation.json",
+    "status_observation": {
+      "mode": "0o644",
+      "mtime_ns": 1793186019091461670,
+      "sha256": "bbcc33c8b2d62e09f1d32c1103e75c678a8a0ec7f8c99126137e4c7cc04a4ab7",
+      "size": 1835,
+      "type": "file"
+    }
+  },
+  "preexisting_files": 20150,
+  "process_detail_policy": "Only matching surviving operations retained; none found.",
+  "process_snapshot_sha256": "38e2780131a69a84e21a61e1e97b7d86ac9a38b2761277aeb3cd6a8bbe8659bf",
+  "source_baselines_match": true,
+  "status_time": "2026-10-28T11:14:54.595177+00:00",
+  "surviving_operations": [],
+  "time": "2026-10-28T11:15:00.710413+00:00"
+}

@@ -1,0 +1,138 @@
+host: Darwin 25.4.0; bash on PATH: GNU bash, version 3.2.57(1)-release (arm64-apple-darwin25)
+start 2026-10-17T19:48:45Z
+free disk at start: 12Gi
+3dacde897001828698c0c8d0e2a40f077e8b29100937df92ce2a218ce184a41a  tests/test-spec-gate.sh
+d905f637d5e309a21a29305a9c1d30b4fabd5851331bc29f2b94111dd02b4748  .specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md
+run.sh rc=0; per-suite: -- 10/10 passed -- 2/2 passed -- 18/18 passed -- 5/5 passed -- 13/13 passed -- 9/9 passed -- 19/19 passed -- 9/9 passed -- 4/4 passed -- 8/8 passed -- 6/6 passed -- 3/3 passed -- 11/11 passed -- 27/27 passed -- 3/3 passed 
+shellcheck rc=0; 
+free disk after the suites: 12Gi
+unmutated focus reconcile rc=0
+unmutated focus named rc=0
+unmutated focus tally rc=0
+mutant midnight     focus=reconcile rc=1 killed
+    | AC-009: a same-day waiver one second before the reconciled completion authorized the next round
+    | AC-009: a waiver dated before the reconciled completion authorized the next round
+mutant readcheck    focus=reconcile rc=1 killed
+    | AC-009: a reconcile record outlived an edit of its history and authorized round 6
+    | AC-009: a reconcile record outlived an edit of its history and reserved round 6
+    | AC-009: an exact waiver after reconciliation did not reserve the next round
+mutant readdigest   focus=reconcile rc=1 killed
+    | AC-009: a reconcile record outlived an edit of its history and authorized round 6
+    | AC-009: a reconcile record outlived an edit of its history and reserved round 6
+    | AC-009: an exact waiver after reconciliation did not reserve the next round
+mutant readround    focus=reconcile rc=0 SURVIVED (held equivalent by round 21)
+mutant reccheck     focus=reconcile rc=1 killed
+    | AC-009: a reconcile record with a wrong digest wrote legacy-time.nul
+    | AC-009: a reconcile record with a wrong digest left the history able to order an authorization
+    | AC-009: a reconcile record with a wrong round wrote legacy-time.nul
+    | AC-009: a reconcile record with a wrong round left the history able to order an authorization
+mutant recdigest    focus=reconcile rc=1 killed
+    | AC-009: a reconcile record with a wrong digest wrote legacy-time.nul
+    | AC-009: a reconcile record with a wrong digest left the history able to order an authorization
+mutant recround     focus=reconcile rc=1 killed
+    | AC-009: a reconcile record with a wrong round wrote legacy-time.nul
+    | AC-009: a reconcile record with a wrong round left the history able to order an authorization
+mutant recguard     focus=reconcile rc=1 killed
+    | AC-009: a reconcile record with a timestamp before the history's date wrote legacy-time.nul
+    | AC-009: a reconcile record with a timestamp before the history's date left the history able to order an authorization
+    | AC-009: a reconcile record with a future timestamp wrote legacy-time.nul
+    | AC-009: a reconcile record with a future timestamp left the history able to order an authorization
+    | AC-009: a reconcile record with a timestamp later today wrote legacy-time.nul
+    | AC-009: a reconcile record with a timestamp later today left the history able to order an authorization
+mutant recbefore    focus=reconcile rc=1 killed
+    | AC-009: a reconcile record with a timestamp before the history's date wrote legacy-time.nul
+    | AC-009: a reconcile record with a timestamp before the history's date left the history able to order an authorization
+mutant endofday     focus=reconcile rc=1 killed
+    | AC-009: a same-day waiver one second before the reconciled completion authorized the next round
+    | AC-009: a same-day waiver one second after the reconciled completion was not authorized
+    | AC-009: a waiver dated before the reconciled completion authorized the next round
+mutant clamp        focus=reconcile rc=1 killed
+    | AC-009: a waiver dated before the reconciled completion authorized the next round
+mutant future       focus=reconcile rc=1 killed
+    | AC-009: a reconcile record with a future timestamp wrote legacy-time.nul
+    | AC-009: a reconcile record with a future timestamp left the history able to order an authorization
+    | AC-009: a reconcile record with a timestamp later today wrote legacy-time.nul
+    | AC-009: a reconcile record with a timestamp later today left the history able to order an authorization
+mutant hour         focus=reconcile rc=1 killed
+    | AC-009: a same-day waiver one second before the reconciled completion authorized the next round
+    | AC-009: a waiver dated before the reconciled completion authorized the next round
+mutant minute       focus=reconcile rc=1 killed
+    | AC-009: a same-day waiver one second before the reconciled completion authorized the next round
+    | AC-009: a waiver dated before the reconciled completion authorized the next round
+mutant maxeod       focus=reconcile rc=1 killed
+    | AC-009: a same-day waiver one second before the reconciled completion authorized the next round
+    | AC-009: a same-day waiver one second after the reconciled completion was not authorized
+mutant samedaymid   focus=reconcile rc=1 killed
+    | AC-009: a same-day waiver one second before the reconciled completion authorized the next round
+mutant laterday     focus=reconcile rc=1 killed
+    | AC-009: a record on the history's own date was not reconciled
+    | AC-009: a same-day waiver one second before the reconciled completion authorized the next round
+    | AC-009: a same-day waiver one second after the reconciled completion was not authorized
+mutant futureday    focus=reconcile rc=1 killed
+    | AC-009: a reconcile record with a timestamp later today wrote legacy-time.nul
+    | AC-009: a reconcile record with a timestamp later today left the history able to order an authorization
+mutant futureyear   focus=reconcile rc=1 killed
+    | AC-009: a reconcile record with a timestamp later today wrote legacy-time.nul
+    | AC-009: a reconcile record with a timestamp later today left the history able to order an authorization
+mutant recvalid     focus=reconcile rc=1 killed
+    | AC-009: a reconcile record with an impossible time wrote legacy-time.nul
+    | AC-009: a reconcile record with an impossible time left the history able to order an authorization
+mutant nextmid      focus=reconcile rc=1 killed
+    | AC-009: a same-day waiver one second before the reconciled completion authorized the next round
+    | AC-009: a same-day waiver one second after the reconciled completion was not authorized
+    | AC-009: a waiver dated before the reconciled completion authorized the next round
+mutant clampnext    focus=reconcile rc=1 killed
+    | AC-009: a waiver dated before the reconciled completion authorized the next round
+mutant noon         focus=reconcile rc=1 killed
+    | AC-009: a same-day waiver one second before the reconciled completion authorized the next round
+    | AC-009: a waiver dated before the reconciled completion authorized the next round
+mutant combined     focus=reconcile rc=1 killed
+    | AC-009: a reconcile record with a wrong digest wrote legacy-time.nul
+    | AC-009: a reconcile record with a wrong digest left the history able to order an authorization
+    | AC-009: a reconcile record with a wrong round wrote legacy-time.nul
+    | AC-009: a reconcile record with a wrong round left the history able to order an authorization
+    | AC-009: a reconcile record with a timestamp before the history's date wrote legacy-time.nul
+    | AC-009: a reconcile record with a timestamp before the history's date left the history able to order an authorization
+    | AC-009: a reconcile record with a future timestamp wrote legacy-time.nul
+    | AC-009: a reconcile record with a future timestamp left the history able to order an authorization
+    | AC-009: a reconcile record with a timestamp later today wrote legacy-time.nul
+    | AC-009: a reconcile record with a timestamp later today left the history able to order an authorization
+    | AC-009: a same-day waiver one second before the reconciled completion authorized the next round
+    | AC-009: a waiver dated before the reconciled completion authorized the next round
+    | AC-009: a reconcile record outlived an edit of its history and authorized round 6
+    | AC-009: a reconcile record outlived an edit of its history and reserved round 6
+    | AC-009: an exact waiver after reconciliation did not reserve the next round
+mutant explicitnone focus=named     rc=1 killed
+    | AC-022: an empty Failure modes header was accepted for a task owing no rows
+    | AC-022: an empty Failure modes header changed tasks bytes
+mutant tallyappend  focus=tally     rc=1 killed
+    | AC-010: the tally rewrote the shipped 002 records it read
+    | AC-010: the tally rewrote the synthetic history it read
+    | AC-010: the tally rewrote the annotated 002 history it read
+mutant tallytouch   focus=tally     rc=1 killed
+    | AC-010: the tally rewrote the shipped 002 records it read
+    | AC-010: the tally rewrote the synthetic history it read
+    | AC-010: the tally rewrote the annotated 002 history it read
+mutant tallynewline focus=tally     rc=1 killed
+    | AC-010: the tally rewrote the shipped 002 records it read
+O-029/O-033 assertion killed by: reccheck recdigest combined | AC-009: a reconcile record with a wrong digest wrote legacy-time.nul
+O-029/O-033 assertion killed by: reccheck recdigest combined | AC-009: a reconcile record with a wrong digest left the history able to order an authorization
+O-029/O-033 assertion killed by: reccheck recround combined | AC-009: a reconcile record with a wrong round wrote legacy-time.nul
+O-029/O-033 assertion killed by: reccheck recround combined | AC-009: a reconcile record with a wrong round left the history able to order an authorization
+O-029/O-033 assertion killed by: recguard recbefore combined | AC-009: a reconcile record with a timestamp before the history's date wrote legacy-time.nul
+O-029/O-033 assertion killed by: recguard recbefore combined | AC-009: a reconcile record with a timestamp before the history's date left the history able to order an authorization
+O-029/O-033 assertion killed by: recguard future combined | AC-009: a reconcile record with a future timestamp wrote legacy-time.nul
+O-029/O-033 assertion killed by: recguard future combined | AC-009: a reconcile record with a future timestamp left the history able to order an authorization
+O-029/O-033 assertion killed by: recvalid | AC-009: a reconcile record with an impossible time wrote legacy-time.nul
+O-029/O-033 assertion killed by: recvalid | AC-009: a reconcile record with an impossible time left the history able to order an authorization
+O-029/O-033 assertion killed by: recguard future futureday futureyear combined | AC-009: a reconcile record with a timestamp later today wrote legacy-time.nul
+O-029/O-033 assertion killed by: recguard future futureday futureyear combined | AC-009: a reconcile record with a timestamp later today left the history able to order an authorization
+O-029/O-033 assertion killed by: laterday | AC-009: a record on the history's own date was not reconciled
+O-029/O-033 assertion killed by: midnight endofday hour minute maxeod samedaymid laterday nextmid noon combined | AC-009: a same-day waiver one second before the reconciled completion authorized the next round
+O-029/O-033 assertion killed by: endofday maxeod laterday nextmid | AC-009: a same-day waiver one second after the reconciled completion was not authorized
+O-029/O-033 assertion killed by: midnight endofday clamp hour minute nextmid clampnext noon combined | AC-009: a waiver dated before the reconciled completion authorized the next round
+O-029/O-033 assertion killed by: readcheck readdigest combined | AC-009: a reconcile record outlived an edit of its history and authorized round 6
+O-029/O-033 assertion killed by: readcheck readdigest combined | AC-009: a reconcile record outlived an edit of its history and reserved round 6
+live worktree status outside notes/verification/: before=ecd6625020d93cc5 after=ecd6625020d93cc5 unchanged
+end 2026-10-17T20:32:39Z
+suites=147/147 shellcheck_rc=0 run_rc=0 mutants_killed=28/28 o029_assertions_killed=18/18

@@ -1,0 +1,88 @@
+{
+  "started": "2026-10-29T10:43:07.924148+00:00",
+  "runnerPid": 70532,
+  "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+  "GIT_OPTIONAL_LOCKS": "0",
+  "source": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+  "floor": "FLOOR-LxJkv3",
+  "gate": "opponent",
+  "round": 26,
+  "steps": [
+    {
+      "name": "prereserve",
+      "argv": [
+        "bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/r23-worktree-state.sh",
+        "s46-op26-prereserve"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "GIT_OPTIONAL_LOCKS": "0",
+      "nativePid": 70545,
+      "started": "2026-10-29T10:43:15.064855+00:00",
+      "exit": 0,
+      "ended": "2026-10-29T10:45:24.847388+00:00",
+      "elapsedSeconds": 129.78142020800442
+    },
+    {
+      "name": "reserve",
+      "argv": [
+        "bash",
+        "scripts/spec-gate.sh",
+        "round",
+        ".specify/specs/003-gate-round-reduction-and-token-discipline",
+        "opponent",
+        "--floor",
+        "FLOOR-LxJkv3"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "GIT_OPTIONAL_LOCKS": "0",
+      "nativePid": 80093,
+      "started": "2026-10-29T10:45:24.875252+00:00",
+      "exit": 0,
+      "ended": "2026-10-29T11:11:14.584369+00:00",
+      "elapsedSeconds": 1549.7172640000063
+    },
+    {
+      "name": "reserved",
+      "argv": [
+        "bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/r23-worktree-state.sh",
+        "s46-op26-reserved"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "GIT_OPTIONAL_LOCKS": "0",
+      "nativePid": 63141,
+      "started": "2026-10-29T11:11:14.584777+00:00",
+      "exit": 0,
+      "ended": "2026-10-29T11:13:20.529772+00:00",
+      "elapsedSeconds": 125.94287633401109
+    }
+  ],
+  "reservationCreated": true,
+  "independentReviewStarted": false,
+  "formalClearance": false,
+  "historicalFullPreservationPassed": false,
+  "deviation": "Initial read-only pwd tool call had explicit cwd but omitted explicit GIT_OPTIONAL_LOCKS; every subsequent shell and child command sets it to 0.",
+  "metadata": {
+    "version": "1",
+    "gate": "opponent",
+    "round": "26",
+    "floor": "FLOOR-LxJkv3",
+    "source": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+    "reserved": "2026-10-29T11:11:14Z"
+  },
+  "entriesByteIdentical": true,
+  "entriesSha256": "3ca12e69830dd1f06b6b985847aafd6b54614c068e22167598b00ee835825731",
+  "entryCount": 6860,
+  "stateFieldsMatch": true,
+  "pendingWithoutFinalReport": true,
+  "exit": 1,
+  "protectedUnchanged": true,
+  "reservationWindowPreservationPassed": false,
+  "preexistingDifferenceCount": 1,
+  "unexpectedAdditions": [],
+  "ended": "2026-10-29T11:13:25.551143+00:00",
+  "reservationInvocations": 1,
+  "automaticRetries": 0,
+  "completedOrTallied": false
+}

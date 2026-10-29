@@ -1,0 +1,18 @@
+
+In /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261026-s29/verify-prepublish.sh line 7:
+HUB_DIR="$PWD"
+^-----^ SC2034 (warning): HUB_DIR appears unused. Verify use (or export if used externally).
+
+
+In /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261026-s29/verify-prepublish.sh line 8:
+. scripts/lib.sh
+  ^------------^ SC1091 (info): Not following: scripts/lib.sh was not specified as input (see shellcheck -x).
+
+
+In /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261026-s29/verify-prepublish.sh line 9:
+. scripts/verification-lib.sh
+  ^-------------------------^ SC1091 (info): Not following: scripts/verification-lib.sh was not specified as input (see shellcheck -x).
+
+For more information:
+  https://www.shellcheck.net/wiki/SC2034 -- HUB_DIR appears unused. Verify us...
+  https://www.shellcheck.net/wiki/SC1091 -- Not following: scripts/lib.sh was...

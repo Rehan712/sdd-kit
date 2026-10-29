@@ -550,12 +550,15 @@ test_ignored_local_overlays_and_personas_do_not_decide_the_checks() {
 # AC-010/AC-017: shipped 002's recorded history, read as the input identity
 # hashes it: an enumerated copy of its notes/ (copy_kit's directory selector),
 # never the directories in place, where an empty FLOOR-* or CAP-* left behind
-# is invisible to the identity yet walked by the tally (O-015 review).
+# is invisible to the identity yet walked by the tally (O-015 review). The
+# records the tally reads are hashed before and after it (T031a3o1, O-031).
 shipped_002_tally_case() {
-  local rel=.specify/specs/002-usage-limit-handling-for-dispatched-runs copy="$SANDBOX/tally-002"
+  local rel=.specify/specs/002-usage-limit-handling-for-dispatched-runs copy="$SANDBOX/tally-002" before
   rm -rf "$copy"
   copy_kit "$KIT_DIR" "$copy" "$rel/notes" || t_fail 'AC-010: cannot copy shipped 002 records as the identity hashes them'
+  before="$(records_digest "$copy/$rel")"
   run_rc 0 bash "$SCRIPTS/spec-gate.sh" tally "$copy/$rel"
+  assert_eq "$before" "$(records_digest "$copy/$rel")" 'AC-010: the tally rewrote the shipped 002 records it read'
   assert_contains "$OUT" 'opponent rounds=5'
   assert_contains "$OUT" 'reality-check rounds=1'
   assert_contains "$OUT" 'blocking=6 minor=0'
@@ -2237,6 +2240,12 @@ ROWS
   done
 }
 
+# records_digest <dir> — one digest over the name and bytes of every file under
+# <dir>, so a reader that writes anything it reads is caught (O-031).
+records_digest() {
+  (cd "$1" && find . -type f | LC_ALL=C sort | while IFS= read -r f; do printf '%s\n' "$f"; shasum -a 256 < "$f"; done) | shasum -a 256
+}
+
 # annotate_002 — shipped 002's legacy opponent history on stdin, as canonical
 # rounds on stdout. Each legacy finding keeps its round, severity, Root cause
 # and first location and gains the stable Class the table gives its
@@ -2275,16 +2284,19 @@ annotate_002() {
 # fixture for. Recurrence is keyed by Class alone: two findings of one Class at
 # different files with different Root causes are one recurrence, and two
 # Classes sharing a file and a Root cause are none. An annotated copy of
-# shipped 002 detects both its clock and its lock recurrence, and neither the
-# copy nor the shipped notes change.
+# shipped 002 detects both its clock and its lock recurrence. Each history the
+# tally reads is hashed before and after it (T031a3o1, O-031); the copy check
+# proves only that copy_kit is faithful.
 tally_class_cases() {
-  local spec="$SANDBOX/class-spec" rel=.specify/specs/002-usage-limit-handling-for-dispatched-runs copy="$SANDBOX/annotate-002" shipped
+  local spec="$SANDBOX/class-spec" rel=.specify/specs/002-usage-limit-handling-for-dispatched-runs copy="$SANDBOX/annotate-002" shipped before
   mkdir -p "$spec/notes" "$SANDBOX/annotated/notes"
   { tier_round_fixture 1 '' O-001:clock-parse:new:wrong-result O-002:lock-a:new:wrong-result O-003:lock-b:new:wrong-result
     tier_round_fixture 2 '' O-004:clock-parse:new:wrong-result \
       | sed -e 's#^- \*\*Where:\*\* .*#- **Where:** scripts/cancel.sh:4#' -e 's#^- \*\*Root cause:\*\* .*#- **Root cause:** plan-gap#'
   } > "$spec/notes/opponent.md"
+  before="$(records_digest "$spec")"
   run_rc 0 bash "$SCRIPTS/spec-gate.sh" tally "$spec"
+  assert_eq "$before" "$(records_digest "$spec")" 'AC-010: the tally rewrote the synthetic history it read'
   assert_contains "$OUT" 'class=clock-parse findings=2 recurrences=1' \
     'AC-010: one Class at different files with different Root causes was not one recurrence'
   assert_contains "$OUT" 'class=lock-a findings=1 recurrences=0' 'AC-010: Classes sharing a file and Root cause counted a recurrence'
@@ -2292,13 +2304,15 @@ tally_class_cases() {
   shipped="$(shasum -a 256 < "$KIT_DIR/$rel/notes/opponent.md")"
   copy_kit "$KIT_DIR" "$copy" "$rel/notes" || t_fail 'AC-010: cannot copy shipped 002 records as the identity hashes them'
   annotate_002 < "$copy/$rel/notes/opponent.md" > "$SANDBOX/annotated/notes/opponent.md"
+  before="$(records_digest "$SANDBOX/annotated")"
   run_rc 0 bash "$SCRIPTS/spec-gate.sh" tally "$SANDBOX/annotated"
+  assert_eq "$before" "$(records_digest "$SANDBOX/annotated")" 'AC-010: the tally rewrote the annotated 002 history it read'
   assert_contains "$OUT" 'opponent rounds=5'
   assert_contains "$OUT" 'blocking=6 minor=0 locations=6 unclassified=0'
   assert_contains "$OUT" 'class=clock-reset-grammar findings=2 recurrences=1' 'AC-010: the annotated 002 copy missed its clock recurrence'
   assert_contains "$OUT" 'class=resume-unit-lock findings=3 recurrences=2' 'AC-010: the annotated 002 copy missed its lock recurrence'
-  assert_eq "$shipped" "$(shasum -a 256 < "$copy/$rel/notes/opponent.md")" 'AC-010: annotating changed the 002 copy'
-  assert_eq "$shipped" "$(shasum -a 256 < "$KIT_DIR/$rel/notes/opponent.md")" 'AC-010: the shipped 002 notes changed'
+  assert_eq "$shipped" "$(shasum -a 256 < "$copy/$rel/notes/opponent.md")" 'AC-010: copy_kit did not copy the shipped 002 notes faithfully'
+  assert_eq "$shipped" "$(shasum -a 256 < "$KIT_DIR/$rel/notes/opponent.md")" 'AC-010: the shipped 002 notes changed during the case'
 }
 
 test_reports_and_tally() {
@@ -2702,9 +2716,34 @@ cost_metric_cases() {
 
 # AC-013: execute evidence validation, then carry only a completed, unchanged PASS.
 matrix_runtime_cases() {
-  local spec repo cap source id text digest tmp evidence
+  local spec repo cap source id text digest tmp evidence path predicate
   spec="$(make_verification_git_dir matrix)"
   repo="$(cd "$spec/../../.." && pwd -P)"
+  # The captured check reaches the helper through implementation, and reads
+  # the fixture, configuration and locked dependency version it checks.
+  mkdir -p "$repo/lib" "$repo/tests/fixtures"
+  cat > "$repo/src/parser.sh" <<'EOF'
+. lib/shared.sh
+. ./config.yml
+. ./lockfile
+parse_value() { shared_value "$(cat "$1")"; }
+EOF
+  cat > "$repo/lib/shared.sh" <<'EOF'
+shared_value() {
+  [[ "$1" == "$expected" && "$shared_version" == 1 ]] || return 1
+  printf '%s\n' "$1"
+}
+EOF
+  printf 'good\n' > "$repo/tests/fixtures/value"
+  printf 'expected=good\n' > "$repo/config.yml"
+  printf 'shared_version=1\n' > "$repo/lockfile"
+  cat > "$repo/tests/check.sh" <<'EOF'
+#!/usr/bin/env bash
+# AC-001
+ test_ac_001_shared() { . src/parser.sh; [[ "$(parse_value tests/fixtures/value)" == good ]]; }
+test_ac_001_shared || exit 1
+echo passed
+EOF
   mkdir -p "$spec/notes/verification/rounds/reality-check/ROUND-1"
   run_rc 0 "$SCRIPTS/spec-run.sh" "$spec" T001 --cwd "$repo" --from-task --no-tick --summary
   cap="$(printf '%s' "$OUT" | sed -n 's/^capture=\([^ ]*\).*/\1/p')"
@@ -2728,6 +2767,47 @@ matrix_runtime_cases() {
   vf_hash "$tmp/block" > "$spec/notes/verification/rounds/reality-check/ROUND-1/report.sha256"
   cat "$tmp/round-1" "$tmp/round-2" > "$tmp/report"
   run_rc 0 vf_reality_matrix "$spec" "$tmp/report" 2 "$source" READY
+  # AC-013/AC-020: keep one real success and its saved PASS throughout;
+  # a later failed capture must not be what invalidates this evidence.
+  cp "$spec/notes/captures/$cap/output.log" "$tmp/success.log"
+  run_rc 0 vf_snapshot "$spec" "$repo" "$repo" "$tmp/inputs"
+  for predicate in current reuse; do
+    run_rc 0 vf_capture_check "$spec" "$cap" "$tmp/inputs" "$predicate"
+  done
+  run_rc 0 vf_reality_matrix "$spec" "$tmp/report" 1 "$source" READY
+  for path in src/parser.sh lib/shared.sh tests/fixtures/value lockfile config.yml "${spec#"$repo/"}/spec.md"; do
+    cp "$repo/$path" "$tmp/original"
+    case "$path" in
+      src/parser.sh) printf 'parse_value() { printf "bad\\n"; }\n' >> "$repo/$path";;
+      lib/shared.sh) printf 'shared_value() { printf "bad\\n"; }\n' >> "$repo/$path";;
+      tests/fixtures/value) printf 'bad\n' > "$repo/$path";;
+      lockfile) printf 'shared_version=2\n' > "$repo/$path";;
+      config.yml) printf 'expected=other\n' > "$repo/$path";;
+      */spec.md)
+        sed 's/the shared boundary behavior/the changed shared boundary behavior/' "$tmp/original" > "$repo/$path"
+        assert_contains "$(cat "$repo/$path")" 'AC-001 — the changed shared boundary behavior'
+        ;;
+    esac
+    # Demonstrate actual dependency consumption without another capture.
+    if [[ "$path" != */spec.md ]]; then
+      run_rc 1 bash -c 'cd "$1" && bash tests/check.sh' _ "$repo"
+    fi
+    run_rc 0 vf_snapshot "$spec" "$repo" "$repo" "$tmp/inputs"
+    for predicate in current reuse; do
+      run_rc 3 vf_capture_check "$spec" "$cap" "$tmp/inputs" "$predicate"
+      assert_contains "$OUT" 'current inputs changed' "AC-020: $path $predicate"
+    done
+    run_rc 3 vf_reality_matrix "$spec" "$tmp/report" 1 "$source" READY
+    run_rc 3 vf_reality_matrix "$spec" "$tmp/report" 2 "$source" READY
+    run_rc 0 cmp "$tmp/success.log" "$spec/notes/captures/$cap/output.log"
+    cp "$tmp/original" "$repo/$path"
+    run_rc 0 vf_snapshot "$spec" "$repo" "$repo" "$tmp/inputs"
+    for predicate in current reuse; do
+      run_rc 0 vf_capture_check "$spec" "$cap" "$tmp/inputs" "$predicate"
+    done
+    run_rc 0 vf_reality_matrix "$spec" "$tmp/report" 1 "$source" READY
+    run_rc 0 vf_reality_matrix "$spec" "$tmp/report" 2 "$source" READY
+  done
   # AC-013/FM-016: a matrix row reproduced inside a nested example fence is
   # quoted text. Deleting the real AC-002 row and supplying it that way must
   # not satisfy the every-AC requirement.

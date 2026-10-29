@@ -1,0 +1,22 @@
+{
+  "name": "opponent25",
+  "argv": [
+    "bash",
+    "-c",
+    "set -uo pipefail\n. scripts/lib.sh\n. scripts/verification-lib.sh\nvf_round_authorized \".specify/specs/003-gate-round-reduction-and-token-discipline\" opponent 25 2026-10-26T07:58:27.094301Z\n"
+  ],
+  "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+  "env": {
+    "GIT_OPTIONAL_LOCKS": "0"
+  },
+  "started": "2026-10-26T20:50:03.986078+00:00",
+  "ended": "2026-10-26T20:50:04.080997+00:00",
+  "preceding_completion": "actual closed completion wrapper time (not merely report timestamp)",
+  "previous": "2026-10-26T07:58:27.094301Z",
+  "expected_exit": 0,
+  "exit": 0,
+  "stdout": "",
+  "stderr": "",
+  "reserves_gate": false,
+  "invokes_floor": false
+}

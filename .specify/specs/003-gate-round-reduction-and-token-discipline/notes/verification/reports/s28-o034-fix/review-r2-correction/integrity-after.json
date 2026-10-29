@@ -1,0 +1,58 @@
+{
+  "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+  "head": "2049f65960cc91e9e30bbd5ff1e11fc0fdf7cbd9",
+  "head_unchanged": true,
+  "index": {
+    "sha256": "c492d7ea95abf8e8c335001f20c62ff50bc6f1e2179d7a07d30811181b3dd700",
+    "mode": "0o644",
+    "size": 2200525
+  },
+  "index_unchanged": true,
+  "STATUS": {
+    "sha256": "28919a358c30407ccb0fff041f436768353b2f002c54e1db351ea57efe5e7d88",
+    "mode": "0o600",
+    "size": 772414
+  },
+  "STATUS_unchanged": true,
+  "STATUS_mtime_unchanged": true,
+  "owned": {
+    "scripts/sdd-analyze.sh": {
+      "sha256": "0c26c101666aa8559814f40c7376da6b07290d8e2830b230a54b8eb01b4afdf7",
+      "mode": "0o755",
+      "size": 18753
+    },
+    "tests/test-sdd-analyze.sh": {
+      "sha256": "513308051dc409e42fe72c3c20d5a0fe4a1e7607e5373dcff404fd6993cf4516",
+      "mode": "0o644",
+      "size": 56411
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md": {
+      "sha256": "f2fad981280f9fd33d0b95edfbdfd9bf1f439f97867ebd5dee0c5003d959a37b",
+      "mode": "0o600",
+      "size": 183955
+    }
+  },
+  "protected_existing_files_checked": 16892,
+  "protected_existing_files_unchanged": 16891,
+  "protected_changed": {
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s26-next-session-prompt.md": {
+      "before": {
+        "sha256": "ca2ed38219bbae990bb95646665aeabfbd72b616f95ee012651f470d254cdae4",
+        "mode": "0o644",
+        "size": 69273
+      },
+      "after": {
+        "sha256": "874f898846a0208e1473b808fe08ac56ca68877698f4e5d9e43f30c32046e571",
+        "mode": "0o644",
+        "size": 69966
+      }
+    }
+  },
+  "protected_missing": [],
+  "new_files_outside_correction_directory": [
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/review-r2-correction-invocation.json"
+  ],
+  "task_change_is_only_existing_T031a5o1_block": true,
+  "task_is_unchecked_and_has_no_current_Evidence": true,
+  "git_mutations_performed": false
+}

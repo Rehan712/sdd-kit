@@ -1,0 +1,30 @@
+{
+  "taskId": "node:delegated-task:command%3Amcp%3Ae6315556-7380-4d31-903f-24b14ad55a20%3Adelegate-task%3Asdd003-s29-t029-fresh-worker-high-retry2",
+  "childThreadId": "thread:delegated-task:command%3Amcp%3Ae6315556-7380-4d31-903f-24b14ad55a20%3Adelegate-task%3Asdd003-s29-t029-fresh-worker-high-retry2",
+  "childRunId": "run:thread:thread%3Adelegated-task%3Acommand%253Amcp%253Ae6315556-7380-4d31-903f-24b14ad55a20%253Adelegate-task%253Asdd003-s29-t029-fresh-worker-high-retry2:ordinal:1",
+  "childNodeId": "node:delegated-task:command%3Amcp%3Ae6315556-7380-4d31-903f-24b14ad55a20%3Adelegate-task%3Asdd003-s29-t029-fresh-worker-high-retry2",
+  "status": "completed",
+  "workState": "result_available",
+  "hasPendingChildRuns": false,
+  "latestTerminalRunId": "run:thread:thread%3Adelegated-task%3Acommand%253Amcp%253Ae6315556-7380-4d31-903f-24b14ad55a20%253Adelegate-task%253Asdd003-s29-t029-fresh-worker-high-retry2:ordinal:1",
+  "latestTerminalStatus": "completed",
+  "latestTerminalSummary": null,
+  "latestTerminalResultContextTransferId": null,
+  "providerInstanceId": "codex_codex_gym",
+  "model": "gpt-6.1-sol",
+  "options": [
+    {
+      "id": "reasoningEffort",
+      "value": "high"
+    },
+    {
+      "id": "serviceTier",
+      "value": "default"
+    }
+  ],
+  "summary": "Verification-Return: 1\nTask: T029\nCaptures: CAP-794-aUZ5t0\nSummary: capture=CAP-794-aUZ5t0 command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=e2bd5dfbf6ddcf901317732547649b3e2028c869384acc1e688d65a77c738b33 input=16ffcec3c2f0cffa21b8c35e7b90d768a27bdfdd37deba9147edd25489946494 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-794-aUZ5t0/output.log [complete metadata: capture directory]\nFailure modes:\nFM-001, tests/test-gate-contracts.sh::test_instruction_contracts, CAP-794-aUZ5t0\nINV-005, tests/test-gate-contracts.sh::test_instruction_contracts, CAP-794-aUZ5t0",
+  "resultContextTransferId": "context-transfer:type:subagent_result:source-thread:thread%3Adelegated-task%3Acommand%253Amcp%253Ae6315556-7380-4d31-903f-24b14ad55a20%253Adelegate-task%253Asdd003-s29-t029-fresh-worker-high-retry2:target-thread:2ce93492-409f-4930-a9e5-173544a4c8c6:7a7fb529-7bf0-4882-b059-4a399db0fedb",
+  "hasPendingQuestion": false,
+  "pendingApproval": null,
+  "waitTimedOut": false
+}

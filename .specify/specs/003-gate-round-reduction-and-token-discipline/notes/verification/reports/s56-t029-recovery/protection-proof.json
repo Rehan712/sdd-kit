@@ -1,0 +1,68 @@
+{
+  "added_outside_owned": {},
+  "after_preexisting_file_count": 22264,
+  "baseline_preexisting_file_count": 22264,
+  "changed_preexisting": {},
+  "checks": {
+    "HEAD_and_branch_preserved": true,
+    "all_baselined_external_files_preserved": true,
+    "all_original_worker_receipts_bytes_modes_mtimes_preserved": true,
+    "capture_seven_members_complete_and_ledger_still_exact": true,
+    "every_preexisting_worktree_file_bytes_modes_mtimes_preserved": true,
+    "git_status_preserved_except_exact_owned_outputs": true,
+    "global_refs_byte_identical_this_recovery": true,
+    "no_capture_lock_or_stage_or_pending_binding_return": true,
+    "no_new_external_files": true,
+    "no_new_worktree_paths_outside_owned_directory": true,
+    "no_surviving_original_or_live_capture_gate_process": true,
+    "original_finalizer_failed_result_not_rewritten": true,
+    "original_five_protected_git_files_including_real_index_preserved": true,
+    "sequence_still_exact_844": true
+  },
+  "external_additions": {},
+  "external_changes": {},
+  "global_ref_differences": {},
+  "historical_strict_preservation_passed": false,
+  "live_operations": [],
+  "original_capture_global_ref_differences": {
+    "refs/t3/orchestration-v2/checkpoints/YTA4OTJmNzUzYzJkMmYxMTM4NWJiYzVhM2IxY2VkMTc/ordinal/0": {
+      "after": "f214dce6b70c234af7bbba9d63acae95ee3d8102",
+      "before": null
+    },
+    "refs/t3/orchestration-v2/checkpoints/YmM1MzkwNGQzZTEyZGU1ZGIyMGNhOWM1NWM0M2QxZTU/ordinal/4": {
+      "after": "90906e867560f730bb235ca1ca5765061faddb16",
+      "before": null
+    },
+    "refs/t3/orchestration-v2/checkpoints/YmM1MzkwNGQzZTEyZGU1ZGIyMGNhOWM1NWM0M2QxZTU/ordinal/5": {
+      "after": "b1e6be123fd626e00a063b916e9b04120476390a",
+      "before": null
+    },
+    "refs/t3/orchestration-v2/checkpoints/YmM1MzkwNGQzZTEyZGU1ZGIyMGNhOWM1NWM0M2QxZTU/ordinal/6": {
+      "after": "63318ab60fbc28bdc05864fd5eee4c4048ec0f90",
+      "before": null
+    }
+  },
+  "original_capture_unexpected_preexisting_changes": {
+    ".DS_Store": {
+      "after": {
+        "mode": "0o644",
+        "mtime_ns": 1793310276040546792,
+        "sha256": "a063a5f713a1bb042312af9044e7e1bdf94c1c47e4bbd54daae39fcc5c3d6a05",
+        "size": 8196,
+        "type": "file"
+      },
+      "before": {
+        "mode": "0o644",
+        "mtime_ns": 1793257952701344636,
+        "sha256": "dd30f4dbd45e22f99961b128b2baeff17c080170b878aaa200c6af51dbea32ba",
+        "size": 8196,
+        "type": "file"
+      }
+    }
+  },
+  "original_strict_preservation_passed": false,
+  "original_worker_receipt_changes": {},
+  "pending_operations": [],
+  "strict_current_recovery_preservation_passed": true,
+  "unknown_actor_policy": "Every actual difference is retained; actor unknown. No restoration, broad allowlist, deletion or claim of hostwide state preservation."
+}

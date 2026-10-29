@@ -2,7 +2,7 @@
 tasks_for: 003-gate-round-reduction-and-token-discipline
 status: in-progress  # draft | in-progress | complete
 created: 2026-09-05
-updated: 2026-10-15
+updated: 2026-10-29
 ---
 
 # Tasks: Gate round reduction and token discipline
@@ -1014,6 +1014,96 @@ keeps each edit task to at most five files instead of combining unrelated work.
   - *Notes:* Owns reality-check round 2 gap 4 (AC-009). Test files only, no kernel change, as the user decided on 2026-10-15; the cases start from the reviewer's probes (`notes/verification/reports/rc2-review-probes.txt`) and are applied by `notes/verification/reports/r20-edits/apply-code.py`. Under the user's decisions of 2026-10-14 and 2026-10-15 the invoker's extra proof steps (the mutation matrix, two-direction fixture judging, a separate measurement script, repeated dev runs) are not run; one dev run in a standalone copy and the capture of record prove it. T031a1 to T031a4 share one Verify, so one capture on unchanged source can serve all four acceptances. No gate round, floor or hosted-CI run is part of this task.
   - *Evidence:* CAP-678-tyxcke verified by spec-gate accept; return sha256:620f33983528672b4aa239fe725b1c852b8a6e6c24940951b7e592f561e575ae
 
+- [x] **T031a1o1** — Refuse an empty Failure modes header for a task owing no rows
+  - *Files:* `tests/test-spec-gate.sh`
+  - *Acceptance:* In `test_acceptance` (`acceptance_named_cases`), before the explicit-none acceptance, a return for the no-row task T006 with an empty `Failure modes:` header is refused with `empty required set must explicitly be none`, tasks.md byte-identical (AC-022).
+  - *Verify kind:* test
+  - *Tests:* `tests/test-spec-gate.sh::test_acceptance`
+  - *Verify:* `bash tests/run.sh && bash tests/shellcheck.sh` → all suites `passed`, exit 0
+  - *Reuse:* local
+  - *Refs:* REQ-006, REQ-009, AC-022, FM-006, FM-010, INV-002, plan §7
+  - *Notes:* Repairs O-030 (round 20, minor). Test files only, no kernel change, as the user decided on 2026-10-16; the cases start from opponent round 20's report (`notes/verification/reports/opponent-round20.md`) and `r20-repro-o029.sh`, and are applied by `notes/verification/reports/r21-edits/apply-code.py`. Under the user's decisions of 2026-10-14 to 2026-10-16 the invoker's extra proof steps are not run, except that each new O-029 assertion is shown killed by one of round 20's three mutants in the one dev run. T031a1o1, T031a3o1 and T031a4o1 share one Verify, so one capture on unchanged source can serve all three acceptances. No gate round, floor or hosted-CI run is part of this task.
+  - *Evidence:* CAP-700-lvBf95 verified by spec-gate accept; return sha256:3fed316e7f5305a0f7fdad9e8967931358383703afbba530a420247b983f2388
+
+- [x] **T031a3o1** — Hash the records the tally reads before and after it
+  - *Files:* `tests/test-gate-contracts.sh`
+  - *Acceptance:* In `test_reports_and_tally`, every file under each directory `tally` reads is hashed (names and bytes) before and after the run: the copy in `shipped_002_tally_case`, and the synthetic and annotated histories in `tally_class_cases`; the copy check there is labelled as proving only that `copy_kit` is faithful (AC-010).
+  - *Verify kind:* test
+  - *Tests:* `tests/test-gate-contracts.sh::test_reports_and_tally`
+  - *Verify:* `bash tests/run.sh && bash tests/shellcheck.sh` → all suites `passed`, exit 0
+  - *Reuse:* local
+  - *Refs:* REQ-015, AC-010, FM-019, INV-006, plan §7
+  - *Notes:* Repairs O-031 (round 20, minor). Test files only, no kernel change, as the user decided on 2026-10-16; the cases start from opponent round 20's report (`notes/verification/reports/opponent-round20.md`) and `r20-repro-o029.sh`, and are applied by `notes/verification/reports/r21-edits/apply-code.py`. Under the user's decisions of 2026-10-14 to 2026-10-16 the invoker's extra proof steps are not run, except that each new O-029 assertion is shown killed by one of round 20's three mutants in the one dev run. T031a1o1, T031a3o1 and T031a4o1 share one Verify, so one capture on unchanged source can serve all three acceptances. No gate round, floor or hosted-CI run is part of this task.
+  - *Evidence:* CAP-700-lvBf95 verified by spec-gate accept; return sha256:70766114202d7752136868a5eb570d5515314fad951d1a6b6feb8e9132c8f5fc
+
+- [x] **T031a4o1** — Assert the refusals only a reconciled legacy record decides
+  - *Files:* `tests/test-spec-gate.sh`
+  - *Acceptance:* In `test_rounds` (`round_legacy_reconcile_cases`), on the copy of shipped 002's date-only history: before the valid reconcile, a record naming a wrong digest, a wrong round or a timestamp before the history's date each exits 3, writes no `legacy-time.nul` and leaves the next round refused with `date-only history needs timestamped digest reconciliation`; after it, a waiver dated 2026-07-20T12:00:00Z is refused with `not after the previous round completion at 2026-07-20T23:59:59Z` and the current waiver is authorized; after an edit of the history, with a floor current for it, neither `waiver` nor `round` authorizes or reserves; with the history restored, round 6 reserves. Each new assertion is killed by one of round 20's three mutants (the reconciled timestamp ignored; the reconcile digest and round check removed; all legacy binding removed) (AC-009, REQ-012).
+  - *Verify kind:* test
+  - *Tests:* `tests/test-spec-gate.sh::test_rounds`
+  - *Verify:* `bash tests/run.sh && bash tests/shellcheck.sh` → all suites `passed`, exit 0
+  - *Reuse:* local
+  - *Refs:* REQ-012, AC-009, FM-016, INV-004, plan §7
+  - *Notes:* Repairs O-029 (round 20, blocking). Test files only, no kernel change, as the user decided on 2026-10-16; the cases start from opponent round 20's report (`notes/verification/reports/opponent-round20.md`) and `r20-repro-o029.sh`, and are applied by `notes/verification/reports/r21-edits/apply-code.py`. Under the user's decisions of 2026-10-14 to 2026-10-16 the invoker's extra proof steps are not run, except that each new O-029 assertion is shown killed by one of round 20's three mutants in the one dev run. T031a1o1, T031a3o1 and T031a4o1 share one Verify, so one capture on unchanged source can serve all three acceptances. No gate round, floor or hosted-CI run is part of this task.
+  - *Evidence:* CAP-700-lvBf95 verified by spec-gate accept; return sha256:f07ee635f92439f86b44592be3dbad064ebf32f990a49af35750f125fee65cb6
+
+- [x] **T031a4o2** — Reconcile the legacy record to a time no reading of the date yields
+  - *Files:* `tests/test-spec-gate.sh`
+  - *Acceptance:* In `test_rounds` (`round_legacy_reconcile_cases`), on the copy of shipped 002's date-only history: the valid record is reconciled to 2026-07-21T06:00:00Z, a later day than the history's date, so neither its midnight nor its end of day yields that time; a waiver dated 2026-07-21T05:00:00Z is refused with `not after the previous round completion at 2026-07-21T06:00:00Z`; before the valid record, one stamped 2099-01-01T00:00:00Z exits 3, writes no `legacy-time.nul` and leaves the next round refused with `date-only history needs timestamped digest reconciliation`, like the wrong-digest, wrong-round and before-the-date records. In the one dev run every mutant opponent rounds 20 and 21 ran against these fixtures is killed except the one round 21 held equivalent (the read-path round check alone), and each new assertion is killed by at least one (AC-009, REQ-012).
+  - *Verify kind:* test
+  - *Tests:* `tests/test-spec-gate.sh::test_rounds`
+  - *Verify:* `bash tests/run.sh && bash tests/shellcheck.sh` → all suites `passed`, exit 0
+  - *Reuse:* local
+  - *Refs:* REQ-012, AC-009, FM-016, INV-004, plan §7
+  - *Notes:* Repairs O-029 as round 21 left it open (blocking). Test files only, no kernel change, as the user chose on 2026-10-16 after round 21; the cases follow round 21's report (`notes/verification/reports/opponent-round21.md`) and `r21-repro-o029.sh`, and are applied by `notes/verification/reports/r22-edits/apply-code.py`; the mutants are `r22-edits/mutants-r22.py`. No gate round, floor or hosted-CI run is part of this task.
+  - *Evidence:* CAP-722-hO9jDO verified by spec-gate accept; return sha256:a28b333c0671a27659813f0ebbde072ad92bfb4f804a6ec18532b3e698a340a5
+
+
+- [x] **T031a4o3** — Pin both regions the reconcile guard admits, at non-round times
+  - *Files:* `tests/test-spec-gate.sh`
+  - *Acceptance:* In `test_rounds` (`round_legacy_reconcile_cases`), on the copy of shipped 002's date-only history: the record is reconciled first on the history's own date to 2026-07-20T15:17:43Z, a waiver dated 15:17:42Z is refused with `not after the previous round completion at 2026-07-20T15:17:43Z` and one dated 15:17:44Z is authorized; then it is reconciled again on a later day to 2026-07-21T06:17:43Z, and a waiver dated 06:17:42Z is refused with `not after the previous round completion at 2026-07-21T06:17:43Z`. Records stamped 2026-07-20T25:00:00Z (an impossible time) and at 23:59:59Z of the current UTC day (later today; skipped in the last minute of the day) each exit 3, write no `legacy-time.nul` and leave the next round refused with `date-only history needs timestamped digest reconciliation`, like the other wrong records. In the one dev run every mutant opponent rounds 20, 21 and 22 ran against these fixtures is killed except the one round 21 held equivalent (the read-path round check alone), and each new assertion is killed by at least one (AC-009, REQ-012).
+  - *Verify kind:* test
+  - *Tests:* `tests/test-spec-gate.sh::test_rounds`
+  - *Verify:* `bash tests/run.sh && bash tests/shellcheck.sh` → all suites `passed`, exit 0
+  - *Reuse:* local
+  - *Refs:* REQ-012, AC-009, FM-016, INV-004, plan §7
+  - *Notes:* Repairs O-029 as round 22 left it open (blocking) and O-033 (minor). Test files only, no kernel change, as the user chose on 2026-10-17 after round 22; the cases follow round 22's report (`notes/verification/reports/opponent-round22.md`) and its prototype, and are applied by `notes/verification/reports/r23-edits/apply-code.py`; the mutants are `r23-edits/mutants-r23.py`. No gate round, floor or hosted-CI run is part of this task.
+  - *Evidence:* CAP-744-sgOYqc verified by spec-gate accept; return sha256:ccb0850adfbb58f0e9ae6a3d1e1ec1b379e22fa37746aceb45ca80f75aa33d0a
+
+
+- [x] **T031a5** — Exercise both untyped typecheck-warning branches
+  - *Files:* `tests/test-sdd-analyze.sh`
+  - *Acceptance:* AC-004 fixtures invoke the analyzer with untyped `npm run typecheck` and `tsc --noEmit`, require exit 0 plus the `untyped AC Verify` warning, and retain build/text/shell and explicit test/assertion/static/manual controls.
+  - *Verify kind:* test
+  - *Tests:* `tests/test-sdd-analyze.sh::test_verification_bindings`
+  - *Verify:* `bash tests/test-sdd-analyze.sh` → all suites `passed`, exit 0
+  - *Reuse:* local
+  - *Refs:* REQ-005, AC-004, FM-001, INV-005, plan §7
+  - *Notes:* Closes reality-check round 3 gap 1 (`notes/verification/reports/reality-check-round3.md`). Test-only coverage of behavior the reviewer found correct; no runtime classifier change. No new gate round, floor or hosted-CI run is part of this task.
+  - *Evidence:* CAP-767-tGxtxB verified by spec-gate accept; return sha256:e40b2ee4cfe3f5b8421b16561a902d0b3a610a20388f36c0c1cbf4d278b48de8
+
+- [x] **T031a5o1** — Classify untyped AC verification by executable and runner position
+  - *Files:* `scripts/sdd-analyze.sh`, `tests/test-sdd-analyze.sh`
+  - *Acceptance:* AC-004 public fixtures require exit 0 and the existing untyped AC Verify warning for bare and directory-qualified grep/rg/diff, tsc --noEmit, package/build tools (npm/pnpm/yarn/bun/go/make/cargo), and builtin file-existence checks, including test/, tests/, nested tools/tests/ and tests/node_modules/.bin/ executable paths across simple unquoted Bash 3.2 redirects (`<`, `>`, `>>`, `>|`, `<>`, `<&`, `>&`, `&>`), attached/spaced operator and target boundaries, and operators interleaved with arguments. Neutral filenames and test/runner-looking targets or operands must not hide weak commands. Genuine shell/script/node/cargo/pytest/bats/package runners and custom assertions stay clean; all prior 287 weak/162 clean cases and four explicit test/assertion/static/manual controls remain valid.
+  - *Verify kind:* test
+  - *Tests:* `tests/test-sdd-analyze.sh::test_verification_bindings`
+  - *Verify:* `bash tests/test-sdd-analyze.sh` → all suites `passed`, exit 0
+  - *Reuse:* local
+  - *Refs:* REQ-005, AC-004, FM-001, INV-005, plan §3.1, §7
+  - *Notes:* O-034 remains open after sealed and tallied formal opponent round 26 (Prior O-034, verification-command-classification, wrong-result, implementation-error; Blocks AC-004/REQ-005). Normalize known tool basenames before the generic test-path exemption, covering qualified typecheck/build/file-existence tools and the eight supported redirect siblings while retaining actual runner and operand controls. The same T031a5o1 is reopened for fresh no-tick verification and acceptance; its prior CAP-818-fLEvh7 evidence and exact task/source bytes are archived under notes/verification/reports/s49-o034-qualified-tools-fix/before/. OP26 and prior reports remain sealed historical evidence. O-032 and recorded minor follow-ups remain open and unchanged. No OP27, RC5 or merge authorization is granted by this repair.
+  - *Evidence:* CAP-845-hwbWOH verified by spec-gate accept; return sha256:d09ad15d376d5a60c7da068edf44f913a5d442999e30279d0537ca3c526334ff
+
+- [x] **T031a6** — Invalidate saved success and carried PASS on real input revisions
+  - *Files:* `tests/test-gate-contracts.sh`, `.specify/specs/003-gate-round-reduction-and-token-discipline/plan.md`
+  - *Acceptance:* AC-013/AC-020 fixtures first capture a genuinely passing check that reaches a transitive helper through implementation and consumes fixture/configuration/locked-dependency inputs. Independently mutate implementation, helper, fixture, lock, configuration and actual referenced spec AC text; reject old capture current/reuse and saved/carried PASS while its old log stays byte-identical, then restore each input and require success. Retain existing matrix omissions, unknown impact, verdict and digest-corruption controls; assign actual saved-PASS coverage to the reports family.
+  - *Verify kind:* test
+  - *Tests:* `tests/test-gate-contracts.sh::test_reports_and_tally`
+  - *Verify:* `bash tests/test-gate-contracts.sh` → all suites `passed`, exit 0
+  - *Reuse:* local
+  - *Refs:* REQ-009, AC-013, AC-020, FM-005, FM-010, FM-020, INV-001, INV-005, plan §7
+  - *Notes:* Closes reality-check round 3 gap 2 (`notes/verification/reports/reality-check-round3.md`). Adds shipped regression proof for runtime paths already checked by the reviewer; no kernel or O-032 recovery change. No new gate round, floor or hosted-CI run is part of this task.
+  - *Evidence:* CAP-768-sy4sk5 verified by spec-gate accept; return sha256:7c21e5a69566b6149b058324bb8f306b8878995db80e32065e6f407a8857d690
+
 ## Observability
 
 - [x] **T028** — Record cost and quality without invented savings
@@ -1037,7 +1127,7 @@ keeps each edit task to at most five files instead of combining unrelated work.
   - *Reuse:* local
   - *Refs:* REQ-001, REQ-007, REQ-008, REQ-009, REQ-010, REQ-011, REQ-012, REQ-015, REQ-016, AC-018, FM-001, INV-005, plan §3, §4, §8
   - *Notes:* For AC-016's real control, the invoker rejects one deliberately incomplete copy of this worker's no-tick return, records unchanged task digests, then accepts the intact original; an intentional control is not a failed worker retry. Executing the published example found two defects it had to fix to run at all: a `return.txt` written into the worktree changed the input manifest and made its own fresh capture stale (returns and reports now live under `notes/verification/`), and `spec-evidence.sh`/`spec-ac-coverage.sh` overwrote a caller-exported `$SPEC`, so a reader following the documented variable names got "current evidence missing/stale" on valid proof. Both were reproduced before the fix.
-  - *Evidence:* CAP-657-4toNJM verified by spec-gate accept; return sha256:c46f609823230f1eb709890f8518a7143b1198055dffffc982e6b79cc1af2fa9
+  - *Evidence:* CAP-844-GCqKod verified by spec-gate accept; return sha256:41f438660fef9e7b8efe7da5cff8358ce56f8d846c5c6450bc64c81b0596ffeb
 
 ## Reality Check (pre-ship gate)
 

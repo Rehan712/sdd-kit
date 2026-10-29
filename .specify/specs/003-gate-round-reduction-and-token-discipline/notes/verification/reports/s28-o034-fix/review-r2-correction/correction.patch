@@ -1,0 +1,86 @@
+--- a/scripts/sdd-analyze.sh
++++ b/scripts/sdd-analyze.sh
+@@ -292,10 +292,11 @@
+     gsub(/(^|[[:space:]])[0-9]+[<>]+[[:space:]]*[^[:space:]<>&|;()"\\\047]+/, " ", low)
+     gsub(/[<>]+[[:space:]]*[^[:space:]<>&|;()"\\\047]+/, " ", low)
+     sub(/^[[:space:]]+/, "", low)
++    if (low ~ /^([^[:space:]<>]*\/)?(grep|rg|diff)([[:space:]]|$)/) return 1
+     if (low ~ /^(([^[:space:]<>]*\/)?(bash|sh|zsh)[[:space:]]+(-[euxv]+[[:space:]]+)*)?([^[:space:]<>]*\/)?tests?[\/.:_-][^[:space:]<>]*([[:space:]]|$)/ ||
+         low ~ /^([^[:space:]<>]*\/)?(node[[:space:]]+--test|cargo[[:space:]]+test|(python[23]?[[:space:]]+-m[[:space:]]+)?pytest|bats)([[:space:]]|$)/ ||
+         low ~ /^([^[:space:]<>]*\/)?((npm|pnpm|yarn)[[:space:]]+(run[[:space:]]+)?test|(bun|go|make)[[:space:]]+test)([[:space:]]|$)/) return 0
+-    return low ~ /(^|[[:space:]])(grep|rg|diff)([[:space:]]|$)|typecheck|tsc[[:space:]]+--noemit|(^|[[:space:]])[^[:space:]]*build([[:space:]]|$)|test[[:space:]]+-[ef][[:space:]]/
++    return low ~ /typecheck|tsc[[:space:]]+--noemit|(^|[[:space:]])[^[:space:]]*build([[:space:]]|$)|test[[:space:]]+-[ef][[:space:]]/
+   }
+   function flush() {
+     if (id == "") return
+--- a/tests/test-sdd-analyze.sh
++++ b/tests/test-sdd-analyze.sh
+@@ -676,6 +676,27 @@
+     'test -e tests/check.sh' 'test -f tests/check.sh' \
+     'rg /usr/bin/pytest README.md' 'diff fixtures/bats.txt actual.txt' \
+     'bash --rcfile tests/env.sh -c "npm run typecheck"' \
++    '/usr/bin/grep AC-001 tests/check.sh' \
++    '/usr/bin/grep<input.txt AC-001 tests/check.sh' '/usr/bin/grep <input.txt AC-001 tests/check.sh' \
++    '/usr/bin/grep>output.txt AC-001 tests/check.sh' '/usr/bin/grep >output.txt AC-001 tests/check.sh' \
++    '/usr/bin/rg AC-001 tests/check.sh' \
++    '/usr/bin/rg<input.txt AC-001 tests/check.sh' '/usr/bin/rg <input.txt AC-001 tests/check.sh' \
++    '/usr/bin/rg>output.txt AC-001 tests/check.sh' '/usr/bin/rg >output.txt AC-001 tests/check.sh' \
++    '/usr/bin/diff fixtures/test.txt actual.txt' \
++    '/usr/bin/diff<input.txt fixtures/test.txt actual.txt' '/usr/bin/diff <input.txt fixtures/test.txt actual.txt' \
++    '/usr/bin/diff>output.txt fixtures/test.txt actual.txt' '/usr/bin/diff >output.txt fixtures/test.txt actual.txt' \
++    './tools/grep AC-001 tests/check.sh' \
++    './tools/grep<input.txt AC-001 tests/check.sh' './tools/grep <input.txt AC-001 tests/check.sh' \
++    './tools/grep>output.txt AC-001 tests/check.sh' './tools/grep >output.txt AC-001 tests/check.sh' \
++    './tools/rg AC-001 tests/check.sh' \
++    './tools/rg<input.txt AC-001 tests/check.sh' './tools/rg <input.txt AC-001 tests/check.sh' \
++    './tools/rg>output.txt AC-001 tests/check.sh' './tools/rg >output.txt AC-001 tests/check.sh' \
++    './tools/diff fixtures/test.txt actual.txt' \
++    './tools/diff<input.txt fixtures/test.txt actual.txt' './tools/diff <input.txt fixtures/test.txt actual.txt' \
++    './tools/diff>output.txt fixtures/test.txt actual.txt' './tools/diff >output.txt fixtures/test.txt actual.txt' \
++    'tools/grep AC-001 tests/check.sh' 'tools/rg AC-001 tests/check.sh' 'tools/diff fixtures/test.txt actual.txt' \
++    '../tools/grep AC-001 tests/check.sh' '../tools/rg AC-001 tests/check.sh' '../tools/diff fixtures/test.txt actual.txt' \
++    'tests/grep AC-001 tests/check.sh' 'tests/rg AC-001 tests/check.sh' 'tests/diff fixtures/test.txt actual.txt' \
+     'npm<tests/test-typecheck.txt run typecheck' 'npm <tests/test-typecheck.txt run typecheck' \
+     'tsc>tests/test-typecheck.log --noEmit' 'tsc >tests/test-typecheck.log --noEmit' \
+     'grep<tools/pytest typecheck' 'grep <tools/pytest typecheck' \
+@@ -729,11 +750,16 @@
+     '/usr/bin/python3>input.txt -m pytest tests/typecheck.py' '/usr/bin/python3 >input.txt -m pytest tests/typecheck.py' \
+     'npm<input.txt run test -- --grep typecheck' 'npm <input.txt run test -- --grep typecheck' \
+     'npm>input.txt run test -- --grep typecheck' 'npm >input.txt run test -- --grep typecheck' \
+-    'npm 2>output.txt run test -- --grep typecheck' 'bash 0<input.txt -e tests/typecheck.sh'; do
++    'npm 2>output.txt run test -- --grep typecheck' 'bash 0<input.txt -e tests/typecheck.sh' \
++    '/bin/bash tests/check.sh /usr/bin/grep' './tests/check.sh ./tools/rg' \
++    '/usr/bin/node --test test/check.js ../tools/diff' \
++    'node scripts/assert-content.js /usr/bin/grep AC-001 README.md' \
++    'node scripts/assert-content.js ./tools/rg AC-001 README.md' \
++    'node scripts/assert-content.js ../tools/diff actual.txt expected.txt'; do
+     spec_dir="$(make_spec_dir)"
+     verification_edit_fixture "$spec_dir/tasks.md" "s|\`node --test test/thing.test.js\`|\`$fixture\`|"
+     run_rc 0 "$ANALYZE" "$spec_dir"
+-    assert_not_contains "$OUT" 'untyped AC Verify' "AC-004: $fixture is a runner even with weak-looking arguments"
++    assert_not_contains "$OUT" 'untyped AC Verify' "AC-004: $fixture has no weak executable"
+     assert_contains "$OUT" consistent "AC-004: $fixture stays clean"
+   done
+ 
+--- a/.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md
++++ b/.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md
+@@ -1082,16 +1082,15 @@
+   - *Notes:* Closes reality-check round 3 gap 1 (`notes/verification/reports/reality-check-round3.md`). Test-only coverage of behavior the reviewer found correct; no runtime classifier change. No new gate round, floor or hosted-CI run is part of this task.
+   - *Evidence:* CAP-767-tGxtxB verified by spec-gate accept; return sha256:e40b2ee4cfe3f5b8421b16561a902d0b3a610a20388f36c0c1cbf4d278b48de8
+ 
+-- [x] **T031a5o1** — Classify untyped AC verification by executable and runner position
++- [ ] **T031a5o1** — Classify untyped AC verification by executable and runner position
+   - *Files:* `scripts/sdd-analyze.sh`, `tests/test-sdd-analyze.sh`
+-  - *Acceptance:* AC-004 fixtures require exit 0 plus the existing untyped AC Verify warning for build/typecheck/text-presence/file-existence commands even when arguments or attached/spaced input/output redirection targets name tests or runners; neutral redirect filenames must not hide weak commands; genuine shell/node/cargo/pytest/bats and package test runners remain clean with ordinary and interleaved redirections, and explicit test/assertion/static/manual family controls remain valid.
++  - *Acceptance:* AC-004 fixtures require exit 0 plus the existing untyped AC Verify warning for build/typecheck/text-presence/file-existence commands, including bare and absolute/relative grep/rg/diff executables, even when arguments or attached/spaced input/output redirection targets name tests or runners; neutral redirect filenames must not hide weak commands; genuine shell/node/cargo/pytest/bats and package test runners and custom assertions with tool paths as operands remain clean with ordinary and interleaved redirections, and explicit test/assertion/static/manual family controls remain valid.
+   - *Verify kind:* test
+   - *Tests:* `tests/test-sdd-analyze.sh::test_verification_bindings`
+   - *Verify:* `bash tests/test-sdd-analyze.sh` → all suites `passed`, exit 0
+   - *Reuse:* local
+   - *Refs:* REQ-005, AC-004, FM-001, INV-005, plan §3.1, §7
+-  - *Notes:* O-034, opponent round 24, verification-command-classification: repair every shared runner exemption alternative and its warning consumer; cover the nine reproduced siblings plus search-pattern/path boundaries and genuine runners with weak-looking argument filenames. Independent quality r1 requires the same class-wide redirection boundary repair across executable/script paths, both redirect directions, neutral targets and genuine redirected runners. Prior CAP-791-DfeS6O/source 76977 partial proof is preserved in notes/verification/reports/s28-o034-fix/review-r1-correction/before/ and baseline-proof.json; fresh parent capture/acceptance is pending. O-032 remains open. No gate/floor/hosted-CI execution or new opponent authorization is part of this task.
+-  - *Evidence:* CAP-792-l5lK98 verified by spec-gate accept; return sha256:89f9dca7497de37fdb29ba97009fe2cd212fd1da35ec0ef3ff1d9637688c9f7a
++  - *Notes:* O-034, opponent round 24, verification-command-classification: retain the runner-position and simple unquoted redirection fixes; independent quality r2 requires grep/rg/diff at the executable position with optional directories, without treating tool paths in operands as commands. Same task reopened and current Evidence cleared; CAP-792-l5lK98/source dfa8f89669e39310c4b0a342c28091dbd01abb0cbdfbca8e34369977c9533a63 and canonical return sha256:89f9dca7497de37fdb29ba97009fe2cd212fd1da35ec0ef3ff1d9637688c9f7a remain historical, backed up with the prior task bytes and accepted receipt under notes/verification/reports/s28-o034-fix/review-r2-correction/before/. Correction receipts are in the same review-r2-correction directory. O-032 remains open. Fresh capture/acceptance and independent MAX quality r3 belong to the parent; this editing batch performs none of those or any gate/floor/hosted-CI execution.
+ 
+ - [x] **T031a6** — Invalidate saved success and carried PASS on real input revisions
+   - *Files:* `tests/test-gate-contracts.sh`, `.specify/specs/003-gate-round-reduction-and-token-discipline/plan.md`

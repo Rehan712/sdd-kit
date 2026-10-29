@@ -2444,3 +2444,487 @@ Follow-up tasks proposed:
 - T031a3o1, test files only (→ O-031). Hash the files `tally` reads before and after the run in `tally_class_cases` and `shipped_002_tally_case`.
 - O-032 goes to the follow-up spec, since it needs a kernel change, which the user's decision of 2026-10-15 does not authorize. It is non-blocking.
 <!-- gate-round-end: opponent:20 -->
+
+## Round 21
+
+**Round:** 21
+**Timestamp:** 2026-10-16T19:05:21Z
+**Source:** fd20f46a37268b1cd8bb7874982e3a26a1ce713a04418168d3c6b898edf76305
+**Floor:** FLOOR-5cLeox
+**Verdict:** CHALLENGED
+**Blocking:** 1 · **Minor:** 1
+
+### What I attacked
+
+I worked only in a copy under `/private/tmp/opp21/work`, built from the live enumeration (`git ls-files --cached --others --exclude-standard`) and git-initialized, with `TMPDIR` ending in `/`. The files that matter hash the same in the copy and the worktree: `scripts/verification-lib.sh` `015859de…`, `scripts/spec-gate.sh` `79f20eee…`, `tests/test-spec-gate.sh` `b94c7dfa…` (the hash `r21-dev.log` prints), `tests/test-gate-contracts.sh` `97beb809…` and `tests/helpers.sh` `b7bc6ff9…`. In the worktree I created nothing: my file tool refuses report files, so the invoker persists this block. I ran no floor, round, checkpoint, capture, accept, suite or test function there, sourced nothing from its `tests/`, and ran no container.
+
+- **Scope.** The delta in `r21-session.diff`: T031a4o1 (`round_legacy_reconcile_cases`), T031a1o1 (`acceptance_named_cases`) and T031a3o1 (`records_digest`, `shipped_002_tally_case`, `tally_class_cases`). Also the kernel paths those cases drive: `vf_round_history`, `vf_round_authorized`, `vf_gate_waiver_check`, the `--reconcile` branch of `vf_gate_round`, `vf_return_check` and `vf_tally`. I read AC-009, AC-010, AC-022, REQ-012 and REQ-015 in `spec.md`, the plan's authorization paragraph, and the three task blocks.
+- **Method.** Each case ran on its own through a runner that copies its suite into the copy's `tests/` with the final `t_run_all` replaced by one focus test, as `r21-dev.sh` does. Each mutant is an exact-anchor edit of the copy's `scripts/verification-lib.sh` that refuses unless its anchor occurs once. After every run the kernel was restored and checked with `cmp`. All runs used `/bin/bash` 3.2.57 and the macOS awk. Unmutated, all four cases pass.
+- **O-029 mutants (12).** Killed: the reconciled time replaced by midnight of the history's date (round 20's); the read-path round and digest check removed, and its digest half alone; the reconcile check removed, its digest half alone and its round half alone; the whole date guard of `--reconcile`, and its before-the-date half alone. Survived:
+  - the reconciled time replaced by the end of the history's date, 23:59:59Z (O-029 below);
+  - the reconciled time clamped to that end of day when it is later (O-029 below);
+  - the future half of the `--reconcile` date guard removed (O-029 below);
+  - the read-path round check alone removed. I hold that one equivalent: only `--reconcile` writes a record, and it checks the round; the read path checks the digest, which fixes the history and so its last round.
+- **O-030 mutant.** Round 20's mutant, the guard at `:2861` reduced to refusing mappings, is now killed by the new assertions (O-030 below).
+- **O-031 mutants (3).** All killed: appending a comment line to the history after the report (round 20's), creating a new empty file under `notes/`, and appending a newline to an existing `reality-check.md` (O-031 below).
+- **Probes on the unmutated kernel.** These ran through the fixture's own `floor_fixture` CLI on a copy of shipped 002's history.
+  - A record reconciled to 2026-07-21T09:00:00Z, a day after the history's date, is accepted. A waiver dated 2026-07-21T08:00:00Z is then refused at exit 4 with `not after the previous round completion at 2026-07-21T09:00:00Z`, and `round` reserves nothing.
+  - A record at 2026-07-20T18:00:00Z, inside the date, lets a waiver dated 19:00 that day authorize round 6.
+  - After a valid reconcile and one appended line, `round --reconcile` with a correct record for the edited history exits 3 with empty output, and so does `round`. Only after I deleted `legacy-time.nul` by hand did the same record reconcile (O-032 below).
+  - A record stamped 2099-01-01T00:00:00Z is refused at exit 3 and nothing is written.
+  - A hand-written `legacy-time.nul` stamped 2026-07-19, before the history's date, is read with no date check, and a waiver dated 2026-07-19T12:00:00Z then authorizes round 6. I hold this outside the model (below).
+- **Full suite under a mutant.** I started `tests/run.sh` on a second copy under the end-of-day mutant. I stopped it after the first two suites (12 of 147 tests, no failure), because free disk on `/` fell from 6.9 GiB to under 2 GiB through activity outside my directories, which stayed under 700 MiB. Instead I checked that the mutated line runs only when `legacy-time.nul` exists. No shipped spec holds one, and in `tests/` only `round_legacy_reconcile_cases` writes one, so the focus run decides that mutant for the whole suite.
+- **Claims.** `r21-return-T031a{1,3,4}o1.rc`, `T031a{1,3,4}o1-accept.rc`, `r21-capture.rc`, `r21-floor-1.rc`, `r21-floor-validate.rc`, `r21-reserve.rc`, `r21-scope.rc` and `r21-freeze.rc` all read 0. The capture of record CAP-700-lvBf95 carries input `fd20f46a…` before and after, and shows 15 suites passing 147 of 147. `r21-dev.log` shows each of the 9 new O-029 assertions killed by one of round 20's three mutants, as the task block says. The reservation fields match `ROUND-21/meta.nul`, and all three tasks are ticked (`r21-postaccept.txt`).
+- **Not examined.** Linux with GNU tools and mawk; hosted CI, which has not run on this source; a completed full-suite run under any mutant; O-026 to O-028, since no report-grammar code changed; and the brief's known-open list, which I did not re-litigate.
+
+### Finding O-029
+- **Class:** named-case-fixture-strength
+- **Status:** open
+- **Prior:** O-029
+- **Severity:** wrong-result
+- **Scenario:** The repair reconciles round 5 to 2026-07-20T23:59:59Z, which is also the end of the history's own date. A kernel that orders legacy authorizations against the end of the history's date, and never reads the record's timestamp, prints the same diagnostic for the early waiver. So the fixture cannot tell the reconciled time from a reading of the date.
+  - **The test's own claim.** Its comment says that between the history's date and the reconciled time only the record decides. With the record at the end of the date, the record and the end-of-day reading decide the same way.
+  - **The kernel accepts later records.** The `--reconcile` guard refuses only a stamp dated before the history's date or in the future, so a record on any later day is valid input.
+  - **The plan's rule.** A waiver's timestamp must be later than the preceding completed or reconciled invocation. AC-009 says the reconciliation is for authorization ordering.
+  - **The future half.** No case reconciles with a timestamp in the future, so the second half of the same guard can be deleted with the case green.
+- **Where:** tests/test-spec-gate.sh:1153, tests/test-spec-gate.sh:1156, tests/test-spec-gate.sh:1157, tests/test-spec-gate.sh:1159, scripts/verification-lib.sh:3406, scripts/verification-lib.sh:3583
+- **Reproduced:** In my copy, each mutant applied and restored with `cmp`.
+  - **End of day.** `VF_ROUND_TIME` at `:3406` set to the history's date at 23:59:59Z: `round_legacy_reconcile_cases` passes. My probe then reconciles round 5 to 2026-07-21T09:00:00Z, accepted at exit 0, and writes a waiver dated 2026-07-21T08:00:00Z. Under the mutant that waiver prints `authorized: opponent round 6`, and `round` reserves round 6 on a current floor. Unmutated, it is refused at exit 4 with `not after the previous round completion at 2026-07-21T09:00:00Z`, and nothing is reserved.
+  - **Clamp.** The record's time kept, but clamped to 23:59:59Z of the date when later: the case passes, and the same probe authorizes and reserves round 6.
+  - **Future half.** The `! "$stamp" > now` half of `:3583` removed: the case passes. My probe's record stamped 2099-01-01T00:00:00Z is then written at exit 0. Unmutated, it exits 3 and writes nothing.
+- **Root cause:** plan-gap
+- **Blocks:** AC-009, REQ-012
+- **Wrong behavior:** O-029's ordering clause is still unprotected for any record not stamped at the end of the history's date. A regression that reads the date instead of the record lets a waiver written before the reconciled completion authorize the next round, with every suite green. That bypasses the per-round cap REQ-012 requires, the way round 20 described. The task block prescribed 23:59:59Z, and the code follows it faithfully, which is why the root cause is plan-gap. A regression in the future half fails closed instead: one future record refuses every waiver until it is overwritten. That half alone would be minor.
+- **Class-wide fix:** Test files only. In `round_legacy_reconcile_cases`, reconcile to a time that no reading of the date produces, on a later day, so that one record separates the record from both readings of the date.
+  - **Record.** Reconcile round 5 to 2026-07-21T06:00:00Z, with the right digest.
+  - **Refusal.** A waiver dated 2026-07-21T05:00:00Z is refused with `not after the previous round completion at 2026-07-21T06:00:00Z`. That kills midnight, end of day and the clamp.
+  - **Future.** Before the valid reconcile, a record stamped 2099-01-01T00:00:00Z exits 3, writes no `legacy-time.nul`, and leaves the next round refused as date-only.
+  - **Check.** Show each new assertion killed by the end-of-day, clamp and future-half mutants above, as well as by round 20's three.
+
+### Finding O-032
+- **Class:** round-recovery-diagnostics
+- **Status:** open
+- **Prior:** O-032
+- **Severity:** degraded
+- **Scenario:** An operator reconciles a legacy date-only history, then corrects one line in it. Round 20 named the recovery for the follow-up spec: re-run `round --reconcile` with a record for the current history digest. That recovery is itself refused.
+  - **Why.** `vf_gate_round` reads the history with `vf_round_history` at `:3552`, before the `--reconcile` branch at `:3578`. The stale `legacy-time.nul` fails that read at `:3405` with exit 3, so the new record is never examined.
+  - **Effect.** No CLI command recovers that gate. Only deleting `legacy-time.nul` by hand does, and nothing names that file.
+- **Where:** scripts/verification-lib.sh:3405, scripts/verification-lib.sh:3552, scripts/verification-lib.sh:3578, scripts/verification-lib.sh:3584
+- **Reproduced:** On the unmutated copy, through the fixture's own `floor_fixture` CLI on a copy of 002's history: a valid reconcile, then one appended line, then `round --reconcile` with a record naming round 5 and the edited history's digest gives `rc=3 out=[]`, and `round` gives `rc=3 out=[]`. After I deleted `legacy-time.nul` by hand, the same record reconciled at exit 0.
+- **Root cause:** implementation-error
+- **Blocks:** none
+- **Wrong behavior:** REQ-012 requires a malformed or stale existing record to fail closed with a named recovery action. The cap holds, which is why this stays degraded. But the only recovery is a manual file deletion that no output names, and the recovery recorded for the follow-up spec would not work as written.
+- **Class-wide fix:** For the follow-up spec, since no kernel change is authorized now. In `--reconcile`, read a stored record that no longer matches leniently, so that a record for the current digest can replace it. Give every `return 3` in the legacy read and in `--reconcile` a `round recovery:` diagnostic that names the disagreeing field and that recovery. Then assert those diagnostics in the O-029 cases, including a re-reconcile after an edit.
+
+### Finding O-030
+- **Class:** named-case-fixture-strength
+- **Status:** resolved
+- **Prior:** O-030
+- **Severity:** minor
+- **Scenario:** In round 20, a mutant replaced the guard that requires `Failure modes: none` for a task owing no rows with one that only refuses mappings, and every suite stayed green.
+- **Where:** tests/test-spec-gate.sh:174, tests/test-spec-gate.sh:175, tests/test-spec-gate.sh:176, tests/test-spec-gate.sh:178, scripts/verification-lib.sh:2861
+- **Reproduced:** In my copy, round 20's mutant applied and restored with `cmp`: `acceptance_named_cases` now fails. The accept of the empty-header return for T006 exits 0 instead of 3, the diagnostic `empty required set must explicitly be none` is missing, and tasks.md changes.
+- **Root cause:** implementation-error
+- **Blocks:** none
+- **Wrong behavior:** None remains. A return for the no-row task T006 with an empty `Failure modes:` header is refused with the exact diagnostic, and tasks.md keeps its text. A header followed by narrative reaches the same guard through the parser's truncation record, so the same assertion protects it.
+- **Class-wide fix:** Done by T031a1o1. No further task.
+
+### Finding O-031
+- **Class:** named-case-fixture-strength
+- **Status:** resolved
+- **Prior:** O-031
+- **Severity:** minor
+- **Scenario:** In round 20, a mutant made `vf_tally` append to the history it reads, and both 002 tally cases stayed green, because no case hashed what the tally read.
+- **Where:** tests/test-gate-contracts.sh:559, tests/test-gate-contracts.sh:561, tests/test-gate-contracts.sh:2245, tests/test-gate-contracts.sh:2299, tests/test-gate-contracts.sh:2309, scripts/verification-lib.sh:2150
+- **Reproduced:** In my copy, each mutant applied and restored with `cmp`. Round 20's mutant, `vf_tally` appending a comment line to the history it reads after it reports, now fails all three new digest assertions in `shipped_002_tally_case` and `tally_class_cases`. So does a mutant that creates a new empty file under `notes/`. A mutant that appends a newline to an existing `reality-check.md` fails the shipped 002 assertion, the only case whose history has one.
+- **Root cause:** implementation-error
+- **Blocks:** none
+- **Wrong behavior:** None remains for file content. `records_digest` covers every regular file under each directory the tally reads, by name and bytes. It does not see a new empty directory or a mode change, and neither rewrites a shipped artifact.
+- **Class-wide fix:** Done by T031a3o1. No further task.
+
+### Escalation
+
+Round 21 is past round 3. Its one blocking finding is O-029, still open; it is not a new defect.
+- **The spec is right.** AC-009, REQ-012 and the plan say a reconciliation orders authorizations by its own timestamp, bound to the history's digest.
+- **The prescription left the gap.** Round 20 prescribed a reconciled time of 23:59:59Z and a waiver earlier that day, and asked for each assertion to be killed by its three mutants. The repair does exactly that. But 23:59:59Z is also what an end-of-day reading of the date yields, so the timestamp half of the binding is proven against midnight only.
+- **The decision is the user's.** The repair is test-only and small: one record time, one waiver and one future-record case in one function. It moves the source, so it needs a new floor and an authorized round 22. The alternative is to accept O-029's remaining risk with a signed waiver in the STATUS.md Decisions log. The kernel behaves correctly in every probe here; the risk is a later regression that would pass green. O-032 does not block either way.
+
+### Held up / follow-up tasks
+
+Held up under attack:
+
+- **T031a4o1, the digest and round binding.** Every mutant of the reconcile-time check is killed: the whole check, its digest half and its round half. So is every mutant of the read-time binding: the whole check and its digest half. The edited-history assertions work for the right reason: the floor is re-run on the edited history, so it is current and only the binding refuses the round, and the absence of `authorized` is a sound check because no refusal text contains that word.
+- **T031a4o1, the date guard and the early waiver.** The record stamped before the history's date kills both the whole guard and its before-the-date half. Midnight is killed by the early waiver's exact diagnostic.
+- **T031a1o1.** The new refusal is pinned by its exact diagnostic and kills round 20's mutant. The byte check compares tasks.md as `$(cat)` text, which drops trailing newlines, like every other check in this function; a refused accept writes nothing, so this smells but does not break.
+- **T031a3o1.** `records_digest` sorts names under `LC_ALL=C` and hashes each regular file, and every directory the tally reads in these cases is hashed before and after. The kit-level 002 check is honest as relabelled: nothing in the case writes there.
+- **The hand-written early record.** `vf_round_history` checks the round and digest of `legacy-time.nul` but not its date bounds. Only `--reconcile` writes that file, and it checks them, and a digest-bound record cannot later fall outside its history's date. A hand-forged record is as forgeable as any ledger here, so I record this as a smell, not a finding.
+- **Shipped positives.** None of the new cases asserts an attack at exit 0. Each accepted input is honest: the valid reconcile, the current waiver, the restored history, the explicit none, and the tally runs.
+
+Follow-up tasks proposed:
+
+- T031a4o2, test files only (→ O-029). In `round_legacy_reconcile_cases`, reconcile to 2026-07-21T06:00:00Z and refuse a waiver dated 2026-07-21T05:00:00Z with the exact diagnostic. Refuse a future-stamped reconcile record before the valid one. Show each new assertion killed by the end-of-day, clamp and future-half mutants.
+- O-032 goes to the follow-up spec with the corrected recovery above. It needs a kernel change, which is not authorized, and it does not block.
+<!-- gate-round-end: opponent:21 -->
+
+## Round 22
+
+**Round:** 22
+**Timestamp:** 2026-10-17T15:15:47Z
+**Source:** 809a9b69c4a360cc3e17c07a1f2126a872eb7c229768d4f36f948f228167a443
+**Floor:** FLOOR-3Ge8eO
+**Verdict:** CHALLENGED
+**Blocking:** 1 · **Minor:** 2
+
+### What I attacked
+
+I worked only in a copy under `/private/tmp/opp22/work`, built from the live enumeration (`git ls-files --cached --others --exclude-standard`) and git-initialized, with `TMPDIR=/private/tmp/opp22/tmp/`. The files that matter hash the same in the copy and the worktree: `scripts/verification-lib.sh` `015859de…` (unchanged since round 21), `scripts/spec-gate.sh` `79f20eee…`, `tests/test-spec-gate.sh` `bf297cb1…` (the hash `r22-dev.log` prints), `tests/test-gate-contracts.sh` `97beb809…` and `tests/helpers.sh` `b7bc6ff9…`. In the worktree I created, changed and removed nothing; my file tool refuses report files, so the invoker persists this block. I ran no floor, round, checkpoint, capture, accept, suite or test function there, sourced nothing from its `tests/`, and ran no container.
+
+- **Scope.** The delta in `r22-session.diff`: T031a4o2 in `round_legacy_reconcile_cases`, its task block and the new Decisions entries. Also the kernel paths the case drives: the legacy read in `vf_round_history` (`:3403` to `:3407`), the ordering comparison in `vf_round_authorized` (`:3493`), `vf_gate_waiver_check`, and the `--reconcile` branch of `vf_gate_round` (`:3578` to `:3586`). I read REQ-011, REQ-012, AC-009, FM-016, the plan's authorization paragraph, the verification contract's legacy paragraph, and shipped 002's history and STATUS.
+- **Method.** Each case ran alone through a runner that copies its suite with the final `t_run_all` replaced by one focus test, as `r22-dev.sh` does. Each mutant is an exact-anchor edit of the copy's kernel that refuses unless its anchor occurs once; after every run the kernel was restored and checked with `cmp`. All runs used `/bin/bash` 3.2.57 and the macOS awk. Unmutated, the case passes. During one stretch another process filled the disk to zero; I discarded every run from that window, re-ran them after the disk recovered behind a free-space guard, and checked every log for disk errors.
+- **The dev run's mutants.** I re-ran the 13 O-029 mutants of `r22-edits/mutants-r22.py` against the current case. Twelve are killed by the assertions `r22-dev.log` names; `readround` survives, and I agree with round 21 that it is equivalent. I did not re-run the O-030 and O-031 mutants: neither their cases nor the kernel changed since round 21 killed them.
+- **New mutants (11).** Read-path readings that ignore the record: noon of the history's date, the next day's midnight, and the record clamped to the next day's midnight. All three are killed. Survivors on the current case:
+  - fail open: a record on the history's own date read as that date's midnight; the record truncated to its hour; the record truncated to its minute (O-029 below);
+  - fail closed: the guard requiring a later day than the history's date; a read that never orders earlier than the end of the history's date; the record's validity check removed from `--reconcile`; the future half compared by date only, and by year only (O-033 below).
+- **Round 21's case as a control.** I rebuilt round 21's suite by reversing the delta (`b94c7dfa…`, the hash round 21 recorded) and ran its case under the new survivors. It kills the same-day midnight reading, both truncations and the later-day guard; of the five I ran there, only the end-of-day floor survives.
+- **Probes on the unmutated kernel.** Through the fixture's own `floor_fixture` CLI on a copy of 002's history: a record at 2026-07-20T18:00:00Z reconciles; a waiver at 12:00:00Z that day is refused at exit 4 with `not after the previous round completion at 2026-07-20T18:00:00Z`; a waiver at 19:00:00Z is authorized and round 6 reserves. A record at 2026-07-21T06:45:30Z refuses waivers at 06:30:00Z and 06:45:10Z the same way. Records stamped `2026-07-20T25:00:00Z` or `2026-07-20` exit 3, write nothing, and a correct record then reconciles. The kernel is correct in every probe.
+- **A prototype of the repair.** In a copy of the suite I replaced the valid-record block with a same-day record and a later-day record at non-round times (O-029's Class-wide fix). Unmutated it passes, ShellCheck is clean, and it kills all 16 mutants I ran against it.
+- **Claims.** `r22-capture.rc`, `r22-return-T031a4o2.rc`, `T031a4o2-accept.rc`, `r22-floor-1.rc`, `r22-floor-validate.rc` (stderr empty, the frozen source printed), `r22-scope.rc`, `r22-reserve.rc` and both batch logs read 0. CAP-722-hO9jDO carries input `809a9b69…` before and after and shows 15 suites passing 147 of 147, `test_rounds` among them. T031a4o2 is ticked with that capture and return digest `a28b333c…`. The reservation fields match `ROUND-22/meta.nul`, and the scope diff names only STATUS.md, tasks.md and `tests/test-spec-gate.sh`.
+- **Not examined.** Linux with GNU tools and mawk; hosted CI, which has not run on this source; a full-suite run under any mutant (only `round_legacy_reconcile_cases` writes `legacy-time.nul` in `tests/`, so the focus run decides each read-path and reconcile mutant); O-026 to O-028, since no report-grammar code changed; and the rest of the brief's known-open list, which I did not re-litigate.
+
+### Finding O-029
+- **Class:** named-case-fixture-strength
+- **Status:** open
+- **Prior:** O-029
+- **Severity:** wrong-result
+- **Scenario:** T031a4o2 replaced the case's only valid record, on the history's own date at 2026-07-20T23:59:59Z, with one at 2026-07-21T06:00:00Z, and refuses a waiver one whole hour earlier. It moved the record instead of adding a second one, so the fixture now pins one point on a later day and nothing on the history's date.
+  - **The same-day region.** The `--reconcile` guard admits a record dated on the history's date or on any later day up to now. Shipped 002 is a same-day history: its five rounds and its round 4 and round 5 authorizations are all dated 2026-07-20. An honest record for it names a time on that date, which is what REQ-012's same-day ordering and the contract's "before ordering same-day authorization" are about. A kernel that reads a same-day record as the date's midnight now passes, which is round 20's midnight reading again, for the records an operator would actually write.
+  - **The round hour.** 06:00:00 has zero minutes and seconds, and the refused waiver sits an hour before it. A kernel that drops the record's minutes and seconds, or only its seconds, prints the same `2026-07-21T06:00:00Z` and passes the exact diagnostic.
+  - **Not monotone.** Round 21's case killed all three of these mutants, because its record carried nonzero minutes and seconds on the history's date. The repair killed the end-of-day, clamp and future-half mutants and reopened these three.
+- **Where:** tests/test-spec-gate.sh:1157, tests/test-spec-gate.sh:1158, tests/test-spec-gate.sh:1160, tests/test-spec-gate.sh:1162, tests/test-spec-gate.sh:1164, scripts/verification-lib.sh:3406, scripts/verification-lib.sh:3493, scripts/verification-lib.sh:3583
+- **Reproduced:** In my copy, each mutant applied to `:3406` and restored with `cmp`.
+  - **Current case.** Under the same-day midnight reading, the hour truncation and the minute truncation, `round_legacy_reconcile_cases` passes, `1/1 passed`.
+  - **Round 21's case.** Each of the three is killed, by `AC-009: a waiver dated before the reconciled completion authorized the next round`.
+  - **Hour, end to end.** A record at 2026-07-21T06:45:30Z reconciles, and a waiver dated 2026-07-21T06:30:00Z prints `authorized: opponent round 6`; after a floor, `round` reserves round 6. Unmutated, that waiver is refused at exit 4 with `not after the previous round completion at 2026-07-21T06:45:30Z` and nothing is reserved.
+  - **Minute, end to end.** The same record and a waiver at 06:45:10Z: authorized, and round 6 reserved. Unmutated: refused at exit 4, nothing reserved.
+  - **Same day, end to end.** A record at 2026-07-20T18:00:00Z and a waiver at 12:00:00Z that day: authorized, and round 6 reserved. Unmutated: refused at exit 4 with `not after the previous round completion at 2026-07-20T18:00:00Z`, nothing reserved.
+- **Root cause:** plan-gap
+- **Blocks:** AC-009, REQ-012
+- **Wrong behavior:** Each of these regressions lets a waiver written before the reconciled completion authorize and reserve the next round with every suite green, which bypasses the per-round cap REQ-012 requires: the wrong behavior O-029 has named since round 20. They are less natural than round 21's end-of-day reading, but they are not new attacks on an old fixture: the case this repair replaced killed them, and the same-day region it dropped is where 002's real records fall. One record at one coarse point is an enumeration, and the class stays open. The root cause is plan-gap: round 21's recipe, which this gate wrote, and the task block prescribed one later-day record at 06:00:00Z, and the code follows them faithfully.
+- **Class-wide fix:** Test files only, in `round_legacy_reconcile_cases`. Derive the records from the guard, which admits two regions: the history's date and the later days up to now.
+  - **Same-day record.** Reconcile round 5 to 2026-07-20T15:17:43Z. A waiver at 15:17:42Z is refused with `not after the previous round completion at 2026-07-20T15:17:43Z`, and one at 15:17:44Z is authorized.
+  - **Later-day record.** Then reconcile again, to 2026-07-21T06:17:43Z. A waiver at 06:17:42Z is refused with `not after the previous round completion at 2026-07-21T06:17:43Z`. Keep the bad-record loop, the current waiver, the edited-history steps and the reservation as they are.
+  - **Check.** My prototype of exactly this passes unmutated and under ShellCheck, and kills 16 of 16 mutants: midnight, end of day, clamp, both read-check mutants, the reconcile check, the whole guard, its future half, the same-day midnight reading, both truncations, the end-of-day floor, the later-day guard, the next day's midnight, its clamp and noon.
+
+### Finding O-033
+- **Class:** named-case-fixture-strength
+- **Status:** new
+- **Prior:** none
+- **Severity:** degraded
+- **Scenario:** Three clauses of the `--reconcile` path are pinned nowhere, or at one far point, and a regression in each fails closed with every suite green.
+  - **Same-day records refused.** Rewriting the guard's `! "${stamp:0:10}" < "$VF_ROUND_DATE"` as `"${stamp:0:10}" > "$VF_ROUND_DATE"`, a classic slip when a double negative is made positive, refuses every record on the history's own date. Round 21's case killed it; the current case does not. A read that never orders earlier than the end of the history's date also refuses a same-day waiver written after a same-day record; that one survived round 21's case too.
+  - **Validity unchecked.** Removing `vf_utc_valid` from `:3582` lets a record with no real time through.
+  - **Future by date or year.** Comparing the future half by date or by year only lets a record stamped later today, or later this year, through; the 2099 record does not tell them apart.
+- **Where:** tests/test-spec-gate.sh:1142, tests/test-spec-gate.sh:1147, tests/test-spec-gate.sh:1158, scripts/verification-lib.sh:3406, scripts/verification-lib.sh:3582, scripts/verification-lib.sh:3583
+- **Reproduced:** In my copy, each mutant applied and restored with `cmp`; the current case passes under each of the five, `1/1 passed`.
+  - **Later-day guard.** Round 21's case fails under it: its same-day reconcile exits 3. Probe: a record at 2026-07-20T18:00:00Z exits 3 with empty output, and a waiver at 19:00:00Z that day is then refused with `date-only history needs timestamped digest reconciliation`. Unmutated, the record reconciles, the waiver is authorized and round 6 reserves.
+  - **End-of-day floor.** The same record reconciles, but the 19:00:00Z waiver is refused with `not after the previous round completion at 2026-07-20T23:59:59Z`.
+  - **Validity.** Records stamped `2026-07-20T25:00:00Z` and `2026-07-20` are each written at exit 0, the first printing `reconciled legacy gate=opponent round=5 timestamp=2026-07-20T25:00:00Z`. Then `waiver`, `round`, and `round --reconcile` with a correct record all give `rc=3 out=[]`. Unmutated, both records exit 3 and write nothing, the correct record reconciles, and round 6 reserves.
+- **Root cause:** plan-gap
+- **Blocks:** none
+- **Wrong behavior:** Each regression refuses a valid same-day reconciliation or a valid same-day waiver, or, for a malformed record, wedges the gate with no diagnostic until `legacy-time.nul` is deleted by hand (the O-032 wedge, reached from a record the kernel itself accepted). A near-future record refuses every waiver until its time passes. The cap holds in every case, so this is degraded, as round 21 graded the future half alone. The task block's fixture design named neither the same-day region nor these clauses, hence plan-gap.
+- **Class-wide fix:** Test files only. O-029's fix kills the later-day guard and the end-of-day floor. In the bad-record loop, add a record with an impossible time, such as 2026-07-20T25:00:00Z, refused at exit 3 with no `legacy-time.nul`. For the future half, add a record later today than now, computed without GNU or BSD date arithmetic (for example today's date at 23:59:59Z, skipped in the last second of the day), refused the same way. This can go with O-029's task or to the follow-up spec.
+
+### Finding O-032
+- **Class:** round-recovery-diagnostics
+- **Status:** open
+- **Prior:** O-032
+- **Severity:** degraded
+- **Scenario:** An operator reconciles a legacy date-only history, then corrects one line in it. The recovery round 20 named, re-running `round --reconcile` with a record for the current history digest, is itself refused, because `vf_gate_round` reads the history at `:3552`, before the `--reconcile` branch at `:3578`, and the stale `legacy-time.nul` fails that read at `:3405` with exit 3.
+- **Where:** scripts/verification-lib.sh:3405, scripts/verification-lib.sh:3552, scripts/verification-lib.sh:3578, scripts/verification-lib.sh:3584
+- **Reproduced:** On the unmutated copy, whose kernel hashes as in round 21: a reconcile at 2026-07-21T06:17:43Z, one appended line, then `round --reconcile` with a record naming round 5 and the edited history's digest gives `rc=3 out=[]`. O-033's validity probe reaches the same wedge from a malformed record.
+- **Root cause:** implementation-error
+- **Blocks:** none
+- **Wrong behavior:** REQ-012 requires a malformed or stale existing record to fail closed with a named recovery action. The cap holds, which is why this stays degraded, but the only recovery is a manual file deletion that no output names.
+- **Class-wide fix:** Unchanged from round 21, for the follow-up spec, since no kernel change is authorized: in `--reconcile`, read a stored record that no longer matches leniently so that a record for the current digest can replace it, and give every `return 3` in the legacy read and in `--reconcile` a `round recovery:` diagnostic naming the disagreeing field and that recovery.
+
+### Escalation
+
+Round 22 is past round 3, and its one blocking finding is O-029, still open, not a new defect.
+- **The spec is right.** REQ-012, AC-009 and the contract say a reconciliation orders authorizations by its own timestamp, bound to the history's digest, including same-day authorizations.
+- **The prescription left the gap.** Round 21's recipe, written by this gate, moved the record to a later day at a round hour instead of adding a later-day record beside the same-day one. The repair followed it exactly. The fix is still test-only and small, and a prototype of it killed all 16 mutants I ran against it.
+- **The decision is the user's.** Repair now (it moves the source, so it needs a new floor and an authorized round 23), or accept O-029's remaining risk with a signed waiver in the STATUS.md Decisions log. The kernel behaves correctly in every probe here; the risk is a later regression that would pass green. O-032 and O-033 do not block either way.
+
+### Held up / follow-up tasks
+
+Held up under attack:
+
+- **Every history-only reading.** Midnight, noon, end of day and the next day's midnight, and the record clamped to the end of the day or to the next midnight, are all killed. The exact diagnostic pins the string `2026-07-21T06:00:00Z`, which no reading of 2026-07-20 can print. In that sense round 21's statement of O-029 is met; what stays open is the same-day region and the record's precision, above.
+- **The future half.** The 2099 record kills the removal of the future half, and both halves of the guard together.
+- **The binding.** Every reconcile-check mutant is killed (whole, digest half, round half), and so are the read-check whole and digest-half mutants. The read-path round check alone stays equivalent, as round 21 held.
+- **The bad-record loop.** Each wrong record is judged alone (`rm -f` after each), each label names what is wrong with its record, and each mutant fails the labels of its own mechanism and no others, so the assertions fail for the right reason.
+- **Shipped positives.** The later-day record accepted at exit 0 is honest input: the guard admits it, and a later time can only refuse more waivers. The current waiver, the restored history and the reservation are honest too.
+- **Claims.** The receipts listed under What I attacked read exit 0 and match the files they describe.
+
+Follow-up tasks proposed:
+
+- T031a4o3, test files only (→ O-029, and O-033's same-day half). In `round_legacy_reconcile_cases`, reconcile first to 2026-07-20T15:17:43Z with waivers at 15:17:42Z (refused, exact diagnostic) and 15:17:44Z (authorized), then to 2026-07-21T06:17:43Z with a waiver at 06:17:42Z (refused, exact diagnostic). Show it kills the 16 mutants listed under O-029.
+- O-033's validity and near-future records, with T031a4o3 or for the follow-up spec (minor).
+- O-032 goes to the follow-up spec with the recovery above. It needs a kernel change, which is not authorized, and it does not block.
+<!-- gate-round-end: opponent:22 -->
+
+## Round 23
+
+**Round:** 23
+**Timestamp:** 2026-10-25T14:43:15Z
+**Source:** a7e7dd326b27c7565c26349485c440af26f718a7f16e400ea42ed6961d03cd1a
+**Floor:** FLOOR-il41Kn
+**Verdict:** CLEARED
+**Blocking:** 0 · **Minor:** 1
+
+### What I attacked
+
+This resumes the interrupted review of the existing reservation, reserved 2026-10-25T13:14:19Z; it is not another round. The live orchestration catalog reports provider `codex_codex_gym`, model `gpt-6.1-sol`, reasoningEffort `max`, serviceTier `default`. These match `s26-opponent-invocation-current-provider-retry3.json`, whose observed task ID is `node:delegated-task:command%3Amcp%3Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%3Adelegate-task%3Asdd003-opponent-round23-current-provider-recovery-retry3`. The earlier failed attempt returned no verdict; its saved work is evidence, not a completed gate.
+
+I checked the reservation, both saved state manifests, the round-22-to-23 scope and session diff, the relevant spec/plan/task contracts, prior findings and their responses, and the legacy reconciliation grammar. The changed executable surface is `tests/test-spec-gate.sh::round_legacy_reconcile_cases` at line 1133, called by `test_rounds` at line 1212. I traced its fixture copying, assertion propagation and normal suite enumeration, plus its unchanged consumers: `vf_round_history`, `vf_round_authorized`, `vf_gate_waiver_check` and the legacy `--reconcile` branch of `vf_gate_round`. FM-016, INV-004, AC-009 and REQ-012 determine the ordering and binding attacks.
+
+Before reusing the interrupted work, I compared every copied scratch file with a live counterpart: 77 in `work` and 30 in `probes`, all byte-identical. The original library backup and both scratch libraries match the live library, SHA-256 `015859de8d68d5cbaffa3ea9078a74584f364312b09cd3c739731fd6716a6c36`; the scratch and live test match at `3dacde897001828698c0c8d0e2a40f077e8b29100937df92ce2a218ce184a41a`. The probe histories match shipped 002. The retained full function and shortened mutation prefix match the corresponding live function bytes; probe definitions differ only by omitting the final runner invocation. I also recomputed the live source snapshot: it is byte-identical to FLOOR-il41Kn's sealed `inputs.nul`, with the reserved source digest and HEAD `2049f65960cc91e9e30bbd5ff1e11fc0fdf7cbd9`. The floor and reservation seals match their files.
+
+Recovered evidence under `/private/tmp/opp23-codex-gym-3es8gbyb`, inspected rather than rerun:
+
+- `logs/baseline.log` and `baseline.rc`: the complete unmodified focused case passed, 1/1, exit 0 under Bash 3.2. The shorter prefix also passed before mutation (`prefix-baseline.log`, exit 0). That prefix retains every changed assertion and bad-record check, stopping before the current waiver, edited-history steps and fixture floors.
+- `logs/mutation-summary.json` agrees with the recovery record and the eight raw mutation logs. All eight exit 1 at relevant assertions: `samedaymid`, `hour` and `minute` wrongly authorize the one-second-early waiver; `maxeod` refuses the one-second-later waiver and prints the wrong completion time; `laterday` refuses the valid same-day record; `recvalid` writes the impossible-time record; `futureday` and `futureyear` write the later-today record. These are behavioral assertion failures, not setup failures. The restored library matches the original backup.
+- `probes/boundary-probe.sh` and `logs/boundary.log` (exit 0) independently isolate each waiver. With records at 2026-07-20T15:17:43Z and 2026-07-21T06:17:43Z, one second before and equality both exit 4 with the exact reconciled completion time; one second after exits 0 with `authorized: opponent round 6`. The existing equality assertion at `tests/test-spec-gate.sh:1413` reaches the same shared comparison at `scripts/verification-lib.sh:3493`.
+- `probes/reality-probe.sh` and `logs/reality.log` (exit 0) exercise the sibling gate with shipped 002's reality-check history: a wrong digest exits 3 without a record; a valid record reconciles and reads back round 1, the exact timestamp and legacy style. O-032 is independently reproduced in the boundary log below.
+
+I inspected the saved developer receipts, not a new execution: the task is accepted with CAP-744-sgOYqc; floor, capture, acceptance and scope receipts read exit 0. The per-mutant lines in `r23-dev.log` show 27 kills and the explicitly equivalent `readround` survivor; its footer's `28/28` must not be read as 28 actual kills. Its 18 assertion mappings supplement the eight independently recovered mutation checks.
+
+### Finding O-032
+
+- **Class:** round-recovery-diagnostics
+- **Status:** open
+- **Prior:** O-032
+- **Severity:** degraded
+- **Scenario:** Reconcile shipped 002's date-only opponent history to 2026-07-21T06:17:43Z, append a line to that history, then submit a correct reconciliation record naming round 5 and the edited history's digest.
+- **Where:** scripts/verification-lib.sh:3405, scripts/verification-lib.sh:3552, scripts/verification-lib.sh:3578, scripts/verification-lib.sh:3584
+- **Reproduced:** The recovered, source-matched boundary probe records the corrected reconciliation at exit 3 with empty output. Deleting only the stale legacy-time.nul makes that same record reconcile at exit 0 with the expected timestamp diagnostic. See logs/boundary.log under the recovery scratch directory.
+- **Root cause:** implementation-error
+- **Blocks:** none
+- **Wrong behavior:** The stale stored record is validated before the replacement reconciliation is examined. The gate fails closed, but the CLI neither replaces the stale record nor names the manual recovery. This remains the previously recorded minor defect, at four locations.
+- **Class-wide fix:** Keep the existing follow-up: permit an explicit corrected reconciliation to replace a stale binding, and name the disagreeing field and recovery in each legacy-read and reconciliation refusal. Cover recovery after a history edit and the malformed-record refusals. No kernel repair is authorized in this round.
+
+### Held up / follow-up tasks
+
+T031a4o3 addresses O-029 and O-033. The valid regions come from the guard itself: the history's own date and later dates through the current time. Both now have non-round timestamps and precise early-waiver diagnostics; the same-day positive also rejects an end-of-day floor. Invalid-time and near-future records are refused without leaving reconciliation state. The bad-record loop isolates each input, and the original digest/round checks, edited-history refusal and restored-history reservation remain in the complete function. The changed positives are valid inputs, and assertion failures reach the suite's exit status. I established no remaining substantive defect in these repairs.
+
+The read-path round-check-only mutant remains equivalent within the documented trusted workspace: the writer checks the round, and the retained digest check binds the stored record to the exact history. A manually forged record does not establish a new defect under that model. O-032 stays open for its existing follow-up; O-026, O-027 and O-028 remain recorded minor follow-ups and were not reassessed. Clearance here neither clears those items nor supplies the separate reality-check verdict.
+
+Not rerun: the expensive floor, full suites, completed probes or mutation matrix. Linux/GNU execution, hosted CI and the brief's other unchanged unexamined surfaces were not freshly assessed; their previously recorded limits remain.
+<!-- gate-round-end: opponent:23 -->
+
+## Round 24
+
+**Round:** 24
+**Timestamp:** 2026-10-26T07:25:24Z
+**Source:** c7a82b3ae3b900dcb02a4839decad74db1a13457c5bab9ff859625a5357f0be6
+**Floor:** FLOOR-GMlmyY
+**Verdict:** CHALLENGED
+**Blocking:** 1 · **Minor:** 1
+
+### What I attacked
+
+This completes the adversarial review of the same reservation, reserved 2026-10-26T06:56:06Z. The failed MAX r1 invocation produced no report or verdict; its planned attacks are not executed evidence. Actual recovery identity comes from `notes/verification/reports/s28-opponent24-max-retry2-invocation.json`: task suffix `sdd003-s28-opponent24-max-current-provider-retry2`, provider `codex_codex_gym`, model `gpt-6.1-sol`, reasoningEffort `max`, serviceTier `default`.
+
+I read all 23 acceptance criteria, the applicable requirements, plan FM/INV rows and registry, T031a5/T031a6/T029 and gate task blocks, the exact round-24 and reality-check-4 waivers, reservation metadata, complete five-file source delta, opponent23 and RC3's gaps/responses. I inspected the classifier, capture/snapshot/currency and matrix/prior-PASS implementations, their connected callers, fixture helpers, assertion propagation, suite enumeration, verification grammar and invoker guidance. FM-001/005/010/020 and INV-001/005 frame these attacks. Seven inspected runtime/helper/runner files match the prior snapshot; the newly exposed classifier behavior justifies expanding into that unchanged affected implementation.
+
+I consumed the existing reservation's successful floor-validation receipt without validating or executing the real floor again. FLOOR-GMlmyY records 21 executions and 79 reuses. Its current T031a5 proof is CAP-770-AgEMCd, 19/19; T031a6 and T029 use CAP-769-bZPhmg, 18/18. CAP-767/768 and source-A7 captures were not treated as current. The hosted audit and completed T029 rejection/acceptance receipts remain context, not a substitute for inspecting assertions or an RC4 verdict.
+
+Fresh attacks ran only under `/private/tmp/opp24-retry2-dp2syp7l`, using Bash 3.2.57. Preserved scripts, command-specific tasks/output, result receipts and hashes are under `notes/verification/reports/s28-opponent24-max-retry2-probes/`:
+
+- The exact changed classifier loop and existing shell-runner control pass. Removing only `typecheck` recognition or only `tsc --noEmit` recognition separately makes the corresponding new assertion fail, exit 1.
+- Eighteen actual analyzer invocations exercise weak commands and runner controls. Nine weak variants wrongly omit the required warning; O-034 groups their shared cause. The input declarations and full analyzer output are retained, rather than inferred from the regex alone.
+- The complete current `matrix_runtime_cases` passes in isolation. Its six independent revisions cover implementation, genuinely consumed transitive helper, fixture, lock, config and actual criterion text. I inspected current/reuse refusals, saved/carried PASS refusals, byte-identical old logs and restored positives, plus its retained omission, impact, verdict and corruption controls.
+- Removing the current-manifest comparison makes that same test fail with 23 unexpected successes. Separately removing matrix capture validation makes it fail with 12 unexpected successes, including saved and carried PASS. Both exit 1 at behavioral assertions. These are deliberate scratch mutations, not defects attributed to the unmodified runtime. The restoration audit confirms all copied originals match live source again; all 62 preserved probe files match their manifest hashes.
+
+### Finding O-034
+
+- **Class:** verification-command-classification
+- **Status:** new
+- **Prior:** none
+- **Severity:** wrong-result
+- **Scenario:** Give an AC-referencing task an untyped Verify of `tsc --noEmit tests/unit.ts`, `npm run typecheck -- --project tests/tsconfig.json`, `grep AC-001 tests/check.sh` or `npm run build -- --outDir tests/build`. Siblings include `test -e README.md`, `test -f README.md`, `grep pytest README.md`, `rg bats README.md` and `diff fixtures/test.txt actual.txt`.
+- **Where:** scripts/sdd-analyze.sh:291, scripts/sdd-analyze.sh:292, scripts/sdd-analyze.sh:307, tests/test-sdd-analyze.sh:669
+- **Reproduced:** `classifier-edge.sh` and `classifier-siblings.sh` invoke the copied, source-matched public analyzer on actual task declarations. Every listed command returns 0 without `untyped AC Verify`, and reports `consistent`. Bare `npm run typecheck`, `tsc --noEmit` and `grep AC-001 README.md` warn; genuine shell/node/cargo/pytest/bats runners remain accepted. See `classifier-observations.json` and the numbered task/output receipts.
+- **Root cause:** implementation-error
+- **Blocks:** AC-004, REQ-005
+- **Wrong behavior:** The runner exemption searches the entire command for test-looking words or paths before classifying weak verification. A filename or search pattern therefore suppresses the warning without executing a behavioral test. The leading `test` also exempts the file-existence checks the weak branch explicitly names. AC-004 expressly requires more than runner substring matching; the new four-command regression loop does not cover these argument-position cases.
+- **Class-wide fix:** Repair the shared classifier so runner recognition uses the command's executable/runner position rather than unrelated argument substrings. Sweep both exemption alternatives and retain genuine shell runners and explicit test/assertion/static/manual controls. Extend the existing loop with the reproduced path, search-pattern and file-existence negatives. This is one shared classifier class, with four cited implementation/consumer/test locations; arbitrary shell syntax beyond these cases was not exhaustively explored.
+
+### Finding O-032
+
+- **Class:** round-recovery-diagnostics
+- **Status:** open
+- **Prior:** O-032
+- **Severity:** degraded
+- **Scenario:** Reconcile shipped 002's date-only opponent history, edit that history, then submit a corrected reconciliation naming round 5 and the edited history's digest.
+- **Where:** scripts/verification-lib.sh:3405, scripts/verification-lib.sh:3552, scripts/verification-lib.sh:3578, scripts/verification-lib.sh:3584
+- **Reproduced:** Retained from opponent23's source-matched boundary probe: corrected reconciliation exits 3 with empty output; removing only stale legacy-time.nul permits the correction. Not rerun here. The current library is byte-identical to that reviewed implementation, SHA-256 `015859de8d68d5cbaffa3ea9078a74584f364312b09cd3c739731fd6716a6c36`.
+- **Root cause:** implementation-error
+- **Blocks:** none
+- **Wrong behavior:** The stale stored reconciliation is rejected before its replacement is examined. It fails closed but supplies neither replacement nor the named manual recovery. The existing four-location minor remains unchanged.
+- **Class-wide fix:** Preserve the existing follow-up to permit explicit corrected reconciliation and explain refusals across the legacy-read/reconciliation paths. No kernel repair was authorized in this round.
+
+### Held up / follow-up tasks
+
+Open one class-wide follow-up for O-034 covering the shared classifier, its warning consumer and all reproduced sibling forms. A fresh review must establish that weak commands warn while genuine runners and declared verification kinds remain valid. T031a5's new simple typecheck assertions work, but they do not establish this surrounding contract. T031a6 withstands the focused freshness attacks; no separate substantive freshness defect was established.
+
+O-032 retains its existing minor follow-up. O-026/O-027/O-028 remain recorded minor follow-ups and were not reassessed; they are not new findings or newly cleared items. Prior O-029/O-033 repairs were not reopened without new evidence. No real source, tasks, STATUS, index, captures, floor, reservation or canonical gate history was changed; only the assigned report and excluded probe receipts were written.
+
+Not rerun: the real floor, full suites, hosted CI, T029 control, O-032 probe or historical mutation matrices. Other unchanged and previously unexamined surfaces retain their recorded limits; no RC4 readiness is supplied.
+Risk: weak untyped AC checks can silently pass authoring validation until O-034 is repaired; existing minor follow-ups remain open.
+<!-- gate-round-end: opponent:24 -->
+
+## Round 25
+**Round:** 25
+**Timestamp:** 2026-10-27T07:21:06Z
+**Source:** 16ffcec3c2f0cffa21b8c35e7b90d768a27bdfdd37deba9147edd25489946494
+**Floor:** FLOOR-qoRY6H
+**Verdict:** CHALLENGED
+**Blocking:** 1 · **Minor:** 1
+
+### What I attacked
+
+This is the independent opponent pass for the existing reservation of 2026-10-27T06:54:04Z. Live orchestration confirms `codex_codex_gym / gpt-6.1-sol / reasoningEffort=max / serviceTier=default`, matching `notes/verification/reports/s32-opponent25-max-invocation.json`. No nested delegation or additional round occurred.
+
+I read the complete hash-matched ready brief, all 23 ACs and applicable requirements/constraints, the plan's FM-001–FM-020, INV-001–INV-006 and registry, relevant task blocks, STATUS Decisions including the exact-round authorization, both constitutions and stack configuration. I read opponent23/24, RC3, the three repair quality reports and correction handoffs/provenance. The exact C7 comparison changes four mapped files: analyzer, analyzer tests, tasks and STATUS; 173 mapped source paths remain unchanged. The larger pre-existing HEAD delta is not attributed to this repair.
+
+The relevance sweep covered every AC, with focused source/assertion inspection rather than another RC evidence verdict:
+
+- AC-001–AC-006, AC-011 and AC-023: phase-aware authoring/bindings, malformed/shared definitions, local test ownership, explicit verification kinds, golden-example assertions, all 14 overlay defaults, command grammar, legacy compatibility and the sole weak-warning consumer. I inspected the actual 108 weak/56 clean declarations and warning/exit assertions, plus propagation through `t_fail`, `t_run_all` and `tests/run.sh`.
+- AC-007–AC-010, AC-012 and AC-017: floor/checkpoint execution and identity seams, lost-binding and next-stage counters, round authorization/history, report lifecycle/class/site assertions and actual-or-unknown metrics. Existing round-recovery limits remain; I did not reopen closed findings without new evidence.
+- AC-013–AC-016, AC-018, AC-020 and AC-022: snapshot/capture currency, return validation and atomic acceptance, saved/carried PASS consumers, briefing/invoker contracts and executable fixture assertions. I inspected T031a6's six independently consumed input revisions, old-log comparisons, restored positives and matrix refusal assertions. The live AC-016 dual-gate observation remains RC4's responsibility.
+- AC-019 and AC-021: fixture isolation, suite enumeration, portability receipts and real output/exit/byte-bound assertions. Fresh probes used Bash 3.2.57; no Linux or hosted suite was executed here.
+
+I consumed the successful existing-floor reservation receipt. FLOOR-qoRY6H has 101 records: 21 executions, 80 reuses and 22 unique captures. Current CAP-795-FlRr7i records analyzer 19/19; CAP-794-aUZ5t0 records contracts/T029 18/18; both have matching before/after source16ff. I read the current T029 rejection/acceptance and hosted four-job receipts as context. Historical CAP-791/792/793 and FLOOR-GMlmyY were not treated as current proof. No floor validator or suite was rerun.
+
+Fresh scratch work is preserved under `notes/verification/reports/s32-opponent25-max-probes/`, with scripts, exact task declarations, argv, outputs, results and hashes:
+
+- `classifier-probe.py`: 48 public-analyzer cases pass, including all nine original O-034 inputs, further direct/redirected weak forms and genuine runners/custom-assertion operands. The original reported forms are repaired.
+- `noclobber-probe.py` and `noclobber-corrected/results.json`: 48 public-analyzer cases isolate the remaining boundary below; 24 omit the required warning and 24 ordinary/spaced controls warn. Forty-eight owned-stub executions confirm Bash runs the intended tool with unchanged arguments. The configuration parser also accepts and preserves the three representative command strings. The initial `noclobber/` batch accidentally shadowed the analyzer's own grep with my stub and is explicitly discarded; only the corrected batch supplies these analyzer observations.
+- `currency-probe.py`: all 20 focused checks pass. Changing only the copied analyzer invalidates current/reuse/matrix proof and rejects acceptance without changing task bytes or the old log. Restoration permits acceptance. An actual criterion edit then rejects current evidence while repeated acceptance reports only `freshness=historical`; restoring the criterion restores currency. These were owned fixture checks, not live T029 or AC-016 runs.
+
+All 133 copied source files match their initial hashes and live counterparts after scratch mutations were restored. Supplied STATUS/tasks hashes, modes and mtimes still match. The parent owns the complete returned-worktree/HEAD/index comparison. Broader unchanged runtime, arbitrary shell syntax and platform behavior retain their prior review limits.
+
+### Finding O-034
+
+- **Class:** verification-command-classification
+- **Status:** open
+- **Prior:** O-034
+- **Severity:** wrong-result
+- **Scenario:** An AC-referencing task has an untyped Verify of `grep>|out.txt AC-001 README.md`, `/usr/bin/grep>|out.txt AC-001 README.md`, `./tools/rg>|out.txt AC-001 README.md` or `tests/diff>|out.txt old new`. The same omission occurs with a space after the operator, as in `grep>| out.txt AC-001 README.md`. These are direct known text tools with unquoted output redirection.
+- **Where:** scripts/sdd-analyze.sh:292, scripts/sdd-analyze.sh:293, scripts/sdd-analyze.sh:295, scripts/sdd-analyze.sh:313, tests/test-sdd-analyze.sh:668
+- **Reproduced:** `python3 -I /private/tmp/sdd-opponent25-8elh3grt/noclobber-probe.py` exits 0 after recording 24 missing warnings across grep/rg/diff and bare, absolute, ./tools/ and tests/ paths. Each affected public-analyzer call exits 0 and reports `consistent`. The 24 counterparts using ordinary attached `>` or whitespace before `>|` warn with exit 0. Owned Bash stubs record the same executable arguments and redirected output; see `noclobber-corrected/` and `noclobber-config.json` in the assigned receipts.
+- **Root cause:** implementation-error
+- **Blocks:** AC-004, REQ-005
+- **Wrong behavior:** The redirect substitutions cannot consume `>|` because their target class excludes the pipe character. The following text-tool predicate requires whitespace or end-of-command after the basename, so an attached operator hides the recognized weak executable. A single space before that same redirection restores the warning. The 108 weak regression declarations contain no `>|` case. This remains O-034's warning-classification failure at five cited source/consumer/test sites, despite repairing its previously reported operands and paths.
+- **Class-wide fix:** Retain anchored executable recognition and handle this direct output-redirection boundary for all three text tools. Extend the existing public-analyzer loop with attached/spaced operator and target-spacing pairs, including directory-qualified executables, while retaining genuine runner, operand and explicit-kind controls. Sweep the shared redirect handling and weak-tool boundary together; arbitrary quoting, wrappers and general shell parsing remain outside this finding.
+
+### Finding O-032
+
+- **Class:** round-recovery-diagnostics
+- **Status:** open
+- **Prior:** O-032
+- **Severity:** degraded
+- **Scenario:** Reconcile shipped 002's date-only opponent history, edit that history, then submit a corrected reconciliation naming round 5 and the edited history's digest.
+- **Where:** scripts/verification-lib.sh:3405, scripts/verification-lib.sh:3552, scripts/verification-lib.sh:3578, scripts/verification-lib.sh:3584
+- **Reproduced:** Retained from opponent23/24's source-matched probe: the corrected reconciliation exits 3 with empty output; removing only stale legacy-time.nul permits correction. Not rerun here. The current library remains SHA-256 `015859de8d68d5cbaffa3ea9078a74584f364312b09cd3c739731fd6716a6c36`.
+- **Root cause:** implementation-error
+- **Blocks:** none
+- **Wrong behavior:** Stale stored reconciliation is rejected before its replacement is examined. The command fails closed without naming replacement or manual recovery. The existing four-location minor is unchanged.
+- **Class-wide fix:** Retain the existing follow-up for corrected reconciliation and named diagnostics across the legacy history/reconciliation paths. No kernel repair was authorized or performed.
+
+### Held up / follow-up tasks
+
+Keep one class-wide O-034 follow-up covering the five listed sites and all reproduced tool/path/spacing siblings. Its original cases now hold, but the confirmed direct-redirection omission prevents clearance under AC-004/REQ-005. O-032 retains its existing minor follow-up. O-026/O-027/O-028 remain recorded minor follow-ups, unassessed here and not newly cleared. No separate substantive currency, acceptance or invalidation defect was established.
+
+Only this new report and the assigned excluded receipts were written in the worktree. No source, STATUS/tasks, real capture/acceptance/floor/reservation, canonical history, HEAD or index was mutated by this review. This is solely the formal OP25 verdict; it supplies no RC4, overall-readiness or merge verdict and authorizes no subsequent round.
+
+Not checked again: whole floor/full suites, hosted CI, historical mutation matrices, O-032 reproduction or the live AC-016 probe; unchanged surfaces retain the stated limits.
+Risk: direct text-only checks can still miss the required authoring warning; the recorded minor follow-ups remain open.
+<!-- gate-round-end: opponent:25 -->
+
+## Round 26
+**Round:** 26
+**Timestamp:** 2026-10-29T11:35:29Z
+**Source:** f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0
+**Floor:** FLOOR-LxJkv3
+**Verdict:** CHALLENGED
+**Blocking:** 1 · **Minor:** 1
+
+### What I attacked
+
+This is the genuine independent assessment of the existing reservation of 2026-10-29T11:11:14Z. The read-only live runtime and the actual `s47-opponent26-max-invocation.json` receipt agree on `codex_codex_gym / gpt-6.1-sol / reasoningEffort=max / serviceTier=default`. No substitution, nested agent or additional reservation occurred. I read the complete ready brief; its SHA-256 is `a6b7991e86f18b2371ea966dc09984761602d219a46ebd122d0d1beb0ae58d6d`.
+
+I independently read all 23 ACs, applicable requirements/constraints, plan FM-001–FM-020, INV-001–INV-006, grammar/registry/seams, relevant task claims including T031a5o1/T031a5/T031a6/T029/T030/T031, relevant STATUS Decisions, both constitutions and stack configuration. I read opponent23–25, relevant canonical finding history, RC3, the complete current O-034 repair and connected callers/assertions, quality r5 and retained fixture/provenance receipts. Quality Ship and green checks did not determine this verdict.
+
+The 177-path comparison against C7 independently confirms four changed mapped files: analyzer, analyzer tests, tasks and STATUS; 173 remain unchanged. All 177 current raw hashes match the current hosted source mapping. Git's non-executable 100644 mapping is consistent with the existing mode600 documents. The regenerated repair diff matches the supplied r5 analyzer/test hunks; its sole additional difference is T029's later Evidence refresh from CAP-817 to CAP-819. The larger dirty HEAD diff is pre-existing spec work. Scope receipts and the explicit 23-row relevance sweep are under `notes/verification/reports/s47-opponent26-max-probes/`.
+
+The relevance sweep inspected actual assertions and affected consumers:
+
+- AC-001–AC-006, AC-011 and AC-023: phase-aware/shared/dangling/quoted bindings, local test ownership, all four verification kinds, golden-example assertions, all 14 overlay defaults, command configuration and shipped compatibility. I read the whole changed analyzer/test, its sole weak-warning caller, warning aggregation, `t_fail`/`t_run_all` and suite failure propagation.
+- AC-007–AC-010: checker/suite counters, real failure and pipeline/next-stage controls, lost retained bindings, exact-second legacy reconciliation, both gates' caps and pending-round controls, class/site/lifecycle assertions and unchanged history checks. O-032 remains the known recovery limitation; closed findings were not reopened without new evidence.
+- AC-012–AC-018: report fields and retained scope, saved/carried PASS consumers, briefing/adapter assertions, invoker trace/stop/escalation controls, actual-or-unknown metrics, public help and all nine documented workflow-command assertions. The current T029 rejection/acceptance is existing context; the later authentic dual-gate AC-016 observation remains RC4's responsibility.
+- AC-019–AC-022: source enumeration and fixture isolation, Bash portability, summary byte/line/raw-log/argv/exit assertions, snapshot/capture currency, exact return bindings and atomic acceptance. I inspected T031a6's independently consumed implementation/helper/fixture/lock/config/criterion revisions, unchanged old logs and restored positives, plus current/reuse and saved/carried refusal assertions. These unchanged mechanisms were read, not rerun as another acceptance or mutation matrix.
+
+I consumed the successful existing-floor reservation validation. Independently rehashed floor/reservation seals and raw entries agree: FLOOR-LxJkv3 has 101 records, 5 executions, 96 reuses and 22 unique captures; its input digest is the reviewed source. CAP-818-fLEvh7 records analyzer 19/19 and CAP-819-05nYhW records contracts 18/18, both sealed, no-tick and with identical sourcef156 before/after manifests. Current suite/static capture seals and the retained four-job hosted-CI mapping were inspected. No floor validator, full suite, CI action, capture, acceptance or live-control run was started here.
+
+The reservation kernel genuinely exited 0, with 6,860 raw entries byte-identical at SHA-256 `3ca12e69830dd1f06b6b985847aafd6b54614c068e22167598b00ee835825731`. Its native wrapper genuinely exited 1 after including its own new growing log in its baseline. The preserved ownership observation establishes unchanged pre-invocation originals; it does not turn that wrapper exit into 0. Historical floor preservation failures involving .DS_Store and the generated verifier's global-refs field remain preserved, not repaired or attributed to source corruption.
+
+Fresh focused probes ran outside the worktree with the unmodified, source-matched public analyzer under Bash 3.2.57. Exact scripts, declarations, argv, stdout/stderr, results and hashes are retained in the assigned probe directory:
+
+- `focused-classifier-probes.py`: 181 public cases. All nine original OP24 cases, 48 OP25 noclobber variants, 48 other weak redirect cases, 48 redirected-runner cases and the numeric/operand/control cases meet their expectations. Sixteen newly examined qualified weak executables omit the required warning.
+- `qualified-executable-probe.py`: 29 further public cases produce 20 omissions and nine passing controls. A separate new-contract fixture containing explicit test/assertion/static/manual kinds stays consistent. Across both batches, there are 211 public-analyzer invocations including that combined kind control, with 36 omission observations covering 28 distinct commands.
+- Four direct owned-fixture executions compare `tests/test` and `tools/test`, both symlinks to the same real `/bin/test` binary, SHA-256 `da6c640b2c20476df1bd9d852ff87df56efde7e3a0eeaa010857703f7bf9fcdb`. Both return 0 for an existing README and 1 after its removal, with empty output. Their corresponding analyzer declarations differ solely in executable path: the tests path suppresses the warning; the tools path warns. No task-supplied Verify string was executed and no stub was put in the analyzer's PATH.
+
+The two literal-concatenation fixture builders are present. Retained fixed Bash3.2/Bash5.2-on/Bash5.2-off raw array streams are byte-identical to the old Bash3.2 baseline, with declared totals 287 weak/162 clean; the historical option-on corruption remains retained. I did not rerun a modern-Bash or historical fixture matrix. The original and redirect repairs hold within the cases above, but the executable-path sibling below prevents class clearance.
+
+### Finding O-034
+
+- **Class:** verification-command-classification
+- **Status:** open
+- **Prior:** O-034
+- **Severity:** wrong-result
+- **Scenario:** An AC-referencing task has an untyped Verify of `./tests/node_modules/.bin/tsc --noEmit tests/unit.ts`, `./tests/npm run build`, `./tests/npm run typecheck` or `./tests/test -f README.md`. Equivalent test/, tests/ and nested tools/tests/ executable prefixes also suppress the warning. All eight supported unquoted redirects retain the omission for `./tests/npm<operator/target> run typecheck`, including attached `>|out.txt`.
+- **Where:** scripts/sdd-analyze.sh:296, scripts/sdd-analyze.sh:299, scripts/sdd-analyze.sh:313, tests/test-sdd-analyze.sh:668
+- **Reproduced:** Run the retained `focused-classifier-probes.py` and `qualified-executable-probe.py` with GIT_OPTIONAL_LOCKS=0 from the assigned worktree. Their `public-classifier/results.json`, `qualified-executable/results.json` and `attack-summary.json` preserve 36 warning omissions across 28 distinct direct commands. Each affected public-analyzer invocation exits 0 and reports consistent. Corresponding tools/ controls warn. The second probe's four direct /bin/test observations establish that the concrete presence-only pair performs identical non-behavioral checks despite the different authoring verdicts.
+- **Root cause:** implementation-error
+- **Blocks:** AC-004, REQ-005
+- **Wrong behavior:** The generic test-path exemption at line296 returns before the known typecheck/build/file-existence branch at line299. The repair correctly checks grep/rg/diff basenames before that exemption, but leaves these other known weak forms after it. A directory component therefore turns a direct known weak executable into supposed behavioral-test evidence. These simple unquoted commands require no wrapper, compound syntax or general shell parser. The current regression matrix qualifies the text-tool basenames but omits qualified tsc/package-build/file-existence siblings. This is the same warning-classification defect at four cited implementation/consumer/test locations, not a new class or merely missing RC evidence.
+- **Class-wide fix:** Classify known weak executable/argument forms before the generic test-path exemption, retaining genuine script runners, package test subcommands and explicit kinds. Extend the existing public-analyzer assertions with these qualified basenames, nested test dependency paths, neutral-path counterparts and the eight redirect siblings. Preserve the passing original, noclobber, numeric &>, runner and operand controls. Arbitrary quoting, wrappers, heredocs and compound checks retain the explicit-kind/repository-script limit; their exhaustive classification is not demanded here.
+
+### Finding O-032
+
+- **Class:** round-recovery-diagnostics
+- **Status:** open
+- **Prior:** O-032
+- **Severity:** degraded
+- **Scenario:** Reconcile shipped 002's date-only opponent history, edit that history, then submit a corrected reconciliation naming round5 and the edited history's digest.
+- **Where:** scripts/verification-lib.sh:3405, scripts/verification-lib.sh:3552, scripts/verification-lib.sh:3578, scripts/verification-lib.sh:3584
+- **Reproduced:** Retained from the source-matched opponent23–25 observations: corrected reconciliation exits 3 with empty output; removing only stale legacy-time.nul permits correction. Not rerun here. The inspected current library remains SHA-256 `015859de8d68d5cbaffa3ea9078a74584f364312b09cd3c739731fd6716a6c36`.
+- **Root cause:** implementation-error
+- **Blocks:** none
+- **Wrong behavior:** Stale stored reconciliation fails the history read before replacement is examined. It fails closed without naming the effective manual recovery. The existing four-location minor remains unchanged.
+- **Class-wide fix:** Retain the existing follow-up for corrected reconciliation and named diagnostics across the legacy history/reconciliation paths. No kernel or minor-finding repair was performed.
+
+### Held up / follow-up tasks
+
+Keep one class-wide O-034 follow-up covering all four listed sites and the reproduced executable-path/redirect siblings. The original forms now hold, but O-034 remains open and blocking under AC-004/REQ-005. O-032 retains its existing minor follow-up. This round records two unresolved finding IDs at eight cited locations. O-026/O-027/O-028 remain previously recorded, unassessed minor follow-ups; they are not newly cleared or recounted as new observations here. No separate substantive acceptance, currency, invalidation or fixture-construction defect was established in the inspected scope.
+
+The protection inventory covers 22,822 pre-existing worktree entries, including 20,750 files. All original worktree files retain bytes/modes/mtimes; protected external Git files, the real index, HEAD, STATUS, tasks and source remain unchanged. My worktree writes are only this new report and new assigned probe files; the sole allowed concurrent file addition is the exact parent invocation receipt. New authorized children necessarily change the reports/probe directory mtimes, which were retained.
+
+Full preservation is FALSE: the strict comparison observed one new `refs/t3/orchestration-v2/checkpoints/MTJlM2E2YWEzNGFmOGNhN2FiN2U1MGMwODY5MGMzMDU/ordinal/18` ref, pointing to `2e1a843f90e46d7358698a7ac47dc7eacd25b526`, during this review. Attribution is unknown; no ref-writing command was run by this review. The spec branch ref is unchanged. `protection-pre-report.json` preserves the strict exit1; `global-ref-observation.json` records the exact difference. No ref was reverted or added to the allowlist, and no broad preservation exception was granted.
+
+The parent owns authentic history append, completion and tally after this return. This report supplies only the formal OP26 verdict, no RC4/readiness/merge verdict and no authorization of OP27 or any other round. The canonical file has one terminal LF; a UI return omitting that LF must not be described as a literal byte match.
+
+Not checked again: whole floor/full suites, floor validator, fresh hosted/platform execution, historical mutation matrices, O-032 reproduction or the live AC-016 probe. Unchanged and otherwise unexamined surfaces retain the stated limits.
+Risk: direct build/typecheck/file-presence checks can still miss the required warning through test-looking executable paths; existing minor follow-ups and the recorded global-ref preservation discrepancy remain open.
+<!-- gate-round-end: opponent:26 -->

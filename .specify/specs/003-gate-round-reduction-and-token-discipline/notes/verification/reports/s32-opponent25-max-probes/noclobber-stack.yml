@@ -1,0 +1,9 @@
+stacks: []
+gate_checks:
+  - 'grep>|out.txt AC-001 README.md'
+  - './tools/rg>|out.txt AC-001 README.md'
+  - 'tests/diff>|out.txt old new'
+verification_tools:
+  - 'bash'
+verification_inputs: []
+verification_environment: []

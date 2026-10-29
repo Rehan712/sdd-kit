@@ -1,0 +1,28 @@
+[
+  {
+    "argv": [
+      "/usr/local/bin/docker",
+      "info",
+      "--format",
+      "{{json .ServerVersion}}"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "start": "2026-10-28T10:38:47.331263+00:00",
+    "exit": 0,
+    "end": "2026-10-28T10:38:47.847598+00:00"
+  },
+  {
+    "argv": [
+      "/usr/local/bin/docker",
+      "image",
+      "ls",
+      "--no-trunc",
+      "--format",
+      "{{json .}}"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "start": "2026-10-28T10:38:47.848604+00:00",
+    "exit": 0,
+    "end": "2026-10-28T10:38:47.895246+00:00"
+  }
+]

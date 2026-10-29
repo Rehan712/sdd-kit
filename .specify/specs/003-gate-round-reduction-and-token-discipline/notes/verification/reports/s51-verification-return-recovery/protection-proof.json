@@ -1,0 +1,79 @@
+{
+  "at": "2026-10-29T17:53:04.507877+00:00",
+  "preexisting_worktree_count": 21665,
+  "protected_external_count": 337,
+  "before_inventory": "inventory.before.json",
+  "after_inventory": "inventory.after.json",
+  "full_original_blobs": "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s51-verification-return-recovery-uwftug3g/original-blobs",
+  "changed_preexisting": {},
+  "new_paths_outside_owned": {},
+  "unexpected_new_paths": {},
+  "exact_parent_receipt_addition": null,
+  "external_changes": {},
+  "external_additions": {},
+  "global_ref_differences": {
+    "refs/t3/orchestration-v2/checkpoints/MTJlM2E2YWEzNGFmOGNhN2FiN2U1MGMwODY5MGMzMDU/ordinal/22": {
+      "before": null,
+      "after": "bf5fc73a175da6ef343303c8a60ac08f6d8b6d61"
+    }
+  },
+  "global_ref_attribution": "Unknown concurrent actor if changed; no refs written, reset, hidden, or allowlisted.",
+  "checks": {
+    "all_preexisting_worktree_bytes_modes_mtimes_preserved": true,
+    "no_unexpected_new_files_or_symlinks": true,
+    "all_protected_external_files_preserved": true,
+    "no_new_protected_external_files": true,
+    "git_status_preserved_except_own_outputs_and_exact_parent_receipt": true,
+    "head_unchanged": true,
+    "global_refs_byte_identical_this_recovery": false,
+    "capture_lock_absent": true,
+    "capture_staging_absent": true,
+    "pending_bindings_absent": true,
+    "no_surviving_original_worker_finalizer_capture_analyzer": true
+  },
+  "current_recovery_strict_preservation_passed": false,
+  "historical_s50_strict_preservation_passed": false,
+  "historical_s50_global_refs_byte_identical": false,
+  "historical_s50_global_ref_differences": {
+    "refs/t3/orchestration-v2/checkpoints/MTJlM2E2YWEzNGFmOGNhN2FiN2U1MGMwODY5MGMzMDU/ordinal/21": {
+      "before": null,
+      "after": "85406e82245b1fe962370a4d09f3d6125b9a767d"
+    }
+  },
+  "historical_original_capture_checks": {
+    "only_original_two_authorized_changes": true,
+    "original_authorized_changes_match_s50_proof": true,
+    "evidence_exact_original_append": true,
+    "sequence_single_original_increment": true,
+    "all_original_saved_external_exact": true
+  },
+  "historical_unexpected_changes": {},
+  "historical_preservation_exceptions_retained": [
+    "s45-floor-execution/preservation-exceptions.json",
+    "s46-op26-reservation/result.json",
+    "s46-op26-reservation/ownership-observation.json",
+    "s47-opponent26-max-probes/global-ref-observation.json",
+    "s48-op26-sealing/final-observation.json"
+  ],
+  "hostwide_OS_claim": "Only actual process observations retained; no claim that host-wide OS state is unchanged.",
+  "active_process_candidates": [],
+  "parent_receipt_already_preexisting_in_baseline": {
+    "path": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s51-verification-return-recovery-invocation.json",
+    "before": {
+      "mode": 420,
+      "mtime_ns": 1793296224351059122,
+      "size": 3369,
+      "kind": "file",
+      "sha256": "a4385137ce50bcd77e20bbbc7d9b442f4ce88c9744dd2f61865e47390965852d"
+    },
+    "after": {
+      "mode": 420,
+      "mtime_ns": 1793296224351059122,
+      "size": 3369,
+      "kind": "file",
+      "sha256": "a4385137ce50bcd77e20bbbc7d9b442f4ce88c9744dd2f61865e47390965852d"
+    },
+    "exact_addition_during_recovery": false
+  },
+  "preexisting_files_exclude_entire_new_owned_directory": true
+}

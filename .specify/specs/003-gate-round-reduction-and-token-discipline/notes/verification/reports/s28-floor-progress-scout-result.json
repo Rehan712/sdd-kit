@@ -1,0 +1,30 @@
+{
+  "taskId": "node:delegated-task:command%3Amcp%3Afab79580-a405-41cc-8cf9-2b0c1f103a41%3Adelegate-task%3Asdd003-s28-running-floor-progress-digest-r1",
+  "childThreadId": "thread:delegated-task:command%3Amcp%3Afab79580-a405-41cc-8cf9-2b0c1f103a41%3Adelegate-task%3Asdd003-s28-running-floor-progress-digest-r1",
+  "childRunId": "run:thread:thread%3Adelegated-task%3Acommand%253Amcp%253Afab79580-a405-41cc-8cf9-2b0c1f103a41%253Adelegate-task%253Asdd003-s28-running-floor-progress-digest-r1:ordinal:1",
+  "childNodeId": "node:delegated-task:command%3Amcp%3Afab79580-a405-41cc-8cf9-2b0c1f103a41%3Adelegate-task%3Asdd003-s28-running-floor-progress-digest-r1",
+  "status": "completed",
+  "workState": "result_available",
+  "hasPendingChildRuns": false,
+  "latestTerminalRunId": "run:thread:thread%3Adelegated-task%3Acommand%253Amcp%253Afab79580-a405-41cc-8cf9-2b0c1f103a41%253Adelegate-task%253Asdd003-s28-running-floor-progress-digest-r1:ordinal:1",
+  "latestTerminalStatus": "completed",
+  "latestTerminalSummary": null,
+  "latestTerminalResultContextTransferId": null,
+  "providerInstanceId": "codex_codex_gym",
+  "model": "gpt-6-luna",
+  "options": [
+    {
+      "id": "reasoningEffort",
+      "value": "medium"
+    },
+    {
+      "id": "serviceTier",
+      "value": "default"
+    }
+  ],
+  "summary": "- **Current step:** `scripts/spec-gate.sh floor …` is still running. Its active child is `tests/run.sh`, currently in `tests/test-spec-gate.sh`; nested test processes are running fixture `spec-gate.sh round … opponent` commands. The run started at 23:52:16 UTC.\n- **Progress:** the top-level floor log is still zero bytes. The latest sampler entry is 06:05:28 UTC: AC power, 7.94 GiB available. The wrapper, floor script, and test processes remain alive; no floor exit code or new floor ID exists.\n- **Capture count:** unknown. The floor’s own before/after count is written only when it returns; I did not inspect live capture metadata.\n- **Storage:** available memory has varied around 7.91–7.95 GiB. The earlier floor-start check required at least 8 GiB free disk, but I did not recheck disk capacity.\n\nNo execution, files, locks, or processes were changed. Skipped ETA/stall inference and capture recount; risk status beyond the sampled resources is unknown.",
+  "resultContextTransferId": "context-transfer:type:subagent_result:source-thread:thread%3Adelegated-task%3Acommand%253Amcp%253Afab79580-a405-41cc-8cf9-2b0c1f103a41%253Adelegate-task%253Asdd003-s28-running-floor-progress-digest-r1:target-thread:2ce93492-409f-4930-a9e5-173544a4c8c6:dbcd7e9d-b2de-41f5-8fba-dc265e87ee3f",
+  "hasPendingQuestion": false,
+  "pendingApproval": null,
+  "waitTimedOut": false
+}

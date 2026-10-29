@@ -1,0 +1,37 @@
+{
+  "requested": {
+    "instanceId": "codex_codex_gym",
+    "model": "gpt-6.1-sol",
+    "reasoningEffort": "max",
+    "serviceTier": "default"
+  },
+  "observed": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"threadId\":\"thread:delegated-task:command%3Amcp%3A1f3cd44c-e930-4955-b272-b45788f5db02%3Adelegate-task%3Asdd003-s36-o034-quality-review-current-provider-max-r5\",\"modelSelection\":{\"instanceId\":\"codex_codex_gym\",\"model\":\"gpt-6.1-sol\",\"options\":[{\"id\":\"reasoningEffort\",\"value\":\"max\"},{\"id\":\"serviceTier\",\"value\":\"default\"}]},\"runtimeMode\":\"full-access\",\"interactionMode\":\"default\"}"
+      }
+    ],
+    "structuredContent": {
+      "threadId": "thread:delegated-task:command%3Amcp%3A1f3cd44c-e930-4955-b272-b45788f5db02%3Adelegate-task%3Asdd003-s36-o034-quality-review-current-provider-max-r5",
+      "modelSelection": {
+        "instanceId": "codex_codex_gym",
+        "model": "gpt-6.1-sol",
+        "options": [
+          {
+            "id": "reasoningEffort",
+            "value": "max"
+          },
+          {
+            "id": "serviceTier",
+            "value": "default"
+          }
+        ]
+      },
+      "runtimeMode": "full-access",
+      "interactionMode": "default"
+    },
+    "isError": false
+  },
+  "method": "Read-only t3_thread_configure({}); no model substitution, configuration mutation or nested delegation."
+}

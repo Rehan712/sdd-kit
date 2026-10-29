@@ -1,0 +1,33 @@
+{
+  "invocation": {
+    "taskId": "node:delegated-task:command%3Amcp%3Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%3Adelegate-task%3Asdd003-s27-fresh-t029-worker-high-r1",
+    "childThreadId": "thread:delegated-task:command%3Amcp%3Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%3Adelegate-task%3Asdd003-s27-fresh-t029-worker-high-r1",
+    "childRunId": "run:thread:thread%3Adelegated-task%3Acommand%253Amcp%253Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%253Adelegate-task%253Asdd003-s27-fresh-t029-worker-high-r1:ordinal:1",
+    "childNodeId": "node:delegated-task:command%3Amcp%3Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%3Adelegate-task%3Asdd003-s27-fresh-t029-worker-high-r1",
+    "status": "running",
+    "workState": "working",
+    "hasPendingChildRuns": false,
+    "latestTerminalRunId": null,
+    "latestTerminalStatus": null,
+    "latestTerminalSummary": null,
+    "latestTerminalResultContextTransferId": null,
+    "providerInstanceId": "codex_codex_gym",
+    "model": "gpt-6.1-sol",
+    "options": [
+      {
+        "id": "reasoningEffort",
+        "value": "high"
+      },
+      {
+        "id": "serviceTier",
+        "value": "default"
+      }
+    ],
+    "summary": null,
+    "resultContextTransferId": null,
+    "hasPendingQuestion": false,
+    "pendingApproval": null,
+    "waitTimedOut": false
+  },
+  "taskPrompt": "You are a genuine delegated implementation worker, using user-requested current-provider gpt-6.1-sol/high/default. Work ONLY in /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline; explicitly set this workdir for every command because parent binding is another checkout. You are not alone; preserve all edits and historical proof.\nNeed fresh real T029 no-tick worker return for AC016 current live wiring. User authorized new opponent24/RC4/CI refresh, approved waivers are already recorded in STATUS SHA28919a358c30407ccb0fff041f436768353b2f002c54e1db351ea57efe5e7d88. Current frozen source MUST be c7a82b3ae3b900dcb02a4839decad74db1a13457c5bab9ff859625a5357f0be6; HEAD2049f65960cc91e9e30bbd5ff1e11fc0fdf7cbd9; parent index bytesc492d7ea95abf8e8c335001f20c62ff50bc6f1e2179d7a07d30811181b3dd700. T029 is already[x]; do not untick it or accept/tick anything. Prior CAP766/oldA7 is historical and must not be reused.\nYou own only auto-generated capture/evidence artifacts, canonical .specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/returns/T029.txt (after backing up the existing exact file), and new unused .specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s27-t029-worker/ receipts. Parent concurrently publishes already-built immutable snapshot414838b to existing PR21; that action changes remote refs and excluded orchestration notes only, no app source/tasks/index. Do not make source/STATUS/plan/tasks changes or run gates/floor/probe/CI/PR/commits/push. Battery100% blocks only the six-hour floor, not this bounded requested verification suite.\nBefore execution: save actual tasks.md hash/bytes, HEAD, index bytes/hash/mtime, STATUS hash and old canonical T029 return under your new reportdir; refuse existing receipt collisions, preserve old incomplete-return/history artifacts. Use GIT_OPTIONAL_LOCKS=0. Run ONCE:\nbash scripts/spec-run.sh .specify/specs/003-gate-round-reduction-and-token-discipline T029 --from-task --no-tick --summary\nThat runs bash tests/test-gate-contracts.sh; allow it to finish without a shorttimeout. Preserve stdout/stderr/rc/UTCtime as capture.stdout/.stderr/.rc/.time. Take CAP ID only from real output/created metadata, verify exit0 and input_before=input_after=the exact currentc7 source. Require tasks bytes/HEAD/index/STATUS unchanged; global remote refs can change from authorized parent publication, don't claim refs immutable. On failure stop with concrete signal; no retry/fix.\nAfter actual successful capture, prepare canonical return using existing .specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/handoff/return.sh T029 <actualCAP> --prepare (no acceptance). Verify the live bindings and exact capture summary/FM/INV fields, preserve canonical returnbytes+SHA and complete actual before/after state/CAP metadata receipt in reportdir. Do NOT invoke helper without --prepare. Return EXACT canonical Verification-Return block as your entire final handback, byte-matching canonical file with one finalLF: header,Task,Captures,Summary,Failure modes and concrete rows. No invented legacy transport artifact, no added prose outside schema. Include any concise skip/limit in Summary if necessary, but do not alter actual capture-summary facts. Parent will separately test incomplete-return refusal and accept intact return, then floor."
+}

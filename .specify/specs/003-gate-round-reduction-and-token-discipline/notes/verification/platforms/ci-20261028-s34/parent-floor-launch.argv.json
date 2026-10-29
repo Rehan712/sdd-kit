@@ -1,0 +1,65 @@
+{
+  "status": "PREPARED_NOT_EXECUTED",
+  "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+  "helper_argv": [
+    "/bin/bash",
+    "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s34-final-floor.sh",
+    "1"
+  ],
+  "timed_argv": [
+    "/usr/bin/time",
+    "-p",
+    "-o",
+    "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s34-final-floorrun.time",
+    "/bin/bash",
+    "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s34-final-floor.sh",
+    "1"
+  ],
+  "stdout_stderr": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s34-final-floorrun.wrapper.log",
+  "parent_receipt": {
+    "path": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s34-final-floorrun.launcher.json",
+    "fields": [
+      "startedAt",
+      "source",
+      "power",
+      "freeBytes",
+      "helperSha256",
+      "timedArgv",
+      "wrapperPid",
+      "endedAt",
+      "exit"
+    ]
+  },
+  "wrapper_rc_path": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s34-final-floorrun.wrapper.rc",
+  "wrapper_pid_path": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s34-final-floorrun.wrapper.pid",
+  "collision_suffixes": [
+    "launcher.json",
+    "wrapper.log",
+    "wrapper.rc",
+    "wrapper.pid",
+    "time",
+    "launch.log",
+    "wait.log",
+    "rc",
+    "log",
+    "pre",
+    "samples.log",
+    "source-before.nul",
+    "source-after.nul",
+    "binding-before.json",
+    "binding-after.json",
+    "binding-before.log",
+    "binding-after.log",
+    "floor-id"
+  ],
+  "preconditions": [
+    "Actual AC Power and >=8589934592 free bytes immediately before native launch; helper rechecks both",
+    "No live source writer/floor process, verification lock, pending or staged round",
+    "Every collision suffix must be absent; do not retry or replace a surviving process",
+    "Exact source and raw tasks/status/index/HEAD binding must still pass verify-prepublish.sh",
+    "Parent records native wrapper PID and exit; require floor rc and wrapper rc both 0 and a new floor ID"
+  ],
+  "no_shell_text": true,
+  "no_ac_wait": true,
+  "source": "9eb5835224ccdf82b8d97b108097fac6ab5b993c38200fd1970c765c5e6a3842"
+}

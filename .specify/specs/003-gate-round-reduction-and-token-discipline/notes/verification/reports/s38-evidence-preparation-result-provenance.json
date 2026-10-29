@@ -1,0 +1,35 @@
+{
+  "actualTaskResult": {
+    "taskId": "node:delegated-task:command%3Amcp%3A1f3cd44c-e930-4955-b272-b45788f5db02%3Adelegate-task%3Asdd003-s38-f156-evidence-preparation-current-provider-high-r1",
+    "childThreadId": "thread:delegated-task:command%3Amcp%3A1f3cd44c-e930-4955-b272-b45788f5db02%3Adelegate-task%3Asdd003-s38-f156-evidence-preparation-current-provider-high-r1",
+    "link": "[Spec 003 corrected-source snapshot and floor preparation \u00b7 sol HIGH](t3-thread://v1/thread:delegated-task:command%3Amcp%3A1f3cd44c-e930-4955-b272-b45788f5db02%3Adelegate-task%3Asdd003-s38-f156-evidence-preparation-current-provider-high-r1)",
+    "childRunId": "run:thread:thread%3Adelegated-task%3Acommand%253Amcp%253A1f3cd44c-e930-4955-b272-b45788f5db02%253Adelegate-task%253Asdd003-s38-f156-evidence-preparation-current-provider-high-r1:ordinal:1",
+    "childNodeId": "node:delegated-task:command%3Amcp%3A1f3cd44c-e930-4955-b272-b45788f5db02%3Adelegate-task%3Asdd003-s38-f156-evidence-preparation-current-provider-high-r1",
+    "status": "completed",
+    "workState": "result_available",
+    "hasPendingChildRuns": false,
+    "latestTerminalRunId": "run:thread:thread%3Adelegated-task%3Acommand%253Amcp%253A1f3cd44c-e930-4955-b272-b45788f5db02%253Adelegate-task%253Asdd003-s38-f156-evidence-preparation-current-provider-high-r1:ordinal:1",
+    "latestTerminalStatus": "completed",
+    "latestTerminalSummary": null,
+    "latestTerminalResultContextTransferId": null,
+    "providerInstanceId": "codex_codex_gym",
+    "model": "gpt-6.1-sol",
+    "options": [
+      {
+        "id": "reasoningEffort",
+        "value": "high"
+      },
+      {
+        "id": "serviceTier",
+        "value": "default"
+      }
+    ],
+    "summary": "Prepared and locally validated once:\n\n- Commit: `25347ba729886ae0bea029c594ac00f0bc48e767`\n- Tree: `c68b9a3ab0c39c555d5cb28afa6420cd9a2600b7`\n- Source: `f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0`\n\nStrict mappings, finalized-task binding, syntax, ShellCheck, and offline guards passed. All 20,212 preexisting files and protected Git state were preserved.\n\n[Handoff](/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s38-evidence-preparation/handoff.md) \u00b7 [Result](/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s38-evidence-preparation/result.json)\n\nPublication, network, suites, captures, floor, and gates were not executed. Remote lease, new CI, and launch resources remain unknown; retain the dangling commit and scratch.",
+    "resultContextTransferId": "context-transfer:type:subagent_result:source-thread:thread%3Adelegated-task%3Acommand%253Amcp%253A1f3cd44c-e930-4955-b272-b45788f5db02%253Adelegate-task%253Asdd003-s38-f156-evidence-preparation-current-provider-high-r1:target-thread:f449528d-0620-41cb-b858-dcf160f695ae:70eaaefe-e1ed-447f-8c02-5747195f41ed",
+    "hasPendingQuestion": false,
+    "pendingApproval": null,
+    "waitTimedOut": false
+  },
+  "recordedAt": "2026-10-28T12:02:18.380Z",
+  "selectionVerified": true
+}

@@ -1,0 +1,184 @@
+{
+  "correctedOP25": {
+    "calls": 48,
+    "missingWarnings": 24,
+    "warningControls": 24,
+    "actualNulArgvVerified": 48,
+    "discardedBatchUsed": false
+  },
+  "candidateFocusedPublic": {
+    "passed": 70,
+    "allCorrectedOP25DeclarationsRetained": true,
+    "rawOutputsAndTaskDeclarationsVerified": 70,
+    "numericWordControlWarns": true
+  },
+  "candidateShellSemantics": {
+    "passed": 288,
+    "actualNulArgvVerified": 288,
+    "numericWordSeparateProof": {
+      "command": "npm 2&>out.txt test typecheck.txt",
+      "argv": [
+        "/bin/bash",
+        "-c",
+        "npm 2&>out.txt test typecheck.txt"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/semantics",
+      "PATH": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/semantics/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "expectedArgv": [
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/semantics/bin/npm",
+        "2",
+        "test",
+        "typecheck.txt"
+      ],
+      "actualArgv": [
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/semantics/bin/npm",
+        "2",
+        "test",
+        "typecheck.txt"
+      ],
+      "builtin": false,
+      "passed": true
+    },
+    "commandsExecutedByThisReview": 0
+  },
+  "candidateSuites": {
+    "red": {
+      "argv": [
+        "/bin/bash",
+        "tests/test-sdd-analyze.sh"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 1,
+      "seconds": 129.5284812450409,
+      "assertionFailures": 158,
+      "missingWeakWarnings": 49,
+      "wrongRunnerWarnings": 30,
+      "summary": "  -- 18/19 passed"
+    },
+    "green": {
+      "argv": [
+        "/bin/bash",
+        "tests/test-sdd-analyze.sh"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "seconds": 128.70817828178406,
+      "assertionFailures": 0,
+      "missingWeakWarnings": 0,
+      "wrongRunnerWarnings": 0,
+      "summary": "  -- 19/19 passed"
+    },
+    "rawRedFailCountsVerified": true
+  },
+  "declarations": {
+    "counts": {
+      "weak": 287,
+      "clean": 162
+    },
+    "retainedCaseReceiptMatchesLiveExpansion": true,
+    "previousCounts": {
+      "weak": 108,
+      "clean": 56
+    },
+    "allPreviousRetained": true,
+    "expansionOnlyScript": "collect() {\n  # O-034: simple Bash 3.2 operators end words even without whitespace.\n  local weak_redirect_cases=() runner_redirect_cases=() redirect prefix tool spacing\n  for tool in grep rg diff; do\n    for prefix in '' /usr/bin/ ./tools/ tests/; do\n      for redirect in '>|out.txt' ' >|out.txt' '>| out.txt' ' >| out.txt'; do\n        weak_redirect_cases+=(\"$prefix$tool$redirect old new\")\n      done\n    done\n  done\n  for redirect in '<input.txt' '>out.txt' '>>out.txt' '>|out.txt' '<>input.txt' '<&0' '>&1' '&>out.txt'; do\n    for spacing in '' ' '; do\n      for fixture in 'grepREDIRECT AC-001 README.md' 'rg AC-001REDIRECT README.md' \\\n        'diff oldREDIRECT new' 'tscREDIRECT --noEmit' 'npm runREDIRECT typecheck' \\\n        'npmREDIRECT run build' 'testREDIRECT -e README.md' 'test -fREDIRECT README.md'; do\n        weak_redirect_cases+=(\"${fixture/REDIRECT/$spacing$redirect}\")\n      done\n      for fixture in 'bashREDIRECT tests/typecheck.sh' 'nodeREDIRECT --test test/build.js' \\\n        'cargo testREDIRECT --test typecheck' 'python3 -mREDIRECT pytest tests/build.py' \\\n        'npm runREDIRECT test -- --grep typecheck' './tests/check-typecheck.shREDIRECT /usr/bin/grep'; do\n        runner_redirect_cases+=(\"${fixture/REDIRECT/$spacing$redirect}\")\n      done\n    done\n  done\n\n  for fixture in \\\n    'npm run build' 'npm run typecheck' 'tsc --noEmit' 'grep AC-001 README.md' \\\n    'tsc --noEmit tests/unit.ts' 'npm run typecheck -- --project tests/tsconfig.json' \\\n    'grep AC-001 tests/check.sh' 'npm run build -- --outDir tests/build' \\\n    'test -e README.md' 'test -f README.md' 'grep pytest README.md' \\\n    'rg bats README.md' 'diff fixtures/test.txt actual.txt' \\\n    'grep test README.md' 'grep tests README.md' 'grep \"node --test\" README.md' \\\n    'grep \"cargo test\" README.md' 'grep AC-001 scripts/test-check.sh' \\\n    'test -e tests/check.sh' 'test -f tests/check.sh' \\\n    'rg /usr/bin/pytest README.md' 'diff fixtures/bats.txt actual.txt' \\\n    'bash --rcfile tests/env.sh -c \"npm run typecheck\"' \\\n    '/usr/bin/grep AC-001 tests/check.sh' \\\n    '/usr/bin/grep<input.txt AC-001 tests/check.sh' '/usr/bin/grep <input.txt AC-001 tests/check.sh' \\\n    '/usr/bin/grep>output.txt AC-001 tests/check.sh' '/usr/bin/grep >output.txt AC-001 tests/check.sh' \\\n    '/usr/bin/rg AC-001 tests/check.sh' \\\n    '/usr/bin/rg<input.txt AC-001 tests/check.sh' '/usr/bin/rg <input.txt AC-001 tests/check.sh' \\\n    '/usr/bin/rg>output.txt AC-001 tests/check.sh' '/usr/bin/rg >output.txt AC-001 tests/check.sh' \\\n    '/usr/bin/diff fixtures/test.txt actual.txt' \\\n    '/usr/bin/diff<input.txt fixtures/test.txt actual.txt' '/usr/bin/diff <input.txt fixtures/test.txt actual.txt' \\\n    '/usr/bin/diff>output.txt fixtures/test.txt actual.txt' '/usr/bin/diff >output.txt fixtures/test.txt actual.txt' \\\n    './tools/grep AC-001 tests/check.sh' \\\n    './tools/grep<input.txt AC-001 tests/check.sh' './tools/grep <input.txt AC-001 tests/check.sh' \\\n    './tools/grep>output.txt AC-001 tests/check.sh' './tools/grep >output.txt AC-001 tests/check.sh' \\\n    './tools/rg AC-001 tests/check.sh' \\\n    './tools/rg<input.txt AC-001 tests/check.sh' './tools/rg <input.txt AC-001 tests/check.sh' \\\n    './tools/rg>output.txt AC-001 tests/check.sh' './tools/rg >output.txt AC-001 tests/check.sh' \\\n    './tools/diff fixtures/test.txt actual.txt' \\\n    './tools/diff<input.txt fixtures/test.txt actual.txt' './tools/diff <input.txt fixtures/test.txt actual.txt' \\\n    './tools/diff>output.txt fixtures/test.txt actual.txt' './tools/diff >output.txt fixtures/test.txt actual.txt' \\\n    'tools/grep AC-001 tests/check.sh' 'tools/rg AC-001 tests/check.sh' 'tools/diff fixtures/test.txt actual.txt' \\\n    '../tools/grep AC-001 tests/check.sh' '../tools/rg AC-001 tests/check.sh' '../tools/diff fixtures/test.txt actual.txt' \\\n    'tests/grep AC-001 tests/check.sh' 'tests/rg AC-001 tests/check.sh' 'tests/diff fixtures/test.txt actual.txt' \\\n    'npm<tests/test-typecheck.txt run typecheck' 'npm <tests/test-typecheck.txt run typecheck' \\\n    'tsc>tests/test-typecheck.log --noEmit' 'tsc >tests/test-typecheck.log --noEmit' \\\n    'grep<tools/pytest typecheck' 'grep <tools/pytest typecheck' \\\n    'grep<tools/npm test typecheck.txt' 'grep <tools/npm test typecheck.txt' \\\n    'npm<tests/check.txt run typecheck' 'npm <tests/check.txt run typecheck' \\\n    'npm>tests/check.txt run typecheck' 'npm >tests/check.txt run typecheck' \\\n    'npm<tests/check.txt run build' 'npm <tests/check.txt run build' \\\n    'npm>tests/check.txt run build' 'npm >tests/check.txt run build' \\\n    'tsc<input.txt --noEmit' 'tsc <input.txt --noEmit' \\\n    'tsc>input.txt --noEmit' 'tsc >input.txt --noEmit' \\\n    'grep<input.txt AC-001 README.md' 'grep <input.txt AC-001 README.md' \\\n    'grep>input.txt AC-001 README.md' 'grep >input.txt AC-001 README.md' \\\n    'rg<tools/pytest AC-001 README.md' 'rg <tools/pytest AC-001 README.md' \\\n    'rg>tools/pytest AC-001 README.md' 'rg >tools/pytest AC-001 README.md' \\\n    'diff<tools/bats actual.txt expected.txt' 'diff <tools/bats actual.txt expected.txt' \\\n    'diff>tools/bats actual.txt expected.txt' 'diff >tools/bats actual.txt expected.txt' \\\n    'test<tests/check.txt -e README.md' 'test <tests/check.txt -e README.md' \\\n    'test>tests/check.txt -e README.md' 'test >tests/check.txt -e README.md' \\\n    'grep<tools/bash tests/typecheck.sh' 'grep <tools/bash tests/typecheck.sh' \\\n    'grep>tools/bash tests/typecheck.sh' 'grep >tools/bash tests/typecheck.sh' \\\n    'grep<tests/check.sh typecheck.txt' 'grep <tests/check.sh typecheck.txt' \\\n    'grep>tests/check.sh typecheck.txt' 'grep >tests/check.sh typecheck.txt' \\\n    'tsc 2>output.txt --noEmit' 'npm2>output.txt test typecheck.txt' \\\n    'npm&>tests/typecheck.log run build' 'tsc>&tests/check.log --noEmit' \\\n    'npm 2&>out.txt test typecheck.txt' \\\n    \"${weak_redirect_cases[@]}\"; do\n    printf \"weak\\t%s\\0\" \"$fixture\"\n  done\n  for fixture in \\\n    'bash tests/check.sh' 'sh tests/check.sh' './tests/check.sh' \\\n    'bash -e tests/typecheck.sh' '/bin/bash tests/typecheck.sh' './scripts/test-build.sh' \\\n    'node --test test/typecheck.test.js' 'cargo test --test build' \\\n    'pytest tests/typecheck.py' '/usr/bin/pytest tests/typecheck.py' 'bats tests/build.bats' \\\n    'python3 -m pytest tests/typecheck.py' \\\n    'npm test -- --grep typecheck' 'npm run test -- --grep typecheck' \\\n    '/usr/local/bin/npm test -- --grep typecheck' 'pnpm test --filter typecheck' \\\n    'yarn run test --grep typecheck' 'make test TARGET=typecheck' \\\n    'bun test tests/typecheck.test.ts' 'go test ./typecheck' \\\n    'bash<input.txt tests/typecheck.sh' 'bash <input.txt tests/typecheck.sh' \\\n    'bash>input.txt tests/typecheck.sh' 'bash >input.txt tests/typecheck.sh' \\\n    './tests/check-typecheck.sh<input.txt' './tests/check-typecheck.sh <input.txt' \\\n    './tests/check-typecheck.sh>input.txt' './tests/check-typecheck.sh >input.txt' \\\n    'node<input.txt --test test/typecheck.test.js' 'node <input.txt --test test/typecheck.test.js' \\\n    'node>input.txt --test test/typecheck.test.js' 'node >input.txt --test test/typecheck.test.js' \\\n    'cargo<input.txt test --test typecheck' 'cargo <input.txt test --test typecheck' \\\n    'cargo>input.txt test --test typecheck' 'cargo >input.txt test --test typecheck' \\\n    'pytest<input.txt tests/typecheck.py' 'pytest <input.txt tests/typecheck.py' \\\n    'pytest>input.txt tests/typecheck.py' 'pytest >input.txt tests/typecheck.py' \\\n    '/usr/bin/python3<input.txt -m pytest tests/typecheck.py' '/usr/bin/python3 <input.txt -m pytest tests/typecheck.py' \\\n    '/usr/bin/python3>input.txt -m pytest tests/typecheck.py' '/usr/bin/python3 >input.txt -m pytest tests/typecheck.py' \\\n    'npm<input.txt run test -- --grep typecheck' 'npm <input.txt run test -- --grep typecheck' \\\n    'npm>input.txt run test -- --grep typecheck' 'npm >input.txt run test -- --grep typecheck' \\\n    'npm 2>output.txt run test -- --grep typecheck' 'bash 0<input.txt -e tests/typecheck.sh' \\\n    '/bin/bash tests/check.sh /usr/bin/grep' './tests/check.sh ./tools/rg' \\\n    '/usr/bin/node --test test/check.js ../tools/diff' \\\n    'node scripts/assert-content.js /usr/bin/grep AC-001 README.md' \\\n    'node scripts/assert-content.js ./tools/rg AC-001 README.md' \\\n    'node scripts/assert-content.js ../tools/diff actual.txt expected.txt' \\\n    'bash&>tests/build.log tests/typecheck.sh' 'npm>&tests/typecheck.log run test' \\\n    'node>|tests/build.log --test test/typecheck.js' 'pytest<>tests/build.txt tests/typecheck.py' \\\n    'bats&>out.txt tests/build.bats' 'pnpm>|out.txt test --filter typecheck' \\\n    'yarn run>|out.txt test --grep typecheck' 'bun>|out.txt test tests/build.ts' \\\n    'go test>|out.txt ./typecheck' 'make>|out.txt test TARGET=typecheck' \\\n    \"${runner_redirect_cases[@]}\"; do\n    printf \"clean\\t%s\\0\" \"$fixture\"\n  done\n}\ncollect\n"
+  },
+  "freshSyntaxAndVersion": [
+    {
+      "argv": [
+        "/bin/bash",
+        "--version"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "stdout": "GNU bash, version 3.2.57(1)-release (arm64-apple-darwin25)\nCopyright (C) 2007 Free Software Foundation, Inc.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/bin/bash",
+        "-n",
+        "scripts/sdd-analyze.sh"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/bin/bash",
+        "-n",
+        "tests/test-sdd-analyze.sh"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "consumed-shellcheck": {
+    "argv": [
+      "/opt/homebrew/bin/shellcheck",
+      "--norc",
+      "-S",
+      "warning",
+      "-x",
+      "scripts/sdd-analyze.sh",
+      "tests/test-sdd-analyze.sh"
+    ],
+    "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+    "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+    "SHELLCHECK_OPTS": "unset",
+    "exit": 0
+  },
+  "consumed-analyzer-syntax": {
+    "argv": [
+      "/bin/bash",
+      "-n",
+      "scripts/sdd-analyze.sh"
+    ],
+    "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+    "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+    "SHELLCHECK_OPTS": "unset",
+    "exit": 0
+  },
+  "consumed-tests-syntax": {
+    "argv": [
+      "/bin/bash",
+      "-n",
+      "tests/test-sdd-analyze.sh"
+    ],
+    "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+    "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+    "SHELLCHECK_OPTS": "unset",
+    "exit": 0
+  },
+  "consumed-tasks-analyzer": {
+    "argv": [
+      "/bin/bash",
+      "scripts/sdd-analyze.sh",
+      "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate/.specify/specs/003-gate-round-reduction-and-token-discipline",
+      "--phase",
+      "tasks"
+    ],
+    "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+    "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+    "SHELLCHECK_OPTS": "unset",
+    "exit": 0
+  },
+  "consumed-candidate-whitespace": {
+    "argv": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+    "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+    "SHELLCHECK_OPTS": "unset",
+    "exit": 0
+  }
+}

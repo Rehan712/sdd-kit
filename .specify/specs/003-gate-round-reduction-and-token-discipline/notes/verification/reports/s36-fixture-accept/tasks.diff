@@ -1,0 +1,11 @@
+--- tasks.before
++++ tasks.after
+@@ -1091,7 +1091,7 @@
+   - *Reuse:* local
+   - *Refs:* REQ-005, AC-004, FM-001, INV-005, plan §3.1, §7
+   - *Notes:* O-034 remains open after formal opponent round 25 (Prior O-034, verification-command-classification, wrong-result, implementation-error; Blocks AC-004/REQ-005). Correct the shared normalization and weak/runner operator-word boundaries at scripts/sdd-analyze.sh:292, :293, :295, :313 and tests/test-sdd-analyze.sh:668; retain original round-24 and quality r1/r2/r3 cases. Same T031a5o1 reopened with current Evidence cleared only in the external candidate. Prior accepted CAP-793-x82v97/return sha256:32df8af79290cfcfee6fc84915c4fc9d0726aecab2404736bc0b195da6215083 and exact prior task bytes are historical, preserved under notes/verification/reports/s33-o034-redirection-boundary/before/. Candidate proof and limits are in that directory. O-032 remains open and unchanged. Parent owns post-seal live application, fresh no-tick capture/acceptance and independent MAX quality r4; this candidate performs no gate/floor/CI execution or subsequent-round authorization.
+-  - *Evidence:* CAP-816-dd36Pv verified by spec-gate accept; return sha256:0bb64b0aff1419ba1b6c028fcd6ca2c23f11e48b8d4a88c9357bd716464a9c8b
++  - *Evidence:* CAP-818-fLEvh7 verified by spec-gate accept; return sha256:a7a4d97ce6c2d6131c8dabef0c4b45502efd9be189abd283a1c35d963fe21d2f
+ 
+ - [x] **T031a6** — Invalidate saved success and carried PASS on real input revisions
+   - *Files:* `tests/test-gate-contracts.sh`, `.specify/specs/003-gate-round-reduction-and-token-discipline/plan.md`

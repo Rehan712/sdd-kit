@@ -1,0 +1,22 @@
+{
+  "name": "reality-check5",
+  "argv": [
+    "bash",
+    "-c",
+    "set -uo pipefail\n. scripts/lib.sh\n. scripts/verification-lib.sh\nvf_round_authorized \".specify/specs/003-gate-round-reduction-and-token-discipline\" reality-check 5 2026-10-25T18:44:21Z\n"
+  ],
+  "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+  "env": {
+    "GIT_OPTIONAL_LOCKS": "0"
+  },
+  "started": "2026-10-26T20:50:04.265057+00:00",
+  "ended": "2026-10-26T20:50:04.356885+00:00",
+  "preceding_completion": "actual closed completion wrapper time (not merely report timestamp)",
+  "previous": "2026-10-25T18:44:21Z",
+  "expected_exit": 4,
+  "exit": 4,
+  "stdout": "",
+  "stderr": "round authorization denied: reality-check round 5 needs an exact-round user waiver/spec revision after round 4\n  candidate authorization lines were found and refused:\n  STATUS.md:705 authorizes round=4, not round=5\n",
+  "reserves_gate": false,
+  "invokes_floor": false
+}

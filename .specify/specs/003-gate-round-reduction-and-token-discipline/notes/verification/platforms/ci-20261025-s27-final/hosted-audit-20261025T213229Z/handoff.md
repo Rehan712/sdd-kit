@@ -1,0 +1,73 @@
+# Hosted CI collection handoff
+
+{
+  "status": "PASS",
+  "collector_exit": 0,
+  "binding_before": "PASS",
+  "binding_after": "PASS",
+  "scope": "Actual hosted collection only; no floor or gates executed",
+  "head": "5aee77672d03a2c7811e28e55172817da6dee012",
+  "tree": "d685ec420ba6ce338e72727638e1ccff0bbb3846",
+  "source": "c7a82b3ae3b900dcb02a4839decad74db1a13457c5bab9ff859625a5357f0be6",
+  "audit_dir": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261025-s27-final/hosted-audit-20261025T213229Z",
+  "run_id": 40233074338,
+  "attempt": 1,
+  "url": "https://github.com/Rehan712/sdd-kit/actions/runs/40233074338",
+  "collection_dir": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261025-s27-final/hosted-audit-20261025T213229Z/hosted-40233074338-attempt-1",
+  "jobs": [
+    {
+      "id": 121288759511,
+      "name": "shellcheck",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/Rehan712/sdd-kit/actions/runs/40233074338/job/121288759511",
+      "merge_sha": "13ffb1ebb4439eb9c8fd47585b6d8d10f45dba0c",
+      "checkout_short": "13ffb1e",
+      "raw_log": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261025-s27-final/hosted-audit-20261025T213229Z/hosted-40233074338-attempt-1/job-shellcheck.log",
+      "raw_log_sha256": "798537a5404344a8ab99446b4080b1b804b804bcffd2f868b3d41ceb42b94489"
+    },
+    {
+      "id": 121288759631,
+      "name": "tests-bash32",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/Rehan712/sdd-kit/actions/runs/40233074338/job/121288759631",
+      "merge_sha": "13ffb1ebb4439eb9c8fd47585b6d8d10f45dba0c",
+      "checkout_short": "13ffb1e",
+      "raw_log": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261025-s27-final/hosted-audit-20261025T213229Z/hosted-40233074338-attempt-1/job-tests-bash32.log",
+      "raw_log_sha256": "2072170fbe4fc343c9d47cd48569b273d0ef647d82ebe0e385037e0ede91b4da"
+    },
+    {
+      "id": 121288759662,
+      "name": "tests (ubuntu-latest)",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/Rehan712/sdd-kit/actions/runs/40233074338/job/121288759662",
+      "merge_sha": "13ffb1ebb4439eb9c8fd47585b6d8d10f45dba0c",
+      "checkout_short": "13ffb1e",
+      "raw_log": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261025-s27-final/hosted-audit-20261025T213229Z/hosted-40233074338-attempt-1/job-tests__ubuntu-latest_.log",
+      "raw_log_sha256": "79794723abbcc2dffe2df831f087c83c36854de2d547a3358850408f11fe03cd"
+    },
+    {
+      "id": 121288759681,
+      "name": "tests (macos-latest)",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/Rehan712/sdd-kit/actions/runs/40233074338/job/121288759681",
+      "merge_sha": "13ffb1ebb4439eb9c8fd47585b6d8d10f45dba0c",
+      "checkout_short": "13ffb1e",
+      "raw_log": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261025-s27-final/hosted-audit-20261025T213229Z/hosted-40233074338-attempt-1/job-tests__macos-latest_.log",
+      "raw_log_sha256": "7f74343f70f48417ce65dc4883b835fe524ac2ca30fccce1a08ede5702f3a676"
+    }
+  ],
+  "merge_sha": "13ffb1ebb4439eb9c8fd47585b6d8d10f45dba0c",
+  "merge_tree": "d685ec420ba6ce338e72727638e1ccff0bbb3846",
+  "merge_parents": [
+    "f4a0e4e31df29b53ccb9e088d3b8d0cd58f8e12f",
+    "5aee77672d03a2c7811e28e55172817da6dee012"
+  ],
+  "snapshot_parent": "2049f65960cc91e9e30bbd5ff1e11fc0fdf7cbd9",
+  "completed_utc": "2026-10-25T21:33:58.467662+00:00"
+}
+
+No CI rerun, floor, captures, full suites or gates were launched. Existing source, helpers and historical artifacts were preserved. Floor waiter activity was outside this collection; excluded capture/floor bookkeeping was not required to remain frozen.

@@ -100,7 +100,9 @@ acceptance_parse_fault_cases() {
 # whose command exited nonzero and a manual return whose artifact is absent are
 # each refused, leaving tasks.md byte-identical. A valid return ticks its own
 # task and adds its Evidence line, and changes nothing else; a task owing no
-# rows is accepted with an explicit `Failure modes: none`.
+# rows is accepted with an explicit `Failure modes: none`, and only with it: an
+# empty `Failure modes:` header for that task is refused first (T031a1o1,
+# round 20's O-030).
 acceptance_named_cases() {
   local spec repo cap other failed before digest expected
   spec="$(make_verification_git_dir acceptnamed)"
@@ -166,6 +168,14 @@ EOF
   cp "$SANDBOX/named-tasks" "$spec/tasks.md"
   run_rc 0 "$SCRIPTS/spec-run.sh" "$spec" T006 --cwd "$repo" --from-task --no-tick --summary
   cap="$(printf '%s' "$OUT" | sed -n 's/^capture=\([^ ]*\).*/\1/p')"
+  before="$(cat "$spec/tasks.md")"
+  { printf 'Verification-Return: 1\nTask: T006\nCaptures: %s\nSummary: ' "$cap"
+    cat "$spec/notes/captures/$cap/summary.txt"
+    printf 'Failure modes:\n'; } > "$SANDBOX/named-empty"
+  run_rc 3 "$SCRIPTS/spec-gate.sh" accept "$spec" T006 "$SANDBOX/named-empty"
+  assert_contains "$OUT" 'empty required set must explicitly be none' \
+    'AC-022: an empty Failure modes header was accepted for a task owing no rows'
+  assert_eq "$before" "$(cat "$spec/tasks.md")" 'AC-022: an empty Failure modes header changed tasks bytes'
   { printf 'Verification-Return: 1\nTask: T006\nCaptures: %s\nSummary: ' "$cap"
     cat "$spec/notes/captures/$cap/summary.txt"
     printf 'Failure modes: none\n'; } > "$SANDBOX/named-none"
@@ -1106,8 +1116,22 @@ round_record_line_cases() {
 # refused at exit 4 until `round --reconcile` records an explicit timestamp
 # bound to the history's digest; an exact waiver written after it then
 # authorizes round 6, which reserves on a fresh floor.
+# T031a4o1 (round 20, O-029): the refusals only the reconciled record decides.
+# A record naming a wrong digest, a wrong round or a timestamp before the
+# history's date exits 3, writes no legacy-time.nul and leaves the next round
+# refused as date-only; a waiver after the history's date but before the
+# reconciled time is refused; and an edit of the history after reconciling
+# unbinds the record, so neither waiver nor round authorizes or reserves. The
+# kernel names none of the exit-3 refusals (O-032), so the cases assert state.
+# T031a4o2 (round 21, O-029): the record is reconciled to a time on a later day,
+# which no reading of the history's date yields (neither its midnight nor its
+# end of day), and a record stamped in the future is refused as well.
+# T031a4o3 (round 22, O-029 and O-033): both regions the guard admits are
+# pinned at non-round times, each one second either side: first the history's
+# own date (15:17:43Z), then a later day (06:17:43Z); and records with an
+# impossible time or stamped later today are refused like the other wrong ones.
 round_legacy_reconcile_cases() {
-  local spec cli rel=.specify/specs/002-usage-limit-handling-for-dispatched-runs stamp
+  local spec cli rel=.specify/specs/002-usage-limit-handling-for-dispatched-runs stamp digest bad what legacy
   spec="$(make_verification_git_dir legacyround)"
   cli="$(floor_fixture "$spec")"
   copy_kit "$KIT_DIR" "$SANDBOX/legacy-002" "$rel/notes" || t_fail 'AC-009: cannot copy shipped 002 records as the identity hashes them'
@@ -1117,13 +1141,63 @@ round_legacy_reconcile_cases() {
   assert_contains "$OUT" 'date-only history needs timestamped digest reconciliation' \
     'AC-009: date-only history ordered an authorization without reconciliation'
   [[ ! -d "$spec/notes/verification/rounds/opponent/ROUND-6" ]] || t_fail 'AC-009: a refused legacy round reserved round 6'
-  printf '%s\0' round 5 timestamp 2026-07-20T23:59:59Z report_digest "$(shasum -a 256 < "$spec/notes/opponent.md" | awk '{print $1}')" > "$SANDBOX/legacy-time.nul"
+  legacy="$spec/notes/verification/rounds/opponent/legacy-time.nul"
+  digest="$(shasum -a 256 < "$spec/notes/opponent.md" | awk '{print $1}')"
+  for bad in digest round early future invalid soon; do
+    # A record later today needs a minute's margin before midnight.
+    [[ "$bad" != soon || "$(date -u +%H:%M)" < 23:59 ]] || continue
+    case "$bad" in
+      digest) what='a wrong digest'; printf '%s\0' round 5 timestamp 2026-07-21T06:00:00Z report_digest "$(printf '%064d' 0)";;
+      round) what='a wrong round'; printf '%s\0' round 4 timestamp 2026-07-21T06:00:00Z report_digest "$digest";;
+      early) what="a timestamp before the history's date"; printf '%s\0' round 5 timestamp 2026-07-19T23:59:59Z report_digest "$digest";;
+      future) what='a future timestamp'; printf '%s\0' round 5 timestamp 2099-01-01T00:00:00Z report_digest "$digest";;
+      invalid) what='an impossible time'; printf '%s\0' round 5 timestamp 2026-07-20T25:00:00Z report_digest "$digest";;
+      soon) what='a timestamp later today'; printf '%s\0' round 5 timestamp "$(date -u +%Y-%m-%d)T23:59:59Z" report_digest "$digest";;
+    esac > "$SANDBOX/legacy-wrong-$bad.nul"
+    run_rc 3 bash "$cli" round "$spec" opponent --reconcile "$SANDBOX/legacy-wrong-$bad.nul"
+    [[ ! -e "$legacy" ]] || t_fail "AC-009: a reconcile record with $what wrote legacy-time.nul"
+    run_rc 4 bash "$cli" round "$spec" opponent
+    assert_contains "$OUT" 'date-only history needs timestamped digest reconciliation' \
+      "AC-009: a reconcile record with $what left the history able to order an authorization"
+    # Each wrong record is judged alone, even where a regression wrote one.
+    rm -f "$legacy"
+  done
+  # The history's own date (2026-07-20) first, at a time no coarser reading of
+  # the record or the date yields; only the record decides either second.
+  printf '%s\0' round 5 timestamp 2026-07-20T15:17:43Z report_digest "$digest" > "$SANDBOX/legacy-same.nul"
+  run_rc 0 bash "$cli" round "$spec" opponent --reconcile "$SANDBOX/legacy-same.nul"
+  assert_contains "$OUT" 'reconciled legacy gate=opponent round=5 timestamp=2026-07-20T15:17:43Z' \
+    "AC-009: a record on the history's own date was not reconciled"
+  printf '\n## Decisions log\n%s\n' '- 2026-07-20T15:17:42Z — waiver: gate=opponent; round=6; after=5; by=fixture-user; reason=one second before the same-day completion' >> "$spec/STATUS.md"
+  run_rc 4 bash "$cli" waiver "$spec" opponent 6
+  assert_contains "$OUT" 'not after the previous round completion at 2026-07-20T15:17:43Z' \
+    'AC-009: a same-day waiver one second before the reconciled completion authorized the next round'
+  printf '%s\n' '- 2026-07-20T15:17:44Z — waiver: gate=opponent; round=6; after=5; by=fixture-user; reason=one second after the same-day completion' >> "$spec/STATUS.md"
+  run_rc 0 bash "$cli" waiver "$spec" opponent 6
+  assert_contains "$OUT" 'authorized: opponent round 6' \
+    'AC-009: a same-day waiver one second after the reconciled completion was not authorized'
+  # Then a later day, by a second reconciliation, again at a non-round time.
+  printf '%s\0' round 5 timestamp 2026-07-21T06:17:43Z report_digest "$digest" > "$SANDBOX/legacy-time.nul"
   run_rc 0 bash "$cli" round "$spec" opponent --reconcile "$SANDBOX/legacy-time.nul"
-  assert_contains "$OUT" 'reconciled legacy gate=opponent round=5 timestamp=2026-07-20T23:59:59Z'
+  assert_contains "$OUT" 'reconciled legacy gate=opponent round=5 timestamp=2026-07-21T06:17:43Z'
+  printf '%s\n' '- 2026-07-21T06:17:42Z — waiver: gate=opponent; round=6; after=5; by=fixture-user; reason=one second before the later-day completion' >> "$spec/STATUS.md"
+  run_rc 4 bash "$cli" waiver "$spec" opponent 6
+  assert_contains "$OUT" 'not after the previous round completion at 2026-07-21T06:17:43Z' \
+    'AC-009: a waiver dated before the reconciled completion authorized the next round'
   stamp="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
-  printf '\n## Decisions log\n- %s — waiver: gate=opponent; round=6; after=5; by=fixture-user; reason=order after the reconciled legacy history\n' "$stamp" >> "$spec/STATUS.md"
+  printf '%s\n' "- $stamp — waiver: gate=opponent; round=6; after=5; by=fixture-user; reason=order after the reconciled legacy history" >> "$spec/STATUS.md"
   run_rc 0 bash "$cli" waiver "$spec" opponent 6
   assert_contains "$OUT" 'authorized: opponent round 6' 'AC-009: an exact waiver after reconciliation was not authorized'
+  # An edit of the history unbinds the record: the floor is current for the
+  # edited history, so only the binding refuses the round.
+  cp "$spec/notes/opponent.md" "$SANDBOX/legacy-history"
+  printf 'Edited after reconciliation.\n' >> "$spec/notes/opponent.md"
+  run_rc 0 bash "$cli" floor "$spec"
+  run_rc 3 bash "$cli" waiver "$spec" opponent 6
+  assert_not_contains "$OUT" 'authorized' 'AC-009: a reconcile record outlived an edit of its history and authorized round 6'
+  run_rc 3 bash "$cli" round "$spec" opponent
+  [[ ! -d "$spec/notes/verification/rounds/opponent/ROUND-6" ]] || t_fail 'AC-009: a reconcile record outlived an edit of its history and reserved round 6'
+  cp "$SANDBOX/legacy-history" "$spec/notes/opponent.md"
   run_rc 0 bash "$cli" floor "$spec"
   run_rc 0 bash "$cli" round "$spec" opponent
   assert_contains "$OUT" 'round=6 gate=opponent' 'AC-009: an exact waiver after reconciliation did not reserve the next round'

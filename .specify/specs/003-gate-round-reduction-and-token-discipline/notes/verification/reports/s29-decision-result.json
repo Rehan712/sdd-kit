@@ -1,0 +1,30 @@
+{
+  "taskId": "node:delegated-task:command%3Amcp%3Ae6315556-7380-4d31-903f-24b14ad55a20%3Adelegate-task%3Asdd003-s29-approved-op25-decision-high-r1",
+  "childThreadId": "thread:delegated-task:command%3Amcp%3Ae6315556-7380-4d31-903f-24b14ad55a20%3Adelegate-task%3Asdd003-s29-approved-op25-decision-high-r1",
+  "childRunId": "run:thread:thread%3Adelegated-task%3Acommand%253Amcp%253Ae6315556-7380-4d31-903f-24b14ad55a20%253Adelegate-task%253Asdd003-s29-approved-op25-decision-high-r1:ordinal:1",
+  "childNodeId": "node:delegated-task:command%3Amcp%3Ae6315556-7380-4d31-903f-24b14ad55a20%3Adelegate-task%3Asdd003-s29-approved-op25-decision-high-r1",
+  "status": "completed",
+  "workState": "result_available",
+  "hasPendingChildRuns": false,
+  "latestTerminalRunId": "run:thread:thread%3Adelegated-task%3Acommand%253Amcp%253Ae6315556-7380-4d31-903f-24b14ad55a20%253Adelegate-task%253Asdd003-s29-approved-op25-decision-high-r1:ordinal:1",
+  "latestTerminalStatus": "completed",
+  "latestTerminalSummary": null,
+  "latestTerminalResultContextTransferId": null,
+  "providerInstanceId": "codex_codex_gym",
+  "model": "gpt-6.1-sol",
+  "options": [
+    {
+      "id": "reasoningEffort",
+      "value": "high"
+    },
+    {
+      "id": "serviceTier",
+      "value": "default"
+    }
+  ],
+  "summary": "Recorded the actual \u201cYes\u201d at parent-observed `2026-10-26T20:46:28Z`, without claiming a server timestamp.\n\nAdded only the OP25-after-24 waiver and separate PR #21 refresh decision. RC4 and non-Decisions content remain unchanged. Parser exits: OP25 `0`, OP26 `4`, RC4 `0`, RC5 `4`.\n\nSTATUS remains `0600`:\n\n- Before: `28919a358c30407ccb0fff041f436768353b2f002c54e1db351ea57efe5e7d88`\n- After: `2519b0a153bd7a8548b1b5d6abf3cefaddd6da93d8c5670efba4322dd4c8be1b`\n\n[Closed proof batch](/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s29-approval/CLOSED.md) contains bytes, times, diff, model selection, seal checks and parser receipts. HEAD/index bytes and mtimes and unowned source are unchanged; concurrent parent reports were preserved.\n\nNo tests, gates, floor, CI or Git mutations ran. CAP793/e77d is historical; obtain the new HIGH T029 return/control before final snapshot/freeze.",
+  "resultContextTransferId": "context-transfer:type:subagent_result:source-thread:thread%3Adelegated-task%3Acommand%253Amcp%253Ae6315556-7380-4d31-903f-24b14ad55a20%253Adelegate-task%253Asdd003-s29-approved-op25-decision-high-r1:target-thread:2ce93492-409f-4930-a9e5-173544a4c8c6:54073a65-1c5a-4ca1-8d97-e8c92dd5a7ea",
+  "hasPendingQuestion": false,
+  "pendingApproval": null,
+  "waitTimedOut": false
+}

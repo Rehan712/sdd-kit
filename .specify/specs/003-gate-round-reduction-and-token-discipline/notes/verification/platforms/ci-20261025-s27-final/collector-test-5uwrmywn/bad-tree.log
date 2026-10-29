@@ -1,0 +1,31 @@
+run=1 status=completed conclusion=success event=pull_request head_sha=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa attempt=1
+
+== job shellcheck (1)
+  status=completed conclusion=success runner=offline labels=offline
+  started= completed= log-fetch-exit=0 log-bytes=130
+HEAD is now at bbbbbbb
+git -c protocol.version=2 fetch origin +bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb:refs/remotes/pull/1/merge
+
+== job tests (ubuntu-latest) (2)
+  status=completed conclusion=success runner=offline labels=offline
+  started= completed= log-fetch-exit=0 log-bytes=130
+HEAD is now at bbbbbbb
+git -c protocol.version=2 fetch origin +bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb:refs/remotes/pull/1/merge
+
+== job tests (macos-latest) (3)
+  status=completed conclusion=success runner=offline labels=offline
+  started= completed= log-fetch-exit=0 log-bytes=130
+HEAD is now at bbbbbbb
+git -c protocol.version=2 fetch origin +bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb:refs/remotes/pull/1/merge
+
+== job tests-bash32 (4)
+  status=completed conclusion=success runner=offline labels=offline
+  started= completed= log-fetch-exit=0 log-bytes=130
+HEAD is now at bbbbbbb
+git -c protocol.version=2 fetch origin +bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb:refs/remotes/pull/1/merge
+
+merge-commit-short(s) checked out: bbbbbbb
+merge-commit(s) fetched: bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+merge bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb tree=dddddddddddddddddddddddddddddddddddddddd parents=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+FAIL: tested merge tree differs from snapshot tree
+collect result: FAIL

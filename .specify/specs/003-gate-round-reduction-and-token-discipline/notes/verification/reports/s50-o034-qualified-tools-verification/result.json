@@ -1,0 +1,100 @@
+{
+  "at": "2026-10-29T17:47:32.540947+00:00",
+  "task": "T031a5o1",
+  "capture": "CAP-843-YAhBBt",
+  "canonical_attempt_count": 1,
+  "capture_completed": true,
+  "captured_suite_exit": "0",
+  "suite_counts": [
+    [
+      "19",
+      "19"
+    ]
+  ],
+  "actual_current_source": "3e70d8170d98f13c04f550c15942f70bdb487abf30ad629ff78db2048f077497",
+  "capture_checks": {
+    "native_capture_exit_zero": true,
+    "capture_integrity_exit_zero": true,
+    "actual_id_matches": true,
+    "actual_command_argv": true,
+    "actual_capture_exit_zero": true,
+    "no_tick_one": true,
+    "before_after_input_bytes_identical": true,
+    "input_metadata_hashes_identical": true,
+    "pre_invocation_actual_vf_snapshot_identical": true,
+    "source_differs_from_historical_f156": true,
+    "output_digest_matches": true,
+    "output_byte_count_matches": true,
+    "seal_and_ledger_identical": true,
+    "all_seven_capture_members_verified": true,
+    "capture_bindings_match_current": true,
+    "actual_FM_INV_bindings_match": true,
+    "actual_task_kind_test": true,
+    "sole_capture_sequence_increment": true,
+    "actual_all_suite_counts_pass": true,
+    "required_suite_passes": true,
+    "canonical_summary_stdout_exact": true,
+    "single_canonical_summary_line": true,
+    "capture_cwd_matches": true,
+    "current_source_bound_scripts/sdd-analyze.sh": true,
+    "current_source_bound_tests/test-sdd-analyze.sh": true
+  },
+  "capture_passed": true,
+  "static_checks_passed": true,
+  "focused_green": {
+    "count": 41,
+    "passing": 41,
+    "retained_distinct_OP26_red_inputs": 28,
+    "explicit_kinds_passed": true
+  },
+  "fixture_counts": {
+    "generated_weak": 176,
+    "generated_runner": 96,
+    "qualified_weak": 109,
+    "qualified_runner": 88,
+    "weak": 396,
+    "runner": 250
+  },
+  "fixture_prior_counts": {
+    "generated_weak": 176,
+    "generated_runner": 96,
+    "weak": 287,
+    "runner": 162
+  },
+  "modern_Bash_runtime": {
+    "image": "sha256:a81de950abb8b5d961ed8c1dcd345450fab8cda00ea3c11e7ec24a4ed4bb82ce",
+    "results": [
+      {
+        "patsub_replacement": "on",
+        "arrays_identical_to_bash32": true
+      },
+      {
+        "patsub_replacement": "off",
+        "arrays_identical_to_bash32": true
+      }
+    ]
+  },
+  "preservation": {
+    "all_preexisting_worktree_bytes_modes_mtimes_preserved_except_exact_native_evidence_and_sequence": true,
+    "all_saved_external_files_preserved": true,
+    "no_unexpected_new_files_or_symlinks": true,
+    "exact_one_capture_new_file_set": true,
+    "preexisting_git_status_preserved_after_exact_owned_additions_and_native_changes": true,
+    "head_unchanged": true,
+    "evidence_exact_append_only": true,
+    "only_two_authorized_preexisting_paths_changed": true,
+    "global_refs_byte_identical": false,
+    "capture_lock_absent": true,
+    "capture_staging_absent": true,
+    "no_pending_bindings": true
+  },
+  "strict_preservation_passed": false,
+  "worker_return_sha256": "fadc7d9f0b3d5464c74b84231c14ded708a7bcc21f932652a75ec21ebb6fb162",
+  "worker_return_one_terminal_LF": true,
+  "formal_clearance": false,
+  "OP26_formal_state": "CHALLENGED",
+  "historical_quality_r5_CI_floor_clearance": "historical only after source change",
+  "new_gate_floor_CI_acceptance_tick_executed": false,
+  "source_or_task_edits": false,
+  "known_harness_assertion_issue_preserved": "prechecks-first-attempt.json; actual four explicit kinds plus existing T005 integration task; no product failure or canonical retry"
+}

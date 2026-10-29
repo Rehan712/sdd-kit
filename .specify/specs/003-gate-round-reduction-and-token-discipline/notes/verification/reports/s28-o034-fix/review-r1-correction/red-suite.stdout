@@ -1,0 +1,836 @@
+  ok   test_clean_fixture_is_consistent
+  ok   test_dangling_ref_fails
+  ok   test_duplicate_task_id_fails
+  ok   test_external_marker_must_be_mirrored_in_status
+  ok   test_gate_agent_placeholder_fails
+  ok   test_leftover_spec_directories_do_not_decide_the_shipped_loop
+  ok   test_missing_artifact_is_an_error
+  ok   test_missing_gate_agent_file_fails
+  ok   test_missing_verify_line_warns
+  ok   test_needs_clarification_blocks
+  ok   test_stray_repo_tags_without_umbrella_warn
+  ok   test_task_without_acceptance_fails
+  ok   test_ticked_box_without_evidence_warns
+  ok   test_umbrella_declared_repo_with_no_tasks_warns
+  ok   test_umbrella_tagged_tasks_pass
+  ok   test_umbrella_undeclared_repo_tag_fails
+  ok   test_umbrella_untagged_tasks_fail
+  ok   test_uncovered_ac_fails_and_gate_refs_do_not_count
+  FAIL test_verification_bindings
+       assert: AC-004: untyped npm<tests/test-typecheck.txt run typecheck warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/review-r1-correction/tmp/sddkit.MX8X0d/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 
+       assert: AC-004: npm<tests/test-typecheck.txt run typecheck remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/review-r1-correction/tmp/sddkit.MX8X0d/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 
+       assert: AC-004: untyped tsc>tests/test-typecheck.log --noEmit warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/review-r1-correction/tmp/sddkit.MX8X0d/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 
+       assert: AC-004: tsc>tests/test-typecheck.log --noEmit remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/review-r1-correction/tmp/sddkit.MX8X0d/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 
+       assert: AC-004: untyped grep<tools/pytest typecheck warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/review-r1-correction/tmp/sddkit.MX8X0d/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 
+       assert: AC-004: grep<tools/pytest typecheck remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/review-r1-correction/tmp/sddkit.MX8X0d/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 
+       assert: AC-004: untyped grep<tools/npm test typecheck.txt warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/review-r1-correction/tmp/sddkit.MX8X0d/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 
+       assert: AC-004: grep<tools/npm test typecheck.txt remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/review-r1-correction/tmp/sddkit.MX8X0d/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 
+       assert: AC-004: untyped tsc<input.txt --noEmit warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/review-r1-correction/tmp/sddkit.MX8X0d/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 
+       assert: AC-004: tsc<input.txt --noEmit remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/review-r1-correction/tmp/sddkit.MX8X0d/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 
+       assert: AC-004: untyped tsc <input.txt --noEmit warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/review-r1-correction/tmp/sddkit.MX8X0d/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 
+       assert: AC-004: tsc <input.txt --noEmit remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/review-r1-correction/tmp/sddkit.MX8X0d/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 
+       assert: AC-004: untyped tsc>input.txt --noEmit warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/review-r1-correction/tmp/sddkit.MX8X0d/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 
+       assert: AC-004: tsc>input.txt --noEmit remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/review-r1-correction/tmp/sddkit.MX8X0d/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 
+       assert: AC-004: untyped tsc >input.txt --noEmit warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/review-r1-correction/tmp/sddkit.MX8X0d/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 
+       assert: AC-004: tsc >input.txt --noEmit remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/review-r1-correction/tmp/sddkit.MX8X0d/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 
+       assert: AC-004: untyped grep<input.txt AC-001 README.md warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/review-r1-correction/tmp/sddkit.MX8X0d/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 
+       assert: AC-004: grep<input.txt AC-001 README.md remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/review-r1-correction/tmp/sddkit.MX8X0d/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 
+       assert: AC-004: untyped grep>input.txt AC-001 README.md warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/review-r1-correction/tmp/sddkit.MX8X0d/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 
+       assert: AC-004: grep>input.txt AC-001 README.md remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/review-r1-correction/tmp/sddkit.MX8X0d/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 
+       assert: AC-004: untyped rg<tools/pytest AC-001 README.md warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/review-r1-correction/tmp/sddkit.MX8X0d/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 
+       assert: AC-004: rg<tools/pytest AC-001 README.md remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/review-r1-correction/tmp/sddkit.MX8X0d/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 
+       assert: AC-004: untyped rg>tools/pytest AC-001 README.md warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/review-r1-correction/tmp/sddkit.MX8X0d/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 
+       assert: AC-004: rg>tools/pytest AC-001 README.md remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/review-r1-correction/tmp/sddkit.MX8X0d/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 
+       assert: AC-004: untyped diff<tools/bats actual.txt expected.txt warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/review-r1-correction/tmp/sddkit.MX8X0d/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 
+       assert: AC-004: diff<tools/bats actual.txt expected.txt remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/review-r1-correction/tmp/sddkit.MX8X0d/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 
+       assert: AC-004: untyped diff>tools/bats actual.txt expected.txt warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/review-r1-correction/tmp/sddkit.MX8X0d/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 
+       assert: AC-004: diff>tools/bats actual.txt expected.txt remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/review-r1-correction/tmp/sddkit.MX8X0d/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 
+       assert: AC-004: untyped test<tests/check.txt -e README.md warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/review-r1-correction/tmp/sddkit.MX8X0d/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 
+       assert: AC-004: test<tests/check.txt -e README.md remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/review-r1-correction/tmp/sddkit.MX8X0d/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 
+       assert: AC-004: untyped test <tests/check.txt -e README.md warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/review-r1-correction/tmp/sddkit.MX8X0d/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 
+       assert: AC-004: test <tests/check.txt -e README.md remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/review-r1-correction/tmp/sddkit.MX8X0d/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 
+       assert: AC-004: untyped test>tests/check.txt -e README.md warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/review-r1-correction/tmp/sddkit.MX8X0d/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 
+       assert: AC-004: test>tests/check.txt -e README.md remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/review-r1-correction/tmp/sddkit.MX8X0d/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 
+       assert: AC-004: untyped test >tests/check.txt -e README.md warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/review-r1-correction/tmp/sddkit.MX8X0d/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 
+       assert: AC-004: test >tests/check.txt -e README.md remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/review-r1-correction/tmp/sddkit.MX8X0d/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 
+       assert: AC-004: untyped grep<tools/bash tests/typecheck.sh warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/review-r1-correction/tmp/sddkit.MX8X0d/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 
+       assert: AC-004: grep<tools/bash tests/typecheck.sh remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/review-r1-correction/tmp/sddkit.MX8X0d/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 
+       assert: AC-004: untyped grep>tools/bash tests/typecheck.sh warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/review-r1-correction/tmp/sddkit.MX8X0d/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 
+       assert: AC-004: grep>tools/bash tests/typecheck.sh remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/review-r1-correction/tmp/sddkit.MX8X0d/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 
+       assert: AC-004: untyped tsc 2>output.txt --noEmit warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/review-r1-correction/tmp/sddkit.MX8X0d/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 
+       assert: AC-004: tsc 2>output.txt --noEmit remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/review-r1-correction/tmp/sddkit.MX8X0d/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 
+       assert: AC-004: bash<input.txt tests/typecheck.sh is a runner even with weak-looking arguments unexpectedly contains: untyped AC Verify
+       assert: AC-004: bash<input.txt tests/typecheck.sh stays clean missing substring: consistent
+           in: Analyzing: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/review-r1-correction/tmp/sddkit.MX8X0d/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ! ta
+       assert: AC-004: bash <input.txt tests/typecheck.sh is a runner even with weak-looking arguments unexpectedly contains: untyped AC Verify
+       assert: AC-004: bash <input.txt tests/typecheck.sh stays clean missing substring: consistent
+           in: Analyzing: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/review-r1-correction/tmp/sddkit.MX8X0d/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ! ta
+       assert: AC-004: bash>input.txt tests/typecheck.sh is a runner even with weak-looking arguments unexpectedly contains: untyped AC Verify
+       assert: AC-004: bash>input.txt tests/typecheck.sh stays clean missing substring: consistent
+           in: Analyzing: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/review-r1-correction/tmp/sddkit.MX8X0d/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ! ta
+       assert: AC-004: bash >input.txt tests/typecheck.sh is a runner even with weak-looking arguments unexpectedly contains: untyped AC Verify
+       assert: AC-004: bash >input.txt tests/typecheck.sh stays clean missing substring: consistent
+           in: Analyzing: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/review-r1-correction/tmp/sddkit.MX8X0d/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ! ta
+       assert: AC-004: node<input.txt --test test/typecheck.test.js is a runner even with weak-looking arguments unexpectedly contains: untyped AC Verify
+       assert: AC-004: node<input.txt --test test/typecheck.test.js stays clean missing substring: consistent
+           in: Analyzing: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/review-r1-correction/tmp/sddkit.MX8X0d/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ! ta
+       assert: AC-004: node <input.txt --test test/typecheck.test.js is a runner even with weak-looking arguments unexpectedly contains: untyped AC Verify
+       assert: AC-004: node <input.txt --test test/typecheck.test.js stays clean missing substring: consistent
+           in: Analyzing: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/review-r1-correction/tmp/sddkit.MX8X0d/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ! ta
+       assert: AC-004: node>input.txt --test test/typecheck.test.js is a runner even with weak-looking arguments unexpectedly contains: untyped AC Verify
+       assert: AC-004: node>input.txt --test test/typecheck.test.js stays clean missing substring: consistent
+           in: Analyzing: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/review-r1-correction/tmp/sddkit.MX8X0d/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ! ta
+       assert: AC-004: node >input.txt --test test/typecheck.test.js is a runner even with weak-looking arguments unexpectedly contains: untyped AC Verify
+       assert: AC-004: node >input.txt --test test/typecheck.test.js stays clean missing substring: consistent
+           in: Analyzing: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/review-r1-correction/tmp/sddkit.MX8X0d/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ! ta
+       assert: AC-004: cargo<input.txt test --test typecheck is a runner even with weak-looking arguments unexpectedly contains: untyped AC Verify
+       assert: AC-004: cargo<input.txt test --test typecheck stays clean missing substring: consistent
+           in: Analyzing: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/review-r1-correction/tmp/sddkit.MX8X0d/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ! ta
+       assert: AC-004: cargo <input.txt test --test typecheck is a runner even with weak-looking arguments unexpectedly contains: untyped AC Verify
+       assert: AC-004: cargo <input.txt test --test typecheck stays clean missing substring: consistent
+           in: Analyzing: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/review-r1-correction/tmp/sddkit.MX8X0d/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ! ta
+       assert: AC-004: cargo>input.txt test --test typecheck is a runner even with weak-looking arguments unexpectedly contains: untyped AC Verify
+       assert: AC-004: cargo>input.txt test --test typecheck stays clean missing substring: consistent
+           in: Analyzing: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/review-r1-correction/tmp/sddkit.MX8X0d/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ! ta
+       assert: AC-004: cargo >input.txt test --test typecheck is a runner even with weak-looking arguments unexpectedly contains: untyped AC Verify
+       assert: AC-004: cargo >input.txt test --test typecheck stays clean missing substring: consistent
+           in: Analyzing: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/review-r1-correction/tmp/sddkit.MX8X0d/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ! ta
+       assert: AC-004: pytest<input.txt tests/typecheck.py is a runner even with weak-looking arguments unexpectedly contains: untyped AC Verify
+       assert: AC-004: pytest<input.txt tests/typecheck.py stays clean missing substring: consistent
+           in: Analyzing: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/review-r1-correction/tmp/sddkit.MX8X0d/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ! ta
+       assert: AC-004: pytest>input.txt tests/typecheck.py is a runner even with weak-looking arguments unexpectedly contains: untyped AC Verify
+       assert: AC-004: pytest>input.txt tests/typecheck.py stays clean missing substring: consistent
+           in: Analyzing: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/review-r1-correction/tmp/sddkit.MX8X0d/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ! ta
+       assert: AC-004: /usr/bin/python3<input.txt -m pytest tests/typecheck.py is a runner even with weak-looking arguments unexpectedly contains: untyped AC Verify
+       assert: AC-004: /usr/bin/python3<input.txt -m pytest tests/typecheck.py stays clean missing substring: consistent
+           in: Analyzing: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/review-r1-correction/tmp/sddkit.MX8X0d/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ! ta
+       assert: AC-004: /usr/bin/python3 <input.txt -m pytest tests/typecheck.py is a runner even with weak-looking arguments unexpectedly contains: untyped AC Verify
+       assert: AC-004: /usr/bin/python3 <input.txt -m pytest tests/typecheck.py stays clean missing substring: consistent
+           in: Analyzing: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/review-r1-correction/tmp/sddkit.MX8X0d/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ! ta
+       assert: AC-004: /usr/bin/python3>input.txt -m pytest tests/typecheck.py is a runner even with weak-looking arguments unexpectedly contains: untyped AC Verify
+       assert: AC-004: /usr/bin/python3>input.txt -m pytest tests/typecheck.py stays clean missing substring: consistent
+           in: Analyzing: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/review-r1-correction/tmp/sddkit.MX8X0d/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ! ta
+       assert: AC-004: /usr/bin/python3 >input.txt -m pytest tests/typecheck.py is a runner even with weak-looking arguments unexpectedly contains: untyped AC Verify
+       assert: AC-004: /usr/bin/python3 >input.txt -m pytest tests/typecheck.py stays clean missing substring: consistent
+           in: Analyzing: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/review-r1-correction/tmp/sddkit.MX8X0d/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ! ta
+       assert: AC-004: npm<input.txt run test -- --grep typecheck is a runner even with weak-looking arguments unexpectedly contains: untyped AC Verify
+       assert: AC-004: npm<input.txt run test -- --grep typecheck stays clean missing substring: consistent
+           in: Analyzing: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/review-r1-correction/tmp/sddkit.MX8X0d/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ! ta
+       assert: AC-004: npm <input.txt run test -- --grep typecheck is a runner even with weak-looking arguments unexpectedly contains: untyped AC Verify
+       assert: AC-004: npm <input.txt run test -- --grep typecheck stays clean missing substring: consistent
+           in: Analyzing: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/review-r1-correction/tmp/sddkit.MX8X0d/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ! ta
+       assert: AC-004: npm>input.txt run test -- --grep typecheck is a runner even with weak-looking arguments unexpectedly contains: untyped AC Verify
+       assert: AC-004: npm>input.txt run test -- --grep typecheck stays clean missing substring: consistent
+           in: Analyzing: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/review-r1-correction/tmp/sddkit.MX8X0d/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ! ta
+       assert: AC-004: npm >input.txt run test -- --grep typecheck is a runner even with weak-looking arguments unexpectedly contains: untyped AC Verify
+       assert: AC-004: npm >input.txt run test -- --grep typecheck stays clean missing substring: consistent
+           in: Analyzing: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/review-r1-correction/tmp/sddkit.MX8X0d/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ! ta
+       assert: AC-004: npm 2>output.txt run test -- --grep typecheck is a runner even with weak-looking arguments unexpectedly contains: untyped AC Verify
+       assert: AC-004: npm 2>output.txt run test -- --grep typecheck stays clean missing substring: consistent
+           in: Analyzing: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/review-r1-correction/tmp/sddkit.MX8X0d/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ! ta
+       assert: AC-004: bash 0<input.txt -e tests/typecheck.sh is a runner even with weak-looking arguments unexpectedly contains: untyped AC Verify
+       assert: AC-004: bash 0<input.txt -e tests/typecheck.sh stays clean missing substring: consistent
+           in: Analyzing: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/review-r1-correction/tmp/sddkit.MX8X0d/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ! ta
+  -- 18/19 passed

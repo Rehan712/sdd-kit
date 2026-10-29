@@ -1,0 +1,35 @@
+{
+  "at": "2026-10-29T17:56:18.432549+00:00",
+  "source": "3e70d8170d98f13c04f550c15942f70bdb487abf30ad629ff78db2048f077497",
+  "files": {
+    "scripts/sdd-analyze.sh": {
+      "sha256": "f2809d24b5bec01fa4ca8ab4d689c5e9585472989e66798aabc9597d80f176fd",
+      "mode": 493,
+      "mtimeNs": 1793295459287139619
+    },
+    "tests/test-sdd-analyze.sh": {
+      "sha256": "9dd851fd6ed32797384ada5c4d263dcdbb6947ce95cdeae4d5ea0ac1bb60a393",
+      "mode": 420,
+      "mtimeNs": 1793295459287497581
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md": {
+      "sha256": "859042532b2b0c71136b6db6184008fb354a697b190e77accae10ec1ea166575",
+      "mode": 384,
+      "mtimeNs": 1793296519245071301
+    }
+  },
+  "acceptedReceipt": "ACC-TYOLj8",
+  "acceptanceSealMembersRehashed": {
+    "meta.nul": "a70ea65dcb1767ebf2cdbda6556f1c633e0185948c323f8bf2c044f6619dc43b",
+    "return.txt": "fadc7d9f0b3d5464c74b84231c14ded708a7bcc21f932652a75ec21ebb6fb162",
+    "tasks.after": "859042532b2b0c71136b6db6184008fb354a697b190e77accae10ec1ea166575",
+    "digests.nul": "7b0fabe5a813d34ce65bba64b758fbc65f427830f36d0ddc69dabb02ee1671fd"
+  },
+  "committed": "a7abea5e5f3641fc5ea5507f4d5f9923842b96c04997e36330bb306e1a2efbce",
+  "completeDiffSha256": "5252799a7d6aa9a59398a9674155a3faba995b5811efbdbd478c3b6d6600bd2b",
+  "latestDiffSha256": "5da0b07709526dd6fb542d1f1fb30025c03e3a10df5fc8c868f7253634dddbe9",
+  "latestQualityRound": 6,
+  "cycle": "post-OP26 corrective quality pass 1; previous quality cycle ended Ship at r5",
+  "formalOP26": "sealed CHALLENGED",
+  "OP27Authorized": false
+}

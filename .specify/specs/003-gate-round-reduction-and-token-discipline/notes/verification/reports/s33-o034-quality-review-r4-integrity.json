@@ -1,0 +1,81 @@
+{
+  "head": "2049f65960cc91e9e30bbd5ff1e11fc0fdf7cbd9",
+  "allProtectedBytesModesMtimesUnchanged": true,
+  "files": {
+    "scripts/sdd-analyze.sh": {
+      "sha256": "c43de9e92df5657a3a94091a73bccb9abe37f9e1c3c3f6ccf6cb1cfa64f3a3f2",
+      "mode": "0o755",
+      "mtimeNs": 1793088116020109886
+    },
+    "tests/test-sdd-analyze.sh": {
+      "sha256": "2f9efc4e4b24da1ca1bcef710e82ef852f1e463adbae0263f54d585f333bcd4e",
+      "mode": "0o644",
+      "mtimeNs": 1793088116020177928
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md": {
+      "sha256": "0f79daf37ac3c2330f74c6a2bacf31607def0600528a8955fcfd721d6fb3131c",
+      "mode": "0o600",
+      "mtimeNs": 1793088292733053436
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/STATUS.md": {
+      "sha256": "2519b0a153bd7a8548b1b5d6abf3cefaddd6da93d8c5670efba4322dd4c8be1b",
+      "mode": "0o600",
+      "mtimeNs": 1793047789555914145
+    },
+    "tests/test-gate-contracts.sh": {
+      "sha256": "7bc13dde14004bf4ba967c0f64ec120b19bdde641643a6a7436d154c222f893c",
+      "mode": "0o644",
+      "mtimeNs": 1792956408250063378
+    },
+    "/Users/babar/projects/sdd-kit-public/.git/worktrees/003-gate-round-reduction-and-token-discipline/index": {
+      "sha256": "c492d7ea95abf8e8c335001f20c62ff50bc6f1e2179d7a07d30811181b3dd700",
+      "mode": "0o644",
+      "mtimeNs": 1792957592613445716
+    }
+  },
+  "trackedDirtyStateUnchanged": true,
+  "libraryUnchangedSha256": "015859de8d68d5cbaffa3ea9078a74584f364312b09cd3c739731fd6716a6c36",
+  "preparedFullDiffMatchesExactBeforeCurrentBytes": true,
+  "candidatePatchExactlyThreeHeaders": [
+    [
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md"
+    ],
+    [
+      "scripts/sdd-analyze.sh",
+      "scripts/sdd-analyze.sh"
+    ],
+    [
+      "tests/test-sdd-analyze.sh",
+      "tests/test-sdd-analyze.sh"
+    ]
+  ],
+  "reviewOwnedReceipts": [
+    {
+      "name": "s33-o034-quality-review-r4-baseline.json",
+      "sha256": "27bca5ece4fb96095768bf516c831ac9aa2c8ccd941bb693c207def985b4234c",
+      "bytes": 2822
+    },
+    {
+      "name": "s33-o034-quality-review-r4-checks.json",
+      "sha256": "a427d4ea5a6190fb33b87efb3e5ae6a8adc4ecf1e60c2a13671f64e726eb3136",
+      "bytes": 14520
+    },
+    {
+      "name": "s33-o034-quality-review-r4-evidence.json",
+      "sha256": "5925ecc2680b840156cdd44879636e475c4c0f3582427bdc00adfda819b9ccad",
+      "bytes": 5608
+    },
+    {
+      "name": "s33-o034-quality-review-r4-probes.json",
+      "sha256": "aca8a9dba2604fb62d244f85567bbbb7578e4a173eb7468fb4969c4a2b401c0f",
+      "bytes": 118241
+    },
+    {
+      "name": "s33-o034-quality-review-r4-runtime.json",
+      "sha256": "7ed8b0582d7af173912ed85a8192dc74dfc04e72c2be0253948c89510cf4687b",
+      "bytes": 5953
+    }
+  ],
+  "scopeLimit": "Focused integrity comparison; no full-worktree snapshot or gate action was run. Parent-owned excluded report writes were preserved."
+}

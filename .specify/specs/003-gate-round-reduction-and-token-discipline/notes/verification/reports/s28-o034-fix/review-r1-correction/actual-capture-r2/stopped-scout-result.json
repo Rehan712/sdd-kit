@@ -1,0 +1,30 @@
+{
+  "taskId": "node:delegated-task:command%3Amcp%3Afab79580-a405-41cc-8cf9-2b0c1f103a41%3Adelegate-task%3Asdd003-s28-o034-correction-live-capture-r2",
+  "childThreadId": "thread:delegated-task:command%3Amcp%3Afab79580-a405-41cc-8cf9-2b0c1f103a41%3Adelegate-task%3Asdd003-s28-o034-correction-live-capture-r2",
+  "childRunId": "run:thread:thread%3Adelegated-task%3Acommand%253Amcp%253Afab79580-a405-41cc-8cf9-2b0c1f103a41%253Adelegate-task%253Asdd003-s28-o034-correction-live-capture-r2:ordinal:1",
+  "childNodeId": "node:delegated-task:command%3Amcp%3Afab79580-a405-41cc-8cf9-2b0c1f103a41%3Adelegate-task%3Asdd003-s28-o034-correction-live-capture-r2",
+  "status": "completed",
+  "workState": "result_available",
+  "hasPendingChildRuns": false,
+  "latestTerminalRunId": "run:thread:thread%3Adelegated-task%3Acommand%253Amcp%253Afab79580-a405-41cc-8cf9-2b0c1f103a41%253Adelegate-task%253Asdd003-s28-o034-correction-live-capture-r2:ordinal:1",
+  "latestTerminalStatus": "completed",
+  "latestTerminalSummary": null,
+  "latestTerminalResultContextTransferId": null,
+  "providerInstanceId": "codex_codex_gym",
+  "model": "gpt-6-luna",
+  "options": [
+    {
+      "id": "reasoningEffort",
+      "value": "medium"
+    },
+    {
+      "id": "serviceTier",
+      "value": "default"
+    }
+  ],
+  "summary": "Stopped before running any commands. The listed live file content hashes and `STATUS.md` hash match the handoff, and `HEAD` matches `2049f659…`. However, the worktree has extensive pre-existing changes, including `STATUS.md`, and the required `actual-capture-r2` receipt directory does not exist. That violates the stated baseline, so I did not create receipts or run ShellCheck, the analyzer, or the runner.\n\nNo source files were changed. Skipped all requested checks; no CAP ID, pass count, or output digest was produced. Risk: the worktree needs reconciliation before this capture can run.",
+  "resultContextTransferId": "context-transfer:type:subagent_result:source-thread:thread%3Adelegated-task%3Acommand%253Amcp%253Afab79580-a405-41cc-8cf9-2b0c1f103a41%253Adelegate-task%253Asdd003-s28-o034-correction-live-capture-r2:target-thread:2ce93492-409f-4930-a9e5-173544a4c8c6:c376a80f-f264-4ba3-9f89-2ddbdb4ff49f",
+  "hasPendingQuestion": false,
+  "pendingApproval": null,
+  "waitTimedOut": false
+}

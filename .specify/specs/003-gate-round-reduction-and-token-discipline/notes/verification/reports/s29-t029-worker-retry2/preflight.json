@@ -1,0 +1,56 @@
+{
+  "argv": [
+    "bash",
+    "scripts/spec-run.sh",
+    ".specify/specs/003-gate-round-reduction-and-token-discipline",
+    "T029",
+    "--from-task",
+    "--no-tick",
+    "--summary"
+  ],
+  "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+  "expected_paths": {
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/STATUS.md": [
+      "2519b0a153bd7a8548b1b5d6abf3cefaddd6da93d8c5670efba4322dd4c8be1b",
+      "0600"
+    ],
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md": [
+      "82fe00d7ef49b4d1b66ff65ef8ca1ed672d7c51dfbb8d94a63db4892a3a93894",
+      "0600"
+    ],
+    "scripts/sdd-analyze.sh": [
+      "0c26c101666aa8559814f40c7376da6b07290d8e2830b230a54b8eb01b4afdf7",
+      "0755"
+    ],
+    "tests/test-gate-contracts.sh": [
+      "7bc13dde14004bf4ba967c0f64ec120b19bdde641643a6a7436d154c222f893c",
+      "0644"
+    ],
+    "tests/test-sdd-analyze.sh": [
+      "513308051dc409e42fe72c3c20d5a0fe4a1e7607e5373dcff404fd6993cf4516",
+      "0644"
+    ]
+  },
+  "finished_at": null,
+  "model_selection": {
+    "interactionMode": "default",
+    "model": "gpt-6.1-sol",
+    "options": [
+      {
+        "id": "reasoningEffort",
+        "value": "high"
+      },
+      {
+        "id": "serviceTier",
+        "value": "default"
+      }
+    ],
+    "parentThreadId": "thread:delegated-task:command%3Amcp%3Ae6315556-7380-4d31-903f-24b14ad55a20%3Adelegate-task%3Asdd003-s29-t029-fresh-worker-high-retry2",
+    "providerInstanceId": "codex_codex_gym",
+    "runtimeMode": "full-access",
+    "source": "live orchestrator_capabilities observed during this worker turn"
+  },
+  "preflight_errors": [],
+  "run_count": 0,
+  "started_at": null
+}

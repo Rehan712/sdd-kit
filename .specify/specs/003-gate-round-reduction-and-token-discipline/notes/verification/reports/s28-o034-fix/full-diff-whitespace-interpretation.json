@@ -1,0 +1,5 @@
+{
+  "result": "clean",
+  "expectedExit": 1,
+  "reason": "git diff --no-index implies --exit-code: changed file pairs return 1; all three emit no whitespace diagnostics. Independently git apply --check --whitespace=error-all returns 0."
+}
