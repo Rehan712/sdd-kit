@@ -1,0 +1,371 @@
+{
+  "consumption": "Read completed metadata and receipts only. No validator or suite execution.",
+  "floor": {
+    "version": "1",
+    "id": "FLOOR-qoRY6H",
+    "kind": "floor",
+    "stage": "",
+    "start": "2026-10-26T22:55:57Z",
+    "end": "2026-10-27T06:24:04Z",
+    "source": "16ffcec3c2f0cffa21b8c35e7b90d768a27bdfdd37deba9147edd25489946494",
+    "exit": "0"
+  },
+  "round": {
+    "version": "1",
+    "gate": "opponent",
+    "round": "25",
+    "floor": "FLOOR-qoRY6H",
+    "source": "16ffcec3c2f0cffa21b8c35e7b90d768a27bdfdd37deba9147edd25489946494",
+    "reserved": "2026-10-27T06:54:04Z"
+  },
+  "counts": {
+    "records": 101,
+    "executed": 21,
+    "reused": 80,
+    "uniqueCaptures": 22
+  },
+  "captures": {
+    "CAP-795-FlRr7i": {
+      "meta": {
+        "version": "1",
+        "id": "CAP-795-FlRr7i",
+        "sequence": "795",
+        "kind": "command",
+        "start": "2026-10-26T22:56:41Z",
+        "end": "2026-10-26T22:57:46Z",
+        "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "check": "4b7f6c9b5f0df725e563898e3969549378a848152b48c9b6985cfb1517a462c1",
+        "shell": "/bin/bash",
+        "input_before": "16ffcec3c2f0cffa21b8c35e7b90d768a27bdfdd37deba9147edd25489946494",
+        "input_after": "16ffcec3c2f0cffa21b8c35e7b90d768a27bdfdd37deba9147edd25489946494",
+        "no_tick": "1",
+        "exit": "0",
+        "output_digest": "f9166fdc124954abb48f7c8ed789d96a1ce68c06a9da6df0d9d49a79a07aca5a",
+        "output_bytes": "862",
+        "policy": "local",
+        "key": "  -- 19/19 passed"
+      },
+      "argv": [
+        "/bin/bash",
+        "-o",
+        "pipefail",
+        "-c",
+        "bash tests/test-sdd-analyze.sh"
+      ],
+      "output": "  ok   test_clean_fixture_is_consistent\n  ok   test_dangling_ref_fails\n  ok   test_duplicate_task_id_fails\n  ok   test_external_marker_must_be_mirrored_in_status\n  ok   test_gate_agent_placeholder_fails\n  ok   test_leftover_spec_directories_do_not_decide_the_shipped_loop\n  ok   test_missing_artifact_is_an_error\n  ok   test_missing_gate_agent_file_fails\n  ok   test_missing_verify_line_warns\n  ok   test_needs_clarification_blocks\n  ok   test_stray_repo_tags_without_umbrella_warn\n  ok   test_task_without_acceptance_fails\n  ok   test_ticked_box_without_evidence_warns\n  ok   test_umbrella_declared_repo_with_no_tasks_warns\n  ok   test_umbrella_tagged_tasks_pass\n  ok   test_umbrella_undeclared_repo_tag_fails\n  ok   test_umbrella_untagged_tasks_fail\n  ok   test_uncovered_ac_fails_and_gate_refs_do_not_count\n  ok   test_verification_bindings\n  -- 19/19 passed\n"
+    },
+    "CAP-794-aUZ5t0": {
+      "meta": {
+        "version": "1",
+        "id": "CAP-794-aUZ5t0",
+        "sequence": "794",
+        "kind": "command",
+        "start": "2026-10-26T20:57:39Z",
+        "end": "2026-10-26T21:07:49Z",
+        "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "check": "90a24b4b485e387a27b9bf813d3c91e9bda58741005a354c59364c345a22f4b5",
+        "shell": "/bin/bash",
+        "input_before": "16ffcec3c2f0cffa21b8c35e7b90d768a27bdfdd37deba9147edd25489946494",
+        "input_after": "16ffcec3c2f0cffa21b8c35e7b90d768a27bdfdd37deba9147edd25489946494",
+        "no_tick": "1",
+        "exit": "0",
+        "output_digest": "e2bd5dfbf6ddcf901317732547649b3e2028c869384acc1e688d65a77c738b33",
+        "output_bytes": "688",
+        "policy": "local",
+        "key": "  -- 18/18 passed"
+      },
+      "argv": [
+        "/bin/bash",
+        "-o",
+        "pipefail",
+        "-c",
+        "bash tests/test-gate-contracts.sh"
+      ],
+      "output": "  ok   test_all_brief_modes\n  ok   test_all_overlay_defaults\n  ok   test_briefs_t010\n  ok   test_briefs_t011\n  ok   test_briefs_t012\n  ok   test_briefs_t013\n  ok   test_defaults_t006\n  ok   test_defaults_t007\n  ok   test_defaults_t008\n  ok   test_defaults_t009\n  ok   test_empty_record_directories_do_not_decide_the_002_tally\n  ok   test_ignored_local_overlays_and_personas_do_not_decide_the_checks\n  ok   test_ignored_local_scripts_do_not_reach_the_dispatch_grammar_kit\n  ok   test_ignored_local_scripts_do_not_reach_the_documented_workflow\n  ok   test_instruction_contracts\n  ok   test_invoker_protocol\n  ok   test_reports_and_tally\n  ok   test_review_scope_contracts\n  -- 18/18 passed\n"
+    }
+  },
+  "reservation": {
+    "started": "2026-10-27T06:30:49.779933+00:00",
+    "source": "16ffcec3c2f0cffa21b8c35e7b90d768a27bdfdd37deba9147edd25489946494",
+    "floor": "FLOOR-qoRY6H",
+    "round": 25,
+    "gate": "opponent",
+    "steps": [
+      {
+        "name": "prereserve",
+        "argv": [
+          "bash",
+          "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/r23-worktree-state.sh",
+          "s32-op25-prereserve"
+        ],
+        "started": "2026-10-27T06:30:49.780992+00:00",
+        "ended": "2026-10-27T06:32:09.910332+00:00",
+        "seconds": 80.13,
+        "exit": 0
+      },
+      {
+        "name": "reserve",
+        "argv": [
+          "bash",
+          "scripts/spec-gate.sh",
+          "round",
+          ".specify/specs/003-gate-round-reduction-and-token-discipline",
+          "opponent",
+          "--floor",
+          "FLOOR-qoRY6H"
+        ],
+        "started": "2026-10-27T06:32:09.910790+00:00",
+        "ended": "2026-10-27T06:54:04.780223+00:00",
+        "seconds": 1314.879,
+        "exit": 0
+      },
+      {
+        "name": "reserved",
+        "argv": [
+          "bash",
+          "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/r23-worktree-state.sh",
+          "s32-op25-reserved"
+        ],
+        "started": "2026-10-27T06:54:04.780724+00:00",
+        "ended": "2026-10-27T06:55:26.116869+00:00",
+        "seconds": 81.337,
+        "exit": 0
+      }
+    ],
+    "exit": 0,
+    "reservationCreated": true,
+    "phase": "reserved-worktree-unchanged",
+    "metadata": {
+      "version": "1",
+      "gate": "opponent",
+      "round": "25",
+      "floor": "FLOOR-qoRY6H",
+      "source": "16ffcec3c2f0cffa21b8c35e7b90d768a27bdfdd37deba9147edd25489946494",
+      "reserved": "2026-10-27T06:54:04Z"
+    },
+    "ended": "2026-10-27T06:55:26.120453+00:00",
+    "entriesSha256": "f57ca7f0c9cd971d4e2be1ae2dd13010396b15b2ea04563d4dc5fcaeb6721334",
+    "entryCount": 6652
+  },
+  "t029": {
+    "started": "2026-10-26T21:09:40.176494+00:00",
+    "capture": "CAP-794-aUZ5t0",
+    "task": "T029",
+    "steps": [
+      {
+        "name": "reject",
+        "argv": [
+          "bash",
+          "scripts/spec-gate.sh",
+          "accept",
+          ".specify/specs/003-gate-round-reduction-and-token-discipline",
+          "T029",
+          ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/returns/T029-incomplete.txt"
+        ],
+        "started": "2026-10-26T21:09:40.204678+00:00",
+        "ended": "2026-10-26T21:10:02.268325+00:00",
+        "seconds": 22.065,
+        "exit": 3
+      },
+      {
+        "name": "accept",
+        "argv": [
+          "bash",
+          "scripts/spec-gate.sh",
+          "accept",
+          ".specify/specs/003-gate-round-reduction-and-token-discipline",
+          "T029",
+          ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/returns/T029.txt"
+        ],
+        "started": "2026-10-26T21:10:02.598936+00:00",
+        "ended": "2026-10-26T21:10:32.014737+00:00",
+        "seconds": 29.417,
+        "exit": 0
+      },
+      {
+        "name": "seal-check",
+        "argv": [
+          "bash",
+          "-c",
+          ". scripts/lib.sh; . scripts/verification-lib.sh; vf_integrity \"$1\" meta.nul && vf_integrity \"$2\" meta.nul && vf_integrity \"$3\" meta.nul return.txt tasks.after digests.nul && test \"$(cat \"$3/COMMITTED\")\" = \"$(vf_hash \"$3/COMPLETE\")\"",
+          "_",
+          ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/accept-events/ACCEPT-I3Eloa",
+          ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/accept-events/ACCEPT-4rCf9X",
+          ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/accepted/T029/ACC-MkfiB6"
+        ],
+        "started": "2026-10-26T21:10:32.044674+00:00",
+        "ended": "2026-10-26T21:10:32.179108+00:00",
+        "seconds": 0.134,
+        "exit": 0
+      }
+    ],
+    "exit": 0,
+    "source": "16ffcec3c2f0cffa21b8c35e7b90d768a27bdfdd37deba9147edd25489946494",
+    "before": {
+      "files": {
+        "scripts/sdd-analyze.sh": {
+          "sha256": "0c26c101666aa8559814f40c7376da6b07290d8e2830b230a54b8eb01b4afdf7",
+          "mode": "0o755",
+          "mtimeNs": 1793045575939407052
+        },
+        "tests/test-sdd-analyze.sh": {
+          "sha256": "513308051dc409e42fe72c3c20d5a0fe4a1e7607e5373dcff404fd6993cf4516",
+          "mode": "0o644",
+          "mtimeNs": 1793045485570467704
+        },
+        "tests/test-gate-contracts.sh": {
+          "sha256": "7bc13dde14004bf4ba967c0f64ec120b19bdde641643a6a7436d154c222f893c",
+          "mode": "0o644",
+          "mtimeNs": 1792956408250063378
+        },
+        ".specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md": {
+          "sha256": "82fe00d7ef49b4d1b66ff65ef8ca1ed672d7c51dfbb8d94a63db4892a3a93894",
+          "mode": "0o600",
+          "mtimeNs": 1793046003182732081
+        }
+      },
+      "status": {
+        "sha256": "2519b0a153bd7a8548b1b5d6abf3cefaddd6da93d8c5670efba4322dd4c8be1b",
+        "mode": "0o600",
+        "mtimeNs": 1793047789555914145
+      },
+      "index": {
+        "sha256": "c492d7ea95abf8e8c335001f20c62ff50bc6f1e2179d7a07d30811181b3dd700",
+        "mode": "0o644",
+        "mtimeNs": 1792957592613445716
+      },
+      "head": "2049f65960cc91e9e30bbd5ff1e11fc0fdf7cbd9"
+    },
+    "intactReturnSha256": "1bf5fa3ca21929ce6e70bc56177aaa474f1987a71fc3699ed48ab3b8baba56fc",
+    "incompleteReturnSha256": "b63beefc7007b666340d208e167bacb30476a32396aa72e58b43b79098a879a7",
+    "afterReject": {
+      "files": {
+        "scripts/sdd-analyze.sh": {
+          "sha256": "0c26c101666aa8559814f40c7376da6b07290d8e2830b230a54b8eb01b4afdf7",
+          "mode": "0o755",
+          "mtimeNs": 1793045575939407052
+        },
+        "tests/test-sdd-analyze.sh": {
+          "sha256": "513308051dc409e42fe72c3c20d5a0fe4a1e7607e5373dcff404fd6993cf4516",
+          "mode": "0o644",
+          "mtimeNs": 1793045485570467704
+        },
+        "tests/test-gate-contracts.sh": {
+          "sha256": "7bc13dde14004bf4ba967c0f64ec120b19bdde641643a6a7436d154c222f893c",
+          "mode": "0o644",
+          "mtimeNs": 1792956408250063378
+        },
+        ".specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md": {
+          "sha256": "82fe00d7ef49b4d1b66ff65ef8ca1ed672d7c51dfbb8d94a63db4892a3a93894",
+          "mode": "0o600",
+          "mtimeNs": 1793046003182732081
+        }
+      },
+      "status": {
+        "sha256": "2519b0a153bd7a8548b1b5d6abf3cefaddd6da93d8c5670efba4322dd4c8be1b",
+        "mode": "0o600",
+        "mtimeNs": 1793047789555914145
+      },
+      "index": {
+        "sha256": "c492d7ea95abf8e8c335001f20c62ff50bc6f1e2179d7a07d30811181b3dd700",
+        "mode": "0o644",
+        "mtimeNs": 1792957592613445716
+      },
+      "head": "2049f65960cc91e9e30bbd5ff1e11fc0fdf7cbd9"
+    },
+    "rejectedEvent": "ACCEPT-I3Eloa",
+    "rejectionClass": "binding-mismatch",
+    "rejectionTimestamp": "2026-10-26T21:10:02Z",
+    "rejectedTaskBytesUnchanged": true,
+    "afterAccept": {
+      "files": {
+        "scripts/sdd-analyze.sh": {
+          "sha256": "0c26c101666aa8559814f40c7376da6b07290d8e2830b230a54b8eb01b4afdf7",
+          "mode": "0o755",
+          "mtimeNs": 1793045575939407052
+        },
+        "tests/test-sdd-analyze.sh": {
+          "sha256": "513308051dc409e42fe72c3c20d5a0fe4a1e7607e5373dcff404fd6993cf4516",
+          "mode": "0o644",
+          "mtimeNs": 1793045485570467704
+        },
+        "tests/test-gate-contracts.sh": {
+          "sha256": "7bc13dde14004bf4ba967c0f64ec120b19bdde641643a6a7436d154c222f893c",
+          "mode": "0o644",
+          "mtimeNs": 1792956408250063378
+        },
+        ".specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md": {
+          "sha256": "bc4acb0ebbe27dd0ec452236e93f90817702cbed45b38db41d92a16fa8a63d17",
+          "mode": "0o600",
+          "mtimeNs": 1793049031942505082
+        }
+      },
+      "status": {
+        "sha256": "2519b0a153bd7a8548b1b5d6abf3cefaddd6da93d8c5670efba4322dd4c8be1b",
+        "mode": "0o600",
+        "mtimeNs": 1793047789555914145
+      },
+      "index": {
+        "sha256": "c492d7ea95abf8e8c335001f20c62ff50bc6f1e2179d7a07d30811181b3dd700",
+        "mode": "0o644",
+        "mtimeNs": 1792957592613445716
+      },
+      "head": "2049f65960cc91e9e30bbd5ff1e11fc0fdf7cbd9"
+    },
+    "acceptedEvent": "ACCEPT-4rCf9X",
+    "acceptedReceipt": "ACC-MkfiB6",
+    "acceptTimestamp": "2026-10-26T21:10:31Z",
+    "accepted": true,
+    "ended": "2026-10-26T21:10:32.179544+00:00"
+  },
+  "hosted": {
+    "verifiedAt": "2026-10-26T22:18:53.333540+00:00",
+    "actualTaskResult": {
+      "taskId": "node:delegated-task:command%3Amcp%3Ae6315556-7380-4d31-903f-24b14ad55a20%3Adelegate-task%3Asdd003-s30-hosted-ci-616dd2d-collection-high-r1",
+      "childThreadId": "thread:delegated-task:command%3Amcp%3Ae6315556-7380-4d31-903f-24b14ad55a20%3Adelegate-task%3Asdd003-s30-hosted-ci-616dd2d-collection-high-r1",
+      "childRunId": "run:thread:thread%3Adelegated-task%3Acommand%253Amcp%253Ae6315556-7380-4d31-903f-24b14ad55a20%253Adelegate-task%253Asdd003-s30-hosted-ci-616dd2d-collection-high-r1:ordinal:1",
+      "childNodeId": "node:delegated-task:command%3Amcp%3Ae6315556-7380-4d31-903f-24b14ad55a20%3Adelegate-task%3Asdd003-s30-hosted-ci-616dd2d-collection-high-r1",
+      "status": "completed",
+      "workState": "result_available",
+      "hasPendingChildRuns": false,
+      "latestTerminalRunId": "run:thread:thread%3Adelegated-task%3Acommand%253Amcp%253Ae6315556-7380-4d31-903f-24b14ad55a20%253Adelegate-task%253Asdd003-s30-hosted-ci-616dd2d-collection-high-r1:ordinal:1",
+      "latestTerminalStatus": "completed",
+      "latestTerminalSummary": null,
+      "latestTerminalResultContextTransferId": null,
+      "providerInstanceId": "codex_codex_gym",
+      "model": "gpt-6.1-sol",
+      "options": [
+        {
+          "id": "reasoningEffort",
+          "value": "high"
+        },
+        {
+          "id": "serviceTier",
+          "value": "default"
+        }
+      ],
+      "summary": "PASS: [run 40404936939](https://github.com/Rehan712/sdd-kit/actions/runs/40404936939), attempt 1, completed successfully for exact head `616dd2d`.\n\n- All four jobs succeeded: shellcheck, Ubuntu, macOS, Bash 3.2.\n- Every raw log binds merge `73db38a` \u2192 tree `e68740d`; its parents include the published head.\n- Collector exited 0. Strict before/after checks passed for source `16ffcec`; all 177+8+4 records and protected state remain unchanged.\n- PR21 remains open and draft.\n\n[Handoff and evidence]( /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261026-s29/hosted-s30-audit/handoff.md) include `result.json` and a verified 48-artifact hash manifest.\n\nNo floor, reruns, gates, polling, or mutations performed. This establishes current AC019 hosted evidence, not formal readiness.",
+      "resultContextTransferId": "context-transfer:type:subagent_result:source-thread:thread%3Adelegated-task%3Acommand%253Amcp%253Ae6315556-7380-4d31-903f-24b14ad55a20%253Adelegate-task%253Asdd003-s30-hosted-ci-616dd2d-collection-high-r1:target-thread:2ce93492-409f-4930-a9e5-173544a4c8c6:d71c7a76-a937-42d3-8a0f-e4731b9bb755",
+      "hasPendingQuestion": false,
+      "pendingApproval": null,
+      "waitTimedOut": false
+    },
+    "runId": 40404936939,
+    "head": "616dd2d1bb0f3eb16045821b0b30b9c9b40f2395",
+    "source": "16ffcec3c2f0cffa21b8c35e7b90d768a27bdfdd37deba9147edd25489946494",
+    "merge": "73db38a9551bcbf7fec9df0b5d2d07ddbcf36184",
+    "tree": "e68740dbbf9d10e3abcdfd0c6620ed9c3abd04e1",
+    "artifactCountVerified": 48,
+    "allFourRawJobBindingsVerified": true,
+    "beforeAfterFreezeManifestsIdentical": true,
+    "remaining": "Fresh guarded local floor then authorized independent opponent25 and RC4",
+    "resources": {
+      "onAcPower": false,
+      "power": "Now drawing from 'Battery Power'\n -InternalBattery-0 (id=22413411)\t28%; discharging; 1:32 remaining present: true\n",
+      "freeGiB": 12.55
+    },
+    "floorStarted": false
+  }
+}

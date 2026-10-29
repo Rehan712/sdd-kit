@@ -1,0 +1,11 @@
+--- tasks.before
++++ tasks.after
+@@ -1091,7 +1091,7 @@
+   - *Reuse:* local
+   - *Refs:* REQ-005, AC-004, FM-001, INV-005, plan §3.1, §7
+   - *Notes:* O-034 remains open after sealed and tallied formal opponent round 26 (Prior O-034, verification-command-classification, wrong-result, implementation-error; Blocks AC-004/REQ-005). Normalize known tool basenames before the generic test-path exemption, covering qualified typecheck/build/file-existence tools and the eight supported redirect siblings while retaining actual runner and operand controls. The same T031a5o1 is reopened for fresh no-tick verification and acceptance; its prior CAP-818-fLEvh7 evidence and exact task/source bytes are archived under notes/verification/reports/s49-o034-qualified-tools-fix/before/. OP26 and prior reports remain sealed historical evidence. O-032 and recorded minor follow-ups remain open and unchanged. No OP27, RC5 or merge authorization is granted by this repair.
+-  - *Evidence:* CAP-843-YAhBBt verified by spec-gate accept; return sha256:fadc7d9f0b3d5464c74b84231c14ded708a7bcc21f932652a75ec21ebb6fb162
++  - *Evidence:* CAP-845-hwbWOH verified by spec-gate accept; return sha256:d09ad15d376d5a60c7da068edf44f913a5d442999e30279d0537ca3c526334ff
+ 
+ - [x] **T031a6** — Invalidate saved success and carried PASS on real input revisions
+   - *Files:* `tests/test-gate-contracts.sh`, `.specify/specs/003-gate-round-reduction-and-token-discipline/plan.md`

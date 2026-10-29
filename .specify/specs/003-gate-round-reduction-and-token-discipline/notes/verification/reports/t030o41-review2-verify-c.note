@@ -1,0 +1,22 @@
+t030o41-review2-verify-c: rc=1 (read from the .rc file; the harness notification reported
+exit 0, which was the trailing `echo`'s status). Two FAIL lines, both explained, neither a
+failure to reproduce a pass-C claim:
+
+1. "F3 identity unchanged under CDPATH=." got an EMPTY identity. vf_snapshot itself fails
+   under an exported CDPATH=. when given a relative spec path: its `cd "$spec" && pwd -P`
+   consults CDPATH and prints the directory into the substitution. That fails closed (no
+   identity, so no capture and no reuse in that environment) and is recorded as a
+   measurement. It does not weaken F3 as a regression: `bash tests/shellcheck.sh` fails
+   under CDPATH=. (rc=2) where the pre-repair command passes (rc=0), and a BASH_ENV file
+   setting an unexported CDPATH fails it too (rc=2).
+
+2. "live worktree unchanged" FAIL: the invoker copied the two review reports
+   (t030o41-review2-passC.md, t030o41-review2-passD.md) into this directory while the
+   script ran. Recomputed after the run, the live `git status --porcelain -uall -z` digest
+   with exactly those two entries (and this run's own .rc) removed is 82131a3c...,
+   equal to the digest taken before the run. No other live path changed.
+
+Every other line passed: F3 (regression vs the pre-repair command; BASH_ENV decides the
+command; a BASH_ENV-defined function runs inside the capture harness's own
+`bash -o pipefail -c`) and F4 (with an absolute GIT_INDEX_FILE the suite passes and
+rewrites that foreign index with fixture paths; the copy's own index is untouched).

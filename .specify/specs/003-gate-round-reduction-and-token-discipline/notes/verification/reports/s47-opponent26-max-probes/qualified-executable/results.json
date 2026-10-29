@@ -1,0 +1,515 @@
+{
+  "at": "2026-10-29T11:25:00Z",
+  "scratch": "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-opponent26-qualified-71qqyvnn",
+  "real_file_presence": [
+    {
+      "present": true,
+      "argv": [
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-opponent26-qualified-71qqyvnn/fixture/proj/tests/test",
+        "-f",
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-opponent26-qualified-71qqyvnn/fixture/proj/README.md"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "GIT_OPTIONAL_LOCKS": "0",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "resolved_executable": "/bin/test",
+      "binary_sha256": "da6c640b2c20476df1bd9d852ff87df56efde7e3a0eeaa010857703f7bf9fcdb"
+    },
+    {
+      "present": true,
+      "argv": [
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-opponent26-qualified-71qqyvnn/fixture/proj/tools/test",
+        "-f",
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-opponent26-qualified-71qqyvnn/fixture/proj/README.md"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "GIT_OPTIONAL_LOCKS": "0",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "resolved_executable": "/bin/test",
+      "binary_sha256": "da6c640b2c20476df1bd9d852ff87df56efde7e3a0eeaa010857703f7bf9fcdb"
+    },
+    {
+      "present": false,
+      "argv": [
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-opponent26-qualified-71qqyvnn/fixture/proj/tests/test",
+        "-f",
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-opponent26-qualified-71qqyvnn/fixture/proj/README.md"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "GIT_OPTIONAL_LOCKS": "0",
+      "exit": 1,
+      "stdout": "",
+      "stderr": "",
+      "resolved_executable": "/bin/test",
+      "binary_sha256": "da6c640b2c20476df1bd9d852ff87df56efde7e3a0eeaa010857703f7bf9fcdb"
+    },
+    {
+      "present": false,
+      "argv": [
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-opponent26-qualified-71qqyvnn/fixture/proj/tools/test",
+        "-f",
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-opponent26-qualified-71qqyvnn/fixture/proj/README.md"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "GIT_OPTIONAL_LOCKS": "0",
+      "exit": 1,
+      "stdout": "",
+      "stderr": "",
+      "resolved_executable": "/bin/test",
+      "binary_sha256": "da6c640b2c20476df1bd9d852ff87df56efde7e3a0eeaa010857703f7bf9fcdb"
+    }
+  ],
+  "public_results": [
+    {
+      "id": 1,
+      "group": "qualified-weak",
+      "command": "./tests/tsc --noEmit tests/unit.ts",
+      "expected_warning": true,
+      "observed_warning": false,
+      "exit": 0,
+      "argv": [
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-opponent26-qualified-71qqyvnn/kit/scripts/sdd-analyze.sh",
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-opponent26-qualified-71qqyvnn/fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "GIT_OPTIONAL_LOCKS": "0",
+      "matches": false
+    },
+    {
+      "id": 2,
+      "group": "qualified-weak",
+      "command": "./tests/npm run build",
+      "expected_warning": true,
+      "observed_warning": false,
+      "exit": 0,
+      "argv": [
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-opponent26-qualified-71qqyvnn/kit/scripts/sdd-analyze.sh",
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-opponent26-qualified-71qqyvnn/fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "GIT_OPTIONAL_LOCKS": "0",
+      "matches": false
+    },
+    {
+      "id": 3,
+      "group": "qualified-weak",
+      "command": "./tests/npm run typecheck",
+      "expected_warning": true,
+      "observed_warning": false,
+      "exit": 0,
+      "argv": [
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-opponent26-qualified-71qqyvnn/kit/scripts/sdd-analyze.sh",
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-opponent26-qualified-71qqyvnn/fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "GIT_OPTIONAL_LOCKS": "0",
+      "matches": false
+    },
+    {
+      "id": 4,
+      "group": "qualified-weak",
+      "command": "./tests/test -f README.md",
+      "expected_warning": true,
+      "observed_warning": false,
+      "exit": 0,
+      "argv": [
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-opponent26-qualified-71qqyvnn/kit/scripts/sdd-analyze.sh",
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-opponent26-qualified-71qqyvnn/fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "GIT_OPTIONAL_LOCKS": "0",
+      "matches": false
+    },
+    {
+      "id": 5,
+      "group": "qualified-weak",
+      "command": "./test/tsc --noEmit tests/unit.ts",
+      "expected_warning": true,
+      "observed_warning": false,
+      "exit": 0,
+      "argv": [
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-opponent26-qualified-71qqyvnn/kit/scripts/sdd-analyze.sh",
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-opponent26-qualified-71qqyvnn/fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "GIT_OPTIONAL_LOCKS": "0",
+      "matches": false
+    },
+    {
+      "id": 6,
+      "group": "qualified-weak",
+      "command": "./test/npm run build",
+      "expected_warning": true,
+      "observed_warning": false,
+      "exit": 0,
+      "argv": [
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-opponent26-qualified-71qqyvnn/kit/scripts/sdd-analyze.sh",
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-opponent26-qualified-71qqyvnn/fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "GIT_OPTIONAL_LOCKS": "0",
+      "matches": false
+    },
+    {
+      "id": 7,
+      "group": "qualified-weak",
+      "command": "./test/npm run typecheck",
+      "expected_warning": true,
+      "observed_warning": false,
+      "exit": 0,
+      "argv": [
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-opponent26-qualified-71qqyvnn/kit/scripts/sdd-analyze.sh",
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-opponent26-qualified-71qqyvnn/fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "GIT_OPTIONAL_LOCKS": "0",
+      "matches": false
+    },
+    {
+      "id": 8,
+      "group": "qualified-weak",
+      "command": "./test/test -f README.md",
+      "expected_warning": true,
+      "observed_warning": false,
+      "exit": 0,
+      "argv": [
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-opponent26-qualified-71qqyvnn/kit/scripts/sdd-analyze.sh",
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-opponent26-qualified-71qqyvnn/fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "GIT_OPTIONAL_LOCKS": "0",
+      "matches": false
+    },
+    {
+      "id": 9,
+      "group": "qualified-weak",
+      "command": "./tests/node_modules/.bin/tsc --noEmit tests/unit.ts",
+      "expected_warning": true,
+      "observed_warning": false,
+      "exit": 0,
+      "argv": [
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-opponent26-qualified-71qqyvnn/kit/scripts/sdd-analyze.sh",
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-opponent26-qualified-71qqyvnn/fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "GIT_OPTIONAL_LOCKS": "0",
+      "matches": false
+    },
+    {
+      "id": 10,
+      "group": "qualified-weak",
+      "command": "./tests/node_modules/.bin/npm run build",
+      "expected_warning": true,
+      "observed_warning": false,
+      "exit": 0,
+      "argv": [
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-opponent26-qualified-71qqyvnn/kit/scripts/sdd-analyze.sh",
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-opponent26-qualified-71qqyvnn/fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "GIT_OPTIONAL_LOCKS": "0",
+      "matches": false
+    },
+    {
+      "id": 11,
+      "group": "qualified-weak",
+      "command": "./tests/node_modules/.bin/npm run typecheck",
+      "expected_warning": true,
+      "observed_warning": false,
+      "exit": 0,
+      "argv": [
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-opponent26-qualified-71qqyvnn/kit/scripts/sdd-analyze.sh",
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-opponent26-qualified-71qqyvnn/fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "GIT_OPTIONAL_LOCKS": "0",
+      "matches": false
+    },
+    {
+      "id": 12,
+      "group": "qualified-weak",
+      "command": "./tests/node_modules/.bin/test -f README.md",
+      "expected_warning": true,
+      "observed_warning": false,
+      "exit": 0,
+      "argv": [
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-opponent26-qualified-71qqyvnn/kit/scripts/sdd-analyze.sh",
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-opponent26-qualified-71qqyvnn/fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "GIT_OPTIONAL_LOCKS": "0",
+      "matches": false
+    },
+    {
+      "id": 13,
+      "group": "qualified-weak",
+      "command": "./tools/tsc --noEmit tests/unit.ts",
+      "expected_warning": true,
+      "observed_warning": true,
+      "exit": 0,
+      "argv": [
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-opponent26-qualified-71qqyvnn/kit/scripts/sdd-analyze.sh",
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-opponent26-qualified-71qqyvnn/fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "GIT_OPTIONAL_LOCKS": "0",
+      "matches": true
+    },
+    {
+      "id": 14,
+      "group": "qualified-weak",
+      "command": "./tools/npm run build",
+      "expected_warning": true,
+      "observed_warning": true,
+      "exit": 0,
+      "argv": [
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-opponent26-qualified-71qqyvnn/kit/scripts/sdd-analyze.sh",
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-opponent26-qualified-71qqyvnn/fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "GIT_OPTIONAL_LOCKS": "0",
+      "matches": true
+    },
+    {
+      "id": 15,
+      "group": "qualified-weak",
+      "command": "./tools/npm run typecheck",
+      "expected_warning": true,
+      "observed_warning": true,
+      "exit": 0,
+      "argv": [
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-opponent26-qualified-71qqyvnn/kit/scripts/sdd-analyze.sh",
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-opponent26-qualified-71qqyvnn/fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "GIT_OPTIONAL_LOCKS": "0",
+      "matches": true
+    },
+    {
+      "id": 16,
+      "group": "qualified-weak",
+      "command": "./tools/test -f README.md",
+      "expected_warning": true,
+      "observed_warning": true,
+      "exit": 0,
+      "argv": [
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-opponent26-qualified-71qqyvnn/kit/scripts/sdd-analyze.sh",
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-opponent26-qualified-71qqyvnn/fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "GIT_OPTIONAL_LOCKS": "0",
+      "matches": true
+    },
+    {
+      "id": 17,
+      "group": "redirected-qualified-weak",
+      "command": "./tests/npm<input.txt run typecheck",
+      "expected_warning": true,
+      "observed_warning": false,
+      "exit": 0,
+      "argv": [
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-opponent26-qualified-71qqyvnn/kit/scripts/sdd-analyze.sh",
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-opponent26-qualified-71qqyvnn/fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "GIT_OPTIONAL_LOCKS": "0",
+      "matches": false
+    },
+    {
+      "id": 18,
+      "group": "redirected-qualified-weak",
+      "command": "./tests/npm>out.txt run typecheck",
+      "expected_warning": true,
+      "observed_warning": false,
+      "exit": 0,
+      "argv": [
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-opponent26-qualified-71qqyvnn/kit/scripts/sdd-analyze.sh",
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-opponent26-qualified-71qqyvnn/fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "GIT_OPTIONAL_LOCKS": "0",
+      "matches": false
+    },
+    {
+      "id": 19,
+      "group": "redirected-qualified-weak",
+      "command": "./tests/npm>>out.txt run typecheck",
+      "expected_warning": true,
+      "observed_warning": false,
+      "exit": 0,
+      "argv": [
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-opponent26-qualified-71qqyvnn/kit/scripts/sdd-analyze.sh",
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-opponent26-qualified-71qqyvnn/fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "GIT_OPTIONAL_LOCKS": "0",
+      "matches": false
+    },
+    {
+      "id": 20,
+      "group": "redirected-qualified-weak",
+      "command": "./tests/npm>|out.txt run typecheck",
+      "expected_warning": true,
+      "observed_warning": false,
+      "exit": 0,
+      "argv": [
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-opponent26-qualified-71qqyvnn/kit/scripts/sdd-analyze.sh",
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-opponent26-qualified-71qqyvnn/fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "GIT_OPTIONAL_LOCKS": "0",
+      "matches": false
+    },
+    {
+      "id": 21,
+      "group": "redirected-qualified-weak",
+      "command": "./tests/npm<>input.txt run typecheck",
+      "expected_warning": true,
+      "observed_warning": false,
+      "exit": 0,
+      "argv": [
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-opponent26-qualified-71qqyvnn/kit/scripts/sdd-analyze.sh",
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-opponent26-qualified-71qqyvnn/fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "GIT_OPTIONAL_LOCKS": "0",
+      "matches": false
+    },
+    {
+      "id": 22,
+      "group": "redirected-qualified-weak",
+      "command": "./tests/npm<&0 run typecheck",
+      "expected_warning": true,
+      "observed_warning": false,
+      "exit": 0,
+      "argv": [
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-opponent26-qualified-71qqyvnn/kit/scripts/sdd-analyze.sh",
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-opponent26-qualified-71qqyvnn/fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "GIT_OPTIONAL_LOCKS": "0",
+      "matches": false
+    },
+    {
+      "id": 23,
+      "group": "redirected-qualified-weak",
+      "command": "./tests/npm>&1 run typecheck",
+      "expected_warning": true,
+      "observed_warning": false,
+      "exit": 0,
+      "argv": [
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-opponent26-qualified-71qqyvnn/kit/scripts/sdd-analyze.sh",
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-opponent26-qualified-71qqyvnn/fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "GIT_OPTIONAL_LOCKS": "0",
+      "matches": false
+    },
+    {
+      "id": 24,
+      "group": "redirected-qualified-weak",
+      "command": "./tests/npm&>out.txt run typecheck",
+      "expected_warning": true,
+      "observed_warning": false,
+      "exit": 0,
+      "argv": [
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-opponent26-qualified-71qqyvnn/kit/scripts/sdd-analyze.sh",
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-opponent26-qualified-71qqyvnn/fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "GIT_OPTIONAL_LOCKS": "0",
+      "matches": false
+    },
+    {
+      "id": 25,
+      "group": "sibling-control",
+      "command": "./tests/grep AC-001 README.md",
+      "expected_warning": true,
+      "observed_warning": true,
+      "exit": 0,
+      "argv": [
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-opponent26-qualified-71qqyvnn/kit/scripts/sdd-analyze.sh",
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-opponent26-qualified-71qqyvnn/fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "GIT_OPTIONAL_LOCKS": "0",
+      "matches": true
+    },
+    {
+      "id": 26,
+      "group": "sibling-control",
+      "command": "./tests/npm run test -- --grep typecheck",
+      "expected_warning": false,
+      "observed_warning": false,
+      "exit": 0,
+      "argv": [
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-opponent26-qualified-71qqyvnn/kit/scripts/sdd-analyze.sh",
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-opponent26-qualified-71qqyvnn/fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "GIT_OPTIONAL_LOCKS": "0",
+      "matches": true
+    },
+    {
+      "id": 27,
+      "group": "sibling-control",
+      "command": "bash tests/typecheck.sh",
+      "expected_warning": false,
+      "observed_warning": false,
+      "exit": 0,
+      "argv": [
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-opponent26-qualified-71qqyvnn/kit/scripts/sdd-analyze.sh",
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-opponent26-qualified-71qqyvnn/fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "GIT_OPTIONAL_LOCKS": "0",
+      "matches": true
+    },
+    {
+      "id": 28,
+      "group": "sibling-control",
+      "command": "./tests/check-build.sh",
+      "expected_warning": false,
+      "observed_warning": false,
+      "exit": 0,
+      "argv": [
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-opponent26-qualified-71qqyvnn/kit/scripts/sdd-analyze.sh",
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-opponent26-qualified-71qqyvnn/fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "GIT_OPTIONAL_LOCKS": "0",
+      "matches": true
+    },
+    {
+      "id": 29,
+      "group": "sibling-control",
+      "command": "./tools/test -f README.md",
+      "expected_warning": true,
+      "observed_warning": true,
+      "exit": 0,
+      "argv": [
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-opponent26-qualified-71qqyvnn/kit/scripts/sdd-analyze.sh",
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-opponent26-qualified-71qqyvnn/fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "GIT_OPTIONAL_LOCKS": "0",
+      "matches": true
+    }
+  ],
+  "public_count": 29,
+  "omissions": 20,
+  "explicit_test_assertion_static_manual_controls": {
+    "exit": 0,
+    "consistent": true
+  },
+  "copied_files_match": true,
+  "untrusted_verify_data_executed": false,
+  "shell_commands_cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+  "env": {
+    "GIT_OPTIONAL_LOCKS": "0"
+  }
+}

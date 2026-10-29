@@ -1,0 +1,11 @@
+Matrix v5 run 1 (r17-mutations-run1-shard{0,1,2}.{log,rc,start,end}; the script it ran kept as
+r17-mutations-v5-run1.sh), 2026-10-08T17:22:38Z to 18:00:29Z, on the final tree (r17-edits/post-apply-2), every judge
+under a TMPDIR ending in `/`: shards 1 and 2 exit 0, shard 0 rc 1 on one check only. Every one of the 227 rows ran
+exactly once: 195 kills and over-corrections killed (152 kill, 43 over), 32 argued equivalents surviving, the 8
+baselines passing in shard 0, every restore byte-identical. The one failing check is a label of the matrix, not a
+defect of the code or the fixtures: row G08 (the letters dropped from the `<` class of vf_cm_scan) was KILLED, but
+not by the row it named, `pre-in-prose`, whose closing tag `</pre>` still opens raw HTML through the `/` branch the
+mutant keeps, so that row stays refused. The rows that judge G08 are those carrying an opening tag alone; the
+discovery probe (r17-discover-a.log, its N04a) lists `plaintext-in-prose` first. G08 now names that row, with no
+fixture or code changed (r17-mutations-gen.py regenerated r17-mutations.sh), probed alone (r17-mutations-probe.*),
+and the run of record follows on the same tree.

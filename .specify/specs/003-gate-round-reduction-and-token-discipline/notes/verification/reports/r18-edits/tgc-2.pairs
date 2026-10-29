@@ -1,0 +1,85 @@
+@@OLD
+narrowed-constructs-outside|[ref]: https://x.example\n\n### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n## Notes\n\nNote <1@x.example>, [a](u`v) and c <= d.\n- ```\n  x\n- y\n
+SHAPES
+@@NEW
+narrowed-constructs-outside|[ref]: https://x.example\n\n### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n## Notes\n\nNote <1@x.example>, [a](u`v) and c <= d.\n- ```\n  x\n- y\n
+invalid-angle-destination-holding-lt|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n- See [x](<: < `b>) here.\n
+unclosed-angle-destination|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n- See [x](<:a here and more.\n
+destination-with-space-then-code|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n- See [x](u v`) and `code`.\n
+destination-then-code-span|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n- See [x](u `v`) here.\n
+bracket-inside-label-position|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n- The arr[i][j[`k`]] index.\n
+nested-bracket-then-colon-at-line-start|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n\n[a [b]: x\n
+bracket-left-open-before-blank-line|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n\n[a note\n\nb]: here\n
+SHAPES
+@@END
+@@OLD
+heading-tag-on-later-finding|### Finding G-041\n- **Class:** tier-binding\n- **Severity:** minor\n### Finding G-042 <b>x</b>\n- **Class:** tier-binding\n- **Severity:** minor\n|raw HTML outside a code span in finding G-042
+ROWS
+@@NEW
+heading-tag-on-later-finding|### Finding G-041\n- **Class:** tier-binding\n- **Severity:** minor\n### Finding G-042 <b>x</b>\n- **Class:** tier-binding\n- **Severity:** minor\n|raw HTML outside a code span in finding G-042
+destination-after-space|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n[x]( u`v)<br>Severity: data-loss, tick: `.\n|a backtick inside a link destination, title or label in finding G-042
+angle-destination-with-space|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n[x](<:x `b>)<pre>Severity: data-loss</pre>`\n|a backtick inside a link destination, title or label in finding G-042
+angle-destination-escaped-gt|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n[x](<:a\\>b`c>)<pre>Severity: data-loss</pre>`\n|a backtick inside a link destination, title or label in finding G-042
+destination-escaped-paren|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n[x](u\\)v`w)<br>Severity: data-loss, tick: `.\n|a backtick inside a link destination, title or label in finding G-042
+destination-nested-parens|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n[x](u(v)`w)<br>Severity: data-loss, tick: `.\n|a backtick inside a link destination, title or label in finding G-042
+bare-destination-at-line-end|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n[x](u\n"x`")<br>Severity: data-loss, tick: `.\n|a link destination, title or label that does not end on its line in finding G-042
+destination-space-at-line-end|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n[x](u \n"x`")<br>Severity: data-loss, tick: `.\n|a link destination, title or label that does not end on its line in finding G-042
+title-in-parens|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n[x](u (`))<br>Severity: data-loss, tick: `.\n|a backtick inside a link destination, title or label in finding G-042
+title-escaped-quote|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n[x](u "a\\"`")<br>Severity: data-loss, tick: `.\n|a backtick inside a link destination, title or label in finding G-042
+title-then-line-end|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n[x](u "t"\n)x`<br>Severity: data-loss, tick: `.\n|a link destination, title or label that does not end on its line in finding G-042
+label-escaped-bracket|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n[x][a\\]`b]<br>Severity: data-loss, tick: `.\n|a backtick inside a link destination, title or label in finding G-042
+fence-after-tab|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- note\n\n\t```\n  ### x\n\t```\n- **Severity**: data-loss\n|a code fence that may be inside a list item in finding G-042
+ordered-number-then-image|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n1. ![q\nx\n](u)Severity: data-loss\n|a second Severity line in finding G-042
+image-alt-beginning-with-code-span-across-lines|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n![ `]` x\ny\n](u)Severity: data-loss\n|a second Severity line in finding G-042
+heading-tag-on-deeper-heading|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n#### Notes <b>x</b>\nA note.\n|raw HTML outside a code span in finding G-042
+definition-after-quote-marker|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n> [a]: /u\n|a link reference definition in finding G-042
+break-image-outside-finding-after-id|### Finding G-041\n- **Class:** tier-binding\n- **Severity:** minor\n## Notes\n\nG-042 is discussed below.\nNote<br>&nbsp;![q\nx\n](u)Severity: data-loss\n|a severity line outside any Finding
+tag-image-alt-code-span-outside-finding-after-id|### Finding G-041\n- **Class:** tier-binding\n- **Severity:** minor\n## Notes\n\nG-042 is discussed below.\n\n<b>![ `]` x\ny\n](u)Severity: data-loss\n|a severity line outside any Finding
+image-title-across-lines-outside-finding-after-id|### Finding G-041\n- **Class:** tier-binding\n- **Severity:** minor\n## Notes\n\nG-042 is discussed below.\n\n![ `]` x ](u "a\ny\nb")Severity: data-loss\n|a severity line outside any Finding
+ROWS
+@@END
+@@OLD
+definition-line|- **Severity:** minor\n\n[a]: https://x.example|a link reference definition in finding G-050
+ROWS
+@@NEW
+definition-line|- **Severity:** minor\n\n[a]: https://x.example|a link reference definition in finding G-050
+destination-after-space|- **Severity:** minor\n\n[x]( u`v)<br>Severity: data-loss, tick: `.|a backtick inside a link destination, title or label in finding G-050
+angle-destination-with-space|- **Severity:** minor\n\n[x](<:x `b>)<pre>Severity: data-loss</pre>`|a backtick inside a link destination, title or label in finding G-050
+angle-destination-escaped-gt|- **Severity:** minor\n\n[x](<:a\\>b`c>)<pre>Severity: data-loss</pre>`|a backtick inside a link destination, title or label in finding G-050
+destination-escaped-paren|- **Severity:** minor\n\n[x](u\\)v`w)<br>Severity: data-loss, tick: `.|a backtick inside a link destination, title or label in finding G-050
+destination-nested-parens|- **Severity:** minor\n\n[x](u(v)`w)<br>Severity: data-loss, tick: `.|a backtick inside a link destination, title or label in finding G-050
+bare-destination-at-line-end|- **Severity:** minor\n\n[x](u\n"x`")<br>Severity: data-loss, tick: `.|a link destination, title or label that does not end on its line in finding G-050
+destination-space-at-line-end|- **Severity:** minor\n\n[x](u \n"x`")<br>Severity: data-loss, tick: `.|a link destination, title or label that does not end on its line in finding G-050
+title-in-parens|- **Severity:** minor\n\n[x](u (`))<br>Severity: data-loss, tick: `.|a backtick inside a link destination, title or label in finding G-050
+title-escaped-quote|- **Severity:** minor\n\n[x](u "a\\"`")<br>Severity: data-loss, tick: `.|a backtick inside a link destination, title or label in finding G-050
+title-then-line-end|- **Severity:** minor\n\n[x](u "t"\n)x`<br>Severity: data-loss, tick: `.|a link destination, title or label that does not end on its line in finding G-050
+label-escaped-bracket|- **Severity:** minor\n\n[x][a\\]`b]<br>Severity: data-loss, tick: `.|a backtick inside a link destination, title or label in finding G-050
+ordered-number-then-image|- **Severity:** minor\n\n1. ![q\nx\n](u)Severity: data-loss|a Severity line this grammar cannot read in finding G-050
+image-alt-beginning-with-code-span-across-lines|- **Severity:** minor\n\n![ `]` x\ny\n](u)Severity: data-loss|a Severity line this grammar cannot read in finding G-050
+heading-tag-on-deeper-heading|- **Severity:** minor\n\n#### Notes <b>x</b>\nA note.|raw HTML outside a code span in finding G-050
+definition-after-quote-marker|- **Severity:** minor\n\n> [a]: /u|a link reference definition in finding G-050
+title-tag-inside-finding|- **Severity:** minor\n\n# Opponent review <b>x</b>|raw HTML outside a code span in finding G-050
+ROWS
+@@END
+@@OLD
+definition-escaped-label|\n[a\\]b]: /u '\n    - **Severity:** minor\n    - x'\n|a link reference definition in finding G-050
+ROWS
+@@NEW
+definition-escaped-label|\n[a\\]b]: /u '\n    - **Severity:** minor\n    - x'\n|a link reference definition in finding G-050
+fence-after-tab|- **Severity:** minor\n- note\n\n\t```\n  ### x\n\t```\n- **Severity**: data-loss\n|a code fence that may be inside a list item in finding G-050
+ROWS
+@@END
+@@OLD
+a-task-checkboxes|### Finding G-042|  - [x] done\n  - [ ] open\n
+ROWS
+@@NEW
+a-task-checkboxes|### Finding G-042|  - [x] done\n  - [ ] open\n
+a-invalid-angle-destination-holding-lt|### Finding G-042|  - See [x](<: < `b>) here.\n
+a-unclosed-angle-destination|### Finding G-042|  - See [x](<:a here and more.\n
+a-destination-with-space-then-code|### Finding G-042|  - See [x](u v`) and `code`.\n
+a-destination-then-code-span|### Finding G-042|  - See [x](u `v`) here.\n
+a-bracket-inside-label-position|### Finding G-042|  - The arr[i][j[`k`]] index.\n
+a-nested-bracket-then-colon-at-line-start|### Finding G-042|\n[a [b]: x\n\n
+a-bracket-left-open-before-blank-line|### Finding G-042|\n[a note\n\nb]: here\n\n
+ROWS
+@@END

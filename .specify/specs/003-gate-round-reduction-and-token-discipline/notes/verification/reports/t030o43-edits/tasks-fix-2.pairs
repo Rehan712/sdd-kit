@@ -1,0 +1,10 @@
+@@OLD
+Every grammar the harness parses is ASCII, so `LC_ALL=C` reads every record a UTF-8 or single-byte locale reads and decodes every byte.
+@@NEW
+Every grammar the harness parses is ASCII: under `LC_ALL=C` each byte is one character, so no byte can end a parse, and a byte >= 0x80 is in no character class, so a record line or token the ASCII grammar cannot read is refused by name, or, where the parser decides what must be covered, kept whole.
+@@END
+@@OLD
+the analyzer's clarification marker and AC inventory, and `spec-ac-coverage.sh`'s AC inventory, refuse the byte as under C;
+@@NEW
+the analyzer's clarification marker and AC inventory, and `spec-ac-coverage.sh`'s AC inventory, refuse the byte as under C; a manifest heading or field line, or a required report section, carrying a U+00A0 is refused in every locale, a Decisions heading carrying one still starts the hashed section, and a non-ASCII artifact name is taken whole;
+@@END

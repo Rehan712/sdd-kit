@@ -1,0 +1,367 @@
+@@OLD
+# _VF_AWK_FENCE — the ONE fence tracker every parser shares. Quoted content is
+@@NEW
+# _VF_AWK_WS — the ONE reading of whitespace every parser of author text
+# shares (T030o43, review 2). The harness parses under LC_ALL=C, where a byte
+# >= 0x80 is in no character class, so a non-ASCII Unicode space stopped
+# reading as the whitespace a UTF-8 locale had read it as: a field whose
+# separator was a U+00A0 no longer matched, a value of only U+00A0 read as
+# present, a name ran on across one. Repairing each site in turn kept finding
+# the next, so every such parser takes one step before any rule of its own:
+# vf_ws maps the UTF-8 encoding of each non-ASCII White_Space character
+# (U+0085, U+00A0, U+1680, U+2000-U+200A, U+2028, U+2029, U+202F, U+205F and
+# U+3000) to one VT byte. VT is in [[:space:]], so every class-based trim,
+# separator and emptiness test reads the character as whitespace, as a UTF-8
+# locale read U+00A0. VT is neither a space, a tab nor a default field
+# separator, so every literal grammar -- CommonMark indentation, fences and
+# block quotes, the canonical field line's single space, a `; ` separator --
+# reads the line exactly as every locale read it before the pin, and the
+# fence tracker below reaches the same state on the mapped line as on the
+# line as written, which is what vf_report_block reads. ASCII whitespace is
+# left alone. vf_original keeps the line as written: a value the harness
+# passes on (the Verify command it runs, a frontmatter path it compares) and
+# a line it hashes are taken from it, and vf_wstrim trims the same
+# whitespace from their ends only.
+_VF_AWK_WS='
+function vf_ws(s) {
+  gsub(/\302[\205\240]|\341\232\200|\342\200[\200-\212\250\251\257]|\342\201\237|\343\200\200/, "\013", s)
+  return s
+}
+function vf_wstrim(s) {
+  sub(/^([[:space:]]|\302[\205\240]|\341\232\200|\342\200[\200-\212\250\251\257]|\342\201\237|\343\200\200)+/, "", s)
+  sub(/([[:space:]]|\302[\205\240]|\341\232\200|\342\200[\200-\212\250\251\257]|\342\201\237|\343\200\200)+$/, "", s)
+  return s
+}
+'
+# The step itself: the first rule of every parser of author text.
+_VF_AWK_WSLINE='
+{ vf_original = $0; $0 = vf_ws($0) }
+'
+
+# _VF_AWK_FENCE — the ONE fence tracker every parser shares. Quoted content is
+@@END
+@@OLD
+  return vf_comment(s)
+}
+'
+
+# vf_config <stack-file> <tasks-file-or-empty> <new-output-dir>
+@@NEW
+  return vf_comment(s)
+}
+'
+# The preludes of a parser of author text: the whitespace reading, then the
+# fence tracker when the parser suppresses quoted content, then the step.
+# vf_report_block alone takes the fence tracker without the step, because its
+# output is a sealed digest of the report as written.
+_VF_AWK_TEXT="$_VF_AWK_WS$_VF_AWK_FENCE$_VF_AWK_WSLINE"
+_VF_AWK_TEXT_UNFENCED="$_VF_AWK_WS$_VF_AWK_WSLINE"
+
+# vf_config <stack-file> <tasks-file-or-empty> <new-output-dir>
+@@END
+@@OLD
+    awk "$_VF_AWK_FENCE"'
+      vf_quoted($0) { next }
+      /^## / { stage=substr($0,4); sub(/[[:space:]]+$/, "", stage) }
+@@NEW
+    awk "$_VF_AWK_TEXT"'
+      vf_quoted($0) { next }
+      /^## / { stage=substr($0,4); sub(/[[:space:]]+$/, "", stage) }
+@@END
+@@OLD
+# read as absent. Under C a byte >= 0x80 is also in no character class, so a
+# record written with a non-ASCII space or letter where the grammar wants ASCII
+# does not match it; each parser that decides with it refuses such a line, or,
+# where it decides what must be covered, keeps more (T030o43 review). The
+@@NEW
+# read as absent. Under C a byte >= 0x80 is also in no character class, so
+# every parser of author text reads non-ASCII Unicode whitespace through the
+# one step of _VF_AWK_WS above, and a non-ASCII letter where a grammar wants an
+# ASCII one fails that grammar and is refused by it (T030o43 reviews 1, 2). The
+@@END
+@@OLD
+# quote; otherwise an inline ` #` comment and trailing blanks dropped), and fail
+# with status 3 when the parse fails, so no parse failure reads as a passing
+# result (T030o43).
+vf_fm_value() { # <file> <key> -> the value, or nothing when the key is absent
+  [[ -f "$1" ]] || return 0
+  awk -v key="$2" '# vf_fm_value
+    NR == 1 { if ($0 != "---") exit; next }
+    /^---[[:space:]]*$/ { exit }
+    index($0, key ":") == 1 {
+      v = substr($0, length(key) + 2); sub(/^[[:space:]]+/, "", v)
+      q = substr(v, 1, 1)
+      if (q == "\"" || q == "\047") { v = substr(v, 2); sub(q ".*$", "", v) }
+      else { sub(/[[:space:]]+#.*$/, "", v); sub(/[[:space:]]+$/, "", v) }
+      print v; exit
+    }
+  ' "$1" || { printf 'error: %s: frontmatter could not be read for %s\n' "$1" "$2" >&2; return 3; }
+}
+vf_fm_count() { # <file> <key> -> how many frontmatter lines set the key
+  [[ -f "$1" ]] || { echo 0; return 0; }
+  awk -v name="$2" '# vf_fm_count
+    NR == 1 { if ($0 != "---") exit; next }
+    /^---[[:space:]]*$/ { exit }
+    index($0, name ":") == 1 { n++ }
+    END { print n + 0 }
+  ' "$1" || { printf 'error: %s: frontmatter could not be counted for %s\n' "$1" "$2" >&2; return 3; }
+}
+@@NEW
+# quote; otherwise an inline ` #` comment and trailing blanks dropped), with
+# whitespace read through _VF_AWK_WS, and fail with status 3 when the parse
+# fails, so no parse failure reads as a passing result (T030o43). A value is
+# taken from the line as written and trimmed at its ends only: a worktree or
+# branch it names is compared with the real one.
+vf_fm_value() { # <file> <key> -> the value, or nothing when the key is absent
+  [[ -f "$1" ]] || return 0
+  awk -v key="$2" "$_VF_AWK_TEXT_UNFENCED"'# vf_fm_value
+    NR == 1 { if ($0 != "---") exit; next }
+    /^---[[:space:]]*$/ { exit }
+    index($0, key ":") == 1 {
+      v = vf_wstrim(substr(vf_original, length(key) + 2))
+      q = substr(v, 1, 1)
+      if (q == "\"" || q == "\047") { v = substr(v, 2); sub(q ".*$", "", v) }
+      else { sub(/([[:space:]]|\302[\205\240]|\341\232\200|\342\200[\200-\212\250\251\257]|\342\201\237|\343\200\200)+#.*$/, "", v); v = vf_wstrim(v) }
+      print v; exit
+    }
+  ' "$1" || { printf 'error: %s: frontmatter could not be read for %s\n' "$1" "$2" >&2; return 3; }
+}
+vf_fm_count() { # <file> <key> -> how many frontmatter lines set the key
+  [[ -f "$1" ]] || { echo 0; return 0; }
+  awk -v name="$2" "$_VF_AWK_TEXT_UNFENCED"'# vf_fm_count
+    NR == 1 { if ($0 != "---") exit; next }
+    /^---[[:space:]]*$/ { exit }
+    index($0, name ":") == 1 { n++ }
+    END { print n + 0 }
+  ' "$1" || { printf 'error: %s: frontmatter could not be counted for %s\n' "$1" "$2" >&2; return 3; }
+}
+# vf_contract <spec.md> -> "1" for the versioned contract, nothing for a
+# legacy spec. Routed by the KEY, as vf_bindings and vf_project_config route
+# it: no key is legacy, one key whose value is 1 is current, and anything
+# else -- an empty value, another value, a second key, a frontmatter that
+# cannot be read -- is refused by name with status 3, never read as the
+# legacy path (T030o43 review 2, R2-F6).
+vf_contract() {
+  local count value
+  count="$(vf_fm_count "$1" verification_contract)" || return 3
+  case "$count" in
+    0) return 0;;
+    1) value="$(vf_fm_value "$1" verification_contract)" || return 3
+       [[ "$value" == 1 ]] && { echo 1; return 0; }
+       printf 'unsupported verification contract: %s\n' "${value:-<empty>}" >&2; return 3;;
+    *) printf 'unsupported verification contract: declared %s times\n' "$count" >&2; return 3;;
+  esac
+}
+@@END
+@@OLD
+      "$_VF_AWK_FENCE"'
+    function trim(s) { sub(/^[[:space:]]+/, "", s); sub(/[[:space:]]+$/, "", s); return s }
+    function clean_cell(s) { s=trim(s); gsub(SUBSEP, "|", s); return s }
+@@NEW
+      "$_VF_AWK_TEXT"'
+    function trim(s) { sub(/^[[:space:]]+/, "", s); sub(/[[:space:]]+$/, "", s); return s }
+    function clean_cell(s) { s=trim(s); gsub(SUBSEP, "|", s); return s }
+@@END
+@@OLD
+    awk -v OFS="$us" "$_VF_AWK_FENCE"'
+      vf_quoted($0) { next }
+      /^##[^#]/ { stage=$0; sub(/^##[[:space:]]*/,"",stage) }
+@@NEW
+    awk -v OFS="$us" "$_VF_AWK_TEXT"'
+      vf_quoted($0) { next }
+      /^##[^#]/ { stage=$0; sub(/^##[[:space:]]*/,"",stage) }
+@@END
+@@OLD
+        "$_VF_AWK_FENCE"'
+      function trim(s) { sub(/^[[:space:]]+/,"",s); sub(/[[:space:]]+$/, "", s); return s }
+      function strip_ticks(s) { s=trim(s); if (s ~ /^`.*`$/) { sub(/^`/,"",s); sub(/`$/,"",s) } return s }
+@@NEW
+        "$_VF_AWK_TEXT"'
+      function trim(s) { sub(/^[[:space:]]+/,"",s); sub(/[[:space:]]+$/, "", s); return s }
+      function strip_ticks(s) { s=trim(s); if (s ~ /^`.*`$/) { sub(/^`/,"",s); sub(/`$/,"",s) } return s }
+@@END
+@@OLD
+      function after(line,label, v) { v=line; sub("^.*\\*" label ":\\*[[:space:]]*","",v); return trim(v) }
+@@NEW
+      function after(line,label, v) { v=line; sub("^.*\\*" label ":\\*[[:space:]]*","",v); return trim(v) }
+      function after_written(line,label, v) { v=line; sub("^.*\\*" label ":\\*","",v); return vf_wstrim(v) }
+@@END
+@@OLD
+            verify_syntax(field["Verify kind"],field["Verify"],field["Tests"])
+@@NEW
+            verify_syntax(field["Verify kind"],verify_read,field["Tests"])
+@@END
+@@OLD
+        id=""; delete field; delete field_seen; has_agent=0
+@@NEW
+        id=""; delete field; delete field_seen; has_agent=0; verify_read=""
+@@END
+@@OLD
+      id!="" && /\*Verify:\*/ { set_field("Verify",after($0,"Verify")); next }
+@@NEW
+      # The command the harness runs and records is the one written: its
+      # value comes from the line as written, trimmed at its ends, and its
+      # syntax is judged on the line read through the whitespace step.
+      id!="" && /\*Verify:\*/ { set_field("Verify",after_written(vf_original,"Verify")); verify_read=after($0,"Verify"); next }
+@@END
+@@OLD
+    # Every line that carries a manifest record's marker must parse as that
+    # record, by the same field grammar a canonical finding obeys. The grammar
+    # is ASCII, and under the harness pin a byte >= 0x80 is in no character
+    # class, so a heading or field line written with a non-ASCII space no
+    # longer matched it -- and was skipped in silence, which dropped the
+    # finding, its strictest tier and its Class (T030o43 review F1).
+    awk "$_VF_AWK_FENCE"'
+      function bad(why) {printf "manifest line %d: %s: %s\n", FNR, why, $0 > "/dev/stderr"; failed=1}
+      function flushm() {
+        if(id!="" && cls=="") bad("finding " id " has no readable Class")
+        if(id!="" && cls!="") print id ":" cls ":" sev
+        id=""; cls=""; sev=""
+      }
+      vf_quoted($0) {next}
+      /^#+ Finding [A-Z][A-Z0-9]*-[0-9]+[[:space:]]*$/ {flushm(); id=$NF; next}
+      /^#+[^A-Za-z]*Finding([^A-Za-z]|$)/ {flushm(); bad("a Finding heading this grammar cannot read"); next}
+      id != "" && /^-[[:space:]]+\*\*Class:\*\*/ {
+        cls=$0; sub(/^.*\*\*Class:\*\*[[:space:]]*/, "", cls)
+        gsub(/[[:space:]]/, "", cls)
+        if (cls !~ /^[a-z][a-z0-9]*(-[a-z0-9]+)*$/) {bad("a Class this grammar cannot read"); cls="-"}
+        next
+      }
+      id != "" && /^-[[:space:]]+\*\*Severity:\*\*/ {
+        sev=$0; sub(/^.*\*\*Severity:\*\*[[:space:]]*/, "", sev)
+        gsub(/[[:space:]]/, "", sev)
+        if (sev !~ /^(data-loss|wrong-result|regression|crash|minor|degraded)$/) bad("a Severity this grammar cannot read")
+        next
+      }
+      id != "" && /\*\*(Class|Severity):\*\*/ {bad("a Class or Severity line this grammar cannot read")}
+      END {flushm(); if (failed) exit 3}
+@@NEW
+    # The pass reads by the canonical finding's own field grammar, keyed on
+    # the lines that carry a record rather than on a heading it might not see
+    # (T030o43 reviews 1 and 2). A heading is an ATX heading (up to three
+    # spaces, a run of `#`, then a space, a tab or the end); every heading
+    # closes the finding before it, and one whose first word is `Finding` in
+    # any case and whose second is a finding ID opens one, a title allowed
+    # after. A field is a line whose first word, after indentation, a list
+    # marker and emphasis, is Class or Severity in any case with a colon inside
+    # or outside the emphasis. It must be written `- **Class:**` or
+    # `- **Severity:**` at any indentation, as the canonical parser reads it,
+    # sit inside a finding, appear once in it, and carry a value of its
+    # grammar. Any other line is prose, even one that mentions a field. A
+    # finding with no Class, a field outside a finding, a second field, a
+    # field or ID the grammar cannot read and quoting left open at the end are
+    # each refused by name, so no spelling loses a finding: its fields fall
+    # outside it, or into the one above, and both refuse. A byte-order mark on
+    # the first line is not part of it.
+    awk "$_VF_AWK_TEXT"'
+      function bad(why) {printf "manifest line %d: %s: %s\n", FNR, why, vf_original > "/dev/stderr"; failed=1}
+      function flushm() {
+        if(id!="" && cls=="") bad("finding " id " has no readable Class")
+        if(id!="" && cls!="") print id ":" cls ":" sev
+        id=""; cls=""; sev=""; classes=0; severities=0
+      }
+      function value(s) {sub(/^.*\*\*[^*]+:\*\*[ ]*/, "", s); gsub(/^[[:space:]]+|[[:space:]]+$/, "", s); return s}
+      function fieldname(s,   t, w) {
+        t=s; sub(/^[[:space:]]+/, "", t)
+        if (t ~ /^[-*+][[:space:]]/) sub(/^[-*+][[:space:]]+/, "", t)
+        sub(/^[*_]+/, "", t)
+        if (!match(t, /^[A-Za-z]+/)) return ""
+        w=tolower(substr(t, 1, RLENGTH)); t=substr(t, RLENGTH + 1); sub(/^[*_]+/, "", t)
+        return (substr(t, 1, 1) == ":") ? w : ""
+      }
+      FNR == 1 {sub(/^\357\273\277/, "")}
+      vf_quoted($0) {next}
+      /^ ? ? ?#+([ \t]|$)/ {
+        flushm(); heading=$0; sub(/^ +/, "", heading); split(heading, word, /[[:space:]]+/)
+        if (tolower(word[2]) == "finding" && word[3] ~ /^[A-Za-z][A-Za-z0-9]*-[0-9]/) {
+          if (word[3] ~ /^[A-Z][A-Z0-9]*-[0-9]+$/) id=word[3]
+          else bad("a Finding heading whose ID this grammar cannot read")
+        }
+        next
+      }
+      {
+        field=fieldname($0)
+        if (field != "class" && field != "severity") next
+        if (id == "") {bad("a " field " line outside any Finding"); next}
+        if (field == "class") {
+          if (classes++) {bad("a second Class line in finding " id); next}
+          if ($0 !~ /^[ ]*-[[:space:]]+\*\*Class:\*\*/) {bad("a Class line this grammar cannot read"); cls="-"; next}
+          cls=value($0)
+          if (cls !~ /^[a-z][a-z0-9]*(-[a-z0-9]+)*$/) {bad("a Class this grammar cannot read"); cls="-"}
+          next
+        }
+        if (severities++) {bad("a second Severity line in finding " id); next}
+        if ($0 !~ /^[ ]*-[[:space:]]+\*\*Severity:\*\*/) {bad("a Severity line this grammar cannot read"); next}
+        sev=value($0)
+        if (sev !~ /^(data-loss|wrong-result|regression|crash|minor|degraded)$/) {bad("a Severity this grammar cannot read"); sev=""}
+      }
+      END {
+        flushm()
+        if (fenced) bad("a code fence is left open")
+        if (commented) bad("an HTML comment is left open")
+        if (rawkind) bad("a raw HTML block is left open")
+        if (failed) exit 3
+      }
+@@END
+@@OLD
+  VF_REPORT_FILE="$file" awk -v gate="$gate" -v priorids="$priorids" "$_VF_AWK_FENCE"'
+@@NEW
+  VF_REPORT_FILE="$file" awk -v gate="$gate" -v priorids="$priorids" "$_VF_AWK_TEXT"'
+@@END
+@@OLD
+    function value(s) {sub(/^.*\*\*[^*]+:\*\*[ ]*/, "", s); return clean(s)}
+    # Blank is what a reader sees as blank. A section body is author text in
+    # any script, so a line of only Unicode White_Space characters (their
+    # UTF-8 encodings, which under the harness pin are in no class) is as empty
+    # as a line of ASCII blanks; any other byte is content (T030o43 review).
+    function vf_blank(s) {
+      gsub(/[ \t\r\f\013]|\302[\205\240]|\341\232\200|\342\200[\200-\212\250\251\257]|\342\201\237|\343\200\200/, "", s)
+      return s == ""
+    }
+@@NEW
+    function value(s) {sub(/^.*\*\*[^*]+:\*\*[ ]*/, "", s); return clean(s)}
+@@END
+@@OLD
+    cursec!="" && !vf_blank($0) && $0 !~ /^#+[ ]/ {secbody[n SUBSEP cursec]=1}
+@@NEW
+    cursec!="" && $0 !~ /^[[:space:]]*$/ && $0 !~ /^#+[ ]/ {secbody[n SUBSEP cursec]=1}
+@@END
+@@OLD
+      # The identity keeps more, never less: the section starts at the first
+      # line that begins "## Decisions log", whatever follows on that line,
+      # so a heading carrying a byte the grammar cannot read can no longer
+      # take the whole log out of the input identity (T030o43 review).
+      awk '/^## Decisions log/ && !seen {on=1; seen=1; print; next} /^## / {on=0} on {print}' "$2" > "$3";;
+@@NEW
+      # The identity keeps more, never less, and never less than the
+      # authorization scanner reads (T030o43 review 2, R2-F1): a hashed
+      # section starts at EVERY line that begins "## Decisions log" once its
+      # whitespace is read, quoted or not, whatever follows on it, and ends
+      # only at a "## " line the shared fence tracker does not quote. So no
+      # earlier, archived, duplicate or fenced heading, and no heading quoted
+      # inside the log, can take the lines the scanner reads out of the
+      # identity. The lines are recognized as read and hashed as written.
+      awk "$_VF_AWK_TEXT"'
+        { quoted = vf_quoted($0) }
+        /^## Decisions log/ { on = 1; print vf_original; next }
+        !quoted && /^## / { on = 0 }
+        on { print vf_original }
+      ' "$2" > "$3";;
+@@END
+@@OLD
+  line="$(awk -v gate="$gate" -v round="$round" -v rejects="$rejects" -v gates="$VF_GATES" "$_VF_AWK_FENCE"'
+@@NEW
+  line="$(awk -v gate="$gate" -v round="$round" -v rejects="$rejects" -v gates="$VF_GATES" "$_VF_AWK_TEXT"'
+@@END
+@@OLD
+  awk '
+    function flush() {if(id!="") {gsub(/[[:space:]]+/," ",text); sub(/ +$/, "",text); printf "%s%c%s%c",id,0,text,0}; id=""}
+@@NEW
+  awk "$_VF_AWK_TEXT_UNFENCED"'
+    function flush() {if(id!="") {gsub(/[[:space:]]+/," ",text); sub(/ +$/, "",text); printf "%s%c%s%c",id,0,text,0}; id=""}
+@@END
+@@OLD
+  awk -F '|' "$_VF_AWK_FENCE"'
+@@NEW
+  awk -F '|' "$_VF_AWK_TEXT"'
+@@END

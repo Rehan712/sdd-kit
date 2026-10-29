@@ -1,0 +1,120 @@
+FLOOR-UeGEcf source=9cf02d45d97952557c41180743b973563e854825d6d2d5e73b1db3b72be4dfa5 records=370
+FLOOR-5cLeox source=fd20f46a37268b1cd8bb7874982e3a26a1ce713a04418168d3c6b898edf76305 records=371
+
+== FLOOR-UeGEcf -> FLOOR-5cLeox: differing records (- old, + new; kind path only) ==
++ index .github/workflows/ci.yml
+- index .github/workflows/ci.yml
++ index .specify/specs/003-gate-round-reduction-and-token-discipline/STATUS.md
++ path .specify/specs/003-gate-round-reduction-and-token-discipline/STATUS.md
+- index .specify/specs/003-gate-round-reduction-and-token-discipline/STATUS.md
+- path .specify/specs/003-gate-round-reduction-and-token-discipline/STATUS.md
++ index .specify/specs/003-gate-round-reduction-and-token-discipline/plan.md
+- index .specify/specs/003-gate-round-reduction-and-token-discipline/plan.md
++ index .specify/specs/003-gate-round-reduction-and-token-discipline/spec.md
+- index .specify/specs/003-gate-round-reduction-and-token-discipline/spec.md
++ index .specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md
++ path .specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md
+- index .specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md
+- path .specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md
++ index .specify/stack.yml
+- index .specify/stack.yml
++ document /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/STATUS.md
+- document /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/STATUS.md
++ document /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md
+- document /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md
++ index README.md
+- index README.md
++ index agents/sdd-orchestrator.md
+- index agents/sdd-orchestrator.md
++ index scripts/sdd-analyze.sh
+- index scripts/sdd-analyze.sh
++ index scripts/spec-ac-coverage.sh
+- index scripts/spec-ac-coverage.sh
++ index scripts/spec-evidence.sh
+- index scripts/spec-evidence.sh
++ index scripts/spec-gate.sh
+- index scripts/spec-gate.sh
++ index scripts/spec-run.sh
+- index scripts/spec-run.sh
++ index scripts/spec-task.sh
+- index scripts/spec-task.sh
++ index scripts/verification-lib.sh
+- index scripts/verification-lib.sh
++ index skills/sdd-go/SKILL.md
+- index skills/sdd-go/SKILL.md
++ index skills/sdd-implement/SKILL.md
+- index skills/sdd-implement/SKILL.md
++ index skills/sdd-review/SKILL.md
+- index skills/sdd-review/SKILL.md
++ index templates/verification-contract.md
+- index templates/verification-contract.md
++ index tests/helpers.sh
+- index tests/helpers.sh
++ index tests/probe-gate-contract.sh
+- index tests/probe-gate-contract.sh
++ index tests/run.sh
+- index tests/run.sh
++ index tests/shellcheck.sh
++ index tests/test-build-adapters.sh
+- index tests/test-build-adapters.sh
++ index tests/test-executable-bits.sh
+- index tests/test-executable-bits.sh
++ index tests/test-gate-contracts.sh
++ path tests/test-gate-contracts.sh
+- index tests/test-gate-contracts.sh
+- path tests/test-gate-contracts.sh
++ index tests/test-golden-example.sh
+- index tests/test-golden-example.sh
++ index tests/test-model-policy.sh
+- index tests/test-model-policy.sh
++ index tests/test-sdd-analyze.sh
+- index tests/test-sdd-analyze.sh
++ index tests/test-spec-ac-coverage.sh
+- index tests/test-spec-ac-coverage.sh
++ index tests/test-spec-dispatch.sh
+- index tests/test-spec-dispatch.sh
++ index tests/test-spec-gate.sh
++ path tests/test-spec-gate.sh
+- index tests/test-spec-gate.sh
+- path tests/test-spec-gate.sh
++ index tests/test-usage-limits.sh
+- index tests/test-usage-limits.sh
++ index tests/test-verification.sh
+- index tests/test-verification.sh
+== distinct paths ==
+.github/workflows/ci.yml
+.specify/specs/003-gate-round-reduction-and-token-discipline/STATUS.md
+.specify/specs/003-gate-round-reduction-and-token-discipline/plan.md
+.specify/specs/003-gate-round-reduction-and-token-discipline/spec.md
+.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md
+.specify/stack.yml
+/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/STATUS.md
+/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md
+README.md
+agents/sdd-orchestrator.md
+scripts/sdd-analyze.sh
+scripts/spec-ac-coverage.sh
+scripts/spec-evidence.sh
+scripts/spec-gate.sh
+scripts/spec-run.sh
+scripts/spec-task.sh
+scripts/verification-lib.sh
+skills/sdd-go/SKILL.md
+skills/sdd-implement/SKILL.md
+skills/sdd-review/SKILL.md
+templates/verification-contract.md
+tests/helpers.sh
+tests/probe-gate-contract.sh
+tests/run.sh
+tests/shellcheck.sh
+tests/test-build-adapters.sh
+tests/test-executable-bits.sh
+tests/test-gate-contracts.sh
+tests/test-golden-example.sh
+tests/test-model-policy.sh
+tests/test-sdd-analyze.sh
+tests/test-spec-ac-coverage.sh
+tests/test-spec-dispatch.sh
+tests/test-spec-gate.sh
+tests/test-usage-limits.sh
+tests/test-verification.sh

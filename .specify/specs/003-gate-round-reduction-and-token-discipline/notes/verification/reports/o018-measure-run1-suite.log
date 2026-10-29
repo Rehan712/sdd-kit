@@ -1,0 +1,232 @@
+== test-build-adapters.sh
+  ok   test_adapters_install_into_every_codex_home
+  ok   test_brief_modes
+  ok   test_codex_adapters_delegate_copilot_adapters_persona_pass
+  ok   test_degrades_without_policy_or_codex_home
+  ok   test_delegation_findings_artifact_present_and_shaped
+  ok   test_prune_respects_kit_marker_and_role_unmapping
+  ok   test_stage_kit_excludes_and_never_writes_through_a_host_models_yml
+  ok   test_stage_kit_failure_is_named_and_stays_in_the_sandbox
+  ok   test_stale_single_agent_claims_are_gone
+  ok   test_subagent_tomls_carry_identity_policy_and_persona
+  -- 10/10 passed
+== test-executable-bits.sh
+  ok   test_AC_011_every_kit_script_is_executable
+  ok   test_AC_011_ignored_local_scripts_do_not_decide_the_executable_check
+  -- 2/2 passed
+== test-gate-contracts.sh
+  ok   test_all_brief_modes
+  ok   test_all_overlay_defaults
+  ok   test_briefs_t010
+  ok   test_briefs_t011
+  ok   test_briefs_t012
+  ok   test_briefs_t013
+  ok   test_defaults_t006
+  ok   test_defaults_t007
+  ok   test_defaults_t008
+  ok   test_defaults_t009
+  ok   test_empty_record_directories_do_not_decide_the_002_tally
+  ok   test_ignored_local_overlays_and_personas_do_not_decide_the_checks
+  ok   test_ignored_local_scripts_do_not_reach_the_dispatch_grammar_kit
+  ok   test_ignored_local_scripts_do_not_reach_the_documented_workflow
+  ok   test_instruction_contracts
+  ok   test_invoker_protocol
+  FAIL test_reports_and_tally
+       assert: expected exit 0, got 3: bash -c . "$1"; vf_reports "$2" opponent "$3" "$4" _ /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/512efee2-5748-4ebb-ba93-8afa08f5a48f/scratchpad/s12/o018-measure/d/scripts/verification-lib.sh /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/512efee2-5748-4ebb-ba93-8afa08f5a48f/scratchpad/s12/o018-measure/tmp/sddkit.bOs0Np/manifest-locale/notes/opponent.md /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/512efee2-5748-4ebb-ba93-8afa08f5a48f/scratchpad/s12/o018-measure/tmp/sddkit.bOs0Np/manifest-locale.nul /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/512efee2-5748-4ebb-ba93-8afa08f5a48f/scratchpad/s12/o018-measure/tmp/sddkit.bOs0Np/manifest-locale
+           output: manifest line 4: finding O-017 has no readable Severity: - **Class:** harness-locale-decoding
+       report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/512efee2-5748-4ebb-ba93-8afa08f5a48f/scratchpad/s12/o018-measure/tmp/sddkit.bOs0Np/manifest-locale/notes/verification/reports/opponent-findings-review.md: prior-review manifest could not be parsed; reconcile canonical records
+       assert: AC-012: a plausible manifest (class-only) was refused (T030o43 review 2) unexpectedly contains: prior-review manifest could not be parsed
+       assert: AC-012: an unrelated manifest Prior neutralized a blocking finding missing substring: resolved finding O-042 has no earlier round of this gate and no declared prior-review record
+           in: manifest line 5: finding O-041 has no readable Severity: - **Class:** unrelated-class
+       report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/512efee2-5748-4ebb-ba93-8afa08f5a48f/scratchpad/s12/o018-measure/tmp/sddkit.bOs0Np/schema/notes/verification/reports/opponent-findings-2026-09-09.md: prior-review manifest could not be parsed; reconcile canonical records
+       assert: AC-012: a same-class manifest Prior neutralized a brand-new data-loss finding missing substring: resolved finding O-042 has no earlier round of this gate and no declared prior-review record
+           in: manifest line 5: finding O-041 has no readable Severity: - **Class:** silent-data-loss
+       report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/512efee2-5748-4ebb-ba93-8afa08f5a48f/scratchpad/s12/o018-measure/tmp/sddkit.bOs0Np/schema/notes/verification/reports/opponent-findings-2026-09-09.md: prior-review manifest could not be parsed; reconcile canonical records
+       assert: expected exit 0, got 3: bash /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/512efee2-5748-4ebb-ba93-8afa08f5a48f/scratchpad/s12/o018-measure/d/scripts/spec-gate.sh tally /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/512efee2-5748-4ebb-ba93-8afa08f5a48f/scratchpad/s12/o018-measure/tmp/sddkit.bOs0Np/schema
+           output: manifest line 5: finding O-042 has no readable Severity: - **Class:** silent-data-loss
+       report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/512efee2-5748-4ebb-ba93-8afa08f5a48f/scratchpad/s12/o018-measure/tmp/sddkit.bOs0Np/schema/notes/verification/reports/opponent-findings-2026-09-09.md: prior-review manifest could not be parsed; reconcile canonical records
+       assert: AC-012: fenced manifest entry authorized a resolved claim missing substring: resolved finding O-042 has no earlier round of this gate and no declared prior-review record
+           in: manifest line 8: finding O-041 has no readable Severity: ```
+       report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/512efee2-5748-4ebb-ba93-8afa08f5a48f/scratchpad/s12/o018-measure/tmp/sddkit.bOs0Np/schema/notes/verification/reports/opponent-findings-2026-09-09.md: prior-review manifest could not be parsed; reconcile canonical records
+       assert: AC-012: commented manifest entry authorized a resolved claim missing substring: resolved finding O-042 has no earlier round of this gate and no declared prior-review record
+           in: manifest line 8: finding O-041 has no readable Severity: -->
+       report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/512efee2-5748-4ebb-ba93-8afa08f5a48f/scratchpad/s12/o018-measure/tmp/sddkit.bOs0Np/schema/notes/verification/reports/opponent-findings-2026-09-09.md: prior-review manifest could not be parsed; reconcile canonical records
+       assert: AC-012: script-hidden manifest entry authorized a resolved claim missing substring: resolved finding O-042 has no earlier round of this gate and no declared prior-review record
+           in: manifest line 8: finding O-041 has no readable Severity: </script>
+       report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/512efee2-5748-4ebb-ba93-8afa08f5a48f/scratchpad/s12/o018-measure/tmp/sddkit.bOs0Np/schema/notes/verification/reports/opponent-findings-2026-09-09.md: prior-review manifest could not be parsed; reconcile canonical records
+       assert: expected exit 0, got 3: bash /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/512efee2-5748-4ebb-ba93-8afa08f5a48f/scratchpad/s12/o018-measure/d/scripts/spec-gate.sh tally /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/512efee2-5748-4ebb-ba93-8afa08f5a48f/scratchpad/s12/o018-measure/tmp/sddkit.bOs0Np/schema
+           output: manifest line 3: finding O-042 has no readable Severity: - **Class:** silent-data-loss
+       report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/512efee2-5748-4ebb-ba93-8afa08f5a48f/scratchpad/s12/o018-measure/tmp/sddkit.bOs0Np/schema/notes/verification/reports/opponent-findings-2026-09-09.md: prior-review manifest could not be parsed; reconcile canonical records
+       assert: output missing substring: blocking=0 minor=0
+           in: manifest line 3: finding O-042 has no readable Severity: - **Class:** silent-data-loss
+       report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/512efee2-5748-4ebb-ba93-8afa08f5a48f/scratchpad/s12/o018-measure/tmp/sddkit.bOs0Np/schema/notes/verification/reports/opponent-findings-2026-09-09.md: prior-review manifest could not be parsed; reconcile canonical records
+       assert: output missing substring: missing required report section: what i attacked
+           in: manifest line 5: finding O-041 has no readable Severity: - **Class:** silent-data-loss
+       report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/512efee2-5748-4ebb-ba93-8afa08f5a48f/scratchpad/s12/o018-measure/tmp/sddkit.bOs0Np/schema_round/.specify/specs/003-verification-fixture/notes/verification/reports/opponent-findings-fixture.md: prior-review manifest could not be parsed; reconcile canonical records
+       assert: AC-012: a same-class Prior canonized a brand-new data-loss finding missing substring: resolved finding O-042 has no earlier round of this gate and no declared prior-review record
+           in: manifest line 5: finding O-041 has no readable Severity: - **Class:** silent-data-loss
+       report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/512efee2-5748-4ebb-ba93-8afa08f5a48f/scratchpad/s12/o018-measure/tmp/sddkit.bOs0Np/schema_round/.specify/specs/003-verification-fixture/notes/verification/reports/opponent-findings-fixture.md: prior-review manifest could not be parsed; reconcile canonical records
+       assert: AC-012: round completion accepted Class drift for a manifest finding ID missing substring: finding O-041 changes Class from return-envelope-parsing to silent-data-loss
+           in: manifest line 5: finding O-041 has no readable Severity: - **Class:** return-envelope-parsing
+       report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/512efee2-5748-4ebb-ba93-8afa08f5a48f/scratchpad/s12/o018-measure/tmp/sddkit.bOs0Np/schema_round/.specify/specs/003-verification-fixture/notes/verification/reports/opponent-findings-fixture.md: prior-review manifest could not be parsed; reconcile canonical records
+       assert: expected exit 0, got 3: bash /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/512efee2-5748-4ebb-ba93-8afa08f5a48f/scratchpad/s12/o018-measure/tmp/sddkit.bOs0Np/floor-kit-schema_round/scripts/spec-gate.sh round /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/512efee2-5748-4ebb-ba93-8afa08f5a48f/scratchpad/s12/o018-measure/tmp/sddkit.bOs0Np/schema_round/.specify/specs/003-verification-fixture opponent --complete /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/512efee2-5748-4ebb-ba93-8afa08f5a48f/scratchpad/s12/o018-measure/tmp/sddkit.bOs0Np/schema-round-ownid.md
+           output: manifest line 5: finding O-041 has no readable Severity: - **Class:** silent-data-loss
+       report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/512efee2-5748-4ebb-ba93-8afa08f5a48f/scratchpad/s12/o018-measure/tmp/sddkit.bOs0Np/schema_round/.specify/specs/003-verification-fixture/notes/verification/reports/opponent-findings-fixture.md: prior-review manifest could not be parsed; reconcile canonical records
+       assert: output missing substring: round completed
+           in: manifest line 5: finding O-041 has no readable Severity: - **Class:** silent-data-loss
+       report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/512efee2-5748-4ebb-ba93-8afa08f5a48f/scratchpad/s12/o018-measure/tmp/sddkit.bOs0Np/schema_round/.specify/specs/003-verification-fixture/notes/verification/reports/opponent-findings-fixture.md: prior-review manifest could not be parsed; reconcile canonical records
+       assert: AC-012: reconcile canonized a same-class Prior attack missing substring: resolved finding O-042 has no earlier round of this gate and no declared prior-review record
+           in: manifest line 5: finding O-041 has no readable Severity: - **Class:** silent-data-loss
+       report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/512efee2-5748-4ebb-ba93-8afa08f5a48f/scratchpad/s12/o018-measure/tmp/sddkit.bOs0Np/schema_reconcile/.specify/specs/003-verification-fixture/notes/verification/reports/opponent-findings-fixture.md: prior-review manifest could not be parsed; reconcile canonical records
+       assert: AC-012: reconciliation accepted Class drift for a manifest finding ID missing substring: finding O-041 changes Class from return-envelope-parsing to silent-data-loss
+           in: manifest line 5: finding O-041 has no readable Severity: - **Class:** return-envelope-parsing
+       report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/512efee2-5748-4ebb-ba93-8afa08f5a48f/scratchpad/s12/o018-measure/tmp/sddkit.bOs0Np/schema_reconcile/.specify/specs/003-verification-fixture/notes/verification/reports/opponent-findings-fixture.md: prior-review manifest could not be parsed; reconcile canonical records
+       assert: expected exit 0, got 3: bash /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/512efee2-5748-4ebb-ba93-8afa08f5a48f/scratchpad/s12/o018-measure/tmp/sddkit.bOs0Np/floor-kit-schema_reconcile/scripts/spec-gate.sh round /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/512efee2-5748-4ebb-ba93-8afa08f5a48f/scratchpad/s12/o018-measure/tmp/sddkit.bOs0Np/schema_reconcile/.specify/specs/003-verification-fixture opponent --reconcile /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/512efee2-5748-4ebb-ba93-8afa08f5a48f/scratchpad/s12/o018-measure/tmp/sddkit.bOs0Np/schema-reconcile-report.md
+           output: manifest line 5: finding O-041 has no readable Severity: - **Class:** silent-data-loss
+       report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/512efee2-5748-4ebb-ba93-8afa08f5a48f/scratchpad/s12/o018-measure/tmp/sddkit.bOs0Np/schema_reconcile/.specify/specs/003-verification-fixture/notes/verification/reports/opponent-findings-fixture.md: prior-review manifest could not be parsed; reconcile canonical records
+       assert: output missing substring: round completed
+           in: manifest line 5: finding O-041 has no readable Severity: - **Class:** silent-data-loss
+       report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/512efee2-5748-4ebb-ba93-8afa08f5a48f/scratchpad/s12/o018-measure/tmp/sddkit.bOs0Np/schema_reconcile/.specify/specs/003-verification-fixture/notes/verification/reports/opponent-findings-fixture.md: prior-review manifest could not be parsed; reconcile canonical records
+  ok   test_review_scope_contracts
+  -- 17/18 passed
+== test-golden-example.sh
+  ok   test_golden_example_demonstrates_the_conventions
+  ok   test_golden_example_passes_sdd_analyze_with_zero_warnings
+  ok   test_stage_example_copies_only_enumerated_files
+  ok   test_stage_example_failure_is_named_and_stays_in_the_sandbox
+  ok   test_verification_golden
+  -- 5/5 passed
+== test-lib.sh
+  ok   test_expand_tilde
+  ok   test_fm_get_no_frontmatter_is_empty
+  ok   test_fm_get_reads_only_the_fence
+  ok   test_fm_list_inline_and_block
+  ok   test_fm_set_appends_missing_key_inside_fence
+  ok   test_fm_set_refuses_file_without_frontmatter
+  ok   test_fm_set_replaces_and_keeps_inline_comment
+  ok   test_registry_entries_parses_entries_in_any_field_order
+  ok   test_registry_path_for_expands_tilde
+  ok   test_spec_declared_repos
+  ok   test_usage_from_header
+  ok   test_yml_clean_hash_needs_preceding_space
+  ok   test_yml_get_and_list
+  -- 13/13 passed
+== test-model-policy.sh
+  ok   test_AC_008_usage_limit_policy_absent_and_present_defaults
+  ok   test_AC_008_usage_limit_policy_rejects_invalid_values
+  ok   test_AC_008_usage_limit_policy_set_unset_round_trip
+  ok   test_AC_008_usage_limit_policy_wizard_preserves_ordered_fallback
+  ok   test_AC_008_wizard_fixture_never_writes_through_a_host_models_yml
+  ok   test_claude_effort_whitelist_unchanged
+  ok   test_codex_sandbox_and_approval_policy_fields
+  ok   test_documented_codex_efforts_accepted
+  ok   test_junk_codex_effort_rejected
+  -- 9/9 passed
+== test-sdd-analyze.sh
+  ok   test_clean_fixture_is_consistent
+  ok   test_dangling_ref_fails
+  ok   test_duplicate_task_id_fails
+  ok   test_external_marker_must_be_mirrored_in_status
+  ok   test_gate_agent_placeholder_fails
+  ok   test_leftover_spec_directories_do_not_decide_the_shipped_loop
+  ok   test_missing_artifact_is_an_error
+  ok   test_missing_gate_agent_file_fails
+  ok   test_missing_verify_line_warns
+  ok   test_needs_clarification_blocks
+  ok   test_stray_repo_tags_without_umbrella_warn
+  ok   test_task_without_acceptance_fails
+  ok   test_ticked_box_without_evidence_warns
+  ok   test_umbrella_declared_repo_with_no_tasks_warns
+  ok   test_umbrella_tagged_tasks_pass
+  ok   test_umbrella_undeclared_repo_tag_fails
+  ok   test_umbrella_untagged_tasks_fail
+  ok   test_uncovered_ac_fails_and_gate_refs_do_not_count
+  ok   test_verification_bindings
+  -- 19/19 passed
+== test-spec-ac-coverage.sh
+  ok   test_all_acs_bound_passes
+  ok   test_default_root_is_the_git_toplevel
+  ok   test_extra_test_glob_extends_the_net
+  ok   test_longer_ids_do_not_satisfy_shorter_acs
+  ok   test_no_acs_in_spec_is_a_noop_not_a_crash
+  ok   test_root_path_containing_test_does_not_classify_everything
+  ok   test_spec_dir_itself_never_counts_as_coverage
+  ok   test_test_paths_with_spaces_are_counted
+  ok   test_unreferenced_ac_fails_referenced_ac_passes
+  -- 9/9 passed
+== test-spec-dispatch.sh
+  ok   test_repo_match_is_token_exact
+  ok   test_stage_umbrella_copies_only_enumerated_scripts
+  ok   test_stage_umbrella_failure_is_named_and_stays_in_the_sandbox
+  ok   test_undeclared_repo_refused_and_declared_accepted_past_the_guard
+  -- 4/4 passed
+== test-spec-gate.sh
+  ok   test_acceptance
+  ok   test_checkpoints
+  ok   test_floor
+  ok   test_floor_fixture_failure_is_named_and_stays_in_the_sandbox
+  ok   test_floor_fixture_stages_only_enumerated_scripts
+  ok   test_manual_acceptance
+  ok   test_prepared_before_recovery
+  ok   test_rounds
+  -- 8/8 passed
+== test-spec-run.sh
+  ok   test_bounded_capture
+  ok   test_failing_command_keeps_box_unticked_but_records
+  ok   test_key_flag_picks_the_evidence_line
+  ok   test_no_tick_captures_only
+  ok   test_passing_command_records_and_ticks
+  ok   test_usage_errors
+  -- 6/6 passed
+== test-spec-status.sh
+  ok   test_append_decision_adds_dated_entry_at_end_and_updates_frontmatter
+  ok   test_append_decision_refuses_duplicate_sections_without_mutation
+  ok   test_append_decision_refuses_missing_section_without_mutation
+  -- 3/3 passed
+== test-spec-task.sh
+  ok   test_done_rerun_replaces_evidence_not_duplicates
+  ok   test_done_with_evidence_is_one_atomic_edit
+  ok   test_done_without_evidence_is_refused
+  ok   test_follow_up_ids_never_match_their_parent
+  ok   test_gate_and_ship_tasks_are_exempt_from_evidence
+  ok   test_list_reports_id_state_stage_subject
+  ok   test_preformatted_evidence_is_not_double_wrapped
+  ok   test_start_marks_in_progress
+  ok   test_undo_unticks_but_keeps_evidence
+  ok   test_unknown_task_and_bad_usage
+  ok   test_versioned_done_guard
+  -- 11/11 passed
+== test-usage-limits.sh
+  ok   test_AC_001_classifies_every_planned_provider_limit_fixture
+  ok   test_AC_001_ordinary_failures_including_limit_word_are_none
+  ok   test_AC_002_pattern_table_is_the_only_provider_message_source_and_bash_32_safe
+  ok   test_AC_002_unparseable_horizon_is_unknown_and_bad_usage_is_refused
+  ok   test_AC_003_and_AC_007_codex_attempt_capture_classifies_and_stays_manual_without_policy
+  ok   test_AC_003_dispatch_fixture_copies_only_enumerated_scripts
+  ok   test_AC_003_fail_policy_is_manual_and_ordinary_dispatch_failures_keep_exit_six
+  ok   test_AC_004_and_AC_005_park_policy_replays_original_dispatch_once_per_retry
+  ok   test_AC_004_cron_add_list_and_remove_are_marked_and_idempotent
+  ok   test_AC_004_launchd_add_list_and_remove_are_one_shot_and_idempotent
+  ok   test_AC_005_generic_failure_marks_failed_and_list_cancel_reconcile_scheduler
+  ok   test_AC_005_repeat_limit_reparks_via_nested_dispatcher_and_stops_at_three
+  ok   test_AC_005_resume_replays_adversarial_argv_and_success_removes_unit
+  ok   test_AC_005_scheduler_remove_failure_releases_lock_and_retries_same_unit
+  ok   test_AC_006_and_AC_009_readiness_requires_binary_adapter_and_authentication
+  ok   test_AC_006_auth_checker_override_does_not_bypass_binary_or_adapter_checks
+  ok   test_AC_006_delegate_caps_three_attempts_and_parks_when_exhausted
+  ok   test_AC_006_delegate_classifies_only_the_current_attempt_slice
+  ok   test_AC_006_delegate_uses_ordered_ready_fallback_and_preserves_verification
+  ok   test_AC_009_doctor_fixture_excludes_machine_local_kit_files
+  ok   test_AC_009_doctor_reconciles_pending_failed_and_both_orphan_classes_without_models
+  ok   test_AC_009_doctor_reports_invalid_limit_policy_and_unready_fallbacks
+  ok   test_AC_010_documents_exact_limit_policy_keys_and_recovery_workflows
+  ok   test_T013o1_clock_only_horizons_follow_configured_park_policy
+  ok   test_T013o3_cancel_scheduler_remove_failure_releases_lock_and_recovers
+  ok   test_T013o4_replay_restores_the_parked_path_under_a_stock_scheduler_path
+  ok   test_T013o5_metadata_write_failure_releases_lock_and_unit_recovers
+  -- 27/27 passed
+== test-verification.sh
+  ok   test_capture_provenance
+  ok   test_config_grammar
+  ok   test_owned_transactions
+  -- 3/3 passed

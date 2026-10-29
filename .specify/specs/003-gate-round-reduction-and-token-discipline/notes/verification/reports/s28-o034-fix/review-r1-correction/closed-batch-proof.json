@@ -1,0 +1,71 @@
+{
+  "editing_batch": "closed",
+  "owned": {
+    "scripts/sdd-analyze.sh": {
+      "before": {
+        "sha256": "6ab2130ba40e2f96a097c2ca132160535aa8d70d053bd525c2ce5fc7f465966b",
+        "mode": "0o755",
+        "bytes": 18542,
+        "mtime_ns": 1793001852039054982
+      },
+      "after": {
+        "sha256": "1a175221eaa2aca3198a6d93c11618ead124f2c69e1c4351313281d2affd500b",
+        "mode": "0o755",
+        "bytes": 18721,
+        "mtime_ns": 1793004503066622351
+      }
+    },
+    "tests/test-sdd-analyze.sh": {
+      "before": {
+        "sha256": "0ee700041f225bc21e7ca43307d9493fa6ffed98abf145eec0c1f9f874a8f763",
+        "mode": "0o644",
+        "bytes": 51002,
+        "mtime_ns": 1793001852039203773
+      },
+      "after": {
+        "sha256": "c90afc20667bef1269e7d90dd37b807bec0393e27b9948da37d0f3c15dc315a8",
+        "mode": "0o644",
+        "bytes": 54181,
+        "mtime_ns": 1793004304813240243
+      }
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md": {
+      "before": {
+        "sha256": "1f8b6ab712c3a9c2eb8a8011bff5e9148750466efe7e2644341ddae0abe27c07",
+        "mode": "0o600",
+        "bytes": 183296,
+        "mtime_ns": 1793002355963853814
+      },
+      "after": {
+        "sha256": "7530d61107dbcafc2c28b11b9f588fcf2565fbc82e263d50675d6d157bdf6296",
+        "mode": "0o600",
+        "bytes": 183693,
+        "mtime_ns": 1793004438017077086
+      }
+    }
+  },
+  "unchanged_file_count": 14902,
+  "changed_existing_files": [
+    "tests/test-sdd-analyze.sh",
+    "scripts/sdd-analyze.sh",
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md"
+  ],
+  "new_files_outside_authorized_report_directory": [],
+  "head": "2049f65960cc91e9e30bbd5ff1e11fc0fdf7cbd9",
+  "index": {
+    "sha256": "c492d7ea95abf8e8c335001f20c62ff50bc6f1e2179d7a07d30811181b3dd700",
+    "mode": "0o644",
+    "bytes": 2200525,
+    "mtime_ns": 1792957592613445716
+  },
+  "status": {
+    "sha256": "28919a358c30407ccb0fff041f436768353b2f002c54e1db351ea57efe5e7d88",
+    "mode": "0o600",
+    "bytes": 772414,
+    "mtime_ns": 1792959058374188118
+  },
+  "source_context_before": "76977c6609cc7064d3fa73250b821c0f04c3375f6f632410a6c2ebc6ddaefffa",
+  "task_edit_confined_to_existing_T031a5o1_block": true,
+  "classifier_and_test_edits_confined_to_existing_regions": true,
+  "gate_readiness_or_model_verdict_supplied": false
+}

@@ -1,0 +1,13 @@
+PASS M3 U snapshot under C
+PASS M3 P snapshot under C
+PASS M3 under C: every record outside the edited files equals U
+  | records compared: 346 of 372; excluded in P: 26 (8 harness, 1 version, 8 edited path, 8 edited index, 1 helper path)
+PASS M3 under C: exactly 26 records excluded in P
+PASS M3 U snapshot under en_US.UTF-8
+PASS M3 P snapshot under en_US.UTF-8
+PASS M3 under en_US.UTF-8: every record outside the edited files equals U
+  | records compared: 346 of 372; excluded in P: 26 (8 harness, 1 version, 8 edited path, 8 edited index, 1 helper path)
+PASS M3 under en_US.UTF-8: exactly 26 records excluded in P
+PASS M3: U snapshot is one digest under C and en_US.UTF-8
+PASS M3: P snapshot is one digest under C and en_US.UTF-8
+o017-measure-m3 failures=0

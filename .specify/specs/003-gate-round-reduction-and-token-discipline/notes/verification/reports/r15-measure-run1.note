@@ -1,0 +1,6 @@
+r15-measure run 1 (started 2026-10-07T19:27:20Z), STOPPED by the invoker during section D (the full suite on D), after sections A, B1, B3 and C had passed (829 PASS,
+0 FAIL); it has no rc receipt and judges nothing. It measured the first candidate (r15-edits/kernel-1-run1.pairs), whose code-span
+reading made every character of a code span inert, letters included; planning matrix v4 showed that this would refuse a
+finding line whose first visible word is a code span's text followed by Class or Severity, which a renderer shows as
+that word. The adopted candidate keeps letters and digits inside a code span and makes only its other characters inert,
+so a bracket or tag inside one still opens or closes nothing. The run of record follows on that candidate.

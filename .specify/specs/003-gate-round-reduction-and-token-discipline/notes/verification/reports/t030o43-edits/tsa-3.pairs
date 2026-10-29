@@ -1,0 +1,38 @@
+@@OLD
+  assert_contains "$OUT" "verification contract: $spec_dir/spec.md: frontmatter could not be read for verification_contract" \
+    'AC-023: the binding parser read an unreadable frontmatter as no contract (T030o43)'
+}
+@@NEW
+  assert_contains "$OUT" "verification contract: $spec_dir/spec.md: frontmatter could not be read for verification_contract" \
+    'AC-023: the binding parser read an unreadable frontmatter as no contract (T030o43)'
+  # Whitespace is read as whitespace (T030o43 review 2): a manual observation
+  # or a registry locator of a U+00A0 alone is empty, as an empty one is, and a
+  # gate's Agent path after a U+00A0 is the path.
+  local nb=$'\302\240' cmd
+  cp "$SANDBOX/analyzer-spec" "$spec_dir/spec.md"; cp "$spec_dir/tasks.md" "$SANDBOX/analyzer-tasks"; cp "$spec_dir/plan.md" "$SANDBOX/analyzer-plan"
+  sed "s/\`manual: inspect the release artifact and record its digest\`/\`manual: $nb\`/" "$SANDBOX/analyzer-tasks" > "$spec_dir/tasks.md"
+  run_rc 1 "$ANALYZE" "$spec_dir"
+  assert_contains "$OUT" 'task T004 manual Verify must be manual: <observation>' \
+    'AC-023: a manual observation of a U+00A0 alone was read as an observation (T030o43 review 2)'
+  sed "s/^| manual-family | manual | AC-004 | release-observation |\$/| manual-family | manual | AC-004 | $nb |/" "$SANDBOX/analyzer-plan" > "$spec_dir/plan.md"
+  sed "s/^  - \*Tests:\* release-observation\$/  - *Tests:* $nb/" "$SANDBOX/analyzer-tasks" > "$spec_dir/tasks.md"
+  run_rc 1 "$ANALYZE" "$spec_dir"
+  assert_contains "$OUT" 'verification family manual-family has blank or placeholder criteria/locator' \
+    'AC-023: a registry locator of a U+00A0 alone was read as a locator (T030o43 review 2)'
+  assert_contains "$OUT" 'task T004 Ref INV-001 has no matching typed test-family locator' \
+    'AC-023: a Tests locator of a U+00A0 alone bound a manual task (T030o43 review 2)'
+  cp "$SANDBOX/analyzer-plan" "$spec_dir/plan.md"
+  sed "s/^  - \*Agent:\* agents\/opponent.agent.md\$/  - *Agent:* ${nb}agents\/opponent.agent.md/" "$SANDBOX/analyzer-tasks" > "$spec_dir/tasks.md"
+  run_rc 0 "$ANALYZE" "$spec_dir"
+  assert_contains "$OUT" 'opponent gate present, agent file exists' \
+    'AC-023: a gate Agent path after a U+00A0 read the U+00A0 into the path (T030o43 review 2)'
+  # The Verify command the harness runs and records is the one written: a
+  # U+00A0 inside it stays, and one before its backticks is whitespace.
+  cmd="grep -c 'a${nb}b' tests/check.sh"
+  sed "s/^  - \*Verify:\* \`bash tests\/check.sh\` → passed\$/  - *Verify:*$nb\`$cmd\` → passed/" "$SANDBOX/analyzer-tasks" > "$spec_dir/tasks.md"
+  run_rc 0 bash -c '. "$1"; vf_bindings "$2" tasks "" "$3" && vf_task_info "$3" T001 && printf "%s" "$VF_TASK_COMMAND"' _ \
+    "$SCRIPTS/verification-lib.sh" "$spec_dir" "$SANDBOX/verify-written.nul"
+  assert_eq "$cmd" "$OUT" 'AC-023: the Verify command was not run as written (T030o43 review 2)'
+  cp "$SANDBOX/analyzer-tasks" "$spec_dir/tasks.md"
+}
+@@END

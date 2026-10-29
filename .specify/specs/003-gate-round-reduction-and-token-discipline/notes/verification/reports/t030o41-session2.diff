@@ -1,0 +1,1123 @@
+--- a/scripts/verification-lib.sh
++++ b/scripts/verification-lib.sh
+@@ -1408,6 +1408,16 @@
+     *) cp "$2" "$3";;
+   esac
+ }
++# The bytes the identity hashes for one working-tree path, and the only way a
++# reader whose verdict must be a function of the identity should obtain them:
++# a link's target as it is (the link's own name says nothing about its
++# target's grammar), a regular file through vf_semantic_file under its
++# repository-relative name. The input is always "$repo/$path", so a name that
++# begins with "-" is a path and never an option.
++vf_path_content() { # <repo> <relative path> <output>
++  if [[ -L "$1/$2" ]]; then cp -- "$1/$2" "$3"
++  else vf_semantic_file "$2" "$1/$2" "$3"; fi
++}
+ vf_path_record() { # <repo> <relative path> <output> <scratch> <own spec dir or empty> [fold]
+   local repo="$1" path="$2" output="$3" scratch="$4" own="$5" fold="${6:-0}" type mode digest link=''
+   # Only the enumeration passes an anchor. A declared input arrives with an
+@@ -1417,17 +1427,31 @@
+   if [[ -L "$repo/$path" ]]; then
+     type='link'; link="$(readlink "$repo/$path"; printf .)"; link="${link%.}"; digest=''; mode=120000
+     # Target content is an input even when the target is outside the repository.
+-    if [[ -f "$repo/$path" ]]; then digest="$(vf_hash "$repo/$path")" || return 3
++    if [[ -f "$repo/$path" ]]; then
++      vf_path_content "$repo" "$path" "$scratch/semantic" && digest="$(vf_hash "$scratch/semantic")" || return 3
+     elif [[ -d "$repo/$path" ]]; then echo "verification inputs: directory symlink requires explicit target files: $path" >&2; return 3; fi
+   elif [[ -f "$repo/$path" ]]; then
+     type='file'; mode=100644; [[ ! -x "$repo/$path" ]] || mode=100755
+-    vf_semantic_file "$path" "$repo/$path" "$scratch/semantic" || return 3
++    vf_path_content "$repo" "$path" "$scratch/semantic" || return 3
+     digest="$(vf_hash "$scratch/semantic")" || return 3
+   elif [[ ! -e "$repo/$path" ]]; then type=missing; mode=''; digest=''
+   else echo "verification inputs: unsupported file type: $path" >&2; return 3; fi
+   printf '%s\0' path "$path" "$type" "$mode" "$digest" "$link" >> "$output"
+ }
+ 
++# The source enumeration: tracked and untracked-but-not-ignored paths,
++# NUL-framed, relative to the repository root. vf_snapshot hashes exactly this
++# set, so a reader whose verdict must be a function of the input identity -- a
++# reuse-checked check, or a test fixture copying the kit -- enumerates through
++# it as well: two spellings of "the source" are two things that can drift.
++# A git failure is a failure, never an empty and therefore clean tree.
++vf_source_paths() { # <physical repo root> <output>
++  [[ "$(git -C "$1" rev-parse --show-toplevel 2>/dev/null)" == "$1" ]] || {
++    echo 'verification inputs: Git worktree root required' >&2; return 3;
++  }
++  git -C "$1" ls-files --cached --others --exclude-standard -z > "$2" || return 3
++}
++
+ # Fixed arity six-field input records. Git supplies NUL-safe deterministic
+ # tracked/index and untracked ordering; no GNU sort -z or line-split filenames.
+ vf_snapshot() (
+@@ -1445,7 +1469,7 @@
+   vf_config "$repo/.specify/stack.yml" "$spec/tasks.md" "$tmp/config" || return 3
+   printf '%s\0' version 1 "$repo" "$cwd" '' '' > "$tmp/inputs"
+   git -C "$repo" ls-files --stage -z > "$tmp/index" || return 3
+-  git -C "$repo" ls-files --cached --others --exclude-standard -z > "$tmp/paths" || return 3
++  vf_source_paths "$repo" "$tmp/paths" || return 3
+   while IFS= read -r -d '' record; do
+     path="${record#*$'\t'}"; head="${record%%$'\t'*}"
+     vf_bookkeeping_path "$path" "$own" "$fold" && continue
+--- a/templates/verification-contract.md
++++ b/templates/verification-contract.md
+@@ -168,6 +168,24 @@
+ report can be a test fixture, and a changed fixture invalidates reuse. Gates reuse
+ valid execution, never automatic semantic PASS, and may attack covered or
+ previously unexamined unchanged surfaces.
++
++A reused success is sound only while the check's verdict is a function of that
++identity, so a check opted into reuse reads the repository only as the snapshot
++hashes it: paths from the same enumeration (tracked files and untracked files
++git does not ignore), without the verified spec's generated bookkeeping, and
++each path's content as the snapshot hashes it — a link's target as it is; spec,
++plan and tasks files without the lines the snapshot drops (`status:` and
++`updated:` frontmatter, task Evidence lines, checkbox state); STATUS only for
++its Decisions log. That covers the check's own file list, any glob or
++directory walk it makes, and any copy it reads. It also reads no environment
++variable the project has not declared and no configuration outside the
++repository. A check that depends on an ignored path declares it under
++`verification_inputs`; one that reads the dropped lines, or configuration it
++cannot pin, stays off `reuse_checks`. The kit's own suites read through
++`vf_source_paths` and `vf_path_content`, the functions the snapshot itself
++calls; `tests/run.sh` lists its suites that way, `tests/shellcheck.sh` lints
++the enumerated scripts with no rc file and `SHELLCHECK_OPTS` unset, and a
++suite starts with the kit's own `SDD_*` and `XDG_*` variables cleared.
+ 
+ The implementation plan owns runtime interfaces and their test families:
+ capture/provenance, acceptance, floor/checkpoints, round reservations and report
+--- a/README.md
++++ b/README.md
+@@ -330,8 +330,12 @@
+ ```bash
+ tests/run.sh              # all suites (lib, sdd-analyze, spec-task, spec-run, spec-ac-coverage)
+ tests/run.sh task         # only files whose name contains "task"
+-shellcheck -S warning -x scripts/*.sh tests/*.sh
++bash tests/shellcheck.sh  # ShellCheck over the enumerated scripts/*.sh and tests/*.sh, no rc files, SHELLCHECK_OPTS unset
+ ```
++
++Both commands are reuse-checked, so each reads only what the input identity
++hashes: the suites and scripts git enumerates, never an ignored local file or
++configuration outside the repository.
+ 
+ CI runs both on Linux and macOS, plus a run with `bash` shimmed to `/bin/bash`
+ 3.2 so the compatibility claim is enforced, not assumed. Touching a script?
+--- a/.specify/stack.yml
++++ b/.specify/stack.yml
+@@ -4,7 +4,7 @@
+ base_branch: main
+ gate_checks:
+   - 'bash tests/run.sh'
+-  - 'shellcheck -S warning -x scripts/*.sh tests/*.sh'
++  - 'bash tests/shellcheck.sh'
+ checkpoints:
+   Backend:
+     - 'bash tests/run.sh'
+@@ -13,7 +13,7 @@
+ # Only these deterministic local checks opt in; integrity checks always run.
+ reuse_checks:
+   - 'bash tests/run.sh'
+-  - 'shellcheck -S warning -x scripts/*.sh tests/*.sh'
++  - 'bash tests/shellcheck.sh'
+ verification_tools:
+   - 'bash'
+   - 'git'
+--- a/.github/workflows/ci.yml
++++ b/.github/workflows/ci.yml
+@@ -14,7 +14,9 @@
+     steps:
+       - uses: actions/checkout@v5
+       - name: shellcheck (warning severity blocks)
+-        run: shellcheck -S warning -x scripts/*.sh tests/*.sh
++        # The same pinned command the gate and reuse checks run: enumerated
++        # files, no .shellcheckrc lookup, SHELLCHECK_OPTS unset.
++        run: bash tests/shellcheck.sh
+ 
+   tests:
+     strategy:
+--- a/tests/helpers.sh
++++ b/tests/helpers.sh
+@@ -18,6 +18,17 @@
+ TODAY="$(date +%Y-%m-%d)"
+ export NO_COLOR=1   # assertions match plain text, never escape codes
+ 
++# The kit's own configuration namespace (SDD_*) and the XDG base-directory
++# family its scripts consult are cleared when a suite starts. The suites are
++# reuse-checked and the input identity declares no environment
++# (verification_environment: []), so an ambient knob such as
++# SDD_RESUME_JITTER_SECONDS must not decide a verdict (O-015 review,
++# 2026-09-24). A test that needs one sets it for the command it runs.
++for _t_env in $(compgen -e); do
++  case "$_t_env" in SDD_*|XDG_*) unset "$_t_env";; esac
++done
++unset _t_env
++
+ _t_fail=0
+ t_fail() { printf 'assert: %s\n' "$1"; _t_fail=1; }
+ 
+@@ -347,8 +358,89 @@
+     /^project:/ { print; print "repos: " repos; next }
+     { print }
+   ' "$spec" > "$spec.tmp" && mv "$spec.tmp" "$spec"
++}
++
++# copy_kit <kit root> <dest> — the kit's hub content as the input identity
++# hashes it. Paths come from vf_source_paths (tracked and untracked files git
++# does not ignore), so machine-local ignored files such as system-map.yml or
++# models.yml never arrive, and neither does .git. Spec directories are left
++# out: every byte the identity drops lives under .specify/specs/ (a spec's
++# generated records and the lines vf_semantic_file removes), while every other
++# enumerated path is hashed verbatim, so what is copied is exactly hashed
++# content whichever spec is being verified. No whole-kit consumer reads a spec:
++# the doctor runs --hub-only and the wizard reads models.yml. The suites that
++# copy the kit are reuse-checked, so a copy carrying bytes the identity does
++# not hash would let those bytes decide a reusable verdict (O-015, round 10).
++# An indexed path deleted from the working tree is recorded by the identity as
++# missing and has nothing to copy.
++#
++# No EXIT trap, and every failure path cleans up and RETURNS. Run as the whole
++# of a command substitution, as run_rc runs it, bash 3.2 unwinds a subshell
++# function's locals before an EXIT trap fires on `exit`, so the trap reads the
++# CALLER's variables of the same names: on 2026-09-24 an earlier version's
++# `rm -f "$list" "$present"` removed a caller's relative `present` -- the live
++# kit's .specify/stack.yml.
++#
++# With a third argument, only the enumerated files under that repository-
++# relative directory are copied, verbatim and at their relative paths, spec
++# records included: the 002 tally reads another spec's notes/ that way, whose
++# every byte the identity hashes as ordinary source, and a directory holding no
++# enumerated file -- an empty FLOOR-* left behind, say -- never arrives.
++copy_kit() ( # <kit root> <dest> [<repo-relative directory>]
++  set -o pipefail
++  local src work path rc
++  src="$(cd "$1" && pwd -P)" || return 1
++  work="$(mktemp -d "${TMPDIR:-/tmp}/copy-kit.XXXXXX")" || return 1
++  if ! bash -c '. "$1/verification-lib.sh"; vf_source_paths "$2" "$3"' _ "$SCRIPTS" "$src" "$work/list"; then
++    echo "copy_kit: cannot enumerate $1" >&2; rm -rf -- "$work"; return 1
++  fi
++  while IFS= read -r -d '' path; do
++    if [[ -n "${3:-}" ]]; then
++      [[ "$path" == "${3%/}"/* ]] || continue
++    else
++      # Leaving out more is the safe direction, so the spec-directory match
++      # folds case everywhere rather than only where the filesystem does.
++      shopt -s nocasematch
++      case "$path" in .specify/specs/*) shopt -u nocasematch; continue;; esac
++      shopt -u nocasematch
++    fi
++    [[ ! -e "$src/$path" && ! -L "$src/$path" ]] || printf '%s\0' "$path"
++  done < "$work/list" > "$work/present"
++  mkdir -p "$2" && ( cd "$src" && tar --null -T "$work/present" -cf - ) | ( cd "$2" && tar -xf - )
++  rc=$?
++  rm -rf -- "$work"
++  return "$rc"
++)
++
++# make_host_kit <dest> — a copy of the kit that is its own Git worktree, for
++# fixtures that plant what a developer's live kit could hold: an ignored file,
++# a symlink, an empty directory. Echoes nothing; returns copy_kit's status.
++make_host_kit() {
++  copy_kit "$KIT_DIR" "$1" && git -C "$1" init -q
+ }
+ 
++# kit_files <dir> <basename glob> — NUL-framed repository-relative paths of the
++# enumerated files directly inside <dir> of $KIT_DIR whose basename matches the
++# glob: the counterpart of "$KIT_DIR/<dir>/<glob>" that sees only what the
++# input identity hashes, never an ignored local file (O-015 review). Fails by
++# name when the kit cannot be enumerated.
++kit_files() {
++  local root list path rc=0
++  root="$(cd "$KIT_DIR" && pwd -P)" || return 1
++  list="$(mktemp "${TMPDIR:-/tmp}/kit-files.XXXXXX")" || return 1
++  if bash -c '. "$1/verification-lib.sh"; vf_source_paths "$2" "$3"' _ "$SCRIPTS" "$root" "$list"; then
++    while IFS= read -r -d '' path; do
++      [[ "$path" == */* && "${path%/*}" == "$1" ]] || continue
++      # shellcheck disable=SC2053  # the second argument IS the pattern
++      [[ "${path##*/}" == $2 && -f "$root/$path" ]] && printf '%s\0' "$path"
++    done < "$list"
++  else
++    echo "kit_files: cannot enumerate $KIT_DIR" >&2; rc=1
++  fi
++  rm -f "$list"
++  return "$rc"
++}
++
+ # --- runner --------------------------------------------------------------------
+ 
+ # t_run_all — run every test_* function defined so far; report and exit.
+--- a/tests/run.sh
++++ b/tests/run.sh
+@@ -10,16 +10,35 @@
+ #   tests/run.sh              # all test files
+ #   tests/run.sh task         # only files whose name contains "task"
+ #
+-# Exit: 0 = all green, 1 = failures, 2 = no test file matches the filter.
++# Exit: 0 = all green, 1 = failures (or a kit that cannot be enumerated),
++#       2 = no test file matches the filter.
+ 
+ set -u
+ 
+ TESTS_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+ FILTER="${1:-}"
+ 
++# The suites are tests/test-*.sh as vf_source_paths enumerates them -- the list
++# the input identity hashes -- never a shell glob, which would also run an
++# ignored local file and let it decide this reuse-checked command (O-015
++# review, 2026-09-24).
++ROOT="$(cd -- "$TESTS_DIR/.." && pwd -P)"
++. "$ROOT/scripts/verification-lib.sh"
++list="$(mktemp "${TMPDIR:-/tmp}/run-suites.XXXXXX")" || exit 1
++if ! vf_source_paths "$ROOT" "$list"; then
++  rm -f "$list"
++  echo 'tests/run.sh: cannot enumerate the kit (a Git worktree is required)' >&2
++  exit 1
++fi
++suites=()
++while IFS= read -r -d '' path; do
++  case "$path" in tests/*/*) ;; tests/test-*.sh) suites+=("$ROOT/$path");; esac
++done < "$list"
++rm -f "$list"
++
+ rc=0
+ files=0
+-for f in "$TESTS_DIR"/test-*.sh; do
++for f in ${suites[@]+"${suites[@]}"}; do
+   [[ -f "$f" ]] || continue
+   if [[ -n "$FILTER" && "$(basename "$f")" != *"$FILTER"* ]]; then continue; fi
+   files=$((files+1))
+--- a/tests/shellcheck.sh
++++ b/tests/shellcheck.sh
+@@ -0,0 +1,35 @@
++#!/usr/bin/env bash
++# tests/shellcheck.sh — the kit's ShellCheck check, pinned to what the input
++# identity hashes, because the check is reuse-checked (O-015 review,
++# 2026-09-24). The files are scripts/*.sh and tests/*.sh as vf_source_paths
++# enumerates them, never an ignored local file a shell glob would add; and
++# ShellCheck reads no configuration from outside the repository: --norc skips
++# every .shellcheckrc (the checked file's directory up to /, ~/.shellcheckrc
++# and the XDG one) and SHELLCHECK_OPTS is unset.
++#
++# Usage: bash tests/shellcheck.sh
++# Exit: ShellCheck's own status; 2 when the kit cannot be enumerated.
++
++set -u
++
++ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd -P)"
++. "$ROOT/scripts/verification-lib.sh"
++
++list="$(mktemp "${TMPDIR:-/tmp}/shellcheck-files.XXXXXX")" || exit 2
++if ! vf_source_paths "$ROOT" "$list"; then
++  rm -f "$list"
++  echo 'tests/shellcheck.sh: cannot enumerate the kit (a Git worktree is required)' >&2
++  exit 2
++fi
++files=()
++while IFS= read -r -d '' path; do
++  case "$path" in
++    scripts/*/*|tests/*/*) ;;
++    scripts/*.sh|tests/*.sh) [[ ! -f "$ROOT/$path" ]] || files+=("$path");;
++  esac
++done < "$list"
++rm -f "$list"
++(( ${#files[@]} > 0 )) || { echo 'tests/shellcheck.sh: no scripts enumerated' >&2; exit 2; }
++
++cd "$ROOT" || exit 2
++exec env -u SHELLCHECK_OPTS shellcheck --norc -S warning -x "${files[@]}"
+--- a/tests/test-gate-contracts.sh
++++ b/tests/test-gate-contracts.sh
+@@ -15,11 +15,13 @@
+ # own conventions produce.
+ #
+ # SCOPE is taken from the enumeration the input manifest itself uses --
+-# `git ls-files --cached --others --exclude-standard` filtered through
+-# `vf_bookkeeping_path`, the same predicate vf_snapshot applies -- rather than
+-# restated as a find(1) filter, so it cannot drift when a new extension appears
+-# or a directory is named `captures` somewhere the anchored bookkeeping path
+-# does not cover. That predicate excludes only the VERIFIED spec's generated
++# `vf_source_paths`, the very function vf_snapshot's path pass calls, filtered
++# through `vf_bookkeeping_path`, the same predicate vf_snapshot applies --
++# rather than restated as a find(1) filter or a second git command line, so it
++# cannot drift when a new extension appears, a directory is named `captures`
++# somewhere the anchored bookkeeping path does not cover, or git quotes a name.
++# A tree that cannot be enumerated is an error, never an empty and therefore
++# clean tree. That predicate excludes only the VERIFIED spec's generated
+ # records, and the scan anchors each path to the spec that CONTAINS it: a
+ # spec's generated gate records are historical copies whichever spec is being
+ # verified, while another spec's non-generated notes stay in scope. Measured
+@@ -30,6 +32,15 @@
+ # STATUS.md is the one further subtraction: its Decisions log is an
+ # append-only record of what was true when each entry was written.
+ #
++# CONTENT is read the same way: each path passes through `vf_path_content`,
++# the function vf_path_record itself calls to decide which bytes the identity
++# hashes (a link's target as it is, a file through `vf_semantic_file`), and
++# only that output is scanned. This guard runs inside reuse-checked commands, so its
++# verdict must be a function of the input identity. Round 10 (O-015) showed the
++# raw bytes are not: a sentence on a spec's Evidence line or `status:`/`updated:`
++# line failed this suite while the identity -- and so every reusable PASS of
++# it -- stayed unchanged.
++#
+ # The NEEDLE matches the PROPOSITION. Each candidate is normalized to a single
+ # whitespace-collapsed stream with backticks and asterisks stripped, so a hard
+ # wrap, a code span or emphasis cannot hide the claim --
+@@ -39,23 +50,48 @@
+ # connective between them: the same names under the opposite claim ("are
+ # dropped", "are no longer hashed", "No name is hashed because ...") state the
+ # CURRENT rule and are exactly what the replacement text says.
+-superseded_environment_scan() ( # root -> one line per surviving claim
+-  local root="$1" path own
++# No EXIT trap: the wrapper owns one private directory and removes it on every
++# path (see copy_kit in helpers.sh for the trap-scope incident this avoids).
++superseded_environment_scan() ( # root -> one line per surviving claim; exit 1, by name, when the tree cannot be read
++  local work rc
++  work="$(mktemp -d "${TMPDIR:-/tmp}/env-scan.XXXXXX")" || return 1
++  superseded_environment_scan_in "$1" "$work"
++  rc=$?
++  rm -rf -- "$work"
++  return "$rc"
++)
++superseded_environment_scan_in() ( # root work-dir
++  local root path own second rest list="$2/list" content="$2/content" fold=0
+   . "$SCRIPTS/lib.sh"
+   . "$SCRIPTS/verification-lib.sh"
+-  cd "$root" || return 1
+-  git ls-files --cached --others --exclude-standard 2>/dev/null | while IFS= read -r path; do
++  root="$(cd "$1" && pwd -P)" || return 1
++  vf_source_paths "$root" "$list" || { echo "superseded_environment_scan: cannot enumerate $1" >&2; return 1; }
++  # Letter case folds exactly where the identity folds it: OPPONENT.md IS
++  # opponent.md on a folding filesystem, so a case-variant spelling of a
++  # spec's generated record is that record here too.
++  ! vf_case_folds "$root" || fold=1
++  while IFS= read -r -d '' path; do
+     own=''
+-    case "$path" in .specify/specs/*/*) own="${path#.specify/specs/}"; own=".specify/specs/${own%%/*}";; esac
+-    vf_bookkeeping_path "$path" "$own" && continue
++    [[ "$fold" != 1 ]] || shopt -s nocasematch
++    case "$path" in
++      .specify/specs/*/*) second="${path#*/}"; rest="${second#*/}"; own="${path%%/*}/${second%%/*}/${rest%%/*}";;
++    esac
++    shopt -u nocasematch
++    vf_bookkeeping_path "$path" "$own" "$fold" && continue
+     case "$path" in STATUS.md|*/STATUS.md) continue;; esac
+-    [[ -f "$path" ]] || continue
+-    LC_ALL=C awk -v path="$path" '
++    [[ -f "$root/$path" ]] || continue
++    # The bytes the identity hashes for this path, from the function
++    # vf_path_record itself calls: a link's target as it is, a file through
++    # vf_semantic_file.
++    vf_path_content "$root" "$path" "$content" || { echo "superseded_environment_scan: cannot read $path" >&2; return 1; }
++    P="$path" LC_ALL=C awk '
+       function negated(gap) {
+         return gap ~ /(^| )(no|not|never|none|nothing|neither|nor|without)( |[.,;:])/ ||
+                gap ~ /(no longer|instead of|rather than|superseded|dropped|removed|excluded)/
+       }
+-      function report(claim) {printf "%s :: %s\n", path, claim}
++      # The name arrives through the environment, not -v: -v rewrites
++      # backslash escapes and BSD awk refuses a newline in its value.
++      function report(claim) {printf "%s :: %s\n", ENVIRON["P"], claim}
+       # Backticks and asterisks only. Underscores are NOT stripped: `LC_` is a
+       # NAME this guard searches for, and deleting the underscore deletes the
+       # needle -- measured, an `LC_*`-only claim escaped a normalizer that
+@@ -94,14 +130,17 @@
+           rest = after
+         }
+       }
+-    ' "$path"
+-  done
++    ' "$content" || { echo "superseded_environment_scan: cannot scan $path" >&2; return 1; }
++  done < "$list"
+ )
+ 
+ superseded_environment_cases() {
+   local tree name shape reported
+-  # The live tree carries the replacement text and must be clean.
+-  assert_eq '' "$(superseded_environment_scan "$KIT_DIR")" \
++  # The live tree carries the replacement text and must be clean. The scan's
++  # exit is asserted as well as its output: a tree it cannot read prints
++  # nothing, and nothing is exactly what a clean tree prints.
++  reported="$(superseded_environment_scan "$KIT_DIR")" || t_fail 'AC-018: the superseded-rule scan could not read the live tree'
++  assert_eq '' "$reported" \
+     'AC-018: superseded fixed-environment membership survives in a current artifact'
+ 
+   # A guard proven only on the tree it already passes proves nothing, so the
+@@ -151,7 +190,7 @@
+   # D1: line joining alone does not normalize whitespace INSIDE a predicate.
+   # Both a tab and repeated spaces are members of [[:space:]]+.
+   printf '%s\tis\talways  hashed by the snapshot.\n' "$n_path" > "$tree/inner-whitespace.md"
+-  reported="$(superseded_environment_scan "$tree")"
++  reported="$(superseded_environment_scan "$tree")" || t_fail 'AC-018: the scan could not read its fixture tree'
+   for shape in verbatim.md hardwrapped.md backticked.md reordered.md subset.md \
+       other-extension.txt other-extension.yaml captures/basename.md names-first.md \
+       family-only.md inner-whitespace.md; do
+@@ -170,7 +209,7 @@
+   mkdir -p "$tree/.specify/specs/004-y/notes"
+   printf 'The snapshot %s %s and %s.\n' "$v_inc" "$n_path" "$n_tmp" > "$tree/.specify/specs/004-y/notes/opponent.md"
+   printf 'The snapshot %s %s and %s.\n' "$v_inc" "$n_path" "$n_tmp" > "$tree/.specify/specs/004-y/notes/history.md"
+-  reported="$(superseded_environment_scan "$tree")"
++  reported="$(superseded_environment_scan "$tree")" || t_fail 'AC-018: the scan could not read its fixture tree'
+   assert_not_contains "$reported" 'notes/captures/sealed.md' \
+     'AC-018: a sealed bookkeeping copy was treated as a current claim'
+   assert_not_contains "$reported" 'STATUS.md' \
+@@ -202,10 +241,122 @@
+   # passive verb phrase rather than a bare participle.
+   printf 'Any variable the project has not declared — `%sCTYPE` and `%sALL` included, the two most CI images export by default — leaves the source identity byte-identical.\n' \
+     "$n_lc_prefix" "$n_lc_prefix" > "$tree/among-them.md"
+-  assert_eq '' "$(superseded_environment_scan "$tree")" \
++  reported="$(superseded_environment_scan "$tree")" || t_fail 'AC-018: the scan could not read its fixture tree'
++  assert_eq '' "$reported" \
+     'AC-018: the guard flagged a sentence stating the replacement rule'
++
++  # O-015, round 10: the scan reads what the identity hashes, in both
++  # directions. A claim on a spec's Evidence line or on a status:/updated:
++  # frontmatter line is bookkeeping vf_semantic_file drops, so it is neither
++  # reported nor visible to the identity; the same claim on a body line is
++  # both. Visibility is asserted through the function vf_snapshot hashes.
++  local spec_rel=.specify/specs/004-y claim f base quoted
++  claim="$(printf 'the macOS job %s %s and %s shims for Bash 3.2' "$v_inc2" "$n_path" "$n_tmp")"
++  rm -rf "$tree"; mkdir -p "$tree/$spec_rel" "$SANDBOX/env-base"; git -C "$tree" init -q
++  printf -- '---\nstatus: shipped\nupdated: 2026-09-24\n---\n\n# Spec\n' > "$SANDBOX/env-base/spec.md"
++  printf -- '---\nstatus: shipped\nupdated: 2026-09-24\n---\n\n# Plan\n' > "$SANDBOX/env-base/plan.md"
++  printf -- '---\nstatus: in-progress\nupdated: 2026-09-24\n---\n\n- [x] **T001** — Task\n  - *Evidence:* hosted CI green (2026-09-24)\n' \
++    > "$SANDBOX/env-base/tasks.md"
++  printf -- '---\nstatus: shipped  # %s\nupdated: 2026-09-24\n---\n\n# Spec\n' "$claim" > "$tree/$spec_rel/spec.md"
++  printf -- '---\nstatus: shipped\nupdated: 2026-09-24  # %s\n---\n\n# Plan\n' "$claim" > "$tree/$spec_rel/plan.md"
++  printf -- '---\nstatus: in-progress\nupdated: 2026-09-24\n---\n\n- [x] **T001** — Task\n  - *Evidence:* hosted CI green; %s (2026-09-24)\n' \
++    "$claim" > "$tree/$spec_rel/tasks.md"
++  reported="$(superseded_environment_scan "$tree")" || t_fail 'AC-018: the scan could not read its fixture tree'
++  assert_eq '' "$reported" \
++    'AC-020: a claim on a line the identity drops was scanned, so a reusable PASS of this suite could fail (O-015)'
++  for f in spec.md plan.md tasks.md; do
++    base="$(semantic_digest "$spec_rel/$f" "$SANDBOX/env-base/$f")"
++    [[ -n "$base" && "$base" == "$(semantic_digest "$spec_rel/$f" "$tree/$spec_rel/$f")" ]] \
++      || t_fail "AC-020: the identity saw the dropped-line claim in $f, so this fixture no longer isolates O-015"
++  done
++  printf '\n%s.\n' "$claim" >> "$tree/$spec_rel/tasks.md"
++  reported="$(superseded_environment_scan "$tree")" || t_fail 'AC-018: the scan could not read its fixture tree'
++  assert_contains "$reported" "$spec_rel/tasks.md ::" 'AC-018: a claim on a spec body line escaped the scan'
++  base="$(semantic_digest "$spec_rel/tasks.md" "$SANDBOX/env-base/tasks.md")"
++  [[ -n "$base" && "$base" != "$(semantic_digest "$spec_rel/tasks.md" "$tree/$spec_rel/tasks.md")" ]] \
++    || t_fail 'AC-020: a claim on a spec body line was invisible to the identity'
++
++  # Names git quotes when it is not asked for NUL framing -- non-ASCII under
++  # core.quotePath, a double quote, a control character -- are read like any
++  # other name, because the enumeration is the identity's own.
++  for quoted in "caf$(printf '\303\251').md" 'say"hi".md' "tab$(printf '\t')name.md"; do
++    printf 'The snapshot %s %s.\n' "$v_inc2" "$n_path" > "$tree/$quoted"
++  done
++  reported="$(superseded_environment_scan "$tree")" || t_fail 'AC-018: the scan could not read its fixture tree'
++  for quoted in "caf$(printf '\303\251').md" 'say"hi".md' "tab$(printf '\t')name.md"; do
++    assert_contains "$reported" "$quoted ::" "AC-018: a claim in a file whose name git quotes escaped the scan: $quoted"
++  done
++
++  # A tree the enumeration cannot read fails by name. Before O-015 a git
++  # failure printed nothing, and nothing is what a clean tree prints.
++  mkdir -p "$SANDBOX/env-not-a-repo"
++  printf 'The snapshot %s %s.\n' "$v_inc2" "$n_path" > "$SANDBOX/env-not-a-repo/claim.md"
++  run_rc 1 superseded_environment_scan "$SANDBOX/env-not-a-repo"
++  assert_contains "$OUT" 'superseded_environment_scan: cannot enumerate' \
++    'AC-018: a tree outside any repository was read as clean'
++  export GIT_DIR="$SANDBOX/no-such-git-dir"
++  run_rc 1 superseded_environment_scan "$tree"
++  unset GIT_DIR
++  assert_contains "$OUT" 'superseded_environment_scan: cannot enumerate' \
++    'AC-018: a failing git was read as an empty, clean tree'
++  # A subdirectory is not the manifest's root, so git succeeding there is not
++  # enough: its listing would silently narrow the scope to one directory.
++  run_rc 1 superseded_environment_scan "$tree/$spec_rel"
++  assert_contains "$OUT" 'superseded_environment_scan: cannot enumerate' \
++    'AC-018: a repository subdirectory was scanned as if it were the whole source'
++
++  # Round-10 review (B1): letter case folds exactly where the identity folds
++  # it. On a folding filesystem NOTES/Opponent.md IS the spec's generated
++  # notes/opponent.md, which the identity excludes; elsewhere it is an
++  # ordinary file and an input.
++  mkdir -p "$tree/$spec_rel/NOTES"
++  printf 'The snapshot %s %s.\n' "$v_inc2" "$n_path" > "$tree/$spec_rel/NOTES/Opponent.md"
++  reported="$(superseded_environment_scan "$tree")" || t_fail 'AC-018: the scan could not read its fixture tree'
++  if bash -c '. "$1"; vf_case_folds "$2"' _ "$SCRIPTS/verification-lib.sh" "$tree"; then
++    assert_not_contains "$reported" 'NOTES/Opponent.md' \
++      "AC-020: a case-variant spelling of a spec's generated record was scanned on a folding filesystem"
++  else
++    assert_contains "$reported" 'NOTES/Opponent.md ::' \
++      'AC-018: a distinct case-variant file escaped the scan on a case-sensitive filesystem'
++  fi
++  rm -rf "$tree/$spec_rel/NOTES"
++
++  # Round-10 review (B4, B5): every name the identity hashes is read, and a
++  # link is read as the identity reads it -- its target as it is, whatever the
++  # link is named. A name beginning with "-", one holding a newline and one
++  # holding a backslash are reported verbatim; a healthy "-" file is no error.
++  local nl; nl="$(printf '\nx')"; nl="${nl%x}"
++  printf 'Nothing superseded here.\n' > "$tree/-plain.md"
++  for quoted in '-notes.md' "new${nl}line.md" 'back\slash.md'; do
++    printf 'The snapshot %s %s.\n' "$v_inc2" "$n_path" > "$tree/$quoted"
++  done
++  mkdir -p "$SANDBOX/env-outside" "$tree/.specify/specs/005-z"
++  printf -- '- [x] **T001** — Task\n  - *Evidence:* %s\n' "$claim" > "$SANDBOX/env-outside/tasks.md"
++  ln -s "$SANDBOX/env-outside/tasks.md" "$tree/.specify/specs/005-z/tasks.md"
++  reported="$(superseded_environment_scan "$tree")" || t_fail 'AC-018: a healthy tree with unusual names failed the scan'
++  for quoted in '-notes.md' "new${nl}line.md" 'back\slash.md'; do
++    assert_contains "$reported" "$quoted ::" "AC-018: a claim in a file named $quoted escaped the scan"
++  done
++  assert_contains "$reported" '.specify/specs/005-z/tasks.md ::' \
++    "AC-018: a claim the identity hashes through a link's target escaped the scan"
++
++  # A listed file that cannot be read fails by name (skipped where the test
++  # runs with privileges that read a mode-000 file anyway).
++  printf 'The snapshot %s %s.\n' "$v_inc2" "$n_path" > "$tree/locked.md"
++  chmod 000 "$tree/locked.md"
++  if [[ ! -r "$tree/locked.md" ]]; then
++    run_rc 1 superseded_environment_scan "$tree"
++    assert_contains "$OUT" 'superseded_environment_scan: cannot read locked.md' \
++      'AC-018: an unreadable listed file was skipped instead of failing the scan'
++  fi
++  chmod 600 "$tree/locked.md"; rm -f "$tree/locked.md"
+ }
+ 
++semantic_digest() { # <repo-relative path> <file> -> digest of the bytes vf_snapshot hashes for it
++  bash -c '. "$1/lib.sh"; . "$1/verification-lib.sh"; vf_semantic_file "$2" "$3" "$4" && vf_hash "$4"' \
++    _ "$SCRIPTS" "$1" "$2" "$SANDBOX/semantic-digest"
++}
++
+ test_instruction_contracts() {
+   local contract spec plan plan_skill tasks_skill
+   contract="$(cat "$KIT_DIR/templates/verification-contract.md")"
+@@ -241,6 +392,9 @@
+   assert_contains "$contract" '`Prior` is recorded for the reader and never carries the claim.'
+   assert_contains "$contract" 'DERIVED from the CommonMark HTML-block start conditions'
+   assert_contains "$contract" 'exactly `verification_environment:`'
++  # O-015: the obligation every reuse opt-in carries, stated for projects.
++  assert_contains "$contract" 'reads the repository only as the snapshot'
++  assert_contains "$contract" 'off `reuse_checks`'
+   superseded_environment_cases
+ 
+   # AC-004: one explicit grammar admits real shell/custom checks and
+@@ -309,11 +463,16 @@
+ 
+ test_defaults_t009() { defaults_contract monorepo troposphere; }
+ 
++# The overlays and personas are the enumerated ones (kit_files), never a glob
++# that would also judge an ignored local file: this suite is reuse-checked
++# (O-015 review).
+ test_all_overlay_defaults() {
+-  local file
+-  for file in "$KIT_DIR"/templates/stack-overlays/*.md; do
++  local file list="$SANDBOX/overlays"
++  kit_files templates/stack-overlays '*.md' > "$list" || t_fail 'AC-002: cannot enumerate the stack overlays'
++  [[ -s "$list" ]] || t_fail 'AC-002: no stack overlay was enumerated'
++  while IFS= read -r -d '' file; do
+     defaults_contract "$(basename "$file" .md)"
+-  done
++  done < "$list"
+ }
+ 
+ # AC-014: mode instructions retain planning judgment and bound implementation
+@@ -350,7 +509,56 @@
+   brief_contract "$KIT_DIR/agents/test-engineer.md"
+ }
+ 
+-test_all_brief_modes() { brief_contract "$KIT_DIR"/agents/*-expert.md "$KIT_DIR/agents/test-engineer.md"; }
++test_all_brief_modes() {
++  local file list="$SANDBOX/personas" personas=()
++  kit_files agents '*-expert.md' > "$list" || t_fail 'AC-014: cannot enumerate the expert personas'
++  while IFS= read -r -d '' file; do personas+=("$KIT_DIR/$file"); done < "$list"
++  (( ${#personas[@]} > 0 )) || t_fail 'AC-014: no expert persona was enumerated'
++  brief_contract ${personas[@]+"${personas[@]}"} "$KIT_DIR/agents/test-engineer.md"
++}
++
++# O-015 sibling: an ignored local overlay or persona in a developer's kit is
++# not part of the kit, and must not decide the two checks above.
++test_ignored_local_overlays_and_personas_do_not_decide_the_checks() {
++  local host="$SANDBOX/host-kit"
++  make_host_kit "$host" || t_fail 'AC-002: cannot build the host kit'
++  printf 'templates/stack-overlays/zz-local.md\nagents/zz-local-expert.md\n' >> "$host/.git/info/exclude"
++  printf '# local notes, no defaults section\n' > "$host/templates/stack-overlays/zz-local.md"
++  printf '# local persona, no brief modes\n' > "$host/agents/zz-local-expert.md"
++  KIT_DIR="$host" test_all_overlay_defaults
++  KIT_DIR="$host" test_all_brief_modes
++}
++
++# AC-010/AC-017: shipped 002's recorded history, read as the input identity
++# hashes it: an enumerated copy of its notes/ (copy_kit's directory selector),
++# never the directories in place, where an empty FLOOR-* or CAP-* left behind
++# is invisible to the identity yet walked by the tally (O-015 review).
++shipped_002_tally_case() {
++  local rel=.specify/specs/002-usage-limit-handling-for-dispatched-runs copy="$SANDBOX/tally-002"
++  rm -rf "$copy"
++  copy_kit "$KIT_DIR" "$copy" "$rel/notes" || t_fail 'AC-010: cannot copy shipped 002 records as the identity hashes them'
++  run_rc 0 bash "$SCRIPTS/spec-gate.sh" tally "$copy/$rel"
++  assert_contains "$OUT" 'opponent rounds=5'
++  assert_contains "$OUT" 'reality-check rounds=1'
++  assert_contains "$OUT" 'blocking=6 minor=0'
++  assert_contains "$OUT" 'unclassified=6'
++  assert_contains "$OUT" 'finding-observations=6 distinct-finding-ids=6 reopened=0'
++  # AC-017: 002 shipped before sealed execution records existed. Every cost
++  # field reports zero and usage stays unknown; no saving is inferred from its
++  # five rounds.
++  assert_contains "$OUT" 'execution-observations=0 check-executions=0 cache-hits=0 captures=0 full-log-bytes=0 returned-summary-bytes=0 usage=unknown baseline-usage=unknown'
++}
++
++# O-015 sibling: an empty directory under shipped 002's records -- a FLOOR-*
++# or CAP-* left by an interrupted run -- holds no file the identity hashes, and
++# must not decide the 002 tally check.
++test_empty_record_directories_do_not_decide_the_002_tally() {
++  local host="$SANDBOX/host-002" rel=.specify/specs/002-usage-limit-handling-for-dispatched-runs
++  mkdir -p "$host"; git -C "$host" init -q
++  copy_kit "$KIT_DIR" "$host" "$rel/notes" || t_fail 'AC-010: cannot build the host tree'
++  mkdir -p "$host/$rel/notes/verification/floors/FLOOR-zz" "$host/$rel/notes/captures/CAP-9-zz"
++  KIT_DIR="$host" shipped_002_tally_case
++}
+ 
+ report_fixture() {
+   local n="$1" status="$2" verdict="$3" blocks="$4"
+@@ -739,16 +947,7 @@
+   # reopened sequence counts only the reopened class as a recurrence.
+   local spec="$SANDBOX/spec" round insert
+   mkdir -p "$spec/notes"
+-  run_rc 0 bash "$SCRIPTS/spec-gate.sh" tally "$KIT_DIR/.specify/specs/002-usage-limit-handling-for-dispatched-runs"
+-  assert_contains "$OUT" 'opponent rounds=5'
+-  assert_contains "$OUT" 'reality-check rounds=1'
+-  assert_contains "$OUT" 'blocking=6 minor=0'
+-  assert_contains "$OUT" 'unclassified=6'
+-  assert_contains "$OUT" 'finding-observations=6 distinct-finding-ids=6 reopened=0'
+-  # AC-017: 002 shipped before sealed execution records existed. Every cost
+-  # field reports zero and usage stays unknown; no saving is inferred from its
+-  # five rounds.
+-  assert_contains "$OUT" 'execution-observations=0 check-executions=0 cache-hits=0 captures=0 full-log-bytes=0 returned-summary-bytes=0 usage=unknown baseline-usage=unknown'
++  shipped_002_tally_case
+   # O-004 round 7. Round 3 was `resolved CLEARED 0` here: a shipped POSITIVE
+   # asserting rc=0 for a lifecycle whose round 3 resolves O-001 and clears at
+   # zero blockers, and whose round 4 then reopens the very same finding -- a
+--- a/tests/test-verification.sh
++++ b/tests/test-verification.sh
+@@ -377,7 +377,123 @@
+   [[ "$OUT" != "$changed" ]] || t_fail 'AC-020: declared executable mutation missed'
+   capture_validity_cases
+   bookkeeping_anchor_cases
++  outside_layout_anchor_cases
++  kit_copy_cases
++  reuse_command_input_cases
++
++}
++
++# O-015 review: the reuse-checked commands themselves read only what the input
++# identity hashes. In a host kit, tests/run.sh never runs an ignored local
++# suite; tests/shellcheck.sh never lints an ignored local script and reads
++# neither SHELLCHECK_OPTS nor a .shellcheckrc outside the kit; and a suite
++# starts with the kit's own SDD_* and XDG_* knobs cleared.
++reuse_command_input_cases() {
++  local host="$SANDBOX/host-kit"
++  make_host_kit "$host" || t_fail 'AC-020: cannot build the host kit'
++  printf 'tests/test-zz-local.sh\nscripts/zz-local.sh\n' >> "$host/.git/info/exclude"
++  printf '#!/usr/bin/env bash\necho local-suite-ran\nexit 1\n' > "$host/tests/test-zz-local.sh"
++  run_rc 2 bash "$host/tests/run.sh" zz-local
++  assert_contains "$OUT" "no test file matches 'zz-local'" 'AC-020: tests/run.sh ran an ignored local suite'
++  assert_not_contains "$OUT" 'local-suite-ran' 'AC-020: tests/run.sh ran an ignored local suite'
++  if command -v shellcheck > /dev/null 2>&1; then
++    printf '#!/usr/bin/env bash\nunused_value=1\ncd /tmp\n' > "$host/scripts/zz-local.sh"
++    # The host kit's parent is the sandbox, so ShellCheck's upward rc search
++    # would reach this file without --norc.
++    printf 'enable=check-unassigned-uppercase\n' > "$SANDBOX/.shellcheckrc"
++    run_rc 0 env SHELLCHECK_OPTS='--enable=check-unassigned-uppercase' bash "$host/tests/shellcheck.sh"
++    assert_not_contains "$OUT" 'zz-local.sh' 'AC-020: tests/shellcheck.sh linted an ignored local script'
++    # Control: once enumerated, the same script IS linted, so the probe is live.
++    sed '/^scripts\/zz-local\.sh$/d' "$host/.git/info/exclude" > "$SANDBOX/exclude" && cat "$SANDBOX/exclude" > "$host/.git/info/exclude"
++    run_rc 1 bash "$host/tests/shellcheck.sh"
++    assert_contains "$OUT" 'scripts/zz-local.sh' 'AC-020: tests/shellcheck.sh did not lint an enumerated script'
++    rm -f "$SANDBOX/.shellcheckrc"
++  fi
++  run_rc 0 env SDD_RESUME_JITTER_SECONDS=301 XDG_STATE_HOME="$SANDBOX/ambient-state" \
++    bash -c '. "$1/tests/helpers.sh"; [[ -z "${SDD_RESUME_JITTER_SECONDS+set}${XDG_STATE_HOME+set}" ]]' _ "$KIT_DIR"
++}
+ 
++# Round 10's isolation gap: the anchor exists only for .specify/specs/<name>
++# inside the repository. An in-repository spec in any other layout -- a hub's
++# specs/<name> umbrella, say -- gets an EMPTY anchor, which excludes nothing,
++# so its own records are inputs. That is the deny-side direction.
++outside_layout_anchor_cases() {
++  local spec repo outside base
++  spec="$(make_verification_git_dir outside)"
++  repo="$(cd "$spec/../../.." && pwd -P)"
++  outside="$repo/specs/004-outside"
++  mkdir -p "$repo/specs"; cp -R "$spec" "$outside"
++  run_rc 0 bash -c '. "$1"; vf_bookkeeping_anchor "$2" "$3" 0' _ "$SCRIPTS/verification-lib.sh" \
++    "$(cd "$outside" && pwd -P)" "$repo"
++  assert_eq '' "$OUT" 'AC-020: an in-repository spec outside .specify/specs/<name> was given an anchor'
++  run_rc 0 snapshot_fixture "$outside" "$repo" "$SANDBOX/outside-base"
++  base="$OUT"
++  mkdir -p "$outside/notes"; printf '## Round 1\n' >> "$outside/notes/opponent.md"
++  run_rc 0 snapshot_fixture "$outside" "$repo" "$SANDBOX/outside-edited"
++  [[ "$OUT" != "$base" ]] \
++    || t_fail "AC-020: an outside-layout spec's own notes/opponent.md was excluded; an empty anchor excludes nothing"
++}
++
++# O-015 sibling, round 10: copy_kit copies exactly what the identity
++# enumerates. A whole-kit copy made with cp -R carried the host's ignored
++# system-map.yml into the doctor fixture and failed it with the identity
++# unchanged.
++kit_copy_cases() {
++  local src="$SANDBOX/kit-src" dest="$SANDBOX/kit-dest" name present absent
++  name="caf$(printf '\303\251').md"
++  mkdir -p "$src/docs" "$src/build" "$src/bin" "$src/.specify/specs/004-y/notes"
++  git -C "$src" init -q
++  printf 'build/\nmodels.yml\nsystem-map.yml\n' > "$src/.gitignore"
++  printf 'tracked\n' > "$src/docs/tracked.md"
++  printf 'deleted\n' > "$src/docs/deleted.md"
++  printf '#!/usr/bin/env bash\necho run\n' > "$src/bin/run.sh"; chmod 755 "$src/bin/run.sh"
++  printf 'stacks: []\n' > "$src/.specify/stack.yml"
++  printf -- '- [x] **T001** — Task\n  - *Evidence:* dropped by the identity\n' > "$src/.specify/specs/004-y/tasks.md"
++  printf '## Round 1\n' > "$src/.specify/specs/004-y/notes/opponent.md"
++  git -C "$src" add . && git -C "$src" -c user.name=Fixture -c user.email=fixture@example.invalid commit -qm fixture
++  rm "$src/docs/deleted.md"
++  printf 'untracked\n' > "$src/docs/untracked.md"
++  printf 'non-ascii\n' > "$src/docs/$name"
++  ln -s tracked.md "$src/docs/link.md"
++  printf 'repos: [unclosed\n' > "$src/system-map.yml"
++  printf 'tiers: [unclosed\n' > "$src/models.yml"
++  printf 'stale adapter\n' > "$src/build/adapter.md"
++  run_rc 0 copy_kit "$src" "$dest"
++  for present in .gitignore docs/tracked.md docs/untracked.md "docs/$name" bin/run.sh .specify/stack.yml; do
++    [[ -f "$dest/$present" ]] || t_fail "AC-020: copy_kit dropped the enumerated path $present"
++  done
++  cmp -s "$src/docs/tracked.md" "$dest/docs/tracked.md" || t_fail 'AC-020: copy_kit changed the content of a copied file'
++  [[ -x "$dest/bin/run.sh" ]] || t_fail 'AC-020: copy_kit dropped the executable mode of a copied script'
++  [[ -L "$dest/docs/link.md" ]] || t_fail 'AC-020: copy_kit did not keep an enumerated symlink as a link'
++  # Spec directories hold every byte the identity drops, so none is copied.
++  for absent in system-map.yml models.yml build .git docs/deleted.md .specify/specs; do
++    [[ ! -e "$dest/$absent" && ! -L "$dest/$absent" ]] \
++      || t_fail "AC-020: copy_kit carried $absent, which the input identity does not hash verbatim"
++  done
++  # With a directory selector, exactly the enumerated files under it arrive.
++  run_rc 0 copy_kit "$src" "$SANDBOX/kit-selected" .specify/specs/004-y
++  [[ -f "$SANDBOX/kit-selected/.specify/specs/004-y/tasks.md" ]] \
++    || t_fail 'AC-020: copy_kit dropped an enumerated file under the selected directory'
++  for absent in docs bin .specify/stack.yml system-map.yml; do
++    [[ ! -e "$SANDBOX/kit-selected/$absent" ]] || t_fail "AC-020: copy_kit copied $absent outside the selected directory"
++  done
++  # A source the enumeration cannot read fails by name and claims no copy.
++  mkdir -p "$SANDBOX/not-a-kit"; printf 'x\n' > "$SANDBOX/not-a-kit/file.md"
++  run_rc 1 copy_kit "$SANDBOX/not-a-kit" "$SANDBOX/kit-none"
++  assert_contains "$OUT" 'copy_kit: cannot enumerate' 'AC-020: an unreadable kit was copied as if it were whole'
++  # A subdirectory of a repository is not a kit root: git succeeds there, but
++  # its listing is not the identity's enumeration.
++  run_rc 1 copy_kit "$src/docs" "$SANDBOX/kit-sub"
++  assert_contains "$OUT" 'copy_kit: cannot enumerate' 'AC-020: a repository subdirectory was copied as a whole kit'
++  # 2026-09-24: an earlier copy_kit's EXIT trap, fired on `exit` from inside a
++  # command substitution, read the CALLER's variables and removed a caller's
++  # relative path -- the live .specify/stack.yml. A failing copy_kit run that
++  # way must leave every caller-scope path alone.
++  printf 'keep\n' > "$SANDBOX/sentinel"
++  # shellcheck disable=SC2034  # caller-scope names the helper must never read
++  ( cd "$SANDBOX" && list=sentinel present=sentinel work=sentinel tmp=sentinel path=sentinel \
++      && out="$(copy_kit "$SANDBOX/not-a-kit" "$SANDBOX/kit-none" 2>&1)"; : "$out" )
++  [[ -f "$SANDBOX/sentinel" ]] || t_fail "AC-020: a failing copy_kit removed a path named by its caller's variables"
+ }
+ 
+ capture_check_fixture() {
+--- a/tests/test-sdd-analyze.sh
++++ b/tests/test-sdd-analyze.sh
+@@ -170,7 +170,7 @@
+ 
+ test_verification_bindings() {
+   local spec_dir catalog value fields index record_types mapped_one=0 mapped_two=0
+-  local fixture shipped shipped_count=0
++  local fixture shipped_count=0
+ 
+   # AC-001/AC-003/AC-004: concrete shared rows and every explicit proof kind
+   # are valid at task handoff even before their planned test files exist.
+@@ -507,18 +507,110 @@
+   run_rc 0 "$ANALYZE" "$spec_dir"
+   assert_not_contains "$OUT" 'untyped AC Verify' 'AC-004: shell test runners need no framework wrapper'
+ 
+-  # AC-023: run the actual shipped artifacts unchanged in an isolated project
+-  # with local persona stubs so the test does not depend on an installed hub.
+-  for shipped in "$KIT_DIR"/.specify/specs/001-* "$KIT_DIR"/.specify/specs/002-*; do
+-    [[ -d "$shipped" ]] || continue
++  # AC-023: run the actual shipped artifacts in an isolated project with local
++  # persona stubs so the test does not depend on an installed hub.
++  local rel002='' root="$SANDBOX/shipped" probe diag i
++  shipped_specs_case
++
++  # O-015 sibling, round 10, both directions, built from the identity's own
++  # view so the fixture cannot depend on a dropped byte: 002's tasks.md as
++  # vf_path_content yields it, with the probe placed after its first task
++  # header, a hashed line. On an Evidence line the identity drops the probe,
++  # so the verdict cannot move; on a body line it is source, and must. Before
++  # the repair an Agent field marker or an unclosed comment opener on an
++  # Evidence line failed the analyzer with the identity unchanged. The RAW
++  # artifact would still fail on that line, because the analyzer reads a
++  # field from any line carrying its marker: a field-grammar defect recorded
++  # in Decisions and deliberately left open, so this certifies the identity's
++  # view and not the raw file.
++  [[ -n "$rel002" ]] || t_fail 'AC-023: shipped 002 is not in the identity enumeration'
++  for i in 1 2; do
++    case "$i" in
++      1) probe='cross-checked with *Agent:* agents/opponent-retired.md'
++         diag='opponent gate agent file not found: agents/opponent-retired.md';;
++      2) probe='<!-- earlier wording kept for the record'
++         diag='opponent gate task not found';;
++    esac
++    rm -rf "$root"; mkdir -p "$root/$rel002"
++    for value in spec.md plan.md tasks.md STATUS.md; do
++      bash -c '. "$1/verification-lib.sh"; vf_path_content "$2" "$3" "$4"' \
++        _ "$SCRIPTS" "$KIT_DIR" "$rel002/$value" "$root/$rel002/$value" \
++        || t_fail "AC-023: cannot read $rel002/$value as the identity hashes it"
++    done
++    cp "$root/$rel002/tasks.md" "$SANDBOX/hashed-tasks"
++    awk -v p="$probe" '!done && /^- \[[ xX~]\] \*\*T[0-9]/ {print; print "  - *Evidence:* " p; done=1; next} {print}' \
++      "$SANDBOX/hashed-tasks" > "$root/$rel002/tasks.md"
++    assert_eq 1 "$(grep -c -F -- "$probe" "$root/$rel002/tasks.md")" 'AC-023: the Evidence-line probe was not placed'
++    shipped_analyzer_case "$root" "$rel002" 0
++    assert_contains "$OUT" 'legacy verification contract remains compatible' \
++      "AC-023: in the identity's view, text on a shipped Evidence line broke compatibility: $probe"
++    assert_not_contains "$OUT" "$diag" \
++      "AC-023: in the identity's view, text on a shipped Evidence line changed the analyzer verdict: $probe"
++    awk -v p="$probe" '!done && /^- \[[ xX~]\] \*\*T[0-9]/ {print; print "  " p; done=1; next} {print}' \
++      "$SANDBOX/hashed-tasks" > "$root/$rel002/tasks.md"
++    assert_eq 1 "$(grep -c -F -- "$probe" "$root/$rel002/tasks.md")" 'AC-023: the body-line probe was not placed'
++    shipped_analyzer_case "$root" "$rel002" 1
++    assert_contains "$OUT" "$diag" "AC-023: the same text on a body line did not reach the analyzer: $probe"
++  done
++}
++
++# AC-023: both the shipped set and each artifact are read as the input identity
++# reads them: which specs exist comes from vf_source_paths, never a directory
++# glob that an ignored or empty leftover would satisfy, and each file's bytes
++# come from vf_path_content (shipped_analyzer_case). Counts into the caller's
++# shipped_count and names shipped 002 in the caller's rel002.
++shipped_specs_case() {
++  local path name rel
++  bash -c '. "$1/verification-lib.sh"; vf_source_paths "$2" "$3"' \
++    _ "$SCRIPTS" "$(cd "$KIT_DIR" && pwd -P)" "$SANDBOX/kit-paths" \
++    || t_fail 'AC-023: cannot enumerate the kit as the input identity does'
++  : > "$SANDBOX/shipped-rels"
++  while IFS= read -r -d '' path; do
++    case "$path" in .specify/specs/001-*/tasks.md|.specify/specs/002-*/tasks.md) ;; *) continue;; esac
++    name="${path#.specify/specs/}"; name="${name%/tasks.md}"
++    [[ "$name" != */* ]] || continue
++    printf '%s\0' ".specify/specs/$name" >> "$SANDBOX/shipped-rels"
++    [[ "$name" != 002-* ]] || rel002=".specify/specs/$name"
++  done < "$SANDBOX/kit-paths"
++  while IFS= read -r -d '' rel; do
+     shipped_count=$((shipped_count+1))
+-    spec_dir="$(make_spec_dir)"
+-    for value in spec.md plan.md tasks.md STATUS.md; do cp "$shipped/$value" "$spec_dir/$value"; done
+-    verification_edit_fixture "$spec_dir/tasks.md" 's|~/.sdd/agents/|agents/|g'
+-    run_rc 0 "$ANALYZE" "$spec_dir"
++    shipped_analyzer_case "$KIT_DIR" "$rel" 0
+     assert_contains "$OUT" 'legacy verification contract remains compatible' 'AC-023: shipped artifact compatibility is not current freshness'
+-  done
++  done < "$SANDBOX/shipped-rels"
+   assert_eq 2 "$shipped_count" 'AC-023: both shipped specs were actually checked'
+ }
+ 
++# O-015 review: a spec directory the identity never sees -- one left empty by
++# a branch switch, or one whose files git ignores -- is not a shipped spec and
++# must not decide the AC-023 loop.
++test_leftover_spec_directories_do_not_decide_the_shipped_loop() {
++  local host="$SANDBOX/host-specs" shipped_count=0 rel002='' spec
++  mkdir -p "$host"; git -C "$host" init -q
++  for spec in "$KIT_DIR"/.specify/specs/001-* "$KIT_DIR"/.specify/specs/002-*; do
++    copy_kit "$KIT_DIR" "$host" ".specify/specs/${spec##*/}" || t_fail 'AC-023: cannot build the host tree'
++  done
++  mkdir -p "$host/.specify/specs/002-zz-scratch" "$host/.specify/specs/001-stale"
++  printf '.specify/specs/001-stale/\n' >> "$host/.git/info/exclude"
++  cp "$KIT_DIR/.specify/specs/${spec##*/}/tasks.md" "$host/.specify/specs/001-stale/tasks.md"
++  KIT_DIR="$host" shipped_specs_case
++}
++
++# AC-023/O-015: the analyzer reads each shipped artifact as the input identity
++# hashes it -- through vf_path_content, the function vf_path_record calls --
++# because this suite is reuse-checked and a reused PASS must be a function of
++# that identity. The lines the identity drops (Evidence lines, checkbox state,
++# status:/updated:, STATUS outside its Decisions log) are REQ-009 bookkeeping,
++# not part of the compatibility claim.
++shipped_analyzer_case() { # <repository root> <repo-relative spec dir> <expected exit>; sets OUT
++  local spec_dir value
++  spec_dir="$(make_spec_dir)"
++  for value in spec.md plan.md tasks.md STATUS.md; do
++    bash -c '. "$1/verification-lib.sh"; vf_path_content "$2" "$3" "$4"' \
++      _ "$SCRIPTS" "$1" "$2/$value" "$spec_dir/$value" \
++      || t_fail "AC-023: cannot read $2/$value as the identity hashes it"
++  done
++  verification_edit_fixture "$spec_dir/tasks.md" 's|~/.sdd/agents/|agents/|g'
++  run_rc "$3" "$ANALYZE" "$spec_dir"
++}
++
+ t_run_all
+--- a/tests/test-usage-limits.sh
++++ b/tests/test-usage-limits.sh
+@@ -895,7 +895,9 @@
+   DOCTOR_ROOT="$SANDBOX/doctor-resume-root"
+   DOCTOR_SCHEDULER="$SANDBOX/doctor-resume-scheduler"
+   DOCTOR_JOBS="$SANDBOX/doctor-scheduler-jobs"
+-  cp -R "$KIT_DIR" "$DOCTOR_KIT"
++  # The kit as the input identity sees it: a host's machine-local system-map.yml,
++  # models.yml or build/ must not decide this reuse-checked verdict (O-015).
++  copy_kit "$KIT_DIR" "$DOCTOR_KIT" || t_fail 'AC-009: cannot copy the kit for the doctor fixture'
+   mkdir -p "$DOCTOR_HOME" "$DOCTOR_BIN" "$DOCTOR_ROOT" "$DOCTOR_KIT/build"
+   : > "$DOCTOR_KIT/registry.yml"
+   : > "$DOCTOR_KIT/build/.stamp"
+@@ -996,6 +998,28 @@
+     "AC-009: doctor reports a unit-without-job orphan"
+   assert_contains "$OUT" "resume orphan: scheduler job $job_only has no resume unit" \
+     "AC-009: doctor reports a job-without-unit orphan"
++}
++
++# O-015 sibling, round 10: the doctor fixture copies the kit as the input
++# identity enumerates it. A host kit's machine-local system-map.yml and
++# models.yml are ignored and unhashed, and this suite is reuse-checked, so
++# neither may reach the fixture. Before the repair the fixture's cp -R carried
++# an invalid system-map.yml in and failed the doctor with the identity unchanged.
++test_AC_009_doctor_fixture_excludes_machine_local_kit_files() {
++  local host="$SANDBOX/host-kit" name
++  copy_kit "$KIT_DIR" "$host" || t_fail 'AC-009: cannot build the host kit'
++  git -C "$host" init -q
++  printf 'repos: [unclosed\n' > "$host/system-map.yml"
++  printf 'tiers: [unclosed\n' > "$host/models.yml"
++  KIT_DIR="$host" doctor_fixture
++  for name in system-map.yml models.yml; do
++    [[ ! -e "$DOCTOR_KIT/$name" ]] || t_fail "AC-009: the doctor fixture carried the host's ignored $name"
++  done
++  run_rc 0 run_doctor
++  assert_not_contains "$OUT" 'system-map.yml invalid' \
++    "AC-009: the host's ignored system-map.yml decided the doctor verdict"
++  assert_contains "$OUT" 'models.yml not configured' \
++    "AC-009: the host's ignored models.yml reached the doctor fixture"
+ }
+ 
+ # AC-010: public policy docs must stay aligned with the parser and preserve the
+--- a/tests/test-model-policy.sh
++++ b/tests/test-model-policy.sh
+@@ -149,7 +149,8 @@
+ test_AC_008_usage_limit_policy_wizard_preserves_ordered_fallback() {
+   local kit p home transcript policy
+   kit="$SANDBOX/kit"; home="$SANDBOX/home"; transcript="$SANDBOX/wizard.typescript"
+-  cp -R "$KIT_DIR" "$kit"
++  # The kit as the input identity sees it, never the host's machine-local files (O-015).
++  copy_kit "$KIT_DIR" "$kit" || t_fail 'AC-008: cannot copy the kit for the wizard fixture'
+   p="$kit/models.yml"
+   mkdir -p "$home"
+   cat > "$p" <<'EOF'
+--- a/tests/test-build-adapters.sh
++++ b/tests/test-build-adapters.sh
+@@ -10,17 +10,23 @@
+ KIT_MARKER="# Generated by sdd-kit (build-adapters.sh) from models.yml — do not edit."
+ 
+ # stage_kit — kit copy in $SANDBOX/kit with a minimal models.yml; fresh
+-# $SANDBOX/home with .codex and .copilot. Echoes the kit path.
++# $SANDBOX/home with .codex and .copilot. Echoes the kit path. The copy is the
++# kit as the input identity enumerates it (copy_kit): this suite is
++# reuse-checked, so a developer's ignored models.yml, build/ or registry.yml
++# must not reach it (O-015 review).
+ stage_kit() {
+   local kit="$SANDBOX/kit"
+   mkdir -p "$kit" "$SANDBOX/home/.codex" "$SANDBOX/home/.copilot"
+-  (cd "$KIT_DIR" && tar -cf - --exclude .git --exclude .specify --exclude '*.worktrees' .) \
+-    | (cd "$kit" && tar -xf -)
++  copy_kit "$KIT_DIR" "$kit" >&2 || { echo 'stage_kit: cannot stage the kit copy' >&2; return 1; }
+   write_policy_file "$kit"
+   echo "$kit"
+ }
+ 
++# The policy is written as a new file, never through whatever already sits at
++# that name: a symlinked models.yml would otherwise be followed out of the
++# sandbox and overwrite its target.
+ write_policy_file() {
++  rm -f "$1/models.yml"
+   cat > "$1/models.yml" <<'EOF'
+ tiers:
+   reasoning:
+@@ -218,4 +224,29 @@
+   assert_contains "$(cat "$SANDBOX/home/.codex/agents/sdd-reality-check.toml")" 'carried (round n)'
+ }
+ 
++# O-015 sibling: a developer's ignored models.yml -- here a symlink to a real
++# policy outside the kit -- neither reaches the staged kit nor is written
++# through. Before the repair it flipped four tests through a relative link and,
++# through an absolute one, the fixture policy overwrote the link's target.
++test_stage_kit_excludes_and_never_writes_through_a_host_models_yml() {
++  local host="$SANDBOX/host-kit" target="$SANDBOX/dotfiles/models.yml" before kit
++  make_host_kit "$host" || t_fail 'cannot build the host kit'
++  mkdir -p "$SANDBOX/dotfiles" "$SANDBOX/link-kit"
++  cp "$KIT_DIR/models.example.yml" "$target"
++  before="$(cksum < "$target")"
++  ln -s "$target" "$host/models.yml"
++  printf 'projects: [unclosed\n' > "$host/registry.yml"
++  kit="$(KIT_DIR="$host" stage_kit)"
++  [[ -f "$kit/models.yml" && ! -L "$kit/models.yml" ]] \
++    || t_fail "stage_kit carried the host's ignored models.yml link into the staged kit"
++  [[ ! -e "$kit/registry.yml" ]] || t_fail "stage_kit carried the host's ignored registry.yml into the staged kit"
++  assert_eq "$before" "$(cksum < "$target")" "staging the kit wrote through the host's models.yml link"
++  # The writer alone, handed a link, replaces it instead of following it.
++  ln -s "$target" "$SANDBOX/link-kit/models.yml"
++  write_policy_file "$SANDBOX/link-kit"
++  [[ -f "$SANDBOX/link-kit/models.yml" && ! -L "$SANDBOX/link-kit/models.yml" ]] \
++    || t_fail 'write_policy_file left models.yml a link'
++  assert_eq "$before" "$(cksum < "$target")" 'write_policy_file wrote through a models.yml link'
++}
++
+ t_run_all
+--- a/tests/test-executable-bits.sh
++++ b/tests/test-executable-bits.sh
+@@ -9,12 +9,27 @@
+ 
+ # AC-011: every script that can be invoked directly, including the new limit
+ # classifier, readiness seam, and resume tools, must retain its executable bit.
++# The scripts are the enumerated ones (kit_files), never a glob that would also
++# judge an ignored local file: this suite is reuse-checked (O-015 review).
+ test_AC_011_every_kit_script_is_executable() {
+-  local f bad=""
+-  for f in "$KIT_DIR"/scripts/*.sh "$KIT_DIR"/tests/run.sh; do
+-    [[ -x "$f" ]] || bad="$bad ${f##*/}"
+-  done
++  local f bad="" list="$SANDBOX/kit-scripts"
++  { kit_files scripts '*.sh' && kit_files tests 'run.sh'; } > "$list" \
++    || t_fail 'AC-011: cannot enumerate the kit scripts'
++  [[ -s "$list" ]] || t_fail 'AC-011: no kit script was enumerated'
++  while IFS= read -r -d '' f; do
++    [[ -x "$KIT_DIR/$f" ]] || bad="$bad ${f##*/}"
++  done < "$list"
+   [[ -z "$bad" ]] || t_fail "tracked without the executable bit:$bad"
+ }
+ 
++# O-015 sibling: an ignored, non-executable script in a developer's kit is not
++# a kit script, and must not decide the check above.
++test_AC_011_ignored_local_scripts_do_not_decide_the_executable_check() {
++  local host="$SANDBOX/host-kit"
++  make_host_kit "$host" || t_fail 'AC-011: cannot build the host kit'
++  printf 'scripts/zz-local.sh\n' >> "$host/.git/info/exclude"
++  printf 'echo local\n' > "$host/scripts/zz-local.sh"; chmod 644 "$host/scripts/zz-local.sh"
++  KIT_DIR="$host" test_AC_011_every_kit_script_is_executable
++}
++
+ t_run_all
+--- a/.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md
++++ b/.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md
+@@ -712,6 +712,16 @@
+   - *Refs:* REQ-011, REQ-015, AC-012, AC-017, AC-018, FM-019, INV-006, plan §3.3, §4.3
+   - *Notes:* Owns round-9 O-014 and both Held-up isolation gaps. Shares T030o39's Verify command so one capture on unchanged source can serve both acceptances. No gate round, floor or hosted-CI run is part of this task.
+   - *Evidence:* CAP-411-B8GLAC verified by spec-gate accept; return sha256:9e9938a290947e9052071c2506952b052f323a5ccd4de9141aa1b9391ae86202
++
++- [ ] **T030o41** [hard] — Make every reuse-checked reader read what the input identity hashes
++  - *Files:* `scripts/verification-lib.sh`, `templates/verification-contract.md`, `README.md`, `.specify/stack.yml`, `.github/workflows/ci.yml`, `.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md`, `tests/helpers.sh`, `tests/run.sh`, `tests/shellcheck.sh` (new), `tests/test-gate-contracts.sh`, `tests/test-verification.sh`, `tests/test-sdd-analyze.sh`, `tests/test-usage-limits.sh`, `tests/test-model-policy.sh`, `tests/test-build-adapters.sh`, `tests/test-executable-bits.sh`
++  - *Acceptance:* Derive the obligation from the identity (REQ-009, AC-020): a reuse-checked command's verdict is a function of the input identity, so it reads the repository only as `vf_snapshot` hashes it. Paths come from one enumeration function, `vf_source_paths` (Git worktree root required, NUL-framed `git ls-files --cached --others --exclude-standard`, a git failure is a failure), which `vf_snapshot`'s path pass also calls; content comes from `vf_path_content` (a link's target as it is, a file through `vf_semantic_file`, always from the repository-rooted path), which `vf_path_record` also calls; both leave the identity's records unchanged. The readers are derived from the production, not the reports: the reuse-checked commands' own file lists, every glob a suite makes over the live kit, whole-kit copies and the scripts run on them, spec records read in place, and the environment and configuration the programs consult. So `tests/run.sh` lists suites through `vf_source_paths`; `tests/shellcheck.sh` runs ShellCheck over the enumerated `scripts/*.sh` and `tests/*.sh` with `SHELLCHECK_OPTS` unset and `--norc`, and is the ShellCheck command everywhere; live-kit globs in suites come from a `kit_files` helper; the O-010 scan folds case where the identity does and reads every name; the AC-023 loop takes its shipped set from the enumeration and each artifact from `vf_path_content`; `copy_kit` copies the enumerated hub content without `.specify/specs/`, is used for every whole-kit copy, and never uses an EXIT trap; `stage_kit`'s writer never writes through a link; the 002 tally test reads an enumerated copy of 002's `notes/`; suites start with every `SDD_*` and `XDG_*` variable unset. Each site has a fixture in both directions against a host kit or tree carrying the ignored, directory-shaped, differently-spelled or ambient input, with exact diagnostics, and an in-repository spec in a hub-style `specs/` directory, outside `.specify/specs/`, has an empty anchor.
++  - *Verify kind:* test
++  - *Tests:* `tests/test-gate-contracts.sh::test_instruction_contracts`, `tests/test-verification.sh::test_capture_provenance`, `tests/test-sdd-analyze.sh::test_verification_bindings`, `tests/test-gate-contracts.sh::test_reports_and_tally`
++  - *Verify:* `bash tests/run.sh && bash tests/shellcheck.sh` → all suites `passed`, exit 0
++  - *Reuse:* local
++  - *Refs:* REQ-009, AC-010, AC-018, AC-020, AC-023, FM-002, FM-010, FM-014, FM-019, INV-001, INV-006, plan §3.2, §4.2
++  - *Notes:* Owns round-10 O-015 and the round-10 Held-up isolation gap, plus the sibling readers the report did not name: two reproduced before repair (`notes/verification/reports/o015-repro.{sh,log,rc}`) and the rest found by the two independent review passes (`notes/verification/reports/t030o41-review.md`). The user chose one task and then chose to expand it to every measured member (Decisions, 2026-09-24). Changing T027's Verify to the pinned ShellCheck command makes T027's sealed acceptance historical. No gate round, floor or hosted-CI run is part of this task.
+ 
+ ## API
+ 
+@@ -766,7 +776,7 @@
+   - *Acceptance:* Add cross-component AC-007/AC-008/AC-013/AC-015/AC-019 integration cases composing existing local tests, enumerate all overlays/personas, regenerate final adapters in sandboxes and retain actual suite/ShellCheck platform evidence without treating a local run as the remote matrix.
+   - *Verify kind:* test
+   - *Tests:* `tests/test-gate-contracts.sh::test_invoker_protocol`, `tests/test-spec-gate.sh::test_floor`, `tests/test-spec-gate.sh::test_checkpoints`, `tests/test-verification.sh::test_capture_provenance`, `tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-gate-contracts.sh::test_instruction_contracts`, `tests/test-build-adapters.sh::test_brief_modes`, `tests/test-spec-run.sh::test_bounded_capture`
+-  - *Verify:* `bash tests/run.sh && shellcheck -S warning -x scripts/*.sh tests/*.sh` → all suites `passed`, exit 0
++  - *Verify:* `bash tests/run.sh && bash tests/shellcheck.sh` → all suites `passed`, exit 0
+   - *Reuse:* local
+   - *Refs:* REQ-001, REQ-003, REQ-007, REQ-008, REQ-009, REQ-013, REQ-014, AC-002, AC-007, AC-008, AC-013, AC-014, AC-015, AC-019, FM-002, FM-007, FM-012, FM-013, INV-001, INV-004, plan §5, §7, §8
+   - *Notes:* AC-019 needs actual Linux/macOS/Bash-3.2 execution evidence before T031 READY, plus the normal PR CI afterward; if no authorized executor is available, stop implementation and request an execution route rather than inventing a PASS.

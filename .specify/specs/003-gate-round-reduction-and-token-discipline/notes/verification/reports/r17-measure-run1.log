@@ -1,0 +1,1315 @@
+start 2026-10-08T13:52:01Z; host: Darwin 25.4.0; bash on PATH: GNU bash, version 3.2.57(1)-release (arm64-apple-darwin25); TMPDIR=/private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/06f7a0b3-b652-4da3-832e-aad664056a31/scratchpad/r17-measure/tmp/
+PASS CUR: the four files hash as r17-edits/pre-apply
+PASS D: kernel-1.pairs applied, each block exactly once
+PASS D: vc-1.pairs applied, each block exactly once
+PASS D: the kernel still parses
+PASS D: only the two candidate files differ from CUR
+== A: the cases of r17-repro.sh and the derived siblings, both passes; each member is refused by name on D
+  | A M a1-pre C: CUR rc=0 
+  | A M a1-pre en_US.UTF-8: CUR rc=0 
+  | A K a1-pre C: CUR rc=0 
+  | A K a1-pre en_US.UTF-8: CUR rc=0 
+PASS A M a1-pre C: CUR rc
+PASS A M a1-pre C: D rc
+PASS A M a1-pre C: D says
+PASS A M a1-pre C: CUR stderr empty
+PASS A M a1-pre en_US.UTF-8: CUR rc
+PASS A M a1-pre en_US.UTF-8: D rc
+PASS A M a1-pre en_US.UTF-8: D says
+PASS A M a1-pre en_US.UTF-8: CUR stderr empty
+PASS A K a1-pre C: CUR rc
+PASS A K a1-pre C: D rc
+PASS A K a1-pre C: D says
+PASS A K a1-pre C: CUR stderr empty
+PASS A K a1-pre en_US.UTF-8: CUR rc
+PASS A K a1-pre en_US.UTF-8: D rc
+PASS A K a1-pre en_US.UTF-8: D says
+PASS A K a1-pre en_US.UTF-8: CUR stderr empty
+  | A M a1b-hgroup C: CUR rc=0 
+  | A M a1b-hgroup en_US.UTF-8: CUR rc=0 
+  | A K a1b-hgroup C: CUR rc=0 
+  | A K a1b-hgroup en_US.UTF-8: CUR rc=0 
+PASS A M a1b-hgroup C: CUR rc
+PASS A M a1b-hgroup C: D rc
+PASS A M a1b-hgroup C: D says
+PASS A M a1b-hgroup C: CUR stderr empty
+PASS A M a1b-hgroup en_US.UTF-8: CUR rc
+PASS A M a1b-hgroup en_US.UTF-8: D rc
+PASS A M a1b-hgroup en_US.UTF-8: D says
+PASS A M a1b-hgroup en_US.UTF-8: CUR stderr empty
+PASS A K a1b-hgroup C: CUR rc
+PASS A K a1b-hgroup C: D rc
+PASS A K a1b-hgroup C: D says
+PASS A K a1b-hgroup C: CUR stderr empty
+PASS A K a1b-hgroup en_US.UTF-8: CUR rc
+PASS A K a1b-hgroup en_US.UTF-8: D rc
+PASS A K a1b-hgroup en_US.UTF-8: D says
+PASS A K a1b-hgroup en_US.UTF-8: CUR stderr empty
+  | A M a1c-listing C: CUR rc=0 
+  | A M a1c-listing en_US.UTF-8: CUR rc=0 
+  | A K a1c-listing C: CUR rc=0 
+  | A K a1c-listing en_US.UTF-8: CUR rc=0 
+PASS A M a1c-listing C: CUR rc
+PASS A M a1c-listing C: D rc
+PASS A M a1c-listing C: D says
+PASS A M a1c-listing C: CUR stderr empty
+PASS A M a1c-listing en_US.UTF-8: CUR rc
+PASS A M a1c-listing en_US.UTF-8: D rc
+PASS A M a1c-listing en_US.UTF-8: D says
+PASS A M a1c-listing en_US.UTF-8: CUR stderr empty
+PASS A K a1c-listing C: CUR rc
+PASS A K a1c-listing C: D rc
+PASS A K a1c-listing C: D says
+PASS A K a1c-listing C: CUR stderr empty
+PASS A K a1c-listing en_US.UTF-8: CUR rc
+PASS A K a1c-listing en_US.UTF-8: D rc
+PASS A K a1c-listing en_US.UTF-8: D says
+PASS A K a1c-listing en_US.UTF-8: CUR stderr empty
+  | A M b2-xmp C: CUR rc=0 
+  | A M b2-xmp en_US.UTF-8: CUR rc=0 
+  | A K b2-xmp C: CUR rc=0 
+  | A K b2-xmp en_US.UTF-8: CUR rc=0 
+PASS A M b2-xmp C: CUR rc
+PASS A M b2-xmp C: D rc
+PASS A M b2-xmp C: D says
+PASS A M b2-xmp C: CUR stderr empty
+PASS A M b2-xmp en_US.UTF-8: CUR rc
+PASS A M b2-xmp en_US.UTF-8: D rc
+PASS A M b2-xmp en_US.UTF-8: D says
+PASS A M b2-xmp en_US.UTF-8: CUR stderr empty
+PASS A K b2-xmp C: CUR rc
+PASS A K b2-xmp C: D rc
+PASS A K b2-xmp C: D says
+PASS A K b2-xmp C: CUR stderr empty
+PASS A K b2-xmp en_US.UTF-8: CUR rc
+PASS A K b2-xmp en_US.UTF-8: D rc
+PASS A K b2-xmp en_US.UTF-8: D says
+PASS A K b2-xmp en_US.UTF-8: CUR stderr empty
+  | A M b3-plaintext C: CUR rc=0 
+  | A M b3-plaintext en_US.UTF-8: CUR rc=0 
+  | A K b3-plaintext C: CUR rc=0 
+  | A K b3-plaintext en_US.UTF-8: CUR rc=0 
+PASS A M b3-plaintext C: CUR rc
+PASS A M b3-plaintext C: D rc
+PASS A M b3-plaintext C: D says
+PASS A M b3-plaintext C: CUR stderr empty
+PASS A M b3-plaintext en_US.UTF-8: CUR rc
+PASS A M b3-plaintext en_US.UTF-8: D rc
+PASS A M b3-plaintext en_US.UTF-8: D says
+PASS A M b3-plaintext en_US.UTF-8: CUR stderr empty
+PASS A K b3-plaintext C: CUR rc
+PASS A K b3-plaintext C: D rc
+PASS A K b3-plaintext C: D says
+PASS A K b3-plaintext C: CUR stderr empty
+PASS A K b3-plaintext en_US.UTF-8: CUR rc
+PASS A K b3-plaintext en_US.UTF-8: D rc
+PASS A K b3-plaintext en_US.UTF-8: D says
+PASS A K b3-plaintext en_US.UTF-8: CUR stderr empty
+  | A M a2-link-br C: CUR rc=0 
+  | A M a2-link-br en_US.UTF-8: CUR rc=0 
+  | A K a2-link-br C: CUR rc=0 
+  | A K a2-link-br en_US.UTF-8: CUR rc=0 
+PASS A M a2-link-br C: CUR rc
+PASS A M a2-link-br C: D rc
+PASS A M a2-link-br C: D says
+PASS A M a2-link-br C: CUR stderr empty
+PASS A M a2-link-br en_US.UTF-8: CUR rc
+PASS A M a2-link-br en_US.UTF-8: D rc
+PASS A M a2-link-br en_US.UTF-8: D says
+PASS A M a2-link-br en_US.UTF-8: CUR stderr empty
+PASS A K a2-link-br C: CUR rc
+PASS A K a2-link-br C: D rc
+PASS A K a2-link-br C: D says
+PASS A K a2-link-br C: CUR stderr empty
+PASS A K a2-link-br en_US.UTF-8: CUR rc
+PASS A K a2-link-br en_US.UTF-8: D rc
+PASS A K a2-link-br en_US.UTF-8: D says
+PASS A K a2-link-br en_US.UTF-8: CUR stderr empty
+  | A M b4-link-p C: CUR rc=0 
+  | A M b4-link-p en_US.UTF-8: CUR rc=0 
+  | A K b4-link-p C: CUR rc=0 
+  | A K b4-link-p en_US.UTF-8: CUR rc=0 
+PASS A M b4-link-p C: CUR rc
+PASS A M b4-link-p C: D rc
+PASS A M b4-link-p C: D says
+PASS A M b4-link-p C: CUR stderr empty
+PASS A M b4-link-p en_US.UTF-8: CUR rc
+PASS A M b4-link-p en_US.UTF-8: D rc
+PASS A M b4-link-p en_US.UTF-8: D says
+PASS A M b4-link-p en_US.UTF-8: CUR stderr empty
+PASS A K b4-link-p C: CUR rc
+PASS A K b4-link-p C: D rc
+PASS A K b4-link-p C: D says
+PASS A K b4-link-p C: CUR stderr empty
+PASS A K b4-link-p en_US.UTF-8: CUR rc
+PASS A K b4-link-p en_US.UTF-8: D rc
+PASS A K b4-link-p en_US.UTF-8: D says
+PASS A K b4-link-p en_US.UTF-8: CUR stderr empty
+  | A M a3-escbs-codespan C: CUR rc=0 
+  | A M a3-escbs-codespan en_US.UTF-8: CUR rc=0 
+  | A K a3-escbs-codespan C: CUR rc=0 
+  | A K a3-escbs-codespan en_US.UTF-8: CUR rc=0 
+PASS A M a3-escbs-codespan C: CUR rc
+PASS A M a3-escbs-codespan C: D rc
+PASS A M a3-escbs-codespan C: D says
+PASS A M a3-escbs-codespan C: CUR stderr empty
+PASS A M a3-escbs-codespan en_US.UTF-8: CUR rc
+PASS A M a3-escbs-codespan en_US.UTF-8: D rc
+PASS A M a3-escbs-codespan en_US.UTF-8: D says
+PASS A M a3-escbs-codespan en_US.UTF-8: CUR stderr empty
+PASS A K a3-escbs-codespan C: CUR rc
+PASS A K a3-escbs-codespan C: D rc
+PASS A K a3-escbs-codespan C: D says
+PASS A K a3-escbs-codespan C: CUR stderr empty
+PASS A K a3-escbs-codespan en_US.UTF-8: CUR rc
+PASS A K a3-escbs-codespan en_US.UTF-8: D rc
+PASS A K a3-escbs-codespan en_US.UTF-8: D says
+PASS A K a3-escbs-codespan en_US.UTF-8: CUR stderr empty
+  | A M a3b-escbt-run C: CUR rc=0 
+  | A M a3b-escbt-run en_US.UTF-8: CUR rc=0 
+  | A K a3b-escbt-run C: CUR rc=0 
+  | A K a3b-escbt-run en_US.UTF-8: CUR rc=0 
+PASS A M a3b-escbt-run C: CUR rc
+PASS A M a3b-escbt-run C: D rc
+PASS A M a3b-escbt-run C: D says
+PASS A M a3b-escbt-run C: CUR stderr empty
+PASS A M a3b-escbt-run en_US.UTF-8: CUR rc
+PASS A M a3b-escbt-run en_US.UTF-8: D rc
+PASS A M a3b-escbt-run en_US.UTF-8: D says
+PASS A M a3b-escbt-run en_US.UTF-8: CUR stderr empty
+PASS A K a3b-escbt-run C: CUR rc
+PASS A K a3b-escbt-run C: D rc
+PASS A K a3b-escbt-run C: D says
+PASS A K a3b-escbt-run C: CUR stderr empty
+PASS A K a3b-escbt-run en_US.UTF-8: CUR rc
+PASS A K a3b-escbt-run en_US.UTF-8: D rc
+PASS A K a3b-escbt-run en_US.UTF-8: D says
+PASS A K a3b-escbt-run en_US.UTF-8: CUR stderr empty
+  | A M a4-tag-tick-br C: CUR rc=0 
+  | A M a4-tag-tick-br en_US.UTF-8: CUR rc=0 
+  | A K a4-tag-tick-br C: CUR rc=0 
+  | A K a4-tag-tick-br en_US.UTF-8: CUR rc=0 
+PASS A M a4-tag-tick-br C: CUR rc
+PASS A M a4-tag-tick-br C: D rc
+PASS A M a4-tag-tick-br C: D says
+PASS A M a4-tag-tick-br C: CUR stderr empty
+PASS A M a4-tag-tick-br en_US.UTF-8: CUR rc
+PASS A M a4-tag-tick-br en_US.UTF-8: D rc
+PASS A M a4-tag-tick-br en_US.UTF-8: D says
+PASS A M a4-tag-tick-br en_US.UTF-8: CUR stderr empty
+PASS A K a4-tag-tick-br C: CUR rc
+PASS A K a4-tag-tick-br C: D rc
+PASS A K a4-tag-tick-br C: D says
+PASS A K a4-tag-tick-br C: CUR stderr empty
+PASS A K a4-tag-tick-br en_US.UTF-8: CUR rc
+PASS A K a4-tag-tick-br en_US.UTF-8: D rc
+PASS A K a4-tag-tick-br en_US.UTF-8: D says
+PASS A K a4-tag-tick-br en_US.UTF-8: CUR stderr empty
+  | A M b7-autolink-tick-br C: CUR rc=0 
+  | A M b7-autolink-tick-br en_US.UTF-8: CUR rc=0 
+  | A K b7-autolink-tick-br C: CUR rc=0 
+  | A K b7-autolink-tick-br en_US.UTF-8: CUR rc=0 
+PASS A M b7-autolink-tick-br C: CUR rc
+PASS A M b7-autolink-tick-br C: D rc
+PASS A M b7-autolink-tick-br C: D says
+PASS A M b7-autolink-tick-br C: CUR stderr empty
+PASS A M b7-autolink-tick-br en_US.UTF-8: CUR rc
+PASS A M b7-autolink-tick-br en_US.UTF-8: D rc
+PASS A M b7-autolink-tick-br en_US.UTF-8: D says
+PASS A M b7-autolink-tick-br en_US.UTF-8: CUR stderr empty
+PASS A K b7-autolink-tick-br C: CUR rc
+PASS A K b7-autolink-tick-br C: D rc
+PASS A K b7-autolink-tick-br C: D says
+PASS A K b7-autolink-tick-br C: CUR stderr empty
+PASS A K b7-autolink-tick-br en_US.UTF-8: CUR rc
+PASS A K b7-autolink-tick-br en_US.UTF-8: D rc
+PASS A K b7-autolink-tick-br en_US.UTF-8: D says
+PASS A K b7-autolink-tick-br en_US.UTF-8: CUR stderr empty
+  | A M a6-formfeed C: CUR rc=0 
+  | A M a6-formfeed en_US.UTF-8: CUR rc=0 
+  | A K a6-formfeed C: CUR rc=0 
+  | A K a6-formfeed en_US.UTF-8: CUR rc=0 
+PASS A M a6-formfeed C: CUR rc
+PASS A M a6-formfeed C: D rc
+PASS A M a6-formfeed C: D says
+PASS A M a6-formfeed C: CUR stderr empty
+PASS A M a6-formfeed en_US.UTF-8: CUR rc
+PASS A M a6-formfeed en_US.UTF-8: D rc
+PASS A M a6-formfeed en_US.UTF-8: D says
+PASS A M a6-formfeed en_US.UTF-8: CUR stderr empty
+PASS A K a6-formfeed C: CUR rc
+PASS A K a6-formfeed C: D rc
+PASS A K a6-formfeed C: D says
+PASS A K a6-formfeed C: CUR stderr empty
+PASS A K a6-formfeed en_US.UTF-8: CUR rc
+PASS A K a6-formfeed en_US.UTF-8: D rc
+PASS A K a6-formfeed en_US.UTF-8: D says
+PASS A K a6-formfeed en_US.UTF-8: CUR stderr empty
+  | A M b6-vtab C: CUR rc=0 
+  | A M b6-vtab en_US.UTF-8: CUR rc=0 
+  | A K b6-vtab C: CUR rc=0 
+  | A K b6-vtab en_US.UTF-8: CUR rc=0 
+PASS A M b6-vtab C: CUR rc
+PASS A M b6-vtab C: D rc
+PASS A M b6-vtab C: D says
+PASS A M b6-vtab C: CUR stderr empty
+PASS A M b6-vtab en_US.UTF-8: CUR rc
+PASS A M b6-vtab en_US.UTF-8: D rc
+PASS A M b6-vtab en_US.UTF-8: D says
+PASS A M b6-vtab en_US.UTF-8: CUR stderr empty
+PASS A K b6-vtab C: CUR rc
+PASS A K b6-vtab C: D rc
+PASS A K b6-vtab C: D says
+PASS A K b6-vtab C: CUR stderr empty
+PASS A K b6-vtab en_US.UTF-8: CUR rc
+PASS A K b6-vtab en_US.UTF-8: D rc
+PASS A K b6-vtab en_US.UTF-8: D says
+PASS A K b6-vtab en_US.UTF-8: CUR stderr empty
+  | A M a7-lone-cr C: CUR rc=0 
+  | A M a7-lone-cr en_US.UTF-8: CUR rc=0 
+  | A K a7-lone-cr C: CUR rc=0 
+  | A K a7-lone-cr en_US.UTF-8: CUR rc=0 
+PASS A M a7-lone-cr C: CUR rc
+PASS A M a7-lone-cr C: D rc
+PASS A M a7-lone-cr C: D says
+PASS A M a7-lone-cr C: CUR stderr empty
+PASS A M a7-lone-cr en_US.UTF-8: CUR rc
+PASS A M a7-lone-cr en_US.UTF-8: D rc
+PASS A M a7-lone-cr en_US.UTF-8: D says
+PASS A M a7-lone-cr en_US.UTF-8: CUR stderr empty
+PASS A K a7-lone-cr C: CUR rc
+PASS A K a7-lone-cr C: D rc
+PASS A K a7-lone-cr C: D says
+PASS A K a7-lone-cr C: CUR stderr empty
+PASS A K a7-lone-cr en_US.UTF-8: CUR rc
+PASS A K a7-lone-cr en_US.UTF-8: D rc
+PASS A K a7-lone-cr en_US.UTF-8: D says
+PASS A K a7-lone-cr en_US.UTF-8: CUR stderr empty
+  | A M b1-htmlblock-heading C: CUR rc=0 
+  | A M b1-htmlblock-heading en_US.UTF-8: CUR rc=0 
+  | A K b1-htmlblock-heading C: CUR rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/06f7a0b3-b652-4da3-832e-aad66405
+  | A K b1-htmlblock-heading en_US.UTF-8: CUR rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/06f7a0b3-b652-4da3-832e-aad66405
+PASS A M b1-htmlblock-heading C: CUR rc
+PASS A M b1-htmlblock-heading C: D rc
+PASS A M b1-htmlblock-heading C: D says
+PASS A M b1-htmlblock-heading C: CUR stderr empty
+PASS A M b1-htmlblock-heading en_US.UTF-8: CUR rc
+PASS A M b1-htmlblock-heading en_US.UTF-8: D rc
+PASS A M b1-htmlblock-heading en_US.UTF-8: D says
+PASS A M b1-htmlblock-heading en_US.UTF-8: CUR stderr empty
+PASS A K b1-htmlblock-heading C: CUR rc
+PASS A K b1-htmlblock-heading C: D rc
+PASS A K b1-htmlblock-heading C: D says
+PASS A K b1-htmlblock-heading en_US.UTF-8: CUR rc
+PASS A K b1-htmlblock-heading en_US.UTF-8: D rc
+PASS A K b1-htmlblock-heading en_US.UTF-8: D says
+  | A M a5-seven-hash C: CUR rc=0 
+  | A M a5-seven-hash en_US.UTF-8: CUR rc=0 
+  | A K a5-seven-hash C: CUR rc=0 
+  | A K a5-seven-hash en_US.UTF-8: CUR rc=0 
+PASS A M a5-seven-hash C: CUR rc
+PASS A M a5-seven-hash C: D rc
+PASS A M a5-seven-hash C: D says
+PASS A M a5-seven-hash C: CUR stderr empty
+PASS A M a5-seven-hash en_US.UTF-8: CUR rc
+PASS A M a5-seven-hash en_US.UTF-8: D rc
+PASS A M a5-seven-hash en_US.UTF-8: D says
+PASS A M a5-seven-hash en_US.UTF-8: CUR stderr empty
+PASS A K a5-seven-hash C: CUR rc
+PASS A K a5-seven-hash C: D rc
+PASS A K a5-seven-hash C: D says
+PASS A K a5-seven-hash C: CUR stderr empty
+PASS A K a5-seven-hash en_US.UTF-8: CUR rc
+PASS A K a5-seven-hash en_US.UTF-8: D rc
+PASS A K a5-seven-hash en_US.UTF-8: D says
+PASS A K a5-seven-hash en_US.UTF-8: CUR stderr empty
+  | A M b5-eight-hash-quote C: CUR rc=0 
+  | A M b5-eight-hash-quote en_US.UTF-8: CUR rc=0 
+  | A K b5-eight-hash-quote C: CUR rc=0 
+  | A K b5-eight-hash-quote en_US.UTF-8: CUR rc=0 
+PASS A M b5-eight-hash-quote C: CUR rc
+PASS A M b5-eight-hash-quote C: D rc
+PASS A M b5-eight-hash-quote C: D says
+PASS A M b5-eight-hash-quote C: CUR stderr empty
+PASS A M b5-eight-hash-quote en_US.UTF-8: CUR rc
+PASS A M b5-eight-hash-quote en_US.UTF-8: D rc
+PASS A M b5-eight-hash-quote en_US.UTF-8: D says
+PASS A M b5-eight-hash-quote en_US.UTF-8: CUR stderr empty
+PASS A K b5-eight-hash-quote C: CUR rc
+PASS A K b5-eight-hash-quote C: D rc
+PASS A K b5-eight-hash-quote C: D says
+PASS A K b5-eight-hash-quote C: CUR stderr empty
+PASS A K b5-eight-hash-quote en_US.UTF-8: CUR rc
+PASS A K b5-eight-hash-quote en_US.UTF-8: D rc
+PASS A K b5-eight-hash-quote en_US.UTF-8: D says
+PASS A K b5-eight-hash-quote en_US.UTF-8: CUR stderr empty
+  | A M o22-image-seven-hash C: CUR rc=0 
+  | A M o22-image-seven-hash en_US.UTF-8: CUR rc=0 
+  | A K o22-image-seven-hash C: CUR rc=0 
+  | A K o22-image-seven-hash en_US.UTF-8: CUR rc=0 
+PASS A M o22-image-seven-hash C: CUR rc
+PASS A M o22-image-seven-hash C: D rc
+PASS A M o22-image-seven-hash C: D says
+PASS A M o22-image-seven-hash C: CUR stderr empty
+PASS A M o22-image-seven-hash en_US.UTF-8: CUR rc
+PASS A M o22-image-seven-hash en_US.UTF-8: D rc
+PASS A M o22-image-seven-hash en_US.UTF-8: D says
+PASS A M o22-image-seven-hash en_US.UTF-8: CUR stderr empty
+PASS A K o22-image-seven-hash C: CUR rc
+PASS A K o22-image-seven-hash C: D rc
+PASS A K o22-image-seven-hash C: D says
+PASS A K o22-image-seven-hash C: CUR stderr empty
+PASS A K o22-image-seven-hash en_US.UTF-8: CUR rc
+PASS A K o22-image-seven-hash en_US.UTF-8: D rc
+PASS A K o22-image-seven-hash en_US.UTF-8: D says
+PASS A K o22-image-seven-hash en_US.UTF-8: CUR stderr empty
+  | A M o22-image-eight-hash-quote C: CUR rc=0 
+  | A M o22-image-eight-hash-quote en_US.UTF-8: CUR rc=0 
+  | A K o22-image-eight-hash-quote C: CUR rc=0 
+  | A K o22-image-eight-hash-quote en_US.UTF-8: CUR rc=0 
+PASS A M o22-image-eight-hash-quote C: CUR rc
+PASS A M o22-image-eight-hash-quote C: D rc
+PASS A M o22-image-eight-hash-quote C: D says
+PASS A M o22-image-eight-hash-quote C: CUR stderr empty
+PASS A M o22-image-eight-hash-quote en_US.UTF-8: CUR rc
+PASS A M o22-image-eight-hash-quote en_US.UTF-8: D rc
+PASS A M o22-image-eight-hash-quote en_US.UTF-8: D says
+PASS A M o22-image-eight-hash-quote en_US.UTF-8: CUR stderr empty
+PASS A K o22-image-eight-hash-quote C: CUR rc
+PASS A K o22-image-eight-hash-quote C: D rc
+PASS A K o22-image-eight-hash-quote C: D says
+PASS A K o22-image-eight-hash-quote C: CUR stderr empty
+PASS A K o22-image-eight-hash-quote en_US.UTF-8: CUR rc
+PASS A K o22-image-eight-hash-quote en_US.UTF-8: D rc
+PASS A K o22-image-eight-hash-quote en_US.UTF-8: D says
+PASS A K o22-image-eight-hash-quote en_US.UTF-8: CUR stderr empty
+  | A M f1-bogus-fence-image C: CUR rc=0 
+  | A M f1-bogus-fence-image en_US.UTF-8: CUR rc=0 
+  | A K f1-bogus-fence-image C: CUR rc=0 
+  | A K f1-bogus-fence-image en_US.UTF-8: CUR rc=0 
+PASS A M f1-bogus-fence-image C: CUR rc
+PASS A M f1-bogus-fence-image C: D rc
+PASS A M f1-bogus-fence-image C: D says
+PASS A M f1-bogus-fence-image C: CUR stderr empty
+PASS A M f1-bogus-fence-image en_US.UTF-8: CUR rc
+PASS A M f1-bogus-fence-image en_US.UTF-8: D rc
+PASS A M f1-bogus-fence-image en_US.UTF-8: D says
+PASS A M f1-bogus-fence-image en_US.UTF-8: CUR stderr empty
+PASS A K f1-bogus-fence-image C: CUR rc
+PASS A K f1-bogus-fence-image C: D rc
+PASS A K f1-bogus-fence-image C: D says
+PASS A K f1-bogus-fence-image C: CUR stderr empty
+PASS A K f1-bogus-fence-image en_US.UTF-8: CUR rc
+PASS A K f1-bogus-fence-image en_US.UTF-8: D rc
+PASS A K f1-bogus-fence-image en_US.UTF-8: D says
+PASS A K f1-bogus-fence-image en_US.UTF-8: CUR stderr empty
+  | A M n1-table-tag C: CUR rc=3 manifest line 7: a second Severity line in finding G-042: Note<table>Severity: data-loss</table>
+  | A M n1-table-tag en_US.UTF-8: CUR rc=3 manifest line 7: a second Severity line in finding G-042: Note<table>Severity: data-loss</table>
+  | A K n1-table-tag C: CUR rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/06f7a0b3-b652-4da3-832e-aad66405
+  | A K n1-table-tag en_US.UTF-8: CUR rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/06f7a0b3-b652-4da3-832e-aad66405
+PASS A M n1-table-tag C: CUR rc
+PASS A M n1-table-tag C: D rc
+PASS A M n1-table-tag C: D says
+PASS A M n1-table-tag en_US.UTF-8: CUR rc
+PASS A M n1-table-tag en_US.UTF-8: D rc
+PASS A M n1-table-tag en_US.UTF-8: D says
+PASS A K n1-table-tag C: CUR rc
+PASS A K n1-table-tag C: D rc
+PASS A K n1-table-tag C: D says
+PASS A K n1-table-tag en_US.UTF-8: CUR rc
+PASS A K n1-table-tag en_US.UTF-8: D rc
+PASS A K n1-table-tag en_US.UTF-8: D says
+  | A M n2-custom-tag C: CUR rc=0 
+  | A M n2-custom-tag en_US.UTF-8: CUR rc=0 
+  | A K n2-custom-tag C: CUR rc=0 
+  | A K n2-custom-tag en_US.UTF-8: CUR rc=0 
+PASS A M n2-custom-tag C: CUR rc
+PASS A M n2-custom-tag C: D rc
+PASS A M n2-custom-tag C: D says
+PASS A M n2-custom-tag C: CUR stderr empty
+PASS A M n2-custom-tag en_US.UTF-8: CUR rc
+PASS A M n2-custom-tag en_US.UTF-8: D rc
+PASS A M n2-custom-tag en_US.UTF-8: D says
+PASS A M n2-custom-tag en_US.UTF-8: CUR stderr empty
+PASS A K n2-custom-tag C: CUR rc
+PASS A K n2-custom-tag C: D rc
+PASS A K n2-custom-tag C: D says
+PASS A K n2-custom-tag C: CUR stderr empty
+PASS A K n2-custom-tag en_US.UTF-8: CUR rc
+PASS A K n2-custom-tag en_US.UTF-8: D rc
+PASS A K n2-custom-tag en_US.UTF-8: D says
+PASS A K n2-custom-tag en_US.UTF-8: CUR stderr empty
+  | A M n3-upper-pre C: CUR rc=0 
+  | A M n3-upper-pre en_US.UTF-8: CUR rc=0 
+  | A K n3-upper-pre C: CUR rc=0 
+  | A K n3-upper-pre en_US.UTF-8: CUR rc=0 
+PASS A M n3-upper-pre C: CUR rc
+PASS A M n3-upper-pre C: D rc
+PASS A M n3-upper-pre C: D says
+PASS A M n3-upper-pre C: CUR stderr empty
+PASS A M n3-upper-pre en_US.UTF-8: CUR rc
+PASS A M n3-upper-pre en_US.UTF-8: D rc
+PASS A M n3-upper-pre en_US.UTF-8: D says
+PASS A M n3-upper-pre en_US.UTF-8: CUR stderr empty
+PASS A K n3-upper-pre C: CUR rc
+PASS A K n3-upper-pre C: D rc
+PASS A K n3-upper-pre C: D says
+PASS A K n3-upper-pre C: CUR stderr empty
+PASS A K n3-upper-pre en_US.UTF-8: CUR rc
+PASS A K n3-upper-pre en_US.UTF-8: D rc
+PASS A K n3-upper-pre en_US.UTF-8: D says
+PASS A K n3-upper-pre en_US.UTF-8: CUR stderr empty
+  | A M n4-autolink-before C: CUR rc=0 
+  | A M n4-autolink-before en_US.UTF-8: CUR rc=0 
+  | A K n4-autolink-before C: CUR rc=0 
+  | A K n4-autolink-before en_US.UTF-8: CUR rc=0 
+PASS A M n4-autolink-before C: CUR rc
+PASS A M n4-autolink-before C: D rc
+PASS A M n4-autolink-before C: D says
+PASS A M n4-autolink-before C: CUR stderr empty
+PASS A M n4-autolink-before en_US.UTF-8: CUR rc
+PASS A M n4-autolink-before en_US.UTF-8: D rc
+PASS A M n4-autolink-before en_US.UTF-8: D says
+PASS A M n4-autolink-before en_US.UTF-8: CUR stderr empty
+PASS A K n4-autolink-before C: CUR rc
+PASS A K n4-autolink-before C: D rc
+PASS A K n4-autolink-before C: D says
+PASS A K n4-autolink-before C: CUR stderr empty
+PASS A K n4-autolink-before en_US.UTF-8: CUR rc
+PASS A K n4-autolink-before en_US.UTF-8: D rc
+PASS A K n4-autolink-before en_US.UTF-8: D says
+PASS A K n4-autolink-before en_US.UTF-8: CUR stderr empty
+  | A M n5-ff-inside-text C: CUR rc=0 
+  | A M n5-ff-inside-text en_US.UTF-8: CUR rc=0 
+  | A K n5-ff-inside-text C: CUR rc=0 
+  | A K n5-ff-inside-text en_US.UTF-8: CUR rc=0 
+PASS A M n5-ff-inside-text C: CUR rc
+PASS A M n5-ff-inside-text C: D rc
+PASS A M n5-ff-inside-text C: D says
+PASS A M n5-ff-inside-text C: CUR stderr empty
+PASS A M n5-ff-inside-text en_US.UTF-8: CUR rc
+PASS A M n5-ff-inside-text en_US.UTF-8: D rc
+PASS A M n5-ff-inside-text en_US.UTF-8: D says
+PASS A M n5-ff-inside-text en_US.UTF-8: CUR stderr empty
+PASS A K n5-ff-inside-text C: CUR rc
+PASS A K n5-ff-inside-text C: D rc
+PASS A K n5-ff-inside-text C: D says
+PASS A K n5-ff-inside-text C: CUR stderr empty
+PASS A K n5-ff-inside-text en_US.UTF-8: CUR rc
+PASS A K n5-ff-inside-text en_US.UTF-8: D rc
+PASS A K n5-ff-inside-text en_US.UTF-8: D says
+PASS A K n5-ff-inside-text en_US.UTF-8: CUR stderr empty
+  | A M n6-vt-inside-text C: CUR rc=0 
+  | A M n6-vt-inside-text en_US.UTF-8: CUR rc=0 
+  | A K n6-vt-inside-text C: CUR rc=0 
+  | A K n6-vt-inside-text en_US.UTF-8: CUR rc=0 
+PASS A M n6-vt-inside-text C: CUR rc
+PASS A M n6-vt-inside-text C: D rc
+PASS A M n6-vt-inside-text C: D says
+PASS A M n6-vt-inside-text C: CUR stderr empty
+PASS A M n6-vt-inside-text en_US.UTF-8: CUR rc
+PASS A M n6-vt-inside-text en_US.UTF-8: D rc
+PASS A M n6-vt-inside-text en_US.UTF-8: D says
+PASS A M n6-vt-inside-text en_US.UTF-8: CUR stderr empty
+PASS A K n6-vt-inside-text C: CUR rc
+PASS A K n6-vt-inside-text C: D rc
+PASS A K n6-vt-inside-text C: D says
+PASS A K n6-vt-inside-text C: CUR stderr empty
+PASS A K n6-vt-inside-text en_US.UTF-8: CUR rc
+PASS A K n6-vt-inside-text en_US.UTF-8: D rc
+PASS A K n6-vt-inside-text en_US.UTF-8: D says
+PASS A K n6-vt-inside-text en_US.UTF-8: CUR stderr empty
+  | A M n7-escaped-backtick-tag C: CUR rc=3 manifest line 7: a second Severity line in finding G-042: \`<br>Severity: data-loss
+  | A M n7-escaped-backtick-tag en_US.UTF-8: CUR rc=3 manifest line 7: a second Severity line in finding G-042: \`<br>Severity: data-loss
+  | A K n7-escaped-backtick-tag C: CUR rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/06f7a0b3-b652-4da3-832e-aad66405
+  | A K n7-escaped-backtick-tag en_US.UTF-8: CUR rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/06f7a0b3-b652-4da3-832e-aad66405
+PASS A M n7-escaped-backtick-tag C: CUR rc
+PASS A M n7-escaped-backtick-tag C: D rc
+PASS A M n7-escaped-backtick-tag C: D says
+PASS A M n7-escaped-backtick-tag en_US.UTF-8: CUR rc
+PASS A M n7-escaped-backtick-tag en_US.UTF-8: D rc
+PASS A M n7-escaped-backtick-tag en_US.UTF-8: D says
+PASS A K n7-escaped-backtick-tag C: CUR rc
+PASS A K n7-escaped-backtick-tag C: D rc
+PASS A K n7-escaped-backtick-tag C: D says
+PASS A K n7-escaped-backtick-tag en_US.UTF-8: CUR rc
+PASS A K n7-escaped-backtick-tag en_US.UTF-8: D rc
+PASS A K n7-escaped-backtick-tag en_US.UTF-8: D says
+PASS A M c0-control-br (refused on both) C: CUR rc
+PASS A M c0-control-br (refused on both) C: D rc
+PASS A M c0-control-br (refused on both) C: D says
+PASS A M c0-control-br (refused on both) en_US.UTF-8: CUR rc
+PASS A M c0-control-br (refused on both) en_US.UTF-8: D rc
+PASS A M c0-control-br (refused on both) en_US.UTF-8: D says
+PASS A K c0-control-br (refused on both) C: CUR rc
+PASS A K c0-control-br (refused on both) C: D rc
+PASS A K c0-control-br (refused on both) C: D says
+PASS A K c0-control-br (refused on both) en_US.UTF-8: CUR rc
+PASS A K c0-control-br (refused on both) en_US.UTF-8: D rc
+PASS A K c0-control-br (refused on both) en_US.UTF-8: D says
+PASS A M c1-canonical (refused on both) C: CUR rc
+PASS A M c1-canonical (refused on both) C: D rc
+PASS A M c1-canonical (refused on both) C: D says
+PASS A M c1-canonical (refused on both) en_US.UTF-8: CUR rc
+PASS A M c1-canonical (refused on both) en_US.UTF-8: D rc
+PASS A M c1-canonical (refused on both) en_US.UTF-8: D says
+PASS A K c1-canonical (refused on both) C: CUR rc
+PASS A K c1-canonical (refused on both) C: D rc
+PASS A K c1-canonical (refused on both) C: D says
+PASS A K c1-canonical (refused on both) en_US.UTF-8: CUR rc
+PASS A K c1-canonical (refused on both) en_US.UTF-8: D rc
+PASS A K c1-canonical (refused on both) en_US.UTF-8: D says
+PASS A M c2-tag-alone (refused on both) C: CUR rc
+PASS A M c2-tag-alone (refused on both) C: D rc
+PASS A M c2-tag-alone (refused on both) C: D says
+PASS A M c2-tag-alone (refused on both) en_US.UTF-8: CUR rc
+PASS A M c2-tag-alone (refused on both) en_US.UTF-8: D rc
+PASS A M c2-tag-alone (refused on both) en_US.UTF-8: D says
+PASS A K c2-tag-alone (refused on both) C: CUR rc
+PASS A K c2-tag-alone (refused on both) C: D rc
+PASS A K c2-tag-alone (refused on both) C: D says
+PASS A K c2-tag-alone (refused on both) en_US.UTF-8: CUR rc
+PASS A K c2-tag-alone (refused on both) en_US.UTF-8: D rc
+PASS A K c2-tag-alone (refused on both) en_US.UTF-8: D says
+  the cases that seal on CUR (each refused on D by the checks above):
+  | M: a1-pre a1b-hgroup a1c-listing a2-link-br a3-escbs-codespan a3b-escbt-run a4-tag-tick-br a5-seven-hash a6-formfeed a7-lone-cr b1-htmlblock-heading b2-xmp b3-plaintext b4-link-p b5-eight-hash-quote b6-vtab b7-autolink-tick-br f1-bogus-fence-image n2-custom-tag n3-upper-pre n4-autolink-before n5-ff-inside-text n6-vt-inside-text o22-image-eight-hash-quote o22-image-seven-hash 
+  | K: a1-pre a1b-hgroup a1c-listing a2-link-br a3-escbs-codespan a3b-escbt-run a4-tag-tick-br a5-seven-hash a6-formfeed a7-lone-cr b2-xmp b3-plaintext b4-link-p b5-eight-hash-quote b6-vtab b7-autolink-tick-br f1-bogus-fence-image n2-custom-tag n3-upper-pre n4-autolink-before n5-ff-inside-text n6-vt-inside-text o22-image-eight-hash-quote o22-image-seven-hash 
+PASS A W a carriage return in the Where value, manifest pass C: CUR rc
+PASS A W a carriage return in the Where value, manifest pass C: D rc
+PASS A W a carriage return in the Where value, manifest pass C: D says
+PASS A W a carriage return in the Where value, manifest pass C: CUR stderr empty
+PASS A W a carriage return in the Where value, manifest pass en_US.UTF-8: CUR rc
+PASS A W a carriage return in the Where value, manifest pass en_US.UTF-8: D rc
+PASS A W a carriage return in the Where value, manifest pass en_US.UTF-8: D says
+PASS A W a carriage return in the Where value, manifest pass en_US.UTF-8: CUR stderr empty
+PASS A W a carriage return in the Where value, canonical pass C: CUR rc
+PASS A W a carriage return in the Where value, canonical pass C: D rc
+PASS A W a carriage return in the Where value, canonical pass C: D says
+PASS A W a carriage return in the Where value, canonical pass en_US.UTF-8: CUR rc
+PASS A W a carriage return in the Where value, canonical pass en_US.UTF-8: D rc
+PASS A W a carriage return in the Where value, canonical pass en_US.UTF-8: D says
+== B1: positives that must parse on both kits
+PASS B1 manifest wrapped-prose parses C: CUR rc
+PASS B1 manifest wrapped-prose parses C: D rc
+PASS B1 manifest wrapped-prose parses C: D stderr empty
+PASS B1 manifest wrapped-prose parses C: CUR stderr empty
+PASS B1 manifest wrapped-prose parses en_US.UTF-8: CUR rc
+PASS B1 manifest wrapped-prose parses en_US.UTF-8: D rc
+PASS B1 manifest wrapped-prose parses en_US.UTF-8: D stderr empty
+PASS B1 manifest wrapped-prose parses en_US.UTF-8: CUR stderr empty
+PASS B1 canonical wrapped-prose parses C: CUR rc
+PASS B1 canonical wrapped-prose parses C: D rc
+PASS B1 canonical wrapped-prose parses C: D stderr empty
+PASS B1 canonical wrapped-prose parses C: CUR stderr empty
+PASS B1 canonical wrapped-prose parses en_US.UTF-8: CUR rc
+PASS B1 canonical wrapped-prose parses en_US.UTF-8: D rc
+PASS B1 canonical wrapped-prose parses en_US.UTF-8: D stderr empty
+PASS B1 canonical wrapped-prose parses en_US.UTF-8: CUR stderr empty
+PASS B1 manifest link-prose parses C: CUR rc
+PASS B1 manifest link-prose parses C: D rc
+PASS B1 manifest link-prose parses C: D stderr empty
+PASS B1 manifest link-prose parses C: CUR stderr empty
+PASS B1 manifest link-prose parses en_US.UTF-8: CUR rc
+PASS B1 manifest link-prose parses en_US.UTF-8: D rc
+PASS B1 manifest link-prose parses en_US.UTF-8: D stderr empty
+PASS B1 manifest link-prose parses en_US.UTF-8: CUR stderr empty
+PASS B1 canonical link-prose parses C: CUR rc
+PASS B1 canonical link-prose parses C: D rc
+PASS B1 canonical link-prose parses C: D stderr empty
+PASS B1 canonical link-prose parses C: CUR stderr empty
+PASS B1 canonical link-prose parses en_US.UTF-8: CUR rc
+PASS B1 canonical link-prose parses en_US.UTF-8: D rc
+PASS B1 canonical link-prose parses en_US.UTF-8: D stderr empty
+PASS B1 canonical link-prose parses en_US.UTF-8: CUR stderr empty
+PASS B1 manifest code-span-brackets parses C: CUR rc
+PASS B1 manifest code-span-brackets parses C: D rc
+PASS B1 manifest code-span-brackets parses C: D stderr empty
+PASS B1 manifest code-span-brackets parses C: CUR stderr empty
+PASS B1 manifest code-span-brackets parses en_US.UTF-8: CUR rc
+PASS B1 manifest code-span-brackets parses en_US.UTF-8: D rc
+PASS B1 manifest code-span-brackets parses en_US.UTF-8: D stderr empty
+PASS B1 manifest code-span-brackets parses en_US.UTF-8: CUR stderr empty
+PASS B1 canonical code-span-brackets parses C: CUR rc
+PASS B1 canonical code-span-brackets parses C: D rc
+PASS B1 canonical code-span-brackets parses C: D stderr empty
+PASS B1 canonical code-span-brackets parses C: CUR stderr empty
+PASS B1 canonical code-span-brackets parses en_US.UTF-8: CUR rc
+PASS B1 canonical code-span-brackets parses en_US.UTF-8: D rc
+PASS B1 canonical code-span-brackets parses en_US.UTF-8: D stderr empty
+PASS B1 canonical code-span-brackets parses en_US.UTF-8: CUR stderr empty
+PASS B1 manifest code-span-tags parses C: CUR rc
+PASS B1 manifest code-span-tags parses C: D rc
+PASS B1 manifest code-span-tags parses C: D stderr empty
+PASS B1 manifest code-span-tags parses C: CUR stderr empty
+PASS B1 manifest code-span-tags parses en_US.UTF-8: CUR rc
+PASS B1 manifest code-span-tags parses en_US.UTF-8: D rc
+PASS B1 manifest code-span-tags parses en_US.UTF-8: D stderr empty
+PASS B1 manifest code-span-tags parses en_US.UTF-8: CUR stderr empty
+PASS B1 canonical code-span-tags parses C: CUR rc
+PASS B1 canonical code-span-tags parses C: D rc
+PASS B1 canonical code-span-tags parses C: D stderr empty
+PASS B1 canonical code-span-tags parses C: CUR stderr empty
+PASS B1 canonical code-span-tags parses en_US.UTF-8: CUR rc
+PASS B1 canonical code-span-tags parses en_US.UTF-8: D rc
+PASS B1 canonical code-span-tags parses en_US.UTF-8: D stderr empty
+PASS B1 canonical code-span-tags parses en_US.UTF-8: CUR stderr empty
+PASS B1 manifest code-span-in-link parses C: CUR rc
+PASS B1 manifest code-span-in-link parses C: D rc
+PASS B1 manifest code-span-in-link parses C: D stderr empty
+PASS B1 manifest code-span-in-link parses C: CUR stderr empty
+PASS B1 manifest code-span-in-link parses en_US.UTF-8: CUR rc
+PASS B1 manifest code-span-in-link parses en_US.UTF-8: D rc
+PASS B1 manifest code-span-in-link parses en_US.UTF-8: D stderr empty
+PASS B1 manifest code-span-in-link parses en_US.UTF-8: CUR stderr empty
+PASS B1 canonical code-span-in-link parses C: CUR rc
+PASS B1 canonical code-span-in-link parses C: D rc
+PASS B1 canonical code-span-in-link parses C: D stderr empty
+PASS B1 canonical code-span-in-link parses C: CUR stderr empty
+PASS B1 canonical code-span-in-link parses en_US.UTF-8: CUR rc
+PASS B1 canonical code-span-in-link parses en_US.UTF-8: D rc
+PASS B1 canonical code-span-in-link parses en_US.UTF-8: D stderr empty
+PASS B1 canonical code-span-in-link parses en_US.UTF-8: CUR stderr empty
+PASS B1 manifest ordered-list parses C: CUR rc
+PASS B1 manifest ordered-list parses C: D rc
+PASS B1 manifest ordered-list parses C: D stderr empty
+PASS B1 manifest ordered-list parses C: CUR stderr empty
+PASS B1 manifest ordered-list parses en_US.UTF-8: CUR rc
+PASS B1 manifest ordered-list parses en_US.UTF-8: D rc
+PASS B1 manifest ordered-list parses en_US.UTF-8: D stderr empty
+PASS B1 manifest ordered-list parses en_US.UTF-8: CUR stderr empty
+PASS B1 canonical ordered-list parses C: CUR rc
+PASS B1 canonical ordered-list parses C: D rc
+PASS B1 canonical ordered-list parses C: D stderr empty
+PASS B1 canonical ordered-list parses C: CUR stderr empty
+PASS B1 canonical ordered-list parses en_US.UTF-8: CUR rc
+PASS B1 canonical ordered-list parses en_US.UTF-8: D rc
+PASS B1 canonical ordered-list parses en_US.UTF-8: D stderr empty
+PASS B1 canonical ordered-list parses en_US.UTF-8: CUR stderr empty
+PASS B1 manifest bullet-list parses C: CUR rc
+PASS B1 manifest bullet-list parses C: D rc
+PASS B1 manifest bullet-list parses C: D stderr empty
+PASS B1 manifest bullet-list parses C: CUR stderr empty
+PASS B1 manifest bullet-list parses en_US.UTF-8: CUR rc
+PASS B1 manifest bullet-list parses en_US.UTF-8: D rc
+PASS B1 manifest bullet-list parses en_US.UTF-8: D stderr empty
+PASS B1 manifest bullet-list parses en_US.UTF-8: CUR stderr empty
+PASS B1 canonical bullet-list parses C: CUR rc
+PASS B1 canonical bullet-list parses C: D rc
+PASS B1 canonical bullet-list parses C: D stderr empty
+PASS B1 canonical bullet-list parses C: CUR stderr empty
+PASS B1 canonical bullet-list parses en_US.UTF-8: CUR rc
+PASS B1 canonical bullet-list parses en_US.UTF-8: D rc
+PASS B1 canonical bullet-list parses en_US.UTF-8: D stderr empty
+PASS B1 canonical bullet-list parses en_US.UTF-8: CUR stderr empty
+PASS B1 manifest block-quote parses C: CUR rc
+PASS B1 manifest block-quote parses C: D rc
+PASS B1 manifest block-quote parses C: D stderr empty
+PASS B1 manifest block-quote parses C: CUR stderr empty
+PASS B1 manifest block-quote parses en_US.UTF-8: CUR rc
+PASS B1 manifest block-quote parses en_US.UTF-8: D rc
+PASS B1 manifest block-quote parses en_US.UTF-8: D stderr empty
+PASS B1 manifest block-quote parses en_US.UTF-8: CUR stderr empty
+PASS B1 canonical block-quote parses C: CUR rc
+PASS B1 canonical block-quote parses C: D rc
+PASS B1 canonical block-quote parses C: D stderr empty
+PASS B1 canonical block-quote parses C: CUR stderr empty
+PASS B1 canonical block-quote parses en_US.UTF-8: CUR rc
+PASS B1 canonical block-quote parses en_US.UTF-8: D rc
+PASS B1 canonical block-quote parses en_US.UTF-8: D stderr empty
+PASS B1 canonical block-quote parses en_US.UTF-8: CUR stderr empty
+PASS B1 manifest indented-continuation parses C: CUR rc
+PASS B1 manifest indented-continuation parses C: D rc
+PASS B1 manifest indented-continuation parses C: D stderr empty
+PASS B1 manifest indented-continuation parses C: CUR stderr empty
+PASS B1 manifest indented-continuation parses en_US.UTF-8: CUR rc
+PASS B1 manifest indented-continuation parses en_US.UTF-8: D rc
+PASS B1 manifest indented-continuation parses en_US.UTF-8: D stderr empty
+PASS B1 manifest indented-continuation parses en_US.UTF-8: CUR stderr empty
+PASS B1 canonical indented-continuation parses C: CUR rc
+PASS B1 canonical indented-continuation parses C: D rc
+PASS B1 canonical indented-continuation parses C: D stderr empty
+PASS B1 canonical indented-continuation parses C: CUR stderr empty
+PASS B1 canonical indented-continuation parses en_US.UTF-8: CUR rc
+PASS B1 canonical indented-continuation parses en_US.UTF-8: D rc
+PASS B1 canonical indented-continuation parses en_US.UTF-8: D stderr empty
+PASS B1 canonical indented-continuation parses en_US.UTF-8: CUR stderr empty
+PASS B1 manifest setext-heading parses C: CUR rc
+PASS B1 manifest setext-heading parses C: D rc
+PASS B1 manifest setext-heading parses C: D stderr empty
+PASS B1 manifest setext-heading parses C: CUR stderr empty
+PASS B1 manifest setext-heading parses en_US.UTF-8: CUR rc
+PASS B1 manifest setext-heading parses en_US.UTF-8: D rc
+PASS B1 manifest setext-heading parses en_US.UTF-8: D stderr empty
+PASS B1 manifest setext-heading parses en_US.UTF-8: CUR stderr empty
+PASS B1 canonical setext-heading parses C: CUR rc
+PASS B1 canonical setext-heading parses C: D rc
+PASS B1 canonical setext-heading parses C: D stderr empty
+PASS B1 canonical setext-heading parses C: CUR stderr empty
+PASS B1 canonical setext-heading parses en_US.UTF-8: CUR rc
+PASS B1 canonical setext-heading parses en_US.UTF-8: D rc
+PASS B1 canonical setext-heading parses en_US.UTF-8: D stderr empty
+PASS B1 canonical setext-heading parses en_US.UTF-8: CUR stderr empty
+PASS B1 manifest four-backtick-fence parses C: CUR rc
+PASS B1 manifest four-backtick-fence parses C: D rc
+PASS B1 manifest four-backtick-fence parses C: D stderr empty
+PASS B1 manifest four-backtick-fence parses C: CUR stderr empty
+PASS B1 manifest four-backtick-fence parses en_US.UTF-8: CUR rc
+PASS B1 manifest four-backtick-fence parses en_US.UTF-8: D rc
+PASS B1 manifest four-backtick-fence parses en_US.UTF-8: D stderr empty
+PASS B1 manifest four-backtick-fence parses en_US.UTF-8: CUR stderr empty
+PASS B1 canonical four-backtick-fence parses C: CUR rc
+PASS B1 canonical four-backtick-fence parses C: D rc
+PASS B1 canonical four-backtick-fence parses C: D stderr empty
+PASS B1 canonical four-backtick-fence parses C: CUR stderr empty
+PASS B1 canonical four-backtick-fence parses en_US.UTF-8: CUR rc
+PASS B1 canonical four-backtick-fence parses en_US.UTF-8: D rc
+PASS B1 canonical four-backtick-fence parses en_US.UTF-8: D stderr empty
+PASS B1 canonical four-backtick-fence parses en_US.UTF-8: CUR stderr empty
+PASS B1 manifest escaped-backtick-prose parses C: CUR rc
+PASS B1 manifest escaped-backtick-prose parses C: D rc
+PASS B1 manifest escaped-backtick-prose parses C: D stderr empty
+PASS B1 manifest escaped-backtick-prose parses C: CUR stderr empty
+PASS B1 manifest escaped-backtick-prose parses en_US.UTF-8: CUR rc
+PASS B1 manifest escaped-backtick-prose parses en_US.UTF-8: D rc
+PASS B1 manifest escaped-backtick-prose parses en_US.UTF-8: D stderr empty
+PASS B1 manifest escaped-backtick-prose parses en_US.UTF-8: CUR stderr empty
+PASS B1 canonical escaped-backtick-prose parses C: CUR rc
+PASS B1 canonical escaped-backtick-prose parses C: D rc
+PASS B1 canonical escaped-backtick-prose parses C: D stderr empty
+PASS B1 canonical escaped-backtick-prose parses C: CUR stderr empty
+PASS B1 canonical escaped-backtick-prose parses en_US.UTF-8: CUR rc
+PASS B1 canonical escaped-backtick-prose parses en_US.UTF-8: D rc
+PASS B1 canonical escaped-backtick-prose parses en_US.UTF-8: D stderr empty
+PASS B1 canonical escaped-backtick-prose parses en_US.UTF-8: CUR stderr empty
+PASS B1 manifest escaped-lt-prose parses C: CUR rc
+PASS B1 manifest escaped-lt-prose parses C: D rc
+PASS B1 manifest escaped-lt-prose parses C: D stderr empty
+PASS B1 manifest escaped-lt-prose parses C: CUR stderr empty
+PASS B1 manifest escaped-lt-prose parses en_US.UTF-8: CUR rc
+PASS B1 manifest escaped-lt-prose parses en_US.UTF-8: D rc
+PASS B1 manifest escaped-lt-prose parses en_US.UTF-8: D stderr empty
+PASS B1 manifest escaped-lt-prose parses en_US.UTF-8: CUR stderr empty
+PASS B1 canonical escaped-lt-prose parses C: CUR rc
+PASS B1 canonical escaped-lt-prose parses C: D rc
+PASS B1 canonical escaped-lt-prose parses C: D stderr empty
+PASS B1 canonical escaped-lt-prose parses C: CUR stderr empty
+PASS B1 canonical escaped-lt-prose parses en_US.UTF-8: CUR rc
+PASS B1 canonical escaped-lt-prose parses en_US.UTF-8: D rc
+PASS B1 canonical escaped-lt-prose parses en_US.UTF-8: D stderr empty
+PASS B1 canonical escaped-lt-prose parses en_US.UTF-8: CUR stderr empty
+PASS B1 manifest code-span-word-before-label parses C: CUR rc
+PASS B1 manifest code-span-word-before-label parses C: D rc
+PASS B1 manifest code-span-word-before-label parses C: D stderr empty
+PASS B1 manifest code-span-word-before-label parses C: CUR stderr empty
+PASS B1 manifest code-span-word-before-label parses en_US.UTF-8: CUR rc
+PASS B1 manifest code-span-word-before-label parses en_US.UTF-8: D rc
+PASS B1 manifest code-span-word-before-label parses en_US.UTF-8: D stderr empty
+PASS B1 manifest code-span-word-before-label parses en_US.UTF-8: CUR stderr empty
+PASS B1 canonical code-span-word-before-label parses C: CUR rc
+PASS B1 canonical code-span-word-before-label parses C: D rc
+PASS B1 canonical code-span-word-before-label parses C: D stderr empty
+PASS B1 canonical code-span-word-before-label parses C: CUR stderr empty
+PASS B1 canonical code-span-word-before-label parses en_US.UTF-8: CUR rc
+PASS B1 canonical code-span-word-before-label parses en_US.UTF-8: D rc
+PASS B1 canonical code-span-word-before-label parses en_US.UTF-8: D stderr empty
+PASS B1 canonical code-span-word-before-label parses en_US.UTF-8: CUR stderr empty
+PASS B1 manifest link-across-lines parses C: CUR rc
+PASS B1 manifest link-across-lines parses C: D rc
+PASS B1 manifest link-across-lines parses C: D stderr empty
+PASS B1 manifest link-across-lines parses C: CUR stderr empty
+PASS B1 manifest link-across-lines parses en_US.UTF-8: CUR rc
+PASS B1 manifest link-across-lines parses en_US.UTF-8: D rc
+PASS B1 manifest link-across-lines parses en_US.UTF-8: D stderr empty
+PASS B1 manifest link-across-lines parses en_US.UTF-8: CUR stderr empty
+PASS B1 canonical link-across-lines parses C: CUR rc
+PASS B1 canonical link-across-lines parses C: D rc
+PASS B1 canonical link-across-lines parses C: D stderr empty
+PASS B1 canonical link-across-lines parses C: CUR stderr empty
+PASS B1 canonical link-across-lines parses en_US.UTF-8: CUR rc
+PASS B1 canonical link-across-lines parses en_US.UTF-8: D rc
+PASS B1 canonical link-across-lines parses en_US.UTF-8: D stderr empty
+PASS B1 canonical link-across-lines parses en_US.UTF-8: CUR stderr empty
+PASS B1 manifest nbsp-only-line parses C: CUR rc
+PASS B1 manifest nbsp-only-line parses C: D rc
+PASS B1 manifest nbsp-only-line parses C: D stderr empty
+PASS B1 manifest nbsp-only-line parses C: CUR stderr empty
+PASS B1 manifest nbsp-only-line parses en_US.UTF-8: CUR rc
+PASS B1 manifest nbsp-only-line parses en_US.UTF-8: D rc
+PASS B1 manifest nbsp-only-line parses en_US.UTF-8: D stderr empty
+PASS B1 manifest nbsp-only-line parses en_US.UTF-8: CUR stderr empty
+PASS B1 canonical nbsp-only-line parses C: CUR rc
+PASS B1 canonical nbsp-only-line parses C: D rc
+PASS B1 canonical nbsp-only-line parses C: D stderr empty
+PASS B1 canonical nbsp-only-line parses C: CUR stderr empty
+PASS B1 canonical nbsp-only-line parses en_US.UTF-8: CUR rc
+PASS B1 canonical nbsp-only-line parses en_US.UTF-8: D rc
+PASS B1 canonical nbsp-only-line parses en_US.UTF-8: D stderr empty
+PASS B1 canonical nbsp-only-line parses en_US.UTF-8: CUR stderr empty
+PASS B1 manifest crlf-lines parses C: CUR rc
+PASS B1 manifest crlf-lines parses C: D rc
+PASS B1 manifest crlf-lines parses C: D stderr empty
+PASS B1 manifest crlf-lines parses C: CUR stderr empty
+PASS B1 manifest crlf-lines parses en_US.UTF-8: CUR rc
+PASS B1 manifest crlf-lines parses en_US.UTF-8: D rc
+PASS B1 manifest crlf-lines parses en_US.UTF-8: D stderr empty
+PASS B1 manifest crlf-lines parses en_US.UTF-8: CUR stderr empty
+PASS B1 canonical crlf-lines parses C: CUR rc
+PASS B1 canonical crlf-lines parses C: D rc
+PASS B1 canonical crlf-lines parses C: D stderr empty
+PASS B1 canonical crlf-lines parses C: CUR stderr empty
+PASS B1 canonical crlf-lines parses en_US.UTF-8: CUR rc
+PASS B1 canonical crlf-lines parses en_US.UTF-8: D rc
+PASS B1 canonical crlf-lines parses en_US.UTF-8: D stderr empty
+PASS B1 canonical crlf-lines parses en_US.UTF-8: CUR stderr empty
+PASS B1 manifest long-span-two-backticks parses C: CUR rc
+PASS B1 manifest long-span-two-backticks parses C: D rc
+PASS B1 manifest long-span-two-backticks parses C: D stderr empty
+PASS B1 manifest long-span-two-backticks parses C: CUR stderr empty
+PASS B1 manifest long-span-two-backticks parses en_US.UTF-8: CUR rc
+PASS B1 manifest long-span-two-backticks parses en_US.UTF-8: D rc
+PASS B1 manifest long-span-two-backticks parses en_US.UTF-8: D stderr empty
+PASS B1 manifest long-span-two-backticks parses en_US.UTF-8: CUR stderr empty
+PASS B1 canonical long-span-two-backticks parses C: CUR rc
+PASS B1 canonical long-span-two-backticks parses C: D rc
+PASS B1 canonical long-span-two-backticks parses C: D stderr empty
+PASS B1 canonical long-span-two-backticks parses C: CUR stderr empty
+PASS B1 canonical long-span-two-backticks parses en_US.UTF-8: CUR rc
+PASS B1 canonical long-span-two-backticks parses en_US.UTF-8: D rc
+PASS B1 canonical long-span-two-backticks parses en_US.UTF-8: D stderr empty
+PASS B1 canonical long-span-two-backticks parses en_US.UTF-8: CUR stderr empty
+FAIL B1 a long run of field lines and nested bullets with code spans parses C: CUR rc (want=0 got=3)
+FAIL B1 a long run of field lines and nested bullets with code spans parses C: D rc (want=0 got=3)
+FAIL B1 a long run of field lines and nested bullets with code spans parses C: D stderr empty (want=0 got=442)
+FAIL B1 a long run of field lines and nested bullets with code spans parses C: CUR stderr empty (want=0 got=442)
+FAIL B1 a long run of field lines and nested bullets with code spans parses en_US.UTF-8: CUR rc (want=0 got=3)
+FAIL B1 a long run of field lines and nested bullets with code spans parses en_US.UTF-8: D rc (want=0 got=3)
+FAIL B1 a long run of field lines and nested bullets with code spans parses en_US.UTF-8: D stderr empty (want=0 got=442)
+FAIL B1 a long run of field lines and nested bullets with code spans parses en_US.UTF-8: CUR stderr empty (want=0 got=442)
+PASS B1 raw HTML outside any finding parses (the narrowed grammar is the finding's) C: CUR rc
+PASS B1 raw HTML outside any finding parses (the narrowed grammar is the finding's) C: D rc
+PASS B1 raw HTML outside any finding parses (the narrowed grammar is the finding's) C: D stderr empty
+PASS B1 raw HTML outside any finding parses (the narrowed grammar is the finding's) C: CUR stderr empty
+PASS B1 raw HTML outside any finding parses (the narrowed grammar is the finding's) en_US.UTF-8: CUR rc
+PASS B1 raw HTML outside any finding parses (the narrowed grammar is the finding's) en_US.UTF-8: D rc
+PASS B1 raw HTML outside any finding parses (the narrowed grammar is the finding's) en_US.UTF-8: D stderr empty
+PASS B1 raw HTML outside any finding parses (the narrowed grammar is the finding's) en_US.UTF-8: CUR stderr empty
+== B2: the recorded consequence, positives of T030o47 that carry raw HTML inside a finding: parse on CUR, refused by name on D
+  | B2 M br-prose C: CUR rc=0 D rc=3 manifest line 7: raw HTML outside a code span in finding O-017: Line one<br>line two names no tier.
+  | B2 M br-prose en_US.UTF-8: CUR rc=0 D rc=3 manifest line 7: raw HTML outside a code span in finding O-017: Line one<br>line two names no tier.
+  | B2 K br-prose C: CUR rc=0 D rc=3 raw HTML outside a code span in finding G-050; reconcile canonical records
+  | B2 K br-prose en_US.UTF-8: CUR rc=0 D rc=3 raw HTML outside a code span in finding G-050; reconcile canonical records
+PASS B2 br-prose: refused on D in both passes and both locales
+  | B2 M div-prose C: CUR rc=0 D rc=3 manifest line 7: raw HTML outside a code span in finding O-017: A note <div>with a block tag</div> and no tier
+  | B2 M div-prose en_US.UTF-8: CUR rc=0 D rc=3 manifest line 7: raw HTML outside a code span in finding O-017: A note <div>with a block tag</div> and no tier
+  | B2 K div-prose C: CUR rc=0 D rc=3 raw HTML outside a code span in finding G-050; reconcile canonical records
+  | B2 K div-prose en_US.UTF-8: CUR rc=0 D rc=3 raw HTML outside a code span in finding G-050; reconcile canonical records
+PASS B2 div-prose: refused on D in both passes and both locales
+  | B2 M details-block C: CUR rc=0 D rc=3 manifest line 7: raw HTML outside a code span in finding O-017: <details>
+  | B2 M details-block en_US.UTF-8: CUR rc=0 D rc=3 manifest line 7: raw HTML outside a code span in finding O-017: <details>
+  | B2 K details-block C: CUR rc=0 D rc=3 raw HTML outside a code span in finding G-050; reconcile canonical records
+  | B2 K details-block en_US.UTF-8: CUR rc=0 D rc=3 raw HTML outside a code span in finding G-050; reconcile canonical records
+PASS B2 details-block: refused on D in both passes and both locales
+  | B2 M span-in-prose C: CUR rc=0 D rc=3 manifest line 7: raw HTML outside a code span in finding O-017: Note <span>Severity: as noted</span> stays pro
+  | B2 M span-in-prose en_US.UTF-8: CUR rc=0 D rc=3 manifest line 7: raw HTML outside a code span in finding O-017: Note <span>Severity: as noted</span> stays pro
+  | B2 K span-in-prose C: CUR rc=0 D rc=3 raw HTML outside a code span in finding G-050; reconcile canonical records
+  | B2 K span-in-prose en_US.UTF-8: CUR rc=0 D rc=3 raw HTML outside a code span in finding G-050; reconcile canonical records
+PASS B2 span-in-prose: refused on D in both passes and both locales
+  | B2 M blank-line-ends-run C: CUR rc=0 D rc=3 manifest line 7: raw HTML outside a code span in finding O-017: <b title="a
+  | B2 M blank-line-ends-run en_US.UTF-8: CUR rc=0 D rc=3 manifest line 7: raw HTML outside a code span in finding O-017: <b title="a
+  | B2 K blank-line-ends-run C: CUR rc=0 D rc=3 raw HTML outside a code span in finding G-050; reconcile canonical records
+  | B2 K blank-line-ends-run en_US.UTF-8: CUR rc=0 D rc=3 raw HTML outside a code span in finding G-050; reconcile canonical records
+PASS B2 blank-line-ends-run: refused on D in both passes and both locales
+  | B2 M quoted-heading-then-attribute-line C: CUR rc=0 D rc=3 manifest line 7: raw HTML outside a code span in finding O-017: > #### <abbr
+  | B2 M quoted-heading-then-attribute-line en_US.UTF-8: CUR rc=0 D rc=3 manifest line 7: raw HTML outside a code span in finding O-017: > #### <abbr
+  | B2 K quoted-heading-then-attribute-line C: CUR rc=0 D rc=3 raw HTML outside a code span in finding G-050; reconcile canonical records
+  | B2 K quoted-heading-then-attribute-line en_US.UTF-8: CUR rc=0 D rc=3 raw HTML outside a code span in finding G-050; reconcile canonical records
+PASS B2 quoted-heading-then-attribute-line: refused on D in both passes and both locales
+  | B2 M real-fence-image C: CUR rc=0 D rc=3 manifest line 10: quoted content carries a Severity line: y](u)Severity: data-loss
+  | B2 M real-fence-image en_US.UTF-8: CUR rc=0 D rc=3 manifest line 10: quoted content carries a Severity line: y](u)Severity: data-loss
+  | B2 K real-fence-image C: CUR rc=0 D rc=3 quoted content carries a Severity line; reconcile canonical records
+  | B2 K real-fence-image en_US.UTF-8: CUR rc=0 D rc=3 quoted content carries a Severity line; reconcile canonical records
+PASS B2 real-fence-image: refused on D in both passes and both locales
+  | B2 M multiline-span-tag C: CUR rc=0 D rc=3 manifest line 8: raw HTML outside a code span in finding O-017: and <b> closes` here, no tier.
+  | B2 M multiline-span-tag en_US.UTF-8: CUR rc=0 D rc=3 manifest line 8: raw HTML outside a code span in finding O-017: and <b> closes` here, no tier.
+  | B2 K multiline-span-tag C: CUR rc=0 D rc=3 raw HTML outside a code span in finding G-050; reconcile canonical records
+  | B2 K multiline-span-tag en_US.UTF-8: CUR rc=0 D rc=3 raw HTML outside a code span in finding G-050; reconcile canonical records
+PASS B2 multiline-span-tag: refused on D in both passes and both locales
+PASS B2 the O-021 block <div> after a field line: parses on CUR, refused on D
+PASS B2 the O-021 block <div>: D says
+PASS B2 the O-021 block <details> after a field line: parses on CUR, refused on D
+PASS B2 the O-021 block <details>: D says
+== B3: the real prior-review manifest and every returned round report read as a manifest
+PASS B3 the 2026-09-09 manifest parses C: CUR rc
+PASS B3 the 2026-09-09 manifest parses C: D rc
+PASS B3 the 2026-09-09 manifest parses C: D stderr empty
+PASS B3 the 2026-09-09 manifest parses C: CUR stderr empty
+PASS B3 the 2026-09-09 manifest parses en_US.UTF-8: CUR rc
+PASS B3 the 2026-09-09 manifest parses en_US.UTF-8: D rc
+PASS B3 the 2026-09-09 manifest parses en_US.UTF-8: D stderr empty
+PASS B3 the 2026-09-09 manifest parses en_US.UTF-8: CUR stderr empty
+PASS B3 the 2026-09-09 manifest: CUR and D catalogs identical
+PASS B3 opponent-round10 as a manifest parses C: CUR rc
+PASS B3 opponent-round10 as a manifest parses C: D rc
+PASS B3 opponent-round10 as a manifest parses C: D stderr empty
+PASS B3 opponent-round10 as a manifest parses C: CUR stderr empty
+PASS B3 opponent-round10 as a manifest parses en_US.UTF-8: CUR rc
+PASS B3 opponent-round10 as a manifest parses en_US.UTF-8: D rc
+PASS B3 opponent-round10 as a manifest parses en_US.UTF-8: D stderr empty
+PASS B3 opponent-round10 as a manifest parses en_US.UTF-8: CUR stderr empty
+PASS B3 opponent-round11 as a manifest parses C: CUR rc
+PASS B3 opponent-round11 as a manifest parses C: D rc
+PASS B3 opponent-round11 as a manifest parses C: D stderr empty
+PASS B3 opponent-round11 as a manifest parses C: CUR stderr empty
+PASS B3 opponent-round11 as a manifest parses en_US.UTF-8: CUR rc
+PASS B3 opponent-round11 as a manifest parses en_US.UTF-8: D rc
+PASS B3 opponent-round11 as a manifest parses en_US.UTF-8: D stderr empty
+PASS B3 opponent-round11 as a manifest parses en_US.UTF-8: CUR stderr empty
+PASS B3 opponent-round12 as a manifest parses C: CUR rc
+PASS B3 opponent-round12 as a manifest parses C: D rc
+PASS B3 opponent-round12 as a manifest parses C: D stderr empty
+PASS B3 opponent-round12 as a manifest parses C: CUR stderr empty
+PASS B3 opponent-round12 as a manifest parses en_US.UTF-8: CUR rc
+PASS B3 opponent-round12 as a manifest parses en_US.UTF-8: D rc
+PASS B3 opponent-round12 as a manifest parses en_US.UTF-8: D stderr empty
+PASS B3 opponent-round12 as a manifest parses en_US.UTF-8: CUR stderr empty
+PASS B3 opponent-round13 as a manifest parses C: CUR rc
+PASS B3 opponent-round13 as a manifest parses C: D rc
+PASS B3 opponent-round13 as a manifest parses C: D stderr empty
+PASS B3 opponent-round13 as a manifest parses C: CUR stderr empty
+PASS B3 opponent-round13 as a manifest parses en_US.UTF-8: CUR rc
+PASS B3 opponent-round13 as a manifest parses en_US.UTF-8: D rc
+PASS B3 opponent-round13 as a manifest parses en_US.UTF-8: D stderr empty
+PASS B3 opponent-round13 as a manifest parses en_US.UTF-8: CUR stderr empty
+PASS B3 opponent-round14 as a manifest parses C: CUR rc
+PASS B3 opponent-round14 as a manifest parses C: D rc
+PASS B3 opponent-round14 as a manifest parses C: D stderr empty
+PASS B3 opponent-round14 as a manifest parses C: CUR stderr empty
+PASS B3 opponent-round14 as a manifest parses en_US.UTF-8: CUR rc
+PASS B3 opponent-round14 as a manifest parses en_US.UTF-8: D rc
+PASS B3 opponent-round14 as a manifest parses en_US.UTF-8: D stderr empty
+PASS B3 opponent-round14 as a manifest parses en_US.UTF-8: CUR stderr empty
+PASS B3 opponent-round15 as a manifest parses C: CUR rc
+PASS B3 opponent-round15 as a manifest parses C: D rc
+PASS B3 opponent-round15 as a manifest parses C: D stderr empty
+PASS B3 opponent-round15 as a manifest parses C: CUR stderr empty
+PASS B3 opponent-round15 as a manifest parses en_US.UTF-8: CUR rc
+PASS B3 opponent-round15 as a manifest parses en_US.UTF-8: D rc
+PASS B3 opponent-round15 as a manifest parses en_US.UTF-8: D stderr empty
+PASS B3 opponent-round15 as a manifest parses en_US.UTF-8: CUR stderr empty
+PASS B3 opponent-round16 as a manifest parses C: CUR rc
+PASS B3 opponent-round16 as a manifest parses C: D rc
+PASS B3 opponent-round16 as a manifest parses C: D stderr empty
+PASS B3 opponent-round16 as a manifest parses C: CUR stderr empty
+PASS B3 opponent-round16 as a manifest parses en_US.UTF-8: CUR rc
+PASS B3 opponent-round16 as a manifest parses en_US.UTF-8: D rc
+PASS B3 opponent-round16 as a manifest parses en_US.UTF-8: D stderr empty
+PASS B3 opponent-round16 as a manifest parses en_US.UTF-8: CUR stderr empty
+PASS B3 opponent-round2 as a manifest parses C: CUR rc
+PASS B3 opponent-round2 as a manifest parses C: D rc
+PASS B3 opponent-round2 as a manifest parses C: D stderr empty
+PASS B3 opponent-round2 as a manifest parses C: CUR stderr empty
+PASS B3 opponent-round2 as a manifest parses en_US.UTF-8: CUR rc
+PASS B3 opponent-round2 as a manifest parses en_US.UTF-8: D rc
+PASS B3 opponent-round2 as a manifest parses en_US.UTF-8: D stderr empty
+PASS B3 opponent-round2 as a manifest parses en_US.UTF-8: CUR stderr empty
+PASS B3 opponent-round3-reconcile as a manifest parses C: CUR rc
+PASS B3 opponent-round3-reconcile as a manifest parses C: D rc
+PASS B3 opponent-round3-reconcile as a manifest parses C: D stderr empty
+PASS B3 opponent-round3-reconcile as a manifest parses C: CUR stderr empty
+PASS B3 opponent-round3-reconcile as a manifest parses en_US.UTF-8: CUR rc
+PASS B3 opponent-round3-reconcile as a manifest parses en_US.UTF-8: D rc
+PASS B3 opponent-round3-reconcile as a manifest parses en_US.UTF-8: D stderr empty
+PASS B3 opponent-round3-reconcile as a manifest parses en_US.UTF-8: CUR stderr empty
+PASS B3 opponent-round3 as a manifest parses C: CUR rc
+PASS B3 opponent-round3 as a manifest parses C: D rc
+PASS B3 opponent-round3 as a manifest parses C: D stderr empty
+PASS B3 opponent-round3 as a manifest parses C: CUR stderr empty
+PASS B3 opponent-round3 as a manifest parses en_US.UTF-8: CUR rc
+PASS B3 opponent-round3 as a manifest parses en_US.UTF-8: D rc
+PASS B3 opponent-round3 as a manifest parses en_US.UTF-8: D stderr empty
+PASS B3 opponent-round3 as a manifest parses en_US.UTF-8: CUR stderr empty
+PASS B3 opponent-round4 as a manifest parses C: CUR rc
+PASS B3 opponent-round4 as a manifest parses C: D rc
+PASS B3 opponent-round4 as a manifest parses C: D stderr empty
+PASS B3 opponent-round4 as a manifest parses C: CUR stderr empty
+PASS B3 opponent-round4 as a manifest parses en_US.UTF-8: CUR rc
+PASS B3 opponent-round4 as a manifest parses en_US.UTF-8: D rc
+PASS B3 opponent-round4 as a manifest parses en_US.UTF-8: D stderr empty
+PASS B3 opponent-round4 as a manifest parses en_US.UTF-8: CUR stderr empty
+PASS B3 opponent-round5 as a manifest parses C: CUR rc
+PASS B3 opponent-round5 as a manifest parses C: D rc
+PASS B3 opponent-round5 as a manifest parses C: D stderr empty
+PASS B3 opponent-round5 as a manifest parses C: CUR stderr empty
+PASS B3 opponent-round5 as a manifest parses en_US.UTF-8: CUR rc
+PASS B3 opponent-round5 as a manifest parses en_US.UTF-8: D rc
+PASS B3 opponent-round5 as a manifest parses en_US.UTF-8: D stderr empty
+PASS B3 opponent-round5 as a manifest parses en_US.UTF-8: CUR stderr empty
+PASS B3 opponent-round6 as a manifest parses C: CUR rc
+PASS B3 opponent-round6 as a manifest parses C: D rc
+PASS B3 opponent-round6 as a manifest parses C: D stderr empty
+PASS B3 opponent-round6 as a manifest parses C: CUR stderr empty
+PASS B3 opponent-round6 as a manifest parses en_US.UTF-8: CUR rc
+PASS B3 opponent-round6 as a manifest parses en_US.UTF-8: D rc
+PASS B3 opponent-round6 as a manifest parses en_US.UTF-8: D stderr empty
+PASS B3 opponent-round6 as a manifest parses en_US.UTF-8: CUR stderr empty
+PASS B3 opponent-round8 as a manifest parses C: CUR rc
+PASS B3 opponent-round8 as a manifest parses C: D rc
+PASS B3 opponent-round8 as a manifest parses C: D stderr empty
+PASS B3 opponent-round8 as a manifest parses C: CUR stderr empty
+PASS B3 opponent-round8 as a manifest parses en_US.UTF-8: CUR rc
+PASS B3 opponent-round8 as a manifest parses en_US.UTF-8: D rc
+PASS B3 opponent-round8 as a manifest parses en_US.UTF-8: D stderr empty
+PASS B3 opponent-round8 as a manifest parses en_US.UTF-8: CUR stderr empty
+PASS B3 opponent-round9 as a manifest parses C: CUR rc
+PASS B3 opponent-round9 as a manifest parses C: D rc
+PASS B3 opponent-round9 as a manifest parses C: D stderr empty
+PASS B3 opponent-round9 as a manifest parses C: CUR stderr empty
+PASS B3 opponent-round9 as a manifest parses en_US.UTF-8: CUR rc
+PASS B3 opponent-round9 as a manifest parses en_US.UTF-8: D rc
+PASS B3 opponent-round9 as a manifest parses en_US.UTF-8: D stderr empty
+PASS B3 opponent-round9 as a manifest parses en_US.UTF-8: CUR stderr empty
+PASS B3 every returned file read (rounds 2 to 6 and 8 to 16, and the round-3 reconcile record, each once)
+== C: the recorded history, CUR against D
+PASS C 001-codex-subagent-gates-and-hard-task-escalation tally under C: CUR and D identical, kit path normalized (output and exit)
+PASS C 001-codex-subagent-gates-and-hard-task-escalation an under C: CUR and D identical, kit path normalized (output and exit)
+PASS C 001-codex-subagent-gates-and-hard-task-escalation cov under C: CUR and D identical, kit path normalized (output and exit)
+  | 001-codex-subagent-gates-and-hard-task-escalation under C: tally exit 3, analyzer exit 0, ac-coverage exit 0
+PASS C 001-codex-subagent-gates-and-hard-task-escalation opponent catalog under C: CUR and D identical (or written by neither)
+PASS C 001-codex-subagent-gates-and-hard-task-escalation opponent diagnostics and exit under C: CUR and D identical
+PASS C 001-codex-subagent-gates-and-hard-task-escalation opponent every extracted round block under C: CUR and D identical (1 rounds)
+PASS C 001-codex-subagent-gates-and-hard-task-escalation reality-check catalog under C: CUR and D identical (or written by neither)
+PASS C 001-codex-subagent-gates-and-hard-task-escalation reality-check diagnostics and exit under C: CUR and D identical
+PASS C 001-codex-subagent-gates-and-hard-task-escalation reality-check every extracted round block under C: CUR and D identical (1 rounds)
+PASS C 001-codex-subagent-gates-and-hard-task-escalation plan binding catalog and diagnostics under C: CUR and D identical
+PASS C 001-codex-subagent-gates-and-hard-task-escalation tasks binding catalog and diagnostics under C: CUR and D identical
+PASS C 001-codex-subagent-gates-and-hard-task-escalation stage map and configuration catalog under C: CUR and D identical
+PASS C 001-codex-subagent-gates-and-hard-task-escalation STATUS.md semantic view under C: CUR and D identical
+PASS C 001-codex-subagent-gates-and-hard-task-escalation tasks.md semantic view under C: CUR and D identical
+PASS C 001-codex-subagent-gates-and-hard-task-escalation plan.md semantic view under C: CUR and D identical
+PASS C 001-codex-subagent-gates-and-hard-task-escalation spec.md semantic view under C: CUR and D identical
+PASS C 001-codex-subagent-gates-and-hard-task-escalation tally under en_US.UTF-8: CUR and D identical, kit path normalized (output and exit)
+PASS C 001-codex-subagent-gates-and-hard-task-escalation an under en_US.UTF-8: CUR and D identical, kit path normalized (output and exit)
+PASS C 001-codex-subagent-gates-and-hard-task-escalation cov under en_US.UTF-8: CUR and D identical, kit path normalized (output and exit)
+  | 001-codex-subagent-gates-and-hard-task-escalation under en_US.UTF-8: tally exit 3, analyzer exit 0, ac-coverage exit 0
+PASS C 001-codex-subagent-gates-and-hard-task-escalation opponent catalog under en_US.UTF-8: CUR and D identical (or written by neither)
+PASS C 001-codex-subagent-gates-and-hard-task-escalation opponent diagnostics and exit under en_US.UTF-8: CUR and D identical
+PASS C 001-codex-subagent-gates-and-hard-task-escalation opponent every extracted round block under en_US.UTF-8: CUR and D identical (1 rounds)
+PASS C 001-codex-subagent-gates-and-hard-task-escalation reality-check catalog under en_US.UTF-8: CUR and D identical (or written by neither)
+PASS C 001-codex-subagent-gates-and-hard-task-escalation reality-check diagnostics and exit under en_US.UTF-8: CUR and D identical
+PASS C 001-codex-subagent-gates-and-hard-task-escalation reality-check every extracted round block under en_US.UTF-8: CUR and D identical (1 rounds)
+PASS C 001-codex-subagent-gates-and-hard-task-escalation plan binding catalog and diagnostics under en_US.UTF-8: CUR and D identical
+PASS C 001-codex-subagent-gates-and-hard-task-escalation tasks binding catalog and diagnostics under en_US.UTF-8: CUR and D identical
+PASS C 001-codex-subagent-gates-and-hard-task-escalation stage map and configuration catalog under en_US.UTF-8: CUR and D identical
+PASS C 001-codex-subagent-gates-and-hard-task-escalation STATUS.md semantic view under en_US.UTF-8: CUR and D identical
+PASS C 001-codex-subagent-gates-and-hard-task-escalation tasks.md semantic view under en_US.UTF-8: CUR and D identical
+PASS C 001-codex-subagent-gates-and-hard-task-escalation plan.md semantic view under en_US.UTF-8: CUR and D identical
+PASS C 001-codex-subagent-gates-and-hard-task-escalation spec.md semantic view under en_US.UTF-8: CUR and D identical
+PASS C 002-usage-limit-handling-for-dispatched-runs tally under C: CUR and D identical, kit path normalized (output and exit)
+PASS C 002-usage-limit-handling-for-dispatched-runs an under C: CUR and D identical, kit path normalized (output and exit)
+PASS C 002-usage-limit-handling-for-dispatched-runs cov under C: CUR and D identical, kit path normalized (output and exit)
+  | 002-usage-limit-handling-for-dispatched-runs under C: tally exit 0, analyzer exit 0, ac-coverage exit 0
+PASS C 002-usage-limit-handling-for-dispatched-runs opponent catalog under C: CUR and D identical (or written by neither)
+PASS C 002-usage-limit-handling-for-dispatched-runs opponent diagnostics and exit under C: CUR and D identical
+PASS C 002-usage-limit-handling-for-dispatched-runs opponent every extracted round block under C: CUR and D identical (5 rounds)
+PASS C 002-usage-limit-handling-for-dispatched-runs reality-check catalog under C: CUR and D identical (or written by neither)
+PASS C 002-usage-limit-handling-for-dispatched-runs reality-check diagnostics and exit under C: CUR and D identical
+PASS C 002-usage-limit-handling-for-dispatched-runs reality-check every extracted round block under C: CUR and D identical (1 rounds)
+PASS C 002-usage-limit-handling-for-dispatched-runs plan binding catalog and diagnostics under C: CUR and D identical
+PASS C 002-usage-limit-handling-for-dispatched-runs tasks binding catalog and diagnostics under C: CUR and D identical
+PASS C 002-usage-limit-handling-for-dispatched-runs stage map and configuration catalog under C: CUR and D identical
+PASS C 002-usage-limit-handling-for-dispatched-runs STATUS.md semantic view under C: CUR and D identical
+PASS C 002-usage-limit-handling-for-dispatched-runs tasks.md semantic view under C: CUR and D identical
+PASS C 002-usage-limit-handling-for-dispatched-runs plan.md semantic view under C: CUR and D identical
+PASS C 002-usage-limit-handling-for-dispatched-runs spec.md semantic view under C: CUR and D identical
+PASS C 002-usage-limit-handling-for-dispatched-runs tally under en_US.UTF-8: CUR and D identical, kit path normalized (output and exit)
+PASS C 002-usage-limit-handling-for-dispatched-runs an under en_US.UTF-8: CUR and D identical, kit path normalized (output and exit)
+PASS C 002-usage-limit-handling-for-dispatched-runs cov under en_US.UTF-8: CUR and D identical, kit path normalized (output and exit)
+  | 002-usage-limit-handling-for-dispatched-runs under en_US.UTF-8: tally exit 0, analyzer exit 0, ac-coverage exit 0
+PASS C 002-usage-limit-handling-for-dispatched-runs opponent catalog under en_US.UTF-8: CUR and D identical (or written by neither)
+PASS C 002-usage-limit-handling-for-dispatched-runs opponent diagnostics and exit under en_US.UTF-8: CUR and D identical
+PASS C 002-usage-limit-handling-for-dispatched-runs opponent every extracted round block under en_US.UTF-8: CUR and D identical (5 rounds)
+PASS C 002-usage-limit-handling-for-dispatched-runs reality-check catalog under en_US.UTF-8: CUR and D identical (or written by neither)
+PASS C 002-usage-limit-handling-for-dispatched-runs reality-check diagnostics and exit under en_US.UTF-8: CUR and D identical
+PASS C 002-usage-limit-handling-for-dispatched-runs reality-check every extracted round block under en_US.UTF-8: CUR and D identical (1 rounds)
+PASS C 002-usage-limit-handling-for-dispatched-runs plan binding catalog and diagnostics under en_US.UTF-8: CUR and D identical
+PASS C 002-usage-limit-handling-for-dispatched-runs tasks binding catalog and diagnostics under en_US.UTF-8: CUR and D identical
+PASS C 002-usage-limit-handling-for-dispatched-runs stage map and configuration catalog under en_US.UTF-8: CUR and D identical
+PASS C 002-usage-limit-handling-for-dispatched-runs STATUS.md semantic view under en_US.UTF-8: CUR and D identical
+PASS C 002-usage-limit-handling-for-dispatched-runs tasks.md semantic view under en_US.UTF-8: CUR and D identical
+PASS C 002-usage-limit-handling-for-dispatched-runs plan.md semantic view under en_US.UTF-8: CUR and D identical
+PASS C 002-usage-limit-handling-for-dispatched-runs spec.md semantic view under en_US.UTF-8: CUR and D identical
+PASS C 003-gate-round-reduction-and-token-discipline tally under C: CUR and D identical, kit path normalized (output and exit)
+PASS C 003-gate-round-reduction-and-token-discipline an under C: CUR and D identical, kit path normalized (output and exit)
+PASS C 003-gate-round-reduction-and-token-discipline cov under C: CUR and D identical, kit path normalized (output and exit)
+  | 003-gate-round-reduction-and-token-discipline under C: tally exit 0, analyzer exit 0, ac-coverage exit 0
+PASS C 003-gate-round-reduction-and-token-discipline opponent catalog under C: CUR and D identical (or written by neither)
+PASS C 003-gate-round-reduction-and-token-discipline opponent diagnostics and exit under C: CUR and D identical
+PASS C 003-gate-round-reduction-and-token-discipline opponent every extracted round block under C: CUR and D identical (16 rounds)
+PASS C 003-gate-round-reduction-and-token-discipline reality-check catalog under C: CUR and D identical (or written by neither)
+PASS C 003-gate-round-reduction-and-token-discipline reality-check diagnostics and exit under C: CUR and D identical
+PASS C 003-gate-round-reduction-and-token-discipline reality-check every extracted round block under C: CUR and D identical (1 rounds)
+PASS C 003-gate-round-reduction-and-token-discipline plan binding catalog and diagnostics under C: CUR and D identical
+PASS C 003-gate-round-reduction-and-token-discipline tasks binding catalog and diagnostics under C: CUR and D identical
+PASS C 003-gate-round-reduction-and-token-discipline stage map and configuration catalog under C: CUR and D identical
+PASS C 003-gate-round-reduction-and-token-discipline STATUS.md semantic view under C: CUR and D identical
+PASS C 003-gate-round-reduction-and-token-discipline tasks.md semantic view under C: CUR and D identical
+PASS C 003-gate-round-reduction-and-token-discipline plan.md semantic view under C: CUR and D identical
+PASS C 003-gate-round-reduction-and-token-discipline spec.md semantic view under C: CUR and D identical
+PASS C 003-gate-round-reduction-and-token-discipline tally under en_US.UTF-8: CUR and D identical, kit path normalized (output and exit)
+PASS C 003-gate-round-reduction-and-token-discipline an under en_US.UTF-8: CUR and D identical, kit path normalized (output and exit)
+PASS C 003-gate-round-reduction-and-token-discipline cov under en_US.UTF-8: CUR and D identical, kit path normalized (output and exit)
+  | 003-gate-round-reduction-and-token-discipline under en_US.UTF-8: tally exit 0, analyzer exit 0, ac-coverage exit 0
+PASS C 003-gate-round-reduction-and-token-discipline opponent catalog under en_US.UTF-8: CUR and D identical (or written by neither)
+PASS C 003-gate-round-reduction-and-token-discipline opponent diagnostics and exit under en_US.UTF-8: CUR and D identical
+PASS C 003-gate-round-reduction-and-token-discipline opponent every extracted round block under en_US.UTF-8: CUR and D identical (16 rounds)
+PASS C 003-gate-round-reduction-and-token-discipline reality-check catalog under en_US.UTF-8: CUR and D identical (or written by neither)
+PASS C 003-gate-round-reduction-and-token-discipline reality-check diagnostics and exit under en_US.UTF-8: CUR and D identical
+PASS C 003-gate-round-reduction-and-token-discipline reality-check every extracted round block under en_US.UTF-8: CUR and D identical (1 rounds)
+PASS C 003-gate-round-reduction-and-token-discipline plan binding catalog and diagnostics under en_US.UTF-8: CUR and D identical
+PASS C 003-gate-round-reduction-and-token-discipline tasks binding catalog and diagnostics under en_US.UTF-8: CUR and D identical
+PASS C 003-gate-round-reduction-and-token-discipline stage map and configuration catalog under en_US.UTF-8: CUR and D identical
+PASS C 003-gate-round-reduction-and-token-discipline STATUS.md semantic view under en_US.UTF-8: CUR and D identical
+PASS C 003-gate-round-reduction-and-token-discipline tasks.md semantic view under en_US.UTF-8: CUR and D identical
+PASS C 003-gate-round-reduction-and-token-discipline plan.md semantic view under en_US.UTF-8: CUR and D identical
+PASS C 003-gate-round-reduction-and-token-discipline spec.md semantic view under en_US.UTF-8: CUR and D identical
+  the sealed digests: every completed round ledger of 003 against D's extracted block
+PASS C 003 opponent round 1 sealed digest under C equals D's block
+PASS C 003 opponent round 1 sealed digest under en_US.UTF-8 equals D's block
+PASS C 003 opponent round 10 sealed digest under C equals D's block
+PASS C 003 opponent round 10 sealed digest under en_US.UTF-8 equals D's block
+PASS C 003 opponent round 11 sealed digest under C equals D's block
+PASS C 003 opponent round 11 sealed digest under en_US.UTF-8 equals D's block
+PASS C 003 opponent round 12 sealed digest under C equals D's block
+PASS C 003 opponent round 12 sealed digest under en_US.UTF-8 equals D's block
+PASS C 003 opponent round 13 sealed digest under C equals D's block
+PASS C 003 opponent round 13 sealed digest under en_US.UTF-8 equals D's block
+PASS C 003 opponent round 14 sealed digest under C equals D's block
+PASS C 003 opponent round 14 sealed digest under en_US.UTF-8 equals D's block
+PASS C 003 opponent round 15 sealed digest under C equals D's block
+PASS C 003 opponent round 15 sealed digest under en_US.UTF-8 equals D's block
+PASS C 003 opponent round 16 sealed digest under C equals D's block
+PASS C 003 opponent round 16 sealed digest under en_US.UTF-8 equals D's block
+PASS C 003 opponent round 2 sealed digest under C equals D's block
+PASS C 003 opponent round 2 sealed digest under en_US.UTF-8 equals D's block
+PASS C 003 opponent round 3 sealed digest under C equals D's block
+PASS C 003 opponent round 3 sealed digest under en_US.UTF-8 equals D's block
+PASS C 003 opponent round 4 sealed digest under C equals D's block
+PASS C 003 opponent round 4 sealed digest under en_US.UTF-8 equals D's block
+PASS C 003 opponent round 5 sealed digest under C equals D's block
+PASS C 003 opponent round 5 sealed digest under en_US.UTF-8 equals D's block
+PASS C 003 opponent round 6 sealed digest under C equals D's block
+PASS C 003 opponent round 6 sealed digest under en_US.UTF-8 equals D's block
+PASS C 003 opponent round 7 sealed digest under C equals D's block
+PASS C 003 opponent round 7 sealed digest under en_US.UTF-8 equals D's block
+PASS C 003 opponent round 8 sealed digest under C equals D's block
+PASS C 003 opponent round 8 sealed digest under en_US.UTF-8 equals D's block
+PASS C 003 opponent round 9 sealed digest under C equals D's block
+PASS C 003 opponent round 9 sealed digest under en_US.UTF-8 equals D's block
+PASS C 003 reality-check round 1 sealed digest under C equals D's block
+PASS C 003 reality-check round 1 sealed digest under en_US.UTF-8 equals D's block
+PASS C 003: seventeen sealed rounds compared (sixteen opponent, one reality-check)
+PASS C waiver check for round 16: CUR and D identical
+PASS C waiver check for round 17: CUR and D identical
+PASS C waiver round 16 reported completed (exit 0)
+PASS C waiver round 17 refused (exit 4)
+PASS C snapshot records outside the two candidate files identical (kit path normalized)
+  | snapshot: CUR 3da5d1c62874d82c, D c313a4bb914e77b3, records compared 366
+  | timing: 003 tally on cur took 104 s
+  | timing: 003 tally on d took 100 s
+== E: O-023, the run reader timed (one canonical round whose Reproduced field holds n sub-bullets)
+  | D legal n=50: 0s rc=0
+  | D legal n=100: 0s rc=0
+  | D legal n=200: 0s rc=0
+  | D legal n=400: 0s rc=0
+  | D html n=100: 0s rc=3 raw HTML outside a code span in finding G-050; reconcile canonical records
+  | D html n=200: 0s rc=3 raw HTML outside a code span in finding G-050; reconcile canonical records
+  | CUR legal n=100: 49s rc=0
+PASS E D: the 400-line legal run parses (rc 0)
+PASS E D: the 200-line run with tags outside code spans is refused (rc 3)
+PASS E D: the 400-line legal run takes under 30 s
+PASS E D: the 200-line html run takes under 30 s
+PASS E D: doubling the legal run from 200 to 400 lines at most quadruples its time (plus 2 s)
+== D: the full suite on D in its own copy (TMPDIR ending in /), failures read assertion by assertion
+  | suite rc=1; per-suite:   -- 10/10 passed   -- 2/2 passed   -- 17/18 passed   -- 5/5 passed   -- 13/13 passed   -- 9/9 passed   -- 19/19 passed   -- 9/9 passed   -- 4/4 passed   -- 7/8 passed   -- 6/6 passed   -- 3/3 passed   -- 11/11 passed   -- 27/27 passed   -- 3/3 passed 
+  |   FAIL test_reports_and_tally
+  |   FAIL test_rounds
+  |          assert: expected exit 0, got 3: bash -c . "$1"; vf_reports "$2" opponent "$3" "$4" _ /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/06f7a0b3-b652-4da3-832e-aad664056a31/scratchpad/r17-measure/dsuite/scripts/ve
+  |          assert: AC-012: a plausible manifest (severity-then-pre-block) was refused (T030o43 review 2) unexpectedly contains: prior-review manifest could not be parsed
+  |          assert: expected exit 0, got 3: bash -c . "$1"; vf_reports "$2" opponent "$3" "$4" _ /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/06f7a0b3-b652-4da3-832e-aad664056a31/scratchpad/r17-measure/dsuite/scripts/ve
+  |          assert: AC-012: a plausible manifest (severity-then-comment) was refused (T030o43 review 2) unexpectedly contains: prior-review manifest could not be parsed
+  |          assert: expected exit 0, got 3: bash -c . "$1"; vf_reports "$2" opponent "$3" "$4" _ /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/06f7a0b3-b652-4da3-832e-aad664056a31/scratchpad/r17-measure/dsuite/scripts/ve
+  |          assert: AC-012: a plausible manifest (severity-then-div) was refused (T030o43 review 2) unexpectedly contains: prior-review manifest could not be parsed
+  |          assert: expected exit 0, got 3: bash -c . "$1"; vf_reports "$2" opponent "$3" "$4" _ /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/06f7a0b3-b652-4da3-832e-aad664056a31/scratchpad/r17-measure/dsuite/scripts/ve
+  |          assert: AC-012: a plausible manifest (severity-then-details) was refused (T030o43 review 2) unexpectedly contains: prior-review manifest could not be parsed
+  |          assert: expected exit 0, got 3: bash -c . "$1"; vf_reports "$2" opponent "$3" "$4" _ /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/06f7a0b3-b652-4da3-832e-aad664056a31/scratchpad/r17-measure/dsuite/scripts/ve
+  |          assert: AC-012: a plausible manifest (severity-then-closing-tag) was refused (T030o43 review 2) unexpectedly contains: prior-review manifest could not be parsed
+  |          assert: expected exit 0, got 3: bash -c . "$1"; vf_reports "$2" opponent "$3" "$4" _ /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/06f7a0b3-b652-4da3-832e-aad664056a31/scratchpad/r17-measure/dsuite/scripts/ve
+  |          assert: AC-012: a plausible manifest (wrapped-tag-prose) was refused (T030o43 review 2) unexpectedly contains: prior-review manifest could not be parsed
+  |          assert: expected exit 0, got 3: bash -c . "$1"; vf_reports "$2" opponent "$3" "$4" _ /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/06f7a0b3-b652-4da3-832e-aad664056a31/scratchpad/r17-measure/dsuite/scripts/ve
+  |          assert: AC-012: a plausible manifest (fenced-tag-example) was refused (T030o43 review 2) unexpectedly contains: prior-review manifest could not be parsed
+  |          assert: expected exit 0, got 3: bash -c . "$1"; vf_reports "$2" opponent "$3" "$4" _ /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/06f7a0b3-b652-4da3-832e-aad664056a31/scratchpad/r17-measure/dsuite/scripts/ve
+  |          assert: AC-012: a plausible manifest (heading-then-attribute-line) was refused (T030o43 review 2) unexpectedly contains: prior-review manifest could not be parsed
+  |          assert: expected exit 0, got 3: bash -c . "$1"; vf_reports "$2" opponent "$3" "$4" _ /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/06f7a0b3-b652-4da3-832e-aad664056a31/scratchpad/r17-measure/dsuite/scripts/ve
+  |          assert: AC-012: a plausible manifest (br-prose) was refused (T030o43 review 2) unexpectedly contains: prior-review manifest could not be parsed
+  |          assert: expected exit 0, got 3: bash -c . "$1"; vf_reports "$2" opponent "$3" "$4" _ /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/06f7a0b3-b652-4da3-832e-aad664056a31/scratchpad/r17-measure/dsuite/scripts/ve
+  |          assert: AC-012: a plausible manifest (quoted-heading-then-attribute-line) was refused (T030o43 review 2) unexpectedly contains: prior-review manifest could not be parsed
+  |          assert: expected exit 0, got 3: bash -c . "$1"; vf_reports "$2" opponent "$3" "$4" _ /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/06f7a0b3-b652-4da3-832e-aad664056a31/scratchpad/r17-measure/dsuite/scripts/ve
+  |          assert: AC-012: a plausible manifest (span-in-prose) was refused (T030o43 review 2) unexpectedly contains: prior-review manifest could not be parsed
+  |          assert: expected exit 0, got 3: bash -c . "$1"; vf_reports "$2" opponent "$3" "$4" _ /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/06f7a0b3-b652-4da3-832e-aad664056a31/scratchpad/r17-measure/dsuite/scripts/ve
+  |          assert: AC-012: a plausible manifest (blank-line-ends-run) was refused (T030o43 review 2) unexpectedly contains: prior-review manifest could not be parsed
+  |          assert: expected exit 0, got 3: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/06f7a0b3-b652-4da3-832e-aad664056a31/scratchpad/r17-measure/tmp-suite/sddkit.rtObXy/record-lines/notes/opponent.m
+  |          assert: AC-012: a Where value with br and p tags and no tier was refused under LANG=C (O-018) unexpectedly contains: report recovery
+  |          assert: expected exit 0, got 3: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/06f7a0b3-b652-4da3-832e-aad664056a31/scratchpad/r17-measure/tmp-suite/sddkit.rtObXy/record-lines/notes/
+  |          assert: AC-012: a Where value with br and p tags and no tier was refused under LANG=en_US.UTF-8 (O-018) unexpectedly contains: report recovery
+  |          assert: expected exit 0, got 3: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/06f7a0b3-b652-4da3-832e-aad664056a31/scratchpad/r17-measure/tmp-suite/sddkit.rtObXy/record-lines/notes/opponent.m
+  |          assert: AC-012: a Severity line followed by a div-block was refused under LANG=C (O-021) unexpectedly contains: report recovery
+  |          assert: expected exit 0, got 3: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/06f7a0b3-b652-4da3-832e-aad664056a31/scratchpad/r17-measure/tmp-suite/sddkit.rtObXy/record-lines/notes/
+  |          assert: AC-012: a Severity line followed by a div-block was refused under LANG=en_US.UTF-8 (O-021) unexpectedly contains: report recovery
+  |          assert: expected exit 0, got 3: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/06f7a0b3-b652-4da3-832e-aad664056a31/scratchpad/r17-measure/tmp-suite/sddkit.rtObXy/record-lines/notes/opponent.m
+  |          assert: AC-012: a Severity line followed by a details-block was refused under LANG=C (O-021) unexpectedly contains: report recovery
+  |          assert: expected exit 0, got 3: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/06f7a0b3-b652-4da3-832e-aad664056a31/scratchpad/r17-measure/tmp-suite/sddkit.rtObXy/record-lines/notes/
+  |          assert: AC-012: a Severity line followed by a details-block was refused under LANG=en_US.UTF-8 (O-021) unexpectedly contains: report recovery
+  |          assert: expected exit 0, got 3: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/06f7a0b3-b652-4da3-832e-aad664056a31/scratchpad/r17-measure/tmp-suite/sddkit.rtObXy/record-lines/notes/opponent.m
+  |          assert: AC-012: a Severity line followed by a closing-tag was refused under LANG=C (O-021) unexpectedly contains: report recovery
+  |          assert: expected exit 0, got 3: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/06f7a0b3-b652-4da3-832e-aad664056a31/scratchpad/r17-measure/tmp-suite/sddkit.rtObXy/record-lines/notes/
+  |          assert: AC-012: a Severity line followed by a closing-tag was refused under LANG=en_US.UTF-8 (O-021) unexpectedly contains: report recovery
+  |          assert: expected exit 0, got 3: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/06f7a0b3-b652-4da3-832e-aad664056a31/scratchpad/r17-measure/tmp-suite/sddkit.rtObXy/record-lines/notes/opponent.m
+  |          assert: AC-012: a canonical finding with a-empty-comment-then-prose was refused under LANG=C (O-018) unexpectedly contains: report recovery
+  |          assert: expected exit 0, got 3: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/06f7a0b3-b652-4da3-832e-aad664056a31/scratchpad/r17-measure/tmp-suite/sddkit.rtObXy/record-lines/notes/
+  |          assert: AC-012: a canonical finding with a-empty-comment-then-prose was refused under LANG=en_US.UTF-8 (O-018) unexpectedly contains: report recovery
+  |          assert: expected exit 0, got 3: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/06f7a0b3-b652-4da3-832e-aad664056a31/scratchpad/r17-measure/tmp-suite/sddkit.rtObXy/record-lines/notes/opponent.m
+  |          assert: AC-012: a canonical finding with a-wrapped-tag-prose was refused under LANG=C (O-018) unexpectedly contains: report recovery
+  |          assert: expected exit 0, got 3: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/06f7a0b3-b652-4da3-832e-aad664056a31/scratchpad/r17-measure/tmp-suite/sddkit.rtObXy/record-lines/notes/
+  |          assert: AC-012: a canonical finding with a-wrapped-tag-prose was refused under LANG=en_US.UTF-8 (O-018) unexpectedly contains: report recovery
+  |          assert: expected exit 0, got 3: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/06f7a0b3-b652-4da3-832e-aad664056a31/scratchpad/r17-measure/tmp-suite/sddkit.rtObXy/record-lines/notes/opponent.m
+  |          assert: AC-012: a canonical finding with a-fenced-tag-example was refused under LANG=C (O-018) unexpectedly contains: report recovery
+  |          assert: expected exit 0, got 3: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/06f7a0b3-b652-4da3-832e-aad664056a31/scratchpad/r17-measure/tmp-suite/sddkit.rtObXy/record-lines/notes/
+  |          assert: AC-012: a canonical finding with a-fenced-tag-example was refused under LANG=en_US.UTF-8 (O-018) unexpectedly contains: report recovery
+  |          assert: expected exit 0, got 3: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/06f7a0b3-b652-4da3-832e-aad664056a31/scratchpad/r17-measure/tmp-suite/sddkit.rtObXy/record-lines/notes/opponent.m
+  |          assert: AC-012: a canonical finding with a-heading-then-attribute-line was refused under LANG=C (O-018) unexpectedly contains: report recovery
+  |          assert: expected exit 0, got 3: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/06f7a0b3-b652-4da3-832e-aad664056a31/scratchpad/r17-measure/tmp-suite/sddkit.rtObXy/record-lines/notes/
+  |          assert: AC-012: a canonical finding with a-heading-then-attribute-line was refused under LANG=en_US.UTF-8 (O-018) unexpectedly contains: report recovery
+  |          assert: expected exit 0, got 3: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/06f7a0b3-b652-4da3-832e-aad664056a31/scratchpad/r17-measure/tmp-suite/sddkit.rtObXy/record-lines/notes/opponent.m
+  |          assert: AC-012: a canonical finding with a-br-prose was refused under LANG=C (O-018) unexpectedly contains: report recovery
+  |          assert: expected exit 0, got 3: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/06f7a0b3-b652-4da3-832e-aad664056a31/scratchpad/r17-measure/tmp-suite/sddkit.rtObXy/record-lines/notes/
+  |          assert: AC-012: a canonical finding with a-br-prose was refused under LANG=en_US.UTF-8 (O-018) unexpectedly contains: report recovery
+  |          assert: expected exit 0, got 3: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/06f7a0b3-b652-4da3-832e-aad664056a31/scratchpad/r17-measure/tmp-suite/sddkit.rtObXy/record-lines/notes/opponent.m
+  |          assert: AC-012: a canonical finding with a-quoted-heading-then-attribute-line was refused under LANG=C (O-018) unexpectedly contains: report recovery
+  |          assert: expected exit 0, got 3: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/06f7a0b3-b652-4da3-832e-aad664056a31/scratchpad/r17-measure/tmp-suite/sddkit.rtObXy/record-lines/notes/
+  |          assert: AC-012: a canonical finding with a-quoted-heading-then-attribute-line was refused under LANG=en_US.UTF-8 (O-018) unexpectedly contains: report recovery
+  |          assert: expected exit 0, got 3: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/06f7a0b3-b652-4da3-832e-aad664056a31/scratchpad/r17-measure/tmp-suite/sddkit.rtObXy/record-lines/notes/opponent.m
+  |          assert: AC-012: a canonical finding with a-span-in-prose was refused under LANG=C (O-018) unexpectedly contains: report recovery
+  |          assert: expected exit 0, got 3: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/06f7a0b3-b652-4da3-832e-aad664056a31/scratchpad/r17-measure/tmp-suite/sddkit.rtObXy/record-lines/notes/
+  |          assert: AC-012: a canonical finding with a-span-in-prose was refused under LANG=en_US.UTF-8 (O-018) unexpectedly contains: report recovery
+  |          assert: expected exit 0, got 3: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/06f7a0b3-b652-4da3-832e-aad664056a31/scratchpad/r17-measure/tmp-suite/sddkit.rtObXy/record-lines/notes/opponent.m
+  |          assert: AC-012: a canonical finding with a-blank-line-ends-run was refused under LANG=C (O-018) unexpectedly contains: report recovery
+  |          assert: expected exit 0, got 3: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/06f7a0b3-b652-4da3-832e-aad664056a31/scratchpad/r17-measure/tmp-suite/sddkit.rtObXy/record-lines/notes/
+  |          assert: AC-012: a canonical finding with a-blank-line-ends-run was refused under LANG=en_US.UTF-8 (O-018) unexpectedly contains: report recovery
+  |          assert: expected exit 0, got 3: bash /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/06f7a0b3-b652-4da3-832e-aad664056a31/scratchpad/r17-measure/tmp-suite/sddkit.eWVy0q/floor-kit-recordlines/scripts/spec-gate.s
+  |          assert: output missing substring: round completed gate=opponent round=2 verdict=CHALLENGED
+  |          assert: output missing substring: opponent rounds=2
+  |          assert: output missing substring: blocking=2 minor=0
+  | suite exit recorded (expected to fail only on fixture rows whose findings carry raw HTML, the recorded consequence): 1
+PASS live worktree status outside notes/verification/ unchanged
+end 2026-10-08T14:26:21Z
+r17-measure failures=8

@@ -1,0 +1,26 @@
+@@OLD
+export LC_ALL=C
+
+KIT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+@@NEW
+export LC_ALL=C
+# TMPDIR, spelled as the physical path of the directory it names (T030o43,
+# CAP-521-Q8OdIp). Every sandbox and temporary path a suite makes begins with
+# it, and a program under test canonicalizes a path it is given, lexically
+# (`cd && pwd`, which collapses `//` and resolves `.` and `..`) or physically
+# (`cd -P`, `pwd -P`, which also resolve symlinks). A fixture that compared a
+# printed path, or matched an argument, with the caller's spelling decided its
+# verdict by that spelling: macOS's default TMPDIR ends in `/`, so a sandbox
+# was `.../T//sddkit.*` while the analyzer printed `.../T/sddkit.*`, and the
+# suite failed where every run under a TMPDIR written without the slash
+# passed. The physical path is a fixed point of both canonicalizations, so
+# every spelling of one directory (a trailing or doubled slash, `.`, `..`, a
+# symlink, or no TMPDIR at all, which is /tmp) gives a suite one string. It
+# names the same directory, so where temporary files go is unchanged. It is
+# exported, so every program the suite runs inherits it.
+_t_tmpdir="$(cd -P -- "${TMPDIR:-/tmp}" 2> /dev/null && pwd -P)" || {
+  printf 'tests/helpers.sh: TMPDIR does not name a directory: %s\n' "${TMPDIR:-/tmp}" >&2; exit 2; }
+export TMPDIR="$_t_tmpdir"; unset _t_tmpdir
+
+KIT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+@@END

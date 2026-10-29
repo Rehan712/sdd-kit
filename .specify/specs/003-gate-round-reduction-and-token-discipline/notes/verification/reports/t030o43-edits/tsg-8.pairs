@@ -1,0 +1,19 @@
+@@OLD
+  run_rc 0 "$SCRIPTS/spec-gate.sh" checkpoint "$spec" Backend
+  assert_contains "$OUT" 'completed-task coverage checked' 'fixture: the checkpoint seals unfaulted'
+}
+@@NEW
+  run_rc 0 "$SCRIPTS/spec-gate.sh" checkpoint "$spec" Backend
+  assert_contains "$OUT" 'completed-task coverage checked' 'fixture: the checkpoint seals unfaulted'
+  # A contract written with a U+00A0 before its 1 is the current contract to
+  # every reader, the checkpoint's own included (T030o43 review 3, R3-F9), so
+  # the checkpoint judges completed coverage and refuses a lost binding.
+  sed "s/^verification_contract: 1\$/verification_contract:$(printf '\302\240')1/" "$spec/spec.md" > "$SANDBOX/checkpoint-spec"
+  cp "$SANDBOX/checkpoint-spec" "$spec/spec.md"
+  sed 's/REQ-001, AC-001, FM-001/REQ-001, AC-001/' "$spec/tasks.md" > "$SANDBOX/checkpoint-tasks"
+  cp "$SANDBOX/checkpoint-tasks" "$spec/tasks.md"
+  run_rc 3 "$SCRIPTS/spec-gate.sh" checkpoint "$spec" Backend
+  assert_contains "$OUT" 'lost prior binding' \
+    'AC-008: a checkpoint read a contract written with a U+00A0 as legacy and skipped coverage (T030o43 review 3)'
+}
+@@END

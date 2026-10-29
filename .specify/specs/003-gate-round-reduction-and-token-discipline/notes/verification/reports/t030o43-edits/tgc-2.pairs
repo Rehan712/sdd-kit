@@ -1,0 +1,53 @@
+@@OLD
+  # The status half (T030o43): a manifest pass that dies is refused by name,
+  # never read as a manifest that records nothing.
+@@NEW
+  # T030o43 review F1: under the pin a byte >= 0x80 is in no character class,
+  # so a manifest heading or field line written with a U+00A0 where the
+  # grammar wants a space does not match it. The pass refuses such a line by
+  # name, in every locale, instead of dropping the finding in silence.
+  local line nb=$'\302\240'
+  for line in "-$nb**Class:** tier-binding" "-$nb**Severity:** data-loss" "### Finding G-042$nb" "###${nb}Finding G-042"; do
+    case "$line" in
+      *Finding*) printf '# Prior review\n\n%s\n- **Class:** tier-binding\n- **Severity:** data-loss\n' "$line";;
+      *Class*) printf '# Prior review\n\n### Finding G-042\n%s\n- **Severity:** data-loss\n' "$line";;
+      *) printf '# Prior review\n\n### Finding G-042\n- **Class:** tier-binding\n%s\n' "$line";;
+    esac > "$spec/notes/verification/reports/opponent-findings-review.md"
+    tier_round_fixture 1 '' G-042:tier-binding:open:minor > "$report"
+    for l in C en_US.UTF-8; do
+      run_rc 3 in_locale "$l" bash -c '. "$1"; vf_reports "$2" opponent "$3" "$4"' _ \
+        "$SCRIPTS/verification-lib.sh" "$report" "$SANDBOX/manifest-locale.nul" "$spec"
+      assert_contains "$OUT" 'prior-review manifest could not be parsed' \
+        "AC-012: a manifest line carrying a U+00A0 was dropped in silence under LANG=$l (T030o43 review)"
+    done
+  done
+  printf '# Prior review\n\n### Finding G-042\n- **Class:** tier-binding\n- **Severity:** data-loss\n' \
+    > "$spec/notes/verification/reports/opponent-findings-review.md"
+  fault_bin "$SANDBOX/fault-manifest-sort" sort 'manifest-locale.nul.'
+  run_rc 3 env PATH="$SANDBOX/fault-manifest-sort:$PATH" bash -c '. "$1"; vf_reports "$2" opponent "$3" "$4"' _ \
+    "$SCRIPTS/verification-lib.sh" "$report" "$SANDBOX/manifest-locale.nul" "$spec"
+  assert_contains "$OUT" 'prior-review manifest records could not be sorted' \
+    'AC-012: manifest records that could not be sorted were read as none (T030o43 review)'
+  # A required section whose only body line is a U+00A0 is as empty as a
+  # blank one, in every locale.
+  local blank_spec="$SANDBOX/section-blank"; mkdir -p "$blank_spec/notes"
+  tier_round_fixture 1 '' G-042:tier-binding:new:data-loss |
+    sed "s/^Severity tier binding across rounds of one gate\.\$/$nb/" > "$blank_spec/notes/opponent.md"
+  for l in C en_US.UTF-8; do
+    run_rc 3 in_locale "$l" bash -c '. "$1"; vf_reports "$2" opponent "$3" "$4"' _ \
+      "$SCRIPTS/verification-lib.sh" "$blank_spec/notes/opponent.md" "$SANDBOX/section-blank.nul" "$blank_spec"
+    assert_contains "$OUT" 'empty required report section: what i attacked' \
+      "AC-012: a required section holding only a U+00A0 counted as a body under LANG=$l (T030o43 review)"
+  done
+  # The status half (T030o43): a manifest pass that dies is refused by name,
+  # never read as a manifest that records nothing.
+@@END
+@@OLD
+  fault_bin "$SANDBOX/fault-tally-obs" awk 'distinct++'
+@@NEW
+  fault_bin "$SANDBOX/fault-tally-sort" sort 'class-lines'
+  run_rc 3 env PATH="$SANDBOX/fault-tally-sort:$PATH" bash "$SCRIPTS/spec-gate.sh" tally "$spec"
+  assert_contains "$OUT" 'tally: the class table could not be sorted' \
+    'AC-017: a class table that could not be sorted went missing from the tally (T030o43 review)'
+  fault_bin "$SANDBOX/fault-tally-obs" awk 'distinct++'
+@@END

@@ -13,6 +13,7 @@
 #   spec-task.sh start <spec-dir> T###            # [ ] -> [~]  (in progress)
 #   spec-task.sh done  <spec-dir> T### --evidence "cmd → key output"
 #                                                 # -> [x] + *Evidence:* (+ date)
+#   spec-task.sh done <spec-dir> T### --return-file <validated-worker-return>
 #   spec-task.sh undo  <spec-dir> T###            # -> [ ]  (evidence line kept)
 #
 # `done` re-run on a done task updates the evidence line (idempotent).
@@ -24,14 +25,19 @@ set -euo pipefail
 
 HUB_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 . "$HUB_DIR/scripts/lib.sh"
+# The kernel pins the harness's own parsing to LC_ALL=C when it loads, so it
+# loads before any program reads a byte of the spec (O-017).
+. "$HUB_DIR/scripts/verification-lib.sh"
 
 usage() { usage_from_header "$0"; exit 0; }
 
 EVIDENCE=""
+RETURN_FILE=""
 ARGS=()
 while (( $# )); do
   case "$1" in
     --help|-h) usage ;;
+    --return-file) shift; RETURN_FILE="${1:?--return-file needs a file}" ;;
     --evidence) shift; EVIDENCE="${1:?--evidence needs text}" ;;
     -*) echo "unknown flag: $1" >&2; exit 2 ;;
     *) ARGS+=("$1") ;;
@@ -49,27 +55,29 @@ TASKS="$SPEC_DIR/tasks.md"
 # task_scan — one record per task:  id \t state \t stage \t is_exempt \t subject
 # state: todo|doing|done. is_exempt: 1 when gate (*Agent:* line) or Ship stage.
 task_scan() {
-  awk '
+  awk "$_VF_AWK_TEXT_UNFENCED"'
     function flush() {
       if (id == "") return
-      exempt = (is_gate || stage == "Ship") ? 1 : 0
+      exempt = (!proof_kind && id !~ /^T[0-9]{3}[a-z]+[0-9]+$/ && (is_gate || stage == "Ship")) ? 1 : 0
       printf "%s\t%s\t%s\t%d\t%s\n", id, state, stage, exempt, subj
       id=""
     }
-    /^##[^#]/ { flush(); sub(/^##[[:space:]]*/,""); stage=$0 }
+    /^##[^#]/ { flush(); stage=vf_heading_text(vf_original) }
     /^- \[[ xX~]\] \*\*T[0-9]{3}[a-z0-9]*\*\*/ {
       flush()
       match($0, /T[0-9]{3}[a-z0-9]*/); id = substr($0, RSTART, RLENGTH)
       state = "todo"
       if ($0 ~ /^- \[[xX]\]/) state = "done"
       else if ($0 ~ /^- \[~\]/) state = "doing"
-      subj = $0
-      sub(/^- \[[ xX~]\] \*\*T[0-9]{3}[a-z0-9]*\*\*[[:space:]]*/, "", subj)
-      while (subj ~ /^\[[^]]*\][[:space:]]*/) sub(/^\[[^]]*\][[:space:]]*/, "", subj)
-      sub(/^(—|-)[[:space:]]*/, "", subj)
-      is_gate = 0; next
+      # The subject is displayed as written, trimmed by the whitespace set.
+      subj = vf_original
+      sub(/^- \[[ xX~]\] \*\*T[0-9]{3}[a-z0-9]*\*\*/, "", subj); subj = vf_wstrim(subj)
+      while (subj ~ /^\[[^]]*\]/) { sub(/^\[[^]]*\]/, "", subj); subj = vf_wstrim(subj) }
+      if (sub(/^(—|-)/, "", subj)) subj = vf_wstrim(subj)
+      is_gate = 0; proof_kind = 0; next
     }
     /\*Agent:\*/ { is_gate = 1 }
+    /\*Verify kind:\*/ { proof_kind = 1 }
     END { flush() }
   ' "$TASKS"
 }
@@ -114,6 +122,34 @@ mutate() {
   mv "$tmp" "$TASKS"
   fm_set "$TASKS" updated "$(date +%Y-%m-%d)" 2>/dev/null || true
 }
+
+# A frontmatter that cannot be read, and a contract key that is not exactly
+# one key of value 1, are failures, never the legacy path, which would tick a
+# versioned task on --evidence alone (vf_contract).
+CONTRACT="$(vf_contract "$SPEC_DIR/spec.md")" || exit 3
+if [[ "$CMD" != list ]]; then
+  [[ "$TASK_ID" =~ ^T[0-9][0-9][0-9][a-z0-9]*$ ]] || { echo 'invalid task ID' >&2; exit 2; }
+fi
+if [[ "$CONTRACT" == 1 && "$CMD" =~ ^(start|undo|done)$ ]]; then
+  vf_writer_init
+  if [[ "$CMD" != "done" ]]; then
+    vf_lock "$SPEC_DIR" || exit 3
+    target_box=' '; [[ "$CMD" != start ]] || target_box='~'
+    rewrite="$(mktemp "$SPEC_DIR/.tasks.accept.XXXXXX")" || exit 3
+    vf_tasks_rewrite "$TASKS" "$TASK_ID" "$target_box" '' "$rewrite" || { rm -f "$rewrite"; exit 3; }
+    mv "$rewrite" "$TASKS" || exit 3
+    printf '%s -> [%s]\n' "$TASK_ID" "$target_box"
+    exit 0
+  fi
+  row="$(task_row "$TASK_ID")"
+  [[ -n "$row" ]] || { echo 'task not found' >&2; exit 1; }
+  if [[ -n "$RETURN_FILE" ]]; then
+    vf_accept_transaction "$SPEC_DIR" "$TASK_ID" "$RETURN_FILE"
+    exit $?
+  fi
+  [[ "$(cut -f4 <<< "$row")" == 1 ]] || { echo 'REFUSED: versioned task requires spec-gate accept / --return-file' >&2; exit 3; }
+  vf_lock "$SPEC_DIR" || exit 3
+fi
 
 case "$CMD" in
   list)

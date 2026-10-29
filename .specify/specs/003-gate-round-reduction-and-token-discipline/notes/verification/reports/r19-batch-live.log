@@ -1,0 +1,27 @@
+PASS live before the batch: round 19 refused at exit 4
+  | appended 7 entries; waiver 2026-10-15T00:22:50Z
+  | 2c52e6d1ccf1c22bfc8e97961bcb8e14ccc5cf30d85fe2ab578022461e02d416  .specify/specs/003-gate-round-reduction-and-token-discipline/spec.md
+  | f48a1ce7a6422388c49a87d3f5e252327c3e7281c4481dbbe0637b0574f2add4  .specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md
+  | 015859de8d68d5cbaffa3ea9078a74584f364312b09cd3c739731fd6716a6c36  scripts/verification-lib.sh
+  | eb42670d4fa5d2112885ff2cb25cfa70904d460ce5ac68b1f2abfa4ecc4093c6  templates/verification-contract.md
+  | 813f217995d6fc1b678723fdd74cceefd31380ecfb713cd2e216fd3a0539d8ae  tests/test-gate-contracts.sh
+  | 4460312501d181e1bac0c2f4028af510afc47cae57ba202a360b7a108594c73c  tests/test-spec-gate.sh
+PASS live .specify/specs/003-gate-round-reduction-and-token-discipline/STATUS.md equals the validated scratch copy
+PASS live .specify/specs/003-gate-round-reduction-and-token-discipline/spec.md equals the validated scratch copy
+PASS live .specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md equals the validated scratch copy
+PASS live scripts/verification-lib.sh equals the validated scratch copy
+PASS live templates/verification-contract.md equals the validated scratch copy
+PASS live tests/test-gate-contracts.sh equals the validated scratch copy
+PASS live tests/test-spec-gate.sh equals the validated scratch copy
+PASS live round 18 still reported completed
+PASS live round 19 authorized
+PASS live round 20 refused at exit 4
+PASS live analyzer exit 0 with 0 errors
+PASS live the T030o54 block present and unticked
+PASS live the T030o55 block present and unticked
+PASS live the T030o56 block present and unticked
+PASS live exactly one authorization line for round 19
+PASS live the freezing entry is the last Decisions entry
+PASS live the REQ-011 revision present
+PASS live the four code files hash as apply-code printed
+r19-batch-apply live failures=0

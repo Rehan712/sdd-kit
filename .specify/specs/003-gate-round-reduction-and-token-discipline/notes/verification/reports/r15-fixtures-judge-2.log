@@ -1,0 +1,23 @@
+start 2026-10-07T09:41:43Z; TMPDIR=/private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/bc990126-e721-4b43-bcf3-8141bed22d6c/scratchpad/s15/r15-fixtures-2/tmp/
+PASS K: the four files hash as r14-edits/post-apply-1
+PASS K: tgc-2.pairs applied, each block exactly once
+PASS K: the suite still parses
+PASS L: the L18 mutant applies exactly once
+PASS P: the kernel hashes as r14-edits/pre-apply
+== K: report_record_line_cases passes with the new rows on the repaired kernel
+PASS K report_record_line_cases passes
+== L: the L18 mutant fails on the two new rows and on no other
+PASS L report_record_line_cases fails
+  | L: 8 failing assertions
+PASS L: no failing assertion outside the new rows
+PASS L fails on: written as second-tier-tag-then-reference under LANG=C
+PASS L fails on: written as second-tier-tag-then-reference under LANG=en_US.UTF-8
+PASS L fails on: written as tag-then-reference under LANG=C
+PASS L fails on: written as tag-then-reference under LANG=en_US.UTF-8
+== P: on the kernel before this repair, the two new rows are refused (they isolate a guard of the new code)
+PASS P report_record_line_cases fails (on the round-14 rows)
+  | P: 148 failing assertions
+PASS P: no failing assertion names the two new rows
+PASS live worktree status outside notes/verification/ unchanged
+end 2026-10-07T09:42:58Z
+r15-fixtures-judge-2 failures=0

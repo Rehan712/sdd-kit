@@ -1,0 +1,31 @@
+  ok   test_all_brief_modes
+  ok   test_all_overlay_defaults
+  ok   test_briefs_t010
+  ok   test_briefs_t011
+  ok   test_briefs_t012
+  ok   test_briefs_t013
+  ok   test_defaults_t006
+  ok   test_defaults_t007
+  ok   test_defaults_t008
+  ok   test_defaults_t009
+  FAIL test_instruction_contracts
+       assert: output missing substring: Optional `checkpoints`
+           in: # SDD Kit — spec-driven development, multi-project, multi-CLI
+       
+       A portable setup for **spec-driven development** (SDD): every non-trivial change is
+       captured as a spec, planned, decomposed into checkable tasks, implemented in an
+       isolated git worktree, and blocked from shipping until **two adversarial gates**
+       pass. Works across all your projects from one install, and drives Claude Code,
+       Codex CLI, and Copilot CLI from the same canonical skill files.
+       
+       > Spec → Plan → Tasks → Implement → Retro. Specs are the durable artifact; code is
+       > what falls out.
+       
+       ## Install
+       
+       ```bash
+       git clone <this-
+  ok   test_invoker_protocol
+  ok   test_reports_and_tally
+  ok   test_review_scope_contracts
+  -- 13/14 passed

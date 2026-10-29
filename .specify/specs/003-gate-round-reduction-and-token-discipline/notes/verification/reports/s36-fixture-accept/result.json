@@ -1,0 +1,55 @@
+{
+  "started": "2026-10-28T10:52:17.473586+00:00",
+  "task": "T031a5o1",
+  "capture": "CAP-818-fLEvh7",
+  "source": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+  "head": "2049f65960cc91e9e30bbd5ff1e11fc0fdf7cbd9",
+  "protectedBefore": {
+    "/Users/babar/projects/sdd-kit-public/.git/worktrees/003-gate-round-reduction-and-token-discipline/index": {
+      "sha256": "c492d7ea95abf8e8c335001f20c62ff50bc6f1e2179d7a07d30811181b3dd700",
+      "mode": 420,
+      "mtimeNs": 1792957592613445716
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/STATUS.md": {
+      "sha256": "569eba99f2f1860ccb083c72f88e3a1cc21ce49be31547d5ce34cc75f1415099",
+      "mode": 384,
+      "mtimeNs": 1793178169511231380
+    },
+    "scripts/sdd-analyze.sh": {
+      "sha256": "c43de9e92df5657a3a94091a73bccb9abe37f9e1c3c3f6ccf6cb1cfa64f3a3f2",
+      "mode": 493,
+      "mtimeNs": 1793088116020109886
+    },
+    "tests/test-sdd-analyze.sh": {
+      "sha256": "e5b5cde870b2da8c086a41f3a3824b401262343225108c7f3bab716324150c9a",
+      "mode": 420,
+      "mtimeNs": 1793183737724792921
+    },
+    "tests/test-gate-contracts.sh": {
+      "sha256": "7bc13dde14004bf4ba967c0f64ec120b19bdde641643a6a7436d154c222f893c",
+      "mode": 420,
+      "mtimeNs": 1792956408250063378
+    }
+  },
+  "returnSha256": "a7a4d97ce6c2d6131c8dabef0c4b45502efd9be189abd283a1c35d963fe21d2f",
+  "exit": 0,
+  "accepted": true,
+  "argv": [
+    "bash",
+    "scripts/spec-gate.sh",
+    "accept",
+    ".specify/specs/003-gate-round-reduction-and-token-discipline",
+    "T031a5o1",
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/returns/T031a5o1.txt"
+  ],
+  "seconds": 90.549,
+  "acceptExit": 0,
+  "acceptedReceipt": "ACC-wrdG2W",
+  "protectedUnchanged": true,
+  "tasksAfter": {
+    "sha256": "b5c663f7299074826b1e00a9a23a2041ec210d4fa2d66af455498e40411a855c",
+    "mode": 384,
+    "mtimeNs": 1793184827802227362
+  },
+  "ended": "2026-10-28T10:53:48.072252+00:00"
+}

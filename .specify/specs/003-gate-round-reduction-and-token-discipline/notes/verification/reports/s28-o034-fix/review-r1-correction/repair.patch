@@ -1,0 +1,109 @@
+--- a/scripts/sdd-analyze.sh
++++ b/scripts/sdd-analyze.sh
+@@ -288,11 +288,13 @@
+   }
+   function weak_verify(command, low) {
+     low=tolower(command)
++    # shortcut: handle simple unquoted redirections and direct runners, use Verify kind for complex wrappers.
++    gsub(/(^|[[:space:]])[0-9]+[<>]+[[:space:]]*[^[:space:]<>&|;()"\\\047]+/, " ", low)
++    gsub(/[<>]+[[:space:]]*[^[:space:]<>&|;()"\\\047]+/, " ", low)
+     sub(/^[[:space:]]+/, "", low)
+-    # shortcut: recognize direct runners and shell scripts, use Verify kind for other wrappers.
+-    if (low ~ /^(([^[:space:]]*\/)?(bash|sh|zsh)[[:space:]]+(-[euxv]+[[:space:]]+)*)?([^[:space:]]*\/)?tests?[\/.:_-][^[:space:]]*([[:space:]]|$)/ ||
+-        low ~ /^([^[:space:]]*\/)?(node[[:space:]]+--test|cargo[[:space:]]+test|(python[23]?[[:space:]]+-m[[:space:]]+)?pytest|bats)([[:space:]]|$)/ ||
+-        low ~ /^([^[:space:]]*\/)?((npm|pnpm|yarn)[[:space:]]+(run[[:space:]]+)?test|(bun|go|make)[[:space:]]+test)([[:space:]]|$)/) return 0
++    if (low ~ /^(([^[:space:]<>]*\/)?(bash|sh|zsh)[[:space:]]+(-[euxv]+[[:space:]]+)*)?([^[:space:]<>]*\/)?tests?[\/.:_-][^[:space:]<>]*([[:space:]]|$)/ ||
++        low ~ /^([^[:space:]<>]*\/)?(node[[:space:]]+--test|cargo[[:space:]]+test|(python[23]?[[:space:]]+-m[[:space:]]+)?pytest|bats)([[:space:]]|$)/ ||
++        low ~ /^([^[:space:]<>]*\/)?((npm|pnpm|yarn)[[:space:]]+(run[[:space:]]+)?test|(bun|go|make)[[:space:]]+test)([[:space:]]|$)/) return 0
+     return low ~ /(^|[[:space:]])(grep|rg|diff)([[:space:]]|$)|typecheck|tsc[[:space:]]+--noemit|(^|[[:space:]])[^[:space:]]*build([[:space:]]|$)|test[[:space:]]+-[ef][[:space:]]/
+   }
+   function flush() {
+--- a/tests/test-sdd-analyze.sh
++++ b/tests/test-sdd-analyze.sh
+@@ -664,7 +664,7 @@
+   run_rc 0 "$ANALYZE" "$spec_dir"
+   assert_contains "$OUT" consistent 'AC-003: quoted/fenced examples do not add definitions'
+ 
+-  # AC-004/O-034: test names in arguments do not turn weak checks into runners.
++  # AC-004/O-034: arguments and redirection targets do not become runners.
+   for fixture in \
+     'npm run build' 'npm run typecheck' 'tsc --noEmit' 'grep AC-001 README.md' \
+     'tsc --noEmit tests/unit.ts' 'npm run typecheck -- --project tests/tsconfig.json' \
+@@ -675,7 +675,30 @@
+     'grep "cargo test" README.md' 'grep AC-001 scripts/test-check.sh' \
+     'test -e tests/check.sh' 'test -f tests/check.sh' \
+     'rg /usr/bin/pytest README.md' 'diff fixtures/bats.txt actual.txt' \
+-    'bash --rcfile tests/env.sh -c "npm run typecheck"'; do
++    'bash --rcfile tests/env.sh -c "npm run typecheck"' \
++    'npm<tests/test-typecheck.txt run typecheck' 'npm <tests/test-typecheck.txt run typecheck' \
++    'tsc>tests/test-typecheck.log --noEmit' 'tsc >tests/test-typecheck.log --noEmit' \
++    'grep<tools/pytest typecheck' 'grep <tools/pytest typecheck' \
++    'grep<tools/npm test typecheck.txt' 'grep <tools/npm test typecheck.txt' \
++    'npm<tests/check.txt run typecheck' 'npm <tests/check.txt run typecheck' \
++    'npm>tests/check.txt run typecheck' 'npm >tests/check.txt run typecheck' \
++    'npm<tests/check.txt run build' 'npm <tests/check.txt run build' \
++    'npm>tests/check.txt run build' 'npm >tests/check.txt run build' \
++    'tsc<input.txt --noEmit' 'tsc <input.txt --noEmit' \
++    'tsc>input.txt --noEmit' 'tsc >input.txt --noEmit' \
++    'grep<input.txt AC-001 README.md' 'grep <input.txt AC-001 README.md' \
++    'grep>input.txt AC-001 README.md' 'grep >input.txt AC-001 README.md' \
++    'rg<tools/pytest AC-001 README.md' 'rg <tools/pytest AC-001 README.md' \
++    'rg>tools/pytest AC-001 README.md' 'rg >tools/pytest AC-001 README.md' \
++    'diff<tools/bats actual.txt expected.txt' 'diff <tools/bats actual.txt expected.txt' \
++    'diff>tools/bats actual.txt expected.txt' 'diff >tools/bats actual.txt expected.txt' \
++    'test<tests/check.txt -e README.md' 'test <tests/check.txt -e README.md' \
++    'test>tests/check.txt -e README.md' 'test >tests/check.txt -e README.md' \
++    'grep<tools/bash tests/typecheck.sh' 'grep <tools/bash tests/typecheck.sh' \
++    'grep>tools/bash tests/typecheck.sh' 'grep >tools/bash tests/typecheck.sh' \
++    'grep<tests/check.sh typecheck.txt' 'grep <tests/check.sh typecheck.txt' \
++    'grep>tests/check.sh typecheck.txt' 'grep >tests/check.sh typecheck.txt' \
++    'tsc 2>output.txt --noEmit' 'npm2>output.txt test typecheck.txt'; do
+     spec_dir="$(make_spec_dir)"
+     verification_edit_fixture "$spec_dir/tasks.md" "s|\`node --test test/thing.test.js\`|\`$fixture\`|"
+     run_rc 0 "$ANALYZE" "$spec_dir"
+@@ -691,7 +714,22 @@
+     'npm test -- --grep typecheck' 'npm run test -- --grep typecheck' \
+     '/usr/local/bin/npm test -- --grep typecheck' 'pnpm test --filter typecheck' \
+     'yarn run test --grep typecheck' 'make test TARGET=typecheck' \
+-    'bun test tests/typecheck.test.ts' 'go test ./typecheck'; do
++    'bun test tests/typecheck.test.ts' 'go test ./typecheck' \
++    'bash<input.txt tests/typecheck.sh' 'bash <input.txt tests/typecheck.sh' \
++    'bash>input.txt tests/typecheck.sh' 'bash >input.txt tests/typecheck.sh' \
++    './tests/check-typecheck.sh<input.txt' './tests/check-typecheck.sh <input.txt' \
++    './tests/check-typecheck.sh>input.txt' './tests/check-typecheck.sh >input.txt' \
++    'node<input.txt --test test/typecheck.test.js' 'node <input.txt --test test/typecheck.test.js' \
++    'node>input.txt --test test/typecheck.test.js' 'node >input.txt --test test/typecheck.test.js' \
++    'cargo<input.txt test --test typecheck' 'cargo <input.txt test --test typecheck' \
++    'cargo>input.txt test --test typecheck' 'cargo >input.txt test --test typecheck' \
++    'pytest<input.txt tests/typecheck.py' 'pytest <input.txt tests/typecheck.py' \
++    'pytest>input.txt tests/typecheck.py' 'pytest >input.txt tests/typecheck.py' \
++    '/usr/bin/python3<input.txt -m pytest tests/typecheck.py' '/usr/bin/python3 <input.txt -m pytest tests/typecheck.py' \
++    '/usr/bin/python3>input.txt -m pytest tests/typecheck.py' '/usr/bin/python3 >input.txt -m pytest tests/typecheck.py' \
++    'npm<input.txt run test -- --grep typecheck' 'npm <input.txt run test -- --grep typecheck' \
++    'npm>input.txt run test -- --grep typecheck' 'npm >input.txt run test -- --grep typecheck' \
++    'npm 2>output.txt run test -- --grep typecheck' 'bash 0<input.txt -e tests/typecheck.sh'; do
+     spec_dir="$(make_spec_dir)"
+     verification_edit_fixture "$spec_dir/tasks.md" "s|\`node --test test/thing.test.js\`|\`$fixture\`|"
+     run_rc 0 "$ANALYZE" "$spec_dir"
+--- a/.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md
++++ b/.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md
+@@ -1082,16 +1082,15 @@
+   - *Notes:* Closes reality-check round 3 gap 1 (`notes/verification/reports/reality-check-round3.md`). Test-only coverage of behavior the reviewer found correct; no runtime classifier change. No new gate round, floor or hosted-CI run is part of this task.
+   - *Evidence:* CAP-767-tGxtxB verified by spec-gate accept; return sha256:e40b2ee4cfe3f5b8421b16561a902d0b3a610a20388f36c0c1cbf4d278b48de8
+ 
+-- [x] **T031a5o1** — Classify untyped AC verification by executable and runner position
++- [ ] **T031a5o1** — Classify untyped AC verification by executable and runner position
+   - *Files:* `scripts/sdd-analyze.sh`, `tests/test-sdd-analyze.sh`
+-  - *Acceptance:* AC-004 fixtures require exit 0 plus the existing untyped AC Verify warning for build/typecheck/text-presence/file-existence commands even when arguments name tests or runners; genuine shell/node/cargo/pytest/bats and package test runners remain clean, and explicit test/assertion/static/manual family controls remain valid.
++  - *Acceptance:* AC-004 fixtures require exit 0 plus the existing untyped AC Verify warning for build/typecheck/text-presence/file-existence commands even when arguments or attached/spaced input/output redirection targets name tests or runners; neutral redirect filenames must not hide weak commands; genuine shell/node/cargo/pytest/bats and package test runners remain clean with ordinary and interleaved redirections, and explicit test/assertion/static/manual family controls remain valid.
+   - *Verify kind:* test
+   - *Tests:* `tests/test-sdd-analyze.sh::test_verification_bindings`
+   - *Verify:* `bash tests/test-sdd-analyze.sh` → all suites `passed`, exit 0
+   - *Reuse:* local
+   - *Refs:* REQ-005, AC-004, FM-001, INV-005, plan §3.1, §7
+-  - *Notes:* O-034, opponent round 24, verification-command-classification: repair both shared runner exemption alternatives and their warning consumer; cover the nine reproduced siblings plus search-pattern/path boundaries and genuine runners with weak-looking argument filenames. O-032 remains open. No gate/floor/hosted-CI execution or new opponent authorization is part of this task.
+-  - *Evidence:* CAP-791-DfeS6O verified by spec-gate accept; return sha256:1db01df45ea2f2071a5c5f057f9e8ff8c1eca4f54c21423056becc6e34331d2f
++  - *Notes:* O-034, opponent round 24, verification-command-classification: repair every shared runner exemption alternative and its warning consumer; cover the nine reproduced siblings plus search-pattern/path boundaries and genuine runners with weak-looking argument filenames. Independent quality r1 requires the same class-wide redirection boundary repair across executable/script paths, both redirect directions, neutral targets and genuine redirected runners. Prior CAP-791-DfeS6O/source 76977 partial proof is preserved in notes/verification/reports/s28-o034-fix/review-r1-correction/before/ and baseline-proof.json; fresh parent capture/acceptance is pending. O-032 remains open. No gate/floor/hosted-CI execution or new opponent authorization is part of this task.
+ 
+ - [x] **T031a6** — Invalidate saved success and carried PASS on real input revisions
+   - *Files:* `tests/test-gate-contracts.sh`, `.specify/specs/003-gate-round-reduction-and-token-discipline/plan.md`

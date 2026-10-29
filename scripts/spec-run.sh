@@ -19,6 +19,7 @@
 #   spec-run.sh <spec-dir> T### --key 'passed' -- bun test        # pick the evidence line
 #   spec-run.sh <spec-dir> T### --cwd <dir>    -- <command>       # run somewhere else
 #   spec-run.sh <spec-dir> T### --no-tick      -- <command>       # capture only, don't tick
+#   spec-run.sh <spec-dir> T### --from-task --no-tick --summary
 #   spec-run.sh --help
 #
 # Everything after `--` is the command, executed as-is (no shell re-parsing).
@@ -34,6 +35,9 @@ set -uo pipefail
 
 HUB_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 . "$HUB_DIR/scripts/lib.sh"
+# The kernel pins the harness's own parsing to LC_ALL=C when it loads, so it
+# loads before any program reads a byte of the spec (O-017).
+. "$HUB_DIR/scripts/verification-lib.sh"
 SPEC_TASK="$HUB_DIR/scripts/spec-task.sh"
 
 usage() { usage_from_header "$0"; exit 0; }
@@ -42,6 +46,8 @@ usage() { usage_from_header "$0"; exit 0; }
 KEY=""
 RUN_CWD=""
 NO_TICK=0
+SUMMARY=0
+FROM_TASK=0
 ARGS=()
 CMD=()
 seen_ddash=0
@@ -53,6 +59,8 @@ while (( $# )); do
     --key)   shift; KEY="${1:?--key needs a pattern}" ;;
     --cwd)   shift; RUN_CWD="${1:?--cwd needs a directory}" ;;
     --no-tick) NO_TICK=1 ;;
+    --summary) SUMMARY=1 ;;
+    --from-task) FROM_TASK=1 ;;
     -*) echo "unknown flag: $1" >&2; exit 2 ;;
     *) ARGS+=("$1") ;;
   esac
@@ -62,8 +70,8 @@ done
 SPEC_DIR="${ARGS[0]:-}"
 TASK_ID="${ARGS[1]:-}"
 [[ -z "$SPEC_DIR" || -z "$TASK_ID" ]] && { usage_from_header "$0" >&2; exit 2; }
-(( seen_ddash )) || { echo "no command — put the acceptance command after \`--\`" >&2; exit 2; }
-(( ${#CMD[@]} )) || { echo "empty command after \`--\`" >&2; exit 2; }
+(( seen_ddash || FROM_TASK )) || { echo "no command — put the acceptance command after \`--\`" >&2; exit 2; }
+(( ${#CMD[@]} || FROM_TASK )) || { echo "empty command after \`--\`" >&2; exit 2; }
 [[ -d "$SPEC_DIR" ]] || { echo "not a directory: $SPEC_DIR" >&2; exit 2; }
 SPEC_DIR="$(cd "$SPEC_DIR" && pwd)"
 TASKS="$SPEC_DIR/tasks.md"
@@ -72,6 +80,44 @@ grep -qE "\*\*$TASK_ID\*\*" "$TASKS" || { echo "task $TASK_ID not found in $TASK
 
 RUN_CWD="${RUN_CWD:-$PWD}"
 [[ -d "$RUN_CWD" ]] || { echo "--cwd is not a directory: $RUN_CWD" >&2; exit 2; }
+
+# Versioned capture path is additive; legacy default output/ticking stays below.
+# A frontmatter that cannot be read, and a contract key that is not exactly
+# one key of value 1, are failures, never the legacy path (vf_contract).
+contract="$(vf_contract "$SPEC_DIR/spec.md")" || exit 3
+if [[ "$contract" == 1 ]] || (( SUMMARY || FROM_TASK )); then
+  (( FROM_TASK == 0 || ${#CMD[@]} == 0 )) || { echo '--from-task and explicit command are exclusive' >&2; exit 2; }
+  vf_writer_init
+  mkdir -p "$SPEC_DIR/notes/verification" || exit 3
+  binding="$(mktemp "$SPEC_DIR/notes/verification/bindings.XXXXXX")" || exit 3
+  vf_binding_snapshot "$SPEC_DIR" "$binding" || exit 3
+  policy=never
+  if [[ "$contract" == 1 ]]; then
+    vf_task_info "$binding" "$TASK_ID" || exit 3
+    policy="${VF_TASK[10]:-never}"
+  fi
+  if (( FROM_TASK )); then
+    [[ "$contract" == 1 && "${VF_TASK[5]}" != manual ]] || { echo '--from-task needs an automated versioned task' >&2; exit 3; }
+    CMD=("$(command -v bash)" -o pipefail -c "$VF_TASK_COMMAND")
+  fi
+  VF_KEY_PATTERN="$KEY" VF_NO_TICK="$NO_TICK"
+  vf_capture "$SPEC_DIR" "$binding" "$RUN_CWD" "$policy" -- "${CMD[@]}"
+  rc=$?
+  rm -f "$binding"
+  [[ -n "${VF_CAPTURE_DIR:-}" ]] || exit "$rc"
+  if (( SUMMARY )); then
+    if (( rc )); then vf_summary "$VF_CAPTURE_DIR" failure; else cat "$VF_CAPTURE_DIR/summary.txt"; fi
+  else
+    printf '$ %s\n' "${CMD[*]}" >&2
+    cat "$VF_CAPTURE_DIR/output.log" >&2
+    cat "$VF_CAPTURE_DIR/summary.txt"
+  fi
+  (( rc == 0 )) || exit "$rc"
+  if (( ! NO_TICK )); then
+    echo 'captured; invoker must validate a return with spec-gate accept before ticking' >&2
+  fi
+  exit 0
+fi
 
 # --- hashing (BSD + GNU safe): shasum -a 256, then sha256sum, then cksum ----
 hash_file() {
@@ -94,7 +140,7 @@ ts="$(date +%Y-%m-%dT%H:%M:%S)"
 echo "\$ $cmd_str" >&2
 # No `set -e` in this script, so a non-zero command does not abort us — we want
 # its exit code. Not a pipeline, so pipefail is irrelevant here.
-( cd "$RUN_CWD" && "${CMD[@]}" ) >"$out" 2>&1
+( cd "$RUN_CWD" && vf_caller_locale && "${CMD[@]}" ) >"$out" 2>&1
 rc=$?
 
 # Echo the captured output so the operator sees exactly what ran.

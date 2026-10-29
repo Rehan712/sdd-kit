@@ -1,0 +1,18 @@
+prior finding. A field line, in a manifest or in a canonical report, is decided
+by its label, read from the line's rendered text: inline raw HTML renders as
+nothing, a numeric character reference renders as its character, and the label
+is the first word after any indentation, heading marker, list marker or
+emphasis. A manifest field line must be a dash, whitespace and `**Class:**` or
+`**Severity:**`, its value the text after that label only, and every manifest
+finding needs one readable Class and one readable Severity, so a tier the pass
+does not read is refused with its finding rather than dropped. A finding is the
+section its Finding heading opens: a heading as shallow as that one closes it,
+and a deeper heading is one of its lines. A field line, a Finding heading or a
+line that looks like one that the pass cannot read is refused by name, and so
+is a manifest from which it reads no finding; a Class or Severity line outside
+a manifest finding is prose only while nothing since the last heading can hold
+a finding's record. In a canonical report, only `### Finding <ID>` opens a
+finding and any other heading that reads as a Finding heading is refused; a
+finding field line outside any finding is refused; inside a finding, a Class or
+Severity line that is not that field's own line is refused; and a field's
+duplicate is found by its label, whatever its indentation.

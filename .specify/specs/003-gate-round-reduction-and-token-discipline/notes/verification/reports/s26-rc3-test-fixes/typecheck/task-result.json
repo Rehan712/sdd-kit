@@ -1,0 +1,30 @@
+{
+  "taskId": "node:delegated-task:command%3Amcp%3Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%3Adelegate-task%3Asdd003-t031a5-real-capture-r1",
+  "childThreadId": "thread:delegated-task:command%3Amcp%3Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%3Adelegate-task%3Asdd003-t031a5-real-capture-r1",
+  "childRunId": "run:thread:thread%3Adelegated-task%3Acommand%253Amcp%253Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%253Adelegate-task%253Asdd003-t031a5-real-capture-r1:ordinal:1",
+  "childNodeId": "node:delegated-task:command%3Amcp%3Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%3Adelegate-task%3Asdd003-t031a5-real-capture-r1",
+  "status": "completed",
+  "workState": "result_available",
+  "hasPendingChildRuns": false,
+  "latestTerminalRunId": "run:thread:thread%3Adelegated-task%3Acommand%253Amcp%253Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%253Adelegate-task%253Asdd003-t031a5-real-capture-r1:ordinal:1",
+  "latestTerminalStatus": "completed",
+  "latestTerminalSummary": null,
+  "latestTerminalResultContextTransferId": null,
+  "providerInstanceId": "codex_codex_gym",
+  "model": "gpt-6-luna",
+  "options": [
+    {
+      "id": "reasoningEffort",
+      "value": "medium"
+    },
+    {
+      "id": "serviceTier",
+      "value": "default"
+    }
+  ],
+  "summary": "Capture **CAP-767-tGxtxB** completed successfully via `bash tests/test-sdd-analyze.sh`: **19/19 passed, exit 0**. Output digest: `f9166fdc124954abb48f7c8ed789d96a1ce68c06a9da6df0d9d49a79a07aca5a`; stderr was empty.\n\nCapture evidence is in [typecheck/capture.stdout](/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s26-rc3-test-fixes/typecheck/capture.stdout), with matching `capture.stderr`, `capture.rc`, and `capture.time` files. `tasks.md` hash, HEAD, and index tree were unchanged.\n\nSkipped broader suites and gates as instructed. No failure observed.",
+  "resultContextTransferId": "context-transfer:type:subagent_result:source-thread:thread%3Adelegated-task%3Acommand%253Amcp%253Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%253Adelegate-task%253Asdd003-t031a5-real-capture-r1:target-thread:2ce93492-409f-4930-a9e5-173544a4c8c6:c834f124-5830-4030-9587-9526a608f75a",
+  "hasPendingQuestion": false,
+  "pendingApproval": null,
+  "waitTimedOut": false
+}

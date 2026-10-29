@@ -1,0 +1,28 @@
+FAIL CUR scan exit 0 (want=0 got=1)
+FAIL CUR scan reports no superseded claim (want= got=/private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-o010-precheck/one.sh: line 5: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-o010-precheck/helpers.sh: No such file or directory
+/private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-o010-precheck/one.sh: line 65: /lib.sh: No such file or directory
+/private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-o010-precheck/one.sh: line 66: /verification-lib.sh: No such file or directory
+/private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-o010-precheck/one.sh: line 68: vf_source_paths: command not found
+superseded_environment_scan: cannot enumerate /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-o010-precheck/CUR)
+  | /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-o010-precheck/one.sh: line 5: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-o010-precheck/helpers.sh: No such file or directory
+  | /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-o010-precheck/one.sh: line 65: /lib.sh: No such file or directory
+  | /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-o010-precheck/one.sh: line 66: /verification-lib.sh: No such file or directory
+  | /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-o010-precheck/one.sh: line 68: vf_source_paths: command not found
+  | superseded_environment_scan: cannot enumerate /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-o010-precheck/CUR
+applied 1 block(s) to /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-o010-precheck/D/tests/helpers.sh
+applied 1 block(s) to /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-o010-precheck/D/tests/test-verification.sh
+applied 1 block(s) to /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-o010-precheck/D/templates/verification-contract.md
+applied 1 block(s) to /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-o010-precheck/D/scripts/verification-lib.sh
+applied 1 block(s) to /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-o010-precheck/D/.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md
+FAIL D scan exit 0 (want=0 got=1)
+FAIL D scan reports no superseded claim (want= got=/private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-o010-precheck/one.sh: line 5: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-o010-precheck/helpers.sh: No such file or directory
+/private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-o010-precheck/one.sh: line 65: /lib.sh: No such file or directory
+/private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-o010-precheck/one.sh: line 66: /verification-lib.sh: No such file or directory
+/private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-o010-precheck/one.sh: line 68: vf_source_paths: command not found
+superseded_environment_scan: cannot enumerate /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-o010-precheck/D)
+  | /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-o010-precheck/one.sh: line 5: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-o010-precheck/helpers.sh: No such file or directory
+  | /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-o010-precheck/one.sh: line 65: /lib.sh: No such file or directory
+  | /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-o010-precheck/one.sh: line 66: /verification-lib.sh: No such file or directory
+  | /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-o010-precheck/one.sh: line 68: vf_source_paths: command not found
+  | superseded_environment_scan: cannot enumerate /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-o010-precheck/D
+t030o43-o010-precheck failures=4

@@ -1,0 +1,69 @@
+{
+  "ended": "2026-10-29T22:14:49.635617+00:00",
+  "exit": 0,
+  "task": "T031a5o1",
+  "capture": "CAP-845-hwbWOH",
+  "source": "7d4f17221f13d850cb7db06cdbb6261119ca97b52228adeac74d82f6496a9bff",
+  "accepted": true,
+  "acceptedReceipt": "ACC-zmvoA1",
+  "acceptedEvent": "ACCEPT-7BJ9u1",
+  "acceptedMeta": {
+    "version": "1",
+    "task": "T031a5o1",
+    "return_digest": "d09ad15d376d5a60c7da068edf44f913a5d442999e30279d0537ca3c526334ff",
+    "binding_digest": "8766df908be5d8f628c3880af34ae761dd1c9c4946e8da08da3e566c8c0c788a",
+    "input": "7d4f17221f13d850cb7db06cdbb6261119ca97b52228adeac74d82f6496a9bff",
+    "captures": "CAP-845-hwbWOH",
+    "manual": ""
+  },
+  "beforeTasks": {
+    "mode": 384,
+    "mtimeNs": 1793311225510798891,
+    "size": 184198,
+    "sha256": "2380332731cede88cbcef942aed51847a80a1dd23166b03dc3b80f9381f1d9bd",
+    "type": "file"
+  },
+  "afterTasks": {
+    "mode": 384,
+    "mtimeNs": 1793312074060855555,
+    "size": 184198,
+    "sha256": "49a1dbedb00bfdab05ac1890ca06a0ee5ca6a8d54d26c2904c18337fda72d425",
+    "type": "file"
+  },
+  "protectedUnchanged": true,
+  "currentSourceUnchanged": true,
+  "changedPreexisting": {
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md": {
+      "before": {
+        "mode": 384,
+        "mtimeNs": 1793311225510798891,
+        "size": 184198,
+        "sha256": "2380332731cede88cbcef942aed51847a80a1dd23166b03dc3b80f9381f1d9bd",
+        "type": "file"
+      },
+      "after": {
+        "mode": 384,
+        "mtimeNs": 1793312074060855555,
+        "size": 184198,
+        "sha256": "49a1dbedb00bfdab05ac1890ca06a0ee5ca6a8d54d26c2904c18337fda72d425",
+        "type": "file"
+      }
+    }
+  },
+  "newPaths": [
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/accept-events/ACCEPT-7BJ9u1/COMPLETE",
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/accept-events/ACCEPT-7BJ9u1/meta.nul",
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/accepted/T031a5o1/ACC-zmvoA1/COMMITTED",
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/accepted/T031a5o1/ACC-zmvoA1/COMPLETE",
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/accepted/T031a5o1/ACC-zmvoA1/digests.nul",
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/accepted/T031a5o1/ACC-zmvoA1/meta.nul",
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/accepted/T031a5o1/ACC-zmvoA1/return.txt",
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/accepted/T031a5o1/ACC-zmvoA1/tasks.after"
+  ],
+  "unexpectedPreexistingChanges": {},
+  "strictGlobalRefsUnchanged": true,
+  "historicalStrictPreservation": false,
+  "allOtherOriginalWorktreeFilesPreserved": true,
+  "taskBytesFinalizedBeforeSnapshot": true,
+  "note": "All task bytes now final after T029 control and T031a5o1 acceptance; no further task or Decisions edits before snapshot/CI/floor/gates."
+}

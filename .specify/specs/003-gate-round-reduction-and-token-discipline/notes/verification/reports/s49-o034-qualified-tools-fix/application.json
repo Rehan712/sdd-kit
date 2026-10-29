@@ -1,0 +1,28 @@
+{
+  "at": "2026-10-29T17:37:39.288312+00:00",
+  "ownedChanges": {
+    "scripts/sdd-analyze.sh": {
+      "sha256": "f2809d24b5bec01fa4ca8ab4d689c5e9585472989e66798aabc9597d80f176fd",
+      "mode": 493,
+      "mtimeNs": 1793295459287139619
+    },
+    "tests/test-sdd-analyze.sh": {
+      "sha256": "9dd851fd6ed32797384ada5c4d263dcdbb6947ce95cdeae4d5ea0ac1bb60a393",
+      "mode": 420,
+      "mtimeNs": 1793295459287497581
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md": {
+      "sha256": "5595ae67feee154cdb7af6a6ce12ad24ac1bbd15a8cf4e86e820151dda9d9eeb",
+      "mode": 384,
+      "mtimeNs": 1793295459287893710
+    }
+  },
+  "rootFix": "Normalize directory prefixes of known tool basenames before the generic test-path exemption; retain existing runner and weak-command predicates.",
+  "newWeakDeclarations": 109,
+  "newRunnerDeclarations": 88,
+  "priorWeakDeclarationsRetained": 287,
+  "priorRunnerDeclarationsRetained": 162,
+  "taskReopened": "T031a5o1",
+  "acceptanceOrCaptureRun": false,
+  "op27Authorized": false
+}

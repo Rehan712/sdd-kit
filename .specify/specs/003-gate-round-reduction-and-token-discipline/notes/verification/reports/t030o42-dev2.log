@@ -1,0 +1,7 @@
+PASS bash tests/shellcheck.sh (want=0 got=0)
+PASS test_instruction_contracts (want=0 got=0)
+PASS reuse_command_locale_cases (want=0 got=0)
+PASS analyzer on 003 (1 warning(s), 0 errors) (want=0 got=0)
+PASS copy unchanged (want=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  - got=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  -)
+PASS live unchanged outside notes/verification/ (want=66ef051e755c1b13355590f5a1e96fe82d515a6eaf70fbab45fe281caec945be got=66ef051e755c1b13355590f5a1e96fe82d515a6eaf70fbab45fe281caec945be)
+t030o42-dev2 failures=0

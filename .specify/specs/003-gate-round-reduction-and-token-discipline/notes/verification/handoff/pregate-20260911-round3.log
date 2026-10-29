@@ -1,0 +1,46 @@
+
+=== 2026-09-11T15:39:05Z :: checkpoint Backend ===
+result=CHECKPOINT-TswDh0 source=173fc57bca09014a4e94d497cc1802128b50c99c1548e76d713ef9fb7662aefb exit=0 executed=9 cache-hits=31 records=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/checkpoints/CHECKPOINT-TswDh0/commands.nul
+
+=== 2026-09-11T17:11:40Z :: checkpoint API ===
+result=CHECKPOINT-glMepJ source=173fc57bca09014a4e94d497cc1802128b50c99c1548e76d713ef9fb7662aefb exit=0 executed=1 cache-hits=41 records=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/checkpoints/CHECKPOINT-glMepJ/commands.nul
+
+=== 2026-09-11T17:38:12Z :: checkpoint Tests ===
+no checkpoint commands; completed-task coverage checked
+result=CHECKPOINT-Msibji source=173fc57bca09014a4e94d497cc1802128b50c99c1548e76d713ef9fb7662aefb exit=0 executed=2 cache-hits=44 records=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/checkpoints/CHECKPOINT-Msibji/commands.nul
+
+=== 2026-09-11T18:22:08Z :: checkpoint Observability ===
+no checkpoint commands; completed-task coverage checked
+result=CHECKPOINT-i3mCaF source=173fc57bca09014a4e94d497cc1802128b50c99c1548e76d713ef9fb7662aefb exit=0 executed=0 cache-hits=47 records=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/checkpoints/CHECKPOINT-i3mCaF/commands.nul
+
+=== 2026-09-11T18:47:45Z :: checkpoint Docs ===
+no checkpoint commands; completed-task coverage checked
+result=CHECKPOINT-ihLrYD source=173fc57bca09014a4e94d497cc1802128b50c99c1548e76d713ef9fb7662aefb exit=0 executed=0 cache-hits=48 records=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/checkpoints/CHECKPOINT-ihLrYD/commands.nul
+
+=== 2026-09-11T20:31:26Z :: snapshot bindings + inputs ===
+173fc57bca09014a4e94d497cc1802128b50c99c1548e76d713ef9fb7662aefb
+
+=== 2026-09-11T20:31:35Z :: T029 typed AC-016 control ===
+T029 capture=CAP-153-FAla8S
+accept rejected: T029 return: missing, extra, duplicate or unknown FM/INV test binding
+Deliberately incomplete T029 control rejected; unchanged tasks digest=4e87a753ceb6078f439fe01059df08b41046f85c4973a19855e12bb3255ca5a9
+accept accepted task=T029 return=56068760312696ef8c10ed1ba5a2b6c08c487e4bd3350ea592e263dcc68e1f46
+
+=== 2026-09-11T20:32:20Z :: floor ===
+result=FLOOR-QjKfE7 source=173fc57bca09014a4e94d497cc1802128b50c99c1548e76d713ef9fb7662aefb exit=0 executed=4 cache-hits=49 records=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/floors/FLOOR-QjKfE7/commands.nul
+
+=== 2026-09-11T22:35:27Z :: tally ===
+opponent rounds=2
+reality-check rounds=0
+blocking=8 minor=3 locations=79 unclassified=0
+class=config-interpolation-validation findings=2 recurrences=1
+class=gate-report-schema-validation findings=2 recurrences=1
+class=live-control-semantic-validation findings=2 recurrences=0
+class=post-pr-followup-binding-schema findings=2 recurrences=0
+class=return-envelope-parsing findings=2 recurrences=0
+class=round-authorization-grammar findings=3 recurrences=2
+class=round-block-attribution findings=3 recurrences=1
+finding-observations=16 distinct-finding-ids=9 reopened=8
+execution-observations=33 check-executions=121 cache-hits=1075 captures=172 full-log-bytes=234599 returned-summary-bytes=92179 usage=unknown baseline-usage=unknown
+
+Pre-gate sequence complete. Ledger state, not this line, decides round state.

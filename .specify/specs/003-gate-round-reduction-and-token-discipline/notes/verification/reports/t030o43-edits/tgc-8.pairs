@@ -1,0 +1,59 @@
+@@OLD
+bare-class-word|refuse|### Finding G-042\nclass\n- **Severity:** data-loss\n
+SHAPES
+@@NEW
+bare-class-word|refuse|### Finding G-042\nclass\n- **Severity:** data-loss\n
+subheading-unbolded-severity|refuse|### Finding G-042\n- **Class:** tier-binding\n\n#### Assessment\n\nSeverity: data-loss\n
+subheading-bulleted-severity|refuse|### Finding G-042\n- **Class:** tier-binding\n\n#### Assessment\n- Severity: data-loss\n
+subheading-star-bullet-severity|refuse|### Finding G-042\n- **Class:** tier-binding\n\n#### Assessment\n* **Severity:** data-loss\n
+nonbreaking-hyphen-id-unbolded|refuse|### Finding G\342\200\221042\n- Class: tier-binding\n- Severity: data-loss\n
+multiword-emphasized-severity|refuse|### Finding G-042\n- **Class:** tier-binding\n- **Severity level:** data-loss\n
+multiword-colon-outside-severity|refuse|### Finding G-042\n- **Class:** tier-binding\n- **Severity level**: data-loss\n
+bullet-character-severity|refuse|### Finding G-042\n- **Class:** tier-binding\n\342\200\242 **Severity:** data-loss\n
+checkbox-severity|refuse|### Finding G-042\n- **Class:** tier-binding\n- [x] **Severity:** data-loss\n
+table-manifest|refuse|## Findings\n\n| ID | Class | Severity |\n|----|-------|----------|\n| G-042 | tier-binding | data-loss |\n
+inline-finding-manifest|refuse|## Findings\n\n- **G-042** (tier-binding) — Severity data-loss\n
+SHAPES
+@@END
+@@OLD
+introduction-prose|# Prior review\n\nSeverity: every finding below is blocking.\n\n### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n
+SHAPES
+@@NEW
+introduction-prose|# Prior review\n\nSeverity: every finding below is blocking.\n\n### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n
+class-binding-lead-in|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n   - **Class binding.** A manifest recording the tier is read.\n
+summary-with-subsection|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n\n## Summary\n\n#### Details\n\n- Severity: all blocking\n
+SHAPES
+@@END
+@@OLD
+  # The status half (T030o43): a manifest pass that dies is refused by name,
+@@NEW
+  # A declared manifest from which the pass reads no finding is refused by
+  # name, never read as a record of nothing (T030o43 review 4, R4-F4).
+  printf '# Prior review\n\n## Findings\n\n| ID | Class | Severity |\n|----|-------|----------|\n| G-042 | tier-binding | data-loss |\n' \
+    > "$spec/notes/verification/reports/opponent-findings-review.md"
+  tier_round_fixture 1 '' G-042:tier-binding:open:minor > "$report"
+  run_rc 3 bash -c '. "$1"; vf_reports "$2" opponent "$3" "$4"' _ \
+    "$SCRIPTS/verification-lib.sh" "$report" "$SANDBOX/manifest-locale.nul" "$spec"
+  assert_contains "$OUT" 'manifest: records no finding this grammar can read' \
+    'AC-012: a manifest from which no finding was read was read as a record of nothing (T030o43 review 4)'
+  # The status half (T030o43): a manifest pass that dies is refused by name,
+@@END
+@@OLD
+  # review, and cannot authorize a resolved claim.
+  printf '\140\140\140markdown\n## Finding O-042\n- **Class:** silent-data-loss\n\140\140\140\n' \
+@@NEW
+  # review, and cannot authorize a resolved claim. A manifest that records no
+  # finding is refused on its own (T030o43 review 4), so each of these carries
+  # one real, unrelated finding and the quoted entry is still what is tested.
+  printf '## Finding O-041\n\n- **Class:** unrelated-class\n\n\140\140\140markdown\n## Finding O-042\n- **Class:** silent-data-loss\n\140\140\140\n' \
+@@END
+@@OLD
+  printf '<!--\n## Finding O-042\n- **Class:** silent-data-loss\n-->\n' \
+@@NEW
+  printf '## Finding O-041\n\n- **Class:** unrelated-class\n\n<!--\n## Finding O-042\n- **Class:** silent-data-loss\n-->\n' \
+@@END
+@@OLD
+  printf '<script>\n## Finding O-042\n- **Class:** silent-data-loss\n</script>\n' \
+@@NEW
+  printf '## Finding O-041\n\n- **Class:** unrelated-class\n\n<script>\n## Finding O-042\n- **Class:** silent-data-loss\n</script>\n' \
+@@END

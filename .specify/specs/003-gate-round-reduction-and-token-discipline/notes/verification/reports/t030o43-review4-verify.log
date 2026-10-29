@@ -1,0 +1,100 @@
+== control
+PASS control CUR C: rc=3 report recovery: m/control/notes/opponent.md:24: clearing verdict rests on 1 lowered severity tier(s) of known findings; reconcile canonical records
+PASS control REV4 C: rc=3 report recovery: m/control/notes/opponent.md:24: clearing verdict rests on 1 lowered severity tier(s) of known findings; reconcile canonical records
+PASS control CUR en_US.UTF-8: rc=3 report recovery: m/control/notes/opponent.md:24: clearing verdict rests on 1 lowered severity tier(s) of known findings; reconcile canonical records
+PASS control REV4 en_US.UTF-8: rc=3 report recovery: m/control/notes/opponent.md:24: clearing verdict rests on 1 lowered severity tier(s) of known findings; reconcile canonical records
+== R4-F1 (blocking, regression): a sub-heading inside a finding, and a U+2011 in a Finding heading ID
+PASS subhead-unbolded CUR C: rc=0 
+PASS subhead-unbolded REV4 C: rc=3 manifest line 8: a severity line outside any Finding: Severity: data-loss|report recovery: m/subhead-unbolded/notes/verification/reports/opponent-findings-review.md: prior-review manifest could not be parsed; reconcile canonical records
+PASS subhead-unbolded CUR en_US.UTF-8: rc=0 
+PASS subhead-unbolded REV4 en_US.UTF-8: rc=3 manifest line 8: a severity line outside any Finding: Severity: data-loss|report recovery: m/subhead-unbolded/notes/verification/reports/opponent-findings-review.md: prior-review manifest could not be parsed; reconcile canonical records
+PASS subhead-bullet-unbolded CUR C: rc=0 
+PASS subhead-bullet-unbolded REV4 C: rc=3 manifest line 7: a severity line outside any Finding: - Severity: data-loss|report recovery: m/subhead-bullet-unbolded/notes/verification/reports/opponent-findings-review.md: prior-review manifest could not be parsed; reconcile canonical records
+PASS subhead-bullet-unbolded CUR en_US.UTF-8: rc=0 
+PASS subhead-bullet-unbolded REV4 en_US.UTF-8: rc=3 manifest line 7: a severity line outside any Finding: - Severity: data-loss|report recovery: m/subhead-bullet-unbolded/notes/verification/reports/opponent-findings-review.md: prior-review manifest could not be parsed; reconcile canonical records
+PASS subhead-star-bullet CUR C: rc=0 
+PASS subhead-star-bullet REV4 C: rc=3 manifest line 7: a severity line outside any Finding: * **Severity:** data-loss|report recovery: m/subhead-star-bullet/notes/verification/reports/opponent-findings-review.md: prior-review manifest could not be parsed; reconcile canonical records
+PASS subhead-star-bullet CUR en_US.UTF-8: rc=0 
+PASS subhead-star-bullet REV4 en_US.UTF-8: rc=3 manifest line 7: a severity line outside any Finding: * **Severity:** data-loss|report recovery: m/subhead-star-bullet/notes/verification/reports/opponent-findings-review.md: prior-review manifest could not be parsed; reconcile canonical records
+PASS subhead-bold-colon-out CUR C: rc=0 
+PASS subhead-bold-colon-out REV4 C: rc=3 manifest line 7: a severity line outside any Finding: - **Severity**: data-loss|report recovery: m/subhead-bold-colon-out/notes/verification/reports/opponent-findings-review.md: prior-review manifest could not be parsed; reconcile canonical records
+PASS subhead-bold-colon-out CUR en_US.UTF-8: rc=0 
+PASS subhead-bold-colon-out REV4 en_US.UTF-8: rc=3 manifest line 7: a severity line outside any Finding: - **Severity**: data-loss|report recovery: m/subhead-bold-colon-out/notes/verification/reports/opponent-findings-review.md: prior-review manifest could not be parsed; reconcile canonical records
+PASS subhead-strict CUR C: rc=3 manifest line 7: a severity line outside any Finding: - **Severity:** data-loss|report recovery: m/subhead-strict/notes/verification/reports/opponent-findings-review.md: prior-review manifest could not be parsed; reconcile canonical records
+PASS subhead-strict REV4 C: rc=3 manifest line 7: a severity line outside any Finding: - **Severity:** data-loss|report recovery: m/subhead-strict/notes/verification/reports/opponent-findings-review.md: prior-review manifest could not be parsed; reconcile canonical records
+PASS subhead-strict CUR en_US.UTF-8: rc=3 manifest line 7: a severity line outside any Finding: - **Severity:** data-loss|report recovery: m/subhead-strict/notes/verification/reports/opponent-findings-review.md: prior-review manifest could not be parsed; reconcile canonical records
+PASS subhead-strict REV4 en_US.UTF-8: rc=3 manifest line 7: a severity line outside any Finding: - **Severity:** data-loss|report recovery: m/subhead-strict/notes/verification/reports/opponent-findings-review.md: prior-review manifest could not be parsed; reconcile canonical records
+PASS nbhyphen-unbolded CUR C: rc=0 
+PASS nbhyphen-unbolded REV4 C: rc=3 manifest line 4: a class line outside any Finding: - Class: tier-binding|manifest line 5: a severity line outside any Finding: - Severity: data-loss|report recovery: m/nbhyphen-unbolded/notes/verification/reports/opponent-findings-review.md: prior-review manif
+PASS nbhyphen-unbolded CUR en_US.UTF-8: rc=0 
+PASS nbhyphen-unbolded REV4 en_US.UTF-8: rc=3 manifest line 4: a class line outside any Finding: - Class: tier-binding|manifest line 5: a severity line outside any Finding: - Severity: data-loss|report recovery: m/nbhyphen-unbolded/notes/verification/reports/opponent-findings-review.md: prior-review manif
+== R4-F2 (blocking, pre-existing): a multi-word emphasized label, other list markers
+PASS sev-level CUR C: rc=0 
+PASS sev-level REV4 C: rc=0 
+PASS sev-level CUR en_US.UTF-8: rc=0 
+PASS sev-level REV4 en_US.UTF-8: rc=0 
+PASS sev-tier CUR C: rc=0 
+PASS sev-tier REV4 C: rc=0 
+PASS sev-tier CUR en_US.UTF-8: rc=0 
+PASS sev-tier REV4 en_US.UTF-8: rc=0 
+PASS sev-paren CUR C: rc=3 manifest line 5: a Severity line this grammar cannot read: - **Severity (tier):** data-loss|report recovery: m/sev-paren/notes/verification/reports/opponent-findings-review.md: prior-review manifest could not be parsed; reconcile canonical records
+PASS sev-paren REV4 C: rc=0 
+PASS sev-paren CUR en_US.UTF-8: rc=3 manifest line 5: a Severity line this grammar cannot read: - **Severity (tier):** data-loss|report recovery: m/sev-paren/notes/verification/reports/opponent-findings-review.md: prior-review manifest could not be parsed; reconcile canonical records
+PASS sev-paren REV4 en_US.UTF-8: rc=0 
+PASS ubullet CUR C: rc=0 
+PASS ubullet REV4 C: rc=0 
+PASS ubullet CUR en_US.UTF-8: rc=0 
+PASS ubullet REV4 en_US.UTF-8: rc=0 
+PASS endash-bullet CUR C: rc=0 
+PASS endash-bullet REV4 C: rc=0 
+PASS endash-bullet CUR en_US.UTF-8: rc=0 
+PASS endash-bullet REV4 en_US.UTF-8: rc=0 
+PASS checkbox CUR C: rc=0 
+PASS checkbox REV4 C: rc=0 
+PASS checkbox CUR en_US.UTF-8: rc=0 
+PASS checkbox REV4 en_US.UTF-8: rc=0 
+== R4-F4 (blocking, pre-existing): findings not written as heading and field lines
+PASS table-with-heading CUR C: rc=0 
+PASS table-with-heading REV4 C: rc=0 
+PASS table-with-heading CUR en_US.UTF-8: rc=0 
+PASS table-with-heading REV4 en_US.UTF-8: rc=0 
+PASS inline-finding CUR C: rc=0 
+PASS inline-finding REV4 C: rc=0 
+PASS inline-finding CUR en_US.UTF-8: rc=0 
+PASS inline-finding REV4 en_US.UTF-8: rc=0 
+== R4-F5 (minor): a Finding heading inside a list item
+PASS list-heading CUR C: rc=0 
+PASS list-heading REV4 C: rc=0 
+PASS list-heading CUR en_US.UTF-8: rc=0 
+PASS list-heading REV4 en_US.UTF-8: rc=0 
+PASS ordered-heading CUR C: rc=0 
+PASS ordered-heading REV4 C: rc=0 
+PASS ordered-heading CUR en_US.UTF-8: rc=0 
+PASS ordered-heading REV4 en_US.UTF-8: rc=0 
+== R4-F6 (minor, refusing, regression): an emphasized lead-in word inside a finding
+PASS bold-lead-in CUR C: rc=3 manifest line 6: a second Severity line in finding G-042: **Severity** was re-read after the repro.|report recovery: m/bold-lead-in/notes/verification/reports/opponent-findings-review.md: prior-review manifest could not be parsed; reconcile canonical records
+PASS bold-lead-in REV4 C: rc=0 
+PASS bold-lead-in CUR en_US.UTF-8: rc=3 manifest line 6: a second Severity line in finding G-042: **Severity** was re-read after the repro.|report recovery: m/bold-lead-in/notes/verification/reports/opponent-findings-review.md: prior-review manifest could not be parsed; reconcile canonical records
+PASS bold-lead-in REV4 en_US.UTF-8: rc=0 
+PASS bold-lead-in-class CUR C: rc=3 manifest line 6: a second Class line in finding G-042: - **Class** and tier were both re-read.|report recovery: m/bold-lead-in-class/notes/verification/reports/opponent-findings-review.md: prior-review manifest could not be parsed; reconcile canonical records
+PASS bold-lead-in-class REV4 C: rc=0 
+PASS bold-lead-in-class CUR en_US.UTF-8: rc=3 manifest line 6: a second Class line in finding G-042: - **Class** and tier were both re-read.|report recovery: m/bold-lead-in-class/notes/verification/reports/opponent-findings-review.md: prior-review manifest could not be parsed; reconcile canonical records
+PASS bold-lead-in-class REV4 en_US.UTF-8: rc=0 
+== R4-F8 (minor, refusing): an ID-shaped token that names no finding after the last heading
+PASS ac-ref-summary CUR C: rc=3 manifest line 10: a severity line outside any Finding: - Severity: all blocking|report recovery: m/ac-ref-summary/notes/verification/reports/opponent-findings-review.md: prior-review manifest could not be parsed; reconcile canonical records
+PASS ac-ref-summary REV4 C: rc=3 manifest line 10: a severity line outside any Finding: - Severity: all blocking|report recovery: m/ac-ref-summary/notes/verification/reports/opponent-findings-review.md: prior-review manifest could not be parsed; reconcile canonical records
+PASS ac-ref-summary CUR en_US.UTF-8: rc=3 manifest line 10: a severity line outside any Finding: - Severity: all blocking|report recovery: m/ac-ref-summary/notes/verification/reports/opponent-findings-review.md: prior-review manifest could not be parsed; reconcile canonical records
+PASS ac-ref-summary REV4 en_US.UTF-8: rc=3 manifest line 10: a severity line outside any Finding: - Severity: all blocking|report recovery: m/ac-ref-summary/notes/verification/reports/opponent-findings-review.md: prior-review manifest could not be parsed; reconcile canonical records
+PASS utf8-summary CUR C: rc=3 manifest line 10: a severity line outside any Finding: - Severity: one blocking finding|report recovery: m/utf8-summary/notes/verification/reports/opponent-findings-review.md: prior-review manifest could not be parsed; reconcile canonical records
+PASS utf8-summary REV4 C: rc=3 manifest line 10: a severity line outside any Finding: - Severity: one blocking finding|report recovery: m/utf8-summary/notes/verification/reports/opponent-findings-review.md: prior-review manifest could not be parsed; reconcile canonical records
+PASS utf8-summary CUR en_US.UTF-8: rc=3 manifest line 10: a severity line outside any Finding: - Severity: one blocking finding|report recovery: m/utf8-summary/notes/verification/reports/opponent-findings-review.md: prior-review manifest could not be parsed; reconcile canonical records
+PASS utf8-summary REV4 en_US.UTF-8: rc=3 manifest line 10: a severity line outside any Finding: - Severity: one blocking finding|report recovery: m/utf8-summary/notes/verification/reports/opponent-findings-review.md: prior-review manifest could not be parsed; reconcile canonical records
+== R4-F3 (minor): a criterion that begins with a U+00A0 or a tab after its dash
+PASS F3 leading U+00A0 in the spec, cell [one criterion] CUR: text=[ one criterion$] DIFFER
+PASS F3 leading U+00A0 in the spec, cell [ one criterion] CUR: text=[ one criterion$] DIFFER
+PASS F3 leading U+00A0 in the spec, cell [ one criterion] CUR: text=[ one criterion$] DIFFER
+PASS F3 leading tab in the spec CUR: text=[ one criterion$] DIFFER
+PASS F3 control: trailing U+00A0 CUR: text=[one criterion$] EQUAL
+== R4-F7.1 (wording): the umbrella tag pass reads its tag from the mapped line
+PASS F7.1 the tag is taken from $0: 1
+t030o43-review4-verify checks=90 failures=0

@@ -1,0 +1,2 @@
+Run 1 of the T030o39/T030o40 mutation matrix, started 2026-09-23T08:35:21Z, STOPPED by the invoker before completion; no .rc exists.
+Its M10-M16 results are VOID: run-matrix.sh routed mutants with the glob M1*, which also matches M10-M16, so those mutants ran test_capture_provenance instead of their own test function. The M10/M11 "SURVIVED" lines are that routing bug, not fixture gaps. Baselines and M1-M9 ran the intended function. The whole matrix is re-run after the independent-review fixes with exact routing.

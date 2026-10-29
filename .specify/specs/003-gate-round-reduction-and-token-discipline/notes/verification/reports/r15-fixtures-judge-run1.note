@@ -1,0 +1,7 @@
+r15-fixtures-judge run 1 (2026-10-07T19:32:19Z to 19:34:41Z, exit 0), kept as -run1 with its script (r15-fixtures-judge-run1.sh) and
+the fixture pairs it judged (r15-edits/tgc-1-run1.pairs). Every check passed. Writing matrix v4 then found three guards of
+the candidate that no row isolated, so rows were added to tgc-1.pairs before the judge run of record: a tier after a br
+whose suffix holds a code span with a bracket (the reading after a break applied to the code-span-inert text), in
+both passes; a quoted heading followed by its attribute line, which must parse (the heading reset reads a heading
+inside a block quote), in both passes; and a br-carried tier in the Where value of the legacy F6 fixture, which must
+still parse (the field-value reading is canonical-only).

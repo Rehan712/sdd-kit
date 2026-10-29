@@ -1,0 +1,32 @@
+{
+  "status": "PREPARED_NOT_PUSHED",
+  "repository": "Rehan712/sdd-kit",
+  "pr_url": "https://github.com/Rehan712/sdd-kit/pull/21",
+  "pr_number": 21,
+  "branch": "ci-snapshot/spec-003-20261025-s26",
+  "ref": "refs/heads/ci-snapshot/spec-003-20261025-s26",
+  "expected_remote_head": "414838bb52898921aa49fb3d25caed6e7b711763",
+  "commit": "5aee77672d03a2c7811e28e55172817da6dee012",
+  "tree": "d685ec420ba6ce338e72727638e1ccff0bbb3846",
+  "parent": "2049f65960cc91e9e30bbd5ff1e11fc0fdf7cbd9",
+  "source": "c7a82b3ae3b900dcb02a4839decad74db1a13457c5bab9ff859625a5357f0be6",
+  "new_branch": false,
+  "new_pr": false,
+  "argv": [
+    "git",
+    "-c",
+    "push.followTags=false",
+    "-c",
+    "push.recurseSubmodules=no",
+    "-c",
+    "push.gpgSign=false",
+    "push",
+    "--no-verify",
+    "--porcelain",
+    "--force-with-lease=refs/heads/ci-snapshot/spec-003-20261025-s26:414838bb52898921aa49fb3d25caed6e7b711763",
+    "origin",
+    "5aee77672d03a2c7811e28e55172817da6dee012:refs/heads/ci-snapshot/spec-003-20261025-s26"
+  ],
+  "credential_handling": "Parent supplies existing scoped Rehan712 credential; no credentials are embedded or inspected here.",
+  "created_at_utc": "2026-10-25T20:51:34.824669+00:00"
+}

@@ -1,0 +1,5 @@
+# same from either line; a name (an artifact name, an Agent path) is a token
+# that ends at any whitespace, so it is read from the mapped line. The one
+# value outside the rule is the analyzer's umbrella `[repo:]` tag, read from
+# the mapped line in a pass that runs for umbrella specs only (recorded
+# extent, T030o43 review 4).

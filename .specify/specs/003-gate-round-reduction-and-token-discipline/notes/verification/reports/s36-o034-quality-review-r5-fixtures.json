@@ -1,0 +1,99 @@
+{
+  "status": "PASS",
+  "recordedAt": "2026-10-28T11:01:44.393746+00:00",
+  "scope_full_diff_matches_live": true,
+  "latest_patch_exactly_two_builders": true,
+  "analyzer_diff_unchanged_from_quality_r4": true,
+  "test_r4_diff_plus_only_two_builders": true,
+  "probe_builders_and_declarations_match_actual_test": true,
+  "fixture_runs": [
+    {
+      "label": "before-bash32-default",
+      "exit": 0,
+      "counts": {
+        "generated_weak": 176,
+        "generated_runner": 96,
+        "weak": 287,
+        "runner": 162
+      },
+      "raw_sha256": "04da52df07af08e24f82095e3fda8e6ab734a9a059df84c46f856f8352496bde",
+      "raw_stderr": "BASH_VERSION=3.2.57(1)-release\n/bin/bash: line 4: shopt: patsub_replacement: invalid shell option name\n"
+    },
+    {
+      "label": "before-bash52-on",
+      "exit": 0,
+      "counts": {
+        "generated_weak": 176,
+        "generated_runner": 96,
+        "weak": 287,
+        "runner": 162
+      },
+      "raw_sha256": "4bd9c6bed32c3263280cc3e42a207e8e352b197a1cf624a67bf2e0dc4c1a74b7",
+      "raw_stderr": "BASH_VERSION=5.2.37(1)-release\nshopt -s patsub_replacement\nPRETTY_NAME=\"Debian GNU/Linux 13 (trixie)\"\nNAME=\"Debian GNU/Linux\"\nVERSION_ID=\"13\"\nVERSION=\"13 (trixie)\"\nVERSION_CODENAME=trixie\nDEBIAN_VERSION_FULL=13.6\nID=debian\nHOME_URL=\"https://www.debian.org/\"\nSUPPORT_URL=\"https://www.debian.org/support\"\nBUG_REPORT_URL=\"https://bugs.debian.org/\"\n"
+    },
+    {
+      "label": "before-bash52-off",
+      "exit": 0,
+      "counts": {
+        "generated_weak": 176,
+        "generated_runner": 96,
+        "weak": 287,
+        "runner": 162
+      },
+      "raw_sha256": "04da52df07af08e24f82095e3fda8e6ab734a9a059df84c46f856f8352496bde",
+      "raw_stderr": "BASH_VERSION=5.2.37(1)-release\nshopt -u patsub_replacement\nPRETTY_NAME=\"Debian GNU/Linux 13 (trixie)\"\nNAME=\"Debian GNU/Linux\"\nVERSION_ID=\"13\"\nVERSION=\"13 (trixie)\"\nVERSION_CODENAME=trixie\nDEBIAN_VERSION_FULL=13.6\nID=debian\nHOME_URL=\"https://www.debian.org/\"\nSUPPORT_URL=\"https://www.debian.org/support\"\nBUG_REPORT_URL=\"https://bugs.debian.org/\"\n"
+    },
+    {
+      "label": "after-bash32-default",
+      "exit": 0,
+      "counts": {
+        "generated_weak": 176,
+        "generated_runner": 96,
+        "weak": 287,
+        "runner": 162
+      },
+      "raw_sha256": "04da52df07af08e24f82095e3fda8e6ab734a9a059df84c46f856f8352496bde",
+      "raw_stderr": "BASH_VERSION=3.2.57(1)-release\n/bin/bash: line 4: shopt: patsub_replacement: invalid shell option name\n"
+    },
+    {
+      "label": "after-bash52-on",
+      "exit": 0,
+      "counts": {
+        "generated_weak": 176,
+        "generated_runner": 96,
+        "weak": 287,
+        "runner": 162
+      },
+      "raw_sha256": "04da52df07af08e24f82095e3fda8e6ab734a9a059df84c46f856f8352496bde",
+      "raw_stderr": "BASH_VERSION=5.2.37(1)-release\nshopt -s patsub_replacement\nPRETTY_NAME=\"Debian GNU/Linux 13 (trixie)\"\nNAME=\"Debian GNU/Linux\"\nVERSION_ID=\"13\"\nVERSION=\"13 (trixie)\"\nVERSION_CODENAME=trixie\nDEBIAN_VERSION_FULL=13.6\nID=debian\nHOME_URL=\"https://www.debian.org/\"\nSUPPORT_URL=\"https://www.debian.org/support\"\nBUG_REPORT_URL=\"https://bugs.debian.org/\"\n"
+    },
+    {
+      "label": "after-bash52-off",
+      "exit": 0,
+      "counts": {
+        "generated_weak": 176,
+        "generated_runner": 96,
+        "weak": 287,
+        "runner": 162
+      },
+      "raw_sha256": "04da52df07af08e24f82095e3fda8e6ab734a9a059df84c46f856f8352496bde",
+      "raw_stderr": "BASH_VERSION=5.2.37(1)-release\nshopt -u patsub_replacement\nPRETTY_NAME=\"Debian GNU/Linux 13 (trixie)\"\nNAME=\"Debian GNU/Linux\"\nVERSION_ID=\"13\"\nVERSION=\"13 (trixie)\"\nVERSION_CODENAME=trixie\nDEBIAN_VERSION_FULL=13.6\nID=debian\nHOME_URL=\"https://www.debian.org/\"\nSUPPORT_URL=\"https://www.debian.org/support\"\nBUG_REPORT_URL=\"https://bugs.debian.org/\"\n"
+    }
+  ],
+  "all_fixed_arrays_identical_to_bash32_baseline": true,
+  "old_on_corrupted_counts": {
+    "generated_weak": 48,
+    "generated_runner": 36,
+    "weak": 48,
+    "runner": 36
+  },
+  "ci_labels_matched": 22,
+  "original_CI_host_version_options": "unobserved",
+  "counts": {
+    "generated_weak": 176,
+    "generated_runner": 96,
+    "weak": 287,
+    "runner": 162
+  },
+  "proof_limit": "Consumed and independently checked raw fixture artifacts; no modern Bash analyzer suite or hosted CI rerun."
+}

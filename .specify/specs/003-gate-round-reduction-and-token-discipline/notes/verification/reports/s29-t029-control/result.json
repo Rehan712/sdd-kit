@@ -1,0 +1,171 @@
+{
+  "started": "2026-10-26T21:09:40.176494+00:00",
+  "capture": "CAP-794-aUZ5t0",
+  "task": "T029",
+  "steps": [
+    {
+      "name": "reject",
+      "argv": [
+        "bash",
+        "scripts/spec-gate.sh",
+        "accept",
+        ".specify/specs/003-gate-round-reduction-and-token-discipline",
+        "T029",
+        ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/returns/T029-incomplete.txt"
+      ],
+      "started": "2026-10-26T21:09:40.204678+00:00",
+      "ended": "2026-10-26T21:10:02.268325+00:00",
+      "seconds": 22.065,
+      "exit": 3
+    },
+    {
+      "name": "accept",
+      "argv": [
+        "bash",
+        "scripts/spec-gate.sh",
+        "accept",
+        ".specify/specs/003-gate-round-reduction-and-token-discipline",
+        "T029",
+        ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/returns/T029.txt"
+      ],
+      "started": "2026-10-26T21:10:02.598936+00:00",
+      "ended": "2026-10-26T21:10:32.014737+00:00",
+      "seconds": 29.417,
+      "exit": 0
+    },
+    {
+      "name": "seal-check",
+      "argv": [
+        "bash",
+        "-c",
+        ". scripts/lib.sh; . scripts/verification-lib.sh; vf_integrity \"$1\" meta.nul && vf_integrity \"$2\" meta.nul && vf_integrity \"$3\" meta.nul return.txt tasks.after digests.nul && test \"$(cat \"$3/COMMITTED\")\" = \"$(vf_hash \"$3/COMPLETE\")\"",
+        "_",
+        ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/accept-events/ACCEPT-I3Eloa",
+        ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/accept-events/ACCEPT-4rCf9X",
+        ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/accepted/T029/ACC-MkfiB6"
+      ],
+      "started": "2026-10-26T21:10:32.044674+00:00",
+      "ended": "2026-10-26T21:10:32.179108+00:00",
+      "seconds": 0.134,
+      "exit": 0
+    }
+  ],
+  "exit": 0,
+  "source": "16ffcec3c2f0cffa21b8c35e7b90d768a27bdfdd37deba9147edd25489946494",
+  "before": {
+    "files": {
+      "scripts/sdd-analyze.sh": {
+        "sha256": "0c26c101666aa8559814f40c7376da6b07290d8e2830b230a54b8eb01b4afdf7",
+        "mode": "0o755",
+        "mtimeNs": 1793045575939407052
+      },
+      "tests/test-sdd-analyze.sh": {
+        "sha256": "513308051dc409e42fe72c3c20d5a0fe4a1e7607e5373dcff404fd6993cf4516",
+        "mode": "0o644",
+        "mtimeNs": 1793045485570467704
+      },
+      "tests/test-gate-contracts.sh": {
+        "sha256": "7bc13dde14004bf4ba967c0f64ec120b19bdde641643a6a7436d154c222f893c",
+        "mode": "0o644",
+        "mtimeNs": 1792956408250063378
+      },
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md": {
+        "sha256": "82fe00d7ef49b4d1b66ff65ef8ca1ed672d7c51dfbb8d94a63db4892a3a93894",
+        "mode": "0o600",
+        "mtimeNs": 1793046003182732081
+      }
+    },
+    "status": {
+      "sha256": "2519b0a153bd7a8548b1b5d6abf3cefaddd6da93d8c5670efba4322dd4c8be1b",
+      "mode": "0o600",
+      "mtimeNs": 1793047789555914145
+    },
+    "index": {
+      "sha256": "c492d7ea95abf8e8c335001f20c62ff50bc6f1e2179d7a07d30811181b3dd700",
+      "mode": "0o644",
+      "mtimeNs": 1792957592613445716
+    },
+    "head": "2049f65960cc91e9e30bbd5ff1e11fc0fdf7cbd9"
+  },
+  "intactReturnSha256": "1bf5fa3ca21929ce6e70bc56177aaa474f1987a71fc3699ed48ab3b8baba56fc",
+  "incompleteReturnSha256": "b63beefc7007b666340d208e167bacb30476a32396aa72e58b43b79098a879a7",
+  "afterReject": {
+    "files": {
+      "scripts/sdd-analyze.sh": {
+        "sha256": "0c26c101666aa8559814f40c7376da6b07290d8e2830b230a54b8eb01b4afdf7",
+        "mode": "0o755",
+        "mtimeNs": 1793045575939407052
+      },
+      "tests/test-sdd-analyze.sh": {
+        "sha256": "513308051dc409e42fe72c3c20d5a0fe4a1e7607e5373dcff404fd6993cf4516",
+        "mode": "0o644",
+        "mtimeNs": 1793045485570467704
+      },
+      "tests/test-gate-contracts.sh": {
+        "sha256": "7bc13dde14004bf4ba967c0f64ec120b19bdde641643a6a7436d154c222f893c",
+        "mode": "0o644",
+        "mtimeNs": 1792956408250063378
+      },
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md": {
+        "sha256": "82fe00d7ef49b4d1b66ff65ef8ca1ed672d7c51dfbb8d94a63db4892a3a93894",
+        "mode": "0o600",
+        "mtimeNs": 1793046003182732081
+      }
+    },
+    "status": {
+      "sha256": "2519b0a153bd7a8548b1b5d6abf3cefaddd6da93d8c5670efba4322dd4c8be1b",
+      "mode": "0o600",
+      "mtimeNs": 1793047789555914145
+    },
+    "index": {
+      "sha256": "c492d7ea95abf8e8c335001f20c62ff50bc6f1e2179d7a07d30811181b3dd700",
+      "mode": "0o644",
+      "mtimeNs": 1792957592613445716
+    },
+    "head": "2049f65960cc91e9e30bbd5ff1e11fc0fdf7cbd9"
+  },
+  "rejectedEvent": "ACCEPT-I3Eloa",
+  "rejectionClass": "binding-mismatch",
+  "rejectionTimestamp": "2026-10-26T21:10:02Z",
+  "rejectedTaskBytesUnchanged": true,
+  "afterAccept": {
+    "files": {
+      "scripts/sdd-analyze.sh": {
+        "sha256": "0c26c101666aa8559814f40c7376da6b07290d8e2830b230a54b8eb01b4afdf7",
+        "mode": "0o755",
+        "mtimeNs": 1793045575939407052
+      },
+      "tests/test-sdd-analyze.sh": {
+        "sha256": "513308051dc409e42fe72c3c20d5a0fe4a1e7607e5373dcff404fd6993cf4516",
+        "mode": "0o644",
+        "mtimeNs": 1793045485570467704
+      },
+      "tests/test-gate-contracts.sh": {
+        "sha256": "7bc13dde14004bf4ba967c0f64ec120b19bdde641643a6a7436d154c222f893c",
+        "mode": "0o644",
+        "mtimeNs": 1792956408250063378
+      },
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md": {
+        "sha256": "bc4acb0ebbe27dd0ec452236e93f90817702cbed45b38db41d92a16fa8a63d17",
+        "mode": "0o600",
+        "mtimeNs": 1793049031942505082
+      }
+    },
+    "status": {
+      "sha256": "2519b0a153bd7a8548b1b5d6abf3cefaddd6da93d8c5670efba4322dd4c8be1b",
+      "mode": "0o600",
+      "mtimeNs": 1793047789555914145
+    },
+    "index": {
+      "sha256": "c492d7ea95abf8e8c335001f20c62ff50bc6f1e2179d7a07d30811181b3dd700",
+      "mode": "0o644",
+      "mtimeNs": 1792957592613445716
+    },
+    "head": "2049f65960cc91e9e30bbd5ff1e11fc0fdf7cbd9"
+  },
+  "acceptedEvent": "ACCEPT-4rCf9X",
+  "acceptedReceipt": "ACC-MkfiB6",
+  "acceptTimestamp": "2026-10-26T21:10:31Z",
+  "accepted": true,
+  "ended": "2026-10-26T21:10:32.179544+00:00"
+}

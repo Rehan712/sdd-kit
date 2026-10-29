@@ -1,0 +1,19 @@
+{
+  "operation": "Pure report-schema parse on an external combined copy; no round completion, tally or floor validation.",
+  "argv": [
+    "/bin/bash",
+    "-c",
+    ". \"$1\"; vf_reports \"$2\" opponent \"$3\" \"$4\"",
+    "_",
+    "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/verification-lib.sh",
+    "/private/tmp/sdd-opponent25-8elh3grt/opponent-history-plus25.md",
+    "/private/tmp/sdd-opponent25-8elh3grt/report-catalog.nul",
+    "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline"
+  ],
+  "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+  "exit": 0,
+  "stdout": "",
+  "stderr": "",
+  "reportSha256": "862bb96f89392722f86f6063bf560b3de1bf12de431a38fe85227d4a7ae92868",
+  "bytes": 9560
+}

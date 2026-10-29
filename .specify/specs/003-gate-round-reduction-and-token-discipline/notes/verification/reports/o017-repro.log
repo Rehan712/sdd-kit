@@ -1,0 +1,77 @@
+ambient: LANG=C.UTF-8 LC_CTYPE=UTF-8 
+== A: manifest carries one cp1252 apostrophe (0x92); CLEARED round re-records G-042 open at minor
+PASS A under C: refused (rc 3)
+PASS A under C: the lowered-tier refusal
+PASS A under en_US.UTF-8: sealed (rc 0)
+  | stderr: awk: towc: multibyte conversion failure on: '’s key vanished'
+PASS A under de_DE.UTF-8: sealed (rc 0)
+  | stderr: awk: towc: multibyte conversion failure on: '’s key vanished'
+PASS A under C.UTF-8: sealed (rc 0)
+  | stderr: awk: towc: multibyte conversion failure on: '’s key vanished'
+PASS A under ambient: sealed (rc 0)
+  | stderr: awk: towc: multibyte conversion failure on: '’s key vanished'
+== B: control, the same manifest with the apostrophe as UTF-8 U+2019
+PASS B under C: refused (rc 3)
+PASS B under en_US.UTF-8: refused (rc 3)
+PASS B under de_DE.UTF-8: refused (rc 3)
+PASS B under C.UTF-8: refused (rc 3)
+== C: Class binding; CHALLENGED round reuses G-042 as silent-data-loss over a 0x92 manifest
+PASS C under C: refused (rc 3)
+PASS C under C: the Class-binding refusal
+PASS C under en_US.UTF-8: accepted (rc 0)
+PASS C under de_DE.UTF-8: accepted (rc 0)
+PASS C under C.UTF-8: accepted (rc 0)
+== D: Shift-JIS; a valid UTF-8 manifest whose only non-ASCII is one em dash
+PASS D under C: refused (rc 3)
+PASS D under en_US.UTF-8: refused (rc 3)
+PASS D under ja_JP.SJIS: sealed (rc 0)
+  | SJIS stderr: awk: towc: multibyte conversion failure on: '” twice'
+== E: end to end through spec-gate.sh; fixture built, floor sealed and round 1 reserved under C each time
+PASS E C: fixture, floor and reservation under C
+  | complete under C: rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/cf8105b0-c4fe-410c-afe8-3a2a37d75d11/scratchpad/o017-repro/sb-C/o017/.sp
+  | tally under C: rc=0 blocking=0 minor=0 locations=0 unclassified=0 severity-downgrades=0 
+PASS E en_US.UTF-8: fixture, floor and reservation under C
+  | complete under en_US.UTF-8: rc=0 
+  | tally under en_US.UTF-8: rc=0 blocking=0 minor=1 locations=1 unclassified=0 severity-downgrades=0 
+  | the same sealed history, tally under C: rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/cf8105b0-c4fe-410c-afe8-3a2a37d75d11/scratchpad/o017-repro/sb-en_US.UTF-
+  | round 2 reservation: under C rc=3, then under en_US.UTF-8 rc=0
+PASS E: under C the CLEARED completion is refused (rc 3)
+PASS E: under C the lowered-tier refusal
+PASS E: under en_US.UTF-8 the identical bytes seal CLEARED (rc 0)
+PASS E: under en_US.UTF-8 the completion line
+PASS E: the sealed history is refused by tally under C (rc 3)
+PASS E: round 2 under C is refused (rc 3)
+PASS E: round 2 under en_US.UTF-8 reserves (rc 0)
+== F: analyzer sibling; one 0x92 byte before a [NEEDS CLARIFICATION] marker in 003 spec.md
+  | analyzer under C: rc=1 1 error(s), 1 warning(s)
+  | analyzer under en_US.UTF-8: rc=0 1 warning(s), 0 errors
+PASS F under C: the marker fails the analyzer (rc 1)
+PASS F under C: the marker diagnostic
+PASS F under en_US.UTF-8: the analyzer passes (rc 0)
+PASS F under en_US.UTF-8: the marker reads as absent
+== G: checker sibling (not in the report); one 0x92 byte before an AC id no test names
+  | under C: spec-ac-coverage rc=1 '1 AC(s) with no test naming them â€” add the AC id to the test that proves it, or add the test'; analyzer rc=1 '1 error(s), 1 warning(s)'
+  | under en_US.UTF-8: spec-ac-coverage rc=0 'bound â€” every AC is named by at least one test file'; analyzer rc=0 '1 warning(s), 0 errors'
+PASS G under C: spec-ac-coverage refuses (rc 1)
+PASS G under C: AC-998 has no test
+PASS G under en_US.UTF-8: spec-ac-coverage passes (rc 0)
+PASS G under C: the analyzer refuses (rc 1)
+PASS G under C: AC-998 uncovered
+PASS G under en_US.UTF-8: the analyzer passes (rc 0)
+== H: the waiver parser (:2465) discards its status; a 0x92 line in the Decisions log above a valid waiver
+  | under C: rc=0 
+  | under en_US.UTF-8: rc=4   input record number 7, file /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/cf8105b0-c4fe-410c-afe8-3a2a37d75d11/scratchpad/o017-repro/specH/STATUS.md  source line number 84 round autho
+PASS H under C: authorized (rc 0)
+PASS H under en_US.UTF-8: denied (rc 4), fail closed
+PASS H under en_US.UTF-8: the refusal claims no candidate exists
+== I: the recorded history, unrepaired: tally and snapshot across locales
+  | tally 001-codex-subagent-gates-and-hard-task-escalation: C rc=3, en_US.UTF-8 rc=3, output identical
+  | tally 002-usage-limit-handling-for-dispatched-runs: C rc=0, en_US.UTF-8 rc=0, output identical
+  | tally 003-gate-round-reduction-and-token-discipline: C rc=0, en_US.UTF-8 rc=0, output identical
+  | snapshot under C: rc=0 digest=9447f4e3b93f8e29
+  | snapshot under C.UTF-8: rc=0 digest=9447f4e3b93f8e29
+  | snapshot under en_US.UTF-8: rc=0 digest=9447f4e3b93f8e29
+  | snapshot under en_US.ISO8859-1: rc=0 digest=9447f4e3b93f8e29
+PASS I: snapshot equal under C and en_US.UTF-8
+PASS live worktree status outside notes/verification/ unchanged
+o017-repro failures=0

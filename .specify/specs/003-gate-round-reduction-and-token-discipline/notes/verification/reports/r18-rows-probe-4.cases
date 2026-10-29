@@ -1,0 +1,5 @@
+# Session 20: v5's D11 (the escape step of vf_settled_brackets) survived matrix run 1; is any row able to reach it?
+# kind|tag|body (after the minor tier, or the whole manifest for W)|diagnostic
+R|d11-as-v5|\n![a\\]\nb\nc](u)Severity: data-loss\n|a second Severity line in finding G-042
+R|escaped-bracket-before-first-word|\n![\\] x\ny\nz](u)Severity: data-loss\n|a second Severity line in finding G-042
+R|escaped-bracket-closing-before-first-word-then-image|\n[\\] a] ![q\nr\n](u)Severity: data-loss\n|a second Severity line in finding G-042

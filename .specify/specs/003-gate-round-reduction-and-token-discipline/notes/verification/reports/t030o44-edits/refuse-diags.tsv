@@ -1,0 +1,56 @@
+word-before-finding	a class line outside any Finding: - **Class:** tier-binding
+nbsp-before-hashes	a Finding heading this grammar cannot read: \302\240### Finding G-042
+zwsp-before-hashes	a Finding heading this grammar cannot read: \342\200\213### Finding G-042
+nbsp-after-hashes	a Finding heading this grammar cannot read: ###\302\240Finding G-042
+ill-cased-id	a Finding heading whose ID this grammar cannot read: ### Finding g-042
+field-outside-finding	a severity line outside any Finding: - **Severity:** data-loss
+no-class	finding G-042 has no readable Class: - **Severity:** data-loss
+second-class	a second Class line in finding G-042: - **Class:** tier-binding
+unbolded-class	a Class line this grammar cannot read: - Class: tier-binding
+class-without-dash	a Class line this grammar cannot read: **Class:** tier-binding
+severity-without-dash	a Severity line this grammar cannot read: **Severity:** data-loss
+class-grammar	a Class this grammar cannot read: - **Class:** Tier-Binding
+class-with-space	a Class this grammar cannot read: - **Class:** tier binding
+second-severity	a second Severity line in finding G-042: - **Severity:** minor
+unbolded-severity	a Severity line this grammar cannot read: - Severity: data-loss
+colon-outside-severity	a Severity line this grammar cannot read: - **Severity**: data-loss
+lowercase-severity	a Severity line this grammar cannot read: - **severity:** data-loss
+italic-severity	a Severity line this grammar cannot read: - *Severity:* data-loss
+severity-grammar	a Severity this grammar cannot read: - **Severity:** data loss
+fence-left-open	a code fence is left open: - **Severity:** data-loss
+comment-left-open	an HTML comment is left open: - **Severity:** data-loss
+raw-block-left-open	a raw HTML block is left open: - **Severity:** data-loss
+severity-then-prior	a Severity this grammar cannot read: - **Severity:** data-loss; **Prior:** minor
+minor-then-prior	a Severity this grammar cannot read: - **Severity:** minor; **Prior:** data-loss
+class-then-status	a Class this grammar cannot read: - **Class:** tier-binding; **Status:** open
+space-colon-severity	a Severity line this grammar cannot read: - **Severity :** data-loss
+nbsp-colon-severity	a Severity line this grammar cannot read: - **Severity\302\240:** data-loss
+nnbsp-colon-severity	a Severity line this grammar cannot read: - **Severity\342\200\257:** data-loss
+bold-space-colon-severity	a Severity line this grammar cannot read: - **Severity** : data-loss
+emdash-severity	a Severity line this grammar cannot read: - **Severity** \342\200\224 data-loss
+fullwidth-colon-severity	a Severity line this grammar cannot read: - **Severity\357\274\232** data-loss
+ordered-severity	a Severity line this grammar cannot read: 1. **Severity:** data-loss
+separatorless-severity	a Severity line this grammar cannot read: - **Severity** data-loss
+nested-severity-prose	a second Severity line in finding G-042:   - Severity: raised from minor after the repro
+nbsp-after-hashes-below-class-only	a Finding heading this grammar cannot read: ###\302\240Finding G-042
+tab-before-hashes-below-class-only	a Finding heading this grammar cannot read: \011### Finding G-042
+zwsp-before-hashes-below-class-only	a Finding heading this grammar cannot read: \342\200\213### Finding G-042
+nbsp-before-hashes-below-class-only	a Finding heading this grammar cannot read: \302\240### Finding G-042
+no-space-after-hashes-below-class-only	a Finding heading this grammar cannot read: ###Finding G-042
+indented-heading-below-class-only	a Finding heading this grammar cannot read:     ### Finding G-042
+word-before-finding-unbolded	a class line outside any Finding: - Class: tier-binding
+bold-finding-line-unbolded	a severity line outside any Finding: - Severity: data-loss
+colon-finding-heading-unbolded	a Finding heading this grammar cannot read: ### Finding: G-042
+id-on-an-outside-line	a severity line outside any Finding: - Severity: data-loss (G-042)
+bare-class-word	a Class line this grammar cannot read: class
+no-class-beside-another	finding G-042 has no readable Class: - **Severity:** data-loss
+subheading-unbolded-severity	a Severity line this grammar cannot read: Severity: data-loss
+subheading-bulleted-severity	a Severity line this grammar cannot read: - Severity: data-loss
+subheading-star-bullet-severity	a Severity line this grammar cannot read: * **Severity:** data-loss
+nonbreaking-hyphen-id-unbolded	a class line outside any Finding: - Class: tier-binding
+multiword-emphasized-severity	a Severity line this grammar cannot read: - **Severity level:** data-loss
+multiword-colon-outside-severity	a Severity line this grammar cannot read: - **Severity level**: data-loss
+bullet-character-severity	a Severity line this grammar cannot read: \342\200\242 **Severity:** data-loss
+checkbox-severity	a Severity line this grammar cannot read: - [x] **Severity:** data-loss
+table-manifest	manifest: records no finding this grammar can read
+inline-finding-manifest	manifest: records no finding this grammar can read

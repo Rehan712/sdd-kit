@@ -1,0 +1,20 @@
+{
+  "command": [
+    "git",
+    "-c",
+    "push.followTags=false",
+    "-c",
+    "push.recurseSubmodules=no",
+    "-c",
+    "push.gpgSign=false",
+    "push",
+    "--no-verify",
+    "--porcelain",
+    "origin",
+    "781b963e6777b44059b24e696dafa37c69242a05:refs/heads/ci-snapshot/spec-003-20261025-s26"
+  ],
+  "commit": "781b963e6777b44059b24e696dafa37c69242a05",
+  "ref": "refs/heads/ci-snapshot/spec-003-20261025-s26",
+  "force": false,
+  "started_at": "2026-10-25T16:43:16.169031+00:00"
+}

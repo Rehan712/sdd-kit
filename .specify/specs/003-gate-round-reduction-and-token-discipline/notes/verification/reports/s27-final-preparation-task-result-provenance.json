@@ -1,0 +1,30 @@
+{
+  "taskId": "node:delegated-task:command%3Amcp%3Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%3Adelegate-task%3Asdd003-s27-final-postcontrol-snapshot-high-r1",
+  "childThreadId": "thread:delegated-task:command%3Amcp%3Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%3Adelegate-task%3Asdd003-s27-final-postcontrol-snapshot-high-r1",
+  "childRunId": "run:thread:thread%3Adelegated-task%3Acommand%253Amcp%253Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%253Adelegate-task%253Asdd003-s27-final-postcontrol-snapshot-high-r1:ordinal:1",
+  "childNodeId": "node:delegated-task:command%3Amcp%3Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%3Adelegate-task%3Asdd003-s27-final-postcontrol-snapshot-high-r1",
+  "status": "completed",
+  "workState": "result_available",
+  "hasPendingChildRuns": false,
+  "latestTerminalRunId": "run:thread:thread%3Adelegated-task%3Acommand%253Amcp%253Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%253Adelegate-task%253Asdd003-s27-final-postcontrol-snapshot-high-r1:ordinal:1",
+  "latestTerminalStatus": "completed",
+  "latestTerminalSummary": null,
+  "latestTerminalResultContextTransferId": null,
+  "providerInstanceId": "codex_codex_gym",
+  "model": "gpt-6.1-sol",
+  "options": [
+    {
+      "id": "reasoningEffort",
+      "value": "high"
+    },
+    {
+      "id": "serviceTier",
+      "value": "default"
+    }
+  ],
+  "summary": "Final preparation complete.\n\n- Source: `c7a82b3ae3b900dcb02a4839decad74db1a13457c5bab9ff859625a5357f0be6`\n- Tree: `d685ec420ba6ce338e72727638e1ccff0bbb3846`\n- Unreferenced commit: `5aee77672d03a2c7811e28e55172817da6dee012`\n- Expected remote head: `414838bb52898921aa49fb3d25caed6e7b711763`\n\nStrict mapping passes: **177 source paths + 8 harness + 4 document records**. Prepared/completed manifests match. Bash syntax, scoped ShellCheck, and all seven offline collector controls pass.\n\nHEAD, index bytes/mtime, STATUS, and post-acceptance tasks bytes/mtime remain unchanged. Raw tasks SHA remains `add4d6235dc7554841a041fb9bd04083630ca987278484ac88dd23406b7aecaa`. All 183 historical P27 files are preserved. No known live writer, verification lock, or pending reservation was observed.\n\nExact paths and parent instructions:\n\n- [Handoff](/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s27-final-preparation-handoff.md)\n- [Completed proof and protected state](/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261025-s27-final/preparation-completed.json)\n- [Native AC-wait launch argv](/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261025-s27-final/parent-floor-launch.argv.json)\n- [Floor helper](/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s27-final-floor.sh)\n- [Lease-protected publication](/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261025-s27-final/publication.json)\n- [PR body](/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261025-s27-final/pr21-body.md) and [title](/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261025-s27-final/pr21-title.txt)\n\nFinal observation: **Battery Power, 92%; 11.23 GiB free**. AC guard retained.\n\nNot run: floor, gates, application suites, publication, hosted collection, or merge. Fresh floor and final hosted CI remain unverified.",
+  "resultContextTransferId": "context-transfer:type:subagent_result:source-thread:thread%3Adelegated-task%3Acommand%253Amcp%253Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%253Adelegate-task%253Asdd003-s27-final-postcontrol-snapshot-high-r1:target-thread:2ce93492-409f-4930-a9e5-173544a4c8c6:35d535f1-d0f7-40a6-beb6-fb1d540af89c",
+  "hasPendingQuestion": false,
+  "pendingApproval": null,
+  "waitTimedOut": false
+}

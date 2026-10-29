@@ -1,0 +1,660 @@
+--- a/scripts/verification-lib.sh
++++ b/scripts/verification-lib.sh
+@@ -255,31 +255,47 @@
+ # letter, digit or hyphen; otherwise "". The first word is the one after any
+ # run of characters that are not letters or digits (indentation, heading
+ # markers, any list marker, emphasis, backslash escapes, quotes, brackets),
+-# ordered-list numbers and task checkboxes. The line is read twice, and a
+-# label either reading yields is returned, so a reading that approximates what
+-# a renderer shows can only make a line refuse, never let a visible label pass
+-# (T030o44 review F1, F9, F11): as written, and as rendered. The rendered
+-# reading takes out inline raw HTML by CommonMark 0.31.2's own productions
+-# (6.6: an open tag with its attributes, a quoted value holding `>` included,
+-# a closing tag, a comment, which `<!-->` and `<!--->` complete, a processing
+-# instruction, a declaration, a CDATA section; one left open hides the rest
+-# of the line), takes out a link's destination and title, a reference link's
+-# label and an image whole (6.3, 6.4), renders a footnote reference as its
+-# number, a numeric character reference as its character and a named one as a
+-# character that is no letter or digit (2.5; no named reference renders as an
+-# ASCII letter or digit). vf_finding_heading <line> is true when the text of an
++# ordered-list numbers and task checkboxes. The line is read as written and as
++# rendered, and a label any reading yields is returned, so a reading that
++# approximates what a renderer shows can only make a line refuse, never let a
++# visible label pass (T030o44 review F1, F9, F11). The rendered reading takes
++# out inline raw HTML by CommonMark 0.31.2's own productions (6.6: an open tag
++# with its attributes, a quoted value holding `>` included, a closing tag, a
++# comment, which `<!-->` and `<!--->` complete, a processing instruction, a
++# declaration, a CDATA section; one left open hides the rest of the line);
++# reduces bracket pairs innermost first, to a fixpoint, since link text may
++# hold balanced brackets and images (6.3, 6.4; round 14, O-018): an image
++# becomes a character that is no letter or digit, a link or a reference link
++# its text between two such characters, a footnote reference its number, any
++# other pair its text, a task checkbox stays, and a bracket a backslash escapes
++# is literal (2.4); renders a numeric character reference as its character and
++# a named one as a character that is no letter or digit (2.5; no named
++# reference renders as an ASCII letter or digit); and takes out a run of `*`
++# between two letters or digits, which emphasis may hold inside a word (6.2).
++# A second rendered reading also takes out every named reference, every
++# numeric one beyond ASCII and every byte outside ASCII, so a word a renderer
++# shows whole across an invisible character (a soft hyphen, a zero-width
++# space) is read whole; it can only add a label. vf_finding_heading <line> is true when the text of an
+ # ATX heading is the word Finding in any case, not continued by a letter or
+ # digit, followed, after anything that is not a letter or digit, by a finding
+ # ID. vf_record <line> names the record a line carries to either reader (a
+ # finding field line, a Class or Severity line, a Finding heading) or is "".
+ # vf_block_start <text> is true when a line, without its indentation, starts a
+-# block that ends a list item's paragraph: a list item with text (an ordered
+-# one only when numbered 1, the only number that may interrupt a paragraph),
+-# an ATX heading, a block quote, a code fence a renderer opens (a backtick
+-# fence's info string holds no backtick), a comment, an HTML block of the
+-# other kinds that may interrupt a paragraph (CommonMark 4.6 conditions 1, 3, 4
+-# and 5, read by the tracker's own vf_raw_start) or a thematic break. Any other
+-# line may continue the paragraph, which is the deny side.
++# block that ends a paragraph: a list item with text (an ordered one only when
++# numbered 1, the only number that may interrupt a paragraph), an ATX heading,
++# a block quote, a code fence a renderer opens (4.5: three or more backticks
++# whose info string holds no backtick, or three or more tildes), an HTML block
++# of any kind but the seventh, which alone cannot interrupt a paragraph (4.6:
++# conditions 1, 3, 4 and 5 read by the tracker's own vf_raw_start, a comment,
++# and the block-level tag names of condition 6), or a thematic break. Any
++# other line may continue the paragraph, which is the deny side (round 14,
++# O-021). A reader reads a record by paragraph, not only by line, since an
++# inline construct may span lines (6.3, 6.6; round 14, O-018): vf_para <line>,
++# called on every line before quoting is read, joins the line to the paragraph
++# before it unless the line is blank, starts a block, follows an ATX heading
++# or sits in a code fence, and reads the line without its block-quote markers;
++# vf_para_label names the Class or Severity line a continuation line makes of
++# a paragraph whose first line carried no label, once per paragraph, or is "".
+ _VF_AWK_LABEL='
+ function vf_label_hex(h,   i, n) {
+   n = 0; h = tolower(h)
+@@ -352,31 +368,37 @@
+   }
+   return (substr(s, j, 1) == ")") ? j + 1 : 0
+ }
+-function vf_label_links(s,   out, i, j, k, m) {
+-  out = ""
+-  while (match(s, /!?\[[^]]*\]/)) {
+-    i = RSTART; j = RSTART + RLENGTH; m = 0
++function vf_label_links(s,   pos, i, j, k, m, b, lb, inner) {
++  gsub(/\\[][]/, "\003", s)
++  pos = 1
++  while (match(substr(s, pos), /!?\[[^][]*\]/)) {
++    i = pos + RSTART - 1; j = i + RLENGTH; b = (substr(s, i, 1) == "!"); lb = i + b
++    inner = substr(s, lb + 1, j - lb - 2); m = 0
+     if (substr(s, j, 1) == "(") m = vf_label_dest(s, j)
+     else if (substr(s, j, 1) == "[" && (k = index(substr(s, j + 1), "]"))) m = j + k + 1
+-    if (m) {out = out substr(s, 1, i - 1) (substr(s, i, 1) == "!" ? "" : substr(s, i, j - i)); s = substr(s, m)}
+-    else {out = out substr(s, 1, j - 1); s = substr(s, j)}
++    if (m) {s = substr(s, 1, i - 1) (b ? "\001" : "\001" inner "\001") substr(s, m); pos = 1; continue}
++    if (!b && inner ~ /^[ xX]$/) {pos = j; continue}
++    s = substr(s, 1, lb - 1) "\001" inner "\001" substr(s, j); pos = 1
+   }
+-  return out s
++  return s
+ }
+-function vf_label_render(s,   t, n) {
++function vf_label_render(s, hide,   t, n) {
+   s = vf_label_html(s)
+   gsub(/\[\^[^]]*\]/, "\001", s)
+   s = vf_label_links(s)
+   while (match(s, /&#[0-9]+;|&#[xX][0-9A-Fa-f]+;/)) {
+     t = substr(s, RSTART + 2, RLENGTH - 3)
+     n = (t ~ /^[xX]/) ? vf_label_hex(substr(t, 2)) : t + 0
+-    s = substr(s, 1, RSTART - 1) ((n > 32 && n < 127) ? sprintf("%c", n) : "\001") substr(s, RSTART + RLENGTH)
++    s = substr(s, 1, RSTART - 1) ((n > 32 && n < 127) ? sprintf("%c", n) : ((hide && n > 126) ? "" : "\001")) substr(s, RSTART + RLENGTH)
+   }
+-  gsub(/&[A-Za-z][A-Za-z0-9]*;/, "\001", s)
++  gsub(/&[A-Za-z][A-Za-z0-9]*;/, hide ? "" : "\001", s)
++  while (match(s, /[A-Za-z0-9]\*+[A-Za-z0-9]/)) s = substr(s, 1, RSTART) substr(s, RSTART + RLENGTH - 1)
++  if (hide) gsub(/[\200-\377]/, "", s)
+   return s
+ }
+ function vf_label(s, labels,   w) {
+-  w = vf_label_word(vf_label_render(s), labels)
++  w = vf_label_word(vf_label_render(s, 0), labels)
++  if (w == "") w = vf_label_word(vf_label_render(s, 1), labels)
+   return (w != "") ? w : vf_label_word(s, labels)
+ }
+ function vf_finding_heading(s,   t) {
+@@ -397,8 +419,26 @@
+   b = sprintf("%c", 96)
+   if (t ~ /^[-+*][ \t]+[^ \t]/ || t ~ /^1[.)][ \t]+[^ \t]/) return 1
+   if (t ~ /^(#|##|###|####|#####|######)([ \t]|$)/ || t ~ /^>/ || t ~ /^<!--/ || t ~ /^~~~/ || vf_raw_start(t)) return 1
+-  if (t ~ ("^" b b b "[^" b "]*$")) return 1
++  if (t ~ ("^" b b b b "*[^" b "]*$")) return 1
++  if (tolower(t) ~ /^<\/?(address|article|aside|base|basefont|blockquote|body|caption|center|col|colgroup|dd|details|dialog|dir|div|dl|dt|fieldset|figcaption|figure|footer|form|frame|frameset|h1|h2|h3|h4|h5|h6|head|header|hr|html|iframe|legend|li|link|main|menu|menuitem|nav|noframes|ol|optgroup|option|p|param|search|section|summary|table|tbody|td|tfoot|th|thead|title|tr|track|ul)([ \t>]|\/>|$)/) return 1
+   return (t ~ /^(\*[ \t]*\*[ \t]*\*[* \t]*|-[ \t]*-[ \t]*-[- \t]*|_[ \t]*_[ \t]*_[_ \t]*)$/)
++}
++function vf_para(s,   t) {
++  t = s; sub(/^[ \t]*(>[ \t]*)*/, "", t)
++  if (fenced || t ~ /^[[:space:]]*$/) {vf_para_text = vf_para_line = vf_para_first = ""; vf_para_cont = vf_para_open = 0; return}
++  vf_para_cont = (vf_para_open && !vf_block_start(t))
++  if (vf_para_cont) vf_para_text = vf_para_text " " t
++  else {vf_para_text = t; vf_para_line = s; vf_para_first = "?"}
++  vf_para_open = (t !~ /^#+([ \t]|$)/)
++}
++function vf_para_label(   l) {
++  if (!vf_para_cont) return ""
++  if (vf_para_first == "?") vf_para_first = vf_label(vf_para_line, "class severity")
++  if (vf_para_first != "") return ""
++  l = vf_label(vf_para_text, "class severity")
++  if (l == "") return ""
++  vf_para_first = "refused"
++  return (l == "class") ? "Class line" : "Severity line"
+ }
+ '
+ # The preludes of a parser of author text: the whitespace reading, the label
+@@ -1352,7 +1392,11 @@
+     # The list item a field line opens holds that line only: a line that would
+     # continue its paragraph, or any further text inside the item, is read by
+     # a reader as part of the field and is refused by name, unless the pass
+-    # reads that line as a field line of its own (T030o44 review F10). Every finding needs one readable Class and one readable Severity,
++    # reads that line as a field line of its own (T030o44 review F10). A label
++    # is read by paragraph as well as by line (vf_para), so a line that
++    # continues a paragraph whose joined text carries a label its first line
++    # did not is read as a field line this grammar cannot read, quoted or not
++    # (round 14, O-018). Every finding needs one readable Class and one readable Severity,
+     # so a tier the pass does not read is refused with its finding, never
+     # dropped (O-018). The shared tracker skips quoted content, and as a line
+     # reader without CommonMark's containers it can quote content a renderer
+@@ -1390,7 +1434,12 @@
+           itemfield=""
+         }
+       }
+-      vf_quoted($0) {shape=vf_record($0); if (shape != "" && (id != "" || shape == "Finding heading")) bad("quoted content carries a " shape); next}
++      {vf_para($0)}
++      vf_quoted($0) {
++        shape=vf_record($0); if (shape == "" && id != "") shape=vf_para_label()
++        if (shape != "" && (id != "" || shape == "Finding heading")) bad("quoted content carries a " shape)
++        next
++      }
+       /^ ? ? ?#+([ \t]|$)/ {
+         heading=$0; sub(/^ +/, "", heading); split(heading, word, /[[:space:]]+/)
+         hl=match(heading, /[^#]/); hl=(hl ? hl - 1 : length(heading))
+@@ -1411,9 +1460,10 @@
+         flushm(); idseen=1; bad("a Finding heading this grammar cannot read"); next
+       }
+       {
+-        field=fieldname($0)
++        pl=vf_para_label(); field=fieldname($0); pfield=0
++        if (field == "" && pl != "") {field=(pl == "Class line") ? "class" : "severity"; pfield=1}
+         if (field != "class" && field != "severity") {if ($0 ~ /[A-Za-z][A-Za-z0-9]*-[0-9]/) idseen=1; next}
+-        strict=(field == "class") ? ($0 ~ /^[ ]*-[[:space:]]+\*\*Class:\*\*/) : ($0 ~ /^[ ]*-[[:space:]]+\*\*Severity:\*\*/)
++        strict=!pfield && ((field == "class") ? ($0 ~ /^[ ]*-[[:space:]]+\*\*Class:\*\*/) : ($0 ~ /^[ ]*-[[:space:]]+\*\*Severity:\*\*/))
+         if (id == "") {
+           if (strict || idseen || $0 ~ /[A-Za-z][A-Za-z0-9]*-[0-9]/) bad("a " field " line outside any Finding")
+           next
+@@ -1610,7 +1660,9 @@
+         itemfield=""
+       }
+     }
++    {vf_para($0)}
+     vf_quoted($0) {
++      if (active && $0 !~ /^[[:space:]]*$/) body=1
+       # Quoting does not exempt a line from the after-marker rule: a fenced,
+       # commented or blockquoted preamble is still content the accumulator
+       # would attribute to the sealed round above it.
+@@ -1618,18 +1670,33 @@
+       # The tracker is a line reader that does not track CommonMark containers,
+       # so what it quotes can be content a renderer shows (T030o44 review F4):
+       # in a canonical round, a quoted Finding heading, or inside a finding a
+-      # quoted line that carries a record of it, is refused by name, never
+-      # skipped. A quoted field line outside any finding attaches to none.
+-      else if (style=="canonical" && active && (shape=vf_record($0)) != "" && (fid != "" || shape == "Finding heading")) err("quoted content carries a " shape)
++      # quoted line that carries a record of it, or whose paragraph does
++      # (round 14, O-018), is refused by name, never skipped. A quoted field
++      # line outside any finding attaches to none.
++      else if (style=="canonical" && active) {
++        shape=vf_record($0); if (shape == "" && fid != "") shape=vf_para_label()
++        if (shape != "" && (fid != "" || shape == "Finding heading")) err("quoted content carries a " shape)
++      }
+       next
+     }
+     /^## Round [1-9][0-9]*$/ {
+-      flush(); n=substr($0, 10); active=1; style="canonical"; declared=date=verdict=utc=source=floor=cursec=suppressed=""; ended=counted=blockers=minors=downgraded=0; next
++      flush(); n=substr($0, 10); active=1; style="canonical"; declared=date=verdict=utc=source=floor=cursec=suppressed=""; ended=counted=blockers=minors=downgraded=body=0; next
+     }
++    # The style of a round decides which rules judge its lines, so it is decided
++    # before the round has a body (round 14, O-020). The round heading makes a
++    # round canonical, a report title read before its Round and Timestamp lines
++    # makes it legacy, and a Timestamp line makes it canonical; once the round
++    # has a body -- any non-blank line but its heading, its title and its
++    # identity fields -- a title that would make it legacy, or a Timestamp
++    # line that would make it canonical, is refused by name. Otherwise the
++    # lines before the switch were judged by the rules of one style while the
++    # round was sealed by the other: a title and a late Timestamp skipped every
++    # canonical rule of finding() and of the record readers, the count
++    # included, while flush() judged the round canonical.
+     /^# (Opponent review|Reality Check)/ {
+       if (ended) {err("content after the round completion marker"); next}
+-      if (!active) {n=last+1; active=1; style="legacy"; declared=date=verdict=utc=source=floor=suppressed=""; ended=counted=blockers=minors=downgraded=0}
+-      else if (!declared && !utc) style="legacy"
++      if (!active) {n=last+1; active=1; style="legacy"; declared=date=verdict=utc=source=floor=suppressed=""; ended=counted=blockers=minors=downgraded=body=0}
++      else if (!declared && !utc) {if (style=="canonical" && body) err("a report title after the body of a canonical round"); style="legacy"}
+       next
+     }
+     /^## Round/ {err("malformed round heading"); next}
+@@ -1639,13 +1706,14 @@
+       if(seenfield[n SUBSEP key]++) err("duplicate identity field")
+       v=value(vf_original)
+       if(key=="**Round") declared=v
+-      if(key=="**Timestamp") {utc=v; date=substr(v,1,10); style="canonical"}
++      if(key=="**Timestamp") {if (style=="legacy" && body) err("a Timestamp line after the body of a round its title made legacy"); utc=v; date=substr(v,1,10); style="canonical"}
+       if(key=="**Source") source=v
+       if(key=="**Floor") floor=v
+       if(key=="**Date") date=v
+       if(key=="**Verdict") verdict=v
+       next
+     }
++    active && $0 !~ /^[[:space:]]*$/ {body=1}
+     /^<!-- gate-round-end:/ {
+       finding(); if($0!="<!-- gate-round-end: " gate ":" n " -->" || ended) err("completion marker mismatch"); ended=1; cursec=""; next
+     }
+@@ -1701,7 +1769,8 @@
+     # spelling of it`), so a report puts another word first (T030o44 review F2).
+     style=="canonical" && !ended && !fid && /^[ ]*- \*\*(Class|Status|Prior|Severity|Where|Root cause|Scenario|Reproduced|Blocks|Wrong behavior|Class-wide fix):\*\*/ {err("a finding field outside any Finding"); next}
+     style=="canonical" && fid && !/^[ ]*- \*\*(Class|Status|Prior|Severity|Where|Root cause|Scenario|Reproduced|Blocks|Wrong behavior|Class-wide fix):\*\*/ {
+-      lbl=vf_label($0, "class severity")
++      pl=vf_para_label(); lbl=vf_label($0, "class severity")
++      if (lbl == "" && pl != "") lbl=(pl == "Class line") ? "class" : "severity"
+       if (lbl != "") err("a " (lbl == "class" ? "Class" : "Severity") " line this grammar cannot read in finding " fid)
+     }
+     fid && /^[ ]*- \*\*(Class|Status|Prior|Severity|Where|Root cause|Scenario|Reproduced|Blocks|Wrong behavior|Class-wide fix):\*\*/ {
+--- a/templates/verification-contract.md
++++ b/templates/verification-contract.md
+@@ -357,11 +357,17 @@
+ of the rendering can only refuse: the rendered text takes inline raw HTML out
+ by CommonMark's own productions (an open tag with its attributes, a closing
+ tag, a comment, which `<!-->` completes, a processing instruction, a
+-declaration, a CDATA section), takes out link destinations, reference labels
+-and images, renders a numeric character reference as its character and a
+-named one as a character that is no letter or digit, and the label is the
+-first word after any run of characters that are not letters or digits,
+-ordered-list numbers and task checkboxes. The other canonical fields are
++declaration, a CDATA section), reduces bracket pairs innermost first to a
++fixpoint (an image becomes no text, a link its text, so a linked image is
++taken out as an image is), renders a numeric character reference as its
++character and a named one as a character that is no letter or digit, and
++takes out emphasis inside a word; a second rendered reading also takes out
++every named reference and every character outside ASCII, so a word shown
++whole across an invisible character is read whole. The label is the first
++word after any run of characters that are not letters or digits,
++ordered-list numbers and task checkboxes, and it is read from each line and
++from each paragraph, a line joined with the lines that continue it, since an
++inline construct may span lines. The other canonical fields are
+ decided by their spelling. A manifest field line must be a dash, whitespace
+ and `**Class:**` or `**Severity:**`, its value the text after that label only,
+ and every manifest finding needs one readable Class and one readable Severity,
+@@ -369,7 +375,10 @@
+ dropped. The list item a Class or Severity line opens, and in a canonical
+ finding a Status line's, holds that line only: a line that would continue its
+ paragraph, or other text inside the item, is refused by name unless the pass
+-reads it as a field line of its own. Quoting is read by a line tracker that
++reads it as a field line of its own. A paragraph ends at a blank line or at a
++line that starts a block that may interrupt it: a list item, an ATX heading, a
++block quote, a code fence, an HTML block of any kind but the seventh, or a
++thematic break. Quoting is read by a line tracker that
+ does not follow CommonMark's containers, so it can quote content a renderer
+ shows; a fenced, blockquoted, commented or raw-HTML line that is a Finding
+ heading, or that carries a record of the finding it is in (a finding field
+@@ -389,7 +398,11 @@
+ whose label is Class or Severity and that is not that field's own line is
+ refused, prose included, so such a line starts with another word; and a
+ field's duplicate is found by its label, whatever its indentation, in a round
+-of either style.
++of either style. A round's style is decided before its body, since it decides
++which of these rules judge the body's lines: once a round has a body, any
++non-blank line but its heading, its report title and its identity fields, a
++title that would make a canonical round legacy, or a Timestamp line that
++would make a legacy round canonical, is refused by name.
+ 
+ The capture input manifest records environment variables whose MEMBERSHIP is
+ exactly `verification_environment:` — the declaration and nothing beside it.
+--- a/tests/test-gate-contracts.sh
++++ b/tests/test-gate-contracts.sh
+@@ -1133,6 +1133,19 @@
+ severity-then-comment|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n<!-- a note -->\n
+ severity-then-tilde-fence|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n~~~\nplain output\n~~~\n
+ summary-with-subsection|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n\n## Summary\n\n#### Details\n\n- Severity: all blocking\n
++severity-then-div|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n<div>\nnote\n</div>\n
++severity-then-details|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n<details>\nx\n</details>\n
++severity-then-closing-tag|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n</details>\n
++severity-then-four-backtick-fence|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n````text\nplain output\n````\n
++link-prose|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n- See [the report](x) for the tier.\n
++linked-image-prose|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n- [![badge](y.png)](z) shows the build state.\n
++wrapped-prose|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n- A note that wraps\nonto the next line, then says Severity: as noted.\n
++wrapped-link-text|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n- [a link whose text\nwraps](x) and more.\n
++intraword-prose|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n- The c*a*se of one word.\n
++blockquote-prose|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n\n> A quoted\n> remark about the Severity of it.\n
++wrapped-tag-prose|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n- <abbr title="a long\ntitle">API</abbr> severity is unchanged.\n
++fenced-tag-example|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n\n```\n<b\ntitle="x">Severity: data-loss</b>\n```\n
++heading-then-attribute-line|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n\n#### <abbr\ntitle="t">Severity: data-loss</abbr>\n
+ SHAPES
+   printf '# Prior review\n\n### Finding G-042\n- **Class:** tier-binding\n- **Severity:** data-loss\n' \
+     > "$spec/notes/verification/reports/opponent-findings-review.md"
+@@ -1297,7 +1310,14 @@
+   # opener), a second tier or a whole finding the quoting tracker hides (after
+   # `<!-->`, after an opener inside an attribute, inside a fence a renderer
+   # does not open, a fence, a block quote, a comment, a script block), and a
+-  # Severity item that holds more than its line.
++  # Severity item that holds more than its line. Round 14's members follow
++  # (O-018 reopened): a second tier behind brackets that nest (a linked image,
++  # an image with an escaped bracket in its alt text), behind a construct that
++  # spans lines (a tag, a title, link text, alt text, a processing instruction,
++  # a CDATA section, a block-level tag, a comment, a block-quoted tag), inside
++  # a word emphasis splits, and inside a word an invisible character splits;
++  # and a condition-7 tag line after a field line, which continues its item
++  # (O-021's refusal twin).
+   while IFS='|' read -r tag body want; do
+     printf '# Prior review\n\n%b' "$body" > "$spec/notes/verification/reports/opponent-findings-review.md"
+     tier_round_fixture 1 '' G-042:tier-binding:open:minor > "$report"
+@@ -1352,7 +1372,7 @@
+ value-nested-tier-note|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n  - **Tier:** data-loss\n|a Severity field whose list item holds more than its line in finding G-042:   - **Tier:** data-loss
+ value-ordered-two|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n2. data-loss\n|a Severity field whose list item holds more than its line in finding G-042: 2. data-loss
+ value-backtick-info-fence|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n```x`y\nnot a fence\n```\n|a Severity field whose list item holds more than its line in finding G-042: ```x`y
+-value-details|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n<details>\nx\n</details>\n|a Severity field whose list item holds more than its line in finding G-042: <details>
++value-span-twin|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n<span>\nx\n</span>\n|a Severity field whose list item holds more than its line in finding G-042: <span>
+ class-value-continued|### Finding G-042\n- **Class:** tier-binding\n  other-binding\n- **Severity:** data-loss\n|a Class field whose list item holds more than its line in finding G-042:   other-binding
+ nested-lead-in|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n   - **Class binding.** A manifest recording the tier is read.\n|a Severity field whose list item holds more than its line in finding G-042:    - **Class binding.** A manifest recording the tier is read.
+ second-tier-closing-tag|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- </b>Severity: data-loss\n|a second Severity line in finding G-042: - </b>Severity: data-loss
+@@ -1361,6 +1381,28 @@
+ second-tier-cdata|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- <![CDATA[x]]>Severity: data-loss\n|a second Severity line in finding G-042: - <![CDATA[x]]>Severity: data-loss
+ hidden-finding-outside|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n## Notes\n\n<!--\n### Finding G-043\n- **Class:** other-binding\n- **Severity:** data-loss\n-->\n|quoted content carries a Finding heading: ### Finding G-043
+ value-tab-paragraph|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n\tdata-loss\n|a Severity field whose list item holds more than its line in finding G-042
++nested-badge|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- [![badge](y.png)](z)Severity: data-loss\n|a second Severity line in finding G-042: - [![badge](y.png)](z)Severity: data-loss
++nested-badge-empty-alt|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- [![](y)](z)Severity: data-loss\n|a second Severity line in finding G-042: - [![](y)](z)Severity: data-loss
++nested-brackets|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- [[]](x)Severity: data-loss\n|a second Severity line in finding G-042: - [[]](x)Severity: data-loss
++escaped-bracket-alt|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- ![a\\]b](y)Severity: data-loss\n|a second Severity line in finding G-042: - ![a\]b](y)Severity: data-loss
++wrapped-abbr-title|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- <abbr title="the tier this\nfinding carries">Severity:</abbr> data-loss\n|a second Severity line in finding G-042: finding carries">Severity:</abbr> data-loss
++split-tag|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- <b\ntitle="x">Severity: data-loss</b>\n|a second Severity line in finding G-042: title="x">Severity: data-loss</b>
++empty-link-across|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- [\n](x)Severity: data-loss\n|a second Severity line in finding G-042: ](x)Severity: data-loss
++link-title-across|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- [](x\n"t")Severity: data-loss\n|a second Severity line in finding G-042: "t")Severity: data-loss
++image-alt-across|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- ![ba\ndge](y)Severity: data-loss\n|a second Severity line in finding G-042: dge](y)Severity: data-loss
++pi-across|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- <?x\ny?>Severity: data-loss\n|a second Severity line in finding G-042: y?>Severity: data-loss
++cdata-across|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- <![CDATA[x\ny]]>Severity: data-loss\n|a second Severity line in finding G-042: y]]>Severity: data-loss
++div-block-across|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n<div\ntitle="x">Severity: data-loss</div>\n|a second Severity line in finding G-042: title="x">Severity: data-loss</div>
++intraword-emphasis|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- S*everity:* data-loss\n|a second Severity line in finding G-042: - S*everity:* data-loss
++intraword-strong|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- **Sev**erity: data-loss\n|a second Severity line in finding G-042: - **Sev**erity: data-loss
++zero-width-space|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- Sev\342\200\213erity: data-loss\n|a second Severity line in finding G-042
++soft-hyphen|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- Sev\302\255erity: data-loss\n|a second Severity line in finding G-042
++named-soft-hyphen|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- Sev&shy;erity: data-loss\n|a second Severity line in finding G-042: - Sev&shy;erity: data-loss
++numeric-soft-hyphen|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- Sev&#173;erity: data-loss\n|a second Severity line in finding G-042: - Sev&#173;erity: data-loss
++named-zero-width|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- Se&ZeroWidthSpace;verity: data-loss\n|a second Severity line in finding G-042: - Se&ZeroWidthSpace;verity: data-loss
++comment-across-quoted|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- <!-- a\nb --> Severity: data-loss\n|quoted content carries a Severity line: b --> Severity: data-loss
++blockquoted-tag-split|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n> - <b\n> title="x">Severity: data-loss</b>\n|quoted content carries a Severity line: > title="x">Severity: data-loss</b>
++checkbox-then-tag|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- [x] <b>Severity:</b> data-loss\n|a second Severity line in finding G-042: - [x] <b>Severity:</b> data-loss
+ ROWS
+   # O-019: a heading deeper than the Finding heading is one of its lines, so
+   # the canonical field lines under it are read: the CLEARED round is refused
+@@ -1445,7 +1487,36 @@
+ value-continued-lazy|- **Severity:** minor\ndata-loss|a Severity field whose list item holds more than its line in finding G-050
+ value-second-paragraph|- **Severity:** minor\n\n  data-loss|a Severity field whose list item holds more than its line in finding G-050
+ value-tab-paragraph|- **Severity:** minor\n\n\tdata-loss|a Severity field whose list item holds more than its line in finding G-050
++value-span-twin|- **Severity:** minor\n<span>\nx\n</span>\n|a Severity field whose list item holds more than its line in finding G-050
++nested-badge|- **Severity:** minor\n- [![badge](y.png)](z)Severity: data-loss|a Severity line this grammar cannot read in finding G-050
++nested-brackets|- **Severity:** minor\n- [[]](x)Severity: data-loss|a Severity line this grammar cannot read in finding G-050
++wrapped-abbr-title|- **Severity:** minor\n- <abbr title="the tier this\nfinding carries">Severity:</abbr> data-loss|a Severity line this grammar cannot read in finding G-050
++split-tag|- **Severity:** minor\n- <b\ntitle="x">Severity: data-loss</b>|a Severity line this grammar cannot read in finding G-050
++link-title-across|- **Severity:** minor\n- [](x\n"t")Severity: data-loss|a Severity line this grammar cannot read in finding G-050
++pi-across|- **Severity:** minor\n- <?x\ny?>Severity: data-loss|a Severity line this grammar cannot read in finding G-050
++div-block-across|- **Severity:** minor\n\n<div\ntitle="x">Severity: data-loss</div>\n|a Severity line this grammar cannot read in finding G-050
++intraword-emphasis|- **Severity:** minor\n- S*everity:* data-loss|a Severity line this grammar cannot read in finding G-050
++zero-width-space|- **Severity:** minor\n- Sev\342\200\213erity: data-loss|a Severity line this grammar cannot read in finding G-050
++named-soft-hyphen|- **Severity:** minor\n- Sev&shy;erity: data-loss|a Severity line this grammar cannot read in finding G-050
++comment-across-quoted|- **Severity:** minor\n- <!-- a\nb --> Severity: data-loss|quoted content carries a Severity line
++blockquoted-tag-split|- **Severity:** minor\n> - <b\n> title="x">Severity: data-loss</b>|quoted content carries a Severity line
+ ROWS
++  # A field line followed directly by a block a renderer starts there holds
++  # its item alone (round 14, O-021): every HTML block but the seventh kind,
++  # condition 6's block-level tags included, and a fence of three or more
++  # backticks may interrupt the field's paragraph, so the round parses.
++  while IFS='|' read -r tag sevs; do
++    record_round 1 CHALLENGED 1 0 '### Finding G-050' dup-binding new "$sevs" > "$report"
++    for l in C en_US.UTF-8; do
++      run_rc 0 record_line_vf "$l" "$report" "$spec"
++      assert_not_contains "$OUT" 'report recovery' "AC-012: a Severity line followed by a $tag was refused under LANG=$l (O-021)"
++    done
++  done <<'ROWS'
++div-block|- **Severity:** data-loss\n<div>\nnote\n</div>\n
++details-block|- **Severity:** data-loss\n<details>\nx\n</details>\n
++closing-tag|- **Severity:** data-loss\n</details>\n
++four-backtick-fence|- **Severity:** data-loss\n````text\nplain output\n````\n
++ROWS
+   # A Status continued past its line is a count the pass would read without
+   # its continuation, and a finding hidden by the tracker, inside a round or in
+   # its Held-up section, is refused by its heading (T030o44 review F10, F4).
+@@ -1549,6 +1620,15 @@
+ a-quoted-example|### Finding G-042|  - The lines `#### Severity: data-loss` and `- <b>Severity:</b> minor` are refused.\n
+ a-empty-comment-then-prose|### Finding G-042|  - <!--> note --> Severity: as noted.\n
+ a-findings-word|### Finding G-042|#### Findings-2026 carried over\nThe word continues past Finding, so this is a section.\n
++a-link-prose|### Finding G-042|  - See [the report](x) for the tier.\n
++a-linked-image-prose|### Finding G-042|  - [![badge](y.png)](z) shows the build state.\n
++a-wrapped-prose|### Finding G-042|  - A note that wraps\n    onto the next line, then says Severity: as noted.\n
++a-wrapped-link-text|### Finding G-042|  - [a link whose text\n    wraps](x) and more.\n
++a-intraword-prose|### Finding G-042|  - The c*a*se of one word.\n
++a-wrapped-tag-prose|### Finding G-042|  - <abbr title="a long\n    title">API</abbr> severity is unchanged.\n
++a-wrapped-scenario|### Finding G-042|  that wraps onto a second line, with the Severity it had\n
++a-fenced-tag-example|### Finding G-042|\n```\n<b\ntitle="x">Severity: data-loss</b>\n```\n\n
++a-heading-then-attribute-line|### Finding G-042|#### <abbr\ntitle="t">Severity: data-loss</abbr>\n
+ ROWS
+   record_round 1 CHALLENGED 1 0 '### Finding G-042' tier-binding new '- **Severity:** data-loss' '  - `#### Severity: data-loss` is the heading form.\n' > "$report"
+   run_rc 3 record_line_vf C "$report" "$spec"
+@@ -1561,12 +1641,118 @@
+     run_rc 3 record_line_vf C "$report" "$spec"
+     assert_contains "$OUT" 'content after the round completion marker' \
+       "AC-012: $tag after the completion marker lost the after-marker refusal (T030o44)"
++  done
++}
++
++# AC-012/FM-019/INV-006 — O-020 (round 14, T030o45). A round's style decides
++# which rules judge its lines, and its own text sets it: the round heading makes
++# it canonical, a report title read before its Round and Timestamp lines makes
++# it legacy, and a Timestamp line makes it canonical. A title and a late
++# Timestamp let every line between be judged by the legacy rules, the count
++# included, while the round sealed as canonical. The style is decided before the
++# round has a body, and either switch after it is refused by name.
++# style_finding <heading> <class> <status> <severity lines through printf %b>
++style_finding() {
++  printf '%s\n- **Class:** %s\n- **Status:** %s\n- **Prior:** none\n%b\n' "$1" "$2" "$3" "$4"
++  printf -- '- **Scenario:** a recorded trigger\n- **Where:** scripts/run.sh:9\n- **Reproduced:** concrete trigger at that site\n'
++  printf -- '- **Root cause:** implementation-error\n- **Blocks:** AC-012\n- **Wrong behavior:** observed versus required\n'
++  printf -- '- **Class-wide fix:** read or refuse every record line\n'
++}
++# style_round <mode> <n> <verdict> <blocking> <minor> <findings>: title (the title under the round heading),
++# notitle (the same round without it), titlefirst (the title opens the round), titlelate (the title after the
++# What-I-attacked section), each with its Timestamp after the Held-up section; titleearly, the Timestamp
++# right after the Round line.
++style_round() {
++  local mode="$1" n="$2"
++  [[ "$mode" == titlefirst ]] || printf '## Round %s\n' "$n"
++  [[ "$mode" != titlelate ]] || printf '### What I attacked\nFinding records read by both readers.\n'
++  [[ "$mode" == notitle ]] || printf '# Opponent review — fixture\n'
++  printf '**Round:** %s\n' "$n"
++  [[ "$mode" != titleearly ]] || printf '**Timestamp:** 2026-09-06T12:00:0%sZ\n' "$n"
++  printf '**Source:** aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\n**Floor:** FLOOR-fixture\n'
++  printf '**Verdict:** %s\n**Blocking:** %s · **Minor:** %s\n' "$3" "$4" "$5"
++  [[ "$mode" == titlelate ]] || printf '### What I attacked\nFinding records read by both readers.\n'
++  printf '%s### Held up / follow-up tasks\nFixture disposition recorded.\n' "$6"
++  [[ "$mode" == titleearly ]] || printf '**Timestamp:** 2026-09-06T12:00:0%sZ\n' "$n"
++  printf '<!-- gate-round-end: opponent:%s -->\n' "$n"
++}
++
++report_round_style_cases() {
++  local spec report l tag want mode g99 g100 r1 ts ti
++  ts='a Timestamp line after the body of a round its title made legacy'
++  ti='a report title after the body of a canonical round'
++  spec="$SANDBOX/round-style"; report="$spec/notes/opponent.md"; mkdir -p "$spec/notes"
++  g99="$(style_finding '### Finding G-099' silent-loss new '- **Severity:** data-loss')"$'\n'
++  g100="$(style_finding '### Finding G-100' minor-slip new '- **Severity:** minor')"$'\n'
++  r1="$(record_round 1 CHALLENGED 1 0 '### Finding G-042' tier-binding new '- **Severity:** data-loss')"
++  # Under a title and a late Timestamp each is refused by name; the same round
++  # without its title keeps its own refusal, which is what the title switched off.
++  while IFS='|' read -r tag want; do
++    for mode in title notitle; do
++      case "$tag" in
++        uncounted-blocking) style_round "$mode" 1 CLEARED 0 1 "$g99$g100";;
++        resolved-open) printf '%s\n\n' "$r1"; style_round "$mode" 2 CLEARED 0 1 "$(style_finding '### Finding G-042' tier-binding resolved '- **Severity:** data-loss')"$'\n'"$g100";;
++        invented-resolution) style_round "$mode" 1 CLEARED 0 1 "$(style_finding '### Finding G-077' tier-binding resolved '- **Severity:** data-loss')"$'\n'"$g100";;
++        unknown-severity) style_round "$mode" 1 CLEARED 0 1 "$(style_finding '### Finding G-098' tier-binding new '- **Severity:** catastrophic')"$'\n'"$g100";;
++        behind-html) style_round "$mode" 1 CLEARED 0 1 "$(style_finding '### Finding G-050' dup-binding new '- **Severity:** minor\n- <b>Severity:</b> data-loss')"$'\n'"$g100";;
++        empty-comment) style_round "$mode" 1 CLEARED 0 1 "$(style_finding '### Finding G-050' dup-binding new '- **Severity:** minor\n\n<!-->\n\n- **Severity:** data-loss\n\nThe tier above. -->')"$'\n'"$g100";;
++        level-four-heading) printf '%s\n\n' "$r1"; style_round "$mode" 2 CLEARED 0 0 "$(style_finding '#### Finding G-042' tier-binding open '- **Severity:** minor')"$'\n';;
++      esac > "$report"
++      for l in C en_US.UTF-8; do
++        run_rc 3 record_line_vf "$l" "$report" "$spec"
++        if [[ "$mode" == title ]]; then
++          assert_contains "$OUT" "$ts" "AC-012: a title and a late Timestamp let a round with $tag seal under LANG=$l (O-020)"
++        else
++          assert_contains "$OUT" "$want" "AC-012: the round with $tag lost its own refusal without the title under LANG=$l (O-020)"
++        fi
++      done
++    done
++  done <<'ROWS'
++uncounted-blocking|finding totals disagree
++resolved-open|clearing verdict rests on resolved findings this gate recorded open: G-042
++invented-resolution|resolved finding G-077 has no earlier round of this gate and no declared prior-review record
++unknown-severity|unknown severity
++behind-html|a Severity line this grammar cannot read in finding G-050
++empty-comment|quoted content carries a Severity line
++level-four-heading|a Finding heading this grammar cannot read
++ROWS
++  # A round the title opens has the same switch, and so has a title placed
++  # after the round has a body, each refused by name.
++  for l in C en_US.UTF-8; do
++    style_round titlefirst 1 CLEARED 0 1 "$g99$g100" > "$report"
++    run_rc 3 record_line_vf "$l" "$report" "$spec"
++    assert_contains "$OUT" "$ts" "AC-012: a round its title opens sealed with a late Timestamp under LANG=$l (O-020)"
++    style_round titlelate 1 CLEARED 0 1 "$g99$g100" > "$report"
++    run_rc 3 record_line_vf "$l" "$report" "$spec"
++    assert_contains "$OUT" "$ti" "AC-012: a title after the body of a canonical round was read under LANG=$l (O-020)"
++  done
++  # A quoted line is body too: a round whose only body before its Timestamp is
++  # a fenced example would otherwise skip the quoted-record refusal there.
++  { printf '## Round 1\n# Opponent review — fixture\n**Round:** 1\n```text\n### Finding G-099\n```\n**Timestamp:** 2026-09-06T12:00:01Z\n'
++    style_round notitle 1 CHALLENGED 1 0 "$(style_finding '### Finding G-042' tier-binding new '- **Severity:** data-loss')"$'\n' | sed -e '1,2d' -e '/^\*\*Timestamp:\*\*/d'; } > "$report"
++  for l in C en_US.UTF-8; do
++    run_rc 3 record_line_vf "$l" "$report" "$spec"
++    assert_contains "$OUT" "$ts" "AC-012: a round whose only body before its late Timestamp is quoted sealed under LANG=$l (O-020)"
++  done
++  # The reality-check gate reads the same style: a gap written in field
++  # spelling under a title and a late Timestamp is refused by the switch.
++  printf '## Round 1\n# Reality Check — fixture\n**Round:** 1\n**Source:** aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\n**Floor:** FLOOR-fixture\n**Verdict:** NEEDS WORK\n\n## Summary\n\nChecked one criterion.\n\n## AC matrix\n\n| AC | Criterion / revision | Evidence | Affected inputs | Verdict |\n|----|----|----|----|----|\n| AC-001 | x | CAP-1 | a | MISSING |\n\n## Constitution check\n\n- PASS\n\n## Gaps (if NEEDS WORK)\n\n1. **AC-001 evidence missing** — the capture is stale.\n   - **Where:** scripts/run.sh:9\n\n## Re-run conditions\n\nRe-invoke when fixed.\n**Timestamp:** 2026-09-06T12:00:01Z\n<!-- gate-round-end: reality-check:1 -->\n' > "$spec/notes/reality-check.md"
++  run_rc 3 bash -c '. "$1"; vf_reports "$2" reality-check "$3" "$4"' _ "$SCRIPTS/verification-lib.sh" "$spec/notes/reality-check.md" "$SANDBOX/round-style-rc.nul" "$spec"
++  assert_contains "$OUT" "$ts" 'AC-012: a reality-check round sealed its legacy-judged body as canonical (O-020)'
++  rm -f "$spec/notes/reality-check.md"
++  # A titled round whose Timestamp precedes its body parses, and is canonical.
++  style_round titleearly 1 CHALLENGED 1 0 "$(style_finding '### Finding G-042' tier-binding new '- **Severity:** data-loss')"$'\n' > "$report"
++  for l in C en_US.UTF-8; do
++    run_rc 0 record_line_vf "$l" "$report" "$spec"
++    [[ "$(tr '\000' '\n' < "$SANDBOX/record-lines.nul" | paste - - - - - - - - - - - - | awk -F '\t' '$1=="round" {print $7}')" == canonical ]] ||
++      t_fail "AC-012: a titled round whose Timestamp precedes its body was not read canonical under LANG=$l (O-020)"
+   done
+ }
+ 
+ test_reports_and_tally() {
+   report_manifest_locale_cases
+   report_record_line_cases
++  report_round_style_cases
+   matrix_runtime_cases
+   cost_metric_cases
+   report_prior_binding_cases
+--- a/tests/test-spec-gate.sh
++++ b/tests/test-spec-gate.sh
+@@ -806,11 +806,36 @@
+   printf '<!-- gate-round-end: opponent:%s -->\n' "$2"
+ }
+ 
++# record_style_report <reservation-output> <n> <verdict> <blocking> <minor> <finding>...
++# The reservation's round with a report title under its heading and its Timestamp after its Held-up
++# section (round 14, O-020); each <finding> is heading:class:status:severity.
++record_style_report() {
++  local res="$1" n="$2" verdict="$3" b="$4" m="$5" src floor stamp f h c st sv
++  shift 5
++  src="$(printf '%s' "$res" | sed -n 's/.* source=\([^ ]*\).*/\1/p')"
++  floor="$(printf '%s' "$res" | sed -n 's/.* floor=\([^ ]*\).*/\1/p')"
++  stamp="$(printf '%s' "$res" | sed -n 's/.* reserved=\([^ ]*\).*/\1/p')"
++  printf '## Round %s\n# Opponent review — fixture\n**Round:** %s\n**Source:** %s\n**Floor:** %s\n' "$n" "$n" "$src" "$floor"
++  printf '**Verdict:** %s\n**Blocking:** %s · **Minor:** %s\n### What I attacked\nFinding records read by both readers.\n' "$verdict" "$b" "$m"
++  for f in "$@"; do
++    IFS=: read -r h c st sv <<< "$f"
++    printf '%s\n- **Class:** %s\n- **Status:** %s\n- **Prior:** none\n- **Severity:** %s\n' "$h" "$c" "$st" "$sv"
++    printf -- '- **Scenario:** a recorded trigger\n- **Where:** scripts/run.sh:9\n- **Reproduced:** concrete trigger at that site\n'
++    printf -- '- **Root cause:** implementation-error\n- **Blocks:** AC-012\n- **Wrong behavior:** observed versus required\n'
++    printf -- '- **Class-wide fix:** read or refuse every record line\n'
++  done
++  printf '### Held up / follow-up tasks\nFixture disposition recorded.\n**Timestamp:** %s\n<!-- gate-round-end: opponent:%s -->\n' "$stamp" "$n"
++}
++
+ # AC-009/AC-012 — O-018 and O-019 end to end (round 13, T030o44): a CLEARED
+ # round whose report or prior-review manifest carried a record line neither
+ # reader read or refused sealed through `round --complete`, with the tier lost
+ # from the tally. A refused completion leaves the reservation in place, so one
+-# fixture serves every case, and the valid report completes after them.
++# fixture serves every case, and the valid report completes after them. Round
++# 14's mechanisms follow, one spelling each (T030o45, T030o46): a title with a
++# late Timestamp (O-020), brackets that nest, a construct that spans lines,
++# emphasis and an invisible character inside the word (O-018), and a block
++# after a field line that ends its item (O-021).
+ round_record_line_cases() {
+   local spec cli res manifest report l row
+   spec="$(make_verification_git_dir recordlines)"
+@@ -838,7 +863,11 @@
+   for row in '- <Severity:data-loss>|a second Severity line in finding G-042' \
+              '- &nbsp;Severity: data-loss|a second Severity line in finding G-042' \
+              '- [](x)**Severity:** data-loss|a second Severity line in finding G-042' \
+-             '  data-loss|a Severity field whose list item holds more than its line in finding G-042'; do
++             '  data-loss|a Severity field whose list item holds more than its line in finding G-042' \
++             '- [![badge](y.png)](z)Severity: data-loss|a second Severity line in finding G-042' \
++             $'- <b\ntitle="x">Severity: data-loss</b>|a second Severity line in finding G-042' \
++             '- S*everity:* data-loss|a second Severity line in finding G-042' \
++             $'- Sev\342\200\213erity: data-loss|a second Severity line in finding G-042'; do
+     printf '# Prior review\n\n### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n%s\n' "${row%%|*}" > "$manifest"
+     for l in C en_US.UTF-8; do
+       run_rc 3 in_locale "$l" bash "$cli" round "$spec" opponent --complete "$report"
+@@ -858,13 +887,23 @@
+   # Severity value continued past its line, are refused at completion (T030o44
+   # review F4, F10).
+   for row in '- **Severity:** minor\n\n<!-->\n\n- **Severity:** data-loss\n\nThe tier above is the one we stand by. -->|quoted content carries a Severity line' \
+-             '- **Severity:** minor\n  data-loss|a Severity field whose list item holds more than its line in finding G-050'; do
++             '- **Severity:** minor\n  data-loss|a Severity field whose list item holds more than its line in finding G-050' \
++             '- **Severity:** minor\n- <abbr title="the tier this\nfinding carries">Severity:</abbr> data-loss|a Severity line this grammar cannot read in finding G-050' \
++             '- **Severity:** minor\n- <!-- a\nb --> Severity: data-loss|quoted content carries a Severity line'; do
+     record_line_report "$res" 1 CLEARED 0 1 '### Finding G-050' dup-binding new "${row%%|*}" > "$SANDBOX/record-lines-dup.md"
+     for l in C en_US.UTF-8; do
+       run_rc 3 in_locale "$l" bash "$cli" round "$spec" opponent --complete "$SANDBOX/record-lines-dup.md"
+       assert_contains "$OUT" "${row#*|}" "AC-009: a CLEARED completion over a second tier written as ${row%%|*} was not refused under LANG=$l (T030o44 review)"
+     done
+   done
++  # A title and a late Timestamp let a CLEARED round seal over a blocking
++  # finding it never counted (O-020); the switch is refused at completion.
++  record_style_report "$res" 1 CLEARED 0 1 '### Finding G-099:silent-loss:new:data-loss' '### Finding G-100:minor-slip:new:minor' > "$SANDBOX/record-lines-style.md"
++  for l in C en_US.UTF-8; do
++    run_rc 3 in_locale "$l" bash "$cli" round "$spec" opponent --complete "$SANDBOX/record-lines-style.md"
++    assert_contains "$OUT" 'a Timestamp line after the body of a round its title made legacy' \
++      "AC-009: a CLEARED completion under a title and a late Timestamp was not refused under LANG=$l (O-020)"
++  done
+   record_line_report "$res" 1 CHALLENGED 1 0 '### Finding G-042' tier-binding open '- **Severity:** data-loss' > "$report"
+   run_rc 0 bash "$cli" round "$spec" opponent --complete "$report"
+   assert_contains "$OUT" 'round completed gate=opponent round=1 verdict=CHALLENGED'
+@@ -882,11 +921,19 @@
+       assert_contains "$OUT" "${row#*|}" "AC-009: a CLEARED round 2 under ${row%%|*} was not refused under LANG=$l (O-018)"
+     done
+   done
++  record_style_report "$res" 2 CLEARED 0 0 '#### Finding G-042:tier-binding:open:minor' > "$SANDBOX/record-lines-style.md"
++  for l in C en_US.UTF-8; do
++    run_rc 3 in_locale "$l" bash "$cli" round "$spec" opponent --complete "$SANDBOX/record-lines-style.md"
++    assert_contains "$OUT" 'a Timestamp line after the body of a round its title made legacy' \
++      "AC-009: a CLEARED round 2 under a title, a late Timestamp and #### Finding G-042 was not refused under LANG=$l (O-020)"
++  done
+   record_line_report "$res" 2 CLEARED 0 1 '### Finding G-042' tier-binding open '- **Severity:** minor' > "$report"
+   run_rc 3 bash "$cli" round "$spec" opponent --complete "$report"
+   assert_contains "$OUT" 'clearing verdict rests on 1 lowered severity tier(s) of known findings' \
+     'AC-009: the canonical control at a lowered tier completed (O-018)'
+-  record_line_report "$res" 2 CHALLENGED 1 0 '### Finding G-042' tier-binding open '- **Severity:** data-loss' > "$report"
++  # The round that completes carries a block-level HTML block directly after its
++  # Severity line, which ends that line's item (O-021).
++  record_line_report "$res" 2 CHALLENGED 1 0 '### Finding G-042' tier-binding open '- **Severity:** data-loss\n<details>\nx\n</details>\n' > "$report"
+   run_rc 0 bash "$cli" round "$spec" opponent --complete "$report"
+   assert_contains "$OUT" 'round completed gate=opponent round=2 verdict=CHALLENGED'
+   run_rc 0 bash "$cli" tally "$spec"

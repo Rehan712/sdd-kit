@@ -1,0 +1,35 @@
+part=full start=2026-09-30T14:44:34Z
+applied 1 block(s) to /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-m11-full/d-slash/tests/helpers.sh
+applied 1 block(s) to /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-m11-full/d-slash/tests/test-verification.sh
+applied 1 block(s) to /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-m11-full/d-slash/templates/verification-contract.md
+applied 1 block(s) to /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-m11-full/d-slash/scripts/verification-lib.sh
+applied 1 block(s) to /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-m11-full/d-unset/tests/helpers.sh
+applied 1 block(s) to /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-m11-full/d-link/tests/helpers.sh
+applied 1 block(s) to /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-m11-full/d-unset/tests/test-verification.sh
+applied 1 block(s) to /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-m11-full/d-link/tests/test-verification.sh
+applied 1 block(s) to /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-m11-full/d-unset/templates/verification-contract.md
+applied 1 block(s) to /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-m11-full/d-link/templates/verification-contract.md
+applied 1 block(s) to /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-m11-full/d-unset/scripts/verification-lib.sh
+applied 1 block(s) to /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-m11-full/d-link/scripts/verification-lib.sh
+== cur-link (14:44:48Z-15:07:35Z): rc=1 --10/10passed --2/2passed --18/18passed --5/5passed --13/13passed --9/9passed --18/19passed --9/9passed --4/4passed --8/8passed --6/6passed --3/3passed --11/11passed --27/27passed --3/3passed 
+  |   FAIL test_verification_bindings
+  |          assert: expected exit 1, got 0: env PATH=/private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0930d017-2e05-4aae-8d87-b883fbd8a605/scratchpad/t030o43-m11-full/cur-li
+  |          assert: AC-023: a task reference inventory that could not be read read as no dangling ref (T030o43) missing substring: tasks.md could not be read for its AC and REQ referenc
+  |          assert: AC-023: the configuration policy counted an unreadable frontmatter as no contract (T030o43) missing substring: ✗ /private/tmp/claude-501/-Users-babar-projects-sdd-ki
+  |          assert: AC-023: the binding parser counted an unreadable frontmatter as no contract (T030o43) missing substring: verification contract: /private/tmp/claude-501/-Users-babar-
+  |          assert: AC-023: the configuration policy read an unreadable frontmatter as no contract (T030o43) missing substring: ✗ /private/tmp/claude-501/-Users-babar-projects-sdd-kit-p
+  |          assert: AC-023: the binding parser read an unreadable frontmatter as no contract (T030o43) missing substring: verification contract: /private/tmp/claude-501/-Users-babar-pro
+PASS cur-link left its copy unchanged
+== cur-unset (14:44:48Z-15:08:04Z): rc=0 --10/10passed --2/2passed --18/18passed --5/5passed --13/13passed --9/9passed --19/19passed --9/9passed --4/4passed --8/8passed --6/6passed --3/3passed --11/11passed --27/27passed --3/3passed 
+PASS cur-unset left its copy unchanged
+== d-slash (14:44:48Z-15:08:07Z): rc=0 --10/10passed --2/2passed --18/18passed --5/5passed --13/13passed --9/9passed --19/19passed --9/9passed --4/4passed --8/8passed --6/6passed --3/3passed --11/11passed --27/27passed --3/3passed 
+PASS d-slash exit 0
+PASS d-slash left its copy unchanged
+== d-link (15:08:21Z-15:29:21Z): rc=0 --10/10passed --2/2passed --18/18passed --5/5passed --13/13passed --9/9passed --19/19passed --9/9passed --4/4passed --8/8passed --6/6passed --3/3passed --11/11passed --27/27passed --3/3passed 
+PASS d-link exit 0
+PASS d-link left its copy unchanged
+== d-unset (15:08:21Z-15:29:21Z): rc=0 --10/10passed --2/2passed --18/18passed --5/5passed --13/13passed --9/9passed --19/19passed --9/9passed --4/4passed --8/8passed --6/6passed --3/3passed --11/11passed --27/27passed --3/3passed 
+PASS d-unset exit 0
+PASS d-unset left its copy unchanged
+PASS live worktree status outside notes/verification/ unchanged
+t030o43-measure-11 part=full passes=9 failures=0 end=2026-09-30T15:29:24Z

@@ -1,0 +1,9 @@
+@@OLD
+# A frontmatter that cannot be read is a failure, never the legacy path.
+contract="$(vf_fm_value "$SPEC_DIR/spec.md" verification_contract)" || exit 3
+if [[ -n "$contract" && "$contract" != 1 ]]; then echo 'unsupported verification contract' >&2; exit 3; fi
+@@NEW
+# A frontmatter that cannot be read, and a contract key that is not exactly
+# one key of value 1, are failures, never the legacy path (vf_contract).
+contract="$(vf_contract "$SPEC_DIR/spec.md")" || exit 3
+@@END

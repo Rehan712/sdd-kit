@@ -1,0 +1,7 @@
+@@OLD
+  sed "s/^  - \*Verify:\* \`bash tests\/check.sh\` → passed\$/  - *Verify:*$nb\`$cmd\` → passed/" "$SANDBOX/analyzer-tasks" > "$spec_dir/tasks.md"
+  run_rc 0 bash -c '. "$1"; vf_bindings "$2" tasks "" "$3" && vf_task_info "$3" T001 && printf "%s" "$VF_TASK_COMMAND"' _ \
+@@NEW
+  sed "s#^  - \*Verify:\* \`bash tests/check.sh\` → passed\$#  - *Verify:*$nb\`$cmd\` → passed#" "$SANDBOX/analyzer-tasks" > "$spec_dir/tasks.md"
+  run_rc 0 bash -c '. "$1"; vf_bindings "$2" tasks "" "$3" 2>/dev/null && vf_task_info "$3" T001 && printf "%s" "$VF_TASK_COMMAND"' _ \
+@@END

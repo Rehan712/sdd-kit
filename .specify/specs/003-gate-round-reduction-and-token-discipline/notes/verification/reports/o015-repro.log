@@ -1,0 +1,104 @@
+  | live worktree porcelain digest before: ee611e5ea4bd0c1989aaa352013ee7afc23a8041a31e5fe09c03a1d2a830ff42
+== 0. build the copy from the live manifest enumeration
+PASS live enumeration rc (want=0 got=0)
+PASS copy extraction rc (want=0 got=0)
+PASS copy committed (want=0 got=0)
+PASS tests/test-gate-contracts.sh ends in exactly one t_run_all line (want=1 got=1)
+PASS tests/test-verification.sh ends in exactly one t_run_all line (want=1 got=1)
+PASS tests/test-sdd-analyze.sh ends in exactly one t_run_all line (want=1 got=1)
+PASS tests/test-usage-limits.sh ends in exactly one t_run_all line (want=1 got=1)
+PASS copy clean; runner copies excluded from its enumeration (want= got=)
+== A0 baseline
+PASS baseline snapshot rc (want=0 got=0)
+PASS baseline scan rc (want=0 got=0)
+PASS baseline scan is clean (want= got=)
+== A1 O-015 end to end: a capture stays reusable over a suite that now fails
+PASS T030o38 Verify is exactly the gate-contracts suite (want=1 got=1)
+PASS capture of bash tests/test-gate-contracts.sh rc (want=0 got=0)
+  | capture=CAP-455-GQBlNa summary: capture=CAP-455-GQBlNa command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=c89f7d9e3ceea159e64bb75defc10d0c11ca84dee772071cbdfc2c36232f3fdb input=ee1300b77edf9f3cff2803
+PASS spec-task.sh done T030 --evidence rc (want=0 got=0)
+  | T030 -> [x] with evidence
+PASS snapshot after the tick rc (want=0 got=0)
+  | identity before=ee1300b77edf9f3cff280364007eceb8001dc45c5f45cba2f513d0a5deb1844c after=ee1300b77edf9f3cff280364007eceb8001dc45c5f45cba2f513d0a5deb1844c
+PASS identity unchanged by the tick (want=ee1300b77edf9f3cff280364007eceb8001dc45c5f45cba2f513d0a5deb1844c got=ee1300b77edf9f3cff280364007eceb8001dc45c5f45cba2f513d0a5deb1844c)
+PASS manifests cmp-identical (want=0 got=0)
+PASS vf_capture_check CAP-455-GQBlNa reuse after the tick: accepted (the wrong result) (want=0 got=0)
+  | scan: .specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md :: includes PATH
+PASS scan reports the verified spec tasks.md Evidence line (want=1 got=1)
+PASS bash tests/test-gate-contracts.sh after the tick: fails (want=1 got=1)
+  |   FAIL test_instruction_contracts   -- 13/14 passed 
+PASS the failure is the O-010 guard assertion (want=1 got=1)
+PASS A1: copy restored (want= got=)
+== A2-A4 the same sentence on other dropped lines of ANOTHER spec
+PASS A2 002 tasks.md Evidence line: identity unchanged (want=ee1300b77edf9f3cff280364007eceb8001dc45c5f45cba2f513d0a5deb1844c got=ee1300b77edf9f3cff280364007eceb8001dc45c5f45cba2f513d0a5deb1844c)
+PASS A2 scan reports 002 tasks.md (want=1 got=1)
+PASS A2: copy restored (want= got=)
+PASS A3 edit landed on the plan.md updated: line (want=1 got=1)
+PASS A3 002 plan.md updated: line: identity unchanged (want=ee1300b77edf9f3cff280364007eceb8001dc45c5f45cba2f513d0a5deb1844c got=ee1300b77edf9f3cff280364007eceb8001dc45c5f45cba2f513d0a5deb1844c)
+PASS A3 scan reports 002 plan.md (want=1 got=1)
+PASS A3: copy restored (want= got=)
+PASS A4 002 spec.md status: line: identity unchanged (want=ee1300b77edf9f3cff280364007eceb8001dc45c5f45cba2f513d0a5deb1844c got=ee1300b77edf9f3cff280364007eceb8001dc45c5f45cba2f513d0a5deb1844c)
+PASS A4 scan reports 002 spec.md (want=1 got=1)
+PASS A4: copy restored (want= got=)
+== A5 control: the same sentence in the body is hashed and reported
+PASS A5 body claim moves the identity (want=1 got=1)
+PASS A5 scan reports the body claim (want=1 got=1)
+PASS A5: copy restored (want= got=)
+== A6 latent: a name git quotes without -z
+PASS A6 the untracked non-ASCII file moves the identity (want=1 got=1)
+PASS A6 the manifest records the name unquoted (want=1 got=1)
+  | git ls-files without -z prints: "docs/caf\303\251.md"
+PASS A6 scan misses the quoted name (want=0 got=0)
+PASS A6 control: the ASCII twin is reported (want=1 got=1)
+PASS A6: copy restored (want= got=)
+== A7 a git failure reads as an empty, clean tree
+PASS A7 precondition: the body claim is reported (want=1 got=1)
+PASS A7 with git failing, the scan exits 0 (want=0 got=0)
+PASS A7 with git failing, the scan prints nothing, so assert_eq "" passes over a live claim (want= got=)
+PASS A7: copy restored (want= got=)
+== B isolation gap: the .specify/specs/<name> layout clause in vf_bookkeeping_anchor
+PASS B clause present exactly once (want=1 got=1)
+PASS B mutation landed (want=0 got=0)
+PASS B clause deleted: tests/test-verification.sh SURVIVES (want=0 got=0)
+  |   -- 3/3 passed
+PASS B: copy restored (want= got=)
+== C1 measurement: the AC-023 analyzer loop over 002 bytes the identity drops
+PASS C1 baseline test_verification_bindings (want=0 got=0)
+  | C1 agent:  1 file changed, 1 insertion(+), 1 deletion(-)
+PASS C1 agent: identity unchanged (want=ee1300b77edf9f3cff280364007eceb8001dc45c5f45cba2f513d0a5deb1844c got=ee1300b77edf9f3cff280364007eceb8001dc45c5f45cba2f513d0a5deb1844c)
+  | C1 agent: test_verification_bindings rc=1
+  |   assert: expected exit 0, got 1: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/77956d71-d2eb-4385-a878-a9c49cd22780/scratchpad/o015/copy/scripts/sdd-analyze.sh /private/tmp/claude-501/-U
+  |     ✗ opponent gate agent fi
+PASS C1 agent: copy restored (want= got=)
+  | C1 comment:  1 file changed, 1 insertion(+), 1 deletion(-)
+PASS C1 comment: identity unchanged (want=ee1300b77edf9f3cff280364007eceb8001dc45c5f45cba2f513d0a5deb1844c got=ee1300b77edf9f3cff280364007eceb8001dc45c5f45cba2f513d0a5deb1844c)
+  | C1 comment: test_verification_bindings rc=1
+  |   assert: expected exit 0, got 1: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/77956d71-d2eb-4385-a878-a9c49cd22780/scratchpad/o015/copy/scripts/sdd-analyze.sh /private/tmp/claude-501/-U
+  |     ✗ AC(s) not covered by any implementation task (gate Refs don't count): AC-003 AC-004 AC-005 AC-006 AC-007 AC-008 AC-009 AC-010 AC-011
+PASS C1 comment: copy restored (want= got=)
+  | C1 untick:  1 file changed, 22 insertions(+), 22 deletions(-)
+PASS C1 untick: identity unchanged (want=ee1300b77edf9f3cff280364007eceb8001dc45c5f45cba2f513d0a5deb1844c got=ee1300b77edf9f3cff280364007eceb8001dc45c5f45cba2f513d0a5deb1844c)
+  | C1 untick: test_verification_bindings rc=0
+PASS C1 untick: copy restored (want= got=)
+  | C1 phase:  1 file changed, 1 insertion(+), 1 deletion(-)
+PASS C1 phase: identity unchanged (want=ee1300b77edf9f3cff280364007eceb8001dc45c5f45cba2f513d0a5deb1844c got=ee1300b77edf9f3cff280364007eceb8001dc45c5f45cba2f513d0a5deb1844c)
+  | C1 phase: test_verification_bindings rc=0
+PASS C1 phase: copy restored (want= got=)
+== C2 measurement: git-ignored machine-local files and the verified spec own records
+PASS C2 baseline doctor reconcile test (want=0 got=0)
+PASS C2 system-map.yml is ignored (want= got=)
+PASS C2 system-map.yml alone: identity unchanged (want=ee1300b77edf9f3cff280364007eceb8001dc45c5f45cba2f513d0a5deb1844c got=ee1300b77edf9f3cff280364007eceb8001dc45c5f45cba2f513d0a5deb1844c)
+  | C2 invalid system-map.yml alone: doctor reconcile test rc=1
+  |   assert: expected exit 0, got 1: run_doctor
+  | C2 porcelain now:  M .specify/specs/003-gate-round-reduction-and-token-discipline/notes/evidence.md  M .specify/specs/003-gate-round-reduction-and-token-discipline/notes/opponent.md ?? .specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/junk.md 
+PASS C2 all ignored junk + own records: identity unchanged (want=ee1300b77edf9f3cff280364007eceb8001dc45c5f45cba2f513d0a5deb1844c got=ee1300b77edf9f3cff280364007eceb8001dc45c5f45cba2f513d0a5deb1844c)
+  | C2 full bash tests/run.sh over the junk: rc=1
+  |   == test-usage-limits.sh	  FAIL test_AC_009_doctor_reconciles_pending_failed_and_both_orphan_classes_without_models
+  |     FAIL test_AC_009_doctor_reports_invalid_limit_policy_and_unready_fallbacks	  -- 23/25 passed
+  | failing:   FAIL test_AC_009_doctor_reconciles_pending_failed_and_both_orphan_classes_without_models
+  | failing:   FAIL test_AC_009_doctor_reports_invalid_limit_policy_and_unready_fallbacks
+PASS C2: copy restored (want= got=)
+PASS C2 ignored junk removed (want= got=)
+  | live worktree porcelain digest after: ee611e5ea4bd0c1989aaa352013ee7afc23a8041a31e5fe09c03a1d2a830ff42
+PASS live worktree unchanged by the whole reproduction (want=ee611e5ea4bd0c1989aaa352013ee7afc23a8041a31e5fe09c03a1d2a830ff42 got=ee611e5ea4bd0c1989aaa352013ee7afc23a8041a31e5fe09c03a1d2a830ff42)
+repro failures=0

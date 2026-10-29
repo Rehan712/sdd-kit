@@ -1,0 +1,110 @@
+[
+  {
+    "argv": [
+      "/bin/bash",
+      "-s",
+      "--",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline",
+      "CAP-844-GCqKod",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s56-t029-recovery"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "end": "2026-10-29T21:55:22.064544+00:00",
+    "env_overrides": {
+      "GIT_OPTIONAL_LOCKS": "0"
+    },
+    "exit": 0,
+    "label": "independent-current-source-capture-bindings",
+    "start": "2026-10-29T21:54:41.412199+00:00",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdin_sha256": "9bfb041578bd58c6e96e01cdbee5fbb1c44ef290d95600b045148c2f5d10cf41",
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "argv": [
+      "ps",
+      "-axo",
+      "pid=,ppid=,stat=,etime=,command="
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "end": "2026-10-29T21:56:19.982167+00:00",
+    "env_overrides": {
+      "GIT_OPTIONAL_LOCKS": "0"
+    },
+    "exit": 0,
+    "label": "processes-after",
+    "start": "2026-10-29T21:56:19.950110+00:00",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout_sha256": "5d70c5662ec38f71d451cc85532e4792cfff1424c056d332c88361cc5252a967"
+  },
+  {
+    "argv": [
+      "git",
+      "rev-parse",
+      "HEAD"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "end": "2026-10-29T21:56:20.002462+00:00",
+    "env_overrides": {
+      "GIT_OPTIONAL_LOCKS": "0"
+    },
+    "exit": 0,
+    "label": "HEAD-after",
+    "start": "2026-10-29T21:56:19.982739+00:00",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout_sha256": "ca3d15cf225493c7ac684541da169f6afadccfe5f64d3cdc9791fa203e9eac0c"
+  },
+  {
+    "argv": [
+      "git",
+      "symbolic-ref",
+      "HEAD"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "end": "2026-10-29T21:56:20.020619+00:00",
+    "env_overrides": {
+      "GIT_OPTIONAL_LOCKS": "0"
+    },
+    "exit": 0,
+    "label": "branch-after",
+    "start": "2026-10-29T21:56:20.002844+00:00",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout_sha256": "7f1e184c86cf9ecb05a268ab63aaf91df3fc868efc6709e10480683082152cb8"
+  },
+  {
+    "argv": [
+      "git",
+      "for-each-ref",
+      "--format=%(refname) %(objectname)"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "end": "2026-10-29T21:56:20.133497+00:00",
+    "env_overrides": {
+      "GIT_OPTIONAL_LOCKS": "0"
+    },
+    "exit": 0,
+    "label": "global-refs-after",
+    "start": "2026-10-29T21:56:20.021076+00:00",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout_sha256": "0e03dc6205f7c0f6865f93b026494c3c5482773cb2b77d239ea9147a301c01a3"
+  },
+  {
+    "argv": [
+      "git",
+      "status",
+      "--porcelain=v1",
+      "-z",
+      "--untracked-files=all"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "end": "2026-10-29T21:56:20.398412+00:00",
+    "env_overrides": {
+      "GIT_OPTIONAL_LOCKS": "0"
+    },
+    "exit": 0,
+    "label": "git-status-after",
+    "start": "2026-10-29T21:56:20.133961+00:00",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout_sha256": "cec1c695325d2781a212b97735789044de5ba37ec3d7806d8e1a8d71c39f925c"
+  }
+]

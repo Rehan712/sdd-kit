@@ -1,0 +1,71 @@
+  ok   test_acceptance
+  ok   test_checkpoints
+  ok   test_floor
+  ok   test_floor_fixture_failure_is_named_and_stays_in_the_sandbox
+  ok   test_floor_fixture_stages_only_enumerated_scripts
+  ok   test_manual_acceptance
+  ok   test_prepared_before_recovery
+  ok   test_rounds
+  -- 8/8 passed
+  ok   test_all_brief_modes
+  ok   test_all_overlay_defaults
+  ok   test_briefs_t010
+  ok   test_briefs_t011
+  ok   test_briefs_t012
+  ok   test_briefs_t013
+  ok   test_defaults_t006
+  ok   test_defaults_t007
+  ok   test_defaults_t008
+  ok   test_defaults_t009
+  ok   test_empty_record_directories_do_not_decide_the_002_tally
+  ok   test_ignored_local_overlays_and_personas_do_not_decide_the_checks
+  ok   test_ignored_local_scripts_do_not_reach_the_dispatch_grammar_kit
+  ok   test_ignored_local_scripts_do_not_reach_the_documented_workflow
+  ok   test_instruction_contracts
+  FAIL test_invoker_protocol
+       assert: expected exit 0, got 3: bash /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.8jEGlM/floor-kit-probeclass/scripts/spec-gate.sh accept /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.8jEGlM/probeclass/.specify/specs/003-verification-fixture T001 /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.8jEGlM/class-intact
+           output: accept rejected: T001 cp: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/vf-snapshot.44zIoZ/inputs: could not copy extended attributes to /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.8jEGlM/probeclass/.specify/specs/003-verification-fixture/notes/verification/return.qBrHL3/after: No space left on device
+       return: inputs changed during validation
+       assert: expected exit 0, got 3: bash /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.8jEGlM/floor-kit-probeclass/tests/probe-gate-contract.sh /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.8jEGlM/probeclass/.specify/specs/003-verification-fixture --task T001
+           output: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.8jEGlM/floor-kit-probeclass/scripts/verification-lib.sh: line 2059: cannot create temp file for here document: No space left on device
+       /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.8jEGlM/floor-kit-probeclass/scripts/verification-lib.sh: line 2061: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/vf-snapshot.fSS0Yu/blob: No space left on device
+       return: inputs changed during validation
+       probe gap: authentic rejected-copy/intact-acceptance control missing or stale
+       assert: output missing substring: class=binding-mismatch
+           in: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.8jEGlM/floor-kit-probeclass/scripts/verification-lib.sh: line 2059: cannot create temp file for here document: No space left on device
+       /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.8jEGlM/floor-kit-probeclass/scripts/verification-lib.sh: line 2061: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/vf-snapshot.fSS0Yu/blob: No space left on device
+       return: inputs changed during validation
+       probe gap: authentic rejected-copy/intact-acceptance control missing or stale
+       tests/test-gate-contracts.sh: line 2069: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.8jEGlM/gate-stub: No space left on device
+       assert: expected exit 0, got 127: invoker_sequence
+           output: tests/test-gate-contracts.sh: line 2051: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.8jEGlM/trace: No space left on device
+       tests/test-gate-contracts.sh: line 2053: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.8jEGlM/trace: No space left on device
+       bash: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.8jEGlM/gate-stub: No such file or directory
+       tests/test-gate-contracts.sh: line 2057: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.8jEGlM/trace: No space left on device
+       tests/test-gate-contracts.sh: line 2053: /private/var/fol
+       cat: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.8jEGlM/trace: No such file or directory
+       assert: output missing substring: barrier
+           in: 
+       assert: output missing substring: capture --from-task --no-tick --summary
+           in: 
+       assert: output missing substring: dispatch-opponent
+           in: 
+       assert: expected exit 3, got 127: invoker_sequence
+           output: bash: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.8jEGlM/gate-stub: No such file or directory
+       bash: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.8jEGlM/gate-stub: No such file or directory
+       assert: values differ
+           expected: 2
+           actual:   0
+       assert: expected exit 3, got 127: invoker_sequence
+           output: bash: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.8jEGlM/gate-stub: No such file or directory
+       bash: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.8jEGlM/gate-stub: No such file or directory
+       assert: expected exit 3, got 127: invoker_sequence
+           output: bash: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.8jEGlM/gate-stub: No such file or directory
+       bash: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.8jEGlM/gate-stub: No such file or directory
+       assert: expected exit 4, got 127: invoker_sequence
+           output: bash: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.8jEGlM/gate-stub: No such file or directory
+       bash: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.8jEGlM/gate-stub: No such file or directory
+  FAIL test_reports_and_tally
+sed: stdout: No space left on device
+  ok   test_review_scope_contracts
+  -- 16/18 passed

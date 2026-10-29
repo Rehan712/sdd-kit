@@ -1,0 +1,17 @@
+{
+  "label": "accept",
+  "argv": [
+    "bash",
+    "scripts/spec-gate.sh",
+    "accept",
+    ".specify/specs/003-gate-round-reduction-and-token-discipline",
+    "T029",
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s57-t029-control/returned.txt"
+  ],
+  "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+  "envOverrides": {
+    "GIT_OPTIONAL_LOCKS": "0"
+  },
+  "started": "2026-10-29T21:59:24.969969+00:00",
+  "nativePid": 50842
+}

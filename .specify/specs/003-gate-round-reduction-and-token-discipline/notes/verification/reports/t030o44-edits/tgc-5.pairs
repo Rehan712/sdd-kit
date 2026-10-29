@@ -1,0 +1,41 @@
+@@OLD
+nested-lead-in|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n   - **Class binding.** A manifest recording the tier is read.\n|a Severity field whose list item holds more than its line in finding G-042:    - **Class binding.** A manifest recording the tier is read.
+ROWS
+@@NEW
+nested-lead-in|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n   - **Class binding.** A manifest recording the tier is read.\n|a Severity field whose list item holds more than its line in finding G-042:    - **Class binding.** A manifest recording the tier is read.
+second-tier-closing-tag|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- </b>Severity: data-loss\n|a second Severity line in finding G-042: - </b>Severity: data-loss
+second-tier-processing-instruction|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- <?x?>Severity: data-loss\n|a second Severity line in finding G-042: - <?x?>Severity: data-loss
+second-tier-declaration|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- <!X y>Severity: data-loss\n|a second Severity line in finding G-042: - <!X y>Severity: data-loss
+second-tier-cdata|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- <![CDATA[x]]>Severity: data-loss\n|a second Severity line in finding G-042: - <![CDATA[x]]>Severity: data-loss
+hidden-finding-outside|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n## Notes\n\n<!--\n### Finding G-043\n- **Class:** other-binding\n- **Severity:** data-loss\n-->\n|quoted content carries a Finding heading: ### Finding G-043
+ROWS
+@@END
+@@OLD
+quoted-output-without-record|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n\n```text\nplain output, no record in it\n```\n> A quoted remark.\n
+@@NEW
+quoted-output-without-record|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n\n```text\nplain output, no record in it\n```\n> A quoted remark.\n
+severity-then-ordered-one|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n1. A first step.\n
+severity-then-blockquote|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n> A quoted remark.\n
+severity-then-comment|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n<!-- a note -->\n
+severity-then-tilde-fence|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n~~~\nplain output\n~~~\n
+@@END
+@@OLD
+LINES
+  # F3 and F6: the duplicate key ignores indentation in a legacy round too, and
+@@NEW
+LINES
+  # The field-item rule's exceptions in a canonical finding: a blank line ends
+  # a field's paragraph, and a nested field line is a field of its own; and a
+  # Finding heading hidden behind a U+00A0 is still refused as quoted content.
+  record_round 1 CHALLENGED 1 0 '### Finding G-042' tier-binding new '- **Severity:** data-loss\n\nA paragraph after the field.' > "$report"
+  run_rc 0 record_line_vf C "$report" "$spec"
+  record_round 1 CHALLENGED 1 0 '### Finding G-042' tier-binding new '- **Severity:** data-loss' |
+    sed 's/^- \*\*Status:\*\* new$/  - **Status:** new/' > "$report"
+  run_rc 0 record_line_vf C "$report" "$spec"
+  record_round 1 CHALLENGED 1 0 '### Finding G-042' tier-binding new '- **Severity:** data-loss' |
+    awk '/^Fixture disposition recorded\.$/ {print; print "<!--"; print "\302\240### Finding G-051"; print "-->"; next} {print}' > "$report"
+  run_rc 3 record_line_vf C "$report" "$spec"
+  assert_contains "$OUT" 'quoted content carries a Finding heading' \
+    'AC-012: a hidden Finding heading behind a U+00A0 was skipped (T030o44 review)'
+  # F3 and F6: the duplicate key ignores indentation in a legacy round too, and
+@@END

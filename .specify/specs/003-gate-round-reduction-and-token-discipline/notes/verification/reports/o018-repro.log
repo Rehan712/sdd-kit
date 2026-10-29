@@ -1,0 +1,397 @@
+host: Darwin 25.4.0; bash on PATH: GNU bash, version 3.2.57(1)-release (arm64-apple-darwin25); TMPDIR=/private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/512efee2-5748-4ebb-ba93-8afa08f5a48f/scratchpad/s12/o018-repro/tmp/
+PASS PRE: the kit part of t030o43-final.diff names 12 files
+PASS PRE: t030o43-final.diff reverses cleanly
+PASS PRE: no reject or backup files
+PASS PRE: the kernel has no shared whitespace step
+== M: manifest member. A CLEARED round 1 re-records G-042 open at minor, totals 0 . 1; the manifest holds G-042 at data-loss in some spelling
+PASS M control cur C: refused (rc 3)
+PASS M control cur C: the lowered-tier refusal
+PASS M control cur en_US.UTF-8: refused (rc 3)
+PASS M control cur en_US.UTF-8: the lowered-tier refusal
+PASS M control pre C: refused (rc 3)
+PASS M control pre C: the lowered-tier refusal
+PASS M control pre en_US.UTF-8: refused (rc 3)
+PASS M control pre en_US.UTF-8: the lowered-tier refusal
+PASS M m1-h4-colon cur C: sealed in silence (rc 0)
+PASS M m1-h4-colon cur C: stderr empty
+PASS M m1-h4-colon cur en_US.UTF-8: sealed in silence (rc 0)
+PASS M m1-h4-colon cur en_US.UTF-8: stderr empty
+PASS M m1-h4-colon pre C: sealed in silence too, so it predates T030o43 (rc 0)
+PASS M m1-h4-colon pre en_US.UTF-8: sealed in silence too, so it predates T030o43 (rc 0)
+PASS M m2-h4-body cur C: sealed in silence (rc 0)
+PASS M m2-h4-body cur C: stderr empty
+PASS M m2-h4-body cur en_US.UTF-8: sealed in silence (rc 0)
+PASS M m2-h4-body cur en_US.UTF-8: stderr empty
+PASS M m2-h4-body pre C: sealed in silence too, so it predates T030o43 (rc 0)
+PASS M m2-h4-body pre en_US.UTF-8: sealed in silence too, so it predates T030o43 (rc 0)
+PASS M m3-h4-bold cur C: sealed in silence (rc 0)
+PASS M m3-h4-bold cur C: stderr empty
+PASS M m3-h4-bold cur en_US.UTF-8: sealed in silence (rc 0)
+PASS M m3-h4-bold cur en_US.UTF-8: stderr empty
+PASS M m3-h4-bold pre C: sealed in silence too, so it predates T030o43 (rc 0)
+PASS M m3-h4-bold pre en_US.UTF-8: sealed in silence too, so it predates T030o43 (rc 0)
+PASS M m4-h4-dash cur C: sealed in silence (rc 0)
+PASS M m4-h4-dash cur C: stderr empty
+PASS M m4-h4-dash cur en_US.UTF-8: sealed in silence (rc 0)
+PASS M m4-h4-dash cur en_US.UTF-8: stderr empty
+PASS M m4-h4-dash pre C: sealed in silence too, so it predates T030o43 (rc 0)
+PASS M m4-h4-dash pre en_US.UTF-8: sealed in silence too, so it predates T030o43 (rc 0)
+PASS M m5-h3-under-h2 cur C: sealed in silence (rc 0)
+PASS M m5-h3-under-h2 cur C: stderr empty
+PASS M m5-h3-under-h2 cur en_US.UTF-8: sealed in silence (rc 0)
+PASS M m5-h3-under-h2 cur en_US.UTF-8: stderr empty
+PASS M m5-h3-under-h2 pre C: sealed in silence too, so it predates T030o43 (rc 0)
+PASS M m5-h3-under-h2 pre en_US.UTF-8: sealed in silence too, so it predates T030o43 (rc 0)
+PASS M m5b-h3-body-under-h2 cur C: sealed in silence (rc 0)
+PASS M m5b-h3-body-under-h2 cur C: stderr empty
+PASS M m5b-h3-body-under-h2 cur en_US.UTF-8: sealed in silence (rc 0)
+PASS M m5b-h3-body-under-h2 cur en_US.UTF-8: stderr empty
+PASS M m5b-h3-body-under-h2 pre C: sealed in silence too, so it predates T030o43 (rc 0)
+PASS M m5b-h3-body-under-h2 pre en_US.UTF-8: sealed in silence too, so it predates T030o43 (rc 0)
+PASS M m6-html-b cur C: sealed in silence (rc 0)
+PASS M m6-html-b cur C: stderr empty
+PASS M m6-html-b cur en_US.UTF-8: sealed in silence (rc 0)
+PASS M m6-html-b cur en_US.UTF-8: stderr empty
+PASS M m6-html-b pre C: sealed in silence too, so it predates T030o43 (rc 0)
+PASS M m6-html-b pre en_US.UTF-8: sealed in silence too, so it predates T030o43 (rc 0)
+PASS M m7-html-strong cur C: sealed in silence (rc 0)
+PASS M m7-html-strong cur C: stderr empty
+PASS M m7-html-strong cur en_US.UTF-8: sealed in silence (rc 0)
+PASS M m7-html-strong cur en_US.UTF-8: stderr empty
+PASS M m7-html-strong pre C: sealed in silence too, so it predates T030o43 (rc 0)
+PASS M m7-html-strong pre en_US.UTF-8: sealed in silence too, so it predates T030o43 (rc 0)
+PASS M m8-html-h4 cur C: sealed in silence (rc 0)
+PASS M m8-html-h4 cur C: stderr empty
+PASS M m8-html-h4 cur en_US.UTF-8: sealed in silence (rc 0)
+PASS M m8-html-h4 cur en_US.UTF-8: stderr empty
+PASS M m8-html-h4 pre C: sealed in silence too, so it predates T030o43 (rc 0)
+PASS M m8-html-h4 pre en_US.UTF-8: sealed in silence too, so it predates T030o43 (rc 0)
+PASS M d1-h5 cur C: sealed in silence (rc 0)
+PASS M d1-h5 cur C: stderr empty
+PASS M d1-h5 cur en_US.UTF-8: sealed in silence (rc 0)
+PASS M d1-h5 cur en_US.UTF-8: stderr empty
+  | M d1-h5 pre C: rc=0 
+  | M d1-h5 pre en_US.UTF-8: rc=0 
+PASS M d2-h6-closed cur C: sealed in silence (rc 0)
+PASS M d2-h6-closed cur C: stderr empty
+PASS M d2-h6-closed cur en_US.UTF-8: sealed in silence (rc 0)
+PASS M d2-h6-closed cur en_US.UTF-8: stderr empty
+  | M d2-h6-closed pre C: rc=0 
+  | M d2-h6-closed pre en_US.UTF-8: rc=0 
+PASS M d3-html-em cur C: sealed in silence (rc 0)
+PASS M d3-html-em cur C: stderr empty
+PASS M d3-html-em cur en_US.UTF-8: sealed in silence (rc 0)
+PASS M d3-html-em cur en_US.UTF-8: stderr empty
+  | M d3-html-em pre C: rc=0 
+  | M d3-html-em pre en_US.UTF-8: rc=0 
+PASS M d4-html-span cur C: sealed in silence (rc 0)
+PASS M d4-html-span cur C: stderr empty
+PASS M d4-html-span cur en_US.UTF-8: sealed in silence (rc 0)
+PASS M d4-html-span cur en_US.UTF-8: stderr empty
+  | M d4-html-span pre C: rc=0 
+  | M d4-html-span pre en_US.UTF-8: rc=0 
+PASS M d5-blockquote cur C: sealed in silence (rc 0)
+PASS M d5-blockquote cur C: stderr empty
+PASS M d5-blockquote cur en_US.UTF-8: sealed in silence (rc 0)
+PASS M d5-blockquote cur en_US.UTF-8: stderr empty
+  | M d5-blockquote pre C: rc=0 
+  | M d5-blockquote pre en_US.UTF-8: rc=0 
+PASS M d6-fenced cur C: sealed in silence (rc 0)
+PASS M d6-fenced cur C: stderr empty
+PASS M d6-fenced cur en_US.UTF-8: sealed in silence (rc 0)
+PASS M d6-fenced cur en_US.UTF-8: stderr empty
+  | M d6-fenced pre C: rc=0 
+  | M d6-fenced pre en_US.UTF-8: rc=0 
+PASS M d7-comment cur C: sealed in silence (rc 0)
+PASS M d7-comment cur C: stderr empty
+PASS M d7-comment cur en_US.UTF-8: sealed in silence (rc 0)
+PASS M d7-comment cur en_US.UTF-8: stderr empty
+  | M d7-comment pre C: rc=0 
+  | M d7-comment pre en_US.UTF-8: rc=0 
+PASS M d8-absent cur C: sealed in silence (rc 0)
+PASS M d8-absent cur C: stderr empty
+PASS M d8-absent cur en_US.UTF-8: sealed in silence (rc 0)
+PASS M d8-absent cur en_US.UTF-8: stderr empty
+  | M d8-absent pre C: rc=0 
+  | M d8-absent pre en_US.UTF-8: rc=0 
+  setext form, which the report says CUR now refuses and PRE did not:
+  | M setext cur C: rc=3 manifest line 6: a Severity line this grammar cannot read: Severity: data-loss
+  | M setext pre C: rc=0 
+PASS M setext cur: refused (rc 3)
+PASS M setext cur: by name
+== S: O-019. A sub-heading inside a manifest finding, above its canonical field lines
+PASS S s1-notes cur C: refused (rc 3)
+PASS S s1-notes cur C: the Severity line refused as outside any Finding
+PASS S s1-notes cur en_US.UTF-8: refused (rc 3)
+PASS S s1-notes cur en_US.UTF-8: the Severity line refused as outside any Finding
+PASS S s1-notes pre C: refused (rc 3)
+PASS S s1-notes pre C: on the lowered tier, so PRE read the fields
+PASS S s1-notes pre en_US.UTF-8: refused (rc 3)
+PASS S s1-notes pre en_US.UTF-8: on the lowered tier, so PRE read the fields
+PASS S s2-details cur C: refused (rc 3)
+PASS S s2-details cur C: the finding refused as Class-less at the sub-heading
+PASS S s2-details cur C: the Class line refused as outside any Finding
+PASS S s2-details cur en_US.UTF-8: refused (rc 3)
+PASS S s2-details cur en_US.UTF-8: the finding refused as Class-less at the sub-heading
+PASS S s2-details cur en_US.UTF-8: the Class line refused as outside any Finding
+PASS S s2-details pre C: refused (rc 3)
+PASS S s2-details pre C: on the lowered tier, so PRE read the fields
+PASS S s2-details pre en_US.UTF-8: refused (rc 3)
+PASS S s2-details pre en_US.UTF-8: on the lowered tier, so PRE read the fields
+== C: canonical-report member. Round 1 CHALLENGED with G-042 open at data-loss; round 2 CLEARED, totals 0 . 0, re-lists G-042 open at minor under a heading
+PASS C control cur C: the canonical heading at minor, totals 0 . 1, refused (rc 3)
+PASS C control cur C: the lowered-tier refusal
+PASS C control cur en_US.UTF-8: the canonical heading at minor, totals 0 . 1, refused (rc 3)
+PASS C control cur en_US.UTF-8: the lowered-tier refusal
+PASS C control pre C: the canonical heading at minor, totals 0 . 1, refused (rc 3)
+PASS C control pre C: the lowered-tier refusal
+PASS C control pre en_US.UTF-8: the canonical heading at minor, totals 0 . 1, refused (rc 3)
+PASS C control pre en_US.UTF-8: the lowered-tier refusal
+PASS C c1-h4 cur C: sealed in silence (rc 0)
+PASS C c1-h4 cur C: stderr empty
+PASS C c1-h4 cur C: round 2 records no finding
+PASS C c1-h4 cur en_US.UTF-8: sealed in silence (rc 0)
+PASS C c1-h4 cur en_US.UTF-8: stderr empty
+PASS C c1-h4 cur en_US.UTF-8: round 2 records no finding
+PASS C c1-h4 pre C: sealed in silence too (rc 0)
+PASS C c1-h4 pre en_US.UTF-8: sealed in silence too (rc 0)
+PASS C c2-tab cur C: sealed in silence (rc 0)
+PASS C c2-tab cur C: stderr empty
+PASS C c2-tab cur C: round 2 records no finding
+PASS C c2-tab cur en_US.UTF-8: sealed in silence (rc 0)
+PASS C c2-tab cur en_US.UTF-8: stderr empty
+PASS C c2-tab cur en_US.UTF-8: round 2 records no finding
+PASS C c2-tab pre C: sealed in silence too (rc 0)
+PASS C c2-tab pre en_US.UTF-8: sealed in silence too (rc 0)
+PASS C c3-two-spaces cur C: sealed in silence (rc 0)
+PASS C c3-two-spaces cur C: stderr empty
+PASS C c3-two-spaces cur C: round 2 records no finding
+PASS C c3-two-spaces cur en_US.UTF-8: sealed in silence (rc 0)
+PASS C c3-two-spaces cur en_US.UTF-8: stderr empty
+PASS C c3-two-spaces cur en_US.UTF-8: round 2 records no finding
+PASS C c3-two-spaces pre C: sealed in silence too (rc 0)
+PASS C c3-two-spaces pre en_US.UTF-8: sealed in silence too (rc 0)
+PASS C c4-nbsp cur C: sealed in silence (rc 0)
+PASS C c4-nbsp cur C: stderr empty
+PASS C c4-nbsp cur C: round 2 records no finding
+PASS C c4-nbsp cur en_US.UTF-8: sealed in silence (rc 0)
+PASS C c4-nbsp cur en_US.UTF-8: stderr empty
+PASS C c4-nbsp cur en_US.UTF-8: round 2 records no finding
+PASS C c4-nbsp pre C: sealed in silence too (rc 0)
+PASS C c4-nbsp pre en_US.UTF-8: sealed in silence too (rc 0)
+PASS C c5-lowercase cur C: sealed in silence (rc 0)
+PASS C c5-lowercase cur C: stderr empty
+PASS C c5-lowercase cur C: round 2 records no finding
+PASS C c5-lowercase cur en_US.UTF-8: sealed in silence (rc 0)
+PASS C c5-lowercase cur en_US.UTF-8: stderr empty
+PASS C c5-lowercase cur en_US.UTF-8: round 2 records no finding
+PASS C c5-lowercase pre C: sealed in silence too (rc 0)
+PASS C c5-lowercase pre en_US.UTF-8: sealed in silence too (rc 0)
+PASS C d1-h2 cur C: sealed in silence (rc 0)
+PASS C d1-h2 cur C: stderr empty
+PASS C d1-h2 cur C: round 2 records no finding
+PASS C d1-h2 cur en_US.UTF-8: sealed in silence (rc 0)
+PASS C d1-h2 cur en_US.UTF-8: stderr empty
+PASS C d1-h2 cur en_US.UTF-8: round 2 records no finding
+  | C d1-h2 pre C: rc=0 
+  | C d1-h2 pre en_US.UTF-8: rc=0 
+PASS C d2-h5 cur C: sealed in silence (rc 0)
+PASS C d2-h5 cur C: stderr empty
+PASS C d2-h5 cur C: round 2 records no finding
+PASS C d2-h5 cur en_US.UTF-8: sealed in silence (rc 0)
+PASS C d2-h5 cur en_US.UTF-8: stderr empty
+PASS C d2-h5 cur en_US.UTF-8: round 2 records no finding
+  | C d2-h5 pre C: rc=0 
+  | C d2-h5 pre en_US.UTF-8: rc=0 
+PASS C d3-leading-space cur C: sealed in silence (rc 0)
+PASS C d3-leading-space cur C: stderr empty
+PASS C d3-leading-space cur C: round 2 records no finding
+PASS C d3-leading-space cur en_US.UTF-8: sealed in silence (rc 0)
+PASS C d3-leading-space cur en_US.UTF-8: stderr empty
+PASS C d3-leading-space cur en_US.UTF-8: round 2 records no finding
+  | C d3-leading-space pre C: rc=0 
+  | C d3-leading-space pre en_US.UTF-8: rc=0 
+PASS C d4-tab-after-hashes cur C: sealed in silence (rc 0)
+PASS C d4-tab-after-hashes cur C: stderr empty
+PASS C d4-tab-after-hashes cur C: round 2 records no finding
+PASS C d4-tab-after-hashes cur en_US.UTF-8: sealed in silence (rc 0)
+PASS C d4-tab-after-hashes cur en_US.UTF-8: stderr empty
+PASS C d4-tab-after-hashes cur en_US.UTF-8: round 2 records no finding
+  | C d4-tab-after-hashes pre C: rc=0 
+  | C d4-tab-after-hashes pre en_US.UTF-8: rc=0 
+PASS C d5-uppercase cur C: sealed in silence (rc 0)
+PASS C d5-uppercase cur C: stderr empty
+PASS C d5-uppercase cur C: round 2 records no finding
+PASS C d5-uppercase cur en_US.UTF-8: sealed in silence (rc 0)
+PASS C d5-uppercase cur en_US.UTF-8: stderr empty
+PASS C d5-uppercase cur en_US.UTF-8: round 2 records no finding
+  | C d5-uppercase pre C: rc=0 
+  | C d5-uppercase pre en_US.UTF-8: rc=0 
+PASS C d6-colon cur C: sealed in silence (rc 0)
+PASS C d6-colon cur C: stderr empty
+PASS C d6-colon cur C: round 2 records no finding
+PASS C d6-colon cur en_US.UTF-8: sealed in silence (rc 0)
+PASS C d6-colon cur en_US.UTF-8: stderr empty
+PASS C d6-colon cur en_US.UTF-8: round 2 records no finding
+  | C d6-colon pre C: rc=0 
+  | C d6-colon pre en_US.UTF-8: rc=0 
+PASS C d7-bold-line cur C: sealed in silence (rc 0)
+PASS C d7-bold-line cur C: stderr empty
+PASS C d7-bold-line cur C: round 2 records no finding
+PASS C d7-bold-line cur en_US.UTF-8: sealed in silence (rc 0)
+PASS C d7-bold-line cur en_US.UTF-8: stderr empty
+PASS C d7-bold-line cur en_US.UTF-8: round 2 records no finding
+  | C d7-bold-line pre C: rc=0 
+  | C d7-bold-line pre en_US.UTF-8: rc=0 
+== U: the canonical duplicate key. A CLEARED round 1, totals 0 . 1, with a new finding G-050 carrying two Severity lines
+PASS U control cur C: refused (rc 3)
+PASS U control cur C: by name
+PASS U control cur en_US.UTF-8: refused (rc 3)
+PASS U control cur en_US.UTF-8: by name
+PASS U control pre C: refused (rc 3)
+PASS U control pre C: by name
+PASS U control pre en_US.UTF-8: refused (rc 3)
+PASS U control pre en_US.UTF-8: by name
+PASS U u1-indented-second cur C: sealed (rc 0)
+PASS U u1-indented-second cur C: G-050 recorded at minor
+PASS U u1-indented-second cur en_US.UTF-8: sealed (rc 0)
+PASS U u1-indented-second cur en_US.UTF-8: G-050 recorded at minor
+PASS U u1-indented-second pre C: sealed too (rc 0)
+PASS U u1-indented-second pre en_US.UTF-8: sealed too (rc 0)
+PASS U d1-indented-first cur C: sealed (rc 0)
+PASS U d1-indented-first cur C: G-050 recorded at minor
+PASS U d1-indented-first cur en_US.UTF-8: sealed (rc 0)
+PASS U d1-indented-first cur en_US.UTF-8: G-050 recorded at minor
+  | U d1-indented-first pre C: rc=0 
+  | U d1-indented-first pre en_US.UTF-8: rc=0 
+PASS U d2-unread-first cur C: sealed (rc 0)
+PASS U d2-unread-first cur C: G-050 recorded at minor
+PASS U d2-unread-first cur en_US.UTF-8: sealed (rc 0)
+PASS U d2-unread-first cur en_US.UTF-8: G-050 recorded at minor
+  | U d2-unread-first pre C: rc=0 
+  | U d2-unread-first pre en_US.UTF-8: rc=0 
+== E: end to end through spec-gate.sh on CUR; fixture, floor and reservation built under C each time
+PASS E m1-h4-colon C: fixture, floor and round-1 reservation
+  | E m1-h4-colon C: complete rc=0 round completed gate=opponent round=1 verdict=CLEARED report=ab9f5827d40a8310c662ff9331071dbb85a7cb20e334f7565c7fe1c6eb66faa1
+  |   tally rc=0 opponent rounds=1 blocking=0 minor=1 locations=1 unclassified=0 severity-downgrades=0 
+PASS E m1-h4-colon C: CLEARED sealed (rc 0)
+PASS E m1-h4-colon C: the completion line
+PASS E m1-h4-colon C: ROUND-1 sealed
+PASS E m1-h4-colon C: tally blocking=0 minor=1
+PASS E m1-h4-colon C: tally severity-downgrades=0
+PASS E m2-h4-body C: fixture, floor and round-1 reservation
+  | E m2-h4-body C: complete rc=0 round completed gate=opponent round=1 verdict=CLEARED report=24004baa0036fffd68cbfe1aac9a03c94b6af6f44d3d16bfba7c0e01597a35c5
+  |   tally rc=0 opponent rounds=1 blocking=0 minor=1 locations=1 unclassified=0 severity-downgrades=0 
+PASS E m2-h4-body C: CLEARED sealed (rc 0)
+PASS E m-control C: fixture, floor and round-1 reservation
+  | E m-control C: complete rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/512efee2-5748-4ebb-ba93-8afa08f5a48f/scratchpad/s12/o018-repro
+  |   tally rc=0 opponent rounds=0 blocking=0 minor=0 locations=0 unclassified=0 severity-downgrades=0 
+PASS E m-control C: refused (rc 3)
+PASS E m-control C: the lowered-tier refusal
+PASS E c1-h4 C: fixture, floor and round-1 reservation
+PASS E c1-h4 C: round 1 CHALLENGED completes (rc 0)
+PASS E c1-h4 C: round 2 reserved
+  | E c1-h4 C: complete rc=0 round completed gate=opponent round=2 verdict=CLEARED report=f8ab980af99df3f330d99da6b2c2b8d27dd05ffd639e430b17d3ab38aacc0b87
+  |   tally rc=0 opponent rounds=2 blocking=1 minor=0 locations=1 unclassified=0 severity-downgrades=0 
+PASS E c1-h4 C: round 2 CLEARED sealed (rc 0)
+PASS E c1-h4 C: the completion line
+PASS E c1-h4 C: tally counts round 1 only
+PASS E c2-tab C: fixture, floor and round-1 reservation
+PASS E c2-tab C: round 1 CHALLENGED completes (rc 0)
+PASS E c2-tab C: round 2 reserved
+  | E c2-tab C: complete rc=0 round completed gate=opponent round=2 verdict=CLEARED report=0c9666d86f9224c250b141c02bdf8a17a3ed67b62ac34e4c18bf32a12e442b7c
+  |   tally rc=0 opponent rounds=2 blocking=1 minor=0 locations=1 unclassified=0 severity-downgrades=0 
+PASS E c2-tab C: round 2 CLEARED sealed (rc 0)
+PASS E c2-tab C: the completion line
+PASS E c2-tab C: tally counts round 1 only
+PASS E c4-nbsp C: fixture, floor and round-1 reservation
+PASS E c4-nbsp C: round 1 CHALLENGED completes (rc 0)
+PASS E c4-nbsp C: round 2 reserved
+  | E c4-nbsp C: complete rc=0 round completed gate=opponent round=2 verdict=CLEARED report=2843192826f56a5707f2127f0b09794efd8ab5f5203272b93bdffd1b7d9be9b0
+  |   tally rc=0 opponent rounds=2 blocking=1 minor=0 locations=1 unclassified=0 severity-downgrades=0 
+PASS E c4-nbsp C: round 2 CLEARED sealed (rc 0)
+PASS E c4-nbsp C: the completion line
+PASS E c4-nbsp C: tally counts round 1 only
+PASS E d7-bold-line C: fixture, floor and round-1 reservation
+PASS E d7-bold-line C: round 1 CHALLENGED completes (rc 0)
+PASS E d7-bold-line C: round 2 reserved
+  | E d7-bold-line C: complete rc=0 round completed gate=opponent round=2 verdict=CLEARED report=3ba98d8df019a2b8720373ee93f998320a029f9cf348235f865b6969f4f80df9
+  |   tally rc=0 opponent rounds=2 blocking=1 minor=0 locations=1 unclassified=0 severity-downgrades=0 
+PASS E d7-bold-line C: round 2 CLEARED sealed (rc 0)
+PASS E d7-bold-line C: the completion line
+PASS E d7-bold-line C: tally counts round 1 only
+PASS E c-control C: fixture, floor and round-1 reservation
+PASS E c-control C: round 1 CHALLENGED completes (rc 0)
+PASS E c-control C: round 2 reserved
+  | E c-control C: complete rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/512efee2-5748-4ebb-ba93-8afa08f5a48f/scratchpad/s12/o018-repro
+  |   tally rc=0 opponent rounds=1 blocking=1 minor=0 locations=1 unclassified=0 severity-downgrades=0 
+PASS E c-control C: round 2 refused (rc 3)
+PASS E c-control C: the lowered-tier refusal
+PASS E u1-indented-second C: fixture, floor and round-1 reservation
+  | E u1-indented-second C: complete rc=0 round completed gate=opponent round=1 verdict=CLEARED report=762e1a1648fabc0911d87a9eaf2cb92802a0cd2180121d353f7c5b68024a8032
+  |   tally rc=0 opponent rounds=1 blocking=0 minor=1 locations=1 unclassified=0 severity-downgrades=0 
+PASS E u1-indented-second C: CLEARED sealed (rc 0)
+PASS E u1-indented-second C: tally blocking=0 minor=1
+PASS E m1-h4-colon en_US.UTF-8: fixture, floor and round-1 reservation
+  | E m1-h4-colon en_US.UTF-8: complete rc=0 round completed gate=opponent round=1 verdict=CLEARED report=8b547bfff9967d71d50c84edf444b4f69cc92d6b97545c189571eb621d9e8cca
+  |   tally rc=0 opponent rounds=1 blocking=0 minor=1 locations=1 unclassified=0 severity-downgrades=0 
+PASS E m1-h4-colon en_US.UTF-8: CLEARED sealed (rc 0)
+PASS E m1-h4-colon en_US.UTF-8: the completion line
+PASS E m1-h4-colon en_US.UTF-8: ROUND-1 sealed
+PASS E m1-h4-colon en_US.UTF-8: tally blocking=0 minor=1
+PASS E m1-h4-colon en_US.UTF-8: tally severity-downgrades=0
+PASS E m2-h4-body en_US.UTF-8: fixture, floor and round-1 reservation
+  | E m2-h4-body en_US.UTF-8: complete rc=0 round completed gate=opponent round=1 verdict=CLEARED report=8ea5d5ea32c7d3a30c21be90ad806b87cc1cd716ac8ba3f4eb6b6374fcb5d889
+  |   tally rc=0 opponent rounds=1 blocking=0 minor=1 locations=1 unclassified=0 severity-downgrades=0 
+PASS E m2-h4-body en_US.UTF-8: CLEARED sealed (rc 0)
+PASS E m-control en_US.UTF-8: fixture, floor and round-1 reservation
+  | E m-control en_US.UTF-8: complete rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/512efee2-5748-4ebb-ba93-8afa08f5a48f/scratchpad/s12/o018-repro
+  |   tally rc=0 opponent rounds=0 blocking=0 minor=0 locations=0 unclassified=0 severity-downgrades=0 
+PASS E m-control en_US.UTF-8: refused (rc 3)
+PASS E m-control en_US.UTF-8: the lowered-tier refusal
+PASS E c1-h4 en_US.UTF-8: fixture, floor and round-1 reservation
+PASS E c1-h4 en_US.UTF-8: round 1 CHALLENGED completes (rc 0)
+PASS E c1-h4 en_US.UTF-8: round 2 reserved
+  | E c1-h4 en_US.UTF-8: complete rc=0 round completed gate=opponent round=2 verdict=CLEARED report=bfc43733b24e442ebfe37424dacebf206d8dbe647102bc65bdbabe055ed1078c
+  |   tally rc=0 opponent rounds=2 blocking=1 minor=0 locations=1 unclassified=0 severity-downgrades=0 
+PASS E c1-h4 en_US.UTF-8: round 2 CLEARED sealed (rc 0)
+PASS E c1-h4 en_US.UTF-8: the completion line
+PASS E c1-h4 en_US.UTF-8: tally counts round 1 only
+PASS E c2-tab en_US.UTF-8: fixture, floor and round-1 reservation
+PASS E c2-tab en_US.UTF-8: round 1 CHALLENGED completes (rc 0)
+PASS E c2-tab en_US.UTF-8: round 2 reserved
+  | E c2-tab en_US.UTF-8: complete rc=0 round completed gate=opponent round=2 verdict=CLEARED report=90e35379066a60e6c64158649458a1b56cfa210956ff75d0e02067f70d0ea6d2
+  |   tally rc=0 opponent rounds=2 blocking=1 minor=0 locations=1 unclassified=0 severity-downgrades=0 
+PASS E c2-tab en_US.UTF-8: round 2 CLEARED sealed (rc 0)
+PASS E c2-tab en_US.UTF-8: the completion line
+PASS E c2-tab en_US.UTF-8: tally counts round 1 only
+PASS E c4-nbsp en_US.UTF-8: fixture, floor and round-1 reservation
+PASS E c4-nbsp en_US.UTF-8: round 1 CHALLENGED completes (rc 0)
+PASS E c4-nbsp en_US.UTF-8: round 2 reserved
+  | E c4-nbsp en_US.UTF-8: complete rc=0 round completed gate=opponent round=2 verdict=CLEARED report=887972ed3bcc002ac6618dce9616f1c0c90ee197264dc9a6f53c44b74737f033
+  |   tally rc=0 opponent rounds=2 blocking=1 minor=0 locations=1 unclassified=0 severity-downgrades=0 
+PASS E c4-nbsp en_US.UTF-8: round 2 CLEARED sealed (rc 0)
+PASS E c4-nbsp en_US.UTF-8: the completion line
+PASS E c4-nbsp en_US.UTF-8: tally counts round 1 only
+PASS E d7-bold-line en_US.UTF-8: fixture, floor and round-1 reservation
+PASS E d7-bold-line en_US.UTF-8: round 1 CHALLENGED completes (rc 0)
+PASS E d7-bold-line en_US.UTF-8: round 2 reserved
+  | E d7-bold-line en_US.UTF-8: complete rc=0 round completed gate=opponent round=2 verdict=CLEARED report=b5992434a80d675e56423f93c4feaadccf3f1ef9436e2932e9da4e87af9687a3
+  |   tally rc=0 opponent rounds=2 blocking=1 minor=0 locations=1 unclassified=0 severity-downgrades=0 
+PASS E d7-bold-line en_US.UTF-8: round 2 CLEARED sealed (rc 0)
+PASS E d7-bold-line en_US.UTF-8: the completion line
+PASS E d7-bold-line en_US.UTF-8: tally counts round 1 only
+PASS E c-control en_US.UTF-8: fixture, floor and round-1 reservation
+PASS E c-control en_US.UTF-8: round 1 CHALLENGED completes (rc 0)
+PASS E c-control en_US.UTF-8: round 2 reserved
+  | E c-control en_US.UTF-8: complete rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/512efee2-5748-4ebb-ba93-8afa08f5a48f/scratchpad/s12/o018-repro
+  |   tally rc=0 opponent rounds=1 blocking=1 minor=0 locations=1 unclassified=0 severity-downgrades=0 
+PASS E c-control en_US.UTF-8: round 2 refused (rc 3)
+PASS E c-control en_US.UTF-8: the lowered-tier refusal
+PASS E u1-indented-second en_US.UTF-8: fixture, floor and round-1 reservation
+  | E u1-indented-second en_US.UTF-8: complete rc=0 round completed gate=opponent round=1 verdict=CLEARED report=b413296d1d6af69ca8169816edae3de7f0fcc8bc6c90eaaaf046126830c78c80
+  |   tally rc=0 opponent rounds=1 blocking=0 minor=1 locations=1 unclassified=0 severity-downgrades=0 
+PASS E u1-indented-second en_US.UTF-8: CLEARED sealed (rc 0)
+PASS E u1-indented-second en_US.UTF-8: tally blocking=0 minor=1
+PASS live worktree status outside notes/verification/ unchanged
+o018-repro failures=0

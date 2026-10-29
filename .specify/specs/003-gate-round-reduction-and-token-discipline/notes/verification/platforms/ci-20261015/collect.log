@@ -1,0 +1,42 @@
+run=38706127101 status=completed conclusion=success event=pull_request head_sha=5ebc8ef0186fd7e5e6569029b0637c7ec8215240 attempt=1
+
+== job shellcheck (116325880372)
+  status=completed conclusion=success runner=GitHub Actions 1000000187 labels=ubuntu-latest
+  started=2026-10-15T08:30:23Z completed=2026-10-15T08:31:07Z log-fetch-exit=1 log-bytes=0
+  step 1 Set up job: completed success
+  step 2 Run actions/checkout@v5: completed success
+  step 3 shellcheck (warning severity blocks): completed success
+  step 6 Post Run actions/checkout@v5: completed success
+  step 7 Complete job: completed success
+
+== job tests (ubuntu-latest) (116325880553)
+  status=completed conclusion=success runner=GitHub Actions 1000000188 labels=ubuntu-latest
+  started=2026-10-15T08:30:22Z completed=2026-10-15T08:50:37Z log-fetch-exit=1 log-bytes=0
+  step 1 Set up job: completed success
+  step 2 Run actions/checkout@v5: completed success
+  step 3 run the test suite: completed success
+  step 6 Post Run actions/checkout@v5: completed success
+  step 7 Complete job: completed success
+
+== job tests-bash32 (116325880734)
+  status=completed conclusion=success runner=GitHub Actions 1000000190 labels=macos-latest
+  started=2026-10-15T08:30:29Z completed=2026-10-15T09:02:21Z log-fetch-exit=1 log-bytes=0
+  step 1 Set up job: completed success
+  step 2 Run actions/checkout@v5: completed success
+  step 3 run the test suite under bash 3.2: completed success
+  step 6 Post Run actions/checkout@v5: completed success
+  step 7 Complete job: completed success
+
+== job tests (macos-latest) (116325880864)
+  status=completed conclusion=success runner=GitHub Actions 1000000189 labels=macos-latest
+  started=2026-10-15T08:30:28Z completed=2026-10-15T08:59:51Z log-fetch-exit=1 log-bytes=0
+  step 1 Set up job: completed success
+  step 2 Run actions/checkout@v5: completed success
+  step 3 run the test suite: completed success
+  step 6 Post Run actions/checkout@v5: completed success
+  step 7 Complete job: completed success
+
+merge-commit-short(s) checked out: 
+merge-commit(s) fetched: 
+FAIL: could not identify the tested merge commit
+collect result: FAIL

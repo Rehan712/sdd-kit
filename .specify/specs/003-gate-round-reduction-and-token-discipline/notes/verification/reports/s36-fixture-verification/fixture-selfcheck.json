@@ -1,0 +1,329 @@
+{
+  "exact_two_builder_change": true,
+  "source_sha256": {
+    "before": "2f9efc4e4b24da1ca1bcef710e82ef852f1e463adbae0263f54d585f333bcd4e",
+    "after": "e5b5cde870b2da8c086a41f3a3824b401262343225108c7f3bab716324150c9a"
+  },
+  "unchanged_declarations": {
+    "weak_sha256": "e4e34a178888ef0f1fcf693426edb6a34146800efa5c59b949de289a1a83bb52",
+    "runner_sha256": "08b8991ab902e507b1c0d032c3416fd46695552494167b1e5854a89ef173d5c1"
+  },
+  "runs": [
+    {
+      "label": "before-bash32-default",
+      "argv": [
+        "/bin/bash",
+        "--noprofile",
+        "--norc",
+        "-s",
+        "--",
+        "default"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "start": "2026-10-28T10:40:01.946774+00:00",
+      "end": "2026-10-28T10:40:01.992484+00:00",
+      "exit": 0,
+      "stdout_sha256": "04da52df07af08e24f82095e3fda8e6ab734a9a059df84c46f856f8352496bde",
+      "stderr_sha256": "bbb7c88f6212d1a28adb9bc86b311cfa189b3e9683f3fc3b6a46b0b40bc3dc88",
+      "counts": {
+        "generated_weak": 176,
+        "generated_runner": 96,
+        "weak": 287,
+        "runner": 162
+      },
+      "array_hashes": {
+        "generated_weak": "ee4596e98e53b9e7af0388f6d05c4dbafef68cb6fc5f86cf29b86ca224f2217c",
+        "generated_runner": "95cd6ff920d53900b0d4b03121f8534c3194a2e4057ee749f550fe2f9ccf3cab",
+        "weak": "ae47e7813f3f487498881e115c6030346041591de907838d6dc95fec53add956",
+        "runner": "437c34853ee1a018b194b637ab918613ccf47743d15ec00386905f96087760a6"
+      }
+    },
+    {
+      "label": "before-bash52-on",
+      "argv": [
+        "/usr/local/bin/docker",
+        "run",
+        "--pull=never",
+        "--rm",
+        "--network=none",
+        "--read-only",
+        "--cap-drop=ALL",
+        "--security-opt=no-new-privileges",
+        "--entrypoint=/bin/bash",
+        "-i",
+        "sha256:a81de950abb8b5d961ed8c1dcd345450fab8cda00ea3c11e7ec24a4ed4bb82ce",
+        "--noprofile",
+        "--norc",
+        "-s",
+        "--",
+        "on"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "start": "2026-10-28T10:40:01.992691+00:00",
+      "end": "2026-10-28T10:40:02.358466+00:00",
+      "exit": 0,
+      "stdout_sha256": "4bd9c6bed32c3263280cc3e42a207e8e352b197a1cf624a67bf2e0dc4c1a74b7",
+      "stderr_sha256": "4b05a46f7e60c784173c31dd680243e34fb528be72397f5d4c0e0c969818d551",
+      "counts": {
+        "generated_weak": 176,
+        "generated_runner": 96,
+        "weak": 287,
+        "runner": 162
+      },
+      "array_hashes": {
+        "generated_weak": "4ec5f2398fcc02464f4e5e297554931b14c406e444bc985d429e0040f6a33d33",
+        "generated_runner": "851bd277c944949375abdb104991ffcd38574cc8ce4fb85701d96bd604dbba39",
+        "weak": "0b12ac0033001896f00875f383932e0adf3a7cf68a08ffe56e09023676795514",
+        "runner": "fae21554320f33d0d70eabae39fa3991f4c1dec7641afe72dc1c4f38bed8ffe4"
+      }
+    },
+    {
+      "label": "before-bash52-off",
+      "argv": [
+        "/usr/local/bin/docker",
+        "run",
+        "--pull=never",
+        "--rm",
+        "--network=none",
+        "--read-only",
+        "--cap-drop=ALL",
+        "--security-opt=no-new-privileges",
+        "--entrypoint=/bin/bash",
+        "-i",
+        "sha256:a81de950abb8b5d961ed8c1dcd345450fab8cda00ea3c11e7ec24a4ed4bb82ce",
+        "--noprofile",
+        "--norc",
+        "-s",
+        "--",
+        "off"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "start": "2026-10-28T10:40:02.358749+00:00",
+      "end": "2026-10-28T10:40:02.784074+00:00",
+      "exit": 0,
+      "stdout_sha256": "04da52df07af08e24f82095e3fda8e6ab734a9a059df84c46f856f8352496bde",
+      "stderr_sha256": "150809b760a14691374b6a6279bd39f457fd9b3c97c82bcb1deca209e1dc877b",
+      "counts": {
+        "generated_weak": 176,
+        "generated_runner": 96,
+        "weak": 287,
+        "runner": 162
+      },
+      "array_hashes": {
+        "generated_weak": "ee4596e98e53b9e7af0388f6d05c4dbafef68cb6fc5f86cf29b86ca224f2217c",
+        "generated_runner": "95cd6ff920d53900b0d4b03121f8534c3194a2e4057ee749f550fe2f9ccf3cab",
+        "weak": "ae47e7813f3f487498881e115c6030346041591de907838d6dc95fec53add956",
+        "runner": "437c34853ee1a018b194b637ab918613ccf47743d15ec00386905f96087760a6"
+      }
+    },
+    {
+      "label": "after-bash32-default",
+      "argv": [
+        "/bin/bash",
+        "--noprofile",
+        "--norc",
+        "-s",
+        "--",
+        "default"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "start": "2026-10-28T10:40:02.784764+00:00",
+      "end": "2026-10-28T10:40:02.840505+00:00",
+      "exit": 0,
+      "stdout_sha256": "04da52df07af08e24f82095e3fda8e6ab734a9a059df84c46f856f8352496bde",
+      "stderr_sha256": "bbb7c88f6212d1a28adb9bc86b311cfa189b3e9683f3fc3b6a46b0b40bc3dc88",
+      "counts": {
+        "generated_weak": 176,
+        "generated_runner": 96,
+        "weak": 287,
+        "runner": 162
+      },
+      "array_hashes": {
+        "generated_weak": "ee4596e98e53b9e7af0388f6d05c4dbafef68cb6fc5f86cf29b86ca224f2217c",
+        "generated_runner": "95cd6ff920d53900b0d4b03121f8534c3194a2e4057ee749f550fe2f9ccf3cab",
+        "weak": "ae47e7813f3f487498881e115c6030346041591de907838d6dc95fec53add956",
+        "runner": "437c34853ee1a018b194b637ab918613ccf47743d15ec00386905f96087760a6"
+      }
+    },
+    {
+      "label": "after-bash52-on",
+      "argv": [
+        "/usr/local/bin/docker",
+        "run",
+        "--pull=never",
+        "--rm",
+        "--network=none",
+        "--read-only",
+        "--cap-drop=ALL",
+        "--security-opt=no-new-privileges",
+        "--entrypoint=/bin/bash",
+        "-i",
+        "sha256:a81de950abb8b5d961ed8c1dcd345450fab8cda00ea3c11e7ec24a4ed4bb82ce",
+        "--noprofile",
+        "--norc",
+        "-s",
+        "--",
+        "on"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "start": "2026-10-28T10:40:02.840658+00:00",
+      "end": "2026-10-28T10:40:03.353888+00:00",
+      "exit": 0,
+      "stdout_sha256": "04da52df07af08e24f82095e3fda8e6ab734a9a059df84c46f856f8352496bde",
+      "stderr_sha256": "4b05a46f7e60c784173c31dd680243e34fb528be72397f5d4c0e0c969818d551",
+      "counts": {
+        "generated_weak": 176,
+        "generated_runner": 96,
+        "weak": 287,
+        "runner": 162
+      },
+      "array_hashes": {
+        "generated_weak": "ee4596e98e53b9e7af0388f6d05c4dbafef68cb6fc5f86cf29b86ca224f2217c",
+        "generated_runner": "95cd6ff920d53900b0d4b03121f8534c3194a2e4057ee749f550fe2f9ccf3cab",
+        "weak": "ae47e7813f3f487498881e115c6030346041591de907838d6dc95fec53add956",
+        "runner": "437c34853ee1a018b194b637ab918613ccf47743d15ec00386905f96087760a6"
+      }
+    },
+    {
+      "label": "after-bash52-off",
+      "argv": [
+        "/usr/local/bin/docker",
+        "run",
+        "--pull=never",
+        "--rm",
+        "--network=none",
+        "--read-only",
+        "--cap-drop=ALL",
+        "--security-opt=no-new-privileges",
+        "--entrypoint=/bin/bash",
+        "-i",
+        "sha256:a81de950abb8b5d961ed8c1dcd345450fab8cda00ea3c11e7ec24a4ed4bb82ce",
+        "--noprofile",
+        "--norc",
+        "-s",
+        "--",
+        "off"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "start": "2026-10-28T10:40:03.354139+00:00",
+      "end": "2026-10-28T10:40:03.786189+00:00",
+      "exit": 0,
+      "stdout_sha256": "04da52df07af08e24f82095e3fda8e6ab734a9a059df84c46f856f8352496bde",
+      "stderr_sha256": "150809b760a14691374b6a6279bd39f457fd9b3c97c82bcb1deca209e1dc877b",
+      "counts": {
+        "generated_weak": 176,
+        "generated_runner": 96,
+        "weak": 287,
+        "runner": 162
+      },
+      "array_hashes": {
+        "generated_weak": "ee4596e98e53b9e7af0388f6d05c4dbafef68cb6fc5f86cf29b86ca224f2217c",
+        "generated_runner": "95cd6ff920d53900b0d4b03121f8534c3194a2e4057ee749f550fe2f9ccf3cab",
+        "weak": "ae47e7813f3f487498881e115c6030346041591de907838d6dc95fec53add956",
+        "runner": "437c34853ee1a018b194b637ab918613ccf47743d15ec00386905f96087760a6"
+      }
+    }
+  ],
+  "status": "PASS",
+  "modern_runtime": "GNU Bash 5.2.37 in existing Debian 12 oven/bun image; fixture-only, not CI host",
+  "mechanism_empirically_reproduced": true,
+  "ci_host_version_and_options_still_unobserved": true,
+  "old_on_red_fixture_labels": [
+    {
+      "malformed": "grepREDIRECT>out.txt AC-001 README.md",
+      "literal_fixed": "grep&>out.txt AC-001 README.md",
+      "raw_log_lines": [
+        238,
+        255
+      ]
+    },
+    {
+      "malformed": "tscREDIRECT>out.txt --noEmit",
+      "literal_fixed": "tsc&>out.txt --noEmit",
+      "raw_log_lines": [
+        272,
+        289
+      ]
+    },
+    {
+      "malformed": "testREDIRECT>out.txt -e README.md",
+      "literal_fixed": "test&>out.txt -e README.md",
+      "raw_log_lines": [
+        306,
+        323
+      ]
+    },
+    {
+      "malformed": "test -fREDIRECT>out.txt README.md",
+      "literal_fixed": "test -f&>out.txt README.md",
+      "raw_log_lines": [
+        340,
+        357
+      ]
+    },
+    {
+      "malformed": "tsc REDIRECT>out.txt --noEmit",
+      "literal_fixed": "tsc &>out.txt --noEmit",
+      "raw_log_lines": [
+        374,
+        391
+      ]
+    },
+    {
+      "malformed": "test REDIRECT>out.txt -e README.md",
+      "literal_fixed": "test &>out.txt -e README.md",
+      "raw_log_lines": [
+        408,
+        425
+      ]
+    },
+    {
+      "malformed": "bashREDIRECT>out.txt tests/typecheck.sh",
+      "literal_fixed": "bash&>out.txt tests/typecheck.sh",
+      "raw_log_lines": [
+        442,
+        443
+      ]
+    },
+    {
+      "malformed": "cargo testREDIRECT>out.txt --test typecheck",
+      "literal_fixed": "cargo test&>out.txt --test typecheck",
+      "raw_log_lines": [
+        459,
+        460
+      ]
+    },
+    {
+      "malformed": "npm runREDIRECT>out.txt test -- --grep typecheck",
+      "literal_fixed": "npm run&>out.txt test -- --grep typecheck",
+      "raw_log_lines": [
+        476,
+        477
+      ]
+    },
+    {
+      "malformed": "bash REDIRECT>out.txt tests/typecheck.sh",
+      "literal_fixed": "bash &>out.txt tests/typecheck.sh",
+      "raw_log_lines": [
+        493,
+        494
+      ]
+    },
+    {
+      "malformed": "npm run REDIRECT>out.txt test -- --grep typecheck",
+      "literal_fixed": "npm run &>out.txt test -- --grep typecheck",
+      "raw_log_lines": [
+        510,
+        511
+      ]
+    }
+  ],
+  "matched_ci_assertion_labels": 22,
+  "old_on_corrupted_generated_counts": {
+    "generated_weak": 48,
+    "generated_runner": 36
+  },
+  "limits": [
+    "Modern Bash probe constructs fixtures only; it does not rerun analyzer assertions or hosted CI."
+  ]
+}

@@ -1,0 +1,50 @@
+@@OLD
+  # A contract value that is neither absent nor 1 is refused, never read as
+  # the legacy check (T030o43 review): a U+00A0 after the colon is a value.
+  cp "$spec/spec.md" "$SANDBOX/floorfault-spec"
+  sed "s/^verification_contract: 1\$/verification_contract:$(printf '\302\240')1/" "$SANDBOX/floorfault-spec" > "$spec/spec.md"
+  run_rc 3 bash "$SCRIPTS/spec-evidence.sh" "$spec"
+  assert_contains "$OUT" 'unsupported verification contract' \
+    'AC-007: a contract value spec-evidence.sh cannot read sent it down the legacy check (T030o43 review)'
+  cp "$SANDBOX/floorfault-spec" "$spec/spec.md"
+@@NEW
+  # The contract routes by its key in every reader, as the kernel routes it
+  # (T030o43 review 2, R2-F6): no key is legacy, one key of value 1 is
+  # current, and an empty value, a quoted empty one or a second key is refused
+  # by name, never read as the legacy path. A U+00A0 after the colon is
+  # whitespace, so that key routes as 1 does.
+  cp "$spec/spec.md" "$SANDBOX/floorfault-spec"
+  local current value script
+  bash "$SCRIPTS/spec-evidence.sh" "$spec" > "$SANDBOX/route-current.out" 2>&1; current=$?
+  sed "s/^verification_contract: 1\$/verification_contract:$(printf '\302\240')1/" "$SANDBOX/floorfault-spec" > "$spec/spec.md"
+  bash "$SCRIPTS/spec-evidence.sh" "$spec" > "$SANDBOX/route-nbsp.out" 2>&1
+  assert_eq "$current:$(cat "$SANDBOX/route-current.out")" "$?:$(cat "$SANDBOX/route-nbsp.out")" \
+    'AC-007: a U+00A0 after the contract colon did not route as the value 1 (T030o43 review 2)'
+  for value in 'verification_contract:' 'verification_contract: ""' "verification_contract: ''" twice; do
+    awk -v v="$value" '$0 == "verification_contract: 1" {print (v == "twice" ? $0 "\n" $0 : v); next} {print}' \
+      "$SANDBOX/floorfault-spec" > "$spec/spec.md"
+    for script in spec-evidence spec-run spec-task; do
+      case "$script" in
+        spec-evidence) run_rc 3 bash "$SCRIPTS/spec-evidence.sh" "$spec";;
+        spec-run) run_rc 3 bash "$SCRIPTS/spec-run.sh" "$spec" T001 --cwd "$repo" --no-tick -- true;;
+        spec-task) run_rc 3 bash "$SCRIPTS/spec-task.sh" list "$spec";;
+      esac
+      assert_contains "$OUT" 'unsupported verification contract' \
+        "AC-007: $script read the contract key [$value] as the legacy path (T030o43 review 2)"
+    done
+  done
+  cp "$SANDBOX/floorfault-spec" "$spec/spec.md"
+@@END
+@@OLD
+  run_rc 1 bash "$SCRIPTS/spec-evidence.sh" "$legacy"
+  assert_contains "$OUT" 'T001 is [x] with no *Evidence:* line' 'fixture: the legacy evidence check'
+@@NEW
+  run_rc 1 bash "$SCRIPTS/spec-evidence.sh" "$legacy"
+  assert_contains "$OUT" 'T001 is [x] with no *Evidence:* line' 'fixture: the legacy evidence check'
+  # An Evidence of a U+00A0 alone is no evidence (T030o43 review 2, R2-F4).
+  printf '  - *Evidence:* \302\240\n' >> "$legacy/tasks.md"
+  run_rc 1 bash "$SCRIPTS/spec-evidence.sh" "$legacy"
+  assert_contains "$OUT" 'T001 is [x] with no *Evidence:* line' \
+    'AC-007: an Evidence of a U+00A0 alone read as evidence (T030o43 review 2)'
+  printf -- '---\nspec: 001-legacy\n---\n\n## Backend\n\n- [x] **T001** — Legacy task\n  - *Acceptance:* legacy\n' > "$legacy/tasks.md"
+@@END

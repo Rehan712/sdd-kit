@@ -1,0 +1,61 @@
+  | live worktree porcelain digest before: 7563a001ed18ea1bb6af935df3caae2dfb03be52dd584d401b2e32a440187a5c
+PASS live enumeration rc (want=0 got=0)
+PASS copy p1 built (pinned=1) (want=0 got=0)
+PASS copy p2 built (pinned=1) (want=0 got=0)
+PASS copy p3 built (pinned=1) (want=0 got=0)
+PASS copy p4 built (pinned=1) (want=0 got=0)
+PASS copy u built (pinned=0) (want=0 got=0)
+  | pin as applied (tests/helpers.sh): 18:unset CDPATH BASH_ENV ENV 19-export LC_ALL=C 
+  | streams started 19:44:05Z
+  | streams returned 20:58:19Z
+== M1. the pin makes the full suite locale-proof
+PASS pinned full suite p1-en_GB rc (want=0 got=0)
+  | p1-en_GB: 147/147 failed: 
+PASS pinned full suite p2-de_DE rc (want=0 got=0)
+  | p2-de_DE: 147/147 failed: 
+PASS pinned full suite p3-iso8859 rc (want=0 got=0)
+  | p3-iso8859: 147/147 failed: 
+== M1b. the pinned usage-limits suite under locales (LANG only) and LC_TIME alone
+PASS pinned usage-limits under en_GB.UTF-8 rc (want=0 got=0)
+  | en_GB.UTF-8: 27/27
+PASS pinned usage-limits under de_DE.UTF-8 rc (want=0 got=0)
+  | de_DE.UTF-8: 27/27
+PASS pinned usage-limits under fr_FR.UTF-8 rc (want=0 got=0)
+  | fr_FR.UTF-8: 27/27
+PASS pinned usage-limits under ja_JP.UTF-8 rc (want=0 got=0)
+  | ja_JP.UTF-8: 27/27
+PASS pinned usage-limits under en_US.ISO8859-1 rc (want=0 got=0)
+  | en_US.ISO8859-1: 27/27
+PASS pinned usage-limits under lctime rc (want=0 got=0)
+  | lctime: 27/27
+== M2. ShellCheck across locales (measured; unpinned, then pinned)
+  | unpinned LC_ALL=C: rc=0 out-bytes=0 digest=e3b0c44298fc1c14 (C digest e3b0c44298fc1c14)
+  | unpinned LC_ALL=POSIX: rc=0 out-bytes=0 digest=e3b0c44298fc1c14 (C digest e3b0c44298fc1c14)
+  | unpinned LC_ALL=C.UTF-8: rc=0 out-bytes=0 digest=e3b0c44298fc1c14 (C digest e3b0c44298fc1c14)
+  | unpinned LC_ALL=en_GB.UTF-8: rc=0 out-bytes=0 digest=e3b0c44298fc1c14 (C digest e3b0c44298fc1c14)
+  | unpinned LC_ALL=de_DE.UTF-8: rc=0 out-bytes=0 digest=e3b0c44298fc1c14 (C digest e3b0c44298fc1c14)
+  | unpinned LC_ALL=ja_JP.UTF-8: rc=0 out-bytes=0 digest=e3b0c44298fc1c14 (C digest e3b0c44298fc1c14)
+  | unpinned LC_ALL=ja_JP.SJIS: rc=0 out-bytes=0 digest=e3b0c44298fc1c14 (C digest e3b0c44298fc1c14)
+  | unpinned LC_ALL=en_US.ISO8859-1: rc=0 out-bytes=0 digest=e3b0c44298fc1c14 (C digest e3b0c44298fc1c14)
+  | unpinned LC_ALL=NONE: rc=0 out-bytes=0 digest=e3b0c44298fc1c14 (C digest e3b0c44298fc1c14)
+  | pinned LANG=de_DE.UTF-8: rc=0 out-bytes=0
+  | pinned LANG=ja_JP.SJIS: rc=0 out-bytes=0
+  | pinned LANG=en_US.ISO8859-1: rc=0 out-bytes=0
+== M3. timezone, with the locale pinned (measured)
+  | p1-tz-kiritimati: rc=0 147/147 failed: 
+  | p2-tz-gmt12: rc=0 147/147 failed: 
+  | p3-tz-stjohns: rc=0 147/147 failed: 
+== M4. program census of the full suite (programs resolved through PATH, declared tools excluded)
+  | census run: rc=0 147/147 failed: 
+  | distinct programs: 38 calls: 178104
+  | awk(65142) basename(1772) cat(4748) chmod(61) cksum(7) cmp(1375) cp(13648) cut(13) date(701) dirname(10782) env(257) find(50) grep(8109) head(2386) id(4) ln(11) mkdir(1916) mktemp(4474) mv(2257) od(30
+  | 82) paste(90) readlink(58) rm(5385) rmdir(504) script(4) sed(2652) sh(2) shasum(42419) sleep(1) sort(2310) tail(14) tar(130) tee(50) touch(4) tr(2664) uname(36) wc(894) xargs(92) 
+== hermeticity
+PASS copy p1 unchanged by its runs (want=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 got=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855)
+PASS copy p2 unchanged by its runs (want=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 got=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855)
+PASS copy p3 unchanged by its runs (want=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 got=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855)
+PASS copy p4 unchanged by its runs (want=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 got=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855)
+PASS copy u unchanged by its runs (want=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 got=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855)
+  | live worktree porcelain digest after: a8ffe88c5d6a49b8768ad1e65ff48352dc48b944e3fa330de6dd91b4c6604b43
+FAIL live worktree unchanged (want=7563a001ed18ea1bb6af935df3caae2dfb03be52dd584d401b2e32a440187a5c got=a8ffe88c5d6a49b8768ad1e65ff48352dc48b944e3fa330de6dd91b4c6604b43)
+o016-measure failures=1

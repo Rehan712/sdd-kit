@@ -1,0 +1,36 @@
+{
+  "actualTaskResult": {
+    "taskId": "node:delegated-task:command%3Amcp%3A1f3cd44c-e930-4955-b272-b45788f5db02%3Adelegate-task%3Asdd003-s37-t029-f156-current-provider-high-r1",
+    "childThreadId": "thread:delegated-task:command%3Amcp%3A1f3cd44c-e930-4955-b272-b45788f5db02%3Adelegate-task%3Asdd003-s37-t029-f156-current-provider-high-r1",
+    "link": "[Spec 003 T029 control refresh after fixture Ship \u00b7 sol HIGH](t3-thread://v1/thread:delegated-task:command%3Amcp%3A1f3cd44c-e930-4955-b272-b45788f5db02%3Adelegate-task%3Asdd003-s37-t029-f156-current-provider-high-r1)",
+    "childRunId": "run:thread:thread%3Adelegated-task%3Acommand%253Amcp%253A1f3cd44c-e930-4955-b272-b45788f5db02%253Adelegate-task%253Asdd003-s37-t029-f156-current-provider-high-r1:ordinal:1",
+    "childNodeId": "node:delegated-task:command%3Amcp%3A1f3cd44c-e930-4955-b272-b45788f5db02%3Adelegate-task%3Asdd003-s37-t029-f156-current-provider-high-r1",
+    "status": "completed",
+    "workState": "result_available",
+    "hasPendingChildRuns": false,
+    "latestTerminalRunId": "run:thread:thread%3Adelegated-task%3Acommand%253Amcp%253A1f3cd44c-e930-4955-b272-b45788f5db02%253Adelegate-task%253Asdd003-s37-t029-f156-current-provider-high-r1:ordinal:1",
+    "latestTerminalStatus": "completed",
+    "latestTerminalSummary": null,
+    "latestTerminalResultContextTransferId": null,
+    "providerInstanceId": "codex_codex_gym",
+    "model": "gpt-6.1-sol",
+    "options": [
+      {
+        "id": "reasoningEffort",
+        "value": "high"
+      },
+      {
+        "id": "serviceTier",
+        "value": "default"
+      }
+    ],
+    "summary": "Verification-Return: 1\nTask: T029\nCaptures: CAP-819-05nYhW\nSummary: capture=CAP-819-05nYhW command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=e2bd5dfbf6ddcf901317732547649b3e2028c869384acc1e688d65a77c738b33 input=f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-819-05nYhW/output.log [complete metadata: capture directory]\nFailure modes:\nFM-001, tests/test-gate-contracts.sh::test_instruction_contracts, CAP-819-05nYhW\nINV-005, tests/test-gate-contracts.sh::test_instruction_contracts, CAP-819-05nYhW",
+    "resultContextTransferId": "context-transfer:type:subagent_result:source-thread:thread%3Adelegated-task%3Acommand%253Amcp%253A1f3cd44c-e930-4955-b272-b45788f5db02%253Adelegate-task%253Asdd003-s37-t029-f156-current-provider-high-r1:target-thread:f449528d-0620-41cb-b858-dcf160f695ae:529d3d95-058e-406a-9fee-36e14d971536",
+    "hasPendingQuestion": false,
+    "pendingApproval": null,
+    "waitTimedOut": false
+  },
+  "workerReturnSha256": "0828776bf6a8018c6cd5768e04c3344ffd1f09d5fb94f5d4a49d38ec36ce4412",
+  "handbackByteMatch": false,
+  "matchesWithOneTerminalLfAdded": true
+}

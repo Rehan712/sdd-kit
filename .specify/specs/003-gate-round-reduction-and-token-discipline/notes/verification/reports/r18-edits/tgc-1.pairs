@@ -1,0 +1,169 @@
+@@OLD
+outside-span-tag|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n\n## Notes\n\nO-017 is discussed below.\nNote <span>Severity: as noted</span> stays prose.\n
+SHAPES
+@@NEW
+outside-span-tag|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n\n## Notes\n\nO-017 is discussed below.\nNote <span>Severity: as noted</span> stays prose.\n
+quoted-destination-member|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n- The form `` [x](u`v)<br>Severity: data-loss, tick: `. `` stays quoted.\n
+quoted-autolink-member|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n- The form `` Note <1`@a.b><pre>Severity: data-loss</pre>` `` stays quoted.\n
+link-title-then-code|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n- See [the doc](u "a title") and `code` after it.\n
+reference-links-prose|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n- See [the doc][ref] and [x][] here.\n
+lt-before-a-space|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n- It takes < 30 s and > 2 s.\n
+wrapped-link-at-line-start|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n\n[a note that\nwraps](u) here.\n
+escaped-bracket-at-line-start|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n\n\\[a]: is not a definition here.\n
+task-checkboxes|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n- [x] done\n- [ ] open\n
+column-zero-fence-after-blank|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n\n```text\nplain\n```\n
+heading-with-tag-closes-finding|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n### Notes <b>x</b>\nA note.\n
+narrowed-constructs-outside|[ref]: https://x.example\n\n### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n## Notes\n\nNote <1@x.example>, [a](u`v) and c <= d.\n- ```\n  x\n- y\n
+SHAPES
+@@END
+@@OLD
+image-alt-holding-an-unclosed-run-then-a-span|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n![``a `]`](u)Severity: data-loss\n|a second Severity line in finding G-042
+ROWS
+@@NEW
+image-alt-holding-an-unclosed-run-then-a-span|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n![``a `]`](u)Severity: data-loss\n|a second Severity line in finding G-042
+autolink-digit-br|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\nNote <1`@a.b><br>Severity: data-loss, tick: `.\n|an autolink outside a code span in finding G-042
+autolink-digit-pre|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\nNote <1`@a.b><pre>Severity: data-loss</pre>`\n|an autolink outside a code span in finding G-042
+autolink-underscore-p|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\nNote <_`@a.b><p>Severity: data-loss `\n|an autolink outside a code span in finding G-042
+autolink-backtick-start|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\nNote <`a@b.c><br>Severity: data-loss, tick: `.\n|an autolink outside a code span in finding G-042
+autolink-plus|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\nNote <+1`@a.b><br>Severity: data-loss, tick: `.\n|an autolink outside a code span in finding G-042
+destination-holding-backtick|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n[x](u`v)<br>Severity: data-loss, tick: `.\n|a backtick inside a link destination, title or label in finding G-042
+title-holding-backtick|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n[x](u "`")<br>Severity: data-loss, tick: `.\n|a backtick inside a link destination, title or label in finding G-042
+angle-destination-holding-backtick|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n[x](<1`b>)<pre>Severity: data-loss</pre>`\n|a backtick inside a link destination, title or label in finding G-042
+label-holding-backtick|[a`b]: /u\n\n### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n[x][a`b]<br>Severity: data-loss, tick: `.\n|a backtick inside a link destination, title or label in finding G-042
+title-across-lines|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n[x](u '\ny`')<br>Severity: data-loss, tick: `.\n|a link destination, title or label that does not end on its line in finding G-042
+destination-on-next-line|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n[x](\nu`v)<br>Severity: data-loss, tick: `.\n|a link destination, title or label that does not end on its line in finding G-042
+label-across-lines|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n[x][a\nb`]<br>Severity: data-loss, tick: `.\n|a link destination, title or label that does not end on its line in finding G-042
+fence-after-list-marker|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- ```\n  ### x\n- **Severity**: data-loss\n|a code fence that may be inside a list item in finding G-042
+fence-swapping-phase|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- note\n  ```\n```\n### x\n```\n- **Severity**: data-loss\n- y\n  ```\n|a code fence that may be inside a list item in finding G-042
+fence-four-spaces-in-item|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- note\n\n    ```\n  ### x\n    ```\n- **Severity**: data-loss\n|a code fence that may be inside a list item in finding G-042
+fence-after-ordered-marker|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n1. ~~~\n   ### x\n- **Severity**: data-loss\n|a code fence that may be inside a list item in finding G-042
+definition-hiding-severity|### Finding G-042\n- **Class:** tier-binding\n\n[a]: /u '\n    - **Severity:** minor\n    - x'\n|a link reference definition in finding G-042
+definition-then-fence|### Finding G-042\n- **Class:** tier-binding\n\n[a]: /u '\n    - **Severity:** minor\n    - x'\n\n- ```\n  ### x\n- **Severity**: data-loss\n|a link reference definition in finding G-042
+definition-in-list-item|### Finding G-042\n- **Class:** tier-binding\n- [a]: /u '\n      - **Severity:** minor\n      - x'\n|a link reference definition in finding G-042
+definition-label-across-lines|### Finding G-042\n- **Class:** tier-binding\n\n[a\nb]: /u '\n    - **Severity:** minor\n    - x'\n|a link reference definition in finding G-042
+definition-escaped-label|### Finding G-042\n- **Class:** tier-binding\n\n[a\\]b]: /u '\n    - **Severity:** minor\n    - x'\n|a link reference definition in finding G-042
+lt-equals-prose|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\nIt holds when c <= d.\n|an autolink outside a code span in finding G-042
+indented-fence-in-item|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- step\n  ```\n  bash x\n  ```\n|a code fence that may be inside a list item in finding G-042
+definition-line|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n[a]: https://x.example\n|a link reference definition in finding G-042
+heading-tag-on-first-finding|### Finding G-042 <b>x</b>\n- **Class:** tier-binding\n- **Severity:** minor\n|raw HTML outside a code span in finding G-042
+heading-tag-on-later-finding|### Finding G-041\n- **Class:** tier-binding\n- **Severity:** minor\n### Finding G-042 <b>x</b>\n- **Class:** tier-binding\n- **Severity:** minor\n|raw HTML outside a code span in finding G-042
+ROWS
+@@END
+@@OLD
+image-alt-holding-an-unclosed-run-then-a-span|- **Severity:** minor\n\n![``a `]`](u)Severity: data-loss|a Severity line this grammar cannot read in finding G-050
+ROWS
+@@NEW
+image-alt-holding-an-unclosed-run-then-a-span|- **Severity:** minor\n\n![``a `]`](u)Severity: data-loss|a Severity line this grammar cannot read in finding G-050
+autolink-digit-br|- **Severity:** minor\n\nNote <1`@a.b><br>Severity: data-loss, tick: `.|an autolink outside a code span in finding G-050
+autolink-digit-pre|- **Severity:** minor\n\nNote <1`@a.b><pre>Severity: data-loss</pre>`|an autolink outside a code span in finding G-050
+autolink-underscore-p|- **Severity:** minor\n\nNote <_`@a.b><p>Severity: data-loss `|an autolink outside a code span in finding G-050
+autolink-backtick-start|- **Severity:** minor\n\nNote <`a@b.c><br>Severity: data-loss, tick: `.|an autolink outside a code span in finding G-050
+autolink-plus|- **Severity:** minor\n\nNote <+1`@a.b><br>Severity: data-loss, tick: `.|an autolink outside a code span in finding G-050
+destination-holding-backtick|- **Severity:** minor\n\n[x](u`v)<br>Severity: data-loss, tick: `.|a backtick inside a link destination, title or label in finding G-050
+title-holding-backtick|- **Severity:** minor\n\n[x](u "`")<br>Severity: data-loss, tick: `.|a backtick inside a link destination, title or label in finding G-050
+angle-destination-holding-backtick|- **Severity:** minor\n\n[x](<1`b>)<pre>Severity: data-loss</pre>`|a backtick inside a link destination, title or label in finding G-050
+label-holding-backtick|- **Severity:** minor\n\n[x][a`b]<br>Severity: data-loss, tick: `.|a backtick inside a link destination, title or label in finding G-050
+title-across-lines|- **Severity:** minor\n\n[x](u '\ny`')<br>Severity: data-loss, tick: `.|a link destination, title or label that does not end on its line in finding G-050
+destination-on-next-line|- **Severity:** minor\n\n[x](\nu`v)<br>Severity: data-loss, tick: `.|a link destination, title or label that does not end on its line in finding G-050
+label-across-lines|- **Severity:** minor\n\n[x][a\nb`]<br>Severity: data-loss, tick: `.|a link destination, title or label that does not end on its line in finding G-050
+lt-equals-prose|- **Severity:** minor\n\nIt holds when c <= d.|an autolink outside a code span in finding G-050
+indented-fence-in-item|- **Severity:** minor\n\n- step\n  ```\n  bash x\n  ```|a code fence that may be inside a list item in finding G-050
+definition-line|- **Severity:** minor\n\n[a]: https://x.example|a link reference definition in finding G-050
+ROWS
+  # The extent of a finding, and the lines a reader sees, come from constructs both
+  # readers follow (round 17, O-024): inside a canonical finding a code fence
+  # that may be inside a list item and a link reference definition are refused
+  # by name, so a fence a list item opens cannot hide a line both passes read
+  # as closing the finding, and a definition cannot carry a field line no
+  # renderer shows. Each tail follows every field of the finding.
+  while IFS='|' read -r tag tail want; do
+    record_round 1 CLEARED 0 1 '### Finding G-050' tier-binding new '' |
+      awk -v t="$tail" 'index($0, "### Held up") == 1 {printf "%s", t} {print}' > "$report"
+    for l in C en_US.UTF-8; do
+      run_rc 3 record_line_vf "$l" "$report" "$spec"
+      assert_contains "$OUT" "$want" "AC-012: a canonical finding whose tail is $tag was not refused by name under LANG=$l (round 17, O-024)"
+    done
+  done <<'ROWS'
+fence-after-list-marker|- **Severity:** minor\n- ```\n  ### x\n- **Severity**: data-loss\n|a code fence that may be inside a list item in finding G-050
+fence-swapping-phase|- **Severity:** minor\n- note\n  ```\n```\n### x\n```\n- **Severity**: data-loss\n- y\n  ```\n|a code fence that may be inside a list item in finding G-050
+fence-four-spaces-in-item|- **Severity:** minor\n- note\n\n    ```\n  ### x\n    ```\n- **Severity**: data-loss\n|a code fence that may be inside a list item in finding G-050
+fence-after-ordered-marker|- **Severity:** minor\n1. ~~~\n   ### x\n- **Severity**: data-loss\n|a code fence that may be inside a list item in finding G-050
+definition-hiding-severity|\n[a]: /u '\n    - **Severity:** minor\n    - x'\n|a link reference definition in finding G-050
+definition-then-fence|\n[a]: /u '\n    - **Severity:** minor\n    - x'\n\n- ```\n  ### x\n- **Severity**: data-loss\n|a link reference definition in finding G-050
+definition-in-list-item|- [a]: /u '\n      - **Severity:** minor\n      - x'\n|a link reference definition in finding G-050
+definition-label-across-lines|\n[a\nb]: /u '\n    - **Severity:** minor\n    - x'\n|a link reference definition in finding G-050
+definition-escaped-label|\n[a\\]b]: /u '\n    - **Severity:** minor\n    - x'\n|a link reference definition in finding G-050
+ROWS
+  # The narrowed check is judged after the heading on a line has opened or
+  # closed a finding (round 17): a Finding heading carrying raw HTML is refused
+  # under the finding it opens, the first one of a round included, and a
+  # section heading that closes a finding is outside it.
+  for l in C en_US.UTF-8; do
+    record_round 1 CHALLENGED 1 0 '### Finding G-050 <b>x</b>' dup-binding new '- **Severity:** data-loss' > "$report"
+    run_rc 3 record_line_vf "$l" "$report" "$spec"
+    assert_contains "$OUT" 'raw HTML outside a code span in finding G-050' \
+      "AC-012: the first Finding heading of a round carried raw HTML under LANG=$l (round 17)"
+    record_round 1 CHALLENGED 2 0 '### Finding G-050' dup-binding new '- **Severity:** data-loss' |
+      awk -v t="### Finding G-051 <b>x</b>\n- **Class:** dup-binding\n- **Status:** new\n- **Prior:** none\n- **Severity:** data-loss\n- **Scenario:** a recorded trigger\n- **Where:** scripts/run.sh:9\n- **Reproduced:** concrete trigger at that site\n- **Root cause:** implementation-error\n- **Blocks:** AC-012\n- **Wrong behavior:** observed versus required\n- **Class-wide fix:** read or refuse every record line\n" 'index($0, "### Held up") == 1 {printf "%s", t} {print}' > "$report"
+    run_rc 3 record_line_vf "$l" "$report" "$spec"
+    assert_contains "$OUT" 'raw HTML outside a code span in finding G-051' \
+      "AC-012: a later Finding heading carrying raw HTML was not refused under the finding it opens under LANG=$l (round 17)"
+    assert_not_contains "$OUT" 'in finding G-050' \
+      "AC-012: a later Finding heading carrying raw HTML was refused under the finding it closes under LANG=$l (round 17)"
+    record_round 1 CHALLENGED 1 0 '### Finding G-050' dup-binding new '- **Severity:** data-loss' |
+      awk 'index($0, "### Held up") == 1 {print "### Notes <b>x</b>"; print "A note."} {print}' > "$report"
+    run_rc 0 record_line_vf "$l" "$report" "$spec"
+    assert_not_contains "$OUT" 'report recovery' \
+      "AC-012: a section heading that closes a finding was refused as raw HTML inside it under LANG=$l (round 17)"
+  done
+  # A candidate is settled on what opens at or before the first word of each of
+  # its readings (round 17, O-023): one bracket quoted in a code span above a
+  # long run keeps no later line re-read, so a 400-line Reproduced field parses
+  # in seconds, where the round-17 tree took about 300 s.
+  record_round 1 CHALLENGED 1 0 '### Finding G-050' dup-binding new '- **Severity:** data-loss' |
+    awk -v n=400 'index($0, "- **Reproduced:**") == 1 {print "- **Reproduced:** the opening bracket `[` is quoted in a code span here"; for (i = 0; i < n; i++) printf "  - step %d: ran `vf_reports x` against [the copy](https://x.example/%d) and saw *exit 0* with `rc=%d` here, fine\n", i, i, i; next} {print}' > "$report"
+  t0=$SECONDS
+  run_rc 0 record_line_vf C "$report" "$spec"
+  assert_not_contains "$OUT" 'report recovery' 'AC-012: a 400-line run under a bracket quoted in a code span was refused (round 17, O-023)'
+  (( SECONDS - t0 < 60 )) || t_fail "AC-012: a 400-line run under a bracket quoted in a code span took $((SECONDS - t0)) s, not under 60 s (round 17, O-023)"
+@@END
+@@OLD
+a-span-tag-after-a-lone-backtick-paragraph|### Finding G-042|\nNote `a\n\nb` <b>` c\n\n
+ROWS
+@@NEW
+a-span-tag-after-a-lone-backtick-paragraph|### Finding G-042|\nNote `a\n\nb` <b>` c\n\n
+a-quoted-destination-member|### Finding G-042|  - The form `` [x](u`v)<br>Severity: data-loss, tick: `. `` stays quoted.\n
+a-quoted-autolink-member|### Finding G-042|  - The form `` Note <1`@a.b><pre>Severity: data-loss</pre>` `` stays quoted.\n
+a-link-title-then-code|### Finding G-042|  - See [the doc](u "a title") and `code` after it.\n
+a-reference-links|### Finding G-042|  - See [the doc][ref] and [x][] here.\n
+a-lt-before-a-space|### Finding G-042|  - It takes < 30 s and > 2 s.\n
+a-wrapped-link-at-line-start|### Finding G-042|\n[a note that\nwraps](u) here.\n\n
+a-escaped-bracket-at-line-start|### Finding G-042|\n\\[a]: is not a definition here.\n\n
+a-column-zero-fence|### Finding G-042|\n```text\nplain\n```\n\n
+a-task-checkboxes|### Finding G-042|  - [x] done\n  - [ ] open\n
+ROWS
+@@END
+@@OLD
+  # seven or eight marks, which ends no run; and an image split after a
+  # backtick line whose info string holds a backtick, which the tracker fences
+  # and a renderer does not, since a run never ends at a fenced line.
+@@NEW
+  # seven or eight marks, which ends no run; and an image split after a
+  # backtick line whose info string holds a backtick, which the tracker fences
+  # and a renderer does not, since a run never ends at a fenced line. Round 17's
+  # members follow (O-018 reopened, O-024): inside a finding the grammar is
+  # narrowed further, so a `<` that may open an autolink (a digit or a symbol an
+  # email address may begin with), an inline link's destination or title, or a
+  # full reference link's label, holding a backtick or not ending on its line,
+  # a code fence that may be inside a list item, and a link reference
+  # definition, its label on one line or across lines, are each refused by
+  # name; so are the stated consequences (`c <= d`, a fence indented under a
+  # list item, a definition line).
+@@END
+@@OLD
+  local spec report l tag body want heading sevs r1 low
+
+@@NEW
+  local spec report l tag body want heading sevs r1 low tail t0
+
+@@END

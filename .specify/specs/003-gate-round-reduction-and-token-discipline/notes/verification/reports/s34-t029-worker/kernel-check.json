@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "bash",
+    "-c",
+    "HUB_DIR=\"$PWD\"; . scripts/lib.sh; . scripts/verification-lib.sh; vf_capture_check \"$1\" \"$2\" \"\" integrity && vf_task_capture_matches \"$3\" T029 \"$1/notes/captures/$2\"",
+    "_",
+    ".specify/specs/003-gate-round-reduction-and-token-discipline",
+    "CAP-817-8hIfCR",
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s34-t029-worker/current-bindings.nul"
+  ],
+  "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+  "start": "2026-10-28T09:38:08.929289+00:00",
+  "end": "2026-10-28T09:38:10.907416+00:00",
+  "exit": 0
+}

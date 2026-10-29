@@ -1,0 +1,59 @@
+{
+  "scope": "Only one owned npm stub ran; this PATH was never used by an analyzer probe.",
+  "total": 2,
+  "passed": 2,
+  "results": [
+    {
+      "command": "npm 2&>/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-quality-review-r4-r9dk0a_3/numeric-word.out test typecheck.txt",
+      "argv": [
+        "/bin/bash",
+        "-c",
+        "npm 2&>/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-quality-review-r4-r9dk0a_3/numeric-word.out test typecheck.txt"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "PATH": "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-quality-review-r4-r9dk0a_3/fd-owned-bin:/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "actualArgv": [
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-quality-review-r4-r9dk0a_3/fd-owned-bin/npm",
+        "2",
+        "test",
+        "typecheck.txt"
+      ],
+      "expectedArgv": [
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-quality-review-r4-r9dk0a_3/fd-owned-bin/npm",
+        "2",
+        "test",
+        "typecheck.txt"
+      ],
+      "rawNulHex": "2f7661722f666f6c646572732f71702f3832783573676731305f7a3731397a39637735626a37316830303030676e2f542f7333332d6f3033342d7175616c6974792d7265766965772d72342d7239646b30615f332f66642d6f776e65642d62696e2f6e706d003200746573740074797065636865636b2e74787400",
+      "passed": true
+    },
+    {
+      "command": "npm 2>/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-quality-review-r4-r9dk0a_3/descriptor.out test typecheck.txt",
+      "argv": [
+        "/bin/bash",
+        "-c",
+        "npm 2>/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-quality-review-r4-r9dk0a_3/descriptor.out test typecheck.txt"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "PATH": "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-quality-review-r4-r9dk0a_3/fd-owned-bin:/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "actualArgv": [
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-quality-review-r4-r9dk0a_3/fd-owned-bin/npm",
+        "test",
+        "typecheck.txt"
+      ],
+      "expectedArgv": [
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-quality-review-r4-r9dk0a_3/fd-owned-bin/npm",
+        "test",
+        "typecheck.txt"
+      ],
+      "rawNulHex": "2f7661722f666f6c646572732f71702f3832783573676731305f7a3731397a39637735626a37316830303030676e2f542f7333332d6f3033342d7175616c6974792d7265766965772d72342d7239646b30615f332f66642d6f776e65642d62696e2f6e706d00746573740074797065636865636b2e74787400",
+      "passed": true
+    }
+  ]
+}

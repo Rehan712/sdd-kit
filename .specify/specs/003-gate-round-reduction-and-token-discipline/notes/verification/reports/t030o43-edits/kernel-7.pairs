@@ -1,0 +1,157 @@
+@@OLD
+# same from either line; a name (an artifact name, an Agent path) is a token
+# that ends at any whitespace, so it is read from the mapped line.
+@@NEW
+# same from either line; a name (an artifact name, an Agent path) is a token
+# that ends at any whitespace, so it is read from the mapped line. The one
+# value outside the rule is the analyzer's umbrella `[repo:]` tag, read from
+# the mapped line in a pass that runs for umbrella specs only (recorded
+# extent, T030o43 review 4).
+@@END
+@@OLD
+    # The pass reads by the canonical finding's own field grammar, keyed on
+    # the lines that carry a record rather than on a heading it might not see
+    # (T030o43 reviews 1 to 3). A heading is an ATX heading (up to three
+    # spaces, a run of `#`, then a space, a tab or the end); every heading
+    # closes the finding before it, and one whose first word is `Finding` in
+    # any case and whose second is a finding ID opens one, a title allowed
+    # after. A line not read as a heading whose text, after leading
+    # whitespace or invisible characters, is a `#` run and the word Finding
+    # is refused by name, so a finding's fields cannot fall into the one
+    # above it (R3-F3). A field is decided by its label (R3-F2): a line whose
+    # first word, after indentation, a bullet or ordered-list marker and
+    # emphasis, is Class or Severity in any case, and which is either an
+    # emphasized label or not continued by a letter, digit or hyphen. Inside
+    # a finding such a line must be written `- **Class:**` or
+    # `- **Severity:**` at any indentation, as the canonical parser reads it,
+    # appear once, and carry a value of its grammar, which is the text after
+    # that label and nothing further (R3-F1). Outside any finding the written
+    # spelling is refused, and any other such line is prose until a finding
+    # ID appears after the last heading, because only a finding's record can
+    # carry a Class or a tier (R3-F5). A finding with no Class, a field or ID
+    # the grammar cannot read and quoting left open at the end are each
+    # refused by name, so no spelling loses a finding. A byte-order mark on
+    # the first line is not part of it.
+    awk "$_VF_AWK_TEXT"'
+      function bad(why) {printf "manifest line %d: %s: %s\n", FNR, why, vf_original > "/dev/stderr"; failed=1}
+      function flushm() {
+        if(id!="" && cls=="") bad("finding " id " has no readable Class")
+        if(id!="" && cls!="") print id ":" cls ":" sev
+        id=""; cls=""; sev=""; classes=0; severities=0
+      }
+      function value(s, label) {sub("^[ ]*-[[:space:]]+[*][*]" label ":[*][*]", "", s); gsub(/^[[:space:]]+|[[:space:]]+$/, "", s); return s}
+      function fieldname(s,   t, w, emph) {
+        t=s; sub(/^[[:space:]]+/, "", t)
+        if (t ~ /^([-*+]|[0-9]+[.)])[[:space:]]/) sub(/^([-*+]|[0-9]+[.)])[[:space:]]+/, "", t)
+        emph=(t ~ /^[*_]/); sub(/^[*_]+/, "", t)
+        if (!match(t, /^[A-Za-z]+/)) return ""
+        w=tolower(substr(t, 1, RLENGTH)); if (w != "class" && w != "severity") return ""
+        t=substr(t, RLENGTH + 1)
+        if (emph && t ~ /^[*_]/) return w
+        sub(/^[*_[:space:]]+/, "", t)
+        return (t ~ /^[A-Za-z0-9-]/) ? "" : w
+      }
+      FNR == 1 {sub(/^\357\273\277/, "")}
+      vf_quoted($0) {next}
+      /^ ? ? ?#+([ \t]|$)/ {
+        flushm(); heading=$0; sub(/^ +/, "", heading); split(heading, word, /[[:space:]]+/)
+        if (tolower(word[2]) == "finding" && word[3] ~ /^[A-Za-z][A-Za-z0-9]*-[0-9]/) {
+          if (word[3] ~ /^[A-Z][A-Z0-9]*-[0-9]+$/) id=word[3]
+          else bad("a Finding heading whose ID this grammar cannot read")
+        }
+        idseen=(heading ~ /[A-Za-z][A-Za-z0-9]*-[0-9]/)
+        next
+      }
+@@NEW
+    # The pass reads by the canonical finding's own field grammar, keyed on
+    # the lines that carry a record rather than on a heading it might not see
+    # (T030o43 reviews 1 to 4). A heading is an ATX heading (up to three
+    # spaces, a run of `#`, then a space, a tab or the end); every heading
+    # closes the finding before it, and one whose first word is `Finding` in
+    # any case and whose second is a finding ID opens one, a title allowed
+    # after. A line not read as a heading whose text, after leading
+    # whitespace or invisible characters, is a `#` run and the word Finding
+    # is refused by name, so a finding's fields cannot fall into the one
+    # above it (R3-F3). A field is decided by its label (R3-F2, R4-F2): a line
+    # whose first word, after any run of characters that are not letters or
+    # digits (indentation, any list marker, emphasis), ordered-list numbers
+    # and task checkboxes, is Class or Severity in any case, and which is an
+    # emphasized label (the emphasis closes right after the word, or the
+    # emphasized span ends in a colon inside or right after it) or is not
+    # continued by a letter, digit or hyphen. Inside a finding such a line
+    # must be a dash, whitespace and `**Class:**` or `**Severity:**`, at any
+    # indentation, appear once, and carry a value of its grammar, which is the
+    # text after that label and nothing further (R3-F1); anything else is
+    # refused by name. Outside any finding that written spelling is refused,
+    # and any other such line is prose only while nothing since the last
+    # heading can hold a finding's record: a finding ID on the heading or a
+    # line, a heading whose second word is Finding, or a heading deeper than
+    # the Finding heading it follows, which the canonical grammar reads as
+    # part of that finding (R3-F5, R4-F1). A finding with no Class, a field or
+    # ID the grammar cannot read, quoting left open at the end, and a manifest
+    # from which no finding is read (R4-F4) are each refused by name. A
+    # finding whose opening line is no heading at all (a setext heading, raw
+    # HTML, a bold line, a heading inside a list item) is recorded extent. A
+    # byte-order mark on the first line is not part of it.
+    awk "$_VF_AWK_TEXT"'
+      function bad(why) {printf "manifest line %d: %s: %s\n", FNR, why, vf_original > "/dev/stderr"; failed=1}
+      function flushm() {
+        if(id!="" && cls=="") bad("finding " id " has no readable Class")
+        if(id!="" && cls!="") {print id ":" cls ":" sev; recorded++}
+        id=""; cls=""; sev=""; classes=0; severities=0
+      }
+      function value(s, label) {sub("^[ ]*-[[:space:]]+[*][*]" label ":[*][*]", "", s); gsub(/^[[:space:]]+|[[:space:]]+$/, "", s); return s}
+      function fieldname(s,   t, w, emph, lead, span, rest) {
+        t=s; lead=""
+        while (t ~ /^([^A-Za-z0-9]|[0-9]+[.)]|\[[ xX]\])/) {
+          if (match(t, /^([0-9]+[.)]|\[[ xX]\])/)) {lead=lead substr(t, 1, RLENGTH); t=substr(t, RLENGTH + 1)}
+          else {lead=lead substr(t, 1, 1); t=substr(t, 2)}
+        }
+        emph=(lead ~ /[*_]$/)
+        if (!match(t, /^[A-Za-z]+/)) return ""
+        w=tolower(substr(t, 1, RLENGTH)); if (w != "class" && w != "severity") return ""
+        t=substr(t, RLENGTH + 1)
+        if (emph && t ~ /^[*_]/) return w
+        if (emph && t !~ /^[A-Za-z0-9-]/) {
+          span=t; sub(/[*_].*$/, "", span)
+          if (span ~ /:[[:space:]]*$/) return w
+          rest=substr(t, length(span) + 1)
+          if (rest ~ /^[*_]/) {sub(/^[*_]+/, "", rest); if (rest ~ /^:/) return w}
+        }
+        sub(/^[*_[:space:]]+/, "", t)
+        return (t ~ /^[A-Za-z0-9-]/) ? "" : w
+      }
+      FNR == 1 {sub(/^\357\273\277/, "")}
+      vf_quoted($0) {next}
+      /^ ? ? ?#+([ \t]|$)/ {
+        flushm(); heading=$0; sub(/^ +/, "", heading); split(heading, word, /[[:space:]]+/)
+        hl=match(heading, /[^#]/); hl=(hl ? hl - 1 : length(heading))
+        if (tolower(word[2]) == "finding" && word[3] ~ /^[A-Za-z][A-Za-z0-9]*-[0-9]/) {
+          if (word[3] ~ /^[A-Z][A-Z0-9]*-[0-9]+$/) {id=word[3]; flevel=hl}
+          else bad("a Finding heading whose ID this grammar cannot read")
+        } else if (flevel && hl <= flevel) flevel=0
+        idseen=(heading ~ /[A-Za-z][A-Za-z0-9]*-[0-9]/) || tolower(word[2]) == "finding" || (flevel && hl > flevel)
+        next
+      }
+@@END
+@@OLD
+      END {
+        flushm()
+        if (fenced) bad("a code fence is left open")
+        if (commented) bad("an HTML comment is left open")
+        if (rawkind) bad("a raw HTML block is left open")
+        if (failed) exit 3
+      }
+@@NEW
+      END {
+        flushm()
+        if (fenced) bad("a code fence is left open")
+        if (commented) bad("an HTML comment is left open")
+        if (rawkind) bad("a raw HTML block is left open")
+        # A declared manifest exists to vouch for findings, so one from which
+        # the pass reads none is refused, never read as a record of nothing
+        # (T030o43 review 4, R4-F4).
+        if (!recorded && !failed) {printf "manifest: records no finding this grammar can read\n" > "/dev/stderr"; failed=1}
+        if (failed) exit 3
+      }
+@@END

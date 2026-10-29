@@ -1,0 +1,7 @@
+Round 22 opponent report persisted 2026-10-17T18:22:41Z by user decision (T3 Code session, 2026-10-17).
+The reviewer (agent a3c6b3cd674b1fe95, CLI session c5adf68d-82e5-49c7-bd6f-9187eede9bcb) finished its block in its work dir
+(block.md -> block-final.md, timestamp 2026-10-17T15:15:47Z) and was terminated by the weekly usage limit at 15:15:49Z,
+before its SubagentHandback. So there is no hand-back and no reviewer-stated sha256; the report was copied byte-exact from
+/private/tmp/opp22/block-final.md (sha256 106c04377eb7b2017769681a05a7ed834d43adbef90d1186ab58568e82348f9a) with
+r22-persist-report.py's block checks (heading, end marker + one newline, no CR), plus no placeholder left.
+block.md differs from block-final.md only in the Timestamp line (TIMESTAMP_PLACEHOLDER).

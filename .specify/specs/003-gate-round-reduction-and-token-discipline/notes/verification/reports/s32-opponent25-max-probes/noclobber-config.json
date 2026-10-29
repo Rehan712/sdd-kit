@@ -1,0 +1,27 @@
+{
+  "argv": [
+    "/bin/bash",
+    "-c",
+    ". \"$1\"; vf_config \"$2\" \"$3\" \"$4\"",
+    "_",
+    "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/verification-lib.sh",
+    "/private/tmp/sdd-opponent25-8elh3grt/noclobber-stack.yml",
+    "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature/tasks.md",
+    "/private/tmp/sdd-opponent25-8elh3grt/noclobber-config"
+  ],
+  "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+  "exit": 0,
+  "stdout": "",
+  "stderr": "",
+  "commands": [
+    "gate_checks",
+    "",
+    "grep>|out.txt AC-001 README.md",
+    "gate_checks",
+    "",
+    "./tools/rg>|out.txt AC-001 README.md",
+    "gate_checks",
+    "",
+    "tests/diff>|out.txt old new"
+  ]
+}

@@ -1,0 +1,366 @@
+diff --git a/.specify/specs/003-gate-round-reduction-and-token-discipline/STATUS.md b/.specify/specs/003-gate-round-reduction-and-token-discipline/STATUS.md
+index b2663e7..dd17176 100644
+--- a/.specify/specs/003-gate-round-reduction-and-token-discipline/STATUS.md
++++ b/.specify/specs/003-gate-round-reduction-and-token-discipline/STATUS.md
+@@ -620,6 +620,20 @@ defects already reproduced with file:line
+ 
+ - 2026-10-13 — The T030o51, T030o52 and T030o53 repair is implemented as recorded and proven; Decisions are FROZEN from this entry through the capture and acceptance of T030o51, T030o52 and T030o53, the floor, and round 18's completion and tally, and results go to the neutral STATUS sections. The four pairs were applied, each block exactly once and after a hash check of the four files against `r18-edits/pre-apply.sha256` (`notes/verification/reports/r18-apply-1.{sh,log,rc}`, exit 0: `kernel-1`, `vc-1`, `tgc-1`, `tsg-1`, post-apply hashes `r18-edits/post-apply-1.sha256`), as measured and judged (`r18-measure`, `r18-fixtures-judge`). Dev runs on that tree, each in a standalone copy with a `TMPDIR` ending in `/`: `r18-dev1-{full,full-locale}.{log,rc,start,end}`, both exit 0, the full suite at 147/147 over 15 suites plus ShellCheck plainly and under `LANG=en_US.UTF-8` with every `LC_*` removed. Writing matrix v6 found guards of the new code that no row isolated: an exploratory probe in standalone copies (`r18-discover.sh` with the 75 candidate mutants of `r18-discover-mutants.py`, `r18-discover-{a,b,c}.{log,rc,start,end}`, exit 0 each) found 41 killed by existing rows, nine judged equivalent by session 19, and 25 surviving every row, of the destination and title reader, the label reader, the fence after a tab, two over-corrections of the definition reader, the narrowed check at a deeper heading and a report title, and the settled test's head after an ordered-list number and after a br; a 76th mutant, S10, is v5's D13 with the inert reading's line, which no row killed either. Rows isolating them were built from the suite's exact text (`r18-edits/tgc-2.pairs`, `r18-edits/build-fixtures-2.py`) and judged in standalone copies before they were applied (`r18-fixtures-judge-2.sh`). Its run 2 (session 19; `r18-fixtures-judge-2-run2.*` with a note) found the rows of S03, S09 and S10 sealing under their own mutants, because each completed its image on the line after the one that opened it: `vf_para_label` judges a candidate only from the next line of its run on and reads its label before asking `vf_settled`, so a mutant of the settled test reaches a verdict only through a line between the opening and the completing one; with one line inside each image, each row is refused on the repaired kernel and seals under exactly its own mutant, and both renderers show the tier first after the image (`r18-rows-probe.{sh,cases,log,rc}`, `r18-rows-render.{sh,log,rc}`). Its run 3 (`-run3.*` with a note) passed, and before the pairs were applied the nine equivalents were checked against the kernel: R03 (the block-quote marker taken out of the definition reader's prefix) lets a link reference definition after `> ` inside a finding pass, which the narrowed grammar refuses by name and which in markdown-it swallows lazy continuation lines, a field line among them; S07 and S08 (the inert reading's own bracket test, and the bracket tests of its two rendered readings, dropped) drop, outside every finding after a finding ID, a candidate whose image alt begins with a code span holding `]`, completed with a title across lines or after an inline tag, so the tier the completed image leaves first is not read; each was given a row refused on the repaired kernel and under the other eight candidates and sealing under exactly its own mutant (`r18-rows-probe-2.*`, `r18-rows-render-2.*`). Run 4, the judge of record (`r18-fixtures-judge-2-{0,1,2}.{log,rc,start,end}`, exit 0 each): the repaired kernel passes both changed functions, and each of 29 mutants fails on every row named for it. The pairs were applied after a hash check (`r18-apply-2.{sh,log,rc}`, exit 0, post-apply hashes `r18-edits/post-apply-2.sha256`, its delta `r18-session-2.diff`, session 19's apply kept as `r18-session-1.diff`). Dev runs on that tree: `r18-dev2-{full,full-locale}.{log,rc,start,end}`, both exit 0, the full suite at 147/147 over 15 suites plus ShellCheck plainly and under `LANG=en_US.UTF-8` with every `LC_*` removed, each copy and the live status outside `notes/verification/` unchanged. Matrix v6 (`r18-mutations.sh`, 303 rows, built by `r18-mutations-gen.py` from v5, `r17-mutations.sh`, and the discovery mutants) re-targets the v5 rows whose literals the repair rewrote (G06, G06e and G12 on the reason chain, G07 as discovery A08, G13 to G19 on each pass's main narrowed check, E09, E09c and P21 on the resets that now clear the carried label, D05 as S01, D06 as S06, D07, D12 to D15 and D19 on the settled test, of which D12, D13, D14 and D19 are kills now) and adds a row for every other discovery mutant, named V and its discovery id. Its first dry run (`r18-mutations-dry-run1.{log,rc,note}`, rc 1) found two carried rows whose literals the repair moved, L15 (its line now also in `vf_cm_dest`) and K05 (its anchor gained the narrowed check at a heading), re-targeted in the generator, and the next dry run exited 0 (`-dry-run2.{log,rc}`). The probe of the 100 new and re-targeted rows (`r18-mutations-probe-shard{0,1,2}.{log,rc,start,end}`, `r18-mutations-probe.ids`, exit 0 each) killed every kill and over-correction row with its exact diagnostic, kept the ten equivalents among them, and passed all eight baselines. The matrix's run 1 on that tree (`r18-mutations-run1-shard{0,1,2}.*` with `r18-mutations-run1.note`; shard 0 exit 0, shards 1 and 2 rc 1; the script it ran kept as `r18-mutations-v6-run1.sh`) behaved as recorded in every row but three carried v5 rows of the settled test, which reading brackets up to each reading's first word changed: D04 (the open-code-span condition) survived its row, whose open image bracket the head test now keeps, and is not equivalent, since a code span left open across lines after an entity, holding an image, puts no bracket before any reading's first word, so the open span alone keeps that candidate, and once the span closes the inert reading's first word is the tier (`r18-rows-probe-3.*`, `r18-rows-render-3.*`); that row was added in both passes (`r18-edits/tgc-3.pairs`, `build-fixtures-3.py`), judged first (`r18-fixtures-judge-3.{sh,log,rc,start,end}`, exit 0: the repaired kernel passes both changed functions, and D04 fails on both new rows) and applied after a hash check (`r18-apply-3.{sh,log,rc}`, exit 0, `r18-edits/post-apply-3.sha256`, its delta `r18-session-3.diff`); the session's whole delta is `r18-session.diff` (four files), which reverses to `r18-edits/pre-apply.sha256`, as each apply's delta reverses to the hashes before it. D02 (a settled candidate never dropped), argued equivalent in v5 because only the cost changes, is a kill now, since the 400-line timing row T030o53 added bounds that cost: its judge had run over ten minutes when the invoker stopped the one awk parsing that row, which then failed at 624 s; v6 runs every judge in its own process group under a 900 s watchdog that stops it whole and records the diagnostic the D02 row names. D11 (the escape step of `vf_settled_brackets`) is an argued equivalent now: the rendered readings take escaped brackets out before they pair brackets, so a bracket only an escaped one would close stays open before the first word there (`r18-rows-probe-4.*`). Dev runs on the final tree: `r18-dev3-{full,full-locale}.{log,rc,start,end}`, both exit 0, the full suite at 147/147 over 15 suites plus ShellCheck plainly and under `LANG=en_US.UTF-8` with every `LC_*` removed, each copy and the live status outside `notes/verification/` unchanged. The regenerated matrix dry-ran at exit 0 (`r18-mutations-dry.{log,rc}`) and its probe of D02, D04 and D11 with the baselines (`r18-mutations-probe2.{log,rc,start,end}`) exited 0: D02 stopped by the watchdog and killed with its diagnostic, D04 killed by the new row with its exact diagnostic, D11 surviving as argued, and all eight baselines passing. The matrix of record ran in three shards, detached under `nohup` (`r18-mutations-shard{0,1,2}.{log,rc,start,end}`, exit 0 each, 21:24:26Z to 22:40:49Z), every one of the 303 rows exactly once: 213 kills and 57 over-corrections killed, each with its exact diagnostic (D02 by the watchdog), 33 argued equivalents surviving (v5's L05, L19, R03b, Q08, B12, S06, P18 to P21, X11, B05, B07, B14, B14c, B17, G17, G18, Y02, Y10, D15 to D18, D20 and D21; G07 as discovery A08; D11; and VB07, VH08, VR10, VS04 and VS05, each argued beside its row), 8 baselines passing and every restore byte-identical. Next, in order: the freeze point, the capture of record (`spec-run.sh <spec> T030o51 --from-task --no-tick --summary`), the returns and `spec-gate.sh accept` for T030o51, T030o52 and T030o53 on that capture, one fresh floor on AC, the reservation of round 18 under the recorded 2026-10-09T09:41:41Z waiver, the independent opponent, completion, tally, the final audit, then the report to the user under the standing instruction.
+ 
++- 2026-10-14 — Opponent round 18 is recorded here now that this batch moves the source anyway: CHALLENGED, 2 blocking + 1 minor, report digest `aeb8c870ffbcbf9fedf422f5f33bb7ac4950cf9443437cfca6bc5e5e44513932`, against source `567cb6e0…` and FLOOR-OgYGoP, reserved 2026-10-14T12:22:22Z, report timestamp 13:22:23Z, with `--complete` and `tally` both exit 0 (`notes/verification/reports/r18-complete.{log,rc,time}`, 16:53:44Z to 17:08:04Z, `r18-tally.{log,rc}`). FLOOR-OgYGoP sealed at rc 0 on the frozen source (`r18-floor-1.*`, 21 executed and 65 reused, 07:02:57Z to 11:51:10Z) and validated current (`r18-floor-validate.*`). Rounds 1-17 kept their sealed digests, and the worktree states recorded before reservation, at reservation and at return are byte-identical (`r18-state-{prereserve,reserved,returned}.*`, 5372 paths). Tally: opponent=18, reality-check=1, blocking=36, minor=15, locations=496, unclassified=0, observations=72, distinct IDs=25, reopened=32, severity-downgrades=5, captures=649. The reviewer wrote its report itself, stopped on a session usage limit before returning and was resumed by message after the reset; the block it returned is byte-identical to the file (`r18-persist.{log,rc}`; provenance `opponent-round18.note`). It credited T030o51 as holding for every construct CommonMark 0.31.2 binds before a code span, T030o52 for every list-marker form it tried, T030o53's soundness and the folded minor, and found no positive row asserting an attack. It reopened O-018 (wrong-result, plan-gap, blocks REQ-011, AC-009, AC-012): a backtick inside a GFM extended autolink, or inside a shortcut, collapsed or image reference's label, which marked binds before any code span, pairs, to the gate, with a later backtick into a code span, so a live `br` or `pre` tag after it reads as inside a span and a data-loss tier marked shows seals a CLEARED round at minor, in both passes and both locales, on CUR and PRE. It established O-025 (new, wrong-result, plan-gap, blocks REQ-011, AC-009, AC-012): a GFM table inside a finding shows a data-loss tier as a cell's first text in both renderers, which the label reader, never splitting a line at a pipe, does not read. It reopened O-023 (degraded, plan-gap): T030o53's head-only rule leaves a candidate led by a link, an image or a code span holding a bracket unsettled (29.4 s at 100 lines, 373 s at 200). Final audit: `r18-final-audit.{sh,log,rc}`, exit 0, 59 PASS. The outcome was held out of this log until now, so that FLOOR-OgYGoP and the round-18 observation stayed current for `567cb6e0…` through completion.
++
++- 2026-10-14 — User decision of 2026-10-14 (session 21), after round 18 was reported and the invoker stopped to ask, as the standing instruction of 2026-10-07 requires on a choice between fixes with trade-offs, each option chosen as the invoker recommended it: O-018, narrow further (the reviewer's M1), over deriving the refused constructs from what each renderer binds before a code span; O-025, refuse tables (the reviewer's M2), over reading the label after every unescaped pipe; O-023, settle on either test (the reviewer's M3). The user then asked: "with which option the implementation would be fast i want to finish everything quickly. i have been working with this spec for past 4 weeks i think. Give me best option and tell me which things i can waive out to finish work with the spec", and selected "Drop extra proof steps, Authorize CI + reality-check 2, Defer the retro (T034), Choose all that would be recommended by you", the last covering the spec revision the invoker recommended. Decided: (1) for this repair the invoker's extra proof steps are not run (the mutation matrix, two-direction fixture judging, a separate measurement script, repeated dev runs); kept are one dev run in a standalone copy, one capture of record, the returns and `spec-gate.sh accept`, the floor and the gate rounds; (2) REQ-011 is revised (entry below); (3) a hosted CI run on the current source by the established snapshot method (a temporary branch and PR closed unmerged, the active gh account never switched) and reality-check round 2, which needs no waiver (rounds 1-3 need no authorization), are authorized, both after round 19 and on its floor while the source is unchanged, so one floor serves both gates; (4) the retro (T034) is deferred to a post-merge follow-up. Order: (a) reproduce, done (entry below); (b) one dev run of the repair in a standalone copy, done (entry below); (c) this batch, before any live code: the outcome, this decision, the reproduction, the spec revision, the task blocks and the round-19 waiver; (d) the repair applied live, the freeze point, one capture of record, the returns and accept; (e) one fresh floor on AC power; (f) round 19, complete, tally, the final audit, the report; (g) on CLEARED, the hosted CI run and reality-check round 2 on the same floor, then the user is asked for the guarded PR. Not authorized: shipped 002's locale-dependent reset parsing; the open-extent follow-up task; commits to the spec branch; the guarded PR and merge before the user is asked; any bypass. Cost stated rather than hidden: dropping the extra proof steps trades the invoker's independent proof that every new row kills its bug for time; round 19 checks the repair independently.
++
++- 2026-10-14 — Round 18's findings reproduced independently BEFORE any repair, in standalone copies built from the live enumeration with a `TMPDIR` ending in `/`, from the reviewer's own cases in its transcript (`notes/verification/reports/r19-repro.{sh,log,rc,time}`, exit 0, 196 PASS, 0 FAIL, 17:10:12Z to 17:18:12Z, the live status outside `notes/verification/` unchanged): the seven O-018 members and both O-025 table spellings seal in silence on CUR (`r18-edits/post-apply-3`) in both passes and both locales, and on PRE (CUR with `r18-session.diff` reversed) too; a URL member, a reference member and the table each seal a CLEARED round 1 end to end in both passes and both locales, while the `br` control is refused at exit 3 by name; the one-column table and a raw `td` stay refused; four positives parse; `vf_settled` leaves the link-, image-, ordered-item- and bracketed-code-span-led texts unsettled on CUR and settles them on PRE, and the reverse for round 17's shape; the link-led run took 2.89 s at 50 lines and 29.86 s at 100 on CUR, 0.09 s at 100 and 0.29 s at 400 on PRE.
++
++- 2026-10-14 — Spec revision of REQ-011, the user's decision above: gate reports are trusted-author input, written by the kit's own gate agents and read by people as well as by the tally, so a rendering divergence in a report (markdown a renderer shows differently from how the documented report grammar reads it, which that grammar neither reads nor refuses) is degraded, hence minor, and is recorded for a follow-up spec; a report written in the documented grammar that the gate misreads still blocks as wrong-result. The contract template says the same. Stated plainly: of the 30 findings in class gate-report-schema-validation, 24 are recurrences, and from round 15 to round 18 each round found another construct a renderer reads differently; the user made this revision to finish the spec, on the threat model it states, after the repair in this batch closes every divergence found so far. It applies from round 19 on and re-grades no sealed round.
++
++- 2026-10-14 — T030o54 (O-018), T030o55 (O-025) and T030o56 (O-023) are opened, Backend, binding plan §7's existing registry with no new families exactly as T030o44 to T030o53 do: reports (`tests/test-gate-contracts.sh::test_reports_and_tally`, FM-019, INV-006) and rounds (`tests/test-spec-gate.sh::test_rounds`, FM-016, INV-004), each with the Verify `bash tests/run.sh && bash tests/shellcheck.sh`, so one capture on unchanged source can serve all three acceptances; they are serial, because all three edit the same four files. The kernel change is the reviewer's own MALL mutant (its M1, M2 and M3 together), taken from its transcript with its helper names given kernel names, which the reviewer ran with both changed suites passing (18/18 and 8/8) and every history output byte-identical; it is applied by `notes/verification/reports/r19-edits/apply-code.py` (refusing unless the four files hash as `r18-edits/post-apply-3`), with the rows the task blocks name, and the documents by `r19-edits/apply-docs.py`. A spot check on a standalone copy refused every member by name, parsed every positive, and parsed a 400-line run of link-, image- and code-span-led sub-bullets in 0.32 s. The one dev run, in a standalone copy built from the live enumeration with both scripts applied and a `TMPDIR` ending in `/` (`notes/verification/reports/r19-dev.{sh,log,rc,time}`, 2026-10-14T23:56:48Z to 2026-10-15T00:22:29Z, the live status outside `notes/verification/` unchanged): `tests/run.sh` passed 147/147 and `tests/shellcheck.sh` passed, exit 0.
++
++- 2026-10-15T00:22:50Z — waiver: gate=opponent; round=19; after=18; by=Rehan712; reason=user instructed on 2026-10-07 to repair the findings of a CHALLENGED round and rerun the opponent until all issues are resolved, and on 2026-10-14 chose the round-18 repair and asked to finish the spec quickly, so round 19 assesses the repairs of round 18's O-018, O-025 and O-023 against a fresh floor sealed after those repairs are accepted
++
++- 2026-10-14 — Decisions are FROZEN from this batch through the live apply of T030o54, T030o55 and T030o56, their capture and acceptance, the floor, round 19's completion and tally, and, on CLEARED, the hosted CI run and reality-check round 2 on that floor; results go to STATUS's neutral sections only, so that the floor stays current for both gates.
++
+ ## Open questions / blockers
+ 
+ - [ ] **User decision, 2026-10-14 (session 21), to finish 003 quickly.** The user asked: "with which option the implementation would be fast i want to finish everything quickly. i have been working with this spec for past 4 weeks i think. Give me best option and tell me which things i can waive out to finish work with the spec". The invoker answered that the chosen repair is already the fastest (the reviewer's MALL mutant passed both changed suites and was history-neutral) and offered four items; the user selected "Drop extra proof steps, Authorize CI + reality-check 2, Defer the retro (T034), Choose all that would be recommended by you", the last covering the item the invoker recommended first among the rest. So, approved: (1) drop the invoker's extra proof steps for the round-18 repair (the mutation matrix, two-direction fixture judging, a separate measurement script, repeated dev runs), keeping one capture of record, the returns and `spec-gate.sh accept`, the floor and the gate rounds; (2) a spec revision written before round 19: opponent reports are trusted-author input, so a formatting or rendering trick inside a report that hides a severity from the tally is minor, recorded for a follow-up spec, not blocking; (3) a hosted CI run on the spec branch and reality-check round 2, their authorizations written in the same Decisions batch as the round-19 waiver so one floor serves both gates; (4) the retro (T034) deferred to a post-merge follow-up. NOT yet in Decisions (frozen at `02b9cc4c…`); it goes into the round-18 repair batch.
+diff --git a/.specify/specs/003-gate-round-reduction-and-token-discipline/spec.md b/.specify/specs/003-gate-round-reduction-and-token-discipline/spec.md
+index 71a2e2c..c71f9cc 100644
+--- a/.specify/specs/003-gate-round-reduction-and-token-discipline/spec.md
++++ b/.specify/specs/003-gate-round-reduction-and-token-discipline/spec.md
+@@ -196,7 +196,15 @@ need to judge correctness.
+   blocks as wrong-result. The report keeps `Reproduced:` per finding and
+   `**Blocking:** n · **Minor:** n`. Missing required evidence is handled
+   by the floor/reality-check even if no reproduced behavioral defect exists.
+-  Severity never changes merely to meet a round or cost target.
++  Severity never changes merely to meet a round or cost target. Threat
++  model (the user's revision of 2026-10-14): gate reports are
++  trusted-author input, written by the kit's own gate agents and read
++  by people as well as by the tally, so a rendering divergence in a
++  report (markdown a renderer shows differently from how the documented
++  report grammar reads it, which that grammar neither reads nor
++  refuses) is degraded, hence minor, and is recorded for a follow-up
++  spec; a report written in the documented grammar that the gate
++  misreads still blocks as wrong-result.
+ - **REQ-012 (round cap and report identity):** Before every invocation,
+   `spec-gate.sh round <spec-dir> <opponent|reality-check>` determines the
+   next number from that gate's canonical reports. Both report templates use
+diff --git a/.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md b/.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md
+index 1f21ba6..4b3165c 100644
+--- a/.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md
++++ b/.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md
+@@ -856,6 +856,36 @@ keeps each edit task to at most five files instead of combining unrelated work.
+   - *Notes:* Owns round-17 O-023 (reopened, minor, fails slow), reproduced before repair (`notes/verification/reports/r18-repro.{sh,log,rc,time}`: 41 s at a 200-line run and 300 s at 400 on the T030o50 tree), with the rule measured before adoption (`notes/verification/reports/r18-measure.{sh,log,rc,time}`) and its fixtures judged in both directions (`notes/verification/reports/r18-fixtures-judge.{sh,log,rc,time}`). Serial after T030o52, which edits the same files. No gate round, floor or hosted-CI run is part of this task.
+   - *Evidence:* CAP-634-14RLF3 verified by spec-gate accept; return sha256:0e8a025249f5870cb1a44a8ce6fb40936806e5082bc2d9fa27bbb2f2c1f9707e
+ 
++- [ ] **T030o54** — Narrow the finding grammar further: refuse by name a backtick inside a bracket pair closed on its line or inside a GFM URL literal, outside every code span
++  - *Files:* `scripts/verification-lib.sh`, `templates/verification-contract.md`, `tests/test-gate-contracts.sh`, `tests/test-spec-gate.sh`
++  - *Acceptance:* As the user decided on 2026-10-14 (the round-18 reviewer's M1), inside a finding, in both readers of finding records (the manifest pass, and the canonical pass of a canonical round before its completion marker), a line is refused by name when, outside every code span in some reading, it carries a bracket pair closed on its line whose label holds a backtick run the label does not close (a shortcut, collapsed or image reference's label: `a backtick inside a link destination, title or label`), or a URL literal after `http://`, `https://` or `ftp://` (the scheme ending the text before it) or after `www.`, whose text up to whitespace or `<` holds a backtick (`an autolink outside a code span`): the constructs marked binds before any code span (REQ-011, AC-012). Rows in both passes and both locales for every round-18 member (the four URL spellings and the three reference spellings); positives that parse (a URL literal before a code span, link text holding a closed code span, references with no backtick in their labels, `www.` in prose); and end to end, a URL member and a reference member in the manifest pass and a `www.` member and an image-reference member in the canonical pass, each refused at completion by name.
++  - *Verify kind:* test
++  - *Tests:* `tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-spec-gate.sh::test_rounds`
++  - *Verify:* `bash tests/run.sh && bash tests/shellcheck.sh` → all suites `passed`, exit 0
++  - *Reuse:* local
++  - *Refs:* REQ-011, AC-009, AC-012, FM-016, FM-019, INV-004, INV-006, plan §3.3, §4.3
++  - *Notes:* Owns round-18 O-018 (reopened, blocking); its members predate T030o51. Reproduced before repair (`notes/verification/reports/r19-repro.{sh,log,rc,time}`); the kernel change is the round-18 reviewer's own mutant, taken from its transcript and applied by `notes/verification/reports/r19-edits/apply-code.py`. Under the user's decision of 2026-10-14 the invoker's extra proof steps (the mutation matrix, two-direction fixture judging, a separate measurement script, repeated dev runs) are not run for this repair; one dev run in a standalone copy and the capture of record prove it. T030o54, T030o55 and T030o56 are serial, because all three edit the same four files; one capture of the shared Verify on unchanged source can serve all three acceptances. No gate round, floor or hosted-CI run is part of this task.
++
++- [ ] **T030o55** — Refuse by name inside a finding a line that may be a GFM table delimiter row
++  - *Files:* `scripts/verification-lib.sh`, `templates/verification-contract.md`, `tests/test-gate-contracts.sh`, `tests/test-spec-gate.sh`
++  - *Acceptance:* As the user decided on 2026-10-14 (the round-18 reviewer's M2), inside a finding, in both readers of finding records, a line whose text, spaces and tabs removed, holds a pipe and is a run of hyphen cells with optional colons separated by pipes is refused by name (`a table delimiter row`), since a renderer shows a cell's first text where the label reader, which never splits a line at a pipe, does not look (REQ-011, AC-012). Rows in both passes and both locales for a table and for a table in a list item with alignment colons; positives that parse (pipes in prose and in code spans); and end to end, a table in the manifest pass and a table after the fields of a canonical finding, each refused at completion by name.
++  - *Verify kind:* test
++  - *Tests:* `tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-spec-gate.sh::test_rounds`
++  - *Verify:* `bash tests/run.sh && bash tests/shellcheck.sh` → all suites `passed`, exit 0
++  - *Reuse:* local
++  - *Refs:* REQ-011, AC-009, AC-012, FM-016, FM-019, INV-004, INV-006, plan §3.3, §4.3
++  - *Notes:* Owns round-18 O-025 (new, blocking); its members predate T030o51, the gap dating from the label reader itself. Reproduced before repair (`notes/verification/reports/r19-repro.{sh,log,rc,time}`); the kernel change is the round-18 reviewer's own mutant, taken from its transcript and applied by `notes/verification/reports/r19-edits/apply-code.py`. Under the user's decision of 2026-10-14 the invoker's extra proof steps (the mutation matrix, two-direction fixture judging, a separate measurement script, repeated dev runs) are not run for this repair; one dev run in a standalone copy and the capture of record prove it. T030o54, T030o55 and T030o56 are serial, because all three edit the same four files; one capture of the shared Verify on unchanged source can serve all three acceptances. No gate round, floor or hosted-CI run is part of this task.
++
++- [ ] **T030o56** — Settle a run reader's candidate when its head or its whole text balances
++  - *Files:* `scripts/verification-lib.sh`, `templates/verification-contract.md`, `tests/test-gate-contracts.sh`, `tests/test-spec-gate.sh`
++  - *Acceptance:* As the user decided on 2026-10-14 (the round-18 reviewer's M3), a candidate is settled when its lead is settled and either its head's brackets balance (T030o53's rule) or its whole text's brackets balance with complete destinations (T030o50's rule), each argued sound alone (REQ-011, AC-012). A 400-line Reproduced field of sub-bullets led in turn by a link, an image and a code span holding a bracket parses within 60 s (0.32 s on the candidate; about 30 s at 100 lines on the round-18 tree), and the round-17 400-line row stays within its bound.
++  - *Verify kind:* test
++  - *Tests:* `tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-spec-gate.sh::test_rounds`
++  - *Verify:* `bash tests/run.sh && bash tests/shellcheck.sh` → all suites `passed`, exit 0
++  - *Reuse:* local
++  - *Refs:* REQ-011, AC-009, AC-012, FM-016, FM-019, INV-004, INV-006, plan §3.3, §4.3
++  - *Notes:* Owns round-18 O-023 (reopened, minor, degraded): T030o53's head-only rule left link-led lines unsettled. Reproduced before repair (`notes/verification/reports/r19-repro.{sh,log,rc,time}`); the kernel change is the round-18 reviewer's own mutant, taken from its transcript and applied by `notes/verification/reports/r19-edits/apply-code.py`. Under the user's decision of 2026-10-14 the invoker's extra proof steps (the mutation matrix, two-direction fixture judging, a separate measurement script, repeated dev runs) are not run for this repair; one dev run in a standalone copy and the capture of record prove it. T030o54, T030o55 and T030o56 are serial, because all three edit the same four files; one capture of the shared Verify on unchanged source can serve all three acceptances. No gate round, floor or hosted-CI run is part of this task.
++
+ ## API
+ 
+ - [x] **T025** [hard] — Wire every invoker to deterministic acceptance
+diff --git a/scripts/verification-lib.sh b/scripts/verification-lib.sh
+index 3403c55..c5a27a6 100755
+--- a/scripts/verification-lib.sh
++++ b/scripts/verification-lib.sh
+@@ -511,14 +511,32 @@ function vf_cm_label(s, j,   n, c) {
+   while (j <= n && (c = substr(s, j, 1)) != "]") {if (c == "\\") j++; else if (c == "[") return 0; j++}
+   return (j > n) ? -1 : j + 1
+ }
++function vf_cm_open_tick(L,   b, n, i, j, r, k, c) {
++  b = sprintf("%c", 96); n = length(L); i = 1
++  while (i <= n) {
++    c = substr(L, i, 1)
++    if (c == "\\") {i += 2; continue}
++    if (c != b) {i++; continue}
++    j = i; while (j <= n && substr(L, j, 1) == b) j++
++    r = j - i; k = vf_cm_close(L, j, r); if (!k) return 1; i = k
++  }
++  return 0
++}
++function vf_cm_url(s, j,   n, c) {
++  n = length(s)
++  while (j <= n && (c = substr(s, j, 1)) !~ /[ \t<]/) {if (c == sprintf("%c", 96)) {vf_cm_auto = 1; return}; j++}
++}
+ function vf_cm_scan(s, st,   b, re, n, i, c, j, r, k) {
+-  b = sprintf("%c", 96); re = "[]\\\\<" b "]"; vf_cm_out = vf_cm_auto = vf_cm_link = 0; vf_cm_exits = ""; n = length(s); i = 1
++  b = sprintf("%c", 96); re = "[][\\\\<:wW" b "]"; vf_cm_out = vf_cm_auto = vf_cm_link = 0; vf_cm_exits = ""; n = length(s); i = 1
+   if (vf_cm_ac == "") vf_cm_ac = "[0-9.#$%&*+=^_{|}~" sprintf("%c", 39) b "-]"
+   if (st > 0) {k = vf_cm_close(s, 1, st); if (!k) {vf_cm_exits = " " st; return}; i = k}
+   while (i <= n && match(substr(s, i), re)) {
+     i += RSTART - 1; c = substr(s, i, 1)
+     if (c == "\\") {i += (i < n && vf_cm_punct(substr(s, i + 1, 1))) ? 2 : 1; continue}
+     if (c == "<") {c = substr(s, i + 1, 1); if (c ~ /[A-Za-z\/!?]/) vf_cm_out = 1; else if (c ~ vf_cm_ac) vf_cm_auto = 1; i++; continue}
++    if (c == "[") {k = vf_cm_label(s, i); if (k > 0 && vf_cm_open_tick(substr(s, i + 1, k - i - 2))) vf_cm_link = 1; i++; continue}
++    if (c == ":") {if (substr(s, i, 3) == "://" && tolower(substr(s, 1, i - 1)) ~ /(https?|ftp)$/) vf_cm_url(s, i + 3); i++; continue}
++    if (c == "w" || c == "W") {if (tolower(substr(s, i, 4)) == "www.") vf_cm_url(s, i + 4); i++; continue}
+     if (c == "]") {
+       c = substr(s, i + 1, 1)
+       if (c == "(" || c == "[") {
+@@ -564,7 +582,7 @@ function vf_settled_head(t,   h) {
+   return h substr(t, 1, RLENGTH)
+ }
+ function vf_settled_word(t) {
+-  return vf_settled_lead(t) && vf_settled_brackets(vf_settled_head(t))
++  return vf_settled_lead(t) && (vf_settled_brackets(vf_settled_head(t)) || vf_settled_brackets(t))
+ }
+ function vf_settled_html(s,   p, e, rest) {
+   if (vf_lbl_tag == "") vf_label_html("")
+@@ -662,6 +680,10 @@ function vf_block_start(t,   b) {
+   if (tolower(t) ~ /^<\/?(address|article|aside|base|basefont|blockquote|body|caption|center|col|colgroup|dd|details|dialog|dir|div|dl|dt|fieldset|figcaption|figure|footer|form|frame|frameset|h1|h2|h3|h4|h5|h6|head|header|hr|html|iframe|legend|li|link|main|menu|menuitem|nav|noframes|ol|optgroup|option|p|param|search|section|summary|table|tbody|td|tfoot|th|thead|title|tr|track|ul)([ \t>]|\/>|$)/) return 1
+   return (t ~ /^(\*[ \t]*\*[ \t]*\*[* \t]*|-[ \t]*-[ \t]*-[- \t]*|_[ \t]*_[ \t]*_[_ \t]*)$/)
+ }
++function vf_para_delim(t,   u) {
++  u = t; gsub(/[ \t]/, "", u)
++  return index(u, "|") && u ~ /^\|?:?-+:?(\|:?-+:?)*\|?$/
++}
+ function vf_para_refdef(s, t,   k, n, c) {
+   if (!vf_def_open) {
+     t = s; sub(/^([ \t]|>|([-+*]|[0-9]+[.)])[ \t])*/, "", t)
+@@ -682,6 +704,7 @@ function vf_para(s,   t, q, k, x, i, n, done, ex, f, d) {
+   else if ((k = index(vf_original, "\r")) && k < length(vf_original)) vf_narrow = "a carriage return inside a line"
+   else if (s ~ ("^[ \t]*(([-+*]|[0-9]+[.)])[ \t]+)*(" f "|~~~)") && s !~ ("^(" f "|~~~)")) vf_narrow = "a code fence that may be inside a list item"
+   else if (d) vf_narrow = "a link reference definition"
++  else if (index(t, "|") && vf_para_delim(t)) vf_narrow = "a table delimiter row"
+   n = split(vf_cm_states " 0", x, " "); done = " "; ex = ""
+   for (i = 1; i <= n; i++) {
+     if (index(done, " " x[i] " ")) continue
+diff --git a/templates/verification-contract.md b/templates/verification-contract.md
+index e2ed031..e9fa58f 100644
+--- a/templates/verification-contract.md
++++ b/templates/verification-contract.md
+@@ -383,7 +383,14 @@ grammar is narrowed rather than rendered: a line is refused by name when it
+ carries, outside every code span, raw HTML or an autolink (a `<` followed by
+ a letter, a digit, or a symbol an email address may begin with), or an inline
+ link's destination or title, or a full reference link's label, that holds a
+-backtick or does not end on its line; when it carries a form feed or vertical
++backtick or does not end on its line; a bracket pair closed on its line (a
++shortcut, collapsed or image reference's label) that holds a backtick run it
++does not close, or a URL literal (after `http://`, `https://`, `ftp://` or
++`www.`) whose text up to whitespace or `<` holds a backtick, since a GFM
++renderer binds both before any code span; when it may be a table delimiter
++row (hyphen cells, colons allowed, and at least one pipe), since a renderer
++shows a cell's first text where the label reader, which never splits a line
++at a pipe, does not look; when it carries a form feed or vertical
+ tab, or a carriage return that does not end the line; when it opens a code
+ fence anywhere but at the start of the line (after indentation or a list
+ marker, where a list item may open a fence the fence tracker does not
+@@ -393,7 +400,10 @@ of its paragraph, since a label may span lines). The check
+ is judged after the line's own heading has opened or closed a finding. So a
+ report writes markup inside a finding only as code, between backticks, writes
+ a code example inside a finding as a fence at the start of a line, and keeps
+-link definitions outside every finding. The other canonical fields are
++link definitions and tables outside every finding. Reports are trusted-author
++input, written by the kit's own gate agents: a rendering divergence this
++grammar neither reads nor refuses is a minor finding for a follow-up, not a
++blocker (REQ-011). The other canonical fields are
+ decided by their spelling. A manifest field line must be a dash, whitespace
+ and `**Class:**` or `**Severity:**`, its value the text after that label only,
+ and every manifest finding needs one readable Class and one readable Severity,
+diff --git a/tests/test-gate-contracts.sh b/tests/test-gate-contracts.sh
+index 55f890a..7295d63 100644
+--- a/tests/test-gate-contracts.sh
++++ b/tests/test-gate-contracts.sh
+@@ -1398,7 +1398,10 @@ report_record_line_cases() {
+   # a code fence that may be inside a list item, and a link reference
+   # definition, its label on one line or across lines, are each refused by
+   # name; so are the stated consequences (`c <= d`, a fence indented under a
+-  # list item, a definition line).
++  # list item, a definition line). Round 18's members follow (O-018): a
++  # backtick inside a GFM URL literal, or inside a shortcut, collapsed or
++  # image reference's label, which marked binds before any code span, is
++  # refused by name; tables (O-025) follow below.
+   while IFS='|' read -r tag body want; do
+     printf '# Prior review\n\n%b' "$body" > "$spec/notes/verification/reports/opponent-findings-review.md"
+     tier_round_fixture 1 '' G-042:tier-binding:open:minor > "$report"
+@@ -1589,6 +1592,42 @@ break-image-outside-finding-after-id|### Finding G-041\n- **Class:** tier-bindin
+ tag-image-alt-code-span-outside-finding-after-id|### Finding G-041\n- **Class:** tier-binding\n- **Severity:** minor\n## Notes\n\nG-042 is discussed below.\n\n<b>![ `]` x\ny\n](u)Severity: data-loss\n|a severity line outside any Finding
+ image-title-across-lines-outside-finding-after-id|### Finding G-041\n- **Class:** tier-binding\n- **Severity:** minor\n## Notes\n\nG-042 is discussed below.\n\n![ `]` x ](u "a\ny\nb")Severity: data-loss\n|a severity line outside any Finding
+ entity-then-code-span-holding-image-across-lines|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n&amp;`![Severity: data-loss](u) z\ny\nw`\n|a second Severity line in finding G-042
++url-literal-tick|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\nNote http://a.b/`<br>Severity: data-loss, tick: `.\n|an autolink outside a code span in finding G-042
++https-literal-tick|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\nNote https://a.b/x`<br>Severity: data-loss, tick: `.\n|an autolink outside a code span in finding G-042
++www-literal-tick|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\nNote www.a.b/x`<br>Severity: data-loss, tick: `.\n|an autolink outside a code span in finding G-042
++ftp-literal-tick-pre|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\nNote ftp://a.b/`<pre>Severity: data-loss</pre>`\n|an autolink outside a code span in finding G-042
++shortcut-reference-tick|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\nNote [a`b]<br>Severity: data-loss, tick: `.\n|a backtick inside a link destination, title or label in finding G-042
++collapsed-reference-tick|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\nNote [a`b][]<br>Severity: data-loss, tick: `.\n|a backtick inside a link destination, title or label in finding G-042
++image-reference-tick|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\nNote ![a`b]<br>Severity: data-loss, tick: `.\n|a backtick inside a link destination, title or label in finding G-042
++ROWS
++  # Round 18 (O-025): a GFM table inside a finding shows a cell's first text
++  # where the label reader, which never splits a line at a pipe, does not look,
++  # so a line that may be a table delimiter row is refused by name; pipes in
++  # prose and in code spans, a URL literal and references with no backtick in
++  # their labels still parse.
++  while IFS='~' read -r tag body; do
++    printf '# Prior review\n\n%b' "$body" > "$spec/notes/verification/reports/opponent-findings-review.md"
++    tier_round_fixture 1 '' G-042:tier-binding:open:minor > "$report"
++    for l in C en_US.UTF-8; do
++      run_rc 3 record_line_vf "$l" "$report" "$spec"
++      assert_contains "$OUT" 'a table delimiter row in finding G-042' "AC-012: a manifest tier in a table cell ($tag) was not refused by name under LANG=$l (round 18, O-025)"
++    done
++  done <<'ROWS'
++table-cell~### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n| Step | Result |\n| - | - |\n| ran | **Severity:** data-loss |\n
++table-in-list-item~### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n- Steps:\n\n  | Step | Result |\n  |:--|--:|\n  | ran | **Severity:** data-loss |\n
++ROWS
++  while IFS='~' read -r tag body; do
++    printf '# Prior review\n\n### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n%b' "$body" > "$spec/notes/verification/reports/opponent-findings-review.md"
++    tier_round_fixture 1 '' G-042:tier-binding:open:minor > "$report"
++    for l in C en_US.UTF-8; do
++      run_rc 0 record_line_vf "$l" "$report" "$spec"
++      assert_not_contains "$OUT" 'report recovery' "AC-012: a manifest finding with $tag was refused under LANG=$l (round 18)"
++    done
++  done <<'ROWS'
++url-literal~See https://x.example/a and `code` here.\n
++link-text-code-span~See [the `x` doc](u) and `code`.\n
++references~See [the doc][ref] and [x][] here.\n
++pipes-in-prose~It reads a | b and `c | d` here.\n
+ ROWS
+   # O-019: a heading deeper than the Finding heading is one of its lines, so
+   # the canonical field lines under it are read: the CLEARED round is refused
+@@ -1823,6 +1862,16 @@ ROWS
+   run_rc 0 record_line_vf C "$report" "$spec"
+   assert_not_contains "$OUT" 'report recovery' 'AC-012: a 400-line run under a bracket quoted in a code span was refused (round 17, O-023)'
+   (( SECONDS - t0 < 60 )) || t_fail "AC-012: a 400-line run under a bracket quoted in a code span took $((SECONDS - t0)) s, not under 60 s (round 17, O-023)"
++  # A candidate is settled when its head or its whole text balances (round 18,
++  # O-023): a run of sub-bullets each led by a link, an image or a code span
++  # holding a bracket keeps no later line re-read, so a 400-line Reproduced
++  # field parses in seconds, where the round-18 tree took about 30 s at 100.
++  record_round 1 CHALLENGED 1 0 '### Finding G-050' dup-binding new '- **Severity:** data-loss' |
++    awk -v n=400 'index($0, "- **Reproduced:**") == 1 {print "- **Reproduced:** steps follow"; for (i = 0; i < n; i++) {k = i % 3; if (k == 0) printf "  - [step %d](https://x.example/%d) ran `vf_reports x` and saw *exit 0* with `rc=%d` here, fine\n", i, i, i; else if (k == 1) printf "  - ![badge %d](https://x.example/%d.png) step ran and saw *exit 0* with `rc=%d` here, fine\n", i, i, i; else printf "  - `[%d]` held and [the copy](https://x.example/%d) saw *exit 0* with `rc=%d` here, fine\n", i, i, i}; next} {print}' > "$report"
++  t0=$SECONDS
++  run_rc 0 record_line_vf C "$report" "$spec"
++  assert_not_contains "$OUT" 'report recovery' 'AC-012: a 400-line run of link-, image- and code-span-led sub-bullets was refused (round 18, O-023)'
++  (( SECONDS - t0 < 60 )) || t_fail "AC-012: a 400-line run of link-, image- and code-span-led sub-bullets took $((SECONDS - t0)) s, not under 60 s (round 18, O-023)"
+   # A rendered line start inside a field value: after a br or a block-level
+   # tag a renderer starts a new line, so a Where value carrying one before a
+   # tier is refused, and one carrying no tier parses (round 15, O-018).
+@@ -2034,6 +2083,40 @@ a-br-prose|### Finding G-042|  - Line one<br>line two names no tier.\n
+ a-quoted-heading-then-attribute-line|### Finding G-042|\n> #### <abbr\n> title="t">Severity: data-loss</abbr>\n\n
+ a-span-in-prose|### Finding G-042|\nNote <span>Severity: as noted</span> stays prose.\n\n
+ a-blank-line-ends-run|### Finding G-042|\n<b title="a\n\n- b">Severity: data-loss</b>\n\n
++ROWS
++  # Round 18 (O-018, O-025): inside a canonical finding, a backtick inside a
++  # GFM URL literal or inside a reference link's label, which marked binds
++  # before any code span, and a line that may be a table delimiter row are
++  # refused by name; what the narrowing leaves still parses.
++  while IFS='~' read -r tag body want; do
++    record_round 1 CHALLENGED 1 0 '### Finding G-042' tier-binding new '- **Severity:** data-loss' "$body" > "$report"
++    for l in C en_US.UTF-8; do
++      run_rc 3 record_line_vf "$l" "$report" "$spec"
++      assert_contains "$OUT" "$want" "AC-012: a canonical finding with $tag was not refused by name under LANG=$l (round 18)"
++    done
++  done <<'ROWS'
++a-url-literal-tick~\nNote http://a.b/`<br>Severity: data-loss, tick: `.\n\n~an autolink outside a code span in finding G-042
++a-https-literal-tick~\nNote https://a.b/x`<br>Severity: data-loss, tick: `.\n\n~an autolink outside a code span in finding G-042
++a-www-literal-tick~\nNote www.a.b/x`<br>Severity: data-loss, tick: `.\n\n~an autolink outside a code span in finding G-042
++a-ftp-literal-tick-pre~\nNote ftp://a.b/`<pre>Severity: data-loss</pre>`\n\n~an autolink outside a code span in finding G-042
++a-shortcut-reference-tick~\nNote [a`b]<br>Severity: data-loss, tick: `.\n\n~a backtick inside a link destination, title or label in finding G-042
++a-collapsed-reference-tick~\nNote [a`b][]<br>Severity: data-loss, tick: `.\n\n~a backtick inside a link destination, title or label in finding G-042
++a-image-reference-tick~\nNote ![a`b]<br>Severity: data-loss, tick: `.\n\n~a backtick inside a link destination, title or label in finding G-042
++a-table-cell~\n| Step | Result |\n| - | - |\n| ran | **Severity:** data-loss |\n\n~a table delimiter row in finding G-042
++a-table-in-list-item~  - Steps:\n\n    | Step | Result |\n    |:--|--:|\n    | ran | **Severity:** data-loss |\n\n~a table delimiter row in finding G-042
++ROWS
++  while IFS='~' read -r tag body; do
++    record_round 1 CHALLENGED 1 0 '### Finding G-042' tier-binding new '- **Severity:** data-loss' "$body" > "$report"
++    for l in C en_US.UTF-8; do
++      run_rc 0 record_line_vf "$l" "$report" "$spec"
++      assert_not_contains "$OUT" 'report recovery' "AC-012: a canonical finding with $tag was refused under LANG=$l (round 18)"
++    done
++  done <<'ROWS'
++a-url-literal~\nSee https://x.example/a and `code` here.\n\n
++a-www-literal~\nSee www.example.com for the `rc` value.\n\n
++a-link-text-code-span~\nSee [the `x` doc](u) and `code`.\n\n
++a-references~\nSee [the doc][ref] and [x][] here.\n\n
++a-pipes-in-prose~\nIt reads a | b and `c | d` here.\n\n
+ ROWS
+   record_round 1 CHALLENGED 1 0 '### Finding G-042' tier-binding new '- **Severity:** data-loss' '  - `#### Severity: data-loss` is the heading form.\n' > "$report"
+   run_rc 3 record_line_vf C "$report" "$spec"
+diff --git a/tests/test-spec-gate.sh b/tests/test-spec-gate.sh
+index bcce5b3..9d6bf1f 100755
+--- a/tests/test-spec-gate.sh
++++ b/tests/test-spec-gate.sh
+@@ -867,7 +867,9 @@ round_record_line_cases() {
+   # placed with 2.4's escapes, an image split by a line of seven marks, and an
+   # image after a backtick line the tracker fences and a renderer does not.
+   # Round 17's follow (O-018, O-024): a `<` that may open an autolink, a link
+-  # destination holding a backtick, and a fence after a list marker.
++  # destination holding a backtick, and a fence after a list marker. Round
++  # 18's follow (O-018): a backtick inside a URL literal and inside a
++  # reference link's label, which marked binds before any code span.
+   for row in '- <Severity:data-loss>|a second Severity line in finding G-042' \
+              '- &nbsp;Severity: data-loss|a second Severity line in finding G-042' \
+              '- [](x)**Severity:** data-loss|a second Severity line in finding G-042' \
+@@ -888,6 +890,8 @@ round_record_line_cases() {
+              $'\n```a`b\n\n![x\ny](u)Severity: data-loss\n```|quoted content carries a Severity line' \
+              $'\nNote <1`@a.b><br>Severity: data-loss, tick: `.|an autolink outside a code span in finding G-042' \
+              $'\n[x](u`v)<br>Severity: data-loss, tick: `.|a backtick inside a link destination, title or label in finding G-042' \
++             $'\nNote http://a.b/`<br>Severity: data-loss, tick: `.|an autolink outside a code span in finding G-042' \
++             $'\nNote [a`b]<br>Severity: data-loss, tick: `.|a backtick inside a link destination, title or label in finding G-042' \
+              $'- ```\n  ### x\n- **Severity**: data-loss|a code fence that may be inside a list item in finding G-042'; do
+     printf '# Prior review\n\n### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n%s\n' "${row%%|*}" > "$manifest"
+     for l in C en_US.UTF-8; do
+@@ -903,6 +907,14 @@ round_record_line_cases() {
+     assert_contains "$OUT" 'a link reference definition in finding G-042' \
+       "AC-009: a CLEARED completion over a manifest tier hidden in a link reference definition was not refused under LANG=$l (round 17, O-024)"
+   done
++  # Round 18 (O-025): a table inside a finding shows a cell's first text the
++  # label reader never reads, so a delimiter row is refused by name at completion.
++  printf '# Prior review\n\n### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n| Step | Result |\n| - | - |\n| ran | **Severity:** data-loss |\n' > "$manifest"
++  for l in C en_US.UTF-8; do
++    run_rc 3 in_locale "$l" bash "$cli" round "$spec" opponent --complete "$report"
++    assert_contains "$OUT" 'a table delimiter row in finding G-042' \
++      "AC-009: a CLEARED completion over a manifest tier in a table cell was not refused under LANG=$l (round 18, O-025)"
++  done
+   # O-019: a field line under a sub-heading of the manifest finding is read, so
+   # the CLEARED completion is refused on the manifest tier itself.
+   printf '# Prior review\n\n### Finding G-042\n- **Class:** tier-binding\n#### Notes\nReproduced twice.\n- **Severity:** data-loss\n' > "$manifest"
+@@ -925,6 +937,8 @@ round_record_line_cases() {
+              '- **Severity:** minor\n\nNote\r\rSeverity: data-loss|a carriage return inside a line in finding G-050' \
+              '- **Severity:** minor\n\n![x\n####### y](u)Severity: data-loss|a Severity line this grammar cannot read in finding G-050' \
+              '- **Severity:** minor\n\nNote <1`@a.b><pre>Severity: data-loss</pre>`|an autolink outside a code span in finding G-050' \
++             '- **Severity:** minor\n\nNote www.a.b/x`<br>Severity: data-loss, tick: `.|an autolink outside a code span in finding G-050' \
++             '- **Severity:** minor\n\nNote ![a`b]<br>Severity: data-loss, tick: `.|a backtick inside a link destination, title or label in finding G-050' \
+              '- **Severity:** minor\n\n[x](u "`")<br>Severity: data-loss, tick: `.|a backtick inside a link destination, title or label in finding G-050'; do
+     record_line_report "$res" 1 CLEARED 0 1 '### Finding G-050' dup-binding new "${row%%|*}" > "$SANDBOX/record-lines-dup.md"
+     for l in C en_US.UTF-8; do
+@@ -946,6 +960,15 @@ round_record_line_cases() {
+     assert_contains "$OUT" 'a code fence that may be inside a list item in finding G-050' \
+       "AC-009: a CLEARED completion over a finding a list-item fence closed early was not refused under LANG=$l (round 17, O-024)"
+   done
++  # Round 18 (O-025): the same table after the fields of a canonical finding.
++  tail=$'\n| Step | Result |\n| - | - |\n| ran | **Severity:** data-loss |\n'
++  record_line_report "$res" 1 CLEARED 0 1 '### Finding G-050' tier-binding new '- **Severity:** minor' |
++    TAIL="$tail" awk 'index($0, "### Held up") == 1 {printf "%s", ENVIRON["TAIL"]} {print}' > "$SANDBOX/record-lines-o025.md"
++  for l in C en_US.UTF-8; do
++    run_rc 3 in_locale "$l" bash "$cli" round "$spec" opponent --complete "$SANDBOX/record-lines-o025.md"
++    assert_contains "$OUT" 'a table delimiter row in finding G-050' \
++      "AC-009: a CLEARED completion over a tier in a table cell was not refused under LANG=$l (round 18, O-025)"
++  done
+   # A title and a late Timestamp let a CLEARED round seal over a blocking
+   # finding it never counted (O-020); the switch is refused at completion.
+   record_style_report "$res" 1 CLEARED 0 1 '### Finding G-099:silent-loss:new:data-loss' '### Finding G-100:minor-slip:new:minor' > "$SANDBOX/record-lines-style.md"

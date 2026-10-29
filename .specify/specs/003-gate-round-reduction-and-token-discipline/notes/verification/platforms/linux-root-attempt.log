@@ -1,0 +1,107 @@
+GNU bash, version 5.2.37(1)-release (aarch64-unknown-linux-gnu)
+Copyright (C) 2022 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+
+This is free software; you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+ShellCheck - shell script analysis tool
+version: 0.10.0
+license: GNU General Public License, version 3
+website: https://www.shellcheck.net
+== test-build-adapters.sh
+  ok   test_adapters_install_into_every_codex_home
+  ok   test_brief_modes
+  ok   test_codex_adapters_delegate_copilot_adapters_persona_pass
+  ok   test_degrades_without_policy_or_codex_home
+  ok   test_delegation_findings_artifact_present_and_shaped
+  ok   test_prune_respects_kit_marker_and_role_unmapping
+  ok   test_stale_single_agent_claims_are_gone
+  ok   test_subagent_tomls_carry_identity_policy_and_persona
+  -- 8/8 passed
+== test-executable-bits.sh
+  ok   test_AC_011_every_kit_script_is_executable
+  -- 1/1 passed
+== test-gate-contracts.sh
+  ok   test_all_brief_modes
+  ok   test_all_overlay_defaults
+  ok   test_briefs_t010
+  ok   test_briefs_t011
+  ok   test_briefs_t012
+  ok   test_briefs_t013
+  ok   test_defaults_t006
+  ok   test_defaults_t007
+  ok   test_defaults_t008
+  ok   test_defaults_t009
+  ok   test_instruction_contracts
+  ok   test_invoker_protocol
+  ok   test_reports_and_tally
+  ok   test_review_scope_contracts
+  -- 14/14 passed
+== test-golden-example.sh
+  ok   test_golden_example_demonstrates_the_conventions
+  ok   test_golden_example_passes_sdd_analyze_with_zero_warnings
+  ok   test_verification_golden
+  -- 3/3 passed
+== test-lib.sh
+  ok   test_expand_tilde
+  ok   test_fm_get_no_frontmatter_is_empty
+  ok   test_fm_get_reads_only_the_fence
+  ok   test_fm_list_inline_and_block
+  ok   test_fm_set_appends_missing_key_inside_fence
+  ok   test_fm_set_refuses_file_without_frontmatter
+  ok   test_fm_set_replaces_and_keeps_inline_comment
+  ok   test_registry_entries_parses_entries_in_any_field_order
+  ok   test_registry_path_for_expands_tilde
+  ok   test_spec_declared_repos
+  ok   test_usage_from_header
+  ok   test_yml_clean_hash_needs_preceding_space
+  ok   test_yml_get_and_list
+  -- 13/13 passed
+== test-model-policy.sh
+  ok   test_AC_008_usage_limit_policy_absent_and_present_defaults
+  ok   test_AC_008_usage_limit_policy_rejects_invalid_values
+  ok   test_AC_008_usage_limit_policy_set_unset_round_trip
+  ok   test_AC_008_usage_limit_policy_wizard_preserves_ordered_fallback
+  ok   test_claude_effort_whitelist_unchanged
+  ok   test_codex_sandbox_and_approval_policy_fields
+  ok   test_documented_codex_efforts_accepted
+  ok   test_junk_codex_effort_rejected
+  -- 8/8 passed
+== test-sdd-analyze.sh
+  ok   test_clean_fixture_is_consistent
+  ok   test_dangling_ref_fails
+  ok   test_duplicate_task_id_fails
+  ok   test_external_marker_must_be_mirrored_in_status
+  ok   test_gate_agent_placeholder_fails
+  ok   test_missing_artifact_is_an_error
+  ok   test_missing_gate_agent_file_fails
+  ok   test_missing_verify_line_warns
+  ok   test_needs_clarification_blocks
+  ok   test_stray_repo_tags_without_umbrella_warn
+  ok   test_task_without_acceptance_fails
+  ok   test_ticked_box_without_evidence_warns
+  ok   test_umbrella_declared_repo_with_no_tasks_warns
+  ok   test_umbrella_tagged_tasks_pass
+  ok   test_umbrella_undeclared_repo_tag_fails
+  ok   test_umbrella_untagged_tasks_fail
+  ok   test_uncovered_ac_fails_and_gate_refs_do_not_count
+  ok   test_verification_bindings
+  -- 18/18 passed
+== test-spec-ac-coverage.sh
+  ok   test_all_acs_bound_passes
+  ok   test_default_root_is_the_git_toplevel
+  ok   test_extra_test_glob_extends_the_net
+  ok   test_longer_ids_do_not_satisfy_shorter_acs
+  ok   test_no_acs_in_spec_is_a_noop_not_a_crash
+  ok   test_root_path_containing_test_does_not_classify_everything
+  ok   test_spec_dir_itself_never_counts_as_coverage
+  ok   test_test_paths_with_spaces_are_counted
+  ok   test_unreferenced_ac_fails_referenced_ac_passes
+  -- 9/9 passed
+== test-spec-dispatch.sh
+  ok   test_repo_match_is_token_exact
+  ok   test_undeclared_repo_refused_and_declared_accepted_past_the_guard
+  -- 2/2 passed
+== test-spec-gate.sh
+  ok   test_acceptance
+  ok   test_checkpoints

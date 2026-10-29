@@ -1,0 +1,195 @@
+@@OLD
+  # Real and plausible manifests parse (R2-F3): a line that merely mentions a
+  # field is prose, a heading closes the finding above it, a fenced example is
+  # quoted, and a Class-only finding is a record. A CHALLENGED round that
+  # re-records the finding at its manifest Class and tier has nothing to refuse.
+@@NEW
+  # Real and plausible manifests parse (R2-F3): a line that merely mentions a
+  # field is prose, a heading as shallow as the Finding heading closes it, and a
+  # fenced example is quoted. A finding that carries a Class alone is no longer
+  # one of them: every manifest finding needs one readable Severity (O-018), so
+  # the shipped class-only row is a refusal in report_record_line_cases. A
+  # CHALLENGED round that re-records the finding at its manifest Class and tier
+  # has nothing to refuse.
+@@END
+@@OLD
+prose-mention|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n- **Scenario:** the **Class:** field was lost; a line written `-\302\240**Class:**` was skipped\n
+class-only|## Findings\n\n### Finding O-017\n- **Class:** harness-locale-decoding\n
+finding-summary|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n\n## Finding summary\nOne finding.\n\n```text\n- **Severity:** minor\n```\n
+@@NEW
+prose-mention|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n- **Scenario:** the **Class:** field was lost; a line written `-\302\240**Class:**` was skipped\n
+finding-summary|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n\n## Finding summary\nOne finding.\n\n```text\n- **Severity:** minor\n```\n
+@@END
+@@OLD
+test_reports_and_tally() {
+  report_manifest_locale_cases
+@@NEW
+# AC-012/FM-019/INV-006 — O-018 and O-019 (round 13, T030o44). Both readers of
+# finding records read a record line by what renders as one, through the one
+# label reader vf_label, and refuse by name a line they cannot read; neither
+# reads it as prose. The members are derived from the rendered text, not from
+# the spellings round 13 named: a heading that carries a label, a label behind
+# inline HTML or a character reference, a quoted or absent tier, a Finding
+# heading the pass cannot open, a field line outside any finding, and a second
+# field the duplicate key missed because it was keyed by spelling.
+# record_round <n> <verdict> <blocking> <minor> <heading> <class> <status> <severity lines> [<extra lines>]
+# (the heading, severity and extra lines through printf %b; the extra lines go after the Scenario)
+record_round() {
+  printf '## Round %s\n**Round:** %s\n**Timestamp:** 2026-09-06T12:00:0%sZ\n' "$1" "$1" "$1"
+  printf '**Source:** aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\n**Floor:** FLOOR-fixture\n'
+  printf '**Verdict:** %s\n**Blocking:** %s · **Minor:** %s\n' "$2" "$3" "$4"
+  printf '### What I attacked\nFinding records read by both readers.\n'
+  printf '%b\n- **Class:** %s\n- **Status:** %s\n- **Prior:** none\n%b\n' "$5" "$6" "$7" "$8"
+  printf -- '- **Scenario:** a recorded trigger\n%b' "${9:-}"
+  printf -- '- **Where:** scripts/run.sh:9\n- **Reproduced:** concrete trigger at that site\n'
+  printf -- '- **Root cause:** implementation-error\n- **Blocks:** AC-012\n- **Wrong behavior:** observed versus required\n'
+  printf -- '- **Class-wide fix:** read or refuse every record line\n### Held up / follow-up tasks\nFixture disposition recorded.\n'
+  printf '<!-- gate-round-end: opponent:%s -->\n' "$1"
+}
+
+record_line_vf() { # <locale> <report> <spec>
+  in_locale "$1" bash -c '. "$1"; vf_reports "$2" opponent "$3" "$4"' _ "$SCRIPTS/verification-lib.sh" "$2" "$SANDBOX/record-lines.nul" "$3"
+}
+
+report_record_line_cases() {
+  local spec report l tag body want heading sevs r1 low
+  low='clearing verdict rests on 1 lowered severity tier(s) of known findings'
+  spec="$SANDBOX/record-lines"; report="$spec/notes/opponent.md"
+  mkdir -p "$spec/notes/verification/reports"
+  # The manifest member: a CLEARED round 1 re-records G-042 open at minor over
+  # a manifest whose G-042 carries data-loss on a line the pass must read or
+  # refuse. Every finding needs one readable Severity, so a tier the pass does
+  # not read, a quoted one included, is refused with its finding.
+  while IFS='|' read -r tag body want; do
+    printf '# Prior review\n\n%b' "$body" > "$spec/notes/verification/reports/opponent-findings-review.md"
+    tier_round_fixture 1 '' G-042:tier-binding:open:minor > "$report"
+    for l in C en_US.UTF-8; do
+      run_rc 3 record_line_vf "$l" "$report" "$spec"
+      assert_contains "$OUT" "$want" "AC-012: a manifest tier written as $tag was not refused by name under LANG=$l (O-018)"
+    done
+  done <<'ROWS'
+heading-label|### Finding G-042\n- **Class:** tier-binding\n\n#### Severity: data-loss\n|a Severity line this grammar cannot read: #### Severity: data-loss
+heading-body|### Finding G-042\n- **Class:** tier-binding\n\n#### Severity\n\ndata-loss\n|a Severity line this grammar cannot read: #### Severity
+heading-under-level-two|## Finding G-042\n- **Class:** tier-binding\n\n### Severity: data-loss\n|a Severity line this grammar cannot read: ### Severity: data-loss
+html-tag|### Finding G-042\n- **Class:** tier-binding\n- <b>Severity:</b> data-loss\n|a Severity line this grammar cannot read: - <b>Severity:</b> data-loss
+html-block|### Finding G-042\n- **Class:** tier-binding\n<h4>Severity: data-loss</h4>\n|a Severity line this grammar cannot read: <h4>Severity: data-loss</h4>
+character-reference|### Finding G-042\n- **Class:** tier-binding\n- &#x53;everity: data-loss\n|a Severity line this grammar cannot read: - &#x53;everity: data-loss
+inline-comment|### Finding G-042\n- **Class:** tier-binding\n- <!-- tier --> Severity: data-loss\n|a Severity line this grammar cannot read: - <!-- tier --> Severity: data-loss
+second-tier-behind-html|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- <b>Severity:</b> data-loss\n|a second Severity line in finding G-042
+blockquoted-tier|### Finding G-042\n- **Class:** tier-binding\n> - **Severity:** data-loss\n|finding G-042 has no readable Severity
+fenced-tier|### Finding G-042\n- **Class:** tier-binding\n```text\n- **Severity:** data-loss\n```\n|finding G-042 has no readable Severity
+commented-tier|### Finding G-042\n- **Class:** tier-binding\n<!-- - **Severity:** data-loss -->\n|finding G-042 has no readable Severity
+no-tier|### Finding G-042\n- **Class:** tier-binding\n|finding G-042 has no readable Severity
+class-only-shipped|## Findings\n\n### Finding O-017\n- **Class:** harness-locale-decoding\n|finding O-017 has no readable Severity
+dash-separated-heading|### Finding \342\200\224 G-042\n- **Class:** tier-binding\n- **Severity:** data-loss\n|a Finding heading this grammar cannot read
+ROWS
+  # O-019: a heading deeper than the Finding heading is one of its lines, so
+  # the canonical field lines under it are read: the CLEARED round is refused
+  # on the manifest tier, and a CHALLENGED round at that tier parses.
+  while IFS='|' read -r tag body; do
+    printf '# Prior review\n\n%b' "$body" > "$spec/notes/verification/reports/opponent-findings-review.md"
+    for l in C en_US.UTF-8; do
+      tier_round_fixture 1 '' G-042:tier-binding:open:minor > "$report"
+      run_rc 3 record_line_vf "$l" "$report" "$spec"
+      assert_contains "$OUT" "$low" "AC-012: a manifest field line under a sub-heading ($tag) was not read under LANG=$l (O-019)"
+      assert_not_contains "$OUT" 'outside any Finding' "AC-012: a manifest field line under a sub-heading ($tag) was read as outside its finding (O-019)"
+      tier_round_fixture 1 '' G-042:tier-binding:open:data-loss > "$report"
+      run_rc 0 record_line_vf "$l" "$report" "$spec"
+    done
+  done <<'ROWS'
+notes-sub-heading|### Finding G-042\n- **Class:** tier-binding\n#### Notes\nReproduced twice.\n- **Severity:** data-loss\n
+details-sub-heading|### Finding G-042\n#### Details\n- **Class:** tier-binding\n- **Severity:** data-loss\n
+two-levels|### Finding G-042\n#### Details\n##### Evidence\n- **Class:** tier-binding\n- **Severity:** data-loss\n
+finding-summary-sub-heading|### Finding G-042\n- **Class:** tier-binding\n#### Finding summary\n- **Severity:** data-loss\n
+ROWS
+  rm -rf "$spec/notes/verification"
+  # The canonical member: round 1 is CHALLENGED with G-042 open at data-loss,
+  # and round 2 is CLEARED at 0 . 0 and re-lists G-042 at minor under a line
+  # that opens a finding to a reader but is not `### Finding <ID>`. The
+  # canonical heading at minor and 0 . 1 is the control.
+  r1="$(record_round 1 CHALLENGED 1 0 '### Finding G-042' tier-binding new '- **Severity:** data-loss')"
+  { printf '%s\n\n' "$r1"; record_round 2 CLEARED 0 1 '### Finding G-042' tier-binding open '- **Severity:** minor'; } > "$report"
+  run_rc 3 record_line_vf C "$report" "$spec"
+  assert_contains "$OUT" "$low" 'AC-012: the canonical control at a lowered tier sealed (O-018)'
+  while IFS='|' read -r tag heading want; do
+    { printf '%s\n\n' "$r1"; record_round 2 CLEARED 0 0 "$heading" tier-binding open '- **Severity:** minor'; } > "$report"
+    for l in C en_US.UTF-8; do
+      run_rc 3 record_line_vf "$l" "$report" "$spec"
+      assert_contains "$OUT" "$want" "AC-012: a finding opened by $tag was not refused by name under LANG=$l (O-018)"
+    done
+  done <<'ROWS'
+level-four|#### Finding G-042|a Finding heading this grammar cannot read
+tab|### Finding\tG-042|a Finding heading this grammar cannot read
+two-spaces|###  Finding G-042|a Finding heading this grammar cannot read
+no-break-space|### Finding\302\240G-042|a Finding heading this grammar cannot read
+lowercase|### finding G-042|a Finding heading this grammar cannot read
+uppercase|### FINDING G-042|a Finding heading this grammar cannot read
+level-two|## Finding G-042|a Finding heading this grammar cannot read
+leading-space| ### Finding G-042|a Finding heading this grammar cannot read
+tab-after-hashes|###\tFinding G-042|a Finding heading this grammar cannot read
+colon|### Finding: G-042|a Finding heading this grammar cannot read
+no-break-space-before-hashes|\302\240### Finding G-042|a Finding heading this grammar cannot read
+bold-line|**Finding G-042**|a finding field outside any Finding
+list-item|- ### Finding G-042|a finding field outside any Finding
+ROWS
+  # The duplicate key is the field's label, and inside a finding a line whose
+  # label is Class or Severity is that field's line or is refused: a new G-050
+  # under CLEARED at 0 . 1 cannot record minor past a data-loss line.
+  while IFS='|' read -r tag sevs want; do
+    record_round 1 CLEARED 0 1 '### Finding G-050' dup-binding new "$sevs" > "$report"
+    for l in C en_US.UTF-8; do
+      run_rc 3 record_line_vf "$l" "$report" "$spec"
+      assert_contains "$OUT" "$want" "AC-012: a second tier written as $tag was not refused by name under LANG=$l (O-018)"
+    done
+  done <<'ROWS'
+indented-second|- **Severity:** data-loss\n  - **Severity:** minor|duplicate finding field
+indented-first|  - **Severity:** data-loss\n- **Severity:** minor|duplicate finding field
+unread-first|- **Severity**: data-loss\n- **Severity:** minor|a Severity line this grammar cannot read in finding G-050
+behind-html|- **Severity:** minor\n  - <b>Severity:</b> data-loss|a Severity line this grammar cannot read in finding G-050
+character-reference|- **Severity:** minor\n  - &#83;everity: data-loss|a Severity line this grammar cannot read in finding G-050
+sub-heading|- **Severity:** minor\n#### Severity: data-loss|a Severity line this grammar cannot read in finding G-050
+class-reference|- **Severity:** minor\n  - &#x43;lass: other-class|a Class line this grammar cannot read in finding G-050
+ROWS
+  # A finding is closed by a heading as shallow as `###`, so a field line after
+  # a section heading is outside it, while prose there, and a sub-heading,
+  # title, lead-in or quoted example inside a finding, still parse. A line in a
+  # finding that BEGINS with a code span holding a label is refused, the safe
+  # direction recorded in Decisions.
+  record_round 1 CHALLENGED 1 0 '### Finding G-042' tier-binding new '- **Severity:** data-loss' |
+    sed 's/^Fixture disposition recorded\.$/- **Severity:** minor/' > "$report"
+  run_rc 3 record_line_vf C "$report" "$spec"
+  assert_contains "$OUT" 'a finding field outside any Finding' 'AC-012: a field line after a section heading was read into the finding above it (O-018)'
+  record_round 1 CHALLENGED 1 0 '### Finding G-042' tier-binding new '- **Severity:** data-loss' |
+    sed 's/^Fixture disposition recorded\.$/- Severity: all blocking, as recorded./' > "$report"
+  run_rc 0 record_line_vf C "$report" "$spec"
+  while IFS='|' read -r tag heading body; do
+    record_round 1 CHALLENGED 1 0 "$heading" tier-binding new '- **Severity:** data-loss' "$body" > "$report"
+    for l in C en_US.UTF-8; do
+      run_rc 0 record_line_vf "$l" "$report" "$spec"
+      assert_not_contains "$OUT" 'report recovery' "AC-012: a canonical finding with $tag was refused under LANG=$l (O-018)"
+    done
+  done <<'ROWS'
+a-notes-sub-heading|### Finding G-042|#### Notes\nReproduced twice, once per locale.\n
+a-details-sub-heading|### Finding G-042|#### Details\n- **The manifest member.** A heading carries the tier.\n
+a-title|### Finding G-042 — tier read|
+a-lead-in|### Finding G-042|  - **Class binding.** The record is read.\n  - Severity was re-read twice.\n
+a-quoted-example|### Finding G-042|  - The lines `#### Severity: data-loss` and `- <b>Severity:</b> minor` are refused.\n
+ROWS
+  record_round 1 CHALLENGED 1 0 '### Finding G-042' tier-binding new '- **Severity:** data-loss' '  - `#### Severity: data-loss` is the heading form.\n' > "$report"
+  run_rc 3 record_line_vf C "$report" "$spec"
+  assert_contains "$OUT" 'a Severity line this grammar cannot read in finding G-042' \
+    'AC-012: a finding line beginning with a code span holding a label was read as prose (T030o44)'
+  # The canonical rules stop at the completion marker, so a field line or a
+  # Finding-like heading after it keeps the after-marker refusal it had.
+  for tag in '- **Severity:** minor' '#### Finding G-043'; do
+    { record_round 1 CHALLENGED 1 0 '### Finding G-042' tier-binding new '- **Severity:** data-loss'; printf '%s\n' "$tag"; } > "$report"
+    run_rc 3 record_line_vf C "$report" "$spec"
+    assert_contains "$OUT" 'content after the round completion marker' \
+      "AC-012: $tag after the completion marker lost the after-marker refusal (T030o44)"
+  done
+}
+
+test_reports_and_tally() {
+  report_manifest_locale_cases
+  report_record_line_cases
+@@END

@@ -1,0 +1,183 @@
+@@OLD
+  # T030o43 review F1: under the pin a byte >= 0x80 is in no character class,
+  # so a manifest heading or field line written with a U+00A0 where the
+  # grammar wants a space does not match it. The pass refuses such a line by
+  # name, in every locale, instead of dropping the finding in silence.
+  local line nb=$'\302\240'
+  for line in "-$nb**Class:** tier-binding" "-$nb**Severity:** data-loss" "### Finding G-042$nb" "###${nb}Finding G-042"; do
+    case "$line" in
+      *Finding*) printf '# Prior review\n\n%s\n- **Class:** tier-binding\n- **Severity:** data-loss\n' "$line";;
+      *Class*) printf '# Prior review\n\n### Finding G-042\n%s\n- **Severity:** data-loss\n' "$line";;
+      *) printf '# Prior review\n\n### Finding G-042\n- **Class:** tier-binding\n%s\n' "$line";;
+    esac > "$spec/notes/verification/reports/opponent-findings-review.md"
+    tier_round_fixture 1 '' G-042:tier-binding:open:minor > "$report"
+    for l in C en_US.UTF-8; do
+      run_rc 3 in_locale "$l" bash -c '. "$1"; vf_reports "$2" opponent "$3" "$4"' _ \
+        "$SCRIPTS/verification-lib.sh" "$report" "$SANDBOX/manifest-locale.nul" "$spec"
+      assert_contains "$OUT" 'prior-review manifest could not be parsed' \
+        "AC-012: a manifest line carrying a U+00A0 was dropped in silence under LANG=$l (T030o43 review)"
+    done
+  done
+  # The same field grammar a canonical finding obeys: a finding with no Class,
+  # a Class or a Severity it does not define, is refused, never dropped.
+  local body
+  for body in '### Finding G-042\n- **Severity:** data-loss\n' \
+      '### Finding G-042\n- **Class:** Tier-Binding\n- **Severity:** data-loss\n' \
+      '### Finding G-042\n- **Class:** tier-binding\n- **Severity:** data loss\n'; do
+    printf '# Prior review\n\n%b' "$body" > "$spec/notes/verification/reports/opponent-findings-review.md"
+    run_rc 3 bash -c '. "$1"; vf_reports "$2" opponent "$3" "$4"' _ \
+      "$SCRIPTS/verification-lib.sh" "$report" "$SANDBOX/manifest-locale.nul" "$spec"
+    assert_contains "$OUT" 'prior-review manifest could not be parsed' \
+      "AC-012: a manifest finding its grammar cannot read was not refused by name: $body (T030o43 review)"
+  done
+  printf '# Prior review\n\n### Finding G-042\n- **Class:** tier-binding\n- **Severity:** data-loss\n' \
+    > "$spec/notes/verification/reports/opponent-findings-review.md"
+  fault_bin "$SANDBOX/fault-manifest-sort" sort 'manifest-locale.nul.'
+  run_rc 3 env PATH="$SANDBOX/fault-manifest-sort:$PATH" bash -c '. "$1"; vf_reports "$2" opponent "$3" "$4"' _ \
+    "$SCRIPTS/verification-lib.sh" "$report" "$SANDBOX/manifest-locale.nul" "$spec"
+  assert_contains "$OUT" 'prior-review manifest records could not be sorted' \
+    'AC-012: manifest records that could not be sorted were read as none (T030o43 review)'
+  # A required section whose only body line is a U+00A0 is as empty as a
+  # blank one, in every locale.
+  local blank_spec="$SANDBOX/section-blank"; mkdir -p "$blank_spec/notes"
+  tier_round_fixture 1 '' G-042:tier-binding:new:data-loss |
+    sed "s/^Severity tier binding across rounds of one gate\.\$/$nb/" > "$blank_spec/notes/opponent.md"
+  for l in C en_US.UTF-8; do
+    run_rc 3 in_locale "$l" bash -c '. "$1"; vf_reports "$2" opponent "$3" "$4"' _ \
+      "$SCRIPTS/verification-lib.sh" "$blank_spec/notes/opponent.md" "$SANDBOX/section-blank.nul" "$blank_spec"
+    assert_contains "$OUT" 'empty required report section: what i attacked' \
+      "AC-012: a required section holding only a U+00A0 counted as a body under LANG=$l (T030o43 review)"
+  done
+@@NEW
+  # T030o43 reviews 1 and 2: every parser of author text reads the 19
+  # non-ASCII Unicode White_Space characters as whitespace through the one
+  # step of _VF_AWK_WS, so a manifest field line whose separator after the
+  # dash is any one of them is READ, in every locale, and the CLEARED round
+  # resting on the manifest's tier is refused as it is for an ASCII space.
+  local ch i=0 ws
+  ws=($'\302\205' $'\302\240' $'\341\232\200' $'\342\200\200' $'\342\200\201' $'\342\200\202' $'\342\200\203'
+      $'\342\200\204' $'\342\200\205' $'\342\200\206' $'\342\200\207' $'\342\200\210' $'\342\200\211'
+      $'\342\200\212' $'\342\200\250' $'\342\200\251' $'\342\200\257' $'\342\201\237' $'\343\200\200')
+  for ch in "${ws[@]}"; do
+    i=$((i+1))
+    printf '# Prior review\n\n### Finding G-042\n-%s**Class:** tier-binding\n-%s**Severity:** data-loss\n' "$ch" "$ch" \
+      > "$spec/notes/verification/reports/opponent-findings-review.md"
+    tier_round_fixture 1 '' G-042:tier-binding:open:minor > "$report"
+    for l in C en_US.UTF-8; do
+      run_rc 3 in_locale "$l" bash -c '. "$1"; vf_reports "$2" opponent "$3" "$4"' _ \
+        "$SCRIPTS/verification-lib.sh" "$report" "$SANDBOX/manifest-locale.nul" "$spec"
+      assert_contains "$OUT" 'clearing verdict rests on 1 lowered severity tier(s) of known findings' \
+        "AC-012: a manifest field line after White_Space character $i was not read under LANG=$l (T030o43 review 2)"
+    done
+  done
+  # The pass is keyed on the lines that carry a record, by the canonical
+  # finding's own field grammar, so every spelling of a finding is either READ
+  # (the CLEARED round is refused on the lowered tier) or REFUSED by name,
+  # never dropped (R2-F2). A line that begins with a U+00A0 and a fence run is
+  # no fence to any reader, and not to the pass either; a field indented as a
+  # list continuation keeps its tier.
+  local label want shape
+  while IFS='|' read -r label want shape; do
+    printf '# Prior review\n\n%b' "$shape" > "$spec/notes/verification/reports/opponent-findings-review.md"
+    tier_round_fixture 1 '' G-042:tier-binding:open:minor > "$report"
+    run_rc 3 bash -c '. "$1"; vf_reports "$2" opponent "$3" "$4"' _ \
+      "$SCRIPTS/verification-lib.sh" "$report" "$SANDBOX/manifest-locale.nul" "$spec"
+    if [[ "$want" == read ]]; then
+      assert_contains "$OUT" 'clearing verdict rests on 1 lowered severity tier(s) of known findings' \
+        "AC-012: a manifest finding spelled $label was dropped (T030o43 review 2)"
+    else
+      assert_contains "$OUT" 'prior-review manifest could not be parsed' \
+        "AC-012: a manifest spelled $label was not refused by name (T030o43 review 2)"
+    fi
+  done <<'SHAPES'
+lowercase-finding|read|### finding G-042\n- **Class:** tier-binding\n- **Severity:** data-loss\n
+uppercase-finding|read|### FINDING G-042\n- **Class:** tier-binding\n- **Severity:** data-loss\n
+one-leading-space|read| ### Finding G-042\n- **Class:** tier-binding\n- **Severity:** data-loss\n
+byte-order-mark|read|\357\273\277### Finding G-042\n- **Class:** tier-binding\n- **Severity:** data-loss\n
+crlf|read|### Finding G-042\r\n- **Class:** tier-binding\r\n- **Severity:** data-loss\r\n
+titled-heading|read|### Finding G-042 — tier binding lost\n- **Class:** tier-binding\n- **Severity:** data-loss\n
+nbsp-after-id|read|### Finding G-042\302\240\n- **Class:** tier-binding\n- **Severity:** data-loss\n
+indented-fields|read|### Finding G-042\n  - **Class:** tier-binding\n    - **Severity:** data-loss\n
+before-another|read|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** data-loss\n### finding G-041\n- **Class:** tier-binding\n- **Severity:** minor\n
+nbsp-fence-pair|read|\302\240```\n### Finding G-042\n- **Class:** tier-binding\n- **Severity:** data-loss\n\302\240```\n
+word-before-finding|refuse|### Opponent finding G-042\n- **Class:** tier-binding\n- **Severity:** data-loss\n
+nbsp-before-hashes|refuse|\302\240### Finding G-042\n- **Class:** tier-binding\n- **Severity:** data-loss\n
+zwsp-before-hashes|refuse|\342\200\213### Finding G-042\n- **Class:** tier-binding\n- **Severity:** data-loss\n
+nbsp-after-hashes|refuse|###\302\240Finding G-042\n- **Class:** tier-binding\n- **Severity:** data-loss\n
+ill-cased-id|refuse|### Finding g-042\n- **Class:** tier-binding\n- **Severity:** data-loss\n
+field-outside-finding|refuse|- **Severity:** data-loss\n### Finding G-042\n- **Class:** tier-binding\n
+no-class|refuse|### Finding G-042\n- **Severity:** data-loss\n
+second-class|refuse|### Finding G-042\n- **Class:** tier-binding\n- **Class:** tier-binding\n- **Severity:** data-loss\n
+unbolded-class|refuse|### Finding G-042\n- Class: tier-binding\n- **Severity:** data-loss\n
+class-grammar|refuse|### Finding G-042\n- **Class:** Tier-Binding\n- **Severity:** data-loss\n
+class-with-space|refuse|### Finding G-042\n- **Class:** tier binding\n- **Severity:** data-loss\n
+second-severity|refuse|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** data-loss\n- **Severity:** minor\n
+unbolded-severity|refuse|### Finding G-042\n- **Class:** tier-binding\n- Severity: data-loss\n
+colon-outside-severity|refuse|### Finding G-042\n- **Class:** tier-binding\n- **Severity**: data-loss\n
+lowercase-severity|refuse|### Finding G-042\n- **Class:** tier-binding\n- **severity:** data-loss\n
+italic-severity|refuse|### Finding G-042\n- **Class:** tier-binding\n- *Severity:* data-loss\n
+severity-grammar|refuse|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** data loss\n
+fence-left-open|refuse|### Finding G-041\n- **Class:** other-class\n```text\n### Finding G-042\n- **Class:** tier-binding\n- **Severity:** data-loss\n
+comment-left-open|refuse|### Finding G-041\n- **Class:** other-class\n- **Scenario:** see <!-- never closed\n### Finding G-042\n- **Class:** tier-binding\n- **Severity:** data-loss\n
+raw-block-left-open|refuse|### Finding G-041\n- **Class:** other-class\n<pre>\n### Finding G-042\n- **Class:** tier-binding\n- **Severity:** data-loss\n
+SHAPES
+  # Real and plausible manifests parse (R2-F3): a line that merely mentions a
+  # field is prose, a heading closes the finding above it, a fenced example is
+  # quoted, and a Class-only finding is a record. A CHALLENGED round that
+  # re-records the finding at its manifest Class and tier has nothing to refuse.
+  tier_round_fixture 1 '' O-017:harness-locale-decoding:open:wrong-result > "$report"
+  while IFS='|' read -r label shape; do
+    printf '%b' "$shape" > "$spec/notes/verification/reports/opponent-findings-review.md"
+    run_rc 0 bash -c '. "$1"; vf_reports "$2" opponent "$3" "$4"' _ \
+      "$SCRIPTS/verification-lib.sh" "$report" "$SANDBOX/manifest-locale.nul" "$spec"
+    assert_not_contains "$OUT" 'prior-review manifest could not be parsed' \
+      "AC-012: a plausible manifest ($label) was refused (T030o43 review 2)"
+  done <<'SHAPES'
+recorded-finding-text|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Status:** new\n- **Severity:** wrong-result\n- **Where:** scripts/verification-lib.sh:955-968\n- **The inputs.** The manifest has six lines: a heading, a Class, a Severity and a Scenario.\n- **Class-wide fix:** make every `**Severity:**` line parse by the canonical grammar\n
+trailing-section|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n\n## Follow-up\n- T030o43 fixes the **Severity:** handling\n- **T001** — fix it; its **Severity:** stays data-loss\n
+prose-mention|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n- **Scenario:** the **Class:** field was lost; a line written `-\302\240**Class:**` was skipped\n
+class-only|## Findings\n\n### Finding O-017\n- **Class:** harness-locale-decoding\n
+finding-summary|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n\n## Finding summary\nOne finding.\n\n```text\n- **Severity:** minor\n```\n
+SHAPES
+  printf '# Prior review\n\n### Finding G-042\n- **Class:** tier-binding\n- **Severity:** data-loss\n' \
+    > "$spec/notes/verification/reports/opponent-findings-review.md"
+  tier_round_fixture 1 '' G-042:tier-binding:open:minor > "$report"
+  fault_bin "$SANDBOX/fault-manifest-sort" sort 'manifest-locale.nul.'
+  run_rc 3 env PATH="$SANDBOX/fault-manifest-sort:$PATH" bash -c '. "$1"; vf_reports "$2" opponent "$3" "$4"' _ \
+    "$SCRIPTS/verification-lib.sh" "$report" "$SANDBOX/manifest-locale.nul" "$spec"
+  assert_contains "$OUT" 'prior-review manifest records could not be sorted' \
+    'AC-012: manifest records that could not be sorted were read as none (T030o43 review)'
+  # A value of only such whitespace is empty (R2-F4): a required section
+  # whose body is one of the 19 characters, and a canonical finding field of
+  # a U+00A0 alone, are refused in every locale; the canonical field line keeps
+  # its one literal space, so a Class line with a U+00A0 after the dash is not
+  # a field.
+  local blank_spec="$SANDBOX/section-blank" field
+  mkdir -p "$blank_spec/notes"
+  i=0
+  for ch in "${ws[@]}"; do
+    i=$((i+1))
+    tier_round_fixture 1 '' G-042:tier-binding:new:data-loss |
+      sed "s/^Severity tier binding across rounds of one gate\.\$/$ch/" > "$blank_spec/notes/opponent.md"
+    run_rc 3 bash -c '. "$1"; vf_reports "$2" opponent "$3" "$4"' _ \
+      "$SCRIPTS/verification-lib.sh" "$blank_spec/notes/opponent.md" "$SANDBOX/section-blank.nul" "$blank_spec"
+    assert_contains "$OUT" 'empty required report section: what i attacked' \
+      "AC-012: a required section holding only White_Space character $i counted as a body (T030o43 review 2)"
+  done
+  for field in Scenario Reproduced 'Wrong behavior' 'Class-wide fix' Prior; do
+    for l in C en_US.UTF-8; do
+      tier_round_fixture 1 '' G-042:tier-binding:new:data-loss |
+        awk -v f="- **$field:**" -v nb=$'\302\240' 'index($0, f) == 1 {print f " " nb; next} {print}' > "$blank_spec/notes/opponent.md"
+      run_rc 3 in_locale "$l" bash -c '. "$1"; vf_reports "$2" opponent "$3" "$4"' _ \
+        "$SCRIPTS/verification-lib.sh" "$blank_spec/notes/opponent.md" "$SANDBOX/section-blank.nul" "$blank_spec"
+      assert_contains "$OUT" 'incomplete finding G-042' \
+        "AC-012: a finding whose $field is a U+00A0 alone read as complete under LANG=$l (T030o43 review 2)"
+    done
+  done
+  tier_round_fixture 1 '' G-042:tier-binding:new:data-loss |
+    awk -v nb=$'\302\240' 'index($0, "- **Class:**") == 1 {sub(/^- /, "-" nb)} {print}' > "$blank_spec/notes/opponent.md"
+  run_rc 3 bash -c '. "$1"; vf_reports "$2" opponent "$3" "$4"' _ \
+    "$SCRIPTS/verification-lib.sh" "$blank_spec/notes/opponent.md" "$SANDBOX/section-blank.nul" "$blank_spec"
+  assert_contains "$OUT" 'incomplete finding G-042' \
+    'AC-012: a canonical field line read a U+00A0 as its one literal space (T030o43 review 2)'
+@@END

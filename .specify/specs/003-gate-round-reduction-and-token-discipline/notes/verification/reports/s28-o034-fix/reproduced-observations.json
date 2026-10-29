@@ -1,0 +1,258 @@
+{
+  "observations": [
+    {
+      "phase": "red",
+      "probe": "edge",
+      "analyzerExit": 0,
+      "actualWarning": true,
+      "command": "npm run typecheck"
+    },
+    {
+      "phase": "red",
+      "probe": "edge",
+      "analyzerExit": 0,
+      "actualWarning": false,
+      "command": "npm run typecheck -- --project tests/tsconfig.json"
+    },
+    {
+      "phase": "red",
+      "probe": "edge",
+      "analyzerExit": 0,
+      "actualWarning": true,
+      "command": "tsc --noEmit"
+    },
+    {
+      "phase": "red",
+      "probe": "edge",
+      "analyzerExit": 0,
+      "actualWarning": false,
+      "command": "tsc --noEmit tests/unit.ts"
+    },
+    {
+      "phase": "red",
+      "probe": "edge",
+      "analyzerExit": 0,
+      "actualWarning": true,
+      "command": "grep AC-001 README.md"
+    },
+    {
+      "phase": "red",
+      "probe": "edge",
+      "analyzerExit": 0,
+      "actualWarning": false,
+      "command": "grep AC-001 tests/check.sh"
+    },
+    {
+      "phase": "red",
+      "probe": "edge",
+      "analyzerExit": 0,
+      "actualWarning": false,
+      "command": "npm run build -- --outDir tests/build"
+    },
+    {
+      "phase": "red",
+      "probe": "edge",
+      "analyzerExit": 0,
+      "actualWarning": false,
+      "command": "bash tests/check.sh"
+    },
+    {
+      "phase": "red",
+      "probe": "siblings",
+      "analyzerExit": 0,
+      "actualWarning": false,
+      "command": "test -e README.md"
+    },
+    {
+      "phase": "red",
+      "probe": "siblings",
+      "analyzerExit": 0,
+      "actualWarning": false,
+      "command": "test -f README.md"
+    },
+    {
+      "phase": "red",
+      "probe": "siblings",
+      "analyzerExit": 0,
+      "actualWarning": false,
+      "command": "grep pytest README.md"
+    },
+    {
+      "phase": "red",
+      "probe": "siblings",
+      "analyzerExit": 0,
+      "actualWarning": false,
+      "command": "rg bats README.md"
+    },
+    {
+      "phase": "red",
+      "probe": "siblings",
+      "analyzerExit": 0,
+      "actualWarning": false,
+      "command": "diff fixtures/test.txt actual.txt"
+    },
+    {
+      "phase": "red",
+      "probe": "siblings",
+      "analyzerExit": 0,
+      "actualWarning": false,
+      "command": "node --test test/thing.test.js"
+    },
+    {
+      "phase": "red",
+      "probe": "siblings",
+      "analyzerExit": 0,
+      "actualWarning": false,
+      "command": "cargo test"
+    },
+    {
+      "phase": "red",
+      "probe": "siblings",
+      "analyzerExit": 0,
+      "actualWarning": false,
+      "command": "pytest"
+    },
+    {
+      "phase": "red",
+      "probe": "siblings",
+      "analyzerExit": 0,
+      "actualWarning": false,
+      "command": "bats test.bats"
+    },
+    {
+      "phase": "red",
+      "probe": "siblings",
+      "analyzerExit": 0,
+      "actualWarning": false,
+      "command": "bash tests/check.sh"
+    },
+    {
+      "phase": "final-green",
+      "probe": "edge",
+      "analyzerExit": 0,
+      "actualWarning": true,
+      "command": "npm run typecheck"
+    },
+    {
+      "phase": "final-green",
+      "probe": "edge",
+      "analyzerExit": 0,
+      "actualWarning": true,
+      "command": "npm run typecheck -- --project tests/tsconfig.json"
+    },
+    {
+      "phase": "final-green",
+      "probe": "edge",
+      "analyzerExit": 0,
+      "actualWarning": true,
+      "command": "tsc --noEmit"
+    },
+    {
+      "phase": "final-green",
+      "probe": "edge",
+      "analyzerExit": 0,
+      "actualWarning": true,
+      "command": "tsc --noEmit tests/unit.ts"
+    },
+    {
+      "phase": "final-green",
+      "probe": "edge",
+      "analyzerExit": 0,
+      "actualWarning": true,
+      "command": "grep AC-001 README.md"
+    },
+    {
+      "phase": "final-green",
+      "probe": "edge",
+      "analyzerExit": 0,
+      "actualWarning": true,
+      "command": "grep AC-001 tests/check.sh"
+    },
+    {
+      "phase": "final-green",
+      "probe": "edge",
+      "analyzerExit": 0,
+      "actualWarning": true,
+      "command": "npm run build -- --outDir tests/build"
+    },
+    {
+      "phase": "final-green",
+      "probe": "edge",
+      "analyzerExit": 0,
+      "actualWarning": false,
+      "command": "bash tests/check.sh"
+    },
+    {
+      "phase": "final-green",
+      "probe": "siblings",
+      "analyzerExit": 0,
+      "actualWarning": true,
+      "command": "test -e README.md"
+    },
+    {
+      "phase": "final-green",
+      "probe": "siblings",
+      "analyzerExit": 0,
+      "actualWarning": true,
+      "command": "test -f README.md"
+    },
+    {
+      "phase": "final-green",
+      "probe": "siblings",
+      "analyzerExit": 0,
+      "actualWarning": true,
+      "command": "grep pytest README.md"
+    },
+    {
+      "phase": "final-green",
+      "probe": "siblings",
+      "analyzerExit": 0,
+      "actualWarning": true,
+      "command": "rg bats README.md"
+    },
+    {
+      "phase": "final-green",
+      "probe": "siblings",
+      "analyzerExit": 0,
+      "actualWarning": true,
+      "command": "diff fixtures/test.txt actual.txt"
+    },
+    {
+      "phase": "final-green",
+      "probe": "siblings",
+      "analyzerExit": 0,
+      "actualWarning": false,
+      "command": "node --test test/thing.test.js"
+    },
+    {
+      "phase": "final-green",
+      "probe": "siblings",
+      "analyzerExit": 0,
+      "actualWarning": false,
+      "command": "cargo test"
+    },
+    {
+      "phase": "final-green",
+      "probe": "siblings",
+      "analyzerExit": 0,
+      "actualWarning": false,
+      "command": "pytest"
+    },
+    {
+      "phase": "final-green",
+      "probe": "siblings",
+      "analyzerExit": 0,
+      "actualWarning": false,
+      "command": "bats test.bats"
+    },
+    {
+      "phase": "final-green",
+      "probe": "siblings",
+      "analyzerExit": 0,
+      "actualWarning": false,
+      "command": "bash tests/check.sh"
+    }
+  ],
+  "redMissingWarnings": 9,
+  "greenMissingWarnings": 0
+}

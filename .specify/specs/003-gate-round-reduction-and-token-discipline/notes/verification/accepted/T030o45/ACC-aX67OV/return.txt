@@ -1,0 +1,9 @@
+Verification-Return: 1
+Task: T030o45
+Captures: CAP-567-dtDT42
+Summary: capture=CAP-567-dtDT42 command=/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh  key=  -- 3/3 passed exit=0 output=b150ad3c2adee17324471b5021f9d78f292fabb354dcc1009742d11f71d50699 input=c9f2b61691a4447d28f4baaf640c3f43ec993040fda9febaf8eba82134e5b21e log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-567-dtDT42/output.log [complete metadata: capture directory]
+Failure modes:
+FM-016, tests/test-spec-gate.sh::test_rounds, CAP-567-dtDT42
+FM-019, tests/test-gate-contracts.sh::test_reports_and_tally, CAP-567-dtDT42
+INV-004, tests/test-spec-gate.sh::test_rounds, CAP-567-dtDT42
+INV-006, tests/test-gate-contracts.sh::test_reports_and_tally, CAP-567-dtDT42

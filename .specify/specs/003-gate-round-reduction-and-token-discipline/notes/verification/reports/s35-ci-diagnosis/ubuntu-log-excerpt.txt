@@ -1,0 +1,325 @@
+2026-10-28T09:58:22.3044527Z ##[group]Operating System
+2026-10-28T09:58:22.3045260Z Ubuntu
+2026-10-28T09:58:22.3045849Z 24.04.5
+2026-10-28T09:58:22.3046411Z LTS
+2026-10-28T09:58:22.3046926Z ##[endgroup]
+2026-10-28T09:58:22.3047454Z ##[group]Runner Image
+2026-10-28T09:58:22.3048107Z Image: ubuntu-24.04
+2026-10-28T09:58:22.3048704Z Version: 20261012.334.1
+2026-10-28T09:58:22.3050006Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261012.334/images/ubuntu/Ubuntu2404-Readme.md
+2026-10-28T09:58:22.3051999Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261012.334
+2026-10-28T09:58:23.3605038Z ##[group]Fetching the repository
+2026-10-28T09:58:23.3623370Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +9894ce4a679c8120e1be7c432106f7a07021eb0b:refs/remotes/pull/21/merge
+2026-10-28T09:58:25.1056129Z From https://github.com/Rehan712/sdd-kit
+2026-10-28T09:58:25.1058126Z  * [new ref]         9894ce4a679c8120e1be7c432106f7a07021eb0b -> pull/21/merge
+2026-10-28T09:58:25.1063358Z ##[endgroup]
+2026-10-28T09:58:26.3917981Z HEAD is now at 9894ce4 Merge 08210681770b65c6ccdfa2571b80a79a09e03154 into f4a0e4e31df29b53ccb9e088d3b8d0cd58f8e12f
+2026-10-28T09:58:26.3965539Z ##[endgroup]
+2026-10-28T09:58:26.4014384Z [command]/usr/bin/git log -1 --format=%H
+2026-10-28T09:58:26.4041712Z 9894ce4a679c8120e1be7c432106f7a07021eb0b
+2026-10-28T09:58:26.4284729Z ##[group]Run tests/run.sh
+2026-10-28T09:58:26.4285108Z tests/run.sh
+2026-10-28T09:58:26.4553073Z shell: /usr/bin/bash -e {0}
+2026-10-28T09:58:26.4553494Z ##[endgroup]
+2026-10-28T09:58:26.7153849Z == test-build-adapters.sh
+2026-10-28T10:08:31.4275850Z == test-sdd-analyze.sh
+2026-10-28T10:08:31.5843456Z   ok   test_clean_fixture_is_consistent
+2026-10-28T10:08:35.5047855Z   ok   test_uncovered_ac_fails_and_gate_refs_do_not_count
+2026-10-28T10:09:52.1933460Z   FAIL test_verification_bindings
+2026-10-28T10:09:52.1949371Z        assert: AC-004: untyped grepREDIRECT>out.txt AC-001 README.md warns without breaking legacy missing substring: untyped AC Verify
+2026-10-28T10:09:52.1950559Z            in: Analyzing: /tmp/sddkit.hT9Rrn/proj/.specify/specs/001-test-feature
+2026-10-28T10:09:52.1951586Z          ✓ spec.md present
+2026-10-28T10:09:52.1951873Z          ✓ plan.md present
+2026-10-28T10:09:52.1952147Z          ✓ tasks.md present
+2026-10-28T10:09:52.1952438Z          ✓ STATUS.md present
+2026-10-28T10:09:52.1952941Z          ✓ verification command configuration valid
+2026-10-28T10:09:52.1953663Z          ✓ no unresolved [NEEDS CLARIFICATION] markers
+2026-10-28T10:09:52.1954344Z          ✓ spec.md defines 2 AC id(s)
+2026-10-28T10:09:52.1954961Z          ✓ every AC is covered by an implementation task
+2026-10-28T10:09:52.1955730Z          ✓ all task refs resolve to spec ids
+2026-10-28T10:09:52.1956271Z          ✓ 6 task(s) parsed
+2026-10-28T10:09:52.1956851Z          ✓ legacy verification contract remains compatible
+2026-10-28T10:09:52.1957532Z          ✓ opponent gate present, agent file exists
+2026-10-28T10:09:52.1958196Z          ✓ reality-check gate present, agent file exists
+2026-10-28T10:09:52.1958693Z        ---
+2026-10-28T10:09:52.1959126Z        consistent — spec/plan/tasks line up
+2026-10-28T10:09:52.1960024Z        assert: AC-004: grepREDIRECT>out.txt AC-001 README.md remains warning-only missing substring: warning(s), 0 errors
+2026-10-28T10:09:52.1961349Z            in: Analyzing: /tmp/sddkit.hT9Rrn/proj/.specify/specs/001-test-feature
+2026-10-28T10:09:52.1962195Z          ✓ spec.md present
+2026-10-28T10:09:52.1962550Z          ✓ plan.md present
+2026-10-28T10:09:52.1962813Z          ✓ tasks.md present
+2026-10-28T10:09:52.1963074Z          ✓ STATUS.md present
+2026-10-28T10:09:52.1963383Z          ✓ verification command configuration valid
+2026-10-28T10:09:52.1963758Z          ✓ no unresolved [NEEDS CLARIFICATION] markers
+2026-10-28T10:09:52.1964102Z          ✓ spec.md defines 2 AC id(s)
+2026-10-28T10:09:52.1964547Z          ✓ every AC is covered by an implementation task
+2026-10-28T10:09:52.1964905Z          ✓ all task refs resolve to spec ids
+2026-10-28T10:09:52.1965294Z          ✓ 6 task(s) parsed
+2026-10-28T10:09:52.1965610Z          ✓ legacy verification contract remains compatible
+2026-10-28T10:09:52.1965985Z          ✓ opponent gate present, agent file exists
+2026-10-28T10:09:52.1966456Z          ✓ reality-check gate present, agent file exists
+2026-10-28T10:09:52.1966750Z        ---
+2026-10-28T10:09:52.1967009Z        consistent — spec/plan/tasks line up
+2026-10-28T10:09:52.1967669Z        assert: AC-004: untyped tscREDIRECT>out.txt --noEmit warns without breaking legacy missing substring: untyped AC Verify
+2026-10-28T10:09:52.1968424Z            in: Analyzing: /tmp/sddkit.hT9Rrn/proj/.specify/specs/001-test-feature
+2026-10-28T10:09:52.1968840Z          ✓ spec.md present
+2026-10-28T10:09:52.1969089Z          ✓ plan.md present
+2026-10-28T10:09:52.1969427Z          ✓ tasks.md present
+2026-10-28T10:09:52.1969696Z          ✓ STATUS.md present
+2026-10-28T10:09:52.1969990Z          ✓ verification command configuration valid
+2026-10-28T10:09:52.1970354Z          ✓ no unresolved [NEEDS CLARIFICATION] markers
+2026-10-28T10:09:52.1971308Z          ✓ spec.md defines 2 AC id(s)
+2026-10-28T10:09:52.1971947Z          ✓ every AC is covered by an implementation task
+2026-10-28T10:09:52.1972525Z          ✓ all task refs resolve to spec ids
+2026-10-28T10:09:52.1972987Z          ✓ 6 task(s) parsed
+2026-10-28T10:09:52.1973527Z          ✓ legacy verification contract remains compatible
+2026-10-28T10:09:52.1974169Z          ✓ opponent gate present, agent file exists
+2026-10-28T10:09:52.1975184Z          ✓ reality-check gate present, agent file exists
+2026-10-28T10:09:52.1975687Z        ---
+2026-10-28T10:09:52.1976127Z        consistent — spec/plan/tasks line up
+2026-10-28T10:09:52.1976942Z        assert: AC-004: tscREDIRECT>out.txt --noEmit remains warning-only missing substring: warning(s), 0 errors
+2026-10-28T10:09:52.1977950Z            in: Analyzing: /tmp/sddkit.hT9Rrn/proj/.specify/specs/001-test-feature
+2026-10-28T10:09:52.1978689Z          ✓ spec.md present
+2026-10-28T10:09:52.1979125Z          ✓ plan.md present
+2026-10-28T10:09:52.1979545Z          ✓ tasks.md present
+2026-10-28T10:09:52.1979996Z          ✓ STATUS.md present
+2026-10-28T10:09:52.1980504Z          ✓ verification command configuration valid
+2026-10-28T10:09:52.1981351Z          ✓ no unresolved [NEEDS CLARIFICATION] markers
+2026-10-28T10:09:52.1981939Z          ✓ spec.md defines 2 AC id(s)
+2026-10-28T10:09:52.1982516Z          ✓ every AC is covered by an implementation task
+2026-10-28T10:09:52.1983165Z          ✓ all task refs resolve to spec ids
+2026-10-28T10:09:52.1983761Z          ✓ 6 task(s) parsed
+2026-10-28T10:09:52.1984356Z          ✓ legacy verification contract remains compatible
+2026-10-28T10:09:52.1985104Z          ✓ opponent gate present, agent file exists
+2026-10-28T10:09:52.1985888Z          ✓ reality-check gate present, agent file exists
+2026-10-28T10:09:52.1986419Z        ---
+2026-10-28T10:09:52.1986872Z        consistent — spec/plan/tasks line up
+2026-10-28T10:09:52.1987877Z        assert: AC-004: untyped testREDIRECT>out.txt -e README.md warns without breaking legacy missing substring: untyped AC Verify
+2026-10-28T10:09:52.1989118Z            in: Analyzing: /tmp/sddkit.hT9Rrn/proj/.specify/specs/001-test-feature
+2026-10-28T10:09:52.1989938Z          ✓ spec.md present
+2026-10-28T10:09:52.1990425Z          ✓ plan.md present
+2026-10-28T10:09:52.1991541Z          ✓ tasks.md present
+2026-10-28T10:09:52.1992453Z          ✓ STATUS.md present
+2026-10-28T10:09:52.1993113Z          ✓ verification command configuration valid
+2026-10-28T10:09:52.1993869Z          ✓ no unresolved [NEEDS CLARIFICATION] markers
+2026-10-28T10:09:52.1994524Z          ✓ spec.md defines 2 AC id(s)
+2026-10-28T10:09:52.1995157Z          ✓ every AC is covered by an implementation task
+2026-10-28T10:09:52.1995814Z          ✓ all task refs resolve to spec ids
+2026-10-28T10:09:52.1996374Z          ✓ 6 task(s) parsed
+2026-10-28T10:09:52.1996961Z          ✓ legacy verification contract remains compatible
+2026-10-28T10:09:52.1997724Z          ✓ opponent gate present, agent file exists
+2026-10-28T10:09:52.1998398Z          ✓ reality-check gate present, agent file exists
+2026-10-28T10:09:52.1998913Z        ---
+2026-10-28T10:09:52.1999342Z        consistent — spec/plan/tasks line up
+2026-10-28T10:09:52.2000256Z        assert: AC-004: testREDIRECT>out.txt -e README.md remains warning-only missing substring: warning(s), 0 errors
+2026-10-28T10:09:52.2001650Z            in: Analyzing: /tmp/sddkit.hT9Rrn/proj/.specify/specs/001-test-feature
+2026-10-28T10:09:52.2002434Z          ✓ spec.md present
+2026-10-28T10:09:52.2002919Z          ✓ plan.md present
+2026-10-28T10:09:52.2003480Z          ✓ tasks.md present
+2026-10-28T10:09:52.2003966Z          ✓ STATUS.md present
+2026-10-28T10:09:52.2004556Z          ✓ verification command configuration valid
+2026-10-28T10:09:52.2005291Z          ✓ no unresolved [NEEDS CLARIFICATION] markers
+2026-10-28T10:09:52.2005969Z          ✓ spec.md defines 2 AC id(s)
+2026-10-28T10:09:52.2006645Z          ✓ every AC is covered by an implementation task
+2026-10-28T10:09:52.2007330Z          ✓ all task refs resolve to spec ids
+2026-10-28T10:09:52.2007896Z          ✓ 6 task(s) parsed
+2026-10-28T10:09:52.2008495Z          ✓ legacy verification contract remains compatible
+2026-10-28T10:09:52.2009202Z          ✓ opponent gate present, agent file exists
+2026-10-28T10:09:52.2009905Z          ✓ reality-check gate present, agent file exists
+2026-10-28T10:09:52.2010471Z        ---
+2026-10-28T10:09:52.2011194Z        consistent — spec/plan/tasks line up
+2026-10-28T10:09:52.2012517Z        assert: AC-004: untyped test -fREDIRECT>out.txt README.md warns without breaking legacy missing substring: untyped AC Verify
+2026-10-28T10:09:52.2013747Z            in: Analyzing: /tmp/sddkit.hT9Rrn/proj/.specify/specs/001-test-feature
+2026-10-28T10:09:52.2014561Z          ✓ spec.md present
+2026-10-28T10:09:52.2015060Z          ✓ plan.md present
+2026-10-28T10:09:52.2015555Z          ✓ tasks.md present
+2026-10-28T10:09:52.2016057Z          ✓ STATUS.md present
+2026-10-28T10:09:52.2016654Z          ✓ verification command configuration valid
+2026-10-28T10:09:52.2017341Z          ✓ no unresolved [NEEDS CLARIFICATION] markers
+2026-10-28T10:09:52.2017970Z          ✓ spec.md defines 2 AC id(s)
+2026-10-28T10:09:52.2018612Z          ✓ every AC is covered by an implementation task
+2026-10-28T10:09:52.2019277Z          ✓ all task refs resolve to spec ids
+2026-10-28T10:09:52.2019856Z          ✓ 6 task(s) parsed
+2026-10-28T10:09:52.2020437Z          ✓ legacy verification contract remains compatible
+2026-10-28T10:09:52.2021138Z          ✓ opponent gate present, agent file exists
+2026-10-28T10:09:52.2021574Z          ✓ reality-check gate present, agent file exists
+2026-10-28T10:09:52.2021931Z        ---
+2026-10-28T10:09:52.2022184Z        consistent — spec/plan/tasks line up
+2026-10-28T10:09:52.2022780Z        assert: AC-004: test -fREDIRECT>out.txt README.md remains warning-only missing substring: warning(s), 0 errors
+2026-10-28T10:09:52.2023508Z            in: Analyzing: /tmp/sddkit.hT9Rrn/proj/.specify/specs/001-test-feature
+2026-10-28T10:09:52.2023942Z          ✓ spec.md present
+2026-10-28T10:09:52.2024191Z          ✓ plan.md present
+2026-10-28T10:09:52.2024445Z          ✓ tasks.md present
+2026-10-28T10:09:52.2024792Z          ✓ STATUS.md present
+2026-10-28T10:09:52.2025098Z          ✓ verification command configuration valid
+2026-10-28T10:09:52.2025734Z          ✓ no unresolved [NEEDS CLARIFICATION] markers
+2026-10-28T10:09:52.2026122Z          ✓ spec.md defines 2 AC id(s)
+2026-10-28T10:09:52.2026483Z          ✓ every AC is covered by an implementation task
+2026-10-28T10:09:52.2026834Z          ✓ all task refs resolve to spec ids
+2026-10-28T10:09:52.2027227Z          ✓ 6 task(s) parsed
+2026-10-28T10:09:52.2027549Z          ✓ legacy verification contract remains compatible
+2026-10-28T10:09:52.2028023Z          ✓ opponent gate present, agent file exists
+2026-10-28T10:09:52.2028407Z          ✓ reality-check gate present, agent file exists
+2026-10-28T10:09:52.2028777Z        ---
+2026-10-28T10:09:52.2029016Z        consistent — spec/plan/tasks line up
+2026-10-28T10:09:52.2029653Z        assert: AC-004: untyped tsc REDIRECT>out.txt --noEmit warns without breaking legacy missing substring: untyped AC Verify
+2026-10-28T10:09:52.2030393Z            in: Analyzing: /tmp/sddkit.hT9Rrn/proj/.specify/specs/001-test-feature
+2026-10-28T10:09:52.2031091Z          ✓ spec.md present
+2026-10-28T10:09:52.2031368Z          ✓ plan.md present
+2026-10-28T10:09:52.2031622Z          ✓ tasks.md present
+2026-10-28T10:09:52.2031995Z          ✓ STATUS.md present
+2026-10-28T10:09:52.2032308Z          ✓ verification command configuration valid
+2026-10-28T10:09:52.2032770Z          ✓ no unresolved [NEEDS CLARIFICATION] markers
+2026-10-28T10:09:52.2033117Z          ✓ spec.md defines 2 AC id(s)
+2026-10-28T10:09:52.2033458Z          ✓ every AC is covered by an implementation task
+2026-10-28T10:09:52.2033902Z          ✓ all task refs resolve to spec ids
+2026-10-28T10:09:52.2034211Z          ✓ 6 task(s) parsed
+2026-10-28T10:09:52.2034522Z          ✓ legacy verification contract remains compatible
+2026-10-28T10:09:52.2034939Z          ✓ opponent gate present, agent file exists
+2026-10-28T10:09:52.2035367Z          ✓ reality-check gate present, agent file exists
+2026-10-28T10:09:52.2035742Z        ---
+2026-10-28T10:09:52.2036003Z        consistent — spec/plan/tasks line up
+2026-10-28T10:09:52.2036601Z        assert: AC-004: tsc REDIRECT>out.txt --noEmit remains warning-only missing substring: warning(s), 0 errors
+2026-10-28T10:09:52.2037462Z            in: Analyzing: /tmp/sddkit.hT9Rrn/proj/.specify/specs/001-test-feature
+2026-10-28T10:09:52.2037879Z          ✓ spec.md present
+2026-10-28T10:09:52.2038216Z          ✓ plan.md present
+2026-10-28T10:09:52.2038478Z          ✓ tasks.md present
+2026-10-28T10:09:52.2038731Z          ✓ STATUS.md present
+2026-10-28T10:09:52.2039025Z          ✓ verification command configuration valid
+2026-10-28T10:09:52.2039487Z          ✓ no unresolved [NEEDS CLARIFICATION] markers
+2026-10-28T10:09:52.2039818Z          ✓ spec.md defines 2 AC id(s)
+2026-10-28T10:09:52.2040248Z          ✓ every AC is covered by an implementation task
+2026-10-28T10:09:52.2040597Z          ✓ all task refs resolve to spec ids
+2026-10-28T10:09:52.2041168Z          ✓ 6 task(s) parsed
+2026-10-28T10:09:52.2041572Z          ✓ legacy verification contract remains compatible
+2026-10-28T10:09:52.2041972Z          ✓ opponent gate present, agent file exists
+2026-10-28T10:09:52.2042345Z          ✓ reality-check gate present, agent file exists
+2026-10-28T10:09:52.2042637Z        ---
+2026-10-28T10:09:52.2042873Z        consistent — spec/plan/tasks line up
+2026-10-28T10:09:52.2043436Z        assert: AC-004: untyped test REDIRECT>out.txt -e README.md warns without breaking legacy missing substring: untyped AC Verify
+2026-10-28T10:09:52.2044090Z            in: Analyzing: /tmp/sddkit.hT9Rrn/proj/.specify/specs/001-test-feature
+2026-10-28T10:09:52.2044491Z          ✓ spec.md present
+2026-10-28T10:09:52.2044830Z          ✓ plan.md present
+2026-10-28T10:09:52.2045083Z          ✓ tasks.md present
+2026-10-28T10:09:52.2045342Z          ✓ STATUS.md present
+2026-10-28T10:09:52.2045736Z          ✓ verification command configuration valid
+2026-10-28T10:09:52.2046158Z          ✓ no unresolved [NEEDS CLARIFICATION] markers
+2026-10-28T10:09:52.2046529Z          ✓ spec.md defines 2 AC id(s)
+2026-10-28T10:09:52.2047125Z          ✓ every AC is covered by an implementation task
+2026-10-28T10:09:52.2047494Z          ✓ all task refs resolve to spec ids
+2026-10-28T10:09:52.2047796Z          ✓ 6 task(s) parsed
+2026-10-28T10:09:52.2048213Z          ✓ legacy verification contract remains compatible
+2026-10-28T10:09:52.2048588Z          ✓ opponent gate present, agent file exists
+2026-10-28T10:09:52.2048945Z          ✓ reality-check gate present, agent file exists
+2026-10-28T10:09:52.2049322Z        ---
+2026-10-28T10:09:52.2049562Z        consistent — spec/plan/tasks line up
+2026-10-28T10:09:52.2050162Z        assert: AC-004: test REDIRECT>out.txt -e README.md remains warning-only missing substring: warning(s), 0 errors
+2026-10-28T10:09:52.2051030Z            in: Analyzing: /tmp/sddkit.hT9Rrn/proj/.specify/specs/001-test-feature
+2026-10-28T10:09:52.2051463Z          ✓ spec.md present
+2026-10-28T10:09:52.2051710Z          ✓ plan.md present
+2026-10-28T10:09:52.2051952Z          ✓ tasks.md present
+2026-10-28T10:09:52.2052285Z          ✓ STATUS.md present
+2026-10-28T10:09:52.2052639Z          ✓ verification command configuration valid
+2026-10-28T10:09:52.2053111Z          ✓ no unresolved [NEEDS CLARIFICATION] markers
+2026-10-28T10:09:52.2053466Z          ✓ spec.md defines 2 AC id(s)
+2026-10-28T10:09:52.2053904Z          ✓ every AC is covered by an implementation task
+2026-10-28T10:09:52.2054264Z          ✓ all task refs resolve to spec ids
+2026-10-28T10:09:52.2054647Z          ✓ 6 task(s) parsed
+2026-10-28T10:09:52.2054957Z          ✓ legacy verification contract remains compatible
+2026-10-28T10:09:52.2055327Z          ✓ opponent gate present, agent file exists
+2026-10-28T10:09:52.2055787Z          ✓ reality-check gate present, agent file exists
+2026-10-28T10:09:52.2056068Z        ---
+2026-10-28T10:09:52.2056306Z        consistent — spec/plan/tasks line up
+2026-10-28T10:09:52.2056945Z        assert: AC-004: bashREDIRECT>out.txt tests/typecheck.sh has no weak executable unexpectedly contains: untyped AC Verify
+2026-10-28T10:09:52.2057777Z        assert: AC-004: bashREDIRECT>out.txt tests/typecheck.sh stays clean missing substring: consistent
+2026-10-28T10:09:52.2058348Z            in: Analyzing: /tmp/sddkit.hT9Rrn/proj/.specify/specs/001-test-feature
+2026-10-28T10:09:52.2059014Z          ✓ spec.md present
+2026-10-28T10:09:52.2059272Z          ✓ plan.md present
+2026-10-28T10:09:52.2059554Z          ✓ tasks.md present
+2026-10-28T10:09:52.2059866Z          ✓ STATUS.md present
+2026-10-28T10:09:52.2060164Z          ✓ verification command configuration valid
+2026-10-28T10:09:52.2060630Z          ✓ no unresolved [NEEDS CLARIFICATION] markers
+2026-10-28T10:09:52.2061428Z          ✓ spec.md defines 2 AC id(s)
+2026-10-28T10:09:52.2062049Z          ✓ every AC is covered by an implementation task
+2026-10-28T10:09:52.2062741Z          ✓ all task refs resolve to spec ids
+2026-10-28T10:09:52.2063527Z          ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence
+2026-10-28T10:09:52.2064411Z          ✓ 6 task(s) parsed
+2026-10-28T10:09:52.2065038Z          ✓ legacy verification contract remains compatible
+2026-10-28T10:09:52.2065743Z          ✓ opponent gate present, agent file exists
+2026-10-28T10:09:52.2066240Z         
+2026-10-28T10:09:52.2067087Z        assert: AC-004: cargo testREDIRECT>out.txt --test typecheck has no weak executable unexpectedly contains: untyped AC Verify
+2026-10-28T10:09:52.2068438Z        assert: AC-004: cargo testREDIRECT>out.txt --test typecheck stays clean missing substring: consistent
+2026-10-28T10:09:52.2069496Z            in: Analyzing: /tmp/sddkit.hT9Rrn/proj/.specify/specs/001-test-feature
+2026-10-28T10:09:52.2070253Z          ✓ spec.md present
+2026-10-28T10:09:52.2070978Z          ✓ plan.md present
+2026-10-28T10:09:52.2071477Z          ✓ tasks.md present
+2026-10-28T10:09:52.2071948Z          ✓ STATUS.md present
+2026-10-28T10:09:52.2072558Z          ✓ verification command configuration valid
+2026-10-28T10:09:52.2073275Z          ✓ no unresolved [NEEDS CLARIFICATION] markers
+2026-10-28T10:09:52.2073895Z          ✓ spec.md defines 2 AC id(s)
+2026-10-28T10:09:52.2074707Z          ✓ every AC is covered by an implementation task
+2026-10-28T10:09:52.2075442Z          ✓ all task refs resolve to spec ids
+2026-10-28T10:09:52.2076252Z          ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence
+2026-10-28T10:09:52.2077146Z          ✓ 6 task(s) parsed
+2026-10-28T10:09:52.2077762Z          ✓ legacy verification contract remains compatible
+2026-10-28T10:09:52.2078462Z          ✓ opponent gate present, agent file exists
+2026-10-28T10:09:52.2078959Z         
+2026-10-28T10:09:52.2079843Z        assert: AC-004: npm runREDIRECT>out.txt test -- --grep typecheck has no weak executable unexpectedly contains: untyped AC Verify
+2026-10-28T10:09:52.2081437Z        assert: AC-004: npm runREDIRECT>out.txt test -- --grep typecheck stays clean missing substring: consistent
+2026-10-28T10:09:52.2082085Z            in: Analyzing: /tmp/sddkit.hT9Rrn/proj/.specify/specs/001-test-feature
+2026-10-28T10:09:52.2082536Z          ✓ spec.md present
+2026-10-28T10:09:52.2082982Z          ✓ plan.md present
+2026-10-28T10:09:52.2083438Z          ✓ tasks.md present
+2026-10-28T10:09:52.2083913Z          ✓ STATUS.md present
+2026-10-28T10:09:52.2084446Z          ✓ verification command configuration valid
+2026-10-28T10:09:52.2085173Z          ✓ no unresolved [NEEDS CLARIFICATION] markers
+2026-10-28T10:09:52.2085839Z          ✓ spec.md defines 2 AC id(s)
+2026-10-28T10:09:52.2086508Z          ✓ every AC is covered by an implementation task
+2026-10-28T10:09:52.2087185Z          ✓ all task refs resolve to spec ids
+2026-10-28T10:09:52.2087996Z          ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence
+2026-10-28T10:09:52.2088882Z          ✓ 6 task(s) parsed
+2026-10-28T10:09:52.2089467Z          ✓ legacy verification contract remains compatible
+2026-10-28T10:09:52.2090204Z          ✓ opponent gate present, agent file exists
+2026-10-28T10:09:52.2090690Z         
+2026-10-28T10:09:52.2091790Z        assert: AC-004: bash REDIRECT>out.txt tests/typecheck.sh has no weak executable unexpectedly contains: untyped AC Verify
+2026-10-28T10:09:52.2092993Z        assert: AC-004: bash REDIRECT>out.txt tests/typecheck.sh stays clean missing substring: consistent
+2026-10-28T10:09:52.2093989Z            in: Analyzing: /tmp/sddkit.hT9Rrn/proj/.specify/specs/001-test-feature
+2026-10-28T10:09:52.2094736Z          ✓ spec.md present
+2026-10-28T10:09:52.2095117Z          ✓ plan.md present
+2026-10-28T10:09:52.2095501Z          ✓ tasks.md present
+2026-10-28T10:09:52.2095974Z          ✓ STATUS.md present
+2026-10-28T10:09:52.2096390Z          ✓ verification command configuration valid
+2026-10-28T10:09:52.2097073Z          ✓ no unresolved [NEEDS CLARIFICATION] markers
+2026-10-28T10:09:52.2097676Z          ✓ spec.md defines 2 AC id(s)
+2026-10-28T10:09:52.2098285Z          ✓ every AC is covered by an implementation task
+2026-10-28T10:09:52.2098932Z          ✓ all task refs resolve to spec ids
+2026-10-28T10:09:52.2099685Z          ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence
+2026-10-28T10:09:52.2100584Z          ✓ 6 task(s) parsed
+2026-10-28T10:09:52.2101484Z          ✓ legacy verification contract remains compatible
+2026-10-28T10:09:52.2102182Z          ✓ opponent gate present, agent file exists
+2026-10-28T10:09:52.2102764Z         
+2026-10-28T10:09:52.2103628Z        assert: AC-004: npm run REDIRECT>out.txt test -- --grep typecheck has no weak executable unexpectedly contains: untyped AC Verify
+2026-10-28T10:09:52.2104998Z        assert: AC-004: npm run REDIRECT>out.txt test -- --grep typecheck stays clean missing substring: consistent
+2026-10-28T10:09:52.2106044Z            in: Analyzing: /tmp/sddkit.hT9Rrn/proj/.specify/specs/001-test-feature
+2026-10-28T10:09:52.2106827Z          ✓ spec.md present
+2026-10-28T10:09:52.2107310Z          ✓ plan.md present
+2026-10-28T10:09:52.2107780Z          ✓ tasks.md present
+2026-10-28T10:09:52.2108282Z          ✓ STATUS.md present
+2026-10-28T10:09:52.2109054Z          ✓ verification command configuration valid
+2026-10-28T10:09:52.2109764Z          ✓ no unresolved [NEEDS CLARIFICATION] markers
+2026-10-28T10:09:52.2110402Z          ✓ spec.md defines 2 AC id(s)
+2026-10-28T10:09:52.2111226Z          ✓ every AC is covered by an implementation task
+2026-10-28T10:09:52.2111871Z          ✓ all task refs resolve to spec ids
+2026-10-28T10:09:52.2112669Z          ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence
+2026-10-28T10:09:52.2113529Z          ✓ 6 task(s) parsed
+2026-10-28T10:09:52.2114114Z          ✓ legacy verification contract remains compatible
+2026-10-28T10:09:52.2114788Z          ✓ opponent gate present, agent file exists
+2026-10-28T10:09:52.2115295Z         
+2026-10-28T10:09:52.2245424Z   -- 18/19 passed
+2026-10-28T10:09:52.2264490Z == test-spec-ac-coverage.sh
+2026-10-28T10:21:34.2230672Z == test-verification.sh
+2026-10-28T10:25:44.6595091Z   ok   test_capture_provenance
+2026-10-28T10:25:47.6874699Z   ok   test_config_grammar
+2026-10-28T10:25:47.8854709Z   ok   test_owned_transactions
+2026-10-28T10:25:47.8867542Z   -- 3/3 passed
+2026-10-28T10:25:47.8899944Z ##[error]Process completed with exit code 1.

@@ -1,0 +1,106 @@
+worktree-stat-digest pre=472f0127b0b3eedf67bc54e43439525e30a82f37b94d0685d270425797c6de9f
+tools: bash=/bin/bash git=/usr/bin/git shellcheck=/opt/homebrew/bin/shellcheck
+opponent sealed-rounds=9 pending=0 ledgers=9
+PASS opponent no pending reservation
+reality-check sealed-rounds=1 pending=0 ledgers=1
+PASS reality-check no pending reservation
+PASS no opponent ROUND-10 ledger
+PASS no reality-check ROUND-2 ledger
+PASS opponent round 1 digest 1ac95178f408b2ae
+PASS opponent round 2 digest 5170b08212a51a9b
+PASS opponent round 3 digest 3de48d658a33a909
+PASS opponent round 4 digest d044652efcb90251
+PASS opponent round 5 digest 0898afcc62cf8716
+PASS opponent round 6 digest cc1b86cb05959b85
+PASS opponent round 7 digest 9f98e50c63046c9f
+PASS opponent round 8 digest b391edbf50604425
+PASS opponent round 9 digest 2aae626e3c600201
+PASS round 9 canonical block == returned block
+PASS round 9 digest == 2aae626e...
+PASS reality-check round 1 digest == ledger == e5f957db...
+PASS reality-check round 1 canonical == returned
+ROUND-9 meta: version 1 gate opponent round 9 floor FLOOR-k1reWt source aa18111b6dbe36a6d75e923129802ffa7c688dddedc9a7ec811c350dd7bc66c4 reserved 2026-09-22T23:49:11Z 
+current source=aa18111b6dbe36a6d75e923129802ffa7c688dddedc9a7ec811c350dd7bc66c4
+PASS source == aa18111b...
+PASS current input manifest cmp-identical to hosted-CI snapshot-inputs.nul
+PASS Decisions digest == 98c1ec6a... (got 98c1ec6a9a37d16f)
+PASS round 9 outcome (2aae626e / O-013 / O-014) absent from Decisions
+last Decisions line: - 2026-09-22T19:22:38Z — waiver: gate=opponent; round=9; after=8; by=Rehan712; reason=user chose the coordinated scope o
+PASS FLOOR-k1reWt validates current (rc=0)
+PASS FLOOR-k1reWt commands executed=22 reused=49 (22/49)
+latest pointer .specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/floor-latest -> FLOOR-k1reWt 
+PASS capture CAP-409-Z8jCNl reusable now (rc=0)
+PASS capture CAP-410-M38Py8 reusable now (rc=0)
+PASS capture CAP-389-mHlDcf reusable now (rc=0)
+PASS T029 control capture CAP-367-g14RVk is NOT current (rc=3: capture stale: current inputs changed; refresh verification)
+PASS no held lock
+PASS HEAD == 0d55c62 (0d55c62) on spec/003-gate-round-reduction-and-token-discipline
+PASS T030 unchecked
+PASS T031 unchecked
+PASS T032 unchecked
+PASS T033 unchecked
+PASS T034 unchecked
+PASS T030o37 checked
+PASS T030o38 checked
+PASS T030o39/T030o40 not yet in tasks.md
+staging survivors: floor=5 checkpoint=5 capture=0
+captures on disk=404 ledger entries=404
+PASS opponent round 10 refused at exit 4 (rc=4)
+w10 output (9 lines):
+round authorization denied: opponent round 10 needs an exact-round user waiver/spec revision after round 9
+  candidate authorization lines were found and refused:
+  STATUS.md:168 authorizes round=4, not round=10
+  STATUS.md:206 authorizes round=5, not round=10
+  STATUS.md:212 refused: waiver needs exactly 5 "; "-separated fields, found 6 — a "; " inside reason= splits the entry
+  STATUS.md:222 authorizes round=6, not round=10
+  STATUS.md:250 authorizes round=7, not round=10
+  STATUS.md:288 authorizes round=8, not round=10
+  STATUS.md:331 authorizes round=9, not round=10
+w10 candidate lines naming STATUS.md: 7
+opponent 9 check rc=0: opponent round 9 is already completed; the next round is 10
+reality-check 2 check rc=0: rounds 1-3 need no authorization: reality-check round 2
+PASS tally exit 0 (rc=0)
+PASS tally byte-identical to r9-tally.log
+PASS ci collect.rc == 0
+PASS ci build.rc == 0
+PASS ci pr-close.rc == 0
+PASS ci branch-delete.rc == 0
+PASS ci snapshot-inputs.sha256 == aa18111b...
+PASS snapshot commit tree == 13b18cd7
+PASS snapshot commit parent == 0d55c62
+jobs.json: shellcheck=success tests-bash32=success tests (ubuntu-latest)=success tests (macos-latest)=success
+jobs.json non-success step conclusions: 
+job tests__ubuntu-latest_: ok-lines=130 FAIL-lines=0 suites=15 summed=130/130 merge-ref-55d1325e-mentions=3
+job tests__macos-latest_: ok-lines=130 FAIL-lines=0 suites=15 summed=130/130 merge-ref-55d1325e-mentions=3
+job tests-bash32: ok-lines=130 FAIL-lines=0 suites=15 summed=130/130 merge-ref-55d1325e-mentions=3
+pr-final-state: state=CLOSED closed=true closedAt=2026-09-22T19:52:18Z mergedAt=null draft=true head=15b7bb5d64343e12f9dbfc51c2df92d0274b2784
+  bookkeeping in CI tree: .specify/specs/001-codex-subagent-gates-and-hard-task-escalation/notes/evidence.md same
+  bookkeeping in CI tree: .specify/specs/001-codex-subagent-gates-and-hard-task-escalation/notes/opponent.md same
+  bookkeeping in CI tree: .specify/specs/001-codex-subagent-gates-and-hard-task-escalation/notes/reality-check.md same
+  bookkeeping in CI tree: .specify/specs/002-usage-limit-handling-for-dispatched-runs/notes/evidence.md same
+  bookkeeping in CI tree: .specify/specs/002-usage-limit-handling-for-dispatched-runs/notes/opponent.md same
+  bookkeeping in CI tree: .specify/specs/002-usage-limit-handling-for-dispatched-runs/notes/reality-check.md same
+PASS 001/002 files: 22 in CI tree, 6 bookkeeping, 0 differ from today's bytes; same path set
+PASS 001/002 spec dirs clean vs HEAD (no diff, no untracked)
+vf_bookkeeping_path(002 opponent.md) rc=0 (0 = excluded)
+vf_path_record(002 opponent.md) rc=0 record-bytes=0 stderr=none-captured
+vf_path_record(README.md) rc=0 record-bytes=93 (control)
+identity records: 002 notes/* paths=10; 002 opponent/reality-check/evidence reports=0
+manifest seeds: O-001:return-envelope-parsing:wrong-result O-002:round-authorization-grammar:wrong-result O-003:live-control-semantic-validation:wrong-result O-004:gate-report-schema-validation:wrong-result O-005:config-interpolation-validation:wrong-result O-006:post-pr-followup-binding-schema:regression 
+replay WITHOUT manifest seed (tally rule):
+  downgrade round=6 id=O-002 status=reopened sev=degraded
+  downgrade round=7 id=O-002 status=reopened sev=degraded
+  downgrade round=7 id=O-010 status=reopened sev=degraded
+  downgrade round=8 id=O-002 status=reopened sev=degraded
+  severity-downgrades=4
+replay WITH manifest seed (guard rule):
+  downgrade round=1 id=O-001 status=reopened sev=minor
+  downgrade round=6 id=O-002 status=reopened sev=degraded
+  downgrade round=7 id=O-002 status=reopened sev=degraded
+  downgrade round=7 id=O-010 status=reopened sev=degraded
+  downgrade round=8 id=O-002 status=reopened sev=degraded
+  severity-downgrades=5
+cited mutation sites: lib:1243=[{ k=$5 SUBSEP $2] tgc:1305=[if(body ~ /;;|;&/) fail()]
+worktree-stat-digest post=ebfa0ada98fa0b3402c83446958ca000ef6e9af6f14ce7831ff1b294fae3bc92
+FAIL worktree unchanged by this audit
+audit failures=1

@@ -1,0 +1,34 @@
+{
+  "recordType": "t3-worker-invocation-observation",
+  "task": "T029",
+  "purpose": "Fresh real no-tick return for AC016 rejection/acceptance control",
+  "requested": {
+    "providerInstanceId": "codex_codex_gym",
+    "model": "gpt-6.1-sol",
+    "options": {
+      "reasoningEffort": "high",
+      "serviceTier": "default"
+    }
+  },
+  "observed": {
+    "taskId": "node:delegated-task:command%3Amcp%3Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%3Adelegate-task%3Asdd003-rc3-t029-no-tick-worker-r1",
+    "childThreadId": "thread:delegated-task:command%3Amcp%3Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%3Adelegate-task%3Asdd003-rc3-t029-no-tick-worker-r1",
+    "childRunId": "run:thread:thread%3Adelegated-task%3Acommand%253Amcp%253Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%253Adelegate-task%253Asdd003-rc3-t029-no-tick-worker-r1:ordinal:1",
+    "providerInstanceId": "codex_codex_gym",
+    "model": "gpt-6.1-sol",
+    "options": [
+      {
+        "id": "reasoningEffort",
+        "value": "high"
+      },
+      {
+        "id": "serviceTier",
+        "value": "default"
+      }
+    ],
+    "status": "running"
+  },
+  "source": "a7e7dd326b27c7565c26349485c440af26f718a7f16e400ea42ed6961d03cd1a",
+  "floor": "FLOOR-il41Kn",
+  "recordedAt": "2026-10-25T15:35:19.553145+00:00"
+}

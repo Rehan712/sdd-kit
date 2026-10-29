@@ -1,0 +1,244 @@
+@@OLD
+nbsp-fence-pair|read|\302\240```\n### Finding G-042\n- **Class:** tier-binding\n- **Severity:** data-loss\n\302\240```\n
+@@NEW
+nbsp-fence-pair|read|\302\240```\n### Finding G-042\n- **Class:** tier-binding\n- **Severity:** data-loss\n\n\302\240```\n
+@@END
+@@OLD
+  # Real and plausible manifests parse (R2-F3): a line that merely mentions a
+  # field is prose, a heading as shallow as the Finding heading closes it, and a
+  # fenced example is quoted. A finding that carries a Class alone is no longer
+@@NEW
+  # Real and plausible manifests parse (R2-F3): a line that merely mentions a
+  # field is prose, a heading as shallow as the Finding heading closes it, a
+  # fenced example outside any finding stays quoted, and a field line followed
+  # by a heading, a block, a blank line or another field holds its list item
+  # alone (T030o44 review F10). A finding that carries a Class alone is no longer
+@@END
+@@OLD
+class-binding-lead-in|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n   - **Class binding.** A manifest recording the tier is read.\n
+@@NEW
+class-binding-lead-in|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n- **Class binding.** A manifest recording the tier is read.\n
+severity-then-heading|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n#### Notes\nReproduced twice.\n
+severity-then-fenced-block|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n```text\nplain output\n```\n
+severity-then-pre-block|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n<pre>\nplain output\n</pre>\n
+severity-then-thematic-break|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n---\nAfter the break.\n
+severity-then-blank-and-prose|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n\nA paragraph after the finding.\n
+quoted-output-without-record|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n\n```text\nplain output, no record in it\n```\n> A quoted remark.\n
+@@END
+@@OLD
+  # The manifest member: a CLEARED round 1 re-records G-042 open at minor over
+  # a manifest whose G-042 carries data-loss on a line the pass must read or
+  # refuse. Every finding needs one readable Severity, so a tier the pass does
+  # not read, a quoted one included, is refused with its finding.
+@@NEW
+  # The manifest member: a CLEARED round 1 re-records G-042 open at minor over
+  # a manifest whose G-042 carries data-loss on a line the pass must read or
+  # refuse. Every finding needs one readable Severity, so a tier the pass does
+  # not read, a quoted one included, is refused with its finding. The T030o44
+  # review's members follow: a second tier the label reader reads as written
+  # or as rendered (a tag with a quoted `>`, an autolink, a non-tag, a named
+  # reference, an empty link or image, a reference link, a footnote reference,
+  # a nested destination, a comment holding `>`, a code span holding a tag or an
+  # opener), a second tier or a whole finding the quoting tracker hides (after
+  # `<!-->`, after an opener inside an attribute, inside a fence a renderer
+  # does not open, a fence, a block quote, a comment, a script block), and a
+  # Severity item that holds more than its line.
+@@END
+@@OLD
+subheading-then-hidden-finding|### Finding G-042\n- **Class:** tier-binding\n#### Notes\n- **Severity:** data-loss\n###\302\240Finding G-043\n- **Class:** other-class\n- **Severity:** minor\n|a Finding heading this grammar cannot read
+ROWS
+@@NEW
+subheading-then-hidden-finding|### Finding G-042\n- **Class:** tier-binding\n#### Notes\n- **Severity:** data-loss\n###\302\240Finding G-043\n- **Class:** other-class\n- **Severity:** minor\n|a Finding heading this grammar cannot read
+second-tier-quoted-gt|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- <b title="a>b">Severity:</b> data-loss\n|a second Severity line in finding G-042: - <b title="a>b">Severity:</b> data-loss
+second-tier-autolink|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- <Severity:data-loss>\n|a second Severity line in finding G-042: - <Severity:data-loss>
+second-tier-non-tag|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- <Severity: data-loss>\n|a second Severity line in finding G-042: - <Severity: data-loss>
+second-tier-named-reference|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- &nbsp;Severity: data-loss\n|a second Severity line in finding G-042: - &nbsp;Severity: data-loss
+second-tier-named-reference-bold|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- &ensp;**Severity:** data-loss\n|a second Severity line in finding G-042: - &ensp;**Severity:** data-loss
+second-tier-empty-link|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- [](x)**Severity:** data-loss\n|a second Severity line in finding G-042: - [](x)**Severity:** data-loss
+second-tier-link-title|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- [](#a "t")Severity: data-loss\n|a second Severity line in finding G-042: - [](#a "t")Severity: data-loss
+second-tier-image|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- ![x](y)Severity: data-loss\n|a second Severity line in finding G-042: - ![x](y)Severity: data-loss
+second-tier-reference-link|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- [][r]Severity: data-loss\n|a second Severity line in finding G-042: - [][r]Severity: data-loss
+second-tier-footnote|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- [^1]Severity: data-loss\n|a second Severity line in finding G-042: - [^1]Severity: data-loss
+second-tier-nested-destination|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- [](a(b)c)Severity: data-loss\n|a second Severity line in finding G-042: - [](a(b)c)Severity: data-loss
+second-tier-comment-holding-gt|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- <!-- a>b --> Severity: data-loss\n|a second Severity line in finding G-042: - <!-- a>b --> Severity: data-loss
+second-tier-code-span-tag|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- `<Severity>` data-loss\n|a second Severity line in finding G-042: - `<Severity>` data-loss
+second-tier-code-span-opener|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- `<!--` Severity: data-loss\n|a second Severity line in finding G-042: - `<!--` Severity: data-loss
+second-tier-after-empty-comment|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n<!-->\n\n- **Severity:** data-loss\n\nNotes end here. -->\n|quoted content carries a Severity line: - **Severity:** data-loss
+second-tier-after-empty-comment-dash|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n<!--->\n\n- **Severity:** data-loss\n\nNotes end here. -->\n|quoted content carries a Severity line: - **Severity:** data-loss
+second-tier-after-opener-in-attribute|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- <b title="<!--">Note</b> the tier below.\n- **Severity:** data-loss\n- That is the tier. -->\n|quoted content carries a Severity line: - **Severity:** data-loss
+second-tier-after-backtick-info-fence|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n```x`y\n- **Severity:** data-loss\n```\n|quoted content carries a Severity line: - **Severity:** data-loss
+second-tier-fenced|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n```text\n- **Severity:** data-loss\n```\n|quoted content carries a Severity line: - **Severity:** data-loss
+second-tier-blockquoted|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n> - **Severity:** data-loss\n|quoted content carries a Severity line: > - **Severity:** data-loss
+second-tier-commented|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n<!--\n- **Severity:** data-loss\n-->\n|quoted content carries a Severity line: - **Severity:** data-loss
+second-tier-script|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n<script>\n- **Severity:** data-loss\n</script>\n|quoted content carries a Severity line: - **Severity:** data-loss
+hidden-finding|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n<!-->\n\n### Finding G-043\n- **Class:** other-binding\n- **Severity:** data-loss\n\n-->\n|quoted content carries a Finding heading: ### Finding G-043
+value-continued|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n  data-loss\n|a Severity field whose list item holds more than its line in finding G-042:   data-loss
+value-continued-lazy|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\ndata-loss\n|a Severity field whose list item holds more than its line in finding G-042: data-loss
+value-second-paragraph|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n  data-loss\n|a Severity field whose list item holds more than its line in finding G-042:   data-loss
+value-nested-item|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n  - data-loss\n|a Severity field whose list item holds more than its line in finding G-042:   - data-loss
+value-nested-tier-note|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n  - **Tier:** data-loss\n|a Severity field whose list item holds more than its line in finding G-042:   - **Tier:** data-loss
+value-ordered-two|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n2. data-loss\n|a Severity field whose list item holds more than its line in finding G-042: 2. data-loss
+value-backtick-info-fence|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n```x`y\nnot a fence\n```\n|a Severity field whose list item holds more than its line in finding G-042: ```x`y
+value-details|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n<details>\nx\n</details>\n|a Severity field whose list item holds more than its line in finding G-042: <details>
+class-value-continued|### Finding G-042\n- **Class:** tier-binding\n  other-binding\n- **Severity:** data-loss\n|a Class field whose list item holds more than its line in finding G-042:   other-binding
+nested-lead-in|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n   - **Class binding.** A manifest recording the tier is read.\n|a Severity field whose list item holds more than its line in finding G-042:    - **Class binding.** A manifest recording the tier is read.
+ROWS
+@@END
+@@OLD
+class-reference|- **Severity:** minor\n  - &#x43;lass: other-class|a Class line this grammar cannot read in finding G-050
+ROWS
+@@NEW
+class-reference|- **Severity:** minor\n  - &#x43;lass: other-class|a Class line this grammar cannot read in finding G-050
+second-tier-quoted-gt|- **Severity:** minor\n- <b title="a>b">Severity:</b> data-loss|a Severity line this grammar cannot read in finding G-050
+second-tier-autolink|- **Severity:** minor\n- <Severity:data-loss>|a Severity line this grammar cannot read in finding G-050
+second-tier-non-tag|- **Severity:** minor\n- <Severity: data-loss>|a Severity line this grammar cannot read in finding G-050
+second-tier-named-reference|- **Severity:** minor\n- &nbsp;**Severity:** data-loss|a Severity line this grammar cannot read in finding G-050
+second-tier-empty-link|- **Severity:** minor\n- [](x)**Severity:** data-loss|a Severity line this grammar cannot read in finding G-050
+second-tier-image|- **Severity:** minor\n- ![x](y)Severity: data-loss|a Severity line this grammar cannot read in finding G-050
+second-tier-comment-holding-gt|- **Severity:** minor\n- <!-- a>b --> Severity: data-loss|a Severity line this grammar cannot read in finding G-050
+second-tier-after-empty-comment|- **Severity:** minor\n\n<!-->\n\n- **Severity:** data-loss\n\nThe tier above is the one we stand by. -->|quoted content carries a Severity line
+second-tier-after-opener-in-attribute|- **Severity:** minor\n- <b title="<!--">Note</b> the tier below.\n- **Severity:** data-loss\n- That is the tier. -->|quoted content carries a Severity line
+second-tier-after-backtick-info-fence|- **Severity:** minor\n\n```x`y\n- **Severity:** data-loss\n```|quoted content carries a Severity line
+second-tier-fenced|- **Severity:** minor\n\n```text\n- **Severity:** data-loss\n```|quoted content carries a Severity line
+second-tier-blockquoted|- **Severity:** minor\n> - **Severity:** data-loss|quoted content carries a Severity line
+quoted-status|- **Severity:** minor\n\n<!-->\n\n- **Status:** resolved\n\n-->|quoted content carries a finding field line
+value-continued|- **Severity:** minor\n  data-loss|a Severity field whose list item holds more than its line in finding G-050
+value-continued-lazy|- **Severity:** minor\ndata-loss|a Severity field whose list item holds more than its line in finding G-050
+ROWS
+  # A Status continued past its line is a count the pass would read without
+  # its continuation, and a finding hidden by the tracker, inside a round or in
+  # its Held-up section, is refused by its heading (T030o44 review F10, F4).
+  record_round 1 CHALLENGED 1 0 '### Finding G-050' dup-binding $'new\n  reopened later' '- **Severity:** data-loss' > "$report"
+  for l in C en_US.UTF-8; do
+    run_rc 3 record_line_vf "$l" "$report" "$spec"
+    assert_contains "$OUT" 'a Status field whose list item holds more than its line in finding G-050' \
+      "AC-012: a Status continued past its line was read without its continuation under LANG=$l (T030o44 review)"
+  done
+  record_round 1 CLEARED 0 1 '### Finding G-050' dup-binding new '- **Severity:** minor' |
+    awk '/^### Held up/ {print "<!-->"; print "### Finding G-051"; print "- **Class:** other-binding"; print "- **Severity:** data-loss"; print "-->"} {print}' > "$report"
+  for l in C en_US.UTF-8; do
+    run_rc 3 record_line_vf "$l" "$report" "$spec"
+    assert_contains "$OUT" 'quoted content carries a Finding heading' \
+      "AC-012: a finding hidden after an empty comment was left uncounted under LANG=$l (T030o44 review)"
+  done
+  record_round 1 CHALLENGED 1 0 '### Finding G-042' tier-binding new '- **Severity:** data-loss' |
+    awk '/^Fixture disposition recorded\.$/ {print; print "<!--"; print "### Finding G-051"; print "-->"; next} {print}' > "$report"
+  run_rc 3 record_line_vf C "$report" "$spec"
+  assert_contains "$OUT" 'quoted content carries a Finding heading' \
+    'AC-012: a Finding heading hidden in a Held-up section was skipped (T030o44 review)'
+  # A quoted field line outside any finding attaches to none, so an example in
+  # a Held-up section parses.
+  record_round 1 CHALLENGED 1 0 '### Finding G-042' tier-binding new '- **Severity:** data-loss' |
+    awk '/^Fixture disposition recorded\.$/ {print; print "```text"; print "- **Severity:** minor"; print "```"; next} {print}' > "$report"
+  run_rc 0 record_line_vf C "$report" "$spec"
+  # F2, recorded at its real extent: inside a finding, a line whose first word
+  # is Class or Severity, not continued by a letter, digit or hyphen, is
+  # refused unless it is that field's line, prose included.
+  local line
+  while IFS= read -r line; do
+    record_round 1 CHALLENGED 1 0 '### Finding G-042' tier-binding new '- **Severity:** data-loss' "$line\n" > "$report"
+    run_rc 3 record_line_vf C "$report" "$spec"
+    assert_contains "$OUT" 'line this grammar cannot read in finding G-042' \
+      "AC-012: a finding line beginning with a label ($line) was read as prose (T030o44 review F2)"
+  done <<'LINES'
+  class, not one spelling of it.
+  (class) line outside any Finding in both locales.
+  - Severity: unchanged from round 12.
+  - Class, Status and Prior are unchanged.
+  - "Severity" here is the tier the count reads.
+  - Severity/Class binding held.
+LINES
+  # F3 and F6: the duplicate key ignores indentation in a legacy round too, and
+  # every other canonical rule leaves a legacy round as it was: a round that
+  # reaches each of them parses, with its finding's Blocks kept.
+  printf '# Opponent review\n**Round:** 1\n**Date:** 2026-07-20\n**Verdict:** CHALLENGED\n1. **A defect** — *severity:* wrong-result\n   - **Scenario:** x\n   - **Where:** `a.sh:1`\n     - **Where:** `b.sh:2`\n' > "$report"
+  run_rc 3 record_line_vf C "$report" "$spec"
+  assert_contains "$OUT" 'duplicate finding field' 'AC-012: an indented duplicate field in a legacy round was read (T030o44 review F3)'
+  printf '# Opponent review\n**Round:** 1\n**Date:** 2026-07-20\n**Verdict:** CHALLENGED\n\n## What I attacked\n- **Scenario:** a recorded trigger\n\n1. **A defect** — *severity:* wrong-result\n   - **Where:** `a.sh:1`\n   - **Status:** open\n     still open\n   - Severity, as above.\n#### Finding G-1\n\302\240#### Finding G-2\n### Notes\n   - **Blocks:** AC-001\n> - **Severity:** quoted in a legacy round\n' > "$report"
+  run_rc 0 record_line_vf C "$report" "$spec"
+  [[ "$(tr '\000' '\n' < "$SANDBOX/record-lines.nul" | paste - - - - - - - - - - - - | awk -F '\t' '$1=="finding" {print $3, $12}')" == 'legacy-1-1 AC-001' ]] ||
+    t_fail 'AC-012: a canonical rule reached a legacy round, or the round lost its Blocks (T030o44 review F6)'
+  # F5: the canonical rules read a canonical round of either gate, since the
+  # tally counts both; a reality-check gap writes its detail as prose.
+  local rc_report="$spec/notes/reality-check.md"
+  printf '## Round 1\n**Round:** 1\n**Timestamp:** 2026-09-06T12:00:01Z\n**Source:** aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\n**Floor:** FLOOR-fixture\n**Verdict:** NEEDS WORK\n\n## Summary\n\nChecked one criterion.\n\n## AC matrix\n\n| AC | Criterion / revision | Evidence | Affected inputs | Verdict |\n|----|----|----|----|----|\n| AC-001 | x | CAP-1 | a | MISSING |\n\n## Constitution check\n\n- PASS\n\n## Gaps (if NEEDS WORK)\n\n%b\n\n## Re-run conditions\n\nRe-invoke when fixed.\n<!-- gate-round-end: reality-check:1 -->\n' '1. **AC-001 evidence missing** — the capture is stale.\n   - **Where:** scripts/run.sh:9' > "$rc_report"
+  run_rc 3 bash -c '. "$1"; vf_reports "$2" reality-check "$3" "$4"' _ "$SCRIPTS/verification-lib.sh" "$rc_report" "$SANDBOX/record-lines-rc.nul" "$spec"
+  assert_contains "$OUT" 'a finding field outside any Finding' \
+    'AC-012: a reality-check gap written in field spelling sealed past the canonical rules (T030o44 review F5)'
+  printf '## Round 1\n**Round:** 1\n**Timestamp:** 2026-09-06T12:00:01Z\n**Source:** aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\n**Floor:** FLOOR-fixture\n**Verdict:** NEEDS WORK\n\n## Summary\n\nChecked one criterion.\n\n## AC matrix\n\n| AC | Criterion / revision | Evidence | Affected inputs | Verdict |\n|----|----|----|----|----|\n| AC-001 | x | CAP-1 | a | MISSING |\n\n## Constitution check\n\n- PASS\n\n## Gaps (if NEEDS WORK)\n\n%b\n\n## Re-run conditions\n\nRe-invoke when fixed.\n<!-- gate-round-end: reality-check:1 -->\n' '1. **AC-001 evidence missing** — the capture is stale. Where: scripts/run.sh:9. *Root cause:* implementation-error' > "$rc_report"
+  run_rc 0 bash -c '. "$1"; vf_reports "$2" reality-check "$3" "$4"' _ "$SCRIPTS/verification-lib.sh" "$rc_report" "$SANDBOX/record-lines-rc.nul" "$spec"
+  rm -f "$rc_report"
+@@END
+@@OLD
+  # A genuine comment still suppresses the finding in full. This control keeps
+  # the indentation guard from turning every opener into visible report data.
+@@NEW
+  # A genuine comment still hides the finding in full, and a reader of finding
+  # records refuses a hidden Finding heading by name rather than skip it, since
+  # the tracker can quote what a renderer shows (T030o44 review F4). This
+  # control keeps the indentation guard from turning every opener into visible
+  # report data: an exposed finding would be counted, not refused as quoted.
+@@END
+@@OLD
+       {print}' "$SANDBOX/comment-zero.md" > "$spec/notes/opponent.md"
+  run_rc 0 bash "$SCRIPTS/spec-gate.sh" tally "$spec"
+  assert_contains "$OUT" 'blocking=0 minor=0' 'AC-012: genuinely commented finding was counted'
+@@NEW
+       {print}' "$SANDBOX/comment-zero.md" > "$spec/notes/opponent.md"
+  run_rc 3 bash "$SCRIPTS/spec-gate.sh" tally "$spec"
+  assert_contains "$OUT" 'quoted content carries a Finding heading' 'AC-012: genuinely commented finding was counted or skipped'
+@@END
+@@OLD
+  # A mismatched condition-1 closer is content. The hidden blocker remains
+  # hidden until the corresponding close tag arrives.
+@@NEW
+  # A mismatched condition-1 closer is content. The hidden blocker remains
+  # hidden until the corresponding close tag arrives, and is refused by its
+  # heading as quoted content; an exposed one would be counted instead.
+@@END
+@@OLD
+       {print}' "$SANDBOX/comment-zero.md" > "$spec/notes/opponent.md"
+  run_rc 0 bash "$SCRIPTS/spec-gate.sh" tally "$spec"
+  assert_contains "$OUT" 'blocking=0 minor=0' 'AC-012: mismatched HTML close exposed a hidden report finding'
+@@NEW
+       {print}' "$SANDBOX/comment-zero.md" > "$spec/notes/opponent.md"
+  run_rc 3 bash "$SCRIPTS/spec-gate.sh" tally "$spec"
+  assert_contains "$OUT" 'quoted content carries a Finding heading' 'AC-012: mismatched HTML close exposed a hidden report finding'
+@@END
+@@OLD
+  # The prior manifest is authored Markdown too. A same-class entry quoted in
+  # a fence or HTML comment is a record of discarded prose, not trusted prior
+  # review, and cannot authorize a resolved claim. A manifest that records no
+  # finding is refused on its own (T030o43 review 4), so each of these carries
+  # one real, unrelated finding and the quoted entry is still what is tested.
+@@NEW
+  # The prior manifest is authored Markdown too. A same-class entry quoted in
+  # a fence or HTML comment is not trusted prior review and cannot authorize a
+  # resolved claim: the pass refuses a quoted Finding heading by name, since
+  # the tracker can quote what a renderer shows (T030o44 review F4), so the
+  # manifest vouches for nothing. A manifest that records no finding is refused
+  # on its own (T030o43 review 4), so each of these carries one real, unrelated
+  # finding and the quoted entry is still what is tested.
+@@END
+@@OLD
+  assert_contains "$OUT" 'resolved finding O-042 has no earlier round of this gate and no declared prior-review record' 'AC-012: fenced manifest entry authorized a resolved claim'
+@@NEW
+  assert_contains "$OUT" 'quoted content carries a Finding heading: ## Finding O-042' 'AC-012: fenced manifest entry authorized a resolved claim'
+@@END
+@@OLD
+  assert_contains "$OUT" 'resolved finding O-042 has no earlier round of this gate and no declared prior-review record' 'AC-012: commented manifest entry authorized a resolved claim'
+@@NEW
+  assert_contains "$OUT" 'quoted content carries a Finding heading: ## Finding O-042' 'AC-012: commented manifest entry authorized a resolved claim'
+@@END
+@@OLD
+  # O-002 round 4: condition-1 raw HTML renders nothing, so a manifest entry
+  # hidden inside it is not a record a reader can see either.
+@@NEW
+  # O-002 round 4: condition-1 raw HTML renders nothing, so a manifest entry
+  # hidden inside it vouches for nothing either, and is refused by name.
+@@END
+@@OLD
+  assert_contains "$OUT" 'resolved finding O-042 has no earlier round of this gate and no declared prior-review record' 'AC-012: script-hidden manifest entry authorized a resolved claim'
+@@NEW
+  assert_contains "$OUT" 'quoted content carries a Finding heading: ## Finding O-042' 'AC-012: script-hidden manifest entry authorized a resolved claim'
+@@END

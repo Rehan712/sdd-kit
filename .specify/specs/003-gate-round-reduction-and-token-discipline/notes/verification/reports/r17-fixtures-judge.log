@@ -1,0 +1,72 @@
+start 2026-10-08T14:50:44Z; TMPDIR=/private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/06f7a0b3-b652-4da3-832e-aad664056a31/scratchpad/r17-fixtures/tmp/
+PASS FX: the four files hash as r17-edits/pre-apply
+PASS FX: tgc-1.pairs applied, each block exactly once
+PASS FX: tsg-1.pairs applied, each block exactly once
+PASS DX: kernel-1.pairs applied
+PASS DX: vc-1.pairs applied
+PASS FX: both suites still parse
+PASS DX: both suites still parse
+== DX: every changed fixture function passes on the repaired kernel
+PASS DX report_manifest_locale_cases passes
+PASS DX report_record_line_cases passes
+PASS DX round_record_line_cases passes
+== FX: on the unrepaired kernel
+PASS FX report_manifest_locale_cases fails
+PASS FX report_manifest_locale_cases: no failing assertion outside the twelve rows the narrowed grammar refuses and their exit checks
+PASS FX report_manifest_locale_cases: each of the twelve fails
+PASS FX report_record_line_cases fails
+  | FX report_record_line_cases: 180 failing assertions
+PASS FX report_record_line_cases: no failing assertion outside the new member rows, the rows turned into refusals, and their exit checks
+PASS FX report_record_line_cases fails on the narrowed row a-empty-comment-then-prose under both locales
+PASS FX report_record_line_cases fails on the narrowed row a-wrapped-tag-prose under both locales
+PASS FX report_record_line_cases fails on the narrowed row a-fenced-tag-example under both locales
+PASS FX report_record_line_cases fails on the narrowed row a-heading-then-attribute-line under both locales
+PASS FX report_record_line_cases fails on the narrowed row a-br-prose under both locales
+PASS FX report_record_line_cases fails on the narrowed row a-quoted-heading-then-attribute-line under both locales
+PASS FX report_record_line_cases fails on the narrowed row a-span-in-prose under both locales
+PASS FX report_record_line_cases fails on the narrowed row a-blank-line-ends-run under both locales
+PASS FX report_record_line_cases fails on: a Where value with br and p tags was not refused as raw HTML, under both locales
+PASS FX report_record_line_cases fails on: a Where value holding a carriage return was not refused, under both locales
+PASS FX report_record_line_cases fails on: a Severity line followed by a div-block, under both locales
+PASS FX report_record_line_cases fails on: a Severity line followed by a details-block, under both locales
+PASS FX report_record_line_cases fails on: a Severity line followed by a closing-tag, under both locales
+  the round-16 member rows on the unrepaired kernel (each failing row is a member CUR seals or names otherwise):
+  | pre-in-prose: 4 failing assertion(s)
+  | hgroup-in-prose: 2 failing assertion(s)
+  | listing-in-prose: 2 failing assertion(s)
+  | xmp-in-prose: 2 failing assertion(s)
+  | plaintext-in-prose: 2 failing assertion(s)
+  | br-in-link-text: 4 failing assertion(s)
+  | p-in-link-text: 2 failing assertion(s)
+  | tag-holding-backtick: 4 failing assertion(s)
+  | autolink-holding-backtick: 2 failing assertion(s)
+  | autolink-before-label: 2 failing assertion(s)
+  | tag-split-by-form-feed: 2 failing assertion(s)
+  | tag-split-by-seven-marks: 2 failing assertion(s)
+  | html-block-heading: 2 failing assertion(s)
+  | escaped-backtick-then-br: 2 failing assertion(s)
+  | lone-carriage-return: 4 failing assertion(s)
+  | form-feed-in-text: 4 failing assertion(s)
+  | vertical-tab-in-text: 2 failing assertion(s)
+  | escaped-backslash-code-span: 4 failing assertion(s)
+  | escaped-first-backtick: 4 failing assertion(s)
+  | image-split-by-seven-marks: 4 failing assertion(s)
+  | image-split-by-eight-marks-quoted: 2 failing assertion(s)
+  | image-after-backtick-info-fence: 4 failing assertion(s)
+  | tag-split-by-vertical-tab: 2 failing assertion(s)
+  | tag-split-by-eight-marks-quoted: 2 failing assertion(s)
+PASS FX report_record_line_cases fails on the member row pre-in-prose
+PASS FX report_record_line_cases fails on the member row br-in-link-text
+PASS FX report_record_line_cases fails on the member row tag-holding-backtick
+PASS FX report_record_line_cases fails on the member row tag-split-by-form-feed
+PASS FX report_record_line_cases fails on the member row lone-carriage-return
+PASS FX report_record_line_cases fails on the member row escaped-backslash-code-span
+PASS FX report_record_line_cases fails on the member row escaped-first-backtick
+PASS FX report_record_line_cases fails on the member row image-split-by-seven-marks
+PASS FX report_record_line_cases fails on the member row image-after-backtick-info-fence
+PASS FX round_record_line_cases fails
+PASS FX round_record_line_cases: its first failing assertion is a new row (raw HTML in prose, end to end)
+  | first: assert: AC-009: a CLEARED completion over a second manifest tier written as - Note<pre>Severity: data-loss</pre> was not refused under LANG=C (T030o44 review) m
+PASS live worktree status outside notes/verification/ unchanged
+end 2026-10-08T14:53:21Z
+r17-fixtures-judge failures=0

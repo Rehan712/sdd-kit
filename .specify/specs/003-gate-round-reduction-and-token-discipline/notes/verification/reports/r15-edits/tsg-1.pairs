@@ -1,0 +1,26 @@
+@@OLD
+  # autolink, a named reference, an empty link), and a Severity item that holds
+  # more than its line.
+@@NEW
+  # autolink, a named reference, an empty link), and a Severity item that holds
+  # more than its line. Round 15's mechanisms follow, one spelling each
+  # (T030o47): a paragraph boundary the reader misses (a sibling ordered item)
+  # or invents (an indented list marker), a code span that holds a bracket, and
+  # a rendered line start (a br tag).
+@@END
+@@OLD
+             $'- Sev\342\200\213erity: data-loss|a second Severity line in finding G-042'; do
+@@NEW
+             $'- Sev\342\200\213erity: data-loss|a second Severity line in finding G-042' \
+             $'\n1. a\n2. <b\ntitle="x">Severity: data-loss</b>|a second Severity line in finding G-042' \
+             $'\n<b title="a\n    - b">Severity: data-loss</b>|a second Severity line in finding G-042' \
+             '- [`]`](u)Severity: data-loss|a second Severity line in finding G-042' \
+             '- Note<br>Severity: data-loss|a second Severity line in finding G-042'; do
+@@END
+@@OLD
+             '- **Severity:** minor\n- <!-- a\nb --> Severity: data-loss|quoted content carries a Severity line'; do
+@@NEW
+             '- **Severity:** minor\n- <!-- a\nb --> Severity: data-loss|quoted content carries a Severity line' \
+             '- **Severity:** minor\n\nA remark\n===\n<b\ntitle="x">Severity: data-loss</b>|a Severity line this grammar cannot read in finding G-050' \
+             '- **Severity:** minor\n\nNote\n> <b\n> title="x">Severity: data-loss</b>|quoted content carries a Severity line'; do
+@@END

@@ -1,0 +1,24 @@
+@@OLD
+. "$HUB_DIR/scripts/lib.sh"
+SPEC_TASK="$HUB_DIR/scripts/spec-task.sh"
+@@NEW
+. "$HUB_DIR/scripts/lib.sh"
+# The kernel pins the harness's own parsing to LC_ALL=C when it loads, so it
+# loads before any program reads a byte of the spec (O-017).
+. "$HUB_DIR/scripts/verification-lib.sh"
+SPEC_TASK="$HUB_DIR/scripts/spec-task.sh"
+@@END
+@@OLD
+# Versioned capture path is additive; legacy default output/ticking stays below.
+. "$HUB_DIR/scripts/verification-lib.sh"
+contract="$(fm_get "$SPEC_DIR/spec.md" verification_contract 2>/dev/null || :)"
+@@NEW
+# Versioned capture path is additive; legacy default output/ticking stays below.
+# A frontmatter that cannot be read is a failure, never the legacy path.
+contract="$(vf_fm_value "$SPEC_DIR/spec.md" verification_contract)" || exit 3
+@@END
+@@OLD
+( cd "$RUN_CWD" && "${CMD[@]}" ) >"$out" 2>&1
+@@NEW
+( cd "$RUN_CWD" && vf_caller_locale && "${CMD[@]}" ) >"$out" 2>&1
+@@END

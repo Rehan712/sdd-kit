@@ -1,0 +1,30 @@
+--- a/tests/test-gate-contracts.sh
++++ b/tests/test-gate-contracts.sh
+@@ -1317,7 +1317,10 @@
+   # a CDATA section, a block-level tag, a comment, a block-quoted tag), inside
+   # a word emphasis splits, and inside a word an invisible character splits;
+   # and a condition-7 tag line after a field line, which continues its item
+-  # (O-021's refusal twin).
++  # (O-021's refusal twin). A second tier behind a closing tag and a named
++  # reference is read by the first rendered reading alone, since the second
++  # one joins the word to the next, which isolates that reading (session 15,
++  # matrix row L18).
+   while IFS='|' read -r tag body want; do
+     printf '# Prior review\n\n%b' "$body" > "$spec/notes/verification/reports/opponent-findings-review.md"
+     tier_round_fixture 1 '' G-042:tier-binding:open:minor > "$report"
+@@ -1343,6 +1346,7 @@
+ dash-separated-heading|### Finding \342\200\224 G-042\n- **Class:** tier-binding\n- **Severity:** data-loss\n|a Finding heading this grammar cannot read
+ subheading-then-hidden-finding|### Finding G-042\n- **Class:** tier-binding\n#### Notes\n- **Severity:** data-loss\n###\302\240Finding G-043\n- **Class:** other-class\n- **Severity:** minor\n|a Finding heading this grammar cannot read
+ second-tier-quoted-gt|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- <b title="a>b">Severity:</b> data-loss\n|a second Severity line in finding G-042: - <b title="a>b">Severity:</b> data-loss
++second-tier-tag-then-reference|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- <b>Severity</b>&nbsp;data-loss\n|a second Severity line in finding G-042: - <b>Severity</b>&nbsp;data-loss
+ second-tier-autolink|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- <Severity:data-loss>\n|a second Severity line in finding G-042: - <Severity:data-loss>
+ second-tier-non-tag|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- <Severity: data-loss>\n|a second Severity line in finding G-042: - <Severity: data-loss>
+ second-tier-named-reference|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- &nbsp;Severity: data-loss\n|a second Severity line in finding G-042: - &nbsp;Severity: data-loss
+@@ -1468,6 +1472,7 @@
+ unread-first|- **Severity**: data-loss\n- **Severity:** minor|a Severity line this grammar cannot read in finding G-050
+ behind-html|- **Severity:** minor\n  - <b>Severity:</b> data-loss|a Severity line this grammar cannot read in finding G-050
+ character-reference|- **Severity:** minor\n  - &#83;everity: data-loss|a Severity line this grammar cannot read in finding G-050
++tag-then-reference|- **Severity:** minor\n- <b>Severity</b>&nbsp;data-loss|a Severity line this grammar cannot read in finding G-050
+ sub-heading|- **Severity:** minor\n#### Severity: data-loss|a Severity line this grammar cannot read in finding G-050
+ class-reference|- **Severity:** minor\n  - &#x43;lass: other-class|a Class line this grammar cannot read in finding G-050
+ second-tier-quoted-gt|- **Severity:** minor\n- <b title="a>b">Severity:</b> data-loss|a Severity line this grammar cannot read in finding G-050

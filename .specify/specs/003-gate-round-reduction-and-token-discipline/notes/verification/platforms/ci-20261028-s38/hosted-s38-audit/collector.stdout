@@ -1,0 +1,96 @@
+run=40684905884 status=completed conclusion=success event=pull_request head_sha=25347ba729886ae0bea029c594ac00f0bc48e767 attempt=1
+
+== job tests-bash32 (122804640261)
+  status=completed conclusion=success runner=GitHub Actions 1000000215 labels=macos-latest
+  started=2026-10-28T12:04:52Z completed=2026-10-28T12:44:19Z log-fetch-exit=0 log-bytes=29215
+  step 1 Set up job: completed success
+  step 2 Run actions/checkout@v5: completed success
+  step 3 run the test suite under bash 3.2: completed success
+  step 6 Post Run actions/checkout@v5: completed success
+  step 7 Complete job: completed success
+  id: ##[group]Runner Image Provisioner
+  id: Version: 20261021.618
+  id: ##[group]Operating System
+  id: macOS
+  id: ##[group]Runner Image
+  id: Image: macos-26-arm64
+  id: Version: 20261021.0445.8
+  id: Included Software: https://github.com/actions/runner-images/blob/macos-26-arm64/20261021.0445/images/macos/macos-26-arm64-Readme.md
+  shell: /bin/bash -e {0}
+  checkout: [command]/opt/homebrew/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +ffb6ebed7e8e42cdc35fc32a66e4cd2ec06cf062:refs/remotes/pull/21/merge
+  checkout: ##[group]Checking out the ref
+  checkout: [command]/opt/homebrew/bin/git checkout --progress --force refs/remotes/pull/21/merge
+  suites=15 passed=147 total=147
+  ok-lines=147 not-ok-lines=14
+
+== job shellcheck (122804640662)
+  status=completed conclusion=success runner=GitHub Actions 1000000216 labels=ubuntu-latest
+  started=2026-10-28T12:04:49Z completed=2026-10-28T12:05:34Z log-fetch-exit=0 log-bytes=10735
+  step 1 Set up job: completed success
+  step 2 Run actions/checkout@v5: completed success
+  step 3 shellcheck (warning severity blocks): completed success
+  step 6 Post Run actions/checkout@v5: completed success
+  step 7 Complete job: completed success
+  id: ##[group]Runner Image Provisioner
+  id: Version: 20261021.618
+  id: ##[group]Operating System
+  id: Ubuntu
+  id: ##[group]Runner Image
+  id: Image: ubuntu-24.04
+  id: Version: 20261025.353.1
+  id: Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261025.353/images/ubuntu/Ubuntu2404-Readme.md
+  shell: /usr/bin/bash -e {0}
+  checkout: [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +ffb6ebed7e8e42cdc35fc32a66e4cd2ec06cf062:refs/remotes/pull/21/merge
+  checkout: ##[group]Checking out the ref
+  checkout: [command]/usr/bin/git checkout --progress --force refs/remotes/pull/21/merge
+
+== job tests (ubuntu-latest) (122804640797)
+  status=completed conclusion=success runner=GitHub Actions 1000000217 labels=ubuntu-latest
+  started=2026-10-28T12:04:50Z completed=2026-10-28T12:33:27Z log-fetch-exit=0 log-bytes=25580
+  step 1 Set up job: completed success
+  step 2 Run actions/checkout@v5: completed success
+  step 3 run the test suite: completed success
+  step 6 Post Run actions/checkout@v5: completed success
+  step 7 Complete job: completed success
+  id: ##[group]Runner Image Provisioner
+  id: Version: 20261021.618
+  id: ##[group]Operating System
+  id: Ubuntu
+  id: ##[group]Runner Image
+  id: Image: ubuntu-24.04
+  id: Version: 20261025.353.1
+  id: Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261025.353/images/ubuntu/Ubuntu2404-Readme.md
+  shell: /usr/bin/bash -e {0}
+  checkout: [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +ffb6ebed7e8e42cdc35fc32a66e4cd2ec06cf062:refs/remotes/pull/21/merge
+  checkout: ##[group]Checking out the ref
+  checkout: [command]/usr/bin/git checkout --progress --force refs/remotes/pull/21/merge
+  suites=15 passed=147 total=147
+  ok-lines=147 not-ok-lines=16
+
+== job tests (macos-latest) (122804640973)
+  status=completed conclusion=success runner=GitHub Actions 1000000219 labels=macos-latest
+  started=2026-10-28T12:09:50Z completed=2026-10-28T12:47:44Z log-fetch-exit=0 log-bytes=28435
+  step 1 Set up job: completed success
+  step 2 Run actions/checkout@v5: completed success
+  step 3 run the test suite: completed success
+  step 6 Post Run actions/checkout@v5: completed success
+  step 7 Complete job: completed success
+  id: ##[group]Runner Image Provisioner
+  id: Version: 20261012.601
+  id: ##[group]Operating System
+  id: macOS
+  id: ##[group]Runner Image
+  id: Image: macos-26-arm64
+  id: Version: 20261013.0424.1
+  id: Included Software: https://github.com/actions/runner-images/blob/macos-26-arm64/20261013.0424/images/macos/macos-26-arm64-Readme.md
+  shell: /bin/bash -e {0}
+  checkout: [command]/opt/homebrew/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +ffb6ebed7e8e42cdc35fc32a66e4cd2ec06cf062:refs/remotes/pull/21/merge
+  checkout: ##[group]Checking out the ref
+  checkout: [command]/opt/homebrew/bin/git checkout --progress --force refs/remotes/pull/21/merge
+  suites=15 passed=147 total=147
+  ok-lines=147 not-ok-lines=14
+
+merge-commit-short(s) checked out: ffb6ebe
+merge-commit(s) fetched: ffb6ebed7e8e42cdc35fc32a66e4cd2ec06cf062
+merge ffb6ebed7e8e42cdc35fc32a66e4cd2ec06cf062 tree=c68b9a3ab0c39c555d5cb28afa6420cd9a2600b7 parents=f4a0e4e31df29b53ccb9e088d3b8d0cd58f8e12f,25347ba729886ae0bea029c594ac00f0bc48e767
+collect result: PASS

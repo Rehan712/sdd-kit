@@ -1,0 +1,34 @@
+{
+  "recordedAt": "2026-10-26T20:50:41.122867+00:00",
+  "actualTaskResult": {
+    "taskId": "node:delegated-task:command%3Amcp%3Ae6315556-7380-4d31-903f-24b14ad55a20%3Adelegate-task%3Asdd003-s29-resource-scratch-audit-luna-r1",
+    "childThreadId": "thread:delegated-task:command%3Amcp%3Ae6315556-7380-4d31-903f-24b14ad55a20%3Adelegate-task%3Asdd003-s29-resource-scratch-audit-luna-r1",
+    "childRunId": "run:thread:thread%3Adelegated-task%3Acommand%253Amcp%253Ae6315556-7380-4d31-903f-24b14ad55a20%253Adelegate-task%253Asdd003-s29-resource-scratch-audit-luna-r1:ordinal:1",
+    "childNodeId": "node:delegated-task:command%3Amcp%3Ae6315556-7380-4d31-903f-24b14ad55a20%3Adelegate-task%3Asdd003-s29-resource-scratch-audit-luna-r1",
+    "status": "completed",
+    "workState": "result_available",
+    "hasPendingChildRuns": false,
+    "latestTerminalRunId": "run:thread:thread%3Adelegated-task%3Acommand%253Amcp%253Ae6315556-7380-4d31-903f-24b14ad55a20%253Adelegate-task%253Asdd003-s29-resource-scratch-audit-luna-r1:ordinal:1",
+    "latestTerminalStatus": "completed",
+    "latestTerminalSummary": null,
+    "latestTerminalResultContextTransferId": null,
+    "providerInstanceId": "codex_codex_gym",
+    "model": "gpt-6-luna",
+    "options": [
+      {
+        "id": "reasoningEffort",
+        "value": "medium"
+      },
+      {
+        "id": "serviceTier",
+        "value": "default"
+      }
+    ],
+    "summary": "## Read-only resource findings\n\nMeasured in the assigned worktree: **1.9 GiB free** on a 228 GiB volume; **battery power at 59%, discharging**. The worktree is about **427 MiB** and the spec notes tree about **423 MiB**.\n\n| Candidate | Allocated | Provenance and status |\n|---|---:|---|\n| `/private/tmp/opp23-codex-gym-3es8gbyb` \u2192 same resolved path | 3.9 MiB | Round 23 recovered probes. The report says the evidence was recovered and inspected, and the durable copy is in the repo reports. |\n| `/private/tmp/opp24-retry2-dp2syp7l` \u2192 same resolved path | 2.9 MiB | Round 24 retry probes. The report says scripts, tasks, outputs, receipts, and hashes are preserved in repo reports. |\n| `/private/tmp/s28-o034-7nbg8e2h` \u2192 same resolved path | 5.6 MiB | O-034 independent classifier probes. The handoff records preserved scripts, tasks, outputs, summaries, and comparison evidence in the report tree. |\n| `/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh` \u2192 same resolved path | 0.3 MiB | O-034 review-r2 correction scratch. Its handoff indexes the preserved probe results and receipts in the report tree. |\n\n**Conservative safely reclaimable subtotal: about 12.7 MiB**, without deleting anything. These are the only candidates whose handoffs support treating the external directories as retired scratch with report copies available. No matching live source or verifier binding to these exact paths was found; `lsof` showed no open files under them.\n\n**Preserve / UNKNOWN:**\n\n- `/private/tmp/sdd-ci-20261025-s26-g50lrq9u` \u2014 **11.0 MiB**. The report explicitly says to preserve its scratch and unreferenced tree objects. It is a snapshot/publication artifact.\n- `/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-ci-20261025-s27-th6cxwvh` \u2014 **11.2 MiB**, and `.../sdd-ci-20261025-s27-final-7e31skjy` \u2014 **11.5 MiB**. Both contain snapshots and unreferenced objects; their handoffs say to keep them through publication. The final prepublish verifier is specifically known to bind old scratch paths. A fresh CI builder using a new scratch does not establish that these are safe to remove yet.\n- The requested `/private/tmp/sdd-ci-20261025-*` and `/private/tmp/s28-o034-*` globs found only the paths listed above.\n\nThe 12.7 MiB is far short of the **at least 8 GiB** needed for the next floor. **Least safe next action:** do not remove the CI snapshots before publication; instead, defer the multi-hour floor until AC power and substantially more free space are available, or have the pending CI work explicitly adapt and verify its source bindings before reconsidering those snapshots.\n\nSkipped: no output report was created because the findings are self-contained here; no deletion, floor, CI, tests, or broad disk search was performed. Risk: this scoped inventory cannot identify other disk consumers, and battery power currently rules out the floor.",
+    "resultContextTransferId": "context-transfer:type:subagent_result:source-thread:thread%3Adelegated-task%3Acommand%253Amcp%253Ae6315556-7380-4d31-903f-24b14ad55a20%253Adelegate-task%253Asdd003-s29-resource-scratch-audit-luna-r1:target-thread:2ce93492-409f-4930-a9e5-173544a4c8c6:38302e44-efa7-4fb1-8b9d-c10467d843b7",
+    "hasPendingQuestion": false,
+    "pendingApproval": null,
+    "waitTimedOut": false
+  },
+  "decision": "No scratch deletion: only12.7MiB reclaimable, immaterial versus8GiB floor threshold; preserve all evidence and bound CI scratch."
+}

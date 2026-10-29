@@ -1,0 +1,64 @@
+@@OLD
+Manifest definitions use the same quoted-content rules as other declarations;
+fenced, commented, blockquoted or raw-HTML-hidden examples cannot establish a
+prior finding. A field line, in a manifest or in a canonical report, is decided
+by its label, read from the line's rendered text: inline raw HTML renders as
+nothing, a numeric character reference renders as its character, and the label
+is the first word after any indentation, heading marker, list marker or
+emphasis. A manifest field line must be a dash, whitespace and `**Class:**` or
+`**Severity:**`, its value the text after that label only, and every manifest
+finding needs one readable Class and one readable Severity, so a tier the pass
+does not read is refused with its finding rather than dropped. A finding is the
+section its Finding heading opens: a heading as shallow as that one closes it,
+and a deeper heading is one of its lines. A field line, a Finding heading or a
+line that looks like one that the pass cannot read is refused by name, and so
+is a manifest from which it reads no finding; a Class or Severity line outside
+a manifest finding is prose only while nothing since the last heading can hold
+a finding's record. In a canonical report, only `### Finding <ID>` opens a
+finding and any other heading that reads as a Finding heading is refused; a
+finding field line outside any finding is refused; inside a finding, a Class or
+Severity line that is not that field's own line is refused; and a field's
+duplicate is found by its label, whatever its indentation.
+@@NEW
+Manifest definitions use the same quoted-content rules as other declarations;
+fenced, commented, blockquoted or raw-HTML-hidden examples cannot establish a
+prior finding. A Class or Severity line, in a manifest or in a canonical
+report, is decided by its label, read from the line as written and from its
+rendered text, and a label either reading yields counts, so an approximation
+of the rendering can only refuse: the rendered text takes inline raw HTML out
+by CommonMark's own productions (an open tag with its attributes, a closing
+tag, a comment, which `<!-->` completes, a processing instruction, a
+declaration, a CDATA section), takes out link destinations, reference labels
+and images, renders a numeric character reference as its character and a
+named one as a character that is no letter or digit, and the label is the
+first word after any run of characters that are not letters or digits,
+ordered-list numbers and task checkboxes. The other canonical fields are
+decided by their spelling. A manifest field line must be a dash, whitespace
+and `**Class:**` or `**Severity:**`, its value the text after that label only,
+and every manifest finding needs one readable Class and one readable Severity,
+so a tier the pass does not read is refused with its finding rather than
+dropped. The list item a Class or Severity line opens, and in a canonical
+finding a Status line's, holds that line only: a line that would continue its
+paragraph, or other text inside the item, is refused by name unless the pass
+reads it as a field line of its own. Quoting is read by a line tracker that
+does not follow CommonMark's containers, so it can quote content a renderer
+shows; a fenced, blockquoted, commented or raw-HTML line that is a Finding
+heading, or that carries a record of the finding it is in (a finding field
+line, a Class or Severity line), is therefore refused by name, in a manifest
+and in a canonical round before its completion marker, never skipped, and a
+report quotes such an example inline, in a code span after another word. A
+quoted field line outside any finding attaches to none. A finding is the section its Finding
+heading opens: a heading as shallow as that one closes it, and a deeper
+heading is one of its lines. A field line, a Finding heading or a line that
+looks like one that the pass cannot read is refused by name, and so is a
+manifest from which it reads no finding; a Class or Severity line outside a
+manifest finding is prose only while nothing since the last heading can hold
+a finding's record. In a canonical report of either gate, only `### Finding
+<ID>` opens a finding and any other heading that reads as a Finding heading is
+refused; a finding field line outside any finding is refused, so a
+reality-check report writes a gap's detail as prose; inside a finding, a line
+whose label is Class or Severity and that is not that field's own line is
+refused, prose included, so such a line starts with another word; and a
+field's duplicate is found by its label, whatever its indentation, in a round
+of either style.
+@@END

@@ -1,0 +1,6 @@
+K74 (git rm -f --cached restored to raw git, judged test_capture_provenance@hostile) has a timing-dependent verdict, measured over four runs:
+  probe 1 (as part of the then E13 row): killed, git ran the failing clean filter on the sibling records;
+  probe 2 (t030o41-mutations-v5-probe2.log): survived, no filter invocation;
+  rerun 1 (t030o41-mutations-v5-k74-rerun-1.log, matrix rc 1): survived, 0 filter errors;
+  rerun 2 (t030o41-mutations-v5-k74-rerun-2.log, matrix rc 0): killed, 2 filter errors.
+Consistent with git re-hashing an index entry through the clean filter only when its stat data cannot prove it clean, which depends on sub-second timing. The row is therefore not in the matrix of record; the site stays pinned (fixture_git) for the same reason as the add sites K72 kills deterministically, and the pinned version passes deterministically (dev11 hostile full suite, 143/143).

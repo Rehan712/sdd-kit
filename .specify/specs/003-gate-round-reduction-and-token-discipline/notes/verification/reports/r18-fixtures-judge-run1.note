@@ -1,0 +1,9 @@
+r18-fixtures-judge run 1 (session 19, 2026-10-09, rc 1): every check passed but one. On DX the new end-to-end
+O-024 case of round_record_line_cases (tsg-1) was refused at completion with 'no recognized rounds' instead of its
+two diagnostics: its tail was a $'...' string holding real newlines, passed to awk with -v, which BSD awk rejects
+('newline in string', the 2026-09-13 lesson), so awk printed nothing and the returned report was empty. A fault
+of the fixture, not of the kernel: the tail now reaches awk through ENVIRON (r18-edits/build-fixtures.py; the
+earlier pairs kept as r18-edits/tsg-1-run1.pairs). On FX every expectation held: report_manifest_locale_cases
+failed only on the relaxed row, report_record_line_cases on 211 assertions all among the new rows (the timing row
+took 305 s), and round_record_line_cases first at its first new row. The judge is re-run in full as
+r18-fixtures-judge.{log,rc,time}; run 1's outputs are kept as r18-fixtures-judge-run1-*.

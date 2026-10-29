@@ -1,0 +1,41 @@
+[
+  {
+    "command": [
+      "git",
+      "diff",
+      "--no-index",
+      "--check",
+      "/private/tmp/s28-o034-7nbg8e2h/before/scripts/sdd-analyze.sh",
+      "/private/tmp/s28-o034-7nbg8e2h/candidate/scripts/sdd-analyze.sh"
+    ],
+    "exit": 1,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--no-index",
+      "--check",
+      "/private/tmp/s28-o034-7nbg8e2h/before/tests/test-sdd-analyze.sh",
+      "/private/tmp/s28-o034-7nbg8e2h/candidate/tests/test-sdd-analyze.sh"
+    ],
+    "exit": 1,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--no-index",
+      "--check",
+      "/private/tmp/s28-o034-7nbg8e2h/before/.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md",
+      "/private/tmp/s28-o034-7nbg8e2h/candidate/.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md"
+    ],
+    "exit": 1,
+    "stdout": "",
+    "stderr": ""
+  }
+]

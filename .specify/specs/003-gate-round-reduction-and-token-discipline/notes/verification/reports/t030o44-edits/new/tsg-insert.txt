@@ -1,0 +1,82 @@
+# record_line_report <reservation-output> <n> <verdict> <blocking> <minor> <heading> <class> <status> <severity lines>
+# A canonical round carrying the reservation's identity; heading and severity lines through printf %b.
+record_line_report() {
+  local src floor stamp
+  src="$(printf '%s' "$1" | sed -n 's/.* source=\([^ ]*\).*/\1/p')"
+  floor="$(printf '%s' "$1" | sed -n 's/.* floor=\([^ ]*\).*/\1/p')"
+  stamp="$(printf '%s' "$1" | sed -n 's/.* reserved=\([^ ]*\).*/\1/p')"
+  printf '## Round %s\n**Round:** %s\n**Timestamp:** %s\n**Source:** %s\n**Floor:** %s\n' "$2" "$2" "$stamp" "$src" "$floor"
+  printf '**Verdict:** %s\n**Blocking:** %s · **Minor:** %s\n### What I attacked\nFinding records read by both readers.\n' "$3" "$4" "$5"
+  printf '%b\n- **Class:** %s\n- **Status:** %s\n- **Prior:** none\n%b\n' "$6" "$7" "$8" "$9"
+  printf -- '- **Scenario:** a recorded trigger\n- **Where:** scripts/run.sh:9\n- **Reproduced:** concrete trigger at that site\n'
+  printf -- '- **Root cause:** implementation-error\n- **Blocks:** AC-012\n- **Wrong behavior:** observed versus required\n'
+  printf -- '- **Class-wide fix:** read or refuse every record line\n### Held up / follow-up tasks\nFixture disposition recorded.\n'
+  printf '<!-- gate-round-end: opponent:%s -->\n' "$2"
+}
+
+# AC-009/AC-012 — O-018 and O-019 end to end (round 13, T030o44): a CLEARED
+# round whose report or prior-review manifest carried a record line neither
+# reader read or refused sealed through `round --complete`, with the tier lost
+# from the tally. A refused completion leaves the reservation in place, so one
+# fixture serves every case, and the valid report completes after them.
+round_record_line_cases() {
+  local spec cli res manifest report l row
+  spec="$(make_verification_git_dir recordlines)"
+  cli="$(floor_fixture "$spec")"
+  run_rc 0 bash "$cli" floor "$spec"
+  run_rc 0 bash "$cli" round "$spec" opponent
+  res="$OUT"
+  manifest="$spec/notes/verification/reports/opponent-findings-review.md"
+  mkdir -p "$spec/notes/verification/reports"
+  report="$SANDBOX/record-lines-report.md"
+  record_line_report "$res" 1 CLEARED 0 1 '### Finding G-042' tier-binding open '- **Severity:** minor' > "$report"
+  for row in '#### Severity: data-loss|a Severity line this grammar cannot read: #### Severity: data-loss' \
+             '- <b>Severity:</b> data-loss|a Severity line this grammar cannot read: - <b>Severity:</b> data-loss' \
+             '> - **Severity:** data-loss|finding G-042 has no readable Severity'; do
+    printf '# Prior review\n\n### Finding G-042\n- **Class:** tier-binding\n\n%s\n' "${row%%|*}" > "$manifest"
+    for l in C en_US.UTF-8; do
+      run_rc 3 in_locale "$l" bash "$cli" round "$spec" opponent --complete "$report"
+      assert_contains "$OUT" "${row#*|}" "AC-009: a CLEARED completion over a manifest tier written as ${row%%|*} was not refused under LANG=$l (O-018)"
+    done
+  done
+  # O-019: a field line under a sub-heading of the manifest finding is read, so
+  # the CLEARED completion is refused on the manifest tier itself.
+  printf '# Prior review\n\n### Finding G-042\n- **Class:** tier-binding\n#### Notes\nReproduced twice.\n- **Severity:** data-loss\n' > "$manifest"
+  run_rc 3 bash "$cli" round "$spec" opponent --complete "$report"
+  assert_contains "$OUT" 'clearing verdict rests on 1 lowered severity tier(s) of known findings' \
+    'AC-009: a manifest field line under a sub-heading was not read at completion (O-019)'
+  record_line_report "$res" 1 CLEARED 0 1 '### Finding G-050' dup-binding new '- **Severity:** data-loss\n  - **Severity:** minor' > "$SANDBOX/record-lines-dup.md"
+  run_rc 3 bash "$cli" round "$spec" opponent --complete "$SANDBOX/record-lines-dup.md"
+  assert_contains "$OUT" 'duplicate finding field' 'AC-009: an indented second Severity lowered a new finding at completion (O-018)'
+  record_line_report "$res" 1 CHALLENGED 1 0 '### Finding G-042' tier-binding open '- **Severity:** data-loss' > "$report"
+  run_rc 0 bash "$cli" round "$spec" opponent --complete "$report"
+  assert_contains "$OUT" 'round completed gate=opponent round=1 verdict=CHALLENGED'
+  # Round 2 is CLEARED at 0 . 0 and re-lists G-042 at minor under a line that
+  # opens a finding to a reader but is not `### Finding <ID>`.
+  run_rc 0 bash "$cli" round "$spec" opponent
+  res="$OUT"
+  for row in '#### Finding G-042|a Finding heading this grammar cannot read' \
+             '### Finding\tG-042|a Finding heading this grammar cannot read' \
+             '### Finding\302\240G-042|a Finding heading this grammar cannot read' \
+             '**Finding G-042**|a finding field outside any Finding'; do
+    record_line_report "$res" 2 CLEARED 0 0 "${row%%|*}" tier-binding open '- **Severity:** minor' > "$report"
+    for l in C en_US.UTF-8; do
+      run_rc 3 in_locale "$l" bash "$cli" round "$spec" opponent --complete "$report"
+      assert_contains "$OUT" "${row#*|}" "AC-009: a CLEARED round 2 under ${row%%|*} was not refused under LANG=$l (O-018)"
+    done
+  done
+  record_line_report "$res" 2 CLEARED 0 1 '### Finding G-042' tier-binding open '- **Severity:** minor' > "$report"
+  run_rc 3 bash "$cli" round "$spec" opponent --complete "$report"
+  assert_contains "$OUT" 'clearing verdict rests on 1 lowered severity tier(s) of known findings' \
+    'AC-009: the canonical control at a lowered tier completed (O-018)'
+  record_line_report "$res" 2 CHALLENGED 1 0 '### Finding G-042' tier-binding open '- **Severity:** data-loss' > "$report"
+  run_rc 0 bash "$cli" round "$spec" opponent --complete "$report"
+  assert_contains "$OUT" 'round completed gate=opponent round=2 verdict=CHALLENGED'
+  run_rc 0 bash "$cli" tally "$spec"
+  assert_contains "$OUT" 'opponent rounds=2'
+  assert_contains "$OUT" 'blocking=2 minor=0'
+}
+
+test_rounds() {
+  round_locale_cases
+  round_record_line_cases

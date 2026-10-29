@@ -1,0 +1,19 @@
+{
+  "argv": [
+    "/usr/local/bin/docker",
+    "run",
+    "--pull=never",
+    "--rm",
+    "--network=none",
+    "--read-only",
+    "--cap-drop=ALL",
+    "--security-opt=no-new-privileges",
+    "--entrypoint=/bin/bash",
+    "sha256:a81de950abb8b5d961ed8c1dcd345450fab8cda00ea3c11e7ec24a4ed4bb82ce",
+    "--version"
+  ],
+  "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+  "start": "2026-10-28T10:39:06.472485+00:00",
+  "exit": 0,
+  "end": "2026-10-28T10:39:06.930292+00:00"
+}

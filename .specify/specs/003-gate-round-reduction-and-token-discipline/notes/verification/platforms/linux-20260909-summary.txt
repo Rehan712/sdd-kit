@@ -1,0 +1,10 @@
+Linux portability verification — 2026-09-09
+Command: bash tests/run.sh && shellcheck -S warning -x scripts/*.sh tests/*.sh
+Environment: sdd-spec003-verification:local, unprivileged verifier user; network disabled; executable temporary memory filesystems.
+Image: sha256:fdbdb0bbf7d3a06691fc70afbda937ac31998d49ee7f67d9fb6c77996823f7fa
+Archive: 7d9ca4d898f6db8d2e5558712201e12ad3bdfaf568761b6d40ed2123044ac82b  /tmp/spec003-verification-20260909-fixed.tar.gz
+Log: linux-20260909-fixed.log
+Log sha256: e98cca56664aa3349e165d49cd2a79b3aa3450d3c7390c694e7330f8168d5394
+Result: exit 0; 15 suites, 130/130 tests passed; ShellCheck warning-level exit 0.
+Scope: actual local Linux execution, not a claim that the future GitHub-hosted CI matrix ran.
+Earlier 20260909 attempts: root-directory extraction failed; temporary mounts disallowed execution; then the timestamp fixture's unsupported interpolation required correction. Those logs remain preserved and do not supply PASS evidence.

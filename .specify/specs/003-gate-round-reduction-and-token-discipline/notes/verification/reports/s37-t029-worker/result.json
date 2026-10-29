@@ -1,0 +1,279 @@
+{
+  "capture": "CAP-819-05nYhW",
+  "capture_metadata": {
+    "check": "90a24b4b485e387a27b9bf813d3c91e9bda58741005a354c59364c345a22f4b5",
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "end": "2026-10-28T11:45:43Z",
+    "exit": "0",
+    "id": "CAP-819-05nYhW",
+    "input_after": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+    "input_before": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+    "key": "  -- 18/18 passed",
+    "kind": "command",
+    "no_tick": "1",
+    "output_bytes": "688",
+    "output_digest": "e2bd5dfbf6ddcf901317732547649b3e2028c869384acc1e688d65a77c738b33",
+    "policy": "local",
+    "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "sequence": "819",
+    "shell": "/bin/bash",
+    "start": "2026-10-28T11:15:44Z",
+    "version": "1"
+  },
+  "capture_sha256": {
+    "argv.nul": "102caf17909a3ea4ebccfc8fd6c902f01d85ad68ea0347db6357c47efbeb3832",
+    "bindings.nul": "8766df908be5d8f628c3880af34ae761dd1c9c4946e8da08da3e566c8c0c788a",
+    "inputs-after.nul": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+    "inputs.nul": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+    "meta.nul": "eb1abf4055977d9acce792c4b84b900f347366b40d55ee423b736c5384a31b8c",
+    "output.log": "e2bd5dfbf6ddcf901317732547649b3e2028c869384acc1e688d65a77c738b33",
+    "summary.txt": "4774e4cb874fd6a86647c0672936955717056b4dc4ef57142b28e89343692e8a"
+  },
+  "checks": {
+    "HEAD_branch_index_refs_bytes_modes_mtimes_unchanged": true,
+    "actual_18_of_18": true,
+    "automatic_file_modes_preserved": true,
+    "capture_exit_zero": true,
+    "capture_identity": true,
+    "command_exit_zero": true,
+    "command_output_hashes": true,
+    "current_bindings_equal_capture": true,
+    "current_capture_and_task_match": true,
+    "current_source_expected": true,
+    "cwd_repo_exact": true,
+    "emitted_summary_exact_one_line": true,
+    "every_protected_file_hash_mode_mtime_size_unchanged": true,
+    "evidence_exact_automatic_append": true,
+    "exact_argv": true,
+    "failure_mode_rows_match_current_bindings": true,
+    "fresh_source_matches_actual_CAP818": true,
+    "input_after_expected": true,
+    "input_before_expected": true,
+    "ledger_matches_seal": true,
+    "new_files_exact_capture_and_ledger": true,
+    "no_surviving_capture_lock_or_stage": true,
+    "no_tick_one": true,
+    "output_digest_and_bytes": true,
+    "preexisting_git_status_set_unchanged": true,
+    "read_only_checks_preserved_worktree": true,
+    "seal_exact": true,
+    "sequence_exact_one_increment": true,
+    "stderr_empty": true
+  },
+  "command": {
+    "argv": [
+      "bash",
+      "scripts/spec-run.sh",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline",
+      "T029",
+      "--from-task",
+      "--no-tick",
+      "--summary"
+    ],
+    "attempt": 1,
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "end": "2026-10-28T11:46:29.620797+00:00",
+    "end_time_ns": 1793187989620924000,
+    "environment_policy": "inherited unchanged; nonsecret execution-relevant whitelist recorded",
+    "exit": 0,
+    "expected_source": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+    "nonsecret_environment": {
+      "GIT_OPTIONAL_LOCKS": "0",
+      "LANG": "C.UTF-8",
+      "LC_ALL": "C.UTF-8",
+      "LC_CTYPE": "C.UTF-8",
+      "NO_COLOR": "1",
+      "PATH": "/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/opt/pkg/env/active/bin:/opt/pmk/env/global/bin:/Library/Apple/usr/bin:/Users/babar/.nvm/versions/node/v24.19.0/lib/node_modules/@openai/codex/node_modules/@openai/codex-darwin-arm64/vendor/aarch64-apple-darwin/codex-path:/Users/babar/.codex_gym/tmp/arg0-macos/codex-arg01a4JX6:/Users/babar/.nvm/versions/node/v24.19.0/bin:/Users/babar/.local/bin:/Users/babar/.bun/bin:/Users/babar/.antigravity/antigravity/bin:/opt/homebrew/bin:/Users/babar/.cargo/bin:/Users/babar/Library/Android/sdk/emulator:/Users/babar/Library/Android/sdk/platform-tools",
+      "SHELL": "/bin/zsh",
+      "TMPDIR": "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/"
+    },
+    "retries": 0,
+    "start": "2026-10-28T11:15:00.711953+00:00",
+    "start_time_ns": 1793186100711966000,
+    "stderr_bytes": 0,
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout_bytes": 501,
+    "stdout_sha256": "4774e4cb874fd6a86647c0672936955717056b4dc4ef57142b28e89343692e8a"
+  },
+  "current_T029_bindings": [
+    [
+      "FM-001",
+      "tests/test-gate-contracts.sh::test_instruction_contracts"
+    ],
+    [
+      "INV-005",
+      "tests/test-gate-contracts.sh::test_instruction_contracts"
+    ]
+  ],
+  "current_T029_task_rows": [
+    [
+      "task",
+      "T029",
+      "T029",
+      "Docs",
+      "",
+      "test",
+      "",
+      "`tests/test-gate-contracts.sh::test_instruction_contracts`",
+      "REQ-001, REQ-007, REQ-008, REQ-009, REQ-010, REQ-011, REQ-012, REQ-015, REQ-016, AC-018, FM-001, INV-005, plan \u00a73, \u00a74, \u00a78",
+      "`bash tests/test-gate-contracts.sh` \u2192 all suites `passed`, exit 0",
+      "local",
+      ""
+    ]
+  ],
+  "output_tail": [
+    "  ok   test_all_brief_modes",
+    "  ok   test_all_overlay_defaults",
+    "  ok   test_briefs_t010",
+    "  ok   test_briefs_t011",
+    "  ok   test_briefs_t012",
+    "  ok   test_briefs_t013",
+    "  ok   test_defaults_t006",
+    "  ok   test_defaults_t007",
+    "  ok   test_defaults_t008",
+    "  ok   test_defaults_t009",
+    "  ok   test_empty_record_directories_do_not_decide_the_002_tally",
+    "  ok   test_ignored_local_overlays_and_personas_do_not_decide_the_checks",
+    "  ok   test_ignored_local_scripts_do_not_reach_the_dispatch_grammar_kit",
+    "  ok   test_ignored_local_scripts_do_not_reach_the_documented_workflow",
+    "  ok   test_instruction_contracts",
+    "  ok   test_invoker_protocol",
+    "  ok   test_reports_and_tally",
+    "  ok   test_review_scope_contracts",
+    "  -- 18/18 passed"
+  ],
+  "preservation": {
+    "automatic_before_after": {
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/evidence.md": {
+        "after": {
+          "mode": "0o644",
+          "mtime_ns": 1793187989583727744,
+          "sha256": "00a6431055d2b1a25f364d2347efa91e2378177bd3b45b7fe67b6b95b5e39767",
+          "size": 570624,
+          "type": "file"
+        },
+        "before": {
+          "mode": "0o644",
+          "mtime_ns": 1793184496874714703,
+          "sha256": "523be034864497a64582cc444fc001eb1c1ec2e964d7131660415cc00df0e5a4",
+          "size": 570001,
+          "type": "file"
+        }
+      },
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/sequence": {
+        "after": {
+          "mode": "0o644",
+          "mtime_ns": 1793186103114846265,
+          "sha256": "4dbf966b4e9896f57b2413818c1da312eaf41014bb1b353bf425f23edb4618aa",
+          "size": 4,
+          "type": "file"
+        },
+        "before": {
+          "mode": "0o644",
+          "mtime_ns": 1793184066858567971,
+          "sha256": "7fe2bd7ea2be37bebc39bf7c41d491a7964d3ad1fa48367761b9ab2870644012",
+          "size": 4,
+          "type": "file"
+        }
+      }
+    },
+    "changed_protected_files": [],
+    "git_metadata_after": {
+      "/Users/babar/projects/sdd-kit-public/.git/worktrees/003-gate-round-reduction-and-token-discipline/HEAD": {
+        "mode": "0o644",
+        "mtime_ns": 1788654328953442318,
+        "sha256": "36b441e5337734d73e547a921b682069ccd54788152cff695f469a8e54e84134",
+        "size": 67,
+        "type": "file"
+      },
+      "/Users/babar/projects/sdd-kit-public/.git/worktrees/003-gate-round-reduction-and-token-discipline/index": {
+        "mode": "0o644",
+        "mtime_ns": 1792957592613445716,
+        "sha256": "c492d7ea95abf8e8c335001f20c62ff50bc6f1e2179d7a07d30811181b3dd700",
+        "size": 2200525,
+        "type": "file"
+      }
+    },
+    "git_metadata_before": {
+      "HEAD": "2049f65960cc91e9e30bbd5ff1e11fc0fdf7cbd9",
+      "branch": "spec/003-gate-round-reduction-and-token-discipline",
+      "files": {
+        "/Users/babar/projects/sdd-kit-public/.git/worktrees/003-gate-round-reduction-and-token-discipline/HEAD": {
+          "mode": "0o644",
+          "mtime_ns": 1788654328953442318,
+          "sha256": "36b441e5337734d73e547a921b682069ccd54788152cff695f469a8e54e84134",
+          "size": 67,
+          "type": "file"
+        },
+        "/Users/babar/projects/sdd-kit-public/.git/worktrees/003-gate-round-reduction-and-token-discipline/index": {
+          "mode": "0o644",
+          "mtime_ns": 1792957592613445716,
+          "sha256": "c492d7ea95abf8e8c335001f20c62ff50bc6f1e2179d7a07d30811181b3dd700",
+          "size": 2200525,
+          "type": "file"
+        }
+      }
+    },
+    "missing_preexisting_files": [],
+    "new_files": [
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-819-05nYhW/COMPLETE",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-819-05nYhW/argv.nul",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-819-05nYhW/bindings.nul",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-819-05nYhW/inputs-after.nul",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-819-05nYhW/inputs.nul",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-819-05nYhW/meta.nul",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-819-05nYhW/output.log",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-819-05nYhW/summary.txt",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/captures/CAP-819-05nYhW"
+    ],
+    "parent_receipt_status_timing": {
+      "initial_observation": "Absent at initial baseline inspection; present at subsequent staging/receipt inspection and before both saved status and inventory.",
+      "inventory_observation": {
+        "mode": "0o644",
+        "mtime_ns": 1793186019091461670,
+        "sha256": "bbcc33c8b2d62e09f1d32c1103e75c678a8a0ec7f8c99126137e4c7cc04a4ab7",
+        "size": 1835,
+        "type": "file"
+      },
+      "path": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s37-t029-worker-invocation.json",
+      "status_observation": {
+        "mode": "0o644",
+        "mtime_ns": 1793186019091461670,
+        "sha256": "bbcc33c8b2d62e09f1d32c1103e75c678a8a0ec7f8c99126137e4c7cc04a4ab7",
+        "size": 1835,
+        "type": "file"
+      }
+    },
+    "pending_operations": [],
+    "preexisting_file_count": 20150,
+    "preexisting_history_policy": "Every preexisting worktree file including all historical captures, ledgers, reports, accepted returns, tasks and STATUS compared by sha256/type/mode/mtime_ns/size; only exact automatic evidence append and sequence update allowed.",
+    "protected_file_count": 20148,
+    "unexpected_new_files": []
+  },
+  "read_only_changed_files": [],
+  "read_only_check": {
+    "argv": [
+      "bash",
+      "-s",
+      "--",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline",
+      "CAP-819-05nYhW",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s37-t029-worker"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "exit": 0,
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "scope": "Single no-tick capture; no acceptance, task/source/STATUS edits, extra suites, CI, floor or gate operations.",
+  "status": "passed",
+  "summary": "capture=CAP-819-05nYhW command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=e2bd5dfbf6ddcf901317732547649b3e2028c869384acc1e688d65a77c738b33 input=f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-819-05nYhW/output.log [complete metadata: capture directory]",
+  "task": "T029",
+  "verification_end": "2026-10-28T11:47:52.481163+00:00",
+  "worker_return": {
+    "bytes": 747,
+    "path": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s37-t029-worker/worker-return.txt",
+    "sha256": "0828776bf6a8018c6cd5768e04c3344ffd1f09d5fb94f5d4a49d38ec36ce4412",
+    "terminal_LF_count": 1
+  }
+}

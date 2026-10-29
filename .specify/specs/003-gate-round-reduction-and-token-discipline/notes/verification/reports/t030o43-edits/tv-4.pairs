@@ -1,0 +1,43 @@
+@@OLD
+    cp "$d/status-b.md" "$d/x/STATUS.md"
+    run_rc 0 bash -c '. "$1"; vf_round_authorized "$2" opponent 4 2026-09-27T00:00:00Z' _ "$SCRIPTS/verification-lib.sh" "$d/x"
+    cmp -s "$d/a.sem" "$d/b.sem" &&
+      t_fail "AC-020: a waiver the scanner reads left the input identity ($shape, T030o43 review 2)"
+  done
+@@NEW
+    cp "$d/status-b.md" "$d/x/STATUS.md"
+    bash -c '. "$1"; vf_round_authorized "$2" opponent 4 2026-09-27T00:00:00Z' _ "$SCRIPTS/verification-lib.sh" "$d/x" > /dev/null 2>&1 ||
+      t_fail "AC-020: the scanner did not read the waiver ($shape, fixture)"
+    cmp -s "$d/a.sem" "$d/b.sem" &&
+      t_fail "AC-020: a waiver the scanner reads left the input identity ($shape, T030o43 review 2)"
+  done
+  # The identity keeps more than the scanner reads, as written: a section
+  # under a heading that only begins "## Decisions log", and one under such a
+  # heading quoted in a fence, are hashed, and a line is hashed as written, so
+  # two spellings of one space are two identities.
+  local body_a body_b
+  for shape in archived-content fenced-content written-bytes; do
+    case "$shape" in
+      archived-content) body_a='## Decisions log (archived)\n\n- 2026-01-01 — one\n'; body_b='## Decisions log (archived)\n\n- 2026-01-01 — two\n';;
+      fenced-content) body_a='```text\n## Decisions log\n- one\n```\n'; body_b='```text\n## Decisions log\n- two\n```\n';;
+      written-bytes) body_a='## Decisions log\n\n- 2026-09-06 — one\302\240decision\n'; body_b='## Decisions log\n\n- 2026-09-06 — one\342\200\203decision\n';;
+    esac
+    printf -- '---\nspec: x\n---\n\n%b\n## Open questions / blockers\n' "$body_a" > "$d/status-a.md"
+    printf -- '---\nspec: x\n---\n\n%b\n## Open questions / blockers\n' "$body_b" > "$d/status-b.md"
+    bash -c '. "$1"; vf_semantic_file "$2" "$3" "$4" && vf_semantic_file "$2" "$5" "$6"' _ "$SCRIPTS/verification-lib.sh" \
+      .specify/specs/x/STATUS.md "$d/status-a.md" "$d/a.sem" "$d/status-b.md" "$d/b.sem"
+    cmp -s "$d/a.sem" "$d/b.sem" &&
+      t_fail "AC-020: the Decisions view kept less than written ($shape, T030o43 review 2)"
+  done
+@@END
+@@OLD
+  printf -- '---\nspec: x\nworktree: /tmp/My\302\240Projects/wt\nverification_contract:\302\2401\302\240# pinned\n---\n' > "$d/fm.md"
+@@NEW
+  printf -- '---\nspec: x\nworktree: /tmp/My\302\240Projects/wt\nverification_contract:\302\2401\302\240# pinned\nbranch:\302\240"spec/x" # quoted\n---\n' > "$d/fm.md"
+  run_rc 0 bash -c '. "$1"; vf_fm_value "$2" branch' _ "$SCRIPTS/verification-lib.sh" "$d/fm.md"
+  assert_eq spec/x "$OUT" 'AC-020: a quoted frontmatter value after a U+00A0 kept its quotes (T030o43 review 2)'
+  # A closing fence followed by such whitespace closes the frontmatter.
+  printf -- '---\nspec: x\n---\302\240\nverification_contract: 1\n' > "$d/fm-close.md"
+  run_rc 0 bash -c '. "$1"; vf_fm_count "$2" verification_contract' _ "$SCRIPTS/verification-lib.sh" "$d/fm-close.md"
+  assert_eq 0 "$OUT" 'AC-020: a closing frontmatter fence followed by a U+00A0 did not close it (T030o43 review 2)'
+@@END

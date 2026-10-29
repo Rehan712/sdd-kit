@@ -1,0 +1,74 @@
+{
+  "ended": "2026-10-29T22:01:31.694303+00:00",
+  "exit": 0,
+  "task": "T029",
+  "capture": "CAP-844-GCqKod",
+  "source": "7d4f17221f13d850cb7db06cdbb6261119ca97b52228adeac74d82f6496a9bff",
+  "accepted": true,
+  "rejectedEvent": "ACCEPT-oovEKE",
+  "rejectionClass": "binding-mismatch",
+  "rejectedTaskBytesModeMtimeUnchanged": true,
+  "acceptedReceipt": "ACC-nP1KDk",
+  "acceptedEvent": "ACCEPT-FWY9e6",
+  "acceptedMeta": {
+    "version": "1",
+    "task": "T029",
+    "return_digest": "41f438660fef9e7b8efe7da5cff8358ce56f8d846c5c6450bc64c81b0596ffeb",
+    "binding_digest": "8766df908be5d8f628c3880af34ae761dd1c9c4946e8da08da3e566c8c0c788a",
+    "input": "7d4f17221f13d850cb7db06cdbb6261119ca97b52228adeac74d82f6496a9bff",
+    "captures": "CAP-844-GCqKod",
+    "manual": ""
+  },
+  "beforeTasks": {
+    "mode": 384,
+    "mtimeNs": 1793296519245071301,
+    "size": 184198,
+    "sha256": "859042532b2b0c71136b6db6184008fb354a697b190e77accae10ec1ea166575",
+    "type": "file"
+  },
+  "afterTasks": {
+    "mode": 384,
+    "mtimeNs": 1793311225510798891,
+    "size": 184198,
+    "sha256": "2380332731cede88cbcef942aed51847a80a1dd23166b03dc3b80f9381f1d9bd",
+    "type": "file"
+  },
+  "protectedUnchanged": true,
+  "currentSourceUnchanged": true,
+  "changedPreexisting": {
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md": {
+      "before": {
+        "mode": 384,
+        "mtimeNs": 1793296519245071301,
+        "size": 184198,
+        "sha256": "859042532b2b0c71136b6db6184008fb354a697b190e77accae10ec1ea166575",
+        "type": "file"
+      },
+      "after": {
+        "mode": 384,
+        "mtimeNs": 1793311225510798891,
+        "size": 184198,
+        "sha256": "2380332731cede88cbcef942aed51847a80a1dd23166b03dc3b80f9381f1d9bd",
+        "type": "file"
+      }
+    }
+  },
+  "newPaths": [
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/accept-events/ACCEPT-FWY9e6/COMPLETE",
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/accept-events/ACCEPT-FWY9e6/meta.nul",
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/accept-events/ACCEPT-oovEKE/COMPLETE",
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/accept-events/ACCEPT-oovEKE/meta.nul",
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/accepted/T029/ACC-nP1KDk/COMMITTED",
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/accepted/T029/ACC-nP1KDk/COMPLETE",
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/accepted/T029/ACC-nP1KDk/digests.nul",
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/accepted/T029/ACC-nP1KDk/meta.nul",
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/accepted/T029/ACC-nP1KDk/return.txt",
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/accepted/T029/ACC-nP1KDk/tasks.after"
+  ],
+  "unexpectedPreexistingChanges": {},
+  "strictGlobalRefsUnchanged": true,
+  "historicalStrictPreservation": false,
+  "allOtherOriginalWorktreeFilesPreserved": true,
+  "taskBytesFinalizedBeforeSnapshot": false,
+  "note": "T031a5o1 fresh capture/acceptance still required before final task freeze and snapshot."
+}

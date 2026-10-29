@@ -1,0 +1,54 @@
+@@OLD
+  # The identity keeps more, never less: a Decisions heading carrying a U+00A0
+  # still starts the section the identity hashes (T030o43 review).
+  printf -- '---\nspec: x\n---\n\n## Decisions log\302\240\n\n- 2026-09-06 — one decision\n' > "$SANDBOX/status-a.md"
+  printf -- '---\nspec: x\n---\n\n## Decisions log\302\240\n\n- 2026-09-06 — another decision\n' > "$SANDBOX/status-b.md"
+  bash -c '. "$1"; vf_semantic_file "$2" "$3" "$4" && vf_semantic_file "$2" "$5" "$6"' _ "$SCRIPTS/verification-lib.sh" \
+    .specify/specs/x/STATUS.md "$SANDBOX/status-a.md" "$SANDBOX/status-a.sem" "$SANDBOX/status-b.md" "$SANDBOX/status-b.sem"
+  cmp -s "$SANDBOX/status-a.sem" "$SANDBOX/status-b.sem" &&
+    t_fail 'AC-020: a Decisions log under a heading carrying a U+00A0 left the input identity (T030o43 review)'
+@@NEW
+  # The input identity's Decisions view covers every line the authorization
+  # scanner reads (T030o43 review 2, R2-F1): a section starts at every line
+  # that begins "## Decisions log", quoted or not, and ends only at a heading
+  # the fence tracker does not quote. Each shape is a pair of STATUS files
+  # that differ by one waiver line; the scanner reads that line, so the
+  # identity must tell the two apart.
+  local shape waiver d="$SANDBOX/decisions"
+  waiver='- 2026-09-27T15:55:36Z — waiver: gate=opponent; round=4; after=3; by=someone; reason=a fixture reason'
+  mkdir -p "$d/x"
+  for shape in fenced-earlier archived-earlier duplicate-later fenced-round-inside nbsp-heading; do
+    for v in a b; do
+      {
+        printf -- '---\nspec: x\n---\n\n'
+        case "$shape" in
+          fenced-earlier) printf '## Where things stand\n\n```text\n## Decisions log\n```\n\n';;
+          archived-earlier) printf '## Decisions log (archived)\n\n- 2026-01-01 — an old decision\n\n';;
+        esac
+        if [[ "$shape" == nbsp-heading ]]; then printf '## Decisions log\302\240\n\n'; else printf '## Decisions log\n\n'; fi
+        printf -- '- 2026-09-06 — one decision\n'
+        [[ "$shape" != fenced-round-inside ]] || printf -- '- 2026-09-06 — quoting a report:\n\n```text\n## Round 3\n```\n\n'
+        [[ "$shape" == duplicate-later || "$v" == a ]] || printf '%s\n' "$waiver"
+        printf '\n## Open questions / blockers\n\n- none\n'
+        if [[ "$shape" == duplicate-later ]]; then
+          printf '\n## Decisions log\n\n- 2026-09-06 — a second section\n'
+          [[ "$v" == a ]] || printf '%s\n' "$waiver"
+        fi
+      } > "$d/status-$v.md"
+    done
+    bash -c '. "$1"; vf_semantic_file "$2" "$3" "$4" && vf_semantic_file "$2" "$5" "$6"' _ "$SCRIPTS/verification-lib.sh" \
+      .specify/specs/x/STATUS.md "$d/status-a.md" "$d/a.sem" "$d/status-b.md" "$d/b.sem"
+    cp "$d/status-b.md" "$d/x/STATUS.md"
+    run_rc 0 bash -c '. "$1"; vf_round_authorized "$2" opponent 4 2026-09-27T00:00:00Z' _ "$SCRIPTS/verification-lib.sh" "$d/x"
+    cmp -s "$d/a.sem" "$d/b.sem" &&
+      t_fail "AC-020: a waiver the scanner reads left the input identity ($shape, T030o43 review 2)"
+  done
+  # A frontmatter value is the value as written, trimmed at its ends: a path
+  # with a U+00A0 inside it stays that path, and a U+00A0 after the colon or
+  # before an inline comment is whitespace (T030o43 review 2).
+  printf -- '---\nspec: x\nworktree: /tmp/My\302\240Projects/wt\nverification_contract:\302\2401\302\240# pinned\n---\n' > "$d/fm.md"
+  run_rc 0 bash -c '. "$1"; vf_fm_value "$2" worktree' _ "$SCRIPTS/verification-lib.sh" "$d/fm.md"
+  assert_eq $'/tmp/My\302\240Projects/wt' "$OUT" 'AC-020: a frontmatter path was not read as written (T030o43 review 2)'
+  run_rc 0 bash -c '. "$1"; vf_fm_value "$2" verification_contract' _ "$SCRIPTS/verification-lib.sh" "$d/fm.md"
+  assert_eq 1 "$OUT" 'AC-020: a U+00A0 around a frontmatter value was read as part of it (T030o43 review 2)'
+@@END

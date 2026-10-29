@@ -1,0 +1,18 @@
+Hosted CI portability verification — 2026-09-25 (after T030o41 was accepted)
+Workflow: .github/workflows/ci.yml, unmodified by this route (it is part of the snapshot tree).
+Run: https://github.com/Rehan712/sdd-kit/actions/runs/36159615221 — attempt 1, event pull_request, draft do-not-merge PR #18.
+Source identity: e07efa818886b08fd028b3a038921ae58d2774c6926a86394712014e86a50536 (sha256 of ci-20260925/snapshot/inputs.nul; equal to the freeze point and to CAP-455-RNmM6l's input).
+Snapshot: commit ee944e3295e9853718c59107fc9555b227873bf7, tree 4ca16df79d4a48e9571dc0b7eca49b4a049034f5, parent 0d55c62; built through a temporary index (real index, HEAD and spec branch unchanged).
+Mapping (ci-20260925/build.log, build.rc = 0): 6,543 listed paths = 6,543 tree entries; 177/177 manifest path records equal their tree entries after vf_semantic_file, with equal modes; the other 6,366 entries satisfy the anchored vf_bookkeeping_path (anchor .specify/specs/003-gate-round-reduction-and-token-discipline, fold=1).
+Tested commit: GitHub merge 0bae27940ffe4a4c7623b0865e490154a9307208 (parents f4a0e4e = main, ee944e32 = snapshot); its tree is 4ca16df7…, identical to the snapshot (collect.log, via the GitHub API).
+Jobs (conclusion; runner image; result):
+- shellcheck: success; ubuntu-24.04 20260920.314.1 (ShellCheck 0.9.0-1 per that image's manifest, the same image as run 35854215839); step `bash tests/shellcheck.sh`, which passes --norc and unsets SHELLCHECK_OPTS: ShellCheck 0.9 accepts --norc.
+- tests (ubuntu-latest): success; ubuntu-24.04 20260920.314.1; 15 suites, 147/147, 0 FAIL lines; the case-sensitive (non-folding) branch of the fixtures, including T030o41's, runs here.
+- tests (macos-latest): success; macos-26-arm64 20260907.0351.1; 15 suites, 147/147.
+- tests-bash32: success; macos-26-arm64 20260907.0351.1; /bin/bash 3.2.57 via the workflow's PATH shim; 15 suites, 147/147.
+Exits: every job conclusion is success (run-36159615221/jobs.json); no "Process completed with exit code" line in the shellcheck log.
+Credentials: push and PR operations ran as Rehan712 through a process-scoped GH_TOKEN; the active gh account was never switched (gh-accounts-before.txt = gh-accounts-after.txt) and the token was never printed.
+Approval: asked again after code changed and approved by the user on 2026-09-25 (ci-20260925/approval.txt).
+Limits: normal CI on the eventual guarded PR (T032) is still required before merge. This evidence binds source e07efa81…; any later source change makes it historical.
+Cleanup: PR #18 closed unmerged at 2026-09-25T16:45:05Z; branch ci-snapshot/spec-003-20260925 deleted (ci-20260925/pr-final-state.txt: state=CLOSED, mergedAt=null, remote branch absent). GitHub retains the closed PR and its commit publicly.
+Collector: ci-20260925/collect.sh, collect.log, collect.rc = 0 (collect result: PASS); finish.sh, finish.log, finish.rc = 0.

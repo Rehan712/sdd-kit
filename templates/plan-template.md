@@ -80,12 +80,37 @@ For each stack tag, anything stack-specific worth calling out. The hub's `templa
 
 - `<stack-tag>`: ...
 
-## 7. Risks
+## 7. Risks, failure modes and verification
 
 What could go wrong, ranked roughly by likelihood × impact. For each, a mitigation.
 
 - **R1:** ... — *Mitigation:* ...
 - **R2:** ...
+
+Use the [verification contract](verification-contract.md) as the authoritative
+FM/INV, exclusions and test-family grammar. Planning defines rows and families
+without future task IDs; task decomposition supplies owners later. Example:
+
+| ID | Components | Category | Trigger | Decided behavior | Test families |
+|---|---|---|---|---|---|
+| FM-001 | storage, handler | partial failure | Write fails after acquisition | Return mapped failure; release owned connection | storage-errors |
+
+| ID | Scope | Promise | Enforcement sites | Test families |
+|---|---|---|---|---|
+| INV-001 | storage, handler | Never release an unowned connection | Shared guard and failed-acquisition path | storage-errors |
+
+Exclusions: formatter / concurrency/ordering — synchronous pure function with
+no shared state. Replace examples with applicable scenarios from stack defaults;
+shared rows list all affected components. Never leave placeholder behaviors.
+
+| Family | Kind | Criteria | Concrete locators |
+|---|---|---|---|
+| storage-errors | test | AC-001 | `tests/storage.sh::test_failed_write_releases_owned_connection` |
+
+Locators identify intended literal tests; files need not exist during planning.
+Review still judges assertion adequacy. For each behavior task, add/extend its
+local tests with implementation; reserve Tests-stage work for integration.
+Do not relabel automated proof static/manual to bypass a failed check.
 
 ## 8. Rollout
 

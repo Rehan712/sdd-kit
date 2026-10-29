@@ -1,0 +1,6 @@
+Docker image sdd-spec003-verification:local was rebuilt as sha256:3060bcc2b3e24b4fff71c841499bb06eaea6ef8e7f40109d224f30f8bb9010b2.
+Linux validation used root and failed the existing permission-denial test; it also encountered filesystem I/O errors during disk exhaustion. This is not Linux PASS evidence.
+Docker image metadata disappeared and overlay/containerd writes failed read-only or with input/output errors.
+After the user said CONTINUE, docker desktop restart --timeout 60 was attempted. It exited 1: Failed to stop Docker Desktop; backend/build/dev-envs processes still running, context deadline exceeded.
+An existing mv-localstack container was present (previously unhealthy). No factory reset, volume deletion or process-force-kill was performed. The hanging read-only docker desktop status client was terminated for handoff.
+A smaller unprivileged Dockerfile is prepared at /tmp/spec003-linux-light/Dockerfile. Restore Docker before rerunning; do not infer that it restarted successfully.

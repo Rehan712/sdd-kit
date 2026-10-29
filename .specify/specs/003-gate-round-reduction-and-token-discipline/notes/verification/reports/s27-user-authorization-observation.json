@@ -1,0 +1,118 @@
+{
+  "userReply": "Continue",
+  "inReplyTo": {
+    "opponent": {
+      "next": 24,
+      "after": 23
+    },
+    "realityCheck": {
+      "next": 4,
+      "after": 3
+    },
+    "ciRefresh": "existing temporary PR21 for reviewed fixes"
+  },
+  "approvalObservedAtUtc": "2026-10-25T20:07:52Z",
+  "timestampMeaning": "UTC clock observation immediately after receiving the approval; user did not supply a timestamp",
+  "scope": "Record exact next-round Decisions, freeze source, refresh matching deterministic floor and CI snapshot PR21, then independent MAX opponent24 and reality-check4. No merge authorization.",
+  "tasks": [
+    {
+      "key": "s27AuthorizationWorker",
+      "invocation": {
+        "taskId": "node:delegated-task:command%3Amcp%3Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%3Adelegate-task%3Asdd003-s27-authorized-next-round-decisions-high-r1",
+        "childThreadId": "thread:delegated-task:command%3Amcp%3Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%3Adelegate-task%3Asdd003-s27-authorized-next-round-decisions-high-r1",
+        "childRunId": "run:thread:thread%3Adelegated-task%3Acommand%253Amcp%253Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%253Adelegate-task%253Asdd003-s27-authorized-next-round-decisions-high-r1:ordinal:1",
+        "childNodeId": "node:delegated-task:command%3Amcp%3Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%3Adelegate-task%3Asdd003-s27-authorized-next-round-decisions-high-r1",
+        "status": "running",
+        "workState": "working",
+        "hasPendingChildRuns": false,
+        "latestTerminalRunId": null,
+        "latestTerminalStatus": null,
+        "latestTerminalSummary": null,
+        "latestTerminalResultContextTransferId": null,
+        "providerInstanceId": "codex_codex_gym",
+        "model": "gpt-6.1-sol",
+        "options": [
+          {
+            "id": "reasoningEffort",
+            "value": "high"
+          },
+          {
+            "id": "serviceTier",
+            "value": "default"
+          }
+        ],
+        "summary": null,
+        "resultContextTransferId": null,
+        "hasPendingQuestion": false,
+        "pendingApproval": null,
+        "waitTimedOut": false
+      }
+    },
+    {
+      "key": "s27FloorRecon",
+      "invocation": {
+        "taskId": "node:delegated-task:command%3Amcp%3Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%3Adelegate-task%3Asdd003-s27-floor-recipe-recon-r1",
+        "childThreadId": "thread:delegated-task:command%3Amcp%3Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%3Adelegate-task%3Asdd003-s27-floor-recipe-recon-r1",
+        "childRunId": "run:thread:thread%3Adelegated-task%3Acommand%253Amcp%253Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%253Adelegate-task%253Asdd003-s27-floor-recipe-recon-r1:ordinal:1",
+        "childNodeId": "node:delegated-task:command%3Amcp%3Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%3Adelegate-task%3Asdd003-s27-floor-recipe-recon-r1",
+        "status": "running",
+        "workState": "working",
+        "hasPendingChildRuns": false,
+        "latestTerminalRunId": null,
+        "latestTerminalStatus": null,
+        "latestTerminalSummary": null,
+        "latestTerminalResultContextTransferId": null,
+        "providerInstanceId": "codex_codex_gym",
+        "model": "gpt-6-luna",
+        "options": [
+          {
+            "id": "reasoningEffort",
+            "value": "medium"
+          },
+          {
+            "id": "serviceTier",
+            "value": "default"
+          }
+        ],
+        "summary": null,
+        "resultContextTransferId": null,
+        "hasPendingQuestion": false,
+        "pendingApproval": null,
+        "waitTimedOut": false
+      }
+    },
+    {
+      "key": "s27CiRecon",
+      "invocation": {
+        "taskId": "node:delegated-task:command%3Amcp%3Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%3Adelegate-task%3Asdd003-s27-ci-refresh-recipe-recon-r1",
+        "childThreadId": "thread:delegated-task:command%3Amcp%3Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%3Adelegate-task%3Asdd003-s27-ci-refresh-recipe-recon-r1",
+        "childRunId": "run:thread:thread%3Adelegated-task%3Acommand%253Amcp%253Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%253Adelegate-task%253Asdd003-s27-ci-refresh-recipe-recon-r1:ordinal:1",
+        "childNodeId": "node:delegated-task:command%3Amcp%3Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%3Adelegate-task%3Asdd003-s27-ci-refresh-recipe-recon-r1",
+        "status": "running",
+        "workState": "working",
+        "hasPendingChildRuns": false,
+        "latestTerminalRunId": null,
+        "latestTerminalStatus": null,
+        "latestTerminalSummary": null,
+        "latestTerminalResultContextTransferId": null,
+        "providerInstanceId": "codex_codex_gym",
+        "model": "gpt-6-luna",
+        "options": [
+          {
+            "id": "reasoningEffort",
+            "value": "medium"
+          },
+          {
+            "id": "serviceTier",
+            "value": "default"
+          }
+        ],
+        "summary": null,
+        "resultContextTransferId": null,
+        "hasPendingQuestion": false,
+        "pendingApproval": null,
+        "waitTimedOut": false
+      }
+    }
+  ]
+}

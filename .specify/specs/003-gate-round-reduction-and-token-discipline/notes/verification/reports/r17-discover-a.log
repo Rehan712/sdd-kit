@@ -1,0 +1,291 @@
+== E01 report_record_line_cases rc=0 failing-asserts=0
+== E01 report_manifest_locale_cases rc=0 failing-asserts=0
+== E01a report_record_line_cases rc=0 failing-asserts=0
+== E01a report_manifest_locale_cases rc=0 failing-asserts=0
+== E01b report_record_line_cases rc=0 failing-asserts=0
+== E01b report_manifest_locale_cases rc=0 failing-asserts=0
+== E02 report_record_line_cases rc=1 failing-asserts=12
+  | assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.2otU3O/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-bab
+  | assert: AC-012: a manifest tier written as image-split-by-seven-marks was not refused by name under LANG=C (O-018) missing substring: a second Severity line in finding G-042
+  | assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.2otU3O/record-lines/notes/opponent.md /private/tmp/claude-501/
+  | assert: AC-012: a manifest tier written as image-split-by-seven-marks was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a second Severity line in finding G-042
+  | assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.2otU3O/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-bab
+  | assert: AC-012: a manifest tier written as image-split-by-eight-marks-quoted was not refused by name under LANG=C (O-018) missing substring: quoted content carries a Severity line
+  | assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.2otU3O/record-lines/notes/opponent.md /private/tmp/claude-501/
+  | assert: AC-012: a manifest tier written as image-split-by-eight-marks-quoted was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: quoted content carries a Severity line
+== E02 report_manifest_locale_cases rc=0 failing-asserts=0
+== E02 round_record_line_cases rc=1 failing-asserts=43
+  | assert: expected exit 3, got 0: in_locale C bash /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.Hrhi0z/floor-kit-recordlines/scripts/spec-gate.sh round /private/tmp/cla
+  | assert: AC-009: a CLEARED completion over a second manifest tier written as 
+  | assert: AC-009: a CLEARED completion over a second manifest tier written as 
+  | assert: AC-009: an indented second Severity lowered a new finding at completion (O-018) missing substring: duplicate finding field
+  | assert: AC-009: a CLEARED completion over a second tier written as - **Severity:** minor\n\n<!-->\n\n- **Severity:** data-loss\n\nThe tier above is the one we stand by. --> was not refused under LANG=C (T030o44 review) missing substring: quoted content carries
+  | assert: AC-009: a CLEARED completion over a second tier written as - **Severity:** minor\n\n<!-->\n\n- **Severity:** data-loss\n\nThe tier above is the one we stand by. --> was not refused under LANG=en_US.UTF-8 (T030o44 review) missing substring: quoted conte
+  | assert: AC-009: a CLEARED completion over a second tier written as - **Severity:** minor\n  data-loss was not refused under LANG=C (T030o44 review) missing substring: a Severity field whose list item holds more than its line in finding G-050
+  | assert: AC-009: a CLEARED completion over a second tier written as - **Severity:** minor\n  data-loss was not refused under LANG=en_US.UTF-8 (T030o44 review) missing substring: a Severity field whose list item holds more than its line in finding G-050
+== E03 report_record_line_cases rc=0 failing-asserts=0
+== E03 report_manifest_locale_cases rc=0 failing-asserts=0
+== E04 report_record_line_cases rc=0 failing-asserts=0
+== E04 report_manifest_locale_cases rc=0 failing-asserts=0
+== E05 report_record_line_cases rc=1 failing-asserts=4
+  | assert: AC-012: a manifest tier written as paragraph-indented-heading-marker was not refused by name under LANG=C (O-018) missing substring: a second Severity line in finding G-042:     # b">Severity: data-loss</b>
+  | assert: AC-012: a manifest tier written as paragraph-indented-heading-marker was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a second Severity line in finding G-042:     # b">Severity: data-loss</b>
+  | assert: AC-012: a second tier written as paragraph-indented-heading-marker was not refused by name under LANG=C (O-018) missing substring: a Severity line this grammar cannot read in finding G-050
+  | assert: AC-012: a second tier written as paragraph-indented-heading-marker was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a Severity line this grammar cannot read in finding G-050
+== E05 report_manifest_locale_cases rc=0 failing-asserts=0
+== E06 report_record_line_cases rc=0 failing-asserts=0
+== E06 report_manifest_locale_cases rc=0 failing-asserts=0
+== E07 report_record_line_cases rc=1 failing-asserts=8
+  | assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.447O7i/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-bab
+  | assert: AC-012: a manifest tier written as image-after-backtick-info-fence was not refused by name under LANG=C (O-018) missing substring: quoted content carries a Severity line
+  | assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.447O7i/record-lines/notes/opponent.md /private/tmp/claude-501/
+  | assert: AC-012: a manifest tier written as image-after-backtick-info-fence was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: quoted content carries a Severity line
+  | assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.447O7i/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-bab
+  | assert: AC-012: a second tier written as image-after-backtick-info-fence was not refused by name under LANG=C (O-018) missing substring: quoted content carries a Severity line
+  | assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.447O7i/record-lines/notes/opponent.md /private/tmp/claude-501/
+  | assert: AC-012: a second tier written as image-after-backtick-info-fence was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: quoted content carries a Severity line
+== E07 report_manifest_locale_cases rc=0 failing-asserts=0
+== E07 round_record_line_cases rc=1 failing-asserts=43
+  | assert: expected exit 3, got 0: in_locale C bash /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.xnMUWi/floor-kit-recordlines/scripts/spec-gate.sh round /private/tmp/cla
+  | assert: AC-009: a CLEARED completion over a second manifest tier written as 
+  | assert: AC-009: a CLEARED completion over a second manifest tier written as 
+  | assert: AC-009: an indented second Severity lowered a new finding at completion (O-018) missing substring: duplicate finding field
+  | assert: AC-009: a CLEARED completion over a second tier written as - **Severity:** minor\n\n<!-->\n\n- **Severity:** data-loss\n\nThe tier above is the one we stand by. --> was not refused under LANG=C (T030o44 review) missing substring: quoted content carries
+  | assert: AC-009: a CLEARED completion over a second tier written as - **Severity:** minor\n\n<!-->\n\n- **Severity:** data-loss\n\nThe tier above is the one we stand by. --> was not refused under LANG=en_US.UTF-8 (T030o44 review) missing substring: quoted conte
+  | assert: AC-009: a CLEARED completion over a second tier written as - **Severity:** minor\n  data-loss was not refused under LANG=C (T030o44 review) missing substring: a Severity field whose list item holds more than its line in finding G-050
+  | assert: AC-009: a CLEARED completion over a second tier written as - **Severity:** minor\n  data-loss was not refused under LANG=en_US.UTF-8 (T030o44 review) missing substring: a Severity field whose list item holds more than its line in finding G-050
+== E08 report_record_line_cases rc=0 failing-asserts=0
+== E08 report_manifest_locale_cases rc=0 failing-asserts=0
+== E09 report_record_line_cases rc=0 failing-asserts=0
+== E09 report_manifest_locale_cases rc=0 failing-asserts=0
+== N01 report_record_line_cases rc=1 failing-asserts=12
+  | assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.umstbD/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-bab
+  | assert: AC-012: a manifest tier written as form-feed-in-text was not refused by name under LANG=C (O-018) missing substring: a form feed or vertical tab in finding G-042
+  | assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.umstbD/record-lines/notes/opponent.md /private/tmp/claude-501/
+  | assert: AC-012: a manifest tier written as form-feed-in-text was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a form feed or vertical tab in finding G-042
+  | assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.umstbD/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-bab
+  | assert: AC-012: a manifest tier written as vertical-tab-in-text was not refused by name under LANG=C (O-018) missing substring: a form feed or vertical tab in finding G-042
+  | assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.umstbD/record-lines/notes/opponent.md /private/tmp/claude-501/
+  | assert: AC-012: a manifest tier written as vertical-tab-in-text was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a form feed or vertical tab in finding G-042
+== N01 report_manifest_locale_cases rc=0 failing-asserts=0
+== N01 round_record_line_cases rc=1 failing-asserts=43
+  | assert: expected exit 3, got 0: in_locale C bash /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.VdT7kC/floor-kit-recordlines/scripts/spec-gate.sh round /private/tmp/cla
+  | assert: AC-009: a CLEARED completion over a second manifest tier written as - NoteSeverity: data-loss was not refused under LANG=C (T030o44 review) missing substring: a form feed or vertical tab in finding G-042
+  | assert: AC-009: a CLEARED completion over a second manifest tier written as - NoteSeverity: data-loss was not refused under LANG=en_US.UTF-8 (T030o44 review) missing substring: a form feed or vertical tab in finding G-042
+  | assert: AC-009: an indented second Severity lowered a new finding at completion (O-018) missing substring: duplicate finding field
+  | assert: AC-009: a CLEARED completion over a second tier written as - **Severity:** minor\n\n<!-->\n\n- **Severity:** data-loss\n\nThe tier above is the one we stand by. --> was not refused under LANG=C (T030o44 review) missing substring: quoted content carries
+  | assert: AC-009: a CLEARED completion over a second tier written as - **Severity:** minor\n\n<!-->\n\n- **Severity:** data-loss\n\nThe tier above is the one we stand by. --> was not refused under LANG=en_US.UTF-8 (T030o44 review) missing substring: quoted conte
+  | assert: AC-009: a CLEARED completion over a second tier written as - **Severity:** minor\n  data-loss was not refused under LANG=C (T030o44 review) missing substring: a Severity field whose list item holds more than its line in finding G-050
+  | assert: AC-009: a CLEARED completion over a second tier written as - **Severity:** minor\n  data-loss was not refused under LANG=en_US.UTF-8 (T030o44 review) missing substring: a Severity field whose list item holds more than its line in finding G-050
+== N01f report_record_line_cases rc=1 failing-asserts=8
+  | assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.3gdEZ9/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-bab
+  | assert: AC-012: a manifest tier written as form-feed-in-text was not refused by name under LANG=C (O-018) missing substring: a form feed or vertical tab in finding G-042
+  | assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.3gdEZ9/record-lines/notes/opponent.md /private/tmp/claude-501/
+  | assert: AC-012: a manifest tier written as form-feed-in-text was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a form feed or vertical tab in finding G-042
+  | assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.3gdEZ9/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-bab
+  | assert: AC-012: a second tier written as form-feed-in-text was not refused by name under LANG=C (O-018) missing substring: a form feed or vertical tab in finding G-050
+  | assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.3gdEZ9/record-lines/notes/opponent.md /private/tmp/claude-501/
+  | assert: AC-012: a second tier written as form-feed-in-text was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a form feed or vertical tab in finding G-050
+== N01f report_manifest_locale_cases rc=0 failing-asserts=0
+== N01v report_record_line_cases rc=1 failing-asserts=4
+  | assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.2yJ1tV/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-bab
+  | assert: AC-012: a manifest tier written as vertical-tab-in-text was not refused by name under LANG=C (O-018) missing substring: a form feed or vertical tab in finding G-042
+  | assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.2yJ1tV/record-lines/notes/opponent.md /private/tmp/claude-501/
+  | assert: AC-012: a manifest tier written as vertical-tab-in-text was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a form feed or vertical tab in finding G-042
+== N01v report_manifest_locale_cases rc=0 failing-asserts=0
+== N02 report_record_line_cases rc=1 failing-asserts=10
+  | assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.IZPZxn/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-bab
+  | assert: AC-012: a manifest tier written as lone-carriage-return was not refused by name under LANG=C (O-018) missing substring: a carriage return inside a line in finding G-042
+  | assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.IZPZxn/record-lines/notes/opponent.md /private/tmp/claude-501/
+  | assert: AC-012: a manifest tier written as lone-carriage-return was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a carriage return inside a line in finding G-042
+  | assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.IZPZxn/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-bab
+  | assert: AC-012: a second tier written as lone-carriage-return was not refused by name under LANG=C (O-018) missing substring: a carriage return inside a line in finding G-050
+  | assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.IZPZxn/record-lines/notes/opponent.md /private/tmp/claude-501/
+  | assert: AC-012: a second tier written as lone-carriage-return was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a carriage return inside a line in finding G-050
+== N02 report_manifest_locale_cases rc=0 failing-asserts=0
+== N02 round_record_line_cases rc=1 failing-asserts=43
+  | assert: expected exit 3, got 0: in_locale C bash /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.iSQF64/floor-kit-recordlines/scripts/spec-gate.sh round /private/tmp/cla
+  | assert: AC-009: a CLEARED completion over a second manifest tier written as - NoteSeverity: data-loss was not refused under LANG=C (T030o44 review) missing substring: a carriage return inside a line in finding G-042
+  | assert: AC-009: a CLEARED completion over a second manifest tier written as - NoteSeverity: data-loss was not refused under LANG=en_US.UTF-8 (T030o44 review) missing substring: a carriage return inside a line in finding G-042
+  | assert: AC-009: an indented second Severity lowered a new finding at completion (O-018) missing substring: duplicate finding field
+  | assert: AC-009: a CLEARED completion over a second tier written as - **Severity:** minor\n\n<!-->\n\n- **Severity:** data-loss\n\nThe tier above is the one we stand by. --> was not refused under LANG=C (T030o44 review) missing substring: quoted content carries
+  | assert: AC-009: a CLEARED completion over a second tier written as - **Severity:** minor\n\n<!-->\n\n- **Severity:** data-loss\n\nThe tier above is the one we stand by. --> was not refused under LANG=en_US.UTF-8 (T030o44 review) missing substring: quoted conte
+  | assert: AC-009: a CLEARED completion over a second tier written as - **Severity:** minor\n  data-loss was not refused under LANG=C (T030o44 review) missing substring: a Severity field whose list item holds more than its line in finding G-050
+  | assert: AC-009: a CLEARED completion over a second tier written as - **Severity:** minor\n  data-loss was not refused under LANG=en_US.UTF-8 (T030o44 review) missing substring: a Severity field whose list item holds more than its line in finding G-050
+== N02o report_record_line_cases rc=0 failing-asserts=0
+== N02o report_manifest_locale_cases rc=1 failing-asserts=1
+  | assert: AC-012: a manifest finding spelled crlf was dropped (T030o43 review 2) missing substring: clearing verdict rests on 1 lowered severity tier(s) of known findings
+== N03 report_record_line_cases rc=1 failing-asserts=112
+  | assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.H8OfBN/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-bab
+  | assert: AC-012: a manifest tier written as pre-in-prose was not refused by name under LANG=C (O-018) missing substring: raw HTML outside a code span in finding G-042
+  | assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.H8OfBN/record-lines/notes/opponent.md /private/tmp/claude-501/
+  | assert: AC-012: a manifest tier written as pre-in-prose was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: raw HTML outside a code span in finding G-042
+  | assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.H8OfBN/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-bab
+  | assert: AC-012: a manifest tier written as hgroup-in-prose was not refused by name under LANG=C (O-018) missing substring: raw HTML outside a code span in finding G-042
+  | assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.H8OfBN/record-lines/notes/opponent.md /private/tmp/claude-501/
+  | assert: AC-012: a manifest tier written as hgroup-in-prose was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: raw HTML outside a code span in finding G-042
+== N03 report_manifest_locale_cases rc=1 failing-asserts=23
+  | assert: expected exit 3, got 0: bash -c . "$1"; vf_reports "$2" opponent "$3" "$4" _ /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/copy/scripts/verification-lib.sh /private/tmp/c
+  | assert: AC-012: a manifest finding carrying raw HTML (severity-then-pre-block) was not refused by name (round 16, O-018) missing substring: raw HTML outside a code span in finding O-017
+  | assert: expected exit 3, got 0: bash -c . "$1"; vf_reports "$2" opponent "$3" "$4" _ /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/copy/scripts/verification-lib.sh /private/tmp/c
+  | assert: AC-012: a manifest finding carrying raw HTML (severity-then-comment) was not refused by name (round 16, O-018) missing substring: raw HTML outside a code span in finding O-017
+  | assert: expected exit 3, got 0: bash -c . "$1"; vf_reports "$2" opponent "$3" "$4" _ /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/copy/scripts/verification-lib.sh /private/tmp/c
+  | assert: AC-012: a manifest finding carrying raw HTML (severity-then-div) was not refused by name (round 16, O-018) missing substring: raw HTML outside a code span in finding O-017
+  | assert: expected exit 3, got 0: bash -c . "$1"; vf_reports "$2" opponent "$3" "$4" _ /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/copy/scripts/verification-lib.sh /private/tmp/c
+  | assert: AC-012: a manifest finding carrying raw HTML (severity-then-details) was not refused by name (round 16, O-018) missing substring: raw HTML outside a code span in finding O-017
+== N03 round_record_line_cases rc=1 failing-asserts=43
+  | assert: expected exit 3, got 0: in_locale C bash /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.Qz0XV1/floor-kit-recordlines/scripts/spec-gate.sh round /private/tmp/cla
+  | assert: AC-009: a CLEARED completion over a second manifest tier written as - Note<pre>Severity: data-loss</pre> was not refused under LANG=C (T030o44 review) missing substring: raw HTML outside a code span in finding G-042
+  | assert: AC-009: a CLEARED completion over a second manifest tier written as - Note<pre>Severity: data-loss</pre> was not refused under LANG=en_US.UTF-8 (T030o44 review) missing substring: raw HTML outside a code span in finding G-042
+  | assert: AC-009: an indented second Severity lowered a new finding at completion (O-018) missing substring: duplicate finding field
+  | assert: AC-009: a CLEARED completion over a second tier written as - **Severity:** minor\n\n<!-->\n\n- **Severity:** data-loss\n\nThe tier above is the one we stand by. --> was not refused under LANG=C (T030o44 review) missing substring: quoted content carries
+  | assert: AC-009: a CLEARED completion over a second tier written as - **Severity:** minor\n\n<!-->\n\n- **Severity:** data-loss\n\nThe tier above is the one we stand by. --> was not refused under LANG=en_US.UTF-8 (T030o44 review) missing substring: quoted conte
+  | assert: AC-009: a CLEARED completion over a second tier written as - **Severity:** minor\n  data-loss was not refused under LANG=C (T030o44 review) missing substring: a Severity field whose list item holds more than its line in finding G-050
+  | assert: AC-009: a CLEARED completion over a second tier written as - **Severity:** minor\n  data-loss was not refused under LANG=en_US.UTF-8 (T030o44 review) missing substring: a Severity field whose list item holds more than its line in finding G-050
+== N03p report_record_line_cases rc=0 failing-asserts=0
+== N03p report_manifest_locale_cases rc=0 failing-asserts=0
+== N04a report_record_line_cases rc=1 failing-asserts=42
+  | assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.1TuxUg/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-bab
+  | assert: AC-012: a manifest tier written as plaintext-in-prose was not refused by name under LANG=C (O-018) missing substring: raw HTML outside a code span in finding G-042
+  | assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.1TuxUg/record-lines/notes/opponent.md /private/tmp/claude-501/
+  | assert: AC-012: a manifest tier written as plaintext-in-prose was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: raw HTML outside a code span in finding G-042
+  | assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.1TuxUg/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-bab
+  | assert: AC-012: a manifest tier written as br-in-link-text was not refused by name under LANG=C (O-018) missing substring: raw HTML outside a code span in finding G-042
+  | assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.1TuxUg/record-lines/notes/opponent.md /private/tmp/claude-501/
+  | assert: AC-012: a manifest tier written as br-in-link-text was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: raw HTML outside a code span in finding G-042
+== N04a report_manifest_locale_cases rc=1 failing-asserts=2
+  | assert: expected exit 3, got 0: bash -c . "$1"; vf_reports "$2" opponent "$3" "$4" _ /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/copy/scripts/verification-lib.sh /private/tmp/c
+  | assert: AC-012: a manifest finding carrying raw HTML (br-prose) was not refused by name (round 16, O-018) missing substring: raw HTML outside a code span in finding O-017
+== N04b report_record_line_cases rc=1 failing-asserts=4
+  | assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.G2jZJJ/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-bab
+  | assert: AC-012: a Severity line followed by a closing-tag was not refused as raw HTML under LANG=C (round 16, O-018) missing substring: raw HTML outside a code span in finding G-050
+  | assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.G2jZJJ/record-lines/notes/opponent.md /private/tmp/claude-501/
+  | assert: AC-012: a Severity line followed by a closing-tag was not refused as raw HTML under LANG=en_US.UTF-8 (round 16, O-018) missing substring: raw HTML outside a code span in finding G-050
+== N04b report_manifest_locale_cases rc=1 failing-asserts=2
+  | assert: expected exit 3, got 0: bash -c . "$1"; vf_reports "$2" opponent "$3" "$4" _ /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/copy/scripts/verification-lib.sh /private/tmp/c
+  | assert: AC-012: a manifest finding carrying raw HTML (severity-then-closing-tag) was not refused by name (round 16, O-018) missing substring: raw HTML outside a code span in finding O-017
+== N04c report_record_line_cases rc=1 failing-asserts=4
+  | assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.VWgY5V/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-bab
+  | assert: AC-012: a canonical finding with a-empty-comment-then-prose was not refused as raw HTML under LANG=C (round 16, O-018) missing substring: raw HTML outside a code span in finding G-042
+  | assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.VWgY5V/record-lines/notes/opponent.md /private/tmp/claude-501/
+  | assert: AC-012: a canonical finding with a-empty-comment-then-prose was not refused as raw HTML under LANG=en_US.UTF-8 (round 16, O-018) missing substring: raw HTML outside a code span in finding G-042
+== N04c report_manifest_locale_cases rc=1 failing-asserts=2
+  | assert: expected exit 3, got 0: bash -c . "$1"; vf_reports "$2" opponent "$3" "$4" _ /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/copy/scripts/verification-lib.sh /private/tmp/c
+  | assert: AC-012: a manifest finding carrying raw HTML (severity-then-comment) was not refused by name (round 16, O-018) missing substring: raw HTML outside a code span in finding O-017
+== N04d report_record_line_cases rc=0 failing-asserts=0
+== N04d report_manifest_locale_cases rc=0 failing-asserts=0
+== N04w report_record_line_cases rc=1 failing-asserts=4
+  | assert: expected exit 0, got 3: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.z7qkK0/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-bab
+  | assert: AC-012: a canonical finding with a-escaped-lt was refused under LANG=C (O-018) unexpectedly contains: report recovery
+  | assert: expected exit 0, got 3: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.z7qkK0/record-lines/notes/opponent.md /private/tmp/claude-501/
+  | assert: AC-012: a canonical finding with a-escaped-lt was refused under LANG=en_US.UTF-8 (O-018) unexpectedly contains: report recovery
+== N04w report_manifest_locale_cases rc=1 failing-asserts=2
+  | assert: expected exit 0, got 3: bash -c . "$1"; vf_reports "$2" opponent "$3" "$4" _ /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/copy/scripts/verification-lib.sh /private/tmp/c
+  | assert: AC-012: a plausible manifest (escaped-lt-prose) was refused (T030o43 review 2) unexpectedly contains: prior-review manifest could not be parsed
+== N05 report_record_line_cases rc=1 failing-asserts=62
+  | assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.qHeSUM/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-bab
+  | assert: AC-012: a manifest tier written as pre-in-prose was not refused by name under LANG=C (O-018) missing substring: raw HTML outside a code span in finding G-042
+  | assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.qHeSUM/record-lines/notes/opponent.md /private/tmp/claude-501/
+  | assert: AC-012: a manifest tier written as pre-in-prose was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: raw HTML outside a code span in finding G-042
+  | assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.qHeSUM/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-bab
+  | assert: AC-012: a manifest tier written as hgroup-in-prose was not refused by name under LANG=C (O-018) missing substring: raw HTML outside a code span in finding G-042
+  | assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.qHeSUM/record-lines/notes/opponent.md /private/tmp/claude-501/
+  | assert: AC-012: a manifest tier written as hgroup-in-prose was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: raw HTML outside a code span in finding G-042
+== N05 report_manifest_locale_cases rc=1 failing-asserts=23
+  | assert: expected exit 3, got 0: bash -c . "$1"; vf_reports "$2" opponent "$3" "$4" _ /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/copy/scripts/verification-lib.sh /private/tmp/c
+  | assert: AC-012: a manifest finding carrying raw HTML (severity-then-pre-block) was not refused by name (round 16, O-018) missing substring: raw HTML outside a code span in finding O-017
+  | assert: expected exit 3, got 0: bash -c . "$1"; vf_reports "$2" opponent "$3" "$4" _ /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/copy/scripts/verification-lib.sh /private/tmp/c
+  | assert: AC-012: a manifest finding carrying raw HTML (severity-then-comment) was not refused by name (round 16, O-018) missing substring: raw HTML outside a code span in finding O-017
+  | assert: expected exit 3, got 0: bash -c . "$1"; vf_reports "$2" opponent "$3" "$4" _ /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/copy/scripts/verification-lib.sh /private/tmp/c
+  | assert: AC-012: a manifest finding carrying raw HTML (severity-then-div) was not refused by name (round 16, O-018) missing substring: raw HTML outside a code span in finding O-017
+  | assert: expected exit 3, got 0: bash -c . "$1"; vf_reports "$2" opponent "$3" "$4" _ /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/copy/scripts/verification-lib.sh /private/tmp/c
+  | assert: AC-012: a manifest finding carrying raw HTML (severity-then-details) was not refused by name (round 16, O-018) missing substring: raw HTML outside a code span in finding O-017
+== N05 round_record_line_cases rc=1 failing-asserts=47
+  | assert: expected exit 3, got 0: in_locale C bash /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.zEoY4U/floor-kit-recordlines/scripts/spec-gate.sh round /private/tmp/cla
+  | assert: AC-009: a CLEARED completion over a second manifest tier written as - Note<pre>Severity: data-loss</pre> was not refused under LANG=C (T030o44 review) missing substring: raw HTML outside a code span in finding G-042
+  | assert: AC-009: a CLEARED completion over a second manifest tier written as - Note<pre>Severity: data-loss</pre> was not refused under LANG=en_US.UTF-8 (T030o44 review) missing substring: raw HTML outside a code span in finding G-042
+  | assert: AC-009: a CLEARED completion over a second manifest tier written as - NoteSeverity: data-loss was not refused under LANG=C (T030o44 review) missing substring: a carriage return inside a line in finding G-042
+  | assert: AC-009: a CLEARED completion over a second manifest tier written as - NoteSeverity: data-loss was not refused under LANG=en_US.UTF-8 (T030o44 review) missing substring: a carriage return inside a line in finding G-042
+  | assert: AC-009: a CLEARED completion over a second manifest tier written as - NoteSeverity: data-loss was not refused under LANG=C (T030o44 review) missing substring: a form feed or vertical tab in finding G-042
+  | assert: AC-009: a CLEARED completion over a second manifest tier written as - NoteSeverity: data-loss was not refused under LANG=en_US.UTF-8 (T030o44 review) missing substring: a form feed or vertical tab in finding G-042
+  | assert: AC-009: an indented second Severity lowered a new finding at completion (O-018) missing substring: duplicate finding field
+== N05o report_record_line_cases rc=0 failing-asserts=0
+== N05o report_manifest_locale_cases rc=0 failing-asserts=0
+== N06 report_record_line_cases rc=1 failing-asserts=72
+  | assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.ic9r7S/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-bab
+  | assert: AC-012: a second tier written as pre-in-prose was not refused by name under LANG=C (O-018) missing substring: raw HTML outside a code span in finding G-050
+  | assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.ic9r7S/record-lines/notes/opponent.md /private/tmp/claude-501/
+  | assert: AC-012: a second tier written as pre-in-prose was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: raw HTML outside a code span in finding G-050
+  | assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.ic9r7S/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-bab
+  | assert: AC-012: a second tier written as br-in-link-text was not refused by name under LANG=C (O-018) missing substring: raw HTML outside a code span in finding G-050
+  | assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.ic9r7S/record-lines/notes/opponent.md /private/tmp/claude-501/
+  | assert: AC-012: a second tier written as br-in-link-text was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: raw HTML outside a code span in finding G-050
+== N06 report_manifest_locale_cases rc=0 failing-asserts=0
+== N06 round_record_line_cases rc=1 failing-asserts=16
+  | assert: expected exit 3, got 0: in_locale C bash /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.Vpc3vo/floor-kit-recordlines/scripts/spec-gate.sh round /private/tmp/cla
+  | assert: AC-009: a CLEARED completion over a second tier written as - **Severity:** minor\n\nNote<pre>Severity: data-loss</pre> was not refused under LANG=C (T030o44 review) missing substring: raw HTML outside a code span in finding G-050
+  | assert: AC-009: a CLEARED completion over a second tier written as - **Severity:** minor\n\nNote<pre>Severity: data-loss</pre> was not refused under LANG=en_US.UTF-8 (T030o44 review) missing substring: raw HTML outside a code span in finding G-050
+  | assert: AC-009: a CLEARED completion over a second tier written as - **Severity:** minor\n\nNote\r\rSeverity: data-loss was not refused under LANG=C (T030o44 review) missing substring: a carriage return inside a line in finding G-050
+  | assert: AC-009: a CLEARED completion over a second tier written as - **Severity:** minor\n\nNote\r\rSeverity: data-loss was not refused under LANG=en_US.UTF-8 (T030o44 review) missing substring: a carriage return inside a line in finding G-050
+  | assert: AC-009: a CLEARED completion over a second tier written as - **Severity:** minor\n\n![x\n####### y](u)Severity: data-loss was not refused under LANG=C (T030o44 review) missing substring: a Severity line this grammar cannot read in finding G-050
+  | assert: AC-009: a CLEARED completion over a second tier written as - **Severity:** minor\n\n![x\n####### y](u)Severity: data-loss was not refused under LANG=en_US.UTF-8 (T030o44 review) missing substring: a Severity line this grammar cannot read in finding G-0
+  | assert: AC-009: a CLEARED completion under a title and a late Timestamp was not refused under LANG=C (O-020) missing substring: a Timestamp line after the body of a round its title made legacy
+== N06s report_record_line_cases rc=1 failing-asserts=2
+  | assert: expected exit 0, got 3: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.KgIvMD/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-bab
+  | assert: AC-012: a canonical rule reached a legacy round, or the round lost its Blocks (T030o44 review F6)
+== N06s report_manifest_locale_cases rc=0 failing-asserts=0
+== N06s round_record_line_cases rc=0 failing-asserts=0
+== N06a report_record_line_cases rc=0 failing-asserts=0
+== N06a report_manifest_locale_cases rc=0 failing-asserts=0
+== N06e report_record_line_cases rc=0 failing-asserts=0
+== N06e report_manifest_locale_cases rc=0 failing-asserts=0
+== N06e round_record_line_cases rc=0 failing-asserts=0
+== N06f report_record_line_cases rc=1 failing-asserts=110
+  | assert: expected exit 0, got 3: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.pziTyq/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-bab
+  | assert: expected exit 0, got 3: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.pziTyq/record-lines/notes/opponent.md /private/tmp/claude-501/
+  | assert: expected exit 0, got 3: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.pziTyq/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-bab
+  | assert: expected exit 0, got 3: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.pziTyq/record-lines/notes/opponent.md /private/tmp/claude-501/
+  | assert: expected exit 0, got 3: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.pziTyq/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-bab
+  | assert: expected exit 0, got 3: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.pziTyq/record-lines/notes/opponent.md /private/tmp/claude-501/
+  | assert: expected exit 0, got 3: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.pziTyq/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-bab
+  | assert: expected exit 0, got 3: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.pziTyq/record-lines/notes/opponent.md /private/tmp/claude-501/
+== N06f report_manifest_locale_cases rc=1 failing-asserts=40
+  | assert: expected exit 0, got 3: bash -c . "$1"; vf_reports "$2" opponent "$3" "$4" _ /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/copy/scripts/verification-lib.sh /private/tmp/c
+  | assert: expected exit 0, got 3: bash -c . "$1"; vf_reports "$2" opponent "$3" "$4" _ /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/copy/scripts/verification-lib.sh /private/tmp/c
+  | assert: expected exit 0, got 3: bash -c . "$1"; vf_reports "$2" opponent "$3" "$4" _ /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/copy/scripts/verification-lib.sh /private/tmp/c
+  | assert: expected exit 0, got 3: bash -c . "$1"; vf_reports "$2" opponent "$3" "$4" _ /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/copy/scripts/verification-lib.sh /private/tmp/c
+  | assert: expected exit 0, got 3: bash -c . "$1"; vf_reports "$2" opponent "$3" "$4" _ /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/copy/scripts/verification-lib.sh /private/tmp/c
+  | assert: expected exit 0, got 3: bash -c . "$1"; vf_reports "$2" opponent "$3" "$4" _ /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/copy/scripts/verification-lib.sh /private/tmp/c
+  | assert: expected exit 0, got 3: bash -c . "$1"; vf_reports "$2" opponent "$3" "$4" _ /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/copy/scripts/verification-lib.sh /private/tmp/c
+  | assert: expected exit 0, got 3: bash -c . "$1"; vf_reports "$2" opponent "$3" "$4" _ /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/copy/scripts/verification-lib.sh /private/tmp/c
+== N06f round_record_line_cases rc=1 failing-asserts=7
+  | assert: expected exit 0, got 3: bash /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.3Yfk5c/floor-kit-recordlines/scripts/spec-gate.sh round /private/tmp/claude-501/-Use
+  | assert: output missing substring: round completed gate=opponent round=1 verdict=CHALLENGED
+  | assert: expected exit 0, got 3: bash /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.3Yfk5c/floor-kit-recordlines/scripts/spec-gate.sh round /private/tmp/claude-501/-Use
+  | assert: expected exit 0, got 3: bash /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.3Yfk5c/floor-kit-recordlines/scripts/spec-gate.sh round /private/tmp/claude-501/-Use
+  | assert: output missing substring: round completed gate=opponent round=2 verdict=CHALLENGED
+  | assert: output missing substring: opponent rounds=2
+  | assert: output missing substring: blocking=2 minor=0
+== C01 report_record_line_cases rc=1 failing-asserts=4
+  | assert: expected exit 0, got 3: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.wLHqcN/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-bab
+  | assert: AC-012: a canonical finding with a-escaped-lt was refused under LANG=C (O-018) unexpectedly contains: report recovery
+  | assert: expected exit 0, got 3: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.wLHqcN/record-lines/notes/opponent.md /private/tmp/claude-501/
+  | assert: AC-012: a canonical finding with a-escaped-lt was refused under LANG=en_US.UTF-8 (O-018) unexpectedly contains: report recovery
+== C01 report_manifest_locale_cases rc=1 failing-asserts=2
+  | assert: expected exit 0, got 3: bash -c . "$1"; vf_reports "$2" opponent "$3" "$4" _ /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/copy/scripts/verification-lib.sh /private/tmp/c
+  | assert: AC-012: a plausible manifest (escaped-lt-prose) was refused (T030o43 review 2) unexpectedly contains: prior-review manifest could not be parsed
+== C02 report_record_line_cases rc=0 failing-asserts=0
+== C02 report_manifest_locale_cases rc=0 failing-asserts=0
+== C02z report_record_line_cases rc=1 failing-asserts=20
+  | assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.ttXrfF/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-bab
+  | assert: AC-012: a manifest tier written as escaped-backtick-then-code-span was not refused by name under LANG=C (O-018) missing substring: a second Severity line in finding G-042: [\` `]`](u)Severity: data-loss
+  | assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.ttXrfF/record-lines/notes/opponent.md /private/tmp/claude-501/
+  | assert: AC-012: a manifest tier written as escaped-backtick-then-code-span was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a second Severity line in finding G-042: [\` `]`](u)Severity: data-loss
+  | assert: expected exit 3, got 0: record_line_vf C /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.ttXrfF/record-lines/notes/opponent.md /private/tmp/claude-501/-Users-bab
+  | assert: AC-012: a manifest tier written as escaped-first-backtick was not refused by name under LANG=C (O-018) missing substring: a second Severity line in finding G-042
+  | assert: expected exit 3, got 0: record_line_vf en_US.UTF-8 /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/tmp/sddkit.ttXrfF/record-lines/notes/opponent.md /private/tmp/claude-501/
+  | assert: AC-012: a manifest tier written as escaped-first-backtick was not refused by name under LANG=en_US.UTF-8 (O-018) missing substring: a second Severity line in finding G-042
+== C02z report_manifest_locale_cases rc=1 failing-asserts=2
+  | assert: expected exit 0, got 3: bash -c . "$1"; vf_reports "$2" opponent "$3" "$4" _ /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/53d88112-c889-4597-92ad-593f60a4c49e/scratchpad/r17disc/r17-disc-a/copy/scripts/verification-lib.sh /private/tmp/c
+  | assert: AC-012: a plausible manifest (escaped-lt-prose) was refused (T030o43 review 2) unexpectedly contains: prior-review manifest could not be parsed
+r17-discover a done 17:18:06Z

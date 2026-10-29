@@ -1,0 +1,861 @@
+{
+  "status": "PASS",
+  "completed_at": "2026-10-28T10:50:15.566374+00:00",
+  "scope": {
+    "mode": "test-audit",
+    "task": "T031a5o1",
+    "continuation": "existing spec003",
+    "provider_requested": "codex_codex_gym/gpt-6.1-sol/HIGH/default",
+    "working_directory": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "git_optional_locks": "0",
+    "ownership": [
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification",
+      "actual spec-run automatic capture/sequence/evidence append"
+    ],
+    "limits": [
+      "Modern Bash runs are isolated fixture construction probes; no modern-Bash analyzer suite or hosted CI run was executed.",
+      "Original CI host Bash version and patsub_replacement setting remain unobserved.",
+      "No acceptance, quality/formal readiness verdict, source/task/STATUS/canonical return edits, commits, pushes, index/ref writes, CI queries/retries/cancellation, floor, gate, reservation, PR watch/link/list, nested agents, dependency install, image pull, remote executor, O-032/minor repairs, full project tests or historical mutation matrix."
+    ],
+    "modern_runtime_available": true,
+    "modern_runtime_image": "sha256:a81de950abb8b5d961ed8c1dcd345450fab8cda00ea3c11e7ec24a4ed4bb82ce",
+    "formal_authorizations_unchanged": "OP26 after OP25 approved; RC4 after RC3 retained; no new authorization requested or consumed",
+    "prepared_at": "2026-10-28T10:44:15.955771+00:00"
+  },
+  "fixture_selfcheck": {
+    "exact_two_builder_change": true,
+    "source_sha256": {
+      "before": "2f9efc4e4b24da1ca1bcef710e82ef852f1e463adbae0263f54d585f333bcd4e",
+      "after": "e5b5cde870b2da8c086a41f3a3824b401262343225108c7f3bab716324150c9a"
+    },
+    "unchanged_declarations": {
+      "weak_sha256": "e4e34a178888ef0f1fcf693426edb6a34146800efa5c59b949de289a1a83bb52",
+      "runner_sha256": "08b8991ab902e507b1c0d032c3416fd46695552494167b1e5854a89ef173d5c1"
+    },
+    "runs": [
+      {
+        "label": "before-bash32-default",
+        "argv": [
+          "/bin/bash",
+          "--noprofile",
+          "--norc",
+          "-s",
+          "--",
+          "default"
+        ],
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "start": "2026-10-28T10:40:01.946774+00:00",
+        "end": "2026-10-28T10:40:01.992484+00:00",
+        "exit": 0,
+        "stdout_sha256": "04da52df07af08e24f82095e3fda8e6ab734a9a059df84c46f856f8352496bde",
+        "stderr_sha256": "bbb7c88f6212d1a28adb9bc86b311cfa189b3e9683f3fc3b6a46b0b40bc3dc88",
+        "counts": {
+          "generated_weak": 176,
+          "generated_runner": 96,
+          "weak": 287,
+          "runner": 162
+        },
+        "array_hashes": {
+          "generated_weak": "ee4596e98e53b9e7af0388f6d05c4dbafef68cb6fc5f86cf29b86ca224f2217c",
+          "generated_runner": "95cd6ff920d53900b0d4b03121f8534c3194a2e4057ee749f550fe2f9ccf3cab",
+          "weak": "ae47e7813f3f487498881e115c6030346041591de907838d6dc95fec53add956",
+          "runner": "437c34853ee1a018b194b637ab918613ccf47743d15ec00386905f96087760a6"
+        }
+      },
+      {
+        "label": "before-bash52-on",
+        "argv": [
+          "/usr/local/bin/docker",
+          "run",
+          "--pull=never",
+          "--rm",
+          "--network=none",
+          "--read-only",
+          "--cap-drop=ALL",
+          "--security-opt=no-new-privileges",
+          "--entrypoint=/bin/bash",
+          "-i",
+          "sha256:a81de950abb8b5d961ed8c1dcd345450fab8cda00ea3c11e7ec24a4ed4bb82ce",
+          "--noprofile",
+          "--norc",
+          "-s",
+          "--",
+          "on"
+        ],
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "start": "2026-10-28T10:40:01.992691+00:00",
+        "end": "2026-10-28T10:40:02.358466+00:00",
+        "exit": 0,
+        "stdout_sha256": "4bd9c6bed32c3263280cc3e42a207e8e352b197a1cf624a67bf2e0dc4c1a74b7",
+        "stderr_sha256": "4b05a46f7e60c784173c31dd680243e34fb528be72397f5d4c0e0c969818d551",
+        "counts": {
+          "generated_weak": 176,
+          "generated_runner": 96,
+          "weak": 287,
+          "runner": 162
+        },
+        "array_hashes": {
+          "generated_weak": "4ec5f2398fcc02464f4e5e297554931b14c406e444bc985d429e0040f6a33d33",
+          "generated_runner": "851bd277c944949375abdb104991ffcd38574cc8ce4fb85701d96bd604dbba39",
+          "weak": "0b12ac0033001896f00875f383932e0adf3a7cf68a08ffe56e09023676795514",
+          "runner": "fae21554320f33d0d70eabae39fa3991f4c1dec7641afe72dc1c4f38bed8ffe4"
+        }
+      },
+      {
+        "label": "before-bash52-off",
+        "argv": [
+          "/usr/local/bin/docker",
+          "run",
+          "--pull=never",
+          "--rm",
+          "--network=none",
+          "--read-only",
+          "--cap-drop=ALL",
+          "--security-opt=no-new-privileges",
+          "--entrypoint=/bin/bash",
+          "-i",
+          "sha256:a81de950abb8b5d961ed8c1dcd345450fab8cda00ea3c11e7ec24a4ed4bb82ce",
+          "--noprofile",
+          "--norc",
+          "-s",
+          "--",
+          "off"
+        ],
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "start": "2026-10-28T10:40:02.358749+00:00",
+        "end": "2026-10-28T10:40:02.784074+00:00",
+        "exit": 0,
+        "stdout_sha256": "04da52df07af08e24f82095e3fda8e6ab734a9a059df84c46f856f8352496bde",
+        "stderr_sha256": "150809b760a14691374b6a6279bd39f457fd9b3c97c82bcb1deca209e1dc877b",
+        "counts": {
+          "generated_weak": 176,
+          "generated_runner": 96,
+          "weak": 287,
+          "runner": 162
+        },
+        "array_hashes": {
+          "generated_weak": "ee4596e98e53b9e7af0388f6d05c4dbafef68cb6fc5f86cf29b86ca224f2217c",
+          "generated_runner": "95cd6ff920d53900b0d4b03121f8534c3194a2e4057ee749f550fe2f9ccf3cab",
+          "weak": "ae47e7813f3f487498881e115c6030346041591de907838d6dc95fec53add956",
+          "runner": "437c34853ee1a018b194b637ab918613ccf47743d15ec00386905f96087760a6"
+        }
+      },
+      {
+        "label": "after-bash32-default",
+        "argv": [
+          "/bin/bash",
+          "--noprofile",
+          "--norc",
+          "-s",
+          "--",
+          "default"
+        ],
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "start": "2026-10-28T10:40:02.784764+00:00",
+        "end": "2026-10-28T10:40:02.840505+00:00",
+        "exit": 0,
+        "stdout_sha256": "04da52df07af08e24f82095e3fda8e6ab734a9a059df84c46f856f8352496bde",
+        "stderr_sha256": "bbb7c88f6212d1a28adb9bc86b311cfa189b3e9683f3fc3b6a46b0b40bc3dc88",
+        "counts": {
+          "generated_weak": 176,
+          "generated_runner": 96,
+          "weak": 287,
+          "runner": 162
+        },
+        "array_hashes": {
+          "generated_weak": "ee4596e98e53b9e7af0388f6d05c4dbafef68cb6fc5f86cf29b86ca224f2217c",
+          "generated_runner": "95cd6ff920d53900b0d4b03121f8534c3194a2e4057ee749f550fe2f9ccf3cab",
+          "weak": "ae47e7813f3f487498881e115c6030346041591de907838d6dc95fec53add956",
+          "runner": "437c34853ee1a018b194b637ab918613ccf47743d15ec00386905f96087760a6"
+        }
+      },
+      {
+        "label": "after-bash52-on",
+        "argv": [
+          "/usr/local/bin/docker",
+          "run",
+          "--pull=never",
+          "--rm",
+          "--network=none",
+          "--read-only",
+          "--cap-drop=ALL",
+          "--security-opt=no-new-privileges",
+          "--entrypoint=/bin/bash",
+          "-i",
+          "sha256:a81de950abb8b5d961ed8c1dcd345450fab8cda00ea3c11e7ec24a4ed4bb82ce",
+          "--noprofile",
+          "--norc",
+          "-s",
+          "--",
+          "on"
+        ],
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "start": "2026-10-28T10:40:02.840658+00:00",
+        "end": "2026-10-28T10:40:03.353888+00:00",
+        "exit": 0,
+        "stdout_sha256": "04da52df07af08e24f82095e3fda8e6ab734a9a059df84c46f856f8352496bde",
+        "stderr_sha256": "4b05a46f7e60c784173c31dd680243e34fb528be72397f5d4c0e0c969818d551",
+        "counts": {
+          "generated_weak": 176,
+          "generated_runner": 96,
+          "weak": 287,
+          "runner": 162
+        },
+        "array_hashes": {
+          "generated_weak": "ee4596e98e53b9e7af0388f6d05c4dbafef68cb6fc5f86cf29b86ca224f2217c",
+          "generated_runner": "95cd6ff920d53900b0d4b03121f8534c3194a2e4057ee749f550fe2f9ccf3cab",
+          "weak": "ae47e7813f3f487498881e115c6030346041591de907838d6dc95fec53add956",
+          "runner": "437c34853ee1a018b194b637ab918613ccf47743d15ec00386905f96087760a6"
+        }
+      },
+      {
+        "label": "after-bash52-off",
+        "argv": [
+          "/usr/local/bin/docker",
+          "run",
+          "--pull=never",
+          "--rm",
+          "--network=none",
+          "--read-only",
+          "--cap-drop=ALL",
+          "--security-opt=no-new-privileges",
+          "--entrypoint=/bin/bash",
+          "-i",
+          "sha256:a81de950abb8b5d961ed8c1dcd345450fab8cda00ea3c11e7ec24a4ed4bb82ce",
+          "--noprofile",
+          "--norc",
+          "-s",
+          "--",
+          "off"
+        ],
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "start": "2026-10-28T10:40:03.354139+00:00",
+        "end": "2026-10-28T10:40:03.786189+00:00",
+        "exit": 0,
+        "stdout_sha256": "04da52df07af08e24f82095e3fda8e6ab734a9a059df84c46f856f8352496bde",
+        "stderr_sha256": "150809b760a14691374b6a6279bd39f457fd9b3c97c82bcb1deca209e1dc877b",
+        "counts": {
+          "generated_weak": 176,
+          "generated_runner": 96,
+          "weak": 287,
+          "runner": 162
+        },
+        "array_hashes": {
+          "generated_weak": "ee4596e98e53b9e7af0388f6d05c4dbafef68cb6fc5f86cf29b86ca224f2217c",
+          "generated_runner": "95cd6ff920d53900b0d4b03121f8534c3194a2e4057ee749f550fe2f9ccf3cab",
+          "weak": "ae47e7813f3f487498881e115c6030346041591de907838d6dc95fec53add956",
+          "runner": "437c34853ee1a018b194b637ab918613ccf47743d15ec00386905f96087760a6"
+        }
+      }
+    ],
+    "status": "PASS",
+    "modern_runtime": "GNU Bash 5.2.37 in existing Debian 12 oven/bun image; fixture-only, not CI host",
+    "mechanism_empirically_reproduced": true,
+    "ci_host_version_and_options_still_unobserved": true,
+    "old_on_red_fixture_labels": [
+      {
+        "malformed": "grepREDIRECT>out.txt AC-001 README.md",
+        "literal_fixed": "grep&>out.txt AC-001 README.md",
+        "raw_log_lines": [
+          238,
+          255
+        ]
+      },
+      {
+        "malformed": "tscREDIRECT>out.txt --noEmit",
+        "literal_fixed": "tsc&>out.txt --noEmit",
+        "raw_log_lines": [
+          272,
+          289
+        ]
+      },
+      {
+        "malformed": "testREDIRECT>out.txt -e README.md",
+        "literal_fixed": "test&>out.txt -e README.md",
+        "raw_log_lines": [
+          306,
+          323
+        ]
+      },
+      {
+        "malformed": "test -fREDIRECT>out.txt README.md",
+        "literal_fixed": "test -f&>out.txt README.md",
+        "raw_log_lines": [
+          340,
+          357
+        ]
+      },
+      {
+        "malformed": "tsc REDIRECT>out.txt --noEmit",
+        "literal_fixed": "tsc &>out.txt --noEmit",
+        "raw_log_lines": [
+          374,
+          391
+        ]
+      },
+      {
+        "malformed": "test REDIRECT>out.txt -e README.md",
+        "literal_fixed": "test &>out.txt -e README.md",
+        "raw_log_lines": [
+          408,
+          425
+        ]
+      },
+      {
+        "malformed": "bashREDIRECT>out.txt tests/typecheck.sh",
+        "literal_fixed": "bash&>out.txt tests/typecheck.sh",
+        "raw_log_lines": [
+          442,
+          443
+        ]
+      },
+      {
+        "malformed": "cargo testREDIRECT>out.txt --test typecheck",
+        "literal_fixed": "cargo test&>out.txt --test typecheck",
+        "raw_log_lines": [
+          459,
+          460
+        ]
+      },
+      {
+        "malformed": "npm runREDIRECT>out.txt test -- --grep typecheck",
+        "literal_fixed": "npm run&>out.txt test -- --grep typecheck",
+        "raw_log_lines": [
+          476,
+          477
+        ]
+      },
+      {
+        "malformed": "bash REDIRECT>out.txt tests/typecheck.sh",
+        "literal_fixed": "bash &>out.txt tests/typecheck.sh",
+        "raw_log_lines": [
+          493,
+          494
+        ]
+      },
+      {
+        "malformed": "npm run REDIRECT>out.txt test -- --grep typecheck",
+        "literal_fixed": "npm run &>out.txt test -- --grep typecheck",
+        "raw_log_lines": [
+          510,
+          511
+        ]
+      }
+    ],
+    "matched_ci_assertion_labels": 22,
+    "old_on_corrupted_generated_counts": {
+      "generated_weak": 48,
+      "generated_runner": 36
+    },
+    "limits": [
+      "Modern Bash probe constructs fixtures only; it does not rerun analyzer assertions or hosted CI."
+    ]
+  },
+  "explicit_kind_controls": {
+    "helper": "tests/helpers.sh",
+    "helper_sha256": "b7bc6ff9fffa3350c206a7bf25a0ef23517a98f1797ef3f199ac7cdfe240e9b2",
+    "helper_matches_baseline": true,
+    "rows": [
+      {
+        "line": 292,
+        "text": "| shell-family | test | AC-001 | `tests/check.sh::test_ac_001_shared` |"
+      },
+      {
+        "line": 293,
+        "text": "| assertion-family | assertion | AC-002 | `scripts/check-contract.sh::assert_ac_002_contract` |"
+      },
+      {
+        "line": 294,
+        "text": "| static-family | static | AC-003 | `tests/static.sh::test_ac_003_schema` |"
+      },
+      {
+        "line": 295,
+        "text": "| manual-family | manual | AC-004 | release-observation |"
+      }
+    ],
+    "test_controls_entirely_unchanged_by_exact_two_expression_diff": true
+  },
+  "runtime_discovery": {
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "paths": {
+      "bash": "/bin/bash",
+      "shellcheck": "/opt/homebrew/bin/shellcheck",
+      "docker": "/usr/local/bin/docker",
+      "podman": null,
+      "colima": null,
+      "orbctl": null
+    },
+    "candidates": [
+      {
+        "path": "/Applications/Docker.app/Contents/Resources/bin/docker",
+        "exists": true
+      },
+      {
+        "path": "/bin/bash",
+        "exists": true,
+        "exit": 0,
+        "stdout": "GNU bash, version 3.2.57(1)-release (arm64-apple-darwin25)\nCopyright (C) 2007 Free Software Foundation, Inc.\n",
+        "stderr": ""
+      },
+      {
+        "path": "/opt/homebrew/bin/bash",
+        "exists": false
+      },
+      {
+        "path": "/opt/local/bin/bash",
+        "exists": false
+      },
+      {
+        "path": "/run/current-system/sw/bin/bash",
+        "exists": false
+      },
+      {
+        "path": "/usr/local/bin/bash",
+        "exists": false
+      }
+    ]
+  },
+  "docker_discovery": [
+    {
+      "argv": [
+        "/usr/local/bin/docker",
+        "info",
+        "--format",
+        "{{json .ServerVersion}}"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "start": "2026-10-28T10:38:47.331263+00:00",
+      "exit": 0,
+      "end": "2026-10-28T10:38:47.847598+00:00"
+    },
+    {
+      "argv": [
+        "/usr/local/bin/docker",
+        "image",
+        "ls",
+        "--no-trunc",
+        "--format",
+        "{{json .}}"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "start": "2026-10-28T10:38:47.848604+00:00",
+      "exit": 0,
+      "end": "2026-10-28T10:38:47.895246+00:00"
+    }
+  ],
+  "static_checks": [
+    {
+      "label": "bash32-syntax",
+      "argv": [
+        "/bin/bash",
+        "-n",
+        "tests/test-sdd-analyze.sh"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "env_overrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "LC_ALL": "C",
+        "SHELLCHECK_OPTS": null
+      },
+      "start": "2026-10-28T10:40:14.792545+00:00",
+      "end": "2026-10-28T10:40:14.804718+00:00",
+      "exit": 0
+    },
+    {
+      "label": "shellcheck",
+      "argv": [
+        "/opt/homebrew/bin/shellcheck",
+        "--norc",
+        "-S",
+        "warning",
+        "-x",
+        "tests/test-sdd-analyze.sh"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "env_overrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "LC_ALL": "C",
+        "SHELLCHECK_OPTS": null
+      },
+      "start": "2026-10-28T10:40:14.804945+00:00",
+      "end": "2026-10-28T10:40:16.256096+00:00",
+      "exit": 0
+    }
+  ],
+  "capture_invocation": {
+    "argv": [
+      "bash",
+      "scripts/spec-run.sh",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline",
+      "T031a5o1",
+      "--from-task",
+      "--no-tick",
+      "--summary"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "env_nonsecret": {
+      "GIT_OPTIONAL_LOCKS": "0",
+      "PATH": "/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/opt/pkg/env/active/bin:/opt/pmk/env/global/bin:/Library/Apple/usr/bin:/Users/babar/.nvm/versions/node/v24.19.0/lib/node_modules/@openai/codex/node_modules/@openai/codex-darwin-arm64/vendor/aarch64-apple-darwin/codex-path:/Users/babar/.codex_gym/tmp/arg0-macos/codex-arg01a4JX6:/Users/babar/.nvm/versions/node/v24.19.0/bin:/Users/babar/.local/bin:/Users/babar/.bun/bin:/Users/babar/.antigravity/antigravity/bin:/opt/homebrew/bin:/Users/babar/.cargo/bin:/Users/babar/Library/Android/sdk/emulator:/Users/babar/Library/Android/sdk/platform-tools",
+      "SHELL": "/bin/zsh",
+      "LANG": "C.UTF-8",
+      "LC_ALL": "C.UTF-8",
+      "LC_CTYPE": "C.UTF-8",
+      "TMPDIR": "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/"
+    },
+    "other_environment_recorded_in_capture_as_declared_hashes": true,
+    "start": "2026-10-28T10:41:04.526522+00:00",
+    "attempt_count": 1,
+    "exit": 0,
+    "end": "2026-10-28T10:48:16.916568+00:00",
+    "stdout_sha256": "16d287c2efafb07cee1c26b8168f5c6da3732af758da56d23b61000206ec39b0",
+    "stdout_bytes": 498,
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_bytes": 0
+  },
+  "capture": {
+    "id": "CAP-818-fLEvh7",
+    "directory": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-818-fLEvh7",
+    "meta": {
+      "version": "1",
+      "id": "CAP-818-fLEvh7",
+      "sequence": "818",
+      "kind": "command",
+      "start": "2026-10-28T10:41:50Z",
+      "end": "2026-10-28T10:47:33Z",
+      "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "check": "4b7f6c9b5f0df725e563898e3969549378a848152b48c9b6985cfb1517a462c1",
+      "shell": "/bin/bash",
+      "input_before": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+      "input_after": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+      "no_tick": "1",
+      "exit": "0",
+      "output_digest": "f9166fdc124954abb48f7c8ed789d96a1ce68c06a9da6df0d9d49a79a07aca5a",
+      "output_bytes": "862",
+      "policy": "local",
+      "key": "  -- 19/19 passed"
+    },
+    "argv": [
+      [
+        "/bin/bash"
+      ],
+      [
+        "-o"
+      ],
+      [
+        "pipefail"
+      ],
+      [
+        "-c"
+      ],
+      [
+        "bash tests/test-sdd-analyze.sh"
+      ]
+    ],
+    "input_record_count": 371,
+    "actual_worktree_source_records": [
+      [
+        "path",
+        "scripts/sdd-analyze.sh",
+        "file",
+        "100755",
+        "c43de9e92df5657a3a94091a73bccb9abe37f9e1c3c3f6ccf6cb1cfa64f3a3f2",
+        ""
+      ],
+      [
+        "path",
+        "tests/test-sdd-analyze.sh",
+        "file",
+        "100644",
+        "e5b5cde870b2da8c086a41f3a3824b401262343225108c7f3bab716324150c9a",
+        ""
+      ]
+    ],
+    "summary_exact": "capture=CAP-818-fLEvh7 command=/bin/bash -o pipefail -c bash tests/test-sdd-analyze.sh  key=  -- 19/19 passed exit=0 output=f9166fdc124954abb48f7c8ed789d96a1ce68c06a9da6df0d9d49a79a07aca5a input=f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-818-fLEvh7/output.log [complete metadata: capture directory]\n",
+    "seal": "verification:1\n47c2d43cd995c212769311f37783138c75b4d06f6df6c2ccd68f0a742e80c858 meta.nul\na193b9b8454686d43618a97cd684b331c6e36a0e968611582be2ce0aee872844 argv.nul\nf156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 inputs.nul\nf156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 inputs-after.nul\n8766df908be5d8f628c3880af34ae761dd1c9c4946e8da08da3e566c8c0c788a bindings.nul\nf9166fdc124954abb48f7c8ed789d96a1ce68c06a9da6df0d9d49a79a07aca5a output.log\n16d287c2efafb07cee1c26b8168f5c6da3732af758da56d23b61000206ec39b0 summary.txt\n",
+    "sealed_files": [
+      {
+        "file": "meta.nul",
+        "sha256": "47c2d43cd995c212769311f37783138c75b4d06f6df6c2ccd68f0a742e80c858",
+        "bytes": 691
+      },
+      {
+        "file": "argv.nul",
+        "sha256": "a193b9b8454686d43618a97cd684b331c6e36a0e968611582be2ce0aee872844",
+        "bytes": 56
+      },
+      {
+        "file": "inputs.nul",
+        "sha256": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+        "bytes": 46619
+      },
+      {
+        "file": "inputs-after.nul",
+        "sha256": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+        "bytes": 46619
+      },
+      {
+        "file": "bindings.nul",
+        "sha256": "8766df908be5d8f628c3880af34ae761dd1c9c4946e8da08da3e566c8c0c788a",
+        "bytes": 253653
+      },
+      {
+        "file": "output.log",
+        "sha256": "f9166fdc124954abb48f7c8ed789d96a1ce68c06a9da6df0d9d49a79a07aca5a",
+        "bytes": 862
+      },
+      {
+        "file": "summary.txt",
+        "sha256": "16d287c2efafb07cee1c26b8168f5c6da3732af758da56d23b61000206ec39b0",
+        "bytes": 498
+      }
+    ],
+    "required_failure_mode_bindings": [
+      [
+        "FM-001",
+        "tests/test-sdd-analyze.sh::test_verification_bindings"
+      ],
+      [
+        "INV-005",
+        "tests/test-sdd-analyze.sh::test_verification_bindings"
+      ]
+    ],
+    "task_binding_record": [
+      "task",
+      "T031a5o1",
+      "T031a5o1",
+      "Tests",
+      "",
+      "test",
+      "",
+      "`tests/test-sdd-analyze.sh::test_verification_bindings`",
+      "REQ-005, AC-004, FM-001, INV-005, plan \u00a73.1, \u00a77",
+      "`bash tests/test-sdd-analyze.sh` \u2192 all suites `passed`, exit 0",
+      "local",
+      ""
+    ],
+    "current_binding_rows": [
+      [
+        "binding",
+        "FM-001",
+        "T031a5o1",
+        "Tests",
+        "",
+        "test",
+        "authoring",
+        "tests/test-sdd-analyze.sh::test_verification_bindings",
+        "AC-001, AC-003, AC-004, AC-005, AC-006, AC-011, AC-023: phase modes, shared/excluded rows, malformed/dangling IDs, kinds, same-task tests, zero-warning golden, untouched 001/002 exit 0.",
+        "`bash tests/test-sdd-analyze.sh` \u2192 all suites `passed`, exit 0",
+        "",
+        ""
+      ],
+      [
+        "binding",
+        "INV-005",
+        "T031a5o1",
+        "Tests",
+        "",
+        "test",
+        "authoring",
+        "tests/test-sdd-analyze.sh::test_verification_bindings",
+        "AC-001, AC-003, AC-004, AC-005, AC-006, AC-011, AC-023: phase modes, shared/excluded rows, malformed/dangling IDs, kinds, same-task tests, zero-warning golden, untouched 001/002 exit 0.",
+        "`bash tests/test-sdd-analyze.sh` \u2192 all suites `passed`, exit 0",
+        "",
+        ""
+      ]
+    ],
+    "integrity_and_current_task_binding_check": {
+      "argv": [
+        "/bin/bash",
+        ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/check-capture.sh",
+        ".specify/specs/003-gate-round-reduction-and-token-discipline",
+        "CAP-818-fLEvh7",
+        ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "env_nonsecret": {
+        "GIT_OPTIONAL_LOCKS": "0"
+      },
+      "start": "2026-10-28T10:50:01.355724+00:00",
+      "end": "2026-10-28T10:50:04.910984+00:00",
+      "exit": 0,
+      "stdout_sha256": "d1f4d62ad7bfb684ad91a9754984cba5903d5576aa14735db4e0ad89cb8c64da",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "suite_passed": "19/19",
+    "command_attempts": 1,
+    "accepted": false,
+    "current_identity_derivation": "actual sealed inputs.nul and inputs-after.nul; working-tree source rows match the fixed test and unchanged analyzer; protected-file audit proves no source changed through verification",
+    "not_historical_snapshot": "No historical identity was relabeled; this fresh capture derives its own input identity."
+  },
+  "protection": {
+    "preexisting_files_checked": 20037,
+    "all_preexisting_raw_hashes_modes_mtimes_unchanged_except_automatic_sequence_and_evidence": true,
+    "allowed_changes": [
+      {
+        "path": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/evidence.md",
+        "before": {
+          "mode": 420,
+          "mtime_ns": 1793180219757602107,
+          "size": 569381,
+          "sha256": "ecbe2ca1fae9462251199c946b0280a14110e4028fa8d94601e6fe4131a2d149"
+        },
+        "after": {
+          "mode": 420,
+          "mtime_ns": 1793184496874714703,
+          "size": 570001,
+          "sha256": "523be034864497a64582cc444fc001eb1c1ec2e964d7131660415cc00df0e5a4"
+        }
+      },
+      {
+        "path": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/sequence",
+        "before": {
+          "mode": 420,
+          "mtime_ns": 1793178441585087806,
+          "size": 4,
+          "sha256": "693cb23c724c9650c70c0b138961eefc7422ec4c0011ef83616bf7994807eb95"
+        },
+        "after": {
+          "mode": 420,
+          "mtime_ns": 1793184066858567971,
+          "size": 4,
+          "sha256": "7fe2bd7ea2be37bebc39bf7c41d491a7964d3ad1fa48367761b9ab2870644012"
+        }
+      }
+    ],
+    "evidence_prior_bytes_preserved": true,
+    "evidence_append_sha256": "2c1476b0f1b82c7fbd9f311cceeaab847fd8601da38002b17b62bba314f8cbd1",
+    "evidence_append_bytes": 620,
+    "preexisting_history_preserved": true,
+    "head": "2049f65960cc91e9e30bbd5ff1e11fc0fdf7cbd9",
+    "branch": "spec/003-gate-round-reduction-and-token-discipline",
+    "index": {
+      "mode": 420,
+      "mtime_ns": 1792957592613445716,
+      "size": 2200525,
+      "sha256": "c492d7ea95abf8e8c335001f20c62ff50bc6f1e2179d7a07d30811181b3dd700"
+    },
+    "new_files": [
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-818-fLEvh7/bindings.nul",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-818-fLEvh7/COMPLETE",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-818-fLEvh7/inputs.nul",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-818-fLEvh7/output.log",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-818-fLEvh7/meta.nul",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-818-fLEvh7/inputs-after.nul",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-818-fLEvh7/summary.txt",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-818-fLEvh7/argv.nul",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/captures/CAP-818-fLEvh7",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/shellcheck.stderr",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/before-bash32-default.arrays.json",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/capture-integrity.stderr",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/protected.before.json",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/before-bash52-off.stderr",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/after-bash52-on.stderr",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/docker-discovery.json",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/before-bash32-default.stderr",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/after-bash52-off.stderr",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/current-bindings.nul",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/after-bash52-on.arrays.nul",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/after-fixture-probe.sh",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/after-bash52-off.arrays.nul",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/fixture-selfcheck.json",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/status-baseline-timing.json",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/docker-bash-version.json",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/finalize-audit.py",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/capture-integrity.stdout",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/shellcheck.stdout",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/after-bash52-on.arrays.json",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/runtime-discovery.json",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/git-status.before.nul",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/before-bash52-off.arrays.nul",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/git-status.after.nul",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/docker-images.stderr",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/after-bash52-off.arrays.json",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/check-capture.sh",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/capture-integrity.json",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/evidence-append.raw",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/bash32-syntax.stderr",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/docker-info.stderr",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/static-checks.json",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/after-bash32-default.arrays.nul",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/capture.stderr",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/before-fixture-probe.sh",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/finalize-audit.attempt1.py",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/explicit-kind-controls.json",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/before-bash52-on.arrays.json",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/capture-preflight.json",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/after-bash32-default.arrays.json",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/docker-bash-version.stderr",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/docker-bash-version.stdout",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/protected.after.json",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/capture.stdout",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/capture-invocation.json",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/docker-images.stdout",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/bash32-syntax.stdout",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/after-bash32-default.stderr",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/docker-info.stdout",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/before-bash52-on.stderr",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/before-bash52-off.arrays.json",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/finalize-audit.attempt1.stderr",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/before-bash32-default.arrays.nul",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/audit-scope.json",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/before-bash52-on.arrays.nul",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/protected-raw/analyzer.after",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/protected-raw/HEAD.after",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/protected-raw/tasks",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/protected-raw/evidence",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/protected-raw/test",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/protected-raw/test.after",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/protected-raw/index.after",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/protected-raw/STATUS",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/protected-raw/HEAD",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/protected-raw/STATUS.after",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/protected-raw/index",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/protected-raw/tasks.after",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/protected-raw/sequence",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/protected-raw/analyzer"
+    ],
+    "no_unexpected_new_files": true,
+    "no_lock_or_pending_capture_after": true,
+    "initial_status_to_file_inventory_timing_receipt": {
+      "path": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification-invocation.json",
+      "already_present_in_before_file_inventory": true,
+      "before": {
+        "mode": 420,
+        "mtime_ns": 1793183878776106203,
+        "size": 1972,
+        "sha256": "131eaaf2c46d16e5b8a9da0f13381f4703c32d1a69606074d84fbb8bc68342b3"
+      },
+      "after": {
+        "mode": 420,
+        "mtime_ns": 1793183878776106203,
+        "size": 1972,
+        "sha256": "131eaaf2c46d16e5b8a9da0f13381f4703c32d1a69606074d84fbb8bc68342b3"
+      },
+      "current_sha256": "131eaaf2c46d16e5b8a9da0f13381f4703c32d1a69606074d84fbb8bc68342b3",
+      "before_inventory_completed_at": "2026-10-28T10:38:07.184575+00:00",
+      "unchanged": true,
+      "receipt_json_keys": [
+        "recordedAt",
+        "actualInvocation",
+        "selectionVerified",
+        "scope"
+      ]
+    },
+    "initial_finalizer_stop": "Conservative status assertion detected parent invocation receipt added between initial status read and inventory; receipt was already protected by before inventory and remains byte/mode/mtime identical; initial checker and diagnostic retained; no capture rerun.",
+    "git_status_preserved_except_owned_additions_automatic_bookkeeping_and_documented_initial_inventory_timing": true
+  },
+  "worker_return": {
+    "path": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification/worker-return.txt",
+    "sha256": "a7a4d97ce6c2d6131c8dabef0c4b45502efd9be189abd283a1c35d963fe21d2f",
+    "terminal_lf_count": 1,
+    "canonical_return_untouched": true,
+    "parent_acceptance_required": true
+  },
+  "risks_and_skipped_checks": [
+    "Modern Bash runs are isolated fixture construction probes; no modern-Bash analyzer suite or hosted CI run was executed.",
+    "Original CI host Bash version and patsub_replacement setting remain unobserved.",
+    "No acceptance, quality/formal readiness verdict, source/task/STATUS/canonical return edits, commits, pushes, index/ref writes, CI queries/retries/cancellation, floor, gate, reservation, PR watch/link/list, nested agents, dependency install, image pull, remote executor, O-032/minor repairs, full project tests or historical mutation matrix."
+  ],
+  "audit_checker_note": "The first preservation checker stopped on a parent invocation receipt already present in its before-file inventory but absent from the earlier status read. Its raw bytes/mode/mtime are unchanged; the narrowly documented status timing correction passed without any capture rerun. The retained first-checker error is explicitly a transcribed tool-output excerpt."
+}

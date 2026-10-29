@@ -1,0 +1,25 @@
+@@OLD
+inline-comment|### Finding G-042\n- **Class:** tier-binding\n- <!-- tier --> Severity: data-loss\n|a Severity line this grammar cannot read: - <!-- tier --> Severity: data-loss
+@@NEW
+inline-comment|### Finding G-042\n- **Class:** tier-binding\n- <!-- tier --> Severity: data-loss\n|a Severity line this grammar cannot read: - <!-- tier --> Severity: data-loss
+inline-comment-with-gt|### Finding G-042\n- **Class:** tier-binding\n- <!-- tier > note --> Severity: data-loss\n|a Severity line this grammar cannot read: - <!-- tier > note --> Severity: data-loss
+@@END
+@@OLD
+    sed 's/^Fixture disposition recorded\.$/- Severity: all blocking, as recorded./' > "$report"
+  run_rc 0 record_line_vf C "$report" "$spec"
+@@NEW
+    sed 's/^Fixture disposition recorded\.$/- Severity: all blocking, as recorded./' > "$report"
+  run_rc 0 record_line_vf C "$report" "$spec"
+  assert_not_contains "$OUT" 'report recovery' 'AC-012: Held-up prose after the last finding was refused (O-018)'
+@@END
+@@OLD
+a-quoted-example|### Finding G-042|  - The lines `#### Severity: data-loss` and `- <b>Severity:</b> minor` are refused.\n
+@@NEW
+a-quoted-example|### Finding G-042|  - The lines `#### Severity: data-loss` and `- <b>Severity:</b> minor` are refused.\n
+a-findings-word|### Finding G-042|#### Findings-2026 carried over\nThe word continues past Finding, so this is a section.\n
+@@END
+@@OLD
+  for tag in '- **Severity:** minor' '#### Finding G-043'; do
+@@NEW
+  for tag in '- **Severity:** minor' '#### Finding G-043' $'\302\240### Finding G-043'; do
+@@END

@@ -1,0 +1,26 @@
+run=1 status=completed conclusion=success event=pull_request head_sha=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa attempt=1
+
+== job shellcheck (1)
+  status=completed conclusion=success runner=offline labels=offline
+  started= completed= log-fetch-exit=0 log-bytes=23
+HEAD is now at bbbbbbb
+
+== job tests (ubuntu-latest) (2)
+  status=completed conclusion=success runner=offline labels=offline
+  started= completed= log-fetch-exit=0 log-bytes=23
+HEAD is now at bbbbbbb
+
+== job tests (macos-latest) (3)
+  status=completed conclusion=success runner=offline labels=offline
+  started= completed= log-fetch-exit=0 log-bytes=23
+HEAD is now at bbbbbbb
+
+== job tests-bash32 (4)
+  status=completed conclusion=success runner=offline labels=offline
+  started= completed= log-fetch-exit=0 log-bytes=23
+HEAD is now at bbbbbbb
+
+merge-commit-short(s) checked out: bbbbbbb
+merge-commit(s) fetched: 
+FAIL: could not identify the tested merge commit
+collect result: FAIL

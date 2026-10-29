@@ -1,0 +1,11 @@
+@@OLD
+  # A stage heading's whitespace is read as whitespace, so a checkpoint
+@@NEW
+  # Both task passes read a stage heading's whitespace alike, so an
+  # Integration owner under a Tests heading written with a U+00A0 is in Tests.
+  sed "s/^## Tests\$/## ${nb}Tests/" "$SANDBOX/analyzer-tasks" > "$spec_dir/tasks.md"
+  run_rc 0 "$ANALYZE" "$spec_dir"
+  assert_not_contains "$OUT" 'Integration owner is not in the Tests stage' \
+    'AC-023: an Integration owner under a Tests heading written with a U+00A0 was not in the Tests stage (T030o43 review 2)'
+  # A stage heading's whitespace is read as whitespace, so a checkpoint
+@@END

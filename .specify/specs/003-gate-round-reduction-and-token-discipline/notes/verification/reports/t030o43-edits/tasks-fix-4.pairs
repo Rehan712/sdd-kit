@@ -1,0 +1,15 @@
+@@OLD
+it takes a value it passes on (the Verify command it runs, a frontmatter value) from the line as written, trimmed at its ends; and a grammar token it cannot read is refused by name.
+@@NEW
+it takes every value it passes on into a catalog or a record, to another program or into a comparison from the line as written, trimmed at its ends, and never splits a mapped line by awk's default field splitting; and a grammar token it cannot read is refused by name.
+@@END
+@@OLD
+the prior-review manifest pass reads by the canonical field grammar keyed on its field lines, so every spelling of a finding is either read or refused by name, never dropped;
+@@NEW
+the prior-review manifest pass reads by the canonical field grammar keyed on its field lines, decides a field line by its label and takes its value after that label only, refuses by name a line not read as a heading that is a `#` run and the word Finding, and reads a Class or Severity line outside any finding as prose only until a finding ID appears after the last heading, so every spelling of a finding is either read or refused by name, never dropped;
+@@END
+@@OLD
+a `verification_contract` key routes three ways by count in every reader;
+@@NEW
+a `verification_contract` key routes three ways by count in every reader; a matrix criterion is compared by the AC catalog's whitespace rule; a stage heading is its text trimmed at both ends in every reader that compares it;
+@@END

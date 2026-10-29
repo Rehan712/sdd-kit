@@ -1,0 +1,69 @@
+@@OLD
+             $'\n```a`b\n\n![x\ny](u)Severity: data-loss\n```|quoted content carries a Severity line'; do
+@@NEW
+             $'\n```a`b\n\n![x\ny](u)Severity: data-loss\n```|quoted content carries a Severity line' \
+             $'\nNote <1`@a.b><br>Severity: data-loss, tick: `.|an autolink outside a code span in finding G-042' \
+             $'\n[x](u`v)<br>Severity: data-loss, tick: `.|a backtick inside a link destination, title or label in finding G-042' \
+             $'- ```\n  ### x\n- **Severity**: data-loss|a code fence that may be inside a list item in finding G-042'; do
+@@END
+@@OLD
+  # O-019: a field line under a sub-heading of the manifest finding is read, so
+  # the CLEARED completion is refused on the manifest tier itself.
+@@NEW
+  # Round 17 (O-024): a link reference definition renders nothing yet carries
+  # a field line, so it is refused by name inside a finding at completion.
+  printf '# Prior review\n\n### Finding G-042\n- **Class:** tier-binding\n\n[a]: /u %s\n    - **Severity:** minor\n    - x%s\n' "'" "'" > "$manifest"
+  for l in C en_US.UTF-8; do
+    run_rc 3 in_locale "$l" bash "$cli" round "$spec" opponent --complete "$report"
+    assert_contains "$OUT" 'a link reference definition in finding G-042' \
+      "AC-009: a CLEARED completion over a manifest tier hidden in a link reference definition was not refused under LANG=$l (round 17, O-024)"
+  done
+  # O-019: a field line under a sub-heading of the manifest finding is read, so
+  # the CLEARED completion is refused on the manifest tier itself.
+@@END
+@@OLD
+             '- **Severity:** minor\n\n![x\n####### y](u)Severity: data-loss|a Severity line this grammar cannot read in finding G-050'; do
+@@NEW
+             '- **Severity:** minor\n\n![x\n####### y](u)Severity: data-loss|a Severity line this grammar cannot read in finding G-050' \
+             '- **Severity:** minor\n\nNote <1`@a.b><pre>Severity: data-loss</pre>`|an autolink outside a code span in finding G-050' \
+             '- **Severity:** minor\n\n[x](u "`")<br>Severity: data-loss, tick: `.|a backtick inside a link destination, title or label in finding G-050'; do
+@@END
+@@OLD
+  # A title and a late Timestamp let a CLEARED round seal over a blocking
+  # finding it never counted (O-020); the switch is refused at completion.
+@@NEW
+  # Round 17 (O-024): after every field of a canonical finding, a definition
+  # carries the minor tier no renderer shows and a fence a list item opens
+  # hides the line the passes read as closing the finding, so the data-loss
+  # item after it fell outside every finding; both are refused at completion.
+  tail=$'\n[a]: /u \'\n    - **Severity:** minor\n    - x\'\n\n- ```\n  ### x\n- **Severity**: data-loss\n'
+  record_line_report "$res" 1 CLEARED 0 1 '### Finding G-050' tier-binding new '' |
+    awk -v t="$tail" 'index($0, "### Held up") == 1 {printf "%s", t} {print}' > "$SANDBOX/record-lines-o024.md"
+  for l in C en_US.UTF-8; do
+    run_rc 3 in_locale "$l" bash "$cli" round "$spec" opponent --complete "$SANDBOX/record-lines-o024.md"
+    assert_contains "$OUT" 'a link reference definition in finding G-050' \
+      "AC-009: a CLEARED completion over a tier hidden in a link reference definition was not refused under LANG=$l (round 17, O-024)"
+    assert_contains "$OUT" 'a code fence that may be inside a list item in finding G-050' \
+      "AC-009: a CLEARED completion over a finding a list-item fence closed early was not refused under LANG=$l (round 17, O-024)"
+  done
+  # A title and a late Timestamp let a CLEARED round seal over a blocking
+  # finding it never counted (O-020); the switch is refused at completion.
+@@END
+@@OLD
+  # placed with 2.4's escapes, an image split by a line of seven marks, and an
+  # image after a backtick line the tracker fences and a renderer does not.
+@@NEW
+  # placed with 2.4's escapes, an image split by a line of seven marks, and an
+  # image after a backtick line the tracker fences and a renderer does not.
+  # Round 17's follow (O-018, O-024): a `<` that may open an autolink, a link
+  # destination holding a backtick, and a fence after a list marker.
+@@END
+@@OLD
+round_record_line_cases() {
+  local spec cli res manifest report l row
+
+@@NEW
+round_record_line_cases() {
+  local spec cli res manifest report l row tail
+
+@@END

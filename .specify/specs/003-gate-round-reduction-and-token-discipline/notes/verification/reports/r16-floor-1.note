@@ -1,0 +1,28 @@
+Floor attempt 1 for round 16 (r16-floor-1.*), 2026-10-08 (session 17): FAILED at rc 1, sealed nothing.
+
+Ran 06:19:02Z to 07:31:01Z on AC (83% to 100%), free disk 13.00 to 12.52 GiB, swap under 0.9 GB.
+It executed 10 captures on input eee97354... (CAP-590 to CAP-599). CAP-590 to CAP-598 exited 0;
+test-spec-gate.sh passed 8/8 in three of them (CAP-596, CAP-597, CAP-598). CAP-599
+(`bash tests/test-verification.sh && bash tests/test-spec-gate.sh`, 07:19:58Z to 07:30:52Z)
+exited 1: test-spec-gate.sh 7/8, test_rounds failing in round_verdict_source_cases on all five
+completions of one reservation, each with `round completion: report identities/timestamp differ
+from reservation` (scripts/verification-lib.sh:3373).
+
+Cause: a wall-clock step backwards during that fixture. macOS timed set the system time back by
+3.975 s at 07:28:56Z (09:28:56 local, Europe/Stockholm): `Setting system time to Thu Oct  8
+09:28:52 2026`, `adjust,-3.975301027` (r16-floor-1-timed.log, from `log show`). The fixture writes
+its report's Timestamp equal to the reservation's `reserved` second (tests/test-spec-gate.sh,
+round_report) and completes within seconds; :3373 refuses a report Timestamp later than `date -u`
+at completion, so for the seconds after the step every completion of a reservation stamped before
+it is refused. That is the kernel's fail-closed direction (no wrong PASS), and test_rounds is the
+last test of the last suite in CAP-599, so it was running at the step.
+
+Not a defect of T030o47. The suite passed 8/8 alone in a standalone copy afterwards
+(r17-diag-tsg-1.{log,rc,start,end}, exit 0, via r15-dev.sh, copy and live status unchanged).
+Recorded as an observation, not repaired: a fixture that completes within seconds of its own
+reservation is sensitive to a backward clock step (any round_report-based case), and the floor
+verdict then depends on timed's schedule, not on the input identity, failing closed.
+
+State after: no lock, floor-latest still FLOOR-dCwGgb, no process left; the staging directory
+notes/verification/floors/.floor.J8i5WF is preserved (a survivor is evidence). The ten captures
+are banked. Next: attempt 2 (r16-floor.sh 2), same command, on AC.

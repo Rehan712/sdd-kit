@@ -1,0 +1,6 @@
+{
+  "status": "review checker stopped before evidence checks",
+  "transcribed_tool_output": "IndexError: list index out of range at file_diff, line 24",
+  "cause": "Reviewer assumed r4 diff used a/ and b/ headers; it actually uses before/ and current/.",
+  "correction": "Normalize historical diff labels before comparing file hunks. No product source, test, capture, acceptance or gate command ran in this failed read-only checker."
+}

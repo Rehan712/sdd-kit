@@ -1,0 +1,25 @@
+{
+  "command": "npm 2&>out.txt test typecheck.txt",
+  "argv": [
+    "/bin/bash",
+    "-c",
+    "npm 2&>out.txt test typecheck.txt"
+  ],
+  "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/semantics",
+  "PATH": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/semantics/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+  "exit": 0,
+  "expectedArgv": [
+    "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/semantics/bin/npm",
+    "2",
+    "test",
+    "typecheck.txt"
+  ],
+  "actualArgv": [
+    "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/semantics/bin/npm",
+    "2",
+    "test",
+    "typecheck.txt"
+  ],
+  "builtin": false,
+  "passed": true
+}

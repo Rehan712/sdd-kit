@@ -1,0 +1,22 @@
+  | live worktree porcelain digest before: b15d2b18bea5c25614c06531e0aa18cd5cdde2e38386e8d5138abf58c20001df
+== ShellCheck (the pinned command)
+FAIL bash tests/shellcheck.sh (want=0 got=1)
+
+In tests/test-verification.sh line 576:
+  if printed="$(SANDBOX="$failing" PATH="$SANDBOX/fixture-failing-git:$PATH" \
+                ^-----^ SC2097 (warning): This assignment is only seen by the forked process.
+                                         ^------^ SC2098 (warning): This expansion will not see the mentioned assignment.
+
+For more information:
+  https://www.shellcheck.net/wiki/SC2097 -- This assignment is only seen by t...
+  https://www.shellcheck.net/wiki/SC2098 -- This expansion will not see the m...
+PASS shellcheck: copy unchanged (want=0 got=0)
+== new and changed fixtures, one function at a time
+FAIL fixture_repository_cases (want=0 got=1)
+  |   assert: AC-020: a fixture repository that could not be built returned success
+  |   assert: AC-020: a fixture repository that could not be built was not reported by name missing substring: cannot build the make_verification_git_dir failing fixture repository
+  |   assert: AC-020: a failed fixture build left no record for the runner missing substring: make_verification_git_dir failing
+FAIL reuse_command_input_cases (want=0 got=1)
+  |   assert: expected exit 0, got 1: env CDPATH=. SHELLCHECK_OPTS=--enable=check-unassigned-uppercase bash -c cd "$1" && bash tests/shellcheck.sh _ /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/1c1e945f-3f81-4ba8-8888-8263f1ca2273
+  |       output: 
+PASS kit_copy_cases (want=0 got=0)

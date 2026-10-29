@@ -1,0 +1,727 @@
+host: Darwin 25.4.0; bash on PATH: GNU bash, version 3.2.57(1)-release (arm64-apple-darwin25); TMPDIR=/private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0975ee40-5cb7-4b98-9d44-c2f005ef40ac/scratchpad/s14/r14-repro/tmp/
+start 2026-10-02T17:25:50Z
+PASS CUR: the kernel hashes as post-apply-6
+PASS PRE: t030o44-final.diff names 4 files
+PASS PRE: t030o44-final.diff reverses cleanly
+PASS PRE: no reject or backup files
+PASS PRE: the kernel hashes as pre-apply
+== O-020 direct: the title variant against the same round without its title (the control), CUR and PRE
+PASS A a1-counting cur title C: sealed in silence (rc 0)
+PASS A a1-counting cur title C: stderr empty
+PASS A a1-counting cur title en_US.UTF-8: sealed in silence (rc 0)
+PASS A a1-counting cur title en_US.UTF-8: stderr empty
+PASS A a1-counting cur control (no title) C: refused (rc 3)
+PASS A a1-counting cur control C: finding totals disagree
+PASS A a1-counting cur control (no title) en_US.UTF-8: refused (rc 3)
+PASS A a1-counting cur control en_US.UTF-8: finding totals disagree
+PASS A a1-counting pre title C: sealed in silence (rc 0)
+PASS A a1-counting pre title C: stderr empty
+PASS A a1-counting pre title en_US.UTF-8: sealed in silence (rc 0)
+PASS A a1-counting pre title en_US.UTF-8: stderr empty
+  | A a1-counting pre control C: rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0975ee40-5cb7-4b98-9d44-c2f005ef40ac/scratchpad/s14/r14-repro/spec-A-a1-counting-pre/notes/o
+  | A a1-counting pre control en_US.UTF-8: rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0975ee40-5cb7-4b98-9d44-c2f005ef40ac/scratchpad/s14/r14-repro/spec-A-a1-counting-pre/notes/o
+PASS A a2-resolved-open cur title C: sealed in silence (rc 0)
+PASS A a2-resolved-open cur title C: stderr empty
+PASS A a2-resolved-open cur title en_US.UTF-8: sealed in silence (rc 0)
+PASS A a2-resolved-open cur title en_US.UTF-8: stderr empty
+PASS A a2-resolved-open cur control (no title) C: refused (rc 3)
+PASS A a2-resolved-open cur control C: clearing verdict rests on resolved findings this gate recorded open: G-042
+PASS A a2-resolved-open cur control (no title) en_US.UTF-8: refused (rc 3)
+PASS A a2-resolved-open cur control en_US.UTF-8: clearing verdict rests on resolved findings this gate recorded open: G-042
+PASS A a2-resolved-open pre title C: sealed in silence (rc 0)
+PASS A a2-resolved-open pre title C: stderr empty
+PASS A a2-resolved-open pre title en_US.UTF-8: sealed in silence (rc 0)
+PASS A a2-resolved-open pre title en_US.UTF-8: stderr empty
+  | A a2-resolved-open pre control C: rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0975ee40-5cb7-4b98-9d44-c2f005ef40ac/scratchpad/s14/r14-repro/spec-A-a2-resolved-open-pre/no
+  | A a2-resolved-open pre control en_US.UTF-8: rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0975ee40-5cb7-4b98-9d44-c2f005ef40ac/scratchpad/s14/r14-repro/spec-A-a2-resolved-open-pre/no
+PASS A a3-invented-resolved cur title C: sealed in silence (rc 0)
+PASS A a3-invented-resolved cur title C: stderr empty
+PASS A a3-invented-resolved cur title en_US.UTF-8: sealed in silence (rc 0)
+PASS A a3-invented-resolved cur title en_US.UTF-8: stderr empty
+PASS A a3-invented-resolved cur control (no title) C: refused (rc 3)
+PASS A a3-invented-resolved cur control C: resolved finding G-077 has no earlier round of this gate and no declared prior-review record
+PASS A a3-invented-resolved cur control (no title) en_US.UTF-8: refused (rc 3)
+PASS A a3-invented-resolved cur control en_US.UTF-8: resolved finding G-077 has no earlier round of this gate and no declared prior-review record
+PASS A a3-invented-resolved pre title C: sealed in silence (rc 0)
+PASS A a3-invented-resolved pre title C: stderr empty
+PASS A a3-invented-resolved pre title en_US.UTF-8: sealed in silence (rc 0)
+PASS A a3-invented-resolved pre title en_US.UTF-8: stderr empty
+  | A a3-invented-resolved pre control C: rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0975ee40-5cb7-4b98-9d44-c2f005ef40ac/scratchpad/s14/r14-repro/spec-A-a3-invented-resolved-pr
+  | A a3-invented-resolved pre control en_US.UTF-8: rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0975ee40-5cb7-4b98-9d44-c2f005ef40ac/scratchpad/s14/r14-repro/spec-A-a3-invented-resolved-pr
+PASS A a4-unknown-severity cur title C: sealed in silence (rc 0)
+PASS A a4-unknown-severity cur title C: stderr empty
+PASS A a4-unknown-severity cur title en_US.UTF-8: sealed in silence (rc 0)
+PASS A a4-unknown-severity cur title en_US.UTF-8: stderr empty
+PASS A a4-unknown-severity cur control (no title) C: refused (rc 3)
+PASS A a4-unknown-severity cur control C: unknown severity
+PASS A a4-unknown-severity cur control (no title) en_US.UTF-8: refused (rc 3)
+PASS A a4-unknown-severity cur control en_US.UTF-8: unknown severity
+PASS A a4-unknown-severity pre title C: sealed in silence (rc 0)
+PASS A a4-unknown-severity pre title C: stderr empty
+PASS A a4-unknown-severity pre title en_US.UTF-8: sealed in silence (rc 0)
+PASS A a4-unknown-severity pre title en_US.UTF-8: stderr empty
+  | A a4-unknown-severity pre control C: rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0975ee40-5cb7-4b98-9d44-c2f005ef40ac/scratchpad/s14/r14-repro/spec-A-a4-unknown-severity-pre
+  | A a4-unknown-severity pre control en_US.UTF-8: rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0975ee40-5cb7-4b98-9d44-c2f005ef40ac/scratchpad/s14/r14-repro/spec-A-a4-unknown-severity-pre
+PASS A a5-behind-html cur title C: sealed in silence (rc 0)
+PASS A a5-behind-html cur title C: stderr empty
+PASS A a5-behind-html cur title en_US.UTF-8: sealed in silence (rc 0)
+PASS A a5-behind-html cur title en_US.UTF-8: stderr empty
+PASS A a5-behind-html cur control (no title) C: refused (rc 3)
+PASS A a5-behind-html cur control C: a Severity line this grammar cannot read in finding G-050
+PASS A a5-behind-html cur control (no title) en_US.UTF-8: refused (rc 3)
+PASS A a5-behind-html cur control en_US.UTF-8: a Severity line this grammar cannot read in finding G-050
+PASS A a5-behind-html pre title C: sealed in silence (rc 0)
+PASS A a5-behind-html pre title C: stderr empty
+PASS A a5-behind-html pre title en_US.UTF-8: sealed in silence (rc 0)
+PASS A a5-behind-html pre title en_US.UTF-8: stderr empty
+  | A a5-behind-html pre control C: rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0975ee40-5cb7-4b98-9d44-c2f005ef40ac/scratchpad/s14/r14-repro/spec-A-a5-behind-html-pre/note
+  | A a5-behind-html pre control en_US.UTF-8: rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0975ee40-5cb7-4b98-9d44-c2f005ef40ac/scratchpad/s14/r14-repro/spec-A-a5-behind-html-pre/note
+PASS A a6-heading-label cur title C: sealed in silence (rc 0)
+PASS A a6-heading-label cur title C: stderr empty
+PASS A a6-heading-label cur title en_US.UTF-8: sealed in silence (rc 0)
+PASS A a6-heading-label cur title en_US.UTF-8: stderr empty
+PASS A a6-heading-label cur control (no title) C: refused (rc 3)
+PASS A a6-heading-label cur control C: a Severity line this grammar cannot read in finding G-050
+PASS A a6-heading-label cur control (no title) en_US.UTF-8: refused (rc 3)
+PASS A a6-heading-label cur control en_US.UTF-8: a Severity line this grammar cannot read in finding G-050
+PASS A a6-heading-label pre title C: sealed in silence (rc 0)
+PASS A a6-heading-label pre title C: stderr empty
+PASS A a6-heading-label pre title en_US.UTF-8: sealed in silence (rc 0)
+PASS A a6-heading-label pre title en_US.UTF-8: stderr empty
+  | A a6-heading-label pre control C: rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0975ee40-5cb7-4b98-9d44-c2f005ef40ac/scratchpad/s14/r14-repro/spec-A-a6-heading-label-pre/no
+  | A a6-heading-label pre control en_US.UTF-8: rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0975ee40-5cb7-4b98-9d44-c2f005ef40ac/scratchpad/s14/r14-repro/spec-A-a6-heading-label-pre/no
+PASS A a7-continued-value cur title C: sealed in silence (rc 0)
+PASS A a7-continued-value cur title C: stderr empty
+PASS A a7-continued-value cur title en_US.UTF-8: sealed in silence (rc 0)
+PASS A a7-continued-value cur title en_US.UTF-8: stderr empty
+PASS A a7-continued-value cur control (no title) C: refused (rc 3)
+PASS A a7-continued-value cur control C: a Severity field whose list item holds more than its line in finding G-050
+PASS A a7-continued-value cur control (no title) en_US.UTF-8: refused (rc 3)
+PASS A a7-continued-value cur control en_US.UTF-8: a Severity field whose list item holds more than its line in finding G-050
+PASS A a7-continued-value pre title C: sealed in silence (rc 0)
+PASS A a7-continued-value pre title C: stderr empty
+PASS A a7-continued-value pre title en_US.UTF-8: sealed in silence (rc 0)
+PASS A a7-continued-value pre title en_US.UTF-8: stderr empty
+  | A a7-continued-value pre control C: rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0975ee40-5cb7-4b98-9d44-c2f005ef40ac/scratchpad/s14/r14-repro/spec-A-a7-continued-value-pre/
+  | A a7-continued-value pre control en_US.UTF-8: rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0975ee40-5cb7-4b98-9d44-c2f005ef40ac/scratchpad/s14/r14-repro/spec-A-a7-continued-value-pre/
+PASS A a8-empty-comment cur title C: sealed in silence (rc 0)
+PASS A a8-empty-comment cur title C: stderr empty
+PASS A a8-empty-comment cur title en_US.UTF-8: sealed in silence (rc 0)
+PASS A a8-empty-comment cur title en_US.UTF-8: stderr empty
+PASS A a8-empty-comment cur control (no title) C: refused (rc 3)
+PASS A a8-empty-comment cur control C: quoted content carries a Severity line
+PASS A a8-empty-comment cur control (no title) en_US.UTF-8: refused (rc 3)
+PASS A a8-empty-comment cur control en_US.UTF-8: quoted content carries a Severity line
+PASS A a8-empty-comment pre title C: sealed in silence (rc 0)
+PASS A a8-empty-comment pre title C: stderr empty
+PASS A a8-empty-comment pre title en_US.UTF-8: sealed in silence (rc 0)
+PASS A a8-empty-comment pre title en_US.UTF-8: stderr empty
+  | A a8-empty-comment pre control C: rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0975ee40-5cb7-4b98-9d44-c2f005ef40ac/scratchpad/s14/r14-repro/spec-A-a8-empty-comment-pre/no
+  | A a8-empty-comment pre control en_US.UTF-8: rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0975ee40-5cb7-4b98-9d44-c2f005ef40ac/scratchpad/s14/r14-repro/spec-A-a8-empty-comment-pre/no
+PASS A a9-level-four-heading cur title C: sealed in silence (rc 0)
+PASS A a9-level-four-heading cur title C: stderr empty
+PASS A a9-level-four-heading cur title en_US.UTF-8: sealed in silence (rc 0)
+PASS A a9-level-four-heading cur title en_US.UTF-8: stderr empty
+PASS A a9-level-four-heading cur control (no title) C: refused (rc 3)
+PASS A a9-level-four-heading cur control C: a Finding heading this grammar cannot read
+PASS A a9-level-four-heading cur control (no title) en_US.UTF-8: refused (rc 3)
+PASS A a9-level-four-heading cur control en_US.UTF-8: a Finding heading this grammar cannot read
+PASS A a9-level-four-heading pre title C: sealed in silence (rc 0)
+PASS A a9-level-four-heading pre title C: stderr empty
+PASS A a9-level-four-heading pre title en_US.UTF-8: sealed in silence (rc 0)
+PASS A a9-level-four-heading pre title en_US.UTF-8: stderr empty
+  | A a9-level-four-heading pre control C: rc=0 
+  | A a9-level-four-heading pre control en_US.UTF-8: rc=0 
+PASS A s1-title-opens-round cur titlefirst C: sealed in silence (rc 0)
+PASS A s1-title-opens-round cur titlefirst C: stderr empty
+PASS A s1-title-opens-round cur titlefirst en_US.UTF-8: sealed in silence (rc 0)
+PASS A s1-title-opens-round cur titlefirst en_US.UTF-8: stderr empty
+PASS A s1-title-opens-round cur control (no title) C: refused (rc 3)
+PASS A s1-title-opens-round cur control C: finding totals disagree
+PASS A s1-title-opens-round cur control (no title) en_US.UTF-8: refused (rc 3)
+PASS A s1-title-opens-round cur control en_US.UTF-8: finding totals disagree
+PASS A s1-title-opens-round pre titlefirst C: sealed in silence (rc 0)
+PASS A s1-title-opens-round pre titlefirst C: stderr empty
+PASS A s1-title-opens-round pre titlefirst en_US.UTF-8: sealed in silence (rc 0)
+PASS A s1-title-opens-round pre titlefirst en_US.UTF-8: stderr empty
+  | A s1-title-opens-round pre control C: rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0975ee40-5cb7-4b98-9d44-c2f005ef40ac/scratchpad/s14/r14-repro/spec-A-s1-title-opens-round-pr
+  | A s1-title-opens-round pre control en_US.UTF-8: rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0975ee40-5cb7-4b98-9d44-c2f005ef40ac/scratchpad/s14/r14-repro/spec-A-s1-title-opens-round-pr
+PASS A s2-title-after-content cur titlelate C: sealed in silence (rc 0)
+PASS A s2-title-after-content cur titlelate C: stderr empty
+PASS A s2-title-after-content cur titlelate en_US.UTF-8: sealed in silence (rc 0)
+PASS A s2-title-after-content cur titlelate en_US.UTF-8: stderr empty
+PASS A s2-title-after-content cur control (no title) C: refused (rc 3)
+PASS A s2-title-after-content cur control C: finding totals disagree
+PASS A s2-title-after-content cur control (no title) en_US.UTF-8: refused (rc 3)
+PASS A s2-title-after-content cur control en_US.UTF-8: finding totals disagree
+PASS A s2-title-after-content pre titlelate C: sealed in silence (rc 0)
+PASS A s2-title-after-content pre titlelate C: stderr empty
+PASS A s2-title-after-content pre titlelate en_US.UTF-8: sealed in silence (rc 0)
+PASS A s2-title-after-content pre titlelate en_US.UTF-8: stderr empty
+  | A s2-title-after-content pre control C: rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0975ee40-5cb7-4b98-9d44-c2f005ef40ac/scratchpad/s14/r14-repro/spec-A-s2-title-after-content-
+  | A s2-title-after-content pre control en_US.UTF-8: rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0975ee40-5cb7-4b98-9d44-c2f005ef40ac/scratchpad/s14/r14-repro/spec-A-s2-title-after-content-
+PASS A a1-counting cur C: the control also names the verdict
+PASS A a1-counting cur title C: the uncounted G-099 is still in the catalog the tally reads
+PASS A a9-level-four-heading cur title C: round 2 records no finding
+PASS A a9-level-four-heading cur control C: the field lines outside any finding
+PASS A a1-counting cur en_US.UTF-8: the control also names the verdict
+PASS A a1-counting cur title en_US.UTF-8: the uncounted G-099 is still in the catalog the tally reads
+PASS A a9-level-four-heading cur title en_US.UTF-8: round 2 records no finding
+PASS A a9-level-four-heading cur control en_US.UTF-8: the field lines outside any finding
+== O-020 direct, reality-check gate: a gap written in field spelling under a title and a late Timestamp
+PASS RC cur title C: sealed in silence (rc 0)
+PASS RC cur title C: stderr empty
+PASS RC cur title en_US.UTF-8: sealed in silence (rc 0)
+PASS RC cur title en_US.UTF-8: stderr empty
+PASS RC cur control C: refused (rc 3)
+PASS RC cur control C: by name
+PASS RC cur control en_US.UTF-8: refused (rc 3)
+PASS RC cur control en_US.UTF-8: by name
+PASS RC pre title C: sealed in silence (rc 0)
+PASS RC pre title C: stderr empty
+PASS RC pre title en_US.UTF-8: sealed in silence (rc 0)
+PASS RC pre title en_US.UTF-8: stderr empty
+  | RC pre control C: rc=0 
+  | RC pre control en_US.UTF-8: rc=0 
+== O-018 direct: the manifest holds G-042 at minor and a second line a reader sees as a data-loss tier; a CLEARED round 1 re-records G-042 at minor
+  | marked: <ul> <li><strong>Severity:</strong> minor</li> <li><a href="z"><img src="y.png" alt="badge"></a>Severity: data-loss</li> </ul> 
+PASS M b1-badge cur C: sealed in silence (rc 0)
+PASS M b1-badge cur C: stderr empty
+PASS M b1-badge cur en_US.UTF-8: sealed in silence (rc 0)
+PASS M b1-badge cur en_US.UTF-8: stderr empty
+PASS M b1-badge pre C: sealed in silence (rc 0)
+PASS M b1-badge pre C: stderr empty
+PASS M b1-badge pre en_US.UTF-8: sealed in silence (rc 0)
+PASS M b1-badge pre en_US.UTF-8: stderr empty
+  | marked: <ul> <li><strong>Severity:</strong> minor</li> <li><a href="z"><img src="y" alt=""></a>Severity: data-loss</li> </ul> 
+PASS M b2-badge-empty-alt cur C: sealed in silence (rc 0)
+PASS M b2-badge-empty-alt cur C: stderr empty
+PASS M b2-badge-empty-alt cur en_US.UTF-8: sealed in silence (rc 0)
+PASS M b2-badge-empty-alt cur en_US.UTF-8: stderr empty
+PASS M b2-badge-empty-alt pre C: sealed in silence (rc 0)
+PASS M b2-badge-empty-alt pre C: stderr empty
+PASS M b2-badge-empty-alt pre en_US.UTF-8: sealed in silence (rc 0)
+PASS M b2-badge-empty-alt pre en_US.UTF-8: stderr empty
+  | marked: <ul> <li><strong>Severity:</strong> minor</li> <li><a href="x">[]</a>Severity: data-loss</li> </ul> 
+PASS M b3-nested-empty cur C: sealed in silence (rc 0)
+PASS M b3-nested-empty cur C: stderr empty
+PASS M b3-nested-empty cur en_US.UTF-8: sealed in silence (rc 0)
+PASS M b3-nested-empty cur en_US.UTF-8: stderr empty
+PASS M b3-nested-empty pre C: sealed in silence (rc 0)
+PASS M b3-nested-empty pre C: stderr empty
+PASS M b3-nested-empty pre en_US.UTF-8: sealed in silence (rc 0)
+PASS M b3-nested-empty pre en_US.UTF-8: stderr empty
+  | marked: <ul> <li><strong>Severity:</strong> minor</li> <li><img src="y" alt="a]b">Severity: data-loss</li> </ul> 
+PASS M b4-alt-escaped-bracket cur C: sealed in silence (rc 0)
+PASS M b4-alt-escaped-bracket cur C: stderr empty
+PASS M b4-alt-escaped-bracket cur en_US.UTF-8: sealed in silence (rc 0)
+PASS M b4-alt-escaped-bracket cur en_US.UTF-8: stderr empty
+PASS M b4-alt-escaped-bracket pre C: sealed in silence (rc 0)
+PASS M b4-alt-escaped-bracket pre C: stderr empty
+PASS M b4-alt-escaped-bracket pre en_US.UTF-8: sealed in silence (rc 0)
+PASS M b4-alt-escaped-bracket pre en_US.UTF-8: stderr empty
+  | marked: <ul> <li><strong>Severity:</strong> minor</li> <li><abbr title="the tier this finding carries">Severity:</abbr> data-loss</li> </ul> 
+PASS M m1-abbr-title-wrapped cur C: sealed in silence (rc 0)
+PASS M m1-abbr-title-wrapped cur C: stderr empty
+PASS M m1-abbr-title-wrapped cur en_US.UTF-8: sealed in silence (rc 0)
+PASS M m1-abbr-title-wrapped cur en_US.UTF-8: stderr empty
+PASS M m1-abbr-title-wrapped pre C: sealed in silence (rc 0)
+PASS M m1-abbr-title-wrapped pre C: stderr empty
+PASS M m1-abbr-title-wrapped pre en_US.UTF-8: sealed in silence (rc 0)
+PASS M m1-abbr-title-wrapped pre en_US.UTF-8: stderr empty
+  | marked: <ul> <li><strong>Severity:</strong> minor</li> <li><b title="x">Severity: data-loss</b></li> </ul> 
+PASS M m2-tag-split cur C: sealed in silence (rc 0)
+PASS M m2-tag-split cur C: stderr empty
+PASS M m2-tag-split cur en_US.UTF-8: sealed in silence (rc 0)
+PASS M m2-tag-split cur en_US.UTF-8: stderr empty
+PASS M m2-tag-split pre C: sealed in silence (rc 0)
+PASS M m2-tag-split pre C: stderr empty
+PASS M m2-tag-split pre en_US.UTF-8: sealed in silence (rc 0)
+PASS M m2-tag-split pre en_US.UTF-8: stderr empty
+  | marked: <ul> <li><strong>Severity:</strong> minor</li> <li><a href="x"> </a>Severity: data-loss</li> </ul> 
+PASS M m3-empty-link-across cur C: sealed in silence (rc 0)
+PASS M m3-empty-link-across cur C: stderr empty
+PASS M m3-empty-link-across cur en_US.UTF-8: sealed in silence (rc 0)
+PASS M m3-empty-link-across cur en_US.UTF-8: stderr empty
+PASS M m3-empty-link-across pre C: sealed in silence (rc 0)
+PASS M m3-empty-link-across pre C: stderr empty
+PASS M m3-empty-link-across pre en_US.UTF-8: sealed in silence (rc 0)
+PASS M m3-empty-link-across pre en_US.UTF-8: stderr empty
+  | marked: <ul> <li><strong>Severity:</strong> minor</li> <li><a href="x" title="t"></a>Severity: data-loss</li> </ul> 
+PASS M m4-title-across cur C: sealed in silence (rc 0)
+PASS M m4-title-across cur C: stderr empty
+PASS M m4-title-across cur en_US.UTF-8: sealed in silence (rc 0)
+PASS M m4-title-across cur en_US.UTF-8: stderr empty
+PASS M m4-title-across pre C: sealed in silence (rc 0)
+PASS M m4-title-across pre C: stderr empty
+PASS M m4-title-across pre en_US.UTF-8: sealed in silence (rc 0)
+PASS M m4-title-across pre en_US.UTF-8: stderr empty
+  | marked: <ul> <li><strong>Severity:</strong> minor</li> <li><img src="y" alt="ba dge">Severity: data-loss</li> </ul> 
+PASS M m5-alt-across cur C: sealed in silence (rc 0)
+PASS M m5-alt-across cur C: stderr empty
+PASS M m5-alt-across cur en_US.UTF-8: sealed in silence (rc 0)
+PASS M m5-alt-across cur en_US.UTF-8: stderr empty
+PASS M m5-alt-across pre C: sealed in silence (rc 0)
+PASS M m5-alt-across pre C: stderr empty
+PASS M m5-alt-across pre en_US.UTF-8: sealed in silence (rc 0)
+PASS M m5-alt-across pre en_US.UTF-8: stderr empty
+  | marked: <ul> <li><strong>Severity:</strong> minor</li> <li>S<em>everity:</em> data-loss</li> </ul> 
+PASS M d1-intraword-emphasis cur C: sealed in silence (rc 0)
+PASS M d1-intraword-emphasis cur C: stderr empty
+PASS M d1-intraword-emphasis cur en_US.UTF-8: sealed in silence (rc 0)
+PASS M d1-intraword-emphasis cur en_US.UTF-8: stderr empty
+PASS M d1-intraword-emphasis pre C: sealed in silence (rc 0)
+PASS M d1-intraword-emphasis pre C: stderr empty
+PASS M d1-intraword-emphasis pre en_US.UTF-8: sealed in silence (rc 0)
+PASS M d1-intraword-emphasis pre en_US.UTF-8: stderr empty
+  | marked: <ul> <li><strong>Severity:</strong> minor</li> <li><strong>Sev</strong>erity: data-loss</li> </ul> 
+PASS M d2-intraword-strong cur C: sealed in silence (rc 0)
+PASS M d2-intraword-strong cur C: stderr empty
+PASS M d2-intraword-strong cur en_US.UTF-8: sealed in silence (rc 0)
+PASS M d2-intraword-strong cur en_US.UTF-8: stderr empty
+PASS M d2-intraword-strong pre C: sealed in silence (rc 0)
+PASS M d2-intraword-strong pre C: stderr empty
+PASS M d2-intraword-strong pre en_US.UTF-8: sealed in silence (rc 0)
+PASS M d2-intraword-strong pre en_US.UTF-8: stderr empty
+  | marked: <ul> <li><strong>Severity:</strong> minor</li> <li><?x y?>Severity: data-loss</li> </ul> 
+PASS M d3-pi-across cur C: sealed in silence (rc 0)
+PASS M d3-pi-across cur C: stderr empty
+PASS M d3-pi-across cur en_US.UTF-8: sealed in silence (rc 0)
+PASS M d3-pi-across cur en_US.UTF-8: stderr empty
+PASS M d3-pi-across pre C: sealed in silence (rc 0)
+PASS M d3-pi-across pre C: stderr empty
+PASS M d3-pi-across pre en_US.UTF-8: sealed in silence (rc 0)
+PASS M d3-pi-across pre en_US.UTF-8: stderr empty
+  | marked: <ul> <li><strong>Severity:</strong> minor</li> </ul> <div title="x">Severity: data-loss</div> 
+PASS M d4-div-across cur C: sealed in silence (rc 0)
+PASS M d4-div-across cur C: stderr empty
+PASS M d4-div-across cur en_US.UTF-8: sealed in silence (rc 0)
+PASS M d4-div-across cur en_US.UTF-8: stderr empty
+PASS M d4-div-across pre C: sealed in silence (rc 0)
+PASS M d4-div-across pre C: stderr empty
+PASS M d4-div-across pre en_US.UTF-8: sealed in silence (rc 0)
+PASS M d4-div-across pre en_US.UTF-8: stderr empty
+  | marked: <ul> <li><strong>Severity:</strong> minor</li> <li>[<a href="z"><img src="y" alt=""></a>](w)Severity: data-loss</li> </ul> 
+PASS M d5-deeper-nesting cur C: sealed in silence (rc 0)
+PASS M d5-deeper-nesting cur C: stderr empty
+PASS M d5-deeper-nesting cur en_US.UTF-8: sealed in silence (rc 0)
+PASS M d5-deeper-nesting cur en_US.UTF-8: stderr empty
+PASS M d5-deeper-nesting pre C: sealed in silence (rc 0)
+PASS M d5-deeper-nesting pre C: stderr empty
+PASS M d5-deeper-nesting pre en_US.UTF-8: sealed in silence (rc 0)
+PASS M d5-deeper-nesting pre en_US.UTF-8: stderr empty
+  | marked: <ul> <li><strong>Severity:</strong> minor</li> <li><![CDATA[x y]]>Severity: data-loss</li> </ul> 
+PASS M d6-cdata-across cur C: sealed in silence (rc 0)
+PASS M d6-cdata-across cur C: stderr empty
+PASS M d6-cdata-across cur en_US.UTF-8: sealed in silence (rc 0)
+PASS M d6-cdata-across cur en_US.UTF-8: stderr empty
+PASS M d6-cdata-across pre C: sealed in silence (rc 0)
+PASS M d6-cdata-across pre C: stderr empty
+PASS M d6-cdata-across pre en_US.UTF-8: sealed in silence (rc 0)
+PASS M d6-cdata-across pre en_US.UTF-8: stderr empty
+  | marked: <ul> <li><strong>Severity:</strong> minor</li> <li><strong>Severity:</strong> data-loss</li> </ul> 
+PASS M c1-canonical cur C: refused (rc 3)
+PASS M c1-canonical cur C: by name
+PASS M c1-canonical cur en_US.UTF-8: refused (rc 3)
+PASS M c1-canonical cur en_US.UTF-8: by name
+  | M c1-canonical pre C: rc=3 manifest line 6: a second Severity line in finding G-042: - **Severity:** data-loss
+  | M c1-canonical pre en_US.UTF-8: rc=3 manifest line 6: a second Severity line in finding G-042: - **Severity:** data-loss
+  | marked: <ul> <li><strong>Severity:</strong> minor</li> <li><img src="y" alt="logo">Severity: data-loss</li> </ul> 
+PASS M c2-plain-image cur C: refused (rc 3)
+PASS M c2-plain-image cur C: by name
+PASS M c2-plain-image cur en_US.UTF-8: refused (rc 3)
+PASS M c2-plain-image cur en_US.UTF-8: by name
+  | M c2-plain-image pre C: rc=0 
+  | M c2-plain-image pre en_US.UTF-8: rc=0 
+  | marked: <ul> <li><strong>Severity:</strong> minor</li> <li><abbr title="the tier this finding carries">Severity:</abbr> data-loss</li> </ul> 
+PASS M c3-one-line-abbr cur C: refused (rc 3)
+PASS M c3-one-line-abbr cur C: by name
+PASS M c3-one-line-abbr cur en_US.UTF-8: refused (rc 3)
+PASS M c3-one-line-abbr cur en_US.UTF-8: by name
+  | M c3-one-line-abbr pre C: rc=0 
+  | M c3-one-line-abbr pre en_US.UTF-8: rc=0 
+  | marked: <ul> <li><strong>Severity:</strong> minor</li> <li><b title="x">Severity: data-loss</b></li> </ul> 
+PASS M c4-one-line-tag cur C: refused (rc 3)
+PASS M c4-one-line-tag cur C: by name
+PASS M c4-one-line-tag cur en_US.UTF-8: refused (rc 3)
+PASS M c4-one-line-tag cur en_US.UTF-8: by name
+  | M c4-one-line-tag pre C: rc=0 
+  | M c4-one-line-tag pre en_US.UTF-8: rc=0 
+== O-018 direct, the canonical pass: a CLEARED round 1 at 0 . 1 whose new G-050 carries the minor line and then the second line
+PASS K b1-badge cur C: sealed in silence (rc 0)
+PASS K b1-badge cur C: stderr empty
+PASS K b1-badge cur C: G-050 recorded at minor
+PASS K b1-badge cur en_US.UTF-8: sealed in silence (rc 0)
+PASS K b1-badge cur en_US.UTF-8: stderr empty
+PASS K b1-badge cur en_US.UTF-8: G-050 recorded at minor
+PASS K b1-badge pre C: sealed in silence (rc 0)
+PASS K b1-badge pre C: stderr empty
+PASS K b1-badge pre C: G-050 recorded at minor
+PASS K b1-badge pre en_US.UTF-8: sealed in silence (rc 0)
+PASS K b1-badge pre en_US.UTF-8: stderr empty
+PASS K b1-badge pre en_US.UTF-8: G-050 recorded at minor
+PASS K b2-badge-empty-alt cur C: sealed in silence (rc 0)
+PASS K b2-badge-empty-alt cur C: stderr empty
+PASS K b2-badge-empty-alt cur C: G-050 recorded at minor
+PASS K b2-badge-empty-alt cur en_US.UTF-8: sealed in silence (rc 0)
+PASS K b2-badge-empty-alt cur en_US.UTF-8: stderr empty
+PASS K b2-badge-empty-alt cur en_US.UTF-8: G-050 recorded at minor
+PASS K b2-badge-empty-alt pre C: sealed in silence (rc 0)
+PASS K b2-badge-empty-alt pre C: stderr empty
+PASS K b2-badge-empty-alt pre C: G-050 recorded at minor
+PASS K b2-badge-empty-alt pre en_US.UTF-8: sealed in silence (rc 0)
+PASS K b2-badge-empty-alt pre en_US.UTF-8: stderr empty
+PASS K b2-badge-empty-alt pre en_US.UTF-8: G-050 recorded at minor
+PASS K b3-nested-empty cur C: sealed in silence (rc 0)
+PASS K b3-nested-empty cur C: stderr empty
+PASS K b3-nested-empty cur C: G-050 recorded at minor
+PASS K b3-nested-empty cur en_US.UTF-8: sealed in silence (rc 0)
+PASS K b3-nested-empty cur en_US.UTF-8: stderr empty
+PASS K b3-nested-empty cur en_US.UTF-8: G-050 recorded at minor
+PASS K b3-nested-empty pre C: sealed in silence (rc 0)
+PASS K b3-nested-empty pre C: stderr empty
+PASS K b3-nested-empty pre C: G-050 recorded at minor
+PASS K b3-nested-empty pre en_US.UTF-8: sealed in silence (rc 0)
+PASS K b3-nested-empty pre en_US.UTF-8: stderr empty
+PASS K b3-nested-empty pre en_US.UTF-8: G-050 recorded at minor
+PASS K b4-alt-escaped-bracket cur C: sealed in silence (rc 0)
+PASS K b4-alt-escaped-bracket cur C: stderr empty
+PASS K b4-alt-escaped-bracket cur C: G-050 recorded at minor
+PASS K b4-alt-escaped-bracket cur en_US.UTF-8: sealed in silence (rc 0)
+PASS K b4-alt-escaped-bracket cur en_US.UTF-8: stderr empty
+PASS K b4-alt-escaped-bracket cur en_US.UTF-8: G-050 recorded at minor
+PASS K b4-alt-escaped-bracket pre C: sealed in silence (rc 0)
+PASS K b4-alt-escaped-bracket pre C: stderr empty
+PASS K b4-alt-escaped-bracket pre C: G-050 recorded at minor
+PASS K b4-alt-escaped-bracket pre en_US.UTF-8: sealed in silence (rc 0)
+PASS K b4-alt-escaped-bracket pre en_US.UTF-8: stderr empty
+PASS K b4-alt-escaped-bracket pre en_US.UTF-8: G-050 recorded at minor
+PASS K m1-abbr-title-wrapped cur C: sealed in silence (rc 0)
+PASS K m1-abbr-title-wrapped cur C: stderr empty
+PASS K m1-abbr-title-wrapped cur C: G-050 recorded at minor
+PASS K m1-abbr-title-wrapped cur en_US.UTF-8: sealed in silence (rc 0)
+PASS K m1-abbr-title-wrapped cur en_US.UTF-8: stderr empty
+PASS K m1-abbr-title-wrapped cur en_US.UTF-8: G-050 recorded at minor
+PASS K m1-abbr-title-wrapped pre C: sealed in silence (rc 0)
+PASS K m1-abbr-title-wrapped pre C: stderr empty
+PASS K m1-abbr-title-wrapped pre C: G-050 recorded at minor
+PASS K m1-abbr-title-wrapped pre en_US.UTF-8: sealed in silence (rc 0)
+PASS K m1-abbr-title-wrapped pre en_US.UTF-8: stderr empty
+PASS K m1-abbr-title-wrapped pre en_US.UTF-8: G-050 recorded at minor
+PASS K m2-tag-split cur C: sealed in silence (rc 0)
+PASS K m2-tag-split cur C: stderr empty
+PASS K m2-tag-split cur C: G-050 recorded at minor
+PASS K m2-tag-split cur en_US.UTF-8: sealed in silence (rc 0)
+PASS K m2-tag-split cur en_US.UTF-8: stderr empty
+PASS K m2-tag-split cur en_US.UTF-8: G-050 recorded at minor
+PASS K m2-tag-split pre C: sealed in silence (rc 0)
+PASS K m2-tag-split pre C: stderr empty
+PASS K m2-tag-split pre C: G-050 recorded at minor
+PASS K m2-tag-split pre en_US.UTF-8: sealed in silence (rc 0)
+PASS K m2-tag-split pre en_US.UTF-8: stderr empty
+PASS K m2-tag-split pre en_US.UTF-8: G-050 recorded at minor
+PASS K m3-empty-link-across cur C: sealed in silence (rc 0)
+PASS K m3-empty-link-across cur C: stderr empty
+PASS K m3-empty-link-across cur C: G-050 recorded at minor
+PASS K m3-empty-link-across cur en_US.UTF-8: sealed in silence (rc 0)
+PASS K m3-empty-link-across cur en_US.UTF-8: stderr empty
+PASS K m3-empty-link-across cur en_US.UTF-8: G-050 recorded at minor
+PASS K m3-empty-link-across pre C: sealed in silence (rc 0)
+PASS K m3-empty-link-across pre C: stderr empty
+PASS K m3-empty-link-across pre C: G-050 recorded at minor
+PASS K m3-empty-link-across pre en_US.UTF-8: sealed in silence (rc 0)
+PASS K m3-empty-link-across pre en_US.UTF-8: stderr empty
+PASS K m3-empty-link-across pre en_US.UTF-8: G-050 recorded at minor
+PASS K m4-title-across cur C: sealed in silence (rc 0)
+PASS K m4-title-across cur C: stderr empty
+PASS K m4-title-across cur C: G-050 recorded at minor
+PASS K m4-title-across cur en_US.UTF-8: sealed in silence (rc 0)
+PASS K m4-title-across cur en_US.UTF-8: stderr empty
+PASS K m4-title-across cur en_US.UTF-8: G-050 recorded at minor
+PASS K m4-title-across pre C: sealed in silence (rc 0)
+PASS K m4-title-across pre C: stderr empty
+PASS K m4-title-across pre C: G-050 recorded at minor
+PASS K m4-title-across pre en_US.UTF-8: sealed in silence (rc 0)
+PASS K m4-title-across pre en_US.UTF-8: stderr empty
+PASS K m4-title-across pre en_US.UTF-8: G-050 recorded at minor
+PASS K m5-alt-across cur C: sealed in silence (rc 0)
+PASS K m5-alt-across cur C: stderr empty
+PASS K m5-alt-across cur C: G-050 recorded at minor
+PASS K m5-alt-across cur en_US.UTF-8: sealed in silence (rc 0)
+PASS K m5-alt-across cur en_US.UTF-8: stderr empty
+PASS K m5-alt-across cur en_US.UTF-8: G-050 recorded at minor
+PASS K m5-alt-across pre C: sealed in silence (rc 0)
+PASS K m5-alt-across pre C: stderr empty
+PASS K m5-alt-across pre C: G-050 recorded at minor
+PASS K m5-alt-across pre en_US.UTF-8: sealed in silence (rc 0)
+PASS K m5-alt-across pre en_US.UTF-8: stderr empty
+PASS K m5-alt-across pre en_US.UTF-8: G-050 recorded at minor
+PASS K d1-intraword-emphasis cur C: sealed in silence (rc 0)
+PASS K d1-intraword-emphasis cur C: stderr empty
+PASS K d1-intraword-emphasis cur C: G-050 recorded at minor
+PASS K d1-intraword-emphasis cur en_US.UTF-8: sealed in silence (rc 0)
+PASS K d1-intraword-emphasis cur en_US.UTF-8: stderr empty
+PASS K d1-intraword-emphasis cur en_US.UTF-8: G-050 recorded at minor
+PASS K d1-intraword-emphasis pre C: sealed in silence (rc 0)
+PASS K d1-intraword-emphasis pre C: stderr empty
+PASS K d1-intraword-emphasis pre C: G-050 recorded at minor
+PASS K d1-intraword-emphasis pre en_US.UTF-8: sealed in silence (rc 0)
+PASS K d1-intraword-emphasis pre en_US.UTF-8: stderr empty
+PASS K d1-intraword-emphasis pre en_US.UTF-8: G-050 recorded at minor
+PASS K d2-intraword-strong cur C: sealed in silence (rc 0)
+PASS K d2-intraword-strong cur C: stderr empty
+PASS K d2-intraword-strong cur C: G-050 recorded at minor
+PASS K d2-intraword-strong cur en_US.UTF-8: sealed in silence (rc 0)
+PASS K d2-intraword-strong cur en_US.UTF-8: stderr empty
+PASS K d2-intraword-strong cur en_US.UTF-8: G-050 recorded at minor
+PASS K d2-intraword-strong pre C: sealed in silence (rc 0)
+PASS K d2-intraword-strong pre C: stderr empty
+PASS K d2-intraword-strong pre C: G-050 recorded at minor
+PASS K d2-intraword-strong pre en_US.UTF-8: sealed in silence (rc 0)
+PASS K d2-intraword-strong pre en_US.UTF-8: stderr empty
+PASS K d2-intraword-strong pre en_US.UTF-8: G-050 recorded at minor
+PASS K d3-pi-across cur C: sealed in silence (rc 0)
+PASS K d3-pi-across cur C: stderr empty
+PASS K d3-pi-across cur C: G-050 recorded at minor
+PASS K d3-pi-across cur en_US.UTF-8: sealed in silence (rc 0)
+PASS K d3-pi-across cur en_US.UTF-8: stderr empty
+PASS K d3-pi-across cur en_US.UTF-8: G-050 recorded at minor
+PASS K d3-pi-across pre C: sealed in silence (rc 0)
+PASS K d3-pi-across pre C: stderr empty
+PASS K d3-pi-across pre C: G-050 recorded at minor
+PASS K d3-pi-across pre en_US.UTF-8: sealed in silence (rc 0)
+PASS K d3-pi-across pre en_US.UTF-8: stderr empty
+PASS K d3-pi-across pre en_US.UTF-8: G-050 recorded at minor
+PASS K d4-div-across cur C: sealed in silence (rc 0)
+PASS K d4-div-across cur C: stderr empty
+PASS K d4-div-across cur C: G-050 recorded at minor
+PASS K d4-div-across cur en_US.UTF-8: sealed in silence (rc 0)
+PASS K d4-div-across cur en_US.UTF-8: stderr empty
+PASS K d4-div-across cur en_US.UTF-8: G-050 recorded at minor
+PASS K d4-div-across pre C: sealed in silence (rc 0)
+PASS K d4-div-across pre C: stderr empty
+PASS K d4-div-across pre C: G-050 recorded at minor
+PASS K d4-div-across pre en_US.UTF-8: sealed in silence (rc 0)
+PASS K d4-div-across pre en_US.UTF-8: stderr empty
+PASS K d4-div-across pre en_US.UTF-8: G-050 recorded at minor
+PASS K d5-deeper-nesting cur C: sealed in silence (rc 0)
+PASS K d5-deeper-nesting cur C: stderr empty
+PASS K d5-deeper-nesting cur C: G-050 recorded at minor
+PASS K d5-deeper-nesting cur en_US.UTF-8: sealed in silence (rc 0)
+PASS K d5-deeper-nesting cur en_US.UTF-8: stderr empty
+PASS K d5-deeper-nesting cur en_US.UTF-8: G-050 recorded at minor
+PASS K d5-deeper-nesting pre C: sealed in silence (rc 0)
+PASS K d5-deeper-nesting pre C: stderr empty
+PASS K d5-deeper-nesting pre C: G-050 recorded at minor
+PASS K d5-deeper-nesting pre en_US.UTF-8: sealed in silence (rc 0)
+PASS K d5-deeper-nesting pre en_US.UTF-8: stderr empty
+PASS K d5-deeper-nesting pre en_US.UTF-8: G-050 recorded at minor
+PASS K d6-cdata-across cur C: sealed in silence (rc 0)
+PASS K d6-cdata-across cur C: stderr empty
+PASS K d6-cdata-across cur C: G-050 recorded at minor
+PASS K d6-cdata-across cur en_US.UTF-8: sealed in silence (rc 0)
+PASS K d6-cdata-across cur en_US.UTF-8: stderr empty
+PASS K d6-cdata-across cur en_US.UTF-8: G-050 recorded at minor
+PASS K d6-cdata-across pre C: sealed in silence (rc 0)
+PASS K d6-cdata-across pre C: stderr empty
+PASS K d6-cdata-across pre C: G-050 recorded at minor
+PASS K d6-cdata-across pre en_US.UTF-8: sealed in silence (rc 0)
+PASS K d6-cdata-across pre en_US.UTF-8: stderr empty
+PASS K d6-cdata-across pre en_US.UTF-8: G-050 recorded at minor
+PASS K c1-canonical cur C: refused (rc 3)
+PASS K c1-canonical cur C: by name
+PASS K c1-canonical cur en_US.UTF-8: refused (rc 3)
+PASS K c1-canonical cur en_US.UTF-8: by name
+  | K c1-canonical pre C: rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0975ee40-5cb7-4b98-9d44-c2f005ef40ac/scratchpad/s14/r14-repro/spec-K-c1-canonical-pre/notes/
+  | K c1-canonical pre en_US.UTF-8: rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0975ee40-5cb7-4b98-9d44-c2f005ef40ac/scratchpad/s14/r14-repro/spec-K-c1-canonical-pre/notes/
+PASS K c2-plain-image cur C: refused (rc 3)
+PASS K c2-plain-image cur C: by name
+PASS K c2-plain-image cur en_US.UTF-8: refused (rc 3)
+PASS K c2-plain-image cur en_US.UTF-8: by name
+  | K c2-plain-image pre C: rc=0 
+  | K c2-plain-image pre en_US.UTF-8: rc=0 
+PASS K c3-one-line-abbr cur C: refused (rc 3)
+PASS K c3-one-line-abbr cur C: by name
+PASS K c3-one-line-abbr cur en_US.UTF-8: refused (rc 3)
+PASS K c3-one-line-abbr cur en_US.UTF-8: by name
+  | K c3-one-line-abbr pre C: rc=0 
+  | K c3-one-line-abbr pre en_US.UTF-8: rc=0 
+PASS K c4-one-line-tag cur C: refused (rc 3)
+PASS K c4-one-line-tag cur C: by name
+PASS K c4-one-line-tag cur en_US.UTF-8: refused (rc 3)
+PASS K c4-one-line-tag cur en_US.UTF-8: by name
+  | K c4-one-line-tag pre C: rc=0 
+  | K c4-one-line-tag pre en_US.UTF-8: rc=0 
+== O-021 direct: a field line followed directly by a block a renderer starts there (both passes); the span twin is a continuation
+  | marked: <ul> <li><strong>Severity:</strong> data-loss</li> </ul> <div> note </div> 
+PASS O o1-div cur C: the canonical pass refuses (rc 3)
+PASS O o1-div cur C: by name
+PASS O o1-div cur C: the manifest pass refuses (rc 3)
+PASS O o1-div cur C: by name
+PASS O o1-div cur en_US.UTF-8: the canonical pass refuses (rc 3)
+PASS O o1-div cur en_US.UTF-8: by name
+PASS O o1-div cur en_US.UTF-8: the manifest pass refuses (rc 3)
+PASS O o1-div cur en_US.UTF-8: by name
+PASS O o1-div pre C: the canonical pass parses (rc 0)
+  | O o1-div pre C: manifest rc=0 
+PASS O o1-div pre en_US.UTF-8: the canonical pass parses (rc 0)
+  | O o1-div pre en_US.UTF-8: manifest rc=0 
+  | marked: <ul> <li><strong>Severity:</strong> data-loss</li> </ul> <pre><code class="language-text">plain output </code></pre> 
+PASS O o2-four-backtick-fence cur C: the canonical pass refuses (rc 3)
+PASS O o2-four-backtick-fence cur C: by name
+PASS O o2-four-backtick-fence cur C: the manifest pass refuses (rc 3)
+PASS O o2-four-backtick-fence cur C: by name
+PASS O o2-four-backtick-fence cur en_US.UTF-8: the canonical pass refuses (rc 3)
+PASS O o2-four-backtick-fence cur en_US.UTF-8: by name
+PASS O o2-four-backtick-fence cur en_US.UTF-8: the manifest pass refuses (rc 3)
+PASS O o2-four-backtick-fence cur en_US.UTF-8: by name
+PASS O o2-four-backtick-fence pre C: the canonical pass parses (rc 0)
+  | O o2-four-backtick-fence pre C: manifest rc=0 
+PASS O o2-four-backtick-fence pre en_US.UTF-8: the canonical pass parses (rc 0)
+  | O o2-four-backtick-fence pre en_US.UTF-8: manifest rc=0 
+  | marked: <ul> <li><strong>Severity:</strong> data-loss</li> </ul> <details> x </details> 
+PASS O o3-details cur C: the canonical pass refuses (rc 3)
+PASS O o3-details cur C: by name
+PASS O o3-details cur C: the manifest pass refuses (rc 3)
+PASS O o3-details cur C: by name
+PASS O o3-details cur en_US.UTF-8: the canonical pass refuses (rc 3)
+PASS O o3-details cur en_US.UTF-8: by name
+PASS O o3-details cur en_US.UTF-8: the manifest pass refuses (rc 3)
+PASS O o3-details cur en_US.UTF-8: by name
+PASS O o3-details pre C: the canonical pass parses (rc 0)
+  | O o3-details pre C: manifest rc=0 
+PASS O o3-details pre en_US.UTF-8: the canonical pass parses (rc 0)
+  | O o3-details pre en_US.UTF-8: manifest rc=0 
+  | marked: <ul> <li><strong>Severity:</strong> data-loss</li> </ul> <span> x </span> 
+PASS O t1-span-twin cur C: the canonical pass refuses (rc 3)
+PASS O t1-span-twin cur C: by name
+PASS O t1-span-twin cur C: the manifest pass refuses (rc 3)
+PASS O t1-span-twin cur C: by name
+PASS O t1-span-twin cur en_US.UTF-8: the canonical pass refuses (rc 3)
+PASS O t1-span-twin cur en_US.UTF-8: by name
+PASS O t1-span-twin cur en_US.UTF-8: the manifest pass refuses (rc 3)
+PASS O t1-span-twin cur en_US.UTF-8: by name
+PASS O t1-span-twin pre C: the canonical pass parses (rc 0)
+  | O t1-span-twin pre C: manifest rc=0 
+PASS O t1-span-twin pre en_US.UTF-8: the canonical pass parses (rc 0)
+  | O t1-span-twin pre en_US.UTF-8: manifest rc=0 
+== E: end to end through spec-gate.sh on CUR; fixture, floor and reservation built under C each time
+PASS E e1-counting C: fixture, floor and round-1 reservation
+  | E e1-counting C: complete rc=0 round completed gate=opponent round=1 verdict=CLEARED report=76fd50a71376e870bf12c5636df883cea3365cb3a5164e864ce841ce1f999348
+  |   tally rc=0 opponent rounds=1 blocking=1 minor=1 locations=2 unclassified=0 severity-downgrades=0 
+PASS E e1-counting C: CLEARED sealed (rc 0)
+PASS E e1-counting C: the completion line
+PASS E e1-counting C: ROUND-1 sealed
+PASS E e1-counting C: the tally counts a blocking finding from the CLEARED round
+PASS E e1-control C: fixture, floor and round-1 reservation
+  | E e1-control C: complete rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0975ee40-5cb7-4b98-9d44-c2f005ef40ac/scratchpad/s14/r14-repro/sb-e1-cont
+  |   tally rc=0 opponent rounds=0 blocking=0 minor=0 locations=0 unclassified=0 severity-downgrades=0 
+PASS E e1-control C: refused (rc 3)
+PASS E e1-control C: by name
+PASS E e2-member C: fixture, floor and round-1 reservation
+PASS E e2-member C: round 1 CHALLENGED completes (rc 0)
+PASS E e2-member C: round 2 reserved
+  | E e2-member C: complete rc=0 round completed gate=opponent round=2 verdict=CLEARED report=d31a8aaaed0beba9a155b8d0b31536409e960639eac6a04112df15f6c3435ffd
+  |   tally rc=0 opponent rounds=2 blocking=1 minor=0 locations=1 unclassified=0 severity-downgrades=0 
+PASS E e2-member C: round 2 CLEARED sealed (rc 0)
+PASS E e2-member C: the completion line
+PASS E e2-member C: two rounds
+PASS E e2-member C: round 2 recorded nothing
+PASS E e2-control C: fixture, floor and round-1 reservation
+PASS E e2-control C: round 1 CHALLENGED completes (rc 0)
+PASS E e2-control C: round 2 reserved
+  | E e2-control C: complete rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0975ee40-5cb7-4b98-9d44-c2f005ef40ac/scratchpad/s14/r14-repro/sb-e2-cont
+  |   tally rc=0 opponent rounds=1 blocking=1 minor=0 locations=1 unclassified=0 severity-downgrades=0 
+PASS E e2-control C: refused (rc 3)
+PASS E e2-control C: by name
+PASS E e3-title-opens C: fixture, floor and round-1 reservation
+  | E e3-title-opens C: complete rc=0 round completed gate=opponent round=1 verdict=CLEARED report=3c7672e5330066886c73b39bb8b01ed5d53fff1db8caaccb39f6b4e1e97ed3f6
+  |   tally rc=0 opponent rounds=1 blocking=1 minor=1 locations=2 unclassified=0 severity-downgrades=0 
+PASS E e3-title-opens C: CLEARED sealed (rc 0)
+PASS E e3-title-opens C: the tally counts a blocking finding from the CLEARED round
+PASS E e4-badge C: fixture, floor and round-1 reservation
+  | E e4-badge C: complete rc=0 round completed gate=opponent round=1 verdict=CLEARED report=a62a8618cfab1f783ca05e2353181634d9ebd86bfcb27dffaa60c4f3b8b3a096
+  |   tally rc=0 opponent rounds=1 blocking=0 minor=1 locations=1 unclassified=0 severity-downgrades=0 
+PASS E e4-badge C: CLEARED sealed (rc 0)
+PASS E e4-badge C: the tally
+PASS E e4-control C: fixture, floor and round-1 reservation
+  | E e4-control C: complete rc=3 manifest line 6: a second Severity line in finding G-042: - ![logo](y)Severity: data-loss
+  |   tally rc=0 opponent rounds=0 blocking=0 minor=0 locations=0 unclassified=0 severity-downgrades=0 
+PASS E e4-control C: refused (rc 3)
+PASS E e4-control C: by name
+PASS E e5-abbr-wrapped C: fixture, floor and round-1 reservation
+  | E e5-abbr-wrapped C: complete rc=0 round completed gate=opponent round=1 verdict=CLEARED report=9eb82d9a5d5b29fd67ab48f5a78e770d822ec6a3894d3d3363a2be01cdcf9e14
+  |   tally rc=0 opponent rounds=1 blocking=0 minor=1 locations=1 unclassified=0 severity-downgrades=0 
+PASS E e5-abbr-wrapped C: CLEARED sealed (rc 0)
+PASS E e5-abbr-wrapped C: the tally
+PASS E e6-intraword C: fixture, floor and round-1 reservation
+  | E e6-intraword C: complete rc=0 round completed gate=opponent round=1 verdict=CLEARED report=6877360fd87d761fe0d2549b2b798abf1acd123194f4d8397d06ecd521b4dbd1
+  |   tally rc=0 opponent rounds=1 blocking=0 minor=1 locations=1 unclassified=0 severity-downgrades=0 
+PASS E e6-intraword C: CLEARED sealed (rc 0)
+PASS E e6-intraword C: the tally
+PASS E e5-control C: fixture, floor and round-1 reservation
+  | E e5-control C: complete rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0975ee40-5cb7-4b98-9d44-c2f005ef40ac/scratchpad/s14/r14-repro/sb-e5-cont
+  |   tally rc=0 opponent rounds=0 blocking=0 minor=0 locations=0 unclassified=0 severity-downgrades=0 
+PASS E e5-control C: refused (rc 3)
+PASS E e5-control C: by name
+PASS E e1-counting en_US.UTF-8: fixture, floor and round-1 reservation
+  | E e1-counting en_US.UTF-8: complete rc=0 round completed gate=opponent round=1 verdict=CLEARED report=f7041f45675aad67ff17e2d4ffb4f069ab102a0f7fcac02a7116317819990515
+  |   tally rc=0 opponent rounds=1 blocking=1 minor=1 locations=2 unclassified=0 severity-downgrades=0 
+PASS E e1-counting en_US.UTF-8: CLEARED sealed (rc 0)
+PASS E e1-counting en_US.UTF-8: the completion line
+PASS E e1-counting en_US.UTF-8: ROUND-1 sealed
+PASS E e1-counting en_US.UTF-8: the tally counts a blocking finding from the CLEARED round
+PASS E e1-control en_US.UTF-8: fixture, floor and round-1 reservation
+  | E e1-control en_US.UTF-8: complete rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0975ee40-5cb7-4b98-9d44-c2f005ef40ac/scratchpad/s14/r14-repro/sb-e1-cont
+  |   tally rc=0 opponent rounds=0 blocking=0 minor=0 locations=0 unclassified=0 severity-downgrades=0 
+PASS E e1-control en_US.UTF-8: refused (rc 3)
+PASS E e1-control en_US.UTF-8: by name
+PASS E e2-member en_US.UTF-8: fixture, floor and round-1 reservation
+PASS E e2-member en_US.UTF-8: round 1 CHALLENGED completes (rc 0)
+PASS E e2-member en_US.UTF-8: round 2 reserved
+  | E e2-member en_US.UTF-8: complete rc=0 round completed gate=opponent round=2 verdict=CLEARED report=af6efe6a3c4277b5a1d786ef0ff510232caf5307f2ad4c777c9f7404243362fa
+  |   tally rc=0 opponent rounds=2 blocking=1 minor=0 locations=1 unclassified=0 severity-downgrades=0 
+PASS E e2-member en_US.UTF-8: round 2 CLEARED sealed (rc 0)
+PASS E e2-member en_US.UTF-8: the completion line
+PASS E e2-member en_US.UTF-8: two rounds
+PASS E e2-member en_US.UTF-8: round 2 recorded nothing
+PASS E e2-control en_US.UTF-8: fixture, floor and round-1 reservation
+PASS E e2-control en_US.UTF-8: round 1 CHALLENGED completes (rc 0)
+PASS E e2-control en_US.UTF-8: round 2 reserved
+  | E e2-control en_US.UTF-8: complete rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0975ee40-5cb7-4b98-9d44-c2f005ef40ac/scratchpad/s14/r14-repro/sb-e2-cont
+  |   tally rc=0 opponent rounds=1 blocking=1 minor=0 locations=1 unclassified=0 severity-downgrades=0 
+PASS E e2-control en_US.UTF-8: refused (rc 3)
+PASS E e2-control en_US.UTF-8: by name
+PASS E e3-title-opens en_US.UTF-8: fixture, floor and round-1 reservation
+  | E e3-title-opens en_US.UTF-8: complete rc=0 round completed gate=opponent round=1 verdict=CLEARED report=1bda857075651fb5d8395a10eb0d9fdac980e5c4eaae53c127e15c0b70eb75a2
+  |   tally rc=0 opponent rounds=1 blocking=1 minor=1 locations=2 unclassified=0 severity-downgrades=0 
+PASS E e3-title-opens en_US.UTF-8: CLEARED sealed (rc 0)
+PASS E e3-title-opens en_US.UTF-8: the tally counts a blocking finding from the CLEARED round
+PASS E e4-badge en_US.UTF-8: fixture, floor and round-1 reservation
+  | E e4-badge en_US.UTF-8: complete rc=0 round completed gate=opponent round=1 verdict=CLEARED report=30f521ff6676b12a7b07a8cf741baff2fbab7f4672043777f6f6d2507e64924c
+  |   tally rc=0 opponent rounds=1 blocking=0 minor=1 locations=1 unclassified=0 severity-downgrades=0 
+PASS E e4-badge en_US.UTF-8: CLEARED sealed (rc 0)
+PASS E e4-badge en_US.UTF-8: the tally
+PASS E e4-control en_US.UTF-8: fixture, floor and round-1 reservation
+  | E e4-control en_US.UTF-8: complete rc=3 manifest line 6: a second Severity line in finding G-042: - ![logo](y)Severity: data-loss
+  |   tally rc=0 opponent rounds=0 blocking=0 minor=0 locations=0 unclassified=0 severity-downgrades=0 
+PASS E e4-control en_US.UTF-8: refused (rc 3)
+PASS E e4-control en_US.UTF-8: by name
+PASS E e5-abbr-wrapped en_US.UTF-8: fixture, floor and round-1 reservation
+  | E e5-abbr-wrapped en_US.UTF-8: complete rc=0 round completed gate=opponent round=1 verdict=CLEARED report=3112e6b76cfce7f0b0f071743876c08c36e7f4c894f08049c669375561e2f97b
+  |   tally rc=0 opponent rounds=1 blocking=0 minor=1 locations=1 unclassified=0 severity-downgrades=0 
+PASS E e5-abbr-wrapped en_US.UTF-8: CLEARED sealed (rc 0)
+PASS E e5-abbr-wrapped en_US.UTF-8: the tally
+PASS E e6-intraword en_US.UTF-8: fixture, floor and round-1 reservation
+  | E e6-intraword en_US.UTF-8: complete rc=0 round completed gate=opponent round=1 verdict=CLEARED report=398f7484b00ba421d842384d7fbe552341417a1cf8df19daae4a2df7ed386204
+  |   tally rc=0 opponent rounds=1 blocking=0 minor=1 locations=1 unclassified=0 severity-downgrades=0 
+PASS E e6-intraword en_US.UTF-8: CLEARED sealed (rc 0)
+PASS E e6-intraword en_US.UTF-8: the tally
+PASS E e5-control en_US.UTF-8: fixture, floor and round-1 reservation
+  | E e5-control en_US.UTF-8: complete rc=3 report recovery: /private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/0975ee40-5cb7-4b98-9d44-c2f005ef40ac/scratchpad/s14/r14-repro/sb-e5-cont
+  |   tally rc=0 opponent rounds=0 blocking=0 minor=0 locations=0 unclassified=0 severity-downgrades=0 
+PASS E e5-control en_US.UTF-8: refused (rc 3)
+PASS E e5-control en_US.UTF-8: by name
+PASS live worktree status outside notes/verification/ unchanged
+end 2026-10-02T17:36:44Z
+r14-repro failures=0

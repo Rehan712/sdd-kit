@@ -1,0 +1,6 @@
+r18-measure run 1 (session 19, 2026-10-09): stopped by the invoker about five minutes in, during section A, because the
+rule for a link reference definition whose label spans lines refused an existing positive fixture row
+(a-wrapped-link-text: link text wrapped at the start of a line). The rule was refined before any further
+measurement (a label left open at the end of a line is carried through its run and the line that closes it with
+]: is refused), and the measurement re-run in full as r18-measure.{log,rc,time}. Run 1 judges nothing; its rc
+file holds the exit of the trailing echo after the process was stopped, not a result.

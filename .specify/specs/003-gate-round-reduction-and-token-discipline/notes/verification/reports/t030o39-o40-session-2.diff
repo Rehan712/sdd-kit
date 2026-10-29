@@ -1,0 +1,586 @@
+diff --git a/scripts/verification-lib.sh b/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/verification-lib.sh
+index f13e78b..637dd8a 100755
+--- a/scripts/verification-lib.sh
++++ b/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/verification-lib.sh
+@@ -1025,7 +1025,7 @@ vf_reports() (
+         # an honest re-characterisation of the next member of a class. So the
+         # guard binds where the ATTACK lands instead - a clearing verdict may
+         # not rest on a downgrade - and a non-clearing round may re-characterise.
+-        if ((fid in firsttier) && firsttier[fid]=="blocking" && sev ~ /^(minor|degraded)$/ && status!="resolved") downgraded++
++        # The predicate itself is evaluated once, after this block (O-014).
+         # Round 6 bound Severity, the SECOND token of the predicate on the line
+         # above, and wrote status!="resolved" into the guard on the line below
+         # as an explicit exemption - so the token that suppresses the count is
+@@ -1046,7 +1046,15 @@ vf_reports() (
+         if (status=="resolved" && (fid in openround))
+           suppressed = suppressed (suppressed=="" ? "" : ", ") fid
+       }
++      # One computation, two readers (O-014). A lowered tier is judged here,
++      # once per observation of every round style, against the history both
++      # writers below and the manifest pass share. flush() refuses a clearing
++      # verdict that rests on it; vf_tally counts the emitted records. A second
++      # fold inside the tally is how the metric lost the manifest seed.
++      lowered = ((fid in firsttier) && firsttier[fid]=="blocking" && sev ~ /^(minor|degraded)$/ && status!="resolved")
++      if (lowered) downgraded++
+       emit("finding",n,fid,cls,status,prior,sev,loc,root,trigger,repro,blocks)
++      if (lowered) emit("downgrade",n,fid,cls,status,prior,sev,"","","","","")
+       if (!(fid in firstclass)) firstclass[fid]=cls
+       # Fold every observation, just like the manifest writer: an escalation
+       # must remain history when a later round walks the same ID back down.
+@@ -1203,7 +1211,7 @@ vf_reports() (
+ )
+ 
+ vf_tally() (
+-  local spec="$1" tmp gate v f=() rounds blockers=0 minors=0 unclassified=0 locations=0
++  local spec="$1" tmp gate v f=() rounds blockers=0 minors=0 unclassified=0 locations=0 downgrades=0
+   tmp="$(mktemp -d "${TMPDIR:-/tmp}/vf-tally.XXXXXX")" || return 3
+   trap 'rm -rf "$tmp"' EXIT
+   : > "$tmp/classes"
+@@ -1221,6 +1229,7 @@ vf_tally() (
+           [[ "${f[3]}" != unclassified ]] || unclassified=$((unclassified+1))
+           locations=$((locations+$(printf '%s\n' "${f[7]}" | awk '{n=0; while(match($0,/[^ `,]+:[0-9]+/)){n++; $0=substr($0,RSTART+RLENGTH)}; print n}')))
+           printf '%s\t%s\t%s\t%s\t%s\t%s\n' "${f[3]}" "${f[2]}" "${f[4]}" "${f[5]}" "$gate" "${f[6]}" >> "$tmp/classes";;
++        downgrade) downgrades=$((downgrades+1));;
+       esac
+       f=()
+     done < "$tmp/report"
+@@ -1237,14 +1246,11 @@ vf_tally() (
+   # honest re-characterisation stays legal -- which means it must not be
+   # SILENT. Counting it here is the other half of that trade: MET-002 can see
+   # how often a recorded tier moved down, which is the measurement REQ-011's
+-  # "severity never changes merely to meet a round or cost target" needs.
+-  awk -F '\t' '
+-    function tier(s) {return (s=="minor" || s=="degraded") ? "minor" : "blocking"}
+-    { k=$5 SUBSEP $2
+-      if((k in first) && first[k]=="blocking" && tier($6)=="minor" && $3!="resolved") down++
+-      if(!(k in first) || tier($6)=="blocking") first[k]=tier($6)
+-    }
+-    END {printf "severity-downgrades=%d\n", down+0}' "$tmp/classes"
++  # "severity never changes merely to meet a round or cost target" needs. The
++  # count is the guard's own: vf_reports emits one downgrade record per
++  # observation it judged lowered, per gate, against the same manifest and
++  # round history. There is deliberately no second fold here (O-014).
++  printf 'severity-downgrades=%s\n' "$downgrades"
+   vf_execution_tally "$spec"
+ )
+ 
+@@ -1318,13 +1324,61 @@ vf_publish() {
+   mv "$staging" "$final"
+ }
+ 
+-# Exclusions are generated paths only, never entire notes/.specify directories.
+-vf_bookkeeping_path() {
++# Exclusions are generated paths only, never entire notes/.specify directories,
++# and only the VERIFIED spec's own. Another spec's reports, captures and ledgers
++# are ordinary source: a shipped spec's gate report is a fixture here (AC-010),
++# and a changed fixture must invalidate reuse (AC-020). <own> is the verified
++# spec's repo-relative directory, or empty when the spec is not
++# .specify/specs/<name> inside the repository being read; empty excludes nothing.
++vf_bookkeeping_path() { # <repo-relative path> <own spec dir or empty> [1 when the filesystem folds case]
++  (( $# == 2 || $# == 3 )) || { echo 'vf_bookkeeping_path: <path> <own> [fold] required' >&2; return 2; }
++  [[ -n "$2" ]] || return 1
++  local rc=1 was=0
++  # Where the filesystem folds case, OPPONENT.md IS opponent.md, so the match
++  # folds too; everywhere else they are two different files.
++  if [[ "${3:-0}" == 1 ]]; then shopt -q nocasematch && was=1; shopt -s nocasematch; fi
+   case "$1" in
+-    .specify/specs/*/.tasks.accept.*|.specify/specs/*/notes/captures/*|.specify/specs/*/notes/verification/*|.specify/specs/*/notes/evidence.md|.specify/specs/*/notes/opponent.md|.specify/specs/*/notes/reality-check.md) return 0;;
++    "$2"/.tasks.accept.*|"$2"/notes/captures/*|"$2"/notes/verification/*|"$2"/notes/evidence.md|"$2"/notes/opponent.md|"$2"/notes/reality-check.md) rc=0;;
+   esac
+-  return 1
++  [[ "${3:-0}" != 1 || "$was" == 1 ]] || shopt -u nocasematch
++  return "$rc"
++}
++# Split `git rev-parse --show-toplevel --show-prefix` output; the prefix line is
++# empty at the root, and command substitution has already dropped it.
++_vf_git_where() { # <output> -> VF_TOP VF_PREFIX
++  VF_TOP="${1%%$'\n'*}" VF_PREFIX=''
++  [[ "$1" != *$'\n'* ]] || VF_PREFIX="${1#*$'\n'}"
++  VF_PREFIX="${VF_PREFIX%/}"
+ }
++# The anchor for vf_bookkeeping_path: the spec's own directory as git spells it
++# under this repository's root -- the on-disk case, not the case a caller
++# typed, which bash's pwd keeps -- when it is .specify/specs/<name>.
++vf_bookkeeping_anchor() { # <spec dir> <physical repo root>
++  local out
++  out="$(git -C "$1" rev-parse --show-toplevel --show-prefix 2>/dev/null)" || return 0
++  _vf_git_where "$out"
++  if [[ "$VF_TOP" == "$2" && "$VF_PREFIX" =~ ^\.specify/specs/[^/]+$ ]]; then printf '%s\n' "$VF_PREFIX"; fi
++}
++# Physical, canonical repo-relative location of a path: every symlink followed,
++# every `..` resolved by the filesystem (cd -P, never lexically), and directory
++# components spelled as git reports them. Prints "." for the repository root
++# and fails for a location outside it. The final component keeps its spelling;
++# vf_bookkeeping_path folds its case where the filesystem does.
++vf_physical_rel() ( # <physical repo root> <repo-relative path>
++  local repo="$1" path="$1/$2" link dir base='' out n=0
++  while [[ -L "$path" ]]; do
++    (( n++ < 40 )) || return 1
++    link="$(readlink "$path")" || return 1
++    case "$link" in /*) path="$link";; *) path="$(dirname -- "$path")/$link";; esac
++  done
++  if [[ -d "$path" ]]; then dir="$path"; else dir="$(dirname -- "$path")"; base="$(basename -- "$path")"; fi
++  out="$(cd -P -- "$dir" 2>/dev/null && git rev-parse --show-toplevel --show-prefix 2>/dev/null)" || return 1
++  _vf_git_where "$out"
++  [[ "$VF_TOP" == "$repo" ]] || return 1
++  if [[ -n "$VF_PREFIX" && -n "$base" ]]; then printf '%s/%s\n' "$VF_PREFIX" "$base"
++  elif [[ -n "$VF_PREFIX$base" ]]; then printf '%s\n' "$VF_PREFIX$base"
++  else printf '.\n'; fi
++)
+ vf_semantic_file() { # <repo-relative path> <input-file> <output-file>
+   case "$1" in
+     .specify/specs/*/STATUS.md)
+@@ -1340,9 +1394,12 @@ vf_semantic_file() { # <repo-relative path> <input-file> <output-file>
+     *) cp "$2" "$3";;
+   esac
+ }
+-vf_path_record() { # <repo> <relative path> <output> <scratch>
+-  local repo="$1" path="$2" output="$3" scratch="$4" type mode digest link=''
+-  if vf_bookkeeping_path "$path"; then return 0; fi
++vf_path_record() { # <repo> <relative path> <output> <scratch> <own spec dir or empty> [fold]
++  local repo="$1" path="$2" output="$3" scratch="$4" own="$5" fold="${6:-0}" type mode digest link=''
++  # Only the enumeration passes an anchor. A declared input arrives with an
++  # empty one, so it can never take this return: it is hashed, or it was
++  # refused by name before this call.
++  if vf_bookkeeping_path "$path" "$own" "$fold"; then return 0; fi
+   if [[ -L "$repo/$path" ]]; then
+     type='link'; link="$(readlink "$repo/$path"; printf .)"; link="${link%.}"; digest=''; mode=120000
+     # Target content is an input even when the target is outside the repository.
+@@ -1360,10 +1417,12 @@ vf_path_record() { # <repo> <relative path> <output> <scratch>
+ # Fixed arity six-field input records. Git supplies NUL-safe deterministic
+ # tracked/index and untracked ordering; no GNU sort -z or line-split filenames.
+ vf_snapshot() (
+-  local spec="$1" repo="$2" cwd="$3" output="$4" tmp path record head oid mode stage key value tool resolved
++  local spec="$1" repo="$2" cwd="$3" output="$4" tmp path record head oid mode stage key value tool resolved own real fold=0
+   spec="$(cd "$spec" && pwd -P)" || return 3
+   repo="$(cd "$repo" && pwd -P)" || return 3
+   cwd="$(cd "$cwd" && pwd -P)" || return 3
++  own="$(vf_bookkeeping_anchor "$spec" "$repo")"
++  [[ "$(git -C "$repo" config --bool core.ignorecase 2>/dev/null)" != true ]] || fold=1
+   [[ "$(git -C "$repo" rev-parse --show-toplevel 2>/dev/null)" == "$repo" ]] || {
+     echo 'verification inputs: Git worktree root required' >&2; return 3;
+   }
+@@ -1375,30 +1434,45 @@ vf_snapshot() (
+   git -C "$repo" ls-files --cached --others --exclude-standard -z > "$tmp/paths" || return 3
+   while IFS= read -r -d '' record; do
+     path="${record#*$'\t'}"; head="${record%%$'\t'*}"
+-    vf_bookkeeping_path "$path" && continue
++    vf_bookkeeping_path "$path" "$own" "$fold" && continue
+     read -r mode oid stage <<< "$head"
+     [[ "$mode" != 160000 ]] || { echo "verification inputs: submodule requires explicit transitive inputs: $path" >&2; return 3; }
+     git -C "$repo" cat-file blob "$oid" > "$tmp/blob" || return 3
+     vf_semantic_file "$path" "$tmp/blob" "$tmp/semantic" || return 3
+     printf '%s\0' index "$path" "$mode" "$stage" "$(vf_hash "$tmp/semantic")" '' >> "$tmp/inputs"
+   done < "$tmp/index"
+-  while IFS= read -r -d '' path; do vf_path_record "$repo" "$path" "$tmp/inputs" "$tmp" || return 3; done < "$tmp/paths"
++  while IFS= read -r -d '' path; do vf_path_record "$repo" "$path" "$tmp/inputs" "$tmp" "$own" "$fold" || return 3; done < "$tmp/paths"
+   while IFS= read -r -d '' path; do
+     case "$path" in /*|../*|*/../*|*/..|..) echo 'verification inputs must be repo relative' >&2; return 3;; esac
+     [[ -e "$repo/$path" || -L "$repo/$path" ]] || { echo "verification input missing: $path" >&2; return 3; }
++    # A declared input is never dropped silently. The verified spec's own
++    # generated records cannot be one: hashing its report or ledgers would let
++    # completing a round invalidate the floor that completion revalidates. So
++    # a declaration reaching them -- the record itself, or a directory wholly
++    # inside them, located physically rather than by spelling -- is refused.
++    # So is the repository root: the whole source is already an input, and a
++    # declared root would hash .git as well.
++    real="$(vf_physical_rel "$repo" "$path")" || real=''
++    if [[ "$real" == . ]]; then echo "verification inputs: declared input is the repository root: $path" >&2; return 3; fi
++    if [[ -n "$real" ]] && { vf_bookkeeping_path "$real" "$own" "$fold" || { [[ -d "$repo/$real" ]] && vf_bookkeeping_path "$real/." "$own" "$fold"; }; }; then
++      echo "verification inputs: declared input is this spec's own generated bookkeeping: $path" >&2; return 3
++    fi
+     if [[ -d "$repo/$path" && ! -L "$repo/$path" ]]; then
+       # find ordering is not canonical across platforms. Hash each record then
+       # sort its digest; paths themselves remain intact in each framed record.
+-      find "$repo/$path" \( -type f -o -type l \) -print0 > "$tmp/extra" || return 3
++      # Members follow the enumeration's own rule: the verified spec's
++      # generated records are not inputs, and are not counted either.
++      find "$repo/${real:-$path}" \( -type f -o -type l \) -print0 > "$tmp/extra" || return 3
+       : > "$tmp/extra-hashes"
+       while IFS= read -r -d '' record; do
++        vf_bookkeeping_path "${record#"$repo/"}" "$own" "$fold" && continue
+         : > "$tmp/path-record"
+-        vf_path_record "$repo" "${record#"$repo/"}" "$tmp/path-record" "$tmp" || return 3
++        vf_path_record "$repo" "${record#"$repo/"}" "$tmp/path-record" "$tmp" '' || return 3
+         vf_hash "$tmp/path-record" >> "$tmp/extra-hashes" || return 3
+       done < "$tmp/extra"
+       LC_ALL=C sort "$tmp/extra-hashes" > "$tmp/sorted"
+       printf '%s\0' declared-directory "$path" "$(vf_hash "$tmp/sorted")" '' '' '' >> "$tmp/inputs"
+-    else vf_path_record "$repo" "$path" "$tmp/inputs" "$tmp" || return 3; fi
++    else vf_path_record "$repo" "$path" "$tmp/inputs" "$tmp" '' || return 3; fi
+   done < "$tmp/config/inputs.nul"
+   # The environment record is a DECLARED, CLOSED set: the variables the harness
+   # demonstrably uses, plus whatever the project declares. Hashing everything
+diff --git a/tests/test-verification.sh b/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-verification.sh
+index 49da7ee..f510e05 100755
+--- a/tests/test-verification.sh
++++ b/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-verification.sh
+@@ -376,6 +376,7 @@ break"
+   run_rc 0 env PATH="$SANDBOX/tool-bin:$PATH" bash -c '. "$1"; vf_snapshot "$2" "$3" "$3" "$4"' _ "$SCRIPTS/verification-lib.sh" "$spec" "$repo" "$SANDBOX/tool-after"
+   [[ "$OUT" != "$changed" ]] || t_fail 'AC-020: declared executable mutation missed'
+   capture_validity_cases
++  bookkeeping_anchor_cases
+ 
+ }
+ 
+@@ -383,6 +384,164 @@ capture_check_fixture() {
+   bash -c '. "$1"; vf_capture_check "$2" "$3" "$4" "$5"' _ "$SCRIPTS/verification-lib.sh" "$@"
+ }
+ 
++declare_inputs_fixture() { # repo saved-stack path... -> stack.yml declaring exactly these inputs
++  local repo="$1" saved="$2"; shift 2
++  { sed '/^verification_inputs:/d' "$saved"; printf 'verification_inputs:\n'; printf "  - '%s'\n" "$@"; } > "$repo/.specify/stack.yml"
++}
++
++# O-013: generated bookkeeping is the VERIFIED spec's own. Another spec's gate
++# records are ordinary source -- a shipped spec's report is a fixture here
++# (AC-010), and a changed fixture must not leave an old success reusable
++# (AC-020). A declared input is hashed or refused by name, never dropped.
++bookkeeping_anchor_cases() {
++  local spec repo own sibling path base staged cap spelling declared upper n
++  spec="$(make_verification_git_dir anchor)"
++  repo="$(cd "$spec/../../.." && pwd -P)"
++  own="$(cd "$spec" && pwd -P)"; own="${own#"$repo"/}"
++  sibling="$repo/.specify/specs/999-sibling"
++  cp "$repo/.specify/stack.yml" "$SANDBOX/anchor-stack"
++  run_rc 0 snapshot_fixture "$spec" "$repo" "$SANDBOX/anchor-base"
++  base="$OUT"
++  # Both directions over all six generated shapes: the verified spec's own
++  # record is invisible, the same record of another spec is an input whether
++  # it is untracked, staged, or edited after staging.
++  for path in notes/opponent.md notes/reality-check.md notes/evidence.md \
++      notes/verification/reports/opponent-findings-x.md notes/verification/floors/FLOOR-x/meta.nul \
++      notes/captures/CAP-1-x/output.log .tasks.accept.x; do
++    mkdir -p "$(dirname "$spec/$path")" "$(dirname "$sibling/$path")"
++    printf 'record\n' > "$spec/$path"
++    run_rc 0 snapshot_fixture "$spec" "$repo" "$SANDBOX/anchor-own"
++    assert_eq "$base" "$OUT" "AC-020: the verified spec's own $path changed the identity"
++    printf 'record\n' > "$sibling/$path"
++    run_rc 0 snapshot_fixture "$spec" "$repo" "$SANDBOX/anchor-sibling"
++    [[ "$OUT" != "$base" ]] || t_fail "AC-020: another spec's untracked $path left the identity unchanged"
++    git -C "$repo" add -f -- "$sibling/$path"
++    run_rc 0 snapshot_fixture "$spec" "$repo" "$SANDBOX/anchor-sibling"
++    staged="$OUT"
++    printf 'edited\n' > "$sibling/$path"
++    run_rc 0 snapshot_fixture "$spec" "$repo" "$SANDBOX/anchor-sibling"
++    [[ "$OUT" != "$staged" ]] || t_fail "AC-020: an edit to another spec's tracked $path left the identity unchanged"
++    # Staging that edit changes the index record alone, the working file being
++    # unchanged, so this isolates the index pass's anchor.
++    staged="$OUT"
++    git -C "$repo" add -f -- "$sibling/$path"
++    run_rc 0 snapshot_fixture "$spec" "$repo" "$SANDBOX/anchor-sibling"
++    [[ "$OUT" != "$staged" ]] || t_fail "AC-020: a staged-only change to another spec's $path left the identity unchanged"
++    git -C "$repo" rm -q -f --cached -- "$sibling/$path"
++    rm -rf "$sibling" "${spec:?}/$path"
++  done
++  run_rc 0 snapshot_fixture "$spec" "$repo" "$SANDBOX/anchor-base"
++  assert_eq "$base" "$OUT" 'AC-020: the anchor fixture did not return to its baseline'
++
++  # Through a real capture: an old success stays reusable across the verified
++  # spec's own report, and not across another spec's report, findings manifest
++  # or floor record.
++  run_rc 0 "$SCRIPTS/spec-run.sh" "$spec" T001 --cwd "$repo" --from-task --no-tick --summary
++  cap="$(printf '%s' "$OUT" | sed -n 's/^capture=\([^ ]*\).*/\1/p')"
++  printf '## Round 1\n' >> "$spec/notes/opponent.md"
++  run_rc 0 snapshot_fixture "$spec" "$repo" "$SANDBOX/anchor-current"
++  run_rc 0 capture_check_fixture "$spec" "$cap" "$SANDBOX/anchor-current" reuse
++  for path in notes/opponent.md notes/verification/reports/opponent-findings-x.md notes/verification/floors/FLOOR-x/meta.nul; do
++    mkdir -p "$(dirname "$sibling/$path")"
++    printf 'record\n' > "$sibling/$path"
++    run_rc 0 snapshot_fixture "$spec" "$repo" "$SANDBOX/anchor-current"
++    run_rc 3 capture_check_fixture "$spec" "$cap" "$SANDBOX/anchor-current" reuse
++    assert_contains "$OUT" 'capture stale: current inputs changed' \
++      "AC-020: another spec's $path left an old success reusable"
++    rm -rf "$sibling"
++  done
++
++  # Declared inputs. The verified spec's own records are refused by NAME, by
++  # location rather than spelling: the record, a directory wholly inside the
++  # records, another spelling of either, and a link naming one. So is the
++  # repository root, which is already the whole-source input.
++  ln -s "../$own/notes/opponent.md" "$repo/docs/report-link"
++  for spelling in "$own/notes/opponent.md" "./$own/notes/opponent.md" "$own//notes/opponent.md" \
++      "$own/notes/verification" "$own/notes/captures/" docs/report-link; do
++    declare_inputs_fixture "$repo" "$SANDBOX/anchor-stack" "$spelling"
++    run_rc 3 snapshot_fixture "$spec" "$repo" "$SANDBOX/anchor-declared"
++    assert_contains "$OUT" "verification inputs: declared input is this spec's own generated bookkeeping: $spelling" \
++      "AC-020: declared own bookkeeping $spelling was not refused by name"
++  done
++  rm "$repo/docs/report-link"
++  for spelling in . ./; do
++    declare_inputs_fixture "$repo" "$SANDBOX/anchor-stack" "$spelling"
++    run_rc 3 snapshot_fixture "$spec" "$repo" "$SANDBOX/anchor-declared"
++    assert_contains "$OUT" "verification inputs: declared input is the repository root: $spelling" \
++      "AC-020: the declared repository root $spelling was not refused by name"
++  done
++  # `..` after a symlinked component resolves through the FILESYSTEM. Read
++  # lexically, ign/docs/l lands on the decoy; the kernel reads the spec's own
++  # report, so the declaration is refused. ign/ is ignored by git, as declared
++  # inputs usually are, so its directory link is never enumerated.
++  printf 'ign/\n' >> "$repo/.gitignore"
++  mkdir -p "$repo/ign/docs" "$repo/ign/notes"
++  ln -s "../$own/notes" "$repo/ign/sub"
++  ln -s ../sub/../notes/opponent.md "$repo/ign/docs/l"
++  printf 'decoy\n' > "$repo/ign/notes/opponent.md"
++  assert_eq "$(cat "$spec/notes/opponent.md")" "$(cat "$repo/ign/docs/l")" 'fixture: the link must reach the own report'
++  declare_inputs_fixture "$repo" "$SANDBOX/anchor-stack" ign/docs/l
++  run_rc 3 snapshot_fixture "$spec" "$repo" "$SANDBOX/anchor-declared"
++  assert_contains "$OUT" "verification inputs: declared input is this spec's own generated bookkeeping: ign/docs/l" \
++    'AC-020: a link reaching the own report through a symlinked parent and .. was not refused'
++  # A declared symlink loop terminates, recorded as a link with no target.
++  ln -s loop "$repo/ign/loop"
++  declare_inputs_fixture "$repo" "$SANDBOX/anchor-stack" ign/loop
++  run_rc 0 snapshot_fixture "$spec" "$repo" "$SANDBOX/anchor-declared"
++  rm -rf "$repo/ign"
++  # Where the filesystem folds case -- the other spelling then EXISTS -- another
++  # case names the same record. The refusal folds, and a spec path typed in
++  # another case keeps its own records out of its identity. Where the
++  # filesystem does not fold, those spellings name nothing and are not tried.
++  if [[ -e "$repo/$own/notes/OPPONENT.md" ]]; then
++    for spelling in "$own/notes/OPPONENT.md" "$(printf '%s' "$own" | tr '[:lower:]' '[:upper:]')/notes/opponent.md"; do
++      declare_inputs_fixture "$repo" "$SANDBOX/anchor-stack" "$spelling"
++      run_rc 3 snapshot_fixture "$spec" "$repo" "$SANDBOX/anchor-declared"
++      assert_contains "$OUT" "verification inputs: declared input is this spec's own generated bookkeeping: $spelling" \
++        "AC-020: declared own bookkeeping $spelling was not refused on a case-folding filesystem"
++    done
++    cp "$SANDBOX/anchor-stack" "$repo/.specify/stack.yml"
++    upper="$(dirname "$spec")/$(basename "$spec" | tr '[:lower:]' '[:upper:]')"
++    run_rc 0 snapshot_fixture "$upper" "$repo" "$SANDBOX/anchor-upper"
++    staged="$OUT"
++    mkdir -p "$spec/notes/captures/CAP-3-z"; printf 'log\n' > "$spec/notes/captures/CAP-3-z/output.log"
++    run_rc 0 snapshot_fixture "$upper" "$repo" "$SANDBOX/anchor-upper"
++    assert_eq "$staged" "$OUT" "AC-020: a spec path typed in another case leaked the spec's own records into its identity"
++  fi
++  # Another spec's report, declared while git ignores it, is hashed: a record
++  # names it and an edit moves the identity. Before O-013 this was dropped.
++  declared='.specify/specs/999-sibling/notes/opponent.md'
++  mkdir -p "$sibling/notes"; printf 'report\n' > "$repo/$declared"
++  printf '.specify/specs/999-sibling/\n' >> "$repo/.gitignore"
++  declare_inputs_fixture "$repo" "$SANDBOX/anchor-stack" "$declared"
++  run_rc 0 snapshot_fixture "$spec" "$repo" "$SANDBOX/anchor-declared"
++  staged="$OUT"
++  assert_eq 1 "$(tr '\0' '\n' < "$SANDBOX/anchor-declared" | grep -c -F -x "$declared")" \
++    "AC-020: the declared report of another spec has no identity record"
++  printf 'edited\n' > "$repo/$declared"
++  run_rc 0 snapshot_fixture "$spec" "$repo" "$SANDBOX/anchor-declared"
++  [[ "$OUT" != "$staged" ]] || t_fail 'AC-020: an edit to a declared input was dropped'
++  # A declared directory CONTAINING the records skips them by the enumeration's
++  # rule, neither hashed nor counted, so a capture still sees stable inputs.
++  # Members are enumerated from the directory's canonical location, so every
++  # spelling of the declaration skips the same records.
++  n=0
++  for spelling in .specify ./.specify .specify/; do
++    n=$((n+1))
++    declare_inputs_fixture "$repo" "$SANDBOX/anchor-stack" "$spelling"
++    run_rc 0 snapshot_fixture "$spec" "$repo" "$SANDBOX/anchor-declared"
++    staged="$OUT"
++    mkdir -p "$spec/notes/captures/CAP-2$n-y"; printf 'log\n' > "$spec/notes/captures/CAP-2$n-y/output.log"
++    run_rc 0 snapshot_fixture "$spec" "$repo" "$SANDBOX/anchor-declared"
++    assert_eq "$staged" "$OUT" "AC-020: the verified spec's own records were counted inside declared directory $spelling"
++  done
++  run_rc 0 "$SCRIPTS/spec-run.sh" "$spec" T001 --cwd "$repo" --from-task --no-tick --summary
++  cap="$(printf '%s' "$OUT" | sed -n 's/^capture=\([^ ]*\).*/\1/p')"
++  run_rc 0 snapshot_fixture "$spec" "$repo" "$SANDBOX/anchor-current"
++  run_rc 0 capture_check_fixture "$spec" "$cap" "$SANDBOX/anchor-current" current
++  cp "$SANDBOX/anchor-stack" "$repo/.specify/stack.yml"
++}
++
+ capture_validity_cases() {
+   local spec repo cap later before file
+   spec="$(make_verification_git_dir validity)"
+diff --git a/tests/test-gate-contracts.sh b/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-gate-contracts.sh
+index 27ca7ca..409b3b4 100644
+--- a/tests/test-gate-contracts.sh
++++ b/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-gate-contracts.sh
+@@ -16,13 +16,19 @@
+ #
+ # SCOPE is taken from the enumeration the input manifest itself uses --
+ # `git ls-files --cached --others --exclude-standard` filtered through
+-# `vf_bookkeeping_path` (scripts/verification-lib.sh:1320, the same predicate
+-# vf_snapshot applies at :1376 and :1383) -- rather than restated as a find(1)
+-# filter. The guard set is then the manifest set BY CONSTRUCTION and cannot
+-# drift when a new extension appears or a directory is named `captures`
+-# somewhere the anchored bookkeeping path does not cover. STATUS.md is the one
+-# subtraction: its Decisions log is an append-only record of what was true when
+-# each entry was written.
++# `vf_bookkeeping_path`, the same predicate vf_snapshot applies -- rather than
++# restated as a find(1) filter, so it cannot drift when a new extension appears
++# or a directory is named `captures` somewhere the anchored bookkeeping path
++# does not cover. That predicate excludes only the VERIFIED spec's generated
++# records, and the scan anchors each path to the spec that CONTAINS it: a
++# spec's generated gate records are historical copies whichever spec is being
++# verified, while another spec's non-generated notes stay in scope. Measured
++# 2026-09-23: anchored to 003 alone the live scan is clean, but with no anchor
++# it reports 29 claims, all quotations inside 003's own sealed records -- and
++# those records are ordinary source in every LATER spec's manifest, so a scope
++# equal to one verified spec's manifest would fail the next spec on history.
++# STATUS.md is the one further subtraction: its Decisions log is an
++# append-only record of what was true when each entry was written.
+ #
+ # The NEEDLE matches the PROPOSITION. Each candidate is normalized to a single
+ # whitespace-collapsed stream with backticks and asterisks stripped, so a hard
+@@ -34,12 +40,14 @@
+ # dropped", "are no longer hashed", "No name is hashed because ...") state the
+ # CURRENT rule and are exactly what the replacement text says.
+ superseded_environment_scan() ( # root -> one line per surviving claim
+-  local root="$1" path
++  local root="$1" path own
+   . "$SCRIPTS/lib.sh"
+   . "$SCRIPTS/verification-lib.sh"
+   cd "$root" || return 1
+   git ls-files --cached --others --exclude-standard 2>/dev/null | while IFS= read -r path; do
+-    vf_bookkeeping_path "$path" && continue
++    own=''
++    case "$path" in .specify/specs/*/*) own="${path#.specify/specs/}"; own=".specify/specs/${own%%/*}";; esac
++    vf_bookkeeping_path "$path" "$own" && continue
+     case "$path" in STATUS.md|*/STATUS.md) continue;; esac
+     [[ -f "$path" ]] || continue
+     LC_ALL=C awk -v path="$path" '
+@@ -156,11 +164,21 @@ superseded_environment_cases() {
+   printf 'The snapshot %s %s and %s.\n' "$v_inc" "$n_path" "$n_tmp" \
+     > "$tree/.specify/specs/003-x/notes/captures/sealed.md"
+   printf 'The snapshot %s %s and %s.\n' "$v_inc" "$n_path" "$n_tmp" > "$tree/STATUS.md"
++  # O-013: each path is anchored to the spec that contains it, so ANOTHER
++  # spec's generated gate record is a historical copy as well, while that
++  # spec's other notes are current text and stay in scope.
++  mkdir -p "$tree/.specify/specs/004-y/notes"
++  printf 'The snapshot %s %s and %s.\n' "$v_inc" "$n_path" "$n_tmp" > "$tree/.specify/specs/004-y/notes/opponent.md"
++  printf 'The snapshot %s %s and %s.\n' "$v_inc" "$n_path" "$n_tmp" > "$tree/.specify/specs/004-y/notes/history.md"
+   reported="$(superseded_environment_scan "$tree")"
+   assert_not_contains "$reported" 'notes/captures/sealed.md' \
+     'AC-018: a sealed bookkeeping copy was treated as a current claim'
+   assert_not_contains "$reported" 'STATUS.md' \
+     'AC-018: the append-only Decisions log was treated as a current claim'
++  assert_not_contains "$reported" '004-y/notes/opponent.md' \
++    "AC-018: another spec's sealed gate record was treated as a current claim"
++  assert_contains "$reported" '004-y/notes/history.md' \
++    "AC-018: another spec's current notes escaped the superseded-rule scan"
+ 
+   # The over-correction control, and the reason it is needed: a normalizing,
+   # order-free matcher sees the same names in the sentences that state the
+@@ -535,6 +553,28 @@ report_severity_tier_cases() {
+     "$SCRIPTS/verification-lib.sh" "$report" "$SANDBOX/tier-manifest.nul" "$spec"
+   assert_contains "$OUT" 'clearing verdict rests on 1 lowered severity tier(s) of known findings' \
+     'AC-012: round observation weakened the strictest manifest tier'
++
++  # O-014: the metric is the guard's own computation, so the manifest seed the
++  # guard judged against is in the count too. The same observation a CLEARED
++  # round may not rest on is legal under CHALLENGED, and still counted.
++  tier_round_fixture 1 '' G-042:tier-binding:reopened:minor G-043:tier-binding:new:wrong-result > "$report"
++  run_rc 0 bash "$SCRIPTS/spec-gate.sh" tally "$spec"
++  assert_contains "$OUT" 'severity-downgrades=1' \
++    'AC-017: the tally missed a lowered tier the guard counted from a prior-review manifest'
++
++  # Per gate by construction. The same ID recorded open at a blocking tier by
++  # one gate -- in a manifest and in a round -- is no history for the other
++  # gate, so neither an ID-only fold nor a manifest read across gates counts it.
++  spec="$SANDBOX/tier-cross"; mkdir -p "$spec/notes/verification/reports"
++  printf '### Finding G-042\n- **Class:** tier-binding\n- **Severity:** wrong-result\n' \
++    > "$spec/notes/verification/reports/opponent-findings-cross.md"
++  finding_round_fixture opponent 1 G-042 tier-binding open none > "$spec/notes/opponent.md"
++  finding_round_fixture reality-check 1 G-042 tier-binding open none \
++    | sed 's/^- \*\*Severity:\*\* data-loss$/- **Severity:** degraded/' > "$spec/notes/reality-check.md"
++  assert_eq 1 "$(grep -c -x -F -- '- **Severity:** degraded' "$spec/notes/reality-check.md")" 'fixture: reality-check tier'
++  run_rc 0 bash "$SCRIPTS/spec-gate.sh" tally "$spec"
++  assert_contains "$OUT" 'severity-downgrades=0' \
++    'AC-017: one gate lowered the tier of the same finding ID recorded by the other gate'
+ }
+ 
+ report_duplicate_totals_cases() {
+@@ -1365,6 +1405,17 @@ gate_dispatch_grammar_cases() {
+   # Equivalent spellings of documented clauses must continue to pass.
+   sed -E 's/^  ([a-z-]+)\)/\t(\1)/' "$SCRIPTS/spec-gate.sh" > "$cli"
+   run_rc 0 gate_documentation_check "$cli" "$KIT_DIR/README.md"
++  # Two clauses on one line are two verbs to bash, and the second really
++  # executes. The body check must refuse the line: without it the reader
++  # classifies only `probe` and the second verb silently leaves the
++  # documentation obligation (round 9, Held up).
++  awk -v clause='  probe) :;; probe3) echo probe3; exit 0;;' '/^  \*\)/ {print clause} {print}' \
++    "$SCRIPTS/spec-gate.sh" > "$cli"
++  run_rc 0 bash "$cli" probe3 "$kit/spec"
++  assert_contains "$OUT" 'probe3' 'AC-018: the two-clause fixture line is not a second executable verb'
++  run_rc 3 gate_dispatch_verbs "$cli"
++  assert_contains "$OUT" 'AC-018: unclassifiable spec-gate.sh dispatcher clause' \
++    'AC-018: a clause line hiding a second verb was classified'
+   # Patterns outside the finite literal subset must be diagnosed, not dropped.
+   for clause in '  probe*) :;;' '  "probe") :;;' '  [pq]robe) :;;' '  $verb) :;;' '  probe) : ;&' '  probe)'; do
+     awk -v clause="$clause" '/^  \*\)/ {print clause} {print}' "$SCRIPTS/spec-gate.sh" > "$cli"
+diff --git a/templates/verification-contract.md b/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/templates/verification-contract.md
+index 4595bac..5febc23 100644
+--- a/templates/verification-contract.md
++++ b/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/templates/verification-contract.md
+@@ -130,7 +130,13 @@ planning defers stage membership until real task decomposition exists. Missing
+ legacy configuration warns and cannot automatically clear a floor.
+ reuse_checks opts exact command strings into local reuse; it does not replace
+ gate_checks. Declare all relevant resolved tools and otherwise ignored input
+-paths. Unknown, external or time-dependent inputs forbid reuse in version 1.
++paths. A declared input whose physical location is the verified spec's own
++generated bookkeeping, or the repository root, is refused by name. Location
++resolves links, `.`/`..` segments and repeated slashes through the filesystem,
++and folds letter case where the repository's filesystem does
++(`core.ignorecase`). Inside a declared directory those records are skipped,
++never counted; a link member is hashed through its target like any other link.
++Unknown, external or time-dependent inputs forbid reuse in version 1.
+ `verification_environment` lists relevant exported variable names using shell
+ identifier syntax (`[A-Za-z_][A-Za-z0-9_]*`), with no values or expansions.
+ The snapshot environment set is exactly this declaration. Declare every
+@@ -155,7 +161,11 @@ checkpoint validation still refresh stale captures.
+ Presence is not freshness: current proof requires complete log/metadata digests,
+ before/after source and input identity, exact command/shell/cwd, declared tools
+ and hashed environment. Whole-source changes invalidate potentially affected
+-proof; only narrowly documented generated bookkeeping is excluded. Gates reuse
++proof; only the verified spec's own generated bookkeeping is excluded (its
++`.tasks.accept.*`, `notes/captures/`, `notes/verification/`,
++`notes/evidence.md`, `notes/opponent.md` and `notes/reality-check.md`).
++Another spec's copies of those paths are ordinary inputs: a shipped spec's gate
++report can be a test fixture, and a changed fixture invalidates reuse. Gates reuse
+ valid execution, never automatic semantic PASS, and may attack covered or
+ previously unexamined unchanged surfaces.
+ 
+diff --git a/.specify/specs/003-gate-round-reduction-and-token-discipline/plan.md b/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/plan.md
+index 1df61f6..8a25d63 100644
+--- a/.specify/specs/003-gate-round-reduction-and-token-discipline/plan.md
++++ b/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/plan.md
+@@ -176,7 +176,10 @@ Identity rules (REQ-009, AC-013, AC-020):
+ 3. Hash semantic spec/plan/tasks content, including AC text, decisions, Verify,
+    kinds, bindings and integration owners. Exclude only documented bookkeeping:
+    checkbox state, generated Evidence fields, status/updated fields and the
+-   explicitly generated capture/report/ledger paths. STATUS Decisions remain
++   verified spec's OWN explicitly generated capture/report/ledger paths.
++   Another spec's copies of those paths are ordinary inputs (a shipped report
++   is a fixture), and a declared input reaching the verified spec's own
++   generated paths is refused by name. STATUS Decisions remain
+    inputs. Do not exclude all Markdown, .specify, notes or ignored files.
+ 4. Snapshot a declared environment set as hashes (never persist raw secrets).
+    Membership is EXACTLY the project's `verification_environment` list of shell
+diff --git a/.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md b/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md
+index e886f8d..2d198a1 100644
+--- a/.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md
++++ b/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md
+@@ -691,6 +691,26 @@ keeps each edit task to at most five files instead of combining unrelated work.
+   - *Notes:* Owns round-8 O-002 documentation discovery only. This is a fail-closed static subset, not a general Bash parser. No authorization, floor or gate round is part of this task.
+   - *Evidence:* CAP-366-H7QjI6 verified by spec-gate accept; return sha256:fe2790a493c4a398808da47ecc0cd432ac33a51f766171121b8d6c29936b566a
+ 
++- [ ] **T030o39** [hard] — Anchor generated bookkeeping to the verified spec and refuse bookkeeping declared as an input
++  - *Files:* `scripts/verification-lib.sh`, `templates/verification-contract.md`, `tests/test-verification.sh`, `tests/test-gate-contracts.sh`, `.specify/specs/003-gate-round-reduction-and-token-discipline/plan.md`
++  - *Acceptance:* Derive the excluded set from the 2026-09-23 Decisions reading of REQ-009: generated bookkeeping is the six path shapes (`.tasks.accept.*`, `notes/captures/`, `notes/verification/`, `notes/evidence.md`, `notes/opponent.md`, `notes/reality-check.md`) of the VERIFIED spec only, anchored to its repo-relative directory when that is `.specify/specs/<name>` inside the snapshotted repository, and otherwise empty so nothing is excluded. Every consumer takes the anchor from the spec whose capture or floor it computes: the index pass, the path pass and the declared-input pass of `vf_snapshot`, and `vf_path_record`. A `verification_inputs:` path inside that bookkeeping, exactly or as a declared directory wholly within it, is refused by name at exit 3 and never skipped silently; a declared directory's members that are the verified spec's own bookkeeping are skipped by the enumeration's rule. Location is physical and canonical: links and `..` resolve through the filesystem, directory components and the anchor itself are spelled as git reports them, letter case folds where `core.ignorecase` says the filesystem folds, and a declared repository root is refused by name too. The O-010 scan applies the same predicate with each path anchored to the spec that contains it. Negatives in both directions, through a real capture: editing or adding another spec's gate report, findings manifest, capture or floor record changes the identity and makes `reuse` refuse with `capture stale: current inputs changed`, while the same edit to the verified spec's own records does not. Plan §3.2 step 3 and `templates/verification-contract.md` state the anchored rule and the refusal.
++  - *Verify kind:* test
++  - *Tests:* `tests/test-verification.sh::test_capture_provenance`, `tests/test-gate-contracts.sh::test_instruction_contracts`
++  - *Verify:* `bash tests/test-verification.sh && bash tests/test-gate-contracts.sh` → all suites `passed`, exit 0
++  - *Reuse:* local
++  - *Refs:* REQ-009, AC-018, AC-020, FM-010, FM-014, FM-019, INV-001, INV-006, plan §3.2, §4.2
++  - *Notes:* Owns round-9 O-013. The anchoring reading is the user's 2026-09-23 Decisions entry, not a spec revision. The reviewer's proposed scan scope was measured and replaced by per-path anchoring (Decisions, 2026-09-23). No gate round, floor or hosted-CI run is part of this task.
++
++- [ ] **T030o40** — Make the severity-downgrade metric the guard's own computation and kill the two unisolated guards
++  - *Files:* `scripts/verification-lib.sh`, `tests/test-gate-contracts.sh`
++  - *Acceptance:* Derive the metric from the guard it measures (REQ-011, MET-002). `vf_reports` evaluates the lowered-tier predicate once per finding observation against the history its manifest and round writers share; `flush()` refuses a CLEARED verdict that rests on it; each counted observation is emitted as a `downgrade` catalog record that `vf_tally` counts per gate, and no second fold remains in `vf_tally`. A declared manifest tier followed by a lower non-resolved round tier yields `severity-downgrades=1`. The same ID on the other gate yields 0, and no manifest crosses gates. Every existing tier fixture keeps its count, and on the real record 003 reports 5 and 002 reports 0. The dispatcher reader refuses a clause line whose body holds a second clause, such as `  probe) :;; probe3) echo probe3; exit 0;;`, which bash executes as two verbs, with the named AC-018 diagnostic, so deleting that refusal fails a fixture.
++  - *Verify kind:* test
++  - *Tests:* `tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-gate-contracts.sh::test_instruction_contracts`
++  - *Verify:* `bash tests/test-verification.sh && bash tests/test-gate-contracts.sh` → all suites `passed`, exit 0
++  - *Reuse:* local
++  - *Refs:* REQ-011, REQ-015, AC-012, AC-017, AC-018, FM-019, INV-006, plan §3.3, §4.3
++  - *Notes:* Owns round-9 O-014 and both Held-up isolation gaps. Shares T030o39's Verify command so one capture on unchanged source can serve both acceptances. No gate round, floor or hosted-CI run is part of this task.
++
+ ## API
+ 
+ - [x] **T025** [hard] — Wire every invoker to deterministic acceptance

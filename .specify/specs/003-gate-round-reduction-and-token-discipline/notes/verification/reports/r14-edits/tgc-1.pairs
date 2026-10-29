@@ -1,0 +1,239 @@
+@@OLD
+  # does not open, a fence, a block quote, a comment, a script block), and a
+  # Severity item that holds more than its line.
+  while IFS='|' read -r tag body want; do
+    printf '# Prior review\n\n%b' "$body" > "$spec/notes/verification/reports/opponent-findings-review.md"
+@@NEW
+  # does not open, a fence, a block quote, a comment, a script block), and a
+  # Severity item that holds more than its line. Round 14's members follow
+  # (O-018 reopened): a second tier behind brackets that nest (a linked image,
+  # an image with an escaped bracket in its alt text), behind a construct that
+  # spans lines (a tag, a title, link text, alt text, a processing instruction,
+  # a CDATA section, a block-level tag, a comment, a block-quoted tag), inside
+  # a word emphasis splits, and inside a word an invisible character splits;
+  # and a condition-7 tag line after a field line, which continues its item
+  # (O-021's refusal twin).
+  while IFS='|' read -r tag body want; do
+    printf '# Prior review\n\n%b' "$body" > "$spec/notes/verification/reports/opponent-findings-review.md"
+@@END
+@@OLD
+value-details|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n<details>\nx\n</details>\n|a Severity field whose list item holds more than its line in finding G-042: <details>
+@@NEW
+value-span-twin|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n<span>\nx\n</span>\n|a Severity field whose list item holds more than its line in finding G-042: <span>
+@@END
+@@OLD
+value-tab-paragraph|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n\tdata-loss\n|a Severity field whose list item holds more than its line in finding G-042
+ROWS
+@@NEW
+value-tab-paragraph|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n\tdata-loss\n|a Severity field whose list item holds more than its line in finding G-042
+nested-badge|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- [![badge](y.png)](z)Severity: data-loss\n|a second Severity line in finding G-042: - [![badge](y.png)](z)Severity: data-loss
+nested-badge-empty-alt|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- [![](y)](z)Severity: data-loss\n|a second Severity line in finding G-042: - [![](y)](z)Severity: data-loss
+nested-brackets|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- [[]](x)Severity: data-loss\n|a second Severity line in finding G-042: - [[]](x)Severity: data-loss
+escaped-bracket-alt|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- ![a\\]b](y)Severity: data-loss\n|a second Severity line in finding G-042: - ![a\]b](y)Severity: data-loss
+wrapped-abbr-title|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- <abbr title="the tier this\nfinding carries">Severity:</abbr> data-loss\n|a second Severity line in finding G-042: finding carries">Severity:</abbr> data-loss
+split-tag|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- <b\ntitle="x">Severity: data-loss</b>\n|a second Severity line in finding G-042: title="x">Severity: data-loss</b>
+empty-link-across|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- [\n](x)Severity: data-loss\n|a second Severity line in finding G-042: ](x)Severity: data-loss
+link-title-across|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- [](x\n"t")Severity: data-loss\n|a second Severity line in finding G-042: "t")Severity: data-loss
+image-alt-across|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- ![ba\ndge](y)Severity: data-loss\n|a second Severity line in finding G-042: dge](y)Severity: data-loss
+pi-across|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- <?x\ny?>Severity: data-loss\n|a second Severity line in finding G-042: y?>Severity: data-loss
+cdata-across|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- <![CDATA[x\ny]]>Severity: data-loss\n|a second Severity line in finding G-042: y]]>Severity: data-loss
+div-block-across|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n<div\ntitle="x">Severity: data-loss</div>\n|a second Severity line in finding G-042: title="x">Severity: data-loss</div>
+intraword-emphasis|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- S*everity:* data-loss\n|a second Severity line in finding G-042: - S*everity:* data-loss
+intraword-strong|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- **Sev**erity: data-loss\n|a second Severity line in finding G-042: - **Sev**erity: data-loss
+zero-width-space|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- Sev\342\200\213erity: data-loss\n|a second Severity line in finding G-042
+soft-hyphen|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- Sev\302\255erity: data-loss\n|a second Severity line in finding G-042
+named-soft-hyphen|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- Sev&shy;erity: data-loss\n|a second Severity line in finding G-042: - Sev&shy;erity: data-loss
+numeric-soft-hyphen|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- Sev&#173;erity: data-loss\n|a second Severity line in finding G-042: - Sev&#173;erity: data-loss
+named-zero-width|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- Se&ZeroWidthSpace;verity: data-loss\n|a second Severity line in finding G-042: - Se&ZeroWidthSpace;verity: data-loss
+comment-across-quoted|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- <!-- a\nb --> Severity: data-loss\n|quoted content carries a Severity line: b --> Severity: data-loss
+blockquoted-tag-split|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n> - <b\n> title="x">Severity: data-loss</b>\n|quoted content carries a Severity line: > title="x">Severity: data-loss</b>
+checkbox-then-tag|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- [x] <b>Severity:</b> data-loss\n|a second Severity line in finding G-042: - [x] <b>Severity:</b> data-loss
+ROWS
+@@END
+@@OLD
+summary-with-subsection|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n\n## Summary\n\n#### Details\n\n- Severity: all blocking\n
+SHAPES
+@@NEW
+summary-with-subsection|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n\n## Summary\n\n#### Details\n\n- Severity: all blocking\n
+severity-then-div|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n<div>\nnote\n</div>\n
+severity-then-details|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n<details>\nx\n</details>\n
+severity-then-closing-tag|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n</details>\n
+severity-then-four-backtick-fence|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n````text\nplain output\n````\n
+link-prose|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n- See [the report](x) for the tier.\n
+linked-image-prose|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n- [![badge](y.png)](z) shows the build state.\n
+wrapped-prose|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n- A note that wraps\nonto the next line, then says Severity: as noted.\n
+wrapped-link-text|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n- [a link whose text\nwraps](x) and more.\n
+intraword-prose|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n- The c*a*se of one word.\n
+blockquote-prose|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n\n> A quoted\n> remark about the Severity of it.\n
+wrapped-tag-prose|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n- <abbr title="a long\ntitle">API</abbr> severity is unchanged.\n
+fenced-tag-example|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n\n```\n<b\ntitle="x">Severity: data-loss</b>\n```\n
+heading-then-attribute-line|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n\n#### <abbr\ntitle="t">Severity: data-loss</abbr>\n
+SHAPES
+@@END
+@@OLD
+value-tab-paragraph|- **Severity:** minor\n\n\tdata-loss|a Severity field whose list item holds more than its line in finding G-050
+ROWS
+@@NEW
+value-tab-paragraph|- **Severity:** minor\n\n\tdata-loss|a Severity field whose list item holds more than its line in finding G-050
+value-span-twin|- **Severity:** minor\n<span>\nx\n</span>\n|a Severity field whose list item holds more than its line in finding G-050
+nested-badge|- **Severity:** minor\n- [![badge](y.png)](z)Severity: data-loss|a Severity line this grammar cannot read in finding G-050
+nested-brackets|- **Severity:** minor\n- [[]](x)Severity: data-loss|a Severity line this grammar cannot read in finding G-050
+wrapped-abbr-title|- **Severity:** minor\n- <abbr title="the tier this\nfinding carries">Severity:</abbr> data-loss|a Severity line this grammar cannot read in finding G-050
+split-tag|- **Severity:** minor\n- <b\ntitle="x">Severity: data-loss</b>|a Severity line this grammar cannot read in finding G-050
+link-title-across|- **Severity:** minor\n- [](x\n"t")Severity: data-loss|a Severity line this grammar cannot read in finding G-050
+pi-across|- **Severity:** minor\n- <?x\ny?>Severity: data-loss|a Severity line this grammar cannot read in finding G-050
+div-block-across|- **Severity:** minor\n\n<div\ntitle="x">Severity: data-loss</div>\n|a Severity line this grammar cannot read in finding G-050
+intraword-emphasis|- **Severity:** minor\n- S*everity:* data-loss|a Severity line this grammar cannot read in finding G-050
+zero-width-space|- **Severity:** minor\n- Sev\342\200\213erity: data-loss|a Severity line this grammar cannot read in finding G-050
+named-soft-hyphen|- **Severity:** minor\n- Sev&shy;erity: data-loss|a Severity line this grammar cannot read in finding G-050
+comment-across-quoted|- **Severity:** minor\n- <!-- a\nb --> Severity: data-loss|quoted content carries a Severity line
+blockquoted-tag-split|- **Severity:** minor\n> - <b\n> title="x">Severity: data-loss</b>|quoted content carries a Severity line
+ROWS
+  # A field line followed directly by a block a renderer starts there holds
+  # its item alone (round 14, O-021): every HTML block but the seventh kind,
+  # condition 6's block-level tags included, and a fence of three or more
+  # backticks may interrupt the field's paragraph, so the round parses.
+  while IFS='|' read -r tag sevs; do
+    record_round 1 CHALLENGED 1 0 '### Finding G-050' dup-binding new "$sevs" > "$report"
+    for l in C en_US.UTF-8; do
+      run_rc 0 record_line_vf "$l" "$report" "$spec"
+      assert_not_contains "$OUT" 'report recovery' "AC-012: a Severity line followed by a $tag was refused under LANG=$l (O-021)"
+    done
+  done <<'ROWS'
+div-block|- **Severity:** data-loss\n<div>\nnote\n</div>\n
+details-block|- **Severity:** data-loss\n<details>\nx\n</details>\n
+closing-tag|- **Severity:** data-loss\n</details>\n
+four-backtick-fence|- **Severity:** data-loss\n````text\nplain output\n````\n
+ROWS
+@@END
+@@OLD
+a-findings-word|### Finding G-042|#### Findings-2026 carried over\nThe word continues past Finding, so this is a section.\n
+ROWS
+@@NEW
+a-findings-word|### Finding G-042|#### Findings-2026 carried over\nThe word continues past Finding, so this is a section.\n
+a-link-prose|### Finding G-042|  - See [the report](x) for the tier.\n
+a-linked-image-prose|### Finding G-042|  - [![badge](y.png)](z) shows the build state.\n
+a-wrapped-prose|### Finding G-042|  - A note that wraps\n    onto the next line, then says Severity: as noted.\n
+a-wrapped-link-text|### Finding G-042|  - [a link whose text\n    wraps](x) and more.\n
+a-intraword-prose|### Finding G-042|  - The c*a*se of one word.\n
+a-wrapped-tag-prose|### Finding G-042|  - <abbr title="a long\n    title">API</abbr> severity is unchanged.\n
+a-wrapped-scenario|### Finding G-042|  that wraps onto a second line, with the Severity it had\n
+a-fenced-tag-example|### Finding G-042|\n```\n<b\ntitle="x">Severity: data-loss</b>\n```\n\n
+a-heading-then-attribute-line|### Finding G-042|#### <abbr\ntitle="t">Severity: data-loss</abbr>\n
+ROWS
+@@END
+@@OLD
+test_reports_and_tally() {
+  report_manifest_locale_cases
+  report_record_line_cases
+@@NEW
+# AC-012/FM-019/INV-006 — O-020 (round 14, T030o45). A round's style decides
+# which rules judge its lines, and its own text sets it: the round heading makes
+# it canonical, a report title read before its Round and Timestamp lines makes
+# it legacy, and a Timestamp line makes it canonical. A title and a late
+# Timestamp let every line between be judged by the legacy rules, the count
+# included, while the round sealed as canonical. The style is decided before the
+# round has a body, and either switch after it is refused by name.
+# style_finding <heading> <class> <status> <severity lines through printf %b>
+style_finding() {
+  printf '%s\n- **Class:** %s\n- **Status:** %s\n- **Prior:** none\n%b\n' "$1" "$2" "$3" "$4"
+  printf -- '- **Scenario:** a recorded trigger\n- **Where:** scripts/run.sh:9\n- **Reproduced:** concrete trigger at that site\n'
+  printf -- '- **Root cause:** implementation-error\n- **Blocks:** AC-012\n- **Wrong behavior:** observed versus required\n'
+  printf -- '- **Class-wide fix:** read or refuse every record line\n'
+}
+# style_round <mode> <n> <verdict> <blocking> <minor> <findings>: title (the title under the round heading),
+# notitle (the same round without it), titlefirst (the title opens the round), titlelate (the title after the
+# What-I-attacked section), each with its Timestamp after the Held-up section; titleearly, the Timestamp
+# right after the Round line.
+style_round() {
+  local mode="$1" n="$2"
+  [[ "$mode" == titlefirst ]] || printf '## Round %s\n' "$n"
+  [[ "$mode" != titlelate ]] || printf '### What I attacked\nFinding records read by both readers.\n'
+  [[ "$mode" == notitle ]] || printf '# Opponent review — fixture\n'
+  printf '**Round:** %s\n' "$n"
+  [[ "$mode" != titleearly ]] || printf '**Timestamp:** 2026-09-06T12:00:0%sZ\n' "$n"
+  printf '**Source:** aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\n**Floor:** FLOOR-fixture\n'
+  printf '**Verdict:** %s\n**Blocking:** %s · **Minor:** %s\n' "$3" "$4" "$5"
+  [[ "$mode" == titlelate ]] || printf '### What I attacked\nFinding records read by both readers.\n'
+  printf '%s### Held up / follow-up tasks\nFixture disposition recorded.\n' "$6"
+  [[ "$mode" == titleearly ]] || printf '**Timestamp:** 2026-09-06T12:00:0%sZ\n' "$n"
+  printf '<!-- gate-round-end: opponent:%s -->\n' "$n"
+}
+
+report_round_style_cases() {
+  local spec report l tag want mode g99 g100 r1 ts ti
+  ts='a Timestamp line after the body of a round its title made legacy'
+  ti='a report title after the body of a canonical round'
+  spec="$SANDBOX/round-style"; report="$spec/notes/opponent.md"; mkdir -p "$spec/notes"
+  g99="$(style_finding '### Finding G-099' silent-loss new '- **Severity:** data-loss')"$'\n'
+  g100="$(style_finding '### Finding G-100' minor-slip new '- **Severity:** minor')"$'\n'
+  r1="$(record_round 1 CHALLENGED 1 0 '### Finding G-042' tier-binding new '- **Severity:** data-loss')"
+  # Under a title and a late Timestamp each is refused by name; the same round
+  # without its title keeps its own refusal, which is what the title switched off.
+  while IFS='|' read -r tag want; do
+    for mode in title notitle; do
+      case "$tag" in
+        uncounted-blocking) style_round "$mode" 1 CLEARED 0 1 "$g99$g100";;
+        resolved-open) printf '%s\n\n' "$r1"; style_round "$mode" 2 CLEARED 0 1 "$(style_finding '### Finding G-042' tier-binding resolved '- **Severity:** data-loss')"$'\n'"$g100";;
+        invented-resolution) style_round "$mode" 1 CLEARED 0 1 "$(style_finding '### Finding G-077' tier-binding resolved '- **Severity:** data-loss')"$'\n'"$g100";;
+        unknown-severity) style_round "$mode" 1 CLEARED 0 1 "$(style_finding '### Finding G-098' tier-binding new '- **Severity:** catastrophic')"$'\n'"$g100";;
+        behind-html) style_round "$mode" 1 CLEARED 0 1 "$(style_finding '### Finding G-050' dup-binding new '- **Severity:** minor\n- <b>Severity:</b> data-loss')"$'\n'"$g100";;
+        empty-comment) style_round "$mode" 1 CLEARED 0 1 "$(style_finding '### Finding G-050' dup-binding new '- **Severity:** minor\n\n<!-->\n\n- **Severity:** data-loss\n\nThe tier above. -->')"$'\n'"$g100";;
+        level-four-heading) printf '%s\n\n' "$r1"; style_round "$mode" 2 CLEARED 0 0 "$(style_finding '#### Finding G-042' tier-binding open '- **Severity:** minor')"$'\n';;
+      esac > "$report"
+      for l in C en_US.UTF-8; do
+        run_rc 3 record_line_vf "$l" "$report" "$spec"
+        if [[ "$mode" == title ]]; then
+          assert_contains "$OUT" "$ts" "AC-012: a title and a late Timestamp let a round with $tag seal under LANG=$l (O-020)"
+        else
+          assert_contains "$OUT" "$want" "AC-012: the round with $tag lost its own refusal without the title under LANG=$l (O-020)"
+        fi
+      done
+    done
+  done <<'ROWS'
+uncounted-blocking|finding totals disagree
+resolved-open|clearing verdict rests on resolved findings this gate recorded open: G-042
+invented-resolution|resolved finding G-077 has no earlier round of this gate and no declared prior-review record
+unknown-severity|unknown severity
+behind-html|a Severity line this grammar cannot read in finding G-050
+empty-comment|quoted content carries a Severity line
+level-four-heading|a Finding heading this grammar cannot read
+ROWS
+  # A round the title opens has the same switch, and so has a title placed
+  # after the round has a body, each refused by name.
+  for l in C en_US.UTF-8; do
+    style_round titlefirst 1 CLEARED 0 1 "$g99$g100" > "$report"
+    run_rc 3 record_line_vf "$l" "$report" "$spec"
+    assert_contains "$OUT" "$ts" "AC-012: a round its title opens sealed with a late Timestamp under LANG=$l (O-020)"
+    style_round titlelate 1 CLEARED 0 1 "$g99$g100" > "$report"
+    run_rc 3 record_line_vf "$l" "$report" "$spec"
+    assert_contains "$OUT" "$ti" "AC-012: a title after the body of a canonical round was read under LANG=$l (O-020)"
+  done
+  # A quoted line is body too: a round whose only body before its Timestamp is
+  # a fenced example would otherwise skip the quoted-record refusal there.
+  { printf '## Round 1\n# Opponent review — fixture\n**Round:** 1\n```text\n### Finding G-099\n```\n**Timestamp:** 2026-09-06T12:00:01Z\n'
+    style_round notitle 1 CHALLENGED 1 0 "$(style_finding '### Finding G-042' tier-binding new '- **Severity:** data-loss')"$'\n' | sed -e '1,2d' -e '/^\*\*Timestamp:\*\*/d'; } > "$report"
+  for l in C en_US.UTF-8; do
+    run_rc 3 record_line_vf "$l" "$report" "$spec"
+    assert_contains "$OUT" "$ts" "AC-012: a round whose only body before its late Timestamp is quoted sealed under LANG=$l (O-020)"
+  done
+  # The reality-check gate reads the same style: a gap written in field
+  # spelling under a title and a late Timestamp is refused by the switch.
+  printf '## Round 1\n# Reality Check — fixture\n**Round:** 1\n**Source:** aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\n**Floor:** FLOOR-fixture\n**Verdict:** NEEDS WORK\n\n## Summary\n\nChecked one criterion.\n\n## AC matrix\n\n| AC | Criterion / revision | Evidence | Affected inputs | Verdict |\n|----|----|----|----|----|\n| AC-001 | x | CAP-1 | a | MISSING |\n\n## Constitution check\n\n- PASS\n\n## Gaps (if NEEDS WORK)\n\n1. **AC-001 evidence missing** — the capture is stale.\n   - **Where:** scripts/run.sh:9\n\n## Re-run conditions\n\nRe-invoke when fixed.\n**Timestamp:** 2026-09-06T12:00:01Z\n<!-- gate-round-end: reality-check:1 -->\n' > "$spec/notes/reality-check.md"
+  run_rc 3 bash -c '. "$1"; vf_reports "$2" reality-check "$3" "$4"' _ "$SCRIPTS/verification-lib.sh" "$spec/notes/reality-check.md" "$SANDBOX/round-style-rc.nul" "$spec"
+  assert_contains "$OUT" "$ts" 'AC-012: a reality-check round sealed its legacy-judged body as canonical (O-020)'
+  rm -f "$spec/notes/reality-check.md"
+  # A titled round whose Timestamp precedes its body parses, and is canonical.
+  style_round titleearly 1 CHALLENGED 1 0 "$(style_finding '### Finding G-042' tier-binding new '- **Severity:** data-loss')"$'\n' > "$report"
+  for l in C en_US.UTF-8; do
+    run_rc 0 record_line_vf "$l" "$report" "$spec"
+    [[ "$(tr '\000' '\n' < "$SANDBOX/record-lines.nul" | paste - - - - - - - - - - - - | awk -F '\t' '$1=="round" {print $7}')" == canonical ]] ||
+      t_fail "AC-012: a titled round whose Timestamp precedes its body was not read canonical under LANG=$l (O-020)"
+  done
+}
+
+test_reports_and_tally() {
+  report_manifest_locale_cases
+  report_record_line_cases
+  report_round_style_cases
+@@END

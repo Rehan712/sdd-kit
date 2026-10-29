@@ -1,0 +1,346 @@
+{
+  "scratchSpec": "/private/tmp/sdd-opponent25-8elh3grt/execution/op25-currency/.specify/specs/003-verification-fixture",
+  "ownedStub": "tests/check.sh from copied helper; sources owned src/parser.sh only",
+  "cap": "CAP-1-giBD5n",
+  "steps": [
+    {
+      "label": "setup",
+      "argv": [
+        "/bin/bash",
+        "-c",
+        ". \"$1\"; SANDBOX=\"$2\"; make_verification_git_dir op25-currency",
+        "_",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/tests/helpers.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/execution"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "expected": 0,
+      "ok": true
+    },
+    {
+      "label": "capture",
+      "argv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/spec-run.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/execution/op25-currency/.specify/specs/003-verification-fixture",
+        "T001",
+        "--cwd",
+        "/private/tmp/sdd-opponent25-8elh3grt/execution/op25-currency",
+        "--from-task",
+        "--no-tick",
+        "--summary"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "expected": 0,
+      "ok": true
+    },
+    {
+      "label": "intact-current",
+      "argv": [
+        "/bin/bash",
+        "-c",
+        ". \"$1\"; vf_snapshot \"$2\" \"$3\" \"$3\" \"$4\" >/dev/null && vf_capture_check \"$2\" \"$5\" \"$4\" \"$6\"",
+        "_",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/verification-lib.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/execution/op25-currency/.specify/specs/003-verification-fixture",
+        "/private/tmp/sdd-opponent25-8elh3grt/execution/op25-currency",
+        "/private/tmp/sdd-opponent25-8elh3grt/currency/inputs.nul",
+        "CAP-1-giBD5n",
+        "current"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "expected": 0,
+      "ok": true
+    },
+    {
+      "label": "intact-reuse",
+      "argv": [
+        "/bin/bash",
+        "-c",
+        ". \"$1\"; vf_snapshot \"$2\" \"$3\" \"$3\" \"$4\" >/dev/null && vf_capture_check \"$2\" \"$5\" \"$4\" \"$6\"",
+        "_",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/verification-lib.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/execution/op25-currency/.specify/specs/003-verification-fixture",
+        "/private/tmp/sdd-opponent25-8elh3grt/execution/op25-currency",
+        "/private/tmp/sdd-opponent25-8elh3grt/currency/inputs.nul",
+        "CAP-1-giBD5n",
+        "reuse"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "expected": 0,
+      "ok": true
+    },
+    {
+      "label": "intact-matrix",
+      "argv": [
+        "/bin/bash",
+        "-c",
+        ". \"$1\"; vf_matrix_evidence \"$2\" \"$3\"",
+        "_",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/verification-lib.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/execution/op25-currency/.specify/specs/003-verification-fixture",
+        "CAP-1-giBD5n; review: independent owned fixture observation"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "expected": 0,
+      "ok": true
+    },
+    {
+      "label": "changed-harness-current",
+      "argv": [
+        "/bin/bash",
+        "-c",
+        ". \"$1\"; vf_snapshot \"$2\" \"$3\" \"$3\" \"$4\" >/dev/null && vf_capture_check \"$2\" \"$5\" \"$4\" \"$6\"",
+        "_",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/verification-lib.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/execution/op25-currency/.specify/specs/003-verification-fixture",
+        "/private/tmp/sdd-opponent25-8elh3grt/execution/op25-currency",
+        "/private/tmp/sdd-opponent25-8elh3grt/currency/inputs.nul",
+        "CAP-1-giBD5n",
+        "current"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 3,
+      "expected": 3,
+      "ok": true
+    },
+    {
+      "label": "changed-harness-reuse",
+      "argv": [
+        "/bin/bash",
+        "-c",
+        ". \"$1\"; vf_snapshot \"$2\" \"$3\" \"$3\" \"$4\" >/dev/null && vf_capture_check \"$2\" \"$5\" \"$4\" \"$6\"",
+        "_",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/verification-lib.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/execution/op25-currency/.specify/specs/003-verification-fixture",
+        "/private/tmp/sdd-opponent25-8elh3grt/execution/op25-currency",
+        "/private/tmp/sdd-opponent25-8elh3grt/currency/inputs.nul",
+        "CAP-1-giBD5n",
+        "reuse"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 3,
+      "expected": 3,
+      "ok": true
+    },
+    {
+      "label": "changed-harness-matrix",
+      "argv": [
+        "/bin/bash",
+        "-c",
+        ". \"$1\"; vf_matrix_evidence \"$2\" \"$3\"",
+        "_",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/verification-lib.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/execution/op25-currency/.specify/specs/003-verification-fixture",
+        "CAP-1-giBD5n; review: independent owned fixture observation"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 3,
+      "expected": 3,
+      "ok": true
+    },
+    {
+      "label": "reject-stale",
+      "argv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/spec-gate.sh",
+        "accept",
+        "/private/tmp/sdd-opponent25-8elh3grt/execution/op25-currency/.specify/specs/003-verification-fixture",
+        "T001",
+        "/private/tmp/sdd-opponent25-8elh3grt/currency/return.txt"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 3,
+      "expected": 3,
+      "ok": true
+    },
+    {
+      "label": "restored-harness-current",
+      "argv": [
+        "/bin/bash",
+        "-c",
+        ". \"$1\"; vf_snapshot \"$2\" \"$3\" \"$3\" \"$4\" >/dev/null && vf_capture_check \"$2\" \"$5\" \"$4\" \"$6\"",
+        "_",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/verification-lib.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/execution/op25-currency/.specify/specs/003-verification-fixture",
+        "/private/tmp/sdd-opponent25-8elh3grt/execution/op25-currency",
+        "/private/tmp/sdd-opponent25-8elh3grt/currency/inputs.nul",
+        "CAP-1-giBD5n",
+        "current"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "expected": 0,
+      "ok": true
+    },
+    {
+      "label": "restored-harness-reuse",
+      "argv": [
+        "/bin/bash",
+        "-c",
+        ". \"$1\"; vf_snapshot \"$2\" \"$3\" \"$3\" \"$4\" >/dev/null && vf_capture_check \"$2\" \"$5\" \"$4\" \"$6\"",
+        "_",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/verification-lib.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/execution/op25-currency/.specify/specs/003-verification-fixture",
+        "/private/tmp/sdd-opponent25-8elh3grt/execution/op25-currency",
+        "/private/tmp/sdd-opponent25-8elh3grt/currency/inputs.nul",
+        "CAP-1-giBD5n",
+        "reuse"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "expected": 0,
+      "ok": true
+    },
+    {
+      "label": "restored-harness-matrix",
+      "argv": [
+        "/bin/bash",
+        "-c",
+        ". \"$1\"; vf_matrix_evidence \"$2\" \"$3\"",
+        "_",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/verification-lib.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/execution/op25-currency/.specify/specs/003-verification-fixture",
+        "CAP-1-giBD5n; review: independent owned fixture observation"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "expected": 0,
+      "ok": true
+    },
+    {
+      "label": "accept-current",
+      "argv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/spec-gate.sh",
+        "accept",
+        "/private/tmp/sdd-opponent25-8elh3grt/execution/op25-currency/.specify/specs/003-verification-fixture",
+        "T001",
+        "/private/tmp/sdd-opponent25-8elh3grt/currency/return.txt"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "expected": 0,
+      "ok": true
+    },
+    {
+      "label": "current-after-tick",
+      "argv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/spec-evidence.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/execution/op25-currency/.specify/specs/003-verification-fixture",
+        "--current"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "expected": 0,
+      "ok": true
+    },
+    {
+      "label": "current-reject-after-criterion-edit",
+      "argv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/spec-evidence.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/execution/op25-currency/.specify/specs/003-verification-fixture",
+        "--current"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 3,
+      "expected": 3,
+      "ok": true
+    },
+    {
+      "label": "historical-retry",
+      "argv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/spec-gate.sh",
+        "accept",
+        "/private/tmp/sdd-opponent25-8elh3grt/execution/op25-currency/.specify/specs/003-verification-fixture",
+        "T001",
+        "/private/tmp/sdd-opponent25-8elh3grt/currency/return.txt"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "expected": 0,
+      "ok": true
+    },
+    {
+      "label": "criterion-edit-current",
+      "argv": [
+        "/bin/bash",
+        "-c",
+        ". \"$1\"; vf_snapshot \"$2\" \"$3\" \"$3\" \"$4\" >/dev/null && vf_capture_check \"$2\" \"$5\" \"$4\" \"$6\"",
+        "_",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/verification-lib.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/execution/op25-currency/.specify/specs/003-verification-fixture",
+        "/private/tmp/sdd-opponent25-8elh3grt/execution/op25-currency",
+        "/private/tmp/sdd-opponent25-8elh3grt/currency/inputs.nul",
+        "CAP-1-giBD5n",
+        "current"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 3,
+      "expected": 3,
+      "ok": true
+    },
+    {
+      "label": "criterion-edit-reuse",
+      "argv": [
+        "/bin/bash",
+        "-c",
+        ". \"$1\"; vf_snapshot \"$2\" \"$3\" \"$3\" \"$4\" >/dev/null && vf_capture_check \"$2\" \"$5\" \"$4\" \"$6\"",
+        "_",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/verification-lib.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/execution/op25-currency/.specify/specs/003-verification-fixture",
+        "/private/tmp/sdd-opponent25-8elh3grt/execution/op25-currency",
+        "/private/tmp/sdd-opponent25-8elh3grt/currency/inputs.nul",
+        "CAP-1-giBD5n",
+        "reuse"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 3,
+      "expected": 3,
+      "ok": true
+    },
+    {
+      "label": "criterion-edit-matrix",
+      "argv": [
+        "/bin/bash",
+        "-c",
+        ". \"$1\"; vf_matrix_evidence \"$2\" \"$3\"",
+        "_",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/verification-lib.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/execution/op25-currency/.specify/specs/003-verification-fixture",
+        "CAP-1-giBD5n; review: independent owned fixture observation"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 3,
+      "expected": 3,
+      "ok": true
+    },
+    {
+      "label": "current-after-criterion-restore",
+      "argv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/spec-evidence.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/execution/op25-currency/.specify/specs/003-verification-fixture",
+        "--current"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "expected": 0,
+      "ok": true
+    }
+  ],
+  "summaryBytes": 419,
+  "summaryLines": 1,
+  "tasksUnchangedAfterReject": true,
+  "historicalRetryDidNotClaimCurrency": true,
+  "oldLogUnchanged": true,
+  "allMutationsRestored": true
+}

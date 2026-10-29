@@ -1,0 +1,11 @@
+      FNR == 1 {sub(/^\357\273\277/, "")}
+      itemfield != "" {
+        if ($0 ~ /^[ \t]*$/) itemblank=1
+        else {
+          ii=match($0, /[^ ]/) - 1; fl=($0 ~ /^[ ]*-[[:space:]]+\*\*(Class|Severity):\*\*/)
+          if (substr($0, ii + 1, 1) == "\t" || (!fl && (ii >= itemind + 2 || (!itemblank && !vf_block_start(substr($0, ii + 1))))))
+            bad("a " itemfield " field whose list item holds more than its line in finding " itemid)
+          itemfield=""
+        }
+      }
+      vf_quoted($0) {shape=vf_record($0); if (shape != "" && (id != "" || shape == "Finding heading")) bad("quoted content carries a " shape); next}

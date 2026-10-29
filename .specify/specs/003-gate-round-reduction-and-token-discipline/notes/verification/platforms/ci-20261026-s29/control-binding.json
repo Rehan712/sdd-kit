@@ -1,0 +1,58 @@
+{
+  "path": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s29-t029-control/result.json",
+  "sha256": "571590c5e48fd745407e94fd06c799db9ee9d0645676aa7e7a97b340315f352b",
+  "exit": 0,
+  "capture": "CAP-794-aUZ5t0",
+  "acceptedReceipt": "ACC-MkfiB6",
+  "rejectedEvent": "ACCEPT-I3Eloa",
+  "rejectionClass": "binding-mismatch",
+  "rejectedTaskBytesUnchanged": true,
+  "steps": [
+    {
+      "name": "reject",
+      "argv": [
+        "bash",
+        "scripts/spec-gate.sh",
+        "accept",
+        ".specify/specs/003-gate-round-reduction-and-token-discipline",
+        "T029",
+        ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/returns/T029-incomplete.txt"
+      ],
+      "started": "2026-10-26T21:09:40.204678+00:00",
+      "ended": "2026-10-26T21:10:02.268325+00:00",
+      "seconds": 22.065,
+      "exit": 3
+    },
+    {
+      "name": "accept",
+      "argv": [
+        "bash",
+        "scripts/spec-gate.sh",
+        "accept",
+        ".specify/specs/003-gate-round-reduction-and-token-discipline",
+        "T029",
+        ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/returns/T029.txt"
+      ],
+      "started": "2026-10-26T21:10:02.598936+00:00",
+      "ended": "2026-10-26T21:10:32.014737+00:00",
+      "seconds": 29.417,
+      "exit": 0
+    },
+    {
+      "name": "seal-check",
+      "argv": [
+        "bash",
+        "-c",
+        ". scripts/lib.sh; . scripts/verification-lib.sh; vf_integrity \"$1\" meta.nul && vf_integrity \"$2\" meta.nul && vf_integrity \"$3\" meta.nul return.txt tasks.after digests.nul && test \"$(cat \"$3/COMMITTED\")\" = \"$(vf_hash \"$3/COMPLETE\")\"",
+        "_",
+        ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/accept-events/ACCEPT-I3Eloa",
+        ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/accept-events/ACCEPT-4rCf9X",
+        ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/accepted/T029/ACC-MkfiB6"
+      ],
+      "started": "2026-10-26T21:10:32.044674+00:00",
+      "ended": "2026-10-26T21:10:32.179108+00:00",
+      "seconds": 0.134,
+      "exit": 0
+    }
+  ]
+}

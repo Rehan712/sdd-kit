@@ -1,0 +1,34 @@
+{
+  "taskId": "node:delegated-task:command%3Amcp%3Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%3Adelegate-task%3Asdd003-rc3-fixes-ponytail-review-max-r1",
+  "childThreadId": "thread:delegated-task:command%3Amcp%3Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%3Adelegate-task%3Asdd003-rc3-fixes-ponytail-review-max-r1",
+  "childRunId": "run:thread:thread%3Adelegated-task%3Acommand%253Amcp%253Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%253Adelegate-task%253Asdd003-rc3-fixes-ponytail-review-max-r1:ordinal:1",
+  "childNodeId": "node:delegated-task:command%3Amcp%3Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%3Adelegate-task%3Asdd003-rc3-fixes-ponytail-review-max-r1",
+  "status": "completed",
+  "workState": "result_available",
+  "hasPendingChildRuns": false,
+  "latestTerminalRunId": "run:thread:thread%3Adelegated-task%3Acommand%253Amcp%253Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%253Adelegate-task%253Asdd003-rc3-fixes-ponytail-review-max-r1:ordinal:1",
+  "latestTerminalStatus": "completed",
+  "latestTerminalSummary": null,
+  "latestTerminalResultContextTransferId": null,
+  "providerInstanceId": "codex_codex_gym",
+  "model": "gpt-6.1-sol",
+  "options": [
+    {
+      "id": "reasoningEffort",
+      "value": "max"
+    },
+    {
+      "id": "serviceTier",
+      "value": "default"
+    }
+  ],
+  "summary": "What this change does: It adds the missing typecheck-warning and saved-success invalidation regressions identified by RC3, then updates the plan bindings and accepted follow-up tasks. The CI compatibility repair preserves raw job-log bytes in files and filters terminal controls from displayed log diagnostics.\n\nLooks good. Ship. No new Must fix or Should fix findings established.\n\nThis is implementation-codex ponytail-review round 1, using codex_codex_gym / gpt-6.1-sol / reasoningEffort=max / serviceTier=default. BASE/HEAD is `2049f65960cc91e9e30bbd5ff1e11fc0fdf7cbd9`. I reviewed the four-file delta against its exact before-application copies: `tests/test-sdd-analyze.sh`, `tests/test-gate-contracts.sh`, and this spec's `plan.md` and live `tasks.md`. The application hashes agree; the later task changes match the recorded acceptance results. Pre-existing implementation, test-spec-gate repair, historical findings and gate records were excluded from attribution.\n\nI traced the analyzer classifier, spec-run capture path, snapshot/current/reuse validation, matrix evidence and prior-PASS validation, and task acceptance, with the shared test fixtures, suite runner, accepted criteria, registries and README. All eleven connected runtime/helper/runner/README files checked remain byte-identical to the earlier frozen-source mapping. I assumed one local CLI operator using Bash 3.2 and BSD tools; these changes add no runtime dependency.\n\nThe new matrix fixture genuinely consumes the transitive helper, data, configuration and locked version. Each independent mutation rejects the original capture and both saved/current and carried PASS, preserves the old log, and passes again after restoration. Its criterion case changes the actual spec text. Direct failing checks do not publish replacement captures that could mask the invalidation being tested. The typecheck fixtures invoke the analyzer with both command declarations; they require no npm or TypeScript installation.\n\nFresh checks passed:\n\n- Isolated changed analyzer cases: four untyped warning commands and the recognized shell-runner control.\n- Isolated complete `matrix_runtime_cases`, including its retained omission, impact, verdict and corruption controls, under Bash `3.2.57`.\n- Warning-level ShellCheck for both changed test files; individual Bash syntax checks for those tests, the collector and both retry verifiers; `git diff --check`.\n- A fresh snapshot reproduced source `3a5df78c6c55ff2a8145ec92270ac8a13d781626d6b0a13bf32a02cffebe3b86`. CAP-767-tGxtxB and CAP-768-sy4sk5 each passed integrity, current and reuse validation. Their saved full-suite outputs report 19/19 and 18/18 respectively; I did not rerun those full suites.\n\nI also reviewed `ci-20261025-s26/collect.sh`, `test-collector.py`, their callers, and the retry-local collection and before/after binding verifiers. All seven collector controls passed again using temporary copies: the original five cases, escape preservation and download-failure propagation. The saved artifacts independently preserve all four exact escape-containing streams, contain printable diagnostics, and record all four exit-23 download failures. All 141 artifact hashes and 58 protected historical-file hashes match. Both retry verifiers explicitly exit on source mismatch; the retained failed first control and successful corrected control are accurately distinguished.\n\nThe saved four-job hosted proof consistently binds its logs, snapshot parent and merge tree to older source `a7e7dd326b27c7565c26349485c440af26f718a7f16e400ea42ed6961d03cd1a`. Its before/after binding JSON matches exactly. This is historical CI evidence, not verification of current source. This report creates no official opponent/reality-check round or readiness claim.\n\nNot checked: the full floor, new hosted CI, or formal opponent/reality-check gates for current source; formal shipping readiness remains pending. No source, task state, gate state, commits or PRs were changed.\nVerdict: Ship.",
+  "resultContextTransferId": "context-transfer:type:subagent_result:source-thread:thread%3Adelegated-task%3Acommand%253Amcp%253Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%253Adelegate-task%253Asdd003-rc3-fixes-ponytail-review-max-r1:target-thread:2ce93492-409f-4930-a9e5-173544a4c8c6:d29c6918-6c2b-4cf3-b42b-561348cdb2ee",
+  "hasPendingQuestion": false,
+  "pendingApproval": null,
+  "waitTimedOut": false,
+  "reportPath": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s26-rc3-test-fixes/ponytail-review-r1.md",
+  "reportBytes": 3990,
+  "reportSha256": "b523c927257b8606310ace06a294728c719f6820f04c59e9c693eb219533fe23",
+  "handbackMatchesReport": true
+}

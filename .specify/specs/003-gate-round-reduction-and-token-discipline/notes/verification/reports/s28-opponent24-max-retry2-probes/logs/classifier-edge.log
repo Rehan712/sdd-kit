@@ -1,0 +1,8 @@
+exit=0 warning=yes command=npm run typecheck
+exit=0 warning=no command=npm run typecheck -- --project tests/tsconfig.json
+exit=0 warning=yes command=tsc --noEmit
+exit=0 warning=no command=tsc --noEmit tests/unit.ts
+exit=0 warning=yes command=grep AC-001 README.md
+exit=0 warning=no command=grep AC-001 tests/check.sh
+exit=0 warning=no command=npm run build -- --outDir tests/build
+exit=0 warning=no command=bash tests/check.sh

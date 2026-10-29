@@ -1,0 +1,7 @@
+spec_dir="$(make_verification_spec_dir locproj)"; proj="${spec_dir%/.specify/*}"
+nb=$'\302\240'
+sed "s#tests/check.sh::test_ac_001_shared#tests/my${nb}check.sh::test_ac_001_shared#" "$spec_dir/plan.md" > "$spec_dir/p" && mv "$spec_dir/p" "$spec_dir/plan.md"
+sed "s#tests/check.sh::test_ac_001_shared#tests/my${nb}check.sh::test_ac_001_shared#; s#\`tests/check.sh\`#\`tests/my${nb}check.sh\`#" "$spec_dir/tasks.md" > "$spec_dir/t" && mv "$spec_dir/t" "$spec_dir/tasks.md"
+mkdir -p "$proj/tests"; printf 'test_ac_001_shared() { :; }\n' > "$proj/tests/my${nb}check.sh"
+bash -c '. "$1/verification-lib.sh"; vf_bindings "$2" tasks "" "$3"; echo "bindings rc=$?"; vf_locators_exist "$3" T001 "$4"; echo "locators rc=$?"' _ "$SCRIPTS" "$spec_dir" "$SANDBOX/b.nul" "$proj" 2>&1 | LC_ALL=C sed -n l | head -8
+tr '\0' '\n' < "$SANDBOX/b.nul" | grep -a 'check.sh' | head -2 | LC_ALL=C sed -n l

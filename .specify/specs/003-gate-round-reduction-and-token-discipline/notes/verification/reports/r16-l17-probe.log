@@ -1,0 +1,21 @@
+kernels: k-cur.sh = live scripts/verification-lib.sh 069468874d2e56b8; k-l17.sh = the same with L17's literal replaced a174b95c1b82aa5d
+- `<Severity>` data-loss
+  cur=[severity] l17=[severity]
+  marked: <ul> <li><code>&lt;Severity&gt;</code> data-loss</li> </ul> 
+  mdit:   <ul> <li><code>&lt;Severity&gt;</code> data-loss</li> </ul> 
+- [^Severity] data-loss
+  cur=[severity] l17=[]
+  marked: <ul> <li>[^Severity] data-loss</li> </ul> 
+  mdit:   <ul> <li>[^Severity] data-loss</li> </ul> 
+- [^Severity]: data-loss
+  cur=[severity] l17=[]
+  marked: <ul> <li></li> </ul> 
+  mdit:   <ul> <li></li> </ul> 
+- ![Severity](u) data-loss
+  cur=[severity] l17=[]
+  marked: <ul> <li><img src="u" alt="Severity"> data-loss</li> </ul> 
+  mdit:   <ul> <li><img src="u" alt="Severity"> data-loss</li> </ul> 
+- **Severity:** minor
+  cur=[severity] l17=[severity]
+  marked: <ul> <li><strong>Severity:</strong> minor</li> </ul> 
+  mdit:   <ul> <li><strong>Severity:</strong> minor</li> </ul> 

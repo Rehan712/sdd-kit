@@ -1,0 +1,5584 @@
+# Evidence log
+
+Captured acceptance runs, appended by `spec-run.sh`. One block per run.
+
+## T001 — 2026-09-06T02:28:16
+
+- **Command:** `bash tests/test-gate-contracts.sh`
+- **Cwd:** /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline
+- **Exit:** 0
+- **Captured:** 2026-09-06T02:28:16 · sha256:8d191b7cf017 (over full output)
+
+```text
+  ok   test_instruction_contracts
+  -- 1/1 passed
+```
+
+## T002 — 2026-09-06T03:02:27
+
+- **Command:** `bash tests/test-sdd-analyze.sh`
+- **Cwd:** /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline
+- **Exit:** 0
+- **Captured:** 2026-09-06T03:02:27 · sha256:20ac89cdff35 (over full output)
+
+```text
+  ok   test_clean_fixture_is_consistent
+  ok   test_dangling_ref_fails
+  ok   test_duplicate_task_id_fails
+  ok   test_external_marker_must_be_mirrored_in_status
+  ok   test_gate_agent_placeholder_fails
+  ok   test_missing_artifact_is_an_error
+  ok   test_missing_gate_agent_file_fails
+  ok   test_missing_verify_line_warns
+  ok   test_needs_clarification_blocks
+  ok   test_stray_repo_tags_without_umbrella_warn
+  ok   test_task_without_acceptance_fails
+  ok   test_ticked_box_without_evidence_warns
+  ok   test_umbrella_declared_repo_with_no_tasks_warns
+  ok   test_umbrella_tagged_tasks_pass
+  ok   test_umbrella_undeclared_repo_tag_fails
+  ok   test_umbrella_untagged_tasks_fail
+  ok   test_uncovered_ac_fails_and_gate_refs_do_not_count
+  ok   test_verification_bindings
+  -- 18/18 passed
+```
+
+## T002 — 2026-09-06T10:38:10
+
+- **Command:** `bash tests/test-sdd-analyze.sh`
+- **Cwd:** /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline
+- **Exit:** 0
+- **Captured:** 2026-09-06T10:38:10 · sha256:20ac89cdff35 (over full output)
+
+```text
+  ok   test_clean_fixture_is_consistent
+  ok   test_dangling_ref_fails
+  ok   test_duplicate_task_id_fails
+  ok   test_external_marker_must_be_mirrored_in_status
+  ok   test_gate_agent_placeholder_fails
+  ok   test_missing_artifact_is_an_error
+  ok   test_missing_gate_agent_file_fails
+  ok   test_missing_verify_line_warns
+  ok   test_needs_clarification_blocks
+  ok   test_stray_repo_tags_without_umbrella_warn
+  ok   test_task_without_acceptance_fails
+  ok   test_ticked_box_without_evidence_warns
+  ok   test_umbrella_declared_repo_with_no_tasks_warns
+  ok   test_umbrella_tagged_tasks_pass
+  ok   test_umbrella_undeclared_repo_tag_fails
+  ok   test_umbrella_untagged_tasks_fail
+  ok   test_uncovered_ac_fails_and_gate_refs_do_not_count
+  ok   test_verification_bindings
+  -- 18/18 passed
+```
+
+## T002 — 2026-09-06T10:41:22
+
+- **Command:** `bash tests/test-sdd-analyze.sh`
+- **Cwd:** /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline
+- **Exit:** 0
+- **Captured:** 2026-09-06T10:41:22 · sha256:20ac89cdff35 (over full output)
+
+```text
+  ok   test_clean_fixture_is_consistent
+  ok   test_dangling_ref_fails
+  ok   test_duplicate_task_id_fails
+  ok   test_external_marker_must_be_mirrored_in_status
+  ok   test_gate_agent_placeholder_fails
+  ok   test_missing_artifact_is_an_error
+  ok   test_missing_gate_agent_file_fails
+  ok   test_missing_verify_line_warns
+  ok   test_needs_clarification_blocks
+  ok   test_stray_repo_tags_without_umbrella_warn
+  ok   test_task_without_acceptance_fails
+  ok   test_ticked_box_without_evidence_warns
+  ok   test_umbrella_declared_repo_with_no_tasks_warns
+  ok   test_umbrella_tagged_tasks_pass
+  ok   test_umbrella_undeclared_repo_tag_fails
+  ok   test_umbrella_untagged_tasks_fail
+  ok   test_uncovered_ac_fails_and_gate_refs_do_not_count
+  ok   test_verification_bindings
+  -- 18/18 passed
+```
+
+## T003 — 2026-09-06T19:51:40
+
+- **Command:** `bash tests/test-verification.sh`
+- **Cwd:** /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline
+- **Exit:** 0
+- **Captured:** 2026-09-06T19:51:40 · sha256:ce28c7d7bf6a (over full output)
+
+```text
+  ok   test_config_grammar
+  -- 1/1 passed
+```
+
+## T003f1 — 2026-09-06T19:51:42
+
+- **Command:** `bash tests/test-sdd-analyze.sh`
+- **Cwd:** /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline
+- **Exit:** 0
+- **Captured:** 2026-09-06T19:51:42 · sha256:20ac89cdff35 (over full output)
+
+```text
+  ok   test_clean_fixture_is_consistent
+  ok   test_dangling_ref_fails
+  ok   test_duplicate_task_id_fails
+  ok   test_external_marker_must_be_mirrored_in_status
+  ok   test_gate_agent_placeholder_fails
+  ok   test_missing_artifact_is_an_error
+  ok   test_missing_gate_agent_file_fails
+  ok   test_missing_verify_line_warns
+  ok   test_needs_clarification_blocks
+  ok   test_stray_repo_tags_without_umbrella_warn
+  ok   test_task_without_acceptance_fails
+  ok   test_ticked_box_without_evidence_warns
+  ok   test_umbrella_declared_repo_with_no_tasks_warns
+  ok   test_umbrella_tagged_tasks_pass
+  ok   test_umbrella_undeclared_repo_tag_fails
+  ok   test_umbrella_untagged_tasks_fail
+  ok   test_uncovered_ac_fails_and_gate_refs_do_not_count
+  ok   test_verification_bindings
+  -- 18/18 passed
+```
+
+## T003 — 2026-09-06T19:54:05
+
+- **Command:** `bash tests/test-verification.sh`
+- **Cwd:** /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline
+- **Exit:** 0
+- **Captured:** 2026-09-06T19:54:05 · sha256:ce28c7d7bf6a (over full output)
+
+```text
+  ok   test_config_grammar
+  -- 1/1 passed
+```
+
+## T003f1 — 2026-09-06T19:56:35
+
+- **Command:** `bash tests/test-sdd-analyze.sh`
+- **Cwd:** /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline
+- **Exit:** 0
+- **Captured:** 2026-09-06T19:56:35 · sha256:20ac89cdff35 (over full output)
+
+```text
+  ok   test_clean_fixture_is_consistent
+  ok   test_dangling_ref_fails
+  ok   test_duplicate_task_id_fails
+  ok   test_external_marker_must_be_mirrored_in_status
+  ok   test_gate_agent_placeholder_fails
+  ok   test_missing_artifact_is_an_error
+  ok   test_missing_gate_agent_file_fails
+  ok   test_missing_verify_line_warns
+  ok   test_needs_clarification_blocks
+  ok   test_stray_repo_tags_without_umbrella_warn
+  ok   test_task_without_acceptance_fails
+  ok   test_ticked_box_without_evidence_warns
+  ok   test_umbrella_declared_repo_with_no_tasks_warns
+  ok   test_umbrella_tagged_tasks_pass
+  ok   test_umbrella_undeclared_repo_tag_fails
+  ok   test_umbrella_untagged_tasks_fail
+  ok   test_uncovered_ac_fails_and_gate_refs_do_not_count
+  ok   test_verification_bindings
+  -- 18/18 passed
+```
+
+## T004 — 2026-09-06T20:13:02
+
+- **Command:** `bash tests/test-gate-contracts.sh`
+- **Cwd:** /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline
+- **Exit:** 0
+- **Captured:** 2026-09-06T20:13:02 · sha256:8d191b7cf017 (over full output)
+
+```text
+  ok   test_instruction_contracts
+  -- 1/1 passed
+```
+
+## T005 — 2026-09-06T20:13:02
+
+- **Command:** `bash tests/test-golden-example.sh`
+- **Cwd:** /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline
+- **Exit:** 0
+- **Captured:** 2026-09-06T20:13:02 · sha256:c5596e4df60e (over full output)
+
+```text
+  ok   test_golden_example_demonstrates_the_conventions
+  ok   test_golden_example_passes_sdd_analyze_with_zero_warnings
+  ok   test_verification_golden
+  -- 3/3 passed
+```
+
+## T006 — 2026-09-06T20:14:28
+
+- **Command:** `bash tests/test-gate-contracts.sh`
+- **Cwd:** /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline
+- **Exit:** 0
+- **Captured:** 2026-09-06T20:14:28 · sha256:c933ee933ed1 (over full output)
+
+```text
+  ok   test_defaults_t006
+  ok   test_instruction_contracts
+  -- 2/2 passed
+```
+
+## T006 — 2026-09-06T20:14:54
+
+- **Command:** `bash tests/test-gate-contracts.sh`
+- **Cwd:** /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline
+- **Exit:** 0
+- **Captured:** 2026-09-06T20:14:54 · sha256:c933ee933ed1 (over full output)
+
+```text
+  ok   test_defaults_t006
+  ok   test_instruction_contracts
+  -- 2/2 passed
+```
+
+## T007 — 2026-09-06T20:14:55
+
+- **Command:** `bash tests/test-gate-contracts.sh`
+- **Cwd:** /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline
+- **Exit:** 0
+- **Captured:** 2026-09-06T20:14:55 · sha256:2d2aa9369d48 (over full output)
+
+```text
+  ok   test_defaults_t006
+  ok   test_defaults_t007
+  ok   test_instruction_contracts
+  -- 3/3 passed
+```
+
+## T008 — 2026-09-06T20:14:56
+
+- **Command:** `bash tests/test-gate-contracts.sh`
+- **Cwd:** /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline
+- **Exit:** 0
+- **Captured:** 2026-09-06T20:14:56 · sha256:12499981ed6d (over full output)
+
+```text
+  ok   test_defaults_t006
+  ok   test_defaults_t007
+  ok   test_defaults_t008
+  ok   test_instruction_contracts
+  -- 4/4 passed
+```
+
+## T009 — 2026-09-06T20:14:57
+
+- **Command:** `bash tests/test-gate-contracts.sh`
+- **Cwd:** /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline
+- **Exit:** 0
+- **Captured:** 2026-09-06T20:14:57 · sha256:43e181334dbe (over full output)
+
+```text
+  ok   test_all_overlay_defaults
+  ok   test_defaults_t006
+  ok   test_defaults_t007
+  ok   test_defaults_t008
+  ok   test_defaults_t009
+  ok   test_instruction_contracts
+  -- 6/6 passed
+```
+
+## T010 — 2026-09-06T20:15:54
+
+- **Command:** `bash tests/test-gate-contracts.sh`
+- **Cwd:** /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline
+- **Exit:** 0
+- **Captured:** 2026-09-06T20:15:54 · sha256:1b5b3a1a0af0 (over full output)
+
+```text
+  ok   test_all_overlay_defaults
+  ok   test_briefs_t010
+  ok   test_defaults_t006
+  ok   test_defaults_t007
+  ok   test_defaults_t008
+  ok   test_defaults_t009
+  ok   test_instruction_contracts
+  -- 7/7 passed
+```
+
+## T011 — 2026-09-06T20:15:54
+
+- **Command:** `bash tests/test-gate-contracts.sh`
+- **Cwd:** /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline
+- **Exit:** 0
+- **Captured:** 2026-09-06T20:15:54 · sha256:8d8e94845058 (over full output)
+
+```text
+  ok   test_all_overlay_defaults
+  ok   test_briefs_t010
+  ok   test_briefs_t011
+  ok   test_defaults_t006
+  ok   test_defaults_t007
+  ok   test_defaults_t008
+  ok   test_defaults_t009
+  ok   test_instruction_contracts
+  -- 8/8 passed
+```
+
+## T012 — 2026-09-06T20:15:55
+
+- **Command:** `bash tests/test-gate-contracts.sh`
+- **Cwd:** /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline
+- **Exit:** 0
+- **Captured:** 2026-09-06T20:15:55 · sha256:49e830668618 (over full output)
+
+```text
+  ok   test_all_overlay_defaults
+  ok   test_briefs_t010
+  ok   test_briefs_t011
+  ok   test_briefs_t012
+  ok   test_defaults_t006
+  ok   test_defaults_t007
+  ok   test_defaults_t008
+  ok   test_defaults_t009
+  ok   test_instruction_contracts
+  -- 9/9 passed
+```
+
+## T013 — 2026-09-06T20:16:20
+
+- **Command:** `bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-build-adapters.sh`
+- **Cwd:** /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline
+- **Exit:** 0
+- **Captured:** 2026-09-06T20:16:20 · sha256:609e2f9c87a6 (over full output)
+
+```text
+  ok   test_all_brief_modes
+  ok   test_all_overlay_defaults
+  ok   test_briefs_t010
+  ok   test_briefs_t011
+  ok   test_briefs_t012
+  ok   test_briefs_t013
+  ok   test_defaults_t006
+  ok   test_defaults_t007
+  ok   test_defaults_t008
+  ok   test_defaults_t009
+  ok   test_instruction_contracts
+  -- 11/11 passed
+  ok   test_adapters_install_into_every_codex_home
+  ok   test_brief_modes
+  ok   test_codex_adapters_delegate_copilot_adapters_persona_pass
+  ok   test_degrades_without_policy_or_codex_home
+  ok   test_delegation_findings_artifact_present_and_shaped
+  ok   test_prune_respects_kit_marker_and_role_unmapping
+  ok   test_stale_single_agent_claims_are_gone
+  ok   test_subagent_tomls_carry_identity_policy_and_persona
+  -- 8/8 passed
+```
+
+## T014 — 2026-09-06T20:20:14
+
+- **Command:** `bash tests/test-gate-contracts.sh`
+- **Cwd:** /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline
+- **Exit:** 0
+- **Captured:** 2026-09-06T20:20:14 · sha256:7dcb3a982827 (over full output)
+
+```text
+  ok   test_all_brief_modes
+  ok   test_all_overlay_defaults
+  ok   test_briefs_t010
+  ok   test_briefs_t011
+  ok   test_briefs_t012
+  ok   test_briefs_t013
+  ok   test_defaults_t006
+  ok   test_defaults_t007
+  ok   test_defaults_t008
+  ok   test_defaults_t009
+  ok   test_instruction_contracts
+  ok   test_reports_and_tally
+  ok   test_review_scope_contracts
+  -- 13/13 passed
+```
+
+## T015 — 2026-09-06T20:21:14
+
+- **Command:** `bash tests/test-verification.sh`
+- **Cwd:** /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline
+- **Exit:** 0
+- **Captured:** 2026-09-06T20:21:14 · sha256:0e92dde043a9 (over full output)
+
+```text
+  ok   test_config_grammar
+  ok   test_owned_transactions
+  -- 2/2 passed
+```
+
+## T016 — 2026-09-07T06:57:59
+
+- **Command:** `bash tests/test-verification.sh`
+- **Cwd:** /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline
+- **Exit:** 0
+- **Captured:** 2026-09-07T06:57:59 · sha256:b0307d5f3643 (over full output)
+
+```text
+  ok   test_capture_provenance
+  ok   test_config_grammar
+  ok   test_owned_transactions
+  -- 3/3 passed
+```
+
+## CAP-1-G083Nw — 2026-09-07T05:02:31Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-1-G083Nw/output.log`.
+
+capture=CAP-1-G083Nw command=/bin/bash -o pipefail -c bash tests/test-spec-run.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=6afa5129adcacc389d7dd247ba059bc93f6abec84371466d3b7f5f19daa2bbd2 input=7ddeca901e592669a05dc262a94d224054c5b200de566212667b44333bed711c log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-1-G083Nw/output.log [complete metadata: capture directory]
+
+## CAP-2-fvXXB7 — 2026-09-07T05:09:57Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-2-fvXXB7/output.log`.
+
+capture=CAP-2-fvXXB7 command=/bin/bash -o pipefail -c bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=b0307d5f3643923c85b2aa7d758ae3f0bf12a603f48312482e8cbeddb222d636 input=c3647b8eb1498d931e28244badb369909fdf3e3e456361528380bac8100a5705 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-2-fvXXB7/output.log [complete metadata: capture directory]
+
+## CAP-3-F6tBsK — 2026-09-07T05:16:53Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-3-F6tBsK/output.log`.
+
+capture=CAP-3-F6tBsK command=/bin/bash -o pipefail -c bash tests/test-spec-task.sh && bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=c6dc9c911986718cc173a45c9b3af2a90a07906beb688ae74cdb5b5ef1426064 input=3f03628bcb1cff55a77756f45b67bc8abdaf3ec45b1035534cf9f317f37b4572 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-3-F6tBsK/output.log [complete metadata: capture directory]
+
+## CAP-4-9AgF6L — 2026-09-07T05:28:23Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-4-9AgF6L/output.log`.
+
+capture=CAP-4-9AgF6L command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh  key=  -- 4/4 passed exit=0 output=cdb4b2552579056efd0d71394daf96b1e0eec3f7fb5c181409a84acd360c1c0a input=5b5743f2067d7fc7a4e14992a803ee578e5213d1f13d8f3b719c78894d2a6f5c log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-4-9AgF6L/output.log [complete metadata: capture directory]
+
+## CAP-5-lU4jNB — 2026-09-07T15:19:26Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-5-lU4jNB/output.log`.
+
+capture=CAP-5-lU4jNB command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh  key=  -- 5/5 passed exit=0 output=4528bb4c2538df3714e146a03bb7da7fbc1b353905f89f8698df12fbffdaf8d1 input=651c45acbed3ca24f274837a0b58eeef80f809f6ab4ff340ed28ffceed64edce log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-5-lU4jNB/output.log [complete metadata: capture directory]
+
+## CAP-6-nIAiBv — 2026-09-07T20:28:15Z
+
+Captured run, exit 143. Full log: `notes/captures/CAP-6-nIAiBv/output.log`.
+
+capture=CAP-6-nIAiBv command=/bin/bash -o pipefail -c bash tests/run.sh && shellcheck -S warning -x scripts/*.sh tests/*.sh  key=/bin/bash: line 1: 82193 Terminated: 15          bash tests/run.sh exit=143 output=36643774106bf85c464898e18bf60990ccc08b7c4779987cdac86ad5daf3285f input=887c71c9bcd40d67d47477bd314609d4e25b80c8d3787b1126be891694de83c5 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-6-nIAiBv/output.log [complete metadata: capture directory]
+
+## CAP-8-Z75ufP — 2026-09-07T21:05:10Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-8-Z75ufP/output.log`.
+
+capture=CAP-8-Z75ufP command=/bin/bash -o pipefail -c bash tests/run.sh && shellcheck -S warning -x scripts/*.sh tests/*.sh  key=  -- 3/3 passed exit=0 output=23bc386b960148ddb0cdc2b30e01e4ef4f998bb43992204343ccc2f7b7d35c4d input=d5f67fadf458916852035f7aa23ebb8db0f55c3214e7127133c0321af80dc09d log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-8-Z75ufP/output.log [complete metadata: capture directory]
+
+## CAP-9-FZwaR4 — 2026-09-08T02:11:56Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-9-FZwaR4/output.log`.
+
+capture=CAP-9-FZwaR4 command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=0674f61c5163d250133fb5d838ec0ee3730d3d6e40f72f723f5f49416449d191 input=d5f67fadf458916852035f7aa23ebb8db0f55c3214e7127133c0321af80dc09d log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-9-FZwaR4/output.log [complete metadata: capture directory]
+
+## Handoff — stopped after T022
+
+T022 exact Verify passed in CAP-9-FZwaR4: test-spec-gate 6/6 and
+ test-verification 3/3, exit 0. Deterministic accept recorded return digest
+7385bc8a188f76ce0654da500b90d45072e6d58c9686f03544cb99a26ef17211.
+CAP-8-Z75ufP contains the full macOS/Bash 3.2 suite plus ShellCheck PASS.
+Linux logs under notes/verification/platforms are incomplete/failing observations,
+not Linux PASS. Docker restart timed out; no factory reset or volume deletion.
+T023 onward remain pending; no opponent was dispatched. User requested handoff
+and stop after the current task. Existing dirty changes are deliberately preserved.
+
+## CAP-10-rSCipE — 2026-09-08T02:28:18Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-10-rSCipE/output.log`.
+
+capture=CAP-10-rSCipE command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=1e7cb98767b063c47d9b91e7f2304ba6ecc36bbdc8319e4e7ae51594753470ce input=9dee1f12f9f436232e8706eb941d54837e1953756aeb0e28d66a29011571fa01 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-10-rSCipE/output.log [complete metadata: capture directory]
+
+## CAP-11-VYrZH0 — 2026-09-08T02:32:15Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-11-VYrZH0/output.log`.
+
+capture=CAP-11-VYrZH0 command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=0c5db03a7dd3fdf020bd0228826045f5a8f1e5b4e433b9079de6b54021fa94a7 input=4549ff7e398f484d188eb589452dcb45cf61f11ae18b1eb48f845b5af5dc5223 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-11-VYrZH0/output.log [complete metadata: capture directory]
+
+## CAP-12-3n3CnT — 2026-09-08T06:09:42Z
+
+Captured run, exit 1. Full log: `notes/captures/CAP-12-3n3CnT/output.log`.
+
+capture=CAP-12-3n3CnT command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh  key=  -- 13/14 passed exit=1 output=f4d7535b7e4db95f15ecaae2180f18602fdc6857012dd6c54f068c81c546a5b6 input=76d8ec4fe0044309bedd0be40ed8e452a9570abb68ec1fe80ae334fed85cfac6 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-12-3n3CnT/output.log [complete metadata: capture directory]
+
+## CAP-13-APrAYv — 2026-09-08T06:12:39Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-13-APrAYv/output.log`.
+
+capture=CAP-13-APrAYv command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=c89f7d9e3ceea159e64bb75defc10d0c11ca84dee772071cbdfc2c36232f3fdb input=698de37ff1f8f3d585b73d1fe7ffae2640158f4d79b6f80d270b36bb1412ea85 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-13-APrAYv/output.log [complete metadata: capture directory]
+
+## CAP-14-jVE3FM — 2026-09-08T06:13:30Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-14-jVE3FM/output.log`.
+
+capture=CAP-14-jVE3FM command=/bin/bash -o pipefail -c bash tests/test-sdd-analyze.sh  key=  -- 18/18 passed exit=0 output=20ac89cdff35a7ebcd8d19d2c3a2ddc42f015dc3cb116147d9f5c5c5b4b62344 input=698de37ff1f8f3d585b73d1fe7ffae2640158f4d79b6f80d270b36bb1412ea85 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-14-jVE3FM/output.log [complete metadata: capture directory]
+
+## CAP-15-4eF31Y — 2026-09-08T06:15:04Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-15-4eF31Y/output.log`.
+
+capture=CAP-15-4eF31Y command=/bin/bash -o pipefail -c bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=b0307d5f3643923c85b2aa7d758ae3f0bf12a603f48312482e8cbeddb222d636 input=698de37ff1f8f3d585b73d1fe7ffae2640158f4d79b6f80d270b36bb1412ea85 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-15-4eF31Y/output.log [complete metadata: capture directory]
+
+## CAP-16-VBzeMz — 2026-09-08T06:16:22Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-16-VBzeMz/output.log`.
+
+capture=CAP-16-VBzeMz command=/bin/bash -o pipefail -c bash tests/test-golden-example.sh  key=  -- 3/3 passed exit=0 output=c5596e4df60ed53e31618150bc13f9487553233a0cbc59820063ae9aa2cc96ae input=698de37ff1f8f3d585b73d1fe7ffae2640158f4d79b6f80d270b36bb1412ea85 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-16-VBzeMz/output.log [complete metadata: capture directory]
+
+## CAP-17-nUBCdM — 2026-09-08T06:21:30Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-17-nUBCdM/output.log`.
+
+capture=CAP-17-nUBCdM command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-build-adapters.sh  key=  -- 8/8 passed exit=0 output=07e727dc8f9709670ecccccc71bb8a688e4b406e14206de1a60860b72586b1e0 input=698de37ff1f8f3d585b73d1fe7ffae2640158f4d79b6f80d270b36bb1412ea85 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-17-nUBCdM/output.log [complete metadata: capture directory]
+
+## CAP-18-l2UUu5 — 2026-09-08T06:25:01Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-18-l2UUu5/output.log`.
+
+capture=CAP-18-l2UUu5 command=/bin/bash -o pipefail -c bash tests/test-spec-run.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=6afa5129adcacc389d7dd247ba059bc93f6abec84371466d3b7f5f19daa2bbd2 input=0f717780ec18f4189e1323876531185ec3454daaeaba1cb6b8ea866f493fa3d6 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-18-l2UUu5/output.log [complete metadata: capture directory]
+
+## CAP-19-YqoEuW — 2026-09-08T06:26:37Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-19-YqoEuW/output.log`.
+
+capture=CAP-19-YqoEuW command=/bin/bash -o pipefail -c bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=b0307d5f3643923c85b2aa7d758ae3f0bf12a603f48312482e8cbeddb222d636 input=0f717780ec18f4189e1323876531185ec3454daaeaba1cb6b8ea866f493fa3d6 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-19-YqoEuW/output.log [complete metadata: capture directory]
+
+## CAP-20-SHj0XJ — 2026-09-08T15:50:30Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-20-SHj0XJ/output.log`.
+
+capture=CAP-20-SHj0XJ command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=c89f7d9e3ceea159e64bb75defc10d0c11ca84dee772071cbdfc2c36232f3fdb input=bc398a70cddaeba1dc31650b192997c00dd1cac3fa56c9c6bb166e69a202c1c0 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-20-SHj0XJ/output.log [complete metadata: capture directory]
+
+## CAP-21-dKb6XY — 2026-09-08T15:51:17Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-21-dKb6XY/output.log`.
+
+capture=CAP-21-dKb6XY command=/bin/bash -o pipefail -c bash tests/test-sdd-analyze.sh  key=  -- 18/18 passed exit=0 output=20ac89cdff35a7ebcd8d19d2c3a2ddc42f015dc3cb116147d9f5c5c5b4b62344 input=bc398a70cddaeba1dc31650b192997c00dd1cac3fa56c9c6bb166e69a202c1c0 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-21-dKb6XY/output.log [complete metadata: capture directory]
+
+## CAP-22-qurmtb — 2026-09-08T15:52:39Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-22-qurmtb/output.log`.
+
+capture=CAP-22-qurmtb command=/bin/bash -o pipefail -c bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=b0307d5f3643923c85b2aa7d758ae3f0bf12a603f48312482e8cbeddb222d636 input=bc398a70cddaeba1dc31650b192997c00dd1cac3fa56c9c6bb166e69a202c1c0 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-22-qurmtb/output.log [complete metadata: capture directory]
+
+## CAP-23-ddEXbZ — 2026-09-08T15:53:26Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-23-ddEXbZ/output.log`.
+
+capture=CAP-23-ddEXbZ command=/bin/bash -o pipefail -c bash tests/test-golden-example.sh  key=  -- 3/3 passed exit=0 output=c5596e4df60ed53e31618150bc13f9487553233a0cbc59820063ae9aa2cc96ae input=bc398a70cddaeba1dc31650b192997c00dd1cac3fa56c9c6bb166e69a202c1c0 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-23-ddEXbZ/output.log [complete metadata: capture directory]
+
+## CAP-24-so3Oe2 — 2026-09-08T15:57:27Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-24-so3Oe2/output.log`.
+
+capture=CAP-24-so3Oe2 command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-build-adapters.sh  key=  -- 8/8 passed exit=0 output=07e727dc8f9709670ecccccc71bb8a688e4b406e14206de1a60860b72586b1e0 input=bc398a70cddaeba1dc31650b192997c00dd1cac3fa56c9c6bb166e69a202c1c0 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-24-so3Oe2/output.log [complete metadata: capture directory]
+
+## CAP-25-YLM9sI — 2026-09-08T20:52:28Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-25-YLM9sI/output.log`.
+
+capture=CAP-25-YLM9sI command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=c89f7d9e3ceea159e64bb75defc10d0c11ca84dee772071cbdfc2c36232f3fdb input=7c6cb6d6835e01d0b9ac27fcb010ce6f5ab62e17f796dda097415e6c2321f6f9 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-25-YLM9sI/output.log [complete metadata: capture directory]
+
+## CAP-26-36WsT1 — 2026-09-08T20:55:17Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-26-36WsT1/output.log`.
+
+capture=CAP-26-36WsT1 command=/bin/bash -o pipefail -c bash tests/test-sdd-analyze.sh  key=  -- 18/18 passed exit=0 output=20ac89cdff35a7ebcd8d19d2c3a2ddc42f015dc3cb116147d9f5c5c5b4b62344 input=7c6cb6d6835e01d0b9ac27fcb010ce6f5ab62e17f796dda097415e6c2321f6f9 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-26-36WsT1/output.log [complete metadata: capture directory]
+
+## CAP-27-UvfUeW — 2026-09-08T20:56:44Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-27-UvfUeW/output.log`.
+
+capture=CAP-27-UvfUeW command=/bin/bash -o pipefail -c bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=b0307d5f3643923c85b2aa7d758ae3f0bf12a603f48312482e8cbeddb222d636 input=7c6cb6d6835e01d0b9ac27fcb010ce6f5ab62e17f796dda097415e6c2321f6f9 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-27-UvfUeW/output.log [complete metadata: capture directory]
+
+## CAP-28-4Mn7JI — 2026-09-08T20:57:34Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-28-4Mn7JI/output.log`.
+
+capture=CAP-28-4Mn7JI command=/bin/bash -o pipefail -c bash tests/test-golden-example.sh  key=  -- 3/3 passed exit=0 output=c5596e4df60ed53e31618150bc13f9487553233a0cbc59820063ae9aa2cc96ae input=7c6cb6d6835e01d0b9ac27fcb010ce6f5ab62e17f796dda097415e6c2321f6f9 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-28-4Mn7JI/output.log [complete metadata: capture directory]
+
+## CAP-29-pwbpiT — 2026-09-08T21:02:15Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-29-pwbpiT/output.log`.
+
+capture=CAP-29-pwbpiT command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-build-adapters.sh  key=  -- 8/8 passed exit=0 output=07e727dc8f9709670ecccccc71bb8a688e4b406e14206de1a60860b72586b1e0 input=7c6cb6d6835e01d0b9ac27fcb010ce6f5ab62e17f796dda097415e6c2321f6f9 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-29-pwbpiT/output.log [complete metadata: capture directory]
+
+## CAP-30-SZFqk0 — 2026-09-08T21:04:21Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-30-SZFqk0/output.log`.
+
+capture=CAP-30-SZFqk0 command=/bin/bash -o pipefail -c bash tests/test-spec-run.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=6afa5129adcacc389d7dd247ba059bc93f6abec84371466d3b7f5f19daa2bbd2 input=7c6cb6d6835e01d0b9ac27fcb010ce6f5ab62e17f796dda097415e6c2321f6f9 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-30-SZFqk0/output.log [complete metadata: capture directory]
+
+## CAP-31-mZr7oc — 2026-09-08T21:18:38Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-31-mZr7oc/output.log`.
+
+capture=CAP-31-mZr7oc command=/bin/bash -o pipefail -c bash tests/test-spec-task.sh && bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=3334b455c3ba2b83d00ab61c13747adf07fa5cb70298720a949d5e873eecd3f0 input=7c6cb6d6835e01d0b9ac27fcb010ce6f5ab62e17f796dda097415e6c2321f6f9 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-31-mZr7oc/output.log [complete metadata: capture directory]
+
+## CAP-32-d3je9z — 2026-09-08T21:25:42Z
+
+Captured run, exit 1. Full log: `notes/captures/CAP-32-d3je9z/output.log`.
+
+capture=CAP-32-d3je9z command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh  key=  -- 4/6 passed exit=1 output=3b23fa20834b709bd8913f5b11d45913f63258efa97e70168d93c6323654d091 input=7c6cb6d6835e01d0b9ac27fcb010ce6f5ab62e17f796dda097415e6c2321f6f9 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-32-d3je9z/output.log [complete metadata: capture directory]
+
+## CAP-33-K5qhPT — 2026-09-08T21:41:28Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-33-K5qhPT/output.log`.
+
+capture=CAP-33-K5qhPT command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=c89f7d9e3ceea159e64bb75defc10d0c11ca84dee772071cbdfc2c36232f3fdb input=c3cfe9ffebdc6273ba89a109434fafd24fbde3dcfe22a614d45379a11390642a log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-33-K5qhPT/output.log [complete metadata: capture directory]
+
+## CAP-34-3J5D3g — 2026-09-08T21:42:10Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-34-3J5D3g/output.log`.
+
+capture=CAP-34-3J5D3g command=/bin/bash -o pipefail -c bash tests/test-sdd-analyze.sh  key=  -- 18/18 passed exit=0 output=20ac89cdff35a7ebcd8d19d2c3a2ddc42f015dc3cb116147d9f5c5c5b4b62344 input=c3cfe9ffebdc6273ba89a109434fafd24fbde3dcfe22a614d45379a11390642a log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-34-3J5D3g/output.log [complete metadata: capture directory]
+
+## CAP-35-I3JjaW — 2026-09-08T21:43:33Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-35-I3JjaW/output.log`.
+
+capture=CAP-35-I3JjaW command=/bin/bash -o pipefail -c bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=b0307d5f3643923c85b2aa7d758ae3f0bf12a603f48312482e8cbeddb222d636 input=c3cfe9ffebdc6273ba89a109434fafd24fbde3dcfe22a614d45379a11390642a log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-35-I3JjaW/output.log [complete metadata: capture directory]
+
+## CAP-36-piqicJ — 2026-09-08T21:44:25Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-36-piqicJ/output.log`.
+
+capture=CAP-36-piqicJ command=/bin/bash -o pipefail -c bash tests/test-golden-example.sh  key=  -- 3/3 passed exit=0 output=c5596e4df60ed53e31618150bc13f9487553233a0cbc59820063ae9aa2cc96ae input=c3cfe9ffebdc6273ba89a109434fafd24fbde3dcfe22a614d45379a11390642a log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-36-piqicJ/output.log [complete metadata: capture directory]
+
+## CAP-37-AXKh3Z — 2026-09-08T21:51:03Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-37-AXKh3Z/output.log`.
+
+capture=CAP-37-AXKh3Z command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-build-adapters.sh  key=  -- 8/8 passed exit=0 output=07e727dc8f9709670ecccccc71bb8a688e4b406e14206de1a60860b72586b1e0 input=c3cfe9ffebdc6273ba89a109434fafd24fbde3dcfe22a614d45379a11390642a log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-37-AXKh3Z/output.log [complete metadata: capture directory]
+
+## CAP-38-dVr8Cu — 2026-09-08T21:53:18Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-38-dVr8Cu/output.log`.
+
+capture=CAP-38-dVr8Cu command=/bin/bash -o pipefail -c bash tests/test-spec-run.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=6afa5129adcacc389d7dd247ba059bc93f6abec84371466d3b7f5f19daa2bbd2 input=c3cfe9ffebdc6273ba89a109434fafd24fbde3dcfe22a614d45379a11390642a log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-38-dVr8Cu/output.log [complete metadata: capture directory]
+
+## CAP-39-FOjIma — 2026-09-08T22:03:27Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-39-FOjIma/output.log`.
+
+capture=CAP-39-FOjIma command=/bin/bash -o pipefail -c bash tests/test-spec-task.sh && bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=3334b455c3ba2b83d00ab61c13747adf07fa5cb70298720a949d5e873eecd3f0 input=c3cfe9ffebdc6273ba89a109434fafd24fbde3dcfe22a614d45379a11390642a log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-39-FOjIma/output.log [complete metadata: capture directory]
+
+## CAP-40-THoNC1 — 2026-09-08T22:14:13Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-40-THoNC1/output.log`.
+
+capture=CAP-40-THoNC1 command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=f3fb7114ca5222ecd984af53b2c6f1e91576973505c2112e12455304993b539b input=c3cfe9ffebdc6273ba89a109434fafd24fbde3dcfe22a614d45379a11390642a log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-40-THoNC1/output.log [complete metadata: capture directory]
+
+## CAP-41-BPUsEf — 2026-09-08T22:27:41Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-41-BPUsEf/output.log`.
+
+capture=CAP-41-BPUsEf command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=0674f61c5163d250133fb5d838ec0ee3730d3d6e40f72f723f5f49416449d191 input=c3cfe9ffebdc6273ba89a109434fafd24fbde3dcfe22a614d45379a11390642a log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-41-BPUsEf/output.log [complete metadata: capture directory]
+
+## CAP-42-qFYYa1 — 2026-09-08T22:39:49Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-42-qFYYa1/output.log`.
+
+capture=CAP-42-qFYYa1 command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=1e7cb98767b063c47d9b91e7f2304ba6ecc36bbdc8319e4e7ae51594753470ce input=c3cfe9ffebdc6273ba89a109434fafd24fbde3dcfe22a614d45379a11390642a log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-42-qFYYa1/output.log [complete metadata: capture directory]
+
+## CAP-43-7FBD86 — 2026-09-08T22:46:05Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-43-7FBD86/output.log`.
+
+capture=CAP-43-7FBD86 command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=0c5db03a7dd3fdf020bd0228826045f5a8f1e5b4e433b9079de6b54021fa94a7 input=c3cfe9ffebdc6273ba89a109434fafd24fbde3dcfe22a614d45379a11390642a log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-43-7FBD86/output.log [complete metadata: capture directory]
+
+## CAP-44-BurSfG — 2026-09-08T23:00:38Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-44-BurSfG/output.log`.
+
+capture=CAP-44-BurSfG command=/bin/bash -o pipefail -c bash tests/run.sh  key=  -- 3/3 passed exit=0 output=23bc386b960148ddb0cdc2b30e01e4ef4f998bb43992204343ccc2f7b7d35c4d input=c3cfe9ffebdc6273ba89a109434fafd24fbde3dcfe22a614d45379a11390642a log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-44-BurSfG/output.log [complete metadata: capture directory]
+
+## CAP-45-D9rq3x — 2026-09-09T08:00:28Z
+
+Captured run, exit 143. Full log: `notes/captures/CAP-45-D9rq3x/output.log`.
+
+capture=CAP-45-D9rq3x command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh  key=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/verification-lib.sh: line 1143:  7192 Terminated: 15          "$@" exit=143 output=34fab3e1882fce34f514fbab2cc1335e95d9ef45c48861b18549ec8821a8b0c4 input=dd709938a381865dbd206dbf2d89b4b15cd5d3c55beebffd82e624f99fd8c280 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-45-D9rq3x/output.log [complete metadata: capture directory]
+
+## CAP-46-MEsdpq — 2026-09-09T08:10:18Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-46-MEsdpq/output.log`.
+
+capture=CAP-46-MEsdpq command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=f3fb7114ca5222ecd984af53b2c6f1e91576973505c2112e12455304993b539b input=9504562a1e1f4c3a36295be30356bf09404f1040c61bf4fa75303ba4dece5f5e log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-46-MEsdpq/output.log [complete metadata: capture directory]
+
+## CAP-47-pAxlby — 2026-09-09T08:24:18Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-47-pAxlby/output.log`.
+
+capture=CAP-47-pAxlby command=/bin/bash -o pipefail -c bash tests/run.sh && shellcheck -S warning -x scripts/*.sh tests/*.sh  key=  -- 3/3 passed exit=0 output=23bc386b960148ddb0cdc2b30e01e4ef4f998bb43992204343ccc2f7b7d35c4d input=9504562a1e1f4c3a36295be30356bf09404f1040c61bf4fa75303ba4dece5f5e log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-47-pAxlby/output.log [complete metadata: capture directory]
+
+## CAP-48-8qJB71 — 2026-09-09T15:18:10Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-48-8qJB71/output.log`.
+
+capture=CAP-48-8qJB71 command=/usr/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=c89f7d9e3ceea159e64bb75defc10d0c11ca84dee772071cbdfc2c36232f3fdb input=046189dcb06b804404553fea633ad24e9f88d19e706655cc522ae8d604d067a0 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-48-8qJB71/output.log [complete metadata: capture directory]
+
+## CAP-49-0k7Bq1 — 2026-09-09T15:18:24Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-49-0k7Bq1/output.log`.
+
+capture=CAP-49-0k7Bq1 command=/usr/bin/bash -o pipefail -c bash tests/test-sdd-analyze.sh  key=  -- 18/18 passed exit=0 output=20ac89cdff35a7ebcd8d19d2c3a2ddc42f015dc3cb116147d9f5c5c5b4b62344 input=046189dcb06b804404553fea633ad24e9f88d19e706655cc522ae8d604d067a0 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-49-0k7Bq1/output.log [complete metadata: capture directory]
+
+## CAP-50-v33Zmq — 2026-09-09T15:19:01Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-50-v33Zmq/output.log`.
+
+capture=CAP-50-v33Zmq command=/usr/bin/bash -o pipefail -c bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=b0307d5f3643923c85b2aa7d758ae3f0bf12a603f48312482e8cbeddb222d636 input=046189dcb06b804404553fea633ad24e9f88d19e706655cc522ae8d604d067a0 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-50-v33Zmq/output.log [complete metadata: capture directory]
+
+## CAP-51-VsBmcC — 2026-09-09T15:19:49Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-51-VsBmcC/output.log`.
+
+capture=CAP-51-VsBmcC command=/usr/bin/bash -o pipefail -c bash tests/test-golden-example.sh  key=  -- 3/3 passed exit=0 output=c5596e4df60ed53e31618150bc13f9487553233a0cbc59820063ae9aa2cc96ae input=046189dcb06b804404553fea633ad24e9f88d19e706655cc522ae8d604d067a0 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-51-VsBmcC/output.log [complete metadata: capture directory]
+
+## CAP-52-XlEpOt — 2026-09-09T15:23:13Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-52-XlEpOt/output.log`.
+
+capture=CAP-52-XlEpOt command=/usr/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-build-adapters.sh  key=  -- 8/8 passed exit=0 output=07e727dc8f9709670ecccccc71bb8a688e4b406e14206de1a60860b72586b1e0 input=046189dcb06b804404553fea633ad24e9f88d19e706655cc522ae8d604d067a0 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-52-XlEpOt/output.log [complete metadata: capture directory]
+
+## CAP-53-S5WlHO — 2026-09-09T15:23:58Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-53-S5WlHO/output.log`.
+
+capture=CAP-53-S5WlHO command=/usr/bin/bash -o pipefail -c bash tests/test-spec-run.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=6afa5129adcacc389d7dd247ba059bc93f6abec84371466d3b7f5f19daa2bbd2 input=046189dcb06b804404553fea633ad24e9f88d19e706655cc522ae8d604d067a0 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-53-S5WlHO/output.log [complete metadata: capture directory]
+
+## CAP-54-6og2nn — 2026-09-09T15:26:49Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-54-6og2nn/output.log`.
+
+capture=CAP-54-6og2nn command=/usr/bin/bash -o pipefail -c bash tests/test-spec-task.sh && bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=3334b455c3ba2b83d00ab61c13747adf07fa5cb70298720a949d5e873eecd3f0 input=046189dcb06b804404553fea633ad24e9f88d19e706655cc522ae8d604d067a0 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-54-6og2nn/output.log [complete metadata: capture directory]
+
+## CAP-55-8QU7TF — 2026-09-09T15:29:19Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-55-8QU7TF/output.log`.
+
+capture=CAP-55-8QU7TF command=/usr/bin/bash -o pipefail -c bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=f3fb7114ca5222ecd984af53b2c6f1e91576973505c2112e12455304993b539b input=046189dcb06b804404553fea633ad24e9f88d19e706655cc522ae8d604d067a0 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-55-8QU7TF/output.log [complete metadata: capture directory]
+
+## CAP-56-HQs8hY — 2026-09-09T15:32:07Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-56-HQs8hY/output.log`.
+
+capture=CAP-56-HQs8hY command=/usr/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=0674f61c5163d250133fb5d838ec0ee3730d3d6e40f72f723f5f49416449d191 input=046189dcb06b804404553fea633ad24e9f88d19e706655cc522ae8d604d067a0 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-56-HQs8hY/output.log [complete metadata: capture directory]
+
+## CAP-57-JQQPoh — 2026-09-09T15:34:51Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-57-JQQPoh/output.log`.
+
+capture=CAP-57-JQQPoh command=/usr/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=1e7cb98767b063c47d9b91e7f2304ba6ecc36bbdc8319e4e7ae51594753470ce input=046189dcb06b804404553fea633ad24e9f88d19e706655cc522ae8d604d067a0 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-57-JQQPoh/output.log [complete metadata: capture directory]
+
+## CAP-58-6q9xPZ — 2026-09-09T15:36:03Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-58-6q9xPZ/output.log`.
+
+capture=CAP-58-6q9xPZ command=/usr/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=0c5db03a7dd3fdf020bd0228826045f5a8f1e5b4e433b9079de6b54021fa94a7 input=046189dcb06b804404553fea633ad24e9f88d19e706655cc522ae8d604d067a0 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-58-6q9xPZ/output.log [complete metadata: capture directory]
+
+## CAP-59-T1vZyi — 2026-09-09T15:39:47Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-59-T1vZyi/output.log`.
+
+capture=CAP-59-T1vZyi command=/usr/bin/bash -o pipefail -c bash tests/run.sh  key=  -- 3/3 passed exit=0 output=23bc386b960148ddb0cdc2b30e01e4ef4f998bb43992204343ccc2f7b7d35c4d input=046189dcb06b804404553fea633ad24e9f88d19e706655cc522ae8d604d067a0 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-59-T1vZyi/output.log [complete metadata: capture directory]
+
+## CAP-60-2slPoM — 2026-09-09T18:04:55Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-60-2slPoM/output.log`.
+
+capture=CAP-60-2slPoM command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=c89f7d9e3ceea159e64bb75defc10d0c11ca84dee772071cbdfc2c36232f3fdb input=4562dfc2231ea6ebe80072e9ff4ed22588f1460505988b62a116f6055ad68c71 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-60-2slPoM/output.log [complete metadata: capture directory]
+
+## CAP-61-qoaIt1 — 2026-09-09T18:05:31Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-61-qoaIt1/output.log`.
+
+capture=CAP-61-qoaIt1 command=/bin/bash -o pipefail -c bash tests/test-sdd-analyze.sh  key=  -- 18/18 passed exit=0 output=20ac89cdff35a7ebcd8d19d2c3a2ddc42f015dc3cb116147d9f5c5c5b4b62344 input=4562dfc2231ea6ebe80072e9ff4ed22588f1460505988b62a116f6055ad68c71 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-61-qoaIt1/output.log [complete metadata: capture directory]
+
+## CAP-62-q8UF3A — 2026-09-09T18:06:42Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-62-q8UF3A/output.log`.
+
+capture=CAP-62-q8UF3A command=/bin/bash -o pipefail -c bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=b0307d5f3643923c85b2aa7d758ae3f0bf12a603f48312482e8cbeddb222d636 input=4562dfc2231ea6ebe80072e9ff4ed22588f1460505988b62a116f6055ad68c71 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-62-q8UF3A/output.log [complete metadata: capture directory]
+
+## CAP-63-vU9EZS — 2026-09-09T18:07:26Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-63-vU9EZS/output.log`.
+
+capture=CAP-63-vU9EZS command=/bin/bash -o pipefail -c bash tests/test-golden-example.sh  key=  -- 3/3 passed exit=0 output=c5596e4df60ed53e31618150bc13f9487553233a0cbc59820063ae9aa2cc96ae input=4562dfc2231ea6ebe80072e9ff4ed22588f1460505988b62a116f6055ad68c71 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-63-vU9EZS/output.log [complete metadata: capture directory]
+
+## CAP-64-r0pvJY — 2026-09-09T18:11:28Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-64-r0pvJY/output.log`.
+
+capture=CAP-64-r0pvJY command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-build-adapters.sh  key=  -- 8/8 passed exit=0 output=07e727dc8f9709670ecccccc71bb8a688e4b406e14206de1a60860b72586b1e0 input=4562dfc2231ea6ebe80072e9ff4ed22588f1460505988b62a116f6055ad68c71 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-64-r0pvJY/output.log [complete metadata: capture directory]
+
+## CAP-65-BQyOTo — 2026-09-09T18:13:20Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-65-BQyOTo/output.log`.
+
+capture=CAP-65-BQyOTo command=/bin/bash -o pipefail -c bash tests/test-spec-run.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=6afa5129adcacc389d7dd247ba059bc93f6abec84371466d3b7f5f19daa2bbd2 input=4562dfc2231ea6ebe80072e9ff4ed22588f1460505988b62a116f6055ad68c71 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-65-BQyOTo/output.log [complete metadata: capture directory]
+
+## CAP-66-kVbkyc — 2026-09-09T18:21:47Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-66-kVbkyc/output.log`.
+
+capture=CAP-66-kVbkyc command=/bin/bash -o pipefail -c bash tests/test-spec-task.sh && bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=3334b455c3ba2b83d00ab61c13747adf07fa5cb70298720a949d5e873eecd3f0 input=4562dfc2231ea6ebe80072e9ff4ed22588f1460505988b62a116f6055ad68c71 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-66-kVbkyc/output.log [complete metadata: capture directory]
+
+## CAP-67-8XH4go — 2026-09-09T18:29:19Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-67-8XH4go/output.log`.
+
+capture=CAP-67-8XH4go command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=f3fb7114ca5222ecd984af53b2c6f1e91576973505c2112e12455304993b539b input=4562dfc2231ea6ebe80072e9ff4ed22588f1460505988b62a116f6055ad68c71 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-67-8XH4go/output.log [complete metadata: capture directory]
+
+## CAP-68-6iZx3e — 2026-09-09T18:37:46Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-68-6iZx3e/output.log`.
+
+capture=CAP-68-6iZx3e command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=0674f61c5163d250133fb5d838ec0ee3730d3d6e40f72f723f5f49416449d191 input=4562dfc2231ea6ebe80072e9ff4ed22588f1460505988b62a116f6055ad68c71 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-68-6iZx3e/output.log [complete metadata: capture directory]
+
+## CAP-69-A3bO56 — 2026-09-09T18:45:57Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-69-A3bO56/output.log`.
+
+capture=CAP-69-A3bO56 command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=1e7cb98767b063c47d9b91e7f2304ba6ecc36bbdc8319e4e7ae51594753470ce input=4562dfc2231ea6ebe80072e9ff4ed22588f1460505988b62a116f6055ad68c71 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-69-A3bO56/output.log [complete metadata: capture directory]
+
+## CAP-70-4rtYdX — 2026-09-09T18:49:28Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-70-4rtYdX/output.log`.
+
+capture=CAP-70-4rtYdX command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=0c5db03a7dd3fdf020bd0228826045f5a8f1e5b4e433b9079de6b54021fa94a7 input=4562dfc2231ea6ebe80072e9ff4ed22588f1460505988b62a116f6055ad68c71 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-70-4rtYdX/output.log [complete metadata: capture directory]
+
+## CAP-71-fH3nIl — 2026-09-09T19:01:04Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-71-fH3nIl/output.log`.
+
+capture=CAP-71-fH3nIl command=/bin/bash -o pipefail -c bash tests/run.sh  key=  -- 3/3 passed exit=0 output=23bc386b960148ddb0cdc2b30e01e4ef4f998bb43992204343ccc2f7b7d35c4d input=4562dfc2231ea6ebe80072e9ff4ed22588f1460505988b62a116f6055ad68c71 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-71-fH3nIl/output.log [complete metadata: capture directory]
+
+## CAP-72-DRCsRw — 2026-09-09T19:52:14Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-72-DRCsRw/output.log`.
+
+capture=CAP-72-DRCsRw command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=c89f7d9e3ceea159e64bb75defc10d0c11ca84dee772071cbdfc2c36232f3fdb input=a16a5388c1670eec70fc8a4ec52e803e78c2598c4157f7a2d68261db0038accf log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-72-DRCsRw/output.log [complete metadata: capture directory]
+
+## CAP-73-AhehRb — 2026-09-09T19:52:48Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-73-AhehRb/output.log`.
+
+capture=CAP-73-AhehRb command=/bin/bash -o pipefail -c bash tests/test-sdd-analyze.sh  key=  -- 18/18 passed exit=0 output=20ac89cdff35a7ebcd8d19d2c3a2ddc42f015dc3cb116147d9f5c5c5b4b62344 input=a16a5388c1670eec70fc8a4ec52e803e78c2598c4157f7a2d68261db0038accf log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-73-AhehRb/output.log [complete metadata: capture directory]
+
+## CAP-74-98czoc — 2026-09-09T19:54:01Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-74-98czoc/output.log`.
+
+capture=CAP-74-98czoc command=/bin/bash -o pipefail -c bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=b0307d5f3643923c85b2aa7d758ae3f0bf12a603f48312482e8cbeddb222d636 input=a16a5388c1670eec70fc8a4ec52e803e78c2598c4157f7a2d68261db0038accf log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-74-98czoc/output.log [complete metadata: capture directory]
+
+## CAP-75-NFVrmN — 2026-09-09T19:54:45Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-75-NFVrmN/output.log`.
+
+capture=CAP-75-NFVrmN command=/bin/bash -o pipefail -c bash tests/test-golden-example.sh  key=  -- 3/3 passed exit=0 output=c5596e4df60ed53e31618150bc13f9487553233a0cbc59820063ae9aa2cc96ae input=a16a5388c1670eec70fc8a4ec52e803e78c2598c4157f7a2d68261db0038accf log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-75-NFVrmN/output.log [complete metadata: capture directory]
+
+## CAP-76-dJN52t — 2026-09-09T20:00:58Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-76-dJN52t/output.log`.
+
+capture=CAP-76-dJN52t command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-build-adapters.sh  key=  -- 8/8 passed exit=0 output=07e727dc8f9709670ecccccc71bb8a688e4b406e14206de1a60860b72586b1e0 input=a16a5388c1670eec70fc8a4ec52e803e78c2598c4157f7a2d68261db0038accf log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-76-dJN52t/output.log [complete metadata: capture directory]
+
+## CAP-77-Go1xHN — 2026-09-09T20:02:52Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-77-Go1xHN/output.log`.
+
+capture=CAP-77-Go1xHN command=/bin/bash -o pipefail -c bash tests/test-spec-run.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=6afa5129adcacc389d7dd247ba059bc93f6abec84371466d3b7f5f19daa2bbd2 input=a16a5388c1670eec70fc8a4ec52e803e78c2598c4157f7a2d68261db0038accf log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-77-Go1xHN/output.log [complete metadata: capture directory]
+
+## CAP-78-mZ6fQV — 2026-09-09T20:11:42Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-78-mZ6fQV/output.log`.
+
+capture=CAP-78-mZ6fQV command=/bin/bash -o pipefail -c bash tests/test-spec-task.sh && bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=3334b455c3ba2b83d00ab61c13747adf07fa5cb70298720a949d5e873eecd3f0 input=a16a5388c1670eec70fc8a4ec52e803e78c2598c4157f7a2d68261db0038accf log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-78-mZ6fQV/output.log [complete metadata: capture directory]
+
+## CAP-79-W7CISj — 2026-09-09T20:19:48Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-79-W7CISj/output.log`.
+
+capture=CAP-79-W7CISj command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=f3fb7114ca5222ecd984af53b2c6f1e91576973505c2112e12455304993b539b input=a16a5388c1670eec70fc8a4ec52e803e78c2598c4157f7a2d68261db0038accf log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-79-W7CISj/output.log [complete metadata: capture directory]
+
+## CAP-80-qsJQs2 — 2026-09-09T20:28:36Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-80-qsJQs2/output.log`.
+
+capture=CAP-80-qsJQs2 command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=0674f61c5163d250133fb5d838ec0ee3730d3d6e40f72f723f5f49416449d191 input=a16a5388c1670eec70fc8a4ec52e803e78c2598c4157f7a2d68261db0038accf log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-80-qsJQs2/output.log [complete metadata: capture directory]
+
+## CAP-81-vF0TTM — 2026-09-09T20:37:26Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-81-vF0TTM/output.log`.
+
+capture=CAP-81-vF0TTM command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=1e7cb98767b063c47d9b91e7f2304ba6ecc36bbdc8319e4e7ae51594753470ce input=a16a5388c1670eec70fc8a4ec52e803e78c2598c4157f7a2d68261db0038accf log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-81-vF0TTM/output.log [complete metadata: capture directory]
+
+## CAP-82-p2iU6V — 2026-09-09T20:43:33Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-82-p2iU6V/output.log`.
+
+capture=CAP-82-p2iU6V command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=0c5db03a7dd3fdf020bd0228826045f5a8f1e5b4e433b9079de6b54021fa94a7 input=a16a5388c1670eec70fc8a4ec52e803e78c2598c4157f7a2d68261db0038accf log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-82-p2iU6V/output.log [complete metadata: capture directory]
+
+## CAP-83-uYPngt — 2026-09-09T20:59:25Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-83-uYPngt/output.log`.
+
+capture=CAP-83-uYPngt command=/bin/bash -o pipefail -c bash tests/run.sh  key=  -- 3/3 passed exit=0 output=23bc386b960148ddb0cdc2b30e01e4ef4f998bb43992204343ccc2f7b7d35c4d input=a16a5388c1670eec70fc8a4ec52e803e78c2598c4157f7a2d68261db0038accf log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-83-uYPngt/output.log [complete metadata: capture directory]
+
+## CAP-84-CaN6Ze — 2026-09-09T21:24:31Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-84-CaN6Ze/output.log`.
+
+capture=CAP-84-CaN6Ze command=/bin/bash -o pipefail -c bash tests/run.sh && shellcheck -S warning -x scripts/*.sh tests/*.sh  key=  -- 3/3 passed exit=0 output=23bc386b960148ddb0cdc2b30e01e4ef4f998bb43992204343ccc2f7b7d35c4d input=a16a5388c1670eec70fc8a4ec52e803e78c2598c4157f7a2d68261db0038accf log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-84-CaN6Ze/output.log [complete metadata: capture directory]
+
+## CAP-85-OB39D7 — 2026-09-09T21:42:34Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-85-OB39D7/output.log`.
+
+capture=CAP-85-OB39D7 command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline  key=1 warning(s), 0 errors exit=0 output=8899365fc3870d5dc7cf84e65de296f35a2c0c026e937cf9778d75c3fafb2a60 input=a16a5388c1670eec70fc8a4ec52e803e78c2598c4157f7a2d68261db0038accf log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-85-OB39D7/output.log [complete metadata: capture directory]
+
+## CAP-86-QhcTIa — 2026-09-09T21:43:00Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-86-QhcTIa/output.log`.
+
+capture=CAP-86-QhcTIa command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-ac-coverage.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline --root /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline  key=bound — every AC is named by at least one test file exit=0 output=19427ef8405a9634cbdb2e7ff615ba53323361a2b9071bc00043c25a53b8a203 input=a16a5388c1670eec70fc8a4ec52e803e78c2598c4157f7a2d68261db0038accf log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-86-QhcTIa/output.log [complete metadata: capture directory]
+
+## CAP-87-5WZzjL — 2026-09-09T21:50:23Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-87-5WZzjL/output.log`.
+
+capture=CAP-87-5WZzjL command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-evidence.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline  key=current evidence: all completed task checks have valid current captures exit=0 output=627091afc3dd6c5723656985582a2466071af1fafbe2ce2b84bd57786edc3a00 input=a16a5388c1670eec70fc8a4ec52e803e78c2598c4157f7a2d68261db0038accf log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-87-5WZzjL/output.log [complete metadata: capture directory]
+
+## CAP-88-bSWLDJ — 2026-09-09T21:51:26Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-88-bSWLDJ/output.log`.
+
+capture=CAP-88-bSWLDJ command=/bin/bash -o pipefail -c shellcheck -S warning -x scripts/*.sh tests/*.sh  key=(no output) exit=0 output=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 input=a16a5388c1670eec70fc8a4ec52e803e78c2598c4157f7a2d68261db0038accf log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-88-bSWLDJ/output.log [complete metadata: capture directory]
+
+## GATE-FLOOR
+
+Result: FLOOR-slCPQD; source: a16a5388c1670eec70fc8a4ec52e803e78c2598c4157f7a2d68261db0038accf; exit: 0; command records: `notes/verification/floors/FLOOR-slCPQD/commands.nul`.
+
+## CAP-89-0bLgSL — 2026-09-09T22:27:46Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-89-0bLgSL/output.log`.
+
+capture=CAP-89-0bLgSL command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=f3fb7114ca5222ecd984af53b2c6f1e91576973505c2112e12455304993b539b input=a8a35ed567de9fcfe66d2c4d88084744e8ab8fe4beaed731d3e7d5a6b039ec81 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-89-0bLgSL/output.log [complete metadata: capture directory]
+
+## CAP-90-vaH6bG — 2026-09-09T22:44:13Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-90-vaH6bG/output.log`.
+
+capture=CAP-90-vaH6bG command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=f3fb7114ca5222ecd984af53b2c6f1e91576973505c2112e12455304993b539b input=42197cdc11fc5964395b216099a21e738baeaff70664a5d98ff95449159c603d log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-90-vaH6bG/output.log [complete metadata: capture directory]
+
+## CAP-91-myxn7k — 2026-09-10T05:37:17Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-91-myxn7k/output.log`.
+
+capture=CAP-91-myxn7k command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=c89f7d9e3ceea159e64bb75defc10d0c11ca84dee772071cbdfc2c36232f3fdb input=3576ddc958a68f092b64b3d262ba1e8fa1725a7dc3b16337dde83e76995aeaec log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-91-myxn7k/output.log [complete metadata: capture directory]
+
+## CAP-92-pit8L4 — 2026-09-10T05:40:05Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-92-pit8L4/output.log`.
+
+capture=CAP-92-pit8L4 command=/bin/bash -o pipefail -c bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=b0307d5f3643923c85b2aa7d758ae3f0bf12a603f48312482e8cbeddb222d636 input=7cb8044d05a4edb1af06c821a6a9b5b87130ca5ca26c46032f07448a2da7c7c6 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-92-pit8L4/output.log [complete metadata: capture directory]
+
+## CAP-93-t1qHWF — 2026-09-10T06:07:39Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-93-t1qHWF/output.log`.
+
+capture=CAP-93-t1qHWF command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=cea534ae1dd3df8a53663a770a07528dbfc05ec6aae2fd7bf04d3296c5a3acf0 input=f7b1097c091f6cc2cf60289bea2931c6ae09a52b028b179b72d07942c892e531 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-93-t1qHWF/output.log [complete metadata: capture directory]
+
+## CAP-94-JMKWcl — 2026-09-10T06:30:03Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-94-JMKWcl/output.log`.
+
+capture=CAP-94-JMKWcl command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=c89f7d9e3ceea159e64bb75defc10d0c11ca84dee772071cbdfc2c36232f3fdb input=66c4879fd34deff46e077723c31153a88d8416a539d7260c053df3ce416e0725 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-94-JMKWcl/output.log [complete metadata: capture directory]
+
+## CAP-95-bj7mUc — 2026-09-10T06:40:21Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-95-bj7mUc/output.log`.
+
+capture=CAP-95-bj7mUc command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=c89f7d9e3ceea159e64bb75defc10d0c11ca84dee772071cbdfc2c36232f3fdb input=0591655f55ed9eae4284dead0435b1c1ce8de1e2f545b97ab554962d9f377e93 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-95-bj7mUc/output.log [complete metadata: capture directory]
+
+## CAP-96-ahtPAq — 2026-09-10T06:41:00Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-96-ahtPAq/output.log`.
+
+capture=CAP-96-ahtPAq command=/bin/bash -o pipefail -c bash tests/test-sdd-analyze.sh  key=  -- 18/18 passed exit=0 output=20ac89cdff35a7ebcd8d19d2c3a2ddc42f015dc3cb116147d9f5c5c5b4b62344 input=0591655f55ed9eae4284dead0435b1c1ce8de1e2f545b97ab554962d9f377e93 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-96-ahtPAq/output.log [complete metadata: capture directory]
+
+## CAP-97-CqGVkR — 2026-09-10T06:42:17Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-97-CqGVkR/output.log`.
+
+capture=CAP-97-CqGVkR command=/bin/bash -o pipefail -c bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=b0307d5f3643923c85b2aa7d758ae3f0bf12a603f48312482e8cbeddb222d636 input=0591655f55ed9eae4284dead0435b1c1ce8de1e2f545b97ab554962d9f377e93 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-97-CqGVkR/output.log [complete metadata: capture directory]
+
+## CAP-98-T3pDnz — 2026-09-10T06:43:05Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-98-T3pDnz/output.log`.
+
+capture=CAP-98-T3pDnz command=/bin/bash -o pipefail -c bash tests/test-golden-example.sh  key=  -- 3/3 passed exit=0 output=c5596e4df60ed53e31618150bc13f9487553233a0cbc59820063ae9aa2cc96ae input=0591655f55ed9eae4284dead0435b1c1ce8de1e2f545b97ab554962d9f377e93 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-98-T3pDnz/output.log [complete metadata: capture directory]
+
+## CAP-99-UUlNJu — 2026-09-10T06:51:56Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-99-UUlNJu/output.log`.
+
+capture=CAP-99-UUlNJu command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-build-adapters.sh  key=  -- 8/8 passed exit=0 output=07e727dc8f9709670ecccccc71bb8a688e4b406e14206de1a60860b72586b1e0 input=0591655f55ed9eae4284dead0435b1c1ce8de1e2f545b97ab554962d9f377e93 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-99-UUlNJu/output.log [complete metadata: capture directory]
+
+## CAP-100-S7wJhv — 2026-09-10T06:53:54Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-100-S7wJhv/output.log`.
+
+capture=CAP-100-S7wJhv command=/bin/bash -o pipefail -c bash tests/test-spec-run.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=6afa5129adcacc389d7dd247ba059bc93f6abec84371466d3b7f5f19daa2bbd2 input=0591655f55ed9eae4284dead0435b1c1ce8de1e2f545b97ab554962d9f377e93 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-100-S7wJhv/output.log [complete metadata: capture directory]
+
+## CAP-101-Ufxzc2 — 2026-09-10T07:02:59Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-101-Ufxzc2/output.log`.
+
+capture=CAP-101-Ufxzc2 command=/bin/bash -o pipefail -c bash tests/test-spec-task.sh && bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=3334b455c3ba2b83d00ab61c13747adf07fa5cb70298720a949d5e873eecd3f0 input=0591655f55ed9eae4284dead0435b1c1ce8de1e2f545b97ab554962d9f377e93 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-101-Ufxzc2/output.log [complete metadata: capture directory]
+
+## CAP-102-LPzQVi — 2026-09-10T07:11:16Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-102-LPzQVi/output.log`.
+
+capture=CAP-102-LPzQVi command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=f3fb7114ca5222ecd984af53b2c6f1e91576973505c2112e12455304993b539b input=0591655f55ed9eae4284dead0435b1c1ce8de1e2f545b97ab554962d9f377e93 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-102-LPzQVi/output.log [complete metadata: capture directory]
+
+## CAP-103-8bGYaT — 2026-09-10T07:20:24Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-103-8bGYaT/output.log`.
+
+capture=CAP-103-8bGYaT command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=0674f61c5163d250133fb5d838ec0ee3730d3d6e40f72f723f5f49416449d191 input=0591655f55ed9eae4284dead0435b1c1ce8de1e2f545b97ab554962d9f377e93 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-103-8bGYaT/output.log [complete metadata: capture directory]
+
+## CAP-104-SGdGL8 — 2026-09-10T07:29:25Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-104-SGdGL8/output.log`.
+
+capture=CAP-104-SGdGL8 command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=1e7cb98767b063c47d9b91e7f2304ba6ecc36bbdc8319e4e7ae51594753470ce input=0591655f55ed9eae4284dead0435b1c1ce8de1e2f545b97ab554962d9f377e93 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-104-SGdGL8/output.log [complete metadata: capture directory]
+
+## CAP-105-WgHXjZ — 2026-09-10T07:37:40Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-105-WgHXjZ/output.log`.
+
+capture=CAP-105-WgHXjZ command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=0c5db03a7dd3fdf020bd0228826045f5a8f1e5b4e433b9079de6b54021fa94a7 input=0591655f55ed9eae4284dead0435b1c1ce8de1e2f545b97ab554962d9f377e93 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-105-WgHXjZ/output.log [complete metadata: capture directory]
+
+## CAP-106-7NfhUd — 2026-09-10T07:55:14Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-106-7NfhUd/output.log`.
+
+capture=CAP-106-7NfhUd command=/bin/bash -o pipefail -c bash tests/run.sh  key=  -- 3/3 passed exit=0 output=23bc386b960148ddb0cdc2b30e01e4ef4f998bb43992204343ccc2f7b7d35c4d input=0591655f55ed9eae4284dead0435b1c1ce8de1e2f545b97ab554962d9f377e93 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-106-7NfhUd/output.log [complete metadata: capture directory]
+
+## CAP-107-AOkabQ — 2026-09-10T14:31:39Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-107-AOkabQ/output.log`.
+
+capture=CAP-107-AOkabQ command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=cea534ae1dd3df8a53663a770a07528dbfc05ec6aae2fd7bf04d3296c5a3acf0 input=0591655f55ed9eae4284dead0435b1c1ce8de1e2f545b97ab554962d9f377e93 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-107-AOkabQ/output.log [complete metadata: capture directory]
+
+## CAP-108-gBNSp0 — 2026-09-10T14:55:12Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-108-gBNSp0/output.log`.
+
+capture=CAP-108-gBNSp0 command=/bin/bash -o pipefail -c bash tests/run.sh && shellcheck -S warning -x scripts/*.sh tests/*.sh  key=  -- 3/3 passed exit=0 output=23bc386b960148ddb0cdc2b30e01e4ef4f998bb43992204343ccc2f7b7d35c4d input=0591655f55ed9eae4284dead0435b1c1ce8de1e2f545b97ab554962d9f377e93 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-108-gBNSp0/output.log [complete metadata: capture directory]
+
+## CAP-109-m6pbBl — 2026-09-10T15:15:27Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-109-m6pbBl/output.log`.
+
+capture=CAP-109-m6pbBl command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline  key=1 warning(s), 0 errors exit=0 output=67256f2b06d390a9a0230ddf435c2bf66a13798e9b3408c4168c00c560a14133 input=0591655f55ed9eae4284dead0435b1c1ce8de1e2f545b97ab554962d9f377e93 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-109-m6pbBl/output.log [complete metadata: capture directory]
+
+## CAP-110-6wjkP0 — 2026-09-10T15:15:53Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-110-6wjkP0/output.log`.
+
+capture=CAP-110-6wjkP0 command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-ac-coverage.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline --root /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline  key=bound — every AC is named by at least one test file exit=0 output=6d8f0592ae9ff5d4edddcd663e689dd8a451bd6c4df9a8f5e2e991252322fdb8 input=0591655f55ed9eae4284dead0435b1c1ce8de1e2f545b97ab554962d9f377e93 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-110-6wjkP0/output.log [complete metadata: capture directory]
+
+## CAP-111-aizMWV — 2026-09-10T15:24:52Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-111-aizMWV/output.log`.
+
+capture=CAP-111-aizMWV command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-evidence.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline  key=current evidence: all completed task checks have valid current captures exit=0 output=26b75a2ca9139b001558e32559fea4b6b742ee2fefa7fbf291f962346821d26c input=0591655f55ed9eae4284dead0435b1c1ce8de1e2f545b97ab554962d9f377e93 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-111-aizMWV/output.log [complete metadata: capture directory]
+
+## CAP-112-3zL3t1 — 2026-09-10T15:25:51Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-112-3zL3t1/output.log`.
+
+capture=CAP-112-3zL3t1 command=/bin/bash -o pipefail -c shellcheck -S warning -x scripts/*.sh tests/*.sh  key=(no output) exit=0 output=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 input=0591655f55ed9eae4284dead0435b1c1ce8de1e2f545b97ab554962d9f377e93 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-112-3zL3t1/output.log [complete metadata: capture directory]
+
+## GATE-FLOOR
+
+Result: FLOOR-JKSuM0; source: 0591655f55ed9eae4284dead0435b1c1ce8de1e2f545b97ab554962d9f377e93; exit: 0; command records: `notes/verification/floors/FLOOR-JKSuM0/commands.nul`.
+
+## CAP-113-uM6Ym4 — 2026-09-10T17:06:58Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-113-uM6Ym4/output.log`.
+
+capture=CAP-113-uM6Ym4 command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=f3fb7114ca5222ecd984af53b2c6f1e91576973505c2112e12455304993b539b input=6ad6a8a5f3011af7983a6b3bcfeab5e40abb721918077b6dbe91f6c501088f90 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-113-uM6Ym4/output.log [complete metadata: capture directory]
+
+## CAP-114-MtMR9N — 2026-09-10T17:27:01Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-114-MtMR9N/output.log`.
+
+capture=CAP-114-MtMR9N command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=f3fb7114ca5222ecd984af53b2c6f1e91576973505c2112e12455304993b539b input=11bfff721c0bd1498ae5148574ec19a94575e5c839325a20e5f4b8327b7a2f41 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-114-MtMR9N/output.log [complete metadata: capture directory]
+
+## CAP-115-sIpzTu — 2026-09-10T18:19:16Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-115-sIpzTu/output.log`.
+
+capture=CAP-115-sIpzTu command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=fe6ca922241392cf3402a6829cfff98a4d41661da79c2d7041650952bde69e72 input=dfcb4a12dd49a9ab7e082f4459f9ce6e9e437b36ef0cc2b020ce1659a54e6858 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-115-sIpzTu/output.log [complete metadata: capture directory]
+
+## CAP-116-EEJH8Y — 2026-09-10T18:34:42Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-116-EEJH8Y/output.log`.
+
+capture=CAP-116-EEJH8Y command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=c89f7d9e3ceea159e64bb75defc10d0c11ca84dee772071cbdfc2c36232f3fdb input=9db328fbf67e16b31801a0c10c5c62a62cf9ecbdf57f3b5b1fb97edf73f84311 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-116-EEJH8Y/output.log [complete metadata: capture directory]
+
+## CAP-117-hc1bP6 — 2026-09-10T18:37:20Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-117-hc1bP6/output.log`.
+
+capture=CAP-117-hc1bP6 command=/bin/bash -o pipefail -c bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=b0307d5f3643923c85b2aa7d758ae3f0bf12a603f48312482e8cbeddb222d636 input=5b1f0473b8e191b35d6933a2b9a2f30798c4dc37adf736dc6ec818d1621ccf08 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-117-hc1bP6/output.log [complete metadata: capture directory]
+
+## CAP-118-pbjpW0 — 2026-09-10T20:48:04Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-118-pbjpW0/output.log`.
+
+capture=CAP-118-pbjpW0 command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=c89f7d9e3ceea159e64bb75defc10d0c11ca84dee772071cbdfc2c36232f3fdb input=e6979a100b355e5f3e87997939c215ed1f71956109823eac5e2004f6c383326a log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-118-pbjpW0/output.log [complete metadata: capture directory]
+
+## CAP-119-w8cz3B — 2026-09-10T20:48:46Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-119-w8cz3B/output.log`.
+
+capture=CAP-119-w8cz3B command=/bin/bash -o pipefail -c bash tests/test-sdd-analyze.sh  key=  -- 18/18 passed exit=0 output=20ac89cdff35a7ebcd8d19d2c3a2ddc42f015dc3cb116147d9f5c5c5b4b62344 input=e6979a100b355e5f3e87997939c215ed1f71956109823eac5e2004f6c383326a log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-119-w8cz3B/output.log [complete metadata: capture directory]
+
+## CAP-120-1K9flX — 2026-09-10T20:50:05Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-120-1K9flX/output.log`.
+
+capture=CAP-120-1K9flX command=/bin/bash -o pipefail -c bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=b0307d5f3643923c85b2aa7d758ae3f0bf12a603f48312482e8cbeddb222d636 input=e6979a100b355e5f3e87997939c215ed1f71956109823eac5e2004f6c383326a log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-120-1K9flX/output.log [complete metadata: capture directory]
+
+## CAP-121-Uy8TRT — 2026-09-10T20:50:56Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-121-Uy8TRT/output.log`.
+
+capture=CAP-121-Uy8TRT command=/bin/bash -o pipefail -c bash tests/test-golden-example.sh  key=  -- 3/3 passed exit=0 output=c5596e4df60ed53e31618150bc13f9487553233a0cbc59820063ae9aa2cc96ae input=e6979a100b355e5f3e87997939c215ed1f71956109823eac5e2004f6c383326a log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-121-Uy8TRT/output.log [complete metadata: capture directory]
+
+## CAP-122-wQD9gX — 2026-09-10T20:59:51Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-122-wQD9gX/output.log`.
+
+capture=CAP-122-wQD9gX command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-build-adapters.sh  key=  -- 8/8 passed exit=0 output=07e727dc8f9709670ecccccc71bb8a688e4b406e14206de1a60860b72586b1e0 input=e6979a100b355e5f3e87997939c215ed1f71956109823eac5e2004f6c383326a log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-122-wQD9gX/output.log [complete metadata: capture directory]
+
+## CAP-123-HBZ0JI — 2026-09-10T21:01:52Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-123-HBZ0JI/output.log`.
+
+capture=CAP-123-HBZ0JI command=/bin/bash -o pipefail -c bash tests/test-spec-run.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=6afa5129adcacc389d7dd247ba059bc93f6abec84371466d3b7f5f19daa2bbd2 input=e6979a100b355e5f3e87997939c215ed1f71956109823eac5e2004f6c383326a log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-123-HBZ0JI/output.log [complete metadata: capture directory]
+
+## CAP-124-WnGXvs — 2026-09-10T21:12:30Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-124-WnGXvs/output.log`.
+
+capture=CAP-124-WnGXvs command=/bin/bash -o pipefail -c bash tests/test-spec-task.sh && bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=3334b455c3ba2b83d00ab61c13747adf07fa5cb70298720a949d5e873eecd3f0 input=e6979a100b355e5f3e87997939c215ed1f71956109823eac5e2004f6c383326a log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-124-WnGXvs/output.log [complete metadata: capture directory]
+
+## CAP-125-kejbpe — 2026-09-10T21:22:24Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-125-kejbpe/output.log`.
+
+capture=CAP-125-kejbpe command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=f3fb7114ca5222ecd984af53b2c6f1e91576973505c2112e12455304993b539b input=e6979a100b355e5f3e87997939c215ed1f71956109823eac5e2004f6c383326a log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-125-kejbpe/output.log [complete metadata: capture directory]
+
+## CAP-126-iy9D0r — 2026-09-10T21:32:57Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-126-iy9D0r/output.log`.
+
+capture=CAP-126-iy9D0r command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=0674f61c5163d250133fb5d838ec0ee3730d3d6e40f72f723f5f49416449d191 input=e6979a100b355e5f3e87997939c215ed1f71956109823eac5e2004f6c383326a log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-126-iy9D0r/output.log [complete metadata: capture directory]
+
+## CAP-127-LNMsTl — 2026-09-10T21:43:22Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-127-LNMsTl/output.log`.
+
+capture=CAP-127-LNMsTl command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=1e7cb98767b063c47d9b91e7f2304ba6ecc36bbdc8319e4e7ae51594753470ce input=e6979a100b355e5f3e87997939c215ed1f71956109823eac5e2004f6c383326a log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-127-LNMsTl/output.log [complete metadata: capture directory]
+
+## CAP-128-i0v9Mw — 2026-09-10T21:51:43Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-128-i0v9Mw/output.log`.
+
+capture=CAP-128-i0v9Mw command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=0c5db03a7dd3fdf020bd0228826045f5a8f1e5b4e433b9079de6b54021fa94a7 input=e6979a100b355e5f3e87997939c215ed1f71956109823eac5e2004f6c383326a log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-128-i0v9Mw/output.log [complete metadata: capture directory]
+
+## CAP-129-kgKRFf — 2026-09-10T22:11:30Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-129-kgKRFf/output.log`.
+
+capture=CAP-129-kgKRFf command=/bin/bash -o pipefail -c bash tests/run.sh  key=  -- 3/3 passed exit=0 output=23bc386b960148ddb0cdc2b30e01e4ef4f998bb43992204343ccc2f7b7d35c4d input=e6979a100b355e5f3e87997939c215ed1f71956109823eac5e2004f6c383326a log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-129-kgKRFf/output.log [complete metadata: capture directory]
+
+## CAP-130-ivIQoG — 2026-09-10T22:35:07Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-130-ivIQoG/output.log`.
+
+capture=CAP-130-ivIQoG command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=cea534ae1dd3df8a53663a770a07528dbfc05ec6aae2fd7bf04d3296c5a3acf0 input=e6979a100b355e5f3e87997939c215ed1f71956109823eac5e2004f6c383326a log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-130-ivIQoG/output.log [complete metadata: capture directory]
+
+## CAP-131-tYz0RJ — 2026-09-10T23:00:02Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-131-tYz0RJ/output.log`.
+
+capture=CAP-131-tYz0RJ command=/bin/bash -o pipefail -c bash tests/run.sh && shellcheck -S warning -x scripts/*.sh tests/*.sh  key=  -- 3/3 passed exit=0 output=23bc386b960148ddb0cdc2b30e01e4ef4f998bb43992204343ccc2f7b7d35c4d input=e6979a100b355e5f3e87997939c215ed1f71956109823eac5e2004f6c383326a log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-131-tYz0RJ/output.log [complete metadata: capture directory]
+
+## CAP-132-ijHQzK — 2026-09-11T06:48:42Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-132-ijHQzK/output.log`.
+
+capture=CAP-132-ijHQzK command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=fe6ca922241392cf3402a6829cfff98a4d41661da79c2d7041650952bde69e72 input=e6979a100b355e5f3e87997939c215ed1f71956109823eac5e2004f6c383326a log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-132-ijHQzK/output.log [complete metadata: capture directory]
+
+## CAP-133-Ev1OW5 — 2026-09-11T09:12:43Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-133-Ev1OW5/output.log`.
+
+capture=CAP-133-Ev1OW5 command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-verification.sh && bash tests/test-sdd-analyze.sh  key=  -- 18/18 passed exit=0 output=81deb99d485304d7d6379a019518cbca98c3683336fa465a858a8a452daa5fd6 input=a01fdd9e8000833c5fc225ef7f659c4cdc53e6716eb6ab61bebf2b808609ccff log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-133-Ev1OW5/output.log [complete metadata: capture directory]
+
+## CAP-134-EYqqHc — 2026-09-11T09:21:44Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-134-EYqqHc/output.log`.
+
+capture=CAP-134-EYqqHc command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=c89f7d9e3ceea159e64bb75defc10d0c11ca84dee772071cbdfc2c36232f3fdb input=a01fdd9e8000833c5fc225ef7f659c4cdc53e6716eb6ab61bebf2b808609ccff log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-134-EYqqHc/output.log [complete metadata: capture directory]
+
+## CAP-135-srXwDo — 2026-09-11T09:22:21Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-135-srXwDo/output.log`.
+
+capture=CAP-135-srXwDo command=/bin/bash -o pipefail -c bash tests/test-sdd-analyze.sh  key=  -- 18/18 passed exit=0 output=20ac89cdff35a7ebcd8d19d2c3a2ddc42f015dc3cb116147d9f5c5c5b4b62344 input=a01fdd9e8000833c5fc225ef7f659c4cdc53e6716eb6ab61bebf2b808609ccff log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-135-srXwDo/output.log [complete metadata: capture directory]
+
+## CAP-136-TLwO2S — 2026-09-11T09:23:36Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-136-TLwO2S/output.log`.
+
+capture=CAP-136-TLwO2S command=/bin/bash -o pipefail -c bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=b0307d5f3643923c85b2aa7d758ae3f0bf12a603f48312482e8cbeddb222d636 input=a01fdd9e8000833c5fc225ef7f659c4cdc53e6716eb6ab61bebf2b808609ccff log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-136-TLwO2S/output.log [complete metadata: capture directory]
+
+## CAP-137-zMmc6c — 2026-09-11T09:24:22Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-137-zMmc6c/output.log`.
+
+capture=CAP-137-zMmc6c command=/bin/bash -o pipefail -c bash tests/test-golden-example.sh  key=  -- 3/3 passed exit=0 output=c5596e4df60ed53e31618150bc13f9487553233a0cbc59820063ae9aa2cc96ae input=a01fdd9e8000833c5fc225ef7f659c4cdc53e6716eb6ab61bebf2b808609ccff log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-137-zMmc6c/output.log [complete metadata: capture directory]
+
+## CAP-138-MW6P7w — 2026-09-11T09:33:09Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-138-MW6P7w/output.log`.
+
+capture=CAP-138-MW6P7w command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-build-adapters.sh  key=  -- 8/8 passed exit=0 output=07e727dc8f9709670ecccccc71bb8a688e4b406e14206de1a60860b72586b1e0 input=a01fdd9e8000833c5fc225ef7f659c4cdc53e6716eb6ab61bebf2b808609ccff log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-138-MW6P7w/output.log [complete metadata: capture directory]
+
+## CAP-139-n7l6tL — 2026-09-11T09:35:08Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-139-n7l6tL/output.log`.
+
+capture=CAP-139-n7l6tL command=/bin/bash -o pipefail -c bash tests/test-spec-run.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=6afa5129adcacc389d7dd247ba059bc93f6abec84371466d3b7f5f19daa2bbd2 input=a01fdd9e8000833c5fc225ef7f659c4cdc53e6716eb6ab61bebf2b808609ccff log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-139-n7l6tL/output.log [complete metadata: capture directory]
+
+## CAP-140-xeWFH7 — 2026-09-11T09:45:42Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-140-xeWFH7/output.log`.
+
+capture=CAP-140-xeWFH7 command=/bin/bash -o pipefail -c bash tests/test-spec-task.sh && bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=3334b455c3ba2b83d00ab61c13747adf07fa5cb70298720a949d5e873eecd3f0 input=a01fdd9e8000833c5fc225ef7f659c4cdc53e6716eb6ab61bebf2b808609ccff log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-140-xeWFH7/output.log [complete metadata: capture directory]
+
+## CAP-141-tWXgdv — 2026-09-11T09:55:17Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-141-tWXgdv/output.log`.
+
+capture=CAP-141-tWXgdv command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=f3fb7114ca5222ecd984af53b2c6f1e91576973505c2112e12455304993b539b input=a01fdd9e8000833c5fc225ef7f659c4cdc53e6716eb6ab61bebf2b808609ccff log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-141-tWXgdv/output.log [complete metadata: capture directory]
+
+## CAP-142-3YWtY4 — 2026-09-11T10:05:55Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-142-3YWtY4/output.log`.
+
+capture=CAP-142-3YWtY4 command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=0674f61c5163d250133fb5d838ec0ee3730d3d6e40f72f723f5f49416449d191 input=a01fdd9e8000833c5fc225ef7f659c4cdc53e6716eb6ab61bebf2b808609ccff log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-142-3YWtY4/output.log [complete metadata: capture directory]
+
+## CAP-143-dJJ5yr — 2026-09-11T10:16:21Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-143-dJJ5yr/output.log`.
+
+capture=CAP-143-dJJ5yr command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=1e7cb98767b063c47d9b91e7f2304ba6ecc36bbdc8319e4e7ae51594753470ce input=a01fdd9e8000833c5fc225ef7f659c4cdc53e6716eb6ab61bebf2b808609ccff log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-143-dJJ5yr/output.log [complete metadata: capture directory]
+
+## CAP-144-V3GXa1 — 2026-09-11T10:24:36Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-144-V3GXa1/output.log`.
+
+capture=CAP-144-V3GXa1 command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=0c5db03a7dd3fdf020bd0228826045f5a8f1e5b4e433b9079de6b54021fa94a7 input=a01fdd9e8000833c5fc225ef7f659c4cdc53e6716eb6ab61bebf2b808609ccff log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-144-V3GXa1/output.log [complete metadata: capture directory]
+
+## CAP-145-l37zXN — 2026-09-11T10:44:39Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-145-l37zXN/output.log`.
+
+capture=CAP-145-l37zXN command=/bin/bash -o pipefail -c bash tests/run.sh  key=  -- 3/3 passed exit=0 output=23bc386b960148ddb0cdc2b30e01e4ef4f998bb43992204343ccc2f7b7d35c4d input=a01fdd9e8000833c5fc225ef7f659c4cdc53e6716eb6ab61bebf2b808609ccff log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-145-l37zXN/output.log [complete metadata: capture directory]
+
+## CAP-146-vrp8gT — 2026-09-11T11:39:52Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-146-vrp8gT/output.log`.
+
+capture=CAP-146-vrp8gT command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=cea534ae1dd3df8a53663a770a07528dbfc05ec6aae2fd7bf04d3296c5a3acf0 input=a01fdd9e8000833c5fc225ef7f659c4cdc53e6716eb6ab61bebf2b808609ccff log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-146-vrp8gT/output.log [complete metadata: capture directory]
+
+## CAP-147-TQwwgN — 2026-09-11T12:05:29Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-147-TQwwgN/output.log`.
+
+capture=CAP-147-TQwwgN command=/bin/bash -o pipefail -c bash tests/run.sh && shellcheck -S warning -x scripts/*.sh tests/*.sh  key=  -- 3/3 passed exit=0 output=23bc386b960148ddb0cdc2b30e01e4ef4f998bb43992204343ccc2f7b7d35c4d input=a01fdd9e8000833c5fc225ef7f659c4cdc53e6716eb6ab61bebf2b808609ccff log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-147-TQwwgN/output.log [complete metadata: capture directory]
+
+## CAP-148-7KAy5D — 2026-09-11T12:22:42Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-148-7KAy5D/output.log`.
+
+capture=CAP-148-7KAy5D command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=fe6ca922241392cf3402a6829cfff98a4d41661da79c2d7041650952bde69e72 input=a01fdd9e8000833c5fc225ef7f659c4cdc53e6716eb6ab61bebf2b808609ccff log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-148-7KAy5D/output.log [complete metadata: capture directory]
+
+## CAP-149-tq2GQQ — 2026-09-11T12:48:16Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-149-tq2GQQ/output.log`.
+
+capture=CAP-149-tq2GQQ command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline  key=1 warning(s), 0 errors exit=0 output=4b571fa943f830b25fbe07fd98d3a6d68ee9fc2ac1b5fb3560d4efd7606409b4 input=a01fdd9e8000833c5fc225ef7f659c4cdc53e6716eb6ab61bebf2b808609ccff log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-149-tq2GQQ/output.log [complete metadata: capture directory]
+
+## CAP-150-sldDYF — 2026-09-11T12:48:43Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-150-sldDYF/output.log`.
+
+capture=CAP-150-sldDYF command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-ac-coverage.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline --root /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline  key=bound — every AC is named by at least one test file exit=0 output=a59b60e4fdfed94b991ba92423b0f7f8312a1dec3fa8789fb2b1db6ef72aafb7 input=a01fdd9e8000833c5fc225ef7f659c4cdc53e6716eb6ab61bebf2b808609ccff log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-150-sldDYF/output.log [complete metadata: capture directory]
+
+## CAP-151-gLSKCX — 2026-09-11T13:00:42Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-151-gLSKCX/output.log`.
+
+capture=CAP-151-gLSKCX command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-evidence.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline  key=current evidence: all completed task checks have valid current captures exit=0 output=eefb5feacfcc0928bda2347016debb2da9728a37d84f6f77eee74c94866d878e input=a01fdd9e8000833c5fc225ef7f659c4cdc53e6716eb6ab61bebf2b808609ccff log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-151-gLSKCX/output.log [complete metadata: capture directory]
+
+## CAP-152-ByI04Z — 2026-09-11T13:01:40Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-152-ByI04Z/output.log`.
+
+capture=CAP-152-ByI04Z command=/bin/bash -o pipefail -c shellcheck -S warning -x scripts/*.sh tests/*.sh  key=(no output) exit=0 output=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 input=a01fdd9e8000833c5fc225ef7f659c4cdc53e6716eb6ab61bebf2b808609ccff log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-152-ByI04Z/output.log [complete metadata: capture directory]
+
+## GATE-FLOOR
+
+Result: FLOOR-pODF4T; source: a01fdd9e8000833c5fc225ef7f659c4cdc53e6716eb6ab61bebf2b808609ccff; exit: 0; command records: `notes/verification/floors/FLOOR-pODF4T/commands.nul`.
+
+## CAP-153-FAla8S — 2026-09-11T14:55:32Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-153-FAla8S/output.log`.
+
+capture=CAP-153-FAla8S command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=c89f7d9e3ceea159e64bb75defc10d0c11ca84dee772071cbdfc2c36232f3fdb input=173fc57bca09014a4e94d497cc1802128b50c99c1548e76d713ef9fb7662aefb log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-153-FAla8S/output.log [complete metadata: capture directory]
+
+## CAP-154-iPa3xR — 2026-09-11T14:56:58Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-154-iPa3xR/output.log`.
+
+capture=CAP-154-iPa3xR command=/bin/bash -o pipefail -c bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=b0307d5f3643923c85b2aa7d758ae3f0bf12a603f48312482e8cbeddb222d636 input=173fc57bca09014a4e94d497cc1802128b50c99c1548e76d713ef9fb7662aefb log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-154-iPa3xR/output.log [complete metadata: capture directory]
+
+## CAP-155-8dBolN — 2026-09-11T15:06:48Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-155-8dBolN/output.log`.
+
+capture=CAP-155-8dBolN command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=f3fb7114ca5222ecd984af53b2c6f1e91576973505c2112e12455304993b539b input=173fc57bca09014a4e94d497cc1802128b50c99c1548e76d713ef9fb7662aefb log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-155-8dBolN/output.log [complete metadata: capture directory]
+
+## CAP-156-UYhU8o — 2026-09-11T15:20:07Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-156-UYhU8o/output.log`.
+
+capture=CAP-156-UYhU8o command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=f3fb7114ca5222ecd984af53b2c6f1e91576973505c2112e12455304993b539b input=173fc57bca09014a4e94d497cc1802128b50c99c1548e76d713ef9fb7662aefb log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-156-UYhU8o/output.log [complete metadata: capture directory]
+
+## CAP-157-uvthVs — 2026-09-11T15:38:15Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-157-uvthVs/output.log`.
+
+capture=CAP-157-uvthVs command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-verification.sh && bash tests/test-sdd-analyze.sh  key=  -- 18/18 passed exit=0 output=81deb99d485304d7d6379a019518cbca98c3683336fa465a858a8a452daa5fd6 input=173fc57bca09014a4e94d497cc1802128b50c99c1548e76d713ef9fb7662aefb log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-157-uvthVs/output.log [complete metadata: capture directory]
+
+## CAP-158-bbni85 — 2026-09-11T15:40:05Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-158-bbni85/output.log`.
+
+capture=CAP-158-bbni85 command=/bin/bash -o pipefail -c bash tests/test-sdd-analyze.sh  key=  -- 18/18 passed exit=0 output=20ac89cdff35a7ebcd8d19d2c3a2ddc42f015dc3cb116147d9f5c5c5b4b62344 input=173fc57bca09014a4e94d497cc1802128b50c99c1548e76d713ef9fb7662aefb log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-158-bbni85/output.log [complete metadata: capture directory]
+
+## CAP-159-3HwGci — 2026-09-11T15:41:00Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-159-3HwGci/output.log`.
+
+capture=CAP-159-3HwGci command=/bin/bash -o pipefail -c bash tests/test-golden-example.sh  key=  -- 3/3 passed exit=0 output=c5596e4df60ed53e31618150bc13f9487553233a0cbc59820063ae9aa2cc96ae input=173fc57bca09014a4e94d497cc1802128b50c99c1548e76d713ef9fb7662aefb log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-159-3HwGci/output.log [complete metadata: capture directory]
+
+## CAP-160-Wxjo3F — 2026-09-11T15:49:55Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-160-Wxjo3F/output.log`.
+
+capture=CAP-160-Wxjo3F command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-build-adapters.sh  key=  -- 8/8 passed exit=0 output=07e727dc8f9709670ecccccc71bb8a688e4b406e14206de1a60860b72586b1e0 input=173fc57bca09014a4e94d497cc1802128b50c99c1548e76d713ef9fb7662aefb log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-160-Wxjo3F/output.log [complete metadata: capture directory]
+
+## CAP-161-OQsimx — 2026-09-11T15:51:56Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-161-OQsimx/output.log`.
+
+capture=CAP-161-OQsimx command=/bin/bash -o pipefail -c bash tests/test-spec-run.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=6afa5129adcacc389d7dd247ba059bc93f6abec84371466d3b7f5f19daa2bbd2 input=173fc57bca09014a4e94d497cc1802128b50c99c1548e76d713ef9fb7662aefb log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-161-OQsimx/output.log [complete metadata: capture directory]
+
+## CAP-162-3vVwWa — 2026-09-11T16:02:58Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-162-3vVwWa/output.log`.
+
+capture=CAP-162-3vVwWa command=/bin/bash -o pipefail -c bash tests/test-spec-task.sh && bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=3334b455c3ba2b83d00ab61c13747adf07fa5cb70298720a949d5e873eecd3f0 input=173fc57bca09014a4e94d497cc1802128b50c99c1548e76d713ef9fb7662aefb log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-162-3vVwWa/output.log [complete metadata: capture directory]
+
+## CAP-163-9iKWp8 — 2026-09-11T16:25:19Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-163-9iKWp8/output.log`.
+
+capture=CAP-163-9iKWp8 command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=0674f61c5163d250133fb5d838ec0ee3730d3d6e40f72f723f5f49416449d191 input=173fc57bca09014a4e94d497cc1802128b50c99c1548e76d713ef9fb7662aefb log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-163-9iKWp8/output.log [complete metadata: capture directory]
+
+## CAP-164-6sqjkp — 2026-09-11T16:42:04Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-164-6sqjkp/output.log`.
+
+capture=CAP-164-6sqjkp command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=1e7cb98767b063c47d9b91e7f2304ba6ecc36bbdc8319e4e7ae51594753470ce input=173fc57bca09014a4e94d497cc1802128b50c99c1548e76d713ef9fb7662aefb log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-164-6sqjkp/output.log [complete metadata: capture directory]
+
+## CAP-165-7vGMU1 — 2026-09-11T16:50:16Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-165-7vGMU1/output.log`.
+
+capture=CAP-165-7vGMU1 command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=0c5db03a7dd3fdf020bd0228826045f5a8f1e5b4e433b9079de6b54021fa94a7 input=173fc57bca09014a4e94d497cc1802128b50c99c1548e76d713ef9fb7662aefb log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-165-7vGMU1/output.log [complete metadata: capture directory]
+
+## CAP-166-6mHy9p — 2026-09-11T17:11:22Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-166-6mHy9p/output.log`.
+
+capture=CAP-166-6mHy9p command=/bin/bash -o pipefail -c bash tests/run.sh  key=  -- 3/3 passed exit=0 output=23bc386b960148ddb0cdc2b30e01e4ef4f998bb43992204343ccc2f7b7d35c4d input=173fc57bca09014a4e94d497cc1802128b50c99c1548e76d713ef9fb7662aefb log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-166-6mHy9p/output.log [complete metadata: capture directory]
+
+## CAP-167-ca8b3M — 2026-09-11T17:37:09Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-167-ca8b3M/output.log`.
+
+capture=CAP-167-ca8b3M command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=cea534ae1dd3df8a53663a770a07528dbfc05ec6aae2fd7bf04d3296c5a3acf0 input=173fc57bca09014a4e94d497cc1802128b50c99c1548e76d713ef9fb7662aefb log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-167-ca8b3M/output.log [complete metadata: capture directory]
+
+## CAP-168-xdm7qx — 2026-09-11T18:05:12Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-168-xdm7qx/output.log`.
+
+capture=CAP-168-xdm7qx command=/bin/bash -o pipefail -c bash tests/run.sh && shellcheck -S warning -x scripts/*.sh tests/*.sh  key=  -- 3/3 passed exit=0 output=23bc386b960148ddb0cdc2b30e01e4ef4f998bb43992204343ccc2f7b7d35c4d input=173fc57bca09014a4e94d497cc1802128b50c99c1548e76d713ef9fb7662aefb log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-168-xdm7qx/output.log [complete metadata: capture directory]
+
+## CAP-169-Bb1aQB — 2026-09-11T18:21:50Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-169-Bb1aQB/output.log`.
+
+capture=CAP-169-Bb1aQB command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=fe6ca922241392cf3402a6829cfff98a4d41661da79c2d7041650952bde69e72 input=173fc57bca09014a4e94d497cc1802128b50c99c1548e76d713ef9fb7662aefb log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-169-Bb1aQB/output.log [complete metadata: capture directory]
+
+## CAP-170-IHiwvt — 2026-09-11T22:18:10Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-170-IHiwvt/output.log`.
+
+capture=CAP-170-IHiwvt command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline  key=1 warning(s), 0 errors exit=0 output=ec777cffcd947af20ee82eda75708cae9f5a1070af290131f47d5ff5be47b10e input=173fc57bca09014a4e94d497cc1802128b50c99c1548e76d713ef9fb7662aefb log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-170-IHiwvt/output.log [complete metadata: capture directory]
+
+## CAP-171-yWMHMI — 2026-09-11T22:18:37Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-171-yWMHMI/output.log`.
+
+capture=CAP-171-yWMHMI command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-ac-coverage.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline --root /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline  key=bound — every AC is named by at least one test file exit=0 output=a59b60e4fdfed94b991ba92423b0f7f8312a1dec3fa8789fb2b1db6ef72aafb7 input=173fc57bca09014a4e94d497cc1802128b50c99c1548e76d713ef9fb7662aefb log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-171-yWMHMI/output.log [complete metadata: capture directory]
+
+## CAP-172-wUD9k4 — 2026-09-11T22:34:09Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-172-wUD9k4/output.log`.
+
+capture=CAP-172-wUD9k4 command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-evidence.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline  key=current evidence: all completed task checks have valid current captures exit=0 output=7744fa419f3fc87df863dd55c4dda9d2faa90cece8e07479dd63595599f879fa input=173fc57bca09014a4e94d497cc1802128b50c99c1548e76d713ef9fb7662aefb log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-172-wUD9k4/output.log [complete metadata: capture directory]
+
+## CAP-173-1gEbxz — 2026-09-11T22:35:08Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-173-1gEbxz/output.log`.
+
+capture=CAP-173-1gEbxz command=/bin/bash -o pipefail -c shellcheck -S warning -x scripts/*.sh tests/*.sh  key=(no output) exit=0 output=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 input=173fc57bca09014a4e94d497cc1802128b50c99c1548e76d713ef9fb7662aefb log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-173-1gEbxz/output.log [complete metadata: capture directory]
+
+## GATE-FLOOR
+
+Result: FLOOR-QjKfE7; source: 173fc57bca09014a4e94d497cc1802128b50c99c1548e76d713ef9fb7662aefb; exit: 0; command records: `notes/verification/floors/FLOOR-QjKfE7/commands.nul`.
+
+## CAP-174-0BTJ52 — 2026-09-12T13:50:01Z
+
+Captured run, exit 1. Full log: `notes/captures/CAP-174-0BTJ52/output.log`.
+
+capture=CAP-174-0BTJ52 command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-spec-gate.sh  key=  -- 13/14 passed exit=1 output=b805987163ebb2efac297b113c114e7ced3aac303d29a0c3d20c19195ec4bfe3 input=b740caef35c8390138caaadcb872afdb35f37c960f12b5908f016c511ed245c5 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-174-0BTJ52/output.log [complete metadata: capture directory]
+
+## CAP-175-XuyzhE — 2026-09-12T18:55:44Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-175-XuyzhE/output.log`.
+
+capture=CAP-175-XuyzhE command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=cea534ae1dd3df8a53663a770a07528dbfc05ec6aae2fd7bf04d3296c5a3acf0 input=6f2aee2b62d165045799982255b2f772eb404388baf99f98688f849646ab201e log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-175-XuyzhE/output.log [complete metadata: capture directory]
+
+## CAP-176-Akofnw — 2026-09-12T21:47:26Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-176-Akofnw/output.log`.
+
+capture=CAP-176-Akofnw command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-sdd-analyze.sh  key=  -- 18/18 passed exit=0 output=5fedbf813386f524798ceae747c083ee0920238cd7e8072e49582cc6e799828f input=8e40fd5ef5b7c460559cb7f501defa345fbf49047855ac5a12588f84b34f8453 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-176-Akofnw/output.log [complete metadata: capture directory]
+
+## CAP-177-koEjAU — 2026-09-12T21:53:30Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-177-koEjAU/output.log`.
+
+capture=CAP-177-koEjAU command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=c89f7d9e3ceea159e64bb75defc10d0c11ca84dee772071cbdfc2c36232f3fdb input=8e40fd5ef5b7c460559cb7f501defa345fbf49047855ac5a12588f84b34f8453 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-177-koEjAU/output.log [complete metadata: capture directory]
+
+## CAP-178-mpDcyA — 2026-09-12T22:06:06Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-178-mpDcyA/output.log`.
+
+capture=CAP-178-mpDcyA command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=c692c9eb1e2a3b754318d1692b19a2995671005c35348d35aaf8b7dd8165a9dd input=8e40fd5ef5b7c460559cb7f501defa345fbf49047855ac5a12588f84b34f8453 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-178-mpDcyA/output.log [complete metadata: capture directory]
+
+## CAP-179-2OoHpK — 2026-09-12T22:12:48Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-179-2OoHpK/output.log`.
+
+capture=CAP-179-2OoHpK command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=f3fb7114ca5222ecd984af53b2c6f1e91576973505c2112e12455304993b539b input=8e40fd5ef5b7c460559cb7f501defa345fbf49047855ac5a12588f84b34f8453 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-179-2OoHpK/output.log [complete metadata: capture directory]
+
+## CAP-180-O3ksh6 — 2026-09-12T22:54:38Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-180-O3ksh6/output.log`.
+
+capture=CAP-180-O3ksh6 command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=c89f7d9e3ceea159e64bb75defc10d0c11ca84dee772071cbdfc2c36232f3fdb input=d211df8cd94c05cd40600f1caa1b229781a6a2981892f85c2531ca91f45a2c2f log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-180-O3ksh6/output.log [complete metadata: capture directory]
+
+## CAP-181-I6e0wN — 2026-09-12T22:55:16Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-181-I6e0wN/output.log`.
+
+capture=CAP-181-I6e0wN command=/bin/bash -o pipefail -c bash tests/test-sdd-analyze.sh  key=  -- 18/18 passed exit=0 output=20ac89cdff35a7ebcd8d19d2c3a2ddc42f015dc3cb116147d9f5c5c5b4b62344 input=d211df8cd94c05cd40600f1caa1b229781a6a2981892f85c2531ca91f45a2c2f log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-181-I6e0wN/output.log [complete metadata: capture directory]
+
+## CAP-182-3dlbJ0 — 2026-09-12T22:56:19Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-182-3dlbJ0/output.log`.
+
+capture=CAP-182-3dlbJ0 command=/bin/bash -o pipefail -c bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=b0307d5f3643923c85b2aa7d758ae3f0bf12a603f48312482e8cbeddb222d636 input=d211df8cd94c05cd40600f1caa1b229781a6a2981892f85c2531ca91f45a2c2f log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-182-3dlbJ0/output.log [complete metadata: capture directory]
+
+## CAP-183-3yCVRd — 2026-09-12T22:57:04Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-183-3yCVRd/output.log`.
+
+capture=CAP-183-3yCVRd command=/bin/bash -o pipefail -c bash tests/test-golden-example.sh  key=  -- 3/3 passed exit=0 output=c5596e4df60ed53e31618150bc13f9487553233a0cbc59820063ae9aa2cc96ae input=d211df8cd94c05cd40600f1caa1b229781a6a2981892f85c2531ca91f45a2c2f log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-183-3yCVRd/output.log [complete metadata: capture directory]
+
+## CAP-184-hcnvdJ — 2026-09-12T23:04:45Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-184-hcnvdJ/output.log`.
+
+capture=CAP-184-hcnvdJ command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-build-adapters.sh  key=  -- 8/8 passed exit=0 output=07e727dc8f9709670ecccccc71bb8a688e4b406e14206de1a60860b72586b1e0 input=d211df8cd94c05cd40600f1caa1b229781a6a2981892f85c2531ca91f45a2c2f log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-184-hcnvdJ/output.log [complete metadata: capture directory]
+
+## CAP-185-zJsn5Z — 2026-09-12T23:06:38Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-185-zJsn5Z/output.log`.
+
+capture=CAP-185-zJsn5Z command=/bin/bash -o pipefail -c bash tests/test-spec-run.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=6afa5129adcacc389d7dd247ba059bc93f6abec84371466d3b7f5f19daa2bbd2 input=d211df8cd94c05cd40600f1caa1b229781a6a2981892f85c2531ca91f45a2c2f log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-185-zJsn5Z/output.log [complete metadata: capture directory]
+
+## CAP-186-Qef1Qg — 2026-09-12T23:14:54Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-186-Qef1Qg/output.log`.
+
+capture=CAP-186-Qef1Qg command=/bin/bash -o pipefail -c bash tests/test-spec-task.sh && bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=3334b455c3ba2b83d00ab61c13747adf07fa5cb70298720a949d5e873eecd3f0 input=d211df8cd94c05cd40600f1caa1b229781a6a2981892f85c2531ca91f45a2c2f log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-186-Qef1Qg/output.log [complete metadata: capture directory]
+
+## CAP-187-HR8I46 — 2026-09-12T23:23:32Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-187-HR8I46/output.log`.
+
+capture=CAP-187-HR8I46 command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=f3fb7114ca5222ecd984af53b2c6f1e91576973505c2112e12455304993b539b input=d211df8cd94c05cd40600f1caa1b229781a6a2981892f85c2531ca91f45a2c2f log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-187-HR8I46/output.log [complete metadata: capture directory]
+
+## CAP-188-xOl3vb — 2026-09-12T23:37:38Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-188-xOl3vb/output.log`.
+
+capture=CAP-188-xOl3vb command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=0674f61c5163d250133fb5d838ec0ee3730d3d6e40f72f723f5f49416449d191 input=d211df8cd94c05cd40600f1caa1b229781a6a2981892f85c2531ca91f45a2c2f log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-188-xOl3vb/output.log [complete metadata: capture directory]
+
+## CAP-189-AkHJm0 — 2026-09-12T23:46:40Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-189-AkHJm0/output.log`.
+
+capture=CAP-189-AkHJm0 command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=1e7cb98767b063c47d9b91e7f2304ba6ecc36bbdc8319e4e7ae51594753470ce input=d211df8cd94c05cd40600f1caa1b229781a6a2981892f85c2531ca91f45a2c2f log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-189-AkHJm0/output.log [complete metadata: capture directory]
+
+## CAP-190-2Xb8MU — 2026-09-12T23:52:55Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-190-2Xb8MU/output.log`.
+
+capture=CAP-190-2Xb8MU command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=0c5db03a7dd3fdf020bd0228826045f5a8f1e5b4e433b9079de6b54021fa94a7 input=d211df8cd94c05cd40600f1caa1b229781a6a2981892f85c2531ca91f45a2c2f log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-190-2Xb8MU/output.log [complete metadata: capture directory]
+
+## CAP-191-zP3wDR — 2026-09-13T00:06:18Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-191-zP3wDR/output.log`.
+
+capture=CAP-191-zP3wDR command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-verification.sh && bash tests/test-sdd-analyze.sh  key=  -- 18/18 passed exit=0 output=81deb99d485304d7d6379a019518cbca98c3683336fa465a858a8a452daa5fd6 input=d211df8cd94c05cd40600f1caa1b229781a6a2981892f85c2531ca91f45a2c2f log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-191-zP3wDR/output.log [complete metadata: capture directory]
+
+## CAP-192-rPFZRn — 2026-09-13T00:18:27Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-192-rPFZRn/output.log`.
+
+capture=CAP-192-rPFZRn command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=cea534ae1dd3df8a53663a770a07528dbfc05ec6aae2fd7bf04d3296c5a3acf0 input=d211df8cd94c05cd40600f1caa1b229781a6a2981892f85c2531ca91f45a2c2f log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-192-rPFZRn/output.log [complete metadata: capture directory]
+
+## CAP-193-jxmYvB — 2026-09-13T00:30:06Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-193-jxmYvB/output.log`.
+
+capture=CAP-193-jxmYvB command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-sdd-analyze.sh  key=  -- 18/18 passed exit=0 output=5fedbf813386f524798ceae747c083ee0920238cd7e8072e49582cc6e799828f input=d211df8cd94c05cd40600f1caa1b229781a6a2981892f85c2531ca91f45a2c2f log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-193-jxmYvB/output.log [complete metadata: capture directory]
+
+## CAP-194-5HRLy6 — 2026-09-13T00:42:18Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-194-5HRLy6/output.log`.
+
+capture=CAP-194-5HRLy6 command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=c692c9eb1e2a3b754318d1692b19a2995671005c35348d35aaf8b7dd8165a9dd input=d211df8cd94c05cd40600f1caa1b229781a6a2981892f85c2531ca91f45a2c2f log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-194-5HRLy6/output.log [complete metadata: capture directory]
+
+## CAP-195-NOmBt8 — 2026-09-13T00:55:38Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-195-NOmBt8/output.log`.
+
+capture=CAP-195-NOmBt8 command=/bin/bash -o pipefail -c bash tests/run.sh  key=  -- 3/3 passed exit=0 output=23bc386b960148ddb0cdc2b30e01e4ef4f998bb43992204343ccc2f7b7d35c4d input=d211df8cd94c05cd40600f1caa1b229781a6a2981892f85c2531ca91f45a2c2f log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-195-NOmBt8/output.log [complete metadata: capture directory]
+
+## CAP-196-PWL4Xt — 2026-09-13T01:25:14Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-196-PWL4Xt/output.log`.
+
+capture=CAP-196-PWL4Xt command=/bin/bash -o pipefail -c bash tests/run.sh && shellcheck -S warning -x scripts/*.sh tests/*.sh  key=  -- 3/3 passed exit=0 output=23bc386b960148ddb0cdc2b30e01e4ef4f998bb43992204343ccc2f7b7d35c4d input=d211df8cd94c05cd40600f1caa1b229781a6a2981892f85c2531ca91f45a2c2f log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-196-PWL4Xt/output.log [complete metadata: capture directory]
+
+## CAP-197-aTTojL — 2026-09-13T08:34:03Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-197-aTTojL/output.log`.
+
+capture=CAP-197-aTTojL command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=fe6ca922241392cf3402a6829cfff98a4d41661da79c2d7041650952bde69e72 input=d211df8cd94c05cd40600f1caa1b229781a6a2981892f85c2531ca91f45a2c2f log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-197-aTTojL/output.log [complete metadata: capture directory]
+
+## CAP-198-nvHzL3 — 2026-09-13T09:01:51Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-198-nvHzL3/output.log`.
+
+capture=CAP-198-nvHzL3 command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline  key=1 warning(s), 0 errors exit=0 output=c93ac83602a4e54f54790afdd4d65ccc8b6206f0f3cd09ada741e2ca93b2580d input=d211df8cd94c05cd40600f1caa1b229781a6a2981892f85c2531ca91f45a2c2f log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-198-nvHzL3/output.log [complete metadata: capture directory]
+
+## CAP-199-SqpYHf — 2026-09-13T09:02:16Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-199-SqpYHf/output.log`.
+
+capture=CAP-199-SqpYHf command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-ac-coverage.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline --root /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline  key=bound — every AC is named by at least one test file exit=0 output=5c841ad952893a091551df1f3b0b6b0156b039dbc4ee61ee3a9c902ec9ccc343 input=d211df8cd94c05cd40600f1caa1b229781a6a2981892f85c2531ca91f45a2c2f log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-199-SqpYHf/output.log [complete metadata: capture directory]
+
+## CAP-200-bbwiNf — 2026-09-13T09:19:54Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-200-bbwiNf/output.log`.
+
+capture=CAP-200-bbwiNf command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-evidence.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline  key=current evidence: all completed task checks have valid current captures exit=0 output=d64391fd0f54a3f4ffe1a0f423e3a769ddb25ef7a0edc9a6a8f716670a8ef6ef input=d211df8cd94c05cd40600f1caa1b229781a6a2981892f85c2531ca91f45a2c2f log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-200-bbwiNf/output.log [complete metadata: capture directory]
+
+## CAP-201-9kFBVg — 2026-09-13T09:20:50Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-201-9kFBVg/output.log`.
+
+capture=CAP-201-9kFBVg command=/bin/bash -o pipefail -c shellcheck -S warning -x scripts/*.sh tests/*.sh  key=(no output) exit=0 output=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 input=d211df8cd94c05cd40600f1caa1b229781a6a2981892f85c2531ca91f45a2c2f log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-201-9kFBVg/output.log [complete metadata: capture directory]
+
+## GATE-FLOOR
+
+Result: FLOOR-R5Mi3G; source: d211df8cd94c05cd40600f1caa1b229781a6a2981892f85c2531ca91f45a2c2f; exit: 0; command records: `notes/verification/floors/FLOOR-R5Mi3G/commands.nul`.
+
+## CAP-202-EJzhKK — 2026-09-13T11:41:34Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-202-EJzhKK/output.log`.
+
+capture=CAP-202-EJzhKK command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-sdd-analyze.sh  key=  -- 18/18 passed exit=0 output=5fedbf813386f524798ceae747c083ee0920238cd7e8072e49582cc6e799828f input=584419dfcde61ee9fd56f47a196b56e99d52d7e213c3c5e542c65e4095baaea4 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-202-EJzhKK/output.log [complete metadata: capture directory]
+
+## CAP-203-KfCQSW — 2026-09-13T11:47:32Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-203-KfCQSW/output.log`.
+
+capture=CAP-203-KfCQSW command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=c89f7d9e3ceea159e64bb75defc10d0c11ca84dee772071cbdfc2c36232f3fdb input=584419dfcde61ee9fd56f47a196b56e99d52d7e213c3c5e542c65e4095baaea4 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-203-KfCQSW/output.log [complete metadata: capture directory]
+
+## CAP-204-j1KEKV — 2026-09-13T11:59:34Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-204-j1KEKV/output.log`.
+
+capture=CAP-204-j1KEKV command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=c692c9eb1e2a3b754318d1692b19a2995671005c35348d35aaf8b7dd8165a9dd input=584419dfcde61ee9fd56f47a196b56e99d52d7e213c3c5e542c65e4095baaea4 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-204-j1KEKV/output.log [complete metadata: capture directory]
+
+## CAP-205-vSkzLQ — 2026-09-13T18:30:42Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-205-vSkzLQ/output.log`.
+
+capture=CAP-205-vSkzLQ command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=c89f7d9e3ceea159e64bb75defc10d0c11ca84dee772071cbdfc2c36232f3fdb input=cee79ffc77267c915a38f41ea7a5b1f0303a2074aa9f29b2600d6224b058fcbb log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-205-vSkzLQ/output.log [complete metadata: capture directory]
+
+## CAP-206-IuDP59 — 2026-09-13T18:31:21Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-206-IuDP59/output.log`.
+
+capture=CAP-206-IuDP59 command=/bin/bash -o pipefail -c bash tests/test-sdd-analyze.sh  key=  -- 18/18 passed exit=0 output=20ac89cdff35a7ebcd8d19d2c3a2ddc42f015dc3cb116147d9f5c5c5b4b62344 input=cee79ffc77267c915a38f41ea7a5b1f0303a2074aa9f29b2600d6224b058fcbb log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-206-IuDP59/output.log [complete metadata: capture directory]
+
+## CAP-207-4GGZ2u — 2026-09-13T18:32:29Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-207-4GGZ2u/output.log`.
+
+capture=CAP-207-4GGZ2u command=/bin/bash -o pipefail -c bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=b0307d5f3643923c85b2aa7d758ae3f0bf12a603f48312482e8cbeddb222d636 input=cee79ffc77267c915a38f41ea7a5b1f0303a2074aa9f29b2600d6224b058fcbb log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-207-4GGZ2u/output.log [complete metadata: capture directory]
+
+## CAP-208-9C8sj2 — 2026-09-13T18:33:14Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-208-9C8sj2/output.log`.
+
+capture=CAP-208-9C8sj2 command=/bin/bash -o pipefail -c bash tests/test-golden-example.sh  key=  -- 3/3 passed exit=0 output=c5596e4df60ed53e31618150bc13f9487553233a0cbc59820063ae9aa2cc96ae input=cee79ffc77267c915a38f41ea7a5b1f0303a2074aa9f29b2600d6224b058fcbb log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-208-9C8sj2/output.log [complete metadata: capture directory]
+
+## CAP-209-KvlfsJ — 2026-09-13T18:40:11Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-209-KvlfsJ/output.log`.
+
+capture=CAP-209-KvlfsJ command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-build-adapters.sh  key=  -- 8/8 passed exit=0 output=07e727dc8f9709670ecccccc71bb8a688e4b406e14206de1a60860b72586b1e0 input=cee79ffc77267c915a38f41ea7a5b1f0303a2074aa9f29b2600d6224b058fcbb log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-209-KvlfsJ/output.log [complete metadata: capture directory]
+
+## CAP-210-JxDn0d — 2026-09-13T18:41:58Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-210-JxDn0d/output.log`.
+
+capture=CAP-210-JxDn0d command=/bin/bash -o pipefail -c bash tests/test-spec-run.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=6afa5129adcacc389d7dd247ba059bc93f6abec84371466d3b7f5f19daa2bbd2 input=cee79ffc77267c915a38f41ea7a5b1f0303a2074aa9f29b2600d6224b058fcbb log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-210-JxDn0d/output.log [complete metadata: capture directory]
+
+## CAP-211-2LV4Yj — 2026-09-13T18:49:07Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-211-2LV4Yj/output.log`.
+
+capture=CAP-211-2LV4Yj command=/bin/bash -o pipefail -c bash tests/test-spec-task.sh && bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=3334b455c3ba2b83d00ab61c13747adf07fa5cb70298720a949d5e873eecd3f0 input=cee79ffc77267c915a38f41ea7a5b1f0303a2074aa9f29b2600d6224b058fcbb log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-211-2LV4Yj/output.log [complete metadata: capture directory]
+
+## CAP-212-E2kBqL — 2026-09-13T18:55:24Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-212-E2kBqL/output.log`.
+
+capture=CAP-212-E2kBqL command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=f3fb7114ca5222ecd984af53b2c6f1e91576973505c2112e12455304993b539b input=cee79ffc77267c915a38f41ea7a5b1f0303a2074aa9f29b2600d6224b058fcbb log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-212-E2kBqL/output.log [complete metadata: capture directory]
+
+## CAP-213-IwYPzz — 2026-09-13T19:02:32Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-213-IwYPzz/output.log`.
+
+capture=CAP-213-IwYPzz command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=0674f61c5163d250133fb5d838ec0ee3730d3d6e40f72f723f5f49416449d191 input=cee79ffc77267c915a38f41ea7a5b1f0303a2074aa9f29b2600d6224b058fcbb log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-213-IwYPzz/output.log [complete metadata: capture directory]
+
+## CAP-214-SHPvrK — 2026-09-13T19:09:44Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-214-SHPvrK/output.log`.
+
+capture=CAP-214-SHPvrK command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=1e7cb98767b063c47d9b91e7f2304ba6ecc36bbdc8319e4e7ae51594753470ce input=cee79ffc77267c915a38f41ea7a5b1f0303a2074aa9f29b2600d6224b058fcbb log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-214-SHPvrK/output.log [complete metadata: capture directory]
+
+## CAP-215-VSTJAb — 2026-09-13T19:16:11Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-215-VSTJAb/output.log`.
+
+capture=CAP-215-VSTJAb command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=0c5db03a7dd3fdf020bd0228826045f5a8f1e5b4e433b9079de6b54021fa94a7 input=cee79ffc77267c915a38f41ea7a5b1f0303a2074aa9f29b2600d6224b058fcbb log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-215-VSTJAb/output.log [complete metadata: capture directory]
+
+## CAP-216-77kgof — 2026-09-13T19:29:52Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-216-77kgof/output.log`.
+
+capture=CAP-216-77kgof command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-verification.sh && bash tests/test-sdd-analyze.sh  key=  -- 18/18 passed exit=0 output=81deb99d485304d7d6379a019518cbca98c3683336fa465a858a8a452daa5fd6 input=cee79ffc77267c915a38f41ea7a5b1f0303a2074aa9f29b2600d6224b058fcbb log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-216-77kgof/output.log [complete metadata: capture directory]
+
+## CAP-217-OyeL5x — 2026-09-13T19:41:38Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-217-OyeL5x/output.log`.
+
+capture=CAP-217-OyeL5x command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=cea534ae1dd3df8a53663a770a07528dbfc05ec6aae2fd7bf04d3296c5a3acf0 input=cee79ffc77267c915a38f41ea7a5b1f0303a2074aa9f29b2600d6224b058fcbb log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-217-OyeL5x/output.log [complete metadata: capture directory]
+
+## CAP-218-kdiEFd — 2026-09-13T19:52:55Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-218-kdiEFd/output.log`.
+
+capture=CAP-218-kdiEFd command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-sdd-analyze.sh  key=  -- 18/18 passed exit=0 output=5fedbf813386f524798ceae747c083ee0920238cd7e8072e49582cc6e799828f input=cee79ffc77267c915a38f41ea7a5b1f0303a2074aa9f29b2600d6224b058fcbb log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-218-kdiEFd/output.log [complete metadata: capture directory]
+
+## CAP-219-GEQuLj — 2026-09-13T20:05:02Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-219-GEQuLj/output.log`.
+
+capture=CAP-219-GEQuLj command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=c692c9eb1e2a3b754318d1692b19a2995671005c35348d35aaf8b7dd8165a9dd input=cee79ffc77267c915a38f41ea7a5b1f0303a2074aa9f29b2600d6224b058fcbb log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-219-GEQuLj/output.log [complete metadata: capture directory]
+
+## CAP-220-WGEq0O — 2026-09-13T20:18:49Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-220-WGEq0O/output.log`.
+
+capture=CAP-220-WGEq0O command=/bin/bash -o pipefail -c bash tests/run.sh  key=  -- 3/3 passed exit=0 output=23bc386b960148ddb0cdc2b30e01e4ef4f998bb43992204343ccc2f7b7d35c4d input=cee79ffc77267c915a38f41ea7a5b1f0303a2074aa9f29b2600d6224b058fcbb log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-220-WGEq0O/output.log [complete metadata: capture directory]
+
+## CAP-221-qBr4Op — 2026-09-13T20:51:38Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-221-qBr4Op/output.log`.
+
+capture=CAP-221-qBr4Op command=/bin/bash -o pipefail -c bash tests/run.sh && shellcheck -S warning -x scripts/*.sh tests/*.sh  key=  -- 3/3 passed exit=0 output=23bc386b960148ddb0cdc2b30e01e4ef4f998bb43992204343ccc2f7b7d35c4d input=cee79ffc77267c915a38f41ea7a5b1f0303a2074aa9f29b2600d6224b058fcbb log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-221-qBr4Op/output.log [complete metadata: capture directory]
+
+## CAP-222-Ukczh4 — 2026-09-13T21:03:03Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-222-Ukczh4/output.log`.
+
+capture=CAP-222-Ukczh4 command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=fe6ca922241392cf3402a6829cfff98a4d41661da79c2d7041650952bde69e72 input=cee79ffc77267c915a38f41ea7a5b1f0303a2074aa9f29b2600d6224b058fcbb log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-222-Ukczh4/output.log [complete metadata: capture directory]
+
+## CAP-223-ZFiFF5 — 2026-09-13T21:33:10Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-223-ZFiFF5/output.log`.
+
+capture=CAP-223-ZFiFF5 command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline  key=1 warning(s), 0 errors exit=0 output=afe03a601e9e9bd772e00ef6e524efe0a08c321f9b3374481a30a61f981175e6 input=cee79ffc77267c915a38f41ea7a5b1f0303a2074aa9f29b2600d6224b058fcbb log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-223-ZFiFF5/output.log [complete metadata: capture directory]
+
+## CAP-224-XkEX6N — 2026-09-13T21:33:37Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-224-XkEX6N/output.log`.
+
+capture=CAP-224-XkEX6N command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-ac-coverage.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline --root /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline  key=bound — every AC is named by at least one test file exit=0 output=5c841ad952893a091551df1f3b0b6b0156b039dbc4ee61ee3a9c902ec9ccc343 input=cee79ffc77267c915a38f41ea7a5b1f0303a2074aa9f29b2600d6224b058fcbb log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-224-XkEX6N/output.log [complete metadata: capture directory]
+
+## CAP-225-G8YdfM — 2026-09-14T03:28:03Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-225-G8YdfM/output.log`.
+
+capture=CAP-225-G8YdfM command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-evidence.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline  key=current evidence: all completed task checks have valid current captures exit=0 output=1aa21c04783da72f4e354465df3f112f4d08573404e41b7a19f0e46a79f4f573 input=cee79ffc77267c915a38f41ea7a5b1f0303a2074aa9f29b2600d6224b058fcbb log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-225-G8YdfM/output.log [complete metadata: capture directory]
+
+## CAP-226-W8PaH4 — 2026-09-14T05:58:41Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-226-W8PaH4/output.log`.
+
+capture=CAP-226-W8PaH4 command=/bin/bash -o pipefail -c shellcheck -S warning -x scripts/*.sh tests/*.sh  key=(no output) exit=0 output=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 input=cee79ffc77267c915a38f41ea7a5b1f0303a2074aa9f29b2600d6224b058fcbb log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-226-W8PaH4/output.log [complete metadata: capture directory]
+
+## GATE-FLOOR
+
+Result: FLOOR-bVcJIO; source: cee79ffc77267c915a38f41ea7a5b1f0303a2074aa9f29b2600d6224b058fcbb; exit: 0; command records: `notes/verification/floors/FLOOR-bVcJIO/commands.nul`.
+
+## CAP-227-0HrBkU — 2026-09-14T22:37:48Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-227-0HrBkU/output.log`.
+
+capture=CAP-227-0HrBkU command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=c89f7d9e3ceea159e64bb75defc10d0c11ca84dee772071cbdfc2c36232f3fdb input=04acee0fb055369416b87c6e7a6777a2d0cbbbcb68d40217b79935337b725435 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-227-0HrBkU/output.log [complete metadata: capture directory]
+
+## CAP-228-vmNZUy — 2026-09-14T22:38:31Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-228-vmNZUy/output.log`.
+
+capture=CAP-228-vmNZUy command=/bin/bash -o pipefail -c bash tests/test-sdd-analyze.sh  key=  -- 18/18 passed exit=0 output=20ac89cdff35a7ebcd8d19d2c3a2ddc42f015dc3cb116147d9f5c5c5b4b62344 input=04acee0fb055369416b87c6e7a6777a2d0cbbbcb68d40217b79935337b725435 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-228-vmNZUy/output.log [complete metadata: capture directory]
+
+## CAP-229-lGME3y — 2026-09-14T22:39:40Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-229-lGME3y/output.log`.
+
+capture=CAP-229-lGME3y command=/bin/bash -o pipefail -c bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=b0307d5f3643923c85b2aa7d758ae3f0bf12a603f48312482e8cbeddb222d636 input=04acee0fb055369416b87c6e7a6777a2d0cbbbcb68d40217b79935337b725435 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-229-lGME3y/output.log [complete metadata: capture directory]
+
+## CAP-230-JLHC3K — 2026-09-14T22:40:27Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-230-JLHC3K/output.log`.
+
+capture=CAP-230-JLHC3K command=/bin/bash -o pipefail -c bash tests/test-golden-example.sh  key=  -- 3/3 passed exit=0 output=c5596e4df60ed53e31618150bc13f9487553233a0cbc59820063ae9aa2cc96ae input=04acee0fb055369416b87c6e7a6777a2d0cbbbcb68d40217b79935337b725435 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-230-JLHC3K/output.log [complete metadata: capture directory]
+
+## CAP-231-U3pnxK — 2026-09-14T22:47:19Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-231-U3pnxK/output.log`.
+
+capture=CAP-231-U3pnxK command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-build-adapters.sh  key=  -- 8/8 passed exit=0 output=07e727dc8f9709670ecccccc71bb8a688e4b406e14206de1a60860b72586b1e0 input=04acee0fb055369416b87c6e7a6777a2d0cbbbcb68d40217b79935337b725435 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-231-U3pnxK/output.log [complete metadata: capture directory]
+
+## CAP-232-bdwEXz — 2026-09-14T22:49:15Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-232-bdwEXz/output.log`.
+
+capture=CAP-232-bdwEXz command=/bin/bash -o pipefail -c bash tests/test-spec-run.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=6afa5129adcacc389d7dd247ba059bc93f6abec84371466d3b7f5f19daa2bbd2 input=04acee0fb055369416b87c6e7a6777a2d0cbbbcb68d40217b79935337b725435 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-232-bdwEXz/output.log [complete metadata: capture directory]
+
+## CAP-233-tdHyip — 2026-09-15T01:45:15Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-233-tdHyip/output.log`.
+
+capture=CAP-233-tdHyip command=/bin/bash -o pipefail -c bash tests/test-spec-task.sh && bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=3334b455c3ba2b83d00ab61c13747adf07fa5cb70298720a949d5e873eecd3f0 input=04acee0fb055369416b87c6e7a6777a2d0cbbbcb68d40217b79935337b725435 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-233-tdHyip/output.log [complete metadata: capture directory]
+
+## CAP-234-ayqUKB — 2026-09-15T06:52:38Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-234-ayqUKB/output.log`.
+
+capture=CAP-234-ayqUKB command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=f3fb7114ca5222ecd984af53b2c6f1e91576973505c2112e12455304993b539b input=04acee0fb055369416b87c6e7a6777a2d0cbbbcb68d40217b79935337b725435 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-234-ayqUKB/output.log [complete metadata: capture directory]
+
+## CAP-235-NT4b3t — 2026-09-15T06:59:47Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-235-NT4b3t/output.log`.
+
+capture=CAP-235-NT4b3t command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=0674f61c5163d250133fb5d838ec0ee3730d3d6e40f72f723f5f49416449d191 input=04acee0fb055369416b87c6e7a6777a2d0cbbbcb68d40217b79935337b725435 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-235-NT4b3t/output.log [complete metadata: capture directory]
+
+## CAP-236-l53wT8 — 2026-09-15T07:06:43Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-236-l53wT8/output.log`.
+
+capture=CAP-236-l53wT8 command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=1e7cb98767b063c47d9b91e7f2304ba6ecc36bbdc8319e4e7ae51594753470ce input=04acee0fb055369416b87c6e7a6777a2d0cbbbcb68d40217b79935337b725435 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-236-l53wT8/output.log [complete metadata: capture directory]
+
+## CAP-238-PLFuAW — 2026-09-15T19:27:41Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-238-PLFuAW/output.log`.
+
+capture=CAP-238-PLFuAW command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=0c5db03a7dd3fdf020bd0228826045f5a8f1e5b4e433b9079de6b54021fa94a7 input=04acee0fb055369416b87c6e7a6777a2d0cbbbcb68d40217b79935337b725435 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-238-PLFuAW/output.log [complete metadata: capture directory]
+
+## CAP-239-sUqE1a — 2026-09-15T19:41:24Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-239-sUqE1a/output.log`.
+
+capture=CAP-239-sUqE1a command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-verification.sh && bash tests/test-sdd-analyze.sh  key=  -- 18/18 passed exit=0 output=81deb99d485304d7d6379a019518cbca98c3683336fa465a858a8a452daa5fd6 input=04acee0fb055369416b87c6e7a6777a2d0cbbbcb68d40217b79935337b725435 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-239-sUqE1a/output.log [complete metadata: capture directory]
+
+## CAP-240-eGrCg6 — 2026-09-15T20:02:36Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-240-eGrCg6/output.log`.
+
+capture=CAP-240-eGrCg6 command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=cea534ae1dd3df8a53663a770a07528dbfc05ec6aae2fd7bf04d3296c5a3acf0 input=04acee0fb055369416b87c6e7a6777a2d0cbbbcb68d40217b79935337b725435 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-240-eGrCg6/output.log [complete metadata: capture directory]
+
+## CAP-241-CgUV4H — 2026-09-15T20:16:31Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-241-CgUV4H/output.log`.
+
+capture=CAP-241-CgUV4H command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-sdd-analyze.sh  key=  -- 18/18 passed exit=0 output=5fedbf813386f524798ceae747c083ee0920238cd7e8072e49582cc6e799828f input=04acee0fb055369416b87c6e7a6777a2d0cbbbcb68d40217b79935337b725435 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-241-CgUV4H/output.log [complete metadata: capture directory]
+
+## CAP-242-5xtc4D — 2026-09-15T20:29:10Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-242-5xtc4D/output.log`.
+
+capture=CAP-242-5xtc4D command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=c692c9eb1e2a3b754318d1692b19a2995671005c35348d35aaf8b7dd8165a9dd input=04acee0fb055369416b87c6e7a6777a2d0cbbbcb68d40217b79935337b725435 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-242-5xtc4D/output.log [complete metadata: capture directory]
+
+## CAP-243-0wWYVR — 2026-09-15T20:45:12Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-243-0wWYVR/output.log`.
+
+capture=CAP-243-0wWYVR command=/bin/bash -o pipefail -c bash tests/run.sh && shellcheck -S warning -x scripts/*.sh tests/*.sh  key=  -- 3/3 passed exit=0 output=23bc386b960148ddb0cdc2b30e01e4ef4f998bb43992204343ccc2f7b7d35c4d input=04acee0fb055369416b87c6e7a6777a2d0cbbbcb68d40217b79935337b725435 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-243-0wWYVR/output.log [complete metadata: capture directory]
+
+## CAP-244-J1hxBO — 2026-09-15T20:57:24Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-244-J1hxBO/output.log`.
+
+capture=CAP-244-J1hxBO command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=fe6ca922241392cf3402a6829cfff98a4d41661da79c2d7041650952bde69e72 input=04acee0fb055369416b87c6e7a6777a2d0cbbbcb68d40217b79935337b725435 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-244-J1hxBO/output.log [complete metadata: capture directory]
+
+## CAP-245-mSjPtO — 2026-09-15T20:58:18Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-245-mSjPtO/output.log`.
+
+capture=CAP-245-mSjPtO command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline  key=1 warning(s), 0 errors exit=0 output=afe03a601e9e9bd772e00ef6e524efe0a08c321f9b3374481a30a61f981175e6 input=04acee0fb055369416b87c6e7a6777a2d0cbbbcb68d40217b79935337b725435 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-245-mSjPtO/output.log [complete metadata: capture directory]
+
+## CAP-246-JfuMrk — 2026-09-15T20:58:45Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-246-JfuMrk/output.log`.
+
+capture=CAP-246-JfuMrk command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-ac-coverage.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline --root /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline  key=bound — every AC is named by at least one test file exit=0 output=5c841ad952893a091551df1f3b0b6b0156b039dbc4ee61ee3a9c902ec9ccc343 input=04acee0fb055369416b87c6e7a6777a2d0cbbbcb68d40217b79935337b725435 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-246-JfuMrk/output.log [complete metadata: capture directory]
+
+## CAP-247-pLTyje — 2026-09-15T21:20:54Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-247-pLTyje/output.log`.
+
+capture=CAP-247-pLTyje command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-evidence.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline  key=current evidence: all completed task checks have valid current captures exit=0 output=cbce5e460372ce5152573bd67c7c3e92b1844e2695b01f3478dee14d4eb78671 input=04acee0fb055369416b87c6e7a6777a2d0cbbbcb68d40217b79935337b725435 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-247-pLTyje/output.log [complete metadata: capture directory]
+
+## CAP-248-9xAA4n — 2026-09-15T21:33:50Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-248-9xAA4n/output.log`.
+
+capture=CAP-248-9xAA4n command=/bin/bash -o pipefail -c bash tests/run.sh  key=  -- 3/3 passed exit=0 output=23bc386b960148ddb0cdc2b30e01e4ef4f998bb43992204343ccc2f7b7d35c4d input=04acee0fb055369416b87c6e7a6777a2d0cbbbcb68d40217b79935337b725435 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-248-9xAA4n/output.log [complete metadata: capture directory]
+
+## CAP-249-ebskdn — 2026-09-15T21:34:38Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-249-ebskdn/output.log`.
+
+capture=CAP-249-ebskdn command=/bin/bash -o pipefail -c shellcheck -S warning -x scripts/*.sh tests/*.sh  key=(no output) exit=0 output=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 input=04acee0fb055369416b87c6e7a6777a2d0cbbbcb68d40217b79935337b725435 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-249-ebskdn/output.log [complete metadata: capture directory]
+
+## GATE-FLOOR
+
+Result: FLOOR-tVabls; source: 04acee0fb055369416b87c6e7a6777a2d0cbbbcb68d40217b79935337b725435; exit: 0; command records: `notes/verification/floors/FLOOR-tVabls/commands.nul`.
+
+## CAP-250-rlyxa6 — 2026-09-15T21:44:45Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-250-rlyxa6/output.log`.
+
+capture=CAP-250-rlyxa6 command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=c89f7d9e3ceea159e64bb75defc10d0c11ca84dee772071cbdfc2c36232f3fdb input=73202d83b57a0c05d1888f969a114d8ad9b15357704900179b815ce5d8cc8f1c log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-250-rlyxa6/output.log [complete metadata: capture directory]
+
+## CAP-251-uqoSxb — 2026-09-15T21:45:25Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-251-uqoSxb/output.log`.
+
+capture=CAP-251-uqoSxb command=/bin/bash -o pipefail -c bash tests/test-sdd-analyze.sh  key=  -- 18/18 passed exit=0 output=20ac89cdff35a7ebcd8d19d2c3a2ddc42f015dc3cb116147d9f5c5c5b4b62344 input=73202d83b57a0c05d1888f969a114d8ad9b15357704900179b815ce5d8cc8f1c log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-251-uqoSxb/output.log [complete metadata: capture directory]
+
+## CAP-252-W2sXE7 — 2026-09-15T21:46:31Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-252-W2sXE7/output.log`.
+
+capture=CAP-252-W2sXE7 command=/bin/bash -o pipefail -c bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=b0307d5f3643923c85b2aa7d758ae3f0bf12a603f48312482e8cbeddb222d636 input=73202d83b57a0c05d1888f969a114d8ad9b15357704900179b815ce5d8cc8f1c log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-252-W2sXE7/output.log [complete metadata: capture directory]
+
+## CAP-253-3pFHKX — 2026-09-15T21:47:17Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-253-3pFHKX/output.log`.
+
+capture=CAP-253-3pFHKX command=/bin/bash -o pipefail -c bash tests/test-golden-example.sh  key=  -- 3/3 passed exit=0 output=c5596e4df60ed53e31618150bc13f9487553233a0cbc59820063ae9aa2cc96ae input=73202d83b57a0c05d1888f969a114d8ad9b15357704900179b815ce5d8cc8f1c log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-253-3pFHKX/output.log [complete metadata: capture directory]
+
+## CAP-254-PMZU1D — 2026-09-15T21:54:06Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-254-PMZU1D/output.log`.
+
+capture=CAP-254-PMZU1D command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-build-adapters.sh  key=  -- 8/8 passed exit=0 output=07e727dc8f9709670ecccccc71bb8a688e4b406e14206de1a60860b72586b1e0 input=73202d83b57a0c05d1888f969a114d8ad9b15357704900179b815ce5d8cc8f1c log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-254-PMZU1D/output.log [complete metadata: capture directory]
+
+## CAP-255-EksjNg — 2026-09-15T21:56:13Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-255-EksjNg/output.log`.
+
+capture=CAP-255-EksjNg command=/bin/bash -o pipefail -c bash tests/test-spec-run.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=6afa5129adcacc389d7dd247ba059bc93f6abec84371466d3b7f5f19daa2bbd2 input=73202d83b57a0c05d1888f969a114d8ad9b15357704900179b815ce5d8cc8f1c log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-255-EksjNg/output.log [complete metadata: capture directory]
+
+## CAP-256-VmRuat — 2026-09-15T22:03:44Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-256-VmRuat/output.log`.
+
+capture=CAP-256-VmRuat command=/bin/bash -o pipefail -c bash tests/test-spec-task.sh && bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=3334b455c3ba2b83d00ab61c13747adf07fa5cb70298720a949d5e873eecd3f0 input=73202d83b57a0c05d1888f969a114d8ad9b15357704900179b815ce5d8cc8f1c log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-256-VmRuat/output.log [complete metadata: capture directory]
+
+## CAP-257-W6Tw2H — 2026-09-15T22:09:53Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-257-W6Tw2H/output.log`.
+
+capture=CAP-257-W6Tw2H command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=f3fb7114ca5222ecd984af53b2c6f1e91576973505c2112e12455304993b539b input=73202d83b57a0c05d1888f969a114d8ad9b15357704900179b815ce5d8cc8f1c log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-257-W6Tw2H/output.log [complete metadata: capture directory]
+
+## CAP-258-957om7 — 2026-09-15T22:17:07Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-258-957om7/output.log`.
+
+capture=CAP-258-957om7 command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=0674f61c5163d250133fb5d838ec0ee3730d3d6e40f72f723f5f49416449d191 input=73202d83b57a0c05d1888f969a114d8ad9b15357704900179b815ce5d8cc8f1c log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-258-957om7/output.log [complete metadata: capture directory]
+
+## CAP-259-LKPR1r — 2026-09-15T22:24:05Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-259-LKPR1r/output.log`.
+
+capture=CAP-259-LKPR1r command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=1e7cb98767b063c47d9b91e7f2304ba6ecc36bbdc8319e4e7ae51594753470ce input=73202d83b57a0c05d1888f969a114d8ad9b15357704900179b815ce5d8cc8f1c log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-259-LKPR1r/output.log [complete metadata: capture directory]
+
+## CAP-260-Z8mBm7 — 2026-09-15T22:30:16Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-260-Z8mBm7/output.log`.
+
+capture=CAP-260-Z8mBm7 command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=0c5db03a7dd3fdf020bd0228826045f5a8f1e5b4e433b9079de6b54021fa94a7 input=73202d83b57a0c05d1888f969a114d8ad9b15357704900179b815ce5d8cc8f1c log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-260-Z8mBm7/output.log [complete metadata: capture directory]
+
+## CAP-261-eqLRye — 2026-09-15T22:43:24Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-261-eqLRye/output.log`.
+
+capture=CAP-261-eqLRye command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-verification.sh && bash tests/test-sdd-analyze.sh  key=  -- 18/18 passed exit=0 output=81deb99d485304d7d6379a019518cbca98c3683336fa465a858a8a452daa5fd6 input=73202d83b57a0c05d1888f969a114d8ad9b15357704900179b815ce5d8cc8f1c log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-261-eqLRye/output.log [complete metadata: capture directory]
+
+## CAP-262-TKh5TT — 2026-09-15T22:55:03Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-262-TKh5TT/output.log`.
+
+capture=CAP-262-TKh5TT command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=cea534ae1dd3df8a53663a770a07528dbfc05ec6aae2fd7bf04d3296c5a3acf0 input=73202d83b57a0c05d1888f969a114d8ad9b15357704900179b815ce5d8cc8f1c log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-262-TKh5TT/output.log [complete metadata: capture directory]
+
+## CAP-263-Z6Wfpw — 2026-09-15T23:06:00Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-263-Z6Wfpw/output.log`.
+
+capture=CAP-263-Z6Wfpw command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-sdd-analyze.sh  key=  -- 18/18 passed exit=0 output=5fedbf813386f524798ceae747c083ee0920238cd7e8072e49582cc6e799828f input=73202d83b57a0c05d1888f969a114d8ad9b15357704900179b815ce5d8cc8f1c log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-263-Z6Wfpw/output.log [complete metadata: capture directory]
+
+## CAP-264-YPcy7P — 2026-09-15T23:17:34Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-264-YPcy7P/output.log`.
+
+capture=CAP-264-YPcy7P command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=c692c9eb1e2a3b754318d1692b19a2995671005c35348d35aaf8b7dd8165a9dd input=73202d83b57a0c05d1888f969a114d8ad9b15357704900179b815ce5d8cc8f1c log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-264-YPcy7P/output.log [complete metadata: capture directory]
+
+## CAP-265-NWIcze — 2026-09-15T23:31:51Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-265-NWIcze/output.log`.
+
+capture=CAP-265-NWIcze command=/bin/bash -o pipefail -c bash tests/run.sh && shellcheck -S warning -x scripts/*.sh tests/*.sh  key=  -- 3/3 passed exit=0 output=23bc386b960148ddb0cdc2b30e01e4ef4f998bb43992204343ccc2f7b7d35c4d input=73202d83b57a0c05d1888f969a114d8ad9b15357704900179b815ce5d8cc8f1c log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-265-NWIcze/output.log [complete metadata: capture directory]
+
+## CAP-266-6q6bEx — 2026-09-15T23:42:45Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-266-6q6bEx/output.log`.
+
+capture=CAP-266-6q6bEx command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=fe6ca922241392cf3402a6829cfff98a4d41661da79c2d7041650952bde69e72 input=73202d83b57a0c05d1888f969a114d8ad9b15357704900179b815ce5d8cc8f1c log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-266-6q6bEx/output.log [complete metadata: capture directory]
+
+## CAP-267-xNvFjk — 2026-09-15T23:43:30Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-267-xNvFjk/output.log`.
+
+capture=CAP-267-xNvFjk command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline  key=1 warning(s), 0 errors exit=0 output=afe03a601e9e9bd772e00ef6e524efe0a08c321f9b3374481a30a61f981175e6 input=73202d83b57a0c05d1888f969a114d8ad9b15357704900179b815ce5d8cc8f1c log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-267-xNvFjk/output.log [complete metadata: capture directory]
+
+## CAP-268-P4mN6S — 2026-09-15T23:43:55Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-268-P4mN6S/output.log`.
+
+capture=CAP-268-P4mN6S command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-ac-coverage.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline --root /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline  key=bound — every AC is named by at least one test file exit=0 output=5c841ad952893a091551df1f3b0b6b0156b039dbc4ee61ee3a9c902ec9ccc343 input=73202d83b57a0c05d1888f969a114d8ad9b15357704900179b815ce5d8cc8f1c log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-268-P4mN6S/output.log [complete metadata: capture directory]
+
+## CAP-269-wua7Cn — 2026-09-16T00:06:56Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-269-wua7Cn/output.log`.
+
+capture=CAP-269-wua7Cn command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-evidence.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline  key=current evidence: all completed task checks have valid current captures exit=0 output=b287b37a8839a19c9974f2789e0b9905fe6c091b3bfaa1c525b20546725b13d8 input=73202d83b57a0c05d1888f969a114d8ad9b15357704900179b815ce5d8cc8f1c log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-269-wua7Cn/output.log [complete metadata: capture directory]
+
+## CAP-270-5zMRCP — 2026-09-16T00:19:34Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-270-5zMRCP/output.log`.
+
+capture=CAP-270-5zMRCP command=/bin/bash -o pipefail -c bash tests/run.sh  key=  -- 3/3 passed exit=0 output=23bc386b960148ddb0cdc2b30e01e4ef4f998bb43992204343ccc2f7b7d35c4d input=73202d83b57a0c05d1888f969a114d8ad9b15357704900179b815ce5d8cc8f1c log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-270-5zMRCP/output.log [complete metadata: capture directory]
+
+## CAP-271-339oLB — 2026-09-16T00:20:21Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-271-339oLB/output.log`.
+
+capture=CAP-271-339oLB command=/bin/bash -o pipefail -c shellcheck -S warning -x scripts/*.sh tests/*.sh  key=(no output) exit=0 output=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 input=73202d83b57a0c05d1888f969a114d8ad9b15357704900179b815ce5d8cc8f1c log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-271-339oLB/output.log [complete metadata: capture directory]
+
+## GATE-FLOOR
+
+Result: FLOOR-b0sLmN; source: 73202d83b57a0c05d1888f969a114d8ad9b15357704900179b815ce5d8cc8f1c; exit: 0; command records: `notes/verification/floors/FLOOR-b0sLmN/commands.nul`.
+
+## CAP-272-I4rOZq — 2026-09-16T07:38:16Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-272-I4rOZq/output.log`.
+
+capture=CAP-272-I4rOZq command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=c89f7d9e3ceea159e64bb75defc10d0c11ca84dee772071cbdfc2c36232f3fdb input=d6711c27404045084926d5837e6cfd09e223336ed1a86c1e50997b57113f8664 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-272-I4rOZq/output.log [complete metadata: capture directory]
+
+## CAP-273-7RW12J — 2026-09-16T07:44:57Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-273-7RW12J/output.log`.
+
+capture=CAP-273-7RW12J command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=c89f7d9e3ceea159e64bb75defc10d0c11ca84dee772071cbdfc2c36232f3fdb input=d6711c27404045084926d5837e6cfd09e223336ed1a86c1e50997b57113f8664 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-273-7RW12J/output.log [complete metadata: capture directory]
+
+## CAP-274-BdOYW1 — 2026-09-16T07:51:01Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-274-BdOYW1/output.log`.
+
+capture=CAP-274-BdOYW1 command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=f3fb7114ca5222ecd984af53b2c6f1e91576973505c2112e12455304993b539b input=d6711c27404045084926d5837e6cfd09e223336ed1a86c1e50997b57113f8664 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-274-BdOYW1/output.log [complete metadata: capture directory]
+
+## CAP-275-mDGzk7 — 2026-09-16T07:56:30Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-275-mDGzk7/output.log`.
+
+capture=CAP-275-mDGzk7 command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=c89f7d9e3ceea159e64bb75defc10d0c11ca84dee772071cbdfc2c36232f3fdb input=d6711c27404045084926d5837e6cfd09e223336ed1a86c1e50997b57113f8664 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-275-mDGzk7/output.log [complete metadata: capture directory]
+
+## CAP-276-UG65R0 — 2026-09-16T10:01:25Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-276-UG65R0/output.log`.
+
+capture=CAP-276-UG65R0 command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=c89f7d9e3ceea159e64bb75defc10d0c11ca84dee772071cbdfc2c36232f3fdb input=5936a7fe77fd5f404329b20aa24850b3a20bcc953c4fe5e75cc5fec943021afe log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-276-UG65R0/output.log [complete metadata: capture directory]
+
+## CAP-277-XG9xOU — 2026-09-16T10:02:03Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-277-XG9xOU/output.log`.
+
+capture=CAP-277-XG9xOU command=/bin/bash -o pipefail -c bash tests/test-sdd-analyze.sh  key=  -- 18/18 passed exit=0 output=20ac89cdff35a7ebcd8d19d2c3a2ddc42f015dc3cb116147d9f5c5c5b4b62344 input=5936a7fe77fd5f404329b20aa24850b3a20bcc953c4fe5e75cc5fec943021afe log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-277-XG9xOU/output.log [complete metadata: capture directory]
+
+## CAP-278-91X3yO — 2026-09-16T10:03:07Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-278-91X3yO/output.log`.
+
+capture=CAP-278-91X3yO command=/bin/bash -o pipefail -c bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=b0307d5f3643923c85b2aa7d758ae3f0bf12a603f48312482e8cbeddb222d636 input=5936a7fe77fd5f404329b20aa24850b3a20bcc953c4fe5e75cc5fec943021afe log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-278-91X3yO/output.log [complete metadata: capture directory]
+
+## CAP-279-gQfwXY — 2026-09-16T10:03:52Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-279-gQfwXY/output.log`.
+
+capture=CAP-279-gQfwXY command=/bin/bash -o pipefail -c bash tests/test-golden-example.sh  key=  -- 3/3 passed exit=0 output=c5596e4df60ed53e31618150bc13f9487553233a0cbc59820063ae9aa2cc96ae input=5936a7fe77fd5f404329b20aa24850b3a20bcc953c4fe5e75cc5fec943021afe log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-279-gQfwXY/output.log [complete metadata: capture directory]
+
+## CAP-280-Waq9yH — 2026-09-16T10:10:29Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-280-Waq9yH/output.log`.
+
+capture=CAP-280-Waq9yH command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-build-adapters.sh  key=  -- 8/8 passed exit=0 output=07e727dc8f9709670ecccccc71bb8a688e4b406e14206de1a60860b72586b1e0 input=5936a7fe77fd5f404329b20aa24850b3a20bcc953c4fe5e75cc5fec943021afe log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-280-Waq9yH/output.log [complete metadata: capture directory]
+
+## CAP-281-LZznaF — 2026-09-16T10:12:10Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-281-LZznaF/output.log`.
+
+capture=CAP-281-LZznaF command=/bin/bash -o pipefail -c bash tests/test-spec-run.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=6afa5129adcacc389d7dd247ba059bc93f6abec84371466d3b7f5f19daa2bbd2 input=5936a7fe77fd5f404329b20aa24850b3a20bcc953c4fe5e75cc5fec943021afe log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-281-LZznaF/output.log [complete metadata: capture directory]
+
+## CAP-282-i1j2TY — 2026-09-16T10:18:58Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-282-i1j2TY/output.log`.
+
+capture=CAP-282-i1j2TY command=/bin/bash -o pipefail -c bash tests/test-spec-task.sh && bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=3334b455c3ba2b83d00ab61c13747adf07fa5cb70298720a949d5e873eecd3f0 input=5936a7fe77fd5f404329b20aa24850b3a20bcc953c4fe5e75cc5fec943021afe log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-282-i1j2TY/output.log [complete metadata: capture directory]
+
+## CAP-283-a9Pzko — 2026-09-16T10:24:55Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-283-a9Pzko/output.log`.
+
+capture=CAP-283-a9Pzko command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=f3fb7114ca5222ecd984af53b2c6f1e91576973505c2112e12455304993b539b input=5936a7fe77fd5f404329b20aa24850b3a20bcc953c4fe5e75cc5fec943021afe log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-283-a9Pzko/output.log [complete metadata: capture directory]
+
+## CAP-284-YagwDg — 2026-09-16T10:31:40Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-284-YagwDg/output.log`.
+
+capture=CAP-284-YagwDg command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=0674f61c5163d250133fb5d838ec0ee3730d3d6e40f72f723f5f49416449d191 input=5936a7fe77fd5f404329b20aa24850b3a20bcc953c4fe5e75cc5fec943021afe log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-284-YagwDg/output.log [complete metadata: capture directory]
+
+## CAP-285-0PWOyH — 2026-09-16T10:38:16Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-285-0PWOyH/output.log`.
+
+capture=CAP-285-0PWOyH command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=1e7cb98767b063c47d9b91e7f2304ba6ecc36bbdc8319e4e7ae51594753470ce input=5936a7fe77fd5f404329b20aa24850b3a20bcc953c4fe5e75cc5fec943021afe log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-285-0PWOyH/output.log [complete metadata: capture directory]
+
+## CAP-286-DYD0D5 — 2026-09-16T10:44:14Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-286-DYD0D5/output.log`.
+
+capture=CAP-286-DYD0D5 command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=0c5db03a7dd3fdf020bd0228826045f5a8f1e5b4e433b9079de6b54021fa94a7 input=5936a7fe77fd5f404329b20aa24850b3a20bcc953c4fe5e75cc5fec943021afe log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-286-DYD0D5/output.log [complete metadata: capture directory]
+
+## CAP-287-LktpaO — 2026-09-16T10:57:19Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-287-LktpaO/output.log`.
+
+capture=CAP-287-LktpaO command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-verification.sh && bash tests/test-sdd-analyze.sh  key=  -- 18/18 passed exit=0 output=81deb99d485304d7d6379a019518cbca98c3683336fa465a858a8a452daa5fd6 input=5936a7fe77fd5f404329b20aa24850b3a20bcc953c4fe5e75cc5fec943021afe log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-287-LktpaO/output.log [complete metadata: capture directory]
+
+## CAP-288-WR9uM3 — 2026-09-16T11:09:02Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-288-WR9uM3/output.log`.
+
+capture=CAP-288-WR9uM3 command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=cea534ae1dd3df8a53663a770a07528dbfc05ec6aae2fd7bf04d3296c5a3acf0 input=5936a7fe77fd5f404329b20aa24850b3a20bcc953c4fe5e75cc5fec943021afe log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-288-WR9uM3/output.log [complete metadata: capture directory]
+
+## CAP-289-2G1299 — 2026-09-16T11:20:16Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-289-2G1299/output.log`.
+
+capture=CAP-289-2G1299 command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-sdd-analyze.sh  key=  -- 18/18 passed exit=0 output=5fedbf813386f524798ceae747c083ee0920238cd7e8072e49582cc6e799828f input=5936a7fe77fd5f404329b20aa24850b3a20bcc953c4fe5e75cc5fec943021afe log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-289-2G1299/output.log [complete metadata: capture directory]
+
+## CAP-291-1gWMo0 — 2026-09-16T12:19:54Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-291-1gWMo0/output.log`.
+
+capture=CAP-291-1gWMo0 command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=c89f7d9e3ceea159e64bb75defc10d0c11ca84dee772071cbdfc2c36232f3fdb input=340518360ced516cd6201716bc8805c982956e80a11a8da497f1028164d8a14c log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-291-1gWMo0/output.log [complete metadata: capture directory]
+
+## CAP-292-oPirzv — 2026-09-16T12:20:34Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-292-oPirzv/output.log`.
+
+capture=CAP-292-oPirzv command=/bin/bash -o pipefail -c bash tests/test-sdd-analyze.sh  key=  -- 18/18 passed exit=0 output=20ac89cdff35a7ebcd8d19d2c3a2ddc42f015dc3cb116147d9f5c5c5b4b62344 input=340518360ced516cd6201716bc8805c982956e80a11a8da497f1028164d8a14c log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-292-oPirzv/output.log [complete metadata: capture directory]
+
+## CAP-293-Rfk61t — 2026-09-16T12:21:39Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-293-Rfk61t/output.log`.
+
+capture=CAP-293-Rfk61t command=/bin/bash -o pipefail -c bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=b0307d5f3643923c85b2aa7d758ae3f0bf12a603f48312482e8cbeddb222d636 input=340518360ced516cd6201716bc8805c982956e80a11a8da497f1028164d8a14c log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-293-Rfk61t/output.log [complete metadata: capture directory]
+
+## CAP-294-4aQEow — 2026-09-16T12:22:28Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-294-4aQEow/output.log`.
+
+capture=CAP-294-4aQEow command=/bin/bash -o pipefail -c bash tests/test-golden-example.sh  key=  -- 3/3 passed exit=0 output=c5596e4df60ed53e31618150bc13f9487553233a0cbc59820063ae9aa2cc96ae input=340518360ced516cd6201716bc8805c982956e80a11a8da497f1028164d8a14c log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-294-4aQEow/output.log [complete metadata: capture directory]
+
+## CAP-295-1I83yO — 2026-09-16T12:29:44Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-295-1I83yO/output.log`.
+
+capture=CAP-295-1I83yO command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-build-adapters.sh  key=  -- 8/8 passed exit=0 output=07e727dc8f9709670ecccccc71bb8a688e4b406e14206de1a60860b72586b1e0 input=340518360ced516cd6201716bc8805c982956e80a11a8da497f1028164d8a14c log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-295-1I83yO/output.log [complete metadata: capture directory]
+
+## CAP-296-7Gor5B — 2026-09-16T12:31:25Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-296-7Gor5B/output.log`.
+
+capture=CAP-296-7Gor5B command=/bin/bash -o pipefail -c bash tests/test-spec-run.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=6afa5129adcacc389d7dd247ba059bc93f6abec84371466d3b7f5f19daa2bbd2 input=340518360ced516cd6201716bc8805c982956e80a11a8da497f1028164d8a14c log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-296-7Gor5B/output.log [complete metadata: capture directory]
+
+## CAP-297-dqlk66 — 2026-09-16T12:38:10Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-297-dqlk66/output.log`.
+
+capture=CAP-297-dqlk66 command=/bin/bash -o pipefail -c bash tests/test-spec-task.sh && bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=3334b455c3ba2b83d00ab61c13747adf07fa5cb70298720a949d5e873eecd3f0 input=340518360ced516cd6201716bc8805c982956e80a11a8da497f1028164d8a14c log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-297-dqlk66/output.log [complete metadata: capture directory]
+
+## CAP-298-HySpca — 2026-09-16T12:44:10Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-298-HySpca/output.log`.
+
+capture=CAP-298-HySpca command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=f3fb7114ca5222ecd984af53b2c6f1e91576973505c2112e12455304993b539b input=340518360ced516cd6201716bc8805c982956e80a11a8da497f1028164d8a14c log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-298-HySpca/output.log [complete metadata: capture directory]
+
+## CAP-299-tmRNWx — 2026-09-16T12:50:57Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-299-tmRNWx/output.log`.
+
+capture=CAP-299-tmRNWx command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=0674f61c5163d250133fb5d838ec0ee3730d3d6e40f72f723f5f49416449d191 input=340518360ced516cd6201716bc8805c982956e80a11a8da497f1028164d8a14c log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-299-tmRNWx/output.log [complete metadata: capture directory]
+
+## CAP-300-2A60ra — 2026-09-16T12:58:21Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-300-2A60ra/output.log`.
+
+capture=CAP-300-2A60ra command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=1e7cb98767b063c47d9b91e7f2304ba6ecc36bbdc8319e4e7ae51594753470ce input=340518360ced516cd6201716bc8805c982956e80a11a8da497f1028164d8a14c log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-300-2A60ra/output.log [complete metadata: capture directory]
+
+## CAP-301-Igkmx7 — 2026-09-16T13:05:16Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-301-Igkmx7/output.log`.
+
+capture=CAP-301-Igkmx7 command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=0c5db03a7dd3fdf020bd0228826045f5a8f1e5b4e433b9079de6b54021fa94a7 input=340518360ced516cd6201716bc8805c982956e80a11a8da497f1028164d8a14c log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-301-Igkmx7/output.log [complete metadata: capture directory]
+
+## CAP-302-tVe11C — 2026-09-16T13:22:33Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-302-tVe11C/output.log`.
+
+capture=CAP-302-tVe11C command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-verification.sh && bash tests/test-sdd-analyze.sh  key=  -- 18/18 passed exit=0 output=81deb99d485304d7d6379a019518cbca98c3683336fa465a858a8a452daa5fd6 input=340518360ced516cd6201716bc8805c982956e80a11a8da497f1028164d8a14c log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-302-tVe11C/output.log [complete metadata: capture directory]
+
+## CAP-303-oPl4JM — 2026-09-16T13:36:17Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-303-oPl4JM/output.log`.
+
+capture=CAP-303-oPl4JM command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=cea534ae1dd3df8a53663a770a07528dbfc05ec6aae2fd7bf04d3296c5a3acf0 input=340518360ced516cd6201716bc8805c982956e80a11a8da497f1028164d8a14c log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-303-oPl4JM/output.log [complete metadata: capture directory]
+
+## CAP-304-nauJn2 — 2026-09-16T13:49:25Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-304-nauJn2/output.log`.
+
+capture=CAP-304-nauJn2 command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-sdd-analyze.sh  key=  -- 18/18 passed exit=0 output=5fedbf813386f524798ceae747c083ee0920238cd7e8072e49582cc6e799828f input=340518360ced516cd6201716bc8805c982956e80a11a8da497f1028164d8a14c log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-304-nauJn2/output.log [complete metadata: capture directory]
+
+## CAP-305-1L4wtt — 2026-09-16T14:02:33Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-305-1L4wtt/output.log`.
+
+capture=CAP-305-1L4wtt command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=c692c9eb1e2a3b754318d1692b19a2995671005c35348d35aaf8b7dd8165a9dd input=340518360ced516cd6201716bc8805c982956e80a11a8da497f1028164d8a14c log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-305-1L4wtt/output.log [complete metadata: capture directory]
+
+## CAP-306-ECjwwN — 2026-09-16T14:17:37Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-306-ECjwwN/output.log`.
+
+capture=CAP-306-ECjwwN command=/bin/bash -o pipefail -c bash tests/run.sh && shellcheck -S warning -x scripts/*.sh tests/*.sh  key=  -- 3/3 passed exit=0 output=23bc386b960148ddb0cdc2b30e01e4ef4f998bb43992204343ccc2f7b7d35c4d input=340518360ced516cd6201716bc8805c982956e80a11a8da497f1028164d8a14c log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-306-ECjwwN/output.log [complete metadata: capture directory]
+
+## CAP-307-HY9Fkg — 2026-09-16T14:28:43Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-307-HY9Fkg/output.log`.
+
+capture=CAP-307-HY9Fkg command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=fe6ca922241392cf3402a6829cfff98a4d41661da79c2d7041650952bde69e72 input=340518360ced516cd6201716bc8805c982956e80a11a8da497f1028164d8a14c log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-307-HY9Fkg/output.log [complete metadata: capture directory]
+
+## CAP-308-ompxlK — 2026-09-16T14:29:29Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-308-ompxlK/output.log`.
+
+capture=CAP-308-ompxlK command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline  key=1 warning(s), 0 errors exit=0 output=6745e1447ea1435636eadb054016aba8b3300f1993c4d99df70aa7d66bc54de6 input=340518360ced516cd6201716bc8805c982956e80a11a8da497f1028164d8a14c log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-308-ompxlK/output.log [complete metadata: capture directory]
+
+## CAP-309-gA5XvD — 2026-09-16T14:29:54Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-309-gA5XvD/output.log`.
+
+capture=CAP-309-gA5XvD command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-ac-coverage.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline --root /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline  key=bound — every AC is named by at least one test file exit=0 output=5c841ad952893a091551df1f3b0b6b0156b039dbc4ee61ee3a9c902ec9ccc343 input=340518360ced516cd6201716bc8805c982956e80a11a8da497f1028164d8a14c log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-309-gA5XvD/output.log [complete metadata: capture directory]
+
+## CAP-310-RVM1Hh — 2026-09-16T14:57:53Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-310-RVM1Hh/output.log`.
+
+capture=CAP-310-RVM1Hh command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-evidence.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline  key=current evidence: all completed task checks have valid current captures exit=0 output=5f819322c6f23052264f6480656990a194a3b678af6a172ff8438065f58cb977 input=340518360ced516cd6201716bc8805c982956e80a11a8da497f1028164d8a14c log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-310-RVM1Hh/output.log [complete metadata: capture directory]
+
+## CAP-311-fmjdmh — 2026-09-16T15:10:34Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-311-fmjdmh/output.log`.
+
+capture=CAP-311-fmjdmh command=/bin/bash -o pipefail -c bash tests/run.sh  key=  -- 3/3 passed exit=0 output=23bc386b960148ddb0cdc2b30e01e4ef4f998bb43992204343ccc2f7b7d35c4d input=340518360ced516cd6201716bc8805c982956e80a11a8da497f1028164d8a14c log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-311-fmjdmh/output.log [complete metadata: capture directory]
+
+## CAP-312-766mK0 — 2026-09-16T15:11:25Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-312-766mK0/output.log`.
+
+capture=CAP-312-766mK0 command=/bin/bash -o pipefail -c shellcheck -S warning -x scripts/*.sh tests/*.sh  key=(no output) exit=0 output=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 input=340518360ced516cd6201716bc8805c982956e80a11a8da497f1028164d8a14c log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-312-766mK0/output.log [complete metadata: capture directory]
+
+## GATE-FLOOR
+
+Result: FLOOR-qstcrp; source: 340518360ced516cd6201716bc8805c982956e80a11a8da497f1028164d8a14c; exit: 0; command records: `notes/verification/floors/FLOOR-qstcrp/commands.nul`.
+
+## CAP-313-P3hRbH — 2026-09-17T07:04:24Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-313-P3hRbH/output.log`.
+
+capture=CAP-313-P3hRbH command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=cea534ae1dd3df8a53663a770a07528dbfc05ec6aae2fd7bf04d3296c5a3acf0 input=01df30478bd110441361f4ec5f6071067da6033e38d2ca5b3531ef29ed36b5de log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-313-P3hRbH/output.log [complete metadata: capture directory]
+
+## CAP-314-0FfJM3 — 2026-09-17T07:10:57Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-314-0FfJM3/output.log`.
+
+capture=CAP-314-0FfJM3 command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=c89f7d9e3ceea159e64bb75defc10d0c11ca84dee772071cbdfc2c36232f3fdb input=01df30478bd110441361f4ec5f6071067da6033e38d2ca5b3531ef29ed36b5de log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-314-0FfJM3/output.log [complete metadata: capture directory]
+
+## CAP-315-zAjbad — 2026-09-17T07:24:05Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-315-zAjbad/output.log`.
+
+capture=CAP-315-zAjbad command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=fe6ca922241392cf3402a6829cfff98a4d41661da79c2d7041650952bde69e72 input=01df30478bd110441361f4ec5f6071067da6033e38d2ca5b3531ef29ed36b5de log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-315-zAjbad/output.log [complete metadata: capture directory]
+
+## CAP-316-I1tieA — 2026-09-17T07:30:29Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-316-I1tieA/output.log`.
+
+capture=CAP-316-I1tieA command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=c89f7d9e3ceea159e64bb75defc10d0c11ca84dee772071cbdfc2c36232f3fdb input=01df30478bd110441361f4ec5f6071067da6033e38d2ca5b3531ef29ed36b5de log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-316-I1tieA/output.log [complete metadata: capture directory]
+
+## CAP-317-W18rLr — 2026-09-17T15:55:05Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-317-W18rLr/output.log`.
+
+capture=CAP-317-W18rLr command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=c89f7d9e3ceea159e64bb75defc10d0c11ca84dee772071cbdfc2c36232f3fdb input=02bb8fa796e9c75a94f6c929ed8b609fb2c8dc880011f604eb008563a18a552d log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-317-W18rLr/output.log [complete metadata: capture directory]
+
+## CAP-318-PSqGIF — 2026-09-17T15:55:44Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-318-PSqGIF/output.log`.
+
+capture=CAP-318-PSqGIF command=/bin/bash -o pipefail -c bash tests/test-sdd-analyze.sh  key=  -- 18/18 passed exit=0 output=20ac89cdff35a7ebcd8d19d2c3a2ddc42f015dc3cb116147d9f5c5c5b4b62344 input=02bb8fa796e9c75a94f6c929ed8b609fb2c8dc880011f604eb008563a18a552d log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-318-PSqGIF/output.log [complete metadata: capture directory]
+
+## CAP-319-p08f2L — 2026-09-17T15:56:48Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-319-p08f2L/output.log`.
+
+capture=CAP-319-p08f2L command=/bin/bash -o pipefail -c bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=b0307d5f3643923c85b2aa7d758ae3f0bf12a603f48312482e8cbeddb222d636 input=02bb8fa796e9c75a94f6c929ed8b609fb2c8dc880011f604eb008563a18a552d log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-319-p08f2L/output.log [complete metadata: capture directory]
+
+## CAP-320-tOPDZw — 2026-09-17T15:57:33Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-320-tOPDZw/output.log`.
+
+capture=CAP-320-tOPDZw command=/bin/bash -o pipefail -c bash tests/test-golden-example.sh  key=  -- 3/3 passed exit=0 output=c5596e4df60ed53e31618150bc13f9487553233a0cbc59820063ae9aa2cc96ae input=02bb8fa796e9c75a94f6c929ed8b609fb2c8dc880011f604eb008563a18a552d log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-320-tOPDZw/output.log [complete metadata: capture directory]
+
+## CAP-321-ffIvKq — 2026-09-17T16:04:12Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-321-ffIvKq/output.log`.
+
+capture=CAP-321-ffIvKq command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-build-adapters.sh  key=  -- 8/8 passed exit=0 output=07e727dc8f9709670ecccccc71bb8a688e4b406e14206de1a60860b72586b1e0 input=02bb8fa796e9c75a94f6c929ed8b609fb2c8dc880011f604eb008563a18a552d log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-321-ffIvKq/output.log [complete metadata: capture directory]
+
+## CAP-322-MZdeKX — 2026-09-17T16:05:52Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-322-MZdeKX/output.log`.
+
+capture=CAP-322-MZdeKX command=/bin/bash -o pipefail -c bash tests/test-spec-run.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=6afa5129adcacc389d7dd247ba059bc93f6abec84371466d3b7f5f19daa2bbd2 input=02bb8fa796e9c75a94f6c929ed8b609fb2c8dc880011f604eb008563a18a552d log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-322-MZdeKX/output.log [complete metadata: capture directory]
+
+## CAP-323-VD3rnw — 2026-09-17T16:13:15Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-323-VD3rnw/output.log`.
+
+capture=CAP-323-VD3rnw command=/bin/bash -o pipefail -c bash tests/test-spec-task.sh && bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=3334b455c3ba2b83d00ab61c13747adf07fa5cb70298720a949d5e873eecd3f0 input=02bb8fa796e9c75a94f6c929ed8b609fb2c8dc880011f604eb008563a18a552d log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-323-VD3rnw/output.log [complete metadata: capture directory]
+
+## CAP-324-58kxF2 — 2026-09-17T16:19:50Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-324-58kxF2/output.log`.
+
+capture=CAP-324-58kxF2 command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=f3fb7114ca5222ecd984af53b2c6f1e91576973505c2112e12455304993b539b input=02bb8fa796e9c75a94f6c929ed8b609fb2c8dc880011f604eb008563a18a552d log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-324-58kxF2/output.log [complete metadata: capture directory]
+
+## CAP-325-v5uEan — 2026-09-17T16:27:13Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-325-v5uEan/output.log`.
+
+capture=CAP-325-v5uEan command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=0674f61c5163d250133fb5d838ec0ee3730d3d6e40f72f723f5f49416449d191 input=02bb8fa796e9c75a94f6c929ed8b609fb2c8dc880011f604eb008563a18a552d log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-325-v5uEan/output.log [complete metadata: capture directory]
+
+## CAP-326-ysRunH — 2026-09-17T16:34:25Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-326-ysRunH/output.log`.
+
+capture=CAP-326-ysRunH command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=1e7cb98767b063c47d9b91e7f2304ba6ecc36bbdc8319e4e7ae51594753470ce input=02bb8fa796e9c75a94f6c929ed8b609fb2c8dc880011f604eb008563a18a552d log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-326-ysRunH/output.log [complete metadata: capture directory]
+
+## CAP-327-HT8gDZ — 2026-09-17T16:40:24Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-327-HT8gDZ/output.log`.
+
+capture=CAP-327-HT8gDZ command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=0c5db03a7dd3fdf020bd0228826045f5a8f1e5b4e433b9079de6b54021fa94a7 input=02bb8fa796e9c75a94f6c929ed8b609fb2c8dc880011f604eb008563a18a552d log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-327-HT8gDZ/output.log [complete metadata: capture directory]
+
+## CAP-328-gmDaS6 — 2026-09-17T16:54:02Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-328-gmDaS6/output.log`.
+
+capture=CAP-328-gmDaS6 command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-verification.sh && bash tests/test-sdd-analyze.sh  key=  -- 18/18 passed exit=0 output=81deb99d485304d7d6379a019518cbca98c3683336fa465a858a8a452daa5fd6 input=02bb8fa796e9c75a94f6c929ed8b609fb2c8dc880011f604eb008563a18a552d log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-328-gmDaS6/output.log [complete metadata: capture directory]
+
+## CAP-329-bPVa4Q — 2026-09-17T17:06:24Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-329-bPVa4Q/output.log`.
+
+capture=CAP-329-bPVa4Q command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=cea534ae1dd3df8a53663a770a07528dbfc05ec6aae2fd7bf04d3296c5a3acf0 input=02bb8fa796e9c75a94f6c929ed8b609fb2c8dc880011f604eb008563a18a552d log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-329-bPVa4Q/output.log [complete metadata: capture directory]
+
+## CAP-330-u3n6OP — 2026-09-17T17:18:11Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-330-u3n6OP/output.log`.
+
+capture=CAP-330-u3n6OP command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-sdd-analyze.sh  key=  -- 18/18 passed exit=0 output=5fedbf813386f524798ceae747c083ee0920238cd7e8072e49582cc6e799828f input=02bb8fa796e9c75a94f6c929ed8b609fb2c8dc880011f604eb008563a18a552d log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-330-u3n6OP/output.log [complete metadata: capture directory]
+
+## CAP-331-Hzsumo — 2026-09-17T17:30:31Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-331-Hzsumo/output.log`.
+
+capture=CAP-331-Hzsumo command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=c692c9eb1e2a3b754318d1692b19a2995671005c35348d35aaf8b7dd8165a9dd input=02bb8fa796e9c75a94f6c929ed8b609fb2c8dc880011f604eb008563a18a552d log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-331-Hzsumo/output.log [complete metadata: capture directory]
+
+## CAP-332-kIlkqv — 2026-09-17T17:44:24Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-332-kIlkqv/output.log`.
+
+capture=CAP-332-kIlkqv command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=fe6ca922241392cf3402a6829cfff98a4d41661da79c2d7041650952bde69e72 input=02bb8fa796e9c75a94f6c929ed8b609fb2c8dc880011f604eb008563a18a552d log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-332-kIlkqv/output.log [complete metadata: capture directory]
+
+## CAP-333-a0Wg9N — 2026-09-17T18:01:22Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-333-a0Wg9N/output.log`.
+
+capture=CAP-333-a0Wg9N command=/bin/bash -o pipefail -c bash tests/run.sh && shellcheck -S warning -x scripts/*.sh tests/*.sh  key=  -- 3/3 passed exit=0 output=23bc386b960148ddb0cdc2b30e01e4ef4f998bb43992204343ccc2f7b7d35c4d input=02bb8fa796e9c75a94f6c929ed8b609fb2c8dc880011f604eb008563a18a552d log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-333-a0Wg9N/output.log [complete metadata: capture directory]
+
+## CAP-334-J9Ayji — 2026-09-17T18:03:25Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-334-J9Ayji/output.log`.
+
+capture=CAP-334-J9Ayji command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline  key=1 warning(s), 0 errors exit=0 output=cde3bb770bd331247e6f18117179bf2919cb297450199d5160c54138b85f6a40 input=02bb8fa796e9c75a94f6c929ed8b609fb2c8dc880011f604eb008563a18a552d log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-334-J9Ayji/output.log [complete metadata: capture directory]
+
+## CAP-335-LPBuIW — 2026-09-17T18:03:53Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-335-LPBuIW/output.log`.
+
+capture=CAP-335-LPBuIW command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-ac-coverage.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline --root /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline  key=bound — every AC is named by at least one test file exit=0 output=fb6ad656c1d58951a80622d08a0515b9373426cbf8c76475eec7597b4f273aff input=02bb8fa796e9c75a94f6c929ed8b609fb2c8dc880011f604eb008563a18a552d log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-335-LPBuIW/output.log [complete metadata: capture directory]
+
+## CAP-337-CeHOpG — 2026-09-17T18:56:56Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-337-CeHOpG/output.log`.
+
+capture=CAP-337-CeHOpG command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline  key=1 warning(s), 0 errors exit=0 output=cde3bb770bd331247e6f18117179bf2919cb297450199d5160c54138b85f6a40 input=02bb8fa796e9c75a94f6c929ed8b609fb2c8dc880011f604eb008563a18a552d log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-337-CeHOpG/output.log [complete metadata: capture directory]
+
+## CAP-338-QxSVUD — 2026-09-17T18:57:23Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-338-QxSVUD/output.log`.
+
+capture=CAP-338-QxSVUD command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-ac-coverage.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline --root /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline  key=bound — every AC is named by at least one test file exit=0 output=fb6ad656c1d58951a80622d08a0515b9373426cbf8c76475eec7597b4f273aff input=02bb8fa796e9c75a94f6c929ed8b609fb2c8dc880011f604eb008563a18a552d log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-338-QxSVUD/output.log [complete metadata: capture directory]
+
+## CAP-340-Hk1dzh — 2026-09-18T09:55:28Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-340-Hk1dzh/output.log`.
+
+capture=CAP-340-Hk1dzh command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=c89f7d9e3ceea159e64bb75defc10d0c11ca84dee772071cbdfc2c36232f3fdb input=f6df3f6c71f5f6da43428771bc9ddba03342dc5ce525f62d1d164806fb85d1d2 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-340-Hk1dzh/output.log [complete metadata: capture directory]
+
+## CAP-341-nCF8hG — 2026-09-18T09:56:08Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-341-nCF8hG/output.log`.
+
+capture=CAP-341-nCF8hG command=/bin/bash -o pipefail -c bash tests/test-sdd-analyze.sh  key=  -- 18/18 passed exit=0 output=20ac89cdff35a7ebcd8d19d2c3a2ddc42f015dc3cb116147d9f5c5c5b4b62344 input=f6df3f6c71f5f6da43428771bc9ddba03342dc5ce525f62d1d164806fb85d1d2 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-341-nCF8hG/output.log [complete metadata: capture directory]
+
+## CAP-342-Xu284W — 2026-09-18T09:57:14Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-342-Xu284W/output.log`.
+
+capture=CAP-342-Xu284W command=/bin/bash -o pipefail -c bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=b0307d5f3643923c85b2aa7d758ae3f0bf12a603f48312482e8cbeddb222d636 input=f6df3f6c71f5f6da43428771bc9ddba03342dc5ce525f62d1d164806fb85d1d2 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-342-Xu284W/output.log [complete metadata: capture directory]
+
+## CAP-343-QkCXr1 — 2026-09-18T09:58:02Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-343-QkCXr1/output.log`.
+
+capture=CAP-343-QkCXr1 command=/bin/bash -o pipefail -c bash tests/test-golden-example.sh  key=  -- 3/3 passed exit=0 output=c5596e4df60ed53e31618150bc13f9487553233a0cbc59820063ae9aa2cc96ae input=f6df3f6c71f5f6da43428771bc9ddba03342dc5ce525f62d1d164806fb85d1d2 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-343-QkCXr1/output.log [complete metadata: capture directory]
+
+## CAP-344-jUCVYi — 2026-09-18T10:05:03Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-344-jUCVYi/output.log`.
+
+capture=CAP-344-jUCVYi command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-build-adapters.sh  key=  -- 8/8 passed exit=0 output=07e727dc8f9709670ecccccc71bb8a688e4b406e14206de1a60860b72586b1e0 input=f6df3f6c71f5f6da43428771bc9ddba03342dc5ce525f62d1d164806fb85d1d2 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-344-jUCVYi/output.log [complete metadata: capture directory]
+
+## CAP-345-F7b3nE — 2026-09-18T10:06:51Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-345-F7b3nE/output.log`.
+
+capture=CAP-345-F7b3nE command=/bin/bash -o pipefail -c bash tests/test-spec-run.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=6afa5129adcacc389d7dd247ba059bc93f6abec84371466d3b7f5f19daa2bbd2 input=f6df3f6c71f5f6da43428771bc9ddba03342dc5ce525f62d1d164806fb85d1d2 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-345-F7b3nE/output.log [complete metadata: capture directory]
+
+## CAP-346-6AdeJc — 2026-09-18T10:14:53Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-346-6AdeJc/output.log`.
+
+capture=CAP-346-6AdeJc command=/bin/bash -o pipefail -c bash tests/test-spec-task.sh && bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=3334b455c3ba2b83d00ab61c13747adf07fa5cb70298720a949d5e873eecd3f0 input=f6df3f6c71f5f6da43428771bc9ddba03342dc5ce525f62d1d164806fb85d1d2 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-346-6AdeJc/output.log [complete metadata: capture directory]
+
+## CAP-347-FCb8aH — 2026-09-18T10:22:05Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-347-FCb8aH/output.log`.
+
+capture=CAP-347-FCb8aH command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=f3fb7114ca5222ecd984af53b2c6f1e91576973505c2112e12455304993b539b input=f6df3f6c71f5f6da43428771bc9ddba03342dc5ce525f62d1d164806fb85d1d2 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-347-FCb8aH/output.log [complete metadata: capture directory]
+
+## CAP-348-XNQKyH — 2026-09-18T10:30:04Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-348-XNQKyH/output.log`.
+
+capture=CAP-348-XNQKyH command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=0674f61c5163d250133fb5d838ec0ee3730d3d6e40f72f723f5f49416449d191 input=f6df3f6c71f5f6da43428771bc9ddba03342dc5ce525f62d1d164806fb85d1d2 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-348-XNQKyH/output.log [complete metadata: capture directory]
+
+## CAP-349-BKzDEr — 2026-09-18T10:37:52Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-349-BKzDEr/output.log`.
+
+capture=CAP-349-BKzDEr command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=1e7cb98767b063c47d9b91e7f2304ba6ecc36bbdc8319e4e7ae51594753470ce input=f6df3f6c71f5f6da43428771bc9ddba03342dc5ce525f62d1d164806fb85d1d2 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-349-BKzDEr/output.log [complete metadata: capture directory]
+
+## CAP-350-u3aOba — 2026-09-18T10:45:19Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-350-u3aOba/output.log`.
+
+capture=CAP-350-u3aOba command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=0c5db03a7dd3fdf020bd0228826045f5a8f1e5b4e433b9079de6b54021fa94a7 input=f6df3f6c71f5f6da43428771bc9ddba03342dc5ce525f62d1d164806fb85d1d2 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-350-u3aOba/output.log [complete metadata: capture directory]
+
+## CAP-351-so6pqd — 2026-09-18T11:01:35Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-351-so6pqd/output.log`.
+
+capture=CAP-351-so6pqd command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-verification.sh && bash tests/test-sdd-analyze.sh  key=  -- 18/18 passed exit=0 output=81deb99d485304d7d6379a019518cbca98c3683336fa465a858a8a452daa5fd6 input=f6df3f6c71f5f6da43428771bc9ddba03342dc5ce525f62d1d164806fb85d1d2 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-351-so6pqd/output.log [complete metadata: capture directory]
+
+## CAP-352-myHR3F — 2026-09-18T11:15:09Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-352-myHR3F/output.log`.
+
+capture=CAP-352-myHR3F command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=cea534ae1dd3df8a53663a770a07528dbfc05ec6aae2fd7bf04d3296c5a3acf0 input=f6df3f6c71f5f6da43428771bc9ddba03342dc5ce525f62d1d164806fb85d1d2 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-352-myHR3F/output.log [complete metadata: capture directory]
+
+## CAP-353-4ZasCY — 2026-09-18T11:27:30Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-353-4ZasCY/output.log`.
+
+capture=CAP-353-4ZasCY command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-sdd-analyze.sh  key=  -- 18/18 passed exit=0 output=5fedbf813386f524798ceae747c083ee0920238cd7e8072e49582cc6e799828f input=f6df3f6c71f5f6da43428771bc9ddba03342dc5ce525f62d1d164806fb85d1d2 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-353-4ZasCY/output.log [complete metadata: capture directory]
+
+## CAP-354-j6OA4h — 2026-09-18T11:40:26Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-354-j6OA4h/output.log`.
+
+capture=CAP-354-j6OA4h command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=c692c9eb1e2a3b754318d1692b19a2995671005c35348d35aaf8b7dd8165a9dd input=f6df3f6c71f5f6da43428771bc9ddba03342dc5ce525f62d1d164806fb85d1d2 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-354-j6OA4h/output.log [complete metadata: capture directory]
+
+## CAP-355-knfpHD — 2026-09-18T11:54:23Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-355-knfpHD/output.log`.
+
+capture=CAP-355-knfpHD command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=fe6ca922241392cf3402a6829cfff98a4d41661da79c2d7041650952bde69e72 input=f6df3f6c71f5f6da43428771bc9ddba03342dc5ce525f62d1d164806fb85d1d2 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-355-knfpHD/output.log [complete metadata: capture directory]
+
+## CAP-356-1uxkEi — 2026-09-18T12:11:02Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-356-1uxkEi/output.log`.
+
+capture=CAP-356-1uxkEi command=/bin/bash -o pipefail -c bash tests/run.sh && shellcheck -S warning -x scripts/*.sh tests/*.sh  key=  -- 3/3 passed exit=0 output=23bc386b960148ddb0cdc2b30e01e4ef4f998bb43992204343ccc2f7b7d35c4d input=f6df3f6c71f5f6da43428771bc9ddba03342dc5ce525f62d1d164806fb85d1d2 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-356-1uxkEi/output.log [complete metadata: capture directory]
+
+## CAP-357-2LVWE6 — 2026-09-18T12:12:14Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-357-2LVWE6/output.log`.
+
+capture=CAP-357-2LVWE6 command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline  key=1 warning(s), 0 errors exit=0 output=cde3bb770bd331247e6f18117179bf2919cb297450199d5160c54138b85f6a40 input=f6df3f6c71f5f6da43428771bc9ddba03342dc5ce525f62d1d164806fb85d1d2 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-357-2LVWE6/output.log [complete metadata: capture directory]
+
+## CAP-358-RlNqc8 — 2026-09-18T12:12:41Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-358-RlNqc8/output.log`.
+
+capture=CAP-358-RlNqc8 command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-ac-coverage.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline --root /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline  key=bound — every AC is named by at least one test file exit=0 output=fb6ad656c1d58951a80622d08a0515b9373426cbf8c76475eec7597b4f273aff input=f6df3f6c71f5f6da43428771bc9ddba03342dc5ce525f62d1d164806fb85d1d2 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-358-RlNqc8/output.log [complete metadata: capture directory]
+
+## CAP-360-7Rc4qZ — 2026-09-18T12:52:48Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-360-7Rc4qZ/output.log`.
+
+capture=CAP-360-7Rc4qZ command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline  key=1 warning(s), 0 errors exit=0 output=cde3bb770bd331247e6f18117179bf2919cb297450199d5160c54138b85f6a40 input=f6df3f6c71f5f6da43428771bc9ddba03342dc5ce525f62d1d164806fb85d1d2 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-360-7Rc4qZ/output.log [complete metadata: capture directory]
+
+## CAP-361-nSHQ1c — 2026-09-18T12:53:13Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-361-nSHQ1c/output.log`.
+
+capture=CAP-361-nSHQ1c command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-ac-coverage.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline --root /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline  key=bound — every AC is named by at least one test file exit=0 output=fb6ad656c1d58951a80622d08a0515b9373426cbf8c76475eec7597b4f273aff input=f6df3f6c71f5f6da43428771bc9ddba03342dc5ce525f62d1d164806fb85d1d2 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-361-nSHQ1c/output.log [complete metadata: capture directory]
+
+## CAP-362-rke2gS — 2026-09-18T13:31:48Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-362-rke2gS/output.log`.
+
+capture=CAP-362-rke2gS command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-evidence.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline  key=current evidence: all completed task checks have valid current captures exit=0 output=b1a8fc8c74c75d04452369a3c9d1b068966b32302d1edb8b3641c62d65cf6c02 input=f6df3f6c71f5f6da43428771bc9ddba03342dc5ce525f62d1d164806fb85d1d2 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-362-rke2gS/output.log [complete metadata: capture directory]
+
+## CAP-363-OMs2oc — 2026-09-18T13:45:25Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-363-OMs2oc/output.log`.
+
+capture=CAP-363-OMs2oc command=/bin/bash -o pipefail -c bash tests/run.sh  key=  -- 3/3 passed exit=0 output=23bc386b960148ddb0cdc2b30e01e4ef4f998bb43992204343ccc2f7b7d35c4d input=f6df3f6c71f5f6da43428771bc9ddba03342dc5ce525f62d1d164806fb85d1d2 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-363-OMs2oc/output.log [complete metadata: capture directory]
+
+## CAP-364-fXyoap — 2026-09-18T13:46:13Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-364-fXyoap/output.log`.
+
+capture=CAP-364-fXyoap command=/bin/bash -o pipefail -c shellcheck -S warning -x scripts/*.sh tests/*.sh  key=(no output) exit=0 output=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 input=f6df3f6c71f5f6da43428771bc9ddba03342dc5ce525f62d1d164806fb85d1d2 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-364-fXyoap/output.log [complete metadata: capture directory]
+
+## GATE-FLOOR
+
+Result: FLOOR-bvsiKa; source: f6df3f6c71f5f6da43428771bc9ddba03342dc5ce525f62d1d164806fb85d1d2; exit: 0; command records: `notes/verification/floors/FLOOR-bvsiKa/commands.nul`.
+
+## CAP-365-yoGgI4 — 2026-09-20T09:54:31Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-365-yoGgI4/output.log`.
+
+capture=CAP-365-yoGgI4 command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=c89f7d9e3ceea159e64bb75defc10d0c11ca84dee772071cbdfc2c36232f3fdb input=340259d92683a3b0e514f6c8b399dfc7d09e4f2911998a4d676d952648b10e7e log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-365-yoGgI4/output.log [complete metadata: capture directory]
+
+## CAP-366-H7QjI6 — 2026-09-20T10:01:22Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-366-H7QjI6/output.log`.
+
+capture=CAP-366-H7QjI6 command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=c89f7d9e3ceea159e64bb75defc10d0c11ca84dee772071cbdfc2c36232f3fdb input=d53d1f5225ad510430fea8ce70ad90a6cf94dd70564b412b1fb9a5a17b6e5333 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-366-H7QjI6/output.log [complete metadata: capture directory]
+
+## CAP-367-g14RVk — 2026-09-20T17:54:23Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-367-g14RVk/output.log`.
+
+capture=CAP-367-g14RVk command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=c89f7d9e3ceea159e64bb75defc10d0c11ca84dee772071cbdfc2c36232f3fdb input=09a0a919de9c51fa8843e086936d1c4d1810bc0d623b0a5d2968264d2e699c6f log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-367-g14RVk/output.log [complete metadata: capture directory]
+
+## CAP-368-T4Z59y — 2026-09-20T17:55:06Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-368-T4Z59y/output.log`.
+
+capture=CAP-368-T4Z59y command=/bin/bash -o pipefail -c bash tests/test-sdd-analyze.sh  key=  -- 18/18 passed exit=0 output=20ac89cdff35a7ebcd8d19d2c3a2ddc42f015dc3cb116147d9f5c5c5b4b62344 input=09a0a919de9c51fa8843e086936d1c4d1810bc0d623b0a5d2968264d2e699c6f log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-368-T4Z59y/output.log [complete metadata: capture directory]
+
+## CAP-369-Vgl2jU — 2026-09-20T17:56:17Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-369-Vgl2jU/output.log`.
+
+capture=CAP-369-Vgl2jU command=/bin/bash -o pipefail -c bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=b0307d5f3643923c85b2aa7d758ae3f0bf12a603f48312482e8cbeddb222d636 input=09a0a919de9c51fa8843e086936d1c4d1810bc0d623b0a5d2968264d2e699c6f log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-369-Vgl2jU/output.log [complete metadata: capture directory]
+
+## CAP-370-lnbUfM — 2026-09-20T17:57:05Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-370-lnbUfM/output.log`.
+
+capture=CAP-370-lnbUfM command=/bin/bash -o pipefail -c bash tests/test-golden-example.sh  key=  -- 3/3 passed exit=0 output=c5596e4df60ed53e31618150bc13f9487553233a0cbc59820063ae9aa2cc96ae input=09a0a919de9c51fa8843e086936d1c4d1810bc0d623b0a5d2968264d2e699c6f log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-370-lnbUfM/output.log [complete metadata: capture directory]
+
+## CAP-371-GTUtfi — 2026-09-20T18:04:13Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-371-GTUtfi/output.log`.
+
+capture=CAP-371-GTUtfi command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-build-adapters.sh  key=  -- 8/8 passed exit=0 output=07e727dc8f9709670ecccccc71bb8a688e4b406e14206de1a60860b72586b1e0 input=09a0a919de9c51fa8843e086936d1c4d1810bc0d623b0a5d2968264d2e699c6f log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-371-GTUtfi/output.log [complete metadata: capture directory]
+
+## CAP-372-xChyj2 — 2026-09-20T18:06:03Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-372-xChyj2/output.log`.
+
+capture=CAP-372-xChyj2 command=/bin/bash -o pipefail -c bash tests/test-spec-run.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=6afa5129adcacc389d7dd247ba059bc93f6abec84371466d3b7f5f19daa2bbd2 input=09a0a919de9c51fa8843e086936d1c4d1810bc0d623b0a5d2968264d2e699c6f log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-372-xChyj2/output.log [complete metadata: capture directory]
+
+## CAP-373-rNuTvO — 2026-09-20T18:13:56Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-373-rNuTvO/output.log`.
+
+capture=CAP-373-rNuTvO command=/bin/bash -o pipefail -c bash tests/test-spec-task.sh && bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=3334b455c3ba2b83d00ab61c13747adf07fa5cb70298720a949d5e873eecd3f0 input=09a0a919de9c51fa8843e086936d1c4d1810bc0d623b0a5d2968264d2e699c6f log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-373-rNuTvO/output.log [complete metadata: capture directory]
+
+## CAP-374-1ag2y2 — 2026-09-20T18:20:52Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-374-1ag2y2/output.log`.
+
+capture=CAP-374-1ag2y2 command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=f3fb7114ca5222ecd984af53b2c6f1e91576973505c2112e12455304993b539b input=09a0a919de9c51fa8843e086936d1c4d1810bc0d623b0a5d2968264d2e699c6f log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-374-1ag2y2/output.log [complete metadata: capture directory]
+
+## CAP-375-dBabEO — 2026-09-20T18:28:35Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-375-dBabEO/output.log`.
+
+capture=CAP-375-dBabEO command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=0674f61c5163d250133fb5d838ec0ee3730d3d6e40f72f723f5f49416449d191 input=09a0a919de9c51fa8843e086936d1c4d1810bc0d623b0a5d2968264d2e699c6f log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-375-dBabEO/output.log [complete metadata: capture directory]
+
+## CAP-376-CbJHsE — 2026-09-20T18:36:12Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-376-CbJHsE/output.log`.
+
+capture=CAP-376-CbJHsE command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=1e7cb98767b063c47d9b91e7f2304ba6ecc36bbdc8319e4e7ae51594753470ce input=09a0a919de9c51fa8843e086936d1c4d1810bc0d623b0a5d2968264d2e699c6f log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-376-CbJHsE/output.log [complete metadata: capture directory]
+
+## CAP-377-rqdg1e — 2026-09-20T18:42:25Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-377-rqdg1e/output.log`.
+
+capture=CAP-377-rqdg1e command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=0c5db03a7dd3fdf020bd0228826045f5a8f1e5b4e433b9079de6b54021fa94a7 input=09a0a919de9c51fa8843e086936d1c4d1810bc0d623b0a5d2968264d2e699c6f log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-377-rqdg1e/output.log [complete metadata: capture directory]
+
+## CAP-378-vPRkFM — 2026-09-20T18:56:44Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-378-vPRkFM/output.log`.
+
+capture=CAP-378-vPRkFM command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-verification.sh && bash tests/test-sdd-analyze.sh  key=  -- 18/18 passed exit=0 output=81deb99d485304d7d6379a019518cbca98c3683336fa465a858a8a452daa5fd6 input=09a0a919de9c51fa8843e086936d1c4d1810bc0d623b0a5d2968264d2e699c6f log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-378-vPRkFM/output.log [complete metadata: capture directory]
+
+## CAP-379-QRzVXE — 2026-09-20T19:10:15Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-379-QRzVXE/output.log`.
+
+capture=CAP-379-QRzVXE command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=cea534ae1dd3df8a53663a770a07528dbfc05ec6aae2fd7bf04d3296c5a3acf0 input=09a0a919de9c51fa8843e086936d1c4d1810bc0d623b0a5d2968264d2e699c6f log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-379-QRzVXE/output.log [complete metadata: capture directory]
+
+## CAP-380-8JzKpa — 2026-09-20T19:23:42Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-380-8JzKpa/output.log`.
+
+capture=CAP-380-8JzKpa command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-sdd-analyze.sh  key=  -- 18/18 passed exit=0 output=5fedbf813386f524798ceae747c083ee0920238cd7e8072e49582cc6e799828f input=09a0a919de9c51fa8843e086936d1c4d1810bc0d623b0a5d2968264d2e699c6f log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-380-8JzKpa/output.log [complete metadata: capture directory]
+
+## CAP-381-C8zwFr — 2026-09-20T19:37:41Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-381-C8zwFr/output.log`.
+
+capture=CAP-381-C8zwFr command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=c692c9eb1e2a3b754318d1692b19a2995671005c35348d35aaf8b7dd8165a9dd input=09a0a919de9c51fa8843e086936d1c4d1810bc0d623b0a5d2968264d2e699c6f log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-381-C8zwFr/output.log [complete metadata: capture directory]
+
+## CAP-382-ZLY9ei — 2026-09-20T19:57:35Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-382-ZLY9ei/output.log`.
+
+capture=CAP-382-ZLY9ei command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=fe6ca922241392cf3402a6829cfff98a4d41661da79c2d7041650952bde69e72 input=09a0a919de9c51fa8843e086936d1c4d1810bc0d623b0a5d2968264d2e699c6f log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-382-ZLY9ei/output.log [complete metadata: capture directory]
+
+## CAP-383-Fs5QnO — 2026-09-20T20:14:34Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-383-Fs5QnO/output.log`.
+
+capture=CAP-383-Fs5QnO command=/bin/bash -o pipefail -c bash tests/run.sh && shellcheck -S warning -x scripts/*.sh tests/*.sh  key=  -- 3/3 passed exit=0 output=23bc386b960148ddb0cdc2b30e01e4ef4f998bb43992204343ccc2f7b7d35c4d input=09a0a919de9c51fa8843e086936d1c4d1810bc0d623b0a5d2968264d2e699c6f log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-383-Fs5QnO/output.log [complete metadata: capture directory]
+
+## CAP-384-nH42Di — 2026-09-20T20:15:45Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-384-nH42Di/output.log`.
+
+capture=CAP-384-nH42Di command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline  key=1 warning(s), 0 errors exit=0 output=1b083c154fc3aac3d6cedf77f123b1dd70b2578ae06d8d02c2ead446ec93522b input=09a0a919de9c51fa8843e086936d1c4d1810bc0d623b0a5d2968264d2e699c6f log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-384-nH42Di/output.log [complete metadata: capture directory]
+
+## CAP-385-oU69jN — 2026-09-20T20:16:13Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-385-oU69jN/output.log`.
+
+capture=CAP-385-oU69jN command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-ac-coverage.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline --root /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline  key=bound — every AC is named by at least one test file exit=0 output=fb6ad656c1d58951a80622d08a0515b9373426cbf8c76475eec7597b4f273aff input=09a0a919de9c51fa8843e086936d1c4d1810bc0d623b0a5d2968264d2e699c6f log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-385-oU69jN/output.log [complete metadata: capture directory]
+
+## CAP-386-fmjMGY — 2026-09-20T20:55:53Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-386-fmjMGY/output.log`.
+
+capture=CAP-386-fmjMGY command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-evidence.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline  key=current evidence: all completed task checks have valid current captures exit=0 output=834a8853cce8418bc2ebdcaedf34c9f904317da49a7d8ec3a1568e3ec435ffd1 input=09a0a919de9c51fa8843e086936d1c4d1810bc0d623b0a5d2968264d2e699c6f log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-386-fmjMGY/output.log [complete metadata: capture directory]
+
+## CAP-387-kPL8E3 — 2026-09-20T21:11:26Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-387-kPL8E3/output.log`.
+
+capture=CAP-387-kPL8E3 command=/bin/bash -o pipefail -c bash tests/run.sh  key=  -- 3/3 passed exit=0 output=23bc386b960148ddb0cdc2b30e01e4ef4f998bb43992204343ccc2f7b7d35c4d input=09a0a919de9c51fa8843e086936d1c4d1810bc0d623b0a5d2968264d2e699c6f log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-387-kPL8E3/output.log [complete metadata: capture directory]
+
+## CAP-388-6uDX8d — 2026-09-20T21:12:33Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-388-6uDX8d/output.log`.
+
+capture=CAP-388-6uDX8d command=/bin/bash -o pipefail -c shellcheck -S warning -x scripts/*.sh tests/*.sh  key=(no output) exit=0 output=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 input=09a0a919de9c51fa8843e086936d1c4d1810bc0d623b0a5d2968264d2e699c6f log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-388-6uDX8d/output.log [complete metadata: capture directory]
+
+## GATE-FLOOR
+
+Result: FLOOR-NbXfe5; source: 09a0a919de9c51fa8843e086936d1c4d1810bc0d623b0a5d2968264d2e699c6f; exit: 0; command records: `notes/verification/floors/FLOOR-NbXfe5/commands.nul`.
+
+## CAP-389-mHlDcf — 2026-09-22T19:59:42Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-389-mHlDcf/output.log`.
+
+capture=CAP-389-mHlDcf command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=c89f7d9e3ceea159e64bb75defc10d0c11ca84dee772071cbdfc2c36232f3fdb input=aa18111b6dbe36a6d75e923129802ffa7c688dddedc9a7ec811c350dd7bc66c4 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-389-mHlDcf/output.log [complete metadata: capture directory]
+
+## CAP-390-Wo4lw2 — 2026-09-22T20:00:23Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-390-Wo4lw2/output.log`.
+
+capture=CAP-390-Wo4lw2 command=/bin/bash -o pipefail -c bash tests/test-sdd-analyze.sh  key=  -- 18/18 passed exit=0 output=20ac89cdff35a7ebcd8d19d2c3a2ddc42f015dc3cb116147d9f5c5c5b4b62344 input=aa18111b6dbe36a6d75e923129802ffa7c688dddedc9a7ec811c350dd7bc66c4 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-390-Wo4lw2/output.log [complete metadata: capture directory]
+
+## CAP-391-R2X1zY — 2026-09-22T20:01:30Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-391-R2X1zY/output.log`.
+
+capture=CAP-391-R2X1zY command=/bin/bash -o pipefail -c bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=b0307d5f3643923c85b2aa7d758ae3f0bf12a603f48312482e8cbeddb222d636 input=aa18111b6dbe36a6d75e923129802ffa7c688dddedc9a7ec811c350dd7bc66c4 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-391-R2X1zY/output.log [complete metadata: capture directory]
+
+## CAP-392-zXWugK — 2026-09-22T20:02:18Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-392-zXWugK/output.log`.
+
+capture=CAP-392-zXWugK command=/bin/bash -o pipefail -c bash tests/test-golden-example.sh  key=  -- 3/3 passed exit=0 output=c5596e4df60ed53e31618150bc13f9487553233a0cbc59820063ae9aa2cc96ae input=aa18111b6dbe36a6d75e923129802ffa7c688dddedc9a7ec811c350dd7bc66c4 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-392-zXWugK/output.log [complete metadata: capture directory]
+
+## CAP-393-H1jty6 — 2026-09-22T20:09:28Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-393-H1jty6/output.log`.
+
+capture=CAP-393-H1jty6 command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-build-adapters.sh  key=  -- 8/8 passed exit=0 output=07e727dc8f9709670ecccccc71bb8a688e4b406e14206de1a60860b72586b1e0 input=aa18111b6dbe36a6d75e923129802ffa7c688dddedc9a7ec811c350dd7bc66c4 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-393-H1jty6/output.log [complete metadata: capture directory]
+
+## CAP-394-BEAIh9 — 2026-09-22T20:11:15Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-394-BEAIh9/output.log`.
+
+capture=CAP-394-BEAIh9 command=/bin/bash -o pipefail -c bash tests/test-spec-run.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=6afa5129adcacc389d7dd247ba059bc93f6abec84371466d3b7f5f19daa2bbd2 input=aa18111b6dbe36a6d75e923129802ffa7c688dddedc9a7ec811c350dd7bc66c4 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-394-BEAIh9/output.log [complete metadata: capture directory]
+
+## CAP-395-L8Jurj — 2026-09-22T20:19:03Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-395-L8Jurj/output.log`.
+
+capture=CAP-395-L8Jurj command=/bin/bash -o pipefail -c bash tests/test-spec-task.sh && bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=3334b455c3ba2b83d00ab61c13747adf07fa5cb70298720a949d5e873eecd3f0 input=aa18111b6dbe36a6d75e923129802ffa7c688dddedc9a7ec811c350dd7bc66c4 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-395-L8Jurj/output.log [complete metadata: capture directory]
+
+## CAP-396-k0OUQf — 2026-09-22T20:26:02Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-396-k0OUQf/output.log`.
+
+capture=CAP-396-k0OUQf command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=f3fb7114ca5222ecd984af53b2c6f1e91576973505c2112e12455304993b539b input=aa18111b6dbe36a6d75e923129802ffa7c688dddedc9a7ec811c350dd7bc66c4 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-396-k0OUQf/output.log [complete metadata: capture directory]
+
+## CAP-397-0cWzPn — 2026-09-22T20:33:53Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-397-0cWzPn/output.log`.
+
+capture=CAP-397-0cWzPn command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=0674f61c5163d250133fb5d838ec0ee3730d3d6e40f72f723f5f49416449d191 input=aa18111b6dbe36a6d75e923129802ffa7c688dddedc9a7ec811c350dd7bc66c4 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-397-0cWzPn/output.log [complete metadata: capture directory]
+
+## CAP-398-xoYOO4 — 2026-09-22T20:41:43Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-398-xoYOO4/output.log`.
+
+capture=CAP-398-xoYOO4 command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=1e7cb98767b063c47d9b91e7f2304ba6ecc36bbdc8319e4e7ae51594753470ce input=aa18111b6dbe36a6d75e923129802ffa7c688dddedc9a7ec811c350dd7bc66c4 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-398-xoYOO4/output.log [complete metadata: capture directory]
+
+## CAP-399-HWBRh1 — 2026-09-22T20:49:10Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-399-HWBRh1/output.log`.
+
+capture=CAP-399-HWBRh1 command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=0c5db03a7dd3fdf020bd0228826045f5a8f1e5b4e433b9079de6b54021fa94a7 input=aa18111b6dbe36a6d75e923129802ffa7c688dddedc9a7ec811c350dd7bc66c4 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-399-HWBRh1/output.log [complete metadata: capture directory]
+
+## CAP-400-uVXUug — 2026-09-22T21:06:30Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-400-uVXUug/output.log`.
+
+capture=CAP-400-uVXUug command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-verification.sh && bash tests/test-sdd-analyze.sh  key=  -- 18/18 passed exit=0 output=81deb99d485304d7d6379a019518cbca98c3683336fa465a858a8a452daa5fd6 input=aa18111b6dbe36a6d75e923129802ffa7c688dddedc9a7ec811c350dd7bc66c4 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-400-uVXUug/output.log [complete metadata: capture directory]
+
+## CAP-401-Sukidz — 2026-09-22T21:19:51Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-401-Sukidz/output.log`.
+
+capture=CAP-401-Sukidz command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=cea534ae1dd3df8a53663a770a07528dbfc05ec6aae2fd7bf04d3296c5a3acf0 input=aa18111b6dbe36a6d75e923129802ffa7c688dddedc9a7ec811c350dd7bc66c4 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-401-Sukidz/output.log [complete metadata: capture directory]
+
+## CAP-402-lYRGJ1 — 2026-09-22T21:36:46Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-402-lYRGJ1/output.log`.
+
+capture=CAP-402-lYRGJ1 command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-sdd-analyze.sh  key=  -- 18/18 passed exit=0 output=5fedbf813386f524798ceae747c083ee0920238cd7e8072e49582cc6e799828f input=aa18111b6dbe36a6d75e923129802ffa7c688dddedc9a7ec811c350dd7bc66c4 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-402-lYRGJ1/output.log [complete metadata: capture directory]
+
+## CAP-403-6tqX6R — 2026-09-22T21:51:53Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-403-6tqX6R/output.log`.
+
+capture=CAP-403-6tqX6R command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=c692c9eb1e2a3b754318d1692b19a2995671005c35348d35aaf8b7dd8165a9dd input=aa18111b6dbe36a6d75e923129802ffa7c688dddedc9a7ec811c350dd7bc66c4 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-403-6tqX6R/output.log [complete metadata: capture directory]
+
+## CAP-404-PvK6Ug — 2026-09-22T22:06:09Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-404-PvK6Ug/output.log`.
+
+capture=CAP-404-PvK6Ug command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=fe6ca922241392cf3402a6829cfff98a4d41661da79c2d7041650952bde69e72 input=aa18111b6dbe36a6d75e923129802ffa7c688dddedc9a7ec811c350dd7bc66c4 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-404-PvK6Ug/output.log [complete metadata: capture directory]
+
+## CAP-405-rVxUNh — 2026-09-22T22:22:13Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-405-rVxUNh/output.log`.
+
+capture=CAP-405-rVxUNh command=/bin/bash -o pipefail -c bash tests/run.sh && shellcheck -S warning -x scripts/*.sh tests/*.sh  key=  -- 3/3 passed exit=0 output=23bc386b960148ddb0cdc2b30e01e4ef4f998bb43992204343ccc2f7b7d35c4d input=aa18111b6dbe36a6d75e923129802ffa7c688dddedc9a7ec811c350dd7bc66c4 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-405-rVxUNh/output.log [complete metadata: capture directory]
+
+## CAP-406-3qPALx — 2026-09-22T22:23:24Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-406-3qPALx/output.log`.
+
+capture=CAP-406-3qPALx command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline  key=1 warning(s), 0 errors exit=0 output=1b083c154fc3aac3d6cedf77f123b1dd70b2578ae06d8d02c2ead446ec93522b input=aa18111b6dbe36a6d75e923129802ffa7c688dddedc9a7ec811c350dd7bc66c4 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-406-3qPALx/output.log [complete metadata: capture directory]
+
+## CAP-407-qu0X3y — 2026-09-22T22:23:50Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-407-qu0X3y/output.log`.
+
+capture=CAP-407-qu0X3y command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-ac-coverage.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline --root /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline  key=bound — every AC is named by at least one test file exit=0 output=fb6ad656c1d58951a80622d08a0515b9373426cbf8c76475eec7597b4f273aff input=aa18111b6dbe36a6d75e923129802ffa7c688dddedc9a7ec811c350dd7bc66c4 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-407-qu0X3y/output.log [complete metadata: capture directory]
+
+## CAP-408-92Af8o — 2026-09-22T23:06:26Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-408-92Af8o/output.log`.
+
+capture=CAP-408-92Af8o command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-evidence.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline  key=current evidence: all completed task checks have valid current captures exit=0 output=41114dcb7105ce9068688cdad9d2db6ed37b12a3fb42822dd80484a8f03adb3a input=aa18111b6dbe36a6d75e923129802ffa7c688dddedc9a7ec811c350dd7bc66c4 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-408-92Af8o/output.log [complete metadata: capture directory]
+
+## CAP-409-Z8jCNl — 2026-09-22T23:23:29Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-409-Z8jCNl/output.log`.
+
+capture=CAP-409-Z8jCNl command=/bin/bash -o pipefail -c bash tests/run.sh  key=  -- 3/3 passed exit=0 output=23bc386b960148ddb0cdc2b30e01e4ef4f998bb43992204343ccc2f7b7d35c4d input=aa18111b6dbe36a6d75e923129802ffa7c688dddedc9a7ec811c350dd7bc66c4 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-409-Z8jCNl/output.log [complete metadata: capture directory]
+
+## CAP-410-M38Py8 — 2026-09-22T23:24:30Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-410-M38Py8/output.log`.
+
+capture=CAP-410-M38Py8 command=/bin/bash -o pipefail -c shellcheck -S warning -x scripts/*.sh tests/*.sh  key=(no output) exit=0 output=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 input=aa18111b6dbe36a6d75e923129802ffa7c688dddedc9a7ec811c350dd7bc66c4 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-410-M38Py8/output.log [complete metadata: capture directory]
+
+## GATE-FLOOR
+
+Result: FLOOR-k1reWt; source: aa18111b6dbe36a6d75e923129802ffa7c688dddedc9a7ec811c350dd7bc66c4; exit: 0; command records: `notes/verification/floors/FLOOR-k1reWt/commands.nul`.
+
+## CAP-411-B8GLAC — 2026-09-23T11:18:10Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-411-B8GLAC/output.log`.
+
+capture=CAP-411-B8GLAC command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=0c5db03a7dd3fdf020bd0228826045f5a8f1e5b4e433b9079de6b54021fa94a7 input=d27bab536454eead9135c5d502962488e653eef8277006b50eeb5d43b22b4466 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-411-B8GLAC/output.log [complete metadata: capture directory]
+
+## CAP-412-59sk66 — 2026-09-23T11:37:19Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-412-59sk66/output.log`.
+
+capture=CAP-412-59sk66 command=/bin/bash -o pipefail -c bash tests/run.sh && shellcheck -S warning -x scripts/*.sh tests/*.sh  key=  -- 3/3 passed exit=0 output=23bc386b960148ddb0cdc2b30e01e4ef4f998bb43992204343ccc2f7b7d35c4d input=d27bab536454eead9135c5d502962488e653eef8277006b50eeb5d43b22b4466 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-412-59sk66/output.log [complete metadata: capture directory]
+
+## CAP-413-efYkDY — 2026-09-23T13:28:28Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-413-efYkDY/output.log`.
+
+capture=CAP-413-efYkDY command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=c89f7d9e3ceea159e64bb75defc10d0c11ca84dee772071cbdfc2c36232f3fdb input=d27bab536454eead9135c5d502962488e653eef8277006b50eeb5d43b22b4466 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-413-efYkDY/output.log [complete metadata: capture directory]
+
+## CAP-414-fCfvJf — 2026-09-23T13:29:16Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-414-fCfvJf/output.log`.
+
+capture=CAP-414-fCfvJf command=/bin/bash -o pipefail -c bash tests/test-sdd-analyze.sh  key=  -- 18/18 passed exit=0 output=20ac89cdff35a7ebcd8d19d2c3a2ddc42f015dc3cb116147d9f5c5c5b4b62344 input=d27bab536454eead9135c5d502962488e653eef8277006b50eeb5d43b22b4466 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-414-fCfvJf/output.log [complete metadata: capture directory]
+
+## CAP-415-W1gArm — 2026-09-23T13:31:25Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-415-W1gArm/output.log`.
+
+capture=CAP-415-W1gArm command=/bin/bash -o pipefail -c bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=b0307d5f3643923c85b2aa7d758ae3f0bf12a603f48312482e8cbeddb222d636 input=d27bab536454eead9135c5d502962488e653eef8277006b50eeb5d43b22b4466 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-415-W1gArm/output.log [complete metadata: capture directory]
+
+## CAP-416-w54uL9 — 2026-09-23T13:32:18Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-416-w54uL9/output.log`.
+
+capture=CAP-416-w54uL9 command=/bin/bash -o pipefail -c bash tests/test-golden-example.sh  key=  -- 3/3 passed exit=0 output=c5596e4df60ed53e31618150bc13f9487553233a0cbc59820063ae9aa2cc96ae input=d27bab536454eead9135c5d502962488e653eef8277006b50eeb5d43b22b4466 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-416-w54uL9/output.log [complete metadata: capture directory]
+
+## CAP-417-D7tIre — 2026-09-23T13:40:00Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-417-D7tIre/output.log`.
+
+capture=CAP-417-D7tIre command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-build-adapters.sh  key=  -- 8/8 passed exit=0 output=07e727dc8f9709670ecccccc71bb8a688e4b406e14206de1a60860b72586b1e0 input=d27bab536454eead9135c5d502962488e653eef8277006b50eeb5d43b22b4466 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-417-D7tIre/output.log [complete metadata: capture directory]
+
+## CAP-418-GPisQj — 2026-09-23T13:42:54Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-418-GPisQj/output.log`.
+
+capture=CAP-418-GPisQj command=/bin/bash -o pipefail -c bash tests/test-spec-run.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=6afa5129adcacc389d7dd247ba059bc93f6abec84371466d3b7f5f19daa2bbd2 input=d27bab536454eead9135c5d502962488e653eef8277006b50eeb5d43b22b4466 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-418-GPisQj/output.log [complete metadata: capture directory]
+
+## CAP-419-IWOWT9 — 2026-09-23T13:51:49Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-419-IWOWT9/output.log`.
+
+capture=CAP-419-IWOWT9 command=/bin/bash -o pipefail -c bash tests/test-spec-task.sh && bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=3334b455c3ba2b83d00ab61c13747adf07fa5cb70298720a949d5e873eecd3f0 input=d27bab536454eead9135c5d502962488e653eef8277006b50eeb5d43b22b4466 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-419-IWOWT9/output.log [complete metadata: capture directory]
+
+## CAP-420-bw9ti1 — 2026-09-23T13:58:51Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-420-bw9ti1/output.log`.
+
+capture=CAP-420-bw9ti1 command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=f3fb7114ca5222ecd984af53b2c6f1e91576973505c2112e12455304993b539b input=d27bab536454eead9135c5d502962488e653eef8277006b50eeb5d43b22b4466 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-420-bw9ti1/output.log [complete metadata: capture directory]
+
+## CAP-421-X83nL6 — 2026-09-23T14:07:44Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-421-X83nL6/output.log`.
+
+capture=CAP-421-X83nL6 command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=0674f61c5163d250133fb5d838ec0ee3730d3d6e40f72f723f5f49416449d191 input=d27bab536454eead9135c5d502962488e653eef8277006b50eeb5d43b22b4466 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-421-X83nL6/output.log [complete metadata: capture directory]
+
+## CAP-422-2Pa2mF — 2026-09-23T14:16:29Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-422-2Pa2mF/output.log`.
+
+capture=CAP-422-2Pa2mF command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=1e7cb98767b063c47d9b91e7f2304ba6ecc36bbdc8319e4e7ae51594753470ce input=d27bab536454eead9135c5d502962488e653eef8277006b50eeb5d43b22b4466 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-422-2Pa2mF/output.log [complete metadata: capture directory]
+
+## CAP-423-J1yrcr — 2026-09-23T14:32:18Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-423-J1yrcr/output.log`.
+
+capture=CAP-423-J1yrcr command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-verification.sh && bash tests/test-sdd-analyze.sh  key=  -- 18/18 passed exit=0 output=81deb99d485304d7d6379a019518cbca98c3683336fa465a858a8a452daa5fd6 input=d27bab536454eead9135c5d502962488e653eef8277006b50eeb5d43b22b4466 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-423-J1yrcr/output.log [complete metadata: capture directory]
+
+## CAP-424-dg3THs — 2026-09-23T14:45:22Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-424-dg3THs/output.log`.
+
+capture=CAP-424-dg3THs command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=cea534ae1dd3df8a53663a770a07528dbfc05ec6aae2fd7bf04d3296c5a3acf0 input=d27bab536454eead9135c5d502962488e653eef8277006b50eeb5d43b22b4466 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-424-dg3THs/output.log [complete metadata: capture directory]
+
+## CAP-425-Uv7avQ — 2026-09-23T14:57:56Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-425-Uv7avQ/output.log`.
+
+capture=CAP-425-Uv7avQ command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-sdd-analyze.sh  key=  -- 18/18 passed exit=0 output=5fedbf813386f524798ceae747c083ee0920238cd7e8072e49582cc6e799828f input=d27bab536454eead9135c5d502962488e653eef8277006b50eeb5d43b22b4466 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-425-Uv7avQ/output.log [complete metadata: capture directory]
+
+## CAP-426-4Wnh0L — 2026-09-23T15:12:06Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-426-4Wnh0L/output.log`.
+
+capture=CAP-426-4Wnh0L command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=c692c9eb1e2a3b754318d1692b19a2995671005c35348d35aaf8b7dd8165a9dd input=d27bab536454eead9135c5d502962488e653eef8277006b50eeb5d43b22b4466 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-426-4Wnh0L/output.log [complete metadata: capture directory]
+
+## CAP-427-a3cHpV — 2026-09-23T15:26:07Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-427-a3cHpV/output.log`.
+
+capture=CAP-427-a3cHpV command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=fe6ca922241392cf3402a6829cfff98a4d41661da79c2d7041650952bde69e72 input=d27bab536454eead9135c5d502962488e653eef8277006b50eeb5d43b22b4466 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-427-a3cHpV/output.log [complete metadata: capture directory]
+
+## CAP-428-NBu2v6 — 2026-09-23T15:29:11Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-428-NBu2v6/output.log`.
+
+capture=CAP-428-NBu2v6 command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline  key=1 warning(s), 0 errors exit=0 output=084946b8e308c53a76afd58d03461a200c203180c2231daa67424eb3ead02797 input=d27bab536454eead9135c5d502962488e653eef8277006b50eeb5d43b22b4466 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-428-NBu2v6/output.log [complete metadata: capture directory]
+
+## CAP-429-TUAD7J — 2026-09-23T15:29:39Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-429-TUAD7J/output.log`.
+
+capture=CAP-429-TUAD7J command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-ac-coverage.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline --root /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline  key=bound — every AC is named by at least one test file exit=0 output=dc565b36343581a156860b7dcc3b6819613cf4086be4c91a542b987b3a51d1e2 input=d27bab536454eead9135c5d502962488e653eef8277006b50eeb5d43b22b4466 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-429-TUAD7J/output.log [complete metadata: capture directory]
+
+## CAP-430-RiUvvW — 2026-09-23T16:17:49Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-430-RiUvvW/output.log`.
+
+capture=CAP-430-RiUvvW command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-evidence.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline  key=current evidence: all completed task checks have valid current captures exit=0 output=a00248b2c4053b439bfaebbe1d0502bd9a754456d14ca6730e6fa3cc03250ff9 input=d27bab536454eead9135c5d502962488e653eef8277006b50eeb5d43b22b4466 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-430-RiUvvW/output.log [complete metadata: capture directory]
+
+## CAP-431-V4kwV1 — 2026-09-23T16:34:03Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-431-V4kwV1/output.log`.
+
+capture=CAP-431-V4kwV1 command=/bin/bash -o pipefail -c bash tests/run.sh  key=  -- 3/3 passed exit=0 output=23bc386b960148ddb0cdc2b30e01e4ef4f998bb43992204343ccc2f7b7d35c4d input=d27bab536454eead9135c5d502962488e653eef8277006b50eeb5d43b22b4466 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-431-V4kwV1/output.log [complete metadata: capture directory]
+
+## CAP-432-EZbmF5 — 2026-09-23T16:35:00Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-432-EZbmF5/output.log`.
+
+capture=CAP-432-EZbmF5 command=/bin/bash -o pipefail -c shellcheck -S warning -x scripts/*.sh tests/*.sh  key=(no output) exit=0 output=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 input=d27bab536454eead9135c5d502962488e653eef8277006b50eeb5d43b22b4466 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-432-EZbmF5/output.log [complete metadata: capture directory]
+
+## GATE-FLOOR
+
+Result: FLOOR-oejTDu; source: d27bab536454eead9135c5d502962488e653eef8277006b50eeb5d43b22b4466; exit: 0; command records: `notes/verification/floors/FLOOR-oejTDu/commands.nul`.
+
+## CAP-433-Yy72Iz — 2026-09-23T22:30:17Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-433-Yy72Iz/output.log`.
+
+capture=CAP-433-Yy72Iz command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=c89f7d9e3ceea159e64bb75defc10d0c11ca84dee772071cbdfc2c36232f3fdb input=6c6291c2b37d35fb82c67c42c173ae042bb116c742f1c84a5dfa9c1c77c04c2d log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-433-Yy72Iz/output.log [complete metadata: capture directory]
+
+## CAP-434-h4ZhXm — 2026-09-23T22:31:01Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-434-h4ZhXm/output.log`.
+
+capture=CAP-434-h4ZhXm command=/bin/bash -o pipefail -c bash tests/test-sdd-analyze.sh  key=  -- 18/18 passed exit=0 output=20ac89cdff35a7ebcd8d19d2c3a2ddc42f015dc3cb116147d9f5c5c5b4b62344 input=6c6291c2b37d35fb82c67c42c173ae042bb116c742f1c84a5dfa9c1c77c04c2d log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-434-h4ZhXm/output.log [complete metadata: capture directory]
+
+## CAP-435-q7i0Oy — 2026-09-23T22:33:15Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-435-q7i0Oy/output.log`.
+
+capture=CAP-435-q7i0Oy command=/bin/bash -o pipefail -c bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=b0307d5f3643923c85b2aa7d758ae3f0bf12a603f48312482e8cbeddb222d636 input=6c6291c2b37d35fb82c67c42c173ae042bb116c742f1c84a5dfa9c1c77c04c2d log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-435-q7i0Oy/output.log [complete metadata: capture directory]
+
+## CAP-436-pVcTy6 — 2026-09-23T22:34:09Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-436-pVcTy6/output.log`.
+
+capture=CAP-436-pVcTy6 command=/bin/bash -o pipefail -c bash tests/test-golden-example.sh  key=  -- 3/3 passed exit=0 output=c5596e4df60ed53e31618150bc13f9487553233a0cbc59820063ae9aa2cc96ae input=6c6291c2b37d35fb82c67c42c173ae042bb116c742f1c84a5dfa9c1c77c04c2d log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-436-pVcTy6/output.log [complete metadata: capture directory]
+
+## CAP-437-GqkmKE — 2026-09-23T22:41:29Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-437-GqkmKE/output.log`.
+
+capture=CAP-437-GqkmKE command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-build-adapters.sh  key=  -- 8/8 passed exit=0 output=07e727dc8f9709670ecccccc71bb8a688e4b406e14206de1a60860b72586b1e0 input=6c6291c2b37d35fb82c67c42c173ae042bb116c742f1c84a5dfa9c1c77c04c2d log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-437-GqkmKE/output.log [complete metadata: capture directory]
+
+## CAP-438-CHOCSR — 2026-09-23T22:44:23Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-438-CHOCSR/output.log`.
+
+capture=CAP-438-CHOCSR command=/bin/bash -o pipefail -c bash tests/test-spec-run.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=6afa5129adcacc389d7dd247ba059bc93f6abec84371466d3b7f5f19daa2bbd2 input=6c6291c2b37d35fb82c67c42c173ae042bb116c742f1c84a5dfa9c1c77c04c2d log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-438-CHOCSR/output.log [complete metadata: capture directory]
+
+## CAP-439-hMifnh — 2026-09-23T22:53:47Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-439-hMifnh/output.log`.
+
+capture=CAP-439-hMifnh command=/bin/bash -o pipefail -c bash tests/test-spec-task.sh && bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=3334b455c3ba2b83d00ab61c13747adf07fa5cb70298720a949d5e873eecd3f0 input=6c6291c2b37d35fb82c67c42c173ae042bb116c742f1c84a5dfa9c1c77c04c2d log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-439-hMifnh/output.log [complete metadata: capture directory]
+
+## CAP-440-KezGWR — 2026-09-23T23:01:40Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-440-KezGWR/output.log`.
+
+capture=CAP-440-KezGWR command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=f3fb7114ca5222ecd984af53b2c6f1e91576973505c2112e12455304993b539b input=6c6291c2b37d35fb82c67c42c173ae042bb116c742f1c84a5dfa9c1c77c04c2d log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-440-KezGWR/output.log [complete metadata: capture directory]
+
+## CAP-441-prCb8D — 2026-09-23T23:12:17Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-441-prCb8D/output.log`.
+
+capture=CAP-441-prCb8D command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=0674f61c5163d250133fb5d838ec0ee3730d3d6e40f72f723f5f49416449d191 input=6c6291c2b37d35fb82c67c42c173ae042bb116c742f1c84a5dfa9c1c77c04c2d log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-441-prCb8D/output.log [complete metadata: capture directory]
+
+## CAP-442-GeZ0KH — 2026-09-23T23:24:38Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-442-GeZ0KH/output.log`.
+
+capture=CAP-442-GeZ0KH command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=1e7cb98767b063c47d9b91e7f2304ba6ecc36bbdc8319e4e7ae51594753470ce input=6c6291c2b37d35fb82c67c42c173ae042bb116c742f1c84a5dfa9c1c77c04c2d log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-442-GeZ0KH/output.log [complete metadata: capture directory]
+
+## CAP-443-0KR1mR — 2026-09-23T23:39:17Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-443-0KR1mR/output.log`.
+
+capture=CAP-443-0KR1mR command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=0c5db03a7dd3fdf020bd0228826045f5a8f1e5b4e433b9079de6b54021fa94a7 input=6c6291c2b37d35fb82c67c42c173ae042bb116c742f1c84a5dfa9c1c77c04c2d log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-443-0KR1mR/output.log [complete metadata: capture directory]
+
+## CAP-444-QoMROP — 2026-09-23T23:55:12Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-444-QoMROP/output.log`.
+
+capture=CAP-444-QoMROP command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-verification.sh && bash tests/test-sdd-analyze.sh  key=  -- 18/18 passed exit=0 output=81deb99d485304d7d6379a019518cbca98c3683336fa465a858a8a452daa5fd6 input=6c6291c2b37d35fb82c67c42c173ae042bb116c742f1c84a5dfa9c1c77c04c2d log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-444-QoMROP/output.log [complete metadata: capture directory]
+
+## CAP-445-lDufFi — 2026-09-24T00:08:03Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-445-lDufFi/output.log`.
+
+capture=CAP-445-lDufFi command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-spec-gate.sh  key=  -- 6/6 passed exit=0 output=cea534ae1dd3df8a53663a770a07528dbfc05ec6aae2fd7bf04d3296c5a3acf0 input=6c6291c2b37d35fb82c67c42c173ae042bb116c742f1c84a5dfa9c1c77c04c2d log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-445-lDufFi/output.log [complete metadata: capture directory]
+
+## CAP-446-8gsmmC — 2026-09-24T00:20:15Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-446-8gsmmC/output.log`.
+
+capture=CAP-446-8gsmmC command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-sdd-analyze.sh  key=  -- 18/18 passed exit=0 output=5fedbf813386f524798ceae747c083ee0920238cd7e8072e49582cc6e799828f input=6c6291c2b37d35fb82c67c42c173ae042bb116c742f1c84a5dfa9c1c77c04c2d log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-446-8gsmmC/output.log [complete metadata: capture directory]
+
+## CAP-447-1jppoy — 2026-09-24T00:33:59Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-447-1jppoy/output.log`.
+
+capture=CAP-447-1jppoy command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=c692c9eb1e2a3b754318d1692b19a2995671005c35348d35aaf8b7dd8165a9dd input=6c6291c2b37d35fb82c67c42c173ae042bb116c742f1c84a5dfa9c1c77c04c2d log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-447-1jppoy/output.log [complete metadata: capture directory]
+
+## CAP-448-CrGDWr — 2026-09-24T00:47:41Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-448-CrGDWr/output.log`.
+
+capture=CAP-448-CrGDWr command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh  key=  -- 14/14 passed exit=0 output=fe6ca922241392cf3402a6829cfff98a4d41661da79c2d7041650952bde69e72 input=6c6291c2b37d35fb82c67c42c173ae042bb116c742f1c84a5dfa9c1c77c04c2d log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-448-CrGDWr/output.log [complete metadata: capture directory]
+
+## CAP-449-yKKssl — 2026-09-24T01:04:40Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-449-yKKssl/output.log`.
+
+capture=CAP-449-yKKssl command=/bin/bash -o pipefail -c bash tests/run.sh && shellcheck -S warning -x scripts/*.sh tests/*.sh  key=  -- 3/3 passed exit=0 output=23bc386b960148ddb0cdc2b30e01e4ef4f998bb43992204343ccc2f7b7d35c4d input=6c6291c2b37d35fb82c67c42c173ae042bb116c742f1c84a5dfa9c1c77c04c2d log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-449-yKKssl/output.log [complete metadata: capture directory]
+
+## CAP-450-HCiLo7 — 2026-09-24T01:05:52Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-450-HCiLo7/output.log`.
+
+capture=CAP-450-HCiLo7 command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline  key=1 warning(s), 0 errors exit=0 output=084946b8e308c53a76afd58d03461a200c203180c2231daa67424eb3ead02797 input=6c6291c2b37d35fb82c67c42c173ae042bb116c742f1c84a5dfa9c1c77c04c2d log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-450-HCiLo7/output.log [complete metadata: capture directory]
+
+## CAP-451-s3xBSY — 2026-09-24T01:06:19Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-451-s3xBSY/output.log`.
+
+capture=CAP-451-s3xBSY command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-ac-coverage.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline --root /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline  key=bound — every AC is named by at least one test file exit=0 output=dc565b36343581a156860b7dcc3b6819613cf4086be4c91a542b987b3a51d1e2 input=6c6291c2b37d35fb82c67c42c173ae042bb116c742f1c84a5dfa9c1c77c04c2d log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-451-s3xBSY/output.log [complete metadata: capture directory]
+
+## CAP-452-pIdDVP — 2026-09-24T01:51:21Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-452-pIdDVP/output.log`.
+
+capture=CAP-452-pIdDVP command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-evidence.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline  key=current evidence: all completed task checks have valid current captures exit=0 output=40a46dae68bf7248a55e53a1de7485d7fda5f43163c81925f0a40470f0c6f832 input=6c6291c2b37d35fb82c67c42c173ae042bb116c742f1c84a5dfa9c1c77c04c2d log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-452-pIdDVP/output.log [complete metadata: capture directory]
+
+## CAP-453-gA0Lj4 — 2026-09-24T02:06:17Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-453-gA0Lj4/output.log`.
+
+capture=CAP-453-gA0Lj4 command=/bin/bash -o pipefail -c bash tests/run.sh  key=  -- 3/3 passed exit=0 output=23bc386b960148ddb0cdc2b30e01e4ef4f998bb43992204343ccc2f7b7d35c4d input=6c6291c2b37d35fb82c67c42c173ae042bb116c742f1c84a5dfa9c1c77c04c2d log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-453-gA0Lj4/output.log [complete metadata: capture directory]
+
+## CAP-454-X5Tgos — 2026-09-24T02:07:09Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-454-X5Tgos/output.log`.
+
+capture=CAP-454-X5Tgos command=/bin/bash -o pipefail -c shellcheck -S warning -x scripts/*.sh tests/*.sh  key=(no output) exit=0 output=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 input=6c6291c2b37d35fb82c67c42c173ae042bb116c742f1c84a5dfa9c1c77c04c2d log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-454-X5Tgos/output.log [complete metadata: capture directory]
+
+## GATE-FLOOR
+
+Result: FLOOR-qQEv7w; source: 6c6291c2b37d35fb82c67c42c173ae042bb116c742f1c84a5dfa9c1c77c04c2d; exit: 0; command records: `notes/verification/floors/FLOOR-qQEv7w/commands.nul`.
+
+## CAP-455-RNmM6l — 2026-09-25T16:12:10Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-455-RNmM6l/output.log`.
+
+capture=CAP-455-RNmM6l command=/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh  key=  -- 3/3 passed exit=0 output=b150ad3c2adee17324471b5021f9d78f292fabb354dcc1009742d11f71d50699 input=e07efa818886b08fd028b3a038921ae58d2774c6926a86394712014e86a50536 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-455-RNmM6l/output.log [complete metadata: capture directory]
+
+## CAP-456-3PwMO2 — 2026-09-25T21:49:53Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-456-3PwMO2/output.log`.
+
+capture=CAP-456-3PwMO2 command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=e2bd5dfbf6ddcf901317732547649b3e2028c869384acc1e688d65a77c738b33 input=e07efa818886b08fd028b3a038921ae58d2774c6926a86394712014e86a50536 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-456-3PwMO2/output.log [complete metadata: capture directory]
+
+## CAP-457-bOHkij — 2026-09-25T21:51:07Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-457-bOHkij/output.log`.
+
+capture=CAP-457-bOHkij command=/bin/bash -o pipefail -c bash tests/test-sdd-analyze.sh  key=  -- 19/19 passed exit=0 output=f9166fdc124954abb48f7c8ed789d96a1ce68c06a9da6df0d9d49a79a07aca5a input=e07efa818886b08fd028b3a038921ae58d2774c6926a86394712014e86a50536 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-457-bOHkij/output.log [complete metadata: capture directory]
+
+## CAP-458-YUuXtn — 2026-09-25T21:55:28Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-458-YUuXtn/output.log`.
+
+capture=CAP-458-YUuXtn command=/bin/bash -o pipefail -c bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=b0307d5f3643923c85b2aa7d758ae3f0bf12a603f48312482e8cbeddb222d636 input=e07efa818886b08fd028b3a038921ae58d2774c6926a86394712014e86a50536 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-458-YUuXtn/output.log [complete metadata: capture directory]
+
+## CAP-459-tRx4cs — 2026-09-25T21:56:30Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-459-tRx4cs/output.log`.
+
+capture=CAP-459-tRx4cs command=/bin/bash -o pipefail -c bash tests/test-golden-example.sh  key=  -- 5/5 passed exit=0 output=dc54db17fc456b716d3c4bacdc0e09fda5c2df8fd46442fa54ea9b855e779182 input=e07efa818886b08fd028b3a038921ae58d2774c6926a86394712014e86a50536 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-459-tRx4cs/output.log [complete metadata: capture directory]
+
+## CAP-460-95nvJV — 2026-09-25T22:06:54Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-460-95nvJV/output.log`.
+
+capture=CAP-460-95nvJV command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-build-adapters.sh  key=  -- 10/10 passed exit=0 output=30e3c37ef9cd95137d04ac561e5cffcfcd29854d9a0c3902906b94c2d462b9f8 input=e07efa818886b08fd028b3a038921ae58d2774c6926a86394712014e86a50536 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-460-95nvJV/output.log [complete metadata: capture directory]
+
+## CAP-461-vArgg1 — 2026-09-25T22:11:37Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-461-vArgg1/output.log`.
+
+capture=CAP-461-vArgg1 command=/bin/bash -o pipefail -c bash tests/test-spec-run.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=6afa5129adcacc389d7dd247ba059bc93f6abec84371466d3b7f5f19daa2bbd2 input=e07efa818886b08fd028b3a038921ae58d2774c6926a86394712014e86a50536 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-461-vArgg1/output.log [complete metadata: capture directory]
+
+## CAP-462-h1cssk — 2026-09-25T22:29:14Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-462-h1cssk/output.log`.
+
+capture=CAP-462-h1cssk command=/bin/bash -o pipefail -c bash tests/test-spec-task.sh && bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=92e0f6ae9eb40c2f7ffccbed611018798c37aebeb5ad3d5c438bbe7232566791 input=e07efa818886b08fd028b3a038921ae58d2774c6926a86394712014e86a50536 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-462-h1cssk/output.log [complete metadata: capture directory]
+
+## CAP-463-2BtStV — 2026-09-25T22:38:50Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-463-2BtStV/output.log`.
+
+capture=CAP-463-2BtStV command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh  key=  -- 8/8 passed exit=0 output=ce84a8f1d4f2042d5862aaccf523b5c2cad467528205d0937715b65aca1aed5f input=e07efa818886b08fd028b3a038921ae58d2774c6926a86394712014e86a50536 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-463-2BtStV/output.log [complete metadata: capture directory]
+
+## CAP-464-HR2MHQ — 2026-09-25T22:50:18Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-464-HR2MHQ/output.log`.
+
+capture=CAP-464-HR2MHQ command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=eaed840fc7e1da90d7fbc574f13167212b5c09e43b1adc486bd8fb879c84e61f input=e07efa818886b08fd028b3a038921ae58d2774c6926a86394712014e86a50536 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-464-HR2MHQ/output.log [complete metadata: capture directory]
+
+## CAP-465-N9igCm — 2026-09-25T23:01:52Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-465-N9igCm/output.log`.
+
+capture=CAP-465-N9igCm command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh  key=  -- 8/8 passed exit=0 output=54b9f0a22b923c2d0091384a9699e48ecf699315a1a65541bb4fc4c4ea1f18cb input=e07efa818886b08fd028b3a038921ae58d2774c6926a86394712014e86a50536 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-465-N9igCm/output.log [complete metadata: capture directory]
+
+## CAP-466-tngOqb — 2026-09-25T23:13:34Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-466-tngOqb/output.log`.
+
+capture=CAP-466-tngOqb command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=3c87a1f9bf70014c150ad6a98d52d0712b28b5673ae59e8b28a1f03a9dc92ff5 input=e07efa818886b08fd028b3a038921ae58d2774c6926a86394712014e86a50536 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-466-tngOqb/output.log [complete metadata: capture directory]
+
+## CAP-467-WWDfa3 — 2026-09-25T23:41:38Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-467-WWDfa3/output.log`.
+
+capture=CAP-467-WWDfa3 command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-verification.sh && bash tests/test-sdd-analyze.sh  key=  -- 19/19 passed exit=0 output=41657457f44cc1f57e09e2ad86e8a53a74aad41f03dc1ca71aa130ae7943ebc5 input=e07efa818886b08fd028b3a038921ae58d2774c6926a86394712014e86a50536 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-467-WWDfa3/output.log [complete metadata: capture directory]
+
+## CAP-468-X91Efy — 2026-09-25T23:58:51Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-468-X91Efy/output.log`.
+
+capture=CAP-468-X91Efy command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-spec-gate.sh  key=  -- 8/8 passed exit=0 output=3b10b8d711d8f1e2776ce8d3c566044bc2bab6db387d1a97bbeadfae9e27a756 input=e07efa818886b08fd028b3a038921ae58d2774c6926a86394712014e86a50536 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-468-X91Efy/output.log [complete metadata: capture directory]
+
+## CAP-469-NlHtCS — 2026-09-26T00:14:51Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-469-NlHtCS/output.log`.
+
+capture=CAP-469-NlHtCS command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-sdd-analyze.sh  key=  -- 19/19 passed exit=0 output=2f8d38f0a97fadd4499b71f914d1807d157d1b700cb97d4e4ebf99c03c9d022a input=e07efa818886b08fd028b3a038921ae58d2774c6926a86394712014e86a50536 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-469-NlHtCS/output.log [complete metadata: capture directory]
+
+## CAP-470-QlQAXJ — 2026-09-26T00:32:29Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-470-QlQAXJ/output.log`.
+
+capture=CAP-470-QlQAXJ command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=574f03c0c565372d75397dd9b169d43c48a9e10df69ca03bb1000b795be3d478 input=e07efa818886b08fd028b3a038921ae58d2774c6926a86394712014e86a50536 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-470-QlQAXJ/output.log [complete metadata: capture directory]
+
+## CAP-471-2FbWp1 — 2026-09-26T00:49:41Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-471-2FbWp1/output.log`.
+
+capture=CAP-471-2FbWp1 command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=67612af507b659daf52b99440e4b75b0d53668dcbdd360085dd60783ad1d4917 input=e07efa818886b08fd028b3a038921ae58d2774c6926a86394712014e86a50536 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-471-2FbWp1/output.log [complete metadata: capture directory]
+
+## CAP-472-3eGW9R — 2026-09-26T00:53:26Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-472-3eGW9R/output.log`.
+
+capture=CAP-472-3eGW9R command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline  key=1 warning(s), 0 errors exit=0 output=fcb0f63b53d7d585e469c7cd5959da3b7572375031c3579478505fef279aa551 input=e07efa818886b08fd028b3a038921ae58d2774c6926a86394712014e86a50536 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-472-3eGW9R/output.log [complete metadata: capture directory]
+
+## CAP-473-5zkysd — 2026-09-26T00:53:59Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-473-5zkysd/output.log`.
+
+capture=CAP-473-5zkysd command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-ac-coverage.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline --root /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline  key=bound — every AC is named by at least one test file exit=0 output=e9ed81df000a0ca9bf80e134935d7947c4802e4bb5c4ab297a2d885c10f9c51a input=e07efa818886b08fd028b3a038921ae58d2774c6926a86394712014e86a50536 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-473-5zkysd/output.log [complete metadata: capture directory]
+
+## CAP-474-xdUnRx — 2026-09-26T09:44:32Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-474-xdUnRx/output.log`.
+
+capture=CAP-474-xdUnRx command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-evidence.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline  key=current evidence: all completed task checks have valid current captures exit=0 output=2d09605b8d7340b14a7d8daeba79e9cf9a9b7bcc0c8b7bbe19c26aa04155685c input=e07efa818886b08fd028b3a038921ae58d2774c6926a86394712014e86a50536 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-474-xdUnRx/output.log [complete metadata: capture directory]
+
+## CAP-475-z6pqwO — 2026-09-26T10:04:20Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-475-z6pqwO/output.log`.
+
+capture=CAP-475-z6pqwO command=/bin/bash -o pipefail -c bash tests/run.sh  key=  -- 3/3 passed exit=0 output=b150ad3c2adee17324471b5021f9d78f292fabb354dcc1009742d11f71d50699 input=e07efa818886b08fd028b3a038921ae58d2774c6926a86394712014e86a50536 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-475-z6pqwO/output.log [complete metadata: capture directory]
+
+## CAP-476-yTS4tE — 2026-09-26T10:05:33Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-476-yTS4tE/output.log`.
+
+capture=CAP-476-yTS4tE command=/bin/bash -o pipefail -c bash tests/shellcheck.sh  key=(no output) exit=0 output=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 input=e07efa818886b08fd028b3a038921ae58d2774c6926a86394712014e86a50536 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-476-yTS4tE/output.log [complete metadata: capture directory]
+
+## GATE-FLOOR
+
+Result: FLOOR-6eaaRv; source: e07efa818886b08fd028b3a038921ae58d2774c6926a86394712014e86a50536; exit: 0; command records: `notes/verification/floors/FLOOR-6eaaRv/commands.nul`.
+
+## CAP-477-AH2mV6 — 2026-09-26T11:50:15Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-477-AH2mV6/output.log`.
+
+capture=CAP-477-AH2mV6 command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=e2bd5dfbf6ddcf901317732547649b3e2028c869384acc1e688d65a77c738b33 input=1fba08ed13e83cbca56ef731047f39c3668dfa47c4ff81873de63ee2eea3b0b0 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-477-AH2mV6/output.log [complete metadata: capture directory]
+
+## CAP-478-05601w — 2026-09-26T11:51:01Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-478-05601w/output.log`.
+
+capture=CAP-478-05601w command=/bin/bash -o pipefail -c bash tests/test-sdd-analyze.sh  key=  -- 19/19 passed exit=0 output=f9166fdc124954abb48f7c8ed789d96a1ce68c06a9da6df0d9d49a79a07aca5a input=1fba08ed13e83cbca56ef731047f39c3668dfa47c4ff81873de63ee2eea3b0b0 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-478-05601w/output.log [complete metadata: capture directory]
+
+## CAP-479-4NmcVd — 2026-09-26T11:54:21Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-479-4NmcVd/output.log`.
+
+capture=CAP-479-4NmcVd command=/bin/bash -o pipefail -c bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=b0307d5f3643923c85b2aa7d758ae3f0bf12a603f48312482e8cbeddb222d636 input=1fba08ed13e83cbca56ef731047f39c3668dfa47c4ff81873de63ee2eea3b0b0 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-479-4NmcVd/output.log [complete metadata: capture directory]
+
+## CAP-480-rbJMjB — 2026-09-26T11:55:13Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-480-rbJMjB/output.log`.
+
+capture=CAP-480-rbJMjB command=/bin/bash -o pipefail -c bash tests/test-golden-example.sh  key=  -- 5/5 passed exit=0 output=dc54db17fc456b716d3c4bacdc0e09fda5c2df8fd46442fa54ea9b855e779182 input=1fba08ed13e83cbca56ef731047f39c3668dfa47c4ff81873de63ee2eea3b0b0 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-480-rbJMjB/output.log [complete metadata: capture directory]
+
+## CAP-481-eOrSID — 2026-09-26T12:03:52Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-481-eOrSID/output.log`.
+
+capture=CAP-481-eOrSID command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-build-adapters.sh  key=  -- 10/10 passed exit=0 output=30e3c37ef9cd95137d04ac561e5cffcfcd29854d9a0c3902906b94c2d462b9f8 input=1fba08ed13e83cbca56ef731047f39c3668dfa47c4ff81873de63ee2eea3b0b0 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-481-eOrSID/output.log [complete metadata: capture directory]
+
+## CAP-482-t04d2R — 2026-09-26T12:07:54Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-482-t04d2R/output.log`.
+
+capture=CAP-482-t04d2R command=/bin/bash -o pipefail -c bash tests/test-spec-run.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=6afa5129adcacc389d7dd247ba059bc93f6abec84371466d3b7f5f19daa2bbd2 input=1fba08ed13e83cbca56ef731047f39c3668dfa47c4ff81873de63ee2eea3b0b0 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-482-t04d2R/output.log [complete metadata: capture directory]
+
+## CAP-483-4jrn4D — 2026-09-26T12:18:25Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-483-4jrn4D/output.log`.
+
+capture=CAP-483-4jrn4D command=/bin/bash -o pipefail -c bash tests/test-spec-task.sh && bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=92e0f6ae9eb40c2f7ffccbed611018798c37aebeb5ad3d5c438bbe7232566791 input=1fba08ed13e83cbca56ef731047f39c3668dfa47c4ff81873de63ee2eea3b0b0 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-483-4jrn4D/output.log [complete metadata: capture directory]
+
+## CAP-484-ED4VEe — 2026-09-26T12:25:45Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-484-ED4VEe/output.log`.
+
+capture=CAP-484-ED4VEe command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh  key=  -- 8/8 passed exit=0 output=ce84a8f1d4f2042d5862aaccf523b5c2cad467528205d0937715b65aca1aed5f input=1fba08ed13e83cbca56ef731047f39c3668dfa47c4ff81873de63ee2eea3b0b0 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-484-ED4VEe/output.log [complete metadata: capture directory]
+
+## CAP-485-ItEt1M — 2026-09-26T12:36:05Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-485-ItEt1M/output.log`.
+
+capture=CAP-485-ItEt1M command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=eaed840fc7e1da90d7fbc574f13167212b5c09e43b1adc486bd8fb879c84e61f input=1fba08ed13e83cbca56ef731047f39c3668dfa47c4ff81873de63ee2eea3b0b0 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-485-ItEt1M/output.log [complete metadata: capture directory]
+
+## CAP-486-4EXuSS — 2026-09-26T12:46:34Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-486-4EXuSS/output.log`.
+
+capture=CAP-486-4EXuSS command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh  key=  -- 8/8 passed exit=0 output=54b9f0a22b923c2d0091384a9699e48ecf699315a1a65541bb4fc4c4ea1f18cb input=1fba08ed13e83cbca56ef731047f39c3668dfa47c4ff81873de63ee2eea3b0b0 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-486-4EXuSS/output.log [complete metadata: capture directory]
+
+## CAP-487-R0MMZX — 2026-09-26T12:56:37Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-487-R0MMZX/output.log`.
+
+capture=CAP-487-R0MMZX command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=3c87a1f9bf70014c150ad6a98d52d0712b28b5673ae59e8b28a1f03a9dc92ff5 input=1fba08ed13e83cbca56ef731047f39c3668dfa47c4ff81873de63ee2eea3b0b0 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-487-R0MMZX/output.log [complete metadata: capture directory]
+
+## CAP-488-rhF9zf — 2026-09-26T13:15:14Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-488-rhF9zf/output.log`.
+
+capture=CAP-488-rhF9zf command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-verification.sh && bash tests/test-sdd-analyze.sh  key=  -- 19/19 passed exit=0 output=41657457f44cc1f57e09e2ad86e8a53a74aad41f03dc1ca71aa130ae7943ebc5 input=1fba08ed13e83cbca56ef731047f39c3668dfa47c4ff81873de63ee2eea3b0b0 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-488-rhF9zf/output.log [complete metadata: capture directory]
+
+## CAP-489-32H5NU — 2026-09-26T13:30:07Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-489-32H5NU/output.log`.
+
+capture=CAP-489-32H5NU command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-spec-gate.sh  key=  -- 8/8 passed exit=0 output=3b10b8d711d8f1e2776ce8d3c566044bc2bab6db387d1a97bbeadfae9e27a756 input=1fba08ed13e83cbca56ef731047f39c3668dfa47c4ff81873de63ee2eea3b0b0 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-489-32H5NU/output.log [complete metadata: capture directory]
+
+## CAP-490-I4l78z — 2026-09-26T13:44:21Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-490-I4l78z/output.log`.
+
+capture=CAP-490-I4l78z command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-sdd-analyze.sh  key=  -- 19/19 passed exit=0 output=2f8d38f0a97fadd4499b71f914d1807d157d1b700cb97d4e4ebf99c03c9d022a input=1fba08ed13e83cbca56ef731047f39c3668dfa47c4ff81873de63ee2eea3b0b0 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-490-I4l78z/output.log [complete metadata: capture directory]
+
+## CAP-491-Ypy8oE — 2026-09-26T14:01:50Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-491-Ypy8oE/output.log`.
+
+capture=CAP-491-Ypy8oE command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=574f03c0c565372d75397dd9b169d43c48a9e10df69ca03bb1000b795be3d478 input=1fba08ed13e83cbca56ef731047f39c3668dfa47c4ff81873de63ee2eea3b0b0 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-491-Ypy8oE/output.log [complete metadata: capture directory]
+
+## CAP-492-e9WVSy — 2026-09-26T14:18:26Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-492-e9WVSy/output.log`.
+
+capture=CAP-492-e9WVSy command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=67612af507b659daf52b99440e4b75b0d53668dcbdd360085dd60783ad1d4917 input=1fba08ed13e83cbca56ef731047f39c3668dfa47c4ff81873de63ee2eea3b0b0 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-492-e9WVSy/output.log [complete metadata: capture directory]
+
+## CAP-493-7c3LyF — 2026-09-26T14:38:32Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-493-7c3LyF/output.log`.
+
+capture=CAP-493-7c3LyF command=/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh  key=  -- 3/3 passed exit=0 output=b150ad3c2adee17324471b5021f9d78f292fabb354dcc1009742d11f71d50699 input=1fba08ed13e83cbca56ef731047f39c3668dfa47c4ff81873de63ee2eea3b0b0 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-493-7c3LyF/output.log [complete metadata: capture directory]
+
+## CAP-494-gT0fb6 — 2026-09-26T14:40:58Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-494-gT0fb6/output.log`.
+
+capture=CAP-494-gT0fb6 command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline  key=1 warning(s), 0 errors exit=0 output=fcb0f63b53d7d585e469c7cd5959da3b7572375031c3579478505fef279aa551 input=1fba08ed13e83cbca56ef731047f39c3668dfa47c4ff81873de63ee2eea3b0b0 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-494-gT0fb6/output.log [complete metadata: capture directory]
+
+## CAP-495-AGVjvH — 2026-09-26T14:41:26Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-495-AGVjvH/output.log`.
+
+capture=CAP-495-AGVjvH command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-ac-coverage.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline --root /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline  key=bound — every AC is named by at least one test file exit=0 output=e9ed81df000a0ca9bf80e134935d7947c4802e4bb5c4ab297a2d885c10f9c51a input=1fba08ed13e83cbca56ef731047f39c3668dfa47c4ff81873de63ee2eea3b0b0 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-495-AGVjvH/output.log [complete metadata: capture directory]
+
+## CAP-496-8ufs5O — 2026-09-26T15:32:29Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-496-8ufs5O/output.log`.
+
+capture=CAP-496-8ufs5O command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-evidence.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline  key=current evidence: all completed task checks have valid current captures exit=0 output=f51ace9bef106b953ac6d88872b87eb2adb88fca352941474cc507e41edabd55 input=1fba08ed13e83cbca56ef731047f39c3668dfa47c4ff81873de63ee2eea3b0b0 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-496-8ufs5O/output.log [complete metadata: capture directory]
+
+## CAP-497-yxVt5d — 2026-09-26T15:50:43Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-497-yxVt5d/output.log`.
+
+capture=CAP-497-yxVt5d command=/bin/bash -o pipefail -c bash tests/run.sh  key=  -- 3/3 passed exit=0 output=b150ad3c2adee17324471b5021f9d78f292fabb354dcc1009742d11f71d50699 input=1fba08ed13e83cbca56ef731047f39c3668dfa47c4ff81873de63ee2eea3b0b0 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-497-yxVt5d/output.log [complete metadata: capture directory]
+
+## CAP-498-0gFJQ4 — 2026-09-26T15:51:41Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-498-0gFJQ4/output.log`.
+
+capture=CAP-498-0gFJQ4 command=/bin/bash -o pipefail -c bash tests/shellcheck.sh  key=(no output) exit=0 output=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 input=1fba08ed13e83cbca56ef731047f39c3668dfa47c4ff81873de63ee2eea3b0b0 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-498-0gFJQ4/output.log [complete metadata: capture directory]
+
+## GATE-FLOOR
+
+Result: FLOOR-QeBcq3; source: 1fba08ed13e83cbca56ef731047f39c3668dfa47c4ff81873de63ee2eea3b0b0; exit: 0; command records: `notes/verification/floors/FLOOR-QeBcq3/commands.nul`.
+
+## CAP-499-rKuH6Z — 2026-09-27T09:19:02Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-499-rKuH6Z/output.log`.
+
+capture=CAP-499-rKuH6Z command=/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh  key=  -- 3/3 passed exit=0 output=b150ad3c2adee17324471b5021f9d78f292fabb354dcc1009742d11f71d50699 input=bb996df97887231e1fd50ebce39b2d3b7f918e3896917ea0031a59b227198254 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-499-rKuH6Z/output.log [complete metadata: capture directory]
+
+## CAP-500-otqNQb — 2026-09-27T09:31:33Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-500-otqNQb/output.log`.
+
+capture=CAP-500-otqNQb command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=e2bd5dfbf6ddcf901317732547649b3e2028c869384acc1e688d65a77c738b33 input=bb996df97887231e1fd50ebce39b2d3b7f918e3896917ea0031a59b227198254 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-500-otqNQb/output.log [complete metadata: capture directory]
+
+## CAP-501-AyJ8Lv — 2026-09-27T09:32:24Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-501-AyJ8Lv/output.log`.
+
+capture=CAP-501-AyJ8Lv command=/bin/bash -o pipefail -c bash tests/test-sdd-analyze.sh  key=  -- 19/19 passed exit=0 output=f9166fdc124954abb48f7c8ed789d96a1ce68c06a9da6df0d9d49a79a07aca5a input=bb996df97887231e1fd50ebce39b2d3b7f918e3896917ea0031a59b227198254 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-501-AyJ8Lv/output.log [complete metadata: capture directory]
+
+## CAP-502-mm0TNS — 2026-09-27T09:36:12Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-502-mm0TNS/output.log`.
+
+capture=CAP-502-mm0TNS command=/bin/bash -o pipefail -c bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=b0307d5f3643923c85b2aa7d758ae3f0bf12a603f48312482e8cbeddb222d636 input=bb996df97887231e1fd50ebce39b2d3b7f918e3896917ea0031a59b227198254 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-502-mm0TNS/output.log [complete metadata: capture directory]
+
+## CAP-503-K86LoY — 2026-09-27T09:37:13Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-503-K86LoY/output.log`.
+
+capture=CAP-503-K86LoY command=/bin/bash -o pipefail -c bash tests/test-golden-example.sh  key=  -- 5/5 passed exit=0 output=dc54db17fc456b716d3c4bacdc0e09fda5c2df8fd46442fa54ea9b855e779182 input=bb996df97887231e1fd50ebce39b2d3b7f918e3896917ea0031a59b227198254 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-503-K86LoY/output.log [complete metadata: capture directory]
+
+## CAP-504-P6l4HF — 2026-09-27T09:47:02Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-504-P6l4HF/output.log`.
+
+capture=CAP-504-P6l4HF command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-build-adapters.sh  key=  -- 10/10 passed exit=0 output=30e3c37ef9cd95137d04ac561e5cffcfcd29854d9a0c3902906b94c2d462b9f8 input=bb996df97887231e1fd50ebce39b2d3b7f918e3896917ea0031a59b227198254 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-504-P6l4HF/output.log [complete metadata: capture directory]
+
+## CAP-505-k8wYCn — 2026-09-27T09:51:52Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-505-k8wYCn/output.log`.
+
+capture=CAP-505-k8wYCn command=/bin/bash -o pipefail -c bash tests/test-spec-run.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=6afa5129adcacc389d7dd247ba059bc93f6abec84371466d3b7f5f19daa2bbd2 input=bb996df97887231e1fd50ebce39b2d3b7f918e3896917ea0031a59b227198254 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-505-k8wYCn/output.log [complete metadata: capture directory]
+
+## CAP-506-Y5n7nv — 2026-09-27T10:03:33Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-506-Y5n7nv/output.log`.
+
+capture=CAP-506-Y5n7nv command=/bin/bash -o pipefail -c bash tests/test-spec-task.sh && bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=92e0f6ae9eb40c2f7ffccbed611018798c37aebeb5ad3d5c438bbe7232566791 input=bb996df97887231e1fd50ebce39b2d3b7f918e3896917ea0031a59b227198254 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-506-Y5n7nv/output.log [complete metadata: capture directory]
+
+## CAP-507-WbUixO — 2026-09-27T10:10:49Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-507-WbUixO/output.log`.
+
+capture=CAP-507-WbUixO command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh  key=  -- 8/8 passed exit=0 output=ce84a8f1d4f2042d5862aaccf523b5c2cad467528205d0937715b65aca1aed5f input=bb996df97887231e1fd50ebce39b2d3b7f918e3896917ea0031a59b227198254 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-507-WbUixO/output.log [complete metadata: capture directory]
+
+## CAP-508-WF9N9Z — 2026-09-27T10:21:13Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-508-WF9N9Z/output.log`.
+
+capture=CAP-508-WF9N9Z command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=eaed840fc7e1da90d7fbc574f13167212b5c09e43b1adc486bd8fb879c84e61f input=bb996df97887231e1fd50ebce39b2d3b7f918e3896917ea0031a59b227198254 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-508-WF9N9Z/output.log [complete metadata: capture directory]
+
+## CAP-509-ZpdE2V — 2026-09-27T10:31:24Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-509-ZpdE2V/output.log`.
+
+capture=CAP-509-ZpdE2V command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh  key=  -- 8/8 passed exit=0 output=54b9f0a22b923c2d0091384a9699e48ecf699315a1a65541bb4fc4c4ea1f18cb input=bb996df97887231e1fd50ebce39b2d3b7f918e3896917ea0031a59b227198254 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-509-ZpdE2V/output.log [complete metadata: capture directory]
+
+## CAP-510-7c1tjJ — 2026-09-27T10:41:19Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-510-7c1tjJ/output.log`.
+
+capture=CAP-510-7c1tjJ command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=3c87a1f9bf70014c150ad6a98d52d0712b28b5673ae59e8b28a1f03a9dc92ff5 input=bb996df97887231e1fd50ebce39b2d3b7f918e3896917ea0031a59b227198254 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-510-7c1tjJ/output.log [complete metadata: capture directory]
+
+## CAP-511-m9WYF4 — 2026-09-27T10:59:47Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-511-m9WYF4/output.log`.
+
+capture=CAP-511-m9WYF4 command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-verification.sh && bash tests/test-sdd-analyze.sh  key=  -- 19/19 passed exit=0 output=41657457f44cc1f57e09e2ad86e8a53a74aad41f03dc1ca71aa130ae7943ebc5 input=bb996df97887231e1fd50ebce39b2d3b7f918e3896917ea0031a59b227198254 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-511-m9WYF4/output.log [complete metadata: capture directory]
+
+## CAP-512-kW3bJC — 2026-09-27T11:14:32Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-512-kW3bJC/output.log`.
+
+capture=CAP-512-kW3bJC command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-spec-gate.sh  key=  -- 8/8 passed exit=0 output=3b10b8d711d8f1e2776ce8d3c566044bc2bab6db387d1a97bbeadfae9e27a756 input=bb996df97887231e1fd50ebce39b2d3b7f918e3896917ea0031a59b227198254 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-512-kW3bJC/output.log [complete metadata: capture directory]
+
+## CAP-513-1hWiav — 2026-09-27T11:28:37Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-513-1hWiav/output.log`.
+
+capture=CAP-513-1hWiav command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-sdd-analyze.sh  key=  -- 19/19 passed exit=0 output=2f8d38f0a97fadd4499b71f914d1807d157d1b700cb97d4e4ebf99c03c9d022a input=bb996df97887231e1fd50ebce39b2d3b7f918e3896917ea0031a59b227198254 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-513-1hWiav/output.log [complete metadata: capture directory]
+
+## CAP-514-VK33G5 — 2026-09-27T11:45:32Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-514-VK33G5/output.log`.
+
+capture=CAP-514-VK33G5 command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=574f03c0c565372d75397dd9b169d43c48a9e10df69ca03bb1000b795be3d478 input=bb996df97887231e1fd50ebce39b2d3b7f918e3896917ea0031a59b227198254 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-514-VK33G5/output.log [complete metadata: capture directory]
+
+## CAP-515-pTDCXD — 2026-09-27T12:01:07Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-515-pTDCXD/output.log`.
+
+capture=CAP-515-pTDCXD command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=67612af507b659daf52b99440e4b75b0d53668dcbdd360085dd60783ad1d4917 input=bb996df97887231e1fd50ebce39b2d3b7f918e3896917ea0031a59b227198254 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-515-pTDCXD/output.log [complete metadata: capture directory]
+
+## CAP-516-qGWRLf — 2026-09-27T12:04:35Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-516-qGWRLf/output.log`.
+
+capture=CAP-516-qGWRLf command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline  key=1 warning(s), 0 errors exit=0 output=eb4ec0fdb6901c05d637b767e57f46617b6ba89e36e9d192f961a354c577b7c1 input=bb996df97887231e1fd50ebce39b2d3b7f918e3896917ea0031a59b227198254 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-516-qGWRLf/output.log [complete metadata: capture directory]
+
+## CAP-517-KyJw11 — 2026-09-27T12:05:03Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-517-KyJw11/output.log`.
+
+capture=CAP-517-KyJw11 command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-ac-coverage.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline --root /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline  key=bound — every AC is named by at least one test file exit=0 output=e9ed81df000a0ca9bf80e134935d7947c4802e4bb5c4ab297a2d885c10f9c51a input=bb996df97887231e1fd50ebce39b2d3b7f918e3896917ea0031a59b227198254 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-517-KyJw11/output.log [complete metadata: capture directory]
+
+## CAP-518-JblfIx — 2026-09-27T12:57:51Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-518-JblfIx/output.log`.
+
+capture=CAP-518-JblfIx command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-evidence.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline  key=current evidence: all completed task checks have valid current captures exit=0 output=534eccfcb216587daab117ab985850824f2a935c94cac610686b871e7076b1ab input=bb996df97887231e1fd50ebce39b2d3b7f918e3896917ea0031a59b227198254 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-518-JblfIx/output.log [complete metadata: capture directory]
+
+## CAP-519-0tfKrB — 2026-09-27T13:16:16Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-519-0tfKrB/output.log`.
+
+capture=CAP-519-0tfKrB command=/bin/bash -o pipefail -c bash tests/run.sh  key=  -- 3/3 passed exit=0 output=b150ad3c2adee17324471b5021f9d78f292fabb354dcc1009742d11f71d50699 input=bb996df97887231e1fd50ebce39b2d3b7f918e3896917ea0031a59b227198254 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-519-0tfKrB/output.log [complete metadata: capture directory]
+
+## CAP-520-4E4Dft — 2026-09-27T13:17:15Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-520-4E4Dft/output.log`.
+
+capture=CAP-520-4E4Dft command=/bin/bash -o pipefail -c bash tests/shellcheck.sh  key=(no output) exit=0 output=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 input=bb996df97887231e1fd50ebce39b2d3b7f918e3896917ea0031a59b227198254 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-520-4E4Dft/output.log [complete metadata: capture directory]
+
+## GATE-FLOOR
+
+Result: FLOOR-0334B2; source: bb996df97887231e1fd50ebce39b2d3b7f918e3896917ea0031a59b227198254; exit: 0; command records: `notes/verification/floors/FLOOR-0334B2/commands.nul`.
+
+## CAP-521-Q8OdIp — 2026-09-30T14:21:47Z
+
+Captured run, exit 1. Full log: `notes/captures/CAP-521-Q8OdIp/output.log`.
+
+capture=CAP-521-Q8OdIp command=/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh  key=  -- 3/3 passed exit=1 output=98fb96bcfdc1802055cd308de9e762465b67951da2d5b27e65428501d94fe60c input=ecbca9d295a38c14e001b11fcaefcd1849ed6e8b65fb5824722a4ab565a43d0d log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-521-Q8OdIp/output.log [complete metadata: capture directory]
+
+## CAP-522-PgNdFn — 2026-09-30T16:21:49Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-522-PgNdFn/output.log`.
+
+capture=CAP-522-PgNdFn command=/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh  key=  -- 3/3 passed exit=0 output=b150ad3c2adee17324471b5021f9d78f292fabb354dcc1009742d11f71d50699 input=24828d54ee3b743533467e880ce81eb33deec5f1429dea750f4380a899bba145 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-522-PgNdFn/output.log [complete metadata: capture directory]
+
+## CAP-523-v32rBY — 2026-09-30T18:56:40Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-523-v32rBY/output.log`.
+
+capture=CAP-523-v32rBY command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=e2bd5dfbf6ddcf901317732547649b3e2028c869384acc1e688d65a77c738b33 input=24828d54ee3b743533467e880ce81eb33deec5f1429dea750f4380a899bba145 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-523-v32rBY/output.log [complete metadata: capture directory]
+
+## CAP-524-Smp2QS — 2026-09-30T18:57:31Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-524-Smp2QS/output.log`.
+
+capture=CAP-524-Smp2QS command=/bin/bash -o pipefail -c bash tests/test-sdd-analyze.sh  key=  -- 19/19 passed exit=0 output=f9166fdc124954abb48f7c8ed789d96a1ce68c06a9da6df0d9d49a79a07aca5a input=24828d54ee3b743533467e880ce81eb33deec5f1429dea750f4380a899bba145 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-524-Smp2QS/output.log [complete metadata: capture directory]
+
+## CAP-525-56Ag6E — 2026-09-30T19:02:18Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-525-56Ag6E/output.log`.
+
+capture=CAP-525-56Ag6E command=/bin/bash -o pipefail -c bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=b0307d5f3643923c85b2aa7d758ae3f0bf12a603f48312482e8cbeddb222d636 input=24828d54ee3b743533467e880ce81eb33deec5f1429dea750f4380a899bba145 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-525-56Ag6E/output.log [complete metadata: capture directory]
+
+## CAP-526-BaVnIp — 2026-09-30T19:03:09Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-526-BaVnIp/output.log`.
+
+capture=CAP-526-BaVnIp command=/bin/bash -o pipefail -c bash tests/test-golden-example.sh  key=  -- 5/5 passed exit=0 output=dc54db17fc456b716d3c4bacdc0e09fda5c2df8fd46442fa54ea9b855e779182 input=24828d54ee3b743533467e880ce81eb33deec5f1429dea750f4380a899bba145 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-526-BaVnIp/output.log [complete metadata: capture directory]
+
+## CAP-527-pbaN4U — 2026-09-30T19:11:47Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-527-pbaN4U/output.log`.
+
+capture=CAP-527-pbaN4U command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-build-adapters.sh  key=  -- 10/10 passed exit=0 output=30e3c37ef9cd95137d04ac561e5cffcfcd29854d9a0c3902906b94c2d462b9f8 input=24828d54ee3b743533467e880ce81eb33deec5f1429dea750f4380a899bba145 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-527-pbaN4U/output.log [complete metadata: capture directory]
+
+## CAP-528-LymZMl — 2026-09-30T19:16:08Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-528-LymZMl/output.log`.
+
+capture=CAP-528-LymZMl command=/bin/bash -o pipefail -c bash tests/test-spec-run.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=6afa5129adcacc389d7dd247ba059bc93f6abec84371466d3b7f5f19daa2bbd2 input=24828d54ee3b743533467e880ce81eb33deec5f1429dea750f4380a899bba145 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-528-LymZMl/output.log [complete metadata: capture directory]
+
+## CAP-529-Iu20SA — 2026-09-30T19:28:12Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-529-Iu20SA/output.log`.
+
+capture=CAP-529-Iu20SA command=/bin/bash -o pipefail -c bash tests/test-spec-task.sh && bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=92e0f6ae9eb40c2f7ffccbed611018798c37aebeb5ad3d5c438bbe7232566791 input=24828d54ee3b743533467e880ce81eb33deec5f1429dea750f4380a899bba145 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-529-Iu20SA/output.log [complete metadata: capture directory]
+
+## CAP-530-KRUfRP — 2026-09-30T19:36:09Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-530-KRUfRP/output.log`.
+
+capture=CAP-530-KRUfRP command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh  key=  -- 8/8 passed exit=0 output=ce84a8f1d4f2042d5862aaccf523b5c2cad467528205d0937715b65aca1aed5f input=24828d54ee3b743533467e880ce81eb33deec5f1429dea750f4380a899bba145 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-530-KRUfRP/output.log [complete metadata: capture directory]
+
+## CAP-531-uNuSM0 — 2026-09-30T19:47:18Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-531-uNuSM0/output.log`.
+
+capture=CAP-531-uNuSM0 command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=eaed840fc7e1da90d7fbc574f13167212b5c09e43b1adc486bd8fb879c84e61f input=24828d54ee3b743533467e880ce81eb33deec5f1429dea750f4380a899bba145 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-531-uNuSM0/output.log [complete metadata: capture directory]
+
+## CAP-532-kE8LH3 — 2026-09-30T19:58:19Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-532-kE8LH3/output.log`.
+
+capture=CAP-532-kE8LH3 command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh  key=  -- 8/8 passed exit=0 output=54b9f0a22b923c2d0091384a9699e48ecf699315a1a65541bb4fc4c4ea1f18cb input=24828d54ee3b743533467e880ce81eb33deec5f1429dea750f4380a899bba145 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-532-kE8LH3/output.log [complete metadata: capture directory]
+
+## CAP-533-Pyq03S — 2026-09-30T20:08:25Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-533-Pyq03S/output.log`.
+
+capture=CAP-533-Pyq03S command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=3c87a1f9bf70014c150ad6a98d52d0712b28b5673ae59e8b28a1f03a9dc92ff5 input=24828d54ee3b743533467e880ce81eb33deec5f1429dea750f4380a899bba145 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-533-Pyq03S/output.log [complete metadata: capture directory]
+
+## CAP-534-2gAFRH — 2026-09-30T20:27:37Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-534-2gAFRH/output.log`.
+
+capture=CAP-534-2gAFRH command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-verification.sh && bash tests/test-sdd-analyze.sh  key=  -- 19/19 passed exit=0 output=41657457f44cc1f57e09e2ad86e8a53a74aad41f03dc1ca71aa130ae7943ebc5 input=24828d54ee3b743533467e880ce81eb33deec5f1429dea750f4380a899bba145 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-534-2gAFRH/output.log [complete metadata: capture directory]
+
+## CAP-535-unKJME — 2026-09-30T20:44:38Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-535-unKJME/output.log`.
+
+capture=CAP-535-unKJME command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-spec-gate.sh  key=  -- 8/8 passed exit=0 output=3b10b8d711d8f1e2776ce8d3c566044bc2bab6db387d1a97bbeadfae9e27a756 input=24828d54ee3b743533467e880ce81eb33deec5f1429dea750f4380a899bba145 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-535-unKJME/output.log [complete metadata: capture directory]
+
+## CAP-536-u2c0x4 — 2026-09-30T21:00:38Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-536-u2c0x4/output.log`.
+
+capture=CAP-536-u2c0x4 command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-sdd-analyze.sh  key=  -- 19/19 passed exit=0 output=2f8d38f0a97fadd4499b71f914d1807d157d1b700cb97d4e4ebf99c03c9d022a input=24828d54ee3b743533467e880ce81eb33deec5f1429dea750f4380a899bba145 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-536-u2c0x4/output.log [complete metadata: capture directory]
+
+## CAP-537-5krCrA — 2026-09-30T21:20:38Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-537-5krCrA/output.log`.
+
+capture=CAP-537-5krCrA command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=574f03c0c565372d75397dd9b169d43c48a9e10df69ca03bb1000b795be3d478 input=24828d54ee3b743533467e880ce81eb33deec5f1429dea750f4380a899bba145 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-537-5krCrA/output.log [complete metadata: capture directory]
+
+## CAP-538-8u59wu — 2026-09-30T21:37:24Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-538-8u59wu/output.log`.
+
+capture=CAP-538-8u59wu command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=67612af507b659daf52b99440e4b75b0d53668dcbdd360085dd60783ad1d4917 input=24828d54ee3b743533467e880ce81eb33deec5f1429dea750f4380a899bba145 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-538-8u59wu/output.log [complete metadata: capture directory]
+
+## CAP-539-X0ZY7P — 2026-09-30T21:41:53Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-539-X0ZY7P/output.log`.
+
+capture=CAP-539-X0ZY7P command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline  key=1 warning(s), 0 errors exit=0 output=1e0bcb140b1a47fbc0d9566a0b1fc394e1f944e6ac75dd010f99f61830a03852 input=24828d54ee3b743533467e880ce81eb33deec5f1429dea750f4380a899bba145 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-539-X0ZY7P/output.log [complete metadata: capture directory]
+
+## CAP-540-49cOWB — 2026-09-30T21:42:50Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-540-49cOWB/output.log`.
+
+capture=CAP-540-49cOWB command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-ac-coverage.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline --root /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline  key=bound — every AC is named by at least one test file exit=0 output=807bdf60fb995c624eaa5c28b6aa90d568163903f7714d827aff202d9be6f0c2 input=24828d54ee3b743533467e880ce81eb33deec5f1429dea750f4380a899bba145 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-540-49cOWB/output.log [complete metadata: capture directory]
+
+## CAP-541-8jwv2o — 2026-09-30T22:38:26Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-541-8jwv2o/output.log`.
+
+capture=CAP-541-8jwv2o command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-evidence.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline  key=current evidence: all completed task checks have valid current captures exit=0 output=4e2976870f41d85612c57c646483cfb3ee87e9712b37100e40e7721872d4fc37 input=24828d54ee3b743533467e880ce81eb33deec5f1429dea750f4380a899bba145 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-541-8jwv2o/output.log [complete metadata: capture directory]
+
+## CAP-542-qZdSTI — 2026-09-30T22:59:35Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-542-qZdSTI/output.log`.
+
+capture=CAP-542-qZdSTI command=/bin/bash -o pipefail -c bash tests/run.sh  key=  -- 3/3 passed exit=0 output=b150ad3c2adee17324471b5021f9d78f292fabb354dcc1009742d11f71d50699 input=24828d54ee3b743533467e880ce81eb33deec5f1429dea750f4380a899bba145 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-542-qZdSTI/output.log [complete metadata: capture directory]
+
+## CAP-543-cVvDyf — 2026-09-30T23:00:34Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-543-cVvDyf/output.log`.
+
+capture=CAP-543-cVvDyf command=/bin/bash -o pipefail -c bash tests/shellcheck.sh  key=(no output) exit=0 output=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 input=24828d54ee3b743533467e880ce81eb33deec5f1429dea750f4380a899bba145 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-543-cVvDyf/output.log [complete metadata: capture directory]
+
+## GATE-FLOOR
+
+Result: FLOOR-w6mznu; source: 24828d54ee3b743533467e880ce81eb33deec5f1429dea750f4380a899bba145; exit: 0; command records: `notes/verification/floors/FLOOR-w6mznu/commands.nul`.
+
+## CAP-544-cjPQ2j — 2026-10-02T09:43:28Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-544-cjPQ2j/output.log`.
+
+capture=CAP-544-cjPQ2j command=/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh  key=  -- 3/3 passed exit=0 output=b150ad3c2adee17324471b5021f9d78f292fabb354dcc1009742d11f71d50699 input=75a92e76ef6817868f99e8ca6f477de33f2d97d3d839488de1e9a6acf8701415 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-544-cjPQ2j/output.log [complete metadata: capture directory]
+
+## CAP-545-PWORoK — 2026-10-02T09:52:44Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-545-PWORoK/output.log`.
+
+capture=CAP-545-PWORoK command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=e2bd5dfbf6ddcf901317732547649b3e2028c869384acc1e688d65a77c738b33 input=75a92e76ef6817868f99e8ca6f477de33f2d97d3d839488de1e9a6acf8701415 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-545-PWORoK/output.log [complete metadata: capture directory]
+
+## CAP-546-89ZEJu — 2026-10-02T09:53:38Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-546-89ZEJu/output.log`.
+
+capture=CAP-546-89ZEJu command=/bin/bash -o pipefail -c bash tests/test-sdd-analyze.sh  key=  -- 19/19 passed exit=0 output=f9166fdc124954abb48f7c8ed789d96a1ce68c06a9da6df0d9d49a79a07aca5a input=75a92e76ef6817868f99e8ca6f477de33f2d97d3d839488de1e9a6acf8701415 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-546-89ZEJu/output.log [complete metadata: capture directory]
+
+## CAP-547-187fdY — 2026-10-02T09:57:29Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-547-187fdY/output.log`.
+
+capture=CAP-547-187fdY command=/bin/bash -o pipefail -c bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=b0307d5f3643923c85b2aa7d758ae3f0bf12a603f48312482e8cbeddb222d636 input=75a92e76ef6817868f99e8ca6f477de33f2d97d3d839488de1e9a6acf8701415 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-547-187fdY/output.log [complete metadata: capture directory]
+
+## CAP-548-Is5HRQ — 2026-10-02T09:58:23Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-548-Is5HRQ/output.log`.
+
+capture=CAP-548-Is5HRQ command=/bin/bash -o pipefail -c bash tests/test-golden-example.sh  key=  -- 5/5 passed exit=0 output=dc54db17fc456b716d3c4bacdc0e09fda5c2df8fd46442fa54ea9b855e779182 input=75a92e76ef6817868f99e8ca6f477de33f2d97d3d839488de1e9a6acf8701415 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-548-Is5HRQ/output.log [complete metadata: capture directory]
+
+## CAP-549-Lhlfpz — 2026-10-02T10:07:13Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-549-Lhlfpz/output.log`.
+
+capture=CAP-549-Lhlfpz command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-build-adapters.sh  key=  -- 10/10 passed exit=0 output=30e3c37ef9cd95137d04ac561e5cffcfcd29854d9a0c3902906b94c2d462b9f8 input=75a92e76ef6817868f99e8ca6f477de33f2d97d3d839488de1e9a6acf8701415 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-549-Lhlfpz/output.log [complete metadata: capture directory]
+
+## CAP-550-dPMeNN — 2026-10-02T10:11:46Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-550-dPMeNN/output.log`.
+
+capture=CAP-550-dPMeNN command=/bin/bash -o pipefail -c bash tests/test-spec-run.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=6afa5129adcacc389d7dd247ba059bc93f6abec84371466d3b7f5f19daa2bbd2 input=75a92e76ef6817868f99e8ca6f477de33f2d97d3d839488de1e9a6acf8701415 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-550-dPMeNN/output.log [complete metadata: capture directory]
+
+## CAP-551-QDhupK — 2026-10-02T10:24:15Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-551-QDhupK/output.log`.
+
+capture=CAP-551-QDhupK command=/bin/bash -o pipefail -c bash tests/test-spec-task.sh && bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=92e0f6ae9eb40c2f7ffccbed611018798c37aebeb5ad3d5c438bbe7232566791 input=75a92e76ef6817868f99e8ca6f477de33f2d97d3d839488de1e9a6acf8701415 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-551-QDhupK/output.log [complete metadata: capture directory]
+
+## CAP-552-9dTv2K — 2026-10-02T10:33:23Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-552-9dTv2K/output.log`.
+
+capture=CAP-552-9dTv2K command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh  key=  -- 8/8 passed exit=0 output=ce84a8f1d4f2042d5862aaccf523b5c2cad467528205d0937715b65aca1aed5f input=75a92e76ef6817868f99e8ca6f477de33f2d97d3d839488de1e9a6acf8701415 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-552-9dTv2K/output.log [complete metadata: capture directory]
+
+## CAP-553-hwgL6o — 2026-10-02T10:47:47Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-553-hwgL6o/output.log`.
+
+capture=CAP-553-hwgL6o command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=eaed840fc7e1da90d7fbc574f13167212b5c09e43b1adc486bd8fb879c84e61f input=75a92e76ef6817868f99e8ca6f477de33f2d97d3d839488de1e9a6acf8701415 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-553-hwgL6o/output.log [complete metadata: capture directory]
+
+## CAP-554-HCoJmE — 2026-10-02T11:01:38Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-554-HCoJmE/output.log`.
+
+capture=CAP-554-HCoJmE command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh  key=  -- 8/8 passed exit=0 output=54b9f0a22b923c2d0091384a9699e48ecf699315a1a65541bb4fc4c4ea1f18cb input=75a92e76ef6817868f99e8ca6f477de33f2d97d3d839488de1e9a6acf8701415 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-554-HCoJmE/output.log [complete metadata: capture directory]
+
+## CAP-555-vDYTOM — 2026-10-02T11:16:18Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-555-vDYTOM/output.log`.
+
+capture=CAP-555-vDYTOM command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=3c87a1f9bf70014c150ad6a98d52d0712b28b5673ae59e8b28a1f03a9dc92ff5 input=75a92e76ef6817868f99e8ca6f477de33f2d97d3d839488de1e9a6acf8701415 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-555-vDYTOM/output.log [complete metadata: capture directory]
+
+## CAP-556-VYLWD0 — 2026-10-02T11:38:04Z
+
+Captured run, exit 1. Full log: `notes/captures/CAP-556-VYLWD0/output.log`.
+
+capture=CAP-556-VYLWD0 command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-verification.sh && bash tests/test-sdd-analyze.sh  key=  -- 16/18 passed exit=1 output=bdb9cefa8e0f6bc164c9422e460349db0c339c6cb903500fac21881412125aa7 input=75a92e76ef6817868f99e8ca6f477de33f2d97d3d839488de1e9a6acf8701415 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-556-VYLWD0/output.log [complete metadata: capture directory]
+
+## CAP-557-CTJ6Te — 2026-10-02T12:40:02Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-557-CTJ6Te/output.log`.
+
+capture=CAP-557-CTJ6Te command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-verification.sh && bash tests/test-sdd-analyze.sh  key=  -- 19/19 passed exit=0 output=41657457f44cc1f57e09e2ad86e8a53a74aad41f03dc1ca71aa130ae7943ebc5 input=75a92e76ef6817868f99e8ca6f477de33f2d97d3d839488de1e9a6acf8701415 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-557-CTJ6Te/output.log [complete metadata: capture directory]
+
+## CAP-558-fc8cVt — 2026-10-02T12:56:47Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-558-fc8cVt/output.log`.
+
+capture=CAP-558-fc8cVt command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-spec-gate.sh  key=  -- 8/8 passed exit=0 output=3b10b8d711d8f1e2776ce8d3c566044bc2bab6db387d1a97bbeadfae9e27a756 input=75a92e76ef6817868f99e8ca6f477de33f2d97d3d839488de1e9a6acf8701415 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-558-fc8cVt/output.log [complete metadata: capture directory]
+
+## CAP-559-K7dB4V — 2026-10-02T13:14:12Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-559-K7dB4V/output.log`.
+
+capture=CAP-559-K7dB4V command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-sdd-analyze.sh  key=  -- 19/19 passed exit=0 output=2f8d38f0a97fadd4499b71f914d1807d157d1b700cb97d4e4ebf99c03c9d022a input=75a92e76ef6817868f99e8ca6f477de33f2d97d3d839488de1e9a6acf8701415 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-559-K7dB4V/output.log [complete metadata: capture directory]
+
+## CAP-560-Ce7dla — 2026-10-02T13:33:04Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-560-Ce7dla/output.log`.
+
+capture=CAP-560-Ce7dla command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=574f03c0c565372d75397dd9b169d43c48a9e10df69ca03bb1000b795be3d478 input=75a92e76ef6817868f99e8ca6f477de33f2d97d3d839488de1e9a6acf8701415 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-560-Ce7dla/output.log [complete metadata: capture directory]
+
+## CAP-561-gNSpeI — 2026-10-02T13:51:16Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-561-gNSpeI/output.log`.
+
+capture=CAP-561-gNSpeI command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=67612af507b659daf52b99440e4b75b0d53668dcbdd360085dd60783ad1d4917 input=75a92e76ef6817868f99e8ca6f477de33f2d97d3d839488de1e9a6acf8701415 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-561-gNSpeI/output.log [complete metadata: capture directory]
+
+## CAP-562-BejVtM — 2026-10-02T13:54:55Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-562-BejVtM/output.log`.
+
+capture=CAP-562-BejVtM command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline  key=1 warning(s), 0 errors exit=0 output=f76880cdcf6cbc947777189debe2b198d56b2b6133cbd16c7a7a6371f1a1aa70 input=75a92e76ef6817868f99e8ca6f477de33f2d97d3d839488de1e9a6acf8701415 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-562-BejVtM/output.log [complete metadata: capture directory]
+
+## CAP-563-Y9zmmq — 2026-10-02T13:55:22Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-563-Y9zmmq/output.log`.
+
+capture=CAP-563-Y9zmmq command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-ac-coverage.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline --root /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline  key=bound — every AC is named by at least one test file exit=0 output=807bdf60fb995c624eaa5c28b6aa90d568163903f7714d827aff202d9be6f0c2 input=75a92e76ef6817868f99e8ca6f477de33f2d97d3d839488de1e9a6acf8701415 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-563-Y9zmmq/output.log [complete metadata: capture directory]
+
+## CAP-564-1sxGYN — 2026-10-02T14:53:36Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-564-1sxGYN/output.log`.
+
+capture=CAP-564-1sxGYN command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-evidence.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline  key=current evidence: all completed task checks have valid current captures exit=0 output=19551cd0f22cde099ac87c6ad285111c7813873d45828784da40c22fdc6bdd7c input=75a92e76ef6817868f99e8ca6f477de33f2d97d3d839488de1e9a6acf8701415 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-564-1sxGYN/output.log [complete metadata: capture directory]
+
+## CAP-565-sqtfzJ — 2026-10-02T15:13:35Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-565-sqtfzJ/output.log`.
+
+capture=CAP-565-sqtfzJ command=/bin/bash -o pipefail -c bash tests/run.sh  key=  -- 3/3 passed exit=0 output=b150ad3c2adee17324471b5021f9d78f292fabb354dcc1009742d11f71d50699 input=75a92e76ef6817868f99e8ca6f477de33f2d97d3d839488de1e9a6acf8701415 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-565-sqtfzJ/output.log [complete metadata: capture directory]
+
+## CAP-566-50boMt — 2026-10-02T15:14:33Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-566-50boMt/output.log`.
+
+capture=CAP-566-50boMt command=/bin/bash -o pipefail -c bash tests/shellcheck.sh  key=(no output) exit=0 output=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 input=75a92e76ef6817868f99e8ca6f477de33f2d97d3d839488de1e9a6acf8701415 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-566-50boMt/output.log [complete metadata: capture directory]
+
+## GATE-FLOOR
+
+Result: FLOOR-auyetN; source: 75a92e76ef6817868f99e8ca6f477de33f2d97d3d839488de1e9a6acf8701415; exit: 0; command records: `notes/verification/floors/FLOOR-auyetN/commands.nul`.
+
+## CAP-567-dtDT42 — 2026-10-07T11:09:27Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-567-dtDT42/output.log`.
+
+capture=CAP-567-dtDT42 command=/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh  key=  -- 3/3 passed exit=0 output=b150ad3c2adee17324471b5021f9d78f292fabb354dcc1009742d11f71d50699 input=c9f2b61691a4447d28f4baaf640c3f43ec993040fda9febaf8eba82134e5b21e log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-567-dtDT42/output.log [complete metadata: capture directory]
+
+## CAP-568-AavBQs — 2026-10-07T11:20:36Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-568-AavBQs/output.log`.
+
+capture=CAP-568-AavBQs command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=e2bd5dfbf6ddcf901317732547649b3e2028c869384acc1e688d65a77c738b33 input=c9f2b61691a4447d28f4baaf640c3f43ec993040fda9febaf8eba82134e5b21e log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-568-AavBQs/output.log [complete metadata: capture directory]
+
+## CAP-569-wVRq6p — 2026-10-07T11:21:30Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-569-wVRq6p/output.log`.
+
+capture=CAP-569-wVRq6p command=/bin/bash -o pipefail -c bash tests/test-sdd-analyze.sh  key=  -- 19/19 passed exit=0 output=f9166fdc124954abb48f7c8ed789d96a1ce68c06a9da6df0d9d49a79a07aca5a input=c9f2b61691a4447d28f4baaf640c3f43ec993040fda9febaf8eba82134e5b21e log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-569-wVRq6p/output.log [complete metadata: capture directory]
+
+## CAP-570-qIam30 — 2026-10-07T11:25:22Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-570-qIam30/output.log`.
+
+capture=CAP-570-qIam30 command=/bin/bash -o pipefail -c bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=b0307d5f3643923c85b2aa7d758ae3f0bf12a603f48312482e8cbeddb222d636 input=c9f2b61691a4447d28f4baaf640c3f43ec993040fda9febaf8eba82134e5b21e log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-570-qIam30/output.log [complete metadata: capture directory]
+
+## CAP-571-SLwGKR — 2026-10-07T11:26:16Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-571-SLwGKR/output.log`.
+
+capture=CAP-571-SLwGKR command=/bin/bash -o pipefail -c bash tests/test-golden-example.sh  key=  -- 5/5 passed exit=0 output=dc54db17fc456b716d3c4bacdc0e09fda5c2df8fd46442fa54ea9b855e779182 input=c9f2b61691a4447d28f4baaf640c3f43ec993040fda9febaf8eba82134e5b21e log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-571-SLwGKR/output.log [complete metadata: capture directory]
+
+## CAP-572-o6dC0r — 2026-10-07T11:34:56Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-572-o6dC0r/output.log`.
+
+capture=CAP-572-o6dC0r command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-build-adapters.sh  key=  -- 10/10 passed exit=0 output=30e3c37ef9cd95137d04ac561e5cffcfcd29854d9a0c3902906b94c2d462b9f8 input=c9f2b61691a4447d28f4baaf640c3f43ec993040fda9febaf8eba82134e5b21e log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-572-o6dC0r/output.log [complete metadata: capture directory]
+
+## CAP-573-AFcMWD — 2026-10-07T11:39:22Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-573-AFcMWD/output.log`.
+
+capture=CAP-573-AFcMWD command=/bin/bash -o pipefail -c bash tests/test-spec-run.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=6afa5129adcacc389d7dd247ba059bc93f6abec84371466d3b7f5f19daa2bbd2 input=c9f2b61691a4447d28f4baaf640c3f43ec993040fda9febaf8eba82134e5b21e log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-573-AFcMWD/output.log [complete metadata: capture directory]
+
+## CAP-574-ywSlGi — 2026-10-07T11:51:31Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-574-ywSlGi/output.log`.
+
+capture=CAP-574-ywSlGi command=/bin/bash -o pipefail -c bash tests/test-spec-task.sh && bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=92e0f6ae9eb40c2f7ffccbed611018798c37aebeb5ad3d5c438bbe7232566791 input=c9f2b61691a4447d28f4baaf640c3f43ec993040fda9febaf8eba82134e5b21e log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-574-ywSlGi/output.log [complete metadata: capture directory]
+
+## CAP-575-MPuO5q — 2026-10-07T12:00:10Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-575-MPuO5q/output.log`.
+
+capture=CAP-575-MPuO5q command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh  key=  -- 8/8 passed exit=0 output=ce84a8f1d4f2042d5862aaccf523b5c2cad467528205d0937715b65aca1aed5f input=c9f2b61691a4447d28f4baaf640c3f43ec993040fda9febaf8eba82134e5b21e log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-575-MPuO5q/output.log [complete metadata: capture directory]
+
+## CAP-576-s7BZel — 2026-10-07T12:12:20Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-576-s7BZel/output.log`.
+
+capture=CAP-576-s7BZel command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=eaed840fc7e1da90d7fbc574f13167212b5c09e43b1adc486bd8fb879c84e61f input=c9f2b61691a4447d28f4baaf640c3f43ec993040fda9febaf8eba82134e5b21e log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-576-s7BZel/output.log [complete metadata: capture directory]
+
+## CAP-577-DFcii6 — 2026-10-07T12:25:34Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-577-DFcii6/output.log`.
+
+capture=CAP-577-DFcii6 command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh  key=  -- 8/8 passed exit=0 output=54b9f0a22b923c2d0091384a9699e48ecf699315a1a65541bb4fc4c4ea1f18cb input=c9f2b61691a4447d28f4baaf640c3f43ec993040fda9febaf8eba82134e5b21e log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-577-DFcii6/output.log [complete metadata: capture directory]
+
+## CAP-578-dgCIBl — 2026-10-07T12:36:45Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-578-dgCIBl/output.log`.
+
+capture=CAP-578-dgCIBl command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=3c87a1f9bf70014c150ad6a98d52d0712b28b5673ae59e8b28a1f03a9dc92ff5 input=c9f2b61691a4447d28f4baaf640c3f43ec993040fda9febaf8eba82134e5b21e log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-578-dgCIBl/output.log [complete metadata: capture directory]
+
+## CAP-579-YbzDwa — 2026-10-07T12:58:50Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-579-YbzDwa/output.log`.
+
+capture=CAP-579-YbzDwa command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-verification.sh && bash tests/test-sdd-analyze.sh  key=  -- 19/19 passed exit=0 output=41657457f44cc1f57e09e2ad86e8a53a74aad41f03dc1ca71aa130ae7943ebc5 input=c9f2b61691a4447d28f4baaf640c3f43ec993040fda9febaf8eba82134e5b21e log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-579-YbzDwa/output.log [complete metadata: capture directory]
+
+## CAP-580-p4WRmg — 2026-10-07T13:15:57Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-580-p4WRmg/output.log`.
+
+capture=CAP-580-p4WRmg command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-spec-gate.sh  key=  -- 8/8 passed exit=0 output=3b10b8d711d8f1e2776ce8d3c566044bc2bab6db387d1a97bbeadfae9e27a756 input=c9f2b61691a4447d28f4baaf640c3f43ec993040fda9febaf8eba82134e5b21e log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-580-p4WRmg/output.log [complete metadata: capture directory]
+
+## CAP-581-vtCzeX — 2026-10-07T13:32:38Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-581-vtCzeX/output.log`.
+
+capture=CAP-581-vtCzeX command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-sdd-analyze.sh  key=  -- 19/19 passed exit=0 output=2f8d38f0a97fadd4499b71f914d1807d157d1b700cb97d4e4ebf99c03c9d022a input=c9f2b61691a4447d28f4baaf640c3f43ec993040fda9febaf8eba82134e5b21e log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-581-vtCzeX/output.log [complete metadata: capture directory]
+
+## CAP-582-I6cEdx — 2026-10-07T13:52:14Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-582-I6cEdx/output.log`.
+
+capture=CAP-582-I6cEdx command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=574f03c0c565372d75397dd9b169d43c48a9e10df69ca03bb1000b795be3d478 input=c9f2b61691a4447d28f4baaf640c3f43ec993040fda9febaf8eba82134e5b21e log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-582-I6cEdx/output.log [complete metadata: capture directory]
+
+## CAP-583-VTSoMK — 2026-10-07T14:10:04Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-583-VTSoMK/output.log`.
+
+capture=CAP-583-VTSoMK command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=67612af507b659daf52b99440e4b75b0d53668dcbdd360085dd60783ad1d4917 input=c9f2b61691a4447d28f4baaf640c3f43ec993040fda9febaf8eba82134e5b21e log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-583-VTSoMK/output.log [complete metadata: capture directory]
+
+## CAP-584-gMEQtD — 2026-10-07T14:14:22Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-584-gMEQtD/output.log`.
+
+capture=CAP-584-gMEQtD command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline  key=1 warning(s), 0 errors exit=0 output=33a6459c276add1f065ac306895fc5be327a4aa811237274ac91a96eb9aa81b9 input=c9f2b61691a4447d28f4baaf640c3f43ec993040fda9febaf8eba82134e5b21e log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-584-gMEQtD/output.log [complete metadata: capture directory]
+
+## CAP-585-aiPcVq — 2026-10-07T14:14:51Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-585-aiPcVq/output.log`.
+
+capture=CAP-585-aiPcVq command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-ac-coverage.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline --root /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline  key=bound — every AC is named by at least one test file exit=0 output=807bdf60fb995c624eaa5c28b6aa90d568163903f7714d827aff202d9be6f0c2 input=c9f2b61691a4447d28f4baaf640c3f43ec993040fda9febaf8eba82134e5b21e log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-585-aiPcVq/output.log [complete metadata: capture directory]
+
+## CAP-586-9Inejb — 2026-10-07T15:16:57Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-586-9Inejb/output.log`.
+
+capture=CAP-586-9Inejb command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-evidence.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline  key=current evidence: all completed task checks have valid current captures exit=0 output=aacfb40ee0da4cb3735d72172e0110d4d18b8942db9b591b83acc53ae99959b5 input=c9f2b61691a4447d28f4baaf640c3f43ec993040fda9febaf8eba82134e5b21e log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-586-9Inejb/output.log [complete metadata: capture directory]
+
+## CAP-587-D3wD8s — 2026-10-07T15:38:40Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-587-D3wD8s/output.log`.
+
+capture=CAP-587-D3wD8s command=/bin/bash -o pipefail -c bash tests/run.sh  key=  -- 3/3 passed exit=0 output=b150ad3c2adee17324471b5021f9d78f292fabb354dcc1009742d11f71d50699 input=c9f2b61691a4447d28f4baaf640c3f43ec993040fda9febaf8eba82134e5b21e log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-587-D3wD8s/output.log [complete metadata: capture directory]
+
+## CAP-588-NL1xek — 2026-10-07T15:39:41Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-588-NL1xek/output.log`.
+
+capture=CAP-588-NL1xek command=/bin/bash -o pipefail -c bash tests/shellcheck.sh  key=(no output) exit=0 output=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 input=c9f2b61691a4447d28f4baaf640c3f43ec993040fda9febaf8eba82134e5b21e log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-588-NL1xek/output.log [complete metadata: capture directory]
+
+## GATE-FLOOR
+
+Result: FLOOR-dCwGgb; source: c9f2b61691a4447d28f4baaf640c3f43ec993040fda9febaf8eba82134e5b21e; exit: 0; command records: `notes/verification/floors/FLOOR-dCwGgb/commands.nul`.
+
+## CAP-589-ZNd9Ug — 2026-10-07T23:17:48Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-589-ZNd9Ug/output.log`.
+
+capture=CAP-589-ZNd9Ug command=/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh  key=  -- 3/3 passed exit=0 output=b150ad3c2adee17324471b5021f9d78f292fabb354dcc1009742d11f71d50699 input=eee97354a5aa4069a44c3791db4b576486502299450a7d3a89739677ec949c12 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-589-ZNd9Ug/output.log [complete metadata: capture directory]
+
+## CAP-590-FYPJAB — 2026-10-08T06:26:20Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-590-FYPJAB/output.log`.
+
+capture=CAP-590-FYPJAB command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=e2bd5dfbf6ddcf901317732547649b3e2028c869384acc1e688d65a77c738b33 input=eee97354a5aa4069a44c3791db4b576486502299450a7d3a89739677ec949c12 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-590-FYPJAB/output.log [complete metadata: capture directory]
+
+## CAP-591-91Ov9h — 2026-10-08T06:27:13Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-591-91Ov9h/output.log`.
+
+capture=CAP-591-91Ov9h command=/bin/bash -o pipefail -c bash tests/test-sdd-analyze.sh  key=  -- 19/19 passed exit=0 output=f9166fdc124954abb48f7c8ed789d96a1ce68c06a9da6df0d9d49a79a07aca5a input=eee97354a5aa4069a44c3791db4b576486502299450a7d3a89739677ec949c12 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-591-91Ov9h/output.log [complete metadata: capture directory]
+
+## CAP-592-1SydCn — 2026-10-08T06:31:08Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-592-1SydCn/output.log`.
+
+capture=CAP-592-1SydCn command=/bin/bash -o pipefail -c bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=b0307d5f3643923c85b2aa7d758ae3f0bf12a603f48312482e8cbeddb222d636 input=eee97354a5aa4069a44c3791db4b576486502299450a7d3a89739677ec949c12 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-592-1SydCn/output.log [complete metadata: capture directory]
+
+## CAP-593-sC33sm — 2026-10-08T06:32:05Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-593-sC33sm/output.log`.
+
+capture=CAP-593-sC33sm command=/bin/bash -o pipefail -c bash tests/test-golden-example.sh  key=  -- 5/5 passed exit=0 output=dc54db17fc456b716d3c4bacdc0e09fda5c2df8fd46442fa54ea9b855e779182 input=eee97354a5aa4069a44c3791db4b576486502299450a7d3a89739677ec949c12 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-593-sC33sm/output.log [complete metadata: capture directory]
+
+## CAP-594-LFTujm — 2026-10-08T06:41:16Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-594-LFTujm/output.log`.
+
+capture=CAP-594-LFTujm command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-build-adapters.sh  key=  -- 10/10 passed exit=0 output=30e3c37ef9cd95137d04ac561e5cffcfcd29854d9a0c3902906b94c2d462b9f8 input=eee97354a5aa4069a44c3791db4b576486502299450a7d3a89739677ec949c12 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-594-LFTujm/output.log [complete metadata: capture directory]
+
+## CAP-595-004tfb — 2026-10-08T06:45:53Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-595-004tfb/output.log`.
+
+capture=CAP-595-004tfb command=/bin/bash -o pipefail -c bash tests/test-spec-run.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=6afa5129adcacc389d7dd247ba059bc93f6abec84371466d3b7f5f19daa2bbd2 input=eee97354a5aa4069a44c3791db4b576486502299450a7d3a89739677ec949c12 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-595-004tfb/output.log [complete metadata: capture directory]
+
+## CAP-596-MzYRJ8 — 2026-10-08T06:58:16Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-596-MzYRJ8/output.log`.
+
+capture=CAP-596-MzYRJ8 command=/bin/bash -o pipefail -c bash tests/test-spec-task.sh && bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=92e0f6ae9eb40c2f7ffccbed611018798c37aebeb5ad3d5c438bbe7232566791 input=eee97354a5aa4069a44c3791db4b576486502299450a7d3a89739677ec949c12 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-596-MzYRJ8/output.log [complete metadata: capture directory]
+
+## CAP-597-pivV1A — 2026-10-08T07:07:21Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-597-pivV1A/output.log`.
+
+capture=CAP-597-pivV1A command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh  key=  -- 8/8 passed exit=0 output=ce84a8f1d4f2042d5862aaccf523b5c2cad467528205d0937715b65aca1aed5f input=eee97354a5aa4069a44c3791db4b576486502299450a7d3a89739677ec949c12 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-597-pivV1A/output.log [complete metadata: capture directory]
+
+## CAP-598-zl7T4q — 2026-10-08T07:19:30Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-598-zl7T4q/output.log`.
+
+capture=CAP-598-zl7T4q command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=eaed840fc7e1da90d7fbc574f13167212b5c09e43b1adc486bd8fb879c84e61f input=eee97354a5aa4069a44c3791db4b576486502299450a7d3a89739677ec949c12 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-598-zl7T4q/output.log [complete metadata: capture directory]
+
+## CAP-599-W0NrMi — 2026-10-08T07:30:52Z
+
+Captured run, exit 1. Full log: `notes/captures/CAP-599-W0NrMi/output.log`.
+
+capture=CAP-599-W0NrMi command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh  key=  -- 7/8 passed exit=1 output=b3f96ff60363f524e6ca310f3c080a7de5e39e5a8d3c17252a63b99713833da9 input=eee97354a5aa4069a44c3791db4b576486502299450a7d3a89739677ec949c12 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-599-W0NrMi/output.log [complete metadata: capture directory]
+
+## CAP-600-20hZsK — 2026-10-08T07:59:23Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-600-20hZsK/output.log`.
+
+capture=CAP-600-20hZsK command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh  key=  -- 8/8 passed exit=0 output=54b9f0a22b923c2d0091384a9699e48ecf699315a1a65541bb4fc4c4ea1f18cb input=eee97354a5aa4069a44c3791db4b576486502299450a7d3a89739677ec949c12 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-600-20hZsK/output.log [complete metadata: capture directory]
+
+## CAP-601-4b0mcb — 2026-10-08T08:09:44Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-601-4b0mcb/output.log`.
+
+capture=CAP-601-4b0mcb command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=3c87a1f9bf70014c150ad6a98d52d0712b28b5673ae59e8b28a1f03a9dc92ff5 input=eee97354a5aa4069a44c3791db4b576486502299450a7d3a89739677ec949c12 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-601-4b0mcb/output.log [complete metadata: capture directory]
+
+## CAP-602-XoC2Eh — 2026-10-08T08:30:05Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-602-XoC2Eh/output.log`.
+
+capture=CAP-602-XoC2Eh command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-verification.sh && bash tests/test-sdd-analyze.sh  key=  -- 19/19 passed exit=0 output=41657457f44cc1f57e09e2ad86e8a53a74aad41f03dc1ca71aa130ae7943ebc5 input=eee97354a5aa4069a44c3791db4b576486502299450a7d3a89739677ec949c12 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-602-XoC2Eh/output.log [complete metadata: capture directory]
+
+## CAP-603-gVYKFs — 2026-10-08T08:46:16Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-603-gVYKFs/output.log`.
+
+capture=CAP-603-gVYKFs command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-spec-gate.sh  key=  -- 8/8 passed exit=0 output=3b10b8d711d8f1e2776ce8d3c566044bc2bab6db387d1a97bbeadfae9e27a756 input=eee97354a5aa4069a44c3791db4b576486502299450a7d3a89739677ec949c12 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-603-gVYKFs/output.log [complete metadata: capture directory]
+
+## CAP-604-AhpR2K — 2026-10-08T09:01:56Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-604-AhpR2K/output.log`.
+
+capture=CAP-604-AhpR2K command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-sdd-analyze.sh  key=  -- 19/19 passed exit=0 output=2f8d38f0a97fadd4499b71f914d1807d157d1b700cb97d4e4ebf99c03c9d022a input=eee97354a5aa4069a44c3791db4b576486502299450a7d3a89739677ec949c12 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-604-AhpR2K/output.log [complete metadata: capture directory]
+
+## CAP-605-4P3b92 — 2026-10-08T09:20:46Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-605-4P3b92/output.log`.
+
+capture=CAP-605-4P3b92 command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=574f03c0c565372d75397dd9b169d43c48a9e10df69ca03bb1000b795be3d478 input=eee97354a5aa4069a44c3791db4b576486502299450a7d3a89739677ec949c12 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-605-4P3b92/output.log [complete metadata: capture directory]
+
+## CAP-606-DNRQnm — 2026-10-08T09:38:02Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-606-DNRQnm/output.log`.
+
+capture=CAP-606-DNRQnm command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=67612af507b659daf52b99440e4b75b0d53668dcbdd360085dd60783ad1d4917 input=eee97354a5aa4069a44c3791db4b576486502299450a7d3a89739677ec949c12 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-606-DNRQnm/output.log [complete metadata: capture directory]
+
+## CAP-607-Hou8r8 — 2026-10-08T09:42:20Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-607-Hou8r8/output.log`.
+
+capture=CAP-607-Hou8r8 command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline  key=1 warning(s), 0 errors exit=0 output=411ec9c9bda7b89f2b13814bca7fbf24a101db004ee0d9b62478eae3338dd994 input=eee97354a5aa4069a44c3791db4b576486502299450a7d3a89739677ec949c12 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-607-Hou8r8/output.log [complete metadata: capture directory]
+
+## CAP-608-Zd3cHQ — 2026-10-08T09:42:47Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-608-Zd3cHQ/output.log`.
+
+capture=CAP-608-Zd3cHQ command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-ac-coverage.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline --root /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline  key=bound — every AC is named by at least one test file exit=0 output=807bdf60fb995c624eaa5c28b6aa90d568163903f7714d827aff202d9be6f0c2 input=eee97354a5aa4069a44c3791db4b576486502299450a7d3a89739677ec949c12 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-608-Zd3cHQ/output.log [complete metadata: capture directory]
+
+## CAP-609-0YB2Cg — 2026-10-08T10:46:09Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-609-0YB2Cg/output.log`.
+
+capture=CAP-609-0YB2Cg command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-evidence.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline  key=current evidence: all completed task checks have valid current captures exit=0 output=879946d4a574de199211967fe84eeb822d3ab6a6720d4878048a67c164609fb1 input=eee97354a5aa4069a44c3791db4b576486502299450a7d3a89739677ec949c12 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-609-0YB2Cg/output.log [complete metadata: capture directory]
+
+## CAP-610-k6Ljzp — 2026-10-08T11:06:30Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-610-k6Ljzp/output.log`.
+
+capture=CAP-610-k6Ljzp command=/bin/bash -o pipefail -c bash tests/run.sh  key=  -- 3/3 passed exit=0 output=b150ad3c2adee17324471b5021f9d78f292fabb354dcc1009742d11f71d50699 input=eee97354a5aa4069a44c3791db4b576486502299450a7d3a89739677ec949c12 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-610-k6Ljzp/output.log [complete metadata: capture directory]
+
+## CAP-611-AeD4Bj — 2026-10-08T11:07:30Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-611-AeD4Bj/output.log`.
+
+capture=CAP-611-AeD4Bj command=/bin/bash -o pipefail -c bash tests/shellcheck.sh  key=(no output) exit=0 output=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 input=eee97354a5aa4069a44c3791db4b576486502299450a7d3a89739677ec949c12 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-611-AeD4Bj/output.log [complete metadata: capture directory]
+
+## GATE-FLOOR
+
+Result: FLOOR-UW5FIE; source: eee97354a5aa4069a44c3791db4b576486502299450a7d3a89739677ec949c12; exit: 0; command records: `notes/verification/floors/FLOOR-UW5FIE/commands.nul`.
+
+## CAP-612-hpySUJ — 2026-10-08T18:51:48Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-612-hpySUJ/output.log`.
+
+capture=CAP-612-hpySUJ command=/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh  key=  -- 3/3 passed exit=0 output=b150ad3c2adee17324471b5021f9d78f292fabb354dcc1009742d11f71d50699 input=54c64d8346fe2459204e68de298f193bb5ea0abe8de86c00de159f05eac07129 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-612-hpySUJ/output.log [complete metadata: capture directory]
+
+## CAP-613-Sx8QPb — 2026-10-08T19:01:56Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-613-Sx8QPb/output.log`.
+
+capture=CAP-613-Sx8QPb command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=e2bd5dfbf6ddcf901317732547649b3e2028c869384acc1e688d65a77c738b33 input=54c64d8346fe2459204e68de298f193bb5ea0abe8de86c00de159f05eac07129 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-613-Sx8QPb/output.log [complete metadata: capture directory]
+
+## CAP-614-Lczr2t — 2026-10-08T19:02:48Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-614-Lczr2t/output.log`.
+
+capture=CAP-614-Lczr2t command=/bin/bash -o pipefail -c bash tests/test-sdd-analyze.sh  key=  -- 19/19 passed exit=0 output=f9166fdc124954abb48f7c8ed789d96a1ce68c06a9da6df0d9d49a79a07aca5a input=54c64d8346fe2459204e68de298f193bb5ea0abe8de86c00de159f05eac07129 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-614-Lczr2t/output.log [complete metadata: capture directory]
+
+## CAP-615-Y7d5lB — 2026-10-08T19:06:36Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-615-Y7d5lB/output.log`.
+
+capture=CAP-615-Y7d5lB command=/bin/bash -o pipefail -c bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=b0307d5f3643923c85b2aa7d758ae3f0bf12a603f48312482e8cbeddb222d636 input=54c64d8346fe2459204e68de298f193bb5ea0abe8de86c00de159f05eac07129 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-615-Y7d5lB/output.log [complete metadata: capture directory]
+
+## CAP-616-2VKkDv — 2026-10-08T19:07:30Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-616-2VKkDv/output.log`.
+
+capture=CAP-616-2VKkDv command=/bin/bash -o pipefail -c bash tests/test-golden-example.sh  key=  -- 5/5 passed exit=0 output=dc54db17fc456b716d3c4bacdc0e09fda5c2df8fd46442fa54ea9b855e779182 input=54c64d8346fe2459204e68de298f193bb5ea0abe8de86c00de159f05eac07129 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-616-2VKkDv/output.log [complete metadata: capture directory]
+
+## CAP-617-1QkUzL — 2026-10-08T19:16:20Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-617-1QkUzL/output.log`.
+
+capture=CAP-617-1QkUzL command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-build-adapters.sh  key=  -- 10/10 passed exit=0 output=30e3c37ef9cd95137d04ac561e5cffcfcd29854d9a0c3902906b94c2d462b9f8 input=54c64d8346fe2459204e68de298f193bb5ea0abe8de86c00de159f05eac07129 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-617-1QkUzL/output.log [complete metadata: capture directory]
+
+## CAP-618-tJ1weq — 2026-10-08T19:20:44Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-618-tJ1weq/output.log`.
+
+capture=CAP-618-tJ1weq command=/bin/bash -o pipefail -c bash tests/test-spec-run.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=6afa5129adcacc389d7dd247ba059bc93f6abec84371466d3b7f5f19daa2bbd2 input=54c64d8346fe2459204e68de298f193bb5ea0abe8de86c00de159f05eac07129 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-618-tJ1weq/output.log [complete metadata: capture directory]
+
+## CAP-619-bYlfbo — 2026-10-08T19:32:48Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-619-bYlfbo/output.log`.
+
+capture=CAP-619-bYlfbo command=/bin/bash -o pipefail -c bash tests/test-spec-task.sh && bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=92e0f6ae9eb40c2f7ffccbed611018798c37aebeb5ad3d5c438bbe7232566791 input=54c64d8346fe2459204e68de298f193bb5ea0abe8de86c00de159f05eac07129 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-619-bYlfbo/output.log [complete metadata: capture directory]
+
+## CAP-620-rIlMdg — 2026-10-08T19:41:25Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-620-rIlMdg/output.log`.
+
+capture=CAP-620-rIlMdg command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh  key=  -- 8/8 passed exit=0 output=ce84a8f1d4f2042d5862aaccf523b5c2cad467528205d0937715b65aca1aed5f input=54c64d8346fe2459204e68de298f193bb5ea0abe8de86c00de159f05eac07129 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-620-rIlMdg/output.log [complete metadata: capture directory]
+
+## CAP-621-BPHFz1 — 2026-10-08T19:53:55Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-621-BPHFz1/output.log`.
+
+capture=CAP-621-BPHFz1 command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=eaed840fc7e1da90d7fbc574f13167212b5c09e43b1adc486bd8fb879c84e61f input=54c64d8346fe2459204e68de298f193bb5ea0abe8de86c00de159f05eac07129 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-621-BPHFz1/output.log [complete metadata: capture directory]
+
+## CAP-622-IkcbqZ — 2026-10-08T20:06:51Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-622-IkcbqZ/output.log`.
+
+capture=CAP-622-IkcbqZ command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh  key=  -- 8/8 passed exit=0 output=54b9f0a22b923c2d0091384a9699e48ecf699315a1a65541bb4fc4c4ea1f18cb input=54c64d8346fe2459204e68de298f193bb5ea0abe8de86c00de159f05eac07129 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-622-IkcbqZ/output.log [complete metadata: capture directory]
+
+## CAP-623-kHRgL8 — 2026-10-08T20:17:31Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-623-kHRgL8/output.log`.
+
+capture=CAP-623-kHRgL8 command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=3c87a1f9bf70014c150ad6a98d52d0712b28b5673ae59e8b28a1f03a9dc92ff5 input=54c64d8346fe2459204e68de298f193bb5ea0abe8de86c00de159f05eac07129 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-623-kHRgL8/output.log [complete metadata: capture directory]
+
+## CAP-624-whqbgY — 2026-10-08T20:39:11Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-624-whqbgY/output.log`.
+
+capture=CAP-624-whqbgY command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-verification.sh && bash tests/test-sdd-analyze.sh  key=  -- 19/19 passed exit=0 output=41657457f44cc1f57e09e2ad86e8a53a74aad41f03dc1ca71aa130ae7943ebc5 input=54c64d8346fe2459204e68de298f193bb5ea0abe8de86c00de159f05eac07129 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-624-whqbgY/output.log [complete metadata: capture directory]
+
+## CAP-625-k7bnAq — 2026-10-08T21:03:08Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-625-k7bnAq/output.log`.
+
+capture=CAP-625-k7bnAq command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-spec-gate.sh  key=  -- 8/8 passed exit=0 output=3b10b8d711d8f1e2776ce8d3c566044bc2bab6db387d1a97bbeadfae9e27a756 input=54c64d8346fe2459204e68de298f193bb5ea0abe8de86c00de159f05eac07129 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-625-k7bnAq/output.log [complete metadata: capture directory]
+
+## CAP-626-lo4s2N — 2026-10-08T21:24:05Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-626-lo4s2N/output.log`.
+
+capture=CAP-626-lo4s2N command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-sdd-analyze.sh  key=  -- 19/19 passed exit=0 output=2f8d38f0a97fadd4499b71f914d1807d157d1b700cb97d4e4ebf99c03c9d022a input=54c64d8346fe2459204e68de298f193bb5ea0abe8de86c00de159f05eac07129 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-626-lo4s2N/output.log [complete metadata: capture directory]
+
+## CAP-627-7wQb8p — 2026-10-08T21:43:57Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-627-7wQb8p/output.log`.
+
+capture=CAP-627-7wQb8p command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=574f03c0c565372d75397dd9b169d43c48a9e10df69ca03bb1000b795be3d478 input=54c64d8346fe2459204e68de298f193bb5ea0abe8de86c00de159f05eac07129 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-627-7wQb8p/output.log [complete metadata: capture directory]
+
+## CAP-628-RgxuDD — 2026-10-08T22:02:29Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-628-RgxuDD/output.log`.
+
+capture=CAP-628-RgxuDD command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=67612af507b659daf52b99440e4b75b0d53668dcbdd360085dd60783ad1d4917 input=54c64d8346fe2459204e68de298f193bb5ea0abe8de86c00de159f05eac07129 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-628-RgxuDD/output.log [complete metadata: capture directory]
+
+## CAP-629-4UZoJv — 2026-10-08T22:07:32Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-629-4UZoJv/output.log`.
+
+capture=CAP-629-4UZoJv command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline  key=1 warning(s), 0 errors exit=0 output=d538bca117b75457207755ce4bf1cdf1686f1aad88d2c35543fba4023eb8b7b0 input=54c64d8346fe2459204e68de298f193bb5ea0abe8de86c00de159f05eac07129 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-629-4UZoJv/output.log [complete metadata: capture directory]
+
+## CAP-630-O6MF1G — 2026-10-08T22:08:01Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-630-O6MF1G/output.log`.
+
+capture=CAP-630-O6MF1G command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-ac-coverage.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline --root /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline  key=bound — every AC is named by at least one test file exit=0 output=807bdf60fb995c624eaa5c28b6aa90d568163903f7714d827aff202d9be6f0c2 input=54c64d8346fe2459204e68de298f193bb5ea0abe8de86c00de159f05eac07129 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-630-O6MF1G/output.log [complete metadata: capture directory]
+
+## CAP-631-6xh4MD — 2026-10-08T23:20:20Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-631-6xh4MD/output.log`.
+
+capture=CAP-631-6xh4MD command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-evidence.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline  key=current evidence: all completed task checks have valid current captures exit=0 output=5bd9ff86587882355697b09285f05b88a45bbbac507d6e21c20ce64608007cf5 input=54c64d8346fe2459204e68de298f193bb5ea0abe8de86c00de159f05eac07129 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-631-6xh4MD/output.log [complete metadata: capture directory]
+
+## CAP-632-ZtFEnh — 2026-10-08T23:40:33Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-632-ZtFEnh/output.log`.
+
+capture=CAP-632-ZtFEnh command=/bin/bash -o pipefail -c bash tests/run.sh  key=  -- 3/3 passed exit=0 output=b150ad3c2adee17324471b5021f9d78f292fabb354dcc1009742d11f71d50699 input=54c64d8346fe2459204e68de298f193bb5ea0abe8de86c00de159f05eac07129 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-632-ZtFEnh/output.log [complete metadata: capture directory]
+
+## CAP-633-JwNdB6 — 2026-10-08T23:41:32Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-633-JwNdB6/output.log`.
+
+capture=CAP-633-JwNdB6 command=/bin/bash -o pipefail -c bash tests/shellcheck.sh  key=(no output) exit=0 output=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 input=54c64d8346fe2459204e68de298f193bb5ea0abe8de86c00de159f05eac07129 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-633-JwNdB6/output.log [complete metadata: capture directory]
+
+## GATE-FLOOR
+
+Result: FLOOR-QCFkfi; source: 54c64d8346fe2459204e68de298f193bb5ea0abe8de86c00de159f05eac07129; exit: 0; command records: `notes/verification/floors/FLOOR-QCFkfi/commands.nul`.
+
+## CAP-634-14RLF3 — 2026-10-13T23:03:30Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-634-14RLF3/output.log`.
+
+capture=CAP-634-14RLF3 command=/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh  key=  -- 3/3 passed exit=0 output=b150ad3c2adee17324471b5021f9d78f292fabb354dcc1009742d11f71d50699 input=567cb6e04411ca525cb059fc247ab7ac34b1c52718f969d3478734ee69a7228e log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-634-14RLF3/output.log [complete metadata: capture directory]
+
+## CAP-635-BPCymR — 2026-10-14T07:10:28Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-635-BPCymR/output.log`.
+
+capture=CAP-635-BPCymR command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=e2bd5dfbf6ddcf901317732547649b3e2028c869384acc1e688d65a77c738b33 input=567cb6e04411ca525cb059fc247ab7ac34b1c52718f969d3478734ee69a7228e log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-635-BPCymR/output.log [complete metadata: capture directory]
+
+## CAP-636-JxBDWu — 2026-10-14T07:11:21Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-636-JxBDWu/output.log`.
+
+capture=CAP-636-JxBDWu command=/bin/bash -o pipefail -c bash tests/test-sdd-analyze.sh  key=  -- 19/19 passed exit=0 output=f9166fdc124954abb48f7c8ed789d96a1ce68c06a9da6df0d9d49a79a07aca5a input=567cb6e04411ca525cb059fc247ab7ac34b1c52718f969d3478734ee69a7228e log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-636-JxBDWu/output.log [complete metadata: capture directory]
+
+## CAP-637-FmCc0J — 2026-10-14T07:15:13Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-637-FmCc0J/output.log`.
+
+capture=CAP-637-FmCc0J command=/bin/bash -o pipefail -c bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=b0307d5f3643923c85b2aa7d758ae3f0bf12a603f48312482e8cbeddb222d636 input=567cb6e04411ca525cb059fc247ab7ac34b1c52718f969d3478734ee69a7228e log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-637-FmCc0J/output.log [complete metadata: capture directory]
+
+## CAP-638-5uCi5n — 2026-10-14T07:16:08Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-638-5uCi5n/output.log`.
+
+capture=CAP-638-5uCi5n command=/bin/bash -o pipefail -c bash tests/test-golden-example.sh  key=  -- 5/5 passed exit=0 output=dc54db17fc456b716d3c4bacdc0e09fda5c2df8fd46442fa54ea9b855e779182 input=567cb6e04411ca525cb059fc247ab7ac34b1c52718f969d3478734ee69a7228e log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-638-5uCi5n/output.log [complete metadata: capture directory]
+
+## CAP-639-DSLacS — 2026-10-14T07:25:26Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-639-DSLacS/output.log`.
+
+capture=CAP-639-DSLacS command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-build-adapters.sh  key=  -- 10/10 passed exit=0 output=30e3c37ef9cd95137d04ac561e5cffcfcd29854d9a0c3902906b94c2d462b9f8 input=567cb6e04411ca525cb059fc247ab7ac34b1c52718f969d3478734ee69a7228e log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-639-DSLacS/output.log [complete metadata: capture directory]
+
+## CAP-640-Nm7bvd — 2026-10-14T07:30:09Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-640-Nm7bvd/output.log`.
+
+capture=CAP-640-Nm7bvd command=/bin/bash -o pipefail -c bash tests/test-spec-run.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=6afa5129adcacc389d7dd247ba059bc93f6abec84371466d3b7f5f19daa2bbd2 input=567cb6e04411ca525cb059fc247ab7ac34b1c52718f969d3478734ee69a7228e log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-640-Nm7bvd/output.log [complete metadata: capture directory]
+
+## CAP-641-ZGtrM8 — 2026-10-14T07:42:35Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-641-ZGtrM8/output.log`.
+
+capture=CAP-641-ZGtrM8 command=/bin/bash -o pipefail -c bash tests/test-spec-task.sh && bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=92e0f6ae9eb40c2f7ffccbed611018798c37aebeb5ad3d5c438bbe7232566791 input=567cb6e04411ca525cb059fc247ab7ac34b1c52718f969d3478734ee69a7228e log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-641-ZGtrM8/output.log [complete metadata: capture directory]
+
+## CAP-642-VzV15s — 2026-10-14T07:51:41Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-642-VzV15s/output.log`.
+
+capture=CAP-642-VzV15s command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh  key=  -- 8/8 passed exit=0 output=ce84a8f1d4f2042d5862aaccf523b5c2cad467528205d0937715b65aca1aed5f input=567cb6e04411ca525cb059fc247ab7ac34b1c52718f969d3478734ee69a7228e log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-642-VzV15s/output.log [complete metadata: capture directory]
+
+## CAP-643-6WhW3C — 2026-10-14T08:03:57Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-643-6WhW3C/output.log`.
+
+capture=CAP-643-6WhW3C command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=eaed840fc7e1da90d7fbc574f13167212b5c09e43b1adc486bd8fb879c84e61f input=567cb6e04411ca525cb059fc247ab7ac34b1c52718f969d3478734ee69a7228e log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-643-6WhW3C/output.log [complete metadata: capture directory]
+
+## CAP-644-0MRKFP — 2026-10-14T08:16:00Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-644-0MRKFP/output.log`.
+
+capture=CAP-644-0MRKFP command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh  key=  -- 8/8 passed exit=0 output=54b9f0a22b923c2d0091384a9699e48ecf699315a1a65541bb4fc4c4ea1f18cb input=567cb6e04411ca525cb059fc247ab7ac34b1c52718f969d3478734ee69a7228e log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-644-0MRKFP/output.log [complete metadata: capture directory]
+
+## CAP-645-CXr3Sz — 2026-10-14T08:27:31Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-645-CXr3Sz/output.log`.
+
+capture=CAP-645-CXr3Sz command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=3c87a1f9bf70014c150ad6a98d52d0712b28b5673ae59e8b28a1f03a9dc92ff5 input=567cb6e04411ca525cb059fc247ab7ac34b1c52718f969d3478734ee69a7228e log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-645-CXr3Sz/output.log [complete metadata: capture directory]
+
+## CAP-646-7tUkXj — 2026-10-14T08:57:25Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-646-7tUkXj/output.log`.
+
+capture=CAP-646-7tUkXj command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-verification.sh && bash tests/test-sdd-analyze.sh  key=  -- 19/19 passed exit=0 output=41657457f44cc1f57e09e2ad86e8a53a74aad41f03dc1ca71aa130ae7943ebc5 input=567cb6e04411ca525cb059fc247ab7ac34b1c52718f969d3478734ee69a7228e log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-646-7tUkXj/output.log [complete metadata: capture directory]
+
+## CAP-647-sgeEKc — 2026-10-14T09:14:54Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-647-sgeEKc/output.log`.
+
+capture=CAP-647-sgeEKc command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-spec-gate.sh  key=  -- 8/8 passed exit=0 output=3b10b8d711d8f1e2776ce8d3c566044bc2bab6db387d1a97bbeadfae9e27a756 input=567cb6e04411ca525cb059fc247ab7ac34b1c52718f969d3478734ee69a7228e log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-647-sgeEKc/output.log [complete metadata: capture directory]
+
+## CAP-648-aU7Vpq — 2026-10-14T09:30:56Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-648-aU7Vpq/output.log`.
+
+capture=CAP-648-aU7Vpq command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-sdd-analyze.sh  key=  -- 19/19 passed exit=0 output=2f8d38f0a97fadd4499b71f914d1807d157d1b700cb97d4e4ebf99c03c9d022a input=567cb6e04411ca525cb059fc247ab7ac34b1c52718f969d3478734ee69a7228e log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-648-aU7Vpq/output.log [complete metadata: capture directory]
+
+## CAP-649-RD4sdb — 2026-10-14T09:50:03Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-649-RD4sdb/output.log`.
+
+capture=CAP-649-RD4sdb command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=574f03c0c565372d75397dd9b169d43c48a9e10df69ca03bb1000b795be3d478 input=567cb6e04411ca525cb059fc247ab7ac34b1c52718f969d3478734ee69a7228e log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-649-RD4sdb/output.log [complete metadata: capture directory]
+
+## CAP-650-3y0kig — 2026-10-14T10:07:32Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-650-3y0kig/output.log`.
+
+capture=CAP-650-3y0kig command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=67612af507b659daf52b99440e4b75b0d53668dcbdd360085dd60783ad1d4917 input=567cb6e04411ca525cb059fc247ab7ac34b1c52718f969d3478734ee69a7228e log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-650-3y0kig/output.log [complete metadata: capture directory]
+
+## CAP-651-cpcn9C — 2026-10-14T10:13:02Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-651-cpcn9C/output.log`.
+
+capture=CAP-651-cpcn9C command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline  key=1 warning(s), 0 errors exit=0 output=fad505c7f98cc54ef736f8eff4fdaddbdccc0810a9b669982ab6100adc88e52c input=567cb6e04411ca525cb059fc247ab7ac34b1c52718f969d3478734ee69a7228e log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-651-cpcn9C/output.log [complete metadata: capture directory]
+
+## CAP-652-W5OBGz — 2026-10-14T10:13:30Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-652-W5OBGz/output.log`.
+
+capture=CAP-652-W5OBGz command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-ac-coverage.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline --root /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline  key=bound — every AC is named by at least one test file exit=0 output=807bdf60fb995c624eaa5c28b6aa90d568163903f7714d827aff202d9be6f0c2 input=567cb6e04411ca525cb059fc247ab7ac34b1c52718f969d3478734ee69a7228e log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-652-W5OBGz/output.log [complete metadata: capture directory]
+
+## CAP-653-c80wLd — 2026-10-14T11:29:20Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-653-c80wLd/output.log`.
+
+capture=CAP-653-c80wLd command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-evidence.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline  key=current evidence: all completed task checks have valid current captures exit=0 output=9e6c9630f722193acc3fe21360a3e98b8cd68c8cc744ad78b3ef36804ba9b942 input=567cb6e04411ca525cb059fc247ab7ac34b1c52718f969d3478734ee69a7228e log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-653-c80wLd/output.log [complete metadata: capture directory]
+
+## CAP-654-i7lejr — 2026-10-14T11:49:51Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-654-i7lejr/output.log`.
+
+capture=CAP-654-i7lejr command=/bin/bash -o pipefail -c bash tests/run.sh  key=  -- 3/3 passed exit=0 output=b150ad3c2adee17324471b5021f9d78f292fabb354dcc1009742d11f71d50699 input=567cb6e04411ca525cb059fc247ab7ac34b1c52718f969d3478734ee69a7228e log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-654-i7lejr/output.log [complete metadata: capture directory]
+
+## CAP-655-zlENki — 2026-10-14T11:50:51Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-655-zlENki/output.log`.
+
+capture=CAP-655-zlENki command=/bin/bash -o pipefail -c bash tests/shellcheck.sh  key=(no output) exit=0 output=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 input=567cb6e04411ca525cb059fc247ab7ac34b1c52718f969d3478734ee69a7228e log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-655-zlENki/output.log [complete metadata: capture directory]
+
+## GATE-FLOOR
+
+Result: FLOOR-OgYGoP; source: 567cb6e04411ca525cb059fc247ab7ac34b1c52718f969d3478734ee69a7228e; exit: 0; command records: `notes/verification/floors/FLOOR-OgYGoP/commands.nul`.
+
+## CAP-656-JZJTKB — 2026-10-15T01:05:49Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-656-JZJTKB/output.log`.
+
+capture=CAP-656-JZJTKB command=/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh  key=  -- 3/3 passed exit=0 output=b150ad3c2adee17324471b5021f9d78f292fabb354dcc1009742d11f71d50699 input=1f0774ddf738539f83236db08fa7f8847c3e9a276964fc5582730ed6bd5c8a66 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-656-JZJTKB/output.log [complete metadata: capture directory]
+
+## CAP-657-4toNJM — 2026-10-15T01:27:50Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-657-4toNJM/output.log`.
+
+capture=CAP-657-4toNJM command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=e2bd5dfbf6ddcf901317732547649b3e2028c869384acc1e688d65a77c738b33 input=1f0774ddf738539f83236db08fa7f8847c3e9a276964fc5582730ed6bd5c8a66 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-657-4toNJM/output.log [complete metadata: capture directory]
+
+## CAP-658-9Mye42 — 2026-10-15T01:29:32Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-658-9Mye42/output.log`.
+
+capture=CAP-658-9Mye42 command=/bin/bash -o pipefail -c bash tests/test-sdd-analyze.sh  key=  -- 19/19 passed exit=0 output=f9166fdc124954abb48f7c8ed789d96a1ce68c06a9da6df0d9d49a79a07aca5a input=1f0774ddf738539f83236db08fa7f8847c3e9a276964fc5582730ed6bd5c8a66 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-658-9Mye42/output.log [complete metadata: capture directory]
+
+## CAP-659-KSJJWW — 2026-10-15T01:35:39Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-659-KSJJWW/output.log`.
+
+capture=CAP-659-KSJJWW command=/bin/bash -o pipefail -c bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=b0307d5f3643923c85b2aa7d758ae3f0bf12a603f48312482e8cbeddb222d636 input=1f0774ddf738539f83236db08fa7f8847c3e9a276964fc5582730ed6bd5c8a66 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-659-KSJJWW/output.log [complete metadata: capture directory]
+
+## CAP-660-P3qrOl — 2026-10-15T01:36:53Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-660-P3qrOl/output.log`.
+
+capture=CAP-660-P3qrOl command=/bin/bash -o pipefail -c bash tests/test-golden-example.sh  key=  -- 5/5 passed exit=0 output=dc54db17fc456b716d3c4bacdc0e09fda5c2df8fd46442fa54ea9b855e779182 input=1f0774ddf738539f83236db08fa7f8847c3e9a276964fc5582730ed6bd5c8a66 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-660-P3qrOl/output.log [complete metadata: capture directory]
+
+## CAP-661-gCU6kH — 2026-10-15T01:48:15Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-661-gCU6kH/output.log`.
+
+capture=CAP-661-gCU6kH command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-build-adapters.sh  key=  -- 10/10 passed exit=0 output=30e3c37ef9cd95137d04ac561e5cffcfcd29854d9a0c3902906b94c2d462b9f8 input=1f0774ddf738539f83236db08fa7f8847c3e9a276964fc5582730ed6bd5c8a66 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-661-gCU6kH/output.log [complete metadata: capture directory]
+
+## CAP-662-6VNood — 2026-10-15T01:54:29Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-662-6VNood/output.log`.
+
+capture=CAP-662-6VNood command=/bin/bash -o pipefail -c bash tests/test-spec-run.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=6afa5129adcacc389d7dd247ba059bc93f6abec84371466d3b7f5f19daa2bbd2 input=1f0774ddf738539f83236db08fa7f8847c3e9a276964fc5582730ed6bd5c8a66 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-662-6VNood/output.log [complete metadata: capture directory]
+
+## CAP-663-CQVSsD — 2026-10-15T02:12:11Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-663-CQVSsD/output.log`.
+
+capture=CAP-663-CQVSsD command=/bin/bash -o pipefail -c bash tests/test-spec-task.sh && bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=92e0f6ae9eb40c2f7ffccbed611018798c37aebeb5ad3d5c438bbe7232566791 input=1f0774ddf738539f83236db08fa7f8847c3e9a276964fc5582730ed6bd5c8a66 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-663-CQVSsD/output.log [complete metadata: capture directory]
+
+## CAP-664-dPObvD — 2026-10-15T02:24:03Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-664-dPObvD/output.log`.
+
+capture=CAP-664-dPObvD command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh  key=  -- 8/8 passed exit=0 output=ce84a8f1d4f2042d5862aaccf523b5c2cad467528205d0937715b65aca1aed5f input=1f0774ddf738539f83236db08fa7f8847c3e9a276964fc5582730ed6bd5c8a66 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-664-dPObvD/output.log [complete metadata: capture directory]
+
+## CAP-665-4JOwAA — 2026-10-15T02:41:03Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-665-4JOwAA/output.log`.
+
+capture=CAP-665-4JOwAA command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=eaed840fc7e1da90d7fbc574f13167212b5c09e43b1adc486bd8fb879c84e61f input=1f0774ddf738539f83236db08fa7f8847c3e9a276964fc5582730ed6bd5c8a66 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-665-4JOwAA/output.log [complete metadata: capture directory]
+
+## CAP-666-vVIuK0 — 2026-10-15T02:57:22Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-666-vVIuK0/output.log`.
+
+capture=CAP-666-vVIuK0 command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh  key=  -- 8/8 passed exit=0 output=54b9f0a22b923c2d0091384a9699e48ecf699315a1a65541bb4fc4c4ea1f18cb input=1f0774ddf738539f83236db08fa7f8847c3e9a276964fc5582730ed6bd5c8a66 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-666-vVIuK0/output.log [complete metadata: capture directory]
+
+## CAP-667-EG8cbS — 2026-10-15T03:09:45Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-667-EG8cbS/output.log`.
+
+capture=CAP-667-EG8cbS command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=3c87a1f9bf70014c150ad6a98d52d0712b28b5673ae59e8b28a1f03a9dc92ff5 input=1f0774ddf738539f83236db08fa7f8847c3e9a276964fc5582730ed6bd5c8a66 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-667-EG8cbS/output.log [complete metadata: capture directory]
+
+## CAP-668-IfMwgi — 2026-10-15T03:31:22Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-668-IfMwgi/output.log`.
+
+capture=CAP-668-IfMwgi command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-verification.sh && bash tests/test-sdd-analyze.sh  key=  -- 19/19 passed exit=0 output=41657457f44cc1f57e09e2ad86e8a53a74aad41f03dc1ca71aa130ae7943ebc5 input=1f0774ddf738539f83236db08fa7f8847c3e9a276964fc5582730ed6bd5c8a66 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-668-IfMwgi/output.log [complete metadata: capture directory]
+
+## CAP-669-WW7qCI — 2026-10-15T03:48:40Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-669-WW7qCI/output.log`.
+
+capture=CAP-669-WW7qCI command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-spec-gate.sh  key=  -- 8/8 passed exit=0 output=3b10b8d711d8f1e2776ce8d3c566044bc2bab6db387d1a97bbeadfae9e27a756 input=1f0774ddf738539f83236db08fa7f8847c3e9a276964fc5582730ed6bd5c8a66 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-669-WW7qCI/output.log [complete metadata: capture directory]
+
+## CAP-670-Efpkc3 — 2026-10-15T04:05:31Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-670-Efpkc3/output.log`.
+
+capture=CAP-670-Efpkc3 command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-sdd-analyze.sh  key=  -- 19/19 passed exit=0 output=2f8d38f0a97fadd4499b71f914d1807d157d1b700cb97d4e4ebf99c03c9d022a input=1f0774ddf738539f83236db08fa7f8847c3e9a276964fc5582730ed6bd5c8a66 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-670-Efpkc3/output.log [complete metadata: capture directory]
+
+## CAP-671-NNOA2u — 2026-10-15T04:25:27Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-671-NNOA2u/output.log`.
+
+capture=CAP-671-NNOA2u command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=574f03c0c565372d75397dd9b169d43c48a9e10df69ca03bb1000b795be3d478 input=1f0774ddf738539f83236db08fa7f8847c3e9a276964fc5582730ed6bd5c8a66 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-671-NNOA2u/output.log [complete metadata: capture directory]
+
+## CAP-672-TuLoTm — 2026-10-15T04:43:45Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-672-TuLoTm/output.log`.
+
+capture=CAP-672-TuLoTm command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=67612af507b659daf52b99440e4b75b0d53668dcbdd360085dd60783ad1d4917 input=1f0774ddf738539f83236db08fa7f8847c3e9a276964fc5582730ed6bd5c8a66 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-672-TuLoTm/output.log [complete metadata: capture directory]
+
+## CAP-673-PvKWjr — 2026-10-15T04:50:14Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-673-PvKWjr/output.log`.
+
+capture=CAP-673-PvKWjr command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline  key=1 warning(s), 0 errors exit=0 output=43b894bdbff9d6eab4dd1ed1cec47a7dfb5977923315a5e45ffd5496cf164f3d input=1f0774ddf738539f83236db08fa7f8847c3e9a276964fc5582730ed6bd5c8a66 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-673-PvKWjr/output.log [complete metadata: capture directory]
+
+## CAP-674-EM2K5t — 2026-10-15T04:50:44Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-674-EM2K5t/output.log`.
+
+capture=CAP-674-EM2K5t command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-ac-coverage.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline --root /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline  key=bound — every AC is named by at least one test file exit=0 output=807bdf60fb995c624eaa5c28b6aa90d568163903f7714d827aff202d9be6f0c2 input=1f0774ddf738539f83236db08fa7f8847c3e9a276964fc5582730ed6bd5c8a66 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-674-EM2K5t/output.log [complete metadata: capture directory]
+
+## CAP-675-PsKyeA — 2026-10-15T06:17:31Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-675-PsKyeA/output.log`.
+
+capture=CAP-675-PsKyeA command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-evidence.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline  key=current evidence: all completed task checks have valid current captures exit=0 output=37b518bca3e77fd73e4a80aceb02e80d4b02f729995528d2df6c2b598f50f351 input=1f0774ddf738539f83236db08fa7f8847c3e9a276964fc5582730ed6bd5c8a66 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-675-PsKyeA/output.log [complete metadata: capture directory]
+
+## CAP-676-MzjTZ9 — 2026-10-15T06:43:35Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-676-MzjTZ9/output.log`.
+
+capture=CAP-676-MzjTZ9 command=/bin/bash -o pipefail -c bash tests/run.sh  key=  -- 3/3 passed exit=0 output=b150ad3c2adee17324471b5021f9d78f292fabb354dcc1009742d11f71d50699 input=1f0774ddf738539f83236db08fa7f8847c3e9a276964fc5582730ed6bd5c8a66 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-676-MzjTZ9/output.log [complete metadata: capture directory]
+
+## CAP-677-0Uc7Y2 — 2026-10-15T06:44:40Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-677-0Uc7Y2/output.log`.
+
+capture=CAP-677-0Uc7Y2 command=/bin/bash -o pipefail -c bash tests/shellcheck.sh  key=(no output) exit=0 output=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 input=1f0774ddf738539f83236db08fa7f8847c3e9a276964fc5582730ed6bd5c8a66 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-677-0Uc7Y2/output.log [complete metadata: capture directory]
+
+## GATE-FLOOR
+
+Result: FLOOR-GCDl2x; source: 1f0774ddf738539f83236db08fa7f8847c3e9a276964fc5582730ed6bd5c8a66; exit: 0; command records: `notes/verification/floors/FLOOR-GCDl2x/commands.nul`.
+
+## CAP-678-tyxcke — 2026-10-15T17:27:16Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-678-tyxcke/output.log`.
+
+capture=CAP-678-tyxcke command=/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh  key=  -- 3/3 passed exit=0 output=b150ad3c2adee17324471b5021f9d78f292fabb354dcc1009742d11f71d50699 input=9cf02d45d97952557c41180743b973563e854825d6d2d5e73b1db3b72be4dfa5 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-678-tyxcke/output.log [complete metadata: capture directory]
+
+## CAP-679-jomjFz — 2026-10-15T17:38:48Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-679-jomjFz/output.log`.
+
+capture=CAP-679-jomjFz command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=e2bd5dfbf6ddcf901317732547649b3e2028c869384acc1e688d65a77c738b33 input=9cf02d45d97952557c41180743b973563e854825d6d2d5e73b1db3b72be4dfa5 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-679-jomjFz/output.log [complete metadata: capture directory]
+
+## CAP-680-z4KuRv — 2026-10-15T17:39:43Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-680-z4KuRv/output.log`.
+
+capture=CAP-680-z4KuRv command=/bin/bash -o pipefail -c bash tests/test-sdd-analyze.sh  key=  -- 19/19 passed exit=0 output=f9166fdc124954abb48f7c8ed789d96a1ce68c06a9da6df0d9d49a79a07aca5a input=9cf02d45d97952557c41180743b973563e854825d6d2d5e73b1db3b72be4dfa5 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-680-z4KuRv/output.log [complete metadata: capture directory]
+
+## CAP-681-BKrbvg — 2026-10-15T17:43:40Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-681-BKrbvg/output.log`.
+
+capture=CAP-681-BKrbvg command=/bin/bash -o pipefail -c bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=b0307d5f3643923c85b2aa7d758ae3f0bf12a603f48312482e8cbeddb222d636 input=9cf02d45d97952557c41180743b973563e854825d6d2d5e73b1db3b72be4dfa5 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-681-BKrbvg/output.log [complete metadata: capture directory]
+
+## CAP-682-8Wp4wF — 2026-10-15T17:44:36Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-682-8Wp4wF/output.log`.
+
+capture=CAP-682-8Wp4wF command=/bin/bash -o pipefail -c bash tests/test-golden-example.sh  key=  -- 5/5 passed exit=0 output=dc54db17fc456b716d3c4bacdc0e09fda5c2df8fd46442fa54ea9b855e779182 input=9cf02d45d97952557c41180743b973563e854825d6d2d5e73b1db3b72be4dfa5 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-682-8Wp4wF/output.log [complete metadata: capture directory]
+
+## CAP-683-q3NQwE — 2026-10-15T17:54:01Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-683-q3NQwE/output.log`.
+
+capture=CAP-683-q3NQwE command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-build-adapters.sh  key=  -- 10/10 passed exit=0 output=30e3c37ef9cd95137d04ac561e5cffcfcd29854d9a0c3902906b94c2d462b9f8 input=9cf02d45d97952557c41180743b973563e854825d6d2d5e73b1db3b72be4dfa5 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-683-q3NQwE/output.log [complete metadata: capture directory]
+
+## CAP-684-MIENzC — 2026-10-15T18:00:55Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-684-MIENzC/output.log`.
+
+capture=CAP-684-MIENzC command=/bin/bash -o pipefail -c bash tests/test-spec-run.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=6afa5129adcacc389d7dd247ba059bc93f6abec84371466d3b7f5f19daa2bbd2 input=9cf02d45d97952557c41180743b973563e854825d6d2d5e73b1db3b72be4dfa5 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-684-MIENzC/output.log [complete metadata: capture directory]
+
+## CAP-685-rql7uy — 2026-10-15T18:21:35Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-685-rql7uy/output.log`.
+
+capture=CAP-685-rql7uy command=/bin/bash -o pipefail -c bash tests/test-spec-task.sh && bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=92e0f6ae9eb40c2f7ffccbed611018798c37aebeb5ad3d5c438bbe7232566791 input=9cf02d45d97952557c41180743b973563e854825d6d2d5e73b1db3b72be4dfa5 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-685-rql7uy/output.log [complete metadata: capture directory]
+
+## CAP-686-XxQ1nf — 2026-10-15T18:34:52Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-686-XxQ1nf/output.log`.
+
+capture=CAP-686-XxQ1nf command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh  key=  -- 8/8 passed exit=0 output=ce84a8f1d4f2042d5862aaccf523b5c2cad467528205d0937715b65aca1aed5f input=9cf02d45d97952557c41180743b973563e854825d6d2d5e73b1db3b72be4dfa5 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-686-XxQ1nf/output.log [complete metadata: capture directory]
+
+## CAP-687-nAuWwZ — 2026-10-15T18:50:56Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-687-nAuWwZ/output.log`.
+
+capture=CAP-687-nAuWwZ command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=eaed840fc7e1da90d7fbc574f13167212b5c09e43b1adc486bd8fb879c84e61f input=9cf02d45d97952557c41180743b973563e854825d6d2d5e73b1db3b72be4dfa5 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-687-nAuWwZ/output.log [complete metadata: capture directory]
+
+## CAP-688-k5HV7e — 2026-10-15T19:06:13Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-688-k5HV7e/output.log`.
+
+capture=CAP-688-k5HV7e command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh  key=  -- 8/8 passed exit=0 output=54b9f0a22b923c2d0091384a9699e48ecf699315a1a65541bb4fc4c4ea1f18cb input=9cf02d45d97952557c41180743b973563e854825d6d2d5e73b1db3b72be4dfa5 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-688-k5HV7e/output.log [complete metadata: capture directory]
+
+## CAP-689-RrGVc7 — 2026-10-15T19:18:56Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-689-RrGVc7/output.log`.
+
+capture=CAP-689-RrGVc7 command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=3c87a1f9bf70014c150ad6a98d52d0712b28b5673ae59e8b28a1f03a9dc92ff5 input=9cf02d45d97952557c41180743b973563e854825d6d2d5e73b1db3b72be4dfa5 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-689-RrGVc7/output.log [complete metadata: capture directory]
+
+## CAP-690-Yi1gI3 — 2026-10-15T19:47:45Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-690-Yi1gI3/output.log`.
+
+capture=CAP-690-Yi1gI3 command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-verification.sh && bash tests/test-sdd-analyze.sh  key=  -- 19/19 passed exit=0 output=41657457f44cc1f57e09e2ad86e8a53a74aad41f03dc1ca71aa130ae7943ebc5 input=9cf02d45d97952557c41180743b973563e854825d6d2d5e73b1db3b72be4dfa5 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-690-Yi1gI3/output.log [complete metadata: capture directory]
+
+## CAP-691-ARQE7G — 2026-10-15T21:35:25Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-691-ARQE7G/output.log`.
+
+capture=CAP-691-ARQE7G command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-spec-gate.sh  key=  -- 8/8 passed exit=0 output=3b10b8d711d8f1e2776ce8d3c566044bc2bab6db387d1a97bbeadfae9e27a756 input=9cf02d45d97952557c41180743b973563e854825d6d2d5e73b1db3b72be4dfa5 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-691-ARQE7G/output.log [complete metadata: capture directory]
+
+## CAP-692-1UHxFD — 2026-10-15T21:58:30Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-692-1UHxFD/output.log`.
+
+capture=CAP-692-1UHxFD command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-sdd-analyze.sh  key=  -- 19/19 passed exit=0 output=2f8d38f0a97fadd4499b71f914d1807d157d1b700cb97d4e4ebf99c03c9d022a input=9cf02d45d97952557c41180743b973563e854825d6d2d5e73b1db3b72be4dfa5 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-692-1UHxFD/output.log [complete metadata: capture directory]
+
+## CAP-693-bs5tYx — 2026-10-15T22:22:33Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-693-bs5tYx/output.log`.
+
+capture=CAP-693-bs5tYx command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=574f03c0c565372d75397dd9b169d43c48a9e10df69ca03bb1000b795be3d478 input=9cf02d45d97952557c41180743b973563e854825d6d2d5e73b1db3b72be4dfa5 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-693-bs5tYx/output.log [complete metadata: capture directory]
+
+## CAP-694-iu1rNK — 2026-10-15T22:43:58Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-694-iu1rNK/output.log`.
+
+capture=CAP-694-iu1rNK command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=67612af507b659daf52b99440e4b75b0d53668dcbdd360085dd60783ad1d4917 input=9cf02d45d97952557c41180743b973563e854825d6d2d5e73b1db3b72be4dfa5 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-694-iu1rNK/output.log [complete metadata: capture directory]
+
+## CAP-695-EZPP24 — 2026-10-15T22:51:13Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-695-EZPP24/output.log`.
+
+capture=CAP-695-EZPP24 command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline  key=1 warning(s), 0 errors exit=0 output=a2cd7998af880edc2d2eef4d46cf11497d00af85ce7a475e4e5a68986a33b328 input=9cf02d45d97952557c41180743b973563e854825d6d2d5e73b1db3b72be4dfa5 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-695-EZPP24/output.log [complete metadata: capture directory]
+
+## CAP-696-lel2VE — 2026-10-15T22:51:43Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-696-lel2VE/output.log`.
+
+capture=CAP-696-lel2VE command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-ac-coverage.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline --root /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline  key=bound — every AC is named by at least one test file exit=0 output=f73c8f5d85d60868683fbbbc8b089edf595bcc9720bf68afb771f5ad57e016ce input=9cf02d45d97952557c41180743b973563e854825d6d2d5e73b1db3b72be4dfa5 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-696-lel2VE/output.log [complete metadata: capture directory]
+
+## CAP-697-h7xG2U — 2026-10-16T00:28:00Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-697-h7xG2U/output.log`.
+
+capture=CAP-697-h7xG2U command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-evidence.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline  key=current evidence: all completed task checks have valid current captures exit=0 output=d970bfcae71bfa83b8839b682c47d6ac42a724ea4ab642c3ca20f9b256851e80 input=9cf02d45d97952557c41180743b973563e854825d6d2d5e73b1db3b72be4dfa5 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-697-h7xG2U/output.log [complete metadata: capture directory]
+
+## CAP-698-ikeSJh — 2026-10-16T00:50:17Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-698-ikeSJh/output.log`.
+
+capture=CAP-698-ikeSJh command=/bin/bash -o pipefail -c bash tests/run.sh  key=  -- 3/3 passed exit=0 output=b150ad3c2adee17324471b5021f9d78f292fabb354dcc1009742d11f71d50699 input=9cf02d45d97952557c41180743b973563e854825d6d2d5e73b1db3b72be4dfa5 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-698-ikeSJh/output.log [complete metadata: capture directory]
+
+## CAP-699-tIPo09 — 2026-10-16T00:51:19Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-699-tIPo09/output.log`.
+
+capture=CAP-699-tIPo09 command=/bin/bash -o pipefail -c bash tests/shellcheck.sh  key=(no output) exit=0 output=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 input=9cf02d45d97952557c41180743b973563e854825d6d2d5e73b1db3b72be4dfa5 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-699-tIPo09/output.log [complete metadata: capture directory]
+
+## GATE-FLOOR
+
+Result: FLOOR-UeGEcf; source: 9cf02d45d97952557c41180743b973563e854825d6d2d5e73b1db3b72be4dfa5; exit: 0; command records: `notes/verification/floors/FLOOR-UeGEcf/commands.nul`.
+
+## CAP-700-lvBf95 — 2026-10-16T08:45:46Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-700-lvBf95/output.log`.
+
+capture=CAP-700-lvBf95 command=/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh  key=  -- 3/3 passed exit=0 output=b150ad3c2adee17324471b5021f9d78f292fabb354dcc1009742d11f71d50699 input=fd20f46a37268b1cd8bb7874982e3a26a1ce713a04418168d3c6b898edf76305 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-700-lvBf95/output.log [complete metadata: capture directory]
+
+## CAP-701-0sCQUB — 2026-10-16T09:02:44Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-701-0sCQUB/output.log`.
+
+capture=CAP-701-0sCQUB command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=e2bd5dfbf6ddcf901317732547649b3e2028c869384acc1e688d65a77c738b33 input=fd20f46a37268b1cd8bb7874982e3a26a1ce713a04418168d3c6b898edf76305 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-701-0sCQUB/output.log [complete metadata: capture directory]
+
+## CAP-702-9x0FjD — 2026-10-16T09:04:21Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-702-9x0FjD/output.log`.
+
+capture=CAP-702-9x0FjD command=/bin/bash -o pipefail -c bash tests/test-sdd-analyze.sh  key=  -- 19/19 passed exit=0 output=f9166fdc124954abb48f7c8ed789d96a1ce68c06a9da6df0d9d49a79a07aca5a input=fd20f46a37268b1cd8bb7874982e3a26a1ce713a04418168d3c6b898edf76305 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-702-9x0FjD/output.log [complete metadata: capture directory]
+
+## CAP-703-VoZSIT — 2026-10-16T09:09:26Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-703-VoZSIT/output.log`.
+
+capture=CAP-703-VoZSIT command=/bin/bash -o pipefail -c bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=b0307d5f3643923c85b2aa7d758ae3f0bf12a603f48312482e8cbeddb222d636 input=fd20f46a37268b1cd8bb7874982e3a26a1ce713a04418168d3c6b898edf76305 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-703-VoZSIT/output.log [complete metadata: capture directory]
+
+## CAP-704-BPtpzh — 2026-10-16T09:10:37Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-704-BPtpzh/output.log`.
+
+capture=CAP-704-BPtpzh command=/bin/bash -o pipefail -c bash tests/test-golden-example.sh  key=  -- 5/5 passed exit=0 output=dc54db17fc456b716d3c4bacdc0e09fda5c2df8fd46442fa54ea9b855e779182 input=fd20f46a37268b1cd8bb7874982e3a26a1ce713a04418168d3c6b898edf76305 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-704-BPtpzh/output.log [complete metadata: capture directory]
+
+## CAP-705-zvpwyQ — 2026-10-16T09:24:25Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-705-zvpwyQ/output.log`.
+
+capture=CAP-705-zvpwyQ command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-build-adapters.sh  key=  -- 10/10 passed exit=0 output=30e3c37ef9cd95137d04ac561e5cffcfcd29854d9a0c3902906b94c2d462b9f8 input=fd20f46a37268b1cd8bb7874982e3a26a1ce713a04418168d3c6b898edf76305 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-705-zvpwyQ/output.log [complete metadata: capture directory]
+
+## CAP-706-msv2nT — 2026-10-16T09:30:43Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-706-msv2nT/output.log`.
+
+capture=CAP-706-msv2nT command=/bin/bash -o pipefail -c bash tests/test-spec-run.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=6afa5129adcacc389d7dd247ba059bc93f6abec84371466d3b7f5f19daa2bbd2 input=fd20f46a37268b1cd8bb7874982e3a26a1ce713a04418168d3c6b898edf76305 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-706-msv2nT/output.log [complete metadata: capture directory]
+
+## CAP-707-h61Dxy — 2026-10-16T09:46:11Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-707-h61Dxy/output.log`.
+
+capture=CAP-707-h61Dxy command=/bin/bash -o pipefail -c bash tests/test-spec-task.sh && bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=92e0f6ae9eb40c2f7ffccbed611018798c37aebeb5ad3d5c438bbe7232566791 input=fd20f46a37268b1cd8bb7874982e3a26a1ce713a04418168d3c6b898edf76305 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-707-h61Dxy/output.log [complete metadata: capture directory]
+
+## CAP-708-MfYqn1 — 2026-10-16T09:56:17Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-708-MfYqn1/output.log`.
+
+capture=CAP-708-MfYqn1 command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh  key=  -- 8/8 passed exit=0 output=ce84a8f1d4f2042d5862aaccf523b5c2cad467528205d0937715b65aca1aed5f input=fd20f46a37268b1cd8bb7874982e3a26a1ce713a04418168d3c6b898edf76305 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-708-MfYqn1/output.log [complete metadata: capture directory]
+
+## CAP-709-KaogRz — 2026-10-16T10:09:59Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-709-KaogRz/output.log`.
+
+capture=CAP-709-KaogRz command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=eaed840fc7e1da90d7fbc574f13167212b5c09e43b1adc486bd8fb879c84e61f input=fd20f46a37268b1cd8bb7874982e3a26a1ce713a04418168d3c6b898edf76305 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-709-KaogRz/output.log [complete metadata: capture directory]
+
+## CAP-710-OfZwUD — 2026-10-16T10:23:20Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-710-OfZwUD/output.log`.
+
+capture=CAP-710-OfZwUD command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh  key=  -- 8/8 passed exit=0 output=54b9f0a22b923c2d0091384a9699e48ecf699315a1a65541bb4fc4c4ea1f18cb input=fd20f46a37268b1cd8bb7874982e3a26a1ce713a04418168d3c6b898edf76305 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-710-OfZwUD/output.log [complete metadata: capture directory]
+
+## CAP-711-bSQmMF — 2026-10-16T10:34:24Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-711-bSQmMF/output.log`.
+
+capture=CAP-711-bSQmMF command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=3c87a1f9bf70014c150ad6a98d52d0712b28b5673ae59e8b28a1f03a9dc92ff5 input=fd20f46a37268b1cd8bb7874982e3a26a1ce713a04418168d3c6b898edf76305 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-711-bSQmMF/output.log [complete metadata: capture directory]
+
+## CAP-712-vrdYUH — 2026-10-16T10:58:25Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-712-vrdYUH/output.log`.
+
+capture=CAP-712-vrdYUH command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-verification.sh && bash tests/test-sdd-analyze.sh  key=  -- 19/19 passed exit=0 output=41657457f44cc1f57e09e2ad86e8a53a74aad41f03dc1ca71aa130ae7943ebc5 input=fd20f46a37268b1cd8bb7874982e3a26a1ce713a04418168d3c6b898edf76305 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-712-vrdYUH/output.log [complete metadata: capture directory]
+
+## CAP-713-O1p8ip — 2026-10-16T11:16:21Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-713-O1p8ip/output.log`.
+
+capture=CAP-713-O1p8ip command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-spec-gate.sh  key=  -- 8/8 passed exit=0 output=3b10b8d711d8f1e2776ce8d3c566044bc2bab6db387d1a97bbeadfae9e27a756 input=fd20f46a37268b1cd8bb7874982e3a26a1ce713a04418168d3c6b898edf76305 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-713-O1p8ip/output.log [complete metadata: capture directory]
+
+## CAP-714-4TDfVR — 2026-10-16T11:33:45Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-714-4TDfVR/output.log`.
+
+capture=CAP-714-4TDfVR command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-sdd-analyze.sh  key=  -- 19/19 passed exit=0 output=2f8d38f0a97fadd4499b71f914d1807d157d1b700cb97d4e4ebf99c03c9d022a input=fd20f46a37268b1cd8bb7874982e3a26a1ce713a04418168d3c6b898edf76305 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-714-4TDfVR/output.log [complete metadata: capture directory]
+
+## CAP-715-rvv0kG — 2026-10-16T11:54:13Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-715-rvv0kG/output.log`.
+
+capture=CAP-715-rvv0kG command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=574f03c0c565372d75397dd9b169d43c48a9e10df69ca03bb1000b795be3d478 input=fd20f46a37268b1cd8bb7874982e3a26a1ce713a04418168d3c6b898edf76305 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-715-rvv0kG/output.log [complete metadata: capture directory]
+
+## CAP-716-NvH0m3 — 2026-10-16T12:13:34Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-716-NvH0m3/output.log`.
+
+capture=CAP-716-NvH0m3 command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=67612af507b659daf52b99440e4b75b0d53668dcbdd360085dd60783ad1d4917 input=fd20f46a37268b1cd8bb7874982e3a26a1ce713a04418168d3c6b898edf76305 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-716-NvH0m3/output.log [complete metadata: capture directory]
+
+## CAP-717-tBABR3 — 2026-10-16T12:21:54Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-717-tBABR3/output.log`.
+
+capture=CAP-717-tBABR3 command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline  key=1 warning(s), 0 errors exit=0 output=67672687c36420fc7822e3f2737107bbfe5cb92eee0f430ca3edbcfe86a80b78 input=fd20f46a37268b1cd8bb7874982e3a26a1ce713a04418168d3c6b898edf76305 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-717-tBABR3/output.log [complete metadata: capture directory]
+
+## CAP-718-yn9nqj — 2026-10-16T12:22:27Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-718-yn9nqj/output.log`.
+
+capture=CAP-718-yn9nqj command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-ac-coverage.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline --root /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline  key=bound — every AC is named by at least one test file exit=0 output=f73c8f5d85d60868683fbbbc8b089edf595bcc9720bf68afb771f5ad57e016ce input=fd20f46a37268b1cd8bb7874982e3a26a1ce713a04418168d3c6b898edf76305 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-718-yn9nqj/output.log [complete metadata: capture directory]
+
+## CAP-719-fedc02 — 2026-10-16T14:11:36Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-719-fedc02/output.log`.
+
+capture=CAP-719-fedc02 command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-evidence.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline  key=current evidence: all completed task checks have valid current captures exit=0 output=752155a7371defb341bf3a5e8782888de460aab80ff20318452f6b57f839264b input=fd20f46a37268b1cd8bb7874982e3a26a1ce713a04418168d3c6b898edf76305 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-719-fedc02/output.log [complete metadata: capture directory]
+
+## CAP-720-Oft7eN — 2026-10-16T14:34:04Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-720-Oft7eN/output.log`.
+
+capture=CAP-720-Oft7eN command=/bin/bash -o pipefail -c bash tests/run.sh  key=  -- 3/3 passed exit=0 output=b150ad3c2adee17324471b5021f9d78f292fabb354dcc1009742d11f71d50699 input=fd20f46a37268b1cd8bb7874982e3a26a1ce713a04418168d3c6b898edf76305 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-720-Oft7eN/output.log [complete metadata: capture directory]
+
+## CAP-721-y2B46W — 2026-10-16T14:35:10Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-721-y2B46W/output.log`.
+
+capture=CAP-721-y2B46W command=/bin/bash -o pipefail -c bash tests/shellcheck.sh  key=(no output) exit=0 output=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 input=fd20f46a37268b1cd8bb7874982e3a26a1ce713a04418168d3c6b898edf76305 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-721-y2B46W/output.log [complete metadata: capture directory]
+
+## GATE-FLOOR
+
+Result: FLOOR-5cLeox; source: fd20f46a37268b1cd8bb7874982e3a26a1ce713a04418168d3c6b898edf76305; exit: 0; command records: `notes/verification/floors/FLOOR-5cLeox/commands.nul`.
+
+## CAP-722-hO9jDO — 2026-10-16T21:13:12Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-722-hO9jDO/output.log`.
+
+capture=CAP-722-hO9jDO command=/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh  key=  -- 3/3 passed exit=0 output=b150ad3c2adee17324471b5021f9d78f292fabb354dcc1009742d11f71d50699 input=809a9b69c4a360cc3e17c07a1f2126a872eb7c229768d4f36f948f228167a443 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-722-hO9jDO/output.log [complete metadata: capture directory]
+
+## CAP-723-7vd96U — 2026-10-16T21:25:29Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-723-7vd96U/output.log`.
+
+capture=CAP-723-7vd96U command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=e2bd5dfbf6ddcf901317732547649b3e2028c869384acc1e688d65a77c738b33 input=809a9b69c4a360cc3e17c07a1f2126a872eb7c229768d4f36f948f228167a443 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-723-7vd96U/output.log [complete metadata: capture directory]
+
+## CAP-724-77GruR — 2026-10-16T21:26:29Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-724-77GruR/output.log`.
+
+capture=CAP-724-77GruR command=/bin/bash -o pipefail -c bash tests/test-sdd-analyze.sh  key=  -- 19/19 passed exit=0 output=f9166fdc124954abb48f7c8ed789d96a1ce68c06a9da6df0d9d49a79a07aca5a input=809a9b69c4a360cc3e17c07a1f2126a872eb7c229768d4f36f948f228167a443 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-724-77GruR/output.log [complete metadata: capture directory]
+
+## CAP-725-MN35LV — 2026-10-16T21:30:31Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-725-MN35LV/output.log`.
+
+capture=CAP-725-MN35LV command=/bin/bash -o pipefail -c bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=b0307d5f3643923c85b2aa7d758ae3f0bf12a603f48312482e8cbeddb222d636 input=809a9b69c4a360cc3e17c07a1f2126a872eb7c229768d4f36f948f228167a443 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-725-MN35LV/output.log [complete metadata: capture directory]
+
+## CAP-726-dHC1Fy — 2026-10-16T21:31:35Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-726-dHC1Fy/output.log`.
+
+capture=CAP-726-dHC1Fy command=/bin/bash -o pipefail -c bash tests/test-golden-example.sh  key=  -- 5/5 passed exit=0 output=dc54db17fc456b716d3c4bacdc0e09fda5c2df8fd46442fa54ea9b855e779182 input=809a9b69c4a360cc3e17c07a1f2126a872eb7c229768d4f36f948f228167a443 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-726-dHC1Fy/output.log [complete metadata: capture directory]
+
+## CAP-727-DTmasv — 2026-10-16T21:41:08Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-727-DTmasv/output.log`.
+
+capture=CAP-727-DTmasv command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-build-adapters.sh  key=  -- 10/10 passed exit=0 output=30e3c37ef9cd95137d04ac561e5cffcfcd29854d9a0c3902906b94c2d462b9f8 input=809a9b69c4a360cc3e17c07a1f2126a872eb7c229768d4f36f948f228167a443 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-727-DTmasv/output.log [complete metadata: capture directory]
+
+## CAP-728-ZmDgxd — 2026-10-16T21:45:58Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-728-ZmDgxd/output.log`.
+
+capture=CAP-728-ZmDgxd command=/bin/bash -o pipefail -c bash tests/test-spec-run.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=6afa5129adcacc389d7dd247ba059bc93f6abec84371466d3b7f5f19daa2bbd2 input=809a9b69c4a360cc3e17c07a1f2126a872eb7c229768d4f36f948f228167a443 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-728-ZmDgxd/output.log [complete metadata: capture directory]
+
+## CAP-729-84T5CQ — 2026-10-16T22:00:05Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-729-84T5CQ/output.log`.
+
+capture=CAP-729-84T5CQ command=/bin/bash -o pipefail -c bash tests/test-spec-task.sh && bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=92e0f6ae9eb40c2f7ffccbed611018798c37aebeb5ad3d5c438bbe7232566791 input=809a9b69c4a360cc3e17c07a1f2126a872eb7c229768d4f36f948f228167a443 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-729-84T5CQ/output.log [complete metadata: capture directory]
+
+## CAP-730-MIK7Ag — 2026-10-16T22:10:38Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-730-MIK7Ag/output.log`.
+
+capture=CAP-730-MIK7Ag command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh  key=  -- 8/8 passed exit=0 output=ce84a8f1d4f2042d5862aaccf523b5c2cad467528205d0937715b65aca1aed5f input=809a9b69c4a360cc3e17c07a1f2126a872eb7c229768d4f36f948f228167a443 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-730-MIK7Ag/output.log [complete metadata: capture directory]
+
+## CAP-731-kK9dxV — 2026-10-16T22:24:48Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-731-kK9dxV/output.log`.
+
+capture=CAP-731-kK9dxV command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=eaed840fc7e1da90d7fbc574f13167212b5c09e43b1adc486bd8fb879c84e61f input=809a9b69c4a360cc3e17c07a1f2126a872eb7c229768d4f36f948f228167a443 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-731-kK9dxV/output.log [complete metadata: capture directory]
+
+## CAP-732-7avHw4 — 2026-10-16T22:38:43Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-732-7avHw4/output.log`.
+
+capture=CAP-732-7avHw4 command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh  key=  -- 8/8 passed exit=0 output=54b9f0a22b923c2d0091384a9699e48ecf699315a1a65541bb4fc4c4ea1f18cb input=809a9b69c4a360cc3e17c07a1f2126a872eb7c229768d4f36f948f228167a443 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-732-7avHw4/output.log [complete metadata: capture directory]
+
+## CAP-733-lBluwv — 2026-10-16T22:50:01Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-733-lBluwv/output.log`.
+
+capture=CAP-733-lBluwv command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=3c87a1f9bf70014c150ad6a98d52d0712b28b5673ae59e8b28a1f03a9dc92ff5 input=809a9b69c4a360cc3e17c07a1f2126a872eb7c229768d4f36f948f228167a443 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-733-lBluwv/output.log [complete metadata: capture directory]
+
+## CAP-734-Lhw7W6 — 2026-10-16T23:13:23Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-734-Lhw7W6/output.log`.
+
+capture=CAP-734-Lhw7W6 command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-verification.sh && bash tests/test-sdd-analyze.sh  key=  -- 19/19 passed exit=0 output=41657457f44cc1f57e09e2ad86e8a53a74aad41f03dc1ca71aa130ae7943ebc5 input=809a9b69c4a360cc3e17c07a1f2126a872eb7c229768d4f36f948f228167a443 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-734-Lhw7W6/output.log [complete metadata: capture directory]
+
+## CAP-735-o3rWko — 2026-10-16T23:32:17Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-735-o3rWko/output.log`.
+
+capture=CAP-735-o3rWko command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-spec-gate.sh  key=  -- 8/8 passed exit=0 output=3b10b8d711d8f1e2776ce8d3c566044bc2bab6db387d1a97bbeadfae9e27a756 input=809a9b69c4a360cc3e17c07a1f2126a872eb7c229768d4f36f948f228167a443 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-735-o3rWko/output.log [complete metadata: capture directory]
+
+## CAP-736-1N9Smf — 2026-10-16T23:50:26Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-736-1N9Smf/output.log`.
+
+capture=CAP-736-1N9Smf command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-sdd-analyze.sh  key=  -- 19/19 passed exit=0 output=2f8d38f0a97fadd4499b71f914d1807d157d1b700cb97d4e4ebf99c03c9d022a input=809a9b69c4a360cc3e17c07a1f2126a872eb7c229768d4f36f948f228167a443 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-736-1N9Smf/output.log [complete metadata: capture directory]
+
+## CAP-737-dUmb39 — 2026-10-17T00:11:58Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-737-dUmb39/output.log`.
+
+capture=CAP-737-dUmb39 command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=574f03c0c565372d75397dd9b169d43c48a9e10df69ca03bb1000b795be3d478 input=809a9b69c4a360cc3e17c07a1f2126a872eb7c229768d4f36f948f228167a443 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-737-dUmb39/output.log [complete metadata: capture directory]
+
+## CAP-738-ma4LSb — 2026-10-17T00:39:29Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-738-ma4LSb/output.log`.
+
+capture=CAP-738-ma4LSb command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=67612af507b659daf52b99440e4b75b0d53668dcbdd360085dd60783ad1d4917 input=809a9b69c4a360cc3e17c07a1f2126a872eb7c229768d4f36f948f228167a443 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-738-ma4LSb/output.log [complete metadata: capture directory]
+
+## CAP-739-vhg2TZ — 2026-10-17T00:48:46Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-739-vhg2TZ/output.log`.
+
+capture=CAP-739-vhg2TZ command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline  key=1 warning(s), 0 errors exit=0 output=8c7c0307972af060d058d124aa4c300cf258dcc3f82736c2bb66bc802b8d0c1d input=809a9b69c4a360cc3e17c07a1f2126a872eb7c229768d4f36f948f228167a443 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-739-vhg2TZ/output.log [complete metadata: capture directory]
+
+## CAP-740-TDa3x8 — 2026-10-17T00:49:21Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-740-TDa3x8/output.log`.
+
+capture=CAP-740-TDa3x8 command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-ac-coverage.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline --root /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline  key=bound — every AC is named by at least one test file exit=0 output=f73c8f5d85d60868683fbbbc8b089edf595bcc9720bf68afb771f5ad57e016ce input=809a9b69c4a360cc3e17c07a1f2126a872eb7c229768d4f36f948f228167a443 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-740-TDa3x8/output.log [complete metadata: capture directory]
+
+## CAP-741-LEUVYF — 2026-10-17T03:04:58Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-741-LEUVYF/output.log`.
+
+capture=CAP-741-LEUVYF command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-evidence.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline  key=current evidence: all completed task checks have valid current captures exit=0 output=7dbe539534b2215166519c1dbcee3ccc83733f83e851ae2caff324b739af38e4 input=809a9b69c4a360cc3e17c07a1f2126a872eb7c229768d4f36f948f228167a443 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-741-LEUVYF/output.log [complete metadata: capture directory]
+
+## CAP-742-DDEsOF — 2026-10-17T03:26:49Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-742-DDEsOF/output.log`.
+
+capture=CAP-742-DDEsOF command=/bin/bash -o pipefail -c bash tests/run.sh  key=  -- 3/3 passed exit=0 output=b150ad3c2adee17324471b5021f9d78f292fabb354dcc1009742d11f71d50699 input=809a9b69c4a360cc3e17c07a1f2126a872eb7c229768d4f36f948f228167a443 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-742-DDEsOF/output.log [complete metadata: capture directory]
+
+## CAP-743-o5lonL — 2026-10-17T03:27:53Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-743-o5lonL/output.log`.
+
+capture=CAP-743-o5lonL command=/bin/bash -o pipefail -c bash tests/shellcheck.sh  key=(no output) exit=0 output=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 input=809a9b69c4a360cc3e17c07a1f2126a872eb7c229768d4f36f948f228167a443 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-743-o5lonL/output.log [complete metadata: capture directory]
+
+## GATE-FLOOR
+
+Result: FLOOR-3Ge8eO; source: 809a9b69c4a360cc3e17c07a1f2126a872eb7c229768d4f36f948f228167a443; exit: 0; command records: `notes/verification/floors/FLOOR-3Ge8eO/commands.nul`.
+
+## CAP-744-sgOYqc — 2026-10-17T21:13:26Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-744-sgOYqc/output.log`.
+
+capture=CAP-744-sgOYqc command=/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh  key=  -- 3/3 passed exit=0 output=b150ad3c2adee17324471b5021f9d78f292fabb354dcc1009742d11f71d50699 input=a7e7dd326b27c7565c26349485c440af26f718a7f16e400ea42ed6961d03cd1a log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-744-sgOYqc/output.log [complete metadata: capture directory]
+
+## CAP-745-LjE9Xa — 2026-10-17T21:23:33Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-745-LjE9Xa/output.log`.
+
+capture=CAP-745-LjE9Xa command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=e2bd5dfbf6ddcf901317732547649b3e2028c869384acc1e688d65a77c738b33 input=a7e7dd326b27c7565c26349485c440af26f718a7f16e400ea42ed6961d03cd1a log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-745-LjE9Xa/output.log [complete metadata: capture directory]
+
+## CAP-746-fGlw7A — 2026-10-17T21:24:44Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-746-fGlw7A/output.log`.
+
+capture=CAP-746-fGlw7A command=/bin/bash -o pipefail -c bash tests/test-sdd-analyze.sh  key=  -- 19/19 passed exit=0 output=f9166fdc124954abb48f7c8ed789d96a1ce68c06a9da6df0d9d49a79a07aca5a input=a7e7dd326b27c7565c26349485c440af26f718a7f16e400ea42ed6961d03cd1a log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-746-fGlw7A/output.log [complete metadata: capture directory]
+
+## CAP-747-m1dr8w — 2026-10-17T21:29:42Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-747-m1dr8w/output.log`.
+
+capture=CAP-747-m1dr8w command=/bin/bash -o pipefail -c bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=b0307d5f3643923c85b2aa7d758ae3f0bf12a603f48312482e8cbeddb222d636 input=a7e7dd326b27c7565c26349485c440af26f718a7f16e400ea42ed6961d03cd1a log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-747-m1dr8w/output.log [complete metadata: capture directory]
+
+## CAP-748-YsET15 — 2026-10-17T21:30:53Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-748-YsET15/output.log`.
+
+capture=CAP-748-YsET15 command=/bin/bash -o pipefail -c bash tests/test-golden-example.sh  key=  -- 5/5 passed exit=0 output=dc54db17fc456b716d3c4bacdc0e09fda5c2df8fd46442fa54ea9b855e779182 input=a7e7dd326b27c7565c26349485c440af26f718a7f16e400ea42ed6961d03cd1a log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-748-YsET15/output.log [complete metadata: capture directory]
+
+## CAP-749-KbSXvo — 2026-10-17T21:41:03Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-749-KbSXvo/output.log`.
+
+capture=CAP-749-KbSXvo command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-build-adapters.sh  key=  -- 10/10 passed exit=0 output=30e3c37ef9cd95137d04ac561e5cffcfcd29854d9a0c3902906b94c2d462b9f8 input=a7e7dd326b27c7565c26349485c440af26f718a7f16e400ea42ed6961d03cd1a log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-749-KbSXvo/output.log [complete metadata: capture directory]
+
+## CAP-750-0wJowY — 2026-10-17T21:45:59Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-750-0wJowY/output.log`.
+
+capture=CAP-750-0wJowY command=/bin/bash -o pipefail -c bash tests/test-spec-run.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=6afa5129adcacc389d7dd247ba059bc93f6abec84371466d3b7f5f19daa2bbd2 input=a7e7dd326b27c7565c26349485c440af26f718a7f16e400ea42ed6961d03cd1a log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-750-0wJowY/output.log [complete metadata: capture directory]
+
+## CAP-751-INEeZW — 2026-10-17T22:00:20Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-751-INEeZW/output.log`.
+
+capture=CAP-751-INEeZW command=/bin/bash -o pipefail -c bash tests/test-spec-task.sh && bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=92e0f6ae9eb40c2f7ffccbed611018798c37aebeb5ad3d5c438bbe7232566791 input=a7e7dd326b27c7565c26349485c440af26f718a7f16e400ea42ed6961d03cd1a log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-751-INEeZW/output.log [complete metadata: capture directory]
+
+## CAP-752-6bXMqa — 2026-10-17T22:10:58Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-752-6bXMqa/output.log`.
+
+capture=CAP-752-6bXMqa command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh  key=  -- 8/8 passed exit=0 output=ce84a8f1d4f2042d5862aaccf523b5c2cad467528205d0937715b65aca1aed5f input=a7e7dd326b27c7565c26349485c440af26f718a7f16e400ea42ed6961d03cd1a log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-752-6bXMqa/output.log [complete metadata: capture directory]
+
+## CAP-753-YUm7ON — 2026-10-17T22:25:16Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-753-YUm7ON/output.log`.
+
+capture=CAP-753-YUm7ON command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=eaed840fc7e1da90d7fbc574f13167212b5c09e43b1adc486bd8fb879c84e61f input=a7e7dd326b27c7565c26349485c440af26f718a7f16e400ea42ed6961d03cd1a log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-753-YUm7ON/output.log [complete metadata: capture directory]
+
+## CAP-754-RuaAFH — 2026-10-17T22:39:20Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-754-RuaAFH/output.log`.
+
+capture=CAP-754-RuaAFH command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh  key=  -- 8/8 passed exit=0 output=54b9f0a22b923c2d0091384a9699e48ecf699315a1a65541bb4fc4c4ea1f18cb input=a7e7dd326b27c7565c26349485c440af26f718a7f16e400ea42ed6961d03cd1a log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-754-RuaAFH/output.log [complete metadata: capture directory]
+
+## CAP-755-NfiHRC — 2026-10-17T22:50:56Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-755-NfiHRC/output.log`.
+
+capture=CAP-755-NfiHRC command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=3c87a1f9bf70014c150ad6a98d52d0712b28b5673ae59e8b28a1f03a9dc92ff5 input=a7e7dd326b27c7565c26349485c440af26f718a7f16e400ea42ed6961d03cd1a log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-755-NfiHRC/output.log [complete metadata: capture directory]
+
+## CAP-756-crUoLf — 2026-10-17T23:15:02Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-756-crUoLf/output.log`.
+
+capture=CAP-756-crUoLf command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-verification.sh && bash tests/test-sdd-analyze.sh  key=  -- 19/19 passed exit=0 output=41657457f44cc1f57e09e2ad86e8a53a74aad41f03dc1ca71aa130ae7943ebc5 input=a7e7dd326b27c7565c26349485c440af26f718a7f16e400ea42ed6961d03cd1a log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-756-crUoLf/output.log [complete metadata: capture directory]
+
+## CAP-757-hT4h6z — 2026-10-17T23:34:39Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-757-hT4h6z/output.log`.
+
+capture=CAP-757-hT4h6z command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-spec-gate.sh  key=  -- 8/8 passed exit=0 output=3b10b8d711d8f1e2776ce8d3c566044bc2bab6db387d1a97bbeadfae9e27a756 input=a7e7dd326b27c7565c26349485c440af26f718a7f16e400ea42ed6961d03cd1a log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-757-hT4h6z/output.log [complete metadata: capture directory]
+
+## CAP-758-nGDuE2 — 2026-10-17T23:54:04Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-758-nGDuE2/output.log`.
+
+capture=CAP-758-nGDuE2 command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-sdd-analyze.sh  key=  -- 19/19 passed exit=0 output=2f8d38f0a97fadd4499b71f914d1807d157d1b700cb97d4e4ebf99c03c9d022a input=a7e7dd326b27c7565c26349485c440af26f718a7f16e400ea42ed6961d03cd1a log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-758-nGDuE2/output.log [complete metadata: capture directory]
+
+## CAP-759-4cy68p — 2026-10-18T00:20:02Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-759-4cy68p/output.log`.
+
+capture=CAP-759-4cy68p command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=574f03c0c565372d75397dd9b169d43c48a9e10df69ca03bb1000b795be3d478 input=a7e7dd326b27c7565c26349485c440af26f718a7f16e400ea42ed6961d03cd1a log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-759-4cy68p/output.log [complete metadata: capture directory]
+
+## CAP-760-99JmGQ — 2026-10-18T00:52:14Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-760-99JmGQ/output.log`.
+
+capture=CAP-760-99JmGQ command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=67612af507b659daf52b99440e4b75b0d53668dcbdd360085dd60783ad1d4917 input=a7e7dd326b27c7565c26349485c440af26f718a7f16e400ea42ed6961d03cd1a log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-760-99JmGQ/output.log [complete metadata: capture directory]
+
+## CAP-761-GED647 — 2026-10-18T01:03:32Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-761-GED647/output.log`.
+
+capture=CAP-761-GED647 command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline  key=1 warning(s), 0 errors exit=0 output=36a9790532a3e19e8a9fb7e6ac7efb084a158ce8ed1cb63bfefe6e9ca4e32e2c input=a7e7dd326b27c7565c26349485c440af26f718a7f16e400ea42ed6961d03cd1a log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-761-GED647/output.log [complete metadata: capture directory]
+
+## CAP-762-kR8V32 — 2026-10-18T01:04:09Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-762-kR8V32/output.log`.
+
+capture=CAP-762-kR8V32 command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-ac-coverage.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline --root /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline  key=bound — every AC is named by at least one test file exit=0 output=f73c8f5d85d60868683fbbbc8b089edf595bcc9720bf68afb771f5ad57e016ce input=a7e7dd326b27c7565c26349485c440af26f718a7f16e400ea42ed6961d03cd1a log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-762-kR8V32/output.log [complete metadata: capture directory]
+
+## CAP-763-fpxj8g — 2026-10-18T03:07:05Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-763-fpxj8g/output.log`.
+
+capture=CAP-763-fpxj8g command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-evidence.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline  key=current evidence: all completed task checks have valid current captures exit=0 output=418c53f841bd2affe3cfd9e0cbb694583bf621c9d9940058b6b6bdafb65c4cd1 input=a7e7dd326b27c7565c26349485c440af26f718a7f16e400ea42ed6961d03cd1a log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-763-fpxj8g/output.log [complete metadata: capture directory]
+
+## CAP-764-xRH5jN — 2026-10-18T03:29:47Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-764-xRH5jN/output.log`.
+
+capture=CAP-764-xRH5jN command=/bin/bash -o pipefail -c bash tests/run.sh  key=  -- 3/3 passed exit=0 output=b150ad3c2adee17324471b5021f9d78f292fabb354dcc1009742d11f71d50699 input=a7e7dd326b27c7565c26349485c440af26f718a7f16e400ea42ed6961d03cd1a log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-764-xRH5jN/output.log [complete metadata: capture directory]
+
+## CAP-765-hYGZir — 2026-10-18T03:30:55Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-765-hYGZir/output.log`.
+
+capture=CAP-765-hYGZir command=/bin/bash -o pipefail -c bash tests/shellcheck.sh  key=(no output) exit=0 output=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 input=a7e7dd326b27c7565c26349485c440af26f718a7f16e400ea42ed6961d03cd1a log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-765-hYGZir/output.log [complete metadata: capture directory]
+
+## GATE-FLOOR
+
+Result: FLOOR-il41Kn; source: a7e7dd326b27c7565c26349485c440af26f718a7f16e400ea42ed6961d03cd1a; exit: 0; command records: `notes/verification/floors/FLOOR-il41Kn/commands.nul`.
+
+## CAP-766-iRGuhN — 2026-10-25T15:43:16Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-766-iRGuhN/output.log`.
+
+capture=CAP-766-iRGuhN command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=e2bd5dfbf6ddcf901317732547649b3e2028c869384acc1e688d65a77c738b33 input=a7e7dd326b27c7565c26349485c440af26f718a7f16e400ea42ed6961d03cd1a log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-766-iRGuhN/output.log [complete metadata: capture directory]
+
+## CAP-767-tGxtxB — 2026-10-25T19:34:23Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-767-tGxtxB/output.log`.
+
+capture=CAP-767-tGxtxB command=/bin/bash -o pipefail -c bash tests/test-sdd-analyze.sh  key=  -- 19/19 passed exit=0 output=f9166fdc124954abb48f7c8ed789d96a1ce68c06a9da6df0d9d49a79a07aca5a input=3a5df78c6c55ff2a8145ec92270ac8a13d781626d6b0a13bf32a02cffebe3b86 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-767-tGxtxB/output.log [complete metadata: capture directory]
+
+## CAP-768-sy4sk5 — 2026-10-25T19:46:17Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-768-sy4sk5/output.log`.
+
+capture=CAP-768-sy4sk5 command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=e2bd5dfbf6ddcf901317732547649b3e2028c869384acc1e688d65a77c738b33 input=3a5df78c6c55ff2a8145ec92270ac8a13d781626d6b0a13bf32a02cffebe3b86 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-768-sy4sk5/output.log [complete metadata: capture directory]
+
+## CAP-769-bZPhmg — 2026-10-25T20:36:14Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-769-bZPhmg/output.log`.
+
+capture=CAP-769-bZPhmg command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=e2bd5dfbf6ddcf901317732547649b3e2028c869384acc1e688d65a77c738b33 input=c7a82b3ae3b900dcb02a4839decad74db1a13457c5bab9ff859625a5357f0be6 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-769-bZPhmg/output.log [complete metadata: capture directory]
+
+## CAP-770-AgEMCd — 2026-10-25T23:53:27Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-770-AgEMCd/output.log`.
+
+capture=CAP-770-AgEMCd command=/bin/bash -o pipefail -c bash tests/test-sdd-analyze.sh  key=  -- 19/19 passed exit=0 output=f9166fdc124954abb48f7c8ed789d96a1ce68c06a9da6df0d9d49a79a07aca5a input=c7a82b3ae3b900dcb02a4839decad74db1a13457c5bab9ff859625a5357f0be6 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-770-AgEMCd/output.log [complete metadata: capture directory]
+
+## CAP-771-uCIL9v — 2026-10-25T23:57:26Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-771-uCIL9v/output.log`.
+
+capture=CAP-771-uCIL9v command=/bin/bash -o pipefail -c bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=b0307d5f3643923c85b2aa7d758ae3f0bf12a603f48312482e8cbeddb222d636 input=c7a82b3ae3b900dcb02a4839decad74db1a13457c5bab9ff859625a5357f0be6 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-771-uCIL9v/output.log [complete metadata: capture directory]
+
+## CAP-772-DBIpmR — 2026-10-25T23:58:28Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-772-DBIpmR/output.log`.
+
+capture=CAP-772-DBIpmR command=/bin/bash -o pipefail -c bash tests/test-golden-example.sh  key=  -- 5/5 passed exit=0 output=dc54db17fc456b716d3c4bacdc0e09fda5c2df8fd46442fa54ea9b855e779182 input=c7a82b3ae3b900dcb02a4839decad74db1a13457c5bab9ff859625a5357f0be6 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-772-DBIpmR/output.log [complete metadata: capture directory]
+
+## CAP-773-i3XYRk — 2026-10-26T00:09:04Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-773-i3XYRk/output.log`.
+
+capture=CAP-773-i3XYRk command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-build-adapters.sh  key=  -- 10/10 passed exit=0 output=30e3c37ef9cd95137d04ac561e5cffcfcd29854d9a0c3902906b94c2d462b9f8 input=c7a82b3ae3b900dcb02a4839decad74db1a13457c5bab9ff859625a5357f0be6 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-773-i3XYRk/output.log [complete metadata: capture directory]
+
+## CAP-774-yhHmXk — 2026-10-26T00:14:02Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-774-yhHmXk/output.log`.
+
+capture=CAP-774-yhHmXk command=/bin/bash -o pipefail -c bash tests/test-spec-run.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=6afa5129adcacc389d7dd247ba059bc93f6abec84371466d3b7f5f19daa2bbd2 input=c7a82b3ae3b900dcb02a4839decad74db1a13457c5bab9ff859625a5357f0be6 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-774-yhHmXk/output.log [complete metadata: capture directory]
+
+## CAP-775-mI8i8Y — 2026-10-26T00:28:02Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-775-mI8i8Y/output.log`.
+
+capture=CAP-775-mI8i8Y command=/bin/bash -o pipefail -c bash tests/test-spec-task.sh && bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=92e0f6ae9eb40c2f7ffccbed611018798c37aebeb5ad3d5c438bbe7232566791 input=c7a82b3ae3b900dcb02a4839decad74db1a13457c5bab9ff859625a5357f0be6 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-775-mI8i8Y/output.log [complete metadata: capture directory]
+
+## CAP-776-Dg1sHo — 2026-10-26T00:37:59Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-776-Dg1sHo/output.log`.
+
+capture=CAP-776-Dg1sHo command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh  key=  -- 8/8 passed exit=0 output=ce84a8f1d4f2042d5862aaccf523b5c2cad467528205d0937715b65aca1aed5f input=c7a82b3ae3b900dcb02a4839decad74db1a13457c5bab9ff859625a5357f0be6 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-776-Dg1sHo/output.log [complete metadata: capture directory]
+
+## CAP-777-L2FQvD — 2026-10-26T00:51:07Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-777-L2FQvD/output.log`.
+
+capture=CAP-777-L2FQvD command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=eaed840fc7e1da90d7fbc574f13167212b5c09e43b1adc486bd8fb879c84e61f input=c7a82b3ae3b900dcb02a4839decad74db1a13457c5bab9ff859625a5357f0be6 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-777-L2FQvD/output.log [complete metadata: capture directory]
+
+## CAP-778-gr4GCx — 2026-10-26T01:07:44Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-778-gr4GCx/output.log`.
+
+capture=CAP-778-gr4GCx command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh  key=  -- 8/8 passed exit=0 output=54b9f0a22b923c2d0091384a9699e48ecf699315a1a65541bb4fc4c4ea1f18cb input=c7a82b3ae3b900dcb02a4839decad74db1a13457c5bab9ff859625a5357f0be6 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-778-gr4GCx/output.log [complete metadata: capture directory]
+
+## CAP-779-apVHQR — 2026-10-26T01:22:02Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-779-apVHQR/output.log`.
+
+capture=CAP-779-apVHQR command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=3c87a1f9bf70014c150ad6a98d52d0712b28b5673ae59e8b28a1f03a9dc92ff5 input=c7a82b3ae3b900dcb02a4839decad74db1a13457c5bab9ff859625a5357f0be6 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-779-apVHQR/output.log [complete metadata: capture directory]
+
+## CAP-780-lQYtQ1 — 2026-10-26T01:44:56Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-780-lQYtQ1/output.log`.
+
+capture=CAP-780-lQYtQ1 command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-verification.sh && bash tests/test-sdd-analyze.sh  key=  -- 19/19 passed exit=0 output=41657457f44cc1f57e09e2ad86e8a53a74aad41f03dc1ca71aa130ae7943ebc5 input=c7a82b3ae3b900dcb02a4839decad74db1a13457c5bab9ff859625a5357f0be6 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-780-lQYtQ1/output.log [complete metadata: capture directory]
+
+## CAP-781-gKsLEi — 2026-10-26T02:03:38Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-781-gKsLEi/output.log`.
+
+capture=CAP-781-gKsLEi command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-spec-gate.sh  key=  -- 8/8 passed exit=0 output=3b10b8d711d8f1e2776ce8d3c566044bc2bab6db387d1a97bbeadfae9e27a756 input=c7a82b3ae3b900dcb02a4839decad74db1a13457c5bab9ff859625a5357f0be6 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-781-gKsLEi/output.log [complete metadata: capture directory]
+
+## CAP-782-rL7TBL — 2026-10-26T02:21:44Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-782-rL7TBL/output.log`.
+
+capture=CAP-782-rL7TBL command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-sdd-analyze.sh  key=  -- 19/19 passed exit=0 output=2f8d38f0a97fadd4499b71f914d1807d157d1b700cb97d4e4ebf99c03c9d022a input=c7a82b3ae3b900dcb02a4839decad74db1a13457c5bab9ff859625a5357f0be6 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-782-rL7TBL/output.log [complete metadata: capture directory]
+
+## CAP-783-yWnwFT — 2026-10-26T02:42:53Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-783-yWnwFT/output.log`.
+
+capture=CAP-783-yWnwFT command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=574f03c0c565372d75397dd9b169d43c48a9e10df69ca03bb1000b795be3d478 input=c7a82b3ae3b900dcb02a4839decad74db1a13457c5bab9ff859625a5357f0be6 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-783-yWnwFT/output.log [complete metadata: capture directory]
+
+## CAP-784-FY9IOk — 2026-10-26T03:02:41Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-784-FY9IOk/output.log`.
+
+capture=CAP-784-FY9IOk command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=67612af507b659daf52b99440e4b75b0d53668dcbdd360085dd60783ad1d4917 input=c7a82b3ae3b900dcb02a4839decad74db1a13457c5bab9ff859625a5357f0be6 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-784-FY9IOk/output.log [complete metadata: capture directory]
+
+## CAP-785-yErMUi — 2026-10-26T03:26:59Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-785-yErMUi/output.log`.
+
+capture=CAP-785-yErMUi command=/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh  key=  -- 3/3 passed exit=0 output=b150ad3c2adee17324471b5021f9d78f292fabb354dcc1009742d11f71d50699 input=c7a82b3ae3b900dcb02a4839decad74db1a13457c5bab9ff859625a5357f0be6 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-785-yErMUi/output.log [complete metadata: capture directory]
+
+## CAP-786-LLPTpK — 2026-10-26T03:34:45Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-786-LLPTpK/output.log`.
+
+capture=CAP-786-LLPTpK command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline  key=1 warning(s), 0 errors exit=0 output=60b0589931a1ea8a2211e6704cd95272bbba86fd19b31bd5b89370e2874b910d input=c7a82b3ae3b900dcb02a4839decad74db1a13457c5bab9ff859625a5357f0be6 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-786-LLPTpK/output.log [complete metadata: capture directory]
+
+## CAP-787-OghaDn — 2026-10-26T03:35:17Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-787-OghaDn/output.log`.
+
+capture=CAP-787-OghaDn command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-ac-coverage.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline --root /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline  key=bound — every AC is named by at least one test file exit=0 output=f73c8f5d85d60868683fbbbc8b089edf595bcc9720bf68afb771f5ad57e016ce input=c7a82b3ae3b900dcb02a4839decad74db1a13457c5bab9ff859625a5357f0be6 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-787-OghaDn/output.log [complete metadata: capture directory]
+
+## CAP-788-7ilk7x — 2026-10-26T05:47:53Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-788-7ilk7x/output.log`.
+
+capture=CAP-788-7ilk7x command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-evidence.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline  key=current evidence: all completed task checks have valid current captures exit=0 output=04866dde4e364ae23c5f70a3e3f77c81d8824307fe491690145d731918ccf967 input=c7a82b3ae3b900dcb02a4839decad74db1a13457c5bab9ff859625a5357f0be6 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-788-7ilk7x/output.log [complete metadata: capture directory]
+
+## CAP-789-4JirLI — 2026-10-26T06:13:02Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-789-4JirLI/output.log`.
+
+capture=CAP-789-4JirLI command=/bin/bash -o pipefail -c bash tests/run.sh  key=  -- 3/3 passed exit=0 output=b150ad3c2adee17324471b5021f9d78f292fabb354dcc1009742d11f71d50699 input=c7a82b3ae3b900dcb02a4839decad74db1a13457c5bab9ff859625a5357f0be6 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-789-4JirLI/output.log [complete metadata: capture directory]
+
+## CAP-790-0OUIBm — 2026-10-26T06:14:08Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-790-0OUIBm/output.log`.
+
+capture=CAP-790-0OUIBm command=/bin/bash -o pipefail -c bash tests/shellcheck.sh  key=(no output) exit=0 output=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 input=c7a82b3ae3b900dcb02a4839decad74db1a13457c5bab9ff859625a5357f0be6 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-790-0OUIBm/output.log [complete metadata: capture directory]
+
+## GATE-FLOOR
+
+Result: FLOOR-GMlmyY; source: c7a82b3ae3b900dcb02a4839decad74db1a13457c5bab9ff859625a5357f0be6; exit: 0; command records: `notes/verification/floors/FLOOR-GMlmyY/commands.nul`.
+
+## CAP-791-DfeS6O — 2026-10-26T08:09:51Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-791-DfeS6O/output.log`.
+
+capture=CAP-791-DfeS6O command=/bin/bash -o pipefail -c bash tests/test-sdd-analyze.sh  key=  -- 19/19 passed exit=0 output=f9166fdc124954abb48f7c8ed789d96a1ce68c06a9da6df0d9d49a79a07aca5a input=76977c6609cc7064d3fa73250b821c0f04c3375f6f632410a6c2ebc6ddaefffa log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-791-DfeS6O/output.log [complete metadata: capture directory]
+
+## CAP-792-l5lK98 — 2026-10-26T09:07:12Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-792-l5lK98/output.log`.
+
+capture=CAP-792-l5lK98 command=/bin/bash -o pipefail -c bash tests/test-sdd-analyze.sh  key=  -- 19/19 passed exit=0 output=f9166fdc124954abb48f7c8ed789d96a1ce68c06a9da6df0d9d49a79a07aca5a input=dfa8f89669e39310c4b0a342c28091dbd01abb0cbdfbca8e34369977c9533a63 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-792-l5lK98/output.log [complete metadata: capture directory]
+
+## CAP-793-x82v97 — 2026-10-26T20:19:21Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-793-x82v97/output.log`.
+
+capture=CAP-793-x82v97 command=/bin/bash -o pipefail -c bash tests/test-sdd-analyze.sh  key=  -- 19/19 passed exit=0 output=f9166fdc124954abb48f7c8ed789d96a1ce68c06a9da6df0d9d49a79a07aca5a input=e77d4b2969f45f3dfa95cedc18148e1abf0dabffd786946f59ff6a5b7fd07df6 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-793-x82v97/output.log [complete metadata: capture directory]
+
+## CAP-794-aUZ5t0 — 2026-10-26T21:07:49Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-794-aUZ5t0/output.log`.
+
+capture=CAP-794-aUZ5t0 command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=e2bd5dfbf6ddcf901317732547649b3e2028c869384acc1e688d65a77c738b33 input=16ffcec3c2f0cffa21b8c35e7b90d768a27bdfdd37deba9147edd25489946494 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-794-aUZ5t0/output.log [complete metadata: capture directory]
+
+## CAP-795-FlRr7i — 2026-10-26T22:57:46Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-795-FlRr7i/output.log`.
+
+capture=CAP-795-FlRr7i command=/bin/bash -o pipefail -c bash tests/test-sdd-analyze.sh  key=  -- 19/19 passed exit=0 output=f9166fdc124954abb48f7c8ed789d96a1ce68c06a9da6df0d9d49a79a07aca5a input=16ffcec3c2f0cffa21b8c35e7b90d768a27bdfdd37deba9147edd25489946494 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-795-FlRr7i/output.log [complete metadata: capture directory]
+
+## CAP-796-2XOqyZ — 2026-10-26T23:02:10Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-796-2XOqyZ/output.log`.
+
+capture=CAP-796-2XOqyZ command=/bin/bash -o pipefail -c bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=b0307d5f3643923c85b2aa7d758ae3f0bf12a603f48312482e8cbeddb222d636 input=16ffcec3c2f0cffa21b8c35e7b90d768a27bdfdd37deba9147edd25489946494 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-796-2XOqyZ/output.log [complete metadata: capture directory]
+
+## CAP-797-FctBB2 — 2026-10-26T23:03:32Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-797-FctBB2/output.log`.
+
+capture=CAP-797-FctBB2 command=/bin/bash -o pipefail -c bash tests/test-golden-example.sh  key=  -- 5/5 passed exit=0 output=dc54db17fc456b716d3c4bacdc0e09fda5c2df8fd46442fa54ea9b855e779182 input=16ffcec3c2f0cffa21b8c35e7b90d768a27bdfdd37deba9147edd25489946494 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-797-FctBB2/output.log [complete metadata: capture directory]
+
+## CAP-798-TLYX1N — 2026-10-26T23:17:00Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-798-TLYX1N/output.log`.
+
+capture=CAP-798-TLYX1N command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-build-adapters.sh  key=  -- 10/10 passed exit=0 output=30e3c37ef9cd95137d04ac561e5cffcfcd29854d9a0c3902906b94c2d462b9f8 input=16ffcec3c2f0cffa21b8c35e7b90d768a27bdfdd37deba9147edd25489946494 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-798-TLYX1N/output.log [complete metadata: capture directory]
+
+## CAP-799-Uv85Bm — 2026-10-26T23:22:36Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-799-Uv85Bm/output.log`.
+
+capture=CAP-799-Uv85Bm command=/bin/bash -o pipefail -c bash tests/test-spec-run.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=6afa5129adcacc389d7dd247ba059bc93f6abec84371466d3b7f5f19daa2bbd2 input=16ffcec3c2f0cffa21b8c35e7b90d768a27bdfdd37deba9147edd25489946494 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-799-Uv85Bm/output.log [complete metadata: capture directory]
+
+## CAP-800-55Eoxa — 2026-10-26T23:39:28Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-800-55Eoxa/output.log`.
+
+capture=CAP-800-55Eoxa command=/bin/bash -o pipefail -c bash tests/test-spec-task.sh && bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=92e0f6ae9eb40c2f7ffccbed611018798c37aebeb5ad3d5c438bbe7232566791 input=16ffcec3c2f0cffa21b8c35e7b90d768a27bdfdd37deba9147edd25489946494 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-800-55Eoxa/output.log [complete metadata: capture directory]
+
+## CAP-801-17rxQl — 2026-10-26T23:53:42Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-801-17rxQl/output.log`.
+
+capture=CAP-801-17rxQl command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh  key=  -- 8/8 passed exit=0 output=ce84a8f1d4f2042d5862aaccf523b5c2cad467528205d0937715b65aca1aed5f input=16ffcec3c2f0cffa21b8c35e7b90d768a27bdfdd37deba9147edd25489946494 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-801-17rxQl/output.log [complete metadata: capture directory]
+
+## CAP-802-J9xZVq — 2026-10-27T00:09:59Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-802-J9xZVq/output.log`.
+
+capture=CAP-802-J9xZVq command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=eaed840fc7e1da90d7fbc574f13167212b5c09e43b1adc486bd8fb879c84e61f input=16ffcec3c2f0cffa21b8c35e7b90d768a27bdfdd37deba9147edd25489946494 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-802-J9xZVq/output.log [complete metadata: capture directory]
+
+## CAP-803-Mvck1p — 2026-10-27T00:25:58Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-803-Mvck1p/output.log`.
+
+capture=CAP-803-Mvck1p command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh  key=  -- 8/8 passed exit=0 output=54b9f0a22b923c2d0091384a9699e48ecf699315a1a65541bb4fc4c4ea1f18cb input=16ffcec3c2f0cffa21b8c35e7b90d768a27bdfdd37deba9147edd25489946494 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-803-Mvck1p/output.log [complete metadata: capture directory]
+
+## CAP-804-8HwxXv — 2026-10-27T00:40:44Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-804-8HwxXv/output.log`.
+
+capture=CAP-804-8HwxXv command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=3c87a1f9bf70014c150ad6a98d52d0712b28b5673ae59e8b28a1f03a9dc92ff5 input=16ffcec3c2f0cffa21b8c35e7b90d768a27bdfdd37deba9147edd25489946494 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-804-8HwxXv/output.log [complete metadata: capture directory]
+
+## CAP-805-H1IlMe — 2026-10-27T01:10:24Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-805-H1IlMe/output.log`.
+
+capture=CAP-805-H1IlMe command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-verification.sh && bash tests/test-sdd-analyze.sh  key=  -- 19/19 passed exit=0 output=41657457f44cc1f57e09e2ad86e8a53a74aad41f03dc1ca71aa130ae7943ebc5 input=16ffcec3c2f0cffa21b8c35e7b90d768a27bdfdd37deba9147edd25489946494 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-805-H1IlMe/output.log [complete metadata: capture directory]
+
+## CAP-806-VJMgfC — 2026-10-27T01:32:58Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-806-VJMgfC/output.log`.
+
+capture=CAP-806-VJMgfC command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-spec-gate.sh  key=  -- 8/8 passed exit=0 output=3b10b8d711d8f1e2776ce8d3c566044bc2bab6db387d1a97bbeadfae9e27a756 input=16ffcec3c2f0cffa21b8c35e7b90d768a27bdfdd37deba9147edd25489946494 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-806-VJMgfC/output.log [complete metadata: capture directory]
+
+## CAP-807-hTSvFj — 2026-10-27T01:55:42Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-807-hTSvFj/output.log`.
+
+capture=CAP-807-hTSvFj command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-sdd-analyze.sh  key=  -- 19/19 passed exit=0 output=2f8d38f0a97fadd4499b71f914d1807d157d1b700cb97d4e4ebf99c03c9d022a input=16ffcec3c2f0cffa21b8c35e7b90d768a27bdfdd37deba9147edd25489946494 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-807-hTSvFj/output.log [complete metadata: capture directory]
+
+## CAP-808-29pLYW — 2026-10-27T02:21:42Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-808-29pLYW/output.log`.
+
+capture=CAP-808-29pLYW command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=574f03c0c565372d75397dd9b169d43c48a9e10df69ca03bb1000b795be3d478 input=16ffcec3c2f0cffa21b8c35e7b90d768a27bdfdd37deba9147edd25489946494 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-808-29pLYW/output.log [complete metadata: capture directory]
+
+## CAP-809-aWHAFo — 2026-10-27T02:45:52Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-809-aWHAFo/output.log`.
+
+capture=CAP-809-aWHAFo command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=67612af507b659daf52b99440e4b75b0d53668dcbdd360085dd60783ad1d4917 input=16ffcec3c2f0cffa21b8c35e7b90d768a27bdfdd37deba9147edd25489946494 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-809-aWHAFo/output.log [complete metadata: capture directory]
+
+## CAP-810-PJO85F — 2026-10-27T03:15:29Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-810-PJO85F/output.log`.
+
+capture=CAP-810-PJO85F command=/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh  key=  -- 3/3 passed exit=0 output=b150ad3c2adee17324471b5021f9d78f292fabb354dcc1009742d11f71d50699 input=16ffcec3c2f0cffa21b8c35e7b90d768a27bdfdd37deba9147edd25489946494 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-810-PJO85F/output.log [complete metadata: capture directory]
+
+## CAP-811-S3cIkd — 2026-10-27T03:25:20Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-811-S3cIkd/output.log`.
+
+capture=CAP-811-S3cIkd command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline  key=1 warning(s), 0 errors exit=0 output=6a0d0cbdb2a06233f658a7f7d1983a585e3ae4d791d0c3590b9fc7dde6a6d37c input=16ffcec3c2f0cffa21b8c35e7b90d768a27bdfdd37deba9147edd25489946494 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-811-S3cIkd/output.log [complete metadata: capture directory]
+
+## CAP-812-tr3UhC — 2026-10-27T03:25:59Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-812-tr3UhC/output.log`.
+
+capture=CAP-812-tr3UhC command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-ac-coverage.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline --root /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline  key=bound — every AC is named by at least one test file exit=0 output=f73c8f5d85d60868683fbbbc8b089edf595bcc9720bf68afb771f5ad57e016ce input=16ffcec3c2f0cffa21b8c35e7b90d768a27bdfdd37deba9147edd25489946494 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-812-tr3UhC/output.log [complete metadata: capture directory]
+
+## CAP-813-5zeXqf — 2026-10-27T05:54:27Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-813-5zeXqf/output.log`.
+
+capture=CAP-813-5zeXqf command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-evidence.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline  key=current evidence: all completed task checks have valid current captures exit=0 output=bab8bdf6e8c99f2afd4fb7e24ea2cb6f5a257f34d3febacb8deed10d9bb90e09 input=16ffcec3c2f0cffa21b8c35e7b90d768a27bdfdd37deba9147edd25489946494 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-813-5zeXqf/output.log [complete metadata: capture directory]
+
+## CAP-814-2WE0cH — 2026-10-27T06:22:27Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-814-2WE0cH/output.log`.
+
+capture=CAP-814-2WE0cH command=/bin/bash -o pipefail -c bash tests/run.sh  key=  -- 3/3 passed exit=0 output=b150ad3c2adee17324471b5021f9d78f292fabb354dcc1009742d11f71d50699 input=16ffcec3c2f0cffa21b8c35e7b90d768a27bdfdd37deba9147edd25489946494 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-814-2WE0cH/output.log [complete metadata: capture directory]
+
+## CAP-815-P1tcku — 2026-10-27T06:23:38Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-815-P1tcku/output.log`.
+
+capture=CAP-815-P1tcku command=/bin/bash -o pipefail -c bash tests/shellcheck.sh  key=(no output) exit=0 output=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 input=16ffcec3c2f0cffa21b8c35e7b90d768a27bdfdd37deba9147edd25489946494 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-815-P1tcku/output.log [complete metadata: capture directory]
+
+## GATE-FLOOR
+
+Result: FLOOR-qoRY6H; source: 16ffcec3c2f0cffa21b8c35e7b90d768a27bdfdd37deba9147edd25489946494; exit: 0; command records: `notes/verification/floors/FLOOR-qoRY6H/commands.nul`.
+
+## CAP-816-dd36Pv — 2026-10-27T08:04:12Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-816-dd36Pv/output.log`.
+
+capture=CAP-816-dd36Pv command=/bin/bash -o pipefail -c bash tests/test-sdd-analyze.sh  key=  -- 19/19 passed exit=0 output=f9166fdc124954abb48f7c8ed789d96a1ce68c06a9da6df0d9d49a79a07aca5a input=9dac9ec88c3f4c690fd665791e9111f80a14cb9831950659c9a34907f65c8fc6 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-816-dd36Pv/output.log [complete metadata: capture directory]
+
+## CAP-817-8hIfCR — 2026-10-28T09:36:17Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-817-8hIfCR/output.log`.
+
+capture=CAP-817-8hIfCR command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=e2bd5dfbf6ddcf901317732547649b3e2028c869384acc1e688d65a77c738b33 input=9eb5835224ccdf82b8d97b108097fac6ab5b993c38200fd1970c765c5e6a3842 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-817-8hIfCR/output.log [complete metadata: capture directory]
+
+## CAP-818-fLEvh7 — 2026-10-28T10:47:33Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-818-fLEvh7/output.log`.
+
+capture=CAP-818-fLEvh7 command=/bin/bash -o pipefail -c bash tests/test-sdd-analyze.sh  key=  -- 19/19 passed exit=0 output=f9166fdc124954abb48f7c8ed789d96a1ce68c06a9da6df0d9d49a79a07aca5a input=f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-818-fLEvh7/output.log [complete metadata: capture directory]
+
+## CAP-819-05nYhW — 2026-10-28T11:45:43Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-819-05nYhW/output.log`.
+
+capture=CAP-819-05nYhW command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=e2bd5dfbf6ddcf901317732547649b3e2028c869384acc1e688d65a77c738b33 input=f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-819-05nYhW/output.log [complete metadata: capture directory]
+
+## CAP-820-3rZll1 — 2026-10-28T13:30:30Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-820-3rZll1/output.log`.
+
+capture=CAP-820-3rZll1 command=/bin/bash -o pipefail -c bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=b0307d5f3643923c85b2aa7d758ae3f0bf12a603f48312482e8cbeddb222d636 input=f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-820-3rZll1/output.log [complete metadata: capture directory]
+
+## CAP-821-PunhEv — 2026-10-28T13:35:18Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-821-PunhEv/output.log`.
+
+capture=CAP-821-PunhEv command=/bin/bash -o pipefail -c bash tests/test-golden-example.sh  key=  -- 5/5 passed exit=0 output=dc54db17fc456b716d3c4bacdc0e09fda5c2df8fd46442fa54ea9b855e779182 input=f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-821-PunhEv/output.log [complete metadata: capture directory]
+
+## CAP-822-SHhBLf — 2026-10-28T14:02:20Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-822-SHhBLf/output.log`.
+
+capture=CAP-822-SHhBLf command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-build-adapters.sh  key=  -- 10/10 passed exit=0 output=30e3c37ef9cd95137d04ac561e5cffcfcd29854d9a0c3902906b94c2d462b9f8 input=f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-822-SHhBLf/output.log [complete metadata: capture directory]
+
+## CAP-823-V0snkv — 2026-10-28T14:10:44Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-823-V0snkv/output.log`.
+
+capture=CAP-823-V0snkv command=/bin/bash -o pipefail -c bash tests/test-spec-run.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=6afa5129adcacc389d7dd247ba059bc93f6abec84371466d3b7f5f19daa2bbd2 input=f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-823-V0snkv/output.log [complete metadata: capture directory]
+
+## CAP-824-uwaOpM — 2026-10-28T14:33:36Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-824-uwaOpM/output.log`.
+
+capture=CAP-824-uwaOpM command=/bin/bash -o pipefail -c bash tests/test-spec-task.sh && bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=92e0f6ae9eb40c2f7ffccbed611018798c37aebeb5ad3d5c438bbe7232566791 input=f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-824-uwaOpM/output.log [complete metadata: capture directory]
+
+## CAP-825-1XtXfy — 2026-10-28T14:49:01Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-825-1XtXfy/output.log`.
+
+capture=CAP-825-1XtXfy command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh  key=  -- 8/8 passed exit=0 output=ce84a8f1d4f2042d5862aaccf523b5c2cad467528205d0937715b65aca1aed5f input=f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-825-1XtXfy/output.log [complete metadata: capture directory]
+
+## CAP-826-JCf2n0 — 2026-10-28T15:08:36Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-826-JCf2n0/output.log`.
+
+capture=CAP-826-JCf2n0 command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-verification.sh  key=  -- 3/3 passed exit=0 output=eaed840fc7e1da90d7fbc574f13167212b5c09e43b1adc486bd8fb879c84e61f input=f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-826-JCf2n0/output.log [complete metadata: capture directory]
+
+## CAP-827-QUzbWz — 2026-10-28T15:27:03Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-827-QUzbWz/output.log`.
+
+capture=CAP-827-QUzbWz command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh  key=  -- 8/8 passed exit=0 output=54b9f0a22b923c2d0091384a9699e48ecf699315a1a65541bb4fc4c4ea1f18cb input=f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-827-QUzbWz/output.log [complete metadata: capture directory]
+
+## CAP-828-INyKFb — 2026-10-28T15:43:46Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-828-INyKFb/output.log`.
+
+capture=CAP-828-INyKFb command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=3c87a1f9bf70014c150ad6a98d52d0712b28b5673ae59e8b28a1f03a9dc92ff5 input=f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-828-INyKFb/output.log [complete metadata: capture directory]
+
+## CAP-829-bbEFOb — 2026-10-28T16:14:59Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-829-bbEFOb/output.log`.
+
+capture=CAP-829-bbEFOb command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-verification.sh && bash tests/test-sdd-analyze.sh  key=  -- 19/19 passed exit=0 output=41657457f44cc1f57e09e2ad86e8a53a74aad41f03dc1ca71aa130ae7943ebc5 input=f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-829-bbEFOb/output.log [complete metadata: capture directory]
+
+## CAP-830-CsCffj — 2026-10-28T16:39:01Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-830-CsCffj/output.log`.
+
+capture=CAP-830-CsCffj command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-spec-gate.sh  key=  -- 8/8 passed exit=0 output=3b10b8d711d8f1e2776ce8d3c566044bc2bab6db387d1a97bbeadfae9e27a756 input=f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-830-CsCffj/output.log [complete metadata: capture directory]
+
+## CAP-831-9Jnoio — 2026-10-28T17:03:14Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-831-9Jnoio/output.log`.
+
+capture=CAP-831-9Jnoio command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-sdd-analyze.sh  key=  -- 19/19 passed exit=0 output=2f8d38f0a97fadd4499b71f914d1807d157d1b700cb97d4e4ebf99c03c9d022a input=f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-831-9Jnoio/output.log [complete metadata: capture directory]
+
+## CAP-832-yMZbdL — 2026-10-28T17:32:49Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-832-yMZbdL/output.log`.
+
+capture=CAP-832-yMZbdL command=/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=574f03c0c565372d75397dd9b169d43c48a9e10df69ca03bb1000b795be3d478 input=f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-832-yMZbdL/output.log [complete metadata: capture directory]
+
+## CAP-833-iRYlHe — 2026-10-28T17:58:38Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-833-iRYlHe/output.log`.
+
+capture=CAP-833-iRYlHe command=/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=67612af507b659daf52b99440e4b75b0d53668dcbdd360085dd60783ad1d4917 input=f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-833-iRYlHe/output.log [complete metadata: capture directory]
+
+## CAP-834-BGiAv1 — 2026-10-28T18:32:16Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-834-BGiAv1/output.log`.
+
+capture=CAP-834-BGiAv1 command=/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh  key=  -- 3/3 passed exit=0 output=b150ad3c2adee17324471b5021f9d78f292fabb354dcc1009742d11f71d50699 input=f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-834-BGiAv1/output.log [complete metadata: capture directory]
+
+## CAP-835-2xphbV — 2026-10-28T18:43:10Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-835-2xphbV/output.log`.
+
+capture=CAP-835-2xphbV command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline  key=1 warning(s), 0 errors exit=0 output=6a0d0cbdb2a06233f658a7f7d1983a585e3ae4d791d0c3590b9fc7dde6a6d37c input=f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-835-2xphbV/output.log [complete metadata: capture directory]
+
+## CAP-836-fo1wDx — 2026-10-28T18:43:52Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-836-fo1wDx/output.log`.
+
+capture=CAP-836-fo1wDx command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-ac-coverage.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline --root /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline  key=bound — every AC is named by at least one test file exit=0 output=f73c8f5d85d60868683fbbbc8b089edf595bcc9720bf68afb771f5ad57e016ce input=f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-836-fo1wDx/output.log [complete metadata: capture directory]
+
+## CAP-838-AGMe8j — 2026-10-29T07:28:13Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-838-AGMe8j/output.log`.
+
+capture=CAP-838-AGMe8j command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline  key=1 warning(s), 0 errors exit=0 output=6a0d0cbdb2a06233f658a7f7d1983a585e3ae4d791d0c3590b9fc7dde6a6d37c input=f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-838-AGMe8j/output.log [complete metadata: capture directory]
+
+## CAP-839-i8knEa — 2026-10-29T07:28:53Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-839-i8knEa/output.log`.
+
+capture=CAP-839-i8knEa command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-ac-coverage.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline --root /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline  key=bound — every AC is named by at least one test file exit=0 output=f73c8f5d85d60868683fbbbc8b089edf595bcc9720bf68afb771f5ad57e016ce input=f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-839-i8knEa/output.log [complete metadata: capture directory]
+
+## CAP-840-VAwVZK — 2026-10-29T10:03:00Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-840-VAwVZK/output.log`.
+
+capture=CAP-840-VAwVZK command=/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-evidence.sh /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline  key=current evidence: all completed task checks have valid current captures exit=0 output=465b69e2fe91bed30f7a7a4da4e00a3106d3e9fefaf33b5be91ce5b36530f334 input=f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-840-VAwVZK/output.log [complete metadata: capture directory]
+
+## CAP-841-xkIIRp — 2026-10-29T10:33:49Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-841-xkIIRp/output.log`.
+
+capture=CAP-841-xkIIRp command=/bin/bash -o pipefail -c bash tests/run.sh  key=  -- 3/3 passed exit=0 output=b150ad3c2adee17324471b5021f9d78f292fabb354dcc1009742d11f71d50699 input=f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-841-xkIIRp/output.log [complete metadata: capture directory]
+
+## CAP-842-ygeARx — 2026-10-29T10:35:04Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-842-ygeARx/output.log`.
+
+capture=CAP-842-ygeARx command=/bin/bash -o pipefail -c bash tests/shellcheck.sh  key=(no output) exit=0 output=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 input=f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-842-ygeARx/output.log [complete metadata: capture directory]
+
+## GATE-FLOOR
+
+Result: FLOOR-LxJkv3; source: f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0; exit: 0; command records: `notes/verification/floors/FLOOR-LxJkv3/commands.nul`.
+
+## CAP-843-YAhBBt — 2026-10-29T17:46:38Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-843-YAhBBt/output.log`.
+
+capture=CAP-843-YAhBBt command=/bin/bash -o pipefail -c bash tests/test-sdd-analyze.sh  key=  -- 19/19 passed exit=0 output=f9166fdc124954abb48f7c8ed789d96a1ce68c06a9da6df0d9d49a79a07aca5a input=3e70d8170d98f13c04f550c15942f70bdb487abf30ad629ff78db2048f077497 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-843-YAhBBt/output.log [complete metadata: capture directory]
+
+## CAP-844-GCqKod — 2026-10-29T21:51:40Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-844-GCqKod/output.log`.
+
+capture=CAP-844-GCqKod command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=e2bd5dfbf6ddcf901317732547649b3e2028c869384acc1e688d65a77c738b33 input=7d4f17221f13d850cb7db06cdbb6261119ca97b52228adeac74d82f6496a9bff log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-844-GCqKod/output.log [complete metadata: capture directory]
+
+## CAP-845-hwbWOH — 2026-10-29T22:11:30Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-845-hwbWOH/output.log`.
+
+capture=CAP-845-hwbWOH command=/bin/bash -o pipefail -c bash tests/test-sdd-analyze.sh  key=  -- 19/19 passed exit=0 output=f9166fdc124954abb48f7c8ed789d96a1ce68c06a9da6df0d9d49a79a07aca5a input=7d4f17221f13d850cb7db06cdbb6261119ca97b52228adeac74d82f6496a9bff log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-845-hwbWOH/output.log [complete metadata: capture directory]

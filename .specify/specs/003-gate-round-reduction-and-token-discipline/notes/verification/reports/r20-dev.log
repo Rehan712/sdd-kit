@@ -1,0 +1,11 @@
+host: Darwin 25.4.0; bash on PATH: GNU bash, version 3.2.57(1)-release (arm64-apple-darwin25)
+start 2026-10-15T16:39:15Z
+a5c7a0d0bcd16de00816974842fe52556c4bcc002ab8a528960b8c8f3dc96ea6  tests/test-spec-gate.sh
+8b07ca66699440bd4eb6ea6a41df8775d7d927af7d32752a4646f002681f55a1  tests/test-verification.sh
+f927e872de6b5256111191a4472321fc0e03f540b1eec3aa91aa31aff7cb1962  tests/test-gate-contracts.sh
+e68299f202d8327a41afbb490e527484489f0bb40267a674d933b5d332ba5777  .specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md
+run.sh rc=0; per-suite: -- 10/10 passed -- 2/2 passed -- 18/18 passed -- 5/5 passed -- 13/13 passed -- 9/9 passed -- 19/19 passed -- 9/9 passed -- 4/4 passed -- 8/8 passed -- 6/6 passed -- 3/3 passed -- 11/11 passed -- 27/27 passed -- 3/3 passed 
+shellcheck rc=0; 
+live worktree status outside notes/verification/: before=e3e34bee9392ec58 after=e3e34bee9392ec58 unchanged
+end 2026-10-15T17:02:49Z
+suites=147/147 shellcheck_rc=0 run_rc=0

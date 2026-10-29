@@ -1,0 +1,47 @@
+  | live worktree porcelain digest before: e7d8f661973fc356077a9e5d76ab07e2d523d2c769527815816a740043b334b0
+PASS live enumeration rc (want=0 got=0)
+PASS copy extraction rc (want=0 got=0)
+PASS copy committed (want=0 got=0)
+== R5-2 a failed fixture build leaves its callers resolving to the filesystem root
+  | post-delta: rc=1 spec=[] resolves=[/] insandbox=no author=[] objfmt=
+PASS R5-2 post-delta: the build fails (want=1 got=1)
+PASS R5-2 post-delta: the helper prints no spec (want=1 got=1)
+PASS R5-2 post-delta: a caller resolves repo to / (want=1 got=1)
+  | pre-delta:  rc=0 spec=[set] resolves=[/private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/1c1e945f-3f81-4ba8-8888-8263f1ca2273/scratchpad/v5/tmp/mv.1QiPkR/probe] insandbox=yes author=[] objfmt=
+PASS R5-2 pre-delta: the helper still printed its sandbox spec (want=1 got=1)
+  | callers that do not check the status: 27
+PASS R5-2 unchecked callers exist (want=1 got=1)
+== R5-4 git environment still decides fixture builds
+  | GIT_AUTHOR_NAME=Dev: rc=0 spec=[set] resolves=[/private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/1c1e945f-3f81-4ba8-8888-8263f1ca2273/scratchpad/v5/tmp/mv.jeIev5/probe] insandbox=yes author=[Dev] objfmt=sha1
+PASS R5-4 an ambient GIT_AUTHOR_NAME replaces the fixed identity (want=1 got=1)
+  | GIT_DEFAULT_HASH=sha256: rc=0 spec=[set] resolves=[/private/tmp/claude-501/-Users-babar-projects-sdd-kit-public/1c1e945f-3f81-4ba8-8888-8263f1ca2273/scratchpad/v5/tmp/mv.TURCX2/probe] insandbox=yes author=[Fixture] objfmt=sha256
+PASS R5-4 an ambient GIT_DEFAULT_HASH decides the object format (want=1 got=1)
+PASS R5-4 the kit enumeration is identical under GIT_QUARANTINE_PATH (want=0 got=0)
+PASS R5-4 fixture_repository_cases fails under GIT_QUARANTINE_PATH (want=1 got=1)
+PASS R5-4 control: it passes without it (want=0 got=0)
+== R5-5 unchecked init sites, and E08's reason
+PASS R5-5 test_default_root_is_the_git_toplevel passes with init refused (want=0 got=0)
+PASS R5-5 and init really was refused (want=1 got=1)
+  | origins under the pin without GIT_CONFIG_NOSYSTEM: file:.git/config file:/Applications/Xcode.app/Contents/Developer/usr/share/git-core/gitconfig 
+PASS R5-5 this git does read a system file (want=1 got=1)
+== R5-3 E15 makes tree 2 vacuous for an over-correcting scan
+PASS R5-3 over-correction mutant applied (want=0 got=0)
+PASS R5-3 the over-correction is killed (want=1 got=1)
+PASS R5-3 by tree 2 (want=1 got=1)
+PASS R5-3 K60 applied on top (want=0 got=0)
+  | bare+k60@hostile rc=1
+PASS R5-3 with K60, tree 2 no longer reports the over-correction (want=0 got=0)
+== R5-1 E13 is killed by configuration that reaches add and checkout
+PASS R5-1 the kit enumeration is identical under autocrlf (want=0 got=0)
+PASS R5-1 unmutated test_capture_provenance passes under autocrlf (want=0 got=0)
+PASS R5-1 E13 applied (want=0 got=0)
+PASS R5-1 E13 fails test_capture_provenance under autocrlf (want=1 got=1)
+  | assert: AC-020: generated bookkeeping stays reusable assert: AC-020: checkbox/evidence bookkeeping excluded 
+PASS copy unchanged (want=!! tests/.one-gate-contracts.sh
+!! tests/.one-spec-ac-coverage.sh
+!! tests/.one-verification.sh got=!! tests/.one-gate-contracts.sh
+!! tests/.one-spec-ac-coverage.sh
+!! tests/.one-verification.sh)
+  | live worktree porcelain digest after: e7d8f661973fc356077a9e5d76ab07e2d523d2c769527815816a740043b334b0
+PASS live worktree unchanged (want=e7d8f661973fc356077a9e5d76ab07e2d523d2c769527815816a740043b334b0 got=e7d8f661973fc356077a9e5d76ab07e2d523d2c769527815816a740043b334b0)
+verify-5 failures=0

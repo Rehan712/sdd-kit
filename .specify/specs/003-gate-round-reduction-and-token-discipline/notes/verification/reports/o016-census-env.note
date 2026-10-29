@@ -1,0 +1,8 @@
+Correction to o016-census-env.txt (T030o42 review F3, verified in t030o42-review-verify.log).
+The `date` row reads "<no ENVIRONMENT section>", which is wrong: date(1) has an ENVIRONMENT
+section naming TZ. The extraction pattern \b[A-Z][A-Z0-9_]{2,}\b required names of three or more
+characters, so the two-letter TZ was dropped (the pattern also drops any other two-letter name).
+The census reads ENVIRONMENT headings only, so it is a lower bound: macOS `man sh` is a stub page
+naming no variable, while the `sh` it runs is bash in POSIX mode, which reads SHELLOPTS, the locale
+and (interactive) ENV -- covered by the LC_ALL=C pin or by the recorded harness-level item. TZ was
+measured separately (o016-measure.log M3), so no conclusion changes. The receipt is kept as run.

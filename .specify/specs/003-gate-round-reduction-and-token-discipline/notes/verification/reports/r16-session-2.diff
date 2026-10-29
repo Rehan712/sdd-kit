@@ -1,0 +1,18 @@
+--- a/tests/test-gate-contracts.sh
++++ b/tests/test-gate-contracts.sh
+@@ -1399,6 +1399,7 @@
+ second-tier-nested-destination|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- [](a(b)c)Severity: data-loss\n|a second Severity line in finding G-042: - [](a(b)c)Severity: data-loss
+ second-tier-comment-holding-gt|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- <!-- a>b --> Severity: data-loss\n|a second Severity line in finding G-042: - <!-- a>b --> Severity: data-loss
+ second-tier-code-span-tag|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- `<Severity>` data-loss\n|a second Severity line in finding G-042: - `<Severity>` data-loss
++second-tier-footnote-literal|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- [^Severity] data-loss\n|a second Severity line in finding G-042: - [^Severity] data-loss
+ second-tier-code-span-opener|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n- `<!--` Severity: data-loss\n|a second Severity line in finding G-042: - `<!--` Severity: data-loss
+ second-tier-after-empty-comment|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n<!-->\n\n- **Severity:** data-loss\n\nNotes end here. -->\n|quoted content carries a Severity line: - **Severity:** data-loss
+ second-tier-after-empty-comment-dash|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n<!--->\n\n- **Severity:** data-loss\n\nNotes end here. -->\n|quoted content carries a Severity line: - **Severity:** data-loss
+@@ -1513,6 +1514,7 @@
+ behind-html|- **Severity:** minor\n  - <b>Severity:</b> data-loss|a Severity line this grammar cannot read in finding G-050
+ character-reference|- **Severity:** minor\n  - &#83;everity: data-loss|a Severity line this grammar cannot read in finding G-050
+ tag-then-reference|- **Severity:** minor\n- <b>Severity</b>&nbsp;data-loss|a Severity line this grammar cannot read in finding G-050
++footnote-literal|- **Severity:** minor\n- [^Severity] data-loss|a Severity line this grammar cannot read in finding G-050
+ paragraph-ordered-sibling|- **Severity:** minor\n\n1. a\n2. <b\ntitle="x">Severity: data-loss</b>|a Severity line this grammar cannot read in finding G-050
+ paragraph-ordered-paren|- **Severity:** minor\n\n1) a\n2) <b\ntitle="x">Severity: data-loss</b>|a Severity line this grammar cannot read in finding G-050
+ paragraph-zero-one|- **Severity:** minor\n\nText\n01. <b\ntitle="x">Severity: data-loss</b>|a Severity line this grammar cannot read in finding G-050

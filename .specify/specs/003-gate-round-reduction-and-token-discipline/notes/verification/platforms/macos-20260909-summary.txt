@@ -1,0 +1,10 @@
+macOS portability verification — 2026-09-09
+Platform: Darwin rehans-macbook-air.local 25.4.0 Darwin Kernel Version 25.4.0: Thu Mar 19 19:33:09 PDT 2026; root:xnu-12377.101.15~1/RELEASE_ARM64_T8112 arm64
+Bash: GNU bash, version 3.2.57(1)-release (arm64-apple-darwin25)
+Exact Verify: bash tests/run.sh && shellcheck -S warning -x scripts/*.sh tests/*.sh
+Capture: CAP-47-pAxlby
+Input digest: 9504562a1e1f4c3a36295be30356bf09404f1040c61bf4fa75303ba4dece5f5e
+Output sha256: 23bc386b960148ddb0cdc2b30e01e4ef4f998bb43992204343ccc2f7b7d35c4d
+Result: exit 0; 15 suites, 130/130 tests; ShellCheck warning-level exit 0.
+Acceptance: T027 accepted by spec-gate; return c06ea61a688d86e89ae6ea547043ead4d9f156cc729e2d03bd48be5cf5df9fab.
+No GitHub-hosted CI execution is claimed; normal PR CI remains required.

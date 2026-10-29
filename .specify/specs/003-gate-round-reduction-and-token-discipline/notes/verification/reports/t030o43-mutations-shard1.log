@@ -1,0 +1,92 @@
+== baseline shard 1/2 20:00:31Z
+== the pin
+PASS K02 literal applies once in scripts/spec-run.sh
+PASS K02 literal applies once in scripts/spec-run.sh
+PASS K02 KILLED (judge rc)
+PASS K02 diagnostic: spec-run.sh ran a program of its own under the caller's locale (O-017)
+PASS K04 literal applies once in scripts/spec-run.sh
+PASS K04 KILLED (judge rc)
+PASS K04 diagnostic: the legacy run did not get the caller's LC_ALL back (O-017)
+PASS K06 literal applies once in scripts/verification-lib.sh
+PASS K06 KILLED (judge rc)
+PASS K06 diagnostic: the record of a declared LC_ALL carried the pin, not the caller's value (O-017)
+PASS K08 literal applies once in scripts/spec-ac-coverage.sh
+PASS K08 literal applies once in scripts/spec-ac-coverage.sh
+PASS K08 literal applies once in scripts/spec-ac-coverage.sh
+PASS K08 KILLED (judge rc)
+PASS K08 diagnostic: spec-ac-coverage.sh read no AC id after an undecodable byte
+== status reads
+PASS S02 literal applies once in scripts/verification-lib.sh
+PASS S02 KILLED (judge rc)
+PASS S02 diagnostic: a Decisions parse that died was not refused by name (O-017)
+PASS S04 literal applies once in scripts/verification-lib.sh
+PASS S04 KILLED (judge rc)
+PASS S04 diagnostic: the configuration policy read an unreadable frontmatter as no contract (T030o43)
+PASS S06 literal applies once in scripts/verification-lib.sh
+PASS S06 KILLED (judge rc)
+PASS S06 diagnostic: the binding parser read an unreadable frontmatter as no contract (T030o43)
+PASS S08 literal applies once in scripts/verification-lib.sh
+PASS S08 KILLED (judge rc)
+PASS S08 diagnostic: an unreadable branch skipped the gate's mismatch check (T030o43)
+PASS S10 literal applies once in scripts/spec-task.sh
+PASS S10 KILLED (judge rc)
+PASS S10 diagnostic: an unreadable frontmatter let spec-task.sh tick a versioned task on --evidence (T030o43)
+PASS S12 literal applies once in scripts/verification-lib.sh
+PASS S12 KILLED (judge rc)
+PASS S12 diagnostic: an AC inventory that could not be read read as no uncovered AC (T030o43)
+PASS S14 literal applies once in scripts/sdd-analyze.sh
+PASS S14 KILLED (judge rc)
+PASS S14 diagnostic: a task reference inventory that could not be read read as no dangling ref (T030o43)
+PASS S16 literal applies once in scripts/spec-ac-coverage.sh
+PASS S16 KILLED (judge rc)
+PASS S16 diagnostic: an AC inventory that could not be read let spec-ac-coverage.sh find nothing to check (T030o43)
+PASS S18 literal applies once in scripts/verification-lib.sh
+PASS S18 KILLED (judge rc)
+PASS S18 diagnostic: a diagnostic count that failed published a catalog carrying errors (T030o43)
+PASS S20 literal applies once in scripts/verification-lib.sh
+PASS S20 KILLED (judge rc)
+PASS S20 diagnostic: declared directory digests that could not be sorted were hashed anyway (O-017)
+PASS S22 literal applies once in scripts/verification-lib.sh
+PASS S22 KILLED (judge rc)
+PASS S22 diagnostic: a returned-binding sort that failed was not refused by name (T030o43)
+PASS S24 literal applies once in scripts/verification-lib.sh
+PASS S24 KILLED (judge rc)
+PASS S24 diagnostic: a task list that could not be read left completed tasks' Verify unrefreshed (T030o43)
+PASS S26 literal applies once in scripts/verification-lib.sh
+PASS S26 KILLED (judge rc)
+PASS S26 diagnostic: references that could not be read skipped the binding-gap check (T030o43)
+PASS S28 literal applies once in scripts/spec-evidence.sh
+PASS S28 KILLED (judge rc)
+PASS S28 diagnostic: artifact names that could not be searched read as none named (T030o43)
+PASS S30 literal applies once in scripts/verification-lib.sh
+PASS S30 KILLED (judge rc)
+PASS S30 diagnostic: finding observations that could not be counted went missing from the tally (O-017)
+== after the review
+PASS K09 literal applies once in scripts/verification-lib.sh
+PASS K09 KILLED (judge rc)
+PASS K09 diagnostic: a record inherited beside another LC_ALL replaced the caller's value (T030o43 review)
+PASS S31 literal applies once in scripts/verification-lib.sh
+PASS S31 KILLED (judge rc)
+PASS S31 diagnostic: a manifest line carrying a U+00A0 was dropped in silence under LANG=C (T030o43 review)
+PASS S33 literal applies once in scripts/verification-lib.sh
+PASS S33 KILLED (judge rc)
+PASS S33 diagnostic: a manifest finding its grammar cannot read was not refused by name
+PASS S35 literal applies once in scripts/verification-lib.sh
+PASS S35 KILLED (judge rc)
+PASS S35 diagnostic: a manifest finding its grammar cannot read was not refused by name
+PASS S37 literal applies once in scripts/verification-lib.sh
+PASS S37 KILLED (judge rc)
+PASS S37 diagnostic: a required section holding only a U+00A0 counted as a body under LANG=C (T030o43 review)
+PASS S39 literal applies once in scripts/spec-evidence.sh
+PASS S39 KILLED (judge rc)
+PASS S39 diagnostic: a contract value spec-evidence.sh cannot read sent it down the legacy check (T030o43 review)
+PASS S41 literal applies once in scripts/verification-lib.sh
+PASS S41 KILLED (judge rc)
+PASS S41 diagnostic: a size that could not be read let a return past the 64 KiB bound (T030o43 review)
+PASS S43 literal applies once in scripts/verification-lib.sh
+PASS S43 KILLED (judge rc)
+PASS S43 diagnostic: a class table that could not be sorted went missing from the tally (T030o43 review)
+PASS E02 literal applies once in scripts/verification-lib.sh
+PASS E02 SURVIVES as argued (equiv)
+== done shard 1/2 20:04:46Z rows=56
+t030o43-mutations failures=0

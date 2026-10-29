@@ -1,0 +1,70 @@
+@@OLD
+nbsp-line-prose|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n\nA line\n\302\240\nafter a no-break space line.\n
+SHAPES
+@@NEW
+nbsp-line-prose|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n\nA line\n\302\240\nafter a no-break space line.\n
+image-split-by-blank-line|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n\n![x\n\ny](u)Severity: data-loss\n
+image-split-by-crlf-blank-line|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n\n![x\r\n\r\ny](u)Severity: data-loss\r\n
+image-split-by-six-marks|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n\n![x\n###### h\ny](u)Severity: data-loss\n
+quoted-image-split-by-six-marks|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n\n> ![x\n> ###### h\n> y](u)Severity: data-loss\n
+span-tag-after-a-lone-backtick-paragraph|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n\nNote `a\n\nb` <b>` c\n
+outside-comment-closer|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n\n## Notes\n\nO-017 is discussed below.\n- <!--> note --> Severity: as noted.\n
+outside-span-tag|### Finding O-017\n- **Class:** harness-locale-decoding\n- **Severity:** wrong-result\n\n## Notes\n\nO-017 is discussed below.\nNote <span>Severity: as noted</span> stays prose.\n
+SHAPES
+@@END
+@@OLD
+image-after-backtick-info-fence|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n\140\140\140a\140b\n\n![x\ny](u)Severity: data-loss\n\140\140\140\n|quoted content carries a Severity line
+ROWS
+@@NEW
+image-after-backtick-info-fence|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n\140\140\140a\140b\n\n![x\ny](u)Severity: data-loss\n\140\140\140\n|quoted content carries a Severity line
+tag-after-span-closing-next-line|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\nNote `a\nb` <b>` c\n|raw HTML outside a code span in finding G-042
+tag-after-span-closing-two-lines-later|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\nNote `a\nb\nc` <b>` d\n|raw HTML outside a code span in finding G-042
+pi-in-prose|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\nNote <?x?> here.\n|raw HTML outside a code span in finding G-042
+image-alt-across-three-lines|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n![x\ny\nz](u)Severity: data-loss\n|a second Severity line in finding G-042
+link-title-across-three-lines|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n[](x\n"t\nu")Severity: data-loss\n|a second Severity line in finding G-042
+image-alt-holding-code-span-across-lines|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n![x `]`\ny\n](u)Severity: data-loss\n|a second Severity line in finding G-042
+image-alt-code-span-closing-two-lines-later|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n![x `]\ny\n`](u)Severity: data-loss\n|a second Severity line in finding G-042
+tag-attribute-across-three-lines|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n<b title="a\nx\ny">Severity: data-loss</b>\n|a second Severity line in finding G-042
+image-after-stray-bracket-across-three-lines|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n]![a\nb\nc](u)Severity: data-loss\n|a second Severity line in finding G-042
+image-alt-holding-escaped-bracket-across-lines|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n![a\\]\nb\nc](u)Severity: data-loss\n|a second Severity line in finding G-042
+image-alt-holding-an-unclosed-run-then-a-span|### Finding G-042\n- **Class:** tier-binding\n- **Severity:** minor\n\n![``a `]`](u)Severity: data-loss\n|a second Severity line in finding G-042
+ROWS
+@@END
+@@OLD
+image-after-backtick-info-fence|- **Severity:** minor\n\n\140\140\140a\140b\n\n![x\ny](u)Severity: data-loss\n\140\140\140|quoted content carries a Severity line
+ROWS
+@@NEW
+image-after-backtick-info-fence|- **Severity:** minor\n\n\140\140\140a\140b\n\n![x\ny](u)Severity: data-loss\n\140\140\140|quoted content carries a Severity line
+tag-after-span-closing-next-line|- **Severity:** minor\n\nNote `a\nb` <b>` c|raw HTML outside a code span in finding G-050
+tag-after-span-closing-two-lines-later|- **Severity:** minor\n\nNote `a\nb\nc` <b>` d|raw HTML outside a code span in finding G-050
+pi-in-prose|- **Severity:** minor\n\nNote <?x?> here.|raw HTML outside a code span in finding G-050
+image-alt-across-three-lines|- **Severity:** minor\n\n![x\ny\nz](u)Severity: data-loss|a Severity line this grammar cannot read in finding G-050
+link-title-across-three-lines|- **Severity:** minor\n\n[](x\n"t\nu")Severity: data-loss|a Severity line this grammar cannot read in finding G-050
+image-alt-holding-code-span-across-lines|- **Severity:** minor\n\n![x `]`\ny\n](u)Severity: data-loss|a Severity line this grammar cannot read in finding G-050
+image-alt-code-span-closing-two-lines-later|- **Severity:** minor\n\n![x `]\ny\n`](u)Severity: data-loss|a Severity line this grammar cannot read in finding G-050
+tag-attribute-across-three-lines|- **Severity:** minor\n\n<b title="a\nx\ny">Severity: data-loss</b>|a Severity line this grammar cannot read in finding G-050
+image-after-stray-bracket-across-three-lines|- **Severity:** minor\n\n]![a\nb\nc](u)Severity: data-loss|a Severity line this grammar cannot read in finding G-050
+image-alt-holding-escaped-bracket-across-lines|- **Severity:** minor\n\n![a\\]\nb\nc](u)Severity: data-loss|a Severity line this grammar cannot read in finding G-050
+image-alt-holding-an-unclosed-run-then-a-span|- **Severity:** minor\n\n![``a `]`](u)Severity: data-loss|a Severity line this grammar cannot read in finding G-050
+ROWS
+@@END
+@@OLD
+a-nbsp-line|### Finding G-042|\nA line\n\302\240\nafter a no-break space line.\n\n
+ROWS
+@@NEW
+a-nbsp-line|### Finding G-042|\nA line\n\302\240\nafter a no-break space line.\n\n
+a-image-split-by-blank-line|### Finding G-042|\n![x\n\ny](u)Severity: data-loss\n\n
+a-image-split-by-six-marks|### Finding G-042|\n![x\n###### h\ny](u)Severity: data-loss\n\n
+a-quoted-image-split-by-six-marks|### Finding G-042|\n> ![x\n> ###### h\n> y](u)Severity: data-loss\n\n
+a-span-tag-after-a-lone-backtick-paragraph|### Finding G-042|\nNote `a\n\nb` <b>` c\n\n
+ROWS
+@@END
+@@OLD
+  assert_not_contains "$OUT" 'report recovery' 'AC-012: Held-up prose after the last finding was refused (O-018)'
+@@NEW
+  assert_not_contains "$OUT" 'report recovery' 'AC-012: Held-up prose after the last finding was refused (O-018)'
+  record_round 1 CHALLENGED 1 0 '### Finding G-042' tier-binding new '- **Severity:** data-loss' |
+    sed 's/^Fixture disposition recorded\.$/Held up: <b>no tier<\/b> here./' > "$report"
+  run_rc 0 record_line_vf C "$report" "$spec"
+  assert_not_contains "$OUT" 'report recovery' 'AC-012: raw HTML in Held-up prose outside every finding was refused (round 16, O-018)'
+@@END

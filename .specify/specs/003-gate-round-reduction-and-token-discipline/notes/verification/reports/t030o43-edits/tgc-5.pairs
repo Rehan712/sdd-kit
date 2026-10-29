@@ -1,0 +1,30 @@
+@@OLD
+  while IFS='|' read -r label want shape; do
+    printf '# Prior review\n\n%b' "$shape" > "$spec/notes/verification/reports/opponent-findings-review.md"
+@@NEW
+  while IFS='|' read -r label want shape; do
+    printf '%b' "$shape" > "$spec/notes/verification/reports/opponent-findings-review.md"
+@@END
+@@OLD
+unbolded-class|refuse|### Finding G-042\n- Class: tier-binding\n- **Severity:** data-loss\n
+@@NEW
+unbolded-class|refuse|### Finding G-042\n- Class: tier-binding\n- **Severity:** data-loss\n
+class-without-dash|refuse|### Finding G-042\n**Class:** tier-binding\n- **Severity:** data-loss\n
+severity-without-dash|refuse|### Finding G-042\n- **Class:** tier-binding\n**Severity:** data-loss\n
+@@END
+@@OLD
+  assert_contains "$OUT" 'incomplete finding G-042' \
+    'AC-012: a canonical field line read a U+00A0 as its one literal space (T030o43 review 2)'
+@@NEW
+  assert_contains "$OUT" 'incomplete finding G-042' \
+    'AC-012: a canonical field line read a U+00A0 as its one literal space (T030o43 review 2)'
+  # The AC catalog's canonical text reads such whitespace as whitespace, as a
+  # UTF-8 locale did, so a criterion's digest does not depend on which space
+  # its author typed.
+  mkdir -p "$SANDBOX/ac-catalog"
+  printf -- '---\nspec: x\n---\n\n- AC-001 — one\302\240criterion\342\200\203with\343\200\200spaces\n' > "$SANDBOX/ac-catalog/spec.md"
+  run_rc 0 bash -c '. "$1"; vf_ac_catalog "$2" "$3" && tr "\000" "\n" < "$3" | sed -n 2p' _ \
+    "$SCRIPTS/verification-lib.sh" "$SANDBOX/ac-catalog" "$SANDBOX/ac-catalog.nul"
+  assert_eq 'one criterion with spaces' "$OUT" \
+    "AC-012: the AC catalog kept a non-ASCII space in a criterion's canonical text (T030o43 review 2)"
+@@END

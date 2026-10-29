@@ -1,0 +1,241 @@
+diff --git a/.specify/specs/003-gate-round-reduction-and-token-discipline/STATUS.md b/.specify/specs/003-gate-round-reduction-and-token-discipline/STATUS.md
+index a2733ec..e5f0f72 100644
+--- a/.specify/specs/003-gate-round-reduction-and-token-discipline/STATUS.md
++++ b/.specify/specs/003-gate-round-reduction-and-token-discipline/STATUS.md
+@@ -5,11 +5,11 @@ active_tool: none      # claude | codex | copilot | none — who currently holds
+ branch: spec/003-gate-round-reduction-and-token-discipline            # spec/003-gate-round-reduction-and-token-discipline once cut, else none
+ worktree: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline          # absolute path once created, else none
+ pr: https://github.com/Rehan712/sdd-kit/pull/20                # PR URL once opened — spec-pr.sh writes this itself
+-opponent: CHALLENGED (round 21 consumed 2026-10-16; 1 blocking + 1 minor; digest 9f3b01ba3392…; O-029 still open, a test-only fixture gap for AC-009 (23:59:59Z coincides with an end-of-day reading); O-030 and O-031 resolved; O-032 degraded, follow-up spec)       # not-run | CHALLENGED | CLEARED | BLOCKED  (+ date)
+-reality_check: NEEDS WORK (round 2 sealed 2026-10-15; 18 PASS; AC-007, AC-009, AC-010, AC-020, AC-022 FAIL for named cases with no fixture; digest 461c29c87123…; the user chose to add the tests as T031a1 to T031a4)  # not-run | NEEDS WORK | FAILED | READY  (+ date)
++opponent: CLEARED (round 23 completed 2026-10-25T15:08:39Z, report timestamp 14:43:15Z; 0 blocking + 1 minor; historical source a7e7dd326b27…; fresh round 24 pending for reviewed regression fixes)
++reality_check: NEEDS WORK (round 3 completed 2026-10-25T18:44:21Z, report timestamp 18:03:53Z; 20 PASS + 3 FAIL, AC-004/AC-013/AC-020; fixes T031a5/T031a6 accepted, fresh full assessment pending)
+ ci: not-run             # not-run | pending | green | red  (+ date) — spec-ci.sh writes this
+ retro: not-run          # not-run | done (+ date) — /sdd:retro after ship
+-updated: 2026-10-16
++updated: 2026-10-25
+ ---
+ 
+ # STATUS — Gate round reduction and token discipline
+@@ -19,6 +19,8 @@ updated: 2026-10-16
+ 
+ ## Where things stand
+ 
++**2026-10-25 (session 27) — Reviewed regression fixes accepted; opponent 24, reality-check 4 and refreshed temporary snapshot PR #21 authorized; fresh floor, hosted CI and formal gates pending.** Opponent round 23 is sealed CLEARED (0 blocking + 1 minor, O-032 deferred), and reality-check round 3 is sealed NEEDS WORK (20 PASS, AC-004/AC-013/AC-020 FAIL). Their completion commands ended at 2026-10-25T15:08:39Z and 2026-10-25T18:44:21Z respectively (`r23-complete.{log,rc,time}`, `rc3-complete.{log,rc,time}`), both before the user's approval at 2026-10-25T20:07:52Z. The targeted repairs are ACCEPTED: T031a5 on CAP-767-tGxtxB (19/19) and T031a6 on CAP-768-sy4sk5 (18/18); MAX ponytail-review round 1 returned Ship (`notes/verification/reports/s26-rc3-test-fixes/ponytail-review-r1.md`). Their source before this authorization batch is `3a5df78c6c55ff2a8145ec92270ac8a13d781626d6b0a13bf32a02cffebe3b86`; HEAD remains `2049f65960cc91e9e30bbd5ff1e11fc0fdf7cbd9`. FLOOR-il41Kn/source `a7e7dd326b27…` and hosted snapshot `781b963e6777…` are historical for these reviewed fixes. The user's actual reply "Continue" authorizes the two next rounds and refreshing existing temporary snapshot PR #21, with no merge, as recorded separately in Decisions below. This batch changes Decisions and therefore the source identity; the parent must freeze it before fresh matching evidence. T030, T031 and overall readiness remain incomplete. Decision, seal and byte-preservation proof: `notes/verification/reports/s27-authorization-1-before-state.json`, `s27-authorization-1-after-state.json` and `s27-authorization-1-STATUS.diff`.
++
+ **2026-10-17 (session 25, before round 23) — O-029 and O-033 repaired test-only as T031a4o3, proven and ACCEPTED; the round-23 floor runs detached; opponent round 23 next session (neutral record; Decisions frozen at `3db813f9…`, source `a7e7dd32…`, HEAD `2049f65`).** The user chose "Fix the issue then continue" after round 22 (`r22-user-decision-1.txt`; read as repair now and authorize round 23). The fixture, from round 22's recipe plus O-033's impossible-time and later-today records, applied by `r23-edits/apply-code.py`; an exploratory focus check in a standalone copy before the dev run (not a receipt). The one dev run (`r23-dev.{sh,log,rc,time}`, exit 0, 19:48:44Z to 20:32:42Z): 147/147 over 15 suites plus ShellCheck; each of the 28 mutants opponent rounds 20 to 22 ran (`r23-edits/mutants-r23.py`, round 22's eleven copied verbatim from its reviewer's work dir) killed but `readround`, held equivalent; 18 of 18 O-029/O-033 assertions each killed by at least one; the live status outside `notes/verification/` unchanged. The batch (`r23-batch-apply.sh`, waiver timestamp `r23-batch.ts` 2026-10-17T20:32:50Z): the first scratch attempt (`r23-batch-scratch-1.{log,rc}`, exit 2) failed on a tracked file the invoker had deleted by mistake (`r23-handoff-state.sh`, an earlier session's script that a generated round-23 script had overwritten; restored from HEAD, where it was unmodified, with the source unchanged at `809a9b69…`); then scratch and live exit 0 (`r23-batch-{scratch,live}.{log,rc}`). Freeze point `r23-freeze.{txt,rc,err}` (exit 0): source `a7e7dd326b27c7565c26349485c440af26f718a7f16e400ea42ed6961d03cd1a`, Decisions `3db813f9b63584b0af05b3482375fb67a23f4d4848206cc4c5ea40b524c3dd0f`. CAP-744-sgOYqc (`r23-capture.{log,rc,start,end}`, exit 0, input the frozen source, 20:35:18Z to 21:13:38Z); the return validated (`r23-return-T031a4o3.{log,rc}`, exit 0); **T031a4o3 ACCEPTED** (`T031a4o3-accept.{log,rc}`, exit 0, return `ccb0850a…`); the tick moved neither source, Decisions, waivers nor the test file (`r23-postaccept.{txt,rc,err}`). The floor (`r23-floor.sh` attempt 1, `r23-floor-1.{pre,log,rc,samples.log,wrapper.log,wrapper.rc}`) started 21:15:19Z on AC with 9.4 GiB free; at the user's request no model waits on it: `r23-after-floor.sh` (detached, `r23-after-floor.{log,rc}`) waits for it, then validates the floor (`r23-floor-validate.*`) and writes the scope diff against FLOOR-3Ge8eO (`r23-scope.{log,rc}`); it reserves nothing. The reality-check round 3 scripts (`rc3-final-audit.sh`, `reality-check-round3-brief.draft.md`) were moved to the round-23 path; their earlier versions are not receipts.
+ 
+ **2026-10-17 (session 25, after round 22) — opponent round 22 CHALLENGED, 1 blocking + 2 minor: O-029 still open, O-033 new (minor), O-032 open (minor, degraded); a choice for the user (neutral record; Decisions frozen at `ca4711dd…`, source `809a9b69…`, HEAD `2049f65`).** Round 22 reserved at 2026-10-17T08:50:29Z on FLOOR-3Ge8eO (`r22-reserve.{log,rc,time}`, exit 0); the independent opponent, dispatched 08:52:01Z on `opponent-round22-brief.md` (sha256 `847beb1c…`), finished its block at 15:15:47Z (**CHALLENGED, Blocking 1, Minor 2**) and was stopped by the weekly usage limit at 15:15:49Z, before its hand-back. By the user's decision the block was persisted byte-exact from its work dir as `opponent-round22.md` (sha256 `106c0437…`; there is no hand-back and no reviewer-stated digest; provenance in `r22-persist-provenance.txt`, copies in `r22-opp-workdir/`). The worktree states before reservation, at reservation and at return are byte-identical (`r22-state-{prereserve,reserved,returned}.*`). `--complete` (`r22-complete.{log,rc,time}`, exit 0, 18:40:32Z to 19:00:57Z, free disk 6.8 to 7.8 GiB on battery, `r22-complete.disk.log`; `r22-complete.disk.broken.log` is a first sampler that failed on its own quoting and was replaced, the completion itself untouched) sealed round 22; `tally` exit 0 (`r22-tally.{log,rc}`: opponent=22, blocking=39, minor=24); the final audit exit 0, 76 PASS (`r22-final-audit.{sh,log,rc,time}`; it needed no adaptation for the missing hand-back, since it checks the returned block against the sealed digest). O-029 (open, wrong-result, class named-case-fixture-strength, root cause plan-gap, blocks AC-009 and REQ-012): T031a4o2 moved the case's only valid record to 2026-07-21T06:00:00Z instead of adding one, so the history's own date is unpinned and the record has zero minutes and seconds; a kernel reading a same-day record as the date's midnight, or truncating the record to its hour or minute, passes the case (round 21's case killed all three). The kernel is right in every probe. The reviewer proposes T031a4o3 (test files only): reconcile to 2026-07-20T15:17:43Z with waivers at 15:17:42Z refused (exact diagnostic) and 15:17:44Z authorized, then to 2026-07-21T06:17:43Z with a waiver at 06:17:42Z refused; its prototype passes unmutated and under ShellCheck and kills 16 of 16 mutants. O-033 (new, minor, degraded, fails closed): the later-day guard, the record's validity check in `--reconcile` and the future half by date or year are unpinned; test-only fix, with T031a4o3 or for the follow-up spec. O-032 (open, minor, degraded): unchanged, for the follow-up spec, no kernel change authorized. Not reproduced by the invoker this session (the user asked to keep only the steps the tools require; the reviewer's reproduction is in the report). The report escalates the O-029 decision to the user: repair now, or accept the remaining risk with a signed waiver in Decisions.
+@@ -698,6 +700,12 @@ defects already reproduced with file:line
+ 
+ - 2026-10-17 — Decisions are FROZEN from this batch through the live apply of T031a4o3, its capture and acceptance, the floor, round 23's completion and tally, and, on CLEARED, any hosted CI run, the T029 control and reality-check round 3 on that floor; results go to STATUS's neutral sections only, so that the floor stays current for both gates.
+ 
++- 2026-10-25T20:07:52Z — waiver: gate=opponent; round=24; after=23; by=user; reason=user replied "Continue" to the exact permission question after completed round 23 to re-evaluate reviewed AC-004/AC-013/AC-020 regression fixes on fresh matching evidence
++
++- 2026-10-25T20:07:52Z — waiver: gate=reality-check; round=4; after=3; by=user; reason=user replied "Continue" to the exact permission question after completed round 3 for an independent full AC assessment after the reviewed regression fixes on fresh matching evidence
++
++- 2026-10-25T20:07:52Z — User authorization: by=user, actual chat reply "Continue" to the exact permission question, as supplied by the parent task. The user authorized refreshing existing temporary CI snapshot PR #21 for the reviewed AC-004/AC-013/AC-020 regression fixes (accepted T031a5 and T031a6, MAX ponytail-review round 1 Ship), using fresh matching evidence after this Decisions batch is frozen. No merge is authorized. The approval is later than opponent round 23 completion at 2026-10-25T15:08:39Z and reality-check round 3 completion at 2026-10-25T18:44:21Z. The two exact-round waivers above are independent authorizations, not new gate results or readiness claims. No personal GitHub identity is inferred for the approving user.
++
+ ## Open questions / blockers
+ 
+ - [x] *Done: the user chose "Fix the issue then continue" (`r22-user-decision-1.txt`); round 22's outcome and the decision are in Decisions since the T031a4o3 batch; T031a4o3 accepted; round 23 gates it.* **Round 22 CHALLENGED on O-029 (2026-10-17, session 25); NOT yet in Decisions (frozen at `ca4711dd…`); a choice for the user.** Round 22's outcome goes into Decisions in the next batch. Options: repair as T031a4o3 (test files only, the reviewer's recipe), then a dev run, batch, capture, accept, a fresh floor (about 6 h on AC, about 10 GiB free) and an authorized round 23; or accept O-029's remaining risk with a signed waiver in Decisions, then reality-check round 3 and commit and push to PR #20. The Decisions section is part of the source identity (`vf_semantic_file`), so a waiver written before reality-check round 3 makes FLOOR-3Ge8eO historical and needs a fresh floor first; the kernel does not require a CLEARED opponent round before a reality-check round. Committing also moves the source identity. O-033 (minor) can go with T031a4o3 or to the follow-up spec; O-032 (minor) stays for the follow-up spec.
+diff --git a/.specify/specs/003-gate-round-reduction-and-token-discipline/plan.md b/.specify/specs/003-gate-round-reduction-and-token-discipline/plan.md
+index 8a25d63..e1ca081 100644
+--- a/.specify/specs/003-gate-round-reduction-and-token-discipline/plan.md
++++ b/.specify/specs/003-gate-round-reduction-and-token-discipline/plan.md
+@@ -495,12 +495,12 @@ later. Shared rows list every affected component group.
+ | FM-002 | A, E | regression | Legacy/golden spec or regenerated adapter loses its contract | Legacy analyzer stays green; golden/new examples have zero warnings; modes retained | authoring, guidance |
+ | FM-003 | A | concurrency/ordering | Plan has no tasks yet; local tests deferred to future Tests task | Planning valid without task numbers; task handoff rejects gaps and warns on deferred local proof | authoring |
+ | FM-004 | A | partial failure | Worker brief omits/conflicts with an existing decision | Supply missing slice first; new decision returns to plan; bounded escalation | guidance, wiring |
+-| FM-005 | A, B, E | state/data integrity | Spec/plan/Verify changes after briefing/capture | Refresh brief and proof; manual/static relabel cannot bypass automated criterion | provenance, acceptance, guidance |
++| FM-005 | A, B, E | state/data integrity | Spec/plan/Verify changes after briefing/capture | Refresh brief and proof; manual/static relabel cannot bypass automated criterion | provenance, acceptance, reports, guidance |
+ | FM-006 | B, C | boundary | Spaces/quotes/pipeline/control bytes/large output or wrong return IDs | Lossless execution; exact binding validation; bounded escaped display with raw log | capture, config, acceptance |
+ | FM-007 | B, C, D | concurrency/ordering | Competing writers, foreign lock, edit during verification | Owner-only lock cleanup; stable batch barrier; changed-input proof refused | provenance, transactions, wiring |
+ | FM-008 | B, C | partial failure | Nonzero command, signal, disk/publish failure, incomplete capture | Preserve command exit; no complete proof/tick; retain diagnosable interrupted state | capture, transactions |
+ | FM-009 | B | regression | Existing --key/default argv/no-tick or legacy done usage | Preserve legacy semantics; summary additive; new non-exempt tick uses acceptance | capture, acceptance |
+-| FM-010 | B, D | state/data integrity | Tampered/old log, stale source/tool/env, later failed run, forged return | Integrity/freshness checked independently; reject reuse/current PASS and invalid acceptance | provenance, acceptance |
++| FM-010 | B, D | state/data integrity | Tampered/old log, stale source/tool/env, later failed run, forged return | Integrity/freshness checked independently; reject reuse/current PASS and invalid acceptance | provenance, acceptance, reports |
+ | FM-011 | C | boundary | Missing gate list, malformed YAML, unknown stage or wrong worktree | Named configuration failure; legacy warning does not clear floor; no main-checkout fallback | config, floor |
+ | FM-012 | C | concurrency/ordering | Same command across stages/gates/repos; stage not finished | Only exact valid identity deduplicates; checkpoint runs after completed batch | floor, checkpoints |
+ | FM-013 | C | partial failure | Checker/checkpoint/pipeline fails | Real nonzero exit, gate/next-stage invocation count remains zero | floor, checkpoints, wiring |
+@@ -524,7 +524,7 @@ checks are non-reusable. Security review is unchanged, not excluded from shippin
+ 
+ | ID | Scope | Promise | Enforcement sites | Test families |
+ |---|---|---|---|---|
+-| INV-001 | B, C, D | A relied-on automated PASS has complete, successful, matching real evidence | Shared vf_capture_check at acceptance, floor, resume and carry evaluation | provenance, acceptance, floor |
++| INV-001 | B, C, D | A relied-on automated PASS has complete, successful, matching real evidence | Shared vf_capture_check at acceptance, floor, resume and carry evaluation | provenance, acceptance, floor, reports |
+ | INV-002 | B | An invalid return does not alter task state; valid retry is idempotent | spec-task validated-return transaction with one final tasks rename | acceptance, transactions |
+ | INV-003 | B, C, D | Cleanup releases only acquired ownership; half-writes are not completed state | vf_lock/vf_unlock and COMPLETE/pending transaction validation | transactions |
+ | INV-004 | C, D | No gate/next stage is invoked after failed floor/checkpoint or denied round | Common invoker sequence; stub and live observation counters | floor, checkpoints, rounds, wiring |
+@@ -544,13 +544,13 @@ exit/byte measurements and unchanged-file comparisons.
+ | authoring | test | AC-001, AC-003, AC-004, AC-005, AC-006, AC-011, AC-023: phase modes, shared/excluded rows, malformed/dangling IDs, kinds, same-task tests, zero-warning golden, untouched 001/002 exit 0. | `tests/test-sdd-analyze.sh::test_verification_bindings`; `tests/test-golden-example.sh::test_verification_golden` |
+ | config | test | AC-011, AC-023: actual stack commands, malformed/unknown/duplicate map keys, spaces/quotes, doctor/analyzer consistency, new versus legacy. | `tests/test-verification.sh::test_config_grammar` |
+ | capture | test | AC-019, AC-021: actual verbose success/failure, byte/line bounds, full-log digest, argv/key/default/no-tick compatibility, real exits including pipeline. | `tests/test-spec-run.sh::test_bounded_capture` |
+-| provenance | test | AC-013, AC-020, AC-023: independent mutations of source/staged/dirty/untracked/helper/test/fixture/lock/config/tool/env/criterion/cwd/command; tamper/truncation/old format/later failure/during-run; unchanged hit, bookkeeping hit, volatile miss; old failing-test/sound-evidence repro. | `tests/test-verification.sh::test_capture_provenance` |
++| provenance | test | AC-013, AC-020, AC-023: source/staged/dirty/untracked/test/fixture/lock/config/tool/env/cwd/command snapshots and capture currency; tamper/truncation/old format/later failure/during-run; unchanged hit, bookkeeping hit, volatile miss; old failing-test/sound-evidence repro. Real transitive-helper and criterion-text saved-success/PASS cases are exercised in reports. | `tests/test-verification.sh::test_capture_provenance` |
+ | transactions | test | AC-020, AC-022: owned/foreign/failed-acquisition cleanup, concurrent publications, interruptions before/after each commit point, retry/pending recovery, tasks byte identity. | `tests/test-verification.sh::test_owned_transactions` |
+ | acceptance | test | AC-022: missing/extra/duplicate/none mapping, unknown locator/capture, forged summary, failed/stale/changed-source return, valid once/idempotent, artifact-backed manual and automated-bypass refusal. | `tests/test-spec-gate.sh::test_acceptance` |
+ | floor | test | AC-007: all three checkers and all gate commands observed, correct repo/cwd, fresh integrity each call, one unchanged suite across gates, source/command/cwd invalidation, missing config stop. | `tests/test-spec-gate.sh::test_floor` |
+ | checkpoints | test | AC-008: real failure codes, no commands with delta, removed completed/prior bindings, pending future and explicit integration owner, checkpoint-to-floor reuse, next-stage counter zero. | `tests/test-spec-gate.sh::test_checkpoints` |
+ | rounds | test | AC-009: both gates 1–3/denied 4, same-day exact waiver/revision, reject old/unscoped/wrong gate/round, round 5 still denied, quoted headings, malformed/duplicate/pending/date-only reconciliation. | `tests/test-spec-gate.sh::test_rounds` |
+-| reports | test | AC-010, AC-012, AC-013, AC-017: full schema/matrix, stable prior IDs and class recurrence across files/root causes, open recheck not recurrence, raw sites/unknown data; untouched 002 five rounds/six blockers/unclassified, annotated copy detects clock and lock recurrence. | `tests/test-gate-contracts.sh::test_reports_and_tally` |
++| reports | test | AC-010, AC-012, AC-013, AC-017, AC-020: full schema/matrix; saved-success/PASS invalidation for consumed source/helper/fixture/lock/config and actual criterion text; stable prior IDs and class recurrence across files/root causes, open recheck not recurrence, raw sites/unknown data; untouched 002 five rounds/six blockers/unclassified, annotated copy detects clock and lock recurrence. | `tests/test-gate-contracts.sh::test_reports_and_tally` |
+ | guidance | test | AC-001, AC-002, AC-004, AC-006, AC-012, AC-014, AC-015, AC-017, AC-018: enumerate overlays/personas, modes/revisions/omissions, retained gate scope/severity, metrics fields, docs/help and executable examples, regenerated adapters. | `tests/test-gate-contracts.sh::test_instruction_contracts`; `tests/test-build-adapters.sh::test_brief_modes` |
+ | wiring | test | AC-015, AC-016, AC-019: stub workers/gates exercise actual scripts, incomplete return unchanged then accepted once, floor/cap stop counters, stage barrier, shared gate suite; live-probe positive/negative fixtures without a future-report dependency. | `tests/test-gate-contracts.sh::test_invoker_protocol` |
+ 
+diff --git a/.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md b/.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md
+index 53c3a0e..b0df4c0 100644
+--- a/.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md
++++ b/.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md
+@@ -1071,6 +1071,28 @@ keeps each edit task to at most five files instead of combining unrelated work.
+   - *Evidence:* CAP-744-sgOYqc verified by spec-gate accept; return sha256:ccb0850adfbb58f0e9ae6a3d1e1ec1b379e22fa37746aceb45ca80f75aa33d0a
+ 
+ 
++- [x] **T031a5** — Exercise both untyped typecheck-warning branches
++  - *Files:* `tests/test-sdd-analyze.sh`
++  - *Acceptance:* AC-004 fixtures invoke the analyzer with untyped `npm run typecheck` and `tsc --noEmit`, require exit 0 plus the `untyped AC Verify` warning, and retain build/text/shell and explicit test/assertion/static/manual controls.
++  - *Verify kind:* test
++  - *Tests:* `tests/test-sdd-analyze.sh::test_verification_bindings`
++  - *Verify:* `bash tests/test-sdd-analyze.sh` → all suites `passed`, exit 0
++  - *Reuse:* local
++  - *Refs:* REQ-005, AC-004, FM-001, INV-005, plan §7
++  - *Notes:* Closes reality-check round 3 gap 1 (`notes/verification/reports/reality-check-round3.md`). Test-only coverage of behavior the reviewer found correct; no runtime classifier change. No new gate round, floor or hosted-CI run is part of this task.
++  - *Evidence:* CAP-767-tGxtxB verified by spec-gate accept; return sha256:e40b2ee4cfe3f5b8421b16561a902d0b3a610a20388f36c0c1cbf4d278b48de8
++
++- [x] **T031a6** — Invalidate saved success and carried PASS on real input revisions
++  - *Files:* `tests/test-gate-contracts.sh`, `.specify/specs/003-gate-round-reduction-and-token-discipline/plan.md`
++  - *Acceptance:* AC-013/AC-020 fixtures first capture a genuinely passing check that reaches a transitive helper through implementation and consumes fixture/configuration/locked-dependency inputs. Independently mutate implementation, helper, fixture, lock, configuration and actual referenced spec AC text; reject old capture current/reuse and saved/carried PASS while its old log stays byte-identical, then restore each input and require success. Retain existing matrix omissions, unknown impact, verdict and digest-corruption controls; assign actual saved-PASS coverage to the reports family.
++  - *Verify kind:* test
++  - *Tests:* `tests/test-gate-contracts.sh::test_reports_and_tally`
++  - *Verify:* `bash tests/test-gate-contracts.sh` → all suites `passed`, exit 0
++  - *Reuse:* local
++  - *Refs:* REQ-009, AC-013, AC-020, FM-005, FM-010, FM-020, INV-001, INV-005, plan §7
++  - *Notes:* Closes reality-check round 3 gap 2 (`notes/verification/reports/reality-check-round3.md`). Adds shipped regression proof for runtime paths already checked by the reviewer; no kernel or O-032 recovery change. No new gate round, floor or hosted-CI run is part of this task.
++  - *Evidence:* CAP-768-sy4sk5 verified by spec-gate accept; return sha256:7c21e5a69566b6149b058324bb8f306b8878995db80e32065e6f407a8857d690
++
+ ## Observability
+ 
+ - [x] **T028** — Record cost and quality without invented savings
+@@ -1094,7 +1116,7 @@ keeps each edit task to at most five files instead of combining unrelated work.
+   - *Reuse:* local
+   - *Refs:* REQ-001, REQ-007, REQ-008, REQ-009, REQ-010, REQ-011, REQ-012, REQ-015, REQ-016, AC-018, FM-001, INV-005, plan §3, §4, §8
+   - *Notes:* For AC-016's real control, the invoker rejects one deliberately incomplete copy of this worker's no-tick return, records unchanged task digests, then accepts the intact original; an intentional control is not a failed worker retry. Executing the published example found two defects it had to fix to run at all: a `return.txt` written into the worktree changed the input manifest and made its own fresh capture stale (returns and reports now live under `notes/verification/`), and `spec-evidence.sh`/`spec-ac-coverage.sh` overwrote a caller-exported `$SPEC`, so a reader following the documented variable names got "current evidence missing/stale" on valid proof. Both were reproduced before the fix.
+-  - *Evidence:* CAP-766-iRGuhN verified by spec-gate accept; return sha256:2eff1b646196926cba33790856dd012387a8b5db72fe3d9917e282462c34cb47
++  - *Evidence:* CAP-769-bZPhmg verified by spec-gate accept; return sha256:dc47e2239dc84dc47a2b080f18660c8fcde667c190c937309646049d64e48b9c
+ 
+ ## Reality Check (pre-ship gate)
+ 
+diff --git a/tests/test-gate-contracts.sh b/tests/test-gate-contracts.sh
+index 794d8e3..e1cdf62 100644
+--- a/tests/test-gate-contracts.sh
++++ b/tests/test-gate-contracts.sh
+@@ -2716,9 +2716,34 @@ cost_metric_cases() {
+ 
+ # AC-013: execute evidence validation, then carry only a completed, unchanged PASS.
+ matrix_runtime_cases() {
+-  local spec repo cap source id text digest tmp evidence
++  local spec repo cap source id text digest tmp evidence path predicate
+   spec="$(make_verification_git_dir matrix)"
+   repo="$(cd "$spec/../../.." && pwd -P)"
++  # The captured check reaches the helper through implementation, and reads
++  # the fixture, configuration and locked dependency version it checks.
++  mkdir -p "$repo/lib" "$repo/tests/fixtures"
++  cat > "$repo/src/parser.sh" <<'EOF'
++. lib/shared.sh
++. ./config.yml
++. ./lockfile
++parse_value() { shared_value "$(cat "$1")"; }
++EOF
++  cat > "$repo/lib/shared.sh" <<'EOF'
++shared_value() {
++  [[ "$1" == "$expected" && "$shared_version" == 1 ]] || return 1
++  printf '%s\n' "$1"
++}
++EOF
++  printf 'good\n' > "$repo/tests/fixtures/value"
++  printf 'expected=good\n' > "$repo/config.yml"
++  printf 'shared_version=1\n' > "$repo/lockfile"
++  cat > "$repo/tests/check.sh" <<'EOF'
++#!/usr/bin/env bash
++# AC-001
++ test_ac_001_shared() { . src/parser.sh; [[ "$(parse_value tests/fixtures/value)" == good ]]; }
++test_ac_001_shared || exit 1
++echo passed
++EOF
+   mkdir -p "$spec/notes/verification/rounds/reality-check/ROUND-1"
+   run_rc 0 "$SCRIPTS/spec-run.sh" "$spec" T001 --cwd "$repo" --from-task --no-tick --summary
+   cap="$(printf '%s' "$OUT" | sed -n 's/^capture=\([^ ]*\).*/\1/p')"
+@@ -2742,6 +2767,47 @@ matrix_runtime_cases() {
+   vf_hash "$tmp/block" > "$spec/notes/verification/rounds/reality-check/ROUND-1/report.sha256"
+   cat "$tmp/round-1" "$tmp/round-2" > "$tmp/report"
+   run_rc 0 vf_reality_matrix "$spec" "$tmp/report" 2 "$source" READY
++  # AC-013/AC-020: keep one real success and its saved PASS throughout;
++  # a later failed capture must not be what invalidates this evidence.
++  cp "$spec/notes/captures/$cap/output.log" "$tmp/success.log"
++  run_rc 0 vf_snapshot "$spec" "$repo" "$repo" "$tmp/inputs"
++  for predicate in current reuse; do
++    run_rc 0 vf_capture_check "$spec" "$cap" "$tmp/inputs" "$predicate"
++  done
++  run_rc 0 vf_reality_matrix "$spec" "$tmp/report" 1 "$source" READY
++  for path in src/parser.sh lib/shared.sh tests/fixtures/value lockfile config.yml "${spec#"$repo/"}/spec.md"; do
++    cp "$repo/$path" "$tmp/original"
++    case "$path" in
++      src/parser.sh) printf 'parse_value() { printf "bad\\n"; }\n' >> "$repo/$path";;
++      lib/shared.sh) printf 'shared_value() { printf "bad\\n"; }\n' >> "$repo/$path";;
++      tests/fixtures/value) printf 'bad\n' > "$repo/$path";;
++      lockfile) printf 'shared_version=2\n' > "$repo/$path";;
++      config.yml) printf 'expected=other\n' > "$repo/$path";;
++      */spec.md)
++        sed 's/the shared boundary behavior/the changed shared boundary behavior/' "$tmp/original" > "$repo/$path"
++        assert_contains "$(cat "$repo/$path")" 'AC-001 — the changed shared boundary behavior'
++        ;;
++    esac
++    # Demonstrate actual dependency consumption without another capture.
++    if [[ "$path" != */spec.md ]]; then
++      run_rc 1 bash -c 'cd "$1" && bash tests/check.sh' _ "$repo"
++    fi
++    run_rc 0 vf_snapshot "$spec" "$repo" "$repo" "$tmp/inputs"
++    for predicate in current reuse; do
++      run_rc 3 vf_capture_check "$spec" "$cap" "$tmp/inputs" "$predicate"
++      assert_contains "$OUT" 'current inputs changed' "AC-020: $path $predicate"
++    done
++    run_rc 3 vf_reality_matrix "$spec" "$tmp/report" 1 "$source" READY
++    run_rc 3 vf_reality_matrix "$spec" "$tmp/report" 2 "$source" READY
++    run_rc 0 cmp "$tmp/success.log" "$spec/notes/captures/$cap/output.log"
++    cp "$tmp/original" "$repo/$path"
++    run_rc 0 vf_snapshot "$spec" "$repo" "$repo" "$tmp/inputs"
++    for predicate in current reuse; do
++      run_rc 0 vf_capture_check "$spec" "$cap" "$tmp/inputs" "$predicate"
++    done
++    run_rc 0 vf_reality_matrix "$spec" "$tmp/report" 1 "$source" READY
++    run_rc 0 vf_reality_matrix "$spec" "$tmp/report" 2 "$source" READY
++  done
+   # AC-013/FM-016: a matrix row reproduced inside a nested example fence is
+   # quoted text. Deleting the real AC-002 row and supplying it that way must
+   # not satisfy the every-AC requirement.
+diff --git a/tests/test-sdd-analyze.sh b/tests/test-sdd-analyze.sh
+index f2eb1ae..02b43bf 100644
+--- a/tests/test-sdd-analyze.sh
++++ b/tests/test-sdd-analyze.sh
+@@ -664,17 +664,13 @@ EOF
+   run_rc 0 "$ANALYZE" "$spec_dir"
+   assert_contains "$OUT" consistent 'AC-003: quoted/fenced examples do not add definitions'
+ 
+-  # AC-004: real shell runners remain valid; an untyped build/text-only
++  # AC-004: real shell runners remain valid; an untyped build/typecheck/text-only
+   # command warns even if its displayed expected output says tests passed.
+-  for fixture in build text; do
++  for fixture in 'npm run build' 'npm run typecheck' 'tsc --noEmit' 'grep AC-001 README.md'; do
+     spec_dir="$(make_spec_dir)"
+-    if [[ "$fixture" == build ]]; then
+-      verification_edit_fixture "$spec_dir/tasks.md" 's/`node --test test\/thing.test.js`/`npm run build`/'
+-    else
+-      verification_edit_fixture "$spec_dir/tasks.md" 's/`node --test test\/thing.test.js`/`grep AC-001 README.md`/'
+-    fi
++    verification_edit_fixture "$spec_dir/tasks.md" "s|\`node --test test/thing.test.js\`|\`$fixture\`|"
+     run_rc 0 "$ANALYZE" "$spec_dir"
+-    assert_contains "$OUT" 'untyped AC Verify' 'AC-004: weak untyped command warns without breaking legacy'
++    assert_contains "$OUT" 'untyped AC Verify' "AC-004: untyped $fixture warns without breaking legacy"
+   done
+   spec_dir="$(make_spec_dir)"
+   verification_edit_fixture "$spec_dir/tasks.md" 's/`node --test test\/thing.test.js`/`bash tests\/check.sh`/'

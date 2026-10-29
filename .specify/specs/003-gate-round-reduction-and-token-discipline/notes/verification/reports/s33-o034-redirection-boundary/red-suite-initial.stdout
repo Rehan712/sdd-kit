@@ -1,0 +1,1940 @@
+  ok   test_clean_fixture_is_consistent
+  ok   test_dangling_ref_fails
+  ok   test_duplicate_task_id_fails
+  ok   test_external_marker_must_be_mirrored_in_status
+  ok   test_gate_agent_placeholder_fails
+  ok   test_leftover_spec_directories_do_not_decide_the_shipped_loop
+  ok   test_missing_artifact_is_an_error
+  ok   test_missing_gate_agent_file_fails
+  ok   test_missing_verify_line_warns
+  ok   test_needs_clarification_blocks
+  ok   test_stray_repo_tags_without_umbrella_warn
+  ok   test_task_without_acceptance_fails
+  ok   test_ticked_box_without_evidence_warns
+  ok   test_umbrella_declared_repo_with_no_tasks_warns
+  ok   test_umbrella_tagged_tasks_pass
+  ok   test_umbrella_undeclared_repo_tag_fails
+  ok   test_umbrella_untagged_tasks_fail
+  ok   test_uncovered_ac_fails_and_gate_refs_do_not_count
+  FAIL test_verification_bindings
+       assert: AC-004: untyped tsc>&tests/check.log --noEmit warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: tsc>&tests/check.log --noEmit remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: untyped grep>|out.txt old new warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: grep>|out.txt old new remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: untyped grep>| out.txt old new warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: grep>| out.txt old new remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: untyped /usr/bin/grep>|out.txt old new warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: /usr/bin/grep>|out.txt old new remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: untyped /usr/bin/grep>| out.txt old new warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: /usr/bin/grep>| out.txt old new remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: untyped ./tools/grep>|out.txt old new warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: ./tools/grep>|out.txt old new remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: untyped ./tools/grep>| out.txt old new warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: ./tools/grep>| out.txt old new remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: untyped tests/grep>|out.txt old new warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: tests/grep>|out.txt old new remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: untyped tests/grep>| out.txt old new warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: tests/grep>| out.txt old new remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: untyped rg>|out.txt old new warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: rg>|out.txt old new remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: untyped rg>| out.txt old new warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: rg>| out.txt old new remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: untyped /usr/bin/rg>|out.txt old new warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: /usr/bin/rg>|out.txt old new remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: untyped /usr/bin/rg>| out.txt old new warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: /usr/bin/rg>| out.txt old new remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: untyped ./tools/rg>|out.txt old new warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: ./tools/rg>|out.txt old new remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: untyped ./tools/rg>| out.txt old new warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: ./tools/rg>| out.txt old new remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: untyped tests/rg>|out.txt old new warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: tests/rg>|out.txt old new remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: untyped tests/rg>| out.txt old new warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: tests/rg>| out.txt old new remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: untyped diff>|out.txt old new warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: diff>|out.txt old new remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: untyped diff>| out.txt old new warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: diff>| out.txt old new remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: untyped /usr/bin/diff>|out.txt old new warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: /usr/bin/diff>|out.txt old new remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: untyped /usr/bin/diff>| out.txt old new warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: /usr/bin/diff>| out.txt old new remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: untyped ./tools/diff>|out.txt old new warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: ./tools/diff>|out.txt old new remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: untyped ./tools/diff>| out.txt old new warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: ./tools/diff>| out.txt old new remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: untyped tests/diff>|out.txt old new warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: tests/diff>|out.txt old new remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: untyped tests/diff>| out.txt old new warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: tests/diff>| out.txt old new remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: untyped grep>|out.txt AC-001 README.md warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: grep>|out.txt AC-001 README.md remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: untyped tsc>|out.txt --noEmit warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: tsc>|out.txt --noEmit remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: untyped test>|out.txt -e README.md warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: test>|out.txt -e README.md remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: untyped test -f>|out.txt README.md warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: test -f>|out.txt README.md remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: untyped tsc >|out.txt --noEmit warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: tsc >|out.txt --noEmit remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: untyped test >|out.txt -e README.md warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: test >|out.txt -e README.md remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: untyped grep<&0 AC-001 README.md warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: grep<&0 AC-001 README.md remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: untyped tsc<&0 --noEmit warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: tsc<&0 --noEmit remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: untyped test<&0 -e README.md warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: test<&0 -e README.md remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: untyped test -f<&0 README.md warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: test -f<&0 README.md remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: untyped tsc <&0 --noEmit warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: tsc <&0 --noEmit remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: untyped test <&0 -e README.md warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: test <&0 -e README.md remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: untyped grep>&1 AC-001 README.md warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: grep>&1 AC-001 README.md remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: untyped tsc>&1 --noEmit warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: tsc>&1 --noEmit remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: untyped test>&1 -e README.md warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: test>&1 -e README.md remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: untyped test -f>&1 README.md warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: test -f>&1 README.md remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: untyped tsc >&1 --noEmit warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: tsc >&1 --noEmit remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: untyped test >&1 -e README.md warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: test >&1 -e README.md remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: untyped grep&>out.txt AC-001 README.md warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: grep&>out.txt AC-001 README.md remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: untyped tsc&>out.txt --noEmit warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: tsc&>out.txt --noEmit remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: untyped test&>out.txt -e README.md warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: test&>out.txt -e README.md remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: untyped test -f&>out.txt README.md warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: test -f&>out.txt README.md remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: untyped tsc &>out.txt --noEmit warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: tsc &>out.txt --noEmit remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: untyped test &>out.txt -e README.md warns without breaking legacy missing substring: untyped AC Verify
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: test &>out.txt -e README.md remains warning-only missing substring: warning(s), 0 errors
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compatible
+         ✓ opponent gate present, agent file exists
+         ✓ reality-check gate present, agent file
+       assert: AC-004: bash&>tests/build.log tests/typecheck.sh has no weak executable unexpectedly contains: untyped AC Verify
+       assert: AC-004: bash&>tests/build.log tests/typecheck.sh stays clean missing substring: consistent
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compati
+       assert: AC-004: npm>&tests/typecheck.log run test has no weak executable unexpectedly contains: untyped AC Verify
+       assert: AC-004: npm>&tests/typecheck.log run test stays clean missing substring: consistent
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compati
+       assert: AC-004: node>|tests/build.log --test test/typecheck.js has no weak executable unexpectedly contains: untyped AC Verify
+       assert: AC-004: node>|tests/build.log --test test/typecheck.js stays clean missing substring: consistent
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compati
+       assert: AC-004: pnpm>|out.txt test --filter typecheck has no weak executable unexpectedly contains: untyped AC Verify
+       assert: AC-004: pnpm>|out.txt test --filter typecheck stays clean missing substring: consistent
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compati
+       assert: AC-004: yarn run>|out.txt test --grep typecheck has no weak executable unexpectedly contains: untyped AC Verify
+       assert: AC-004: yarn run>|out.txt test --grep typecheck stays clean missing substring: consistent
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compati
+       assert: AC-004: go test>|out.txt ./typecheck has no weak executable unexpectedly contains: untyped AC Verify
+       assert: AC-004: go test>|out.txt ./typecheck stays clean missing substring: consistent
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compati
+       assert: AC-004: make>|out.txt test TARGET=typecheck has no weak executable unexpectedly contains: untyped AC Verify
+       assert: AC-004: make>|out.txt test TARGET=typecheck stays clean missing substring: consistent
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compati
+       assert: AC-004: bash>|out.txt tests/typecheck.sh has no weak executable unexpectedly contains: untyped AC Verify
+       assert: AC-004: bash>|out.txt tests/typecheck.sh stays clean missing substring: consistent
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compati
+       assert: AC-004: cargo test>|out.txt --test typecheck has no weak executable unexpectedly contains: untyped AC Verify
+       assert: AC-004: cargo test>|out.txt --test typecheck stays clean missing substring: consistent
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compati
+       assert: AC-004: npm run>|out.txt test -- --grep typecheck has no weak executable unexpectedly contains: untyped AC Verify
+       assert: AC-004: npm run>|out.txt test -- --grep typecheck stays clean missing substring: consistent
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compati
+       assert: AC-004: ./tests/check-typecheck.sh>|out.txt /usr/bin/grep has no weak executable unexpectedly contains: untyped AC Verify
+       assert: AC-004: ./tests/check-typecheck.sh>|out.txt /usr/bin/grep stays clean missing substring: consistent
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compati
+       assert: AC-004: bash >|out.txt tests/typecheck.sh has no weak executable unexpectedly contains: untyped AC Verify
+       assert: AC-004: bash >|out.txt tests/typecheck.sh stays clean missing substring: consistent
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compati
+       assert: AC-004: npm run >|out.txt test -- --grep typecheck has no weak executable unexpectedly contains: untyped AC Verify
+       assert: AC-004: npm run >|out.txt test -- --grep typecheck stays clean missing substring: consistent
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compati
+       assert: AC-004: bash<&0 tests/typecheck.sh has no weak executable unexpectedly contains: untyped AC Verify
+       assert: AC-004: bash<&0 tests/typecheck.sh stays clean missing substring: consistent
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compati
+       assert: AC-004: cargo test<&0 --test typecheck has no weak executable unexpectedly contains: untyped AC Verify
+       assert: AC-004: cargo test<&0 --test typecheck stays clean missing substring: consistent
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compati
+       assert: AC-004: npm run<&0 test -- --grep typecheck has no weak executable unexpectedly contains: untyped AC Verify
+       assert: AC-004: npm run<&0 test -- --grep typecheck stays clean missing substring: consistent
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compati
+       assert: AC-004: ./tests/check-typecheck.sh<&0 /usr/bin/grep has no weak executable unexpectedly contains: untyped AC Verify
+       assert: AC-004: ./tests/check-typecheck.sh<&0 /usr/bin/grep stays clean missing substring: consistent
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compati
+       assert: AC-004: bash <&0 tests/typecheck.sh has no weak executable unexpectedly contains: untyped AC Verify
+       assert: AC-004: bash <&0 tests/typecheck.sh stays clean missing substring: consistent
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compati
+       assert: AC-004: npm run <&0 test -- --grep typecheck has no weak executable unexpectedly contains: untyped AC Verify
+       assert: AC-004: npm run <&0 test -- --grep typecheck stays clean missing substring: consistent
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compati
+       assert: AC-004: bash>&1 tests/typecheck.sh has no weak executable unexpectedly contains: untyped AC Verify
+       assert: AC-004: bash>&1 tests/typecheck.sh stays clean missing substring: consistent
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compati
+       assert: AC-004: cargo test>&1 --test typecheck has no weak executable unexpectedly contains: untyped AC Verify
+       assert: AC-004: cargo test>&1 --test typecheck stays clean missing substring: consistent
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compati
+       assert: AC-004: npm run>&1 test -- --grep typecheck has no weak executable unexpectedly contains: untyped AC Verify
+       assert: AC-004: npm run>&1 test -- --grep typecheck stays clean missing substring: consistent
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compati
+       assert: AC-004: ./tests/check-typecheck.sh>&1 /usr/bin/grep has no weak executable unexpectedly contains: untyped AC Verify
+       assert: AC-004: ./tests/check-typecheck.sh>&1 /usr/bin/grep stays clean missing substring: consistent
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compati
+       assert: AC-004: bash >&1 tests/typecheck.sh has no weak executable unexpectedly contains: untyped AC Verify
+       assert: AC-004: bash >&1 tests/typecheck.sh stays clean missing substring: consistent
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compati
+       assert: AC-004: npm run >&1 test -- --grep typecheck has no weak executable unexpectedly contains: untyped AC Verify
+       assert: AC-004: npm run >&1 test -- --grep typecheck stays clean missing substring: consistent
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compati
+       assert: AC-004: bash&>out.txt tests/typecheck.sh has no weak executable unexpectedly contains: untyped AC Verify
+       assert: AC-004: bash&>out.txt tests/typecheck.sh stays clean missing substring: consistent
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compati
+       assert: AC-004: cargo test&>out.txt --test typecheck has no weak executable unexpectedly contains: untyped AC Verify
+       assert: AC-004: cargo test&>out.txt --test typecheck stays clean missing substring: consistent
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compati
+       assert: AC-004: npm run&>out.txt test -- --grep typecheck has no weak executable unexpectedly contains: untyped AC Verify
+       assert: AC-004: npm run&>out.txt test -- --grep typecheck stays clean missing substring: consistent
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compati
+       assert: AC-004: bash &>out.txt tests/typecheck.sh has no weak executable unexpectedly contains: untyped AC Verify
+       assert: AC-004: bash &>out.txt tests/typecheck.sh stays clean missing substring: consistent
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compati
+       assert: AC-004: npm run &>out.txt test -- --grep typecheck has no weak executable unexpectedly contains: untyped AC Verify
+       assert: AC-004: npm run &>out.txt test -- --grep typecheck stays clean missing substring: consistent
+           in: Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sddkit.K59u3E/proj/.specify/specs/001-test-feature
+         ✓ spec.md present
+         ✓ plan.md present
+         ✓ tasks.md present
+         ✓ STATUS.md present
+         ✓ verification command configuration valid
+         ✓ no unresolved [NEEDS CLARIFICATION] markers
+         ✓ spec.md defines 2 AC id(s)
+         ✓ every AC is covered by an implementation task
+         ✓ all task refs resolve to spec ids
+         ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence
+         ✓ 6 task(s) parsed
+         ✓ legacy verification contract remains compati
+  -- 18/19 passed

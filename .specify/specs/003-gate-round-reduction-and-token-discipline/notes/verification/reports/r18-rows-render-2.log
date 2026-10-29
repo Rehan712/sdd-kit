@@ -1,0 +1,13 @@
+R definition-after-quote-marker
+  | marked rc=0 <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<blockquote>~</blockquote>
+  | mdit   rc=0 <ul>~<li><strong>Severity:</strong> minor</li>~</ul>~<blockquote></blockquote>
+W image-title-across-lines-outside-finding-after-id
+  | marked rc=0 <h3>Finding G-041</h3>~<ul>~<li><strong>Class:</strong> tier-binding</li>~<li><strong>Severity:</strong> minor</li>~</ul>~<h2>Notes</h2>~<p>G-042 is discussed below.</p>~<p><img src="u" alt=" ] x " title="a~y~b">Severity: data-loss</p>
+  | mdit   rc=0 <h3>Finding G-041</h3>~<ul>~<li><strong>Class:</strong> tier-binding</li>~<li><strong>Severity:</strong> minor</li>~</ul>~<h2>Notes</h2>~<p>G-042 is discussed below.</p>~<p><img src="u" alt="  x " title="a~y~b">Severity: data-loss</p>
+W tag-image-alt-code-span-outside-finding-after-id
+  | marked rc=0 <h3>Finding G-041</h3>~<ul>~<li><strong>Class:</strong> tier-binding</li>~<li><strong>Severity:</strong> minor</li>~</ul>~<h2>Notes</h2>~<p>G-042 is discussed below.</p>~<p><b><img src="u" alt=" ] x~y~">Severity: data-loss</p>
+  | mdit   rc=0 <h3>Finding G-041</h3>~<ul>~<li><strong>Class:</strong> tier-binding</li>~<li><strong>Severity:</strong> minor</li>~</ul>~<h2>Notes</h2>~<p>G-042 is discussed below.</p>~<p><b><img src="u" alt="  x~y~">Severity: data-loss</p>
+W quoted-definition-hiding-a-field-line
+  | marked rc=0 <h3>Finding G-042</h3>~<ul>~<li><strong>Class:</strong> tier-binding</li>~</ul>~<blockquote>~<p>[a]: /u &#39;~- <strong>Severity:</strong> minor~- x&#39;</p>~</blockquote>~<ul>~<li><strong>Severity:</strong> data-loss</li>~</ul>
+  | mdit   rc=0 <h3>Finding G-042</h3>~<ul>~<li><strong>Class:</strong> tier-binding</li>~</ul>~<blockquote></blockquote>~<ul>~<li><strong>Severity:</strong> data-loss</li>~</ul>
+r18-rows-render failures=0

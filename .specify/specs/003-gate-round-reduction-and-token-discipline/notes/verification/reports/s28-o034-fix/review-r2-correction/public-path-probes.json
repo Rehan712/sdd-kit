@@ -1,0 +1,1614 @@
+{
+  "fixture_setup": {
+    "argv": [
+      "/bin/bash",
+      "-c",
+      ". \"$1/tests/helpers.sh\"; make_spec_dir",
+      "_",
+      "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "exit": 0,
+    "stdout": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n",
+    "stderr": ""
+  },
+  "environment_overrides": {
+    "GIT_OPTIONAL_LOCKS": "0",
+    "NO_COLOR": "1",
+    "LC_ALL": "C",
+    "SHELLCHECK_OPTS": "",
+    "SANDBOX": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes"
+  },
+  "environment_unset": [
+    "BASH_ENV",
+    "ENV",
+    "CDPATH"
+  ],
+  "policy": "Verify strings are fixture data; only the public analyzer is executed",
+  "cases": [
+    {
+      "kind": "weak",
+      "command": "/usr/bin/grep AC-001 tests/check.sh",
+      "tasks_md": "---\ntasks_for: 001-test-feature\nstatus: in-progress\ncreated: 2026-01-01\nupdated: 2026-01-01\n---\n# Tasks: Test feature\n\n## Setup\n\n- [ ] **T001** \u2014 Add scaffolding\n  - *Files:* `src/`\n  - *Acceptance:* build succeeds\n  - *Verify:* `npm run build` \u2192 \"built\"\n\n## Backend\n\n- [ ] **T002** \u2014 Implement the thing endpoint\n  - *Files:* `src/thing.js`\n  - *Acceptance:* unit test passes\n  - *Verify:* `/usr/bin/grep AC-001 tests/check.sh` \u2192 \"pass 1\"\n  - *Refs:* REQ-001, AC-001\n\n- [ ] **T003** \u2014 Validate payloads\n  - *Files:* `src/validate.js`\n  - *Acceptance:* invalid-payload test passes\n  - *Verify:* `node --test test/validate.test.js` \u2192 \"pass 2\"\n  - *Refs:* AC-002\n\n## Reality Check (pre-ship gate)\n\n- [ ] **T009** \u2014 Opponent review: steelman why this implementation is wrong\n  - *Agent:* agents/opponent.agent.md\n  - *Acceptance:* agent returns **CLEARED**\n  - *Refs:* AC-001, AC-002\n\n- [ ] **T010** \u2014 Reality-check the implemented spec end-to-end\n  - *Agent:* agents/reality-check.agent.md\n  - *Acceptance:* agent returns **READY**\n  - *Refs:* AC-001, AC-002\n\n## Ship\n\n- [ ] **T011** \u2014 Open PR to the base branch\n  - *Acceptance:* spec-pr.sh prints the PR URL\n",
+      "results": {
+        "before": {
+          "argv": [
+            "/bin/bash",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.2671928405761719,
+          "warned": false,
+          "consistent": true,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\nconsistent \u2014 spec/plan/tasks line up\n",
+          "stderr": ""
+        },
+        "after": {
+          "argv": [
+            "/bin/bash",
+            "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.2824409008026123,
+          "warned": true,
+          "consistent": false,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\n1 warning(s), 0 errors\n",
+          "stderr": ""
+        }
+      }
+    },
+    {
+      "kind": "weak",
+      "command": "/usr/bin/grep<input.txt AC-001 tests/check.sh",
+      "tasks_md": "---\ntasks_for: 001-test-feature\nstatus: in-progress\ncreated: 2026-01-01\nupdated: 2026-01-01\n---\n# Tasks: Test feature\n\n## Setup\n\n- [ ] **T001** \u2014 Add scaffolding\n  - *Files:* `src/`\n  - *Acceptance:* build succeeds\n  - *Verify:* `npm run build` \u2192 \"built\"\n\n## Backend\n\n- [ ] **T002** \u2014 Implement the thing endpoint\n  - *Files:* `src/thing.js`\n  - *Acceptance:* unit test passes\n  - *Verify:* `/usr/bin/grep<input.txt AC-001 tests/check.sh` \u2192 \"pass 1\"\n  - *Refs:* REQ-001, AC-001\n\n- [ ] **T003** \u2014 Validate payloads\n  - *Files:* `src/validate.js`\n  - *Acceptance:* invalid-payload test passes\n  - *Verify:* `node --test test/validate.test.js` \u2192 \"pass 2\"\n  - *Refs:* AC-002\n\n## Reality Check (pre-ship gate)\n\n- [ ] **T009** \u2014 Opponent review: steelman why this implementation is wrong\n  - *Agent:* agents/opponent.agent.md\n  - *Acceptance:* agent returns **CLEARED**\n  - *Refs:* AC-001, AC-002\n\n- [ ] **T010** \u2014 Reality-check the implemented spec end-to-end\n  - *Agent:* agents/reality-check.agent.md\n  - *Acceptance:* agent returns **READY**\n  - *Refs:* AC-001, AC-002\n\n## Ship\n\n- [ ] **T011** \u2014 Open PR to the base branch\n  - *Acceptance:* spec-pr.sh prints the PR URL\n",
+      "results": {
+        "before": {
+          "argv": [
+            "/bin/bash",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.23383116722106934,
+          "warned": false,
+          "consistent": true,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\nconsistent \u2014 spec/plan/tasks line up\n",
+          "stderr": ""
+        },
+        "after": {
+          "argv": [
+            "/bin/bash",
+            "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.19978904724121094,
+          "warned": true,
+          "consistent": false,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\n1 warning(s), 0 errors\n",
+          "stderr": ""
+        }
+      }
+    },
+    {
+      "kind": "weak",
+      "command": "/usr/bin/grep <input.txt AC-001 tests/check.sh",
+      "tasks_md": "---\ntasks_for: 001-test-feature\nstatus: in-progress\ncreated: 2026-01-01\nupdated: 2026-01-01\n---\n# Tasks: Test feature\n\n## Setup\n\n- [ ] **T001** \u2014 Add scaffolding\n  - *Files:* `src/`\n  - *Acceptance:* build succeeds\n  - *Verify:* `npm run build` \u2192 \"built\"\n\n## Backend\n\n- [ ] **T002** \u2014 Implement the thing endpoint\n  - *Files:* `src/thing.js`\n  - *Acceptance:* unit test passes\n  - *Verify:* `/usr/bin/grep <input.txt AC-001 tests/check.sh` \u2192 \"pass 1\"\n  - *Refs:* REQ-001, AC-001\n\n- [ ] **T003** \u2014 Validate payloads\n  - *Files:* `src/validate.js`\n  - *Acceptance:* invalid-payload test passes\n  - *Verify:* `node --test test/validate.test.js` \u2192 \"pass 2\"\n  - *Refs:* AC-002\n\n## Reality Check (pre-ship gate)\n\n- [ ] **T009** \u2014 Opponent review: steelman why this implementation is wrong\n  - *Agent:* agents/opponent.agent.md\n  - *Acceptance:* agent returns **CLEARED**\n  - *Refs:* AC-001, AC-002\n\n- [ ] **T010** \u2014 Reality-check the implemented spec end-to-end\n  - *Agent:* agents/reality-check.agent.md\n  - *Acceptance:* agent returns **READY**\n  - *Refs:* AC-001, AC-002\n\n## Ship\n\n- [ ] **T011** \u2014 Open PR to the base branch\n  - *Acceptance:* spec-pr.sh prints the PR URL\n",
+      "results": {
+        "before": {
+          "argv": [
+            "/bin/bash",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.18823504447937012,
+          "warned": false,
+          "consistent": true,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\nconsistent \u2014 spec/plan/tasks line up\n",
+          "stderr": ""
+        },
+        "after": {
+          "argv": [
+            "/bin/bash",
+            "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.19017910957336426,
+          "warned": true,
+          "consistent": false,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\n1 warning(s), 0 errors\n",
+          "stderr": ""
+        }
+      }
+    },
+    {
+      "kind": "weak",
+      "command": "/usr/bin/grep>output.txt AC-001 tests/check.sh",
+      "tasks_md": "---\ntasks_for: 001-test-feature\nstatus: in-progress\ncreated: 2026-01-01\nupdated: 2026-01-01\n---\n# Tasks: Test feature\n\n## Setup\n\n- [ ] **T001** \u2014 Add scaffolding\n  - *Files:* `src/`\n  - *Acceptance:* build succeeds\n  - *Verify:* `npm run build` \u2192 \"built\"\n\n## Backend\n\n- [ ] **T002** \u2014 Implement the thing endpoint\n  - *Files:* `src/thing.js`\n  - *Acceptance:* unit test passes\n  - *Verify:* `/usr/bin/grep>output.txt AC-001 tests/check.sh` \u2192 \"pass 1\"\n  - *Refs:* REQ-001, AC-001\n\n- [ ] **T003** \u2014 Validate payloads\n  - *Files:* `src/validate.js`\n  - *Acceptance:* invalid-payload test passes\n  - *Verify:* `node --test test/validate.test.js` \u2192 \"pass 2\"\n  - *Refs:* AC-002\n\n## Reality Check (pre-ship gate)\n\n- [ ] **T009** \u2014 Opponent review: steelman why this implementation is wrong\n  - *Agent:* agents/opponent.agent.md\n  - *Acceptance:* agent returns **CLEARED**\n  - *Refs:* AC-001, AC-002\n\n- [ ] **T010** \u2014 Reality-check the implemented spec end-to-end\n  - *Agent:* agents/reality-check.agent.md\n  - *Acceptance:* agent returns **READY**\n  - *Refs:* AC-001, AC-002\n\n## Ship\n\n- [ ] **T011** \u2014 Open PR to the base branch\n  - *Acceptance:* spec-pr.sh prints the PR URL\n",
+      "results": {
+        "before": {
+          "argv": [
+            "/bin/bash",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.18925905227661133,
+          "warned": false,
+          "consistent": true,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\nconsistent \u2014 spec/plan/tasks line up\n",
+          "stderr": ""
+        },
+        "after": {
+          "argv": [
+            "/bin/bash",
+            "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.19062089920043945,
+          "warned": true,
+          "consistent": false,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\n1 warning(s), 0 errors\n",
+          "stderr": ""
+        }
+      }
+    },
+    {
+      "kind": "weak",
+      "command": "/usr/bin/grep >output.txt AC-001 tests/check.sh",
+      "tasks_md": "---\ntasks_for: 001-test-feature\nstatus: in-progress\ncreated: 2026-01-01\nupdated: 2026-01-01\n---\n# Tasks: Test feature\n\n## Setup\n\n- [ ] **T001** \u2014 Add scaffolding\n  - *Files:* `src/`\n  - *Acceptance:* build succeeds\n  - *Verify:* `npm run build` \u2192 \"built\"\n\n## Backend\n\n- [ ] **T002** \u2014 Implement the thing endpoint\n  - *Files:* `src/thing.js`\n  - *Acceptance:* unit test passes\n  - *Verify:* `/usr/bin/grep >output.txt AC-001 tests/check.sh` \u2192 \"pass 1\"\n  - *Refs:* REQ-001, AC-001\n\n- [ ] **T003** \u2014 Validate payloads\n  - *Files:* `src/validate.js`\n  - *Acceptance:* invalid-payload test passes\n  - *Verify:* `node --test test/validate.test.js` \u2192 \"pass 2\"\n  - *Refs:* AC-002\n\n## Reality Check (pre-ship gate)\n\n- [ ] **T009** \u2014 Opponent review: steelman why this implementation is wrong\n  - *Agent:* agents/opponent.agent.md\n  - *Acceptance:* agent returns **CLEARED**\n  - *Refs:* AC-001, AC-002\n\n- [ ] **T010** \u2014 Reality-check the implemented spec end-to-end\n  - *Agent:* agents/reality-check.agent.md\n  - *Acceptance:* agent returns **READY**\n  - *Refs:* AC-001, AC-002\n\n## Ship\n\n- [ ] **T011** \u2014 Open PR to the base branch\n  - *Acceptance:* spec-pr.sh prints the PR URL\n",
+      "results": {
+        "before": {
+          "argv": [
+            "/bin/bash",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.18535685539245605,
+          "warned": false,
+          "consistent": true,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\nconsistent \u2014 spec/plan/tasks line up\n",
+          "stderr": ""
+        },
+        "after": {
+          "argv": [
+            "/bin/bash",
+            "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.18867802619934082,
+          "warned": true,
+          "consistent": false,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\n1 warning(s), 0 errors\n",
+          "stderr": ""
+        }
+      }
+    },
+    {
+      "kind": "weak",
+      "command": "/usr/bin/rg AC-001 tests/check.sh",
+      "tasks_md": "---\ntasks_for: 001-test-feature\nstatus: in-progress\ncreated: 2026-01-01\nupdated: 2026-01-01\n---\n# Tasks: Test feature\n\n## Setup\n\n- [ ] **T001** \u2014 Add scaffolding\n  - *Files:* `src/`\n  - *Acceptance:* build succeeds\n  - *Verify:* `npm run build` \u2192 \"built\"\n\n## Backend\n\n- [ ] **T002** \u2014 Implement the thing endpoint\n  - *Files:* `src/thing.js`\n  - *Acceptance:* unit test passes\n  - *Verify:* `/usr/bin/rg AC-001 tests/check.sh` \u2192 \"pass 1\"\n  - *Refs:* REQ-001, AC-001\n\n- [ ] **T003** \u2014 Validate payloads\n  - *Files:* `src/validate.js`\n  - *Acceptance:* invalid-payload test passes\n  - *Verify:* `node --test test/validate.test.js` \u2192 \"pass 2\"\n  - *Refs:* AC-002\n\n## Reality Check (pre-ship gate)\n\n- [ ] **T009** \u2014 Opponent review: steelman why this implementation is wrong\n  - *Agent:* agents/opponent.agent.md\n  - *Acceptance:* agent returns **CLEARED**\n  - *Refs:* AC-001, AC-002\n\n- [ ] **T010** \u2014 Reality-check the implemented spec end-to-end\n  - *Agent:* agents/reality-check.agent.md\n  - *Acceptance:* agent returns **READY**\n  - *Refs:* AC-001, AC-002\n\n## Ship\n\n- [ ] **T011** \u2014 Open PR to the base branch\n  - *Acceptance:* spec-pr.sh prints the PR URL\n",
+      "results": {
+        "before": {
+          "argv": [
+            "/bin/bash",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.1987597942352295,
+          "warned": false,
+          "consistent": true,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\nconsistent \u2014 spec/plan/tasks line up\n",
+          "stderr": ""
+        },
+        "after": {
+          "argv": [
+            "/bin/bash",
+            "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.19391894340515137,
+          "warned": true,
+          "consistent": false,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\n1 warning(s), 0 errors\n",
+          "stderr": ""
+        }
+      }
+    },
+    {
+      "kind": "weak",
+      "command": "/usr/bin/rg<input.txt AC-001 tests/check.sh",
+      "tasks_md": "---\ntasks_for: 001-test-feature\nstatus: in-progress\ncreated: 2026-01-01\nupdated: 2026-01-01\n---\n# Tasks: Test feature\n\n## Setup\n\n- [ ] **T001** \u2014 Add scaffolding\n  - *Files:* `src/`\n  - *Acceptance:* build succeeds\n  - *Verify:* `npm run build` \u2192 \"built\"\n\n## Backend\n\n- [ ] **T002** \u2014 Implement the thing endpoint\n  - *Files:* `src/thing.js`\n  - *Acceptance:* unit test passes\n  - *Verify:* `/usr/bin/rg<input.txt AC-001 tests/check.sh` \u2192 \"pass 1\"\n  - *Refs:* REQ-001, AC-001\n\n- [ ] **T003** \u2014 Validate payloads\n  - *Files:* `src/validate.js`\n  - *Acceptance:* invalid-payload test passes\n  - *Verify:* `node --test test/validate.test.js` \u2192 \"pass 2\"\n  - *Refs:* AC-002\n\n## Reality Check (pre-ship gate)\n\n- [ ] **T009** \u2014 Opponent review: steelman why this implementation is wrong\n  - *Agent:* agents/opponent.agent.md\n  - *Acceptance:* agent returns **CLEARED**\n  - *Refs:* AC-001, AC-002\n\n- [ ] **T010** \u2014 Reality-check the implemented spec end-to-end\n  - *Agent:* agents/reality-check.agent.md\n  - *Acceptance:* agent returns **READY**\n  - *Refs:* AC-001, AC-002\n\n## Ship\n\n- [ ] **T011** \u2014 Open PR to the base branch\n  - *Acceptance:* spec-pr.sh prints the PR URL\n",
+      "results": {
+        "before": {
+          "argv": [
+            "/bin/bash",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.18855786323547363,
+          "warned": false,
+          "consistent": true,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\nconsistent \u2014 spec/plan/tasks line up\n",
+          "stderr": ""
+        },
+        "after": {
+          "argv": [
+            "/bin/bash",
+            "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.19044208526611328,
+          "warned": true,
+          "consistent": false,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\n1 warning(s), 0 errors\n",
+          "stderr": ""
+        }
+      }
+    },
+    {
+      "kind": "weak",
+      "command": "/usr/bin/rg <input.txt AC-001 tests/check.sh",
+      "tasks_md": "---\ntasks_for: 001-test-feature\nstatus: in-progress\ncreated: 2026-01-01\nupdated: 2026-01-01\n---\n# Tasks: Test feature\n\n## Setup\n\n- [ ] **T001** \u2014 Add scaffolding\n  - *Files:* `src/`\n  - *Acceptance:* build succeeds\n  - *Verify:* `npm run build` \u2192 \"built\"\n\n## Backend\n\n- [ ] **T002** \u2014 Implement the thing endpoint\n  - *Files:* `src/thing.js`\n  - *Acceptance:* unit test passes\n  - *Verify:* `/usr/bin/rg <input.txt AC-001 tests/check.sh` \u2192 \"pass 1\"\n  - *Refs:* REQ-001, AC-001\n\n- [ ] **T003** \u2014 Validate payloads\n  - *Files:* `src/validate.js`\n  - *Acceptance:* invalid-payload test passes\n  - *Verify:* `node --test test/validate.test.js` \u2192 \"pass 2\"\n  - *Refs:* AC-002\n\n## Reality Check (pre-ship gate)\n\n- [ ] **T009** \u2014 Opponent review: steelman why this implementation is wrong\n  - *Agent:* agents/opponent.agent.md\n  - *Acceptance:* agent returns **CLEARED**\n  - *Refs:* AC-001, AC-002\n\n- [ ] **T010** \u2014 Reality-check the implemented spec end-to-end\n  - *Agent:* agents/reality-check.agent.md\n  - *Acceptance:* agent returns **READY**\n  - *Refs:* AC-001, AC-002\n\n## Ship\n\n- [ ] **T011** \u2014 Open PR to the base branch\n  - *Acceptance:* spec-pr.sh prints the PR URL\n",
+      "results": {
+        "before": {
+          "argv": [
+            "/bin/bash",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.19186902046203613,
+          "warned": false,
+          "consistent": true,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\nconsistent \u2014 spec/plan/tasks line up\n",
+          "stderr": ""
+        },
+        "after": {
+          "argv": [
+            "/bin/bash",
+            "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.27469730377197266,
+          "warned": true,
+          "consistent": false,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\n1 warning(s), 0 errors\n",
+          "stderr": ""
+        }
+      }
+    },
+    {
+      "kind": "weak",
+      "command": "/usr/bin/rg>output.txt AC-001 tests/check.sh",
+      "tasks_md": "---\ntasks_for: 001-test-feature\nstatus: in-progress\ncreated: 2026-01-01\nupdated: 2026-01-01\n---\n# Tasks: Test feature\n\n## Setup\n\n- [ ] **T001** \u2014 Add scaffolding\n  - *Files:* `src/`\n  - *Acceptance:* build succeeds\n  - *Verify:* `npm run build` \u2192 \"built\"\n\n## Backend\n\n- [ ] **T002** \u2014 Implement the thing endpoint\n  - *Files:* `src/thing.js`\n  - *Acceptance:* unit test passes\n  - *Verify:* `/usr/bin/rg>output.txt AC-001 tests/check.sh` \u2192 \"pass 1\"\n  - *Refs:* REQ-001, AC-001\n\n- [ ] **T003** \u2014 Validate payloads\n  - *Files:* `src/validate.js`\n  - *Acceptance:* invalid-payload test passes\n  - *Verify:* `node --test test/validate.test.js` \u2192 \"pass 2\"\n  - *Refs:* AC-002\n\n## Reality Check (pre-ship gate)\n\n- [ ] **T009** \u2014 Opponent review: steelman why this implementation is wrong\n  - *Agent:* agents/opponent.agent.md\n  - *Acceptance:* agent returns **CLEARED**\n  - *Refs:* AC-001, AC-002\n\n- [ ] **T010** \u2014 Reality-check the implemented spec end-to-end\n  - *Agent:* agents/reality-check.agent.md\n  - *Acceptance:* agent returns **READY**\n  - *Refs:* AC-001, AC-002\n\n## Ship\n\n- [ ] **T011** \u2014 Open PR to the base branch\n  - *Acceptance:* spec-pr.sh prints the PR URL\n",
+      "results": {
+        "before": {
+          "argv": [
+            "/bin/bash",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.3109910488128662,
+          "warned": false,
+          "consistent": true,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\nconsistent \u2014 spec/plan/tasks line up\n",
+          "stderr": ""
+        },
+        "after": {
+          "argv": [
+            "/bin/bash",
+            "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.22171688079833984,
+          "warned": true,
+          "consistent": false,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\n1 warning(s), 0 errors\n",
+          "stderr": ""
+        }
+      }
+    },
+    {
+      "kind": "weak",
+      "command": "/usr/bin/rg >output.txt AC-001 tests/check.sh",
+      "tasks_md": "---\ntasks_for: 001-test-feature\nstatus: in-progress\ncreated: 2026-01-01\nupdated: 2026-01-01\n---\n# Tasks: Test feature\n\n## Setup\n\n- [ ] **T001** \u2014 Add scaffolding\n  - *Files:* `src/`\n  - *Acceptance:* build succeeds\n  - *Verify:* `npm run build` \u2192 \"built\"\n\n## Backend\n\n- [ ] **T002** \u2014 Implement the thing endpoint\n  - *Files:* `src/thing.js`\n  - *Acceptance:* unit test passes\n  - *Verify:* `/usr/bin/rg >output.txt AC-001 tests/check.sh` \u2192 \"pass 1\"\n  - *Refs:* REQ-001, AC-001\n\n- [ ] **T003** \u2014 Validate payloads\n  - *Files:* `src/validate.js`\n  - *Acceptance:* invalid-payload test passes\n  - *Verify:* `node --test test/validate.test.js` \u2192 \"pass 2\"\n  - *Refs:* AC-002\n\n## Reality Check (pre-ship gate)\n\n- [ ] **T009** \u2014 Opponent review: steelman why this implementation is wrong\n  - *Agent:* agents/opponent.agent.md\n  - *Acceptance:* agent returns **CLEARED**\n  - *Refs:* AC-001, AC-002\n\n- [ ] **T010** \u2014 Reality-check the implemented spec end-to-end\n  - *Agent:* agents/reality-check.agent.md\n  - *Acceptance:* agent returns **READY**\n  - *Refs:* AC-001, AC-002\n\n## Ship\n\n- [ ] **T011** \u2014 Open PR to the base branch\n  - *Acceptance:* spec-pr.sh prints the PR URL\n",
+      "results": {
+        "before": {
+          "argv": [
+            "/bin/bash",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.29477810859680176,
+          "warned": false,
+          "consistent": true,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\nconsistent \u2014 spec/plan/tasks line up\n",
+          "stderr": ""
+        },
+        "after": {
+          "argv": [
+            "/bin/bash",
+            "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.20270824432373047,
+          "warned": true,
+          "consistent": false,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\n1 warning(s), 0 errors\n",
+          "stderr": ""
+        }
+      }
+    },
+    {
+      "kind": "weak",
+      "command": "/usr/bin/diff fixtures/test.txt actual.txt",
+      "tasks_md": "---\ntasks_for: 001-test-feature\nstatus: in-progress\ncreated: 2026-01-01\nupdated: 2026-01-01\n---\n# Tasks: Test feature\n\n## Setup\n\n- [ ] **T001** \u2014 Add scaffolding\n  - *Files:* `src/`\n  - *Acceptance:* build succeeds\n  - *Verify:* `npm run build` \u2192 \"built\"\n\n## Backend\n\n- [ ] **T002** \u2014 Implement the thing endpoint\n  - *Files:* `src/thing.js`\n  - *Acceptance:* unit test passes\n  - *Verify:* `/usr/bin/diff fixtures/test.txt actual.txt` \u2192 \"pass 1\"\n  - *Refs:* REQ-001, AC-001\n\n- [ ] **T003** \u2014 Validate payloads\n  - *Files:* `src/validate.js`\n  - *Acceptance:* invalid-payload test passes\n  - *Verify:* `node --test test/validate.test.js` \u2192 \"pass 2\"\n  - *Refs:* AC-002\n\n## Reality Check (pre-ship gate)\n\n- [ ] **T009** \u2014 Opponent review: steelman why this implementation is wrong\n  - *Agent:* agents/opponent.agent.md\n  - *Acceptance:* agent returns **CLEARED**\n  - *Refs:* AC-001, AC-002\n\n- [ ] **T010** \u2014 Reality-check the implemented spec end-to-end\n  - *Agent:* agents/reality-check.agent.md\n  - *Acceptance:* agent returns **READY**\n  - *Refs:* AC-001, AC-002\n\n## Ship\n\n- [ ] **T011** \u2014 Open PR to the base branch\n  - *Acceptance:* spec-pr.sh prints the PR URL\n",
+      "results": {
+        "before": {
+          "argv": [
+            "/bin/bash",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.19014501571655273,
+          "warned": false,
+          "consistent": true,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\nconsistent \u2014 spec/plan/tasks line up\n",
+          "stderr": ""
+        },
+        "after": {
+          "argv": [
+            "/bin/bash",
+            "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.24397993087768555,
+          "warned": true,
+          "consistent": false,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\n1 warning(s), 0 errors\n",
+          "stderr": ""
+        }
+      }
+    },
+    {
+      "kind": "weak",
+      "command": "/usr/bin/diff<input.txt fixtures/test.txt actual.txt",
+      "tasks_md": "---\ntasks_for: 001-test-feature\nstatus: in-progress\ncreated: 2026-01-01\nupdated: 2026-01-01\n---\n# Tasks: Test feature\n\n## Setup\n\n- [ ] **T001** \u2014 Add scaffolding\n  - *Files:* `src/`\n  - *Acceptance:* build succeeds\n  - *Verify:* `npm run build` \u2192 \"built\"\n\n## Backend\n\n- [ ] **T002** \u2014 Implement the thing endpoint\n  - *Files:* `src/thing.js`\n  - *Acceptance:* unit test passes\n  - *Verify:* `/usr/bin/diff<input.txt fixtures/test.txt actual.txt` \u2192 \"pass 1\"\n  - *Refs:* REQ-001, AC-001\n\n- [ ] **T003** \u2014 Validate payloads\n  - *Files:* `src/validate.js`\n  - *Acceptance:* invalid-payload test passes\n  - *Verify:* `node --test test/validate.test.js` \u2192 \"pass 2\"\n  - *Refs:* AC-002\n\n## Reality Check (pre-ship gate)\n\n- [ ] **T009** \u2014 Opponent review: steelman why this implementation is wrong\n  - *Agent:* agents/opponent.agent.md\n  - *Acceptance:* agent returns **CLEARED**\n  - *Refs:* AC-001, AC-002\n\n- [ ] **T010** \u2014 Reality-check the implemented spec end-to-end\n  - *Agent:* agents/reality-check.agent.md\n  - *Acceptance:* agent returns **READY**\n  - *Refs:* AC-001, AC-002\n\n## Ship\n\n- [ ] **T011** \u2014 Open PR to the base branch\n  - *Acceptance:* spec-pr.sh prints the PR URL\n",
+      "results": {
+        "before": {
+          "argv": [
+            "/bin/bash",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.19737815856933594,
+          "warned": false,
+          "consistent": true,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\nconsistent \u2014 spec/plan/tasks line up\n",
+          "stderr": ""
+        },
+        "after": {
+          "argv": [
+            "/bin/bash",
+            "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.1903669834136963,
+          "warned": true,
+          "consistent": false,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\n1 warning(s), 0 errors\n",
+          "stderr": ""
+        }
+      }
+    },
+    {
+      "kind": "weak",
+      "command": "/usr/bin/diff <input.txt fixtures/test.txt actual.txt",
+      "tasks_md": "---\ntasks_for: 001-test-feature\nstatus: in-progress\ncreated: 2026-01-01\nupdated: 2026-01-01\n---\n# Tasks: Test feature\n\n## Setup\n\n- [ ] **T001** \u2014 Add scaffolding\n  - *Files:* `src/`\n  - *Acceptance:* build succeeds\n  - *Verify:* `npm run build` \u2192 \"built\"\n\n## Backend\n\n- [ ] **T002** \u2014 Implement the thing endpoint\n  - *Files:* `src/thing.js`\n  - *Acceptance:* unit test passes\n  - *Verify:* `/usr/bin/diff <input.txt fixtures/test.txt actual.txt` \u2192 \"pass 1\"\n  - *Refs:* REQ-001, AC-001\n\n- [ ] **T003** \u2014 Validate payloads\n  - *Files:* `src/validate.js`\n  - *Acceptance:* invalid-payload test passes\n  - *Verify:* `node --test test/validate.test.js` \u2192 \"pass 2\"\n  - *Refs:* AC-002\n\n## Reality Check (pre-ship gate)\n\n- [ ] **T009** \u2014 Opponent review: steelman why this implementation is wrong\n  - *Agent:* agents/opponent.agent.md\n  - *Acceptance:* agent returns **CLEARED**\n  - *Refs:* AC-001, AC-002\n\n- [ ] **T010** \u2014 Reality-check the implemented spec end-to-end\n  - *Agent:* agents/reality-check.agent.md\n  - *Acceptance:* agent returns **READY**\n  - *Refs:* AC-001, AC-002\n\n## Ship\n\n- [ ] **T011** \u2014 Open PR to the base branch\n  - *Acceptance:* spec-pr.sh prints the PR URL\n",
+      "results": {
+        "before": {
+          "argv": [
+            "/bin/bash",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.18825316429138184,
+          "warned": false,
+          "consistent": true,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\nconsistent \u2014 spec/plan/tasks line up\n",
+          "stderr": ""
+        },
+        "after": {
+          "argv": [
+            "/bin/bash",
+            "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.19344472885131836,
+          "warned": true,
+          "consistent": false,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\n1 warning(s), 0 errors\n",
+          "stderr": ""
+        }
+      }
+    },
+    {
+      "kind": "weak",
+      "command": "/usr/bin/diff>output.txt fixtures/test.txt actual.txt",
+      "tasks_md": "---\ntasks_for: 001-test-feature\nstatus: in-progress\ncreated: 2026-01-01\nupdated: 2026-01-01\n---\n# Tasks: Test feature\n\n## Setup\n\n- [ ] **T001** \u2014 Add scaffolding\n  - *Files:* `src/`\n  - *Acceptance:* build succeeds\n  - *Verify:* `npm run build` \u2192 \"built\"\n\n## Backend\n\n- [ ] **T002** \u2014 Implement the thing endpoint\n  - *Files:* `src/thing.js`\n  - *Acceptance:* unit test passes\n  - *Verify:* `/usr/bin/diff>output.txt fixtures/test.txt actual.txt` \u2192 \"pass 1\"\n  - *Refs:* REQ-001, AC-001\n\n- [ ] **T003** \u2014 Validate payloads\n  - *Files:* `src/validate.js`\n  - *Acceptance:* invalid-payload test passes\n  - *Verify:* `node --test test/validate.test.js` \u2192 \"pass 2\"\n  - *Refs:* AC-002\n\n## Reality Check (pre-ship gate)\n\n- [ ] **T009** \u2014 Opponent review: steelman why this implementation is wrong\n  - *Agent:* agents/opponent.agent.md\n  - *Acceptance:* agent returns **CLEARED**\n  - *Refs:* AC-001, AC-002\n\n- [ ] **T010** \u2014 Reality-check the implemented spec end-to-end\n  - *Agent:* agents/reality-check.agent.md\n  - *Acceptance:* agent returns **READY**\n  - *Refs:* AC-001, AC-002\n\n## Ship\n\n- [ ] **T011** \u2014 Open PR to the base branch\n  - *Acceptance:* spec-pr.sh prints the PR URL\n",
+      "results": {
+        "before": {
+          "argv": [
+            "/bin/bash",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.18449687957763672,
+          "warned": false,
+          "consistent": true,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\nconsistent \u2014 spec/plan/tasks line up\n",
+          "stderr": ""
+        },
+        "after": {
+          "argv": [
+            "/bin/bash",
+            "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.18937110900878906,
+          "warned": true,
+          "consistent": false,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\n1 warning(s), 0 errors\n",
+          "stderr": ""
+        }
+      }
+    },
+    {
+      "kind": "weak",
+      "command": "/usr/bin/diff >output.txt fixtures/test.txt actual.txt",
+      "tasks_md": "---\ntasks_for: 001-test-feature\nstatus: in-progress\ncreated: 2026-01-01\nupdated: 2026-01-01\n---\n# Tasks: Test feature\n\n## Setup\n\n- [ ] **T001** \u2014 Add scaffolding\n  - *Files:* `src/`\n  - *Acceptance:* build succeeds\n  - *Verify:* `npm run build` \u2192 \"built\"\n\n## Backend\n\n- [ ] **T002** \u2014 Implement the thing endpoint\n  - *Files:* `src/thing.js`\n  - *Acceptance:* unit test passes\n  - *Verify:* `/usr/bin/diff >output.txt fixtures/test.txt actual.txt` \u2192 \"pass 1\"\n  - *Refs:* REQ-001, AC-001\n\n- [ ] **T003** \u2014 Validate payloads\n  - *Files:* `src/validate.js`\n  - *Acceptance:* invalid-payload test passes\n  - *Verify:* `node --test test/validate.test.js` \u2192 \"pass 2\"\n  - *Refs:* AC-002\n\n## Reality Check (pre-ship gate)\n\n- [ ] **T009** \u2014 Opponent review: steelman why this implementation is wrong\n  - *Agent:* agents/opponent.agent.md\n  - *Acceptance:* agent returns **CLEARED**\n  - *Refs:* AC-001, AC-002\n\n- [ ] **T010** \u2014 Reality-check the implemented spec end-to-end\n  - *Agent:* agents/reality-check.agent.md\n  - *Acceptance:* agent returns **READY**\n  - *Refs:* AC-001, AC-002\n\n## Ship\n\n- [ ] **T011** \u2014 Open PR to the base branch\n  - *Acceptance:* spec-pr.sh prints the PR URL\n",
+      "results": {
+        "before": {
+          "argv": [
+            "/bin/bash",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.1895427703857422,
+          "warned": false,
+          "consistent": true,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\nconsistent \u2014 spec/plan/tasks line up\n",
+          "stderr": ""
+        },
+        "after": {
+          "argv": [
+            "/bin/bash",
+            "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.18982791900634766,
+          "warned": true,
+          "consistent": false,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\n1 warning(s), 0 errors\n",
+          "stderr": ""
+        }
+      }
+    },
+    {
+      "kind": "weak",
+      "command": "./tools/grep AC-001 tests/check.sh",
+      "tasks_md": "---\ntasks_for: 001-test-feature\nstatus: in-progress\ncreated: 2026-01-01\nupdated: 2026-01-01\n---\n# Tasks: Test feature\n\n## Setup\n\n- [ ] **T001** \u2014 Add scaffolding\n  - *Files:* `src/`\n  - *Acceptance:* build succeeds\n  - *Verify:* `npm run build` \u2192 \"built\"\n\n## Backend\n\n- [ ] **T002** \u2014 Implement the thing endpoint\n  - *Files:* `src/thing.js`\n  - *Acceptance:* unit test passes\n  - *Verify:* `./tools/grep AC-001 tests/check.sh` \u2192 \"pass 1\"\n  - *Refs:* REQ-001, AC-001\n\n- [ ] **T003** \u2014 Validate payloads\n  - *Files:* `src/validate.js`\n  - *Acceptance:* invalid-payload test passes\n  - *Verify:* `node --test test/validate.test.js` \u2192 \"pass 2\"\n  - *Refs:* AC-002\n\n## Reality Check (pre-ship gate)\n\n- [ ] **T009** \u2014 Opponent review: steelman why this implementation is wrong\n  - *Agent:* agents/opponent.agent.md\n  - *Acceptance:* agent returns **CLEARED**\n  - *Refs:* AC-001, AC-002\n\n- [ ] **T010** \u2014 Reality-check the implemented spec end-to-end\n  - *Agent:* agents/reality-check.agent.md\n  - *Acceptance:* agent returns **READY**\n  - *Refs:* AC-001, AC-002\n\n## Ship\n\n- [ ] **T011** \u2014 Open PR to the base branch\n  - *Acceptance:* spec-pr.sh prints the PR URL\n",
+      "results": {
+        "before": {
+          "argv": [
+            "/bin/bash",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.18995976448059082,
+          "warned": false,
+          "consistent": true,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\nconsistent \u2014 spec/plan/tasks line up\n",
+          "stderr": ""
+        },
+        "after": {
+          "argv": [
+            "/bin/bash",
+            "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.18497490882873535,
+          "warned": true,
+          "consistent": false,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\n1 warning(s), 0 errors\n",
+          "stderr": ""
+        }
+      }
+    },
+    {
+      "kind": "weak",
+      "command": "./tools/grep<input.txt AC-001 tests/check.sh",
+      "tasks_md": "---\ntasks_for: 001-test-feature\nstatus: in-progress\ncreated: 2026-01-01\nupdated: 2026-01-01\n---\n# Tasks: Test feature\n\n## Setup\n\n- [ ] **T001** \u2014 Add scaffolding\n  - *Files:* `src/`\n  - *Acceptance:* build succeeds\n  - *Verify:* `npm run build` \u2192 \"built\"\n\n## Backend\n\n- [ ] **T002** \u2014 Implement the thing endpoint\n  - *Files:* `src/thing.js`\n  - *Acceptance:* unit test passes\n  - *Verify:* `./tools/grep<input.txt AC-001 tests/check.sh` \u2192 \"pass 1\"\n  - *Refs:* REQ-001, AC-001\n\n- [ ] **T003** \u2014 Validate payloads\n  - *Files:* `src/validate.js`\n  - *Acceptance:* invalid-payload test passes\n  - *Verify:* `node --test test/validate.test.js` \u2192 \"pass 2\"\n  - *Refs:* AC-002\n\n## Reality Check (pre-ship gate)\n\n- [ ] **T009** \u2014 Opponent review: steelman why this implementation is wrong\n  - *Agent:* agents/opponent.agent.md\n  - *Acceptance:* agent returns **CLEARED**\n  - *Refs:* AC-001, AC-002\n\n- [ ] **T010** \u2014 Reality-check the implemented spec end-to-end\n  - *Agent:* agents/reality-check.agent.md\n  - *Acceptance:* agent returns **READY**\n  - *Refs:* AC-001, AC-002\n\n## Ship\n\n- [ ] **T011** \u2014 Open PR to the base branch\n  - *Acceptance:* spec-pr.sh prints the PR URL\n",
+      "results": {
+        "before": {
+          "argv": [
+            "/bin/bash",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.20489192008972168,
+          "warned": false,
+          "consistent": true,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\nconsistent \u2014 spec/plan/tasks line up\n",
+          "stderr": ""
+        },
+        "after": {
+          "argv": [
+            "/bin/bash",
+            "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.1918799877166748,
+          "warned": true,
+          "consistent": false,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\n1 warning(s), 0 errors\n",
+          "stderr": ""
+        }
+      }
+    },
+    {
+      "kind": "weak",
+      "command": "./tools/grep <input.txt AC-001 tests/check.sh",
+      "tasks_md": "---\ntasks_for: 001-test-feature\nstatus: in-progress\ncreated: 2026-01-01\nupdated: 2026-01-01\n---\n# Tasks: Test feature\n\n## Setup\n\n- [ ] **T001** \u2014 Add scaffolding\n  - *Files:* `src/`\n  - *Acceptance:* build succeeds\n  - *Verify:* `npm run build` \u2192 \"built\"\n\n## Backend\n\n- [ ] **T002** \u2014 Implement the thing endpoint\n  - *Files:* `src/thing.js`\n  - *Acceptance:* unit test passes\n  - *Verify:* `./tools/grep <input.txt AC-001 tests/check.sh` \u2192 \"pass 1\"\n  - *Refs:* REQ-001, AC-001\n\n- [ ] **T003** \u2014 Validate payloads\n  - *Files:* `src/validate.js`\n  - *Acceptance:* invalid-payload test passes\n  - *Verify:* `node --test test/validate.test.js` \u2192 \"pass 2\"\n  - *Refs:* AC-002\n\n## Reality Check (pre-ship gate)\n\n- [ ] **T009** \u2014 Opponent review: steelman why this implementation is wrong\n  - *Agent:* agents/opponent.agent.md\n  - *Acceptance:* agent returns **CLEARED**\n  - *Refs:* AC-001, AC-002\n\n- [ ] **T010** \u2014 Reality-check the implemented spec end-to-end\n  - *Agent:* agents/reality-check.agent.md\n  - *Acceptance:* agent returns **READY**\n  - *Refs:* AC-001, AC-002\n\n## Ship\n\n- [ ] **T011** \u2014 Open PR to the base branch\n  - *Acceptance:* spec-pr.sh prints the PR URL\n",
+      "results": {
+        "before": {
+          "argv": [
+            "/bin/bash",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.18769192695617676,
+          "warned": false,
+          "consistent": true,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\nconsistent \u2014 spec/plan/tasks line up\n",
+          "stderr": ""
+        },
+        "after": {
+          "argv": [
+            "/bin/bash",
+            "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.18845677375793457,
+          "warned": true,
+          "consistent": false,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\n1 warning(s), 0 errors\n",
+          "stderr": ""
+        }
+      }
+    },
+    {
+      "kind": "weak",
+      "command": "./tools/grep>output.txt AC-001 tests/check.sh",
+      "tasks_md": "---\ntasks_for: 001-test-feature\nstatus: in-progress\ncreated: 2026-01-01\nupdated: 2026-01-01\n---\n# Tasks: Test feature\n\n## Setup\n\n- [ ] **T001** \u2014 Add scaffolding\n  - *Files:* `src/`\n  - *Acceptance:* build succeeds\n  - *Verify:* `npm run build` \u2192 \"built\"\n\n## Backend\n\n- [ ] **T002** \u2014 Implement the thing endpoint\n  - *Files:* `src/thing.js`\n  - *Acceptance:* unit test passes\n  - *Verify:* `./tools/grep>output.txt AC-001 tests/check.sh` \u2192 \"pass 1\"\n  - *Refs:* REQ-001, AC-001\n\n- [ ] **T003** \u2014 Validate payloads\n  - *Files:* `src/validate.js`\n  - *Acceptance:* invalid-payload test passes\n  - *Verify:* `node --test test/validate.test.js` \u2192 \"pass 2\"\n  - *Refs:* AC-002\n\n## Reality Check (pre-ship gate)\n\n- [ ] **T009** \u2014 Opponent review: steelman why this implementation is wrong\n  - *Agent:* agents/opponent.agent.md\n  - *Acceptance:* agent returns **CLEARED**\n  - *Refs:* AC-001, AC-002\n\n- [ ] **T010** \u2014 Reality-check the implemented spec end-to-end\n  - *Agent:* agents/reality-check.agent.md\n  - *Acceptance:* agent returns **READY**\n  - *Refs:* AC-001, AC-002\n\n## Ship\n\n- [ ] **T011** \u2014 Open PR to the base branch\n  - *Acceptance:* spec-pr.sh prints the PR URL\n",
+      "results": {
+        "before": {
+          "argv": [
+            "/bin/bash",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.19128012657165527,
+          "warned": false,
+          "consistent": true,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\nconsistent \u2014 spec/plan/tasks line up\n",
+          "stderr": ""
+        },
+        "after": {
+          "argv": [
+            "/bin/bash",
+            "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.19687891006469727,
+          "warned": true,
+          "consistent": false,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\n1 warning(s), 0 errors\n",
+          "stderr": ""
+        }
+      }
+    },
+    {
+      "kind": "weak",
+      "command": "./tools/grep >output.txt AC-001 tests/check.sh",
+      "tasks_md": "---\ntasks_for: 001-test-feature\nstatus: in-progress\ncreated: 2026-01-01\nupdated: 2026-01-01\n---\n# Tasks: Test feature\n\n## Setup\n\n- [ ] **T001** \u2014 Add scaffolding\n  - *Files:* `src/`\n  - *Acceptance:* build succeeds\n  - *Verify:* `npm run build` \u2192 \"built\"\n\n## Backend\n\n- [ ] **T002** \u2014 Implement the thing endpoint\n  - *Files:* `src/thing.js`\n  - *Acceptance:* unit test passes\n  - *Verify:* `./tools/grep >output.txt AC-001 tests/check.sh` \u2192 \"pass 1\"\n  - *Refs:* REQ-001, AC-001\n\n- [ ] **T003** \u2014 Validate payloads\n  - *Files:* `src/validate.js`\n  - *Acceptance:* invalid-payload test passes\n  - *Verify:* `node --test test/validate.test.js` \u2192 \"pass 2\"\n  - *Refs:* AC-002\n\n## Reality Check (pre-ship gate)\n\n- [ ] **T009** \u2014 Opponent review: steelman why this implementation is wrong\n  - *Agent:* agents/opponent.agent.md\n  - *Acceptance:* agent returns **CLEARED**\n  - *Refs:* AC-001, AC-002\n\n- [ ] **T010** \u2014 Reality-check the implemented spec end-to-end\n  - *Agent:* agents/reality-check.agent.md\n  - *Acceptance:* agent returns **READY**\n  - *Refs:* AC-001, AC-002\n\n## Ship\n\n- [ ] **T011** \u2014 Open PR to the base branch\n  - *Acceptance:* spec-pr.sh prints the PR URL\n",
+      "results": {
+        "before": {
+          "argv": [
+            "/bin/bash",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.19351601600646973,
+          "warned": false,
+          "consistent": true,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\nconsistent \u2014 spec/plan/tasks line up\n",
+          "stderr": ""
+        },
+        "after": {
+          "argv": [
+            "/bin/bash",
+            "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.1904160976409912,
+          "warned": true,
+          "consistent": false,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\n1 warning(s), 0 errors\n",
+          "stderr": ""
+        }
+      }
+    },
+    {
+      "kind": "weak",
+      "command": "./tools/rg AC-001 tests/check.sh",
+      "tasks_md": "---\ntasks_for: 001-test-feature\nstatus: in-progress\ncreated: 2026-01-01\nupdated: 2026-01-01\n---\n# Tasks: Test feature\n\n## Setup\n\n- [ ] **T001** \u2014 Add scaffolding\n  - *Files:* `src/`\n  - *Acceptance:* build succeeds\n  - *Verify:* `npm run build` \u2192 \"built\"\n\n## Backend\n\n- [ ] **T002** \u2014 Implement the thing endpoint\n  - *Files:* `src/thing.js`\n  - *Acceptance:* unit test passes\n  - *Verify:* `./tools/rg AC-001 tests/check.sh` \u2192 \"pass 1\"\n  - *Refs:* REQ-001, AC-001\n\n- [ ] **T003** \u2014 Validate payloads\n  - *Files:* `src/validate.js`\n  - *Acceptance:* invalid-payload test passes\n  - *Verify:* `node --test test/validate.test.js` \u2192 \"pass 2\"\n  - *Refs:* AC-002\n\n## Reality Check (pre-ship gate)\n\n- [ ] **T009** \u2014 Opponent review: steelman why this implementation is wrong\n  - *Agent:* agents/opponent.agent.md\n  - *Acceptance:* agent returns **CLEARED**\n  - *Refs:* AC-001, AC-002\n\n- [ ] **T010** \u2014 Reality-check the implemented spec end-to-end\n  - *Agent:* agents/reality-check.agent.md\n  - *Acceptance:* agent returns **READY**\n  - *Refs:* AC-001, AC-002\n\n## Ship\n\n- [ ] **T011** \u2014 Open PR to the base branch\n  - *Acceptance:* spec-pr.sh prints the PR URL\n",
+      "results": {
+        "before": {
+          "argv": [
+            "/bin/bash",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.1884918212890625,
+          "warned": false,
+          "consistent": true,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\nconsistent \u2014 spec/plan/tasks line up\n",
+          "stderr": ""
+        },
+        "after": {
+          "argv": [
+            "/bin/bash",
+            "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.1909010410308838,
+          "warned": true,
+          "consistent": false,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\n1 warning(s), 0 errors\n",
+          "stderr": ""
+        }
+      }
+    },
+    {
+      "kind": "weak",
+      "command": "./tools/rg<input.txt AC-001 tests/check.sh",
+      "tasks_md": "---\ntasks_for: 001-test-feature\nstatus: in-progress\ncreated: 2026-01-01\nupdated: 2026-01-01\n---\n# Tasks: Test feature\n\n## Setup\n\n- [ ] **T001** \u2014 Add scaffolding\n  - *Files:* `src/`\n  - *Acceptance:* build succeeds\n  - *Verify:* `npm run build` \u2192 \"built\"\n\n## Backend\n\n- [ ] **T002** \u2014 Implement the thing endpoint\n  - *Files:* `src/thing.js`\n  - *Acceptance:* unit test passes\n  - *Verify:* `./tools/rg<input.txt AC-001 tests/check.sh` \u2192 \"pass 1\"\n  - *Refs:* REQ-001, AC-001\n\n- [ ] **T003** \u2014 Validate payloads\n  - *Files:* `src/validate.js`\n  - *Acceptance:* invalid-payload test passes\n  - *Verify:* `node --test test/validate.test.js` \u2192 \"pass 2\"\n  - *Refs:* AC-002\n\n## Reality Check (pre-ship gate)\n\n- [ ] **T009** \u2014 Opponent review: steelman why this implementation is wrong\n  - *Agent:* agents/opponent.agent.md\n  - *Acceptance:* agent returns **CLEARED**\n  - *Refs:* AC-001, AC-002\n\n- [ ] **T010** \u2014 Reality-check the implemented spec end-to-end\n  - *Agent:* agents/reality-check.agent.md\n  - *Acceptance:* agent returns **READY**\n  - *Refs:* AC-001, AC-002\n\n## Ship\n\n- [ ] **T011** \u2014 Open PR to the base branch\n  - *Acceptance:* spec-pr.sh prints the PR URL\n",
+      "results": {
+        "before": {
+          "argv": [
+            "/bin/bash",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.18812966346740723,
+          "warned": false,
+          "consistent": true,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\nconsistent \u2014 spec/plan/tasks line up\n",
+          "stderr": ""
+        },
+        "after": {
+          "argv": [
+            "/bin/bash",
+            "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.1905529499053955,
+          "warned": true,
+          "consistent": false,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\n1 warning(s), 0 errors\n",
+          "stderr": ""
+        }
+      }
+    },
+    {
+      "kind": "weak",
+      "command": "./tools/rg <input.txt AC-001 tests/check.sh",
+      "tasks_md": "---\ntasks_for: 001-test-feature\nstatus: in-progress\ncreated: 2026-01-01\nupdated: 2026-01-01\n---\n# Tasks: Test feature\n\n## Setup\n\n- [ ] **T001** \u2014 Add scaffolding\n  - *Files:* `src/`\n  - *Acceptance:* build succeeds\n  - *Verify:* `npm run build` \u2192 \"built\"\n\n## Backend\n\n- [ ] **T002** \u2014 Implement the thing endpoint\n  - *Files:* `src/thing.js`\n  - *Acceptance:* unit test passes\n  - *Verify:* `./tools/rg <input.txt AC-001 tests/check.sh` \u2192 \"pass 1\"\n  - *Refs:* REQ-001, AC-001\n\n- [ ] **T003** \u2014 Validate payloads\n  - *Files:* `src/validate.js`\n  - *Acceptance:* invalid-payload test passes\n  - *Verify:* `node --test test/validate.test.js` \u2192 \"pass 2\"\n  - *Refs:* AC-002\n\n## Reality Check (pre-ship gate)\n\n- [ ] **T009** \u2014 Opponent review: steelman why this implementation is wrong\n  - *Agent:* agents/opponent.agent.md\n  - *Acceptance:* agent returns **CLEARED**\n  - *Refs:* AC-001, AC-002\n\n- [ ] **T010** \u2014 Reality-check the implemented spec end-to-end\n  - *Agent:* agents/reality-check.agent.md\n  - *Acceptance:* agent returns **READY**\n  - *Refs:* AC-001, AC-002\n\n## Ship\n\n- [ ] **T011** \u2014 Open PR to the base branch\n  - *Acceptance:* spec-pr.sh prints the PR URL\n",
+      "results": {
+        "before": {
+          "argv": [
+            "/bin/bash",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.18255615234375,
+          "warned": false,
+          "consistent": true,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\nconsistent \u2014 spec/plan/tasks line up\n",
+          "stderr": ""
+        },
+        "after": {
+          "argv": [
+            "/bin/bash",
+            "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.2078251838684082,
+          "warned": true,
+          "consistent": false,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\n1 warning(s), 0 errors\n",
+          "stderr": ""
+        }
+      }
+    },
+    {
+      "kind": "weak",
+      "command": "./tools/rg>output.txt AC-001 tests/check.sh",
+      "tasks_md": "---\ntasks_for: 001-test-feature\nstatus: in-progress\ncreated: 2026-01-01\nupdated: 2026-01-01\n---\n# Tasks: Test feature\n\n## Setup\n\n- [ ] **T001** \u2014 Add scaffolding\n  - *Files:* `src/`\n  - *Acceptance:* build succeeds\n  - *Verify:* `npm run build` \u2192 \"built\"\n\n## Backend\n\n- [ ] **T002** \u2014 Implement the thing endpoint\n  - *Files:* `src/thing.js`\n  - *Acceptance:* unit test passes\n  - *Verify:* `./tools/rg>output.txt AC-001 tests/check.sh` \u2192 \"pass 1\"\n  - *Refs:* REQ-001, AC-001\n\n- [ ] **T003** \u2014 Validate payloads\n  - *Files:* `src/validate.js`\n  - *Acceptance:* invalid-payload test passes\n  - *Verify:* `node --test test/validate.test.js` \u2192 \"pass 2\"\n  - *Refs:* AC-002\n\n## Reality Check (pre-ship gate)\n\n- [ ] **T009** \u2014 Opponent review: steelman why this implementation is wrong\n  - *Agent:* agents/opponent.agent.md\n  - *Acceptance:* agent returns **CLEARED**\n  - *Refs:* AC-001, AC-002\n\n- [ ] **T010** \u2014 Reality-check the implemented spec end-to-end\n  - *Agent:* agents/reality-check.agent.md\n  - *Acceptance:* agent returns **READY**\n  - *Refs:* AC-001, AC-002\n\n## Ship\n\n- [ ] **T011** \u2014 Open PR to the base branch\n  - *Acceptance:* spec-pr.sh prints the PR URL\n",
+      "results": {
+        "before": {
+          "argv": [
+            "/bin/bash",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.1898937225341797,
+          "warned": false,
+          "consistent": true,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\nconsistent \u2014 spec/plan/tasks line up\n",
+          "stderr": ""
+        },
+        "after": {
+          "argv": [
+            "/bin/bash",
+            "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.18830204010009766,
+          "warned": true,
+          "consistent": false,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\n1 warning(s), 0 errors\n",
+          "stderr": ""
+        }
+      }
+    },
+    {
+      "kind": "weak",
+      "command": "./tools/rg >output.txt AC-001 tests/check.sh",
+      "tasks_md": "---\ntasks_for: 001-test-feature\nstatus: in-progress\ncreated: 2026-01-01\nupdated: 2026-01-01\n---\n# Tasks: Test feature\n\n## Setup\n\n- [ ] **T001** \u2014 Add scaffolding\n  - *Files:* `src/`\n  - *Acceptance:* build succeeds\n  - *Verify:* `npm run build` \u2192 \"built\"\n\n## Backend\n\n- [ ] **T002** \u2014 Implement the thing endpoint\n  - *Files:* `src/thing.js`\n  - *Acceptance:* unit test passes\n  - *Verify:* `./tools/rg >output.txt AC-001 tests/check.sh` \u2192 \"pass 1\"\n  - *Refs:* REQ-001, AC-001\n\n- [ ] **T003** \u2014 Validate payloads\n  - *Files:* `src/validate.js`\n  - *Acceptance:* invalid-payload test passes\n  - *Verify:* `node --test test/validate.test.js` \u2192 \"pass 2\"\n  - *Refs:* AC-002\n\n## Reality Check (pre-ship gate)\n\n- [ ] **T009** \u2014 Opponent review: steelman why this implementation is wrong\n  - *Agent:* agents/opponent.agent.md\n  - *Acceptance:* agent returns **CLEARED**\n  - *Refs:* AC-001, AC-002\n\n- [ ] **T010** \u2014 Reality-check the implemented spec end-to-end\n  - *Agent:* agents/reality-check.agent.md\n  - *Acceptance:* agent returns **READY**\n  - *Refs:* AC-001, AC-002\n\n## Ship\n\n- [ ] **T011** \u2014 Open PR to the base branch\n  - *Acceptance:* spec-pr.sh prints the PR URL\n",
+      "results": {
+        "before": {
+          "argv": [
+            "/bin/bash",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.18527793884277344,
+          "warned": false,
+          "consistent": true,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\nconsistent \u2014 spec/plan/tasks line up\n",
+          "stderr": ""
+        },
+        "after": {
+          "argv": [
+            "/bin/bash",
+            "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.1919841766357422,
+          "warned": true,
+          "consistent": false,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\n1 warning(s), 0 errors\n",
+          "stderr": ""
+        }
+      }
+    },
+    {
+      "kind": "weak",
+      "command": "./tools/diff fixtures/test.txt actual.txt",
+      "tasks_md": "---\ntasks_for: 001-test-feature\nstatus: in-progress\ncreated: 2026-01-01\nupdated: 2026-01-01\n---\n# Tasks: Test feature\n\n## Setup\n\n- [ ] **T001** \u2014 Add scaffolding\n  - *Files:* `src/`\n  - *Acceptance:* build succeeds\n  - *Verify:* `npm run build` \u2192 \"built\"\n\n## Backend\n\n- [ ] **T002** \u2014 Implement the thing endpoint\n  - *Files:* `src/thing.js`\n  - *Acceptance:* unit test passes\n  - *Verify:* `./tools/diff fixtures/test.txt actual.txt` \u2192 \"pass 1\"\n  - *Refs:* REQ-001, AC-001\n\n- [ ] **T003** \u2014 Validate payloads\n  - *Files:* `src/validate.js`\n  - *Acceptance:* invalid-payload test passes\n  - *Verify:* `node --test test/validate.test.js` \u2192 \"pass 2\"\n  - *Refs:* AC-002\n\n## Reality Check (pre-ship gate)\n\n- [ ] **T009** \u2014 Opponent review: steelman why this implementation is wrong\n  - *Agent:* agents/opponent.agent.md\n  - *Acceptance:* agent returns **CLEARED**\n  - *Refs:* AC-001, AC-002\n\n- [ ] **T010** \u2014 Reality-check the implemented spec end-to-end\n  - *Agent:* agents/reality-check.agent.md\n  - *Acceptance:* agent returns **READY**\n  - *Refs:* AC-001, AC-002\n\n## Ship\n\n- [ ] **T011** \u2014 Open PR to the base branch\n  - *Acceptance:* spec-pr.sh prints the PR URL\n",
+      "results": {
+        "before": {
+          "argv": [
+            "/bin/bash",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.18991899490356445,
+          "warned": false,
+          "consistent": true,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\nconsistent \u2014 spec/plan/tasks line up\n",
+          "stderr": ""
+        },
+        "after": {
+          "argv": [
+            "/bin/bash",
+            "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.18894577026367188,
+          "warned": true,
+          "consistent": false,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\n1 warning(s), 0 errors\n",
+          "stderr": ""
+        }
+      }
+    },
+    {
+      "kind": "weak",
+      "command": "./tools/diff<input.txt fixtures/test.txt actual.txt",
+      "tasks_md": "---\ntasks_for: 001-test-feature\nstatus: in-progress\ncreated: 2026-01-01\nupdated: 2026-01-01\n---\n# Tasks: Test feature\n\n## Setup\n\n- [ ] **T001** \u2014 Add scaffolding\n  - *Files:* `src/`\n  - *Acceptance:* build succeeds\n  - *Verify:* `npm run build` \u2192 \"built\"\n\n## Backend\n\n- [ ] **T002** \u2014 Implement the thing endpoint\n  - *Files:* `src/thing.js`\n  - *Acceptance:* unit test passes\n  - *Verify:* `./tools/diff<input.txt fixtures/test.txt actual.txt` \u2192 \"pass 1\"\n  - *Refs:* REQ-001, AC-001\n\n- [ ] **T003** \u2014 Validate payloads\n  - *Files:* `src/validate.js`\n  - *Acceptance:* invalid-payload test passes\n  - *Verify:* `node --test test/validate.test.js` \u2192 \"pass 2\"\n  - *Refs:* AC-002\n\n## Reality Check (pre-ship gate)\n\n- [ ] **T009** \u2014 Opponent review: steelman why this implementation is wrong\n  - *Agent:* agents/opponent.agent.md\n  - *Acceptance:* agent returns **CLEARED**\n  - *Refs:* AC-001, AC-002\n\n- [ ] **T010** \u2014 Reality-check the implemented spec end-to-end\n  - *Agent:* agents/reality-check.agent.md\n  - *Acceptance:* agent returns **READY**\n  - *Refs:* AC-001, AC-002\n\n## Ship\n\n- [ ] **T011** \u2014 Open PR to the base branch\n  - *Acceptance:* spec-pr.sh prints the PR URL\n",
+      "results": {
+        "before": {
+          "argv": [
+            "/bin/bash",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.19947314262390137,
+          "warned": false,
+          "consistent": true,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\nconsistent \u2014 spec/plan/tasks line up\n",
+          "stderr": ""
+        },
+        "after": {
+          "argv": [
+            "/bin/bash",
+            "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.2058260440826416,
+          "warned": true,
+          "consistent": false,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\n1 warning(s), 0 errors\n",
+          "stderr": ""
+        }
+      }
+    },
+    {
+      "kind": "weak",
+      "command": "./tools/diff <input.txt fixtures/test.txt actual.txt",
+      "tasks_md": "---\ntasks_for: 001-test-feature\nstatus: in-progress\ncreated: 2026-01-01\nupdated: 2026-01-01\n---\n# Tasks: Test feature\n\n## Setup\n\n- [ ] **T001** \u2014 Add scaffolding\n  - *Files:* `src/`\n  - *Acceptance:* build succeeds\n  - *Verify:* `npm run build` \u2192 \"built\"\n\n## Backend\n\n- [ ] **T002** \u2014 Implement the thing endpoint\n  - *Files:* `src/thing.js`\n  - *Acceptance:* unit test passes\n  - *Verify:* `./tools/diff <input.txt fixtures/test.txt actual.txt` \u2192 \"pass 1\"\n  - *Refs:* REQ-001, AC-001\n\n- [ ] **T003** \u2014 Validate payloads\n  - *Files:* `src/validate.js`\n  - *Acceptance:* invalid-payload test passes\n  - *Verify:* `node --test test/validate.test.js` \u2192 \"pass 2\"\n  - *Refs:* AC-002\n\n## Reality Check (pre-ship gate)\n\n- [ ] **T009** \u2014 Opponent review: steelman why this implementation is wrong\n  - *Agent:* agents/opponent.agent.md\n  - *Acceptance:* agent returns **CLEARED**\n  - *Refs:* AC-001, AC-002\n\n- [ ] **T010** \u2014 Reality-check the implemented spec end-to-end\n  - *Agent:* agents/reality-check.agent.md\n  - *Acceptance:* agent returns **READY**\n  - *Refs:* AC-001, AC-002\n\n## Ship\n\n- [ ] **T011** \u2014 Open PR to the base branch\n  - *Acceptance:* spec-pr.sh prints the PR URL\n",
+      "results": {
+        "before": {
+          "argv": [
+            "/bin/bash",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.1922779083251953,
+          "warned": false,
+          "consistent": true,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\nconsistent \u2014 spec/plan/tasks line up\n",
+          "stderr": ""
+        },
+        "after": {
+          "argv": [
+            "/bin/bash",
+            "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.19181203842163086,
+          "warned": true,
+          "consistent": false,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\n1 warning(s), 0 errors\n",
+          "stderr": ""
+        }
+      }
+    },
+    {
+      "kind": "weak",
+      "command": "./tools/diff>output.txt fixtures/test.txt actual.txt",
+      "tasks_md": "---\ntasks_for: 001-test-feature\nstatus: in-progress\ncreated: 2026-01-01\nupdated: 2026-01-01\n---\n# Tasks: Test feature\n\n## Setup\n\n- [ ] **T001** \u2014 Add scaffolding\n  - *Files:* `src/`\n  - *Acceptance:* build succeeds\n  - *Verify:* `npm run build` \u2192 \"built\"\n\n## Backend\n\n- [ ] **T002** \u2014 Implement the thing endpoint\n  - *Files:* `src/thing.js`\n  - *Acceptance:* unit test passes\n  - *Verify:* `./tools/diff>output.txt fixtures/test.txt actual.txt` \u2192 \"pass 1\"\n  - *Refs:* REQ-001, AC-001\n\n- [ ] **T003** \u2014 Validate payloads\n  - *Files:* `src/validate.js`\n  - *Acceptance:* invalid-payload test passes\n  - *Verify:* `node --test test/validate.test.js` \u2192 \"pass 2\"\n  - *Refs:* AC-002\n\n## Reality Check (pre-ship gate)\n\n- [ ] **T009** \u2014 Opponent review: steelman why this implementation is wrong\n  - *Agent:* agents/opponent.agent.md\n  - *Acceptance:* agent returns **CLEARED**\n  - *Refs:* AC-001, AC-002\n\n- [ ] **T010** \u2014 Reality-check the implemented spec end-to-end\n  - *Agent:* agents/reality-check.agent.md\n  - *Acceptance:* agent returns **READY**\n  - *Refs:* AC-001, AC-002\n\n## Ship\n\n- [ ] **T011** \u2014 Open PR to the base branch\n  - *Acceptance:* spec-pr.sh prints the PR URL\n",
+      "results": {
+        "before": {
+          "argv": [
+            "/bin/bash",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.19311308860778809,
+          "warned": false,
+          "consistent": true,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\nconsistent \u2014 spec/plan/tasks line up\n",
+          "stderr": ""
+        },
+        "after": {
+          "argv": [
+            "/bin/bash",
+            "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.19762420654296875,
+          "warned": true,
+          "consistent": false,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\n1 warning(s), 0 errors\n",
+          "stderr": ""
+        }
+      }
+    },
+    {
+      "kind": "weak",
+      "command": "./tools/diff >output.txt fixtures/test.txt actual.txt",
+      "tasks_md": "---\ntasks_for: 001-test-feature\nstatus: in-progress\ncreated: 2026-01-01\nupdated: 2026-01-01\n---\n# Tasks: Test feature\n\n## Setup\n\n- [ ] **T001** \u2014 Add scaffolding\n  - *Files:* `src/`\n  - *Acceptance:* build succeeds\n  - *Verify:* `npm run build` \u2192 \"built\"\n\n## Backend\n\n- [ ] **T002** \u2014 Implement the thing endpoint\n  - *Files:* `src/thing.js`\n  - *Acceptance:* unit test passes\n  - *Verify:* `./tools/diff >output.txt fixtures/test.txt actual.txt` \u2192 \"pass 1\"\n  - *Refs:* REQ-001, AC-001\n\n- [ ] **T003** \u2014 Validate payloads\n  - *Files:* `src/validate.js`\n  - *Acceptance:* invalid-payload test passes\n  - *Verify:* `node --test test/validate.test.js` \u2192 \"pass 2\"\n  - *Refs:* AC-002\n\n## Reality Check (pre-ship gate)\n\n- [ ] **T009** \u2014 Opponent review: steelman why this implementation is wrong\n  - *Agent:* agents/opponent.agent.md\n  - *Acceptance:* agent returns **CLEARED**\n  - *Refs:* AC-001, AC-002\n\n- [ ] **T010** \u2014 Reality-check the implemented spec end-to-end\n  - *Agent:* agents/reality-check.agent.md\n  - *Acceptance:* agent returns **READY**\n  - *Refs:* AC-001, AC-002\n\n## Ship\n\n- [ ] **T011** \u2014 Open PR to the base branch\n  - *Acceptance:* spec-pr.sh prints the PR URL\n",
+      "results": {
+        "before": {
+          "argv": [
+            "/bin/bash",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.20460104942321777,
+          "warned": false,
+          "consistent": true,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\nconsistent \u2014 spec/plan/tasks line up\n",
+          "stderr": ""
+        },
+        "after": {
+          "argv": [
+            "/bin/bash",
+            "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.21713995933532715,
+          "warned": true,
+          "consistent": false,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\n1 warning(s), 0 errors\n",
+          "stderr": ""
+        }
+      }
+    },
+    {
+      "kind": "weak",
+      "command": "tools/grep AC-001 tests/check.sh",
+      "tasks_md": "---\ntasks_for: 001-test-feature\nstatus: in-progress\ncreated: 2026-01-01\nupdated: 2026-01-01\n---\n# Tasks: Test feature\n\n## Setup\n\n- [ ] **T001** \u2014 Add scaffolding\n  - *Files:* `src/`\n  - *Acceptance:* build succeeds\n  - *Verify:* `npm run build` \u2192 \"built\"\n\n## Backend\n\n- [ ] **T002** \u2014 Implement the thing endpoint\n  - *Files:* `src/thing.js`\n  - *Acceptance:* unit test passes\n  - *Verify:* `tools/grep AC-001 tests/check.sh` \u2192 \"pass 1\"\n  - *Refs:* REQ-001, AC-001\n\n- [ ] **T003** \u2014 Validate payloads\n  - *Files:* `src/validate.js`\n  - *Acceptance:* invalid-payload test passes\n  - *Verify:* `node --test test/validate.test.js` \u2192 \"pass 2\"\n  - *Refs:* AC-002\n\n## Reality Check (pre-ship gate)\n\n- [ ] **T009** \u2014 Opponent review: steelman why this implementation is wrong\n  - *Agent:* agents/opponent.agent.md\n  - *Acceptance:* agent returns **CLEARED**\n  - *Refs:* AC-001, AC-002\n\n- [ ] **T010** \u2014 Reality-check the implemented spec end-to-end\n  - *Agent:* agents/reality-check.agent.md\n  - *Acceptance:* agent returns **READY**\n  - *Refs:* AC-001, AC-002\n\n## Ship\n\n- [ ] **T011** \u2014 Open PR to the base branch\n  - *Acceptance:* spec-pr.sh prints the PR URL\n",
+      "results": {
+        "before": {
+          "argv": [
+            "/bin/bash",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.20960688591003418,
+          "warned": false,
+          "consistent": true,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\nconsistent \u2014 spec/plan/tasks line up\n",
+          "stderr": ""
+        },
+        "after": {
+          "argv": [
+            "/bin/bash",
+            "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.19378209114074707,
+          "warned": true,
+          "consistent": false,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\n1 warning(s), 0 errors\n",
+          "stderr": ""
+        }
+      }
+    },
+    {
+      "kind": "weak",
+      "command": "tools/rg AC-001 tests/check.sh",
+      "tasks_md": "---\ntasks_for: 001-test-feature\nstatus: in-progress\ncreated: 2026-01-01\nupdated: 2026-01-01\n---\n# Tasks: Test feature\n\n## Setup\n\n- [ ] **T001** \u2014 Add scaffolding\n  - *Files:* `src/`\n  - *Acceptance:* build succeeds\n  - *Verify:* `npm run build` \u2192 \"built\"\n\n## Backend\n\n- [ ] **T002** \u2014 Implement the thing endpoint\n  - *Files:* `src/thing.js`\n  - *Acceptance:* unit test passes\n  - *Verify:* `tools/rg AC-001 tests/check.sh` \u2192 \"pass 1\"\n  - *Refs:* REQ-001, AC-001\n\n- [ ] **T003** \u2014 Validate payloads\n  - *Files:* `src/validate.js`\n  - *Acceptance:* invalid-payload test passes\n  - *Verify:* `node --test test/validate.test.js` \u2192 \"pass 2\"\n  - *Refs:* AC-002\n\n## Reality Check (pre-ship gate)\n\n- [ ] **T009** \u2014 Opponent review: steelman why this implementation is wrong\n  - *Agent:* agents/opponent.agent.md\n  - *Acceptance:* agent returns **CLEARED**\n  - *Refs:* AC-001, AC-002\n\n- [ ] **T010** \u2014 Reality-check the implemented spec end-to-end\n  - *Agent:* agents/reality-check.agent.md\n  - *Acceptance:* agent returns **READY**\n  - *Refs:* AC-001, AC-002\n\n## Ship\n\n- [ ] **T011** \u2014 Open PR to the base branch\n  - *Acceptance:* spec-pr.sh prints the PR URL\n",
+      "results": {
+        "before": {
+          "argv": [
+            "/bin/bash",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.18875885009765625,
+          "warned": false,
+          "consistent": true,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\nconsistent \u2014 spec/plan/tasks line up\n",
+          "stderr": ""
+        },
+        "after": {
+          "argv": [
+            "/bin/bash",
+            "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.19857406616210938,
+          "warned": true,
+          "consistent": false,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\n1 warning(s), 0 errors\n",
+          "stderr": ""
+        }
+      }
+    },
+    {
+      "kind": "weak",
+      "command": "tools/diff fixtures/test.txt actual.txt",
+      "tasks_md": "---\ntasks_for: 001-test-feature\nstatus: in-progress\ncreated: 2026-01-01\nupdated: 2026-01-01\n---\n# Tasks: Test feature\n\n## Setup\n\n- [ ] **T001** \u2014 Add scaffolding\n  - *Files:* `src/`\n  - *Acceptance:* build succeeds\n  - *Verify:* `npm run build` \u2192 \"built\"\n\n## Backend\n\n- [ ] **T002** \u2014 Implement the thing endpoint\n  - *Files:* `src/thing.js`\n  - *Acceptance:* unit test passes\n  - *Verify:* `tools/diff fixtures/test.txt actual.txt` \u2192 \"pass 1\"\n  - *Refs:* REQ-001, AC-001\n\n- [ ] **T003** \u2014 Validate payloads\n  - *Files:* `src/validate.js`\n  - *Acceptance:* invalid-payload test passes\n  - *Verify:* `node --test test/validate.test.js` \u2192 \"pass 2\"\n  - *Refs:* AC-002\n\n## Reality Check (pre-ship gate)\n\n- [ ] **T009** \u2014 Opponent review: steelman why this implementation is wrong\n  - *Agent:* agents/opponent.agent.md\n  - *Acceptance:* agent returns **CLEARED**\n  - *Refs:* AC-001, AC-002\n\n- [ ] **T010** \u2014 Reality-check the implemented spec end-to-end\n  - *Agent:* agents/reality-check.agent.md\n  - *Acceptance:* agent returns **READY**\n  - *Refs:* AC-001, AC-002\n\n## Ship\n\n- [ ] **T011** \u2014 Open PR to the base branch\n  - *Acceptance:* spec-pr.sh prints the PR URL\n",
+      "results": {
+        "before": {
+          "argv": [
+            "/bin/bash",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.1894850730895996,
+          "warned": false,
+          "consistent": true,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\nconsistent \u2014 spec/plan/tasks line up\n",
+          "stderr": ""
+        },
+        "after": {
+          "argv": [
+            "/bin/bash",
+            "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.19842195510864258,
+          "warned": true,
+          "consistent": false,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\n1 warning(s), 0 errors\n",
+          "stderr": ""
+        }
+      }
+    },
+    {
+      "kind": "weak",
+      "command": "../tools/grep AC-001 tests/check.sh",
+      "tasks_md": "---\ntasks_for: 001-test-feature\nstatus: in-progress\ncreated: 2026-01-01\nupdated: 2026-01-01\n---\n# Tasks: Test feature\n\n## Setup\n\n- [ ] **T001** \u2014 Add scaffolding\n  - *Files:* `src/`\n  - *Acceptance:* build succeeds\n  - *Verify:* `npm run build` \u2192 \"built\"\n\n## Backend\n\n- [ ] **T002** \u2014 Implement the thing endpoint\n  - *Files:* `src/thing.js`\n  - *Acceptance:* unit test passes\n  - *Verify:* `../tools/grep AC-001 tests/check.sh` \u2192 \"pass 1\"\n  - *Refs:* REQ-001, AC-001\n\n- [ ] **T003** \u2014 Validate payloads\n  - *Files:* `src/validate.js`\n  - *Acceptance:* invalid-payload test passes\n  - *Verify:* `node --test test/validate.test.js` \u2192 \"pass 2\"\n  - *Refs:* AC-002\n\n## Reality Check (pre-ship gate)\n\n- [ ] **T009** \u2014 Opponent review: steelman why this implementation is wrong\n  - *Agent:* agents/opponent.agent.md\n  - *Acceptance:* agent returns **CLEARED**\n  - *Refs:* AC-001, AC-002\n\n- [ ] **T010** \u2014 Reality-check the implemented spec end-to-end\n  - *Agent:* agents/reality-check.agent.md\n  - *Acceptance:* agent returns **READY**\n  - *Refs:* AC-001, AC-002\n\n## Ship\n\n- [ ] **T011** \u2014 Open PR to the base branch\n  - *Acceptance:* spec-pr.sh prints the PR URL\n",
+      "results": {
+        "before": {
+          "argv": [
+            "/bin/bash",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.1867828369140625,
+          "warned": false,
+          "consistent": true,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\nconsistent \u2014 spec/plan/tasks line up\n",
+          "stderr": ""
+        },
+        "after": {
+          "argv": [
+            "/bin/bash",
+            "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.1830768585205078,
+          "warned": true,
+          "consistent": false,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\n1 warning(s), 0 errors\n",
+          "stderr": ""
+        }
+      }
+    },
+    {
+      "kind": "weak",
+      "command": "../tools/rg AC-001 tests/check.sh",
+      "tasks_md": "---\ntasks_for: 001-test-feature\nstatus: in-progress\ncreated: 2026-01-01\nupdated: 2026-01-01\n---\n# Tasks: Test feature\n\n## Setup\n\n- [ ] **T001** \u2014 Add scaffolding\n  - *Files:* `src/`\n  - *Acceptance:* build succeeds\n  - *Verify:* `npm run build` \u2192 \"built\"\n\n## Backend\n\n- [ ] **T002** \u2014 Implement the thing endpoint\n  - *Files:* `src/thing.js`\n  - *Acceptance:* unit test passes\n  - *Verify:* `../tools/rg AC-001 tests/check.sh` \u2192 \"pass 1\"\n  - *Refs:* REQ-001, AC-001\n\n- [ ] **T003** \u2014 Validate payloads\n  - *Files:* `src/validate.js`\n  - *Acceptance:* invalid-payload test passes\n  - *Verify:* `node --test test/validate.test.js` \u2192 \"pass 2\"\n  - *Refs:* AC-002\n\n## Reality Check (pre-ship gate)\n\n- [ ] **T009** \u2014 Opponent review: steelman why this implementation is wrong\n  - *Agent:* agents/opponent.agent.md\n  - *Acceptance:* agent returns **CLEARED**\n  - *Refs:* AC-001, AC-002\n\n- [ ] **T010** \u2014 Reality-check the implemented spec end-to-end\n  - *Agent:* agents/reality-check.agent.md\n  - *Acceptance:* agent returns **READY**\n  - *Refs:* AC-001, AC-002\n\n## Ship\n\n- [ ] **T011** \u2014 Open PR to the base branch\n  - *Acceptance:* spec-pr.sh prints the PR URL\n",
+      "results": {
+        "before": {
+          "argv": [
+            "/bin/bash",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.19263815879821777,
+          "warned": false,
+          "consistent": true,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\nconsistent \u2014 spec/plan/tasks line up\n",
+          "stderr": ""
+        },
+        "after": {
+          "argv": [
+            "/bin/bash",
+            "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.2086472511291504,
+          "warned": true,
+          "consistent": false,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\n1 warning(s), 0 errors\n",
+          "stderr": ""
+        }
+      }
+    },
+    {
+      "kind": "weak",
+      "command": "../tools/diff fixtures/test.txt actual.txt",
+      "tasks_md": "---\ntasks_for: 001-test-feature\nstatus: in-progress\ncreated: 2026-01-01\nupdated: 2026-01-01\n---\n# Tasks: Test feature\n\n## Setup\n\n- [ ] **T001** \u2014 Add scaffolding\n  - *Files:* `src/`\n  - *Acceptance:* build succeeds\n  - *Verify:* `npm run build` \u2192 \"built\"\n\n## Backend\n\n- [ ] **T002** \u2014 Implement the thing endpoint\n  - *Files:* `src/thing.js`\n  - *Acceptance:* unit test passes\n  - *Verify:* `../tools/diff fixtures/test.txt actual.txt` \u2192 \"pass 1\"\n  - *Refs:* REQ-001, AC-001\n\n- [ ] **T003** \u2014 Validate payloads\n  - *Files:* `src/validate.js`\n  - *Acceptance:* invalid-payload test passes\n  - *Verify:* `node --test test/validate.test.js` \u2192 \"pass 2\"\n  - *Refs:* AC-002\n\n## Reality Check (pre-ship gate)\n\n- [ ] **T009** \u2014 Opponent review: steelman why this implementation is wrong\n  - *Agent:* agents/opponent.agent.md\n  - *Acceptance:* agent returns **CLEARED**\n  - *Refs:* AC-001, AC-002\n\n- [ ] **T010** \u2014 Reality-check the implemented spec end-to-end\n  - *Agent:* agents/reality-check.agent.md\n  - *Acceptance:* agent returns **READY**\n  - *Refs:* AC-001, AC-002\n\n## Ship\n\n- [ ] **T011** \u2014 Open PR to the base branch\n  - *Acceptance:* spec-pr.sh prints the PR URL\n",
+      "results": {
+        "before": {
+          "argv": [
+            "/bin/bash",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.19162917137145996,
+          "warned": false,
+          "consistent": true,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\nconsistent \u2014 spec/plan/tasks line up\n",
+          "stderr": ""
+        },
+        "after": {
+          "argv": [
+            "/bin/bash",
+            "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.18591809272766113,
+          "warned": true,
+          "consistent": false,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\n1 warning(s), 0 errors\n",
+          "stderr": ""
+        }
+      }
+    },
+    {
+      "kind": "weak",
+      "command": "tests/grep AC-001 tests/check.sh",
+      "tasks_md": "---\ntasks_for: 001-test-feature\nstatus: in-progress\ncreated: 2026-01-01\nupdated: 2026-01-01\n---\n# Tasks: Test feature\n\n## Setup\n\n- [ ] **T001** \u2014 Add scaffolding\n  - *Files:* `src/`\n  - *Acceptance:* build succeeds\n  - *Verify:* `npm run build` \u2192 \"built\"\n\n## Backend\n\n- [ ] **T002** \u2014 Implement the thing endpoint\n  - *Files:* `src/thing.js`\n  - *Acceptance:* unit test passes\n  - *Verify:* `tests/grep AC-001 tests/check.sh` \u2192 \"pass 1\"\n  - *Refs:* REQ-001, AC-001\n\n- [ ] **T003** \u2014 Validate payloads\n  - *Files:* `src/validate.js`\n  - *Acceptance:* invalid-payload test passes\n  - *Verify:* `node --test test/validate.test.js` \u2192 \"pass 2\"\n  - *Refs:* AC-002\n\n## Reality Check (pre-ship gate)\n\n- [ ] **T009** \u2014 Opponent review: steelman why this implementation is wrong\n  - *Agent:* agents/opponent.agent.md\n  - *Acceptance:* agent returns **CLEARED**\n  - *Refs:* AC-001, AC-002\n\n- [ ] **T010** \u2014 Reality-check the implemented spec end-to-end\n  - *Agent:* agents/reality-check.agent.md\n  - *Acceptance:* agent returns **READY**\n  - *Refs:* AC-001, AC-002\n\n## Ship\n\n- [ ] **T011** \u2014 Open PR to the base branch\n  - *Acceptance:* spec-pr.sh prints the PR URL\n",
+      "results": {
+        "before": {
+          "argv": [
+            "/bin/bash",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.18289613723754883,
+          "warned": false,
+          "consistent": true,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\nconsistent \u2014 spec/plan/tasks line up\n",
+          "stderr": ""
+        },
+        "after": {
+          "argv": [
+            "/bin/bash",
+            "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.19878292083740234,
+          "warned": true,
+          "consistent": false,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\n1 warning(s), 0 errors\n",
+          "stderr": ""
+        }
+      }
+    },
+    {
+      "kind": "weak",
+      "command": "tests/rg AC-001 tests/check.sh",
+      "tasks_md": "---\ntasks_for: 001-test-feature\nstatus: in-progress\ncreated: 2026-01-01\nupdated: 2026-01-01\n---\n# Tasks: Test feature\n\n## Setup\n\n- [ ] **T001** \u2014 Add scaffolding\n  - *Files:* `src/`\n  - *Acceptance:* build succeeds\n  - *Verify:* `npm run build` \u2192 \"built\"\n\n## Backend\n\n- [ ] **T002** \u2014 Implement the thing endpoint\n  - *Files:* `src/thing.js`\n  - *Acceptance:* unit test passes\n  - *Verify:* `tests/rg AC-001 tests/check.sh` \u2192 \"pass 1\"\n  - *Refs:* REQ-001, AC-001\n\n- [ ] **T003** \u2014 Validate payloads\n  - *Files:* `src/validate.js`\n  - *Acceptance:* invalid-payload test passes\n  - *Verify:* `node --test test/validate.test.js` \u2192 \"pass 2\"\n  - *Refs:* AC-002\n\n## Reality Check (pre-ship gate)\n\n- [ ] **T009** \u2014 Opponent review: steelman why this implementation is wrong\n  - *Agent:* agents/opponent.agent.md\n  - *Acceptance:* agent returns **CLEARED**\n  - *Refs:* AC-001, AC-002\n\n- [ ] **T010** \u2014 Reality-check the implemented spec end-to-end\n  - *Agent:* agents/reality-check.agent.md\n  - *Acceptance:* agent returns **READY**\n  - *Refs:* AC-001, AC-002\n\n## Ship\n\n- [ ] **T011** \u2014 Open PR to the base branch\n  - *Acceptance:* spec-pr.sh prints the PR URL\n",
+      "results": {
+        "before": {
+          "argv": [
+            "/bin/bash",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.19542694091796875,
+          "warned": false,
+          "consistent": true,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\nconsistent \u2014 spec/plan/tasks line up\n",
+          "stderr": ""
+        },
+        "after": {
+          "argv": [
+            "/bin/bash",
+            "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.1907823085784912,
+          "warned": true,
+          "consistent": false,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\n1 warning(s), 0 errors\n",
+          "stderr": ""
+        }
+      }
+    },
+    {
+      "kind": "weak",
+      "command": "tests/diff fixtures/test.txt actual.txt",
+      "tasks_md": "---\ntasks_for: 001-test-feature\nstatus: in-progress\ncreated: 2026-01-01\nupdated: 2026-01-01\n---\n# Tasks: Test feature\n\n## Setup\n\n- [ ] **T001** \u2014 Add scaffolding\n  - *Files:* `src/`\n  - *Acceptance:* build succeeds\n  - *Verify:* `npm run build` \u2192 \"built\"\n\n## Backend\n\n- [ ] **T002** \u2014 Implement the thing endpoint\n  - *Files:* `src/thing.js`\n  - *Acceptance:* unit test passes\n  - *Verify:* `tests/diff fixtures/test.txt actual.txt` \u2192 \"pass 1\"\n  - *Refs:* REQ-001, AC-001\n\n- [ ] **T003** \u2014 Validate payloads\n  - *Files:* `src/validate.js`\n  - *Acceptance:* invalid-payload test passes\n  - *Verify:* `node --test test/validate.test.js` \u2192 \"pass 2\"\n  - *Refs:* AC-002\n\n## Reality Check (pre-ship gate)\n\n- [ ] **T009** \u2014 Opponent review: steelman why this implementation is wrong\n  - *Agent:* agents/opponent.agent.md\n  - *Acceptance:* agent returns **CLEARED**\n  - *Refs:* AC-001, AC-002\n\n- [ ] **T010** \u2014 Reality-check the implemented spec end-to-end\n  - *Agent:* agents/reality-check.agent.md\n  - *Acceptance:* agent returns **READY**\n  - *Refs:* AC-001, AC-002\n\n## Ship\n\n- [ ] **T011** \u2014 Open PR to the base branch\n  - *Acceptance:* spec-pr.sh prints the PR URL\n",
+      "results": {
+        "before": {
+          "argv": [
+            "/bin/bash",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.19211912155151367,
+          "warned": false,
+          "consistent": true,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\nconsistent \u2014 spec/plan/tasks line up\n",
+          "stderr": ""
+        },
+        "after": {
+          "argv": [
+            "/bin/bash",
+            "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.19870400428771973,
+          "warned": true,
+          "consistent": false,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\n1 warning(s), 0 errors\n",
+          "stderr": ""
+        }
+      }
+    },
+    {
+      "kind": "clean",
+      "command": "/bin/bash tests/check.sh /usr/bin/grep",
+      "tasks_md": "---\ntasks_for: 001-test-feature\nstatus: in-progress\ncreated: 2026-01-01\nupdated: 2026-01-01\n---\n# Tasks: Test feature\n\n## Setup\n\n- [ ] **T001** \u2014 Add scaffolding\n  - *Files:* `src/`\n  - *Acceptance:* build succeeds\n  - *Verify:* `npm run build` \u2192 \"built\"\n\n## Backend\n\n- [ ] **T002** \u2014 Implement the thing endpoint\n  - *Files:* `src/thing.js`\n  - *Acceptance:* unit test passes\n  - *Verify:* `/bin/bash tests/check.sh /usr/bin/grep` \u2192 \"pass 1\"\n  - *Refs:* REQ-001, AC-001\n\n- [ ] **T003** \u2014 Validate payloads\n  - *Files:* `src/validate.js`\n  - *Acceptance:* invalid-payload test passes\n  - *Verify:* `node --test test/validate.test.js` \u2192 \"pass 2\"\n  - *Refs:* AC-002\n\n## Reality Check (pre-ship gate)\n\n- [ ] **T009** \u2014 Opponent review: steelman why this implementation is wrong\n  - *Agent:* agents/opponent.agent.md\n  - *Acceptance:* agent returns **CLEARED**\n  - *Refs:* AC-001, AC-002\n\n- [ ] **T010** \u2014 Reality-check the implemented spec end-to-end\n  - *Agent:* agents/reality-check.agent.md\n  - *Acceptance:* agent returns **READY**\n  - *Refs:* AC-001, AC-002\n\n## Ship\n\n- [ ] **T011** \u2014 Open PR to the base branch\n  - *Acceptance:* spec-pr.sh prints the PR URL\n",
+      "results": {
+        "before": {
+          "argv": [
+            "/bin/bash",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.1881709098815918,
+          "warned": false,
+          "consistent": true,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\nconsistent \u2014 spec/plan/tasks line up\n",
+          "stderr": ""
+        },
+        "after": {
+          "argv": [
+            "/bin/bash",
+            "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.1861581802368164,
+          "warned": false,
+          "consistent": true,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\nconsistent \u2014 spec/plan/tasks line up\n",
+          "stderr": ""
+        }
+      }
+    },
+    {
+      "kind": "clean",
+      "command": "./tests/check.sh ./tools/rg",
+      "tasks_md": "---\ntasks_for: 001-test-feature\nstatus: in-progress\ncreated: 2026-01-01\nupdated: 2026-01-01\n---\n# Tasks: Test feature\n\n## Setup\n\n- [ ] **T001** \u2014 Add scaffolding\n  - *Files:* `src/`\n  - *Acceptance:* build succeeds\n  - *Verify:* `npm run build` \u2192 \"built\"\n\n## Backend\n\n- [ ] **T002** \u2014 Implement the thing endpoint\n  - *Files:* `src/thing.js`\n  - *Acceptance:* unit test passes\n  - *Verify:* `./tests/check.sh ./tools/rg` \u2192 \"pass 1\"\n  - *Refs:* REQ-001, AC-001\n\n- [ ] **T003** \u2014 Validate payloads\n  - *Files:* `src/validate.js`\n  - *Acceptance:* invalid-payload test passes\n  - *Verify:* `node --test test/validate.test.js` \u2192 \"pass 2\"\n  - *Refs:* AC-002\n\n## Reality Check (pre-ship gate)\n\n- [ ] **T009** \u2014 Opponent review: steelman why this implementation is wrong\n  - *Agent:* agents/opponent.agent.md\n  - *Acceptance:* agent returns **CLEARED**\n  - *Refs:* AC-001, AC-002\n\n- [ ] **T010** \u2014 Reality-check the implemented spec end-to-end\n  - *Agent:* agents/reality-check.agent.md\n  - *Acceptance:* agent returns **READY**\n  - *Refs:* AC-001, AC-002\n\n## Ship\n\n- [ ] **T011** \u2014 Open PR to the base branch\n  - *Acceptance:* spec-pr.sh prints the PR URL\n",
+      "results": {
+        "before": {
+          "argv": [
+            "/bin/bash",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.18909692764282227,
+          "warned": false,
+          "consistent": true,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\nconsistent \u2014 spec/plan/tasks line up\n",
+          "stderr": ""
+        },
+        "after": {
+          "argv": [
+            "/bin/bash",
+            "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.18862009048461914,
+          "warned": false,
+          "consistent": true,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\nconsistent \u2014 spec/plan/tasks line up\n",
+          "stderr": ""
+        }
+      }
+    },
+    {
+      "kind": "clean",
+      "command": "/usr/bin/node --test test/check.js ../tools/diff",
+      "tasks_md": "---\ntasks_for: 001-test-feature\nstatus: in-progress\ncreated: 2026-01-01\nupdated: 2026-01-01\n---\n# Tasks: Test feature\n\n## Setup\n\n- [ ] **T001** \u2014 Add scaffolding\n  - *Files:* `src/`\n  - *Acceptance:* build succeeds\n  - *Verify:* `npm run build` \u2192 \"built\"\n\n## Backend\n\n- [ ] **T002** \u2014 Implement the thing endpoint\n  - *Files:* `src/thing.js`\n  - *Acceptance:* unit test passes\n  - *Verify:* `/usr/bin/node --test test/check.js ../tools/diff` \u2192 \"pass 1\"\n  - *Refs:* REQ-001, AC-001\n\n- [ ] **T003** \u2014 Validate payloads\n  - *Files:* `src/validate.js`\n  - *Acceptance:* invalid-payload test passes\n  - *Verify:* `node --test test/validate.test.js` \u2192 \"pass 2\"\n  - *Refs:* AC-002\n\n## Reality Check (pre-ship gate)\n\n- [ ] **T009** \u2014 Opponent review: steelman why this implementation is wrong\n  - *Agent:* agents/opponent.agent.md\n  - *Acceptance:* agent returns **CLEARED**\n  - *Refs:* AC-001, AC-002\n\n- [ ] **T010** \u2014 Reality-check the implemented spec end-to-end\n  - *Agent:* agents/reality-check.agent.md\n  - *Acceptance:* agent returns **READY**\n  - *Refs:* AC-001, AC-002\n\n## Ship\n\n- [ ] **T011** \u2014 Open PR to the base branch\n  - *Acceptance:* spec-pr.sh prints the PR URL\n",
+      "results": {
+        "before": {
+          "argv": [
+            "/bin/bash",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.19010519981384277,
+          "warned": false,
+          "consistent": true,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\nconsistent \u2014 spec/plan/tasks line up\n",
+          "stderr": ""
+        },
+        "after": {
+          "argv": [
+            "/bin/bash",
+            "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.1915111541748047,
+          "warned": false,
+          "consistent": true,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\nconsistent \u2014 spec/plan/tasks line up\n",
+          "stderr": ""
+        }
+      }
+    },
+    {
+      "kind": "clean",
+      "command": "node scripts/assert-content.js /usr/bin/grep AC-001 README.md",
+      "tasks_md": "---\ntasks_for: 001-test-feature\nstatus: in-progress\ncreated: 2026-01-01\nupdated: 2026-01-01\n---\n# Tasks: Test feature\n\n## Setup\n\n- [ ] **T001** \u2014 Add scaffolding\n  - *Files:* `src/`\n  - *Acceptance:* build succeeds\n  - *Verify:* `npm run build` \u2192 \"built\"\n\n## Backend\n\n- [ ] **T002** \u2014 Implement the thing endpoint\n  - *Files:* `src/thing.js`\n  - *Acceptance:* unit test passes\n  - *Verify:* `node scripts/assert-content.js /usr/bin/grep AC-001 README.md` \u2192 \"pass 1\"\n  - *Refs:* REQ-001, AC-001\n\n- [ ] **T003** \u2014 Validate payloads\n  - *Files:* `src/validate.js`\n  - *Acceptance:* invalid-payload test passes\n  - *Verify:* `node --test test/validate.test.js` \u2192 \"pass 2\"\n  - *Refs:* AC-002\n\n## Reality Check (pre-ship gate)\n\n- [ ] **T009** \u2014 Opponent review: steelman why this implementation is wrong\n  - *Agent:* agents/opponent.agent.md\n  - *Acceptance:* agent returns **CLEARED**\n  - *Refs:* AC-001, AC-002\n\n- [ ] **T010** \u2014 Reality-check the implemented spec end-to-end\n  - *Agent:* agents/reality-check.agent.md\n  - *Acceptance:* agent returns **READY**\n  - *Refs:* AC-001, AC-002\n\n## Ship\n\n- [ ] **T011** \u2014 Open PR to the base branch\n  - *Acceptance:* spec-pr.sh prints the PR URL\n",
+      "results": {
+        "before": {
+          "argv": [
+            "/bin/bash",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.1937859058380127,
+          "warned": false,
+          "consistent": true,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\nconsistent \u2014 spec/plan/tasks line up\n",
+          "stderr": ""
+        },
+        "after": {
+          "argv": [
+            "/bin/bash",
+            "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.18808197975158691,
+          "warned": false,
+          "consistent": true,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\nconsistent \u2014 spec/plan/tasks line up\n",
+          "stderr": ""
+        }
+      }
+    },
+    {
+      "kind": "clean",
+      "command": "node scripts/assert-content.js ./tools/rg AC-001 README.md",
+      "tasks_md": "---\ntasks_for: 001-test-feature\nstatus: in-progress\ncreated: 2026-01-01\nupdated: 2026-01-01\n---\n# Tasks: Test feature\n\n## Setup\n\n- [ ] **T001** \u2014 Add scaffolding\n  - *Files:* `src/`\n  - *Acceptance:* build succeeds\n  - *Verify:* `npm run build` \u2192 \"built\"\n\n## Backend\n\n- [ ] **T002** \u2014 Implement the thing endpoint\n  - *Files:* `src/thing.js`\n  - *Acceptance:* unit test passes\n  - *Verify:* `node scripts/assert-content.js ./tools/rg AC-001 README.md` \u2192 \"pass 1\"\n  - *Refs:* REQ-001, AC-001\n\n- [ ] **T003** \u2014 Validate payloads\n  - *Files:* `src/validate.js`\n  - *Acceptance:* invalid-payload test passes\n  - *Verify:* `node --test test/validate.test.js` \u2192 \"pass 2\"\n  - *Refs:* AC-002\n\n## Reality Check (pre-ship gate)\n\n- [ ] **T009** \u2014 Opponent review: steelman why this implementation is wrong\n  - *Agent:* agents/opponent.agent.md\n  - *Acceptance:* agent returns **CLEARED**\n  - *Refs:* AC-001, AC-002\n\n- [ ] **T010** \u2014 Reality-check the implemented spec end-to-end\n  - *Agent:* agents/reality-check.agent.md\n  - *Acceptance:* agent returns **READY**\n  - *Refs:* AC-001, AC-002\n\n## Ship\n\n- [ ] **T011** \u2014 Open PR to the base branch\n  - *Acceptance:* spec-pr.sh prints the PR URL\n",
+      "results": {
+        "before": {
+          "argv": [
+            "/bin/bash",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.18675780296325684,
+          "warned": false,
+          "consistent": true,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\nconsistent \u2014 spec/plan/tasks line up\n",
+          "stderr": ""
+        },
+        "after": {
+          "argv": [
+            "/bin/bash",
+            "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.19805479049682617,
+          "warned": false,
+          "consistent": true,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\nconsistent \u2014 spec/plan/tasks line up\n",
+          "stderr": ""
+        }
+      }
+    },
+    {
+      "kind": "clean",
+      "command": "node scripts/assert-content.js ../tools/diff actual.txt expected.txt",
+      "tasks_md": "---\ntasks_for: 001-test-feature\nstatus: in-progress\ncreated: 2026-01-01\nupdated: 2026-01-01\n---\n# Tasks: Test feature\n\n## Setup\n\n- [ ] **T001** \u2014 Add scaffolding\n  - *Files:* `src/`\n  - *Acceptance:* build succeeds\n  - *Verify:* `npm run build` \u2192 \"built\"\n\n## Backend\n\n- [ ] **T002** \u2014 Implement the thing endpoint\n  - *Files:* `src/thing.js`\n  - *Acceptance:* unit test passes\n  - *Verify:* `node scripts/assert-content.js ../tools/diff actual.txt expected.txt` \u2192 \"pass 1\"\n  - *Refs:* REQ-001, AC-001\n\n- [ ] **T003** \u2014 Validate payloads\n  - *Files:* `src/validate.js`\n  - *Acceptance:* invalid-payload test passes\n  - *Verify:* `node --test test/validate.test.js` \u2192 \"pass 2\"\n  - *Refs:* AC-002\n\n## Reality Check (pre-ship gate)\n\n- [ ] **T009** \u2014 Opponent review: steelman why this implementation is wrong\n  - *Agent:* agents/opponent.agent.md\n  - *Acceptance:* agent returns **CLEARED**\n  - *Refs:* AC-001, AC-002\n\n- [ ] **T010** \u2014 Reality-check the implemented spec end-to-end\n  - *Agent:* agents/reality-check.agent.md\n  - *Acceptance:* agent returns **READY**\n  - *Refs:* AC-001, AC-002\n\n## Ship\n\n- [ ] **T011** \u2014 Open PR to the base branch\n  - *Acceptance:* spec-pr.sh prints the PR URL\n",
+      "results": {
+        "before": {
+          "argv": [
+            "/bin/bash",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.1957099437713623,
+          "warned": false,
+          "consistent": true,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\nconsistent \u2014 spec/plan/tasks line up\n",
+          "stderr": ""
+        },
+        "after": {
+          "argv": [
+            "/bin/bash",
+            "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+            "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature"
+          ],
+          "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+          "exit": 0,
+          "duration_seconds": 0.21707701683044434,
+          "warned": false,
+          "consistent": true,
+          "stdout": "Analyzing: /private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/public-probes/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\nconsistent \u2014 spec/plan/tasks line up\n",
+          "stderr": ""
+        }
+      }
+    }
+  ],
+  "summary": {
+    "new_weak_cases": 39,
+    "new_clean_controls": 6,
+    "public_analyzer_invocations": 90,
+    "before_missing_weak_warnings": 39,
+    "after_weak_warnings": 39,
+    "before_and_after_clean_controls": 6,
+    "all_expected": true
+  }
+}

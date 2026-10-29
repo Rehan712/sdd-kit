@@ -1,0 +1,10 @@
+exit=0 warning=yes command=test -e README.md
+exit=0 warning=yes command=test -f README.md
+exit=0 warning=yes command=grep pytest README.md
+exit=0 warning=yes command=rg bats README.md
+exit=0 warning=yes command=diff fixtures/test.txt actual.txt
+exit=0 warning=no command=node --test test/thing.test.js
+exit=0 warning=no command=cargo test
+exit=0 warning=no command=pytest
+exit=0 warning=no command=bats test.bats
+exit=0 warning=no command=bash tests/check.sh

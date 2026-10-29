@@ -1,0 +1,64 @@
+@@OLD
+evidence_contract="$(vf_fm_value "$SPEC_FILE" verification_contract)" || exit 3
+# Three ways, as every other reader of the contract routes it: absent is
+# legacy, 1 is current, anything else is refused, never the legacy check.
+[[ -z "$evidence_contract" || "$evidence_contract" == 1 ]] ||
+  { echo "unsupported verification contract: $evidence_contract" >&2; exit 3; }
+@@NEW
+# Routed by the key, as every other reader of the contract routes it: no key
+# is legacy, one key of value 1 is current, anything else is refused, never
+# the legacy check (vf_contract).
+evidence_contract="$(vf_contract "$SPEC_FILE")" || exit 3
+@@END
+@@OLD
+records="$(awk '
+  function flush() { if (id!="") printf "%s\t%s\t%d\t%d\t%s\n", id, stage, is_gate, is_done, ev; id="" }
+@@NEW
+records="$(awk "$_VF_AWK_TEXT_UNFENCED"'
+  function flush() { if (id!="") printf "%s\t%s\t%d\t%d\t%s\n", id, stage, is_gate, is_done, ev; id="" }
+@@END
+@@OLD
+  # 3. named screenshot/PDF artifact must exist on disk
+  # Any byte that is not a blank or a control character belongs to the name:
+  # under the harness pin [[:graph:]] is ASCII only, which cut a non-ASCII
+  # artifact name short or missed it (T030o43 review F2).
+  arts="$(printf '%s\n' "$ev" | grep -oiE '[^[:space:][:cntrl:]]+\.(png|jpg|jpeg|gif|svg|pdf)')"; arts_rc=$?
+  (( arts_rc < 2 )) || fail "$id evidence could not be searched for artifact names"
+  for art in $arts; do
+    art="${art%[.,;:)]}"   # trim trailing punctuation
+    if [[ -e "$art" || -e "$SPEC_DIR/$art" || ( -n "$repo_root" && -e "$repo_root/$art" ) ]]; then
+      :
+@@NEW
+  # 3. named screenshot/PDF artifact must exist on disk
+  # A name is a run of bytes that are neither whitespace nor control: the
+  # evidence was read through the kernel's whitespace step, so a U+00A0 or a
+  # U+3000 ends a name as an ASCII space does, and a non-ASCII letter is part
+  # of it (T030o43 reviews 1 and 2). Quoting punctuation from a closed set
+  # glued to the front is not part of the name; a missing name still fails.
+  # Globbing is off, so a name is never a pattern.
+  arts="$(printf '%s\n' "$ev" | grep -oiE '[^[:space:][:cntrl:]]+\.(png|jpg|jpeg|gif|svg|pdf)')"; arts_rc=$?
+  (( arts_rc < 2 )) || fail "$id evidence could not be searched for artifact names"
+  set -f
+  for art in $arts; do
+    art="${art%[.,;:)]}"   # trim trailing punctuation
+    bare="$art" stripped=1
+    while (( stripped )); do
+      stripped=0
+      for wrap in "\"" "'" '`' "(" "[" "{" "<" $'\342\200\234' $'\342\200\230' $'\302\253' $'\343\200\214' $'\343\200\216' $'\357\274\210'; do
+        if [[ "$bare" == "$wrap"* ]]; then bare="${bare#"$wrap"}"; stripped=1; fi
+      done
+    done
+    if [[ -e "$art" || -e "$SPEC_DIR/$art" || ( -n "$repo_root" && -e "$repo_root/$art" ) ]] ||
+       [[ "$bare" != "$art" && -n "$bare" && ( -e "$bare" || -e "$SPEC_DIR/$bare" || ( -n "$repo_root" && -e "$repo_root/$bare" ) ) ]]; then
+      :
+@@END
+@@OLD
+      fail "$id names artifact '$art' in its evidence, but no such file exists"
+    fi
+  done
+@@NEW
+      fail "$id names artifact '$art' in its evidence, but no such file exists"
+    fi
+  done
+  set +f
+@@END
