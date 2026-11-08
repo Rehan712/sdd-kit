@@ -1,0 +1,1057 @@
+[
+  {
+    "label": "bash32-version",
+    "argv": [
+      "/bin/bash",
+      "--version"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "env_overrides": {
+      "GIT_OPTIONAL_LOCKS": "0",
+      "LC_ALL": "C",
+      "SHELLCHECK_OPTS": null
+    },
+    "start": "2026-10-29T17:41:51.031976+00:00",
+    "end": "2026-10-29T17:41:51.036203+00:00",
+    "exit": 0,
+    "stdin_sha256": null,
+    "stdout_sha256": "bbb931c0afdf20554fcb03c4414a67092e2d8db87226567a6ad5be3c1bcc1a15",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "bash32-syntax",
+    "argv": [
+      "/bin/bash",
+      "-n",
+      "scripts/sdd-analyze.sh",
+      "tests/test-sdd-analyze.sh"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "env_overrides": {
+      "GIT_OPTIONAL_LOCKS": "0",
+      "LC_ALL": "C",
+      "SHELLCHECK_OPTS": null
+    },
+    "start": "2026-10-29T17:41:51.036385+00:00",
+    "end": "2026-10-29T17:41:51.040069+00:00",
+    "exit": 0,
+    "stdin_sha256": null,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "shellcheck",
+    "argv": [
+      "/opt/homebrew/bin/shellcheck",
+      "--norc",
+      "-S",
+      "warning",
+      "-x",
+      "scripts/sdd-analyze.sh",
+      "tests/test-sdd-analyze.sh"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "env_overrides": {
+      "GIT_OPTIONAL_LOCKS": "0",
+      "LC_ALL": "C",
+      "SHELLCHECK_OPTS": null
+    },
+    "start": "2026-10-29T17:41:51.040324+00:00",
+    "end": "2026-10-29T17:41:53.686760+00:00",
+    "exit": 0,
+    "stdin_sha256": null,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "before-bash32-fixture",
+    "argv": [
+      "/bin/bash",
+      "-s",
+      "--",
+      "default"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "env_overrides": {
+      "GIT_OPTIONAL_LOCKS": "0",
+      "LC_ALL": "C",
+      "SHELLCHECK_OPTS": null
+    },
+    "start": "2026-10-29T17:41:53.688411+00:00",
+    "end": "2026-10-29T17:41:53.700940+00:00",
+    "exit": 0,
+    "stdin_sha256": "f8d197db9d781c45bd46889886f82f72d93477110baf721f08362dc0bab1c151",
+    "stdout_sha256": "04da52df07af08e24f82095e3fda8e6ab734a9a059df84c46f856f8352496bde",
+    "stderr_sha256": "bbb7c88f6212d1a28adb9bc86b311cfa189b3e9683f3fc3b6a46b0b40bc3dc88"
+  },
+  {
+    "label": "current-bash32-fixture",
+    "argv": [
+      "/bin/bash",
+      "-s",
+      "--",
+      "default"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "env_overrides": {
+      "GIT_OPTIONAL_LOCKS": "0",
+      "LC_ALL": "C",
+      "SHELLCHECK_OPTS": null
+    },
+    "start": "2026-10-29T17:41:53.701712+00:00",
+    "end": "2026-10-29T17:41:53.717568+00:00",
+    "exit": 0,
+    "stdin_sha256": "1fd501816194c0d9fc368689b5a09a462ab2c92659d9a9eb885bf6daa05c44ea",
+    "stdout_sha256": "e8edf28bdcb40bbaf2569d8081f89edc0c1f38dfeee1d54580f6f1e6a5c9e36d",
+    "stderr_sha256": "bbb7c88f6212d1a28adb9bc86b311cfa189b3e9683f3fc3b6a46b0b40bc3dc88"
+  },
+  {
+    "label": "docker-info",
+    "argv": [
+      "/usr/local/bin/docker",
+      "info",
+      "--format",
+      "{{json .ServerVersion}}"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "env_overrides": {
+      "GIT_OPTIONAL_LOCKS": "0",
+      "LC_ALL": "C",
+      "SHELLCHECK_OPTS": null
+    },
+    "start": "2026-10-29T17:41:53.719376+00:00",
+    "end": "2026-10-29T17:41:54.093572+00:00",
+    "exit": 0,
+    "stdin_sha256": null,
+    "stdout_sha256": "1a7dc7d819d7ad76ffb02bbcbf18ab2397d9e60706b77d149ad825d1198a7c26",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "docker-image-inspect",
+    "argv": [
+      "/usr/local/bin/docker",
+      "image",
+      "inspect",
+      "sha256:a81de950abb8b5d961ed8c1dcd345450fab8cda00ea3c11e7ec24a4ed4bb82ce",
+      "--format",
+      "{{.Id}}"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "env_overrides": {
+      "GIT_OPTIONAL_LOCKS": "0",
+      "LC_ALL": "C",
+      "SHELLCHECK_OPTS": null
+    },
+    "start": "2026-10-29T17:41:54.094034+00:00",
+    "end": "2026-10-29T17:41:54.111731+00:00",
+    "exit": 0,
+    "stdin_sha256": null,
+    "stdout_sha256": "0a6433473b6e994bd846af4593c3d720131fa1710cec841d538ad800751add87",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "current-bash52-on",
+    "argv": [
+      "/usr/local/bin/docker",
+      "run",
+      "--pull=never",
+      "--rm",
+      "-i",
+      "--network=none",
+      "--read-only",
+      "--cap-drop=ALL",
+      "--security-opt=no-new-privileges",
+      "--entrypoint=/bin/bash",
+      "sha256:a81de950abb8b5d961ed8c1dcd345450fab8cda00ea3c11e7ec24a4ed4bb82ce",
+      "-s",
+      "--",
+      "on"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "env_overrides": {
+      "GIT_OPTIONAL_LOCKS": "0",
+      "LC_ALL": "C",
+      "SHELLCHECK_OPTS": null
+    },
+    "start": "2026-10-29T17:41:54.112118+00:00",
+    "end": "2026-10-29T17:41:54.356667+00:00",
+    "exit": 0,
+    "stdin_sha256": "1fd501816194c0d9fc368689b5a09a462ab2c92659d9a9eb885bf6daa05c44ea",
+    "stdout_sha256": "e8edf28bdcb40bbaf2569d8081f89edc0c1f38dfeee1d54580f6f1e6a5c9e36d",
+    "stderr_sha256": "49fb96608701aa0bbb6e21c65d89083b85c0afcc35d56b4586273c07e5a82249"
+  },
+  {
+    "label": "current-bash52-off",
+    "argv": [
+      "/usr/local/bin/docker",
+      "run",
+      "--pull=never",
+      "--rm",
+      "-i",
+      "--network=none",
+      "--read-only",
+      "--cap-drop=ALL",
+      "--security-opt=no-new-privileges",
+      "--entrypoint=/bin/bash",
+      "sha256:a81de950abb8b5d961ed8c1dcd345450fab8cda00ea3c11e7ec24a4ed4bb82ce",
+      "-s",
+      "--",
+      "off"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "env_overrides": {
+      "GIT_OPTIONAL_LOCKS": "0",
+      "LC_ALL": "C",
+      "SHELLCHECK_OPTS": null
+    },
+    "start": "2026-10-29T17:41:54.358390+00:00",
+    "end": "2026-10-29T17:41:54.521675+00:00",
+    "exit": 0,
+    "stdin_sha256": "1fd501816194c0d9fc368689b5a09a462ab2c92659d9a9eb885bf6daa05c44ea",
+    "stdout_sha256": "e8edf28bdcb40bbaf2569d8081f89edc0c1f38dfeee1d54580f6f1e6a5c9e36d",
+    "stderr_sha256": "21501f85d32813ed3739f513cdc95f7a7669ac931117794331a93c6204aae44e"
+  },
+  {
+    "label": "focused-fixture-setup",
+    "argv": [
+      "/bin/bash",
+      "-c",
+      ". \"$1\"; SANDBOX=\"$2\"; make_spec_dir",
+      "_",
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-kit/tests/helpers.sh",
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-fixture"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "env_overrides": {
+      "GIT_OPTIONAL_LOCKS": "0",
+      "LC_ALL": "C",
+      "SHELLCHECK_OPTS": null
+    },
+    "start": "2026-10-29T17:41:54.544895+00:00",
+    "end": "2026-10-29T17:41:54.588806+00:00",
+    "exit": 0,
+    "stdin_sha256": null,
+    "stdout_sha256": "53f0e02bb59d7e11fbd635a1441618be1b79173f4454cc0165d6cde98be70efd",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "focused-01",
+    "argv": [
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-kit/scripts/sdd-analyze.sh",
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-fixture/proj/.specify/specs/001-test-feature"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "env_overrides": {
+      "GIT_OPTIONAL_LOCKS": "0",
+      "LC_ALL": "C",
+      "SHELLCHECK_OPTS": null
+    },
+    "start": "2026-10-29T17:41:54.589672+00:00",
+    "end": "2026-10-29T17:41:55.088276+00:00",
+    "exit": 0,
+    "stdin_sha256": null,
+    "stdout_sha256": "536794a4abe978d9531a25c23523353f22fb6d22e6c094e796e037a67c3a4aa9",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "focused-02",
+    "argv": [
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-kit/scripts/sdd-analyze.sh",
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-fixture/proj/.specify/specs/001-test-feature"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "env_overrides": {
+      "GIT_OPTIONAL_LOCKS": "0",
+      "LC_ALL": "C",
+      "SHELLCHECK_OPTS": null
+    },
+    "start": "2026-10-29T17:41:55.089258+00:00",
+    "end": "2026-10-29T17:41:55.277028+00:00",
+    "exit": 0,
+    "stdin_sha256": null,
+    "stdout_sha256": "536794a4abe978d9531a25c23523353f22fb6d22e6c094e796e037a67c3a4aa9",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "focused-03",
+    "argv": [
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-kit/scripts/sdd-analyze.sh",
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-fixture/proj/.specify/specs/001-test-feature"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "env_overrides": {
+      "GIT_OPTIONAL_LOCKS": "0",
+      "LC_ALL": "C",
+      "SHELLCHECK_OPTS": null
+    },
+    "start": "2026-10-29T17:41:55.277855+00:00",
+    "end": "2026-10-29T17:41:55.467582+00:00",
+    "exit": 0,
+    "stdin_sha256": null,
+    "stdout_sha256": "536794a4abe978d9531a25c23523353f22fb6d22e6c094e796e037a67c3a4aa9",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "focused-04",
+    "argv": [
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-kit/scripts/sdd-analyze.sh",
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-fixture/proj/.specify/specs/001-test-feature"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "env_overrides": {
+      "GIT_OPTIONAL_LOCKS": "0",
+      "LC_ALL": "C",
+      "SHELLCHECK_OPTS": null
+    },
+    "start": "2026-10-29T17:41:55.468417+00:00",
+    "end": "2026-10-29T17:41:55.658639+00:00",
+    "exit": 0,
+    "stdin_sha256": null,
+    "stdout_sha256": "536794a4abe978d9531a25c23523353f22fb6d22e6c094e796e037a67c3a4aa9",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "focused-05",
+    "argv": [
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-kit/scripts/sdd-analyze.sh",
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-fixture/proj/.specify/specs/001-test-feature"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "env_overrides": {
+      "GIT_OPTIONAL_LOCKS": "0",
+      "LC_ALL": "C",
+      "SHELLCHECK_OPTS": null
+    },
+    "start": "2026-10-29T17:41:55.659381+00:00",
+    "end": "2026-10-29T17:41:55.848632+00:00",
+    "exit": 0,
+    "stdin_sha256": null,
+    "stdout_sha256": "536794a4abe978d9531a25c23523353f22fb6d22e6c094e796e037a67c3a4aa9",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "focused-06",
+    "argv": [
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-kit/scripts/sdd-analyze.sh",
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-fixture/proj/.specify/specs/001-test-feature"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "env_overrides": {
+      "GIT_OPTIONAL_LOCKS": "0",
+      "LC_ALL": "C",
+      "SHELLCHECK_OPTS": null
+    },
+    "start": "2026-10-29T17:41:55.849486+00:00",
+    "end": "2026-10-29T17:41:56.038299+00:00",
+    "exit": 0,
+    "stdin_sha256": null,
+    "stdout_sha256": "536794a4abe978d9531a25c23523353f22fb6d22e6c094e796e037a67c3a4aa9",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "focused-07",
+    "argv": [
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-kit/scripts/sdd-analyze.sh",
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-fixture/proj/.specify/specs/001-test-feature"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "env_overrides": {
+      "GIT_OPTIONAL_LOCKS": "0",
+      "LC_ALL": "C",
+      "SHELLCHECK_OPTS": null
+    },
+    "start": "2026-10-29T17:41:56.039166+00:00",
+    "end": "2026-10-29T17:41:56.226598+00:00",
+    "exit": 0,
+    "stdin_sha256": null,
+    "stdout_sha256": "536794a4abe978d9531a25c23523353f22fb6d22e6c094e796e037a67c3a4aa9",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "focused-08",
+    "argv": [
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-kit/scripts/sdd-analyze.sh",
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-fixture/proj/.specify/specs/001-test-feature"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "env_overrides": {
+      "GIT_OPTIONAL_LOCKS": "0",
+      "LC_ALL": "C",
+      "SHELLCHECK_OPTS": null
+    },
+    "start": "2026-10-29T17:41:56.227359+00:00",
+    "end": "2026-10-29T17:41:56.416959+00:00",
+    "exit": 0,
+    "stdin_sha256": null,
+    "stdout_sha256": "536794a4abe978d9531a25c23523353f22fb6d22e6c094e796e037a67c3a4aa9",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "focused-09",
+    "argv": [
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-kit/scripts/sdd-analyze.sh",
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-fixture/proj/.specify/specs/001-test-feature"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "env_overrides": {
+      "GIT_OPTIONAL_LOCKS": "0",
+      "LC_ALL": "C",
+      "SHELLCHECK_OPTS": null
+    },
+    "start": "2026-10-29T17:41:56.417933+00:00",
+    "end": "2026-10-29T17:41:56.682395+00:00",
+    "exit": 0,
+    "stdin_sha256": null,
+    "stdout_sha256": "536794a4abe978d9531a25c23523353f22fb6d22e6c094e796e037a67c3a4aa9",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "focused-10",
+    "argv": [
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-kit/scripts/sdd-analyze.sh",
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-fixture/proj/.specify/specs/001-test-feature"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "env_overrides": {
+      "GIT_OPTIONAL_LOCKS": "0",
+      "LC_ALL": "C",
+      "SHELLCHECK_OPTS": null
+    },
+    "start": "2026-10-29T17:41:56.683482+00:00",
+    "end": "2026-10-29T17:41:57.032509+00:00",
+    "exit": 0,
+    "stdin_sha256": null,
+    "stdout_sha256": "536794a4abe978d9531a25c23523353f22fb6d22e6c094e796e037a67c3a4aa9",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "focused-11",
+    "argv": [
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-kit/scripts/sdd-analyze.sh",
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-fixture/proj/.specify/specs/001-test-feature"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "env_overrides": {
+      "GIT_OPTIONAL_LOCKS": "0",
+      "LC_ALL": "C",
+      "SHELLCHECK_OPTS": null
+    },
+    "start": "2026-10-29T17:41:57.033735+00:00",
+    "end": "2026-10-29T17:41:57.284793+00:00",
+    "exit": 0,
+    "stdin_sha256": null,
+    "stdout_sha256": "536794a4abe978d9531a25c23523353f22fb6d22e6c094e796e037a67c3a4aa9",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "focused-12",
+    "argv": [
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-kit/scripts/sdd-analyze.sh",
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-fixture/proj/.specify/specs/001-test-feature"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "env_overrides": {
+      "GIT_OPTIONAL_LOCKS": "0",
+      "LC_ALL": "C",
+      "SHELLCHECK_OPTS": null
+    },
+    "start": "2026-10-29T17:41:57.285539+00:00",
+    "end": "2026-10-29T17:41:57.462109+00:00",
+    "exit": 0,
+    "stdin_sha256": null,
+    "stdout_sha256": "536794a4abe978d9531a25c23523353f22fb6d22e6c094e796e037a67c3a4aa9",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "focused-13",
+    "argv": [
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-kit/scripts/sdd-analyze.sh",
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-fixture/proj/.specify/specs/001-test-feature"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "env_overrides": {
+      "GIT_OPTIONAL_LOCKS": "0",
+      "LC_ALL": "C",
+      "SHELLCHECK_OPTS": null
+    },
+    "start": "2026-10-29T17:41:57.462969+00:00",
+    "end": "2026-10-29T17:41:57.650163+00:00",
+    "exit": 0,
+    "stdin_sha256": null,
+    "stdout_sha256": "536794a4abe978d9531a25c23523353f22fb6d22e6c094e796e037a67c3a4aa9",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "focused-14",
+    "argv": [
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-kit/scripts/sdd-analyze.sh",
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-fixture/proj/.specify/specs/001-test-feature"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "env_overrides": {
+      "GIT_OPTIONAL_LOCKS": "0",
+      "LC_ALL": "C",
+      "SHELLCHECK_OPTS": null
+    },
+    "start": "2026-10-29T17:41:57.651237+00:00",
+    "end": "2026-10-29T17:41:57.903478+00:00",
+    "exit": 0,
+    "stdin_sha256": null,
+    "stdout_sha256": "536794a4abe978d9531a25c23523353f22fb6d22e6c094e796e037a67c3a4aa9",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "focused-15",
+    "argv": [
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-kit/scripts/sdd-analyze.sh",
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-fixture/proj/.specify/specs/001-test-feature"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "env_overrides": {
+      "GIT_OPTIONAL_LOCKS": "0",
+      "LC_ALL": "C",
+      "SHELLCHECK_OPTS": null
+    },
+    "start": "2026-10-29T17:41:57.904675+00:00",
+    "end": "2026-10-29T17:41:58.187208+00:00",
+    "exit": 0,
+    "stdin_sha256": null,
+    "stdout_sha256": "536794a4abe978d9531a25c23523353f22fb6d22e6c094e796e037a67c3a4aa9",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "focused-16",
+    "argv": [
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-kit/scripts/sdd-analyze.sh",
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-fixture/proj/.specify/specs/001-test-feature"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "env_overrides": {
+      "GIT_OPTIONAL_LOCKS": "0",
+      "LC_ALL": "C",
+      "SHELLCHECK_OPTS": null
+    },
+    "start": "2026-10-29T17:41:58.188011+00:00",
+    "end": "2026-10-29T17:41:58.377320+00:00",
+    "exit": 0,
+    "stdin_sha256": null,
+    "stdout_sha256": "536794a4abe978d9531a25c23523353f22fb6d22e6c094e796e037a67c3a4aa9",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "focused-17",
+    "argv": [
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-kit/scripts/sdd-analyze.sh",
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-fixture/proj/.specify/specs/001-test-feature"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "env_overrides": {
+      "GIT_OPTIONAL_LOCKS": "0",
+      "LC_ALL": "C",
+      "SHELLCHECK_OPTS": null
+    },
+    "start": "2026-10-29T17:41:58.378136+00:00",
+    "end": "2026-10-29T17:41:58.559347+00:00",
+    "exit": 0,
+    "stdin_sha256": null,
+    "stdout_sha256": "536794a4abe978d9531a25c23523353f22fb6d22e6c094e796e037a67c3a4aa9",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "focused-18",
+    "argv": [
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-kit/scripts/sdd-analyze.sh",
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-fixture/proj/.specify/specs/001-test-feature"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "env_overrides": {
+      "GIT_OPTIONAL_LOCKS": "0",
+      "LC_ALL": "C",
+      "SHELLCHECK_OPTS": null
+    },
+    "start": "2026-10-29T17:41:58.560327+00:00",
+    "end": "2026-10-29T17:41:58.745968+00:00",
+    "exit": 0,
+    "stdin_sha256": null,
+    "stdout_sha256": "536794a4abe978d9531a25c23523353f22fb6d22e6c094e796e037a67c3a4aa9",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "focused-19",
+    "argv": [
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-kit/scripts/sdd-analyze.sh",
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-fixture/proj/.specify/specs/001-test-feature"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "env_overrides": {
+      "GIT_OPTIONAL_LOCKS": "0",
+      "LC_ALL": "C",
+      "SHELLCHECK_OPTS": null
+    },
+    "start": "2026-10-29T17:41:58.746943+00:00",
+    "end": "2026-10-29T17:41:59.074316+00:00",
+    "exit": 0,
+    "stdin_sha256": null,
+    "stdout_sha256": "536794a4abe978d9531a25c23523353f22fb6d22e6c094e796e037a67c3a4aa9",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "focused-20",
+    "argv": [
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-kit/scripts/sdd-analyze.sh",
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-fixture/proj/.specify/specs/001-test-feature"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "env_overrides": {
+      "GIT_OPTIONAL_LOCKS": "0",
+      "LC_ALL": "C",
+      "SHELLCHECK_OPTS": null
+    },
+    "start": "2026-10-29T17:41:59.075819+00:00",
+    "end": "2026-10-29T17:41:59.284485+00:00",
+    "exit": 0,
+    "stdin_sha256": null,
+    "stdout_sha256": "536794a4abe978d9531a25c23523353f22fb6d22e6c094e796e037a67c3a4aa9",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "focused-21",
+    "argv": [
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-kit/scripts/sdd-analyze.sh",
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-fixture/proj/.specify/specs/001-test-feature"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "env_overrides": {
+      "GIT_OPTIONAL_LOCKS": "0",
+      "LC_ALL": "C",
+      "SHELLCHECK_OPTS": null
+    },
+    "start": "2026-10-29T17:41:59.285436+00:00",
+    "end": "2026-10-29T17:41:59.470491+00:00",
+    "exit": 0,
+    "stdin_sha256": null,
+    "stdout_sha256": "536794a4abe978d9531a25c23523353f22fb6d22e6c094e796e037a67c3a4aa9",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "focused-22",
+    "argv": [
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-kit/scripts/sdd-analyze.sh",
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-fixture/proj/.specify/specs/001-test-feature"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "env_overrides": {
+      "GIT_OPTIONAL_LOCKS": "0",
+      "LC_ALL": "C",
+      "SHELLCHECK_OPTS": null
+    },
+    "start": "2026-10-29T17:41:59.471307+00:00",
+    "end": "2026-10-29T17:41:59.662390+00:00",
+    "exit": 0,
+    "stdin_sha256": null,
+    "stdout_sha256": "536794a4abe978d9531a25c23523353f22fb6d22e6c094e796e037a67c3a4aa9",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "focused-23",
+    "argv": [
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-kit/scripts/sdd-analyze.sh",
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-fixture/proj/.specify/specs/001-test-feature"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "env_overrides": {
+      "GIT_OPTIONAL_LOCKS": "0",
+      "LC_ALL": "C",
+      "SHELLCHECK_OPTS": null
+    },
+    "start": "2026-10-29T17:41:59.663381+00:00",
+    "end": "2026-10-29T17:41:59.851351+00:00",
+    "exit": 0,
+    "stdin_sha256": null,
+    "stdout_sha256": "536794a4abe978d9531a25c23523353f22fb6d22e6c094e796e037a67c3a4aa9",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "focused-24",
+    "argv": [
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-kit/scripts/sdd-analyze.sh",
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-fixture/proj/.specify/specs/001-test-feature"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "env_overrides": {
+      "GIT_OPTIONAL_LOCKS": "0",
+      "LC_ALL": "C",
+      "SHELLCHECK_OPTS": null
+    },
+    "start": "2026-10-29T17:41:59.852324+00:00",
+    "end": "2026-10-29T17:42:00.039518+00:00",
+    "exit": 0,
+    "stdin_sha256": null,
+    "stdout_sha256": "536794a4abe978d9531a25c23523353f22fb6d22e6c094e796e037a67c3a4aa9",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "focused-25",
+    "argv": [
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-kit/scripts/sdd-analyze.sh",
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-fixture/proj/.specify/specs/001-test-feature"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "env_overrides": {
+      "GIT_OPTIONAL_LOCKS": "0",
+      "LC_ALL": "C",
+      "SHELLCHECK_OPTS": null
+    },
+    "start": "2026-10-29T17:42:00.040478+00:00",
+    "end": "2026-10-29T17:42:00.229442+00:00",
+    "exit": 0,
+    "stdin_sha256": null,
+    "stdout_sha256": "536794a4abe978d9531a25c23523353f22fb6d22e6c094e796e037a67c3a4aa9",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "focused-26",
+    "argv": [
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-kit/scripts/sdd-analyze.sh",
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-fixture/proj/.specify/specs/001-test-feature"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "env_overrides": {
+      "GIT_OPTIONAL_LOCKS": "0",
+      "LC_ALL": "C",
+      "SHELLCHECK_OPTS": null
+    },
+    "start": "2026-10-29T17:42:00.230421+00:00",
+    "end": "2026-10-29T17:42:00.419744+00:00",
+    "exit": 0,
+    "stdin_sha256": null,
+    "stdout_sha256": "536794a4abe978d9531a25c23523353f22fb6d22e6c094e796e037a67c3a4aa9",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "focused-27",
+    "argv": [
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-kit/scripts/sdd-analyze.sh",
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-fixture/proj/.specify/specs/001-test-feature"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "env_overrides": {
+      "GIT_OPTIONAL_LOCKS": "0",
+      "LC_ALL": "C",
+      "SHELLCHECK_OPTS": null
+    },
+    "start": "2026-10-29T17:42:00.420742+00:00",
+    "end": "2026-10-29T17:42:00.609598+00:00",
+    "exit": 0,
+    "stdin_sha256": null,
+    "stdout_sha256": "536794a4abe978d9531a25c23523353f22fb6d22e6c094e796e037a67c3a4aa9",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "focused-28",
+    "argv": [
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-kit/scripts/sdd-analyze.sh",
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-fixture/proj/.specify/specs/001-test-feature"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "env_overrides": {
+      "GIT_OPTIONAL_LOCKS": "0",
+      "LC_ALL": "C",
+      "SHELLCHECK_OPTS": null
+    },
+    "start": "2026-10-29T17:42:00.610557+00:00",
+    "end": "2026-10-29T17:42:00.798530+00:00",
+    "exit": 0,
+    "stdin_sha256": null,
+    "stdout_sha256": "536794a4abe978d9531a25c23523353f22fb6d22e6c094e796e037a67c3a4aa9",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "focused-29",
+    "argv": [
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-kit/scripts/sdd-analyze.sh",
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-fixture/proj/.specify/specs/001-test-feature"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "env_overrides": {
+      "GIT_OPTIONAL_LOCKS": "0",
+      "LC_ALL": "C",
+      "SHELLCHECK_OPTS": null
+    },
+    "start": "2026-10-29T17:42:00.799592+00:00",
+    "end": "2026-10-29T17:42:00.988358+00:00",
+    "exit": 0,
+    "stdin_sha256": null,
+    "stdout_sha256": "536794a4abe978d9531a25c23523353f22fb6d22e6c094e796e037a67c3a4aa9",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "focused-30",
+    "argv": [
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-kit/scripts/sdd-analyze.sh",
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-fixture/proj/.specify/specs/001-test-feature"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "env_overrides": {
+      "GIT_OPTIONAL_LOCKS": "0",
+      "LC_ALL": "C",
+      "SHELLCHECK_OPTS": null
+    },
+    "start": "2026-10-29T17:42:00.989395+00:00",
+    "end": "2026-10-29T17:42:01.184786+00:00",
+    "exit": 0,
+    "stdin_sha256": null,
+    "stdout_sha256": "536794a4abe978d9531a25c23523353f22fb6d22e6c094e796e037a67c3a4aa9",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "focused-31",
+    "argv": [
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-kit/scripts/sdd-analyze.sh",
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-fixture/proj/.specify/specs/001-test-feature"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "env_overrides": {
+      "GIT_OPTIONAL_LOCKS": "0",
+      "LC_ALL": "C",
+      "SHELLCHECK_OPTS": null
+    },
+    "start": "2026-10-29T17:42:01.185859+00:00",
+    "end": "2026-10-29T17:42:01.374441+00:00",
+    "exit": 0,
+    "stdin_sha256": null,
+    "stdout_sha256": "536794a4abe978d9531a25c23523353f22fb6d22e6c094e796e037a67c3a4aa9",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "focused-32",
+    "argv": [
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-kit/scripts/sdd-analyze.sh",
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-fixture/proj/.specify/specs/001-test-feature"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "env_overrides": {
+      "GIT_OPTIONAL_LOCKS": "0",
+      "LC_ALL": "C",
+      "SHELLCHECK_OPTS": null
+    },
+    "start": "2026-10-29T17:42:01.375478+00:00",
+    "end": "2026-10-29T17:42:01.564942+00:00",
+    "exit": 0,
+    "stdin_sha256": null,
+    "stdout_sha256": "536794a4abe978d9531a25c23523353f22fb6d22e6c094e796e037a67c3a4aa9",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "focused-33",
+    "argv": [
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-kit/scripts/sdd-analyze.sh",
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-fixture/proj/.specify/specs/001-test-feature"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "env_overrides": {
+      "GIT_OPTIONAL_LOCKS": "0",
+      "LC_ALL": "C",
+      "SHELLCHECK_OPTS": null
+    },
+    "start": "2026-10-29T17:42:01.566351+00:00",
+    "end": "2026-10-29T17:42:01.754253+00:00",
+    "exit": 0,
+    "stdin_sha256": null,
+    "stdout_sha256": "8385096ed281bb8eacea81836519be15cccda75472d5e3a3a987e603b6087176",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "focused-34",
+    "argv": [
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-kit/scripts/sdd-analyze.sh",
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-fixture/proj/.specify/specs/001-test-feature"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "env_overrides": {
+      "GIT_OPTIONAL_LOCKS": "0",
+      "LC_ALL": "C",
+      "SHELLCHECK_OPTS": null
+    },
+    "start": "2026-10-29T17:42:01.755350+00:00",
+    "end": "2026-10-29T17:42:01.946259+00:00",
+    "exit": 0,
+    "stdin_sha256": null,
+    "stdout_sha256": "8385096ed281bb8eacea81836519be15cccda75472d5e3a3a987e603b6087176",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "focused-35",
+    "argv": [
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-kit/scripts/sdd-analyze.sh",
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-fixture/proj/.specify/specs/001-test-feature"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "env_overrides": {
+      "GIT_OPTIONAL_LOCKS": "0",
+      "LC_ALL": "C",
+      "SHELLCHECK_OPTS": null
+    },
+    "start": "2026-10-29T17:42:01.947348+00:00",
+    "end": "2026-10-29T17:42:02.139220+00:00",
+    "exit": 0,
+    "stdin_sha256": null,
+    "stdout_sha256": "8385096ed281bb8eacea81836519be15cccda75472d5e3a3a987e603b6087176",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "focused-36",
+    "argv": [
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-kit/scripts/sdd-analyze.sh",
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-fixture/proj/.specify/specs/001-test-feature"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "env_overrides": {
+      "GIT_OPTIONAL_LOCKS": "0",
+      "LC_ALL": "C",
+      "SHELLCHECK_OPTS": null
+    },
+    "start": "2026-10-29T17:42:02.140468+00:00",
+    "end": "2026-10-29T17:42:02.329219+00:00",
+    "exit": 0,
+    "stdin_sha256": null,
+    "stdout_sha256": "8385096ed281bb8eacea81836519be15cccda75472d5e3a3a987e603b6087176",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "focused-37",
+    "argv": [
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-kit/scripts/sdd-analyze.sh",
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-fixture/proj/.specify/specs/001-test-feature"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "env_overrides": {
+      "GIT_OPTIONAL_LOCKS": "0",
+      "LC_ALL": "C",
+      "SHELLCHECK_OPTS": null
+    },
+    "start": "2026-10-29T17:42:02.330295+00:00",
+    "end": "2026-10-29T17:42:02.517342+00:00",
+    "exit": 0,
+    "stdin_sha256": null,
+    "stdout_sha256": "8385096ed281bb8eacea81836519be15cccda75472d5e3a3a987e603b6087176",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "focused-38",
+    "argv": [
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-kit/scripts/sdd-analyze.sh",
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-fixture/proj/.specify/specs/001-test-feature"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "env_overrides": {
+      "GIT_OPTIONAL_LOCKS": "0",
+      "LC_ALL": "C",
+      "SHELLCHECK_OPTS": null
+    },
+    "start": "2026-10-29T17:42:02.518592+00:00",
+    "end": "2026-10-29T17:42:02.707086+00:00",
+    "exit": 0,
+    "stdin_sha256": null,
+    "stdout_sha256": "8385096ed281bb8eacea81836519be15cccda75472d5e3a3a987e603b6087176",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "focused-39",
+    "argv": [
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-kit/scripts/sdd-analyze.sh",
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-fixture/proj/.specify/specs/001-test-feature"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "env_overrides": {
+      "GIT_OPTIONAL_LOCKS": "0",
+      "LC_ALL": "C",
+      "SHELLCHECK_OPTS": null
+    },
+    "start": "2026-10-29T17:42:02.708169+00:00",
+    "end": "2026-10-29T17:42:02.896896+00:00",
+    "exit": 0,
+    "stdin_sha256": null,
+    "stdout_sha256": "8385096ed281bb8eacea81836519be15cccda75472d5e3a3a987e603b6087176",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "focused-40",
+    "argv": [
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-kit/scripts/sdd-analyze.sh",
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-fixture/proj/.specify/specs/001-test-feature"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "env_overrides": {
+      "GIT_OPTIONAL_LOCKS": "0",
+      "LC_ALL": "C",
+      "SHELLCHECK_OPTS": null
+    },
+    "start": "2026-10-29T17:42:02.898280+00:00",
+    "end": "2026-10-29T17:42:03.088655+00:00",
+    "exit": 0,
+    "stdin_sha256": null,
+    "stdout_sha256": "8385096ed281bb8eacea81836519be15cccda75472d5e3a3a987e603b6087176",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "focused-41",
+    "argv": [
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-kit/scripts/sdd-analyze.sh",
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-fixture/proj/.specify/specs/001-test-feature"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "env_overrides": {
+      "GIT_OPTIONAL_LOCKS": "0",
+      "LC_ALL": "C",
+      "SHELLCHECK_OPTS": null
+    },
+    "start": "2026-10-29T17:42:03.089983+00:00",
+    "end": "2026-10-29T17:42:03.279666+00:00",
+    "exit": 0,
+    "stdin_sha256": null,
+    "stdout_sha256": "8385096ed281bb8eacea81836519be15cccda75472d5e3a3a987e603b6087176",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "explicit-controls-setup",
+    "argv": [
+      "/bin/bash",
+      "-c",
+      ". \"$1\"; SANDBOX=\"$2\"; make_verification_spec_dir explicit-controls",
+      "_",
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-kit/tests/helpers.sh",
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-typed"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "env_overrides": {
+      "GIT_OPTIONAL_LOCKS": "0",
+      "LC_ALL": "C",
+      "SHELLCHECK_OPTS": null
+    },
+    "start": "2026-10-29T17:42:03.280485+00:00",
+    "end": "2026-10-29T17:42:03.319891+00:00",
+    "exit": 0,
+    "stdin_sha256": null,
+    "stdout_sha256": "c87d5bb65ea22e76662a1bc3a59b662dc3813cc43f6cdbb7f40ff941521d8572",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "explicit-controls",
+    "argv": [
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-kit/scripts/sdd-analyze.sh",
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/green-typed/explicit-controls/.specify/specs/003-verification-fixture"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "env_overrides": {
+      "GIT_OPTIONAL_LOCKS": "0",
+      "LC_ALL": "C",
+      "SHELLCHECK_OPTS": null
+    },
+    "start": "2026-10-29T17:42:25.890371+00:00",
+    "end": "2026-10-29T17:42:26.158448+00:00",
+    "exit": 0,
+    "stdout_sha256": "dd5198b09985e57e23d72b981a11628c6a6b3c4190ad7ae30b69cb2acc81ec60",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+]

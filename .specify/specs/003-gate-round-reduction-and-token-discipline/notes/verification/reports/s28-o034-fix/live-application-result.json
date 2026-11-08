@@ -1,0 +1,36 @@
+{
+  "appliedAt": "2026-10-26T08:04:12.103743+00:00",
+  "task": "T031a5o1",
+  "patchSha256": "8f2a11a321af170c78315b26d4cc2582e914c05247febd798b50c07d343d5b87",
+  "files": {
+    "scripts/sdd-analyze.sh": {
+      "beforeSha256": "cfef526b91e34e5d1b60f169a0ef9dda9d6b0ed1f1e1590ad0ec034f2e0e2c96",
+      "afterSha256": "6ab2130ba40e2f96a097c2ca132160535aa8d70d053bd525c2ce5fc7f465966b",
+      "mode": "0o755"
+    },
+    "tests/test-sdd-analyze.sh": {
+      "beforeSha256": "c2f0ef08c4d4774d10d3e9c817baa5ead211a94fce5fd634aa4b064753e42521",
+      "afterSha256": "0ee700041f225bc21e7ca43307d9493fa6ffed98abf145eec0c1f9f874a8f763",
+      "mode": "0o644"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md": {
+      "beforeSha256": "add4d6235dc7554841a041fb9bd04083630ca987278484ac88dd23406b7aecaa",
+      "afterSha256": "19877ace3d8e155b96295971b5217ed089f5dbf1462b5dbdf9b389a1fc73db4d",
+      "mode": "0o644"
+    }
+  },
+  "indexBefore": {
+    "sha256": "c492d7ea95abf8e8c335001f20c62ff50bc6f1e2179d7a07d30811181b3dd700",
+    "mtimeNs": 1792957592613445716,
+    "size": 2200525
+  },
+  "indexAfter": {
+    "sha256": "c492d7ea95abf8e8c335001f20c62ff50bc6f1e2179d7a07d30811181b3dd700",
+    "mtimeNs": 1792957592613445716,
+    "size": 2200525
+  },
+  "head": "2049f65960cc91e9e30bbd5ff1e11fc0fdf7cbd9",
+  "opponent24SealedBeforeApply": true,
+  "whitespaceExit": 0,
+  "liveCaptureAcceptanceNotYetDone": true
+}

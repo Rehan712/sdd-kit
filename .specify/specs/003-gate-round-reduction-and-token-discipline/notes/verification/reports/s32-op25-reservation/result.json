@@ -1,0 +1,63 @@
+{
+  "started": "2026-10-27T06:30:49.779933+00:00",
+  "source": "16ffcec3c2f0cffa21b8c35e7b90d768a27bdfdd37deba9147edd25489946494",
+  "floor": "FLOOR-qoRY6H",
+  "round": 25,
+  "gate": "opponent",
+  "steps": [
+    {
+      "name": "prereserve",
+      "argv": [
+        "bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/r23-worktree-state.sh",
+        "s32-op25-prereserve"
+      ],
+      "started": "2026-10-27T06:30:49.780992+00:00",
+      "ended": "2026-10-27T06:32:09.910332+00:00",
+      "seconds": 80.13,
+      "exit": 0
+    },
+    {
+      "name": "reserve",
+      "argv": [
+        "bash",
+        "scripts/spec-gate.sh",
+        "round",
+        ".specify/specs/003-gate-round-reduction-and-token-discipline",
+        "opponent",
+        "--floor",
+        "FLOOR-qoRY6H"
+      ],
+      "started": "2026-10-27T06:32:09.910790+00:00",
+      "ended": "2026-10-27T06:54:04.780223+00:00",
+      "seconds": 1314.879,
+      "exit": 0
+    },
+    {
+      "name": "reserved",
+      "argv": [
+        "bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/r23-worktree-state.sh",
+        "s32-op25-reserved"
+      ],
+      "started": "2026-10-27T06:54:04.780724+00:00",
+      "ended": "2026-10-27T06:55:26.116869+00:00",
+      "seconds": 81.337,
+      "exit": 0
+    }
+  ],
+  "exit": 0,
+  "reservationCreated": true,
+  "phase": "reserved-worktree-unchanged",
+  "metadata": {
+    "version": "1",
+    "gate": "opponent",
+    "round": "25",
+    "floor": "FLOOR-qoRY6H",
+    "source": "16ffcec3c2f0cffa21b8c35e7b90d768a27bdfdd37deba9147edd25489946494",
+    "reserved": "2026-10-27T06:54:04Z"
+  },
+  "ended": "2026-10-27T06:55:26.120453+00:00",
+  "entriesSha256": "f57ca7f0c9cd971d4e2be1ae2dd13010396b15b2ea04563d4dc5fcaeb6721334",
+  "entryCount": 6652
+}

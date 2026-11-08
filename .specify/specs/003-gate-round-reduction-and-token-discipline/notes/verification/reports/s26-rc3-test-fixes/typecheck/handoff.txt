@@ -1,0 +1,35 @@
+Patch-only handoff: AC-004 untyped typecheck regression fixtures
+
+Target: tests/test-sdd-analyze.sh::test_verification_bindings
+Patch: typecheck.patch (standard a/ and b/ paths; only tests/test-sdd-analyze.sh)
+Candidate: test-sdd-analyze.sh
+Source baseline SHA256: bc7c888386104b8cab077da8ab10b43b93b20d37cedf79568779dff9e0a51385
+Source baseline Git blob: f2eb1aea5a6f88ec167e31d2bdaf2eb5b16d53f6
+Other read-input SHA256 values: baseline-sha256.json
+
+The existing loop now passes npm run build, npm run typecheck, tsc --noEmit,
+and grep AC-001 README.md through the public analyzer. Each iteration retains
+run_rc 0 and asserts the untyped AC Verify warning, with its command in the
+failure label. Removing either distinct typecheck classifier alternative would
+leave that command without the asserted warning. Existing shell and explicit
+test/assertion/static/manual positive and negative controls remain unchanged.
+The shared substitution replaces the prior per-command branches; no new helper,
+fixture file, dependency, or runtime change is introduced.
+
+Completed checks (both exit 0):
+- /bin/bash -n <owned directory>/test-sdd-analyze.sh
+  Interpreter: GNU Bash 3.2.57(1)-release (arm64-apple-darwin25).
+- GIT_OPTIONAL_LOCKS=0 git apply --check <owned directory>/typecheck.patch
+  Executed in the actual worktree; no patch application or index refresh.
+- Baseline SHA256 values above still match after preparation/checks.
+
+Parent validation command after applying the patch, from
+/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline:
+  GIT_OPTIONAL_LOCKS=0 bash tests/test-sdd-analyze.sh
+The family has no named-function filter. The candidate is stored away from
+helpers.sh and is for patch review/syntax only, not direct suite execution.
+
+Not executed: new fixtures, analyzer suite, mutation tests, full suites, gates,
+floors or captures. No live source, task, STATUS, plan, config, index/ref, or
+gate data was edited, staged, committed or pushed. Behavioral validation and
+any changed-baseline reconciliation belong to the parent after RC3 closes.

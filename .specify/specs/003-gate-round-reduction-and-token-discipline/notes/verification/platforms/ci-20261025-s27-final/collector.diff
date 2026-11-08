@@ -1,0 +1,11 @@
+--- .specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261025-s27/collect.sh
++++ .specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261025-s27-final/collect.sh
+@@ -5,7 +5,7 @@
+ set -uo pipefail
+ {
+ run="$1" out="$2" repo=Rehan712/sdd-kit
+-want_tree=e98c79fe564564397f36ff0b9910137572ea10bb
++want_tree=d685ec420ba6ce338e72727638e1ccff0bbb3846
+ want_head="${3:?usage: collect.sh <run-id> <out-dir> <approved-snapshot-head>}"
+ mkdir -p "$out"
+ fail=0

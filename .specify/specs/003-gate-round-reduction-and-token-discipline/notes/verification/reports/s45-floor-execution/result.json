@@ -1,0 +1,186 @@
+{
+  "observedAt": "2026-10-29T10:37:18.797204+00:00",
+  "outcome": "FLOOR_EXECUTION_REQUIRES_ATTENTION",
+  "conditions": {
+    "actualFloorExitZero": true,
+    "actualWrapperExitZero": true,
+    "actualRunnerExitZero": true,
+    "strictBindingBefore": true,
+    "strictBindingAfter": true,
+    "sourceManifestsByteIdentical": true,
+    "newSealedFloorEqualsLatest": true,
+    "rawSummaryMatchesRecords": true,
+    "preservation": false,
+    "onlyValidCachedFlags": true,
+    "allNewCaptureExitsZero": true
+  },
+  "helperInvocations": 1,
+  "automaticRetries": 0,
+  "wrapperPid": 3762,
+  "actualFloorExit": 0,
+  "actualWrapperExit": 0,
+  "actualRunnerExit": 0,
+  "source": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+  "sourceBeforeSha256": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+  "sourceAfterSha256": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+  "sourceManifestsByteIdentical": true,
+  "newFloorId": "FLOOR-LxJkv3",
+  "floorLatestBefore": "FLOOR-qoRY6H",
+  "floorLatestAfter": "FLOOR-LxJkv3",
+  "floorTiming": {
+    "start": "2026-10-29T06:53:07Z",
+    "end": "2026-10-29T10:35:30Z",
+    "elapsedSeconds": 13343.0
+  },
+  "wrapperTiming": {
+    "start": "2026-10-29T06:52:24.572603+00:00",
+    "end": "2026-10-29T10:35:44.753137+00:00",
+    "elapsedSeconds": 13399.926596292,
+    "nativeTimeOutput": "real 13399.99\nuser 6742.92\nsys 5446.79\n"
+  },
+  "counts": {
+    "records": 101,
+    "executed": 5,
+    "reused": 96,
+    "uniqueCaptures": 22,
+    "newCaptures": 5,
+    "byKind": {
+      "task": 96,
+      "checker": 3,
+      "gate_check": 2
+    }
+  },
+  "newCaptures": [
+    "CAP-838-AGMe8j",
+    "CAP-839-i8knEa",
+    "CAP-840-VAwVZK",
+    "CAP-841-xkIIRp",
+    "CAP-842-ygeARx"
+  ],
+  "newCaptureInvocations": {
+    "CAP-838-AGMe8j": {
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline"
+      ],
+      "start": "2026-10-29T07:28:12Z",
+      "end": "2026-10-29T07:28:13Z",
+      "exit": "0"
+    },
+    "CAP-839-i8knEa": {
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-ac-coverage.sh",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline",
+        "--root",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline"
+      ],
+      "start": "2026-10-29T07:28:53Z",
+      "end": "2026-10-29T07:28:53Z",
+      "exit": "0"
+    },
+    "CAP-840-VAwVZK": {
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-evidence.sh",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline"
+      ],
+      "start": "2026-10-29T07:29:33Z",
+      "end": "2026-10-29T10:03:00Z",
+      "exit": "0"
+    },
+    "CAP-841-xkIIRp": {
+      "argv": [
+        "/bin/bash",
+        "-o",
+        "pipefail",
+        "-c",
+        "bash tests/run.sh"
+      ],
+      "start": "2026-10-29T10:03:42Z",
+      "end": "2026-10-29T10:33:49Z",
+      "exit": "0"
+    },
+    "CAP-842-ygeARx": {
+      "argv": [
+        "/bin/bash",
+        "-o",
+        "pipefail",
+        "-c",
+        "bash tests/shellcheck.sh"
+      ],
+      "start": "2026-10-29T10:34:31Z",
+      "end": "2026-10-29T10:35:04Z",
+      "exit": "0"
+    }
+  },
+  "strictBindingBefore": "PASS",
+  "strictBindingAfter": "PASS",
+  "head": "2049f65960cc91e9e30bbd5ff1e11fc0fdf7cbd9",
+  "index": {
+    "mode": "0o644",
+    "mtime_ns": 1792957592613445716,
+    "size": 2200525,
+    "kind": "file",
+    "sha256": "c492d7ea95abf8e8c335001f20c62ff50bc6f1e2179d7a07d30811181b3dd700"
+  },
+  "preservationPassed": false,
+  "preexistingEntriesChecked": 20616,
+  "historicalFailedArtifactsPreserved": true,
+  "generatedOutputsArchived": true,
+  "generatedOutputBytesAndModesEqualBaseline": false,
+  "generatedOutputOriginalTimestampsRestored": false,
+  "generatedOutputByteWritesByWorker": 0,
+  "actualLaunchPower": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=23068771)\t100%; charged; 0:00 remaining present: true\n",
+  "actualLaunchFreeBytes": 15571943424,
+  "powerAfter": "Now drawing from 'Battery Power'\n -InternalBattery-0 (id=23068771)\t65%; discharging; 3:19 remaining present: true\n",
+  "timedArgv": [
+    "/usr/bin/time",
+    "-p",
+    "-o",
+    "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s44-final-floorrun.time",
+    "/bin/bash",
+    "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s44-final-floor.sh",
+    "1"
+  ],
+  "nativeRunnerArgv": [
+    "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+    "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s44-floor-retry/runner.py"
+  ],
+  "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+  "GIT_OPTIONAL_LOCKS": "0",
+  "historicalPreflightFieldsNote": "Unchanged prepared runner retains historical preflightPassed/blocker fields; actual guards and native launch are recorded independently in s45 launch-preflight.json and phase startedAt/power/freeBytes/PID fields.",
+  "logs": {
+    "floor": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s44-final-floorrun.log",
+    "wrapper": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s44-final-floorrun.wrapper.log",
+    "samples": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s44-final-floorrun.samples.log"
+  },
+  "evidence": {
+    "actualFloorObservation": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s45-floor-execution/actual-floor-observation.json",
+    "preservation": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s45-floor-execution/preservation-after.json",
+    "generatedOutputs": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s45-floor-execution/verifier-generated-output-receipt.json",
+    "sourceAndSeal": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s45-floor-execution/seal-and-source-observation.json",
+    "actualLaunchPreflight": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s45-floor-execution/launch-preflight.json"
+  },
+  "formalRoundReserved": false,
+  "extraValidatorOrSuitesRun": false,
+  "cleanupPerformed": false,
+  "sourceChangesPerformed": false,
+  "indexWritesPerformed": false,
+  "protectedHeadIndexStatusTasksAndSourcePreserved": true,
+  "preservationExceptions": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s45-floor-execution/preservation-exceptions.json",
+  "preservationExceptionSummary": {
+    "unexpectedPreexistingChange": ".DS_Store bytes and mtime changed; attribution unknown; retained actual file",
+    "generatedVerificationJsonDifferingFields": {
+      "state_after.refs_sha256": {
+        "before": "7e5b5c2cf90ef6e8da94850f8c8960ff05517ae1568f717d67c0af72f2765924",
+        "after": "6464016d4181a924a884c63f283a4a793c3df76878a56d6e9811201e932b3a41"
+      }
+    },
+    "generatedVerificationJsonOriginalTimestampsRestored": false,
+    "inputsAfterNulOriginalTimestampsRestored": true,
+    "unexpectedAdditions": []
+  },
+  "protectionConclusion": "HEAD, index, STATUS, tasks, source and historical failed artifacts match their baseline. Full preservation is false because .DS_Store changed and the authorized generated verification JSON differs from its original archive. Both generated actual outputs and originals are preserved; only the byte/mode-identical inputs-after.nul timestamps were restored."
+}

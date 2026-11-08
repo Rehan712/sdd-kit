@@ -1,0 +1,9 @@
+set -uo pipefail
+. scripts/lib.sh
+. scripts/verification-lib.sh
+spec="$1"; cap="$2"; own="$3"
+vf_binding_snapshot "$spec" "$own/bindings.after.nul" || exit 3
+vf_snapshot "$(cd "$spec" && pwd -P)" "$PWD" "$PWD" "$own/inputs.after.nul" > "$own/source.after.txt" || exit 3
+vf_capture_check "$spec" "$cap" "$own/inputs.after.nul" integrity || exit 3
+vf_capture_check "$spec" "$cap" "$own/inputs.after.nul" current || exit 3
+vf_task_capture_matches "$own/bindings.after.nul" T031a5o1 "$spec/notes/captures/$cap" || exit 3

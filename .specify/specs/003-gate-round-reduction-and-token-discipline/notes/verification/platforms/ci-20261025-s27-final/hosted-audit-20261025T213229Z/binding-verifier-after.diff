@@ -1,0 +1,28 @@
+--- /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261025-s27-final/verify-prepublish.sh
++++ /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261025-s27-final/hosted-audit-20261025T213229Z/binding-verifier-after.sh
+@@ -7,7 +7,7 @@
+ . scripts/lib.sh
+ . scripts/verification-lib.sh
+ s=.specify/specs/003-gate-round-reduction-and-token-discipline
+-source_id="$(vf_snapshot "$s" "$PWD" "$PWD" "$out/inputs-after.nul")"
++source_id="$(vf_snapshot "$s" "$PWD" "$PWD" "$out/hosted-audit-20261025T213229Z/inputs-after.nul")"
+ [[ "$source_id" == c7a82b3ae3b900dcb02a4839decad74db1a13457c5bab9ff859625a5357f0be6 ]] || { echo "FAIL: frozen source identity differs" >&2; exit 1; }
+ python3 - "$out" <<'PY'
+ from pathlib import Path
+@@ -37,7 +37,7 @@
+              head_file_sha256=hashlib.sha256(head_file.read_bytes()).hexdigest(),
+              refs_sha256=hashlib.sha256(git('show-ref')).hexdigest())
+ assert all(after[k] == before[k] for k in before if k != 'refs_sha256'), 'HEAD/index changed'
+-assert (owned / 'inputs-after.nul').read_bytes() == (snapshot / 'inputs.nul').read_bytes()
++assert (owned / 'hosted-audit-20261025T213229Z/inputs-after.nul').read_bytes() == (snapshot / 'inputs.nul').read_bytes()
+ assert hashlib.sha256((snapshot / 'inputs.nul').read_bytes()).hexdigest() == summary['source']
+ assert git('ls-tree', '-r', '-z', summary['tree']) == (snapshot / 'tree.nul').read_bytes()
+ env = dict(os.environ, GIT_INDEX_FILE=str(snapshot / 'index'))
+@@ -94,6 +94,6 @@
+               tree_modes=dict(collections.Counter(e[0] for e in entries.values())),
+               state_after=after,
+               global_refs_changed_since_baseline=after['refs_sha256'] != before['refs_sha256'])
+-(owned / 'verification-final.json').write_text(json.dumps(result, indent=2) + '\n')
++(owned / 'hosted-audit-20261025T213229Z/verification-after.json').write_text(json.dumps(result, indent=2) + '\n')
+ print(json.dumps(result, indent=2))
+ PY

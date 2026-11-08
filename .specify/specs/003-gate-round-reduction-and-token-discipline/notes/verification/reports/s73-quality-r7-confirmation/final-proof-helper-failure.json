@@ -1,0 +1,14 @@
+{
+  "at": "2026-10-30T15:03:38.302507+00:00",
+  "actualExit": 1,
+  "error": "AssertionError in final parent receipt check",
+  "failedCheck": "not preservation[gitChanges]",
+  "actualGitChanges": {
+    "added": {},
+    "changed": {}
+  },
+  "cause": "Structured dictionary with empty added/changed maps is truthy; actual diffs were empty",
+  "sourceOrTaskWrites": false,
+  "proofFileWrittenBeforeFailure": false,
+  "originalToolTranscriptPreserved": true
+}

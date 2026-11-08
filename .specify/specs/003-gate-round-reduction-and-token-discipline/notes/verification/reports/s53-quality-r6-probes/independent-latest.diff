@@ -1,0 +1,96 @@
+--- before-OP26-repair/scripts/sdd-analyze.sh
++++ current/scripts/sdd-analyze.sh
+@@ -292,6 +292,9 @@
+     gsub(/(^|[[:space:]])[0-9]+([<>]&|<>|>>|>\||[<>])[[:space:]]*[^[:space:]<>&|;()"\\\047]+/, " ", low)
+     gsub(/([<>]&|&>|<>|>>|>\||[<>])[[:space:]]*[^[:space:]<>&|;()"\\\047]+/, " ", low)
+     sub(/^[[:space:]]+/, "", low)
++    # A known tool keeps its meaning under a test-looking executable path.
++    if (low ~ /^([^[:space:]<>&|;()]*\/)?(tsc|npm|pnpm|yarn|bun|go|make|cargo|test)([[:space:]<>&|;()]|$)/)
++      sub(/^[^[:space:]<>&|;()]*\//, "", low)
+     if (low ~ /^([^[:space:]<>&|;()]*\/)?(grep|rg|diff)([[:space:]<>&|;()]|$)/) return 1
+     if (low ~ /^(([^[:space:]<>&|;()]*\/)?(bash|sh|zsh)[[:space:]]+(-[euxv]+[[:space:]]+)*)?([^[:space:]<>&|;()]*\/)?tests?[\/.:_-][^[:space:]<>&|;()]*([[:space:]<>&|;()]|$)/ ||
+         low ~ /^([^[:space:]<>&|;()]*\/)?(node[[:space:]]+--test|cargo[[:space:]]+test|(python[23]?[[:space:]]+-m[[:space:]]+)?pytest|bats)([[:space:]<>&|;()]|$)/ ||
+--- before-OP26-repair/tests/test-sdd-analyze.sh
++++ current/tests/test-sdd-analyze.sh
+@@ -688,6 +688,34 @@
+     done
+   done
+ 
++  # O-034: executable directories cannot turn known weak tools into tests.
++  local weak_qualified_cases=() runner_qualified_cases=()
++  for prefix in '' ./tests/ tests/ test/ tools/tests/ ./tests/node_modules/.bin/ tools/; do
++    for fixture in 'tsc --noEmit tests/unit.ts' 'npm run build' 'npm run typecheck' \
++      'pnpm run build' 'yarn typecheck' 'bun build' 'go build' 'make build' \
++      'cargo build' 'test -e README.md' 'test -f README.md'; do
++      weak_qualified_cases+=("$prefix$fixture")
++    done
++    for fixture in 'npm test -- --grep typecheck' 'npm run test -- --grep typecheck' \
++      'pnpm test tests/build.js' 'yarn run test tests/typecheck.js' \
++      'bun test tests/typecheck.ts' 'go test ./build' 'make test TARGET=typecheck' \
++      'cargo test --test build'; do
++      runner_qualified_cases+=("$prefix$fixture")
++    done
++  done
++  for redirect in '<input.txt' '>out.txt' '>>out.txt' '>|out.txt' '<>input.txt' '<&0' '>&1' '&>out.txt'; do
++    for fixture in './tests/npmREDIRECT run typecheck' \
++      './tests/node_modules/.bin/tscREDIRECT --noEmit tests/unit.ts' \
++      'test/testREDIRECT -f README.md' 'tools/tests/cargoREDIRECT build'; do
++      weak_qualified_cases+=("${fixture%%REDIRECT*}$redirect${fixture#*REDIRECT}")
++    done
++    for fixture in './tests/npmREDIRECT run test -- --grep typecheck' \
++      './tests/cargoREDIRECT test --test build' './tests/bunREDIRECT test tests/typecheck.ts' \
++      './tests/goREDIRECT test ./build'; do
++      runner_qualified_cases+=("${fixture%%REDIRECT*}$redirect${fixture#*REDIRECT}")
++    done
++  done
++
+   # AC-004/O-034: arguments and redirection targets do not become runners.
+   for fixture in \
+     'npm run build' 'npm run typecheck' 'tsc --noEmit' 'grep AC-001 README.md' \
+@@ -746,7 +774,7 @@
+     'tsc 2>output.txt --noEmit' 'npm2>output.txt test typecheck.txt' \
+     'npm&>tests/typecheck.log run build' 'tsc>&tests/check.log --noEmit' \
+     'npm 2&>out.txt test typecheck.txt' \
+-    "${weak_redirect_cases[@]}"; do
++    "${weak_redirect_cases[@]}" "${weak_qualified_cases[@]}"; do
+     spec_dir="$(make_spec_dir)"
+     value="${fixture//&/\\&}"; value="${value//|/\\|}"
+     verification_edit_fixture "$spec_dir/tasks.md" "s|\`node --test test/thing.test.js\`|\`$value\`|"
+@@ -789,7 +817,7 @@
+     'bats&>out.txt tests/build.bats' 'pnpm>|out.txt test --filter typecheck' \
+     'yarn run>|out.txt test --grep typecheck' 'bun>|out.txt test tests/build.ts' \
+     'go test>|out.txt ./typecheck' 'make>|out.txt test TARGET=typecheck' \
+-    "${runner_redirect_cases[@]}"; do
++    "${runner_redirect_cases[@]}" "${runner_qualified_cases[@]}"; do
+     spec_dir="$(make_spec_dir)"
+     value="${fixture//&/\\&}"; value="${value//|/\\|}"
+     verification_edit_fixture "$spec_dir/tasks.md" "s|\`node --test test/thing.test.js\`|\`$value\`|"
+--- before-OP26-repair/.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md
++++ current/.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md
+@@ -2,7 +2,7 @@
+ tasks_for: 003-gate-round-reduction-and-token-discipline
+ status: in-progress  # draft | in-progress | complete
+ created: 2026-09-05
+-updated: 2026-10-28
++updated: 2026-10-29
+ ---
+ 
+ # Tasks: Gate round reduction and token discipline
+@@ -1084,14 +1084,14 @@
+ 
+ - [x] **T031a5o1** — Classify untyped AC verification by executable and runner position
+   - *Files:* `scripts/sdd-analyze.sh`, `tests/test-sdd-analyze.sh`
+-  - *Acceptance:* AC-004 public fixtures require exit 0 and the existing untyped AC Verify warning for bare and directory-qualified grep/rg/diff, tsc --noEmit, npm typecheck/build and builtin file-existence checks across simple unquoted Bash 3.2 redirects (`<`, `>`, `>>`, `>|`, `<>`, `<&`, `>&`, `&>`), attached/spaced operator and target boundaries, and operators interleaved with arguments. Neutral filenames and test/runner-looking targets or operands must not hide weak commands. Genuine shell/script/node/cargo/pytest/bats/package runners and custom assertions stay clean; all prior 108 weak/56 clean cases and four explicit test/assertion/static/manual controls remain valid.
++  - *Acceptance:* AC-004 public fixtures require exit 0 and the existing untyped AC Verify warning for bare and directory-qualified grep/rg/diff, tsc --noEmit, package/build tools (npm/pnpm/yarn/bun/go/make/cargo), and builtin file-existence checks, including test/, tests/, nested tools/tests/ and tests/node_modules/.bin/ executable paths across simple unquoted Bash 3.2 redirects (`<`, `>`, `>>`, `>|`, `<>`, `<&`, `>&`, `&>`), attached/spaced operator and target boundaries, and operators interleaved with arguments. Neutral filenames and test/runner-looking targets or operands must not hide weak commands. Genuine shell/script/node/cargo/pytest/bats/package runners and custom assertions stay clean; all prior 287 weak/162 clean cases and four explicit test/assertion/static/manual controls remain valid.
+   - *Verify kind:* test
+   - *Tests:* `tests/test-sdd-analyze.sh::test_verification_bindings`
+   - *Verify:* `bash tests/test-sdd-analyze.sh` → all suites `passed`, exit 0
+   - *Reuse:* local
+   - *Refs:* REQ-005, AC-004, FM-001, INV-005, plan §3.1, §7
+-  - *Notes:* O-034 remains open after formal opponent round 25 (Prior O-034, verification-command-classification, wrong-result, implementation-error; Blocks AC-004/REQ-005). Correct the shared normalization and weak/runner operator-word boundaries at scripts/sdd-analyze.sh:292, :293, :295, :313 and tests/test-sdd-analyze.sh:668; retain original round-24 and quality r1/r2/r3 cases. Same T031a5o1 reopened with current Evidence cleared only in the external candidate. Prior accepted CAP-793-x82v97/return sha256:32df8af79290cfcfee6fc84915c4fc9d0726aecab2404736bc0b195da6215083 and exact prior task bytes are historical, preserved under notes/verification/reports/s33-o034-redirection-boundary/before/. Candidate proof and limits are in that directory. O-032 remains open and unchanged. Parent owns post-seal live application, fresh no-tick capture/acceptance and independent MAX quality r4; this candidate performs no gate/floor/CI execution or subsequent-round authorization.
+-  - *Evidence:* CAP-818-fLEvh7 verified by spec-gate accept; return sha256:a7a4d97ce6c2d6131c8dabef0c4b45502efd9be189abd283a1c35d963fe21d2f
++  - *Notes:* O-034 remains open after sealed and tallied formal opponent round 26 (Prior O-034, verification-command-classification, wrong-result, implementation-error; Blocks AC-004/REQ-005). Normalize known tool basenames before the generic test-path exemption, covering qualified typecheck/build/file-existence tools and the eight supported redirect siblings while retaining actual runner and operand controls. The same T031a5o1 is reopened for fresh no-tick verification and acceptance; its prior CAP-818-fLEvh7 evidence and exact task/source bytes are archived under notes/verification/reports/s49-o034-qualified-tools-fix/before/. OP26 and prior reports remain sealed historical evidence. O-032 and recorded minor follow-ups remain open and unchanged. No OP27, RC5 or merge authorization is granted by this repair.
++  - *Evidence:* CAP-843-YAhBBt verified by spec-gate accept; return sha256:fadc7d9f0b3d5464c74b84231c14ded708a7bcc21f932652a75ec21ebb6fb162
+ 
+ - [x] **T031a6** — Invalidate saved success and carried PASS on real input revisions
+   - *Files:* `tests/test-gate-contracts.sh`, `.specify/specs/003-gate-round-reduction-and-token-discipline/plan.md`

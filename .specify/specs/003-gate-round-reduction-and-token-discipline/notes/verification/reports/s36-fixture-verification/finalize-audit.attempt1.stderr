@@ -1,0 +1,6 @@
+Transcribed tool-output excerpt from the first audit checker (not a separately captured process stderr file):
+
+Traceback (most recent call last):
+  File "finalize-audit.py", line 85, in <module>
+    assert status_filter(status)==status_filter((o/'git-status.before.nul').read_bytes()),'preexisting Git status changed'
+AssertionError: preexisting Git status changed

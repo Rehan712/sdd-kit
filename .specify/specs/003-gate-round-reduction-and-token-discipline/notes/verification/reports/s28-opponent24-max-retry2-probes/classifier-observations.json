@@ -1,0 +1,168 @@
+{
+  "scratchRoot": "/private/tmp/opp24-retry2-dp2syp7l",
+  "observations": [
+    {
+      "command": "npm run typecheck",
+      "analyzerExit": 0,
+      "actualWarning": true,
+      "requiredWarning": true,
+      "taskFile": "classifier-edge/000.tasks.md",
+      "taskFileSha256": "a63c95dfcf7dca779346d62b1336eab0606eed24a506fa02020a6aa7d6c5e4ee",
+      "outputFile": "classifier-edge/000.log"
+    },
+    {
+      "command": "npm run typecheck -- --project tests/tsconfig.json",
+      "analyzerExit": 0,
+      "actualWarning": false,
+      "requiredWarning": true,
+      "taskFile": "classifier-edge/001.tasks.md",
+      "taskFileSha256": "29bf7c4d3c0837d8ee8876db1c05e468e5455c912d94674ae0b269d5153ba83d",
+      "outputFile": "classifier-edge/001.log"
+    },
+    {
+      "command": "tsc --noEmit",
+      "analyzerExit": 0,
+      "actualWarning": true,
+      "requiredWarning": true,
+      "taskFile": "classifier-edge/002.tasks.md",
+      "taskFileSha256": "1591c93f4942aaf5f11cb7980404d1f699554444d4da0a5be147ab428c74f26f",
+      "outputFile": "classifier-edge/002.log"
+    },
+    {
+      "command": "tsc --noEmit tests/unit.ts",
+      "analyzerExit": 0,
+      "actualWarning": false,
+      "requiredWarning": true,
+      "taskFile": "classifier-edge/003.tasks.md",
+      "taskFileSha256": "29d7d60e25541a427c12248b1854fcb5a193959e3f35b6da0771574c40bf6a9d",
+      "outputFile": "classifier-edge/003.log"
+    },
+    {
+      "command": "grep AC-001 README.md",
+      "analyzerExit": 0,
+      "actualWarning": true,
+      "requiredWarning": true,
+      "taskFile": "classifier-edge/004.tasks.md",
+      "taskFileSha256": "c50613554f757e0e4cc7c40d25a2d639375de20659e2e4ec60c1303e13c3c032",
+      "outputFile": "classifier-edge/004.log"
+    },
+    {
+      "command": "grep AC-001 tests/check.sh",
+      "analyzerExit": 0,
+      "actualWarning": false,
+      "requiredWarning": true,
+      "taskFile": "classifier-edge/005.tasks.md",
+      "taskFileSha256": "cc692574f25b657be0e0a484220c64b8d15955ef8de35feae1ec841770cdb7f3",
+      "outputFile": "classifier-edge/005.log"
+    },
+    {
+      "command": "npm run build -- --outDir tests/build",
+      "analyzerExit": 0,
+      "actualWarning": false,
+      "requiredWarning": true,
+      "taskFile": "classifier-edge/006.tasks.md",
+      "taskFileSha256": "32cb31929951b1550723ca38aa32f5d02ed752e8c614e73234d21c9872e6c1a2",
+      "outputFile": "classifier-edge/006.log"
+    },
+    {
+      "command": "bash tests/check.sh",
+      "analyzerExit": 0,
+      "actualWarning": false,
+      "requiredWarning": false,
+      "taskFile": "classifier-edge/007.tasks.md",
+      "taskFileSha256": "d44c1b206148c7bd42da1e70c97ccebe68cf1ab804b9f8f27606ac03b1ea437b",
+      "outputFile": "classifier-edge/007.log"
+    },
+    {
+      "command": "test -e README.md",
+      "analyzerExit": 0,
+      "actualWarning": false,
+      "requiredWarning": true,
+      "taskFile": "classifier-siblings/000.tasks.md",
+      "taskFileSha256": "804fdc73aa7ff37f4ba1a089f9496eabea28a32baf23d36e5cbf182e9b64f708",
+      "outputFile": "classifier-siblings/000.log"
+    },
+    {
+      "command": "test -f README.md",
+      "analyzerExit": 0,
+      "actualWarning": false,
+      "requiredWarning": true,
+      "taskFile": "classifier-siblings/001.tasks.md",
+      "taskFileSha256": "7fbcac452494627d235ea505631a268c2b34c116232251b56226ef918d1590da",
+      "outputFile": "classifier-siblings/001.log"
+    },
+    {
+      "command": "grep pytest README.md",
+      "analyzerExit": 0,
+      "actualWarning": false,
+      "requiredWarning": true,
+      "taskFile": "classifier-siblings/002.tasks.md",
+      "taskFileSha256": "8e2781e37300994e38449e571a8bb8b1da6c82ddd5ccd8637954850b0037ec8d",
+      "outputFile": "classifier-siblings/002.log"
+    },
+    {
+      "command": "rg bats README.md",
+      "analyzerExit": 0,
+      "actualWarning": false,
+      "requiredWarning": true,
+      "taskFile": "classifier-siblings/003.tasks.md",
+      "taskFileSha256": "ac08988d226cb8b3cb9277ea9e713a385a632a387a5305c164f49ccd5d741236",
+      "outputFile": "classifier-siblings/003.log"
+    },
+    {
+      "command": "diff fixtures/test.txt actual.txt",
+      "analyzerExit": 0,
+      "actualWarning": false,
+      "requiredWarning": true,
+      "taskFile": "classifier-siblings/004.tasks.md",
+      "taskFileSha256": "d67c8044871738c0bd6b6a3eb2298c0c3bc041318ff280d20decfd095262463f",
+      "outputFile": "classifier-siblings/004.log"
+    },
+    {
+      "command": "node --test test/thing.test.js",
+      "analyzerExit": 0,
+      "actualWarning": false,
+      "requiredWarning": false,
+      "taskFile": "classifier-siblings/005.tasks.md",
+      "taskFileSha256": "1c19337b9b0ead42a7ec8c89649e552a742847695bd1fbfccd392a28a81f57b6",
+      "outputFile": "classifier-siblings/005.log"
+    },
+    {
+      "command": "cargo test",
+      "analyzerExit": 0,
+      "actualWarning": false,
+      "requiredWarning": false,
+      "taskFile": "classifier-siblings/006.tasks.md",
+      "taskFileSha256": "54cba0614d8e345cba163bcc1aa6524a41f2ffa169070ccf3e904db9f516cb59",
+      "outputFile": "classifier-siblings/006.log"
+    },
+    {
+      "command": "pytest",
+      "analyzerExit": 0,
+      "actualWarning": false,
+      "requiredWarning": false,
+      "taskFile": "classifier-siblings/007.tasks.md",
+      "taskFileSha256": "bb0aec55b854cf0f1fa2dda2f239e14196079f65cf44551da02f0cac8ba655dd",
+      "outputFile": "classifier-siblings/007.log"
+    },
+    {
+      "command": "bats test.bats",
+      "analyzerExit": 0,
+      "actualWarning": false,
+      "requiredWarning": false,
+      "taskFile": "classifier-siblings/008.tasks.md",
+      "taskFileSha256": "b8d6bb9125311f28b05e3a98afd716be89d7c61a093e6cf955d2aeb5ec116527",
+      "outputFile": "classifier-siblings/008.log"
+    },
+    {
+      "command": "bash tests/check.sh",
+      "analyzerExit": 0,
+      "actualWarning": false,
+      "requiredWarning": false,
+      "taskFile": "classifier-siblings/009.tasks.md",
+      "taskFileSha256": "d44c1b206148c7bd42da1e70c97ccebe68cf1ab804b9f8f27606ac03b1ea437b",
+      "outputFile": "classifier-siblings/009.log"
+    }
+  ],
+  "missingWarnings": 9
+}

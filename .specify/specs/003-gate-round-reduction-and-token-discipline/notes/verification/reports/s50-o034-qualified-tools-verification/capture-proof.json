@@ -1,0 +1,202 @@
+{
+  "at": "2026-10-29T17:47:24.998229+00:00",
+  "capture": "CAP-843-YAhBBt",
+  "metadata": {
+    "version": "1",
+    "id": "CAP-843-YAhBBt",
+    "sequence": "843",
+    "kind": "command",
+    "start": "2026-10-29T17:43:38Z",
+    "end": "2026-10-29T17:46:38Z",
+    "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "check": "4b7f6c9b5f0df725e563898e3969549378a848152b48c9b6985cfb1517a462c1",
+    "shell": "/bin/bash",
+    "input_before": "3e70d8170d98f13c04f550c15942f70bdb487abf30ad629ff78db2048f077497",
+    "input_after": "3e70d8170d98f13c04f550c15942f70bdb487abf30ad629ff78db2048f077497",
+    "no_tick": "1",
+    "exit": "0",
+    "output_digest": "f9166fdc124954abb48f7c8ed789d96a1ce68c06a9da6df0d9d49a79a07aca5a",
+    "output_bytes": "862",
+    "policy": "local",
+    "key": "  -- 19/19 passed"
+  },
+  "actual_argv": [
+    "/bin/bash",
+    "-o",
+    "pipefail",
+    "-c",
+    "bash tests/test-sdd-analyze.sh"
+  ],
+  "summary": "capture=CAP-843-YAhBBt command=/bin/bash -o pipefail -c bash tests/test-sdd-analyze.sh  key=  -- 19/19 passed exit=0 output=f9166fdc124954abb48f7c8ed789d96a1ce68c06a9da6df0d9d49a79a07aca5a input=3e70d8170d98f13c04f550c15942f70bdb487abf30ad629ff78db2048f077497 log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-843-YAhBBt/output.log [complete metadata: capture directory]",
+  "raw_log": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-843-YAhBBt/output.log",
+  "suite_counts": [
+    [
+      "19",
+      "19"
+    ]
+  ],
+  "passing_suite_lines": [
+    "test_clean_fixture_is_consistent",
+    "test_dangling_ref_fails",
+    "test_duplicate_task_id_fails",
+    "test_external_marker_must_be_mirrored_in_status",
+    "test_gate_agent_placeholder_fails",
+    "test_leftover_spec_directories_do_not_decide_the_shipped_loop",
+    "test_missing_artifact_is_an_error",
+    "test_missing_gate_agent_file_fails",
+    "test_missing_verify_line_warns",
+    "test_needs_clarification_blocks",
+    "test_stray_repo_tags_without_umbrella_warn",
+    "test_task_without_acceptance_fails",
+    "test_ticked_box_without_evidence_warns",
+    "test_umbrella_declared_repo_with_no_tasks_warns",
+    "test_umbrella_tagged_tasks_pass",
+    "test_umbrella_undeclared_repo_tag_fails",
+    "test_umbrella_untagged_tasks_fail",
+    "test_uncovered_ac_fails_and_gate_refs_do_not_count",
+    "test_verification_bindings"
+  ],
+  "failing_suite_lines": [],
+  "bindings": [
+    [
+      "FM-001",
+      "tests/test-sdd-analyze.sh::test_verification_bindings"
+    ],
+    [
+      "INV-005",
+      "tests/test-sdd-analyze.sh::test_verification_bindings"
+    ]
+  ],
+  "task_catalog_rows": [
+    [
+      "task",
+      "T031a5o1",
+      "T031a5o1",
+      "Tests",
+      "",
+      "test",
+      "",
+      "`tests/test-sdd-analyze.sh::test_verification_bindings`",
+      "REQ-005, AC-004, FM-001, INV-005, plan \u00a73.1, \u00a77",
+      "`bash tests/test-sdd-analyze.sh` \u2192 all suites `passed`, exit 0",
+      "local",
+      ""
+    ]
+  ],
+  "source_rows": [
+    [
+      "path",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/STATUS.md",
+      "file",
+      "100644",
+      "dab997ab615ecd1e83450d40e7d5789bfbce65d9d74e49a8936be12c166114cd",
+      ""
+    ],
+    [
+      "path",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md",
+      "file",
+      "100644",
+      "acb59e13dc337837ac4a84eb04787f47887bf73d449bb70305f4ecdaf1132d5a",
+      ""
+    ],
+    [
+      "path",
+      "scripts/sdd-analyze.sh",
+      "file",
+      "100755",
+      "f2809d24b5bec01fa4ca8ab4d689c5e9585472989e66798aabc9597d80f176fd",
+      ""
+    ],
+    [
+      "path",
+      "tests/test-sdd-analyze.sh",
+      "file",
+      "100644",
+      "9dd851fd6ed32797384ada5c4d263dcdbb6947ce95cdeae4d5ea0ac1bb60a393",
+      ""
+    ]
+  ],
+  "seal_sha256": "443cd742b993996b7dff8ad5839ddd40b6bcffdb356db0eb24aac0d7838b3632",
+  "ledger_path": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/captures/CAP-843-YAhBBt",
+  "ledger_sha256": "443cd742b993996b7dff8ad5839ddd40b6bcffdb356db0eb24aac0d7838b3632",
+  "sealed_members": [
+    {
+      "file": "meta.nul",
+      "seal_sha256": "f1d0ef7f09ba34777190dfb59e05ec3360c085b5295c270aa069dfa3bf80c099",
+      "actual_sha256": "f1d0ef7f09ba34777190dfb59e05ec3360c085b5295c270aa069dfa3bf80c099",
+      "bytes": 691,
+      "matches": true
+    },
+    {
+      "file": "argv.nul",
+      "seal_sha256": "a193b9b8454686d43618a97cd684b331c6e36a0e968611582be2ce0aee872844",
+      "actual_sha256": "a193b9b8454686d43618a97cd684b331c6e36a0e968611582be2ce0aee872844",
+      "bytes": 56,
+      "matches": true
+    },
+    {
+      "file": "inputs.nul",
+      "seal_sha256": "3e70d8170d98f13c04f550c15942f70bdb487abf30ad629ff78db2048f077497",
+      "actual_sha256": "3e70d8170d98f13c04f550c15942f70bdb487abf30ad629ff78db2048f077497",
+      "bytes": 46619,
+      "matches": true
+    },
+    {
+      "file": "inputs-after.nul",
+      "seal_sha256": "3e70d8170d98f13c04f550c15942f70bdb487abf30ad629ff78db2048f077497",
+      "actual_sha256": "3e70d8170d98f13c04f550c15942f70bdb487abf30ad629ff78db2048f077497",
+      "bytes": 46619,
+      "matches": true
+    },
+    {
+      "file": "bindings.nul",
+      "seal_sha256": "8766df908be5d8f628c3880af34ae761dd1c9c4946e8da08da3e566c8c0c788a",
+      "actual_sha256": "8766df908be5d8f628c3880af34ae761dd1c9c4946e8da08da3e566c8c0c788a",
+      "bytes": 253653,
+      "matches": true
+    },
+    {
+      "file": "output.log",
+      "seal_sha256": "f9166fdc124954abb48f7c8ed789d96a1ce68c06a9da6df0d9d49a79a07aca5a",
+      "actual_sha256": "f9166fdc124954abb48f7c8ed789d96a1ce68c06a9da6df0d9d49a79a07aca5a",
+      "bytes": 862,
+      "matches": true
+    },
+    {
+      "file": "summary.txt",
+      "seal_sha256": "9ef877f5f08c86a3de249d4c101f728a5e521bfa9015eb3ec3ec7ec28c3ffbf4",
+      "actual_sha256": "9ef877f5f08c86a3de249d4c101f728a5e521bfa9015eb3ec3ec7ec28c3ffbf4",
+      "bytes": 498,
+      "matches": true
+    }
+  ],
+  "checks": {
+    "native_capture_exit_zero": true,
+    "capture_integrity_exit_zero": true,
+    "actual_id_matches": true,
+    "actual_command_argv": true,
+    "actual_capture_exit_zero": true,
+    "no_tick_one": true,
+    "before_after_input_bytes_identical": true,
+    "input_metadata_hashes_identical": true,
+    "pre_invocation_actual_vf_snapshot_identical": true,
+    "source_differs_from_historical_f156": true,
+    "output_digest_matches": true,
+    "output_byte_count_matches": true,
+    "seal_and_ledger_identical": true,
+    "all_seven_capture_members_verified": true,
+    "capture_bindings_match_current": true,
+    "actual_FM_INV_bindings_match": true,
+    "actual_task_kind_test": true,
+    "sole_capture_sequence_increment": true,
+    "actual_all_suite_counts_pass": true,
+    "required_suite_passes": true,
+    "canonical_summary_stdout_exact": true,
+    "single_canonical_summary_line": true,
+    "capture_cwd_matches": true,
+    "current_source_bound_scripts/sdd-analyze.sh": true,
+    "current_source_bound_tests/test-sdd-analyze.sh": true
+  }
+}

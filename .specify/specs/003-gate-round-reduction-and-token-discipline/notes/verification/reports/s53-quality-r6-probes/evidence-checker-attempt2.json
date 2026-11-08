@@ -1,0 +1,12 @@
+{
+  "script": "inspect-evidence-v2.py",
+  "exit": 1,
+  "failure": "AssertionError in acceptance stdout shape check",
+  "cause": "Review checker expected an ACC receipt ID in public stdout. Actual CLI prints accepted task and return digest; receipt identity is established by the sealed directory and COMMITTED.",
+  "actual_stdout": "accept accepted task=T031a5o1 return=fadc7d9f0b3d5464c74b84231c14ded708a7bcc21f932652a75ec21ebb6fb162\n",
+  "actual_exit": 0,
+  "actual_stderr_bytes": 0,
+  "product_failure": false,
+  "suite_capture_acceptance_retried": false,
+  "correction": "Assert the exact real public stdout and continue independent receipt seal checks; preserve prior stopped checkers and outputs."
+}

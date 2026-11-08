@@ -1,0 +1,30 @@
+{
+  "taskId": "node:delegated-task:command%3Amcp%3Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%3Adelegate-task%3Asdd003-t031a6-real-capture-r1",
+  "childThreadId": "thread:delegated-task:command%3Amcp%3Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%3Adelegate-task%3Asdd003-t031a6-real-capture-r1",
+  "childRunId": "run:thread:thread%3Adelegated-task%3Acommand%253Amcp%253Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%253Adelegate-task%253Asdd003-t031a6-real-capture-r1:ordinal:1",
+  "childNodeId": "node:delegated-task:command%3Amcp%3Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%3Adelegate-task%3Asdd003-t031a6-real-capture-r1",
+  "status": "completed",
+  "workState": "result_available",
+  "hasPendingChildRuns": false,
+  "latestTerminalRunId": "run:thread:thread%3Adelegated-task%3Acommand%253Amcp%253Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%253Adelegate-task%253Asdd003-t031a6-real-capture-r1:ordinal:1",
+  "latestTerminalStatus": "completed",
+  "latestTerminalSummary": null,
+  "latestTerminalResultContextTransferId": null,
+  "providerInstanceId": "codex_codex_gym",
+  "model": "gpt-6-luna",
+  "options": [
+    {
+      "id": "reasoningEffort",
+      "value": "medium"
+    },
+    {
+      "id": "serviceTier",
+      "value": "default"
+    }
+  ],
+  "summary": "T031a6 completed in one serial capture:\n\n- **Capture:** `CAP-768-sy4sk5`\n- **Exit:** 0; **passed:** 18/18\n- **Source input digest:** before `3a5df78c6c55ff2a8145ec92270ac8a13d781626d6b0a13bf32a02cffebe3b86`; after the same\n- **Output digest:** `e2bd5dfbf6ddcf901317732547649b3e2028c869384acc1e688d65a77c738b33`\n- **Summary:** `bash tests/test-gate-contracts.sh` — 18/18 passed, exit 0.\n- **Capture files:** [stdout](/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s26-rc3-test-fixes/invalidation/capture.stdout), [stderr](/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s26-rc3-test-fixes/invalidation/capture.stderr), [exit code](/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s26-rc3-test-fixes/invalidation/capture.rc), [timing](/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s26-rc3-test-fixes/invalidation/capture.time)\n- **Baseline receipt:** [t031a6-baseline.txt](/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s26-rc3-test-fixes/invalidation/t031a6-baseline.txt)\n- **State unchanged:** HEAD `2049f65960cc91e9e30bbd5ff1e11fc0fdf7cbd9`; `tasks.md` SHA-256 `6d611aee0bddb0a9b4b0665c1b65974dbed91674212ebe9d50998e7b4418e3da`; semantic index tree `6a73a5f3146ee65737eac74edc09f9032434eea7`. No failure signal appeared.\n\nSkipped other test suites, gates, and task acceptance/ticking as instructed.",
+  "resultContextTransferId": "context-transfer:type:subagent_result:source-thread:thread%3Adelegated-task%3Acommand%253Amcp%253Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%253Adelegate-task%253Asdd003-t031a6-real-capture-r1:target-thread:2ce93492-409f-4930-a9e5-173544a4c8c6:e27570d0-779d-4b3d-8cea-842702d64ea0",
+  "hasPendingQuestion": false,
+  "pendingApproval": null,
+  "waitTimedOut": false
+}

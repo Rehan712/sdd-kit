@@ -1,0 +1,33 @@
+{
+  "invocation": {
+    "taskId": "node:delegated-task:command%3Amcp%3Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%3Adelegate-task%3Asdd003-s27-t029-rejection-ledger-digest-r1",
+    "childThreadId": "thread:delegated-task:command%3Amcp%3Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%3Adelegate-task%3Asdd003-s27-t029-rejection-ledger-digest-r1",
+    "childRunId": "run:thread:thread%3Adelegated-task%3Acommand%253Amcp%253Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%253Adelegate-task%253Asdd003-s27-t029-rejection-ledger-digest-r1:ordinal:1",
+    "childNodeId": "node:delegated-task:command%3Amcp%3Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%3Adelegate-task%3Asdd003-s27-t029-rejection-ledger-digest-r1",
+    "status": "running",
+    "workState": "working",
+    "hasPendingChildRuns": false,
+    "latestTerminalRunId": null,
+    "latestTerminalStatus": null,
+    "latestTerminalSummary": null,
+    "latestTerminalResultContextTransferId": null,
+    "providerInstanceId": "codex_codex_gym",
+    "model": "gpt-6-luna",
+    "options": [
+      {
+        "id": "reasoningEffort",
+        "value": "medium"
+      },
+      {
+        "id": "serviceTier",
+        "value": "default"
+      }
+    ],
+    "summary": null,
+    "resultContextTransferId": null,
+    "hasPendingQuestion": false,
+    "pendingApproval": null,
+    "waitTimedOut": false
+  },
+  "prompt": "Mode log-digest, read-only scout. Work ONLY in /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline; explicit workdir on every command. You are not alone, preserve all files/source/evidence. Need exact current control refusal signal, no guesses or reruns.\nRoot's incomplete T029 control at .specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s27-t029-control/result.json rejected exit3 after12.712s with tasks before/after SHA d1f829c82436168de21ddbfce847cb8833034036021280c82784ee17485815ed unchanged. Wrapper falsely required literal binding-mismatch in stdout+stderr, marked exit1; intact acceptance has NOT run. Real highworker canonical return CAP-769-bZPhmg is genuine and byte-matched, sourceC7 c7a82b3ae3b900dcb02a4839decad74db1a13457c5bab9ff859625a5357f0be6. The deliberately incomplete file removed only FM001 row; its digest1f573c893caeb0a4e8e938606d01fd12e0927ca010893f025c6f72b82495112a, intactreturn dc47e2239dc84dc47a2b080f18660c8fcde667c190c937309646049d64e48b9c.\nRead actual reject.stdout/.stderr, find the actual newly archived rejection ledger/event using exact task/return digest/time, and report reason/status/before-after state with eventID/path. Existing probe at tests/probe-gate-contract.sh uses structured reason binding-mismatch; explain exact relationship to CLI diagnostic, so parent can truthfully count existing rejection without rerunning it if valid. Don't create a proof from wording alone. If reason differs, show exact cause.\nAlso inspect narrow existing accept path in verification-lib/spec-task only as needed: does accepting an intact fresh return for already[x] T029 rewrite raw tasks.md Evidence or only acceptance proof state? Current prepared CI snapshot sourceC7/treee98c, helper platforms/ci-20261025-s27/verify-prepublish.sh checks raw177file mapping including taskdoc. Could accepting T029 invalidate that raw mapping even if normalized sourceC7 remains unchanged? Give exact code/line behavior and least action needed (keep strict proof, no silent validator relaxation). Don't run acceptance/captures/tests/gates/snapshots or mutate any file. Return under25lines, actual logreason/event/caller signal and concrete UNKNOWNs."
+}

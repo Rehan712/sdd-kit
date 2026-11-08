@@ -1,0 +1,63 @@
+[
+  {
+    "argv": [
+      "/bin/bash",
+      "--norc",
+      "-n",
+      "scripts/sdd-analyze.sh"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "envOverrides": {
+      "GIT_OPTIONAL_LOCKS": "0"
+    },
+    "envUnset": [
+      "SHELLCHECK_OPTS"
+    ],
+    "started": "2026-10-30T14:24:26.407323+00:00",
+    "ended": "2026-10-30T14:24:26.411808+00:00",
+    "exit": 0,
+    "stdoutSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "argv": [
+      "/bin/bash",
+      "--norc",
+      "-n",
+      "tests/test-sdd-analyze.sh"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "envOverrides": {
+      "GIT_OPTIONAL_LOCKS": "0"
+    },
+    "envUnset": [
+      "SHELLCHECK_OPTS"
+    ],
+    "started": "2026-10-30T14:24:26.411830+00:00",
+    "ended": "2026-10-30T14:24:26.417213+00:00",
+    "exit": 0,
+    "stdoutSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "argv": [
+      "shellcheck",
+      "--norc",
+      "--severity=warning",
+      "scripts/sdd-analyze.sh",
+      "tests/test-sdd-analyze.sh"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "envOverrides": {
+      "GIT_OPTIONAL_LOCKS": "0"
+    },
+    "envUnset": [
+      "SHELLCHECK_OPTS"
+    ],
+    "started": "2026-10-30T14:24:26.417224+00:00",
+    "ended": "2026-10-30T14:24:27.126986+00:00",
+    "exit": 0,
+    "stdoutSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+]

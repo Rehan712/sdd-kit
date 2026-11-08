@@ -1,0 +1,56 @@
+{
+  "build-snapshot.sh_shellcheck": {
+    "argv": [
+      "shellcheck",
+      "--shell=bash",
+      "--severity=warning",
+      "--external-sources",
+      "--exclude=SC2034",
+      "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261026-s29/build-snapshot.sh"
+    ],
+    "exit": 0,
+    "scope": "warning/error; sources followed; only established sourced HUB_DIR SC2034 excluded for builder/verifier"
+  },
+  "verify-prepublish.sh_shellcheck": {
+    "argv": [
+      "shellcheck",
+      "--shell=bash",
+      "--severity=warning",
+      "--external-sources",
+      "--exclude=SC2034",
+      "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261026-s29/verify-prepublish.sh"
+    ],
+    "exit": 0,
+    "scope": "warning/error; sources followed; only established sourced HUB_DIR SC2034 excluded for builder/verifier"
+  },
+  "collect.sh_shellcheck": {
+    "argv": [
+      "shellcheck",
+      "--shell=bash",
+      "--severity=warning",
+      "--external-sources",
+      "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261026-s29/collect.sh"
+    ],
+    "exit": 0,
+    "scope": "warning/error; sources followed; only established sourced HUB_DIR SC2034 excluded for builder/verifier"
+  },
+  "s29-final-floor.sh_shellcheck": {
+    "argv": [
+      "shellcheck",
+      "--shell=bash",
+      "--severity=warning",
+      "--external-sources",
+      "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s29-final-floor.sh"
+    ],
+    "exit": 0,
+    "scope": "warning/error; sources followed; only established sourced HUB_DIR SC2034 excluded for builder/verifier"
+  },
+  "s29-final-floor.sh_bash32_syntax": {
+    "argv": [
+      "/bin/bash",
+      "-n",
+      "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s29-final-floor.sh"
+    ],
+    "exit": 0
+  }
+}

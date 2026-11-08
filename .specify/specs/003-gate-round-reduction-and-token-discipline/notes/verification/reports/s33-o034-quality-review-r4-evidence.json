@@ -1,0 +1,150 @@
+{
+  "captureFiles": {
+    "meta.nul": "4c91072ee2745e2294a4001636e4b8126fc915fbd43d0ad394e699519dfd2bba",
+    "argv.nul": "a193b9b8454686d43618a97cd684b331c6e36a0e968611582be2ce0aee872844",
+    "inputs.nul": "9dac9ec88c3f4c690fd665791e9111f80a14cb9831950659c9a34907f65c8fc6",
+    "inputs-after.nul": "9dac9ec88c3f4c690fd665791e9111f80a14cb9831950659c9a34907f65c8fc6",
+    "bindings.nul": "8766df908be5d8f628c3880af34ae761dd1c9c4946e8da08da3e566c8c0c788a",
+    "output.log": "f9166fdc124954abb48f7c8ed789d96a1ce68c06a9da6df0d9d49a79a07aca5a",
+    "summary.txt": "ed9deddd5137a57f77f522c8016e13e9953dee36d6d619ba23a0b83724c07fd3"
+  },
+  "captureMeta": {
+    "version": "1",
+    "id": "CAP-816-dd36Pv",
+    "sequence": "816",
+    "kind": "command",
+    "start": "2026-10-27T08:02:09Z",
+    "end": "2026-10-27T08:04:12Z",
+    "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "check": "4b7f6c9b5f0df725e563898e3969549378a848152b48c9b6985cfb1517a462c1",
+    "shell": "/bin/bash",
+    "input_before": "9dac9ec88c3f4c690fd665791e9111f80a14cb9831950659c9a34907f65c8fc6",
+    "input_after": "9dac9ec88c3f4c690fd665791e9111f80a14cb9831950659c9a34907f65c8fc6",
+    "no_tick": "1",
+    "exit": "0",
+    "output_digest": "f9166fdc124954abb48f7c8ed789d96a1ce68c06a9da6df0d9d49a79a07aca5a",
+    "output_bytes": "862",
+    "policy": "local",
+    "key": "  -- 19/19 passed"
+  },
+  "inputRecords": [
+    {
+      "fields": [
+        "path",
+        "scripts/sdd-analyze.sh",
+        "file",
+        "100755",
+        "c43de9e92df5657a3a94091a73bccb9abe37f9e1c3c3f6ccf6cb1cfa64f3a3f2",
+        ""
+      ],
+      "observedContentDigest": "c43de9e92df5657a3a94091a73bccb9abe37f9e1c3c3f6ccf6cb1cfa64f3a3f2"
+    },
+    {
+      "fields": [
+        "path",
+        "tests/test-sdd-analyze.sh",
+        "file",
+        "100644",
+        "2f9efc4e4b24da1ca1bcef710e82ef852f1e463adbae0263f54d585f333bcd4e",
+        ""
+      ],
+      "observedContentDigest": "2f9efc4e4b24da1ca1bcef710e82ef852f1e463adbae0263f54d585f333bcd4e"
+    },
+    {
+      "fields": [
+        "path",
+        ".specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md",
+        "file",
+        "100644",
+        "c1e0410c69979b7b8559866b0eb4dcb43ba534985477e07c11ce9acd39589a1e",
+        ""
+      ],
+      "observedContentDigest": "c1e0410c69979b7b8559866b0eb4dcb43ba534985477e07c11ce9acd39589a1e"
+    }
+  ],
+  "taskBindingRows": [
+    [
+      "task",
+      "T031a5o1",
+      "T031a5o1",
+      "Tests",
+      "",
+      "test",
+      "",
+      "`tests/test-sdd-analyze.sh::test_verification_bindings`",
+      "REQ-005, AC-004, FM-001, INV-005, plan \u00a73.1, \u00a77",
+      "`bash tests/test-sdd-analyze.sh` \u2192 all suites `passed`, exit 0",
+      "local",
+      ""
+    ],
+    [
+      "test",
+      "tests/test-sdd-analyze.sh::test_verification_bindings",
+      "T031a5o1",
+      "Tests",
+      "",
+      "test",
+      "authoring",
+      "tests/test-sdd-analyze.sh::test_verification_bindings",
+      "AC-001, AC-003, AC-004, AC-005, AC-006, AC-011, AC-023: phase modes, shared/excluded rows, malformed/dangling IDs, kinds, same-task tests, zero-warning golden, untouched 001/002 exit 0.",
+      "`bash tests/test-sdd-analyze.sh` \u2192 all suites `passed`, exit 0",
+      "",
+      ""
+    ],
+    [
+      "binding",
+      "FM-001",
+      "T031a5o1",
+      "Tests",
+      "",
+      "test",
+      "authoring",
+      "tests/test-sdd-analyze.sh::test_verification_bindings",
+      "AC-001, AC-003, AC-004, AC-005, AC-006, AC-011, AC-023: phase modes, shared/excluded rows, malformed/dangling IDs, kinds, same-task tests, zero-warning golden, untouched 001/002 exit 0.",
+      "`bash tests/test-sdd-analyze.sh` \u2192 all suites `passed`, exit 0",
+      "",
+      ""
+    ],
+    [
+      "binding",
+      "INV-005",
+      "T031a5o1",
+      "Tests",
+      "",
+      "test",
+      "authoring",
+      "tests/test-sdd-analyze.sh::test_verification_bindings",
+      "AC-001, AC-003, AC-004, AC-005, AC-006, AC-011, AC-023: phase modes, shared/excluded rows, malformed/dangling IDs, kinds, same-task tests, zero-warning golden, untouched 001/002 exit 0.",
+      "`bash tests/test-sdd-analyze.sh` \u2192 all suites `passed`, exit 0",
+      "",
+      ""
+    ]
+  ],
+  "acceptedFiles": {
+    "meta.nul": "9dcdda7b19e773a626cf7e1ca4a6606bdc0376f124d1e365fd75d6aa52faa9e9",
+    "return.txt": "0bb64b0aff1419ba1b6c028fcd6ca2c23f11e48b8d4a88c9357bd716464a9c8b",
+    "tasks.after": "0f79daf37ac3c2330f74c6a2bacf31607def0600528a8955fcfd721d6fb3131c",
+    "digests.nul": "2d846b4a8bf6734062d63c025136f53937dbde9639373a61032661f11f0207e9"
+  },
+  "acceptanceMeta": {
+    "version": "1",
+    "task": "T031a5o1",
+    "return_digest": "0bb64b0aff1419ba1b6c028fcd6ca2c23f11e48b8d4a88c9357bd716464a9c8b",
+    "binding_digest": "8766df908be5d8f628c3880af34ae761dd1c9c4946e8da08da3e566c8c0c788a",
+    "input": "9dac9ec88c3f4c690fd665791e9111f80a14cb9831950659c9a34907f65c8fc6",
+    "captures": "CAP-816-dd36Pv",
+    "manual": ""
+  },
+  "latestTaskEditScope": "same T031a5o1 block plus updated metadata; all other task bytes unchanged",
+  "op25": {
+    "hash": "862bb96f89392722f86f6063bf560b3de1bf12de431a38fe85227d4a7ae92868",
+    "sealed": true,
+    "byteMatchedHandback": true,
+    "sealedBeforeApplication": true,
+    "entryCount": 6652,
+    "verdict": "CHALLENGED"
+  },
+  "candidatePatchHash": "4c7f0405700fd457976bddb909cf3b0e40d4d9c0a95b804c443564d2576258da",
+  "finalCandidateRuntimeAndTestsMatchLive": true
+}

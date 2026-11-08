@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "bash",
+    "-c",
+    "set -uo pipefail\n. scripts/verification-lib.sh\nvf_bookkeeping_path \".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s29-approval/model-selection.json\" \".specify/specs/003-gate-round-reduction-and-token-discipline\"\n"
+  ],
+  "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+  "env": {
+    "GIT_OPTIONAL_LOCKS": "0"
+  },
+  "exit": 0,
+  "stdout": "",
+  "stderr": "",
+  "meaning": "Excluded verification bookkeeping by actual vf_bookkeeping_path, not an assertion of Git-ignore status"
+}

@@ -1,0 +1,86 @@
+{
+  "result": "PREPARED_AND_LOCALLY_VALIDATED",
+  "completedAt": "2026-10-28T12:00:49.193106+00:00",
+  "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+  "source": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+  "tree": "c68b9a3ab0c39c555d5cb28afa6420cd9a2600b7",
+  "commit": "25347ba729886ae0bea029c594ac00f0bc48e767",
+  "parent": "2049f65960cc91e9e30bbd5ff1e11fc0fdf7cbd9",
+  "snapshotBuildCount": 1,
+  "treeEntries": 20224,
+  "mapping": {
+    "path": 177,
+    "index": 177,
+    "harness": 8,
+    "document": 4,
+    "tool": 4,
+    "bookkeepingExtras": 20047,
+    "raw": "PASS",
+    "semantic": "PASS",
+    "beforeAfter": "BYTE_IDENTICAL"
+  },
+  "tasksAfterAcceptSha256": "3d0b827856d89b6b1ae08b096dd5277920375f26f5fc1c97cc3e45f1f569b3d7",
+  "acceptedT029": "ACC-5OLy1X",
+  "capture": "CAP-819-05nYhW",
+  "protectedState": "UNCHANGED_BYTES_MODES_MTIMES",
+  "preexistingFilesChecked": 20212,
+  "donors": "UNCHANGED_BYTES_MODES_MTIMES",
+  "checks": {
+    "bash32Syntax": "PASS",
+    "scopedShellcheck": "PASS",
+    "exactSubstitutions": "PASS",
+    "offlineGuardControls": 10,
+    "strictPrepublish": "PASS",
+    "finalizedControlTree": "PASS",
+    "wholePreexistingPreservation": "PASS"
+  },
+  "paths": {
+    "platform": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s38",
+    "preparation": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s38-evidence-preparation",
+    "summary": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s38/summary.json",
+    "prepublish": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s38/verify-prepublish.sh",
+    "floor": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s38-final-floor.sh",
+    "floorArgv": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s38/parent-floor-launch.argv.json",
+    "hostedArgv": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s38/parent-hosted-collection.argv.json",
+    "publication": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s38/publication.json",
+    "scratch": "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/spec003-s38-ci-_wgaynq2",
+    "snapshot": "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/spec003-s38-ci-_wgaynq2/snapshot",
+    "handoff": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s38-evidence-preparation/handoff.md"
+  },
+  "parentHelperArgv": [
+    "/bin/bash",
+    "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s38-final-floor.sh",
+    "1"
+  ],
+  "parentTimedArgv": [
+    "/usr/bin/time",
+    "-p",
+    "-o",
+    "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s38-final-floorrun.time",
+    "/bin/bash",
+    "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s38-final-floor.sh",
+    "1"
+  ],
+  "publishExecuted": false,
+  "networkQueriesExecuted": false,
+  "credentialsAccessed": false,
+  "floorStartedOrQueued": false,
+  "gatesReservedCompletedOrTallied": false,
+  "suitesOrCapturesExecuted": false,
+  "formalReadiness": "NOT_ASSESSED",
+  "unknowns": [
+    "Current remote/PR head must be re-queried immediately before exact-lease publication",
+    "New hosted run/attempt and four-job proof do not exist in this preparation",
+    "Actual AC and >=8GiB free disk must be rechecked before parent launch",
+    "Fresh floor and OP26/conditional RC4 remain parent-owned future work",
+    "Snapshot commit is dangling by authorization; preserve scratch and object until publication"
+  ],
+  "identity": {
+    "requestedProvider": "codex_codex_gym",
+    "requestedModel": "gpt-6.1-sol",
+    "requestedReasoningEffort": "high",
+    "requestedServiceTier": "default",
+    "observedModelEffort": "gpt-6.1-sol/high from developer runtime statement",
+    "providerTierProvenance": "Parent-owned invocation; not independently exposed by local execution tool"
+  }
+}

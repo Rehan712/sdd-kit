@@ -1,0 +1,210 @@
+{
+  "allChecks": true,
+  "branchRef": "refs/heads/spec/003-gate-round-reduction-and-token-discipline",
+  "declarationChecks": {
+    "beforeClean": 250,
+    "beforeWeak": 396,
+    "cleanAdded": 4,
+    "currentClean": 254,
+    "currentWeak": 522,
+    "explicitKinds": [
+      "assertion",
+      "manual",
+      "static",
+      "test"
+    ],
+    "priorCleanOrderedSubsequence": true,
+    "priorWeakOrderedSubsequence": true,
+    "weakAdded": 126
+  },
+  "diffs": {
+    "current": {
+      "literalMatch": true,
+      "reconstructedSHA256": "94bbf9429de9ea73b112417d7456657891ba672cf233c8bd6757852fa13a4132",
+      "suppliedSHA256": "94bbf9429de9ea73b112417d7456657891ba672cf233c8bd6757852fa13a4132"
+    },
+    "latest": {
+      "literalMatch": true,
+      "reconstructedSHA256": "50f45e392f23eb5b091ef2b73d333a350bde3bc564b488eec64bf4595021a326",
+      "suppliedSHA256": "50f45e392f23eb5b091ef2b73d333a350bde3bc564b488eec64bf4595021a326"
+    }
+  },
+  "evidenceChecks": {
+    "actualCanonicalSealedReturnIdentical": true,
+    "captureExitNoTick": true,
+    "captureSource": true,
+    "committedBindsComplete": true,
+    "currentTasksEqualAcceptedAfter": true,
+    "metaSameSource": true,
+    "nineteenPassingFunctions": true,
+    "outputDigestMatches": true,
+    "returnHashMatches": true,
+    "sameInputBytes": true
+  },
+  "head": "2049f65960cc91e9e30bbd5ff1e11fc0fdf7cbd9",
+  "rawScopeFiles": {
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/STATUS.md": {
+      "actual": {
+        "bytes": 781599,
+        "mode": 384,
+        "mtimeNs": 1793370193293528352,
+        "sha256": "cea8c1a6a18e887beb8e5ef97c6ebdc729836b7c4ae387be8e9038ddf1e70563"
+      },
+      "expected": {
+        "bytes": 781599,
+        "mode": 384,
+        "mtimeNs": 1793370193293528352,
+        "sha256": "cea8c1a6a18e887beb8e5ef97c6ebdc729836b7c4ae387be8e9038ddf1e70563"
+      },
+      "matches": true
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md": {
+      "actual": {
+        "bytes": 184402,
+        "mode": 384,
+        "mtimeNs": 1793371094155415930,
+        "sha256": "cf287c0f31ffb099f795ea436508f301db7ca9e9eceeca8dfad7df020098c7d1"
+      },
+      "expected": {
+        "bytes": 184402,
+        "mode": 384,
+        "mtimeNs": 1793371094155415930,
+        "sha256": "cf287c0f31ffb099f795ea436508f301db7ca9e9eceeca8dfad7df020098c7d1"
+      },
+      "matches": true
+    },
+    "scripts/sdd-analyze.sh": {
+      "actual": {
+        "bytes": 19124,
+        "mode": 493,
+        "mtimeNs": 1793370193295121506,
+        "sha256": "0e7225fa967bce5196e4f068f1ab56dbd8ad7c9765f73e46d336aa2694c5db10"
+      },
+      "expected": {
+        "bytes": 19124,
+        "mode": 493,
+        "mtimeNs": 1793370193295121506,
+        "sha256": "0e7225fa967bce5196e4f068f1ab56dbd8ad7c9765f73e46d336aa2694c5db10"
+      },
+      "matches": true
+    },
+    "tests/test-gate-contracts.sh": {
+      "actual": {
+        "bytes": 265294,
+        "mode": 420,
+        "mtimeNs": 1792956408250063378,
+        "sha256": "7bc13dde14004bf4ba967c0f64ec120b19bdde641643a6a7436d154c222f893c"
+      },
+      "expected": {
+        "bytes": 265294,
+        "mode": 420,
+        "mtimeNs": 1792956408250063378,
+        "sha256": "7bc13dde14004bf4ba967c0f64ec120b19bdde641643a6a7436d154c222f893c"
+      },
+      "matches": true
+    },
+    "tests/test-sdd-analyze.sh": {
+      "actual": {
+        "bytes": 60824,
+        "mode": 420,
+        "mtimeNs": 1793370193295760393,
+        "sha256": "a531320d3964ddf5dd953df27cf6f905d5f441f60bf766923d865ca00ce1bb66"
+      },
+      "expected": {
+        "bytes": 60824,
+        "mode": 420,
+        "mtimeNs": 1793370193295760393,
+        "sha256": "a531320d3964ddf5dd953df27cf6f905d5f441f60bf766923d865ca00ce1bb66"
+      },
+      "matches": true
+    }
+  },
+  "realIndex": {
+    "mode": 420,
+    "mtimeNs": 1792957592613445716,
+    "sha256": "c492d7ea95abf8e8c335001f20c62ff50bc6f1e2179d7a07d30811181b3dd700"
+  },
+  "runtime": {
+    "callArguments": {},
+    "instanceId": "codex",
+    "model": "gpt-6.1-sol",
+    "reasoningEffort": "max",
+    "requestedMatch": true,
+    "serviceTier": "default"
+  },
+  "seals": {
+    "accepted": {
+      "completeSHA256": "3823625e9c7a6a98af7e3a0e6ae21e9320a0050c3cc93364f8a89c81d4ee2633",
+      "expectedCount": 4,
+      "memberCount": 4,
+      "members": {
+        "digests.nul": {
+          "actual": "aa625ee517c8674a39ab3b6ef0f9c247ffbb015026b655234505383600e53779",
+          "recorded": "aa625ee517c8674a39ab3b6ef0f9c247ffbb015026b655234505383600e53779"
+        },
+        "meta.nul": {
+          "actual": "175bd24923f2536a9b8de7d91a2690e4970e54217d808f9bd9bb16178d6c6462",
+          "recorded": "175bd24923f2536a9b8de7d91a2690e4970e54217d808f9bd9bb16178d6c6462"
+        },
+        "return.txt": {
+          "actual": "cf20dd90ac8c2af715a1095a1f5a291b73eb6875c530774a549fc5a778b282e0",
+          "recorded": "cf20dd90ac8c2af715a1095a1f5a291b73eb6875c530774a549fc5a778b282e0"
+        },
+        "tasks.after": {
+          "actual": "cf287c0f31ffb099f795ea436508f301db7ca9e9eceeca8dfad7df020098c7d1",
+          "recorded": "cf287c0f31ffb099f795ea436508f301db7ca9e9eceeca8dfad7df020098c7d1"
+        }
+      },
+      "valid": true
+    },
+    "capture": {
+      "completeSHA256": "26bbbd91e844a7b3eb1a38249d4473d445b790c0a3c68ebb397bb61b56da5657",
+      "expectedCount": 7,
+      "memberCount": 7,
+      "members": {
+        "argv.nul": {
+          "actual": "a193b9b8454686d43618a97cd684b331c6e36a0e968611582be2ce0aee872844",
+          "recorded": "a193b9b8454686d43618a97cd684b331c6e36a0e968611582be2ce0aee872844"
+        },
+        "bindings.nul": {
+          "actual": "8766df908be5d8f628c3880af34ae761dd1c9c4946e8da08da3e566c8c0c788a",
+          "recorded": "8766df908be5d8f628c3880af34ae761dd1c9c4946e8da08da3e566c8c0c788a"
+        },
+        "inputs-after.nul": {
+          "actual": "62cbf525b0caac98f27729393f6e7203ec6ac1cd34c164b3734b7c10a98be23f",
+          "recorded": "62cbf525b0caac98f27729393f6e7203ec6ac1cd34c164b3734b7c10a98be23f"
+        },
+        "inputs.nul": {
+          "actual": "62cbf525b0caac98f27729393f6e7203ec6ac1cd34c164b3734b7c10a98be23f",
+          "recorded": "62cbf525b0caac98f27729393f6e7203ec6ac1cd34c164b3734b7c10a98be23f"
+        },
+        "meta.nul": {
+          "actual": "2919487eb0e9eb13f7793eb8b8b76aff5ee914dc3dabb64e782989f9688dfb50",
+          "recorded": "2919487eb0e9eb13f7793eb8b8b76aff5ee914dc3dabb64e782989f9688dfb50"
+        },
+        "output.log": {
+          "actual": "f9166fdc124954abb48f7c8ed789d96a1ce68c06a9da6df0d9d49a79a07aca5a",
+          "recorded": "f9166fdc124954abb48f7c8ed789d96a1ce68c06a9da6df0d9d49a79a07aca5a"
+        },
+        "summary.txt": {
+          "actual": "b644a7fb224199c000aeb7c3e9502b1733e2050623ff406a0d7b1b11c3519400",
+          "recorded": "b644a7fb224199c000aeb7c3e9502b1733e2050623ff406a0d7b1b11c3519400"
+        }
+      },
+      "valid": true
+    },
+    "event": {
+      "completeSHA256": "4fb86f9a1d77411703481a2dc08ff81a64f9f54dc78a1883cc5ffd4e34da0c6d",
+      "expectedCount": 1,
+      "memberCount": 1,
+      "members": {
+        "meta.nul": {
+          "actual": "4bae9b02367bee2faa071f8ded88182901ac6cf241c521bfb425ed430b763ac6",
+          "recorded": "4bae9b02367bee2faa071f8ded88182901ac6cf241c521bfb425ed430b763ac6"
+        }
+      },
+      "valid": true
+    }
+  },
+  "source": "62cbf525b0caac98f27729393f6e7203ec6ac1cd34c164b3734b7c10a98be23f"
+}

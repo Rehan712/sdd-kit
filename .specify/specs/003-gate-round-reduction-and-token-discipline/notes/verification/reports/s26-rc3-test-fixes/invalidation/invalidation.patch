@@ -1,0 +1,86 @@
+--- a/tests/test-gate-contracts.sh
++++ b/tests/test-gate-contracts.sh
+@@ -2716,9 +2716,34 @@
+ 
+ # AC-013: execute evidence validation, then carry only a completed, unchanged PASS.
+ matrix_runtime_cases() {
+-  local spec repo cap source id text digest tmp evidence
++  local spec repo cap source id text digest tmp evidence path predicate
+   spec="$(make_verification_git_dir matrix)"
+   repo="$(cd "$spec/../../.." && pwd -P)"
++  # The captured check reaches the helper through implementation, and reads
++  # the fixture, configuration and locked dependency version it checks.
++  mkdir -p "$repo/lib" "$repo/tests/fixtures"
++  cat > "$repo/src/parser.sh" <<'EOF'
++. lib/shared.sh
++. ./config.yml
++. ./lockfile
++parse_value() { shared_value "$(cat "$1")"; }
++EOF
++  cat > "$repo/lib/shared.sh" <<'EOF'
++shared_value() {
++  [[ "$1" == "$expected" && "$shared_version" == 1 ]] || return 1
++  printf '%s\n' "$1"
++}
++EOF
++  printf 'good\n' > "$repo/tests/fixtures/value"
++  printf 'expected=good\n' > "$repo/config.yml"
++  printf 'shared_version=1\n' > "$repo/lockfile"
++  cat > "$repo/tests/check.sh" <<'EOF'
++#!/usr/bin/env bash
++# AC-001
++ test_ac_001_shared() { . src/parser.sh; [[ "$(parse_value tests/fixtures/value)" == good ]]; }
++test_ac_001_shared || exit 1
++echo passed
++EOF
+   mkdir -p "$spec/notes/verification/rounds/reality-check/ROUND-1"
+   run_rc 0 "$SCRIPTS/spec-run.sh" "$spec" T001 --cwd "$repo" --from-task --no-tick --summary
+   cap="$(printf '%s' "$OUT" | sed -n 's/^capture=\([^ ]*\).*/\1/p')"
+@@ -2742,6 +2767,47 @@
+   vf_hash "$tmp/block" > "$spec/notes/verification/rounds/reality-check/ROUND-1/report.sha256"
+   cat "$tmp/round-1" "$tmp/round-2" > "$tmp/report"
+   run_rc 0 vf_reality_matrix "$spec" "$tmp/report" 2 "$source" READY
++  # AC-013/AC-020: keep one real success and its saved PASS throughout;
++  # a later failed capture must not be what invalidates this evidence.
++  cp "$spec/notes/captures/$cap/output.log" "$tmp/success.log"
++  run_rc 0 vf_snapshot "$spec" "$repo" "$repo" "$tmp/inputs"
++  for predicate in current reuse; do
++    run_rc 0 vf_capture_check "$spec" "$cap" "$tmp/inputs" "$predicate"
++  done
++  run_rc 0 vf_reality_matrix "$spec" "$tmp/report" 1 "$source" READY
++  for path in src/parser.sh lib/shared.sh tests/fixtures/value lockfile config.yml "${spec#"$repo/"}/spec.md"; do
++    cp "$repo/$path" "$tmp/original"
++    case "$path" in
++      src/parser.sh) printf 'parse_value() { printf "bad\\n"; }\n' >> "$repo/$path";;
++      lib/shared.sh) printf 'shared_value() { printf "bad\\n"; }\n' >> "$repo/$path";;
++      tests/fixtures/value) printf 'bad\n' > "$repo/$path";;
++      lockfile) printf 'shared_version=2\n' > "$repo/$path";;
++      config.yml) printf 'expected=other\n' > "$repo/$path";;
++      */spec.md)
++        sed 's/the shared boundary behavior/the changed shared boundary behavior/' "$tmp/original" > "$repo/$path"
++        assert_contains "$(cat "$repo/$path")" 'AC-001 — the changed shared boundary behavior'
++        ;;
++    esac
++    # Demonstrate actual dependency consumption without another capture.
++    if [[ "$path" != */spec.md ]]; then
++      run_rc 1 bash -c 'cd "$1" && bash tests/check.sh' _ "$repo"
++    fi
++    run_rc 0 vf_snapshot "$spec" "$repo" "$repo" "$tmp/inputs"
++    for predicate in current reuse; do
++      run_rc 3 vf_capture_check "$spec" "$cap" "$tmp/inputs" "$predicate"
++      assert_contains "$OUT" 'current inputs changed' "AC-020: $path $predicate"
++    done
++    run_rc 3 vf_reality_matrix "$spec" "$tmp/report" 1 "$source" READY
++    run_rc 3 vf_reality_matrix "$spec" "$tmp/report" 2 "$source" READY
++    run_rc 0 cmp "$tmp/success.log" "$spec/notes/captures/$cap/output.log"
++    cp "$tmp/original" "$repo/$path"
++    run_rc 0 vf_snapshot "$spec" "$repo" "$repo" "$tmp/inputs"
++    for predicate in current reuse; do
++      run_rc 0 vf_capture_check "$spec" "$cap" "$tmp/inputs" "$predicate"
++    done
++    run_rc 0 vf_reality_matrix "$spec" "$tmp/report" 1 "$source" READY
++    run_rc 0 vf_reality_matrix "$spec" "$tmp/report" 2 "$source" READY
++  done
+   # AC-013/FM-016: a matrix row reproduced inside a nested example fence is
+   # quoted text. Deleting the real AC-002 row and supplying it that way must
+   # not satisfy the every-AC requirement.

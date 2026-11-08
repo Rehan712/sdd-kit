@@ -1,0 +1,127 @@
+{
+  "at": "2026-10-29T11:14:14.825896+00:00",
+  "actualKernelReservationExit": 0,
+  "actualNativeRunnerExit": 1,
+  "reservationCreatedOnce": true,
+  "metadata": {
+    "version": "1",
+    "gate": "opponent",
+    "round": "26",
+    "floor": "FLOOR-LxJkv3",
+    "source": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+    "reserved": "2026-10-29T11:11:14Z"
+  },
+  "roundMetaSha256": "8b2ce27d15808d5b730f2de76955e8a01b65349c0bfc2099738d8520ed5f0f53",
+  "roundSealSha256": "7a2cfd31f3d0fa8db994fa38c12f107322e48b03633553dd2876718e3eb75930",
+  "pendingWithoutFinalReport": true,
+  "rawEntriesByteIdentical": true,
+  "entryCount": 6860,
+  "entriesSha256": "3ca12e69830dd1f06b6b985847aafd6b54614c068e22167598b00ee835825731",
+  "stateFieldsMatch": true,
+  "protectedOriginalBytesModesMtimesUnchanged": true,
+  "preInvocationOriginalEntriesCompared": 20713,
+  "preInvocationOriginalDifferences": {},
+  "parentPreparedFilesPreserved": true,
+  "globalRefsUnchanged": true,
+  "unexpectedAdditions": [],
+  "newOwnedFilesAlreadyPresentAtRunnerBaseline": [
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s46-op26-reservation/activity-before.json",
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s46-op26-reservation/native-launch.json",
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s46-op26-reservation/native-runner.stderr",
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s46-op26-reservation/native-runner.stdout",
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s46-op26-reservation/preflight.json",
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s46-op26-reservation/protected-originals.tar",
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s46-op26-reservation/runner.py"
+  ],
+  "ownedNewReceiptGrowth": {
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s46-op26-reservation/native-runner.stdout": {
+      "before": {
+        "mode": 420,
+        "mtimeNs": 1793270587838499894,
+        "size": 0,
+        "kind": "file",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "after": {
+        "mode": 420,
+        "mtimeNs": 1793272400530022009,
+        "size": 2884,
+        "kind": "file",
+        "sha256": "1dd5f283d8fe048a7cec52a05199a58b28f4bcbdd7dd733a0803d7af1861cbbb"
+      }
+    }
+  },
+  "runnerExitOneExplanation": "The raw runner baseline was taken after seven new owned receipt files were created. Its comparison correctly observed growth of native-runner.stdout, then returned 1 because it did not distinguish that newly owned log from original files. Original result.json and preservation.json remain untouched. This observation narrows the comparison to the original ownership boundary; no exception for any preexisting file was added.",
+  "rawRunnerComparisonPassed": false,
+  "historicalFullPreservationPassed": false,
+  "historicalExceptionsRetained": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s45-floor-execution/preservation-exceptions.json",
+  "kernelArgv": [
+    "bash",
+    "scripts/spec-gate.sh",
+    "round",
+    ".specify/specs/003-gate-round-reduction-and-token-discipline",
+    "opponent",
+    "--floor",
+    "FLOOR-LxJkv3"
+  ],
+  "timings": [
+    {
+      "name": "prereserve",
+      "argv": [
+        "bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/r23-worktree-state.sh",
+        "s46-op26-prereserve"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "GIT_OPTIONAL_LOCKS": "0",
+      "nativePid": 70545,
+      "started": "2026-10-29T10:43:15.064855+00:00",
+      "exit": 0,
+      "ended": "2026-10-29T10:45:24.847388+00:00",
+      "elapsedSeconds": 129.78142020800442
+    },
+    {
+      "name": "reserve",
+      "argv": [
+        "bash",
+        "scripts/spec-gate.sh",
+        "round",
+        ".specify/specs/003-gate-round-reduction-and-token-discipline",
+        "opponent",
+        "--floor",
+        "FLOOR-LxJkv3"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "GIT_OPTIONAL_LOCKS": "0",
+      "nativePid": 80093,
+      "started": "2026-10-29T10:45:24.875252+00:00",
+      "exit": 0,
+      "ended": "2026-10-29T11:11:14.584369+00:00",
+      "elapsedSeconds": 1549.7172640000063
+    },
+    {
+      "name": "reserved",
+      "argv": [
+        "bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/r23-worktree-state.sh",
+        "s46-op26-reserved"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "GIT_OPTIONAL_LOCKS": "0",
+      "nativePid": 63141,
+      "started": "2026-10-29T11:11:14.584777+00:00",
+      "exit": 0,
+      "ended": "2026-10-29T11:13:20.529772+00:00",
+      "elapsedSeconds": 125.94287633401109
+    }
+  ],
+  "nativeTotalElapsedSeconds": 1817.7287048750004,
+  "noActiveKernelProcessAtFinalInspection": true,
+  "lockAbsent": true,
+  "stagedReservationAbsent": true,
+  "automaticRetries": 0,
+  "independentReviewStarted": false,
+  "completedOrTallied": false,
+  "formalClearance": false,
+  "shellEnvironmentDeviation": "Initial read-only pwd tool call had explicit cwd but omitted explicit GIT_OPTIONAL_LOCKS; every subsequent shell and child command sets it to 0."
+}

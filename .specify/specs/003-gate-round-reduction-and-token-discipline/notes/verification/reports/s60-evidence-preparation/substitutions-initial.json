@@ -1,0 +1,95 @@
+{
+  ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261029-s60/build-snapshot.sh": {
+    "donor": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s38/build-snapshot.sh",
+    "target": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261029-s60/build-snapshot.sh",
+    "substitutions": []
+  },
+  ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261029-s60/test-collector.py": {
+    "donor": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s38/test-collector.py",
+    "target": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261029-s60/test-collector.py",
+    "substitutions": []
+  },
+  ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s60-final-floor.sh": {
+    "donor": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s38-final-floor.sh",
+    "target": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s60-final-floor.sh",
+    "substitutions": [
+      {
+        "old": "ci-20261028-s38",
+        "new": "ci-20261029-s60",
+        "count": 1
+      },
+      {
+        "old": "s38-final-floor",
+        "new": "s60-final-floor",
+        "count": 16
+      },
+      {
+        "old": "f156c52e",
+        "new": "7d4f1722",
+        "count": 1
+      }
+    ]
+  },
+  ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s60-evidence-preparation/build-once.py": {
+    "donor": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s38-evidence-preparation/build-once.py",
+    "target": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s60-evidence-preparation/build-once.py",
+    "substitutions": [
+      {
+        "old": "ci-20261028-s38",
+        "new": "ci-20261029-s60",
+        "count": 1
+      },
+      {
+        "old": "s38-evidence-preparation",
+        "new": "s60-evidence-preparation",
+        "count": 1
+      },
+      {
+        "old": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+        "new": "7d4f17221f13d850cb7db06cdbb6261119ca97b52228adeac74d82f6496a9bff",
+        "count": 1
+      },
+      {
+        "old": "OP26 authorization and accepted T029",
+        "new": "OP27 authorization and accepted T029 plus T031a5o1",
+        "count": 1
+      }
+    ]
+  },
+  ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s60-evidence-preparation/validate-preparation.py": {
+    "donor": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s38-evidence-preparation/validate-preparation.py",
+    "target": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s60-evidence-preparation/validate-preparation.py",
+    "substitutions": [
+      {
+        "old": "ci-20261028-s38",
+        "new": "ci-20261029-s60",
+        "count": 1
+      },
+      {
+        "old": "s38-evidence-preparation",
+        "new": "s60-evidence-preparation",
+        "count": 1
+      },
+      {
+        "old": "s38-final-floor",
+        "new": "s60-final-floor",
+        "count": 5
+      },
+      {
+        "old": "d=o.parent/'ci-20261028-s34'",
+        "new": "d=o.parent/'ci-20261028-s38'",
+        "count": 1
+      },
+      {
+        "old": "accepted/T029/ACC-5OLy1X/tasks.after",
+        "new": "accepted/T031a5o1/ACC-zmvoA1/tasks.after",
+        "count": 1
+      },
+      {
+        "old": "'ci-20261028-s34' not in floor",
+        "new": "'ci-20261028-s38' not in floor",
+        "count": 1
+      }
+    ]
+  }
+}

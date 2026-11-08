@@ -1,0 +1,179 @@
+{
+  "status": "PREPARED_NOT_EXECUTED",
+  "source": "16ffcec3c2f0cffa21b8c35e7b90d768a27bdfdd37deba9147edd25489946494",
+  "tree": "e68740dbbf9d10e3abcdfd0c6620ed9c3abd04e1",
+  "commit": "616dd2d1bb0f3eb16045821b0b30b9c9b40f2395",
+  "parent": "2049f65960cc91e9e30bbd5ff1e11fc0fdf7cbd9",
+  "expected_remote_head": "5aee77672d03a2c7811e28e55172817da6dee012",
+  "remote_expectation": "HISTORICAL_UNQUERIED_PARENT_MUST_CONFIRM",
+  "path_records": 177,
+  "harness_records": 8,
+  "document_records": 4,
+  "tree_entries": 17159,
+  "bookkeeping_extras": 16982,
+  "mapping": "PASS",
+  "prepared_binding_exit": 0,
+  "completed_binding_exit": 0,
+  "freeze_manifest": "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-ci-20261026-s29-61ddsu3j/snapshot/inputs.nul",
+  "completed_manifest": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261026-s29/inputs-completed.nul",
+  "manifest_byte_identical": true,
+  "builder_unchanged": true,
+  "protected_state": "UNCHANGED",
+  "source_177_bytes_modes_sizes_mtime_ns": "UNCHANGED",
+  "historical_helpers_unchanged": 9,
+  "control": {
+    "path": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s29-t029-control/result.json",
+    "sha256": "571590c5e48fd745407e94fd06c799db9ee9d0645676aa7e7a97b340315f352b",
+    "exit": 0,
+    "capture": "CAP-794-aUZ5t0",
+    "acceptedReceipt": "ACC-MkfiB6",
+    "rejectedEvent": "ACCEPT-I3Eloa",
+    "rejectionClass": "binding-mismatch",
+    "rejectedTaskBytesUnchanged": true,
+    "steps": [
+      {
+        "name": "reject",
+        "argv": [
+          "bash",
+          "scripts/spec-gate.sh",
+          "accept",
+          ".specify/specs/003-gate-round-reduction-and-token-discipline",
+          "T029",
+          ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/returns/T029-incomplete.txt"
+        ],
+        "started": "2026-10-26T21:09:40.204678+00:00",
+        "ended": "2026-10-26T21:10:02.268325+00:00",
+        "seconds": 22.065,
+        "exit": 3
+      },
+      {
+        "name": "accept",
+        "argv": [
+          "bash",
+          "scripts/spec-gate.sh",
+          "accept",
+          ".specify/specs/003-gate-round-reduction-and-token-discipline",
+          "T029",
+          ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/returns/T029.txt"
+        ],
+        "started": "2026-10-26T21:10:02.598936+00:00",
+        "ended": "2026-10-26T21:10:32.014737+00:00",
+        "seconds": 29.417,
+        "exit": 0
+      },
+      {
+        "name": "seal-check",
+        "argv": [
+          "bash",
+          "-c",
+          ". scripts/lib.sh; . scripts/verification-lib.sh; vf_integrity \"$1\" meta.nul && vf_integrity \"$2\" meta.nul && vf_integrity \"$3\" meta.nul return.txt tasks.after digests.nul && test \"$(cat \"$3/COMMITTED\")\" = \"$(vf_hash \"$3/COMPLETE\")\"",
+          "_",
+          ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/accept-events/ACCEPT-I3Eloa",
+          ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/accept-events/ACCEPT-4rCf9X",
+          ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/accepted/T029/ACC-MkfiB6"
+        ],
+        "started": "2026-10-26T21:10:32.044674+00:00",
+        "ended": "2026-10-26T21:10:32.179108+00:00",
+        "seconds": 0.134,
+        "exit": 0
+      }
+    ]
+  },
+  "checks": {
+    "build-snapshot.sh_shellcheck": {
+      "argv": [
+        "shellcheck",
+        "--shell=bash",
+        "--severity=warning",
+        "--external-sources",
+        "--exclude=SC2034",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261026-s29/build-snapshot.sh"
+      ],
+      "exit": 0,
+      "scope": "warning/error; sources followed; only established sourced HUB_DIR SC2034 excluded for builder/verifier"
+    },
+    "verify-prepublish.sh_shellcheck": {
+      "argv": [
+        "shellcheck",
+        "--shell=bash",
+        "--severity=warning",
+        "--external-sources",
+        "--exclude=SC2034",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261026-s29/verify-prepublish.sh"
+      ],
+      "exit": 0,
+      "scope": "warning/error; sources followed; only established sourced HUB_DIR SC2034 excluded for builder/verifier"
+    },
+    "collect.sh_shellcheck": {
+      "argv": [
+        "shellcheck",
+        "--shell=bash",
+        "--severity=warning",
+        "--external-sources",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261026-s29/collect.sh"
+      ],
+      "exit": 0,
+      "scope": "warning/error; sources followed; only established sourced HUB_DIR SC2034 excluded for builder/verifier"
+    },
+    "s29-final-floor.sh_shellcheck": {
+      "argv": [
+        "shellcheck",
+        "--shell=bash",
+        "--severity=warning",
+        "--external-sources",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s29-final-floor.sh"
+      ],
+      "exit": 0,
+      "scope": "warning/error; sources followed; only established sourced HUB_DIR SC2034 excluded for builder/verifier"
+    },
+    "s29-final-floor.sh_bash32_syntax": {
+      "argv": [
+        "/bin/bash",
+        "-n",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s29-final-floor.sh"
+      ],
+      "exit": 0
+    }
+  },
+  "seven_offline_collector_controls": 0,
+  "floor_executed": false,
+  "wait_queued": false,
+  "floorvalidation_executed": false,
+  "publication_executed": false,
+  "hosted_collection_executed": false,
+  "hosted_result": "PENDING",
+  "review": {
+    "verdict": "Ship for local preparation only",
+    "actionable_findings": 0,
+    "providerInstanceId": "codex_codex_gym",
+    "model": "gpt-6.1-sol",
+    "options": [
+      {
+        "id": "reasoningEffort",
+        "value": "max"
+      },
+      {
+        "id": "serviceTier",
+        "value": "default"
+      }
+    ],
+    "taskId": "node:delegated-task:command%3Amcp%3A4adb202d-fec3-4b66-9035-f22f98e05c4b%3Adelegate-task%3Asdd003-s29-preparation-review-max-r2",
+    "receipt": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261026-s29/review-r2-result.json",
+    "prior_round_failed_preserved": true
+  },
+  "resources": {
+    "observed_at_utc": "2026-10-26T21:26:19.850724+00:00",
+    "disk_free_bytes": 14823743488,
+    "power": "Now drawing from 'Battery Power'\n -InternalBattery-0 (id=22413411)\t47%; discharging; 2:49 remaining present: true\n",
+    "swap": "total = 3072.00M  used = 1670.19M  free = 1401.81M  (encrypted)\n",
+    "scratch_bytes": 15196160,
+    "floor_minimum_free_bytes": 8589934592,
+    "floor_started": false,
+    "cleanup_performed": false
+  },
+  "helper": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s29-final-floor.sh",
+  "launch_plan": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261026-s29/parent-floor-launch.argv.json",
+  "publication": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261026-s29/publication.json",
+  "handoff": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s29-preparation-handoff.md",
+  "completed_at_utc": "2026-10-26T21:26:19.850724+00:00"
+}

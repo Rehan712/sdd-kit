@@ -1,0 +1,61 @@
+{
+  "status": "BLOCKED_PUSH_PERMISSION",
+  "recorded_at": "2026-10-25T16:44:45.805622+00:00",
+  "local_snapshot_commit": "781b963e6777b44059b24e696dafa37c69242a05",
+  "approved_tree": "43292032de54f25df06531471b07ada5da0becf0",
+  "source": "a7e7dd326b27c7565c26349485c440af26f718a7f16e400ea42ed6961d03cd1a",
+  "parent": "2049f65960cc91e9e30bbd5ff1e11fc0fdf7cbd9",
+  "pushed_sha": null,
+  "remote_url": "https://github.com/Rehan712/sdd-kit.git",
+  "remote_ref": "refs/heads/ci-snapshot/spec-003-20261025-s26",
+  "remote_ref_exists_after_failed_push": false,
+  "push_exit_code": 128,
+  "push_error": "remote: Permission to Rehan712/sdd-kit.git denied to shehzadigill. HTTP 403.",
+  "authenticated_gh_user": "shehzadigill",
+  "authenticated_gh_repository_push_permission": false,
+  "head_index_proof": {
+    "head": "2049f65960cc91e9e30bbd5ff1e11fc0fdf7cbd9",
+    "index_path": "/Users/babar/projects/sdd-kit-public/.git/worktrees/003-gate-round-reduction-and-token-discipline/index",
+    "index_sha256": "c492d7ea95abf8e8c335001f20c62ff50bc6f1e2179d7a07d30811181b3dd700",
+    "index_bytes": 2200525,
+    "index_mtime_ns": 1792932424888295709,
+    "head_file_sha256": "36b441e5337734d73e547a921b682069ccd54788152cff695f469a8e54e84134",
+    "refs_sha256": "2a78bc00e911977948eb75d5d7484f920f7b23946aa351ea9c3b525047a06722"
+  },
+  "local_branch_refs_unchanged": true,
+  "source_mapping": "PASS: 177 paths + 8 harness + 4 documents",
+  "base_proof": {
+    "remote_main": "f4a0e4e31df29b53ccb9e088d3b8d0cd58f8e12f",
+    "parent": "2049f65960cc91e9e30bbd5ff1e11fc0fdf7cbd9",
+    "api_status": "ahead",
+    "merge_base": "f4a0e4e31df29b53ccb9e088d3b8d0cd58f8e12f",
+    "remote_ancestry_pass": true,
+    "local_ancestor_exit": 0,
+    "collector_condition": "main ancestor of snapshot parent; merge with approved snapshot will preserve exact snapshot tree"
+  },
+  "merge_tree_proof": {
+    "commit": "781b963e6777b44059b24e696dafa37c69242a05",
+    "tree": "43292032de54f25df06531471b07ada5da0becf0",
+    "parent": "2049f65960cc91e9e30bbd5ff1e11fc0fdf7cbd9",
+    "message": "test(ci): snapshot spec 003 RC3 source a7e7dd32 (s26)",
+    "merge_tree_exit": 0,
+    "merge_tree": "43292032de54f25df06531471b07ada5da0becf0",
+    "remote_main": "f4a0e4e31df29b53ccb9e088d3b8d0cd58f8e12f"
+  },
+  "title_file": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261025-s26/publication-20261025T164211Z/draft-pr-title.txt",
+  "body_file": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261025-s26/publication-20261025T164211Z/draft-pr-body.md",
+  "remaining_actions": [
+    "Parent/operator obtains existing repository push access for origin.",
+    "Recheck branch idempotency and live main/source bindings, then push the existing local commit without force; do not create a duplicate commit.",
+    "Verify actual remote SHA equals local snapshot SHA.",
+    "Parent creates temporary draft PR against main using prepared title/body and links it immediately through T3.",
+    "Parent owns hosted CI watching/collection and final tested merge-tree verification."
+  ],
+  "not_performed": [
+    "PR creation/linking",
+    "CI triggers, polling or watching",
+    "tests/floors/probes/gates",
+    "real-index changes, checkouts, local branch updates",
+    "code/config/task/STATUS/Decisions edits"
+  ]
+}

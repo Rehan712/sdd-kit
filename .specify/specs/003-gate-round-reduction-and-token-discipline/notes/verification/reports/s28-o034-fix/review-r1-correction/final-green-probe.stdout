@@ -1,0 +1,119 @@
+1	weak	0	yes	npm run build
+2	weak	0	yes	npm run typecheck
+3	weak	0	yes	tsc --noEmit
+4	weak	0	yes	grep AC-001 README.md
+5	weak	0	yes	tsc --noEmit tests/unit.ts
+6	weak	0	yes	npm run typecheck -- --project tests/tsconfig.json
+7	weak	0	yes	grep AC-001 tests/check.sh
+8	weak	0	yes	npm run build -- --outDir tests/build
+9	weak	0	yes	test -e README.md
+10	weak	0	yes	test -f README.md
+11	weak	0	yes	grep pytest README.md
+12	weak	0	yes	rg bats README.md
+13	weak	0	yes	diff fixtures/test.txt actual.txt
+14	weak	0	yes	grep test README.md
+15	weak	0	yes	grep tests README.md
+16	weak	0	yes	grep "node --test" README.md
+17	weak	0	yes	grep "cargo test" README.md
+18	weak	0	yes	grep AC-001 scripts/test-check.sh
+19	weak	0	yes	test -e tests/check.sh
+20	weak	0	yes	test -f tests/check.sh
+21	weak	0	yes	rg /usr/bin/pytest README.md
+22	weak	0	yes	diff fixtures/bats.txt actual.txt
+23	weak	0	yes	bash --rcfile tests/env.sh -c "npm run typecheck"
+24	weak	0	yes	npm<tests/test-typecheck.txt run typecheck
+25	weak	0	yes	npm <tests/test-typecheck.txt run typecheck
+26	weak	0	yes	tsc>tests/test-typecheck.log --noEmit
+27	weak	0	yes	tsc >tests/test-typecheck.log --noEmit
+28	weak	0	yes	grep<tools/pytest typecheck
+29	weak	0	yes	grep <tools/pytest typecheck
+30	weak	0	yes	grep<tools/npm test typecheck.txt
+31	weak	0	yes	grep <tools/npm test typecheck.txt
+32	weak	0	yes	npm<tests/check.txt run typecheck
+33	weak	0	yes	npm <tests/check.txt run typecheck
+34	weak	0	yes	npm>tests/check.txt run typecheck
+35	weak	0	yes	npm >tests/check.txt run typecheck
+36	weak	0	yes	npm<tests/check.txt run build
+37	weak	0	yes	npm <tests/check.txt run build
+38	weak	0	yes	npm>tests/check.txt run build
+39	weak	0	yes	npm >tests/check.txt run build
+40	weak	0	yes	tsc<input.txt --noEmit
+41	weak	0	yes	tsc <input.txt --noEmit
+42	weak	0	yes	tsc>input.txt --noEmit
+43	weak	0	yes	tsc >input.txt --noEmit
+44	weak	0	yes	grep<input.txt AC-001 README.md
+45	weak	0	yes	grep <input.txt AC-001 README.md
+46	weak	0	yes	grep>input.txt AC-001 README.md
+47	weak	0	yes	grep >input.txt AC-001 README.md
+48	weak	0	yes	rg<tools/pytest AC-001 README.md
+49	weak	0	yes	rg <tools/pytest AC-001 README.md
+50	weak	0	yes	rg>tools/pytest AC-001 README.md
+51	weak	0	yes	rg >tools/pytest AC-001 README.md
+52	weak	0	yes	diff<tools/bats actual.txt expected.txt
+53	weak	0	yes	diff <tools/bats actual.txt expected.txt
+54	weak	0	yes	diff>tools/bats actual.txt expected.txt
+55	weak	0	yes	diff >tools/bats actual.txt expected.txt
+56	weak	0	yes	test<tests/check.txt -e README.md
+57	weak	0	yes	test <tests/check.txt -e README.md
+58	weak	0	yes	test>tests/check.txt -e README.md
+59	weak	0	yes	test >tests/check.txt -e README.md
+60	weak	0	yes	grep<tools/bash tests/typecheck.sh
+61	weak	0	yes	grep <tools/bash tests/typecheck.sh
+62	weak	0	yes	grep>tools/bash tests/typecheck.sh
+63	weak	0	yes	grep >tools/bash tests/typecheck.sh
+64	weak	0	yes	grep<tests/check.sh typecheck.txt
+65	weak	0	yes	grep <tests/check.sh typecheck.txt
+66	weak	0	yes	grep>tests/check.sh typecheck.txt
+67	weak	0	yes	grep >tests/check.sh typecheck.txt
+68	weak	0	yes	tsc 2>output.txt --noEmit
+69	weak	0	yes	npm2>output.txt test typecheck.txt
+70	runner	0	no	bash tests/check.sh
+71	runner	0	no	sh tests/check.sh
+72	runner	0	no	./tests/check.sh
+73	runner	0	no	bash -e tests/typecheck.sh
+74	runner	0	no	/bin/bash tests/typecheck.sh
+75	runner	0	no	./scripts/test-build.sh
+76	runner	0	no	node --test test/typecheck.test.js
+77	runner	0	no	cargo test --test build
+78	runner	0	no	pytest tests/typecheck.py
+79	runner	0	no	/usr/bin/pytest tests/typecheck.py
+80	runner	0	no	bats tests/build.bats
+81	runner	0	no	python3 -m pytest tests/typecheck.py
+82	runner	0	no	npm test -- --grep typecheck
+83	runner	0	no	npm run test -- --grep typecheck
+84	runner	0	no	/usr/local/bin/npm test -- --grep typecheck
+85	runner	0	no	pnpm test --filter typecheck
+86	runner	0	no	yarn run test --grep typecheck
+87	runner	0	no	make test TARGET=typecheck
+88	runner	0	no	bun test tests/typecheck.test.ts
+89	runner	0	no	go test ./typecheck
+90	runner	0	no	bash<input.txt tests/typecheck.sh
+91	runner	0	no	bash <input.txt tests/typecheck.sh
+92	runner	0	no	bash>input.txt tests/typecheck.sh
+93	runner	0	no	bash >input.txt tests/typecheck.sh
+94	runner	0	no	./tests/check-typecheck.sh<input.txt
+95	runner	0	no	./tests/check-typecheck.sh <input.txt
+96	runner	0	no	./tests/check-typecheck.sh>input.txt
+97	runner	0	no	./tests/check-typecheck.sh >input.txt
+98	runner	0	no	node<input.txt --test test/typecheck.test.js
+99	runner	0	no	node <input.txt --test test/typecheck.test.js
+100	runner	0	no	node>input.txt --test test/typecheck.test.js
+101	runner	0	no	node >input.txt --test test/typecheck.test.js
+102	runner	0	no	cargo<input.txt test --test typecheck
+103	runner	0	no	cargo <input.txt test --test typecheck
+104	runner	0	no	cargo>input.txt test --test typecheck
+105	runner	0	no	cargo >input.txt test --test typecheck
+106	runner	0	no	pytest<input.txt tests/typecheck.py
+107	runner	0	no	pytest <input.txt tests/typecheck.py
+108	runner	0	no	pytest>input.txt tests/typecheck.py
+109	runner	0	no	pytest >input.txt tests/typecheck.py
+110	runner	0	no	/usr/bin/python3<input.txt -m pytest tests/typecheck.py
+111	runner	0	no	/usr/bin/python3 <input.txt -m pytest tests/typecheck.py
+112	runner	0	no	/usr/bin/python3>input.txt -m pytest tests/typecheck.py
+113	runner	0	no	/usr/bin/python3 >input.txt -m pytest tests/typecheck.py
+114	runner	0	no	npm<input.txt run test -- --grep typecheck
+115	runner	0	no	npm <input.txt run test -- --grep typecheck
+116	runner	0	no	npm>input.txt run test -- --grep typecheck
+117	runner	0	no	npm >input.txt run test -- --grep typecheck
+118	runner	0	no	npm 2>output.txt run test -- --grep typecheck
+119	runner	0	no	bash 0<input.txt -e tests/typecheck.sh

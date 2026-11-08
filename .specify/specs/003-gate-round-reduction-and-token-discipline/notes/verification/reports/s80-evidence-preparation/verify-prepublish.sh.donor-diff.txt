@@ -1,0 +1,18 @@
+--- /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261029-s60/verify-prepublish.sh
++++ /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261109-s80/verify-prepublish.sh
+@@ -3,13 +3,13 @@
+ set -euo pipefail
+ [[ "$PWD" == /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline ]] || { echo "FAIL: wrong workdir" >&2; exit 2; }
+ export GIT_OPTIONAL_LOCKS=0
+-out="$PWD/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261029-s60"
++out="$PWD/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261109-s80"
+ HUB_DIR="$PWD"
+ . scripts/lib.sh
+ . scripts/verification-lib.sh
+ s=.specify/specs/003-gate-round-reduction-and-token-discipline
+ source_id="$(vf_snapshot "$s" "$PWD" "$PWD" "$out/inputs-after.nul")"
+-[[ "$source_id" == 7d4f17221f13d850cb7db06cdbb6261119ca97b52228adeac74d82f6496a9bff ]] || { echo "FAIL: frozen source identity differs" >&2; exit 1; }
++[[ "$source_id" == 03a560ada7b3f691a20cbc50a6fcbdf4d0ac9773f3f1fe3c309e9b3d70c82c6a ]] || { echo "FAIL: frozen source identity differs" >&2; exit 1; }
+ python3 - "$out" <<'PY'
+ from pathlib import Path
+ import collections

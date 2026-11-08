@@ -1,0 +1,702 @@
+[
+  {
+    "group": "original-op24",
+    "command": "tsc --noEmit tests/unit.ts",
+    "expected_warning": true
+  },
+  {
+    "group": "original-op24",
+    "command": "npm run typecheck -- --project tests/tsconfig.json",
+    "expected_warning": true
+  },
+  {
+    "group": "original-op24",
+    "command": "grep AC-001 tests/check.sh",
+    "expected_warning": true
+  },
+  {
+    "group": "original-op24",
+    "command": "npm run build -- --outDir tests/build",
+    "expected_warning": true
+  },
+  {
+    "group": "original-op24",
+    "command": "test -e README.md",
+    "expected_warning": true
+  },
+  {
+    "group": "original-op24",
+    "command": "test -f README.md",
+    "expected_warning": true
+  },
+  {
+    "group": "original-op24",
+    "command": "grep pytest README.md",
+    "expected_warning": true
+  },
+  {
+    "group": "original-op24",
+    "command": "rg bats README.md",
+    "expected_warning": true
+  },
+  {
+    "group": "original-op24",
+    "command": "diff fixtures/test.txt actual.txt",
+    "expected_warning": true
+  },
+  {
+    "group": "op26-exact",
+    "command": "./test/npm run build",
+    "expected_warning": true
+  },
+  {
+    "group": "op26-exact",
+    "command": "./test/npm run typecheck",
+    "expected_warning": true
+  },
+  {
+    "group": "op26-exact",
+    "command": "./test/test -f README.md",
+    "expected_warning": true
+  },
+  {
+    "group": "op26-exact",
+    "command": "./test/tsc --noEmit tests/unit.ts",
+    "expected_warning": true
+  },
+  {
+    "group": "op26-exact",
+    "command": "./tests/node_modules/.bin/npm run build",
+    "expected_warning": true
+  },
+  {
+    "group": "op26-exact",
+    "command": "./tests/node_modules/.bin/npm run typecheck",
+    "expected_warning": true
+  },
+  {
+    "group": "op26-exact",
+    "command": "./tests/node_modules/.bin/test -f README.md",
+    "expected_warning": true
+  },
+  {
+    "group": "op26-exact",
+    "command": "./tests/node_modules/.bin/tsc --noEmit tests/unit.ts",
+    "expected_warning": true
+  },
+  {
+    "group": "op26-exact",
+    "command": "./tests/npm run build",
+    "expected_warning": true
+  },
+  {
+    "group": "op26-exact",
+    "command": "./tests/npm run typecheck",
+    "expected_warning": true
+  },
+  {
+    "group": "op26-exact",
+    "command": "./tests/npm&>out.txt run typecheck",
+    "expected_warning": true
+  },
+  {
+    "group": "op26-exact",
+    "command": "./tests/npm<&0 run typecheck",
+    "expected_warning": true
+  },
+  {
+    "group": "op26-exact",
+    "command": "./tests/npm<>input.txt run typecheck",
+    "expected_warning": true
+  },
+  {
+    "group": "op26-exact",
+    "command": "./tests/npm<input.txt run typecheck",
+    "expected_warning": true
+  },
+  {
+    "group": "op26-exact",
+    "command": "./tests/npm>&1 run typecheck",
+    "expected_warning": true
+  },
+  {
+    "group": "op26-exact",
+    "command": "./tests/npm>>out.txt run typecheck",
+    "expected_warning": true
+  },
+  {
+    "group": "op26-exact",
+    "command": "./tests/npm>out.txt run typecheck",
+    "expected_warning": true
+  },
+  {
+    "group": "op26-exact",
+    "command": "./tests/npm>|out.txt run typecheck",
+    "expected_warning": true
+  },
+  {
+    "group": "op26-exact",
+    "command": "./tests/test -f README.md",
+    "expected_warning": true
+  },
+  {
+    "group": "op26-exact",
+    "command": "./tests/tsc --noEmit tests/unit.ts",
+    "expected_warning": true
+  },
+  {
+    "group": "op26-exact",
+    "command": "./tools/tests/npm run build",
+    "expected_warning": true
+  },
+  {
+    "group": "op26-exact",
+    "command": "./tools/tests/npm run typecheck",
+    "expected_warning": true
+  },
+  {
+    "group": "op26-exact",
+    "command": "./tools/tests/test -f README.md",
+    "expected_warning": true
+  },
+  {
+    "group": "op26-exact",
+    "command": "./tools/tests/tsc --noEmit tests/unit.ts",
+    "expected_warning": true
+  },
+  {
+    "group": "op26-exact",
+    "command": "tests/npm run build",
+    "expected_warning": true
+  },
+  {
+    "group": "op26-exact",
+    "command": "tests/npm run typecheck",
+    "expected_warning": true
+  },
+  {
+    "group": "op26-exact",
+    "command": "tests/test -f README.md",
+    "expected_warning": true
+  },
+  {
+    "group": "op26-exact",
+    "command": "tests/tsc --noEmit tests/unit.ts",
+    "expected_warning": true
+  },
+  {
+    "group": "directory-siblings",
+    "command": "tools/tests/deep/tsc --noEmit tests/unit.ts",
+    "expected_warning": true
+  },
+  {
+    "group": "directory-siblings",
+    "command": "tools/tests/deep/npm run build",
+    "expected_warning": true
+  },
+  {
+    "group": "directory-siblings",
+    "command": "tools/tests/deep/pnpm run build",
+    "expected_warning": true
+  },
+  {
+    "group": "directory-siblings",
+    "command": "tools/tests/deep/yarn typecheck",
+    "expected_warning": true
+  },
+  {
+    "group": "directory-siblings",
+    "command": "tools/tests/deep/bun build",
+    "expected_warning": true
+  },
+  {
+    "group": "directory-siblings",
+    "command": "tools/tests/deep/go build",
+    "expected_warning": true
+  },
+  {
+    "group": "directory-siblings",
+    "command": "tools/tests/deep/make build",
+    "expected_warning": true
+  },
+  {
+    "group": "directory-siblings",
+    "command": "tools/tests/deep/cargo build",
+    "expected_warning": true
+  },
+  {
+    "group": "directory-siblings",
+    "command": "tools/tests/deep/test -f tests/check.sh",
+    "expected_warning": true
+  },
+  {
+    "group": "directory-siblings",
+    "command": "./tests/node_modules/.bin/tsc --noEmit tests/unit.ts",
+    "expected_warning": true
+  },
+  {
+    "group": "directory-siblings",
+    "command": "./tests/node_modules/.bin/npm run build",
+    "expected_warning": true
+  },
+  {
+    "group": "directory-siblings",
+    "command": "./tests/node_modules/.bin/pnpm run build",
+    "expected_warning": true
+  },
+  {
+    "group": "directory-siblings",
+    "command": "./tests/node_modules/.bin/yarn typecheck",
+    "expected_warning": true
+  },
+  {
+    "group": "directory-siblings",
+    "command": "./tests/node_modules/.bin/bun build",
+    "expected_warning": true
+  },
+  {
+    "group": "directory-siblings",
+    "command": "./tests/node_modules/.bin/go build",
+    "expected_warning": true
+  },
+  {
+    "group": "directory-siblings",
+    "command": "./tests/node_modules/.bin/make build",
+    "expected_warning": true
+  },
+  {
+    "group": "directory-siblings",
+    "command": "./tests/node_modules/.bin/cargo build",
+    "expected_warning": true
+  },
+  {
+    "group": "directory-siblings",
+    "command": "./tests/node_modules/.bin/test -f tests/check.sh",
+    "expected_warning": true
+  },
+  {
+    "group": "directory-siblings",
+    "command": "/opt/tests/toolchain/tsc --noEmit tests/unit.ts",
+    "expected_warning": true
+  },
+  {
+    "group": "directory-siblings",
+    "command": "/opt/tests/toolchain/npm run build",
+    "expected_warning": true
+  },
+  {
+    "group": "directory-siblings",
+    "command": "/opt/tests/toolchain/pnpm run build",
+    "expected_warning": true
+  },
+  {
+    "group": "directory-siblings",
+    "command": "/opt/tests/toolchain/yarn typecheck",
+    "expected_warning": true
+  },
+  {
+    "group": "directory-siblings",
+    "command": "/opt/tests/toolchain/bun build",
+    "expected_warning": true
+  },
+  {
+    "group": "directory-siblings",
+    "command": "/opt/tests/toolchain/go build",
+    "expected_warning": true
+  },
+  {
+    "group": "directory-siblings",
+    "command": "/opt/tests/toolchain/make build",
+    "expected_warning": true
+  },
+  {
+    "group": "directory-siblings",
+    "command": "/opt/tests/toolchain/cargo build",
+    "expected_warning": true
+  },
+  {
+    "group": "directory-siblings",
+    "command": "/opt/tests/toolchain/test -f tests/check.sh",
+    "expected_warning": true
+  },
+  {
+    "group": "directory-siblings",
+    "command": "../test/../tests/tsc --noEmit tests/unit.ts",
+    "expected_warning": true
+  },
+  {
+    "group": "directory-siblings",
+    "command": "../test/../tests/npm run build",
+    "expected_warning": true
+  },
+  {
+    "group": "directory-siblings",
+    "command": "../test/../tests/pnpm run build",
+    "expected_warning": true
+  },
+  {
+    "group": "directory-siblings",
+    "command": "../test/../tests/yarn typecheck",
+    "expected_warning": true
+  },
+  {
+    "group": "directory-siblings",
+    "command": "../test/../tests/bun build",
+    "expected_warning": true
+  },
+  {
+    "group": "directory-siblings",
+    "command": "../test/../tests/go build",
+    "expected_warning": true
+  },
+  {
+    "group": "directory-siblings",
+    "command": "../test/../tests/make build",
+    "expected_warning": true
+  },
+  {
+    "group": "directory-siblings",
+    "command": "../test/../tests/cargo build",
+    "expected_warning": true
+  },
+  {
+    "group": "directory-siblings",
+    "command": "../test/../tests/test -f tests/check.sh",
+    "expected_warning": true
+  },
+  {
+    "group": "redirect-siblings",
+    "command": "./tools/tests/deep/npm<in.txt run build",
+    "expected_warning": true
+  },
+  {
+    "group": "redirect-siblings",
+    "command": "./tests/node_modules/.bin/tsc <in.txt --noEmit tests/unit.ts",
+    "expected_warning": true
+  },
+  {
+    "group": "redirect-siblings",
+    "command": "./tests/test -f<in.txt README.md",
+    "expected_warning": true
+  },
+  {
+    "group": "redirect-runner",
+    "command": "./tools/tests/deep/npm<in.txt run test -- --grep typecheck",
+    "expected_warning": false
+  },
+  {
+    "group": "redirect-text",
+    "command": "./tests/grep<in.txt pytest tests/check.sh",
+    "expected_warning": true
+  },
+  {
+    "group": "redirect-siblings",
+    "command": "./tools/tests/deep/npm>out.txt run build",
+    "expected_warning": true
+  },
+  {
+    "group": "redirect-siblings",
+    "command": "./tests/node_modules/.bin/tsc >out.txt --noEmit tests/unit.ts",
+    "expected_warning": true
+  },
+  {
+    "group": "redirect-siblings",
+    "command": "./tests/test -f>out.txt README.md",
+    "expected_warning": true
+  },
+  {
+    "group": "redirect-runner",
+    "command": "./tools/tests/deep/npm>out.txt run test -- --grep typecheck",
+    "expected_warning": false
+  },
+  {
+    "group": "redirect-text",
+    "command": "./tests/grep>out.txt pytest tests/check.sh",
+    "expected_warning": true
+  },
+  {
+    "group": "redirect-siblings",
+    "command": "./tools/tests/deep/npm>>out.txt run build",
+    "expected_warning": true
+  },
+  {
+    "group": "redirect-siblings",
+    "command": "./tests/node_modules/.bin/tsc >>out.txt --noEmit tests/unit.ts",
+    "expected_warning": true
+  },
+  {
+    "group": "redirect-siblings",
+    "command": "./tests/test -f>>out.txt README.md",
+    "expected_warning": true
+  },
+  {
+    "group": "redirect-runner",
+    "command": "./tools/tests/deep/npm>>out.txt run test -- --grep typecheck",
+    "expected_warning": false
+  },
+  {
+    "group": "redirect-text",
+    "command": "./tests/grep>>out.txt pytest tests/check.sh",
+    "expected_warning": true
+  },
+  {
+    "group": "redirect-siblings",
+    "command": "./tools/tests/deep/npm>|out.txt run build",
+    "expected_warning": true
+  },
+  {
+    "group": "redirect-siblings",
+    "command": "./tests/node_modules/.bin/tsc >|out.txt --noEmit tests/unit.ts",
+    "expected_warning": true
+  },
+  {
+    "group": "redirect-siblings",
+    "command": "./tests/test -f>|out.txt README.md",
+    "expected_warning": true
+  },
+  {
+    "group": "redirect-runner",
+    "command": "./tools/tests/deep/npm>|out.txt run test -- --grep typecheck",
+    "expected_warning": false
+  },
+  {
+    "group": "redirect-text",
+    "command": "./tests/grep>|out.txt pytest tests/check.sh",
+    "expected_warning": true
+  },
+  {
+    "group": "redirect-siblings",
+    "command": "./tools/tests/deep/npm<>in.txt run build",
+    "expected_warning": true
+  },
+  {
+    "group": "redirect-siblings",
+    "command": "./tests/node_modules/.bin/tsc <>in.txt --noEmit tests/unit.ts",
+    "expected_warning": true
+  },
+  {
+    "group": "redirect-siblings",
+    "command": "./tests/test -f<>in.txt README.md",
+    "expected_warning": true
+  },
+  {
+    "group": "redirect-runner",
+    "command": "./tools/tests/deep/npm<>in.txt run test -- --grep typecheck",
+    "expected_warning": false
+  },
+  {
+    "group": "redirect-text",
+    "command": "./tests/grep<>in.txt pytest tests/check.sh",
+    "expected_warning": true
+  },
+  {
+    "group": "redirect-siblings",
+    "command": "./tools/tests/deep/npm<&0 run build",
+    "expected_warning": true
+  },
+  {
+    "group": "redirect-siblings",
+    "command": "./tests/node_modules/.bin/tsc <&0 --noEmit tests/unit.ts",
+    "expected_warning": true
+  },
+  {
+    "group": "redirect-siblings",
+    "command": "./tests/test -f<&0 README.md",
+    "expected_warning": true
+  },
+  {
+    "group": "redirect-runner",
+    "command": "./tools/tests/deep/npm<&0 run test -- --grep typecheck",
+    "expected_warning": false
+  },
+  {
+    "group": "redirect-text",
+    "command": "./tests/grep<&0 pytest tests/check.sh",
+    "expected_warning": true
+  },
+  {
+    "group": "redirect-siblings",
+    "command": "./tools/tests/deep/npm>&1 run build",
+    "expected_warning": true
+  },
+  {
+    "group": "redirect-siblings",
+    "command": "./tests/node_modules/.bin/tsc >&1 --noEmit tests/unit.ts",
+    "expected_warning": true
+  },
+  {
+    "group": "redirect-siblings",
+    "command": "./tests/test -f>&1 README.md",
+    "expected_warning": true
+  },
+  {
+    "group": "redirect-runner",
+    "command": "./tools/tests/deep/npm>&1 run test -- --grep typecheck",
+    "expected_warning": false
+  },
+  {
+    "group": "redirect-text",
+    "command": "./tests/grep>&1 pytest tests/check.sh",
+    "expected_warning": true
+  },
+  {
+    "group": "redirect-siblings",
+    "command": "./tools/tests/deep/npm&>out.txt run build",
+    "expected_warning": true
+  },
+  {
+    "group": "redirect-siblings",
+    "command": "./tests/node_modules/.bin/tsc &>out.txt --noEmit tests/unit.ts",
+    "expected_warning": true
+  },
+  {
+    "group": "redirect-siblings",
+    "command": "./tests/test -f&>out.txt README.md",
+    "expected_warning": true
+  },
+  {
+    "group": "redirect-runner",
+    "command": "./tools/tests/deep/npm&>out.txt run test -- --grep typecheck",
+    "expected_warning": false
+  },
+  {
+    "group": "redirect-text",
+    "command": "./tests/grep&>out.txt pytest tests/check.sh",
+    "expected_warning": true
+  },
+  {
+    "group": "boundaries",
+    "command": "<tests/typecheck.txt ./tests/npm run build",
+    "expected_warning": true
+  },
+  {
+    "group": "boundaries",
+    "command": "0<tests/check.txt ./tests/test -e README.md",
+    "expected_warning": true
+  },
+  {
+    "group": "boundaries",
+    "command": "./tests/npm 2>tests/check.log run build",
+    "expected_warning": true
+  },
+  {
+    "group": "boundaries",
+    "command": "./tests/npm 2&>out.txt test typecheck.txt",
+    "expected_warning": true
+  },
+  {
+    "group": "boundaries",
+    "command": "npm2>out.txt test typecheck.txt",
+    "expected_warning": true
+  },
+  {
+    "group": "boundaries",
+    "command": "./tests/npm >&- run build",
+    "expected_warning": true
+  },
+  {
+    "group": "boundaries",
+    "command": "/usr/bin/grep >| out.txt tests README.md",
+    "expected_warning": true
+  },
+  {
+    "group": "boundaries",
+    "command": "./tests/rg AC-001 ./tests/npm",
+    "expected_warning": true
+  },
+  {
+    "group": "boundaries",
+    "command": "./tests/diff tests/a.txt tests/b.txt",
+    "expected_warning": true
+  },
+  {
+    "group": "runner-and-operands",
+    "command": "./tests/npm test -- --grep typecheck",
+    "expected_warning": false
+  },
+  {
+    "group": "runner-and-operands",
+    "command": "tools/tests/pnpm run test tests/build.ts",
+    "expected_warning": false
+  },
+  {
+    "group": "runner-and-operands",
+    "command": "/opt/tests/yarn test typecheck",
+    "expected_warning": false
+  },
+  {
+    "group": "runner-and-operands",
+    "command": "./tests/bun test tests/typecheck.ts",
+    "expected_warning": false
+  },
+  {
+    "group": "runner-and-operands",
+    "command": "./tests/go test ./build",
+    "expected_warning": false
+  },
+  {
+    "group": "runner-and-operands",
+    "command": "./tests/make test TARGET=typecheck",
+    "expected_warning": false
+  },
+  {
+    "group": "runner-and-operands",
+    "command": "./tests/cargo test --test build",
+    "expected_warning": false
+  },
+  {
+    "group": "runner-and-operands",
+    "command": "/opt/tests/node --test tests/typecheck.js",
+    "expected_warning": false
+  },
+  {
+    "group": "runner-and-operands",
+    "command": "./tests/python3 -m pytest tests/build.py",
+    "expected_warning": false
+  },
+  {
+    "group": "runner-and-operands",
+    "command": "./tests/pytest tests/typecheck.py",
+    "expected_warning": false
+  },
+  {
+    "group": "runner-and-operands",
+    "command": "./tests/bats tests/build.bats",
+    "expected_warning": false
+  },
+  {
+    "group": "runner-and-operands",
+    "command": "bash -ex ./tests/typecheck.sh",
+    "expected_warning": false
+  },
+  {
+    "group": "runner-and-operands",
+    "command": "./tests/check-build.sh /usr/bin/grep",
+    "expected_warning": false
+  },
+  {
+    "group": "runner-and-operands",
+    "command": "node scripts/assert-content.js ./tests/grep AC-001 README.md",
+    "expected_warning": false
+  },
+  {
+    "group": "runner-and-operands",
+    "command": "node scripts/assert-content.js ./tools/rg AC-001 README.md",
+    "expected_warning": false
+  },
+  {
+    "group": "runner-and-operands",
+    "command": "./tests/npmish --grep text",
+    "expected_warning": false
+  },
+  {
+    "group": "runner-and-operands",
+    "command": "./tests/test-helper.sh tests/unit.ts",
+    "expected_warning": false
+  },
+  {
+    "group": "runner-and-operands",
+    "command": "./tools/contest.py README.md",
+    "expected_warning": false
+  }
+]

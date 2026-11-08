@@ -1,0 +1,22 @@
+{
+  "label": "source-before",
+  "argv": [
+    "bash",
+    "-c",
+    ". scripts/lib.sh; . scripts/verification-lib.sh; vf_snapshot \"$1\" \"$PWD\" \"$PWD\" \"$2\" > \"$3\"",
+    "_",
+    "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline",
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s59-analyzer-accept/inputs-before.nul",
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s59-analyzer-accept/source-before.txt"
+  ],
+  "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+  "envOverrides": {
+    "GIT_OPTIONAL_LOCKS": "0"
+  },
+  "started": "2026-10-29T22:13:51.161638+00:00",
+  "nativePid": 84418,
+  "ended": "2026-10-29T22:14:04.498834+00:00",
+  "exit": 0,
+  "stdoutSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

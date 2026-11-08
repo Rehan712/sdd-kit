@@ -1,0 +1,68 @@
+{
+  "observedAt": "2026-10-28T13:39:42.230440+00:00",
+  "wrapperPid": 72997,
+  "wrapper": [
+    {
+      "pid": 72997,
+      "ppid": 72883,
+      "elapsed": "30:41",
+      "command": "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/Resources/Python.app/Contents/MacOS/Python /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s41-floor-operation/runner.py"
+    }
+  ],
+  "descendants": [
+    {
+      "pid": 73000,
+      "ppid": 72997,
+      "elapsed": "30:41",
+      "command": "/usr/bin/time -p -o /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s38-final-floorrun.time /bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s38-final-floor.sh 1"
+    },
+    {
+      "pid": 73001,
+      "ppid": 73000,
+      "elapsed": "30:41",
+      "command": "/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s38-final-floor.sh 1"
+    },
+    {
+      "pid": 78370,
+      "ppid": 73001,
+      "elapsed": "28:51",
+      "command": "/bin/bash /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s38-final-floor.sh 1"
+    },
+    {
+      "pid": 78371,
+      "ppid": 73001,
+      "elapsed": "28:51",
+      "command": "bash -c bash scripts/spec-gate.sh floor \"$1\" > \"$2\" 2>&1; printf \"%s\\n\" \"$?\" > \"$3\" _ .specify/specs/003-gate-round-reduction-and-token-discipline .specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s38-final-floorrun.log .specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s38-final-floorrun.rc"
+    },
+    {
+      "pid": 78376,
+      "ppid": 78371,
+      "elapsed": "28:51",
+      "command": "caffeinate -i -m -s bash -c bash scripts/spec-gate.sh floor \"$1\" > \"$2\" 2>&1; printf \"%s\\n\" \"$?\" > \"$3\" _ .specify/specs/003-gate-round-reduction-and-token-discipline .specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s38-final-floorrun.log .specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s38-final-floorrun.rc"
+    },
+    {
+      "pid": 78380,
+      "ppid": 78371,
+      "elapsed": "28:51",
+      "command": "bash scripts/spec-gate.sh floor .specify/specs/003-gate-round-reduction-and-token-discipline"
+    },
+    {
+      "pid": 82975,
+      "ppid": 78370,
+      "elapsed": "00:47",
+      "command": "sleep 60"
+    },
+    {
+      "pid": 86377,
+      "ppid": 78380,
+      "elapsed": "00:00",
+      "command": "(cmp)"
+    }
+  ],
+  "automaticSamplesTail": [
+    "13:36:54Z avail=11.19GiB swap_used=12766.94M power=AC Power/78%",
+    "13:37:54Z avail=11.21GiB swap_used=12740.69M power=AC Power/79%",
+    "13:38:55Z avail=11.19GiB swap_used=12829.12M power=AC Power/80%"
+  ],
+  "floorLogTail": []
+}

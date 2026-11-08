@@ -1,0 +1,1044 @@
+{
+  "phase": "red",
+  "total": 69,
+  "passed": 36,
+  "missingWeakWarnings": 27,
+  "wrongRunnerWarnings": 6,
+  "results": [
+    {
+      "command": "grep>out.txt AC-001 README.md",
+      "kind": "weak",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": true,
+      "consistent": false,
+      "passed": true
+    },
+    {
+      "command": "grep>|out.txt AC-001 README.md",
+      "kind": "weak",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": false,
+      "consistent": true,
+      "passed": false
+    },
+    {
+      "command": "grep >|out.txt AC-001 README.md",
+      "kind": "weak",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": true,
+      "consistent": false,
+      "passed": true
+    },
+    {
+      "command": "grep>| out.txt AC-001 README.md",
+      "kind": "weak",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": false,
+      "consistent": true,
+      "passed": false
+    },
+    {
+      "command": "/usr/bin/grep>out.txt AC-001 README.md",
+      "kind": "weak",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": true,
+      "consistent": false,
+      "passed": true
+    },
+    {
+      "command": "/usr/bin/grep>|out.txt AC-001 README.md",
+      "kind": "weak",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": false,
+      "consistent": true,
+      "passed": false
+    },
+    {
+      "command": "/usr/bin/grep >|out.txt AC-001 README.md",
+      "kind": "weak",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": true,
+      "consistent": false,
+      "passed": true
+    },
+    {
+      "command": "/usr/bin/grep>| out.txt AC-001 README.md",
+      "kind": "weak",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": false,
+      "consistent": true,
+      "passed": false
+    },
+    {
+      "command": "./tools/grep>out.txt AC-001 README.md",
+      "kind": "weak",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": true,
+      "consistent": false,
+      "passed": true
+    },
+    {
+      "command": "./tools/grep>|out.txt AC-001 README.md",
+      "kind": "weak",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": false,
+      "consistent": true,
+      "passed": false
+    },
+    {
+      "command": "./tools/grep >|out.txt AC-001 README.md",
+      "kind": "weak",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": true,
+      "consistent": false,
+      "passed": true
+    },
+    {
+      "command": "./tools/grep>| out.txt AC-001 README.md",
+      "kind": "weak",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": false,
+      "consistent": true,
+      "passed": false
+    },
+    {
+      "command": "tests/grep>out.txt AC-001 README.md",
+      "kind": "weak",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": true,
+      "consistent": false,
+      "passed": true
+    },
+    {
+      "command": "tests/grep>|out.txt AC-001 README.md",
+      "kind": "weak",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": false,
+      "consistent": true,
+      "passed": false
+    },
+    {
+      "command": "tests/grep >|out.txt AC-001 README.md",
+      "kind": "weak",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": true,
+      "consistent": false,
+      "passed": true
+    },
+    {
+      "command": "tests/grep>| out.txt AC-001 README.md",
+      "kind": "weak",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": false,
+      "consistent": true,
+      "passed": false
+    },
+    {
+      "command": "rg>out.txt AC-001 README.md",
+      "kind": "weak",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": true,
+      "consistent": false,
+      "passed": true
+    },
+    {
+      "command": "rg>|out.txt AC-001 README.md",
+      "kind": "weak",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": false,
+      "consistent": true,
+      "passed": false
+    },
+    {
+      "command": "rg >|out.txt AC-001 README.md",
+      "kind": "weak",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": true,
+      "consistent": false,
+      "passed": true
+    },
+    {
+      "command": "rg>| out.txt AC-001 README.md",
+      "kind": "weak",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": false,
+      "consistent": true,
+      "passed": false
+    },
+    {
+      "command": "/usr/bin/rg>out.txt AC-001 README.md",
+      "kind": "weak",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": true,
+      "consistent": false,
+      "passed": true
+    },
+    {
+      "command": "/usr/bin/rg>|out.txt AC-001 README.md",
+      "kind": "weak",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": false,
+      "consistent": true,
+      "passed": false
+    },
+    {
+      "command": "/usr/bin/rg >|out.txt AC-001 README.md",
+      "kind": "weak",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": true,
+      "consistent": false,
+      "passed": true
+    },
+    {
+      "command": "/usr/bin/rg>| out.txt AC-001 README.md",
+      "kind": "weak",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": false,
+      "consistent": true,
+      "passed": false
+    },
+    {
+      "command": "./tools/rg>out.txt AC-001 README.md",
+      "kind": "weak",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": true,
+      "consistent": false,
+      "passed": true
+    },
+    {
+      "command": "./tools/rg>|out.txt AC-001 README.md",
+      "kind": "weak",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": false,
+      "consistent": true,
+      "passed": false
+    },
+    {
+      "command": "./tools/rg >|out.txt AC-001 README.md",
+      "kind": "weak",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": true,
+      "consistent": false,
+      "passed": true
+    },
+    {
+      "command": "./tools/rg>| out.txt AC-001 README.md",
+      "kind": "weak",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": false,
+      "consistent": true,
+      "passed": false
+    },
+    {
+      "command": "tests/rg>out.txt AC-001 README.md",
+      "kind": "weak",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": true,
+      "consistent": false,
+      "passed": true
+    },
+    {
+      "command": "tests/rg>|out.txt AC-001 README.md",
+      "kind": "weak",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": false,
+      "consistent": true,
+      "passed": false
+    },
+    {
+      "command": "tests/rg >|out.txt AC-001 README.md",
+      "kind": "weak",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": true,
+      "consistent": false,
+      "passed": true
+    },
+    {
+      "command": "tests/rg>| out.txt AC-001 README.md",
+      "kind": "weak",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": false,
+      "consistent": true,
+      "passed": false
+    },
+    {
+      "command": "diff>out.txt old new",
+      "kind": "weak",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": true,
+      "consistent": false,
+      "passed": true
+    },
+    {
+      "command": "diff>|out.txt old new",
+      "kind": "weak",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": false,
+      "consistent": true,
+      "passed": false
+    },
+    {
+      "command": "diff >|out.txt old new",
+      "kind": "weak",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": true,
+      "consistent": false,
+      "passed": true
+    },
+    {
+      "command": "diff>| out.txt old new",
+      "kind": "weak",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": false,
+      "consistent": true,
+      "passed": false
+    },
+    {
+      "command": "/usr/bin/diff>out.txt old new",
+      "kind": "weak",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": true,
+      "consistent": false,
+      "passed": true
+    },
+    {
+      "command": "/usr/bin/diff>|out.txt old new",
+      "kind": "weak",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": false,
+      "consistent": true,
+      "passed": false
+    },
+    {
+      "command": "/usr/bin/diff >|out.txt old new",
+      "kind": "weak",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": true,
+      "consistent": false,
+      "passed": true
+    },
+    {
+      "command": "/usr/bin/diff>| out.txt old new",
+      "kind": "weak",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": false,
+      "consistent": true,
+      "passed": false
+    },
+    {
+      "command": "./tools/diff>out.txt old new",
+      "kind": "weak",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": true,
+      "consistent": false,
+      "passed": true
+    },
+    {
+      "command": "./tools/diff>|out.txt old new",
+      "kind": "weak",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": false,
+      "consistent": true,
+      "passed": false
+    },
+    {
+      "command": "./tools/diff >|out.txt old new",
+      "kind": "weak",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": true,
+      "consistent": false,
+      "passed": true
+    },
+    {
+      "command": "./tools/diff>| out.txt old new",
+      "kind": "weak",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": false,
+      "consistent": true,
+      "passed": false
+    },
+    {
+      "command": "tests/diff>out.txt old new",
+      "kind": "weak",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": true,
+      "consistent": false,
+      "passed": true
+    },
+    {
+      "command": "tests/diff>|out.txt old new",
+      "kind": "weak",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": false,
+      "consistent": true,
+      "passed": false
+    },
+    {
+      "command": "tests/diff >|out.txt old new",
+      "kind": "weak",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": true,
+      "consistent": false,
+      "passed": true
+    },
+    {
+      "command": "tests/diff>| out.txt old new",
+      "kind": "weak",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": false,
+      "consistent": true,
+      "passed": false
+    },
+    {
+      "command": "tsc>&tests/check.log --noEmit",
+      "kind": "weak",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": false,
+      "consistent": true,
+      "passed": false
+    },
+    {
+      "command": "npm&>tests/typecheck.log run build",
+      "kind": "weak",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": true,
+      "consistent": false,
+      "passed": true
+    },
+    {
+      "command": "npm run>&1 typecheck",
+      "kind": "weak",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": true,
+      "consistent": false,
+      "passed": true
+    },
+    {
+      "command": "test -f<&0 README.md",
+      "kind": "weak",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": false,
+      "consistent": true,
+      "passed": false
+    },
+    {
+      "command": "tsc 2>&- --noEmit",
+      "kind": "weak",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": false,
+      "consistent": true,
+      "passed": false
+    },
+    {
+      "command": "npm 0<&- run build",
+      "kind": "weak",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": true,
+      "consistent": false,
+      "passed": true
+    },
+    {
+      "command": "grep 2>&1 AC-001 README.md",
+      "kind": "weak",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": true,
+      "consistent": false,
+      "passed": true
+    },
+    {
+      "command": "rg<>input.txt AC-001 README.md",
+      "kind": "weak",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": true,
+      "consistent": false,
+      "passed": true
+    },
+    {
+      "command": "diff>>out.txt old new",
+      "kind": "weak",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": true,
+      "consistent": false,
+      "passed": true
+    },
+    {
+      "command": "npm2>&1 test typecheck.txt",
+      "kind": "weak",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": true,
+      "consistent": false,
+      "passed": true
+    },
+    {
+      "command": "bash&>tests/build.log tests/typecheck.sh",
+      "kind": "clean",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": true,
+      "consistent": false,
+      "passed": false
+    },
+    {
+      "command": "npm>&tests/typecheck.log run test",
+      "kind": "clean",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": true,
+      "consistent": false,
+      "passed": false
+    },
+    {
+      "command": "node>|tests/build.log --test test/typecheck.js",
+      "kind": "clean",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": true,
+      "consistent": false,
+      "passed": false
+    },
+    {
+      "command": "pytest<>tests/build.txt tests/typecheck.py",
+      "kind": "clean",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": false,
+      "consistent": true,
+      "passed": true
+    },
+    {
+      "command": "cargo test&>out.txt --test typecheck",
+      "kind": "clean",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": true,
+      "consistent": false,
+      "passed": false
+    },
+    {
+      "command": "python3 -m<&0 pytest tests/build.py",
+      "kind": "clean",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": false,
+      "consistent": true,
+      "passed": true
+    },
+    {
+      "command": "npm run>&1 test -- --grep typecheck",
+      "kind": "clean",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": true,
+      "consistent": false,
+      "passed": false
+    },
+    {
+      "command": "bash 2>&- tests/typecheck.sh",
+      "kind": "clean",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": true,
+      "consistent": false,
+      "passed": false
+    },
+    {
+      "command": "node scripts/assert-content.js /usr/bin/grep",
+      "kind": "clean",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": false,
+      "consistent": true,
+      "passed": true
+    },
+    {
+      "command": "node scripts/assert-content.js ./tools/rg",
+      "kind": "clean",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": false,
+      "consistent": true,
+      "passed": true
+    },
+    {
+      "command": "node scripts/assert-content.js tests/diff",
+      "kind": "clean",
+      "argv": [
+        "/bin/bash",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/red-kit/scripts/sdd-analyze.sh",
+        "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/public-fixture/proj/.specify/specs/001-test-feature"
+      ],
+      "cwd": "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s33-o034-candidate-w12sg2fx/candidate",
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "exit": 0,
+      "warned": false,
+      "consistent": true,
+      "passed": true
+    }
+  ]
+}

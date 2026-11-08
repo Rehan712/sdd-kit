@@ -1,0 +1,66 @@
+[
+  {
+    "label": "bash32-version",
+    "argv": [
+      "/bin/bash",
+      "--version"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "env_overrides": {
+      "GIT_OPTIONAL_LOCKS": "0",
+      "LC_ALL": "C",
+      "SHELLCHECK_OPTS": null
+    },
+    "start": "2026-10-29T17:41:51.031976+00:00",
+    "end": "2026-10-29T17:41:51.036203+00:00",
+    "exit": 0,
+    "stdin_sha256": null,
+    "stdout_sha256": "bbb931c0afdf20554fcb03c4414a67092e2d8db87226567a6ad5be3c1bcc1a15",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "bash32-syntax",
+    "argv": [
+      "/bin/bash",
+      "-n",
+      "scripts/sdd-analyze.sh",
+      "tests/test-sdd-analyze.sh"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "env_overrides": {
+      "GIT_OPTIONAL_LOCKS": "0",
+      "LC_ALL": "C",
+      "SHELLCHECK_OPTS": null
+    },
+    "start": "2026-10-29T17:41:51.036385+00:00",
+    "end": "2026-10-29T17:41:51.040069+00:00",
+    "exit": 0,
+    "stdin_sha256": null,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "shellcheck",
+    "argv": [
+      "/opt/homebrew/bin/shellcheck",
+      "--norc",
+      "-S",
+      "warning",
+      "-x",
+      "scripts/sdd-analyze.sh",
+      "tests/test-sdd-analyze.sh"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "env_overrides": {
+      "GIT_OPTIONAL_LOCKS": "0",
+      "LC_ALL": "C",
+      "SHELLCHECK_OPTS": null
+    },
+    "start": "2026-10-29T17:41:51.040324+00:00",
+    "end": "2026-10-29T17:41:53.686760+00:00",
+    "exit": 0,
+    "stdin_sha256": null,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+]

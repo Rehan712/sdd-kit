@@ -1,0 +1,40 @@
+{
+  "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+  "paths": {
+    "bash": "/bin/bash",
+    "shellcheck": "/opt/homebrew/bin/shellcheck",
+    "docker": "/usr/local/bin/docker",
+    "podman": null,
+    "colima": null,
+    "orbctl": null
+  },
+  "candidates": [
+    {
+      "path": "/Applications/Docker.app/Contents/Resources/bin/docker",
+      "exists": true
+    },
+    {
+      "path": "/bin/bash",
+      "exists": true,
+      "exit": 0,
+      "stdout": "GNU bash, version 3.2.57(1)-release (arm64-apple-darwin25)\nCopyright (C) 2007 Free Software Foundation, Inc.\n",
+      "stderr": ""
+    },
+    {
+      "path": "/opt/homebrew/bin/bash",
+      "exists": false
+    },
+    {
+      "path": "/opt/local/bin/bash",
+      "exists": false
+    },
+    {
+      "path": "/run/current-system/sw/bin/bash",
+      "exists": false
+    },
+    {
+      "path": "/usr/local/bin/bash",
+      "exists": false
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "workdir": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+  "launch_shell": "bash",
+  "shell_text": "cd /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline\nset -euo pipefail\nexport GIT_OPTIONAL_LOCKS=0\nr=\"$PWD/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports\"\npmset -g batt | head -1 | grep -q 'AC Power'\nfor suffix in launch.log wrapper.log wrapper.rc wrapper.pid log rc time pre samples.log source-before.nul source-after.nul binding-before.json binding-after.json binding-before.log binding-after.log floor-id; do\n  test ! -e \"$r/s27-floorrun.$suffix\"\ndone\nnohup bash -c '\n  /usr/bin/time -p -o \"$1/s27-floorrun.time\" bash \"$1/s27-floor.sh\" 1 > \"$1/s27-floorrun.wrapper.log\" 2>&1\n  rc=$?\n  printf \"%s\\n\" \"$rc\" > \"$1/s27-floorrun.wrapper.rc\"\n  exit \"$rc\"\n' _ \"$r\" > \"$r/s27-floorrun.launch.log\" 2>&1 < /dev/null &\nprintf '%s\\n' \"$!\" > \"$r/s27-floorrun.wrapper.pid\"\n",
+  "helper_argv": [
+    "bash",
+    "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s27-floor.sh",
+    "1"
+  ],
+  "floor_argv": [
+    "bash",
+    "scripts/spec-gate.sh",
+    "floor",
+    ".specify/specs/003-gate-round-reduction-and-token-discipline"
+  ],
+  "power_requirement": "Actual pmset AC Power, checked by parent and helper",
+  "executed": false
+}

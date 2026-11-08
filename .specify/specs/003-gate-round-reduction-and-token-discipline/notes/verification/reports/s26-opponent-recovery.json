@@ -1,0 +1,139 @@
+{
+  "recordType": "partial-opponent-recovery",
+  "gate": "opponent",
+  "round": 23,
+  "priorTask": {
+    "taskId": "node:delegated-task:command%3Amcp%3A5af1d574-4c97-4e78-bba3-3d7d606547af%3Adelegate-task%3Asdd003-opponent-round23-max-current-provider-retry2",
+    "childThreadId": "thread:delegated-task:command%3Amcp%3A5af1d574-4c97-4e78-bba3-3d7d606547af%3Adelegate-task%3Asdd003-opponent-round23-max-current-provider-retry2",
+    "status": "failed",
+    "summary": "Provider turn failed.",
+    "providerInstanceId": "codex_codex_gym",
+    "model": "gpt-6.1-sol",
+    "options": [
+      {
+        "id": "reasoningEffort",
+        "value": "max"
+      },
+      {
+        "id": "serviceTier",
+        "value": "default"
+      }
+    ]
+  },
+  "partialProgress": [
+    {
+      "position": 33,
+      "text": "The focused case passes unchanged under Bash 3.2. I also found an existing equality check for authorization timestamps, so that boundary is already covered outside the repaired case. The mutation checks are running; I\u2019ll separately verify the known O-032 recovery failure.\n",
+      "updatedAt": "2026-10-25T13:38:39.108Z"
+    },
+    {
+      "position": 39,
+      "text": "Independent probes confirm that both same-day and later-day reconciliations reject waivers one second before or exactly at completion, and accept one second after. O-032 still reproduces: after a history edit, a corrected reconciliation record is silently refused until the stale record is manually removed.\n",
+      "updatedAt": "2026-10-25T13:41:58.064Z"
+    },
+    {
+      "position": 41,
+      "text": "The ordering mutations checked so far fail at the new assertions. I\u2019ll stop the remaining mutation probes after those assertions to keep the scratch work bounded; the complete focused case has already passed unchanged.\n",
+      "updatedAt": "2026-10-25T13:43:19.938Z"
+    }
+  ],
+  "scratch": "/private/tmp/opp23-codex-gym-3es8gbyb",
+  "finalReportExists": false,
+  "finalVerdict": null,
+  "source": "a7e7dd326b27c7565c26349485c440af26f718a7f16e400ea42ed6961d03cd1a",
+  "floor": "FLOOR-il41Kn",
+  "note": "The previous review made partial progress but never returned a final report. T3 server restart separately interrupted the parent's thread-read call. Saved artifacts are inputs to verify, not an accepted gate result.",
+  "recordedAt": "2026-10-25T14:35:21.769449+00:00",
+  "probeRcs": {
+    "reality.rc": "0",
+    "prefix-baseline.rc": "0",
+    "baseline.rc": "0",
+    "boundary.rc": "0"
+  },
+  "mutations": [
+    {
+      "mutant": "samedaymid",
+      "rc": 1,
+      "assertions": [
+        "assert: expected exit 4, got 0: bash /private/tmp/opp23-codex-gym-3es8gbyb/tmp/sddkit.xAkVpo/floor-kit-legacyround/scripts/spec-gate.sh waiver /private/tmp/opp23-codex-gym-3es8gbyb/tmp/sddkit.xAkVpo/legacyround/.specify/specs/003-verification-fixture opponent 6",
+        "assert: AC-009: a same-day waiver one second before the reconciled completion authorized the next round missing substring: not after the previous round completion at 2026-07-20T15:17:43Z"
+      ],
+      "seconds": 90.83
+    },
+    {
+      "mutant": "hour",
+      "rc": 1,
+      "assertions": [
+        "assert: expected exit 4, got 0: bash /private/tmp/opp23-codex-gym-3es8gbyb/tmp/sddkit.2sarFH/floor-kit-legacyround/scripts/spec-gate.sh waiver /private/tmp/opp23-codex-gym-3es8gbyb/tmp/sddkit.2sarFH/legacyround/.specify/specs/003-verification-fixture opponent 6",
+        "assert: AC-009: a same-day waiver one second before the reconciled completion authorized the next round missing substring: not after the previous round completion at 2026-07-20T15:17:43Z",
+        "assert: expected exit 4, got 0: bash /private/tmp/opp23-codex-gym-3es8gbyb/tmp/sddkit.2sarFH/floor-kit-legacyround/scripts/spec-gate.sh waiver /private/tmp/opp23-codex-gym-3es8gbyb/tmp/sddkit.2sarFH/legacyround/.specify/specs/003-verification-fixture opponent 6",
+        "assert: AC-009: a waiver dated before the reconciled completion authorized the next round missing substring: not after the previous round completion at 2026-07-21T06:17:43Z"
+      ],
+      "seconds": 201.28
+    },
+    {
+      "mutant": "minute",
+      "rc": 1,
+      "assertions": [
+        "assert: expected exit 4, got 0: bash /private/tmp/opp23-codex-gym-3es8gbyb/tmp/sddkit.trgbwJ/floor-kit-legacyround/scripts/spec-gate.sh waiver /private/tmp/opp23-codex-gym-3es8gbyb/tmp/sddkit.trgbwJ/legacyround/.specify/specs/003-verification-fixture opponent 6",
+        "assert: AC-009: a same-day waiver one second before the reconciled completion authorized the next round missing substring: not after the previous round completion at 2026-07-20T15:17:43Z",
+        "assert: expected exit 4, got 0: bash /private/tmp/opp23-codex-gym-3es8gbyb/tmp/sddkit.trgbwJ/floor-kit-legacyround/scripts/spec-gate.sh waiver /private/tmp/opp23-codex-gym-3es8gbyb/tmp/sddkit.trgbwJ/legacyround/.specify/specs/003-verification-fixture opponent 6",
+        "assert: AC-009: a waiver dated before the reconciled completion authorized the next round missing substring: not after the previous round completion at 2026-07-21T06:17:43Z"
+      ],
+      "seconds": 165.98
+    },
+    {
+      "mutant": "maxeod",
+      "rc": 1,
+      "assertions": [
+        "assert: AC-009: a same-day waiver one second before the reconciled completion authorized the next round missing substring: not after the previous round completion at 2026-07-20T15:17:43Z",
+        "assert: expected exit 0, got 4: bash /private/tmp/opp23-codex-gym-3es8gbyb/tmp/sddkit.FrIrws/floor-kit-legacyround/scripts/spec-gate.sh waiver /private/tmp/opp23-codex-gym-3es8gbyb/tmp/sddkit.FrIrws/legacyround/.specify/specs/003-verification-fixture opponent 6",
+        "assert: AC-009: a same-day waiver one second after the reconciled completion was not authorized missing substring: authorized: opponent round 6"
+      ],
+      "seconds": 8.37
+    },
+    {
+      "mutant": "laterday",
+      "rc": 1,
+      "assertions": [
+        "assert: expected exit 0, got 3: bash /private/tmp/opp23-codex-gym-3es8gbyb/tmp/sddkit.PqdY6T/floor-kit-legacyround/scripts/spec-gate.sh round /private/tmp/opp23-codex-gym-3es8gbyb/tmp/sddkit.PqdY6T/legacyround/.specify/specs/003-verification-fixture opponent --reconcile /private/tmp/opp23-codex-gym-3es8gbyb/tmp/sddkit.PqdY6T/legacy-same.nul",
+        "assert: AC-009: a record on the history's own date was not reconciled missing substring: reconciled legacy gate=opponent round=5 timestamp=2026-07-20T15:17:43Z",
+        "assert: AC-009: a same-day waiver one second before the reconciled completion authorized the next round missing substring: not after the previous round completion at 2026-07-20T15:17:43Z",
+        "assert: expected exit 0, got 4: bash /private/tmp/opp23-codex-gym-3es8gbyb/tmp/sddkit.PqdY6T/floor-kit-legacyround/scripts/spec-gate.sh waiver /private/tmp/opp23-codex-gym-3es8gbyb/tmp/sddkit.PqdY6T/legacyround/.specify/specs/003-verification-fixture opponent 6",
+        "assert: AC-009: a same-day waiver one second after the reconciled completion was not authorized missing substring: authorized: opponent round 6"
+      ],
+      "seconds": 8.12
+    },
+    {
+      "mutant": "recvalid",
+      "rc": 1,
+      "assertions": [
+        "assert: expected exit 3, got 0: bash /private/tmp/opp23-codex-gym-3es8gbyb/tmp/sddkit.BZ1d3L/floor-kit-legacyround/scripts/spec-gate.sh round /private/tmp/opp23-codex-gym-3es8gbyb/tmp/sddkit.BZ1d3L/legacyround/.specify/specs/003-verification-fixture opponent --reconcile /private/tmp/opp23-codex-gym-3es8gbyb/tmp/sddkit.BZ1d3L/legacy-wrong-invalid.nul",
+        "assert: AC-009: a reconcile record with an impossible time wrote legacy-time.nul",
+        "assert: expected exit 4, got 3: bash /private/tmp/opp23-codex-gym-3es8gbyb/tmp/sddkit.BZ1d3L/floor-kit-legacyround/scripts/spec-gate.sh round /private/tmp/opp23-codex-gym-3es8gbyb/tmp/sddkit.BZ1d3L/legacyround/.specify/specs/003-verification-fixture opponent",
+        "assert: AC-009: a reconcile record with an impossible time left the history able to order an authorization missing substring: date-only history needs timestamped digest reconciliation"
+      ],
+      "seconds": 9.44
+    },
+    {
+      "mutant": "futureday",
+      "rc": 1,
+      "assertions": [
+        "assert: expected exit 3, got 0: bash /private/tmp/opp23-codex-gym-3es8gbyb/tmp/sddkit.Cyi6T4/floor-kit-legacyround/scripts/spec-gate.sh round /private/tmp/opp23-codex-gym-3es8gbyb/tmp/sddkit.Cyi6T4/legacyround/.specify/specs/003-verification-fixture opponent --reconcile /private/tmp/opp23-codex-gym-3es8gbyb/tmp/sddkit.Cyi6T4/legacy-wrong-soon.nul",
+        "assert: AC-009: a reconcile record with a timestamp later today wrote legacy-time.nul",
+        "assert: AC-009: a reconcile record with a timestamp later today left the history able to order an authorization missing substring: date-only history needs timestamped digest reconciliation"
+      ],
+      "seconds": 9.73
+    },
+    {
+      "mutant": "futureyear",
+      "rc": 1,
+      "assertions": [
+        "assert: expected exit 3, got 0: bash /private/tmp/opp23-codex-gym-3es8gbyb/tmp/sddkit.y0djMj/floor-kit-legacyround/scripts/spec-gate.sh round /private/tmp/opp23-codex-gym-3es8gbyb/tmp/sddkit.y0djMj/legacyround/.specify/specs/003-verification-fixture opponent --reconcile /private/tmp/opp23-codex-gym-3es8gbyb/tmp/sddkit.y0djMj/legacy-wrong-soon.nul",
+        "assert: AC-009: a reconcile record with a timestamp later today wrote legacy-time.nul",
+        "assert: AC-009: a reconcile record with a timestamp later today left the history able to order an authorization missing substring: date-only history needs timestamped digest reconciliation"
+      ],
+      "seconds": 8.72
+    }
+  ]
+}

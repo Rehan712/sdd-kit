@@ -1,0 +1,62 @@
+{
+  "at": "2026-10-29T18:13:53.663820+00:00",
+  "actualDelegateStatus": "completed",
+  "identity": {
+    "provider": "codex_codex_gym",
+    "model": "gpt-6.1-sol",
+    "options": {
+      "reasoningEffort": "max",
+      "serviceTier": "default"
+    }
+  },
+  "qualityRound": 6,
+  "verdict": "Ship",
+  "remainingFindings": 0,
+  "reportSha256": "9f0c94819b85191876b25e41b2eeb718bc439f9d8dfe0126925fe9f8b19216b6",
+  "canonicalBytes": 10012,
+  "actualReturnedBytes": 10011,
+  "literalByteMatch": false,
+  "matchesAfterAddingExactlyOneTerminalLF": true,
+  "source": "3e70d8170d98f13c04f550c15942f70bdb487abf30ad629ff78db2048f077497",
+  "currentRawSourceFiles": {
+    "scripts/sdd-analyze.sh": {
+      "sha256": "f2809d24b5bec01fa4ca8ab4d689c5e9585472989e66798aabc9597d80f176fd",
+      "mode": 493,
+      "mtimeNs": 1793295459287139619
+    },
+    "tests/test-sdd-analyze.sh": {
+      "sha256": "9dd851fd6ed32797384ada5c4d263dcdbb6947ce95cdeae4d5ea0ac1bb60a393",
+      "mode": 420,
+      "mtimeNs": 1793295459287497581
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md": {
+      "sha256": "859042532b2b0c71136b6db6184008fb354a697b190e77accae10ec1ea166575",
+      "mode": 384,
+      "mtimeNs": 1793296519245071301
+    }
+  },
+  "head": "2049f65960cc91e9e30bbd5ff1e11fc0fdf7cbd9",
+  "protectedHeadIndexStatusAndSourceUnchanged": true,
+  "acceptedReceipt": "ACC-TYOLj8",
+  "committedDigestVerified": true,
+  "acceptedTasksEqualLive": true,
+  "formalOP26": "sealed CHALLENGED",
+  "OP27Reserved": false,
+  "OP27ApprovalGranted": false,
+  "strictReviewPreservationSummary": {
+    "observed_utc": "2026-10-29T18:11:43Z",
+    "original_file_symlink_count": 21715,
+    "all_originals_bytes_modes_mtimes_preserved": true,
+    "head_index_external_git_preserved": true,
+    "spec_branch_unchanged": true,
+    "global_ref_attribution": "Unknown; this review ran no ref-writing command. No restoration or allowlist exception.",
+    "strict_global_refs_preserved": false,
+    "original_ownership_boundary_used": true,
+    "source_after_accept_original_preserved": true,
+    "own_new_file_count": 460,
+    "strict_preservation_passed": false
+  },
+  "freshCIAndFloor": "pending after new authorization/control/freeze",
+  "RC4": "standing approval retained; blocked until formal opponent clearance",
+  "O032AndRecordedMinors": "open; untouched"
+}

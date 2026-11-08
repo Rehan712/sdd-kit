@@ -1,0 +1,54 @@
+{
+  "builder": {
+    "donor": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s34/build-snapshot.sh",
+    "target": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s38/build-snapshot.sh",
+    "substitutions": []
+  },
+  "collector_test": {
+    "donor": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s34/test-collector.py",
+    "target": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s38/test-collector.py",
+    "substitutions": []
+  },
+  "floor": {
+    "donor": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s34-final-floor.sh",
+    "target": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s38-final-floor.sh",
+    "substitutions": [
+      {
+        "old": "s34-final",
+        "new": "s38-final",
+        "count": 18
+      },
+      {
+        "old": "9eb58352",
+        "new": "f156c52e",
+        "count": 1
+      },
+      {
+        "old": "ci-20261028-s34",
+        "new": "ci-20261028-s38",
+        "count": 1
+      }
+    ]
+  },
+  "build_once": {
+    "donor": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s34-evidence-preparation/build-once.py",
+    "target": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s38-evidence-preparation/build-once.py",
+    "substitutions": [
+      {
+        "old": "ci-20261028-s34",
+        "new": "ci-20261028-s38",
+        "count": 1
+      },
+      {
+        "old": "s34-evidence-preparation",
+        "new": "s38-evidence-preparation",
+        "count": 1
+      },
+      {
+        "old": "9eb5835224ccdf82b8d97b108097fac6ab5b993c38200fd1970c765c5e6a3842",
+        "new": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+        "count": 1
+      }
+    ]
+  }
+}

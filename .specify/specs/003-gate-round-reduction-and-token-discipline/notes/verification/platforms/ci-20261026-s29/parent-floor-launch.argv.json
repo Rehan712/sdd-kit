@@ -1,0 +1,33 @@
+{
+  "workdir": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+  "launch_shell": "bash",
+  "shell_text": "set -euo pipefail\ncd /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline\nexport GIT_OPTIONAL_LOCKS=0\nr=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports\nfor suffix in launch.log wrapper.log wrapper.rc wrapper.pid wait.log log rc time pre samples.log source-before.nul source-after.nul binding-before.json binding-after.json binding-before.log binding-after.log floor-id; do\n  test ! -e \"$r/s29-final-floorrun.$suffix\"\ndone\nnohup bash -c 'cd /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline || exit 2\nset -uo pipefail\nr=\"$1\"\nwhile ! pmset -g batt | head -1 | grep -q '\"'\"'AC Power'\"'\"'; do\n  printf '\"'\"'waiting-for-AC=%s\\n'\"'\"' \"$(date -u +%Y-%m-%dT%H:%M:%SZ)\" >> \"$r/s29-final-floorrun.wait.log\"\n  sleep 60\ndone\nprintf '\"'\"'AC-confirmed=%s\\n'\"'\"' \"$(date -u +%Y-%m-%dT%H:%M:%SZ)\" >> \"$r/s29-final-floorrun.wait.log\"\n/usr/bin/time -p -o \"$r/s29-final-floorrun.time\" bash \"$r/s29-final-floor.sh\" 1 > \"$r/s29-final-floorrun.wrapper.log\" 2>&1\nrc=$?\nprintf '\"'\"'%s\\n'\"'\"' \"$rc\" > \"$r/s29-final-floorrun.wrapper.rc\"\nexit \"$rc\"\n' _ /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports > \"$r/s29-final-floorrun.launch.log\" 2>&1 < /dev/null &\nprintf '%s\\n' \"$!\" > \"$r/s29-final-floorrun.wrapper.pid\"\n",
+  "launch_argv": [
+    "nohup",
+    "bash",
+    "-c",
+    "cd /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline || exit 2\nset -uo pipefail\nr=\"$1\"\nwhile ! pmset -g batt | head -1 | grep -q 'AC Power'; do\n  printf 'waiting-for-AC=%s\\n' \"$(date -u +%Y-%m-%dT%H:%M:%SZ)\" >> \"$r/s29-final-floorrun.wait.log\"\n  sleep 60\ndone\nprintf 'AC-confirmed=%s\\n' \"$(date -u +%Y-%m-%dT%H:%M:%SZ)\" >> \"$r/s29-final-floorrun.wait.log\"\n/usr/bin/time -p -o \"$r/s29-final-floorrun.time\" bash \"$r/s29-final-floor.sh\" 1 > \"$r/s29-final-floorrun.wrapper.log\" 2>&1\nrc=$?\nprintf '%s\\n' \"$rc\" > \"$r/s29-final-floorrun.wrapper.rc\"\nexit \"$rc\"\n",
+    "_",
+    "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports"
+  ],
+  "helper_argv": [
+    "bash",
+    "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s29-final-floor.sh",
+    "1"
+  ],
+  "floor_argv": [
+    "bash",
+    "scripts/spec-gate.sh",
+    "floor",
+    ".specify/specs/003-gate-round-reduction-and-token-discipline"
+  ],
+  "parent_preconditions": [
+    "s29-t029-control/result.json exit=0 and accepted=true",
+    "no live source writer, floor process, verification lock or reservation",
+    "free disk >=8 GiB immediately before launch and again before floor execution",
+    "keep exact s29 frozen source and raw tasks/status binding unchanged"
+  ],
+  "power_requirement": "Single detached native wait for actual pmset AC Power; helper rechecks actual AC before binding/floor",
+  "executed": false,
+  "execution_policy": "PREPARED ONLY. Do not launch or queue an AC wait while on battery or with <8 GiB free. Parent explicitly launches later; runner independently rechecks AC and disk."
+}

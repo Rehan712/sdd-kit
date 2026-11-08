@@ -1,0 +1,17 @@
+--- a/tests/test-sdd-analyze.sh
++++ b/tests/test-sdd-analyze.sh
+@@ -678,12 +678,12 @@
+       for fixture in 'grepREDIRECT AC-001 README.md' 'rg AC-001REDIRECT README.md' \
+         'diff oldREDIRECT new' 'tscREDIRECT --noEmit' 'npm runREDIRECT typecheck' \
+         'npmREDIRECT run build' 'testREDIRECT -e README.md' 'test -fREDIRECT README.md'; do
+-        weak_redirect_cases+=("${fixture/REDIRECT/$spacing$redirect}")
++        weak_redirect_cases+=("${fixture%%REDIRECT*}$spacing$redirect${fixture#*REDIRECT}")
+       done
+       for fixture in 'bashREDIRECT tests/typecheck.sh' 'nodeREDIRECT --test test/build.js' \
+         'cargo testREDIRECT --test typecheck' 'python3 -mREDIRECT pytest tests/build.py' \
+         'npm runREDIRECT test -- --grep typecheck' './tests/check-typecheck.shREDIRECT /usr/bin/grep'; do
+-        runner_redirect_cases+=("${fixture/REDIRECT/$spacing$redirect}")
++        runner_redirect_cases+=("${fixture%%REDIRECT*}$spacing$redirect${fixture#*REDIRECT}")
+       done
+     done
+   done

@@ -1,0 +1,6 @@
+set -uo pipefail
+. scripts/lib.sh
+. scripts/verification-lib.sh
+spec="$1"; own="$2"
+vf_binding_snapshot "$spec" "$own/bindings.before.nul" || exit 3
+vf_snapshot "$(cd "$spec" && pwd -P)" "$PWD" "$PWD" "$own/inputs.before.nul" || exit 3

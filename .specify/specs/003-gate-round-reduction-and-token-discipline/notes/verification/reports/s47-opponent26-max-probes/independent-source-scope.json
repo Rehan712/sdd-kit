@@ -1,0 +1,42 @@
+{
+  "at": "2026-10-29T11:21:05Z",
+  "mapped_paths": 177,
+  "mapping_current_raw_or_mode_differences": [
+    {
+      "path": ".specify/specs/003-gate-round-reduction-and-token-discipline/STATUS.md",
+      "raw_match": true,
+      "actual_mode": "0o600",
+      "mapped_mode": "100644",
+      "actual_sha256": "569eba99f2f1860ccb083c72f88e3a1cc21ce49be31547d5ce34cc75f1415099"
+    },
+    {
+      "path": ".specify/specs/003-gate-round-reduction-and-token-discipline/spec.md",
+      "raw_match": true,
+      "actual_mode": "0o600",
+      "mapped_mode": "100644",
+      "actual_sha256": "2c52e6d1ccf1c22bfc8e97961bcb8e14ccc5cf30d85fe2ab578022461e02d416"
+    },
+    {
+      "path": ".specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md",
+      "raw_match": true,
+      "actual_mode": "0o600",
+      "mapped_mode": "100644",
+      "actual_sha256": "3d0b827856d89b6b1ae08b096dd5277920375f26f5fc1c97cc3e45f1f569b3d7"
+    }
+  ],
+  "c7_changed_paths": [
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/STATUS.md",
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md",
+    "scripts/sdd-analyze.sh",
+    "tests/test-sdd-analyze.sh"
+  ],
+  "c7_unchanged": 173,
+  "independent_diff_matches_supplied": false,
+  "live_scope_hashes": {
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/STATUS.md": "569eba99f2f1860ccb083c72f88e3a1cc21ce49be31547d5ce34cc75f1415099",
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md": "3d0b827856d89b6b1ae08b096dd5277920375f26f5fc1c97cc3e45f1f569b3d7",
+    "scripts/sdd-analyze.sh": "c43de9e92df5657a3a94091a73bccb9abe37f9e1c3c3f6ccf6cb1cfa64f3a3f2",
+    "tests/test-sdd-analyze.sh": "e5b5cde870b2da8c086a41f3a3824b401262343225108c7f3bab716324150c9a"
+  },
+  "verification_lib_sha256": "015859de8d68d5cbaffa3ea9078a74584f364312b09cd3c739731fd6716a6c36"
+}

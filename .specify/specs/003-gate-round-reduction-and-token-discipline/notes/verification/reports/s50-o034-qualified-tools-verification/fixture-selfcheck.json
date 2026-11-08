@@ -1,0 +1,36 @@
+{
+  "source_sha256": "9dd851fd6ed32797384ada5c4d263dcdbb6947ce95cdeae4d5ea0ac1bb60a393",
+  "before_source_sha256": "e5b5cde870b2da8c086a41f3a3824b401262343225108c7f3bab716324150c9a",
+  "counts": {
+    "generated_weak": 176,
+    "generated_runner": 96,
+    "qualified_weak": 109,
+    "qualified_runner": 88,
+    "weak": 396,
+    "runner": 250
+  },
+  "prior_counts": {
+    "generated_weak": 176,
+    "generated_runner": 96,
+    "weak": 287,
+    "runner": 162
+  },
+  "old_builders_byte_identical_prefix": true,
+  "old_declarations_byte_identical_after_removing_only_new_array_expansion": true,
+  "all_prior_array_entries_identical": true,
+  "unexpanded_REDIRECT_absent": true,
+  "literal_ampersand_examples_passed": true,
+  "modern_runtime": {
+    "image": "sha256:a81de950abb8b5d961ed8c1dcd345450fab8cda00ea3c11e7ec24a4ed4bb82ce",
+    "results": [
+      {
+        "patsub_replacement": "on",
+        "arrays_identical_to_bash32": true
+      },
+      {
+        "patsub_replacement": "off",
+        "arrays_identical_to_bash32": true
+      }
+    ]
+  }
+}

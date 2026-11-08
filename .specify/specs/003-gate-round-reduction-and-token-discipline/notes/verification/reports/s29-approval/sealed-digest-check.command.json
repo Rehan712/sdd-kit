@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "bash",
+    "-c",
+    "set -uo pipefail\n. scripts/lib.sh\n. scripts/verification-lib.sh\nvf_integrity '.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/rounds/opponent/ROUND-24' meta.nul || exit 3\nvf_integrity '.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/rounds/reality-check/ROUND-3' meta.nul || exit 3\nvf_report_block '.specify/specs/003-gate-round-reduction-and-token-discipline/notes/opponent.md' 24 > '.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s29-approval/opponent24.canonical.md' || exit 3\nvf_report_block '.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/opponent-round24.md' 24 > '.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s29-approval/opponent24.returned.md' || exit 3\ncmp '.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s29-approval/opponent24.canonical.md' '.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s29-approval/opponent24.returned.md' || exit 3\nvf_hash '.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s29-approval/opponent24.canonical.md'\nvf_report_block '.specify/specs/003-gate-round-reduction-and-token-discipline/notes/reality-check.md' 3 > '.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s29-approval/reality-check3.canonical.md' || exit 3\nvf_hash '.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s29-approval/reality-check3.canonical.md'\n"
+  ],
+  "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+  "env": {
+    "GIT_OPTIONAL_LOCKS": "0"
+  },
+  "started": "2026-10-26T20:49:24.261794+00:00",
+  "ended": "2026-10-26T20:49:24.408647+00:00",
+  "exit": 0
+}

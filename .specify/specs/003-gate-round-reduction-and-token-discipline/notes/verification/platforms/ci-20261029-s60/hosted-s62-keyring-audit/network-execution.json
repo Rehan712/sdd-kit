@@ -1,0 +1,86 @@
+[
+  {
+    "name": "verify-before",
+    "argv": [
+      "/bin/bash",
+      "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261029-s60/verify-prepublish.sh"
+    ],
+    "started": "2026-10-29T23:06:10.543165+00:00",
+    "ended": "2026-10-29T23:06:27.556884+00:00",
+    "seconds": 17.013,
+    "exit": 0
+  },
+  {
+    "name": "authenticated-user",
+    "argv": [
+      "gh",
+      "api",
+      "user"
+    ],
+    "started": "2026-10-29T23:06:27.557701+00:00",
+    "ended": "2026-10-29T23:06:28.002928+00:00",
+    "seconds": 0.445,
+    "exit": 0
+  },
+  {
+    "name": "selected-run-query",
+    "argv": [
+      "gh",
+      "api",
+      "repos/Rehan712/sdd-kit/actions/runs/40966033511"
+    ],
+    "started": "2026-10-29T23:06:28.003607+00:00",
+    "ended": "2026-10-29T23:06:28.485286+00:00",
+    "seconds": 0.482,
+    "exit": 0
+  },
+  {
+    "name": "collector",
+    "argv": [
+      "bash",
+      "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261029-s60/collect.sh",
+      "40966033511",
+      "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261029-s60/hosted-s62-keyring-audit/hosted",
+      "e75b3027023ef251fa0c531c96f2b8276aa980ae"
+    ],
+    "started": "2026-10-29T23:06:28.487905+00:00",
+    "ended": "2026-10-29T23:06:35.896382+00:00",
+    "seconds": 7.408,
+    "exit": 0
+  },
+  {
+    "name": "tested-merge-commit",
+    "argv": [
+      "gh",
+      "api",
+      "repos/Rehan712/sdd-kit/git/commits/70b8ab820abbbaf2792d822c0bad117d91c363a2"
+    ],
+    "started": "2026-10-29T23:06:35.902113+00:00",
+    "ended": "2026-10-29T23:06:36.362721+00:00",
+    "seconds": 0.461,
+    "exit": 0
+  },
+  {
+    "name": "current-pr21",
+    "argv": [
+      "gh",
+      "api",
+      "repos/Rehan712/sdd-kit/pulls/21"
+    ],
+    "started": "2026-10-29T23:06:36.364083+00:00",
+    "ended": "2026-10-29T23:06:37.070477+00:00",
+    "seconds": 0.706,
+    "exit": 0
+  },
+  {
+    "name": "verify-after",
+    "argv": [
+      "/bin/bash",
+      "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261029-s60/verify-prepublish.sh"
+    ],
+    "started": "2026-10-29T23:06:37.072944+00:00",
+    "ended": "2026-10-29T23:06:52.872381+00:00",
+    "seconds": 15.799,
+    "exit": 0
+  }
+]

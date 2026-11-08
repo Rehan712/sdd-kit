@@ -1,0 +1,30 @@
+{
+  "taskId": "node:delegated-task:command%3Amcp%3Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%3Adelegate-task%3Asdd003-s27-live-control-round-recipe-recon-r1",
+  "childThreadId": "thread:delegated-task:command%3Amcp%3Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%3Adelegate-task%3Asdd003-s27-live-control-round-recipe-recon-r1",
+  "childRunId": "run:thread:thread%3Adelegated-task%3Acommand%253Amcp%253Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%253Adelegate-task%253Asdd003-s27-live-control-round-recipe-recon-r1:ordinal:1",
+  "childNodeId": "node:delegated-task:command%3Amcp%3Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%3Adelegate-task%3Asdd003-s27-live-control-round-recipe-recon-r1",
+  "status": "completed",
+  "workState": "result_available",
+  "hasPendingChildRuns": false,
+  "latestTerminalRunId": "run:thread:thread%3Adelegated-task%3Acommand%253Amcp%253Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%253Adelegate-task%253Asdd003-s27-live-control-round-recipe-recon-r1:ordinal:1",
+  "latestTerminalStatus": "completed",
+  "latestTerminalSummary": null,
+  "latestTerminalResultContextTransferId": null,
+  "providerInstanceId": "codex_codex_gym",
+  "model": "gpt-6-luna",
+  "options": [
+    {
+      "id": "reasoningEffort",
+      "value": "medium"
+    },
+    {
+      "id": "serviceTier",
+      "value": "default"
+    }
+  ],
+  "summary": "- **Yes, AC-016 needs a fresh T029 control.** The probe requires a genuine `binding-mismatch` rejection for an incomplete worker return, unchanged task digests, and a later intact acceptance. The old T029/CAP766 control predates the source/STATUS edits, so it cannot establish current live evidence. The accepted T029 return must also pass `vf_return_check` against the edited spec.\n\n- **Order:** get a fresh delegated-worker T029 no-tick return; reject its deliberately incomplete FM/INV copy and accept the intact return; then run the new floor. That control/acceptance can change `tasks.md` and proof state, so it must precede the floor and both round reservations. Reserve and complete opponent round 24 on that floor. Only after opponent 24 is sealed, reserve reality-check round 4 on the same floor, then run the read-only AC-016 probe during that active reservation. Complete RC4 afterward.\n\n- Direct CLI forms:\n  ```bash\n  bash scripts/spec-run.sh \"$spec\" T029 --from-task --no-tick --summary\n  bash scripts/spec-gate.sh accept \"$spec\" T029 \"$spec/notes/verification/returns/T029-incomplete.txt\" # expect exit 3; tasks digest unchanged\n  bash scripts/spec-gate.sh accept \"$spec\" T029 \"$spec/notes/verification/returns/T029.txt\"\n  bash scripts/spec-gate.sh round \"$spec\" opponent --floor \"$floor_id\"\n  bash scripts/spec-gate.sh round \"$spec\" opponent --complete \"$report_file\"\n  bash scripts/spec-gate.sh round \"$spec\" reality-check --floor \"$floor_id\"\n  bash tests/probe-gate-contract.sh \"$spec\" --task T029\n  bash scripts/spec-gate.sh round \"$spec\" reality-check --complete \"$report_file\"\n  bash scripts/spec-gate.sh tally \"$spec\"\n  ```\n  `spec-gate.sh round` derives the next number from sealed history; `--floor` pins the selected floor. `--complete` requires the pending reservation and the returned report.\n\n- Both reports must be complete canonical blocks beginning `## Round 24` / `## Round 4`, with exact `Round`, `Timestamp`, `Source`, `Floor`, and `Verdict` fields, ending respectively in `<!-- gate-round-end: opponent:24 -->` and `<!-- gate-round-end: reality-check:4 -->`. Preserve earlier sealed blocks and findings. RC4 must report the AC-016 probe observation and current gate/floor identities.\n\n- For fresh helpers, copy the existing r23/rc3 step and brief-fill helpers to new names; update round numbers, report paths, receipt basenames, expected gate, and metadata assertion. Keep old r23/rc3 output paths untouched. RC4 control step belongs before floor; opponent 24 reserve/complete steps follow the floor; RC4 reserve/probe/complete follow opponent clearance. Session/brief text should cite the current floor/source and recorded `opponent24after23` / `RC4after3` authorizations.\n\n**UNKNOWN:** I could not verify from the checked-in helper scripts whether a new delegated T029 capture will itself alter `tasks.md` before acceptance, or whether an existing current T029 capture can be reused. Inspect the fresh capture/return receipts before deciding; do not reuse CAP766. I did not run gates, tests, floor validation, or captures, and made no writes.",
+  "resultContextTransferId": "context-transfer:type:subagent_result:source-thread:thread%3Adelegated-task%3Acommand%253Amcp%253Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%253Adelegate-task%253Asdd003-s27-live-control-round-recipe-recon-r1:target-thread:2ce93492-409f-4930-a9e5-173544a4c8c6:2d7cc091-2c19-48fd-85ea-fc32d10275c2",
+  "hasPendingQuestion": false,
+  "pendingApproval": null,
+  "waitTimedOut": false
+}

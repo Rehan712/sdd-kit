@@ -1,0 +1,36 @@
+{
+  "argv": [
+    "bash",
+    "scripts/spec-run.sh",
+    ".specify/specs/003-gate-round-reduction-and-token-discipline",
+    "T029",
+    "--from-task",
+    "--no-tick",
+    "--summary"
+  ],
+  "attempt": 1,
+  "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+  "end": "2026-10-29T21:51:55.365618+00:00",
+  "end_time_ns": 1793310715365691000,
+  "environment_policy": "Inherited environment, GIT_OPTIONAL_LOCKS explicitly 0; only execution-relevant nonsecret whitelist recorded.",
+  "exit": 0,
+  "expected_source": "7d4f17221f13d850cb7db06cdbb6261119ca97b52228adeac74d82f6496a9bff",
+  "nativePid": 18016,
+  "nonsecret_environment": {
+    "GIT_OPTIONAL_LOCKS": "0",
+    "LANG": "C.UTF-8",
+    "LC_ALL": "C.UTF-8",
+    "LC_CTYPE": "C.UTF-8",
+    "NO_COLOR": "1",
+    "PATH": "/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/opt/pkg/env/active/bin:/opt/pmk/env/global/bin:/Library/Apple/usr/bin:/Users/babar/.nvm/versions/node/v24.19.0/lib/node_modules/@openai/codex/node_modules/@openai/codex-darwin-arm64/vendor/aarch64-apple-darwin/codex-path:/Users/babar/.codex_gym/tmp/arg0-macos/codex-arg0xey4nx:/Users/babar/.nvm/versions/node/v24.19.0/bin:/Users/babar/.local/bin:/Users/babar/.bun/bin:/Users/babar/.antigravity/antigravity/bin:/opt/homebrew/bin:/Users/babar/.cargo/bin:/Users/babar/Library/Android/sdk/emulator:/Users/babar/Library/Android/sdk/platform-tools",
+    "SHELL": "/bin/zsh",
+    "TMPDIR": "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/"
+  },
+  "retries": 0,
+  "start": "2026-10-29T21:34:33.914608+00:00",
+  "start_time_ns": 1793309673914631000,
+  "stderr_bytes": 0,
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_bytes": 501,
+  "stdout_sha256": "55b83640ffbda8618a63b98e2550f379b27d8257e5b650ede4677a6b1711158d"
+}

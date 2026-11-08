@@ -1,0 +1,27 @@
+{
+  "argv": [
+    "git",
+    "diff",
+    "--check",
+    "--",
+    "scripts/sdd-analyze.sh",
+    "tests/test-sdd-analyze.sh",
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md"
+  ],
+  "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+  "exit": 0,
+  "duration_seconds": 0.01730203628540039,
+  "environment_overrides": {
+    "GIT_OPTIONAL_LOCKS": "0",
+    "NO_COLOR": "1",
+    "LC_ALL": "C",
+    "SHELLCHECK_OPTS": ""
+  },
+  "environment_unset": [
+    "BASH_ENV",
+    "ENV",
+    "CDPATH"
+  ],
+  "stdout_file": "diff-whitespace.stdout",
+  "stderr_file": "diff-whitespace.stderr"
+}

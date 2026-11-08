@@ -1,0 +1,3253 @@
+{
+  "observed_utc": "2026-10-29T18:09:05Z",
+  "original_file_symlink_count": 21715,
+  "missing_originals": [],
+  "changed_originals": {},
+  "external_git_changes": {},
+  "unexpected_additions": {},
+  "exact_parent_receipt_new": {
+    "mode": 420,
+    "mtime_ns": 1793296738462882488,
+    "size": 3341,
+    "type": "file",
+    "sha256": "c0fa0241ac733ba34487aeb91175586c0f791f360ca2277a16ba535782e321c7"
+  },
+  "all_originals_bytes_modes_mtimes_preserved": true,
+  "head_index_external_git_preserved": true,
+  "spec_branch_unchanged": true,
+  "global_ref_differences": {
+    "refs/t3/orchestration-v2/checkpoints/MTJlM2E2YWEzNGFmOGNhN2FiN2U1MGMwODY5MGMzMDU/ordinal/23": {
+      "before": null,
+      "after": [
+        "075a2d5bd39d601e1df9585d3ca3d1e684e091fb",
+        ""
+      ]
+    }
+  },
+  "raw_ref_differences": {
+    "t3/orchestration-v2/checkpoints/MTJlM2E2YWEzNGFmOGNhN2FiN2U1MGMwODY5MGMzMDU/ordinal/23": {
+      "before": null,
+      "after": {
+        "mode": 420,
+        "mtime_ns": 1793296745853197138,
+        "size": 41,
+        "type": "file",
+        "sha256": "f5b18b65334cf24efed91f92833503fd9d6a260116fe5e2ea35c18fec6e6aaec"
+      }
+    }
+  },
+  "global_ref_attribution": "Unknown; this review ran no ref-writing command. No restoration or allowlist exception.",
+  "strict_global_refs_preserved": false,
+  "original_ownership_boundary_used": true,
+  "source_after_accept_original_preserved": true,
+  "own_new_files": {
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/check-preservation.py": {
+      "mode": 420,
+      "mtime_ns": 1793297338489339215,
+      "size": 4600,
+      "type": "file",
+      "sha256": "c599602a54bc04686f625cac9876a6c91ec43992a80f15bfeb83ad3757626a97"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/check-retained-records.py": {
+      "mode": 420,
+      "mtime_ns": 1793297267888848590,
+      "size": 2542,
+      "type": "file",
+      "sha256": "17ef455a617b2a9e9663a5a4314d9d14aad7ccf56e0acc85b57deda553c0f0c3"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/evidence-checker-attempt1.json": {
+      "mode": 420,
+      "mtime_ns": 1793297197158851836,
+      "size": 539,
+      "type": "file",
+      "sha256": "9985f2786bcf837afae63c2b8bf4de975fb923779e8f0812d3d28d813ad01861"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/evidence-checker-attempt2.json": {
+      "mode": 420,
+      "mtime_ns": 1793297216061798631,
+      "size": 707,
+      "type": "file",
+      "sha256": "bfcd2b3d4d0185a6ab35c052f5cd078b19fc1e1e35823d0150a07c9393a1eba7"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/evidence-review-command-records.json": {
+      "mode": 420,
+      "mtime_ns": 1793297216817272803,
+      "size": 1070,
+      "type": "file",
+      "sha256": "5683806bcc7bff36b5e2dd620228d22f7df262e0a8dcfa4850a5f66d4b322e77"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/evidence-review.json": {
+      "mode": 420,
+      "mtime_ns": 1793297216818543765,
+      "size": 41918,
+      "type": "file",
+      "sha256": "36a6d17ea49ea4ccfd8209602ce95351a3c9bd24c3b64fd019fcfcf5f0315f0b"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/focused-public-probes.py": {
+      "mode": 420,
+      "mtime_ns": 1793296933344401667,
+      "size": 8205,
+      "type": "file",
+      "sha256": "c7edfab2574756e5fac2cb019e853f27067f1eb7b6759657c77c49960ff41be7"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/independent-current.diff": {
+      "mode": 420,
+      "mtime_ns": 1793297158474268088,
+      "size": 20185,
+      "type": "file",
+      "sha256": "5252799a7d6aa9a59398a9674155a3faba995b5811efbdbd478c3b6d6600bd2b"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/independent-latest.diff": {
+      "mode": 420,
+      "mtime_ns": 1793297158478593268,
+      "size": 8627,
+      "type": "file",
+      "sha256": "5da0b07709526dd6fb542d1f1fb30025c03e3a10df5fc8c868f7253634dddbe9"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/inspect-evidence-v2.py": {
+      "mode": 420,
+      "mtime_ns": 1793297197159199837,
+      "size": 12571,
+      "type": "file",
+      "sha256": "aee014b28d6236333341f2eb58df978dd5facd4c1aee84e34d3b5681f0d9ad65"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/inspect-evidence-v3.py": {
+      "mode": 420,
+      "mtime_ns": 1793297216062147757,
+      "size": 12629,
+      "type": "file",
+      "sha256": "b8f5ad33bca3c41000a1203d049954ba0952e6bdead2fe3d2cded8d5f316ff0e"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/inspect-evidence.py": {
+      "mode": 420,
+      "mtime_ns": 1793297158381837526,
+      "size": 12411,
+      "type": "file",
+      "sha256": "59928ea333d0c9679b516ebe62afe4da1d2ac8b9089849051f2606b94762a98d"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/manifest-content.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793297159059884470,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/manifest-content.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793297159059803345,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/manifest-read-paths.nul": {
+      "mode": 420,
+      "mtime_ns": 1793297158479520271,
+      "size": 7263,
+      "type": "file",
+      "sha256": "691160e3c8a6ad5735e677337d867ece67d04e30382537bbaddc1635f786038b"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/probe-construction-attempt1.json": {
+      "mode": 420,
+      "mtime_ns": 1793296933344226792,
+      "size": 398,
+      "type": "file",
+      "sha256": "9d4eda4942e826925e659fc6b88bd38744e33cb079db85a6ba0b543ea578e815"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/read-manifest-content.sh": {
+      "mode": 420,
+      "mtime_ns": 1793297158479607021,
+      "size": 171,
+      "type": "file",
+      "sha256": "70812fe6ef5899af211c6a21530f5b072bea05c399bb7cc4087144415c4f8f8a"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/recovery-live-read.json": {
+      "mode": 420,
+      "mtime_ns": 1793297019185151357,
+      "size": 11139,
+      "type": "file",
+      "sha256": "5098a3e40c197374ad27e9da0ac72988487e70af98cccfef0d93d1a740476909"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/retained-records-review.json": {
+      "mode": 420,
+      "mtime_ns": 1793297268004113469,
+      "size": 14205,
+      "type": "file",
+      "sha256": "fae763165638bb5016b906dfde310f3270aabf808bde87cfd86f61d420e38d40"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/review-before.json": {
+      "mode": 420,
+      "mtime_ns": 1793296728268325413,
+      "size": 8363295,
+      "type": "file",
+      "sha256": "346f07c0accbaaa27bf4e7ed391bf11e5d8d9a86d6848c1b77d47f546bbb85d6"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/runtime-observed.json": {
+      "mode": 420,
+      "mtime_ns": 1793296747967151914,
+      "size": 1066,
+      "type": "file",
+      "sha256": "d2f110b88885f4f7ad417f088e5a809709bf3445d76f61bcd644ecb5bb76d16e"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-001.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296933621420437,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-001.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296933621329644,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-001.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296933439415112,
+      "size": 513,
+      "type": "file",
+      "sha256": "477ac7fb9d7584f1e2680308e2b6212ad64fe1420bec3f4845b1510e9eb31a43"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-002.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296933800688087,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-002.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296933800598420,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-002.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296933621848396,
+      "size": 537,
+      "type": "file",
+      "sha256": "9faede84067dd3ad3d63e16f440c3b0603b5a2f93e27650722b77300b3d63585"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-003.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296933979319735,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-003.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296933979230902,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-003.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296933801100171,
+      "size": 513,
+      "type": "file",
+      "sha256": "82f3ded9b85e52a234f5c027569e7169292819741e0798ca3b636a3e4f10dc65"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-004.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296934158162009,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-004.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296934158067509,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-004.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296933979720403,
+      "size": 524,
+      "type": "file",
+      "sha256": "3d22417062a54cecb6439952594c31235cb45c2c0b7c0f7349425958be393ab3"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-005.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296934337114242,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-005.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296934337036075,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-005.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296934158591136,
+      "size": 504,
+      "type": "file",
+      "sha256": "e8dcdb9b187bbcb453968cc6ada477434a4887c90626fe4bde753d5f17ea553d"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-006.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296934516005683,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-006.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296934515928683,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-006.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296934337542827,
+      "size": 504,
+      "type": "file",
+      "sha256": "3a5d6d21645f698718255b913df2c5b2efb55378206d615c3478e79fcf568c9a"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-007.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296934694471664,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-007.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296934694391830,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-007.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296934516407934,
+      "size": 508,
+      "type": "file",
+      "sha256": "0c07ace11b0e04d88a4cd4c16cb0fa033d659f19fea9b39fa15c4d50425ee542"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-008.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296934874525524,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-008.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296934874430191,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-008.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296934694883748,
+      "size": 504,
+      "type": "file",
+      "sha256": "8030348e63f8156883360c047172fd12dfec73740cfc0d13c2f28d80c16e44ad"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-009.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296935053514216,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-009.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296935053419132,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-009.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296934874933984,
+      "size": 520,
+      "type": "file",
+      "sha256": "bb00fb7a45adff1c152d8b15b111170212db3db5ec3d84b7d82418a3e4faafaf"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-010.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296935230218317,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-010.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296935230126942,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-010.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296935053938300,
+      "size": 507,
+      "type": "file",
+      "sha256": "9f6fe20dc0c75df97e7591138a95c299691f1a541fedfa238a62ef0bd52138e2"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-011.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296935409703468,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-011.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296935409614176,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-011.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296935230617068,
+      "size": 511,
+      "type": "file",
+      "sha256": "4420d081327c172860de2f1e508eeadf24d38175664972dcc4cd45c346d36952"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-012.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296935588830617,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-012.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296935588735658,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-012.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296935410113386,
+      "size": 511,
+      "type": "file",
+      "sha256": "03eb62645d8df78af275e682f79e4037287f1493f868fe99a7fe2c686b18ac21"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-013.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296935768853394,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-013.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296935768763477,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-013.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296935589255368,
+      "size": 520,
+      "type": "file",
+      "sha256": "51feb9b7854c46e2e4b194086f7771493fe722fd9f2bf6c60a9ca991d27aff46"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-014.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296935947816960,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-014.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296935947720710,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-014.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296935769282854,
+      "size": 526,
+      "type": "file",
+      "sha256": "e6a833ca9c9901f11e040cdb7e336de7baea6fb2dd23527dc792f43dbdbf0110"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-015.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296936127139653,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-015.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296936127046111,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-015.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296935948244753,
+      "size": 530,
+      "type": "file",
+      "sha256": "734cf148f46b9cf65685b704a65acab225ba9f5203eac79c3533157b3db921ee"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-016.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296936306680595,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-016.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296936306590887,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-016.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296936127573779,
+      "size": 530,
+      "type": "file",
+      "sha256": "7cf1ee9f49397628f8fbb7694bb1c0b41571ea87ad83877ca880608da5b749d6"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-017.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296936486482414,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-017.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296936486391081,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-017.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296936307120180,
+      "size": 539,
+      "type": "file",
+      "sha256": "318c514da47d440b9f67114b1929f18411eef2f0db77df8e980db56921551ba0"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-018.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296936665484479,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-018.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296936665394104,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-018.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296936486903957,
+      "size": 508,
+      "type": "file",
+      "sha256": "2e007d277bdbb0bfe7251a9a1c824b7435657f21bcc9ced9afa159b365665d9f"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-019.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296936845055256,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-019.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296936844966714,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-019.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296936665904106,
+      "size": 512,
+      "type": "file",
+      "sha256": "759ea102ef4cc5057b277d2f0b53ec65cfc69fc43841e2a2dc625c88e4302583"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-020.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296937023266695,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-020.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296937023172153,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-020.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296936845467507,
+      "size": 521,
+      "type": "file",
+      "sha256": "4c79edc51bf9c1cb9b2532323f2d0c7cbc536a743527ec68845a5e2041220712"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-021.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296937202870054,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-021.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296937202786346,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-021.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296937023688946,
+      "size": 515,
+      "type": "file",
+      "sha256": "a0a640f1cc1ed3b4207165a24892dc05762e2aa519faf2d21958aca5dbe4db3a"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-022.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296937382346747,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-022.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296937382251497,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-022.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296937203291181,
+      "size": 523,
+      "type": "file",
+      "sha256": "a0fdce5038084632a6063bf90e7629e7607d6a2387df9bc9e358dcab52fed4d6"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-023.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296937561503604,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-023.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296937561418437,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-023.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296937382756331,
+      "size": 522,
+      "type": "file",
+      "sha256": "2a7e9e3ae5a4b39d3c1e138e7730b5c687f43e5833597223d3da303389b5dd78"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-024.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296937740048003,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-024.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296937739954169,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-024.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296937561920064,
+      "size": 515,
+      "type": "file",
+      "sha256": "6649f2d719983264a88efac3014d60cc28b4a1dac2e7b302874e87313f23b126"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-025.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296937919918696,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-025.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296937919829154,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-025.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296937740456629,
+      "size": 521,
+      "type": "file",
+      "sha256": "d88da5ba8dcaa9fb71ed903861876796e793d2277dad979fb5727dbc2743a473"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-026.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296938099065096,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-026.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296938098961138,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-026.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296937920338323,
+      "size": 520,
+      "type": "file",
+      "sha256": "d9e50f373ed86a67c0014075b6a54c5c06e07ac8da53352ce7164f8d265d9a43"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-027.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296938279271458,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-027.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296938279178291,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-027.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296938099506098,
+      "size": 521,
+      "type": "file",
+      "sha256": "f932b8c038e5a524c2ebe1bd9f515a7afb556addab94d7731087f1a316344612"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-028.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296938457911773,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-028.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296938457811439,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-028.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296938279689292,
+      "size": 512,
+      "type": "file",
+      "sha256": "54823f5025ba8fb80f8eba0ec649a22a96017252f624a98ec536f850a31947bd"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-029.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296938636468170,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-029.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296938636378920,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-029.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296938458322649,
+      "size": 521,
+      "type": "file",
+      "sha256": "1dac8ebc3054db8d6b178d9c993e36b549fd9dbb19282bc1749c93a114f6558d"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-030.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296938816040363,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-030.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296938815944280,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-030.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296938636882880,
+      "size": 514,
+      "type": "file",
+      "sha256": "ec3243c0e52baf55144b8ee0fb968e813b8a9a2a231e2254bfeea3d8cfb18e25"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-031.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296938993630634,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-031.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296938993536008,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-031.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296938816456864,
+      "size": 518,
+      "type": "file",
+      "sha256": "4cf81e59240c49ad457cdb902a56a6c9719728d0e749e5995e8f6531bc38d1b2"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-032.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296939173415244,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-032.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296939173337952,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-032.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296938994034135,
+      "size": 518,
+      "type": "file",
+      "sha256": "5a2d05dc58e148dbdb933254a76bfbd1aa17434191842a6fff8193818518c38a"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-033.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296939353154062,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-033.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296939353058604,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-033.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296939173856245,
+      "size": 527,
+      "type": "file",
+      "sha256": "2509b47657feccedd75388e08cef800742cf42a9e5f9132e776127c001176c3b"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-034.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296939531964044,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-034.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296939531884835,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-034.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296939353559730,
+      "size": 506,
+      "type": "file",
+      "sha256": "eac97e173d07e72fdf83e060e236bd953b4bc250a0691562675ac0edb6e6b529"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-035.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296939711312028,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-035.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296939711238486,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-035.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296939532372545,
+      "size": 510,
+      "type": "file",
+      "sha256": "87465441ca31d26a72cb0933c0737591df9cb5f5329ee9af53d1e1724beb6f69"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-036.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296939888890673,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-036.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296939888792339,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-036.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296939711690279,
+      "size": 510,
+      "type": "file",
+      "sha256": "3b92a2b291f84dde1457e801600e828d271832fa6554ec324f40bdf3e9ae1d68"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-037.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296940068202323,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-037.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296940068110823,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-037.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296939889309091,
+      "size": 519,
+      "type": "file",
+      "sha256": "8d2415876bb94e490da429a3208583fe7245f9c905f7e1748dc3cda9d6b7a72e"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-038.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296940249517563,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-038.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296940249420771,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-038.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296940068634991,
+      "size": 530,
+      "type": "file",
+      "sha256": "e7aea8690bfcc8ee9f3ef22942bd8ff969d89de4cb7bd3bde177639be6ade801"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-039.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296940428927756,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-039.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296940428825089,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-039.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296940249955606,
+      "size": 517,
+      "type": "file",
+      "sha256": "76551fe473de1168eb5b17e1ca3ff7bcf8d286ac9a85e710913ea9b1ace1ca53"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-040.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296940608437947,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-040.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296940608342114,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-040.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296940429343965,
+      "size": 518,
+      "type": "file",
+      "sha256": "853508064a5206090e893cb337fd837ce205b9be7e914522f695033aa75cffe6"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-041.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296940786654220,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-041.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296940786562344,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-041.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296940608860907,
+      "size": 518,
+      "type": "file",
+      "sha256": "f1157c9ed0a00b3585e8a9d590c4833d237f714ab86b69608134ac30b3b85f68"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-042.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296940964337365,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-042.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296940964254074,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-042.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296940787080846,
+      "size": 513,
+      "type": "file",
+      "sha256": "0f7fbd46862b00d028624c1ae65fc5d538da68a807cd3ab25c7dc2799b1c5ecb"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-043.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296941144353685,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-043.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296941144257476,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-043.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296940964779742,
+      "size": 512,
+      "type": "file",
+      "sha256": "ae89920314f7736edebff90a5666a65f648305bc0d1cc6df694ca28b50e5a210"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-044.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296941324646921,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-044.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296941324554754,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-044.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296941144764852,
+      "size": 514,
+      "type": "file",
+      "sha256": "7b9f75837a5bf0ce5b4f1e72a32b9911aa94341ea977274f602c8e59e8c2c7f0"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-045.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296941505834327,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-045.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296941505765077,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-045.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296941325073756,
+      "size": 515,
+      "type": "file",
+      "sha256": "1e7ba7dc5823f7b66747cc0977874a51300f09c7f4bea9071b1c21cb772c0e89"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-046.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296941683835640,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-046.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296941683737348,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-046.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296941506265204,
+      "size": 526,
+      "type": "file",
+      "sha256": "065aeca0201e4bdcb086fef77d8a91ac4d0738337b1482251777cbc4bd309c52"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-047.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296941855161309,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-047.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296941855058141,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-047.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296941684251599,
+      "size": 539,
+      "type": "file",
+      "sha256": "318c514da47d440b9f67114b1929f18411eef2f0db77df8e980db56921551ba0"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-048.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296942030968115,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-048.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296942030879032,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-048.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296941855502101,
+      "size": 526,
+      "type": "file",
+      "sha256": "e6a833ca9c9901f11e040cdb7e336de7baea6fb2dd23527dc792f43dbdbf0110"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-049.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296942210397349,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-049.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296942210303099,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-049.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296942031365992,
+      "size": 527,
+      "type": "file",
+      "sha256": "bf375b5fa27fbcf226b7b3d402f6a9b37cbe95afab8b068af35b2b5f99d4d231"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-050.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296942385832239,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-050.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296942385752280,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-050.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296942210816017,
+      "size": 527,
+      "type": "file",
+      "sha256": "ee415acb37736d9b92fa3e36fecbbfd59f102381975398961eea7fbeb14447e6"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-051.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296942563505633,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-051.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296942563411341,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-051.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296942386203323,
+      "size": 522,
+      "type": "file",
+      "sha256": "bc72bbb97e26fda90f441daeca814943ba3dde79e20daefabf705959ba158ab2"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-052.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296942741099945,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-052.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296942741005653,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-052.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296942563954635,
+      "size": 521,
+      "type": "file",
+      "sha256": "1eaeb92239dc841ab4601c298330da4d6aacf229034881e36522e13001ba8ad1"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-053.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296942921564599,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-053.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296942921475474,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-053.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296942741525947,
+      "size": 523,
+      "type": "file",
+      "sha256": "6110806964f7e96ffde1a947312ee70fe890b3daf65f4ea15043a8d7368b4a19"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-054.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296943100937917,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-054.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296943100842625,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-054.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296942921980267,
+      "size": 524,
+      "type": "file",
+      "sha256": "38ccb6435bbfd60b128c56063e067bd0bac6f9faa133d8fe5538f5b3cecaed36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-055.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296943281245570,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-055.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296943281150820,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-055.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296943101350626,
+      "size": 535,
+      "type": "file",
+      "sha256": "71a5d0700a0c8d070c62b12f808e4ea84266766c0990580551003b005ea744f6"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-056.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296943461255056,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-056.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296943461153014,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-056.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296943281662696,
+      "size": 534,
+      "type": "file",
+      "sha256": "2498a965ed1c32c94f490e8ba8e5d638c6a4a0fc011bbb6eda87baec39fd33d9"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-057.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296943641060499,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-057.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296943640968373,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-057.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296943461637807,
+      "size": 521,
+      "type": "file",
+      "sha256": "f5329e81d915ada792ca2cd9d274b1fd6a719fb616b8c150cfde83884c276777"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-058.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296943819942648,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-058.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296943819846106,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-058.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296943641473375,
+      "size": 522,
+      "type": "file",
+      "sha256": "aeb74ac24a6d4fbaa46add439bff37aa5d9cb8aed3ecf8efc23fc7897af26c2d"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-059.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296943998298212,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-059.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296943998202920,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-059.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296943820370524,
+      "size": 522,
+      "type": "file",
+      "sha256": "5d19759c88b7cfdfa47a6a17cc71fa7a1d555fe2a71958eaadf92dadc1200570"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-060.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296944177232112,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-060.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296944177132778,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-060.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296943998707755,
+      "size": 517,
+      "type": "file",
+      "sha256": "c4697a4e46809383e93cec64958dec6dbfec0d37faa214a65079bac9dbdf681f"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-061.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296944356085636,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-061.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296944355980927,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-061.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296944177650321,
+      "size": 516,
+      "type": "file",
+      "sha256": "c08595767e607f271f5cef8d4a094943d62bcdd5a249476e464ac964e9f523b0"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-062.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296944534888159,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-062.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296944534793992,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-062.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296944356499262,
+      "size": 518,
+      "type": "file",
+      "sha256": "804807e0f8944acafa4802de0560d70ee7fdb546751367e1a2b66e89e44753b1"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-063.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296944713461349,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-063.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296944713368182,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-063.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296944535292702,
+      "size": 519,
+      "type": "file",
+      "sha256": "4c3b4ca40df53634b9d6ae9b871eb3d7412a47c698ce322a116aa63a45a8057d"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-064.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296944900639106,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-064.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296944900547105,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-064.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296944713885142,
+      "size": 530,
+      "type": "file",
+      "sha256": "b1f4ffc40b46fc1f738aac342d908d84a749ab3191ca5d8f1e8349ff7bf98954"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-065.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296945128202897,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-065.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296945128086189,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-065.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296944901062648,
+      "size": 530,
+      "type": "file",
+      "sha256": "5c90a1b4c7ca493a7ebf3ba476c9b2fad2e5a698b181239aaa82dd7f11cca454"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-066.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296945325777351,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-066.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296945325672226,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-066.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296945128833941,
+      "size": 517,
+      "type": "file",
+      "sha256": "e7dcd0673be3aba317733277feeec2510a538d17b28cb5441023e091f36ba479"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-067.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296945514287987,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-067.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296945514197904,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-067.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296945326215353,
+      "size": 518,
+      "type": "file",
+      "sha256": "3313829e0c713a60d5d4b5d24850e49067eb84f0d031282a7a40c28b68aeb293"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-068.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296945706224382,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-068.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296945706127632,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-068.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296945514749989,
+      "size": 518,
+      "type": "file",
+      "sha256": "c8b31754c53c6ed633b0c970150dd8972ae6baacd080901fc8f5d7131686fcf7"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-069.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296945899233323,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-069.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296945899097281,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-069.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296945706671133,
+      "size": 513,
+      "type": "file",
+      "sha256": "a655e3607bbd325b0baf43988891075cbb6b381fca61b92844d902bc5d29f2b1"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-070.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296946083483029,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-070.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296946083384737,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-070.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296945899687616,
+      "size": 512,
+      "type": "file",
+      "sha256": "146954998e3d171977a5a1170442be541765fbbf73e06b3fa7ffe2c2a6397deb"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-071.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296946262428804,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-071.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296946262329929,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-071.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296946083898197,
+      "size": 514,
+      "type": "file",
+      "sha256": "6b196f7b3ffae323a77ef5337dddd5d5f0d5895e3a100cbb5c155fa50949ece7"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-072.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296946441216828,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-072.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296946441119786,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-072.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296946262857763,
+      "size": 515,
+      "type": "file",
+      "sha256": "42795e686e983e3700fa1839377138414a5c34da410c30e57582a6f0fc30b1fb"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-073.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296946620226310,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-073.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296946620147643,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-073.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296946441624287,
+      "size": 526,
+      "type": "file",
+      "sha256": "28aa650272e3cd12f1792a5764e4efde4153df724912ae1fce84fc1de946a5e5"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-074.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296946799752294,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-074.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296946799655377,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-074.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296946620622477,
+      "size": 526,
+      "type": "file",
+      "sha256": "d067bd83ec94bfffe2d4d3c3211bdc7b5ef5478262f0038d4b2dc6293fd1a471"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-075.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296946978970069,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-075.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296946978893319,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-075.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296946800158337,
+      "size": 547,
+      "type": "file",
+      "sha256": "3ed08949774c9aa65e0793eb540011fd49ad92fd2ab216cbb5ffd5cccb3d2cec"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-076.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296947157769177,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-076.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296947157672926,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-076.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296946979381696,
+      "size": 519,
+      "type": "file",
+      "sha256": "3e7f17a8cd5ab40d3c585056d1af83bf403a24248c1a252a783f3e44f4d3f2ce"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-077.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296947337214203,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-077.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296947337123244,
+      "size": 620,
+      "type": "file",
+      "sha256": "6dddaed1d5adbf16d6ac4b39150014545743a5728c2b5178cc303e02bc9f11c5"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-077.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296947158184428,
+      "size": 545,
+      "type": "file",
+      "sha256": "d008bb606c2fd099f086d95f3908aa7a05c46d356b90a97e5a1be6e7230495ff"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-078.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296947516307311,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-078.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296947516212810,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-078.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296947337624370,
+      "size": 528,
+      "type": "file",
+      "sha256": "5113afc24dcba2e6aba4437ada66922414e756a54153a16de1eb81783c3b9747"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-079.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296947694483999,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-079.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296947694388415,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-079.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296947516708270,
+      "size": 527,
+      "type": "file",
+      "sha256": "01f93a7aa8e5e7c1678b27f290df16862c15e51100c4dddf8ef3d049aa080b8d"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-080.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296947874156567,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-080.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296947874057525,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-080.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296947694917500,
+      "size": 548,
+      "type": "file",
+      "sha256": "ad42e6c12161802a9f7051417f56cf1c319dea8e85f13ca60c0b43ae6d11308b"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-081.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296948052901799,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-081.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296948052809507,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-081.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296947874574026,
+      "size": 520,
+      "type": "file",
+      "sha256": "0de4343ecccf3c2cbfaabd38f923430470ce2be4258ec694c75ccb3e633e6714"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-082.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296948232345117,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-082.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296948232254783,
+      "size": 620,
+      "type": "file",
+      "sha256": "6dddaed1d5adbf16d6ac4b39150014545743a5728c2b5178cc303e02bc9f11c5"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-082.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296948053341717,
+      "size": 546,
+      "type": "file",
+      "sha256": "9c2a33ab59ce5cc07754f88128315b4a20bc77d9374fe4201e34d92c7af610e5"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-083.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296948412124768,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-083.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296948412024768,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-083.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296948232764160,
+      "size": 529,
+      "type": "file",
+      "sha256": "c9554e61898be8d557d01f22aaf6750e89516fbc4e9235507d61b4685095fefa"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-084.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296948591086833,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-084.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296948590996375,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-084.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296948412548103,
+      "size": 528,
+      "type": "file",
+      "sha256": "3c34158e31f8b79ac08ad4ed51375e69fc93f1ae2449da3bf566c8dcc276f3f9"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-085.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296948770416692,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-085.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296948770319900,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-085.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296948591504835,
+      "size": 549,
+      "type": "file",
+      "sha256": "16052ef1142236c6ecedfa1e94bbfb3a0111cdf3726ee067574dd0ce00144dad"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-086.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296948948738590,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-086.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296948948640173,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-086.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296948770832777,
+      "size": 521,
+      "type": "file",
+      "sha256": "1799af70bd79073764cfd16c39af795ae9d9fb022a0929286e5c365f5178da7c"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-087.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296949127836323,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-087.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296949127735489,
+      "size": 620,
+      "type": "file",
+      "sha256": "6dddaed1d5adbf16d6ac4b39150014545743a5728c2b5178cc303e02bc9f11c5"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-087.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296948949146383,
+      "size": 547,
+      "type": "file",
+      "sha256": "6dbe8f200a995be9e37a66c9ef06b000ccccdd986da08976a1d606c7a1871164"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-088.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296949306537472,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-088.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296949306449722,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-088.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296949128253825,
+      "size": 530,
+      "type": "file",
+      "sha256": "543f5f14370160857003036c5496df26340a7dc962b298d996924b5a89cfa949"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-089.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296949485852747,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-089.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296949485753289,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-089.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296949306970306,
+      "size": 528,
+      "type": "file",
+      "sha256": "15b991da65e1390439575495cb0712657033235cbd6911a14c9711f6e34e9de5"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-090.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296949664846688,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-090.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296949664755021,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-090.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296949486270040,
+      "size": 549,
+      "type": "file",
+      "sha256": "5070eb8cd40f040d75698753ec83b0fe160303c28939e627c6b8f9f28998d616"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-091.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296949844420881,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-091.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296949844341047,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-091.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296949665258605,
+      "size": 521,
+      "type": "file",
+      "sha256": "3023dd36fbe2fa9155c55de437bb74fabba91dd48c0517aec2dff25319ff8581"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-092.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296950022999112,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-092.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296950022908237,
+      "size": 620,
+      "type": "file",
+      "sha256": "6dddaed1d5adbf16d6ac4b39150014545743a5728c2b5178cc303e02bc9f11c5"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-092.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296949844800590,
+      "size": 547,
+      "type": "file",
+      "sha256": "67c56ef339010185c1714e8be1a4c911c792e45414fab136dfc6ed002f914c5e"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-093.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296950209012407,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-093.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296950208909532,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-093.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296950023411822,
+      "size": 530,
+      "type": "file",
+      "sha256": "886df3a60e713fe8c4db8bd28a26b79134947e33685e567bd2325763a1873b07"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-094.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296950388750142,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-094.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296950388653517,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-094.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296950209450242,
+      "size": 527,
+      "type": "file",
+      "sha256": "9ab3f85eef2a3c052064c5b8a9292949dae2efa5bf73c7401a0f54f73c0b72d1"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-095.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296950567896125,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-095.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296950567801291,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-095.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296950389172935,
+      "size": 548,
+      "type": "file",
+      "sha256": "aa440b1857c58d9c3853536c4a03830862d2a94a1efff5def9dcd1830723954c"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-096.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296950747884194,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-096.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296950747791610,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-096.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296950568307334,
+      "size": 520,
+      "type": "file",
+      "sha256": "da5d72382a331c902eecffff589b44fbbee9954f2641f4d082e066226c217bb1"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-097.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296950926847385,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-097.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296950926754760,
+      "size": 620,
+      "type": "file",
+      "sha256": "6dddaed1d5adbf16d6ac4b39150014545743a5728c2b5178cc303e02bc9f11c5"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-097.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296950748291654,
+      "size": 546,
+      "type": "file",
+      "sha256": "a7d66393e835e79a1d5658178a841b0d07d548a2f1cbf98ac3ddda52d700b656"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-098.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296951106936413,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-098.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296951106841246,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-098.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296950927258303,
+      "size": 529,
+      "type": "file",
+      "sha256": "5275615b04995bdb01b6e4b46c50f4fab52c65b32159cd09f028950d90064956"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-099.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296951285607311,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-099.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296951285528561,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-099.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296951107355039,
+      "size": 522,
+      "type": "file",
+      "sha256": "94aed9183cc9f6954e264d90d4d30dcd3cd781f89e15d95f9a03acdf1c0cdeef"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-100.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296951465075796,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-100.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296951464980921,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-100.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296951286022271,
+      "size": 543,
+      "type": "file",
+      "sha256": "8576ebe703a838edb7708a93ad03a68167c10bb3b490e5e056b13b50b30a7a77"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-101.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296951644058486,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-101.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296951643961819,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-101.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296951465482589,
+      "size": 515,
+      "type": "file",
+      "sha256": "2538ab8d6e9e6e38c005f880676c3b3cc98463878f8a8a09cb7e7d91a0829175"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-102.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296951831972328,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-102.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296951831874120,
+      "size": 620,
+      "type": "file",
+      "sha256": "6dddaed1d5adbf16d6ac4b39150014545743a5728c2b5178cc303e02bc9f11c5"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-102.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296951644468987,
+      "size": 541,
+      "type": "file",
+      "sha256": "07d789843fb6b52aa268a693e47d64d8157e173ab4e9a737674dd75cb2c66eaa"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-103.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296952011073937,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-103.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296952010956686,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-103.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296951832379830,
+      "size": 524,
+      "type": "file",
+      "sha256": "0c0bc3d65c0f57992f513427f62ee00801a96ae81cff0708275e8bf444658fee"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-104.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296952194414557,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-104.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296952194321390,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-104.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296952011551855,
+      "size": 522,
+      "type": "file",
+      "sha256": "29c524e3abd89c6001be5e860eb781c07bbe95b7f0e3954656a4ead2e207eac3"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-105.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296952374794586,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-105.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296952374702794,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-105.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296952194848808,
+      "size": 543,
+      "type": "file",
+      "sha256": "e60a8bcd3de231a15e2d3f3a7717d1ea67bc2318548b84dd40c78d70f8520cee"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-106.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296952554078860,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-106.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296952553983527,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-106.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296952375209004,
+      "size": 515,
+      "type": "file",
+      "sha256": "c13faa16a031a19171a0ed2eece8358a68d617245286ef1cda9963b68f2cc1f8"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-107.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296952732773342,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-107.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296952732697342,
+      "size": 620,
+      "type": "file",
+      "sha256": "6dddaed1d5adbf16d6ac4b39150014545743a5728c2b5178cc303e02bc9f11c5"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-107.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296952554487445,
+      "size": 541,
+      "type": "file",
+      "sha256": "f3680654da5f9243e6a06423218528ca0636dda2307a4c7efc85bbf086ee9e18"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-108.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296952912679370,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-108.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296952912586286,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-108.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296952733187218,
+      "size": 524,
+      "type": "file",
+      "sha256": "49bb3012e81097f55548c69be52bafd83878c027cc6ec77d74a0abd2c6d954b5"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-109.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296953091726978,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-109.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296953091634061,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-109.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296952913112454,
+      "size": 528,
+      "type": "file",
+      "sha256": "0505db49f0c4dc7e7319086d195024fac2bf08d16b0442dc7852f3213c047242"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-110.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296953276378394,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-110.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296953276286727,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-110.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296953092149687,
+      "size": 549,
+      "type": "file",
+      "sha256": "7c0ceff4c345ecbf2bae52a34f02fb0cebc72cf020077175261bb911b3a2a245"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-111.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296953456475046,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-111.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296953456383255,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-111.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296953276794228,
+      "size": 521,
+      "type": "file",
+      "sha256": "c8ad95dfa4cba1f89612377d7e06c9c716345341dcae7f038a194e95160ff1ee"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-112.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296953635994447,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-112.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296953635897863,
+      "size": 620,
+      "type": "file",
+      "sha256": "6dddaed1d5adbf16d6ac4b39150014545743a5728c2b5178cc303e02bc9f11c5"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-112.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296953456883756,
+      "size": 547,
+      "type": "file",
+      "sha256": "d56e43301bf29a83850e35fa826fa07223a101e02d2976ac775ac110a966cc0e"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-113.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296953820059569,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-113.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296953819959527,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-113.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296953636388448,
+      "size": 530,
+      "type": "file",
+      "sha256": "9ac7faad34d00eb03c5e01abdd11ecbcf6e74a6b178d16e898368beb9d20bdae"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-114.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296953997871507,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-114.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296953997778340,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-114.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296953820484237,
+      "size": 529,
+      "type": "file",
+      "sha256": "2d6e1977d4b74e36b30b9ca823deb5b22f077f9ba2f81952d08f0756c60bc1e7"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-115.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296954176074529,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-115.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296954175989321,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-115.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296953998292883,
+      "size": 530,
+      "type": "file",
+      "sha256": "75878bc85dadca607e3a376dc5d196fd3dd36993ab054468696d4ff7318673ea"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-116.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296954355400263,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-116.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296954355305346,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-116.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296954176494739,
+      "size": 526,
+      "type": "file",
+      "sha256": "0b762fb74b6c2a41df49205daf233c74e3c9451bdfd8c950817cdf43f0ed4404"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-117.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296954534627121,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-117.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296954534529204,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-117.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296954355818015,
+      "size": 528,
+      "type": "file",
+      "sha256": "54f94e3c7b7813ecf7e50242ed0febab1ec3ea79f699919229cd0002697cf5b6"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-118.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296954712838476,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-118.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296954712740393,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-118.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296954535052664,
+      "size": 518,
+      "type": "file",
+      "sha256": "8a76777150c43e599ca858928659e83ae5a14628941b7a42a8cf9528a9dfd8d2"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-119.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296954890722331,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-119.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296954890631789,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-119.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296954713246186,
+      "size": 512,
+      "type": "file",
+      "sha256": "6f4a7dd36694a467b3416bd64744a386d577779c7d07a5bf563454c2bc2db96d"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-120.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296955069568980,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-120.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296955069473605,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-120.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296954891139624,
+      "size": 527,
+      "type": "file",
+      "sha256": "02d0f151eaa3d7fd70e15e1e5c8be802496c5fe7b3df574a32b18bd664f7257b"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-121.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296955250134551,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-121.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296955250037259,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-121.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296955069979273,
+      "size": 516,
+      "type": "file",
+      "sha256": "c4c9d0c22944a5294c2ccfed055dc6aab744c6d6b73b2cc48bb15658b583eb5c"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-122.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296955428843825,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-122.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296955428752700,
+      "size": 699,
+      "type": "file",
+      "sha256": "29d771e89248269cb302809a0e47887815f11528aafeefcef39c41ce37991d36"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-122.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296955250539802,
+      "size": 523,
+      "type": "file",
+      "sha256": "f7f5a8bc6af1d4f351211d4a88a0b576a661a21ef4b55bf79fee5b6cfb2b5ba2"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-123.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296955608465684,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-123.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296955608377142,
+      "size": 620,
+      "type": "file",
+      "sha256": "6dddaed1d5adbf16d6ac4b39150014545743a5728c2b5178cc303e02bc9f11c5"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-123.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296955429245493,
+      "size": 523,
+      "type": "file",
+      "sha256": "c3229debb9efc965cdec8fefa54bf3ac88c9e03e1bf6bd84a997a13d07d9d557"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-124.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296955787353249,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-124.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296955787257874,
+      "size": 620,
+      "type": "file",
+      "sha256": "6dddaed1d5adbf16d6ac4b39150014545743a5728c2b5178cc303e02bc9f11c5"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-124.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296955608887143,
+      "size": 527,
+      "type": "file",
+      "sha256": "5b9f1a61fe44ddaa0f857a62cd9954dc048739a240241468e2dcc138f36ed292"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-125.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296955965547355,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-125.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296955965472021,
+      "size": 620,
+      "type": "file",
+      "sha256": "6dddaed1d5adbf16d6ac4b39150014545743a5728c2b5178cc303e02bc9f11c5"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-125.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296955787784792,
+      "size": 517,
+      "type": "file",
+      "sha256": "5894cc934273c85ec263f411483869ade2f6d30e875b3e0e3d9d6f9b6096f631"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-126.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296956145616258,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-126.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296956145538758,
+      "size": 620,
+      "type": "file",
+      "sha256": "6dddaed1d5adbf16d6ac4b39150014545743a5728c2b5178cc303e02bc9f11c5"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-126.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296955965973273,
+      "size": 522,
+      "type": "file",
+      "sha256": "7538bca0968bb480ffd906a709ded69c5054cfc6df06c5b9bf32a0479fe088eb"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-127.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296956324496324,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-127.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296956324394490,
+      "size": 620,
+      "type": "file",
+      "sha256": "6dddaed1d5adbf16d6ac4b39150014545743a5728c2b5178cc303e02bc9f11c5"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-127.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296956146025676,
+      "size": 510,
+      "type": "file",
+      "sha256": "d41d176d9186a14963303788b6e17a9be296405ea02074d37556ac207412edc7"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-128.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296956504294267,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-128.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296956504194725,
+      "size": 620,
+      "type": "file",
+      "sha256": "6dddaed1d5adbf16d6ac4b39150014545743a5728c2b5178cc303e02bc9f11c5"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-128.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296956324921533,
+      "size": 521,
+      "type": "file",
+      "sha256": "49110ee30ac292a204c247a74ec4c019bf5d152168b794c01c69444c5a372830"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-129.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296956683170499,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-129.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296956683090582,
+      "size": 620,
+      "type": "file",
+      "sha256": "6dddaed1d5adbf16d6ac4b39150014545743a5728c2b5178cc303e02bc9f11c5"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-129.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296956504755685,
+      "size": 518,
+      "type": "file",
+      "sha256": "12388be3532593107deb2e8d45491bce817955eec64c6ba0b08f5abc9c5cd6e8"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-130.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296956861918356,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-130.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296956861822731,
+      "size": 620,
+      "type": "file",
+      "sha256": "6dddaed1d5adbf16d6ac4b39150014545743a5728c2b5178cc303e02bc9f11c5"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-130.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296956683567167,
+      "size": 528,
+      "type": "file",
+      "sha256": "e057014c192caff227a5046d179ea612458b23a7a318e926f20a79aa1c74eea7"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-131.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296957042364635,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-131.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296957042274259,
+      "size": 620,
+      "type": "file",
+      "sha256": "6dddaed1d5adbf16d6ac4b39150014545743a5728c2b5178cc303e02bc9f11c5"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-131.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296956862337607,
+      "size": 527,
+      "type": "file",
+      "sha256": "08b6bf89e6214dbb3e5e37b68b5726b8f66f85eb60ead9720a0244a2d0a22b05"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-132.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296957224448127,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-132.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296957224367418,
+      "size": 620,
+      "type": "file",
+      "sha256": "6dddaed1d5adbf16d6ac4b39150014545743a5728c2b5178cc303e02bc9f11c5"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-132.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296957042796094,
+      "size": 520,
+      "type": "file",
+      "sha256": "edf35cecf7d7777e35f60b57e8d0a7c0bd4a0e3e838aa61e58c356bc60915879"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-133.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296957412851387,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-133.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296957412779637,
+      "size": 620,
+      "type": "file",
+      "sha256": "6dddaed1d5adbf16d6ac4b39150014545743a5728c2b5178cc303e02bc9f11c5"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-133.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296957224862420,
+      "size": 516,
+      "type": "file",
+      "sha256": "708f707feb2f6409ac20d2f6add0ef15148db8c62f70a885ac3528c719bfae1d"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-134.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296957595027337,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-134.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296957594947170,
+      "size": 620,
+      "type": "file",
+      "sha256": "6dddaed1d5adbf16d6ac4b39150014545743a5728c2b5178cc303e02bc9f11c5"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-134.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296957413272597,
+      "size": 516,
+      "type": "file",
+      "sha256": "6375a6b3937631b818d7766bffe7a8beb7878281939862c1148cdab41b8618a1"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-135.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296957777481913,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-135.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296957777409204,
+      "size": 620,
+      "type": "file",
+      "sha256": "6dddaed1d5adbf16d6ac4b39150014545743a5728c2b5178cc303e02bc9f11c5"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-135.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296957595442630,
+      "size": 523,
+      "type": "file",
+      "sha256": "da1e20b96e7e440b1691b942e128dac3701f407ffc93d3c21539508ca6aac685"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-136.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296957960520408,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-136.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296957960448033,
+      "size": 620,
+      "type": "file",
+      "sha256": "6dddaed1d5adbf16d6ac4b39150014545743a5728c2b5178cc303e02bc9f11c5"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-136.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296957777905623,
+      "size": 547,
+      "type": "file",
+      "sha256": "1c5a5b16276dae25dd06cc821e16088b19d870c50927b18ef8267c046dd785c7"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-137.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296958143222777,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-137.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296958143147443,
+      "size": 620,
+      "type": "file",
+      "sha256": "6dddaed1d5adbf16d6ac4b39150014545743a5728c2b5178cc303e02bc9f11c5"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-137.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296957960912701,
+      "size": 545,
+      "type": "file",
+      "sha256": "30a8f8b951d26cb912be179fda897a82b00961fb8260cb999f31ae96e36d5267"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-138.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296958326686439,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-138.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296958326610189,
+      "size": 620,
+      "type": "file",
+      "sha256": "6dddaed1d5adbf16d6ac4b39150014545743a5728c2b5178cc303e02bc9f11c5"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-138.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296958143641528,
+      "size": 513,
+      "type": "file",
+      "sha256": "afd80421cafb80f3f24ad0036a48a49ec0d211966ac906364a9df2314fbd1ffa"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-139.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296958507793220,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-139.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296958507697178,
+      "size": 620,
+      "type": "file",
+      "sha256": "6dddaed1d5adbf16d6ac4b39150014545743a5728c2b5178cc303e02bc9f11c5"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-139.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296958327139607,
+      "size": 523,
+      "type": "file",
+      "sha256": "8184b4deb33bc00554e3ee34d1cd529343b59aa603bed879af825064f960573a"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-140.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296958687214412,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-140.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296958687129245,
+      "size": 620,
+      "type": "file",
+      "sha256": "6dddaed1d5adbf16d6ac4b39150014545743a5728c2b5178cc303e02bc9f11c5"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/case-140.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296958508215680,
+      "size": 515,
+      "type": "file",
+      "sha256": "9ece84d18b0bd19a28feb93fccd753fb01a88ca78cc2afad0b91f2c8e7aa9af3"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/cases.json": {
+      "mode": 420,
+      "mtime_ns": 1793296933439238904,
+      "size": 17661,
+      "type": "file",
+      "sha256": "bf512deda7d075592e6be99986047f2fe3a21e89d41b591e64153897eed260e6"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/command-records.json": {
+      "mode": 420,
+      "mtime_ns": 1793296959144686627,
+      "size": 164570,
+      "type": "file",
+      "sha256": "dd4d6c531939f8aca2ef01a737211b079a4a5a0c7b7e638538422e991df95eb5"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/four-explicit-kinds.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296959142699705,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/four-explicit-kinds.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296959142613329,
+      "size": 625,
+      "type": "file",
+      "sha256": "15deed3d24b666c9d16fcfc62a35a9b5b06a9c77a6b780c88b048e6b12e4b187"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/load-101.stderr": {
+      "mode": 420,
+      "mtime_ns": 1793296958878358638,
+      "size": 0,
+      "type": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/load-101.stdout": {
+      "mode": 420,
+      "mtime_ns": 1793296958878261596,
+      "size": 5427,
+      "type": "file",
+      "sha256": "ab916bf114d32ffbe6e305f916e3fe63449f8bcb2568c0df5c0f2f80dae61040"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/load-101.tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296958687773913,
+      "size": 22705,
+      "type": "file",
+      "sha256": "8ede6bb6f2fe735b7685f1a2e7ffc847c6676b46d50f0b4cb676e26adb71c725"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/results.json": {
+      "mode": 420,
+      "mtime_ns": 1793296959145862714,
+      "size": 37330,
+      "type": "file",
+      "sha256": "f84ac233260336259730de012b5a320cb056f1f3af3d41253930cdb843cd8078"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/base/STATUS.md": {
+      "mode": 420,
+      "mtime_ns": 1793296933437963608,
+      "size": 30,
+      "type": "file",
+      "sha256": "fb2ea2437a988276c4758d52e2e0d729960f29e91ef9e6cbfac33c019027bf89"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/base/gates.md": {
+      "mode": 420,
+      "mtime_ns": 1793296933438145192,
+      "size": 270,
+      "type": "file",
+      "sha256": "258f5a3ddd19d3d125c9245345e30a2f087c9eac7085f506b4ec03f0bc838be7"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/base/plan.md": {
+      "mode": 420,
+      "mtime_ns": 1793296933437787608,
+      "size": 64,
+      "type": "file",
+      "sha256": "079983ad93c16cbca625c0f503d7d4054f5e4de700a506964980873add4c4116"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/base/spec.md": {
+      "mode": 420,
+      "mtime_ns": 1793296933437605899,
+      "size": 99,
+      "type": "file",
+      "sha256": "d3a2fe88015d38fb5f3f5d1e4a74f988bd1c3708431495919dbccc815703e4a4"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/base/stack.yml": {
+      "mode": 420,
+      "mtime_ns": 1793296933438057150,
+      "size": 117,
+      "type": "file",
+      "sha256": "21f55427920d8ecc03610a145cc3ecd76d545d716aea1f6d85b213fed371ebb4"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/kinds/STATUS.md": {
+      "mode": 420,
+      "mtime_ns": 1793296958879765643,
+      "size": 95,
+      "type": "file",
+      "sha256": "a5dd72a68e87ca2da4cdf5126cb84a78927b8679878a2f99d3e01ff48d3bd146"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/kinds/plan.md": {
+      "mode": 420,
+      "mtime_ns": 1793296958879513975,
+      "size": 1295,
+      "type": "file",
+      "sha256": "9213a21af0b8fa2983d67466f482d8bdcd0ff5db816b8785ab7ae806ab056993"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/kinds/spec.md": {
+      "mode": 420,
+      "mtime_ns": 1793296958879229891,
+      "size": 577,
+      "type": "file",
+      "sha256": "067085dfbfda9c431d01578c88d72312942ed9824e0dcad9e0b44b7642c5a091"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s53-quality-r6-probes/public/kinds/tasks.md": {
+      "mode": 420,
+      "mtime_ns": 1793296958880013851,
+      "size": 2306,
+      "type": "file",
+      "sha256": "e876ee8fabf768d2489847f57aa3c248063bd578432e02a6e22d7dd9e1f2f33c"
+    }
+  },
+  "own_new_file_count": 458,
+  "strict_preservation_passed": false
+}

@@ -1,0 +1,63 @@
+{
+  "candidateResult": {
+    "taskId": "node:delegated-task:command%3Amcp%3Afab79580-a405-41cc-8cf9-2b0c1f103a41%3Adelegate-task%3Asdd003-s28-o034-classifier-fix-high-r1",
+    "childThreadId": "thread:delegated-task:command%3Amcp%3Afab79580-a405-41cc-8cf9-2b0c1f103a41%3Adelegate-task%3Asdd003-s28-o034-classifier-fix-high-r1",
+    "childRunId": "run:thread:thread%3Adelegated-task%3Acommand%253Amcp%253Afab79580-a405-41cc-8cf9-2b0c1f103a41%253Adelegate-task%253Asdd003-s28-o034-classifier-fix-high-r1:ordinal:1",
+    "childNodeId": "node:delegated-task:command%3Amcp%3Afab79580-a405-41cc-8cf9-2b0c1f103a41%3Adelegate-task%3Asdd003-s28-o034-classifier-fix-high-r1",
+    "status": "completed",
+    "workState": "result_available",
+    "hasPendingChildRuns": false,
+    "latestTerminalRunId": "run:thread:thread%3Adelegated-task%3Acommand%253Amcp%253Afab79580-a405-41cc-8cf9-2b0c1f103a41%253Adelegate-task%253Asdd003-s28-o034-classifier-fix-high-r1:ordinal:1",
+    "latestTerminalStatus": "completed",
+    "latestTerminalSummary": null,
+    "latestTerminalResultContextTransferId": null,
+    "providerInstanceId": "codex_codex_gym",
+    "model": "gpt-6.1-sol",
+    "options": [
+      {
+        "id": "reasoningEffort",
+        "value": "high"
+      },
+      {
+        "id": "serviceTier",
+        "value": "default"
+      }
+    ],
+    "summary": "Prepared the [patch](/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/o034-candidate.patch); **not applied**. Adds unchecked **T031a5o1**.\n\nOwned files and before SHA-256:\n\n- `scripts/sdd-analyze.sh`: `cfef526b91e34e5d1b60f169a0ef9dda9d6b0ed1f1e1590ad0ec034f2e0e2c96`\n- `tests/test-sdd-analyze.sh`: `c2f0ef08c4d4774d10d3e9c817baa5ead211a94fce5fd634aa4b064753e42521`\n- Spec `tasks.md`: `add4d6235dc7554841a041fb9bd04083630ca987278484ac88dd23406b7aecaa`\n\n`/bin/bash tests/test-sdd-analyze.sh`: red **18/19**, exit 1 with 38 failed assertions; green **19/19**, exit 0. Covers 23 weak cases, 20 runner controls and existing explicit kinds. All nine reproduced siblings now warn.\n\nBash 3.2 syntax, warning-level ShellCheck, candidate metadata, whitespace and live `git apply --check` pass. All 177 mapped live files and HEAD remain unchanged.\n\nScratch: `/private/tmp/s28-o034-7nbg8e2h/candidate`. Exact commands, after hashes and retained proofs: [handoff](/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/HANDOFF.md).\n\nSkipped live capture/acceptance/gates/floor/CI and O-032 repairs.  \nLimit: complex wrappers may require explicit Verify kind; live validation and independent review remain pending.",
+    "resultContextTransferId": "context-transfer:type:subagent_result:source-thread:thread%3Adelegated-task%3Acommand%253Amcp%253Afab79580-a405-41cc-8cf9-2b0c1f103a41%253Adelegate-task%253Asdd003-s28-o034-classifier-fix-high-r1:target-thread:2ce93492-409f-4930-a9e5-173544a4c8c6:c8a68e14-747e-4056-b387-f50564f29cbc",
+    "hasPendingQuestion": false,
+    "pendingApproval": null,
+    "waitTimedOut": false
+  },
+  "captureInvocation": {
+    "taskId": "node:delegated-task:command%3Amcp%3Afab79580-a405-41cc-8cf9-2b0c1f103a41%3Adelegate-task%3Asdd003-s28-o034-live-capture-luna-r1",
+    "childThreadId": "thread:delegated-task:command%3Amcp%3Afab79580-a405-41cc-8cf9-2b0c1f103a41%3Adelegate-task%3Asdd003-s28-o034-live-capture-luna-r1",
+    "childRunId": "run:thread:thread%3Adelegated-task%3Acommand%253Amcp%253Afab79580-a405-41cc-8cf9-2b0c1f103a41%253Adelegate-task%253Asdd003-s28-o034-live-capture-luna-r1:ordinal:1",
+    "childNodeId": "node:delegated-task:command%3Amcp%3Afab79580-a405-41cc-8cf9-2b0c1f103a41%3Adelegate-task%3Asdd003-s28-o034-live-capture-luna-r1",
+    "status": "running",
+    "workState": "working",
+    "hasPendingChildRuns": false,
+    "latestTerminalRunId": null,
+    "latestTerminalStatus": null,
+    "latestTerminalSummary": null,
+    "latestTerminalResultContextTransferId": null,
+    "providerInstanceId": "codex_codex_gym",
+    "model": "gpt-6-luna",
+    "options": [
+      {
+        "id": "reasoningEffort",
+        "value": "medium"
+      },
+      {
+        "id": "serviceTier",
+        "value": "default"
+      }
+    ],
+    "summary": null,
+    "resultContextTransferId": null,
+    "hasPendingQuestion": false,
+    "pendingApproval": null,
+    "waitTimedOut": false
+  },
+  "meaning": "Actual HIGH candidate applied after genuine round24 seal0. Live capture task is active; no acceptance or formal clearance claimed."
+}

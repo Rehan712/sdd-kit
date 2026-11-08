@@ -1,0 +1,8 @@
+unmutated: rc=0
+mutant applied: endofday
+round_legacy_reconcile_cases under the endofday mutant: rc=0 (0 reproduces O-029)
+mutant applied: clamp
+round_legacy_reconcile_cases under the clamp mutant: rc=0 (0 reproduces O-029)
+mutant applied: future
+round_legacy_reconcile_cases under the future mutant: rc=0 (0 reproduces O-029)
+live status outside notes/verification/: before=f058f25dcc32ace1 after=f058f25dcc32ace1 unchanged

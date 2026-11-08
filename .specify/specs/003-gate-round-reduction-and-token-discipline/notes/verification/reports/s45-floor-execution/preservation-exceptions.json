@@ -1,0 +1,48 @@
+{
+  "at": "2026-10-29T10:38:11.344996+00:00",
+  "fullPreservationPassed": false,
+  "unexplainedPreexistingChange": {
+    "before": {
+      "mode": "0o644",
+      "mtime_ns": 1793256171922918360,
+      "size": 8196,
+      "kind": "file",
+      "sha256": "6449ec759a7f01d760b5ee3605bc39d1fdcda912da6990f15a48e4ff0f22761f"
+    },
+    "after": {
+      "mode": "0o644",
+      "mtime_ns": 1793257952701344636,
+      "size": 8196,
+      "kind": "file",
+      "sha256": "dd30f4dbd45e22f99961b128b2baeff17c080170b878aaa200c6af51dbea32ba"
+    }
+  },
+  "unexplainedChangeObservedAt": "2026-10-29T07:12:32.701344+00:00",
+  "unexplainedChangeAttribution": "Unknown; no worker command writes .DS_Store, and no restoration was attempted.",
+  "generatedVerificationJsonDifferences": {
+    "state_after.refs_sha256": {
+      "before": "7e5b5c2cf90ef6e8da94850f8c8960ff05517ae1568f717d67c0af72f2765924",
+      "after": "6464016d4181a924a884c63f283a4a793c3df76878a56d6e9811201e932b3a41"
+    }
+  },
+  "generatedVerificationJsonDiff": "--- archived-original-verification-final.json\n+++ actual-generated-verification-final.json\n@@ -21,7 +21,7 @@\n     \"index_mtime_ns\": 1792957592613445716,\n     \"head_file_sha256\": \"36b441e5337734d73e547a921b682069ccd54788152cff695f469a8e54e84134\",\n     \"head_file_mtime_ns\": 1788654328953442318,\n-    \"refs_sha256\": \"7e5b5c2cf90ef6e8da94850f8c8960ff05517ae1568f717d67c0af72f2765924\"\n+    \"refs_sha256\": \"6464016d4181a924a884c63f283a4a793c3df76878a56d6e9811201e932b3a41\"\n   },\n   \"global_refs_changed_since_baseline\": true\n }\n",
+  "generatedOutputRestorations": {
+    "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s38/inputs-after.nul": {
+      "bytesAndModeEqual": true,
+      "timestampRestorePerformed": true,
+      "originalTimestampsRestored": true,
+      "actualGeneratedSha256": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0"
+    },
+    "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s38/verification-final.json": {
+      "bytesAndModeEqual": false,
+      "timestampRestorePerformed": false,
+      "originalTimestampsRestored": false,
+      "actualGeneratedSha256": "ba6cecd70037fe78ee363d290f6464f5c98d16c2d0578e24f49e7342f483e041"
+    }
+  },
+  "protectedHeadIndexStatusTasksAndSourcePreserved": true,
+  "otherPreexistingChanges": {},
+  "historicalFailedArtifactsPreserved": true,
+  "unexpectedAdditions": [],
+  "noRepairCleanupOrRetryPerformed": true
+}

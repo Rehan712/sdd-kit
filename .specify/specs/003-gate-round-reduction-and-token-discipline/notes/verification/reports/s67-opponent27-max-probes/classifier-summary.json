@@ -1,0 +1,65 @@
+{
+  "cases": 175,
+  "publicInvocations": 176,
+  "mismatches": 6,
+  "explicitKindsControl": {
+    "argv": [
+      "/bin/bash",
+      "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+      "/private/tmp/sdd003-op27-independent-91uecis9/explicit-kinds/.specify/specs/003-verification-fixture"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "envOverrides": {
+      "GIT_OPTIONAL_LOCKS": "0",
+      "LC_ALL": "C",
+      "NO_COLOR": "1",
+      "TMPDIR": "/private/tmp/sdd003-op27-independent-91uecis9"
+    },
+    "exit": 0,
+    "asExpected": true
+  },
+  "failures": [
+    {
+      "index": 158,
+      "command": "tsc --pretty false --noEmit tests/unit.ts",
+      "group": "typecheck-option-order",
+      "exit": 0,
+      "observedWarning": false
+    },
+    {
+      "index": 159,
+      "command": "tsc --project tests/tsconfig.json --noEmit",
+      "group": "typecheck-option-order",
+      "exit": 0,
+      "observedWarning": false
+    },
+    {
+      "index": 161,
+      "command": "./tests/tsc --pretty false --noEmit tests/unit.ts",
+      "group": "typecheck-option-order",
+      "exit": 0,
+      "observedWarning": false
+    },
+    {
+      "index": 162,
+      "command": "./tests/tsc --project tests/tsconfig.json --noEmit",
+      "group": "typecheck-option-order",
+      "exit": 0,
+      "observedWarning": false
+    },
+    {
+      "index": 164,
+      "command": "tools/tsc --pretty false --noEmit tests/unit.ts",
+      "group": "typecheck-option-order",
+      "exit": 0,
+      "observedWarning": false
+    },
+    {
+      "index": 165,
+      "command": "tools/tsc --project tests/tsconfig.json --noEmit",
+      "group": "typecheck-option-order",
+      "exit": 0,
+      "observedWarning": false
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "status": "PASS",
+  "recordedAt": "2026-10-28T11:03:10.880666+00:00",
+  "worker_preexisting_entries": 20037,
+  "worker_changes": [
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/evidence.md",
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/sequence"
+  ],
+  "all_other_worker_file_records_identical": true,
+  "worker_status_difference_only_single_protected_invocation_receipt": true,
+  "timing_receipt": {
+    "path": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s36-fixture-verification-invocation.json",
+    "already_present_in_before_file_inventory": true,
+    "before": {
+      "mode": 420,
+      "mtime_ns": 1793183878776106203,
+      "size": 1972,
+      "sha256": "131eaaf2c46d16e5b8a9da0f13381f4703c32d1a69606074d84fbb8bc68342b3"
+    },
+    "after": {
+      "mode": 420,
+      "mtime_ns": 1793183878776106203,
+      "size": 1972,
+      "sha256": "131eaaf2c46d16e5b8a9da0f13381f4703c32d1a69606074d84fbb8bc68342b3"
+    },
+    "current_sha256": "131eaaf2c46d16e5b8a9da0f13381f4703c32d1a69606074d84fbb8bc68342b3",
+    "before_inventory_completed_at": "2026-10-28T10:38:07.184575+00:00",
+    "unchanged": true,
+    "receipt_json_keys": [
+      "recordedAt",
+      "actualInvocation",
+      "selectionVerified",
+      "scope"
+    ]
+  },
+  "raw_timing_receipt_hash": "131eaaf2c46d16e5b8a9da0f13381f4703c32d1a69606074d84fbb8bc68342b3",
+  "initial_audit_error_retained_and_labeled_transcription": true,
+  "audit_finalizer_delta": "--- \n+++ \n@@ -82,9 +82,15 @@\n assert not [f for f in newfiles if not new_allowed(f)],[f for f in newfiles if not new_allowed(f)]\n def status_filter(b):\n  return [x for x in b.split(b'\\0') if x and not new_allowed(x[3:].decode(errors='surrogateescape')) and x[3:].decode(errors='surrogateescape') not in allowed]\n-assert status_filter(status)==status_filter((o/'git-status.before.nul').read_bytes()),'preexisting Git status changed'\n+status_before=status_filter((o/'git-status.before.nul').read_bytes())\n+status_after=status_filter(status)\n+timing=json.loads((o/'status-baseline-timing.json').read_text())\n+timing_path=timing['path']\n+assert timing['already_present_in_before_file_inventory'] and timing['unchanged'] and after[timing_path]==base['files'][timing_path]\n+assert status_after.count(('?? '+timing_path).encode())==1 and ('?? '+timing_path).encode() not in status_before\n+assert [r for r in status_after if r!=('?? '+timing_path).encode()]==status_before,'preexisting Git status changed beyond documented baseline timing receipt'\n assert not (s/'notes/verification/lock').exists() and not list((s/'notes/captures').glob('.capture.*')) and not list((s/'notes/verification').glob('bindings.*'))\n-protection={'preexisting_files_checked':len(base['files']),'all_preexisting_raw_hashes_modes_mtimes_unchanged_except_automatic_sequence_and_evidence':True,'allowed_changes':changes,'evidence_prior_bytes_preserved':True,'evidence_append_sha256':h(append),'evidence_append_bytes':len(append),'preexisting_history_preserved':True,'head':base['head'],'branch':base['branch'],'index':after['@gitdir/index'],'git_status_preserved_except_owned_additions_and_automatic_capture_bookkeeping':True,'new_files':newfiles,'no_unexpected_new_files':True,'no_lock_or_pending_capture_after':True}\n+protection={'preexisting_files_checked':len(base['files']),'all_preexisting_raw_hashes_modes_mtimes_unchanged_except_automatic_sequence_and_evidence':True,'allowed_changes':changes,'evidence_prior_bytes_preserved':True,'evidence_append_sha256':h(append),'evidence_append_bytes':len(append),'preexisting_history_preserved':True,'head':base['head'],'branch':base['branch'],'index':after['@gitdir/index'],'git_status_preserved_except_owned_additions_and_automatic_capture_bookkeeping':True,'new_files':newfiles,'no_unexpected_new_files':True,'no_lock_or_pending_capture_after':True,'initial_status_to_file_inventory_timing_receipt':timing,'initial_finalizer_stop':'Conservative status assertion detected parent invocation receipt added between initial status read and inventory; receipt was already protected by before inventory and remains byte/mode/mtime identical; initial checker and diagnostic retained; no capture rerun.'}\n (o/'protection-check.json').write_text(json.dumps(protection,indent=2)+'\\n')\n static=json.loads((o/'static-checks.json').read_text());assert all(r['exit']==0 for r in static)\n fixture=json.loads((o/'fixture-selfcheck.json').read_text());assert fixture['status']=='PASS'\n",
+  "evidence_prior_bytes_preserved": true,
+  "evidence_append_bytes": 620,
+  "current_HEAD_and_index_still_match_worker_baseline": true,
+  "capture_attempt_count": 1,
+  "judgment": "Timing correction is narrow and supported by both file inventories and the raw status records. It does not excuse a source change or introduce a capture retry."
+}

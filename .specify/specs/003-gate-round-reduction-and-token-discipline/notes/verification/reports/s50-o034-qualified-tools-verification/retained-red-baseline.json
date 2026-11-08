@@ -1,0 +1,57 @@
+{
+  "proofs": [
+    {
+      "path": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s47-opponent26-max-probes/public-classifier/results.json",
+      "sha256": "70b1996efd70806f38be42c091a66ba0601e0308fe455a0700151100001ffd60",
+      "omissions": 16
+    },
+    {
+      "path": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s47-opponent26-max-probes/qualified-executable/results.json",
+      "sha256": "7b41418ea5d8c48467c4116d2b122c30debd89871d172453409c97edad29742f",
+      "omissions": 20
+    }
+  ],
+  "observation_count": 36,
+  "distinct_command_count": 28,
+  "commands": [
+    "tests/tsc --noEmit tests/unit.ts",
+    "tests/npm run build",
+    "tests/npm run typecheck",
+    "tests/test -f README.md",
+    "./tests/tsc --noEmit tests/unit.ts",
+    "./tests/npm run build",
+    "./tests/npm run typecheck",
+    "./tests/test -f README.md",
+    "./test/tsc --noEmit tests/unit.ts",
+    "./test/npm run build",
+    "./test/npm run typecheck",
+    "./test/test -f README.md",
+    "./tools/tests/tsc --noEmit tests/unit.ts",
+    "./tools/tests/npm run build",
+    "./tools/tests/npm run typecheck",
+    "./tools/tests/test -f README.md",
+    "./tests/node_modules/.bin/tsc --noEmit tests/unit.ts",
+    "./tests/node_modules/.bin/npm run build",
+    "./tests/node_modules/.bin/npm run typecheck",
+    "./tests/node_modules/.bin/test -f README.md",
+    "./tests/npm<input.txt run typecheck",
+    "./tests/npm>out.txt run typecheck",
+    "./tests/npm>>out.txt run typecheck",
+    "./tests/npm>|out.txt run typecheck",
+    "./tests/npm<>input.txt run typecheck",
+    "./tests/npm<&0 run typecheck",
+    "./tests/npm>&1 run typecheck",
+    "./tests/npm&>out.txt run typecheck"
+  ],
+  "historical_source": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+  "old_source_not_rerun": true,
+  "original_scripts_sha256": {
+    "focused-classifier-probes.py": "2765426e1e2e8f32171fc9e724d696d37e709d739136ff9d4ab8b3cb25f519b6",
+    "qualified-executable-probe.py": "b58367036664ce0cde0beff40a01f556a7da8a896f3f56c75793805e1d2fb5f4"
+  },
+  "actual_old_copied_analyzer_sha256": "c43de9e92df5657a3a94091a73bccb9abe37f9e1c3c3f6ccf6cb1cfa64f3a3f2",
+  "parent_saved_before_analyzer_sha256": "c43de9e92df5657a3a94091a73bccb9abe37f9e1c3c3f6ccf6cb1cfa64f3a3f2",
+  "actual_CAP818_input_before": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+  "actual_CAP818_input_after": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+  "old_probe_source_matches_preserved_before_file": true
+}

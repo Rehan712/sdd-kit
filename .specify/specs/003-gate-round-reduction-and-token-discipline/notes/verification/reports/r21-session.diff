@@ -1,0 +1,234 @@
+diff --git a/.specify/specs/003-gate-round-reduction-and-token-discipline/STATUS.md b/.specify/specs/003-gate-round-reduction-and-token-discipline/STATUS.md
+index ce9d273..f7cb273 100644
+--- a/.specify/specs/003-gate-round-reduction-and-token-discipline/STATUS.md
++++ b/.specify/specs/003-gate-round-reduction-and-token-discipline/STATUS.md
+@@ -656,6 +656,18 @@ defects already reproduced with file:line
+ 
+ - 2026-10-15 — Decisions are FROZEN from this batch through the live apply of T031a1 to T031a4, their capture and acceptance, the floor, round 20's completion and tally, and, on CLEARED, the hosted CI run, the T029 control and reality-check round 3 on that floor; results go to STATUS's neutral sections only, so that the floor stays current for both gates.
+ 
++- 2026-10-16 — Opponent round 20 is recorded here now that this batch moves the source anyway: CHALLENGED, 1 blocking + 3 minor, report digest `8630890bab45bfcae42acbeda45f203826c7c5afd1da494583ff7bb512602fdd`, against source `9cf02d45…` and FLOOR-UeGEcf (sealed at rc 0, 9 executed and 84 reused, 2026-10-15T21:09:28Z to 2026-10-16T00:51:39Z, validated current), reserved 2026-10-16T01:26:39Z, report timestamp 02:09:54Z, `--complete` and `tally` both exit 0 (`notes/verification/reports/r20-complete.{log,rc,time}`, `r20-tally.{log,rc}`: opponent=20, blocking=37, minor=21), the final audit exit 0 (`r20-final-audit.{log,rc}`). It held T031a1 to T031a4 except as follows. O-029 (new, blocking, wrong-result, class named-case-fixture-strength, root cause implementation-error, blocks AC-009 and REQ-012): `round_legacy_reconcile_cases` passes when the kernel ignores the reconciled timestamp, drops the reconcile digest and round check, or drops all legacy binding; the kernel itself refuses each of those cases. Reproduced before any repair (`r20-repro-o029.{sh,log,rc,time}`, exit 0: under the timestamp mutant, in a standalone copy, the case passes; the live status outside `notes/verification/` unchanged). O-030 (minor): no empty `Failure modes:` header is refused for a task owing no rows. O-031 (minor): the 002 byte-identity checks in `tally_class_cases` can never fail. O-032 (degraded, class round-recovery-diagnostics): the legacy-record refusals exit 3 with no diagnostic; it needs a kernel change and goes to the follow-up spec, not authorized here. The commit `2049f65` of all 003 work and the draft PR (below) moved the source to `3e13d844…`, so FLOOR-UeGEcf and round 20's observation are historical for any later source.
++
++- 2026-10-16 — User instruction of 2026-10-15 (session 23), about 23:00Z, while floor attempt 2 ran, verbatim: "actually my github ci limit reached so skip that part after opponent continue on reality check. Also ignore minor issues from opponent and reality checker. then continue creation of PR". Asked two questions, the user chose: (1) "Draft PR with --force (Recommended)": open the PR as a draft through `spec-pr.sh --force --draft`, the body showing the real verdicts; the PR's own CI proves AC-019 once the GitHub Actions limit resets, then it is marked ready (T033 merge later, with the user); not chosen: wait for CI and open a normal PR; local evidence instead of CI. (2) "Yes, commit and push (Recommended)": one commit of all 003 work, its message ending with the Co-Authored-By line, pushed to the spec branch as Rehan712 through a process-scoped GH_TOKEN, then the PR; not chosen: stop before committing. So: no hosted CI run while the Actions limit holds, and minor findings of either gate do not stop the sequence. Receipt: `notes/verification/reports/r20-user-decision-2.txt`.
++
++- 2026-10-16 — User decision of 2026-10-16 (session 23), after round 20. Asked: "Opponent round 20 is CHALLENGED on O-029 (a test-only weakness in the new AC-009 fixture; code is correct). How should I proceed?" The user chose "Draft PR now, fix later (Recommended)": skip reality-check round 3, commit, push and open the draft PR with `--force` showing opponent CHALLENGED, then fix O-029 (test-only) on the PR branch, with CI when the Actions limit resets, and re-gate before merge. Not chosen: reality-check round 3 then the draft PR; fix O-029 first, then the PR. Receipt: `r20-user-decision-3.txt`. Done in session 23: commit `2049f65` of all 003 work on the spec branch, pushed as Rehan712, and draft PR #20 (https://github.com/Rehan712/sdd-kit/pull/20) opened through `spec-pr.sh --force --draft` (`r20-pr.{log,rc,time}`, exit 0; the active gh account unchanged, `r20-gh-accounts-{before,after}.txt`). In session 24 the user authorized opponent round 21 for this repair and commits plus pushes of this work to the PR branch, and asked to finish fast: only the steps the tools require, no mutation matrix, no two-direction fixture judging, no separate measurement scripts, no repeated dev runs, except that each new O-029 assertion is shown killed by one of round 20's three mutants in the one dev run. Order: (a) the fixtures in a standalone copy and that dev run, done (entry below); (b) this batch; (c) the freeze point, one capture of record, the returns and accept; (d) one fresh floor on AC power; (e) round 21, complete, tally, the final audit; (f) on CLEARED, hosted CI for the exact source if the Actions limit has reset, the T029 control on the new floor's T029 capture, reality-check round 3 (rounds 1-3 need no authorization), then commit and push to the PR branch; if CI is still limited, reality-check round 3 anyway, commit, push and stop; (g) on READY, the user is asked before PR #20 is marked ready and about the merge and rollout (T033). Not authorized: shipped 002's reset parsing; the open-extent task; the round-19 follow-ups F1 to F4; the O-032 kernel change; merge; any bypass. The retro (T034) stays deferred.
++
++- 2026-10-16 — T031a1o1 (O-030, AC-022), T031a3o1 (O-031, AC-010) and T031a4o1 (O-029, AC-009 and REQ-012) are opened, Tests, binding plan §7's existing registry with no new families: acceptance (`tests/test-spec-gate.sh::test_acceptance`, FM-006, FM-010, INV-002); reports (`tests/test-gate-contracts.sh::test_reports_and_tally`, FM-019, INV-006); rounds (`tests/test-spec-gate.sh::test_rounds`, FM-016, INV-004). Each has the Verify `bash tests/run.sh && bash tests/shellcheck.sh`, so one capture on unchanged source can serve all three acceptances. Test files only, no kernel change: the cases start from round 20's report and `r20-repro-o029.sh` and are applied by `notes/verification/reports/r21-edits/apply-code.py` (refusing unless the two suites hash as at `2049f65`), the blocks by `r21-edits/apply-docs.py`. The one dev run, in a standalone copy built from the live enumeration with both scripts applied and a `TMPDIR` ending in `/` (`notes/verification/reports/r21-dev.{sh,log,rc,time}`, 2026-10-16T07:54:58Z to 2026-10-16T08:20:41Z, the live status outside `notes/verification/` unchanged): `tests/run.sh` passed 147/147 and `tests/shellcheck.sh` passed, exit 0; then each of round 20's three mutants (`r21-edits/mutants-o029.py`: the reconciled timestamp ignored; the reconcile digest and round check removed; all legacy binding removed) was applied to the copy's kernel and restored by `cmp`, and 9 of 9 new O-029 assertions were each killed by at least one of them.
++
++- 2026-10-16T08:20:54Z — waiver: gate=opponent; round=21; after=20; by=Rehan712; reason=user chose on 2026-10-16 to repair round 20's O-029 with O-030 and O-031 as T031a4o1, T031a1o1 and T031a3o1 (test files only) on the PR branch and authorized opponent round 21, so round 21 assesses those changes against a fresh floor sealed after they are accepted
++
++- 2026-10-16 — Decisions are FROZEN from this batch through the live apply of T031a1o1, T031a3o1 and T031a4o1, their capture and acceptance, the floor, round 21's completion and tally, and, on CLEARED, any hosted CI run, the T029 control and reality-check round 3 on that floor; results go to STATUS's neutral sections only, so that the floor stays current for both gates.
++
+ ## Open questions / blockers
+ 
+ - [ ] **Before merge (user decision 2026-10-16, session 23; NOT yet in Decisions):** repair O-029 test-only on the PR branch (the reviewer's T031a4o1: before the valid reconcile, a wrong digest, a wrong round and a timestamp before the history's date each exit 3, write no `legacy-time.nul` and leave the next round refused; after it, a waiver dated 2026-07-20 before 23:59:59Z refused with `not after the previous round completion at 2026-07-20T23:59:59Z`; after editing the history, neither `waiver` nor `round` authorizes or reserves; each assertion killed by one of the three mutants), optionally O-030 (T031a1o1) and O-031 (T031a3o1), both test-only; then a fresh floor, an authorized opponent round 21, hosted CI once the Actions limit resets (AC-019) and reality-check round 3, then mark the PR ready (T033 merge with the user). O-032 (kernel diagnostics) goes to the follow-up spec. User decision verbatim: `notes/verification/reports/r20-user-decision-3.txt`.
+diff --git a/.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md b/.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md
+index 583034e..1c0f59e 100644
+--- a/.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md
++++ b/.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md
+@@ -1014,6 +1014,36 @@ keeps each edit task to at most five files instead of combining unrelated work.
+   - *Notes:* Owns reality-check round 2 gap 4 (AC-009). Test files only, no kernel change, as the user decided on 2026-10-15; the cases start from the reviewer's probes (`notes/verification/reports/rc2-review-probes.txt`) and are applied by `notes/verification/reports/r20-edits/apply-code.py`. Under the user's decisions of 2026-10-14 and 2026-10-15 the invoker's extra proof steps (the mutation matrix, two-direction fixture judging, a separate measurement script, repeated dev runs) are not run; one dev run in a standalone copy and the capture of record prove it. T031a1 to T031a4 share one Verify, so one capture on unchanged source can serve all four acceptances. No gate round, floor or hosted-CI run is part of this task.
+   - *Evidence:* CAP-678-tyxcke verified by spec-gate accept; return sha256:620f33983528672b4aa239fe725b1c852b8a6e6c24940951b7e592f561e575ae
+ 
++- [ ] **T031a1o1** — Refuse an empty Failure modes header for a task owing no rows
++  - *Files:* `tests/test-spec-gate.sh`
++  - *Acceptance:* In `test_acceptance` (`acceptance_named_cases`), before the explicit-none acceptance, a return for the no-row task T006 with an empty `Failure modes:` header is refused with `empty required set must explicitly be none`, tasks.md byte-identical (AC-022).
++  - *Verify kind:* test
++  - *Tests:* `tests/test-spec-gate.sh::test_acceptance`
++  - *Verify:* `bash tests/run.sh && bash tests/shellcheck.sh` → all suites `passed`, exit 0
++  - *Reuse:* local
++  - *Refs:* REQ-006, REQ-009, AC-022, FM-006, FM-010, INV-002, plan §7
++  - *Notes:* Repairs O-030 (round 20, minor). Test files only, no kernel change, as the user decided on 2026-10-16; the cases start from opponent round 20's report (`notes/verification/reports/opponent-round20.md`) and `r20-repro-o029.sh`, and are applied by `notes/verification/reports/r21-edits/apply-code.py`. Under the user's decisions of 2026-10-14 to 2026-10-16 the invoker's extra proof steps are not run, except that each new O-029 assertion is shown killed by one of round 20's three mutants in the one dev run. T031a1o1, T031a3o1 and T031a4o1 share one Verify, so one capture on unchanged source can serve all three acceptances. No gate round, floor or hosted-CI run is part of this task.
++
++- [ ] **T031a3o1** — Hash the records the tally reads before and after it
++  - *Files:* `tests/test-gate-contracts.sh`
++  - *Acceptance:* In `test_reports_and_tally`, every file under each directory `tally` reads is hashed (names and bytes) before and after the run: the copy in `shipped_002_tally_case`, and the synthetic and annotated histories in `tally_class_cases`; the copy check there is labelled as proving only that `copy_kit` is faithful (AC-010).
++  - *Verify kind:* test
++  - *Tests:* `tests/test-gate-contracts.sh::test_reports_and_tally`
++  - *Verify:* `bash tests/run.sh && bash tests/shellcheck.sh` → all suites `passed`, exit 0
++  - *Reuse:* local
++  - *Refs:* REQ-015, AC-010, FM-019, INV-006, plan §7
++  - *Notes:* Repairs O-031 (round 20, minor). Test files only, no kernel change, as the user decided on 2026-10-16; the cases start from opponent round 20's report (`notes/verification/reports/opponent-round20.md`) and `r20-repro-o029.sh`, and are applied by `notes/verification/reports/r21-edits/apply-code.py`. Under the user's decisions of 2026-10-14 to 2026-10-16 the invoker's extra proof steps are not run, except that each new O-029 assertion is shown killed by one of round 20's three mutants in the one dev run. T031a1o1, T031a3o1 and T031a4o1 share one Verify, so one capture on unchanged source can serve all three acceptances. No gate round, floor or hosted-CI run is part of this task.
++
++- [ ] **T031a4o1** — Assert the refusals only a reconciled legacy record decides
++  - *Files:* `tests/test-spec-gate.sh`
++  - *Acceptance:* In `test_rounds` (`round_legacy_reconcile_cases`), on the copy of shipped 002's date-only history: before the valid reconcile, a record naming a wrong digest, a wrong round or a timestamp before the history's date each exits 3, writes no `legacy-time.nul` and leaves the next round refused with `date-only history needs timestamped digest reconciliation`; after it, a waiver dated 2026-07-20T12:00:00Z is refused with `not after the previous round completion at 2026-07-20T23:59:59Z` and the current waiver is authorized; after an edit of the history, with a floor current for it, neither `waiver` nor `round` authorizes or reserves; with the history restored, round 6 reserves. Each new assertion is killed by one of round 20's three mutants (the reconciled timestamp ignored; the reconcile digest and round check removed; all legacy binding removed) (AC-009, REQ-012).
++  - *Verify kind:* test
++  - *Tests:* `tests/test-spec-gate.sh::test_rounds`
++  - *Verify:* `bash tests/run.sh && bash tests/shellcheck.sh` → all suites `passed`, exit 0
++  - *Reuse:* local
++  - *Refs:* REQ-012, AC-009, FM-016, INV-004, plan §7
++  - *Notes:* Repairs O-029 (round 20, blocking). Test files only, no kernel change, as the user decided on 2026-10-16; the cases start from opponent round 20's report (`notes/verification/reports/opponent-round20.md`) and `r20-repro-o029.sh`, and are applied by `notes/verification/reports/r21-edits/apply-code.py`. Under the user's decisions of 2026-10-14 to 2026-10-16 the invoker's extra proof steps are not run, except that each new O-029 assertion is shown killed by one of round 20's three mutants in the one dev run. T031a1o1, T031a3o1 and T031a4o1 share one Verify, so one capture on unchanged source can serve all three acceptances. No gate round, floor or hosted-CI run is part of this task.
++
+ ## Observability
+ 
+ - [x] **T028** — Record cost and quality without invented savings
+diff --git a/tests/test-gate-contracts.sh b/tests/test-gate-contracts.sh
+index 00d00eb..794d8e3 100644
+--- a/tests/test-gate-contracts.sh
++++ b/tests/test-gate-contracts.sh
+@@ -550,12 +550,15 @@ test_ignored_local_overlays_and_personas_do_not_decide_the_checks() {
+ # AC-010/AC-017: shipped 002's recorded history, read as the input identity
+ # hashes it: an enumerated copy of its notes/ (copy_kit's directory selector),
+ # never the directories in place, where an empty FLOOR-* or CAP-* left behind
+-# is invisible to the identity yet walked by the tally (O-015 review).
++# is invisible to the identity yet walked by the tally (O-015 review). The
++# records the tally reads are hashed before and after it (T031a3o1, O-031).
+ shipped_002_tally_case() {
+-  local rel=.specify/specs/002-usage-limit-handling-for-dispatched-runs copy="$SANDBOX/tally-002"
++  local rel=.specify/specs/002-usage-limit-handling-for-dispatched-runs copy="$SANDBOX/tally-002" before
+   rm -rf "$copy"
+   copy_kit "$KIT_DIR" "$copy" "$rel/notes" || t_fail 'AC-010: cannot copy shipped 002 records as the identity hashes them'
++  before="$(records_digest "$copy/$rel")"
+   run_rc 0 bash "$SCRIPTS/spec-gate.sh" tally "$copy/$rel"
++  assert_eq "$before" "$(records_digest "$copy/$rel")" 'AC-010: the tally rewrote the shipped 002 records it read'
+   assert_contains "$OUT" 'opponent rounds=5'
+   assert_contains "$OUT" 'reality-check rounds=1'
+   assert_contains "$OUT" 'blocking=6 minor=0'
+@@ -2237,6 +2240,12 @@ ROWS
+   done
+ }
+ 
++# records_digest <dir> — one digest over the name and bytes of every file under
++# <dir>, so a reader that writes anything it reads is caught (O-031).
++records_digest() {
++  (cd "$1" && find . -type f | LC_ALL=C sort | while IFS= read -r f; do printf '%s\n' "$f"; shasum -a 256 < "$f"; done) | shasum -a 256
++}
++
+ # annotate_002 — shipped 002's legacy opponent history on stdin, as canonical
+ # rounds on stdout. Each legacy finding keeps its round, severity, Root cause
+ # and first location and gains the stable Class the table gives its
+@@ -2275,16 +2284,19 @@ annotate_002() {
+ # fixture for. Recurrence is keyed by Class alone: two findings of one Class at
+ # different files with different Root causes are one recurrence, and two
+ # Classes sharing a file and a Root cause are none. An annotated copy of
+-# shipped 002 detects both its clock and its lock recurrence, and neither the
+-# copy nor the shipped notes change.
++# shipped 002 detects both its clock and its lock recurrence. Each history the
++# tally reads is hashed before and after it (T031a3o1, O-031); the copy check
++# proves only that copy_kit is faithful.
+ tally_class_cases() {
+-  local spec="$SANDBOX/class-spec" rel=.specify/specs/002-usage-limit-handling-for-dispatched-runs copy="$SANDBOX/annotate-002" shipped
++  local spec="$SANDBOX/class-spec" rel=.specify/specs/002-usage-limit-handling-for-dispatched-runs copy="$SANDBOX/annotate-002" shipped before
+   mkdir -p "$spec/notes" "$SANDBOX/annotated/notes"
+   { tier_round_fixture 1 '' O-001:clock-parse:new:wrong-result O-002:lock-a:new:wrong-result O-003:lock-b:new:wrong-result
+     tier_round_fixture 2 '' O-004:clock-parse:new:wrong-result \
+       | sed -e 's#^- \*\*Where:\*\* .*#- **Where:** scripts/cancel.sh:4#' -e 's#^- \*\*Root cause:\*\* .*#- **Root cause:** plan-gap#'
+   } > "$spec/notes/opponent.md"
++  before="$(records_digest "$spec")"
+   run_rc 0 bash "$SCRIPTS/spec-gate.sh" tally "$spec"
++  assert_eq "$before" "$(records_digest "$spec")" 'AC-010: the tally rewrote the synthetic history it read'
+   assert_contains "$OUT" 'class=clock-parse findings=2 recurrences=1' \
+     'AC-010: one Class at different files with different Root causes was not one recurrence'
+   assert_contains "$OUT" 'class=lock-a findings=1 recurrences=0' 'AC-010: Classes sharing a file and Root cause counted a recurrence'
+@@ -2292,13 +2304,15 @@ tally_class_cases() {
+   shipped="$(shasum -a 256 < "$KIT_DIR/$rel/notes/opponent.md")"
+   copy_kit "$KIT_DIR" "$copy" "$rel/notes" || t_fail 'AC-010: cannot copy shipped 002 records as the identity hashes them'
+   annotate_002 < "$copy/$rel/notes/opponent.md" > "$SANDBOX/annotated/notes/opponent.md"
++  before="$(records_digest "$SANDBOX/annotated")"
+   run_rc 0 bash "$SCRIPTS/spec-gate.sh" tally "$SANDBOX/annotated"
++  assert_eq "$before" "$(records_digest "$SANDBOX/annotated")" 'AC-010: the tally rewrote the annotated 002 history it read'
+   assert_contains "$OUT" 'opponent rounds=5'
+   assert_contains "$OUT" 'blocking=6 minor=0 locations=6 unclassified=0'
+   assert_contains "$OUT" 'class=clock-reset-grammar findings=2 recurrences=1' 'AC-010: the annotated 002 copy missed its clock recurrence'
+   assert_contains "$OUT" 'class=resume-unit-lock findings=3 recurrences=2' 'AC-010: the annotated 002 copy missed its lock recurrence'
+-  assert_eq "$shipped" "$(shasum -a 256 < "$copy/$rel/notes/opponent.md")" 'AC-010: annotating changed the 002 copy'
+-  assert_eq "$shipped" "$(shasum -a 256 < "$KIT_DIR/$rel/notes/opponent.md")" 'AC-010: the shipped 002 notes changed'
++  assert_eq "$shipped" "$(shasum -a 256 < "$copy/$rel/notes/opponent.md")" 'AC-010: copy_kit did not copy the shipped 002 notes faithfully'
++  assert_eq "$shipped" "$(shasum -a 256 < "$KIT_DIR/$rel/notes/opponent.md")" 'AC-010: the shipped 002 notes changed during the case'
+ }
+ 
+ test_reports_and_tally() {
+diff --git a/tests/test-spec-gate.sh b/tests/test-spec-gate.sh
+index 157b344..441ad99 100755
+--- a/tests/test-spec-gate.sh
++++ b/tests/test-spec-gate.sh
+@@ -100,7 +100,9 @@ acceptance_parse_fault_cases() {
+ # whose command exited nonzero and a manual return whose artifact is absent are
+ # each refused, leaving tasks.md byte-identical. A valid return ticks its own
+ # task and adds its Evidence line, and changes nothing else; a task owing no
+-# rows is accepted with an explicit `Failure modes: none`.
++# rows is accepted with an explicit `Failure modes: none`, and only with it: an
++# empty `Failure modes:` header for that task is refused first (T031a1o1,
++# round 20's O-030).
+ acceptance_named_cases() {
+   local spec repo cap other failed before digest expected
+   spec="$(make_verification_git_dir acceptnamed)"
+@@ -166,6 +168,14 @@ EOF
+   cp "$SANDBOX/named-tasks" "$spec/tasks.md"
+   run_rc 0 "$SCRIPTS/spec-run.sh" "$spec" T006 --cwd "$repo" --from-task --no-tick --summary
+   cap="$(printf '%s' "$OUT" | sed -n 's/^capture=\([^ ]*\).*/\1/p')"
++  before="$(cat "$spec/tasks.md")"
++  { printf 'Verification-Return: 1\nTask: T006\nCaptures: %s\nSummary: ' "$cap"
++    cat "$spec/notes/captures/$cap/summary.txt"
++    printf 'Failure modes:\n'; } > "$SANDBOX/named-empty"
++  run_rc 3 "$SCRIPTS/spec-gate.sh" accept "$spec" T006 "$SANDBOX/named-empty"
++  assert_contains "$OUT" 'empty required set must explicitly be none' \
++    'AC-022: an empty Failure modes header was accepted for a task owing no rows'
++  assert_eq "$before" "$(cat "$spec/tasks.md")" 'AC-022: an empty Failure modes header changed tasks bytes'
+   { printf 'Verification-Return: 1\nTask: T006\nCaptures: %s\nSummary: ' "$cap"
+     cat "$spec/notes/captures/$cap/summary.txt"
+     printf 'Failure modes: none\n'; } > "$SANDBOX/named-none"
+@@ -1106,8 +1116,15 @@ round_record_line_cases() {
+ # refused at exit 4 until `round --reconcile` records an explicit timestamp
+ # bound to the history's digest; an exact waiver written after it then
+ # authorizes round 6, which reserves on a fresh floor.
++# T031a4o1 (round 20, O-029): the refusals only the reconciled record decides.
++# A record naming a wrong digest, a wrong round or a timestamp before the
++# history's date exits 3, writes no legacy-time.nul and leaves the next round
++# refused as date-only; a waiver after the history's date but before the
++# reconciled time is refused; and an edit of the history after reconciling
++# unbinds the record, so neither waiver nor round authorizes or reserves. The
++# kernel names none of the exit-3 refusals (O-032), so the cases assert state.
+ round_legacy_reconcile_cases() {
+-  local spec cli rel=.specify/specs/002-usage-limit-handling-for-dispatched-runs stamp
++  local spec cli rel=.specify/specs/002-usage-limit-handling-for-dispatched-runs stamp digest bad legacy
+   spec="$(make_verification_git_dir legacyround)"
+   cli="$(floor_fixture "$spec")"
+   copy_kit "$KIT_DIR" "$SANDBOX/legacy-002" "$rel/notes" || t_fail 'AC-009: cannot copy shipped 002 records as the identity hashes them'
+@@ -1117,13 +1134,44 @@ round_legacy_reconcile_cases() {
+   assert_contains "$OUT" 'date-only history needs timestamped digest reconciliation' \
+     'AC-009: date-only history ordered an authorization without reconciliation'
+   [[ ! -d "$spec/notes/verification/rounds/opponent/ROUND-6" ]] || t_fail 'AC-009: a refused legacy round reserved round 6'
+-  printf '%s\0' round 5 timestamp 2026-07-20T23:59:59Z report_digest "$(shasum -a 256 < "$spec/notes/opponent.md" | awk '{print $1}')" > "$SANDBOX/legacy-time.nul"
++  legacy="$spec/notes/verification/rounds/opponent/legacy-time.nul"
++  digest="$(shasum -a 256 < "$spec/notes/opponent.md" | awk '{print $1}')"
++  for bad in digest round timestamp; do
++    case "$bad" in
++      digest) printf '%s\0' round 5 timestamp 2026-07-20T23:59:59Z report_digest "$(printf '%064d' 0)";;
++      round) printf '%s\0' round 4 timestamp 2026-07-20T23:59:59Z report_digest "$digest";;
++      timestamp) printf '%s\0' round 5 timestamp 2026-07-19T23:59:59Z report_digest "$digest";;
++    esac > "$SANDBOX/legacy-wrong-$bad.nul"
++    run_rc 3 bash "$cli" round "$spec" opponent --reconcile "$SANDBOX/legacy-wrong-$bad.nul"
++    [[ ! -e "$legacy" ]] || t_fail "AC-009: a reconcile record with a wrong $bad wrote legacy-time.nul"
++    run_rc 4 bash "$cli" round "$spec" opponent
++    assert_contains "$OUT" 'date-only history needs timestamped digest reconciliation' \
++      "AC-009: a reconcile record with a wrong $bad left the history able to order an authorization"
++    # Each wrong record is judged alone, even where a regression wrote one.
++    rm -f "$legacy"
++  done
++  printf '%s\0' round 5 timestamp 2026-07-20T23:59:59Z report_digest "$digest" > "$SANDBOX/legacy-time.nul"
+   run_rc 0 bash "$cli" round "$spec" opponent --reconcile "$SANDBOX/legacy-time.nul"
+   assert_contains "$OUT" 'reconciled legacy gate=opponent round=5 timestamp=2026-07-20T23:59:59Z'
++  # After the history's date, before the reconciled time: only the record decides.
++  printf '\n## Decisions log\n%s\n' '- 2026-07-20T12:00:00Z — waiver: gate=opponent; round=6; after=5; by=fixture-user; reason=dated before the reconciled completion' >> "$spec/STATUS.md"
++  run_rc 4 bash "$cli" waiver "$spec" opponent 6
++  assert_contains "$OUT" 'not after the previous round completion at 2026-07-20T23:59:59Z' \
++    'AC-009: a waiver dated before the reconciled completion authorized the next round'
+   stamp="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+-  printf '\n## Decisions log\n- %s — waiver: gate=opponent; round=6; after=5; by=fixture-user; reason=order after the reconciled legacy history\n' "$stamp" >> "$spec/STATUS.md"
++  printf '%s\n' "- $stamp — waiver: gate=opponent; round=6; after=5; by=fixture-user; reason=order after the reconciled legacy history" >> "$spec/STATUS.md"
+   run_rc 0 bash "$cli" waiver "$spec" opponent 6
+   assert_contains "$OUT" 'authorized: opponent round 6' 'AC-009: an exact waiver after reconciliation was not authorized'
++  # An edit of the history unbinds the record: the floor is current for the
++  # edited history, so only the binding refuses the round.
++  cp "$spec/notes/opponent.md" "$SANDBOX/legacy-history"
++  printf 'Edited after reconciliation.\n' >> "$spec/notes/opponent.md"
++  run_rc 0 bash "$cli" floor "$spec"
++  run_rc 3 bash "$cli" waiver "$spec" opponent 6
++  assert_not_contains "$OUT" 'authorized' 'AC-009: a reconcile record outlived an edit of its history and authorized round 6'
++  run_rc 3 bash "$cli" round "$spec" opponent
++  [[ ! -d "$spec/notes/verification/rounds/opponent/ROUND-6" ]] || t_fail 'AC-009: a reconcile record outlived an edit of its history and reserved round 6'
++  cp "$SANDBOX/legacy-history" "$spec/notes/opponent.md"
+   run_rc 0 bash "$cli" floor "$spec"
+   run_rc 0 bash "$cli" round "$spec" opponent
+   assert_contains "$OUT" 'round=6 gate=opponent' 'AC-009: an exact waiver after reconciliation did not reserve the next round'

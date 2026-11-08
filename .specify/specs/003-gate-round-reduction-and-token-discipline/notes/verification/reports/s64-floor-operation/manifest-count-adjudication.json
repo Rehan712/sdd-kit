@@ -1,0 +1,26 @@
+{
+  "at": "2026-10-30T11:18:11.585457+00:00",
+  "originalReceipt": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s64-floor-operation/completion-integrity.json",
+  "originalDiagnostic": "manifestCountsMatch=false retained in original receipt",
+  "reason": "Original expected dictionary listed only the five component kinds and omitted the manifest version record. The actual manifest has the same version record and all component counts as the frozen summary; no source or manifest bytes changed.",
+  "actual": {
+    "version": 1,
+    "index": 177,
+    "path": 177,
+    "tool": 4,
+    "harness": 8,
+    "document": 4
+  },
+  "frozenSummary": {
+    "version": 1,
+    "index": 177,
+    "path": 177,
+    "tool": 4,
+    "harness": 8,
+    "document": 4
+  },
+  "matchesFrozenSummary": true,
+  "requiredComponentCountsMatch": true,
+  "sourceSha256": "7d4f17221f13d850cb7db06cdbb6261119ca97b52228adeac74d82f6496a9bff",
+  "beforeAfterManifestsByteIdentical": true
+}

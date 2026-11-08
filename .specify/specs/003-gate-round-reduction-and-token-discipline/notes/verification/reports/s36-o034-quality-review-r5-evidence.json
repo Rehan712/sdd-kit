@@ -1,0 +1,227 @@
+{
+  "status": "PASS",
+  "recordedAt": "2026-10-28T11:02:22.654819+00:00",
+  "capture_files": [
+    {
+      "file": "meta.nul",
+      "sha256": "47c2d43cd995c212769311f37783138c75b4d06f6df6c2ccd68f0a742e80c858",
+      "bytes": 691
+    },
+    {
+      "file": "argv.nul",
+      "sha256": "a193b9b8454686d43618a97cd684b331c6e36a0e968611582be2ce0aee872844",
+      "bytes": 56
+    },
+    {
+      "file": "inputs.nul",
+      "sha256": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+      "bytes": 46619
+    },
+    {
+      "file": "inputs-after.nul",
+      "sha256": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+      "bytes": 46619
+    },
+    {
+      "file": "bindings.nul",
+      "sha256": "8766df908be5d8f628c3880af34ae761dd1c9c4946e8da08da3e566c8c0c788a",
+      "bytes": 253653
+    },
+    {
+      "file": "output.log",
+      "sha256": "f9166fdc124954abb48f7c8ed789d96a1ce68c06a9da6df0d9d49a79a07aca5a",
+      "bytes": 862
+    },
+    {
+      "file": "summary.txt",
+      "sha256": "16d287c2efafb07cee1c26b8168f5c6da3732af758da56d23b61000206ec39b0",
+      "bytes": 498
+    }
+  ],
+  "capture_meta": {
+    "version": "1",
+    "id": "CAP-818-fLEvh7",
+    "sequence": "818",
+    "kind": "command",
+    "start": "2026-10-28T10:41:50Z",
+    "end": "2026-10-28T10:47:33Z",
+    "repo": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "check": "4b7f6c9b5f0df725e563898e3969549378a848152b48c9b6985cfb1517a462c1",
+    "shell": "/bin/bash",
+    "input_before": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+    "input_after": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+    "no_tick": "1",
+    "exit": "0",
+    "output_digest": "f9166fdc124954abb48f7c8ed789d96a1ce68c06a9da6df0d9d49a79a07aca5a",
+    "output_bytes": "862",
+    "policy": "local",
+    "key": "  -- 19/19 passed"
+  },
+  "source_rows": [
+    [
+      "path",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md",
+      "file",
+      "100644",
+      "c1e0410c69979b7b8559866b0eb4dcb43ba534985477e07c11ce9acd39589a1e",
+      ""
+    ],
+    [
+      "path",
+      "scripts/sdd-analyze.sh",
+      "file",
+      "100755",
+      "c43de9e92df5657a3a94091a73bccb9abe37f9e1c3c3f6ccf6cb1cfa64f3a3f2",
+      ""
+    ],
+    [
+      "path",
+      "tests/test-sdd-analyze.sh",
+      "file",
+      "100644",
+      "e5b5cde870b2da8c086a41f3a3824b401262343225108c7f3bab716324150c9a",
+      ""
+    ]
+  ],
+  "normalized_current_tasks_matches_capture": true,
+  "normalization_command": {
+    "argv": [
+      "/bin/bash",
+      "-c",
+      ". scripts/lib.sh\n. scripts/verification-lib.sh\nvf_path_content \"$1\" \"$2\" \"$3\"",
+      "_",
+      "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md",
+      "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s36-o034-quality-review-r5-evidence-9uwznsen/tasks.normalized"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "exit": 0,
+    "scratch": "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/s36-o034-quality-review-r5-evidence-9uwznsen"
+  },
+  "task_binding": [
+    [
+      "task",
+      "T031a5o1",
+      "T031a5o1",
+      "Tests",
+      "",
+      "test",
+      "",
+      "`tests/test-sdd-analyze.sh::test_verification_bindings`",
+      "REQ-005, AC-004, FM-001, INV-005, plan \u00a73.1, \u00a77",
+      "`bash tests/test-sdd-analyze.sh` \u2192 all suites `passed`, exit 0",
+      "local",
+      ""
+    ]
+  ],
+  "required_bindings": [
+    [
+      "binding",
+      "FM-001",
+      "T031a5o1",
+      "Tests",
+      "",
+      "test",
+      "authoring",
+      "tests/test-sdd-analyze.sh::test_verification_bindings",
+      "AC-001, AC-003, AC-004, AC-005, AC-006, AC-011, AC-023: phase modes, shared/excluded rows, malformed/dangling IDs, kinds, same-task tests, zero-warning golden, untouched 001/002 exit 0.",
+      "`bash tests/test-sdd-analyze.sh` \u2192 all suites `passed`, exit 0",
+      "",
+      ""
+    ],
+    [
+      "binding",
+      "INV-005",
+      "T031a5o1",
+      "Tests",
+      "",
+      "test",
+      "authoring",
+      "tests/test-sdd-analyze.sh::test_verification_bindings",
+      "AC-001, AC-003, AC-004, AC-005, AC-006, AC-011, AC-023: phase modes, shared/excluded rows, malformed/dangling IDs, kinds, same-task tests, zero-warning golden, untouched 001/002 exit 0.",
+      "`bash tests/test-sdd-analyze.sh` \u2192 all suites `passed`, exit 0",
+      "",
+      ""
+    ]
+  ],
+  "acceptance_files": [
+    {
+      "file": "meta.nul",
+      "sha256": "69731bd2c154d25008a77c88e25b27fd8ae8d0aeb3b7698405e4a9b8faa08dee",
+      "bytes": 286
+    },
+    {
+      "file": "return.txt",
+      "sha256": "a7a4d97ce6c2d6131c8dabef0c4b45502efd9be189abd283a1c35d963fe21d2f",
+      "bytes": 742
+    },
+    {
+      "file": "tasks.after",
+      "sha256": "b5c663f7299074826b1e00a9a23a2041ec210d4fa2d66af455498e40411a855c",
+      "bytes": 184227
+    },
+    {
+      "file": "digests.nul",
+      "sha256": "0a81b7d26f17af0e76f64e40c4cebddabef8ea0cb69160ceda763ee091d391fd",
+      "bytes": 143
+    }
+  ],
+  "acceptance_meta": {
+    "version": "1",
+    "task": "T031a5o1",
+    "return_digest": "a7a4d97ce6c2d6131c8dabef0c4b45502efd9be189abd283a1c35d963fe21d2f",
+    "binding_digest": "8766df908be5d8f628c3880af34ae761dd1c9c4946e8da08da3e566c8c0c788a",
+    "input": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+    "captures": "CAP-818-fLEvh7",
+    "manual": ""
+  },
+  "committed_valid": true,
+  "accepted_tasks_equals_live": true,
+  "worker_actual_T3_return_matches_with_one_terminal_LF": true,
+  "worker_return_bytes": 742,
+  "actual_summary_bytes": 741,
+  "consumed_static_checks": [
+    {
+      "label": "bash32-syntax",
+      "argv": [
+        "/bin/bash",
+        "-n",
+        "tests/test-sdd-analyze.sh"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "env_overrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "LC_ALL": "C",
+        "SHELLCHECK_OPTS": null
+      },
+      "start": "2026-10-28T10:40:14.792545+00:00",
+      "end": "2026-10-28T10:40:14.804718+00:00",
+      "exit": 0
+    },
+    {
+      "label": "shellcheck",
+      "argv": [
+        "/opt/homebrew/bin/shellcheck",
+        "--norc",
+        "-S",
+        "warning",
+        "-x",
+        "tests/test-sdd-analyze.sh"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "env_overrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "LC_ALL": "C",
+        "SHELLCHECK_OPTS": null
+      },
+      "start": "2026-10-28T10:40:14.804945+00:00",
+      "end": "2026-10-28T10:40:16.256096+00:00",
+      "exit": 0
+    }
+  ],
+  "consumed_capture_integrity_check_passed": true,
+  "capture_attempts": 1,
+  "op25_seal_still_CHALLENGED": true,
+  "executed": "Scoped vf_path_content only; no suites, capture, acceptance, floor, gate or retries."
+}

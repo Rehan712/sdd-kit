@@ -1,0 +1,30 @@
+{
+  "status": "PREPARED_NOT_EXECUTED",
+  "argv": [
+    "python3",
+    "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s60-evidence-preparation/runner.py"
+  ],
+  "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+  "env": {
+    "GIT_OPTIONAL_LOCKS": "0"
+  },
+  "start_new_session": true,
+  "stdin": "subprocess.DEVNULL",
+  "stdout_stderr_file": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s60-final-floorrun.wrapper.log",
+  "file_open_mode": "xb",
+  "pipes": false,
+  "shell": false,
+  "awaitSameOperation": true,
+  "retry": false,
+  "requiredBeforeOpeningLogs": [
+    "Actual AC Power and >=8589934592 free bytes immediately before native launch; helper rechecks both",
+    "No live source writer/floor process, verification lock, pending or staged round",
+    "Every collision suffix must be absent; do not retry or replace a surviving process",
+    "Exact source and raw tasks/status/index/HEAD binding must still pass verify-prepublish.sh",
+    "Parent records native wrapper PID and exit; require floor rc and wrapper rc both 0 and a new floor ID"
+  ],
+  "phaseOutputsMustRemainAbsent": [
+    "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s60-evidence-preparation/phase-started.json",
+    "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s60-evidence-preparation/phase-completed.json"
+  ]
+}

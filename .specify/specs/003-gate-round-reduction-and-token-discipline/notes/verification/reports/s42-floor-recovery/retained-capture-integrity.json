@@ -1,0 +1,221 @@
+[
+  {
+    "id": "CAP-820-3rZll1",
+    "exit": 0,
+    "source": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+    "sealSha256": "568fb8a3c188d5e8cf2f8ad60eaafca69fce80db6c282c43a55fb13f7df5281d",
+    "argv": [
+      "/bin/bash",
+      "-o",
+      "pipefail",
+      "-c",
+      "bash tests/test-verification.sh"
+    ]
+  },
+  {
+    "id": "CAP-821-PunhEv",
+    "exit": 0,
+    "source": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+    "sealSha256": "8fc0af942f95e05a5a34a307a58f018b91c0b8e687719ee19c58c2dbdb1b96ea",
+    "argv": [
+      "/bin/bash",
+      "-o",
+      "pipefail",
+      "-c",
+      "bash tests/test-golden-example.sh"
+    ]
+  },
+  {
+    "id": "CAP-822-SHhBLf",
+    "exit": 0,
+    "source": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+    "sealSha256": "df9fb0621fece4645abd9806c4685842e5cf6a3899b2aa8d89dcb927ab70b021",
+    "argv": [
+      "/bin/bash",
+      "-o",
+      "pipefail",
+      "-c",
+      "bash tests/test-gate-contracts.sh && bash tests/test-build-adapters.sh"
+    ]
+  },
+  {
+    "id": "CAP-823-V0snkv",
+    "exit": 0,
+    "source": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+    "sealSha256": "8ad6e26d3ec4b68c760cb6762bedb792082a336ba3188103246dd079297e1afb",
+    "argv": [
+      "/bin/bash",
+      "-o",
+      "pipefail",
+      "-c",
+      "bash tests/test-spec-run.sh && bash tests/test-verification.sh"
+    ]
+  },
+  {
+    "id": "CAP-824-uwaOpM",
+    "exit": 0,
+    "source": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+    "sealSha256": "ffd6f21dd889b5249f08c1e64e47332b9995b71c4be7a5b6016b2bae58366bc3",
+    "argv": [
+      "/bin/bash",
+      "-o",
+      "pipefail",
+      "-c",
+      "bash tests/test-spec-task.sh && bash tests/test-spec-gate.sh && bash tests/test-verification.sh"
+    ]
+  },
+  {
+    "id": "CAP-825-1XtXfy",
+    "exit": 0,
+    "source": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+    "sealSha256": "6c2b84481818f7dbfcebbbcbd86029e9be3de1905755961fbc6dc4ed82017c3e",
+    "argv": [
+      "/bin/bash",
+      "-o",
+      "pipefail",
+      "-c",
+      "bash tests/test-spec-gate.sh"
+    ]
+  },
+  {
+    "id": "CAP-826-JCf2n0",
+    "exit": 0,
+    "source": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+    "sealSha256": "a9336da2962f9cb4f934cec95e62130759e1d48e872741f98b756adc81f361e3",
+    "argv": [
+      "/bin/bash",
+      "-o",
+      "pipefail",
+      "-c",
+      "bash tests/test-spec-gate.sh && bash tests/test-verification.sh"
+    ]
+  },
+  {
+    "id": "CAP-827-QUzbWz",
+    "exit": 0,
+    "source": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+    "sealSha256": "eacea496c55d42d1abf8481832355e1e560be422a64e1375ed15bd81ff29cabc",
+    "argv": [
+      "/bin/bash",
+      "-o",
+      "pipefail",
+      "-c",
+      "bash tests/test-verification.sh && bash tests/test-spec-gate.sh"
+    ]
+  },
+  {
+    "id": "CAP-828-INyKFb",
+    "exit": 0,
+    "source": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+    "sealSha256": "9fb91b28a7dfa4eb7e99133deabc464935c539d065a5b34de17eee542df5f8ef",
+    "argv": [
+      "/bin/bash",
+      "-o",
+      "pipefail",
+      "-c",
+      "bash tests/test-verification.sh && bash tests/test-gate-contracts.sh"
+    ]
+  },
+  {
+    "id": "CAP-829-bbEFOb",
+    "exit": 0,
+    "source": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+    "sealSha256": "b6b4b5ee8319ffc311bdb83ec9503696bcac474e1f07d83101a0f86606e29b1d",
+    "argv": [
+      "/bin/bash",
+      "-o",
+      "pipefail",
+      "-c",
+      "bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-verification.sh && bash tests/test-sdd-analyze.sh"
+    ]
+  },
+  {
+    "id": "CAP-830-CsCffj",
+    "exit": 0,
+    "source": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+    "sealSha256": "3c81c17f0d1b20bacaeec1416477e96d134e9b6766a8b79b9cb86b4564c005b6",
+    "argv": [
+      "/bin/bash",
+      "-o",
+      "pipefail",
+      "-c",
+      "bash tests/test-gate-contracts.sh && bash tests/test-spec-gate.sh"
+    ]
+  },
+  {
+    "id": "CAP-831-9Jnoio",
+    "exit": 0,
+    "source": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+    "sealSha256": "e22677d05f75edaf7ebe8a3a3f1c14d260d153c691774478b7442b8cf8bd7808",
+    "argv": [
+      "/bin/bash",
+      "-o",
+      "pipefail",
+      "-c",
+      "bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-sdd-analyze.sh"
+    ]
+  },
+  {
+    "id": "CAP-832-yMZbdL",
+    "exit": 0,
+    "source": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+    "sealSha256": "2faa973655082a0a7cd316b8b5d4d9ca51b4cc1eeadc91e7f41e38893f69394d",
+    "argv": [
+      "/bin/bash",
+      "-o",
+      "pipefail",
+      "-c",
+      "bash tests/test-verification.sh && bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh"
+    ]
+  },
+  {
+    "id": "CAP-833-iRYlHe",
+    "exit": 0,
+    "source": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+    "sealSha256": "5f287c840c27ed266ea295e98b378c63ee04bc7198f8046b7c09d4432ebeb304",
+    "argv": [
+      "/bin/bash",
+      "-o",
+      "pipefail",
+      "-c",
+      "bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh"
+    ]
+  },
+  {
+    "id": "CAP-834-BGiAv1",
+    "exit": 0,
+    "source": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+    "sealSha256": "25e2e7c7c24a244eab23b4fda5a2da56f4309072991e60174c69692be433ff67",
+    "argv": [
+      "/bin/bash",
+      "-o",
+      "pipefail",
+      "-c",
+      "bash tests/run.sh && bash tests/shellcheck.sh"
+    ]
+  },
+  {
+    "id": "CAP-835-2xphbV",
+    "exit": 0,
+    "source": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+    "sealSha256": "2af258820f6d53b4b25633aaca20487309e18754afeae6c2f73f8a5737b99a00",
+    "argv": [
+      "/bin/bash",
+      "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+      "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline"
+    ]
+  },
+  {
+    "id": "CAP-836-fo1wDx",
+    "exit": 0,
+    "source": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+    "sealSha256": "c0600623da1699695aace34f854d5496b2883ed8806469b6536e14d7a44922c8",
+    "argv": [
+      "/bin/bash",
+      "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/spec-ac-coverage.sh",
+      "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline",
+      "--root",
+      "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline"
+    ]
+  }
+]

@@ -1,0 +1,23 @@
+{
+  "argv": [
+    "/bin/bash",
+    "/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/red-test-sdd-analyze.sh"
+  ],
+  "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+  "exit": 1,
+  "duration_seconds": 81.7316837310791,
+  "environment_overrides": {
+    "GIT_OPTIONAL_LOCKS": "0",
+    "NO_COLOR": "1",
+    "LC_ALL": "C",
+    "SHELLCHECK_OPTS": ""
+  },
+  "environment_unset": [
+    "BASH_ENV",
+    "ENV",
+    "CDPATH"
+  ],
+  "stdout_file": "red-suite.stdout",
+  "stderr_file": "red-suite.stderr",
+  "suite_adaptation": "Only helpers source and ANALYZE paths point to live helpers and the external baseline analyzer; all tests unchanged"
+}

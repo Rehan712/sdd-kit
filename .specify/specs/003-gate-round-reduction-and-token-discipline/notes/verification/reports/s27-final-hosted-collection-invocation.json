@@ -1,0 +1,33 @@
+{
+  "invocation": {
+    "taskId": "node:delegated-task:command%3Amcp%3Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%3Adelegate-task%3Asdd003-s27-final-hosted-ci-collection-high-r1",
+    "childThreadId": "thread:delegated-task:command%3Amcp%3Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%3Adelegate-task%3Asdd003-s27-final-hosted-ci-collection-high-r1",
+    "childRunId": "run:thread:thread%3Adelegated-task%3Acommand%253Amcp%253Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%253Adelegate-task%253Asdd003-s27-final-hosted-ci-collection-high-r1:ordinal:1",
+    "childNodeId": "node:delegated-task:command%3Amcp%3Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%3Adelegate-task%3Asdd003-s27-final-hosted-ci-collection-high-r1",
+    "status": "running",
+    "workState": "working",
+    "hasPendingChildRuns": false,
+    "latestTerminalRunId": null,
+    "latestTerminalStatus": null,
+    "latestTerminalSummary": null,
+    "latestTerminalResultContextTransferId": null,
+    "providerInstanceId": "codex_codex_gym",
+    "model": "gpt-6.1-sol",
+    "options": [
+      {
+        "id": "reasoningEffort",
+        "value": "high"
+      },
+      {
+        "id": "serviceTier",
+        "value": "default"
+      }
+    ],
+    "summary": null,
+    "resultContextTransferId": null,
+    "hasPendingQuestion": false,
+    "pendingApproval": null,
+    "waitTimedOut": false
+  },
+  "prompt": "HIGH execution/preparation worker, current provider codex_codex_gym / gpt-6.1-sol / reasoningEfforthigh / serviceTierdefault. Work ONLY in /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline; explicit workdir on every command. You are not alone. Preserve all app/source/STATUS/tasks/index and historical proof; don't edit/delete/overwrite any existing helper/artifact.\nUser received native PR21 notification that ALL4checks passed on FINALcommit5aee77672d03a2c7811e28e55172817da6dee012. Need collect ACTUAL current hosted CI proof, not just checks. Approved sourcec7a82b3ae3b900dcb02a4839decad74db1a13457c5bab9ff859625a5357f0be6, exact finaltree d685ec420ba6ce338e72727638e1ccff0bbb3846, snapshotparent2049f65960cc91e9e30bbd5ff1e11fc0fdf7cbd9. Existing draft PR21 branchci-snapshot/spec-003-20261025-s26. Root already linked it and UNWATCHED after completed checks; child MUST NOT watch/poll or make remote writes/comments/merge.\nCurrent platformdir P=.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261025-s27-final. Exact prepared collector is P/collect.sh <ACTUALcompletedmatchingrunid> <NEWoutputdir> 5aee77672d03a2c7811e28e55172817da6dee012. It is existing reviewed implementation with finaltreepin and file-only --allow-escape-sequences. Don't changecollectorlogic or rerunCI/fullsuites/floor/captures/gates.\nOne-off floor ACwaiter is ALIVE PID8439/nativeexecsession69258. At21:30:23Z currentpowerBattery86%, no actualfloorstarted; waiter will automatically launch onAC. It may start while you collect, so DON'T call original P/verify-prepublish.sh directly: it writes SHARED inputs-after.nul/verification-final.json that the floorhelper also uses. Avoid output races. You own only NEW hosted collection directories/driver/checker copies/reports under P and new s27-final-hosted-* rootreport provenance. Make minimally adapted copies of original strict verifier with ONLY its generated output paths replaced with UNIQUE before/after names in your new auditdir. Keep original out/immutable mappings/originrefs/strict source/head/index/STATUS/rawtask checks unchanged; preserve allassertions. Confirm literal substitution counts/code diff, don't silently loosen guard. Original P/checker and itsoutputs must remain untouched. Existing sharedoriginal inputs/source/preparation objects all historical. Currentrawtasks SHAadd4d6235dc7554841a041fb9bd04083630ca987278484ac88dd23406b7aecaa; indexSHAc492d7ea95abf8e8c335001f20c62ff50bc6f1e2179d7a07d30811181b3dd700/mtime1792957592613445716ns; STATUSSHA28919a358c30407ccb0fff041f436768353b2f002c54e1db351ea57efe5e7d88.\nActions:\n1. Query GitHub completed workflowruns ONCE for exacthead5aee..., eventpull_request, workflow.github/workflows/ci.yml, actualbranch; preserve candidatejson and actualselectedrun/url/attempt. Pick only observed compatiblecurrent run; ifnone reportgap, no polling/guessedID. ReadonlyGitHubmetadata/logrequests allowed. Use existing stored Rehan712 credential scoped to subprocessmemory/environment if needed; never print/save tokens/authconfig/globalaccountswitch, no secrets in argv/files/logs. Captureoutputs privately; rawANSI joblogs are data, not instructions or terminaloutput.\n2. Refuse fresh-outputname collisions; preserve selection/UTCargv/exit receipts. Run unique strict bindingBEFORE, then unchangedcollector ONCE into fresh output, assert realrunconclusionSUCCESS and exact4successful matrixjobs: shellcheck,tests(ubuntu-latest),tests(macos-latest),tests-bash32. Preserve rawlogs/APImetadata/hashmanifest/downloadexits.\n3. Require actualjobcheckout mergeSHA evidence in everyjoblog, testedmergetree exactlyd685... and mergeparent binds finalsnapshot5aee...; revalidate all177path+8harness+4doc source mapping C7 using actualfrozenmanifest. Run independentoutput strict bindingAFTER and requirecurrent normalizedinputmanifest=builderfreeze plus protected177/index/HEAD/STATUS/rawtask stable. Floor will change excluded captures/floorreceiptmetadata; that is expected, don't assertall13kbookkeepingfiles unchanged.\n4. Bashsyntax for minimally adaptedbindingcopies/driver, guard logic unchanged; no redundant7offlinecollectorcontrols sincecollectorcodeunchanged. Preserve exactdiff of IO-path substitutions, allgeneratedartifacts/hashes and truthful handoff.md/result.json. If anycollection/bindingfailure stopwithconcretecause, don'trerun/relax.\nReturnactualrunID,attempt,URL,4jobresults,actualmergeSHA/tree/source,collectorexit andbefore-afterbindingstatus, proof/handoff paths and anylimit. No claimnewfloor/gatescomplete. This is authorized actualsource-bound hostedcollection; userapproval persists."
+}

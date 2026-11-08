@@ -1,0 +1,82 @@
+{
+  "result": "PASS",
+  "run_url": "https://github.com/Rehan712/sdd-kit/actions/runs/40213790327",
+  "run_id": 40213790327,
+  "attempt": 1,
+  "snapshot_head": "781b963e6777b44059b24e696dafa37c69242a05",
+  "tested_merge": "0665f790e678e7815bf8cd6e8c7e727eb3508646",
+  "tested_tree": "43292032de54f25df06531471b07ada5da0becf0",
+  "frozen_tree": "43292032de54f25df06531471b07ada5da0becf0",
+  "exact_tree_equality": true,
+  "source": "a7e7dd326b27c7565c26349485c440af26f718a7f16e400ea42ed6961d03cd1a",
+  "source_paths": 177,
+  "harness_records": 8,
+  "document_records": 4,
+  "source_mapping": "source-mapping.tsv",
+  "matrix": [
+    {
+      "name": "shellcheck",
+      "id": 121230450714,
+      "status": "completed",
+      "conclusion": "success",
+      "runner": "GitHub Actions 1000000195",
+      "labels": [
+        "ubuntu-latest"
+      ],
+      "started_at": "2026-10-25T16:52:51Z",
+      "completed_at": "2026-10-25T16:53:42Z",
+      "tested_merge": "0665f790e678e7815bf8cd6e8c7e727eb3508646",
+      "raw_log": "job-shellcheck.log",
+      "raw_bytes": 10739,
+      "raw_sha256": "247c2cb29d3a96ad833a8916b4243f7cd41fbeb51ae0dc9da9b4c2e99d83e476"
+    },
+    {
+      "name": "tests (ubuntu-latest)",
+      "id": 121230450945,
+      "status": "completed",
+      "conclusion": "success",
+      "runner": "GitHub Actions 1000000196",
+      "labels": [
+        "ubuntu-latest"
+      ],
+      "started_at": "2026-10-25T16:52:51Z",
+      "completed_at": "2026-10-25T17:14:37Z",
+      "tested_merge": "0665f790e678e7815bf8cd6e8c7e727eb3508646",
+      "raw_log": "job-tests__ubuntu-latest_.log",
+      "raw_bytes": 24109,
+      "raw_sha256": "025ccf98b076e57be2cfb1424ab618094842170f01984cbe35ba7aea7cf66cdf"
+    },
+    {
+      "name": "tests-bash32",
+      "id": 121230450968,
+      "status": "completed",
+      "conclusion": "success",
+      "runner": "GitHub Actions 1000000197",
+      "labels": [
+        "macos-latest"
+      ],
+      "started_at": "2026-10-25T16:52:53Z",
+      "completed_at": "2026-10-25T17:21:45Z",
+      "tested_merge": "0665f790e678e7815bf8cd6e8c7e727eb3508646",
+      "raw_log": "job-tests-bash32.log",
+      "raw_bytes": 28935,
+      "raw_sha256": "00907876e2ea876b61907596bc373d2e811f435f0811f86b413fddd61bf0f919"
+    },
+    {
+      "name": "tests (macos-latest)",
+      "id": 121230450979,
+      "status": "completed",
+      "conclusion": "success",
+      "runner": "GitHub Actions 1000000198",
+      "labels": [
+        "macos-latest"
+      ],
+      "started_at": "2026-10-25T16:52:52Z",
+      "completed_at": "2026-10-25T17:26:41Z",
+      "tested_merge": "0665f790e678e7815bf8cd6e8c7e727eb3508646",
+      "raw_log": "job-tests__macos-latest_.log",
+      "raw_bytes": 28471,
+      "raw_sha256": "a89ea3a783732ef36b1ba8df0387260811491085740ac603064951d5974a6744"
+    }
+  ]
+}

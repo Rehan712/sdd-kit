@@ -1,0 +1,18 @@
+{
+  "task": "T029",
+  "capture": "CAP-769-bZPhmg",
+  "started": "2026-10-25T20:38:48.952225+00:00",
+  "removedControlRow": "FM-001, tests/test-gate-contracts.sh::test_instruction_contracts, CAP-769-bZPhmg",
+  "intactReturnSha256": "dc47e2239dc84dc47a2b080f18660c8fcde667c190c937309646049d64e48b9c",
+  "incompleteReturnSha256": "1f573c893caeb0a4e8e938606d01fd12e0927ca010893f025c6f72b82495112a",
+  "tasksBeforeSha256": "d1f829c82436168de21ddbfce847cb8833034036021280c82784ee17485815ed",
+  "reject": {
+    "exit": 3,
+    "seconds": 12.712,
+    "ended": "2026-10-25T20:39:01.664124+00:00"
+  },
+  "tasksAfterRejectSha256": "d1f829c82436168de21ddbfce847cb8833034036021280c82784ee17485815ed",
+  "exit": 1,
+  "error": "Incomplete control did not produce expected binding-mismatch exit3",
+  "ended": "2026-10-25T20:39:01.664297+00:00"
+}

@@ -1,0 +1,56 @@
+{
+  "recordType": "github-ci-observation",
+  "command": "gh pr view 20 --repo Rehan712/sdd-kit --json url,headRefName,headRefOid,baseRefName,state,isDraft,statusCheckRollup",
+  "response": {
+    "baseRefName": "main",
+    "headRefName": "spec/003-gate-round-reduction-and-token-discipline",
+    "headRefOid": "2049f65960cc91e9e30bbd5ff1e11fc0fdf7cbd9",
+    "isDraft": true,
+    "state": "OPEN",
+    "statusCheckRollup": [
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-16T02:53:27Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/Rehan712/sdd-kit/actions/runs/38842647062/job/116786010517",
+        "name": "shellcheck",
+        "startedAt": "2026-10-16T02:52:27Z",
+        "status": "COMPLETED",
+        "workflowName": "ci"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-16T03:13:45Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/Rehan712/sdd-kit/actions/runs/38842647062/job/116786010376",
+        "name": "tests (ubuntu-latest)",
+        "startedAt": "2026-10-16T02:52:28Z",
+        "status": "COMPLETED",
+        "workflowName": "ci"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-16T03:24:21Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/Rehan712/sdd-kit/actions/runs/38842647062/job/116786010659",
+        "name": "tests (macos-latest)",
+        "startedAt": "2026-10-16T02:52:34Z",
+        "status": "COMPLETED",
+        "workflowName": "ci"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-16T03:20:48Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/Rehan712/sdd-kit/actions/runs/38842647062/job/116786010650",
+        "name": "tests-bash32",
+        "startedAt": "2026-10-16T02:52:33Z",
+        "status": "COMPLETED",
+        "workflowName": "ci"
+      }
+    ],
+    "url": "https://github.com/Rehan712/sdd-kit/pull/20"
+  },
+  "scopeLimit": "This observes existing hosted CI results and their actual completion dates; it does not claim a new run of uncommitted test-only repairs.",
+  "observedAt": "2026-10-25T15:47:41.237609+00:00"
+}

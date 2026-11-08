@@ -1,0 +1,90 @@
+{
+  "at": "2026-10-29T17:47:32.538353+00:00",
+  "protected_preexisting_file_and_symlink_count": 21456,
+  "original_full_file_bytes_saved_external": "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd-s50-o034-verification-83br1pr1/original-blobs",
+  "changed_preexisting": {
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/evidence.md": {
+      "before": {
+        "mode": 420,
+        "mtime_ns": 1793270130977452402,
+        "size": 586451,
+        "kind": "file",
+        "sha256": "8578402b5294dc3a5bfcfe3b304f1e2ad4dce3112a8ecd47664668aac2ae1a4a"
+      },
+      "after": {
+        "mode": 420,
+        "mtime_ns": 1793296011976712074,
+        "size": 587071,
+        "kind": "file",
+        "sha256": "27e69f0e24a38ade45b79d2def6beb66ea355fbe3541be7c80afb883d288131e"
+      }
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/sequence": {
+      "before": {
+        "mode": 420,
+        "mtime_ns": 1793270058897169025,
+        "size": 4,
+        "kind": "file",
+        "sha256": "7d5f6ffe8a29e1f9d9107fcced580b494f66adbf34d46aa6df3d79d298053b92"
+      },
+      "after": {
+        "mode": 420,
+        "mtime_ns": 1793295805725568668,
+        "size": 4,
+        "kind": "file",
+        "sha256": "899eb94fcbba5b1a9be203c9fd98b7ebd3e6650c31e2604c2b9ec704e38eb83c"
+      }
+    }
+  },
+  "unexpected_changed_preexisting": {},
+  "external_changes": {},
+  "unexpected_new_paths": [],
+  "exact_authorized_new_capture_paths": [
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-843-YAhBBt/COMPLETE",
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-843-YAhBBt/argv.nul",
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-843-YAhBBt/bindings.nul",
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-843-YAhBBt/inputs-after.nul",
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-843-YAhBBt/inputs.nul",
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-843-YAhBBt/meta.nul",
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-843-YAhBBt/output.log",
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-843-YAhBBt/summary.txt",
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/captures/CAP-843-YAhBBt"
+  ],
+  "parent_receipt_addition": {
+    "mode": 420,
+    "mtime_ns": 1793295667811847698,
+    "size": 3489,
+    "kind": "file",
+    "sha256": "41c640aa455fabc0b463ca1403643019cf6849a10bb0edc7423f462d96eaa915"
+  },
+  "global_ref_differences": {
+    "refs/t3/orchestration-v2/checkpoints/MTJlM2E2YWEzNGFmOGNhN2FiN2U1MGMwODY5MGMzMDU/ordinal/21": {
+      "before": null,
+      "after": "85406e82245b1fe962370a4d09f3d6125b9a767d"
+    }
+  },
+  "global_ref_attribution": "Unknown concurrent actor if changed; no ref-writing command was run, no refs reset or allowlisted.",
+  "checks": {
+    "all_preexisting_worktree_bytes_modes_mtimes_preserved_except_exact_native_evidence_and_sequence": true,
+    "all_saved_external_files_preserved": true,
+    "no_unexpected_new_files_or_symlinks": true,
+    "exact_one_capture_new_file_set": true,
+    "preexisting_git_status_preserved_after_exact_owned_additions_and_native_changes": true,
+    "head_unchanged": true,
+    "evidence_exact_append_only": true,
+    "only_two_authorized_preexisting_paths_changed": true,
+    "global_refs_byte_identical": false,
+    "capture_lock_absent": true,
+    "capture_staging_absent": true,
+    "no_pending_bindings": true
+  },
+  "strict_preservation_passed": false,
+  "background_OS_observation": "Actual process lists retained before and after; offline disposable Docker Bash runtime used a frozen existing image. Host-wide OS changes are not attributed or hidden.",
+  "historical_preservation_exceptions_retained": [
+    "s45-floor-execution/preservation-exceptions.json",
+    "s46-op26-reservation/result.json",
+    "s46-op26-reservation/ownership-observation.json",
+    "s47-opponent26-max-probes/global-ref-observation.json",
+    "s48-op26-sealing/final-observation.json"
+  ]
+}

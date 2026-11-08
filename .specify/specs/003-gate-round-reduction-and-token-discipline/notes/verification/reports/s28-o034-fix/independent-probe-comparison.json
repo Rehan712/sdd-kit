@@ -1,0 +1,130 @@
+{
+  "probes": [
+    {
+      "command": "npm run typecheck",
+      "preservedTaskMatchesDeclaredHash": true,
+      "redTaskByteIdentical": true,
+      "preservedActualWarning": true,
+      "preservedOutputSha256": "f81b4c4e4bb690a88bdee7e2a024f4df2dfe0fb2e0353a67e39da43872990cc6"
+    },
+    {
+      "command": "npm run typecheck -- --project tests/tsconfig.json",
+      "preservedTaskMatchesDeclaredHash": true,
+      "redTaskByteIdentical": true,
+      "preservedActualWarning": false,
+      "preservedOutputSha256": "d08f2e040b7953edcf06a01226d5ab97916ce2e45ceae9e10c21f3b206936f6b"
+    },
+    {
+      "command": "tsc --noEmit",
+      "preservedTaskMatchesDeclaredHash": true,
+      "redTaskByteIdentical": true,
+      "preservedActualWarning": true,
+      "preservedOutputSha256": "f81b4c4e4bb690a88bdee7e2a024f4df2dfe0fb2e0353a67e39da43872990cc6"
+    },
+    {
+      "command": "tsc --noEmit tests/unit.ts",
+      "preservedTaskMatchesDeclaredHash": true,
+      "redTaskByteIdentical": true,
+      "preservedActualWarning": false,
+      "preservedOutputSha256": "d08f2e040b7953edcf06a01226d5ab97916ce2e45ceae9e10c21f3b206936f6b"
+    },
+    {
+      "command": "grep AC-001 README.md",
+      "preservedTaskMatchesDeclaredHash": true,
+      "redTaskByteIdentical": true,
+      "preservedActualWarning": true,
+      "preservedOutputSha256": "f81b4c4e4bb690a88bdee7e2a024f4df2dfe0fb2e0353a67e39da43872990cc6"
+    },
+    {
+      "command": "grep AC-001 tests/check.sh",
+      "preservedTaskMatchesDeclaredHash": true,
+      "redTaskByteIdentical": true,
+      "preservedActualWarning": false,
+      "preservedOutputSha256": "d08f2e040b7953edcf06a01226d5ab97916ce2e45ceae9e10c21f3b206936f6b"
+    },
+    {
+      "command": "npm run build -- --outDir tests/build",
+      "preservedTaskMatchesDeclaredHash": true,
+      "redTaskByteIdentical": true,
+      "preservedActualWarning": false,
+      "preservedOutputSha256": "d08f2e040b7953edcf06a01226d5ab97916ce2e45ceae9e10c21f3b206936f6b"
+    },
+    {
+      "command": "bash tests/check.sh",
+      "preservedTaskMatchesDeclaredHash": true,
+      "redTaskByteIdentical": true,
+      "preservedActualWarning": false,
+      "preservedOutputSha256": "d08f2e040b7953edcf06a01226d5ab97916ce2e45ceae9e10c21f3b206936f6b"
+    },
+    {
+      "command": "test -e README.md",
+      "preservedTaskMatchesDeclaredHash": true,
+      "redTaskByteIdentical": true,
+      "preservedActualWarning": false,
+      "preservedOutputSha256": "f6be3d9bdf1b03b290d38caeefabbc3efe93523a93baf2e410eb1130c1bd1581"
+    },
+    {
+      "command": "test -f README.md",
+      "preservedTaskMatchesDeclaredHash": true,
+      "redTaskByteIdentical": true,
+      "preservedActualWarning": false,
+      "preservedOutputSha256": "f6be3d9bdf1b03b290d38caeefabbc3efe93523a93baf2e410eb1130c1bd1581"
+    },
+    {
+      "command": "grep pytest README.md",
+      "preservedTaskMatchesDeclaredHash": true,
+      "redTaskByteIdentical": true,
+      "preservedActualWarning": false,
+      "preservedOutputSha256": "f6be3d9bdf1b03b290d38caeefabbc3efe93523a93baf2e410eb1130c1bd1581"
+    },
+    {
+      "command": "rg bats README.md",
+      "preservedTaskMatchesDeclaredHash": true,
+      "redTaskByteIdentical": true,
+      "preservedActualWarning": false,
+      "preservedOutputSha256": "f6be3d9bdf1b03b290d38caeefabbc3efe93523a93baf2e410eb1130c1bd1581"
+    },
+    {
+      "command": "diff fixtures/test.txt actual.txt",
+      "preservedTaskMatchesDeclaredHash": true,
+      "redTaskByteIdentical": true,
+      "preservedActualWarning": false,
+      "preservedOutputSha256": "f6be3d9bdf1b03b290d38caeefabbc3efe93523a93baf2e410eb1130c1bd1581"
+    },
+    {
+      "command": "node --test test/thing.test.js",
+      "preservedTaskMatchesDeclaredHash": true,
+      "redTaskByteIdentical": true,
+      "preservedActualWarning": false,
+      "preservedOutputSha256": "f6be3d9bdf1b03b290d38caeefabbc3efe93523a93baf2e410eb1130c1bd1581"
+    },
+    {
+      "command": "cargo test",
+      "preservedTaskMatchesDeclaredHash": true,
+      "redTaskByteIdentical": true,
+      "preservedActualWarning": false,
+      "preservedOutputSha256": "f6be3d9bdf1b03b290d38caeefabbc3efe93523a93baf2e410eb1130c1bd1581"
+    },
+    {
+      "command": "pytest",
+      "preservedTaskMatchesDeclaredHash": true,
+      "redTaskByteIdentical": true,
+      "preservedActualWarning": false,
+      "preservedOutputSha256": "f6be3d9bdf1b03b290d38caeefabbc3efe93523a93baf2e410eb1130c1bd1581"
+    },
+    {
+      "command": "bats test.bats",
+      "preservedTaskMatchesDeclaredHash": true,
+      "redTaskByteIdentical": true,
+      "preservedActualWarning": false,
+      "preservedOutputSha256": "f6be3d9bdf1b03b290d38caeefabbc3efe93523a93baf2e410eb1130c1bd1581"
+    },
+    {
+      "command": "bash tests/check.sh",
+      "preservedTaskMatchesDeclaredHash": true,
+      "redTaskByteIdentical": true,
+      "preservedActualWarning": false,
+      "preservedOutputSha256": "f6be3d9bdf1b03b290d38caeefabbc3efe93523a93baf2e410eb1130c1bd1581"
+    }
+  ]
+}

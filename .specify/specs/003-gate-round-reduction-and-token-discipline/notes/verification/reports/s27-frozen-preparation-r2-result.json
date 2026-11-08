@@ -1,0 +1,30 @@
+{
+  "taskId": "node:delegated-task:command%3Amcp%3Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%3Adelegate-task%3Asdd003-s27-frozen-ci-preparation-high-r2",
+  "childThreadId": "thread:delegated-task:command%3Amcp%3Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%3Adelegate-task%3Asdd003-s27-frozen-ci-preparation-high-r2",
+  "childRunId": "run:thread:thread%3Adelegated-task%3Acommand%253Amcp%253Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%253Adelegate-task%253Asdd003-s27-frozen-ci-preparation-high-r2:ordinal:1",
+  "childNodeId": "node:delegated-task:command%3Amcp%3Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%3Adelegate-task%3Asdd003-s27-frozen-ci-preparation-high-r2",
+  "status": "completed",
+  "workState": "result_available",
+  "hasPendingChildRuns": false,
+  "latestTerminalRunId": "run:thread:thread%3Adelegated-task%3Acommand%253Amcp%253Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%253Adelegate-task%253Asdd003-s27-frozen-ci-preparation-high-r2:ordinal:1",
+  "latestTerminalStatus": "completed",
+  "latestTerminalSummary": null,
+  "latestTerminalResultContextTransferId": null,
+  "providerInstanceId": "codex_codex_gym",
+  "model": "gpt-6.1-sol",
+  "options": [
+    {
+      "id": "reasoningEffort",
+      "value": "high"
+    },
+    {
+      "id": "serviceTier",
+      "value": "default"
+    }
+  ],
+  "summary": "Prepared; floor remains pending AC.\n\n- Freeze: `c7a82b3ae3b900dcb02a4839decad74db1a13457c5bab9ff859625a5357f0be6`\n- Tree: `e98c79fe564564397f36ff0b9910137572ea10bb`\n- Unreferenced commit: `414838bb52898921aa49fb3d25caed6e7b711763`\n- Expected remote: `781b963e6777b44059b24e696dafa37c69242a05`\n- Mapping PASS: 177 source paths, 8 harness records, 4 documents; zero mismatches.\n- HEAD/STATUS/index unchanged; index mtime remains `1792957592613445716`ns.\n\nExact parent launch/push/collection commands and proof paths are in the [handoff](/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s27-preparation-handoff.md). Syntax, diagnosed ShellCheck, and seven offline collector controls passed. Prior battery-block proof is preserved.\n\nNot run: floor, gates, captures, full suites, hosted collection, or publication. Floor and refreshed hosted CI remain unverified; actual power is still Battery.",
+  "resultContextTransferId": "context-transfer:type:subagent_result:source-thread:thread%3Adelegated-task%3Acommand%253Amcp%253Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%253Adelegate-task%253Asdd003-s27-frozen-ci-preparation-high-r2:target-thread:2ce93492-409f-4930-a9e5-173544a4c8c6:9f66e4ae-e4c3-49f6-a3b1-ac61cbf94cf5",
+  "hasPendingQuestion": false,
+  "pendingApproval": null,
+  "waitTimedOut": false
+}

@@ -1,0 +1,259 @@
+{
+  "started": "2026-10-26T21:30:02.325059+00:00",
+  "status": "PUBLISHED_DRAFT_CI_PENDING",
+  "approvedRefresh": true,
+  "commit": "616dd2d1bb0f3eb16045821b0b30b9c9b40f2395",
+  "tree": "e68740dbbf9d10e3abcdfd0c6620ed9c3abd04e1",
+  "source": "16ffcec3c2f0cffa21b8c35e7b90d768a27bdfdd37deba9147edd25489946494",
+  "expectedLease": "5aee77672d03a2c7811e28e55172817da6dee012",
+  "steps": [
+    {
+      "name": "verify-prepublish",
+      "argv": [
+        "bash",
+        ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261026-s29/verify-prepublish.sh"
+      ],
+      "started": "2026-10-26T21:30:02.343852+00:00",
+      "ended": "2026-10-26T21:30:15.666544+00:00",
+      "seconds": 13.323,
+      "exit": 0
+    },
+    {
+      "name": "commit-tree-binding",
+      "argv": [
+        "git",
+        "show",
+        "-s",
+        "--format=%T%n%P",
+        "616dd2d1bb0f3eb16045821b0b30b9c9b40f2395"
+      ],
+      "started": "2026-10-26T21:30:15.668179+00:00",
+      "ended": "2026-10-26T21:30:15.725427+00:00",
+      "seconds": 0.057,
+      "exit": 0
+    },
+    {
+      "name": "remote-url",
+      "argv": [
+        "git",
+        "remote",
+        "get-url",
+        "origin"
+      ],
+      "started": "2026-10-26T21:30:15.725730+00:00",
+      "ended": "2026-10-26T21:30:15.736845+00:00",
+      "seconds": 0.011,
+      "exit": 0
+    },
+    {
+      "name": "auth-subject",
+      "argv": [
+        "gh",
+        "api",
+        "user"
+      ],
+      "started": "2026-10-26T21:30:15.975684+00:00",
+      "ended": "2026-10-26T21:30:16.436364+00:00",
+      "seconds": 0.461,
+      "exit": 0
+    },
+    {
+      "name": "repository-permissions",
+      "argv": [
+        "gh",
+        "api",
+        "repos/Rehan712/sdd-kit"
+      ],
+      "started": "2026-10-26T21:30:16.438424+00:00",
+      "ended": "2026-10-26T21:30:16.949371+00:00",
+      "seconds": 0.511,
+      "exit": 0
+    },
+    {
+      "name": "pr-before",
+      "argv": [
+        "gh",
+        "api",
+        "repos/Rehan712/sdd-kit/pulls/21"
+      ],
+      "started": "2026-10-26T21:30:16.950705+00:00",
+      "ended": "2026-10-26T21:30:20.270102+00:00",
+      "seconds": 3.32,
+      "exit": 0
+    },
+    {
+      "name": "ls-remote-before",
+      "argv": [
+        "git",
+        "-c",
+        "credential.helper=",
+        "-c",
+        "credential.https://github.com.helper=",
+        "-c",
+        "credential.https://github.com.helper=!gh auth git-credential",
+        "ls-remote",
+        "--heads",
+        "origin",
+        "refs/heads/ci-snapshot/spec-003-20261025-s26"
+      ],
+      "started": "2026-10-26T21:30:20.270664+00:00",
+      "ended": "2026-10-26T21:30:20.680263+00:00",
+      "seconds": 0.41,
+      "exit": 0
+    },
+    {
+      "name": "live-base-merge-tree",
+      "argv": [
+        "git",
+        "merge-tree",
+        "--write-tree",
+        "f4a0e4e31df29b53ccb9e088d3b8d0cd58f8e12f",
+        "616dd2d1bb0f3eb16045821b0b30b9c9b40f2395"
+      ],
+      "started": "2026-10-26T21:30:20.712496+00:00",
+      "ended": "2026-10-26T21:30:20.734238+00:00",
+      "seconds": 0.022,
+      "exit": 0
+    },
+    {
+      "name": "approved-lease-push",
+      "argv": [
+        "git",
+        "-c",
+        "credential.helper=",
+        "-c",
+        "credential.https://github.com.helper=",
+        "-c",
+        "credential.https://github.com.helper=!gh auth git-credential",
+        "-c",
+        "push.followTags=false",
+        "-c",
+        "push.recurseSubmodules=no",
+        "-c",
+        "push.gpgSign=false",
+        "push",
+        "--no-verify",
+        "--porcelain",
+        "--force-with-lease=refs/heads/ci-snapshot/spec-003-20261025-s26:5aee77672d03a2c7811e28e55172817da6dee012",
+        "origin",
+        "616dd2d1bb0f3eb16045821b0b30b9c9b40f2395:refs/heads/ci-snapshot/spec-003-20261025-s26"
+      ],
+      "started": "2026-10-26T21:30:20.734709+00:00",
+      "ended": "2026-10-26T21:30:26.774656+00:00",
+      "seconds": 6.04,
+      "exit": 0
+    },
+    {
+      "name": "ls-remote-after",
+      "argv": [
+        "git",
+        "-c",
+        "credential.helper=",
+        "-c",
+        "credential.https://github.com.helper=",
+        "-c",
+        "credential.https://github.com.helper=!gh auth git-credential",
+        "ls-remote",
+        "--heads",
+        "origin",
+        "refs/heads/ci-snapshot/spec-003-20261025-s26"
+      ],
+      "started": "2026-10-26T21:30:26.777146+00:00",
+      "ended": "2026-10-26T21:30:27.227854+00:00",
+      "seconds": 0.451,
+      "exit": 0
+    },
+    {
+      "name": "pr21-edit",
+      "argv": [
+        "gh",
+        "pr",
+        "edit",
+        "21",
+        "--repo",
+        "Rehan712/sdd-kit",
+        "--title",
+        "test(ci): spec 003 s29 repair and control snapshot (do not merge)",
+        "--body-file",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261026-s29/pr21-body.md"
+      ],
+      "started": "2026-10-26T21:30:27.229916+00:00",
+      "ended": "2026-10-26T21:30:29.233818+00:00",
+      "seconds": 2.004,
+      "exit": 0
+    },
+    {
+      "name": "pr-after",
+      "argv": [
+        "gh",
+        "api",
+        "repos/Rehan712/sdd-kit/pulls/21"
+      ],
+      "started": "2026-10-26T21:30:29.236157+00:00",
+      "ended": "2026-10-26T21:30:30.906688+00:00",
+      "seconds": 1.671,
+      "exit": 0
+    },
+    {
+      "name": "verify-after-publish",
+      "argv": [
+        "bash",
+        ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261026-s29/verify-prepublish.sh"
+      ],
+      "started": "2026-10-26T21:30:30.909370+00:00",
+      "ended": "2026-10-26T21:30:43.817803+00:00",
+      "seconds": 12.909,
+      "exit": 0
+    }
+  ],
+  "pushed": true,
+  "prUpdated": true,
+  "exit": 0,
+  "before": {
+    "head": "2049f65960cc91e9e30bbd5ff1e11fc0fdf7cbd9",
+    "index": {
+      "sha256": "c492d7ea95abf8e8c335001f20c62ff50bc6f1e2179d7a07d30811181b3dd700",
+      "mode": "0o644",
+      "mtimeNs": 1792957592613445716
+    },
+    "status": {
+      "sha256": "2519b0a153bd7a8548b1b5d6abf3cefaddd6da93d8c5670efba4322dd4c8be1b",
+      "mode": "0o600",
+      "mtimeNs": 1793047789555914145
+    },
+    "tasks": {
+      "sha256": "bc4acb0ebbe27dd0ec452236e93f90817702cbed45b38db41d92a16fa8a63d17",
+      "mode": "0o600",
+      "mtimeNs": 1793049031942505082
+    }
+  },
+  "credentialSubject": "Rehan712",
+  "liveBase": "f4a0e4e31df29b53ccb9e088d3b8d0cd58f8e12f",
+  "prUrl": "https://github.com/Rehan712/sdd-kit/pull/21",
+  "prHead": "616dd2d1bb0f3eb16045821b0b30b9c9b40f2395",
+  "after": {
+    "head": "2049f65960cc91e9e30bbd5ff1e11fc0fdf7cbd9",
+    "index": {
+      "sha256": "c492d7ea95abf8e8c335001f20c62ff50bc6f1e2179d7a07d30811181b3dd700",
+      "mode": "0o644",
+      "mtimeNs": 1792957592613445716
+    },
+    "status": {
+      "sha256": "2519b0a153bd7a8548b1b5d6abf3cefaddd6da93d8c5670efba4322dd4c8be1b",
+      "mode": "0o600",
+      "mtimeNs": 1793047789555914145
+    },
+    "tasks": {
+      "sha256": "bc4acb0ebbe27dd0ec452236e93f90817702cbed45b38db41d92a16fa8a63d17",
+      "mode": "0o600",
+      "mtimeNs": 1793049031942505082
+    }
+  },
+  "ended": "2026-10-26T21:30:43.832268+00:00",
+  "identityResponseRetention": {
+    "rawResponseRetained": false,
+    "reason": "Unneeded personal account fields discarded after identity validation",
+    "retainedPublicFields": "auth-subject.selected.json",
+    "rawResponseSha256": "7c9dc183018228dd24b25a73d8c7097aacb3edab111b1b5c3c63e57d54790951"
+  }
+}

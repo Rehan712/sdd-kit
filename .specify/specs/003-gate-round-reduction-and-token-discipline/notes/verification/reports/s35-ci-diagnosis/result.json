@@ -1,0 +1,860 @@
+{
+  "status": "DIAGNOSED_WITH_LIMITS",
+  "mode": "log-digest",
+  "source_read_only": true,
+  "quality_or_formal_review": false,
+  "created_utc": "2026-10-28T10:32:42.961231+00:00",
+  "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+  "git_optional_locks": "0",
+  "run": {
+    "id": 40668391031,
+    "attempt": 1,
+    "head_sha": "08210681770b65c6ccdfa2571b80a79a09e03154",
+    "archived_status": "in_progress",
+    "archived_conclusion": null
+  },
+  "job": {
+    "id": 122748655967,
+    "name": "tests (ubuntu-latest)",
+    "conclusion": "failure",
+    "failed_steps": [
+      {
+        "name": "run the test suite",
+        "status": "completed",
+        "conclusion": "failure",
+        "number": 3,
+        "started_at": "2026-10-28T09:58:26Z",
+        "completed_at": "2026-10-28T10:25:47Z"
+      }
+    ]
+  },
+  "other_jobs_at_archived_observation": [
+    {
+      "name": "shellcheck",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "tests-bash32",
+      "status": "in_progress",
+      "conclusion": null
+    },
+    {
+      "name": "tests (macos-latest)",
+      "status": "in_progress",
+      "conclusion": null
+    }
+  ],
+  "snapshot": {
+    "published_head": "08210681770b65c6ccdfa2571b80a79a09e03154",
+    "published_tree": "c0b0ef2da8160a2c08b61a9ad57719b755b2234c",
+    "normalized_source_user_supplied": "9eb5835224ccdf82b8d97b108097fac6ab5b993c38200fd1970c765c5e6a3842",
+    "local_head": "2049f65960cc91e9e30bbd5ff1e11fc0fdf7cbd9",
+    "tested_merge_from_raw_log": "9894ce4a679c8120e1be7c432106f7a07021eb0b",
+    "tested_merge_raw_lines": [
+      92,
+      141,
+      143,
+      144
+    ],
+    "merge_object_available_locally": false,
+    "merge_tree_independently_verified": false,
+    "file_bindings": [
+      {
+        "path": "tests/test-sdd-analyze.sh",
+        "local_sha256": "2f9efc4e4b24da1ca1bcef710e82ef852f1e463adbae0263f54d585f333bcd4e",
+        "frozen_sha256": "2f9efc4e4b24da1ca1bcef710e82ef852f1e463adbae0263f54d585f333bcd4e",
+        "byte_identical": true,
+        "frozen_git_blob": "89240952de2c1a72d7cd4392f81e89df34e80352"
+      },
+      {
+        "path": "scripts/sdd-analyze.sh",
+        "local_sha256": "c43de9e92df5657a3a94091a73bccb9abe37f9e1c3c3f6ccf6cb1cfa64f3a3f2",
+        "frozen_sha256": "c43de9e92df5657a3a94091a73bccb9abe37f9e1c3c3f6ccf6cb1cfa64f3a3f2",
+        "byte_identical": true,
+        "frozen_git_blob": "38e31d9dbdd847acaba221a109a3aac55ffd9a6c"
+      },
+      {
+        "path": "tests/helpers.sh",
+        "local_sha256": "b7bc6ff9fffa3350c206a7bf25a0ef23517a98f1797ef3f199ac7cdfe240e9b2",
+        "frozen_sha256": "b7bc6ff9fffa3350c206a7bf25a0ef23517a98f1797ef3f199ac7cdfe240e9b2",
+        "byte_identical": true,
+        "frozen_git_blob": "5434b15fbacaee5f96198f54d68e1bce43fecea2"
+      },
+      {
+        "path": "tests/run.sh",
+        "local_sha256": "a9287acf21475c5f10a31931ac89e1d51e3d9982c74741ecda067f44ec12ce9c",
+        "frozen_sha256": "a9287acf21475c5f10a31931ac89e1d51e3d9982c74741ecda067f44ec12ce9c",
+        "byte_identical": true,
+        "frozen_git_blob": "cf4ff0731d0b9a6b205d70be3ab2336e01504049"
+      },
+      {
+        "path": ".github/workflows/ci.yml",
+        "local_sha256": "4a2ad8a62eba5b511e10e1f55ae071363a279ccfb314424752473aedfe1ee5b4",
+        "frozen_sha256": "4a2ad8a62eba5b511e10e1f55ae071363a279ccfb314424752473aedfe1ee5b4",
+        "byte_identical": true,
+        "frozen_git_blob": "661f93741146fe8eaf7b795104f864ac516abd46"
+      }
+    ]
+  },
+  "failed_tests": [
+    {
+      "raw_log": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s35-ci-failure/ubuntu-log-raw.stdout",
+      "raw_line": 237,
+      "diagnostic": "2026-10-28T10:09:52.1933460Z   FAIL test_verification_bindings"
+    }
+  ],
+  "failed_assertions": [
+    {
+      "raw_log": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s35-ci-failure/ubuntu-log-raw.stdout",
+      "raw_line": 238,
+      "diagnostic": "2026-10-28T10:09:52.1949371Z        assert: AC-004: untyped grepREDIRECT>out.txt AC-001 README.md warns without breaking legacy missing substring: untyped AC Verify"
+    },
+    {
+      "raw_log": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s35-ci-failure/ubuntu-log-raw.stdout",
+      "raw_line": 255,
+      "diagnostic": "2026-10-28T10:09:52.1960024Z        assert: AC-004: grepREDIRECT>out.txt AC-001 README.md remains warning-only missing substring: warning(s), 0 errors"
+    },
+    {
+      "raw_log": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s35-ci-failure/ubuntu-log-raw.stdout",
+      "raw_line": 272,
+      "diagnostic": "2026-10-28T10:09:52.1967669Z        assert: AC-004: untyped tscREDIRECT>out.txt --noEmit warns without breaking legacy missing substring: untyped AC Verify"
+    },
+    {
+      "raw_log": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s35-ci-failure/ubuntu-log-raw.stdout",
+      "raw_line": 289,
+      "diagnostic": "2026-10-28T10:09:52.1976942Z        assert: AC-004: tscREDIRECT>out.txt --noEmit remains warning-only missing substring: warning(s), 0 errors"
+    },
+    {
+      "raw_log": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s35-ci-failure/ubuntu-log-raw.stdout",
+      "raw_line": 306,
+      "diagnostic": "2026-10-28T10:09:52.1987877Z        assert: AC-004: untyped testREDIRECT>out.txt -e README.md warns without breaking legacy missing substring: untyped AC Verify"
+    },
+    {
+      "raw_log": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s35-ci-failure/ubuntu-log-raw.stdout",
+      "raw_line": 323,
+      "diagnostic": "2026-10-28T10:09:52.2000256Z        assert: AC-004: testREDIRECT>out.txt -e README.md remains warning-only missing substring: warning(s), 0 errors"
+    },
+    {
+      "raw_log": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s35-ci-failure/ubuntu-log-raw.stdout",
+      "raw_line": 340,
+      "diagnostic": "2026-10-28T10:09:52.2012517Z        assert: AC-004: untyped test -fREDIRECT>out.txt README.md warns without breaking legacy missing substring: untyped AC Verify"
+    },
+    {
+      "raw_log": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s35-ci-failure/ubuntu-log-raw.stdout",
+      "raw_line": 357,
+      "diagnostic": "2026-10-28T10:09:52.2022780Z        assert: AC-004: test -fREDIRECT>out.txt README.md remains warning-only missing substring: warning(s), 0 errors"
+    },
+    {
+      "raw_log": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s35-ci-failure/ubuntu-log-raw.stdout",
+      "raw_line": 374,
+      "diagnostic": "2026-10-28T10:09:52.2029653Z        assert: AC-004: untyped tsc REDIRECT>out.txt --noEmit warns without breaking legacy missing substring: untyped AC Verify"
+    },
+    {
+      "raw_log": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s35-ci-failure/ubuntu-log-raw.stdout",
+      "raw_line": 391,
+      "diagnostic": "2026-10-28T10:09:52.2036601Z        assert: AC-004: tsc REDIRECT>out.txt --noEmit remains warning-only missing substring: warning(s), 0 errors"
+    },
+    {
+      "raw_log": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s35-ci-failure/ubuntu-log-raw.stdout",
+      "raw_line": 408,
+      "diagnostic": "2026-10-28T10:09:52.2043436Z        assert: AC-004: untyped test REDIRECT>out.txt -e README.md warns without breaking legacy missing substring: untyped AC Verify"
+    },
+    {
+      "raw_log": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s35-ci-failure/ubuntu-log-raw.stdout",
+      "raw_line": 425,
+      "diagnostic": "2026-10-28T10:09:52.2050162Z        assert: AC-004: test REDIRECT>out.txt -e README.md remains warning-only missing substring: warning(s), 0 errors"
+    },
+    {
+      "raw_log": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s35-ci-failure/ubuntu-log-raw.stdout",
+      "raw_line": 442,
+      "diagnostic": "2026-10-28T10:09:52.2056945Z        assert: AC-004: bashREDIRECT>out.txt tests/typecheck.sh has no weak executable unexpectedly contains: untyped AC Verify"
+    },
+    {
+      "raw_log": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s35-ci-failure/ubuntu-log-raw.stdout",
+      "raw_line": 443,
+      "diagnostic": "2026-10-28T10:09:52.2057777Z        assert: AC-004: bashREDIRECT>out.txt tests/typecheck.sh stays clean missing substring: consistent"
+    },
+    {
+      "raw_log": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s35-ci-failure/ubuntu-log-raw.stdout",
+      "raw_line": 459,
+      "diagnostic": "2026-10-28T10:09:52.2067087Z        assert: AC-004: cargo testREDIRECT>out.txt --test typecheck has no weak executable unexpectedly contains: untyped AC Verify"
+    },
+    {
+      "raw_log": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s35-ci-failure/ubuntu-log-raw.stdout",
+      "raw_line": 460,
+      "diagnostic": "2026-10-28T10:09:52.2068438Z        assert: AC-004: cargo testREDIRECT>out.txt --test typecheck stays clean missing substring: consistent"
+    },
+    {
+      "raw_log": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s35-ci-failure/ubuntu-log-raw.stdout",
+      "raw_line": 476,
+      "diagnostic": "2026-10-28T10:09:52.2079843Z        assert: AC-004: npm runREDIRECT>out.txt test -- --grep typecheck has no weak executable unexpectedly contains: untyped AC Verify"
+    },
+    {
+      "raw_log": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s35-ci-failure/ubuntu-log-raw.stdout",
+      "raw_line": 477,
+      "diagnostic": "2026-10-28T10:09:52.2081437Z        assert: AC-004: npm runREDIRECT>out.txt test -- --grep typecheck stays clean missing substring: consistent"
+    },
+    {
+      "raw_log": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s35-ci-failure/ubuntu-log-raw.stdout",
+      "raw_line": 493,
+      "diagnostic": "2026-10-28T10:09:52.2091790Z        assert: AC-004: bash REDIRECT>out.txt tests/typecheck.sh has no weak executable unexpectedly contains: untyped AC Verify"
+    },
+    {
+      "raw_log": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s35-ci-failure/ubuntu-log-raw.stdout",
+      "raw_line": 494,
+      "diagnostic": "2026-10-28T10:09:52.2092993Z        assert: AC-004: bash REDIRECT>out.txt tests/typecheck.sh stays clean missing substring: consistent"
+    },
+    {
+      "raw_log": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s35-ci-failure/ubuntu-log-raw.stdout",
+      "raw_line": 510,
+      "diagnostic": "2026-10-28T10:09:52.2103628Z        assert: AC-004: npm run REDIRECT>out.txt test -- --grep typecheck has no weak executable unexpectedly contains: untyped AC Verify"
+    },
+    {
+      "raw_log": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s35-ci-failure/ubuntu-log-raw.stdout",
+      "raw_line": 511,
+      "diagnostic": "2026-10-28T10:09:52.2104998Z        assert: AC-004: npm run REDIRECT>out.txt test -- --grep typecheck stays clean missing substring: consistent"
+    }
+  ],
+  "failure_case_groups": {
+    "weak_commands": [
+      {
+        "fixture": "grepREDIRECT>out.txt AC-001 README.md",
+        "raw_log_lines": [
+          238,
+          255
+        ]
+      },
+      {
+        "fixture": "tscREDIRECT>out.txt --noEmit",
+        "raw_log_lines": [
+          272,
+          289
+        ]
+      },
+      {
+        "fixture": "testREDIRECT>out.txt -e README.md",
+        "raw_log_lines": [
+          306,
+          323
+        ]
+      },
+      {
+        "fixture": "test -fREDIRECT>out.txt README.md",
+        "raw_log_lines": [
+          340,
+          357
+        ]
+      },
+      {
+        "fixture": "tsc REDIRECT>out.txt --noEmit",
+        "raw_log_lines": [
+          374,
+          391
+        ]
+      },
+      {
+        "fixture": "test REDIRECT>out.txt -e README.md",
+        "raw_log_lines": [
+          408,
+          425
+        ]
+      }
+    ],
+    "runner_commands": [
+      {
+        "fixture": "bashREDIRECT>out.txt tests/typecheck.sh",
+        "raw_log_lines": [
+          442,
+          443
+        ]
+      },
+      {
+        "fixture": "cargo testREDIRECT>out.txt --test typecheck",
+        "raw_log_lines": [
+          459,
+          460
+        ]
+      },
+      {
+        "fixture": "npm runREDIRECT>out.txt test -- --grep typecheck",
+        "raw_log_lines": [
+          476,
+          477
+        ]
+      },
+      {
+        "fixture": "bash REDIRECT>out.txt tests/typecheck.sh",
+        "raw_log_lines": [
+          493,
+          494
+        ]
+      },
+      {
+        "fixture": "npm run REDIRECT>out.txt test -- --grep typecheck",
+        "raw_log_lines": [
+          510,
+          511
+        ]
+      }
+    ]
+  },
+  "diagnosis": {
+    "classification": "test_fixture_portability_defect",
+    "confidence": "high for malformed generated fixtures; likely Bash patsub_replacement mechanism, not independently reproduced",
+    "established": "22 failed assertions in one test report REDIRECT>out.txt where generator input is &>out.txt",
+    "likely_cause": "Unquoted replacement parameter expansion at tests/test-sdd-analyze.sh:681 and :686 lets replacement & stand for the matched REDIRECT under Bash patsub_replacement semantics.",
+    "product_regression_demonstrated": false,
+    "transient_or_resource_failure_evidence": false,
+    "unknowns": [
+      "Runner Bash version and patsub_replacement state are not logged.",
+      "No reproduction or test execution authorized.",
+      "Tested merge Git object absent locally, so merge-tree binding remains unverified here.",
+      "Other jobs not re-queried; archived statuses only."
+    ],
+    "evidence": [
+      "tests/test-sdd-analyze.sh:676",
+      "tests/test-sdd-analyze.sh:681",
+      "tests/test-sdd-analyze.sh:686",
+      "tests/test-sdd-analyze.sh:751",
+      "tests/test-sdd-analyze.sh:754",
+      "tests/test-sdd-analyze.sh:755",
+      "tests/test-sdd-analyze.sh:794",
+      "tests/test-sdd-analyze.sh:797",
+      "tests/test-sdd-analyze.sh:798",
+      "scripts/sdd-analyze.sh:289",
+      "scripts/sdd-analyze.sh:313",
+      "tests/helpers.sh:75",
+      "tests/helpers.sh:613",
+      "tests/run.sh:56"
+    ]
+  },
+  "proposed_next_action": {
+    "applied": false,
+    "requires_parent_scope_decision": true,
+    "files": [
+      "tests/test-sdd-analyze.sh"
+    ],
+    "lines": [
+      681,
+      686
+    ],
+    "change": "Replace each ${fixture/REDIRECT/$spacing$redirect} with ${fixture%%REDIRECT*}$spacing$redirect${fixture#*REDIRECT} inside the existing quoted array element, retaining every case and assertion.",
+    "validation_after_authorization": "Check literal generated &> strings and affected analyzer test under Bash 3.2 and newer Ubuntu Bash, then refresh frozen bindings/snapshot and hosted evidence through parent workflow.",
+    "changes_frozen_source": true,
+    "current_ci_usable_for_repaired_source": false,
+    "current_ci_remains_old_snapshot_failure_evidence": true,
+    "touches_O034_fixtures": true,
+    "touches_prohibited_O032_or_recorded_minors": false,
+    "unchanged_source_retry_recommended": false,
+    "retry_reason": "Observed malformed generated labels support a deterministic fixture defect, not a transient failure."
+  },
+  "collector_read_only_inspection": {
+    "path": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s34/hosted-s34-audit/collect-hosted.py",
+    "four_job_check_lines": [
+      44,
+      45
+    ],
+    "same_attempt_check_line": 48,
+    "merge_and_tree_binding_lines": [
+      50,
+      60
+    ],
+    "can_accept_carried_jobs_with_previous_attempt_numbers": false,
+    "collector_executed": false,
+    "change_proposed": false
+  },
+  "raw_log": {
+    "path": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s35-ci-failure/ubuntu-log-raw.stdout",
+    "sha256": "3fb222d94b083898ecb466f2d63d985532a55bafac8055246340235c68e969c0",
+    "bytes": 48872,
+    "mode": "0o644",
+    "mtime_ns": 1793183296503478306
+  },
+  "excerpt": {
+    "path": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s35-ci-diagnosis/ubuntu-log-excerpt.txt",
+    "transformation": "Select raw byte line ranges, strip ANSI CSI sequences only; retain all other bytes and original line endings.",
+    "ranges": [
+      {
+        "excerpt_first_line": 1,
+        "excerpt_last_line": 10,
+        "raw_first_line": 11,
+        "raw_last_line": 20
+      },
+      {
+        "excerpt_first_line": 11,
+        "excerpt_last_line": 15,
+        "raw_first_line": 91,
+        "raw_last_line": 95
+      },
+      {
+        "excerpt_first_line": 16,
+        "excerpt_last_line": 24,
+        "raw_first_line": 141,
+        "raw_last_line": 149
+      },
+      {
+        "excerpt_first_line": 25,
+        "excerpt_last_line": 26,
+        "raw_first_line": 218,
+        "raw_last_line": 219
+      },
+      {
+        "excerpt_first_line": 27,
+        "excerpt_last_line": 319,
+        "raw_first_line": 236,
+        "raw_last_line": 528
+      },
+      {
+        "excerpt_first_line": 320,
+        "excerpt_last_line": 325,
+        "raw_first_line": 610,
+        "raw_last_line": 615
+      }
+    ]
+  },
+  "preservation": {
+    "observed_inputs_and_protected_files_unchanged_during_report_creation": true,
+    "before": [
+      {
+        "path": ".specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md",
+        "sha256": "d512c1cebb93885608694aa5dad0325bd37840da1bed330a75014e3647b3492c",
+        "bytes": 184227,
+        "mode": "0o600",
+        "mtime_ns": 1793180550150290417
+      },
+      {
+        "path": ".specify/specs/003-gate-round-reduction-and-token-discipline/STATUS.md",
+        "sha256": "569eba99f2f1860ccb083c72f88e3a1cc21ce49be31547d5ce34cc75f1415099",
+        "bytes": 776371,
+        "mode": "0o600",
+        "mtime_ns": 1793178169511231380
+      },
+      {
+        "path": "/Users/babar/projects/sdd-kit-public/.git/worktrees/003-gate-round-reduction-and-token-discipline/index",
+        "sha256": "c492d7ea95abf8e8c335001f20c62ff50bc6f1e2179d7a07d30811181b3dd700",
+        "bytes": 2200525,
+        "mode": "0o644",
+        "mtime_ns": 1792957592613445716
+      },
+      {
+        "path": "/Users/babar/projects/sdd-kit-public/.git/worktrees/003-gate-round-reduction-and-token-discipline/HEAD",
+        "sha256": "36b441e5337734d73e547a921b682069ccd54788152cff695f469a8e54e84134",
+        "bytes": 67,
+        "mode": "0o644",
+        "mtime_ns": 1788654328953442318
+      },
+      {
+        "path": "tests/test-sdd-analyze.sh",
+        "sha256": "2f9efc4e4b24da1ca1bcef710e82ef852f1e463adbae0263f54d585f333bcd4e",
+        "bytes": 58405,
+        "mode": "0o644",
+        "mtime_ns": 1793088116020177928
+      },
+      {
+        "path": "scripts/sdd-analyze.sh",
+        "sha256": "c43de9e92df5657a3a94091a73bccb9abe37f9e1c3c3f6ccf6cb1cfa64f3a3f2",
+        "bytes": 18866,
+        "mode": "0o755",
+        "mtime_ns": 1793088116020109886
+      },
+      {
+        "path": "tests/helpers.sh",
+        "sha256": "b7bc6ff9fffa3350c206a7bf25a0ef23517a98f1797ef3f199ac7cdfe240e9b2",
+        "bytes": 26331,
+        "mode": "0o644",
+        "mtime_ns": 1790782241888596582
+      },
+      {
+        "path": "tests/run.sh",
+        "sha256": "a9287acf21475c5f10a31931ac89e1d51e3d9982c74741ecda067f44ec12ce9c",
+        "bytes": 2396,
+        "mode": "0o755",
+        "mtime_ns": 1790456961312001346
+      },
+      {
+        "path": ".github/workflows/ci.yml",
+        "sha256": "4a2ad8a62eba5b511e10e1f55ae071363a279ccfb314424752473aedfe1ee5b4",
+        "bytes": 1348,
+        "mode": "0o644",
+        "mtime_ns": 1790237356133678848
+      },
+      {
+        "path": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s34/hosted-s34-audit/collect-hosted.py",
+        "sha256": "83b12d48afb724c4b7ef1aee2bdc7e1ec202a28e13b7e4e3b4cdf622aa2b9826",
+        "bytes": 8033,
+        "mode": "0o644",
+        "mtime_ns": 1793180964715871524
+      },
+      {
+        "path": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s34/collect.sh",
+        "sha256": "fd15d4289f798771e7e026fc505db9f04bcf3a01ac55eeb37c08e722654bff9c",
+        "bytes": 4249,
+        "mode": "0o644",
+        "mtime_ns": 1793180964713660085
+      },
+      {
+        "path": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s35-ci-failure/ubuntu-log-raw.stdout",
+        "sha256": "3fb222d94b083898ecb466f2d63d985532a55bafac8055246340235c68e969c0",
+        "bytes": 48872,
+        "mode": "0o644",
+        "mtime_ns": 1793183296503478306
+      },
+      {
+        "path": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s35-ci-failure/run.stdout",
+        "sha256": "524401aace77f3825e4c554d03a7445a6bee62cff163294a61bacc2cb8ae3185",
+        "bytes": 12632,
+        "mode": "0o644",
+        "mtime_ns": 1793183246354572703
+      },
+      {
+        "path": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s35-ci-failure/jobs.stdout",
+        "sha256": "e516c68b0cc709c02f93ee90cc306010cd5a7826fda4535cfa91a8df69066eb1",
+        "bytes": 6368,
+        "mode": "0o644",
+        "mtime_ns": 1793183247029964781
+      },
+      {
+        "path": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s35-ci-failure/ubuntu-job.stdout",
+        "sha256": "b358238b02c3a7287fc9b1ab8c4bdd4a1e1c141b5958a2acfc84cce7aba8b9ff",
+        "bytes": 1701,
+        "mode": "0o644",
+        "mtime_ns": 1793183247610461799
+      },
+      {
+        "path": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s35-ci-failure/ubuntu-log-raw.json",
+        "sha256": "9f5865890998851a12a960c9f32c5c38760649aeefe01ef0c93dd74579c86d05",
+        "bytes": 312,
+        "mode": "0o644",
+        "mtime_ns": 1793183296505664154
+      },
+      {
+        "path": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s35-ci-failure/ubuntu-log.stderr",
+        "sha256": "8b6407b2fdbca54bf3d53fb93e79a3560dbe59567fa5044cfee4bed1b5b6e467",
+        "bytes": 99,
+        "mode": "0o644",
+        "mtime_ns": 1793183249118746980
+      },
+      {
+        "path": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s35-ci-failure/ubuntu-log-owner.stderr",
+        "sha256": "8b6407b2fdbca54bf3d53fb93e79a3560dbe59567fa5044cfee4bed1b5b6e467",
+        "bytes": 99,
+        "mode": "0o644",
+        "mtime_ns": 1793183284283924235
+      }
+    ],
+    "after": [
+      {
+        "path": ".specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md",
+        "sha256": "d512c1cebb93885608694aa5dad0325bd37840da1bed330a75014e3647b3492c",
+        "bytes": 184227,
+        "mode": "0o600",
+        "mtime_ns": 1793180550150290417
+      },
+      {
+        "path": ".specify/specs/003-gate-round-reduction-and-token-discipline/STATUS.md",
+        "sha256": "569eba99f2f1860ccb083c72f88e3a1cc21ce49be31547d5ce34cc75f1415099",
+        "bytes": 776371,
+        "mode": "0o600",
+        "mtime_ns": 1793178169511231380
+      },
+      {
+        "path": "/Users/babar/projects/sdd-kit-public/.git/worktrees/003-gate-round-reduction-and-token-discipline/index",
+        "sha256": "c492d7ea95abf8e8c335001f20c62ff50bc6f1e2179d7a07d30811181b3dd700",
+        "bytes": 2200525,
+        "mode": "0o644",
+        "mtime_ns": 1792957592613445716
+      },
+      {
+        "path": "/Users/babar/projects/sdd-kit-public/.git/worktrees/003-gate-round-reduction-and-token-discipline/HEAD",
+        "sha256": "36b441e5337734d73e547a921b682069ccd54788152cff695f469a8e54e84134",
+        "bytes": 67,
+        "mode": "0o644",
+        "mtime_ns": 1788654328953442318
+      },
+      {
+        "path": "tests/test-sdd-analyze.sh",
+        "sha256": "2f9efc4e4b24da1ca1bcef710e82ef852f1e463adbae0263f54d585f333bcd4e",
+        "bytes": 58405,
+        "mode": "0o644",
+        "mtime_ns": 1793088116020177928
+      },
+      {
+        "path": "scripts/sdd-analyze.sh",
+        "sha256": "c43de9e92df5657a3a94091a73bccb9abe37f9e1c3c3f6ccf6cb1cfa64f3a3f2",
+        "bytes": 18866,
+        "mode": "0o755",
+        "mtime_ns": 1793088116020109886
+      },
+      {
+        "path": "tests/helpers.sh",
+        "sha256": "b7bc6ff9fffa3350c206a7bf25a0ef23517a98f1797ef3f199ac7cdfe240e9b2",
+        "bytes": 26331,
+        "mode": "0o644",
+        "mtime_ns": 1790782241888596582
+      },
+      {
+        "path": "tests/run.sh",
+        "sha256": "a9287acf21475c5f10a31931ac89e1d51e3d9982c74741ecda067f44ec12ce9c",
+        "bytes": 2396,
+        "mode": "0o755",
+        "mtime_ns": 1790456961312001346
+      },
+      {
+        "path": ".github/workflows/ci.yml",
+        "sha256": "4a2ad8a62eba5b511e10e1f55ae071363a279ccfb314424752473aedfe1ee5b4",
+        "bytes": 1348,
+        "mode": "0o644",
+        "mtime_ns": 1790237356133678848
+      },
+      {
+        "path": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s34/hosted-s34-audit/collect-hosted.py",
+        "sha256": "83b12d48afb724c4b7ef1aee2bdc7e1ec202a28e13b7e4e3b4cdf622aa2b9826",
+        "bytes": 8033,
+        "mode": "0o644",
+        "mtime_ns": 1793180964715871524
+      },
+      {
+        "path": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s34/collect.sh",
+        "sha256": "fd15d4289f798771e7e026fc505db9f04bcf3a01ac55eeb37c08e722654bff9c",
+        "bytes": 4249,
+        "mode": "0o644",
+        "mtime_ns": 1793180964713660085
+      },
+      {
+        "path": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s35-ci-failure/ubuntu-log-raw.stdout",
+        "sha256": "3fb222d94b083898ecb466f2d63d985532a55bafac8055246340235c68e969c0",
+        "bytes": 48872,
+        "mode": "0o644",
+        "mtime_ns": 1793183296503478306
+      },
+      {
+        "path": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s35-ci-failure/run.stdout",
+        "sha256": "524401aace77f3825e4c554d03a7445a6bee62cff163294a61bacc2cb8ae3185",
+        "bytes": 12632,
+        "mode": "0o644",
+        "mtime_ns": 1793183246354572703
+      },
+      {
+        "path": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s35-ci-failure/jobs.stdout",
+        "sha256": "e516c68b0cc709c02f93ee90cc306010cd5a7826fda4535cfa91a8df69066eb1",
+        "bytes": 6368,
+        "mode": "0o644",
+        "mtime_ns": 1793183247029964781
+      },
+      {
+        "path": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s35-ci-failure/ubuntu-job.stdout",
+        "sha256": "b358238b02c3a7287fc9b1ab8c4bdd4a1e1c141b5958a2acfc84cce7aba8b9ff",
+        "bytes": 1701,
+        "mode": "0o644",
+        "mtime_ns": 1793183247610461799
+      },
+      {
+        "path": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s35-ci-failure/ubuntu-log-raw.json",
+        "sha256": "9f5865890998851a12a960c9f32c5c38760649aeefe01ef0c93dd74579c86d05",
+        "bytes": 312,
+        "mode": "0o644",
+        "mtime_ns": 1793183296505664154
+      },
+      {
+        "path": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s35-ci-failure/ubuntu-log.stderr",
+        "sha256": "8b6407b2fdbca54bf3d53fb93e79a3560dbe59567fa5044cfee4bed1b5b6e467",
+        "bytes": 99,
+        "mode": "0o644",
+        "mtime_ns": 1793183249118746980
+      },
+      {
+        "path": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s35-ci-failure/ubuntu-log-owner.stderr",
+        "sha256": "8b6407b2fdbca54bf3d53fb93e79a3560dbe59567fa5044cfee4bed1b5b6e467",
+        "bytes": 99,
+        "mode": "0o644",
+        "mtime_ns": 1793183284283924235
+      }
+    ],
+    "scope": "Focused byte/mode/mtime checks only; not a full-worktree protected-state proof. Only new report-directory files were written by this task.",
+    "expected_tasks_sha256": "d512c1cebb93885608694aa5dad0325bd37840da1bed330a75014e3647b3492c",
+    "expected_status_sha256": "569eba99f2f1860ccb083c72f88e3a1cc21ce49be31547d5ce34cc75f1415099"
+  },
+  "read_only_git_commands_this_report_creation": [
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "--git-path",
+        "index"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "GIT_OPTIONAL_LOCKS": "0",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "--git-path",
+        "HEAD"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "GIT_OPTIONAL_LOCKS": "0",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "GIT_OPTIONAL_LOCKS": "0",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "git",
+        "show",
+        "08210681770b65c6ccdfa2571b80a79a09e03154:tests/test-sdd-analyze.sh"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "GIT_OPTIONAL_LOCKS": "0",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "08210681770b65c6ccdfa2571b80a79a09e03154:tests/test-sdd-analyze.sh"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "GIT_OPTIONAL_LOCKS": "0",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "git",
+        "show",
+        "08210681770b65c6ccdfa2571b80a79a09e03154:scripts/sdd-analyze.sh"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "GIT_OPTIONAL_LOCKS": "0",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "08210681770b65c6ccdfa2571b80a79a09e03154:scripts/sdd-analyze.sh"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "GIT_OPTIONAL_LOCKS": "0",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "git",
+        "show",
+        "08210681770b65c6ccdfa2571b80a79a09e03154:tests/helpers.sh"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "GIT_OPTIONAL_LOCKS": "0",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "08210681770b65c6ccdfa2571b80a79a09e03154:tests/helpers.sh"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "GIT_OPTIONAL_LOCKS": "0",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "git",
+        "show",
+        "08210681770b65c6ccdfa2571b80a79a09e03154:tests/run.sh"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "GIT_OPTIONAL_LOCKS": "0",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "08210681770b65c6ccdfa2571b80a79a09e03154:tests/run.sh"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "GIT_OPTIONAL_LOCKS": "0",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "git",
+        "show",
+        "08210681770b65c6ccdfa2571b80a79a09e03154:.github/workflows/ci.yml"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "GIT_OPTIONAL_LOCKS": "0",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "08210681770b65c6ccdfa2571b80a79a09e03154:.github/workflows/ci.yml"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "GIT_OPTIONAL_LOCKS": "0",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "git",
+        "cat-file",
+        "-t",
+        "9894ce4a679c8120e1be7c432106f7a07021eb0b"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "GIT_OPTIONAL_LOCKS": "0",
+      "exit_code": 128
+    }
+  ],
+  "other_commands_used": "Read-only pwd, rg discovery/search, cat skill instructions, Python reads/log parsing/hashing and Git show/rev-parse/cat-file. Shell commands all used the explicitly requested workdir and GIT_OPTIONAL_LOCKS=0. Earlier rg search had one missing scripts/lib path; one git cat-file object lookup failed because tested merge is not local; neither is CI evidence.",
+  "commands_not_run": [
+    "tests/reproduction/suites",
+    "captures",
+    "CI API queries/retries/cancellations",
+    "collect-hosted.py or collect.sh execution",
+    "verification/source helpers",
+    "reserves/completions/floor/gates",
+    "delegates",
+    "secret queries",
+    "PR/watch/link operations",
+    "Git checkout/status/add/update-index/commit/push/ref mutations"
+  ],
+  "artifacts": [
+    {
+      "path": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s35-ci-diagnosis/digest.md",
+      "sha256": "32de519a6bfcdb6836456ef443d1e6ed17de55c0ea1c20803f27fb77dc5bdacc",
+      "bytes": 4573,
+      "mode": "0o644",
+      "mtime_ns": 1793183562953206431
+    },
+    {
+      "path": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s35-ci-diagnosis/ubuntu-log-excerpt.txt",
+      "sha256": "cd9848fde439d6c389fce5b628d9de88fabda2939583f81f55032867e2810283",
+      "bytes": 25698,
+      "mode": "0o644",
+      "mtime_ns": 1793183562952223842
+    },
+    {
+      "path": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s35-ci-diagnosis/source-evidence.txt",
+      "sha256": "057626b1579447cf36a079a6569fc02860c056de68b566cdf1145113f8324d82",
+      "bytes": 22361,
+      "mode": "0o644",
+      "mtime_ns": 1793183562952732345
+    }
+  ],
+  "result_limit": "Diagnosis only; no gate verdict and no claim of successful hosted CI or full protected-state verification."
+}

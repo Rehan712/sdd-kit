@@ -1,0 +1,44 @@
+--- /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s60-evidence-preparation/validate-preparation.py
++++ /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s80-evidence-preparation/validate-preparation.py
+@@ -1,6 +1,6 @@
+ import ast,collections,datetime,hashlib,json,os,shutil,stat,subprocess,time
+ from pathlib import Path
+-w=Path.cwd();s=w/'.specify/specs/003-gate-round-reduction-and-token-discipline';r=s/'notes/verification/reports';o=s/'notes/verification/platforms/ci-20261029-s60';p=r/'s60-evidence-preparation';d=o.parent/'ci-20261028-s38'
++w=Path.cwd();s=w/'.specify/specs/003-gate-round-reduction-and-token-discipline';r=s/'notes/verification/reports';o=s/'notes/verification/platforms/ci-20261109-s80';p=r/'s80-evidence-preparation';d=o.parent/'ci-20261029-s60'
+ assert str(w)=='/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline'
+ env=dict(os.environ,GIT_OPTIONAL_LOCKS='0');env.pop('SHELLCHECK_OPTS',None)
+ def put(x,v):
+@@ -24,18 +24,18 @@
+  assert Path(x['target']).read_text()==expected,name
+  assert stat.S_IMODE(Path(x['target']).stat().st_mode)==stat.S_IMODE(Path(x['donor']).stat().st_mode),name
+ assert summary['manifest_record_types']==dict(version=1,index=177,path=177,tool=4,harness=8,document=4)
+-assert (s/'tasks.md').read_bytes()==(s/'notes/verification/accepted/T031a5o1/ACC-zmvoA1/tasks.after').read_bytes()
+-floor=(r/'s60-final-floor.sh').read_text();verifier=(o/'verify-prepublish.sh').read_text();launch=json.loads((o/'parent-floor-launch.argv.json').read_text());pub=json.loads((o/'publication.json').read_text())
++assert (s/'tasks.md').read_bytes()==(s/'notes/verification/accepted/T031a5o1/ACC-eyzH6f/tasks.after').read_bytes()
++floor=(r/'s80-final-floor.sh').read_text();verifier=(o/'verify-prepublish.sh').read_text();launch=json.loads((o/'parent-floor-launch.argv.json').read_text());pub=json.loads((o/'publication.json').read_text())
+ assert 's29-final' not in floor and 'ci-20261028-s38' not in floor and '16ffcec3' not in floor
+ assert floor.index('if free < 8589934592')<floor.index('bash "$out/verify-prepublish.sh"')<floor.index('caffeinate -i -m -s')
+ assert floor.count('bash "$out/verify-prepublish.sh"')==2 and '"$after_floor" != "$before_floor"' in floor
+ assert '[[ ! -e "$s/notes/verification/lock" ]]' in floor and 'pending round' in floor and 'staged reservation' in floor
+-assert launch['helper_argv']==['/bin/bash',str(r/'s60-final-floor.sh'),'1']
+-assert launch['timed_argv']==['/usr/bin/time','-p','-o',str(r/'s60-final-floorrun.time'),*launch['helper_argv']]
++assert launch['helper_argv']==['/bin/bash',str(r/'s80-final-floor.sh'),'1']
++assert launch['timed_argv']==['/usr/bin/time','-p','-o',str(r/'s80-final-floorrun.time'),*launch['helper_argv']]
+ assert launch['no_ac_wait'] and launch['no_shell_text'] and 'shell_text' not in launch
+ assert pub['push_argv_template']==['git','push','--force-with-lease=refs/heads/ci-snapshot/spec-003-20261025-s26:<VERIFIED_REMOTE_HEAD>','origin',summary['commit']+':refs/heads/ci-snapshot/spec-003-20261025-s26']
+-assert not list(r.glob('s60-final-floorrun.*'))
+-hosted=o/'hosted-s60-audit/collect-hosted.py';code=hosted.read_text();tree=ast.parse(code)
++assert not list(r.glob('s80-final-floorrun.*'))
++hosted=o/'hosted-s80-keyring-audit/collect-hosted.py';code=hosted.read_text();tree=ast.parse(code)
+ assert 'auth","token' not in code and 'gh","auth' not in code and 'actions/runs?head_sha=' not in code
+ assert 'verify-before' in code and 'verify-after' in code and 'artifact-hashes.json' in code
+ assert not (hosted.parent/'network-execution.json').exists() and not (hosted.parent/'hosted').exists()
+@@ -58,7 +58,7 @@
+  assert eval(job_guard,{},dict(base,j=j))==(changed is None)
+ version=run('bash32-version',['/bin/bash','--version']);assert 'version 3.2.' in version
+ shellcheck=shutil.which('shellcheck');assert shellcheck
+-for path in [o/'build-snapshot.sh',o/'verify-prepublish.sh',o/'collect.sh',r/'s60-final-floor.sh']:
++for path in [o/'build-snapshot.sh',o/'verify-prepublish.sh',o/'collect.sh',r/'s80-final-floor.sh']:
+  run(path.name+'-syntax',['/bin/bash','-n',str(path)])
+  argv=[shellcheck,'--norc','--shell=bash','--severity=warning','--external-sources']
+  if path.name in ['build-snapshot.sh','verify-prepublish.sh']:argv+=['--exclude=SC2034']

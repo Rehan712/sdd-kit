@@ -1,0 +1,88 @@
+{
+  "result": "PREPARATION_COMPLETE_FLOOR_PENDING_AC",
+  "source": "c7a82b3ae3b900dcb02a4839decad74db1a13457c5bab9ff859625a5357f0be6",
+  "tree": "e98c79fe564564397f36ff0b9910137572ea10bb",
+  "commit": "414838bb52898921aa49fb3d25caed6e7b711763",
+  "parent": "2049f65960cc91e9e30bbd5ff1e11fc0fdf7cbd9",
+  "expected_remote_head": "781b963e6777b44059b24e696dafa37c69242a05",
+  "mapping": {
+    "source_paths": 177,
+    "harness": 8,
+    "documents": 4,
+    "tree_entries": 13840,
+    "bookkeeping_extras": 13663,
+    "mismatches": 0,
+    "non_bookkeeping_extras": 0
+  },
+  "source_manifest_byte_identical": true,
+  "protected_before": {
+    "head": "2049f65960cc91e9e30bbd5ff1e11fc0fdf7cbd9",
+    "index": {
+      "path": "/Users/babar/projects/sdd-kit-public/.git/worktrees/003-gate-round-reduction-and-token-discipline/index",
+      "sha256": "c492d7ea95abf8e8c335001f20c62ff50bc6f1e2179d7a07d30811181b3dd700",
+      "mtime_ns": 1792957592613445716,
+      "size": 2200525
+    },
+    "head_file": {
+      "path": "/Users/babar/projects/sdd-kit-public/.git/worktrees/003-gate-round-reduction-and-token-discipline/HEAD",
+      "sha256": "36b441e5337734d73e547a921b682069ccd54788152cff695f469a8e54e84134",
+      "mtime_ns": 1788654328953442318,
+      "size": 67
+    },
+    "status": {
+      "path": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/STATUS.md",
+      "sha256": "28919a358c30407ccb0fff041f436768353b2f002c54e1db351ea57efe5e7d88",
+      "mtime_ns": 1792959058374188118,
+      "size": 772414
+    }
+  },
+  "protected_after": {
+    "head": "2049f65960cc91e9e30bbd5ff1e11fc0fdf7cbd9",
+    "index": {
+      "path": "/Users/babar/projects/sdd-kit-public/.git/worktrees/003-gate-round-reduction-and-token-discipline/index",
+      "sha256": "c492d7ea95abf8e8c335001f20c62ff50bc6f1e2179d7a07d30811181b3dd700",
+      "mtime_ns": 1792957592613445716,
+      "size": 2200525
+    },
+    "head_file": {
+      "path": "/Users/babar/projects/sdd-kit-public/.git/worktrees/003-gate-round-reduction-and-token-discipline/HEAD",
+      "sha256": "36b441e5337734d73e547a921b682069ccd54788152cff695f469a8e54e84134",
+      "mtime_ns": 1788654328953442318,
+      "size": 67
+    },
+    "status": {
+      "path": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/STATUS.md",
+      "sha256": "28919a358c30407ccb0fff041f436768353b2f002c54e1db351ea57efe5e7d88",
+      "mtime_ns": 1792959058374188118,
+      "size": 772414
+    }
+  },
+  "protected_state_unchanged": true,
+  "source_mapping": "PASS",
+  "snapshot_unreferenced": true,
+  "builder_byte_identical_to_s26": true,
+  "syntax": "PASS",
+  "shellcheck": {
+    "floor": "PASS, warning level unexcluded",
+    "collector": "PASS, warning level unexcluded",
+    "builder_and_verifier": "PASS excluding diagnosed sourced HUB_DIR SC2034 only; original warnings preserved"
+  },
+  "offline_collector_controls": "7/7 PASS",
+  "remote_readonly_checks": "PASS: old head unchanged, existing PR21 open draft",
+  "t3_pr_link": "PR21 linked and final thread list confirmed",
+  "floor_launched": false,
+  "floor_id": null,
+  "gate_or_capture_run": false,
+  "full_suites_run": false,
+  "push_or_github_mutation": false,
+  "refs_or_real_index_or_config_written": false,
+  "floor_pending": "Actual pmset AC Power required by unchanged guard; currently Battery Power",
+  "final_resources": {
+    "observed_at_utc": "2026-10-25T20:22:24.053278+00:00",
+    "available_bytes": 14567550976,
+    "power_raw": "Now drawing from 'Battery Power'\n -InternalBattery-0 (id=22413411)\t100%; discharging; 15:52 remaining present: true\n",
+    "swap_raw": "total = 3072.00M  used = 1469.69M  free = 1602.31M  (encrypted)\n"
+  },
+  "preserved_previous_block_report": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s27-preparation-resource-block-1.json",
+  "global_refs_changed_concurrently": true
+}

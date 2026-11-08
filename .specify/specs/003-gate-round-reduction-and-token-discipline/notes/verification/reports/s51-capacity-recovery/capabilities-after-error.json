@@ -1,0 +1,1086 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\"parentThreadId\":\"f449528d-0620-41cb-b858-dcf160f695ae\",\"inheritedProviderInstanceId\":\"codex_codex_gym\",\"inheritedModel\":\"gpt-6.1-sol\",\"inheritedOptions\":[{\"id\":\"reasoningEffort\",\"value\":\"high\"},{\"id\":\"serviceTier\",\"value\":\"default\"}],\"runtimeMode\":\"full-access\",\"interactionMode\":\"default\",\"providers\":[{\"providerInstanceId\":\"codex\",\"driverKind\":\"codex\",\"displayName\":\"Codex\",\"models\":[{\"id\":\"gpt-6.1-sol\",\"options\":[{\"id\":\"reasoningEffort\",\"values\":[\"low\",\"medium\",\"high\",\"xhigh\",\"max\",\"ultra\"],\"default\":\"low\"},{\"id\":\"serviceTier\",\"values\":[\"default\",\"priority\"],\"default\":\"default\"}]},{\"id\":\"gpt-6-astra\",\"options\":[{\"id\":\"reasoningEffort\",\"values\":[\"low\",\"medium\",\"high\",\"xhigh\",\"max\",\"ultra\"],\"default\":\"medium\"},{\"id\":\"serviceTier\",\"values\":[\"default\",\"priority\"],\"default\":\"default\"}]},{\"id\":\"gpt-6.1-terra\",\"label\":\"GPT-6.1 Terra\",\"options\":[{\"id\":\"reasoningEffort\",\"values\":[\"low\",\"medium\",\"high\",\"xhigh\",\"max\",\"ultra\"],\"default\":\"low\"},{\"id\":\"serviceTier\",\"values\":[\"default\",\"priority\"],\"default\":\"default\"}]},{\"id\":\"gpt-6-luna\",\"options\":[{\"id\":\"reasoningEffort\",\"values\":[\"low\",\"medium\",\"high\",\"xhigh\",\"max\"],\"default\":\"medium\"},{\"id\":\"serviceTier\",\"values\":[\"default\",\"priority\"],\"default\":\"default\"}]}],\"omittedModels\":4,\"canRunChildTask\":true,\"canRunCrossProviderChildTask\":true,\"constraints\":[]},{\"providerInstanceId\":\"codex_rehan\",\"driverKind\":\"codex\",\"displayName\":\"Codex Rizwan\",\"models\":[{\"id\":\"gpt-6-luna\",\"options\":[{\"id\":\"reasoningEffort\",\"values\":[\"low\",\"medium\",\"high\",\"xhigh\",\"max\"],\"default\":\"medium\"}]}],\"omittedModels\":2,\"canRunChildTask\":true,\"canRunCrossProviderChildTask\":true,\"constraints\":[]},{\"providerInstanceId\":\"codex_codex_gym\",\"driverKind\":\"codex\",\"displayName\":\"codex-gym\",\"models\":[{\"id\":\"gpt-6.1-sol\",\"options\":[{\"id\":\"reasoningEffort\",\"values\":[\"low\",\"medium\",\"high\",\"xhigh\",\"max\",\"ultra\"],\"default\":\"low\"},{\"id\":\"serviceTier\",\"values\":[\"default\",\"priority\"],\"default\":\"default\"}]},{\"id\":\"gpt-6-astra\",\"options\":[{\"id\":\"reasoningEffort\",\"values\":[\"low\",\"medium\",\"high\",\"xhigh\",\"max\",\"ultra\"],\"default\":\"medium\"},{\"id\":\"serviceTier\",\"values\":[\"default\",\"priority\"],\"default\":\"default\"}]},{\"id\":\"gpt-6.1-terra\",\"label\":\"GPT-6.1 Terra\",\"options\":[{\"id\":\"reasoningEffort\",\"values\":[\"low\",\"medium\",\"high\",\"xhigh\",\"max\",\"ultra\"],\"default\":\"low\"},{\"id\":\"serviceTier\",\"values\":[\"default\",\"priority\"],\"default\":\"default\"}]},{\"id\":\"gpt-6-luna\",\"options\":[{\"id\":\"reasoningEffort\",\"values\":[\"low\",\"medium\",\"high\",\"xhigh\",\"max\"],\"default\":\"medium\"},{\"id\":\"serviceTier\",\"values\":[\"default\",\"priority\"],\"default\":\"default\"}]}],\"omittedModels\":4,\"canRunChildTask\":true,\"canRunCrossProviderChildTask\":true,\"constraints\":[]},{\"providerInstanceId\":\"claudeAgent_claude_rehan\",\"driverKind\":\"claudeAgent\",\"displayName\":\"Claude_Rehan\",\"models\":[{\"id\":\"claude-opus-5-5\",\"label\":\"Claude Opus 5.5\",\"options\":[{\"id\":\"effort\",\"values\":[\"low\",\"medium\",\"high\",\"xhigh\",\"max\",\"ultracode\",\"ultrathink\"],\"default\":\"medium\"},{\"id\":\"fastMode\",\"values\":[false,true]}]},{\"id\":\"claude-sonnet-5-5\",\"label\":\"Claude Sonnet 5.5\",\"options\":[{\"id\":\"effort\",\"values\":[\"low\",\"medium\",\"high\",\"xhigh\",\"max\",\"ultrathink\"],\"default\":\"high\"}]},{\"id\":\"claude-fable-5-1\",\"label\":\"Claude Fable 5.1\",\"options\":[{\"id\":\"effort\",\"values\":[\"low\",\"medium\",\"high\",\"xhigh\",\"max\",\"ultracode\",\"ultrathink\"],\"default\":\"medium\"}]},{\"id\":\"claude-haiku-5-5\",\"label\":\"Claude Haiku 5.5\",\"options\":[{\"id\":\"effort\",\"values\":[\"low\",\"medium\",\"high\",\"xhigh\",\"max\",\"ultrathink\"],\"default\":\"medium\"}]}],\"omittedModels\":9,\"canRunChildTask\":true,\"canRunCrossProviderChildTask\":true,\"constraints\":[]},{\"providerInstanceId\":\"claudeAgent_claude_gym\",\"driverKind\":\"claudeAgent\",\"displayName\":\"claude-gym\",\"models\":[{\"id\":\"claude-opus-5-5\",\"label\":\"Claude Opus 5.5\",\"options\":[{\"id\":\"effort\",\"values\":[\"low\",\"medium\",\"high\",\"xhigh\",\"max\",\"ultracode\",\"ultrathink\"],\"default\":\"medium\"},{\"id\":\"fastMode\",\"values\":[false,true]}]},{\"id\":\"claude-sonnet-5-5\",\"label\":\"Claude Sonnet 5.5\",\"options\":[{\"id\":\"effort\",\"values\":[\"low\",\"medium\",\"high\",\"xhigh\",\"max\",\"ultrathink\"],\"default\":\"high\"}]},{\"id\":\"claude-fable-5-1\",\"label\":\"Claude Fable 5.1\",\"options\":[{\"id\":\"effort\",\"values\":[\"low\",\"medium\",\"high\",\"xhigh\",\"max\",\"ultracode\",\"ultrathink\"],\"default\":\"medium\"}]},{\"id\":\"claude-haiku-5-5\",\"label\":\"Claude Haiku 5.5\",\"options\":[{\"id\":\"effort\",\"values\":[\"low\",\"medium\",\"high\",\"xhigh\",\"max\",\"ultrathink\"],\"default\":\"medium\"}]}],\"omittedModels\":9,\"canRunChildTask\":false,\"canRunCrossProviderChildTask\":false,\"constraints\":[\"Provider instance is disabled.\"]},{\"providerInstanceId\":\"claudeAgent_haseeb\",\"driverKind\":\"claudeAgent\",\"displayName\":\"Haseeb\",\"models\":[{\"id\":\"claude-opus-5-5\",\"label\":\"Claude Opus 5.5\",\"options\":[{\"id\":\"effort\",\"values\":[\"low\",\"medium\",\"high\",\"xhigh\",\"max\",\"ultracode\",\"ultrathink\"],\"default\":\"medium\"},{\"id\":\"fastMode\",\"values\":[false,true]}]},{\"id\":\"claude-sonnet-5-5\",\"label\":\"Claude Sonnet 5.5\",\"options\":[{\"id\":\"effort\",\"values\":[\"low\",\"medium\",\"high\",\"xhigh\",\"max\",\"ultrathink\"],\"default\":\"high\"}]},{\"id\":\"claude-fable-5-1\",\"label\":\"Claude Fable 5.1\",\"options\":[{\"id\":\"effort\",\"values\":[\"low\",\"medium\",\"high\",\"xhigh\",\"max\",\"ultracode\",\"ultrathink\"],\"default\":\"medium\"}]},{\"id\":\"claude-haiku-5-5\",\"label\":\"Claude Haiku 5.5\",\"options\":[{\"id\":\"effort\",\"values\":[\"low\",\"medium\",\"high\",\"xhigh\",\"max\",\"ultrathink\"],\"default\":\"medium\"}]}],\"omittedModels\":9,\"canRunChildTask\":true,\"canRunCrossProviderChildTask\":true,\"constraints\":[]},{\"providerInstanceId\":\"claudeAgent\",\"driverKind\":\"claudeAgent\",\"displayName\":\"Rehan\",\"models\":[{\"id\":\"claude-opus-5-5\",\"label\":\"Claude Opus 5.5\",\"options\":[{\"id\":\"effort\",\"values\":[\"low\",\"medium\",\"high\",\"xhigh\",\"max\",\"ultracode\",\"ultrathink\"],\"default\":\"medium\"},{\"id\":\"fastMode\",\"values\":[false,true]}]},{\"id\":\"claude-sonnet-5-5\",\"label\":\"Claude Sonnet 5.5\",\"options\":[{\"id\":\"effort\",\"values\":[\"low\",\"medium\",\"high\",\"xhigh\",\"max\",\"ultrathink\"],\"default\":\"high\"}]},{\"id\":\"claude-fable-5-1\",\"label\":\"Claude Fable 5.1\",\"options\":[{\"id\":\"effort\",\"values\":[\"low\",\"medium\",\"high\",\"xhigh\",\"max\",\"ultracode\",\"ultrathink\"],\"default\":\"medium\"}]},{\"id\":\"claude-haiku-5-5\",\"label\":\"Claude Haiku 5.5\",\"options\":[{\"id\":\"effort\",\"values\":[\"low\",\"medium\",\"high\",\"xhigh\",\"max\",\"ultrathink\"],\"default\":\"medium\"}]}],\"canRunChildTask\":false,\"canRunCrossProviderChildTask\":false,\"constraints\":[\"Provider instance is disabled.\"]},{\"providerInstanceId\":\"cursor\",\"driverKind\":\"cursor\",\"displayName\":\"Cursor\",\"models\":[],\"canRunChildTask\":false,\"canRunCrossProviderChildTask\":false,\"constraints\":[\"Provider instance is disabled.\"]},{\"providerInstanceId\":\"grok\",\"driverKind\":\"grok\",\"displayName\":\"Grok\",\"models\":[{\"id\":\"grok-build\",\"label\":\"Grok Build\"}],\"runtimeModes\":[\"approval-required\",\"auto\",\"full-access\"],\"canRunChildTask\":false,\"canRunCrossProviderChildTask\":false,\"constraints\":[\"Provider instance is disabled.\"]},{\"providerInstanceId\":\"opencode\",\"driverKind\":\"opencode\",\"displayName\":\"OpenCode\",\"models\":[],\"canRunChildTask\":false,\"canRunCrossProviderChildTask\":false,\"constraints\":[\"Provider instance is disabled.\"]},{\"providerInstanceId\":\"antigravity\",\"driverKind\":\"antigravity\",\"displayName\":\"Antigravity\",\"models\":[],\"canRunChildTask\":false,\"canRunCrossProviderChildTask\":false,\"constraints\":[\"Provider instance is disabled.\"]},{\"providerInstanceId\":\"fx\",\"driverKind\":\"fx\",\"displayName\":\"fx\",\"models\":[{\"id\":\"default\",\"options\":[{\"id\":\"effort\",\"values\":[\"auto\",\"low\",\"medium\",\"high\",\"xhigh\",\"max\"],\"default\":\"medium\"}]}],\"runtimeModes\":[\"approval-required\",\"auto\"],\"canRunChildTask\":false,\"canRunCrossProviderChildTask\":false,\"constraints\":[\"Provider instance is disabled.\"]},{\"providerInstanceId\":\"acpRegistry_claude_agent\",\"driverKind\":\"acpRegistry\",\"displayName\":\"Claude Agent\",\"models\":[{\"id\":\"default\",\"label\":\"Default (recommended)\",\"options\":[{\"id\":\"mode\",\"values\":[\"default\",\"acceptEdits\",\"plan\",\"auto\",\"bypassPermissions\"],\"default\":\"default\"},{\"id\":\"effort\",\"values\":[\"default\",\"low\",\"medium\",\"high\",\"xhigh\",\"max\"],\"default\":\"xhigh\"},{\"id\":\"agent\",\"values\":[\"default\",\"aws-cdk-lambda-ts-expert\",\"aws-expert\",\"bun-monorepo-expert\",\"expo-rn-expert\",\"firebase-rtk-codegen-expert\",\"ic-reviewer\",\"ic-scout\",\"javascript-expert\",\"loopback4-expert\",\"nextjs-expert\",\"oi-debugger\",\"oi-planner\",\"oi-reviewer\",\"oi-scout\",\"opponent\",\"python-expert\",\"react-expert\",\"reality-check\",\"rust-aws-lambda-expert\",\"rust-expert\",\"sdd-orchestrator\",\"security-reviewer\",\"test-engineer\"],\"default\":\"default\"}]},{\"id\":\"opus\",\"label\":\"Opus 5.5\",\"options\":[{\"id\":\"mode\",\"values\":[\"default\",\"acceptEdits\",\"plan\",\"auto\",\"bypassPermissions\"],\"default\":\"default\"},{\"id\":\"effort\",\"values\":[\"default\",\"low\",\"medium\",\"high\",\"xhigh\",\"max\"],\"default\":\"xhigh\"},{\"id\":\"agent\",\"values\":[\"default\",\"aws-cdk-lambda-ts-expert\",\"aws-expert\",\"bun-monorepo-expert\",\"expo-rn-expert\",\"firebase-rtk-codegen-expert\",\"ic-reviewer\",\"ic-scout\",\"javascript-expert\",\"loopback4-expert\",\"nextjs-expert\",\"oi-debugger\",\"oi-planner\",\"oi-reviewer\",\"oi-scout\",\"opponent\",\"python-expert\",\"react-expert\",\"reality-check\",\"rust-aws-lambda-expert\",\"rust-expert\",\"sdd-orchestrator\",\"security-reviewer\",\"test-engineer\"],\"default\":\"default\"}]},{\"id\":\"claude-fable-5-1[1m]\",\"label\":\"Fable 5.1\",\"options\":[{\"id\":\"mode\",\"values\":[\"default\",\"acceptEdits\",\"plan\",\"auto\",\"bypassPermissions\"],\"default\":\"default\"},{\"id\":\"effort\",\"values\":[\"default\",\"low\",\"medium\",\"high\",\"xhigh\",\"max\"],\"default\":\"xhigh\"},{\"id\":\"agent\",\"values\":[\"default\",\"aws-cdk-lambda-ts-expert\",\"aws-expert\",\"bun-monorepo-expert\",\"expo-rn-expert\",\"firebase-rtk-codegen-expert\",\"ic-reviewer\",\"ic-scout\",\"javascript-expert\",\"loopback4-expert\",\"nextjs-expert\",\"oi-debugger\",\"oi-planner\",\"oi-reviewer\",\"oi-scout\",\"opponent\",\"python-expert\",\"react-expert\",\"reality-check\",\"rust-aws-lambda-expert\",\"rust-expert\",\"sdd-orchestrator\",\"security-reviewer\",\"test-engineer\"],\"default\":\"default\"}]},{\"id\":\"sonnet\",\"label\":\"Sonnet 5.5\",\"options\":[{\"id\":\"mode\",\"values\":[\"default\",\"acceptEdits\",\"plan\",\"auto\",\"bypassPermissions\"],\"default\":\"default\"},{\"id\":\"effort\",\"values\":[\"default\",\"low\",\"medium\",\"high\",\"xhigh\",\"max\"],\"default\":\"xhigh\"},{\"id\":\"agent\",\"values\":[\"default\",\"aws-cdk-lambda-ts-expert\",\"aws-expert\",\"bun-monorepo-expert\",\"expo-rn-expert\",\"firebase-rtk-codegen-expert\",\"ic-reviewer\",\"ic-scout\",\"javascript-expert\",\"loopback4-expert\",\"nextjs-expert\",\"oi-debugger\",\"oi-planner\",\"oi-reviewer\",\"oi-scout\",\"opponent\",\"python-expert\",\"react-expert\",\"reality-check\",\"rust-aws-lambda-expert\",\"rust-expert\",\"sdd-orchestrator\",\"security-reviewer\",\"test-engineer\"],\"default\":\"default\"}]},{\"id\":\"haiku\",\"label\":\"Haiku 5.5\",\"options\":[{\"id\":\"mode\",\"values\":[\"default\",\"acceptEdits\",\"plan\",\"auto\",\"bypassPermissions\"],\"default\":\"default\"},{\"id\":\"effort\",\"values\":[\"default\",\"low\",\"medium\",\"high\",\"xhigh\",\"max\"],\"default\":\"xhigh\"},{\"id\":\"agent\",\"values\":[\"default\",\"aws-cdk-lambda-ts-expert\",\"aws-expert\",\"bun-monorepo-expert\",\"expo-rn-expert\",\"firebase-rtk-codegen-expert\",\"ic-reviewer\",\"ic-scout\",\"javascript-expert\",\"loopback4-expert\",\"nextjs-expert\",\"oi-debugger\",\"oi-planner\",\"oi-reviewer\",\"oi-scout\",\"opponent\",\"python-expert\",\"react-expert\",\"reality-check\",\"rust-aws-lambda-expert\",\"rust-expert\",\"sdd-orchestrator\",\"security-reviewer\",\"test-engineer\"],\"default\":\"default\"}]}],\"canRunChildTask\":true,\"canRunCrossProviderChildTask\":true,\"constraints\":[]},{\"providerInstanceId\":\"muse\",\"driverKind\":\"muse\",\"displayName\":\"Muse Code\",\"models\":[],\"runtimeModes\":[\"approval-required\",\"full-access\"],\"canRunChildTask\":false,\"canRunCrossProviderChildTask\":false,\"constraints\":[\"Provider instance is disabled.\"]},{\"providerInstanceId\":\"pi\",\"driverKind\":\"pi\",\"displayName\":\"Pi\",\"models\":[{\"id\":\"default\",\"label\":\"Pi default\"}],\"runtimeModes\":[\"approval-required\",\"auto-accept-edits\",\"full-access\"],\"canRunChildTask\":false,\"canRunCrossProviderChildTask\":false,\"constraints\":[\"Provider instance is disabled.\"]}],\"features\":{\"appOwnedSubagents\":true,\"asyncPolling\":true,\"cancellation\":true,\"batchThreadCreation\":true,\"threadManagement\":true,\"incrementalThreadRead\":true,\"scheduledTasks\":true,\"maxBatchThreads\":20}}"
+    }
+  ],
+  "structuredContent": {
+    "parentThreadId": "f449528d-0620-41cb-b858-dcf160f695ae",
+    "inheritedProviderInstanceId": "codex_codex_gym",
+    "inheritedModel": "gpt-6.1-sol",
+    "inheritedOptions": [
+      {
+        "id": "reasoningEffort",
+        "value": "high"
+      },
+      {
+        "id": "serviceTier",
+        "value": "default"
+      }
+    ],
+    "runtimeMode": "full-access",
+    "interactionMode": "default",
+    "providers": [
+      {
+        "providerInstanceId": "codex",
+        "driverKind": "codex",
+        "displayName": "Codex",
+        "models": [
+          {
+            "id": "gpt-6.1-sol",
+            "options": [
+              {
+                "id": "reasoningEffort",
+                "values": [
+                  "low",
+                  "medium",
+                  "high",
+                  "xhigh",
+                  "max",
+                  "ultra"
+                ],
+                "default": "low"
+              },
+              {
+                "id": "serviceTier",
+                "values": [
+                  "default",
+                  "priority"
+                ],
+                "default": "default"
+              }
+            ]
+          },
+          {
+            "id": "gpt-6-astra",
+            "options": [
+              {
+                "id": "reasoningEffort",
+                "values": [
+                  "low",
+                  "medium",
+                  "high",
+                  "xhigh",
+                  "max",
+                  "ultra"
+                ],
+                "default": "medium"
+              },
+              {
+                "id": "serviceTier",
+                "values": [
+                  "default",
+                  "priority"
+                ],
+                "default": "default"
+              }
+            ]
+          },
+          {
+            "id": "gpt-6.1-terra",
+            "label": "GPT-6.1 Terra",
+            "options": [
+              {
+                "id": "reasoningEffort",
+                "values": [
+                  "low",
+                  "medium",
+                  "high",
+                  "xhigh",
+                  "max",
+                  "ultra"
+                ],
+                "default": "low"
+              },
+              {
+                "id": "serviceTier",
+                "values": [
+                  "default",
+                  "priority"
+                ],
+                "default": "default"
+              }
+            ]
+          },
+          {
+            "id": "gpt-6-luna",
+            "options": [
+              {
+                "id": "reasoningEffort",
+                "values": [
+                  "low",
+                  "medium",
+                  "high",
+                  "xhigh",
+                  "max"
+                ],
+                "default": "medium"
+              },
+              {
+                "id": "serviceTier",
+                "values": [
+                  "default",
+                  "priority"
+                ],
+                "default": "default"
+              }
+            ]
+          }
+        ],
+        "omittedModels": 4,
+        "canRunChildTask": true,
+        "canRunCrossProviderChildTask": true,
+        "constraints": []
+      },
+      {
+        "providerInstanceId": "codex_rehan",
+        "driverKind": "codex",
+        "displayName": "Codex Rizwan",
+        "models": [
+          {
+            "id": "gpt-6-luna",
+            "options": [
+              {
+                "id": "reasoningEffort",
+                "values": [
+                  "low",
+                  "medium",
+                  "high",
+                  "xhigh",
+                  "max"
+                ],
+                "default": "medium"
+              }
+            ]
+          }
+        ],
+        "omittedModels": 2,
+        "canRunChildTask": true,
+        "canRunCrossProviderChildTask": true,
+        "constraints": []
+      },
+      {
+        "providerInstanceId": "codex_codex_gym",
+        "driverKind": "codex",
+        "displayName": "codex-gym",
+        "models": [
+          {
+            "id": "gpt-6.1-sol",
+            "options": [
+              {
+                "id": "reasoningEffort",
+                "values": [
+                  "low",
+                  "medium",
+                  "high",
+                  "xhigh",
+                  "max",
+                  "ultra"
+                ],
+                "default": "low"
+              },
+              {
+                "id": "serviceTier",
+                "values": [
+                  "default",
+                  "priority"
+                ],
+                "default": "default"
+              }
+            ]
+          },
+          {
+            "id": "gpt-6-astra",
+            "options": [
+              {
+                "id": "reasoningEffort",
+                "values": [
+                  "low",
+                  "medium",
+                  "high",
+                  "xhigh",
+                  "max",
+                  "ultra"
+                ],
+                "default": "medium"
+              },
+              {
+                "id": "serviceTier",
+                "values": [
+                  "default",
+                  "priority"
+                ],
+                "default": "default"
+              }
+            ]
+          },
+          {
+            "id": "gpt-6.1-terra",
+            "label": "GPT-6.1 Terra",
+            "options": [
+              {
+                "id": "reasoningEffort",
+                "values": [
+                  "low",
+                  "medium",
+                  "high",
+                  "xhigh",
+                  "max",
+                  "ultra"
+                ],
+                "default": "low"
+              },
+              {
+                "id": "serviceTier",
+                "values": [
+                  "default",
+                  "priority"
+                ],
+                "default": "default"
+              }
+            ]
+          },
+          {
+            "id": "gpt-6-luna",
+            "options": [
+              {
+                "id": "reasoningEffort",
+                "values": [
+                  "low",
+                  "medium",
+                  "high",
+                  "xhigh",
+                  "max"
+                ],
+                "default": "medium"
+              },
+              {
+                "id": "serviceTier",
+                "values": [
+                  "default",
+                  "priority"
+                ],
+                "default": "default"
+              }
+            ]
+          }
+        ],
+        "omittedModels": 4,
+        "canRunChildTask": true,
+        "canRunCrossProviderChildTask": true,
+        "constraints": []
+      },
+      {
+        "providerInstanceId": "claudeAgent_claude_rehan",
+        "driverKind": "claudeAgent",
+        "displayName": "Claude_Rehan",
+        "models": [
+          {
+            "id": "claude-opus-5-5",
+            "label": "Claude Opus 5.5",
+            "options": [
+              {
+                "id": "effort",
+                "values": [
+                  "low",
+                  "medium",
+                  "high",
+                  "xhigh",
+                  "max",
+                  "ultracode",
+                  "ultrathink"
+                ],
+                "default": "medium"
+              },
+              {
+                "id": "fastMode",
+                "values": [
+                  false,
+                  true
+                ]
+              }
+            ]
+          },
+          {
+            "id": "claude-sonnet-5-5",
+            "label": "Claude Sonnet 5.5",
+            "options": [
+              {
+                "id": "effort",
+                "values": [
+                  "low",
+                  "medium",
+                  "high",
+                  "xhigh",
+                  "max",
+                  "ultrathink"
+                ],
+                "default": "high"
+              }
+            ]
+          },
+          {
+            "id": "claude-fable-5-1",
+            "label": "Claude Fable 5.1",
+            "options": [
+              {
+                "id": "effort",
+                "values": [
+                  "low",
+                  "medium",
+                  "high",
+                  "xhigh",
+                  "max",
+                  "ultracode",
+                  "ultrathink"
+                ],
+                "default": "medium"
+              }
+            ]
+          },
+          {
+            "id": "claude-haiku-5-5",
+            "label": "Claude Haiku 5.5",
+            "options": [
+              {
+                "id": "effort",
+                "values": [
+                  "low",
+                  "medium",
+                  "high",
+                  "xhigh",
+                  "max",
+                  "ultrathink"
+                ],
+                "default": "medium"
+              }
+            ]
+          }
+        ],
+        "omittedModels": 9,
+        "canRunChildTask": true,
+        "canRunCrossProviderChildTask": true,
+        "constraints": []
+      },
+      {
+        "providerInstanceId": "claudeAgent_claude_gym",
+        "driverKind": "claudeAgent",
+        "displayName": "claude-gym",
+        "models": [
+          {
+            "id": "claude-opus-5-5",
+            "label": "Claude Opus 5.5",
+            "options": [
+              {
+                "id": "effort",
+                "values": [
+                  "low",
+                  "medium",
+                  "high",
+                  "xhigh",
+                  "max",
+                  "ultracode",
+                  "ultrathink"
+                ],
+                "default": "medium"
+              },
+              {
+                "id": "fastMode",
+                "values": [
+                  false,
+                  true
+                ]
+              }
+            ]
+          },
+          {
+            "id": "claude-sonnet-5-5",
+            "label": "Claude Sonnet 5.5",
+            "options": [
+              {
+                "id": "effort",
+                "values": [
+                  "low",
+                  "medium",
+                  "high",
+                  "xhigh",
+                  "max",
+                  "ultrathink"
+                ],
+                "default": "high"
+              }
+            ]
+          },
+          {
+            "id": "claude-fable-5-1",
+            "label": "Claude Fable 5.1",
+            "options": [
+              {
+                "id": "effort",
+                "values": [
+                  "low",
+                  "medium",
+                  "high",
+                  "xhigh",
+                  "max",
+                  "ultracode",
+                  "ultrathink"
+                ],
+                "default": "medium"
+              }
+            ]
+          },
+          {
+            "id": "claude-haiku-5-5",
+            "label": "Claude Haiku 5.5",
+            "options": [
+              {
+                "id": "effort",
+                "values": [
+                  "low",
+                  "medium",
+                  "high",
+                  "xhigh",
+                  "max",
+                  "ultrathink"
+                ],
+                "default": "medium"
+              }
+            ]
+          }
+        ],
+        "omittedModels": 9,
+        "canRunChildTask": false,
+        "canRunCrossProviderChildTask": false,
+        "constraints": [
+          "Provider instance is disabled."
+        ]
+      },
+      {
+        "providerInstanceId": "claudeAgent_haseeb",
+        "driverKind": "claudeAgent",
+        "displayName": "Haseeb",
+        "models": [
+          {
+            "id": "claude-opus-5-5",
+            "label": "Claude Opus 5.5",
+            "options": [
+              {
+                "id": "effort",
+                "values": [
+                  "low",
+                  "medium",
+                  "high",
+                  "xhigh",
+                  "max",
+                  "ultracode",
+                  "ultrathink"
+                ],
+                "default": "medium"
+              },
+              {
+                "id": "fastMode",
+                "values": [
+                  false,
+                  true
+                ]
+              }
+            ]
+          },
+          {
+            "id": "claude-sonnet-5-5",
+            "label": "Claude Sonnet 5.5",
+            "options": [
+              {
+                "id": "effort",
+                "values": [
+                  "low",
+                  "medium",
+                  "high",
+                  "xhigh",
+                  "max",
+                  "ultrathink"
+                ],
+                "default": "high"
+              }
+            ]
+          },
+          {
+            "id": "claude-fable-5-1",
+            "label": "Claude Fable 5.1",
+            "options": [
+              {
+                "id": "effort",
+                "values": [
+                  "low",
+                  "medium",
+                  "high",
+                  "xhigh",
+                  "max",
+                  "ultracode",
+                  "ultrathink"
+                ],
+                "default": "medium"
+              }
+            ]
+          },
+          {
+            "id": "claude-haiku-5-5",
+            "label": "Claude Haiku 5.5",
+            "options": [
+              {
+                "id": "effort",
+                "values": [
+                  "low",
+                  "medium",
+                  "high",
+                  "xhigh",
+                  "max",
+                  "ultrathink"
+                ],
+                "default": "medium"
+              }
+            ]
+          }
+        ],
+        "omittedModels": 9,
+        "canRunChildTask": true,
+        "canRunCrossProviderChildTask": true,
+        "constraints": []
+      },
+      {
+        "providerInstanceId": "claudeAgent",
+        "driverKind": "claudeAgent",
+        "displayName": "Rehan",
+        "models": [
+          {
+            "id": "claude-opus-5-5",
+            "label": "Claude Opus 5.5",
+            "options": [
+              {
+                "id": "effort",
+                "values": [
+                  "low",
+                  "medium",
+                  "high",
+                  "xhigh",
+                  "max",
+                  "ultracode",
+                  "ultrathink"
+                ],
+                "default": "medium"
+              },
+              {
+                "id": "fastMode",
+                "values": [
+                  false,
+                  true
+                ]
+              }
+            ]
+          },
+          {
+            "id": "claude-sonnet-5-5",
+            "label": "Claude Sonnet 5.5",
+            "options": [
+              {
+                "id": "effort",
+                "values": [
+                  "low",
+                  "medium",
+                  "high",
+                  "xhigh",
+                  "max",
+                  "ultrathink"
+                ],
+                "default": "high"
+              }
+            ]
+          },
+          {
+            "id": "claude-fable-5-1",
+            "label": "Claude Fable 5.1",
+            "options": [
+              {
+                "id": "effort",
+                "values": [
+                  "low",
+                  "medium",
+                  "high",
+                  "xhigh",
+                  "max",
+                  "ultracode",
+                  "ultrathink"
+                ],
+                "default": "medium"
+              }
+            ]
+          },
+          {
+            "id": "claude-haiku-5-5",
+            "label": "Claude Haiku 5.5",
+            "options": [
+              {
+                "id": "effort",
+                "values": [
+                  "low",
+                  "medium",
+                  "high",
+                  "xhigh",
+                  "max",
+                  "ultrathink"
+                ],
+                "default": "medium"
+              }
+            ]
+          }
+        ],
+        "canRunChildTask": false,
+        "canRunCrossProviderChildTask": false,
+        "constraints": [
+          "Provider instance is disabled."
+        ]
+      },
+      {
+        "providerInstanceId": "cursor",
+        "driverKind": "cursor",
+        "displayName": "Cursor",
+        "models": [],
+        "canRunChildTask": false,
+        "canRunCrossProviderChildTask": false,
+        "constraints": [
+          "Provider instance is disabled."
+        ]
+      },
+      {
+        "providerInstanceId": "grok",
+        "driverKind": "grok",
+        "displayName": "Grok",
+        "models": [
+          {
+            "id": "grok-build",
+            "label": "Grok Build"
+          }
+        ],
+        "runtimeModes": [
+          "approval-required",
+          "auto",
+          "full-access"
+        ],
+        "canRunChildTask": false,
+        "canRunCrossProviderChildTask": false,
+        "constraints": [
+          "Provider instance is disabled."
+        ]
+      },
+      {
+        "providerInstanceId": "opencode",
+        "driverKind": "opencode",
+        "displayName": "OpenCode",
+        "models": [],
+        "canRunChildTask": false,
+        "canRunCrossProviderChildTask": false,
+        "constraints": [
+          "Provider instance is disabled."
+        ]
+      },
+      {
+        "providerInstanceId": "antigravity",
+        "driverKind": "antigravity",
+        "displayName": "Antigravity",
+        "models": [],
+        "canRunChildTask": false,
+        "canRunCrossProviderChildTask": false,
+        "constraints": [
+          "Provider instance is disabled."
+        ]
+      },
+      {
+        "providerInstanceId": "fx",
+        "driverKind": "fx",
+        "displayName": "fx",
+        "models": [
+          {
+            "id": "default",
+            "options": [
+              {
+                "id": "effort",
+                "values": [
+                  "auto",
+                  "low",
+                  "medium",
+                  "high",
+                  "xhigh",
+                  "max"
+                ],
+                "default": "medium"
+              }
+            ]
+          }
+        ],
+        "runtimeModes": [
+          "approval-required",
+          "auto"
+        ],
+        "canRunChildTask": false,
+        "canRunCrossProviderChildTask": false,
+        "constraints": [
+          "Provider instance is disabled."
+        ]
+      },
+      {
+        "providerInstanceId": "acpRegistry_claude_agent",
+        "driverKind": "acpRegistry",
+        "displayName": "Claude Agent",
+        "models": [
+          {
+            "id": "default",
+            "label": "Default (recommended)",
+            "options": [
+              {
+                "id": "mode",
+                "values": [
+                  "default",
+                  "acceptEdits",
+                  "plan",
+                  "auto",
+                  "bypassPermissions"
+                ],
+                "default": "default"
+              },
+              {
+                "id": "effort",
+                "values": [
+                  "default",
+                  "low",
+                  "medium",
+                  "high",
+                  "xhigh",
+                  "max"
+                ],
+                "default": "xhigh"
+              },
+              {
+                "id": "agent",
+                "values": [
+                  "default",
+                  "aws-cdk-lambda-ts-expert",
+                  "aws-expert",
+                  "bun-monorepo-expert",
+                  "expo-rn-expert",
+                  "firebase-rtk-codegen-expert",
+                  "ic-reviewer",
+                  "ic-scout",
+                  "javascript-expert",
+                  "loopback4-expert",
+                  "nextjs-expert",
+                  "oi-debugger",
+                  "oi-planner",
+                  "oi-reviewer",
+                  "oi-scout",
+                  "opponent",
+                  "python-expert",
+                  "react-expert",
+                  "reality-check",
+                  "rust-aws-lambda-expert",
+                  "rust-expert",
+                  "sdd-orchestrator",
+                  "security-reviewer",
+                  "test-engineer"
+                ],
+                "default": "default"
+              }
+            ]
+          },
+          {
+            "id": "opus",
+            "label": "Opus 5.5",
+            "options": [
+              {
+                "id": "mode",
+                "values": [
+                  "default",
+                  "acceptEdits",
+                  "plan",
+                  "auto",
+                  "bypassPermissions"
+                ],
+                "default": "default"
+              },
+              {
+                "id": "effort",
+                "values": [
+                  "default",
+                  "low",
+                  "medium",
+                  "high",
+                  "xhigh",
+                  "max"
+                ],
+                "default": "xhigh"
+              },
+              {
+                "id": "agent",
+                "values": [
+                  "default",
+                  "aws-cdk-lambda-ts-expert",
+                  "aws-expert",
+                  "bun-monorepo-expert",
+                  "expo-rn-expert",
+                  "firebase-rtk-codegen-expert",
+                  "ic-reviewer",
+                  "ic-scout",
+                  "javascript-expert",
+                  "loopback4-expert",
+                  "nextjs-expert",
+                  "oi-debugger",
+                  "oi-planner",
+                  "oi-reviewer",
+                  "oi-scout",
+                  "opponent",
+                  "python-expert",
+                  "react-expert",
+                  "reality-check",
+                  "rust-aws-lambda-expert",
+                  "rust-expert",
+                  "sdd-orchestrator",
+                  "security-reviewer",
+                  "test-engineer"
+                ],
+                "default": "default"
+              }
+            ]
+          },
+          {
+            "id": "claude-fable-5-1[1m]",
+            "label": "Fable 5.1",
+            "options": [
+              {
+                "id": "mode",
+                "values": [
+                  "default",
+                  "acceptEdits",
+                  "plan",
+                  "auto",
+                  "bypassPermissions"
+                ],
+                "default": "default"
+              },
+              {
+                "id": "effort",
+                "values": [
+                  "default",
+                  "low",
+                  "medium",
+                  "high",
+                  "xhigh",
+                  "max"
+                ],
+                "default": "xhigh"
+              },
+              {
+                "id": "agent",
+                "values": [
+                  "default",
+                  "aws-cdk-lambda-ts-expert",
+                  "aws-expert",
+                  "bun-monorepo-expert",
+                  "expo-rn-expert",
+                  "firebase-rtk-codegen-expert",
+                  "ic-reviewer",
+                  "ic-scout",
+                  "javascript-expert",
+                  "loopback4-expert",
+                  "nextjs-expert",
+                  "oi-debugger",
+                  "oi-planner",
+                  "oi-reviewer",
+                  "oi-scout",
+                  "opponent",
+                  "python-expert",
+                  "react-expert",
+                  "reality-check",
+                  "rust-aws-lambda-expert",
+                  "rust-expert",
+                  "sdd-orchestrator",
+                  "security-reviewer",
+                  "test-engineer"
+                ],
+                "default": "default"
+              }
+            ]
+          },
+          {
+            "id": "sonnet",
+            "label": "Sonnet 5.5",
+            "options": [
+              {
+                "id": "mode",
+                "values": [
+                  "default",
+                  "acceptEdits",
+                  "plan",
+                  "auto",
+                  "bypassPermissions"
+                ],
+                "default": "default"
+              },
+              {
+                "id": "effort",
+                "values": [
+                  "default",
+                  "low",
+                  "medium",
+                  "high",
+                  "xhigh",
+                  "max"
+                ],
+                "default": "xhigh"
+              },
+              {
+                "id": "agent",
+                "values": [
+                  "default",
+                  "aws-cdk-lambda-ts-expert",
+                  "aws-expert",
+                  "bun-monorepo-expert",
+                  "expo-rn-expert",
+                  "firebase-rtk-codegen-expert",
+                  "ic-reviewer",
+                  "ic-scout",
+                  "javascript-expert",
+                  "loopback4-expert",
+                  "nextjs-expert",
+                  "oi-debugger",
+                  "oi-planner",
+                  "oi-reviewer",
+                  "oi-scout",
+                  "opponent",
+                  "python-expert",
+                  "react-expert",
+                  "reality-check",
+                  "rust-aws-lambda-expert",
+                  "rust-expert",
+                  "sdd-orchestrator",
+                  "security-reviewer",
+                  "test-engineer"
+                ],
+                "default": "default"
+              }
+            ]
+          },
+          {
+            "id": "haiku",
+            "label": "Haiku 5.5",
+            "options": [
+              {
+                "id": "mode",
+                "values": [
+                  "default",
+                  "acceptEdits",
+                  "plan",
+                  "auto",
+                  "bypassPermissions"
+                ],
+                "default": "default"
+              },
+              {
+                "id": "effort",
+                "values": [
+                  "default",
+                  "low",
+                  "medium",
+                  "high",
+                  "xhigh",
+                  "max"
+                ],
+                "default": "xhigh"
+              },
+              {
+                "id": "agent",
+                "values": [
+                  "default",
+                  "aws-cdk-lambda-ts-expert",
+                  "aws-expert",
+                  "bun-monorepo-expert",
+                  "expo-rn-expert",
+                  "firebase-rtk-codegen-expert",
+                  "ic-reviewer",
+                  "ic-scout",
+                  "javascript-expert",
+                  "loopback4-expert",
+                  "nextjs-expert",
+                  "oi-debugger",
+                  "oi-planner",
+                  "oi-reviewer",
+                  "oi-scout",
+                  "opponent",
+                  "python-expert",
+                  "react-expert",
+                  "reality-check",
+                  "rust-aws-lambda-expert",
+                  "rust-expert",
+                  "sdd-orchestrator",
+                  "security-reviewer",
+                  "test-engineer"
+                ],
+                "default": "default"
+              }
+            ]
+          }
+        ],
+        "canRunChildTask": true,
+        "canRunCrossProviderChildTask": true,
+        "constraints": []
+      },
+      {
+        "providerInstanceId": "muse",
+        "driverKind": "muse",
+        "displayName": "Muse Code",
+        "models": [],
+        "runtimeModes": [
+          "approval-required",
+          "full-access"
+        ],
+        "canRunChildTask": false,
+        "canRunCrossProviderChildTask": false,
+        "constraints": [
+          "Provider instance is disabled."
+        ]
+      },
+      {
+        "providerInstanceId": "pi",
+        "driverKind": "pi",
+        "displayName": "Pi",
+        "models": [
+          {
+            "id": "default",
+            "label": "Pi default"
+          }
+        ],
+        "runtimeModes": [
+          "approval-required",
+          "auto-accept-edits",
+          "full-access"
+        ],
+        "canRunChildTask": false,
+        "canRunCrossProviderChildTask": false,
+        "constraints": [
+          "Provider instance is disabled."
+        ]
+      }
+    ],
+    "features": {
+      "appOwnedSubagents": true,
+      "asyncPolling": true,
+      "cancellation": true,
+      "batchThreadCreation": true,
+      "threadManagement": true,
+      "incrementalThreadRead": true,
+      "scheduledTasks": true,
+      "maxBatchThreads": 20
+    }
+  },
+  "isError": false
+}

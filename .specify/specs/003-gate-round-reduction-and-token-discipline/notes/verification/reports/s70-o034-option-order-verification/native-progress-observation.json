@@ -1,0 +1,19 @@
+{
+  "psExit": 0,
+  "ps": "  PID  PPID STAT ELAPSED COMMAND\n80747 80733 S      01:30 bash scripts/spec-run.sh .specify/specs/003-gate-round-reduction-and-token-discipline T031a5o1 --from-task --no-tick --summary\n",
+  "observedNativeLogs": [
+    {
+      "stage": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/.capture.eXyQTW",
+      "outputBytes": 810,
+      "lastLines": [
+        "  ok   test_ticked_box_without_evidence_warns",
+        "  ok   test_umbrella_declared_repo_with_no_tasks_warns",
+        "  ok   test_umbrella_tagged_tasks_pass",
+        "  ok   test_umbrella_undeclared_repo_tag_fails",
+        "  ok   test_umbrella_untagged_tasks_fail",
+        "  ok   test_uncovered_ac_fails_and_gate_refs_do_not_count"
+      ]
+    }
+  ],
+  "durableCompletionExists": false
+}

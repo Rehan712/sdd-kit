@@ -1,0 +1,115 @@
+{
+  "status": "HOSTED_PASS_PENDING_AFTER_CHECK",
+  "run_id": 40684905884,
+  "attempt": 1,
+  "workflow_id": 312572046,
+  "workflow_path": ".github/workflows/ci.yml",
+  "url": "https://github.com/Rehan712/sdd-kit/actions/runs/40684905884",
+  "run_status": "completed",
+  "run_conclusion": "success",
+  "run_created_at": "2026-10-28T12:04:47Z",
+  "run_updated_at": "2026-10-28T12:47:45Z",
+  "head": "25347ba729886ae0bea029c594ac00f0bc48e767",
+  "source": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+  "tree": "c68b9a3ab0c39c555d5cb28afa6420cd9a2600b7",
+  "merge_sha": "ffb6ebed7e8e42cdc35fc32a66e4cd2ec06cf062",
+  "merge_tree": "c68b9a3ab0c39c555d5cb28afa6420cd9a2600b7",
+  "merge_parents": [
+    "f4a0e4e31df29b53ccb9e088d3b8d0cd58f8e12f",
+    "25347ba729886ae0bea029c594ac00f0bc48e767"
+  ],
+  "collector_exit": 0,
+  "collector_report": "PASS",
+  "jobs": [
+    {
+      "id": 122804640261,
+      "name": "tests-bash32",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/Rehan712/sdd-kit/actions/runs/40684905884/job/122804640261",
+      "started_at": "2026-10-28T12:04:52Z",
+      "completed_at": "2026-10-28T12:44:19Z",
+      "runner_name": "GitHub Actions 1000000215",
+      "labels": [
+        "macos-latest"
+      ],
+      "merge_sha": "ffb6ebed7e8e42cdc35fc32a66e4cd2ec06cf062",
+      "checkout_short": "ffb6ebe",
+      "raw_log": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s38/hosted-s38-audit/hosted/job-tests-bash32.log",
+      "raw_log_sha256": "a31bf3b530e2ad5efdf451ff95ddbdede51bf05f0a7b38093b0fd9265836f494",
+      "raw_log_bytes": 29215,
+      "ansi_escape_bytes": 6
+    },
+    {
+      "id": 122804640662,
+      "name": "shellcheck",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/Rehan712/sdd-kit/actions/runs/40684905884/job/122804640662",
+      "started_at": "2026-10-28T12:04:49Z",
+      "completed_at": "2026-10-28T12:05:34Z",
+      "runner_name": "GitHub Actions 1000000216",
+      "labels": [
+        "ubuntu-latest"
+      ],
+      "merge_sha": "ffb6ebed7e8e42cdc35fc32a66e4cd2ec06cf062",
+      "checkout_short": "ffb6ebe",
+      "raw_log": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s38/hosted-s38-audit/hosted/job-shellcheck.log",
+      "raw_log_sha256": "db7fbe6c4c9e377c59d3d93ea9afdf3f59b9062bd754f41b56ae746d77739c23",
+      "raw_log_bytes": 10735,
+      "ansi_escape_bytes": 2
+    },
+    {
+      "id": 122804640797,
+      "name": "tests (ubuntu-latest)",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/Rehan712/sdd-kit/actions/runs/40684905884/job/122804640797",
+      "started_at": "2026-10-28T12:04:50Z",
+      "completed_at": "2026-10-28T12:33:27Z",
+      "runner_name": "GitHub Actions 1000000217",
+      "labels": [
+        "ubuntu-latest"
+      ],
+      "merge_sha": "ffb6ebed7e8e42cdc35fc32a66e4cd2ec06cf062",
+      "checkout_short": "ffb6ebe",
+      "raw_log": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s38/hosted-s38-audit/hosted/job-tests__ubuntu-latest_.log",
+      "raw_log_sha256": "894237503f767c2e01dfbe7166a7b1b4c6ab50d1ae6a8806b1c62f09156d343f",
+      "raw_log_bytes": 25580,
+      "ansi_escape_bytes": 2
+    },
+    {
+      "id": 122804640973,
+      "name": "tests (macos-latest)",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/Rehan712/sdd-kit/actions/runs/40684905884/job/122804640973",
+      "started_at": "2026-10-28T12:09:50Z",
+      "completed_at": "2026-10-28T12:47:44Z",
+      "runner_name": "GitHub Actions 1000000219",
+      "labels": [
+        "macos-latest"
+      ],
+      "merge_sha": "ffb6ebed7e8e42cdc35fc32a66e4cd2ec06cf062",
+      "checkout_short": "ffb6ebe",
+      "raw_log": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s38/hosted-s38-audit/hosted/job-tests__macos-latest_.log",
+      "raw_log_sha256": "b2129ec996b185924c969d42673dd52faa7068c31f584319c3a8f0d340ef427b",
+      "raw_log_bytes": 28435,
+      "ansi_escape_bytes": 2
+    }
+  ],
+  "current_pr": {
+    "url": "https://github.com/Rehan712/sdd-kit/pull/21",
+    "state": "open",
+    "draft": true,
+    "head": "25347ba729886ae0bea029c594ac00f0bc48e767",
+    "base": "f4a0e4e31df29b53ccb9e088d3b8d0cd58f8e12f",
+    "merge_commit_sha": "ffb6ebed7e8e42cdc35fc32a66e4cd2ec06cf062"
+  },
+  "network_complete_utc": "2026-10-28T12:51:28.258019+00:00",
+  "credential_handling": "parent-supplied GH_TOKEN held only in memory and scoped to network subprocesses; no credential retrieval or auth configuration",
+  "limits": [
+    "Current AC019 hosted evidence only; formal readiness not established.",
+    "No CI rerun, floor, capture, control, tests, gates, Git mutation, PR edit, merge, watch, or polling performed."
+  ]
+}

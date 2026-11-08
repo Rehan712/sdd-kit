@@ -1,0 +1,142 @@
+{
+  "all_original_checks": {
+    "HEAD_branch_index_refs_bytes_modes_mtimes_unchanged": true,
+    "actual_18_of_18": true,
+    "automatic_file_modes_preserved": true,
+    "capture_exit_zero": true,
+    "capture_identity": true,
+    "command_exit_zero": true,
+    "command_output_hashes": true,
+    "current_bindings_equal_capture": true,
+    "current_capture_and_task_match": true,
+    "current_source_expected": true,
+    "cwd_repo_exact": true,
+    "emitted_summary_exact_one_line": true,
+    "every_protected_file_hash_mode_mtime_size_unchanged": false,
+    "evidence_exact_automatic_append": true,
+    "exact_argv": true,
+    "failure_mode_rows_match_current_bindings": true,
+    "fresh_source_matches_post_waiver_full_snapshot": true,
+    "input_after_expected": true,
+    "input_before_expected": true,
+    "ledger_matches_seal": true,
+    "new_files_exact_capture_and_ledger": true,
+    "no_surviving_capture_lock_or_stage": true,
+    "no_tick_one": true,
+    "output_digest_and_bytes": true,
+    "preexisting_git_status_set_unchanged": true,
+    "read_only_checks_preserved_worktree": true,
+    "seal_exact": true,
+    "sequence_exact_one_increment": true,
+    "stderr_empty": true
+  },
+  "attribution": "Unknown actor for .DS_Store and checkpoint ref differences; no actor inferred, no file/ref restored, no difference hidden or broadly allowlisted.",
+  "changed_preexisting": {
+    ".DS_Store": {
+      "after": {
+        "mode": "0o644",
+        "mtime_ns": 1793310276040546792,
+        "sha256": "a063a5f713a1bb042312af9044e7e1bdf94c1c47e4bbd54daae39fcc5c3d6a05",
+        "size": 8196,
+        "type": "file"
+      },
+      "before": {
+        "mode": "0o644",
+        "mtime_ns": 1793257952701344636,
+        "sha256": "dd30f4dbd45e22f99961b128b2baeff17c080170b878aaa200c6af51dbea32ba",
+        "size": 8196,
+        "type": "file"
+      }
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/evidence.md": {
+      "after": {
+        "mode": "0o644",
+        "mtime_ns": 1793310715350394075,
+        "sha256": "939c51d49123db9f0d709d30e452514f712c2cdd3440147b0d40b6589660ff6d",
+        "size": 587694,
+        "type": "file"
+      },
+      "before": {
+        "mode": "0o644",
+        "mtime_ns": 1793296011976712074,
+        "sha256": "27e69f0e24a38ade45b79d2def6beb66ea355fbe3541be7c80afb883d288131e",
+        "size": 587071,
+        "type": "file"
+      }
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/sequence": {
+      "after": {
+        "mode": "0o644",
+        "mtime_ns": 1793309674684014445,
+        "sha256": "650fb46b422406b2b0fc89c674bfb4e6df41548629110322a00690ab39b37133",
+        "size": 4,
+        "type": "file"
+      },
+      "before": {
+        "mode": "0o644",
+        "mtime_ns": 1793295805725568668,
+        "sha256": "899eb94fcbba5b1a9be203c9fd98b7ebd3e6650c31e2604c2b9ec704e38eb83c",
+        "size": 4,
+        "type": "file"
+      }
+    }
+  },
+  "failed_checks": [
+    "every_protected_file_hash_mode_mtime_size_unchanged"
+  ],
+  "global_ref_differences": {
+    "refs/t3/orchestration-v2/checkpoints/YTA4OTJmNzUzYzJkMmYxMTM4NWJiYzVhM2IxY2VkMTc/ordinal/0": {
+      "after": "f214dce6b70c234af7bbba9d63acae95ee3d8102",
+      "before": null
+    },
+    "refs/t3/orchestration-v2/checkpoints/YmM1MzkwNGQzZTEyZGU1ZGIyMGNhOWM1NWM0M2QxZTU/ordinal/4": {
+      "after": "90906e867560f730bb235ca1ca5765061faddb16",
+      "before": null
+    },
+    "refs/t3/orchestration-v2/checkpoints/YmM1MzkwNGQzZTEyZGU1ZGIyMGNhOWM1NWM0M2QxZTU/ordinal/5": {
+      "after": "b1e6be123fd626e00a063b916e9b04120476390a",
+      "before": null
+    },
+    "refs/t3/orchestration-v2/checkpoints/YmM1MzkwNGQzZTEyZGU1ZGIyMGNhOWM1NWM0M2QxZTU/ordinal/6": {
+      "after": "63318ab60fbc28bdc05864fd5eee4c4048ec0f90",
+      "before": null
+    }
+  },
+  "historical_strict_preservation_passed": false,
+  "missing_original": [],
+  "new_capture_and_ledger_paths": [
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-844-GCqKod/COMPLETE",
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-844-GCqKod/argv.nul",
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-844-GCqKod/bindings.nul",
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-844-GCqKod/inputs-after.nul",
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-844-GCqKod/inputs.nul",
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-844-GCqKod/meta.nul",
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-844-GCqKod/output.log",
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-844-GCqKod/summary.txt",
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/captures/CAP-844-GCqKod"
+  ],
+  "original_inventory_excluded_owned_worker_and_approval_directories": true,
+  "original_status": "failed",
+  "protected_source_HEAD_index_tasks_STATUS_preserved": true,
+  "recovery_inventory_covers_both_original_owned_directories": true,
+  "strict_global_refs_preserved": false,
+  "strict_preservation_passed": false,
+  "unexpected_changed_preexisting": {
+    ".DS_Store": {
+      "after": {
+        "mode": "0o644",
+        "mtime_ns": 1793310276040546792,
+        "sha256": "a063a5f713a1bb042312af9044e7e1bdf94c1c47e4bbd54daae39fcc5c3d6a05",
+        "size": 8196,
+        "type": "file"
+      },
+      "before": {
+        "mode": "0o644",
+        "mtime_ns": 1793257952701344636,
+        "sha256": "dd30f4dbd45e22f99961b128b2baeff17c080170b878aaa200c6af51dbea32ba",
+        "size": 8196,
+        "type": "file"
+      }
+    }
+  }
+}

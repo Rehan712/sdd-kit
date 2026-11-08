@@ -1,0 +1,24 @@
+{
+  "helper": "tests/helpers.sh",
+  "helper_sha256": "b7bc6ff9fffa3350c206a7bf25a0ef23517a98f1797ef3f199ac7cdfe240e9b2",
+  "helper_matches_baseline": true,
+  "rows": [
+    {
+      "line": 292,
+      "text": "| shell-family | test | AC-001 | `tests/check.sh::test_ac_001_shared` |"
+    },
+    {
+      "line": 293,
+      "text": "| assertion-family | assertion | AC-002 | `scripts/check-contract.sh::assert_ac_002_contract` |"
+    },
+    {
+      "line": 294,
+      "text": "| static-family | static | AC-003 | `tests/static.sh::test_ac_003_schema` |"
+    },
+    {
+      "line": 295,
+      "text": "| manual-family | manual | AC-004 | release-observation |"
+    }
+  ],
+  "test_controls_entirely_unchanged_by_exact_two_expression_diff": true
+}

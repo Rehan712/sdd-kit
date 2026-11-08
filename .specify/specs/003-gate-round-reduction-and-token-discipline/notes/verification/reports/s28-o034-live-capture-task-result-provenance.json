@@ -1,0 +1,30 @@
+{
+  "taskId": "node:delegated-task:command%3Amcp%3Afab79580-a405-41cc-8cf9-2b0c1f103a41%3Adelegate-task%3Asdd003-s28-o034-live-capture-luna-r1",
+  "childThreadId": "thread:delegated-task:command%3Amcp%3Afab79580-a405-41cc-8cf9-2b0c1f103a41%3Adelegate-task%3Asdd003-s28-o034-live-capture-luna-r1",
+  "childRunId": "run:thread:thread%3Adelegated-task%3Acommand%253Amcp%253Afab79580-a405-41cc-8cf9-2b0c1f103a41%253Adelegate-task%253Asdd003-s28-o034-live-capture-luna-r1:ordinal:1",
+  "childNodeId": "node:delegated-task:command%3Amcp%3Afab79580-a405-41cc-8cf9-2b0c1f103a41%3Adelegate-task%3Asdd003-s28-o034-live-capture-luna-r1",
+  "status": "completed",
+  "workState": "result_available",
+  "hasPendingChildRuns": false,
+  "latestTerminalRunId": "run:thread:thread%3Adelegated-task%3Acommand%253Amcp%253Afab79580-a405-41cc-8cf9-2b0c1f103a41%253Adelegate-task%253Asdd003-s28-o034-live-capture-luna-r1:ordinal:1",
+  "latestTerminalStatus": "completed",
+  "latestTerminalSummary": null,
+  "latestTerminalResultContextTransferId": null,
+  "providerInstanceId": "codex_codex_gym",
+  "model": "gpt-6-luna",
+  "options": [
+    {
+      "id": "reasoningEffort",
+      "value": "medium"
+    },
+    {
+      "id": "serviceTier",
+      "value": "default"
+    }
+  ],
+  "summary": "Live verification succeeded: **CAP-791-DfeS6O**, `19/19` passed, exit `0`. The capture’s before/after input digests match. ShellCheck and the tasks-phase analyzer also exited `0`; the analyzer reported the expected single 101-task guideline warning and no errors.\n\nReceipt: [receipt.txt](/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/live-capture/receipt.txt). Raw runner output and metadata: [CAP-791-DfeS6O](/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-791-DfeS6O).\n\nTasks bytes/mode/mtime, HEAD, index, STATUS.md hash, and both source hashes match the recorded values. The whole `git status` digest changed because `spec-run` created the actual capture directory; no task tick occurred.\n\nSkipped further suites and CI. No other source files were changed by me.",
+  "resultContextTransferId": "context-transfer:type:subagent_result:source-thread:thread%3Adelegated-task%3Acommand%253Amcp%253Afab79580-a405-41cc-8cf9-2b0c1f103a41%253Adelegate-task%253Asdd003-s28-o034-live-capture-luna-r1:target-thread:2ce93492-409f-4930-a9e5-173544a4c8c6:6d4cf5dc-5e31-4dec-b979-4cf0b6556b23",
+  "hasPendingQuestion": false,
+  "pendingApproval": null,
+  "waitTimedOut": false
+}

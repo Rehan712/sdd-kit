@@ -1,0 +1,49 @@
+[
+  {
+    "check": "opponent-waiver",
+    "command": [
+      "bash",
+      "scripts/spec-gate.sh",
+      "waiver",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline",
+      "opponent",
+      "24"
+    ],
+    "start": "2026-10-25T20:11:06.651395+00:00",
+    "end": "2026-10-25T20:11:09.619116+00:00",
+    "exit": 0,
+    "stdout": "authorized: opponent round 24\n",
+    "stderr": ""
+  },
+  {
+    "check": "reality-check-waiver",
+    "command": [
+      "bash",
+      "scripts/spec-gate.sh",
+      "waiver",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline",
+      "reality-check",
+      "4"
+    ],
+    "start": "2026-10-25T20:11:09.619564+00:00",
+    "end": "2026-10-25T20:11:09.860461+00:00",
+    "exit": 0,
+    "stdout": "authorized: reality-check round 4\n",
+    "stderr": ""
+  },
+  {
+    "check": "diff-whitespace",
+    "command": [
+      "git",
+      "diff",
+      "--check",
+      "--",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/STATUS.md"
+    ],
+    "start": "2026-10-25T20:11:09.860898+00:00",
+    "end": "2026-10-25T20:11:09.876647+00:00",
+    "exit": 0,
+    "stdout": "",
+    "stderr": ""
+  }
+]

@@ -1,0 +1,122 @@
+diff --git a/.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md b/.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md
+index f151da9..b20c6ba 100644
+--- a/.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md
++++ b/.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md
+@@ -1082,16 +1082,15 @@ keeps each edit task to at most five files instead of combining unrelated work.
+   - *Notes:* Closes reality-check round 3 gap 1 (`notes/verification/reports/reality-check-round3.md`). Test-only coverage of behavior the reviewer found correct; no runtime classifier change. No new gate round, floor or hosted-CI run is part of this task.
+   - *Evidence:* CAP-767-tGxtxB verified by spec-gate accept; return sha256:e40b2ee4cfe3f5b8421b16561a902d0b3a610a20388f36c0c1cbf4d278b48de8
+ 
+-- [x] **T031a5o1** — Classify untyped AC verification by executable and runner position
++- [ ] **T031a5o1** — Classify untyped AC verification by executable and runner position
+   - *Files:* `scripts/sdd-analyze.sh`, `tests/test-sdd-analyze.sh`
+-  - *Acceptance:* AC-004 fixtures require exit 0 plus the existing untyped AC Verify warning for build/typecheck/text-presence/file-existence commands, including bare and absolute/relative grep/rg/diff executables, even when arguments or attached/spaced input/output redirection targets name tests or runners; neutral redirect filenames must not hide weak commands; genuine shell/node/cargo/pytest/bats and package test runners and custom assertions with tool paths as operands remain clean with ordinary and interleaved redirections, and explicit test/assertion/static/manual family controls remain valid.
++  - *Acceptance:* AC-004 public fixtures require exit 0 and the existing untyped AC Verify warning for bare and directory-qualified grep/rg/diff, tsc --noEmit, npm typecheck/build and builtin file-existence checks across simple unquoted Bash 3.2 redirects (`<`, `>`, `>>`, `>|`, `<>`, `<&`, `>&`, `&>`), attached/spaced operator and target boundaries, and operators interleaved with arguments. Neutral filenames and test/runner-looking targets or operands must not hide weak commands. Genuine shell/script/node/cargo/pytest/bats/package runners and custom assertions stay clean; all prior 108 weak/56 clean cases and four explicit test/assertion/static/manual controls remain valid.
+   - *Verify kind:* test
+   - *Tests:* `tests/test-sdd-analyze.sh::test_verification_bindings`
+   - *Verify:* `bash tests/test-sdd-analyze.sh` → all suites `passed`, exit 0
+   - *Reuse:* local
+   - *Refs:* REQ-005, AC-004, FM-001, INV-005, plan §3.1, §7
+-  - *Notes:* O-034, opponent round 24, verification-command-classification: retain the runner-position and simple unquoted redirection fixes; independent quality r2 requires grep/rg/diff at the executable position with optional directories, without treating tool paths in operands as commands. Same task reopened and current Evidence cleared; CAP-792-l5lK98/source dfa8f89669e39310c4b0a342c28091dbd01abb0cbdfbca8e34369977c9533a63 and canonical return sha256:89f9dca7497de37fdb29ba97009fe2cd212fd1da35ec0ef3ff1d9637688c9f7a remain historical, backed up with the prior task bytes and accepted receipt under notes/verification/reports/s28-o034-fix/review-r2-correction/before/. Correction receipts are in the same review-r2-correction directory. O-032 remains open. Fresh capture/acceptance and independent MAX quality r3 belong to the parent; this editing batch performs none of those or any gate/floor/hosted-CI execution.
+-  - *Evidence:* CAP-793-x82v97 verified by spec-gate accept; return sha256:32df8af79290cfcfee6fc84915c4fc9d0726aecab2404736bc0b195da6215083
++  - *Notes:* O-034 remains open after formal opponent round 25 (Prior O-034, verification-command-classification, wrong-result, implementation-error; Blocks AC-004/REQ-005). Correct the shared normalization and weak/runner operator-word boundaries at scripts/sdd-analyze.sh:292, :293, :295, :313 and tests/test-sdd-analyze.sh:668; retain original round-24 and quality r1/r2/r3 cases. Same T031a5o1 reopened with current Evidence cleared only in the external candidate. Prior accepted CAP-793-x82v97/return sha256:32df8af79290cfcfee6fc84915c4fc9d0726aecab2404736bc0b195da6215083 and exact prior task bytes are historical, preserved under notes/verification/reports/s33-o034-redirection-boundary/before/. Candidate proof and limits are in that directory. O-032 remains open and unchanged. Parent owns post-seal live application, fresh no-tick capture/acceptance and independent MAX quality r4; this candidate performs no gate/floor/CI execution or subsequent-round authorization.
+ 
+ - [x] **T031a6** — Invalidate saved success and carried PASS on real input revisions
+   - *Files:* `tests/test-gate-contracts.sh`, `.specify/specs/003-gate-round-reduction-and-token-discipline/plan.md`
+diff --git a/scripts/sdd-analyze.sh b/scripts/sdd-analyze.sh
+index 1c109be..38e31d9 100755
+--- a/scripts/sdd-analyze.sh
++++ b/scripts/sdd-analyze.sh
+@@ -288,15 +288,15 @@ awk -v RED="$RED" -v YELLOW="$YELLOW" -v RESET="$RESET" "$_VF_AWK_TEXT"'
+   }
+   function weak_verify(command, low) {
+     low=tolower(command)
+-    # shortcut: handle simple unquoted redirections and direct runners, use Verify kind for complex wrappers.
+-    gsub(/(^|[[:space:]])[0-9]+[<>]+[[:space:]]*[^[:space:]<>&|;()"\\\047]+/, " ", low)
+-    gsub(/[<>]+[[:space:]]*[^[:space:]<>&|;()"\\\047]+/, " ", low)
++    # shortcut: handle unquoted file/FD redirects and direct runners; use Verify kind for quoting, heredocs or wrappers.
++    gsub(/(^|[[:space:]])[0-9]+([<>]&|<>|>>|>\||[<>])[[:space:]]*[^[:space:]<>&|;()"\\\047]+/, " ", low)
++    gsub(/([<>]&|&>|<>|>>|>\||[<>])[[:space:]]*[^[:space:]<>&|;()"\\\047]+/, " ", low)
+     sub(/^[[:space:]]+/, "", low)
+-    if (low ~ /^([^[:space:]<>]*\/)?(grep|rg|diff)([[:space:]]|$)/) return 1
+-    if (low ~ /^(([^[:space:]<>]*\/)?(bash|sh|zsh)[[:space:]]+(-[euxv]+[[:space:]]+)*)?([^[:space:]<>]*\/)?tests?[\/.:_-][^[:space:]<>]*([[:space:]]|$)/ ||
+-        low ~ /^([^[:space:]<>]*\/)?(node[[:space:]]+--test|cargo[[:space:]]+test|(python[23]?[[:space:]]+-m[[:space:]]+)?pytest|bats)([[:space:]]|$)/ ||
+-        low ~ /^([^[:space:]<>]*\/)?((npm|pnpm|yarn)[[:space:]]+(run[[:space:]]+)?test|(bun|go|make)[[:space:]]+test)([[:space:]]|$)/) return 0
+-    return low ~ /typecheck|tsc[[:space:]]+--noemit|(^|[[:space:]])[^[:space:]]*build([[:space:]]|$)|test[[:space:]]+-[ef][[:space:]]/
++    if (low ~ /^([^[:space:]<>&|;()]*\/)?(grep|rg|diff)([[:space:]<>&|;()]|$)/) return 1
++    if (low ~ /^(([^[:space:]<>&|;()]*\/)?(bash|sh|zsh)[[:space:]]+(-[euxv]+[[:space:]]+)*)?([^[:space:]<>&|;()]*\/)?tests?[\/.:_-][^[:space:]<>&|;()]*([[:space:]<>&|;()]|$)/ ||
++        low ~ /^([^[:space:]<>&|;()]*\/)?(node[[:space:]]+--test|cargo[[:space:]]+test|(python[23]?[[:space:]]+-m[[:space:]]+)?pytest|bats)([[:space:]<>&|;()]|$)/ ||
++        low ~ /^([^[:space:]<>&|;()]*\/)?((npm|pnpm|yarn)[[:space:]]+(run[[:space:]]+)?test|(bun|go|make)[[:space:]]+test)([[:space:]<>&|;()]|$)/) return 0
++    return low ~ /typecheck|tsc[[:space:]]+--noemit|(^|[[:space:]])[^[:space:]]*build([[:space:]<>&|;()]|$)|test[[:space:]]+-[ef][[:space:]]/
+   }
+   function flush() {
+     if (id == "") return
+diff --git a/tests/test-sdd-analyze.sh b/tests/test-sdd-analyze.sh
+index 51e3a90..8924095 100644
+--- a/tests/test-sdd-analyze.sh
++++ b/tests/test-sdd-analyze.sh
+@@ -664,6 +664,30 @@ EOF
+   run_rc 0 "$ANALYZE" "$spec_dir"
+   assert_contains "$OUT" consistent 'AC-003: quoted/fenced examples do not add definitions'
+ 
++  # O-034: simple Bash 3.2 operators end words even without whitespace.
++  local weak_redirect_cases=() runner_redirect_cases=() redirect prefix tool spacing
++  for tool in grep rg diff; do
++    for prefix in '' /usr/bin/ ./tools/ tests/; do
++      for redirect in '>|out.txt' ' >|out.txt' '>| out.txt' ' >| out.txt'; do
++        weak_redirect_cases+=("$prefix$tool$redirect old new")
++      done
++    done
++  done
++  for redirect in '<input.txt' '>out.txt' '>>out.txt' '>|out.txt' '<>input.txt' '<&0' '>&1' '&>out.txt'; do
++    for spacing in '' ' '; do
++      for fixture in 'grepREDIRECT AC-001 README.md' 'rg AC-001REDIRECT README.md' \
++        'diff oldREDIRECT new' 'tscREDIRECT --noEmit' 'npm runREDIRECT typecheck' \
++        'npmREDIRECT run build' 'testREDIRECT -e README.md' 'test -fREDIRECT README.md'; do
++        weak_redirect_cases+=("${fixture/REDIRECT/$spacing$redirect}")
++      done
++      for fixture in 'bashREDIRECT tests/typecheck.sh' 'nodeREDIRECT --test test/build.js' \
++        'cargo testREDIRECT --test typecheck' 'python3 -mREDIRECT pytest tests/build.py' \
++        'npm runREDIRECT test -- --grep typecheck' './tests/check-typecheck.shREDIRECT /usr/bin/grep'; do
++        runner_redirect_cases+=("${fixture/REDIRECT/$spacing$redirect}")
++      done
++    done
++  done
++
+   # AC-004/O-034: arguments and redirection targets do not become runners.
+   for fixture in \
+     'npm run build' 'npm run typecheck' 'tsc --noEmit' 'grep AC-001 README.md' \
+@@ -719,9 +743,13 @@ EOF
+     'grep>tools/bash tests/typecheck.sh' 'grep >tools/bash tests/typecheck.sh' \
+     'grep<tests/check.sh typecheck.txt' 'grep <tests/check.sh typecheck.txt' \
+     'grep>tests/check.sh typecheck.txt' 'grep >tests/check.sh typecheck.txt' \
+-    'tsc 2>output.txt --noEmit' 'npm2>output.txt test typecheck.txt'; do
++    'tsc 2>output.txt --noEmit' 'npm2>output.txt test typecheck.txt' \
++    'npm&>tests/typecheck.log run build' 'tsc>&tests/check.log --noEmit' \
++    'npm 2&>out.txt test typecheck.txt' \
++    "${weak_redirect_cases[@]}"; do
+     spec_dir="$(make_spec_dir)"
+-    verification_edit_fixture "$spec_dir/tasks.md" "s|\`node --test test/thing.test.js\`|\`$fixture\`|"
++    value="${fixture//&/\\&}"; value="${value//|/\\|}"
++    verification_edit_fixture "$spec_dir/tasks.md" "s|\`node --test test/thing.test.js\`|\`$value\`|"
+     run_rc 0 "$ANALYZE" "$spec_dir"
+     assert_contains "$OUT" 'untyped AC Verify' "AC-004: untyped $fixture warns without breaking legacy"
+     assert_contains "$OUT" 'warning(s), 0 errors' "AC-004: $fixture remains warning-only"
+@@ -755,9 +783,16 @@ EOF
+     '/usr/bin/node --test test/check.js ../tools/diff' \
+     'node scripts/assert-content.js /usr/bin/grep AC-001 README.md' \
+     'node scripts/assert-content.js ./tools/rg AC-001 README.md' \
+-    'node scripts/assert-content.js ../tools/diff actual.txt expected.txt'; do
++    'node scripts/assert-content.js ../tools/diff actual.txt expected.txt' \
++    'bash&>tests/build.log tests/typecheck.sh' 'npm>&tests/typecheck.log run test' \
++    'node>|tests/build.log --test test/typecheck.js' 'pytest<>tests/build.txt tests/typecheck.py' \
++    'bats&>out.txt tests/build.bats' 'pnpm>|out.txt test --filter typecheck' \
++    'yarn run>|out.txt test --grep typecheck' 'bun>|out.txt test tests/build.ts' \
++    'go test>|out.txt ./typecheck' 'make>|out.txt test TARGET=typecheck' \
++    "${runner_redirect_cases[@]}"; do
+     spec_dir="$(make_spec_dir)"
+-    verification_edit_fixture "$spec_dir/tasks.md" "s|\`node --test test/thing.test.js\`|\`$fixture\`|"
++    value="${fixture//&/\\&}"; value="${value//|/\\|}"
++    verification_edit_fixture "$spec_dir/tasks.md" "s|\`node --test test/thing.test.js\`|\`$value\`|"
+     run_rc 0 "$ANALYZE" "$spec_dir"
+     assert_not_contains "$OUT" 'untyped AC Verify' "AC-004: $fixture has no weak executable"
+     assert_contains "$OUT" consistent "AC-004: $fixture stays clean"

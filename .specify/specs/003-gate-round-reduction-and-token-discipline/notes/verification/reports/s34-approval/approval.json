@@ -1,0 +1,42 @@
+{
+  "recordedAt": "2026-10-28T09:02:49Z",
+  "timestampKind": "parent-observed recording time",
+  "question": "Do you approve opponent round 26 after completed opponent round 25, to independently reassess the reviewed O-034 repair on fresh matching evidence, using gpt-6.1-sol MAX on the current provider? Required by spec.md REQ-012; this authorizes OP26 only.",
+  "actualUserAnswer": "Approve opponent round 26 after completed round 25",
+  "gate": "opponent",
+  "round": 26,
+  "after": 25,
+  "head": "2049f65960cc91e9e30bbd5ff1e11fc0fdf7cbd9",
+  "protectedBefore": {
+    "/Users/babar/projects/sdd-kit-public/.git/worktrees/003-gate-round-reduction-and-token-discipline/index": {
+      "sha256": "c492d7ea95abf8e8c335001f20c62ff50bc6f1e2179d7a07d30811181b3dd700",
+      "mode": 420,
+      "mtimeNs": 1792957592613445716
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md": {
+      "sha256": "0f79daf37ac3c2330f74c6a2bacf31607def0600528a8955fcfd721d6fb3131c",
+      "mode": 384,
+      "mtimeNs": 1793088292733053436
+    },
+    "scripts/sdd-analyze.sh": {
+      "sha256": "c43de9e92df5657a3a94091a73bccb9abe37f9e1c3c3f6ccf6cb1cfa64f3a3f2",
+      "mode": 493,
+      "mtimeNs": 1793088116020109886
+    },
+    "tests/test-sdd-analyze.sh": {
+      "sha256": "2f9efc4e4b24da1ca1bcef710e82ef852f1e463adbae0263f54d585f333bcd4e",
+      "mode": 420,
+      "mtimeNs": 1793088116020177928
+    },
+    "tests/test-gate-contracts.sh": {
+      "sha256": "7bc13dde14004bf4ba967c0f64ec120b19bdde641643a6a7436d154c222f893c",
+      "mode": 420,
+      "mtimeNs": 1792956408250063378
+    }
+  },
+  "statusBefore": {
+    "sha256": "2519b0a153bd7a8548b1b5d6abf3cefaddd6da93d8c5670efba4322dd4c8be1b",
+    "mode": 384,
+    "mtimeNs": 1793047789555914145
+  }
+}

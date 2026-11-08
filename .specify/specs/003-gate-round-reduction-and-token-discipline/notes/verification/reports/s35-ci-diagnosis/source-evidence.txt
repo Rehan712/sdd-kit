@@ -1,0 +1,219 @@
+tests/test-sdd-analyze.sh:167: verification_edit_fixture() {
+tests/test-sdd-analyze.sh:168:   sed "$2" "$1" > "$1.tmp" && mv "$1.tmp" "$1"
+tests/test-sdd-analyze.sh:169: }
+tests/test-sdd-analyze.sh:667:   # O-034: simple Bash 3.2 operators end words even without whitespace.
+tests/test-sdd-analyze.sh:668:   local weak_redirect_cases=() runner_redirect_cases=() redirect prefix tool spacing
+tests/test-sdd-analyze.sh:669:   for tool in grep rg diff; do
+tests/test-sdd-analyze.sh:670:     for prefix in '' /usr/bin/ ./tools/ tests/; do
+tests/test-sdd-analyze.sh:671:       for redirect in '>|out.txt' ' >|out.txt' '>| out.txt' ' >| out.txt'; do
+tests/test-sdd-analyze.sh:672:         weak_redirect_cases+=("$prefix$tool$redirect old new")
+tests/test-sdd-analyze.sh:673:       done
+tests/test-sdd-analyze.sh:674:     done
+tests/test-sdd-analyze.sh:675:   done
+tests/test-sdd-analyze.sh:676:   for redirect in '<input.txt' '>out.txt' '>>out.txt' '>|out.txt' '<>input.txt' '<&0' '>&1' '&>out.txt'; do
+tests/test-sdd-analyze.sh:677:     for spacing in '' ' '; do
+tests/test-sdd-analyze.sh:678:       for fixture in 'grepREDIRECT AC-001 README.md' 'rg AC-001REDIRECT README.md' \
+tests/test-sdd-analyze.sh:679:         'diff oldREDIRECT new' 'tscREDIRECT --noEmit' 'npm runREDIRECT typecheck' \
+tests/test-sdd-analyze.sh:680:         'npmREDIRECT run build' 'testREDIRECT -e README.md' 'test -fREDIRECT README.md'; do
+tests/test-sdd-analyze.sh:681:         weak_redirect_cases+=("${fixture/REDIRECT/$spacing$redirect}")
+tests/test-sdd-analyze.sh:682:       done
+tests/test-sdd-analyze.sh:683:       for fixture in 'bashREDIRECT tests/typecheck.sh' 'nodeREDIRECT --test test/build.js' \
+tests/test-sdd-analyze.sh:684:         'cargo testREDIRECT --test typecheck' 'python3 -mREDIRECT pytest tests/build.py' \
+tests/test-sdd-analyze.sh:685:         'npm runREDIRECT test -- --grep typecheck' './tests/check-typecheck.shREDIRECT /usr/bin/grep'; do
+tests/test-sdd-analyze.sh:686:         runner_redirect_cases+=("${fixture/REDIRECT/$spacing$redirect}")
+tests/test-sdd-analyze.sh:687:       done
+tests/test-sdd-analyze.sh:688:     done
+tests/test-sdd-analyze.sh:689:   done
+tests/test-sdd-analyze.sh:749:     "${weak_redirect_cases[@]}"; do
+tests/test-sdd-analyze.sh:750:     spec_dir="$(make_spec_dir)"
+tests/test-sdd-analyze.sh:751:     value="${fixture//&/\\&}"; value="${value//|/\\|}"
+tests/test-sdd-analyze.sh:752:     verification_edit_fixture "$spec_dir/tasks.md" "s|\`node --test test/thing.test.js\`|\`$value\`|"
+tests/test-sdd-analyze.sh:753:     run_rc 0 "$ANALYZE" "$spec_dir"
+tests/test-sdd-analyze.sh:754:     assert_contains "$OUT" 'untyped AC Verify' "AC-004: untyped $fixture warns without breaking legacy"
+tests/test-sdd-analyze.sh:755:     assert_contains "$OUT" 'warning(s), 0 errors' "AC-004: $fixture remains warning-only"
+tests/test-sdd-analyze.sh:792:     "${runner_redirect_cases[@]}"; do
+tests/test-sdd-analyze.sh:793:     spec_dir="$(make_spec_dir)"
+tests/test-sdd-analyze.sh:794:     value="${fixture//&/\\&}"; value="${value//|/\\|}"
+tests/test-sdd-analyze.sh:795:     verification_edit_fixture "$spec_dir/tasks.md" "s|\`node --test test/thing.test.js\`|\`$value\`|"
+tests/test-sdd-analyze.sh:796:     run_rc 0 "$ANALYZE" "$spec_dir"
+tests/test-sdd-analyze.sh:797:     assert_not_contains "$OUT" 'untyped AC Verify' "AC-004: $fixture has no weak executable"
+tests/test-sdd-analyze.sh:798:     assert_contains "$OUT" consistent "AC-004: $fixture stays clean"
+scripts/sdd-analyze.sh:281: awk -v RED="$RED" -v YELLOW="$YELLOW" -v RESET="$RESET" "$_VF_AWK_TEXT"'
+scripts/sdd-analyze.sh:282:   function verify_command(s, rest,close_pos) {
+scripts/sdd-analyze.sh:283:     sub(/^.*\*Verify:\*[[:space:]]*/,"",s)
+scripts/sdd-analyze.sh:284:     if (substr(s,1,1)!="`") return ""
+scripts/sdd-analyze.sh:285:     rest=substr(s,2); close_pos=index(rest,"`")
+scripts/sdd-analyze.sh:286:     if (close_pos<=1) return ""
+scripts/sdd-analyze.sh:287:     return substr(rest,1,close_pos-1)
+scripts/sdd-analyze.sh:288:   }
+scripts/sdd-analyze.sh:289:   function weak_verify(command, low) {
+scripts/sdd-analyze.sh:290:     low=tolower(command)
+scripts/sdd-analyze.sh:291:     # shortcut: handle unquoted file/FD redirects and direct runners; use Verify kind for quoting, heredocs or wrappers.
+scripts/sdd-analyze.sh:292:     gsub(/(^|[[:space:]])[0-9]+([<>]&|<>|>>|>\||[<>])[[:space:]]*[^[:space:]<>&|;()"\\\047]+/, " ", low)
+scripts/sdd-analyze.sh:293:     gsub(/([<>]&|&>|<>|>>|>\||[<>])[[:space:]]*[^[:space:]<>&|;()"\\\047]+/, " ", low)
+scripts/sdd-analyze.sh:294:     sub(/^[[:space:]]+/, "", low)
+scripts/sdd-analyze.sh:295:     if (low ~ /^([^[:space:]<>&|;()]*\/)?(grep|rg|diff)([[:space:]<>&|;()]|$)/) return 1
+scripts/sdd-analyze.sh:296:     if (low ~ /^(([^[:space:]<>&|;()]*\/)?(bash|sh|zsh)[[:space:]]+(-[euxv]+[[:space:]]+)*)?([^[:space:]<>&|;()]*\/)?tests?[\/.:_-][^[:space:]<>&|;()]*([[:space:]<>&|;()]|$)/ ||
+scripts/sdd-analyze.sh:297:         low ~ /^([^[:space:]<>&|;()]*\/)?(node[[:space:]]+--test|cargo[[:space:]]+test|(python[23]?[[:space:]]+-m[[:space:]]+)?pytest|bats)([[:space:]<>&|;()]|$)/ ||
+scripts/sdd-analyze.sh:298:         low ~ /^([^[:space:]<>&|;()]*\/)?((npm|pnpm|yarn)[[:space:]]+(run[[:space:]]+)?test|(bun|go|make)[[:space:]]+test)([[:space:]<>&|;()]|$)/) return 0
+scripts/sdd-analyze.sh:299:     return low ~ /typecheck|tsc[[:space:]]+--noemit|(^|[[:space:]])[^[:space:]]*build([[:space:]<>&|;()]|$)|test[[:space:]]+-[ef][[:space:]]/
+scripts/sdd-analyze.sh:300:   }
+scripts/sdd-analyze.sh:310:     if (!has_ver && !is_gate && !oos && stage != "Ship") {
+scripts/sdd-analyze.sh:311:       printf "  %s!%s task %s has no *Verify:* line (exact command, or manual: <what to observe>)\n", YELLOW, RESET, id; warns++
+scripts/sdd-analyze.sh:312:     }
+scripts/sdd-analyze.sh:313:     if (has_ver && !has_kind && refs_text ~ /AC-[0-9][0-9][0-9]/ && weak_verify(verify_command(verify_text))) {
+scripts/sdd-analyze.sh:314:       printf "  %s!%s task %s has an untyped AC Verify that offers only build/typecheck/text-presence evidence\n", YELLOW, RESET, id; warns++
+scripts/sdd-analyze.sh:315:     }
+tests/helpers.sh:74: _t_fail=0
+tests/helpers.sh:75: t_fail() { printf 'assert: %s\n' "$1"; _t_fail=1; }
+tests/helpers.sh:76: 
+tests/helpers.sh:77: # assert_eq <expected> <actual> [label]
+tests/helpers.sh:78: assert_eq() {
+tests/helpers.sh:79:   [[ "$1" == "$2" ]] && return 0
+tests/helpers.sh:80:   t_fail "${3:-values differ}
+tests/helpers.sh:81:     expected: $1
+tests/helpers.sh:82:     actual:   $2"
+tests/helpers.sh:83: }
+tests/helpers.sh:84: 
+tests/helpers.sh:85: # assert_contains <haystack> <needle> [label]
+tests/helpers.sh:86: assert_contains() {
+tests/helpers.sh:87:   case "$1" in *"$2"*) return 0 ;; esac
+tests/helpers.sh:88:   t_fail "${3:-output} missing substring: $2
+tests/helpers.sh:89:     in: $(printf '%s' "$1" | head -c 600)"
+tests/helpers.sh:90: }
+tests/helpers.sh:91: 
+tests/helpers.sh:92: # assert_not_contains <haystack> <needle> [label]
+tests/helpers.sh:93: assert_not_contains() {
+tests/helpers.sh:94:   case "$1" in
+tests/helpers.sh:95:     *"$2"*) t_fail "${3:-output} unexpectedly contains: $2" ;;
+tests/helpers.sh:96:   esac
+tests/helpers.sh:97: }
+tests/helpers.sh:98: 
+tests/helpers.sh:99: # run_rc <expected-rc> <cmd...> — run, capture combined output in $OUT,
+tests/helpers.sh:100: # assert the exit code. $OUT stays available for content assertions.
+tests/helpers.sh:101: run_rc() {
+tests/helpers.sh:102:   local want="$1" got
+tests/helpers.sh:103:   shift
+tests/helpers.sh:104:   OUT="$("$@" 2>&1)"
+tests/helpers.sh:105:   got=$?
+tests/helpers.sh:106:   [[ "$got" -eq "$want" ]] && return 0
+tests/helpers.sh:107:   t_fail "expected exit $want, got $got: $*
+tests/helpers.sh:108:     output: $(printf '%s' "$OUT" | head -c 600)"
+tests/helpers.sh:200: - [ ] **T002** — Implement the thing endpoint
+tests/helpers.sh:201:   - *Files:* `src/thing.js`
+tests/helpers.sh:202:   - *Acceptance:* unit test passes
+tests/helpers.sh:203:   - *Verify:* `node --test test/thing.test.js` → "pass 1"
+tests/helpers.sh:204:   - *Refs:* REQ-001, AC-001
+tests/helpers.sh:605: t_run_all() {
+tests/helpers.sh:606:   local fn total=0 failed=0 out rc
+tests/helpers.sh:607:   for fn in $(declare -F | awk '{print $3}' | grep '^test_'); do
+tests/helpers.sh:608:     total=$((total+1))
+tests/helpers.sh:609:     # No "test"/"spec" in the sandbox name — scripts under test use path
+tests/helpers.sh:610:     # heuristics, and the harness must never satisfy them by accident.
+tests/helpers.sh:611:     SANDBOX="$(mktemp -d "${TMPDIR:-/tmp}/sddkit.XXXXXX")" || exit 1
+tests/helpers.sh:612:     export SANDBOX
+tests/helpers.sh:613:     out="$( ( _t_fail=0; "$fn"; exit "$_t_fail" ) 2>&1 )"
+tests/helpers.sh:614:     rc=$?
+tests/helpers.sh:615:     # A fixture that could not build its repository fails its test by name,
+tests/helpers.sh:616:     # whatever the test did with the status (fixture_build_failed).
+tests/helpers.sh:617:     if [[ -s "$SANDBOX/.fixture-build-failed" ]]; then
+tests/helpers.sh:618:       rc=1
+tests/helpers.sh:619:       out="$out
+tests/helpers.sh:620: assert: a fixture could not be built: $(tr '\n' ' ' < "$SANDBOX/.fixture-build-failed")"
+tests/helpers.sh:621:     fi
+tests/helpers.sh:622:     if (( rc == 0 )); then
+tests/helpers.sh:623:       echo "  ok   $fn"
+tests/helpers.sh:624:     else
+tests/helpers.sh:625:       failed=$((failed+1))
+tests/helpers.sh:626:       echo "  FAIL $fn"
+tests/helpers.sh:627:       [[ -n "$out" ]] && printf '%s\n' "$out" | sed 's/^/       /'
+tests/helpers.sh:628:     fi
+tests/helpers.sh:629:     rm -rf "$SANDBOX"
+tests/helpers.sh:630:   done
+tests/helpers.sh:631:   echo "  -- $((total-failed))/$total passed"
+tests/helpers.sh:632:   (( failed == 0 ))
+tests/run.sh:47: rc=0
+tests/run.sh:48: files=0
+tests/run.sh:49: for f in ${suites[@]+"${suites[@]}"}; do
+tests/run.sh:50:   [[ -f "$f" ]] || continue
+tests/run.sh:51:   if [[ -n "$FILTER" && "$(basename "$f")" != *"$FILTER"* ]]; then continue; fi
+tests/run.sh:52:   files=$((files+1))
+tests/run.sh:53:   echo "== $(basename "$f")"
+tests/run.sh:54:   # ${BASH} keeps the interpreter: `/bin/bash tests/run.sh` (macOS 3.2) must
+tests/run.sh:55:   # not silently re-exec the suites under a newer PATH bash.
+tests/run.sh:56:   "${BASH:-bash}" "$f" || rc=1
+tests/run.sh:57: done
+tests/run.sh:58: 
+tests/run.sh:59: if (( files == 0 )); then
+tests/run.sh:60:   echo "no test file matches '$FILTER'" >&2
+tests/run.sh:61:   exit 2
+tests/run.sh:62: fi
+tests/run.sh:63: exit "$rc"
+.github/workflows/ci.yml:21:   tests:
+.github/workflows/ci.yml:22:     strategy:
+.github/workflows/ci.yml:23:       fail-fast: false
+.github/workflows/ci.yml:24:       matrix:
+.github/workflows/ci.yml:25:         os: [ubuntu-latest, macos-latest]
+.github/workflows/ci.yml:26:     runs-on: ${{ matrix.os }}
+.github/workflows/ci.yml:27:     steps:
+.github/workflows/ci.yml:28:       - uses: actions/checkout@v5
+.github/workflows/ci.yml:29:       - name: run the test suite
+.github/workflows/ci.yml:30:         run: tests/run.sh
+.github/workflows/ci.yml:31: 
+.github/workflows/ci.yml:32:   tests-bash32:
+.github/workflows/ci.yml:33:     # macOS ships /bin/bash 3.2. Shimming `bash` on PATH to it makes every
+.github/workflows/ci.yml:34:     # `#!/usr/bin/env bash` script under test actually run on 3.2, enforcing
+.github/workflows/ci.yml:35:     # the kit's compatibility claim instead of assuming it.
+.github/workflows/ci.yml:36:     runs-on: macos-latest
+.github/workflows/ci.yml:37:     steps:
+.github/workflows/ci.yml:38:       - uses: actions/checkout@v5
+.github/workflows/ci.yml:39:       - name: run the test suite under bash 3.2
+.github/workflows/ci.yml:40:         run: |
+.github/workflows/ci.yml:41:           mkdir -p "$RUNNER_TEMP/b32shim"
+.github/workflows/ci.yml:42:           ln -sf /bin/bash "$RUNNER_TEMP/b32shim/bash"
+.github/workflows/ci.yml:43:           PATH="$RUNNER_TEMP/b32shim:$PATH" /bin/bash tests/run.sh
+.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s34/hosted-s34-audit/collect-hosted.py:31:  discovered=json.loads(run("selected-run-query",["gh","api","repos/Rehan712/sdd-kit/actions/runs/"+str(wanted_run)],net))
+.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s34/hosted-s34-audit/collect-hosted.py:32:  assert discovered["id"]==wanted_run and discovered["run_attempt"]==wanted_attempt
+.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s34/hosted-s34-audit/collect-hosted.py:33:  assert discovered["head_sha"]==head and discovered["event"]=="pull_request" and discovered["path"]==".github/workflows/ci.yml"
+.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s34/hosted-s34-audit/collect-hosted.py:34:  assert discovered["status"]=="completed" and discovered["conclusion"]=="success","selected CI is not completed success"
+.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s34/hosted-s34-audit/collect-hosted.py:35:  runid=discovered["id"]
+.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s34/hosted-s34-audit/collect-hosted.py:36:  (a/"selected-run.json").write_text(json.dumps(discovered,indent=2)+"\n")
+.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s34/hosted-s34-audit/collect-hosted.py:37:  hosted=a/"hosted";assert not hosted.exists()
+.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s34/hosted-s34-audit/collect-hosted.py:38:  diagnostics=run("collector",["bash",str(p/"collect.sh"),str(runid),str(hosted),head],net)
+.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s34/hosted-s34-audit/collect-hosted.py:39:  assert b"collect result: PASS" in diagnostics and b"FAIL:" not in diagnostics,"collector did not report PASS"
+.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s34/hosted-s34-audit/collect-hosted.py:40:  actual=json.loads((hosted/"run.json").read_text());jobs=json.loads((hosted/"jobs.json").read_text())
+.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s34/hosted-s34-audit/collect-hosted.py:41:  assert actual["id"]==runid and actual["run_attempt"]==discovered["run_attempt"] and actual["workflow_id"]==discovered["workflow_id"]
+.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s34/hosted-s34-audit/collect-hosted.py:42:  assert actual["status"]=="completed" and actual["conclusion"]=="success" and actual["head_sha"]==head and actual["event"]=="pull_request"
+.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s34/hosted-s34-audit/collect-hosted.py:43:  assert actual["path"]==".github/workflows/ci.yml"
+.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s34/hosted-s34-audit/collect-hosted.py:44:  expected={"shellcheck","tests (ubuntu-latest)","tests (macos-latest)","tests-bash32"}
+.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s34/hosted-s34-audit/collect-hosted.py:45:  assert jobs["total_count"]==len(jobs["jobs"])==4 and {j["name"] for j in jobs["jobs"]}==expected
+.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s34/hosted-s34-audit/collect-hosted.py:46:  bound=[];merges=set()
+.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s34/hosted-s34-audit/collect-hosted.py:47:  for j in jobs["jobs"]:
+.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s34/hosted-s34-audit/collect-hosted.py:48:   assert j["status"]=="completed" and j["conclusion"]=="success" and j["run_id"]==runid and j["run_attempt"]==wanted_attempt and j["head_sha"]==head
+.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s34/hosted-s34-audit/collect-hosted.py:49:   safe=re.sub(r"[^A-Za-z0-9._-]","_",j["name"]);log=hosted/("job-"+safe+".log");raw=log.read_bytes()
+.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s34/hosted-s34-audit/collect-hosted.py:50:   fetched=set(re.findall(rb"git -c protocol.version=2 fetch [^\r\n]*?\+?([0-9a-f]{40}):refs/remotes/pull/21/merge",raw))
+.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s34/hosted-s34-audit/collect-hosted.py:51:   assert len(fetched)==1,(j["name"],"exactly one tested merge SHA required")
+.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s34/hosted-s34-audit/collect-hosted.py:52:   merge=next(iter(fetched)).decode();merges.add(merge)
+.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s34/hosted-s34-audit/collect-hosted.py:53:   checked=set(x.decode() for x in re.findall(rb"HEAD is now at ([0-9a-f]+)",raw))
+.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s34/hosted-s34-audit/collect-hosted.py:54:   assert len(checked)==1 and merge.startswith(next(iter(checked))),"checkout does not bind fetched merge"
+.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s34/hosted-s34-audit/collect-hosted.py:55:   # Checkout's final rev-parse output is the full SHA actually at HEAD.
+.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s34/hosted-s34-audit/collect-hosted.py:56:   assert re.search(rb"\[command\][^\r\n]*git log -1 --format=%H\r?\n[^\r\n]*"+merge.encode(),raw),"missing full checked-out HEAD confirmation"
+.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s34/hosted-s34-audit/collect-hosted.py:57:   bound.append(dict(id=j["id"],name=j["name"],status=j["status"],conclusion=j["conclusion"],url=j["html_url"],started_at=j["started_at"],completed_at=j["completed_at"],runner_name=j["runner_name"],labels=j["labels"],merge_sha=merge,checkout_short=next(iter(checked)),raw_log=str(log),raw_log_sha256=hashlib.sha256(raw).hexdigest(),raw_log_bytes=len(raw),ansi_escape_bytes=raw.count(b"\x1b")))
+.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s34/hosted-s34-audit/collect-hosted.py:58:  assert len(merges)==1,"matrix jobs tested different merge SHAs"
+.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s34/hosted-s34-audit/collect-hosted.py:59:  merge=next(iter(merges));commit=json.loads(run("tested-merge-commit",["gh","api","repos/Rehan712/sdd-kit/git/commits/"+merge],net))
+.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s34/hosted-s34-audit/collect-hosted.py:60:  assert commit["sha"]==merge and commit["tree"]["sha"]==tree and head in [x["sha"] for x in commit["parents"]]
+.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s34/collect.sh:12: gh api "repos/$repo/actions/runs/$run" > "$out/run.json" || { echo "run api failed"; exit 3; }
+.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s34/collect.sh:13: gh api "repos/$repo/actions/runs/$run/jobs?per_page=50" > "$out/jobs.json" || { echo "jobs api failed"; exit 3; }
+.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s34/collect.sh:19: while IFS=$'\t' read -r id name status conclusion runner labels started completed; do
+.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s34/collect.sh:20:   safe="$(printf '%s' "$name" | tr -c 'A-Za-z0-9._-' '_')"
+.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s34/collect.sh:21:   gh api "repos/$repo/actions/jobs/$id/logs" --allow-escape-sequences > "$out/job-$safe.log" 2> "$out/job-$safe.log.err"
+.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s34/collect.sh:22:   lrc=$?
+.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s34/collect.sh:23:   printf '\n== job %s (%s)\n' "$name" "$id"
+.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s34/collect.sh:24:   printf '  status=%s conclusion=%s runner=%s labels=%s\n  started=%s completed=%s log-fetch-exit=%s log-bytes=%s\n' \
+.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s34/collect.sh:25:     "$status" "$conclusion" "$runner" "$labels" "$started" "$completed" "$lrc" "$(wc -c < "$out/job-$safe.log" | tr -d ' ')"
+.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s34/collect.sh:26:   [[ "$conclusion" == success ]] || fail=1
+.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s34/collect.sh:27:   [[ "$lrc" == 0 ]] || fail=1
+.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s34/collect.sh:48:   tree="$(gh api "repos/$repo/git/commits/$sha" --jq .tree.sha)"
+.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s34/collect.sh:49:   parents="$(gh api "repos/$repo/git/commits/$sha" --jq '[.parents[].sha]|join(",")')"
+.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s34/collect.sh:50:   printf 'merge %s tree=%s parents=%s\n' "$sha" "$tree" "$parents"
+.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s34/collect.sh:51:   [[ "$tree" == "$want_tree" ]] || { echo "FAIL: tested merge tree differs from snapshot tree"; fail=1; }

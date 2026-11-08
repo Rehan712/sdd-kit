@@ -1,0 +1,80 @@
+{
+  "before": {
+    "files": {
+      "HEAD": {
+        "mode": "0644",
+        "mtime_ns": 1788654328953442318,
+        "path": "/Users/babar/projects/sdd-kit-public/.git/worktrees/003-gate-round-reduction-and-token-discipline/HEAD",
+        "sha256": "36b441e5337734d73e547a921b682069ccd54788152cff695f469a8e54e84134",
+        "size": 67
+      },
+      "STATUS": {
+        "mode": "0600",
+        "mtime_ns": 1793047789555914145,
+        "path": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/STATUS.md",
+        "sha256": "2519b0a153bd7a8548b1b5d6abf3cefaddd6da93d8c5670efba4322dd4c8be1b",
+        "size": 774360
+      },
+      "analyzer": {
+        "mode": "0755",
+        "mtime_ns": 1793045575939407052,
+        "path": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+        "sha256": "0c26c101666aa8559814f40c7376da6b07290d8e2830b230a54b8eb01b4afdf7",
+        "size": 18753
+      },
+      "index": {
+        "mode": "0644",
+        "mtime_ns": 1792957592613445716,
+        "path": "/Users/babar/projects/sdd-kit-public/.git/worktrees/003-gate-round-reduction-and-token-discipline/index",
+        "sha256": "c492d7ea95abf8e8c335001f20c62ff50bc6f1e2179d7a07d30811181b3dd700",
+        "size": 2200525
+      },
+      "tasks": {
+        "mode": "0600",
+        "mtime_ns": 1793046003182732081,
+        "path": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md",
+        "sha256": "82fe00d7ef49b4d1b66ff65ef8ca1ed672d7c51dfbb8d94a63db4892a3a93894",
+        "size": 184095
+      },
+      "test": {
+        "mode": "0644",
+        "mtime_ns": 1792956408250063378,
+        "path": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-gate-contracts.sh",
+        "sha256": "7bc13dde14004bf4ba967c0f64ec120b19bdde641643a6a7436d154c222f893c",
+        "size": 265294
+      }
+    },
+    "head_commit": "2049f65960cc91e9e30bbd5ff1e11fc0fdf7cbd9",
+    "timestamp_utc": "2026-10-26T20:54:11.884421+00:00"
+  },
+  "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+  "failure": "Expected baseline mismatch: [{\"file\": \"test\", \"expected\": \"513308051dc409e42fe72c3c20d5a0fe4a1e7607e5373dcff404fd6993cf4516\", \"actual\": \"7bc13dde14004bf4ba967c0f64ec120b19bdde641643a6a7436d154c222f893c\"}]",
+  "model_selection": {
+    "model": "gpt-6.1-sol",
+    "options": [
+      {
+        "id": "reasoningEffort",
+        "value": "high"
+      },
+      {
+        "id": "serviceTier",
+        "value": "default"
+      }
+    ],
+    "parentThreadId": "thread:delegated-task:command%3Amcp%3Ae6315556-7380-4d31-903f-24b14ad55a20%3Adelegate-task%3Asdd003-s29-t029-fresh-worker-high-r1",
+    "provenance": "Live orchestrator_capabilities observed in this delegated worker",
+    "providerInstanceId": "codex_codex_gym"
+  },
+  "precondition_mismatches": [
+    {
+      "actual": "7bc13dde14004bf4ba967c0f64ec120b19bdde641643a6a7436d154c222f893c",
+      "expected": "513308051dc409e42fe72c3c20d5a0fe4a1e7607e5373dcff404fd6993cf4516",
+      "file": "test"
+    }
+  ],
+  "requested_runs": 1,
+  "run_count": 0,
+  "status": "failed",
+  "task": "T029",
+  "traceback": "Traceback (most recent call last):\n  File \"<stdin>\", line 27, in <module>\nAssertionError: Expected baseline mismatch: [{\"file\": \"test\", \"expected\": \"513308051dc409e42fe72c3c20d5a0fe4a1e7607e5373dcff404fd6993cf4516\", \"actual\": \"7bc13dde14004bf4ba967c0f64ec120b19bdde641643a6a7436d154c222f893c\"}]\n"
+}

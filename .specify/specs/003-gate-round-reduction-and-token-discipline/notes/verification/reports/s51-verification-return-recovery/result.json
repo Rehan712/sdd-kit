@@ -1,0 +1,133 @@
+{
+  "at": "2026-10-29T17:53:04.508607+00:00",
+  "task": "T031a5o1",
+  "capture": "CAP-843-YAhBBt",
+  "recovery_completed": true,
+  "new_genuine_HIGH_return": true,
+  "requested_identity": "codex_codex_gym/gpt-6.1-sol/HIGH/serviceTierdefault",
+  "substitutions": false,
+  "nested_agents": false,
+  "original_delegate_status": "failed",
+  "original_delegate_summary": "Selected model is at capacity. Please try a different model.",
+  "original_delegate_completed_successfully": false,
+  "original_native_capture_completed": true,
+  "original_local_finalizer_result_persisted": true,
+  "recovery_executed_suite": false,
+  "recovery_executed_capture": false,
+  "recovery_executed_focused_probes_or_static_checks": false,
+  "canonical_capture_count": 1,
+  "recovery_capture_count": 0,
+  "current_identity_and_bindings_independently_verified": true,
+  "actual_current_source": "3e70d8170d98f13c04f550c15942f70bdb487abf30ad629ff78db2048f077497",
+  "sealed_capture_suite_counts": [
+    "19/19"
+  ],
+  "sealed_capture_exit": 0,
+  "sealed_capture_no_tick": 1,
+  "capture_checks": {
+    "seal_all_seven_members_and_exact_framing": true,
+    "ledger_identical": true,
+    "seal_matches_original_proof": true,
+    "meta_nul_terminated_even_pairs": true,
+    "exact_argv": true,
+    "capture_id_cwd_repo": true,
+    "completed_once_no_tick_exit_zero": true,
+    "before_after_source_bytes_identical": true,
+    "before_after_source_metadata_hashes": true,
+    "raw_log_actual_19_of_19": true,
+    "raw_log_verification_binding_pass": true,
+    "output_digest_byte_count": true,
+    "original_delegate_failed_capacity": true,
+    "original_capture_one_native_invocation": true,
+    "original_invocation_outputs_match": true,
+    "native_stdout_equals_sealed_summary": true,
+    "original_recorded_commands_stdout_stderr_digests": true,
+    "41_existing_focused_checks_green": true,
+    "28_retained_op26_inputs": true,
+    "retained_red_16": true,
+    "retained_red_20": true,
+    "existing_actual_array_counts": true,
+    "all_old_array_cases_retained": true,
+    "bash32_bash52_on_off_existing_stdout_identical": true,
+    "four_explicit_kinds_existing_proof": true,
+    "fresh_actual_vf_snapshot_equals_capture": true,
+    "fresh_binding_snapshot_equals_capture": true,
+    "both_current_FM001_INV005_bindings": true,
+    "task_kind_test": true,
+    "current_task_unchecked_without_Evidence": true,
+    "summary_one_LF": true,
+    "reconstructed_canonical_body_identical_to_s50": true,
+    "original_finalizer_completed_receipt_not_delegate_success": true
+  },
+  "protection_checks": {
+    "all_preexisting_worktree_bytes_modes_mtimes_preserved": true,
+    "no_unexpected_new_files_or_symlinks": true,
+    "all_protected_external_files_preserved": true,
+    "no_new_protected_external_files": true,
+    "git_status_preserved_except_own_outputs_and_exact_parent_receipt": true,
+    "head_unchanged": true,
+    "global_refs_byte_identical_this_recovery": false,
+    "capture_lock_absent": true,
+    "capture_staging_absent": true,
+    "pending_bindings_absent": true,
+    "no_surviving_original_worker_finalizer_capture_analyzer": true
+  },
+  "historical_original_capture_checks": {
+    "only_original_two_authorized_changes": true,
+    "original_authorized_changes_match_s50_proof": true,
+    "evidence_exact_original_append": true,
+    "sequence_single_original_increment": true,
+    "all_original_saved_external_exact": true
+  },
+  "current_recovery_strict_preservation_passed": false,
+  "historical_strict_preservation_passed": false,
+  "historical_global_refs_byte_identical": false,
+  "historical_unknown_checkpoint_ref_preserved": {
+    "refs/t3/orchestration-v2/checkpoints/MTJlM2E2YWEzNGFmOGNhN2FiN2U1MGMwODY5MGMzMDU/ordinal/21": {
+      "before": null,
+      "after": "85406e82245b1fe962370a4d09f3d6125b9a767d"
+    }
+  },
+  "no_hidden_product_or_capture_retry": true,
+  "source_edits": false,
+  "tasks_edits": false,
+  "acceptance_or_tick": false,
+  "new_gate_floor_CI_PR_or_network": false,
+  "OP26_formal_state": "CHALLENGED",
+  "OP27_authorized": false,
+  "RC5_authorized": false,
+  "RC4_state": "blocked",
+  "O032_and_minors": "unchanged",
+  "gate_or_readiness_verdict_issued": false,
+  "worker_return_bytes": 742,
+  "worker_return_sha256": "fadc7d9f0b3d5464c74b84231c14ded708a7bcc21f932652a75ec21ebb6fb162",
+  "worker_return_byte_identical_to_s50": true,
+  "worker_return_one_terminal_LF": true,
+  "original_s50_result_file_preserved": true,
+  "receipt_references": [
+    "capture-proof.json",
+    "existing-execution-proof.json",
+    "protection-proof.json",
+    "command-records.json",
+    "inventory.before.json",
+    "inventory.after.json"
+  ],
+  "actual_invocation_identity_independently_read": {
+    "providerInstanceId": "codex_codex_gym",
+    "model": "gpt-6.1-sol",
+    "options": {
+      "reasoningEffort": "high",
+      "serviceTier": "default"
+    },
+    "receipt": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s51-verification-return-recovery-invocation.json",
+    "receipt_in_baseline": true,
+    "receipt_preserved": true
+  },
+  "recovery_new_unknown_checkpoint_ref_preserved": {
+    "refs/t3/orchestration-v2/checkpoints/MTJlM2E2YWEzNGFmOGNhN2FiN2U1MGMwODY5MGMzMDU/ordinal/22": {
+      "before": null,
+      "after": "bf5fc73a175da6ef343303c8a60ac08f6d8b6d61"
+    }
+  },
+  "strict_global_refs_byte_identical_this_recovery": false
+}

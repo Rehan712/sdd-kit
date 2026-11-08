@@ -1,0 +1,74 @@
+[
+  {
+    "name": "verify-before",
+    "argv": [
+      "/bin/bash",
+      "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s38/verify-prepublish.sh"
+    ],
+    "started": "2026-10-28T12:50:23.406953+00:00",
+    "ended": "2026-10-28T12:51:17.727493+00:00",
+    "seconds": 54.319,
+    "exit": 0
+  },
+  {
+    "name": "selected-run-query",
+    "argv": [
+      "gh",
+      "api",
+      "repos/Rehan712/sdd-kit/actions/runs/40684905884"
+    ],
+    "started": "2026-10-28T12:51:17.730915+00:00",
+    "ended": "2026-10-28T12:51:18.610320+00:00",
+    "seconds": 0.879,
+    "exit": 0
+  },
+  {
+    "name": "collector",
+    "argv": [
+      "bash",
+      "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s38/collect.sh",
+      "40684905884",
+      "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s38/hosted-s38-audit/hosted",
+      "25347ba729886ae0bea029c594ac00f0bc48e767"
+    ],
+    "started": "2026-10-28T12:51:18.611986+00:00",
+    "ended": "2026-10-28T12:51:26.029549+00:00",
+    "seconds": 7.417,
+    "exit": 0
+  },
+  {
+    "name": "tested-merge-commit",
+    "argv": [
+      "gh",
+      "api",
+      "repos/Rehan712/sdd-kit/git/commits/ffb6ebed7e8e42cdc35fc32a66e4cd2ec06cf062"
+    ],
+    "started": "2026-10-28T12:51:26.035868+00:00",
+    "ended": "2026-10-28T12:51:27.586543+00:00",
+    "seconds": 1.551,
+    "exit": 0
+  },
+  {
+    "name": "current-pr21",
+    "argv": [
+      "gh",
+      "api",
+      "repos/Rehan712/sdd-kit/pulls/21"
+    ],
+    "started": "2026-10-28T12:51:27.587542+00:00",
+    "ended": "2026-10-28T12:51:28.256681+00:00",
+    "seconds": 0.669,
+    "exit": 0
+  },
+  {
+    "name": "verify-after",
+    "argv": [
+      "/bin/bash",
+      "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s38/verify-prepublish.sh"
+    ],
+    "started": "2026-10-28T12:51:28.258953+00:00",
+    "ended": "2026-10-28T12:52:23.758519+00:00",
+    "seconds": 55.499,
+    "exit": 0
+  }
+]

@@ -1,0 +1,478 @@
+[
+  {
+    "kind": "weak",
+    "command": "npm run build"
+  },
+  {
+    "kind": "weak",
+    "command": "npm run typecheck"
+  },
+  {
+    "kind": "weak",
+    "command": "tsc --noEmit"
+  },
+  {
+    "kind": "weak",
+    "command": "grep AC-001 README.md"
+  },
+  {
+    "kind": "weak",
+    "command": "tsc --noEmit tests/unit.ts"
+  },
+  {
+    "kind": "weak",
+    "command": "npm run typecheck -- --project tests/tsconfig.json"
+  },
+  {
+    "kind": "weak",
+    "command": "grep AC-001 tests/check.sh"
+  },
+  {
+    "kind": "weak",
+    "command": "npm run build -- --outDir tests/build"
+  },
+  {
+    "kind": "weak",
+    "command": "test -e README.md"
+  },
+  {
+    "kind": "weak",
+    "command": "test -f README.md"
+  },
+  {
+    "kind": "weak",
+    "command": "grep pytest README.md"
+  },
+  {
+    "kind": "weak",
+    "command": "rg bats README.md"
+  },
+  {
+    "kind": "weak",
+    "command": "diff fixtures/test.txt actual.txt"
+  },
+  {
+    "kind": "weak",
+    "command": "grep test README.md"
+  },
+  {
+    "kind": "weak",
+    "command": "grep tests README.md"
+  },
+  {
+    "kind": "weak",
+    "command": "grep \"node --test\" README.md"
+  },
+  {
+    "kind": "weak",
+    "command": "grep \"cargo test\" README.md"
+  },
+  {
+    "kind": "weak",
+    "command": "grep AC-001 scripts/test-check.sh"
+  },
+  {
+    "kind": "weak",
+    "command": "test -e tests/check.sh"
+  },
+  {
+    "kind": "weak",
+    "command": "test -f tests/check.sh"
+  },
+  {
+    "kind": "weak",
+    "command": "rg /usr/bin/pytest README.md"
+  },
+  {
+    "kind": "weak",
+    "command": "diff fixtures/bats.txt actual.txt"
+  },
+  {
+    "kind": "weak",
+    "command": "bash --rcfile tests/env.sh -c \"npm run typecheck\""
+  },
+  {
+    "kind": "weak",
+    "command": "npm<tests/test-typecheck.txt run typecheck"
+  },
+  {
+    "kind": "weak",
+    "command": "npm <tests/test-typecheck.txt run typecheck"
+  },
+  {
+    "kind": "weak",
+    "command": "tsc>tests/test-typecheck.log --noEmit"
+  },
+  {
+    "kind": "weak",
+    "command": "tsc >tests/test-typecheck.log --noEmit"
+  },
+  {
+    "kind": "weak",
+    "command": "grep<tools/pytest typecheck"
+  },
+  {
+    "kind": "weak",
+    "command": "grep <tools/pytest typecheck"
+  },
+  {
+    "kind": "weak",
+    "command": "grep<tools/npm test typecheck.txt"
+  },
+  {
+    "kind": "weak",
+    "command": "grep <tools/npm test typecheck.txt"
+  },
+  {
+    "kind": "weak",
+    "command": "npm<tests/check.txt run typecheck"
+  },
+  {
+    "kind": "weak",
+    "command": "npm <tests/check.txt run typecheck"
+  },
+  {
+    "kind": "weak",
+    "command": "npm>tests/check.txt run typecheck"
+  },
+  {
+    "kind": "weak",
+    "command": "npm >tests/check.txt run typecheck"
+  },
+  {
+    "kind": "weak",
+    "command": "npm<tests/check.txt run build"
+  },
+  {
+    "kind": "weak",
+    "command": "npm <tests/check.txt run build"
+  },
+  {
+    "kind": "weak",
+    "command": "npm>tests/check.txt run build"
+  },
+  {
+    "kind": "weak",
+    "command": "npm >tests/check.txt run build"
+  },
+  {
+    "kind": "weak",
+    "command": "tsc<input.txt --noEmit"
+  },
+  {
+    "kind": "weak",
+    "command": "tsc <input.txt --noEmit"
+  },
+  {
+    "kind": "weak",
+    "command": "tsc>input.txt --noEmit"
+  },
+  {
+    "kind": "weak",
+    "command": "tsc >input.txt --noEmit"
+  },
+  {
+    "kind": "weak",
+    "command": "grep<input.txt AC-001 README.md"
+  },
+  {
+    "kind": "weak",
+    "command": "grep <input.txt AC-001 README.md"
+  },
+  {
+    "kind": "weak",
+    "command": "grep>input.txt AC-001 README.md"
+  },
+  {
+    "kind": "weak",
+    "command": "grep >input.txt AC-001 README.md"
+  },
+  {
+    "kind": "weak",
+    "command": "rg<tools/pytest AC-001 README.md"
+  },
+  {
+    "kind": "weak",
+    "command": "rg <tools/pytest AC-001 README.md"
+  },
+  {
+    "kind": "weak",
+    "command": "rg>tools/pytest AC-001 README.md"
+  },
+  {
+    "kind": "weak",
+    "command": "rg >tools/pytest AC-001 README.md"
+  },
+  {
+    "kind": "weak",
+    "command": "diff<tools/bats actual.txt expected.txt"
+  },
+  {
+    "kind": "weak",
+    "command": "diff <tools/bats actual.txt expected.txt"
+  },
+  {
+    "kind": "weak",
+    "command": "diff>tools/bats actual.txt expected.txt"
+  },
+  {
+    "kind": "weak",
+    "command": "diff >tools/bats actual.txt expected.txt"
+  },
+  {
+    "kind": "weak",
+    "command": "test<tests/check.txt -e README.md"
+  },
+  {
+    "kind": "weak",
+    "command": "test <tests/check.txt -e README.md"
+  },
+  {
+    "kind": "weak",
+    "command": "test>tests/check.txt -e README.md"
+  },
+  {
+    "kind": "weak",
+    "command": "test >tests/check.txt -e README.md"
+  },
+  {
+    "kind": "weak",
+    "command": "grep<tools/bash tests/typecheck.sh"
+  },
+  {
+    "kind": "weak",
+    "command": "grep <tools/bash tests/typecheck.sh"
+  },
+  {
+    "kind": "weak",
+    "command": "grep>tools/bash tests/typecheck.sh"
+  },
+  {
+    "kind": "weak",
+    "command": "grep >tools/bash tests/typecheck.sh"
+  },
+  {
+    "kind": "weak",
+    "command": "grep<tests/check.sh typecheck.txt"
+  },
+  {
+    "kind": "weak",
+    "command": "grep <tests/check.sh typecheck.txt"
+  },
+  {
+    "kind": "weak",
+    "command": "grep>tests/check.sh typecheck.txt"
+  },
+  {
+    "kind": "weak",
+    "command": "grep >tests/check.sh typecheck.txt"
+  },
+  {
+    "kind": "weak",
+    "command": "tsc 2>output.txt --noEmit"
+  },
+  {
+    "kind": "weak",
+    "command": "npm2>output.txt test typecheck.txt"
+  },
+  {
+    "kind": "runner",
+    "command": "bash tests/check.sh"
+  },
+  {
+    "kind": "runner",
+    "command": "sh tests/check.sh"
+  },
+  {
+    "kind": "runner",
+    "command": "./tests/check.sh"
+  },
+  {
+    "kind": "runner",
+    "command": "bash -e tests/typecheck.sh"
+  },
+  {
+    "kind": "runner",
+    "command": "/bin/bash tests/typecheck.sh"
+  },
+  {
+    "kind": "runner",
+    "command": "./scripts/test-build.sh"
+  },
+  {
+    "kind": "runner",
+    "command": "node --test test/typecheck.test.js"
+  },
+  {
+    "kind": "runner",
+    "command": "cargo test --test build"
+  },
+  {
+    "kind": "runner",
+    "command": "pytest tests/typecheck.py"
+  },
+  {
+    "kind": "runner",
+    "command": "/usr/bin/pytest tests/typecheck.py"
+  },
+  {
+    "kind": "runner",
+    "command": "bats tests/build.bats"
+  },
+  {
+    "kind": "runner",
+    "command": "python3 -m pytest tests/typecheck.py"
+  },
+  {
+    "kind": "runner",
+    "command": "npm test -- --grep typecheck"
+  },
+  {
+    "kind": "runner",
+    "command": "npm run test -- --grep typecheck"
+  },
+  {
+    "kind": "runner",
+    "command": "/usr/local/bin/npm test -- --grep typecheck"
+  },
+  {
+    "kind": "runner",
+    "command": "pnpm test --filter typecheck"
+  },
+  {
+    "kind": "runner",
+    "command": "yarn run test --grep typecheck"
+  },
+  {
+    "kind": "runner",
+    "command": "make test TARGET=typecheck"
+  },
+  {
+    "kind": "runner",
+    "command": "bun test tests/typecheck.test.ts"
+  },
+  {
+    "kind": "runner",
+    "command": "go test ./typecheck"
+  },
+  {
+    "kind": "runner",
+    "command": "bash<input.txt tests/typecheck.sh"
+  },
+  {
+    "kind": "runner",
+    "command": "bash <input.txt tests/typecheck.sh"
+  },
+  {
+    "kind": "runner",
+    "command": "bash>input.txt tests/typecheck.sh"
+  },
+  {
+    "kind": "runner",
+    "command": "bash >input.txt tests/typecheck.sh"
+  },
+  {
+    "kind": "runner",
+    "command": "./tests/check-typecheck.sh<input.txt"
+  },
+  {
+    "kind": "runner",
+    "command": "./tests/check-typecheck.sh <input.txt"
+  },
+  {
+    "kind": "runner",
+    "command": "./tests/check-typecheck.sh>input.txt"
+  },
+  {
+    "kind": "runner",
+    "command": "./tests/check-typecheck.sh >input.txt"
+  },
+  {
+    "kind": "runner",
+    "command": "node<input.txt --test test/typecheck.test.js"
+  },
+  {
+    "kind": "runner",
+    "command": "node <input.txt --test test/typecheck.test.js"
+  },
+  {
+    "kind": "runner",
+    "command": "node>input.txt --test test/typecheck.test.js"
+  },
+  {
+    "kind": "runner",
+    "command": "node >input.txt --test test/typecheck.test.js"
+  },
+  {
+    "kind": "runner",
+    "command": "cargo<input.txt test --test typecheck"
+  },
+  {
+    "kind": "runner",
+    "command": "cargo <input.txt test --test typecheck"
+  },
+  {
+    "kind": "runner",
+    "command": "cargo>input.txt test --test typecheck"
+  },
+  {
+    "kind": "runner",
+    "command": "cargo >input.txt test --test typecheck"
+  },
+  {
+    "kind": "runner",
+    "command": "pytest<input.txt tests/typecheck.py"
+  },
+  {
+    "kind": "runner",
+    "command": "pytest <input.txt tests/typecheck.py"
+  },
+  {
+    "kind": "runner",
+    "command": "pytest>input.txt tests/typecheck.py"
+  },
+  {
+    "kind": "runner",
+    "command": "pytest >input.txt tests/typecheck.py"
+  },
+  {
+    "kind": "runner",
+    "command": "/usr/bin/python3<input.txt -m pytest tests/typecheck.py"
+  },
+  {
+    "kind": "runner",
+    "command": "/usr/bin/python3 <input.txt -m pytest tests/typecheck.py"
+  },
+  {
+    "kind": "runner",
+    "command": "/usr/bin/python3>input.txt -m pytest tests/typecheck.py"
+  },
+  {
+    "kind": "runner",
+    "command": "/usr/bin/python3 >input.txt -m pytest tests/typecheck.py"
+  },
+  {
+    "kind": "runner",
+    "command": "npm<input.txt run test -- --grep typecheck"
+  },
+  {
+    "kind": "runner",
+    "command": "npm <input.txt run test -- --grep typecheck"
+  },
+  {
+    "kind": "runner",
+    "command": "npm>input.txt run test -- --grep typecheck"
+  },
+  {
+    "kind": "runner",
+    "command": "npm >input.txt run test -- --grep typecheck"
+  },
+  {
+    "kind": "runner",
+    "command": "npm 2>output.txt run test -- --grep typecheck"
+  },
+  {
+    "kind": "runner",
+    "command": "bash 0<input.txt -e tests/typecheck.sh"
+  }
+]

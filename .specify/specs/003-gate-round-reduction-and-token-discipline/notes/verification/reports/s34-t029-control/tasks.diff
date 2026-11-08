@@ -1,0 +1,20 @@
+--- tasks.before
++++ tasks.after
+@@ -2,7 +2,7 @@
+ tasks_for: 003-gate-round-reduction-and-token-discipline
+ status: in-progress  # draft | in-progress | complete
+ created: 2026-09-05
+-updated: 2026-10-27
++updated: 2026-10-28
+ ---
+ 
+ # Tasks: Gate round reduction and token discipline
+@@ -1127,7 +1127,7 @@
+   - *Reuse:* local
+   - *Refs:* REQ-001, REQ-007, REQ-008, REQ-009, REQ-010, REQ-011, REQ-012, REQ-015, REQ-016, AC-018, FM-001, INV-005, plan §3, §4, §8
+   - *Notes:* For AC-016's real control, the invoker rejects one deliberately incomplete copy of this worker's no-tick return, records unchanged task digests, then accepts the intact original; an intentional control is not a failed worker retry. Executing the published example found two defects it had to fix to run at all: a `return.txt` written into the worktree changed the input manifest and made its own fresh capture stale (returns and reports now live under `notes/verification/`), and `spec-evidence.sh`/`spec-ac-coverage.sh` overwrote a caller-exported `$SPEC`, so a reader following the documented variable names got "current evidence missing/stale" on valid proof. Both were reproduced before the fix.
+-  - *Evidence:* CAP-794-aUZ5t0 verified by spec-gate accept; return sha256:1bf5fa3ca21929ce6e70bc56177aaa474f1987a71fc3699ed48ab3b8baba56fc
++  - *Evidence:* CAP-817-8hIfCR verified by spec-gate accept; return sha256:078fd949ca8d8c7a2b7d50982ba620a552a2b414898710656804d46706d41954
+ 
+ ## Reality Check (pre-ship gate)
+ 

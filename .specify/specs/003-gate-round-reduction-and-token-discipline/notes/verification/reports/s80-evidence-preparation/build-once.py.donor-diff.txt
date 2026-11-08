@@ -1,0 +1,28 @@
+--- /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s60-evidence-preparation/build-once.py
++++ /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s80-evidence-preparation/build-once.py
+@@ -1,6 +1,6 @@
+ import collections,csv,datetime,hashlib,json,os,stat,subprocess,time
+ from pathlib import Path
+-w=Path.cwd();s=w/'.specify/specs/003-gate-round-reduction-and-token-discipline';r=s/'notes/verification/reports';o=s/'notes/verification/platforms/ci-20261029-s60';p=r/'s60-evidence-preparation';scratch=Path((o/'scratch-path.txt').read_text().strip());snap=scratch/'snapshot'
++w=Path.cwd();s=w/'.specify/specs/003-gate-round-reduction-and-token-discipline';r=s/'notes/verification/reports';o=s/'notes/verification/platforms/ci-20261109-s80';p=r/'s80-evidence-preparation';scratch=Path((o/'scratch-path.txt').read_text().strip());snap=scratch/'snapshot'
+ assert str(w)=='/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline'
+ env=dict(os.environ,GIT_OPTIONAL_LOCKS='0')
+ def put(x,v):
+@@ -19,7 +19,7 @@
+ fields=(snap/'inputs.nul').read_bytes().split(b'\0')[:-1];assert len(fields)%6==0
+ records=[tuple(os.fsdecode(x) for x in fields[i:i+6]) for i in range(0,len(fields),6)]
+ counts=dict(collections.Counter(x[0] for x in records));assert counts==dict(version=1,index=177,path=177,tool=4,harness=8,document=4),counts
+-source=hashlib.sha256((snap/'inputs.nul').read_bytes()).hexdigest();assert source=='7d4f17221f13d850cb7db06cdbb6261119ca97b52228adeac74d82f6496a9bff',source
++source=hashlib.sha256((snap/'inputs.nul').read_bytes()).hexdigest();assert source=='03a560ada7b3f691a20cbc50a6fcbdf4d0ac9773f3f1fe3c309e9b3d70c82c6a',source
+ entries={}
+ for rec in (snap/'tree.nul').read_bytes().split(b'\0')[:-1]:
+  head,path=rec.split(b'\t',1);mode,kind,oid=head.decode().split();entries[os.fsdecode(path)]=(mode,kind,oid)
+@@ -40,7 +40,7 @@
+  if kind=='tool':
+   tool=Path(value);assert tool.is_file() and os.access(tool,os.X_OK) and hashlib.sha256(tool.read_bytes()).hexdigest()==mode
+ lines=result.decode().splitlines();tree=next(x.split('=',1)[1] for x in lines if x.startswith('tree='));parent='2049f65960cc91e9e30bbd5ff1e11fc0fdf7cbd9'
+-commit=run('commit-tree',['git','commit-tree',tree,'-p',parent],('Frozen spec003 O-034 repair, OP27 authorization and accepted T029 plus T031a5o1 CI snapshot; do not merge.\nSource: '+source+'\n').encode()).decode().strip()
++commit=run('commit-tree',['git','commit-tree',tree,'-p',parent],('Frozen spec003 O-034 repair, OP28 authorization and accepted T029 plus T031a5o1 CI snapshot; do not merge.\nSource: '+source+'\n').encode()).decode().strip()
+ summary=dict(source=source,tree=tree,commit=commit,parent=parent,tree_entries=len(entries),path_records_verified=len(rows),manifest_record_types=counts,bookkeeping_extras=len((snap/'extras.txt').read_text().splitlines()),raw_source_mapping='PASS',harness_mapping='PASS',document_mapping='PASS',tool_mapping='PASS',tree_modes=dict(collections.Counter(e[0] for e in entries.values())),scratch=str(scratch),snapshot=str(snap),manifest=str(snap/'inputs.nul'),builder_unchanged=True,freeze_proof='Single unchanged builder; all raw bytes/modes and source semantic mappings; strict verifier must match before/after',tasks_after_accept_sha256=json.loads((o/'protected-before.json').read_text())['tasks']['sha256'])
+ put(o/'summary.json',summary)
+ print(json.dumps(summary,indent=2))

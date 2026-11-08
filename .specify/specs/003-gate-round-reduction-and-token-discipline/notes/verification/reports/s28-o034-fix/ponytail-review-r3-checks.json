@@ -1,0 +1,1117 @@
+{
+  "reviewRound": 3,
+  "scope": "O034 implementation quality only",
+  "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+  "base": "2049f65960cc91e9e30bbd5ff1e11fc0fdf7cbd9",
+  "initialProtectedState": {
+    "scratch": "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7",
+    "files": {
+      "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh": {
+        "sha256": "0c26c101666aa8559814f40c7376da6b07290d8e2830b230a54b8eb01b4afdf7",
+        "mode": "0o755",
+        "mtimeNs": 1793045575939407052
+      },
+      "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-sdd-analyze.sh": {
+        "sha256": "513308051dc409e42fe72c3c20d5a0fe4a1e7607e5373dcff404fd6993cf4516",
+        "mode": "0o644",
+        "mtimeNs": 1793045485570467704
+      },
+      "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md": {
+        "sha256": "82fe00d7ef49b4d1b66ff65ef8ca1ed672d7c51dfbb8d94a63db4892a3a93894",
+        "mode": "0o600",
+        "mtimeNs": 1793046003182732081
+      },
+      "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/STATUS.md": {
+        "sha256": "28919a358c30407ccb0fff041f436768353b2f002c54e1db351ea57efe5e7d88",
+        "mode": "0o600",
+        "mtimeNs": 1792959058374188118
+      },
+      "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/returns/T031a5o1.txt": {
+        "sha256": "32df8af79290cfcfee6fc84915c4fc9d0726aecab2404736bc0b195da6215083",
+        "mode": "0o644",
+        "mtimeNs": 1793045975197697906
+      },
+      "/Users/babar/projects/sdd-kit-public/.git/worktrees/003-gate-round-reduction-and-token-discipline/index": {
+        "sha256": "c492d7ea95abf8e8c335001f20c62ff50bc6f1e2179d7a07d30811181b3dd700",
+        "mode": "0o644",
+        "mtimeNs": 1792957592613445716
+      }
+    },
+    "head": "2049f65960cc91e9e30bbd5ff1e11fc0fdf7cbd9",
+    "statusSha256": "4fc6884e95f190dda9570b439b15512c76eaab732a4efc5edf55a6d19071364a",
+    "trackedDiffSha256": "e40971dea9a0df9d84f8cb0a470a21244cb82d1267c7c862a72ee084f4947630"
+  },
+  "finalProtectedFiles": {
+    "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh": {
+      "sha256": "0c26c101666aa8559814f40c7376da6b07290d8e2830b230a54b8eb01b4afdf7",
+      "mode": "0o755",
+      "mtimeNs": 1793045575939407052
+    },
+    "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/test-sdd-analyze.sh": {
+      "sha256": "513308051dc409e42fe72c3c20d5a0fe4a1e7607e5373dcff404fd6993cf4516",
+      "mode": "0o644",
+      "mtimeNs": 1793045485570467704
+    },
+    "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md": {
+      "sha256": "82fe00d7ef49b4d1b66ff65ef8ca1ed672d7c51dfbb8d94a63db4892a3a93894",
+      "mode": "0o600",
+      "mtimeNs": 1793046003182732081
+    },
+    "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/STATUS.md": {
+      "sha256": "28919a358c30407ccb0fff041f436768353b2f002c54e1db351ea57efe5e7d88",
+      "mode": "0o600",
+      "mtimeNs": 1792959058374188118
+    },
+    "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/returns/T031a5o1.txt": {
+      "sha256": "32df8af79290cfcfee6fc84915c4fc9d0726aecab2404736bc0b195da6215083",
+      "mode": "0o644",
+      "mtimeNs": 1793045975197697906
+    },
+    "/Users/babar/projects/sdd-kit-public/.git/worktrees/003-gate-round-reduction-and-token-discipline/index": {
+      "sha256": "c492d7ea95abf8e8c335001f20c62ff50bc6f1e2179d7a07d30811181b3dd700",
+      "mode": "0o644",
+      "mtimeNs": 1792957592613445716
+    }
+  },
+  "trackedDiffUnchanged": true,
+  "statusDelta": {
+    "added": [],
+    "removed": []
+  },
+  "consumedProof": {
+    "capture": "CAP-793-x82v97",
+    "readOnly": true,
+    "captureSealedFiles": [
+      {
+        "path": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-793-x82v97/meta.nul",
+        "sha256": "338e4df69ab39556ef20cc53f77570209d1b7d9914595d0320fa3728ad657567",
+        "bytes": 691
+      },
+      {
+        "path": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-793-x82v97/argv.nul",
+        "sha256": "a193b9b8454686d43618a97cd684b331c6e36a0e968611582be2ce0aee872844",
+        "bytes": 56
+      },
+      {
+        "path": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-793-x82v97/inputs.nul",
+        "sha256": "e77d4b2969f45f3dfa95cedc18148e1abf0dabffd786946f59ff6a5b7fd07df6",
+        "bytes": 46619
+      },
+      {
+        "path": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-793-x82v97/inputs-after.nul",
+        "sha256": "e77d4b2969f45f3dfa95cedc18148e1abf0dabffd786946f59ff6a5b7fd07df6",
+        "bytes": 46619
+      },
+      {
+        "path": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-793-x82v97/bindings.nul",
+        "sha256": "8766df908be5d8f628c3880af34ae761dd1c9c4946e8da08da3e566c8c0c788a",
+        "bytes": 253653
+      },
+      {
+        "path": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-793-x82v97/output.log",
+        "sha256": "f9166fdc124954abb48f7c8ed789d96a1ce68c06a9da6df0d9d49a79a07aca5a",
+        "bytes": 862
+      },
+      {
+        "path": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-793-x82v97/summary.txt",
+        "sha256": "1d9cd1300c367dd2bb8ac0946d44dc9f0aecabef2ff6dae3329f53a9a6bb441d",
+        "bytes": 498
+      }
+    ],
+    "captureMeta": [
+      "version",
+      "1",
+      "id",
+      "CAP-793-x82v97",
+      "sequence",
+      "793",
+      "kind",
+      "command",
+      "start",
+      "2026-10-26T20:18:14Z",
+      "end",
+      "2026-10-26T20:19:21Z",
+      "repo",
+      "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "cwd",
+      "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "check",
+      "4b7f6c9b5f0df725e563898e3969549378a848152b48c9b6985cfb1517a462c1",
+      "shell",
+      "/bin/bash",
+      "input_before",
+      "e77d4b2969f45f3dfa95cedc18148e1abf0dabffd786946f59ff6a5b7fd07df6",
+      "input_after",
+      "e77d4b2969f45f3dfa95cedc18148e1abf0dabffd786946f59ff6a5b7fd07df6",
+      "no_tick",
+      "1",
+      "exit",
+      "0",
+      "output_digest",
+      "f9166fdc124954abb48f7c8ed789d96a1ce68c06a9da6df0d9d49a79a07aca5a",
+      "output_bytes",
+      "862",
+      "policy",
+      "local",
+      "key",
+      "  -- 19/19 passed",
+      ""
+    ],
+    "acceptanceSealedFiles": [
+      {
+        "path": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/accepted/T031a5o1/ACC-2GB77v/meta.nul",
+        "sha256": "3d33ccc083a9ac9837b30602efedcca0e3b383ea24109d3d74054de749dc3c1a",
+        "bytes": 286
+      },
+      {
+        "path": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/accepted/T031a5o1/ACC-2GB77v/return.txt",
+        "sha256": "32df8af79290cfcfee6fc84915c4fc9d0726aecab2404736bc0b195da6215083",
+        "bytes": 742
+      },
+      {
+        "path": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/accepted/T031a5o1/ACC-2GB77v/tasks.after",
+        "sha256": "82fe00d7ef49b4d1b66ff65ef8ca1ed672d7c51dfbb8d94a63db4892a3a93894",
+        "bytes": 184095
+      },
+      {
+        "path": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/accepted/T031a5o1/ACC-2GB77v/digests.nul",
+        "sha256": "97afc41f796354ac3d13a67ed51101ee7bc2b01a57dc958205b5e8585619dc8f",
+        "bytes": 143
+      }
+    ],
+    "acceptanceMeta": [
+      "version",
+      "1",
+      "task",
+      "T031a5o1",
+      "return_digest",
+      "32df8af79290cfcfee6fc84915c4fc9d0726aecab2404736bc0b195da6215083",
+      "binding_digest",
+      "8766df908be5d8f628c3880af34ae761dd1c9c4946e8da08da3e566c8c0c788a",
+      "input",
+      "e77d4b2969f45f3dfa95cedc18148e1abf0dabffd786946f59ff6a5b7fd07df6",
+      "captures",
+      "CAP-793-x82v97",
+      "manual",
+      "",
+      ""
+    ],
+    "inputBeforeEqualsAfter": true,
+    "inputBindings": [
+      [
+        "",
+        "index",
+        ".specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md",
+        "100644",
+        "0",
+        "f38cf7b44116be38af702adc8acf257e3976bc8d7899e3653a1bbfd54d26511b",
+        ""
+      ],
+      [
+        "",
+        "index",
+        "scripts/sdd-analyze.sh",
+        "100755",
+        "0",
+        "cfef526b91e34e5d1b60f169a0ef9dda9d6b0ed1f1e1590ad0ec034f2e0e2c96",
+        ""
+      ],
+      [
+        "",
+        "index",
+        "tests/test-sdd-analyze.sh",
+        "100644",
+        "0",
+        "bc7c888386104b8cab077da8ab10b43b93b20d37cedf79568779dff9e0a51385",
+        ""
+      ],
+      [
+        "",
+        "path",
+        ".specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md",
+        "file",
+        "100644",
+        "0dd2295933856c06b60d18f328b9f341be81fb2bb2af8d098289ba22c55fd34b",
+        ""
+      ],
+      [
+        "",
+        "path",
+        "scripts/sdd-analyze.sh",
+        "file",
+        "100755",
+        "0c26c101666aa8559814f40c7376da6b07290d8e2830b230a54b8eb01b4afdf7",
+        ""
+      ],
+      [
+        "",
+        "path",
+        "tests/test-sdd-analyze.sh",
+        "file",
+        "100644",
+        "513308051dc409e42fe72c3c20d5a0fe4a1e7607e5373dcff404fd6993cf4516",
+        ""
+      ]
+    ],
+    "steps": [
+      {
+        "name": "capture",
+        "argv": [
+          "bash",
+          "scripts/spec-run.sh",
+          ".specify/specs/003-gate-round-reduction-and-token-discipline",
+          "T031a5o1",
+          "--from-task",
+          "--no-tick",
+          "--summary"
+        ],
+        "started": "2026-10-26T20:18:01.191214+00:00",
+        "ended": "2026-10-26T20:19:34.505690+00:00",
+        "seconds": 93.315,
+        "exit": 0
+      },
+      {
+        "name": "return-prepare",
+        "argv": [
+          "bash",
+          ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/handoff/return.sh",
+          "T031a5o1",
+          "CAP-793-x82v97",
+          "--prepare"
+        ],
+        "started": "2026-10-26T20:19:34.522609+00:00",
+        "ended": "2026-10-26T20:19:35.201573+00:00",
+        "seconds": 0.679,
+        "exit": 0
+      },
+      {
+        "name": "accept",
+        "argv": [
+          "bash",
+          "scripts/spec-gate.sh",
+          "accept",
+          ".specify/specs/003-gate-round-reduction-and-token-discipline",
+          "T031a5o1",
+          ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/returns/T031a5o1.txt"
+        ],
+        "started": "2026-10-26T20:19:35.202419+00:00",
+        "ended": "2026-10-26T20:20:03.256758+00:00",
+        "seconds": 28.054,
+        "exit": 0
+      }
+    ],
+    "acceptedTaskEqualsCurrent": true,
+    "returnEqualsCurrent": true,
+    "wholeRepairDiffMatchesCurrent": true,
+    "repairStats": {
+      "scripts/sdd-analyze.sh": {
+        "beforeSha256": "cfef526b91e34e5d1b60f169a0ef9dda9d6b0ed1f1e1590ad0ec034f2e0e2c96",
+        "currentSha256": "0c26c101666aa8559814f40c7376da6b07290d8e2830b230a54b8eb01b4afdf7",
+        "insertions": 12,
+        "deletions": 6
+      },
+      "tests/test-sdd-analyze.sh": {
+        "beforeSha256": "c2f0ef08c4d4774d10d3e9c817baa5ead211a94fce5fd634aa4b064753e42521",
+        "currentSha256": "513308051dc409e42fe72c3c20d5a0fe4a1e7607e5373dcff404fd6993cf4516",
+        "insertions": 93,
+        "deletions": 7
+      },
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md": {
+        "beforeSha256": "add4d6235dc7554841a041fb9bd04083630ca987278484ac88dd23406b7aecaa",
+        "currentSha256": "82fe00d7ef49b4d1b66ff65ef8ca1ed672d7c51dfbb8d94a63db4892a3a93894",
+        "insertions": 12,
+        "deletions": 1
+      }
+    },
+    "testCounts": {
+      "currentWeak": 108,
+      "currentClean": 56,
+      "retainedWeak": 69,
+      "retainedRunner": 50,
+      "redMissingWarningCases": 39,
+      "redAssertionFailures": 78
+    },
+    "redScriptAdaptation": "--- \n+++ \n@@ -1,8 +1,8 @@\n #!/usr/bin/env bash\n # test-sdd-analyze.sh \u2014 the deterministic spec/plan/tasks consistency gate.\n \n-. \"$(dirname -- \"${BASH_SOURCE[0]}\")/helpers.sh\"\n-ANALYZE=\"$SCRIPTS/sdd-analyze.sh\"\n+. \"/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/helpers.sh\"\n+ANALYZE=\"/private/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/o034-r2-correction-63nod6jh/scripts/sdd-analyze.sh\"\n \n test_clean_fixture_is_consistent() {\n   local spec_dir; spec_dir=\"$(make_spec_dir)\"\n",
+    "parentResultSha256": "305222c28e535c1832cd6be21bdc809f1ca11d0668626daebde368f938304489",
+    "acceptanceCommittedSealValid": true,
+    "acceptedBeforeAfterTaskDigests": [
+      "before",
+      "f2fad981280f9fd33d0b95edfbdfd9bf1f439f97867ebd5dee0c5003d959a37b",
+      "after",
+      "82fe00d7ef49b4d1b66ff65ef8ca1ed672d7c51dfbb8d94a63db4892a3a93894",
+      ""
+    ],
+    "normalizedAcceptedTaskMatchesCapturedSource": {
+      "argv": [
+        "/bin/bash",
+        "--noprofile",
+        "--norc",
+        "-c",
+        ". \"$1\"; vf_path_content \"$2\" \"$3\" \"$4\"",
+        "_",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/verification-lib.sh",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        ".specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md",
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/current-tasks-normalized.md"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "sha256": "0dd2295933856c06b60d18f328b9f341be81fb2bb2af8d098289ba22c55fd34b"
+    },
+    "retainedPublicProbes": {
+      "sha256": "a1b9350e2a28fec9dc03a454c9f7a41b9663a29ae9b30079f0e5f127fa6adde2",
+      "verifiedWeak": 39,
+      "verifiedClean": 6,
+      "invocations": 90
+    },
+    "priorReviewReportHashesVerified": true
+  },
+  "freshChecks": [
+    {
+      "argv": [
+        "/bin/bash",
+        "--version"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "stdout": "GNU bash, version 3.2.57(1)-release (arm64-apple-darwin25)\nCopyright (C) 2007 Free Software Foundation, Inc.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/bin/bash",
+        "-n",
+        "scripts/sdd-analyze.sh"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/bin/bash",
+        "-n",
+        "tests/test-sdd-analyze.sh"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "independentProbes": {
+    "scratch": "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7",
+    "readOnlyPublicAnalyzer": true,
+    "declaredVerifyStringsExecuted": false,
+    "setup": {
+      "argv": [
+        "/bin/bash",
+        "--noprofile",
+        "--norc",
+        "-c",
+        ". \"$1\"; SANDBOX=\"$2\"; make_spec_dir",
+        "_",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/tests/helpers.sh",
+        "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "stdout": "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature\n",
+      "stderr": ""
+    },
+    "environmentOverrides": {
+      "GIT_OPTIONAL_LOCKS": "0",
+      "LC_ALL": "C",
+      "NO_COLOR": "1",
+      "SHELLCHECK_OPTS": ""
+    },
+    "environmentUnset": [
+      "BASH_ENV",
+      "ENV",
+      "CDPATH"
+    ],
+    "fixtureTemplateTasks": "---\ntasks_for: 001-test-feature\nstatus: in-progress\ncreated: 2026-01-01\nupdated: 2026-01-01\n---\n# Tasks: Test feature\n\n## Setup\n\n- [ ] **T001** \u2014 Add scaffolding\n  - *Files:* `src/`\n  - *Acceptance:* build succeeds\n  - *Verify:* `npm run build` \u2192 \"built\"\n\n## Backend\n\n- [ ] **T002** \u2014 Implement the thing endpoint\n  - *Files:* `src/thing.js`\n  - *Acceptance:* unit test passes\n  - *Verify:* `node --test test/thing.test.js` \u2192 \"pass 1\"\n  - *Refs:* REQ-001, AC-001\n\n- [ ] **T003** \u2014 Validate payloads\n  - *Files:* `src/validate.js`\n  - *Acceptance:* invalid-payload test passes\n  - *Verify:* `node --test test/validate.test.js` \u2192 \"pass 2\"\n  - *Refs:* AC-002\n\n## Reality Check (pre-ship gate)\n\n- [ ] **T009** \u2014 Opponent review: steelman why this implementation is wrong\n  - *Agent:* agents/opponent.agent.md\n  - *Acceptance:* agent returns **CLEARED**\n  - *Refs:* AC-001, AC-002\n\n- [ ] **T010** \u2014 Reality-check the implemented spec end-to-end\n  - *Agent:* agents/reality-check.agent.md\n  - *Acceptance:* agent returns **READY**\n  - *Refs:* AC-001, AC-002\n\n## Ship\n\n- [ ] **T011** \u2014 Open PR to the base branch\n  - *Acceptance:* spec-pr.sh prints the PR URL\n",
+    "cases": [
+      {
+        "commandAsFixtureData": "npm<tests/test-typecheck.txt run typecheck",
+        "expectedWarning": true,
+        "argv": [
+          "/bin/bash",
+          "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+          "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature"
+        ],
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "exit": 0,
+        "stdout": "Analyzing: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\n1 warning(s), 0 errors\n",
+        "stderr": "",
+        "seconds": 0.199,
+        "tasksSha256": "6a01e3c69a7ec121df50d2b92acea16d40dfb974519cb6c8ac8be493cdef22cf",
+        "passed": true
+      },
+      {
+        "commandAsFixtureData": "tsc>tests/test-typecheck.log --noEmit",
+        "expectedWarning": true,
+        "argv": [
+          "/bin/bash",
+          "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+          "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature"
+        ],
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "exit": 0,
+        "stdout": "Analyzing: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\n1 warning(s), 0 errors\n",
+        "stderr": "",
+        "seconds": 0.188,
+        "tasksSha256": "2db88c0dda1e9f834c11c7cc9836e733b35bd12d74a19f3fd8b1e7471909ed27",
+        "passed": true
+      },
+      {
+        "commandAsFixtureData": "grep<tools/pytest typecheck",
+        "expectedWarning": true,
+        "argv": [
+          "/bin/bash",
+          "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+          "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature"
+        ],
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "exit": 0,
+        "stdout": "Analyzing: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\n1 warning(s), 0 errors\n",
+        "stderr": "",
+        "seconds": 0.192,
+        "tasksSha256": "b04b50f2217347a6320e057b9af158372e1a09ba64a4f51a1790c60b4d176922",
+        "passed": true
+      },
+      {
+        "commandAsFixtureData": "grep<tools/npm test typecheck.txt",
+        "expectedWarning": true,
+        "argv": [
+          "/bin/bash",
+          "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+          "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature"
+        ],
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "exit": 0,
+        "stdout": "Analyzing: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\n1 warning(s), 0 errors\n",
+        "stderr": "",
+        "seconds": 0.189,
+        "tasksSha256": "52d848fadbc8cc550df980bfe4e8ab8d5cf2bb62a88a107095fc2a10753a96ea",
+        "passed": true
+      },
+      {
+        "commandAsFixtureData": "/usr/bin/grep AC-001 tests/check.sh",
+        "expectedWarning": true,
+        "argv": [
+          "/bin/bash",
+          "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+          "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature"
+        ],
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "exit": 0,
+        "stdout": "Analyzing: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\n1 warning(s), 0 errors\n",
+        "stderr": "",
+        "seconds": 0.19,
+        "tasksSha256": "44fdb473b3c1a13e3f1cb542524117302954fae943483b37fb5d8a5d309f60d3",
+        "passed": true
+      },
+      {
+        "commandAsFixtureData": "/usr/bin/grep<input.txt AC-001 tests/check.sh",
+        "expectedWarning": true,
+        "argv": [
+          "/bin/bash",
+          "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+          "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature"
+        ],
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "exit": 0,
+        "stdout": "Analyzing: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\n1 warning(s), 0 errors\n",
+        "stderr": "",
+        "seconds": 0.208,
+        "tasksSha256": "8dfd787e04446e5ef1c6de4e64fe6669cb7f07a0271f3805894c55ebacf82f7e",
+        "passed": true
+      },
+      {
+        "commandAsFixtureData": "/usr/bin/diff fixtures/test.txt actual.txt",
+        "expectedWarning": true,
+        "argv": [
+          "/bin/bash",
+          "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+          "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature"
+        ],
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "exit": 0,
+        "stdout": "Analyzing: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\n1 warning(s), 0 errors\n",
+        "stderr": "",
+        "seconds": 0.188,
+        "tasksSha256": "21830104229435cc401b2371c9de37b43d8182d0d3f159f51c78b2fb86d98148",
+        "passed": true
+      },
+      {
+        "commandAsFixtureData": "/usr/bin/diff>output.txt fixtures/test.txt actual.txt",
+        "expectedWarning": true,
+        "argv": [
+          "/bin/bash",
+          "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+          "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature"
+        ],
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "exit": 0,
+        "stdout": "Analyzing: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\n1 warning(s), 0 errors\n",
+        "stderr": "",
+        "seconds": 0.189,
+        "tasksSha256": "2f99ddde503ed7057f7045266f753baf6085830a12b8551c51307325622e9e0c",
+        "passed": true
+      },
+      {
+        "commandAsFixtureData": "0<input.txt /usr/bin/grep pytest tests/check.sh",
+        "expectedWarning": true,
+        "argv": [
+          "/bin/bash",
+          "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+          "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature"
+        ],
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "exit": 0,
+        "stdout": "Analyzing: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\n1 warning(s), 0 errors\n",
+        "stderr": "",
+        "seconds": 0.188,
+        "tasksSha256": "83470d2578bfc6165e68e1ea2d507112d1010d3bb08c3e3efd14aa9eb4e871bc",
+        "passed": true
+      },
+      {
+        "commandAsFixtureData": "2>>output.log ./tools/rg bats tests/check.sh",
+        "expectedWarning": true,
+        "argv": [
+          "/bin/bash",
+          "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+          "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature"
+        ],
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "exit": 0,
+        "stdout": "Analyzing: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\n1 warning(s), 0 errors\n",
+        "stderr": "",
+        "seconds": 0.189,
+        "tasksSha256": "948414ebc177ac5455de3291b4ca3755cd3142bb1ab831961c48d60600e5ffe1",
+        "passed": true
+      },
+      {
+        "commandAsFixtureData": "1>output.log tests/diff fixtures/test.txt actual.txt",
+        "expectedWarning": true,
+        "argv": [
+          "/bin/bash",
+          "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+          "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature"
+        ],
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "exit": 0,
+        "stdout": "Analyzing: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\n1 warning(s), 0 errors\n",
+        "stderr": "",
+        "seconds": 0.188,
+        "tasksSha256": "c443fa1271cd3c2d422ee10a3c087e70cd21cd53c5a44825464ee187742b5dc6",
+        "passed": true
+      },
+      {
+        "commandAsFixtureData": "./tests/grep<neutral.txt AC-001 README.md",
+        "expectedWarning": true,
+        "argv": [
+          "/bin/bash",
+          "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+          "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature"
+        ],
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "exit": 0,
+        "stdout": "Analyzing: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\n1 warning(s), 0 errors\n",
+        "stderr": "",
+        "seconds": 0.189,
+        "tasksSha256": "1ced378b57d9da144f9e36eaab0679ea02fefed46390a37840b3b8ee3acaca4b",
+        "passed": true
+      },
+      {
+        "commandAsFixtureData": "../tools/rg 0<input.txt AC-001 README.md",
+        "expectedWarning": true,
+        "argv": [
+          "/bin/bash",
+          "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+          "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature"
+        ],
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "exit": 0,
+        "stdout": "Analyzing: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\n1 warning(s), 0 errors\n",
+        "stderr": "",
+        "seconds": 0.189,
+        "tasksSha256": "63deea271a589d28859c457e7ac76c3560d05b03a909fcea68ef21279a7728d4",
+        "passed": true
+      },
+      {
+        "commandAsFixtureData": "tests/diff 1>>output.log fixtures/test.txt actual.txt",
+        "expectedWarning": true,
+        "argv": [
+          "/bin/bash",
+          "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+          "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature"
+        ],
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "exit": 0,
+        "stdout": "Analyzing: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\n1 warning(s), 0 errors\n",
+        "stderr": "",
+        "seconds": 0.189,
+        "tasksSha256": "ec109e4996cf31cf4335695b1250a97d2a3b5a7d232a906a55f63cd5eee1f678",
+        "passed": true
+      },
+      {
+        "commandAsFixtureData": "tsc 0<input.txt 2>output.log --noEmit tests/unit.ts",
+        "expectedWarning": true,
+        "argv": [
+          "/bin/bash",
+          "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+          "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature"
+        ],
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "exit": 0,
+        "stdout": "Analyzing: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\n1 warning(s), 0 errors\n",
+        "stderr": "",
+        "seconds": 0.188,
+        "tasksSha256": "042e28d17d80967c00b0514aa35e34fc5544fcc73bfefef5df3f1e3a6809d606",
+        "passed": true
+      },
+      {
+        "commandAsFixtureData": "npm3<neutral.txt test typecheck.txt",
+        "expectedWarning": true,
+        "argv": [
+          "/bin/bash",
+          "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+          "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature"
+        ],
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "exit": 0,
+        "stdout": "Analyzing: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\n1 warning(s), 0 errors\n",
+        "stderr": "",
+        "seconds": 0.189,
+        "tasksSha256": "80f27a885f84c95041c2331b3e35b207f2e53afceffcf435d84f0f8b1ec8d492",
+        "passed": true
+      },
+      {
+        "commandAsFixtureData": "npm 2>neutral.log run typecheck -- --project tests/tsconfig.json",
+        "expectedWarning": true,
+        "argv": [
+          "/bin/bash",
+          "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+          "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature"
+        ],
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "exit": 0,
+        "stdout": "Analyzing: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\n1 warning(s), 0 errors\n",
+        "stderr": "",
+        "seconds": 0.19,
+        "tasksSha256": "0e14c1d64684980aae5307b8a505217b513fb05cc387b8392ad2a0f9a54ea558",
+        "passed": true
+      },
+      {
+        "commandAsFixtureData": "/opt/npm2>output.log test typecheck.txt",
+        "expectedWarning": true,
+        "argv": [
+          "/bin/bash",
+          "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+          "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature"
+        ],
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "exit": 0,
+        "stdout": "Analyzing: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\n1 warning(s), 0 errors\n",
+        "stderr": "",
+        "seconds": 0.189,
+        "tasksSha256": "42882249446eb9bd991ed46a4c104fb56b65da2094da136e81ee02e5265cd570",
+        "passed": true
+      },
+      {
+        "commandAsFixtureData": "node --testx typecheck.js",
+        "expectedWarning": true,
+        "argv": [
+          "/bin/bash",
+          "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+          "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature"
+        ],
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "exit": 0,
+        "stdout": "Analyzing: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\n1 warning(s), 0 errors\n",
+        "stderr": "",
+        "seconds": 0.189,
+        "tasksSha256": "e98270d0533143f20dd80016dcf3ceef3901c162cf61387f8c7d4c21aa8b45e8",
+        "passed": true
+      },
+      {
+        "commandAsFixtureData": "cargo testable build",
+        "expectedWarning": true,
+        "argv": [
+          "/bin/bash",
+          "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+          "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature"
+        ],
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "exit": 0,
+        "stdout": "Analyzing: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\n1 warning(s), 0 errors\n",
+        "stderr": "",
+        "seconds": 0.189,
+        "tasksSha256": "f09cba5943c8ee955da3d8ea78d1db1af4b10141a6140ddd7d2b7242f0ff43a2",
+        "passed": true
+      },
+      {
+        "commandAsFixtureData": "batsman typecheck.md",
+        "expectedWarning": true,
+        "argv": [
+          "/bin/bash",
+          "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+          "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature"
+        ],
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "exit": 0,
+        "stdout": "Analyzing: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\n1 warning(s), 0 errors\n",
+        "stderr": "",
+        "seconds": 0.19,
+        "tasksSha256": "1ede6cf69895c5a18af0ed476b45e547bc5fa61da75a6ab1a1be9610c244b3ad",
+        "passed": true
+      },
+      {
+        "commandAsFixtureData": "  /usr/bin/grep tests/check.sh README.md  ",
+        "expectedWarning": true,
+        "argv": [
+          "/bin/bash",
+          "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+          "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature"
+        ],
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "exit": 0,
+        "stdout": "Analyzing: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  ! task T002 has an untyped AC Verify that offers only build/typecheck/text-presence evidence\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\n1 warning(s), 0 errors\n",
+        "stderr": "",
+        "seconds": 0.186,
+        "tasksSha256": "ea3bdb28ed24d1f41cece9f46637f6ea89d4e3377fbf7375c0b99dc8b70f1322",
+        "passed": true
+      },
+      {
+        "commandAsFixtureData": "bash 0<input.txt -e -u tests/typecheck.sh",
+        "expectedWarning": false,
+        "argv": [
+          "/bin/bash",
+          "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+          "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature"
+        ],
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "exit": 0,
+        "stdout": "Analyzing: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\nconsistent \u2014 spec/plan/tasks line up\n",
+        "stderr": "",
+        "seconds": 0.189,
+        "tasksSha256": "9dc15f370203db4575d759c8f3c369c9a15b4ba337da6d9157b142c381b2023e",
+        "passed": true
+      },
+      {
+        "commandAsFixtureData": "/bin/bash 0<input.txt -eu /tmp/tests/typecheck.sh",
+        "expectedWarning": false,
+        "argv": [
+          "/bin/bash",
+          "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+          "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature"
+        ],
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "exit": 0,
+        "stdout": "Analyzing: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\nconsistent \u2014 spec/plan/tasks line up\n",
+        "stderr": "",
+        "seconds": 0.19,
+        "tasksSha256": "8075b7c9213262f02c1a743c59ac21c85e937394a2beeda272b768a2bcbca1ad",
+        "passed": true
+      },
+      {
+        "commandAsFixtureData": "/usr/bin/python3 0<input.txt -m pytest tests/typecheck.py",
+        "expectedWarning": false,
+        "argv": [
+          "/bin/bash",
+          "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+          "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature"
+        ],
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "exit": 0,
+        "stdout": "Analyzing: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\nconsistent \u2014 spec/plan/tasks line up\n",
+        "stderr": "",
+        "seconds": 0.185,
+        "tasksSha256": "7ef22de4c89d8199a0c138dbe8735c34a82813fb0b4445af59dda110928c5f64",
+        "passed": true
+      },
+      {
+        "commandAsFixtureData": "0<input.txt npm run test -- --grep typecheck",
+        "expectedWarning": false,
+        "argv": [
+          "/bin/bash",
+          "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+          "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature"
+        ],
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "exit": 0,
+        "stdout": "Analyzing: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\nconsistent \u2014 spec/plan/tasks line up\n",
+        "stderr": "",
+        "seconds": 0.173,
+        "tasksSha256": "5756dbeba1e4815fafac2ac6eedd1008cb2a20c103ea6cf29272f777a0db6c2a",
+        "passed": true
+      },
+      {
+        "commandAsFixtureData": "1>>out.log /usr/bin/node --test test/typecheck.js",
+        "expectedWarning": false,
+        "argv": [
+          "/bin/bash",
+          "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+          "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature"
+        ],
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "exit": 0,
+        "stdout": "Analyzing: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\nconsistent \u2014 spec/plan/tasks line up\n",
+        "stderr": "",
+        "seconds": 0.185,
+        "tasksSha256": "73afc7f23028a3bd413177b0f03987e94b4f89943ab57eae5d42932b72ae9204",
+        "passed": true
+      },
+      {
+        "commandAsFixtureData": "./tests/check-typecheck.sh 0<input.txt 2>output.log",
+        "expectedWarning": false,
+        "argv": [
+          "/bin/bash",
+          "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+          "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature"
+        ],
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "exit": 0,
+        "stdout": "Analyzing: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\nconsistent \u2014 spec/plan/tasks line up\n",
+        "stderr": "",
+        "seconds": 0.191,
+        "tasksSha256": "1ae3701275decd1a87053dafb84888fe124888969a654675e49e1f93299b5797",
+        "passed": true
+      },
+      {
+        "commandAsFixtureData": "node scripts/assert-content.js /usr/bin/grep AC-001 README.md",
+        "expectedWarning": false,
+        "argv": [
+          "/bin/bash",
+          "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+          "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature"
+        ],
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "exit": 0,
+        "stdout": "Analyzing: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\nconsistent \u2014 spec/plan/tasks line up\n",
+        "stderr": "",
+        "seconds": 0.191,
+        "tasksSha256": "ce5a5c23d0ec406a60c6c0295e9e847e11ca35d6fabab2ed98926080b949e066",
+        "passed": true
+      },
+      {
+        "commandAsFixtureData": "node scripts/assert-content.js grep test README.md",
+        "expectedWarning": false,
+        "argv": [
+          "/bin/bash",
+          "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+          "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature"
+        ],
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "exit": 0,
+        "stdout": "Analyzing: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\nconsistent \u2014 spec/plan/tasks line up\n",
+        "stderr": "",
+        "seconds": 0.191,
+        "tasksSha256": "ef73f233e4a7c96ecc2feafd8b25fe9ef50a5a629898300807c679151e7481e7",
+        "passed": true
+      },
+      {
+        "commandAsFixtureData": "/bin/bash tests/check.sh /usr/bin/grep",
+        "expectedWarning": false,
+        "argv": [
+          "/bin/bash",
+          "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+          "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature"
+        ],
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "exit": 0,
+        "stdout": "Analyzing: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\nconsistent \u2014 spec/plan/tasks line up\n",
+        "stderr": "",
+        "seconds": 0.189,
+        "tasksSha256": "c9aaac4a356e02e955d62ea1afea5adccbe5c5194f3aeea13304f7998bfa59d1",
+        "passed": true
+      },
+      {
+        "commandAsFixtureData": "node scripts/assert-content.js ./tools/rg AC-001 README.md",
+        "expectedWarning": false,
+        "argv": [
+          "/bin/bash",
+          "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+          "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature"
+        ],
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "exit": 0,
+        "stdout": "Analyzing: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\nconsistent \u2014 spec/plan/tasks line up\n",
+        "stderr": "",
+        "seconds": 0.188,
+        "tasksSha256": "52ad9bb5445c58446d2a6ffee5d89639fbe8f2bfaa752aa4af99e030ab7c9fac",
+        "passed": true
+      },
+      {
+        "commandAsFixtureData": "node scripts/assert-content.js ../tools/diff actual.txt expected.txt",
+        "expectedWarning": false,
+        "argv": [
+          "/bin/bash",
+          "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+          "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature"
+        ],
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "exit": 0,
+        "stdout": "Analyzing: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\nconsistent \u2014 spec/plan/tasks line up\n",
+        "stderr": "",
+        "seconds": 0.191,
+        "tasksSha256": "8fd86a4b48172c883560f65067ad6077c9cd34c0cf5620e4082f701f123d2238",
+        "passed": true
+      },
+      {
+        "commandAsFixtureData": "/usr/bin/grepx AC-001 tests/check.sh",
+        "expectedWarning": false,
+        "argv": [
+          "/bin/bash",
+          "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+          "/var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature"
+        ],
+        "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+        "exit": 0,
+        "stdout": "Analyzing: /var/folders/qp/82x5sgg10_z719z9cw5bj71h0000gn/T/sdd003-ponytail-review-r3-83sfapi7/fixtures/proj/.specify/specs/001-test-feature\n  \u2713 spec.md present\n  \u2713 plan.md present\n  \u2713 tasks.md present\n  \u2713 STATUS.md present\n  \u2713 verification command configuration valid\n  \u2713 no unresolved [NEEDS CLARIFICATION] markers\n  \u2713 spec.md defines 2 AC id(s)\n  \u2713 every AC is covered by an implementation task\n  \u2713 all task refs resolve to spec ids\n  \u2713 6 task(s) parsed\n  \u2713 legacy verification contract remains compatible\n  \u2713 opponent gate present, agent file exists\n  \u2713 reality-check gate present, agent file exists\n---\nconsistent \u2014 spec/plan/tasks line up\n",
+        "stderr": "",
+        "seconds": 0.189,
+        "tasksSha256": "bd7e4b6d3b780772f90a4f9ce1dcc32cf40eba2b1bbba1e27544050cc92c8698",
+        "passed": true
+      }
+    ],
+    "total": 34,
+    "passed": 34,
+    "weak": 22,
+    "clean": 12
+  },
+  "consumedChecks": {
+    "analyzer-syntax.json": {
+      "argv": [
+        "/bin/bash",
+        "-n",
+        "scripts/sdd-analyze.sh"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "duration_seconds": 0.0036079883575439453,
+      "environment_overrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "NO_COLOR": "1",
+        "LC_ALL": "C",
+        "SHELLCHECK_OPTS": ""
+      },
+      "environment_unset": [
+        "BASH_ENV",
+        "ENV",
+        "CDPATH"
+      ],
+      "stdout_file": "analyzer-syntax.stdout",
+      "stderr_file": "analyzer-syntax.stderr"
+    },
+    "tests-syntax.json": {
+      "argv": [
+        "/bin/bash",
+        "-n",
+        "tests/test-sdd-analyze.sh"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "duration_seconds": 0.004667758941650391,
+      "environment_overrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "NO_COLOR": "1",
+        "LC_ALL": "C",
+        "SHELLCHECK_OPTS": ""
+      },
+      "environment_unset": [
+        "BASH_ENV",
+        "ENV",
+        "CDPATH"
+      ],
+      "stdout_file": "tests-syntax.stdout",
+      "stderr_file": "tests-syntax.stderr"
+    },
+    "shellcheck.json": {
+      "argv": [
+        "shellcheck",
+        "--norc",
+        "-S",
+        "warning",
+        "-x",
+        "scripts/sdd-analyze.sh",
+        "tests/test-sdd-analyze.sh"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "duration_seconds": 2.789214849472046,
+      "environment_overrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "NO_COLOR": "1",
+        "LC_ALL": "C",
+        "SHELLCHECK_OPTS": ""
+      },
+      "environment_unset": [
+        "BASH_ENV",
+        "ENV",
+        "CDPATH"
+      ],
+      "stdout_file": "shellcheck.stdout",
+      "stderr_file": "shellcheck.stderr"
+    },
+    "tasks-analyzer.json": {
+      "argv": [
+        "/bin/bash",
+        "scripts/sdd-analyze.sh",
+        ".specify/specs/003-gate-round-reduction-and-token-discipline",
+        "--phase",
+        "tasks"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "duration_seconds": 0.7013568878173828,
+      "environment_overrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "NO_COLOR": "1",
+        "LC_ALL": "C",
+        "SHELLCHECK_OPTS": ""
+      },
+      "environment_unset": [
+        "BASH_ENV",
+        "ENV",
+        "CDPATH"
+      ],
+      "stdout_file": "tasks-analyzer.stdout",
+      "stderr_file": "tasks-analyzer.stderr"
+    },
+    "diff-whitespace.json": {
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "--",
+        "scripts/sdd-analyze.sh",
+        "tests/test-sdd-analyze.sh",
+        ".specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "duration_seconds": 0.01730203628540039,
+      "environment_overrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "NO_COLOR": "1",
+        "LC_ALL": "C",
+        "SHELLCHECK_OPTS": ""
+      },
+      "environment_unset": [
+        "BASH_ENV",
+        "ENV",
+        "CDPATH"
+      ],
+      "stdout_file": "diff-whitespace.stdout",
+      "stderr_file": "diff-whitespace.stderr"
+    }
+  },
+  "prohibitedActionsExecuted": false,
+  "writes": "Only authorized ponytail-review-r3.md and ponytail-review-r3-* receipts; scratch outside worktree"
+}

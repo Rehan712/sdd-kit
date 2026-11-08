@@ -1,0 +1,25 @@
+--- .specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261025-s27/verify-prepublish.sh
++++ .specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261025-s27-final/verify-prepublish.sh
+@@ -2,7 +2,7 @@
+ # Read-only binding check; outputs stay in this spec's excluded verification dir.
+ set -euo pipefail
+ export GIT_OPTIONAL_LOCKS=0
+-out="$PWD/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261025-s27"
++out="$PWD/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261025-s27-final"
+ HUB_DIR="$PWD"
+ . scripts/lib.sh
+ . scripts/verification-lib.sh
+@@ -49,11 +49,11 @@
+ assert (owned / 'build-snapshot.sh').read_text() == old
+ collector = json.loads((owned / 'collector-origin.json').read_text())
+ assert hashlib.sha256(Path(collector['path']).read_bytes()).hexdigest() == collector['sha256']
+-assert (owned / 'collect.sh').read_text() == Path(collector['path']).read_text().replace('43292032de54f25df06531471b07ada5da0becf0', summary['tree'])
++assert (owned / 'collect.sh').read_text() == Path(collector['path']).read_text().replace('e98c79fe564564397f36ff0b9910137572ea10bb', summary['tree'])
+ for origin in json.loads((owned / 'origins.json').read_text()).values():
+     assert hashlib.sha256(Path(origin['path']).read_bytes()).hexdigest() == origin['sha256'], origin['path']
+ protected = json.loads((owned / 'protected-before.json').read_text())
+-for key in ('index', 'head_file', 'status'):
++for key in ('index', 'head_file', 'status', 'tasks'):
+     expected = protected[key]
+     path = Path(expected['path'])
+     assert hashlib.sha256(path.read_bytes()).hexdigest() == expected['sha256'], key + ' bytes changed'

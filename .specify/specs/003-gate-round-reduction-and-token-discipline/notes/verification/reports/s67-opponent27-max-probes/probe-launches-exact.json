@@ -1,0 +1,33 @@
+{
+  "clarification": "probe-launches.json rendered driver script paths as equivalent absolute paths; these are the literal relative argv used in the executed shell commands. Original receipt retained. Per-analyzer argv in the result receipts are already literal.",
+  "launches": [
+    {
+      "argv": [
+        "env",
+        "GIT_OPTIONAL_LOCKS=0",
+        "python3",
+        "-I",
+        ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s67-opponent27-max-probes/classifier-probes.py"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "envOverrides": {
+        "GIT_OPTIONAL_LOCKS": "0"
+      }
+    },
+    {
+      "argv": [
+        "env",
+        "GIT_OPTIONAL_LOCKS=0",
+        "python3",
+        "-I",
+        ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s67-opponent27-max-probes/option-order-probes.py"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "envOverrides": {
+        "GIT_OPTIONAL_LOCKS": "0"
+      }
+    }
+  ]
+}

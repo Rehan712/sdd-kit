@@ -1,0 +1,229 @@
+{
+  "at": "2026-10-30T11:14:50.866717+00:00",
+  "floorId": "FLOOR-DJZyNl",
+  "beforeFloor": "FLOOR-LxJkv3",
+  "actualFloorLatest": "FLOOR-DJZyNl",
+  "source": "7d4f17221f13d850cb7db06cdbb6261119ca97b52228adeac74d82f6496a9bff",
+  "meta": {
+    "version": "1",
+    "id": "FLOOR-DJZyNl",
+    "kind": "floor",
+    "stage": "",
+    "start": "2026-10-29T23:11:43Z",
+    "end": "2026-10-30T11:10:45Z",
+    "source": "7d4f17221f13d850cb7db06cdbb6261119ca97b52228adeac74d82f6496a9bff",
+    "exit": "0"
+  },
+  "checks": {
+    "floorRcZero": true,
+    "wrapperRcZero": true,
+    "runnerPhaseExitZero": true,
+    "newFloor": true,
+    "actualLatestEqualsNewFloor": true,
+    "completeSealMatches": true,
+    "metaIdMatches": true,
+    "metaExitZero": true,
+    "metaSourceMatches": true,
+    "manifestsByteIdentical": true,
+    "manifestShaMatches": true,
+    "manifestCountsMatch": false,
+    "strictBindingsPass": true,
+    "allReferencedCaptureMetaExitZero": true,
+    "allReferencedCaptureMetaInputsMatch": true
+  },
+  "counts": {
+    "records": 101,
+    "executed": 20,
+    "cacheHits": 81,
+    "uniqueCaptureIds": 22,
+    "kinds": {
+      "task": 96,
+      "checker": 3,
+      "gate_check": 2
+    },
+    "newCaptureIds": [
+      "CAP-846-mM8J5T",
+      "CAP-847-HxmcBY",
+      "CAP-848-tC34H9",
+      "CAP-849-M3HfrM",
+      "CAP-850-2SHeh8",
+      "CAP-851-CcUiRU",
+      "CAP-852-EfY8gn",
+      "CAP-853-YzaUTJ",
+      "CAP-854-05T3wr",
+      "CAP-855-KvaNzN",
+      "CAP-856-J4c41n",
+      "CAP-857-p5UHuU",
+      "CAP-858-L4xRQU",
+      "CAP-859-D9hEES",
+      "CAP-860-SFDaUO",
+      "CAP-861-XRxCWY",
+      "CAP-862-QKUUU6",
+      "CAP-863-M1pwiB",
+      "CAP-864-w5ZLxL",
+      "CAP-865-huNCzF"
+    ],
+    "reusedPreexistingCaptureIds": [
+      "CAP-844-GCqKod",
+      "CAP-845-hwbWOH"
+    ]
+  },
+  "manifestRecordTypes": {
+    "version": 1,
+    "index": 177,
+    "path": 177,
+    "tool": 4,
+    "harness": 8,
+    "document": 4
+  },
+  "bindings": {
+    "before": {
+      "source": "7d4f17221f13d850cb7db06cdbb6261119ca97b52228adeac74d82f6496a9bff",
+      "tree": "f568f3a7fcdd7099bf8f9b38c676ebcdda488d2d",
+      "parent": "2049f65960cc91e9e30bbd5ff1e11fc0fdf7cbd9",
+      "source_files": 177,
+      "harness_records": 8,
+      "document_records": 4,
+      "mapping": "PASS",
+      "parent_index": "PASS",
+      "head_index": "UNCHANGED",
+      "tree_modes": {
+        "100644": 22399,
+        "100755": 81,
+        "120000": 1
+      },
+      "state_after": {
+        "head": "2049f65960cc91e9e30bbd5ff1e11fc0fdf7cbd9",
+        "index_path": "/Users/babar/projects/sdd-kit-public/.git/worktrees/003-gate-round-reduction-and-token-discipline/index",
+        "index_sha256": "c492d7ea95abf8e8c335001f20c62ff50bc6f1e2179d7a07d30811181b3dd700",
+        "index_bytes": 2200525,
+        "index_mtime_ns": 1792957592613445716,
+        "head_file_sha256": "36b441e5337734d73e547a921b682069ccd54788152cff695f469a8e54e84134",
+        "head_file_mtime_ns": 1788654328953442318,
+        "refs_sha256": "e0ead4e7d7e50deb6401f0a67a0aca1aff83de3df4a8e50d2bfc98103ef02093"
+      },
+      "global_refs_changed_since_baseline": true
+    },
+    "after": {
+      "source": "7d4f17221f13d850cb7db06cdbb6261119ca97b52228adeac74d82f6496a9bff",
+      "tree": "f568f3a7fcdd7099bf8f9b38c676ebcdda488d2d",
+      "parent": "2049f65960cc91e9e30bbd5ff1e11fc0fdf7cbd9",
+      "source_files": 177,
+      "harness_records": 8,
+      "document_records": 4,
+      "mapping": "PASS",
+      "parent_index": "PASS",
+      "head_index": "UNCHANGED",
+      "tree_modes": {
+        "100644": 22399,
+        "100755": 81,
+        "120000": 1
+      },
+      "state_after": {
+        "head": "2049f65960cc91e9e30bbd5ff1e11fc0fdf7cbd9",
+        "index_path": "/Users/babar/projects/sdd-kit-public/.git/worktrees/003-gate-round-reduction-and-token-discipline/index",
+        "index_sha256": "c492d7ea95abf8e8c335001f20c62ff50bc6f1e2179d7a07d30811181b3dd700",
+        "index_bytes": 2200525,
+        "index_mtime_ns": 1792957592613445716,
+        "head_file_sha256": "36b441e5337734d73e547a921b682069ccd54788152cff695f469a8e54e84134",
+        "head_file_mtime_ns": 1788654328953442318,
+        "refs_sha256": "b012f55645b0c4d59bad2f954b709046dd69a32315e7f72091e2722eb4930fc3"
+      },
+      "global_refs_changed_since_baseline": true
+    }
+  },
+  "nativePhaseCompleted": {
+    "status": "PREPARED_NOT_EXECUTED",
+    "source": "7d4f17221f13d850cb7db06cdbb6261119ca97b52228adeac74d82f6496a9bff",
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "preflightPassed": false,
+    "phase": "native-timed-argv-returned",
+    "helperSha256": "262b6d80b872b69e9fdecc9935d40654b8a2f44ca9ff3f968d894eb2894c0396",
+    "runnerSha256": "286b71223a198423719bb09262e024317a5b6e8becca3d1e015ee2caba91fba3",
+    "actualPower": "UNKNOWN_NOT_CHECKED",
+    "actualFreeBytes": "UNKNOWN_NOT_CHECKED",
+    "requires": [
+      "Actual AC Power and >=8589934592 free bytes immediately before native launch; helper rechecks both",
+      "No live source writer/floor process, verification lock, pending or staged round",
+      "Every collision suffix must be absent; do not retry or replace a surviving process",
+      "Exact source and raw tasks/status/index/HEAD binding must still pass verify-prepublish.sh",
+      "Parent records native wrapper PID and exit; require floor rc and wrapper rc both 0 and a new floor ID"
+    ],
+    "verifierOutputScope": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s60-evidence-preparation/verifier-output-scope.json",
+    "startedAt": "2026-10-29T23:11:15.503169+00:00",
+    "wrapperPid": 29782,
+    "power": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=23068771)\t100%; finishing charge; 0:00 remaining present: true\n",
+    "freeBytes": 9006284800,
+    "timedArgv": [
+      "/usr/bin/time",
+      "-p",
+      "-o",
+      "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s60-final-floorrun.time",
+      "/bin/bash",
+      "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s60-final-floor.sh",
+      "1"
+    ],
+    "endedAt": "2026-10-30T11:11:29.760705+00:00",
+    "exit": 0,
+    "elapsedSeconds": 31378.992930458
+  },
+  "nativeTime": "real 43214.25\nuser 14988.66\nsys 11625.64\n",
+  "nativePreAndPost": "start=2026-10-29T23:11:29Z\n/dev/disk3s1s1   228Gi    12Gi   8.4Gi    59%    458k   88M    1%   /\ntotal = 5120.00M  used = 3400.25M  free = 1719.75M  (encrypted)\ncaptures-before=838\nfloor-latest-before=FLOOR-LxJkv3\nend=2026-10-30T11:10:46Z\ncaptures-after=858\nfloor-latest-after=FLOOR-DJZyNl\n/dev/disk3s1s1   228Gi    12Gi    15Gi    44%    458k  161M    0%   /\ntotal = 5120.00M  used = 3406.94M  free = 1713.06M  (encrypted)\n",
+  "rawLog": {
+    "path": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s60-final-floorrun.log",
+    "sha256": "b86b6aa18c7f9f23d11765c95ec94a980fc5df7adc926b18a1ce0cddcca1067e",
+    "bytes": 339,
+    "text": "result=FLOOR-DJZyNl source=7d4f17221f13d850cb7db06cdbb6261119ca97b52228adeac74d82f6496a9bff exit=0 executed=20 cache-hits=81 records=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/floors/FLOOR-DJZyNl/commands.nul\n"
+  },
+  "complete": {
+    "path": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/floors/FLOOR-DJZyNl/COMPLETE",
+    "sha256": "d6bac8c6d0c0d808490a588425bb49c5243f2087d6b1f540c799eac502333619",
+    "text": "verification:1\nf8eb5728859a7b231c69721b689b11b35e83d89c5570fb204e56e5e0e5c03276 meta.nul\na10f8e08a3720fc112f57e0c3842e721999e32aed2166a3db8013e804cad4b2d commands.nul\n8766df908be5d8f628c3880af34ae761dd1c9c4946e8da08da3e566c8c0c788a bindings.nul\n7d4f17221f13d850cb7db06cdbb6261119ca97b52228adeac74d82f6496a9bff inputs.nul\n8af367bcbcf5956d1dbbad28748fbb59f4c37efe13b23df4abb035cfad1179f8 roots.nul\n"
+  },
+  "floorDirectory": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/floors/FLOOR-DJZyNl",
+  "floorArtifactInfo": {
+    "meta.nul": {
+      "sha256": "f8eb5728859a7b231c69721b689b11b35e83d89c5570fb204e56e5e0e5c03276",
+      "mode": 420,
+      "mtimeNs": 1793358645646090345,
+      "size": 175,
+      "symlink": false
+    },
+    "commands.nul": {
+      "sha256": "a10f8e08a3720fc112f57e0c3842e721999e32aed2166a3db8013e804cad4b2d",
+      "mode": 420,
+      "mtimeNs": 1793358603575214313,
+      "size": 29699,
+      "symlink": false
+    },
+    "bindings.nul": {
+      "sha256": "8766df908be5d8f628c3880af34ae761dd1c9c4946e8da08da3e566c8c0c788a",
+      "mode": 420,
+      "mtimeNs": 1793315490153852550,
+      "size": 253653,
+      "symlink": false
+    },
+    "inputs.nul": {
+      "sha256": "7d4f17221f13d850cb7db06cdbb6261119ca97b52228adeac74d82f6496a9bff",
+      "mode": 420,
+      "mtimeNs": 1793315503591186952,
+      "size": 46619,
+      "symlink": false
+    },
+    "roots.nul": {
+      "sha256": "8af367bcbcf5956d1dbbad28748fbb59f4c37efe13b23df4abb035cfad1179f8",
+      "mode": 420,
+      "mtimeNs": 1793315489633999895,
+      "size": 93,
+      "symlink": false
+    },
+    "COMPLETE": {
+      "sha256": "d6bac8c6d0c0d808490a588425bb49c5243f2087d6b1f540c799eac502333619",
+      "mode": 420,
+      "mtimeNs": 1793358645943201818,
+      "size": 396,
+      "symlink": false
+    }
+  },
+  "expensiveFloorValidatorExecuted": false
+}

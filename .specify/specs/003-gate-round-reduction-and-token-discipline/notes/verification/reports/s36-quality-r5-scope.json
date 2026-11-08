@@ -1,0 +1,32 @@
+{
+  "writtenAt": "2026-10-28T10:55:28.601941+00:00",
+  "files": {
+    "scripts/sdd-analyze.sh": {
+      "baselinePath": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/before-live-application/scripts/sdd-analyze.sh",
+      "beforeSha256": "cfef526b91e34e5d1b60f169a0ef9dda9d6b0ed1f1e1590ad0ec034f2e0e2c96",
+      "currentSha256": "c43de9e92df5657a3a94091a73bccb9abe37f9e1c3c3f6ccf6cb1cfa64f3a3f2",
+      "mode": 493,
+      "mtimeNs": 1793088116020109886
+    },
+    "tests/test-sdd-analyze.sh": {
+      "baselinePath": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/before-live-application/tests/test-sdd-analyze.sh",
+      "beforeSha256": "c2f0ef08c4d4774d10d3e9c817baa5ead211a94fce5fd634aa4b064753e42521",
+      "currentSha256": "e5b5cde870b2da8c086a41f3a3824b401262343225108c7f3bab716324150c9a",
+      "mode": 420,
+      "mtimeNs": 1793183737724792921
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md": {
+      "baselinePath": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/before-live-application/.specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md",
+      "beforeSha256": "add4d6235dc7554841a041fb9bd04083630ca987278484ac88dd23406b7aecaa",
+      "currentSha256": "b5c663f7299074826b1e00a9a23a2041ec210d4fa2d66af455498e40411a855c",
+      "mode": 384,
+      "mtimeNs": 1793184827802227362
+    }
+  },
+  "capture": "CAP-818-fLEvh7",
+  "acceptedReceipt": "ACC-wrdG2W",
+  "source": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+  "latestRepair": "Exactly two fixture builders, per s36-fixture-fix/fixture-only.patch; other task diffs are retained acceptance/control bookkeeping",
+  "priorQualityReport": "s33-o034-quality-review-r4.md",
+  "pending": "Fresh T029 control and new frozen hosted CI/floor/formal gates after this code review"
+}

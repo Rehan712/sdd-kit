@@ -1,0 +1,40 @@
+{
+  "original": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261026-s29/verify-prepublish.sh",
+  "original_sha256": "f2ba908421bff48665e72a7fbfb039af23ee8c38890a5ffe23c2e118b0f75cd8",
+  "substitutions": [
+    [
+      "$out/inputs-after.nul",
+      "$out/hosted-s30-audit/inputs-{phase}.nul"
+    ],
+    [
+      "owned / 'inputs-after.nul'",
+      "owned / 'hosted-s30-audit/inputs-{phase}.nul'"
+    ],
+    [
+      "owned / 'verification-final.json'",
+      "owned / 'hosted-s30-audit/verification-{phase}.json'"
+    ]
+  ],
+  "syntax_checks": [
+    {
+      "argv": [
+        "bash",
+        "-n",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261026-s29/hosted-s30-audit/verify-before.sh"
+      ],
+      "exit": 0,
+      "started": "2026-10-26T22:13:05.880972+00:00",
+      "seconds": 0.005
+    },
+    {
+      "argv": [
+        "bash",
+        "-n",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261026-s29/hosted-s30-audit/verify-after.sh"
+      ],
+      "exit": 0,
+      "started": "2026-10-26T22:13:05.886164+00:00",
+      "seconds": 0.003
+    }
+  ]
+}

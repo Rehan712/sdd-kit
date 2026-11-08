@@ -1,0 +1,25 @@
+{
+  "stage": "helper-data-substitution",
+  "exit": 1,
+  "cause": "Assertion expected ci-20261028-s34 in floor-launch JSON, which has only the floor helper path. No target launch JSON was created.",
+  "builderRestarted": false,
+  "builderExit": 0,
+  "commitTreeExit": 0,
+  "continuation": "Inspect existing helper hashes, retain them, create only absent remaining outputs with exact present substitutions.",
+  "existingHelpers": {
+    "summary.json": "b4d32cdcee2eb11f306db43257fd4c65881d8a7e83b0d194a91560000448141f",
+    "test-collector.py": "41624e01ba8db1ab7f22414b9bea39d4e8c0157f2be813c85703e59a4622ca95",
+    "verify-prepublish.sh": "809abe5c891f3bfb2189e3e825982cc78a725657cbd0db040668c863453cf031",
+    "source-raw-before.json": "398848f8fd43f41fac1692a2a8734b3954f14edadbe1617b06c9c8bea9215a61",
+    "helper-origin.json": "8da5dfef1d6cc79a52ac9c0aebafffd3a6d7856ee272c4c566967a3439c3fe52",
+    "state-before.json": "68bae44725cb3a117b6d8199762eb705739b8c6bc8c7f7119110fdd0a56157ec",
+    "collect.sh": "45d6099275964163be1f798244c54e4bbd7681da5a9aa128d541246e01427fd8",
+    "collector-origin.json": "194d49e97011cd7268a33b4390e375e101b50425cd137db36a7eba0f7917c857",
+    "build-snapshot.sh": "88e344100a39b793eb5230b94e0ec9ffdc0a4a1be023f1b3941845479857c1cd",
+    "source-mapping.tsv": "aec17bdb57bee380dec232faa9c5653a1991ad277e75ce046d2d1bb963e5fc16",
+    "scratch-path.txt": "57be847283ded6be04a62a734553531eb97e3cc1812f27956f3bf876f32cf0cb",
+    "origins.json": "4a42ddf613d6c140a5d2a0d84a172764da8e6f1faefc00858c919689bedea4a4",
+    "protected-before.json": "52f61832713fb3b630c06551f17772a6e3d3a8fa9389012286e1ac14bd5c0c0b",
+    "hosted-s38-audit/collect-hosted.py": "424a42c24772def054b5c34b61135cbf0097376161ff84c74280f4d1c07593e0"
+  }
+}

@@ -1,0 +1,1304 @@
+{
+  "total": 48,
+  "missingWarnings": 24,
+  "controls": 24,
+  "results": [
+    {
+      "number": 1,
+      "command": "grep>out.txt AC-001 README.md",
+      "analyzerArgv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "analyzerCwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": true,
+      "consistent": false,
+      "shellArgv": [
+        "/bin/bash",
+        "-c",
+        "grep>out.txt AC-001 README.md"
+      ],
+      "shellCwd": "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected",
+      "shellCommand": "grep>out.txt AC-001 README.md",
+      "shellExit": 0,
+      "executedArgv": [
+        "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected/bin/grep",
+        "AC-001",
+        "README.md"
+      ],
+      "ownedStub": true
+    },
+    {
+      "number": 2,
+      "command": "grep>|out.txt AC-001 README.md",
+      "analyzerArgv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "analyzerCwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": false,
+      "consistent": true,
+      "shellArgv": [
+        "/bin/bash",
+        "-c",
+        "grep>|out.txt AC-001 README.md"
+      ],
+      "shellCwd": "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected",
+      "shellCommand": "grep>|out.txt AC-001 README.md",
+      "shellExit": 0,
+      "executedArgv": [
+        "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected/bin/grep",
+        "AC-001",
+        "README.md"
+      ],
+      "ownedStub": true
+    },
+    {
+      "number": 3,
+      "command": "grep >|out.txt AC-001 README.md",
+      "analyzerArgv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "analyzerCwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": true,
+      "consistent": false,
+      "shellArgv": [
+        "/bin/bash",
+        "-c",
+        "grep >|out.txt AC-001 README.md"
+      ],
+      "shellCwd": "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected",
+      "shellCommand": "grep >|out.txt AC-001 README.md",
+      "shellExit": 0,
+      "executedArgv": [
+        "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected/bin/grep",
+        "AC-001",
+        "README.md"
+      ],
+      "ownedStub": true
+    },
+    {
+      "number": 4,
+      "command": "grep>| out.txt AC-001 README.md",
+      "analyzerArgv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "analyzerCwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": false,
+      "consistent": true,
+      "shellArgv": [
+        "/bin/bash",
+        "-c",
+        "grep>| out.txt AC-001 README.md"
+      ],
+      "shellCwd": "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected",
+      "shellCommand": "grep>| out.txt AC-001 README.md",
+      "shellExit": 0,
+      "executedArgv": [
+        "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected/bin/grep",
+        "AC-001",
+        "README.md"
+      ],
+      "ownedStub": true
+    },
+    {
+      "number": 5,
+      "command": "/usr/bin/grep>out.txt AC-001 README.md",
+      "analyzerArgv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "analyzerCwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": true,
+      "consistent": false,
+      "shellArgv": [
+        "/bin/bash",
+        "-c",
+        "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected/bin/grep>out.txt AC-001 README.md"
+      ],
+      "shellCwd": "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected",
+      "shellCommand": "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected/bin/grep>out.txt AC-001 README.md",
+      "shellExit": 0,
+      "executedArgv": [
+        "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected/bin/grep",
+        "AC-001",
+        "README.md"
+      ],
+      "ownedStub": true
+    },
+    {
+      "number": 6,
+      "command": "/usr/bin/grep>|out.txt AC-001 README.md",
+      "analyzerArgv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "analyzerCwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": false,
+      "consistent": true,
+      "shellArgv": [
+        "/bin/bash",
+        "-c",
+        "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected/bin/grep>|out.txt AC-001 README.md"
+      ],
+      "shellCwd": "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected",
+      "shellCommand": "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected/bin/grep>|out.txt AC-001 README.md",
+      "shellExit": 0,
+      "executedArgv": [
+        "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected/bin/grep",
+        "AC-001",
+        "README.md"
+      ],
+      "ownedStub": true
+    },
+    {
+      "number": 7,
+      "command": "/usr/bin/grep >|out.txt AC-001 README.md",
+      "analyzerArgv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "analyzerCwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": true,
+      "consistent": false,
+      "shellArgv": [
+        "/bin/bash",
+        "-c",
+        "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected/bin/grep >|out.txt AC-001 README.md"
+      ],
+      "shellCwd": "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected",
+      "shellCommand": "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected/bin/grep >|out.txt AC-001 README.md",
+      "shellExit": 0,
+      "executedArgv": [
+        "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected/bin/grep",
+        "AC-001",
+        "README.md"
+      ],
+      "ownedStub": true
+    },
+    {
+      "number": 8,
+      "command": "/usr/bin/grep>| out.txt AC-001 README.md",
+      "analyzerArgv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "analyzerCwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": false,
+      "consistent": true,
+      "shellArgv": [
+        "/bin/bash",
+        "-c",
+        "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected/bin/grep>| out.txt AC-001 README.md"
+      ],
+      "shellCwd": "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected",
+      "shellCommand": "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected/bin/grep>| out.txt AC-001 README.md",
+      "shellExit": 0,
+      "executedArgv": [
+        "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected/bin/grep",
+        "AC-001",
+        "README.md"
+      ],
+      "ownedStub": true
+    },
+    {
+      "number": 9,
+      "command": "./tools/grep>out.txt AC-001 README.md",
+      "analyzerArgv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "analyzerCwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": true,
+      "consistent": false,
+      "shellArgv": [
+        "/bin/bash",
+        "-c",
+        "./tools/grep>out.txt AC-001 README.md"
+      ],
+      "shellCwd": "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected",
+      "shellCommand": "./tools/grep>out.txt AC-001 README.md",
+      "shellExit": 0,
+      "executedArgv": [
+        "./tools/grep",
+        "AC-001",
+        "README.md"
+      ],
+      "ownedStub": true
+    },
+    {
+      "number": 10,
+      "command": "./tools/grep>|out.txt AC-001 README.md",
+      "analyzerArgv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "analyzerCwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": false,
+      "consistent": true,
+      "shellArgv": [
+        "/bin/bash",
+        "-c",
+        "./tools/grep>|out.txt AC-001 README.md"
+      ],
+      "shellCwd": "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected",
+      "shellCommand": "./tools/grep>|out.txt AC-001 README.md",
+      "shellExit": 0,
+      "executedArgv": [
+        "./tools/grep",
+        "AC-001",
+        "README.md"
+      ],
+      "ownedStub": true
+    },
+    {
+      "number": 11,
+      "command": "./tools/grep >|out.txt AC-001 README.md",
+      "analyzerArgv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "analyzerCwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": true,
+      "consistent": false,
+      "shellArgv": [
+        "/bin/bash",
+        "-c",
+        "./tools/grep >|out.txt AC-001 README.md"
+      ],
+      "shellCwd": "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected",
+      "shellCommand": "./tools/grep >|out.txt AC-001 README.md",
+      "shellExit": 0,
+      "executedArgv": [
+        "./tools/grep",
+        "AC-001",
+        "README.md"
+      ],
+      "ownedStub": true
+    },
+    {
+      "number": 12,
+      "command": "./tools/grep>| out.txt AC-001 README.md",
+      "analyzerArgv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "analyzerCwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": false,
+      "consistent": true,
+      "shellArgv": [
+        "/bin/bash",
+        "-c",
+        "./tools/grep>| out.txt AC-001 README.md"
+      ],
+      "shellCwd": "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected",
+      "shellCommand": "./tools/grep>| out.txt AC-001 README.md",
+      "shellExit": 0,
+      "executedArgv": [
+        "./tools/grep",
+        "AC-001",
+        "README.md"
+      ],
+      "ownedStub": true
+    },
+    {
+      "number": 13,
+      "command": "tests/grep>out.txt AC-001 README.md",
+      "analyzerArgv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "analyzerCwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": true,
+      "consistent": false,
+      "shellArgv": [
+        "/bin/bash",
+        "-c",
+        "tests/grep>out.txt AC-001 README.md"
+      ],
+      "shellCwd": "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected",
+      "shellCommand": "tests/grep>out.txt AC-001 README.md",
+      "shellExit": 0,
+      "executedArgv": [
+        "tests/grep",
+        "AC-001",
+        "README.md"
+      ],
+      "ownedStub": true
+    },
+    {
+      "number": 14,
+      "command": "tests/grep>|out.txt AC-001 README.md",
+      "analyzerArgv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "analyzerCwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": false,
+      "consistent": true,
+      "shellArgv": [
+        "/bin/bash",
+        "-c",
+        "tests/grep>|out.txt AC-001 README.md"
+      ],
+      "shellCwd": "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected",
+      "shellCommand": "tests/grep>|out.txt AC-001 README.md",
+      "shellExit": 0,
+      "executedArgv": [
+        "tests/grep",
+        "AC-001",
+        "README.md"
+      ],
+      "ownedStub": true
+    },
+    {
+      "number": 15,
+      "command": "tests/grep >|out.txt AC-001 README.md",
+      "analyzerArgv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "analyzerCwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": true,
+      "consistent": false,
+      "shellArgv": [
+        "/bin/bash",
+        "-c",
+        "tests/grep >|out.txt AC-001 README.md"
+      ],
+      "shellCwd": "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected",
+      "shellCommand": "tests/grep >|out.txt AC-001 README.md",
+      "shellExit": 0,
+      "executedArgv": [
+        "tests/grep",
+        "AC-001",
+        "README.md"
+      ],
+      "ownedStub": true
+    },
+    {
+      "number": 16,
+      "command": "tests/grep>| out.txt AC-001 README.md",
+      "analyzerArgv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "analyzerCwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": false,
+      "consistent": true,
+      "shellArgv": [
+        "/bin/bash",
+        "-c",
+        "tests/grep>| out.txt AC-001 README.md"
+      ],
+      "shellCwd": "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected",
+      "shellCommand": "tests/grep>| out.txt AC-001 README.md",
+      "shellExit": 0,
+      "executedArgv": [
+        "tests/grep",
+        "AC-001",
+        "README.md"
+      ],
+      "ownedStub": true
+    },
+    {
+      "number": 17,
+      "command": "rg>out.txt AC-001 README.md",
+      "analyzerArgv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "analyzerCwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": true,
+      "consistent": false,
+      "shellArgv": [
+        "/bin/bash",
+        "-c",
+        "rg>out.txt AC-001 README.md"
+      ],
+      "shellCwd": "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected",
+      "shellCommand": "rg>out.txt AC-001 README.md",
+      "shellExit": 0,
+      "executedArgv": [
+        "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected/bin/rg",
+        "AC-001",
+        "README.md"
+      ],
+      "ownedStub": true
+    },
+    {
+      "number": 18,
+      "command": "rg>|out.txt AC-001 README.md",
+      "analyzerArgv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "analyzerCwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": false,
+      "consistent": true,
+      "shellArgv": [
+        "/bin/bash",
+        "-c",
+        "rg>|out.txt AC-001 README.md"
+      ],
+      "shellCwd": "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected",
+      "shellCommand": "rg>|out.txt AC-001 README.md",
+      "shellExit": 0,
+      "executedArgv": [
+        "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected/bin/rg",
+        "AC-001",
+        "README.md"
+      ],
+      "ownedStub": true
+    },
+    {
+      "number": 19,
+      "command": "rg >|out.txt AC-001 README.md",
+      "analyzerArgv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "analyzerCwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": true,
+      "consistent": false,
+      "shellArgv": [
+        "/bin/bash",
+        "-c",
+        "rg >|out.txt AC-001 README.md"
+      ],
+      "shellCwd": "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected",
+      "shellCommand": "rg >|out.txt AC-001 README.md",
+      "shellExit": 0,
+      "executedArgv": [
+        "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected/bin/rg",
+        "AC-001",
+        "README.md"
+      ],
+      "ownedStub": true
+    },
+    {
+      "number": 20,
+      "command": "rg>| out.txt AC-001 README.md",
+      "analyzerArgv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "analyzerCwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": false,
+      "consistent": true,
+      "shellArgv": [
+        "/bin/bash",
+        "-c",
+        "rg>| out.txt AC-001 README.md"
+      ],
+      "shellCwd": "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected",
+      "shellCommand": "rg>| out.txt AC-001 README.md",
+      "shellExit": 0,
+      "executedArgv": [
+        "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected/bin/rg",
+        "AC-001",
+        "README.md"
+      ],
+      "ownedStub": true
+    },
+    {
+      "number": 21,
+      "command": "/usr/bin/rg>out.txt AC-001 README.md",
+      "analyzerArgv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "analyzerCwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": true,
+      "consistent": false,
+      "shellArgv": [
+        "/bin/bash",
+        "-c",
+        "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected/bin/rg>out.txt AC-001 README.md"
+      ],
+      "shellCwd": "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected",
+      "shellCommand": "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected/bin/rg>out.txt AC-001 README.md",
+      "shellExit": 0,
+      "executedArgv": [
+        "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected/bin/rg",
+        "AC-001",
+        "README.md"
+      ],
+      "ownedStub": true
+    },
+    {
+      "number": 22,
+      "command": "/usr/bin/rg>|out.txt AC-001 README.md",
+      "analyzerArgv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "analyzerCwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": false,
+      "consistent": true,
+      "shellArgv": [
+        "/bin/bash",
+        "-c",
+        "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected/bin/rg>|out.txt AC-001 README.md"
+      ],
+      "shellCwd": "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected",
+      "shellCommand": "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected/bin/rg>|out.txt AC-001 README.md",
+      "shellExit": 0,
+      "executedArgv": [
+        "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected/bin/rg",
+        "AC-001",
+        "README.md"
+      ],
+      "ownedStub": true
+    },
+    {
+      "number": 23,
+      "command": "/usr/bin/rg >|out.txt AC-001 README.md",
+      "analyzerArgv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "analyzerCwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": true,
+      "consistent": false,
+      "shellArgv": [
+        "/bin/bash",
+        "-c",
+        "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected/bin/rg >|out.txt AC-001 README.md"
+      ],
+      "shellCwd": "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected",
+      "shellCommand": "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected/bin/rg >|out.txt AC-001 README.md",
+      "shellExit": 0,
+      "executedArgv": [
+        "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected/bin/rg",
+        "AC-001",
+        "README.md"
+      ],
+      "ownedStub": true
+    },
+    {
+      "number": 24,
+      "command": "/usr/bin/rg>| out.txt AC-001 README.md",
+      "analyzerArgv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "analyzerCwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": false,
+      "consistent": true,
+      "shellArgv": [
+        "/bin/bash",
+        "-c",
+        "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected/bin/rg>| out.txt AC-001 README.md"
+      ],
+      "shellCwd": "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected",
+      "shellCommand": "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected/bin/rg>| out.txt AC-001 README.md",
+      "shellExit": 0,
+      "executedArgv": [
+        "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected/bin/rg",
+        "AC-001",
+        "README.md"
+      ],
+      "ownedStub": true
+    },
+    {
+      "number": 25,
+      "command": "./tools/rg>out.txt AC-001 README.md",
+      "analyzerArgv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "analyzerCwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": true,
+      "consistent": false,
+      "shellArgv": [
+        "/bin/bash",
+        "-c",
+        "./tools/rg>out.txt AC-001 README.md"
+      ],
+      "shellCwd": "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected",
+      "shellCommand": "./tools/rg>out.txt AC-001 README.md",
+      "shellExit": 0,
+      "executedArgv": [
+        "./tools/rg",
+        "AC-001",
+        "README.md"
+      ],
+      "ownedStub": true
+    },
+    {
+      "number": 26,
+      "command": "./tools/rg>|out.txt AC-001 README.md",
+      "analyzerArgv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "analyzerCwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": false,
+      "consistent": true,
+      "shellArgv": [
+        "/bin/bash",
+        "-c",
+        "./tools/rg>|out.txt AC-001 README.md"
+      ],
+      "shellCwd": "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected",
+      "shellCommand": "./tools/rg>|out.txt AC-001 README.md",
+      "shellExit": 0,
+      "executedArgv": [
+        "./tools/rg",
+        "AC-001",
+        "README.md"
+      ],
+      "ownedStub": true
+    },
+    {
+      "number": 27,
+      "command": "./tools/rg >|out.txt AC-001 README.md",
+      "analyzerArgv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "analyzerCwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": true,
+      "consistent": false,
+      "shellArgv": [
+        "/bin/bash",
+        "-c",
+        "./tools/rg >|out.txt AC-001 README.md"
+      ],
+      "shellCwd": "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected",
+      "shellCommand": "./tools/rg >|out.txt AC-001 README.md",
+      "shellExit": 0,
+      "executedArgv": [
+        "./tools/rg",
+        "AC-001",
+        "README.md"
+      ],
+      "ownedStub": true
+    },
+    {
+      "number": 28,
+      "command": "./tools/rg>| out.txt AC-001 README.md",
+      "analyzerArgv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "analyzerCwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": false,
+      "consistent": true,
+      "shellArgv": [
+        "/bin/bash",
+        "-c",
+        "./tools/rg>| out.txt AC-001 README.md"
+      ],
+      "shellCwd": "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected",
+      "shellCommand": "./tools/rg>| out.txt AC-001 README.md",
+      "shellExit": 0,
+      "executedArgv": [
+        "./tools/rg",
+        "AC-001",
+        "README.md"
+      ],
+      "ownedStub": true
+    },
+    {
+      "number": 29,
+      "command": "tests/rg>out.txt AC-001 README.md",
+      "analyzerArgv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "analyzerCwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": true,
+      "consistent": false,
+      "shellArgv": [
+        "/bin/bash",
+        "-c",
+        "tests/rg>out.txt AC-001 README.md"
+      ],
+      "shellCwd": "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected",
+      "shellCommand": "tests/rg>out.txt AC-001 README.md",
+      "shellExit": 0,
+      "executedArgv": [
+        "tests/rg",
+        "AC-001",
+        "README.md"
+      ],
+      "ownedStub": true
+    },
+    {
+      "number": 30,
+      "command": "tests/rg>|out.txt AC-001 README.md",
+      "analyzerArgv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "analyzerCwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": false,
+      "consistent": true,
+      "shellArgv": [
+        "/bin/bash",
+        "-c",
+        "tests/rg>|out.txt AC-001 README.md"
+      ],
+      "shellCwd": "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected",
+      "shellCommand": "tests/rg>|out.txt AC-001 README.md",
+      "shellExit": 0,
+      "executedArgv": [
+        "tests/rg",
+        "AC-001",
+        "README.md"
+      ],
+      "ownedStub": true
+    },
+    {
+      "number": 31,
+      "command": "tests/rg >|out.txt AC-001 README.md",
+      "analyzerArgv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "analyzerCwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": true,
+      "consistent": false,
+      "shellArgv": [
+        "/bin/bash",
+        "-c",
+        "tests/rg >|out.txt AC-001 README.md"
+      ],
+      "shellCwd": "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected",
+      "shellCommand": "tests/rg >|out.txt AC-001 README.md",
+      "shellExit": 0,
+      "executedArgv": [
+        "tests/rg",
+        "AC-001",
+        "README.md"
+      ],
+      "ownedStub": true
+    },
+    {
+      "number": 32,
+      "command": "tests/rg>| out.txt AC-001 README.md",
+      "analyzerArgv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "analyzerCwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": false,
+      "consistent": true,
+      "shellArgv": [
+        "/bin/bash",
+        "-c",
+        "tests/rg>| out.txt AC-001 README.md"
+      ],
+      "shellCwd": "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected",
+      "shellCommand": "tests/rg>| out.txt AC-001 README.md",
+      "shellExit": 0,
+      "executedArgv": [
+        "tests/rg",
+        "AC-001",
+        "README.md"
+      ],
+      "ownedStub": true
+    },
+    {
+      "number": 33,
+      "command": "diff>out.txt old new",
+      "analyzerArgv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "analyzerCwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": true,
+      "consistent": false,
+      "shellArgv": [
+        "/bin/bash",
+        "-c",
+        "diff>out.txt old new"
+      ],
+      "shellCwd": "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected",
+      "shellCommand": "diff>out.txt old new",
+      "shellExit": 0,
+      "executedArgv": [
+        "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected/bin/diff",
+        "old",
+        "new"
+      ],
+      "ownedStub": true
+    },
+    {
+      "number": 34,
+      "command": "diff>|out.txt old new",
+      "analyzerArgv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "analyzerCwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": false,
+      "consistent": true,
+      "shellArgv": [
+        "/bin/bash",
+        "-c",
+        "diff>|out.txt old new"
+      ],
+      "shellCwd": "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected",
+      "shellCommand": "diff>|out.txt old new",
+      "shellExit": 0,
+      "executedArgv": [
+        "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected/bin/diff",
+        "old",
+        "new"
+      ],
+      "ownedStub": true
+    },
+    {
+      "number": 35,
+      "command": "diff >|out.txt old new",
+      "analyzerArgv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "analyzerCwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": true,
+      "consistent": false,
+      "shellArgv": [
+        "/bin/bash",
+        "-c",
+        "diff >|out.txt old new"
+      ],
+      "shellCwd": "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected",
+      "shellCommand": "diff >|out.txt old new",
+      "shellExit": 0,
+      "executedArgv": [
+        "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected/bin/diff",
+        "old",
+        "new"
+      ],
+      "ownedStub": true
+    },
+    {
+      "number": 36,
+      "command": "diff>| out.txt old new",
+      "analyzerArgv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "analyzerCwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": false,
+      "consistent": true,
+      "shellArgv": [
+        "/bin/bash",
+        "-c",
+        "diff>| out.txt old new"
+      ],
+      "shellCwd": "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected",
+      "shellCommand": "diff>| out.txt old new",
+      "shellExit": 0,
+      "executedArgv": [
+        "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected/bin/diff",
+        "old",
+        "new"
+      ],
+      "ownedStub": true
+    },
+    {
+      "number": 37,
+      "command": "/usr/bin/diff>out.txt old new",
+      "analyzerArgv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "analyzerCwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": true,
+      "consistent": false,
+      "shellArgv": [
+        "/bin/bash",
+        "-c",
+        "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected/bin/diff>out.txt old new"
+      ],
+      "shellCwd": "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected",
+      "shellCommand": "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected/bin/diff>out.txt old new",
+      "shellExit": 0,
+      "executedArgv": [
+        "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected/bin/diff",
+        "old",
+        "new"
+      ],
+      "ownedStub": true
+    },
+    {
+      "number": 38,
+      "command": "/usr/bin/diff>|out.txt old new",
+      "analyzerArgv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "analyzerCwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": false,
+      "consistent": true,
+      "shellArgv": [
+        "/bin/bash",
+        "-c",
+        "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected/bin/diff>|out.txt old new"
+      ],
+      "shellCwd": "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected",
+      "shellCommand": "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected/bin/diff>|out.txt old new",
+      "shellExit": 0,
+      "executedArgv": [
+        "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected/bin/diff",
+        "old",
+        "new"
+      ],
+      "ownedStub": true
+    },
+    {
+      "number": 39,
+      "command": "/usr/bin/diff >|out.txt old new",
+      "analyzerArgv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "analyzerCwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": true,
+      "consistent": false,
+      "shellArgv": [
+        "/bin/bash",
+        "-c",
+        "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected/bin/diff >|out.txt old new"
+      ],
+      "shellCwd": "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected",
+      "shellCommand": "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected/bin/diff >|out.txt old new",
+      "shellExit": 0,
+      "executedArgv": [
+        "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected/bin/diff",
+        "old",
+        "new"
+      ],
+      "ownedStub": true
+    },
+    {
+      "number": 40,
+      "command": "/usr/bin/diff>| out.txt old new",
+      "analyzerArgv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "analyzerCwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": false,
+      "consistent": true,
+      "shellArgv": [
+        "/bin/bash",
+        "-c",
+        "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected/bin/diff>| out.txt old new"
+      ],
+      "shellCwd": "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected",
+      "shellCommand": "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected/bin/diff>| out.txt old new",
+      "shellExit": 0,
+      "executedArgv": [
+        "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected/bin/diff",
+        "old",
+        "new"
+      ],
+      "ownedStub": true
+    },
+    {
+      "number": 41,
+      "command": "./tools/diff>out.txt old new",
+      "analyzerArgv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "analyzerCwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": true,
+      "consistent": false,
+      "shellArgv": [
+        "/bin/bash",
+        "-c",
+        "./tools/diff>out.txt old new"
+      ],
+      "shellCwd": "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected",
+      "shellCommand": "./tools/diff>out.txt old new",
+      "shellExit": 0,
+      "executedArgv": [
+        "./tools/diff",
+        "old",
+        "new"
+      ],
+      "ownedStub": true
+    },
+    {
+      "number": 42,
+      "command": "./tools/diff>|out.txt old new",
+      "analyzerArgv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "analyzerCwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": false,
+      "consistent": true,
+      "shellArgv": [
+        "/bin/bash",
+        "-c",
+        "./tools/diff>|out.txt old new"
+      ],
+      "shellCwd": "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected",
+      "shellCommand": "./tools/diff>|out.txt old new",
+      "shellExit": 0,
+      "executedArgv": [
+        "./tools/diff",
+        "old",
+        "new"
+      ],
+      "ownedStub": true
+    },
+    {
+      "number": 43,
+      "command": "./tools/diff >|out.txt old new",
+      "analyzerArgv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "analyzerCwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": true,
+      "consistent": false,
+      "shellArgv": [
+        "/bin/bash",
+        "-c",
+        "./tools/diff >|out.txt old new"
+      ],
+      "shellCwd": "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected",
+      "shellCommand": "./tools/diff >|out.txt old new",
+      "shellExit": 0,
+      "executedArgv": [
+        "./tools/diff",
+        "old",
+        "new"
+      ],
+      "ownedStub": true
+    },
+    {
+      "number": 44,
+      "command": "./tools/diff>| out.txt old new",
+      "analyzerArgv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "analyzerCwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": false,
+      "consistent": true,
+      "shellArgv": [
+        "/bin/bash",
+        "-c",
+        "./tools/diff>| out.txt old new"
+      ],
+      "shellCwd": "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected",
+      "shellCommand": "./tools/diff>| out.txt old new",
+      "shellExit": 0,
+      "executedArgv": [
+        "./tools/diff",
+        "old",
+        "new"
+      ],
+      "ownedStub": true
+    },
+    {
+      "number": 45,
+      "command": "tests/diff>out.txt old new",
+      "analyzerArgv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "analyzerCwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": true,
+      "consistent": false,
+      "shellArgv": [
+        "/bin/bash",
+        "-c",
+        "tests/diff>out.txt old new"
+      ],
+      "shellCwd": "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected",
+      "shellCommand": "tests/diff>out.txt old new",
+      "shellExit": 0,
+      "executedArgv": [
+        "tests/diff",
+        "old",
+        "new"
+      ],
+      "ownedStub": true
+    },
+    {
+      "number": 46,
+      "command": "tests/diff>|out.txt old new",
+      "analyzerArgv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "analyzerCwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": false,
+      "consistent": true,
+      "shellArgv": [
+        "/bin/bash",
+        "-c",
+        "tests/diff>|out.txt old new"
+      ],
+      "shellCwd": "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected",
+      "shellCommand": "tests/diff>|out.txt old new",
+      "shellExit": 0,
+      "executedArgv": [
+        "tests/diff",
+        "old",
+        "new"
+      ],
+      "ownedStub": true
+    },
+    {
+      "number": 47,
+      "command": "tests/diff >|out.txt old new",
+      "analyzerArgv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "analyzerCwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": true,
+      "consistent": false,
+      "shellArgv": [
+        "/bin/bash",
+        "-c",
+        "tests/diff >|out.txt old new"
+      ],
+      "shellCwd": "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected",
+      "shellCommand": "tests/diff >|out.txt old new",
+      "shellExit": 0,
+      "executedArgv": [
+        "tests/diff",
+        "old",
+        "new"
+      ],
+      "ownedStub": true
+    },
+    {
+      "number": 48,
+      "command": "tests/diff>| out.txt old new",
+      "analyzerArgv": [
+        "/bin/bash",
+        "/private/tmp/sdd-opponent25-8elh3grt/kit/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd-opponent25-8elh3grt/authoring/proj/.specify/specs/001-test-feature"
+      ],
+      "analyzerCwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "exit": 0,
+      "warned": false,
+      "consistent": true,
+      "shellArgv": [
+        "/bin/bash",
+        "-c",
+        "tests/diff>| out.txt old new"
+      ],
+      "shellCwd": "/private/tmp/sdd-opponent25-8elh3grt/shell-semantics-corrected",
+      "shellCommand": "tests/diff>| out.txt old new",
+      "shellExit": 0,
+      "executedArgv": [
+        "tests/diff",
+        "old",
+        "new"
+      ],
+      "ownedStub": true
+    }
+  ],
+  "interpretation": "Each attached >| or >| space form is a direct known text-tool command with output redirection; all tested shell commands use owned stubs."
+}

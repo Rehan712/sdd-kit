@@ -1,0 +1,346 @@
+{
+  ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261029-s60/build-snapshot.sh": {
+    "donor": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s38/build-snapshot.sh",
+    "target": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261029-s60/build-snapshot.sh",
+    "substitutions": []
+  },
+  ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261029-s60/test-collector.py": {
+    "donor": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s38/test-collector.py",
+    "target": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261029-s60/test-collector.py",
+    "substitutions": []
+  },
+  ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s60-final-floor.sh": {
+    "donor": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s38-final-floor.sh",
+    "target": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s60-final-floor.sh",
+    "substitutions": [
+      {
+        "old": "ci-20261028-s38",
+        "new": "ci-20261029-s60",
+        "count": 1
+      },
+      {
+        "old": "s38-final-floor",
+        "new": "s60-final-floor",
+        "count": 16
+      },
+      {
+        "old": "f156c52e",
+        "new": "7d4f1722",
+        "count": 1
+      }
+    ]
+  },
+  ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s60-evidence-preparation/build-once.py": {
+    "donor": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s38-evidence-preparation/build-once.py",
+    "target": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s60-evidence-preparation/build-once.py",
+    "substitutions": [
+      {
+        "old": "ci-20261028-s38",
+        "new": "ci-20261029-s60",
+        "count": 1
+      },
+      {
+        "old": "s38-evidence-preparation",
+        "new": "s60-evidence-preparation",
+        "count": 1
+      },
+      {
+        "old": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+        "new": "7d4f17221f13d850cb7db06cdbb6261119ca97b52228adeac74d82f6496a9bff",
+        "count": 1
+      },
+      {
+        "old": "OP26 authorization and accepted T029",
+        "new": "OP27 authorization and accepted T029 plus T031a5o1",
+        "count": 1
+      }
+    ]
+  },
+  ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s60-evidence-preparation/validate-preparation.py": {
+    "donor": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s38-evidence-preparation/validate-preparation.py",
+    "target": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s60-evidence-preparation/validate-preparation.py",
+    "substitutions": [
+      {
+        "old": "ci-20261028-s38",
+        "new": "ci-20261029-s60",
+        "count": 1
+      },
+      {
+        "old": "s38-evidence-preparation",
+        "new": "s60-evidence-preparation",
+        "count": 1
+      },
+      {
+        "old": "s38-final-floor",
+        "new": "s60-final-floor",
+        "count": 5
+      },
+      {
+        "old": "d=o.parent/'ci-20261028-s34'",
+        "new": "d=o.parent/'ci-20261028-s38'",
+        "count": 1
+      },
+      {
+        "old": "accepted/T029/ACC-5OLy1X/tasks.after",
+        "new": "accepted/T031a5o1/ACC-zmvoA1/tasks.after",
+        "count": 1
+      },
+      {
+        "old": "'ci-20261028-s34' not in floor",
+        "new": "'ci-20261028-s38' not in floor",
+        "count": 1
+      },
+      {
+        "old": "hosted-s38-audit",
+        "new": "hosted-s60-audit",
+        "count": 1
+      }
+    ]
+  },
+  ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261029-s60/collect.sh": {
+    "donor": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s38/collect.sh",
+    "target": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261029-s60/collect.sh",
+    "substitutions": [
+      {
+        "old": "c68b9a3ab0c39c555d5cb28afa6420cd9a2600b7",
+        "new": "f568f3a7fcdd7099bf8f9b38c676ebcdda488d2d",
+        "count": 1
+      }
+    ]
+  },
+  ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261029-s60/verify-prepublish.sh": {
+    "donor": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s38/verify-prepublish.sh",
+    "target": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261029-s60/verify-prepublish.sh",
+    "substitutions": [
+      {
+        "old": "ci-20261028-s38",
+        "new": "ci-20261029-s60",
+        "count": 1
+      },
+      {
+        "old": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+        "new": "7d4f17221f13d850cb7db06cdbb6261119ca97b52228adeac74d82f6496a9bff",
+        "count": 1
+      },
+      {
+        "old": "c0b0ef2da8160a2c08b61a9ad57719b755b2234c",
+        "new": "c68b9a3ab0c39c555d5cb28afa6420cd9a2600b7",
+        "count": 1
+      }
+    ]
+  },
+  ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261029-s60/hosted-s60-audit/collect-hosted.py": {
+    "donor": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261028-s38/hosted-s38-audit/collect-hosted.py",
+    "target": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261029-s60/hosted-s60-audit/collect-hosted.py",
+    "substitutions": [
+      {
+        "old": "25347ba729886ae0bea029c594ac00f0bc48e767",
+        "new": "e75b3027023ef251fa0c531c96f2b8276aa980ae",
+        "count": 1
+      },
+      {
+        "old": "c68b9a3ab0c39c555d5cb28afa6420cd9a2600b7",
+        "new": "f568f3a7fcdd7099bf8f9b38c676ebcdda488d2d",
+        "count": 1
+      },
+      {
+        "old": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+        "new": "7d4f17221f13d850cb7db06cdbb6261119ca97b52228adeac74d82f6496a9bff",
+        "count": 1
+      }
+    ]
+  },
+  ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s60-evidence-preparation/runner.py": {
+    "donor": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s44-floor-retry/runner.py",
+    "target": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s60-evidence-preparation/runner.py",
+    "substitutions": [
+      {
+        "old": "s44-floor-retry",
+        "new": "s60-evidence-preparation",
+        "count": 1
+      },
+      {
+        "old": "a5d40f648cefe6e55ba731053bfc0bb3272665e4d8dc4a8e0d6859a4225ff69b",
+        "new": "262b6d80b872b69e9fdecc9935d40654b8a2f44ca9ff3f968d894eb2894c0396",
+        "count": 1
+      }
+    ]
+  },
+  ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s60-evidence-preparation/prove-bindings.py": {
+    "donor": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s38-evidence-preparation/prove-bindings.py",
+    "target": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s60-evidence-preparation/prove-bindings.py",
+    "substitutions": [
+      {
+        "old": "ci-20261028-s38",
+        "new": "ci-20261029-s60",
+        "count": 1
+      },
+      {
+        "old": "s38-evidence-preparation",
+        "new": "s60-evidence-preparation",
+        "count": 2
+      },
+      {
+        "old": "s37-t029-control/result.json",
+        "new": "s59-analyzer-accept/result.json",
+        "count": 1
+      },
+      {
+        "old": "[('accept-events/ACCEPT-0LHiyU',{'meta.nul'}),('accept-events/ACCEPT-1F42D0',{'meta.nul'}),('accepted/T029/ACC-5OLy1X',{'meta.nul','return.txt','tasks.after','digests.nul'})]",
+        "new": "[('accept-events/ACCEPT-oovEKE',{'meta.nul'}),('accept-events/ACCEPT-FWY9e6',{'meta.nul'}),('accepted/T029/ACC-nP1KDk',{'meta.nul','return.txt','tasks.after','digests.nul'}),('accept-events/ACCEPT-7BJ9u1',{'meta.nul'}),('accepted/T031a5o1/ACC-zmvoA1',{'meta.nul','return.txt','tasks.after','digests.nul'})]",
+        "count": 1
+      },
+      {
+        "old": "  assert (base/'tasks.after').read_bytes()==(s/'tasks.md').read_bytes()",
+        "new": "  if relative.startswith('accepted/T031a5o1/'):assert (base/'tasks.after').read_bytes()==(s/'tasks.md').read_bytes()",
+        "count": 1
+      },
+      {
+        "old": "in (floor,special)",
+        "new": "==floor",
+        "count": 1
+      },
+      {
+        "old": "control['afterAccept']['tasks']",
+        "new": "control['afterTasks']",
+        "count": 1
+      },
+      {
+        "old": "collectorTransport='Actual donor invokes gh API through collect.sh, which already includes --allow-escape-sequences for raw logs. No HTTP transport rewrite.'",
+        "new": "collectorTransport='Actual s38 donor uses gh API/collect.sh with --allow-escape-sequences, not Python HTTP. Preserved data-only; requested robust HTTP donor absent at named path.'",
+        "count": 1
+      }
+    ]
+  },
+  ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s60-evidence-preparation/finalize.py": {
+    "donor": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s38-evidence-preparation/finalize.py",
+    "target": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s60-evidence-preparation/finalize.py",
+    "substitutions": [
+      {
+        "old": "ci-20261028-s38",
+        "new": "ci-20261029-s60",
+        "count": 1
+      },
+      {
+        "old": "s38-evidence-preparation",
+        "new": "s60-evidence-preparation",
+        "count": 2
+      },
+      {
+        "old": "s38-final-floor",
+        "new": "s60-final-floor",
+        "count": 2
+      },
+      {
+        "old": "accepted/T029/ACC-5OLy1X/",
+        "new": "accepted/T029/ACC-nP1KDk/",
+        "count": 2
+      },
+      {
+        "old": "accept-events/ACCEPT-0LHiyU/",
+        "new": "accept-events/ACCEPT-oovEKE/",
+        "count": 1
+      },
+      {
+        "old": "accept-events/ACCEPT-1F42D0/",
+        "new": "accept-events/ACCEPT-FWY9e6/",
+        "count": 1
+      },
+      {
+        "old": "reports/s34-approval/",
+        "new": "reports/s55-approval/",
+        "count": 1
+      },
+      {
+        "old": "reports/s37-t029-control/",
+        "new": "reports/s57-t029-control/",
+        "count": 1
+      },
+      {
+        "old": "['s36-fixture-verification/result.json','s36-o034-quality-review-r5.md','s36-quality-r5-result-provenance.json','s37-t029-worker/result.json','s37-t029-worker-result-provenance.json']",
+        "new": "['s53-o034-quality-review-r6.md','s56-t029-recovery/result.json','s56-t029-recovery/provider-transition.json','s57-t029-control/result.json','s57-t029-control/return-provenance.json','s58-analyzer-refresh/result.json','s59-analyzer-accept/result.json','s59-analyzer-accept/return-provenance.json']",
+        "count": 1
+      },
+      {
+        "old": "s36-o034-quality-review-r5.md",
+        "new": "s53-o034-quality-review-r6.md",
+        "count": 1
+      },
+      {
+        "old": "bbd0d834ea127e59e245a56bca2f7c72e7fdd1c509a4d82a6f337c51b1592d59",
+        "new": "9f0c94819b85191876b25e41b2eeb718bc439f9d8dfe0126925fe9f8b19216b6",
+        "count": 1
+      },
+      {
+        "old": "accepted/T031a5o1/ACC-wrdG2W/",
+        "new": "accepted/T031a5o1/ACC-zmvoA1/",
+        "count": 1
+      },
+      {
+        "old": "notes/captures/CAP-819-05nYhW/",
+        "new": "notes/captures/CAP-845-hwbWOH/",
+        "count": 1
+      },
+      {
+        "old": "prefixes += [relative+'/notes/verification/accepted/T031a5o1/ACC-zmvoA1/',relative+'/notes/captures/CAP-845-hwbWOH/']",
+        "new": "prefixes += [relative+'/notes/verification/accepted/T031a5o1/ACC-zmvoA1/',relative+'/notes/verification/accept-events/ACCEPT-7BJ9u1/',relative+'/notes/captures/CAP-845-hwbWOH/',relative+'/notes/captures/CAP-844-GCqKod/',relative+'/notes/verification/reports/s59-analyzer-accept/']",
+        "count": 1
+      },
+      {
+        "old": "accepted/T029/ACC-nP1KDk/tasks.after",
+        "new": "accepted/T031a5o1/ACC-zmvoA1/tasks.after",
+        "count": 1
+      },
+      {
+        "old": " or x==special",
+        "new": "",
+        "count": 1
+      },
+      {
+        "old": "ACC-5OLy1X",
+        "new": "ACC-zmvoA1",
+        "count": 2
+      },
+      {
+        "old": "CAP-819-05nYhW",
+        "new": "CAP-844-GCqKod",
+        "count": 1
+      },
+      {
+        "old": "acceptedT029='ACC-zmvoA1'",
+        "new": "acceptedT029='ACC-nP1KDk',acceptedAnalyzer='ACC-zmvoA1',historicalStrictPreservation=False,strictCurrentPreservation=True,collectorTransport='gh API plus raw-log escape flag; named donor is not HTTP; data-only copy preserved',guardedRunnerPreparedNotLaunched=True",
+        "count": 1
+      },
+      {
+        "old": "OP26/conditional RC4",
+        "new": "OP27/conditional RC4",
+        "count": 1
+      },
+      {
+        "old": "codex_codex_gym",
+        "new": "codex",
+        "count": 1
+      },
+      {
+        "old": "historical 0821068 head",
+        "new": "historical 25347ba head",
+        "count": 1
+      },
+      {
+        "old": "and are included in the tree",
+        "new": "; the historical T029 whole-file receipt is earlier, its T029 block remains equal, and both receipts are included in the tree",
+        "count": 1
+      },
+      {
+        "old": "Completed genuine T029 control was verified first",
+        "new": "Completed genuine T029 control and latest T031a5o1 acceptance were verified first",
+        "count": 1
+      },
+      {
+        "old": "hosted-s38-audit",
+        "new": "hosted-s60-audit",
+        "count": 2
+      }
+    ]
+  }
+}

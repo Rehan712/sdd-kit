@@ -1,0 +1,24 @@
+--- a/tests/test-sdd-analyze.sh
++++ b/tests/test-sdd-analyze.sh
+@@ -664,17 +664,13 @@
+   run_rc 0 "$ANALYZE" "$spec_dir"
+   assert_contains "$OUT" consistent 'AC-003: quoted/fenced examples do not add definitions'
+ 
+-  # AC-004: real shell runners remain valid; an untyped build/text-only
++  # AC-004: real shell runners remain valid; an untyped build/typecheck/text-only
+   # command warns even if its displayed expected output says tests passed.
+-  for fixture in build text; do
++  for fixture in 'npm run build' 'npm run typecheck' 'tsc --noEmit' 'grep AC-001 README.md'; do
+     spec_dir="$(make_spec_dir)"
+-    if [[ "$fixture" == build ]]; then
+-      verification_edit_fixture "$spec_dir/tasks.md" 's/`node --test test\/thing.test.js`/`npm run build`/'
+-    else
+-      verification_edit_fixture "$spec_dir/tasks.md" 's/`node --test test\/thing.test.js`/`grep AC-001 README.md`/'
+-    fi
++    verification_edit_fixture "$spec_dir/tasks.md" "s|\`node --test test/thing.test.js\`|\`$fixture\`|"
+     run_rc 0 "$ANALYZE" "$spec_dir"
+-    assert_contains "$OUT" 'untyped AC Verify' 'AC-004: weak untyped command warns without breaking legacy'
++    assert_contains "$OUT" 'untyped AC Verify' "AC-004: untyped $fixture warns without breaking legacy"
+   done
+   spec_dir="$(make_spec_dir)"
+   verification_edit_fixture "$spec_dir/tasks.md" 's/`node --test test\/thing.test.js`/`bash tests\/check.sh`/'

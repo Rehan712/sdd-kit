@@ -1,0 +1,41 @@
+{
+  "recordType": "t3-delegation-observation",
+  "gate": "opponent",
+  "round": 23,
+  "technicalRetry": 3,
+  "userSteering": "Continue; run opponent here on this provider",
+  "recovery": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s26-opponent-recovery.json",
+  "requested": {
+    "providerInstanceId": "codex_codex_gym",
+    "model": "gpt-6.1-sol",
+    "options": {
+      "reasoningEffort": "max",
+      "serviceTier": "default"
+    },
+    "role": "review"
+  },
+  "observed": {
+    "taskId": "node:delegated-task:command%3Amcp%3Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%3Adelegate-task%3Asdd003-opponent-round23-current-provider-recovery-retry3",
+    "childThreadId": "thread:delegated-task:command%3Amcp%3Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%3Adelegate-task%3Asdd003-opponent-round23-current-provider-recovery-retry3",
+    "childRunId": "run:thread:thread%3Adelegated-task%3Acommand%253Amcp%253Acb5cda43-acc1-4ace-ba89-e4e25f5ce897%253Adelegate-task%253Asdd003-opponent-round23-current-provider-recovery-retry3:ordinal:1",
+    "providerInstanceId": "codex_codex_gym",
+    "model": "gpt-6.1-sol",
+    "options": [
+      {
+        "id": "reasoningEffort",
+        "value": "max"
+      },
+      {
+        "id": "serviceTier",
+        "value": "default"
+      }
+    ],
+    "status": "running"
+  },
+  "source": "a7e7dd326b27c7565c26349485c440af26f718a7f16e400ea42ed6961d03cd1a",
+  "floor": "FLOOR-il41Kn",
+  "head": "2049f65960cc91e9e30bbd5ff1e11fc0fdf7cbd9",
+  "originalBrief": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/opponent-round23-brief.md",
+  "recordedAt": "2026-10-25T14:37:33.910096+00:00",
+  "briefSha256": "d59fb81435984f69b9a5db01d7191043ab2f2ca42bc2e5c124dca23609031961"
+}

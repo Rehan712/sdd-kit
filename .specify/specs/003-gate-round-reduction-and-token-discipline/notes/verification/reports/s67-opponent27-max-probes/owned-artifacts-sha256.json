@@ -1,0 +1,4316 @@
+{
+  "artifactCount": 717,
+  "files": [
+    {
+      "path": "ac-relevance-sweep.json",
+      "bytes": 11691,
+      "mode": 420,
+      "sha256": "1a2117b9aee55c2b635deae4a59872a8f57ca3057428990e8f4689b077b3bf0a"
+    },
+    {
+      "path": "attack-summary.json",
+      "bytes": 1033,
+      "mode": 420,
+      "sha256": "08fc9e5397d697cfc08f9c5c96c52572c9cc70bd25c2bde71c5856939faf6599"
+    },
+    {
+      "path": "brief-read-proof.json",
+      "bytes": 248,
+      "mode": 420,
+      "sha256": "e8d4a15ba3de90ec6f4c2f73055aa6b6ab45821692b8ba2113a3018a44e02093"
+    },
+    {
+      "path": "canonical-report-receipt.json",
+      "bytes": 358,
+      "mode": 420,
+      "sha256": "932a46ac82f3ef99f0f6fbdd4bbb2d9cc8ee28bed63368e471eec5a3ee09f2cd"
+    },
+    {
+      "path": "case-000/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-000/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "2fd7c92977cc45ea345953a40aeed3e87cf33c6435fe75b139f260fb3151fedf"
+    },
+    {
+      "path": "case-000/tasks.md",
+      "bytes": 1167,
+      "mode": 420,
+      "sha256": "29d7d60e25541a427c12248b1854fcb5a193959e3f35b6da0771574c40bf6a9d"
+    },
+    {
+      "path": "case-001/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-001/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "75c5c4078ca70007e4d8459f440b678e2f4a09bc8c708be27780314c75fcf048"
+    },
+    {
+      "path": "case-001/tasks.md",
+      "bytes": 1154,
+      "mode": 420,
+      "sha256": "d6a2aa367b2c98a3e7555fbb9d014c0fbe040f739b81051834d831e03ab3afe2"
+    },
+    {
+      "path": "case-002/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-002/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "1a1bf7aec84e4725cd8e91860535900692e24c60bcb90e6cf424e1f3d15f440c"
+    },
+    {
+      "path": "case-002/tasks.md",
+      "bytes": 1159,
+      "mode": 420,
+      "sha256": "dcc61721e267dc27e87b0e6470220518044e1ba5b22d2dee2e05bcef533f0d89"
+    },
+    {
+      "path": "case-003/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-003/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "f97f73318351bbad2fc14d049ecdd85903bc3df43ed2f1a6bbd1fb1e42b5ac5c"
+    },
+    {
+      "path": "case-003/tasks.md",
+      "bytes": 1155,
+      "mode": 420,
+      "sha256": "d7a49b0c0cc476bc0ba8adf31060c7e6ddc019743eb7f8fec6f6de6ff5d7dd77"
+    },
+    {
+      "path": "case-004/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-004/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "adc3dc5d8e1d81ec4902859b3c1457ed0dc32f150f36b088abea1b691c2d08c5"
+    },
+    {
+      "path": "case-004/tasks.md",
+      "bytes": 1150,
+      "mode": 420,
+      "sha256": "3d756aee6705f3570b90d5a8b210b2d30c18d90f91750312715626ee724f1fc0"
+    },
+    {
+      "path": "case-005/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-005/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "d04c49a3aa7b19c50bfcd96d49006eeebf4d494f46ea6bb2afb8edf30e1f1723"
+    },
+    {
+      "path": "case-005/tasks.md",
+      "bytes": 1149,
+      "mode": 420,
+      "sha256": "3931b93c90d21e5692f9d88cf809a94bb02d9c519873431912a05f53d751c4f1"
+    },
+    {
+      "path": "case-006/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-006/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "06089abbe44dc1aca991f1b765e1bd16c82c4697a025d70034315e4d766a191d"
+    },
+    {
+      "path": "case-006/tasks.md",
+      "bytes": 1151,
+      "mode": 420,
+      "sha256": "e8346f9c0cf985d49c6f807760c5523da9c3220ba70e9d00e9bde93cc5e05787"
+    },
+    {
+      "path": "case-007/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-007/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "29f072679dbefcb156c4c240105a4cdbdd23f48d03af924e166f8a38128e39fc"
+    },
+    {
+      "path": "case-007/tasks.md",
+      "bytes": 1152,
+      "mode": 420,
+      "sha256": "7549e79a188125ff584890a3d0322b87d0c7734e78da3384b8779237a4929f7c"
+    },
+    {
+      "path": "case-008/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-008/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "a8e3de7c77a136044e9a4e79a73a859c250e13bc4ebe006d7c7bcd5fd218a906"
+    },
+    {
+      "path": "case-008/tasks.md",
+      "bytes": 1158,
+      "mode": 420,
+      "sha256": "7fbcac452494627d235ea505631a268c2b34c116232251b56226ef918d1590da"
+    },
+    {
+      "path": "case-009/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-009/stdout.txt",
+      "bytes": 625,
+      "mode": 420,
+      "sha256": "12a29ca1e038faec05bd91f525aae698c3f0e379dface06e0c1f8d0a21adaa5c"
+    },
+    {
+      "path": "case-009/tasks.md",
+      "bytes": 1173,
+      "mode": 420,
+      "sha256": "c8235402c1b2101ce5ae5444c825ed42da549b92ad6385130728bc3cd94c594b"
+    },
+    {
+      "path": "case-010/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-010/stdout.txt",
+      "bytes": 625,
+      "mode": 420,
+      "sha256": "bbcf0a001c39d8d2952552e0381dca954afbb5ec7ead8ac06bec218e5ed0474e"
+    },
+    {
+      "path": "case-010/tasks.md",
+      "bytes": 1164,
+      "mode": 420,
+      "sha256": "3ea62f6d4a1851a4fa92059df2c900b9b73ddf49e0656a8a70d786d1ef9282fd"
+    },
+    {
+      "path": "case-011/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-011/stdout.txt",
+      "bytes": 625,
+      "mode": 420,
+      "sha256": "a7273d9c97f0a7b5df6775cb20160f076b463e26b05a2d2116f8d79c2e0ee719"
+    },
+    {
+      "path": "case-011/tasks.md",
+      "bytes": 1164,
+      "mode": 420,
+      "sha256": "140a4976e95663ea7380e756262d8c35cc120b7d6923b7462f0bfb7b07bf6a50"
+    },
+    {
+      "path": "case-012/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-012/stdout.txt",
+      "bytes": 625,
+      "mode": 420,
+      "sha256": "9e4d7f9a91febad286ec3a5e544fe3b5556aacb34990ba97c1b0e1144a36acc6"
+    },
+    {
+      "path": "case-012/tasks.md",
+      "bytes": 1156,
+      "mode": 420,
+      "sha256": "d99b5460a1c715b89d173dbb629137080b223d7253785234708db6afdaa3bc0f"
+    },
+    {
+      "path": "case-013/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-013/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "9f10ab08ff6001c768352e05470798c1a6b2c65e8713a6b66e1f7105afd0482b"
+    },
+    {
+      "path": "case-013/tasks.md",
+      "bytes": 1175,
+      "mode": 420,
+      "sha256": "b3065acf7a98fd63a7b0c0be658a2f1187bfc1b5eb7aba358d801380f9277231"
+    },
+    {
+      "path": "case-014/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-014/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "b1ad0cf5183b4fd098f17eba78921251146d2398a1c1c0cec3a89ce4ff801e67"
+    },
+    {
+      "path": "case-014/tasks.md",
+      "bytes": 1162,
+      "mode": 420,
+      "sha256": "57513eb3cd2a2e92fe6b63bb122f10b2352364d21e37ad9a3a8c7c0d55893eb4"
+    },
+    {
+      "path": "case-015/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-015/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "4aeb7ddfb6f77cc7282212da7660d16ad6062723049a28c80af2bfb7478b89f8"
+    },
+    {
+      "path": "case-015/tasks.md",
+      "bytes": 1167,
+      "mode": 420,
+      "sha256": "6e9fe9ca2129379e2ac24a934e1acc2c79ad783877e5e7d36812d03598a7de69"
+    },
+    {
+      "path": "case-016/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-016/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "8bcc35d9114f804fd08fb449b47adad6ba55879b0e701ac1983aa6ae5b86620f"
+    },
+    {
+      "path": "case-016/tasks.md",
+      "bytes": 1163,
+      "mode": 420,
+      "sha256": "1f45ee00143a94f6215ecae2c424ec03952b81424c38443c969e7df582ca6a97"
+    },
+    {
+      "path": "case-017/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-017/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "a17d00e3834276c3b598f474bccf2c1b59dbdf966f0f6b73ea2cc23397182f1d"
+    },
+    {
+      "path": "case-017/tasks.md",
+      "bytes": 1158,
+      "mode": 420,
+      "sha256": "00ebaa0d853a69fe81decd48ce0053c7d37127fc4b2ac54bcf816921b372ecd5"
+    },
+    {
+      "path": "case-018/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-018/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "f44dbf0d361b39bded8b45a965f15c7616ca34bcaf26c0ee17f0fc856aa2cebc"
+    },
+    {
+      "path": "case-018/tasks.md",
+      "bytes": 1157,
+      "mode": 420,
+      "sha256": "23cc60445f5b0e25fd9653852618422b904ee110ac26abcd32a5fe6a4e66e945"
+    },
+    {
+      "path": "case-019/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-019/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "51faaee340b497af43f3e81bae570514fdd93a8887076fa5eead050adc9ae985"
+    },
+    {
+      "path": "case-019/tasks.md",
+      "bytes": 1159,
+      "mode": 420,
+      "sha256": "f7b4c525611e50f98d9d5d04896627e010f6897320ec008db9a25ac3fde025d7"
+    },
+    {
+      "path": "case-020/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-020/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "5f64c5d84cfcdbde5fa660a016e6e8f1b52f0ae0299cad1d701030f93bc88247"
+    },
+    {
+      "path": "case-020/tasks.md",
+      "bytes": 1160,
+      "mode": 420,
+      "sha256": "e0da26803a967f068de7071fe8486b5b0d81926953db4c0bd30536b11179db9a"
+    },
+    {
+      "path": "case-021/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-021/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "556dbb995520d6b987de9fb2f45d9f2f2f70289464180b1b6acbda310879b328"
+    },
+    {
+      "path": "case-021/tasks.md",
+      "bytes": 1166,
+      "mode": 420,
+      "sha256": "28d7b800db19b4fe53c10ab1444c78d9f138d8006ae37663e2bc246d08a35e66"
+    },
+    {
+      "path": "case-022/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-022/stdout.txt",
+      "bytes": 625,
+      "mode": 420,
+      "sha256": "0eabbafbb2219f97904e4305a1878483d5bdcac4bdee063684bdb8153b6f3cbc"
+    },
+    {
+      "path": "case-022/tasks.md",
+      "bytes": 1181,
+      "mode": 420,
+      "sha256": "ab84e9797861ed164bd71e1d9c7b17491b024de8ab3240c0cac44c96d0ede2e6"
+    },
+    {
+      "path": "case-023/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-023/stdout.txt",
+      "bytes": 625,
+      "mode": 420,
+      "sha256": "a0e4ccfe3603a3793f8269d629d5bfa1fc1fa489f0ba8320b2a88f97b424ed53"
+    },
+    {
+      "path": "case-023/tasks.md",
+      "bytes": 1172,
+      "mode": 420,
+      "sha256": "b8c01304e027f0fe11d45707aaa621025208259d3925c1b6b18a191aaad3329f"
+    },
+    {
+      "path": "case-024/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-024/stdout.txt",
+      "bytes": 625,
+      "mode": 420,
+      "sha256": "a0db57e637938bf576ff1359462af2fe02fa225a7dcbc4515a206569840ae236"
+    },
+    {
+      "path": "case-024/tasks.md",
+      "bytes": 1172,
+      "mode": 420,
+      "sha256": "4bfd5cb2fa6b5b581e84964c1c3ee34efee96a4bc5941fccc9db00bafb95d66a"
+    },
+    {
+      "path": "case-025/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-025/stdout.txt",
+      "bytes": 625,
+      "mode": 420,
+      "sha256": "18539c51c6e257aa92182c7458c706db677dccd2d4fe492b329d51d6ce76f177"
+    },
+    {
+      "path": "case-025/tasks.md",
+      "bytes": 1164,
+      "mode": 420,
+      "sha256": "a64620b1e910dc0fa67570b500b1ebe2d7d5a4fa31483be54cdc443c657b671d"
+    },
+    {
+      "path": "case-026/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-026/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "6c3e2b1277c4c46643a353bea2aa21d53af6256dd798e5816bab0f9f3723e187"
+    },
+    {
+      "path": "case-026/tasks.md",
+      "bytes": 1172,
+      "mode": 420,
+      "sha256": "c8c33c72c8b7b7ea605f10d0c4894d08f82402e3f494c51616575f49fddb97d2"
+    },
+    {
+      "path": "case-027/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-027/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "11062fa82040cebce8e69a68211af73f82f52df4eb0f647b5ef87416ddbf7e49"
+    },
+    {
+      "path": "case-027/tasks.md",
+      "bytes": 1159,
+      "mode": 420,
+      "sha256": "491ae44c454bc2c83e3bc54609ec415e05e3185ba755726d32fffe662ff8fd20"
+    },
+    {
+      "path": "case-028/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-028/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "7883617b59698d0b60efdf94ef8dd0b6d197060ffe513d183786fe798869200e"
+    },
+    {
+      "path": "case-028/tasks.md",
+      "bytes": 1164,
+      "mode": 420,
+      "sha256": "64a421e09184c36091a0f5673eca793cb3492a70fedc10a9b72280955efe35c4"
+    },
+    {
+      "path": "case-029/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-029/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "32f8db760110b2586693dc32072d541ff30479e90b85070f49bc5073e50014d8"
+    },
+    {
+      "path": "case-029/tasks.md",
+      "bytes": 1160,
+      "mode": 420,
+      "sha256": "d416efa7b75293b600dec1d2f6754d4a25c28339c1a0edf2bbf151cdbc5c1b8e"
+    },
+    {
+      "path": "case-030/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-030/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "9e30d3a88c1e75289b47c0a4ff3f61e1f852d5700ad396063ead608765817e8c"
+    },
+    {
+      "path": "case-030/tasks.md",
+      "bytes": 1155,
+      "mode": 420,
+      "sha256": "15eef60e769e189ec4faf7f64bd2e8a18f68c9862193c5b18487efcb16b825cf"
+    },
+    {
+      "path": "case-031/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-031/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "daa2f83b3e8198682e568d85b372363e12d4de584df310d042ffa95072944e5c"
+    },
+    {
+      "path": "case-031/tasks.md",
+      "bytes": 1154,
+      "mode": 420,
+      "sha256": "b14c4cacaccf1dbfb8687f29b42dc7b1606955ff5350fd20060e0edec8548812"
+    },
+    {
+      "path": "case-032/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-032/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "1abb16265490f4086bf31b91d3a8d0533bb79b0f81f2b567bd4a61dc6fa74874"
+    },
+    {
+      "path": "case-032/tasks.md",
+      "bytes": 1156,
+      "mode": 420,
+      "sha256": "0eccd32bbeab7cff1c843d2ebdf42d3096962814e79ba8862dc4265fa7259bf8"
+    },
+    {
+      "path": "case-033/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-033/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "06fd85153cec282169d34c4793bf6e337274560e409a960ceb487ce980b65b45"
+    },
+    {
+      "path": "case-033/tasks.md",
+      "bytes": 1157,
+      "mode": 420,
+      "sha256": "8bee063259601ea637e665ebd9915239e3fc61cde1f6eb64e76302017ff73ee1"
+    },
+    {
+      "path": "case-034/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-034/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "0802a618ea96c20dc695866f8b34702291d59432ec56848dbad21af4d7c2eaf6"
+    },
+    {
+      "path": "case-034/tasks.md",
+      "bytes": 1163,
+      "mode": 420,
+      "sha256": "931c4f717ba5c932749f77cc9659ef75d572249c755be02bc5b3dca4eef5024d"
+    },
+    {
+      "path": "case-035/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-035/stdout.txt",
+      "bytes": 625,
+      "mode": 420,
+      "sha256": "f7a08cee3ba88b2235e5918bed6fd62c4ed1d010742f0e993d612f8a3744dcd0"
+    },
+    {
+      "path": "case-035/tasks.md",
+      "bytes": 1178,
+      "mode": 420,
+      "sha256": "f932b1bb3a9091c3864e8359a31aa3d0b89720ca8f61a39a16e71713c875a3e8"
+    },
+    {
+      "path": "case-036/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-036/stdout.txt",
+      "bytes": 625,
+      "mode": 420,
+      "sha256": "98151d22bc81e8e3c2cb53eb9164e150f1bd89c9f75ed8b1240c9a2a83d0d83e"
+    },
+    {
+      "path": "case-036/tasks.md",
+      "bytes": 1169,
+      "mode": 420,
+      "sha256": "70bc403e620c8964a0fc0983451c415c3ebd1c91c351f4a06120bc0ff0d95407"
+    },
+    {
+      "path": "case-037/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-037/stdout.txt",
+      "bytes": 625,
+      "mode": 420,
+      "sha256": "f16d61c3aa0f25a1b208c91476ed1861addba3ecd9f9ff7279d4adf93764c21c"
+    },
+    {
+      "path": "case-037/tasks.md",
+      "bytes": 1169,
+      "mode": 420,
+      "sha256": "4a4820957303bbab0cce5ba5eecda84567c6b9d7c9bae85fdaae064f524dc82f"
+    },
+    {
+      "path": "case-038/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-038/stdout.txt",
+      "bytes": 625,
+      "mode": 420,
+      "sha256": "922c3e6e494808b184e59bf928ab06cfef3b2a313f576fac3955d7e8ab4239ee"
+    },
+    {
+      "path": "case-038/tasks.md",
+      "bytes": 1161,
+      "mode": 420,
+      "sha256": "881053cb43eeaeec48a9a2554121dfd4d032504a4f4f549c5a9122eb24c19bb4"
+    },
+    {
+      "path": "case-039/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-039/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "29a1bf4f2866246ab49be165c7ed5965b9e866181b5736a122e85f215cd3d3b1"
+    },
+    {
+      "path": "case-039/tasks.md",
+      "bytes": 1179,
+      "mode": 420,
+      "sha256": "706c35ded47aa7b1e2b1ca00211a77ebadee84b3fcbf104f96431c675f5ff10d"
+    },
+    {
+      "path": "case-040/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-040/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "8193297c538732f0fe0faa89f9be458a6205c794ad214f8d22fecb3f155e4bd7"
+    },
+    {
+      "path": "case-040/tasks.md",
+      "bytes": 1166,
+      "mode": 420,
+      "sha256": "64cb8add22dcd4d08ca741270c9907a9d065d8ff830050f8d282bfec4cecdc22"
+    },
+    {
+      "path": "case-041/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-041/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "1e04a9083e228e89852fa620ca706d943cacdcb861e094f0a7aa934c1cbdfa8c"
+    },
+    {
+      "path": "case-041/tasks.md",
+      "bytes": 1171,
+      "mode": 420,
+      "sha256": "e2cf1f00211f892da01eb37c73ed04b30f81c44619818a1d33317c663fbd8831"
+    },
+    {
+      "path": "case-042/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-042/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "ef3ef33e475fbb74259cfffa349822f01b4bc7487a1da22261119db942859032"
+    },
+    {
+      "path": "case-042/tasks.md",
+      "bytes": 1167,
+      "mode": 420,
+      "sha256": "93ae1cf61ba7535c15101fd19b1115fde47b6702ab45ee7177220369439b4744"
+    },
+    {
+      "path": "case-043/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-043/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "df3dbfc4bd36ac7367d937a664be797b225029a4b814e40b86e63b1b85ea8446"
+    },
+    {
+      "path": "case-043/tasks.md",
+      "bytes": 1162,
+      "mode": 420,
+      "sha256": "0df4f3503a80f1d54b3e663ae3bd1bcfa2aac3b2e57f9c052260d1e8ae3abc70"
+    },
+    {
+      "path": "case-044/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-044/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "d62c1171f20676934403478aba058eaad6b1cc3ac7cfcc579ccef3479d57f30b"
+    },
+    {
+      "path": "case-044/tasks.md",
+      "bytes": 1161,
+      "mode": 420,
+      "sha256": "690dfc07ed573c30024240182cfe435ff434122d1b0523c6e64ad6c171788359"
+    },
+    {
+      "path": "case-045/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-045/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "dd81ac184db76e5c2eaf5c0a15af16e0974ac2e6faaa6cc5fbab02470b5adf44"
+    },
+    {
+      "path": "case-045/tasks.md",
+      "bytes": 1163,
+      "mode": 420,
+      "sha256": "06d0a4d2b125fd1e21a0a5c92497d2148dfd3a91900af308dcd89683de01d579"
+    },
+    {
+      "path": "case-046/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-046/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "1bcb0b8e957144a453c8b9cff313de26aac55b42945cd648cb9f89a1e63cc031"
+    },
+    {
+      "path": "case-046/tasks.md",
+      "bytes": 1164,
+      "mode": 420,
+      "sha256": "c65baa4df7ba8e85193eae5123debaf26c3a6d72bd39b5681f3c9d8f2a3848b8"
+    },
+    {
+      "path": "case-047/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-047/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "f9809c0a5892f61895e22adfe79c17395a01087c36272fbaa86e3e28a13f29fa"
+    },
+    {
+      "path": "case-047/tasks.md",
+      "bytes": 1170,
+      "mode": 420,
+      "sha256": "ef3329780f7868ffc08c6bf9a43a13079bd9593b6456ba2f76ef4524118208c3"
+    },
+    {
+      "path": "case-048/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-048/stdout.txt",
+      "bytes": 625,
+      "mode": 420,
+      "sha256": "686559373e37143889298a078d958fbd6bf28abc8bbf909c7a6596f8edc7bd79"
+    },
+    {
+      "path": "case-048/tasks.md",
+      "bytes": 1185,
+      "mode": 420,
+      "sha256": "5ff79029f6182762b921f9cedfc5658ae0ab8ecb59e91cb543d41704b9971be8"
+    },
+    {
+      "path": "case-049/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-049/stdout.txt",
+      "bytes": 625,
+      "mode": 420,
+      "sha256": "511a7dbf7aa36af91a37335b92d3c60ebb89c046a839fd03c3f9af507cead96c"
+    },
+    {
+      "path": "case-049/tasks.md",
+      "bytes": 1176,
+      "mode": 420,
+      "sha256": "c12527d7291960c1b5ce7bf7669c42036bcd59ef9d7ba8738b97dc335f53c50c"
+    },
+    {
+      "path": "case-050/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-050/stdout.txt",
+      "bytes": 625,
+      "mode": 420,
+      "sha256": "bab67d398016d6aa49bdf4cf02827f2a6f687035b8ba44182ea6a56948414794"
+    },
+    {
+      "path": "case-050/tasks.md",
+      "bytes": 1176,
+      "mode": 420,
+      "sha256": "11a1f120604949297631dc296afb5a0038b4d302c6c46cccf9171fb0fa0acf6f"
+    },
+    {
+      "path": "case-051/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-051/stdout.txt",
+      "bytes": 625,
+      "mode": 420,
+      "sha256": "fd105f2efe37cc7a0918418478e478e04dbf814898d868fa0623a8c39d7835bd"
+    },
+    {
+      "path": "case-051/tasks.md",
+      "bytes": 1168,
+      "mode": 420,
+      "sha256": "cb1a3ebe9e4ec58928e63e1defb72eab9b65890de73e0b2af055d8870c472c0c"
+    },
+    {
+      "path": "case-052/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-052/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "3736bff95e6709bfb6650ba86260935a5af815872ef4927076cf7740f0570890"
+    },
+    {
+      "path": "case-052/tasks.md",
+      "bytes": 1193,
+      "mode": 420,
+      "sha256": "6a5ee497444a888cef320012672627bcb76f92dfdffc524d1625ef1de9b4c17e"
+    },
+    {
+      "path": "case-053/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-053/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "9af593d38e9dc600923926ffdfca7af0774239e5a8afcca409b5dc7f402cfae4"
+    },
+    {
+      "path": "case-053/tasks.md",
+      "bytes": 1180,
+      "mode": 420,
+      "sha256": "1fdbe4abdcb8c57372da413826496ebe4968c82c61c89e95b1ef8266509fdc0c"
+    },
+    {
+      "path": "case-054/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-054/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "b2fc44756736e157784228845a76e65563486b8a589dcffec8570b6afedf837e"
+    },
+    {
+      "path": "case-054/tasks.md",
+      "bytes": 1185,
+      "mode": 420,
+      "sha256": "fc44e238da6a665bc0e5f033f2806ee7ab3bcf7ff70f7f8eff394ac73ce917dd"
+    },
+    {
+      "path": "case-055/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-055/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "3ecbdb8f023deab0bfa1e8cb4fb5750b51310ca3643b7819bd77c9cf90b0d658"
+    },
+    {
+      "path": "case-055/tasks.md",
+      "bytes": 1181,
+      "mode": 420,
+      "sha256": "3286f1f1d44e632bb1d74a71308aabb7e65089b46829b908ae6fc0f20b065927"
+    },
+    {
+      "path": "case-056/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-056/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "48e75c3cb3d494d2f50af85c97a39d5f3df31db633837a71f197fa75e35cdef7"
+    },
+    {
+      "path": "case-056/tasks.md",
+      "bytes": 1176,
+      "mode": 420,
+      "sha256": "3b034a1f77d538ba8021f78f59f99f7077809445bb4f8e65aa940a5627c1876a"
+    },
+    {
+      "path": "case-057/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-057/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "5de1438fe80c3fef0e5ffc05a1f644a9f811097219879d27710a1ea583dde19a"
+    },
+    {
+      "path": "case-057/tasks.md",
+      "bytes": 1175,
+      "mode": 420,
+      "sha256": "41a983dbc9e0a9d57d33a580140b8d44d8bfb2e49678f12ed5f5a804bbc2bce1"
+    },
+    {
+      "path": "case-058/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-058/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "e05bd61effe630a6e34def84a220ece00bcda088f9d1efe346aab303e8b06484"
+    },
+    {
+      "path": "case-058/tasks.md",
+      "bytes": 1177,
+      "mode": 420,
+      "sha256": "95e19442c147791c22ace987215bd78e92ed6d77aa1d3186b431a9e5bae6f3ec"
+    },
+    {
+      "path": "case-059/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-059/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "7485a225ca0c1d47173935a32545f81447dc2ecda64a3625bf25f21ce9b23e1e"
+    },
+    {
+      "path": "case-059/tasks.md",
+      "bytes": 1178,
+      "mode": 420,
+      "sha256": "1ac97ff5e38f5b93629287ab360fd8fafc30a7fc9cb781f82010fa27f5410cc2"
+    },
+    {
+      "path": "case-060/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-060/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "a40b332257edb65f9bd1bad6629d74b649841a1c5b6306d653422a09efaf648a"
+    },
+    {
+      "path": "case-060/tasks.md",
+      "bytes": 1184,
+      "mode": 420,
+      "sha256": "ce8419ecd28f0df99f341a8005d1c2bff1ece152f78bbc7b432f4a82d9b829ec"
+    },
+    {
+      "path": "case-061/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-061/stdout.txt",
+      "bytes": 625,
+      "mode": 420,
+      "sha256": "000615c609944fb75bc8ce0cb294bc15c8a7862956d80cd318e3bee8a678b2f9"
+    },
+    {
+      "path": "case-061/tasks.md",
+      "bytes": 1199,
+      "mode": 420,
+      "sha256": "e9e4269252791021723dfddc2aba7b3cc6e590718b51d4f1748eb7cbf68eaf30"
+    },
+    {
+      "path": "case-062/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-062/stdout.txt",
+      "bytes": 625,
+      "mode": 420,
+      "sha256": "1f73afb3726d516ec1185f9854f3b3d3296b2fb59d3e34cd0345c435ce721ca1"
+    },
+    {
+      "path": "case-062/tasks.md",
+      "bytes": 1190,
+      "mode": 420,
+      "sha256": "cb5ef85086ac69b63451b08db25f30be6e767145cd61a0fdb8f8d0ea5f7a26d8"
+    },
+    {
+      "path": "case-063/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-063/stdout.txt",
+      "bytes": 625,
+      "mode": 420,
+      "sha256": "dd531db028f623a3b41eaeae690f86c27920a46ebd0e3aea3beadf175c0bf431"
+    },
+    {
+      "path": "case-063/tasks.md",
+      "bytes": 1190,
+      "mode": 420,
+      "sha256": "33aca9091281c2b18c10dcc721e6089a0d7c1b1f358d14ecbbdcd0766fefbb98"
+    },
+    {
+      "path": "case-064/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-064/stdout.txt",
+      "bytes": 625,
+      "mode": 420,
+      "sha256": "18ec8b7b98d5114a7b016a79f84a9a465a14026ff5a6689c6f24f90bc906c83b"
+    },
+    {
+      "path": "case-064/tasks.md",
+      "bytes": 1182,
+      "mode": 420,
+      "sha256": "c477c040fe9d69abba673dd67df46dd790eec6d1e583f508f9a6a07b3d510f4b"
+    },
+    {
+      "path": "case-065/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-065/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "1e744eaf34515197e727d94f124a97fc8c225f75abc7433cfd2e9ea4eac4fe4d"
+    },
+    {
+      "path": "case-065/tasks.md",
+      "bytes": 1183,
+      "mode": 420,
+      "sha256": "0951a55d276351b1445393cd1acecc9711c2194fc1ed26f22a00887e988a3bab"
+    },
+    {
+      "path": "case-066/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-066/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "46685b24df7a34c01ca7cb20d0b0b201acf6152f79f53b2cec3cf9cf6625626f"
+    },
+    {
+      "path": "case-066/tasks.md",
+      "bytes": 1170,
+      "mode": 420,
+      "sha256": "d1435c616788bdda582bebba7e190149809353e74979074ad5c35796252bcaa2"
+    },
+    {
+      "path": "case-067/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-067/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "f0f024415c6c5051fe8ef400fce09edbf469e15c07e9e8c17965743405d20c32"
+    },
+    {
+      "path": "case-067/tasks.md",
+      "bytes": 1175,
+      "mode": 420,
+      "sha256": "963237a2eac92f47ad0468858032d19500969dc8090b22c5c95e7ce306e48821"
+    },
+    {
+      "path": "case-068/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-068/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "a6c9352246d01d61317b4f4afb2f34a70ead16a4d99f5e9d63b0b34c1e891752"
+    },
+    {
+      "path": "case-068/tasks.md",
+      "bytes": 1171,
+      "mode": 420,
+      "sha256": "03470ec4ec6c94d5d73e026bed432b158a737b6cc9dd1820a9efcdebd9a073a6"
+    },
+    {
+      "path": "case-069/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-069/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "7559688239e5194e4eb4a400de642d4e4a97479147fc1c2f909b4f8daff9c150"
+    },
+    {
+      "path": "case-069/tasks.md",
+      "bytes": 1166,
+      "mode": 420,
+      "sha256": "652d2237167e0586e5cdf632ba7cd3b0494fe1dd6a5d91e60ffb6d7d821cce95"
+    },
+    {
+      "path": "case-070/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-070/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "63a13a66db353d2988dcd763091910f53a0e39e8260ede7f166da62f9c445c92"
+    },
+    {
+      "path": "case-070/tasks.md",
+      "bytes": 1165,
+      "mode": 420,
+      "sha256": "23f4f488e75c689d6a44c1a5937926f3f1dd6e5fda8c4ac6294ad0a327600b50"
+    },
+    {
+      "path": "case-071/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-071/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "d0f76c6fc7cbc6b903b27a65c441182988607a25bea98a0d17c4e5570e9fc27f"
+    },
+    {
+      "path": "case-071/tasks.md",
+      "bytes": 1167,
+      "mode": 420,
+      "sha256": "3868ea2eb7f1eb7a72e63c514a12813e52d25855e8d6ad6d55df6ddb0ebd9e00"
+    },
+    {
+      "path": "case-072/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-072/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "ac074b7b38dddcb6886ed5ff0342971fe9ba1960da6bf899aff33163e153477b"
+    },
+    {
+      "path": "case-072/tasks.md",
+      "bytes": 1168,
+      "mode": 420,
+      "sha256": "11cf90b209abe5be3630398b53ad43c91bbd0d54daaf59ac4b845d7a933a538b"
+    },
+    {
+      "path": "case-073/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-073/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "2157ddce4e48377ce5c19360f4e3822c7f66ef2b391b57370dd8da04956b9d67"
+    },
+    {
+      "path": "case-073/tasks.md",
+      "bytes": 1174,
+      "mode": 420,
+      "sha256": "154372df42518bd14599a6be53efb12c81ad72591e6efd8a1af2e05bbae685aa"
+    },
+    {
+      "path": "case-074/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-074/stdout.txt",
+      "bytes": 625,
+      "mode": 420,
+      "sha256": "24f8f0f3e4c657a7683c089406373523dd2ecad98e66672dbd18982ba5dd678f"
+    },
+    {
+      "path": "case-074/tasks.md",
+      "bytes": 1189,
+      "mode": 420,
+      "sha256": "9a97ece0e17011768efb38b0755cddd7947f252eba11d45cb6a7f10efc90676b"
+    },
+    {
+      "path": "case-075/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-075/stdout.txt",
+      "bytes": 625,
+      "mode": 420,
+      "sha256": "338df695a1df674337a4eefd0f7e42458e0744ad77b9e1c885fb792f6b3c3eb3"
+    },
+    {
+      "path": "case-075/tasks.md",
+      "bytes": 1180,
+      "mode": 420,
+      "sha256": "96ced0710287345954ac203ba25337bff7051432244356d560bbe791d998515e"
+    },
+    {
+      "path": "case-076/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-076/stdout.txt",
+      "bytes": 625,
+      "mode": 420,
+      "sha256": "ef2c1f27ac7cf92eb0780c7defd16c675f0b70108682687c7e390b57159d1c1d"
+    },
+    {
+      "path": "case-076/tasks.md",
+      "bytes": 1180,
+      "mode": 420,
+      "sha256": "995a379e368c3c10f13c7f1c264982550b027cb27ff883262ec9e67d6c1795d8"
+    },
+    {
+      "path": "case-077/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-077/stdout.txt",
+      "bytes": 625,
+      "mode": 420,
+      "sha256": "e88971bf50987b7c00762ec15ec521352ccc1fd5624a10f211060c13485096c5"
+    },
+    {
+      "path": "case-077/tasks.md",
+      "bytes": 1172,
+      "mode": 420,
+      "sha256": "44ac65f6c4fb3ce7d3d59f7382a1545196067e9b0121932f73fccca63c52d947"
+    },
+    {
+      "path": "case-078/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-078/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "5a8dc22f90262657519fb88aea300e2bd360b1b491516b853e4f8e6540ae4511"
+    },
+    {
+      "path": "case-078/tasks.md",
+      "bytes": 1176,
+      "mode": 420,
+      "sha256": "a1274439dce956d5cd794aeb08e860236bd90f0b3bc19ec19863223c7a67081c"
+    },
+    {
+      "path": "case-079/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-079/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "72127ecff3ff97598bbd1e6cc6465bf78e04dd98b60ca022b0a7aae9efc48c6a"
+    },
+    {
+      "path": "case-079/tasks.md",
+      "bytes": 1163,
+      "mode": 420,
+      "sha256": "1dcc0e94f5f072db173619369e486d8df4b7a67f9e1be2fcae84d34ba0495f59"
+    },
+    {
+      "path": "case-080/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-080/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "b8076e69d2869218fd95a97c776e8bcb6bee742745b4b3356dac3fa205f60f6a"
+    },
+    {
+      "path": "case-080/tasks.md",
+      "bytes": 1168,
+      "mode": 420,
+      "sha256": "56783e8647a1c71a0121e62466fcf5b6477767f37486dda7d93de519581732e9"
+    },
+    {
+      "path": "case-081/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-081/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "4ad2a0a6e5c56421b97cb314f33447ed3dd6b01b09af7e88bc274c8f16a4bedd"
+    },
+    {
+      "path": "case-081/tasks.md",
+      "bytes": 1164,
+      "mode": 420,
+      "sha256": "b40869a95d7fd3f46e692ce751cf38b859a686fee04843c1426c137958d69b8e"
+    },
+    {
+      "path": "case-082/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-082/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "d48eead839cfe014e31bfdcd0756356c15e8b240b43765cee6c52f2ff8cd7157"
+    },
+    {
+      "path": "case-082/tasks.md",
+      "bytes": 1159,
+      "mode": 420,
+      "sha256": "0122f14936004f169ad2f4038c4be908b029cedc7aa2b661da2dec24dc719ae6"
+    },
+    {
+      "path": "case-083/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-083/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "62598df14772f6cff3589dcaffe2ff2272073b2c99b1ba3cbc1f9e7838735193"
+    },
+    {
+      "path": "case-083/tasks.md",
+      "bytes": 1158,
+      "mode": 420,
+      "sha256": "57f8c264ab45f887cf0198b479246ea871bfded625b0ed75f9d4134c920c48ad"
+    },
+    {
+      "path": "case-084/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-084/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "ef8ed868c8644ad12478be927f3aee9f9da303107b40767b4f502d0bdad4b148"
+    },
+    {
+      "path": "case-084/tasks.md",
+      "bytes": 1160,
+      "mode": 420,
+      "sha256": "cdf6d764aa6ce5c8e86a4d48e1fe1957575c1dab7cb581653ff8709dc1972d05"
+    },
+    {
+      "path": "case-085/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-085/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "16ad7ef06e9d9c4c317b408909395dff094ca9e01440ecb8c994baeaa52ea3aa"
+    },
+    {
+      "path": "case-085/tasks.md",
+      "bytes": 1161,
+      "mode": 420,
+      "sha256": "421b85867b421e1411029ec95c60681d09a43578ddfa4d27b4a849fb9fd5389c"
+    },
+    {
+      "path": "case-086/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-086/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "ca65b1ffaeda2753b012a1ddcb884daf4697eec5e172400fc3e66fda1f5ca15b"
+    },
+    {
+      "path": "case-086/tasks.md",
+      "bytes": 1167,
+      "mode": 420,
+      "sha256": "d26e8e69dfd4fa551819320d9ce44f09f735bf243ed8de4cd26bae6720f77223"
+    },
+    {
+      "path": "case-087/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-087/stdout.txt",
+      "bytes": 625,
+      "mode": 420,
+      "sha256": "f768add081b962e0cba553659fd2c026bc1dac3198eb1bd8f7f132d0019479c7"
+    },
+    {
+      "path": "case-087/tasks.md",
+      "bytes": 1182,
+      "mode": 420,
+      "sha256": "0b9edb2b44693e166380978417a792c3cf00603d06bb4bfe2a1fe65488d33193"
+    },
+    {
+      "path": "case-088/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-088/stdout.txt",
+      "bytes": 625,
+      "mode": 420,
+      "sha256": "706f5d1511aa1c61512be1ef1836f875c7095a86a28332ee6ae0ea51e1ef6e46"
+    },
+    {
+      "path": "case-088/tasks.md",
+      "bytes": 1173,
+      "mode": 420,
+      "sha256": "f5906c72b9e97354d8cc3079f53dfd3bf78bc188e9ba07a26a743eac7d4f3b68"
+    },
+    {
+      "path": "case-089/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-089/stdout.txt",
+      "bytes": 625,
+      "mode": 420,
+      "sha256": "9fb23bc09bafad84f1695147e40b2c8508599e9d215e10ba327a62954cfac922"
+    },
+    {
+      "path": "case-089/tasks.md",
+      "bytes": 1173,
+      "mode": 420,
+      "sha256": "ebfe7e28894399117be326114a907149fda92e7dfefbe3d5b5c1633b930179b6"
+    },
+    {
+      "path": "case-090/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-090/stdout.txt",
+      "bytes": 625,
+      "mode": 420,
+      "sha256": "95238d7d99ca3f23c06270cf7edbb658d01d4b0a32bbee1fdbd8f4507fdde388"
+    },
+    {
+      "path": "case-090/tasks.md",
+      "bytes": 1165,
+      "mode": 420,
+      "sha256": "591136ecb4927f7dc870fa6e05c2673e08b922b1a4b86da6a241653f6059c899"
+    },
+    {
+      "path": "case-091/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-091/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "03271a0ae0deffa28dc869a2c933a396d078c0c8850462fcd8c00e68c96d7800"
+    },
+    {
+      "path": "case-091/tasks.md",
+      "bytes": 1185,
+      "mode": 420,
+      "sha256": "fd9990423e9751c26edf0df954b28b174b893623865e7063e142f3a48e62322d"
+    },
+    {
+      "path": "case-092/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-092/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "5a8dc281a5afd6c4007564c7f740b03badfc8bcacf3079b783b60a714ef5c0d5"
+    },
+    {
+      "path": "case-092/tasks.md",
+      "bytes": 1173,
+      "mode": 420,
+      "sha256": "fb672243c39d8f09b3c8ac440a2c24c5da562db2d04c1488ac8e4e1300dfd3cd"
+    },
+    {
+      "path": "case-093/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-093/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "f36734a0f6ddcbaebc98414b44e3fd5fce073a735f85ebb96b53c5d3f9f50631"
+    },
+    {
+      "path": "case-093/tasks.md",
+      "bytes": 1172,
+      "mode": 420,
+      "sha256": "2960f0230d119cee9d0660157f0b4e2c2adb7e8545f6b5100373f89abf167193"
+    },
+    {
+      "path": "case-094/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-094/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "1fe6136f691248ddca6e842b34eb0e70ddb9836ebd14e29f51f8a6ca9f05e2d2"
+    },
+    {
+      "path": "case-094/tasks.md",
+      "bytes": 1187,
+      "mode": 420,
+      "sha256": "0b596cbb213c356c61e30ae565c65f67f4132bc1d2bd2ad6c9faaf241e5d9db6"
+    },
+    {
+      "path": "case-095/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-095/stdout.txt",
+      "bytes": 625,
+      "mode": 420,
+      "sha256": "688206dafa24263e5d74ed5e8cdf7ed5986ed0057f232f7512c432f7023b8341"
+    },
+    {
+      "path": "case-095/tasks.md",
+      "bytes": 1182,
+      "mode": 420,
+      "sha256": "47a212e48a5d24197bd039b7f53310c6b35d51ca107dda79ca13978833ebab7c"
+    },
+    {
+      "path": "case-096/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-096/stdout.txt",
+      "bytes": 625,
+      "mode": 420,
+      "sha256": "bf370e62446aef3ef3d75abd2c821f655a7cb076335b5cb5f3b6d4dd786f2a5f"
+    },
+    {
+      "path": "case-096/tasks.md",
+      "bytes": 1191,
+      "mode": 420,
+      "sha256": "7d5fa347d1e7f802dd7f1c9c5a032e64a6a15848a8c16447ba49fca74ba4ff99"
+    },
+    {
+      "path": "case-097/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-097/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "80476bc28f2e4a01791033807743d3a189a5e0174ef18552bca4cd8746be6f9c"
+    },
+    {
+      "path": "case-097/tasks.md",
+      "bytes": 1183,
+      "mode": 420,
+      "sha256": "ede887653f78c870f92c02fdb01f29844b1a828e525775cdde93914f451f50cc"
+    },
+    {
+      "path": "case-098/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-098/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "1a0a8b2efb937c02fa6f66bba80361b9a1454bdcb155e2c24c70cd2365e4676c"
+    },
+    {
+      "path": "case-098/tasks.md",
+      "bytes": 1171,
+      "mode": 420,
+      "sha256": "0287a8c44177fb498ad0e8f2692693eb94f204ba96943a121623715fddeeec44"
+    },
+    {
+      "path": "case-099/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-099/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "c413fc6eb867799992ff3ef2d8755d6aee0916306558b9c01a5528e51c8bfc58"
+    },
+    {
+      "path": "case-099/tasks.md",
+      "bytes": 1170,
+      "mode": 420,
+      "sha256": "2498d1bf169b17803cd670b12567219a2fa49e0dd3f890c499e3decc0a43015f"
+    },
+    {
+      "path": "case-100/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-100/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "1980e81000ab87964fc1f4682fb7a623dc54534138099800d568499d667cb1ba"
+    },
+    {
+      "path": "case-100/tasks.md",
+      "bytes": 1185,
+      "mode": 420,
+      "sha256": "126937c1c2c30ff90c2415b17ac4a82fc0401bcd0cc7972815f6fdcdea990837"
+    },
+    {
+      "path": "case-101/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-101/stdout.txt",
+      "bytes": 625,
+      "mode": 420,
+      "sha256": "68b1b7a150141e5a9fa07142a107e6e29faa159fb9cb08341e5fbd544758ea11"
+    },
+    {
+      "path": "case-101/tasks.md",
+      "bytes": 1180,
+      "mode": 420,
+      "sha256": "6bb07d94f28105a5d8f4501d9157277cc890b92e08bef72affe2df683085b431"
+    },
+    {
+      "path": "case-102/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-102/stdout.txt",
+      "bytes": 625,
+      "mode": 420,
+      "sha256": "9c76ef419c3e549a0fb0bf2db776eb1ff526e25cae2bce3859eaae1c20af4a66"
+    },
+    {
+      "path": "case-102/tasks.md",
+      "bytes": 1189,
+      "mode": 420,
+      "sha256": "a91c027c3685573a1c75991aed0338449806fd993c873baf93639f43c6a2f61d"
+    },
+    {
+      "path": "case-103/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-103/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "de22dbe5b97e3bc3eb1b89ce2bdd1d7158fdfe75cd6cb75adcb14bb084d95cdd"
+    },
+    {
+      "path": "case-103/tasks.md",
+      "bytes": 1184,
+      "mode": 420,
+      "sha256": "4c183d242d8682fb7f110cdfc062d0e5f7b4f04cc38db77b796df97803e1abcd"
+    },
+    {
+      "path": "case-104/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-104/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "d74164d80d06d248e763671728792830cdd28898bde59c4d3070f8132c65df64"
+    },
+    {
+      "path": "case-104/tasks.md",
+      "bytes": 1172,
+      "mode": 420,
+      "sha256": "57d41468fa60af1b721ca2772d38f20fd1ec6e24bc0c90d3a6129d930ec373be"
+    },
+    {
+      "path": "case-105/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-105/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "cce6827a52371617fe84df44209da6e7b73c6b02036f1068032862e1fb7b0aa4"
+    },
+    {
+      "path": "case-105/tasks.md",
+      "bytes": 1171,
+      "mode": 420,
+      "sha256": "45cb315e792e0a1ce8f3cf5584ad92251284f7d8980cd130102f37b28d7f9ab3"
+    },
+    {
+      "path": "case-106/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-106/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "fd0724dda4604285c2bddb105ac1e4240bdfa1310e43bb41b11262a7d3cf5136"
+    },
+    {
+      "path": "case-106/tasks.md",
+      "bytes": 1186,
+      "mode": 420,
+      "sha256": "27867ca9c8a236a39e46f7367808064dd22b74436adbd3a0e1e3f2a06cb9fb9c"
+    },
+    {
+      "path": "case-107/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-107/stdout.txt",
+      "bytes": 625,
+      "mode": 420,
+      "sha256": "66a3e75343ca5ef7ddc865aae9b7a4d1dc847a1b7df57a14e9d4957575ddf419"
+    },
+    {
+      "path": "case-107/tasks.md",
+      "bytes": 1181,
+      "mode": 420,
+      "sha256": "25a1ff74119b84bf2468ec92f302f9fec66af2df5fe857f3d435e71a79e4c013"
+    },
+    {
+      "path": "case-108/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-108/stdout.txt",
+      "bytes": 625,
+      "mode": 420,
+      "sha256": "5a2b885dc3ff9822d55015c897428e7ae7fe9807310150d072a6c31158e35057"
+    },
+    {
+      "path": "case-108/tasks.md",
+      "bytes": 1190,
+      "mode": 420,
+      "sha256": "df870b880953badfc764b1f6f6d988f6429a74abf7dcc10ead06b7b79aca52c1"
+    },
+    {
+      "path": "case-109/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-109/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "037be6e5f5d2b200374b5ad02293eba3fd7e17d48bb3376f9521afa6916cb61d"
+    },
+    {
+      "path": "case-109/tasks.md",
+      "bytes": 1184,
+      "mode": 420,
+      "sha256": "dbf22f169cbdd41cda59f1a09d0f0165e5ccf5a6b44033f5578d4104a26e933d"
+    },
+    {
+      "path": "case-110/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-110/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "08b1a2b6d8928a3f9312d15481c7ea68a64d4537a8a781a08d0c7ac408e2ece1"
+    },
+    {
+      "path": "case-110/tasks.md",
+      "bytes": 1172,
+      "mode": 420,
+      "sha256": "d4de3ab2068e0a4af0d0f5bfc1c1ec46783662bc2a99d6917b93c7ff4c03c43a"
+    },
+    {
+      "path": "case-111/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-111/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "03d5aaa813c5a8d42e12b0406848f76042f752b15bac812496957536e0f072dc"
+    },
+    {
+      "path": "case-111/tasks.md",
+      "bytes": 1171,
+      "mode": 420,
+      "sha256": "473c80d89ffab9f37a95549e8ead019bd49b987544d568e51b2c4b882a65dd03"
+    },
+    {
+      "path": "case-112/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-112/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "fd5371cf90d667ef684b716b6a2c9c5a5485cd39193e8c0421d96a4e2cfd2c30"
+    },
+    {
+      "path": "case-112/tasks.md",
+      "bytes": 1186,
+      "mode": 420,
+      "sha256": "018165747127357e42bc88e2ebd6e3261d3173e71043f96e45891ea69370cb78"
+    },
+    {
+      "path": "case-113/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-113/stdout.txt",
+      "bytes": 625,
+      "mode": 420,
+      "sha256": "69351467cfebb03957b6657c160158e46972ee915379ee6ca2ca27ebb11428f8"
+    },
+    {
+      "path": "case-113/tasks.md",
+      "bytes": 1181,
+      "mode": 420,
+      "sha256": "d553394e0b8165ae1257cf0cc3c60781f14cf681eefa3322fb03f6a429d87477"
+    },
+    {
+      "path": "case-114/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-114/stdout.txt",
+      "bytes": 625,
+      "mode": 420,
+      "sha256": "5fd11e0f667cb20afbd8c2d7490a13d46aa6ca5ab016136a99800cd338174fb1"
+    },
+    {
+      "path": "case-114/tasks.md",
+      "bytes": 1190,
+      "mode": 420,
+      "sha256": "49281060098f99ae5f3c28485cdb85950c0455c9589979ee6a75a1be87b76f03"
+    },
+    {
+      "path": "case-115/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-115/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "f743345a110076e89d70d78c076ac1d6653beb1f128333c8b9bc62ad117e70a6"
+    },
+    {
+      "path": "case-115/tasks.md",
+      "bytes": 1186,
+      "mode": 420,
+      "sha256": "130678934c96b16e7179a1bf9729d8e7097434af2b8b65e6d84902a804931a50"
+    },
+    {
+      "path": "case-116/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-116/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "5c7325179f72684cfad9eba7c9c16e93ae636e1c7b6063e92f8222b8d3533a59"
+    },
+    {
+      "path": "case-116/tasks.md",
+      "bytes": 1174,
+      "mode": 420,
+      "sha256": "e54bfee862d724adc29cceea29e8ee561b0c2e84ae12f38325d91fcab1af1421"
+    },
+    {
+      "path": "case-117/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-117/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "cdd85d99345700a4db4156b6808e5ac95e67b76ede8c87325b658edeed713838"
+    },
+    {
+      "path": "case-117/tasks.md",
+      "bytes": 1173,
+      "mode": 420,
+      "sha256": "fa6da97637971c84823f5c91b8de54f3239a07e92eafe0e1607b463f7af269f0"
+    },
+    {
+      "path": "case-118/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-118/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "604f7a9a4906283971b4115682350e29a22de0e4225e614b824f29f4aec95c2a"
+    },
+    {
+      "path": "case-118/tasks.md",
+      "bytes": 1188,
+      "mode": 420,
+      "sha256": "928544206e54bd99d1a62811dad0562a26e22fc3b06b17f3884395a44ec94da7"
+    },
+    {
+      "path": "case-119/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-119/stdout.txt",
+      "bytes": 625,
+      "mode": 420,
+      "sha256": "ca5c71f1aab011bbb3ee3cc2c210857e0efcb1e27364c8ae0ea3200af32d7e9e"
+    },
+    {
+      "path": "case-119/tasks.md",
+      "bytes": 1183,
+      "mode": 420,
+      "sha256": "817c297d7a47d2dca6fddb41b92c40b752faadc012946f4472a6dc45a7124068"
+    },
+    {
+      "path": "case-120/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-120/stdout.txt",
+      "bytes": 625,
+      "mode": 420,
+      "sha256": "f5bf830bf0cefb9af7b927d8acb70104c22f5aaec9b03b8e58749ba7570ba17c"
+    },
+    {
+      "path": "case-120/tasks.md",
+      "bytes": 1192,
+      "mode": 420,
+      "sha256": "3b9896e1fd96f137f094eb384bbf2e62415e71bf17c9aced9a7c892f30579368"
+    },
+    {
+      "path": "case-121/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-121/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "8fca319d2ebeda1f6097291cb376700b9a3dc945930113209b347cc0812ca1dc"
+    },
+    {
+      "path": "case-121/tasks.md",
+      "bytes": 1178,
+      "mode": 420,
+      "sha256": "1c66a617da2436c1fe955a5ca325512443a5c7d5e4343c69cb0ac74a55a5098e"
+    },
+    {
+      "path": "case-122/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-122/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "37555ff50b24244434019fcfdeefdfecbe4721d4e0f01a4d3ce217647de68a8d"
+    },
+    {
+      "path": "case-122/tasks.md",
+      "bytes": 1166,
+      "mode": 420,
+      "sha256": "57755bd884c6463a523e34fc6fbb6e4a385ce1bfb66c0dd615d6f7041ef0d94f"
+    },
+    {
+      "path": "case-123/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-123/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "99bfc23f95e9693857c6dff6ea59e9e5271c49c4290462603ab632025e1d0ad3"
+    },
+    {
+      "path": "case-123/tasks.md",
+      "bytes": 1165,
+      "mode": 420,
+      "sha256": "729c88928b396b17e6077cbf18128567361f0940b7d1182cefdaf20b0b5f9dde"
+    },
+    {
+      "path": "case-124/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-124/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "f8d378781a034a8b1ce58d34b9d7732edf4840d08ee7eecf44bf27da431c6944"
+    },
+    {
+      "path": "case-124/tasks.md",
+      "bytes": 1180,
+      "mode": 420,
+      "sha256": "2376bce2d9681e89251c6d2d58661155a7d5df29b0f8bd8c4f63114291161d8e"
+    },
+    {
+      "path": "case-125/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-125/stdout.txt",
+      "bytes": 625,
+      "mode": 420,
+      "sha256": "779971c0ed7087b2f9263728642893899cb99a1a379d9ecfe51847283505ef2a"
+    },
+    {
+      "path": "case-125/tasks.md",
+      "bytes": 1175,
+      "mode": 420,
+      "sha256": "cdb0f6efdd8416db60b5c1df23501e5aaff4cfbecd25b00faa3200e6c0a560fe"
+    },
+    {
+      "path": "case-126/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-126/stdout.txt",
+      "bytes": 625,
+      "mode": 420,
+      "sha256": "528b4087da56b182b0dca4755d12e67d34684b9d60d66a05aea0fcf596b14b2c"
+    },
+    {
+      "path": "case-126/tasks.md",
+      "bytes": 1184,
+      "mode": 420,
+      "sha256": "5a69ee8b42dfc4522453ba553bba5a268dcf4e3c58722d1e94e65496fd943e2a"
+    },
+    {
+      "path": "case-127/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-127/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "cb45b0b996c190af9aae10268eae5c7b40b326a1e5232f9b23996fff8ed7095f"
+    },
+    {
+      "path": "case-127/tasks.md",
+      "bytes": 1178,
+      "mode": 420,
+      "sha256": "ead50c3cc50bd22d1b3d75c75cd892193c965026ef3837df82ec487c2d0b8c65"
+    },
+    {
+      "path": "case-128/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-128/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "4aee8146463e288c8c7e3b5fd7ed3d3efcac2d41f6c11744291904f57883d97d"
+    },
+    {
+      "path": "case-128/tasks.md",
+      "bytes": 1166,
+      "mode": 420,
+      "sha256": "318a35c9a9c8192b2a80634568a5a735cb4a34e75df5c1ba5c1a2dabb1d15818"
+    },
+    {
+      "path": "case-129/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-129/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "89caacdd722723456df6b0cb1a054ac4a7bb1e68faf5a22d2a31a796cc3ba200"
+    },
+    {
+      "path": "case-129/tasks.md",
+      "bytes": 1165,
+      "mode": 420,
+      "sha256": "bb9c3077000ae9452e11b062fa17c5bee3dfaf86e3b390353db199cacd4936ee"
+    },
+    {
+      "path": "case-130/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-130/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "2a46d79543924fd26cd0201a8df3bccb41fc61db7967be9d84d3449d1a0c03ed"
+    },
+    {
+      "path": "case-130/tasks.md",
+      "bytes": 1180,
+      "mode": 420,
+      "sha256": "9026b612c8d29cf47ed13ea3791fe92cfe4e8a74d468b57eb01ea46ce0e68f2a"
+    },
+    {
+      "path": "case-131/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-131/stdout.txt",
+      "bytes": 625,
+      "mode": 420,
+      "sha256": "ae594c4244970e4e7c4d4c18975a63d44ad644b98a9df84147329d2d9dc9cc8a"
+    },
+    {
+      "path": "case-131/tasks.md",
+      "bytes": 1175,
+      "mode": 420,
+      "sha256": "f9ed3507cda7f7f2039917ce6d280010c3ed33e7cb148e5a365a5ddcef19ed18"
+    },
+    {
+      "path": "case-132/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-132/stdout.txt",
+      "bytes": 625,
+      "mode": 420,
+      "sha256": "4c418c4526b9641a7389ce007a8451c19343afdaa5ab5d71822a4ecc1cdc6f59"
+    },
+    {
+      "path": "case-132/tasks.md",
+      "bytes": 1184,
+      "mode": 420,
+      "sha256": "38106c0988e3f79904e680b3f8f68c50a09f7da33f355d2dcb28d3ebcb7c1a7f"
+    },
+    {
+      "path": "case-133/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-133/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "3d561db48fc680f77335ee915c3d6bf04fb6285cdbd5f62a1b6e1e3c672581b8"
+    },
+    {
+      "path": "case-133/tasks.md",
+      "bytes": 1184,
+      "mode": 420,
+      "sha256": "950a9ac88c8876c102a1b5cc8c2f35b11536bcff9e31070b0944927ab513dfab"
+    },
+    {
+      "path": "case-134/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-134/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "d58c6de11fc10fe847e01de3661a31b035efb11891f1160f39bdb4c2fbf6d229"
+    },
+    {
+      "path": "case-134/tasks.md",
+      "bytes": 1172,
+      "mode": 420,
+      "sha256": "c618da5922adf8ed15d9da1f2b6c68c1c68c4db7b6a42435c742e3937d3b7980"
+    },
+    {
+      "path": "case-135/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-135/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "a81a025e4cbbde403123a3f3dc4c9c431e12371ad58459f2c70c8eebe2bd9c71"
+    },
+    {
+      "path": "case-135/tasks.md",
+      "bytes": 1171,
+      "mode": 420,
+      "sha256": "16c9e233dc37b975344f9162425c7f00c623159537d6e48e8b4c9510c3acaf9c"
+    },
+    {
+      "path": "case-136/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-136/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "c862ee174ead28588eb7599baba5c14fc8600faefe957a5c7fae8431cccc649a"
+    },
+    {
+      "path": "case-136/tasks.md",
+      "bytes": 1186,
+      "mode": 420,
+      "sha256": "0f535c86b03da5bdfefad303fc4293b915f6389c46e7bf0ebfc511c0f3ded4cd"
+    },
+    {
+      "path": "case-137/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-137/stdout.txt",
+      "bytes": 625,
+      "mode": 420,
+      "sha256": "6dd98adbc8a271487f12eb52806d0d5655fa1f6a7b4cc7668ae827b72fabf770"
+    },
+    {
+      "path": "case-137/tasks.md",
+      "bytes": 1181,
+      "mode": 420,
+      "sha256": "2a9bde2b1d5c6f88249f9532d8bd53ab4c1b1e2a33c8a4f2f3bdbd33801371f8"
+    },
+    {
+      "path": "case-138/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-138/stdout.txt",
+      "bytes": 625,
+      "mode": 420,
+      "sha256": "0fe3b8dcf9d88b6a045053f5ff456cf37c5d43d8bf8175f44f8827a581ae2644"
+    },
+    {
+      "path": "case-138/tasks.md",
+      "bytes": 1190,
+      "mode": 420,
+      "sha256": "da97cc8e0bb19735fe170a8e268dce1d799ca0b50a7b51dcc69a2a8098896361"
+    },
+    {
+      "path": "case-139/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-139/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "92ecf7c37ae6119cad06191a0e94313e69700f72d74e53f7630db599e1e2b6de"
+    },
+    {
+      "path": "case-139/tasks.md",
+      "bytes": 1167,
+      "mode": 420,
+      "sha256": "cc692574f25b657be0e0a484220c64b8d15955ef8de35feae1ec841770cdb7f3"
+    },
+    {
+      "path": "case-140/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-140/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "f81fa52107003d317fdb772bf3a84331f94dd28208e43139bfa4478c782efa19"
+    },
+    {
+      "path": "case-140/tasks.md",
+      "bytes": 1158,
+      "mode": 420,
+      "sha256": "ac08988d226cb8b3cb9277ea9e713a385a632a387a5305c164f49ccd5d741236"
+    },
+    {
+      "path": "case-141/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-141/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "3b2c2ce3f882ba192bd69740ed655adc6d029a4e83891e10d94bf62673d6b496"
+    },
+    {
+      "path": "case-141/tasks.md",
+      "bytes": 1174,
+      "mode": 420,
+      "sha256": "d67c8044871738c0bd6b6a3eb2298c0c3bc041318ff280d20decfd095262463f"
+    },
+    {
+      "path": "case-142/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-142/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "eb2c8ce4175e0fd67449596fba953661912959026c26573f45f184dc9fa30360"
+    },
+    {
+      "path": "case-142/tasks.md",
+      "bytes": 1167,
+      "mode": 420,
+      "sha256": "29d7d60e25541a427c12248b1854fcb5a193959e3f35b6da0771574c40bf6a9d"
+    },
+    {
+      "path": "case-143/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-143/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "9779953a667125c274d5189a404a911b701c3038e306557b2d42f396beb9f6aa"
+    },
+    {
+      "path": "case-143/tasks.md",
+      "bytes": 1191,
+      "mode": 420,
+      "sha256": "29bf7c4d3c0837d8ee8876db1c05e468e5455c912d94674ae0b269d5153ba83d"
+    },
+    {
+      "path": "case-144/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-144/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "bd31448509ab1fd94ba248664b06b1670363194b990854a6e160389b12623418"
+    },
+    {
+      "path": "case-144/tasks.md",
+      "bytes": 1178,
+      "mode": 420,
+      "sha256": "32cb31929951b1550723ca38aa32f5d02ed752e8c614e73234d21c9872e6c1a2"
+    },
+    {
+      "path": "case-145/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-145/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "0c56ec8916ca1abf654d7a27473fca9d3df285afdf99cbfb64d46a23a685b9e6"
+    },
+    {
+      "path": "case-145/tasks.md",
+      "bytes": 1158,
+      "mode": 420,
+      "sha256": "804fdc73aa7ff37f4ba1a089f9496eabea28a32baf23d36e5cbf182e9b64f708"
+    },
+    {
+      "path": "case-146/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-146/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "6840fc7e49a7c6b9cb05c1d83ec2d2c94f5e340735b5d4835d147e1784f479ef"
+    },
+    {
+      "path": "case-146/tasks.md",
+      "bytes": 1158,
+      "mode": 420,
+      "sha256": "7fbcac452494627d235ea505631a268c2b34c116232251b56226ef918d1590da"
+    },
+    {
+      "path": "case-147/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-147/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "2440faca4f50d8cb7191abc30f4863e110648796a645d5b21640d68410b82937"
+    },
+    {
+      "path": "case-147/tasks.md",
+      "bytes": 1162,
+      "mode": 420,
+      "sha256": "8e2781e37300994e38449e571a8bb8b1da6c82ddd5ccd8637954850b0037ec8d"
+    },
+    {
+      "path": "case-148/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-148/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "c3c8d2b09e8b09c5089359c3a3615dc7e9a8f92b1ac6315288278ea8d7e2d129"
+    },
+    {
+      "path": "case-148/tasks.md",
+      "bytes": 1174,
+      "mode": 420,
+      "sha256": "84989a23ac5a1e0406117353144ac91cc5269ef2332e03d97198e391d34efe97"
+    },
+    {
+      "path": "case-149/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-149/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "ca4a1534c6950a613ae0373a8da932eadc9c684895d5697c7b019560f8ba6fcf"
+    },
+    {
+      "path": "case-149/tasks.md",
+      "bytes": 1172,
+      "mode": 420,
+      "sha256": "06f18b405e1ff60665e40a3fdb639d298d7e6af046343581215faa3485d12d73"
+    },
+    {
+      "path": "case-150/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-150/stdout.txt",
+      "bytes": 625,
+      "mode": 420,
+      "sha256": "ca0b3803e6dee2d7cf22a808cd820c9eee5d8afe6c20cc368dc13e8494ed7ff9"
+    },
+    {
+      "path": "case-150/tasks.md",
+      "bytes": 1167,
+      "mode": 420,
+      "sha256": "dbd656a09125cc878e7ba38a6b36f806d969d5596bb35d4c7eab2192d904457f"
+    },
+    {
+      "path": "case-151/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-151/stdout.txt",
+      "bytes": 625,
+      "mode": 420,
+      "sha256": "aaf5a7d23f446b9aebc8bf132f5c7fdaf93fac6e3f0b28b90c77926047fa43e9"
+    },
+    {
+      "path": "case-151/tasks.md",
+      "bytes": 1169,
+      "mode": 420,
+      "sha256": "402ec67043fcbfe1ca0c3b3728cde8718ddb83f25ae303505f0e80d53988f711"
+    },
+    {
+      "path": "case-152/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-152/stdout.txt",
+      "bytes": 625,
+      "mode": 420,
+      "sha256": "028450a8e2a7d328672e984fe3d186c9c90cf467138f98bfd42a98201d44447b"
+    },
+    {
+      "path": "case-152/tasks.md",
+      "bytes": 1164,
+      "mode": 420,
+      "sha256": "a260cd9915692fc27290738072b580e8ff8d3ecdf3d2fe3d909648eaac026075"
+    },
+    {
+      "path": "case-153/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-153/stdout.txt",
+      "bytes": 625,
+      "mode": 420,
+      "sha256": "cf3c85dac89c8224b7b0629616326786ebf2be26bb957420f408c5f18e7985fb"
+    },
+    {
+      "path": "case-153/tasks.md",
+      "bytes": 1175,
+      "mode": 420,
+      "sha256": "5dbaf1a3e46bb3f84b00798e7a0fcc9ef285ea43f3d652f13db6f48d1e0efd15"
+    },
+    {
+      "path": "case-154/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-154/stdout.txt",
+      "bytes": 625,
+      "mode": 420,
+      "sha256": "7f2fd1894cc294e9cccf007c00d6dac964d19e396183374f9593e37b68bfaba7"
+    },
+    {
+      "path": "case-154/tasks.md",
+      "bytes": 1173,
+      "mode": 420,
+      "sha256": "350181f06a88f3302243f66c5c1d425bd85a92821962b8dc08faa324c13f4882"
+    },
+    {
+      "path": "case-155/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-155/stdout.txt",
+      "bytes": 625,
+      "mode": 420,
+      "sha256": "454b51b574c132eecf0c0012ea79aa8992e6986be777dd525f8e352dc357b150"
+    },
+    {
+      "path": "case-155/tasks.md",
+      "bytes": 1162,
+      "mode": 420,
+      "sha256": "d63bc180229527b5b6ad9c4d2cc5ce51252ab525cee049e4d43264c6f2585699"
+    },
+    {
+      "path": "case-156/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-156/stdout.txt",
+      "bytes": 625,
+      "mode": 420,
+      "sha256": "9d13e2488be18eb7a8207b323d9924209487d2c7d264c0f9f8d2a1cdafa9e88e"
+    },
+    {
+      "path": "case-156/tasks.md",
+      "bytes": 1202,
+      "mode": 420,
+      "sha256": "ce5a5c23d0ec406a60c6c0295e9e847e11ca35d6fabab2ed98926080b949e066"
+    },
+    {
+      "path": "case-157/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-157/stdout.txt",
+      "bytes": 625,
+      "mode": 420,
+      "sha256": "c0729928656b89df0eff7d2021e8f31e95e9fe004aa2eadf7301f55dff287ce4"
+    },
+    {
+      "path": "case-157/tasks.md",
+      "bytes": 1171,
+      "mode": 420,
+      "sha256": "34849e098d5ef010507cf0ebd1b015c448f2b794d8403f5ee3a79a97177b1f13"
+    },
+    {
+      "path": "case-158/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-158/stdout.txt",
+      "bytes": 625,
+      "mode": 420,
+      "sha256": "d82fb4e2794978194f6df0c998be1bbc434a65c16950247fa1f0bafd9d74aee5"
+    },
+    {
+      "path": "case-158/tasks.md",
+      "bytes": 1182,
+      "mode": 420,
+      "sha256": "4794ebfa8d7ce701ad633e562ae4344f02ea4cb850c12257d192c8be2a83282b"
+    },
+    {
+      "path": "case-159/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-159/stdout.txt",
+      "bytes": 625,
+      "mode": 420,
+      "sha256": "c6872ecb4201630f2dc9c620ead63a46f0dec70da78d9439ce8fc4cb7ad039ab"
+    },
+    {
+      "path": "case-159/tasks.md",
+      "bytes": 1183,
+      "mode": 420,
+      "sha256": "83961967250902ef6445de44ccd4340bda1546d7fcc0c9944c08cccc28783954"
+    },
+    {
+      "path": "case-160/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-160/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "673f15ed53e0748e2f35d6e69a3c15f0eda6b63828955d5f6fdcc5628a6ca32d"
+    },
+    {
+      "path": "case-160/tasks.md",
+      "bytes": 1183,
+      "mode": 420,
+      "sha256": "2dffcc328442deeac37d3f473937ee0a253b72b804af7dd3dbf44c1d04dc14c9"
+    },
+    {
+      "path": "case-161/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-161/stdout.txt",
+      "bytes": 625,
+      "mode": 420,
+      "sha256": "9070cc15ec08f5c91cd6b26f60eefbd3ec1bb5be18f5ab8ff64fd0235b6e88ab"
+    },
+    {
+      "path": "case-161/tasks.md",
+      "bytes": 1190,
+      "mode": 420,
+      "sha256": "c6367ba50f282ab75db7cb9af08e7eb889fe7b0e15b9f17e7c359dea21b72b3f"
+    },
+    {
+      "path": "case-162/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-162/stdout.txt",
+      "bytes": 625,
+      "mode": 420,
+      "sha256": "909ef16e562992b6ae7291130436aec25fa55fc65c7975d60a5a0fbd6a94c942"
+    },
+    {
+      "path": "case-162/tasks.md",
+      "bytes": 1191,
+      "mode": 420,
+      "sha256": "f733168802d6947e6a71dc3619afc96778e9d10dbe34ea41736aeb528eb79ab6"
+    },
+    {
+      "path": "case-163/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-163/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "2bff0027915d2c6d72f921047e42eb100888ccb423b125e6c61495d2971fd878"
+    },
+    {
+      "path": "case-163/tasks.md",
+      "bytes": 1191,
+      "mode": 420,
+      "sha256": "07212f2756d71e471880fcbea7d85a77ec5399a125ffb72e88109fd66cd0bbc7"
+    },
+    {
+      "path": "case-164/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-164/stdout.txt",
+      "bytes": 625,
+      "mode": 420,
+      "sha256": "fe83a0a5bda0f880dd0bcfedad42184d98bc6ed856e17b0dd40033a5fed77776"
+    },
+    {
+      "path": "case-164/tasks.md",
+      "bytes": 1188,
+      "mode": 420,
+      "sha256": "861a53c179624b1672f6186fd0edbf14d96950cb117f2ccae62fa063d56e7899"
+    },
+    {
+      "path": "case-165/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-165/stdout.txt",
+      "bytes": 625,
+      "mode": 420,
+      "sha256": "a7f98427eb67d8c6eda101a4bb3e5cd3788ee9914db740c8aa14d507e6138abe"
+    },
+    {
+      "path": "case-165/tasks.md",
+      "bytes": 1189,
+      "mode": 420,
+      "sha256": "f3767c8976a6fb268055c478703f67f54dee3822939dc3c46979b4111b8fb2e8"
+    },
+    {
+      "path": "case-166/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-166/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "d57134f7c6df50a62bc2e83dd94f9bb858cbb7578c5ca86d7864e241e70ae3e0"
+    },
+    {
+      "path": "case-166/tasks.md",
+      "bytes": 1189,
+      "mode": 420,
+      "sha256": "9cb6d61d6f045add8254971cf966a37381d0a33bce6066285b309aa98d3731c2"
+    },
+    {
+      "path": "case-167/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-167/stdout.txt",
+      "bytes": 625,
+      "mode": 420,
+      "sha256": "d75c4ad945bfcceb3f6e9b13733f58d1459262f49d1a72f278cfae284425a3de"
+    },
+    {
+      "path": "case-167/tasks.md",
+      "bytes": 1171,
+      "mode": 420,
+      "sha256": "cb5c8798753be27f84aef89ef5569b4b1af5c33d5bd849c5fb8272e84ef20a79"
+    },
+    {
+      "path": "case-168/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-168/stdout.txt",
+      "bytes": 625,
+      "mode": 420,
+      "sha256": "b9ad6705b929a05d0bb66ce2b89a97bcf787bb57a2a017d1bb2d676362dc5639"
+    },
+    {
+      "path": "case-168/tasks.md",
+      "bytes": 1166,
+      "mode": 420,
+      "sha256": "70c91a0921aef71a0bb7453cb479612f175377f4513586cff7150d869d97021a"
+    },
+    {
+      "path": "case-169/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-169/stdout.txt",
+      "bytes": 625,
+      "mode": 420,
+      "sha256": "5cbdc8f04b16a3cb8c56dc7238feab55f57087598b8c8e3aa6d3d57efd02bb76"
+    },
+    {
+      "path": "case-169/tasks.md",
+      "bytes": 1173,
+      "mode": 420,
+      "sha256": "9f99fd0d61e308391db0685078e71cc60b63de3ed5aced6a68363e104fcf7730"
+    },
+    {
+      "path": "case-170/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-170/stdout.txt",
+      "bytes": 625,
+      "mode": 420,
+      "sha256": "1b7157b45ba94c34351b777ee7bbc5c3d528b5d62ce5e8badb882df5485922a7"
+    },
+    {
+      "path": "case-170/tasks.md",
+      "bytes": 1172,
+      "mode": 420,
+      "sha256": "a63d6b9835d909b1b408fb00c80a4d16ff5d4e8e7e997d12e435611ae0f52d41"
+    },
+    {
+      "path": "case-171/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-171/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "8280d9b456746a9337ca0f4267afc5d3927af97baf216de0a7355277f6eca5ce"
+    },
+    {
+      "path": "case-171/tasks.md",
+      "bytes": 1186,
+      "mode": 420,
+      "sha256": "90ead4a7b38a33845524f60d22bfd91c2f16198fa56673965ac98fcd0e3ac5ed"
+    },
+    {
+      "path": "case-172/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-172/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "d9b60c196003a577d79b2620ff6fe21ab4d7f0d761b2b60f43666fd1f6c319d7"
+    },
+    {
+      "path": "case-172/tasks.md",
+      "bytes": 1176,
+      "mode": 420,
+      "sha256": "e6acd73bb74a31eb42d01817be331a24367ef89de92bc66070777585fa21124b"
+    },
+    {
+      "path": "case-173/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-173/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "3bbe07c4f6b53e34c8fdecc5bce0e7305ba945c2aefd75c711f80d957a3bdafb"
+    },
+    {
+      "path": "case-173/tasks.md",
+      "bytes": 1182,
+      "mode": 420,
+      "sha256": "7758b69b4a6c258c1f19f8dce57711b30ff1adf9b11f24d406a843c358f94e67"
+    },
+    {
+      "path": "case-174/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "case-174/stdout.txt",
+      "bytes": 704,
+      "mode": 420,
+      "sha256": "33146fea4d31b2a2b7664be9fbffaaea11ca7ea8f7f65987864ba11caee780ff"
+    },
+    {
+      "path": "case-174/tasks.md",
+      "bytes": 1172,
+      "mode": 420,
+      "sha256": "a7d3e1088c330ac8f16f86159b2a637370f8da0e69219ceafa4ea41241d5ab78"
+    },
+    {
+      "path": "classifier-probes.py",
+      "bytes": 7204,
+      "mode": 420,
+      "sha256": "7f729be63100ff6bbcd24a05713af948ac19ae3bb4680773b71f4951c850408a"
+    },
+    {
+      "path": "classifier-results.json",
+      "bytes": 203555,
+      "mode": 420,
+      "sha256": "871b98c226e8dfec9c57300f6fd9f4d906235de4acfac832d04da125acc20afa"
+    },
+    {
+      "path": "classifier-summary.json",
+      "bytes": 1843,
+      "mode": 420,
+      "sha256": "14f977dc068b7b55c0eb53aa6dfc458bb384034956d7e1b2ddda948d71c1d165"
+    },
+    {
+      "path": "current-evidence-context.json",
+      "bytes": 1310,
+      "mode": 420,
+      "sha256": "41e9d1970cb4679ad5966d1bdf84b8cf078bd087d69bca067e3bc49f6f846fe2"
+    },
+    {
+      "path": "explicit-kinds/STATUS.md",
+      "bytes": 95,
+      "mode": 420,
+      "sha256": "a5dd72a68e87ca2da4cdf5126cb84a78927b8679878a2f99d3e01ff48d3bd146"
+    },
+    {
+      "path": "explicit-kinds/plan.md",
+      "bytes": 1295,
+      "mode": 420,
+      "sha256": "9213a21af0b8fa2983d67466f482d8bdcd0ff5db816b8785ab7ae806ab056993"
+    },
+    {
+      "path": "explicit-kinds/spec.md",
+      "bytes": 577,
+      "mode": 420,
+      "sha256": "067085dfbfda9c431d01578c88d72312942ed9824e0dcad9e0b44b7642c5a091"
+    },
+    {
+      "path": "explicit-kinds/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "explicit-kinds/stdout.txt",
+      "bytes": 649,
+      "mode": 420,
+      "sha256": "27660a63738a8b46ebda82e42215caea908bf1fdcc80ffa67cb365fc97d4173d"
+    },
+    {
+      "path": "explicit-kinds/tasks.md",
+      "bytes": 2306,
+      "mode": 420,
+      "sha256": "e876ee8fabf768d2489847f57aa3c248063bd578432e02a6e22d7dd9e1f2f33c"
+    },
+    {
+      "path": "git-before.json",
+      "bytes": 49118,
+      "mode": 420,
+      "sha256": "3daa0061550711216ae3fa09b491a99335f37368e7d5bd1f4788595b36a75b73"
+    },
+    {
+      "path": "hosted-artifacts-observed.json",
+      "bytes": 7695,
+      "mode": 420,
+      "sha256": "44da7474d858663c13c706d56847d32ea2898fcc3027cd3e0b29646f4e3e43dd"
+    },
+    {
+      "path": "option-order-probes.py",
+      "bytes": 2983,
+      "mode": 420,
+      "sha256": "10690b0e5129bda34ce47811b9b4ba69ed6d88360a6b115ede4dbfd3dd37efa2"
+    },
+    {
+      "path": "option-order-results.json",
+      "bytes": 63219,
+      "mode": 420,
+      "sha256": "8ec80d0265150a9ef08be54f243d9fad16b10bd5f9da90c8e47adf845c07466f"
+    },
+    {
+      "path": "options-000/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "options-000/stdout.txt",
+      "bytes": 621,
+      "mode": 420,
+      "sha256": "36b6cdc3d3370d4767ee45dba537419aed5edc9856402b3aca03b19dfbe96c93"
+    },
+    {
+      "path": "options-000/tasks.md",
+      "bytes": 1183,
+      "mode": 420,
+      "sha256": "83961967250902ef6445de44ccd4340bda1546d7fcc0c9944c08cccc28783954"
+    },
+    {
+      "path": "options-001/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "options-001/stdout.txt",
+      "bytes": 700,
+      "mode": 420,
+      "sha256": "4aa3a3eeb0ef54f3fb1f4fcfd286e8f741fb6ff16333e1006d1d2ec4d69b8ed6"
+    },
+    {
+      "path": "options-001/tasks.md",
+      "bytes": 1183,
+      "mode": 420,
+      "sha256": "2dffcc328442deeac37d3f473937ee0a253b72b804af7dd3dbf44c1d04dc14c9"
+    },
+    {
+      "path": "options-002/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "options-002/stdout.txt",
+      "bytes": 621,
+      "mode": 420,
+      "sha256": "5e55370b224ac6fbffde32e713aec51a0a55ace88af33e3c452b2926eecf230d"
+    },
+    {
+      "path": "options-002/tasks.md",
+      "bytes": 1193,
+      "mode": 420,
+      "sha256": "2f6b6acb5e8eab7298fccef745c2c9590fc30b9d86f7b4a5bc61d3af602f9744"
+    },
+    {
+      "path": "options-003/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "options-003/stdout.txt",
+      "bytes": 700,
+      "mode": 420,
+      "sha256": "3ed53d0c1e3a6f65f4d9a0136e0d74c1c8825ac73491affbb10fc1351b3b06be"
+    },
+    {
+      "path": "options-003/tasks.md",
+      "bytes": 1193,
+      "mode": 420,
+      "sha256": "e2a6bab92913d960cea9f0656e8c69061dd6c562283dce964b6c35198d29291d"
+    },
+    {
+      "path": "options-004/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "options-004/stdout.txt",
+      "bytes": 621,
+      "mode": 420,
+      "sha256": "a9f971248547c38e6d44d0a42bd08c40769ea1c89ed1537a520372542a9a2755"
+    },
+    {
+      "path": "options-004/tasks.md",
+      "bytes": 1191,
+      "mode": 420,
+      "sha256": "dfa2d626095686236a187d73b678688eaa686526f0199d30f2a83c446ca0986d"
+    },
+    {
+      "path": "options-005/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "options-005/stdout.txt",
+      "bytes": 700,
+      "mode": 420,
+      "sha256": "8a3d094ebcf0ecc60e5df00a2cde1a792cf3e931d0f36e663183b6d645ce9074"
+    },
+    {
+      "path": "options-005/tasks.md",
+      "bytes": 1191,
+      "mode": 420,
+      "sha256": "6d8997123e24c57d3d943d240839c19a0cc0e2d8e50fbb4b3d11dd1dcc3e2efe"
+    },
+    {
+      "path": "options-006/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "options-006/stdout.txt",
+      "bytes": 621,
+      "mode": 420,
+      "sha256": "8086c99747d3104748d08aa82bb917c2aaca99ce1d8f566f351bdd755438becc"
+    },
+    {
+      "path": "options-006/tasks.md",
+      "bytes": 1192,
+      "mode": 420,
+      "sha256": "f2fa454a7110ca9d942f55eb3c9a7d6d8b3aa7193b6d63ec588da149c04b0337"
+    },
+    {
+      "path": "options-007/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "options-007/stdout.txt",
+      "bytes": 700,
+      "mode": 420,
+      "sha256": "aff519e02f52330fdcf58a2dcc898ac9a5fbc8788dfe32c678e1eec3d9834627"
+    },
+    {
+      "path": "options-007/tasks.md",
+      "bytes": 1192,
+      "mode": 420,
+      "sha256": "032d247a2b4156156bb32fa5a377da74e5f998ea609296908544482f8312fb33"
+    },
+    {
+      "path": "options-008/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "options-008/stdout.txt",
+      "bytes": 621,
+      "mode": 420,
+      "sha256": "b5734860944cf7de37f0145907dad35c632ecb13490e1e54bb937be306f10308"
+    },
+    {
+      "path": "options-008/tasks.md",
+      "bytes": 1192,
+      "mode": 420,
+      "sha256": "b48b907a654e0a3cc4466c5722c1e560d17f9f5663f8995e640269799381d112"
+    },
+    {
+      "path": "options-009/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "options-009/stdout.txt",
+      "bytes": 700,
+      "mode": 420,
+      "sha256": "a9d6a4eefa9d8cdc0ed75b87ac112c83bc2b7cbe0ef59605c2c289003b23de87"
+    },
+    {
+      "path": "options-009/tasks.md",
+      "bytes": 1192,
+      "mode": 420,
+      "sha256": "db44131a5532c56e46d882cbbc3ef3f6bd5077a5b548dd7b7a5af7f36314776b"
+    },
+    {
+      "path": "options-010/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "options-010/stdout.txt",
+      "bytes": 621,
+      "mode": 420,
+      "sha256": "a51623c9e78ca312048ef56a54ab8b76db875a60b5b939bc8724c4e98c6413ae"
+    },
+    {
+      "path": "options-010/tasks.md",
+      "bytes": 1194,
+      "mode": 420,
+      "sha256": "e9694650bbb7ae38a7ea69711f606b3f8dfa9ad30ab51ed99fee1f789723a0d6"
+    },
+    {
+      "path": "options-011/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "options-011/stdout.txt",
+      "bytes": 700,
+      "mode": 420,
+      "sha256": "56f8c0cc1ba3aa53aff22dd84b839bedeb07344d26e541b2ec2a08d1a520a5d7"
+    },
+    {
+      "path": "options-011/tasks.md",
+      "bytes": 1194,
+      "mode": 420,
+      "sha256": "41281aaf4b9e42ce50f918f9dcf336415cd93843012e04264f2ae25277881c3e"
+    },
+    {
+      "path": "options-012/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "options-012/stdout.txt",
+      "bytes": 621,
+      "mode": 420,
+      "sha256": "62fc4bb5dd2077537a3bbd1e21ec87fb339ede9b3016e5cdb683f3a3aa066005"
+    },
+    {
+      "path": "options-012/tasks.md",
+      "bytes": 1186,
+      "mode": 420,
+      "sha256": "ea113acb086905061260f9b2ba8f30c18b027aea4a79fc68a324229603df7921"
+    },
+    {
+      "path": "options-013/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "options-013/stdout.txt",
+      "bytes": 700,
+      "mode": 420,
+      "sha256": "6004d12b1994bea139676e3244dc06ce8bcd57b82a4f22866f5c815877fa5382"
+    },
+    {
+      "path": "options-013/tasks.md",
+      "bytes": 1186,
+      "mode": 420,
+      "sha256": "4480ac3358e59a17bbd6af63fadb5fe2c7600426f9c602c9f377ef8dce07f7f9"
+    },
+    {
+      "path": "options-014/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "options-014/stdout.txt",
+      "bytes": 621,
+      "mode": 420,
+      "sha256": "81d758dfa39bf21ffbd2ce8687e6b61369d2fb0017aa79c776e78a52e6d623b3"
+    },
+    {
+      "path": "options-014/tasks.md",
+      "bytes": 1186,
+      "mode": 420,
+      "sha256": "ed9f0500a035c1296689ffe7f8cfde09902f2bc5d937b400233eac6c42785e57"
+    },
+    {
+      "path": "options-015/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "options-015/stdout.txt",
+      "bytes": 700,
+      "mode": 420,
+      "sha256": "346ac5c3e7cb98eeade2d312c05cfb7e4a889ed9c39bbe028f70f0cd939f5e57"
+    },
+    {
+      "path": "options-015/tasks.md",
+      "bytes": 1186,
+      "mode": 420,
+      "sha256": "df69450ef42201c127b39127b043ff444b79ad368aa49a93fd78725337843d70"
+    },
+    {
+      "path": "options-016/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "options-016/stdout.txt",
+      "bytes": 621,
+      "mode": 420,
+      "sha256": "44db03b0360ade66417e7a7003dec3fe58ad6255d8e6c0f3fcf1a59ed8af1d3e"
+    },
+    {
+      "path": "options-016/tasks.md",
+      "bytes": 1192,
+      "mode": 420,
+      "sha256": "3efe71d6d7e46ba643080ce8dd77a60d0dd234d99fce458f3f910b2aa023c57e"
+    },
+    {
+      "path": "options-017/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "options-017/stdout.txt",
+      "bytes": 700,
+      "mode": 420,
+      "sha256": "a9802d9cccd828e88df4dee86e48fdae9edeaf0c9f290dc708aa66f2b78b0ac4"
+    },
+    {
+      "path": "options-017/tasks.md",
+      "bytes": 1192,
+      "mode": 420,
+      "sha256": "9e818eaa511a8120de4c71451a27bbc917e6e1e7b82793764a697179faa48e64"
+    },
+    {
+      "path": "options-018/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "options-018/stdout.txt",
+      "bytes": 621,
+      "mode": 420,
+      "sha256": "f694073babe854fbbbf80bad09f604fae633d09a649da16b570b55fc499f927e"
+    },
+    {
+      "path": "options-018/tasks.md",
+      "bytes": 1191,
+      "mode": 420,
+      "sha256": "f733168802d6947e6a71dc3619afc96778e9d10dbe34ea41736aeb528eb79ab6"
+    },
+    {
+      "path": "options-019/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "options-019/stdout.txt",
+      "bytes": 700,
+      "mode": 420,
+      "sha256": "17215d8f2e8c45fb5089a1911f60f83ea55610e32e1bfa6875389e1d34f30bbb"
+    },
+    {
+      "path": "options-019/tasks.md",
+      "bytes": 1191,
+      "mode": 420,
+      "sha256": "07212f2756d71e471880fcbea7d85a77ec5399a125ffb72e88109fd66cd0bbc7"
+    },
+    {
+      "path": "options-020/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "options-020/stdout.txt",
+      "bytes": 621,
+      "mode": 420,
+      "sha256": "ae1f7159203a2c73c7ac1a2ffced81a3940d2ecf170d45274d778e75644ac868"
+    },
+    {
+      "path": "options-020/tasks.md",
+      "bytes": 1201,
+      "mode": 420,
+      "sha256": "78e1d48f732b69b579296861423ff146142995d21a4f9697ba5a02cbca4ec324"
+    },
+    {
+      "path": "options-021/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "options-021/stdout.txt",
+      "bytes": 700,
+      "mode": 420,
+      "sha256": "06012f6d175c29804e4f9556079f2c744be3a72516a0546ae48e261c03625702"
+    },
+    {
+      "path": "options-021/tasks.md",
+      "bytes": 1201,
+      "mode": 420,
+      "sha256": "05da516ce925d87285686c5a6c8e53ec793766863cc23396eedb73ebe49c92d1"
+    },
+    {
+      "path": "options-022/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "options-022/stdout.txt",
+      "bytes": 621,
+      "mode": 420,
+      "sha256": "1f967cbdaa7e4817d286e2de8538feea7c7261a3b6e2590772c6a875a4ada4b0"
+    },
+    {
+      "path": "options-022/tasks.md",
+      "bytes": 1199,
+      "mode": 420,
+      "sha256": "2df46e2ed2e490a0ea854c26bb08bcc182ba6c226269d21843cc40092aadf216"
+    },
+    {
+      "path": "options-023/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "options-023/stdout.txt",
+      "bytes": 700,
+      "mode": 420,
+      "sha256": "259075aa4990d2489baddc96952f2979c0e7a11e0596fa180a1ec3c3cf8184be"
+    },
+    {
+      "path": "options-023/tasks.md",
+      "bytes": 1199,
+      "mode": 420,
+      "sha256": "1b616400dfd3a297b56989c42ed5717781e437fe4a09d70b175689980ac1f0f6"
+    },
+    {
+      "path": "options-024/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "options-024/stdout.txt",
+      "bytes": 621,
+      "mode": 420,
+      "sha256": "9b1b7f47b77c6caf182ded9f1a15c27f67347f0b6cb3c8ae73d0454a241cd570"
+    },
+    {
+      "path": "options-024/tasks.md",
+      "bytes": 1200,
+      "mode": 420,
+      "sha256": "5d5a453ad3b52590abb8a3b7f55275ff09a0255e787acaf7d441ea5172a5df25"
+    },
+    {
+      "path": "options-025/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "options-025/stdout.txt",
+      "bytes": 700,
+      "mode": 420,
+      "sha256": "770bf2b56994909d83e5f393937f626f992b936a067303ddcf751b49d3765150"
+    },
+    {
+      "path": "options-025/tasks.md",
+      "bytes": 1200,
+      "mode": 420,
+      "sha256": "9db31f572ad5e23977c040649bb81147d90976edcde3e7e91420b03c5065baeb"
+    },
+    {
+      "path": "options-026/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "options-026/stdout.txt",
+      "bytes": 621,
+      "mode": 420,
+      "sha256": "d86adccf88c17de343c1f6582f4ef53785afa0251c990035fdfa5c458a94c43f"
+    },
+    {
+      "path": "options-026/tasks.md",
+      "bytes": 1200,
+      "mode": 420,
+      "sha256": "eb22d63f2148656cd9f4bfcf8a9163f617fbf22726276fed271aafcee1615f01"
+    },
+    {
+      "path": "options-027/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "options-027/stdout.txt",
+      "bytes": 700,
+      "mode": 420,
+      "sha256": "b87d6106724961fa2302c4057ff5d141a5ecd4a31cc57262f7f424b19c8ff0c1"
+    },
+    {
+      "path": "options-027/tasks.md",
+      "bytes": 1200,
+      "mode": 420,
+      "sha256": "bb5a36be3d3c2f25764c9215a2af0e4fb24bbc2f27b8993ae69cbfcaad708aca"
+    },
+    {
+      "path": "options-028/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "options-028/stdout.txt",
+      "bytes": 621,
+      "mode": 420,
+      "sha256": "cf36583c3c369e067c5ff6bcd3fe8990476bdf61bc54a8949c6c39b824a34092"
+    },
+    {
+      "path": "options-028/tasks.md",
+      "bytes": 1202,
+      "mode": 420,
+      "sha256": "16d919c1fc547045396fa215cdb56eb523b00b47eaaba9f0c8f7fb6d45ed4021"
+    },
+    {
+      "path": "options-029/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "options-029/stdout.txt",
+      "bytes": 700,
+      "mode": 420,
+      "sha256": "90a8036b5f9dce10b1dd495353682b9cea38b69cfef78ef5495470f81db91b6e"
+    },
+    {
+      "path": "options-029/tasks.md",
+      "bytes": 1202,
+      "mode": 420,
+      "sha256": "64465d15e2cf68054a4965881fb473a3c2dd0dfedc6959f05e44d4aa03e9ba8f"
+    },
+    {
+      "path": "options-030/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "options-030/stdout.txt",
+      "bytes": 621,
+      "mode": 420,
+      "sha256": "9b2c1ed66ac668299c90b0f5017f10a0854e3f27eda63aa5620977e3ae779cbb"
+    },
+    {
+      "path": "options-030/tasks.md",
+      "bytes": 1194,
+      "mode": 420,
+      "sha256": "9184738b47060672ffa525ee1683586db5ee6ddb9bf83f777b4224703b7e4897"
+    },
+    {
+      "path": "options-031/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "options-031/stdout.txt",
+      "bytes": 700,
+      "mode": 420,
+      "sha256": "160e4ffbcb2dc8de38f3944811442587e61ac1d0085e1cd9e7a89272becae2e7"
+    },
+    {
+      "path": "options-031/tasks.md",
+      "bytes": 1194,
+      "mode": 420,
+      "sha256": "85f0a184268c085f9699b3cfe30614c31a43c8f4f007aeb0b60bb08b04e86391"
+    },
+    {
+      "path": "options-032/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "options-032/stdout.txt",
+      "bytes": 621,
+      "mode": 420,
+      "sha256": "3e69cadb76c4bf50d3934a39c46f57e43e657f0f0329d4474fd71396ad48ae48"
+    },
+    {
+      "path": "options-032/tasks.md",
+      "bytes": 1194,
+      "mode": 420,
+      "sha256": "6a64eb191bab8cf7bebc1030f6ba4cd37f34d13f6500ff3ab6bca3419f28d4a6"
+    },
+    {
+      "path": "options-033/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "options-033/stdout.txt",
+      "bytes": 700,
+      "mode": 420,
+      "sha256": "1bb217dacf091866e9433449a2d8fc940b7d066f19270b2d93ce9cccfc0bed87"
+    },
+    {
+      "path": "options-033/tasks.md",
+      "bytes": 1194,
+      "mode": 420,
+      "sha256": "9f37bb6da73ca778a8d53526d32e369ee61bede2425977c62d7934c63329b03d"
+    },
+    {
+      "path": "options-034/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "options-034/stdout.txt",
+      "bytes": 621,
+      "mode": 420,
+      "sha256": "655ea4812ff519f35a96fba6169226f66de0f5c23096c86592f18c91eb876a1c"
+    },
+    {
+      "path": "options-034/tasks.md",
+      "bytes": 1200,
+      "mode": 420,
+      "sha256": "1a4447eb1b50959fcae2de0dca7567b98cec7140f400d478d8771cc83f7ea124"
+    },
+    {
+      "path": "options-035/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "options-035/stdout.txt",
+      "bytes": 700,
+      "mode": 420,
+      "sha256": "df1f30cb79e5cde072466fb799bd5321fb567978ddd75d1366f13cfe0948e31b"
+    },
+    {
+      "path": "options-035/tasks.md",
+      "bytes": 1200,
+      "mode": 420,
+      "sha256": "64d92c060988dc3881e85f9f705363a841eb34db23ef8a4b182b3b60e0a49c49"
+    },
+    {
+      "path": "options-036/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "options-036/stdout.txt",
+      "bytes": 621,
+      "mode": 420,
+      "sha256": "4d0a08047192e04921601e13c5607ebe4ee71021507411e0bd606752e1b124f2"
+    },
+    {
+      "path": "options-036/tasks.md",
+      "bytes": 1189,
+      "mode": 420,
+      "sha256": "f3767c8976a6fb268055c478703f67f54dee3822939dc3c46979b4111b8fb2e8"
+    },
+    {
+      "path": "options-037/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "options-037/stdout.txt",
+      "bytes": 700,
+      "mode": 420,
+      "sha256": "e52e16f18119312cbaa3cb6d2c89d75f38e72307add3ea7e4cd74dd61b677c1a"
+    },
+    {
+      "path": "options-037/tasks.md",
+      "bytes": 1189,
+      "mode": 420,
+      "sha256": "9cb6d61d6f045add8254971cf966a37381d0a33bce6066285b309aa98d3731c2"
+    },
+    {
+      "path": "options-038/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "options-038/stdout.txt",
+      "bytes": 621,
+      "mode": 420,
+      "sha256": "5e59f54c0580c680c760ebfed8c8bbddd9bedc3d9848628974e412b32823eb81"
+    },
+    {
+      "path": "options-038/tasks.md",
+      "bytes": 1199,
+      "mode": 420,
+      "sha256": "7a75d0bf7413c0ac195aff1c56cc17534e97e63d6cefc864631a9aa85dd6f57f"
+    },
+    {
+      "path": "options-039/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "options-039/stdout.txt",
+      "bytes": 700,
+      "mode": 420,
+      "sha256": "ba7fd8aecc053ff36579a8fff7b28f24b3f281d6a08b559c9df021f0a552d0d0"
+    },
+    {
+      "path": "options-039/tasks.md",
+      "bytes": 1199,
+      "mode": 420,
+      "sha256": "ae2cac9647112f5edfddf9ec73df258e6d67293d247384934da3587868aaf7b6"
+    },
+    {
+      "path": "options-040/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "options-040/stdout.txt",
+      "bytes": 621,
+      "mode": 420,
+      "sha256": "77ee1f2631b7a02971a4bb097a3a525ae998d7801bd978df744605bb2bb87386"
+    },
+    {
+      "path": "options-040/tasks.md",
+      "bytes": 1197,
+      "mode": 420,
+      "sha256": "67270349d7635a789ddeec2dc97a672582516178bc4cde218d94131c494aaec6"
+    },
+    {
+      "path": "options-041/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "options-041/stdout.txt",
+      "bytes": 700,
+      "mode": 420,
+      "sha256": "87e522008b9ce64585c3360e0647ef68e42f4622934f92c28d61cbf145c25de5"
+    },
+    {
+      "path": "options-041/tasks.md",
+      "bytes": 1197,
+      "mode": 420,
+      "sha256": "64c3a19ef3aeae0cb67c23ab5c147fd9c051e60dff047931b0e88c7489a1cb2f"
+    },
+    {
+      "path": "options-042/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "options-042/stdout.txt",
+      "bytes": 621,
+      "mode": 420,
+      "sha256": "404e26d7dc4ff190871416ce497855c9aaf92981163ba6c7be449daf041092fc"
+    },
+    {
+      "path": "options-042/tasks.md",
+      "bytes": 1198,
+      "mode": 420,
+      "sha256": "b22e5350310cd70f7423bd4341a5f98d82e6c2e651ba57b09c037fc834a386fc"
+    },
+    {
+      "path": "options-043/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "options-043/stdout.txt",
+      "bytes": 700,
+      "mode": 420,
+      "sha256": "8666f4803fab20d24a492a4ec01185a48d74f21b2f8ba111bc5faef6bbdbe57d"
+    },
+    {
+      "path": "options-043/tasks.md",
+      "bytes": 1198,
+      "mode": 420,
+      "sha256": "94292605398a2d8511f20236504653811d455028b3064c4ba6d377c83dc718a6"
+    },
+    {
+      "path": "options-044/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "options-044/stdout.txt",
+      "bytes": 621,
+      "mode": 420,
+      "sha256": "f0f7a5116599d1f52a8ff10dc7420858a699b994be282cfe56efa60d843874d6"
+    },
+    {
+      "path": "options-044/tasks.md",
+      "bytes": 1198,
+      "mode": 420,
+      "sha256": "f4d9f3c0b21c5268d3e8fd48affd60247d0e90d9532f5dcfcc0d3105f0bf2435"
+    },
+    {
+      "path": "options-045/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "options-045/stdout.txt",
+      "bytes": 700,
+      "mode": 420,
+      "sha256": "8f53865d054d27cbb9505b3469e27ebb4afc6bece0fb749a8d17ec94c3b9ace7"
+    },
+    {
+      "path": "options-045/tasks.md",
+      "bytes": 1198,
+      "mode": 420,
+      "sha256": "69504bbe02ad6987a4eca78c1759fe0d0fbcb011e50e24115492c7e300962efb"
+    },
+    {
+      "path": "options-046/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "options-046/stdout.txt",
+      "bytes": 621,
+      "mode": 420,
+      "sha256": "7dffa2b2c175779c241b1dcbc67d073bc631ce2c30720abdb138ce9a86bfb04f"
+    },
+    {
+      "path": "options-046/tasks.md",
+      "bytes": 1200,
+      "mode": 420,
+      "sha256": "8824cf25e988a5b8de54443d1645619ac33fdc39127aeb614c30d67da28d83f1"
+    },
+    {
+      "path": "options-047/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "options-047/stdout.txt",
+      "bytes": 700,
+      "mode": 420,
+      "sha256": "ed1541f2e04b86506fa82f7fb496866cd9af2c73cb18823c02dc7a9752a0e18b"
+    },
+    {
+      "path": "options-047/tasks.md",
+      "bytes": 1200,
+      "mode": 420,
+      "sha256": "b37c9ec2bddc10fafa87451b2afd8839b879a97f97cd4ee9d8fd64c8e1726f96"
+    },
+    {
+      "path": "options-048/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "options-048/stdout.txt",
+      "bytes": 621,
+      "mode": 420,
+      "sha256": "0c2f01b5eca847ff34c345cf35b4b508c4b9656ad0b5aed035ecdad610cc6e08"
+    },
+    {
+      "path": "options-048/tasks.md",
+      "bytes": 1192,
+      "mode": 420,
+      "sha256": "a8a37d9886c22b2c76c1c22892d57f18ecbaebc277072c570e21c2ca4a20be82"
+    },
+    {
+      "path": "options-049/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "options-049/stdout.txt",
+      "bytes": 700,
+      "mode": 420,
+      "sha256": "e64ee2d346421c822b9bba8c2b0890266287f771a2f082710746928a3402f444"
+    },
+    {
+      "path": "options-049/tasks.md",
+      "bytes": 1192,
+      "mode": 420,
+      "sha256": "0a8079a46b4fc7ed49596049083361d0ea6879e50e7cc791fd77dd8d6f985074"
+    },
+    {
+      "path": "options-050/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "options-050/stdout.txt",
+      "bytes": 621,
+      "mode": 420,
+      "sha256": "f13a8a94527f9523b9f4a4cddeccef2b250b9b10374e3033f19165bc45d292ea"
+    },
+    {
+      "path": "options-050/tasks.md",
+      "bytes": 1192,
+      "mode": 420,
+      "sha256": "596f1dd457309551ed19b87d0aeb2a5ba4aa7e68c1659e8f754a44e7d7e06336"
+    },
+    {
+      "path": "options-051/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "options-051/stdout.txt",
+      "bytes": 700,
+      "mode": 420,
+      "sha256": "99e7d37d8dc8cd7e990f43c9c0f3f020d23582640da4841a7bfe937d305b177f"
+    },
+    {
+      "path": "options-051/tasks.md",
+      "bytes": 1192,
+      "mode": 420,
+      "sha256": "989ab4813550c39cbaf8dcda1b4f76a5c4e75d218642fb511e42e6e30e637ef2"
+    },
+    {
+      "path": "options-052/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "options-052/stdout.txt",
+      "bytes": 621,
+      "mode": 420,
+      "sha256": "5846df92b1af60e28e23aa165ce3b25d84acf12945f9072ec067518d3f1dda78"
+    },
+    {
+      "path": "options-052/tasks.md",
+      "bytes": 1198,
+      "mode": 420,
+      "sha256": "2724f36014622456f4fda1baab27ec16609418da885764b6c84a1f3168c29c68"
+    },
+    {
+      "path": "options-053/stderr.txt",
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "options-053/stdout.txt",
+      "bytes": 700,
+      "mode": 420,
+      "sha256": "318421ef24da960efa25e4c103a68683798862d7eb8a0d2da2b754dcf1e2e97b"
+    },
+    {
+      "path": "options-053/tasks.md",
+      "bytes": 1198,
+      "mode": 420,
+      "sha256": "cbe67d433dfc8a740478104267fe2e50dac49703a7f6f105532cdf99fc302a40"
+    },
+    {
+      "path": "probe-hash-check.json",
+      "bytes": 49557,
+      "mode": 420,
+      "sha256": "3260c1da1ee5f61f4ca01c8f51f994fae68edf199d0be46826246f9590ca0eb5"
+    },
+    {
+      "path": "probe-launches-exact.json",
+      "bytes": 1198,
+      "mode": 420,
+      "sha256": "dd0baa86cee34b8537d6287f001493a81ab0b20133fd1900467af3732f51f00a"
+    },
+    {
+      "path": "probe-launches.json",
+      "bytes": 1804,
+      "mode": 420,
+      "sha256": "ef5526083454cd36047a6e725cda9f17e603447affbba6f5e35fea49767b5310"
+    },
+    {
+      "path": "protection-before-publish.json",
+      "bytes": 1400,
+      "mode": 420,
+      "sha256": "b992554fa9216f4297ee49073ac331da46c4a0a1a417326f0115ac027acbeeb2"
+    },
+    {
+      "path": "protection-before.json",
+      "bytes": 11299335,
+      "mode": 420,
+      "sha256": "420e9cd533c2cbc7ac6b2b4e8ed5fe93c9f2fc163df672702a9fd86ae4eda534"
+    },
+    {
+      "path": "protection-check.py",
+      "bytes": 3037,
+      "mode": 420,
+      "sha256": "1f9172b21d144713796aa2ee79e2aea176011928473b162f72a92f77a7897350"
+    },
+    {
+      "path": "protection-final.json",
+      "bytes": 1400,
+      "mode": 420,
+      "sha256": "100440f94903b3f37a8e1b6a04d644becb0b154aa6ea4658e3b01e50403f45de"
+    },
+    {
+      "path": "protection-pre-report.json",
+      "bytes": 1400,
+      "mode": 420,
+      "sha256": "902e0999a0382b328bdb4341a98a11c4b0b4e9fa841710ec87d0fe7e58e5a344"
+    },
+    {
+      "path": "runtime-config.json",
+      "bytes": 1026,
+      "mode": 420,
+      "sha256": "2bd299b367ee733ea782251b04fa108fbe43e10dc20e346da2dcdf415ca64c58"
+    },
+    {
+      "path": "runtime-identity-check.json",
+      "bytes": 400,
+      "mode": 420,
+      "sha256": "fd7e12bcd3c9a7805b10bd7927e84b28ca4e2f542f0ca2fb2b81eb329a82d63a"
+    },
+    {
+      "path": "sealed-input-observations.json",
+      "bytes": 6683,
+      "mode": 420,
+      "sha256": "12f27ba2234051ec945ddee86fc41a7550ea81c43e7bad61b0d566eed766ab90"
+    },
+    {
+      "path": "source-scope-audit.json",
+      "bytes": 78150,
+      "mode": 420,
+      "sha256": "19c7e532d1241edea0eb967640755995f24587d12ca20ca0bc6d187547af0b79"
+    }
+  ],
+  "selfExcluded": "owned-artifacts-sha256.json",
+  "canonicalReport": {
+    "path": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/opponent-round27.md",
+    "bytes": 13284,
+    "sha256": "9425b8f8f0db0c24895a9bdbf9479abe49e9216489508fc7be0e3bd111109479",
+    "exactlyOneTerminalLF": true
+  },
+  "finalProtection": "protection-final.json",
+  "sourceAndReservationWritersUntouched": true
+}

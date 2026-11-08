@@ -1,0 +1,20 @@
+--- /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s60-evidence-preparation/runner.py
++++ /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s80-evidence-preparation/runner.py
+@@ -2,7 +2,7 @@
+ ROOT=pathlib.Path('/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline')
+ S=ROOT/'.specify/specs/003-gate-round-reduction-and-token-discipline'
+ R=S/'notes/verification/reports'
+-OWNED=R/'s60-evidence-preparation'
++OWNED=R/'s80-evidence-preparation'
+ ENV=dict(os.environ, GIT_OPTIONAL_LOCKS='0')
+ CFG=json.loads((OWNED/'parent-floor-launch.argv.json').read_text())
+ def utc():
+@@ -16,7 +16,7 @@
+     helper=pathlib.Path(CFG['helper_argv'][1])
+     digest=hashlib.sha256(helper.read_bytes()).hexdigest()
+     assert "'AC Power'" in power.splitlines()[0] and free>=8589934592
+-    assert digest=='262b6d80b872b69e9fdecc9935d40654b8a2f44ca9ff3f968d894eb2894c0396'
++    assert digest=='d811f6bb7a77f5a1bf80fec642a5c8e54e62e6aa469e3a3022ee3626e6c81b8c'
+     receipt=json.loads((OWNED/'launch-preflight.json').read_text())
+     receipt.update(startedAt=utc(),wrapperPid=os.getpid(),power=power,freeBytes=free,helperSha256=digest,timedArgv=CFG['timed_argv'],cwd=str(ROOT),phase='native-timed-argv-starting')
+     pathlib.Path(CFG['wrapper_pid_path']).write_text(str(os.getpid())+'\n')

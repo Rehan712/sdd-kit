@@ -1,0 +1,45 @@
+{
+  "recordedAt": "2026-10-28T12:06:17.925563+00:00",
+  "head": "25347ba729886ae0bea029c594ac00f0bc48e767",
+  "source": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+  "tree": "c68b9a3ab0c39c555d5cb28afa6420cd9a2600b7",
+  "runObserved": true,
+  "collectorNotStarted": true,
+  "floorStarted": false,
+  "next": "On actual current-head CI completion collect source-bound same-attempt four-job proof with hosted-s38-audit collector, then guarded fresh floor only on actual AC+8GiB. No snapshot rebuild or repush needed.",
+  "runId": 40684905884,
+  "attempt": 1,
+  "event": "pull_request",
+  "workflow": "ci",
+  "status": "queued",
+  "conclusion": null,
+  "url": "https://github.com/Rehan712/sdd-kit/actions/runs/40684905884",
+  "jobsAtObservation": [
+    {
+      "id": 122804640261,
+      "name": "tests-bash32",
+      "status": "in_progress",
+      "conclusion": null
+    },
+    {
+      "id": 122804640662,
+      "name": "shellcheck",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 122804640797,
+      "name": "tests (ubuntu-latest)",
+      "status": "in_progress",
+      "conclusion": null
+    },
+    {
+      "id": 122804640973,
+      "name": "tests (macos-latest)",
+      "status": "queued",
+      "conclusion": null
+    }
+  ],
+  "powerObserved": "Now drawing from 'Battery Power'\n -InternalBattery-0 (id=23068771)\t56%; discharging; 1:42 remaining present: true",
+  "freeGiBObserved": 23.09
+}

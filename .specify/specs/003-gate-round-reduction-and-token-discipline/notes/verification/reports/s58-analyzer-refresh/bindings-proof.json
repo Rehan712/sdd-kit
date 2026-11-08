@@ -1,0 +1,52 @@
+{
+  "bindingDigest": "8766df908be5d8f628c3880af34ae761dd1c9c4946e8da08da3e566c8c0c788a",
+  "currentKernelCheck": {
+    "GIT_OPTIONAL_LOCKS": "0",
+    "argv": [
+      "bash",
+      "-s",
+      "--",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline",
+      "CAP-845-hwbWOH",
+      ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s58-analyzer-refresh"
+    ],
+    "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "end": "2026-10-29T22:12:22.935477+00:00",
+    "endNs": 1793311942935894000,
+    "exit": 0,
+    "nativePid": 81002,
+    "start": "2026-10-29T22:11:51.122539+00:00",
+    "startNs": 1793311911122553000,
+    "stderrBytes": 0,
+    "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdoutBytes": 0,
+    "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "failureModes": [
+    [
+      "FM-001",
+      "tests/test-sdd-analyze.sh::test_verification_bindings"
+    ],
+    [
+      "INV-005",
+      "tests/test-sdd-analyze.sh::test_verification_bindings"
+    ]
+  ],
+  "task": "T031a5o1",
+  "taskRows": [
+    [
+      "task",
+      "T031a5o1",
+      "T031a5o1",
+      "Tests",
+      "",
+      "test",
+      "",
+      "`tests/test-sdd-analyze.sh::test_verification_bindings`",
+      "REQ-005, AC-004, FM-001, INV-005, plan \u00a73.1, \u00a77",
+      "`bash tests/test-sdd-analyze.sh` \u2192 all suites `passed`, exit 0",
+      "local",
+      ""
+    ]
+  ]
+}

@@ -1,0 +1,88 @@
+host: Darwin 25.4.0; bash on PATH: GNU bash, version 3.2.57(1)-release (arm64-apple-darwin25)
+start 2026-10-16T20:14:13Z
+free disk at start: 1.9Gi
+bf297cb17efa680525d2d917de68af6278a7642f803f90ba0f37333c179e831e  tests/test-spec-gate.sh
+b78c7465da71524446b63d5399cc4ca7c756cb79742f5da20bd69e0d0146fbcf  .specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md
+run.sh rc=0; per-suite: -- 10/10 passed -- 2/2 passed -- 18/18 passed -- 5/5 passed -- 13/13 passed -- 9/9 passed -- 19/19 passed -- 9/9 passed -- 4/4 passed -- 8/8 passed -- 6/6 passed -- 3/3 passed -- 11/11 passed -- 27/27 passed -- 3/3 passed 
+shellcheck rc=0; 
+free disk after the suites: 1.6Gi
+unmutated focus reconcile rc=0
+unmutated focus named rc=0
+unmutated focus tally rc=0
+mutant midnight     focus=reconcile rc=1 killed
+    | AC-009: a waiver dated before the reconciled completion authorized the next round
+mutant readcheck    focus=reconcile rc=1 killed
+    | AC-009: a reconcile record outlived an edit of its history and authorized round 6
+    | AC-009: a reconcile record outlived an edit of its history and reserved round 6
+    | AC-009: an exact waiver after reconciliation did not reserve the next round
+mutant readdigest   focus=reconcile rc=1 killed
+    | AC-009: a reconcile record outlived an edit of its history and authorized round 6
+    | AC-009: a reconcile record outlived an edit of its history and reserved round 6
+    | AC-009: an exact waiver after reconciliation did not reserve the next round
+mutant readround    focus=reconcile rc=0 SURVIVED (held equivalent by round 21)
+mutant reccheck     focus=reconcile rc=1 killed
+    | AC-009: a reconcile record with a wrong digest wrote legacy-time.nul
+    | AC-009: a reconcile record with a wrong digest left the history able to order an authorization
+    | AC-009: a reconcile record with a wrong round wrote legacy-time.nul
+    | AC-009: a reconcile record with a wrong round left the history able to order an authorization
+mutant recdigest    focus=reconcile rc=1 killed
+    | AC-009: a reconcile record with a wrong digest wrote legacy-time.nul
+    | AC-009: a reconcile record with a wrong digest left the history able to order an authorization
+mutant recround     focus=reconcile rc=1 killed
+    | AC-009: a reconcile record with a wrong round wrote legacy-time.nul
+    | AC-009: a reconcile record with a wrong round left the history able to order an authorization
+mutant recguard     focus=reconcile rc=1 killed
+    | AC-009: a reconcile record with a timestamp before the history's date wrote legacy-time.nul
+    | AC-009: a reconcile record with a timestamp before the history's date left the history able to order an authorization
+    | AC-009: a reconcile record with a future timestamp wrote legacy-time.nul
+    | AC-009: a reconcile record with a future timestamp left the history able to order an authorization
+mutant recbefore    focus=reconcile rc=1 killed
+    | AC-009: a reconcile record with a timestamp before the history's date wrote legacy-time.nul
+    | AC-009: a reconcile record with a timestamp before the history's date left the history able to order an authorization
+mutant endofday     focus=reconcile rc=1 killed
+    | AC-009: a waiver dated before the reconciled completion authorized the next round
+mutant clamp        focus=reconcile rc=1 killed
+    | AC-009: a waiver dated before the reconciled completion authorized the next round
+mutant future       focus=reconcile rc=1 killed
+    | AC-009: a reconcile record with a future timestamp wrote legacy-time.nul
+    | AC-009: a reconcile record with a future timestamp left the history able to order an authorization
+mutant combined     focus=reconcile rc=1 killed
+    | AC-009: a reconcile record with a wrong digest wrote legacy-time.nul
+    | AC-009: a reconcile record with a wrong digest left the history able to order an authorization
+    | AC-009: a reconcile record with a wrong round wrote legacy-time.nul
+    | AC-009: a reconcile record with a wrong round left the history able to order an authorization
+    | AC-009: a reconcile record with a timestamp before the history's date wrote legacy-time.nul
+    | AC-009: a reconcile record with a timestamp before the history's date left the history able to order an authorization
+    | AC-009: a reconcile record with a future timestamp wrote legacy-time.nul
+    | AC-009: a reconcile record with a future timestamp left the history able to order an authorization
+    | AC-009: a waiver dated before the reconciled completion authorized the next round
+    | AC-009: a reconcile record outlived an edit of its history and authorized round 6
+    | AC-009: a reconcile record outlived an edit of its history and reserved round 6
+    | AC-009: an exact waiver after reconciliation did not reserve the next round
+mutant explicitnone focus=named     rc=1 killed
+    | AC-022: an empty Failure modes header was accepted for a task owing no rows
+    | AC-022: an empty Failure modes header changed tasks bytes
+mutant tallyappend  focus=tally     rc=1 killed
+    | AC-010: the tally rewrote the shipped 002 records it read
+    | AC-010: the tally rewrote the synthetic history it read
+    | AC-010: the tally rewrote the annotated 002 history it read
+mutant tallytouch   focus=tally     rc=1 killed
+    | AC-010: the tally rewrote the shipped 002 records it read
+    | AC-010: the tally rewrote the synthetic history it read
+    | AC-010: the tally rewrote the annotated 002 history it read
+mutant tallynewline focus=tally     rc=1 killed
+    | AC-010: the tally rewrote the shipped 002 records it read
+O-029 assertion killed by: reccheck recdigest combined | AC-009: a reconcile record with a wrong digest wrote legacy-time.nul
+O-029 assertion killed by: reccheck recdigest combined | AC-009: a reconcile record with a wrong digest left the history able to order an authorization
+O-029 assertion killed by: reccheck recround combined | AC-009: a reconcile record with a wrong round wrote legacy-time.nul
+O-029 assertion killed by: reccheck recround combined | AC-009: a reconcile record with a wrong round left the history able to order an authorization
+O-029 assertion killed by: recguard recbefore combined | AC-009: a reconcile record with a timestamp before the history's date wrote legacy-time.nul
+O-029 assertion killed by: recguard recbefore combined | AC-009: a reconcile record with a timestamp before the history's date left the history able to order an authorization
+O-029 assertion killed by: recguard future combined | AC-009: a reconcile record with a future timestamp wrote legacy-time.nul
+O-029 assertion killed by: recguard future combined | AC-009: a reconcile record with a future timestamp left the history able to order an authorization
+O-029 assertion killed by: midnight endofday clamp combined | AC-009: a waiver dated before the reconciled completion authorized the next round
+O-029 assertion killed by: readcheck readdigest combined | AC-009: a reconcile record outlived an edit of its history and authorized round 6
+O-029 assertion killed by: readcheck readdigest combined | AC-009: a reconcile record outlived an edit of its history and reserved round 6
+live worktree status outside notes/verification/: before=f058f25dcc32ace1 after=f058f25dcc32ace1 unchanged
+end 2026-10-16T20:48:12Z
+suites=147/147 shellcheck_rc=0 run_rc=0 mutants_killed=17/17 o029_assertions_killed=11/11

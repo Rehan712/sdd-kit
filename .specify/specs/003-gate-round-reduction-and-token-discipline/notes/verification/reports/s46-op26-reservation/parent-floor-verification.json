@@ -1,0 +1,37 @@
+{
+  "at": "2026-10-29T10:39:44.084387+00:00",
+  "source": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+  "floor": "FLOOR-LxJkv3",
+  "sealHashesRechecked": {
+    "meta.nul": "a62cbfba00fa738a75ba463cd1c06374529b48f53a0a4955e9d6ae5940d99fce",
+    "commands.nul": "218a380ff662bc9be567d6ad83b7a0ec1532d355a6c248ed1da8c02b0a8ff1fc",
+    "bindings.nul": "8766df908be5d8f628c3880af34ae761dd1c9c4946e8da08da3e566c8c0c788a",
+    "inputs.nul": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+    "roots.nul": "8af367bcbcf5956d1dbbad28748fbb59f4c37efe13b23df4abb035cfad1179f8"
+  },
+  "mappedSourceFilesRehashed": 177,
+  "head": "2049f65960cc91e9e30bbd5ff1e11fc0fdf7cbd9",
+  "headIndexTasksStatusProtected": true,
+  "floorAndWrapperExits": [
+    0,
+    0
+  ],
+  "sourceManifestsIdentical": true,
+  "extraFloorValidatorInvoked": false,
+  "fullPreservation": false,
+  "preservationTriage": {
+    "DSStore": {
+      "ignoredBy": ".gitignore:22:.DS_Store\t.DS_Store",
+      "includedInSource": false,
+      "attribution": "unknown",
+      "action": "retain actual file; do not revert"
+    },
+    "generatedVerifierOutput": {
+      "onlyDifference": "state_after.refs_sha256",
+      "oldRefsHash": "7e5b5c2cf90ef6e8da94850f8c8960ff05517ae1568f717d67c0af72f2765924",
+      "newRefsHash": "6464016d4181a924a884c63f283a4a793c3df76878a56d6e9811201e932b3a41",
+      "action": "preserve original and actual; no timestamp restoration or source change"
+    }
+  },
+  "decision": "Fresh floor and protected source binding remain valid; proceed to already user-approved OP26 reservation, preserving full-preservation failure as historical evidence."
+}

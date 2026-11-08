@@ -1,0 +1,12 @@
+{
+  "at": "2026-10-30T14:23:13.160828+00:00",
+  "actualExit": 1,
+  "error": "ValueError: substring not found at exact Decisions heading lookup",
+  "failedHelper": "apply-once.heading-failure.py",
+  "failedHelperSHA256": "598f7f4d7288ba408d4aa15d410048484840175f84206e8077123d9e86f1c820",
+  "actualHeading": "## Decisions log\n",
+  "allFourSourcePathsUnchanged": true,
+  "applicationStartedReceiptAbsent": true,
+  "codeOrTaskWritten": false,
+  "fix": "Use the actual existing suffixed heading; preserve all old bytes"
+}

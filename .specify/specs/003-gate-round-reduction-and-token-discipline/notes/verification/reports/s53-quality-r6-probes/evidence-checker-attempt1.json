@@ -1,0 +1,9 @@
+{
+  "script": "inspect-evidence.py",
+  "exit": 1,
+  "failure": "AssertionError at exact expected tasks comparison",
+  "cause": "Review checker omitted the native acceptance update of updated: 2026-10-28 to updated: 2026-10-29. Actual diff also has precisely the target checkbox and Evidence addition.",
+  "product_failure": false,
+  "suite_capture_acceptance_retried": false,
+  "correction": "Include exactly the observed frontmatter date update in the expected tasks bytes; preserve this stopped checker and all first-attempt outputs."
+}

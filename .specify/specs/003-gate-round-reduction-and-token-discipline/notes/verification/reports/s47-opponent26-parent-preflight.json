@@ -1,0 +1,21 @@
+{
+  "at": "2026-10-29T11:15:24.617064+00:00",
+  "reservationMeta": {
+    "version": "1",
+    "gate": "opponent",
+    "round": "26",
+    "floor": "FLOOR-LxJkv3",
+    "source": "f156c52ee62d1b430b10a302bbba23e3d2f63cecfadd487cfc3571d6ce7d9ee0",
+    "reserved": "2026-10-29T11:11:14Z"
+  },
+  "reservationSealRechecked": true,
+  "rawEntriesSha256": "3ca12e69830dd1f06b6b985847aafd6b54614c068e22167598b00ee835825731",
+  "entryCount": 6860,
+  "rawEntriesByteIdentical": true,
+  "kernelReservationExit": 0,
+  "nativeRunnerExit": 1,
+  "runnerDifference": "new owned native-runner.stdout grew after it was mistakenly included in runner baseline",
+  "originalOwnershipComparisonPassed": true,
+  "historicalFullPreservationPassed": false,
+  "decision": "Proceed with independent MAX assessment of existing pending OP26; do not reserve again or overwrite original runner failure."
+}

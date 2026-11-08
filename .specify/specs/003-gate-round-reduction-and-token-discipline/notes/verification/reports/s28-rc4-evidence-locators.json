@@ -1,0 +1,1686 @@
+{
+  "purpose": "Navigation-only locator index for a future independent RC4. No criterion is graded here; floor capture existence, exits, task bindings, and locators are not semantic PASS evidence.",
+  "source": {
+    "floor": "FLOOR-GMlmyY",
+    "source_sha256": "c7a82b3ae3b900dcb02a4839decad74db1a13457c5bab9ff859625a5357f0be6",
+    "meta": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/floors/FLOOR-GMlmyY/meta.nul",
+    "commands": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/floors/FLOOR-GMlmyY/commands.nul",
+    "inputs": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/floors/FLOOR-GMlmyY/inputs.nul",
+    "bindings": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/floors/FLOOR-GMlmyY/bindings.nul"
+  },
+  "floor_record_summary": {
+    "record_count": 100,
+    "unique_current_capture_ids": 22,
+    "unique_command_strings": 22,
+    "executed": 21,
+    "cache_hits": 79,
+    "interpretation": "100 command records comprise 21 executions plus 79 cache hits; unique CAP/command counts are identity counts and do not collapse the execution/cache-hit distinction."
+  },
+  "binding_catalog_location": "scripts/verification-lib.sh: vf_bindings (deterministic plan/task binding catalog); canonical criterion catalog is vf_ac_catalog in scripts/verification-lib.sh. Existing plan §7 test registry is referenced by each task Tests locator.",
+  "criteria": [
+    {
+      "id": "AC-001",
+      "criterion": "The plan template documents FM/INV grammar and compact exclusions. Analyzer fixtures prove missing/placeholder warnings and a clean shared-row plan. A planning-phase fixture is valid without task numbers; tasks-phase fixtures detect missing bindings. (REQ-002, REQ-004)",
+      "criterion_sha256": "ed36391bac9b40c84c292b25bc8f2ed3f4174b77636e7ce03b12d9c5fc4132e5",
+      "current_task_refs": [
+        "T001",
+        "T002",
+        "T030",
+        "T031"
+      ],
+      "floor_locators": [
+        {
+          "task": "T001",
+          "test": "`tests/test-gate-contracts.sh::test_instruction_contracts`",
+          "capture": "CAP-769-bZPhmg",
+          "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T002",
+          "test": "`tests/test-sdd-analyze.sh::test_verification_bindings`",
+          "capture": "CAP-770-AgEMCd",
+          "command": "/bin/bash -o pipefail -c bash tests/test-sdd-analyze.sh ",
+          "record_exit": 0
+        }
+      ],
+      "direct_review_required": []
+    },
+    {
+      "id": "AC-002",
+      "criterion": "Every shipped code-stack overlay has failure-mode and checkpoint defaults relevant to its stack; text checks enumerate the actual overlay set. Rust, rust-aws-lambda, Next.js, aws-cdk-lambda-ts, JavaScript and React each cover at least three applicable scenarios. Documentation distinguishes stage commands from required gate_checks. (REQ-003, REQ-008)",
+      "criterion_sha256": "d0b45203afeb6f560298a160eb295ea7b1bfc8f7bb6392bcd0a3aee7cb74cf45",
+      "current_task_refs": [
+        "T006",
+        "T007",
+        "T008",
+        "T009",
+        "T027",
+        "T030",
+        "T031"
+      ],
+      "floor_locators": [
+        {
+          "task": "T006",
+          "test": "`tests/test-gate-contracts.sh::test_instruction_contracts`",
+          "capture": "CAP-769-bZPhmg",
+          "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T007",
+          "test": "`tests/test-gate-contracts.sh::test_instruction_contracts`",
+          "capture": "CAP-769-bZPhmg",
+          "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T008",
+          "test": "`tests/test-gate-contracts.sh::test_instruction_contracts`",
+          "capture": "CAP-769-bZPhmg",
+          "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T009",
+          "test": "`tests/test-gate-contracts.sh::test_instruction_contracts`",
+          "capture": "CAP-769-bZPhmg",
+          "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T027",
+          "test": "`tests/test-gate-contracts.sh::test_invoker_protocol`, `tests/test-spec-gate.sh::test_floor`, `tests/test-spec-gate.sh::test_checkpoints`, `tests/test-verification.sh::test_capture_provenance`, `tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-gate-contracts.sh::test_instruction_contracts`, `tests/test-build-adapters.sh::test_brief_modes`, `tests/test-spec-run.sh::test_bounded_capture`",
+          "capture": "CAP-785-yErMUi",
+          "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+          "record_exit": 1
+        }
+      ],
+      "direct_review_required": [
+        "Requires independent direct inspection of the artifact/observation described by the criterion; floor locator alone is not a PASS."
+      ]
+    },
+    {
+      "id": "AC-003",
+      "criterion": "Analyzer fixtures reject duplicate FM/INV definitions and dangling task references, accept defined/shared references, and warn on unassigned applicable rows at task handoff. No future task-number reference is required in a draft plan. (REQ-002, REQ-004)",
+      "criterion_sha256": "215aa9b5709ba8d6517a518a4f367dd218859239e26ef12128e30da10652d1c8",
+      "current_task_refs": [
+        "T002",
+        "T030o12",
+        "T030o13",
+        "T030o18",
+        "T030o23",
+        "T030",
+        "T031"
+      ],
+      "floor_locators": [
+        {
+          "task": "T002",
+          "test": "`tests/test-sdd-analyze.sh::test_verification_bindings`",
+          "capture": "CAP-770-AgEMCd",
+          "command": "/bin/bash -o pipefail -c bash tests/test-sdd-analyze.sh ",
+          "record_exit": 0
+        },
+        {
+          "task": "T030o12",
+          "test": "`tests/test-spec-gate.sh::test_rounds`, `tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-verification.sh::test_config_grammar`, `tests/test-sdd-analyze.sh::test_verification_bindings`",
+          "capture": "CAP-780-lQYtQ1",
+          "command": "/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-verification.sh && bash tests/test-sdd-analyze.sh ",
+          "record_exit": 0
+        },
+        {
+          "task": "T030o13",
+          "test": "`tests/test-spec-gate.sh::test_rounds`, `tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-verification.sh::test_config_grammar`, `tests/test-sdd-analyze.sh::test_verification_bindings`",
+          "capture": "CAP-780-lQYtQ1",
+          "command": "/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-verification.sh && bash tests/test-sdd-analyze.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o18",
+          "test": "`tests/test-spec-gate.sh::test_rounds`, `tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-sdd-analyze.sh::test_verification_bindings`",
+          "capture": "CAP-782-rL7TBL",
+          "command": "/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-sdd-analyze.sh ",
+          "record_exit": 0
+        },
+        {
+          "task": "T030o23",
+          "test": "`tests/test-spec-gate.sh::test_rounds`, `tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-sdd-analyze.sh::test_verification_bindings`",
+          "capture": "CAP-782-rL7TBL",
+          "command": "/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-sdd-analyze.sh ",
+          "record_exit": 1
+        }
+      ],
+      "direct_review_required": []
+    },
+    {
+      "id": "AC-004",
+      "criterion": "Analyzer fixtures warn on an untyped AC Verify that is build/typecheck/text-presence only, accept recognized shell tests and declared behavioral assertions, and accept explicit static/manual checks for their appropriate criteria. The verification-kind grammar has one authoritative definition; runner substring matching alone is insufficient. (REQ-005)",
+      "criterion_sha256": "8ad708c14be2140da78e3820a416621d7b3d1d394106e4942c0b52f19c6e4323",
+      "current_task_refs": [
+        "T001",
+        "T002",
+        "T031a5",
+        "T030",
+        "T031"
+      ],
+      "floor_locators": [
+        {
+          "task": "T001",
+          "test": "`tests/test-gate-contracts.sh::test_instruction_contracts`",
+          "capture": "CAP-769-bZPhmg",
+          "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T002",
+          "test": "`tests/test-sdd-analyze.sh::test_verification_bindings`",
+          "capture": "CAP-770-AgEMCd",
+          "command": "/bin/bash -o pipefail -c bash tests/test-sdd-analyze.sh ",
+          "record_exit": 0
+        },
+        {
+          "task": "T031a5",
+          "test": "`tests/test-sdd-analyze.sh::test_verification_bindings`",
+          "capture": "CAP-770-AgEMCd",
+          "command": "/bin/bash -o pipefail -c bash tests/test-sdd-analyze.sh ",
+          "record_exit": 1
+        }
+      ],
+      "direct_review_required": [
+        "Requires independent direct inspection of the artifact/observation described by the criterion; floor locator alone is not a PASS."
+      ]
+    },
+    {
+      "id": "AC-005",
+      "criterion": "The golden api-key-expiry example contains concrete FM/INV rows, exclusions where needed, and non-gate tasks binding each applicable row to its test family; its analyzer test passes with zero warnings. (REQ-002, REQ-004, REQ-005)",
+      "criterion_sha256": "335e7f2efafe8b0d08f957a134d28dcbb3a4f7364dfbcc4f04e66c33ed7a434f",
+      "current_task_refs": [
+        "T005",
+        "T030",
+        "T031"
+      ],
+      "floor_locators": [
+        {
+          "task": "T005",
+          "test": "`tests/test-golden-example.sh::test_verification_golden`",
+          "capture": "CAP-772-DBIpmR",
+          "command": "/bin/bash -o pipefail -c bash tests/test-golden-example.sh ",
+          "record_exit": 0
+        }
+      ],
+      "direct_review_required": []
+    },
+    {
+      "id": "AC-006",
+      "criterion": "Task template and tasks skill require tests with behavior, allow extension of existing tests, and reserve Tests for cross-cutting integration. Fixtures distinguish a behavior task with its test binding from one that defers all coverage to an unrelated later test task. (REQ-005)",
+      "criterion_sha256": "1deef5b879bf242ace5f288195309a0494b084dfe5ad7161fd6a0a2b668b65bc",
+      "current_task_refs": [
+        "T002",
+        "T003f1",
+        "T004",
+        "T030",
+        "T031"
+      ],
+      "floor_locators": [
+        {
+          "task": "T002",
+          "test": "`tests/test-sdd-analyze.sh::test_verification_bindings`",
+          "capture": "CAP-770-AgEMCd",
+          "command": "/bin/bash -o pipefail -c bash tests/test-sdd-analyze.sh ",
+          "record_exit": 0
+        },
+        {
+          "task": "T003f1",
+          "test": "`tests/test-sdd-analyze.sh::test_verification_bindings`",
+          "capture": "CAP-770-AgEMCd",
+          "command": "/bin/bash -o pipefail -c bash tests/test-sdd-analyze.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T004",
+          "test": "`tests/test-gate-contracts.sh::test_instruction_contracts`",
+          "capture": "CAP-769-bZPhmg",
+          "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh ",
+          "record_exit": 1
+        }
+      ],
+      "direct_review_required": []
+    },
+    {
+      "id": "AC-007",
+      "criterion": "Floor fixtures observe execution of all three deterministic checkers and every required gate_checks command in the intended worktree, record actual exit/key/log/input identities, and return nonzero before any simulated gate call when a required check fails or configuration is missing. Two gate invocations on unchanged reusable inputs execute each unique suite command once; changed source or command executes it again. Bookkeeping changes refresh integrity checks without rerunning the suite. Deduplication never crosses different cwd/repo/input identities. (REQ-007, REQ-009)",
+      "criterion_sha256": "f09e8c61daa1c4e72482507e3935e32f20506920f3a8ad02afe2cb6e1e368392",
+      "current_task_refs": [
+        "T020",
+        "T023",
+        "T030o43",
+        "T027",
+        "T031a2",
+        "T030",
+        "T031"
+      ],
+      "floor_locators": [
+        {
+          "task": "T020",
+          "test": "`tests/test-spec-gate.sh::test_floor`",
+          "capture": "CAP-776-Dg1sHo",
+          "command": "/bin/bash -o pipefail -c bash tests/test-spec-gate.sh ",
+          "record_exit": 0
+        },
+        {
+          "task": "T023",
+          "test": "`tests/test-verification.sh::test_capture_provenance`, `tests/test-spec-gate.sh::test_floor`, `tests/test-spec-gate.sh::test_checkpoints`",
+          "capture": "CAP-778-gr4GCx",
+          "command": "/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh ",
+          "record_exit": 0
+        },
+        {
+          "task": "T030o43",
+          "test": "`tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-spec-gate.sh::test_rounds`, `tests/test-sdd-analyze.sh::test_verification_bindings`, `tests/test-verification.sh::test_capture_provenance`, `tests/test-spec-gate.sh::test_floor`, `tests/test-spec-gate.sh::test_acceptance`, `tests/test-spec-gate.sh::test_checkpoints`",
+          "capture": "CAP-785-yErMUi",
+          "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T027",
+          "test": "`tests/test-gate-contracts.sh::test_invoker_protocol`, `tests/test-spec-gate.sh::test_floor`, `tests/test-spec-gate.sh::test_checkpoints`, `tests/test-verification.sh::test_capture_provenance`, `tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-gate-contracts.sh::test_instruction_contracts`, `tests/test-build-adapters.sh::test_brief_modes`, `tests/test-spec-run.sh::test_bounded_capture`",
+          "capture": "CAP-785-yErMUi",
+          "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T031a2",
+          "test": "`tests/test-spec-gate.sh::test_floor`, `tests/test-verification.sh::test_capture_provenance`",
+          "capture": "CAP-785-yErMUi",
+          "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+          "record_exit": 1
+        }
+      ],
+      "direct_review_required": [
+        "Requires independent direct inspection of the artifact/observation described by the criterion; floor locator alone is not a PASS."
+      ]
+    },
+    {
+      "id": "AC-008",
+      "criterion": "Checkpoint fixtures cover success, exact failure-code propagation including a pipeline, no stage commands, and lost completed AC/FM/INV bindings. Future-stage ACs and declared spanning integration owners do not create premature gaps; removing previously established coverage does. A failing checkpoint leaves the next-stage invocation counter at zero. Matching valid checkpoint execution is reused by floor. (REQ-008)",
+      "criterion_sha256": "b0d60f013a3a59d6b1b730fd20897edefae11716d949941c186c8e288b8f77ec",
+      "current_task_refs": [
+        "T021",
+        "T023",
+        "T030o43",
+        "T027f1",
+        "T027",
+        "T030",
+        "T031"
+      ],
+      "floor_locators": [
+        {
+          "task": "T021",
+          "test": "`tests/test-spec-gate.sh::test_checkpoints`",
+          "capture": "CAP-776-Dg1sHo",
+          "command": "/bin/bash -o pipefail -c bash tests/test-spec-gate.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T023",
+          "test": "`tests/test-verification.sh::test_capture_provenance`, `tests/test-spec-gate.sh::test_floor`, `tests/test-spec-gate.sh::test_checkpoints`",
+          "capture": "CAP-778-gr4GCx",
+          "command": "/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh ",
+          "record_exit": 0
+        },
+        {
+          "task": "T030o43",
+          "test": "`tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-spec-gate.sh::test_rounds`, `tests/test-sdd-analyze.sh::test_verification_bindings`, `tests/test-verification.sh::test_capture_provenance`, `tests/test-spec-gate.sh::test_floor`, `tests/test-spec-gate.sh::test_acceptance`, `tests/test-spec-gate.sh::test_checkpoints`",
+          "capture": "CAP-785-yErMUi",
+          "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T027f1",
+          "test": "`tests/test-spec-gate.sh::test_checkpoints`",
+          "capture": "CAP-776-Dg1sHo",
+          "command": "/bin/bash -o pipefail -c bash tests/test-spec-gate.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T027",
+          "test": "`tests/test-gate-contracts.sh::test_invoker_protocol`, `tests/test-spec-gate.sh::test_floor`, `tests/test-spec-gate.sh::test_checkpoints`, `tests/test-verification.sh::test_capture_provenance`, `tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-gate-contracts.sh::test_instruction_contracts`, `tests/test-build-adapters.sh::test_brief_modes`, `tests/test-spec-run.sh::test_bounded_capture`",
+          "capture": "CAP-785-yErMUi",
+          "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+          "record_exit": 1
+        }
+      ],
+      "direct_review_required": []
+    },
+    {
+      "id": "AC-009",
+      "criterion": "For both gates, round fixtures cover absent notes, rounds 1–3, blocked round 4, a valid same-day timestamped authorization, and rejection of old/unscoped/wrong-gate/wrong-round authorizations. Round-4 permission does not permit round 5. Quoted headings do not add rounds; malformed/duplicate/incomplete records cannot silently reset the count. A legacy date-only report needs explicit timestamp reconciliation for authorization ordering. (REQ-012)",
+      "criterion_sha256": "dbc38f235c49a83287f4486d0f11a6cfa1675c5653136acdd23bb05a4d27a68c",
+      "current_task_refs": [
+        "T022",
+        "T030o2",
+        "T030o11",
+        "T030o7",
+        "T030o12",
+        "T030o13",
+        "T030o16",
+        "T030o17",
+        "T030o22",
+        "T030o18",
+        "T030o21",
+        "T030o23",
+        "T030o31",
+        "T030o33",
+        "T030o35",
+        "T030o43",
+        "T030o44",
+        "T030o45",
+        "T030o46",
+        "T030o47",
+        "T030o48",
+        "T030o49",
+        "T030o50",
+        "T030o51",
+        "T030o52",
+        "T030o53",
+        "T030o54",
+        "T030o55",
+        "T030o56",
+        "T031a4",
+        "T031a4o1",
+        "T031a4o2",
+        "T031a4o3",
+        "T030",
+        "T031"
+      ],
+      "floor_locators": [
+        {
+          "task": "T022",
+          "test": "`tests/test-spec-gate.sh::test_rounds`, `tests/test-verification.sh::test_owned_transactions`",
+          "capture": "CAP-777-L2FQvD",
+          "command": "/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-verification.sh ",
+          "record_exit": 0
+        },
+        {
+          "task": "T030o2",
+          "test": "`tests/test-spec-gate.sh::test_rounds`",
+          "capture": "CAP-776-Dg1sHo",
+          "command": "/bin/bash -o pipefail -c bash tests/test-spec-gate.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o11",
+          "test": "`tests/test-spec-gate.sh::test_rounds`",
+          "capture": "CAP-776-Dg1sHo",
+          "command": "/bin/bash -o pipefail -c bash tests/test-spec-gate.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o7",
+          "test": "`tests/test-spec-gate.sh::test_rounds`",
+          "capture": "CAP-776-Dg1sHo",
+          "command": "/bin/bash -o pipefail -c bash tests/test-spec-gate.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o12",
+          "test": "`tests/test-spec-gate.sh::test_rounds`, `tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-verification.sh::test_config_grammar`, `tests/test-sdd-analyze.sh::test_verification_bindings`",
+          "capture": "CAP-780-lQYtQ1",
+          "command": "/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-verification.sh && bash tests/test-sdd-analyze.sh ",
+          "record_exit": 0
+        },
+        {
+          "task": "T030o13",
+          "test": "`tests/test-spec-gate.sh::test_rounds`, `tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-verification.sh::test_config_grammar`, `tests/test-sdd-analyze.sh::test_verification_bindings`",
+          "capture": "CAP-780-lQYtQ1",
+          "command": "/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-verification.sh && bash tests/test-sdd-analyze.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o16",
+          "test": "`tests/test-spec-gate.sh::test_rounds`",
+          "capture": "CAP-776-Dg1sHo",
+          "command": "/bin/bash -o pipefail -c bash tests/test-spec-gate.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o17",
+          "test": "`tests/test-spec-gate.sh::test_rounds`",
+          "capture": "CAP-776-Dg1sHo",
+          "command": "/bin/bash -o pipefail -c bash tests/test-spec-gate.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o22",
+          "test": "`tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-spec-gate.sh::test_rounds`",
+          "capture": "CAP-781-gKsLEi",
+          "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-spec-gate.sh ",
+          "record_exit": 0
+        },
+        {
+          "task": "T030o18",
+          "test": "`tests/test-spec-gate.sh::test_rounds`, `tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-sdd-analyze.sh::test_verification_bindings`",
+          "capture": "CAP-782-rL7TBL",
+          "command": "/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-sdd-analyze.sh ",
+          "record_exit": 0
+        },
+        {
+          "task": "T030o21",
+          "test": "`tests/test-spec-gate.sh::test_rounds`",
+          "capture": "CAP-776-Dg1sHo",
+          "command": "/bin/bash -o pipefail -c bash tests/test-spec-gate.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o23",
+          "test": "`tests/test-spec-gate.sh::test_rounds`, `tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-sdd-analyze.sh::test_verification_bindings`",
+          "capture": "CAP-782-rL7TBL",
+          "command": "/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-sdd-analyze.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o31",
+          "test": "`tests/test-spec-gate.sh::test_rounds`",
+          "capture": "CAP-776-Dg1sHo",
+          "command": "/bin/bash -o pipefail -c bash tests/test-spec-gate.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o33",
+          "test": "`tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-spec-gate.sh::test_rounds`",
+          "capture": "CAP-781-gKsLEi",
+          "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-spec-gate.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o35",
+          "test": "`tests/test-spec-gate.sh::test_rounds`, `tests/test-gate-contracts.sh::test_instruction_contracts`",
+          "capture": "CAP-784-FY9IOk",
+          "command": "/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh ",
+          "record_exit": 0
+        },
+        {
+          "task": "T030o43",
+          "test": "`tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-spec-gate.sh::test_rounds`, `tests/test-sdd-analyze.sh::test_verification_bindings`, `tests/test-verification.sh::test_capture_provenance`, `tests/test-spec-gate.sh::test_floor`, `tests/test-spec-gate.sh::test_acceptance`, `tests/test-spec-gate.sh::test_checkpoints`",
+          "capture": "CAP-785-yErMUi",
+          "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o44",
+          "test": "`tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-spec-gate.sh::test_rounds`",
+          "capture": "CAP-785-yErMUi",
+          "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o45",
+          "test": "`tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-spec-gate.sh::test_rounds`",
+          "capture": "CAP-785-yErMUi",
+          "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o46",
+          "test": "`tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-spec-gate.sh::test_rounds`",
+          "capture": "CAP-785-yErMUi",
+          "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o47",
+          "test": "`tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-spec-gate.sh::test_rounds`",
+          "capture": "CAP-785-yErMUi",
+          "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o48",
+          "test": "`tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-spec-gate.sh::test_rounds`",
+          "capture": "CAP-785-yErMUi",
+          "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o49",
+          "test": "`tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-spec-gate.sh::test_rounds`",
+          "capture": "CAP-785-yErMUi",
+          "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o50",
+          "test": "`tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-spec-gate.sh::test_rounds`",
+          "capture": "CAP-785-yErMUi",
+          "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o51",
+          "test": "`tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-spec-gate.sh::test_rounds`",
+          "capture": "CAP-785-yErMUi",
+          "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o52",
+          "test": "`tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-spec-gate.sh::test_rounds`",
+          "capture": "CAP-785-yErMUi",
+          "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o53",
+          "test": "`tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-spec-gate.sh::test_rounds`",
+          "capture": "CAP-785-yErMUi",
+          "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o54",
+          "test": "`tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-spec-gate.sh::test_rounds`",
+          "capture": "CAP-785-yErMUi",
+          "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o55",
+          "test": "`tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-spec-gate.sh::test_rounds`",
+          "capture": "CAP-785-yErMUi",
+          "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o56",
+          "test": "`tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-spec-gate.sh::test_rounds`",
+          "capture": "CAP-785-yErMUi",
+          "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T031a4",
+          "test": "`tests/test-spec-gate.sh::test_rounds`",
+          "capture": "CAP-785-yErMUi",
+          "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T031a4o1",
+          "test": "`tests/test-spec-gate.sh::test_rounds`",
+          "capture": "CAP-785-yErMUi",
+          "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T031a4o2",
+          "test": "`tests/test-spec-gate.sh::test_rounds`",
+          "capture": "CAP-785-yErMUi",
+          "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T031a4o3",
+          "test": "`tests/test-spec-gate.sh::test_rounds`",
+          "capture": "CAP-785-yErMUi",
+          "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+          "record_exit": 1
+        }
+      ],
+      "direct_review_required": []
+    },
+    {
+      "id": "AC-010",
+      "criterion": "Tally fixtures distinguish one class across different files and process root causes from different classes sharing a file/root cause; rechecking an open finding is not a new recurrence. An untouched copy of 002 reports five opponent rounds, six blocking findings and unclassified legacy classes. A separately annotated fixture binds its clock and lock findings to stable classes and detects both recurrences. Original shipped artifacts are not rewritten. (REQ-015)",
+      "criterion_sha256": "6da80f9531738c4f10e1f7f35a7aaf7513fd35fcb168d0264357d975d5cdeedc",
+      "current_task_refs": [
+        "T014",
+        "T030o12",
+        "T030o13",
+        "T030o41",
+        "T031a3",
+        "T031a3o1",
+        "T030",
+        "T031"
+      ],
+      "floor_locators": [
+        {
+          "task": "T014",
+          "test": "`tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-gate-contracts.sh::test_instruction_contracts`",
+          "capture": "CAP-769-bZPhmg",
+          "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o12",
+          "test": "`tests/test-spec-gate.sh::test_rounds`, `tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-verification.sh::test_config_grammar`, `tests/test-sdd-analyze.sh::test_verification_bindings`",
+          "capture": "CAP-780-lQYtQ1",
+          "command": "/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-verification.sh && bash tests/test-sdd-analyze.sh ",
+          "record_exit": 0
+        },
+        {
+          "task": "T030o13",
+          "test": "`tests/test-spec-gate.sh::test_rounds`, `tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-verification.sh::test_config_grammar`, `tests/test-sdd-analyze.sh::test_verification_bindings`",
+          "capture": "CAP-780-lQYtQ1",
+          "command": "/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-verification.sh && bash tests/test-sdd-analyze.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o41",
+          "test": "`tests/test-gate-contracts.sh::test_instruction_contracts`, `tests/test-verification.sh::test_capture_provenance`, `tests/test-sdd-analyze.sh::test_verification_bindings`, `tests/test-gate-contracts.sh::test_reports_and_tally`",
+          "capture": "CAP-785-yErMUi",
+          "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+          "record_exit": 0
+        },
+        {
+          "task": "T031a3",
+          "test": "`tests/test-gate-contracts.sh::test_reports_and_tally`",
+          "capture": "CAP-785-yErMUi",
+          "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T031a3o1",
+          "test": "`tests/test-gate-contracts.sh::test_reports_and_tally`",
+          "capture": "CAP-785-yErMUi",
+          "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+          "record_exit": 1
+        }
+      ],
+      "direct_review_required": []
+    },
+    {
+      "id": "AC-011",
+      "criterion": "Analyzer/doctor fixtures accept nonempty gate_checks command lists and optional checkpoint maps, reject malformed lists/maps and unknown checkpoint stages with named errors, and distinguish missing new-contract configuration from legacy warnings. This repo declares `bash tests/run.sh` and its required ShellCheck command as gate_checks; `stacks: []` does not exempt it from running the suite. The supported YAML/command quoting subset is documented and tested, including spaces, arguments and pipeline failures. (REQ-007, REQ-008, CON-001, CON-003)",
+      "criterion_sha256": "be2d01219cedf5d8b7ea3e9532a9b21d5976f7b2c1625bf31142127f6683b84c",
+      "current_task_refs": [
+        "T003",
+        "T003f1",
+        "T030o5",
+        "T030o10",
+        "T030o12",
+        "T030o13",
+        "T030o15",
+        "T030",
+        "T031"
+      ],
+      "floor_locators": [
+        {
+          "task": "T003",
+          "test": "`tests/test-verification.sh::test_config_grammar`",
+          "capture": "CAP-771-uCIL9v",
+          "command": "/bin/bash -o pipefail -c bash tests/test-verification.sh ",
+          "record_exit": 0
+        },
+        {
+          "task": "T003f1",
+          "test": "`tests/test-sdd-analyze.sh::test_verification_bindings`",
+          "capture": "CAP-770-AgEMCd",
+          "command": "/bin/bash -o pipefail -c bash tests/test-sdd-analyze.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o5",
+          "test": "`tests/test-verification.sh::test_config_grammar`",
+          "capture": "CAP-771-uCIL9v",
+          "command": "/bin/bash -o pipefail -c bash tests/test-verification.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o10",
+          "test": "`tests/test-verification.sh::test_config_grammar`",
+          "capture": "CAP-771-uCIL9v",
+          "command": "/bin/bash -o pipefail -c bash tests/test-verification.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o12",
+          "test": "`tests/test-spec-gate.sh::test_rounds`, `tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-verification.sh::test_config_grammar`, `tests/test-sdd-analyze.sh::test_verification_bindings`",
+          "capture": "CAP-780-lQYtQ1",
+          "command": "/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-verification.sh && bash tests/test-sdd-analyze.sh ",
+          "record_exit": 0
+        },
+        {
+          "task": "T030o13",
+          "test": "`tests/test-spec-gate.sh::test_rounds`, `tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-verification.sh::test_config_grammar`, `tests/test-sdd-analyze.sh::test_verification_bindings`",
+          "capture": "CAP-780-lQYtQ1",
+          "command": "/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-verification.sh && bash tests/test-sdd-analyze.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o15",
+          "test": "`tests/test-verification.sh::test_config_grammar`",
+          "capture": "CAP-771-uCIL9v",
+          "command": "/bin/bash -o pipefail -c bash tests/test-verification.sh ",
+          "record_exit": 1
+        }
+      ],
+      "direct_review_required": []
+    },
+    {
+      "id": "AC-012",
+      "criterion": "Opponent instructions/report fields include Class, process Root cause, all finding locations, prior finding references, Reproduced, blocking/minor counts, canonical round/time/source/floor identity, and attacked/unexamined surfaces. They permit expanding a later review to overlooked unchanged code and never exempt a tested FM row. Text tests check these rules; the live report in AC-016 uses this schema. (REQ-010, REQ-011, REQ-012, REQ-015)",
+      "criterion_sha256": "0541063e097efa19738067db0f57d3587cfbdc761334f6753c514e1f04f034f5",
+      "current_task_refs": [
+        "T014",
+        "T030o4",
+        "T030o9",
+        "T030o14",
+        "T030o22",
+        "T030o18",
+        "T030o19",
+        "T030o23",
+        "T030o24",
+        "T030o29",
+        "T030o30",
+        "T030o32",
+        "T030o33",
+        "T030o34",
+        "T030o36",
+        "T030o37",
+        "T030o40",
+        "T030o43",
+        "T030o44",
+        "T030o45",
+        "T030o46",
+        "T030o47",
+        "T030o48",
+        "T030o49",
+        "T030o50",
+        "T030o51",
+        "T030o52",
+        "T030o53",
+        "T030o54",
+        "T030o55",
+        "T030o56",
+        "T030",
+        "T031"
+      ],
+      "floor_locators": [
+        {
+          "task": "T014",
+          "test": "`tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-gate-contracts.sh::test_instruction_contracts`",
+          "capture": "CAP-769-bZPhmg",
+          "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o4",
+          "test": "`tests/test-gate-contracts.sh::test_reports_and_tally`",
+          "capture": "CAP-769-bZPhmg",
+          "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o9",
+          "test": "`tests/test-gate-contracts.sh::test_reports_and_tally`",
+          "capture": "CAP-769-bZPhmg",
+          "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o14",
+          "test": "`tests/test-gate-contracts.sh::test_reports_and_tally`",
+          "capture": "CAP-769-bZPhmg",
+          "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o22",
+          "test": "`tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-spec-gate.sh::test_rounds`",
+          "capture": "CAP-781-gKsLEi",
+          "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-spec-gate.sh ",
+          "record_exit": 0
+        },
+        {
+          "task": "T030o18",
+          "test": "`tests/test-spec-gate.sh::test_rounds`, `tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-sdd-analyze.sh::test_verification_bindings`",
+          "capture": "CAP-782-rL7TBL",
+          "command": "/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-sdd-analyze.sh ",
+          "record_exit": 0
+        },
+        {
+          "task": "T030o19",
+          "test": "`tests/test-gate-contracts.sh::test_reports_and_tally`",
+          "capture": "CAP-769-bZPhmg",
+          "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o23",
+          "test": "`tests/test-spec-gate.sh::test_rounds`, `tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-sdd-analyze.sh::test_verification_bindings`",
+          "capture": "CAP-782-rL7TBL",
+          "command": "/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-sdd-analyze.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o24",
+          "test": "`tests/test-gate-contracts.sh::test_reports_and_tally`",
+          "capture": "CAP-769-bZPhmg",
+          "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o29",
+          "test": "`tests/test-gate-contracts.sh::test_reports_and_tally`",
+          "capture": "CAP-769-bZPhmg",
+          "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o30",
+          "test": "`tests/test-gate-contracts.sh::test_instruction_contracts`",
+          "capture": "CAP-769-bZPhmg",
+          "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o32",
+          "test": "`tests/test-gate-contracts.sh::test_reports_and_tally`",
+          "capture": "CAP-769-bZPhmg",
+          "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o33",
+          "test": "`tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-spec-gate.sh::test_rounds`",
+          "capture": "CAP-781-gKsLEi",
+          "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-spec-gate.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o34",
+          "test": "`tests/test-gate-contracts.sh::test_reports_and_tally`",
+          "capture": "CAP-769-bZPhmg",
+          "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o36",
+          "test": "`tests/test-gate-contracts.sh::test_instruction_contracts`",
+          "capture": "CAP-769-bZPhmg",
+          "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o37",
+          "test": "`tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-gate-contracts.sh::test_instruction_contracts`",
+          "capture": "CAP-769-bZPhmg",
+          "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o40",
+          "test": "`tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-gate-contracts.sh::test_instruction_contracts`",
+          "capture": "CAP-779-apVHQR",
+          "command": "/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-gate-contracts.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o43",
+          "test": "`tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-spec-gate.sh::test_rounds`, `tests/test-sdd-analyze.sh::test_verification_bindings`, `tests/test-verification.sh::test_capture_provenance`, `tests/test-spec-gate.sh::test_floor`, `tests/test-spec-gate.sh::test_acceptance`, `tests/test-spec-gate.sh::test_checkpoints`",
+          "capture": "CAP-785-yErMUi",
+          "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o44",
+          "test": "`tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-spec-gate.sh::test_rounds`",
+          "capture": "CAP-785-yErMUi",
+          "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o45",
+          "test": "`tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-spec-gate.sh::test_rounds`",
+          "capture": "CAP-785-yErMUi",
+          "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o46",
+          "test": "`tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-spec-gate.sh::test_rounds`",
+          "capture": "CAP-785-yErMUi",
+          "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o47",
+          "test": "`tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-spec-gate.sh::test_rounds`",
+          "capture": "CAP-785-yErMUi",
+          "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o48",
+          "test": "`tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-spec-gate.sh::test_rounds`",
+          "capture": "CAP-785-yErMUi",
+          "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o49",
+          "test": "`tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-spec-gate.sh::test_rounds`",
+          "capture": "CAP-785-yErMUi",
+          "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o50",
+          "test": "`tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-spec-gate.sh::test_rounds`",
+          "capture": "CAP-785-yErMUi",
+          "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o51",
+          "test": "`tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-spec-gate.sh::test_rounds`",
+          "capture": "CAP-785-yErMUi",
+          "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o52",
+          "test": "`tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-spec-gate.sh::test_rounds`",
+          "capture": "CAP-785-yErMUi",
+          "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o53",
+          "test": "`tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-spec-gate.sh::test_rounds`",
+          "capture": "CAP-785-yErMUi",
+          "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o54",
+          "test": "`tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-spec-gate.sh::test_rounds`",
+          "capture": "CAP-785-yErMUi",
+          "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o55",
+          "test": "`tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-spec-gate.sh::test_rounds`",
+          "capture": "CAP-785-yErMUi",
+          "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o56",
+          "test": "`tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-spec-gate.sh::test_rounds`",
+          "capture": "CAP-785-yErMUi",
+          "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+          "record_exit": 1
+        }
+      ],
+      "direct_review_required": [
+        "Requires independent direct inspection of the artifact/observation described by the criterion; floor locator alone is not a PASS."
+      ]
+    },
+    {
+      "id": "AC-013",
+      "criterion": "Reality-check includes every AC and uses the carried marker only with matching criterion, impact mapping and valid evidence. Executable invalidation fixtures mutate implementation, a transitive shared helper, fixture, lockfile, configuration and AC text while leaving the old log untouched; each invalidates the affected PASS. Unknown impact triggers conservative reevaluation. Unchanged proven inputs permit carrying, and existing current floor captures avoid duplicate suite runs. Persona and dossier checks also require the canonical round/time/source/floor fields. (REQ-009, REQ-013)",
+      "criterion_sha256": "6254a1bc558e48db8b353dbdd57ea823c77f177e5ad53f1bf2ef1017c114defd",
+      "current_task_refs": [
+        "T024",
+        "T030o12",
+        "T030o13",
+        "T030o33",
+        "T027",
+        "T031a6",
+        "T030",
+        "T031"
+      ],
+      "floor_locators": [
+        {
+          "task": "T024",
+          "test": "`tests/test-verification.sh::test_capture_provenance`, `tests/test-gate-contracts.sh::test_reports_and_tally`",
+          "capture": "CAP-779-apVHQR",
+          "command": "/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-gate-contracts.sh ",
+          "record_exit": 0
+        },
+        {
+          "task": "T030o12",
+          "test": "`tests/test-spec-gate.sh::test_rounds`, `tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-verification.sh::test_config_grammar`, `tests/test-sdd-analyze.sh::test_verification_bindings`",
+          "capture": "CAP-780-lQYtQ1",
+          "command": "/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-verification.sh && bash tests/test-sdd-analyze.sh ",
+          "record_exit": 0
+        },
+        {
+          "task": "T030o13",
+          "test": "`tests/test-spec-gate.sh::test_rounds`, `tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-verification.sh::test_config_grammar`, `tests/test-sdd-analyze.sh::test_verification_bindings`",
+          "capture": "CAP-780-lQYtQ1",
+          "command": "/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh && bash tests/test-verification.sh && bash tests/test-sdd-analyze.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o33",
+          "test": "`tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-spec-gate.sh::test_rounds`",
+          "capture": "CAP-781-gKsLEi",
+          "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-spec-gate.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T027",
+          "test": "`tests/test-gate-contracts.sh::test_invoker_protocol`, `tests/test-spec-gate.sh::test_floor`, `tests/test-spec-gate.sh::test_checkpoints`, `tests/test-verification.sh::test_capture_provenance`, `tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-gate-contracts.sh::test_instruction_contracts`, `tests/test-build-adapters.sh::test_brief_modes`, `tests/test-spec-run.sh::test_bounded_capture`",
+          "capture": "CAP-785-yErMUi",
+          "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T031a6",
+          "test": "`tests/test-gate-contracts.sh::test_reports_and_tally`",
+          "capture": "CAP-769-bZPhmg",
+          "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh ",
+          "record_exit": 1
+        }
+      ],
+      "direct_review_required": []
+    },
+    {
+      "id": "AC-014",
+      "criterion": "All expert/test-engineer personas explicitly separate planning consultation from implementation briefing. Planning permits proposing decisions; implementation uses supplied slices and requests omissions/conflict resolution without routinely rereading whole artifacts. Planning and implementation brief examples encode the correct mode and revision. Regenerated adapters retain both cases. (REQ-014)",
+      "criterion_sha256": "2552bb02b0d3b2a1e4b464e43139d92beea7c23f2c3ab382ed502667e27e16e3",
+      "current_task_refs": [
+        "T010",
+        "T011",
+        "T012",
+        "T013",
+        "T027",
+        "T030",
+        "T031"
+      ],
+      "floor_locators": [
+        {
+          "task": "T010",
+          "test": "`tests/test-gate-contracts.sh::test_instruction_contracts`",
+          "capture": "CAP-769-bZPhmg",
+          "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T011",
+          "test": "`tests/test-gate-contracts.sh::test_instruction_contracts`",
+          "capture": "CAP-769-bZPhmg",
+          "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T012",
+          "test": "`tests/test-gate-contracts.sh::test_instruction_contracts`",
+          "capture": "CAP-769-bZPhmg",
+          "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T013",
+          "test": "`tests/test-gate-contracts.sh::test_instruction_contracts`, `tests/test-build-adapters.sh::test_brief_modes`",
+          "capture": "CAP-773-i3XYRk",
+          "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-build-adapters.sh ",
+          "record_exit": 0
+        },
+        {
+          "task": "T027",
+          "test": "`tests/test-gate-contracts.sh::test_invoker_protocol`, `tests/test-spec-gate.sh::test_floor`, `tests/test-spec-gate.sh::test_checkpoints`, `tests/test-verification.sh::test_capture_provenance`, `tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-gate-contracts.sh::test_instruction_contracts`, `tests/test-build-adapters.sh::test_brief_modes`, `tests/test-spec-run.sh::test_bounded_capture`",
+          "capture": "CAP-785-yErMUi",
+          "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+          "record_exit": 1
+        }
+      ],
+      "direct_review_required": []
+    },
+    {
+      "id": "AC-015",
+      "criterion": "Orchestrator and implement skill use worker --no-tick, deterministic accept, current floor, round authorization, stage coverage checkpoints, and validated reuse. /sdd:go and /sdd:review invoke the same rules, replacing contradictory older round limits. Script fixtures exercise the sequence with simulated workers/gates: a failed floor or blocked round prevents a gate call; an incomplete return leaves the task unchecked; a valid return is accepted once. Assertions observe state and invocation counts, not merely required phrases. AC-016 observes real orchestrator wiring. (REQ-006, REQ-007, REQ-008, REQ-009, REQ-012)",
+      "criterion_sha256": "d03bcf5376f9c7ee748e53ba9a0b46f7178f09de18baa12da69a5e9e075c4696",
+      "current_task_refs": [
+        "T025",
+        "T030o6",
+        "T027",
+        "T030",
+        "T031"
+      ],
+      "floor_locators": [
+        {
+          "task": "T025",
+          "test": "`tests/test-gate-contracts.sh::test_invoker_protocol`, `tests/test-gate-contracts.sh::test_instruction_contracts`",
+          "capture": "CAP-769-bZPhmg",
+          "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o6",
+          "test": "`tests/test-gate-contracts.sh::test_instruction_contracts`, `tests/test-spec-gate.sh::test_acceptance`",
+          "capture": "CAP-781-gKsLEi",
+          "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-spec-gate.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T027",
+          "test": "`tests/test-gate-contracts.sh::test_invoker_protocol`, `tests/test-spec-gate.sh::test_floor`, `tests/test-spec-gate.sh::test_checkpoints`, `tests/test-verification.sh::test_capture_provenance`, `tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-gate-contracts.sh::test_instruction_contracts`, `tests/test-build-adapters.sh::test_brief_modes`, `tests/test-spec-run.sh::test_bounded_capture`",
+          "capture": "CAP-785-yErMUi",
+          "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+          "record_exit": 1
+        }
+      ],
+      "direct_review_required": []
+    },
+    {
+      "id": "AC-016",
+      "criterion": "During this spec's actual orchestrated run, at least one worker uses no-tick capture, and the invoker records rejection of a deliberately incomplete copy of that return without changing task state, then accepts the complete return against the real capture. The first opponent report references a valid earlier floor and the script-granted round. Both gates show valid floor references and suite reuse when their inputs are unchanged. The live observations are checked at reality-check, after the first opponent report can exist. Bootstrap rule: a non-gate implementation task owns the executable probe checker and fixture tests naming AC-016; its pre-gate acceptance verifies those fixtures. Actual first-gate observations belong to the gate and cannot be prerequisites for starting it. The floor does not run a full-suite assertion requiring the future report. Missing live evidence still prevents reality-check READY. (REQ-006, REQ-007, REQ-012, REQ-016)",
+      "criterion_sha256": "44e4a0e5f9ecaf309ddbdced8d7bf6a9a60c0f9d894d983d2380979c85bdd832",
+      "current_task_refs": [
+        "T030o20",
+        "T030o25",
+        "T026",
+        "T030o3",
+        "T030o8",
+        "T030",
+        "T031"
+      ],
+      "floor_locators": [
+        {
+          "task": "T030o20",
+          "test": "`tests/test-verification.sh::test_capture_provenance`, `tests/test-spec-gate.sh::test_acceptance`, `tests/test-gate-contracts.sh::test_invoker_protocol`",
+          "capture": "CAP-783-yWnwFT",
+          "command": "/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh ",
+          "record_exit": 0
+        },
+        {
+          "task": "T030o25",
+          "test": "`tests/test-verification.sh::test_capture_provenance`, `tests/test-spec-gate.sh::test_acceptance`, `tests/test-gate-contracts.sh::test_invoker_protocol`",
+          "capture": "CAP-783-yWnwFT",
+          "command": "/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T026",
+          "test": "`tests/test-gate-contracts.sh::test_invoker_protocol`",
+          "capture": "CAP-769-bZPhmg",
+          "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o3",
+          "test": "`tests/test-gate-contracts.sh::test_invoker_protocol`",
+          "capture": "CAP-769-bZPhmg",
+          "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o8",
+          "test": "`tests/test-spec-gate.sh::test_acceptance`, `tests/test-gate-contracts.sh::test_invoker_protocol`",
+          "capture": "CAP-784-FY9IOk",
+          "command": "/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh ",
+          "record_exit": 1
+        }
+      ],
+      "direct_review_required": [
+        "Current CAP-769-bZPhmg is only the test command locator; inspect T029 completion proof at notes/verification/reports/s27-t029-control/completion-result.json and the genuine current C7 binding/control evidence directly. Use the actual RC4 reservation/probe after opponent24 clears; this locator is not a verdict."
+      ]
+    },
+    {
+      "id": "AC-017",
+      "criterion": "Planning/task instructions bind FM/INV at the correct phase. Retro template/skill report class recurrence separately from process root cause, plus raw location counts, spend/baseline availability, command executions/reuses, reopened findings and the post-ship quality observation owner. Text tests and tally fixtures prove those fields and missing measurements; no savings are invented from round counts. (REQ-001, REQ-002, REQ-015)",
+      "criterion_sha256": "dca3b219c4060e40615403f1e820b53989ecfcef136db03df6883d39a2cdaa5f",
+      "current_task_refs": [
+        "T004",
+        "T014",
+        "T030o37",
+        "T030o40",
+        "T028",
+        "T030",
+        "T031",
+        "T034"
+      ],
+      "floor_locators": [
+        {
+          "task": "T004",
+          "test": "`tests/test-gate-contracts.sh::test_instruction_contracts`",
+          "capture": "CAP-769-bZPhmg",
+          "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T014",
+          "test": "`tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-gate-contracts.sh::test_instruction_contracts`",
+          "capture": "CAP-769-bZPhmg",
+          "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o37",
+          "test": "`tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-gate-contracts.sh::test_instruction_contracts`",
+          "capture": "CAP-769-bZPhmg",
+          "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o40",
+          "test": "`tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-gate-contracts.sh::test_instruction_contracts`",
+          "capture": "CAP-779-apVHQR",
+          "command": "/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-gate-contracts.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T028",
+          "test": "`tests/test-gate-contracts.sh::test_instruction_contracts`, `tests/test-gate-contracts.sh::test_reports_and_tally`",
+          "capture": "CAP-769-bZPhmg",
+          "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh ",
+          "record_exit": 1
+        }
+      ],
+      "direct_review_required": []
+    },
+    {
+      "id": "AC-018",
+      "criterion": "README and constitution explain required gate_checks, optional checkpoints, verification_contract compatibility, evidence integrity versus freshness, no-tick acceptance, summary output, class IDs, scope-aware review and per-round authorization. The documented `spec-gate.sh --help` lists floor, checkpoint, round, tally and accept. All documented command examples run in fixtures. (REQ-001, REQ-015, REQ-016)",
+      "criterion_sha256": "3541d161821a57876ac6a63eed7ed30780833c68795693468033a1a5b7a57c83",
+      "current_task_refs": [
+        "T030o30",
+        "T030o35",
+        "T030o36",
+        "T030o37",
+        "T030o38",
+        "T030o39",
+        "T030o40",
+        "T030o41",
+        "T029",
+        "T030",
+        "T031"
+      ],
+      "floor_locators": [
+        {
+          "task": "T030o30",
+          "test": "`tests/test-gate-contracts.sh::test_instruction_contracts`",
+          "capture": "CAP-769-bZPhmg",
+          "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o35",
+          "test": "`tests/test-spec-gate.sh::test_rounds`, `tests/test-gate-contracts.sh::test_instruction_contracts`",
+          "capture": "CAP-784-FY9IOk",
+          "command": "/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh ",
+          "record_exit": 0
+        },
+        {
+          "task": "T030o36",
+          "test": "`tests/test-gate-contracts.sh::test_instruction_contracts`",
+          "capture": "CAP-769-bZPhmg",
+          "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o37",
+          "test": "`tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-gate-contracts.sh::test_instruction_contracts`",
+          "capture": "CAP-769-bZPhmg",
+          "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o38",
+          "test": "`tests/test-gate-contracts.sh::test_instruction_contracts`",
+          "capture": "CAP-769-bZPhmg",
+          "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o39",
+          "test": "`tests/test-verification.sh::test_capture_provenance`, `tests/test-gate-contracts.sh::test_instruction_contracts`",
+          "capture": "CAP-779-apVHQR",
+          "command": "/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-gate-contracts.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o40",
+          "test": "`tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-gate-contracts.sh::test_instruction_contracts`",
+          "capture": "CAP-779-apVHQR",
+          "command": "/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-gate-contracts.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o41",
+          "test": "`tests/test-gate-contracts.sh::test_instruction_contracts`, `tests/test-verification.sh::test_capture_provenance`, `tests/test-sdd-analyze.sh::test_verification_bindings`, `tests/test-gate-contracts.sh::test_reports_and_tally`",
+          "capture": "CAP-785-yErMUi",
+          "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+          "record_exit": 0
+        },
+        {
+          "task": "T029",
+          "test": "`tests/test-gate-contracts.sh::test_instruction_contracts`",
+          "capture": "CAP-769-bZPhmg",
+          "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh ",
+          "record_exit": 1
+        }
+      ],
+      "direct_review_required": []
+    },
+    {
+      "id": "AC-019",
+      "criterion": "`tests/run.sh` and `shellcheck -S warning -x scripts/*.sh tests/*.sh` pass under bash 3.2 and the existing CI bash matrix. Capture fixtures and provider/scheduler stubs remain isolated from real external actions. (CON-001)",
+      "criterion_sha256": "a9a78e135baa66e78dc267ee0b0c2ea709fe16bf17366476ffa86692b73d5e7b",
+      "current_task_refs": [
+        "T027",
+        "T030",
+        "T031",
+        "T032",
+        "T033"
+      ],
+      "floor_locators": [
+        {
+          "task": "T027",
+          "test": "`tests/test-gate-contracts.sh::test_invoker_protocol`, `tests/test-spec-gate.sh::test_floor`, `tests/test-spec-gate.sh::test_checkpoints`, `tests/test-verification.sh::test_capture_provenance`, `tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-gate-contracts.sh::test_instruction_contracts`, `tests/test-build-adapters.sh::test_brief_modes`, `tests/test-spec-run.sh::test_bounded_capture`",
+          "capture": "CAP-785-yErMUi",
+          "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+          "record_exit": 1
+        }
+      ],
+      "direct_review_required": [
+        "Directly inspect hosted run 40233074338 attempt 1 and all four jobs in notes/verification/platforms/ci-20261025-s27-final/hosted-audit-20261025T213229Z/; verify head 5aee77672d03a2c7811e28e55172817da6dee012 and checkout merge 13ffb1ebb4439eb9c8fd47585b6d8d10f45dba0c/tree d685/source C7. Floor CAP-785 is local suite/ShellCheck only."
+      ]
+    },
+    {
+      "id": "AC-020",
+      "criterion": "Reuse fixtures first capture a passing command, then independently change its source (including dirty/untracked inputs), command/cwd, tests, dependencies, relevant environment/toolchain identity, or referenced criterion. None can reuse the old success. Altered/truncated logs, incomplete writes, missing provenance, a later failed same-input run, and inputs changing during execution also reject reuse. Unchanged deterministic inputs reuse successfully; historical records still parse but are freshness-unknown. External/time-dependent checks without an explicit valid freshness policy run again. The review's failing-test/ \"sound evidence\" scenario cannot obtain reusable or current-PASS status. (REQ-009)",
+      "criterion_sha256": "ad4abe30da11954d092465433553acccb056372459c412bfe50b0d9a6186e770",
+      "current_task_refs": [
+        "T015",
+        "T016",
+        "T017",
+        "T018",
+        "T023",
+        "T030o20",
+        "T030o25",
+        "T030o39",
+        "T030o41",
+        "T030o42",
+        "T030o43",
+        "T031a2",
+        "T031a6",
+        "T030",
+        "T031"
+      ],
+      "floor_locators": [
+        {
+          "task": "T015",
+          "test": "`tests/test-verification.sh::test_owned_transactions`",
+          "capture": "CAP-771-uCIL9v",
+          "command": "/bin/bash -o pipefail -c bash tests/test-verification.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T016",
+          "test": "`tests/test-verification.sh::test_capture_provenance`",
+          "capture": "CAP-771-uCIL9v",
+          "command": "/bin/bash -o pipefail -c bash tests/test-verification.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T017",
+          "test": "`tests/test-spec-run.sh::test_bounded_capture`, `tests/test-verification.sh::test_owned_transactions`",
+          "capture": "CAP-774-yhHmXk",
+          "command": "/bin/bash -o pipefail -c bash tests/test-spec-run.sh && bash tests/test-verification.sh ",
+          "record_exit": 0
+        },
+        {
+          "task": "T018",
+          "test": "`tests/test-verification.sh::test_capture_provenance`",
+          "capture": "CAP-771-uCIL9v",
+          "command": "/bin/bash -o pipefail -c bash tests/test-verification.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T023",
+          "test": "`tests/test-verification.sh::test_capture_provenance`, `tests/test-spec-gate.sh::test_floor`, `tests/test-spec-gate.sh::test_checkpoints`",
+          "capture": "CAP-778-gr4GCx",
+          "command": "/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh ",
+          "record_exit": 0
+        },
+        {
+          "task": "T030o20",
+          "test": "`tests/test-verification.sh::test_capture_provenance`, `tests/test-spec-gate.sh::test_acceptance`, `tests/test-gate-contracts.sh::test_invoker_protocol`",
+          "capture": "CAP-783-yWnwFT",
+          "command": "/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh ",
+          "record_exit": 0
+        },
+        {
+          "task": "T030o25",
+          "test": "`tests/test-verification.sh::test_capture_provenance`, `tests/test-spec-gate.sh::test_acceptance`, `tests/test-gate-contracts.sh::test_invoker_protocol`",
+          "capture": "CAP-783-yWnwFT",
+          "command": "/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o39",
+          "test": "`tests/test-verification.sh::test_capture_provenance`, `tests/test-gate-contracts.sh::test_instruction_contracts`",
+          "capture": "CAP-779-apVHQR",
+          "command": "/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-gate-contracts.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o41",
+          "test": "`tests/test-gate-contracts.sh::test_instruction_contracts`, `tests/test-verification.sh::test_capture_provenance`, `tests/test-sdd-analyze.sh::test_verification_bindings`, `tests/test-gate-contracts.sh::test_reports_and_tally`",
+          "capture": "CAP-785-yErMUi",
+          "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+          "record_exit": 0
+        },
+        {
+          "task": "T030o42",
+          "test": "`tests/test-verification.sh::test_capture_provenance`",
+          "capture": "CAP-785-yErMUi",
+          "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o43",
+          "test": "`tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-spec-gate.sh::test_rounds`, `tests/test-sdd-analyze.sh::test_verification_bindings`, `tests/test-verification.sh::test_capture_provenance`, `tests/test-spec-gate.sh::test_floor`, `tests/test-spec-gate.sh::test_acceptance`, `tests/test-spec-gate.sh::test_checkpoints`",
+          "capture": "CAP-785-yErMUi",
+          "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T031a2",
+          "test": "`tests/test-spec-gate.sh::test_floor`, `tests/test-verification.sh::test_capture_provenance`",
+          "capture": "CAP-785-yErMUi",
+          "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T031a6",
+          "test": "`tests/test-gate-contracts.sh::test_reports_and_tally`",
+          "capture": "CAP-769-bZPhmg",
+          "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh ",
+          "record_exit": 1
+        }
+      ],
+      "direct_review_required": []
+    },
+    {
+      "id": "AC-021",
+      "criterion": "A verbose passing fixture emits one summary line ≤2 KiB with --summary while the full log/digest remains verifiable; a failing fixture preserves its exit and displays at most 20 diagnostic lines/ 8 KiB. Multiline/control output is escaped and long fields reference full metadata. --key alone retains its selection semantics and default output; --summary --no-tick leaves the checkbox unchanged. Tests measure output bytes/lines and actual command executions. (REQ-016)",
+      "criterion_sha256": "b9a7004e018e5776a33c951e2a1c97f1e485ff98979c8b67e295fd6172e40e9a",
+      "current_task_refs": [
+        "T017",
+        "T030",
+        "T031"
+      ],
+      "floor_locators": [
+        {
+          "task": "T017",
+          "test": "`tests/test-spec-run.sh::test_bounded_capture`, `tests/test-verification.sh::test_owned_transactions`",
+          "capture": "CAP-774-yhHmXk",
+          "command": "/bin/bash -o pipefail -c bash tests/test-spec-run.sh && bash tests/test-verification.sh ",
+          "record_exit": 0
+        }
+      ],
+      "direct_review_required": [
+        "Requires independent direct inspection of the artifact/observation described by the criterion; floor locator alone is not a PASS."
+      ]
+    },
+    {
+      "id": "AC-022",
+      "criterion": "Accept fixtures cover missing/extra FM or INV IDs, a missing Failure modes block, no assigned rows with explicit none, nonexistent test or capture references, forged summary, failed/stale capture, and an implementation changed between capture and acceptance. Invalid returns preserve tasks.md byte-for-byte. A complete valid mapping permits exactly one tick and evidence attachment; repeated acceptance is idempotent. Declared manual criteria accept a real artifact/observation, reject a missing artifact, and cannot exempt an automated criterion from capture. Validation resolves each named test through its capture's declared verification binding; substring matches in unrelated logs cannot supply the proof. Required captures must be complete and valid at acceptance. (REQ-006, REQ-009)",
+      "criterion_sha256": "73d9ac59a1f84e8b6d33e67c3b40d86db5c3e32f13e7884f695fb26bc2cf33c2",
+      "current_task_refs": [
+        "T015",
+        "T019",
+        "T030o1",
+        "T030o20",
+        "T030o25",
+        "T030o43",
+        "T030o6",
+        "T030o8",
+        "T031a1",
+        "T031a1o1",
+        "T030",
+        "T031"
+      ],
+      "floor_locators": [
+        {
+          "task": "T015",
+          "test": "`tests/test-verification.sh::test_owned_transactions`",
+          "capture": "CAP-771-uCIL9v",
+          "command": "/bin/bash -o pipefail -c bash tests/test-verification.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T019",
+          "test": "`tests/test-spec-gate.sh::test_acceptance`, `tests/test-verification.sh::test_owned_transactions`",
+          "capture": "CAP-775-mI8i8Y",
+          "command": "/bin/bash -o pipefail -c bash tests/test-spec-task.sh && bash tests/test-spec-gate.sh && bash tests/test-verification.sh ",
+          "record_exit": 0
+        },
+        {
+          "task": "T030o1",
+          "test": "`tests/test-spec-gate.sh::test_acceptance`",
+          "capture": "CAP-776-Dg1sHo",
+          "command": "/bin/bash -o pipefail -c bash tests/test-spec-gate.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o20",
+          "test": "`tests/test-verification.sh::test_capture_provenance`, `tests/test-spec-gate.sh::test_acceptance`, `tests/test-gate-contracts.sh::test_invoker_protocol`",
+          "capture": "CAP-783-yWnwFT",
+          "command": "/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh ",
+          "record_exit": 0
+        },
+        {
+          "task": "T030o25",
+          "test": "`tests/test-verification.sh::test_capture_provenance`, `tests/test-spec-gate.sh::test_acceptance`, `tests/test-gate-contracts.sh::test_invoker_protocol`",
+          "capture": "CAP-783-yWnwFT",
+          "command": "/bin/bash -o pipefail -c bash tests/test-verification.sh && bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o43",
+          "test": "`tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-spec-gate.sh::test_rounds`, `tests/test-sdd-analyze.sh::test_verification_bindings`, `tests/test-verification.sh::test_capture_provenance`, `tests/test-spec-gate.sh::test_floor`, `tests/test-spec-gate.sh::test_acceptance`, `tests/test-spec-gate.sh::test_checkpoints`",
+          "capture": "CAP-785-yErMUi",
+          "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o6",
+          "test": "`tests/test-gate-contracts.sh::test_instruction_contracts`, `tests/test-spec-gate.sh::test_acceptance`",
+          "capture": "CAP-781-gKsLEi",
+          "command": "/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh && bash tests/test-spec-gate.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o8",
+          "test": "`tests/test-spec-gate.sh::test_acceptance`, `tests/test-gate-contracts.sh::test_invoker_protocol`",
+          "capture": "CAP-784-FY9IOk",
+          "command": "/bin/bash -o pipefail -c bash tests/test-spec-gate.sh && bash tests/test-gate-contracts.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T031a1",
+          "test": "`tests/test-spec-gate.sh::test_acceptance`",
+          "capture": "CAP-785-yErMUi",
+          "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T031a1o1",
+          "test": "`tests/test-spec-gate.sh::test_acceptance`",
+          "capture": "CAP-785-yErMUi",
+          "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+          "record_exit": 1
+        }
+      ],
+      "direct_review_required": [
+        "Requires independent direct inspection of the artifact/observation described by the criterion; floor locator alone is not a PASS."
+      ]
+    },
+    {
+      "id": "AC-023",
+      "criterion": "Shipped 001/002 remain analyzer exit 0. New-contract integrity failures stay errors, while missing legacy FM/provenance/config is reported without retroactively claiming freshness. Documentation and fixtures explicitly distinguish analyzer compatibility from a floor that cannot clear without runnable verification. (CON-003, REQ-007, REQ-009) ## 7. Constraints - **CON-001:** Bash 3.2, BSD/POSIX tools and the existing CI matrix; no new runtime dependency. The plan pre-decides parsable metadata/report/command grammars and their failure behavior before script implementation. - **CON-002:** Kit source files stay byte-identical with the private clone after the existing post-merge port. This change ships here first. - **CON-003:** Shipped specs 001/002 retain analyzer exit 0. Missing legacy metadata yields warnings and freshness-unknown, never an invented PASS. New-contract specs require full bindings/configuration at the appropriate handoff; malformed declared data and dangling/duplicate IDs are errors. Tests-with-tasks remains a warning, with zero allowed at new task handoff. - **CON-004:** Models.yml roles/tiers, gate separation/defaults and security reviewer authority do not change. A round waiver permits an invocation, not a softened verdict or skipped criterion. - **CON-005:** Persona edits regenerate through apply-models.sh and build-adapters.sh; sync --check and doctor remain clean within their existing environment requirements. Never edit generated build/ by hand. - **CON-006:** This repo has stacks: [] but an executable shell suite. Text checks validate stack advice; runtime fixtures validate the common harness. Cross-stack live effects are measured in later governed specs. - **CON-007:** Worktree guards, clarification markers and evidence-not-claims remain enforced. Reuse means consuming a verified matching real run, never trusting an implementer's prose or only a filename/hash claim. - **CON-008:** Implement FM/test binding, class sweeps, output bounds and the shared floor before enabling reuse/carry-forward. Reuse remains disabled until provenance and invalidation fixtures pass. Acceptance and shared evidence mutations are serialized; source snapshots must remain stable through capture/validation, including parallel worker batches. ## 8. Open questions None blocking. Existing user choices are preserved; the review corrections are recorded in STATUS. Which governed project supplies the first later measurement point remains a non-blocking owner choice. Missing baseline or follow-up measurements are reported as unknown. ## 9. References - Spec 002 notes/opponent.md and notes/reality-check.md: the recorded five opponent rounds, six findings, and single final evidence matrix. - scripts/spec-run.sh, spec-evidence.sh, spec-ac-coverage.sh, spec-task.sh: current capture, integrity, binding and tick behavior. - scripts/sdd-analyze.sh, sdd-doctor.sh and the proposed spec-gate.sh. - agents/opponent.agent.md, reality-check.agent.md, sdd-orchestrator.md, *-expert.md and test-engineer.md. - skills/sdd-plan, sdd-tasks, sdd-implement, sdd-go, sdd-review and sdd-retro. - templates/plan-template.md, tasks-template.md, retro-template.md, stack-overlays/, and examples/001-api-key-expiry/. - constitution.md §10 and knowledge/deterministic-gates.md. --- *Workflow:* Review draft tasks.md, then /sdd:implement. The spec and plan are accepted. Task decomposition is complete; no harness implementation has begun.",
+      "criterion_sha256": "4b0173b06ff2941b2da40abbc1ff68ff55d444ffbb665a3b58ef1a2fc0b215dc",
+      "current_task_refs": [
+        "T002",
+        "T003",
+        "T003f1",
+        "T018",
+        "T030o41",
+        "T030o43",
+        "T030",
+        "T031",
+        "T033"
+      ],
+      "floor_locators": [
+        {
+          "task": "T002",
+          "test": "`tests/test-sdd-analyze.sh::test_verification_bindings`",
+          "capture": "CAP-770-AgEMCd",
+          "command": "/bin/bash -o pipefail -c bash tests/test-sdd-analyze.sh ",
+          "record_exit": 0
+        },
+        {
+          "task": "T003",
+          "test": "`tests/test-verification.sh::test_config_grammar`",
+          "capture": "CAP-771-uCIL9v",
+          "command": "/bin/bash -o pipefail -c bash tests/test-verification.sh ",
+          "record_exit": 0
+        },
+        {
+          "task": "T003f1",
+          "test": "`tests/test-sdd-analyze.sh::test_verification_bindings`",
+          "capture": "CAP-770-AgEMCd",
+          "command": "/bin/bash -o pipefail -c bash tests/test-sdd-analyze.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T018",
+          "test": "`tests/test-verification.sh::test_capture_provenance`",
+          "capture": "CAP-771-uCIL9v",
+          "command": "/bin/bash -o pipefail -c bash tests/test-verification.sh ",
+          "record_exit": 1
+        },
+        {
+          "task": "T030o41",
+          "test": "`tests/test-gate-contracts.sh::test_instruction_contracts`, `tests/test-verification.sh::test_capture_provenance`, `tests/test-sdd-analyze.sh::test_verification_bindings`, `tests/test-gate-contracts.sh::test_reports_and_tally`",
+          "capture": "CAP-785-yErMUi",
+          "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+          "record_exit": 0
+        },
+        {
+          "task": "T030o43",
+          "test": "`tests/test-gate-contracts.sh::test_reports_and_tally`, `tests/test-spec-gate.sh::test_rounds`, `tests/test-sdd-analyze.sh::test_verification_bindings`, `tests/test-verification.sh::test_capture_provenance`, `tests/test-spec-gate.sh::test_floor`, `tests/test-spec-gate.sh::test_acceptance`, `tests/test-spec-gate.sh::test_checkpoints`",
+          "capture": "CAP-785-yErMUi",
+          "command": "/bin/bash -o pipefail -c bash tests/run.sh && bash tests/shellcheck.sh ",
+          "record_exit": 1
+        }
+      ],
+      "direct_review_required": [
+        "Requires independent direct inspection of the artifact/observation described by the criterion; floor locator alone is not a PASS."
+      ]
+    }
+  ],
+  "ci_locator": "notes/verification/platforms/ci-20261025-s27-final/hosted-audit-20261025T213229Z/; actual run 40233074338 attempt 1; direct review only.",
+  "caveats": [
+    "CAP-769-bZPhmg is current C7 and has the T029 control task record; earlier CAP-767/768 source3a and CAP-766 A7 are not current-floor evidence.",
+    "No capture was rerun, validated, or assigned a verdict while preparing this index.",
+    "Task-to-CAP mappings come from current task Refs and NUL-delimited commands.nul six-field records; only commands recorded against the referenced task are mapped."
+  ]
+}

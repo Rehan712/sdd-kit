@@ -1,0 +1,41 @@
+reality-check ROUND-3 reservation: source=a7e7dd326b27c7565c26349485c440af26f718a7f16e400ea42ed6961d03cd1a floor=FLOOR-il41Kn reserved=2026-10-25T16:24:18Z
+PASS reality-check ROUND-3 reservation integrity
+PASS reality-check ROUND-3 sealed (report.sha256 present)
+PASS opponent ROUND-23 on the same floor and source
+opponent sealed rounds=23 pending=0
+reality-check sealed rounds=3 pending=0
+PASS no staged .reservation-* in either gate
+PASS opponent round 1 canonical block == sealed 1ac95178f408b2ae
+PASS opponent round 2 canonical block == sealed 5170b08212a51a9b
+PASS opponent round 3 canonical block == sealed 3de48d658a33a909
+PASS opponent round 4 canonical block == sealed d044652efcb90251
+PASS opponent round 5 canonical block == sealed 0898afcc62cf8716
+PASS opponent round 6 canonical block == sealed cc1b86cb05959b85
+PASS opponent round 7 canonical block == sealed 9f98e50c63046c9f
+PASS opponent round 8 canonical block == sealed b391edbf50604425
+PASS opponent round 9 canonical block == sealed 2aae626e3c600201
+PASS opponent round 10 canonical block == sealed 9a32b0929d7acc5a
+PASS opponent round 11 canonical block == sealed f13a332b34a800da
+PASS opponent round 12 canonical block == sealed 4539d729b5402bfa
+PASS opponent round 13 canonical block == sealed 2ddbed640c662e36
+PASS opponent round 14 canonical block == sealed 6c94ac54f19b5d00
+PASS opponent round 15 canonical block == sealed 241cebc5c2bbba6b
+PASS opponent round 16 canonical block == sealed fb9bcfb41b40059e
+PASS opponent round 17 canonical block == sealed f94bb2e5f44779f1
+PASS opponent round 18 canonical block == sealed aeb8c870ffbcbf9f
+PASS opponent round 19 canonical block == sealed a99077db6dc4193e
+PASS opponent round 20 canonical block == sealed 8630890bab45bfca
+PASS opponent round 21 canonical block == sealed 9f3b01ba3392055b
+PASS opponent round 22 canonical block == sealed 106c04377eb7b201
+PASS opponent round 23 canonical block == sealed b58071ed44cd3276
+PASS returned opponent report block == sealed round-23 digest
+PASS reality-check round 1 canonical block == sealed
+PASS reality-check round 2 canonical block == sealed
+PASS reality-check round 3 canonical block == sealed
+PASS returned reality-check report block == sealed round-3 digest
+PASS reserved and returned worktree entries byte-identical
+PASS reserved and returned state records equal (label/taken aside)
+PASS source == reserved source (a7e7dd326b27c7565c26349485c440af26f718a7f16e400ea42ed6961d03cd1a)
+PASS source == frozen source a7e7dd32... (a7e7dd326b27c7565c26349485c440af26f718a7f16e400ea42ed6961d03cd1a)
+PASS Decisions digest unchanged 3db813f9... (3db813f9b63584b0af05b3482375fb67a23f4d4848206cc4c5ea40b524c3dd0f)
+PASS floor-latest == reserved floor (FLOOR-il41Kn)

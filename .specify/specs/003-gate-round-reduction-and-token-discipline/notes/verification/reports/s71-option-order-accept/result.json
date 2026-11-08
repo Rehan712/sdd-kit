@@ -1,0 +1,69 @@
+{
+  "ended": "2026-10-30T14:38:43.614446+00:00",
+  "exit": 0,
+  "task": "T031a5o1",
+  "capture": "CAP-866-eXyQTW",
+  "source": "62cbf525b0caac98f27729393f6e7203ec6ac1cd34c164b3734b7c10a98be23f",
+  "accepted": true,
+  "acceptedReceipt": "ACC-0HVJw8",
+  "acceptedEvent": "ACCEPT-ouC5Ma",
+  "acceptedMeta": {
+    "version": "1",
+    "task": "T031a5o1",
+    "return_digest": "cf20dd90ac8c2af715a1095a1f5a291b73eb6875c530774a549fc5a778b282e0",
+    "binding_digest": "8766df908be5d8f628c3880af34ae761dd1c9c4946e8da08da3e566c8c0c788a",
+    "input": "62cbf525b0caac98f27729393f6e7203ec6ac1cd34c164b3734b7c10a98be23f",
+    "captures": "CAP-866-eXyQTW",
+    "manual": ""
+  },
+  "beforeTasks": {
+    "mode": 384,
+    "mtimeNs": 1793370193297038791,
+    "size": 184262,
+    "sha256": "eb4a686092edc159f9e035a3cdccbcb40e5b83a77cd3ef9fd93ffecc3d6b1ebd",
+    "type": "file"
+  },
+  "afterTasks": {
+    "mode": 384,
+    "mtimeNs": 1793371094155415930,
+    "size": 184402,
+    "sha256": "cf287c0f31ffb099f795ea436508f301db7ca9e9eceeca8dfad7df020098c7d1",
+    "type": "file"
+  },
+  "protectedUnchanged": true,
+  "currentSourceUnchanged": true,
+  "changedPreexisting": {
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md": {
+      "before": {
+        "mode": 384,
+        "mtimeNs": 1793370193297038791,
+        "size": 184262,
+        "sha256": "eb4a686092edc159f9e035a3cdccbcb40e5b83a77cd3ef9fd93ffecc3d6b1ebd",
+        "type": "file"
+      },
+      "after": {
+        "mode": 384,
+        "mtimeNs": 1793371094155415930,
+        "size": 184402,
+        "sha256": "cf287c0f31ffb099f795ea436508f301db7ca9e9eceeca8dfad7df020098c7d1",
+        "type": "file"
+      }
+    }
+  },
+  "newPaths": [
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/accept-events/ACCEPT-ouC5Ma/COMPLETE",
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/accept-events/ACCEPT-ouC5Ma/meta.nul",
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/accepted/T031a5o1/ACC-0HVJw8/COMMITTED",
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/accepted/T031a5o1/ACC-0HVJw8/COMPLETE",
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/accepted/T031a5o1/ACC-0HVJw8/digests.nul",
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/accepted/T031a5o1/ACC-0HVJw8/meta.nul",
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/accepted/T031a5o1/ACC-0HVJw8/return.txt",
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/accepted/T031a5o1/ACC-0HVJw8/tasks.after"
+  ],
+  "unexpectedPreexistingChanges": {},
+  "strictGlobalRefsUnchanged": true,
+  "historicalStrictPreservation": false,
+  "allOtherOriginalWorktreeFilesPreserved": true,
+  "taskBytesFinalizedBeforeSnapshot": false,
+  "note": "Repair task accepted for independent quality; OP28 remains unauthorized. Fresh T029/control and final task freeze occur only after actual exact-round approval changes the source."
+}

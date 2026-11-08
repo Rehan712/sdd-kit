@@ -1,0 +1,44 @@
+{
+  "status": "passed",
+  "capture": "CAP-867-DSKmw1",
+  "checks": {
+    "command_exit_zero": true,
+    "command_output_hashes": true,
+    "seal_exact": true,
+    "ledger_matches_seal": true,
+    "no_tick_one": true,
+    "capture_exit_zero": true,
+    "capture_identity": true,
+    "input_before_expected": true,
+    "input_after_expected": true,
+    "output_digest_and_bytes": true,
+    "actual_18_of_18": true,
+    "emitted_summary_exact_one_line": true,
+    "stderr_empty": true,
+    "cwd_repo_exact": true,
+    "current_capture_and_task_match": true,
+    "current_source_expected": true,
+    "current_bindings_equal_capture": true,
+    "failure_mode_rows_match_current_bindings": true,
+    "exact_argv": true,
+    "fresh_source_matches_post_waiver_full_snapshot": true,
+    "every_protected_file_hash_mode_mtime_size_unchanged": true,
+    "new_files_exact_capture_and_ledger": true,
+    "evidence_exact_automatic_append": true,
+    "sequence_exact_one_increment": true,
+    "automatic_file_modes_preserved": true,
+    "HEAD_branch_index_refs_bytes_modes_mtimes_unchanged": true,
+    "preexisting_git_status_set_unchanged": true,
+    "no_surviving_capture_lock_or_stage": true,
+    "read_only_checks_preserved_worktree": true
+  },
+  "exception": null,
+  "result": ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s75-t029-worker/result.json"
+}
+Verification-Return: 1
+Task: T029
+Captures: CAP-867-DSKmw1
+Summary: capture=CAP-867-DSKmw1 command=/bin/bash -o pipefail -c bash tests/test-gate-contracts.sh  key=  -- 18/18 passed exit=0 output=e2bd5dfbf6ddcf901317732547649b3e2028c869384acc1e688d65a77c738b33 input=03a560ada7b3f691a20cbc50a6fcbdf4d0ac9773f3f1fe3c309e9b3d70c82c6a log=/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/captures/CAP-867-DSKmw1/output.log [complete metadata: capture directory]
+Failure modes:
+FM-001, tests/test-gate-contracts.sh::test_instruction_contracts, CAP-867-DSKmw1
+INV-005, tests/test-gate-contracts.sh::test_instruction_contracts, CAP-867-DSKmw1

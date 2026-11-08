@@ -1,0 +1,22 @@
+{
+  "exact_three_file_diff_matches": true,
+  "sources": {
+    "scripts/sdd-analyze.sh": {
+      "before_sha256": "c43de9e92df5657a3a94091a73bccb9abe37f9e1c3c3f6ccf6cb1cfa64f3a3f2",
+      "current_sha256": "f2809d24b5bec01fa4ca8ab4d689c5e9585472989e66798aabc9597d80f176fd"
+    },
+    "tests/test-sdd-analyze.sh": {
+      "before_sha256": "e5b5cde870b2da8c086a41f3a3824b401262343225108c7f3bab716324150c9a",
+      "current_sha256": "9dd851fd6ed32797384ada5c4d263dcdbb6947ce95cdeae4d5ea0ac1bb60a393"
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md": {
+      "before_sha256": "3d0b827856d89b6b1ae08b096dd5277920375f26f5fc1c97cc3e45f1f569b3d7",
+      "current_sha256": "5595ae67feee154cdb7af6a6ce12ad24ac1bbd15a8cf4e86e820151dda9d9eeb"
+    }
+  },
+  "task_unchecked": true,
+  "live_task_evidence_absent": true,
+  "OP26_report_sha256": "06f47f7fdb87803cd7dcd4e4e027549f331dc3e7e019b601998dd999bd4068cd",
+  "formal_verdict": "CHALLENGED",
+  "no_next_round_authorized": true
+}

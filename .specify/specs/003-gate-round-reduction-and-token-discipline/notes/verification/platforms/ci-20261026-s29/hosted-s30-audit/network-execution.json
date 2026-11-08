@@ -1,0 +1,52 @@
+[
+  {
+    "name": "actions-runs-discovery",
+    "argv": [
+      "gh",
+      "api",
+      "repos/Rehan712/sdd-kit/actions/runs?head_sha=616dd2d1bb0f3eb16045821b0b30b9c9b40f2395&event=pull_request&per_page=50"
+    ],
+    "started": "2026-10-26T22:14:11.825236+00:00",
+    "ended": "2026-10-26T22:14:12.386201+00:00",
+    "seconds": 0.561,
+    "exit": 0
+  },
+  {
+    "name": "collector",
+    "argv": [
+      "bash",
+      "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261026-s29/collect.sh",
+      "40404936939",
+      "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261026-s29/hosted-s30-audit/hosted",
+      "616dd2d1bb0f3eb16045821b0b30b9c9b40f2395"
+    ],
+    "started": "2026-10-26T22:14:12.387899+00:00",
+    "ended": "2026-10-26T22:14:18.590536+00:00",
+    "seconds": 6.203,
+    "exit": 0
+  },
+  {
+    "name": "tested-merge-commit",
+    "argv": [
+      "gh",
+      "api",
+      "repos/Rehan712/sdd-kit/git/commits/73db38a9551bcbf7fec9df0b5d2d07ddbcf36184"
+    ],
+    "started": "2026-10-26T22:14:18.592431+00:00",
+    "ended": "2026-10-26T22:14:18.983846+00:00",
+    "seconds": 0.391,
+    "exit": 0
+  },
+  {
+    "name": "current-pr21",
+    "argv": [
+      "gh",
+      "api",
+      "repos/Rehan712/sdd-kit/pulls/21"
+    ],
+    "started": "2026-10-26T22:14:18.984228+00:00",
+    "ended": "2026-10-26T22:14:19.452222+00:00",
+    "seconds": 0.468,
+    "exit": 0
+  }
+]

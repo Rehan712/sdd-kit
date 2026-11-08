@@ -1,0 +1,35 @@
+{
+  "argv": [
+    "/bin/bash",
+    "--norc",
+    "-c",
+    ". \"$1\"; vf_snapshot \"$2\" \"$3\" \"$3\" \"$4\"",
+    "quality-r7",
+    "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/verification-lib.sh",
+    "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline",
+    "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+    "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s72-quality-r7-probes/identity/inputs.nul"
+  ],
+  "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+  "nonsecretEnv": {
+    "GIT_OPTIONAL_LOCKS": "0",
+    "LC_ALL": "C",
+    "NO_COLOR": "1",
+    "TMPDIR": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s72-quality-r7-probes/temporary",
+    "PATH": "/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/opt/pkg/env/active/bin:/opt/pmk/env/global/bin:/Library/Apple/usr/bin:/Users/babar/.nvm/versions/node/v24.19.0/lib/node_modules/@openai/codex/node_modules/@openai/codex-darwin-arm64/vendor/aarch64-apple-darwin/codex-path:/Users/babar/.codex/tmp/arg0-macos/codex-arg0fXdb0H:/Users/babar/.nvm/versions/node/v24.19.0/bin:/Users/babar/.local/bin:/Users/babar/.bun/bin:/Users/babar/.antigravity/antigravity/bin:/opt/homebrew/bin:/Users/babar/.cargo/bin:/Users/babar/Library/Android/sdk/emulator:/Users/babar/Library/Android/sdk/platform-tools"
+  },
+  "envUnset": [
+    "BASH_ENV",
+    "ENV",
+    "CDPATH"
+  ],
+  "started": "2026-10-30T14:52:04.211214+00:00",
+  "elapsedSeconds": 52.616668666,
+  "exit": 0,
+  "stdoutSHA256": "9068de67d0d349585e15fffbb27310741c47fffaf1200ecbd90598f7dd2663e4",
+  "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "source": "62cbf525b0caac98f27729393f6e7203ec6ac1cd34c164b3734b7c10a98be23f",
+  "sourceMatchesExpected": true,
+  "byteIdenticalToAccepted": true,
+  "passed": true
+}

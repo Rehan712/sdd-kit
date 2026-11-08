@@ -1,0 +1,30 @@
+{
+  "taskId": "node:delegated-task:command%3Amcp%3Ae6315556-7380-4d31-903f-24b14ad55a20%3Adelegate-task%3Asdd003-s28-o034-executable-path-fix-high-r3",
+  "childThreadId": "thread:delegated-task:command%3Amcp%3Ae6315556-7380-4d31-903f-24b14ad55a20%3Adelegate-task%3Asdd003-s28-o034-executable-path-fix-high-r3",
+  "childRunId": "run:thread:thread%3Adelegated-task%3Acommand%253Amcp%253Ae6315556-7380-4d31-903f-24b14ad55a20%253Adelegate-task%253Asdd003-s28-o034-executable-path-fix-high-r3:ordinal:1",
+  "childNodeId": "node:delegated-task:command%3Amcp%3Ae6315556-7380-4d31-903f-24b14ad55a20%3Adelegate-task%3Asdd003-s28-o034-executable-path-fix-high-r3",
+  "status": "completed",
+  "workState": "result_available",
+  "hasPendingChildRuns": false,
+  "latestTerminalRunId": "run:thread:thread%3Adelegated-task%3Acommand%253Amcp%253Ae6315556-7380-4d31-903f-24b14ad55a20%253Adelegate-task%253Asdd003-s28-o034-executable-path-fix-high-r3:ordinal:1",
+  "latestTerminalStatus": "completed",
+  "latestTerminalSummary": null,
+  "latestTerminalResultContextTransferId": null,
+  "providerInstanceId": "codex_codex_gym",
+  "model": "gpt-6.1-sol",
+  "options": [
+    {
+      "id": "reasoningEffort",
+      "value": "high"
+    },
+    {
+      "id": "serviceTier",
+      "value": "default"
+    }
+  ],
+  "summary": "Closed the three-file O-034 correction. T031a5o1 is reopened with current Evidence cleared.\n\n- RED: 18/19; 39 reproduced omissions, 78 failed assertions.\n- GREEN: 19/19; 108 weak cases and 56 clean controls.\n- Bash 3.2 syntax, scoped ShellCheck, tasks analyzer and whitespace checks passed.\n- HEAD/index/STATUS unchanged; concurrent parent edits preserved.\n\nFinal SHA-256, with modes 755/644/600 respectively:\n\n- Analyzer: `0c26c101666aa8559814f40c7376da6b07290d8e2830b230a54b8eb01b4afdf7`\n- Tests: `513308051dc409e42fe72c3c20d5a0fe4a1e7607e5373dcff404fd6993cf4516`\n- Tasks: `f2fad981280f9fd33d0b95edfbdfd9bf1f439f97867ebd5dee0c5003d959a37b`\n\n[Handoff, backups, patch and receipts](/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s28-o034-fix/review-r2-correction/HANDOFF.md).\n\nNo capture, acceptance, gates, CI or Git mutations performed; fresh capture/acceptance and independent MAX quality r3 remain with the parent.  \nComplex quoting/wrappers retain the documented heuristic limit; O-032 remains untouched.",
+  "resultContextTransferId": "context-transfer:type:subagent_result:source-thread:thread%3Adelegated-task%3Acommand%253Amcp%253Ae6315556-7380-4d31-903f-24b14ad55a20%253Adelegate-task%253Asdd003-s28-o034-executable-path-fix-high-r3:target-thread:2ce93492-409f-4930-a9e5-173544a4c8c6:77effdb8-326a-4222-bb12-554ad4d71cd4",
+  "hasPendingQuestion": false,
+  "pendingApproval": null,
+  "waitTimedOut": false
+}

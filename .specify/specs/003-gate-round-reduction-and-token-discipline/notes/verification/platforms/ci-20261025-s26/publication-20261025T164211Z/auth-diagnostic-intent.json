@@ -1,0 +1,36 @@
+{
+  "commands": [
+    [
+      "active-gh-user",
+      [
+        "gh",
+        "api",
+        "user",
+        "--jq",
+        ".login"
+      ]
+    ],
+    [
+      "repository-permissions",
+      [
+        "gh",
+        "api",
+        "repos/Rehan712/sdd-kit",
+        "--jq",
+        "{full_name: .full_name, permissions: .permissions}"
+      ]
+    ],
+    [
+      "remote-after-failed-push",
+      [
+        "git",
+        "ls-remote",
+        "--heads",
+        "origin",
+        "refs/heads/main",
+        "refs/heads/ci-snapshot/spec-003-20261025-s26"
+      ]
+    ]
+  ],
+  "scope": "read-only; no secrets or credential changes"
+}

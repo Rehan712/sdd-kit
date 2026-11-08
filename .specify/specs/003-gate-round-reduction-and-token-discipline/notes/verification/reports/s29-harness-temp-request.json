@@ -1,0 +1,16 @@
+{
+  "title": "Audit kit-owned test temporary directories \u00b7 Luna",
+  "clientRequestId": "sdd003-s29-harness-temp-audit-luna-r2",
+  "role": "research",
+  "isolation": "shared",
+  "mode": "async",
+  "target": {
+    "providerInstanceId": "codex_codex_gym",
+    "model": "gpt-6-luna",
+    "options": {
+      "reasoningEffort": "medium",
+      "serviceTier": "default"
+    }
+  },
+  "task": "Narrow read-only resource scout, no edits/deletions. Actual cwd /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline for every command; shared dirty worktree, not alone. HIGH CI snapshot preparation active but no applicationtests/captures/floor. Parent only excludedreports. OWN output optional new .specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s29-harness-temp-audit/ receipts. Absence of newdir/dirtyworktree expected, not blocker.\n\nEarlier scoped audit of explicit agent scratch found only12.7MiBreclaimable. Disk then1.93GiB; after genuine CAP794 bash tests/test-gate-contracts.sh 18/18 run20:57:39-21:07:49Z, disknow1.22GiB. Find whether THIS KIT'S testharness leaves retired external temporary fixtures that account for growth. No broad filesystem/home/otherproject search and NO deletinganything.\n\nUse rg to read mktemp/trap/tempdir/cleanup patterns in tests/helpers.sh, tests/run.sh, tests/test-lib.sh and tests/test-gate-contracts.sh (and only directly referenced temp helper if needed). Discover exact helper-produced directory names/root from actualcode, then bounded du -sk on matching existing directories beneath actual inherited TMPDIR and /private/tmp ONLY. If pattern is generic tmp.* with no provenance, do not scan all; report UNKNOWN. Never alter TMPDIR/HOME variables. Inspect literal structural markers/code hashes/copiedscripts to attribute directories to this repo and retired completed checks. Do not traverse unknown user dirs/symlinks. Get allocatedsizes/mtime/owners/resolvedpaths and any live processes/openfiles under specific candidates. Exclude current CIbuilder/collector scratch, sourceworktree, .git, sourcecaptures, historical verificationreports/probes/snapshots. Don't echo env/secrets or full processcommandlines.\n\nReturn exact candidates with safely reclaimable vs preserve/UNKNOWN, durability (final saved CAP794 log+seals complete vs fixturesreproducible, no sole rawadversarialprobe evidence), sum/no doublecounts, baselinefreedisk/power and least nextaction. Safer to return no safefiles than infer ownership from vague names. No cleanup, no scripts/runtime/sourcechanges, no tests/floor/gate/CI/PR/remoteactions. No new full-disk inventory or dependency. This is diagnostic only; parent will decide cleanup after reviewing explicit provenance."
+}

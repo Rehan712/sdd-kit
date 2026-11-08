@@ -1,0 +1,72 @@
+{
+  "argv": [
+    "/bin/bash",
+    "--norc",
+    "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+    "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s72-quality-r7-probes/fixtures/case-051/.specify/specs/001-test-feature"
+  ],
+  "command": "node scripts/assert-options.js 2>tests/out.log tsc --pretty false --noEmit",
+  "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+  "elapsedSeconds": 0.6869666670000001,
+  "envUnset": [
+    "BASH_ENV",
+    "ENV",
+    "CDPATH"
+  ],
+  "exit": 0,
+  "expectedExit": 0,
+  "expectedWarningTaskIds": [],
+  "expectedWeak": false,
+  "group": "executable-and-operand-boundaries",
+  "id": "case-051",
+  "inputFiles": {
+    ".specify/specs/001-test-feature/STATUS.md": {
+      "mode": 420,
+      "mtimeNs": 1793371729518916956,
+      "sha256": "9a62695ce7fc89af131ba3e8aba362c2e15905250c5b9cc6d8fa0051ca35b1c1"
+    },
+    ".specify/specs/001-test-feature/plan.md": {
+      "mode": 420,
+      "mtimeNs": 1793371729518684745,
+      "sha256": "731472c866f01beedf81f7167decc143cab381ea0805fce7bf6f0c4f14806413"
+    },
+    ".specify/specs/001-test-feature/spec.md": {
+      "mode": 420,
+      "mtimeNs": 1793371729518366490,
+      "sha256": "b78d5df05e8387cf5b707c550019858309c2ff7a4149eba7552001cecdf47b60"
+    },
+    ".specify/specs/001-test-feature/tasks.md": {
+      "mode": 420,
+      "mtimeNs": 1793371729519316462,
+      "sha256": "0e9882780f56cd15274324aec5675b597231234210dc540edfa33cf45b34fbae"
+    },
+    ".specify/stack.yml": {
+      "mode": 420,
+      "mtimeNs": 1793371729519599175,
+      "sha256": "4eacfda57cad8f938d41918232338c35d0caa5cd58d244d237bacedc8aacd68f"
+    },
+    "agents/opponent.agent.md": {
+      "mode": 420,
+      "mtimeNs": 1793371729519953888,
+      "sha256": "10a83f3c449337b3081621bfe47dc9d60777a5e2b14c3c0af83c1e1e16d14602"
+    },
+    "agents/reality-check.agent.md": {
+      "mode": 420,
+      "mtimeNs": 1793371729520378645,
+      "sha256": "10a83f3c449337b3081621bfe47dc9d60777a5e2b14c3c0af83c1e1e16d14602"
+    }
+  },
+  "nonsecretEnv": {
+    "GIT_OPTIONAL_LOCKS": "0",
+    "LANG": "C.UTF-8",
+    "LC_ALL": "C",
+    "NO_COLOR": "1",
+    "PATH": "/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/opt/pkg/env/active/bin:/opt/pmk/env/global/bin:/Library/Apple/usr/bin:/Users/babar/.nvm/versions/node/v24.19.0/lib/node_modules/@openai/codex/node_modules/@openai/codex-darwin-arm64/vendor/aarch64-apple-darwin/codex-path:/Users/babar/.codex/tmp/arg0-macos/codex-arg0fXdb0H:/Users/babar/.nvm/versions/node/v24.19.0/bin:/Users/babar/.local/bin:/Users/babar/.bun/bin:/Users/babar/.antigravity/antigravity/bin:/opt/homebrew/bin:/Users/babar/.cargo/bin:/Users/babar/Library/Android/sdk/emulator:/Users/babar/Library/Android/sdk/platform-tools",
+    "TMPDIR": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s72-quality-r7-probes/temporary"
+  },
+  "passed": true,
+  "started": "2026-10-30T14:48:49.520465+00:00",
+  "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdoutSHA256": "014b8e7bc0b58eb3ad08395991e349be93180ff014df79c751cabf5ad67ed6da",
+  "warningTaskIds": []
+}

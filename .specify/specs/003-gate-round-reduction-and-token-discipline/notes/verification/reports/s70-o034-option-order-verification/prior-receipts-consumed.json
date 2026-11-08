@@ -1,0 +1,66 @@
+{
+  "receipts": {
+    "ownership.json": {
+      "sha256": "2b64cfe5f7fd9861c3a0d74e7f31644947591d1040e165ba429c0c4639db1e0b",
+      "bytes": 1469
+    },
+    "application.json": {
+      "sha256": "1ab2f379ae392b27a3c506510ce2fb24d9041c7fbc24401f2445593ea2fdee27",
+      "bytes": 3683
+    },
+    "application-started.json": {
+      "sha256": "6e5a0d53f1abeab6221a018e1d780d597332a207a26530bfd3df230a434b7678",
+      "bytes": 1130
+    },
+    "red/result.json": {
+      "sha256": "3eb3f6d69ef262742bcf661a92ee2bc6e2f879a628161c7ed1237e09a4e88037",
+      "bytes": 76496
+    },
+    "green/result.json": {
+      "sha256": "4e1a19f6af61a8c74f060aa74e12bdd186a327d8e5889898440e71a2917adaa9",
+      "bytes": 76682
+    },
+    "static-checks.json": {
+      "sha256": "2b6eca02bb8bcba01350196a5cd765e15d4ce89b02b8b111eb45e6cdf032e97b",
+      "bytes": 1903
+    },
+    "heading-lookup-failure.json": {
+      "sha256": "408146ba602a1f07921d2c31620993f9774d4ad18b17e30474a9940b94693b52",
+      "bytes": 519
+    },
+    "builder-runtime-after-application.json": {
+      "sha256": "8dfc28cb8faebbbc01f3a2ef481f056d7920c51741da4fddbb8d977fbad6f934",
+      "bytes": 826
+    },
+    "repair.diff": {
+      "sha256": "a7293dd55ec9e19c6c6e1d00b23858231e4562a85cbc32dc61853a0de8273207",
+      "bytes": 13332
+    },
+    "s68-op27-sealing/final-observation.json": {
+      "sha256": "8fd08d6413c595fcc103392b8948b64e5b4766ed8a58e0ca6977d8fa8957bb60",
+      "bytes": 15512
+    },
+    "s68-op27-sealing/return-provenance.json": {
+      "sha256": "9cecb0134036ca8fb84dbc40380e5e011c9538254ba1676d0e62961bfa22f1f2",
+      "bytes": 947
+    },
+    "opponent-round27.md": {
+      "sha256": "9425b8f8f0db0c24895a9bdbf9479abe49e9216489508fc7be0e3bd111109479",
+      "bytes": 13284
+    }
+  },
+  "consumedExistingFocusedCases": 61,
+  "focusedCasesRepeated": false,
+  "parentGreenAllPass": true,
+  "parentRedMissingWarnings": 30,
+  "parentRedCustomFalseWarnings": 1,
+  "priorTestsByteRetentionProofConsumed": true,
+  "staticChecksConsumed": 3,
+  "staticChecksRepeated": false,
+  "headingLookupFailure": "Actual parent helper failed before any source write; metadata heading corrected, preserved original trace. Not a product verification failure.",
+  "qualityR6": "historical for new code",
+  "qualityReviewPerformed": false,
+  "OP28Authorized": false,
+  "historicalStrictPreservation": false,
+  "modernFullSuiteExecuted": false
+}

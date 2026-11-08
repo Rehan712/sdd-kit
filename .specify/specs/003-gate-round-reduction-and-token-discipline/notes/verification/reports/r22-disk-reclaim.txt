@@ -1,0 +1,20 @@
+Disk reclaim, 2026-10-16 (session 24), before the round-22 floor, at the user's instruction ("Delete some target and node_modules from other projects").
+before: /dev/disk3s1s1   228Gi    12Gi   1.8Gi    87%    458k   19M    2%   /
+checked idle: no cargo/rustc/node process, no open files (lsof +D), nothing written in the last 60 min
+6.1G	/Users/babar/projects/memvault/target
+5.1G	/Users/babar/projects/sales-platform/target
+removed: /Users/babar/projects/memvault/target (Cargo.toml beside it), /Users/babar/projects/sales-platform/target (Cargo.toml beside it)
+/Users/babar/projects/memvault/target
+/Users/babar/projects/sales-platform/target
+after: /dev/disk3s1s1   228Gi    12Gi    13Gi    48%    458k  133M    0%   /
+
+Disk reclaim 2, 2026-10-17T07:53:16Z (session 24), during the round-22 floor, at the user's instruction ("Kill build + delete target"): the memvault build had already ended (no cargo/rustc/ld process), no open file under its target.
+before: /dev/disk3s1s1   228Gi    12Gi   2.8Gi    81%    458k   30M    2%   /
+ 13G	/Users/babar/projects/memvault/target
+removed: /Users/babar/projects/memvault/target (Cargo.toml beside it); left: 
+after: /dev/disk3s1s1   228Gi    12Gi    15Gi    44%    458k  158M    0%   /
+
+Disk reclaim 3, 2026-10-17T14:40:38Z (session 24), during opponent round 22, at the user's instruction ("Delete memvault/target"): no cargo/rustc process, no open file under its target.
+before: /dev/disk3s1s1   228Gi    12Gi   305Mi    98%    458k  3.1M   13%   /
+removed: /Users/babar/projects/memvault/target (Cargo.toml beside it); left: 
+after: /dev/disk3s1s1   228Gi    12Gi    16Gi    43%    458k  167M    0%   /

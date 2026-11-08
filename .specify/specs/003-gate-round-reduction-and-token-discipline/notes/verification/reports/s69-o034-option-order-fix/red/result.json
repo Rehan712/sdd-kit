@@ -1,0 +1,1969 @@
+{
+  "phase": "red",
+  "cases": 61,
+  "reportedOmissionsRetested": 30,
+  "reorderedControls": 27,
+  "customControls": 4,
+  "allNativeExitsZero": true,
+  "allDesiredBehavior": false,
+  "reportedWarningsMissing": 30,
+  "reorderedControlsAllWarn": true,
+  "customUnexpectedWarnings": 1,
+  "analyzerSHA256": "f2809d24b5bec01fa4ca8ab4d689c5e9585472989e66798aabc9597d80f176fd",
+  "scratch": "/private/tmp/sdd003-s69-red-ulpkxjd7",
+  "taskVerifyDataExecuted": false,
+  "results": [
+    {
+      "command": "./tests/tsc --pretty false --noEmit tests/unit.ts",
+      "group": "reported-omission",
+      "expectedWarning": true,
+      "observedWarning": false,
+      "exit": 0,
+      "asExpected": false,
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd003-s69-red-ulpkxjd7/case-000/.specify/specs/001-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "started": "2026-10-30T14:19:37.945008+00:00",
+      "ended": "2026-10-30T14:19:38.134647+00:00",
+      "envOverrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "LC_ALL": "C",
+        "NO_COLOR": "1",
+        "TMPDIR": "/private/tmp/sdd003-s69-red-ulpkxjd7"
+      },
+      "envUnset": [
+        "BASH_ENV",
+        "ENV",
+        "CDPATH"
+      ],
+      "hashes": {
+        "tasks.md": "c6367ba50f282ab75db7cb9af08e7eb889fe7b0e15b9f17e7c359dea21b72b3f",
+        "stdout.txt": "181116c9580f94342e47231bf8f3e533fe779a6145c50a3554bf621a23b75ba1",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": "./tests/tsc --project tests/tsconfig.json --noEmit",
+      "group": "reported-omission",
+      "expectedWarning": true,
+      "observedWarning": false,
+      "exit": 0,
+      "asExpected": false,
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd003-s69-red-ulpkxjd7/case-001/.specify/specs/001-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "started": "2026-10-30T14:19:38.136864+00:00",
+      "ended": "2026-10-30T14:19:38.323701+00:00",
+      "envOverrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "LC_ALL": "C",
+        "NO_COLOR": "1",
+        "TMPDIR": "/private/tmp/sdd003-s69-red-ulpkxjd7"
+      },
+      "envUnset": [
+        "BASH_ENV",
+        "ENV",
+        "CDPATH"
+      ],
+      "hashes": {
+        "tasks.md": "f733168802d6947e6a71dc3619afc96778e9d10dbe34ea41736aeb528eb79ab6",
+        "stdout.txt": "a427752cce421b20a9b513a89de1dc63aba86a250f5116bd356d531aab648fd1",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": "./tests/tsc&>out.txt --project tests/tsconfig.json --noEmit",
+      "group": "reported-omission",
+      "expectedWarning": true,
+      "observedWarning": false,
+      "exit": 0,
+      "asExpected": false,
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd003-s69-red-ulpkxjd7/case-002/.specify/specs/001-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "started": "2026-10-30T14:19:38.325883+00:00",
+      "ended": "2026-10-30T14:19:38.512171+00:00",
+      "envOverrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "LC_ALL": "C",
+        "NO_COLOR": "1",
+        "TMPDIR": "/private/tmp/sdd003-s69-red-ulpkxjd7"
+      },
+      "envUnset": [
+        "BASH_ENV",
+        "ENV",
+        "CDPATH"
+      ],
+      "hashes": {
+        "tasks.md": "1a4447eb1b50959fcae2de0dca7567b98cec7140f400d478d8771cc83f7ea124",
+        "stdout.txt": "e9b1ffc83333b54cf49cb107a60412e7ee5d4da3e832f5367f2b7d2f54d8e982",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": "./tests/tsc<&0 --project tests/tsconfig.json --noEmit",
+      "group": "reported-omission",
+      "expectedWarning": true,
+      "observedWarning": false,
+      "exit": 0,
+      "asExpected": false,
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd003-s69-red-ulpkxjd7/case-003/.specify/specs/001-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "started": "2026-10-30T14:19:38.514304+00:00",
+      "ended": "2026-10-30T14:19:38.700259+00:00",
+      "envOverrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "LC_ALL": "C",
+        "NO_COLOR": "1",
+        "TMPDIR": "/private/tmp/sdd003-s69-red-ulpkxjd7"
+      },
+      "envUnset": [
+        "BASH_ENV",
+        "ENV",
+        "CDPATH"
+      ],
+      "hashes": {
+        "tasks.md": "9184738b47060672ffa525ee1683586db5ee6ddb9bf83f777b4224703b7e4897",
+        "stdout.txt": "d21e1f3ead8d8b10729ec1d7307ca0b5ca7d4904fabfb18fc1125ea4fedf58ec",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": "./tests/tsc<>input.txt --project tests/tsconfig.json --noEmit",
+      "group": "reported-omission",
+      "expectedWarning": true,
+      "observedWarning": false,
+      "exit": 0,
+      "asExpected": false,
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd003-s69-red-ulpkxjd7/case-004/.specify/specs/001-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "started": "2026-10-30T14:19:38.702415+00:00",
+      "ended": "2026-10-30T14:19:38.888226+00:00",
+      "envOverrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "LC_ALL": "C",
+        "NO_COLOR": "1",
+        "TMPDIR": "/private/tmp/sdd003-s69-red-ulpkxjd7"
+      },
+      "envUnset": [
+        "BASH_ENV",
+        "ENV",
+        "CDPATH"
+      ],
+      "hashes": {
+        "tasks.md": "16d919c1fc547045396fa215cdb56eb523b00b47eaaba9f0c8f7fb6d45ed4021",
+        "stdout.txt": "fdfd3b9063653e58d5f8b8cfd45da9fa4d623258d51cfd05cddd7fe13c001c8c",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": "./tests/tsc<input.txt --project tests/tsconfig.json --noEmit",
+      "group": "reported-omission",
+      "expectedWarning": true,
+      "observedWarning": false,
+      "exit": 0,
+      "asExpected": false,
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd003-s69-red-ulpkxjd7/case-005/.specify/specs/001-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "started": "2026-10-30T14:19:38.890373+00:00",
+      "ended": "2026-10-30T14:19:39.077106+00:00",
+      "envOverrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "LC_ALL": "C",
+        "NO_COLOR": "1",
+        "TMPDIR": "/private/tmp/sdd003-s69-red-ulpkxjd7"
+      },
+      "envUnset": [
+        "BASH_ENV",
+        "ENV",
+        "CDPATH"
+      ],
+      "hashes": {
+        "tasks.md": "78e1d48f732b69b579296861423ff146142995d21a4f9697ba5a02cbca4ec324",
+        "stdout.txt": "677279c23c5c3e812940f536d0e3d34ece2f2f1ffb0a6b3074dd84e33edfb7c1",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": "./tests/tsc>&1 --project tests/tsconfig.json --noEmit",
+      "group": "reported-omission",
+      "expectedWarning": true,
+      "observedWarning": false,
+      "exit": 0,
+      "asExpected": false,
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd003-s69-red-ulpkxjd7/case-006/.specify/specs/001-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "started": "2026-10-30T14:19:39.079124+00:00",
+      "ended": "2026-10-30T14:19:39.293210+00:00",
+      "envOverrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "LC_ALL": "C",
+        "NO_COLOR": "1",
+        "TMPDIR": "/private/tmp/sdd003-s69-red-ulpkxjd7"
+      },
+      "envUnset": [
+        "BASH_ENV",
+        "ENV",
+        "CDPATH"
+      ],
+      "hashes": {
+        "tasks.md": "6a64eb191bab8cf7bebc1030f6ba4cd37f34d13f6500ff3ab6bca3419f28d4a6",
+        "stdout.txt": "28ff040b7df394567eee759531a00ce04febc7dc1fcbed0a5787954ff3c84135",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": "./tests/tsc>>out.txt --project tests/tsconfig.json --noEmit",
+      "group": "reported-omission",
+      "expectedWarning": true,
+      "observedWarning": false,
+      "exit": 0,
+      "asExpected": false,
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd003-s69-red-ulpkxjd7/case-007/.specify/specs/001-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "started": "2026-10-30T14:19:39.295389+00:00",
+      "ended": "2026-10-30T14:19:39.481620+00:00",
+      "envOverrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "LC_ALL": "C",
+        "NO_COLOR": "1",
+        "TMPDIR": "/private/tmp/sdd003-s69-red-ulpkxjd7"
+      },
+      "envUnset": [
+        "BASH_ENV",
+        "ENV",
+        "CDPATH"
+      ],
+      "hashes": {
+        "tasks.md": "5d5a453ad3b52590abb8a3b7f55275ff09a0255e787acaf7d441ea5172a5df25",
+        "stdout.txt": "669d98a148e5937c0a5d0f9111775abff73aae3b97130d0e2a3ab61db9b6e97d",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": "./tests/tsc>out.txt --project tests/tsconfig.json --noEmit",
+      "group": "reported-omission",
+      "expectedWarning": true,
+      "observedWarning": false,
+      "exit": 0,
+      "asExpected": false,
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd003-s69-red-ulpkxjd7/case-008/.specify/specs/001-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "started": "2026-10-30T14:19:39.483789+00:00",
+      "ended": "2026-10-30T14:19:39.668386+00:00",
+      "envOverrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "LC_ALL": "C",
+        "NO_COLOR": "1",
+        "TMPDIR": "/private/tmp/sdd003-s69-red-ulpkxjd7"
+      },
+      "envUnset": [
+        "BASH_ENV",
+        "ENV",
+        "CDPATH"
+      ],
+      "hashes": {
+        "tasks.md": "2df46e2ed2e490a0ea854c26bb08bcc182ba6c226269d21843cc40092aadf216",
+        "stdout.txt": "9ab1dfc2116ba20c857a983fa2639d70f12766a21ed02bdaae6868a03ee204f0",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": "./tests/tsc>|out.txt --project tests/tsconfig.json --noEmit",
+      "group": "reported-omission",
+      "expectedWarning": true,
+      "observedWarning": false,
+      "exit": 0,
+      "asExpected": false,
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd003-s69-red-ulpkxjd7/case-009/.specify/specs/001-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "started": "2026-10-30T14:19:39.670598+00:00",
+      "ended": "2026-10-30T14:19:39.856343+00:00",
+      "envOverrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "LC_ALL": "C",
+        "NO_COLOR": "1",
+        "TMPDIR": "/private/tmp/sdd003-s69-red-ulpkxjd7"
+      },
+      "envUnset": [
+        "BASH_ENV",
+        "ENV",
+        "CDPATH"
+      ],
+      "hashes": {
+        "tasks.md": "eb22d63f2148656cd9f4bfcf8a9163f617fbf22726276fed271aafcee1615f01",
+        "stdout.txt": "6e4ef5b4a1b500000caa966e8e0df5665f660cdce0a75b4c13214d9ae0b9b893",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": "tools/tsc --pretty false --noEmit tests/unit.ts",
+      "group": "reported-omission",
+      "expectedWarning": true,
+      "observedWarning": false,
+      "exit": 0,
+      "asExpected": false,
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd003-s69-red-ulpkxjd7/case-010/.specify/specs/001-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "started": "2026-10-30T14:19:39.858411+00:00",
+      "ended": "2026-10-30T14:19:40.044062+00:00",
+      "envOverrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "LC_ALL": "C",
+        "NO_COLOR": "1",
+        "TMPDIR": "/private/tmp/sdd003-s69-red-ulpkxjd7"
+      },
+      "envUnset": [
+        "BASH_ENV",
+        "ENV",
+        "CDPATH"
+      ],
+      "hashes": {
+        "tasks.md": "861a53c179624b1672f6186fd0edbf14d96950cb117f2ccae62fa063d56e7899",
+        "stdout.txt": "d4647029797ddcc15d8455bc7170d4647dc590c8d6833918102c53e7f8486b45",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": "tools/tsc --project tests/tsconfig.json --noEmit",
+      "group": "reported-omission",
+      "expectedWarning": true,
+      "observedWarning": false,
+      "exit": 0,
+      "asExpected": false,
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd003-s69-red-ulpkxjd7/case-011/.specify/specs/001-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "started": "2026-10-30T14:19:40.046178+00:00",
+      "ended": "2026-10-30T14:19:40.231789+00:00",
+      "envOverrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "LC_ALL": "C",
+        "NO_COLOR": "1",
+        "TMPDIR": "/private/tmp/sdd003-s69-red-ulpkxjd7"
+      },
+      "envUnset": [
+        "BASH_ENV",
+        "ENV",
+        "CDPATH"
+      ],
+      "hashes": {
+        "tasks.md": "f3767c8976a6fb268055c478703f67f54dee3822939dc3c46979b4111b8fb2e8",
+        "stdout.txt": "54487f7e738171c975582a91c6f6bb4a7413ebb38c01d54ffa88201b0463579c",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": "tools/tsc&>out.txt --project tests/tsconfig.json --noEmit",
+      "group": "reported-omission",
+      "expectedWarning": true,
+      "observedWarning": false,
+      "exit": 0,
+      "asExpected": false,
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd003-s69-red-ulpkxjd7/case-012/.specify/specs/001-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "started": "2026-10-30T14:19:40.233918+00:00",
+      "ended": "2026-10-30T14:19:40.421631+00:00",
+      "envOverrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "LC_ALL": "C",
+        "NO_COLOR": "1",
+        "TMPDIR": "/private/tmp/sdd003-s69-red-ulpkxjd7"
+      },
+      "envUnset": [
+        "BASH_ENV",
+        "ENV",
+        "CDPATH"
+      ],
+      "hashes": {
+        "tasks.md": "2724f36014622456f4fda1baab27ec16609418da885764b6c84a1f3168c29c68",
+        "stdout.txt": "efd5df4b12f1150bc5b06d87ab8d6490a03b58aedb05fc50baa40b6c0eda304f",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": "tools/tsc<&0 --project tests/tsconfig.json --noEmit",
+      "group": "reported-omission",
+      "expectedWarning": true,
+      "observedWarning": false,
+      "exit": 0,
+      "asExpected": false,
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd003-s69-red-ulpkxjd7/case-013/.specify/specs/001-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "started": "2026-10-30T14:19:40.423665+00:00",
+      "ended": "2026-10-30T14:19:40.609603+00:00",
+      "envOverrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "LC_ALL": "C",
+        "NO_COLOR": "1",
+        "TMPDIR": "/private/tmp/sdd003-s69-red-ulpkxjd7"
+      },
+      "envUnset": [
+        "BASH_ENV",
+        "ENV",
+        "CDPATH"
+      ],
+      "hashes": {
+        "tasks.md": "a8a37d9886c22b2c76c1c22892d57f18ecbaebc277072c570e21c2ca4a20be82",
+        "stdout.txt": "e6b3a888fafc0e5b1c59a4e1f81ab77267dcb86740fc44472b1ee85c94c0a29b",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": "tools/tsc<>input.txt --project tests/tsconfig.json --noEmit",
+      "group": "reported-omission",
+      "expectedWarning": true,
+      "observedWarning": false,
+      "exit": 0,
+      "asExpected": false,
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd003-s69-red-ulpkxjd7/case-014/.specify/specs/001-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "started": "2026-10-30T14:19:40.611703+00:00",
+      "ended": "2026-10-30T14:19:40.797821+00:00",
+      "envOverrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "LC_ALL": "C",
+        "NO_COLOR": "1",
+        "TMPDIR": "/private/tmp/sdd003-s69-red-ulpkxjd7"
+      },
+      "envUnset": [
+        "BASH_ENV",
+        "ENV",
+        "CDPATH"
+      ],
+      "hashes": {
+        "tasks.md": "8824cf25e988a5b8de54443d1645619ac33fdc39127aeb614c30d67da28d83f1",
+        "stdout.txt": "bcce20e16002e6d8df6bb750f9d6dd9b04b0d21a12186f22b055eecf318d103a",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": "tools/tsc<input.txt --project tests/tsconfig.json --noEmit",
+      "group": "reported-omission",
+      "expectedWarning": true,
+      "observedWarning": false,
+      "exit": 0,
+      "asExpected": false,
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd003-s69-red-ulpkxjd7/case-015/.specify/specs/001-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "started": "2026-10-30T14:19:40.799918+00:00",
+      "ended": "2026-10-30T14:19:40.985408+00:00",
+      "envOverrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "LC_ALL": "C",
+        "NO_COLOR": "1",
+        "TMPDIR": "/private/tmp/sdd003-s69-red-ulpkxjd7"
+      },
+      "envUnset": [
+        "BASH_ENV",
+        "ENV",
+        "CDPATH"
+      ],
+      "hashes": {
+        "tasks.md": "7a75d0bf7413c0ac195aff1c56cc17534e97e63d6cefc864631a9aa85dd6f57f",
+        "stdout.txt": "4f8a3cd0e697ff07718b598c888a1109af204f8b1755e87ba4167a12d8d00a32",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": "tools/tsc>&1 --project tests/tsconfig.json --noEmit",
+      "group": "reported-omission",
+      "expectedWarning": true,
+      "observedWarning": false,
+      "exit": 0,
+      "asExpected": false,
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd003-s69-red-ulpkxjd7/case-016/.specify/specs/001-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "started": "2026-10-30T14:19:40.987539+00:00",
+      "ended": "2026-10-30T14:19:41.174601+00:00",
+      "envOverrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "LC_ALL": "C",
+        "NO_COLOR": "1",
+        "TMPDIR": "/private/tmp/sdd003-s69-red-ulpkxjd7"
+      },
+      "envUnset": [
+        "BASH_ENV",
+        "ENV",
+        "CDPATH"
+      ],
+      "hashes": {
+        "tasks.md": "596f1dd457309551ed19b87d0aeb2a5ba4aa7e68c1659e8f754a44e7d7e06336",
+        "stdout.txt": "aa96366736f0418d5a2460edfc2d556c97ba99fdd638ef8d09cbb5dc99dfde5d",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": "tools/tsc>>out.txt --project tests/tsconfig.json --noEmit",
+      "group": "reported-omission",
+      "expectedWarning": true,
+      "observedWarning": false,
+      "exit": 0,
+      "asExpected": false,
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd003-s69-red-ulpkxjd7/case-017/.specify/specs/001-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "started": "2026-10-30T14:19:41.176728+00:00",
+      "ended": "2026-10-30T14:19:41.362662+00:00",
+      "envOverrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "LC_ALL": "C",
+        "NO_COLOR": "1",
+        "TMPDIR": "/private/tmp/sdd003-s69-red-ulpkxjd7"
+      },
+      "envUnset": [
+        "BASH_ENV",
+        "ENV",
+        "CDPATH"
+      ],
+      "hashes": {
+        "tasks.md": "b22e5350310cd70f7423bd4341a5f98d82e6c2e651ba57b09c037fc834a386fc",
+        "stdout.txt": "f944d790710b8cd2881f6ea2eb321bf97c889facaa09dc547d9bed21a5e44c53",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": "tools/tsc>out.txt --project tests/tsconfig.json --noEmit",
+      "group": "reported-omission",
+      "expectedWarning": true,
+      "observedWarning": false,
+      "exit": 0,
+      "asExpected": false,
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd003-s69-red-ulpkxjd7/case-018/.specify/specs/001-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "started": "2026-10-30T14:19:41.364771+00:00",
+      "ended": "2026-10-30T14:19:41.551531+00:00",
+      "envOverrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "LC_ALL": "C",
+        "NO_COLOR": "1",
+        "TMPDIR": "/private/tmp/sdd003-s69-red-ulpkxjd7"
+      },
+      "envUnset": [
+        "BASH_ENV",
+        "ENV",
+        "CDPATH"
+      ],
+      "hashes": {
+        "tasks.md": "67270349d7635a789ddeec2dc97a672582516178bc4cde218d94131c494aaec6",
+        "stdout.txt": "6fc83586e6268b3b3ae03c53bc2789fd08905c8c3ec579b99b559e1c979abe90",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": "tools/tsc>|out.txt --project tests/tsconfig.json --noEmit",
+      "group": "reported-omission",
+      "expectedWarning": true,
+      "observedWarning": false,
+      "exit": 0,
+      "asExpected": false,
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd003-s69-red-ulpkxjd7/case-019/.specify/specs/001-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "started": "2026-10-30T14:19:41.553632+00:00",
+      "ended": "2026-10-30T14:19:41.739625+00:00",
+      "envOverrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "LC_ALL": "C",
+        "NO_COLOR": "1",
+        "TMPDIR": "/private/tmp/sdd003-s69-red-ulpkxjd7"
+      },
+      "envUnset": [
+        "BASH_ENV",
+        "ENV",
+        "CDPATH"
+      ],
+      "hashes": {
+        "tasks.md": "f4d9f3c0b21c5268d3e8fd48affd60247d0e90d9532f5dcfcc0d3105f0bf2435",
+        "stdout.txt": "77ead85ba0ed91dd7a2dffc640fc92e843397f53b27c11fb668080864cf8e24f",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": "tsc --pretty false --noEmit tests/unit.ts",
+      "group": "reported-omission",
+      "expectedWarning": true,
+      "observedWarning": false,
+      "exit": 0,
+      "asExpected": false,
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd003-s69-red-ulpkxjd7/case-020/.specify/specs/001-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "started": "2026-10-30T14:19:41.741776+00:00",
+      "ended": "2026-10-30T14:19:41.928080+00:00",
+      "envOverrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "LC_ALL": "C",
+        "NO_COLOR": "1",
+        "TMPDIR": "/private/tmp/sdd003-s69-red-ulpkxjd7"
+      },
+      "envUnset": [
+        "BASH_ENV",
+        "ENV",
+        "CDPATH"
+      ],
+      "hashes": {
+        "tasks.md": "4794ebfa8d7ce701ad633e562ae4344f02ea4cb850c12257d192c8be2a83282b",
+        "stdout.txt": "3042b7235fdaab6bd0c8c628795a357a71e0c73c9fa0efb344e330dca0de5619",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": "tsc --project tests/tsconfig.json --noEmit",
+      "group": "reported-omission",
+      "expectedWarning": true,
+      "observedWarning": false,
+      "exit": 0,
+      "asExpected": false,
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd003-s69-red-ulpkxjd7/case-021/.specify/specs/001-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "started": "2026-10-30T14:19:41.930145+00:00",
+      "ended": "2026-10-30T14:19:42.124442+00:00",
+      "envOverrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "LC_ALL": "C",
+        "NO_COLOR": "1",
+        "TMPDIR": "/private/tmp/sdd003-s69-red-ulpkxjd7"
+      },
+      "envUnset": [
+        "BASH_ENV",
+        "ENV",
+        "CDPATH"
+      ],
+      "hashes": {
+        "tasks.md": "83961967250902ef6445de44ccd4340bda1546d7fcc0c9944c08cccc28783954",
+        "stdout.txt": "435f8636a7f4782e0addf038f055c21b3acf638484fe2d2667eec82ee382b5fb",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": "tsc&>out.txt --project tests/tsconfig.json --noEmit",
+      "group": "reported-omission",
+      "expectedWarning": true,
+      "observedWarning": false,
+      "exit": 0,
+      "asExpected": false,
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd003-s69-red-ulpkxjd7/case-022/.specify/specs/001-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "started": "2026-10-30T14:19:42.126545+00:00",
+      "ended": "2026-10-30T14:19:42.312835+00:00",
+      "envOverrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "LC_ALL": "C",
+        "NO_COLOR": "1",
+        "TMPDIR": "/private/tmp/sdd003-s69-red-ulpkxjd7"
+      },
+      "envUnset": [
+        "BASH_ENV",
+        "ENV",
+        "CDPATH"
+      ],
+      "hashes": {
+        "tasks.md": "3efe71d6d7e46ba643080ce8dd77a60d0dd234d99fce458f3f910b2aa023c57e",
+        "stdout.txt": "3d17ee650e5b6a34a1811d138214a5ab41d5109fe7ab65bbdb0be8d9a7bcc3b2",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": "tsc<&0 --project tests/tsconfig.json --noEmit",
+      "group": "reported-omission",
+      "expectedWarning": true,
+      "observedWarning": false,
+      "exit": 0,
+      "asExpected": false,
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd003-s69-red-ulpkxjd7/case-023/.specify/specs/001-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "started": "2026-10-30T14:19:42.314994+00:00",
+      "ended": "2026-10-30T14:19:42.501449+00:00",
+      "envOverrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "LC_ALL": "C",
+        "NO_COLOR": "1",
+        "TMPDIR": "/private/tmp/sdd003-s69-red-ulpkxjd7"
+      },
+      "envUnset": [
+        "BASH_ENV",
+        "ENV",
+        "CDPATH"
+      ],
+      "hashes": {
+        "tasks.md": "ea113acb086905061260f9b2ba8f30c18b027aea4a79fc68a324229603df7921",
+        "stdout.txt": "c55cc7d582d3759358ee98a409c0a0c4a071bc3837867321fec5c3dbdb2661e1",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": "tsc<>input.txt --project tests/tsconfig.json --noEmit",
+      "group": "reported-omission",
+      "expectedWarning": true,
+      "observedWarning": false,
+      "exit": 0,
+      "asExpected": false,
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd003-s69-red-ulpkxjd7/case-024/.specify/specs/001-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "started": "2026-10-30T14:19:42.503600+00:00",
+      "ended": "2026-10-30T14:19:42.689829+00:00",
+      "envOverrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "LC_ALL": "C",
+        "NO_COLOR": "1",
+        "TMPDIR": "/private/tmp/sdd003-s69-red-ulpkxjd7"
+      },
+      "envUnset": [
+        "BASH_ENV",
+        "ENV",
+        "CDPATH"
+      ],
+      "hashes": {
+        "tasks.md": "e9694650bbb7ae38a7ea69711f606b3f8dfa9ad30ab51ed99fee1f789723a0d6",
+        "stdout.txt": "18704332a9a5b68b836e6ccb3bd191ab145c1a6cd5e71647163420a54ddb3b10",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": "tsc<input.txt --project tests/tsconfig.json --noEmit",
+      "group": "reported-omission",
+      "expectedWarning": true,
+      "observedWarning": false,
+      "exit": 0,
+      "asExpected": false,
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd003-s69-red-ulpkxjd7/case-025/.specify/specs/001-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "started": "2026-10-30T14:19:42.691791+00:00",
+      "ended": "2026-10-30T14:19:42.877761+00:00",
+      "envOverrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "LC_ALL": "C",
+        "NO_COLOR": "1",
+        "TMPDIR": "/private/tmp/sdd003-s69-red-ulpkxjd7"
+      },
+      "envUnset": [
+        "BASH_ENV",
+        "ENV",
+        "CDPATH"
+      ],
+      "hashes": {
+        "tasks.md": "2f6b6acb5e8eab7298fccef745c2c9590fc30b9d86f7b4a5bc61d3af602f9744",
+        "stdout.txt": "bc1eb36409d012f306e785fe1e52a9df5cd6dae107efcb8e8f034ed4fb1074a1",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": "tsc>&1 --project tests/tsconfig.json --noEmit",
+      "group": "reported-omission",
+      "expectedWarning": true,
+      "observedWarning": false,
+      "exit": 0,
+      "asExpected": false,
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd003-s69-red-ulpkxjd7/case-026/.specify/specs/001-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "started": "2026-10-30T14:19:42.879927+00:00",
+      "ended": "2026-10-30T14:19:43.069634+00:00",
+      "envOverrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "LC_ALL": "C",
+        "NO_COLOR": "1",
+        "TMPDIR": "/private/tmp/sdd003-s69-red-ulpkxjd7"
+      },
+      "envUnset": [
+        "BASH_ENV",
+        "ENV",
+        "CDPATH"
+      ],
+      "hashes": {
+        "tasks.md": "ed9f0500a035c1296689ffe7f8cfde09902f2bc5d937b400233eac6c42785e57",
+        "stdout.txt": "daf29fe87d6593f725fb03ee4dd100cf1fb7497f4b2b2a3805f94eb798e2c137",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": "tsc>>out.txt --project tests/tsconfig.json --noEmit",
+      "group": "reported-omission",
+      "expectedWarning": true,
+      "observedWarning": false,
+      "exit": 0,
+      "asExpected": false,
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd003-s69-red-ulpkxjd7/case-027/.specify/specs/001-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "started": "2026-10-30T14:19:43.071837+00:00",
+      "ended": "2026-10-30T14:19:43.259201+00:00",
+      "envOverrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "LC_ALL": "C",
+        "NO_COLOR": "1",
+        "TMPDIR": "/private/tmp/sdd003-s69-red-ulpkxjd7"
+      },
+      "envUnset": [
+        "BASH_ENV",
+        "ENV",
+        "CDPATH"
+      ],
+      "hashes": {
+        "tasks.md": "f2fa454a7110ca9d942f55eb3c9a7d6d8b3aa7193b6d63ec588da149c04b0337",
+        "stdout.txt": "59648a6e2bcae14dc8229321ef5f8d1bb9d151094fa014582faa166f9c8f3c5c",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": "tsc>out.txt --project tests/tsconfig.json --noEmit",
+      "group": "reported-omission",
+      "expectedWarning": true,
+      "observedWarning": false,
+      "exit": 0,
+      "asExpected": false,
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd003-s69-red-ulpkxjd7/case-028/.specify/specs/001-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "started": "2026-10-30T14:19:43.261314+00:00",
+      "ended": "2026-10-30T14:19:43.449995+00:00",
+      "envOverrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "LC_ALL": "C",
+        "NO_COLOR": "1",
+        "TMPDIR": "/private/tmp/sdd003-s69-red-ulpkxjd7"
+      },
+      "envUnset": [
+        "BASH_ENV",
+        "ENV",
+        "CDPATH"
+      ],
+      "hashes": {
+        "tasks.md": "dfa2d626095686236a187d73b678688eaa686526f0199d30f2a83c446ca0986d",
+        "stdout.txt": "6a5fec2539eaa30c703fd2c3325f1c2a8b39c990eabcd1f57fb8a9632a980c12",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": "tsc>|out.txt --project tests/tsconfig.json --noEmit",
+      "group": "reported-omission",
+      "expectedWarning": true,
+      "observedWarning": false,
+      "exit": 0,
+      "asExpected": false,
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd003-s69-red-ulpkxjd7/case-029/.specify/specs/001-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "started": "2026-10-30T14:19:43.452188+00:00",
+      "ended": "2026-10-30T14:19:43.639576+00:00",
+      "envOverrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "LC_ALL": "C",
+        "NO_COLOR": "1",
+        "TMPDIR": "/private/tmp/sdd003-s69-red-ulpkxjd7"
+      },
+      "envUnset": [
+        "BASH_ENV",
+        "ENV",
+        "CDPATH"
+      ],
+      "hashes": {
+        "tasks.md": "b48b907a654e0a3cc4466c5722c1e560d17f9f5663f8995e640269799381d112",
+        "stdout.txt": "39a50620772c5a55f3c0731554a5de32c8b460e272e1a943e8edc004da270b4a",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": "./tests/tsc --noEmit --project tests/tsconfig.json",
+      "group": "reordered-control",
+      "expectedWarning": true,
+      "observedWarning": true,
+      "exit": 0,
+      "asExpected": true,
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd003-s69-red-ulpkxjd7/case-030/.specify/specs/001-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "started": "2026-10-30T14:19:43.641691+00:00",
+      "ended": "2026-10-30T14:19:43.822535+00:00",
+      "envOverrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "LC_ALL": "C",
+        "NO_COLOR": "1",
+        "TMPDIR": "/private/tmp/sdd003-s69-red-ulpkxjd7"
+      },
+      "envUnset": [
+        "BASH_ENV",
+        "ENV",
+        "CDPATH"
+      ],
+      "hashes": {
+        "tasks.md": "07212f2756d71e471880fcbea7d85a77ec5399a125ffb72e88109fd66cd0bbc7",
+        "stdout.txt": "642ccb8d220d6aa1fb6866550f0c9eff202f06aff90daea174809349d0f97c85",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": "./tests/tsc&>out.txt --noEmit --project tests/tsconfig.json",
+      "group": "reordered-control",
+      "expectedWarning": true,
+      "observedWarning": true,
+      "exit": 0,
+      "asExpected": true,
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd003-s69-red-ulpkxjd7/case-031/.specify/specs/001-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "started": "2026-10-30T14:19:43.824098+00:00",
+      "ended": "2026-10-30T14:19:44.001594+00:00",
+      "envOverrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "LC_ALL": "C",
+        "NO_COLOR": "1",
+        "TMPDIR": "/private/tmp/sdd003-s69-red-ulpkxjd7"
+      },
+      "envUnset": [
+        "BASH_ENV",
+        "ENV",
+        "CDPATH"
+      ],
+      "hashes": {
+        "tasks.md": "64d92c060988dc3881e85f9f705363a841eb34db23ef8a4b182b3b60e0a49c49",
+        "stdout.txt": "5b5728677f07777b4128ae7f31753de0a02258542fdf4bdb281eb08c8da0da84",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": "./tests/tsc<&0 --noEmit --project tests/tsconfig.json",
+      "group": "reordered-control",
+      "expectedWarning": true,
+      "observedWarning": true,
+      "exit": 0,
+      "asExpected": true,
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd003-s69-red-ulpkxjd7/case-032/.specify/specs/001-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "started": "2026-10-30T14:19:44.003390+00:00",
+      "ended": "2026-10-30T14:19:44.187106+00:00",
+      "envOverrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "LC_ALL": "C",
+        "NO_COLOR": "1",
+        "TMPDIR": "/private/tmp/sdd003-s69-red-ulpkxjd7"
+      },
+      "envUnset": [
+        "BASH_ENV",
+        "ENV",
+        "CDPATH"
+      ],
+      "hashes": {
+        "tasks.md": "85f0a184268c085f9699b3cfe30614c31a43c8f4f007aeb0b60bb08b04e86391",
+        "stdout.txt": "1afab64bf8da411998171c0b3bce5b8c746c6d33549077a5edf5ab3017e2a584",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": "./tests/tsc<>input.txt --noEmit --project tests/tsconfig.json",
+      "group": "reordered-control",
+      "expectedWarning": true,
+      "observedWarning": true,
+      "exit": 0,
+      "asExpected": true,
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd003-s69-red-ulpkxjd7/case-033/.specify/specs/001-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "started": "2026-10-30T14:19:44.189482+00:00",
+      "ended": "2026-10-30T14:19:44.371903+00:00",
+      "envOverrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "LC_ALL": "C",
+        "NO_COLOR": "1",
+        "TMPDIR": "/private/tmp/sdd003-s69-red-ulpkxjd7"
+      },
+      "envUnset": [
+        "BASH_ENV",
+        "ENV",
+        "CDPATH"
+      ],
+      "hashes": {
+        "tasks.md": "64465d15e2cf68054a4965881fb473a3c2dd0dfedc6959f05e44d4aa03e9ba8f",
+        "stdout.txt": "1649329e5b6cf07f36a42e2eccbb13878c44a05b9a6b33359f1269e624c5cf58",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": "./tests/tsc<input.txt --noEmit --project tests/tsconfig.json",
+      "group": "reordered-control",
+      "expectedWarning": true,
+      "observedWarning": true,
+      "exit": 0,
+      "asExpected": true,
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd003-s69-red-ulpkxjd7/case-034/.specify/specs/001-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "started": "2026-10-30T14:19:44.373887+00:00",
+      "ended": "2026-10-30T14:19:44.555887+00:00",
+      "envOverrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "LC_ALL": "C",
+        "NO_COLOR": "1",
+        "TMPDIR": "/private/tmp/sdd003-s69-red-ulpkxjd7"
+      },
+      "envUnset": [
+        "BASH_ENV",
+        "ENV",
+        "CDPATH"
+      ],
+      "hashes": {
+        "tasks.md": "05da516ce925d87285686c5a6c8e53ec793766863cc23396eedb73ebe49c92d1",
+        "stdout.txt": "551a68f57e1c5491e9b14a2e9483ccb3df996e5971ad5d3633e18793669b7cf0",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": "./tests/tsc>&1 --noEmit --project tests/tsconfig.json",
+      "group": "reordered-control",
+      "expectedWarning": true,
+      "observedWarning": true,
+      "exit": 0,
+      "asExpected": true,
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd003-s69-red-ulpkxjd7/case-035/.specify/specs/001-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "started": "2026-10-30T14:19:44.557586+00:00",
+      "ended": "2026-10-30T14:19:44.737081+00:00",
+      "envOverrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "LC_ALL": "C",
+        "NO_COLOR": "1",
+        "TMPDIR": "/private/tmp/sdd003-s69-red-ulpkxjd7"
+      },
+      "envUnset": [
+        "BASH_ENV",
+        "ENV",
+        "CDPATH"
+      ],
+      "hashes": {
+        "tasks.md": "9f37bb6da73ca778a8d53526d32e369ee61bede2425977c62d7934c63329b03d",
+        "stdout.txt": "239466fb1ac8dcdac1693fe9a6ca8ca977693bc4345bf143cf893e2db8812c64",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": "./tests/tsc>>out.txt --noEmit --project tests/tsconfig.json",
+      "group": "reordered-control",
+      "expectedWarning": true,
+      "observedWarning": true,
+      "exit": 0,
+      "asExpected": true,
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd003-s69-red-ulpkxjd7/case-036/.specify/specs/001-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "started": "2026-10-30T14:19:44.739851+00:00",
+      "ended": "2026-10-30T14:19:44.912666+00:00",
+      "envOverrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "LC_ALL": "C",
+        "NO_COLOR": "1",
+        "TMPDIR": "/private/tmp/sdd003-s69-red-ulpkxjd7"
+      },
+      "envUnset": [
+        "BASH_ENV",
+        "ENV",
+        "CDPATH"
+      ],
+      "hashes": {
+        "tasks.md": "9db31f572ad5e23977c040649bb81147d90976edcde3e7e91420b03c5065baeb",
+        "stdout.txt": "286c0b91525fb6f26c95955caf9c9db7ef0249d25e60175668a83f8c1c3e5d53",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": "./tests/tsc>out.txt --noEmit --project tests/tsconfig.json",
+      "group": "reordered-control",
+      "expectedWarning": true,
+      "observedWarning": true,
+      "exit": 0,
+      "asExpected": true,
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd003-s69-red-ulpkxjd7/case-037/.specify/specs/001-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "started": "2026-10-30T14:19:44.914281+00:00",
+      "ended": "2026-10-30T14:19:45.113230+00:00",
+      "envOverrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "LC_ALL": "C",
+        "NO_COLOR": "1",
+        "TMPDIR": "/private/tmp/sdd003-s69-red-ulpkxjd7"
+      },
+      "envUnset": [
+        "BASH_ENV",
+        "ENV",
+        "CDPATH"
+      ],
+      "hashes": {
+        "tasks.md": "1b616400dfd3a297b56989c42ed5717781e437fe4a09d70b175689980ac1f0f6",
+        "stdout.txt": "3c0eb142ada65555b8c6a979a7fd3a0c0b6c7b83fd628933e597e843a57a8d05",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": "./tests/tsc>|out.txt --noEmit --project tests/tsconfig.json",
+      "group": "reordered-control",
+      "expectedWarning": true,
+      "observedWarning": true,
+      "exit": 0,
+      "asExpected": true,
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd003-s69-red-ulpkxjd7/case-038/.specify/specs/001-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "started": "2026-10-30T14:19:45.124534+00:00",
+      "ended": "2026-10-30T14:19:45.311436+00:00",
+      "envOverrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "LC_ALL": "C",
+        "NO_COLOR": "1",
+        "TMPDIR": "/private/tmp/sdd003-s69-red-ulpkxjd7"
+      },
+      "envUnset": [
+        "BASH_ENV",
+        "ENV",
+        "CDPATH"
+      ],
+      "hashes": {
+        "tasks.md": "bb5a36be3d3c2f25764c9215a2af0e4fb24bbc2f27b8993ae69cbfcaad708aca",
+        "stdout.txt": "5860b8803a9218a8bf3c92fea6657eb8d0ae0df3d0ce3151efb0fa3f3ed5a0c3",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": "tools/tsc --noEmit --project tests/tsconfig.json",
+      "group": "reordered-control",
+      "expectedWarning": true,
+      "observedWarning": true,
+      "exit": 0,
+      "asExpected": true,
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd003-s69-red-ulpkxjd7/case-039/.specify/specs/001-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "started": "2026-10-30T14:19:45.313119+00:00",
+      "ended": "2026-10-30T14:19:45.489395+00:00",
+      "envOverrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "LC_ALL": "C",
+        "NO_COLOR": "1",
+        "TMPDIR": "/private/tmp/sdd003-s69-red-ulpkxjd7"
+      },
+      "envUnset": [
+        "BASH_ENV",
+        "ENV",
+        "CDPATH"
+      ],
+      "hashes": {
+        "tasks.md": "9cb6d61d6f045add8254971cf966a37381d0a33bce6066285b309aa98d3731c2",
+        "stdout.txt": "58f4d6c2fac3fccaed94df07117f083b19df760b5000fc97c99aa8f49139e791",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": "tools/tsc&>out.txt --noEmit --project tests/tsconfig.json",
+      "group": "reordered-control",
+      "expectedWarning": true,
+      "observedWarning": true,
+      "exit": 0,
+      "asExpected": true,
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd003-s69-red-ulpkxjd7/case-040/.specify/specs/001-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "started": "2026-10-30T14:19:45.491143+00:00",
+      "ended": "2026-10-30T14:19:45.662176+00:00",
+      "envOverrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "LC_ALL": "C",
+        "NO_COLOR": "1",
+        "TMPDIR": "/private/tmp/sdd003-s69-red-ulpkxjd7"
+      },
+      "envUnset": [
+        "BASH_ENV",
+        "ENV",
+        "CDPATH"
+      ],
+      "hashes": {
+        "tasks.md": "cbe67d433dfc8a740478104267fe2e50dac49703a7f6f105532cdf99fc302a40",
+        "stdout.txt": "8faf47f8eae41b78ed3a055567297e9029a0e0905b8d61ae19ca813fafa1ab8c",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": "tools/tsc<&0 --noEmit --project tests/tsconfig.json",
+      "group": "reordered-control",
+      "expectedWarning": true,
+      "observedWarning": true,
+      "exit": 0,
+      "asExpected": true,
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd003-s69-red-ulpkxjd7/case-041/.specify/specs/001-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "started": "2026-10-30T14:19:45.663820+00:00",
+      "ended": "2026-10-30T14:19:45.833353+00:00",
+      "envOverrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "LC_ALL": "C",
+        "NO_COLOR": "1",
+        "TMPDIR": "/private/tmp/sdd003-s69-red-ulpkxjd7"
+      },
+      "envUnset": [
+        "BASH_ENV",
+        "ENV",
+        "CDPATH"
+      ],
+      "hashes": {
+        "tasks.md": "0a8079a46b4fc7ed49596049083361d0ea6879e50e7cc791fd77dd8d6f985074",
+        "stdout.txt": "f3048f16276383b7c7cbfa324144762ed381658ab2bdd8ed6161ddec4db85405",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": "tools/tsc<>input.txt --noEmit --project tests/tsconfig.json",
+      "group": "reordered-control",
+      "expectedWarning": true,
+      "observedWarning": true,
+      "exit": 0,
+      "asExpected": true,
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd003-s69-red-ulpkxjd7/case-042/.specify/specs/001-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "started": "2026-10-30T14:19:45.835009+00:00",
+      "ended": "2026-10-30T14:19:46.004961+00:00",
+      "envOverrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "LC_ALL": "C",
+        "NO_COLOR": "1",
+        "TMPDIR": "/private/tmp/sdd003-s69-red-ulpkxjd7"
+      },
+      "envUnset": [
+        "BASH_ENV",
+        "ENV",
+        "CDPATH"
+      ],
+      "hashes": {
+        "tasks.md": "b37c9ec2bddc10fafa87451b2afd8839b879a97f97cd4ee9d8fd64c8e1726f96",
+        "stdout.txt": "351e83b7ed7d4fe6bf57127078439f171cf04bcd01c12d14b59751135019383a",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": "tools/tsc<input.txt --noEmit --project tests/tsconfig.json",
+      "group": "reordered-control",
+      "expectedWarning": true,
+      "observedWarning": true,
+      "exit": 0,
+      "asExpected": true,
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd003-s69-red-ulpkxjd7/case-043/.specify/specs/001-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "started": "2026-10-30T14:19:46.006613+00:00",
+      "ended": "2026-10-30T14:19:46.178421+00:00",
+      "envOverrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "LC_ALL": "C",
+        "NO_COLOR": "1",
+        "TMPDIR": "/private/tmp/sdd003-s69-red-ulpkxjd7"
+      },
+      "envUnset": [
+        "BASH_ENV",
+        "ENV",
+        "CDPATH"
+      ],
+      "hashes": {
+        "tasks.md": "ae2cac9647112f5edfddf9ec73df258e6d67293d247384934da3587868aaf7b6",
+        "stdout.txt": "cd49d64416f26c59d224cb4fca15119ac69b59eff32e99ee22c916e5625f1329",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": "tools/tsc>&1 --noEmit --project tests/tsconfig.json",
+      "group": "reordered-control",
+      "expectedWarning": true,
+      "observedWarning": true,
+      "exit": 0,
+      "asExpected": true,
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd003-s69-red-ulpkxjd7/case-044/.specify/specs/001-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "started": "2026-10-30T14:19:46.180083+00:00",
+      "ended": "2026-10-30T14:19:46.354543+00:00",
+      "envOverrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "LC_ALL": "C",
+        "NO_COLOR": "1",
+        "TMPDIR": "/private/tmp/sdd003-s69-red-ulpkxjd7"
+      },
+      "envUnset": [
+        "BASH_ENV",
+        "ENV",
+        "CDPATH"
+      ],
+      "hashes": {
+        "tasks.md": "989ab4813550c39cbaf8dcda1b4f76a5c4e75d218642fb511e42e6e30e637ef2",
+        "stdout.txt": "31197343afea38309f521c9475fce2e007155e3d9133d4a32d00c335523985f2",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": "tools/tsc>>out.txt --noEmit --project tests/tsconfig.json",
+      "group": "reordered-control",
+      "expectedWarning": true,
+      "observedWarning": true,
+      "exit": 0,
+      "asExpected": true,
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd003-s69-red-ulpkxjd7/case-045/.specify/specs/001-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "started": "2026-10-30T14:19:46.356071+00:00",
+      "ended": "2026-10-30T14:19:46.527386+00:00",
+      "envOverrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "LC_ALL": "C",
+        "NO_COLOR": "1",
+        "TMPDIR": "/private/tmp/sdd003-s69-red-ulpkxjd7"
+      },
+      "envUnset": [
+        "BASH_ENV",
+        "ENV",
+        "CDPATH"
+      ],
+      "hashes": {
+        "tasks.md": "94292605398a2d8511f20236504653811d455028b3064c4ba6d377c83dc718a6",
+        "stdout.txt": "6243a62158ce3faefa8a19a93032ac1b5a9466a7cbc1c18973bb03a84e129c53",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": "tools/tsc>out.txt --noEmit --project tests/tsconfig.json",
+      "group": "reordered-control",
+      "expectedWarning": true,
+      "observedWarning": true,
+      "exit": 0,
+      "asExpected": true,
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd003-s69-red-ulpkxjd7/case-046/.specify/specs/001-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "started": "2026-10-30T14:19:46.529136+00:00",
+      "ended": "2026-10-30T14:19:46.701188+00:00",
+      "envOverrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "LC_ALL": "C",
+        "NO_COLOR": "1",
+        "TMPDIR": "/private/tmp/sdd003-s69-red-ulpkxjd7"
+      },
+      "envUnset": [
+        "BASH_ENV",
+        "ENV",
+        "CDPATH"
+      ],
+      "hashes": {
+        "tasks.md": "64c3a19ef3aeae0cb67c23ab5c147fd9c051e60dff047931b0e88c7489a1cb2f",
+        "stdout.txt": "54cca79f7322dbba3fab26342cbfa49975c73bd654cd01d6de23248dd1a14f3f",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": "tools/tsc>|out.txt --noEmit --project tests/tsconfig.json",
+      "group": "reordered-control",
+      "expectedWarning": true,
+      "observedWarning": true,
+      "exit": 0,
+      "asExpected": true,
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd003-s69-red-ulpkxjd7/case-047/.specify/specs/001-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "started": "2026-10-30T14:19:46.702799+00:00",
+      "ended": "2026-10-30T14:19:46.868845+00:00",
+      "envOverrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "LC_ALL": "C",
+        "NO_COLOR": "1",
+        "TMPDIR": "/private/tmp/sdd003-s69-red-ulpkxjd7"
+      },
+      "envUnset": [
+        "BASH_ENV",
+        "ENV",
+        "CDPATH"
+      ],
+      "hashes": {
+        "tasks.md": "69504bbe02ad6987a4eca78c1759fe0d0fbcb011e50e24115492c7e300962efb",
+        "stdout.txt": "390716dc9dd90b95d139cdfa5142b3072573857ba3320a459010dbb0d884afdc",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": "tsc --noEmit --project tests/tsconfig.json",
+      "group": "reordered-control",
+      "expectedWarning": true,
+      "observedWarning": true,
+      "exit": 0,
+      "asExpected": true,
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd003-s69-red-ulpkxjd7/case-048/.specify/specs/001-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "started": "2026-10-30T14:19:46.870479+00:00",
+      "ended": "2026-10-30T14:19:47.039530+00:00",
+      "envOverrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "LC_ALL": "C",
+        "NO_COLOR": "1",
+        "TMPDIR": "/private/tmp/sdd003-s69-red-ulpkxjd7"
+      },
+      "envUnset": [
+        "BASH_ENV",
+        "ENV",
+        "CDPATH"
+      ],
+      "hashes": {
+        "tasks.md": "2dffcc328442deeac37d3f473937ee0a253b72b804af7dd3dbf44c1d04dc14c9",
+        "stdout.txt": "1ead8c1609a57ac9be2fe8a63312603a20cd46549084a7ae644177ba50f08832",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": "tsc&>out.txt --noEmit --project tests/tsconfig.json",
+      "group": "reordered-control",
+      "expectedWarning": true,
+      "observedWarning": true,
+      "exit": 0,
+      "asExpected": true,
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd003-s69-red-ulpkxjd7/case-049/.specify/specs/001-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "started": "2026-10-30T14:19:47.041566+00:00",
+      "ended": "2026-10-30T14:19:47.229151+00:00",
+      "envOverrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "LC_ALL": "C",
+        "NO_COLOR": "1",
+        "TMPDIR": "/private/tmp/sdd003-s69-red-ulpkxjd7"
+      },
+      "envUnset": [
+        "BASH_ENV",
+        "ENV",
+        "CDPATH"
+      ],
+      "hashes": {
+        "tasks.md": "9e818eaa511a8120de4c71451a27bbc917e6e1e7b82793764a697179faa48e64",
+        "stdout.txt": "85cdee9f376245bd40fe184f9e2eebc697d838e6d1210ee3e658920aef94b1dc",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": "tsc<&0 --noEmit --project tests/tsconfig.json",
+      "group": "reordered-control",
+      "expectedWarning": true,
+      "observedWarning": true,
+      "exit": 0,
+      "asExpected": true,
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd003-s69-red-ulpkxjd7/case-050/.specify/specs/001-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "started": "2026-10-30T14:19:47.231317+00:00",
+      "ended": "2026-10-30T14:19:47.417813+00:00",
+      "envOverrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "LC_ALL": "C",
+        "NO_COLOR": "1",
+        "TMPDIR": "/private/tmp/sdd003-s69-red-ulpkxjd7"
+      },
+      "envUnset": [
+        "BASH_ENV",
+        "ENV",
+        "CDPATH"
+      ],
+      "hashes": {
+        "tasks.md": "4480ac3358e59a17bbd6af63fadb5fe2c7600426f9c602c9f377ef8dce07f7f9",
+        "stdout.txt": "e0d3bb7af0ad30a1ed061f921b7fd14c01f3d80f28c6f9257801ac4d5315da97",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": "tsc<>input.txt --noEmit --project tests/tsconfig.json",
+      "group": "reordered-control",
+      "expectedWarning": true,
+      "observedWarning": true,
+      "exit": 0,
+      "asExpected": true,
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd003-s69-red-ulpkxjd7/case-051/.specify/specs/001-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "started": "2026-10-30T14:19:47.419988+00:00",
+      "ended": "2026-10-30T14:19:47.605660+00:00",
+      "envOverrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "LC_ALL": "C",
+        "NO_COLOR": "1",
+        "TMPDIR": "/private/tmp/sdd003-s69-red-ulpkxjd7"
+      },
+      "envUnset": [
+        "BASH_ENV",
+        "ENV",
+        "CDPATH"
+      ],
+      "hashes": {
+        "tasks.md": "41281aaf4b9e42ce50f918f9dcf336415cd93843012e04264f2ae25277881c3e",
+        "stdout.txt": "fa5ed89a1a7ca18f79fe7162562a8ca446d6ca5adc2676850dbf0b6a3ccc1c90",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": "tsc<input.txt --noEmit --project tests/tsconfig.json",
+      "group": "reordered-control",
+      "expectedWarning": true,
+      "observedWarning": true,
+      "exit": 0,
+      "asExpected": true,
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd003-s69-red-ulpkxjd7/case-052/.specify/specs/001-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "started": "2026-10-30T14:19:47.607655+00:00",
+      "ended": "2026-10-30T14:19:47.792870+00:00",
+      "envOverrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "LC_ALL": "C",
+        "NO_COLOR": "1",
+        "TMPDIR": "/private/tmp/sdd003-s69-red-ulpkxjd7"
+      },
+      "envUnset": [
+        "BASH_ENV",
+        "ENV",
+        "CDPATH"
+      ],
+      "hashes": {
+        "tasks.md": "e2a6bab92913d960cea9f0656e8c69061dd6c562283dce964b6c35198d29291d",
+        "stdout.txt": "52ad1702e4b83f433a0d3925dd112cb6cd099b3107477431cc48c0e2fbb04c58",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": "tsc>&1 --noEmit --project tests/tsconfig.json",
+      "group": "reordered-control",
+      "expectedWarning": true,
+      "observedWarning": true,
+      "exit": 0,
+      "asExpected": true,
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd003-s69-red-ulpkxjd7/case-053/.specify/specs/001-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "started": "2026-10-30T14:19:47.794917+00:00",
+      "ended": "2026-10-30T14:19:47.980485+00:00",
+      "envOverrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "LC_ALL": "C",
+        "NO_COLOR": "1",
+        "TMPDIR": "/private/tmp/sdd003-s69-red-ulpkxjd7"
+      },
+      "envUnset": [
+        "BASH_ENV",
+        "ENV",
+        "CDPATH"
+      ],
+      "hashes": {
+        "tasks.md": "df69450ef42201c127b39127b043ff444b79ad368aa49a93fd78725337843d70",
+        "stdout.txt": "3243d795342df3eade730bf615c7b8b18d388c528fc7aa0e551e3f6a84b63f04",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": "tsc>>out.txt --noEmit --project tests/tsconfig.json",
+      "group": "reordered-control",
+      "expectedWarning": true,
+      "observedWarning": true,
+      "exit": 0,
+      "asExpected": true,
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd003-s69-red-ulpkxjd7/case-054/.specify/specs/001-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "started": "2026-10-30T14:19:47.982578+00:00",
+      "ended": "2026-10-30T14:19:48.169583+00:00",
+      "envOverrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "LC_ALL": "C",
+        "NO_COLOR": "1",
+        "TMPDIR": "/private/tmp/sdd003-s69-red-ulpkxjd7"
+      },
+      "envUnset": [
+        "BASH_ENV",
+        "ENV",
+        "CDPATH"
+      ],
+      "hashes": {
+        "tasks.md": "032d247a2b4156156bb32fa5a377da74e5f998ea609296908544482f8312fb33",
+        "stdout.txt": "2bbd16af41220eee3b612d9ef840a81b724ef81fbce0a744b63d8426e2b892d2",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": "tsc>out.txt --noEmit --project tests/tsconfig.json",
+      "group": "reordered-control",
+      "expectedWarning": true,
+      "observedWarning": true,
+      "exit": 0,
+      "asExpected": true,
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd003-s69-red-ulpkxjd7/case-055/.specify/specs/001-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "started": "2026-10-30T14:19:48.171849+00:00",
+      "ended": "2026-10-30T14:19:48.357783+00:00",
+      "envOverrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "LC_ALL": "C",
+        "NO_COLOR": "1",
+        "TMPDIR": "/private/tmp/sdd003-s69-red-ulpkxjd7"
+      },
+      "envUnset": [
+        "BASH_ENV",
+        "ENV",
+        "CDPATH"
+      ],
+      "hashes": {
+        "tasks.md": "6d8997123e24c57d3d943d240839c19a0cc0e2d8e50fbb4b3d11dd1dcc3e2efe",
+        "stdout.txt": "48a4a223d98aec8bd4703d3a416539428f463aacd8c5af40f18c54411ad1748d",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": "tsc>|out.txt --noEmit --project tests/tsconfig.json",
+      "group": "reordered-control",
+      "expectedWarning": true,
+      "observedWarning": true,
+      "exit": 0,
+      "asExpected": true,
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd003-s69-red-ulpkxjd7/case-056/.specify/specs/001-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "started": "2026-10-30T14:19:48.359808+00:00",
+      "ended": "2026-10-30T14:19:48.546448+00:00",
+      "envOverrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "LC_ALL": "C",
+        "NO_COLOR": "1",
+        "TMPDIR": "/private/tmp/sdd003-s69-red-ulpkxjd7"
+      },
+      "envUnset": [
+        "BASH_ENV",
+        "ENV",
+        "CDPATH"
+      ],
+      "hashes": {
+        "tasks.md": "db44131a5532c56e46d882cbbc3ef3f6bd5077a5b548dd7b7a5af7f36314776b",
+        "stdout.txt": "f3a8685b5df17723091ab859188627a8c31ccf12cc56c8f110b2c6b14b8d3fd8",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": "node scripts/assert-options.js --noEmit tests/unit.ts",
+      "group": "custom-assertion-operand",
+      "expectedWarning": false,
+      "observedWarning": false,
+      "exit": 0,
+      "asExpected": true,
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd003-s69-red-ulpkxjd7/case-057/.specify/specs/001-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "started": "2026-10-30T14:19:48.548474+00:00",
+      "ended": "2026-10-30T14:19:48.735419+00:00",
+      "envOverrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "LC_ALL": "C",
+        "NO_COLOR": "1",
+        "TMPDIR": "/private/tmp/sdd003-s69-red-ulpkxjd7"
+      },
+      "envUnset": [
+        "BASH_ENV",
+        "ENV",
+        "CDPATH"
+      ],
+      "hashes": {
+        "tasks.md": "4065ef76a1adc371911654b7636134bebab051c9fee07dcc89ff43290ddeabc6",
+        "stdout.txt": "2478b97ceebd5b3f4fc183963b4d2f211f00e04fd9144206c62a213cd503c3b3",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": "node scripts/assert-options.js tsc --project tests/tsconfig.json --noEmit",
+      "group": "custom-assertion-operand",
+      "expectedWarning": false,
+      "observedWarning": false,
+      "exit": 0,
+      "asExpected": true,
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd003-s69-red-ulpkxjd7/case-058/.specify/specs/001-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "started": "2026-10-30T14:19:48.737625+00:00",
+      "ended": "2026-10-30T14:19:48.923460+00:00",
+      "envOverrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "LC_ALL": "C",
+        "NO_COLOR": "1",
+        "TMPDIR": "/private/tmp/sdd003-s69-red-ulpkxjd7"
+      },
+      "envUnset": [
+        "BASH_ENV",
+        "ENV",
+        "CDPATH"
+      ],
+      "hashes": {
+        "tasks.md": "ef5fcd4dd5f92c179ced173bc9b865c07f2ac9e25085c03dea9371e4be4dff9c",
+        "stdout.txt": "fd9b4f918b980082418bc8f9a8d3a76a7d2460af4b3011266d470d31955be2b1",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": "node scripts/assert-options.js tsc --pretty false --noEmit tests/unit.ts",
+      "group": "custom-assertion-operand",
+      "expectedWarning": false,
+      "observedWarning": false,
+      "exit": 0,
+      "asExpected": true,
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd003-s69-red-ulpkxjd7/case-059/.specify/specs/001-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "started": "2026-10-30T14:19:48.925483+00:00",
+      "ended": "2026-10-30T14:19:49.111757+00:00",
+      "envOverrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "LC_ALL": "C",
+        "NO_COLOR": "1",
+        "TMPDIR": "/private/tmp/sdd003-s69-red-ulpkxjd7"
+      },
+      "envUnset": [
+        "BASH_ENV",
+        "ENV",
+        "CDPATH"
+      ],
+      "hashes": {
+        "tasks.md": "dffa93b16db78e2beec00f507794fa3e9850e824f33e6d6d1a8eb56db5c60ad1",
+        "stdout.txt": "7f0730b0b44008bb6844e6aac37c0702bf75f119c1238581558d124bc3cac8ee",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": "node scripts/assert-options.js tsc --noEmit",
+      "group": "custom-assertion-operand",
+      "expectedWarning": false,
+      "observedWarning": true,
+      "exit": 0,
+      "asExpected": false,
+      "argv": [
+        "/bin/bash",
+        "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/scripts/sdd-analyze.sh",
+        "/private/tmp/sdd003-s69-red-ulpkxjd7/case-060/.specify/specs/001-feature"
+      ],
+      "cwd": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline",
+      "started": "2026-10-30T14:19:49.113797+00:00",
+      "ended": "2026-10-30T14:19:49.301494+00:00",
+      "envOverrides": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "LC_ALL": "C",
+        "NO_COLOR": "1",
+        "TMPDIR": "/private/tmp/sdd003-s69-red-ulpkxjd7"
+      },
+      "envUnset": [
+        "BASH_ENV",
+        "ENV",
+        "CDPATH"
+      ],
+      "hashes": {
+        "tasks.md": "787a7588453e68356c6fc20cafa43efa8b51bfbd36dbf7bb1ff7f30833a68c00",
+        "stdout.txt": "4c20bf87f83fb7121c5c7407047d78a5e29f8858657ee7abff7e91aefd7fc9a4",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ]
+}

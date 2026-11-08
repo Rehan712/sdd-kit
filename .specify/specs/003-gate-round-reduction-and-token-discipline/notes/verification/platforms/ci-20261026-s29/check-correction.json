@@ -1,0 +1,7 @@
+{
+  "initial_checks": "checks.json",
+  "initial_failure": "Initial unfiltered ShellCheck exposed SC1091 source-following informational diagnostics and SC2012/SC2016 existing informational diagnostics; new disk guard SC2181 style corrected using direct if ! python3.",
+  "resolution": "checks-verified.json: external sources followed, warning/error scope, only established HUB_DIR SC2034 excluded for builder/verifier; all exit0. Initial logs and checks remain preserved.",
+  "collector_controls": "All seven passed once; not repeated.",
+  "floor_runtime_tested": false
+}

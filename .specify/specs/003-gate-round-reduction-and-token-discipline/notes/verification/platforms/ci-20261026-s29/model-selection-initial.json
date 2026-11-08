@@ -1,0 +1,41 @@
+{
+  "implementation": {
+    "providerInstanceId": "codex_codex_gym",
+    "model": "gpt-6.1-sol",
+    "options": {
+      "reasoningEffort": "high",
+      "serviceTier": "default"
+    },
+    "observed_by": "orchestrator_capabilities"
+  },
+  "review": {
+    "taskId": "node:delegated-task:command%3Amcp%3A4adb202d-fec3-4b66-9035-f22f98e05c4b%3Adelegate-task%3Asdd003-s29-preparation-review-max-r1",
+    "childThreadId": "thread:delegated-task:command%3Amcp%3A4adb202d-fec3-4b66-9035-f22f98e05c4b%3Adelegate-task%3Asdd003-s29-preparation-review-max-r1",
+    "childRunId": "run:thread:thread%3Adelegated-task%3Acommand%253Amcp%253A4adb202d-fec3-4b66-9035-f22f98e05c4b%253Adelegate-task%253Asdd003-s29-preparation-review-max-r1:ordinal:1",
+    "childNodeId": "node:delegated-task:command%3Amcp%3A4adb202d-fec3-4b66-9035-f22f98e05c4b%3Adelegate-task%3Asdd003-s29-preparation-review-max-r1",
+    "status": "running",
+    "workState": "working",
+    "hasPendingChildRuns": false,
+    "latestTerminalRunId": null,
+    "latestTerminalStatus": null,
+    "latestTerminalSummary": null,
+    "latestTerminalResultContextTransferId": null,
+    "providerInstanceId": "codex_codex_gym",
+    "model": "gpt-6.1-sol",
+    "options": [
+      {
+        "id": "reasoningEffort",
+        "value": "max"
+      },
+      {
+        "id": "serviceTier",
+        "value": "default"
+      }
+    ],
+    "summary": null,
+    "resultContextTransferId": null,
+    "hasPendingQuestion": false,
+    "pendingApproval": null,
+    "waitTimedOut": false
+  }
+}

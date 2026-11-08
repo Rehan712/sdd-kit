@@ -1,0 +1,48 @@
+{
+  "verifiedAt": "2026-10-26T22:18:53.333540+00:00",
+  "actualTaskResult": {
+    "taskId": "node:delegated-task:command%3Amcp%3Ae6315556-7380-4d31-903f-24b14ad55a20%3Adelegate-task%3Asdd003-s30-hosted-ci-616dd2d-collection-high-r1",
+    "childThreadId": "thread:delegated-task:command%3Amcp%3Ae6315556-7380-4d31-903f-24b14ad55a20%3Adelegate-task%3Asdd003-s30-hosted-ci-616dd2d-collection-high-r1",
+    "childRunId": "run:thread:thread%3Adelegated-task%3Acommand%253Amcp%253Ae6315556-7380-4d31-903f-24b14ad55a20%253Adelegate-task%253Asdd003-s30-hosted-ci-616dd2d-collection-high-r1:ordinal:1",
+    "childNodeId": "node:delegated-task:command%3Amcp%3Ae6315556-7380-4d31-903f-24b14ad55a20%3Adelegate-task%3Asdd003-s30-hosted-ci-616dd2d-collection-high-r1",
+    "status": "completed",
+    "workState": "result_available",
+    "hasPendingChildRuns": false,
+    "latestTerminalRunId": "run:thread:thread%3Adelegated-task%3Acommand%253Amcp%253Ae6315556-7380-4d31-903f-24b14ad55a20%253Adelegate-task%253Asdd003-s30-hosted-ci-616dd2d-collection-high-r1:ordinal:1",
+    "latestTerminalStatus": "completed",
+    "latestTerminalSummary": null,
+    "latestTerminalResultContextTransferId": null,
+    "providerInstanceId": "codex_codex_gym",
+    "model": "gpt-6.1-sol",
+    "options": [
+      {
+        "id": "reasoningEffort",
+        "value": "high"
+      },
+      {
+        "id": "serviceTier",
+        "value": "default"
+      }
+    ],
+    "summary": "PASS: [run 40404936939](https://github.com/Rehan712/sdd-kit/actions/runs/40404936939), attempt 1, completed successfully for exact head `616dd2d`.\n\n- All four jobs succeeded: shellcheck, Ubuntu, macOS, Bash 3.2.\n- Every raw log binds merge `73db38a` \u2192 tree `e68740d`; its parents include the published head.\n- Collector exited 0. Strict before/after checks passed for source `16ffcec`; all 177+8+4 records and protected state remain unchanged.\n- PR21 remains open and draft.\n\n[Handoff and evidence]( /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261026-s29/hosted-s30-audit/handoff.md) include `result.json` and a verified 48-artifact hash manifest.\n\nNo floor, reruns, gates, polling, or mutations performed. This establishes current AC019 hosted evidence, not formal readiness.",
+    "resultContextTransferId": "context-transfer:type:subagent_result:source-thread:thread%3Adelegated-task%3Acommand%253Amcp%253Ae6315556-7380-4d31-903f-24b14ad55a20%253Adelegate-task%253Asdd003-s30-hosted-ci-616dd2d-collection-high-r1:target-thread:2ce93492-409f-4930-a9e5-173544a4c8c6:d71c7a76-a937-42d3-8a0f-e4731b9bb755",
+    "hasPendingQuestion": false,
+    "pendingApproval": null,
+    "waitTimedOut": false
+  },
+  "runId": 40404936939,
+  "head": "616dd2d1bb0f3eb16045821b0b30b9c9b40f2395",
+  "source": "16ffcec3c2f0cffa21b8c35e7b90d768a27bdfdd37deba9147edd25489946494",
+  "merge": "73db38a9551bcbf7fec9df0b5d2d07ddbcf36184",
+  "tree": "e68740dbbf9d10e3abcdfd0c6620ed9c3abd04e1",
+  "artifactCountVerified": 48,
+  "allFourRawJobBindingsVerified": true,
+  "beforeAfterFreezeManifestsIdentical": true,
+  "remaining": "Fresh guarded local floor then authorized independent opponent25 and RC4",
+  "resources": {
+    "onAcPower": false,
+    "power": "Now drawing from 'Battery Power'\n -InternalBattery-0 (id=22413411)\t28%; discharging; 1:32 remaining present: true\n",
+    "freeGiB": 12.55
+  },
+  "floorStarted": false
+}

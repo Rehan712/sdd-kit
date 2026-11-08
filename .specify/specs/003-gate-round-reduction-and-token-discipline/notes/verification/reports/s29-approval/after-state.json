@@ -1,0 +1,87 @@
+{
+  "closed_at": "2026-10-26T20:50:27.890177+00:00",
+  "scope": "one existing file STATUS.md, Decisions only; all other writes are new excluded verification proof files in s29-approval",
+  "head": "2049f65960cc91e9e30bbd5ff1e11fc0fdf7cbd9",
+  "index": {
+    "sha256": "c492d7ea95abf8e8c335001f20c62ff50bc6f1e2179d7a07d30811181b3dd700",
+    "mode": "0o644",
+    "size": 2200525,
+    "atime_ns": 1793047827764043399,
+    "mtime_ns": 1792957592613445716,
+    "ctime_ns": 1792957592614363077
+  },
+  "HEAD_file": {
+    "sha256": "36b441e5337734d73e547a921b682069ccd54788152cff695f469a8e54e84134",
+    "mode": "0o644",
+    "size": 67,
+    "atime_ns": 1788654328961564517,
+    "mtime_ns": 1788654328953442318,
+    "ctime_ns": 1788654328954700784
+  },
+  "status": {
+    "sha256": "2519b0a153bd7a8548b1b5d6abf3cefaddd6da93d8c5670efba4322dd4c8be1b",
+    "mode": "0o600",
+    "size": 774360,
+    "atime_ns": 1793047789556134402,
+    "mtime_ns": 1793047789555914145,
+    "ctime_ns": 1793047789555914145
+  },
+  "unowned_source_changes": [],
+  "unexpected_new_source_files": [],
+  "excluded_reports_concurrent_changes_preserved": {
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s29-resource-request.json": {
+      "before": null,
+      "after": {
+        "size": 4188,
+        "mtime_ns": 1793047758555283227
+      }
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s29-decision-invocation.json": {
+      "before": null,
+      "after": {
+        "size": 1229,
+        "mtime_ns": 1793047758553223499
+      }
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s29-resource-invocation.json": {
+      "before": null,
+      "after": {
+        "size": 1231,
+        "mtime_ns": 1793047758554501329
+      }
+    },
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/reports/s26-next-session-prompt.md": {
+      "before": {
+        "size": 74455,
+        "mtime_ns": 1793047659383068063
+      },
+      "after": {
+        "size": 75367,
+        "mtime_ns": 1793047758555447982
+      }
+    }
+  },
+  "no_current_lock": true,
+  "pending_reservations": [],
+  "protected_sha_mode_mtime_checks": "PASS",
+  "non_Decisions_bytes": "byte-exact unchanged",
+  "parser_exits": {
+    "opponent25": 0,
+    "opponent26": 4,
+    "reality-check4": 0,
+    "reality-check5": 4
+  },
+  "not_run": [
+    "tests",
+    "floor",
+    "formal gate reservation or execution",
+    "capture",
+    "acceptance",
+    "task tick",
+    "CI",
+    "Git mutation",
+    "merge"
+  ],
+  "parent_next": "NEW genuine delegated HIGH T029 no-tick worker return and rejection/acceptance control BEFORE final CI snapshot/freeze",
+  "historical_evidence": "CAP-793-x82v97/source e77d4b2969f45f3dfa95cedc18148e1abf0dabffd786946f59ff6a5b7fd07df6"
+}

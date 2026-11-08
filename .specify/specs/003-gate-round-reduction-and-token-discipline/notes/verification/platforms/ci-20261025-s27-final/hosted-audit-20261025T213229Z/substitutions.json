@@ -1,0 +1,41 @@
+{
+  "original_path": "/Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261025-s27-final/verify-prepublish.sh",
+  "original_sha256": "51cb0bf8bb3c0e862eaa59bcc27fa4571f8a3e8f30b0baee58fcae445609bde0",
+  "only_generated_output_paths_changed": true,
+  "substitutions": {
+    "before": [
+      {
+        "original": "\"$out/inputs-after.nul\"",
+        "replacement": "\"$out/hosted-audit-20261025T213229Z/inputs-before.nul\"",
+        "count": 1
+      },
+      {
+        "original": "(owned / 'inputs-after.nul')",
+        "replacement": "(owned / 'hosted-audit-20261025T213229Z/inputs-before.nul')",
+        "count": 1
+      },
+      {
+        "original": "(owned / 'verification-final.json')",
+        "replacement": "(owned / 'hosted-audit-20261025T213229Z/verification-before.json')",
+        "count": 1
+      }
+    ],
+    "after": [
+      {
+        "original": "\"$out/inputs-after.nul\"",
+        "replacement": "\"$out/hosted-audit-20261025T213229Z/inputs-after.nul\"",
+        "count": 1
+      },
+      {
+        "original": "(owned / 'inputs-after.nul')",
+        "replacement": "(owned / 'hosted-audit-20261025T213229Z/inputs-after.nul')",
+        "count": 1
+      },
+      {
+        "original": "(owned / 'verification-final.json')",
+        "replacement": "(owned / 'hosted-audit-20261025T213229Z/verification-after.json')",
+        "count": 1
+      }
+    ]
+  }
+}

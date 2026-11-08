@@ -1,0 +1,43 @@
+host: Darwin 25.4.0; bash on PATH: GNU bash, version 3.2.57(1)-release (arm64-apple-darwin25)
+start 2026-10-16T07:54:58Z
+free disk at start: 3.9Gi
+b94c7dfaaf34f9ff4ee178f916e6491fec30135c61f35f230bcb51923bf199cb  tests/test-spec-gate.sh
+97beb8090a7485d945a3564e3eed8f06b12d9878b4a0bda4a56063117d6595a3  tests/test-gate-contracts.sh
+e5c4f72052d4946ae95e902ebb6d3f10a3ed60fd8734530b621ebc825a02b730  .specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md
+run.sh rc=0; per-suite: -- 10/10 passed -- 2/2 passed -- 18/18 passed -- 5/5 passed -- 13/13 passed -- 9/9 passed -- 19/19 passed -- 9/9 passed -- 4/4 passed -- 8/8 passed -- 6/6 passed -- 3/3 passed -- 11/11 passed -- 27/27 passed -- 3/3 passed 
+shellcheck rc=0; 
+free disk after the suites: 3.6Gi
+unmutated round_legacy_reconcile_cases rc=0
+mutant applied: timestamp (1 edit(s))
+mutant timestamp: rc=1
+  | AC-009: a waiver dated before the reconciled completion authorized the next round missing substring: not after the previous round completion at 2026-07-20T23:59:59Z
+mutant applied: reconcile (1 edit(s))
+mutant reconcile: rc=1
+  | AC-009: a reconcile record with a wrong digest wrote legacy-time.nul
+  | AC-009: a reconcile record with a wrong digest left the history able to order an authorization missing substring: date-only history needs timestamped digest reconciliation
+  | AC-009: a reconcile record with a wrong round wrote legacy-time.nul
+  | AC-009: a reconcile record with a wrong round left the history able to order an authorization missing substring: date-only history needs timestamped digest reconciliation
+mutant applied: combined (4 edit(s))
+mutant combined: rc=1
+  | AC-009: a reconcile record with a wrong digest wrote legacy-time.nul
+  | AC-009: a reconcile record with a wrong digest left the history able to order an authorization missing substring: date-only history needs timestamped digest reconciliation
+  | AC-009: a reconcile record with a wrong round wrote legacy-time.nul
+  | AC-009: a reconcile record with a wrong round left the history able to order an authorization missing substring: date-only history needs timestamped digest reconciliation
+  | AC-009: a reconcile record with a wrong timestamp wrote legacy-time.nul
+  | AC-009: a reconcile record with a wrong timestamp left the history able to order an authorization missing substring: date-only history needs timestamped digest reconciliation
+  | AC-009: a waiver dated before the reconciled completion authorized the next round missing substring: not after the previous round completion at 2026-07-20T23:59:59Z
+  | AC-009: a reconcile record outlived an edit of its history and authorized round 6 unexpectedly contains: authorized
+  | AC-009: a reconcile record outlived an edit of its history and reserved round 6
+  | AC-009: an exact waiver after reconciliation did not reserve the next round missing substring: round=6 gate=opponent
+O-029 assertion killed by: reconcile combined | AC-009: a reconcile record with a wrong digest wrote legacy-time.nul
+O-029 assertion killed by: reconcile combined | AC-009: a reconcile record with a wrong digest left the history able to order an authorization
+O-029 assertion killed by: reconcile combined | AC-009: a reconcile record with a wrong round wrote legacy-time.nul
+O-029 assertion killed by: reconcile combined | AC-009: a reconcile record with a wrong round left the history able to order an authorization
+O-029 assertion killed by: combined | AC-009: a reconcile record with a wrong timestamp wrote legacy-time.nul
+O-029 assertion killed by: combined | AC-009: a reconcile record with a wrong timestamp left the history able to order an authorization
+O-029 assertion killed by: timestamp combined | AC-009: a waiver dated before the reconciled completion authorized the next round
+O-029 assertion killed by: combined | AC-009: a reconcile record outlived an edit of its history and authorized round 6
+O-029 assertion killed by: combined | AC-009: a reconcile record outlived an edit of its history and reserved round 6
+live worktree status outside notes/verification/: before=b75b6f14cbcb0f9c after=b75b6f14cbcb0f9c unchanged
+end 2026-10-16T08:20:38Z
+suites=147/147 shellcheck_rc=0 run_rc=0 o029_killed=9/9

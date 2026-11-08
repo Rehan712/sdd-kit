@@ -1,0 +1,28 @@
+--- /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261026-s29/verify-prepublish.sh
++++ /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline/.specify/specs/003-gate-round-reduction-and-token-discipline/notes/verification/platforms/ci-20261026-s29/hosted-s30-audit/verify-after.sh
+@@ -8,7 +8,7 @@
+ . scripts/lib.sh
+ . scripts/verification-lib.sh
+ s=.specify/specs/003-gate-round-reduction-and-token-discipline
+-source_id="$(vf_snapshot "$s" "$PWD" "$PWD" "$out/inputs-after.nul")"
++source_id="$(vf_snapshot "$s" "$PWD" "$PWD" "$out/hosted-s30-audit/inputs-after.nul")"
+ [[ "$source_id" == 16ffcec3c2f0cffa21b8c35e7b90d768a27bdfdd37deba9147edd25489946494 ]] || { echo "FAIL: frozen source identity differs" >&2; exit 1; }
+ python3 - "$out" <<'PY'
+ from pathlib import Path
+@@ -39,7 +39,7 @@
+              head_file_mtime_ns=head_file.stat().st_mtime_ns,
+              refs_sha256=hashlib.sha256(git('show-ref')).hexdigest())
+ assert all(after[k] == before[k] for k in before if k != 'refs_sha256'), 'HEAD/index changed'
+-assert (owned / 'inputs-after.nul').read_bytes() == (snapshot / 'inputs.nul').read_bytes()
++assert (owned / 'hosted-s30-audit/inputs-after.nul').read_bytes() == (snapshot / 'inputs.nul').read_bytes()
+ assert hashlib.sha256((snapshot / 'inputs.nul').read_bytes()).hexdigest() == summary['source']
+ assert git('ls-tree', '-r', '-z', summary['tree']) == (snapshot / 'tree.nul').read_bytes()
+ env = dict(os.environ, GIT_INDEX_FILE=str(snapshot / 'index'))
+@@ -111,6 +111,6 @@
+               tree_modes=dict(collections.Counter(e[0] for e in entries.values())),
+               state_after=after,
+               global_refs_changed_since_baseline=after['refs_sha256'] != before['refs_sha256'])
+-(owned / 'verification-final.json').write_text(json.dumps(result, indent=2) + '\n')
++(owned / 'hosted-s30-audit/verification-after.json').write_text(json.dumps(result, indent=2) + '\n')
+ print(json.dumps(result, indent=2))
+ PY

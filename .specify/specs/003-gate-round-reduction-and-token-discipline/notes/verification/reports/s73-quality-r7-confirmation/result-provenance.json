@@ -1,0 +1,32 @@
+{
+  "at": "2026-10-30T14:59:03.798968+00:00",
+  "qualityRound": 7,
+  "provider": "codex",
+  "model": "gpt-6.1-sol",
+  "reasoningEffort": "max",
+  "serviceTier": "default",
+  "delegateStatus": "completed",
+  "verdict": "Ship",
+  "findings": 0,
+  "actualBodyBytes": 7333,
+  "canonicalBytes": 7333,
+  "literalByteMatch": true,
+  "oneLFOnly": false,
+  "actualSHA256": "e6992f251eff090d8101dc07f77c46fcae65fe07584c54f2dfd582ff323db9e4",
+  "canonicalSHA256": "e6992f251eff090d8101dc07f77c46fcae65fe07584c54f2dfd582ff323db9e4",
+  "reviewedSource": "62cbf525b0caac98f27729393f6e7203ec6ac1cd34c164b3734b7c10a98be23f",
+  "scopedFilesStillExact": {
+    "scripts/sdd-analyze.sh": true,
+    "tests/test-sdd-analyze.sh": true,
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/tasks.md": true,
+    ".specify/specs/003-gate-round-reduction-and-token-discipline/STATUS.md": true,
+    "tests/test-gate-contracts.sh": true
+  },
+  "HEAD": "2049f65960cc91e9e30bbd5ff1e11fc0fdf7cbd9",
+  "realIndexStillExact": true,
+  "OP27RemainsSealedChallenged": true,
+  "OP28WaiverPresent": false,
+  "OP28ReservationPresent": false,
+  "formalClearanceClaimed": false,
+  "historicalStrictPreservation": false
+}
