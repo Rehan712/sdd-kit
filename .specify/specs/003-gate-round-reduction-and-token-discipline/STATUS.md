@@ -1,15 +1,15 @@
 ---
 spec: 003-gate-round-reduction-and-token-discipline
-phase: implement          # specify | plan | tasks | implement | review | shipped | abandoned
+phase: review          # specify | plan | tasks | implement | review | shipped | abandoned
 active_tool: none      # claude | codex | copilot | none — who currently holds the spec
 branch: spec/003-gate-round-reduction-and-token-discipline            # spec/003-gate-round-reduction-and-token-discipline once cut, else none
 worktree: /Users/babar/projects/sdd-kit-public.worktrees/003-gate-round-reduction-and-token-discipline          # absolute path once created, else none
-pr: https://github.com/Rehan712/sdd-kit/pull/20                # PR URL once opened — spec-pr.sh writes this itself
-opponent: CLEARED (round 23 completed 2026-10-25T15:08:39Z, report timestamp 14:43:15Z; 0 blocking + 1 minor; historical source a7e7dd326b27…; fresh round 24 pending for reviewed regression fixes)
-reality_check: NEEDS WORK (round 3 completed 2026-10-25T18:44:21Z, report timestamp 18:03:53Z; 20 PASS + 3 FAIL, AC-004/AC-013/AC-020; fixes T031a5/T031a6 accepted, fresh full assessment pending)
-ci: not-run             # not-run | pending | green | red  (+ date) — spec-ci.sh writes this
+pr: https://github.com/Rehan712/sdd-kit/pull/21
+opponent: USER-WAIVED 2026-11-10 (last independent: round 27 CHALLENGED, sealed; round 28+ not run; minor O-026/O-027/O-028/O-032 open) — see notes/ship-waiver.md
+reality_check: USER-WAIVED 2026-11-10 (last independent: round 3 NEEDS WORK; round 4 not run) — see notes/ship-waiver.md
+ci: green 2026-11-09 on snapshot a1496f4 (run 42536005750); compact merge head gets its own PR run
 retro: not-run          # not-run | done (+ date) — /sdd:retro after ship
-updated: 2026-10-25
+updated: 2026-11-10
 ---
 
 # STATUS — Gate round reduction and token discipline
@@ -723,6 +723,8 @@ defects already reproduced with file:line
 - 2026-10-30T15:10:04Z — waiver: gate=opponent; round=28; after=27; by=user; reason=user explicitly instructed run oppnent round28 in reply to exact approval question after completedOP27 to independently reassess reviewedO034option-orderrepair onfreshmatchingevidence usingMAXcurrentcodexprovider
 
 - 2026-10-30T15:10:04Z — User authorization: by=user, actual reply "run oppnent round 28" to the exact question "Do you approve opponent round 28 after completed opponent round 27, to independently reassess the reviewed O-034 option-order repair on fresh matching evidence, using gpt-6.1-sol MAX on the current provider? This authorizes OP28 only.". Parent actually read thread c3417abc-ea60-4075-b7b8-d6e92d8f830d, messageId 3e56b1db-f8d5-4648-8d10-bdb7880afcda, itemId turn-item:message:3e56b1db-f8d5-4648-8d10-bdb7880afcda, position 525, createdBy user, creationSource web, status completed. The actual message field updatedAt is 2026-10-30T15:05:43.328Z, not a server-created timestamp. Waiver stamp 2026-10-30T15:10:04Z is parent-observed recording UTC, after the actual reply and OP27 kernel completion 2026-10-30T14:05:27.009895Z / tally end 2026-10-30T14:08:22.598494Z. The worker archived the parent-authenticated proof and did not independently read the parent thread. This grants OP28 after completed OP27 only. OP27 remains sealed/tallied CHALLENGED, O-034 blocking and O-032 minor, report SHA256 9425b8f8f0db0c24895a9bdbf9479abe49e9216489508fc7be0e3bd111109479 on historical source7d4 / FLOOR-DJZyNl. The reviewed T031a5o1 O-034 option-order repair uses one shared executable-anchored AWK predicate, has fresh HIGH CAP-866-eXyQTW 19/19 accepted intact once as ACC-0HVJw8 / ACCEPT-ouC5Ma, and genuine independent MAX codex quality r7 Ship with no findings, report e6992f251eff090d8101dc07f77c46fcae65fe07584c54f2dfd582ff323db9e4. Quality Ship is not formal clearance. Old approval statements including historical not-approved flags remain preserved, superseded only by this actual reply. No GitHub identity is inferred. Existing RC4 after3 and the ongoing O-034 temporary draft CI21 refresh authorization persist. No OP29, RC5 or merge is authorized. Source62cb and its full-source proof become historical after this waiver, and actual kernel snapshot/current-binding/current/reuse checks determine freshness without forcing CAP866 current. No T031a5o1 refresh occurs in this batch. Obtain one fresh HIGH T029 no-tick return, then parent authenticates its literal returned body, tests an incomplete FM/INV copy and accepts intact before final CI/floor freeze. Decisions are FROZEN after this batch through proof refresh, matching CI/floor, OP28, and ONLY if CLEARED standing RC4 on the same source/floor. Results belong in neutral sections only. O-032 and O-026/O-027/O-028 minor follow-ups remain open. Historical strict preservation is FALSE for unknown checkpoint refs/.DS_Store/generated JSON refs/scratch index/FETCH_HEAD/origin-directory mtimes, retained without restoration or attribution. Receipt: notes/verification/reports/s75-approval/.
+
+- 2026-11-10 — User ship waiver, no further gate rounds (by user). Quote: "clear the opponent and reality checker manually. no need to run it again and again we ran it a lot of time. so clear it and push and create PR and merge make local main up to date." — Not an independent CLEARED/READY. OP28, RC4, fresh floor and quality rerun not run. Merged as a compact tree: 25,224 evidence files under notes/verification and notes/captures excluded from main, kept in snapshot a1496f4 (PR #21 branch history) and the spec worktree. See notes/ship-waiver.md.
 
 ## Open questions / blockers
 
