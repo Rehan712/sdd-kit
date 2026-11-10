@@ -149,7 +149,8 @@ EOF
 test_AC_008_usage_limit_policy_wizard_preserves_ordered_fallback() {
   local kit p home transcript policy
   kit="$SANDBOX/kit"; home="$SANDBOX/home"; transcript="$SANDBOX/wizard.typescript"
-  cp -R "$KIT_DIR" "$kit"
+  # The kit as the input identity sees it, never the host's machine-local files (O-015).
+  copy_kit "$KIT_DIR" "$kit" || t_fail 'AC-008: cannot copy the kit for the wizard fixture'
   p="$kit/models.yml"
   mkdir -p "$home"
   cat > "$p" <<'EOF'
@@ -179,6 +180,20 @@ EOF
   assert_contains "$policy" "backoff_minutes: 90" "AC-008: wizard preserves backoff"
   run_rc 0 "$kit/scripts/model-policy.sh" --file "$p" check
   assert_contains "$OUT" "model policy valid" "AC-008: wizard output remains valid"
+}
+
+# O-015 second review: the wizard fixture copies the kit as the input identity
+# enumerates it, so a developer's ignored models.yml -- here a link to a policy
+# outside the kit -- neither reaches the fixture nor is written through by it.
+test_AC_008_wizard_fixture_never_writes_through_a_host_models_yml() {
+  local host="$SANDBOX/host-kit" target="$SANDBOX/dotfiles/models.yml" before
+  make_host_kit "$host" || t_fail 'AC-008: cannot build the host kit'
+  mkdir -p "$SANDBOX/dotfiles"
+  cp "$KIT_DIR/models.example.yml" "$target"
+  before="$(cksum < "$target")"
+  ln -s "$target" "$host/models.yml"
+  on_host_kit "$host" test_AC_008_usage_limit_policy_wizard_preserves_ordered_fallback
+  assert_eq "$before" "$(cksum < "$target")" "AC-008: the wizard fixture wrote through the host kit's models.yml link"
 }
 
 t_run_all

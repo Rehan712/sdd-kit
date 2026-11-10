@@ -135,3 +135,22 @@ check-back date.
 - Hub knowledge/overlay edits are applied; constitution proposals are quoted.
 - `STATUS.md` shows `retro: done`.
 - The user has the summary.
+
+## Measure cost together with quality
+
+Use `spec-gate.sh tally <spec-dir>` and the cost/quality table in the retro
+template. Class names identify stable defect families across files; Root cause
+names the process failure. Preserve raw locations, prior/reopened finding IDs,
+distinct findings and repeated observations separately. Leave legacy classes
+unclassified, or annotate a copy with the evidence for each mapping.
+
+Record actual usage/credits observations before/after in the same unit and their
+source; missing observations or baselines are unknown, never inferred from
+rounds, bytes or model prices. Record executed checks, cache hits, full-log bytes
+and returned-summary bytes as proxies only. The shipped 002 baseline is five
+opponent rounds, six wrong-result findings and one final reality-check report;
+two rounds/30% savings are hypotheses. Do not change models to claim savings.
+Name a human 14-day defect observation owner and concrete check-back date,
+retain raw sites and reopened findings, and name the next three measurement
+specs when known (otherwise unknown). Pending observations prevent a claim of
+quality-neutral savings, not a fabricated zero-defect count.

@@ -65,3 +65,21 @@ Tags.of(this).add('ManagedBy', 'cdk');
 - IAM circular dependencies: Stack A needs Stack B's bucket; Stack B needs Stack A's role. Fix with CfnOutput → CfnParameter or a shared stack.
 - `Duration.seconds(N)` confused with raw seconds — always use the helper.
 - `removalPolicy` defaulting to RETAIN for stateful resources is a foot-gun if you `cdk destroy` a dev stack and orphan resources.
+
+## Failure-mode and checkpoint defaults
+
+Use the [verification contract](../verification-contract.md). Fill applicable
+scenario prompts as concrete FM/INV rows with test families in the plan; record
+explicit exclusions with a component/category and reason. Shared scenarios use
+one row listing all affected components.
+
+- Boundary: synthesize IAM policies for each environment and assert exact actions and resource ARNs.
+- State/data integrity: replace or remove a persistent resource; assert the decided removal policy and retention of production data.
+- Partial failure: omit a handler environment variable or fail a downstream request; assert the synth-to-handler environment contract and explicit error mapping.
+
+Optional `checkpoints` use exact authored task-stage names: run the focused
+component tests when its stage finishes and integration after consumers land.
+Start from `npm test -- --run`, adapting to existing project scripts and test scope.
+Required `gate_checks` separately cover the full suite (`npm test -- --run`)
+and mandatory static checks (`npm run typecheck; npx cdk synth`); checkpoints never replace that list.
+Commands here are planning defaults, not an assertion that a project has them.

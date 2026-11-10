@@ -46,3 +46,21 @@ tests/                # cross-crate integration tests (per-crate tests live in e
 - `clone()` sprawl papering over ownership design problems.
 - A god-crate where `core` imports the HTTP framework — boundaries have dissolved.
 - Stringly-typed errors (`Err("bad input".into())`) instead of typed enums.
+
+## Failure-mode and checkpoint defaults
+
+Use the [verification contract](../verification-contract.md). Fill applicable
+scenario prompts as concrete FM/INV rows with test families in the plan; record
+explicit exclusions with a component/category and reason. Shared scenarios use
+one row listing all affected components.
+
+- Boundary: malformed input returns the declared error enum; test panic/error mapping at the binary boundary.
+- Partial failure: cancellation after ownership acquisition releases the owned resource; failed acquisition releases nothing.
+- Concurrency/ordering: a task cancelled while waiting on a bounded channel must not leak permits or deadlock.
+
+Optional `checkpoints` use exact authored task-stage names: run the focused
+component tests when its stage finishes and integration after consumers land.
+Start from `cargo test --workspace`, adapting to existing project scripts and test scope.
+Required `gate_checks` separately cover the full suite (`cargo test --workspace`)
+and mandatory static checks (`cargo clippy --workspace --all-targets -- -D warnings; cargo fmt --check`); checkpoints never replace that list.
+Commands here are planning defaults, not an assertion that a project has them.

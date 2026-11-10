@@ -28,10 +28,15 @@ The deterministic half lives in `~/.sdd/scripts/spec-ci.sh` (it writes the
 1. `bash ~/.sdd/scripts/spec-ci.sh logs <spec-dir>` → writes + prints `notes/ci.md`.
 2. Diagnose each failing check from the logs. For every distinct defect, append
    a follow-up task under the **Ship** stage: `T###c1, T###c2, …` (`###` = the
-   Open-PR task's number), each with *Files:*, *Acceptance:* (the failing check
-   command, locally re-runnable when possible), and *Refs:* to the AC it blocks.
-3. Fix in the worktree (route via `~/.sdd/templates/stack-routing.md`), tick
-   each with `spec-task.sh done … --evidence`, commit, **apply the re-gate rule
+   Open-PR task's number). Follow-ups change behavior, so they are ordinary
+   implementation tasks and the Ship exemption does not reach them; an untyped
+   one can be neither captured nor accepted. Give each: *Files:*, *Acceptance:*
+   (the failing check command, locally re-runnable when possible),
+   *Verify kind:*, *Tests:* (a locator registered in plan §7 — extend that
+   registry if the fix genuinely needs a new family), *Verify:* (the executable
+   command), and *Refs:* to the AC it blocks plus the FM/INV rows it covers.
+3. Fix in the worktree (route via `~/.sdd/templates/stack-routing.md`), accept
+   each structured no-tick return with `spec-gate.sh accept`, commit, **apply the re-gate rule
    below**, then push and re-run `spec-ci.sh watch`.
 
 ### exit 30 — changes requested
@@ -39,19 +44,20 @@ The deterministic half lives in `~/.sdd/scripts/spec-ci.sh` (it writes the
 1. Read the review threads: `gh pr view <url> --comments` (and
    `gh api repos/{owner}/{repo}/pulls/<n>/comments` for line comments).
 2. Every actionable comment becomes `T###r1, T###r2, …` under Ship — same
-   shape as c-tasks. Non-actionable disagreements: reply on the thread with
+   full typed shape as c-tasks, including *Verify kind:*, *Tests:* and *Verify:*;
+   a three-field task cannot produce a `--from-task` capture. Non-actionable disagreements: reply on the thread with
    the spec/AC citation; the spec is the arbiter, and changing it is
    `/sdd:specify` territory, not a code push.
-3. Fix, evidence, commit, re-gate rule, push, reply to each thread with what
+3. Fix, accept each structured no-tick return with `spec-gate.sh accept`,
+   commit, re-gate rule, push, reply to each thread with what
    changed, re-request review (`gh pr edit <url> --add-reviewer <handle>` or
    note it for the user).
 
 ### exit 40 — merge conflicts
 
 Rebase the worktree onto the base branch (`git fetch origin && git rebase
-origin/<base>`), resolve, `git push --force-with-lease`. A pure rebase (no
-manual resolution) needs no re-gate; every manually-resolved hunk counts as a
-code change under the re-gate rule.
+origin/<base>`), resolve, `git push --force-with-lease`. Validate current proof after rebasing; every manually-resolved hunk counts as a
+semantic change under the re-gate rule.
 
 ### exit 10 — pending
 
@@ -85,20 +91,14 @@ is the only reader (constitution §10.6).
 
 ## The re-gate rule (stale verdicts are the silent failure here)
 
-Any commit added to the PR after a gate verdict makes that verdict stale for
-the delta. Bounded, not paranoid:
-
-- **Mechanical fixes** — lint, formatting, a flaky-test rerun, a missing
-  import, comment/doc edits: no re-gate. Note them in STATUS Decisions.
-- **Behavioral fixes** — anything that changes what the code does under any
-  input (that includes most c-/r-tasks and every manually-resolved conflict):
-  re-invoke the **opponent** (per `/sdd:implement` §5a) with the dossier's diff
-  scoped to the delta since the last CLEARED round; reality-check re-runs only
-  if a fix invalidated an AC's recorded evidence.
-- Gate escalation and waivers follow the opponent's Escalation section: from
-  round 3 the user arbitrates; a waiver is the user's explicit sign-off
-  recorded in STATUS Decisions (`waived by <user> — <reason> — <date>`), never
-  a quietly softened verdict.
+After any semantic input change, refresh the deterministic floor and obtain new
+gate reservations before relying on clearance. Bookkeeping-only edits can retain
+current source identity, but never skip artifact integrity checks. Opponent scope
+covers changed, affected and previously unexamined surfaces, including unchanged
+code with a reproduced defect. Reality-check includes every AC and carries only
+runtime-validated unchanged PASS rows. Neither gate is delta-only. A pure rebase
+also requires proof identity validation; commit IDs alone do not decide freshness.
+Follow the protocol below, including exact-round authorization and refusal handling.
 
 ## Rules
 
@@ -106,7 +106,9 @@ the delta. Bounded, not paranoid:
   `spec-ci.sh` exit codes; re-run it after every push.
 - **Follow-up grammar:** `T###c<n>` CI failures, `T###r<n>` review feedback —
   siblings of `T###o<n>` (opponent) and `T###s<n>` (security). All are normal
-  tasks: Files/Acceptance/Refs, evidence on tick.
+  implementation tasks and none inherits the Gate/Ship exemption: they carry
+  Files/Acceptance/Verify kind/Tests/Verify/Refs, and deterministic acceptance
+  on tick.
 - **Never merge over a red gate, a stale gate, or with --admin.** The gates
   gate the merge, not just the PR-open.
 - **Keep STATUS current**: `spec-ci.sh` owns `ci:`; you own blockers ("waiting
@@ -121,3 +123,64 @@ the delta. Bounded, not paranoid:
   `shipped` — or the precise blocker (red check, awaited reviewer, escalated
   gate) is recorded in STATUS with its follow-up tasks opened, and the user
   knows the single next action.
+
+## Deterministic implementation and gate protocol
+
+Use the worktree-local scripts when changing the kit itself; otherwise use the
+installed scripts. Let S be that scripts directory, SPEC the live spec path.
+Read the task verbatim and provide an authoritative brief: exact source revision,
+decided anchors/seams, REQ/AC text, required FM/INV tests, Verify and acceptance.
+Planning consultation may propose decisions; implementation requests only a
+missing slice unless a new decision is required.
+
+1. Finish all source edits in a batch before any acceptance capture. Workers
+   never tick tasks. Wait for every editing worker at this batch barrier; no
+   new editing batch, commit or source mutation until captures and acceptance
+   finish. Refresh historical [x] proof when stale; never reopen implementation
+   solely because proof aged.
+2. Run `bash "$S/spec-run.sh" "$SPEC" T### --from-task --no-tick --summary`.
+   Return the exact Verification-Return block in the shared
+   [verification contract](../../templates/verification-contract.md): authentic
+   capture IDs, canonical summaries and every required FM/INV-to-test mapping.
+   Manual tasks use the declared artifact observation grammar, never a fabricated
+   command exit or bare evidence text.
+3. The invoker runs `bash "$S/spec-gate.sh" accept "$SPEC" T### "$R"`, with
+   `R="$SPEC/notes/verification/returns/T###.txt"`: a return is spec
+   bookkeeping, and a stray return.txt in the worktree changes the input
+   manifest, so acceptance rejects the fresh capture as stale.
+   Only its exit 0 accepts the task. Missing, forged, failed or stale returns
+   leave tasks unchanged. On failure allow one escalation retry with the gap
+   named and the existing implement-hard policy; a second failure stops
+   dispatch. Intentional negative controls are recorded separately from retries.
+   Keep full logs on disk; pass bounded summaries and referenced diagnostics.
+4. After acceptance/commits at each exact authored stage boundary run
+   `bash "$S/spec-gate.sh" checkpoint "$SPEC" "$STAGE"`. Nonzero stops
+   next-stage dispatch, including when no stage commands exist but retained
+   completed-task coverage fails.
+5. Before EACH independent gate invocation run
+   `bash "$S/spec-gate.sh" floor "$SPEC"`, then
+   `bash "$S/spec-gate.sh" round "$SPEC" "$GATE"`.
+   Nonzero from either stops gate dispatch; exit 4 is the round-cap refusal,
+   never a report to reinterpret. Pass the granted round, source and floor,
+   full spec/task paths, source manifests, prior reports, and staged/dirty/
+   untracked diff to the gate. Valid execution can be shared; semantic verdicts
+   remain independent. Opponent precedes reality-check; both keep their defaults.
+6. Persist the returned report only through
+   `bash "$S/spec-gate.sh" round "$SPEC" "$GATE" --complete "$P"`, with
+   `P="$SPEC/notes/verification/reports/$GATE.md"` — a report left beside the
+   code changes the manifest that the next capture and floor verify.
+   Reconcile interrupted reservations explicitly with --reconcile; never reset
+   history or infer a review completed. Rounds 1–3 are permitted for EACH gate.
+   Round 4+ needs exact-gate/exact-next-round user waiver or accepted spec
+   revision, UTC ordered after the prior report, in STATUS Decisions. Autopilot
+   cannot authorize itself. A waiver authorizes one invocation, never clearance.
+   Validate the entry when it is written with
+   `bash "$S/spec-gate.sh" waiver "$SPEC" "$GATE" <round>`: same grammar and
+   the same diagnostics as the reservation, reserving nothing and changing no
+   state. A waiver that has never been parsed is not an authorization.
+7. For CHALLENGED/NEEDS WORK, create follow-ups by stable defect Class with all
+   known sites and a sibling sweep/test in the same fix; retain every established
+   blocker. Re-review changed, affected and previously unexamined surfaces,
+   including unchanged code with a concretely triggered defect. Never narrow
+   severity or scope to hit a round/cost target. Keep security-reviewer authority,
+   configured models and separate gate roles unchanged.

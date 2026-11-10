@@ -2,3 +2,21 @@
 # No stack overlay matches bash+markdown tooling; overlays list stays empty.
 stacks: []
 base_branch: main
+gate_checks:
+  - 'bash tests/run.sh'
+  - 'bash tests/shellcheck.sh'
+checkpoints:
+  Backend:
+    - 'bash tests/run.sh'
+  API:
+    - 'bash tests/run.sh'
+# Only these deterministic local checks opt in; integrity checks always run.
+reuse_checks:
+  - 'bash tests/run.sh'
+  - 'bash tests/shellcheck.sh'
+verification_tools:
+  - 'bash'
+  - 'git'
+  - 'shellcheck'
+verification_inputs: []
+verification_environment: []

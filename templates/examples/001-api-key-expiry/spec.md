@@ -2,6 +2,7 @@
 spec_id: 001-api-key-expiry
 title: API keys expire 90 days after issue
 status: accepted
+verification_contract: 1
 created: 2026-07-10
 updated: 2026-07-10
 owners: [example-owner]

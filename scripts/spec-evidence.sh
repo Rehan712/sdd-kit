@@ -23,7 +23,7 @@
 # is the gate report / PR URL, matching spec-task.sh and sdd-analyze.sh.
 #
 # Usage:
-#   spec-evidence.sh <spec-dir>
+#   spec-evidence.sh <spec-dir> [--current]
 #   spec-evidence.sh --help
 #
 # Exit: 0 = clean (warnings allowed), 1 = integrity errors, 2 = usage.
@@ -32,6 +32,9 @@ set -uo pipefail
 
 HUB_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 . "$HUB_DIR/scripts/lib.sh"
+# The kernel pins the harness's own parsing to LC_ALL=C when it loads, so it
+# loads before any program reads a byte of the spec (O-017).
+. "$HUB_DIR/scripts/verification-lib.sh"
 
 init_colors
 usage() { usage_from_header "$0"; exit 0; }
@@ -40,9 +43,23 @@ usage() { usage_from_header "$0"; exit 0; }
 SPEC_DIR="${1:-}"
 [[ -z "$SPEC_DIR" || ! -d "$SPEC_DIR" ]] && { echo "usage: spec-evidence.sh <spec-dir>" >&2; exit 2; }
 SPEC_DIR="$(cd "$SPEC_DIR" && pwd)"
-SPEC="$SPEC_DIR/spec.md"; TASKS="$SPEC_DIR/tasks.md"; STATUS="$SPEC_DIR/STATUS.md"
+# Suffixed names on purpose: the documented workflow tells callers to use
+# "$SPEC", and the verification checks fingerprint the exported environment.
+# Rewriting a caller-exported name here would make every capture look stale.
+SPEC_FILE="$SPEC_DIR/spec.md"; TASKS_FILE="$SPEC_DIR/tasks.md"; STATUS_FILE="$SPEC_DIR/STATUS.md"
 EVID="$SPEC_DIR/notes/evidence.md"; RC="$SPEC_DIR/notes/reality-check.md"
-[[ -f "$TASKS" ]] || { echo "no tasks.md in $SPEC_DIR" >&2; exit 1; }
+[[ -f "$TASKS_FILE" ]] || { echo "no tasks.md in $SPEC_DIR" >&2; exit 1; }
+
+# Legacy evidence remains readable; new contracts need current proof by default.
+# A frontmatter that cannot be read is a failure, never the legacy check.
+# Routed by the key, as every other reader of the contract routes it: no key
+# is legacy, one key of value 1 is current, anything else is refused, never
+# the legacy check (vf_contract).
+evidence_contract="$(vf_contract "$SPEC_FILE")" || exit 3
+if [[ "${2:-}" == --current || "$evidence_contract" == 1 ]]; then
+  vf_evidence_current "$SPEC_DIR"
+  exit $?
+fi
 
 errors=0; warnings=0
 pass() { echo "  ${GREEN}✓${RESET} $1"; }
@@ -58,7 +75,7 @@ is_umbrella=0
 repo_root="$(git -C "$SPEC_DIR" rev-parse --show-toplevel 2>/dev/null || true)"
 
 # --- per-task records: id \t stage \t is_gate \t is_done \t evidence-text -----
-records="$(awk '
+records="$(awk "$_VF_AWK_TEXT_UNFENCED"'
   function flush() { if (id!="") printf "%s\t%s\t%d\t%d\t%s\n", id, stage, is_gate, is_done, ev; id="" }
   /^##[^#]/ { flush(); sub(/^##[[:space:]]*/,""); stage=$0 }
   /^- \[[ xX~]\] \*\*T[0-9]{3}[a-z0-9]*\*\*/ {
@@ -70,7 +87,7 @@ records="$(awk '
     line=$0; sub(/^[[:space:]]*-[[:space:]]*\*Evidence[^*]*:\*[[:space:]]*/,"",line); ev=line
   }
   END { flush() }
-' "$TASKS")"
+' "$TASKS_FILE")" || { fail "tasks.md could not be parsed for its task records"; records=''; }
 
 checked=0
 while IFS=$'\t' read -r id stage is_gate is_done ev; do
@@ -98,9 +115,26 @@ while IFS=$'\t' read -r id stage is_gate is_done ev; do
   esac
 
   # 3. named screenshot/PDF artifact must exist on disk
-  for art in $(printf '%s\n' "$ev" | grep -oiE '[[:graph:]]+\.(png|jpg|jpeg|gif|svg|pdf)' || true); do
+  # A name is a run of bytes that are neither whitespace nor control: the
+  # evidence was read through the kernel's whitespace step, so a U+00A0 or a
+  # U+3000 ends a name as an ASCII space does, and a non-ASCII letter is part
+  # of it (T030o43 reviews 1 and 2). Quoting punctuation from a closed set
+  # glued to the front is not part of the name; a missing name still fails.
+  # Globbing is off, so a name is never a pattern.
+  arts="$(printf '%s\n' "$ev" | grep -oiE '[^[:space:][:cntrl:]]+\.(png|jpg|jpeg|gif|svg|pdf)')"; arts_rc=$?
+  (( arts_rc < 2 )) || fail "$id evidence could not be searched for artifact names"
+  set -f
+  for art in $arts; do
     art="${art%[.,;:)]}"   # trim trailing punctuation
-    if [[ -e "$art" || -e "$SPEC_DIR/$art" || ( -n "$repo_root" && -e "$repo_root/$art" ) ]]; then
+    bare="$art" stripped=1
+    while (( stripped )); do
+      stripped=0
+      for wrap in "\"" "'" '`' "(" "[" "{" "<" $'\342\200\234' $'\342\200\230' $'\302\253' $'\343\200\214' $'\343\200\216' $'\357\274\210'; do
+        if [[ "$bare" == "$wrap"* ]]; then bare="${bare#"$wrap"}"; stripped=1; fi
+      done
+    done
+    if [[ -e "$art" || -e "$SPEC_DIR/$art" || ( -n "$repo_root" && -e "$repo_root/$art" ) ]] ||
+       [[ "$bare" != "$art" && -n "$bare" && ( -e "$bare" || -e "$SPEC_DIR/$bare" || ( -n "$repo_root" && -e "$repo_root/$bare" ) ) ]]; then
       :
     elif (( is_umbrella )); then
       warn "$id names artifact '$art' — not found under the hub (umbrella: check the repo worktree)"
@@ -108,15 +142,16 @@ while IFS=$'\t' read -r id stage is_gate is_done ev; do
       fail "$id names artifact '$art' in its evidence, but no such file exists"
     fi
   done
-done <<< "$records"
+  set +f
+done < <(printf '%s\n' "$records")
 
 (( checked > 0 )) && pass "$checked ticked task(s) checked for evidence integrity" \
   || pass "no ticked implementation tasks yet — nothing to verify"
 
 # --- 4. manual / post-deploy ACs need an owner + check-back date -------------
 manual_acs=""
-if [[ -f "$SPEC" ]]; then
-  manual_acs="$(grep -E 'AC-[0-9]{3}' "$SPEC" | grep -iE '\[DEPLOY\]|\[MANUAL\]|UNVERIFIABLE' \
+if [[ -f "$SPEC_FILE" ]]; then
+  manual_acs="$(grep -E 'AC-[0-9]{3}' "$SPEC_FILE" | grep -iE '\[DEPLOY\]|\[MANUAL\]|UNVERIFIABLE' \
                  | grep -oE 'AC-[0-9]{3}' | sort -u || true)"
 fi
 if [[ -f "$RC" ]]; then
@@ -131,7 +166,7 @@ fi
 
 if [[ -n "$manual_acs" ]]; then
   has_checkback=0
-  if [[ -f "$STATUS" ]] && grep -qE '\b(20|21)[0-9]{2}-[0-1][0-9]-[0-3][0-9]\b' "$STATUS"; then
+  if [[ -f "$STATUS_FILE" ]] && grep -qE '\b(20|21)[0-9]{2}-[0-1][0-9]-[0-3][0-9]\b' "$STATUS_FILE"; then
     has_checkback=1
   fi
   n="$(printf '%s\n' "$manual_acs" | grep -c .)"

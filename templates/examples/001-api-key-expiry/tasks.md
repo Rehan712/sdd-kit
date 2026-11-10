@@ -13,53 +13,69 @@ updated: 2026-07-10
 ## Setup
 
 - [ ] **T001** — Add KEY_TTL_DAYS and expiresAt to KeyRecord
-  - *Files:* `src/keys/types.ts`
-  - *Acceptance:* `KeyRecord` has `expiresAt: string`; `KEY_TTL_DAYS = 90` exported (plan §4 seam — the only literal 90)
-  - *Verify:* `bun run typecheck` → "0 errors"
-  - *Refs:* REQ-002, plan §4
+  - *Files:* `src/keys/types.ts`, `test/keys.expiry.test.ts`
+  - *Acceptance:* Add the keys.ttl test for the exported 90-day constant and expiry record shape (plan §4 seam); typecheck remains a required static gate.
+  - *Verify kind:* test
+  - *Tests:* `test/keys.expiry.test.ts::keys.ttl`
+  - *Verify:* `bun test --filter keys.ttl` → all tests pass
+  - *Refs:* REQ-002, AC-001, plan §4
 
 ## Backend
 
 - [ ] **T002** — Stamp expires_at at key issue
-  - *Files:* `src/keys/issue.ts`, `schemas/keys.ts`
-  - *Acceptance:* `POST /api/keys` returns 201 with `expires_at` = issue + 90d; zod schema updated in the same commit (plan §6)
+  - *Files:* `src/keys/issue.ts`, `schemas/keys.ts`, `test/keys.expiry.test.ts`
+  - *Acceptance:* Extend keys.issue frozen-clock/schema tests alongside the handler: 201 with expires_at exactly issue + 90d, including a month boundary (plan §6).
+  - *Verify kind:* test
+  - *Tests:* `test/keys.expiry.test.ts::keys.issue`
   - *Verify:* `bun test --filter keys.issue` → "2 pass"
-  - *Refs:* REQ-002, AC-001, plan §2
+  - *Refs:* REQ-002, AC-001, FM-001, plan §2, §7
+  - *Integration owner:* T005
 
 - [ ] **T003** [hard] — Reject expired keys in auth middleware
-  - *Files:* `src/middleware/auth.ts`
-  - *Acceptance:* expired key → `401 {"error":"key_expired"}` before handler dispatch; revoked-AND-expired → `key_revoked` wins (plan §4 seam ordering); valid keys unaffected (the filter's valid-key control case); boundary `now == expires_at` counts as expired (plan R2)
+  - *Files:* `src/middleware/auth.ts`, `test/keys.expiry.test.ts`
+  - *Acceptance:* Extend keys.expired tests in this commit: reject before dispatch, revoked-and-expired keeps key_revoked precedence, equality is expired and valid keys dispatch (plan §4, §7).
+  - *Verify kind:* test
+  - *Tests:* `test/keys.expiry.test.ts::keys.expired`
   - *Verify:* `bun test --filter keys.expired` → "3 pass" (expired + boundary + valid-control)
-  - *Refs:* REQ-001, REQ-003, AC-002, AC-003, plan §2
+  - *Refs:* REQ-001, REQ-003, AC-002, AC-003, FM-002, FM-004, INV-001, plan §2, §7
+  - *Integration owner:* T005
 
 - [ ] **T004** [P] — Backfill script for existing keys
-  - *Files:* `scripts/backfill-key-expiry.ts`
-  - *Acceptance:* dry-run against a seeded local table sets `expires_at` on every row missing it and touches nothing else (CON-001)
-  - *Verify:* `bun scripts/backfill-key-expiry.ts --dry-run --table local` → "0 skipped"
-  - *Refs:* REQ-001, plan §3
+  - *Files:* `scripts/backfill-key-expiry.ts`, `test/backfill-key-expiry.test.ts`
+  - *Acceptance:* Add seeded-table backfill.expiry tests for missing attributes and repeated partial runs preserving existing timestamps; retain --dry-run (CON-001).
+  - *Verify kind:* test
+  - *Tests:* `test/backfill-key-expiry.test.ts::backfill.expiry`
+  - *Verify:* `bun test --filter backfill.expiry` → all tests pass
+  - *Refs:* REQ-001, AC-002, FM-003, INV-002, plan §3, §7
 
 ## Tests
 
-- [ ] **T005** — Expiry test suite binding the ACs
-  - *Files:* `test/keys.expiry.test.ts`
-  - *Acceptance:* tests name AC-001, AC-002, AC-003 in their titles (spec-ac-coverage.sh checks the binding); frozen clock via the existing `withFrozenClock` helper (plan §4 seam)
-  - *Verify:* `bun test test/keys.expiry.test.ts` → "6 pass"
-  - *Refs:* AC-001, AC-002, AC-003
+- [ ] **T005** — Integrate issue and auth expiry contracts
+  - *Files:* `test/keys.expiry.integration.test.ts`
+  - *Acceptance:* Compose issue → authenticate → expire with the existing frozen clock; integration titles name AC-001/002/003. Local behavior tests already landed with T001–T004.
+  - *Verify kind:* test
+  - *Tests:* `test/keys.expiry.integration.test.ts::keys.expiry.integration`
+  - *Verify:* `bun test test/keys.expiry.integration.test.ts` → all tests pass
+  - *Refs:* AC-001, AC-002, AC-003, FM-004, INV-001, plan §7
 
 ## Observability
 
 - [ ] **T006** — Emit auth.key_expired_rejects metric
-  - *Files:* `src/metrics.ts`, `src/middleware/auth.ts`
-  - *Acceptance:* counter increments on every expired-key reject; a unit test asserts the emit; the live CloudWatch metric is AC-004's [DEPLOY] half, owned by T011
+  - *Files:* `src/metrics.ts`, `src/middleware/auth.ts`, `test/metrics.expiry.test.ts`
+  - *Acceptance:* Add metrics.expired assertions alongside the counter for every expired-key reject; the live CloudWatch observation remains AC-004's separate [DEPLOY] half, owned by T011.
+  - *Verify kind:* test
+  - *Tests:* `test/metrics.expiry.test.ts::metrics.expired`
   - *Verify:* `bun test --filter metrics.expired` → "1 pass"
   - *Refs:* AC-004, plan §8
 
 ## Docs
 
 - [ ] **T007** — Document key_expired error and expires_at field
-  - *Files:* `docs/api.md`
-  - *Acceptance:* both documented next to `key_revoked`; the doc's curl example runs as written
-  - *Verify:* `manual: paste the doc's curl against the local server — the 401 body matches the doc verbatim`
+  - *Files:* `docs/api.md`, `test/docs-key-expiry.sh`
+  - *Acceptance:* Add assert_documented_curl with the docs: both fields are next to key_revoked and the documented curl runs against the seeded local server, asserting the exact 401 body.
+  - *Verify kind:* assertion
+  - *Tests:* `test/docs-key-expiry.sh::assert_documented_curl`
+  - *Verify:* `bash test/docs-key-expiry.sh` → documented response assertions pass
   - *Refs:* REQ-003, AC-002
 
 ## Reality Check (pre-ship gate)

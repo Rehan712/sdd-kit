@@ -2,6 +2,7 @@
 spec_id: NNN-slug
 title: <One-line title>
 status: draft  # draft | accepted | implementing | shipped | rejected
+verification_contract: 1
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
 owners: [<github-handle>]
@@ -11,6 +12,11 @@ project: <project-name from registry.yml>
 # <Title>
 
 > One-paragraph elevator pitch. What's changing and for whom?
+
+This spec uses the [version 1 verification contract](verification-contract.md):
+the plan defines failure modes, invariants and test families; tasks bind them
+when decomposed. The project's nonempty `gate_checks:` list supplies required
+suite/static verification independently of optional stage checkpoints.
 
 ## 1. Problem
 

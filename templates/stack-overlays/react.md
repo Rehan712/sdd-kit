@@ -52,3 +52,21 @@ src/
 - Server responses copied into a client store and drifting stale.
 - Effect chains where one effect sets state that triggers another effect.
 - Hard-coded user-facing strings scattered outside i18n.
+
+## Failure-mode and checkpoint defaults
+
+Use the [verification contract](../verification-contract.md). Fill applicable
+scenario prompts as concrete FM/INV rows with test families in the plan; record
+explicit exclusions with a component/category and reason. Shared scenarios use
+one row listing all affected components.
+
+- Concurrency/ordering: resolve requests out of order after a dependency change; stale state must not overwrite the current selection.
+- Partial failure: unmount during an effect and exercise the error boundary; assert cleanup and the visible recovery action.
+- Boundary: empty/loading/error data and repeated submit events keep accessible controls and prevent duplicate mutations.
+
+Optional `checkpoints` use exact authored task-stage names: run the focused
+component tests when its stage finishes and integration after consumers land.
+Start from `npm test -- --run`, adapting to existing project scripts and test scope.
+Required `gate_checks` separately cover the full suite (`npm test -- --run`)
+and mandatory static checks (`npm run lint; npm run typecheck`); checkpoints never replace that list.
+Commands here are planning defaults, not an assertion that a project has them.

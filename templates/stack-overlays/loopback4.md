@@ -45,3 +45,21 @@ Read alongside `plan.md` when `stack.yml` includes `loopback4`.
 - Decorators on inherited methods sometimes silently fail — keep route decorators on the subclass method.
 - `@belongsTo` / `@hasMany` relations need the inclusion resolver registered to actually populate.
 - Default `@property({type: 'string'})` accepts `null`. Add `required: true` to forbid it.
+
+## Failure-mode and checkpoint defaults
+
+Use the [verification contract](../verification-contract.md). Fill applicable
+scenario prompts as concrete FM/INV rows with test families in the plan; record
+explicit exclusions with a component/category and reason. Shared scenarios use
+one row listing all affected components.
+
+- Boundary: send an invalid payload or unauthorized identifier through a real controller; validate the generated OpenAPI response contract.
+- Partial failure: datasource write fails midway; assert transaction rollback and the declared HTTP error.
+- State/data integrity: parallel updates and missing records retain repository constraints and prevent stale success responses.
+
+Optional `checkpoints` use exact authored task-stage names: run the focused
+component tests when its stage finishes and integration after consumers land.
+Start from `npm test`, adapting to existing project scripts and test scope.
+Required `gate_checks` separately cover the full suite (`npm test`)
+and mandatory static checks (`npm run lint; npm run build`); checkpoints never replace that list.
+Commands here are planning defaults, not an assertion that a project has them.

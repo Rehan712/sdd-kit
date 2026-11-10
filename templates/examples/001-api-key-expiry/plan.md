@@ -69,7 +69,7 @@ None new. No IAM changes — the metric uses the existing `PutMetricData` grant.
 - `aws`: metric name follows the existing `auth.*` namespace — no new
   dashboard; the alarm lands with the Observability task.
 
-## 7. Risks
+## 7. Risks, failure modes and verification
 
 - **R1:** Backfill misses rows written between scan and deploy —
   *Mitigation:* after the 48h flag window, the middleware treats a missing
@@ -77,6 +77,45 @@ None new. No IAM changes — the metric uses the existing `PutMetricData` grant.
 - **R2:** Boundary off-by-one at exactly 90 days — *Mitigation:* single
   comparison site (`isExpired`), server time only; the AC-002 test includes
   the `now == expires_at` boundary case (expired at, not after).
+
+Use the shared [verification contract](../../verification-contract.md).
+Families below are planned declarations; the behavior task creates or extends
+their tests before acceptance. Planning does not assign future task IDs.
+
+| ID | Components | Category | Trigger | Decided behavior | Test families |
+|---|---|---|---|---|---|
+| FM-001 | issue, response schema | boundary | Issue at a frozen server time across a month boundary | Return exactly KEY_TTL_DAYS after issue and retain the response schema | issue |
+| FM-002 | auth, handler | concurrency/ordering | Key is revoked and expired, or now equals expires_at | Revoked wins; equality is expired; reject before dispatch | expiry |
+| FM-003 | backfill, auth | partial failure | Backfill retries a partially updated table | Fill missing expiry only; preserve existing timestamps | backfill |
+| FM-004 | auth | regression | Unexpired valid key reaches the new guard | Preserve authentication and dispatch | expiry, integration |
+
+| ID | Scope | Promise | Enforcement sites | Test families |
+|---|---|---|---|---|
+| INV-001 | auth, handler | Never dispatch an expired key when enforcement is enabled | Shared isExpired guard after revocation check | expiry, integration |
+| INV-002 | backfill | Never replace an existing expires_at | Conditional missing-attribute update in the backfill writer | backfill |
+
+Exclusions: response schema / concurrency/ordering — synchronous shape
+validation has no shared state; docs / partial failure — documentation assertions
+make no persistent writes. Shared auth/handler cases use the same rows; existing
+storage-failure handling is unchanged and remains covered by the CRUD suite.
+
+| Family | Kind | Criteria | Concrete locators |
+|---|---|---|---|
+| ttl | test | AC-001 | `test/keys.expiry.test.ts::keys.ttl` |
+| issue | test | AC-001 | `test/keys.expiry.test.ts::keys.issue` |
+| expiry | test | AC-002, AC-003 | `test/keys.expiry.test.ts::keys.expired` |
+| backfill | test | AC-002 | `test/backfill-key-expiry.test.ts::backfill.expiry` |
+| integration | test | AC-001, AC-002, AC-003 | `test/keys.expiry.integration.test.ts::keys.expiry.integration` |
+| metric | test | AC-004: local emission only; CloudWatch observation remains manual | `test/metrics.expiry.test.ts::metrics.expired` |
+| documentation | assertion | AC-002: documented curl response | `test/docs-key-expiry.sh::assert_documented_curl` |
+
+The local metric family proves emission, not CloudWatch delivery. The separate
+deploy observation is `cloudwatch-expiry-dashboard`, backed by the real screenshot,
+observer and timestamp described in AC-004; rollout owns that manual evidence.
+The illustrative project declares `bun test` and `bun run typecheck` as required
+gate_checks. Optional Backend checkpoints run `bun test`; they do not replace
+the gate list. The golden fixture supplies that project configuration in its
+sandbox; it never runs a fictional API or claims deployment evidence.
 
 ## 8. Rollout
 

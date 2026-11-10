@@ -23,6 +23,7 @@ set -uo pipefail
 
 HUB_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 . "$HUB_DIR/scripts/lib.sh"
+. "$HUB_DIR/scripts/verification-lib.sh"
 REGISTRY="$HUB_DIR/registry.yml"
 
 init_colors
@@ -422,6 +423,23 @@ check_project() {
       [[ -d "$sd" ]] || continue
       total=$((total+1))
       [[ -f "${sd}tasks.md" && ! -f "${sd}STATUS.md" ]] && { warn "no STATUS.md in $(basename "$sd")"; missing=$((missing+1)); }
+      if [[ -f "${sd}spec.md" ]]; then
+        local config_result config_rc=0 config_mode=tasks config_line config_error=0
+        case "$(fm_get "${sd}STATUS.md" phase)" in specify|plan) config_mode=plan ;; esac
+        config_result="$(vf_project_config "$sd" "$config_mode" "$proj/.specify/stack.yml" 2>&1)" || config_rc=$?
+        while IFS= read -r config_line; do
+          case "$config_line" in
+            error:*) fail "${config_line#error: }"; config_error=1 ;;
+            warning:*) warn "${config_line#warning: }" ;;
+            ?*) fail "verification configuration parser: $config_line"; config_error=1 ;;
+          esac
+        done <<< "$config_result"
+        if (( config_rc != 0 && config_error == 0 )); then
+          fail "verification configuration parser failed with exit $config_rc"
+        elif (( config_rc == 0 )) && [[ -z "$config_result" ]]; then
+          pass "verification command configuration valid for $(basename "$sd")"
+        fi
+      fi
     done
     (( total > 0 && missing == 0 )) && info "all $total spec(s) have STATUS.md"
   else

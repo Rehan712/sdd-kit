@@ -44,3 +44,21 @@ Read alongside `plan.md` when the project's stack includes `aws`.
 - Log groups with infinite retention quietly accumulating cost.
 - Cross-stack circular references (A needs B's bucket, B needs A's role) — break with a shared stack or exported values.
 - `cdk destroy` / `terraform destroy` on a dev stack orphaning RETAIN'd resources nobody tracks.
+
+## Failure-mode and checkpoint defaults
+
+Use the [verification contract](../verification-contract.md). Fill applicable
+scenario prompts as concrete FM/INV rows with test families in the plan; record
+explicit exclusions with a component/category and reason. Shared scenarios use
+one row listing all affected components.
+
+- Boundary: cross-account access is denied outside the exact IAM resource and condition scope.
+- Partial failure: retry a throttled event after a partial write; assert idempotence, dead-letter routing and timeout behavior.
+- State/data integrity: resource replacement retains production data and does not reuse another environment secret.
+
+Optional `checkpoints` use exact authored task-stage names: run the focused
+component tests when its stage finishes and integration after consumers land.
+Start from `npm test -- --run`, adapting to existing project scripts and test scope.
+Required `gate_checks` separately cover the full suite (`npm test -- --run`)
+and mandatory static checks (`npx cdk synth`); checkpoints never replace that list.
+Commands here are planning defaults, not an assertion that a project has them.

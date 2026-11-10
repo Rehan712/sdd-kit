@@ -14,7 +14,9 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - name: shellcheck (warning severity blocks)
-        run: shellcheck -S warning -x scripts/*.sh tests/*.sh
+        # The same pinned command the gate and reuse checks run: enumerated
+        # files, no .shellcheckrc lookup, SHELLCHECK_OPTS unset.
+        run: bash tests/shellcheck.sh
 
   tests:
     strategy:

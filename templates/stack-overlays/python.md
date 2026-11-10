@@ -53,3 +53,21 @@ tests/
 - Import-time side effects (opening connections, reading env) — defer to explicit init.
 - Circular imports patched with function-local imports instead of fixing module boundaries.
 - Pydantic models used as internal domain objects everywhere, paying validation cost for trusted data.
+
+## Failure-mode and checkpoint defaults
+
+Use the [verification contract](../verification-contract.md). Fill applicable
+scenario prompts as concrete FM/INV rows with test families in the plan; record
+explicit exclusions with a component/category and reason. Shared scenarios use
+one row listing all affected components.
+
+- Boundary: malformed external DTOs map validation exceptions to the declared response without leaking internals.
+- Partial failure: exception or cancellation after context-manager entry closes owned sessions; failure before entry closes nothing.
+- Concurrency/ordering: retry a partially applied job and assert idempotence and isolation of per-request mutable defaults.
+
+Optional `checkpoints` use exact authored task-stage names: run the focused
+component tests when its stage finishes and integration after consumers land.
+Start from `pytest`, adapting to existing project scripts and test scope.
+Required `gate_checks` separately cover the full suite (`pytest`)
+and mandatory static checks (`ruff check .; ruff format --check .; mypy .`); checkpoints never replace that list.
+Commands here are planning defaults, not an assertion that a project has them.

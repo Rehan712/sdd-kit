@@ -66,3 +66,21 @@ Read alongside `plan.md` when `stack.yml` includes `rust-aws-lambda`.
 - Linking against system OpenSSL — use `rustls-tls` features on http clients to stay portable.
 - `tokio::main(flavor = "current_thread")` is usually fine and lighter than the default multi-thread.
 - Calling `aws_config::load_from_env()` per invocation instead of once at cold start — wastes ~100ms each call.
+
+## Failure-mode and checkpoint defaults
+
+Use the [verification contract](../verification-contract.md). Fill applicable
+scenario prompts as concrete FM/INV rows with test families in the plan; record
+explicit exclusions with a component/category and reason. Shared scenarios use
+one row listing all affected components.
+
+- Boundary: invalid Lambda event maps to the declared HTTP or batch error without a panic.
+- Concurrency/ordering: retry the same event after a timeout; assert idempotent writes and partial batch retry identifiers.
+- Partial failure: deadline cancellation after acquisition cleans up owned resources; warm invocation state contains no prior request data.
+
+Optional `checkpoints` use exact authored task-stage names: run the focused
+component tests when its stage finishes and integration after consumers land.
+Start from `cargo test --workspace`, adapting to existing project scripts and test scope.
+Required `gate_checks` separately cover the full suite (`cargo test --workspace`)
+and mandatory static checks (`cargo clippy --workspace --all-targets -- -D warnings; cargo fmt --check`); checkpoints never replace that list.
+Commands here are planning defaults, not an assertion that a project has them.

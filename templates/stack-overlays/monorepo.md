@@ -51,3 +51,21 @@ turbo.json | nx.json | Makefile   # task orchestration
 - Phantom dependencies: code imports a package only hoisting made visible.
 - `packages/utils` as a junk drawer with no owner and infinite dependents.
 - CI green while a downstream package is broken because the task graph didn't declare the dependency.
+
+## Failure-mode and checkpoint defaults
+
+Use the [verification contract](../verification-contract.md). Fill applicable
+scenario prompts as concrete FM/INV rows with test families in the plan; record
+explicit exclusions with a component/category and reason. Shared scenarios use
+one row listing all affected components.
+
+- Regression: a shared schema/configuration change invalidates caches for every transitive consumer.
+- Boundary: a consumer importing another package private source is rejected by dependency-boundary checks.
+- Partial failure: upstream generation fails; downstream builds must not report success from stale artifacts.
+
+Optional `checkpoints` use exact authored task-stage names: run the focused
+component tests when its stage finishes and integration after consumers land.
+Start from `pnpm -r test`, adapting to existing project scripts and test scope.
+Required `gate_checks` separately cover the full suite (`pnpm -r test`)
+and mandatory static checks (`pnpm -r lint; pnpm -r typecheck; pnpm -r build`); checkpoints never replace that list.
+Commands here are planning defaults, not an assertion that a project has them.

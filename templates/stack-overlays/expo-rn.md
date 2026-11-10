@@ -61,3 +61,21 @@ Read alongside `plan.md` when `stack.yml` includes `expo-rn`.
 - Animations that drop frames on Android because they're not on the UI thread (use Reanimated).
 - iOS App Transport Security blocking non-HTTPS dev endpoints — configure exceptions in `app.config.ts`.
 - Universal links that work on simulator but not real device because of provisioning profile mismatch.
+
+## Failure-mode and checkpoint defaults
+
+Use the [verification contract](../verification-contract.md). Fill applicable
+scenario prompts as concrete FM/INV rows with test families in the plan; record
+explicit exclusions with a component/category and reason. Shared scenarios use
+one row listing all affected components.
+
+- Boundary: cold-start and warm-start deep links with invalid parameters reach a safe route without losing authentication.
+- Partial failure: permission denial or offline resume displays retry state and preserves unsent edits.
+- Concurrency/ordering: background/unmount during an async update cleans up subscriptions and avoids duplicate navigation on resume.
+
+Optional `checkpoints` use exact authored task-stage names: run the focused
+component tests when its stage finishes and integration after consumers land.
+Start from `npm test -- --runInBand`, adapting to existing project scripts and test scope.
+Required `gate_checks` separately cover the full suite (`npm test -- --runInBand`)
+and mandatory static checks (`npx expo-doctor; npm run typecheck`); checkpoints never replace that list.
+Commands here are planning defaults, not an assertion that a project has them.

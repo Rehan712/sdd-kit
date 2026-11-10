@@ -49,3 +49,21 @@ Read alongside `plan.md` when `stack.yml` includes `bun-monorepo`.
 
 - Cache `~/.bun/install/cache` and `node_modules` per lockfile hash.
 - `turbo run lint test build --filter=...[origin/main]` to only run on changed packages.
+
+## Failure-mode and checkpoint defaults
+
+Use the [verification contract](../verification-contract.md). Fill applicable
+scenario prompts as concrete FM/INV rows with test families in the plan; record
+explicit exclusions with a component/category and reason. Shared scenarios use
+one row listing all affected components.
+
+- Boundary: import a shared package through its public exports in a production bundle; reject undeclared internal paths.
+- Regression: change a shared lockfile or helper and assert every affected package reruns despite task caching.
+- Partial failure: a dependency build fails; dependent tasks must not consume an older output as current success.
+
+Optional `checkpoints` use exact authored task-stage names: run the focused
+component tests when its stage finishes and integration after consumers land.
+Start from `bun run test`, adapting to existing project scripts and test scope.
+Required `gate_checks` separately cover the full suite (`bun run test`)
+and mandatory static checks (`bun run lint; bun run typecheck; bun run build`); checkpoints never replace that list.
+Commands here are planning defaults, not an assertion that a project has them.
