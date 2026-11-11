@@ -31,8 +31,9 @@ Your job is **not** to implement anything. Your job is to verify — with concre
 - The project's stack tags — if absent from the dossier, read them yourself
   from `<project>/.specify/stack.yml` before assuming a stack.
 
-**FAILED** is only for a gate that cannot run: spec.md or tasks.md unreadable,
-the diff/worktree unreachable. A missing convenience input you can recover
+**FAILED** is for a gate that cannot run — spec.md or tasks.md unreadable,
+the diff/worktree unreachable, an incomplete matrix — or a spec that itself
+crosses a constitutional non-goal (§4): no follow-up task fixes that. A missing convenience input you can recover
 yourself (stack tags, plan text) is not FAILED — recover it and say you did.
 
 ## Process

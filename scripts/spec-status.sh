@@ -9,6 +9,7 @@
 # Enum fields (leading token, case-insensitive):
 #   phase          specify plan tasks implement review shipped abandoned
 #   active_tool    claude codex copilot none
+#   plan_review    not-run SOUND UNSOUND BLOCKED WAIVED
 #   opponent       not-run CLEARED CHALLENGED BLOCKED
 #   reality_check  not-run READY NEEDS FAILED       (NEEDS = "NEEDS WORK")
 #   ci             not-run pending green red
@@ -63,6 +64,7 @@ validate() {
     case "$field" in
       phase)         allowed="specify plan tasks implement review shipped abandoned" ;;
       active_tool)   allowed="claude codex copilot none" ;;
+      plan_review)   allowed="not-run sound unsound blocked waived" ;;
       opponent)      allowed="not-run cleared challenged blocked" ;;
       reality_check) allowed="not-run ready needs failed" ;;
       ci)            allowed="not-run pending green red" ;;

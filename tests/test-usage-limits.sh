@@ -350,6 +350,13 @@ test_AC_006_delegate_uses_ordered_ready_fallback_and_preserves_verification() {
     "AC-006: selected fallback is a second provider attempt, not a nested dispatcher"
   assert_contains "$(cat "$DISPATCH_SPEC/STATUS.md")" 'delegated role=plan kind=long from=codex to=copilot reset=' \
     "AC-006: failover records its from/to decision through STATUS"
+
+  # The plan verifier also refuses a plan whose one-round review has not cleared.
+  "$SCRIPTS/spec-status.sh" set "$DISPATCH_SPEC" plan_review not-run >/dev/null
+  run_rc 1 run_dispatch
+  assert_contains "$OUT" "plan review is 'not-run'"
+  "$SCRIPTS/spec-status.sh" set "$DISPATCH_SPEC" plan_review SOUND >/dev/null
+  run_rc 0 run_dispatch
 }
 
 test_AC_006_delegate_classifies_only_the_current_attempt_slice() {

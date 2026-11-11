@@ -530,6 +530,12 @@ case "$ROLE" in
     fi
     n=$(grep -c 'NEEDS CLARIFICATION' "$LIVE_SPEC/plan.md" 2>/dev/null || true)
     (( n > 0 )) && echo "  ${YELLOW}!${RESET} $n [NEEDS CLARIFICATION] marker(s) left in plan.md — resolve before /sdd:tasks"
+    # A STATUS that predates the field carries none: legacy, not checked.
+    review="$(fm_get "$LIVE_SPEC/STATUS.md" plan_review 2>/dev/null | awk '{print tolower($1)}')"
+    case "$review" in
+      ""|sound|waived) ;;
+      *) echo "  ${RED}✗${RESET} plan review is '$review' — the plan is not cleared for /sdd:tasks (read notes/plan-review.md)"; verify_rc=1 ;;
+    esac
     ;;
   tasks)
     bash "$HUB_DIR/scripts/sdd-analyze.sh" "$LIVE_SPEC" || verify_rc=1

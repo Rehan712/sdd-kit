@@ -49,6 +49,11 @@ updated: YYYY-MM-DD
   malformed kinds, duplicate definitions and dangling refs are errors.
   A newly authored task list has zero test-ownership or Verify warnings.
 - Tasks that can run in parallel are marked `[P]` after the ID.
+- Order is computed by `~/.sdd/scripts/spec-graph.sh`, never eyeballed: stages
+  run in the order written; inside a stage tasks run in the order written,
+  except that two `[P]` tasks never wait for each other; `*Depends on:* T###`
+  adds an edge (it never removes one). Two `[P]` tasks whose *Files:* overlap
+  are not batched together. `spec-graph.sh waves <spec-dir>` prints the batches.
 - Tasks that need frontier reasoning are marked `[hard]` after the ID (marker
   order: `**T###** [P] [hard] [repo:name]`). Tag at decompose time: novel
   algorithms, tricky concurrency/ordering, cross-cutting changes are `[hard]`;

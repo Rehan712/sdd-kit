@@ -554,6 +554,7 @@ test_ignored_local_overlays_and_personas_do_not_decide_the_checks() {
 # records the tally reads are hashed before and after it (T031a3o1, O-031).
 shipped_002_tally_case() {
   local rel=.specify/specs/002-usage-limit-handling-for-dispatched-runs copy="$SANDBOX/tally-002" before
+  kit_ships_002 || return 0
   rm -rf "$copy"
   copy_kit "$KIT_DIR" "$copy" "$rel/notes" || t_fail 'AC-010: cannot copy shipped 002 records as the identity hashes them'
   before="$(records_digest "$copy/$rel")"
@@ -575,6 +576,7 @@ shipped_002_tally_case() {
 # must not decide the 002 tally check.
 test_empty_record_directories_do_not_decide_the_002_tally() {
   local host="$SANDBOX/host-002" rel=.specify/specs/002-usage-limit-handling-for-dispatched-runs
+  kit_ships_002 || return 0  # before the host exists: the mkdir below would satisfy it
   mkdir -p "$host"; fixture_git -C "$host" init -q || fixture_build_failed tally-host
   copy_kit "$KIT_DIR" "$host" "$rel/notes" || t_fail 'AC-010: cannot build the host tree'
   mkdir -p "$host/$rel/notes/verification/floors/FLOOR-zz" "$host/$rel/notes/captures/CAP-9-zz"
@@ -2301,6 +2303,7 @@ tally_class_cases() {
     'AC-010: one Class at different files with different Root causes was not one recurrence'
   assert_contains "$OUT" 'class=lock-a findings=1 recurrences=0' 'AC-010: Classes sharing a file and Root cause counted a recurrence'
   assert_contains "$OUT" 'class=lock-b findings=1 recurrences=0' 'AC-010: Classes sharing a file and Root cause counted a recurrence'
+  kit_ships_002 || return 0
   shipped="$(shasum -a 256 < "$KIT_DIR/$rel/notes/opponent.md")"
   copy_kit "$KIT_DIR" "$copy" "$rel/notes" || t_fail 'AC-010: cannot copy shipped 002 records as the identity hashes them'
   annotate_002 < "$copy/$rel/notes/opponent.md" > "$SANDBOX/annotated/notes/opponent.md"

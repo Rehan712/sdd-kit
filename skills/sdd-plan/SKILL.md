@@ -133,16 +133,46 @@ and seam specificity.
 If planning revealed the spec is wrong or ambiguous, **stop and fix the spec
 first**; tell the user what changed and why. Then resume.
 
-### 7. Update STATUS.md
+### 7. Plan review — one round
+
+A wrong approach or a missing failure mode found now costs a plan edit; found
+at the pre-ship opponent gate it costs a re-implementation. So the plan gets
+one adversarial read before it leaves this phase — one round, never a loop.
+
+1. Invoke the `opponent` agent (Agent tool, `subagent_type: opponent`; Codex:
+   the `sdd-opponent` subagent; no subagents: adopt
+   `~/.sdd/agents/opponent.agent.md` as a distinct pass). The dossier is paths
+   only: `MODE: plan-review`, the spec dir, the project root, both
+   constitutions.
+2. Save its report verbatim to `<spec-dir>/notes/plan-review.md`.
+3. Act on the verdict (`set` below is
+   `~/.sdd/scripts/spec-status.sh set <spec-dir> plan_review <VALUE>`):
+   - **SOUND** — fold every finding into the plan now: a failure mode becomes
+     an FM/INV row (§7), a seam gets pinned (§4), a code mismatch is fixed
+     after you re-read that code, a guess becomes a spec fix (step 6) or a
+     `[NEEDS CLARIFICATION]`. A finding you reject gets one STATUS Decisions
+     line with the reason. Re-run `sdd-analyze.sh <spec-dir> --phase plan`,
+     then `set … SOUND`. Never re-invoke the reviewer to confirm your edits.
+   - **UNSOUND** — `set … UNSOUND`, show the user the approach-level finding,
+     stop. A reworked plan is a new plan and gets its own single round.
+   - **BLOCKED** — `set … BLOCKED`, name the missing piece, stop.
+4. Only the user can skip the review: `set … WAIVED` plus a STATUS Decisions
+   line quoting them.
+
+`/sdd:tasks` and `sdd-analyze.sh` refuse a plan whose `plan_review` is not
+SOUND or WAIVED.
+
+### 8. Update STATUS.md
 
 `phase: plan`, `active_tool: claude`, bump `updated:` (spec-status.sh does the
 bump). Append load-bearing architectural calls to the Decisions log with
 one-line rationale; refresh Open questions; set Where-things-stand / Next
 action → `/sdd:tasks`.
 
-### 8. Hand off
+### 9. Hand off
 
-Path to `plan.md`; 3 bullets (approach, biggest risk, deploy strategy); next:
+Path to `plan.md`; the plan-review verdict and how many findings were folded
+in; 3 bullets (approach, biggest risk, deploy strategy); next:
 `/sdd:tasks`.
 
 ## Grounding rules — non-negotiable
@@ -163,5 +193,7 @@ Path to `plan.md`; 3 bullets (approach, biggest risk, deploy strategy); next:
 ## Done when
 
 - `plan.md` exists with all template sections completed (or "n/a").
+- STATUS `plan_review` is SOUND or WAIVED — or the phase stopped on UNSOUND /
+  BLOCKED and the user has the finding.
 - The user has the path, the summary, and the next step.
 - Any spec edits made during planning are saved.

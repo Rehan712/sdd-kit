@@ -66,7 +66,7 @@ Cross-project principles that govern all work across the projects in `~/.sdd/reg
 3. **PR descriptions reference the spec.** Link to `.specify/specs/NNN-slug/spec.md` in the PR body.
 4. **No `--no-verify`, no force-push to main**, no rewriting published history without explicit team consensus.
 5. **One worktree per spec.** Implementation runs on branch `spec/NNN-slug`, cut from the project's **base branch** (`.specify/stack.yml` `base_branch:`, default `dev`) into a sibling worktree via `scripts/spec-worktree.sh`. The base checkout stays clean; the PR (via `scripts/spec-pr.sh`) merges the branch back. Spec docs are authored/committed on the base branch before the branch is cut. After the PR opens, `/sdd:review` (driven by `scripts/spec-ci.sh`) owns the review phase — CI triage, reviewer feedback, the re-gate rule for post-PR commits, contract-order merge, and worktree teardown (`spec-worktree.sh --remove`). A gate verdict is stale the moment a behavioral commit lands after it.
-6. **One task, one commit.** In orchestrated (`--all`) runs, each passing task is committed individually on the spec branch (never pushed) — per-task provenance is what makes gate review and rollback cheap. Single-task runs propose the commit and wait for the user.
+6. **One task, one commit.** In orchestrated (`--all`) and looped (`spec-loop.sh`) runs, each passing task is committed individually on the spec branch (never pushed) — per-task provenance is what makes gate review and rollback cheap. Single-task runs propose the commit and wait for the user.
 
 ## 8. Testing
 

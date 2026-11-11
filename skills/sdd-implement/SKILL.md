@@ -22,6 +22,11 @@ inside it, and verifies with `sdd-analyze.sh` + `spec-evidence.sh` on return).
 Umbrella: one repo slice at a time — add `--repo <name>` (the run executes
 only that repo's `[repo:]` tasks; gate and Ship tasks stay here). The
 orchestrated cross-repo `--all` never dispatches — it always runs here.
+Single-repo `--all` on another CLI: prefer the loop,
+`bash ~/.sdd/scripts/spec-loop.sh <spec-dir>` — one fresh headless session
+per task in graph order (gates included), so no session carries the tasks
+before it. It stops at the first Ship task, on two sessions without progress
+(exit 1), or at its iteration cap (exit 8); re-running it resumes.
 
 **Autopilot?** Running under `/sdd:go`: apply the auto-mode contract in
 `~/.sdd/skills/sdd-go/SKILL.md` — always orchestrated mode (`--all`) with the
@@ -68,8 +73,12 @@ authority.
 
 ### 1–2. Pick the task; read its context
 
-First unchecked task, or the named `T###` (skip `[x]`; a `[~]` task is yours
-to finish from whatever the worktree already has). If the task is **blocked**
+The named `T###`, else the first row of
+`bash ~/.sdd/scripts/spec-graph.sh next "$WT/.specify/specs/NNN-slug"` (the
+live spec dir — the base checkout's copy is never ticked) — the next task whose
+dependencies are all `[x]`, computed rather than eyeballed (a non-zero exit is
+a broken graph: fix tasks.md first). Skip `[x]`; a `[~]` task is yours
+to finish from whatever the worktree already has. If the task is **blocked**
 (waiting on `[EXTERNAL: …]`, a deploy, or user input), don't dead-end: note the
 blocker in STATUS, skip to the next unblocked task, tell the user.
 
@@ -119,6 +128,10 @@ prevents data loss, or a decision the plan already made.
 Follow the deterministic protocol below: workers capture exact task Verify with
 --from-task --no-tick --summary; the invoker accepts the structured return.
 A failed acceptance gets one escalation retry, then stops dispatch.
+Before that retry, don't read the failing log yourself: send one `sdd-scout`
+(log-digest mode; not registered → `subagent_type: Explore`) the capture's
+full log, `notes/captures/<capture id>/output.log`, and put its digest —
+first failure, file:line, error signature — in the retry brief.
 
 ### 5a. Pre-ship gates (opponent, then reality-check)
 
@@ -190,6 +203,10 @@ Refs: REQ-###, AC-###
 ```
 
 Wait for the user — they may bundle tasks. (Orchestrated mode commits per task.)
+Headless run whose dispatcher note says nobody is waiting (`spec-loop.sh`):
+there is no one to accept a proposal, and the next session must start from a
+clean tree — commit the accepted task yourself on the spec branch (one task,
+one commit, this message; never push).
 
 ### 8. Next
 

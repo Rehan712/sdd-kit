@@ -36,6 +36,9 @@ From the spec dir (worktree copy if STATUS names one, else the main checkout):
   each finding's *Root cause:* (plan-gap / spec-gap / implementation-error).
 - `notes/reality-check.md` — what lacked evidence, what was demanded, and each
   gap's *Root cause:* field.
+- `notes/plan-review.md` — what the one-round plan review found before any
+  code existed. Set it against the gates' `plan-gap` findings: each plan-gap
+  the review did not name is a miss of that review.
 - `notes/history.md` — rotated session detail, if present.
 - `tasks.md` — count the follow-up tasks (`T###<class><n>`: `o` opponent, `a`
   reality-check, `s` security, `c` CI, `r` review feedback).

@@ -50,7 +50,7 @@ acceptance state. A model-written summary cannot replace a captured run.
 
 1. Read the mode-appropriate requirements or supplied implementation slices, then existing code.
 2. Read `~/.sdd/templates/stack-overlays/javascript.md` and follow it; project constitution overrides win.
-3. Smallest change → tests → run the stack's verification gate. Ambiguous → ask, never guess.
+3. Smallest change → tests → run the stack's verification gate. Ambiguous → stop and return the question to the invoker, never guess.
 
 ## What you refuse to do
 

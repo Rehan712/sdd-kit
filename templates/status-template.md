@@ -5,6 +5,7 @@ active_tool: none       # claude | codex | copilot | none — who currently hold
 branch: none            # spec/NNN-slug once cut, else none
 worktree: none          # absolute path once created, else none
 pr: none                # PR URL once opened — spec-pr.sh writes this itself
+plan_review: not-run    # not-run | SOUND | UNSOUND | BLOCKED | WAIVED  (+ date) — /sdd:plan's one-round review
 opponent: not-run       # not-run | CHALLENGED | CLEARED | BLOCKED  (+ date)
 reality_check: not-run  # not-run | NEEDS WORK | FAILED | READY  (+ date)
 ci: not-run             # not-run | pending | green | red  (+ date) — spec-ci.sh writes this

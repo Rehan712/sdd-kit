@@ -12,7 +12,11 @@
 #   - every non-gate, non-Ship task has a *Verify:* line — the exact runnable
 #     command (or `manual: <what to observe>`) that proves it (warning)
 #   - every [x] non-gate, non-Ship task has an *Evidence:* line (warning)
+#   - the plan was reviewed before tasking (STATUS plan_review SOUND or
+#     WAIVED; a STATUS that predates the field is not checked)
 #   - no duplicate task ids
+#   - the task graph is valid (spec-graph.sh check): every `Depends on:` names
+#     a task, and no task waits on itself through a cycle
 #   - both pre-ship gates present; their Agent: files exist on disk
 #   - no template placeholders left over (<Spec Title>, T### skeletons, …)
 #   - umbrella specs (repos: frontmatter): every non-gate/non-Ship task carries
@@ -174,6 +178,15 @@ if [[ "$analysis_phase" == plan ]]; then
   [[ -n "$leftovers" ]] && warn "template placeholders remain:"$'\n'"$(echo "$leftovers" | sed 's/^/      /')"
   finish
 fi
+
+# --- 1b2. plan review: a plan is reviewed once before it is tasked ---
+# A STATUS written before the field existed carries none: legacy, not checked.
+plan_review="$(fm_get "$status" plan_review | awk '{print tolower($1)}')"
+case "$plan_review" in
+  "") ;;
+  sound|waived) pass "plan review: $plan_review" ;;
+  *) fail "plan review is '$plan_review' — run the review step of /sdd:plan, or record the user's waiver: spec-status.sh set <spec-dir> plan_review WAIVED" ;;
+esac
 
 # --- 1c. external dependencies mirrored in STATUS ---
 # [EXTERNAL: <team/repo> — <what> — needed-by <date>] marks a dependency on a
@@ -396,6 +409,13 @@ check_gate() {  # <label> <subject-or-path-regex>
 check_gate "opponent" 'opponent'
 check_gate "reality-check" 'reality.?check'
 rm -f "$tmp"
+
+# --- 7b. task graph: Depends-on refs resolve and nothing waits on itself ---
+if graph="$(bash "$HUB_DIR/scripts/spec-graph.sh" check "$SPEC_DIR" 2>&1)"; then
+  pass "task $graph"
+else
+  fail "task graph invalid (spec-graph.sh check):"$'\n'"$(echo "$graph" | sed 's/^/      /')"
+fi
 
 # --- 8. leftover template placeholders ---
 leftovers=$(grep -nE '<(Title|Spec Title|One-line title|role|name|handle|slug)>|NNN-slug' "$spec" "$tasks" 2>/dev/null | grep -v 'template' | head -5 || true)
