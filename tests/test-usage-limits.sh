@@ -1030,7 +1030,10 @@ test_AC_009_doctor_reconciles_pending_failed_and_both_orphan_classes_without_mod
 test_AC_009_doctor_fixture_excludes_machine_local_kit_files() {
   local host="$SANDBOX/host-kit" name
   copy_kit "$KIT_DIR" "$host" || t_fail 'AC-009: cannot build the host kit'
-  fixture_git -C "$host" init -q || fixture_build_failed doctor-host
+  git_host "$host"
+  # A private hub tracks its real system-map.yml, so its .gitignore leaves the
+  # name out: the host ignores it itself there, as a machine-local file is.
+  git -C "$host" check-ignore -q system-map.yml || printf 'system-map.yml\n' >> "$host/.git/info/exclude"
   printf 'repos: [unclosed\n' > "$host/system-map.yml"
   printf 'tiers: [unclosed\n' > "$host/models.yml"
   FIXTURES="$host/tests/fixtures/usage-limits" on_host_kit "$host" doctor_fixture
