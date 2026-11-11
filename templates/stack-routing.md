@@ -38,6 +38,18 @@ specific signal (an exact filename beats a glob beats a language) wins.
 | Reality-check gate (under `## Reality Check`, `Agent:` → a reality-check persona) | `reality-check` for the hub default; project-local personas run as `general-purpose` with the persona text leading the dossier |
 | Security pass — triggers listed in `agents/security-reviewer.md` ("When you're invoked" is THE list) | `security-reviewer` (read-only; CRITICAL/HIGH block, MEDIUM/LOW log) |
 
+## Read-only recon (never the session model's job when a scout exists)
+
+| Work | Agent |
+|---|---|
+| Codebase search, docs lookup, running a named test/lint/build command, digesting a log (`notes/ci.md`, a long suite output) | `sdd-scout` — read-only tools, pinned to the `explore` role's tier; one narrow question per scout, parallel in one message. Its findings are leads: re-read first-hand before they enter a plan or a fix. |
+
+The three tiers, by what the work can cost you: **read-only → `sdd-scout`
+(recon tier)**, **writing code → stack experts (implementation tier)**,
+**judging it → the gates and `security-reviewer` (reasoning tier, no
+Edit/Write tools)**. `[hard]` tasks and retries escalate the writer to
+`implement-hard`.
+
 ## Planning consultation (stack tag → expert to consult)
 
 For `/sdd:plan`: consult the expert(s) matching the project's stack tags —

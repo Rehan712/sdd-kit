@@ -1,6 +1,7 @@
 ---
 name: sdd:specify
 description: Spec-driven development phase 1. Interview the user about a feature, then write spec.md to the resolved project's .specify/specs/NNN-slug/ directory using the hub template at ~/.sdd/templates/spec-template.md. Features spanning multiple repos become ONE umbrella spec in the hub's specs/ directory instead (new-spec.sh --multi). Use this skill when the user types /sdd:specify, says "let's spec out X", "write a spec for X", "let's plan X" (and there's no existing spec), or otherwise asks to start a new feature in a spec-driven way.
+argument-hint: "<feature description>"
 ---
 
 # /sdd:specify — Write a feature specification

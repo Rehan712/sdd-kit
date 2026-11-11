@@ -20,6 +20,8 @@ scripts/setup.sh
 `setup.sh` is idempotent (re-run it after every `git pull`). It:
 
 1. Symlinks `~/.sdd` → the clone (everything references this stable path).
+   If `~/.sdd` already points at another live clone it stops instead of
+   silently switching your install — pass `--relink` to move it here.
 2. Bootstraps `registry.yml` from `registry.example.yml` — **edit it** to register
    your projects (absolute path + stack tags).
 3. Bootstraps the **model policy** (`models.yml`) — on a terminal it runs the
@@ -38,8 +40,8 @@ After install, `/sdd:onboard` researches every repo in `system-map.yml` and
 writes its standing brief (`briefs/<repo>.md`) — setup prints a hint whenever
 registered repos have no brief. Existing installs: add `onboard: implementation`,
 `review: implementation`, and `go: reasoning` to your machine-local `models.yml`
-roles (new installs get them from the example; `apply-models.sh` prints
-"role … unmapped" until you do).
+roles (new installs get them from the example; `sdd-doctor.sh` lists every
+unmapped role with the command that maps it).
 
 Per project, one-time: create `.specify/stack.yml` (the skills do this for you on
 first `/sdd:specify` if it's missing):
@@ -119,20 +121,32 @@ Two conventions keep the loop honest end-to-end:
 Not every phase deserves the same model. Design and adversarial judgment —
 specify/plan/tasks, the opponent, the reality-check, the security review — get
 the strongest reasoning models on high effort; rote implementation runs on a
-mid-tier model that's faster and cheaper. The mapping is the **model policy**:
+mid-tier model that's faster and cheaper. The split follows what a mistake at
+each tier can cost:
+
+| Work | Who | Tier | Tools |
+|---|---|---|---|
+| **Read-only** — search, docs lookup, running a named command, log digests | `sdd-scout` | `recon` (cheap) | no Edit/Write — it cannot change the repo |
+| **Writing code** — one task at a time, smallest complete change | stack experts, `test-engineer` | `implementation` (mid) — `[hard]` tasks and retries escalate to `implement-hard` | full |
+| **Judging it** — the two gates, the security pass | `opponent`, `reality-check`, `security-reviewer` | `reasoning` (strongest) | no Edit/Write — a reviewer never fixes what it grades |
+
+The mapping is the **model policy**:
 
 - **`models.yml`** (machine-local, gitignored — like the registry) defines
   **tiers** (a model + reasoning effort per CLI) and maps **roles** to tiers.
-  Shipped defaults: `reasoning` = Claude `opus (xhigh)` / Codex `gpt-5.5 (xhigh)`
-  / Copilot `claude-opus-4.8`; `implementation` = `sonnet (high)` / `gpt-5.4 (high)`
-  / `claude-sonnet-4.5`; `recon` = `haiku (medium)` for cheap fan-out
-  exploration. Roles: `specify` `plan` `tasks` `retro` `orchestrator`
+  Shipped defaults: `reasoning` = Claude `opus (xhigh)` / Codex `gpt-6.1-sol (xhigh)`
+  / Copilot `claude-opus-4.8`; `implementation` = `sonnet (high)` / `gpt-6.1-terra (high)`
+  / `claude-sonnet-4.5`; `recon` = `haiku (medium)` for the read-only scout.
+  Provider model ids are retired over time — if a default no longer launches
+  on your CLI, `model-policy.sh update <role> <model> --cli <cli>` swaps it. Roles: `specify` `plan` `tasks` `retro` `orchestrator`
   `opponent` `reality-check` `security-reviewer` `test-engineer`
   `implement-hard` → reasoning (test-engineer because tests are the AC binding
   every gate trusts; `implement-hard` is the escalation role — `[hard]`-tagged
   tasks, failed-acceptance retries, and gate follow-ups dispatch on it instead
-  of repeating a failure at the tier that produced it); `implement`
-  `stack-expert` `onboard` `review` → implementation; `explore` → recon. All
+  of repeating a failure at the tier that produced it; on Claude it is passed
+  as the model's alias family, so a pinned `claude-opus-5-5` escalates as
+  `opus`); `implement` `stack-expert` `onboard` `review` → implementation;
+  `explore` (the `sdd-scout` agent) → recon. All
   of it is editable — add tiers, remap roles, or delete `models.yml` to run
   everything on the session model.
 - **`scripts/configure-models.sh`** is the wizard (runs on first `setup.sh`;
@@ -179,13 +193,36 @@ entirely and use `model-policy.sh update`/`set`, which does all of that for
 you. `sdd-doctor.sh` flags a stale or missing build, and validates the policy
 file.
 
+### Ponytail (optional companion)
+
+The kit's implementers already work to "the smallest change that satisfies
+the task", and the opponent ends every review with a non-blocking **lean
+pass** (unasked code, dead code, single-use abstractions, re-implemented
+helpers — reported as `lean-*` minors, never a reason for another round).
+The [ponytail](https://github.com/DietrichGebert/ponytail) plugin sharpens
+both, and the kit uses it automatically when it is installed:
+
+- `/sdd:implement` and the orchestrator load `ponytail:ponytail` and put its
+  rule in every implementer brief — reuse before writing, nothing the task
+  did not ask for, `shortcut:` comments for known limits. The task's bound
+  tests and the plan's decisions outrank it.
+- The opponent loads `ponytail:ponytail-review` for its lean pass.
+
+Install it per CLI (`/plugin marketplace add DietrichGebert/ponytail`, then
+`/plugin install ponytail@ponytail` in Claude Code; Codex and Copilot have
+the same two `plugin` commands). `sdd-doctor.sh` reports whether a Claude home
+has it. Nothing breaks without it — the rules above are written into the
+skills. One thing to know: ponytail injects itself into every subagent and
+asks for closing "skipped / not checked" lines; the gate personas keep those
+inside the report, because `spec-gate.sh round --complete` rejects anything
+after the round marker.
+
 ### Cross-CLI dispatch (different providers per phase)
 
 Model tiering picks the model *within* whichever CLI you're typing in. The
 optional **`dispatch:`** map in `models.yml` goes one step further: it names
 the CLI that should *run* a phase, so one machine can plan on Claude Code
-(opus), write tasks on Codex (gpt-5.5), and implement on Copilot
-(claude-sonnet-5):
+(opus), write tasks on Codex, and implement on Copilot:
 
 ```yaml
 dispatch:
@@ -252,8 +289,8 @@ A team's feature rarely lives in one repo — web + mobile + big-screen clients,
 several backend services, a separate infra repo. The kit handles that with
 three pieces:
 
-- **`system-map.yml`** (committed, team-shared — unlike the machine-local
-  registry): what each repo *is* — role (`app|service|infra|design|library|external`),
+- **`system-map.yml`** (team-shared in your fork — unlike the machine-local
+  registry; see [Multi-machine](#multi-machine)): what each repo *is* — role (`app|service|infra|design|library|external`),
   owning team, `depends_on`, and the **contracts** between repos (OpenAPI,
   event schemas) with their source repo. Query/validate via
   `scripts/system-map.sh {list,show,path,deps,consumers,contracts,check}`.
@@ -291,7 +328,7 @@ All in `scripts/` (stable path: `~/.sdd/scripts/`):
 
 | Script | What it does |
 |---|---|
-| `setup.sh` | install / repair everything on this machine |
+| `setup.sh` | install / repair everything on this machine (`--no-cli`, `--no-wizard`, `--relink`) |
 | `configure-models.sh` | wizard for the model policy (`models.yml`) — which model + effort runs each SDD role, per CLI |
 | `model-policy.sh` | query/validate/edit the policy: `get <role> <cli> <field>`, `dispatch [<role>]`, `show`, `check`; edits via `update <role> <model> [<effort>]`, `set`/`unset` `tier`\|`role`\|`dispatch` — validated first, then auto re-stamps copies + adapters |
 | `apply-models.sh` | stamp the policy into generated skill/agent copies under `build/` (Claude homes link there) |
@@ -328,7 +365,7 @@ kit's own suite — same zero-dependency floor as the scripts (bash 3.2 + BSD
 tools + git):
 
 ```bash
-tests/run.sh              # all suites (lib, sdd-analyze, spec-task, spec-run, spec-ac-coverage)
+tests/run.sh              # every tests/test-*.sh suite (slow: ~30+ min for all of them)
 tests/run.sh task         # only files whose name contains "task"
 bash tests/shellcheck.sh  # ShellCheck over the enumerated scripts/*.sh and tests/*.sh, no rc files, SHELLCHECK_OPTS unset
 ```
@@ -353,14 +390,16 @@ sdd-kit/
 ├── models.example.yml        # → models.yml (machine-local): model policy — which
 │                             # model+effort runs each role; build/ holds the
 │                             # stamped copies (generated, gitignored)
-├── system-map.yml            # Team-shared repo topology + contracts (committed)
+├── system-map.yml            # Repo topology + contracts (from system-map.example.yml;
+│                             # gitignored here — commit it in your team's fork)
 ├── specs/                    # Umbrella specs — one dir per multi-repo feature
 ├── briefs/                   # Standing per-repo context — seeded by /sdd:onboard,
 │                             # written by plan, refreshed by retro (Source: sha tracked)
 ├── skills/                   # CANONICAL skills: sdd-specify/plan/tasks/implement/
 │                             # review/retro/onboard/go (autopilot)
 ├── agents/                   # Gates (opponent, reality-check), security-reviewer,
-│                             # test-engineer, sdd-orchestrator, and 12 stack experts
+│                             # test-engineer, sdd-orchestrator, sdd-scout (read-only
+│                             # recon), and 12 stack experts
 │                             # (rust, javascript, python, aws, react, nextjs,
 │                             # loopback4, expo-rn, bun-monorepo, aws-cdk-lambda-ts,
 │                             # rust-aws-lambda, firebase-rtk-codegen)
@@ -400,11 +439,16 @@ sdd-kit/
 
 The repo is the source of truth. On each machine: clone, `scripts/setup.sh`, edit
 `registry.yml` for that machine's project paths. Pull + re-run `setup.sh` to update.
-`knowledge/`, overlays, constitution, `system-map.yml`, umbrella `specs/`, `briefs/`,
-and skill improvements travel through git; the registry never does. For a team,
+`knowledge/`, overlays, constitution, umbrella `specs/`, and skill improvements
+travel through git; the registry and the model policy never do. For a team,
 that split is the whole model: fork the kit as the team's hub repo — topology,
 umbrella specs, and lessons are shared; each member's `registry.yml` maps the
 repo names to wherever they're checked out locally.
+
+`system-map.yml` and `briefs/*.md` describe YOUR repos, so this public
+template gitignores them (nobody publishes their topology by accident). In
+your team's fork, delete those two entries from `.gitignore` and commit both —
+that is what makes the map and the briefs team-shared.
 
 ## Credits
 

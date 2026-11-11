@@ -144,11 +144,29 @@ EOF
   assert_contains "$OUT" "invalid backoff_minutes '10081'" "AC-008: check rejects range"
 }
 
+# run_wizard <kit> <home> — the wizard on a pty, accepting every default.
+# `script` grants the pty, but BSD (macOS) and util-linux (Linux) disagree on
+# its CLI: BSD takes the command positionally, util-linux needs -c and only
+# returns the child's exit code with -e. A pty never reaches end of input, so a
+# prompt that re-asks would wait forever: the watchdog turns that into a failure.
+run_wizard() {
+  local kit="$1" home="$2" transcript="$SANDBOX/wizard.typescript" enters='\n\n\n\n\n\n\n\n\n\n\n\n' rc
+  ( sleep 120; pkill -f "$kit/scripts/configure-models.sh" ) > /dev/null 2>&1 &
+  if script --version 2>/dev/null | grep -q util-linux; then
+    bash -c "printf '$enters' | env HOME='$home' script -q -e -c '$kit/scripts/configure-models.sh --no-sync' '$transcript'"
+  else
+    bash -c "printf '$enters' | env HOME='$home' script -q '$transcript' '$kit/scripts/configure-models.sh' --no-sync"
+  fi
+  rc=$?
+  kill "$!" 2> /dev/null
+  return "$rc"
+}
+
 # AC-008: re-running the interactive wizard retains the opt-in block and its
 # ordered fallback list while it rewrites the rest of models.yml.
 test_AC_008_usage_limit_policy_wizard_preserves_ordered_fallback() {
-  local kit p home transcript policy
-  kit="$SANDBOX/kit"; home="$SANDBOX/home"; transcript="$SANDBOX/wizard.typescript"
+  local kit p home policy
+  kit="$SANDBOX/kit"; home="$SANDBOX/home"
   # The kit as the input identity sees it, never the host's machine-local files (O-015).
   copy_kit "$KIT_DIR" "$kit" || t_fail 'AC-008: cannot copy the kit for the wizard fixture'
   p="$kit/models.yml"
@@ -166,20 +184,51 @@ on_limit:
   fallback: [copilot, claude]
   backoff_minutes: 90
 EOF
-  # `script` grants the wizard a pty, but BSD (macOS) and util-linux (Linux)
-  # disagree on its CLI: BSD takes the command positionally, util-linux needs
-  # -c and only returns the child's exit code with -e.
-  if script --version 2>/dev/null | grep -q util-linux; then
-    run_rc 0 bash -c "printf '\\n\\n\\n' | env HOME='$home' script -q -e -c '$kit/scripts/configure-models.sh --no-sync' '$transcript'"
-  else
-    run_rc 0 bash -c "printf '\\n\\n\\n' | env HOME='$home' script -q '$transcript' '$kit/scripts/configure-models.sh' --no-sync"
-  fi
+  run_rc 0 run_wizard "$kit" "$home"
   policy="$(cat "$p")"
   assert_contains "$policy" "short: fail" "AC-008: wizard preserves short action"
   assert_contains "$policy" "fallback: [copilot, claude]" "AC-008: wizard preserves fallback order"
   assert_contains "$policy" "backoff_minutes: 90" "AC-008: wizard preserves backoff"
   run_rc 0 "$kit/scripts/model-policy.sh" --file "$p" check
   assert_contains "$OUT" "model policy valid" "AC-008: wizard output remains valid"
+}
+
+# Reconfiguring must not drop the tier profile's permission policy, and Enter
+# must accept a stored codex effort the policy itself allows (a narrower
+# wizard whitelist re-asked for `ultra` until stdin ran out).
+test_wizard_keeps_codex_permission_keys_and_accepts_stored_efforts() {
+  local kit="$SANDBOX/kit" home="$SANDBOX/home" policy
+  copy_kit "$KIT_DIR" "$kit" || t_fail 'cannot copy the kit for the wizard fixture'
+  mkdir -p "$home/.codex"
+  printf '%s\n' 'tiers:' '  reasoning:' '    claude_model: opus' '    claude_effort: high' \
+    '    codex_model: gpt-6.1-sol' '    codex_effort: ultra' \
+    '    codex_sandbox: workspace-write' '    codex_approval: never' \
+    'roles:' '  opponent: reasoning' > "$kit/models.yml"
+  run_rc 0 run_wizard "$kit" "$home"
+  policy="$(cat "$kit/models.yml")"
+  assert_contains "$policy" 'codex_effort: ultra' 'the wizard lost a stored codex effort'
+  assert_contains "$policy" 'codex_sandbox: workspace-write' 'the wizard dropped codex_sandbox'
+  assert_contains "$policy" 'codex_approval: never' 'the wizard dropped codex_approval'
+}
+
+# [hard] escalation on Claude passes the model's alias family to the Agent
+# tool: a pinned full id must escalate as its family, not silently not at all.
+test_claude_alias_maps_a_full_id_to_its_family() {
+  local p; p="$(sandbox_policy)"
+  run_rc 0 "$MP" --file "$p" set role implement-hard reasoning
+  run_rc 1 "$MP" --file "$p" get implement-hard claude alias
+  run_rc 0 "$MP" --file "$p" set tier reasoning claude model opus
+  run_rc 0 "$MP" --file "$p" get implement-hard claude alias
+  assert_eq opus "$OUT"
+  run_rc 0 "$MP" --file "$p" set tier reasoning claude model claude-sonnet-5-5
+  run_rc 0 "$MP" --file "$p" get implement-hard claude alias
+  assert_eq sonnet "$OUT" 'a full model id does not map to its alias family'
+  run_rc 2 "$MP" --file "$p" get implement-hard codex alias
+  # No family to pass: escalation cannot work, and check says so.
+  run_rc 0 "$MP" --file "$p" set tier reasoning claude model inherit
+  run_rc 1 "$MP" --file "$p" get implement-hard claude alias
+  run_rc 0 "$MP" --file "$p" check
+  assert_contains "$OUT" "role 'implement-hard': claude_model 'inherit' has no alias family"
 }
 
 # O-015 second review: the wizard fixture copies the kit as the input identity

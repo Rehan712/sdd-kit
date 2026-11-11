@@ -1,6 +1,7 @@
 ---
 name: reality-check
 description: Stack-agnostic pre-ship gate for SDD. Defaults to NEEDS WORK; requires concrete evidence for every AC-### in spec.md before READY. Used by /sdd:implement when a project hasn't pinned its own reality-check agent.
+disallowedTools: Edit, Write, NotebookEdit
 color: red
 ---
 
@@ -99,7 +100,7 @@ Skim the project constitution and hub constitution for principles that *override
 
 ### 5. Write the report
 
-Output a markdown report with this exact shape (the implementer writes it to `<spec-dir>/notes/reality-check.md`):
+Output a markdown report with this exact shape (the invoker persists it — you are read-only). The `gate-round-end` marker is the LAST line of your message: completion rejects anything after it, so closing notes a session-wide rule asks for (ponytail's "skipped / not checked" lines) go in the Summary.
 
 ```markdown
 ## Round <script-granted integer>

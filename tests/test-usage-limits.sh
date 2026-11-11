@@ -478,6 +478,19 @@ run_ready() { # <cli> <role>
     "$SCRIPTS/spec-dispatch-ready.sh" "$1" "$2"
 }
 
+# An alternate home selected by the CLI's own variable is where that CLI looks,
+# so it is where readiness looks: ~/.codex and ~/.claude need not exist.
+test_readiness_follows_the_cli_selected_home() {
+  ready_fixture codex implement 0
+  mv "$SANDBOX/home/.codex" "$SANDBOX/home/.codex_alt"
+  run_rc 1 run_ready codex implement
+  CODEX_HOME="$SANDBOX/home/.codex_alt" run_rc 0 run_ready codex implement
+  ready_fixture claude implement 0
+  mv "$SANDBOX/home/.claude" "$SANDBOX/home/.claude_alt"
+  run_rc 1 run_ready claude implement
+  CLAUDE_CONFIG_DIR="$SANDBOX/home/.claude_alt" run_rc 0 run_ready claude implement
+}
+
 test_AC_006_and_AC_009_readiness_requires_binary_adapter_and_authentication() {
   local cli
   for cli in claude codex copilot; do

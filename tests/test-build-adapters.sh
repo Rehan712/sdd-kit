@@ -226,6 +226,58 @@ test_brief_modes() {
   assert_contains "$(cat "$SANDBOX/home/.codex/agents/sdd-reality-check.toml")" 'carried (round n)'
 }
 
+# The canonical skills are written for Claude and say `active_tool: claude`;
+# each adapter must record its own CLI as the holder of the spec.
+test_adapters_record_their_own_cli_as_active_tool() {
+  local kit phase; kit="$(stage_kit)"
+  run_rc 0 run_adapters "$kit"
+  for phase in specify plan tasks implement; do
+    OUT="$(cat "$SANDBOX/home/.codex/skills/sdd-$phase/SKILL.md")"
+    assert_contains "$OUT" 'active_tool: codex' "codex sdd-$phase does not record codex"
+    assert_not_contains "$OUT" 'active_tool: claude' "codex sdd-$phase tells Codex to record claude"
+    OUT="$(cat "$SANDBOX/home/.copilot/agents/sdd-$phase.agent.md")"
+    assert_contains "$OUT" 'active_tool: copilot' "copilot sdd-$phase does not record copilot"
+    assert_not_contains "$OUT" 'active_tool: claude' "copilot sdd-$phase tells Copilot to record claude"
+  done
+}
+
+frontmatter_of() { awk 'NR==1 && $0=="---" {i=1; next} i && $0=="---" {exit} i' "$1"; }
+
+# The three tiers by what the work can cost: the scout (recon tier) and the
+# reviewers (reasoning tier) carry no Edit/Write tools, and the scout is
+# stamped from the `explore` role like any other agent.
+test_scout_and_reviewers_are_read_only_and_the_scout_is_tiered() {
+  local kit f fm; kit="$(stage_kit)"
+  printf 'tiers:\n  recon:\n    claude_model: haiku\n    claude_effort: medium\nroles:\n  explore: recon\n' \
+    > "$kit/models.yml"
+  run_rc 0 env HOME="$SANDBOX/home" bash "$kit/scripts/apply-models.sh"
+  fm="$(frontmatter_of "$kit/build/agents/sdd-scout.md")"
+  assert_contains "$fm" 'model: haiku' 'the scout is not stamped from the explore role'
+  assert_contains "$fm" 'effort: medium' 'the scout carries no effort from the explore role'
+  assert_contains "$fm" 'tools: Read, Grep, Glob, Bash, WebFetch, WebSearch'
+  assert_not_contains "$fm" 'Edit' 'the scout can edit'
+  assert_not_contains "$fm" 'Write' 'the scout can write'
+  for f in opponent.agent.md reality-check.agent.md security-reviewer.md; do
+    assert_contains "$(frontmatter_of "$KIT_DIR/agents/$f")" 'disallowedTools: Edit, Write, NotebookEdit' \
+      "$f can edit the code it grades"
+  done
+}
+
+# A gate report is sealed by its round marker, and completion rejects anything
+# after it — so both personas and every invoker must keep closing notes (a
+# session-wide "skipped / not checked" trailer) inside the report.
+test_gate_reports_end_at_the_round_marker() {
+  local f
+  for f in agents/opponent.agent.md agents/reality-check.agent.md; do
+    assert_contains "$(cat "$KIT_DIR/$f")" 'marker is the LAST line' "$f allows text after the round marker"
+  done
+  for f in agents/sdd-orchestrator.md skills/sdd-implement/SKILL.md skills/sdd-go/SKILL.md skills/sdd-review/SKILL.md; do
+    assert_contains "$(cat "$KIT_DIR/$f")" 'through its `gate-round-end` marker' "$f does not say what to persist"
+  done
+  # Lean findings inform; the validator refuses CHALLENGED without a blocker.
+  assert_contains "$(cat "$KIT_DIR/agents/opponent.agent.md")" 'Lean findings never make the verdict'
+}
+
 # O-015 sibling: a developer's ignored models.yml -- here a symlink to a real
 # policy outside the kit -- neither reaches the staged kit nor is written
 # through. Before the repair it flipped four tests through a relative link and,

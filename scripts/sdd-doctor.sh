@@ -57,6 +57,10 @@ check_hub() {
   [[ -x "$HUB_DIR/scripts/sync.sh"            ]] && pass "scripts/sync.sh"            || fail "sync.sh missing or not executable"
   [[ -x "$HUB_DIR/scripts/system-map.sh"      ]] && pass "scripts/system-map.sh"      || fail "system-map.sh missing or not executable"
   [[ -x "$HUB_DIR/scripts/brief-status.sh"    ]] && pass "scripts/brief-status.sh"    || fail "brief-status.sh missing or not executable"
+  # Prerequisites the scripts shell out to. git is the floor for everything;
+  # gh only for the PR half (spec-pr.sh, spec-ci.sh, /sdd:review).
+  command -v git >/dev/null 2>&1 && pass "git on PATH" || fail "git not on PATH — worktrees, evidence capture and the gates all need it"
+  command -v gh  >/dev/null 2>&1 && pass "gh on PATH"  || warn "gh not on PATH — spec-pr.sh / spec-ci.sh (/sdd:review) cannot open or watch PRs"
   # System map (multi-repo features) is optional; when present it must validate.
   if [[ -f "$HUB_DIR/system-map.yml" ]]; then
     if "$HUB_DIR/scripts/system-map.sh" check >/dev/null 2>&1; then
@@ -94,6 +98,16 @@ check_model_policy() {
   local policy_check
   if policy_check="$("$HUB_DIR/scripts/model-policy.sh" check 2>&1)"; then
     pass "models.yml valid"
+    # A valid policy can still carry warnings (a role the kit added since this
+    # models.yml was written keeps the session model) — surface, don't swallow.
+    # Dispatch warnings are skipped: the dispatch block below reports those.
+    local policy_line
+    while IFS= read -r policy_line; do
+      case "$policy_line" in
+        "  ! dispatch:"*) ;;
+        "  ! "*) warn "models.yml: ${policy_line#  ! }" ;;
+      esac
+    done <<<"$policy_check"
   else
     fail "models.yml invalid — run scripts/model-policy.sh check"
     # Keep the parser's on_limit-specific validation visible.  A generic
@@ -272,6 +286,17 @@ check_claude_homes() {
     fail "home wiring broken — run scripts/sync.sh to repair"
     echo "$out" | grep -E '✗' | sed 's/^/    /'
   fi
+  # Optional companion plugin (README "Ponytail"): info only, never a warning —
+  # the kit's own smallest-change and lean-review rules apply without it.
+  local ph found=""
+  for ph in "$HOME/.claude" "$HOME"/.claude_*; do
+    [[ -d "$ph/plugins/cache/ponytail" ]] && found="$found${found:+, }${ph##*/}"
+  done
+  if [[ -n "$found" ]]; then
+    info "ponytail plugin detected ($found) — implementers and the opponent's lean pass load it"
+  else
+    info "ponytail plugin not detected (optional — see README \"Ponytail\")"
+  fi
   echo
 }
 
@@ -358,6 +383,13 @@ check_briefs() {
   echo "Repo briefs: briefs/<repo>.md freshness (brief-status.sh)"
   if [[ ! -x "$HUB_DIR/scripts/brief-status.sh" ]]; then
     fail "brief-status.sh missing — cannot check briefs"
+    echo
+    return
+  fi
+  # A fresh install's map is the shipped example: its placeholder repos have
+  # no briefs by construction, and /sdd:onboard has nothing real to research.
+  if [[ -f "$HUB_DIR/system-map.yml" ]] && cmp -s "$HUB_DIR/system-map.yml" "$HUB_DIR/system-map.example.yml"; then
+    info "system-map.yml is still the shipped example — describe your repos there, then run /sdd:onboard"
     echo
     return
   fi
@@ -448,8 +480,14 @@ check_project() {
   echo
 }
 
+# Through lib.sh's registry parser, like every other reader: quotes and inline
+# comments stripped, a leading ~ expanded. A raw `path:` grep reported
+# `"~/proj"  # mine` as a path that does not exist.
 list_registry_paths() {
-  awk '/^[[:space:]]*path:/ { sub(/^[[:space:]]*path:[[:space:]]*/,""); print }' "$REGISTRY"
+  local _name path _stacks
+  while IFS=$'\t' read -r _name path _stacks; do
+    expand_tilde "$path"
+  done < <(registry_entries "$REGISTRY")
 }
 
 main() {

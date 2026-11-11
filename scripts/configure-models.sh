@@ -115,6 +115,7 @@ for tier in $("$MP" --file "$SRC" tiers); do
   case "$tier" in
     reasoning)      echo "${BOLD}Tier '$tier'${RESET} — design + adversarial judgment (specify/plan/tasks, gates)" ;;
     implementation) echo "${BOLD}Tier '$tier'${RESET} — code-writing work (implement, stack experts, tests)" ;;
+    recon)          echo "${BOLD}Tier '$tier'${RESET} — read-only scouting (search, docs, logs) — cheap fan-out" ;;
     *)              echo "${BOLD}Tier '$tier'${RESET}" ;;
   esac
 
@@ -124,11 +125,16 @@ for tier in $("$MP" --file "$SRC" tiers); do
 
   if (( HAVE_CODEX )); then
     m="$(ask "Codex model" "$(src_tier "$tier" codex model)")"
-    e="$(ask_choice "Codex effort" "$(src_tier "$tier" codex effort)" "minimal|low|medium|high|xhigh")"
+    # Same whitelist as model-policy.sh: a narrower one here re-asks forever
+    # when Enter offers a valid stored value such as ultra.
+    e="$(ask_choice "Codex effort" "$(src_tier "$tier" codex effort)" "none|minimal|low|medium|high|xhigh|ultra|max")"
   else
     m="$(src_tier "$tier" codex model)"; e="$(src_tier "$tier" codex effort)"
   fi
   printf '%s\tcodex_model\t%s\n%s\tcodex_effort\t%s\n' "$tier" "$m" "$tier" "$e" >> "$TIER_VALS"
+  # Not prompted, but never dropped: the tier profile's permission policy.
+  printf '%s\tcodex_sandbox\t%s\n%s\tcodex_approval\t%s\n' \
+    "$tier" "$(src_tier "$tier" codex sandbox)" "$tier" "$(src_tier "$tier" codex approval)" >> "$TIER_VALS"
 
   if (( HAVE_COPILOT )); then
     m="$(ask "Copilot model" "$(src_tier "$tier" copilot model)")"
@@ -182,7 +188,7 @@ fi
   echo "tiers:"
   for tier in $TIERS_ORDERED; do
     echo "  $tier:"
-    for key in claude_model claude_effort codex_model codex_effort copilot_model copilot_effort; do
+    for key in claude_model claude_effort codex_model codex_effort codex_sandbox codex_approval copilot_model copilot_effort; do
       v="$(awk -F'\t' -v t="$tier" -v k="$key" '$1==t && $2==k { print $3; exit }' "$TIER_VALS")"
       [[ -n "$v" ]] && echo "    $key: $v"
     done
@@ -208,9 +214,16 @@ fi
     echo "  backoff_minutes: $LIMIT_BACKOFF"
   fi
 } > "$POLICY.tmp"
+# Validate the candidate BEFORE it replaces the policy: an answer the wizard's
+# looser prompt accepted must not leave an invalid models.yml that every later
+# setup.sh / apply-models.sh run refuses.
+if ! "$MP" --file "$POLICY.tmp" check; then
+  rm -f "$POLICY.tmp"
+  echo "  ${YELLOW}!${RESET} those answers do not validate — models.yml left unchanged; re-run the wizard" >&2
+  exit 1
+fi
 mv "$POLICY.tmp" "$POLICY"
 
 echo
 echo "  ${GREEN}✓${RESET} wrote ${POLICY#"$KIT_DIR"/}"
-"$MP" check || { echo "  ${YELLOW}!${RESET} fix models.yml and re-run"; exit 1; }
 finish

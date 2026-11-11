@@ -1,6 +1,7 @@
 ---
 name: sdd:retro
 description: Spec-driven development phase 5. After a spec ships, harvest what the gates and the implementation actually taught us — write notes/retro.md in the spec dir, file cross-project lessons into the hub knowledge/, and propose stack-overlay or constitution amendments. Use when the user types /sdd:retro, says "run the retro", "harvest the lessons", or when the Ship stage's retro task comes up in /sdd:implement.
+argument-hint: "[NNN-slug]"
 ---
 
 # /sdd:retro — Harvest lessons after ship

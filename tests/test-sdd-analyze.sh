@@ -145,6 +145,17 @@ test_umbrella_undeclared_repo_tag_fails() {
   assert_contains "$OUT" "T003[repo:gamma]"
 }
 
+# 'alpha' is not the declared 'alpha-api': a word match let the prefix through.
+test_umbrella_repo_tag_match_is_token_exact() {
+  local spec_dir; spec_dir="$(make_spec_dir)"
+  make_umbrella "$spec_dir" "[alpha-api, beta]"
+  tag_task "$spec_dir/tasks.md" T001 alpha-api
+  tag_task "$spec_dir/tasks.md" T002 beta
+  tag_task "$spec_dir/tasks.md" T003 alpha
+  run_rc 1 "$ANALYZE" "$spec_dir"
+  assert_contains "$OUT" "T003[repo:alpha]"
+}
+
 test_umbrella_declared_repo_with_no_tasks_warns() {
   local spec_dir; spec_dir="$(make_spec_dir)"
   make_umbrella "$spec_dir" "[alpha, beta, gamma]"

@@ -1,6 +1,7 @@
 ---
 name: security-reviewer
 description: Read-only pre-merge security pass for SDD. Invoked by the orchestrator after any task that adds/modifies auth, secrets, user input parsing, or external integrations. Distinct from the Reality Check gate — that checks spec compliance; this checks security. Returns findings as new follow-up tasks (T###s) when issues are found.
+disallowedTools: Edit, Write, NotebookEdit
 color: red
 ---
 

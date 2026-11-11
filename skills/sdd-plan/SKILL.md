@@ -1,6 +1,7 @@
 ---
 name: sdd:plan
 description: Spec-driven development phase 2. Read an existing spec.md and produce plan.md alongside it, pulling in the relevant stack overlays from ~/.sdd/templates/stack-overlays/ and consulting the matching tech-stack subagent(s). Use when the user types /sdd:plan, says "plan this", "how would we build this", or asks for an implementation plan for a spec that already exists.
+argument-hint: "[NNN-slug]"
 ---
 
 # /sdd:plan — Produce an implementation plan
@@ -62,13 +63,14 @@ encode lessons the overlay doesn't.
 
 ### 4. Explore the codebase
 
-Agent tool, `subagent_type: Explore`: find existing patterns to reuse, code
-this change must modify, contracts it must respect. Don't pre-decide — let
-exploration inform the design. If `~/.sdd/models.yml` exists, pass
-`~/.sdd/scripts/model-policy.sh get explore claude model` as the Agent tool's
-`model` param when it prints an alias (opus/sonnet/haiku/fable); otherwise omit.
+Agent tool, `subagent_type: sdd-scout` — the kit's read-only scout, pinned to
+the `explore` role's tier by the model policy (no `model` param). One narrow
+question per scout, sent in parallel in one message: existing patterns to
+reuse, code this change must modify, contracts it must respect, the exact
+test/lint/build commands. Don't pre-decide — let exploration inform the
+design. `sdd-scout` not registered in this session → `subagent_type: Explore`.
 
-**Explorers locate; you verify.** Explore agents may run on a cheaper tier —
+**Scouts locate; you verify.** Scouts run on a cheaper tier —
 before a file path, hook point, or "no change needed" claim from a report
 becomes part of the design, re-read that code first-hand this session. A
 misread inherited into plan.md poisons every downstream phase.

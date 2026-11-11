@@ -1,6 +1,7 @@
 ---
 name: sdd:implement
 description: Spec-driven development phase 4. Execute tasks from tasks.md — one task (or a named T###) per pass by default, orchestrated for --all. Makes the code changes in the spec worktree, runs the acceptance check, ticks the checkbox with evidence, and proposes a conventional commit. Use when the user types /sdd:implement, /sdd:implement T###, or says "start implementing the spec", "do the next task", or similar.
+argument-hint: "[T### | --all] [NNN-slug]"
 ---
 
 # /sdd:implement — Execute the tasks
@@ -91,8 +92,9 @@ get follow-ups or a note, no block.
 **Model escalation.** When dispatching via the Agent tool and
 `~/.sdd/models.yml` exists: for a task marked `[hard]`, for any re-dispatch
 after a failed acceptance, and for gate follow-ups (`T###o*`/`T###a*`), pass
-`~/.sdd/scripts/model-policy.sh get implement-hard claude model` as the
-Agent tool's `model` param when it prints an alias (opus/sonnet/haiku/fable).
+the output of `~/.sdd/scripts/model-policy.sh get implement-hard claude alias`
+as the Agent tool's `model` param (it prints opus/sonnet/haiku/fable — a full
+model id in the policy maps to its family).
 Escalate on retry — never repeat a failure at the tier that just produced it.
 Prints nothing / no policy → dispatch normally.
 
@@ -101,6 +103,16 @@ Prints nothing / no policy → dispatch normally.
 Edit exactly the files the task names. Smallest change that satisfies
 acceptance + AC. No drive-by refactors; no error paths the plan didn't call
 for. A genuinely required sibling change = a new task, not scope creep.
+
+**Ponytail — the smallest *complete* change.** Reuse before writing: the
+plan's pattern anchor and existing helpers first, then the standard library,
+then an installed dependency. No abstraction, option, or dependency the task
+did not ask for; a known limit gets a `shortcut: <limit>, <when to upgrade>`
+comment. When the `ponytail:ponytail` skill is listed in the session, load it
+before the first edit, and put this paragraph in every implementer brief —
+a dispatched agent loads the skill itself. The task outranks it: never cut a
+test the task binds, validation at a trust boundary, error handling that
+prevents data loss, or a decision the plan already made.
 
 ### 5. Verify acceptance — run it, don't claim it
 
@@ -130,12 +142,15 @@ Gate tasks are **never run by you** — delegate via the Agent tool. Opponent
    `subagent_type: opponent` / `reality-check` (persona = system prompt, model
    policy pre-stamped). Project-local personas: `subagent_type: general-purpose`
    with the persona file's full contents leading the dossier; if
-   `~/.sdd/models.yml` exists, pass
-   `~/.sdd/scripts/model-policy.sh get reality-check claude model` as the Agent
-   tool's `model` param when it prints an alias (opus/sonnet/haiku/fable).
+   `~/.sdd/models.yml` exists, pass the output of
+   `~/.sdd/scripts/model-policy.sh get reality-check claude alias` as the Agent
+   tool's `model` param (prints nothing → omit it).
 4. **Complete** through spec-gate round --complete after the floor and reservation
    required below. Record the validated verdict in STATUS.
 5. **Outcome.** CLEARED → opponent task complete; READY → reality-check complete.
+   Open `lean-*` minors on a CLEARED report are not follow-ups: list them in
+   the hand-off and let the user decide — fixing one is a source change that
+   re-opens the gates, never an automatic extra round.
    CHALLENGED / NEEDS WORK → class-wide follow-ups with sibling sweeps and tests,
    a fresh floor and another permitted reservation. BLOCKED / FAILED / empty
    response stops dispatch; never self-certify.
@@ -255,7 +270,10 @@ missing slice unless a new decision is required.
 6. Persist the returned report only through
    `bash "$S/spec-gate.sh" round "$SPEC" "$GATE" --complete "$P"`, with
    `P="$SPEC/notes/verification/reports/$GATE.md"` — a report left beside the
-   code changes the manifest that the next capture and floor verify.
+   code changes the manifest that the next capture and floor verify. Save
+   exactly the report: `## Round` through its `gate-round-end` marker. Text
+   the reviewer put before or after it is not the report, and anything after
+   the marker fails completion.
    Reconcile interrupted reservations explicitly with --reconcile; never reset
    history or infer a review completed. Rounds 1–3 are permitted for EACH gate.
    Round 4+ needs exact-gate/exact-next-round user waiver or accepted spec

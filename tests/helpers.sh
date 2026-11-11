@@ -66,7 +66,7 @@ export NO_COLOR=1   # assertions match plain text, never escape codes
 # every fixture's git at the caller's index. A test that needs a knob sets it
 # for the command it runs.
 for _t_env in $(compgen -e); do
-  case "$_t_env" in SDD_*|XDG_STATE_HOME) unset "$_t_env";; esac
+  case "$_t_env" in SDD_*|XDG_STATE_HOME|CODEX_HOME|CLAUDE_CONFIG_DIR) unset "$_t_env";; esac
 done
 for _t_env in $(git rev-parse --local-env-vars); do unset "$_t_env"; done
 unset _t_env

@@ -14,11 +14,16 @@
 # TIERS name a model class per CLI. Keys inside a tier (all optional — omit a
 # key to leave that CLI's session default untouched for the tier):
 #   claude_model:    alias (opus | sonnet | haiku | fable) or a full model ID
-#                    (e.g. claude-opus-4-8). Prefer aliases — ad-hoc subagent
-#                    dispatch (the Explore agent) only accepts aliases.
+#                    (e.g. claude-opus-5-5). Aliases track the newest model
+#                    of the family. Runtime escalation ([hard] tasks, via
+#                    the Agent tool's `model` param) takes aliases only, so
+#                    a full id escalates to its family alias.
 #   claude_effort:   low | medium | high | xhigh | max
 #                    (avoid max — Claude Code treats it as session-only)
-#   codex_model:     OpenAI Codex CLI `model` (e.g. gpt-5.5, gpt-5.4)
+#   codex_model:     OpenAI Codex CLI `model` — an id from `codex` → /model.
+#                    Model ids are retired over time: when a profile stops
+#                    launching, pick a current one there and
+#                    `model-policy.sh update <role> <model> --cli codex`.
 #   codex_effort:    Codex `model_reasoning_effort`
 #                    (none|minimal|low|medium|high|xhigh|ultra|max — the upper
 #                    values are model-dependent)
@@ -38,9 +43,11 @@
 # ROLES map each SDD role to a tier:
 #   skills:  specify, plan, tasks, implement, review, retro, onboard, go
 #   agents:  orchestrator, opponent, reality-check, security-reviewer,
-#            test-engineer, stack-expert (covers every agents/*-expert.md)
-#   runtime: explore (the Explore subagents /sdd:plan and /sdd:onboard fan out);
-#            implement-hard (looked up at dispatch by /sdd:implement and the
+#            test-engineer, stack-expert (covers every agents/*-expert.md),
+#            explore (agents/sdd-scout.md — the read-only scout /sdd:plan,
+#            /sdd:onboard and /sdd:review fan out; tools are read-only by
+#            frontmatter, so the cheap tier can never edit)
+#   runtime: implement-hard (looked up at dispatch by /sdd:implement and the
 #            orchestrator for [hard]-tagged tasks, failed-acceptance retries,
 #            and gate follow-ups — escalation, never stamped into a file)
 #
@@ -56,7 +63,7 @@ tiers:
   reasoning:            # deep design + adversarial judgment — strongest models
     claude_model: opus
     claude_effort: xhigh
-    codex_model: gpt-5.5
+    codex_model: gpt-6.1-sol
     codex_effort: xhigh
     copilot_model: claude-opus-4.8
     copilot_effort: xhigh
@@ -64,13 +71,14 @@ tiers:
   implementation:       # code-writing work — mid-tier, faster and cheaper
     claude_model: sonnet
     claude_effort: high
-    codex_model: gpt-5.4
+    codex_model: gpt-6.1-terra
     codex_effort: high
     copilot_model: claude-sonnet-4.5
     copilot_effort: high
 
-  # recon — cheap fan-out exploration; safe to run low because every claim is
-  # re-verified downstream (/sdd:plan re-reads explorer findings first-hand
+  # recon — read-only scouting (search, docs, running named commands, log
+  # digests); safe to run low because the scout cannot edit and every claim is
+  # re-verified downstream (/sdd:plan re-reads scout findings first-hand
   # before anything enters the design, by grounding rule).
   recon:
     claude_model: haiku
@@ -94,14 +102,13 @@ roles:
                                # green-but-tautological suite is the one hole
                                # the gates can't fully cover, so keep it strong
   stack-expert: implementation
-  explore: recon               # /sdd:plan fan-out; claims re-verified downstream
+  explore: recon               # the sdd-scout agent; claims re-verified downstream
   onboard: implementation      # briefs are durable planning inputs — keep mid-tier
   review: implementation       # /sdd:review — PR babysitting + CI triage
   go: reasoning                # /sdd:go autopilot conductor (chained phases keep their own tiers)
 
 # DISPATCH (optional) — route a PHASE to the CLI that should RUN it, across
-# providers: e.g. plan on Claude Code, tasks on Codex (gpt-5.5), implement on
-# Copilot (claude-sonnet-5). The phase skills detect the mapping and offer
+# providers: e.g. plan on Claude Code, tasks on Codex, implement on Copilot. The phase skills detect the mapping and offer
 # `scripts/spec-dispatch.sh <role> <spec-dir>`, which runs the target CLI
 # headlessly in the right working root and verifies the artifacts on return
 # (sdd-analyze / spec-evidence — provider-agnostic, same gates as always).

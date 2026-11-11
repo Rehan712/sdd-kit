@@ -21,8 +21,9 @@ command -v "$CLI" >/dev/null 2>&1 || {
 }
 
 case "$CLI" in
-  claude)  ADAPTER="$HOME/.claude/skills/sdd-$ROLE/SKILL.md" ;;
-  codex)   ADAPTER="$HOME/.codex/skills/sdd-$ROLE/SKILL.md" ;;
+  # The home each CLI will itself use when an alternate one is selected.
+  claude)  ADAPTER="${CLAUDE_CONFIG_DIR:-$HOME/.claude}/skills/sdd-$ROLE/SKILL.md" ;;
+  codex)   ADAPTER="${CODEX_HOME:-$HOME/.codex}/skills/sdd-$ROLE/SKILL.md" ;;
   copilot) ADAPTER="$HOME/.copilot/agents/sdd-$ROLE.agent.md" ;;
 esac
 [[ -f "$ADAPTER" ]] || {
