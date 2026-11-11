@@ -462,6 +462,15 @@ make_host_kit() {
   copy_kit "$KIT_DIR" "$1" && git_host "$1"
 }
 
+# kit_ships_002 — the kit's own shipped spec 002 is on disk. A private hub
+# built from the kit carries its scripts and suites but not the kit's specs,
+# so the cases that read 002's recorded history skip there. A raw directory
+# test on purpose: a kit that holds the directory but whose identity cannot
+# enumerate it must still fail those cases.
+kit_ships_002() {
+  [[ -d "$KIT_DIR/.specify/specs/002-usage-limit-handling-for-dispatched-runs" ]]
+}
+
 # git_host <dir> — make <dir> a Git worktree whose .git/info exists, so a
 # fixture can append ignore rules to .git/info/exclude. Git creates info/ only
 # from a template directory, and fixture_git's template is empty.

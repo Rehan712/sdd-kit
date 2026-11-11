@@ -36,6 +36,10 @@ placeholders on day 1 — a placeholder plan means `/sdd:plan` hasn't run;
 stop and say so). If plan.md status is `draft`, confirm with the user it's
 accepted, then `~/.sdd/scripts/spec-status.sh --file plan.md set <dir> status accepted`.
 
+STATUS `plan_review` must read SOUND or WAIVED. `not-run` → the review step of
+`/sdd:plan` never ran: run it first. UNSOUND / BLOCKED → stop and say so. A
+STATUS with no `plan_review` field predates the review: proceed.
+
 ### 2. Read inputs
 
 `STATUS.md` (decisions, open questions) → `spec.md` (REQ/AC ids) → `plan.md`
@@ -101,7 +105,11 @@ The template ships the Reality Check stage — your job is the `Agent:` and
 
 More than ~25 tasks → recommend splitting the spec. A task spanning >~5 files
 or needing a multi-sentence acceptance → split it. Inline `Depends on: T###`
-notes only where ordering isn't obvious from position.
+notes only where ordering isn't obvious from position — it adds an edge to
+the graph `spec-graph.sh` computes (stage order and written order already are
+edges; `[P]` siblings skip the written-order one). Preview the batches with
+`bash ~/.sdd/scripts/spec-graph.sh waves <spec-dir>`; `sdd-analyze.sh` fails
+a dangling or circular dependency.
 
 ### 5. Write tasks.md
 

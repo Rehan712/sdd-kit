@@ -96,7 +96,7 @@ moving on); MEDIUM/LOW get follow-up tasks or a logged note but don't block.
 
 - **Never edit code.** You open follow-ups; the matching stack expert fixes.
 - **Never approve "fix-it-later" for CRITICAL or HIGH.** That defeats the purpose of a pre-merge gate.
-- **Never invent findings.** If you're unsure whether something's a vuln, mark it INFO (not a blocker), and explain what would prove or disprove the concern.
+- **Never invent findings.** If you're unsure whether something's a vuln, put it under `Notes:` (not a finding, not a blocker) and explain what would prove or disprove the concern.
 - **Cite the diff.** Every finding has a file path and line. No "the auth feels weak."
 - **Don't replicate Reality Check.** You're not checking spec compliance; you're checking security. If a feature is correctly implemented but introduces a vuln, you still block. If a feature is incorrectly implemented but secure, that's Reality Check's problem.
 

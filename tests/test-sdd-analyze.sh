@@ -12,6 +12,24 @@ test_clean_fixture_is_consistent() {
   assert_contains "$OUT" "6 task(s) parsed"
 }
 
+# The plan is reviewed once before it is tasked: only SOUND or WAIVED passes.
+test_plan_review_must_clear_before_tasks() {
+  local spec_dir v; spec_dir="$(make_spec_dir)"
+  run_rc 0 "$ANALYZE" "$spec_dir"
+  assert_not_contains "$OUT" "plan review" "a STATUS that predates the field is not checked"
+  for v in not-run UNSOUND BLOCKED; do
+    "$SCRIPTS/spec-status.sh" set "$spec_dir" plan_review "$v" >/dev/null
+    run_rc 1 "$ANALYZE" "$spec_dir"
+    assert_contains "$OUT" "plan review is '$(printf '%s' "$v" | tr 'A-Z' 'a-z')'"
+  done
+  "$SCRIPTS/spec-status.sh" set "$spec_dir" plan_review "SOUND (2026-11-11)" >/dev/null
+  run_rc 0 "$ANALYZE" "$spec_dir"
+  assert_contains "$OUT" "plan review: sound"
+  "$SCRIPTS/spec-status.sh" set "$spec_dir" plan_review WAIVED >/dev/null
+  run_rc 0 "$ANALYZE" "$spec_dir"
+  run_rc 1 "$SCRIPTS/spec-status.sh" set "$spec_dir" plan_review maybe
+}
+
 test_missing_artifact_is_an_error() {
   local spec_dir; spec_dir="$(make_spec_dir)"
   rm "$spec_dir/plan.md"
@@ -865,6 +883,7 @@ EOF
   # field from any line carrying its marker: a field-grammar defect recorded
   # in Decisions and deliberately left open, so this certifies the identity's
   # view and not the raw file.
+  kit_ships_002 || return 0
   [[ -n "$rel002" ]] || t_fail 'AC-023: shipped 002 is not in the identity enumeration'
   for i in 1 2; do
     case "$i" in
@@ -924,7 +943,7 @@ shipped_specs_case() {
     shipped_analyzer_case "$KIT_DIR" "$rel" 0
     assert_contains "$OUT" 'legacy verification contract remains compatible' 'AC-023: shipped artifact compatibility is not current freshness'
   done < "$SANDBOX/shipped-rels"
-  assert_eq 2 "$shipped_count" 'AC-023: both shipped specs were actually checked'
+  ! kit_ships_002 || assert_eq 2 "$shipped_count" 'AC-023: both shipped specs were actually checked'
 }
 
 # O-015 review: a spec directory the identity never sees -- one left empty by

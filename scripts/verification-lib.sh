@@ -2538,7 +2538,7 @@ vf_snapshot() (
     [[ -f "$resolved" && -x "$resolved" ]] || { echo "verification tool is not an executable file: $tool" >&2; return 3; }
     printf '%s\0' tool "$tool" "$resolved" "$(vf_hash "$resolved")" '' '' >> "$tmp/inputs"
   done < "$tmp/tools"
-  for tool in lib.sh verification-lib.sh spec-run.sh spec-task.sh spec-gate.sh sdd-analyze.sh spec-ac-coverage.sh spec-evidence.sh; do
+  for tool in lib.sh verification-lib.sh spec-run.sh spec-task.sh spec-gate.sh sdd-analyze.sh spec-graph.sh spec-ac-coverage.sh spec-evidence.sh; do
     resolved="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)/$tool"
     [[ -f "$resolved" ]] || { echo "verification harness missing: $tool" >&2; return 3; }
     printf '%s\0' harness "$resolved" "$(vf_hash "$resolved")" '' '' '' >> "$tmp/inputs"

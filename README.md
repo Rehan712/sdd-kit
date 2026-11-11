@@ -58,7 +58,7 @@ From inside any registered project (including its `<repo>.worktrees/*` checkouts
 | Step | Command | Output |
 |---|---|---|
 | 1. Capture intent | `/sdd:specify "<feature>"` | `.specify/specs/NNN-slug/spec.md` (via interview: goals REQ-###, success metrics MET-###, acceptance criteria AC-###) |
-| 2. Design approach | `/sdd:plan` | `plan.md` — stack experts consulted, codebase explored |
+| 2. Design approach | `/sdd:plan` | `plan.md` — stack experts consulted, codebase explored, then reviewed once by the opponent before tasking (`notes/plan-review.md`, STATUS `plan_review`) |
 | 3. Break into tasks | `/sdd:tasks` | `tasks.md` — commit-sized tasks, each with files + acceptance check + refs; validated by `sdd-analyze.sh` |
 | 4. Execute | `/sdd:implement` | Code changes in a `spec/NNN-slug` worktree, checkboxes ticked (`spec-task.sh` — tick + evidence atomically), gates run |
 | 5. Drive the PR home | `/sdd:review` | CI watched via `spec-ci.sh`, red builds triaged into `T###c*` tasks, reviewer feedback into `T###r*`, re-gate rule applied, merge in contract order, worktree torn down |
@@ -70,11 +70,13 @@ human review of `plan.md` or `tasks.md` (each auto-acceptance is logged in the
 STATUS Decisions log). What it *never* skips is the safety floor: the specify
 interview (no spec → it runs `/sdd:specify` interactively first),
 `[NEEDS CLARIFICATION]` markers (any unknown stops the chain instead of
-guessing), `sdd-analyze.sh`, both adversarial gates at full strength (a gate
+guessing), the one-round plan review (an UNSOUND plan stops the chain),
+`sdd-analyze.sh`, both adversarial gates at full strength (a gate
 deadlock stops the chain — autopilot has no waiver authority), and the
 `spec-pr.sh` gate check. The chain always ends at the open PR; `/sdd:review`
-and the merge stay interactive. Umbrella specs are refused — multi-repo runs
-keep a human on the loop.
+and the merge stay interactive. Umbrella specs autopilot too: implement
+always runs locally there, and the chain ends once every declared repo's PR
+is open.
 
 Every spec directory also carries **`STATUS.md`** — the living handoff record
 (phase, branch, worktree, PR, gate verdicts). Every tool reads it on entry and
@@ -252,6 +254,27 @@ setups: omit `dispatch:` entirely — nothing changes.** Each mapped CLI must be
 installed and authenticated; `sdd-doctor.sh` and `model-policy.sh check` flag
 mappings this machine can't honor.
 
+### Graph and loop (control flow lives in scripts)
+
+The two decisions a long run gets wrong when a model makes them from memory
+are scripted:
+
+- **What may start now** — `spec-graph.sh next <spec-dir>` derives the
+  dependency graph from `tasks.md` (stage order, written order, `[P]`,
+  `Depends on:`, open follow-ups) and prints the one batch whose dependencies
+  are all `[x]` and whose *Files:* cannot collide. The orchestrator dispatches
+  exactly those rows; `sdd-analyze.sh` fails a dangling or circular
+  dependency before implementation starts.
+- **When to stop** — `spec-loop.sh <spec-dir>` runs implement as a loop of
+  fresh sessions, one task each, instead of one session that carries every
+  finished task in its context. State is on disk (`tasks.md`, STATUS, the
+  spec branch), so a killed loop resumes by being run again. It stops at the
+  first Ship task (the PR stays yours), after two sessions that tick nothing
+  and open nothing (exit 1), at `--max-iterations` (exit 8), or when the
+  dispatcher refuses or parks the run. It needs a CLI to dispatch to: the
+  `dispatch:` map or `--to <cli>` (the CLI you are on works too). Gate rounds
+  stay capped by `spec-gate.sh`; umbrella specs stay interactive.
+
 ### When a provider hits its usage limit
 
 Usage-limit recovery applies only to **dispatched** runs. It is off by default:
@@ -339,6 +362,8 @@ All in `scripts/` (stable path: `~/.sdd/scripts/`):
 | `spec-worktree.sh <spec-dir>` | cut/reuse branch `spec/NNN-slug` + sibling worktree from the project's base branch; `--remove [--delete-branch]` tears it down post-merge; umbrella: `--repo <name>` / `--all-repos` |
 | `spec-status.sh` | machine-side state mutations: `get`/`set`/`show` on STATUS.md frontmatter (enum-validated, bumps `updated:`); `--file spec.md` targets other artifacts |
 | `spec-task.sh` | tick tasks deterministically: `list`, `show`, `start`, `done T### --evidence "…"` (tick + evidence one atomic edit — refuses evidence-less ticks), `undo` |
+| `spec-graph.sh <cmd> <spec-dir>` | the task dependency graph, computed instead of recalled: `check` (dangling/circular `Depends on:`, duplicate ids), `next` (the batch that is safe to start now — stage order, `[P]` siblings, follow-ups first, file collisions kept apart, a gate alone), `waves` (every remaining batch) |
+| `spec-loop.sh <spec-dir>` | the outer loop for implement: one fresh headless session per task in `spec-graph.sh` order via `spec-dispatch.sh`; stops at the first Ship task, on two sessions without progress, at `--max-iterations` (default 30), or when the dispatcher refuses/parks; `--to <cli>`, `--dry-run` |
 | `spec-run.sh <spec-dir> T### -- <cmd>` | run an acceptance check FOR REAL: executes the command, captures stdout+exit+hash into `notes/evidence.md`, and ticks the box from that run only on exit 0 — evidence becomes a record, not a typed claim (`--key` to pick the quoted line, `--no-tick` to capture only) |
 | `sdd-analyze.sh <spec-dir>` | deterministic spec↔plan↔tasks lint: AC coverage (implementation tasks only — gate refs don't count), ref integrity, acceptance checks, evidence on `[x]` tasks, gates present, no unresolved `[NEEDS CLARIFICATION]` markers; umbrella: `[repo:]` tag integrity + `[EXTERNAL:]` mirroring |
 | `spec-ac-coverage.sh <spec-dir>` | AC coverage at the CODE layer (gate-time): greps the repo's test files for each `AC-###`, fails any AC no test names — the deterministic floor beneath the reality-check gate (`--root` per repo, `--tests` for extra globs) |

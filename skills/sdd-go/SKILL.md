@@ -16,6 +16,9 @@ the two adversarial gates. Merging stays human — the chain ENDS at the open PR
 - The **specify interview.** A spec born from a one-liner without answers is
   the one failure no downstream gate can catch. No spec yet → run
   `/sdd:specify` normally (interactive), then continue the chain from there.
+- The **plan review** — one adversarial round on plan.md (`/sdd:plan` step 7),
+  standing in for the human plan checkpoint autopilot removes. UNSOUND or
+  BLOCKED stops the chain; autopilot cannot waive it.
 - **`sdd-analyze.sh`** after the tasks phase — exit 0 or the chain stops.
 - The **opponent and reality-check gates**, at full strength — plus
   `spec-pr.sh`'s refusal to open a non-draft PR without CLEARED + READY.
@@ -54,7 +57,13 @@ overrides** (the phase skills' "Autopilot?" blocks point back here):
 5. **Dispatch without the offer.** A phase whose role is mapped to another CLI
    in models.yml `dispatch:` runs there directly via
    `bash ~/.sdd/scripts/spec-dispatch.sh <role> <spec-dir>` (headless +
-   artifact-verified by design) — don't pause to offer it.
+   artifact-verified by design) — don't pause to offer it. A mapped
+   single-repo **implement** runs as the loop instead:
+   `bash ~/.sdd/scripts/spec-loop.sh <spec-dir>` — one fresh session per task
+   in `spec-graph.sh` order, gates included. Exit 0 = it reached the Ship
+   stage: run the "Open PR" task here. Any other exit stops the chain
+   (1 = two sessions made no progress, 8 = iteration cap, else the
+   dispatcher's own code) — report it; never loop on the loop.
 6. **Every auto-decision is logged.** Autopilot is auditable, not silent:
    Decisions lines for acceptances, markers for unknowns, evidence lines and
    gate reports exactly as in normal mode.
@@ -86,9 +95,11 @@ this skill.
 Run the plan phase exactly as its skill defines (Claude Code: invoke the
 `sdd:plan` skill via the Skill tool; single-agent CLIs: follow
 `~/.sdd/skills/sdd-plan/SKILL.md` inline) under the auto-mode contract.
-Spec still `draft` → auto-accept (contract rule 2). When plan.md is written,
-set it `accepted` immediately with its Decisions line — this is the human
-checkpoint yolo removes, so the log entry is mandatory.
+Spec still `draft` → auto-accept (contract rule 2). When plan.md is written
+and its review is SOUND (findings folded in), set it `accepted` with its
+Decisions line — this is the human checkpoint yolo removes, so the log entry
+is mandatory. UNSOUND or BLOCKED → stop the chain with the finding; do not
+rework the approach unasked.
 
 ### 4. Tasks
 
@@ -99,7 +110,8 @@ rule 3 — one fix round). Auto-accept tasks.md.
 ### 5. Implement — all of it
 
 Run `/sdd:implement --all` (orchestrated mode: the `sdd-orchestrator` agent
-owns batching, per-task commits, both gates, script-enforced round reservations).
+owns batching, per-task commits, both gates, script-enforced round reservations)
+— or, when implement is mapped to another CLI, the loop of contract rule 5.
 Stop-point for the orchestrator prompt: **through the Ship stage's "Open PR"
 task** — `spec-pr.sh` opens the PR and flips STATUS to `phase: review`.
 Roll-out and retro tasks stay unticked; they need a merged PR.

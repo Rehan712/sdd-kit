@@ -1132,6 +1132,7 @@ round_record_line_cases() {
 # impossible time or stamped later today are refused like the other wrong ones.
 round_legacy_reconcile_cases() {
   local spec cli rel=.specify/specs/002-usage-limit-handling-for-dispatched-runs stamp digest bad what legacy
+  kit_ships_002 || return 0
   spec="$(make_verification_git_dir legacyround)"
   cli="$(floor_fixture "$spec")"
   copy_kit "$KIT_DIR" "$SANDBOX/legacy-002" "$rel/notes" || t_fail 'AC-009: cannot copy shipped 002 records as the identity hashes them'

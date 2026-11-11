@@ -90,8 +90,9 @@ is the only reader (constitution §10.6).
    `bash ~/.sdd/scripts/spec-worktree.sh --remove --delete-branch <spec-dir>`
    (umbrella: `--all-repos`). Then set artifact statuses:
    `spec-status.sh --file spec.md set <spec-dir> status shipped`, same for
-   plan.md. `phase:` stays `review` until the **Roll out** task (T012) runs —
-   hand back: "merged; next is /sdd:implement T012 (rollout), then /sdd:retro."
+   plan.md. `phase:` stays `review` until the **Roll out** task runs —
+   hand back: "merged; next is /sdd:implement <the Roll out task's T###>,
+   then /sdd:retro."
 
 ## The re-gate rule (stale verdicts are the silent failure here)
 

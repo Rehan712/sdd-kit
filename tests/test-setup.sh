@@ -26,6 +26,9 @@ in_home() {  # <command...> — run with the sandbox home and a stubbed schedule
 # placeholder repos, and must leave every home link and stamped copy in place.
 test_fresh_install_links_homes_and_does_not_onboard_example_repos() {
   local kit; kit="$(stage)"
+  # A private hub tracks its real map and ships no example. A fresh install is
+  # "the map is still the example", so its map stands in as the example.
+  [[ -f "$kit/system-map.example.yml" ]] || cp "$kit/system-map.yml" "$kit/system-map.example.yml"
   run_rc 0 in_home bash "$kit/scripts/setup.sh" --no-wizard --no-cli
   assert_eq "$kit" "$(readlink "$SANDBOX/home/.sdd")" 'setup did not link ~/.sdd to the clone'
   [[ -L "$SANDBOX/home/.claude/skills/sdd-plan" && -L "$SANDBOX/home/.claude/agents/sdd-scout.md" ]] \
