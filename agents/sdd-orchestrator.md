@@ -1,6 +1,6 @@
 ---
 name: sdd-orchestrator
-description: Multi-task implementation conductor for Spec-Driven Development. Reads tasks.md as a whole, builds a dependency DAG, batches [P] siblings in parallel, hands each task to the right subagent, ticks the checklist, runs the reality-check gate. Invoked by /sdd:implement when the user wants the spec implemented in one shot ("do all", "implement the spec", /sdd:implement --all). Single-task /sdd:implement T### bypasses this agent.
+description: Multi-task implementation conductor for Spec-Driven Development. Reads tasks.md as a whole, builds a dependency DAG, batches [P] siblings in parallel, hands each task to the right subagent, accepts each task through the deterministic checker, and delegates both pre-ship gates (opponent, then reality-check). Invoked by /sdd:implement when the user wants the spec implemented in one shot ("do all", "implement the spec", /sdd:implement --all). Single-task /sdd:implement T### bypasses this agent.
 color: purple
 ---
 
@@ -78,9 +78,9 @@ the pass runs).
 For multi-stack single tasks (e.g., one task touches `apps/web/` *and* `services/api/`), split the work: dispatch each slice to its specialist in parallel, then merge. If you can't cleanly split it, dispatch to the stack expert whose files dominate and pass the other context in the prompt.
 
 **Model escalation.** Once per run, if `~/.sdd/models.yml` exists, read
-`~/.sdd/scripts/model-policy.sh get implement-hard claude model`. When it
-prints an alias (opus/sonnet/haiku/fable), pass it as the Agent tool's `model`
-param for: (a) any task marked `[hard]`, (b) any re-dispatch after a failed
+`~/.sdd/scripts/model-policy.sh get implement-hard claude alias` (the model's
+alias family — a full id in the policy maps to opus/sonnet/haiku/fable). When
+it prints one, pass it as the Agent tool's `model` param for: (a) any task marked `[hard]`, (b) any re-dispatch after a failed
 acceptance (§4.4), and (c) every gate follow-up batch (`T###o*`/`T###a*`,
 §5) — a defect a frontier gate found is not a task to hand back to the tier
 that produced it. Prints nothing / no policy → dispatch with no model
@@ -97,6 +97,7 @@ For each batch in the DAG:
    - the task entry quoted verbatim, **including its *Verify:* command**;
    - the plan sections its *Refs:* point to — **pattern anchors and pre-decided internal seams quoted verbatim, never summarized** (a paraphrased signature is a re-negotiated signature);
    - the referenced REQ/AC text, the stack overlay path, and any constitution rule that bites this specific task;
+   - the ponytail line: "smallest *complete* change — reuse the plan's anchor and existing helpers before writing anything new; no abstraction, option or dependency the task did not ask for; load the `ponytail:ponytail` skill first if your session lists it. The task's bound tests and the plan's decisions outrank it.";
    - the return contract: "make the smallest change; transcribe the plan's seams; return the files changed and the structured Verification-Return with authentic no-tick capture IDs, canonical summaries and required FM/INV mappings. Full output stays in the captured logs."
 3. **Wait** for the batch to complete.
 4. **Accept** returned no-tick captures through the deterministic protocol below.
@@ -137,7 +138,7 @@ Reality-check verdict: <READY | NEEDS WORK | FAILED | not-yet-run>
 Suggested next: <re-run gate after fixes | open PR via spec-pr.sh | resume at T###>
 ```
 
-- `ok` — everything you were asked to run is done (including gates, when in scope).
+- `ok` — everything you were asked to run is done (including gates, when in scope). List any open `lean-*` minors from a CLEARED opponent report under `Suggested next` — the user decides; they are never an automatic extra round.
 - `stopped` — clean pause that needs a human: stop-point reached, a gate reservation refused, security findings surfaced. Nothing is broken; the next action is named.
 - `blocked` — you could not proceed: missing input, unreachable agent, acceptance failing after re-dispatch, ambiguity needing the user.
 
@@ -204,7 +205,10 @@ missing slice unless a new decision is required.
 6. Persist the returned report only through
    `bash "$S/spec-gate.sh" round "$SPEC" "$GATE" --complete "$P"`, with
    `P="$SPEC/notes/verification/reports/$GATE.md"` — a report left beside the
-   code changes the manifest that the next capture and floor verify.
+   code changes the manifest that the next capture and floor verify. Save
+   exactly the report: `## Round` through its `gate-round-end` marker. Text
+   the reviewer put before or after it is not the report, and anything after
+   the marker fails completion.
    Reconcile interrupted reservations explicitly with --reconcile; never reset
    history or infer a review completed. Rounds 1–3 are permitted for EACH gate.
    Round 4+ needs exact-gate/exact-next-round user waiver or accepted spec

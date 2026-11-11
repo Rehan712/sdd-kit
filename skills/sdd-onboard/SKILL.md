@@ -1,6 +1,7 @@
 ---
 name: sdd:onboard
 description: Research every repo the hub governs and write its standing brief (briefs/<repo>.md) up front — local checkouts via registry.yml, GitHub-only repos via the system map's remote: field and a cached shallow clone. Also refreshes stale briefs (--refresh). Use when the user types /sdd:onboard, says "onboard the repos", "generate the repo briefs", "refresh the briefs", or right after installing the kit when setup.sh reports repos with no brief.
+argument-hint: "[--refresh [repo ...]]"
 ---
 
 # /sdd:onboard — Research the governed repos, write their briefs
@@ -54,13 +55,13 @@ but the brief must open with a "role: external — read-only for us" note.
    lands in the summary table. Never fabricate a brief for a repo you could
    not check out.
 
-### 3. Research — one Explore agent per repo, in parallel
+### 3. Research — one scout per repo, in parallel
 
-Fan out one Explore agent per work-list repo (one message, multiple Agent
-calls). If the hub has a model policy, run them on its `explore` tier
-(`~/.sdd/scripts/model-policy.sh get explore claude model` — pass as the Agent
-tool's `model` parameter when it prints an alias; otherwise omit). On a
-single-agent CLI, research the repos yourself, sequentially, same rules.
+Fan out one `sdd-scout` agent per work-list repo (one message, multiple Agent
+calls) — the kit's read-only scout, pinned to the `explore` role's tier by the
+model policy (no `model` param; not registered in this session →
+`subagent_type: Explore`). On a single-agent CLI, research the repos
+yourself, sequentially, same rules.
 
 Each agent gets the repo's resolved checkout path and returns the brief
 template's sections — what it owns, entry points (build/test/deploy commands,
@@ -97,8 +98,11 @@ End with one row per system-map repo:
 | `<repo>` | local / cache / — | written / refreshed / current / stale (suggest --refresh) / skipped: <reason> |
 
 Then re-run `~/.sdd/scripts/brief-status.sh check` and paste its summary line —
-that's the run's exit evidence. Remind the user briefs are committed,
-team-shared context: `git -C ~/.sdd add briefs/ && git commit` publishes them.
+that's the run's exit evidence. Say how the briefs travel: when the hub
+tracks them (`git -C ~/.sdd check-ignore -q briefs/<repo>.md` exits 1),
+`git -C ~/.sdd add briefs/ && git commit` shares them with the team; a hub
+that gitignores `briefs/*.md` (the public template does) keeps them
+machine-local.
 
 ## Grounding rules — non-negotiable
 
@@ -131,4 +135,4 @@ team-shared context: `git -C ~/.sdd add briefs/ && git commit` publishes them.
   lines or a `skipped: <reason>` row in the summary.
 - No pre-existing brief was deleted, and non-work-list briefs are byte-identical.
 - `brief-status.sh check` output is pasted in the summary.
-- The user knows which briefs to commit and which repos were skipped and why.
+- The user knows which briefs were written (and whether this hub commits them) and which repos were skipped and why.

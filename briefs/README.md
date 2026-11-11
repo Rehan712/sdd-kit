@@ -28,5 +28,7 @@ Lifecycle:
   kit's grounding rules still require paths to be confirmed in-session before
   they're written into a plan or task.
 
-Briefs are committed — they're team-shared context, like `knowledge/`. The
-clone cache is not.
+Briefs are team-shared context, like `knowledge/` — in a team's own fork. This
+public template gitignores `briefs/*.md` (they describe YOUR repos); delete
+that entry from `.gitignore` in your fork to commit them. The clone cache is
+never committed.

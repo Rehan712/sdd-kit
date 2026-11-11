@@ -125,7 +125,7 @@ if (( UMBRELLA )); then
   fi
   # Exact-token match (grep -w treats '-' as a boundary: '--repo alpha' would
   # pass when only 'alpha-api' is declared, then die at repo resolution with a
-  # misleading exit 4) — same rule as spec-worktree.sh.
+  # misleading exit 4) — the rule lib.sh's list_has gives every other reader.
   if [[ -n "$REPO_NAME" ]] && ! printf '%s\n' "$DECLARED_REPOS" | tr ' ' '\n' | grep -Fqx "$REPO_NAME"; then
     echo "repo '$REPO_NAME' is not declared by this umbrella spec (declared: $DECLARED_REPOS)" >&2
     exit 2
@@ -152,9 +152,14 @@ case "$CLI" in
   *) echo "unknown CLI '$CLI' (claude|codex|copilot)" >&2; exit 2 ;;
 esac
 
+# The Codex home the dispatched `codex exec` will itself use: an alternate
+# profile home (CODEX_HOME=~/.codex_gym) carries its own adapters and tier
+# profiles, and ~/.codex may not exist at all.
+CODEX_DIR="${CODEX_HOME:-$HOME/.codex}"
+
 command -v "$CLI" >/dev/null 2>&1 || { echo "target CLI '$CLI' is not on PATH — install/authenticate it, or drop the dispatch mapping" >&2; exit 4; }
 case "$CLI" in
-  codex)   [[ -f "$HOME/.codex/skills/sdd-$ROLE/SKILL.md" ]] || { echo "codex adapter ~/.codex/skills/sdd-$ROLE missing — run scripts/build-adapters.sh" >&2; exit 4; } ;;
+  codex)   [[ -f "$CODEX_DIR/skills/sdd-$ROLE/SKILL.md" ]] || { echo "codex adapter $CODEX_DIR/skills/sdd-$ROLE missing — run scripts/build-adapters.sh" >&2; exit 4; } ;;
   copilot) [[ -f "$HOME/.copilot/agents/sdd-$ROLE.agent.md" ]] || { echo "copilot agent ~/.copilot/agents/sdd-$ROLE.agent.md missing — run scripts/build-adapters.sh" >&2; exit 4; } ;;
 esac
 
@@ -244,7 +249,7 @@ if [[ "$ROLE" == "implement" ]]; then
 fi
 
 case "$CLI" in
-  codex)   pointer="Your instructions are your installed skill: read ~/.codex/skills/sdd-$ROLE/SKILL.md and execute it for that spec directory." ;;
+  codex)   pointer="Your instructions are your installed skill: read $CODEX_DIR/skills/sdd-$ROLE/SKILL.md and execute it for that spec directory." ;;
   copilot) pointer="You are the sdd-$ROLE agent — your agent instructions ARE the phase skill; execute them for that spec directory." ;;
   claude)  pointer="Invoke your sdd-$ROLE skill (the /sdd:$ROLE phase) for that spec directory." ;;
 esac
@@ -301,7 +306,7 @@ build_command() {
   codex)
     CMD=(codex exec)
     tier="$("$MP" get "$ROLE" codex tier 2>/dev/null)" || tier=""
-    if [[ -n "$tier" && -f "$HOME/.codex/sdd-$tier.config.toml" ]]; then
+    if [[ -n "$tier" && -f "$CODEX_DIR/sdd-$tier.config.toml" ]]; then
       CMD+=(--profile "sdd-$tier")
     else
       m="$("$MP" get "$ROLE" codex model 2>/dev/null)" || m=""

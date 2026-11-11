@@ -30,12 +30,16 @@
 
 set -euo pipefail
 
-KIT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+# Physical paths on both sides of the comparison below: run as
+# ~/.sdd/scripts/sync.sh, or from a clone under a symlinked directory
+# (macOS /tmp), a logical path never equals the link's target, and the two
+# invocations would re-point every home link back and forth.
+KIT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd -P)"
 . "$KIT_DIR/scripts/lib.sh"
 # Prefer the stable ~/.sdd path as the link target when it points at this repo,
 # so links survive the clone moving (re-run setup.sh after a move either way).
 TARGET_ROOT="$KIT_DIR"
-if [[ -L "$HOME/.sdd" && "$(readlink "$HOME/.sdd")" == "$KIT_DIR" ]]; then
+if [[ -L "$HOME/.sdd" && "$(cd -P -- "$HOME/.sdd" 2>/dev/null && pwd -P)" == "$KIT_DIR" ]]; then
   TARGET_ROOT="$HOME/.sdd"
 fi
 

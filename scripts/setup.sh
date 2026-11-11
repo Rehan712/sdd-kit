@@ -25,6 +25,7 @@
 #   scripts/setup.sh              # full install
 #   scripts/setup.sh --no-cli     # skip codex/copilot adapters
 #   scripts/setup.sh --no-wizard  # first install: take default model policy, don't prompt
+#   scripts/setup.sh --relink     # ~/.sdd points at ANOTHER live clone: switch it here
 #   scripts/setup.sh --help
 
 set -euo pipefail
@@ -40,11 +41,13 @@ usage() { usage_from_header "$0"; exit 0; }
 
 NO_CLI=0
 NO_WIZARD=0
+RELINK=0
 for arg in "$@"; do
   case "$arg" in
     --help|-h) usage ;;
     --no-cli) NO_CLI=1 ;;
     --no-wizard) NO_WIZARD=1 ;;
+    --relink) RELINK=1 ;;
     *) echo "unknown arg: $arg" >&2; exit 2 ;;
   esac
 done
@@ -57,6 +60,15 @@ if [[ "$KIT_DIR" == "$HOME/.sdd" ]]; then
   exit 1
 fi
 if [[ -L "$HOME/.sdd" ]]; then
+  # A dangling link (the clone moved) is repaired silently. A link to another
+  # LIVE clone is someone's working install — its registry, model policy and
+  # every home symlink follow ~/.sdd — so switching it needs an explicit flag.
+  current="$(cd -P -- "$HOME/.sdd" 2>/dev/null && pwd -P || true)"
+  if [[ -n "$current" && "$current" != "$KIT_DIR" ]] && (( ! RELINK )); then
+    echo "  ${RED}✗${RESET} ~/.sdd already points at another kit clone: $current" >&2
+    echo "    re-run with --relink to switch this machine to $KIT_DIR" >&2
+    exit 1
+  fi
   ln -sfn "$KIT_DIR" "$HOME/.sdd"
   echo "  ${GREEN}✓${RESET} ~/.sdd -> $KIT_DIR"
 elif [[ -e "$HOME/.sdd" ]]; then
@@ -113,6 +125,7 @@ cat <<EOF
 
 Next steps:
   1. Edit $KIT_DIR/registry.yml — one entry per project you want under SDD.
+     (Multi-repo features: also describe your repos in system-map.yml.)
   2. In each project: mkdir -p .specify/specs and add a .specify/stack.yml
      (see registry.example.yml notes; sdd-doctor.sh <project> will guide you).
   3. From inside a project, run /sdd:specify "<feature>" in Claude Code.
@@ -123,7 +136,12 @@ EOF
 
 # Repo briefs: point at /sdd:onboard when governed repos lack standing context.
 # Guarded — brief-status.sh is a query script and must never fail the install.
-briefs_missing="$("$KIT_DIR/scripts/brief-status.sh" list 2>/dev/null | awk -F'\t' '$5 == "missing"' | wc -l | tr -d ' ' || true)"
+# Skipped while the map is still the shipped example: its placeholder repos
+# are not the user's, and there is nothing for /sdd:onboard to research.
+briefs_missing=0
+if ! cmp -s "$KIT_DIR/system-map.yml" "$KIT_DIR/system-map.example.yml"; then
+  briefs_missing="$("$KIT_DIR/scripts/brief-status.sh" list 2>/dev/null | awk -F'\t' '$5 == "missing"' | wc -l | tr -d ' ' || true)"
+fi
 if [[ "${briefs_missing:-0}" -gt 0 ]]; then
   echo "Briefs: ${YELLOW}$briefs_missing${RESET} registered repo(s) have no repo brief — run /sdd:onboard"
   echo "in Claude Code to research them and write briefs/<repo>.md."

@@ -70,7 +70,7 @@ if [[ -n "$declared_repos" ]]; then
     echo "each repo ships its own PR — run once per repo: spec-pr.sh --repo <name> $spec_dir" >&2
     exit 2
   fi
-  grep -qw "$REPO_NAME" <<< "$declared_repos" \
+  list_has "$declared_repos" "$REPO_NAME" \
     || { echo "repo '$REPO_NAME' is not declared by this umbrella spec (declared: $declared_repos)" >&2; exit 1; }
   repo="$("$SYSMAP" path "$REPO_NAME")" || exit 1
 else

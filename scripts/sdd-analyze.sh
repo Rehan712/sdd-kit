@@ -255,7 +255,7 @@ if [[ -n "$declared_repos" ]]; then
     [[ "$tstage" =~ Reality|Ship ]] && continue
     if [[ -z "$ttag" ]]; then
       untagged="$untagged $tid"
-    elif ! grep -qw "$ttag" <<< "$declared_repos"; then
+    elif ! list_has "$declared_repos" "$ttag"; then
       badtag="$badtag ${tid}[repo:$ttag]"
     fi
   done <<< "$task_map"

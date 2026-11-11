@@ -1,6 +1,7 @@
 ---
 name: sdd:go
 description: Spec-driven development autopilot ("yolo mode"). From an existing spec, chain plan → tasks → implement --all → open PR without stopping for human review of plan.md or tasks.md — deterministic validators and both adversarial gates still block. Use when the user types /sdd:go, or says "yolo this spec", "just build it", "go ahead and build the whole spec", "run it end to end, don't check in with me".
+argument-hint: "[NNN-slug | <feature description>]"
 ---
 
 # /sdd:go — Autopilot from spec to PR
@@ -187,7 +188,10 @@ missing slice unless a new decision is required.
 6. Persist the returned report only through
    `bash "$S/spec-gate.sh" round "$SPEC" "$GATE" --complete "$P"`, with
    `P="$SPEC/notes/verification/reports/$GATE.md"` — a report left beside the
-   code changes the manifest that the next capture and floor verify.
+   code changes the manifest that the next capture and floor verify. Save
+   exactly the report: `## Round` through its `gate-round-end` marker. Text
+   the reviewer put before or after it is not the report, and anything after
+   the marker fails completion.
    Reconcile interrupted reservations explicitly with --reconcile; never reset
    history or infer a review completed. Rounds 1–3 are permitted for EACH gate.
    Round 4+ needs exact-gate/exact-next-round user waiver or accepted spec

@@ -1,6 +1,7 @@
 ---
 name: sdd:review
 description: Spec-driven development phase 4.5 — own the PR from open to merged. Watch CI via spec-ci.sh, triage red builds into T###c follow-ups, turn reviewer feedback into T###r follow-ups, apply the re-gate rule, rebase conflicts, merge in contract order, tear down the worktree. Use when the user types /sdd:review, says "check the PR", "CI is red", "handle the review comments", "is it safe to merge", or when a spec sits in phase review.
+argument-hint: "[NNN-slug]"
 ---
 
 # /sdd:review — Drive the PR home
@@ -26,6 +27,9 @@ The deterministic half lives in `~/.sdd/scripts/spec-ci.sh` (it writes the
 ### exit 20 — checks red
 
 1. `bash ~/.sdd/scripts/spec-ci.sh logs <spec-dir>` → writes + prints `notes/ci.md`.
+   Several failing runs? Discard the print (`… logs <spec-dir> >/dev/null`) and
+   hand `notes/ci.md` to one `sdd-scout` per run (log-digest mode); diagnose
+   from the digests, re-reading only the lines they cite.
 2. Diagnose each failing check from the logs. For every distinct defect, append
    a follow-up task under the **Ship** stage: `T###c1, T###c2, …` (`###` = the
    Open-PR task's number). Follow-ups change behavior, so they are ordinary
@@ -168,7 +172,10 @@ missing slice unless a new decision is required.
 6. Persist the returned report only through
    `bash "$S/spec-gate.sh" round "$SPEC" "$GATE" --complete "$P"`, with
    `P="$SPEC/notes/verification/reports/$GATE.md"` — a report left beside the
-   code changes the manifest that the next capture and floor verify.
+   code changes the manifest that the next capture and floor verify. Save
+   exactly the report: `## Round` through its `gate-round-end` marker. Text
+   the reviewer put before or after it is not the report, and anything after
+   the marker fails completion.
    Reconcile interrupted reservations explicitly with --reconcile; never reset
    history or infer a review completed. Rounds 1–3 are permitted for EACH gate.
    Round 4+ needs exact-gate/exact-next-round user waiver or accepted spec

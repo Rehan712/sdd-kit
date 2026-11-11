@@ -1,6 +1,7 @@
 ---
 name: sdd:tasks
 description: Spec-driven development phase 3. Read an accepted plan.md and produce tasks.md alongside it — a numbered, dependency-ordered checklist where each task is small enough to be a single commit and has an explicit acceptance check. Use when the user types /sdd:tasks, says "break this down", "task this out", or asks for a task list for a spec that already has a plan.
+argument-hint: "[NNN-slug]"
 ---
 
 # /sdd:tasks — Decompose a plan into tasks

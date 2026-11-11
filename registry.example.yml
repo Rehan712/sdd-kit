@@ -20,7 +20,8 @@
 # scripts/project-detect.sh resolves cwd → project root using .specify/stack.yml
 # first, then linked git worktrees, then this registry.
 #
-# TEAM TOPOLOGY lives elsewhere: system-map.yml (committed) describes what each
+# TEAM TOPOLOGY lives elsewhere: system-map.yml (team-shared once your fork
+# stops gitignoring it — see README "Multi-machine") describes what each
 # repo is, who owns it, dependencies, and contracts — entry names there must
 # match the names here. This file only says where repos are on THIS machine.
 

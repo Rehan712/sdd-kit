@@ -81,7 +81,12 @@ CODEX_PREAMBLE='> **Codex adaptation.** Wherever this skill says to delegate to 
 >   overlay under `~/.sdd/templates/stack-overlays/`, and apply them as your senior-reviewer
 >   lens while you do the work yourself.
 > - **Orchestrated mode (--all)** — run the task loop yourself, one task at a time, in
->   dependency order, delegating per the rules above.'
+>   dependency order, delegating per the rules above.
+> - **Scouts (`sdd-scout`)** — no scout subagent is generated for this CLI: do that
+>   read-only recon yourself, same rules (cite `path:line`, name what you could not find).
+> - **Ponytail** — where the skill names `ponytail:ponytail` / `ponytail:ponytail-review`,
+>   use the ponytail plugin'\''s skills when it is installed on this CLI; otherwise the
+>   rule as written in the skill applies on its own.'
 
 COPILOT_PREAMBLE='> **Single-agent adaptation.** The SDD kit does not yet wire delegation on this CLI
 > (Copilot'\''s custom-agent handoff is proven — see `~/.sdd/knowledge/cli-subagent-delegation.md`
@@ -96,7 +101,12 @@ COPILOT_PREAMBLE='> **Single-agent adaptation.** The SDD kit does not yet wire d
 >   adversarial verdict. You are grading work you may have written, so over-correct toward
 >   suspicion. Never skip a gate because you cannot spawn it.
 > - **Orchestrated mode (--all)** — run the task loop yourself, one task at a time, in
->   dependency order; everything else in the skill still applies.'
+>   dependency order; everything else in the skill still applies.
+> - **Scouts (`sdd-scout`)** — do that read-only recon yourself, same rules (cite
+>   `path:line`, name what you could not find).
+> - **Ponytail** — where the skill names `ponytail:ponytail` / `ponytail:ponytail-review`,
+>   use the ponytail plugin'\''s skills when it is installed on this CLI; otherwise the
+>   rule as written in the skill applies on its own.'
 
 # frontmatter_field <file> <key> — read a key from the skill YAML frontmatter.
 frontmatter_field() {
@@ -107,9 +117,13 @@ frontmatter_field() {
   ' "$1"
 }
 
-# skill_body <file> — everything after the closing frontmatter fence.
+# skill_body <file> [<cli>] — everything after the closing frontmatter fence.
+# With <cli>, the STATUS handoff field names that CLI: the canonical skills say
+# `active_tool: claude`, and a Codex or Copilot session copying that verbatim
+# records the wrong holder of the spec.
 skill_body() {
-  awk 'NR==1 && $0=="---" {inside=1; next} inside && $0=="---" {inside=0; body=1; next} body' "$1"
+  awk 'NR==1 && $0=="---" {inside=1; next} inside && $0=="---" {inside=0; body=1; next} body' "$1" \
+    | sed "s/active_tool: claude/active_tool: ${2:-claude}/g"
 }
 
 # Model policy (optional). policy <role> <cli> <field> — empty when unset.
@@ -188,7 +202,7 @@ for skill_dir in "$KIT_DIR"/skills/sdd-*/; do
         "$phase" "$desc" "${phase#sdd-}"
       printf '%s\n\n' "$CODEX_PREAMBLE"
       codex_note "$role"
-      skill_body "$skill_file"
+      skill_body "$skill_file" codex
     } > "$out"
     echo "  ${GREEN}✓${RESET} $(codex_label "$ch"): $phase"
     built=$((built+1))
@@ -205,7 +219,7 @@ for skill_dir in "$KIT_DIR"/skills/sdd-*/; do
         "$phase" "$desc" "$phase" "$cp_model_line"
       printf '%s\n\n' "$COPILOT_PREAMBLE"
       copilot_note "$role"
-      skill_body "$skill_file"
+      skill_body "$skill_file" copilot
     } > "$out"
     echo "  ${GREEN}✓${RESET} copilot: $phase${cp_model:+ (model: $cp_model)}"
     built=$((built+1))
@@ -352,6 +366,9 @@ given — anything else: stop and report, don't edit.
 Implement exactly the quoted task: the smallest change satisfying its
 *Acceptance:* and *Refs:*. Transcribe the plan's pattern anchors and internal
 seams verbatim — never re-derive or redesign them.
+Smallest complete change: reuse the anchor and existing helpers before
+writing anything new; no abstraction, option or dependency the task did not
+ask for. If the ponytail skill is installed, load it first.
 Run the task's *Verify:* command and return: the files you changed, the
 command, and its output pasted verbatim. A reply without pasted output is a
 failed task. Unknowns: surface them — never guess silently.

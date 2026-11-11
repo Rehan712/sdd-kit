@@ -194,6 +194,11 @@ init_colors() {
 # frontmatter (space-separated); empty for single-repo specs.
 spec_declared_repos() { fm_list "${1:-}/spec.md" repos; }
 
+# list_has <space-separated-list> <item> — exact-token membership. `grep -w`
+# is not this: it treats '-' as a word boundary, so 'alpha' matched a declared
+# 'alpha-api' and an undeclared repo passed as a declared one.
+list_has() { case " $1 " in *" $2 "*) return 0 ;; esac; return 1; }
+
 # usage_from_header <script-path> — print the script's leading `#` comment
 # block (skipping the shebang) — immune to line-number drift, unlike sed -n.
 usage_from_header() {

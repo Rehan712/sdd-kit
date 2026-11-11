@@ -13,6 +13,9 @@
 #
 # Usage:
 #   model-policy.sh get <role> <cli> <field>    # field: model | effort | tier
+#   model-policy.sh get <role> claude alias     # the model's alias family
+#                                               # (claude-opus-5-5 -> opus): what the
+#                                               # Agent tool's `model` param accepts
 #   model-policy.sh tier <tier> <cli> <field>   # field: model | effort |
 #                                               #        sandbox | approval (codex)
 #   model-policy.sh roles                       # role<TAB>tier lines
@@ -161,6 +164,17 @@ tier_field() {  # <tier> <key>
 
 role_tier() {  # <role>
   flatten | awk -F'\t' -v r="$1" '$1=="role" && $2==r { print $3; exit }'
+}
+
+# claude_alias <claude_model> — the alias family the Agent tool's `model` param
+# accepts; a full id maps to its family (claude-opus-5-5 -> opus). Prints
+# nothing for a value with no family (inherit, an unrecognized id).
+claude_alias() {
+  local v="$1"
+  case "$v" in
+    opus|sonnet|haiku|fable) echo "$v" ;;
+    claude-opus-*|claude-sonnet-*|claude-haiku-*|claude-fable-*) v="${v#claude-}"; echo "${v%%-*}" ;;
+  esac
 }
 
 limit_present() {
@@ -455,6 +469,12 @@ case "$CMD" in
     t="$(role_tier "$ROLE")"
     [[ -n "$t" ]] || exit 1
     if [[ "$FIELD" == "tier" ]]; then echo "$t"; exit 0; fi
+    if [[ "$FIELD" == "alias" ]]; then
+      [[ "$CLI" == "claude" ]] || { echo "alias is a claude-only field" >&2; exit 2; }
+      v="$(claude_alias "$(tier_field "$t" claude_model)")"
+      [[ -n "$v" ]] || exit 1
+      echo "$v"; exit 0
+    fi
     v="$(tier_field "$t" "${CLI}_${FIELD}")"
     [[ -n "$v" ]] || exit 1
     echo "$v"
@@ -515,8 +535,16 @@ case "$CMD" in
     done < <(flatten | awk -F'\t' '$1=="tier"')
 
     for known in specify plan tasks implement implement-hard review retro onboard go orchestrator opponent reality-check security-reviewer test-engineer stack-expert explore; do
-      grep -qx "$known" <<<"$roles" || warn "role '$known' not mapped — that phase/agent keeps the session default"
+      grep -qx "$known" <<<"$roles" || warn "role '$known' not mapped — that phase/agent keeps the session default (map it: model-policy.sh set role $known <tier>)"
     done
+
+    # [hard] escalation on Claude hands the model's alias family to the Agent
+    # tool's `model` param (`get implement-hard claude alias`); a value with no
+    # family silently disables it.
+    hard_model="$(tier_field "$(role_tier implement-hard)" claude_model)"
+    if [[ -n "$hard_model" && -z "$(claude_alias "$hard_model")" ]]; then
+      warn "role 'implement-hard': claude_model '$hard_model' has no alias family (opus|sonnet|haiku|fable) — Claude [hard] escalation cannot pass it to the Agent tool, so those tasks stay on the implementer's own tier"
+    fi
 
     # dispatch: — phase -> CLI routing (optional; consumed by spec-dispatch.sh)
     while IFS=$'\t' read -r _ drole dcli; do

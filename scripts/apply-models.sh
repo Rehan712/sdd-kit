@@ -16,7 +16,8 @@
 # Role mapping: skills/sdd-<phase> -> role <phase>; agents/ by filename —
 # opponent.agent.md -> opponent, reality-check.agent.md -> reality-check,
 # security-reviewer.md -> security-reviewer, sdd-orchestrator.md ->
-# orchestrator, test-engineer.md -> test-engineer, *-expert.md -> stack-expert.
+# orchestrator, test-engineer.md -> test-engineer, sdd-scout.md -> explore,
+# *-expert.md -> stack-expert.
 # A role missing from models.yml (or an unrecognized agent file) is copied
 # un-stamped — it keeps the session default.
 #
@@ -70,6 +71,7 @@ role_for_agent() {
     security-reviewer.md)   echo "security-reviewer" ;;
     sdd-orchestrator.md)    echo "orchestrator" ;;
     test-engineer.md)       echo "test-engineer" ;;
+    sdd-scout.md)           echo "explore" ;;
     *-expert.md)            echo "stack-expert" ;;
     *)                      echo "" ;;
   esac

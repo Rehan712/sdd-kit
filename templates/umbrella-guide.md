@@ -40,7 +40,7 @@ Shared mechanics (all phases):
 - The stack set is the UNION of every declared repo's stacks (each repo's
   `.specify/stack.yml`, else its registry entry).
 - Required reading: `~/.sdd/system-map.yml` and `knowledge/cross-repo-contracts.md`.
-- **Explore fan-out:** one Explore agent per declared repo, in parallel (one
+- **Explore fan-out:** one `sdd-scout` agent per declared repo, in parallel (one
   message, multiple Agent calls) — each gets its repo path + the spec's ACs
   for that repo; ask for a structured brief (what it owns, entry points,
   contracts provided/consumed, files this feature touches, conventions that

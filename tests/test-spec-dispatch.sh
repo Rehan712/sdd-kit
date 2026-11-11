@@ -40,6 +40,15 @@ test_repo_match_is_token_exact() {
   assert_contains "$OUT" "not declared" "prefix of a declared repo is refused"
 }
 
+# The sibling readers of --repo refuse the same prefix, before any repo lookup.
+test_repo_match_is_token_exact_for_worktree_and_pr() {
+  local dir; dir="$(stage_umbrella)"
+  run_rc 1 bash "$SANDBOX/kit/scripts/spec-worktree.sh" --repo alpha "$dir"
+  assert_contains "$OUT" "not declared" "spec-worktree.sh accepts a prefix of a declared repo"
+  run_rc 1 bash "$SANDBOX/kit/scripts/spec-pr.sh" --repo alpha "$dir"
+  assert_contains "$OUT" "not declared" "spec-pr.sh accepts a prefix of a declared repo"
+}
+
 test_undeclared_repo_refused_and_declared_accepted_past_the_guard() {
   local dir; dir="$(stage_umbrella)"
   run_rc 2 bash "$SANDBOX/kit/scripts/spec-dispatch.sh" implement "$dir" --repo gamma

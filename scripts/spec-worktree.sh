@@ -184,7 +184,7 @@ act_one() { if (( REMOVE )); then remove_one "$1"; else cut_one "$1"; fi; }
 # --- Umbrella dispatch ---
 if [[ -n "$declared_repos" ]]; then
   if [[ -n "$REPO_NAME" ]]; then
-    grep -qw "$REPO_NAME" <<< "$declared_repos" \
+    list_has "$declared_repos" "$REPO_NAME" \
       || { echo "repo '$REPO_NAME' is not declared by this umbrella spec (declared: $declared_repos)" >&2; exit 1; }
     repo_path="$("$SYSMAP" path "$REPO_NAME")" || exit 1
     act_one "$repo_path"
