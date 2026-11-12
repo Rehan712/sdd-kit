@@ -6,7 +6,8 @@ Read alongside `plan.md` when `stack.yml` includes `rust-aws-lambda`.
 
 New and changed Rust follows **`~/.sdd/templates/style-guides/rust.md`** — the
 kit's digest of the [Google Rust Style Guide](https://google.github.io/styleguide/rustguide.html).
-Read it before writing code. Project config and the file being edited win;
+Read it for a new file, or when the project has no linter or formatter
+config; otherwise match the file. Project config and the file being edited win;
 never restyle lines the task does not touch.
 Handlers and binaries are application code, shared crates are library code
 (the guide binds API-design rules on the latter only). Where the two differ,

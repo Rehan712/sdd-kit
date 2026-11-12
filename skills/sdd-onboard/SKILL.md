@@ -55,20 +55,30 @@ but the brief must open with a "role: external — read-only for us" note.
    lands in the summary table. Never fabricate a brief for a repo you could
    not check out.
 
-### 3. Research — one scout per repo, in parallel
+### 3. Research — narrow scouts per repo, in parallel
 
-Fan out one `sdd-scout` agent per work-list repo (one message, multiple Agent
-calls) — the kit's read-only scout, pinned to the `explore` role's tier by the
-model policy (no `model` param; not registered in this session →
-`subagent_type: Explore`). On a single-agent CLI, research the repos
-yourself, sequentially, same rules.
+A scout answers ONE narrow question in at most 40 lines, so a repo is three
+questions, not one "write the brief". Per work-list repo, send three
+`sdd-scout` agents — every repo's calls in one message (the kit's read-only
+scout, pinned to the `explore` role's tier by the model policy; no `model`
+param; not registered in this session → `subagent_type: Explore`). On a
+single-agent CLI, research the repos yourself, sequentially, same rules.
 
-Each agent gets the repo's resolved checkout path and returns the brief
-template's sections — what it owns, entry points (build/test/deploy commands,
-main source roots), contracts provided/consumed (cross-check `system-map.sh
-contracts <repo>`), conventions that bite, gotchas — **with a file path or
-command output backing every claim**. Anything the agent could not verify in
-the checkout is omitted, not guessed.
+1. **Entry points** — what the repo owns, its main source roots, and the
+   actual build / test / lint / deploy commands.
+2. **Contracts** — what it provides and consumes (APIs, events, shared
+   types), cross-checked against `system-map.sh contracts <repo>`.
+3. **Conventions and gotchas** — conventions that bite (lint rules, codegen,
+   required env) and what a first change would trip on.
+
+Each scout gets the repo's resolved checkout path and returns its normal
+reply — **a file path or command output behind every claim**; what it could
+not verify comes back under `UNKNOWN` and stays out of the brief.
+
+**You write the brief, on this skill's tier.** A brief is a durable planning
+input: before a command or a contract goes in, re-read the path the scout
+cites for it. Three short reports are leads for the brief's sections, not
+the brief.
 
 ### 4. Write the briefs
 

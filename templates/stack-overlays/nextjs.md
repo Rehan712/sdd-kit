@@ -7,7 +7,8 @@ Read this alongside `plan.md` when the project's `stack.yml` includes `nextjs`.
 New and changed TypeScript/JavaScript follows
 **`~/.sdd/templates/style-guides/typescript.md`** — the kit's digest of the
 [Google TypeScript Style Guide](https://google.github.io/styleguide/tsguide.html).
-Read it before writing code. Project config (ESLint, Prettier, tsconfig) and
+Read it for a new file, or when the project has no linter or formatter
+config; otherwise match the file. Project config (ESLint, Prettier, tsconfig) and
 the file being edited win; never restyle lines the task does not touch.
 Framework exception: files Next.js loads by convention (`page`, `layout`,
 `loading`, `error`, `not-found`, `template`, `default`, `next.config`) keep the

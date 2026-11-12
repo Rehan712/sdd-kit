@@ -9,10 +9,10 @@ GUARD="$SCRIPTS/scout-guard.sh"
 
 # payload <command> — a PreToolUse payload as Claude Code sends it: the command
 # is a JSON string, so `"` and a newline arrive escaped.
-payload() {
+payload() { # <command> [<description>]
   local cmd="$1"
   cmd="${cmd//\\/\\\\}"; cmd="${cmd//\"/\\\"}"; cmd="${cmd//$'\n'/\\n}"
-  printf '{"session_id":"s","hook_event_name":"PreToolUse","tool_name":"Bash","tool_input":{"command":"%s","description":"probe"}}' "$cmd"
+  printf '{"session_id":"s","hook_event_name":"PreToolUse","tool_name":"Bash","tool_input":{"command":"%s","description":"%s"}}' "$cmd" "${2:-probe}"
 }
 
 guard_rc() { payload "$1" | bash "$GUARD" > /dev/null 2>&1; echo $?; }
@@ -43,6 +43,27 @@ test_guard_allows_search_read_and_named_test_commands() {
   allowed 'gh pr view 12 --json state'
   allowed 'cdk diff'
   allowed 'terraform plan'
+  allowed 'cargo test 2>&1 | tail -20'
+  allowed 'npm test > /dev/null 2>&1; echo $?'
+  allowed 'git config --get remote.origin.url'
+  allowed 'find . -name "*.rs" -newer Cargo.toml'
+  allowed 'curl -s https://example.com/docs'
+  allowed 'aws s3 ls s3://bucket/'
+  allowed 'gh api repos/o/r/pulls/3/comments'
+  allowed 'npx vitest run'
+}
+
+# Only the command is judged. The description is prose the model writes for
+# the user; words like "rm" or "git push" in it must not refuse a search.
+test_guard_ignores_the_description_field() {
+  local rc d
+  for d in 'Search; rm mentions in docs' 'Show diff (rm and mv renames)' \
+           'check && git push state' 'list `rm` candidates > report'; do
+    rc="$(payload 'rg -n foo src/' "$d" | bash "$GUARD" > /dev/null 2>&1; echo $?)"
+    assert_eq 0 "$rc" "scout-guard judged the description: $d"
+  done
+  rc="$(payload 'git commit -m wip' 'read-only status check' | bash "$GUARD" > /dev/null 2>&1; echo $?)"
+  assert_eq 2 "$rc" 'a harmless description let a write through'
 }
 
 # A search FOR a write command is a read: the words sit inside a pattern, not
@@ -53,6 +74,9 @@ test_guard_allows_searching_for_the_words_it_blocks() {
   allowed "rg -n '(git commit|git push)' ."
   allowed "rg -n 'rm -rf|mv ' scripts/"
   allowed 'grep -rn "npm install" README.md'
+  allowed "rg -n 'a => b' src/"
+  allowed 'rg -n "<div>" app/'
+  allowed "awk '\$1 > 5' data.txt"
 }
 
 # --- the guard: state changes are refused -------------------------------------------
@@ -101,6 +125,23 @@ test_guard_blocks_file_mutation_installs_and_deploys() {
   blocked 'gh pr merge 12 --squash'
   blocked 'sudo rm -rf /tmp/x'
   blocked 'CI=1 npm ci'
+  blocked 'echo hi > src/main.rs'
+  blocked 'cat a.txt >> b.txt'
+  blocked 'cargo test 2>&1 > out.log'
+  blocked 'cp a.rs b.rs'
+  blocked 'touch marker'
+  blocked 'mkdir -p out'
+  blocked 'dd if=a of=b'
+  blocked 'find . -name "*.tmp" -delete'
+  blocked 'find . -name "*.orig" -exec rm {} +'
+  blocked 'curl -o f.tgz https://example.com/f.tgz'
+  blocked 'wget https://example.com/f.tgz'
+  blocked 'bunx cdk deploy'
+  blocked 'aws s3 rm s3://bucket/key'
+  blocked 'aws lambda update-function-code --function-name f'
+  blocked 'gh api -X POST repos/o/r/issues'
+  blocked 'git config user.name x'
+  blocked 'git update-ref refs/heads/x HEAD'
 }
 
 # The refusal tells the scout what to do next, on stderr (which is what the
@@ -193,10 +234,16 @@ test_code_writing_skills_carry_ponytail_style_and_scout() {
     assert_contains "$text" 'tyle guide' "$f"
     assert_contains "$text" 'sdd-scout' "$f"
   done
-  for f in skills/aws-serverless-lambda-services-arch-bun/SKILL.md \
-           skills/aws-serverless-lambda-services-arch-node/SKILL.md; do
+  # The Bun and Node runtimes are variants of the one scaffolding skill, not
+  # skills of their own: three near-identical descriptions cost every session.
+  for f in skills/aws-serverless-lambda-services-arch/references/variant-bun.md \
+           skills/aws-serverless-lambda-services-arch/references/variant-node.md; do
     assert_contains "$(cat "$KIT_DIR/$f")" 'Code style and scope' "$f"
+    assert_contains "$(cat "$KIT_DIR/skills/aws-serverless-lambda-services-arch/SKILL.md")" "references/${f##*/}"
   done
+  [[ ! -e "$KIT_DIR/skills/aws-serverless-lambda-services-arch-bun" && \
+     ! -e "$KIT_DIR/skills/aws-serverless-lambda-services-arch-node" ]] \
+    || t_fail 'the runtime variants are separate skills again'
   assert_contains "$(cat "$KIT_DIR/agents/sdd-orchestrator.md")" 'the style guide it names'
   assert_contains "$(cat "$KIT_DIR/templates/stack-routing.md")" 'templates/style-guides/'
 }
@@ -244,10 +291,13 @@ test_gates_use_official_reviews_as_leads() {
   text="$(cat "$KIT_DIR/agents/opponent.agent.md")"
   assert_contains "$text" '`code-review` skill'
   assert_contains "$text" 'never `max` or `ultra`'
+  assert_contains "$text" 'args `high <base>...<spec branch>`' 'the opponent runs code-review with no target'
+  assert_contains "$text" 'round 1 only'
   assert_contains "$text" 'leads, not Findings'
   text="$(cat "$KIT_DIR/agents/security-reviewer.md")"
   assert_contains "$text" '`security-review`'
   assert_contains "$text" 'never remove a check below'
+  assert_contains "$text" 'Scope: branch' 'security-review runs per task again'
   assert_contains "$(cat "$KIT_DIR/skills/sdd-plan/SKILL.md")" 'templates/official-skills.md'
   assert_contains "$(cat "$KIT_DIR/skills/sdd-implement/SKILL.md")" '**Official skills first.**'
 }

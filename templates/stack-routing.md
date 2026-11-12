@@ -36,7 +36,7 @@ specific signal (an exact filename beats a glob beats a language) wins.
 |---|---|
 | Opponent gate (under `## Reality Check`, `Agent:` → `opponent.agent.md`) | `opponent` |
 | Reality-check gate (under `## Reality Check`, `Agent:` → a reality-check persona) | `reality-check` for the hub default; project-local personas run as `general-purpose` with the persona text leading the dossier |
-| Security pass — triggers listed in `agents/security-reviewer.md` ("When you're invoked" is THE list) | `security-reviewer` (read-only; CRITICAL/HIGH block, MEDIUM/LOW log) |
+| Security pass — triggers listed in `agents/security-reviewer.md` ("When you're invoked" is THE list) | `security-reviewer` (read-only; CRITICAL/HIGH block, MEDIUM/LOW log). Per task: `Scope: task`, the checklist. Once before the first opponent round: `Scope: branch`, which adds the built-in `security-review` |
 | Stripe integration code (a `stripe` dependency, Checkout, webhooks, Connect, billing) — no overlay of its own | the stack expert whose files the task names, with the `stripe-best-practices` skill loaded; webhook and key handling trip the security pass |
 | A new screen, page or component, or a visual/interaction decision | the UI stack expert (`nextjs-expert` / `react-expert` / `expo-rn-expert`) with `ui-ux-pro-max` and the persisted `design-system/` |
 
@@ -44,7 +44,7 @@ specific signal (an exact filename beats a glob beats a language) wins.
 
 | Work | Agent |
 |---|---|
-| Codebase search, docs lookup, running a named test/lint/build command, digesting a log (`notes/ci.md`, a long suite output) | `sdd-scout` — no Edit/Write tools, a Bash guard (`scripts/scout-guard.sh`) that refuses writes, pinned to the `explore` role's tier; one narrow question per scout, parallel in one message. Its findings are leads: re-read first-hand before they enter a plan or a fix. |
+| Codebase search, docs lookup, running a named test/lint/build command, digesting a log (`notes/ci.md`, a long suite output) | `sdd-scout` — no Edit/Write tools, a Bash guard (`scripts/scout-guard.sh`) that refuses the common writes (a backstop, not a sandbox), pinned to the `explore` role's tier; one narrow question per scout, parallel in one message. Its findings are leads: re-read first-hand before they enter a plan or a fix. |
 
 Who sends scouts: `/sdd:plan`, `/sdd:onboard`, `/sdd:review`, `/sdd:implement`
 (single-task recon and failed-acceptance log digests), the orchestrator (log
@@ -64,12 +64,14 @@ Four rules sit in every stack-expert persona and in `test-engineer`
 (`## Working rules`), so they hold on any dispatch path — single-task,
 orchestrated, the loop, a post-PR fix:
 
-1. **Ponytail** — the smallest *complete* change; the `ponytail:ponytail`
-   skill when the session lists it.
-2. **Style** — the guide the stack overlay names under
-   `~/.sdd/templates/style-guides/` (`rust.md`, `typescript.md` — digests of
-   the Google Rust and TypeScript style guides). Project lint/format config
-   and the file being edited win; untouched lines are never restyled.
+1. **Ponytail** — the smallest *complete* change; the rules the plugin
+   already injected, else the `ponytail:ponytail` skill when the session
+   lists it — never both.
+2. **Style** — project lint/format config and the file being edited win;
+   untouched lines are never restyled. The guide the stack overlay names
+   under `~/.sdd/templates/style-guides/` (`rust.md`, `typescript.md` —
+   digests of the Google Rust and TypeScript style guides) is read for a new
+   file, or when the project has no linter or formatter config.
 3. **Recon on the cheap tier** — sweeps, docs lookups and long logs go to
    `sdd-scout`.
 4. **Official skills first** — the vendor skill the overlay's
@@ -78,6 +80,11 @@ orchestrated, the loop, a post-PR fix:
    table: `~/.sdd/templates/official-skills.md`.
 
 A project-local agent has no kit persona: put the four in its brief.
+
+What a task needs beyond the rules — the task block, the REQ/AC text, the
+plan's anchors and seams — is copied, not retyped:
+`~/.sdd/scripts/spec-brief.sh <spec-dir> T###` writes it to
+`notes/verification/briefs/T###.md`, and the dispatch names that path.
 
 ## Planning consultation (stack tag → expert to consult)
 

@@ -159,64 +159,8 @@ deferred or stubbed. Next: `/sdd:review` — interactive from here on.
 
 ## Deterministic implementation and gate protocol
 
-Use the worktree-local scripts when changing the kit itself; otherwise use the
-installed scripts. Let S be that scripts directory, SPEC the live spec path.
-Read the task verbatim and provide an authoritative brief: exact source revision,
-decided anchors/seams, REQ/AC text, required FM/INV tests, Verify and acceptance.
-Planning consultation may propose decisions; implementation requests only a
-missing slice unless a new decision is required.
-
-1. Finish all source edits in a batch before any acceptance capture. Workers
-   never tick tasks. Wait for every editing worker at this batch barrier; no
-   new editing batch, commit or source mutation until captures and acceptance
-   finish. Refresh historical [x] proof when stale; never reopen implementation
-   solely because proof aged.
-2. Run `bash "$S/spec-run.sh" "$SPEC" T### --from-task --no-tick --summary`.
-   Return the exact Verification-Return block in the shared
-   [verification contract](../../templates/verification-contract.md): authentic
-   capture IDs, canonical summaries and every required FM/INV-to-test mapping.
-   Manual tasks use the declared artifact observation grammar, never a fabricated
-   command exit or bare evidence text.
-3. The invoker runs `bash "$S/spec-gate.sh" accept "$SPEC" T### "$R"`, with
-   `R="$SPEC/notes/verification/returns/T###.txt"`: a return is spec
-   bookkeeping, and a stray return.txt in the worktree changes the input
-   manifest, so acceptance rejects the fresh capture as stale.
-   Only its exit 0 accepts the task. Missing, forged, failed or stale returns
-   leave tasks unchanged. On failure allow one escalation retry with the gap
-   named and the existing implement-hard policy; a second failure stops
-   dispatch. Intentional negative controls are recorded separately from retries.
-   Keep full logs on disk; pass bounded summaries and referenced diagnostics.
-4. After acceptance/commits at each exact authored stage boundary run
-   `bash "$S/spec-gate.sh" checkpoint "$SPEC" "$STAGE"`. Nonzero stops
-   next-stage dispatch, including when no stage commands exist but retained
-   completed-task coverage fails.
-5. Before EACH independent gate invocation run
-   `bash "$S/spec-gate.sh" floor "$SPEC"`, then
-   `bash "$S/spec-gate.sh" round "$SPEC" "$GATE"`.
-   Nonzero from either stops gate dispatch; exit 4 is the round-cap refusal,
-   never a report to reinterpret. Pass the granted round, source and floor,
-   full spec/task paths, source manifests, prior reports, and staged/dirty/
-   untracked diff to the gate. Valid execution can be shared; semantic verdicts
-   remain independent. Opponent precedes reality-check; both keep their defaults.
-6. Persist the returned report only through
-   `bash "$S/spec-gate.sh" round "$SPEC" "$GATE" --complete "$P"`, with
-   `P="$SPEC/notes/verification/reports/$GATE.md"` — a report left beside the
-   code changes the manifest that the next capture and floor verify. Save
-   exactly the report: `## Round` through its `gate-round-end` marker. Text
-   the reviewer put before or after it is not the report, and anything after
-   the marker fails completion.
-   Reconcile interrupted reservations explicitly with --reconcile; never reset
-   history or infer a review completed. Rounds 1–3 are permitted for EACH gate.
-   Round 4+ needs exact-gate/exact-next-round user waiver or accepted spec
-   revision, UTC ordered after the prior report, in STATUS Decisions. Autopilot
-   cannot authorize itself. A waiver authorizes one invocation, never clearance.
-   Validate the entry when it is written with
-   `bash "$S/spec-gate.sh" waiver "$SPEC" "$GATE" <round>`: same grammar and
-   the same diagnostics as the reservation, reserving nothing and changing no
-   state. A waiver that has never been parsed is not an authorization.
-7. For CHALLENGED/NEEDS WORK, create follow-ups by stable defect Class with all
-   known sites and a sibling sweep/test in the same fix; retain every established
-   blocker. Re-review changed, affected and previously unexamined surfaces,
-   including unchanged code with a concretely triggered defect. Never narrow
-   severity or scope to hit a round/cost target. Keep security-reviewer authority,
-   configured models and separate gate roles unchanged.
+`/sdd:implement` owns it. Captures, `spec-gate.sh accept`, stage checkpoints,
+floors, round reservations and waivers are the section of the same name in
+`~/.sdd/skills/sdd-implement/SKILL.md` — in context once step 5 runs that
+skill (single-agent CLIs: read it there before the first task). Autopilot
+adds nothing to it and removes nothing; contract rule 4 is its only delta.

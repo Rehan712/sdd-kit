@@ -25,7 +25,9 @@ Question: decide cancellation cleanup and covering test family`.
 
 **Implementation:** the brief supplies authoritative spec/plan/constitution
 slices with `Source revision: <semantic revision>`, task Verify, required FM/INV
-rows and test bindings. Read those supplied slices, code and relevant overlay;
+rows and test bindings — inline, or in the brief file it names
+(`notes/verification/briefs/T###.md`, copied from the artifacts by
+`spec-brief.sh`). Read those supplied slices, code and relevant overlay;
 do not routinely reread the whole spec, plan or constitution. Example:
 `Mode: implementation; Source revision: <digest>; Task: T003;
 Required: FM-002, INV-001; Tests: tests/cleanup.sh::test_owner_cleanup`.
@@ -34,27 +36,32 @@ missing slice; only a new decision changes the plan. Refreshed tasks require
 refreshed briefs. Higher-priority instructions and project-local rules prevail.
 
 Implement the behavior and its tests together. Capture the task Verify with
-`spec-run.sh <spec-dir> <task> --from-task --no-tick --summary`, preserving the
-real exit. Return capture IDs and canonical summaries plus a `Failure modes:`
-block mapping every required FM/INV to its named test and capture. Return
-`Failure modes: none` only when the required set is empty. Follow the shared
-[verification contract](../templates/verification-contract.md) return grammar.
+`spec-run.sh <spec-dir> <task> --from-task --no-tick --summary --return`,
+preserving the real exit. A passing capture prints the complete
+`Verification-Return` block — capture ID, canonical summary and every required
+FM/INV mapping (`Failure modes: none` when the required set is empty). Return
+that block exactly as printed; never type or edit one. Only a manual task opens
+the [verification contract](../templates/verification-contract.md): its
+"Structured worker return" section has the `Manual observation:` form.
 The invoker alone runs `spec-gate.sh accept`; workers never tick tasks or edit
 acceptance state. A model-written summary cannot replace a captured run.
 
 ## Working rules — every task
 
-- **Ponytail: the smallest *complete* change.** When the `ponytail:ponytail`
-  skill is listed in your session, load it before the first edit. Reuse
+- **Ponytail: the smallest *complete* change.** Ponytail's rules already in
+  your context (its plugin injects them when you start)? Follow those — do
+  not load them twice. Otherwise, when the `ponytail:ponytail` skill is listed
+  in your session, load it before the first edit. Reuse
   before writing — the plan's pattern anchor and existing helpers, then the
   standard library, then an installed dependency. No abstraction, option or
   dependency the task did not ask for; a known limit gets a
   `shortcut: <limit>, <when to upgrade>` comment. The task outranks it: never
   cut a bound test, validation at a trust boundary, error handling that
   prevents data loss, or a decision the plan already made.
-- **Style.** New and changed lines follow the style guide your overlay names
-  (`~/.sdd/templates/style-guides/`); project lint/format config and the file
-  being edited win. Never restyle lines the task does not touch.
+- **Style.** Project lint/format config and the file being edited win — match
+  them. Never restyle lines the task does not touch. Open the style guide your
+  overlay names (`~/.sdd/templates/style-guides/`) only for a new file, or
+  when the project has no linter or formatter config for the language.
 - **Official skills first.** When your session lists a skill your overlay's
   `## Official skills` section names — or `stripe-best-practices` for any
   Stripe code — load it before the first edit: on its vendor's API and

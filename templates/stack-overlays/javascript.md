@@ -7,7 +7,8 @@ Read alongside `plan.md` when the project's stack includes `javascript` (or `typ
 New and changed TypeScript/JavaScript follows
 **`~/.sdd/templates/style-guides/typescript.md`** — the kit's digest of the
 [Google TypeScript Style Guide](https://google.github.io/styleguide/tsguide.html).
-Read it before writing code. Project config (ESLint, Prettier, tsconfig) and
+Read it for a new file, or when the project has no linter or formatter
+config; otherwise match the file. Project config (ESLint, Prettier, tsconfig) and
 the file being edited win; never restyle lines the task does not touch.
 Where the two differ, this overlay wins: types derived with `z.infer` stay
 type aliases, and a tool config file (`vitest.config.ts`, `eslint.config.js`)

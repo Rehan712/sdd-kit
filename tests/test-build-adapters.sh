@@ -214,7 +214,7 @@ test_brief_modes() {
     assert_contains "$(cat "$generated")" 'Failure modes: none'
     run_rc 0 cmp "$file" "$generated"
   done
-  for phase in implement go review; do
+  for phase in implement review; do
     generated="$SANDBOX/home/.codex/skills/sdd-$phase/SKILL.md"
     assert_contains "$(cat "$generated")" '--from-task --no-tick --summary'
     assert_contains "$(cat "$generated")" 'batch barrier'
@@ -271,7 +271,7 @@ test_gate_reports_end_at_the_round_marker() {
   for f in agents/opponent.agent.md agents/reality-check.agent.md; do
     assert_contains "$(cat "$KIT_DIR/$f")" 'marker is the LAST line' "$f allows text after the round marker"
   done
-  for f in agents/sdd-orchestrator.md skills/sdd-implement/SKILL.md skills/sdd-go/SKILL.md skills/sdd-review/SKILL.md; do
+  for f in agents/sdd-orchestrator.md skills/sdd-implement/SKILL.md skills/sdd-review/SKILL.md; do
     assert_contains "$(cat "$KIT_DIR/$f")" 'through its `gate-round-end` marker' "$f does not say what to persist"
   done
   # Lean findings inform; the validator refuses CHALLENGED without a blocker.

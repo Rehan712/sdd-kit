@@ -128,7 +128,7 @@ each tier can cost:
 
 | Work | Who | Tier | Tools |
 |---|---|---|---|
-| **Read-only** — search, docs lookup, running a named command, log digests | `sdd-scout` | `recon` (cheap) | no Edit/Write, and a Bash guard (`scout-guard.sh`) that refuses git writes, kit state scripts, file mutation, installs and deploys |
+| **Read-only** — search, docs lookup, running a named command, log digests | `sdd-scout` | `recon` (cheap) | no Edit/Write, and a Bash guard (`scout-guard.sh`) that refuses the common writes — git writes, kit state scripts, file mutation, redirects to a file, installs and deploys (a backstop, not a sandbox) |
 | **Writing code** — one task at a time, smallest complete change | stack experts, `test-engineer` | `implementation` (mid) — `[hard]` tasks and retries escalate to `implement-hard` | full |
 | **Judging it** — the two gates, the security pass | `opponent`, `reality-check`, `security-reviewer` | `reasoning` (strongest) | no Edit/Write — a reviewer never fixes what it grades |
 
@@ -146,8 +146,9 @@ The mapping is the **model policy**:
   every gate trusts; `implement-hard` is the escalation role — `[hard]`-tagged
   tasks, failed-acceptance retries, and gate follow-ups dispatch on it instead
   of repeating a failure at the tier that produced it; on Claude it is passed
-  as the model's alias family, so a pinned `claude-opus-5-5` escalates as
-  `opus`); `implement` `stack-expert` `onboard` `review` → implementation;
+  as the model's alias family plus the tier's effort, so a pinned
+  `claude-opus-5-5` escalates as `opus`, and a hard tier that is the same
+  model at a higher effort still changes the retry); `implement` `stack-expert` `onboard` `review` → implementation;
   `explore` (the `sdd-scout` agent) → recon. All
   of it is editable — add tiers, remap roles, or delete `models.yml` to run
   everything on the session model.
@@ -233,11 +234,11 @@ domain to the skill, who loads it, and the install command:
 | Domain | Official source | Used by |
 |---|---|---|
 | Next.js | the version-matched docs bundled in `next` (`node_modules/next/dist/docs/`) + the workflow skills in [`vercel/next.js`](https://github.com/vercel/next.js/tree/canary/skills) — the old `vercel-labs/next-skills` repo is retired and points there | `/sdd:plan`, `nextjs-expert` |
-| AWS | the `aws-core` plugin of the [Agent Toolkit for AWS](https://github.com/aws/agent-toolkit-for-aws) (skills + the AWS MCP server's documentation search) | `/sdd:plan`, the AWS/CDK/Rust-Lambda experts, the scaffolding skills, `security-reviewer` for IAM |
+| AWS | the `aws-core` plugin of the [Agent Toolkit for AWS](https://github.com/aws/agent-toolkit-for-aws) (skills + the AWS MCP server's documentation search) | `/sdd:plan`, the AWS/CDK/Rust-Lambda experts, the scaffolding skill, `security-reviewer` for IAM |
 | Stripe | Stripe's own plugin ([`stripe/ai`](https://github.com/stripe/ai)): `stripe-best-practices`, `upgrade-stripe` | whichever expert writes the integration, `security-reviewer` |
 | UI / UX | `ui-ux-pro-max` — the design system is generated once at plan time and persisted; implementers read the file, not the 700-line skill | `/sdd:plan`, the Next.js/React/Expo experts |
-| Code review | Claude Code's built-in `code-review` (Codex: `codex review`) as the opponent's attack pass — findings are leads the gate must reproduce | `opponent` |
-| Security review | Claude Code's built-in `security-review` as the security pass's first step (Codex has no counterpart; the checklist stands) | `security-reviewer` |
+| Code review | Claude Code's built-in `code-review` (Codex: `codex review`), once, in the opponent's first round, over the range `<base>...<spec branch>` — findings are leads the gate must reproduce | `opponent` |
+| Security review | Claude Code's built-in `security-review`, once per spec: the branch-wide pass before the first opponent round. Per-task passes run the checklist (Codex has no counterpart; the checklist stands) | `security-reviewer` |
 | Every change | ponytail v5 | every code-writing path |
 
 Three rules keep this cheap. A skill is loaded only when the task touches its
@@ -261,11 +262,12 @@ The [ponytail](https://github.com/DietrichGebert/ponytail) plugin sharpens
 both, and the kit uses it automatically when it is installed:
 
 - Every code-writing path carries the rule — reuse before writing, nothing
-  the task did not ask for, `shortcut:` comments for known limits — and loads
-  `ponytail:ponytail` when it is listed: `/sdd:implement`, the orchestrator's
-  briefs, `/sdd:review`'s post-PR fixes, the scaffolding skills, and every
-  stack-expert persona plus `test-engineer` (their `## Working rules`), so it
-  holds whichever way a task was dispatched. The task's bound tests and the
+  the task did not ask for, `shortcut:` comments for known limits:
+  `/sdd:implement`, `/sdd:review`'s post-PR fixes, the scaffolding skill, and
+  every stack-expert persona plus `test-engineer` (their `## Working rules`),
+  so it holds whichever way a task was dispatched. The plugin injects its
+  rules into the session and into every subagent; a writer loads the
+  `ponytail:ponytail` skill only when they are not already in its context. The task's bound tests and the
   plan's decisions outrank it.
 - The opponent loads `ponytail:ponytail-review` for its lean pass.
 - `/sdd:retro` collects the `shortcut:` comments a spec left into a debt
@@ -438,7 +440,8 @@ All in `scripts/` (stable path: `~/.sdd/scripts/`):
 | `spec-dispatch.sh <role> <spec-dir>` | run one phase on ANOTHER CLI/provider headlessly (models.yml `dispatch:` map or `--to`): right working root + model, output captured to `notes/`, artifacts verified on return; `--task T###`/`--all` for implement, umbrella implement takes `--repo <name>` (one slice per run), `--dry-run` prints the command |
 | `sdd-status.sh` | dashboard of every spec in every project + hub umbrella specs (worktree-aware; `--open`, `--phase`, `--project`, `--tsv` for machines) |
 | `companions.sh` | which official skills (ponytail v5, `aws-core`, Stripe, Next.js, `ui-ux-pro-max`) each Claude/Codex home has, with the install command for the missing ones; `--tsv`; exit 1 when ponytail v5 is absent |
-| `scout-guard.sh` | the read-only scout's Bash backstop — a `PreToolUse` hook (wired in `agents/sdd-scout.md`) that refuses git writes, kit state scripts, file mutation, installs and deploys; a search for those words still runs |
+| `scout-guard.sh` | the read-only scout's Bash backstop — a `PreToolUse` hook (wired in `agents/sdd-scout.md`) that refuses the common writes (git writes, kit state scripts, file mutation, redirects to a file, installs, deploys); it judges only the command, so a search for those words still runs. A backstop, not a sandbox |
+| `spec-brief.sh <spec-dir> T###` | write a task's implementation brief from the artifacts — the task block, the REQ/AC text and the plan sections and FM/INV rows its *Refs:* name, verbatim — into `notes/verification/briefs/T###.md`; the invoker hands the implementer the path instead of retyping the plan (`--stdout` to print) |
 | `sync.sh` | verify/repair the per-item symlinks into Claude homes (`--check`); prunes stale links; `--remove` uninstalls them |
 | `build-adapters.sh` | regenerate Codex/Copilot adapters from the skills |
 | `sdd-doctor.sh` | validate the kit, home wiring, adapters, system map, and any project's `.specify/` layout (`--all`, `--hub-only`) |
@@ -572,8 +575,8 @@ From the existing spec worktree, use the local scripts when developing the kit:
 # return.txt beside the code changes the input manifest, and acceptance then
 # rejects the fresh capture as stale.
 VERIFY="$SPEC/notes/verification"; mkdir -p "$VERIFY/returns" "$VERIFY/reports"
-bash scripts/spec-run.sh "$SPEC" "$TASK" --from-task --no-tick --summary
-# Save the authentic Verification-Return block as "$VERIFY/returns/$TASK.txt".
+# --return prints the Verification-Return block; save it as printed.
+bash scripts/spec-run.sh "$SPEC" "$TASK" --from-task --no-tick --summary --return > "$VERIFY/returns/$TASK.txt"
 bash scripts/spec-gate.sh accept "$SPEC" "$TASK" "$VERIFY/returns/$TASK.txt"
 bash scripts/spec-gate.sh checkpoint "$SPEC" "$STAGE"
 bash scripts/spec-gate.sh floor "$SPEC"

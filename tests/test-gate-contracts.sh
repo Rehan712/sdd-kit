@@ -2915,9 +2915,16 @@ STUB
 }
 invoker_instruction_cases() {
   local file text field
-  for file in agents/sdd-orchestrator.md skills/sdd-implement/SKILL.md skills/sdd-go/SKILL.md skills/sdd-review/SKILL.md; do
+  # /sdd:go runs /sdd:implement for every task and gate, so it points at that
+  # skill's protocol instead of carrying a fourth copy of it.
+  text="$(cat "$KIT_DIR/skills/sdd-go/SKILL.md")"
+  assert_contains "$text" '## Deterministic implementation and gate protocol'
+  # shellcheck disable=SC2088  # the literal path the skill prints
+  assert_contains "$text" '~/.sdd/skills/sdd-implement/SKILL.md'
+  assert_not_contains "$text" 'batch barrier' 'sdd-go carries its own copy of the protocol again'
+  for file in agents/sdd-orchestrator.md skills/sdd-implement/SKILL.md skills/sdd-review/SKILL.md; do
     text="$(cat "$KIT_DIR/$file")"
-    assert_contains "$text" '--from-task --no-tick --summary'
+    assert_contains "$text" '--from-task --no-tick --summary --return'
     assert_contains "$text" 'spec-gate.sh" accept'
     assert_contains "$text" 'one escalation retry'
     assert_contains "$text" 'batch barrier'
@@ -3162,10 +3169,11 @@ documented_example_cases() {
       *) eval "$line" || t_fail "documented setup failed: $line";;
     esac
     case "$line" in
+      # The documented capture writes the return itself (--return): the next
+      # line accepts that file as printed, with nothing typed in between.
       *spec-run.sh*)
-        cap="$(printf '%s' "$OUT" | sed -n 's/^capture=\([^ ]*\).*/\1/p')"
-        [[ -n "$cap" ]] || t_fail 'documented capture command returned no capture ID'
-        accept_return "$spec" T001 "$cap" "$spec/notes/verification/returns/T001.txt";;
+        cap="$(sed -n 's/^Captures: //p' "$spec/notes/verification/returns/T001.txt")"
+        [[ -n "$cap" ]] || t_fail 'documented capture command wrote no return block';;
       *'spec-gate.sh round '*)
         [[ "$line" == *--complete* ]] ||
           round_report "$spec" opponent "$OUT" "$spec/notes/verification/reports/opponent.md";;

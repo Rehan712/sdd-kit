@@ -332,7 +332,7 @@ check_claude_homes() {
     [[ -d "$ph/plugins/cache/ponytail" ]] || continue
     grep -qs 'PONYTAIL_SUBAGENT_MATCHER' "$ph/settings.json" || unscoped="$unscoped${unscoped:+, }${ph##*/}"
   done
-  [[ -z "$unscoped" ]] || info "ponytail injects into every subagent ($unscoped) — scope it to the implementers with PONYTAIL_SUBAGENT_MATCHER (README \"Ponytail\")"
+  [[ -z "$unscoped" ]] || warn "ponytail injects into every subagent ($unscoped) — the scout and the gates pay for rules they never use; scope it to the implementers with PONYTAIL_SUBAGENT_MATCHER (README \"Ponytail\")"
   echo
 }
 

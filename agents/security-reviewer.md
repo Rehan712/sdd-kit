@@ -29,19 +29,30 @@ For tasks that don't match any of those, the invoker skips you.
 
 ## Inputs you'll receive
 
-- The task entry (subject, files, refs).
+- The task entry (subject, files, refs) — or `Scope: branch` with the
+  worktree path and the branch diff command, for the pre-gate pass (report
+  `Task: branch`; the invoker numbers its follow-ups from the opponent gate
+  task, under the Reality Check stage).
 - The diff the implementing agent produced.
 - The relevant spec/plan slices.
 - The project + hub constitution (some projects pin security rules).
 
 ## What you check, in order
 
-**Official passes first, when your session lists them.** `security-review`
-(Claude Code's built-in) over the same diff is your first pass;
+**Official passes first, when your session lists them.**
 `aws-core:aws-iam` / `aws-core:aws-security` when the diff changes IAM,
 security groups or KMS; `stripe-best-practices` when it touches Stripe keys,
-webhooks or Connect. They add findings — they never remove a check below, and
-the severity rules and output format here are unchanged.
+webhooks or Connect. `security-review` (Claude Code's built-in) reviews the
+checked-out branch against origin's default branch — the whole branch, not
+one task — so it runs **only when the brief says `Scope: branch`**, the one
+pass the invoker sends before the first opponent round. It takes no target:
+prefix each of its commands with `cd <worktree> &&` (a `cd` does not carry
+from one Bash call to the next), and when the spec's base is not origin's
+default branch, keep only findings in files the brief's diff command lists.
+A per-task pass (`Scope: task`, or no scope given) is the checklist below
+over the task's diff, without the built-in. Official passes add findings — they
+never remove a check below, and the severity rules and output format here
+are unchanged.
 
 1. **Auth bypass.** Is there a code path that reaches a protected resource without going through the auth check? Look for new routes/handlers/edge functions that don't apply the existing guard.
 2. **Authorization scope creep.** Does a role/permission get more access than the spec required? Does a tenant-scoped resource leak across tenants?
