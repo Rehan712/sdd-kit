@@ -376,6 +376,7 @@ break"
   run_rc 0 env PATH="$SANDBOX/tool-bin:$PATH" bash -c '. "$1"; vf_snapshot "$2" "$3" "$3" "$4"' _ "$SCRIPTS/verification-lib.sh" "$spec" "$repo" "$SANDBOX/tool-after"
   [[ "$OUT" != "$changed" ]] || t_fail 'AC-020: declared executable mutation missed'
   capture_validity_cases
+  evidence_single_snapshot_cases
   bookkeeping_anchor_cases
   outside_layout_anchor_cases
   kit_copy_cases
@@ -1217,6 +1218,28 @@ repo" "$SANDBOX/anchor-nl"
   run_rc 0 snapshot_fixture "$spec" "$repo" "$SANDBOX/anchor-current"
   run_rc 0 capture_check_fixture "$spec" "$cap" "$SANDBOX/anchor-current" current
   cp "$SANDBOX/anchor-stack" "$repo/.specify/stack.yml"
+}
+
+# The evidence checker reads each repository once and again when it is done: a
+# current capture passes, and a source that moves while the tasks are being
+# checked is refused instead of being judged against the first reading alone.
+evidence_single_snapshot_cases() {
+  local spec repo f
+  spec="$(make_verification_git_dir evidence-once)"
+  repo="$(cd "$spec/../../.." && pwd -P)"
+  run_rc 0 "$SCRIPTS/spec-run.sh" "$spec" T001 --cwd "$repo" --from-task --no-tick --summary
+  sed 's/^- \[ \] \*\*T001\*\*/- [x] **T001**/' "$spec/tasks.md" > "$SANDBOX/done-tasks"
+  cp "$SANDBOX/done-tasks" "$spec/tasks.md"
+  run_rc 0 "$SCRIPTS/spec-evidence.sh" "$spec"
+  assert_contains "$OUT" 'all completed task checks have valid current captures'
+  # A cmp that edits the source when a capture's argv is compared: after the
+  # first reading, before the last.
+  f="$SANDBOX/moving-source"; mkdir -p "$f"
+  printf '#!/bin/bash\ncase "$*" in *argv.nul*) echo moved >> %q;; esac\nexec %q "$@"\n' \
+    "$repo/docs/note.txt" "$(command -v cmp)" > "$f/cmp"
+  chmod +x "$f/cmp"
+  run_rc 3 env PATH="$f:$PATH" "$SCRIPTS/spec-evidence.sh" "$spec"
+  assert_contains "$OUT" 'source inputs changed during the check'
 }
 
 capture_validity_cases() {
