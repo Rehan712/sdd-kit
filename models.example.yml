@@ -59,22 +59,27 @@
 #   ~/.codex_* profile home). Re-run scripts/setup.sh (or those two scripts)
 #   after editing this file.
 
+# Copilot mixes providers: Claude for reasoning/review, Codex for code/scouting.
 tiers:
-  reasoning:            # deep design + adversarial judgment — strongest models
-    claude_model: opus
-    claude_effort: xhigh
+  reasoning:  # deep design + adversarial judgment — strongest models
+    claude_model: claude-opus-5-5
+    claude_effort: high
     codex_model: gpt-6.1-sol
-    codex_effort: xhigh
-    copilot_model: claude-opus-4.8
+    codex_effort: high
+    codex_sandbox: workspace-write
+    codex_approval: never
+    copilot_model: claude-sonnet-5
     copilot_effort: xhigh
 
-  implementation:       # code-writing work — mid-tier, faster and cheaper
-    claude_model: sonnet
-    claude_effort: high
+  implementation:  # code-writing work — mid-tier, faster and cheaper
+    claude_model: claude-sonnet-5-5
+    claude_effort: medium
     codex_model: gpt-6.1-terra
-    codex_effort: high
-    copilot_model: claude-sonnet-4.5
-    copilot_effort: high
+    codex_effort: medium
+    codex_sandbox: workspace-write
+    codex_approval: never
+    copilot_model: gpt-6.1-terra
+    copilot_effort: medium
 
   # recon — read-only scouting (search, docs, running named commands, log
   # digests); safe to run low because the scout cannot edit and every claim is
@@ -83,6 +88,43 @@ tiers:
   recon:
     claude_model: haiku
     claude_effort: medium
+    codex_model: gpt-6-luna
+    codex_effort: medium
+    codex_sandbox: workspace-write
+    codex_approval: never
+    copilot_model: gpt-6-luna
+    copilot_effort: medium
+  # Higher effort for difficult implementation.
+  implement-hard:
+    claude_model: claude-sonnet-5-5
+    claude_effort: high
+    codex_model: gpt-6.1-terra
+    codex_effort: high
+    codex_sandbox: workspace-write
+    codex_approval: never
+    copilot_model: gpt-6.1-terra
+    copilot_effort: high
+
+  # Independent security judgment.
+  security-reviewer:
+    claude_model: claude-opus-5-5
+    claude_effort: medium
+    codex_model: gpt-6.1-sol
+    codex_effort: medium
+    codex_sandbox: workspace-write
+    codex_approval: never
+    copilot_model: claude-sonnet-5
+    copilot_effort: xhigh
+  # Test design and acceptance coverage.
+  test-engineer:
+    claude_model: claude-opus-5-5
+    claude_effort: medium
+    codex_model: gpt-6.1-sol
+    codex_effort: medium
+    codex_sandbox: workspace-write
+    codex_approval: never
+    copilot_model: claude-sonnet-5
+    copilot_effort: xhigh
 
 roles:
   specify: reasoning
@@ -90,22 +132,28 @@ roles:
   tasks: reasoning
   retro: reasoning
   implement: implementation
-  implement-hard: reasoning    # [hard] tasks, failed-acceptance retries, gate
-                               # follow-ups — escalate instead of repeating a
-                               # failure at the tier that produced it
   orchestrator: reasoning
   opponent: reasoning
   reality-check: reasoning
-  security-reviewer: reasoning
-  test-engineer: reasoning     # tests are specification artifacts — they bind
+  security-reviewer: security-reviewer
+  test-engineer: test-engineer  # tests are specification artifacts — they bind
                                # AC ids, and every gate trusts that binding; a
                                # green-but-tautological suite is the one hole
                                # the gates can't fully cover, so keep it strong
   stack-expert: implementation
-  explore: recon               # the sdd-scout agent; claims re-verified downstream
-  onboard: implementation      # briefs are durable planning inputs — keep mid-tier
-  review: implementation       # /sdd:review — PR babysitting + CI triage
-  go: reasoning                # /sdd:go autopilot conductor (chained phases keep their own tiers)
+  explore: recon  # the sdd-scout agent; claims re-verified downstream
+  onboard: implementation  # briefs are durable planning inputs — keep mid-tier
+  review: reasoning  # /sdd:review — PR babysitting + CI triage
+  go: reasoning  # /sdd:go autopilot conductor (chained phases keep their own tiers)
+  implement-hard: implement-hard  # [hard] tasks, failed-acceptance retries, gate
+                               # follow-ups — escalate instead of repeating a
+                               # failure at the tier that produced it
+
+dispatch:
+  plan: claude
+  tasks: claude
+  implement: claude
+  retro: claude
 
 # DISPATCH (optional) — route a PHASE to the CLI that should RUN it, across
 # providers: e.g. plan on Claude Code, tasks on Codex, implement on Copilot. The phase skills detect the mapping and offer
