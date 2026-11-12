@@ -78,7 +78,8 @@ overrides** (the phase skills' "Autopilot?" blocks point back here):
   (full interview — never abbreviated), then continue the chain.
 - Umbrella spec → umbrella mode (see above): read
   `~/.sdd/templates/umbrella-guide.md` before phase 3.
-- `grep -n "NEEDS CLARIFICATION" spec.md` — any marker → stop and list them;
+- `rg -n "NEEDS CLARIFICATION" spec.md` (`grep -n` when `rg` is not installed)
+  — any marker → stop and list them;
   a clean spec is autopilot's input requirement.
 - Read `STATUS.md`: enter the chain at the phase it shows. Autopilot is
   resumable — `/sdd:go` on a spec mid-implement just continues from there.

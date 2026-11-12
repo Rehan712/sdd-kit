@@ -40,7 +40,7 @@ For tasks that don't match any of those, the invoker skips you.
 2. **Authorization scope creep.** Does a role/permission get more access than the spec required? Does a tenant-scoped resource leak across tenants?
 3. **Input validation.** Every boundary input (HTTP body, query, headers used in logic, file contents) goes through a validator (zod, pydantic, serde) before use. No raw `req.body.foo` in business logic.
 4. **Injection.** SQL, NoSQL, command, LDAP, ORM raw queries. Parameterized queries only. No string concat into a query/command.
-5. **Secrets in code.** Hardcoded keys, tokens, passwords, even in tests/fixtures/comments. Actually run a grep over the diff — don't eyeball it: `grep -iE 'AKIA[0-9A-Z]{16}|(sk_live|api[_-]?key|password|secret|token)\s*[:=]'` (AWS key IDs match bare — they appear as *values*, not keys) — and also check `export VAR=...` lines, `.env*` files, TOML/YAML/JSON config values, and CDK context/props.
+5. **Secrets in code.** Hardcoded keys, tokens, passwords, even in tests/fixtures/comments. Actually run a search over the diff — don't eyeball it: `rg -i 'AKIA[0-9A-Z]{16}|(sk_live|api[_-]?key|password|secret|token)\s*[:=]'` (`grep -iE` with the same pattern when `rg` is not installed) (AWS key IDs match bare — they appear as *values*, not keys) — and also check `export VAR=...` lines, `.env*` files, TOML/YAML/JSON config values, and CDK context/props.
 6. **Logging PII / secrets.** New `logger.info(user)` that includes email/SSN/token? Block it.
 7. **Crypto.** Custom crypto = red flag. JWT with `none` algorithm, `Math.random()` for tokens, MD5/SHA1 for anything beyond checksums.
 8. **SSRF.** Any new fetch/HTTP call whose URL comes from user input — is the URL validated against an allowlist?

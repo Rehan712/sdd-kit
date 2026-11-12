@@ -83,7 +83,8 @@ CODEX_PREAMBLE='> **Codex adaptation.** Wherever this skill says to delegate to 
 > - **Orchestrated mode (--all)** — run the task loop yourself, one task at a time, in
 >   dependency order, delegating per the rules above.
 > - **Scouts (`sdd-scout`)** — no scout subagent is generated for this CLI: do that
->   read-only recon yourself, same rules (cite `path:line`, name what you could not find).
+>   read-only recon yourself, same rules (search with `rg` when installed, else `grep`;
+>   cite `path:line`, name what you could not find).
 > - **Ponytail** — where the skill names `ponytail:ponytail` / `ponytail:ponytail-review`,
 >   use the ponytail plugin'\''s skills when it is installed on this CLI; otherwise the
 >   rule as written in the skill applies on its own.'
@@ -102,8 +103,8 @@ COPILOT_PREAMBLE='> **Single-agent adaptation.** The SDD kit does not yet wire d
 >   suspicion. Never skip a gate because you cannot spawn it.
 > - **Orchestrated mode (--all)** — run the task loop yourself, one task at a time, in
 >   dependency order; everything else in the skill still applies.
-> - **Scouts (`sdd-scout`)** — do that read-only recon yourself, same rules (cite
->   `path:line`, name what you could not find).
+> - **Scouts (`sdd-scout`)** — do that read-only recon yourself, same rules (search with
+>   `rg` when installed, else `grep`; cite `path:line`, name what you could not find).
 > - **Ponytail** — where the skill names `ponytail:ponytail` / `ponytail:ponytail-review`,
 >   use the ponytail plugin'\''s skills when it is installed on this CLI; otherwise the
 >   rule as written in the skill applies on its own.'
