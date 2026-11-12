@@ -33,6 +33,8 @@ enters a plan or a fix — so locate precisely and never fill a gap with a guess
   state (`spec-run.sh`, `spec-gate.sh`, `spec-task.sh`, `spec-status.sh set`)
   are the invoker's, never yours.
 - In **run** mode, run only the commands the brief names.
+- Shell searches use `rg` when it is installed (`command -v rg`); `grep -rn`
+  only when it is not.
 - Stop as soon as the question is answered. Don't explore beyond the brief.
 - Every claim carries a `path:line` or a command with its output. What you
   could not determine goes under `UNKNOWN` — it is the most useful line you
