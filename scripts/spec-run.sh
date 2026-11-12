@@ -20,7 +20,13 @@
 #   spec-run.sh <spec-dir> T### --cwd <dir>    -- <command>       # run somewhere else
 #   spec-run.sh <spec-dir> T### --no-tick      -- <command>       # capture only, don't tick
 #   spec-run.sh <spec-dir> T### --from-task --no-tick --summary
+#   spec-run.sh <spec-dir> T### --from-task --no-tick --summary --return
 #   spec-run.sh --help
+#
+# --return: on a passing capture, print the complete Verification-Return block
+# (task, capture ID, canonical summary, every required FM/INV mapping from the
+# task's bindings) instead of the bare summary line — the worker returns it
+# as printed, and `spec-gate.sh accept` still validates every field.
 #
 # Everything after `--` is the command, executed as-is (no shell re-parsing).
 # Default cwd is the caller's cwd — in /sdd:implement that is the worktree root.
@@ -47,6 +53,7 @@ KEY=""
 RUN_CWD=""
 NO_TICK=0
 SUMMARY=0
+RETURN=0
 FROM_TASK=0
 ARGS=()
 CMD=()
@@ -60,6 +67,7 @@ while (( $# )); do
     --cwd)   shift; RUN_CWD="${1:?--cwd needs a directory}" ;;
     --no-tick) NO_TICK=1 ;;
     --summary) SUMMARY=1 ;;
+    --return) RETURN=1 ;;
     --from-task) FROM_TASK=1 ;;
     -*) echo "unknown flag: $1" >&2; exit 2 ;;
     *) ARGS+=("$1") ;;
@@ -85,7 +93,7 @@ RUN_CWD="${RUN_CWD:-$PWD}"
 # A frontmatter that cannot be read, and a contract key that is not exactly
 # one key of value 1, are failures, never the legacy path (vf_contract).
 contract="$(vf_contract "$SPEC_DIR/spec.md")" || exit 3
-if [[ "$contract" == 1 ]] || (( SUMMARY || FROM_TASK )); then
+if [[ "$contract" == 1 ]] || (( SUMMARY || FROM_TASK || RETURN )); then
   (( FROM_TASK == 0 || ${#CMD[@]} == 0 )) || { echo '--from-task and explicit command are exclusive' >&2; exit 2; }
   vf_writer_init
   mkdir -p "$SPEC_DIR/notes/verification" || exit 3
@@ -96,6 +104,9 @@ if [[ "$contract" == 1 ]] || (( SUMMARY || FROM_TASK )); then
     vf_task_info "$binding" "$TASK_ID" || exit 3
     policy="${VF_TASK[10]:-never}"
   fi
+  if (( RETURN )); then
+    [[ "$contract" == 1 && "${VF_TASK[5]}" != manual ]] || { echo '--return needs an automated versioned task' >&2; exit 3; }
+  fi
   if (( FROM_TASK )); then
     [[ "$contract" == 1 && "${VF_TASK[5]}" != manual ]] || { echo '--from-task needs an automated versioned task' >&2; exit 3; }
     CMD=("$(command -v bash)" -o pipefail -c "$VF_TASK_COMMAND")
@@ -103,15 +114,26 @@ if [[ "$contract" == 1 ]] || (( SUMMARY || FROM_TASK )); then
   VF_KEY_PATTERN="$KEY" VF_NO_TICK="$NO_TICK"
   vf_capture "$SPEC_DIR" "$binding" "$RUN_CWD" "$policy" -- "${CMD[@]}"
   rc=$?
-  rm -f "$binding"
-  [[ -n "${VF_CAPTURE_DIR:-}" ]] || exit "$rc"
-  if (( SUMMARY )); then
+  [[ -n "${VF_CAPTURE_DIR:-}" ]] || { rm -f "$binding"; exit "$rc"; }
+  if (( RETURN && rc == 0 )); then
+    # The block the worker returns, built from the capture and the task's
+    # bindings (FM/INV id + test locator) rather than typed by a model.
+    printf 'Verification-Return: 1\nTask: %s\nCaptures: %s\nSummary: %s\n' \
+      "$TASK_ID" "${VF_CAPTURE_DIR##*/}" "$(cat "$VF_CAPTURE_DIR/summary.txt")"
+    rows="$(f=(); while IFS= read -r -d '' v; do
+      f+=("$v"); (( ${#f[@]} == 12 )) || continue
+      [[ "${f[0]}" == binding && "${f[2]}" == "$TASK_ID" ]] && printf '%s, %s, %s\n' "${f[1]}" "${f[7]}" "${VF_CAPTURE_DIR##*/}"
+      f=()
+    done < "$binding" | LC_ALL=C sort -u)"
+    if [[ -n "$rows" ]]; then printf 'Failure modes:\n%s\n' "$rows"; else printf 'Failure modes: none\n'; fi
+  elif (( SUMMARY )); then
     if (( rc )); then vf_summary "$VF_CAPTURE_DIR" failure; else cat "$VF_CAPTURE_DIR/summary.txt"; fi
   else
     printf '$ %s\n' "${CMD[*]}" >&2
     cat "$VF_CAPTURE_DIR/output.log" >&2
     cat "$VF_CAPTURE_DIR/summary.txt"
   fi
+  rm -f "$binding"
   (( rc == 0 )) || exit "$rc"
   if (( ! NO_TICK )); then
     echo 'captured; invoker must validate a return with spec-gate accept before ticking' >&2

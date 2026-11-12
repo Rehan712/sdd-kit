@@ -1,6 +1,7 @@
 ---
 name: aws-serverless-lambda-services-arch
-description: Architect and scaffold a new AWS serverless app as a set of lambda services — Rust lambdas by default (cargo-lambda, provided.al2023, ARM64), CDK v2 TypeScript infra, CloudFront → Lambda Function URLs (no REST API Gateway), single-table DynamoDB, Cognito + in-handler JWT, SQS/EventBridge async, per-env IAM deploy users. Use when starting a new backend/SaaS app on AWS, when the user says "build a new app with my serverless architecture", "scaffold lambda services", "set up the AWS architecture", or asks how to structure services/infra for a new serverless project. Do NOT use for existing codebases with an established architecture, or for container/ECS/EC2/Kubernetes deployments — this skill applies only when the user explicitly opts into building a NEW app on this Lambda-services architecture.
+description: Architect and scaffold a new AWS serverless app as a set of lambda services — one lambda per bounded context behind CloudFront → Lambda Function URLs (no REST API Gateway), CDK v2 TypeScript infra, single-table DynamoDB, Cognito + in-handler JWT, SQS/EventBridge async, per-env IAM deploy users. Service runtime is Rust by default; Bun or Node.js/TypeScript when the user asks for it. Use when starting a new backend/SaaS app on AWS, when the user says "build a new app with my serverless architecture", "scaffold lambda services", "set up the AWS architecture", "build this app with Bun lambdas", "scaffold Node services", or asks how to structure services/infra for a new serverless project. Do NOT use for existing codebases with an established architecture, or for container/ECS/EC2/Kubernetes deployments — only when the user explicitly opts into building a NEW app on this architecture.
+argument-hint: "[rust|bun|node]"
 ---
 
 # AWS Serverless Lambda-Services Architecture
@@ -20,11 +21,18 @@ Bail out (and say so) if any of these hold — do not force this architecture:
 | File | Covers |
 |---|---|
 | `references/rust-lambda-service.md` | The default service runtime: cargo workspace, crate anatomy, main.rs skeleton, `aws-lambda-router`, error boundary, DynamoDB idioms in Rust, auth, cold-start budget, testing |
-| `references/bun-lambda-service.md` | Bun runtime variant (used by the `-bun` sibling skill): Hono + `handle()`, build.ts ESM gotchas, shared packages, duck-typed ServiceError, bun test |
-| `references/node-lambda-service.md` | Node runtime variant (used by the `-node` sibling skill): `NodejsFunction`/esbuild bundling, plain single-file SQS workers, Powertools option, vitest |
+| `references/bun-lambda-service.md` | Bun runtime (with `references/variant-bun.md`): Hono + `handle()`, build.ts ESM gotchas, shared packages, duck-typed ServiceError, bun test |
+| `references/node-lambda-service.md` | Node runtime (with `references/variant-node.md`): `NodejsFunction`/esbuild bundling, plain single-file SQS workers, Powertools option, vitest |
 | `references/cdk-infrastructure.md` | CDK app/stack topology, cross-region cert+WAF, the `RustLambda` construct, log-group factory, CloudFront behavior factory, WebSocket, observability, per-env IAM deploy users, SSM-first config, hard-won failure lessons |
 | `references/data-auth-events.md` | Single-table DynamoDB key patterns, S3 bucket patterns, Cognito + JWT/API-key auth, multi-tenancy, SQS/DLQ workers, streams, schedules, inbound/outbound webhooks, Bedrock integration |
 | `references/scaffold-cicd-ops.md` | Monorepo template, naming conventions, environments, root scripts, GitHub Actions deploy + cdk-diff gate, frontend hosting, operational checklist |
+
+## Code style and scope (every file you scaffold)
+
+- **Style guides.** Rust follows `~/.sdd/templates/style-guides/rust.md` — the kit's digest of the [Google Rust Style Guide](https://google.github.io/styleguide/rustguide.html); services are application code, `packages/shared-rust` is library code. CDK and every other TypeScript file follows `~/.sdd/templates/style-guides/typescript.md` — the [Google TypeScript Style Guide](https://google.github.io/styleguide/tsguide.html) digest. Put the formatter and the lints each digest names into the scaffold's CI gate, so tools enforce the rules rather than memory. No kit at `~/.sdd` → read the two Google guides directly.
+- **Ponytail — the smallest complete scaffold.** Ponytail's rules already in the session (its plugin injects them) → follow those; otherwise load the `ponytail:ponytail` skill before the first file when the session lists it. Scaffold the walking skeleton and what the user named: no service, queue, construct or option "for later", and a `shortcut: <limit>, <when to upgrade>` comment on every known limit. Never cut the invariants below, IAM scoping, or validation at a trust boundary.
+- **Official skills first.** When the session lists the `aws-core` plugin (Agent Toolkit for AWS), load its skill for what you are scaffolding — `aws-core:aws-cdk`, `aws-serverless`, `aws-iam`, `aws-database`, `aws-observability` — and check current service behaviour through its documentation search; Stripe code loads `stripe-best-practices`; a frontend loads `ui-ux-pro-max`. They outrank this skill's reference files on what a service does *today*; the architecture decisions and invariants here stand. Table: `~/.sdd/templates/official-skills.md`.
+- **Recon goes to a read-only scout.** A crate or CDK API lookup, or a sweep of an existing repo for its conventions, is one narrow question to `sdd-scout` (not registered → `Explore`) — not a reason to fill this session with docs pages. Re-read what it cites before building on it.
 
 ## The architecture in one diagram
 
@@ -70,7 +78,7 @@ Every service is Rust unless a row below applies:
 
 Record every non-Rust choice in an ADR — the exception must justify itself.
 
-**Runtime-first siblings**: if the user wants a Bun-first or Node-first app (whole app, not a per-service exception), use the sibling skills `aws-serverless-lambda-services-arch-bun` / `aws-serverless-lambda-services-arch-node` — same architecture, swapped default runtime. They share this skill's reference files.
+**Runtime-first variants**: if the user wants a Bun-first or Node-first app (whole app, not a per-service exception) — the skill's argument is `bun` or `node`, or they said so — read `references/variant-bun.md` or `references/variant-node.md` before anything else here. Same architecture, swapped default runtime: the variant file lists its runtime table, its substitutions against this file, and its own invariants. No argument and no stated preference → Rust.
 
 ## Scaffolding a new app — order of work
 

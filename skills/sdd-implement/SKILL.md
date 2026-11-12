@@ -82,32 +82,54 @@ to finish from whatever the worktree already has. If the task is **blocked**
 (waiting on `[EXTERNAL: …]`, a deploy, or user input), don't dead-end: note the
 blocker in STATUS, skip to the next unblocked task, tell the user.
 
-Read: the task block (subject/files/acceptance/verify/refs), the plan section
-its *Refs:* point to — **pattern anchors and internal seams especially:
-transcribe them, don't re-decide them** — the referenced REQ/AC text, sibling
-`[x]` tasks (don't redo), both constitutions, the project's stack overlay(s).
+Read the task block (subject/files/acceptance/verify/refs) — enough to route
+it and to judge the security triggers. Then write the implementer's context
+with `bash ~/.sdd/scripts/spec-brief.sh <live spec dir> T###`: it copies the
+task, the REQ/AC text and the plan sections and FM/INV rows its *Refs:* name
+into `notes/verification/briefs/T###.md` and prints the path. **Pattern
+anchors and internal seams are transcribed from that file, never re-decided.**
 
-### 3. Route
+### 3. Route — and who edits
 
 Gate task (under `## Reality Check` or carrying `Agent:`) → **§5a**. Ship task
-→ **§5b**. Otherwise route to the matching stack expert per
+→ **§5b**. Otherwise pick the stack expert per
 **`~/.sdd/templates/stack-routing.md`** (the one shared table — includes
 tie-breakers, Tests/Docs rows, and the cross-cutting security pass, whose
-trigger list lives in `agents/security-reviewer.md`). After steps 4–5 on a task
-matching a security trigger, run `security-reviewer`: CRITICAL/HIGH findings
-block — open `T###s<n>` follow-ups under the same stage and stop; MEDIUM/LOW
-get follow-ups or a note, no block.
+trigger list lives in `agents/security-reviewer.md`).
+
+**Who edits — one answer per session:**
+
+- **You have the Agent tool (Claude Code): the routed expert edits, you do
+  not.** Dispatch it (`subagent_type` = the expert's name) with `$WT` and the
+  worktree guard, the brief file's path to read first, the overlay path, and
+  the return contract of §5. Its persona already carries the rules of §4 —
+  don't repeat them, and don't read the constitutions or overlays yourself:
+  the expert reads what it needs. A project-local agent has no kit persona —
+  put §4's rules in its prompt.
+- **No Agent tool (a single-agent CLI, or the spawn depth is used up): you
+  are the implementer.** Read the brief file, the expert's persona file
+  (`~/.sdd/agents/<expert>.md`), the overlay and any constitution rule that
+  bites, then follow §4 yourself.
+
+After steps 4–5 on a task matching a security trigger, run `security-reviewer`
+over the task's diff (`Scope: task` — its checklist; the built-in branch-wide
+review runs once, in §5a): CRITICAL/HIGH findings block — open `T###s<n>`
+follow-ups under the same stage and stop; MEDIUM/LOW get follow-ups or a
+note, no block.
 
 **Model escalation.** When dispatching via the Agent tool and
 `~/.sdd/models.yml` exists: for a task marked `[hard]`, for any re-dispatch
 after a failed acceptance, and for gate follow-ups (`T###o*`/`T###a*`), pass
 the output of `~/.sdd/scripts/model-policy.sh get implement-hard claude alias`
 as the Agent tool's `model` param (it prints opus/sonnet/haiku/fable — a full
-model id in the policy maps to its family).
+model id in the policy maps to its family) **and** the output of
+`… get implement-hard claude effort` as its `effort` param. Both: the hard
+tier is often the implementer's own model at a higher effort, and the model
+alone would repeat the dispatch unchanged.
 Escalate on retry — never repeat a failure at the tier that just produced it.
-Prints nothing / no policy → dispatch normally.
+A lookup that prints nothing → omit that param; no policy → dispatch normally.
 
-### 4. Implement
+### 4. Implement — the rules whoever edits follows
 
 Edit exactly the files the task names. Smallest change that satisfies
 acceptance + AC. No drive-by refactors; no error paths the plan didn't call
@@ -117,16 +139,39 @@ for. A genuinely required sibling change = a new task, not scope creep.
 plan's pattern anchor and existing helpers first, then the standard library,
 then an installed dependency. No abstraction, option, or dependency the task
 did not ask for; a known limit gets a `shortcut: <limit>, <when to upgrade>`
-comment. When the `ponytail:ponytail` skill is listed in the session, load it
-before the first edit, and put this paragraph in every implementer brief —
-a dispatched agent loads the skill itself. The task outranks it: never cut a
+comment. Ponytail's rules already in context (its plugin injects them at
+session and subagent start) → follow those; otherwise load the
+`ponytail:ponytail` skill before the first edit when the session lists it.
+The task outranks it: never cut a
 test the task binds, validation at a trust boundary, error handling that
 prevents data loss, or a decision the plan already made.
+
+**Official skills first.** A vendor-maintained skill the session lists
+outranks the overlay and memory on that vendor's API: the overlay's
+`## Official skills` section names it (Next.js bundled docs and workflow
+skills, `aws-core`, `ui-ux-pro-max`), and any Stripe code loads
+`stripe-best-practices`. Load only the one the task touches, before the first
+edit — the table and precedence are `~/.sdd/templates/official-skills.md`.
+
+**Style.** Project lint/format config and the file being edited win; lines
+the task does not touch are never restyled. The style guide the stack overlay
+names (`~/.sdd/templates/style-guides/` — the Google Rust and TypeScript
+guides, digested) is read for a new file, or when the project has no linter
+or formatter config for the language.
+
+**Recon goes to the scout.** What the brief does not already answer — every
+caller of a function about to change, the existing helper to reuse, a
+library's API, the exact test command — is one narrow question per
+`sdd-scout` (Agent tool; the kit's read-only scout on the `explore` role's
+tier; not registered → `subagent_type: Explore`), sent in parallel in one
+message. Scouts locate; the implementer verifies: re-read what a report cites
+before it shapes an edit. A lookup one command answers is not worth a spawn.
 
 ### 5. Verify acceptance — run it, don't claim it
 
 Follow the deterministic protocol below: workers capture exact task Verify with
---from-task --no-tick --summary; the invoker accepts the structured return.
+`--from-task --no-tick --summary --return`, which prints the structured return;
+the invoker saves it as printed and accepts it.
 A failed acceptance gets one escalation retry, then stops dispatch.
 Before that retry, don't read the failing log yourself: send one `sdd-scout`
 (log-digest mode; not registered → `subagent_type: Explore`) the capture's
@@ -138,6 +183,13 @@ first failure, file:line, error signature — in the retry brief.
 Gate tasks are **never run by you** — delegate via the Agent tool. Opponent
 (default CHALLENGED) first; reality-check (default NEEDS WORK) second.
 
+0. **One branch-wide security pass, before opponent round 1.** When the
+   spec's diff (`git -C $WT diff <base>...HEAD --stat`) matches any trigger
+   in `agents/security-reviewer.md`, run one `security-reviewer` with
+   `Scope: branch`, the worktree path and that diff command — the only pass
+   that runs the built-in `security-review`. CRITICAL/HIGH → `T###s<n>`
+   follow-ups (`###` = the opponent gate task) under Reality Check, and stop.
+   Later rounds repeat it only when a follow-up touched a trigger.
 1. **Resolve the persona file.** Opponent: the task's `Agent:` field
    (`~/.sdd/agents/opponent.agent.md`). Reality-check, in order: task `Agent:`
    field → project constitution's "Reality-check agent" pin → project-local
@@ -145,7 +197,9 @@ Gate tasks are **never run by you** — delegate via the Agent tool. Opponent
    `~/.sdd/agents/reality-check.agent.md`.
 2. **Assemble the dossier — paths, not pasted contents** (the gate reads files
    itself; don't burn the context twice): spec dir path (spec.md / plan.md /
-   tasks.md / notes/opponent.md for reality-check), worktree path + branch +
+   tasks.md / notes/opponent.md for reality-check), worktree path + the base
+   and spec branch names (the opponent's `code-review` range is
+   `<base>...spec/NNN-slug`) +
    the exact diff command (`git -C $WT diff <base>...HEAD`), project root,
    both constitution paths, the project's stack tags, and the persona's
    verdict instruction (opponent → "CLEARED / CHALLENGED / BLOCKED, default
@@ -248,7 +302,9 @@ summarize, offer the next. "Do all" → that's orchestrated mode, not a loop her
 Use the worktree-local scripts when changing the kit itself; otherwise use the
 installed scripts. Let S be that scripts directory, SPEC the live spec path.
 Read the task verbatim and provide an authoritative brief: exact source revision,
-decided anchors/seams, REQ/AC text, required FM/INV tests, Verify and acceptance.
+decided anchors/seams, REQ/AC text, required FM/INV tests, Verify and acceptance —
+`bash "$S/spec-brief.sh" "$SPEC" T###` copies exactly that from the artifacts
+into a file; hand over its path instead of retyping it.
 Planning consultation may propose decisions; implementation requests only a
 missing slice unless a new decision is required.
 
@@ -257,11 +313,12 @@ missing slice unless a new decision is required.
    new editing batch, commit or source mutation until captures and acceptance
    finish. Refresh historical [x] proof when stale; never reopen implementation
    solely because proof aged.
-2. Run `bash "$S/spec-run.sh" "$SPEC" T### --from-task --no-tick --summary`.
-   Return the exact Verification-Return block in the shared
-   [verification contract](../../templates/verification-contract.md): authentic
-   capture IDs, canonical summaries and every required FM/INV-to-test mapping.
-   Manual tasks use the declared artifact observation grammar, never a fabricated
+2. Run `bash "$S/spec-run.sh" "$SPEC" T### --from-task --no-tick --summary --return`.
+   A passing capture prints the complete Verification-Return block — authentic
+   capture ID, canonical summary and every required FM/INV-to-test mapping:
+   the worker returns it exactly as printed, never typed. Manual tasks use the
+   declared artifact observation grammar of the shared
+   [verification contract](../../templates/verification-contract.md), never a fabricated
    command exit or bare evidence text.
 3. The invoker runs `bash "$S/spec-gate.sh" accept "$SPEC" T### "$R"`, with
    `R="$SPEC/notes/verification/returns/T###.txt"`: a return is spec

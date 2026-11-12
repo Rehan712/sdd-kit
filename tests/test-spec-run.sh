@@ -86,4 +86,25 @@ break' > "$SANDBOX/argv"
   run_rc 0 cmp "$SANDBOX/argv" "$spec/notes/captures/$cap/argv.nul"
 }
 
+# --return prints the block a worker hands back: the script builds it from the
+# capture and the task's bindings, and deterministic acceptance takes it as
+# printed. A failing capture prints the failure summary and no block.
+test_return_flag_prints_a_block_that_accept_takes() {
+  local spec repo
+  spec="$(make_verification_git_dir returnblock)"
+  repo="$(cd "$spec/../../.." && pwd -P)"
+  run_rc 0 "$SPEC_RUN" "$spec" T001 --cwd "$repo" --from-task --no-tick --summary --return
+  assert_contains "$OUT" 'Verification-Return: 1'
+  assert_contains "$OUT" 'Task: T001'
+  assert_contains "$OUT" 'Summary: capture='
+  assert_contains "$OUT" 'FM-001, tests/check.sh::test_ac_001_shared, '
+  mkdir -p "$spec/notes/verification/returns"
+  printf '%s\n' "$OUT" > "$spec/notes/verification/returns/T001.txt"
+  run_rc 0 "$SCRIPTS/spec-gate.sh" accept "$spec" T001 "$spec/notes/verification/returns/T001.txt"
+  assert_contains "$(cat "$spec/tasks.md")" '- [x] **T001**'
+  run_rc 7 "$SPEC_RUN" "$spec" T001 --cwd "$repo" --no-tick --summary --return -- bash -c 'echo broke; exit 7'
+  assert_not_contains "$OUT" 'Verification-Return' 'a failing capture printed a return block'
+  assert_contains "$OUT" 'exit=7'
+}
+
 t_run_all

@@ -32,7 +32,7 @@ and round control of the pre-ship gate.
 ## Inputs you'll receive
 
 - The spec dir path — read `spec.md` (what was promised — REQ-### and AC-###), `plan.md` (what was designed), and `tasks.md` (what was claimed done) yourself; the dossier carries paths, not pasted contents. The per-task `*Evidence:*` lines are **claims, and claims are attack surface**: use the current script floor and reuse only its validated checks. Missing or invalid proof is a floor/reality-check gap; investigate behavioral consequences independently.
-- The diff on the spec branch (or the list of touched files + the project root to read them).
+- The worktree path, the spec branch and the exact diff command (`git -C <worktree> diff <base>...HEAD`) — or the list of touched files + the project root to read them. Read the code in that worktree, not in whatever checkout your shell starts in.
 - The project root absolute path; the project + hub constitutions.
 - `notes/opponent.md` from a prior round, if this is a re-run.
 
@@ -59,14 +59,42 @@ have to hit all of these; you have to find the ones that bite *this* change.
 3. **Rank.** Only reproduced defects, or concrete triggering inputs with file:line, of severity data-loss, wrong-result, regression or crash block. Degraded paths, style and documentation hygiene are minor unless an AC/REQ requires that behavior, document or claim; a violation then blocks as wrong-result.
 4. **Decide.** Any blocking defect → **CHALLENGED**. None after a genuine attack → **CLEARED** (justify it). Report every established blocker, grouping sibling sites by defect class. Keep raw location counts and unresolved finding IDs visible.
 
+**Official review pass (step 2) — round 1 only.** When the `code-review` skill
+is listed in your session (Claude Code's built-in), run it once, in round 1:
+Skill tool, args `high <base>...<spec branch>` — the level first, then the
+target as a range.
+
+- **Name the range.** With no target the skill reviews the branch's commits
+  ahead of its upstream — nothing, once the branch is pushed — or, with no
+  upstream, ahead of `main`, which is the wrong base when the spec was cut
+  from another branch. `<base>` and the spec branch (`spec/NNN-slug`) are the
+  two ends of the dossier's diff command. Umbrella spec: once per repo.
+- **Work in the worktree.** You start in the invoker's directory, which may
+  be another checkout, and a `cd` does not carry from one Bash call to the
+  next: prefix every command — the skill's and your own — with
+  `cd <worktree> &&`, or use `git -C <worktree>`.
+- **Level `high` — never `max` or `ultra`, which need the user** — and never
+  `--fix` or `--comment`: you are read-only and the report is your only
+  output.
+- **Later rounds skip it.** Re-reviewing the fixes is your own attack (Scope
+  and round control below); a second paid review of mostly unchanged code
+  buys nothing.
+
+What it returns are leads, not Findings: only what you reproduce, or pin to a
+concrete triggering input with file:line, enters the report, ranked as in
+step 3. A skill that fails, or returns nothing for a diff that is not empty,
+is not a clearance — say so in **What I attacked** and attack without it.
+
 ## Lean pass — after the attack, never blocking
 
 One pass for code that should not exist: work the task never asked for, dead
 code, an option or abstraction with a single user, a re-implementation of a
 helper the repo already has (name its path), a new dependency for a few lines.
-When the `ponytail:ponytail-review` skill is listed in your session, load it
-(Skill tool) and use its "Lean" checklist for this pass — its bug and risk
-lenses are already your attack surface and the security-reviewer's.
+Round 1 covers the whole diff; a later round covers only the code its fixes
+added. When the `ponytail:ponytail-review` skill is listed in your session,
+load it (Skill tool) in round 1 and use its "Lean" lens (item 6 of "Look
+for") for this pass — its bug and risk lenses are already your attack surface
+and the security-reviewer's.
 
 Each one is a Finding with `Severity: minor`, a Class starting `lean-`, and the
 smallest fix (a deletion where possible). A `shortcut:` comment that names its

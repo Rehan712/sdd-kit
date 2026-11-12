@@ -38,8 +38,9 @@ followup / gate / ship), `stage`, `flags` (`P`, `hard` — routes to the
 escalation model, §3 — and `repo:<name>`, which selects the worktree from the
 repo table). When a batch comes up, read each of its task blocks in
 `tasks.md` — subject, *Files:*, *Acceptance:*, *Verify:* (legacy tasks may
-lack it), *Refs:*, and *Agent:* on a gate — and quote them verbatim in the
-brief (§4).
+lack it), *Refs:*, and *Agent:* on a gate. You need them to route, to commit
+the right files and to judge the security triggers; the implementer gets them
+from the brief file (§4), not from your retyping.
 
 Skip implementation already [x]; refresh missing/stale current proof through the
 deterministic protocol below without changing historical completion.
@@ -96,12 +97,15 @@ For multi-stack single tasks (e.g., one task touches `apps/web/` *and* `services
 
 **Model escalation.** Once per run, if `~/.sdd/models.yml` exists, read
 `~/.sdd/scripts/model-policy.sh get implement-hard claude alias` (the model's
-alias family — a full id in the policy maps to opus/sonnet/haiku/fable). When
-it prints one, pass it as the Agent tool's `model` param for: (a) any task marked `[hard]`, (b) any re-dispatch after a failed
+alias family — a full id in the policy maps to opus/sonnet/haiku/fable) and
+`~/.sdd/scripts/model-policy.sh get implement-hard claude effort`. Pass what
+they print as the Agent tool's `model` **and** `effort` params — both: the
+hard tier is often the implementer's own model at a higher effort, and the
+model alone would repeat the dispatch unchanged — for: (a) any task marked `[hard]`, (b) any re-dispatch after a failed
 acceptance (§4.4), and (c) every gate follow-up batch (`T###o*`/`T###a*`,
 §5) — a defect a frontier gate found is not a task to hand back to the tier
-that produced it. Prints nothing / no policy → dispatch with no model
-override. Escalate on retry, always: repeating a failure at the same tier
+that produced it. A lookup that prints nothing → omit that param; no policy →
+dispatch with no override. Escalate on retry, always: repeating a failure at the same tier
 wastes the round.
 
 ### 4. Execute the plan
@@ -109,16 +113,16 @@ wastes the round.
 For each batch `spec-graph.sh next` prints:
 
 1. **Announce** to stdout: `Batch N: T003 [P], T004 [P] → javascript-expert, aws-expert`.
-2. **Dispatch** each task in the batch via the Agent tool, in parallel if multiple. Each agent invocation gets a self-contained **task brief** — the dispatched agent starts blind and may run on a cheaper tier than you; under-briefing is the failure mode here, not over-briefing:
+2. **Dispatch** each task in the batch via the Agent tool, in parallel if multiple. The dispatched agent starts blind and may run on a cheaper tier than you, so it gets every decision the plan made — copied by a script, never retyped by you. Per task, run `bash "$S/spec-brief.sh" "$SPEC" T###`: it writes the task block, the REQ/AC text and the plan sections and FM/INV rows the task's *Refs:* name, verbatim, and prints the file's path. The dispatch prompt is then short:
    - the **worktree path `$WT` as the working root**, with the instruction to verify `git -C "$WT" rev-parse --abbrev-ref HEAD` prints `spec/NNN-slug` **before the first edit** (wrong output → stop and report, don't edit);
-   - the task entry quoted verbatim, **including its *Verify:* command**;
-   - the plan sections its *Refs:* point to — **pattern anchors and pre-decided internal seams quoted verbatim, never summarized** (a paraphrased signature is a re-negotiated signature);
-   - the referenced REQ/AC text, the stack overlay path, and any constitution rule that bites this specific task;
-   - the ponytail line: "smallest *complete* change — reuse the plan's anchor and existing helpers before writing anything new; no abstraction, option or dependency the task did not ask for; load the `ponytail:ponytail` skill first if your session lists it. The task's bound tests and the plan's decisions outrank it.";
-   - the return contract: "make the smallest change; transcribe the plan's seams; return the files changed and the structured Verification-Return with authentic no-tick capture IDs, canonical summaries and required FM/INV mappings. Full output stays in the captured logs."
+   - **the brief file's path, to read first.** Never paste or summarize what is in it (a paraphrased signature is a re-negotiated signature). A pattern anchor or seam the task needs that the file lacks — its *Refs:* missed a plan section — is named by `plan.md` heading, for the agent to read there;
+   - the stack overlay path (the style guide it names governs new files; an edited file is matched, untouched lines are never restyled), and any constitution rule that bites this specific task;
+   - the return contract: "make the smallest change; transcribe the plan's seams; capture with `spec-run.sh … --from-task --no-tick --summary --return` and return the files changed plus the Verification-Return block exactly as the script printed it. Full output stays in the captured logs."
+
+   A kit expert or `test-engineer` already carries the ponytail, style, official-skill and scout rules in its persona — do not repeat them. A project-local agent has no kit persona: give it the four rules of `stack-routing.md` §What every implementer carries.
 3. **Wait** for the batch to complete.
 4. **Accept** returned no-tick captures through the deterministic protocol below. On a failed acceptance, before the one escalation retry: send one `sdd-scout` (log-digest mode) the capture's full log, `notes/captures/<capture id>/output.log`, and put its digest — first failure, file:line, error signature — in the retry brief. The full log never enters your context.
-5. **Run cross-cutting passes** when security-reviewer triggers apply.
+5. **Run cross-cutting passes** when security-reviewer triggers apply: the task's diff, the persona's checklist. The built-in branch-wide review is not a per-task pass — it runs once, before the first opponent round (§5).
 6. **Record state** only after successful script acceptance; refresh STATUS.
 7. **Commit the passing task** on the spec branch: `git -C "$WT" add -- <the task's files and the spec dir> && git -C "$WT" commit` (never `add -A` after a multi-task batch — it sweeps a sibling's edits into this commit) with the conventional message (`<type>(<scope>): <subject>` + `Implements T### of spec NNN-slug` + `Refs:`). One task, one commit — this is what makes the opponent's per-commit diff review and any rollback cheap. Never push.
 8. Run the stage checkpoint before dispatching the next stage; then move to the next batch.
@@ -128,6 +132,15 @@ For each batch `spec-graph.sh next` prints:
 Use the deterministic protocol below for every invocation and completion.
 Class-wide fixes use the escalation model (§3), followed by a fresh floor and
 another permitted reservation. Never soften a verdict to continue.
+
+**One branch-wide security pass, before opponent round 1.** When the spec's
+diff (`git -C "$WT" diff <base>...HEAD --stat`) matches any trigger in
+`agents/security-reviewer.md`, dispatch one `security-reviewer` with
+`Scope: branch` and that diff command. It is the only pass that runs the
+built-in `security-review`, which reads the whole branch — per task it would
+re-review the same code once per task. CRITICAL/HIGH → `T###s<n>` follow-ups
+(`###` = the opponent gate task) under Reality Check, then stop (§6).
+Later rounds repeat it only when a follow-up touched a trigger.
 
 ### 6. Stop conditions
 
@@ -169,7 +182,7 @@ The user (or `/sdd:implement`) decides what to do next. Per-task commits on the 
 - **Never expand scope.** If you notice a sibling change is needed, open a new task; don't bundle it into someone else's task.
 - **Never batch what the graph did not.** `spec-graph.sh next` already keeps file-colliding `[P]` tasks apart; a batch is its rows, nothing more.
 - **Stop on the first failure.** Don't accumulate broken state across batches.
-- **Brief for the tier below you.** Dispatch prompts are complete, not terse: the task verbatim, the plan's anchors and seams quoted, the *Verify:* command. Don't re-teach the craft — the persona has it — but hand over every decision the plan already made; a dispatched agent that has to re-derive or guess one is a briefing failure, and on a cheaper tier it will guess wrong.
+- **Brief for the tier below you.** A dispatch is complete by reference, not by retyping: the brief file `spec-brief.sh` wrote carries the task, the plan's anchors and seams and the *Verify:* command verbatim. Don't re-teach the craft — the persona has it — but hand over every decision the plan already made (name the plan heading when the brief lacks it); a dispatched agent that has to re-derive or guess one is a briefing failure, and on a cheaper tier it will guess wrong.
 
 ## Output style
 
@@ -183,7 +196,9 @@ The user (or `/sdd:implement`) decides what to do next. Per-task commits on the 
 Use the worktree-local scripts when changing the kit itself; otherwise use the
 installed scripts. Let S be that scripts directory, SPEC the live spec path.
 Read the task verbatim and provide an authoritative brief: exact source revision,
-decided anchors/seams, REQ/AC text, required FM/INV tests, Verify and acceptance.
+decided anchors/seams, REQ/AC text, required FM/INV tests, Verify and acceptance —
+`bash "$S/spec-brief.sh" "$SPEC" T###` copies exactly that from the artifacts
+into a file; hand over its path instead of retyping it.
 Planning consultation may propose decisions; implementation requests only a
 missing slice unless a new decision is required.
 
@@ -192,11 +207,12 @@ missing slice unless a new decision is required.
    new editing batch, commit or source mutation until captures and acceptance
    finish. Refresh historical [x] proof when stale; never reopen implementation
    solely because proof aged.
-2. Run `bash "$S/spec-run.sh" "$SPEC" T### --from-task --no-tick --summary`.
-   Return the exact Verification-Return block in the shared
-   [verification contract](../templates/verification-contract.md): authentic
-   capture IDs, canonical summaries and every required FM/INV-to-test mapping.
-   Manual tasks use the declared artifact observation grammar, never a fabricated
+2. Run `bash "$S/spec-run.sh" "$SPEC" T### --from-task --no-tick --summary --return`.
+   A passing capture prints the complete Verification-Return block — authentic
+   capture ID, canonical summary and every required FM/INV-to-test mapping:
+   the worker returns it exactly as printed, never typed. Manual tasks use the
+   declared artifact observation grammar of the shared
+   [verification contract](../templates/verification-contract.md), never a fabricated
    command exit or bare evidence text.
 3. The invoker runs `bash "$S/spec-gate.sh" accept "$SPEC" T### "$R"`, with
    `R="$SPEC/notes/verification/returns/T###.txt"`: a return is spec

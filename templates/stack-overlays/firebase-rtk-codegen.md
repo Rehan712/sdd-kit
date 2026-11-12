@@ -2,6 +2,17 @@
 
 Read alongside `plan.md` when `stack.yml` includes `firebase-rtk-codegen`.
 
+## Style guide
+
+New and changed TypeScript/JavaScript follows
+**`~/.sdd/templates/style-guides/typescript.md`** — the kit's digest of the
+[Google TypeScript Style Guide](https://google.github.io/styleguide/tsguide.html).
+Read it for a new file, or when the project has no linter or formatter
+config; otherwise match the file. Project config (ESLint, Prettier, tsconfig) and
+the file being edited win; never restyle lines the task does not touch.
+Generated code is exempt: `generated.ts` is never hand-edited to conform —
+fix the codegen config or the OpenAPI source instead.
+
 ## Firebase
 
 - **Auth:** Firebase Auth as the single identity provider for the app. Don't introduce a second.

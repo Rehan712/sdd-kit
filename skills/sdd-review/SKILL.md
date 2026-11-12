@@ -114,6 +114,12 @@ Follow the protocol below, including exact-round authorization and refusal handl
   implementation tasks and none inherits the Gate/Ship exemption: they carry
   Files/Acceptance/Verify kind/Tests/Verify/Refs, and deterministic acceptance
   on tick.
+- **A post-PR fix is an implementation task like any other.** Route and
+  dispatch it as `/sdd:implement` §3 does — the brief file from
+  `spec-brief.sh`, the routed expert edits — under §4's rules: ponytail
+  (smallest *complete* change — a review comment is not a licence to refactor
+  around it) and the overlay's style guide for new files. Read-only recon —
+  the callers a reviewer says you broke, a long CI log — goes to `sdd-scout`.
 - **Never merge over a red gate, a stale gate, or with --admin.** The gates
   gate the merge, not just the PR-open.
 - **Keep STATUS current**: `spec-ci.sh` owns `ci:`; you own blockers ("waiting
@@ -134,7 +140,9 @@ Follow the protocol below, including exact-round authorization and refusal handl
 Use the worktree-local scripts when changing the kit itself; otherwise use the
 installed scripts. Let S be that scripts directory, SPEC the live spec path.
 Read the task verbatim and provide an authoritative brief: exact source revision,
-decided anchors/seams, REQ/AC text, required FM/INV tests, Verify and acceptance.
+decided anchors/seams, REQ/AC text, required FM/INV tests, Verify and acceptance —
+`bash "$S/spec-brief.sh" "$SPEC" T###` copies exactly that from the artifacts
+into a file; hand over its path instead of retyping it.
 Planning consultation may propose decisions; implementation requests only a
 missing slice unless a new decision is required.
 
@@ -143,11 +151,12 @@ missing slice unless a new decision is required.
    new editing batch, commit or source mutation until captures and acceptance
    finish. Refresh historical [x] proof when stale; never reopen implementation
    solely because proof aged.
-2. Run `bash "$S/spec-run.sh" "$SPEC" T### --from-task --no-tick --summary`.
-   Return the exact Verification-Return block in the shared
-   [verification contract](../../templates/verification-contract.md): authentic
-   capture IDs, canonical summaries and every required FM/INV-to-test mapping.
-   Manual tasks use the declared artifact observation grammar, never a fabricated
+2. Run `bash "$S/spec-run.sh" "$SPEC" T### --from-task --no-tick --summary --return`.
+   A passing capture prints the complete Verification-Return block — authentic
+   capture ID, canonical summary and every required FM/INV-to-test mapping:
+   the worker returns it exactly as printed, never typed. Manual tasks use the
+   declared artifact observation grammar of the shared
+   [verification contract](../../templates/verification-contract.md), never a fabricated
    command exit or bare evidence text.
 3. The invoker runs `bash "$S/spec-gate.sh" accept "$SPEC" T### "$R"`, with
    `R="$SPEC/notes/verification/returns/T###.txt"`: a return is spec

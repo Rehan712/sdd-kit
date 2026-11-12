@@ -47,6 +47,13 @@ on any ambiguity. Project root via `~/.sdd/scripts/project-detect.sh`.
 - `~/.sdd/constitution.md` + `<project>/.specify/constitution.md` (if present).
 - Stack tags: `<project>/.specify/stack.yml`, else the project's registry
   entry. Load `~/.sdd/templates/stack-overlays/<tag>.md` for each.
+- **Official skills** — `~/.sdd/templates/official-skills.md`. For each stack
+  tag and domain the spec touches (Next.js, AWS, Stripe, UI/UX), load the
+  skill the table names when the session lists it — only those — before
+  consulting the experts. What a skill settles is written into plan.md as a
+  decision, so implementers transcribe it instead of re-deriving it. A
+  feature with UI: run `ui-ux-pro-max`'s design-system step once, persist it
+  (`design-system/<project>/MASTER.md`), and name that file in plan §6.
 - `~/.sdd/knowledge/*.md` — skim for relevance.
 - `~/.sdd/briefs/<repo>.md` when it exists. Freshness first:
   `~/.sdd/scripts/brief-status.sh repo <repo>` — on `stale`/`unknown`, warn

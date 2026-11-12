@@ -2,6 +2,27 @@
 
 Read alongside `plan.md` when the project's stack includes `react`.
 
+## Style guide
+
+New and changed TypeScript/JavaScript follows
+**`~/.sdd/templates/style-guides/typescript.md`** — the kit's digest of the
+[Google TypeScript Style Guide](https://google.github.io/styleguide/tsguide.html).
+Read it for a new file, or when the project has no linter or formatter
+config; otherwise match the file. Project config (ESLint, Prettier, tsconfig) and
+the file being edited win; never restyle lines the task does not touch.
+Components are named exports in `UpperCamelCase`; a `React.lazy` target keeps
+the default export it requires.
+
+## Official skills
+
+- **UI work:** `ui-ux-pro-max` (`--stack react`). Read the persisted
+  `design-system/<project>/MASTER.md` (and its `pages/` override) first; query
+  the skill only for a decision those do not cover, and close a UI task with
+  its pre-delivery checklist.
+
+Load only what the task touches — precedence and install commands are in
+`~/.sdd/templates/official-skills.md`.
+
 ## Conventions
 
 - **React 18+.** Function components and hooks only; no new class components.

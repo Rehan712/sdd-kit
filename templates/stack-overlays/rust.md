@@ -2,6 +2,17 @@
 
 Read alongside `plan.md` when the project's stack includes `rust`.
 
+## Style guide
+
+New and changed Rust follows **`~/.sdd/templates/style-guides/rust.md`** — the
+kit's digest of the [Google Rust Style Guide](https://google.github.io/styleguide/rustguide.html).
+Read it for a new file, or when the project has no linter or formatter
+config; otherwise match the file. Project config and the file being edited win;
+never restyle lines the task does not touch.
+Where the two differ, this overlay wins: `Arc` for state shared across tokio
+tasks is expected, and a library path that can fail returns a typed error —
+`expect` is for invariants only.
+
 ## Conventions
 
 - **Edition 2021+**, latest stable toolchain, `rust-version` pinned in the workspace `Cargo.toml`.

@@ -146,8 +146,8 @@ session settings do not affect identity.
 
 ## Runtime acceptance and freshness
 
-Workers capture with `spec-run.sh --no-tick --summary` and return authentic
-capture IDs and FM/INV-to-test mappings. Only the invoker validates and ticks
+Workers capture with `spec-run.sh --no-tick --summary` (`--return` prints the
+whole return block) and return authentic capture IDs and FM/INV-to-test mappings. Only the invoker validates and ticks
 through `spec-gate.sh accept`. Explicit none is valid only for an empty required
 set. Missing, forged, failed or stale proof leaves task state unchanged. Manual
 acceptance validates the artifact and recorded observation without inventing a
@@ -250,7 +250,10 @@ FM-001, tests/storage.sh::test_failed_write_releases_owned_connection, CAP-1-exa
 INV-001, tests/storage.sh::test_failed_write_releases_owned_connection, CAP-1-example
 ```
 
-For an empty required FM/INV set use `Failure modes: none`. For a declared
+An automated task never types this block:
+`spec-run.sh <spec-dir> <task> --from-task --no-tick --summary --return`
+prints it from the capture and the task's bindings, and the worker returns
+it as printed. For an empty required FM/INV set use `Failure modes: none`. For a declared
 manual family use `Captures: none`, an observation summary, and:
 `Manual observation: name, repo-relative-path, sha256-digest, observer, YYYY-MM-DDTHH:MM:SSZ, PASS: result`.
 Its mapping uses the registered observation name and `manual` as the third
