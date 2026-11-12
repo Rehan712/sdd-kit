@@ -1616,9 +1616,12 @@ vf_bindings() { # <spec-dir> <plan|tasks|through-stage> <stage-or-empty> <output
 vf_hash() (
   set -o pipefail
   local digest
-  if command -v shasum >/dev/null 2>&1; then digest="$(shasum -a 256 < "$1" | awk '{print $1}')" || return 3
-  elif command -v sha256sum >/dev/null 2>&1; then digest="$(sha256sum < "$1" | awk '{print $1}')" || return 3
+  # sha256sum first: shasum is a Perl script, several times slower per call,
+  # and a snapshot hashes every source file. Both print "<digest>  -".
+  if command -v sha256sum >/dev/null 2>&1; then digest="$(sha256sum < "$1")" || return 3
+  elif command -v shasum >/dev/null 2>&1; then digest="$(shasum -a 256 < "$1")" || return 3
   else echo 'verification prerequisite: SHA-256 unavailable' >&2; return 3; fi
+  digest="${digest%% *}"
   [[ "$digest" =~ ^[a-f0-9]{64}$ ]] || { echo 'verification prerequisite: invalid SHA-256 result' >&2; return 3; }
   printf '%s\n' "$digest"
 )
@@ -2743,24 +2746,42 @@ vf_task_capture_matches() (
   vf_locators_exist "$catalog" "$task" "$repo"
 )
 
-# Discover current proof without changing historical completion or receipts.
-vf_task_current() (
-  local spec="$1" task="$2" catalog="$3" manifest="$4" predicate="${5:-current}" dir found=''
-  for dir in "$spec"/notes/captures/CAP-*; do
-    [[ -d "$dir" ]] || continue
-    vf_task_capture_matches "$catalog" "$task" "$dir" || continue
-    if vf_capture_check "$spec" "${dir##*/}" "$manifest" "$predicate" >/dev/null 2>&1; then found="${dir##*/}"; fi
+# "<argv digest> <capture id>" per capture, in the order the captures are
+# listed: read once per run, so a task finds its captures by digest instead of
+# comparing itself with every capture ever taken. An ID vf_capture_check would
+# refuse, or an argv that cannot be read, proves nothing and is left out.
+vf_capture_index() { # spec -> stdout
+  local dir digest
+  for dir in "$1"/notes/captures/CAP-*; do
+    [[ -d "$dir" && "${dir##*/}" =~ ^CAP-[1-9][0-9]*-[A-Za-z0-9]+$ ]] || continue
+    digest="$(vf_hash "$dir/argv.nul" 2>/dev/null)" || continue
+    printf '%s %s\n' "$digest" "${dir##*/}"
   done
+}
+
+# Discover current proof without changing historical completion or receipts.
+# The digest only narrows the search: every candidate is still compared byte
+# for byte by vf_task_capture_matches.
+vf_task_current() (
+  local spec="$1" task="$2" catalog="$3" manifest="$4" index="$5" predicate="${6:-current}" want digest cap found=''
+  vf_task_info "$catalog" "$task" || return 3
+  want="$(printf '%s\0' "$(command -v bash)" -o pipefail -c "$VF_TASK_COMMAND" | vf_hash /dev/stdin)" || return 3
+  while read -r digest cap; do
+    [[ "$digest" == "$want" ]] || continue
+    vf_task_capture_matches "$catalog" "$task" "$spec/notes/captures/$cap" || continue
+    if vf_capture_check "$spec" "$cap" "$manifest" "$predicate" >/dev/null 2>&1; then found="$cap"; fi
+  done < "$index"
   [[ -n "$found" ]] || { echo "current evidence missing/stale: $task; refresh its Verify (historical completion preserved)" >&2; return 3; }
   printf '%s\n' "$found"
 )
 
 vf_evidence_current() (
-  local spec="$1" repo tmp task state stage subject
+  local spec="$1" repo tmp task state stage subject i n=0 repos=()
   tmp="$(mktemp -d "${TMPDIR:-/tmp}/vf-evidence.XXXXXX")" || return 3
   trap 'rm -rf "$tmp"' EXIT
   vf_binding_snapshot "$spec" "$tmp/bindings" || return 3
   vf_gate_roots "$spec" "$tmp/roots" || return 3
+  vf_capture_index "$spec" > "$tmp/index" || return 3
   # The list is read to a file with its status: a list that stopped early
   # used to leave completed tasks unchecked.
   bash "$(dirname -- "${BASH_SOURCE[0]}")/spec-task.sh" list "$spec" > "$tmp/tasks" ||
@@ -2770,10 +2791,20 @@ vf_evidence_current() (
     # Only exempt true administrative tasks absent from the typed catalog.
     vf_task_info "$tmp/bindings" "$task" >/dev/null 2>&1 || continue
     repo="$(vf_gate_task_repo "$spec" "$task" "$tmp/roots")" || return 3
-    vf_snapshot "$spec" "$repo" "$repo" "$tmp/inputs" >/dev/null || return 3
+    # One snapshot per repository, not one per task: the pass after the loop
+    # refuses a source that moved while the tasks were being checked.
+    for ((i=0; i<n; i++)); do [[ "${repos[i]}" != "$repo" ]] || break; done
+    if (( i == n )); then
+      vf_snapshot "$spec" "$repo" "$repo" "$tmp/inputs-$i" >/dev/null || return 3
+      repos[n]="$repo"; n=$((n+1))
+    fi
     if [[ "${VF_TASK[5]}" == manual ]]; then vf_manual_current "$spec" "$task" || return 3
-    else vf_task_current "$spec" "$task" "$tmp/bindings" "$tmp/inputs" || return 3; fi
+    else vf_task_current "$spec" "$task" "$tmp/bindings" "$tmp/inputs-$i" "$tmp/index" || return 3; fi
   done < "$tmp/tasks"
+  for ((i=0; i<n; i++)); do
+    vf_snapshot "$spec" "${repos[i]}" "${repos[i]}" "$tmp/after" >/dev/null || return 3
+    cmp -s "$tmp/inputs-$i" "$tmp/after" || { echo 'current evidence: source inputs changed during the check; run it again' >&2; return 3; }
+  done
   echo 'current evidence: all completed task checks have valid current captures'
 )
 # Parse only an explicit return block. All emitted records have four NUL fields.
