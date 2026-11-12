@@ -87,6 +87,14 @@ its *Refs:* point to — **pattern anchors and internal seams especially:
 transcribe them, don't re-decide them** — the referenced REQ/AC text, sibling
 `[x]` tasks (don't redo), both constitutions, the project's stack overlay(s).
 
+**Recon goes to the scout.** What the task block and the plan do not already
+answer — every caller of a function you will change, the existing helper to
+reuse, a library's API, the exact test command — is one narrow question per
+`sdd-scout` (Agent tool; the kit's read-only scout on the `explore` role's
+tier; not registered → `subagent_type: Explore`), sent in parallel in one
+message. Scouts locate; you verify: re-read what a report cites before it
+shapes an edit. A lookup one command answers is not worth a spawn.
+
 ### 3. Route
 
 Gate task (under `## Reality Check` or carrying `Agent:`) → **§5a**. Ship task
@@ -122,6 +130,20 @@ before the first edit, and put this paragraph in every implementer brief —
 a dispatched agent loads the skill itself. The task outranks it: never cut a
 test the task binds, validation at a trust boundary, error handling that
 prevents data loss, or a decision the plan already made.
+
+**Official skills first.** A vendor-maintained skill the session lists
+outranks the overlay and memory on that vendor's API: the overlay's
+`## Official skills` section names it (Next.js bundled docs and workflow
+skills, `aws-core`, `ui-ux-pro-max`), and any Stripe code loads
+`stripe-best-practices`. Load only the one the task touches, before the first
+edit — the table and precedence are `~/.sdd/templates/official-skills.md`.
+
+**Style.** New and changed lines follow the style guide the stack overlay
+names (`~/.sdd/templates/style-guides/` — the Google Rust and TypeScript
+guides, digested). Project lint/format config and the file being edited win;
+lines the task does not touch are never restyled. The kit's stack experts and
+`test-engineer` carry this rule and the ponytail one in their personas — a
+project-local agent gets both in its brief.
 
 ### 5. Verify acceptance — run it, don't claim it
 

@@ -2,6 +2,29 @@
 
 Read alongside `plan.md` when `stack.yml` includes `aws-cdk-lambda-ts`.
 
+## Style guide
+
+New and changed TypeScript/JavaScript follows
+**`~/.sdd/templates/style-guides/typescript.md`** — the kit's digest of the
+[Google TypeScript Style Guide](https://google.github.io/styleguide/tsguide.html).
+Read it before writing code. Project config (ESLint, Prettier, tsconfig) and
+the file being edited win; never restyle lines the task does not touch.
+It applies to constructs, stacks and handlers alike; a Lambda entry point is
+the named export `handler`.
+
+## Official skills
+
+When your session lists the **`aws-core`** plugin (Agent Toolkit for AWS),
+load its skill for the service the task touches before writing:
+`aws-core:aws-cdk`, `aws-serverless`, `aws-iam`, `aws-sdk-js-v3-usage`,
+`aws-observability`. With its MCP server connected, check what a service does
+today through its documentation search rather than memory. It outranks this
+overlay on current service behaviour; this overlay and the project's
+constitution still decide conventions.
+
+Load only what the task touches — precedence and install commands are in
+`~/.sdd/templates/official-skills.md`.
+
 ## CDK conventions
 
 - **CDK v2 only.** `aws-cdk-lib` package; legacy `@aws-cdk/*` v1 packages are off-limits in new code.

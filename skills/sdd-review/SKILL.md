@@ -114,6 +114,11 @@ Follow the protocol below, including exact-round authorization and refusal handl
   implementation tasks and none inherits the Gate/Ship exemption: they carry
   Files/Acceptance/Verify kind/Tests/Verify/Refs, and deterministic acceptance
   on tick.
+- **A post-PR fix is an implementation task like any other.** Route it via
+  `stack-routing.md` and brief it as `/sdd:implement` §4 does: the ponytail
+  paragraph (smallest *complete* change — a review comment is not a licence
+  to refactor around it) and the overlay's style guide. Read-only recon — the
+  callers a reviewer says you broke, a long CI log — goes to `sdd-scout`.
 - **Never merge over a red gate, a stale gate, or with --admin.** The gates
   gate the merge, not just the PR-open.
 - **Keep STATUS current**: `spec-ci.sh` owns `ci:`; you own blockers ("waiting

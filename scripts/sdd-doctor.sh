@@ -57,6 +57,23 @@ check_hub() {
   [[ -x "$HUB_DIR/scripts/sync.sh"            ]] && pass "scripts/sync.sh"            || fail "sync.sh missing or not executable"
   [[ -x "$HUB_DIR/scripts/system-map.sh"      ]] && pass "scripts/system-map.sh"      || fail "system-map.sh missing or not executable"
   [[ -x "$HUB_DIR/scripts/brief-status.sh"    ]] && pass "scripts/brief-status.sh"    || fail "brief-status.sh missing or not executable"
+  # The scout's hook runs it through bash, so presence is what matters; without
+  # it the hook is a no-op and "read-only" rests on the persona text alone.
+  [[ -f "$HUB_DIR/templates/official-skills.md" ]] && pass "templates/official-skills.md (the official-skills table)" || fail "official-skills.md missing"
+  [[ -f "$HUB_DIR/scripts/scout-guard.sh"     ]] && pass "scripts/scout-guard.sh (the read-only scout's Bash backstop)" || warn "scout-guard.sh missing — the scout's write guard is inert"
+  # Every style guide an overlay names must exist: a dangling pointer sends an
+  # implementer to read a file that is not there.
+  local ov sg dangling=""
+  for ov in "$HUB_DIR"/templates/stack-overlays/*.md; do
+    [[ -f "$ov" ]] || continue
+    sg="$(grep -oE 'templates/style-guides/[a-z0-9-]+\.md' "$ov" | head -1 || true)"
+    [[ -z "$sg" || -f "$HUB_DIR/$sg" ]] || dangling="$dangling ${ov##*/}→${sg##*/}"
+  done
+  if [[ -z "$dangling" ]]; then
+    pass "templates/style-guides/ (every guide an overlay names exists)"
+  else
+    fail "style guide named by an overlay is missing:$dangling"
+  fi
   # Prerequisites the scripts shell out to. git is the floor for everything;
   # gh only for the PR half (spec-pr.sh, spec-ci.sh, /sdd:review).
   command -v git >/dev/null 2>&1 && pass "git on PATH" || fail "git not on PATH — worktrees, evidence capture and the gates all need it"
@@ -286,17 +303,36 @@ check_claude_homes() {
     fail "home wiring broken — run scripts/sync.sh to repair"
     echo "$out" | grep -E '✗' | sed 's/^/    /'
   fi
-  # Optional companion plugin (README "Ponytail"): info only, never a warning —
-  # the kit's own smallest-change and lean-review rules apply without it.
-  local ph found=""
-  for ph in "$HOME/.claude" "$HOME"/.claude_*; do
-    [[ -d "$ph/plugins/cache/ponytail" ]] && found="$found${found:+, }${ph##*/}"
-  done
-  if [[ -n "$found" ]]; then
-    info "ponytail plugin detected ($found) — implementers and the opponent's lean pass load it"
-  else
-    info "ponytail plugin not detected (optional — see README \"Ponytail\")"
+  # Official skills (templates/official-skills.md; scripts/companions.sh is
+  # the reader). ponytail v5 is part of how the kit works, so a home without
+  # it is a warning; the stack-specific ones are information — a project may
+  # not be on that stack. The kit's own rules still apply without any of them.
+  if [[ -f "$HUB_DIR/scripts/companions.sh" ]]; then
+    local c_home c_id c_level c_state c_install absent="" core_ok=1
+    while IFS=$'\t' read -r _ c_home c_id c_level c_state _ c_install; do
+      [[ -n "$c_id" && "$c_state" != installed ]] || continue
+      if [[ "$c_level" == core ]]; then
+        core_ok=0
+        warn "$c_home: $c_id $c_state (the kit expects v5+) — $c_install"
+      else
+        case " $absent " in *" $c_id "*) ;; *) absent="$absent $c_id" ;; esac
+      fi
+    done < <(bash "$HUB_DIR/scripts/companions.sh" --tsv)
+    (( core_ok )) && pass "ponytail v5+ in every CLI home"
+    if [[ -n "$absent" ]]; then
+      info "official skills missing from at least one home:$absent — scripts/companions.sh prints the install command per home"
+    else
+      pass "official skills installed in every CLI home (aws-core, stripe, nextjs, ui-ux-pro-max)"
+    fi
   fi
+  # ponytail injects into every subagent; the scout, gates and orchestrator
+  # never write code, so scoping it to the implementers saves their tokens.
+  local ph unscoped=""
+  for ph in "$HOME/.claude" "$HOME"/.claude_*; do
+    [[ -d "$ph/plugins/cache/ponytail" ]] || continue
+    grep -qs 'PONYTAIL_SUBAGENT_MATCHER' "$ph/settings.json" || unscoped="$unscoped${unscoped:+, }${ph##*/}"
+  done
+  [[ -z "$unscoped" ]] || info "ponytail injects into every subagent ($unscoped) — scope it to the implementers with PONYTAIL_SUBAGENT_MATCHER (README \"Ponytail\")"
   echo
 }
 

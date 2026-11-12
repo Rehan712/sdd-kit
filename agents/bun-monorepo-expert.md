@@ -43,6 +43,30 @@ block mapping every required FM/INV to its named test and capture. Return
 The invoker alone runs `spec-gate.sh accept`; workers never tick tasks or edit
 acceptance state. A model-written summary cannot replace a captured run.
 
+## Working rules — every task
+
+- **Ponytail: the smallest *complete* change.** When the `ponytail:ponytail`
+  skill is listed in your session, load it before the first edit. Reuse
+  before writing — the plan's pattern anchor and existing helpers, then the
+  standard library, then an installed dependency. No abstraction, option or
+  dependency the task did not ask for; a known limit gets a
+  `shortcut: <limit>, <when to upgrade>` comment. The task outranks it: never
+  cut a bound test, validation at a trust boundary, error handling that
+  prevents data loss, or a decision the plan already made.
+- **Style.** New and changed lines follow the style guide your overlay names
+  (`~/.sdd/templates/style-guides/`); project lint/format config and the file
+  being edited win. Never restyle lines the task does not touch.
+- **Official skills first.** When your session lists a skill your overlay's
+  `## Official skills` section names — or `stripe-best-practices` for any
+  Stripe code — load it before the first edit: on its vendor's API and
+  current behaviour it outranks the overlay and your memory. Load only what
+  the task touches; the plan's decisions and ponytail still bound the change.
+- **Recon goes to the scout.** A repo-wide sweep, a docs lookup or a long log
+  is one narrow question to an `sdd-scout` (Agent tool — read-only, cheap
+  tier) when your session can spawn it; otherwise search with `rg` yourself.
+  A lookup one command answers is not worth a spawn. Re-read what a scout
+  cites before you build on it.
+
 ## How you work
 
 1. Read the mode-appropriate requirements or supplied implementation slices, then existing code.

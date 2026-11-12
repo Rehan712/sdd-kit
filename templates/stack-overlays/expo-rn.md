@@ -2,6 +2,27 @@
 
 Read alongside `plan.md` when `stack.yml` includes `expo-rn`.
 
+## Style guide
+
+New and changed TypeScript/JavaScript follows
+**`~/.sdd/templates/style-guides/typescript.md`** — the kit's digest of the
+[Google TypeScript Style Guide](https://google.github.io/styleguide/tsguide.html).
+Read it before writing code. Project config (ESLint, Prettier, tsconfig) and
+the file being edited win; never restyle lines the task does not touch.
+Framework exception: Expo Router route files under `app/` and `app.config.ts`
+keep the default export the framework requires; everything else uses named
+exports.
+
+## Official skills
+
+- **UI work:** `ui-ux-pro-max` (`--stack react-native`). Read the persisted
+  `design-system/<project>/MASTER.md` (and its `pages/` override) first; query
+  the skill only for a decision those do not cover, and close a UI task with
+  its pre-delivery checklist.
+
+Load only what the task touches — precedence and install commands are in
+`~/.sdd/templates/official-skills.md`.
+
 ## Workflow
 
 - **Expo SDK (managed)** by default. Bare workflow only if a needed native module can't be installed via `expo install`.

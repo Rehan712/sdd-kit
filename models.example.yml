@@ -44,9 +44,11 @@
 #   skills:  specify, plan, tasks, implement, review, retro, onboard, go
 #   agents:  orchestrator, opponent, reality-check, security-reviewer,
 #            test-engineer, stack-expert (covers every agents/*-expert.md),
-#            explore (agents/sdd-scout.md — the read-only scout /sdd:plan,
-#            /sdd:onboard and /sdd:review fan out; tools are read-only by
-#            frontmatter, so the cheap tier can never edit)
+#            explore (agents/sdd-scout.md — the read-only scout that
+#            /sdd:plan, /sdd:onboard, /sdd:review, /sdd:implement and the
+#            stack experts fan out; no Edit/Write tool by frontmatter, and
+#            scripts/scout-guard.sh refuses Bash writes, so the cheap tier
+#            cannot change the repo)
 #   runtime: implement-hard (looked up at dispatch by /sdd:implement and the
 #            orchestrator for [hard]-tagged tasks, failed-acceptance retries,
 #            and gate follow-ups — escalation, never stamped into a file)

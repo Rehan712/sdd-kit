@@ -26,6 +26,13 @@ Bail out (and say so) if any of these hold — do not force this architecture:
 | `references/data-auth-events.md` | Single-table DynamoDB key patterns, S3 bucket patterns, Cognito + JWT/API-key auth, multi-tenancy, SQS/DLQ workers, streams, schedules, inbound/outbound webhooks, Bedrock integration |
 | `references/scaffold-cicd-ops.md` | Monorepo template, naming conventions, environments, root scripts, GitHub Actions deploy + cdk-diff gate, frontend hosting, operational checklist |
 
+## Code style and scope (every file you scaffold)
+
+- **Style guides.** Rust follows `~/.sdd/templates/style-guides/rust.md` — the kit's digest of the [Google Rust Style Guide](https://google.github.io/styleguide/rustguide.html); services are application code, `packages/shared-rust` is library code. CDK and every other TypeScript file follows `~/.sdd/templates/style-guides/typescript.md` — the [Google TypeScript Style Guide](https://google.github.io/styleguide/tsguide.html) digest. Put the formatter and the lints each digest names into the scaffold's CI gate, so tools enforce the rules rather than memory. No kit at `~/.sdd` → read the two Google guides directly.
+- **Ponytail — the smallest complete scaffold.** When the `ponytail:ponytail` skill is listed in the session, load it before the first file. Scaffold the walking skeleton and what the user named: no service, queue, construct or option "for later", and a `shortcut: <limit>, <when to upgrade>` comment on every known limit. Never cut the invariants below, IAM scoping, or validation at a trust boundary.
+- **Official skills first.** When the session lists the `aws-core` plugin (Agent Toolkit for AWS), load its skill for what you are scaffolding — `aws-core:aws-cdk`, `aws-serverless`, `aws-iam`, `aws-database`, `aws-observability` — and check current service behaviour through its documentation search; Stripe code loads `stripe-best-practices`; a frontend loads `ui-ux-pro-max`. They outrank this skill's reference files on what a service does *today*; the architecture decisions and invariants here stand. Table: `~/.sdd/templates/official-skills.md`.
+- **Recon goes to a read-only scout.** A crate or CDK API lookup, or a sweep of an existing repo for its conventions, is one narrow question to `sdd-scout` (not registered → `Explore`) — not a reason to fill this session with docs pages. Re-read what it cites before building on it.
+
 ## The architecture in one diagram
 
 ```

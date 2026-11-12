@@ -46,6 +46,13 @@ From the spec dir (worktree copy if STATUS names one, else the main checkout):
   The *Evidence:* lines are the per-task acceptance record — a task whose evidence was
   weak or absent at gate time is itself a process finding.
 - `spec.md` — the Success metrics (MET-###): can any be measured yet?
+- The **shortcut ledger** — limits the implementers left on purpose. Over the
+  spec's diff: `git diff <base>...<spec branch or merge commit> -U0 | rg '^\+.*shortcut:'`
+  (`grep -E` when `rg` is not installed; the `ponytail:ponytail-debt` skill,
+  when listed, gives the repo-wide ledger). Each
+  `shortcut: <limit>, <when to upgrade>` goes into retro.md; one whose
+  upgrade trigger the shipped load already crosses is a follow-up task, not
+  a note.
 
 ### 3. Distill lessons — four buckets
 

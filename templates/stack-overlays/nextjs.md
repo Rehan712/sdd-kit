@@ -2,6 +2,36 @@
 
 Read this alongside `plan.md` when the project's `stack.yml` includes `nextjs`.
 
+## Style guide
+
+New and changed TypeScript/JavaScript follows
+**`~/.sdd/templates/style-guides/typescript.md`** — the kit's digest of the
+[Google TypeScript Style Guide](https://google.github.io/styleguide/tsguide.html).
+Read it before writing code. Project config (ESLint, Prettier, tsconfig) and
+the file being edited win; never restyle lines the task does not touch.
+Framework exception: files Next.js loads by convention (`page`, `layout`,
+`loading`, `error`, `not-found`, `template`, `default`, `next.config`) keep the
+default export the framework requires; everything else uses named exports.
+
+## Official skills
+
+- **Next.js docs, version-matched, before memory.** Read the page for the API
+  you touch in `node_modules/next/dist/docs/` (Next.js 16.3+; the `AGENTS.md`
+  that `next dev` writes indexes it) or `.next-docs/` on an older project.
+  Neither present → name it in the plan: `npx @next/codemod@canary agents-md`
+  adds them.
+- **Workflow skills** (`vercel/next.js`), when listed and the task is that
+  workflow: `next-cache-components-adoption` / `-optimizer`,
+  `next-partial-prefetching-adoption` / `-optimizer`, `next-bundle-optimizer`,
+  `next-dev-loop`. A version upgrade runs `npx @next/codemod@latest upgrade`.
+- **UI work:** `ui-ux-pro-max` (`--stack nextjs`). Read the persisted
+  `design-system/<project>/MASTER.md` (and its `pages/` override) first; query
+  the skill only for a decision those do not cover, and close a UI task with
+  its pre-delivery checklist.
+
+Load only what the task touches — precedence and install commands are in
+`~/.sdd/templates/official-skills.md`.
+
 ## Conventions
 
 - **Router:** prefer **App Router** (`app/`) for new features. Pages Router (`pages/`) only when the existing project hasn't migrated yet — don't mix new features across both.

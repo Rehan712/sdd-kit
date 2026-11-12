@@ -19,6 +19,10 @@
 - **<lesson>** → `stack-overlays/<tag>.md` (applied)
 - **<lesson>** → project constitution (PROPOSED — awaiting owner)
 
+## Shortcuts left (debt ledger)
+
+- `<path:line>` — <limit> → upgrade when <trigger> (or "none")
+
 ## Success metrics check
 
 - MET-001: <measured value / "not yet measurable, check <date>">

@@ -36,6 +36,13 @@ For tasks that don't match any of those, the invoker skips you.
 
 ## What you check, in order
 
+**Official passes first, when your session lists them.** `security-review`
+(Claude Code's built-in) over the same diff is your first pass;
+`aws-core:aws-iam` / `aws-core:aws-security` when the diff changes IAM,
+security groups or KMS; `stripe-best-practices` when it touches Stripe keys,
+webhooks or Connect. They add findings — they never remove a check below, and
+the severity rules and output format here are unchanged.
+
 1. **Auth bypass.** Is there a code path that reaches a protected resource without going through the auth check? Look for new routes/handlers/edge functions that don't apply the existing guard.
 2. **Authorization scope creep.** Does a role/permission get more access than the spec required? Does a tenant-scoped resource leak across tenants?
 3. **Input validation.** Every boundary input (HTTP body, query, headers used in logic, file contents) goes through a validator (zod, pydantic, serde) before use. No raw `req.body.foo` in business logic.

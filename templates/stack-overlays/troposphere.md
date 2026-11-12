@@ -3,6 +3,18 @@
 Read alongside `plan.md` when the project's stack includes `troposphere` —
 a dedicated infrastructure repo generating CloudFormation from Python.
 
+## Official skills
+
+When your session lists the **`aws-core`** plugin (Agent Toolkit for AWS),
+load its skill for the service the task touches before writing:
+`aws-core:aws-cloudformation`, `aws-iam`. With its MCP server connected, check
+what a service does today through its documentation search rather than memory.
+It outranks this overlay on current service behaviour; this overlay and the
+project's constitution still decide conventions.
+
+Load only what the task touches — precedence and install commands are in
+`~/.sdd/templates/official-skills.md`.
+
 ## Conventions
 
 - **Troposphere generates; CloudFormation deploys.** The Python code is a

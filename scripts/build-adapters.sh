@@ -78,7 +78,8 @@ CODEX_PREAMBLE='> **Codex adaptation.** Wherever this skill says to delegate to 
 >   lever is running the session as `codex --profile sdd-reasoning`.) Not installed →
 >   do it yourself and say so in the task notes.
 > - **Stack experts** — read the named agent file under `~/.sdd/agents/` and the matching
->   overlay under `~/.sdd/templates/stack-overlays/`, and apply them as your senior-reviewer
+>   overlay under `~/.sdd/templates/stack-overlays/` — plus the style guide that overlay
+>   names under `~/.sdd/templates/style-guides/` — and apply them as your senior-reviewer
 >   lens while you do the work yourself.
 > - **Orchestrated mode (--all)** — run the task loop yourself, one task at a time, in
 >   dependency order, delegating per the rules above.
@@ -87,7 +88,13 @@ CODEX_PREAMBLE='> **Codex adaptation.** Wherever this skill says to delegate to 
 >   cite `path:line`, name what you could not find).
 > - **Ponytail** — where the skill names `ponytail:ponytail` / `ponytail:ponytail-review`,
 >   use the ponytail plugin'\''s skills when it is installed on this CLI; otherwise the
->   rule as written in the skill applies on its own.'
+>   rule as written in the skill applies on its own.
+> - **Official skills and reviews** — vendor skills (`aws-core`, `stripe`, `ui-ux-pro-max`,
+>   the Next.js workflow skills) load under the names this CLI lists them by. Where a
+>   skill or persona names Claude Code'\''s `code-review`, run Codex'\''s built-in review
+>   instead — `codex review --base <base branch>` from the worktree, or `/review` — and
+>   treat its findings as leads. Codex ships no `security-review`: the security-reviewer
+>   checklist is the pass.'
 
 COPILOT_PREAMBLE='> **Single-agent adaptation.** The SDD kit does not yet wire delegation on this CLI
 > (Copilot'\''s custom-agent handoff is proven — see `~/.sdd/knowledge/cli-subagent-delegation.md`
@@ -95,7 +102,8 @@ COPILOT_PREAMBLE='> **Single-agent adaptation.** The SDD kit does not yet wire d
 > to an agent (a stack expert, the sdd-orchestrator, the opponent or reality-check gate),
 > do this instead:
 > - **Stack experts** — read the named agent file under `~/.sdd/agents/` and the matching
->   overlay under `~/.sdd/templates/stack-overlays/`, and apply them as your senior-reviewer
+>   overlay under `~/.sdd/templates/stack-overlays/` — plus the style guide that overlay
+>   names under `~/.sdd/templates/style-guides/` — and apply them as your senior-reviewer
 >   lens while you do the work yourself.
 > - **Gates (opponent / reality-check)** — adopt the persona file as a DISTINCT review pass:
 >   fresh read of the diff, that persona'\''s checklist and report format, its default
@@ -107,7 +115,11 @@ COPILOT_PREAMBLE='> **Single-agent adaptation.** The SDD kit does not yet wire d
 >   `rg` when installed, else `grep`; cite `path:line`, name what you could not find).
 > - **Ponytail** — where the skill names `ponytail:ponytail` / `ponytail:ponytail-review`,
 >   use the ponytail plugin'\''s skills when it is installed on this CLI; otherwise the
->   rule as written in the skill applies on its own.'
+>   rule as written in the skill applies on its own.
+> - **Official skills and reviews** — vendor skills (`aws-core`, `stripe`, `ui-ux-pro-max`,
+>   the Next.js workflow skills) load under the names this CLI lists them by. `code-review`
+>   and `security-review` are Claude Code built-ins: where they are absent, the persona'\''s
+>   own checklist is the pass.'
 
 # frontmatter_field <file> <key> — read a key from the skill YAML frontmatter.
 frontmatter_field() {
@@ -370,6 +382,9 @@ seams verbatim — never re-derive or redesign them.
 Smallest complete change: reuse the anchor and existing helpers before
 writing anything new; no abstraction, option or dependency the task did not
 ask for. If the ponytail skill is installed, load it first.
+New and changed lines follow the style guide the stack overlay names
+(~/.sdd/templates/style-guides/); project lint/format config and the file
+being edited win, and lines the task does not touch are never restyled.
 Run the task's *Verify:* command and return: the files you changed, the
 command, and its output pasted verbatim. A reply without pasted output is a
 failed task. Unknowns: surface them — never guess silently.

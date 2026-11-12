@@ -19,7 +19,7 @@ All deep material lives in the sibling base skill `aws-serverless-lambda-service
 | `../aws-serverless-lambda-services-arch/references/scaffold-cicd-ops.md` | Monorepo template, naming, environments, CI/CD, operational checklist |
 | `../aws-serverless-lambda-services-arch/SKILL.md` (base) | Architecture diagram, core decisions + rationale, scaffolding order, invariants, known failure modes |
 
-Follow the base skill's **"Scaffolding a new app — order of work"**, **Invariants**, and **Known failure modes** sections as written, with the substitutions below.
+Follow the base skill's **"Code style and scope"** (style guides, ponytail, official skills, read-only scouts — here every service is TypeScript, so `~/.sdd/templates/style-guides/typescript.md` governs services and CDK alike), **"Scaffolding a new app — order of work"**, **Invariants**, and **Known failure modes** sections as written, with the substitutions below.
 
 ## Runtime decision table (default = Bun)
 

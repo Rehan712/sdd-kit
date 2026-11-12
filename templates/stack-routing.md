@@ -37,18 +37,47 @@ specific signal (an exact filename beats a glob beats a language) wins.
 | Opponent gate (under `## Reality Check`, `Agent:` → `opponent.agent.md`) | `opponent` |
 | Reality-check gate (under `## Reality Check`, `Agent:` → a reality-check persona) | `reality-check` for the hub default; project-local personas run as `general-purpose` with the persona text leading the dossier |
 | Security pass — triggers listed in `agents/security-reviewer.md` ("When you're invoked" is THE list) | `security-reviewer` (read-only; CRITICAL/HIGH block, MEDIUM/LOW log) |
+| Stripe integration code (a `stripe` dependency, Checkout, webhooks, Connect, billing) — no overlay of its own | the stack expert whose files the task names, with the `stripe-best-practices` skill loaded; webhook and key handling trip the security pass |
+| A new screen, page or component, or a visual/interaction decision | the UI stack expert (`nextjs-expert` / `react-expert` / `expo-rn-expert`) with `ui-ux-pro-max` and the persisted `design-system/` |
 
 ## Read-only recon (never the session model's job when a scout exists)
 
 | Work | Agent |
 |---|---|
-| Codebase search, docs lookup, running a named test/lint/build command, digesting a log (`notes/ci.md`, a long suite output) | `sdd-scout` — read-only tools, pinned to the `explore` role's tier; one narrow question per scout, parallel in one message. Its findings are leads: re-read first-hand before they enter a plan or a fix. |
+| Codebase search, docs lookup, running a named test/lint/build command, digesting a log (`notes/ci.md`, a long suite output) | `sdd-scout` — no Edit/Write tools, a Bash guard (`scripts/scout-guard.sh`) that refuses writes, pinned to the `explore` role's tier; one narrow question per scout, parallel in one message. Its findings are leads: re-read first-hand before they enter a plan or a fix. |
+
+Who sends scouts: `/sdd:plan`, `/sdd:onboard`, `/sdd:review`, `/sdd:implement`
+(single-task recon and failed-acceptance log digests), the orchestrator (log
+digests) and the stack experts themselves for a sweep, a docs lookup or a long
+log. Not the gates: an adversarial verdict does not rest on a recon-tier
+"nothing else calls this". A lookup one command answers is not worth a spawn.
 
 The three tiers, by what the work can cost you: **read-only → `sdd-scout`
 (recon tier)**, **writing code → stack experts (implementation tier)**,
 **judging it → the gates and `security-reviewer` (reasoning tier, no
 Edit/Write tools)**. `[hard]` tasks and retries escalate the writer to
 `implement-hard`.
+
+## What every implementer carries
+
+Four rules sit in every stack-expert persona and in `test-engineer`
+(`## Working rules`), so they hold on any dispatch path — single-task,
+orchestrated, the loop, a post-PR fix:
+
+1. **Ponytail** — the smallest *complete* change; the `ponytail:ponytail`
+   skill when the session lists it.
+2. **Style** — the guide the stack overlay names under
+   `~/.sdd/templates/style-guides/` (`rust.md`, `typescript.md` — digests of
+   the Google Rust and TypeScript style guides). Project lint/format config
+   and the file being edited win; untouched lines are never restyled.
+3. **Recon on the cheap tier** — sweeps, docs lookups and long logs go to
+   `sdd-scout`.
+4. **Official skills first** — the vendor skill the overlay's
+   `## Official skills` section names (and `stripe-best-practices` for any
+   Stripe code) outranks overlay and memory on that vendor's API. The one
+   table: `~/.sdd/templates/official-skills.md`.
+
+A project-local agent has no kit persona: put the four in its brief.
 
 ## Planning consultation (stack tag → expert to consult)
 

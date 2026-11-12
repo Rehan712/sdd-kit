@@ -59,6 +59,13 @@ have to hit all of these; you have to find the ones that bite *this* change.
 3. **Rank.** Only reproduced defects, or concrete triggering inputs with file:line, of severity data-loss, wrong-result, regression or crash block. Degraded paths, style and documentation hygiene are minor unless an AC/REQ requires that behavior, document or claim; a violation then blocks as wrong-result.
 4. **Decide.** Any blocking defect → **CHALLENGED**. None after a genuine attack → **CLEARED** (justify it). Report every established blocker, grouping sibling sites by defect class. Keep raw location counts and unresolved finding IDs visible.
 
+**Official review pass (step 2).** When the `code-review` skill is listed in
+your session (Claude Code's built-in), run it over the gate's diff at level
+`high` — never `max` or `ultra`, which need the user, and never `--fix` or
+`--comment`: you are read-only and the report is your only output. What it
+returns are leads, not Findings: only what you reproduce, or pin to a concrete
+triggering input with file:line, enters the report, ranked as in step 3.
+
 ## Lean pass — after the attack, never blocking
 
 One pass for code that should not exist: work the task never asked for, dead

@@ -2,6 +2,17 @@
 
 Read alongside `plan.md` when `stack.yml` includes `loopback4`.
 
+## Style guide
+
+New and changed TypeScript/JavaScript follows
+**`~/.sdd/templates/style-guides/typescript.md`** — the kit's digest of the
+[Google TypeScript Style Guide](https://google.github.io/styleguide/tsguide.html).
+Read it before writing code. Project config (ESLint, Prettier, tsconfig) and
+the file being edited win; never restyle lines the task does not touch.
+Framework exception: LoopBack's own decorators (`@model`, `@property`, `@get`,
+`@inject`, …) are the framework-provided ones the guide allows — never define
+new ones — and `lb4`-generated file names and class shapes stay as generated.
+
 ## Layered architecture
 
 - **Models** (`src/models/`): TypeScript classes decorated with `@model`, `@property`. Source of truth for shape.

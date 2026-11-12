@@ -113,7 +113,7 @@ For each batch `spec-graph.sh next` prints:
    - the **worktree path `$WT` as the working root**, with the instruction to verify `git -C "$WT" rev-parse --abbrev-ref HEAD` prints `spec/NNN-slug` **before the first edit** (wrong output → stop and report, don't edit);
    - the task entry quoted verbatim, **including its *Verify:* command**;
    - the plan sections its *Refs:* point to — **pattern anchors and pre-decided internal seams quoted verbatim, never summarized** (a paraphrased signature is a re-negotiated signature);
-   - the referenced REQ/AC text, the stack overlay path, and any constitution rule that bites this specific task;
+   - the referenced REQ/AC text, the stack overlay path (the style guide it names is part of it: new and changed lines follow it, untouched lines are never restyled), and any constitution rule that bites this specific task;
    - the ponytail line: "smallest *complete* change — reuse the plan's anchor and existing helpers before writing anything new; no abstraction, option or dependency the task did not ask for; load the `ponytail:ponytail` skill first if your session lists it. The task's bound tests and the plan's decisions outrank it.";
    - the return contract: "make the smallest change; transcribe the plan's seams; return the files changed and the structured Verification-Return with authentic no-tick capture IDs, canonical summaries and required FM/INV mappings. Full output stays in the captured logs."
 3. **Wait** for the batch to complete.

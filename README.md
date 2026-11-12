@@ -128,7 +128,7 @@ each tier can cost:
 
 | Work | Who | Tier | Tools |
 |---|---|---|---|
-| **Read-only** — search, docs lookup, running a named command, log digests | `sdd-scout` | `recon` (cheap) | no Edit/Write — it cannot change the repo |
+| **Read-only** — search, docs lookup, running a named command, log digests | `sdd-scout` | `recon` (cheap) | no Edit/Write, and a Bash guard (`scout-guard.sh`) that refuses git writes, kit state scripts, file mutation, installs and deploys |
 | **Writing code** — one task at a time, smallest complete change | stack experts, `test-engineer` | `implementation` (mid) — `[hard]` tasks and retries escalate to `implement-hard` | full |
 | **Judging it** — the two gates, the security pass | `opponent`, `reality-check`, `security-reviewer` | `reasoning` (strongest) | no Edit/Write — a reviewer never fixes what it grades |
 
@@ -195,7 +195,63 @@ entirely and use `model-policy.sh update`/`set`, which does all of that for
 you. `sdd-doctor.sh` flags a stale or missing build, and validates the policy
 file.
 
-### Ponytail (optional companion)
+Everything that writes code sends its read-only work down a tier: `/sdd:plan`,
+`/sdd:onboard`, `/sdd:review` and `/sdd:implement` fan scouts out for
+searches, docs lookups and log digests, and the stack experts do the same for
+a sweep or a long log — one narrow question per scout, re-read first-hand
+before it shapes a plan or an edit. The gates do not: an adversarial verdict
+never rests on a recon-tier "nothing else calls this".
+
+### Style guides
+
+Rust and TypeScript code is written to Google's style guides. The kit ships a
+digest of each under `templates/style-guides/` —
+[`rust.md`](templates/style-guides/rust.md) (the
+[Google Rust Style Guide](https://google.github.io/styleguide/rustguide.html))
+and [`typescript.md`](templates/style-guides/typescript.md) (the
+[Google TypeScript Style Guide](https://google.github.io/styleguide/tsguide.html))
+— short enough to read on every task, each ending with the lints that enforce
+its rules so a project can hand them to a tool instead of a model's memory.
+
+- Every Rust and TypeScript stack overlay names its guide, plus the one place
+  its framework needs otherwise (Next.js and Expo Router default exports,
+  LoopBack decorators, generated RTK Query code).
+- Order of authority: the project's own lint/format config and constitution →
+  the file being edited → the stack overlay → the guide. Untouched lines are
+  never restyled; a style-only change is its own task.
+- The digests carry a "read" date. When Google revises a guide, re-read the
+  page and update the digest — the linked page stays the authority.
+
+### Official skills first
+
+Where a vendor ships its own agent skills, the kit uses them ahead of its own
+overlays: they are maintained against the current API, which a model's memory
+and a hand-written overlay are not. One table —
+[`templates/official-skills.md`](templates/official-skills.md) — maps each
+domain to the skill, who loads it, and the install command:
+
+| Domain | Official source | Used by |
+|---|---|---|
+| Next.js | the version-matched docs bundled in `next` (`node_modules/next/dist/docs/`) + the workflow skills in [`vercel/next.js`](https://github.com/vercel/next.js/tree/canary/skills) — the old `vercel-labs/next-skills` repo is retired and points there | `/sdd:plan`, `nextjs-expert` |
+| AWS | the `aws-core` plugin of the [Agent Toolkit for AWS](https://github.com/aws/agent-toolkit-for-aws) (skills + the AWS MCP server's documentation search) | `/sdd:plan`, the AWS/CDK/Rust-Lambda experts, the scaffolding skills, `security-reviewer` for IAM |
+| Stripe | Stripe's own plugin ([`stripe/ai`](https://github.com/stripe/ai)): `stripe-best-practices`, `upgrade-stripe` | whichever expert writes the integration, `security-reviewer` |
+| UI / UX | `ui-ux-pro-max` — the design system is generated once at plan time and persisted; implementers read the file, not the 700-line skill | `/sdd:plan`, the Next.js/React/Expo experts |
+| Code review | Claude Code's built-in `code-review` (Codex: `codex review`) as the opponent's attack pass — findings are leads the gate must reproduce | `opponent` |
+| Security review | Claude Code's built-in `security-review` as the security pass's first step (Codex has no counterpart; the checklist stands) | `security-reviewer` |
+| Every change | ponytail v5 | every code-writing path |
+
+Three rules keep this cheap. A skill is loaded only when the task touches its
+domain — never because it is installed. Decisions are made once, at plan time,
+and written into plan.md, so an implementer loads a skill for the API it is
+about to call rather than to redesign. And a skill that is not installed is
+not an error: the overlay stands on its own.
+
+`scripts/companions.sh` reports, per CLI home, which of these are installed
+and prints the exact install command for the rest (it only reads files — it
+never installs). `sdd-doctor.sh` runs it: a home without ponytail v5 is a
+warning, the stack-specific ones are information.
+
+### Ponytail (companion — v5)
 
 The kit's implementers already work to "the smallest change that satisfies
 the task", and the opponent ends every review with a non-blocking **lean
@@ -204,20 +260,29 @@ helpers — reported as `lean-*` minors, never a reason for another round).
 The [ponytail](https://github.com/DietrichGebert/ponytail) plugin sharpens
 both, and the kit uses it automatically when it is installed:
 
-- `/sdd:implement` and the orchestrator load `ponytail:ponytail` and put its
-  rule in every implementer brief — reuse before writing, nothing the task
-  did not ask for, `shortcut:` comments for known limits. The task's bound
-  tests and the plan's decisions outrank it.
+- Every code-writing path carries the rule — reuse before writing, nothing
+  the task did not ask for, `shortcut:` comments for known limits — and loads
+  `ponytail:ponytail` when it is listed: `/sdd:implement`, the orchestrator's
+  briefs, `/sdd:review`'s post-PR fixes, the scaffolding skills, and every
+  stack-expert persona plus `test-engineer` (their `## Working rules`), so it
+  holds whichever way a task was dispatched. The task's bound tests and the
+  plan's decisions outrank it.
 - The opponent loads `ponytail:ponytail-review` for its lean pass.
+- `/sdd:retro` collects the `shortcut:` comments a spec left into a debt
+  ledger (`ponytail:ponytail-debt` gives the repo-wide one).
 
 Install it per CLI (`/plugin marketplace add DietrichGebert/ponytail`, then
 `/plugin install ponytail@ponytail` in Claude Code; Codex and Copilot have
-the same two `plugin` commands). `sdd-doctor.sh` reports whether a Claude home
-has it. Nothing breaks without it — the rules above are written into the
-skills. One thing to know: ponytail injects itself into every subagent and
+the same two `plugin` commands). `sdd-doctor.sh` warns about any Claude or
+Codex home without v5 and prints the command for that home. Nothing breaks
+without it — the rules above are written into the skills. One thing to know: ponytail injects itself into every subagent and
 asks for closing "skipped / not checked" lines; the gate personas keep those
 inside the report, because `spec-gate.sh round --complete` rejects anything
-after the round marker.
+after the round marker. The scout, the gates and the orchestrator never write
+code, so the injection only costs them tokens — scope it to the implementers
+by setting `PONYTAIL_SUBAGENT_MATCHER` (ponytail's own switch) in the `env`
+block of `~/.claude/settings.json`:
+`"PONYTAIL_SUBAGENT_MATCHER": "-expert$|^test-engineer$|^general-purpose$"`.
 
 ### Cross-CLI dispatch (different providers per phase)
 
@@ -372,6 +437,8 @@ All in `scripts/` (stable path: `~/.sdd/scripts/`):
 | `spec-ci.sh <cmd>` | the CI watcher: `check`/`watch`/`logs` — PR checks + review + mergeability via `gh`, aggregate written to STATUS `ci:`, distinct exit codes (0 green / 10 pending / 20 red / 30 changes-requested / 40 conflicts); umbrella-aware |
 | `spec-dispatch.sh <role> <spec-dir>` | run one phase on ANOTHER CLI/provider headlessly (models.yml `dispatch:` map or `--to`): right working root + model, output captured to `notes/`, artifacts verified on return; `--task T###`/`--all` for implement, umbrella implement takes `--repo <name>` (one slice per run), `--dry-run` prints the command |
 | `sdd-status.sh` | dashboard of every spec in every project + hub umbrella specs (worktree-aware; `--open`, `--phase`, `--project`, `--tsv` for machines) |
+| `companions.sh` | which official skills (ponytail v5, `aws-core`, Stripe, Next.js, `ui-ux-pro-max`) each Claude/Codex home has, with the install command for the missing ones; `--tsv`; exit 1 when ponytail v5 is absent |
+| `scout-guard.sh` | the read-only scout's Bash backstop — a `PreToolUse` hook (wired in `agents/sdd-scout.md`) that refuses git writes, kit state scripts, file mutation, installs and deploys; a search for those words still runs |
 | `sync.sh` | verify/repair the per-item symlinks into Claude homes (`--check`); prunes stale links; `--remove` uninstalls them |
 | `build-adapters.sh` | regenerate Codex/Copilot adapters from the skills |
 | `sdd-doctor.sh` | validate the kit, home wiring, adapters, system map, and any project's `.specify/` layout (`--all`, `--hub-only`) |
@@ -429,9 +496,12 @@ sdd-kit/
 │                             # loopback4, expo-rn, bun-monorepo, aws-cdk-lambda-ts,
 │                             # rust-aws-lambda, firebase-rtk-codegen)
 ├── templates/                # spec/plan/tasks/STATUS/ADR/brief/retro templates,
-│                             # stack-routing.md (THE routing table), umbrella-guide.md
+│                             # stack-routing.md (THE routing table), umbrella-guide.md,
+│                             # official-skills.md (vendor skills the kit prefers)
 │   ├── stack-overlays/       # per-stack conventions — one per expert above,
 │   │                         # plus monorepo + troposphere (overlay-only)
+│   ├── style-guides/         # rust.md, typescript.md — digests of the Google
+│   │                         # style guides the Rust/TS overlays point at
 │   └── examples/             # the golden example (001-api-key-expiry): a complete
 │                             # spec→plan→tasks set the phase skills calibrate
 │                             # against — CI keeps it passing sdd-analyze
@@ -445,7 +515,10 @@ sdd-kit/
 - **Add a stack**: write `templates/stack-overlays/<tag>.md` (+ optionally
   `agents/<tag>-expert.md`), add the tag to your project's `stack.yml`, and add
   one row to `templates/stack-routing.md` — the single routing table every
-  skill and the orchestrator read. Re-run `setup.sh`.
+  skill and the orchestrator read. Re-run `setup.sh`. A new language gets a
+  digest under `templates/style-guides/` that the overlay names in a
+  `## Style guide` section; a new expert copies the `## Working rules` block
+  from an existing one (the test suite checks both).
 - **Project-specific rules**: `<project>/.specify/constitution.md` extends the kit
   constitution with overrides only. A project can pin its own reality-check agent
   there (`Reality-check agent: <path>` — resolution order: constitution pin →

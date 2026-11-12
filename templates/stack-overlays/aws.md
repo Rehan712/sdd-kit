@@ -2,6 +2,21 @@
 
 Read alongside `plan.md` when the project's stack includes `aws`.
 
+## Official skills
+
+When your session lists the **`aws-core`** plugin (Agent Toolkit for AWS),
+load its skill for the service the task touches before writing:
+`aws-core:aws-iam`, `aws-cdk`, `aws-cloudformation`, `aws-serverless`,
+`aws-database`, `aws-storage`, `aws-messaging-and-streaming`,
+`aws-networking`, `aws-observability`, `aws-secrets-manager`. With its MCP
+server connected, check what a service does today through its documentation
+search rather than memory. It outranks this overlay on current service
+behaviour; this overlay and the project's constitution still decide
+conventions.
+
+Load only what the task touches — precedence and install commands are in
+`~/.sdd/templates/official-skills.md`.
+
 ## Conventions
 
 - **IaC-first.** Every resource is defined in CDK or Terraform. The console is read-only in shared environments; console-created prod resources are incidents.

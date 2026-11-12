@@ -2,6 +2,16 @@
 
 Read alongside `plan.md` when `stack.yml` includes `bun-monorepo`.
 
+## Style guide
+
+New and changed TypeScript/JavaScript follows
+**`~/.sdd/templates/style-guides/typescript.md`** — the kit's digest of the
+[Google TypeScript Style Guide](https://google.github.io/styleguide/tsguide.html).
+Read it before writing code. Project config (ESLint, Prettier, tsconfig) and
+the file being edited win; never restyle lines the task does not touch.
+It applies to every TypeScript package in the workspace; a package's own lint
+config wins over the root's.
+
 ## Workspace structure
 
 - `apps/<name>` — runnable applications (Next.js web, RN mobile, Lambda services).

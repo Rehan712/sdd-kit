@@ -2,6 +2,31 @@
 
 Read alongside `plan.md` when `stack.yml` includes `rust-aws-lambda`.
 
+## Style guide
+
+New and changed Rust follows **`~/.sdd/templates/style-guides/rust.md`** — the
+kit's digest of the [Google Rust Style Guide](https://google.github.io/styleguide/rustguide.html).
+Read it before writing code. Project config and the file being edited win;
+never restyle lines the task does not touch.
+Handlers and binaries are application code, shared crates are library code
+(the guide binds API-design rules on the latter only). Where the two differ,
+this overlay wins: `Arc`-shared clients initialized once per container are
+expected, and a handler path that can fail returns a typed error — `expect`
+is for invariants only.
+
+## Official skills
+
+When your session lists the **`aws-core`** plugin (Agent Toolkit for AWS),
+load its skill for the service the task touches before writing:
+`aws-core:aws-serverless`, `aws-iam`, `aws-observability`. With its MCP server
+connected, check what a service does today through its documentation search
+rather than memory. It outranks this overlay on current service behaviour;
+this overlay and the project's constitution still decide conventions. The
+toolkit has no Rust SDK skill: the SDK rules below stand.
+
+Load only what the task touches — precedence and install commands are in
+`~/.sdd/templates/official-skills.md`.
+
 ## Toolchain
 
 - **cargo-lambda** for building and deploying. `cargo lambda build --release --arm64`.
