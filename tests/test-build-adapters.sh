@@ -263,6 +263,37 @@ test_scout_and_reviewers_are_read_only_and_the_scout_is_tiered() {
   done
 }
 
+# Claude Code applies a skill's stamped model/effort to the turn that loaded it
+# and no further: a /sdd:plan whose experts ran in the background folded their
+# findings in at the session's effort. The stamped copy opens with the note
+# that keeps the phase on its tier; nothing without a stamp carries it.
+test_stamped_skills_open_with_the_turn_note_and_nothing_else_does() {
+  local kit text name; kit="$(stage_kit)"
+  printf 'tiers:\n  reasoning:\n    claude_model: opus\n    claude_effort: high\nroles:\n  plan: reasoning\n  implement: reasoning\n  opponent: reasoning\n' \
+    > "$kit/models.yml"
+  run_rc 0 env HOME="$SANDBOX/home" bash "$kit/scripts/apply-models.sh"
+  for name in sdd-plan sdd-implement; do
+    # One line, so a re-wrapped note still reads the same.
+    text="$(tr -s '[:space:]' ' ' < "$kit/build/skills/$name/SKILL.md")"
+    assert_contains "$text" "effort: high --- **Stay on this phase's model policy.**" "$name: the note is not the first paragraph"
+    assert_contains "$text" 'run_in_background: false' "$name does not launch its agents in the foreground"
+    assert_contains "$text" "make its first call the Skill tool with \`$name\` — alone, with no other tool call in that message" \
+      "$name does not restore its own stamp in a later turn"
+    assert_contains "$text" 'that is not a restart' "$name restarts the phase when the skill text comes back"
+  done
+  assert_contains "$(tr -s '[:space:]' ' ' < "$kit/build/skills/sdd-implement/SKILL.md")" \
+    'run of `--all` is the one launch that may stay in the background' 'implement lost the orchestrator exception'
+  assert_not_contains "$(cat "$kit/build/skills/sdd-plan/SKILL.md")" 'the one launch that may' 'plan carries the implement exception'
+
+  # No stamp, no note: an unmapped role (copied as is), an agent, and the
+  # canonical files the Codex/Copilot adapters are built from.
+  run_rc 0 cmp "$kit/skills/sdd-tasks/SKILL.md" "$kit/build/skills/sdd-tasks/SKILL.md"
+  assert_not_contains "$(cat "$kit/build/agents/opponent.agent.md")" 'Stay on this phase' 'an agent carries the skill note'
+  if grep -rlq 'Stay on this phase' "$KIT_DIR/skills" "$KIT_DIR/agents"; then t_fail 'a canonical file carries the note'; fi
+  assert_contains "$(tr -s '[:space:]' ' ' < "$KIT_DIR/README.md")" 'covers only the turn that loaded it' \
+    'the README no longer says what a skill stamp covers'
+}
+
 # A gate report is sealed by its round marker, and completion rejects anything
 # after it — so both personas and every invoker must keep closing notes (a
 # session-wide "skipped / not checked" trailer) inside the report.

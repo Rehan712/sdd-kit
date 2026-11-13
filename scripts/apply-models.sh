@@ -9,6 +9,13 @@
 #   build/skills/sdd-<phase>/SKILL.md   (canonical body + model:/effort: stamped)
 #   build/agents/<name>.md              (same)
 #
+# An agent's stamp holds for its whole run. A skill's covers only the turn that
+# loaded it — the next turn (the user's reply, a background agent finishing) is
+# back at the session's own effort — so each stamped skill also opens with a
+# note (turn_note below) that tells the session how to stay on its tier. The
+# note exists only where a stamp does: not in the canonical files, the
+# un-stamped copies, or the Codex/Copilot adapters built from them.
+#
 # sync.sh links the Claude homes at build/ when it exists, else at the
 # canonical files. No models.yml (or --clean) removes build/ so the homes fall
 # back to the canonical, un-stamped files on the next sync.
@@ -77,20 +84,56 @@ role_for_agent() {
   esac
 }
 
-# stamp <src> <dst> <model> <effort> — copy src, injecting model:/effort: into
-# the frontmatter (replacing any existing lines). No frontmatter -> plain copy.
+# stamp <src> <dst> <model> <effort> [<note>] — copy src, injecting
+# model:/effort: into the frontmatter (replacing any existing lines) and the
+# note, when given, as the first paragraph of the body. No frontmatter ->
+# plain copy.
 stamp() {
   local src="$1" dst="$2" model="$3" effort="$4"
-  awk -v model="$model" -v effort="$effort" '
+  # ENVIRON, not -v: BSD awk rejects a newline in a -v value.
+  NOTE="${5:-}" awk -v model="$model" -v effort="$effort" '
     NR==1 && $0=="---" { print; infm=1; next }
     infm && $0=="---" {
       if (model  != "") print "model: "  model
       if (effort != "") print "effort: " effort
-      print; infm=0; next
+      print; infm=0
+      if (ENVIRON["NOTE"] != "") { print ""; print ENVIRON["NOTE"] }
+      next
     }
     infm && ($0 ~ /^model:/ || $0 ~ /^effort:/) { next }
     { print }
   ' "$src" > "$dst"
+}
+
+# turn_note <skill name> — the paragraph a stamped skill opens with. Claude
+# Code applies a skill's model/effort to the turn that loaded it and no
+# further (observed: the experts of a /sdd:plan ran in the background, their
+# completion notices started new turns, and the review findings were folded
+# into the plan at the session's medium instead of the policy's high). A
+# foreground agent keeps the turn; re-invoking the skill in a later turn puts
+# the stamp back and, while the skill is still in context, reloads nothing.
+turn_note() {
+  local name="$1" orchestrator=""
+  case "$name" in
+    sdd-implement|sdd-go) orchestrator=" The long \`sdd-orchestrator\` run of \`--all\` is the one launch that may
+stay in the background, so the user can still talk to the session; its
+completion notice starts a later turn." ;;
+  esac
+  cat <<EOF
+**Stay on this phase's model policy.** The \`model:\`/\`effort:\` in this
+file's frontmatter cover only the turn that loaded this skill: any later turn
+— the user's reply, the completion notice of a background agent or command —
+silently runs at the session's own effort. So launch the agents this phase
+consults in the foreground (\`run_in_background: false\`; several in one
+message still run in parallel) and carry on in the same turn; an agent
+returning there is not a new turn.$orchestrator When a later turn continues this phase,
+make its first call the Skill tool with \`$name\` — alone, with no other tool
+call in that message: work sent alongside it still runs at the session's
+effort. It answers "already loaded" and puts the stamp back for the calls
+after it. If it returns this skill's text again instead (compaction or a
+resumed session dropped it), that is not a restart: continue from where
+STATUS.md and the artifacts stand.
+EOF
 }
 
 # Rebuild from scratch — cheap, and removals in skills/ or agents/ propagate.
@@ -108,7 +151,7 @@ for skill_dir in "$KIT_DIR"/skills/*/; do
   model="$("$MP" get "$role" claude model 2>/dev/null || true)"
   effort="$("$MP" get "$role" claude effort 2>/dev/null || true)"
   if [[ -n "$model" || -n "$effort" ]]; then
-    stamp "$skill_dir/SKILL.md" "$BUILD/skills/$name/SKILL.md" "$model" "$effort"
+    stamp "$skill_dir/SKILL.md" "$BUILD/skills/$name/SKILL.md" "$model" "$effort" "$(turn_note "$name")"
     echo "  ${GREEN}✓${RESET} skill $name ← ${model:-session}${effort:+ ($effort)}"
     stamped=$((stamped+1))
   else

@@ -173,7 +173,12 @@ The mapping is the **model policy**:
     agent under `build/` with `model:` + `effort:` stamped into the frontmatter,
     and `sync.sh` points the home symlinks there. `/sdd:plan` runs on the
     reasoning tier even in a sonnet session; stack experts dispatched by the
-    orchestrator run on the implementation tier.
+    orchestrator run on the implementation tier. An agent's stamp holds for
+    its whole run. A skill's stamp covers only the turn that loaded it — the
+    next turn (a background agent finishing, your reply) is back at the
+    session's own effort — so each stamped skill copy opens with a note
+    telling the session to launch its agents in the foreground and to re-invoke
+    the skill first in a later turn, which puts the stamp back.
   - *Codex CLI:* sessions pin models via one profile per tier
     (`~/.codex/sdd-<tier>.config.toml` → `codex --profile sdd-reasoning`);
     each adapter's preamble tells the agent to steer the session to its phase's
