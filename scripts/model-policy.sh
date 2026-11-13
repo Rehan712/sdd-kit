@@ -30,6 +30,24 @@
 #                                               # (--file must PRECEDE the command;
 #                                               # edits on a --file target skip the
 #                                               # re-stamp, like --no-apply)
+#   model-policy.sh --project <dir> <cmd> ...   # overlay that project's
+#                                               # .specify/models.yml (below);
+#                                               # read commands only
+#   model-policy.sh --project <dir> overrides   # the roles the project remaps:
+#                                               # role<TAB>tier<TAB>claude alias
+#                                               # <TAB>claude effort lines (`-` =
+#                                               # unset) — what a dispatcher passes
+#                                               # as the Agent tool's model/effort
+#
+# PROJECT OVERLAY. A project may commit `<project>/.specify/models.yml` holding
+# `roles:` and/or `dispatch:` — nothing else. `--project <dir>` (the project
+# root, a spec worktree, or any directory inside one) lays those rows over the
+# machine policy for that one query. Tiers stay machine-local: the project
+# names a tier, each machine's models.yml says what the tier is. A project
+# role naming a tier this machine does not define is skipped (the machine's
+# mapping stands; `check` warns). Only runtime lookups take `--project` —
+# spec-dispatch.sh and the Agent tool's `model` param; the stamped copies in
+# build/ and the Codex/Copilot adapters are machine-wide and never read it.
 #
 # Editing (non-interactive; the wizard scripts/configure-models.sh remains the
 # interactive path). Every edit is validated BEFORE it is saved — an invalid
@@ -83,11 +101,14 @@ usage() { usage_from_header "$0"; exit 0; }
 
 CUSTOM_FILE=0
 NO_APPLY=0
+PROJECT_ARG=""
+PROJECT_POLICY=""
 
 while (( $# )); do
   case "$1" in
     --help|-h) usage ;;
     --file) shift; POLICY="${1:?--file needs a path}"; CUSTOM_FILE=1 ;;
+    --project) shift; PROJECT_ARG="${1:?--project needs a directory}" ;;
     --no-apply) NO_APPLY=1 ;;
     *) break ;;
   esac
@@ -107,13 +128,32 @@ set -- "$CMD" ${_args[@]+"${_args[@]}"}
 
 [[ -f "$POLICY" ]] || { echo "no model policy at $POLICY (run scripts/configure-models.sh)" >&2; exit 3; }
 
-# Flatten models.yml to TSV:
+# --project <dir>: the directory's own .specify/models.yml (a project root or
+# a spec worktree), else the one at the project root the directory resolves to.
+if [[ -n "$PROJECT_ARG" ]]; then
+  [[ -d "$PROJECT_ARG" ]] || { echo "--project: not a directory: $PROJECT_ARG" >&2; exit 2; }
+  case "$CMD" in
+    set|unset|update)
+      echo "--project is read-only: '$CMD' edits the machine policy ($POLICY). A project's overrides are edited by hand in <project>/.specify/models.yml" >&2
+      exit 2 ;;
+  esac
+  if [[ -f "$PROJECT_ARG/.specify/models.yml" ]]; then
+    PROJECT_POLICY="$PROJECT_ARG/.specify/models.yml"
+  else
+    _root="$("$HUB_DIR/scripts/project-detect.sh" "$PROJECT_ARG" 2>/dev/null | head -1)" || _root=""
+    if [[ -n "$_root" && -f "$_root/.specify/models.yml" ]]; then PROJECT_POLICY="$_root/.specify/models.yml"; fi
+  fi
+fi
+
+KNOWN_ROLES="specify plan tasks implement implement-hard review retro onboard go orchestrator opponent reality-check security-reviewer test-engineer stack-expert explore"
+
+# Flatten a policy file to TSV:
 #   tier<TAB><name><TAB><key><TAB><value>
 #   role<TAB><name><TAB><tier>
 #   dispatch<TAB><role><TAB><cli>
 #   limit<TAB>__present<TAB>1
 #   limit<TAB><short|long|fallback|backoff_minutes><TAB><value>
-flatten() {
+flatten_file() {  # <policy file>
   awk '
     /^[[:space:]]*#/ { next }
     /^[[:space:]]*$/ { next }
@@ -155,7 +195,30 @@ flatten() {
         }
       }
     }
-  ' "$POLICY"
+  ' "$1"
+}
+
+# flatten — the effective policy: the machine file, with the project overlay's
+# role and dispatch rows replacing the machine's in place (new ones appended).
+# A project role whose tier this machine does not define is dropped, so the
+# machine's mapping stands instead of the role losing its model altogether.
+flatten() {
+  if [[ -z "$PROJECT_POLICY" ]]; then flatten_file "$POLICY"; return; fi
+  { flatten_file "$POLICY"; printf '%s\n' '--project--'; flatten_file "$PROJECT_POLICY"; } | awk -F'\t' -v OFS='\t' '
+    $0=="--project--" { proj=1; next }
+    !proj { hub[++n]=$0; if ($1=="tier") tier[$2]=1; next }
+    ($1=="role" && ($3 in tier)) || $1=="dispatch" {
+      k=$1 SUBSEP $2
+      if (!(k in ov)) { ov[k]=$3; kind[++m]=$1; name[m]=$2 }
+    }
+    END {
+      for (i=1; i<=n; i++) {
+        split(hub[i], f, "\t"); k=f[1] SUBSEP f[2]
+        if ((f[1]=="role" || f[1]=="dispatch") && (k in ov)) { print f[1], f[2], ov[k]; used[k]=1 }
+        else print hub[i]
+      }
+      for (i=1; i<=m; i++) { k=kind[i] SUBSEP name[i]; if (!(k in used)) print kind[i], name[i], ov[k] }
+    }'
 }
 
 tier_field() {  # <tier> <key>
@@ -480,8 +543,26 @@ case "$CMD" in
     echo "$v"
     ;;
 
+  overrides)
+    # The roles the overlay remaps to a tier this machine defines — the ones
+    # whose stamped copies no longer say what the project asked for.
+    [[ -n "$PROJECT_POLICY" ]] || exit 0
+    while IFS=$'\t' read -r kind prole ptier; do
+      [[ "$kind" == "role" && "$ptier" == "$(role_tier "$prole")" ]] || continue
+      a="$(claude_alias "$(tier_field "$ptier" claude_model)")"; e="$(tier_field "$ptier" claude_effort)"
+      printf '%s\t%s\t%s\t%s\n' "$prole" "$ptier" "${a:--}" "${e:--}"
+    done < <(flatten_file "$PROJECT_POLICY" | awk -F'\t' '$1=="role" && !seen[$2]++')
+    ;;
+
   show)
     echo "Model policy: $POLICY"
+    if [[ -n "$PROJECT_POLICY" ]]; then
+      echo "Project overlay: $PROJECT_POLICY"
+      echo "  overrides (already applied below): $(flatten_file "$PROJECT_POLICY" | awk -F'\t' -v tiers=" $(flatten | awk -F'\t' '$1=="tier" { print $2 }' | tr '\n' ' ')" '
+        $1=="role" || $1=="dispatch" {
+          printf "%s%s %s -> %s%s", (n++ ? "; " : ""), $1, $2, $3, ($1=="role" && !index(tiers, " " $3 " ") ? " (skipped: no such tier here)" : "")
+        } END { if (!n) printf "none" }')"
+    fi
     echo
     printf '%-20s %-16s %-22s %-22s %-22s\n' "ROLE" "TIER" "CLAUDE" "CODEX" "COPILOT"
     while IFS=$'\t' read -r role tier; do
@@ -534,7 +615,7 @@ case "$CMD" in
       esac
     done < <(flatten | awk -F'\t' '$1=="tier"')
 
-    for known in specify plan tasks implement implement-hard review retro onboard go orchestrator opponent reality-check security-reviewer test-engineer stack-expert explore; do
+    for known in $KNOWN_ROLES; do
       grep -qx "$known" <<<"$roles" || warn "role '$known' not mapped — that phase/agent keeps the session default (map it: model-policy.sh set role $known <tier>)"
     done
 
@@ -608,11 +689,33 @@ case "$CMD" in
       done <<<"$duplicate_keys"
     fi
 
+    # --project: the overlay may only remap roles and dispatch. Everything
+    # above already ran against the merged policy; this is what merging hides.
+    if [[ -n "$PROJECT_POLICY" ]]; then
+      praw="$(flatten_file "$PROJECT_POLICY")"
+      if grep -q '^tier	' <<<"$praw"; then
+        fail "project overlay defines tiers: — tiers are machine-local; name an existing tier under roles: and define it in each machine's models.yml ($PROJECT_POLICY)"
+      fi
+      if grep -q '^limit	' <<<"$praw"; then
+        fail "project overlay sets on_limit: — usage-limit handling is machine-local ($PROJECT_POLICY)"
+      fi
+      if ! grep -Eq '^(role|dispatch)	' <<<"$praw"; then
+        warn "project overlay overrides nothing — no roles: or dispatch: rows in $PROJECT_POLICY"
+      fi
+      while IFS=$'\t' read -r kind prole ptier; do
+        [[ "$kind" == "role" ]] || continue
+        list_has "$KNOWN_ROLES" "$prole" \
+          || warn "project overlay: unknown role '$prole' — nothing looks it up (roles: ${KNOWN_ROLES// /, })"
+        grep -qx "$ptier" <<<"$tiers" \
+          || warn "project overlay: role '$prole' names tier '$ptier', which this machine does not define — the machine's own mapping for '$prole' is used (define it: model-policy.sh set tier $ptier <cli> model <model>)"
+      done <<<"$praw"
+    fi
+
     if (( errors == 0 )); then
-      echo "  ${GREEN}✓${RESET} model policy valid ($(wc -l <<<"$tiers" | tr -d ' ') tiers, $(wc -l <<<"$roles" | tr -d ' ') roles, $warnings warning(s))"
+      echo "  ${GREEN}✓${RESET} model policy valid${PROJECT_POLICY:+ with project overlay} ($(wc -l <<<"$tiers" | tr -d ' ') tiers, $(wc -l <<<"$roles" | tr -d ' ') roles, $warnings warning(s))"
       exit 0
     fi
-    echo "  ${RED}$errors error(s)${RESET}, $warnings warning(s) in $POLICY"
+    echo "  ${RED}$errors error(s)${RESET}, $warnings warning(s) in $POLICY${PROJECT_POLICY:+ + $PROJECT_POLICY}"
     exit 1
     ;;
 

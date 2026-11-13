@@ -484,6 +484,31 @@ check_project() {
   fi
 
   [[ -f "$proj/.specify/constitution.md" ]] && pass "constitution.md" || warn "project constitution.md missing"
+
+  # Optional project-level config. Both are committed files a teammate's
+  # machine reads too, so a row that cannot take effect is said here.
+  local line overlay_out
+  if [[ -f "$proj/.specify/models.yml" ]]; then
+    if [[ ! -f "$HUB_DIR/models.yml" ]]; then
+      warn "models.yml overlay present, but this machine has no model policy — it is not applied (scripts/configure-models.sh)"
+    elif overlay_out="$("$HUB_DIR/scripts/model-policy.sh" --project "$proj" check 2>&1)"; then
+      pass "models.yml overlay valid (role/dispatch overrides for this project)"
+      while IFS= read -r line; do
+        case "$line" in "  ! project overlay"*) warn "models.yml overlay: ${line#  ! project overlay: }" ;; esac
+      done <<<"$overlay_out"
+    else
+      fail "models.yml overlay invalid — run scripts/model-policy.sh --project $proj check"
+      printf '%s\n' "$overlay_out" | grep -E 'project overlay|dispatch:' | sed 's/^/    /'
+    fi
+  fi
+  if [[ -f "$proj/.specify/routing.md" ]]; then
+    if overlay_out="$("$HUB_DIR/scripts/project-routing.sh" check "$proj" 2>&1)"; then
+      pass "routing.md valid (every project skill and agent it names resolves)"
+    else
+      fail "routing.md invalid — run scripts/project-routing.sh check $proj"
+      printf '%s\n' "$overlay_out" | sed 's/^/  /'
+    fi
+  fi
   if [[ -d "$proj/.specify/specs" ]]; then
     pass "specs/ directory"
     local missing=0 total=0

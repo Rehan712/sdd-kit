@@ -61,6 +61,18 @@
 #   ~/.codex_* profile home). Re-run scripts/setup.sh (or those two scripts)
 #   after editing this file.
 
+#
+# PER-PROJECT OVERRIDES
+#   A project may commit <project>/.specify/models.yml with `roles:` and/or
+#   `dispatch:` only — e.g. `roles: { stack-expert: reasoning }` for a repo
+#   whose code is hard, or `dispatch: { implement: codex }`. It names tiers;
+#   this file still says what a tier is, so nothing machine-specific is
+#   committed. A tier this machine lacks → the mapping below stands.
+#   Runtime only: spec-dispatch.sh and the Agent tool's model/effort params
+#   read it (model-policy.sh --project <dir>). The stamped copies and
+#   adapters are machine-wide, so an interactive session's own model is not
+#   changed by it. `model-policy.sh --project <dir> show|check` to inspect.
+
 # Copilot mixes providers: Claude for reasoning/review, Codex for code/scouting.
 tiers:
   reasoning:  # deep design + adversarial judgment — strongest models

@@ -245,4 +245,157 @@ test_AC_008_wizard_fixture_never_writes_through_a_host_models_yml() {
   assert_eq "$before" "$(cksum < "$target")" "AC-008: the wizard fixture wrote through the host kit's models.yml link"
 }
 
+# --- project overlay: <project>/.specify/models.yml --------------------------------
+
+# overlay_fixture — a machine policy with three tiers and a project that
+# remaps two roles and one dispatch. Sets P (policy) and PROJ (project root).
+overlay_fixture() {
+  P="$SANDBOX/models.yml"; PROJ="$SANDBOX/proj"
+  mkdir -p "$PROJ/.specify" "$PROJ/apps/android"
+  cat > "$P" <<'EOF'
+tiers:
+  reasoning:
+    claude_model: claude-opus-5-5
+    claude_effort: high
+    codex_model: gpt-big
+  implementation:
+    claude_model: sonnet
+    claude_effort: medium
+    codex_model: gpt-mid
+  recon:
+    claude_model: haiku
+roles:
+  plan: reasoning
+  implement: implementation
+  stack-expert: implementation
+  explore: recon
+dispatch:
+  plan: claude
+EOF
+  cat > "$PROJ/.specify/models.yml" <<'EOF'
+# This repo's code is hard: write it on the strong tier.
+roles:
+  stack-expert: reasoning
+  test-engineer: reasoning
+dispatch:
+  implement: codex
+EOF
+}
+
+mp() { "$MP" --file "$P" "$@"; }
+
+test_project_overlay_remaps_roles_and_dispatch_for_that_project_only() {
+  overlay_fixture
+  run_rc 0 mp get stack-expert claude alias
+  assert_eq sonnet "$OUT" 'the machine policy changed'
+  run_rc 0 mp --project "$PROJ" get stack-expert claude alias
+  assert_eq opus "$OUT" 'the project role override was not applied'
+  run_rc 0 mp --project "$PROJ" get stack-expert codex model
+  assert_eq gpt-big "$OUT" 'the override must follow the tier on every CLI'
+  run_rc 0 mp --project "$PROJ" get test-engineer claude effort
+  assert_eq high "$OUT" 'a role only the project maps'
+  run_rc 0 mp --project "$PROJ" get plan claude alias
+  assert_eq opus "$OUT" 'a role the project does not mention'
+  run_rc 0 mp --project "$PROJ" dispatch implement
+  assert_eq codex "$OUT"
+  run_rc 0 mp --project "$PROJ" dispatch
+  assert_eq "plan	claude
+implement	codex" "$OUT" 'the merged dispatch map'
+  run_rc 1 mp dispatch implement
+  # Each role once, the machine's order kept, the project's additions last.
+  run_rc 0 mp --project "$PROJ" roles
+  assert_eq "plan	reasoning
+implement	implementation
+stack-expert	reasoning
+explore	recon
+test-engineer	reasoning" "$OUT"
+  run_rc 0 mp --project "$PROJ" show
+  assert_contains "$OUT" "Project overlay: $PROJ/.specify/models.yml"
+}
+
+# The directory may be the root, a spec worktree, or anything inside the
+# project; and a plain query never reads the overlay — the stamped copies and
+# adapters are built from plain queries and must stay machine-wide.
+test_project_overlay_is_found_from_inside_and_never_without_the_flag() {
+  overlay_fixture
+  printf 'stacks: []\n' > "$PROJ/.specify/stack.yml"
+  run_rc 0 mp --project "$PROJ/apps/android" get stack-expert claude alias
+  assert_eq opus "$OUT" 'a directory inside the project did not find its overlay'
+  OUT="$(cd "$PROJ" && "$MP" --file "$P" get stack-expert claude alias 2>&1)"
+  assert_eq sonnet "$OUT" 'a query without --project read the overlay of the cwd'
+  mkdir -p "$SANDBOX/elsewhere"
+  run_rc 0 mp --project "$SANDBOX/elsewhere" get stack-expert claude alias
+  assert_eq sonnet "$OUT" 'a directory with no project changed the answer'
+  run_rc 2 mp --project "$SANDBOX/missing" roles
+  assert_contains "$OUT" 'not a directory'
+}
+
+# A committed overlay must not break a teammate whose machine lacks the tier:
+# their own mapping stands, and check says so.
+test_project_overlay_role_on_an_undefined_tier_falls_back_to_the_machine() {
+  overlay_fixture
+  printf 'roles:\n  stack-expert: frontier\n  explore: reasoning\n  typo-role: reasoning\n' > "$PROJ/.specify/models.yml"
+  run_rc 0 mp --project "$PROJ" get stack-expert claude alias
+  assert_eq sonnet "$OUT" 'a role on an undefined tier lost its machine mapping'
+  run_rc 0 mp --project "$PROJ" get explore claude alias
+  assert_eq opus "$OUT"
+  run_rc 0 mp --project "$PROJ" check
+  assert_contains "$OUT" "role 'stack-expert' names tier 'frontier', which this machine does not define"
+  assert_contains "$OUT" "unknown role 'typo-role'"
+  assert_contains "$OUT" 'model policy valid with project overlay'
+  # show does not claim a skipped row was applied.
+  run_rc 0 mp --project "$PROJ" show
+  assert_contains "$OUT" 'role stack-expert -> frontier (skipped: no such tier here); role explore -> reasoning;'
+  run_rc 0 mp --project "$PROJ" overrides
+  assert_eq "explore	reasoning	opus	high
+typo-role	reasoning	opus	high" "$OUT" 'overrides listed a role whose tier this machine lacks'
+}
+
+# overrides is what a dispatcher passes as the Agent tool's model + effort.
+test_overrides_lists_what_the_project_remaps() {
+  overlay_fixture
+  run_rc 0 mp --project "$PROJ" overrides
+  assert_eq "stack-expert	reasoning	opus	high
+test-engineer	reasoning	opus	high" "$OUT"
+  run_rc 0 mp overrides
+  assert_eq '' "$OUT" 'overrides without a project'
+  printf 'roles:\n  explore: recon\n' > "$PROJ/.specify/models.yml"
+  run_rc 0 mp --project "$PROJ" overrides
+  assert_eq "explore	recon	haiku	-" "$OUT" 'an unset effort prints -'
+}
+
+# Tiers and on_limit are machine-local; edits never go through an overlay.
+test_project_overlay_may_only_remap_roles_and_dispatch() {
+  overlay_fixture
+  cat > "$PROJ/.specify/models.yml" <<'EOF'
+tiers:
+  reasoning:
+    claude_model: haiku
+roles:
+  plan: reasoning
+dispatch:
+  review: claude
+on_limit:
+  short: park
+EOF
+  run_rc 0 mp --project "$PROJ" get plan claude alias
+  assert_eq opus "$OUT" 'a project tiers: block redefined a machine tier'
+  run_rc 1 mp --project "$PROJ" limit short
+  run_rc 1 mp --project "$PROJ" check
+  assert_contains "$OUT" 'project overlay defines tiers:'
+  assert_contains "$OUT" 'project overlay sets on_limit:'
+  assert_contains "$OUT" "dispatch: 'review' needs interactive judgment"
+
+  overlay_fixture
+  local before; before="$(cat "$P" "$PROJ/.specify/models.yml")"
+  run_rc 2 mp --project "$PROJ" set role plan implementation
+  assert_contains "$OUT" '--project is read-only'
+  run_rc 2 mp --project "$PROJ" update plan sonnet
+  run_rc 2 mp --project "$PROJ" unset role plan
+  assert_eq "$before" "$(cat "$P" "$PROJ/.specify/models.yml")" 'a refused edit wrote a file'
+  printf '# nothing yet\n' > "$PROJ/.specify/models.yml"
+  run_rc 0 mp --project "$PROJ" check
+  assert_contains "$OUT" 'project overlay overrides nothing'
+}
+
 t_run_all

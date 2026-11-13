@@ -137,13 +137,27 @@ else
   [[ -d "$PROJ_ROOT/.specify/specs/$SLUG" ]] || { echo "spec dir is not at <project>/.specify/specs/<slug>: $SPEC_DIR" >&2; exit 2; }
 fi
 
+# The project whose .specify/models.yml may remap roles and dispatch for this
+# run (model-policy.sh --project): the spec's own project, or the repo an
+# umbrella implement slice names. Hub-rooted umbrella phases span repos, so
+# they stay on the machine policy.
+POLICY_PROJECT="$PROJ_ROOT"
+if (( UMBRELLA )) && [[ -n "$REPO_NAME" ]]; then
+  POLICY_PROJECT="$("$SYSMAP" path "$REPO_NAME" 2>/dev/null)" || POLICY_PROJECT=""
+fi
+policy() {
+  if [[ -n "$POLICY_PROJECT" && -d "$POLICY_PROJECT" ]]; then "$MP" --project "$POLICY_PROJECT" "$@"
+  else "$MP" "$@"
+  fi
+}
+
 # --- resolve the target CLI ---------------------------------------------------
 
 CLI="$TO"
 if [[ -z "$CLI" ]]; then
-  CLI="$("$MP" dispatch "$ROLE" 2>/dev/null)" || true
+  CLI="$(policy dispatch "$ROLE" 2>/dev/null)" || true
   if [[ -z "$CLI" ]]; then
-    echo "no dispatch mapping for '$ROLE' (models.yml dispatch: block) and no --to given — run the phase locally instead" >&2
+    echo "no dispatch mapping for '$ROLE' (models.yml dispatch: block, or the project's .specify/models.yml) and no --to given — run the phase locally instead" >&2
     exit 3
   fi
 fi
@@ -305,11 +319,11 @@ build_command() {
   case "$attempt_cli" in
   codex)
     CMD=(codex exec)
-    tier="$("$MP" get "$ROLE" codex tier 2>/dev/null)" || tier=""
+    tier="$(policy get "$ROLE" codex tier 2>/dev/null)" || tier=""
     if [[ -n "$tier" && -f "$CODEX_DIR/sdd-$tier.config.toml" ]]; then
       CMD+=(--profile "sdd-$tier")
     else
-      m="$("$MP" get "$ROLE" codex model 2>/dev/null)" || m=""
+      m="$(policy get "$ROLE" codex model 2>/dev/null)" || m=""
       [[ -n "$m" ]] && CMD+=(-m "$m")
     fi
     CMD+=(-C "$ROOT" -s workspace-write)
@@ -320,8 +334,8 @@ build_command() {
     ;;
   copilot)
     CMD=(copilot --agent "sdd-$ROLE" -p "$PROMPT" -C "$ROOT" --allow-all-tools --no-color --log-level error)
-    m="$("$MP" get "$ROLE" copilot model 2>/dev/null)" || m=""
-    e="$("$MP" get "$ROLE" copilot effort 2>/dev/null)" || e=""
+    m="$(policy get "$ROLE" copilot model 2>/dev/null)" || m=""
+    e="$(policy get "$ROLE" copilot effort 2>/dev/null)" || e=""
     [[ -n "$m" ]] && CMD+=(--model "$m")
     [[ -n "$e" ]] && CMD+=(--effort "$e")
     CMD+=(--add-dir "$HUB_DIR")
@@ -329,8 +343,8 @@ build_command() {
     ;;
   claude)
     CMD=(claude -p "$PROMPT" --dangerously-skip-permissions)
-    m="$("$MP" get "$ROLE" claude model 2>/dev/null)" || m=""
-    e="$("$MP" get "$ROLE" claude effort 2>/dev/null)" || e=""
+    m="$(policy get "$ROLE" claude model 2>/dev/null)" || m=""
+    e="$(policy get "$ROLE" claude effort 2>/dev/null)" || e=""
     [[ -n "$m" ]] && CMD+=(--model "$m")
     [[ -n "$e" ]] && CMD+=(--effort "$e")
     CMD+=(--add-dir "$HUB_DIR")

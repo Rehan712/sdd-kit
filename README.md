@@ -190,6 +190,27 @@ The mapping is the **model policy**:
     knowledge file), but the kit doesn't wire gate delegation through it yet;
     the adapters keep the persona-pass until that follow-up spec ships.
 
+**Per-project overrides.** A project can commit
+`<project>/.specify/models.yml` holding `roles:` and/or `dispatch:` — nothing
+else:
+
+```yaml
+roles:
+  stack-expert: reasoning    # this repo's code is hard — write it on the strong tier
+dispatch:
+  implement: codex
+```
+
+It names *tiers*; each machine's `models.yml` still says what a tier is, so no
+model id is committed and a teammate with different models keeps working (a
+tier their machine lacks → their own mapping stands, and `sdd-doctor.sh` says
+so). `scripts/model-policy.sh --project <dir> show|check` prints and validates
+the merged result. What it reaches: every dispatched phase
+(`spec-dispatch.sh`, on all three CLIs) and every Claude subagent spawn (the
+dispatcher passes the alias and effort as Agent-tool params). What it cannot
+reach: the model of an interactive session already running a phase, and Codex
+subagents — both are fixed machine-wide by the stamped copies and profiles.
+
 After editing `models.yml` by hand, re-run `scripts/setup.sh` (or
 `apply-models.sh` + `sync.sh` + `build-adapters.sh`) — or skip the hand-edit
 entirely and use `model-policy.sh update`/`set`, which does all of that for
@@ -251,6 +272,46 @@ not an error: the overlay stands on its own.
 and prints the exact install command for the rest (it only reads files — it
 never installs). `sdd-doctor.sh` runs it: a home without ponytail v5 is a
 warning, the stack-specific ones are information.
+
+### Project skills and agents (per-project routing)
+
+A project often has its own way of planning, writing and reviewing its code —
+and in a multi-platform repo, one per platform. Declare them in
+`<project>/.specify/routing.md` (start from
+[`templates/routing-template.md`](templates/routing-template.md)), one row per
+file signal:
+
+| Signal | Plan | Implement | Review |
+|---|---|---|---|
+| `apps/android/**`, `*.kt` | | `android-implementer` | `android-reviewer` |
+| `apps/ios/**`, `*.swift` | | `ios-implementer` | `ios-reviewer` |
+| `apps/tv/**` | | `bigscreen-implementer` | `bigscreen-reviewer` |
+| `*` | `acme-architecture` | | |
+
+A name is a project agent (`.claude/agents/<name>.md`), a project skill
+(`.claude/skills/<name>/SKILL.md`), a kit agent or skill, or `plugin:skill`.
+The kit asks this table before its own:
+
+- **Plan** — `/sdd:plan` loads the rows whose signal covers what the spec
+  touches, next to the official skills.
+- **Implement** — per task, by its `*Files:*`. An agent *is* the writer; a
+  skill is read by the writer the kit routes to. The brief (`spec-brief.sh`)
+  lists them by file path, so it works the same on Claude Code, Codex and
+  Copilot, and nobody has to remember to name them.
+- **Review** — each reviewer whose signal matches the branch diff runs once
+  per spec, read-only, before the opponent gate; its blocking findings become
+  `T###p<n>` follow-up tasks.
+
+They add to a phase; they never replace one. On the project's conventions a
+project skill outranks the official skills and overlays, but the artifact
+formats, the deterministic checks and the two gates stay the kit's — that is
+what keeps a spec verifiable whoever wrote the code.
+
+`scripts/project-routing.sh` is the one reader: `check <project>` validates
+the table (every name must resolve — a name nobody can load is an error, not
+a silent skip), `match <project> <phase> …` answers a dispatcher.
+`sdd-doctor.sh` runs the check for every registered project. Umbrella specs
+use each repo's own table for its slice.
 
 ### Ponytail (companion — v5)
 
@@ -420,7 +481,8 @@ All in `scripts/` (stable path: `~/.sdd/scripts/`):
 |---|---|
 | `setup.sh` | install / repair everything on this machine (`--no-cli`, `--no-wizard`, `--relink`) |
 | `configure-models.sh` | wizard for the model policy (`models.yml`) — which model + effort runs each SDD role, per CLI |
-| `model-policy.sh` | query/validate/edit the policy: `get <role> <cli> <field>`, `dispatch [<role>]`, `show`, `check`; edits via `update <role> <model> [<effort>]`, `set`/`unset` `tier`\|`role`\|`dispatch` — validated first, then auto re-stamps copies + adapters |
+| `model-policy.sh` | query/validate/edit the policy: `get <role> <cli> <field>`, `dispatch [<role>]`, `show`, `check`; edits via `update <role> <model> [<effort>]`, `set`/`unset` `tier`\|`role`\|`dispatch` — validated first, then auto re-stamps copies + adapters; `--project <dir>` overlays that project's `.specify/models.yml` on any read, `overrides` lists what it remaps |
+| `project-routing.sh` | a project's own skills and agents (`.specify/routing.md`): `check <dir>` validates the table and that every name resolves; `match <dir> <plan\|implement\|review> [<path>… \| --task <spec-dir> T### \| --diff <base>]` prints the targets for those paths |
 | `apply-models.sh` | stamp the policy into generated skill/agent copies under `build/` (Claude homes link there) |
 | `project-detect.sh` | cwd → registered project root (worktree-aware) |
 | `system-map.sh <cmd>` | query/validate the team topology: `list`, `show`, `path`, `deps`, `consumers`, `contracts`, `check` |
@@ -444,7 +506,7 @@ All in `scripts/` (stable path: `~/.sdd/scripts/`):
 | `spec-brief.sh <spec-dir> T###` | write a task's implementation brief from the artifacts — the task block, the REQ/AC text and the plan sections and FM/INV rows its *Refs:* name, verbatim — into `notes/verification/briefs/T###.md`; the invoker hands the implementer the path instead of retyping the plan (`--stdout` to print) |
 | `sync.sh` | verify/repair the per-item symlinks into Claude homes (`--check`); prunes stale links; `--remove` uninstalls them |
 | `build-adapters.sh` | regenerate Codex/Copilot adapters from the skills |
-| `sdd-doctor.sh` | validate the kit, home wiring, adapters, system map, and any project's `.specify/` layout (`--all`, `--hub-only`) |
+| `sdd-doctor.sh` | validate the kit, home wiring, adapters, system map, and any project's `.specify/` layout — including its optional `models.yml` overlay and `routing.md` (`--all`, `--hub-only`) |
 
 (`lib.sh` is the shared parsing library the others source — fence-bound
 frontmatter reads/writes, YAML lists in inline or block form, registry
@@ -499,7 +561,8 @@ sdd-kit/
 │                             # loopback4, expo-rn, bun-monorepo, aws-cdk-lambda-ts,
 │                             # rust-aws-lambda, firebase-rtk-codegen)
 ├── templates/                # spec/plan/tasks/STATUS/ADR/brief/retro templates,
-│                             # stack-routing.md (THE routing table), umbrella-guide.md,
+│                             # stack-routing.md (THE routing table), routing-template.md
+│                             # (a project's own table), umbrella-guide.md,
 │                             # official-skills.md (vendor skills the kit prefers)
 │   ├── stack-overlays/       # per-stack conventions — one per expert above,
 │   │                         # plus monorepo + troposphere (overlay-only)
@@ -526,6 +589,11 @@ sdd-kit/
   constitution with overrides only. A project can pin its own reality-check agent
   there (`Reality-check agent: <path>` — resolution order: constitution pin →
   project-local `.claude/agents/reality-check*.md` → kit default).
+- **Project-specific models and skills**: `<project>/.specify/models.yml`
+  remaps roles and dispatch for that project (see *Per-project overrides*
+  above); `<project>/.specify/routing.md` names its own planning,
+  implementation and review skills and agents per file signal (see *Project
+  skills and agents*). Both are committed with the project.
 - **Editing skills/agents**: edit them **in this repo only** — then re-run
   `setup.sh` (or `apply-models.sh` + `build-adapters.sh`) so the model-stamped
   `build/` copies and the Codex/Copilot adapters pick the change up. Without a

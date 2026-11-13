@@ -86,4 +86,41 @@ test_stage_umbrella_failure_is_named_and_stays_in_the_sandbox() {
     'stage_umbrella left no record of the failed copy'
 }
 
+# A project's .specify/models.yml decides the CLI and the model of a
+# dispatched run for that project; the same kit dispatches another project on
+# the machine policy.
+test_dispatch_reads_the_project_model_overlay() {
+  local kit="$SANDBOX/kit" proj other
+  mkdir -p "$kit" "$SANDBOX/bin"
+  copy_kit "$KIT_DIR" "$kit" scripts || { fixture_build_failed 'dispatch kit scripts'; return 1; }
+  cat > "$kit/models.yml" <<'EOF'
+tiers:
+  reasoning:
+    claude_model: opus
+    claude_effort: high
+  implementation:
+    claude_model: sonnet
+    claude_effort: medium
+roles:
+  plan: reasoning
+EOF
+  printf '#!/bin/sh\nexit 0\n' > "$SANDBOX/bin/claude"; chmod +x "$SANDBOX/bin/claude"
+  for proj in "$SANDBOX/proj" "$SANDBOX/other"; do
+    mkdir -p "$proj/.specify/specs/001-demo"
+    printf -- '---\nspec: 001-demo\n---\n# Spec: Demo\n' > "$proj/.specify/specs/001-demo/spec.md"
+  done
+  proj="$SANDBOX/proj"; other="$SANDBOX/other"
+  printf 'roles:\n  plan: implementation\ndispatch:\n  plan: claude\n' > "$proj/.specify/models.yml"
+
+  run_rc 0 env PATH="$SANDBOX/bin:$PATH" bash "$kit/scripts/spec-dispatch.sh" plan "$proj/.specify/specs/001-demo" --dry-run
+  assert_contains "$OUT" 'dispatch:  plan -> claude' 'the project dispatch mapping was not used'
+  # --dry-run prints the argv two spaces apart.
+  assert_contains "$OUT" '--model  sonnet' 'the project role override did not pick the model'
+  assert_contains "$OUT" '--effort  medium'
+  # No overlay in the other project, and no machine dispatch map: nothing to run.
+  run_rc 3 env PATH="$SANDBOX/bin:$PATH" bash "$kit/scripts/spec-dispatch.sh" plan "$other/.specify/specs/001-demo" --dry-run
+  run_rc 0 env PATH="$SANDBOX/bin:$PATH" bash "$kit/scripts/spec-dispatch.sh" plan "$other/.specify/specs/001-demo" --to claude --dry-run
+  assert_contains "$OUT" '--model  opus' 'another project inherited the overlay'
+}
+
 t_run_all

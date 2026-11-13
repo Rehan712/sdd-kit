@@ -93,12 +93,21 @@ two gates (always delegated, never self-run), and the cross-cutting
 `agents/security-reviewer.md` — that list, not a memory of it, decides when
 the pass runs).
 
+**Project routing first.** Before the table decides, ask the project's own:
+`bash "$S/project-routing.sh" match "$WT" implement --task "$SPEC" T###`
+(umbrella: the task's `[repo:]` worktree). Nothing printed — most projects —
+means the table above stands. An `agent` line is the writer in place of the
+kit expert; `skill` lines leave the writer as routed (`general-purpose` when
+no kit row fits) and are already in the brief, by path. Non-zero is a broken
+table: stop with `blocked`. Rules: `stack-routing.md` §Project routing.
+
 For multi-stack single tasks (e.g., one task touches `apps/web/` *and* `services/api/`), split the work: dispatch each slice to its specialist in parallel, then merge. If you can't cleanly split it, dispatch to the stack expert whose files dominate and pass the other context in the prompt.
 
 **Model escalation.** Once per run, if `~/.sdd/models.yml` exists, read
-`~/.sdd/scripts/model-policy.sh get implement-hard claude alias` (the model's
-alias family — a full id in the policy maps to opus/sonnet/haiku/fable) and
-`~/.sdd/scripts/model-policy.sh get implement-hard claude effort`. Pass what
+`~/.sdd/scripts/model-policy.sh --project "$WT" get implement-hard claude alias`
+(the model's alias family — a full id in the policy maps to
+opus/sonnet/haiku/fable) and
+`~/.sdd/scripts/model-policy.sh --project "$WT" get implement-hard claude effort`. Pass what
 they print as the Agent tool's `model` **and** `effort` params — both: the
 hard tier is often the implementer's own model at a higher effort, and the
 model alone would repeat the dispatch unchanged — for: (a) any task marked `[hard]`, (b) any re-dispatch after a failed
@@ -107,6 +116,15 @@ acceptance (§4.4), and (c) every gate follow-up batch (`T###o*`/`T###a*`,
 that produced it. A lookup that prints nothing → omit that param; no policy →
 dispatch with no override. Escalate on retry, always: repeating a failure at the same tier
 wastes the round.
+
+**Project model overrides.** Same run, once:
+`~/.sdd/scripts/model-policy.sh --project "$WT" overrides`. Each line is a
+role this project remaps (`role  tier  alias  effort`) — pass that alias and
+effort as `model`/`effort` on every spawn of the role's agent (`stack-expert`
+= any `*-expert`, `explore` = `sdd-scout`, the rest by name); a
+`general-purpose` writer hosting a project skill takes the `stack-expert`
+values from `… --project "$WT" get stack-expert claude alias` / `effort`.
+Nothing printed → no override. Escalation above still wins.
 
 ### 4. Execute the plan
 
@@ -141,6 +159,13 @@ built-in `security-review`, which reads the whole branch — per task it would
 re-review the same code once per task. CRITICAL/HIGH → `T###s<n>` follow-ups
 (`###` = the opponent gate task) under Reality Check, then stop (§6).
 Later rounds repeat it only when a follow-up touched a trigger.
+
+**Then the project's own reviewers, once.**
+`bash "$S/project-routing.sh" match "$WT" review --diff <base>` (umbrella:
+once per declared repo's worktree). One read-only review per line it prints,
+as `stack-routing.md` §Project review lays out; BLOCKING findings →
+`T###p<n>` follow-ups under Reality Check, dispatched like any task, and the
+opponent waits for them. Nothing printed → go straight to the opponent.
 
 ### 6. Stop conditions
 
