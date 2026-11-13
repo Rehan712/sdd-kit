@@ -558,7 +558,10 @@ case "$CMD" in
     echo "Model policy: $POLICY"
     if [[ -n "$PROJECT_POLICY" ]]; then
       echo "Project overlay: $PROJECT_POLICY"
-      echo "  overrides (already applied below): $(flatten_file "$PROJECT_POLICY" | awk -F'\t' '$1=="role" || $1=="dispatch" { printf "%s%s %s -> %s", (n++ ? "; " : ""), $1, $2, $3 } END { if (!n) printf "none" }')"
+      echo "  overrides (already applied below): $(flatten_file "$PROJECT_POLICY" | awk -F'\t' -v tiers=" $(flatten | awk -F'\t' '$1=="tier" { print $2 }' | tr '\n' ' ')" '
+        $1=="role" || $1=="dispatch" {
+          printf "%s%s %s -> %s%s", (n++ ? "; " : ""), $1, $2, $3, ($1=="role" && !index(tiers, " " $3 " ") ? " (skipped: no such tier here)" : "")
+        } END { if (!n) printf "none" }')"
     fi
     echo
     printf '%-20s %-16s %-22s %-22s %-22s\n' "ROLE" "TIER" "CLAUDE" "CODEX" "COPILOT"

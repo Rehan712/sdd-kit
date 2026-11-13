@@ -343,6 +343,9 @@ test_project_overlay_role_on_an_undefined_tier_falls_back_to_the_machine() {
   assert_contains "$OUT" "role 'stack-expert' names tier 'frontier', which this machine does not define"
   assert_contains "$OUT" "unknown role 'typo-role'"
   assert_contains "$OUT" 'model policy valid with project overlay'
+  # show does not claim a skipped row was applied.
+  run_rc 0 mp --project "$PROJ" show
+  assert_contains "$OUT" 'role stack-expert -> frontier (skipped: no such tier here); role explore -> reasoning;'
   run_rc 0 mp --project "$PROJ" overrides
   assert_eq "explore	reasoning	opus	high
 typo-role	reasoning	opus	high" "$OUT" 'overrides listed a role whose tier this machine lacks'

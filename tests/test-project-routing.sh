@@ -145,6 +145,25 @@ EOF
   assert_contains "$OUT" 'no routing table'
 }
 
+# What a teammate's editor does to the file: CRLF line ends, alignment colons,
+# no backticks. And a table inside an HTML comment renders as nothing, so it
+# routes nothing.
+test_crlf_table_is_read_and_a_commented_out_table_is_not() {
+  local p; p="$(project)"
+  printf '| signal | implement | review |\r\n|:---|:--:|---:|\r\n| apps/android/**, *.kt | android-implementer | android-reviewer |\r\n' \
+    > "$p/.specify/routing.md"
+  run_rc 0 "$ROUTE" check "$p"
+  run_rc 0 "$ROUTE" match "$p" review shared/Util.kt
+  assert_eq 'skill:android-reviewer' "$(names)" 'a CRLF table was not read'
+
+  printf '<!--\n| Signal | Implement |\n|---|---|\n| `apps/**` | `no-such-skill` |\n-->\n\n| Signal | Implement |\n|---|---|\n| `apps/tv/**` | `bigscreen-implementer` |\n' \
+    > "$p/.specify/routing.md"
+  run_rc 0 "$ROUTE" check "$p"
+  assert_contains "$OUT" 'project routing valid (1 row(s)' 'a commented-out table was read'
+  run_rc 0 "$ROUTE" match "$p" implement apps/android/A.kt
+  assert_eq '' "$OUT" 'a commented-out row routed a task'
+}
+
 # No routing.md is the common case: silent, and never an error.
 test_project_without_a_table_is_silent() {
   mkdir -p "$SANDBOX/plain"

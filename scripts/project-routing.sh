@@ -75,6 +75,9 @@ rows() {
   awk '
     function trim(s) { gsub(/^[ \t]+|[ \t]+$/, "", s); return s }
     function clean(s) { gsub(/`/, "", s); return trim(s) }
+    { sub(/\r$/, "") }                               # a table saved with CRLF line ends
+    /^[ \t]*<!--/ { incomment = 1 }                  # a commented-out table is not in force
+    incomment { if (/-->/) incomment = 0; ncol = 0; next }
     !/^[ \t]*\|/ { ncol = 0; next }                  # a table ends at a non-table line
     {
       line = $0; sub(/^[ \t]*\|/, "", line); sub(/\|[ \t]*$/, "", line)
