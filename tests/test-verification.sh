@@ -260,6 +260,61 @@ snapshot_fixture() {
   bash -c '. "$1"; vf_snapshot "$2" "$3" "$3" "$4"' _ "$SCRIPTS/verification-lib.sh" "$1" "$2" "$3"
 }
 
+# The bulk-hashed records are the per-file ones: every index record carries
+# the digest of its blob and every file record the digest of its file, whether
+# the working file is the blob, differs from it, is gone, is untracked, or has
+# a name the bulk tools cannot carry. The bulk path is the one taken, and a
+# digest line the tool left out costs that file the bulk result, nothing else.
+test_snapshot_bulk_matches_per_file() {
+  local spec repo v f=() want seen=0 indexed=0 staged='' worked='' baseline tool read_alone
+  hash_stdin() { bash -c '. "$1"; vf_hash /dev/stdin' _ "$SCRIPTS/verification-lib.sh"; }
+  spec="$(make_verification_git_dir snapshot)"
+  repo="$(cd "$spec/../../.." && pwd -P)"
+  printf 'staged\n' >> "$repo/src/parser.sh"
+  fixture_git -C "$repo" add src/parser.sh
+  printf 'unstaged\n' >> "$repo/src/parser.sh"
+  printf 'edited\n' >> "$repo/tests/check.sh"
+  printf 'x' > "$repo/back\\slash"; printf 'y' > "$repo/a space"; printf 'z' > "$repo/gone"
+  fixture_git -C "$repo" add 'back\slash' 'a space' gone
+  rm "$repo/gone"
+  printf 'new' > "$repo/untracked"
+  mkdir "$SANDBOX/count" "$SANDBOX/drop"
+  printf '#!/usr/bin/env bash\ncase " $* " in *" cat-file "*) echo x >> "%s";; esac\nexec "%s" "$@"\n' \
+    "$SANDBOX/cat-file.log" "$(command -v git)" > "$SANDBOX/count/git"
+  chmod +x "$SANDBOX/count/git"
+  run_rc 0 env PATH="$SANDBOX/count:$PATH" bash -c '. "$1"; vf_snapshot "$2" "$3" "$3" "$4"' _ \
+    "$SCRIPTS/verification-lib.sh" "$spec" "$repo" "$SANDBOX/manifest"
+  baseline="$OUT"
+  while IFS= read -r -d '' v; do
+    f+=("$v"); (( ${#f[@]} == 6 )) || continue
+    [[ "${f[0]}" != index ]] || indexed=$((indexed+1))
+    case "${f[1]}" in .specify/specs/*/STATUS.md|.specify/specs/*/spec.md|.specify/specs/*/plan.md|.specify/specs/*/tasks.md) f=(); continue;; esac
+    case "${f[0]}:${f[2]}" in
+      index:*) want="$(fixture_git -C "$repo" cat-file blob ":${f[1]}" | hash_stdin)"
+        assert_eq "$want" "${f[4]}" "index digest: ${f[1]}"; seen=$((seen+1))
+        [[ "${f[1]}" != src/parser.sh ]] || staged="${f[4]}";;
+      path:file) want="$(hash_stdin < "$repo/${f[1]}")"
+        assert_eq "$want" "${f[4]}" "file digest: ${f[1]}"; seen=$((seen+1))
+        [[ "${f[1]}" != src/parser.sh ]] || worked="${f[4]}";;
+      path:missing) assert_eq gone "${f[1]}" 'only the removed file is missing';;
+    esac
+    f=()
+  done < "$SANDBOX/manifest"
+  (( seen >= 9 )) || t_fail "only $seen records were compared"
+  [[ -n "$staged" && -n "$worked" && "$staged" != "$worked" ]] || t_fail 'a staged blob took its working file digest'
+  read_alone="$(wc -l < "$SANDBOX/cat-file.log")"
+  (( read_alone < indexed )) || t_fail 'every index blob was still read one process at a time'
+  tool=sha256sum; command -v sha256sum >/dev/null 2>&1 || tool=shasum
+  printf '#!/usr/bin/env bash\nkeep=()\nfor a; do case "$a" in */"a space") ;; *) keep+=("$a");; esac; done\nexec "%s" ${keep[@]+"${keep[@]}"}\n' \
+    "$(command -v "$tool")" > "$SANDBOX/drop/$tool"
+  chmod +x "$SANDBOX/drop/$tool"
+  : > "$SANDBOX/cat-file.log"
+  run_rc 0 env PATH="$SANDBOX/drop:$SANDBOX/count:$PATH" bash -c '. "$1"; vf_snapshot "$2" "$3" "$3" "$4"' _ \
+    "$SCRIPTS/verification-lib.sh" "$spec" "$repo" "$SANDBOX/manifest-drop"
+  assert_eq "$baseline" "$OUT" 'a digest line left out moved the identity'
+  assert_eq "$((read_alone+1))" "$(wc -l < "$SANDBOX/cat-file.log" | tr -d ' ')" 'a digest line left out cost more than its own file the bulk result'
+}
+
 # AC-020: every semantic input class invalidates; bookkeeping alone does not.
 test_capture_provenance() {
   local spec repo baseline changed declared path

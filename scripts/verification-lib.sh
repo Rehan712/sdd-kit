@@ -2314,6 +2314,8 @@ vf_physical_rel() ( # <physical repo root> <repo-relative path> <fold>
   elif [[ -n "$dir$base" ]]; then printf '%s\n' "$dir$base"
   else printf '.\n'; fi
 )
+# vf_bulk_names lists every arm below that is not a plain copy: a file it does
+# not list is hashed as it is, without passing through here.
 vf_semantic_file() { # <repo-relative path> <input-file> <output-file>
   case "$1" in
     .specify/specs/*/STATUS.md)
@@ -2352,7 +2354,59 @@ vf_path_content() { # <repo> <relative path> <output>
   if [[ -L "$1/$2" ]]; then cp -- "$1/$2" "$3"
   else vf_semantic_file "$2" "$1/$2" "$3"; fi
 }
-vf_path_record() { # <repo> <relative path> <output> <scratch> <own spec dir or empty> [fold]
+# Bulk hashing. A snapshot used to start four or more processes per file and
+# per pass (git cat-file, cp, sha256sum), so a repository carrying a shipped
+# spec's few thousand capture records cost minutes per snapshot, and a gate
+# takes three snapshots around every check. The files whose identity bytes are
+# their own bytes are hashed by one process per pass instead. It is only a
+# faster way to the same record: a bulk result is used when it is present and
+# names its file, and everything else still takes the per-file path, which
+# also decides every failure.
+#
+# vf_bulk_names lists those files in the order given: regular, not a link, not
+# rewritten by vf_semantic_file, not this spec's bookkeeping, and with a name
+# the tools below print and read back unchanged.
+vf_bulk_names() { # <repo> <NUL path list> <own> <fold> <names out>
+  local path
+  while IFS= read -r -d '' path; do
+    vf_bookkeeping_path "$path" "$3" "$4" && continue
+    # sha256sum escapes these in its output and hash-object reads names by
+    # line, unquoting a leading ". The root is part of the name both are given.
+    case "$1/$path" in *[[:cntrl:]\\\"]*) continue;; esac
+    # Every arm of vf_semantic_file that is not a plain copy.
+    case "$path" in .specify/specs/*/STATUS.md|.specify/specs/*/spec.md|.specify/specs/*/plan.md|.specify/specs/*/tasks.md) continue;; esac
+    [[ -f "$1/$path" && ! -L "$1/$path" ]] || continue
+    printf '%s\0' "$1/$path"
+  done < "$2" > "$5"
+}
+# One "<digest>  <name>" line per listed file, in order. A file the tool could
+# not read has no line and takes the per-file path, so the status is not read.
+vf_bulk_digests() { # <names> <digest lines out>
+  : > "$2"
+  [[ -s "$1" ]] || return 0
+  if command -v sha256sum >/dev/null 2>&1; then xargs -0 sha256sum < "$1" > "$2" || :
+  elif command -v shasum >/dev/null 2>&1; then xargs -0 shasum -a 256 < "$1" > "$2" || :; fi
+}
+# Git's object name for the raw bytes of each listed file, one per line, in
+# order. Git stops at a file it cannot read; the files after it have no line.
+vf_bulk_oids() { # <repo> <names> <object names out>; run where vf_git_local_unset has
+  tr '\0' '\n' < "$2" | git -C "$1" hash-object --no-filters --stdin-paths > "$3" || :
+}
+# Status 0 when <absolute name> is the next one listed, and VF_BULK_DIGEST is
+# then its digest, or empty when no line names it. fd 3 is the names file, fd 4
+# the digest lines; VF_BULK_NEXT and VF_BULK_LINE are read ahead. A line is
+# held until the file it names comes up, so a missing line costs one file the
+# bulk result and never shifts a digest onto another file.
+vf_bulk_take() { # <absolute name> -> VF_BULK_DIGEST
+  VF_BULK_DIGEST=''
+  [[ -n "$VF_BULK_NEXT" && "$1" == "$VF_BULK_NEXT" ]] || return 1
+  IFS= read -r -d '' VF_BULK_NEXT <&3 || VF_BULK_NEXT=''
+  [[ -n "$VF_BULK_LINE" ]] || IFS= read -r VF_BULK_LINE <&4 || VF_BULK_LINE=''
+  if [[ "${VF_BULK_LINE:0:64}" =~ ^[a-f0-9]{64}$ ]] && [[ "${VF_BULK_LINE:64}" == "  $1" || "${VF_BULK_LINE:64}" == " *$1" ]]; then
+    VF_BULK_DIGEST="${VF_BULK_LINE:0:64}"; VF_BULK_LINE=''
+  fi
+}
+vf_path_record() { # <repo> <relative path> <output> <scratch> <own spec dir or empty> [fold] [bulk digest of the file]
   local repo="$1" path="$2" output="$3" scratch="$4" own="$5" fold="${6:-0}" type mode digest link=''
   # Only the enumeration passes an anchor. A declared input arrives with an
   # empty one, so it can never take this return: it is hashed, or it was
@@ -2366,8 +2420,11 @@ vf_path_record() { # <repo> <relative path> <output> <scratch> <own spec dir or 
     elif [[ -d "$repo/$path" ]]; then echo "verification inputs: directory symlink requires explicit target files: $path" >&2; return 3; fi
   elif [[ -f "$repo/$path" ]]; then
     type='file'; mode=100644; [[ ! -x "$repo/$path" ]] || mode=100755
-    vf_path_content "$repo" "$path" "$scratch/semantic" || return 3
-    digest="$(vf_hash "$scratch/semantic")" || return 3
+    digest="${7:-}"
+    if [[ -z "$digest" ]]; then
+      vf_path_content "$repo" "$path" "$scratch/semantic" || return 3
+      digest="$(vf_hash "$scratch/semantic")" || return 3
+    fi
   elif [[ ! -e "$repo/$path" ]]; then type=missing; mode=''; digest=''
   else echo "verification inputs: unsupported file type: $path" >&2; return 3; fi
   printf '%s\0' path "$path" "$type" "$mode" "$digest" "$link" >> "$output"
@@ -2412,7 +2469,7 @@ vf_git() ( vf_git_local_unset || return 3; exec git "$@" )
 # Fixed arity six-field input records. Git supplies NUL-safe deterministic
 # tracked/index and untracked ordering; no GNU sort -z or line-split filenames.
 vf_snapshot() (
-  local spec="$1" repo="$2" cwd="$3" output="$4" tmp path record head oid mode stage key value tool resolved own real fold=0
+  local spec="$1" repo="$2" cwd="$3" output="$4" tmp path record head oid mode stage before after key value tool resolved own real fold=0
   spec="$(cd "$spec" && pwd -P)" || return 3
   repo="$(cd "$repo" && pwd -P)" || return 3
   cwd="$(cd "$cwd" && pwd -P)" || return 3
@@ -2433,18 +2490,48 @@ vf_snapshot() (
   (
     vf_git_local_unset || exit 3
     git -C "$repo" ls-files --stage -z > "$tmp/index" || exit 3
+    # An index blob is not read when the working file is that blob. Git names
+    # the file's raw bytes (no filters) before and after they are hashed, and
+    # an equal object name is equal bytes, so a file that changed in between
+    # in either direction takes the per-file path.
+    # shortcut: a file rewritten twice in that moment, away from the blob and
+    # back, would lend the blob its other bytes; hashing a private copy closes
+    # it, at the cost of copying the source for every snapshot.
+    while IFS= read -r -d '' record; do printf '%s\0' "${record#*$'\t'}"; done < "$tmp/index" > "$tmp/index-paths"
+    vf_bulk_names "$repo" "$tmp/index-paths" "$own" "$fold" "$tmp/index-names"
+    vf_bulk_oids "$repo" "$tmp/index-names" "$tmp/index-oids"
+    vf_bulk_digests "$tmp/index-names" "$tmp/index-digests"
+    vf_bulk_oids "$repo" "$tmp/index-names" "$tmp/index-oids-after"
+    exec 3< "$tmp/index-names" 4< "$tmp/index-digests" 5< "$tmp/index-oids" 6< "$tmp/index-oids-after"
+    VF_BULK_LINE=''; IFS= read -r -d '' VF_BULK_NEXT <&3 || VF_BULK_NEXT=''
     while IFS= read -r -d '' record; do
       path="${record#*$'\t'}"; head="${record%%$'\t'*}"
       vf_bookkeeping_path "$path" "$own" "$fold" && continue
       read -r mode oid stage <<< "$head"
       [[ "$mode" != 160000 ]] || { echo "verification inputs: submodule requires explicit transitive inputs: $path" >&2; exit 3; }
-      git -C "$repo" cat-file blob "$oid" > "$tmp/blob" || exit 3
-      vf_semantic_file "$path" "$tmp/blob" "$tmp/semantic" || exit 3
-      printf '%s\0' index "$path" "$mode" "$stage" "$(vf_hash "$tmp/semantic")" '' >> "$tmp/inputs"
+      if vf_bulk_take "$repo/$path"; then
+        IFS= read -r before <&5 || before=''
+        IFS= read -r after <&6 || after=''
+        [[ "$before" == "$oid" && "$after" == "$oid" ]] || VF_BULK_DIGEST=''
+      fi
+      if [[ -z "$VF_BULK_DIGEST" ]]; then
+        git -C "$repo" cat-file blob "$oid" > "$tmp/blob" || exit 3
+        vf_semantic_file "$path" "$tmp/blob" "$tmp/semantic" || exit 3
+        VF_BULK_DIGEST="$(vf_hash "$tmp/semantic")" || exit 3
+      fi
+      printf '%s\0' index "$path" "$mode" "$stage" "$VF_BULK_DIGEST" '' >> "$tmp/inputs"
     done < "$tmp/index"
   ) || return 3
   vf_source_paths "$repo" "$tmp/paths" || return 3
-  while IFS= read -r -d '' path; do vf_path_record "$repo" "$path" "$tmp/inputs" "$tmp" "$own" "$fold" || return 3; done < "$tmp/paths"
+  vf_bulk_names "$repo" "$tmp/paths" "$own" "$fold" "$tmp/path-names"
+  vf_bulk_digests "$tmp/path-names" "$tmp/path-digests"
+  exec 3< "$tmp/path-names" 4< "$tmp/path-digests"
+  VF_BULK_LINE=''; IFS= read -r -d '' VF_BULK_NEXT <&3 || VF_BULK_NEXT=''
+  while IFS= read -r -d '' path; do
+    vf_bulk_take "$repo/$path" || :
+    vf_path_record "$repo" "$path" "$tmp/inputs" "$tmp" "$own" "$fold" "$VF_BULK_DIGEST" || return 3
+  done < "$tmp/paths"
+  exec 3<&- 4<&-
   while IFS= read -r -d '' path; do
     case "$path" in /*|../*|*/../*|*/..|..) echo 'verification inputs must be repo relative' >&2; return 3;; esac
     [[ -e "$repo/$path" || -L "$repo/$path" ]] || { echo "verification input missing: $path" >&2; return 3; }
