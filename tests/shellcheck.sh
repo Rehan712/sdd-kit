@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 # tests/shellcheck.sh — the kit's ShellCheck check, pinned to what the input
 # identity hashes, because the check is reuse-checked (O-015 review,
-# 2026-09-24). The files are scripts/*.sh and tests/*.sh as vf_source_paths
-# enumerates them, never an ignored local file a shell glob would add; and
+# 2026-09-24). The files are scripts/*.sh, tests/*.sh and the plugin's scripts
+# (any plugin/**.sh) as vf_source_paths enumerates them, never an ignored
+# local file a shell glob would add; and
 # ShellCheck reads no configuration from outside the repository: --norc skips
 # every .shellcheckrc (the checked file's directory up to /, ~/.shellcheckrc
 # and the XDG one) and SHELLCHECK_OPTS is unset.
@@ -36,7 +37,7 @@ files=()
 while IFS= read -r -d '' path; do
   case "$path" in
     scripts/*/*|tests/*/*) ;;
-    scripts/*.sh|tests/*.sh) [[ ! -f "$ROOT/$path" ]] || files+=("$path");;
+    scripts/*.sh|tests/*.sh|plugin/*.sh) [[ ! -f "$ROOT/$path" ]] || files+=("$path");;
   esac
 done < "$list"
 rm -f "$list"

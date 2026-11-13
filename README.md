@@ -4,7 +4,8 @@ A portable setup for **spec-driven development** (SDD): every non-trivial change
 captured as a spec, planned, decomposed into checkable tasks, implemented in an
 isolated git worktree, and blocked from shipping until **two adversarial gates**
 pass. Works across all your projects from one install, and drives Claude Code,
-Codex CLI, and Copilot CLI from the same canonical skill files.
+Codex CLI, and Copilot CLI from the same canonical skill files. Cursor and
+Antigravity get the same skills as single-agent adapters.
 
 > Spec → Plan → Tasks → Implement → Retro. Specs are the durable artifact; code is
 > what falls out.
@@ -31,9 +32,9 @@ scripts/setup.sh
 4. Symlinks each SDD skill and agent into every Claude home (`~/.claude`,
    `~/.claude_*`) — one link per item, your other skills are untouched.
 5. Generates Codex (`~/.codex`, plus every `~/.codex_*` profile home — the
-   `CODEX_HOME=~/.codex_gym codex` pattern) and Copilot (`~/.copilot`)
-   adapters from the canonical skills, if those CLIs are installed
-   (`--no-cli` to skip).
+   `CODEX_HOME=~/.codex_gym codex` pattern), Copilot (`~/.copilot`), Cursor
+   (`~/.cursor/skills`) and Antigravity (`~/.gemini/config/skills`) adapters
+   from the canonical skills, if those CLIs are installed (`--no-cli` to skip).
 6. Runs `sdd-doctor.sh` to verify.
 
 After install, `/sdd:onboard` researches every repo in `system-map.yml` and
@@ -42,6 +43,56 @@ registered repos have no brief. Existing installs: add `onboard: implementation`
 `review: implementation`, and `go: reasoning` to your machine-local `models.yml`
 roles (new installs get them from the example; `sdd-doctor.sh` lists every
 unmapped role with the command that maps it).
+
+### Install as a plugin
+
+The same install, started from inside the tool — no terminal clone. The
+plugin (`plugin/`) carries one skill, `sdd-setup`, which clones the kit to
+`~/.sdd-kit` and runs `scripts/setup.sh`; run it again later to update.
+
+| Tool | Install the plugin | Then |
+|---|---|---|
+| Claude Code | `/plugin marketplace add Rehan712/sdd-kit`, then `/plugin install sdd-kit@sdd-kit` (shell: `claude plugin install sdd-kit --marketplace Rehan712/sdd-kit`) | `/sdd-kit:sdd-setup` |
+| Codex | `codex plugin marketplace add Rehan712/sdd-kit`, then `codex plugin add sdd-kit@sdd-kit` | ask for the `sdd-setup` skill |
+| Copilot CLI | `copilot plugin marketplace add Rehan712/sdd-kit`, then `copilot plugin install sdd-kit@sdd-kit` | ask for the `sdd-setup` skill |
+| Antigravity | `agy plugin install https://github.com/Rehan712/sdd-kit` | ask for the `sdd-setup` skill |
+| Cursor | Settings → Customize → *From GitHub Repository* → `Rehan712/sdd-kit` | ask for the `sdd-setup` skill |
+
+Start a new session afterwards so the installed skills load.
+
+Why the plugin is an installer and not the kit itself:
+
+- **A plugin folder is replaced on every update**, and the hub holds this
+  machine's `registry.yml`, `models.yml`, repo briefs and umbrella specs.
+  They would be lost, so the hub stays a git clone outside the plugin.
+- **Plugin content is static.** The model policy stamps a model and effort
+  into each skill and agent per machine, and the Codex and Copilot adapters
+  are generated; a plugin can ship neither.
+- **Plugin names are prefixed.** Shipped as Claude Code plugin content the
+  skills load as `/sdd-kit:sdd-specify` and the agents as `sdd-kit:opponent`
+  (measured on Claude Code 2.1.322), and Claude Code ignores `hooks:` in a
+  plugin agent, which drops the scout's Bash guard.
+
+So there is one install path, and the plugin is a second way to start it.
+Uninstalling the plugin leaves the kit in place (`sync.sh --remove` unlinks it).
+
+How far each tool goes:
+
+| Tool | Skills | Gates run as | Model policy |
+|---|---|---|---|
+| Claude Code | native, stamped | separate subagents | per skill and agent |
+| Codex | generated adapters | separate subagents | per-tier profiles |
+| Copilot CLI | generated agents | review passes in the same session | model pinned per agent |
+| Cursor, Antigravity | generated pointers to the hub's skill files | review passes in the same session | none — the session's model |
+
+Cursor and Antigravity support is new. Each generated skill is a short file
+that sends the session to the canonical one under `~/.sdd/skills/` — Antigravity
+loads only the first 24000 bytes of a skill, which `sdd-implement` exceeds.
+Antigravity's CLI was seen loading them; Cursor's loader was not exercised
+(the skills follow its documented naming rules). No spec has been run end to
+end on either. Cursor also loads `~/.claude/skills` and
+`~/.codex/skills`, so on a machine with those homes it lists the SDD skills
+more than once — use the copy under `~/.cursor/skills`.
 
 Per project, one-time: create `.specify/stack.yml` (the skills do this for you on
 first `/sdd:specify` if it's missing):
@@ -510,7 +561,7 @@ All in `scripts/` (stable path: `~/.sdd/scripts/`):
 | `scout-guard.sh` | the read-only scout's Bash backstop — a `PreToolUse` hook (wired in `agents/sdd-scout.md`) that refuses the common writes (git writes, kit state scripts, file mutation, redirects to a file, installs, deploys); it judges only the command, so a search for those words still runs. A backstop, not a sandbox |
 | `spec-brief.sh <spec-dir> T###` | write a task's implementation brief from the artifacts — the task block, the REQ/AC text and the plan sections and FM/INV rows its *Refs:* name, verbatim — into `notes/verification/briefs/T###.md`; the invoker hands the implementer the path instead of retyping the plan (`--stdout` to print) |
 | `sync.sh` | verify/repair the per-item symlinks into Claude homes (`--check`); prunes stale links; `--remove` uninstalls them |
-| `build-adapters.sh` | regenerate Codex/Copilot adapters from the skills |
+| `build-adapters.sh` | regenerate the Codex, Copilot, Cursor and Antigravity adapters from the skills |
 | `sdd-doctor.sh` | validate the kit, home wiring, adapters, system map, and any project's `.specify/` layout — including its optional `models.yml` overlay and `routing.md` (`--all`, `--hub-only`) |
 
 (`lib.sh` is the shared parsing library the others source — fence-bound
@@ -577,6 +628,9 @@ sdd-kit/
 │                             # spec→plan→tasks set the phase skills calibrate
 │                             # against — CI keeps it passing sdd-analyze
 ├── knowledge/                # Cross-project lessons — grows via /sdd:retro
+├── plugin/                   # The installer plugin (one skill: sdd-setup) for Claude
+│                             # Code, Codex, Copilot, Cursor and Antigravity; listed by
+│                             # .claude-plugin/ and .cursor-plugin/marketplace.json
 ├── scripts/                  # everything in the table above
 └── tests/                    # the kit's own test suite (tests/run.sh)
 ```
