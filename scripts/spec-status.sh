@@ -8,7 +8,7 @@
 #
 # Enum fields (leading token, case-insensitive):
 #   phase          specify plan tasks implement review shipped abandoned
-#   active_tool    claude codex copilot none
+#   active_tool    claude codex copilot cursor antigravity none
 #   plan_review    not-run SOUND UNSOUND BLOCKED WAIVED
 #   opponent       not-run CLEARED CHALLENGED BLOCKED
 #   reality_check  not-run READY NEEDS FAILED       (NEEDS = "NEEDS WORK")
@@ -63,7 +63,7 @@ validate() {
   if [[ "$TARGET_FILE" == "STATUS.md" ]]; then
     case "$field" in
       phase)         allowed="specify plan tasks implement review shipped abandoned" ;;
-      active_tool)   allowed="claude codex copilot none" ;;
+      active_tool)   allowed="claude codex copilot cursor antigravity none" ;;
       plan_review)   allowed="not-run sound unsound blocked waived" ;;
       opponent)      allowed="not-run cleared challenged blocked" ;;
       reality_check) allowed="not-run ready needs failed" ;;

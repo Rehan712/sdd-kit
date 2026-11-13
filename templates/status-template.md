@@ -1,7 +1,7 @@
 ---
 spec: NNN-slug
 phase: specify          # specify | plan | tasks | implement | review | shipped | abandoned
-active_tool: none       # claude | codex | copilot | none — who currently holds the spec
+active_tool: none       # claude | codex | copilot | cursor | antigravity | none — who currently holds the spec
 branch: none            # spec/NNN-slug once cut, else none
 worktree: none          # absolute path once created, else none
 pr: none                # PR URL once opened — spec-pr.sh writes this itself

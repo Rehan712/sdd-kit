@@ -348,10 +348,23 @@ check_tool_adapters() {
   [[ -d "$HOME/.codex" ]] && have_codex=1
   [[ -d "$HOME/.copilot" ]] && have_copilot=1
 
+  # Cursor and Antigravity take one pointer skill per kit skill
+  # (build-adapters.sh); a pointer has no content to drift, only to be missing.
+  local sk skill missing
+  for sk in "cursor|$HOME/.cursor" "antigravity|$HOME/.gemini/config"; do
+    [[ -d "${sk#*|}" ]] || continue
+    missing=0
+    for skill in "$HUB_DIR"/skills/*/; do
+      [[ -f "${sk#*|}/skills/$(basename "$skill")/SKILL.md" ]] || missing=$((missing+1))
+    done
+    (( missing == 0 )) && pass "${sk%%|*}: every kit skill present" \
+      || warn "${sk%%|*}: $missing kit skill(s) missing — run scripts/build-adapters.sh"
+  done
+
   # No Codex/Copilot on this machine = nothing to check, not 14 warnings.
   # (build-adapters.sh likewise only generates adapters when the CLI dir exists.)
   if (( ! have_codex && ! have_copilot )); then
-    info "neither ~/.codex nor ~/.copilot exists — adapters not applicable on this machine"
+    info "neither ~/.codex nor ~/.copilot exists — their adapters are not applicable on this machine"
     echo
     return
   fi

@@ -16,14 +16,15 @@
 #   4. Links every SDD skill and agent into each Claude home (~/.claude and
 #      ~/.claude_*), one symlink per item — your other skills/agents are
 #      untouched. Runs scripts/sync.sh under the hood.
-#   5. If ~/.codex (or any ~/.codex_* profile home) or ~/.copilot exist,
-#      generates their adapters from the canonical skills via
-#      scripts/build-adapters.sh (model policy applied).
+#   5. If ~/.codex (or any ~/.codex_* profile home), ~/.copilot, ~/.cursor or
+#      ~/.gemini/config (Antigravity) exist, generates their adapters from the
+#      canonical skills via scripts/build-adapters.sh (model policy applied
+#      where the CLI has one).
 #   6. Runs scripts/sdd-doctor.sh to verify the install.
 #
 # Usage:
 #   scripts/setup.sh              # full install
-#   scripts/setup.sh --no-cli     # skip codex/copilot adapters
+#   scripts/setup.sh --no-cli     # skip the codex/copilot/cursor/antigravity adapters
 #   scripts/setup.sh --no-wizard  # first install: take default model policy, don't prompt
 #   scripts/setup.sh --relink     # ~/.sdd points at ANOTHER live clone: switch it here
 #   scripts/setup.sh --help
@@ -112,7 +113,7 @@ fi
 # --- 4. Claude homes ---
 "$KIT_DIR/scripts/sync.sh"
 
-# --- 5. Codex / Copilot adapters ---
+# --- 5. Codex / Copilot / Cursor / Antigravity adapters ---
 if (( ! NO_CLI )); then
   "$KIT_DIR/scripts/build-adapters.sh"
 fi

@@ -243,6 +243,51 @@ test_adapters_record_their_own_cli_as_active_tool() {
 
 frontmatter_of() { awk 'NR==1 && $0=="---" {i=1; next} i && $0=="---" {exit} i' "$1"; }
 
+# Cursor and Antigravity take plain skill folders: each gets every skill, under
+# a name its loader accepts (lowercase-hyphen, equal to the folder — the
+# canonical `sdd:plan` is neither), as a pointer to the canonical file with the
+# persona-pass rules and its own CLI as the spec's holder. A machine without
+# those homes gets nothing made.
+test_cursor_and_antigravity_get_plain_skills_only_where_they_exist() {
+  local kit cli dir f; kit="$(stage_kit)"
+  run_rc 0 run_adapters "$kit"
+  [[ ! -e "$SANDBOX/home/.cursor" && ! -e "$SANDBOX/home/.gemini" ]] \
+    || t_fail 'a Cursor or Antigravity home was created on a machine without one'
+
+  mkdir -p "$SANDBOX/home/.cursor" "$SANDBOX/home/.gemini/config"
+  run_rc 0 run_adapters "$kit"
+  for cli in cursor antigravity; do
+    dir="$SANDBOX/home/.cursor/skills"
+    [[ "$cli" == cursor ]] || dir="$SANDBOX/home/.gemini/config/skills"
+    f="$dir/sdd-plan/SKILL.md"
+    [[ -f "$f" ]] || { t_fail "$cli: sdd-plan not generated"; continue; }
+    assert_eq 'name: sdd-plan' "$(frontmatter_of "$f" | grep '^name:')" "$cli: skill name is not its folder name"
+    OUT="$(cat "$f")"
+    assert_contains "$OUT" '/.sdd/skills/sdd-plan/SKILL.md' "$cli: does not point at the canonical skill"
+    assert_contains "$OUT" 'Single-agent adaptation' "$cli: no persona-pass preamble"
+    assert_contains "$OUT" 'Never skip a gate' "$cli: the gate rule is missing"
+    assert_not_contains "$OUT" 'Copilot' "$cli: carries Copilot's handoff note"
+    OUT="$(cat "$dir/sdd-implement/SKILL.md")"
+    assert_contains "$OUT" "active_tool: $cli" "$cli sdd-implement does not record $cli"
+    assert_not_contains "$OUT" 'active_tool: claude' "$cli sdd-implement records claude"
+    [[ -f "$dir/aws-serverless-lambda-services-arch/SKILL.md" ]] \
+      || t_fail "$cli: the non-SDD skill was not generated"
+    # sdd-onboard's description holds `remote: field`: a plain YAML scalar with
+    # `: ` in it is a syntax error to a strict parser, so it is quoted.
+    case "$(frontmatter_of "$dir/sdd-onboard/SKILL.md" | grep '^description:')" in
+      'description: "'*'"') ;;
+      *) t_fail "$cli: sdd-onboard's description is not a quoted scalar" ;;
+    esac
+    # Antigravity loads only the first 24000 bytes of a skill.
+    for f in "$dir"/*/SKILL.md; do
+      (( $(wc -c < "$f") < 24000 )) || t_fail "$cli: ${f#"$dir"/} is over Antigravity's 24000-byte limit"
+    done
+  done
+  # The holder those skills record is one spec-status.sh accepts.
+  mkdir -p "$SANDBOX/spec"; cp "$kit/templates/status-template.md" "$SANDBOX/spec/STATUS.md"
+  run_rc 0 bash "$kit/scripts/spec-status.sh" set "$SANDBOX/spec" active_tool antigravity
+}
+
 # The three tiers by what the work can cost: the scout (recon tier) and the
 # reviewers (reasoning tier) carry no Edit/Write tools, and the scout is
 # stamped from the `explore` role like any other agent.

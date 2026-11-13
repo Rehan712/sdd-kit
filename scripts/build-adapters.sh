@@ -20,6 +20,8 @@
 #                                               (if the home exists + models.yml)
 #   ~/.copilot/agents/sdd-<phase>.agent.md      (if ~/.copilot exists)
 #   plus copies of the gate personas for Copilot.
+#   ~/.cursor/skills/sdd-<phase>/SKILL.md        (if ~/.cursor exists)
+#   ~/.gemini/config/skills/sdd-<phase>/SKILL.md (Antigravity; if ~/.gemini/config exists)
 #
 # Model policy (models.yml, optional): each phase's tiered model is applied
 # the way each CLI allows —
@@ -56,6 +58,14 @@ done
 codex_label() {
   [[ "$1" == "$HOME/.codex" ]] && echo "codex" || echo "codex(${1##*/})"
 }
+
+# Skill-only CLIs, as <cli>|<user skills dir>: Cursor and Antigravity load
+# plain SKILL.md folders from these. The kit has no model policy, dispatch
+# target or wired delegation for them, so each gets the single-agent adapter
+# (skill_pointer below).
+SKILL_HOMES=()
+[[ -d "$HOME/.cursor" ]] && SKILL_HOMES+=("cursor|$HOME/.cursor/skills")
+[[ -d "$HOME/.gemini/config" ]] && SKILL_HOMES+=("antigravity|$HOME/.gemini/config/skills")
 
 CODEX_PREAMBLE='> **Codex adaptation.** Wherever this skill says to delegate to an agent, do this:
 > - **Spawning a kit subagent** — pass its name as the `agent_type` argument of
@@ -96,12 +106,8 @@ CODEX_PREAMBLE='> **Codex adaptation.** Wherever this skill says to delegate to 
 >   treat its findings as leads. Codex ships no `security-review`: the security-reviewer
 >   checklist is the pass.'
 
-COPILOT_PREAMBLE='> **Single-agent adaptation.** The SDD kit does not yet wire delegation on this CLI
-> (Copilot'\''s custom-agent handoff is proven — see `~/.sdd/knowledge/cli-subagent-delegation.md`
-> — wiring it is a planned follow-up). Until then, wherever this skill says to delegate
-> to an agent (a stack expert, the sdd-orchestrator, the opponent or reality-check gate),
-> do this instead:
-> - **Stack experts** — read the named agent file under `~/.sdd/agents/` and the matching
+# The persona-pass rules every CLI without kit-wired delegation shares.
+SINGLE_AGENT_RULES='> - **Stack experts** — read the named agent file under `~/.sdd/agents/` and the matching
 >   overlay under `~/.sdd/templates/stack-overlays/` — plus the style guide that overlay
 >   names under `~/.sdd/templates/style-guides/` — and apply them as your senior-reviewer
 >   lens while you do the work yourself.
@@ -120,6 +126,45 @@ COPILOT_PREAMBLE='> **Single-agent adaptation.** The SDD kit does not yet wire d
 >   the Next.js workflow skills) load under the names this CLI lists them by. `code-review`
 >   and `security-review` are Claude Code built-ins: where they are absent, the persona'\''s
 >   own checklist is the pass.'
+
+COPILOT_PREAMBLE='> **Single-agent adaptation.** The SDD kit does not yet wire delegation on this CLI
+> (Copilot'\''s custom-agent handoff is proven — see `~/.sdd/knowledge/cli-subagent-delegation.md`
+> — wiring it is a planned follow-up). Until then, wherever this skill says to delegate
+> to an agent (a stack expert, the sdd-orchestrator, the opponent or reality-check gate),
+> do this instead:
+'"$SINGLE_AGENT_RULES"
+
+# Cursor / Antigravity: the same rules, without Copilot's handoff note.
+SKILL_ONLY_PREAMBLE='> **Single-agent adaptation.** The SDD kit does not wire subagent delegation on this
+> CLI. Wherever this skill says to delegate to an agent (a stack expert, the
+> sdd-orchestrator, the opponent or reality-check gate), do this instead:
+'"$SINGLE_AGENT_RULES"
+
+# skill_pointer <cli> <name> <description> [sdd] — a skill-only CLI's adapter:
+# a short SKILL.md that sends the session to the canonical file in the hub
+# rather than embedding it. Antigravity loads only the first 24000 bytes of a
+# skill body, which sdd-implement exceeds, and a pointer cannot go stale. With
+# `sdd`, the persona-pass rules follow. The description is written as a
+# double-quoted YAML scalar: several contain `: `, which a strict parser
+# rejects in a plain one.
+skill_pointer() {
+  local cli="$1" name="$2" desc="$3"
+  desc="${desc//\\/\\\\}"; desc="${desc//\"/\\\"}"
+  printf -- '---\nname: %s\ndescription: "%s"\n---\n\n' "$name" "$desc"
+  cat <<EOF
+# $name
+
+This skill's instructions live in the SDD kit hub. Read
+\`~/.sdd/skills/$name/SKILL.md\` now, in full — to its last line, in as many
+reads as it takes — and follow it as this skill. Relative paths in it
+(\`references/...\`) are relative to that file.
+EOF
+  [[ "${4:-}" == sdd ]] || return 0
+  # The backticks are literal markdown, not a command substitution.
+  # shellcheck disable=SC2016
+  printf '\n%s\n> - **STATUS.md** — this CLI holds the spec: record `active_tool: %s` wherever\n>   that file says to record `claude`.\n' \
+    "$SKILL_ONLY_PREAMBLE" "$cli"
+}
 
 # frontmatter_field <file> <key> — read a key from the skill YAML frontmatter.
 frontmatter_field() {
@@ -237,6 +282,14 @@ for skill_dir in "$KIT_DIR"/skills/sdd-*/; do
     echo "  ${GREEN}✓${RESET} copilot: $phase${cp_model:+ (model: $cp_model)}"
     built=$((built+1))
   fi
+
+  for sk in ${SKILL_HOMES[@]+"${SKILL_HOMES[@]}"}; do
+    out="${sk#*|}/$phase/SKILL.md"
+    mkdir -p "$(dirname "$out")"
+    skill_pointer "${sk%%|*}" "$phase" "$desc" sdd > "$out"
+    echo "  ${GREEN}✓${RESET} ${sk%%|*}: $phase"
+    built=$((built+1))
+  done
 done
 
 # Non-SDD skills (e.g. architecture skills in skills/): plain adapters — no
@@ -277,6 +330,14 @@ for skill_dir in "$KIT_DIR"/skills/*/; do
     echo "  ${GREEN}✓${RESET} copilot: $name"
     built=$((built+1))
   fi
+
+  for sk in ${SKILL_HOMES[@]+"${SKILL_HOMES[@]}"}; do
+    out="${sk#*|}/$name/SKILL.md"
+    mkdir -p "$(dirname "$out")"
+    skill_pointer "${sk%%|*}" "$name" "$desc" > "$out"
+    echo "  ${GREEN}✓${RESET} ${sk%%|*}: $name"
+    built=$((built+1))
+  done
 done
 
 # Copilot benefits from local copies of the gate personas (it lists agents by dir).
@@ -411,7 +472,7 @@ EOF
 done
 
 if (( built == 0 )); then
-  echo "  ${DIM}·${RESET} neither ~/.codex nor ~/.copilot found — no adapters built"
+  echo "  ${DIM}·${RESET} no Codex, Copilot, Cursor or Antigravity home found — no adapters built"
 else
   echo "adapters built: $built"
 fi

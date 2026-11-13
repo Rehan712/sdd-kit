@@ -199,7 +199,7 @@ done
 
 echo "---"
 if (( REMOVE )); then
-  echo "removed: $fixed kit link(s). The clone itself, ~/.sdd, and any ~/.codex|~/.copilot adapters remain — delete those by hand if uninstalling for good."
+  echo "removed: $fixed kit link(s). The clone itself, ~/.sdd, and any Codex, Copilot, Cursor or Antigravity adapters remain — delete those by hand if uninstalling for good."
   exit 0
 fi
 if (( CHECK )); then
