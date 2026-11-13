@@ -15,6 +15,13 @@
 # Per-project settings live in <project>/.specify/:
 #   stack.yml       — stacks: [...] (+ optional base_branch: main — default dev)
 #   constitution.md — project overrides, `extends` the kit constitution
+#   models.yml      — optional: remap roles → tiers and dispatch for this
+#                     project only (roles: / dispatch: — tiers stay in the
+#                     machine's models.yml). Read at runtime via
+#                     scripts/model-policy.sh --project <dir>
+#   routing.md      — optional: the project's own planning / implementation /
+#                     review skills and agents per file signal (start from
+#                     templates/routing-template.md; scripts/project-routing.sh)
 #   specs/          — one directory per spec (created by /sdd:specify)
 #
 # scripts/project-detect.sh resolves cwd → project root using .specify/stack.yml

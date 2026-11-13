@@ -13,7 +13,7 @@ next to it.
 `~/.sdd/templates/umbrella-guide.md` §Tasks for the `[repo:]` tagging and
 contract-first stage ordering that override the defaults below.
 
-**Dispatched phase?** If `~/.sdd/scripts/model-policy.sh dispatch tasks`
+**Dispatched phase?** If `~/.sdd/scripts/model-policy.sh --project . dispatch tasks`
 prints a CLI other than the one you are running on, offer
 `bash ~/.sdd/scripts/spec-dispatch.sh tasks <spec-dir>` (headless run there;
 `sdd-analyze.sh` verifies the result on return; umbrella specs dispatch too —
@@ -61,6 +61,12 @@ output, ready for `spec-run.sh` — or `manual: <what to observe>`; the
 implementer must never have to invent the check) · ***Refs:***
 (REQ-###/AC-###, applicable FM-###/INV-### + plan section). Test tasks state that the test **names the
 AC id** it proves (`spec-ac-coverage.sh` checks it).
+
+**One platform per task.** A project with its own routing table
+(`<project>/.specify/routing.md` — `~/.sdd/scripts/project-routing.sh match
+<project> implement` lists its rows) hands each task to the implementer whose
+signal covers its *Files:*. Keep a task's files inside one row: work that
+spans two — Android and iOS, say — is two tasks, `[P]` when independent.
 
 **Bind the plan's proof to the behavior task.** Read the shared
 [`verification contract`](../../templates/verification-contract.md); use its

@@ -66,6 +66,11 @@ Shared mechanics (all phases):
 - Codegen regeneration is its own task per consumer repo.
 - Gates: no per-project resolution — use the hub defaults; both gates run
   ONCE, spec-wide.
+- Each repo's own config still applies to its slice: its `.specify/routing.md`
+  (project skills and agents — `project-routing.sh` against that repo's
+  checkout or worktree) and its `.specify/models.yml` (`model-policy.sh
+  --project <that repo's worktree>`). Hub-rooted phases — plan, tasks, retro —
+  run on the machine policy; `/sdd:plan` asks each declared repo's Plan rows.
 - Ship: one PR task per declared repo (`spec-pr.sh --repo <name> <spec-dir>`);
   merge/deploy expectation providers-before-consumers in the rollout task.
 
@@ -83,7 +88,10 @@ Pre-flight (replaces the single-repo steps):
 
 Per task: the tagged repo's worktree is the working root; its *Files:* are
 relative to that repo; read that repo's stack overlays and
-`~/.sdd/briefs/<name>.md`. A change that "also needs a tweak" in a sibling
+`~/.sdd/briefs/<name>.md`. Project routing and model overrides are that
+repo's — every `project-routing.sh` / `model-policy.sh --project` call takes
+the task's `[repo:]` worktree; the project reviewers run once per declared
+repo, each over its own diff, before the spec-wide opponent. A change that "also needs a tweak" in a sibling
 repo is a NEW task for that repo — never a cross-worktree edit.
 
 Orchestrated (--all): pass the orchestrator the hub spec dir, a repo table

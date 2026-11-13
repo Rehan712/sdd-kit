@@ -97,4 +97,31 @@ test_doctor_surfaces_unmapped_roles() {
   assert_contains "$OUT" 'model-policy.sh set role go <tier>'
 }
 
+# The doctor reads a project's optional config: a valid model overlay passes
+# and its inert row is a warning; a routing table naming a skill nobody can
+# load is an error.
+test_doctor_checks_project_model_overlay_and_routing() {
+  local kit proj; kit="$(stage)"; proj="$SANDBOX/home/proj"
+  run_rc 0 in_home bash "$kit/scripts/setup.sh" --no-wizard --no-cli
+  mkdir -p "$proj/.specify/specs" "$proj/.claude/skills/android-implementer"
+  printf 'stacks: [rust]\n' > "$proj/.specify/stack.yml"
+  : > "$proj/.specify/constitution.md"
+  : > "$proj/.claude/skills/android-implementer/SKILL.md"
+  printf 'projects:\n  - name: p\n    path: "~/proj"\n    stacks: [rust]\n' > "$kit/registry.yml"
+  printf 'roles:\n  stack-expert: reasoning\n  explore: no-such-tier\n' > "$proj/.specify/models.yml"
+  printf '| Signal | Implement |\n|---|---|\n| `*.kt` | `android-implementer` |\n' > "$proj/.specify/routing.md"
+  run_rc 0 in_home bash "$kit/scripts/sdd-doctor.sh" "$proj"
+  assert_contains "$OUT" 'models.yml overlay valid'
+  assert_contains "$OUT" "models.yml overlay: role 'explore' names tier 'no-such-tier'"
+  assert_contains "$OUT" 'routing.md valid'
+
+  printf '| Signal | Implement |\n|---|---|\n| `*.kt` | `ios-implementer` |\n' > "$proj/.specify/routing.md"
+  printf 'tiers:\n  reasoning:\n    claude_model: haiku\n' > "$proj/.specify/models.yml"
+  run_rc 1 in_home bash "$kit/scripts/sdd-doctor.sh" "$proj"
+  assert_contains "$OUT" 'models.yml overlay invalid'
+  assert_contains "$OUT" 'project overlay defines tiers:'
+  assert_contains "$OUT" 'routing.md invalid'
+  assert_contains "$OUT" '"ios-implementer" (implement) is not a project agent'
+}
+
 t_run_all

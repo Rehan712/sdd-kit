@@ -74,4 +74,34 @@ test_brief_does_not_change_the_input_manifest() {
   run_rc 0 "$SCRIPTS/spec-gate.sh" accept "$spec" T001 "$spec/notes/verification/returns/T001.txt"
 }
 
+# A project with its own routing table: the brief names the skill and agent
+# files for the task's *Files:*, so the implementer reads them on any CLI.
+test_brief_lists_the_project_skills_for_the_task_files() {
+  local proj="$SANDBOX/proj" spec
+  mkdir -p "$proj/.specify/specs" "$proj/.claude/skills/api-implementer" "$proj/.claude/agents"
+  cp -R "$EXAMPLE" "$proj/.specify/specs/001-api-key-expiry"
+  spec="$(cd "$proj/.specify/specs/001-api-key-expiry" && pwd)"; proj="$(cd "$proj" && pwd)"
+  printf 'stacks: []\n' > "$proj/.specify/stack.yml"
+  : > "$proj/.claude/skills/api-implementer/SKILL.md"
+  printf -- '---\nname: docs-writer\nmodel: sonnet\n---\n' > "$proj/.claude/agents/docs-writer.md"
+  printf '| Signal | Implement |\n|---|---|\n| `src/middleware/**` | `api-implementer`, `aws-core:aws-iam` |\n| `docs/**` | `docs-writer` |\n' \
+    > "$proj/.specify/routing.md"
+
+  run_rc 0 "$BRIEF" "$spec" T003 --stdout
+  assert_contains "$OUT" 'Project routing — this project names its own skills and agents'
+  assert_contains "$OUT" "- skill \`api-implementer\`: $proj/.claude/skills/api-implementer/SKILL.md"
+  assert_contains "$OUT" '- plugin skill `aws-core:aws-iam`: load it with the Skill tool'
+  assert_not_contains "$OUT" 'docs-writer' 'the brief lists a row the task files do not match'
+  assert_contains "$OUT" '**T003** [hard] — Reject expired keys in auth middleware' 'the task block is gone'
+  run_rc 0 "$BRIEF" "$spec" T007 --stdout
+  assert_contains "$OUT" "- agent \`docs-writer\` (the writer this task routes to): $proj/.claude/agents/docs-writer.md"
+  run_rc 0 "$BRIEF" "$spec" T001 --stdout
+  assert_not_contains "$OUT" 'Project routing' 'a task no row covers got a routing header'
+
+  # A table that cannot be trusted stops the brief instead of dropping the skill.
+  printf '| Signal | Implement |\n|---|---|\n| `src/**` | `gone-skill` |\n' > "$proj/.specify/routing.md"
+  run_rc 1 "$BRIEF" "$spec" T003 --stdout
+  assert_contains "$OUT" 'invalid project routing table'
+}
+
 t_run_all

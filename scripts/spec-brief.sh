@@ -7,6 +7,11 @@
 # and the plan sections (`§N`) and FM/INV rows they name from plan.md — all
 # verbatim. The invoker hands the implementer the file's path.
 #
+# When the project has a routing table (.specify/routing.md), the skills and
+# agents it names for the task's *Files:* are listed by path under the header
+# (project-routing.sh) — so an implementer on any CLI reads the project's own
+# conventions without the invoker naming them.
+#
 # The brief lands in <spec-dir>/notes/verification/briefs/T###.md — spec
 # bookkeeping, outside the input manifest, so writing it never stales a
 # capture. `Source revision:` is the digest of spec.md, plan.md and the task
@@ -51,16 +56,7 @@ tmp="$(mktemp -d "${TMPDIR:-/tmp}/spec-brief.XXXXXX")" || exit 1
 trap 'rm -rf "$tmp"' EXIT
 
 # The task block: its checkbox line and the indented field lines under it.
-awk -v id="$TASK_ID" '
-  /^- \[[ xX~]\] \*\*T[0-9][0-9][0-9][a-z0-9]*\*\*/ {
-    match($0, /T[0-9][0-9][0-9][a-z0-9]*/)
-    on = (substr($0, RSTART, RLENGTH) == id)
-    if (on) print
-    next
-  }
-  on && /^[ \t]+[^ \t]/ { print; next }
-  { on = 0 }
-' "$SPEC_DIR/tasks.md" > "$tmp/task"
+task_block "$SPEC_DIR/tasks.md" "$TASK_ID" > "$tmp/task"
 [[ -s "$tmp/task" ]] || { echo "task $TASK_ID not found in $SPEC_DIR/tasks.md" >&2; exit 1; }
 
 # What the task's *Refs:* line names: ids, and plan sections after `§`.
@@ -68,10 +64,31 @@ refs="$(grep -E '^[[:space:]]*- \*Refs:\*' "$tmp/task" | head -1)"
 ids="$(printf '%s\n' "$refs" | grep -oE '(REQ|AC|CON|MET|FM|INV)-[0-9]{3}' | sort -u | tr '\n' ' ')"
 sections="$(printf '%s\n' "$refs" | grep -oE '§[0-9]+' | tr -d '§' | sort -un | tr '\n' ' ')"
 
+# The project's own skills and agents for the task's *Files:* (its
+# .specify/routing.md). An umbrella task names its repo; any other spec dir
+# sits inside its project. A broken table stops the brief: a dispatch that
+# went ahead would skip the project's conventions without saying so.
+route_dir="$SPEC_DIR"
+repo="$(head -1 "$tmp/task" | grep -oE '\[repo:[^]]+\]' | head -1 | sed -E 's/^\[repo:(.*)\]$/\1/')"
+if [[ -n "$repo" ]]; then route_dir="$("$HUB_DIR/scripts/system-map.sh" path "$repo" 2>/dev/null)" || route_dir=""; fi
+routing=""
+if [[ -n "$route_dir" && -d "$route_dir" ]]; then
+  routing="$("$HUB_DIR/scripts/project-routing.sh" match "$route_dir" implement --task "$SPEC_DIR" "$TASK_ID")" || exit 1
+fi
+
 {
   printf '# Brief: %s — spec %s\n\n' "$TASK_ID" "${SPEC_DIR##*/}"
   printf 'Mode: implementation\nSource revision: %s\nSpec dir: %s\n' \
     "$(cat "$SPEC_DIR/spec.md" "$SPEC_DIR/plan.md" "$tmp/task" > "$tmp/rev" && vf_hash "$tmp/rev" | cut -c1-16)" "$SPEC_DIR"
+  if [[ -n "$routing" ]]; then
+    printf '\nProject routing — this project names its own skills and agents for the files of this task.\n'
+    printf 'Read each before the first edit: on its conventions it outranks the stack overlay and the\n'
+    printf 'official skills; the task and the plan outrank it.\n'
+    printf '%s\n' "$routing" | awk -F'\t' '
+      $1 == "agent" { printf "- agent `%s` (the writer this task routes to): %s\n", $2, $3; next }
+      $3 == "-"     { printf "- plugin skill `%s`: load it with the Skill tool when the session lists it\n", $2; next }
+                    { printf "- skill `%s`: %s\n", $2, $3 }'
+  fi
   printf '\nEverything below is copied verbatim from tasks.md, spec.md and plan.md.\n'
   printf '\n## Task\n\n'
   cat "$tmp/task"

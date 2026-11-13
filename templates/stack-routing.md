@@ -6,6 +6,9 @@ a stack (overlay + expert), extend this table only. Agent names are the
 kebab-case `name:` in each agent's frontmatter (= its filename), used verbatim
 as the Agent tool's `subagent_type`.
 
+A project may bring its own skills and agents: its `.specify/routing.md` is
+asked **first** — §Project routing, below.
+
 ## Implementation routing (file/tech signal → agent)
 
 | Signal | Agent |
@@ -85,6 +88,73 @@ What a task needs beyond the rules — the task block, the REQ/AC text, the
 plan's anchors and seams — is copied, not retyped:
 `~/.sdd/scripts/spec-brief.sh <spec-dir> T###` writes it to
 `notes/verification/briefs/T###.md`, and the dispatch names that path.
+
+## Project routing — a project's own skills and agents
+
+A project that has its own planners, implementers or reviewers — one pair per
+platform, say: Android, iOS, big screen — declares them per file signal in
+`<project>/.specify/routing.md` (start from
+`~/.sdd/templates/routing-template.md`). Its rows come before this file's.
+
+**Never read that table yourself.** Ask `~/.sdd/scripts/project-routing.sh`:
+it matches the signals against paths and resolves every name to a file. Each
+output line is `<agent|skill>  <name>  <file to read, or - for a plugin
+skill>  <signal>`, in table order. No table prints nothing — most projects.
+A non-zero exit is a broken table: stop and report it, never dispatch around
+it — that is how a project's conventions get skipped without a word.
+
+| When | Ask | Do |
+|---|---|---|
+| `/sdd:plan`, reading its inputs | `project-routing.sh match <project> plan` | Every Plan row with its signal. Load the skills, and consult the agents, whose signal covers what the spec touches — alongside the official skills. What they settle goes into plan.md as a decision. |
+| Routing a task | `project-routing.sh match "$WT" implement --task <spec-dir> T###` | An `agent` line: that agent is the writer in place of the kit expert (the first one, when several match — a task spanning two platforms should have been two tasks). `skill` lines: the writer stays the expert this file routes to, `general-purpose` when no row above fits, and reads those files first. `spec-brief.sh` already lists the same lines, by path, in the brief — do not retype them. |
+| Before opponent round 1 | `project-routing.sh match "$WT" review --diff <base>` | One read-only review per line — §Project review. |
+
+**Who wins.** On the project's own conventions, what a project skill or agent
+says outranks the official skills, the stack overlay and the style guide. The
+task, the plan and both constitutions outrank it. The artifact formats, the
+deterministic checks and the two gates are not its to change, and ponytail
+still bounds the change. A project agent has no kit persona: its dispatch
+carries the four rules of §What every implementer carries.
+
+**Models.** The stamped model of a kit agent is machine-wide, so a project's
+choices arrive as Agent-tool params:
+
+- Once per session: `~/.sdd/scripts/model-policy.sh --project "$WT" overrides`.
+  Each line is a role this project remaps — `role  tier  alias  effort`
+  (`<project>/.specify/models.yml`). Pass that alias and effort as `model` and
+  `effort` on every spawn of the role's agent: `stack-expert` is any
+  `*-expert`, `explore` is `sdd-scout`, the rest go by name. `-` → omit that
+  param. Prints nothing → nothing to pass. A phase role (`plan`, `tasks`,
+  `implement`, …) cannot change the session already running it; it applies
+  when the phase is dispatched.
+- `general-purpose` hosting a project skill has no stamp at all: pass
+  `model-policy.sh --project "$WT" get stack-expert claude alias` and
+  `… claude effort`, or it runs on the session's own, costlier model.
+- A project agent runs on the `model:` its own frontmatter pins.
+- `[hard]` tasks, retries and gate follow-ups still escalate to
+  `implement-hard` — looked up with `--project "$WT"` too.
+
+### Project review (the Review column)
+
+Once per spec, after the branch-wide security pass and before the first
+opponent round — the gate should attack code that already meets the project's
+own bar. For each line `match "$WT" review --diff <base>` prints:
+
+- `agent` → dispatch it (`subagent_type` = its name).
+- `skill` → `general-purpose`, told to read that file first and to edit
+  nothing, with `model`/`effort` from
+  `model-policy.sh --project "$WT" get security-reviewer claude alias` and
+  `… claude effort`.
+
+The prompt: the worktree path, the diff command (`git -C "$WT" diff
+<base>...HEAD`), the spec dir, the signal that matched, and "review only the
+files under your signal; return each finding as BLOCKING or NOTE with
+file:line and the project rule it breaks; edit nothing". BLOCKING findings
+become `T###p<n>` follow-ups (`###` = the opponent gate task) under Reality
+Check — normal implementation tasks, routed like any other; when they pass,
+the opponent runs. NOTEs go in the hand-off. Later rounds re-run a reviewer
+only when a follow-up touched its signal. No Agent tool: read the reviewer's
+file and do the pass yourself, before the opponent.
 
 ## Planning consultation (stack tag → expert to consult)
 

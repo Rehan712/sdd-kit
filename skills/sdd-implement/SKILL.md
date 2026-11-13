@@ -13,7 +13,7 @@ Phase 4 of the SDD workflow. Reads `tasks.md`, executes the next pending task
 `~/.sdd/templates/umbrella-guide.md` §Implement and follow it wherever it
 overrides this file. Everything below assumes single-repo.
 
-**Dispatched phase?** If `~/.sdd/scripts/model-policy.sh dispatch implement`
+**Dispatched phase?** If `~/.sdd/scripts/model-policy.sh --project . dispatch implement`
 prints a CLI other than the one you are running on, offer the dispatch and
 run locally only if the user declines; prints nothing → run here as normal.
 Single-repo: `bash ~/.sdd/scripts/spec-dispatch.sh implement <spec-dir>
@@ -97,6 +97,15 @@ Gate task (under `## Reality Check` or carrying `Agent:`) → **§5a**. Ship tas
 tie-breakers, Tests/Docs rows, and the cross-cutting security pass, whose
 trigger list lives in `agents/security-reviewer.md`).
 
+**Project routing first.**
+`bash ~/.sdd/scripts/project-routing.sh match "$WT" implement --task <live spec dir> T###`
+prints what the project's own table (`.specify/routing.md`) names for this
+task's files — nothing for most projects; non-zero is a broken table: stop
+and report it. An `agent` line is the writer, in place of the kit expert.
+`skill` lines leave the writer as routed (`general-purpose` when no kit row
+fits); the brief already lists them by path. Rules and models:
+`stack-routing.md` §Project routing.
+
 **Who edits — one answer per session:**
 
 - **You have the Agent tool (Claude Code): the routed expert edits, you do
@@ -120,7 +129,8 @@ note, no block.
 **Model escalation.** When dispatching via the Agent tool and
 `~/.sdd/models.yml` exists: for a task marked `[hard]`, for any re-dispatch
 after a failed acceptance, and for gate follow-ups (`T###o*`/`T###a*`), pass
-the output of `~/.sdd/scripts/model-policy.sh get implement-hard claude alias`
+the output of
+`~/.sdd/scripts/model-policy.sh --project "$WT" get implement-hard claude alias`
 as the Agent tool's `model` param (it prints opus/sonnet/haiku/fable — a full
 model id in the policy maps to its family) **and** the output of
 `… get implement-hard claude effort` as its `effort` param. Both: the hard
@@ -128,6 +138,13 @@ tier is often the implementer's own model at a higher effort, and the model
 alone would repeat the dispatch unchanged.
 Escalate on retry — never repeat a failure at the tier that just produced it.
 A lookup that prints nothing → omit that param; no policy → dispatch normally.
+
+**Project model overrides.** Once per session,
+`~/.sdd/scripts/model-policy.sh --project "$WT" overrides` lists the roles
+this project remaps (`.specify/models.yml`): pass each line's alias and
+effort on every spawn of that role's agent, as `stack-routing.md` §Project
+routing → Models spells out. Prints nothing → nothing to pass. Escalation
+above still wins.
 
 ### 4. Implement — the rules whoever edits follows
 
@@ -190,6 +207,11 @@ Gate tasks are **never run by you** — delegate via the Agent tool. Opponent
    that runs the built-in `security-review`. CRITICAL/HIGH → `T###s<n>`
    follow-ups (`###` = the opponent gate task) under Reality Check, and stop.
    Later rounds repeat it only when a follow-up touched a trigger.
+   **Then the project's own reviewers, once.**
+   `bash ~/.sdd/scripts/project-routing.sh match "$WT" review --diff <base>`
+   — one read-only review per line it prints, BLOCKING findings →
+   `T###p<n>` follow-ups under Reality Check, and stop until they pass
+   (`stack-routing.md` §Project review). Prints nothing → go on.
 1. **Resolve the persona file.** Opponent: the task's `Agent:` field
    (`~/.sdd/agents/opponent.agent.md`). Reality-check, in order: task `Agent:`
    field → project constitution's "Reality-check agent" pin → project-local
@@ -210,7 +232,7 @@ Gate tasks are **never run by you** — delegate via the Agent tool. Opponent
    policy pre-stamped). Project-local personas: `subagent_type: general-purpose`
    with the persona file's full contents leading the dossier; if
    `~/.sdd/models.yml` exists, pass the output of
-   `~/.sdd/scripts/model-policy.sh get reality-check claude alias` as the Agent
+   `~/.sdd/scripts/model-policy.sh --project "$WT" get reality-check claude alias` as the Agent
    tool's `model` param (prints nothing → omit it).
 4. **Complete** through spec-gate round --complete after the floor and reservation
    required below. Record the validated verdict in STATUS.

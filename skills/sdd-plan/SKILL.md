@@ -13,7 +13,7 @@ implementation, writes `plan.md` next to it.
 Read `~/.sdd/templates/umbrella-guide.md` §Plan and follow it wherever it
 overrides this file.
 
-**Dispatched phase?** If `~/.sdd/scripts/model-policy.sh dispatch plan` prints
+**Dispatched phase?** If `~/.sdd/scripts/model-policy.sh --project . dispatch plan` prints
 a CLI other than the one you are running on, this phase is configured to run
 there — offer `bash ~/.sdd/scripts/spec-dispatch.sh plan <spec-dir>` (headless
 run on that CLI; output captured to notes/, artifacts verified on return;
@@ -54,6 +54,14 @@ on any ambiguity. Project root via `~/.sdd/scripts/project-detect.sh`.
   decision, so implementers transcribe it instead of re-deriving it. A
   feature with UI: run `ui-ux-pro-max`'s design-system step once, persist it
   (`design-system/<project>/MASTER.md`), and name that file in plan §6.
+- **Project routing** — `bash ~/.sdd/scripts/project-routing.sh match <project> plan`
+  prints the planning skills and agents this project's own
+  `.specify/routing.md` names, each with its signal (nothing for most
+  projects; non-zero → a broken table: stop and report). Load the skills, and
+  consult the agents in step 3, whose signal covers what the spec touches. On
+  the project's conventions they outrank the official skills and overlays;
+  what they settle is a plan.md decision too. `stack-routing.md` §Project
+  routing has the rules.
 - `~/.sdd/knowledge/*.md` — skim for relevance.
 - `~/.sdd/briefs/<repo>.md` when it exists. Freshness first:
   `~/.sdd/scripts/brief-status.sh repo <repo>` — on `stale`/`unknown`, warn

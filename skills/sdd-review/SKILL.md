@@ -110,7 +110,8 @@ Follow the protocol below, including exact-round authorization and refusal handl
 - **The script measures; you decide.** Never hand-parse PR state — trust
   `spec-ci.sh` exit codes; re-run it after every push.
 - **Follow-up grammar:** `T###c<n>` CI failures, `T###r<n>` review feedback —
-  siblings of `T###o<n>` (opponent) and `T###s<n>` (security). All are normal
+  siblings of `T###o<n>` (opponent), `T###s<n>` (security) and `T###p<n>`
+  (the project's own reviewers). All are normal
   implementation tasks and none inherits the Gate/Ship exemption: they carry
   Files/Acceptance/Verify kind/Tests/Verify/Refs, and deterministic acceptance
   on tick.

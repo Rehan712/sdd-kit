@@ -199,6 +199,21 @@ spec_declared_repos() { fm_list "${1:-}/spec.md" repos; }
 # 'alpha-api' and an undeclared repo passed as a declared one.
 list_has() { case " $1 " in *" $2 "*) return 0 ;; esac; return 1; }
 
+# task_block <tasks.md> <T###> — the task's checkbox line and the indented
+# field lines under it; empty when the task is not there.
+task_block() {
+  awk -v id="$2" '
+    /^- \[[ xX~]\] \*\*T[0-9][0-9][0-9][a-z0-9]*\*\*/ {
+      match($0, /T[0-9][0-9][0-9][a-z0-9]*/)
+      on = (substr($0, RSTART, RLENGTH) == id)
+      if (on) print
+      next
+    }
+    on && /^[ \t]+[^ \t]/ { print; next }
+    { on = 0 }
+  ' "$1"
+}
+
 # usage_from_header <script-path> — print the script's leading `#` comment
 # block (skipping the shebang) — immune to line-number drift, unlike sed -n.
 usage_from_header() {
