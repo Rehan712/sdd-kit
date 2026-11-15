@@ -49,7 +49,9 @@ overrides** (the phase skills' "Autopilot?" blocks point back here):
    implement), set it via `spec-status.sh` and append a STATUS Decisions line:
    `<date> — <artifact> auto-accepted (/sdd:go autopilot) — user pre-authorized at /sdd:go`.
 3. **Validators are hard stops.** `sdd-analyze.sh` errors after the tasks
-   phase: one fix round, re-run; still failing → stop the chain and report.
+   phase: one fix round (Claude Code: the tasks phase agent again, handed the
+   validator's output — rule 7), re-run; still failing → stop the chain and
+   report.
 4. **Gates at full strength, no waivers.** Run exactly as `/sdd:implement`
    §5a. A waiver is the user's explicit sign-off by definition — so where the
    round controller refuses a fourth or subsequent invocation, autopilot
@@ -64,9 +66,39 @@ overrides** (the phase skills' "Autopilot?" blocks point back here):
    stage: run the "Open PR" task here. Any other exit stops the chain
    (1 = two sessions made no progress, 8 = iteration cap, else the
    dispatcher's own code) — report it; never loop on the loop.
+   Those two scripts are the only way a phase leaves this CLI — never a
+   harness's own delegation tool: the script takes the model from the policy
+   and verifies the artifacts on return. A run that can outlast the
+   harness's shell limit (Claude Code stops a background shell at 2 h, and
+   the loop usually runs longer) is launched detached, `nohup` with its exit
+   code written to a file you wait on; a killed loop resumes by being run
+   again.
 6. **Every auto-decision is logged.** Autopilot is auditable, not silent:
    Decisions lines for acceptances, markers for unknowns, evidence lines and
    gate reports exactly as in normal mode.
+7. **Every phase on its own model.** Claude Code honors a skill's `model:`
+   only when the user types its command: a phase skill this chain loads with
+   the Skill tool gets the effort and keeps the conductor's model. So on
+   Claude Code never load `sdd:plan` or `sdd:tasks` here — run each as a
+   **phase agent**, one foreground Agent call (`run_in_background: false`; a
+   phase rule 5 sends to another CLI is dispatched instead):
+   - `subagent_type: general-purpose`; `model` and `effort` are the outputs
+     of
+     `~/.sdd/scripts/model-policy.sh --project <project-root> get <phase> claude alias`
+     and `… get <phase> claude effort` (umbrella: the hub is the project
+     root). A lookup that prints nothing → omit that param.
+   - The prompt is paths, not content — the phase, the spec dir, the project
+     root — and: "Read `~/.sdd/skills/sdd-<phase>/SKILL.md` and run that
+     phase end to end under the auto-mode contract in
+     `~/.sdd/skills/sdd-go/SKILL.md`. Launch the agents it calls for
+     yourself, in the foreground. Return the artifact path, any review
+     verdict, and any stop with its reason."
+   - Its reply is a pointer, not evidence: read STATUS.md and the artifact
+     before acting on a verdict or a stop.
+
+   Implement needs none of this — its work already runs in the
+   `sdd-orchestrator` agent, on that agent's own stamp. Single-agent CLIs:
+   follow the phase's SKILL.md inline.
 
 ## Step-by-step
 
@@ -93,9 +125,10 @@ this skill.
 
 ### 3. Plan
 
-Run the plan phase exactly as its skill defines (Claude Code: invoke the
-`sdd:plan` skill via the Skill tool; single-agent CLIs: follow
-`~/.sdd/skills/sdd-plan/SKILL.md` inline) under the auto-mode contract.
+Run the plan phase exactly as its skill defines, under the auto-mode contract
+— Claude Code: as a phase agent (contract rule 7), so it runs on the plan
+role's model and effort; single-agent CLIs: follow
+`~/.sdd/skills/sdd-plan/SKILL.md` inline.
 Spec still `draft` → auto-accept (contract rule 2). When plan.md is written
 and its review is SOUND (findings folded in), set it `accepted` with its
 Decisions line — this is the human checkpoint yolo removes, so the log entry
@@ -104,7 +137,8 @@ rework the approach unasked.
 
 ### 4. Tasks
 
-Run the tasks phase the same way. Then
+Run the tasks phase the same way — its own phase agent, on the tasks role's
+model and effort. Then
 `bash ~/.sdd/scripts/sdd-analyze.sh <spec-dir>` must exit 0 (contract
 rule 3 — one fix round). Auto-accept tasks.md.
 
@@ -145,6 +179,8 @@ deferred or stubbed. Next: `/sdd:review` — interactive from here on.
   merge belong to `/sdd:review`.
 - **A stopped chain is a success mode**, not a failure: report the marker or
   deadlock precisely and how to resume.
+- **A resume or handoff prompt names roles, never models.** The next session
+  may be on another CLI: write "follow the model policy", not "opus/high".
 - **One spec per run.** "Yolo all my specs" → run them one at a time,
   completing each chain (or hitting its stop) before the next.
 

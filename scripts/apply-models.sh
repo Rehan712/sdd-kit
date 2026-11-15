@@ -11,8 +11,11 @@
 #
 # An agent's stamp holds for its whole run. A skill's covers only the turn that
 # loaded it — the next turn (the user's reply, a background agent finishing) is
-# back at the session's own effort — so each stamped skill also opens with a
-# note (turn_note below) that tells the session how to stay on its tier. The
+# back at the session's own effort — and its model only when the user typed
+# the command: a skill loaded through the Skill tool gets the effort alone,
+# which is why /sdd:go runs each chained phase as an agent. So each stamped
+# skill also opens with a note (turn_note below) that tells the session how to
+# stay on its tier. The
 # note exists only where a stamp does: not in the canonical files, the
 # un-stamped copies, or the Codex/Copilot adapters built from them.
 #
@@ -111,7 +114,9 @@ stamp() {
 # completion notices started new turns, and the review findings were folded
 # into the plan at the session's medium instead of the policy's high). A
 # foreground agent keeps the turn; re-invoking the skill in a later turn puts
-# the stamp back and, while the skill is still in context, reloads nothing.
+# the effort back (never the model — headless probe, Claude Code 2.1.325: a
+# skill loaded by the Skill tool keeps the turn's model) and, while the skill
+# is still in context, reloads nothing.
 turn_note() {
   local name="$1" orchestrator=""
   case "$name" in
@@ -121,16 +126,18 @@ completion notice starts a later turn." ;;
   esac
   cat <<EOF
 **Stay on this phase's model policy.** The \`model:\`/\`effort:\` in this
-file's frontmatter cover only the turn that loaded this skill: any later turn
+file's frontmatter cover only the turn that loaded this skill — the
+\`model:\` only if the user typed its command: any later turn
 — the user's reply, the completion notice of a background agent or command —
-silently runs at the session's own effort. So launch the agents this phase
+silently runs at the session's own model and effort. So launch the agents this phase
 consults in the foreground (\`run_in_background: false\`; several in one
 message still run in parallel) and carry on in the same turn; an agent
 returning there is not a new turn.$orchestrator When a later turn continues this phase,
 make its first call the Skill tool with \`$name\` — alone, with no other tool
 call in that message: work sent alongside it still runs at the session's
-effort. It answers "already loaded" and puts the stamp back for the calls
-after it. If it returns this skill's text again instead (compaction or a
+effort. It answers "already loaded" and puts the effort back for the calls
+after it; the model comes back only when the user types the command again.
+If it returns this skill's text again instead (compaction or a
 resumed session dropped it), that is not a restart: continue from where
 STATUS.md and the artifacts stand.
 EOF

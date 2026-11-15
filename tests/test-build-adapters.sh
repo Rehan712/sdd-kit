@@ -325,6 +325,8 @@ test_stamped_skills_open_with_the_turn_note_and_nothing_else_does() {
     assert_contains "$text" "make its first call the Skill tool with \`$name\` — alone, with no other tool call in that message" \
       "$name does not restore its own stamp in a later turn"
     assert_contains "$text" 'that is not a restart' "$name restarts the phase when the skill text comes back"
+    assert_contains "$text" 'the model comes back only when the user types the command again' \
+      "$name claims a re-invoked skill restores its model"
   done
   assert_contains "$(tr -s '[:space:]' ' ' < "$kit/build/skills/sdd-implement/SKILL.md")" \
     'run of `--all` is the one launch that may stay in the background' 'implement lost the orchestrator exception'
@@ -337,6 +339,81 @@ test_stamped_skills_open_with_the_turn_note_and_nothing_else_does() {
   if grep -rlq 'Stay on this phase' "$KIT_DIR/skills" "$KIT_DIR/agents"; then t_fail 'a canonical file carries the note'; fi
   assert_contains "$(tr -s '[:space:]' ' ' < "$KIT_DIR/README.md")" 'covers only the turn that loaded it' \
     'the README no longer says what a skill stamp covers'
+}
+
+# Claude Code applies a skill's `model:` only when the user types its command:
+# a /sdd:go that loaded sdd-plan with the Skill tool planned on the conductor's
+# model (policy: fable; served: opus) and took the effort alone. The chain runs
+# plan and tasks as agents instead, on the alias + effort these lookups print.
+test_go_runs_plan_and_tasks_as_agents_on_their_policy_model() {
+  local kit text mp; kit="$(stage_kit)"; mp="$kit/scripts/model-policy.sh"
+  text="$(tr -s '[:space:]' ' ' < "$KIT_DIR/skills/sdd-go/SKILL.md")"
+  assert_contains "$text" 'never load `sdd:plan` or `sdd:tasks` here' 'go may load a phase skill inline'
+  assert_not_contains "$text" 'skill via the Skill tool' 'go loads a phase with the Skill tool again'
+  assert_contains "$text" 'subagent_type: general-purpose'
+  assert_contains "$text" 'one foreground Agent call (`run_in_background: false`' 'a phase agent may run in the background'
+  assert_contains "$text" 'model-policy.sh --project <project-root> get <phase> claude alias' 'go does not look up the phase model'
+  assert_contains "$text" '… get <phase> claude effort' 'go does not look up the phase effort'
+  assert_contains "$text" 'Its reply is a pointer, not evidence' 'go trusts a phase agent report'
+  assert_contains "$text" 'Claude Code: as a phase agent (contract rule 7)' 'the plan step does not use the phase agent'
+
+  # The lookups the skill names, on a policy where plan sits above the conductor.
+  printf 'tiers:\n  reasoning:\n    claude_model: claude-opus-5-5\n    claude_effort: medium\n  plan:\n    claude_model: claude-fable-5-2\n    claude_effort: high\nroles:\n  go: reasoning\n  tasks: reasoning\n  plan: plan\n' \
+    > "$kit/models.yml"
+  assert_eq fable "$(env HOME="$SANDBOX/home" bash "$mp" --project "$kit" get plan claude alias)" 'plan alias'
+  assert_eq high "$(env HOME="$SANDBOX/home" bash "$mp" --project "$kit" get plan claude effort)" 'plan effort'
+  assert_eq opus "$(env HOME="$SANDBOX/home" bash "$mp" --project "$kit" get tasks claude alias)" 'tasks alias'
+  # No policy: both lookups print nothing, so the agent call omits the params.
+  rm "$kit/models.yml"
+  assert_eq '' "$(env HOME="$SANDBOX/home" bash "$mp" --project "$kit" get plan claude alias 2>/dev/null)" 'no policy, no alias'
+}
+
+# A Codex session given a prompt that listed "opus/high" for the orchestrator
+# handed the work to Claude through its harness and never looked a role up.
+# Every model-policy block now ends with the rule that keeps a session on its
+# own provider; without a policy there is no block and no rule.
+test_adapters_keep_a_session_on_its_own_provider() {
+  local kit cli file; kit="$(stage_kit)"
+  printf 'tiers:\n  implementation:\n    codex_model: gpt-5.5\n    copilot_model: gpt-5.5\nroles:\n  implement: implementation\n' \
+    > "$kit/models.yml"
+  run_rc 0 env HOME="$SANDBOX/home" bash "$kit/scripts/build-adapters.sh"
+  for cli in codex copilot; do
+    file="$SANDBOX/home/.codex/skills/sdd-implement/SKILL.md"
+    [[ "$cli" == codex ]] || file="$SANDBOX/home/.copilot/agents/sdd-implement.agent.md"
+    # One line without the blockquote markers, so a re-wrapped rule reads the same.
+    OUT="$(sed 's/^> *//' "$file" | tr -s '[:space:]' ' ')"
+    assert_contains "$OUT" '**Stay on this provider.**' "$cli: no provider rule"
+    assert_contains "$OUT" "model-policy.sh get <role> $cli model" "$cli: the rule names another CLI's lookup"
+    assert_contains "$OUT" 'is naming roles' "$cli: another CLI's model names are not read as roles"
+    assert_contains "$OUT" "never a harness's own delegation tool" "$cli: a harness delegation may replace the dispatcher"
+  done
+  rm "$kit/models.yml"
+  run_rc 0 env HOME="$SANDBOX/home" bash "$kit/scripts/build-adapters.sh"
+  assert_not_contains "$(cat "$SANDBOX/home/.codex/skills/sdd-implement/SKILL.md")" 'Stay on this provider' \
+    'a provider rule without a model policy'
+}
+
+# The example policy is what setup.sh copies to models.yml: an active dispatch
+# map there routed every phase of every new install to one CLI, against its
+# own "single-provider setups: OMIT this block" note.
+test_example_policy_ships_no_active_dispatch_map() {
+  local kit; kit="$(stage_kit)"
+  cp "$KIT_DIR/models.example.yml" "$kit/models.yml"
+  run_rc 0 env HOME="$SANDBOX/home" bash "$kit/scripts/model-policy.sh" check
+  assert_eq '' "$(env HOME="$SANDBOX/home" bash "$kit/scripts/model-policy.sh" dispatch)" 'the example routes a phase to another CLI'
+  assert_contains "$(cat "$KIT_DIR/models.example.yml")" '# dispatch:' 'the commented dispatch example is gone'
+}
+
+# /sdd:go sends a phase to another CLI only through the kit's scripts, and its
+# handoff prompts name roles: both failures were observed in one Codex session.
+test_go_dispatches_through_the_scripts_and_hands_off_by_role() {
+  local text
+  text="$(tr -s '[:space:]' ' ' < "$KIT_DIR/skills/sdd-go/SKILL.md")"
+  assert_contains "$text" "never a harness's own delegation tool" 'go may dispatch through a harness tool'
+  assert_contains "$text" 'is launched detached' 'go runs a long dispatch inside a shell the harness stops'
+  assert_contains "$text" 'names roles, never models' 'go writes model names into a handoff'
+  assert_contains "$(tr -s '[:space:]' ' ' < "$KIT_DIR/skills/sdd-implement/SKILL.md")" 'names roles, never models' \
+    'implement writes model names into a handoff'
 }
 
 # A gate report is sealed by its round marker, and completion rejects anything

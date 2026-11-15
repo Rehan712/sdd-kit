@@ -288,6 +288,8 @@ one commit, this message; never push).
 
 Bounded run ("next 3", "through T007") → loop. Default → stop after one,
 summarize, offer the next. "Do all" → that's orchestrated mode, not a loop here.
+A resume or handoff prompt you write names roles, never models — the next
+session may be on another CLI: "follow the model policy", not "opus/high".
 
 ## Grounding rules — non-negotiable
 
