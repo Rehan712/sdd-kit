@@ -74,6 +74,18 @@ check_hub() {
   else
     fail "style guide named by an overlay is missing:$dangling"
   fi
+  # specify, plan and tasks pick knowledge files by their Cue line: a file
+  # without one is never opened, so the lesson in it is paid for again.
+  local kf uncued=""
+  for kf in "$HUB_DIR"/knowledge/*.md; do
+    [[ -f "$kf" ]] || continue
+    grep -q '^\*\*Cue:\*\*' "$kf" || uncued="$uncued ${kf##*/}"
+  done
+  if [[ -z "$uncued" ]]; then
+    pass "knowledge/ (every file opens with a **Cue:** line)"
+  else
+    warn "knowledge file with no **Cue:** line — no phase will open it:$uncued"
+  fi
   # Prerequisites the scripts shell out to. git is the floor for everything;
   # gh only for the PR half (spec-pr.sh, spec-ci.sh, /sdd:review).
   command -v git >/dev/null 2>&1 && pass "git on PATH" || fail "git not on PATH — worktrees, evidence capture and the gates all need it"

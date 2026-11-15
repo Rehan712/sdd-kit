@@ -670,8 +670,14 @@ sdd-kit/
   instantly. Never edit a copy in a home directory — `sdd-doctor.sh` catches
   both drift and a stale build.
 - **The feedback loop**: `/sdd:retro` files lessons into `knowledge/` and proposes
-  overlay amendments — which `/sdd:plan` reads on the next spec. Commit those; that
-  is how the kit gets smarter with every feature you ship.
+  overlay amendments. Every knowledge file opens with a `**Cue:**` line — the
+  kind of situation it applies to — and `/sdd:specify`, `/sdd:plan` and
+  `/sdd:tasks` list the cues and open only the files that match, so a lesson
+  is read where it applies and costs nothing elsewhere (`sdd-doctor.sh` warns
+  on a file with no cue). A mechanical defect becomes a proposed check rather
+  than more prose, and a lesson that was in place while its defect came back
+  is fixed at the cause, not restated. Commit those; that is how the kit gets
+  smarter with every feature you ship.
 
 ## Multi-machine
 
@@ -693,6 +699,10 @@ that is what makes the map and the briefs team-shared.
 The workflow follows the spec-kit school of spec-driven development
 ([github/spec-kit](https://github.com/github/spec-kit)), extended with adversarial
 pre-ship gates, cross-tool STATUS handoff, worktree isolation, and a retro loop.
+Three rules come from
+[Harness²](https://github.com/google-research/harness2) (ideas only, no code):
+a lesson is opened by a cue, prose is the form a later session can skip, and
+what a reviewer reads is evidence rather than instruction.
 
 ### Versioned verification workflow
 

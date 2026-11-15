@@ -1,5 +1,7 @@
 # CLI subagent delegation — what each CLI actually does
 
+**Cue:** a spec changes how the kit hands work to a subagent on Codex or Copilot, or relies on a model or effort pin reaching one.
+
 Empirical, headless probes on installed binaries; transcripts in
 `sdd-kit-public/001`'s `notes/`. Update this file when a CLI version changes
 the picture — every claim below is version-stamped. (learned: sdd-kit-public/001)

@@ -43,7 +43,10 @@ STATUS with no `plan_review` field predates the review: proceed.
 ### 2. Read inputs
 
 `STATUS.md` (decisions, open questions) → `spec.md` (REQ/AC ids) → `plan.md`
-(the architecture) → both constitutions.
+(the architecture) → both constitutions → the `~/.sdd/knowledge/` files whose
+cue matches (`grep -m1 -H '^\*\*Cue:\*\*' ~/.sdd/knowledge/*.md`, one cue per
+file; open only the matches). A lesson there shapes a task's *Acceptance:*
+and *Verify:* — a behavioral AC gets a live run, not a grep.
 
 ### 3. Decompose
 

@@ -1,5 +1,7 @@
 # Deterministic gates & acceptance evidence
 
+**Cue:** a spec adds or changes a script other tools trust (validator, detector, doctor), or an AC whose verb is behavioral — checks, emits, warns, refuses, skips — or one that rests on an empirical probe.
+
 How to build, test, and prove the deterministic scripts that gate SDD (staleness
 detectors, doctors, validators) — and how to accept the behavioral criteria that
 depend on them. Lessons harvested from shipped specs; each is dated and cited.

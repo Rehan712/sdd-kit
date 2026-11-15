@@ -39,6 +39,8 @@ Load both:
 
 These shape acceptance criteria. If a requirement violates the constitution, flag it during the interview rather than silently allowing it.
 
+Then the lessons earlier specs filed: `grep -m1 -H '^\*\*Cue:\*\*' ~/.sdd/knowledge/*.md` prints one cue per file. Open the files whose cue matches this feature, only those — each lesson there is a question to ask in step 4 before it becomes a gate finding.
+
 ### 3. Bootstrap the spec directory
 
 Single-repo spec: run `~/.sdd/scripts/new-spec.sh --project "<project-root>" "<short title>"`, where `<project-root>` is the **absolute path** from step 1 (the script rejects non-directories, so a bare project name fails loudly).

@@ -62,7 +62,9 @@ on any ambiguity. Project root via `~/.sdd/scripts/project-detect.sh`.
   the project's conventions they outrank the official skills and overlays;
   what they settle is a plan.md decision too. `stack-routing.md` §Project
   routing has the rules.
-- `~/.sdd/knowledge/*.md` — skim for relevance.
+- **Lessons from shipped specs** — `grep -m1 -H '^\*\*Cue:\*\*' ~/.sdd/knowledge/*.md`
+  prints one cue per file. Open the files whose cue matches this spec, only
+  those, and write what they settle into plan.md as a decision or an FM/INV row.
 - `~/.sdd/briefs/<repo>.md` when it exists. Freshness first:
   `~/.sdd/scripts/brief-status.sh repo <repo>` — on `stale`/`unknown`, warn
   and suggest `/sdd:onboard --refresh <repo>`; never auto-refresh from here.

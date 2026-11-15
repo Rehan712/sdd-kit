@@ -78,6 +78,27 @@ A lesson must be **generalizable**: "the CORS allowlist missed `mark-read`" is a
 changelog line, not a lesson. "Fail-closed allowlists need a dedicated test enumerating
 every public route, or dead routes get misclassified" is a lesson.
 
+**Then pick the form.** A lesson is an edit to the kit, and prose is the form
+a later session can skip. Take the first that fits:
+
+1. **A check** — the defect was mechanical (a field left out, an AC no test
+   names, a command never run). Name the script rule, `gate_checks` /
+   `checkpoints` entry, lint or template section that would have failed it.
+   The retro changes no code: it goes into retro.md as a proposed follow-up.
+2. **A knowledge entry** — the lesson fits one kind of situation. It costs
+   nothing until a later spec's cue matches.
+3. **An overlay or skill line** — read by every spec on that stack, so every
+   spec pays for it. Cut or merge a line there to make room.
+4. **A constitution line** — propose only (step 5).
+
+**Already filed?** Search before you write:
+`rg -n '<finding Class or mechanism>' ~/.sdd/knowledge ~/.sdd/templates/stack-overlays`
+(`grep -rn` when `rg` is not installed). A lesson that was in place while its
+defect came back did not hold — record it under **Lessons that did not hold**
+and do not restate it. Either no phase opened the file — rewrite its cue so
+this spec would have matched — or it was read and skipped: more prose will
+not hold it, so propose the check (form 1).
+
 Also capture **process lessons**: a stage that produced many follow-ups, an estimate
 that blew up (task count at tasks-time vs. final), a gate that had to run 3+ rounds —
 and what upstream change (spec question, plan section, task granularity) would fix it.
@@ -104,7 +125,12 @@ triage — recurring CI failure classes are overlay material.
 
 - **Hub `knowledge/` entries and overlay amendments: apply directly.** Keep each
   addition short (3–8 lines), dated, with a `(learned: <project>/NNN-slug)` pointer.
-  Don't duplicate — if the file already states the lesson, strengthen it instead.
+  A new `knowledge/<topic>.md` opens, under its title, with
+  `**Cue:** <the kind of situation that should make a later spec open it>` —
+  the pattern, not this spec's facts. `/sdd:specify`, `/sdd:plan` and
+  `/sdd:tasks` choose files by that line; `sdd-doctor.sh` warns on a file
+  without one. A lesson the file already states is not added twice (step 3,
+  "Already filed?").
 - **Constitution changes (hub or project): propose only.** Quote the exact diff in
   your summary; the owner applies or rejects.
 
@@ -134,7 +160,9 @@ check-back date.
 - **Evidence over memory.** Every lesson cites a gate round, finding, or follow-up
   task id. If you can't cite it, don't file it.
 - **Lessons are generalizable or they're not filed.** The bar: would this line have
-  changed how a *different* spec in a *different* project was built?
+  changed how a *different* spec in a *different* project was built? Filing
+  nothing is a valid retro; a lesson the evidence does not support costs
+  every later spec that reads it.
 - **Keep the hub lean.** One knowledge entry per concept. Amend, don't append
   duplicates. A knowledge/ file past ~150 lines needs splitting, not more bullets.
 - **Don't grade people.** The retro is about the system (spec quality, gate coverage,
