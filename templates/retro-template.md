@@ -18,6 +18,14 @@
 - **<lesson>** → `knowledge/<file>.md` (applied)
 - **<lesson>** → `stack-overlays/<tag>.md` (applied)
 - **<lesson>** → project constitution (PROPOSED — awaiting owner)
+- **<check>** → <script rule / gate_checks entry / lint / template section> (PROPOSED follow-up)
+- (or "none — the evidence supports no generalizable lesson")
+
+## Lessons that did not hold
+
+Already filed, and the defect came back anyway. Not restated — fixed at the cause.
+
+- `<knowledge/file.md or overlay> § <heading>` → <finding ID> → never opened (cue rewritten: <what>) | read and skipped (check proposed: <what>) (or "none")
 
 ## Shortcuts left (debt ledger)
 

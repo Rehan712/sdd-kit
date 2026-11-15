@@ -1,5 +1,7 @@
 # Monorepo patterns — when, not how
 
+**Cue:** deciding whether code belongs in a monorepo, a new package, or a split-out repo — before plan.md fixes the layout.
+
 The HOW (layout, workspace protocol, turbo/nx orchestration, tsconfig project
 references and their footguns, shared schemas, CI caching, smells) lives in
 `templates/stack-overlays/monorepo.md` (+ `bun-monorepo.md` for Bun

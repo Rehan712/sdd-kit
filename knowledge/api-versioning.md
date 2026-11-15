@@ -1,5 +1,7 @@
 # API versioning
 
+**Cue:** a spec adds, changes or removes something existing callers depend on — a route, a payload field, an event shape, a generated client type.
+
 How public APIs across these projects evolve without breaking callers.
 
 ## Default: additive evolution

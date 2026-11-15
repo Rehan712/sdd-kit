@@ -1,5 +1,7 @@
 # AWS account conventions
 
+**Cue:** a spec creates or renames AWS resources, accounts, IAM roles, secrets or networking — before naming, tagging or scoping any of them.
+
 Cross-project AWS norms. Override per-project only with explicit justification in `.specify/constitution.md`.
 
 ## Account structure

@@ -1,5 +1,7 @@
 # Cross-repo contracts
 
+**Cue:** the feature spans two or more repos, or depends on a repo another team owns (umbrella spec, `[EXTERNAL: …]`).
+
 How features that span repos (umbrella specs) stay coordinated without a
 shared codebase. Complements `api-versioning.md` (which covers how one API
 evolves); this covers how MANY repos ship one feature.

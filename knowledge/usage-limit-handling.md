@@ -1,5 +1,7 @@
 # Usage-limit handling for dispatched runs
 
+**Cue:** a dispatched or headless run stops on a provider usage limit, or a spec touches the limit classifier, its patterns or the resume scheduler.
+
 This note records the empirical provider messages recognized by the dispatched
 run wrapper. It documents observed wording, not a provider contract: providers
 may change their messages at any time. When wording drifts, update the cited
