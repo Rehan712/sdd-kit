@@ -229,7 +229,12 @@ The mapping is the **model policy**:
     next turn (a background agent finishing, your reply) is back at the
     session's own effort — so each stamped skill copy opens with a note
     telling the session to launch its agents in the foreground and to re-invoke
-    the skill first in a later turn, which puts the stamp back.
+    the skill first in a later turn, which puts the effort back. The model is
+    different: Claude Code applies a skill's `model:` only when you type its
+    command, never when the session loads the skill itself (a plain-language
+    request, or another skill chaining it) — so `/sdd:go` runs plan and
+    tasks each as an agent, passing the phase's model and effort from the
+    policy, and implement in the orchestrator agent.
   - *Codex CLI:* sessions pin models via one profile per tier
     (`~/.codex/sdd-<tier>.config.toml` → `codex --profile sdd-reasoning`);
     each adapter's preamble tells the agent to steer the session to its phase's
@@ -436,7 +441,12 @@ non-interactive by contract — the prompt forbids asking questions; unknowns be
 `[NEEDS CLARIFICATION]` markers and the run stops cleanly. **Single-provider
 setups: omit `dispatch:` entirely — nothing changes.** Each mapped CLI must be
 installed and authenticated; `sdd-doctor.sh` and `model-policy.sh check` flag
-mappings this machine can't honor.
+mappings this machine can't honor. The run uses the target CLI's home from the
+caller's environment (`CLAUDE_CONFIG_DIR`, `CODEX_HOME`, else that CLI's
+default) and prints it — with several accounts, export the one you mean. The
+example policy ships no active `dispatch:` map, and the Codex/Copilot adapters
+keep a session on its own provider: "follow the model policy" there means that
+CLI's models, and another provider is reached only through this script.
 
 ### Graph and loop (control flow lives in scripts)
 

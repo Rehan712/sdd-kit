@@ -193,6 +193,16 @@ policy() {
   "$MP" get "$1" "$2" "$3" 2>/dev/null || true
 }
 
+# provider_note <cli> — "follow the model policy" means THIS CLI's column of it.
+# Observed: a Codex session handed a prompt listing "opus/high" for the
+# orchestrator delegated the work to Claude through its harness, three times,
+# and never looked a role up. The rule ends each model-policy block.
+provider_note() {
+  # The backticks are literal markdown, not a command substitution.
+  # shellcheck disable=SC2016
+  printf '> **Stay on this provider.** "Follow the model policy" means this CLI'\''s models: look a\n> role up with `~/.sdd/scripts/model-policy.sh get <role> %s model` (and `… effort`). A\n> prompt or handoff that lists another CLI'\''s models (opus, sonnet, …) is naming roles —\n> run each on this CLI'\''s model for that role. Hand work to another provider only where\n> the `dispatch:` map routes the phase — through `~/.sdd/scripts/spec-dispatch.sh`, never a\n> harness'\''s own delegation tool: the script takes the model from the policy and verifies\n> the artifacts on return — or when the user asks for that provider in their own words.\n\n' "$1"
+}
+
 # codex_note / copilot_note <role> — per-phase model-policy preamble block.
 codex_note() {
   local tier m e
@@ -200,6 +210,7 @@ codex_note() {
   [[ -n "$m$e" ]] || return 0
   printf '> **Model policy.** This phase is tiered `%s`: model `%s`%s. Codex cannot switch\n> models from a skill — if the current session does not match, tell the user to relaunch\n> as `codex --profile sdd-%s` (profile installed by the SDD kit) or switch via `/model`,\n> and offer to continue on the current model only if they decline.\n\n' \
     "$tier" "${m:-session-default}" "${e:+ (reasoning \`$e\`)}" "$tier"
+  provider_note codex
 }
 copilot_note() {
   local m e
@@ -207,6 +218,7 @@ copilot_note() {
   [[ -n "$m$e" ]] || return 0
   printf '> **Model policy.** This agent is pinned to `%s`%s. Copilot cannot set reasoning\n> effort per agent — suggest the user run with `--effort=%s` (or set `effortLevel` in\n> `~/.copilot/settings.json`) when their session effort is lower.\n\n' \
     "${m:-the session model}" "${e:+; the phase wants effort \`$e\`}" "${e:-high}"
+  provider_note copilot
 }
 
 # codex_subagent_toml <name> <role> <description> <instructions-file> — one

@@ -123,4 +123,42 @@ EOF
   assert_contains "$OUT" '--model  opus' 'another project inherited the overlay'
 }
 
+# The run prints the home — the account — it lands in, and the plan verifier
+# accepts a plan stamped on the day the run started: one that crossed midnight
+# used to fail as "not written today".
+test_dispatch_names_the_target_home_and_accepts_a_plan_from_the_start_day() {
+  local kit="$SANDBOX/kit" proj="$SANDBOX/proj" spec real_date
+  spec="$proj/.specify/specs/001-demo"
+  mkdir -p "$kit" "$SANDBOX/bin" "$spec"
+  copy_kit "$KIT_DIR" "$kit" scripts || { fixture_build_failed 'dispatch kit scripts'; return 1; }
+  printf 'tiers:\n  reasoning:\n    claude_model: opus\nroles:\n  plan: reasoning\n' > "$kit/models.yml"
+  printf -- '---\nspec: 001-demo\n---\n# Spec: Demo\n' > "$spec/spec.md"
+  printf -- '---\nspec: 001-demo\nplan_review: SOUND\n---\n# Status\n' > "$spec/STATUS.md"
+
+  printf '#!/bin/sh\nexit 0\n' > "$SANDBOX/bin/claude"; chmod +x "$SANDBOX/bin/claude"
+  run_rc 0 env PATH="$SANDBOX/bin:$PATH" CLAUDE_CONFIG_DIR="$SANDBOX/claude_alt" \
+    bash "$kit/scripts/spec-dispatch.sh" plan "$spec" --to claude --dry-run
+  assert_contains "$OUT" "home:      $SANDBOX/claude_alt" 'the dry run hides which account it would use'
+  run_rc 0 env -u CLAUDE_CONFIG_DIR PATH="$SANDBOX/bin:$PATH" HOME="$SANDBOX/home" \
+    bash "$kit/scripts/spec-dispatch.sh" plan "$spec" --to claude --dry-run
+  assert_contains "$OUT" "home:      $SANDBOX/home/.claude" 'the default home is not named'
+
+  # Midnight passes during the run: the provider writes the plan on day one
+  # and flips the clock; the verifier then runs on day two.
+  real_date="$(command -v date)"
+  printf '2026-03-01\n' > "$SANDBOX/day"
+  printf '#!/bin/sh\ncase "$1" in +%%Y-%%m-%%d) cat "%s/day" ;; *) exec "%s" "$@" ;; esac\n' "$SANDBOX" "$real_date" \
+    > "$SANDBOX/bin/date"
+  printf '#!/bin/sh\nprintf -- "---\\nupdated: 2026-03-01\\n---\\n# Plan\\n" > "%s/plan.md"\nprintf "2026-03-02\\n" > "%s/day"\n' \
+    "$spec" "$SANDBOX" > "$SANDBOX/bin/claude"
+  chmod +x "$SANDBOX/bin/date" "$SANDBOX/bin/claude"
+  run_rc 0 env PATH="$SANDBOX/bin:$PATH" HOME="$SANDBOX/home" bash "$kit/scripts/spec-dispatch.sh" plan "$spec" --to claude
+  assert_contains "$OUT" 'plan.md updated: 2026-03-01' 'a plan written before midnight was refused'
+  assert_eq '2026-03-02' "$(cat "$SANDBOX/day")" 'the fixture never crossed midnight'
+  # A plan from neither day is still refused.
+  printf '#!/bin/sh\nprintf -- "---\\nupdated: 2025-12-31\\n---\\n# Plan\\n" > "%s/plan.md"\n' "$spec" > "$SANDBOX/bin/claude"
+  run_rc 1 env PATH="$SANDBOX/bin:$PATH" HOME="$SANDBOX/home" bash "$kit/scripts/spec-dispatch.sh" plan "$spec" --to claude
+  assert_contains "$OUT" "expected the day of this run" 'a stale plan passed the verifier'
+}
+
 t_run_all

@@ -21,6 +21,12 @@
 # (spec worktree for implement) bounds the blast radius. Don't dispatch specs
 # you wouldn't let an agent implement unattended.
 #
+# ACCOUNT: the run uses the target CLI's home in the caller's environment —
+# CLAUDE_CONFIG_DIR for Claude, CODEX_HOME for Codex, else that CLI's default
+# (~/.claude, ~/.codex, ~/.copilot). Nothing maps one CLI's account to
+# another's: a Codex session dispatching to Claude lands in ~/.claude unless
+# CLAUDE_CONFIG_DIR is exported. The home is printed on every run and dry-run.
+#
 # Dispatchable roles: plan, tasks, implement, retro.
 #   specify — never (it's an interview);  review — never (interactive merges).
 # Umbrella specs (spec.md `repos:` frontmatter, hub-owned artifacts):
@@ -170,6 +176,13 @@ esac
 # profile home (CODEX_HOME=~/.codex_gym) carries its own adapters and tier
 # profiles, and ~/.codex may not exist at all.
 CODEX_DIR="${CODEX_HOME:-$HOME/.codex}"
+
+# The home — so the account and its usage pool — the run lands in (ACCOUNT above).
+case "$CLI" in
+  claude)  TARGET_HOME="${CLAUDE_CONFIG_DIR:-$HOME/.claude}" ;;
+  codex)   TARGET_HOME="$CODEX_DIR" ;;
+  copilot) TARGET_HOME="$HOME/.copilot" ;;
+esac
 
 command -v "$CLI" >/dev/null 2>&1 || { echo "target CLI '$CLI' is not on PATH — install/authenticate it, or drop the dispatch mapping" >&2; exit 4; }
 case "$CLI" in
@@ -359,6 +372,7 @@ if (( DRY )); then
   echo "dispatch:  $ROLE -> $CLI"
   (( UMBRELLA )) && echo "umbrella:  repos: $DECLARED_REPOS${REPO_NAME:+ — this run: [repo:$REPO_NAME] slice}"
   echo "root:      $ROOT"
+  echo "home:      $TARGET_HOME"
   echo "spec:      $LIVE_SPEC"
   echo "capture:   $CAP"
   echo "command:"
@@ -373,8 +387,9 @@ mkdir -p "$LIVE_SPEC/notes"
 bash "$STATUS_SH" set "$LIVE_SPEC" active_tool "$CLI" >/dev/null 2>&1 \
   || echo "  ${YELLOW}!${RESET} could not set active_tool in STATUS.md (continuing)" >&2
 
-echo "dispatching $ROLE -> $CLI (root: $ROOT)" >&2
+echo "dispatching $ROLE -> $CLI (root: $ROOT, home: $TARGET_HOME)" >&2
 started=$(date +%s)
+START_DAY="$(date +%Y-%m-%d)"
 
 # run_attempt <cli> <attempt-number>
 # Every provider follows this exact pipe. `pipefail` preserves the provider's
@@ -536,10 +551,12 @@ verify_rc=0
 case "$ROLE" in
   plan)
     upd="$(fm_get "$LIVE_SPEC/plan.md" updated 2>/dev/null)"
-    if [[ "$upd" == "$(date +%Y-%m-%d)" ]]; then
+    # Either day: a run that crosses midnight stamps the plan with the day it
+    # wrote it, which is no longer today.
+    if [[ -n "$upd" && ( "$upd" == "$START_DAY" || "$upd" == "$(date +%Y-%m-%d)" ) ]]; then
       echo "  ${GREEN}✓${RESET} plan.md updated: $upd"
     else
-      echo "  ${RED}✗${RESET} plan.md 'updated:' is '${upd:-unset}' (expected today) — the run may not have written the plan"
+      echo "  ${RED}✗${RESET} plan.md 'updated:' is '${upd:-unset}' (expected the day of this run) — the run may not have written the plan"
       verify_rc=1
     fi
     n=$(grep -c 'NEEDS CLARIFICATION' "$LIVE_SPEC/plan.md" 2>/dev/null || true)

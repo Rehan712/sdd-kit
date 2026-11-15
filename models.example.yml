@@ -163,12 +163,6 @@ roles:
                                # follow-ups — escalate instead of repeating a
                                # failure at the tier that produced it
 
-dispatch:
-  plan: claude
-  tasks: claude
-  implement: claude
-  retro: claude
-
 # DISPATCH (optional) — route a PHASE to the CLI that should RUN it, across
 # providers: e.g. plan on Claude Code, tasks on Codex, implement on Copilot. The phase skills detect the mapping and offer
 # `scripts/spec-dispatch.sh <role> <spec-dir>`, which runs the target CLI
