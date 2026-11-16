@@ -139,12 +139,13 @@ updated: 2026-11-16
   - *On CHALLENGED:* open follow-up tasks here (T011o1, T011o2, …) for each defect; fix and re-run before T012
   - *Evidence:* `spec-gate.sh round opponent round 1 → CLEARED, 0 blocking, 8 minor (notes/opponent.md)` (2026-11-16)
 
-- [ ] **T012** — Reality-check the implemented spec end-to-end
+- [x] **T012** — Reality-check the implemented spec end-to-end
   - *Agent:* `~/.sdd/agents/reality-check.agent.md`
   - *Inputs:* every prior `[x]` task, `spec.md`, `plan.md`, `notes/opponent.md`
   - *Acceptance:* agent returns **READY** (not NEEDS WORK / FAILED); every AC-### mapped to concrete evidence in `notes/reality-check.md`; the three `[DEPLOY]` ACs (AC-001, AC-004, AC-007) recorded as deferred to T014 with owner and check-back date in STATUS
   - *Refs:* AC-001, AC-002, AC-003, AC-004, AC-005, AC-006, AC-007, AC-008, AC-009, AC-010, AC-011, AC-012
   - *On NEEDS WORK:* open follow-up tasks here (T012a1, T012a2, …); do not proceed to Ship until they're `[x]` and the gate is re-run
+  - *Evidence:* `spec-gate.sh round reality-check round 1 → READY; AC-001/004/007 deferred to T014 (owner @Rehan712), notes/reality-check.md` (2026-11-16)
 
 ## Ship
 

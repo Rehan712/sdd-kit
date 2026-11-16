@@ -7,7 +7,7 @@ worktree: /Users/babar/projects/sdd-kit-public.worktrees/004-documentation-site-
 pr: none                # PR URL once opened — spec-pr.sh writes this itself
 plan_review: SOUND    # not-run | SOUND | UNSOUND | BLOCKED | WAIVED  (+ date) — /sdd:plan's one-round review
 opponent: CLEARED (2026-11-16)       # not-run | CHALLENGED | CLEARED | BLOCKED  (+ date)
-reality_check: not-run  # not-run | NEEDS WORK | FAILED | READY  (+ date)
+reality_check: READY (2026-11-16)  # not-run | NEEDS WORK | FAILED | READY  (+ date)
 ci: not-run             # not-run | pending | green | red  (+ date) — spec-ci.sh writes this
 retro: not-run          # not-run | done (+ date) — /sdd:retro after ship
 updated: 2026-11-16
@@ -31,9 +31,10 @@ updated: 2026-11-16
 
 ## Where things stand
 
-Spec and plan accepted; `tasks.md` written — 15 tasks (10 implementation, 2
-gates, 3 Ship), `sdd-analyze.sh --phase tasks` consistent with 0 warnings.
-Awaiting `/sdd:implement`; the worktree is cut on the first run.
+T001-T012 done on branch spec/004-documentation-site-on-github-pages (worktree
+cut from main @ 9364ee6; per-task commits, nothing pushed). Opponent CLEARED
+and reality-check READY, both round 1. T013 (Open PR) is not run: the owner
+decides on the PR and must enable Pages first. T014/T015 are post-merge.
 
 ## Decisions log
 
@@ -61,6 +62,10 @@ Append-only, newest last. Each entry: `date — decision — rationale / who dec
 - 2026-11-16 — Tasks: the workflow sits in an `API` stage because `.specify/stack.yml` names an `API` checkpoint and the analyzer requires every checkpoint stage to exist; stack.yml left unchanged since it is shared by every spec. The eleven pages are one task (T003): the nav needs every page, so a split leaves broken intermediate commits.
 - 2026-11-16 — Project model policy added (`.specify/models.yml`): every role on the mid tier — Claude Sonnet 5.5 or Codex GPT-6.1 Terra — at high (design, gates), medium (writing code) or low (recon) effort — @Rehan712, because this spec is mostly mechanical. It applies to every spec in this repository until the file is removed.
 
+- 2026-11-16 — 2026-11-16 — Opponent CLEARED (round 1; 0 blocking, 8 minor: O-001 README model-tiering bullet misdescribes the page, O-002 layout page lacks the 4 new files, O-003 AC-002 test looser than 'heading', O-004 kit_files can go silent in test-build-adapters.sh:135, O-005 SITE_HOST duplicates site_url, O-006 one-off coverage script keyed to old lines, O-007 unanchored site/ ignore, O-008 vague pointers) — minors left to the owner, not auto-fixed; any source change reopens both gates.
+
+- 2026-11-16 — 2026-11-16 — Reality-check READY (round 1). AC-001, AC-004, AC-007 deferred to T014: owner @Rehan712; collect notes/deploy-evidence.md, the four screenshots and the network log within 1 day of the merge deploy (check-back date = merge date + 1 day). MET-001–004 check-back = first deploy date + 14 days, owner @Rehan712. Prerequisite: enable Pages (Settings → Pages → Source: GitHub Actions) before merging (CON-006).
+
 ## Open questions / blockers
 
 - [x] Generator support status — resolved: Zensical (see Decisions).
@@ -81,5 +86,6 @@ through `uv`.
 
 ## Next action
 
-`/sdd:implement T001` (or `/sdd:implement --all`). Commit the spec directory
-and `.specify/models.yml` on `main` first.
+(@Rehan712) Enable Pages (Settings → Pages → Source: GitHub Actions), then run
+the Open PR task (). After /sdd:review reports it merged: T014
+deploy evidence (check-back merge date + 1 day), then /sdd:retro (T015).
