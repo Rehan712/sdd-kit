@@ -178,3 +178,43 @@ capture=CAP-29-ws5sdE command=/bin/bash -o pipefail -c sh -c 'bash tests/run.sh 
 Captured run, exit 0. Full log: `notes/captures/CAP-30-0OhMtu/output.log`.
 
 capture=CAP-30-0OhMtu command=/bin/bash -o pipefail -c bash .specify/specs/004-documentation-site-on-github-pages/notes/readme-coverage.sh  key=readme-coverage: 658 lines, 5 exceptions, 0 missing exit=0 output=5475256b3e7a6e5a065b776b81c416fc93bd1d1ba20f7a412e5b7e2dc3ad9b84 input=14d52c7ba4138c57cd0a8456ce26bc8dea0f1020675260e318fd6bd54b5f6203 log=/Users/babar/projects/sdd-kit-public.worktrees/004-documentation-site-on-github-pages/.specify/specs/004-documentation-site-on-github-pages/notes/captures/CAP-30-0OhMtu/output.log [complete metadata: capture directory]
+
+## CAP-31-in4pIX — 2026-11-16T09:58:30Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-31-in4pIX/output.log`.
+
+capture=CAP-31-in4pIX command=/bin/bash -o pipefail -c uv run --python 3.13 --no-project --with zensical==0.1.1 -- bash tests/docs-check.sh  key=docs-check: ok exit=0 output=ae5fa61d030af0853fdb142232a51da59978c41036458d3d72a5a437f491d41b input=14d52c7ba4138c57cd0a8456ce26bc8dea0f1020675260e318fd6bd54b5f6203 log=/Users/babar/projects/sdd-kit-public.worktrees/004-documentation-site-on-github-pages/.specify/specs/004-documentation-site-on-github-pages/notes/captures/CAP-31-in4pIX/output.log [complete metadata: capture directory]
+
+## CAP-32-dSLWTR — 2026-11-16T09:58:52Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-32-dSLWTR/output.log`.
+
+capture=CAP-32-dSLWTR command=/bin/bash /Users/babar/.sdd/scripts/sdd-analyze.sh /Users/babar/projects/sdd-kit-public.worktrees/004-documentation-site-on-github-pages/.specify/specs/004-documentation-site-on-github-pages  key=consistent — spec/plan/tasks line up exit=0 output=f40d711d1dad1459e07bd6a38e4c0c4d0b6de14527ad1805120ea9ff04f2aa92 input=14d52c7ba4138c57cd0a8456ce26bc8dea0f1020675260e318fd6bd54b5f6203 log=/Users/babar/projects/sdd-kit-public.worktrees/004-documentation-site-on-github-pages/.specify/specs/004-documentation-site-on-github-pages/notes/captures/CAP-32-dSLWTR/output.log [complete metadata: capture directory]
+
+## CAP-33-46jFYm — 2026-11-16T09:58:59Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-33-46jFYm/output.log`.
+
+capture=CAP-33-46jFYm command=/bin/bash /Users/babar/.sdd/scripts/spec-ac-coverage.sh /Users/babar/projects/sdd-kit-public.worktrees/004-documentation-site-on-github-pages/.specify/specs/004-documentation-site-on-github-pages --root /Users/babar/projects/sdd-kit-public.worktrees/004-documentation-site-on-github-pages  key=bound — every AC is named by at least one test file exit=0 output=fa6b943cdd62d599f173a090a7fdb64fa20c5752711045ef37790a9d8c8e026a input=14d52c7ba4138c57cd0a8456ce26bc8dea0f1020675260e318fd6bd54b5f6203 log=/Users/babar/projects/sdd-kit-public.worktrees/004-documentation-site-on-github-pages/.specify/specs/004-documentation-site-on-github-pages/notes/captures/CAP-33-46jFYm/output.log [complete metadata: capture directory]
+
+## CAP-34-ywhLG6 — 2026-11-16T09:59:16Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-34-ywhLG6/output.log`.
+
+capture=CAP-34-ywhLG6 command=/bin/bash /Users/babar/.sdd/scripts/spec-evidence.sh /Users/babar/projects/sdd-kit-public.worktrees/004-documentation-site-on-github-pages/.specify/specs/004-documentation-site-on-github-pages  key=current evidence: all completed task checks have valid current captures exit=0 output=3bb9740e6d785e23bc941ebc60bbab6b42d243caacb1a0841320f82df86896be input=14d52c7ba4138c57cd0a8456ce26bc8dea0f1020675260e318fd6bd54b5f6203 log=/Users/babar/projects/sdd-kit-public.worktrees/004-documentation-site-on-github-pages/.specify/specs/004-documentation-site-on-github-pages/notes/captures/CAP-34-ywhLG6/output.log [complete metadata: capture directory]
+
+## CAP-35-vI2OIu — 2026-11-16T10:24:03Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-35-vI2OIu/output.log`.
+
+capture=CAP-35-vI2OIu command=/bin/bash -o pipefail -c bash tests/run.sh  key=  -- 4/4 passed exit=0 output=0bbff7596da433423e836bc26f346171583be47a0edee8ff2d16d36ea5d14ce1 input=14d52c7ba4138c57cd0a8456ce26bc8dea0f1020675260e318fd6bd54b5f6203 log=/Users/babar/projects/sdd-kit-public.worktrees/004-documentation-site-on-github-pages/.specify/specs/004-documentation-site-on-github-pages/notes/captures/CAP-35-vI2OIu/output.log [complete metadata: capture directory]
+
+## CAP-36-A1NtmA — 2026-11-16T10:24:49Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-36-A1NtmA/output.log`.
+
+capture=CAP-36-A1NtmA command=/bin/bash -o pipefail -c bash tests/shellcheck.sh  key=(no output) exit=0 output=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 input=14d52c7ba4138c57cd0a8456ce26bc8dea0f1020675260e318fd6bd54b5f6203 log=/Users/babar/projects/sdd-kit-public.worktrees/004-documentation-site-on-github-pages/.specify/specs/004-documentation-site-on-github-pages/notes/captures/CAP-36-A1NtmA/output.log [complete metadata: capture directory]
+
+## GATE-FLOOR
+
+Result: FLOOR-HrZL7B; source: 14d52c7ba4138c57cd0a8456ce26bc8dea0f1020675260e318fd6bd54b5f6203; exit: 0; command records: `notes/verification/floors/FLOOR-HrZL7B/commands.nul`.
