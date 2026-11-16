@@ -1,6 +1,6 @@
 ---
 spec: 004-documentation-site-on-github-pages
-phase: tasks          # specify | plan | tasks | implement | review | shipped | abandoned
+phase: implement          # specify | plan | tasks | implement | review | shipped | abandoned
 active_tool: claude       # claude | codex | copilot | cursor | antigravity | none — who currently holds the spec
 branch: none            # spec/004-documentation-site-on-github-pages once cut, else none
 worktree: none          # absolute path once created, else none

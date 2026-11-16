@@ -1,6 +1,6 @@
 ---
 tasks_for: 004-documentation-site-on-github-pages
-status: draft  # draft | in-progress | complete
+status: in-progress  # draft | in-progress | complete
 created: 2026-11-16
 updated: 2026-11-16
 ---
@@ -15,7 +15,7 @@ updated: 2026-11-16
 
 ## Setup
 
-- [ ] **T001** — Add the docs check's third-party asset scan
+- [x] **T001** — Add the docs check's third-party asset scan
   - *Files:* `tests/docs-check.sh` (new), `tests/test-docs.sh` (new)
   - *Acceptance:* `docs-check.sh` exists with the plan §4.3 header, preamble, `SITE_HOST`, usage/exit contract, `--assets-only <dir>` and `scan_assets` (including its `shortcut:` comment); `check_docs` is not written yet. `test-docs.sh` adds the two asset-scan tests: one fixture site per FM-004 trigger exits 1 naming the file and match, a clean site holding the own-host canonical link and a `data:` CSS URL exits 0, and the FM-003 inputs exit 2. ShellCheck clean.
   - *Verify kind:* test
@@ -23,6 +23,7 @@ updated: 2026-11-16
   - *Verify:* `sh -c 'bash tests/run.sh docs && bash tests/shellcheck.sh'` → exit 0, "-- 2/2 passed"
   - *Reuse:* local
   - *Refs:* REQ-008, AC-009, FM-003, FM-004, plan §4.3, §7
+  - *Evidence:* CAP-1-cEwLss verified by spec-gate accept; return sha256:1e1e610bca23a8ccf2efd9ce3de6f1c62d623345e69972e824509ecb010c3968
 
 - [ ] **T002** — Add the docs check's strict build, 404 and broken-link probe
   - *Files:* `tests/docs-check.sh`, `tests/test-docs.sh`

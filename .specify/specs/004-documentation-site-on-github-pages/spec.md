@@ -1,7 +1,7 @@
 ---
 spec_id: 004-documentation-site-on-github-pages
 title: Documentation site on GitHub Pages
-status: accepted  # draft | accepted | implementing | shipped | rejected
+status: implementing  # draft | accepted | implementing | shipped | rejected
 verification_contract: 1
 created: 2026-11-16
 updated: 2026-11-16

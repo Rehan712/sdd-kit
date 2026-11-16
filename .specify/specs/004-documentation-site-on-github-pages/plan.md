@@ -1,6 +1,6 @@
 ---
 plan_for: 004-documentation-site-on-github-pages
-status: accepted  # draft | accepted | implementing | shipped
+status: implementing  # draft | accepted | implementing | shipped
 created: 2026-11-16
 updated: 2026-11-16
 stacks: []
