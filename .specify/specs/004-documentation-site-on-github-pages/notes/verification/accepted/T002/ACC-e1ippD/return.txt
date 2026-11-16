@@ -1,0 +1,35 @@
+Verification-Return: 1
+Task: T002
+Captures: CAP-3-LlPFkp
+Summary: capture=CAP-3-LlPFkp command=/bin/bash -o pipefail -c sh -c 'bash tests/run.sh docs && bash tests/shellcheck.sh'  key=  -- 8/8 passed exit=0 output=ca44a013a1172b38c97e8f8caa6a5f5f9b6fd5b4fd8202740ca2894d7c44fbb1 input=262e4c42214e805a1b2b7cfac638f9ffaea0973ab4a4fca071723df3690bd12d log=/Users/babar/projects/sdd-kit-public.worktrees/004-documentation-site-on-github-pages/.specify/specs/004-documentation-site-on-github-pages/notes/captures/CAP-3-LlPFkp/output.log [complete metadata: capture directory]
+Failure modes:
+FM-001, tests/test-docs.sh::test_AC_008_check_fails_when_strict_mode_accepts_a_broken_link, CAP-3-LlPFkp
+FM-001, tests/test-docs.sh::test_AC_008_check_fails_when_the_failure_does_not_name_the_link, CAP-3-LlPFkp
+FM-001, tests/test-docs.sh::test_AC_008_check_fails_without_a_404_page, CAP-3-LlPFkp
+FM-001, tests/test-docs.sh::test_AC_008_check_never_cleans_the_kit_cache, CAP-3-LlPFkp
+FM-001, tests/test-docs.sh::test_AC_008_check_passes_when_strict_mode_names_the_broken_link, CAP-3-LlPFkp
+FM-001, tests/test-docs.sh::test_AC_008_check_refuses_to_run_without_zensical, CAP-3-LlPFkp
+FM-002, tests/test-docs.sh::test_AC_008_check_fails_when_strict_mode_accepts_a_broken_link, CAP-3-LlPFkp
+FM-002, tests/test-docs.sh::test_AC_008_check_fails_when_the_failure_does_not_name_the_link, CAP-3-LlPFkp
+FM-002, tests/test-docs.sh::test_AC_008_check_fails_without_a_404_page, CAP-3-LlPFkp
+FM-002, tests/test-docs.sh::test_AC_008_check_never_cleans_the_kit_cache, CAP-3-LlPFkp
+FM-002, tests/test-docs.sh::test_AC_008_check_passes_when_strict_mode_names_the_broken_link, CAP-3-LlPFkp
+FM-002, tests/test-docs.sh::test_AC_008_check_refuses_to_run_without_zensical, CAP-3-LlPFkp
+FM-007, tests/test-docs.sh::test_AC_008_check_fails_when_strict_mode_accepts_a_broken_link, CAP-3-LlPFkp
+FM-007, tests/test-docs.sh::test_AC_008_check_fails_when_the_failure_does_not_name_the_link, CAP-3-LlPFkp
+FM-007, tests/test-docs.sh::test_AC_008_check_fails_without_a_404_page, CAP-3-LlPFkp
+FM-007, tests/test-docs.sh::test_AC_008_check_never_cleans_the_kit_cache, CAP-3-LlPFkp
+FM-007, tests/test-docs.sh::test_AC_008_check_passes_when_strict_mode_names_the_broken_link, CAP-3-LlPFkp
+FM-007, tests/test-docs.sh::test_AC_008_check_refuses_to_run_without_zensical, CAP-3-LlPFkp
+INV-003, tests/test-docs.sh::test_AC_008_check_fails_when_strict_mode_accepts_a_broken_link, CAP-3-LlPFkp
+INV-003, tests/test-docs.sh::test_AC_008_check_fails_when_the_failure_does_not_name_the_link, CAP-3-LlPFkp
+INV-003, tests/test-docs.sh::test_AC_008_check_fails_without_a_404_page, CAP-3-LlPFkp
+INV-003, tests/test-docs.sh::test_AC_008_check_never_cleans_the_kit_cache, CAP-3-LlPFkp
+INV-003, tests/test-docs.sh::test_AC_008_check_passes_when_strict_mode_names_the_broken_link, CAP-3-LlPFkp
+INV-003, tests/test-docs.sh::test_AC_008_check_refuses_to_run_without_zensical, CAP-3-LlPFkp
+INV-004, tests/test-docs.sh::test_AC_008_check_fails_when_strict_mode_accepts_a_broken_link, CAP-3-LlPFkp
+INV-004, tests/test-docs.sh::test_AC_008_check_fails_when_the_failure_does_not_name_the_link, CAP-3-LlPFkp
+INV-004, tests/test-docs.sh::test_AC_008_check_fails_without_a_404_page, CAP-3-LlPFkp
+INV-004, tests/test-docs.sh::test_AC_008_check_never_cleans_the_kit_cache, CAP-3-LlPFkp
+INV-004, tests/test-docs.sh::test_AC_008_check_passes_when_strict_mode_names_the_broken_link, CAP-3-LlPFkp
+INV-004, tests/test-docs.sh::test_AC_008_check_refuses_to_run_without_zensical, CAP-3-LlPFkp

@@ -132,7 +132,7 @@ test_codex_adapters_delegate_copilot_adapters_persona_pass() {
 # surfaces; the corrected sections name the generated subagents.
 test_stale_single_agent_claims_are_gone() {
   local f
-  for f in agents/opponent.agent.md agents/reality-check.agent.md constitution.md README.md; do
+  for f in agents/opponent.agent.md agents/reality-check.agent.md constitution.md README.md $(kit_files docs '*.md' | tr '\0' ' '); do
     OUT="$(cat "$KIT_DIR/$f")"
     assert_not_contains "$OUT" "without subagents" "AC-006: stale claim survives in $f"
     assert_not_contains "$OUT" "there is no subagent to spawn" "AC-006: stale claim survives in $f"
@@ -140,7 +140,7 @@ test_stale_single_agent_claims_are_gone() {
   done
   OUT="$(cat "$KIT_DIR/constitution.md")"
   assert_contains "$OUT" "codex/agents" "AC-006: constitution names the subagent path"
-  OUT="$(cat "$KIT_DIR/README.md")"
+  OUT="$(cat "$KIT_DIR/docs/workflow.md")"
   assert_contains "$OUT" "sdd-reality-check" "AC-006: README names the generated gates"
 }
 
@@ -337,7 +337,7 @@ test_stamped_skills_open_with_the_turn_note_and_nothing_else_does() {
   run_rc 0 cmp "$kit/skills/sdd-tasks/SKILL.md" "$kit/build/skills/sdd-tasks/SKILL.md"
   assert_not_contains "$(cat "$kit/build/agents/opponent.agent.md")" 'Stay on this phase' 'an agent carries the skill note'
   if grep -rlq 'Stay on this phase' "$KIT_DIR/skills" "$KIT_DIR/agents"; then t_fail 'a canonical file carries the note'; fi
-  assert_contains "$(tr -s '[:space:]' ' ' < "$KIT_DIR/README.md")" 'covers only the turn that loaded it' \
+  assert_contains "$(tr -s '[:space:]' ' ' < "$KIT_DIR/docs/model-tiering.md")" 'covers only the turn that loaded it' \
     'the README no longer says what a skill stamp covers'
 }
 

@@ -1,0 +1,553 @@
+---
+plan_for: 004-documentation-site-on-github-pages
+status: implementing  # draft | accepted | implementing | shipped
+created: 2026-11-16
+updated: 2026-11-16
+stacks: []
+---
+
+# Plan: Documentation site on GitHub Pages
+
+> The implementation strategy for `spec.md`. Answers **how**, not what.
+> Line numbers for `README.md` are those of `origin/main` at `b9814e6`.
+
+## 1. Approach
+
+The manual is one 761-line page today (REQ-001). Move its prose, unchanged,
+into eleven markdown pages under `docs/` (REQ-003), and build them with Zensical 0.1.1 from one `zensical.toml`
+(REQ-002, REQ-004, CON-003). A new workflow, `docs.yml`, builds and checks the
+site on every pull request and deploys it on a push to `main` (REQ-006). The
+whole check is one script, `tests/docs-check.sh`, which CI and a contributor run
+identically: strict build, 404 page, third-party asset scan, and a built-in
+proof that strict mode still rejects a broken link (REQ-007, REQ-008). The
+README is rewritten to at most 150 lines (REQ-005), and the three test files
+that read README text are pointed at the page that now carries it (REQ-009).
+
+This is a move, not a rewrite. The only new prose is listed in §3 and §4.4.
+
+## 2. Architecture
+
+| File | Change | Why | Pattern anchor |
+|---|---|---|---|
+| `docs/*.md` (11 pages) | new | REQ-003 | no precedent — the page map in §3 is the convention |
+| `zensical.toml` | new | REQ-002, REQ-004, REQ-008 | no precedent — full content in §4.1 |
+| `.github/workflows/docs.yml` | new | REQ-006, AC-006, AC-009, AC-010 | `.github/workflows/ci.yml` — same header comment and `on:` block; full content in §4.2 |
+| `tests/docs-check.sh` | new | REQ-007, AC-008, AC-009 | `tests/shellcheck.sh` — same preamble (`set -u`, `unset CDPATH BASH_ENV ENV`, `export LC_ALL=C`, `ROOT` resolution) and the same header comment with Usage and Exit |
+| `tests/test-docs.sh` | new | AC-002, AC-003, AC-005, AC-006, AC-008, AC-009, AC-010, AC-012 | `tests/test-executable-bits.sh` — same `helpers.sh` source line, `kit_files` enumeration, closing `t_run_all` |
+| `README.md` | rewritten | REQ-005 | template in §4.4 |
+| `tests/test-usage-limits.sh`, `tests/test-build-adapters.sh`, `tests/test-gate-contracts.sh` | modified | REQ-009 | each line named in §4.5 |
+| `scripts/sdd-doctor.sh` (line 347) | modified | its warning points readers at `README "Ponytail"`, which moves | in place — replace `(README \"Ponytail\")` with `(docs: \"Ponytail\")` |
+| `registry.example.yml` (line 31) | modified | its comment says `see README "Multi-machine"`, which moves | in place — replace with `see the docs, Install → "Multi-machine"` |
+| `.gitignore` | modified | a local build writes `site/` | the existing entries — one comment line, one pattern: `site/` |
+| `.specify/specs/004-documentation-site-on-github-pages/notes/readme-coverage.sh` | new, one-off | FM-006 | no precedent — contract in §4.6 |
+
+Unchanged on purpose: `.github/workflows/ci.yml` (AC-012), `.specify/stack.yml`
+(§5), `scripts/setup.sh`, `scripts/sync.sh`, `scripts/build-adapters.sh`,
+`plugin/` (CON-008 — none of them reads `README.md` or `docs/` today; checked
+with `grep -rn 'README\|docs/'`).
+
+## 3. Data model
+
+The content model is the page map. A source range runs from its first heading
+up to, but not including, the next heading named.
+
+| Page | Page title (`#`) | Source in `README.md` |
+|---|---|---|
+| `docs/index.md` | `SDD Kit` | lines 3–11 (pitch and blockquote), then the "Start here" list below, then `## Credits` (lines 697–705) |
+| `docs/install.md` | `Install` | `## Install` to `## The workflow` (13–103), then `## Multi-machine` to `## Credits` (682–695) |
+| `docs/workflow.md` | `The workflow` | `## The workflow` to `## Model tiering` (105–170) |
+| `docs/model-tiering.md` | `Model tiering (which model runs each phase)` | `## Model tiering` to `### Style guides` (172–286) |
+| `docs/skills-and-routing.md` | `Skills, style and routing` (new) | `### Style guides` to `### Cross-CLI dispatch` (288–409) |
+| `docs/dispatch.md` | `Dispatch, loops and usage limits` (new) | `### Cross-CLI dispatch` to `## Multi-repo features` (411–501) |
+| `docs/multi-repo.md` | `Multi-repo features (umbrella specs)` | `## Multi-repo features` to `## Scripts` (503–540) |
+| `docs/scripts.md` | `Scripts` | `## Scripts` to `## What's in the box` (542–605) |
+| `docs/layout.md` | `What's in the box` | `## What's in the box` to `## Customizing` (607–646) |
+| `docs/customizing.md` | `Customizing` | `## Customizing` to `## Multi-machine` (648–680) |
+| `docs/verification.md` | `Versioned verification workflow` | `### Versioned verification workflow` to end of file (707–761) |
+
+Move rules, in order:
+
+1. **Verbatim.** Copy the source range byte for byte. Change nothing that rules
+   2–4 do not name: no rewording, no reflowing, no reordering.
+2. **Heading levels.** The heading that becomes the page title is written `#`.
+   Every other moved heading is written `##`. Heading text is never changed.
+   On the two pages with a new title, put the title first, then the moved
+   sections. This applies outside fenced code blocks only: a line starting `#`
+   inside a fence is a shell comment (lines 721–736 hold nine) and is copied
+   as it is.
+3. **Links.** Rewrite exactly these, and no others:
+
+   | Line | Old target | New target |
+   |---|---|---|
+   | 31 | `#model-tiering-which-model-runs-each-phase` | `model-tiering.md` |
+   | 292 | `templates/style-guides/rust.md` | `https://github.com/Rehan712/sdd-kit/blob/main/templates/style-guides/rust.md` |
+   | 294 | `templates/style-guides/typescript.md` | `https://github.com/Rehan712/sdd-kit/blob/main/templates/style-guides/typescript.md` |
+   | 313 | `templates/official-skills.md` | `https://github.com/Rehan712/sdd-kit/blob/main/templates/official-skills.md` |
+   | 342 | `templates/routing-template.md` | `https://github.com/Rehan712/sdd-kit/blob/main/templates/routing-template.md` |
+   | 501 | `knowledge/usage-limit-handling.md` | `https://github.com/Rehan712/sdd-kit/blob/main/knowledge/usage-limit-handling.md` |
+   | 510 | `#multi-machine` | `install.md#multi-machine` |
+   | 710 | `templates/verification-contract.md` | `https://github.com/Rehan712/sdd-kit/blob/main/templates/verification-contract.md` |
+
+   A relative link to a file outside `docs/` fails the strict build (measured,
+   §7), which is why repository files are linked by absolute URL.
+4. **Three cross-references that say "above".** They stop being true once the
+   text is on another page:
+   - line 644, `# everything in the table above` → `# everything on the Scripts page`
+   - lines 662–663, `(see *Per-project overrides*` / `above)` →
+     `(see [Per-project overrides](model-tiering.md))`
+   - lines 664–665, `(see *Project` / `skills and agents*)` →
+     `(see [Project skills and agents](skills-and-routing.md))`
+
+5. **One nested list.** Lines 223–252 (the `*Claude Code:*`, `*Codex CLI:*` and
+   `*Copilot CLI:*` sub-bullets and their continuation lines) get two more
+   leading spaces on every line. Zensical nests a list only at four spaces; at
+   the README's two they render as siblings of their parent. These are the only
+   nested list markers in the file.
+
+New prose, complete — nothing else is written:
+
+- `docs/index.md`, between the blockquote and `## Credits`: a `## Start here`
+  heading and one bullet per other page, in nav order, each
+  `- [<page title>](<file>) — <one clause>`.
+- `docs/skills-and-routing.md` and `docs/dispatch.md`: the new title only.
+
+## 4. API / contracts
+
+No public API changes. The seams below are transcribed, not re-derived.
+
+### 4.1 `zensical.toml` (repository root) — full content
+
+```toml
+[project]
+site_name = "SDD Kit"
+site_url = "https://rehan712.github.io/sdd-kit/"
+docs_dir = "docs"
+nav = [
+  "index.md",
+  "install.md",
+  "workflow.md",
+  "model-tiering.md",
+  "skills-and-routing.md",
+  "dispatch.md",
+  "multi-repo.md",
+  "scripts.md",
+  "verification.md",
+  "customizing.md",
+  "layout.md",
+]
+
+[project.theme]
+language = "en"
+font = false
+
+[[project.theme.palette]]
+media = "(prefers-color-scheme)"
+toggle.icon = "lucide/sun-moon"
+toggle.name = "Switch to light mode"
+
+[[project.theme.palette]]
+media = "(prefers-color-scheme: light)"
+scheme = "default"
+toggle.icon = "lucide/sun"
+toggle.name = "Switch to dark mode"
+
+[[project.theme.palette]]
+media = "(prefers-color-scheme: dark)"
+scheme = "slate"
+toggle.icon = "lucide/moon"
+toggle.name = "Switch to system preference"
+```
+
+Decided, do not add: `repo_url` (it makes the theme request repository stats
+from a third-party host), any `analytics` or `plugins.search` table (search is
+on by default; AC-003 asserts nothing turns it off), `site_dir` (default `site`).
+One nav entry per line, each a bare quoted file name — `test-docs.sh` parses
+exactly that shape.
+
+### 4.2 `.github/workflows/docs.yml` — full content
+
+```yaml
+# Docs site: every pull request builds and checks the docs; a push to main
+# also deploys them to GitHub Pages. The build needs no secret and no write
+# permission; only the deploy job may write Pages (spec 004, AC-010).
+name: docs
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: docs-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.13'
+      - name: install the pinned generator
+        run: pip install zensical==0.1.1
+      - name: build and check the docs
+        run: bash tests/docs-check.sh
+      - if: github.event_name == 'push'
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: site
+
+  deploy:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5
+```
+
+`deploy:` is the last job in the file; `test-docs.sh` reads "from the line
+`  deploy:` to end of file" as the deploy job.
+
+### 4.3 `tests/docs-check.sh`
+
+```
+Usage: bash tests/docs-check.sh                         # full check
+       bash tests/docs-check.sh --assets-only <site-dir>
+Exit:  0 every check passed
+       1 a check failed
+       2 cannot run: bad usage, zensical missing, or no HTML to scan
+```
+
+Every message goes to stderr and starts `docs-check: `. Constant at the top:
+`SITE_HOST='rehan712.github.io'`. Two functions, both named because the family
+registry points at them:
+
+- `scan_assets <dir>` — exit 2 with `no HTML to scan in <dir>` when `<dir>` is
+  missing or holds no `*.html`. Otherwise report every match of either pattern
+  whose host is not `SITE_HOST`, as `third-party asset in <file>: <match>`, and
+  return 1 if there was any:
+  - in `*.html`, case-insensitive: a `script`, `link`, `img`, `iframe`,
+    `source`, `embed`, `object`, `video` or `audio` tag whose `src`, `href` or
+    `data` attribute value starts `http://`, `https://` or `//` (double-quoted,
+    single-quoted or unquoted);
+  - in `*.css`: `@import` or `url(` followed, after an optional quote, by
+    `http://`, `https://` or `//`. Anchor the scheme directly after the quote:
+    the theme's CSS holds `url("data:image/svg+xml;…xmlns='http://www.w3.org/…`
+    and that must not match.
+  - `<a href>` is a hyperlink, not an asset, and is never reported.
+  - Carry this comment: `# shortcut: line-based scan of tags and CSS; requests
+    made by JavaScript are not seen (AC-004's network log covers them); move to
+    a headless-browser check if the theme starts loading remote assets by script.`
+- `check_docs` — the full check, run from `ROOT`, stopping at the first failure:
+  1. `command -v zensical` fails → exit 2, `zensical not found on PATH (pip install zensical==0.1.1)`.
+  2. `zensical build --strict` non-zero → exit 1, `strict build failed`
+     (the generator's own output is not captured; it names the file and link).
+  3. no `site/404.html` → exit 1, `site/404.html missing`.
+  4. `scan_assets "$ROOT/site"` non-zero → exit with its status.
+  5. Negative probe. `mktemp -d` a directory (removed by a `trap … EXIT`); copy
+     `zensical.toml` and `docs/` into it; append a blank line and
+     `[docs-check probe](docs-check-no-such-page.md)` to its `docs/index.md`;
+     run `zensical build --strict` there, capturing stdout and stderr together
+     (`> "$tmp/out" 2>&1` — the diagnostic is written to stderr).
+     - exit 0 → exit 1, `strict build accepted a broken link`.
+     - output, after `sed $'s/\x1b\\[[0-9;]*m//g'`, lacks
+       `docs-check-no-such-page.md` → exit 1,
+       `strict build failed without naming the broken link`.
+       (Zensical colours each character separately and ignores `NO_COLOR`, so
+       the raw output never contains the name — measured, §7.)
+  6. `docs-check: ok`, exit 0.
+
+  Never pass `--clean` (or `-c`). It deletes `<root>/.cache/`, which in an
+  installed kit is also where `/sdd:onboard` keeps its repository clones
+  (`.cache/repos/`) — measured. It is not needed: a build without it still
+  removes stale files from `site/`.
+
+Bash 3.2 floor as everywhere in the kit: no `mapfile`, no associative arrays,
+no `${var,,}`.
+
+### 4.4 `README.md` — the whole new file, in this order
+
+1. Line 1 and lines 3–11 of the old README, unchanged (title, pitch, blockquote).
+2. `**Documentation: <https://rehan712.github.io/sdd-kit/>**`
+3. `## Install` — the old code block (lines 15–19) unchanged, then one sentence:
+   what `setup.sh` does, the plugin install and per-project setup are on the
+   [Install](https://rehan712.github.io/sdd-kit/install/) page.
+4. `## Quick start` — this block, then one sentence linking the
+   [workflow](https://rehan712.github.io/sdd-kit/workflow/) page:
+
+   ```
+   /sdd:specify "<feature>"   # interview → spec.md
+   /sdd:plan                  # plan.md, reviewed once by the opponent
+   /sdd:tasks                 # tasks.md — commit-sized, each with a check
+   /sdd:implement             # code in a spec worktree, two gates, then the PR
+   ```
+5. `## Documentation` — one bullet for each of the ten pages other than
+   `index.md`, absolute URL `https://rehan712.github.io/sdd-kit/<file without .md>/`.
+   The landing page is the site root (item 2); there is no `…/index/` URL.
+
+The pitch and the install block are the only text that exists both here and on
+the site; AC-005 requires them here. Everything else has one copy.
+
+### 4.5 Test retargets — every line, old → new
+
+Assertions and their expected strings are never changed; only the file read,
+and the word "README" in a failure message.
+
+| Where | Old | New |
+|---|---|---|
+| `tests/test-usage-limits.sh:1067` | `readme="$(cat "$KIT_DIR/README.md")"` | `readme="$(cat "$KIT_DIR/docs/dispatch.md")"` |
+| `tests/test-build-adapters.sh:135` | `for f in agents/opponent.agent.md agents/reality-check.agent.md constitution.md README.md; do` | same list, then `$(kit_files docs '*.md' \| tr '\0' ' ')` before `; do` |
+| `tests/test-build-adapters.sh:143` | `OUT="$(cat "$KIT_DIR/README.md")"` | `OUT="$(cat "$KIT_DIR/docs/workflow.md")"` |
+| `tests/test-build-adapters.sh:340` | `< "$KIT_DIR/README.md"` | `< "$KIT_DIR/docs/model-tiering.md"` |
+| `tests/test-gate-contracts.sh:3062`, `:3073`, `:3127` | `"$KIT_DIR/README.md"` | `"$KIT_DIR/docs/verification.md"` |
+| `tests/test-gate-contracts.sh:3101–3102` | `for document in README.md constitution.md; do` / `text="$(tr '\n' ' ' < "$KIT_DIR/$document")"` | `for document in 'docs/workflow.md docs/verification.md' constitution.md; do` / `text="$(cd "$KIT_DIR" && cat $document \| tr '\n' ' ')"` with `# shellcheck disable=SC2086  # the first entry is two files read as one document` |
+| `tests/test-gate-contracts.sh:3136` | `cat "$KIT_DIR/README.md"` | `cat "$KIT_DIR/docs/verification.md"` |
+| `tests/test-gate-contracts.sh:3155` | `awk '/^### Versioned verification workflow/ {on=1}` | `awk '/^# Versioned verification workflow/ {on=1}` |
+| `tests/test-gate-contracts.sh:3159` | `"$KIT_DIR/README.md" > "$SANDBOX/readme-block"` | `"$KIT_DIR/docs/verification.md" > "$SANDBOX/readme-block"` |
+
+Why 3101 reads two pages as one: the loop requires nine topics in one document,
+and `Rounds 1–3` is on old line 157 (now `workflow.md`) while the other eight
+are in lines 709–760 (now `verification.md`). All six `spec-gate.sh` verbs are
+in lines 727–738, so `verification.md` alone satisfies
+`gate_documentation_check`.
+
+### 4.6 `notes/readme-coverage.sh` — one-off proof that nothing was dropped
+
+`bash .specify/specs/004-documentation-site-on-github-pages/notes/readme-coverage.sh`,
+run from the repository root, no arguments. One function, `readme_coverage`:
+
+- Baseline: `git show "$(git merge-base HEAD origin/main)":README.md`. Cannot
+  read it → exit 2.
+- Normalise a line: delete every `](…)`, every `[` and `*`, then squeeze
+  whitespace and trim. Outside a fenced code block, also delete leading `#`
+  characters; inside one, keep them — a shell comment turned into a heading
+  must show up as a missing line. Track fences in the baseline and in each
+  current file. Blank results are skipped.
+- A baseline line passes when its normalised form equals a normalised line of
+  the current `README.md` or any `docs/*.md`, or when its line number is listed
+  in `notes/readme-coverage-exceptions.txt` (`<line number> <reason>` per line).
+- Print `L<n>: <text>` for each failing line; exit 1 if any. Otherwise print
+  `readme-coverage: <N> lines, <M> exceptions, 0 missing` and exit 0.
+
+Expected exceptions: lines 644 and 662–665 (rule 4). Any other is a finding, not an
+exception to add quietly.
+
+## 5. Dependencies
+
+- **Zensical 0.1.1** (MIT, Python ≥ 3.11), installed only in the docs workflow.
+  `pip install zensical==0.1.1` pins the generator; its own dependencies float.
+  Known limit, accepted: move to a hashed requirements file if a transitive
+  release ever breaks the build.
+- **Actions**, major-tag pins like `ci.yml`: `actions/checkout@v7`,
+  `actions/setup-python@v7`, `actions/upload-pages-artifact@v5`,
+  `actions/deploy-pages@v5` (latest releases on 2026-11-16: v7.0.1, v7.1.0,
+  v5.0.0, v5.0.1 — read from each action's latest GitHub release with `gh api`).
+- **Token permissions:** `contents: read` for the workflow; `pages: write` and
+  `id-token: write` on the deploy job only. No secret.
+- **Repository setting (owner, once):** Settings → Pages → Source: *GitHub
+  Actions*. Not done by any task's code.
+- **Local run of the check** (optional; needs `uv`, present on the owner's
+  machine): `uv run --python 3.13 --no-project --with zensical==0.1.1 -- bash tests/docs-check.sh`.
+- **`.specify/stack.yml` is not changed.** `gate_checks` stay `bash tests/run.sh`
+  and `bash tests/shellcheck.sh`; both enumerate `tests/*.sh`, so the two new
+  files are covered. `docs-check.sh` is not a gate check because it needs
+  Zensical, and the suite must not (INV-003).
+
+## 6. Stack overlay notes
+
+- `stacks: []` — no overlay and no stack expert exists for bash + markdown, so
+  none was consulted (`templates/stack-routing.md`, Planning consultation).
+- Official skills: none apply. The theme is used as shipped, so there is no UI
+  decision for `ui-ux-pro-max` to settle.
+- Project routing: `project-routing.sh match` printed nothing.
+- Lessons applied: `knowledge/deterministic-gates.md` (test the input surface;
+  a check that exists to make a failure visible must prove it cannot go silent
+  — hence FM-001 to FM-004 and the negative probe) and
+  `knowledge/deployment-health.md` (probe the application, not the
+  infrastructure — AC-001 fetches the page itself, not the workflow status).
+
+## 7. Risks, failure modes and verification
+
+- **R1 — text dropped or altered in the split** (likely × high). *Mitigation:*
+  the verbatim rule, `readme-coverage.sh` (FM-006), the heading test (AC-002).
+- **R2 — a test pinned to README text is weakened instead of moved** (likely ×
+  high). *Mitigation:* §4.5 names every line; AC-011's `git diff main -- tests/`
+  is read at the gate.
+- **R3 — Zensical is beta.** *Mitigation:* exact pin; the negative probe fails
+  CI if an upgrade ever stops rejecting broken links.
+- **R4 — the theme's JavaScript bundle contains URLs for `unpkg.com`,
+  `cdn.jsdelivr.net` and `api.github.com`.** The scan cannot see script
+  requests. The plan review traced each to an optional feature this site does
+  not use (ace, glightbox, mermaid, pyodide, repository stats) — and one that
+  it may: a ResizeObserver polyfill fetched on browsers that lack it (older
+  than 2020). That was read from the bundle by the reviewer, not re-verified.
+  *Mitigation:* AC-004's network log on the live site, in a current browser; a
+  third-party request there stops the Ship stage and goes back to the owner.
+- **R5 — Pages not enabled at merge.** The deploy job fails and nothing is
+  published. *Mitigation:* §8 orders the setting before the merge; re-run the
+  job after enabling.
+- **R6 — `spec-ac-coverage.sh` passes vacuously.** `tests/` already names
+  AC-001 to AC-018 for earlier specs, so every id here is "covered" before any
+  test is written. The family registry below is the real binding.
+- **R7 — action major tags can be moved by their owner.** Same trust as
+  `ci.yml`; SHA pinning is out of scope (§9).
+
+Measured on 2026-11-16 with Zensical 0.1.1 on a two-page probe site: a strict
+build exits 1 for a link to a missing page, a missing anchor, and a relative
+link outside `docs/`; exits 0 for a page absent from `nav` (so AC-003 needs its
+own test); writes `site/404.html`; and with `font = false` the only absolute
+`src`/`href` on asset tags is the canonical link to the site's own host.
+`--clean` deletes `<root>/.cache/` including a planted `.cache/repos/x/file`;
+without it that file survives and a stale `site/stale.html` is still removed.
+The plan review then built all eleven pages from the real README with the §4.1
+config: strict build exit 0, full nav on the 404 page.
+
+| ID | Components | Category | Trigger | Decided behavior | Test families |
+|---|---|---|---|---|---|
+| FM-001 | docs-check | boundary | `zensical` is not on PATH | Exit 2 with `zensical not found on PATH`; never exit 0 | docs-check |
+| FM-002 | docs-check | regression | The strict build of a copy carrying a link to a missing page exits 0, or fails without naming that link | Exit 1 with `strict build accepted a broken link` or `strict build failed without naming the broken link` | docs-check |
+| FM-003 | docs-check | boundary | `--assets-only` is given a missing directory, a directory with no `.html` file, or no argument | Exit 2 with `no HTML to scan` or the usage line; never reads as clean | docs-assets |
+| FM-004 | docs-check, site-config | regression | A built page has a `link` tag for `https://fonts.googleapis.com`, a protocol-relative `script src`, an upper-case `IMG SRC`, or CSS `@import url(https://…)` | Exit 1 naming each file and match; the own-host canonical link and `data:` URLs are not reported | docs-assets |
+| FM-005 | docs-pages, site-config | state/data integrity | A `docs/*.md` file is missing from `nav`, or `nav` names a file that does not exist | The nav test fails and names the file | docs-nav |
+| FM-006 | readme, docs-pages | state/data integrity | A line of the old README is absent from the new README and every page, and is not a listed exception | `readme-coverage.sh` exits 1 printing `L<n>: <text>` | readme-coverage |
+| FM-007 | docs-check | boundary | The strict build succeeds but writes no `site/404.html` | Exit 1 with `site/404.html missing` | docs-check |
+| FM-009 | readme | state/data integrity | The README links `https://rehan712.github.io/sdd-kit/index/`, or the URL of a page that was renamed or removed | The README test fails and names the URL | readme-shape |
+| FM-008 | tests, docs-pages | regression | A moved passage is edited on its page so a retargeted assertion no longer finds its string | The existing test fails with its existing message | doc-bindings |
+
+| ID | Scope | Promise | Enforcement sites | Test families |
+|---|---|---|---|---|
+| INV-001 | docs-workflow | `pages: write` and `id-token: write` are never granted outside the deploy job, and the deploy job never runs for anything but a push to `refs/heads/main` | Workflow-level `permissions`; the deploy job's `if` and `permissions` | docs-workflow |
+| INV-002 | readme | `README.md` never exceeds 150 lines and always carries the site URL, `## Install` and `## Quick start` | The README template; the README test | readme-shape |
+| INV-004 | docs-check | The check never passes `--clean` or `-c` to Zensical, so a run inside an installed kit never deletes `.cache/repos` | Both build invocations in `check_docs` (steps 2 and 5) | docs-check |
+| INV-003 | tests, docs-check | `bash tests/run.sh` never needs Python or Zensical | `test-docs.sh` runs `docs-check.sh` only against a stub `zensical` in `$SANDBOX`; `ci.yml` installs neither | docs-check, ci-untouched |
+
+Exclusions: every component / concurrency/ordering — static files and one
+sequential script; the only ordering is `needs: build`, which INV-001's test
+reads. docs-pages, site-config / partial failure — markdown and TOML have no
+runtime; a bad value fails the strict build as a whole (FM-002's positive half).
+docs-workflow / partial failure — a failed deploy leaves the previous site
+serving, which is GitHub Pages' behaviour and not ours to test (R5).
+
+| Family | Kind | Criteria | Concrete locators |
+|---|---|---|---|
+| docs-headings | test | AC-002 | `tests/test-docs.sh::test_AC_002_every_readme_heading_has_a_home` |
+| docs-nav | test | AC-003 | `tests/test-docs.sh::test_AC_003_every_page_is_in_the_nav_and_search_stays_on` |
+| readme-shape | test | AC-005 | `tests/test-docs.sh::test_AC_005_readme_is_a_short_entry_point` |
+| docs-workflow | test | AC-006, AC-009, AC-010 | `tests/test-docs.sh::test_AC_006_docs_build_on_pull_request_and_deploy_only_from_main`; `tests/test-docs.sh::test_AC_009_docs_need_no_secret_domain_or_tracker`; `tests/test-docs.sh::test_AC_010_only_the_deploy_job_can_write_pages` |
+| docs-assets | test | AC-009 | `tests/test-docs.sh::test_AC_009_asset_scan_reports_third_party_hosts`; `tests/test-docs.sh::test_AC_009_asset_scan_refuses_a_site_without_html` |
+| docs-check | test | AC-008 | `tests/test-docs.sh::test_AC_008_check_passes_when_strict_mode_names_the_broken_link`; `tests/test-docs.sh::test_AC_008_check_fails_when_strict_mode_accepts_a_broken_link`; `tests/test-docs.sh::test_AC_008_check_fails_when_the_failure_does_not_name_the_link`; `tests/test-docs.sh::test_AC_008_check_refuses_to_run_without_zensical`; `tests/test-docs.sh::test_AC_008_check_fails_without_a_404_page`; `tests/test-docs.sh::test_AC_008_check_never_cleans_the_kit_cache` |
+| ci-untouched | test | AC-012 | `tests/test-docs.sh::test_AC_012_ci_suite_needs_no_docs_tooling` |
+| doc-bindings | test | AC-011 | `tests/test-usage-limits.sh::test_AC_010_documents_exact_limit_policy_keys_and_recovery_workflows`; `tests/test-build-adapters.sh::test_stale_single_agent_claims_are_gone`; `tests/test-build-adapters.sh::test_stamped_skills_open_with_the_turn_note_and_nothing_else_does`; `tests/test-gate-contracts.sh::test_instruction_contracts` |
+| docs-build | assertion | AC-008, AC-009 | `tests/docs-check.sh::check_docs` |
+| readme-coverage | assertion | AC-002 | `.specify/specs/004-documentation-site-on-github-pages/notes/readme-coverage.sh::readme_coverage` |
+| deploy | manual | AC-001, AC-004, AC-007 | deploy-evidence |
+
+What each new test asserts, so the implementer does not design it:
+
+- `test_AC_002…` — a literal list of the 20 headings in spec §9. For each, some
+  line of `README.md` or a `kit_files docs '*.md'` file, with its leading
+  `#{1,6} ` removed, equals the heading as a fixed string. Never put a heading
+  inside a regular expression: seven of them contain parentheses.
+- `test_AC_003…` — the quoted `.md` names between `nav = [` and `]` in
+  `zensical.toml` equal the `kit_files docs '*.md'` base names, both ways; the
+  file contains neither `plugins.search` nor `enabled = false`; and no
+  enumerated path matches `docs/*/*.md` (`kit_files` lists direct children
+  only, so a page in a subdirectory would escape the nav check — enumerate with
+  the same `vf_source_paths` call `kit_files` makes, and fail on any such path).
+- `test_AC_005…` — `wc -l` ≤ 150; contains `https://rehan712.github.io/sdd-kit/`,
+  `## Install`, `## Quick start`; line 1 starts `# SDD Kit`; and every
+  `https://rehan712.github.io/sdd-kit/<x>/` in the file has a `docs/<x>.md`
+  (the bare root needs `docs/index.md`).
+- `test_AC_006…` — the workflow has `pull_request:`, `branches: [main]`,
+  `run: bash tests/docs-check.sh`, and the deploy job's exact `if:` line.
+- `test_AC_009_docs_need_no_secret…` — every `runs-on:` is `ubuntu-latest`; no
+  `secrets.`; no `docs/CNAME`; `zensical.toml` has `font = false` and neither
+  `repo_url` nor `analytics`.
+- `test_AC_010…` — the text before `  deploy:` holds `contents: read` and
+  neither `pages: write` nor `id-token: write`; the text from `  deploy:` holds
+  each exactly once.
+- `test_AC_009_asset_scan…` — fixture sites written into `$SANDBOX`, one per
+  FM-004 trigger plus a clean one holding the canonical link and a `data:` URL;
+  and the FM-003 inputs.
+- `test_AC_008…` — a stub `zensical` script in `$SANDBOX/bin`, first on `PATH`,
+  run against a sandbox kit the test builds: a copy of `tests/docs-check.sh`
+  (it sources nothing) plus a minimal `zensical.toml` and `docs/index.md` it
+  writes itself, so the test does not depend on the real pages, which land in
+  a later task. One helper, `stub_zensical <mode>`,
+  writes it; every mode appends its arguments to `$SANDBOX/zensical-args`, and
+  "builds" by writing `site/index.html` and `site/404.html` in its working
+  directory. "The probe" below means `docs/index.md` contains
+  `docs-check-no-such-page.md`.
+  - `good` — on the probe, print that name to stderr and exit 1; otherwise
+    build. Expect exit 0 and `docs-check: ok` (the positive control).
+  - `accepts-all` — always build and exit 0. Expect exit 1,
+    `strict build accepted a broken link` (FM-002).
+  - `silent-fail` — on the probe, exit 1 printing nothing; otherwise build.
+    Expect exit 1, `strict build failed without naming the broken link` (FM-002).
+  - `no-404` — as `good`, but never writes `site/404.html`. Expect exit 1,
+    `site/404.html missing` (FM-007).
+  - no stub, and a `PATH` holding only the directories of `bash`, `sed`, `cp`,
+    `mktemp` — expect exit 2, `zensical not found on PATH` (FM-001).
+  - after the `good` run, `$SANDBOX/zensical-args` contains neither `--clean`
+    nor `-c` (INV-004).
+- `test_AC_012…` — `ci.yml` contains none of `zensical`, `setup-python`, `pip`.
+
+`docs-build` is the one run of the real generator: the command in §5, captured
+once by the task that adds the workflow. The Tests stage has nothing to add —
+every test above ships with the file it tests.
+
+## 8. Rollout
+
+1. Commit the spec directory on `main` (it is untracked, and the checkout is on
+   the already-merged `feat/knowledge-cues`); cut `spec/004-…` from `main`.
+2. Implement, gates, PR. The PR's own `docs` run is the first real CI build.
+3. **Owner, before merging:** Settings → Pages → Source: *GitHub Actions*.
+4. Merge. The push run deploys.
+5. Collect the `[DEPLOY]` evidence into `notes/deploy-evidence.md` and
+   `notes/`: the three `curl` outputs (AC-001), four 375px screenshots and the
+   landing page's network log (AC-004), `gh run list --workflow docs.yml
+   --branch main --limit 1` (AC-007). Owner and check-back date go in STATUS.
+
+- No feature flag, no backfill.
+- **Reversible:** revert the merge commit; the README returns and the next push
+  redeploys. To take the site down, unpublish it in Settings → Pages.
+- **Metrics:** MET-001 `curl` status; MET-002 `gh run list --workflow docs.yml`;
+  MET-003 `wc -l README.md`; MET-004 the GitHub billing page — all checked by
+  the owner 14 days after step 4.
+
+## 9. Out of scope (deferred)
+
+- Pinning actions by commit SHA, and a hashed lock file for the generator's
+  dependencies — a repo-wide supply-chain spec, not this one.
+- Dependabot or any automatic bump of the Zensical pin.
+- A headless-browser check for script-initiated requests (R4).
+- A contributor guide for previewing the docs locally.
+- Turning the stale-claim test's page list into a general "all docs" lint.
+
+## 10. References
+
+- Spec: `.specify/specs/004-documentation-site-on-github-pages/spec.md`
+- Anchors: `.github/workflows/ci.yml`, `tests/shellcheck.sh`,
+  `tests/test-executable-bits.sh`, `tests/helpers.sh` (`kit_files`, `copy_kit`,
+  `run_rc`, `assert_contains`, `t_run_all`)
+- Zensical: <https://zensical.org/docs/publish-your-site/>,
+  <https://zensical.org/docs/setup/validation/>
+- GitHub Pages limits:
+  <https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits>
+- ADRs: none — the generator is a one-line pin and its successor reads the same
+  content, so the choice is cheap to reverse.
+
+---
+
+*Workflow:* Once this plan is accepted, run `/sdd:tasks` to produce `tasks.md`.
