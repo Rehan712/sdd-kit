@@ -131,12 +131,13 @@ updated: 2026-11-16
 > work: on Claude each is delegated via the Agent tool; on Codex/Copilot the
 > agent adopts the persona as a distinct review pass.
 
-- [ ] **T011** — Opponent review: steelman why this implementation is wrong
+- [x] **T011** — Opponent review: steelman why this implementation is wrong
   - *Agent:* `~/.sdd/agents/opponent.agent.md`
   - *Inputs:* the diff on this branch, `spec.md`, `plan.md`, every `[x]` task
   - *Acceptance:* agent returns **CLEARED** (not CHALLENGED); findings written to `notes/opponent.md`
   - *Refs:* REQ-001, REQ-002, REQ-003, REQ-004, REQ-005, REQ-006, REQ-007, REQ-008, REQ-009, AC-001, AC-002, AC-003, AC-004, AC-005, AC-006, AC-007, AC-008, AC-009, AC-010, AC-011, AC-012
   - *On CHALLENGED:* open follow-up tasks here (T011o1, T011o2, …) for each defect; fix and re-run before T012
+  - *Evidence:* `spec-gate.sh round opponent round 1 → CLEARED, 0 blocking, 8 minor (notes/opponent.md)` (2026-11-16)
 
 - [ ] **T012** — Reality-check the implemented spec end-to-end
   - *Agent:* `~/.sdd/agents/reality-check.agent.md`
