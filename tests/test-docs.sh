@@ -45,4 +45,86 @@ test_AC_009_asset_scan_refuses_a_site_without_html() {
   assert_contains "$OUT" 'usage'
 }
 
+# stub_zensical <mode> — write a fake zensical into $SANDBOX/bin; every mode
+# logs its arguments and "builds" site/index.html + site/404.html in its cwd.
+# A probe is a docs/index.md that names docs-check-no-such-page.md.
+stub_zensical() {
+  mkdir -p "$SANDBOX/bin"
+  cat > "$SANDBOX/bin/zensical" <<STUB
+#!/usr/bin/env bash
+echo "\$*" >> "$SANDBOX/zensical-args"
+mode='$1'
+probe=false
+grep -q docs-check-no-such-page.md docs/index.md && probe=true
+if [ "\$mode" != accepts-all ] && \$probe; then
+  [ "\$mode" = silent-fail ] || echo 'Error: docs-check-no-such-page.md' >&2
+  exit 1
+fi
+mkdir -p site
+echo '<html></html>' > site/index.html
+[ "\$mode" = no-404 ] || echo '<html></html>' > site/404.html
+exit 0
+STUB
+  chmod +x "$SANDBOX/bin/zensical"
+}
+
+# sandbox_kit — a self-contained kit: the check, a minimal config and one page.
+sandbox_kit() {
+  local kit="$SANDBOX/kit"
+  mkdir -p "$kit/tests" "$kit/docs"
+  cp "$CHECK" "$kit/tests/docs-check.sh"
+  printf '[project]\nsite_name = "t"\n' > "$kit/zensical.toml"
+  printf '# t\n' > "$kit/docs/index.md"
+  KIT="$kit"
+}
+
+# run_check <mode> <expected rc> — run the sandbox kit's check against a stub.
+run_check() {
+  stub_zensical "$1"
+  sandbox_kit
+  PATH="$SANDBOX/bin:$PATH" run_rc "$2" bash "$KIT/tests/docs-check.sh"
+}
+
+# AC-008: positive control.
+test_AC_008_check_passes_when_strict_mode_names_the_broken_link() {
+  run_check good 0
+  assert_contains "$OUT" 'docs-check: ok'
+}
+
+# AC-008 / FM-002: a strict build that accepts the probe is not strict.
+test_AC_008_check_fails_when_strict_mode_accepts_a_broken_link() {
+  run_check accepts-all 1
+  assert_contains "$OUT" 'strict build accepted a broken link'
+}
+
+# AC-008 / FM-002: a failure that does not name the link proves nothing.
+test_AC_008_check_fails_when_the_failure_does_not_name_the_link() {
+  run_check silent-fail 1
+  assert_contains "$OUT" 'strict build failed without naming the broken link'
+}
+
+# AC-008 / FM-007
+test_AC_008_check_fails_without_a_404_page() {
+  run_check no-404 1
+  assert_contains "$OUT" 'site/404.html missing'
+}
+
+# AC-008 / FM-001: PATH holds only bash, sed, cp and mktemp.
+test_AC_008_check_refuses_to_run_without_zensical() {
+  local t
+  sandbox_kit
+  mkdir -p "$SANDBOX/minbin"
+  for t in bash sed cp mktemp; do ln -s "$(command -v "$t")" "$SANDBOX/minbin/$t"; done
+  run_rc 2 env PATH="$SANDBOX/minbin" bash "$KIT/tests/docs-check.sh"
+  assert_contains "$OUT" 'zensical not found on PATH'
+}
+
+# INV-004: the check never cleans, so an installed kit keeps .cache/repos.
+test_AC_008_check_never_cleans_the_kit_cache() {
+  run_check good 0
+  assert_contains "$(cat "$SANDBOX/zensical-args")" 'build --strict'
+  assert_not_contains "$(cat "$SANDBOX/zensical-args")" '--clean'
+  assert_not_contains "$(cat "$SANDBOX/zensical-args")" ' -c'
+}
+
 t_run_all

@@ -25,7 +25,7 @@ updated: 2026-11-16
   - *Refs:* REQ-008, AC-009, FM-003, FM-004, plan §4.3, §7
   - *Evidence:* CAP-1-cEwLss verified by spec-gate accept; return sha256:1e1e610bca23a8ccf2efd9ce3de6f1c62d623345e69972e824509ecb010c3968
 
-- [ ] **T002** — Add the docs check's strict build, 404 and broken-link probe
+- [x] **T002** — Add the docs check's strict build, 404 and broken-link probe
   - *Files:* `tests/docs-check.sh`, `tests/test-docs.sh`
   - *Acceptance:* `check_docs` implements plan §4.3 steps 1–6 exactly: no `--clean`/`-c` anywhere, probe output captured with `2>&1` and ANSI-stripped before the name check, temp dir removed by `trap … EXIT`. `test-docs.sh` adds the `stub_zensical <mode>` helper and the six tests of plan §7 (`good`, `accepts-all`, `silent-fail`, `no-404`, no zensical on `PATH`, recorded args free of `--clean`/`-c`), each on the self-contained sandbox kit plan §7 describes. No test runs the real generator. ShellCheck clean.
   - *Verify kind:* test
@@ -33,6 +33,7 @@ updated: 2026-11-16
   - *Verify:* `sh -c 'bash tests/run.sh docs && bash tests/shellcheck.sh'` → exit 0, "-- 8/8 passed"
   - *Reuse:* local
   - *Refs:* REQ-007, AC-008, FM-001, FM-002, FM-007, INV-003, INV-004, plan §4.3, §7
+  - *Evidence:* CAP-3-LlPFkp verified by spec-gate accept; return sha256:378a20ffc23001f30c6de07550c1a6c061e72330de76d3d01ec7a1f373bd132b
 
 ## Backend
 
