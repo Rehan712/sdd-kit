@@ -127,4 +127,26 @@ test_AC_008_check_never_cleans_the_kit_cache() {
   assert_not_contains "$(cat "$SANDBOX/zensical-args")" ' -c'
 }
 
+# AC-003 / FM-005: the nav and docs/*.md name the same pages, both ways; search
+# is never switched off; no page hides in a subdirectory the nav check cannot see.
+test_AC_003_every_page_is_in_the_nav_and_search_stays_on() {
+  local toml="$KIT_DIR/zensical.toml" nav pages p list
+  nav="$(sed -n '/^nav = \[/,/^\]/p' "$toml" | sed -n 's/^  "\(.*\.md\)",$/\1/p' | sort)"
+  pages="$(kit_files docs '*.md' | tr '\0' '\n' | sed 's|.*/||' | sort)"
+  [[ -n "$pages" ]] || { t_fail "no docs/*.md pages enumerated"; return; }
+  for p in $pages; do
+    printf '%s\n' "$nav" | grep -qxF "$p" || t_fail "docs/$p is not in the nav"
+  done
+  for p in $nav; do
+    printf '%s\n' "$pages" | grep -qxF "$p" || t_fail "nav names $p but docs/$p does not exist"
+  done
+  assert_not_contains "$(cat "$toml")" 'plugins.search'
+  assert_not_contains "$(cat "$toml")" 'enabled = false'
+  list="$SANDBOX/source-paths"
+  bash -c '. "$1/verification-lib.sh"; vf_source_paths "$2" "$3"' _ "$SCRIPTS" "$(cd "$KIT_DIR" && pwd -P)" "$list" || { t_fail "cannot enumerate $KIT_DIR"; return; }
+  while IFS= read -r -d '' p; do
+    case "$p" in docs/*/*.md) t_fail "page in a subdirectory the nav check cannot see: $p";; esac
+  done < "$list"
+}
+
 t_run_all

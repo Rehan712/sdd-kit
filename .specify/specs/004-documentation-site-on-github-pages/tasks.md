@@ -37,7 +37,7 @@ updated: 2026-11-16
 
 ## Backend
 
-- [ ] **T003** — Move the README into eleven docs pages and add the site config
+- [x] **T003** — Move the README into eleven docs pages and add the site config
   - *Files:* `docs/index.md`, `docs/install.md`, `docs/workflow.md`, `docs/model-tiering.md`, `docs/skills-and-routing.md`, `docs/dispatch.md`, `docs/multi-repo.md`, `docs/scripts.md`, `docs/layout.md`, `docs/customizing.md`, `docs/verification.md` (all new), `zensical.toml` (new), `.gitignore`, `tests/test-docs.sh`
   - *Acceptance:* One move, kept in one commit because the nav needs every page. Each page holds exactly its plan §3 source range under move rules 1–5 plus the listed new prose; `README.md` is not touched yet. `zensical.toml` is plan §4.1 byte for byte. `.gitignore` gains a comment line and `site/`. `test-docs.sh` adds the nav test (nav ⇔ `docs/*.md` both ways, search not disabled, no `docs/*/*.md`).
   - *Verify kind:* test
@@ -45,6 +45,7 @@ updated: 2026-11-16
   - *Verify:* `bash tests/run.sh docs` → exit 0, "-- 9/9 passed"
   - *Reuse:* local
   - *Refs:* REQ-002, REQ-003, REQ-004, AC-003, FM-005, plan §3, §4.1, §7
+  - *Evidence:* CAP-5-ya5f7a verified by spec-gate accept; return sha256:f9dbe19e2ebcdb7d2890208aff3c0fefa20372f2a22cb012f2c4b45d2231cf61
 
 ## API
 
