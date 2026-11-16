@@ -3059,7 +3059,7 @@ gate_dispatch_grammar_cases() {
       "$SCRIPTS/spec-gate.sh" > "$cli"
     case "$clause" in *probe_2*) verb=probe_2;; *probe2*) verb=probe2;; *) verb=probe;; esac
     run_rc 0 bash "$cli" "$verb" "$kit/spec"
-    run_rc 1 gate_documentation_check "$cli" "$KIT_DIR/README.md"
+    run_rc 1 gate_documentation_check "$cli" "$KIT_DIR/docs/verification.md"
     assert_contains "$OUT" 'AC-018: the --help synopsis and the dispatcher disagree on the subcommand set'
     assert_contains "$OUT" "AC-018: spec-gate.sh $verb has no --help detail line"
     assert_contains "$OUT" "AC-018: spec-gate.sh $verb appears in no operator-facing document"
@@ -3070,7 +3070,7 @@ gate_dispatch_grammar_cases() {
   done
   # Equivalent spellings of documented clauses must continue to pass.
   sed -E 's/^  ([a-z-]+)\)/\t(\1)/' "$SCRIPTS/spec-gate.sh" > "$cli"
-  run_rc 0 gate_documentation_check "$cli" "$KIT_DIR/README.md"
+  run_rc 0 gate_documentation_check "$cli" "$KIT_DIR/docs/verification.md"
   # Two clauses on one line are two verbs to bash, and the second really
   # executes. The body check must refuse the line: without it the reader
   # classifies only `probe` and the second verb silently leaves the
@@ -3098,8 +3098,9 @@ public_workflow_cases() {
   local script spec document text
   # AC-018: both public entry documents distinguish the required floor from
   # optional stage commands; neither presence nor a legacy capture means fresh.
-  for document in README.md constitution.md; do
-    text="$(tr '\n' ' ' < "$KIT_DIR/$document")"
+  for document in 'docs/workflow.md docs/verification.md' constitution.md; do
+    # shellcheck disable=SC2086  # the first entry is two files read as one document
+    text="$(cd "$KIT_DIR" && cat $document | tr '\n' ' ')"
     assert_contains "$text" 'Required `gate_checks`'
     assert_contains "$text" 'Optional `checkpoints`'
     # Each entry document explains the whole contract, not only the required
@@ -3124,7 +3125,7 @@ public_workflow_cases() {
   # cold floor for want of it. Three obligations per verb: the dispatcher, the
   # --help synopsis and the --help detail lines must agree, and the operator
   # entry document must name it.
-  run_rc 0 gate_documentation_check "$SCRIPTS/spec-gate.sh" "$KIT_DIR/README.md"
+  run_rc 0 gate_documentation_check "$SCRIPTS/spec-gate.sh" "$KIT_DIR/docs/verification.md"
   gate_dispatch_grammar_cases
   documented_example_cases
   spec="$(make_spec_dir)"
@@ -3133,7 +3134,7 @@ public_workflow_cases() {
   # The documented reservation is a mutation guarded by a real floor.
   run_rc 3 bash "$SCRIPTS/spec-gate.sh" round "$spec" opponent
   [[ ! -d "$spec/notes/verification/rounds/opponent/ROUND-1" ]] || t_fail 'documented round bypassed floor'
-  assert_contains "$(cat "$KIT_DIR/README.md")" 'spec-gate.sh accept'
+  assert_contains "$(cat "$KIT_DIR/docs/verification.md")" 'spec-gate.sh accept'
   assert_contains "$(cat "$KIT_DIR/templates/verification-contract.md")" 'Verification-Return: 1'
 }
 # AC-018: the published workflow is executable, not illustrative. Every command
@@ -3153,11 +3154,11 @@ documented_example_cases() {
   # directory link, a nested clone -- would otherwise become an input of this
   # fixture repository's own identity (O-015 second review).
   copy_kit "$KIT_DIR" "$repo" scripts || { t_fail 'documented fixture: cannot copy the kit scripts'; return; }
-  awk '/^### Versioned verification workflow/ {on=1}
+  awk '/^# Versioned verification workflow/ {on=1}
        on && /^```bash$/ {block=1; next}
        block && /^```$/ {exit}
-       block {print}' "$KIT_DIR/README.md" > "$SANDBOX/readme-block"
-  [[ -s "$SANDBOX/readme-block" ]] || { t_fail 'README documents no runnable workflow'; return; }
+       block {print}' "$KIT_DIR/docs/verification.md" > "$SANDBOX/readme-block"
+  [[ -s "$SANDBOX/readme-block" ]] || { t_fail 'docs/verification.md documents no runnable workflow'; return; }
   export SPEC="$spec" TASK=T001 STAGE=Backend
   cd "$repo" || { t_fail "documented fixture repo missing: $repo"; return; }
   while IFS= read -r line; do
