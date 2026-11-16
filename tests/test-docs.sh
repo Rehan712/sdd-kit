@@ -34,6 +34,18 @@ test_AC_009_asset_scan_reports_third_party_hosts() {
   assert_not_contains "$OUT" 'third-party asset'
 }
 
+# AC-009 / FM-004: userinfo cannot pass a foreign host off as the site's own,
+# and an own-host URL with a port or userinfo is still the own host.
+test_AC_009_asset_scan_ignores_userinfo_in_the_host() {
+  local site="$SANDBOX/site-userinfo"
+  mkdir -p "$site/bad" "$site/ok"
+  printf '<html><script src="https://rehan712.github.io:x@evil.example/x.js"></script></html>\n' > "$site/bad/index.html"
+  run_rc 1 bash "$CHECK" --assets-only "$site/bad"
+  assert_contains "$OUT" 'evil.example/x.js'
+  printf '<html><script src="https://u@rehan712.github.io:443/x.js"></script></html>\n' > "$site/ok/index.html"
+  run_rc 0 bash "$CHECK" --assets-only "$site/ok"
+}
+
 # AC-009 / FM-003: nothing to scan never reads as clean.
 test_AC_009_asset_scan_refuses_a_site_without_html() {
   mkdir -p "$SANDBOX/empty"

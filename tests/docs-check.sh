@@ -39,7 +39,7 @@ scan_assets() {
     while IFS= read -r url; do
       [[ -n "$url" ]] || continue
       host="$(printf '%s' "$url" | grep -Eio '(https?:)?//[^"'\'') >]*$' \
-        | sed -E 's#^(https?:)?//##; s#[/?\#:].*$##' | tr 'A-Z' 'a-z')"
+        | sed -E 's#^(https?:)?//##; s#[/?\#].*$##; s#^.*@##; s#:.*$##' | tr 'A-Z' 'a-z')"
       [[ "$host" != "$SITE_HOST" ]] || continue
       echo "docs-check: third-party asset in $file: $url" >&2
       rc=1
