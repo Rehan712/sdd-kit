@@ -58,3 +58,9 @@ capture=CAP-9-0fBazV command=/bin/bash -o pipefail -c bash tests/run.sh docs  ke
 Captured run, exit 0. Full log: `notes/captures/CAP-10-EQoYxb/output.log`.
 
 capture=CAP-10-EQoYxb command=/bin/bash -o pipefail -c bash tests/run.sh docs  key=  -- 13/13 passed exit=0 output=2c3a0c6cf1e46ed5e39ae84dc8f2877918cee88e95b9a3922a8b5c19b4f81ae6 input=802589778dac3ae99b995bb67795600b98623d4492dd3333c562302b2188d0ab log=/Users/babar/projects/sdd-kit-public.worktrees/004-documentation-site-on-github-pages/.specify/specs/004-documentation-site-on-github-pages/notes/captures/CAP-10-EQoYxb/output.log [complete metadata: capture directory]
+
+## CAP-11-ffWxUu — 2026-11-16T08:24:51Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-11-ffWxUu/output.log`.
+
+capture=CAP-11-ffWxUu command=/bin/bash -o pipefail -c uv run --python 3.13 --no-project --with zensical==0.1.1 -- bash tests/docs-check.sh  key=docs-check: ok exit=0 output=2f0fe2864e2a6048551582ad72ac438a08f6b1da1fd7c2568ce2d1362701c76a input=b5bf8b4813ba13e9aea057f30e9472e26cc23804530722342132960475643138 log=/Users/babar/projects/sdd-kit-public.worktrees/004-documentation-site-on-github-pages/.specify/specs/004-documentation-site-on-github-pages/notes/captures/CAP-11-ffWxUu/output.log [complete metadata: capture directory]

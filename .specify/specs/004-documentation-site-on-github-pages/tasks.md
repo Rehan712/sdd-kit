@@ -63,7 +63,7 @@ updated: 2026-11-16
   - *Refs:* REQ-002, REQ-006, REQ-008, AC-006, AC-009, AC-010, AC-012, INV-001, INV-003, plan §4.2, §5, §7
   - *Evidence:* CAP-10-EQoYxb verified by spec-gate accept; return sha256:eae12d016b9745322b7a7e530c9ac9b3cdc7a6d05dabc2edacbf4fd5662da94f
 
-- [ ] **T005** — Run the real docs check once against the moved pages
+- [x] **T005** — Run the real docs check once against the moved pages
   - *Files:* `tests/docs-check.sh`
   - *Acceptance:* Runs `tests/docs-check.sh` without editing it; it writes only the ignored `site/` and `.cache/`. With Zensical 0.1.1 from `uv`, the strict build of the real pages passes, `site/404.html` exists, the asset scan is clean, and the broken-link probe is rejected and named. A failure here is fixed in the page or config it names (T003's files), never by weakening the check.
   - *Verify kind:* assertion
@@ -71,6 +71,7 @@ updated: 2026-11-16
   - *Verify:* `uv run --python 3.13 --no-project --with zensical==0.1.1 -- bash tests/docs-check.sh` → exit 0, "docs-check: ok"
   - *Reuse:* never
   - *Refs:* REQ-007, REQ-008, AC-008, AC-009, plan §5, §7
+  - *Evidence:* CAP-11-ffWxUu verified by spec-gate accept; return sha256:b1fd69a4b9ce73a4b82dbb77d6296b4763bdf602a0bf2ee94621e0a6d52e85b8
 
 ## Docs
 
