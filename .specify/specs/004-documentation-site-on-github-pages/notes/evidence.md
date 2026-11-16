@@ -218,3 +218,31 @@ capture=CAP-36-A1NtmA command=/bin/bash -o pipefail -c bash tests/shellcheck.sh 
 ## GATE-FLOOR
 
 Result: FLOOR-HrZL7B; source: 14d52c7ba4138c57cd0a8456ce26bc8dea0f1020675260e318fd6bd54b5f6203; exit: 0; command records: `notes/verification/floors/FLOOR-HrZL7B/commands.nul`.
+
+## CAP-37-V8gqBY — 2026-11-16T10:35:08Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-37-V8gqBY/output.log`.
+
+capture=CAP-37-V8gqBY command=/bin/bash -o pipefail -c uv run --python 3.13 --no-project --with zensical==0.1.1 -- bash tests/docs-check.sh  key=docs-check: ok exit=0 output=3d75917c6b57f70cb2328a979eb07ba78987f6c7f0bab633b68f786b6e43e4f7 input=14d52c7ba4138c57cd0a8456ce26bc8dea0f1020675260e318fd6bd54b5f6203 log=/Users/babar/projects/sdd-kit-public.worktrees/004-documentation-site-on-github-pages/.specify/specs/004-documentation-site-on-github-pages/notes/captures/CAP-37-V8gqBY/output.log [complete metadata: capture directory]
+
+## CAP-38-sIrtPi — 2026-11-16T10:35:26Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-38-sIrtPi/output.log`.
+
+capture=CAP-38-sIrtPi command=/bin/bash /Users/babar/.sdd/scripts/sdd-analyze.sh /Users/babar/projects/sdd-kit-public.worktrees/004-documentation-site-on-github-pages/.specify/specs/004-documentation-site-on-github-pages  key=consistent — spec/plan/tasks line up exit=0 output=86007c0dfcfc4fd07d0385a2735425e8a22d0faf4cdbab0d3ae24bb8d9e3f066 input=14d52c7ba4138c57cd0a8456ce26bc8dea0f1020675260e318fd6bd54b5f6203 log=/Users/babar/projects/sdd-kit-public.worktrees/004-documentation-site-on-github-pages/.specify/specs/004-documentation-site-on-github-pages/notes/captures/CAP-38-sIrtPi/output.log [complete metadata: capture directory]
+
+## CAP-39-xoJ4SE — 2026-11-16T10:35:32Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-39-xoJ4SE/output.log`.
+
+capture=CAP-39-xoJ4SE command=/bin/bash /Users/babar/.sdd/scripts/spec-ac-coverage.sh /Users/babar/projects/sdd-kit-public.worktrees/004-documentation-site-on-github-pages/.specify/specs/004-documentation-site-on-github-pages --root /Users/babar/projects/sdd-kit-public.worktrees/004-documentation-site-on-github-pages  key=bound — every AC is named by at least one test file exit=0 output=fa6b943cdd62d599f173a090a7fdb64fa20c5752711045ef37790a9d8c8e026a input=14d52c7ba4138c57cd0a8456ce26bc8dea0f1020675260e318fd6bd54b5f6203 log=/Users/babar/projects/sdd-kit-public.worktrees/004-documentation-site-on-github-pages/.specify/specs/004-documentation-site-on-github-pages/notes/captures/CAP-39-xoJ4SE/output.log [complete metadata: capture directory]
+
+## CAP-40-RZoYky — 2026-11-16T10:35:51Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-40-RZoYky/output.log`.
+
+capture=CAP-40-RZoYky command=/bin/bash /Users/babar/.sdd/scripts/spec-evidence.sh /Users/babar/projects/sdd-kit-public.worktrees/004-documentation-site-on-github-pages/.specify/specs/004-documentation-site-on-github-pages  key=current evidence: all completed task checks have valid current captures exit=0 output=c55bae40de8f06cbf903f0077b0f4f795e500df3bbe220bb04a46f29ddf61272 input=14d52c7ba4138c57cd0a8456ce26bc8dea0f1020675260e318fd6bd54b5f6203 log=/Users/babar/projects/sdd-kit-public.worktrees/004-documentation-site-on-github-pages/.specify/specs/004-documentation-site-on-github-pages/notes/captures/CAP-40-RZoYky/output.log [complete metadata: capture directory]
+
+## GATE-FLOOR
+
+Result: FLOOR-vFRASB; source: 14d52c7ba4138c57cd0a8456ce26bc8dea0f1020675260e318fd6bd54b5f6203; exit: 0; command records: `notes/verification/floors/FLOOR-vFRASB/commands.nul`.
