@@ -105,7 +105,7 @@ updated: 2026-11-16
   - *Refs:* REQ-009, AC-011, FM-008, plan §4.5
   - *Evidence:* CAP-18-etIv3G verified by spec-gate accept; return sha256:cc2966c370c1717a0c4940bc5eb2e7a85a16081e0b2b1fc93d42cae444f54ee9
 
-- [ ] **T009** — Rewrite the README as the entry point and retarget its pointers
+- [x] **T009** — Rewrite the README as the entry point and retarget its pointers
   - *Files:* `README.md`, `scripts/sdd-doctor.sh`, `registry.example.yml`, `tests/test-docs.sh`
   - *Acceptance:* `README.md` is exactly the plan §4.4 template (ten page bullets, no `…/index/` URL). `sdd-doctor.sh:347` says `(docs: \"Ponytail\")` and `registry.example.yml:31` says `see the docs, Install → "Multi-machine"` (plan §2). `test-docs.sh` adds the heading test (20 headings, fixed-string compare) and the README test (≤ 150 lines, site URL, `## Install`, `## Quick start`, line 1, every site URL maps to a `docs/<x>.md`). The three retargeted suites still pass after the trim. Nothing under `setup.sh`, `sync.sh`, `plugin/` or the adapters reads `docs/` (spec CON-008).
   - *Verify kind:* test
@@ -113,6 +113,7 @@ updated: 2026-11-16
   - *Verify:* `sh -c 'bash tests/run.sh docs && bash tests/run.sh usage-limits && bash tests/run.sh build-adapters && bash tests/run.sh gate-contracts && bash tests/shellcheck.sh'` → exit 0, "-- 15/15 passed" for `test-docs.sh`
   - *Reuse:* local
   - *Refs:* REQ-003, REQ-005, REQ-009, AC-002, AC-005, FM-009, INV-002, plan §2, §4.4, §7
+  - *Evidence:* CAP-20-FkBxpI verified by spec-gate accept; return sha256:e4e5f2190b2172fc4ac0163285eb63d698a77c86773850ceabac8051d4ea27f1
 
 - [ ] **T010** — Prove no README line was dropped in the move
   - *Files:* `.specify/specs/004-documentation-site-on-github-pages/notes/readme-coverage.sh` (new), `.specify/specs/004-documentation-site-on-github-pages/notes/readme-coverage-exceptions.txt` (new)

@@ -106,3 +106,15 @@ capture=CAP-17-80tiOn command=/bin/bash -o pipefail -c sh -c 'bash tests/run.sh 
 Captured run, exit 0. Full log: `notes/captures/CAP-18-etIv3G/output.log`.
 
 capture=CAP-18-etIv3G command=/bin/bash -o pipefail -c sh -c 'bash tests/run.sh gate-contracts && bash tests/shellcheck.sh'  key=  -- 18/18 passed exit=0 output=241ad537a446d239255473d510af813362149a4ad1fa25dd09b7af5a301988ab input=8cc0f01d6ebb8220a7cc2b109cdad8be8b8712f458bae9f0f0b8c895459bad9c log=/Users/babar/projects/sdd-kit-public.worktrees/004-documentation-site-on-github-pages/.specify/specs/004-documentation-site-on-github-pages/notes/captures/CAP-18-etIv3G/output.log [complete metadata: capture directory]
+
+## CAP-19-H2ip6c — 2026-11-16T09:29:56Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-19-H2ip6c/output.log`.
+
+capture=CAP-19-H2ip6c command=/bin/bash -o pipefail -c sh -c 'bash tests/run.sh docs && bash tests/run.sh usage-limits && bash tests/run.sh build-adapters && bash tests/run.sh gate-contracts && bash tests/shellcheck.sh'  key=  -- 18/18 passed exit=0 output=c4db7c882eff50154f5e37d8576776cee655f5ed6bf6bdf0d8415ef16993ff97 input=200cab267809368cc5f706a23d81eabd71ea607389ca560c34e7be1a47466563 log=/Users/babar/projects/sdd-kit-public.worktrees/004-documentation-site-on-github-pages/.specify/specs/004-documentation-site-on-github-pages/notes/captures/CAP-19-H2ip6c/output.log [complete metadata: capture directory]
+
+## CAP-20-FkBxpI — 2026-11-16T09:37:11Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-20-FkBxpI/output.log`.
+
+capture=CAP-20-FkBxpI command=/bin/bash -o pipefail -c sh -c 'bash tests/run.sh docs && bash tests/run.sh usage-limits && bash tests/run.sh build-adapters && bash tests/run.sh gate-contracts && bash tests/shellcheck.sh'  key=  -- 18/18 passed exit=0 output=c4db7c882eff50154f5e37d8576776cee655f5ed6bf6bdf0d8415ef16993ff97 input=200cab267809368cc5f706a23d81eabd71ea607389ca560c34e7be1a47466563 log=/Users/babar/projects/sdd-kit-public.worktrees/004-documentation-site-on-github-pages/.specify/specs/004-documentation-site-on-github-pages/notes/captures/CAP-20-FkBxpI/output.log [complete metadata: capture directory]

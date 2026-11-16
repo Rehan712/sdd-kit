@@ -190,4 +190,41 @@ test_AC_012_ci_suite_needs_no_docs_tooling() {
   assert_not_contains "$ci" 'pip'
 }
 
+# AC-002: each of the 20 old README headings is still a heading somewhere.
+# Fixed-string compare; seven of them hold parentheses, so never a regex.
+test_AC_002_every_readme_heading_has_a_home() {
+  local heads h text p
+  heads=(
+    'Install' 'Install as a plugin' 'The workflow' 'The two gates (both blocking, in order)'
+    'Model tiering (which model runs each phase)' 'Style guides' 'Official skills first'
+    'Project skills and agents (per-project routing)' 'Ponytail (companion — v5)'
+    'Cross-CLI dispatch (different providers per phase)' 'Graph and loop (control flow lives in scripts)'
+    'When a provider hits its usage limit' 'Multi-repo features (umbrella specs)' 'Scripts'
+    'Testing the kit itself' "What's in the box" 'Customizing' 'Multi-machine' 'Credits'
+    'Versioned verification workflow'
+  )
+  [[ "${#heads[@]}" -eq 20 ]] || t_fail "heading list holds ${#heads[@]}, not 20"
+  text="$(cat "$KIT_DIR/README.md")"
+  while IFS= read -r -d '' p; do text="$text"$'\n'"$(cat "$KIT_DIR/$p")"; done < <(kit_files docs '*.md')
+  text="$(printf '%s\n' "$text" | sed -E 's/^#{1,6} //')"
+  for h in "${heads[@]}"; do
+    printf '%s\n' "$text" | grep -qxF -- "$h" || t_fail "no heading '$h' in README.md or docs/"
+  done
+}
+
+# AC-005 / FM-009: the README is a short entry point whose site links all resolve.
+test_AC_005_readme_is_a_short_entry_point() {
+  local f="$KIT_DIR/README.md" site=https://rehan712.github.io/sdd-kit/ url x
+  [[ "$(wc -l < "$f")" -le 150 ]] || t_fail "README.md is over 150 lines"
+  assert_contains "$(cat "$f")" "$site"
+  assert_contains "$(cat "$f")" '## Install'
+  assert_contains "$(cat "$f")" '## Quick start'
+  [[ "$(head -n1 "$f")" == '# SDD Kit'* ]] || t_fail "README.md line 1 does not start '# SDD Kit'"
+  for url in $(grep -o "${site}[^) >]*" "$f" | sort -u); do
+    x="${url#"$site"}"; x="${x%/}"
+    if [[ -z "$x" ]]; then [[ -f "$KIT_DIR/docs/index.md" ]] || t_fail "$url has no docs/index.md"
+    else [[ -f "$KIT_DIR/docs/$x.md" ]] || t_fail "$url has no docs/$x.md"; fi
+  done
+}
+
 t_run_all
