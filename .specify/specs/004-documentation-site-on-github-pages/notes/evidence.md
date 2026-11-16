@@ -88,3 +88,21 @@ capture=CAP-14-YoNTqp command=/bin/bash -o pipefail -c uv run --python 3.13 --no
 Captured run, exit 0. Full log: `notes/captures/CAP-15-OxHrR5/output.log`.
 
 capture=CAP-15-OxHrR5 command=/bin/bash -o pipefail -c bash tests/run.sh  key=  -- 4/4 passed exit=0 output=4ab373859739bded191f46bfe376ef85afc4b5354ec2b4b9b8c340ef9cc3c6bb input=b5bf8b4813ba13e9aea057f30e9472e26cc23804530722342132960475643138 log=/Users/babar/projects/sdd-kit-public.worktrees/004-documentation-site-on-github-pages/.specify/specs/004-documentation-site-on-github-pages/notes/captures/CAP-15-OxHrR5/output.log [complete metadata: capture directory]
+
+## CAP-16-1EVJUJ — 2026-11-16T09:08:58Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-16-1EVJUJ/output.log`.
+
+capture=CAP-16-1EVJUJ command=/bin/bash -o pipefail -c sh -c 'bash tests/run.sh usage-limits && bash tests/shellcheck.sh'  key=  -- 28/28 passed exit=0 output=1cb7d9df90a38d01570087e62c3df68a8e00fa815a43d1a39691da2b582aa091 input=8cc0f01d6ebb8220a7cc2b109cdad8be8b8712f458bae9f0f0b8c895459bad9c log=/Users/babar/projects/sdd-kit-public.worktrees/004-documentation-site-on-github-pages/.specify/specs/004-documentation-site-on-github-pages/notes/captures/CAP-16-1EVJUJ/output.log [complete metadata: capture directory]
+
+## CAP-17-80tiOn — 2026-11-16T09:10:08Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-17-80tiOn/output.log`.
+
+capture=CAP-17-80tiOn command=/bin/bash -o pipefail -c sh -c 'bash tests/run.sh build-adapters && bash tests/shellcheck.sh'  key=  -- 19/19 passed exit=0 output=573699113b2e30c13f15204232a02cf9bf7f6540503725387337aa6068c58ed1 input=8cc0f01d6ebb8220a7cc2b109cdad8be8b8712f458bae9f0f0b8c895459bad9c log=/Users/babar/projects/sdd-kit-public.worktrees/004-documentation-site-on-github-pages/.specify/specs/004-documentation-site-on-github-pages/notes/captures/CAP-17-80tiOn/output.log [complete metadata: capture directory]
+
+## CAP-18-etIv3G — 2026-11-16T09:16:16Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-18-etIv3G/output.log`.
+
+capture=CAP-18-etIv3G command=/bin/bash -o pipefail -c sh -c 'bash tests/run.sh gate-contracts && bash tests/shellcheck.sh'  key=  -- 18/18 passed exit=0 output=241ad537a446d239255473d510af813362149a4ad1fa25dd09b7af5a301988ab input=8cc0f01d6ebb8220a7cc2b109cdad8be8b8712f458bae9f0f0b8c895459bad9c log=/Users/babar/projects/sdd-kit-public.worktrees/004-documentation-site-on-github-pages/.specify/specs/004-documentation-site-on-github-pages/notes/captures/CAP-18-etIv3G/output.log [complete metadata: capture directory]

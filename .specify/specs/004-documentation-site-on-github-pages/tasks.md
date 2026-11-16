@@ -75,7 +75,7 @@ updated: 2026-11-16
 
 ## Docs
 
-- [ ] **T006** [P] — Point the usage-limit docs test at the dispatch page
+- [x] **T006** [P] — Point the usage-limit docs test at the dispatch page
   - *Files:* `tests/test-usage-limits.sh`
   - *Acceptance:* Line 1067 reads `docs/dispatch.md` (plan §4.5); every assertion and expected string is unchanged; the suite passes while `README.md` still holds the full text, so the pass comes from the page.
   - *Verify kind:* test
@@ -83,8 +83,9 @@ updated: 2026-11-16
   - *Verify:* `sh -c 'bash tests/run.sh usage-limits && bash tests/shellcheck.sh'` → exit 0
   - *Reuse:* local
   - *Refs:* REQ-009, AC-011, FM-008, plan §4.5
+  - *Evidence:* CAP-16-1EVJUJ verified by spec-gate accept; return sha256:ce80c14a61592c9034278268ecbbe4724b3043a6b82efc408a143128922dfb8e
 
-- [ ] **T007** [P] — Point the adapter docs tests at the moved pages
+- [x] **T007** [P] — Point the adapter docs tests at the moved pages
   - *Files:* `tests/test-build-adapters.sh`
   - *Acceptance:* Lines 135, 143 and 340 changed exactly as plan §4.5 (the stale-claim loop also covers every `docs/*.md`; the gate-name check reads `docs/workflow.md`; the skill-stamp sentence reads `docs/model-tiering.md`); assertions and messages otherwise unchanged.
   - *Verify kind:* test
@@ -92,8 +93,9 @@ updated: 2026-11-16
   - *Verify:* `sh -c 'bash tests/run.sh build-adapters && bash tests/shellcheck.sh'` → exit 0
   - *Reuse:* local
   - *Refs:* REQ-009, AC-011, FM-008, plan §4.5
+  - *Evidence:* CAP-17-80tiOn verified by spec-gate accept; return sha256:843e52df6b27edaee2e1305dba46c560bdc5f25b84897cd50ffd71194708ad8b
 
-- [ ] **T008** [P] — Point the gate-contract docs tests at the verification page
+- [x] **T008** [P] — Point the gate-contract docs tests at the verification page
   - *Files:* `tests/test-gate-contracts.sh`
   - *Acceptance:* Lines 3062, 3073, 3101–3102, 3127, 3136, 3155 and 3159 changed exactly as plan §4.5, including the `SC2086` disable comment on the two-file document; the documented bash block is still found and every line of it still runs; assertions otherwise unchanged.
   - *Verify kind:* test
@@ -101,6 +103,7 @@ updated: 2026-11-16
   - *Verify:* `sh -c 'bash tests/run.sh gate-contracts && bash tests/shellcheck.sh'` → exit 0
   - *Reuse:* local
   - *Refs:* REQ-009, AC-011, FM-008, plan §4.5
+  - *Evidence:* CAP-18-etIv3G verified by spec-gate accept; return sha256:cc2966c370c1717a0c4940bc5eb2e7a85a16081e0b2b1fc93d42cae444f54ee9
 
 - [ ] **T009** — Rewrite the README as the entry point and retarget its pointers
   - *Files:* `README.md`, `scripts/sdd-doctor.sh`, `registry.example.yml`, `tests/test-docs.sh`
