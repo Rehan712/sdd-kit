@@ -87,5 +87,5 @@ through `uv`.
 ## Next action
 
 (@Rehan712) Enable Pages (Settings → Pages → Source: GitHub Actions), then run
-the Open PR task (). After /sdd:review reports it merged: T014
+the Open PR task (`spec-pr.sh`). After /sdd:review reports it merged: T014
 deploy evidence (check-back merge date + 1 day), then /sdd:retro (T015).
