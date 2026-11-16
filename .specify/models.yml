@@ -1,0 +1,27 @@
+# Project model policy — overrides for this repository only.
+# Names tiers; this machine's ~/.sdd/models.yml says what each tier is:
+#   mid-high / mid-medium / mid-low = Claude Sonnet 5.5, or Codex GPT-6.1 Terra,
+#   at high / medium / low effort.
+# A machine that does not define a tier keeps its own mapping for that role.
+# Check: ~/.sdd/scripts/model-policy.sh --project . show
+
+roles:
+  # design and judgment
+  specify: mid-high
+  plan: mid-high
+  tasks: mid-high
+  retro: mid-high
+  review: mid-high
+  go: mid-high
+  orchestrator: mid-high
+  opponent: mid-high
+  reality-check: mid-high
+  security-reviewer: mid-high
+  test-engineer: mid-high
+  implement-hard: mid-high
+  # writing code
+  implement: mid-medium
+  stack-expert: mid-medium
+  onboard: mid-medium
+  # read-only recon
+  explore: mid-low
