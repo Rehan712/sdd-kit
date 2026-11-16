@@ -118,3 +118,15 @@ capture=CAP-19-H2ip6c command=/bin/bash -o pipefail -c sh -c 'bash tests/run.sh 
 Captured run, exit 0. Full log: `notes/captures/CAP-20-FkBxpI/output.log`.
 
 capture=CAP-20-FkBxpI command=/bin/bash -o pipefail -c sh -c 'bash tests/run.sh docs && bash tests/run.sh usage-limits && bash tests/run.sh build-adapters && bash tests/run.sh gate-contracts && bash tests/shellcheck.sh'  key=  -- 18/18 passed exit=0 output=c4db7c882eff50154f5e37d8576776cee655f5ed6bf6bdf0d8415ef16993ff97 input=200cab267809368cc5f706a23d81eabd71ea607389ca560c34e7be1a47466563 log=/Users/babar/projects/sdd-kit-public.worktrees/004-documentation-site-on-github-pages/.specify/specs/004-documentation-site-on-github-pages/notes/captures/CAP-20-FkBxpI/output.log [complete metadata: capture directory]
+
+## CAP-21-6sIrqk — 2026-11-16T09:38:01Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-21-6sIrqk/output.log`.
+
+capture=CAP-21-6sIrqk command=/bin/bash -o pipefail -c bash .specify/specs/004-documentation-site-on-github-pages/notes/readme-coverage.sh  key=readme-coverage: 658 lines, 5 exceptions, 0 missing exit=0 output=5475256b3e7a6e5a065b776b81c416fc93bd1d1ba20f7a412e5b7e2dc3ad9b84 input=b4c17bbb28cfe29181311655a768d0f3d2caf2598e344d6f33f3988a3e4bebd7 log=/Users/babar/projects/sdd-kit-public.worktrees/004-documentation-site-on-github-pages/.specify/specs/004-documentation-site-on-github-pages/notes/captures/CAP-21-6sIrqk/output.log [complete metadata: capture directory]
+
+## CAP-22-oMd3Yz — 2026-11-16T09:38:14Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-22-oMd3Yz/output.log`.
+
+capture=CAP-22-oMd3Yz command=/bin/bash -o pipefail -c bash .specify/specs/004-documentation-site-on-github-pages/notes/readme-coverage.sh  key=readme-coverage: 658 lines, 5 exceptions, 0 missing exit=0 output=5475256b3e7a6e5a065b776b81c416fc93bd1d1ba20f7a412e5b7e2dc3ad9b84 input=b4c17bbb28cfe29181311655a768d0f3d2caf2598e344d6f33f3988a3e4bebd7 log=/Users/babar/projects/sdd-kit-public.worktrees/004-documentation-site-on-github-pages/.specify/specs/004-documentation-site-on-github-pages/notes/captures/CAP-22-oMd3Yz/output.log [complete metadata: capture directory]

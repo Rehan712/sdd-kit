@@ -115,7 +115,7 @@ updated: 2026-11-16
   - *Refs:* REQ-003, REQ-005, REQ-009, AC-002, AC-005, FM-009, INV-002, plan §2, §4.4, §7
   - *Evidence:* CAP-20-FkBxpI verified by spec-gate accept; return sha256:e4e5f2190b2172fc4ac0163285eb63d698a77c86773850ceabac8051d4ea27f1
 
-- [ ] **T010** — Prove no README line was dropped in the move
+- [x] **T010** — Prove no README line was dropped in the move
   - *Files:* `.specify/specs/004-documentation-site-on-github-pages/notes/readme-coverage.sh` (new), `.specify/specs/004-documentation-site-on-github-pages/notes/readme-coverage-exceptions.txt` (new)
   - *Acceptance:* The script implements plan §4.6 (fence-aware `#` stripping, merge-base baseline, exit 2 when the baseline cannot be read). The exceptions file lists exactly lines 644, 662, 663, 664 and 665, each with its rule-4 reason. Any other missing line is fixed in the page that should hold it, not added as an exception.
   - *Verify kind:* assertion
@@ -123,6 +123,7 @@ updated: 2026-11-16
   - *Verify:* `bash .specify/specs/004-documentation-site-on-github-pages/notes/readme-coverage.sh` → exit 0, "5 exceptions, 0 missing"
   - *Reuse:* local
   - *Refs:* REQ-003, AC-002, FM-006, plan §3, §4.6
+  - *Evidence:* CAP-22-oMd3Yz verified by spec-gate accept; return sha256:4f072b08afa574120f75e72da8771c5317617c2ed40cf827b0fe26ed6799fecd
 
 ## Reality Check (pre-ship gate)
 
