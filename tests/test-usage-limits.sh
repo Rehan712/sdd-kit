@@ -1064,7 +1064,7 @@ test_AC_003_dispatch_fixture_copies_only_enumerated_scripts() {
 # default-off, explicitly-commented example contract.
 test_AC_010_documents_exact_limit_policy_keys_and_recovery_workflows() {
   local readme example knowledge parser_contract document key
-  readme="$(cat "$KIT_DIR/README.md")"
+  readme="$(cat "$KIT_DIR/docs/dispatch.md")"
   example="$(cat "$KIT_DIR/models.example.yml")"
   knowledge="$(cat "$KIT_DIR/knowledge/usage-limit-handling.md")"
   parser_contract="$(sed -n '/require_limit_key()/,/^}/p' "$SCRIPTS/model-policy.sh")"
