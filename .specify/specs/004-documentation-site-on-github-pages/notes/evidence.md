@@ -28,3 +28,33 @@ capture=CAP-4-qLH6v0 command=/bin/bash -o pipefail -c bash tests/run.sh docs  ke
 Captured run, exit 0. Full log: `notes/captures/CAP-5-ya5f7a/output.log`.
 
 capture=CAP-5-ya5f7a command=/bin/bash -o pipefail -c bash tests/run.sh docs  key=  -- 9/9 passed exit=0 output=c965d1d842b4e9f9c618eaa627cdeb365a744ae955dd328c916f3a4f1ba5ed20 input=59c5a2e9ab29dbc346e8f51de648b32dfc0bbe28d0c57fc740da072fcb4dd838 log=/Users/babar/projects/sdd-kit-public.worktrees/004-documentation-site-on-github-pages/.specify/specs/004-documentation-site-on-github-pages/notes/captures/CAP-5-ya5f7a/output.log [complete metadata: capture directory]
+
+## CAP-6-DFp0cP — 2026-11-16T07:55:27Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-6-DFp0cP/output.log`.
+
+capture=CAP-6-DFp0cP command=/bin/bash -o pipefail -c sh -c 'bash tests/run.sh docs && bash tests/shellcheck.sh'  key=  -- 9/9 passed exit=0 output=c965d1d842b4e9f9c618eaa627cdeb365a744ae955dd328c916f3a4f1ba5ed20 input=8568b56916baf84a757dbcaaf108a121f7cd48be6444567c032387746f703ef3 log=/Users/babar/projects/sdd-kit-public.worktrees/004-documentation-site-on-github-pages/.specify/specs/004-documentation-site-on-github-pages/notes/captures/CAP-6-DFp0cP/output.log [complete metadata: capture directory]
+
+## CAP-7-VZxdwJ — 2026-11-16T07:55:45Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-7-VZxdwJ/output.log`.
+
+capture=CAP-7-VZxdwJ command=/bin/bash -o pipefail -c bash tests/run.sh docs  key=  -- 9/9 passed exit=0 output=c965d1d842b4e9f9c618eaa627cdeb365a744ae955dd328c916f3a4f1ba5ed20 input=8568b56916baf84a757dbcaaf108a121f7cd48be6444567c032387746f703ef3 log=/Users/babar/projects/sdd-kit-public.worktrees/004-documentation-site-on-github-pages/.specify/specs/004-documentation-site-on-github-pages/notes/captures/CAP-7-VZxdwJ/output.log [complete metadata: capture directory]
+
+## CAP-8-qz0trs — 2026-11-16T08:22:13Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-8-qz0trs/output.log`.
+
+capture=CAP-8-qz0trs command=/bin/bash -o pipefail -c bash tests/run.sh  key=  -- 4/4 passed exit=0 output=871448a50f6966a6b3100696463a3af14e5673366e6000c93c1da4bb38d8c0e7 input=8568b56916baf84a757dbcaaf108a121f7cd48be6444567c032387746f703ef3 log=/Users/babar/projects/sdd-kit-public.worktrees/004-documentation-site-on-github-pages/.specify/specs/004-documentation-site-on-github-pages/notes/captures/CAP-8-qz0trs/output.log [complete metadata: capture directory]
+
+## CAP-9-0fBazV — 2026-11-16T08:23:38Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-9-0fBazV/output.log`.
+
+capture=CAP-9-0fBazV command=/bin/bash -o pipefail -c bash tests/run.sh docs  key=  -- 13/13 passed exit=0 output=2c3a0c6cf1e46ed5e39ae84dc8f2877918cee88e95b9a3922a8b5c19b4f81ae6 input=802589778dac3ae99b995bb67795600b98623d4492dd3333c562302b2188d0ab log=/Users/babar/projects/sdd-kit-public.worktrees/004-documentation-site-on-github-pages/.specify/specs/004-documentation-site-on-github-pages/notes/captures/CAP-9-0fBazV/output.log [complete metadata: capture directory]
+
+## CAP-10-EQoYxb — 2026-11-16T08:24:35Z
+
+Captured run, exit 0. Full log: `notes/captures/CAP-10-EQoYxb/output.log`.
+
+capture=CAP-10-EQoYxb command=/bin/bash -o pipefail -c bash tests/run.sh docs  key=  -- 13/13 passed exit=0 output=2c3a0c6cf1e46ed5e39ae84dc8f2877918cee88e95b9a3922a8b5c19b4f81ae6 input=802589778dac3ae99b995bb67795600b98623d4492dd3333c562302b2188d0ab log=/Users/babar/projects/sdd-kit-public.worktrees/004-documentation-site-on-github-pages/.specify/specs/004-documentation-site-on-github-pages/notes/captures/CAP-10-EQoYxb/output.log [complete metadata: capture directory]

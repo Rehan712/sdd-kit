@@ -149,4 +149,45 @@ test_AC_003_every_page_is_in_the_nav_and_search_stays_on() {
   done < "$list"
 }
 
+# AC-006: pull requests build, only a push to main deploys.
+test_AC_006_docs_build_on_pull_request_and_deploy_only_from_main() {
+  local wf; wf="$(cat "$KIT_DIR/.github/workflows/docs.yml")"
+  assert_contains "$wf" '  pull_request:'
+  assert_contains "$wf" 'branches: [main]'
+  assert_contains "$wf" 'run: bash tests/docs-check.sh'
+  assert_contains "$wf" "    if: github.event_name == 'push' && github.ref == 'refs/heads/main'"
+}
+
+# AC-009: no secret, custom domain, tracker or web font.
+test_AC_009_docs_need_no_secret_domain_or_tracker() {
+  local wf toml; wf="$KIT_DIR/.github/workflows/docs.yml"; toml="$(cat "$KIT_DIR/zensical.toml")"
+  [[ -n "$(grep 'runs-on:' "$wf")" ]] || t_fail "no runs-on in docs.yml"
+  [[ -z "$(grep 'runs-on:' "$wf" | grep -v 'runs-on: ubuntu-latest$')" ]] || t_fail "a job runs off ubuntu-latest"
+  assert_not_contains "$(cat "$wf")" 'secrets.'
+  [[ ! -e "$KIT_DIR/docs/CNAME" ]] || t_fail "docs/CNAME exists"
+  assert_contains "$toml" 'font = false'
+  assert_not_contains "$toml" 'repo_url'
+  assert_not_contains "$toml" 'analytics'
+}
+
+# AC-010: only the deploy job (the last one) holds the Pages write permissions.
+test_AC_010_only_the_deploy_job_can_write_pages() {
+  local wf="$KIT_DIR/.github/workflows/docs.yml" before after p
+  before="$(sed '/^  deploy:/,$d' "$wf")"
+  after="$(sed -n '/^  deploy:/,$p' "$wf")"
+  assert_contains "$before" 'contents: read'
+  for p in 'pages: write' 'id-token: write'; do
+    assert_not_contains "$before" "$p"
+    [[ "$(printf '%s\n' "$after" | grep -cF "$p")" -eq 1 ]] || t_fail "$p not exactly once from deploy: on"
+  done
+}
+
+# AC-012: the kit's own CI never needs the docs toolchain.
+test_AC_012_ci_suite_needs_no_docs_tooling() {
+  local ci; ci="$(cat "$KIT_DIR/.github/workflows/ci.yml")"
+  assert_not_contains "$ci" 'zensical'
+  assert_not_contains "$ci" 'setup-python'
+  assert_not_contains "$ci" 'pip'
+}
+
 t_run_all

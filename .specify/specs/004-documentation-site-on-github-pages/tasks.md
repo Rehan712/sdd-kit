@@ -53,7 +53,7 @@ updated: 2026-11-16
 > the deploy job (plan §4.2). The `API` checkpoint in `.specify/stack.yml`
 > runs the full suite after this stage.
 
-- [ ] **T004** — Add the docs workflow and its permission tests
+- [x] **T004** — Add the docs workflow and its permission tests
   - *Files:* `.github/workflows/docs.yml` (new), `tests/test-docs.sh`
   - *Acceptance:* `docs.yml` is plan §4.2 byte for byte, `deploy:` last. `test-docs.sh` adds the four tests of plan §7: both triggers and the deploy job's exact `if:`; standard runners, no `secrets.`, no `docs/CNAME`, `font = false` and no `repo_url`/`analytics`; write permissions only from `  deploy:` on, each exactly once; `ci.yml` free of `zensical`, `setup-python`, `pip`. `.github/workflows/ci.yml` unchanged. Least privilege per constitution §3.1 (spec CON-005).
   - *Verify kind:* test
@@ -61,6 +61,7 @@ updated: 2026-11-16
   - *Verify:* `bash tests/run.sh docs` → exit 0, "-- 13/13 passed"
   - *Reuse:* local
   - *Refs:* REQ-002, REQ-006, REQ-008, AC-006, AC-009, AC-010, AC-012, INV-001, INV-003, plan §4.2, §5, §7
+  - *Evidence:* CAP-10-EQoYxb verified by spec-gate accept; return sha256:eae12d016b9745322b7a7e530c9ac9b3cdc7a6d05dabc2edacbf4fd5662da94f
 
 - [ ] **T005** — Run the real docs check once against the moved pages
   - *Files:* `tests/docs-check.sh`
