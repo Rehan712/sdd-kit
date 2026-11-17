@@ -2691,7 +2691,26 @@ vf_meta_get() {
   echo "metadata: missing $1" >&2; return 3
 }
 VF_CAPTURE_KEYS='version id sequence kind start end repo cwd check shell input_before input_after no_tick exit output_digest output_bytes policy key'
-VF_CAPTURE_FILES=(meta.nul argv.nul inputs.nul inputs-after.nul bindings.nul output.log summary.txt)
+VF_CAPTURE_V1_FILES=(meta.nul argv.nul inputs.nul inputs-after.nul bindings.nul output.log summary.txt)
+VF_CAPTURE_FILES=(meta.nul argv.nul bindings.nul output.log summary.txt)
+
+vf_manifest_matches() { # file expected-sha256
+  [[ "$2" =~ ^[a-f0-9]{64}$ && -f "$1" && ! -L "$1" && ! -L "${1%/*}" && "$(vf_hash "$1")" == "$2" ]] || {
+    echo "capture integrity: missing, linked or corrupt input manifest: $1" >&2; return 3;
+  }
+}
+
+# Called under the spec writer lock. Publish complete objects before any capture
+# references them. An interrupted writer can leave a valid, reusable object.
+vf_store_manifest() { # staging file, manifest store, snapshot digest
+  local src="$1" store="$2" digest="$3" dest="$2/$3.nul"
+  [[ "$digest" =~ ^[a-f0-9]{64}$ && -d "$store" && ! -L "$store" ]] || return 3
+  if [[ -e "$dest" || -L "$dest" ]]; then
+    vf_manifest_matches "$dest" "$digest" && rm "$src"
+  else
+    vf_manifest_matches "$src" "$digest" && mv "$src" "$dest"
+  fi
+}
 
 vf_escape() {
   # Display bytes only. Preserve full fields in metadata and the complete log.
@@ -2724,7 +2743,7 @@ vf_capture() { # spec binding cwd policy -- argv...
   case "$policy" in local|never) ;; *) return 2;; esac
   vf_lock "$spec" || return 3
   parent="$spec/notes/captures"
-  mkdir -p "$parent" "$spec/notes/verification/captures" || return 3
+  mkdir -p "$parent/manifests" "$spec/notes/verification/captures" || return 3
   staging="$(mktemp -d "$parent/.capture.XXXXXX")" || return 3
   VF_STAGING="$staging"
   seq=0
@@ -2751,12 +2770,18 @@ vf_capture() { # spec binding cwd policy -- argv...
     : > "$staging/inputs-after.nul"
     after="$(vf_hash "$staging/inputs-after.nul")" || return 3
   fi
+  vf_store_manifest "$staging/inputs.nul" "$parent/manifests" "$before" || return 3
+  if [[ "$after" == "$before" ]]; then
+    rm "$staging/inputs-after.nul" || return 3
+  else
+    vf_store_manifest "$staging/inputs-after.nul" "$parent/manifests" "$after" || return 3
+  fi
   key=''
   if [[ -n "${VF_KEY_PATTERN:-}" ]]; then key="$(grep -E -- "$VF_KEY_PATTERN" "$staging/output.log" | tail -1 || :)"; fi
   [[ -n "$key" ]] || key="$(awk 'NF {line=$0} END {print line}' "$staging/output.log")"
   [[ -n "$key" ]] || key='(no output)'
   output_digest="$(vf_hash "$staging/output.log")" || return 3
-  printf '%s\0' version 1 id "$id" sequence "$seq" kind command start "$start" end "$end" \
+  printf '%s\0' version 2 id "$id" sequence "$seq" kind command start "$start" end "$end" \
     repo "$repo" cwd "$cwd" check "$check" shell "$shell_identity" input_before "$before" input_after "$after" \
     no_tick "${VF_NO_TICK:-1}" exit "$rc" output_digest "$output_digest" \
     output_bytes "$(wc -c < "$staging/output.log" | tr -d ' ')" policy "$policy" key "$key" > "$staging/meta.nul"
@@ -2777,21 +2802,31 @@ vf_capture_check() (
   [[ "$id" =~ ^CAP-[1-9][0-9]*-[A-Za-z0-9]+$ ]] || { echo 'capture integrity: invalid capture ID' >&2; return 3; }
   case "$predicate" in integrity|current|reuse) ;; *) return 2;; esac
   dir="$spec/notes/captures/$id"
-  vf_integrity "$dir" "${VF_CAPTURE_FILES[@]}" || return 3
+  local version=2
+  if [[ -e "$dir/inputs.nul" || -L "$dir/inputs.nul" ]]; then
+    version=1
+    vf_integrity "$dir" "${VF_CAPTURE_V1_FILES[@]}" || return 3
+  else
+    vf_integrity "$dir" "${VF_CAPTURE_FILES[@]}" || return 3
+  fi
   ledger="$spec/notes/verification/captures/$id"
   [[ -f "$ledger" && ! -L "$ledger" ]] && cmp -s "$dir/COMPLETE" "$ledger" || { echo 'capture integrity: ledger disagreement or missing provenance' >&2; return 3; }
   vf_meta_load "$dir/meta.nul" "$VF_CAPTURE_KEYS" || return 3
   for key in $VF_CAPTURE_KEYS; do vf_meta_get "$key" >/dev/null || return 3; done
-  [[ "$(vf_meta_get version)" == 1 && "$(vf_meta_get id)" == "$id" && "$(vf_meta_get kind)" == command ]] || return 3
+  [[ "$(vf_meta_get version)" == "$version" && "$(vf_meta_get id)" == "$id" && "$(vf_meta_get kind)" == command ]] || return 3
   seq="$(vf_meta_get sequence)"; [[ "$seq" =~ ^[1-9][0-9]*$ && "$id" == CAP-"$seq"-* ]] || return 3
   vf_utc_valid "$(vf_meta_get start)" && vf_utc_valid "$(vf_meta_get end)" || return 3
   [[ "$(vf_meta_get start)" < "$(vf_meta_get end)" || "$(vf_meta_get start)" == "$(vf_meta_get end)" ]] || return 3
   exit_code="$(vf_meta_get exit)"; [[ "$exit_code" =~ ^[0-9]+$ && ${#exit_code} -le 3 && "$exit_code" -le 255 ]] || return 3
   [[ "$(vf_meta_get no_tick)" =~ ^[01]$ ]] || return 3
   before="$(vf_meta_get input_before)"; after="$(vf_meta_get input_after)"
-  [[ "$before" == "$(vf_hash "$dir/inputs.nul")" && "$after" == "$(vf_hash "$dir/inputs-after.nul")" ]] || {
-    echo 'capture integrity: input manifest mismatch' >&2; return 3;
-  }
+  if [[ "$version" == 1 ]]; then
+    vf_manifest_matches "$dir/inputs.nul" "$before" && vf_manifest_matches "$dir/inputs-after.nul" "$after" || return 3
+  else
+    local store="$spec/notes/captures/manifests"
+    vf_manifest_matches "$store/$before.nul" "$before" || return 3
+    if [[ "$after" != "$before" ]]; then vf_manifest_matches "$store/$after.nul" "$after" || return 3; fi
+  fi
   [[ "$(vf_meta_get output_digest)" == "$(vf_hash "$dir/output.log")" && "$(vf_meta_get output_bytes)" == "$(wc -c < "$dir/output.log" | tr -d ' ')" ]] || return 3
   check="$(vf_meta_get check)"; shell_path="$(vf_meta_get shell)"; repo="$(vf_meta_get repo)"; cwd="$(vf_meta_get cwd)"; policy="$(vf_meta_get policy)"
   case "$policy" in local|never) ;; *) return 3;; esac
