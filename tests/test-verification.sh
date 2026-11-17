@@ -1317,7 +1317,7 @@ capture_validity_cases() {
     if [[ "$rcap" == "$cap" ]]; then got+="old:$cached "; else got+="new:$cached "; fi
   done < "$SANDBOX/gate-records"
   assert_eq 'old:1 new:0 ' "$got" 'AC-020: a passing capture was reused for another argv, or not reused for its own'
-  for file in output.log COMPLETE argv.nul inputs.nul bindings.nul meta.nul; do
+  for file in output.log COMPLETE argv.nul bindings.nul meta.nul; do
     cp "$spec/notes/captures/$cap/$file" "$SANDBOX/saved"
     printf tampered >> "$spec/notes/captures/$cap/$file"
     run_rc 3 capture_check_fixture "$spec" "$cap" "$SANDBOX/current" current
@@ -1342,8 +1342,14 @@ capture_validity_cases() {
   run_rc 0 "$SCRIPTS/spec-run.sh" "$spec" T001 --cwd "$repo" --no-tick --summary -- bash -c 'echo changed >> src/parser.sh'
   later="$(printf '%s' "$OUT" | sed -n 's/^capture=\([^ ]*\).*/\1/p')"
   run_rc 0 snapshot_fixture "$spec" "$repo" "$SANDBOX/current"
+  local post_manifest="$spec/notes/captures/manifests/$OUT.nul"
   run_rc 3 capture_check_fixture "$spec" "$later" "$SANDBOX/current" current
   assert_contains "$OUT" 'inputs changed during execution'
+  # A mutating command still has an authentic historical observation of both states.
+  run_rc 0 capture_check_fixture "$spec" "$later" '' integrity
+  mv "$post_manifest" "$SANDBOX/after-manifest" || t_fail 'missing after manifest'
+  run_rc 3 capture_check_fixture "$spec" "$later" '' integrity
+  mv "$SANDBOX/after-manifest" "$post_manifest" || t_fail 'restore after manifest'
   # AC-020: external state has no reuse policy; its later failed observation
   # nevertheless supersedes an older same-input success for initial acceptance.
   printf 'value=good\n' > "$repo/src/parser.sh"

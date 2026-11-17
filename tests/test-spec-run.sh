@@ -86,6 +86,51 @@ break' > "$SANDBOX/argv"
   run_rc 0 cmp "$SANDBOX/argv" "$spec/notes/captures/$cap/argv.nul"
 }
 
+# Two identical captures share one manifest. A v1 capture in the same spec
+# still authenticates its own sealed copies, even if the v2 store is damaged.
+test_capture_manifest_storage() {
+  local spec repo store dir first second digest key objects
+  . "$SCRIPTS/verification-lib.sh"
+  spec="$(make_verification_git_dir shared)"
+  repo="$(cd "$spec/../../.." && pwd -P)"
+  store="$spec/notes/captures/manifests"
+  run_rc 0 "$SPEC_RUN" "$spec" T001 --cwd "$repo" --from-task --no-tick --summary
+  first="${OUT#capture=}"; first="${first%% *}"
+  run_rc 0 "$SPEC_RUN" "$spec" T001 --cwd "$repo" --from-task --no-tick --summary
+  second="${OUT#capture=}"; second="${second%% *}"
+  objects=("$store"/*.nul)
+  assert_eq 1 "${#objects[@]}" 'identical manifests should occupy one file'
+  dir="$spec/notes/captures/$first"
+  vf_meta_load "$dir/meta.nul" "$VF_CAPTURE_KEYS" || t_fail 'metadata'
+  digest="$(vf_meta_get input_before)"
+  assert_eq "$digest" "$(vf_hash "$store/$digest.nul")"
+  [[ ! -e "$dir/inputs.nul" && ! -e "$dir/inputs-after.nul" ]] || t_fail 'duplicate inline manifest'
+  run_rc 0 vf_capture_check "$spec" "$first" "$store/$digest.nul" current
+  run_rc 0 vf_capture_check "$spec" "$second" "$store/$digest.nul" current
+
+  # Rebuild the first record with the original v1 layout and ledger.
+  cp "$store/$digest.nul" "$dir/inputs.nul" && cp "$dir/inputs.nul" "$dir/inputs-after.nul" || t_fail 'v1 manifests'
+  {
+    printf '%s\0' version 1
+    for key in $VF_CAPTURE_KEYS; do
+      [[ "$key" == version ]] || printf '%s\0' "$key" "$(vf_meta_get "$key")"
+    done
+  } > "$dir/meta.nul"
+  rm "$dir/COMPLETE" && vf_seal "$dir" meta.nul argv.nul inputs.nul inputs-after.nul bindings.nul output.log summary.txt &&
+    cp "$dir/COMPLETE" "$spec/notes/verification/captures/$first" || t_fail 'v1 seal'
+  mv "$store/$digest.nul" "$SANDBOX/original"
+  run_rc 0 vf_capture_check "$spec" "$first" "$SANDBOX/original" current
+  run_rc 3 vf_capture_check "$spec" "$second" '' integrity
+  ln -s "$SANDBOX/original" "$store/$digest.nul"
+  run_rc 3 vf_capture_check "$spec" "$second" '' integrity
+  rm "$store/$digest.nul"; echo damaged > "$store/$digest.nul"
+  run_rc 3 vf_capture_check "$spec" "$second" '' integrity
+  run_rc 3 "$SPEC_RUN" "$spec" T001 --cwd "$repo" --from-task --no-tick --summary
+  [[ "$(cat "$store/$digest.nul")" == damaged ]] || t_fail 'existing manifest overwritten'
+  mv "$SANDBOX/original" "$store/$digest.nul"
+  run_rc 0 vf_capture_check "$spec" "$second" '' integrity
+}
+
 # --return prints the block a worker hands back: the script builds it from the
 # capture and the task's bindings, and deterministic acceptance takes it as
 # printed. A failing capture prints the failure summary and no block.

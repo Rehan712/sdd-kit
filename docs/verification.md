@@ -38,6 +38,16 @@ metadata remain under spec-local notes/captures; --summary bounds returned
 success output to 2048 bytes and failure output to 8192 bytes/20 diagnostic
 lines without changing the actual exit code.
 
+New captures store each distinct input manifest once per spec in
+`notes/captures/manifests/<sha256>.nul`. The sealed capture metadata records the
+before and after hashes. Verification checks the stored bytes against both.
+If a shared manifest is missing or corrupt, every capture that references it
+fails verification until the original bytes are restored.
+Update every verifier that reads the spec before writing this format. The
+updated verifier also reads older captures with inline manifests. Keep the
+whole `notes/captures/` tree with the spec when archiving it, including logs
+your project's Git ignore rules may omit. Retro leaves the evidence in place.
+
 Finish batch edits before capture/acceptance. Workers never tick; the invoker
 rejects incomplete or forged returns without changing tasks. Checkpoint failure
 stops the next stage even when only retained-coverage checks apply. A fresh floor
