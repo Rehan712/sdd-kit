@@ -1045,7 +1045,10 @@ capture_check_fixture() {
 # capture's own bindings as the catalog; one record per call is appended to
 # $SANDBOX/gate-records.
 gate_execute_fixture() {
-  bash -c '. "$1"; VF_GATE_FRESH="$2"; vf_gate_execute "$3" "$3/notes/captures/$4/bindings.nul" "$5" local "$6" task:T001 -- "$(command -v bash)" -o pipefail -c "$7"' \
+  bash -c '. "$1"; VF_GATE_FRESH="$2"
+    printf "%s\0" "$5" > "$2.roots"
+    vf_gate_snapshot "$3" "$2.roots" "$2.inputs" "$2.digests" >/dev/null || exit 3
+    vf_gate_execute "$3" "$3/notes/captures/$4/bindings.nul" "$5" local "$6" task:T001 "$2.digests" -- "$(command -v bash)" -o pipefail -c "$7"' \
     _ "$SCRIPTS/verification-lib.sh" "$SANDBOX/gate-fresh" "$1" "$2" "$3" "$SANDBOX/gate-records" "$4"
 }
 

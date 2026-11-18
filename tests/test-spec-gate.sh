@@ -622,6 +622,72 @@ NAMES
   cd "$here" || t_fail 'fixture: back from the legacy spec directory'
 }
 
+test_gate_snapshot_multiple_repositories() {
+  local spec other first second repo
+  . "$SCRIPTS/verification-lib.sh"
+  spec="$(make_verification_git_dir first)"
+  other="$(make_verification_git_dir 'second repo')"
+  first="$(cd "$spec/../../.." && pwd -P)"
+  second="$(cd "$other/../../.." && pwd -P)"
+  printf '%s\0' "$second" "$first" > "$SANDBOX/roots"
+  run_rc 0 vf_gate_snapshot "$spec" "$SANDBOX/roots" "$SANDBOX/combined" "$SANDBOX/digests"
+  for repo in "$first" "$second"; do
+    run_rc 0 vf_snapshot "$spec" "$repo" "$repo" ''
+    assert_eq "$OUT" "$(vf_gate_repo_digest "$SANDBOX/digests" "$repo")" 'each receipt uses its own worktree digest'
+  done
+  run_rc 3 vf_gate_repo_digest "$SANDBOX/digests" "$SANDBOX/absent"
+}
+
+test_gate_snapshot_counts_and_concurrent_edit() {
+  local spec repo gate lib full floor
+  spec="$(make_verification_git_dir snapshots)"
+  repo="$(cd "$spec/../../.." && pwd -P)"
+  gate="$(floor_fixture "$spec")"
+  lib="${gate%/*}/verification-lib.sh"
+  cat >> "$repo/.specify/stack.yml" <<'EOF'
+checkpoints:
+  Backend:
+    - 'bash tests/static.sh'
+EOF
+  # Gate hooks are installed before any run so the harness identity stays fixed.
+  awk '{print}
+    /^vf_snapshot\(\) \(/ {print "  printf x >> \"$SANDBOX/snapshot-calls\""}
+    /^vf_gate_execute\(\) \{/ {print "  fixture_hook before-command || return 3"}
+    /^vf_capture_check\(\) \(/ {print "  fixture_hook checking-receipt || return 3"}
+  ' "$lib" > "$lib.tmp" && mv "$lib.tmp" "$lib"
+  cat >> "$lib" <<'EOF'
+fixture_hook() {
+  if [[ -f "$SANDBOX/$1" ]]; then
+    bash "$SANDBOX/$1" && rm "$SANDBOX/$1"
+  fi
+}
+EOF
+  for full in false true; do
+    fixture_git -C "$repo" config sdd.fullCaptures "$full"
+    : > "$SANDBOX/snapshot-calls"
+    run_rc 0 bash "$gate" checkpoint "$spec" Backend
+    assert_contains "$OUT" 'executed=1'
+    assert_eq xxxx "$(cat "$SANDBOX/snapshot-calls")" 'gate boundaries plus two snapshots for the fresh command'
+  done
+  run_rc 0 bash "$gate" floor "$spec"
+  floor="$(cat "$spec/notes/verification/floor-latest")"
+  : > "$SANDBOX/snapshot-calls"
+  run_rc 0 bash "$gate" round "$spec" opponent --floor "$floor"
+  assert_eq xx "$(cat "$SANDBOX/snapshot-calls")" 'all receipts share the same per-repository snapshot during validation'
+  cp "$repo/src/parser.sh" "$SANDBOX/original"
+  printf 'echo changed >> %q\n' "$repo/src/parser.sh" > "$SANDBOX/checking-receipt"
+  run_rc 3 bash "$gate" round "$spec" reality-check --floor "$floor"
+  assert_contains "$OUT" 'floor stale: inputs changed during validation'
+  cp "$SANDBOX/original" "$repo/src/parser.sh"
+  # The command observes different bytes, but the gate's two endpoint snapshots agree.
+  printf 'echo changed >> %q\n' "$repo/src/parser.sh" > "$SANDBOX/before-command"
+  printf 'cp %q %q\n' "$SANDBOX/original" "$repo/src/parser.sh" > "$SANDBOX/checking-receipt"
+  run_rc 3 bash "$gate" checkpoint "$spec" Backend
+  assert_contains "$OUT" 'capture stale: current inputs changed'
+  run_rc 0 cmp "$SANDBOX/original" "$repo/src/parser.sh"
+}
+
+# AC-007: real checkers and suite commands execute in the existing worktree.
 test_floor() {
   floor_parse_fault_cases
   local spec repo gate id records check
