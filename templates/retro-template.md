@@ -52,7 +52,7 @@ annotated copy establishes the mapping; never rewrite shipped raw reports.
 | Actual usage / credits (same unit) | unknown | unknown | User's usage view before/after; no token estimate substituted |
 | Opponent / reality-check rounds | 5 / 1 for spec 002 | measured | 002 has six wrong-result findings; class mapping unclassified |
 | Check executions / cache hits | unknown | measured | Sealed floor/checkpoint command records |
-| Full log bytes / returned summary bytes | unknown | measured | Capture files, not estimated tokens |
+| Full log bytes / returned summary bytes | unknown | measured | Measured command output bytes from verification records |
 | Blocking defects / raw sites / reopened findings | measured or unknown | measured | Canonical reports with IDs |
 
 Two rounds and 30% savings are hypotheses, not claimed outcomes. Unknown

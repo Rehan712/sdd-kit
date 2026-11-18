@@ -112,7 +112,9 @@ if [[ "$contract" == 1 ]] || (( SUMMARY || FROM_TASK || RETURN )); then
     CMD=("$(command -v bash)" -o pipefail -c "$VF_TASK_COMMAND")
   fi
   VF_KEY_PATTERN="$KEY" VF_NO_TICK="$NO_TICK"
-  vf_capture "$SPEC_DIR" "$binding" "$RUN_CWD" "$policy" -- "${CMD[@]}"
+  display=always
+  if (( SUMMARY )); then display=quiet; elif (( RETURN )); then display=failure; fi
+  vf_capture "$SPEC_DIR" "$binding" "$RUN_CWD" "$policy" "$display" -- "${CMD[@]}"
   rc=$?
   [[ -n "${VF_CAPTURE_DIR:-}" ]] || { rm -f "$binding"; exit "$rc"; }
   if (( RETURN && rc == 0 )); then
@@ -129,8 +131,6 @@ if [[ "$contract" == 1 ]] || (( SUMMARY || FROM_TASK || RETURN )); then
   elif (( SUMMARY )); then
     if (( rc )); then vf_summary "$VF_CAPTURE_DIR" failure; else cat "$VF_CAPTURE_DIR/summary.txt"; fi
   else
-    printf '$ %s\n' "${CMD[*]}" >&2
-    cat "$VF_CAPTURE_DIR/output.log" >&2
     cat "$VF_CAPTURE_DIR/summary.txt"
   fi
   rm -f "$binding"
@@ -153,6 +153,7 @@ hash_file() {
 }
 
 # --- run, capturing combined output; keep the real exit code ----------------
+full="$(vf_full_captures "$RUN_CWD")" || exit 3
 out="$(mktemp "${TMPDIR:-/tmp}/spec-run.XXXXXX")" || exit 1
 trap 'rm -f "$out"' EXIT
 
@@ -176,6 +177,7 @@ fi
 [[ -z "${keyline:-}" ]] && keyline="$(awk 'NF{last=$0} END{print last}' "$out")"
 keyline="$(printf '%s' "$keyline" | sed -E 's/[[:cntrl:]]//g; s/^[[:space:]]+//; s/[[:space:]]+$//')"
 [[ -z "$keyline" ]] && keyline="(no output)"
+if [[ "$full" == false ]]; then keyline="${keyline:0:450}"; fi
 
 # --- append the record to notes/evidence.md --------------------------------
 notes="$SPEC_DIR/notes"
@@ -183,8 +185,6 @@ mkdir -p "$notes"
 evfile="$notes/evidence.md"
 [[ -f "$evfile" ]] || printf '# Evidence log\n\nCaptured acceptance runs, appended by `spec-run.sh`. One block per run.\n' > "$evfile"
 
-# Cap very long output so the log stays readable; the hash is over the FULL run.
-lines="$(wc -l < "$out" | tr -d ' ')"
 {
   printf '\n## %s — %s\n\n' "$TASK_ID" "$ts"
   printf -- '- **Command:** `%s`\n' "$cmd_str"
@@ -192,13 +192,9 @@ lines="$(wc -l < "$out" | tr -d ' ')"
   printf -- '- **Exit:** %s\n' "$rc"
   printf -- '- **Captured:** %s · %s (over full output)\n\n' "$ts" "$digest"
   printf '```text\n'
-  if (( lines > 400 )); then
-    head -n 120 "$out"
-    printf '\n… [%s lines total — trimmed; full run hashed above] …\n\n' "$lines"
-    tail -n 120 "$out"
-  else
-    cat "$out"
-  fi
+  if [[ "$full" == true ]]; then cat "$out"
+  elif (( rc )); then vf_diagnostics "$out"
+  else printf '%s\n' "$keyline"; fi
   printf '```\n'
 } >> "$evfile"
 

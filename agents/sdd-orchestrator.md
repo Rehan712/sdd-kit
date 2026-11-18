@@ -135,11 +135,11 @@ For each batch `spec-graph.sh next` prints:
    - the **worktree path `$WT` as the working root**, with the instruction to verify `git -C "$WT" rev-parse --abbrev-ref HEAD` prints `spec/NNN-slug` **before the first edit** (wrong output → stop and report, don't edit);
    - **the brief file's path, to read first.** Never paste or summarize what is in it (a paraphrased signature is a re-negotiated signature). A pattern anchor or seam the task needs that the file lacks — its *Refs:* missed a plan section — is named by `plan.md` heading, for the agent to read there;
    - the stack overlay path (the style guide it names governs new files; an edited file is matched, untouched lines are never restyled), and any constitution rule that bites this specific task;
-   - the return contract: "make the smallest change; transcribe the plan's seams; capture with `spec-run.sh … --from-task --no-tick --summary --return` and return the files changed plus the Verification-Return block exactly as the script printed it. Full output stays in the captured logs."
+   - the return contract: "make the smallest change; transcribe the plan's seams; capture with `spec-run.sh … --from-task --no-tick --summary --return` and return the files changed plus the Verification-Return block exactly as the script printed it. Return the bounded diagnostics on failure."
 
    A kit expert or `test-engineer` already carries the ponytail, style, official-skill and scout rules in its persona — do not repeat them. A project-local agent has no kit persona: give it the four rules of `stack-routing.md` §What every implementer carries.
 3. **Wait** for the batch to complete.
-4. **Accept** returned no-tick captures through the deterministic protocol below. On a failed acceptance, before the one escalation retry: send one `sdd-scout` (log-digest mode) the capture's full log, `notes/captures/<capture id>/output.log`, and put its digest — first failure, file:line, error signature — in the retry brief. The full log never enters your context.
+4. **Accept** returned no-tick captures through the deterministic protocol below. On a failed acceptance, before the one escalation retry: send one `sdd-scout` (log-digest mode) the failed capture’s `diagnostics.txt` (or `output.log` when full retention is enabled), and put its digest — first failure, file:line, error signature — in the retry brief. The full log never enters your context.
 5. **Run cross-cutting passes** when security-reviewer triggers apply: the task's diff, the persona's checklist. The built-in branch-wide review is not a per-task pass — it runs once, before the first opponent round (§5).
 6. **Record state** only after successful script acceptance; refresh STATUS.
 7. **Commit the passing task** on the spec branch: `git -C "$WT" add -- <the task's files and the spec dir> && git -C "$WT" commit` (never `add -A` after a multi-task batch — it sweeps a sibling's edits into this commit) with the conventional message (`<type>(<scope>): <subject>` + `Implements T### of spec NNN-slug` + `Refs:`). One task, one commit — this is what makes the opponent's per-commit diff review and any rollback cheap. Never push.
@@ -247,7 +247,7 @@ missing slice unless a new decision is required.
    leave tasks unchanged. On failure allow one escalation retry with the gap
    named and the existing implement-hard policy; a second failure stops
    dispatch. Intentional negative controls are recorded separately from retries.
-   Keep full logs on disk; pass bounded summaries and referenced diagnostics.
+   Pass the bounded receipt summary and failure diagnostics. Full logs are available when capture retention is enabled.
 4. After acceptance/commits at each exact authored stage boundary run
    `bash "$S/spec-gate.sh" checkpoint "$SPEC" "$STAGE"`. Nonzero stops
    next-stage dispatch, including when no stage commands exist but retained

@@ -2697,6 +2697,7 @@ cost_metric_cases() {
   load_gate_fixtures
   spec="$(make_verification_git_dir cost)"
   repo="$(cd "$spec/../../.." && pwd -P)"
+  fixture_git -C "$repo" config sdd.fullCaptures true || t_fail 'enable full capture fixture'
   gate="$(floor_fixture "$spec")"
   sed 's/^reuse_checks: \[\]/reuse_checks:\n  - '\''bash tests\/check.sh'\''/' "$repo/.specify/stack.yml" > "$SANDBOX/cost-stack"
   cp "$SANDBOX/cost-stack" "$repo/.specify/stack.yml"
@@ -2722,6 +2723,7 @@ matrix_runtime_cases() {
   local spec repo cap source id text digest tmp evidence path predicate
   spec="$(make_verification_git_dir matrix)"
   repo="$(cd "$spec/../../.." && pwd -P)"
+  fixture_git -C "$repo" config sdd.fullCaptures true || t_fail 'enable full capture fixture'
   # The captured check reaches the helper through implementation, and reads
   # the fixture, configuration and locked dependency version it checks.
   mkdir -p "$repo/lib" "$repo/tests/fixtures"
@@ -3250,6 +3252,7 @@ probe_fixture_cases() {
   load_gate_fixtures
   spec="$(make_verification_git_dir probe)"
   repo="$(cd "$spec/../../.." && pwd -P)"
+  fixture_git -C "$repo" config sdd.fullCaptures true || t_fail 'enable full capture fixture'
   cli="$(floor_fixture "$spec")"
   kit="${cli%/scripts/spec-gate.sh}"
   mkdir "$kit/tests"; cp "$KIT_DIR/tests/probe-gate-contract.sh" "$kit/tests/"

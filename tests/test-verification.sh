@@ -1301,6 +1301,7 @@ capture_validity_cases() {
   local spec repo cap later before file
   spec="$(make_verification_git_dir validity)"
   repo="$(cd "$spec/../../.." && pwd -P)"
+  fixture_git -C "$repo" config sdd.fullCaptures true || t_fail 'enable full capture fixture'
   run_rc 0 "$SCRIPTS/spec-run.sh" "$spec" T001 --cwd "$repo" --from-task --no-tick --summary
   cap="$(printf '%s' "$OUT" | sed -n 's/^capture=\([^ ]*\).*/\1/p')"
   run_rc 0 snapshot_fixture "$spec" "$repo" "$SANDBOX/current"

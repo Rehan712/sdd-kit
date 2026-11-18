@@ -41,6 +41,20 @@ test_key_flag_picks_the_evidence_line() {
     "--key match beats the last line"
 }
 
+test_legacy_output_retention() {
+  local spec repo
+  spec="$(make_spec_dir)"
+  repo="$(cd "$spec/../../.." && pwd -P)"
+  fixture_git -C "$repo" init -q
+  fixture_git -C "$repo" config sdd.fullCaptures false
+  run_rc 0 "$SPEC_RUN" "$spec" T002 --cwd "$repo" --no-tick -- bash -c 'echo details; echo passed'
+  assert_contains "$OUT" $'details\npassed'
+  assert_not_contains "$(cat "$spec/notes/evidence.md")" $'\ndetails\n'
+  fixture_git -C "$repo" config sdd.fullCaptures true
+  run_rc 0 "$SPEC_RUN" "$spec" T002 --cwd "$repo" --no-tick -- bash -c 'echo details; echo passed'
+  assert_contains "$(cat "$spec/notes/evidence.md")" $'\ndetails\npassed'
+}
+
 test_usage_errors() {
   local spec_dir; spec_dir="$(make_spec_dir)"
   run_rc 2 "$SPEC_RUN" "$spec_dir" T002            # no `--`
@@ -54,6 +68,7 @@ test_bounded_capture() {
   local spec repo cap bytes before lib="$SCRIPTS/verification-lib.sh"
   spec="$(make_verification_git_dir bounded)"
   repo="$(cd "$spec/../../.." && pwd -P)"
+  fixture_git -C "$repo" config sdd.fullCaptures true || t_fail 'enable full capture fixture'
   before="$(cat "$spec/tasks.md")"
   run_rc 0 "$SPEC_RUN" "$spec" T001 --cwd "$repo" --from-task --no-tick --summary
   assert_contains "$OUT" 'exit=0'
@@ -93,6 +108,7 @@ test_capture_manifest_storage() {
   . "$SCRIPTS/verification-lib.sh"
   spec="$(make_verification_git_dir shared)"
   repo="$(cd "$spec/../../.." && pwd -P)"
+  fixture_git -C "$repo" config sdd.fullCaptures true || t_fail 'enable full capture fixture'
   store="$spec/notes/captures/manifests"
   run_rc 0 "$SPEC_RUN" "$spec" T001 --cwd "$repo" --from-task --no-tick --summary
   first="${OUT#capture=}"; first="${first%% *}"
@@ -131,11 +147,33 @@ test_capture_manifest_storage() {
   run_rc 0 vf_capture_check "$spec" "$second" '' integrity
 }
 
+test_compact_receipt_bounds_and_freshness() {
+  local spec repo cap dir current="$SANDBOX/current"
+  . "$SCRIPTS/verification-lib.sh"
+  spec="$(make_verification_git_dir compact)"
+  repo="$(cd "$spec/../../.." && pwd -P)"
+  fixture_git -C "$repo" config sdd.fullCaptures false
+  run_rc 6 "$SPEC_RUN" "$spec" T001 --cwd "$repo" --no-tick --summary -- bash -c 'printf "%0100000d\n" 0; exit 6'
+  cap="${OUT#capture=}"; cap="${cap%% *}"; dir="$spec/notes/captures/$cap"
+  run_rc 0 vf_capture_check "$spec" "$cap" '' output-bytes
+  assert_eq 100001 "$OUT"
+  [[ $(wc -c < "$dir/meta.nul") -lt 4096 && $(wc -c < "$dir/diagnostics.txt") -le 6144 ]] ||
+    t_fail 'large output escaped the receipt bounds'
+  [[ $(wc -l < "$dir/summary.txt") -eq 1 ]] || t_fail 'canonical failure summary must remain one line'
+  run_rc 0 "$SPEC_RUN" "$spec" T001 --cwd "$repo" --no-tick --summary -- bash -c 'echo changed >> src/parser.sh'
+  cap="${OUT#capture=}"; cap="${cap%% *}"
+  run_rc 0 vf_snapshot "$spec" "$repo" "$repo" "$current"
+  run_rc 0 vf_capture_check "$spec" "$cap" '' integrity
+  run_rc 3 vf_capture_check "$spec" "$cap" "$current" current
+  assert_contains "$OUT" 'inputs changed during execution'
+}
+
 # --return prints the block a worker hands back: the script builds it from the
 # capture and the task's bindings, and deterministic acceptance takes it as
 # printed. A failing capture prints the failure summary and no block.
 test_return_flag_prints_a_block_that_accept_takes() {
-  local spec repo
+  local spec repo dir cap
+  export GIT_CONFIG_GLOBAL=/dev/null GIT_CONFIG_NOSYSTEM=1
   spec="$(make_verification_git_dir returnblock)"
   repo="$(cd "$spec/../../.." && pwd -P)"
   run_rc 0 "$SPEC_RUN" "$spec" T001 --cwd "$repo" --from-task --no-tick --summary --return
@@ -145,11 +183,24 @@ test_return_flag_prints_a_block_that_accept_takes() {
   assert_contains "$OUT" 'FM-001, tests/check.sh::test_ac_001_shared, '
   mkdir -p "$spec/notes/verification/returns"
   printf '%s\n' "$OUT" > "$spec/notes/verification/returns/T001.txt"
+  cap="$(sed -n 's/^Captures: //p' "$spec/notes/verification/returns/T001.txt")"
+  dir="$spec/notes/captures/$cap"
+  [[ -f "$dir/bindings.sha256" && ! -e "$dir/bindings.nul" && ! -e "$dir/output.log" &&
+     ! -e "$dir/inputs.nul" && ! -e "$spec/notes/captures/manifests" ]] || t_fail 'default should retain only a receipt'
   run_rc 0 "$SCRIPTS/spec-gate.sh" accept "$spec" T001 "$spec/notes/verification/returns/T001.txt"
   assert_contains "$(cat "$spec/tasks.md")" '- [x] **T001**'
   run_rc 7 "$SPEC_RUN" "$spec" T001 --cwd "$repo" --no-tick --summary --return -- bash -c 'echo broke; exit 7'
   assert_not_contains "$OUT" 'Verification-Return' 'a failing capture printed a return block'
   assert_contains "$OUT" 'exit=7'
+  assert_contains "$OUT" 'broke'
+  run_rc 0 "$SCRIPTS/spec-gate.sh" tally "$spec"
+  assert_contains "$OUT" 'captures=2 full-log-bytes=13'
+  printf damaged >> "$dir/bindings.sha256"
+  run_rc 3 bash -c '. "$1"; vf_capture_check "$2" "$3" "" integrity' _ "$SCRIPTS/verification-lib.sh" "$spec" "$cap"
+  fixture_git -C "$repo" config sdd.fullCaptures typo
+  run_rc 3 "$SPEC_RUN" "$spec" T001 --cwd "$repo" --no-tick --summary -- touch "$SANDBOX/unexpected"
+  [[ ! -e "$SANDBOX/unexpected" ]] || t_fail 'invalid setting ran the check'
+
 }
 
 t_run_all

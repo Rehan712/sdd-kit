@@ -2639,8 +2639,8 @@ vf_snapshot() (
     vf_semantic_file ".specify/specs/active/$path" "$spec/$path" "$tmp/semantic" || return 3
     printf '%s\0' document "$spec/$path" "$(vf_hash "$tmp/semantic")" '' '' '' >> "$tmp/inputs"
   done
-  cp "$tmp/inputs" "$output" || return 3
-  vf_hash "$output"
+  if [[ -n "$output" ]]; then cp "$tmp/inputs" "$output" || return 3; fi
+  vf_hash "${output:-$tmp/inputs}"
 )
 
 # Normalize the mutable state column; task text and binding changes remain inputs.
@@ -2693,6 +2693,7 @@ vf_meta_get() {
 VF_CAPTURE_KEYS='version id sequence kind start end repo cwd check shell input_before input_after no_tick exit output_digest output_bytes policy key'
 VF_CAPTURE_V1_FILES=(meta.nul argv.nul inputs.nul inputs-after.nul bindings.nul output.log summary.txt)
 VF_CAPTURE_FILES=(meta.nul argv.nul bindings.nul output.log summary.txt)
+VF_RECEIPT_FILES=(meta.nul argv.nul bindings.sha256 summary.txt)
 
 vf_manifest_matches() { # file expected-sha256
   [[ "$2" =~ ^[a-f0-9]{64}$ && -f "$1" && ! -L "$1" && ! -L "${1%/*}" && "$(vf_hash "$1")" == "$2" ]] || {
@@ -2716,6 +2717,12 @@ vf_escape() {
   # Display bytes only. Preserve full fields in metadata and the complete log.
   LC_ALL=C awk 'BEGIN {ORS=""} {if(NR>1) printf "\\n"; gsub(/\\/,"\\\\"); gsub(/[[:cntrl:]]/,"?"); printf "%s",$0}'
 }
+vf_full_captures() { vf_git -C "$1" config --bool --default false --get sdd.fullCaptures; }
+
+vf_diagnostics() {
+  LC_ALL=C tail -n "$VF_DIAGNOSTIC_LINES" "$1" | \
+      LC_ALL=C awk -v left="$((VF_FAILURE_BYTES-VF_SUCCESS_BYTES))" 'left>0 {line=substr($0,1,left); gsub(/[[:cntrl:]]/,"?",line); line=substr(line "\n",1,left); printf "%s",line; left-=length(line)}'
+}
 vf_summary() {
   local dir="$1" mode="$2" cap command key log exit_code digest input
   vf_meta_load "$dir/meta.nul" "$VF_CAPTURE_KEYS" || return 3
@@ -2723,17 +2730,21 @@ vf_summary() {
   digest="$(vf_meta_get output_digest)"; input="$(vf_meta_get input_before)"
   command="$(tr '\000' ' ' < "$dir/argv.nul" | vf_escape | head -c 450)"
   key="$(vf_meta_get key | vf_escape | head -c 450)"
-  log="$(printf '%s' "${dir%/*}/$cap/output.log" | vf_escape | head -c 350)"
+  if [[ "$(vf_meta_get version)" == 3 ]]; then
+    log=not-retained
+  else
+    log="$(printf '%s' "${dir%/*}/$cap/output.log" | vf_escape | head -c 350)"
+  fi
   printf 'capture=%s command=%s key=%s exit=%s output=%s input=%s log=%s [complete metadata: capture directory]\n' \
     "$cap" "$command" "$key" "$exit_code" "$digest" "$input" "$log" | head -c "$VF_SUCCESS_BYTES"
   if [[ "$mode" == failure ]]; then
-    LC_ALL=C tail -n "$VF_DIAGNOSTIC_LINES" "$dir/output.log" | \
-      LC_ALL=C awk '{gsub(/[[:cntrl:]]/,"?"); print}' | head -c $((VF_FAILURE_BYTES-VF_SUCCESS_BYTES))
+    if [[ "$log" == not-retained ]]; then cat "$dir/diagnostics.txt"
+    else vf_diagnostics "$dir/output.log"; fi
   fi
 }
 
-vf_capture() { # spec binding cwd policy -- argv...
-  local spec="$1" binding="$2" cwd="$3" policy="$4"; shift 4
+vf_capture() { # spec binding cwd policy display -- argv...
+  local spec="$1" binding="$2" cwd="$3" policy="$4" display="$5"; shift 5
   [[ "${1:-}" == -- && $# -gt 1 ]] || return 2; shift
   VF_CAPTURE_ID="" VF_CAPTURE_DIR=""
   local repo parent staging id seq before after rc start end check shell_identity final key output_digest
@@ -2741,9 +2752,15 @@ vf_capture() { # spec binding cwd policy -- argv...
   cwd="$(cd "$cwd" && pwd -P)" || return 3
   repo="$(vf_git -C "$cwd" rev-parse --show-toplevel 2>/dev/null)" || { echo 'capture requires a Git worktree' >&2; return 3; }
   case "$policy" in local|never) ;; *) return 2;; esac
+  local full before_file='' after_file='' version=3 capture_files=("${VF_RECEIPT_FILES[@]}")
+  full="$(vf_full_captures "$repo")" || return 3
   vf_lock "$spec" || return 3
   parent="$spec/notes/captures"
-  mkdir -p "$parent/manifests" "$spec/notes/verification/captures" || return 3
+  mkdir -p "$parent" "$spec/notes/verification/captures" || return 3
+  if [[ "$full" == true ]]; then
+    version=2; capture_files=("${VF_CAPTURE_FILES[@]}")
+    mkdir -p "$parent/manifests" || return 3
+  fi
   staging="$(mktemp -d "$parent/.capture.XXXXXX")" || return 3
   VF_STAGING="$staging"
   seq=0
@@ -2755,10 +2772,15 @@ vf_capture() { # spec binding cwd policy -- argv...
   printf '%s\n' "$seq" > "$spec/notes/verification/sequence.tmp" && mv "$spec/notes/verification/sequence.tmp" "$spec/notes/verification/sequence" || return 3
   id="CAP-$seq-${staging##*.}"
   final="$parent/$id"
-  cp "$binding" "$staging/bindings.nul" || return 3
+  if [[ "$full" == true ]]; then
+    before_file="$staging/inputs.nul"; after_file="$staging/inputs-after.nul"
+    cp "$binding" "$staging/bindings.nul" || return 3
+  else
+    vf_hash "$binding" > "$staging/bindings.sha256" || return 3
+  fi
   printf '%s\0' "$@" > "$staging/argv.nul"
   shell_identity="$(command -v bash)"
-  before="$(vf_snapshot "$spec" "$repo" "$cwd" "$staging/inputs.nul")" || return 3
+  before="$(vf_snapshot "$spec" "$repo" "$cwd" "$before_file")" || return 3
   { cat "$staging/argv.nul"; printf '%s\0' "$shell_identity" "$(vf_hash "$shell_identity")" "$repo" "$cwd" "$policy"; } > "$staging/check"
   check="$(vf_hash "$staging/check")" || return 3
   rm "$staging/check"
@@ -2766,32 +2788,43 @@ vf_capture() { # spec binding cwd policy -- argv...
   (cd "$cwd" && vf_caller_locale && "$@") > "$staging/output.log" 2>&1
   rc=$?
   end="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
-  if ! after="$(vf_snapshot "$spec" "$repo" "$cwd" "$staging/inputs-after.nul")"; then
-    : > "$staging/inputs-after.nul"
-    after="$(vf_hash "$staging/inputs-after.nul")" || return 3
+  if ! after="$(vf_snapshot "$spec" "$repo" "$cwd" "$after_file")"; then
+    if [[ -n "$after_file" ]]; then : > "$after_file" || return 3; fi
+    after="$(vf_hash /dev/null)" || return 3
   fi
-  vf_store_manifest "$staging/inputs.nul" "$parent/manifests" "$before" || return 3
-  if [[ "$after" == "$before" ]]; then
-    rm "$staging/inputs-after.nul" || return 3
-  else
-    vf_store_manifest "$staging/inputs-after.nul" "$parent/manifests" "$after" || return 3
+  if [[ "$full" == true ]]; then
+    vf_store_manifest "$staging/inputs.nul" "$parent/manifests" "$before" || return 3
+    if [[ "$after" == "$before" ]]; then
+      rm "$staging/inputs-after.nul" || return 3
+    else
+      vf_store_manifest "$staging/inputs-after.nul" "$parent/manifests" "$after" || return 3
+    fi
+  elif (( rc )); then
+    vf_diagnostics "$staging/output.log" > "$staging/diagnostics.txt" || return 3
+    capture_files+=(diagnostics.txt)
+  fi
+  if [[ "$display" == always || ( "$display" == failure && "$rc" != 0 ) ]]; then
+    printf '$ %s\n' "$*" >&2
+    cat "$staging/output.log" >&2
   fi
   key=''
   if [[ -n "${VF_KEY_PATTERN:-}" ]]; then key="$(grep -E -- "$VF_KEY_PATTERN" "$staging/output.log" | tail -1 || :)"; fi
   [[ -n "$key" ]] || key="$(awk 'NF {line=$0} END {print line}' "$staging/output.log")"
   [[ -n "$key" ]] || key='(no output)'
+  if [[ "$full" == false ]]; then key="${key:0:450}"; fi
   output_digest="$(vf_hash "$staging/output.log")" || return 3
-  printf '%s\0' version 2 id "$id" sequence "$seq" kind command start "$start" end "$end" \
+  printf '%s\0' version "$version" id "$id" sequence "$seq" kind command start "$start" end "$end" \
     repo "$repo" cwd "$cwd" check "$check" shell "$shell_identity" input_before "$before" input_after "$after" \
     no_tick "${VF_NO_TICK:-1}" exit "$rc" output_digest "$output_digest" \
-    output_bytes "$(wc -c < "$staging/output.log" | tr -d ' ')" policy "$policy" key "$key" > "$staging/meta.nul"
+    output_bytes "$(wc -c < "$staging/output.log" | tr -d ' ')" policy "$policy" key "$key" > "$staging/meta.nul" || return 3
   # Render using the final log reference, without exposing a staging path.
-  vf_summary "$staging" success > "$staging/summary.txt"
-  vf_seal "$staging" "${VF_CAPTURE_FILES[@]}" || return 3
-  vf_publish "$staging" "$final" "${VF_CAPTURE_FILES[@]}" || return 3
+  vf_summary "$staging" success > "$staging/summary.txt" || return 3
+  if [[ "$full" == false ]]; then rm "$staging/output.log" || return 3; fi
+  vf_seal "$staging" "${capture_files[@]}" || return 3
+  vf_publish "$staging" "$final" "${capture_files[@]}" || return 3
   VF_STAGING=''
   cp "$final/COMPLETE" "$spec/notes/verification/captures/$id" || return 3
-  { printf '\n## %s — %s\n\n' "$id" "$end"; printf 'Captured run, exit %s. Full log: `notes/captures/%s/output.log`.\n\n' "$rc" "$id"; cat "$final/summary.txt"; } >> "$spec/notes/evidence.md" || return 3
+  { printf '\n## %s — %s\n\n' "$id" "$end"; printf 'Captured run, exit %s. Receipt: `notes/captures/%s/summary.txt`.\n\n' "$rc" "$id"; cat "$final/summary.txt"; } >> "$spec/notes/evidence.md" || return 3
   vf_unlock
   VF_CAPTURE_ID="$id"
   VF_CAPTURE_DIR="$final"
@@ -2800,10 +2833,15 @@ vf_capture() { # spec binding cwd policy -- argv...
 vf_capture_check() (
   local spec="$1" id="$2" manifest="$3" predicate="$4" dir key v exit_code before after seq check shell_path repo cwd policy ledger other f ocheck oinput oexit oseq
   [[ "$id" =~ ^CAP-[1-9][0-9]*-[A-Za-z0-9]+$ ]] || { echo 'capture integrity: invalid capture ID' >&2; return 3; }
-  case "$predicate" in integrity|current|reuse) ;; *) return 2;; esac
+  case "$predicate" in integrity|current|reuse|output-bytes) ;; *) return 2;; esac
   dir="$spec/notes/captures/$id"
   local version=2
-  if [[ -e "$dir/inputs.nul" || -L "$dir/inputs.nul" ]]; then
+  if [[ -e "$dir/bindings.sha256" || -L "$dir/bindings.sha256" ]]; then
+    version=3
+    local capture_files=("${VF_RECEIPT_FILES[@]}")
+    if [[ -e "$dir/diagnostics.txt" || -L "$dir/diagnostics.txt" ]]; then capture_files+=(diagnostics.txt); fi
+    vf_integrity "$dir" "${capture_files[@]}" || return 3
+  elif [[ -e "$dir/inputs.nul" || -L "$dir/inputs.nul" ]]; then
     version=1
     vf_integrity "$dir" "${VF_CAPTURE_V1_FILES[@]}" || return 3
   else
@@ -2822,15 +2860,24 @@ vf_capture_check() (
   before="$(vf_meta_get input_before)"; after="$(vf_meta_get input_after)"
   if [[ "$version" == 1 ]]; then
     vf_manifest_matches "$dir/inputs.nul" "$before" && vf_manifest_matches "$dir/inputs-after.nul" "$after" || return 3
-  else
+  elif [[ "$version" == 2 ]]; then
     local store="$spec/notes/captures/manifests"
     vf_manifest_matches "$store/$before.nul" "$before" || return 3
     if [[ "$after" != "$before" ]]; then vf_manifest_matches "$store/$after.nul" "$after" || return 3; fi
   fi
-  [[ "$(vf_meta_get output_digest)" == "$(vf_hash "$dir/output.log")" && "$(vf_meta_get output_bytes)" == "$(wc -c < "$dir/output.log" | tr -d ' ')" ]] || return 3
+  local output_bytes
+  output_bytes="$(vf_meta_get output_bytes)" || return 3
+  [[ "$output_bytes" =~ ^(0|[1-9][0-9]{0,17})$ ]] || return 3
+  if [[ "$version" == 3 ]]; then
+    [[ "$before" =~ ^[a-f0-9]{64}$ && "$after" =~ ^[a-f0-9]{64}$ &&
+       "$(vf_meta_get output_digest)" =~ ^[a-f0-9]{64}$ && "$(< "$dir/bindings.sha256")" =~ ^[a-f0-9]{64}$ ]] || return 3
+  else
+    [[ "$(vf_meta_get output_digest)" == "$(vf_hash "$dir/output.log")" && "$output_bytes" == "$(wc -c < "$dir/output.log" | tr -d ' ')" ]] || return 3
+  fi
   check="$(vf_meta_get check)"; shell_path="$(vf_meta_get shell)"; repo="$(vf_meta_get repo)"; cwd="$(vf_meta_get cwd)"; policy="$(vf_meta_get policy)"
   case "$policy" in local|never) ;; *) return 3;; esac
   # Integrity authenticates the stored observation, including its failure.
+  if [[ "$predicate" == output-bytes ]]; then printf '%s\n' "$output_bytes"; return 0; fi
   [[ "$predicate" != integrity ]] || return 0
   [[ "$exit_code" == 0 ]] || { echo "capture failed: exit $exit_code" >&2; return 3; }
   [[ "$before" == "$after" ]] || { echo 'capture stale: inputs changed during execution' >&2; return 3; }
@@ -2856,13 +2903,20 @@ vf_capture_check() (
   done
 )
 
+vf_capture_bindings_match() { # current catalog, capture directory
+  if [[ -f "$2/bindings.sha256" ]]; then
+    local digest
+    digest="$(vf_hash "$1")" && [[ "$digest" == "$(< "$2/bindings.sha256")" ]]
+  else cmp -s "$1" "$2/bindings.nul"; fi
+}
+
 vf_task_capture_matches() (
   local catalog="$1" task="$2" dir="$3" tmp repo
   vf_task_info "$catalog" "$task" || return 3
   tmp="$(mktemp "${TMPDIR:-/tmp}/vf-argv.XXXXXX")" || return 3
   trap 'rm -f "$tmp"' EXIT
   printf '%s\0' "$(command -v bash)" -o pipefail -c "$VF_TASK_COMMAND" > "$tmp"
-  cmp -s "$tmp" "$dir/argv.nul" && cmp -s "$catalog" "$dir/bindings.nul" || return 3
+  cmp -s "$tmp" "$dir/argv.nul" && vf_capture_bindings_match "$catalog" "$dir" || return 3
   vf_meta_load "$dir/meta.nul" "$VF_CAPTURE_KEYS" || return 3
   repo="$(vf_meta_get repo)" || return 3
   vf_locators_exist "$catalog" "$task" "$repo"
@@ -3240,7 +3294,7 @@ vf_gate_execute() { # spec catalog repo policy commands-file kind -- argv...
   if [[ "$policy" == local ]]; then
     for dir in "$spec"/notes/captures/CAP-*; do
       [[ -d "$dir" ]] || continue
-      cmp -s "$tmp/argv" "$dir/argv.nul" && cmp -s "$catalog" "$dir/bindings.nul" || continue
+      cmp -s "$tmp/argv" "$dir/argv.nul" && vf_capture_bindings_match "$catalog" "$dir" || continue
       if (( ! VF_REUSE_ENABLED )); then
         grep -Fx "${dir##*/}" "$VF_GATE_FRESH" >/dev/null || continue
       fi
@@ -3249,7 +3303,7 @@ vf_gate_execute() { # spec catalog repo policy commands-file kind -- argv...
   fi
   if [[ -z "$cap" ]]; then
     VF_NO_TICK=1
-    vf_capture "$spec" "$catalog" "$repo" "$policy" -- "$@" || rc=$?
+    vf_capture "$spec" "$catalog" "$repo" "$policy" quiet -- "$@" || rc=$?
     cap="${VF_CAPTURE_ID:-}"
     [[ -n "$cap" ]] || { rm -rf "$tmp"; return "${rc:-3}"; }
     printf '%s\n' "$cap" >> "$VF_GATE_FRESH"
@@ -3933,9 +3987,10 @@ vf_execution_tally() (
   done
   for file in "$spec"/notes/verification/captures/CAP-*; do
     [[ -f "$file" ]] || continue
-    vf_capture_check "$spec" "${file##*/}" '' integrity || return 3
+    local observed_bytes
+    observed_bytes="$(vf_capture_check "$spec" "${file##*/}" '' output-bytes)" || return 3
     dir="$spec/notes/captures/${file##*/}"
-    bytes=$((bytes+$(wc -c < "$dir/output.log")))
+    bytes=$((bytes+observed_bytes))
     summary_bytes=$((summary_bytes+$(wc -c < "$dir/summary.txt")))
     captures=$((captures+1))
   done
