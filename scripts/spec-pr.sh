@@ -4,10 +4,11 @@
 # Pushes `spec/NNN-slug` and opens a PR (default base `dev`) whose body links the
 # spec/plan/tasks and quotes the opponent + reality-check verdicts from STATUS.md.
 # Prints the PR URL on stdout. If `gh` is missing/unauthenticated, the push still
-# happens and the manual command is printed to stderr (exit 3).
+# happens and the manual command is printed to stderr (exit 3). A forced draft
+# needs gh before the push so an existing non-draft PR cannot receive unchecked work.
 #
 # GATE ENFORCEMENT: refuses to open the PR (exit 4) unless STATUS.md shows
-# opponent CLEARED and reality_check READY. `--force` overrides ONLY together
+# opponent CLEARED and reality_check READY. Versioned specs also require current sealed rounds. `--force` overrides ONLY together
 # with `--draft` (a mid-flight draft PR; the body still shows the real
 # verdicts). A non-draft PR can never skip the gates.
 #
@@ -25,6 +26,7 @@
 #   spec-pr.sh --draft <spec-dir>
 #   spec-pr.sh --force --draft <spec-dir>   # mid-flight draft, gates not yet run
 #   spec-pr.sh --repo <name> <spec-dir>     # umbrella: PR for one declared repo
+#   spec-pr.sh --verify-head <spec-dir>     # validate for merge and print the reviewed commit
 #   spec-pr.sh --help
 
 set -euo pipefail
@@ -38,6 +40,7 @@ usage() { usage_from_header "$0"; exit 0; }
 BASE=""   # --base wins; else .specify/stack.yml `base_branch:`; else dev
 DRAFT=""
 FORCE=0
+VERIFY_HEAD=0
 SPEC_ARG=""
 REPO_NAME=""
 
@@ -45,6 +48,7 @@ while (( $# )); do
   case "$1" in
     --help|-h) usage ;;
     --base) shift; BASE="${1:?--base needs a branch}" ;;
+    --verify-head) VERIFY_HEAD=1 ;;
     --draft) DRAFT="--draft" ;;
     --force) FORCE=1 ;;
     --repo) shift; REPO_NAME="${1:?--repo needs a repo name}" ;;
@@ -56,7 +60,10 @@ done
 
 [[ -z "$SPEC_ARG" || ! -d "$SPEC_ARG" ]] && { echo "usage: spec-pr.sh <spec-dir>" >&2; exit 2; }
 
-spec_dir="$(cd "$SPEC_ARG" && pwd)"
+if (( VERIFY_HEAD )) && [[ -n "$DRAFT" || "$FORCE" == 1 ]]; then echo "--verify-head cannot override gates" >&2; exit 2; fi
+if (( FORCE )) && [[ -z "$DRAFT" ]]; then echo "--force requires --draft" >&2; exit 4; fi
+
+spec_dir="$(cd "$SPEC_ARG" && pwd -P)"
 slug="$(basename "$spec_dir")"
 branch="spec/$slug"
 status="$spec_dir/STATUS.md"
@@ -93,17 +100,35 @@ if [[ -z "$BASE" ]]; then
   BASE="${BASE:-dev}"
 fi
 
-# Run gh from the spec's worktree when STATUS.md names one; else the repo.
-# Umbrella: STATUS frontmatter worktree stays `none` — probe the conventional
-# per-repo worktree path instead.
-workdir="$repo"
-if [[ -n "$declared_repos" ]]; then
-  wt="$(dirname "$repo")/$(basename "$repo").worktrees/$slug"
-  [[ -d "$wt" ]] && workdir="$wt"
-elif [[ -f "$status" ]]; then
-  wt="$(fm_get "$status" worktree)"
-  [[ -n "$wt" && "$wt" != "none" && -d "$wt" ]] && workdir="$wt"
+# Locate the branch via Git even when STATUS points at an old checkout.
+workdir="$(git -C "$repo" worktree list --porcelain | awk -v branch="refs/heads/$branch" '
+  /^worktree / {path=substr($0,10)} $0=="branch " branch {print path}')"
+head="$(git -C "$repo" rev-parse --verify "refs/heads/$branch^{commit}")" || exit 4
+. "$HUB_DIR/scripts/verification-lib.sh"
+contract="$(vf_contract "$spec_dir/spec.md")" || exit 4
+# A locally removed contract key cannot downgrade a versioned branch to label-only gates.
+if [[ -z "$contract" && -z "$declared_repos" ]]; then
+  spec_path=".specify/specs/$slug/spec.md"
+  tree_entry="$(git -C "$repo" ls-tree "$head" -- "$spec_path")" || exit 4
+  if [[ -n "$tree_entry" ]]; then
+    committed_contract="$(
+      tmp="$(mktemp)" || exit 1; trap 'rm -f "$tmp"' EXIT
+      git -C "$repo" show "$head:$spec_path" > "$tmp" && vf_contract "$tmp"
+    )" || exit 4
+    contract="$committed_contract"
+  fi
 fi
+if [[ -n "$workdir" ]]; then
+  workdir="$(cd "$workdir" && pwd -P)"
+  if [[ -z "$declared_repos" && -f "$workdir/.specify/specs/$slug/spec.md" ]]; then
+    spec_dir="$workdir/.specify/specs/$slug"
+    current="$(vf_contract "$spec_dir/spec.md")" || exit 4
+    [[ -z "$contract" || "$current" == "$contract" ]] || { echo 'worktree contract mismatch' >&2; exit 4; }
+    contract="$current"; status="$spec_dir/STATUS.md"
+  fi
+elif [[ -n "$contract" ]]; then
+  echo "release: reviewed worktree for $branch required" >&2; exit 4
+else workdir="$repo"; fi
 
 title="$slug"
 [[ -f "$spec_dir/spec.md" ]] && title="$(fm_get_raw "$spec_dir/spec.md" title)"
@@ -121,10 +146,7 @@ fi
 opp_lc="$(printf '%s' "$opp" | tr '[:upper:]' '[:lower:]')"
 rc_lc="$(printf '%s' "$rc" | tr '[:upper:]' '[:lower:]')"
 if [[ "$opp_lc" != cleared* || "$rc_lc" != ready* ]]; then
-  if (( FORCE )) && [[ -z "$DRAFT" ]]; then
-    echo "REFUSED: --force only applies to draft PRs (--force --draft) — a non-draft PR must pass the gates" >&2
-    exit 4
-  elif (( FORCE )); then
+  if (( FORCE )); then
     echo "warning: opening DRAFT PR with gates not passed (opponent: $opp / reality_check: $rc) — --force --draft given" >&2
   else
     echo "REFUSED: pre-ship gates not passed for $slug" >&2
@@ -135,11 +157,26 @@ if [[ "$opp_lc" != cleared* || "$rc_lc" != ready* ]]; then
   fi
 fi
 
-git -C "$workdir" push -u origin "$branch" >&2
+if [[ "$contract" == 1 && "$FORCE" == 0 ]]; then
+  if [[ -z "$declared_repos" && "$(git -C "$spec_dir" rev-parse --show-toplevel)" != "$workdir" ]]; then
+    echo "release: spec must be verified in $workdir" >&2; exit 4
+  fi
+  vf_release_check "$spec_dir" "$workdir" "$head" || exit 4
+  [[ "$(git -C "$workdir" symbolic-ref --quiet HEAD)" == "refs/heads/$branch" &&
+     "$(git -C "$workdir" rev-parse HEAD)" == "$head" ]] || { echo 'branch changed during verification' >&2; exit 4; }
+fi
+if (( VERIFY_HEAD )); then printf '%s\n' "$head"; exit 0; fi
+if (( FORCE )); then
+  ready="$(cd "$workdir" && gh pr list --head "$branch" --state open --json isCrossRepository,isDraft --jq '[.[] | select(.isCrossRepository == false and .isDraft == false)] | length')" || {
+    echo 'cannot establish draft status before pushing with --force' >&2; exit 4; }
+  [[ "$ready" == 0 ]] || { echo 'refusing to push unreviewed commits to an open non-draft PR' >&2; exit 4; }
+fi
+git -C "$workdir" push origin "$head:refs/heads/$branch" >&2
+git -C "$workdir" branch --set-upstream-to="origin/$branch" "$branch" >&2
 
 if [[ -n "$declared_repos" ]]; then
   # (paste -d takes a delimiter LIST — 'sd', ' would alternate. Join then space.)
-  others="$(tr ' ' '\n' <<< "$declared_repos" | grep -vx "$REPO_NAME" | paste -sd, - | sed 's/,/, /g')"
+  others="$(tr ' ' '\n' <<< "$declared_repos" | awk -v self="$REPO_NAME" '$0!=self' | paste -sd, - | sed 's/,/, /g')"
   body="$(cat <<EOF
 Implements the **$REPO_NAME** slice of umbrella spec \`$slug\` (hub: \`~/.sdd/specs/$slug/\`).
 
@@ -170,15 +207,21 @@ fi
 
 if ! command -v gh >/dev/null 2>&1; then
   echo "gh not found — branch pushed, open the PR manually:" >&2
-  echo "  gh pr create --base $BASE --head $branch --title \"$title\"" >&2
+  echo "  gh pr create $DRAFT --base $BASE --head $branch --title \"$title\"" >&2
   exit 3
 fi
 
 # Create the PR — or, on re-run, reuse the one that already exists (idempotent).
 pr_url="$( (cd "$workdir" && gh pr create --base "$BASE" --head "$branch" $DRAFT \
               --title "$title" --body "$body") )" \
-  || pr_url="$( (cd "$workdir" && gh pr view "$branch" --json url -q .url 2>/dev/null) )" \
+  || pr_url="$( (cd "$workdir" && gh pr list --state open --base "$BASE" --head "$branch" --json url,isCrossRepository --jq '.[] | select(.isCrossRepository == false) | .url') )" \
   || { echo "gh pr create failed and no existing PR found for $branch" >&2; exit 3; }
+[[ -n "$pr_url" && "$pr_url" != *$'\n'* ]] || { echo "no unique open PR for the published commit and base" >&2; exit 3; }
+remote="$(cd "$workdir" && gh pr view "$pr_url" --json state,baseRefName,headRefName,headRefOid,isCrossRepository,isDraft \
+  --jq '[.state,.baseRefName,.headRefName,.headRefOid,(.isCrossRepository|tostring),(.isDraft|tostring)] | join("|")')" || exit 3
+draft_flag=false; [[ -z "$DRAFT" ]] || draft_flag=true
+[[ "$remote" == "OPEN|$BASE|$branch|$head|false|$draft_flag" ]] || {
+  echo 'open PR does not match the published commit, branch, base or draft status' >&2; exit 4; }
 echo "$pr_url"
 
 # Write the PR back into STATUS.md so the dashboard and the next session see it

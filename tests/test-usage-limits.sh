@@ -256,7 +256,7 @@ run_dispatch_resume() { # <unit-id>
 
 dispatch_capture() {
   local f
-  for f in "$DISPATCH_SPEC"/notes/dispatch-plan-*.md; do
+  for f in "$DISPATCH_SPEC"/notes/verification/dispatch/plan-*; do
     [[ "$f" == *attempt-* ]] || { printf '%s\n' "$f"; return 0; }
   done
   return 1
@@ -278,11 +278,11 @@ test_AC_003_and_AC_007_codex_attempt_capture_classifies_and_stays_manual_without
   [[ ! -s "$DISPATCH_LOG" ]] || t_fail "AC-003: absent policy invokes neither scheduler nor readiness fallback"
 
   capture="$(dispatch_capture)" || t_fail "AC-007: aggregate capture was written"
-  attempt="$DISPATCH_SPEC/notes/$(basename "${capture%.md}")-attempt-1-codex.md"
-  [[ -f "$attempt" ]] || t_fail "AC-007: per-attempt capture was written"
-  assert_contains "$(cat "$capture")" 'codex standard output' "AC-007: aggregate capture receives Codex stdout"
-  assert_contains "$(cat "$capture")" 'usage limit' "AC-007: aggregate capture receives Codex stderr"
-  cmp -s "$capture" "$attempt" || t_fail "AC-007: aggregate and attempt captures have matching combined transcripts"
+  attempt="$capture.classify"
+  [[ ! -e "$attempt" ]] || t_fail "temporary classification output was retained"
+  assert_contains "$(cat "$capture")" 'codex standard output'
+  assert_contains "$(cat "$capture")" 'usage limit'
+
 }
 
 test_AC_003_fail_policy_is_manual_and_ordinary_dispatch_failures_keep_exit_six() {
@@ -561,7 +561,7 @@ EOF
 #!/usr/bin/env bash
 printf 'crontab %s\n' "$*" >> "$SCHEDULER_LOG"
 case "${1:-}" in
-  -l) [[ -f "$SCHEDULER_CRONTAB" ]] && cat "$SCHEDULER_CRONTAB" ;;
+  -l) if [[ -f "$SCHEDULER_CRONTAB" ]]; then cat "$SCHEDULER_CRONTAB"; else echo "no crontab for fixture" >&2; exit 1; fi ;;
   -) cat > "$SCHEDULER_CRONTAB" ;;
   *) exit 2 ;;
 esac
@@ -1085,6 +1085,28 @@ test_AC_010_documents_exact_limit_policy_keys_and_recovery_workflows() {
   assert_contains "$knowledge" "may change their messages" "AC-010: knowledge note warns that provider wording drifts"
   assert_contains "$knowledge" "interactive session" "AC-010: knowledge note covers interactive sessions"
   assert_contains "$knowledge" "fresh interactive session" "AC-010: knowledge note gives the manual interactive recipe"
+}
+
+test_cron_failed_read_and_concurrent_writers_preserve_other_entries() {
+  local p q
+  scheduler_fixture Linux
+  echo '0 2 * * * fixture-backup' > "$SCHEDULER_CRONTAB"
+  run_scheduler add a 1704067201 "$SANDBOX/state" & p=$!
+  run_scheduler add ab 1704067201 "$SANDBOX/state" & q=$!
+  wait "$p" && wait "$q" || t_fail 'concurrent units were not both scheduled'
+  assert_contains "$(cat "$SCHEDULER_CRONTAB")" '# sdd-kit-resume:a'
+  assert_contains "$(cat "$SCHEDULER_CRONTAB")" '# sdd-kit-resume:ab'
+  run_rc 0 run_scheduler remove a
+  assert_contains "$(cat "$SCHEDULER_CRONTAB")" '# sdd-kit-resume:ab'
+  assert_contains "$(cat "$SCHEDULER_CRONTAB")" 'fixture-backup'
+  cp "$SCHEDULER_CRONTAB" "$SANDBOX/before"
+  sed '/case "${1:-}"/i\
+[[ "${1:-}" != -l ]] || { echo "permission denied" >&2; exit 1; }
+' "$SCHEDULER_BIN/crontab" > "$SANDBOX/failing"
+  cat "$SANDBOX/failing" > "$SCHEDULER_BIN/crontab"
+  run_rc 1 run_scheduler remove ab
+  run_rc 1 run_scheduler add new 1704067201 "$SANDBOX/state"
+  run_rc 0 cmp "$SANDBOX/before" "$SCHEDULER_CRONTAB"
 }
 
 t_run_all

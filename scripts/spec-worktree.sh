@@ -112,6 +112,8 @@ cut_one() {
     /^branch /{ if (substr($0, 8)==b) print w }
   ')"
   if [[ -n "$existing" ]]; then
+    [[ -d "$existing" && "$(git -C "$existing" symbolic-ref --quiet --short HEAD)" == "$branch" ]] || {
+      echo "registered worktree is missing or no longer on $branch: $existing" >&2; return 1; }
     echo "reusing existing worktree for $branch: $existing" >&2
     echo "$existing"
     return 0
@@ -137,14 +139,14 @@ cut_one() {
     fi
   fi
 
-  mkdir -p "$(dirname "$wt")"
+  mkdir -p "$(dirname "$wt")" || return 1
 
   if git -C "$repo" show-ref --verify --quiet "refs/heads/$branch"; then
     echo "branch $branch exists; attaching worktree at $wt" >&2
-    git -C "$repo" worktree add "$wt" "$branch" >&2
+    git -C "$repo" worktree add "$wt" "$branch" >&2 || return 1
   else
     echo "creating $branch from $base_ref; worktree at $wt" >&2
-    git -C "$repo" worktree add -b "$branch" "$wt" "$base_ref" >&2
+    git -C "$repo" worktree add -b "$branch" "$wt" "$base_ref" >&2 || return 1
   fi
 
   echo "$wt"
@@ -167,7 +169,7 @@ remove_one() {
     echo "commit or stash them first; a --remove must never destroy work" >&2
     return 1
   fi
-  git -C "$repo" worktree remove "$wt" >&2
+  git -C "$repo" worktree remove "$wt" >&2 || return 1
   echo "removed worktree $wt" >&2
   if (( DELETE_BRANCH )); then
     if git -C "$repo" branch -d "$branch" >/dev/null 2>&1; then
@@ -200,7 +202,7 @@ if [[ -n "$declared_repos" ]]; then
       if (( REMOVE )); then
         remove_one "$repo_path" || rc=1
       # One failing repo must not abort the loop — keep cutting the rest.
-      elif wt="$(cut_one "$repo_path" | tail -1)" && [[ -n "$wt" ]]; then
+      elif wt="$(cut_one "$repo_path")" && [[ -n "$wt" ]]; then
         printf '%s\t%s\n' "$r" "$wt"
       else
         echo "FAILED to cut worktree for $r — continuing with the rest" >&2

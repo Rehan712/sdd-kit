@@ -2177,13 +2177,14 @@ vf_tally() (
 
 # Writers initialize once at their entry point. Never trust inherited lock state.
 vf_writer_init() {
-  VF_LOCK_PATH='' VF_LOCK_TOKEN='' VF_STAGING=''
+  VF_LOCK_PATH='' VF_LOCK_TOKEN='' VF_STAGING='' VF_GATE_STAGING=''
   trap 'vf_writer_cleanup' EXIT
   trap 'exit 130' INT
   trap 'exit 143' TERM
   trap 'exit 129' HUP
 }
 vf_writer_cleanup() {
+  if [[ -n "${VF_GATE_STAGING:-}" ]]; then rm -rf "$VF_GATE_STAGING"; fi
   if [[ -n "${VF_STAGING:-}" && -d "$VF_STAGING" && ! -L "$VF_STAGING" ]]; then
     rm -rf "$VF_STAGING"
   fi
@@ -2830,7 +2831,7 @@ vf_capture() { # spec binding cwd policy display -- argv...
   return "$rc"
 }
 vf_capture_check() (
-  local spec="$1" id="$2" manifest="$3" predicate="$4" dir key v exit_code before after seq check shell_path repo cwd policy ledger other f ocheck oinput oexit oseq
+  local spec="$1" id="$2" manifest="$3" predicate="$4" dir key v exit_code before after seq check shell_path repo cwd policy ledger f oseq
   [[ "$id" =~ ^CAP-[1-9][0-9]*-[A-Za-z0-9]+$ ]] || { echo 'capture integrity: invalid capture ID' >&2; return 3; }
   case "$predicate" in integrity|current|current-digest|reuse|output-bytes) ;; *) return 2;; esac
   dir="$spec/notes/captures/$id"
@@ -2889,22 +2890,51 @@ vf_capture_check() (
   [[ -f "$shell_path" ]] || return 3
   v="$( { cat "$dir/argv.nul"; printf '%s\0' "$shell_path" "$(vf_hash "$shell_path")" "$repo" "$cwd" "$policy"; } | vf_hash /dev/stdin)"
   [[ "$check" == "$v" ]] || { echo 'capture stale: command/shell/cwd identity changed' >&2; return 3; }
-  for other in "$spec"/notes/verification/captures/CAP-*; do
-    [[ -f "$other" ]] || continue
-    f="${other##*/}"
+  local index="${5:-}"
+  if [[ -n "$index" ]]; then
+    [[ -e "$index/$check-$before" ]] || return 0
+    f="$(< "$index/$check-$before")"
     oseq="${f#CAP-}"; oseq="${oseq%%-*}"
-    [[ "$oseq" =~ ^[1-9][0-9]*$ ]] || return 3
-    (( oseq > seq )) || continue
-    cmp -s "$other" "$spec/notes/captures/$f/COMPLETE" || return 3
-    [[ "$(awk '$2=="meta.nul" {print $1}' "$other")" == "$(vf_hash "$spec/notes/captures/$f/meta.nul")" ]] || return 3
-    vf_meta_load "$spec/notes/captures/$f/meta.nul" "$VF_CAPTURE_KEYS" || return 3
-    oseq="$(vf_meta_get sequence)"; ocheck="$(vf_meta_get check)"; oinput="$(vf_meta_get input_before)"; oexit="$(vf_meta_get exit)"
-    if (( oseq > seq )) && [[ "$ocheck" == "$check" && "$oinput" == "$before" && "$oexit" != 0 ]]; then
-      vf_capture_check "$spec" "$f" '' integrity >/dev/null || return 3
-      echo "capture superseded: later failed run $f for the same check and inputs" >&2; return 3
+    (( oseq > seq )) || return 0
+  else
+    f="$(vf_later_failures "$spec" "$seq" '' "$check-$before")" || return 3
+    [[ -n "$f" ]] || return 0
+  fi
+  vf_capture_check "$spec" "$f" '' integrity >/dev/null || return 3
+  echo "capture superseded: later failed run $f for the same check and inputs" >&2; return 3
+)
+
+# Authenticate newer metadata once. A locked floor shares the latest failure per identity.
+vf_later_failures() {
+  local spec="$1" min="$2" index="$3" wanted="${4:-}" other f seq meta digest key before check latest
+  for other in "$spec"/notes/verification/captures/CAP-*; do
+    [[ -e "$other" || -L "$other" ]] || continue
+    f="${other##*/}"
+    [[ "$f" =~ ^CAP-([1-9][0-9]*)-[A-Za-z0-9]+$ ]] || return 3
+    seq="${BASH_REMATCH[1]}"; (( seq > min )) || continue
+    meta="$spec/notes/captures/$f/meta.nul"
+    [[ -f "$other" && ! -L "$other" && -f "$meta" && ! -L "$meta" ]] || return 3
+    cmp -s "$other" "${meta%/*}/COMPLETE" || return 3
+    digest="$(vf_hash "$meta")" || return 3
+    [[ "$digest" =~ ^[a-f0-9]{64}$ && "$(awk '$2=="meta.nul" {print $1}' "$other")" == "$digest" ]] || return 3
+    vf_meta_load "$meta" "$VF_CAPTURE_KEYS" || return 3
+    [[ "$(vf_meta_get id)" == "$f" && "$(vf_meta_get sequence)" == "$seq" ]] || return 3
+    [[ "$(vf_meta_get exit)" != 0 ]] || continue
+    check="$(vf_meta_get check)"; before="$(vf_meta_get input_before)"
+    [[ "$check" =~ ^[a-f0-9]{64}$ && "$before" =~ ^[a-f0-9]{64}$ ]] || return 3
+    key="$check-$before"
+    if [[ -z "$index" ]]; then
+      if [[ "$key" == "$wanted" ]]; then echo "$f"; return 0; fi
+    else
+      if [[ -f "$index/$key" ]]; then
+        latest="$(< "$index/$key")"; latest="${latest#CAP-}"
+        (( seq > ${latest%%-*} )) || continue
+      fi
+      printf '%s\n' "$f" > "$index/$key" || return 3
     fi
   done
-)
+  return 0
+}
 
 vf_capture_bindings_match() { # current catalog, capture directory
   if [[ -f "$2/bindings.sha256" ]]; then
@@ -3300,7 +3330,7 @@ vf_gate_execute() { # spec catalog repo policy commands-file kind per-root-diges
   [[ "$1" == -- ]] || return 2; shift
   local tmp dir cap='' cached=0 rc=0 argv expected observed
   expected="$(vf_gate_repo_digest "$roots_digest" "$repo")" || return 3
-  tmp="$(mktemp -d "$spec/notes/verification/execute.XXXXXX")" || return 3
+  tmp="$(mktemp -d "${records%/*}/execute.XXXXXX")" || return 3
   printf '%s\0' "$@" > "$tmp/argv"
   # Reuse only exact argv + cwd + inputs and explicit local policy. Captures
   # made in this invocation can serve duplicate commands after current checks.
@@ -3352,6 +3382,7 @@ vf_gate_floor() {
   spec="$(cd "$spec" && pwd -P)" || return 3
   mkdir -p "$spec/notes/verification/floors" || return 3
   tmp="$(mktemp -d "$spec/notes/verification/floors/.floor.XXXXXX")" || return 3
+  VF_GATE_STAGING="$tmp"
   records="$tmp/commands.nul"; : > "$records"
   VF_GATE_FRESH="$tmp/fresh"; : > "$VF_GATE_FRESH"
   vf_gate_roots "$spec" "$tmp/roots.nul" || return 3
@@ -3406,6 +3437,7 @@ vf_gate_floor() {
   vf_seal "$tmp" meta.nul commands.nul bindings.nul inputs.nul roots.nul || return 3
   final="${tmp%/*}/$id"
   vf_publish "$tmp" "$final" meta.nul commands.nul bindings.nul inputs.nul roots.nul || return 3
+  VF_GATE_STAGING=''
   printf '%s\n' "$id" > "$spec/notes/verification/floor-latest.tmp" && mv "$spec/notes/verification/floor-latest.tmp" "$spec/notes/verification/floor-latest" || return 3
   printf '\n## GATE-FLOOR\n\nResult: %s; source: %s; exit: 0; command records: `notes/verification/floors/%s/commands.nul`.\n' "$id" "$source" "$id" >> "$spec/notes/evidence.md"
   vf_unlock
@@ -3436,10 +3468,24 @@ vf_floor_validate() (
   cmp -s "$tmp/roots" "$dir/roots.nul" || return 3
   observed="$(vf_gate_snapshot "$spec" "$tmp/roots" "$tmp/inputs" "$tmp/repo-digests")" || return 3
   [[ "$source" == "$observed" ]] || { echo 'floor stale: refresh floor for current inputs' >&2; return 3; }
+  local index='' min='' seq pos=0
+  if [[ "${VF_LOCK_PATH:-}" == "$spec/notes/verification/lock" && -n "${VF_LOCK_TOKEN:-}" &&
+        "$(< "$VF_LOCK_PATH/owner")" == "$VF_LOCK_TOKEN" ]]; then
+    while IFS= read -r -d '' v; do
+      pos=$(( (pos+1)%6 )); [[ "$pos" == 5 ]] || continue
+      [[ "$v" =~ ^CAP-([1-9][0-9]*)-[A-Za-z0-9]+$ ]] || return 3
+      seq="${BASH_REMATCH[1]}"; if [[ -z "$min" ]] || (( seq < min )); then min="$seq"; fi
+    done < "$dir/commands.nul"
+    [[ "$pos" == 0 ]] || return 3
+    if [[ -n "$min" ]]; then
+      index="$tmp/failures"; mkdir "$index" || return 3
+      vf_later_failures "$spec" "$min" "$index" || return 3
+    fi
+  fi
   while IFS= read -r -d '' v; do
     f+=("$v"); (( ${#f[@]} == 6 )) || continue
     expected="$(vf_gate_repo_digest "$tmp/repo-digests" "${f[1]}")" || return 3
-    vf_capture_check "$spec" "${f[4]}" "$expected" current-digest || return 3
+    vf_capture_check "$spec" "${f[4]}" "$expected" current-digest "$index" || return 3
     f=()
   done < "$dir/commands.nul"
   observed="$(vf_gate_snapshot "$spec" "$tmp/roots" "$tmp/after")" || return 3
@@ -3535,6 +3581,7 @@ vf_gate_checkpoint() {
   spec="$(cd "$spec" && pwd -P)" || return 3
   mkdir -p "$spec/notes/verification/checkpoints" || return 3
   tmp="$(mktemp -d "$spec/notes/verification/checkpoints/.checkpoint.XXXXXX")" || return 3
+  VF_GATE_STAGING="$tmp"
   VF_GATE_FRESH="$tmp/fresh"; : > "$VF_GATE_FRESH"; : > "$tmp/commands.nul"
   vf_gate_roots "$spec" "$tmp/roots.nul" || return 3
   vf_binding_snapshot "$spec" "$tmp/bindings.nul" || return 3
@@ -3583,6 +3630,7 @@ vf_gate_checkpoint() {
   vf_seal "$tmp" meta.nul commands.nul bindings.nul inputs.nul roots.nul coverage.nul || return 3
   final="${tmp%/*}/$id"
   vf_publish "$tmp" "$final" meta.nul commands.nul bindings.nul inputs.nul roots.nul coverage.nul || return 3
+  VF_GATE_STAGING=''
   vf_unlock
   (( commands )) || printf 'no checkpoint commands; completed-task coverage checked\n'
   vf_gate_result_summary "$final"
@@ -3612,11 +3660,13 @@ vf_report_block() { # report-file round -> canonical block, ignoring quoted head
 }
 vf_round_history() { # spec gate temp -> globals
   local spec="$1" gate="$2" tmp="$3" value f=() ledger
+  VF_ROUND_SOURCE='' VF_ROUND_FLOOR='' VF_ROUND_VERDICT=''
   VF_ROUND_LAST=0 VF_ROUND_TIME='' VF_ROUND_STYLE='' VF_ROUND_DATE=''
   vf_reports "$spec/notes/$gate.md" "$gate" "$tmp/catalog" "$spec" || return 3
   while IFS= read -r -d '' value; do
     f+=("$value"); (( ${#f[@]} == 12 )) || continue
     if [[ "${f[0]}" == round ]]; then
+      VF_ROUND_SOURCE="${f[3]}" VF_ROUND_FLOOR="${f[4]}" VF_ROUND_VERDICT="${f[5]}"
       VF_ROUND_LAST="${f[1]}" VF_ROUND_TIME="${f[2]}" VF_ROUND_STYLE="${f[6]}" VF_ROUND_DATE="${f[7]}"
       ledger="$spec/notes/verification/rounds/$gate/ROUND-${f[1]}"
       if [[ -f "$ledger/report.sha256" ]]; then
@@ -3635,6 +3685,59 @@ vf_round_history() { # spec gate temp -> globals
     VF_ROUND_TIME="$(vf_meta_get timestamp)"; vf_utc_valid "$VF_ROUND_TIME" || return 3
   fi
 }
+
+# Publication validates both sealed verdicts against the same working inputs used by the gates.
+vf_release_check() (
+  local spec="$1" repo="$2" head="$3" tmp gate ledger verdict floor source prior_floor='' prior_source='' path record own fold=0
+  vf_writer_init; vf_lock "$spec" || return 3
+  tmp="$(mktemp -d "$spec/notes/verification/release.XXXXXX")" || return 3
+  VF_STAGING="$tmp"
+  for gate in $VF_GATES; do
+    vf_round_history "$spec" "$gate" "$tmp" || return 3
+    if [[ "$gate" == opponent ]]; then verdict=CLEARED; else verdict=READY; fi
+    [[ "$VF_ROUND_STYLE" == canonical && "$VF_ROUND_VERDICT" == "$verdict" ]] || {
+      echo "release: latest $gate round must be sealed with $verdict" >&2; return 3; }
+    for ledger in "$spec/notes/verification/rounds/$gate"/ROUND-*; do
+      [[ -d "$ledger" && ! -L "$ledger" && -f "$ledger/report.sha256" && ! -L "$ledger/report.sha256" &&
+         "${ledger##*/}" =~ ^ROUND-([1-9][0-9]{0,8})$ ]] && (( BASH_REMATCH[1] <= VF_ROUND_LAST )) || {
+        echo "release: unresolved $gate reservation" >&2; return 3; }
+    done
+    ledger="$spec/notes/verification/rounds/$gate/ROUND-$VF_ROUND_LAST"
+    vf_meta_load "$ledger/meta.nul" 'version gate round floor source reserved' || return 3
+    floor="$(vf_meta_get floor)"; source="$(vf_meta_get source)"
+    [[ "$(vf_meta_get version)" == 1 && "$(vf_meta_get gate)" == "$gate" && "$(vf_meta_get round)" == "$VF_ROUND_LAST" &&
+       "$source" == "$VF_ROUND_SOURCE" && "$floor" == "$VF_ROUND_FLOOR" ]] || return 3
+    if [[ "$floor" != "$prior_floor" ]]; then
+      prior_source="$(vf_floor_validate "$spec" "$floor")" || return 3
+      prior_floor="$floor"
+    fi
+    [[ "$source" == "$prior_source" ]] || return 3
+  done
+  # A floor can pass over uncommitted files. Make sure the commit ships those inputs.
+  vf_case_folds "$spec" && fold=1
+  own="$(vf_bookkeeping_anchor "$spec" "$repo" "$fold")"
+  vf_git -C "$repo" diff --cached --name-only -z --no-renames "$head" > "$tmp/staged" || return 3
+  while IFS= read -r -d '' path; do printf 'M  %s\0' "$path"; done < "$tmp/staged" > "$tmp/dirty" || return 3
+  # A fresh index compares the commit even when the real index has assume-unchanged flags.
+  (
+    vf_git_local_unset || exit 3
+    export GIT_INDEX_FILE="$tmp/index"
+    git -c core.sparseCheckout=false -C "$repo" read-tree "$head" &&
+      git -c core.fsmonitor=false -c core.fileMode=true -C "$repo" status --porcelain=v1 -z --no-renames --untracked-files=all --ignore-submodules=none
+  ) >> "$tmp/dirty" || return 3
+  while IFS= read -r -d '' record; do
+    path="${record:3}"
+    vf_bookkeeping_path "$path" "$own" "$fold" && continue
+    if [[ -n "$own" && "${record:0:2}" == ' M' && "$path" == "$own/STATUS.md" && -f "$repo/$path" && ! -L "$repo/$path" ]]; then
+      if [[ "$(vf_git -C "$repo" ls-tree "$head" -- "$path")" == '100644 blob '* && ! -x "$repo/$path" ]]; then
+        vf_git -C "$repo" show "$head:$path" > "$tmp/committed" || return 3
+        vf_semantic_file "$path" "$tmp/committed" "$tmp/before" && vf_semantic_file "$path" "$repo/$path" "$tmp/after" || return 3
+        cmp -s "$tmp/before" "$tmp/after" && continue
+      fi
+    fi
+    echo "release: commit reviewed changes in $path before publishing" >&2; return 3
+  done < "$tmp/dirty"
+)
 
 vf_round_authorized() (
   local spec="$1" gate="$2" round="$3" previous="$4" line stamp kind revision rejects now

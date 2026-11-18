@@ -258,7 +258,8 @@ fi
 # --- capture file + prompt -----------------------------------------------------
 
 TS="$(date +%Y%m%d-%H%M%S)"
-CAP="$LIVE_SPEC/notes/dispatch-$ROLE-$TS.md"
+dispatch_dir="$LIVE_SPEC/notes/verification/dispatch"
+CAP="$dispatch_dir/$ROLE-$TS.XXXXXX"
 
 task_line=""
 if [[ "$ROLE" == "implement" ]]; then
@@ -383,7 +384,9 @@ fi
 
 # --- run ------------------------------------------------------------------------
 
-mkdir -p "$LIVE_SPEC/notes"
+mkdir -p "$dispatch_dir" || exit 6
+CAP="$(mktemp "$CAP")" || exit 6
+trap 'rm -f "$CAP.last-message" "$CAP.classify" "$CAP.readiness"' EXIT
 bash "$STATUS_SH" set "$LIVE_SPEC" active_tool "$CLI" >/dev/null 2>&1 \
   || echo "  ${YELLOW}!${RESET} could not set active_tool in STATUS.md (continuing)" >&2
 
@@ -393,19 +396,17 @@ START_DAY="$(date +%Y-%m-%d)"
 
 # run_attempt <cli> <attempt-number>
 # Every provider follows this exact pipe. `pipefail` preserves the provider's
-# status even when tee succeeds, while the aggregate and attempt captures get
-# the same combined stdout/stderr transcript.
+# status when tee succeeds. The offset isolates this attempt for classification.
 run_attempt() {
-  local attempt_cli="$1" attempt_number="$2" attempt_cap last_message attempt_rc=0
-  attempt_cap="$LIVE_SPEC/notes/dispatch-$ROLE-$TS-attempt-$attempt_number-$attempt_cli.md"
-  last_message="$attempt_cap.last-message"
+  local attempt_cli="$1" attempt_number="$2" last_message attempt_rc=0
+  attempt_start=$(( $(wc -c < "$CAP") + 1 ))
+  last_message="$CAP.last-message"
   build_command "$attempt_cli" "$last_message"
-  : > "$attempt_cap"
   { echo "# Dispatched $ROLE -> $attempt_cli (attempt $attempt_number) — $(date '+%Y-%m-%d %H:%M:%S')"; echo; } \
-    | tee -a "$CAP" "$attempt_cap" >/dev/null
-  ( cd "$ROOT" && "${CMD[@]}" ) 2>&1 | tee -a "$CAP" "$attempt_cap" || attempt_rc=$?
+    | tee -a "$CAP" >/dev/null
+  ( cd "$ROOT" && "${CMD[@]}" ) 2>&1 | tee -a "$CAP" || attempt_rc=$?
   if [[ -f "$last_message" ]]; then
-    { echo; echo "# Provider final message"; cat "$last_message"; } | tee -a "$CAP" "$attempt_cap" >/dev/null
+    { echo; echo "# Provider final message"; cat "$last_message"; } | tee -a "$CAP" >/dev/null
     rm -f "$last_message"
   fi
   return "$attempt_rc"
@@ -433,7 +434,7 @@ select_fallback() {
       printf '# Fallback skipped: %s (already attempted)\n' "$candidate" | tee -a "$CAP" >/dev/null
       continue
     fi
-    readiness="$LIVE_SPEC/notes/dispatch-$ROLE-$TS-readiness-$candidate.txt"
+    readiness="$CAP.readiness"
     if "$HUB_DIR/scripts/spec-dispatch-ready.sh" "$candidate" "$ROLE" >"$readiness" 2>&1; then
       printf '# Fallback selected: %s\n' "$candidate" | tee -a "$CAP" >/dev/null
       rm -f "$readiness"
@@ -478,8 +479,10 @@ while :; do
   run_attempt "$current_cli" "$attempt_number" || rc=$?
   (( rc == 0 )) && break
 
-  attempt_cap="$LIVE_SPEC/notes/dispatch-$ROLE-$TS-attempt-$attempt_number-$current_cli.md"
+  attempt_cap="$CAP.classify"
+  tail -c "+$attempt_start" "$CAP" > "$attempt_cap" || exit 6
   classification="$("$HUB_DIR/scripts/usage-limit.sh" classify "$current_cli" "$attempt_cap" 2>/dev/null || true)"
+  rm -f "$attempt_cap"
   IFS=$'\t' read -r verdict kind reset _ <<< "$classification"
   if [[ "$verdict" != "limit" ]]; then
     echo >&2
