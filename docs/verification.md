@@ -33,20 +33,28 @@ bash scripts/spec-gate.sh tally "$SPEC"
 ```
 
 Five public entrypoints expose `--help`: spec-run.sh, spec-task.sh,
-spec-evidence.sh, spec-ac-coverage.sh and spec-gate.sh. Full logs and SHA-256
-metadata remain under spec-local notes/captures; --summary bounds returned
-success output to 2048 bytes and failure output to 8192 bytes/20 diagnostic
-lines without changing the actual exit code.
+spec-evidence.sh, spec-ac-coverage.sh and spec-gate.sh.
 
-New captures store each distinct input manifest once per spec in
-`notes/captures/manifests/<sha256>.nul`. The sealed capture metadata records the
-before and after hashes. Verification checks the stored bytes against both.
-If a shared manifest is missing or corrupt, every capture that references it
-fails verification until the original bytes are restored.
-Update every verifier that reads the spec before writing this format. The
-updated verifier also reads older captures with inline manifests. Keep the
-whole `notes/captures/` tree with the spec when archiving it, including logs
-your project's Git ignore rules may omit. Retro leaves the evidence in place.
+Full capture retention is **off by default**. Each versioned run still verifies
+the real command and records a sealed receipt under `notes/captures/`: exact
+arguments, exit status, before/after input hashes, test-binding and output
+hashes, output byte count, and a bounded summary. A failure includes up to 20
+diagnostic lines. Full output and input manifests are temporary during the run.
+Acceptance, freshness checks, and review gates use the receipt. Replaying or
+inspecting the original full output later requires opting in before the run.
+
+```bash
+git config --local sdd.fullCaptures true    # keep full captures for this repository
+git config --local sdd.fullCaptures false   # use receipts for subsequent runs
+```
+
+Use `--global` to set your user default. A repository setting takes precedence.
+Full mode retains `output.log`, the test bindings, and each distinct input
+manifest once in `notes/captures/manifests/`. Switching modes affects new runs.
+Legacy tasks keep their existing Markdown evidence format and also honor this setting.
+The updated kit verifies both earlier full formats and compact receipts. Update
+all verifiers before sharing receipts, and archive the entire spec including
+any logs excluded by Git. Retro retains the evidence.
 
 Finish batch edits before capture/acceptance. Workers never tick; the invoker
 rejects incomplete or forged returns without changing tasks. Checkpoint failure

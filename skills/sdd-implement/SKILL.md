@@ -191,8 +191,8 @@ Follow the deterministic protocol below: workers capture exact task Verify with
 the invoker saves it as printed and accepts it.
 A failed acceptance gets one escalation retry, then stops dispatch.
 Before that retry, don't read the failing log yourself: send one `sdd-scout`
-(log-digest mode; not registered → `subagent_type: Explore`) the capture's
-full log, `notes/captures/<capture id>/output.log`, and put its digest —
+(log-digest mode; not registered → `subagent_type: Explore`) the failed capture’s
+`diagnostics.txt` (or `output.log` when full retention is enabled), and put its digest —
 first failure, file:line, error signature — in the retry brief.
 
 ### 5a. Pre-ship gates (opponent, then reality-check)
@@ -352,7 +352,7 @@ missing slice unless a new decision is required.
    leave tasks unchanged. On failure allow one escalation retry with the gap
    named and the existing implement-hard policy; a second failure stops
    dispatch. Intentional negative controls are recorded separately from retries.
-   Keep full logs on disk; pass bounded summaries and referenced diagnostics.
+   Pass the bounded receipt summary and failure diagnostics. Full logs are available when capture retention is enabled.
 4. After acceptance/commits at each exact authored stage boundary run
    `bash "$S/spec-gate.sh" checkpoint "$SPEC" "$STAGE"`. Nonzero stops
    next-stage dispatch, including when no stage commands exist but retained

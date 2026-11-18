@@ -1313,7 +1313,7 @@ reuse_floor_cases() {
   # A damaged candidate must cause a real refresh, not poison every later run.
   for file in "$spec"/notes/captures/CAP-*/argv.nul; do
     if tr '\000' '\n' < "$file" | grep -Fx 'bash tests/check.sh' >/dev/null; then
-      cap="${file%/argv.nul}"; printf tampered >> "$cap/output.log"
+      cap="${file%/argv.nul}"; printf tampered >> "$cap/summary.txt"
     fi
   done
   run_rc 0 bash "$gate" floor "$spec"
