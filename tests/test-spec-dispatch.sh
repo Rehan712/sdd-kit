@@ -161,4 +161,73 @@ test_dispatch_names_the_target_home_and_accepts_a_plan_from_the_start_day() {
   assert_contains "$OUT" "expected the day of this run" 'a stale plan passed the verifier'
 }
 
+test_umbrella_worktree_reports_partial_failure() {
+  local spec name
+  spec="$(stage_umbrella)"
+  for name in alpha-api beta; do
+    fixture_git init -q "$SANDBOX/$name"
+    fixture_git -C "$SANDBOX/$name" commit --allow-empty -qm fixture
+  done
+  fixture_git -C "$SANDBOX/beta" branch fixture-base
+  cat > "$SANDBOX/kit/scripts/system-map.sh" <<'EOF'
+#!/usr/bin/env bash
+printf '%s/%s\n' "$SANDBOX" "$2"
+EOF
+  run_rc 1 "$SANDBOX/kit/scripts/spec-worktree.sh" --base fixture-base --all-repos "$spec"
+  assert_contains "$OUT" 'FAILED to cut worktree for alpha-api'
+  [[ -d "$SANDBOX/beta.worktrees/001-demo" ]] || t_fail 'healthy sibling was skipped'
+  [[ ! -d "$SANDBOX/alpha-api.worktrees/001-demo" ]] || t_fail 'failed sibling reported a worktree'
+}
+
+test_concurrent_spec_numbers_are_unique() {
+  local n pid pids=() dirs
+  mkdir "$SANDBOX/project"
+  for n in 1 2 3 4 5 6 7 8; do
+    "$SCRIPTS/new-spec.sh" --project "$SANDBOX/project" "Concurrent $n" > "$SANDBOX/log-$n" 2>&1 & pids+=("$!")
+  done
+  for pid in "${pids[@]}"; do wait "$pid" || t_fail 'concurrent creator failed'; done
+  dirs="$SANDBOX/project/.specify/specs"
+  assert_eq 8 "$(cd "$dirs" && printf '%s\n' ???-*/spec.md | cut -c1-3 | sort -u | wc -l | tr -d ' ')"
+}
+
+test_ci_readiness_and_incomplete_umbrella() {
+  local spec name expected response
+  spec="$(stage_umbrella)"
+  mkdir "$SANDBOX/bin"
+  cat > "$SANDBOX/bin/gh" <<'EOF'
+#!/bin/bash
+[[ "$1 $2" == 'pr view' && "$4" == --json && "$5" == *mergeStateStatus* && "$6" == --jq ]] || exit 1
+cat "$SANDBOX/${3##*/}.state"
+EOF
+  chmod +x "$SANDBOX/bin/gh"
+  export PATH="$SANDBOX/bin:$PATH"
+  printf '%s\n' --- 'pr_alpha-api: https://example.invalid/a' 'pr_beta: https://example.invalid/b' --- > "$spec/STATUS.md"
+  echo 'OPEN|false|APPROVED|MERGEABLE|CLEAN|SUCCESS' > "$SANDBOX/a.state"
+  while IFS=' ' read -r expected response; do
+    printf '%s\n' "$response" > "$SANDBOX/b.state"
+    run_rc "$expected" "$SCRIPTS/spec-ci.sh" check "$spec"
+  done <<'EOF'
+0 OPEN|false||MERGEABLE|CLEAN|
+0 MERGED|false||UNKNOWN|UNKNOWN|
+10 OPEN|false|REVIEW_REQUIRED|MERGEABLE|BLOCKED|SUCCESS
+10 OPEN|false||UNKNOWN|UNKNOWN|SUCCESS
+10 OPEN|true||MERGEABLE|DRAFT|SUCCESS
+10 OPEN|false|APPROVED|MERGEABLE|CLEAN|SUCCESS,PENDING
+20 CLOSED|false||MERGEABLE|CLEAN|SUCCESS
+20 OPEN|false||MERGEABLE|CLEAN|SUCCESS,FAILURE
+30 OPEN|false|CHANGES_REQUESTED|MERGEABLE|BLOCKED|SUCCESS
+40 OPEN|false||CONFLICTING|DIRTY|SUCCESS
+3 UNKNOWN|false||UNKNOWN|UNKNOWN|
+EOF
+  for name in a b; do
+    echo 'OPEN|false|APPROVED|MERGEABLE|CLEAN|SUCCESS' > "$SANDBOX/$name.state"
+  done
+  run_rc 0 "$SCRIPTS/spec-ci.sh" check "$spec"
+  sed '/^pr_beta:/d' "$spec/STATUS.md" > "$SANDBOX/status"
+  cp "$SANDBOX/status" "$spec/STATUS.md"
+  run_rc 3 "$SCRIPTS/spec-ci.sh" check "$spec"
+  assert_contains "$OUT" 'missing PR for beta'
+  assert_contains "$(cat "$spec/STATUS.md")" 'ci: pending'
+}
+
 t_run_all

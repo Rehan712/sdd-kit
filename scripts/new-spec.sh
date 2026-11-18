@@ -97,7 +97,6 @@ for d in "$SPECS_ROOT"/*/; do
     fi
   fi
 done
-nnn=$(printf '%03d' "$next_n")
 
 # Slugify title.
 full_slug=$(echo "$TITLE" \
@@ -111,13 +110,28 @@ fi
 slug=$(printf '%s' "$slug" | sed -E 's/-+$//')
 [[ -z "$slug" ]] && slug="untitled"
 
-dir="$SPECS_ROOT/$nnn-$slug"
-if [[ -d "$dir" ]]; then
-  echo "directory already exists: $dir" >&2
-  exit 1
-fi
-
-mkdir -p "$dir" "$dir/notes"
+# Reserve the number across titles. A crashed reservation costs one unused ID.
+dir=
+while (( next_n <= 999 )); do
+  printf -v nnn '%03d' "$next_n"
+  next_n=$((next_n+1))
+  reservation="$SPECS_ROOT/.reserve-$nnn"
+  if ! mkdir "$reservation" 2>/dev/null; then
+    [[ -d "$reservation" ]] && continue
+    # The winner may have already published its spec and released the reservation.
+    for existing in "$SPECS_ROOT/$nnn-"*/; do [[ ! -d "$existing" ]] || continue 2; done
+    echo "cannot reserve spec number $nnn" >&2; exit 1
+  fi
+  trap 'rmdir "$reservation"' EXIT
+  for existing in "$SPECS_ROOT/$nnn-"*/; do
+    if [[ -d "$existing" ]]; then rmdir "$reservation"; trap - EXIT; continue 2; fi
+  done
+  dir="$SPECS_ROOT/$nnn-$slug"
+  mkdir "$dir"
+  break
+done
+[[ -n "${dir:-}" ]] || { echo 'no three-digit spec numbers available' >&2; exit 1; }
+mkdir "$dir/notes"
 touch "$dir/notes/.gitkeep"   # gate reports/evidence land here; survive commits
 today=$(date +%Y-%m-%d)
 

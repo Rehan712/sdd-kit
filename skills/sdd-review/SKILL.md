@@ -82,7 +82,13 @@ is the only reader (constitution §10.6).
    being merged** (re-gate rule below — a PR whose gates predate its last code
    push has stale verdicts; re-run the opponent before merging).
 2. Merge (ask the user first unless they already said "merge when green"):
-   `gh pr merge <url> --squash` (or the repo's convention).
+   Validate the local head immediately before merging. For an umbrella PR, add
+   `--repo <name>` to the verifier. Use the repo's merge strategy and keep the commit guard.
+
+   ```bash
+   head="$(bash ~/.sdd/scripts/spec-pr.sh --verify-head "$spec_dir")" &&
+     gh pr merge "$url" --squash --match-head-commit "$head"
+   ```
    *Umbrella:* merge in the plan's rollout order — **providers before
    consumers** — re-running `spec-ci.sh check --repo <next>` after each merge
    (an earlier merge can break a sibling's base).

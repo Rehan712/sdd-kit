@@ -649,11 +649,14 @@ checkpoints:
   Backend:
     - 'bash tests/static.sh'
 EOF
+  printf '\n[[ ! -f %q ]] || exit 23\n' "$SANDBOX/static-fail" >> "$repo/tests/static.sh"
   # Gate hooks are installed before any run so the harness identity stays fixed.
   awk '{print}
+    /^vf_gate_roots\(\) \{/ {print "  if [[ -f \"$SANDBOX/interrupt-gate\" ]]; then kill -TERM \"$$\"; fi"}
     /^vf_snapshot\(\) \(/ {print "  printf x >> \"$SANDBOX/snapshot-calls\""}
     /^vf_gate_execute\(\) \{/ {print "  fixture_hook before-command || return 3"}
     /^vf_capture_check\(\) \(/ {print "  fixture_hook checking-receipt || return 3"}
+    /^vf_later_failures\(\) \{/ {print "  printf x >> \"$SANDBOX/ledger-scans\""}
   ' "$lib" > "$lib.tmp" && mv "$lib.tmp" "$lib"
   cat >> "$lib" <<'EOF'
 fixture_hook() {
@@ -672,7 +675,9 @@ EOF
   run_rc 0 bash "$gate" floor "$spec"
   floor="$(cat "$spec/notes/verification/floor-latest")"
   : > "$SANDBOX/snapshot-calls"
+  : > "$SANDBOX/ledger-scans"
   run_rc 0 bash "$gate" round "$spec" opponent --floor "$floor"
+  assert_eq x "$(cat "$SANDBOX/ledger-scans")" 'one supersession scan across all five floor receipts'
   assert_eq xx "$(cat "$SANDBOX/snapshot-calls")" 'all receipts share the same per-repository snapshot during validation'
   cp "$repo/src/parser.sh" "$SANDBOX/original"
   printf 'echo changed >> %q\n' "$repo/src/parser.sh" > "$SANDBOX/checking-receipt"
@@ -685,6 +690,16 @@ EOF
   run_rc 3 bash "$gate" checkpoint "$spec" Backend
   assert_contains "$OUT" 'capture stale: current inputs changed'
   run_rc 0 cmp "$SANDBOX/original" "$repo/src/parser.sh"
+  touch "$SANDBOX/interrupt-gate"
+  run_rc 143 bash "$gate" checkpoint "$spec" Backend
+  assert_eq '' "$(find "$spec/notes/verification" -type d -name '.checkpoint.*')" 'interruption left checkpoint scratch'
+  rm "$SANDBOX/interrupt-gate"
+  touch "$SANDBOX/static-fail"
+  run_rc 23 bash "$gate" floor "$spec"
+  run_rc 3 bash "$gate" round "$spec" reality-check --floor "$floor"
+  assert_contains "$OUT" 'capture superseded: later failed run'
+  [[ -f "$spec/notes/verification/floors/$floor/COMPLETE" ]] || t_fail 'previously published floor removed'
+
 }
 
 # AC-007: real checkers and suite commands execute in the existing worktree.
@@ -711,6 +726,7 @@ test_floor() {
   printf '\nexit 7\n' >> "$repo/tests/static.sh"
   run_rc 7 bash "$gate" floor "$spec"
   assert_contains "$OUT" 'exit=7'
+  assert_eq '' "$(find "$spec/notes/verification" -type d -name '.floor.*')" 'failed floor left its scratch directory'
   [[ ! -e "$SANDBOX/model-called" ]] || t_fail 'AC-007: failing floor dispatched model'
   printf 'stacks: []\n' > "$repo/.specify/stack.yml"
   run_rc 3 bash "$gate" floor "$spec"
@@ -1794,6 +1810,65 @@ test_floor_fixture_failure_is_named_and_stays_in_the_sandbox() {
     || t_fail "floor_fixture handed its caller something other than a sandbox path: '$printed'"
   assert_contains "$(cat "$sub/.fixture-build-failed" 2>/dev/null)" 'floor_fixture kit scripts' \
     'floor_fixture left no record of the failed copy'
+}
+
+test_release_validates_current_sealed_rounds_and_pins_the_commit() {
+  local spec repo gate pr head floor cap name report reservation
+  spec="$(make_verification_git_dir release)"
+  repo="$(cd "$spec/../../.." && pwd -P)"; gate="$(floor_fixture "$spec")"; pr="${gate%/*}/spec-pr.sh"
+  fixture_git -C "$repo" checkout -qb "spec/${spec##*/}"
+  . "$SCRIPTS/lib.sh"
+  fm_set "$spec/STATUS.md" opponent CLEARED
+  fm_set "$spec/STATUS.md" reality_check READY
+  fixture_git -C "$repo" add . && fixture_git -C "$repo" commit -qm 'review inputs'
+  head="$(fixture_git -C "$repo" rev-parse HEAD)"
+  run_rc 4 "$pr" --verify-head "$spec"
+  run_rc 0 bash "$gate" floor "$spec"
+  floor="$(cat "$spec/notes/verification/floor-latest")"
+  cap="$(tr '\000' '\n' < "$spec/notes/verification/floors/$floor/commands.nul" | sed -n '5p')"
+  for name in opponent reality-check; do
+    run_rc 0 bash "$gate" round "$spec" "$name" --floor "$floor"
+    reservation="$OUT"; report="$SANDBOX/$name.md"
+    round_report "$spec" "$name" "$reservation" "$report"
+    if [[ "$name" == reality-check ]]; then
+      sed -e 's/Verdict:\*\* NEEDS WORK/Verdict:** READY/' -e "s/| missing |/| $cap; review: fixture output checked |/g" -e 's/| MISSING |/| PASS |/g' "$report" > "$report.tmp"
+      mv "$report.tmp" "$report"
+    fi
+    run_rc 0 bash "$gate" round "$spec" "$name" --complete "$report"
+  done
+  fm_set "$spec/STATUS.md" ci pending
+  run_rc 0 "$pr" --verify-head "$spec"
+  assert_eq "$head" "$OUT"
+  fixture_git init -q --bare "$SANDBOX/remote"
+  fixture_git -C "$repo" remote add origin "$SANDBOX/remote"
+  mkdir "$SANDBOX/pub-bin"
+  cat > "$SANDBOX/pub-bin/gh" <<'EOF'
+#!/bin/sh
+case "$2" in
+  create) echo https://example.invalid/pr/1;;
+  view) printf 'OPEN|dev|%s|%s|false|false\n' "$(git symbolic-ref --short HEAD)" "${TEST_PR_HEAD:-$(git rev-parse HEAD)}";;
+  list) echo 1;;
+esac
+EOF
+  chmod +x "$SANDBOX/pub-bin/gh"
+  run_rc 0 env PATH="$SANDBOX/pub-bin:$PATH" "$pr" "$spec"
+  assert_eq "$head" "$(fixture_git -C "$SANDBOX/remote" rev-parse "refs/heads/spec/${spec##*/}")"
+  run_rc 4 env PATH="$SANDBOX/pub-bin:$PATH" TEST_PR_HEAD=outdated "$pr" "$spec"
+  assert_contains "$OUT" 'does not match the published commit'
+  run_rc 4 env PATH="$SANDBOX/pub-bin:$PATH" "$pr" --force --draft "$spec"
+  assert_contains "$OUT" 'open non-draft PR'
+  printf '\nsource changed\n' >> "$repo/src/parser.sh"
+  run_rc 4 "$pr" --verify-head "$spec"
+  assert_contains "$OUT" 'floor stale'
+  fixture_git -C "$repo" checkout -- src/parser.sh
+  # Same reviewed inputs, but the branch now points at a commit missing staged work.
+  fixture_git -C "$repo" reset -q --soft HEAD^
+  run_rc 4 "$pr" --verify-head "$spec"
+  assert_contains "$OUT" 'commit reviewed changes'
+  fixture_git -C "$repo" reset -q --soft "$head"
+  run_rc 0 bash "$gate" round "$spec" opponent --floor "$floor"
+  run_rc 4 "$pr" --verify-head "$spec"
+  assert_contains "$OUT" 'unresolved opponent reservation'
 }
 
 t_run_all

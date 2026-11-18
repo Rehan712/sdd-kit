@@ -71,7 +71,8 @@ pr_urls() {
     for r in $declared_repos; do
       [[ -n "$REPO_NAME" && "$r" != "$REPO_NAME" ]] && continue
       url="$(fm_get "$status" "pr_$r")"
-      [[ -n "$url" && "$url" != "none" ]] && printf '%s\t%s\n' "$r" "$url"
+      [[ -n "$url" && "$url" != "none" ]] || { echo "missing PR for $r" >&2; return 3; }
+      printf '%s\t%s\n' "$r" "$url"
     done
   else
     url="$(fm_get "$status" pr)"
@@ -80,54 +81,51 @@ pr_urls() {
   return 0
 }
 
-# probe_one <url> — echoes "checks/review/merge" tokens:
-#   checks: pass|fail|pending|none   review: approved|changes|waiting
-#   merge:  clean|conflicts|unknown
+# Read all merge conditions from one PR response. Unknown conditions remain pending.
 probe_one() {
-  gh pr view "$1" --json state,reviewDecision,mergeable,statusCheckRollup 2>/dev/null | awk '
-    BEGIN { checks="none"; review="waiting"; merge="unknown"; fail=0; pend=0; ok=0 }
-    { buf = buf $0 }
-    END {
-      if (buf == "") { print "error"; exit }
-      # statusCheckRollup entries: count conclusions/statuses.
-      n = split(buf, parts, /"(conclusion|state)":"/)
-      for (i = 2; i <= n; i++) {
-        v = parts[i]; sub(/".*/, "", v)
-        if (v == "FAILURE" || v == "TIMED_OUT" || v == "CANCELLED" || v == "ERROR" || v == "ACTION_REQUIRED") fail++
-        else if (v == "PENDING" || v == "IN_PROGRESS" || v == "QUEUED" || v == "EXPECTED" || v == "") pend++
-        else if (v == "SUCCESS" || v == "NEUTRAL" || v == "SKIPPED") ok++
-      }
-      if (fail > 0) checks="fail"; else if (pend > 0) checks="pending"; else if (ok > 0) checks="pass"
-      if (buf ~ /"reviewDecision":"APPROVED"/) review="approved"
-      else if (buf ~ /"reviewDecision":"CHANGES_REQUESTED"/) review="changes"
-      if (buf ~ /"mergeable":"MERGEABLE"/) merge="clean"
-      else if (buf ~ /"mergeable":"CONFLICTING"/) merge="conflicts"
-      print checks "/" review "/" merge
-    }'
+  local summary state draft review merge status checks check pending=0
+  summary="$(gh pr view "$1" --json state,isDraft,reviewDecision,mergeable,mergeStateStatus,statusCheckRollup --jq '
+    [.state, (.isDraft|tostring), (.reviewDecision // ""), .mergeable, .mergeStateStatus,
+     ([.statusCheckRollup[] | if .__typename == "CheckRun" then
+        (if .status == "COMPLETED" then .conclusion else "PENDING" end)
+        else .state end | . // "UNKNOWN"] | join(","))] | join("|")')" || return 3
+  IFS='|' read -r state draft review merge status checks <<< "$summary"
+  case "$state" in MERGED) echo merged; return;; CLOSED) echo closed; return;; OPEN) ;; *) return 3;; esac
+  local results=()
+  IFS=, read -r -a results <<< "$checks"
+  for check in ${results[@]+"${results[@]}"}; do
+    case "$check" in
+      FAILURE|TIMED_OUT|CANCELLED|ERROR|ACTION_REQUIRED|STARTUP_FAILURE) echo red; return;;
+      SUCCESS|NEUTRAL|SKIPPED) ;;
+      *) pending=1;;
+    esac
+  done
+  if [[ "$merge" == CONFLICTING ]]; then echo conflicts
+  elif [[ "$review" == CHANGES_REQUESTED ]]; then echo changes
+  elif [[ "$draft" != false || "$merge" != MERGEABLE || ( "$status" != CLEAN && "$status" != HAS_HOOKS ) ||
+          ( -n "$review" && "$review" != APPROVED ) || "$pending" == 1 ]]; then echo pending
+  else echo green; fi
 }
 
 # aggregate — probes every PR; prints per-PR lines to stderr and the worst
 # state to stdout; empty output means no PRs recorded.
 aggregate() {
-  local worst="green" label url state checks review merge
-  local urls; urls="$(pr_urls)"
-  [[ -z "$urls" ]] && return 3
+  local worst=0 open=0 rank label url state urls
+  local states=(green pending changes conflicts red error)
+  urls="$(pr_urls)" || return 3
+  [[ -n "$urls" ]] || return 3
   while IFS=$'\t' read -r label url; do
-    state="$(probe_one "$url")"
-    if [[ -z "$state" || "$state" == "error" ]]; then
-      echo "  $label: cannot read PR state ($url) — gh error/auth?" >&2
-      worst="error"; continue
-    fi
-    checks="${state%%/*}"; review="$(cut -d/ -f2 <<< "$state")"; merge="${state##*/}"
-    echo "  $label: checks=$checks review=$review merge=$merge  $url" >&2
-    case "$checks" in
-      fail) [[ "$worst" != "error" ]] && worst="red" ;;
-      pending) [[ "$worst" == "green" || "$worst" == "changes" || "$worst" == "conflicts" ]] && worst="pending" ;;
+    state="$(probe_one "$url")" || state=error
+    echo "  $label: $state  $url" >&2
+    if [[ "$state" == merged && -n "$declared_repos" && -z "$REPO_NAME" ]]; then continue; fi
+    open=$((open+1))
+    case "$state" in
+      green) rank=0;; pending) rank=1;; changes) rank=2;; conflicts) rank=3;;
+      red|closed|merged) rank=4;; *) rank=5;;
     esac
-    [[ "$merge" == "conflicts" && "$worst" == "green" ]] && worst="conflicts"
-    [[ "$review" == "changes" && "$worst" == "green" ]] && worst="changes"
+    if (( rank > worst )); then worst=$rank; fi
   done <<< "$urls"
-  echo "$worst"
+  if (( open == 0 )); then echo merged; else echo "${states[worst]}"; fi
 }
 
 write_ci() {  # <field-value>
@@ -139,23 +137,24 @@ finish() {  # <worst> — write-back + exit code
   case "$worst" in
     green)     write_ci green;   echo "CI: green — checks pass, approved/no objections, mergeable"; exit 0 ;;
     pending)   write_ci pending; echo "CI: pending — checks still running"; exit 10 ;;
-    red)       write_ci red;     echo "CI: red — failing checks (run: spec-ci.sh logs $spec_dir)"; exit 20 ;;
+    red)       write_ci red;     echo "CI: red — closed PR or failed checks (run: spec-ci.sh logs $spec_dir)"; exit 20 ;;
     changes)   write_ci red;     echo "CI: changes requested by a reviewer"; exit 30 ;;
     conflicts) write_ci red;     echo "CI: merge conflicts — rebase spec branch onto base"; exit 40 ;;
-    error|*)   echo "CI: could not read one or more PRs" >&2; exit 3 ;;
+    merged)    echo "CI: all recorded PRs already merged"; exit 3 ;;
+    error|*)   write_ci pending; echo "CI: could not read one or more PRs" >&2; exit 3 ;;
   esac
 }
 
 case "$CMD" in
   check)
-    worst="$(aggregate)" || { echo "no PR recorded in STATUS.md — run spec-pr.sh first" >&2; exit 3; }
+    worst="$(aggregate)" || { write_ci pending; echo "no PR recorded in STATUS.md — run spec-pr.sh first" >&2; exit 3; }
     finish "$worst"
     ;;
 
   watch)
     start=$(date +%s)
     while :; do
-      worst="$(aggregate)" || { echo "no PR recorded in STATUS.md — run spec-pr.sh first" >&2; exit 3; }
+      worst="$(aggregate)" || { write_ci pending; echo "no PR recorded in STATUS.md — run spec-pr.sh first" >&2; exit 3; }
       [[ "$worst" != "pending" ]] && finish "$worst"
       (( $(date +%s) - start >= TIMEOUT )) && { write_ci pending; echo "CI: still pending after ${TIMEOUT}s — giving up (re-run watch)"; exit 10; }
       echo "  …checks pending; next poll in ${INTERVAL}s" >&2
@@ -164,7 +163,7 @@ case "$CMD" in
     ;;
 
   logs)
-    urls="$(pr_urls)"
+    urls="$(pr_urls)" || exit 3
     [[ -z "$urls" ]] && { echo "no PR recorded in STATUS.md" >&2; exit 3; }
     mkdir -p "$spec_dir/notes"
     out="$spec_dir/notes/ci.md"

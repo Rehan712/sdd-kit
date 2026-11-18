@@ -112,24 +112,34 @@ list_launchd() {
     | sort -u
 }
 
-cron_without_unit() { # <unit-id>
-  local unit_id="$1" marker entries
-  marker="$MARKER_PREFIX$unit_id"
-  entries="$(crontab -l 2>/dev/null || true)"
-  printf '%s\n' "$entries" | awk -v marker="$marker" 'index($0, marker) == 0'
-}
-
-add_cron() { # <unit-id> <run-at-epoch> <state-root>
-  local unit_id="$1" run_at="$2" state_root="$3" retained command entry
-  retained="$(cron_without_unit "$unit_id")"
-  command="now=\$(date +\\%s); [ \"\$now\" -ge $run_at ] && exec env SDD_RESUME_ROOT=$(shell_quote "$state_root") $(shell_quote "$HUB_DIR/scripts/spec-resume.sh") run $(shell_quote "$unit_id")"
-  entry="* * * * * /bin/bash -c $(shell_quote "$command") $MARKER_PREFIX$unit_id"
-  { printf '%s\n' "$retained"; printf '%s\n' "$entry"; } | crontab -
-}
-
-remove_cron() { # <unit-id>
-  cron_without_unit "$1" | crontab -
-}
+update_cron() ( # unit-id [epoch state-root]
+  local unit_id="$1" base lock tmp rc command tries=0 marker="$MARKER_PREFIX$1"
+  umask 077
+  base="$HOME/.local/state/sdd-kit"
+  mkdir -p "$base" || return 1
+  lock="$base/cron-write.lock"
+  until mkdir "$lock" 2>/dev/null; do
+    (( tries < 50 )) || { echo "cron update busy: $lock" >&2; return 1; }
+    tries=$((tries+1)); sleep 0.1
+  done
+  trap 'rm -rf "$lock"' EXIT
+  trap 'exit 1' HUP INT TERM
+  tmp="$lock/current"
+  if LC_ALL=C crontab -l > "$tmp" 2>"$lock/error"; then :
+  else
+    rc=$?
+    if [[ "$rc" != 1 ]] || [[ ! "$(< "$lock/error")" =~ ^no\ crontab\ for\ [^[:space:]]+$ ]]; then
+      cat "$lock/error" >&2; return 1
+    fi
+    : > "$tmp"
+  fi
+  awk -v marker="$marker" 'length($0)<length(marker) || substr($0,length($0)-length(marker)+1)!=marker' "$tmp" > "$lock/new" || return 1
+  if [[ $# == 3 ]]; then
+    command="now=\$(date +\%s); [ \"\$now\" -ge $2 ] && exec env SDD_RESUME_ROOT=$(shell_quote "$3") $(shell_quote "$HUB_DIR/scripts/spec-resume.sh") run $(shell_quote "$unit_id")"
+    printf '* * * * * /bin/bash -c %s %s\n' "$(shell_quote "$command")" "$marker" >> "$lock/new" || return 1
+  fi
+  cmp -s "$tmp" "$lock/new" || crontab - < "$lock/new"
+)
 
 list_cron() {
   (crontab -l 2>/dev/null || true) \
@@ -142,7 +152,7 @@ add() {
   if [[ "$(uname -s)" == "Darwin" ]]; then
     add_launchd "$unit_id" "$run_at" "$state_root"
   else
-    add_cron "$unit_id" "$run_at" "$state_root"
+    update_cron "$unit_id" "$run_at" "$state_root"
   fi
 }
 
@@ -150,7 +160,7 @@ remove() {
   if [[ "$(uname -s)" == "Darwin" ]]; then
     remove_launchd "$1"
   else
-    remove_cron "$1"
+    update_cron "$1"
   fi
 }
 
