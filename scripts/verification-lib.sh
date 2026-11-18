@@ -2356,9 +2356,8 @@ vf_path_content() { # <repo> <relative path> <output>
 }
 # Bulk hashing. A snapshot used to start four or more processes per file and
 # per pass (git cat-file, cp, sha256sum), so a repository carrying a shipped
-# spec's few thousand capture records cost minutes per snapshot, and a gate
-# takes three snapshots around every check. The files whose identity bytes are
-# their own bytes are hashed by one process per pass instead. It is only a
+# spec's few thousand capture records cost minutes per snapshot. Files whose
+# identity bytes are their own bytes are hashed by one process per pass instead. It is only a
 # faster way to the same record: a bulk result is used when it is present and
 # names its file, and everything else still takes the per-file path, which
 # also decides every failure.
@@ -2833,7 +2832,7 @@ vf_capture() { # spec binding cwd policy display -- argv...
 vf_capture_check() (
   local spec="$1" id="$2" manifest="$3" predicate="$4" dir key v exit_code before after seq check shell_path repo cwd policy ledger other f ocheck oinput oexit oseq
   [[ "$id" =~ ^CAP-[1-9][0-9]*-[A-Za-z0-9]+$ ]] || { echo 'capture integrity: invalid capture ID' >&2; return 3; }
-  case "$predicate" in integrity|current|reuse|output-bytes) ;; *) return 2;; esac
+  case "$predicate" in integrity|current|current-digest|reuse|output-bytes) ;; *) return 2;; esac
   dir="$spec/notes/captures/$id"
   local version=2
   if [[ -e "$dir/bindings.sha256" || -L "$dir/bindings.sha256" ]]; then
@@ -2881,7 +2880,11 @@ vf_capture_check() (
   [[ "$predicate" != integrity ]] || return 0
   [[ "$exit_code" == 0 ]] || { echo "capture failed: exit $exit_code" >&2; return 3; }
   [[ "$before" == "$after" ]] || { echo 'capture stale: inputs changed during execution' >&2; return 3; }
-  [[ -f "$manifest" && "$before" == "$(vf_hash "$manifest")" ]] || { echo 'capture stale: current inputs changed; refresh verification' >&2; return 3; }
+  local expected
+  if [[ "$predicate" == current-digest ]]; then expected="$manifest"
+  elif [[ -f "$manifest" ]]; then expected="$(vf_hash "$manifest")" || return 3
+  else expected=''; fi
+  [[ "$expected" =~ ^[a-f0-9]{64}$ && "$before" == "$expected" ]] || { echo 'capture stale: current inputs changed; refresh verification' >&2; return 3; }
   [[ "$predicate" != reuse || "$policy" == local ]] || { echo 'capture freshness: unknown/external/time policy requires execution' >&2; return 3; }
   [[ -f "$shell_path" ]] || return 3
   v="$( { cat "$dir/argv.nul"; printf '%s\0' "$shell_path" "$(vf_hash "$shell_path")" "$repo" "$cwd" "$policy"; } | vf_hash /dev/stdin)"
@@ -3268,27 +3271,37 @@ vf_gate_roots() {
     done
   fi
 }
-vf_gate_snapshot() (
-  local spec="$1" roots="$2" out="$3" repo tmp
+vf_gate_snapshot() ( # spec roots combined-output [per-root digest catalog]
+  local spec="$1" roots="$2" out="$3" catalog="${4:-}" repo tmp digest
   tmp="$(mktemp "${TMPDIR:-/tmp}/vf-gate-inputs.XXXXXX")" || return 3
   trap 'rm -f "$tmp"' EXIT
-  : > "$out"
+  : > "$out" || return 3
+  if [[ -n "$catalog" ]]; then : > "$catalog" || return 3; fi
   while IFS= read -r -d '' repo; do
-    vf_snapshot "$spec" "$repo" "$repo" "$tmp" >/dev/null || return 3
-    cat "$tmp" >> "$out"
+    digest="$(vf_snapshot "$spec" "$repo" "$repo" "$tmp")" || return 3
+    cat "$tmp" >> "$out" || return 3
+    if [[ -n "$catalog" ]]; then printf '%s\0%s\0' "$repo" "$digest" >> "$catalog" || return 3; fi
   done < "$roots"
   vf_hash "$out"
 )
 
+vf_gate_repo_digest() { # catalog, repository
+  local repo digest
+  while IFS= read -r -d '' repo && IFS= read -r -d '' digest; do
+    if [[ "$repo" == "$2" ]]; then printf '%s\n' "$digest"; return 0; fi
+  done < "$1"
+  echo "gate snapshot missing repository: $2" >&2; return 3
+}
+
 # Explicit local checks may reuse only after every current predicate passes.
 VF_REUSE_ENABLED=1
-vf_gate_execute() { # spec catalog repo policy commands-file kind -- argv...
-  local spec="$1" catalog="$2" repo="$3" policy="$4" records="$5" kind="$6"; shift 6
+vf_gate_execute() { # spec catalog repo policy commands-file kind per-root-digests -- argv...
+  local spec="$1" catalog="$2" repo="$3" policy="$4" records="$5" kind="$6" roots_digest="$7"; shift 7
   [[ "$1" == -- ]] || return 2; shift
-  local tmp dir cap='' cached=0 rc=0 argv
+  local tmp dir cap='' cached=0 rc=0 argv expected observed
+  expected="$(vf_gate_repo_digest "$roots_digest" "$repo")" || return 3
   tmp="$(mktemp -d "$spec/notes/verification/execute.XXXXXX")" || return 3
   printf '%s\0' "$@" > "$tmp/argv"
-  vf_snapshot "$spec" "$repo" "$repo" "$tmp/inputs" >/dev/null || { rm -rf "$tmp"; return 3; }
   # Reuse only exact argv + cwd + inputs and explicit local policy. Captures
   # made in this invocation can serve duplicate commands after current checks.
   if [[ "$policy" == local ]]; then
@@ -3297,6 +3310,10 @@ vf_gate_execute() { # spec catalog repo policy commands-file kind -- argv...
       cmp -s "$tmp/argv" "$dir/argv.nul" && vf_capture_bindings_match "$catalog" "$dir" || continue
       if (( ! VF_REUSE_ENABLED )); then
         grep -Fx "${dir##*/}" "$VF_GATE_FRESH" >/dev/null || continue
+      fi
+      if [[ ! -f "$tmp/inputs" ]]; then
+        observed="$(vf_snapshot "$spec" "$repo" "$repo" "$tmp/inputs")" || { rm -rf "$tmp"; return 3; }
+        [[ "$observed" == "$expected" ]] || { echo 'gate inputs changed before reuse' >&2; rm -rf "$tmp"; return 3; }
       fi
       if vf_capture_check "$spec" "${dir##*/}" "$tmp/inputs" reuse >/dev/null 2>&1; then cap="${dir##*/}"; cached=1; fi
     done
@@ -3311,7 +3328,8 @@ vf_gate_execute() { # spec catalog repo policy commands-file kind -- argv...
   printf -v argv '%s ' "$@"
   printf '%s\0' "$kind" "$repo" "$repo" "$argv" "$cap" "$cached" >> "$records"
   if (( rc )); then vf_summary "$spec/notes/captures/$cap" failure; rm -rf "$tmp"; return "$rc"; fi
-  vf_capture_check "$spec" "$cap" "$tmp/inputs" current || { rm -rf "$tmp"; return 3; }
+  # The capture already observed inputs before and after the command under the writer lock.
+  vf_capture_check "$spec" "$cap" "$expected" current-digest || { rm -rf "$tmp"; return 3; }
   rm -rf "$tmp"
 }
 
@@ -3338,7 +3356,7 @@ vf_gate_floor() {
   VF_GATE_FRESH="$tmp/fresh"; : > "$VF_GATE_FRESH"
   vf_gate_roots "$spec" "$tmp/roots.nul" || return 3
   vf_binding_snapshot "$spec" "$tmp/bindings.nul" || return 3
-  source="$(vf_gate_snapshot "$spec" "$tmp/roots.nul" "$tmp/inputs.nul")" || return 3
+  source="$(vf_gate_snapshot "$spec" "$tmp/roots.nul" "$tmp/inputs.nul" "$tmp/repo-digests")" || return 3
   start="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
   # Configuration gaps are fatal even for a legacy spec. A no-op is no floor.
   while IFS= read -r -d '' repo; do
@@ -3359,7 +3377,7 @@ vf_gate_floor() {
       continue
     fi
     repo="$(vf_gate_task_repo "$spec" "$task" "$tmp/roots.nul")" || return 3
-    vf_gate_execute "$spec" "$tmp/bindings.nul" "$repo" "${VF_TASK[10]}" "$records" "task:$task" -- "$(command -v bash)" -o pipefail -c "$VF_TASK_COMMAND" || return $?
+    vf_gate_execute "$spec" "$tmp/bindings.nul" "$repo" "${VF_TASK[10]}" "$records" "task:$task" "$tmp/repo-digests" -- "$(command -v bash)" -o pipefail -c "$VF_TASK_COMMAND" || return $?
   done < "$tmp/tasks.tsv"
   rm -f "$tmp/tasks.tsv"
   IFS= read -r -d '' repo < "$tmp/roots.nul"
@@ -3367,7 +3385,7 @@ vf_gate_floor() {
     # AC coverage receives the actual existing worktrees, including umbrellas.
     local args=("$(command -v bash)" "$HUB_DIR/scripts/$command.sh" "$spec")
     if [[ "$command" == spec-ac-coverage ]]; then while IFS= read -r -d '' v; do args+=(--root "$v"); done < "$tmp/roots.nul"; fi
-    vf_gate_execute "$spec" "$tmp/bindings.nul" "$repo" never "$records" "checker:$command" -- "${args[@]}" || return $?
+    vf_gate_execute "$spec" "$tmp/bindings.nul" "$repo" never "$records" "checker:$command" "$tmp/repo-digests" -- "${args[@]}" || return $?
   done
   root_index=0
   while IFS= read -r -d '' repo; do
@@ -3375,10 +3393,11 @@ vf_gate_floor() {
       [[ "$kind" == gate_checks ]] || continue
       policy=never
       while IFS= read -r -d '' v; do [[ "$v" != "$command" ]] || policy=local; done < "$tmp/config-$root_index/reuse.nul"
-      vf_gate_execute "$spec" "$tmp/bindings.nul" "$repo" "$policy" "$records" gate_check -- "$(command -v bash)" -o pipefail -c "$command" || return $?
+      vf_gate_execute "$spec" "$tmp/bindings.nul" "$repo" "$policy" "$records" gate_check "$tmp/repo-digests" -- "$(command -v bash)" -o pipefail -c "$command" || return $?
     done < "$tmp/config-$root_index/commands.nul"
     root_index=$((root_index+1))
   done < "$tmp/roots.nul"
+  rm "$tmp/repo-digests" || return 3
   after="$(vf_gate_snapshot "$spec" "$tmp/roots.nul" "$tmp/after")" || return 3
   [[ "$source" == "$after" ]] || { echo 'floor stale: source inputs changed during verification' >&2; return 3; }
   id="FLOOR-${tmp##*.}"
@@ -3404,7 +3423,7 @@ vf_gate_result_summary() {
 }
 
 vf_floor_validate() (
-  local spec="$1" id="$2" dir tmp source v f=() repo
+  local spec="$1" id="$2" dir tmp source observed v f=() expected
   [[ "$id" =~ ^FLOOR-[A-Za-z0-9]+$ ]] || { echo 'floor identity invalid' >&2; return 3; }
   dir="$spec/notes/verification/floors/$id"
   vf_integrity "$dir" meta.nul commands.nul bindings.nul inputs.nul roots.nul || return 3
@@ -3415,14 +3434,16 @@ vf_floor_validate() (
   trap 'rm -rf "$tmp"' EXIT
   vf_gate_roots "$spec" "$tmp/roots" || return 3
   cmp -s "$tmp/roots" "$dir/roots.nul" || return 3
-  [[ "$source" == "$(vf_gate_snapshot "$spec" "$tmp/roots" "$tmp/inputs")" ]] || { echo 'floor stale: refresh floor for current inputs' >&2; return 3; }
+  observed="$(vf_gate_snapshot "$spec" "$tmp/roots" "$tmp/inputs" "$tmp/repo-digests")" || return 3
+  [[ "$source" == "$observed" ]] || { echo 'floor stale: refresh floor for current inputs' >&2; return 3; }
   while IFS= read -r -d '' v; do
     f+=("$v"); (( ${#f[@]} == 6 )) || continue
-    repo="${f[1]}"
-    vf_snapshot "$spec" "$repo" "$repo" "$tmp/repo-inputs" >/dev/null || return 3
-    vf_capture_check "$spec" "${f[4]}" "$tmp/repo-inputs" current || return 3
+    expected="$(vf_gate_repo_digest "$tmp/repo-digests" "${f[1]}")" || return 3
+    vf_capture_check "$spec" "${f[4]}" "$expected" current-digest || return 3
     f=()
   done < "$dir/commands.nul"
+  observed="$(vf_gate_snapshot "$spec" "$tmp/roots" "$tmp/after")" || return 3
+  [[ "$source" == "$observed" ]] || { echo 'floor stale: inputs changed during validation' >&2; return 3; }
   printf '%s\n' "$source"
 )
 
@@ -3527,7 +3548,7 @@ vf_gate_checkpoint() {
     echo 'checkpoint legacy warning: missing typed acceptance/bindings may be gaps' >&2
     : > "$tmp/coverage.nul"
   fi
-  source="$(vf_gate_snapshot "$spec" "$tmp/roots.nul" "$tmp/inputs.nul")" || return 3
+  source="$(vf_gate_snapshot "$spec" "$tmp/roots.nul" "$tmp/inputs.nul" "$tmp/repo-digests")" || return 3
   vf_bindings "$spec" through-stage "$stage" "$tmp/selected" || return 3
   while IFS= read -r -d '' v; do
     local fields=()
@@ -3540,7 +3561,7 @@ vf_gate_checkpoint() {
     if [[ "${fields[5]}" == manual ]]; then vf_manual_current "$spec" "$task" || return 3; continue; fi
     vf_task_info "$tmp/bindings.nul" "$task" || return 3
     repo="$(vf_gate_task_repo "$spec" "$task" "$tmp/roots.nul")" || return 3
-    vf_gate_execute "$spec" "$tmp/bindings.nul" "$repo" "${VF_TASK[10]}" "$tmp/commands.nul" "task:$task" -- "$(command -v bash)" -o pipefail -c "$VF_TASK_COMMAND" || return $?
+    vf_gate_execute "$spec" "$tmp/bindings.nul" "$repo" "${VF_TASK[10]}" "$tmp/commands.nul" "task:$task" "$tmp/repo-digests" -- "$(command -v bash)" -o pipefail -c "$VF_TASK_COMMAND" || return $?
   done < "$tmp/selected"
   while IFS= read -r -d '' repo; do
     vf_config "$repo/.specify/stack.yml" "$spec/tasks.md" "$tmp/config-$index" || return 3
@@ -3548,11 +3569,12 @@ vf_gate_checkpoint() {
       [[ "$kind" == checkpoints && "$check_stage" == "$stage" ]] || continue
       policy=never
       while IFS= read -r -d '' v; do [[ "$v" != "$command" ]] || policy=local; done < "$tmp/config-$index/reuse.nul"
-      vf_gate_execute "$spec" "$tmp/bindings.nul" "$repo" "$policy" "$tmp/commands.nul" checkpoint -- "$(command -v bash)" -o pipefail -c "$command" || return $?
+      vf_gate_execute "$spec" "$tmp/bindings.nul" "$repo" "$policy" "$tmp/commands.nul" checkpoint "$tmp/repo-digests" -- "$(command -v bash)" -o pipefail -c "$command" || return $?
       commands=$((commands+1))
     done < "$tmp/config-$index/commands.nul"
     index=$((index+1))
   done < "$tmp/roots.nul"
+  rm "$tmp/repo-digests" || return 3
   after="$(vf_gate_snapshot "$spec" "$tmp/roots.nul" "$tmp/after")" || return 3
   [[ "$source" == "$after" ]] || { echo 'checkpoint inputs changed during execution' >&2; return 3; }
   id="CHECKPOINT-${tmp##*.}"
