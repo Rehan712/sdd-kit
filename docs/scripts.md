@@ -47,7 +47,7 @@ kit's own suite — same zero-dependency floor as the scripts (bash 3.2 + BSD
 tools + git):
 
 ```bash
-tests/run.sh              # every tests/test-*.sh suite (slow: ~30+ min for all of them)
+tests/run.sh              # every tests/test-*.sh suite, in parallel (one per CPU; the slowest suite sets the time)
 tests/run.sh task         # only files whose name contains "task"
 bash tests/shellcheck.sh  # ShellCheck over the enumerated scripts/*.sh and tests/*.sh, no rc files, SHELLCHECK_OPTS unset
 ```

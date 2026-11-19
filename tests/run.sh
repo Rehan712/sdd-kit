@@ -4,7 +4,9 @@
 # Zero dependencies beyond bash + POSIX tools + git (same floor as the kit
 # itself — bash 3.2 and BSD tools are enough). Each tests/test-*.sh file is a
 # self-contained suite; every test function runs in a subshell with a fresh
-# $SANDBOX temp dir, so tests can't leak state into each other or the repo.
+# $SANDBOX temp dir, so tests can't leak state into each other or the repo —
+# which is why the suites run in parallel, one per CPU (output still prints
+# in suite order, once all have finished).
 #
 # Usage:
 #   tests/run.sh              # all test files
@@ -44,20 +46,40 @@ while IFS= read -r -d '' path; do
 done < "$list"
 rm -f "$list"
 
-rc=0
-files=0
+picked=()
 for f in ${suites[@]+"${suites[@]}"}; do
   [[ -f "$f" ]] || continue
   if [[ -n "$FILTER" && "$(basename "$f")" != *"$FILTER"* ]]; then continue; fi
-  files=$((files+1))
-  echo "== $(basename "$f")"
-  # ${BASH} keeps the interpreter: `/bin/bash tests/run.sh` (macOS 3.2) must
-  # not silently re-exec the suites under a newer PATH bash.
-  "${BASH:-bash}" "$f" || rc=1
+  picked+=("$f")
 done
 
-if (( files == 0 )); then
+if (( ${#picked[@]} == 0 )); then
   echo "no test file matches '$FILTER'" >&2
   exit 2
 fi
+
+# Suites are independent (each test gets its own $SANDBOX), so they run in
+# parallel, one per CPU, with each one's output buffered and printed in suite
+# order once all have finished — the log reads as a sequential run. xargs runs
+# in the foreground so Ctrl-C still reaches every suite (a background job
+# would ignore SIGINT and orphan them). ${BASH} keeps the interpreter:
+# `/bin/bash tests/run.sh` (macOS 3.2) must not silently re-exec the suites
+# under a newer PATH bash.
+out="$(mktemp -d "${TMPDIR:-/tmp}/run-out.XXXXXX")" || exit 1
+trap 'rm -rf "$out"' EXIT
+jobs="$(getconf _NPROCESSORS_ONLN 2>/dev/null || echo 1)"
+[[ "$jobs" =~ ^[1-9][0-9]*$ ]] || jobs=1
+echo "tests/run.sh: suites run in parallel; their output prints in order once all have finished" >&2
+i=0
+for f in "${picked[@]}"; do i=$((i+1)); printf '%s\0%s\0' "$out/$i" "$f"; done \
+  | xargs -0 -n 2 -P "$jobs" sh -c '"$0" "$2" > "$1.log" 2>&1; echo $? > "$1.rc"' "${BASH:-bash}"
+
+rc=0
+i=0
+for f in "${picked[@]}"; do
+  i=$((i+1))
+  echo "== $(basename "$f")"
+  cat "$out/$i.log" 2>/dev/null
+  [[ "$(cat "$out/$i.rc" 2>/dev/null)" == 0 ]] || rc=1
+done
 exit "$rc"
