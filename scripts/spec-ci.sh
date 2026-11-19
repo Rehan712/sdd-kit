@@ -19,16 +19,18 @@
 #
 # Exit codes:
 #   0  green   — checks pass, no changes requested, no conflicts
-#   3  no PR recorded / gh missing or unauthenticated
-#   10 pending — checks still running (watch timed out while pending)
+#   3  no PR recorded / every recorded PR already merged / gh missing or unauthenticated
+#   10 pending — checks running or approval outstanding (watch timed out while
+#      pending), or a draft PR (watch stops: re-run spec-pr.sh after the gates)
 #   20 red     — at least one required check failing
 #   30 changes requested by a reviewer
-#   40 merge conflicts (branch needs a rebase onto base)
+#   40 merge conflicts or branch behind base (needs a rebase onto base)
 #   2  usage
 #
-# ci: frontmatter written: green | pending | red (+ date). "changes requested"
-# and "conflicts" also write red — CI-red vs review-red is in the exit code and
-# the printed summary, not the coarse field.
+# ci: frontmatter written: green | pending | red (+ date). A draft writes
+# pending; "changes requested", "conflicts" and "behind base" also write red —
+# CI-red vs review-red is in the exit code and the printed summary, not the
+# coarse field.
 
 set -uo pipefail
 
@@ -102,6 +104,9 @@ probe_one() {
   done
   if [[ "$merge" == CONFLICTING ]]; then echo conflicts
   elif [[ "$review" == CHANGES_REQUESTED ]]; then echo changes
+  elif [[ "$status" == BEHIND ]]; then echo behind
+  # Waiting never readies a draft: once its checks settle, report it as one.
+  elif [[ "$draft" != false && "$pending" == 0 ]]; then echo draft
   elif [[ "$draft" != false || "$merge" != MERGEABLE || ( "$status" != CLEAN && "$status" != HAS_HOOKS ) ||
           ( -n "$review" && "$review" != APPROVED ) || "$pending" == 1 ]]; then echo pending
   else echo green; fi
@@ -111,17 +116,17 @@ probe_one() {
 # state to stdout; empty output means no PRs recorded.
 aggregate() {
   local worst=0 open=0 rank label url state urls
-  local states=(green pending changes conflicts red error)
+  local states=(green pending draft changes behind conflicts red error)
   urls="$(pr_urls)" || return 3
   [[ -n "$urls" ]] || return 3
   while IFS=$'\t' read -r label url; do
     state="$(probe_one "$url")" || state=error
     echo "  $label: $state  $url" >&2
-    if [[ "$state" == merged && -n "$declared_repos" && -z "$REPO_NAME" ]]; then continue; fi
+    [[ "$state" != merged ]] || continue
     open=$((open+1))
     case "$state" in
-      green) rank=0;; pending) rank=1;; changes) rank=2;; conflicts) rank=3;;
-      red|closed|merged) rank=4;; *) rank=5;;
+      green) rank=0;; pending) rank=1;; draft) rank=2;; changes) rank=3;; behind) rank=4;; conflicts) rank=5;;
+      red|closed) rank=6;; *) rank=7;;
     esac
     if (( rank > worst )); then worst=$rank; fi
   done <<< "$urls"
@@ -136,9 +141,11 @@ finish() {  # <worst> — write-back + exit code
   local worst="$1"
   case "$worst" in
     green)     write_ci green;   echo "CI: green — checks pass, approved/no objections, mergeable"; exit 0 ;;
-    pending)   write_ci pending; echo "CI: pending — checks still running"; exit 10 ;;
+    pending)   write_ci pending; echo "CI: pending — checks running or approval outstanding"; exit 10 ;;
+    draft)     write_ci pending; echo "CI: draft PR — once both gates pass, re-run spec-pr.sh to mark it ready"; exit 10 ;;
     red)       write_ci red;     echo "CI: red — closed PR or failed checks (run: spec-ci.sh logs $spec_dir)"; exit 20 ;;
     changes)   write_ci red;     echo "CI: changes requested by a reviewer"; exit 30 ;;
+    behind)    write_ci red;     echo "CI: branch behind its base — rebase spec branch onto base"; exit 40 ;;
     conflicts) write_ci red;     echo "CI: merge conflicts — rebase spec branch onto base"; exit 40 ;;
     merged)    echo "CI: all recorded PRs already merged"; exit 3 ;;
     error|*)   write_ci pending; echo "CI: could not read one or more PRs" >&2; exit 3 ;;

@@ -269,7 +269,8 @@ publish_adapter() {
   if [[ -f "$dest" ]] && ! cmp -s "$generated" "$dest"; then
     case "$dest" in
       *.toml) [[ "$(head -1 "$dest")" == "$TOML_MARKER" ]] ;;
-      *) [[ "$(tail -1 "$dest")" == "$marker" ]] ;;
+      # Kits before the marker wrote unmarked adapters; every one names SDD or ~/.sdd.
+      *) [[ "$(tail -1 "$dest")" == "$marker" ]] || grep -qE 'SDD|~/\.sdd' "$dest" ;;
     esac || { echo "preserved unmanaged adapter: $dest" >&2; return 0; }
   fi
   if [[ "$dest" != *.toml ]]; then printf '\n%s\n' "$marker" >> "$generated"; fi

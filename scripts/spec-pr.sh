@@ -10,7 +10,8 @@
 # GATE ENFORCEMENT: refuses to open the PR (exit 4) unless STATUS.md shows
 # opponent CLEARED and reality_check READY. Versioned specs also require current sealed rounds. `--force` overrides ONLY together
 # with `--draft` (a mid-flight draft PR; the body still shows the real
-# verdicts). A non-draft PR can never skip the gates.
+# verdicts). A non-draft PR can never skip the gates. A later run without
+# --draft, once both gates pass, marks that draft ready for review.
 #
 # WRITE-BACK: on success the PR URL is written into STATUS.md frontmatter
 # (`pr:`, plus `phase: review` for non-drafts; umbrella repos get `pr_<name>:`)
@@ -172,7 +173,9 @@ if (( FORCE )); then
   [[ "$ready" == 0 ]] || { echo 'refusing to push unreviewed commits to an open non-draft PR' >&2; exit 4; }
 fi
 git -C "$workdir" push origin "$head:refs/heads/$branch" >&2
-git -C "$workdir" branch --set-upstream-to="origin/$branch" "$branch" >&2
+# What push -u records. --set-upstream-to needs a tracking ref a single-branch clone never gets.
+git -C "$workdir" config "branch.$branch.remote" origin
+git -C "$workdir" config "branch.$branch.merge" "refs/heads/$branch"
 
 if [[ -n "$declared_repos" ]]; then
   # (paste -d takes a delimiter LIST — 'sd', ' would alternate. Join then space.)
@@ -217,9 +220,16 @@ pr_url="$( (cd "$workdir" && gh pr create --base "$BASE" --head "$branch" $DRAFT
   || pr_url="$( (cd "$workdir" && gh pr list --state open --base "$BASE" --head "$branch" --json url,isCrossRepository --jq '.[] | select(.isCrossRepository == false) | .url') )" \
   || { echo "gh pr create failed and no existing PR found for $branch" >&2; exit 3; }
 [[ -n "$pr_url" && "$pr_url" != *$'\n'* ]] || { echo "no unique open PR for the published commit and base" >&2; exit 3; }
-remote="$(cd "$workdir" && gh pr view "$pr_url" --json state,baseRefName,headRefName,headRefOid,isCrossRepository,isDraft \
-  --jq '[.state,.baseRefName,.headRefName,.headRefOid,(.isCrossRepository|tostring),(.isDraft|tostring)] | join("|")')" || exit 3
+pr_state() {
+  (cd "$workdir" && gh pr view "$pr_url" --json state,baseRefName,headRefName,headRefOid,isCrossRepository,isDraft \
+    --jq '[.state,.baseRefName,.headRefName,.headRefOid,(.isCrossRepository|tostring),(.isDraft|tostring)] | join("|")')
+}
+remote="$(pr_state)" || exit 3
 draft_flag=false; [[ -z "$DRAFT" ]] || draft_flag=true
+# Both gates passed: mark ready the draft an earlier --force --draft run opened.
+if [[ -z "$DRAFT" && "$remote" == "OPEN|$BASE|$branch|$head|false|true" ]]; then
+  (cd "$workdir" && gh pr ready "$pr_url") >&2 && remote="$(pr_state)" || exit 3
+fi
 [[ "$remote" == "OPEN|$BASE|$branch|$head|false|$draft_flag" ]] || {
   echo 'open PR does not match the published commit, branch, base or draft status' >&2; exit 4; }
 echo "$pr_url"

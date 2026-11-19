@@ -57,7 +57,7 @@ The deterministic half lives in `~/.sdd/scripts/spec-ci.sh` (it writes the
    changed, re-request review (`gh pr edit <url> --add-reviewer <handle>` or
    note it for the user).
 
-### exit 40 — merge conflicts
+### exit 40 — merge conflicts or branch behind base
 
 Rebase the worktree onto the base branch (`git fetch origin && git rebase
 origin/<base>`), resolve, `git push --force-with-lease`. Validate current proof after rebasing; every manually-resolved hunk counts as a
@@ -65,8 +65,11 @@ semantic change under the re-gate rule.
 
 ### exit 10 — pending
 
-Report "checks still running" and either `spec-ci.sh watch` (babysitting) or
-hand the next action to the user. Nothing else to do — don't guess at results.
+The script says which: checks running, approval outstanding, or a draft PR.
+A draft becomes ready when `spec-pr.sh` runs again after both gates pass (it
+refuses before then). Otherwise report it and either `spec-ci.sh watch`
+(babysitting) or hand the next action to the user. Nothing else to do — don't
+guess at results.
 
 ### exit 3 — state unreadable (not a CI verdict)
 
@@ -74,7 +77,9 @@ No PR recorded in STATUS (Ship stage hasn't run — point back to
 `/sdd:implement`), `gh` missing/unauthenticated (`gh auth status`; the user
 runs `gh auth login`), or a recorded PR that can't be read. Fix the tooling
 gap or hand it to the user — never infer PR state some other way; the script
-is the only reader (constitution §10.6).
+is the only reader (constitution §10.6). "All recorded PRs already merged" is
+the one exit 3 that needs no fix: finish step 3 under exit 0 if teardown hasn't
+run, then hand back.
 
 ### exit 0 — green, approved, mergeable
 
