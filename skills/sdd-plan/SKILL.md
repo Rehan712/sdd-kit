@@ -27,6 +27,31 @@ nothing → run here as normal.
 upstream artifact with a STATUS Decisions line instead of confirming, and
 dispatch a mapped phase directly instead of offering it.
 
+**Claude Code: the design runs in a phase agent.** A skill's stamped
+`model:`/`effort:` hold only for the turn that loaded it — the model only when
+the user typed `/sdd:plan` — so a reply, a background agent's notice, or a
+plain-language "plan this" drops the phase to the session's own model. Here:
+step 1, and from step 2 only what needs the user (a draft spec to accept,
+`[NEEDS CLARIFICATION]` markers to resolve). Then steps 2–8 run as one
+foreground Agent call (`run_in_background: false`), `subagent_type:
+general-purpose`, `model` and `effort` the outputs of
+`~/.sdd/scripts/model-policy.sh --project <project-root> get plan claude alias`
+and `… get plan claude effort` (a lookup that prints nothing → omit that
+param; umbrella spec → no `--project`: hub-rooted phases stay on the machine
+policy, as `spec-dispatch.sh` keeps them). Prompt: the spec dir, the project
+root, what the user said about the design, and "You are the plan phase agent.
+Read `~/.sdd/skills/sdd-plan/SKILL.md` and run steps 2–8 here (dispatch is
+settled). Never ask the user: an unknown is a `[NEEDS CLARIFICATION: …]`
+marker, then stop. Launch the agents it calls yourself, in the foreground.
+Return the plan path, the plan-review verdict, any spec edit, and any stop
+with its reason." Its reply
+is a pointer: read STATUS.md and plan.md, then step 9 — or put a stop's
+question to the user; once it is answered, resolve it as step 2 does (remove
+the marker, log the answer in STATUS Decisions), then launch the phase agent
+again — it resumes from STATUS.md and the artifacts. You are the phase agent,
+or have no Agent tool → run the steps yourself; so does a machine with no
+`~/.sdd/models.yml`.
+
 ## Step-by-step
 
 ### 1. Locate the active spec
@@ -72,6 +97,13 @@ on any ambiguity. Project root via `~/.sdd/scripts/project-detect.sh`.
 
 ### 3. Consult stack expert(s)
 
+**Project model overrides** — once:
+`~/.sdd/scripts/model-policy.sh --project <project-root> overrides`. Each
+line is a role this project remaps (`role  tier  alias  effort`): pass that
+alias and effort as `model`/`effort` on every spawn of the role's agent in
+steps 3, 4 and 7 (`stack-expert` = any `*-expert`, `explore` = `sdd-scout`,
+`opponent` by name; `-` → omit that param). Prints nothing → nothing to pass.
+
 Pick the expert per stack tag from **`~/.sdd/templates/stack-routing.md`**
 (§Planning consultation). Multi-stack work: consult each relevant expert **in
 parallel** via the Agent tool — each returns its stack's considerations, file
@@ -81,7 +113,8 @@ encode lessons the overlay doesn't.
 ### 4. Explore the codebase
 
 Agent tool, `subagent_type: sdd-scout` — the kit's read-only scout, pinned to
-the `explore` role's tier by the model policy (no `model` param). One narrow
+the `explore` role's tier by the model policy (no `model` param unless the
+project overrides `explore` — step 3). One narrow
 question per scout, sent in parallel in one message: existing patterns to
 reuse, code this change must modify, contracts it must respect, the exact
 test/lint/build commands. Don't pre-decide — let exploration inform the

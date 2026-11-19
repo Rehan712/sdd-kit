@@ -61,9 +61,11 @@ The mapping is the **model policy**:
       the skill first in a later turn, which puts the effort back. The model is
       different: Claude Code applies a skill's `model:` only when you type its
       command, never when the session loads the skill itself (a plain-language
-      request, or another skill chaining it) — so `/sdd:go` runs plan and
-      tasks each as an agent, passing the phase's model and effort from the
-      policy, and implement in the orchestrator agent.
+      request, or another skill chaining it) — so `/sdd:plan` and
+      `/sdd:tasks` keep only the questions for you in the session and run
+      their design work as one foreground phase agent, passing the phase's
+      model and effort from the policy (project overlay included). `/sdd:go`
+      runs both phases the same way, and implement in the orchestrator agent.
     - *Codex CLI:* sessions pin models via one profile per tier
       (`~/.codex/sdd-<tier>.config.toml` → `codex --profile sdd-reasoning`);
       each adapter's preamble tells the agent to steer the session to its phase's
@@ -97,9 +99,10 @@ tier their machine lacks → their own mapping stands, and `sdd-doctor.sh` says
 so). `scripts/model-policy.sh --project <dir> show|check` prints and validates
 the merged result. What it reaches: every dispatched phase
 (`spec-dispatch.sh`, on all three CLIs) and every Claude subagent spawn (the
-dispatcher passes the alias and effort as Agent-tool params). What it cannot
-reach: the model of an interactive session already running a phase, and Codex
-subagents — both are fixed machine-wide by the stamped copies and profiles.
+dispatcher passes the alias and effort as Agent-tool params) — the plan and
+tasks phase agents included. What it cannot reach: the model of an interactive
+session already running a phase, and Codex subagents — both are fixed
+machine-wide by the stamped copies and profiles.
 
 After editing `models.yml` by hand, re-run `scripts/setup.sh` (or
 `apply-models.sh` + `sync.sh` + `build-adapters.sh`) — or skip the hand-edit

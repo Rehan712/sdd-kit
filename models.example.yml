@@ -69,7 +69,8 @@
 #   this file still says what a tier is, so nothing machine-specific is
 #   committed. A tier this machine lacks → the mapping below stands.
 #   Runtime only: spec-dispatch.sh and the Agent tool's model/effort params
-#   read it (model-policy.sh --project <dir>). The stamped copies and
+#   (the /sdd:plan and /sdd:tasks phase agents included) read it
+#   (model-policy.sh --project <dir>). The stamped copies and
 #   adapters are machine-wide, so an interactive session's own model is not
 #   changed by it. `model-policy.sh --project <dir> show|check` to inspect.
 

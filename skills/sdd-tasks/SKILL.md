@@ -26,6 +26,28 @@ locally only if the user declines. Prints nothing → run here as normal.
 with a STATUS Decisions line instead of confirming, and dispatch a mapped
 phase directly instead of offering it.
 
+**Claude Code: the decomposition runs in a phase agent.** A skill's stamped
+`model:`/`effort:` hold only for the turn that loaded it — the model only when
+the user typed `/sdd:tasks` — so a reply, a background agent's notice, or a
+plain-language "break this down" drops the phase to the session's own model.
+Here: step 1, with any confirmation it needs. Then steps 2–7 run as one
+foreground Agent call (`run_in_background: false`), `subagent_type:
+general-purpose`, `model` and `effort` the outputs of
+`~/.sdd/scripts/model-policy.sh --project <project-root> get tasks claude alias`
+and `… get tasks claude effort` (a lookup that prints nothing → omit that
+param; umbrella spec → no `--project`: hub-rooted phases stay on the machine
+policy, as `spec-dispatch.sh` keeps them). Prompt: the spec dir, the project
+root, what the user said about the breakdown, and "You are the tasks phase
+agent. Read `~/.sdd/skills/sdd-tasks/SKILL.md` and run steps 2–7 here
+(dispatch is settled). Never ask the user: an unknown is a
+`[NEEDS CLARIFICATION: …]` marker, then stop. Return the tasks.md path, the `sdd-analyze.sh` summary line, and any stop
+with its reason." Its reply is a pointer: read STATUS.md and tasks.md, then
+step 8 — or put a stop's question to the user; once it is answered, resolve
+the marker (remove it, log the answer in STATUS Decisions), then launch the
+phase agent again — it resumes from STATUS.md and the artifacts. You are the
+phase agent, or have no Agent tool → run the steps yourself; so does a
+machine with no `~/.sdd/models.yml`.
+
 ## Step-by-step
 
 ### 1. Locate the plan
