@@ -194,6 +194,23 @@ init_colors() {
 # frontmatter (space-separated); empty for single-repo specs.
 spec_declared_repos() { fm_list "${1:-}/spec.md" repos; }
 
+# default_base <repo> — the base branch when neither --base nor stack.yml
+# `base_branch:` names one: `dev` (the kit's convention) when the repo has it,
+# else the branch origin/HEAD names, else main or master; `dev` when none
+# exists, so the caller's error still names the convention.
+default_base() {
+  local head b
+  head="$(git -C "$1" symbolic-ref --quiet --short refs/remotes/origin/HEAD 2>/dev/null || true)"
+  for b in dev "${head#origin/}" main master; do
+    [[ -n "$b" ]] || continue
+    if git -C "$1" show-ref --verify --quiet "refs/heads/$b" \
+      || git -C "$1" show-ref --verify --quiet "refs/remotes/origin/$b"; then
+      echo "$b"; return 0
+    fi
+  done
+  echo dev
+}
+
 # list_has <space-separated-list> <item> — exact-token membership. `grep -w`
 # is not this: it treats '-' as a word boundary, so 'alpha' matched a declared
 # 'alpha-api' and an undeclared repo passed as a declared one.

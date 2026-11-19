@@ -2,7 +2,8 @@
 # spec-worktree.sh — create (or reuse) a git worktree + branch for a spec.
 #
 # Cuts branch `spec/NNN-slug` from local `dev` (default base — it carries the spec
-# docs you committed there; warns if local dev is behind origin) and adds a worktree at:
+# docs you committed there; warns if local dev is behind origin; a repo without
+# dev falls back to its default branch, lib.sh default_base) and adds a worktree at:
 #     <repo-parent>/<repo-name>.worktrees/NNN-slug
 # The worktree is a sibling of the repo, OUTSIDE the working tree — no .gitignore
 # entry needed and no nested-git noise.
@@ -25,7 +26,7 @@
 # Usage:
 #   spec-worktree.sh <spec-dir>                 # e.g. .../.specify/specs/004-foo
 #   spec-worktree.sh --project <repo> 004-foo   # by slug, repo explicit
-#   spec-worktree.sh --base <ref> <spec-dir>    # override base branch (default dev)
+#   spec-worktree.sh --base <ref> <spec-dir>    # override base branch (default dev, else the default branch)
 #   spec-worktree.sh --repo <name> <spec-dir>   # umbrella: one declared repo
 #   spec-worktree.sh --all-repos <spec-dir>     # umbrella: every declared repo
 #   spec-worktree.sh --remove [--delete-branch] <spec-dir>   # post-merge teardown
@@ -40,7 +41,7 @@ SYSMAP="$HUB_DIR/scripts/system-map.sh"
 
 usage() { usage_from_header "$0"; exit 0; }
 
-BASE=""   # --base wins; else .specify/stack.yml `base_branch:`; else dev
+BASE=""   # --base wins; else .specify/stack.yml `base_branch:`; else default_base
 PROJECT=""
 SPEC_ARG=""
 REPO_NAME=""
@@ -81,7 +82,7 @@ fi
 declared_repos=""
 [[ -n "$spec_dir" ]] && declared_repos="$(spec_declared_repos "$spec_dir")"
 
-# Resolve base branch for a given repo: flag > its stack.yml `base_branch:` > dev.
+# Resolve base branch for a given repo: flag > its stack.yml `base_branch:` > default_base.
 read_base() { yml_get "$1/.specify/stack.yml" base_branch; }
 resolve_base() {  # <repo> — echoes the base ref name
   local repo="$1" base="$BASE" common main_root
@@ -93,7 +94,7 @@ resolve_base() {  # <repo> — echoes the base ref name
       main_root="$(dirname "$common")"
       [[ -d "$main_root" && "$main_root" != "$repo" ]] && base="$(read_base "$main_root")"
     fi
-    base="${base:-dev}"
+    [[ -n "$base" ]] || base="$(default_base "$repo")"
   fi
   echo "$base"
 }

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # spec-pr.sh — push the spec branch and open a PR to the base branch via gh.
 #
-# Pushes `spec/NNN-slug` and opens a PR (default base `dev`) whose body links the
+# Pushes `spec/NNN-slug` and opens a PR (default base `dev`, else the repo's default branch) whose body links the
 # spec/plan/tasks and quotes the opponent + reality-check verdicts from STATUS.md.
 # Prints the PR URL on stdout. If `gh` is missing/unauthenticated, the push still
 # happens and the manual command is printed to stderr (exit 3). A forced draft
@@ -23,7 +23,7 @@
 #
 # Usage:
 #   spec-pr.sh <spec-dir>
-#   spec-pr.sh --base <branch> <spec-dir>   # default base: dev
+#   spec-pr.sh --base <branch> <spec-dir>   # default base: dev, else the default branch
 #   spec-pr.sh --draft <spec-dir>
 #   spec-pr.sh --force --draft <spec-dir>   # mid-flight draft, gates not yet run
 #   spec-pr.sh --repo <name> <spec-dir>     # umbrella: PR for one declared repo
@@ -38,7 +38,7 @@ SYSMAP="$HUB_DIR/scripts/system-map.sh"
 
 usage() { usage_from_header "$0"; exit 0; }
 
-BASE=""   # --base wins; else .specify/stack.yml `base_branch:`; else dev
+BASE=""   # --base wins; else .specify/stack.yml `base_branch:`; else default_base (lib.sh)
 DRAFT=""
 FORCE=0
 VERIFY_HEAD=0
@@ -86,7 +86,7 @@ else
   repo="$(git -C "$spec_dir" rev-parse --show-toplevel)"
 fi
 
-# Resolve base branch: flag > project stack.yml `base_branch:` > dev.
+# Resolve base branch: flag > project stack.yml `base_branch:` > default_base (dev, else the default branch).
 # Check the checkout itself first, then the main repo (a worktree checkout may
 # predate stack.yml being committed).
 read_base() { yml_get "$1/.specify/stack.yml" base_branch; }
@@ -98,7 +98,7 @@ if [[ -z "$BASE" ]]; then
     main_root="$(dirname "$common")"
     [[ -d "$main_root" && "$main_root" != "$repo" ]] && BASE="$(read_base "$main_root")"
   fi
-  BASE="${BASE:-dev}"
+  [[ -n "$BASE" ]] || BASE="$(default_base "$repo")"
 fi
 
 # Locate the branch via Git even when STATUS points at an old checkout.

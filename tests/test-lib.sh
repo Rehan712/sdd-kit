@@ -148,4 +148,36 @@ test_spec_declared_repos() {
   assert_eq "" "$(spec_declared_repos "$SANDBOX/nonexistent")" "no spec.md is empty, not fatal"
 }
 
+# --- base branch ----------------------------------------------------------------
+
+# A repo without `dev` and no stack.yml base_branch failed its first worktree
+# cut with "fatal: invalid reference: origin/dev".
+test_default_base_prefers_dev_then_the_default_branch() {
+  local r="$SANDBOX/repo" o="$SANDBOX/origin.git"
+  fixture_git init -q --bare -b trunk "$o"
+  fixture_git init -q -b trunk "$r"
+  fixture_git -C "$r" commit --allow-empty -qm fixture
+  assert_eq dev "$(default_base "$r")" 'no candidate: the convention, so the error names it'
+  fixture_git -C "$r" branch master
+  assert_eq master "$(default_base "$r")" 'a local master'
+  fixture_git -C "$r" remote add origin "$o"
+  fixture_git -C "$r" push -q origin trunk
+  fixture_git -C "$r" remote set-head origin trunk
+  assert_eq trunk "$(default_base "$r")" 'origin/HEAD before main/master'
+  fixture_git -C "$r" branch dev
+  assert_eq dev "$(default_base "$r")" 'dev wins when the repo has it'
+}
+
+test_worktree_cut_on_a_repo_without_dev() {
+  local r="$SANDBOX/repo"
+  fixture_git init -q -b main "$r"
+  mkdir -p "$r/.specify/specs/001-foo"
+  printf -- '---\n---\n' > "$r/.specify/specs/001-foo/spec.md"
+  fixture_git -C "$r" add -A
+  fixture_git -C "$r" commit -qm fixture
+  run_rc 0 bash "$SCRIPTS/spec-worktree.sh" "$r/.specify/specs/001-foo"
+  assert_contains "$OUT" 'creating spec/001-foo from main'
+  assert_eq spec/001-foo "$(git -C "$SANDBOX/repo.worktrees/001-foo" rev-parse --abbrev-ref HEAD 2>&1)" 'worktree branch'
+}
+
 t_run_all

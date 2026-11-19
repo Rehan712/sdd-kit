@@ -190,7 +190,7 @@ updated: YYYY-MM-DD
 > (`T011r*`), rebases, the merge, worktree teardown — belongs to **/sdd:review**
 > (deterministic state via `~/.sdd/scripts/spec-ci.sh`). T012 runs after merge.
 
-- [ ] **T011** — Open PR to the base branch (stack.yml `base_branch:`, default `dev`) referencing `spec.md` and `plan.md`
+- [ ] **T011** — Open PR to the base branch (stack.yml `base_branch:`, default `dev`, else the repo's default branch) referencing `spec.md` and `plan.md`
   - *Files:* (none — branch + PR)
   - *Acceptance:* `~/.sdd/scripts/spec-pr.sh <spec-dir>` prints the PR URL (it writes `pr:` + `phase: review` into STATUS.md itself); both gate verdicts in the PR body; reviewer requested (`gh pr edit --add-reviewer <handle>` or ask the user who)
 
