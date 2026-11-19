@@ -276,12 +276,6 @@ if [[ "$ROLE" == "implement" ]]; then
   fi
 fi
 
-case "$CLI" in
-  codex)   pointer="Your instructions are your installed skill: read $CODEX_DIR/skills/sdd-$ROLE/SKILL.md and execute it for that spec directory." ;;
-  copilot) pointer="You are the sdd-$ROLE agent — your agent instructions ARE the phase skill; execute them for that spec directory." ;;
-  claude)  pointer="Invoke your sdd-$ROLE skill (the /sdd:$ROLE phase) for that spec directory." ;;
-esac
-
 wt_line=""
 if [[ "$ROLE" == "implement" ]]; then
   if (( UMBRELLA )); then
@@ -309,7 +303,19 @@ if (( UMBRELLA )); then
   fi
 fi
 
-PROMPT="NON-INTERACTIVE DISPATCHED RUN — sent from another CLI via ~/.sdd/scripts/spec-dispatch.sh.
+# make_prompt <cli> — the run's prompt for the CLI an attempt runs on. Built
+# per attempt: a usage-limit fallback was handed the first CLI's skill pointer
+# and told to record that CLI as active_tool.
+make_prompt() {
+  local pointer
+  case "$1" in
+    codex)   pointer="Your instructions are your installed skill: read $CODEX_DIR/skills/sdd-$ROLE/SKILL.md and execute it for that spec directory." ;;
+    copilot) pointer="You are the sdd-$ROLE agent — your agent instructions ARE the phase skill; execute them for that spec directory." ;;
+    claude)  pointer="Invoke your sdd-$ROLE skill (the /sdd:$ROLE phase) for that spec directory."
+      # --model/--effort below already pin this run (full model id): the skill's phase agent would only re-pin it to an alias.
+      case "$ROLE" in plan|tasks) pointer="$pointer You are the $ROLE phase agent: the dispatcher started this session on the phase's model policy." ;; esac ;;
+  esac
+  PROMPT="NON-INTERACTIVE DISPATCHED RUN — sent from another CLI via ~/.sdd/scripts/spec-dispatch.sh.
 Execute the SDD $ROLE phase for the spec directory: $LIVE_SPEC
 $pointer
 $umb_line$wt_line$task_line
@@ -317,9 +323,10 @@ $umb_line$wt_line$task_line
 Rules for this run (they override any instruction to ask the user):
 - Never ask the user anything. An unknown you cannot resolve from the artifacts or code -> write [NEEDS CLARIFICATION: <question>] in the artifact where the answer belongs, mirror it in STATUS.md Open questions, and stop cleanly.
 - Follow the skill's grounding rules exactly: evidence only from commands you actually ran; never fabricate.
-- Update STATUS.md as the skill instructs, and set active_tool: $CLI.
+- Update STATUS.md as the skill instructs, and set active_tool: $1.
 - End with a short summary: what you produced, what remains, any [NEEDS CLARIFICATION] markers you left.${NOTE:+
 - Extra context from the dispatcher: $NOTE}"
+}
 
 # --- build the target CLI's command -------------------------------------------
 
@@ -329,6 +336,7 @@ Rules for this run (they override any instruction to ask the user):
 # racing with tee over the aggregate capture.
 build_command() {
   local attempt_cli="$1" last_message="$2" tier m e d
+  make_prompt "$attempt_cli"
   CMD=("$attempt_cli")
   case "$attempt_cli" in
   codex)
