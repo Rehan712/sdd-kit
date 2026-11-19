@@ -1841,18 +1841,27 @@ test_release_validates_current_sealed_rounds_and_pins_the_commit() {
   assert_eq "$head" "$OUT"
   fixture_git init -q --bare "$SANDBOX/remote"
   fixture_git -C "$repo" remote add origin "$SANDBOX/remote"
+  # A single-branch clone: pushing the spec branch creates no tracking ref.
+  fixture_git -C "$repo" config remote.origin.fetch '+refs/heads/dev:refs/remotes/origin/dev'
   mkdir "$SANDBOX/pub-bin"
   cat > "$SANDBOX/pub-bin/gh" <<'EOF'
 #!/bin/sh
 case "$2" in
   create) echo https://example.invalid/pr/1;;
-  view) printf 'OPEN|dev|%s|%s|false|false\n' "$(git symbolic-ref --short HEAD)" "${TEST_PR_HEAD:-$(git rev-parse HEAD)}";;
+  view) d=false; [ ! -e "$SANDBOX/pr-draft" ] || d=true
+    printf 'OPEN|dev|%s|%s|false|%s\n' "$(git symbolic-ref --short HEAD)" "${TEST_PR_HEAD:-$(git rev-parse HEAD)}" "$d";;
+  ready) rm "$SANDBOX/pr-draft";;
   list) echo 1;;
 esac
 EOF
   chmod +x "$SANDBOX/pub-bin/gh"
   run_rc 0 env PATH="$SANDBOX/pub-bin:$PATH" "$pr" "$spec"
   assert_eq "$head" "$(fixture_git -C "$SANDBOX/remote" rev-parse "refs/heads/spec/${spec##*/}")"
+  assert_eq "refs/heads/spec/${spec##*/}" "$(fixture_git -C "$repo" config "branch.spec/${spec##*/}.merge")" 'upstream not recorded'
+  # A --force --draft run opened the PR before the gates passed: publishing now marks it ready.
+  touch "$SANDBOX/pr-draft"
+  run_rc 0 env PATH="$SANDBOX/pub-bin:$PATH" "$pr" "$spec"
+  [[ ! -e "$SANDBOX/pr-draft" ]] || t_fail 'reviewed draft PR left a draft'
   run_rc 4 env PATH="$SANDBOX/pub-bin:$PATH" TEST_PR_HEAD=outdated "$pr" "$spec"
   assert_contains "$OUT" 'does not match the published commit'
   run_rc 4 env PATH="$SANDBOX/pub-bin:$PATH" "$pr" --force --draft "$spec"

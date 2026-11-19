@@ -217,8 +217,21 @@ EOF
 20 OPEN|false||MERGEABLE|CLEAN|SUCCESS,FAILURE
 30 OPEN|false|CHANGES_REQUESTED|MERGEABLE|BLOCKED|SUCCESS
 40 OPEN|false||CONFLICTING|DIRTY|SUCCESS
+40 OPEN|false|APPROVED|MERGEABLE|BEHIND|SUCCESS
 3 UNKNOWN|false||UNKNOWN|UNKNOWN|
 EOF
+  # A settled draft stops the watch instead of polling until the timeout.
+  echo 'OPEN|true||MERGEABLE|DRAFT|SUCCESS' > "$SANDBOX/b.state"
+  run_rc 10 "$SCRIPTS/spec-ci.sh" --timeout 0 watch "$spec"
+  assert_contains "$OUT" 'draft PR'
+  # A merged single-repo PR is done, not red.
+  mkdir "$SANDBOX/single"
+  printf '%s\n' --- 'spec: 002-single' --- > "$SANDBOX/single/spec.md"
+  printf '%s\n' --- 'pr: https://example.invalid/b' 'ci: green (2026-01-01)' --- > "$SANDBOX/single/STATUS.md"
+  echo 'MERGED|false||UNKNOWN|UNKNOWN|' > "$SANDBOX/b.state"
+  run_rc 3 "$SCRIPTS/spec-ci.sh" check "$SANDBOX/single"
+  assert_contains "$OUT" 'already merged'
+  assert_contains "$(cat "$SANDBOX/single/STATUS.md")" 'ci: green'
   for name in a b; do
     echo 'OPEN|false|APPROVED|MERGEABLE|CLEAN|SUCCESS' > "$SANDBOX/$name.state"
   done
