@@ -98,6 +98,7 @@ dispatch_fixture() { # <models.yml body> <provider stdout> <provider stderr> <ex
 set -u
 last_message=""
 provider="$(basename "$0")"
+[[ -z "${DISPATCH_PROMPT_LOG:-}" ]] || printf '%s' "$*" > "$DISPATCH_PROMPT_LOG.$provider"
 while (( $# )); do
   case "$1" in
     --output-last-message) shift; last_message="$1" ;;
@@ -336,9 +337,14 @@ test_AC_006_delegate_uses_ordered_ready_fallback_and_preserves_verification() {
   export DISPATCH_READY_COPILOT_EXIT=0 DISPATCH_READY_COPILOT_MESSAGE='copilot ready for plan'
   export DISPATCH_COPILOT_STDOUT='copilot completed plan' DISPATCH_COPILOT_STDERR=''
   export DISPATCH_COPILOT_EXIT=0 DISPATCH_COPILOT_SUCCESS_PLAN=1
+  export DISPATCH_PROMPT_LOG="$SANDBOX/prompt"
 
   run_rc 0 run_dispatch
   assert_contains "$OUT" 'plan.md updated:' "AC-006: first ready fallback returns through the unchanged plan verifier"
+  # The fallback's prompt is its own: it was handed codex's adapter and active_tool.
+  assert_contains "$(cat "$DISPATCH_PROMPT_LOG.codex")" 'active_tool: codex' 'the first attempt records its CLI'
+  assert_contains "$(cat "$DISPATCH_PROMPT_LOG.copilot")" 'active_tool: copilot' 'a fallback records the CLI it left'
+  assert_not_contains "$(cat "$DISPATCH_PROMPT_LOG.copilot")" '.codex/skills/sdd-plan' "a fallback is pointed at codex's adapter"
   capture="$(dispatch_capture)" || t_fail "AC-006: aggregate capture was written"
   assert_contains "$(cat "$capture")" 'Fallback skipped: codex (already attempted)' \
     "AC-006: the limited CLI is skipped even when listed first"

@@ -1816,6 +1816,8 @@ test_release_validates_current_sealed_rounds_and_pins_the_commit() {
   local spec repo gate pr head floor cap name report reservation
   spec="$(make_verification_git_dir release)"
   repo="$(cd "$spec/../../.." && pwd -P)"; gate="$(floor_fixture "$spec")"; pr="${gate%/*}/spec-pr.sh"
+  # The single-branch clone of dev below has its local dev: the PR's default base.
+  fixture_git -C "$repo" branch dev
   fixture_git -C "$repo" checkout -qb "spec/${spec##*/}"
   . "$SCRIPTS/lib.sh"
   fm_set "$spec/STATUS.md" opponent CLEARED

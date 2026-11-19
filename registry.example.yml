@@ -13,7 +13,7 @@
 #   notes:   freeform context the skills read when planning
 #
 # Per-project settings live in <project>/.specify/:
-#   stack.yml       — stacks: [...] (+ optional base_branch: main — default dev)
+#   stack.yml       — stacks: [...] (+ optional base_branch: main — default dev, else the default branch)
 #   constitution.md — project overrides, `extends` the kit constitution
 #   models.yml      — optional: remap roles → tiers and dispatch for this
 #                     project only (roles: / dispatch: — tiers stay in the

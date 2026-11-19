@@ -41,7 +41,7 @@ authority.
    `branch:`/`worktree:`. If STATUS names a live worktree, operate there.
 2. **Cut/reuse the worktree** (idempotent):
    `WT="$(~/.sdd/scripts/spec-worktree.sh <spec-dir> | tail -1)"` — branch
-   `spec/NNN-slug` from the base branch (`--base` > stack.yml `base_branch:` > `dev`),
+   `spec/NNN-slug` from the base branch (`--base` > stack.yml `base_branch:` > `dev`, else the repo's default branch),
    worktree at `<repo>.worktrees/NNN-slug`.
 3. **Switch your working root to `$WT`.** All code edits, checkbox flips, and
    STATUS updates happen under `$WT/…`; the live spec dir is

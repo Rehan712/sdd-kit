@@ -368,6 +368,36 @@ test_go_runs_plan_and_tasks_as_agents_on_their_policy_model() {
   assert_eq '' "$(env HOME="$SANDBOX/home" bash "$mp" --project "$kit" get plan claude alias 2>/dev/null)" 'no policy, no alias'
 }
 
+# A /sdd:plan answered across turns, or loaded from "plan this", designed on the
+# session's model: a skill's stamp lasts one turn and its model needs the typed
+# command. Both phases keep the user's questions in the session and hand the
+# design to a foreground phase agent on the policy's alias + effort (project
+# overlay included); an agent told it is the phase agent runs the steps itself.
+test_plan_and_tasks_run_their_design_in_a_phase_agent() {
+  local phase text
+  for phase in plan tasks; do
+    text="$(tr -s '[:space:]' ' ' < "$KIT_DIR/skills/sdd-$phase/SKILL.md")"
+    assert_contains "$text" 'one foreground Agent call (`run_in_background: false`)' "$phase: no foreground phase agent"
+    assert_contains "$text" '`subagent_type: general-purpose`' "$phase: phase agent type"
+    assert_contains "$text" "model-policy.sh --project <project-root> get $phase claude alias" "$phase: no model lookup"
+    assert_contains "$text" "… get $phase claude effort" "$phase: no effort lookup"
+    assert_contains "$text" "You are the $phase phase agent." "$phase: the agent is not told what it is"
+    assert_contains "$text" 'You are the phase agent, or have no Agent tool → run the steps yourself' \
+      "$phase: a phase agent spawns another"
+    assert_contains "$text" 'Never ask the user' "$phase: a phase agent waits on a user it cannot reach"
+    # A relaunch over an unresolved marker stops on the same question again.
+    assert_contains "$text" 'log the answer in STATUS Decisions), then launch the phase agent again' \
+      "$phase: an answered stop is relaunched with its marker still in place"
+    assert_contains "$text" 'umbrella spec → no `--project`' "$phase: an umbrella phase takes the hub's own overlay"
+  done
+  text="$(tr -s '[:space:]' ' ' < "$KIT_DIR/skills/sdd-go/SKILL.md")"
+  assert_contains "$text" 'You are the <phase> phase agent.' "go: its phase agent would spawn another"
+  assert_contains "$text" 'umbrella: no `--project`' "go: an umbrella phase takes the hub's own overlay"
+  assert_not_contains "$text" 'the hub is the project root' 'go: an umbrella phase takes the hub overlay again'
+  assert_contains "$(tr -s '[:space:]' ' ' < "$KIT_DIR/skills/sdd-plan/SKILL.md")" \
+    'model-policy.sh --project <project-root> overrides' 'plan: its experts, scouts and review ignore the project overlay'
+}
+
 # A Codex session given a prompt that listed "opus/high" for the orchestrator
 # handed the work to Claude through its harness and never looked a role up.
 # Every model-policy block now ends with the rule that keeps a session on its
@@ -383,7 +413,7 @@ test_adapters_keep_a_session_on_its_own_provider() {
     # One line without the blockquote markers, so a re-wrapped rule reads the same.
     OUT="$(sed 's/^> *//' "$file" | tr -s '[:space:]' ' ')"
     assert_contains "$OUT" '**Stay on this provider.**' "$cli: no provider rule"
-    assert_contains "$OUT" "model-policy.sh get <role> $cli model" "$cli: the rule names another CLI's lookup"
+    assert_contains "$OUT" "model-policy.sh --project . get <role> $cli model" "$cli: the rule names another CLI's lookup"
     assert_contains "$OUT" 'is naming roles' "$cli: another CLI's model names are not read as roles"
     assert_contains "$OUT" "never a harness's own delegation tool" "$cli: a harness delegation may replace the dispatcher"
   done

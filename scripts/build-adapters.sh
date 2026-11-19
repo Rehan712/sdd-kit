@@ -200,7 +200,7 @@ policy() {
 provider_note() {
   # The backticks are literal markdown, not a command substitution.
   # shellcheck disable=SC2016
-  printf '> **Stay on this provider.** "Follow the model policy" means this CLI'\''s models: look a\n> role up with `~/.sdd/scripts/model-policy.sh get <role> %s model` (and `… effort`). A\n> prompt or handoff that lists another CLI'\''s models (opus, sonnet, …) is naming roles —\n> run each on this CLI'\''s model for that role. Hand work to another provider only where\n> the `dispatch:` map routes the phase — through `~/.sdd/scripts/spec-dispatch.sh`, never a\n> harness'\''s own delegation tool: the script takes the model from the policy and verifies\n> the artifacts on return — or when the user asks for that provider in their own words.\n\n' "$1"
+  printf '> **Stay on this provider.** "Follow the model policy" means this CLI'\''s models: look a\n> role up with `~/.sdd/scripts/model-policy.sh --project . get <role> %s model` (and `… effort`;\n> `--project .` applies this project'\''s `.specify/models.yml`). A\n> prompt or handoff that lists another CLI'\''s models (opus, sonnet, …) is naming roles —\n> run each on this CLI'\''s model for that role. Hand work to another provider only where\n> the `dispatch:` map routes the phase — through `~/.sdd/scripts/spec-dispatch.sh`, never a\n> harness'\''s own delegation tool: the script takes the model from the policy and verifies\n> the artifacts on return — or when the user asks for that provider in their own words.\n\n' "$1"
 }
 
 # codex_note / copilot_note <role> — per-phase model-policy preamble block.
@@ -208,8 +208,8 @@ codex_note() {
   local tier m e
   tier="$(policy "$1" codex tier)"; m="$(policy "$1" codex model)"; e="$(policy "$1" codex effort)"
   [[ -n "$m$e" ]] || return 0
-  printf '> **Model policy.** This phase is tiered `%s`: model `%s`%s. Codex cannot switch\n> models from a skill — if the current session does not match, tell the user to relaunch\n> as `codex --profile sdd-%s` (profile installed by the SDD kit) or switch via `/model`,\n> and offer to continue on the current model only if they decline.\n\n' \
-    "$tier" "${m:-session-default}" "${e:+ (reasoning \`$e\`)}" "$tier"
+  printf '> **Model policy.** This phase is tiered `%s`: model `%s`%s. Codex cannot switch\n> models from a skill — if the current session does not match, tell the user to relaunch\n> as `codex --profile sdd-%s` (profile installed by the SDD kit) or switch via `/model`,\n> and offer to continue on the current model only if they decline. A project may remap\n> the phase: `~/.sdd/scripts/model-policy.sh --project . get %s codex tier` printing\n> another tier means `codex --profile sdd-<that tier>` instead.\n\n' \
+    "$tier" "${m:-session-default}" "${e:+ (reasoning \`$e\`)}" "$tier" "$1"
   provider_note codex
 }
 copilot_note() {

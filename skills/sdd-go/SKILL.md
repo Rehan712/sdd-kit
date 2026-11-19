@@ -85,10 +85,12 @@ overrides** (the phase skills' "Autopilot?" blocks point back here):
    - `subagent_type: general-purpose`; `model` and `effort` are the outputs
      of
      `~/.sdd/scripts/model-policy.sh --project <project-root> get <phase> claude alias`
-     and `… get <phase> claude effort` (umbrella: the hub is the project
-     root). A lookup that prints nothing → omit that param.
+     and `… get <phase> claude effort` (umbrella: no `--project` —
+     hub-rooted phases stay on the machine policy, as `spec-dispatch.sh`
+     keeps them). A lookup that prints nothing → omit that param.
    - The prompt is paths, not content — the phase, the spec dir, the project
-     root — and: "Read `~/.sdd/skills/sdd-<phase>/SKILL.md` and run that
+     root — and: "You are the <phase> phase agent. Read
+     `~/.sdd/skills/sdd-<phase>/SKILL.md` and run that
      phase end to end under the auto-mode contract in
      `~/.sdd/skills/sdd-go/SKILL.md`. Launch the agents it calls for
      yourself, in the foreground. Return the artifact path, any review

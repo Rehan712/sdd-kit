@@ -87,7 +87,7 @@ first `/sdd:specify` if it's missing):
 
 ```yaml
 stacks: [javascript, aws]     # tags matching templates/stack-overlays/
-base_branch: main             # optional; default dev
+base_branch: main             # optional; default dev, else the repo's default branch
 ```
 
 ## Multi-machine

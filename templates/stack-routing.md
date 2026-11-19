@@ -126,7 +126,8 @@ choices arrive as Agent-tool params:
   `*-expert`, `explore` is `sdd-scout`, the rest go by name. `-` → omit that
   param. Prints nothing → nothing to pass. A phase role (`plan`, `tasks`,
   `implement`, …) cannot change the session already running it; it applies
-  when the phase is dispatched, or run by `/sdd:go` as a phase agent.
+  when the phase is dispatched, or runs as a phase agent — `/sdd:plan` and
+  `/sdd:tasks` always do on Claude Code, and so does `/sdd:go`.
 - `general-purpose` hosting a project skill has no stamp at all: pass
   `model-policy.sh --project "$WT" get stack-expert claude alias` and
   `… claude effort`, or it runs on the session's own, costlier model.
