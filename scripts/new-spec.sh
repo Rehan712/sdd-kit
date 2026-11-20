@@ -133,6 +133,9 @@ done
 [[ -n "${dir:-}" ]] || { echo 'no three-digit spec numbers available' >&2; exit 1; }
 mkdir "$dir/notes"
 touch "$dir/notes/.gitkeep"   # gate reports/evidence land here; survive commits
+# Raw run records are thousands of files naming this machine's paths.
+printf '%s\n' '# Raw verification captures hold absolute local paths; they stay on disk, never in git.' \
+  /captures/ /verification/captures/ /verification/floors/ /verification/checkpoints/ > "$dir/notes/.gitignore"
 today=$(date +%Y-%m-%d)
 
 # Escape sed replacement metacharacters (\, &, /) so titles like
