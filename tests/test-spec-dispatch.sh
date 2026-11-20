@@ -190,6 +190,21 @@ test_concurrent_spec_numbers_are_unique() {
   assert_eq 8 "$(cd "$dirs" && printf '%s\n' ???-*/spec.md | cut -c1-3 | sort -u | wc -l | tr -d ' ')"
 }
 
+# Run records committed by one spec are listed in every later spec's input
+# manifest, so a new spec keeps them out of git and keeps its reports in.
+test_new_spec_keeps_run_records_out_of_git() {
+  local notes path
+  git_host "$SANDBOX/ignoring" || return 1
+  run_rc 0 "$SCRIPTS/new-spec.sh" --project "$SANDBOX/ignoring" 'Ignore records'
+  notes=.specify/specs/001-ignore-records/notes
+  for path in captures/CAP-1-a/meta.nul verification/captures/CAP-1-a verification/floors/FLOOR-a/inputs.nul verification/checkpoints/CHECKPOINT-a/inputs.nul; do
+    fixture_git -C "$SANDBOX/ignoring" check-ignore -q "$notes/$path" || t_fail "run record is not ignored: $path"
+  done
+  for path in evidence.md opponent.md verification/accepted/T001/ACC-a/meta.nul verification/reports/opponent-findings-1.md; do
+    ! fixture_git -C "$SANDBOX/ignoring" check-ignore -q "$notes/$path" || t_fail "gate record is ignored: $path"
+  done
+}
+
 test_ci_readiness_and_incomplete_umbrella() {
   local spec name expected response
   spec="$(stage_umbrella)"

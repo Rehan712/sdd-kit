@@ -56,6 +56,14 @@ The updated kit verifies both earlier full formats and compact receipts. Update
 all verifiers before sharing receipts, and archive the entire spec including
 any logs excluded by Git. Retro retains the evidence.
 
+A new spec's `notes/.gitignore` keeps `captures/`, `verification/captures/`,
+`verification/floors/` and `verification/checkpoints/` out of Git. Each later
+spec's input manifest lists every tracked file, so committing these run records
+makes every following spec's evidence larger. A spec created before this needs
+the same file added by hand, and records it already committed stay listed until
+they are untracked (`git rm -r --cached`). The ignored records exist only in the
+checkout that produced them: run the tally and the retro before removing it.
+
 Finish batch edits before capture/acceptance. Workers never tick; the invoker
 rejects incomplete or forged returns without changing tasks. Checkpoint failure
 stops the next stage even when only retained-coverage checks apply. A fresh floor
