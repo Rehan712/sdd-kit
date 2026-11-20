@@ -164,8 +164,11 @@ and hashed environment. Whole-source changes invalidate potentially affected
 proof; only the verified spec's own generated bookkeeping is excluded (its
 `.tasks.accept.*`, `notes/captures/`, `notes/verification/`,
 `notes/evidence.md`, `notes/opponent.md` and `notes/reality-check.md`).
-Another spec's copies of those paths are ordinary inputs: a shipped spec's gate
-report can be a test fixture, and a changed fixture invalidates reuse. Gates reuse
+Another spec's reports are ordinary inputs: a shipped spec's gate report can be
+a test fixture, and a changed fixture invalidates reuse. No spec's run ledgers
+are (`notes/captures/`, and `notes/verification/` apart from its `reports/`):
+they are sealed history, and a check that reads another spec's ledgers declares
+them under `verification_inputs`. Gates reuse
 valid execution, never automatic semantic PASS, and may attack covered or
 previously unexamined unchanged surfaces.
 

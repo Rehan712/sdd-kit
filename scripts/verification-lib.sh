@@ -2246,10 +2246,10 @@ vf_publish() {
   mv "$staging" "$final"
 }
 
-# Exclusions are generated paths only, never entire notes/.specify directories,
-# and only the VERIFIED spec's own. Another spec's reports, captures and ledgers
-# are ordinary source: a shipped spec's gate report is a fixture here (AC-010),
-# and a changed fixture must invalidate reuse (AC-020). <own> is the verified
+# Exclusions are generated paths only, never entire notes/.specify directories.
+# Another spec's reports are ordinary source: a shipped spec's gate report is a
+# fixture here (AC-010), and a changed fixture must invalidate reuse (AC-020).
+# Its run ledgers are not (vf_run_ledger_path below). <own> is the verified
 # spec's repo-relative directory, or empty when the spec is not
 # .specify/specs/<name> inside the repository being read; empty excludes nothing.
 vf_bookkeeping_path() { # <repo-relative path> <own spec dir or empty> [1 when the filesystem folds case]
@@ -2264,6 +2264,23 @@ vf_bookkeeping_path() { # <repo-relative path> <own spec dir or empty> [1 when t
   esac
   [[ "${3:-0}" != 1 || "$was" == 1 ]] || shopt -u nocasematch
   return "$rc"
+}
+# Any spec's run ledgers: its captures and everything under notes/verification
+# except the gate reports. They are sealed history that every run adds to, not
+# source. Hashed as source, each spec's manifest listed every record of every
+# spec before it: by a project's third spec 98% of the entries, 5 MB stored
+# twice in each floor and checkpoint. The enumeration leaves them out; a
+# declared input is still hashed, so a project that does read another spec's
+# ledgers names them under verification_inputs. Spelling is compared as git
+# reports it: a path that fails to match is hashed, the safe direction.
+vf_run_ledger_path() { # <repo-relative path>
+  local rest="${1#.specify/specs/}"
+  [[ "$rest" != "$1" ]] || return 1
+  case "${rest#*/}" in
+    notes/verification/reports/*) return 1;;
+    notes/captures/*|notes/verification/*) return 0;;
+  esac
+  return 1
 }
 # Whether the filesystem holding a directory folds letter case, asked of the
 # filesystem itself: a case-swapped spelling names the same inode. Git's
@@ -2370,6 +2387,7 @@ vf_bulk_names() { # <repo> <NUL path list> <own> <fold> <names out>
   local path
   while IFS= read -r -d '' path; do
     vf_bookkeeping_path "$path" "$3" "$4" && continue
+    vf_run_ledger_path "$path" && continue
     # sha256sum escapes these in its output and hash-object reads names by
     # line, unquoting a leading ". The root is part of the name both are given.
     case "$1/$path" in *[[:cntrl:]\\\"]*) continue;; esac
@@ -2507,6 +2525,7 @@ vf_snapshot() (
     while IFS= read -r -d '' record; do
       path="${record#*$'\t'}"; head="${record%%$'\t'*}"
       vf_bookkeeping_path "$path" "$own" "$fold" && continue
+      vf_run_ledger_path "$path" && continue
       read -r mode oid stage <<< "$head"
       [[ "$mode" != 160000 ]] || { echo "verification inputs: submodule requires explicit transitive inputs: $path" >&2; exit 3; }
       if vf_bulk_take "$repo/$path"; then
@@ -2528,6 +2547,7 @@ vf_snapshot() (
   exec 3< "$tmp/path-names" 4< "$tmp/path-digests"
   VF_BULK_LINE=''; IFS= read -r -d '' VF_BULK_NEXT <&3 || VF_BULK_NEXT=''
   while IFS= read -r -d '' path; do
+    vf_run_ledger_path "$path" && continue
     vf_bulk_take "$repo/$path" || :
     vf_path_record "$repo" "$path" "$tmp/inputs" "$tmp" "$own" "$fold" "$VF_BULK_DIGEST" || return 3
   done < "$tmp/paths"

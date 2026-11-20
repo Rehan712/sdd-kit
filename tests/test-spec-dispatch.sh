@@ -190,8 +190,7 @@ test_concurrent_spec_numbers_are_unique() {
   assert_eq 8 "$(cd "$dirs" && printf '%s\n' ???-*/spec.md | cut -c1-3 | sort -u | wc -l | tr -d ' ')"
 }
 
-# Run records committed by one spec are listed in every later spec's input
-# manifest, so a new spec keeps them out of git and keeps its reports in.
+# A new spec keeps its raw run records out of git and its reports in.
 test_new_spec_keeps_run_records_out_of_git() {
   local notes path
   git_host "$SANDBOX/ignoring" || return 1

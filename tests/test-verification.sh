@@ -1058,11 +1058,17 @@ declare_inputs_fixture() { # repo saved-stack path... -> stack.yml declaring exa
 }
 
 # O-013: generated bookkeeping is the VERIFIED spec's own. Another spec's gate
-# records are ordinary source -- a shipped spec's report is a fixture here
+# reports are ordinary source -- a shipped spec's report is a fixture here
 # (AC-010), and a changed fixture must not leave an old success reusable
-# (AC-020). A declared input is hashed or refused by name, never dropped.
+# (AC-020). Its run ledgers are sealed history and never enumerated: hashed,
+# they made every spec's manifest list all the records of the specs before it.
+# A declared input is hashed or refused by name, never dropped.
+sibling_moved() { # <previous identity> <what happened>; reads OUT, path, ledger, base
+  if (( ledger )); then assert_eq "$base" "$OUT" "another spec's run ledger $path entered the identity ($2)"
+  else [[ "$OUT" != "$1" ]] || t_fail "AC-020: $2 of another spec's $path left the identity unchanged"; fi
+}
 bookkeeping_anchor_cases() {
-  local spec repo own sibling path base staged cap spelling declared upper n ignorecase
+  local spec repo own sibling path base staged cap spelling declared upper n ignorecase ledger
   spec="$(make_verification_git_dir anchor)"
   repo="$(cd "$spec/../../.." && pwd -P)"
   own="$(cd "$spec" && pwd -P)"; own="${own#"$repo"/}"
@@ -1071,30 +1077,32 @@ bookkeeping_anchor_cases() {
   run_rc 0 snapshot_fixture "$spec" "$repo" "$SANDBOX/anchor-base"
   base="$OUT"
   # Both directions over all six generated shapes: the verified spec's own
-  # record is invisible, the same record of another spec is an input whether
-  # it is untracked, staged, or edited after staging.
+  # record is invisible, the same report of another spec is an input whether
+  # it is untracked, staged, or edited after staging, and the same run ledger
+  # of another spec is invisible in all three.
   for path in notes/opponent.md notes/reality-check.md notes/evidence.md \
       notes/verification/reports/opponent-findings-x.md notes/verification/floors/FLOOR-x/meta.nul \
       notes/captures/CAP-1-x/output.log .tasks.accept.x; do
+    ledger=0; case "$path" in notes/verification/floors/*|notes/captures/*) ledger=1;; esac
     mkdir -p "$(dirname "$spec/$path")" "$(dirname "$sibling/$path")"
     printf 'record\n' > "$spec/$path"
     run_rc 0 snapshot_fixture "$spec" "$repo" "$SANDBOX/anchor-own"
     assert_eq "$base" "$OUT" "AC-020: the verified spec's own $path changed the identity"
     printf 'record\n' > "$sibling/$path"
     run_rc 0 snapshot_fixture "$spec" "$repo" "$SANDBOX/anchor-sibling"
-    [[ "$OUT" != "$base" ]] || t_fail "AC-020: another spec's untracked $path left the identity unchanged"
+    sibling_moved "$base" 'an untracked copy'
     fixture_git -C "$repo" add -f -- "$sibling/$path"
     run_rc 0 snapshot_fixture "$spec" "$repo" "$SANDBOX/anchor-sibling"
     staged="$OUT"
     printf 'edited\n' > "$sibling/$path"
     run_rc 0 snapshot_fixture "$spec" "$repo" "$SANDBOX/anchor-sibling"
-    [[ "$OUT" != "$staged" ]] || t_fail "AC-020: an edit to another spec's tracked $path left the identity unchanged"
+    sibling_moved "$staged" 'an edit to a tracked copy'
     # Staging that edit changes the index record alone, the working file being
     # unchanged, so this isolates the index pass's anchor.
     staged="$OUT"
     fixture_git -C "$repo" add -f -- "$sibling/$path"
     run_rc 0 snapshot_fixture "$spec" "$repo" "$SANDBOX/anchor-sibling"
-    [[ "$OUT" != "$staged" ]] || t_fail "AC-020: a staged-only change to another spec's $path left the identity unchanged"
+    sibling_moved "$staged" 'a staged-only change'
     fixture_git -C "$repo" rm -q -f --cached -- "$sibling/$path"
     rm -rf "$sibling" "${spec:?}/$path"
   done
@@ -1102,14 +1110,14 @@ bookkeeping_anchor_cases() {
   assert_eq "$base" "$OUT" 'AC-020: the anchor fixture did not return to its baseline'
 
   # Through a real capture: an old success stays reusable across the verified
-  # spec's own report, and not across another spec's report, findings manifest
-  # or floor record.
+  # spec's own report and another spec's floor record, and not across another
+  # spec's report or findings manifest.
   run_rc 0 "$SCRIPTS/spec-run.sh" "$spec" T001 --cwd "$repo" --from-task --no-tick --summary
   cap="$(printf '%s' "$OUT" | sed -n 's/^capture=\([^ ]*\).*/\1/p')"
   printf '## Round 1\n' >> "$spec/notes/opponent.md"
   run_rc 0 snapshot_fixture "$spec" "$repo" "$SANDBOX/anchor-current"
   run_rc 0 capture_check_fixture "$spec" "$cap" "$SANDBOX/anchor-current" reuse
-  for path in notes/opponent.md notes/verification/reports/opponent-findings-x.md notes/verification/floors/FLOOR-x/meta.nul; do
+  for path in notes/opponent.md notes/verification/reports/opponent-findings-x.md; do
     mkdir -p "$(dirname "$sibling/$path")"
     printf 'record\n' > "$sibling/$path"
     run_rc 0 snapshot_fixture "$spec" "$repo" "$SANDBOX/anchor-current"
@@ -1118,6 +1126,22 @@ bookkeeping_anchor_cases() {
       "AC-020: another spec's $path left an old success reusable"
     rm -rf "$sibling"
   done
+  declared='.specify/specs/999-sibling/notes/verification/floors/FLOOR-x/meta.nul'
+  mkdir -p "$(dirname "$repo/$declared")"; printf 'record\n' > "$repo/$declared"
+  run_rc 0 snapshot_fixture "$spec" "$repo" "$SANDBOX/anchor-current"
+  run_rc 0 capture_check_fixture "$spec" "$cap" "$SANDBOX/anchor-current" reuse
+  # Declared, the same ledger is an input again: named in the manifest, and an
+  # edit moves the identity.
+  declare_inputs_fixture "$repo" "$SANDBOX/anchor-stack" "$declared"
+  run_rc 0 snapshot_fixture "$spec" "$repo" "$SANDBOX/anchor-declared"
+  staged="$OUT"
+  assert_eq 1 "$(tr '\0' '\n' < "$SANDBOX/anchor-declared" | grep -c -F -x "$declared")" \
+    "a declared run ledger of another spec has no identity record"
+  printf 'edited\n' > "$repo/$declared"
+  run_rc 0 snapshot_fixture "$spec" "$repo" "$SANDBOX/anchor-declared"
+  [[ "$OUT" != "$staged" ]] || t_fail 'an edit to a declared run ledger of another spec was dropped'
+  rm -rf "$sibling"
+  cp "$SANDBOX/anchor-stack" "$repo/.specify/stack.yml"
 
   # Declared inputs. The verified spec's own records are refused by NAME, by
   # location rather than spelling: the record, a directory wholly inside the
